@@ -41,7 +41,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Foundation** - Templates, shared standards, enhancement checklist
 - [x] **Phase 2: Base Generic Skills** - Enhance 4 base skills (3-4x multiplier effect)
-- [ ] **Phase 3: Domain Expert Skills** - Audit and enhance 16 domain skills (In progress)
+- [x] **Phase 3: Domain Expert Skills** - Audit and enhance 16 domain skills
 - [ ] **Phase 4: Stack-Specific Skills** - Update 12 stack variants
 - [ ] **Phase 5: Utility Skills** - Enhance 6+ utility skills
 - [ ] **Phase 6: Validation** - Test activation, verify quality, document
@@ -80,7 +80,7 @@ Plans:
 - [x] 03-01: Business group (business-strategy, operations, product-management, innovation)
 - [x] 03-02: People group (hr-talent, leadership, health-wellness)
 - [x] 03-03: Finance/Risk group (finance, risk-management, legal-compliance)
-- [ ] 03-04: Technical/External group (data-science, security, sales, marketing, sustainability-esg, rd-management)
+- [x] 03-04: Technical/External group (data-science, security, sales, marketing, sustainability-esg, rd-management)
 
 ### Phase 4: Stack-Specific Skills
 **Goal**: Update 12 stack-specific variants to properly reference enhanced base skills
@@ -122,7 +122,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 |-------|----------------|--------|-----------|
 | 1. Foundation | 2/2 | Complete | 2025-12-17 |
 | 2. Base Generic Skills | 4/4 | Complete | 2025-12-17 |
-| 3. Domain Expert Skills | 3/4 | In progress | - |
+| 3. Domain Expert Skills | 4/4 | Complete | 2025-12-17 |
 | 4. Stack-Specific Skills | 0/3 | Not started | - |
 | 5. Utility Skills | 0/2 | Not started | - |
 | 6. Validation | 0/2 | Not started | - |
