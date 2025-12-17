@@ -52,6 +52,7 @@ Thumbs.db
 # - .mcp.json, settings.json
 # - plans/, tasks/, .planning/, get-shit-done/
 # - .archive/ (completed task docs)
-# - plugins/marketplaces/ (read-only upstream)
+# - plugins/local/ (YOUR customized plugins)
+# - plugins/marketplaces/ (read-only upstream repos)
 # - plugins/known_marketplaces.json
 # ============================================
