@@ -7,13 +7,28 @@ description: This skill should be used when enhancing the visual design and aest
 
 Transform Next.js applications into visually polished web experiences.
 
-**Foundational Reference:** See [Design Patterns](./../_shared/DESIGN_PATTERNS.md)
+## When to Use
 
-## Enhancement Workflow
+**Use for:**
+- Improving styling and visual design
+- Creating responsive layouts
+- Adding animations and transitions
+- Selecting color schemes
+- Building modern UI patterns
+- Enhancing aesthetics
+
+**Don't use when:**
+- UX flow design → use `generic-ux-designer`
+- Code architecture → use `generic-feature-developer`
+- Code review → use `generic-code-reviewer`
+
+**Foundational Reference:** See [Design Patterns](../_shared/DESIGN_PATTERNS.md)
+
+## Quick Enhancement Workflow
 
 1. **Assess** - Identify inconsistent styling, responsive issues, accessibility gaps
 2. **Plan** - Choose color palette, review design principles
-3. **Implement** - Set up foundation (colors, spacing, animations)
+3. **Foundation** - Set up colors, spacing, animations in theme
 4. **Apply** - Replace elements with enhanced components
 5. **Refine** - Test responsiveness, verify accessibility
 6. **Review** - Check hierarchy, consistency, performance
@@ -126,8 +141,16 @@ export function cn(...inputs: ClassValue[]) {
 }
 ```
 
+## Before/After Pattern
+
+When enhancing, document changes:
+```
+Before: Plain gray button, no hover state
+After: Gradient primary button with hover lift effect
+```
+
 ## See Also
 
-- [Design Patterns](./../_shared/DESIGN_PATTERNS.md) - Visual design reference
-- [UX Principles](./../_shared/UX_PRINCIPLES.md) - User experience
+- [Design Patterns](../_shared/DESIGN_PATTERNS.md) - Visual design reference
+- [UX Principles](../_shared/UX_PRINCIPLES.md) - User experience
 - Project `CLAUDE.md` - Design constraints
