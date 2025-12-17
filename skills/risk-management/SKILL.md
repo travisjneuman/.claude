@@ -7,45 +7,12 @@ description: Enterprise risk management expertise for ERM frameworks, risk asses
 
 Comprehensive risk frameworks for enterprise risk assessment, business continuity, and risk mitigation.
 
-## Enterprise Risk Management (ERM)
+**Detailed References:**
+- [ERM Framework & Risk Appetite](references/erm-framework.md) - COSO framework, risk appetite, quantitative analysis
+- [Business Continuity Management](references/business-continuity.md) - BCM lifecycle, recovery objectives, crisis management
+- [Insurance & Risk Transfer](references/insurance-risk-transfer.md) - Insurance programs, risk financing strategies
 
-### COSO ERM Framework
-
-```
-COMPONENTS:
-
-GOVERNANCE & CULTURE:
-- Board risk oversight
-- Operating structure
-- Defines desired culture
-- Commitment to core values
-- Attracts, develops, retains talent
-
-STRATEGY & OBJECTIVE-SETTING:
-- Analyzes business context
-- Defines risk appetite
-- Evaluates alternative strategies
-- Formulates business objectives
-
-PERFORMANCE:
-- Identifies risk
-- Assesses severity of risk
-- Prioritizes risks
-- Implements risk responses
-- Develops portfolio view
-
-REVIEW & REVISION:
-- Assesses substantial change
-- Reviews risk and performance
-- Pursues improvement in ERM
-
-INFORMATION, COMMUNICATION & REPORTING:
-- Leverages information systems
-- Communicates risk information
-- Reports on risk, culture, and performance
-```
-
-### Risk Categories
+## Risk Categories
 
 | Category | Description | Examples |
 |----------|-------------|----------|
@@ -58,38 +25,7 @@ INFORMATION, COMMUNICATION & REPORTING:
 | **Human Capital** | People-related risks | Key person, talent shortage |
 | **External** | Environmental/external risks | Natural disasters, geopolitical |
 
-### Risk Appetite Framework
-
-```
-RISK APPETITE COMPONENTS:
-
-RISK APPETITE STATEMENT:
-High-level description of risks organization is willing to accept
-
-RISK TOLERANCE:
-Acceptable variation from risk appetite targets
-
-RISK LIMITS:
-Specific thresholds that trigger action
-
-EXAMPLE:
-Risk Category: Credit Risk
-Appetite: Moderate credit risk exposure to support growth
-Tolerance: Total credit exposure <$500M
-Limit: Single counterparty exposure <$25M
-
-RISK APPETITE TIERS:
-| Level | Example |
-|-------|---------|
-| None | Safety incidents causing fatalities |
-| Low | Regulatory compliance breaches |
-| Moderate | Strategic investments with uncertain returns |
-| High | Innovation and new market entry |
-```
-
-## Risk Assessment
-
-### Risk Assessment Process
+## Risk Assessment Process
 
 ```
 RISK ASSESSMENT STEPS:
@@ -126,7 +62,7 @@ RISK ASSESSMENT STEPS:
    - Periodic reassessment
 ```
 
-### Risk Heat Map
+## Risk Heat Map
 
 ```
 RISK MATRIX:
@@ -144,110 +80,6 @@ SCORING:
 3-4: Active Management
 6: Senior Management Attention
 9-12: Executive/Board Attention
-```
-
-### Quantitative Risk Analysis
-
-```
-VALUE AT RISK (VaR):
-Maximum expected loss over time period at confidence level
-
-EXPECTED LOSS:
-EL = Probability × Impact
-
-LOSS DISTRIBUTION:
-- Monte Carlo simulation
-- Historical simulation
-- Parametric methods
-
-SCENARIO ANALYSIS:
-| Scenario | Probability | Impact | Expected Loss |
-|----------|-------------|--------|---------------|
-| Best | 20% | $1M | $0.2M |
-| Expected | 60% | $5M | $3.0M |
-| Worst | 20% | $20M | $4.0M |
-```
-
-## Business Continuity
-
-### Business Continuity Management
-
-```
-BCM LIFECYCLE:
-
-1. POLICY & PROGRAM MANAGEMENT
-   - Executive sponsorship
-   - BCM policy
-   - Program governance
-   - Resource allocation
-
-2. RISK ASSESSMENT
-   - Threat identification
-   - Vulnerability assessment
-   - Risk prioritization
-
-3. BUSINESS IMPACT ANALYSIS (BIA)
-   - Critical process identification
-   - Impact assessment over time
-   - RTO/RPO determination
-   - Resource requirements
-
-4. STRATEGY DEVELOPMENT
-   - Recovery strategies
-   - Resource requirements
-   - Cost-benefit analysis
-
-5. PLAN DEVELOPMENT
-   - Documentation
-   - Procedures
-   - Communication plans
-   - Resource lists
-
-6. TESTING & EXERCISE
-   - Tabletop exercises
-   - Functional tests
-   - Full-scale exercises
-
-7. MAINTENANCE & IMPROVEMENT
-   - Plan updates
-   - Training
-   - Continuous improvement
-```
-
-### Recovery Objectives
-
-| Metric | Definition | Example |
-|--------|------------|---------|
-| **RTO** | Recovery Time Objective - Time to restore | 4 hours |
-| **RPO** | Recovery Point Objective - Data loss tolerance | 1 hour |
-| **MTPD** | Maximum Tolerable Period of Disruption | 24 hours |
-| **WRT** | Work Recovery Time - Time to catch up | 8 hours |
-
-### Crisis Management
-
-```
-CRISIS TEAM STRUCTURE:
-
-EXECUTIVE TEAM:
-- Strategic decisions
-- External communications
-- Stakeholder management
-
-OPERATIONS TEAM:
-- Incident management
-- Business continuity
-- Resource coordination
-
-COMMUNICATIONS TEAM:
-- Internal communications
-- Media relations
-- Social media
-
-CRISIS ESCALATION:
-Tier 1: Operational response
-Tier 2: Business unit leadership
-Tier 3: Executive team
-Tier 4: Board involvement
 ```
 
 ## Third-Party Risk Management
@@ -324,73 +156,6 @@ REPUTATIONAL:
 - Market reputation
 - Legal history
 - References
-```
-
-## Insurance & Risk Transfer
-
-### Corporate Insurance Program
-
-| Coverage | Purpose | Key Terms |
-|----------|---------|-----------|
-| **Property** | Physical assets | Replacement cost, BI |
-| **General Liability** | Third-party claims | Occurrence, aggregate |
-| **D&O** | Executive protection | Entity coverage, Side A |
-| **Cyber** | Data breach, ransomware | First/third party |
-| **E&O/Professional** | Service failures | Claims-made |
-| **Employment** | HR-related claims | Wage & hour, EPLI |
-| **Crime/Fidelity** | Internal theft | Employee dishonesty |
-
-### Insurance Program Structure
-
-```
-PROGRAM LAYERS:
-
-RETAINED RISK:
-- Deductible/SIR
-- Captive insurance
-- Self-insurance
-
-PRIMARY LAYER:
-- First dollar coverage (after retention)
-- Lower limits
-- Broader coverage
-
-EXCESS LAYERS:
-- Higher limits
-- Follows primary terms
-- Multiple carriers
-
-UMBRELLA:
-- Additional limits
-- Gap coverage
-- Broader coverage
-```
-
-### Risk Financing Strategy
-
-```
-RISK FINANCING OPTIONS:
-
-RETENTION:
-- Self-insurance
-- Captive insurance
-- Large deductibles
-Pros: Cost control, cash flow
-Cons: Volatility, capital requirements
-
-TRANSFER:
-- Traditional insurance
-- Alternative risk transfer
-- Contractual transfer
-Pros: Certainty, expertise
-Cons: Cost, coverage gaps
-
-HYBRID:
-- Captive + reinsurance
-- Finite risk programs
-- Parametric solutions
-Pros: Optimization
-Cons: Complexity
 ```
 
 ## Operational Risk Management
