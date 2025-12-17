@@ -1,0 +1,330 @@
+---
+type: concept
+category: devops
+adoption: standard
+aliases: [GHA, GitHub CI/CD]
+related:
+  - "[[Docker]]"
+  - "[[Python]]"
+projects:
+  - "[[Projects/The Dead Robot]]"
+  - "[[Projects/Toker League]]"
+created: 2025-12-14
+updated: 2025-12-14
+---
+
+# GitHub Actions
+
+> CI/CD and automation platform built into GitHub. Automate workflows triggered by repository events, schedules, or manual dispatch.
+
+---
+
+## Overview
+
+GitHub Actions enables automation directly in your repository:
+- **CI/CD pipelines** — Build, test, deploy on every push
+- **Scheduled tasks** — Cron-based automation
+- **Event-driven workflows** — React to issues, PRs, releases
+- **Reusable actions** — Marketplace of pre-built automations
+
+### Why GitHub Actions?
+
+| Feature | Benefit |
+|---------|---------|
+| **Native integration** | No external service needed |
+| **Free tier** | 2,000 minutes/month for public repos |
+| **Secrets management** | Secure credential storage |
+| **Matrix builds** | Test across multiple versions |
+| **Self-hosted runners** | Run on your own infrastructure |
+
+---
+
+## Usage in Our Stack
+
+### The Dead Robot — Content Automation
+
+Fully automated X (Twitter) posting pipeline:
+
+```yaml
+# .github/workflows/post-to-x.yml
+name: Post to X
+on:
+  schedule:
+    - cron: '0 8,9,12,14,18 * * 1-5'  # 5x daily, weekdays
+  workflow_dispatch:
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - run: python .github/scripts/generate_post.py
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          TWITTER_API_KEY: ${{ secrets.TWITTER_API_KEY }}
+```
+
+### Toker League — Data Sync
+
+Yahoo Fantasy Sports data synchronization:
+
+```yaml
+# .github/workflows/yahoo-sync.yml
+name: Yahoo Sync
+on:
+  schedule:
+    - cron: '0 */6 * * *'  # Every 6 hours
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+      - run: npm ci
+      - run: npm run yahoo:sync
+```
+
+---
+
+## Key Concepts
+
+### Workflow Structure
+
+```yaml
+name: CI Pipeline
+
+on:                           # Triggers
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:          # Manual trigger
+
+env:                          # Global variables
+  NODE_VERSION: '20'
+
+jobs:
+  build:                      # Job name
+    runs-on: ubuntu-latest    # Runner
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - run: npm ci
+      - run: npm test
+```
+
+### Secrets Management
+
+```yaml
+# Access secrets in workflows
+env:
+  API_KEY: ${{ secrets.API_KEY }}
+
+# Or in steps
+- run: echo "Using ${{ secrets.SECRET_NAME }}"
+```
+
+**Never commit secrets.** Use:
+- Repository Settings → Secrets → Actions
+- Environment-specific secrets for staging/production
+
+### Matrix Strategy
+
+Test across multiple configurations:
+
+```yaml
+jobs:
+  test:
+    strategy:
+      matrix:
+        node: [18, 20, 22]
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+```
+
+---
+
+## Common Patterns
+
+### Cache Dependencies
+
+```yaml
+- uses: actions/cache@v4
+  with:
+    path: ~/.npm
+    key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
+    restore-keys: |
+      ${{ runner.os }}-npm-
+```
+
+### Conditional Steps
+
+```yaml
+- name: Deploy to Production
+  if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+  run: npm run deploy
+```
+
+### Artifacts
+
+```yaml
+# Upload build output
+- uses: actions/upload-artifact@v4
+  with:
+    name: build
+    path: dist/
+
+# Download in another job
+- uses: actions/download-artifact@v4
+  with:
+    name: build
+```
+
+### Job Dependencies
+
+```yaml
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    # ...
+
+  deploy:
+    needs: build  # Wait for build to complete
+    runs-on: ubuntu-latest
+    # ...
+```
+
+---
+
+## Scheduling (Cron)
+
+```yaml
+on:
+  schedule:
+    # ┌───────────── minute (0 - 59)
+    # │ ┌───────────── hour (0 - 23)
+    # │ │ ┌───────────── day of month (1 - 31)
+    # │ │ │ ┌───────────── month (1 - 12)
+    # │ │ │ │ ┌───────────── day of week (0 - 6, Sun=0)
+    - cron: '0 0 * * *'     # Daily at midnight UTC
+    - cron: '0 */6 * * *'   # Every 6 hours
+    - cron: '0 8 * * 1-5'   # 8am UTC, weekdays only
+```
+
+**Note:** Scheduled workflows only run on the default branch.
+
+---
+
+## Best Practices
+
+### Security
+
+1. **Pin action versions** — Use SHA or version tags, not `@main`
+2. **Minimal permissions** — Use `permissions:` to restrict
+3. **Review third-party actions** — Check source before using
+4. **Rotate secrets** — Especially API keys
+
+```yaml
+permissions:
+  contents: read
+  pull-requests: write
+```
+
+### Performance
+
+1. **Cache aggressively** — Dependencies, build outputs
+2. **Use matrix wisely** — Don't over-test
+3. **Cancel redundant runs** — On new pushes to same branch
+
+```yaml
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+```
+
+### Reliability
+
+1. **Retry on failure** — For flaky network operations
+2. **Timeout jobs** — Prevent hanging
+3. **Health checks** — Verify deployments
+
+```yaml
+jobs:
+  build:
+    timeout-minutes: 30
+    steps:
+      - uses: nick-fields/retry@v2
+        with:
+          timeout_minutes: 10
+          max_attempts: 3
+          command: npm run deploy
+```
+
+---
+
+## Debugging
+
+### Enable Debug Logging
+
+Set repository secret:
+- `ACTIONS_RUNNER_DEBUG: true`
+- `ACTIONS_STEP_DEBUG: true`
+
+### Local Testing
+
+Use [act](https://github.com/nektos/act) to run workflows locally:
+
+```bash
+# Install
+brew install act
+
+# Run workflow
+act push
+act -j build  # Specific job
+```
+
+---
+
+## Useful Actions
+
+| Action | Purpose |
+|--------|---------|
+| `actions/checkout@v4` | Clone repository |
+| `actions/setup-node@v4` | Setup Node.js |
+| `actions/setup-python@v5` | Setup Python |
+| `actions/cache@v4` | Cache dependencies |
+| `actions/upload-artifact@v4` | Store build outputs |
+| `peaceiris/actions-gh-pages@v4` | Deploy to GitHub Pages |
+| `softprops/action-gh-release@v2` | Create releases |
+
+---
+
+## Resources
+
+- [GitHub Actions Documentation](https://docs.github.com/en/actions)
+- [Workflow Syntax Reference](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions)
+- [Actions Marketplace](https://github.com/marketplace?type=actions)
+- [act - Local Testing](https://github.com/nektos/act)
+
+---
+
+*Last updated: 2025-12-14*

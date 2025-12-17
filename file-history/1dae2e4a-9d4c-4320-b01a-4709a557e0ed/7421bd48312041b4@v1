@@ -1,0 +1,124 @@
+/**
+ * Base Widget Component
+ *
+ * Reusable wrapper for all dashboard widgets
+ * Provides loading, error states, refresh button, and consistent styling
+ */
+
+import React, { useState, useCallback } from 'react';
+import { motion } from 'framer-motion';
+
+export interface BaseWidgetProps {
+  title: string;
+  icon: string;
+  children: React.ReactNode;
+  loading?: boolean;
+  error?: string | null;
+  onRefresh?: () => void;
+  onSettings?: () => void;
+  className?: string;
+}
+
+export const BaseWidget: React.FC<BaseWidgetProps> = ({
+  title,
+  icon,
+  children,
+  loading = false,
+  error = null,
+  onRefresh,
+  onSettings,
+  className = '',
+}) => {
+  const [isRefreshing, setIsRefreshing] = useState(false);
+
+  const handleRefresh = useCallback(async () => {
+    if (!onRefresh || isRefreshing) return;
+
+    setIsRefreshing(true);
+    try {
+      await onRefresh();
+    } finally {
+      // Minimum 500ms for visual feedback
+      setTimeout(() => setIsRefreshing(false), 500);
+    }
+  }, [onRefresh, isRefreshing]);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
+      className={`bg-surface-light dark:bg-surface-dark-elevated rounded-card shadow-card p-4 flex flex-col ${className}`}
+    >
+      {/* Header */}
+      <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center gap-2">
+          <span className="text-2xl">{icon}</span>
+          <h3 className="text-lg font-semibold text-text-light-primary dark:text-text-dark-primary">
+            {title}
+          </h3>
+        </div>
+
+        <div className="flex items-center gap-2">
+          {/* Refresh Button */}
+          {onRefresh && (
+            <button
+              onClick={handleRefresh}
+              disabled={isRefreshing || loading}
+              className="p-1.5 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded transition-all duration-standard ease-smooth disabled:opacity-50"
+              title="Refresh"
+            >
+              <span className={`text-lg ${isRefreshing ? 'animate-spin inline-block' : ''}`}>
+                🔄
+              </span>
+            </button>
+          )}
+
+          {/* Settings Button */}
+          {onSettings && (
+            <button
+              onClick={onSettings}
+              className="p-1.5 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded transition-all duration-standard ease-smooth"
+              title="Settings"
+            >
+              <span className="text-lg">⚙️</span>
+            </button>
+          )}
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className="flex-1 flex flex-col">
+        {loading ? (
+          <div className="flex-1 flex items-center justify-center">
+            <div className="flex flex-col items-center gap-2">
+              <div className="w-8 h-8 border-4 border-accent-blue border-t-transparent rounded-full animate-spin"></div>
+              <span className="text-sm text-text-light-secondary dark:text-text-dark-secondary">
+                Loading...
+              </span>
+            </div>
+          </div>
+        ) : error ? (
+          <div className="flex-1 flex items-center justify-center">
+            <div className="flex flex-col items-center gap-2 text-center max-w-[200px]">
+              <span className="text-4xl">⚠️</span>
+              <p className="text-sm text-status-error dark:text-status-error-text-dark">
+                {error}
+              </p>
+              {onRefresh && (
+                <button
+                  onClick={handleRefresh}
+                  className="text-sm text-accent-blue hover:underline mt-2"
+                >
+                  Try again
+                </button>
+              )}
+            </div>
+          </div>
+        ) : (
+          <div className="flex-1">{children}</div>
+        )}
+      </div>
+    </motion.div>
+  );
+};

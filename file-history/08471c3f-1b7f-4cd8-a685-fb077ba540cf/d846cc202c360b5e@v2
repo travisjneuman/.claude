@@ -1,0 +1,77 @@
+/**
+ * Diagram Toolbar Component
+ * Tool selection for diagram editor
+ */
+
+import { useDiagramEditorStore } from '../../stores/useDiagramEditorStore';
+import type { ToolType } from '../../types/diagrams';
+import {
+  MousePointer2,
+  Square,
+  Circle,
+  Minus,
+  ArrowRight,
+  Type,
+  Download,
+} from 'lucide-react';
+
+const tools: Array<{ type: ToolType; icon: React.ReactNode; label: string }> = [
+  { type: 'select', icon: <MousePointer2 className="w-5 h-5" />, label: 'Select' },
+  { type: 'rectangle', icon: <Square className="w-5 h-5" />, label: 'Rectangle' },
+  { type: 'circle', icon: <Circle className="w-5 h-5" />, label: 'Circle' },
+  { type: 'line', icon: <Minus className="w-5 h-5" />, label: 'Line' },
+  { type: 'arrow', icon: <ArrowRight className="w-5 h-5" />, label: 'Arrow' },
+  { type: 'text', icon: <Type className="w-5 h-5" />, label: 'Text' },
+];
+
+interface ToolbarProps {
+  onExport?: () => void;
+}
+
+export function Toolbar({ onExport }: ToolbarProps) {
+  const currentTool = useDiagramEditorStore((s) => s.currentTool);
+  const setCurrentTool = useDiagramEditorStore((s) => s.setCurrentTool);
+
+  return (
+    <div className="flex flex-col gap-2 p-3 bg-surface-light dark:bg-surface-dark border-r border-border-light dark:border-border-dark">
+      {/* Tools */}
+      <div className="flex flex-col gap-1">
+        {tools.map((tool) => (
+          <button
+            key={tool.type}
+            onClick={() => setCurrentTool(tool.type)}
+            className={`
+              p-3 rounded-lg transition-colors
+              ${
+                currentTool === tool.type
+                  ? 'bg-primary-light dark:bg-primary-dark text-white'
+                  : 'text-text-light-primary dark:text-text-dark-primary hover:bg-surface-hover-light dark:hover:bg-surface-hover-dark'
+              }
+            `}
+            title={tool.label}
+            aria-label={tool.label}
+          >
+            {tool.icon}
+          </button>
+        ))}
+      </div>
+
+      {/* Separator */}
+      <div className="h-px bg-border-light dark:bg-border-dark my-2" />
+
+      {/* Actions */}
+      <div className="flex flex-col gap-1">
+        {onExport && (
+          <button
+            onClick={onExport}
+            className="p-3 rounded-lg text-text-light-primary dark:text-text-dark-primary hover:bg-surface-hover-light dark:hover:bg-surface-hover-dark transition-colors"
+            title="Export"
+            aria-label="Export diagram"
+          >
+            <Download className="w-5 h-5" />
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}

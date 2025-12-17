@@ -1,0 +1,721 @@
+/**
+ * Notes Page
+ *
+ * Main notes interface with 3-column layout:
+ * - Left: Folder tree + Notes list
+ * - Center: Rich text editor
+ * - Right: Note metadata (optional, collapsible)
+ */
+
+import React, { useEffect, useState, useRef, useMemo } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useNotesStore } from '../stores/useNotesStore';
+import { useFoldersStore } from '../stores/useFoldersStore';
+import { NotesEditor, NotesEditorEmpty } from '../widgets/NotesEditor';
+import { ConfirmDialog } from '../components/ConfirmDialog';
+import { PromptDialog } from '../components/PromptDialog';
+import { useUndoStore } from '../stores/useUndoStore';
+import { exportNoteToMarkdown } from '../services/noteExport';
+import type { Note } from '../types/notes';
+
+/**
+ * One-time migration key to clear corrupted Notes data
+ */
+const MIGRATION_KEY = 'notes_migration_v1_completed';
+
+/**
+ * Recursive Folder Tree Node Component
+ */
+interface FolderTreeNodeProps {
+  node: any;
+  depth: number;
+  activeFolderId: string | null;
+  expandedFolderIds: Set<string>;
+  onSelect: (id: string) => void;
+  onToggleExpanded: (id: string) => void;
+  onDelete: (id: string, name: string) => void;
+  onRename: (id: string, name: string) => void;
+  getFolderNoteCount: (id: string) => number;
+}
+
+const FolderTreeNode: React.FC<FolderTreeNodeProps> = ({
+  node,
+  depth,
+  activeFolderId,
+  expandedFolderIds,
+  onSelect,
+  onToggleExpanded,
+  onDelete,
+  onRename,
+  getFolderNoteCount,
+}) => {
+  const isExpanded = expandedFolderIds.has(node.id);
+  const hasChildren = node.children && node.children.length > 0;
+  const noteCount = getFolderNoteCount(node.id);
+
+  return (
+    <div>
+      <div
+        className={`group relative rounded-lg transition-colors ${
+          activeFolderId === node.id
+            ? 'bg-primary-cyan bg-opacity-10'
+            : 'hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated'
+        }`}
+        style={{ paddingLeft: `${depth * 16}px` }}
+      >
+        <div className="flex items-center">
+          {/* Expand/collapse button */}
+          {hasChildren && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                onToggleExpanded(node.id);
+              }}
+              className="p-1 hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated rounded transition-colors"
+            >
+              <span className="text-sm">{isExpanded ? '▼' : '▶'}</span>
+            </button>
+          )}
+          {!hasChildren && <span className="w-6" />}
+
+          {/* Folder button */}
+          <button
+            onClick={() => onSelect(node.id)}
+            className={`flex-1 text-left px-3 py-2 transition-colors flex items-center gap-2 ${
+              activeFolderId === node.id
+                ? 'text-primary-cyan font-medium'
+                : 'text-text-light-secondary dark:text-text-dark-secondary'
+            }`}
+          >
+            <span>{hasChildren ? (isExpanded ? '📂' : '📁') : '📄'}</span>
+            <span>{node.name}</span>
+            {noteCount > 0 && (
+              <span className="text-xs text-text-light-secondary dark:text-text-dark-secondary">
+                ({noteCount})
+              </span>
+            )}
+          </button>
+
+          {/* Action buttons */}
+          <div className="absolute right-2 opacity-0 group-hover:opacity-100 flex gap-1 transition-opacity">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                onRename(node.id, node.name);
+              }}
+              className="p-1 hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated rounded transition-colors"
+              title="Rename folder"
+            >
+              ✏️
+            </button>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                onDelete(node.id, node.name);
+              }}
+              className="p-1 hover:bg-red-100 dark:hover:bg-red-900 rounded text-red-600 transition-colors"
+              title="Delete folder"
+            >
+              🗑️
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Children */}
+      {isExpanded && hasChildren && (
+        <div className="ml-4">
+          {node.children.map((child: any) => (
+            <FolderTreeNode
+              key={child.id}
+              node={child}
+              depth={depth + 1}
+              activeFolderId={activeFolderId}
+              expandedFolderIds={expandedFolderIds}
+              onSelect={onSelect}
+              onToggleExpanded={onToggleExpanded}
+              onDelete={onDelete}
+              onRename={onRename}
+              getFolderNoteCount={getFolderNoteCount}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
+/**
+ * Folder Sidebar Component (Simplified for MVP)
+ */
+const FolderSidebar: React.FC = () => {
+  // Get raw folders object (stable reference unless folders change)
+  const foldersObj = useFoldersStore((state) => state.folders);
+  const activeFolderId = useFoldersStore((state) => state.activeFolderId);
+  const setActiveFolder = useFoldersStore((state) => state.setActiveFolder);
+  const createFolder = useFoldersStore((state) => state.createFolder);
+  const deleteFolder = useFoldersStore((state) => state.deleteFolder);
+  const updateFolder = useFoldersStore((state) => state.updateFolder);
+  const notesObj = useNotesStore((state) => state.notes);
+  const searchNotes = useNotesStore((state) => state.searchNotes);
+
+  // Dialog state
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [renameDialogOpen, setRenameDialogOpen] = useState(false);
+  const [selectedFolderId, setSelectedFolderId] = useState<string | null>(null);
+  const [selectedFolderName, setSelectedFolderName] = useState('');
+
+  // Search state
+  const [searchQuery, setSearchQuery] = useState('');
+  const searchInputRef = useRef<HTMLInputElement>(null);
+
+  // Keyboard shortcut for search (Cmd+K)
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        searchInputRef.current?.focus();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
+  // Get tree structure for nested folders
+  const getTree = useFoldersStore((state) => state.getTree);
+  const toggleExpanded = useFoldersStore((state) => state.toggleExpanded);
+  const expandedFolderIds = useFoldersStore((state) => state.expandedFolderIds);
+
+  const folderTree = useMemo(() => getTree(), [foldersObj, getTree]);
+
+  // Get note count for a folder
+  const getFolderNoteCount = (folderId: string) => {
+    return Object.values(notesObj).filter(note => note.folderId === folderId).length;
+  };
+
+  // Handle folder deletion
+  const handleDeleteFolder = (folderId: string, folderName: string) => {
+    setSelectedFolderId(folderId);
+    setSelectedFolderName(folderName);
+    setDeleteDialogOpen(true);
+  };
+
+  const confirmDeleteFolder = () => {
+    if (!selectedFolderId) return;
+
+    // Save folder and notes for undo
+    const folderToDelete = foldersObj[selectedFolderId];
+    if (!folderToDelete) {
+      console.warn('Folder not found:', selectedFolderId);
+      return;
+    }
+
+    const notesToDelete = Object.values(notesObj).filter(note => note.folderId === selectedFolderId);
+    const noteCount = notesToDelete.length;
+
+    // Delete all notes in this folder (without undo since folder undo will handle it)
+    // We need to temporarily bypass the undo system for individual notes
+    notesToDelete.forEach(note => {
+      // Call the store action directly without triggering undo
+      useNotesStore.setState((state) => {
+        const { [note.id]: deleted, ...remainingNotes } = state.notes;
+        return {
+          notes: remainingNotes,
+          activeNoteId: state.activeNoteId === note.id ? null : state.activeNoteId,
+        };
+      });
+    });
+
+    // Delete the folder
+    deleteFolder(selectedFolderId);
+
+    console.log(`✅ Folder "${folderToDelete.name}" deleted with ${noteCount} note(s)`);
+
+    // Add undo action to restore folder AND notes
+    useUndoStore.getState().addUndoAction(
+      `Folder "${folderToDelete.name}" and ${noteCount} note(s) deleted`,
+      () => {
+        // Restore the folder
+        useFoldersStore.setState((state) => ({
+          folders: {
+            ...state.folders,
+            [folderToDelete.id]: folderToDelete,
+          },
+        }));
+
+        // Restore all notes
+        useNotesStore.setState((state) => {
+          const restoredNotes = { ...state.notes };
+          notesToDelete.forEach(note => {
+            restoredNotes[note.id] = note;
+          });
+          return {
+            notes: restoredNotes,
+          };
+        });
+
+        console.log(`✅ Folder "${folderToDelete.name}" and ${noteCount} note(s) restored (undo)`);
+      }
+    );
+  };
+
+  // Handle folder rename
+  const handleRenameFolder = (folderId: string, currentName: string) => {
+    setSelectedFolderId(folderId);
+    setSelectedFolderName(currentName);
+    setRenameDialogOpen(true);
+  };
+
+  const confirmRenameFolder = (newName: string) => {
+    if (!selectedFolderId || !newName.trim()) return;
+    updateFolder(selectedFolderId, { name: newName.trim() });
+  };
+
+  return (
+    <div className="p-4 flex flex-col max-h-[40%] overflow-hidden border-b border-border-light dark:border-border-dark">
+      {/* Folders header */}
+      <div className="flex items-center justify-between mb-4 flex-shrink-0">
+        <h3 className="text-base font-semibold text-text-light-primary dark:text-text-dark-primary">Folders</h3>
+        <button
+          onClick={() => createFolder()}
+          className="text-xs px-3 h-8 bg-accent-blue hover:bg-accent-blue-hover text-white rounded transition-colors duration-150 font-medium"
+          title="New Folder"
+        >
+          + Folder
+        </button>
+      </div>
+
+      {/* Search Input */}
+      <div className="px-3 py-2">
+        <input
+          type="text"
+          placeholder="Search notes... (Cmd+K)"
+          className="w-full px-3 py-2 text-sm border border-border-light dark:border-border-dark rounded-lg
+                     bg-surface-light dark:bg-surface-dark
+                     text-text-light-primary dark:text-text-dark-primary
+                     placeholder-text-light-secondary dark:placeholder-text-dark-secondary
+                     focus:outline-none focus:ring-2 focus:ring-accent-blue transition-all"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          ref={searchInputRef}
+        />
+      </div>
+
+      {/* All Notes (root level) */}
+      {!searchQuery.trim() && (
+        <button
+          onClick={() => setActiveFolder(null)}
+          className={`w-full text-left px-3 h-8 rounded-lg transition-colors mb-1 flex-shrink-0 flex items-center text-base ${
+            activeFolderId === null
+              ? 'bg-surface-light-elevated dark:bg-surface-dark-elevated text-text-light-primary dark:text-text-dark-primary font-medium'
+              : 'hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated text-text-light-secondary dark:text-text-dark-secondary'
+          }`}
+        >
+          📂 All Notes
+        </button>
+      )}
+
+      {/* Search Results OR Folder list */}
+      {searchQuery.trim() ? (
+        /* Search Results */
+        <div className="px-3 overflow-y-auto flex-1">
+          <h3 className="text-sm font-semibold text-text-light-secondary dark:text-text-dark-secondary mb-2">
+            {searchNotes(searchQuery).length} results for "{searchQuery}"
+          </h3>
+          <div className="space-y-2">
+            {searchNotes(searchQuery).map((note) => (
+              <div
+                key={note.id}
+                onClick={() => {
+                  setSearchQuery(''); // Clear search
+                  // Note will be selected via the NotesList component
+                }}
+                className="p-3 rounded-lg cursor-pointer hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated transition-colors"
+              >
+                <div className="font-medium text-text-light-primary dark:text-text-dark-primary mb-1">
+                  {note.title || 'Untitled'}
+                </div>
+                <div className="text-sm text-text-light-secondary dark:text-text-dark-secondary line-clamp-2">
+                  {note.contentText?.slice(0, 150)}...
+                </div>
+                <div className="text-xs text-text-light-secondary dark:text-text-dark-secondary mt-1">
+                  {new Date(note.updatedAt).toLocaleDateString()}
+                </div>
+              </div>
+            ))}
+            {searchNotes(searchQuery).length === 0 && (
+              <div className="text-sm text-text-light-secondary dark:text-text-dark-secondary text-center py-8">
+                No notes found for "{searchQuery}"
+              </div>
+            )}
+          </div>
+        </div>
+      ) : (
+        /* Folder tree - Scrollable */
+        <div className="space-y-1 overflow-y-auto flex-1">
+          {folderTree.map((node) => (
+            <FolderTreeNode
+              key={node.id}
+              node={node}
+              depth={0}
+              activeFolderId={activeFolderId}
+              expandedFolderIds={expandedFolderIds}
+              onSelect={setActiveFolder}
+              onToggleExpanded={toggleExpanded}
+              onDelete={handleDeleteFolder}
+              onRename={handleRenameFolder}
+              getFolderNoteCount={getFolderNoteCount}
+            />
+          ))}
+
+          {/* Empty state */}
+          {folderTree.length === 0 && (
+            <div className="text-sm text-text-light-secondary dark:text-text-dark-secondary text-center py-4">
+              No folders yet
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Delete Folder Confirmation Dialog */}
+      <ConfirmDialog
+        isOpen={deleteDialogOpen}
+        onClose={() => setDeleteDialogOpen(false)}
+        onConfirm={confirmDeleteFolder}
+        title="Delete Folder"
+        message={`Delete folder "${selectedFolderName}"? This will also delete ${selectedFolderId ? getFolderNoteCount(selectedFolderId) : 0} note(s) inside.`}
+        confirmText="Delete"
+        variant="danger"
+      />
+
+      {/* Rename Folder Prompt Dialog */}
+      <PromptDialog
+        isOpen={renameDialogOpen}
+        onClose={() => setRenameDialogOpen(false)}
+        onConfirm={confirmRenameFolder}
+        title="Rename Folder"
+        message="Enter a new name for this folder:"
+        defaultValue={selectedFolderName}
+        placeholder="Folder name"
+        confirmText="Rename"
+      />
+    </div>
+  );
+};
+
+/**
+ * Note List Item Component
+ */
+const NoteListItem: React.FC<{ note: Note; isActive: boolean }> = ({
+  note,
+  isActive,
+}) => {
+  const setActiveNote = useNotesStore((state) => state.setActiveNote);
+  const deleteNote = useNotesStore((state) => state.deleteNote);
+  const togglePin = useNotesStore((state) => state.togglePin);
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+
+  // Format date
+  const formatDate = (date: Date) => {
+    const now = new Date();
+    const diff = now.getTime() - new Date(date).getTime();
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+    if (days === 0) return 'Today';
+    if (days === 1) return 'Yesterday';
+    if (days < 7) return `${days} days ago`;
+    return new Date(date).toLocaleDateString();
+  };
+
+  // First line of content
+  const preview = note.contentText.split('\n')[0] || 'No content';
+
+  return (
+    <div
+      className={`group relative p-3 rounded-lg cursor-pointer transition-all ${
+        isActive
+          ? 'bg-primary-cyan bg-opacity-10 border-l-4 border-primary-cyan'
+          : 'hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated border-l-4 border-transparent'
+      }`}
+      onClick={() => setActiveNote(note.id)}
+    >
+      {/* Pin indicator */}
+      {note.isPinned && (
+        <div className="absolute top-2 right-2 text-amber-500">📌</div>
+      )}
+
+      {/* Title */}
+      <h4 className="font-medium text-text-light-primary dark:text-text-dark-primary mb-1 pr-6 truncate">
+        {note.title}
+      </h4>
+
+      {/* Preview */}
+      <p className="text-sm text-text-light-secondary dark:text-text-dark-secondary line-clamp-2 mb-2">
+        {preview}
+      </p>
+
+      {/* Meta */}
+      <div className="flex items-center justify-between text-xs text-text-light-secondary dark:text-text-dark-secondary">
+        <span>{formatDate(note.updatedAt)}</span>
+        {note.tags.length > 0 && (
+          <span className="truncate ml-2">🏷️ {note.tags[0]}</span>
+        )}
+      </div>
+
+      {/* Actions (show on hover) */}
+      <div className="absolute top-2 right-8 opacity-0 group-hover:opacity-100 transition-opacity flex gap-1">
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            exportNoteToMarkdown(note);
+          }}
+          className="p-1 hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated rounded"
+          title="Export to Markdown"
+        >
+          ⬇️
+        </button>
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            togglePin(note.id);
+          }}
+          className="p-1 hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated rounded"
+          title={note.isPinned ? 'Unpin' : 'Pin'}
+        >
+          📌
+        </button>
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            setShowDeleteDialog(true);
+          }}
+          className="p-1 hover:bg-red-100 dark:hover:bg-red-900 rounded text-red-600"
+          title="Delete"
+        >
+          🗑️
+        </button>
+      </div>
+
+      {/* Delete Confirmation Dialog */}
+      {showDeleteDialog && (
+        <ConfirmDialog
+          isOpen={true}
+          onClose={() => setShowDeleteDialog(false)}
+          onConfirm={() => {
+            deleteNote(note.id);
+            setShowDeleteDialog(false);
+          }}
+          title="Delete Note"
+          message={`Are you sure you want to delete "${note.title}"? This action cannot be undone.`}
+          variant="danger"
+        />
+      )}
+    </div>
+  );
+};
+
+/**
+ * Notes List Component
+ */
+const NotesList: React.FC = () => {
+  const activeFolderId = useFoldersStore((state) => state.activeFolderId);
+  // Get raw notes and store config (stable references)
+  const notesObj = useNotesStore((state) => state.notes);
+  const sortConfig = useNotesStore((state) => state.sortConfig);
+  const filter = useNotesStore((state) => state.filter);
+  const activeNoteId = useNotesStore((state) => state.activeNoteId);
+  const createNote = useNotesStore((state) => state.createNote);
+
+  // Compute filtered/sorted notes with useMemo
+  const notes = useMemo(() => {
+    // Filter by folder
+    // If activeFolderId is null, show ALL notes (not just notes with null folderId)
+    let filtered = activeFolderId === null
+      ? Object.values(notesObj) // Show all notes when "All Notes" is selected
+      : Object.values(notesObj).filter((note) => note.folderId === activeFolderId);
+
+    // Apply filter (archived, pinned, etc.)
+    switch (filter) {
+      case 'pinned':
+        filtered = filtered.filter((note) => note.isPinned);
+        break;
+      case 'archived':
+        filtered = filtered.filter((note) => note.isArchived);
+        break;
+      case 'unarchived':
+        filtered = filtered.filter((note) => !note.isArchived);
+        break;
+    }
+
+    // Sort notes
+    const sorted = [...filtered].sort((a, b) => {
+      let comparison = 0;
+      switch (sortConfig.field) {
+        case 'title':
+          comparison = a.title.localeCompare(b.title);
+          break;
+        case 'createdAt':
+          comparison = a.createdAt.getTime() - b.createdAt.getTime();
+          break;
+        case 'updatedAt':
+          comparison = a.updatedAt.getTime() - b.updatedAt.getTime();
+          break;
+      }
+      return sortConfig.order === 'asc' ? comparison : -comparison;
+    });
+
+    // Always pin pinned notes to top
+    return sorted.sort((a, b) => {
+      if (a.isPinned && !b.isPinned) return -1;
+      if (!a.isPinned && b.isPinned) return 1;
+      return 0;
+    });
+  }, [notesObj, activeFolderId, sortConfig, filter]);
+
+  return (
+    <div className="flex-1 overflow-y-auto">
+      <div className="bento-card p-4 m-3">
+        {/* Notes header */}
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="font-semibold text-text-light-primary dark:text-text-dark-primary">
+            Notes ({notes.length})
+          </h3>
+          <button
+            onClick={() => createNote({ folderId: activeFolderId })}
+            className="px-3 py-1.5 bg-gradient-button-primary text-white rounded-lg hover:shadow-glow-magenta transition-all duration-200 text-sm font-medium"
+          >
+            + New Note
+          </button>
+        </div>
+
+      {/* Notes list */}
+      <div className="space-y-2">
+        {notes.map((note) => (
+          <NoteListItem
+            key={note.id}
+            note={note}
+            isActive={note.id === activeNoteId}
+          />
+        ))}
+      </div>
+
+      {/* Empty state */}
+      {notes.length === 0 && (
+        <div className="text-center py-12">
+          <div className="text-6xl mb-4">📝</div>
+          <h3 className="text-xl font-semibold text-text-light-primary dark:text-text-dark-primary mb-2">
+            No notes yet
+          </h3>
+          <p className="text-text-light-secondary dark:text-text-dark-secondary mb-4">
+            Create your first note to get started
+          </p>
+          <button
+            onClick={() => createNote({ folderId: activeFolderId })}
+            className="px-4 py-2 bg-gradient-button-primary text-white rounded-lg hover:shadow-glow-magenta transition-all duration-200 font-medium"
+          >
+            Create Note
+          </button>
+        </div>
+      )}
+      </div>
+    </div>
+  );
+};
+
+/**
+ * Notes Page Component
+ */
+export const Notes: React.FC = () => {
+  const activeNoteId = useNotesStore((state) => state.activeNoteId);
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const migrationRunRef = useRef(false);
+
+  // One-time migration to clear corrupted Notes data
+  // Runs ONCE on component mount (not at module load time)
+  useEffect(() => {
+    // Guard against SSR and multiple runs
+    if (typeof window === 'undefined' || migrationRunRef.current) {
+      return;
+    }
+
+    if (!localStorage.getItem(MIGRATION_KEY)) {
+      console.log('🔧 Clearing corrupted Notes data...');
+
+      // Clear from localStorage (where corrupted data is stored)
+      localStorage.removeItem('notes');
+      localStorage.removeItem('folders');
+
+      console.log('✅ Cleared corrupted data, page will reload with fresh stores');
+
+      // Mark migration complete BEFORE reload to prevent loops
+      localStorage.setItem(MIGRATION_KEY, 'true');
+      migrationRunRef.current = true;
+
+      // Reload page to reinitialize stores
+      window.location.reload();
+    }
+  }, []); // Run once on mount
+
+  useEffect(() => {
+    document.title = 'Notes - Neuman Brain';
+    console.log('📝 Notes page loaded');
+  }, []);
+
+  return (
+    <div className="notes-page">
+      {/* Page Header */}
+      <div className="mb-8">
+        <h1 className="text-xl font-semibold text-text-light-primary dark:text-text-dark-primary mb-2">
+          Notes
+        </h1>
+        <p className="text-base text-text-light-secondary dark:text-text-dark-secondary">
+          Your second brain for ideas, thoughts, and knowledge
+        </p>
+      </div>
+
+      {/* Notes Content */}
+      <div className="h-[calc(100vh-280px)] flex gap-8 relative">
+        {/* Sidebar toggle button */}
+        <button
+          onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
+          className="absolute left-0 top-4 z-20 p-2 bg-surface-light dark:bg-surface-dark-elevated border border-border-light dark:border-border-dark rounded-r-lg hover:bg-surface-light-elevated dark:hover:bg-surface-dark transition-all duration-200"
+          title={isSidebarCollapsed ? 'Show Sidebar' : 'Hide Sidebar'}
+          style={{ transform: isSidebarCollapsed ? 'translateX(0)' : 'translateX(0)' }}
+        >
+          {isSidebarCollapsed ? '→' : '←'}
+        </button>
+
+        {/* Left Sidebar - Folders + Notes List */}
+        <AnimatePresence>
+        {!isSidebarCollapsed && (
+          <motion.div
+            initial={{ width: 0, opacity: 0 }}
+            animate={{ width: 320, opacity: 1 }}
+            exit={{ width: 0, opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="flex-shrink-0 border-r border-border-light dark:border-border-dark bg-transparent flex flex-col overflow-hidden"
+          >
+            <FolderSidebar />
+            <NotesList />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Center - Editor */}
+      <div className="flex-1 overflow-hidden">
+        <div className="h-full overflow-hidden border border-border-light dark:border-border-dark rounded-lg">
+          {activeNoteId ? (
+            <NotesEditor noteId={activeNoteId} />
+          ) : (
+            <NotesEditorEmpty />
+          )}
+        </div>
+      </div>
+
+      {/* Right Sidebar - Metadata (Future) */}
+      {/* TODO: Add note metadata panel */}
+    </div>
+    </div>
+  );
+};

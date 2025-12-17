@@ -1,0 +1,612 @@
+import React, { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { useSidebarStore } from '../stores/useSidebarStore';
+import { useSidebarNavStore } from '../stores/useSidebarNavStore';
+import { useNavExpansionStore } from '../stores/useNavExpansionStore';
+import { useThemeStore } from '../stores/useThemeStore';
+import { PageSettingsPanel } from './PageSettingsPanel';
+import { TimeTrackingPanel } from './TimeTrackingPanel';
+import { DndContext, closestCenter, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
+import type { DragEndEvent } from '@dnd-kit/core';
+import { SortableContext, verticalListSortingStrategy, useSortable, arrayMove } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
+
+/**
+ * FOUNDATIONAL: NavItem interface with expandable support
+ * Any nav item can have sub-pages by adding `children`.
+ */
+interface NavItem {
+  icon: string;
+  label: string;
+  path: string;
+  shortcut?: string;
+  hasSettings?: boolean; // Whether this page has custom settings
+  children?: NavItem[]; // Sub-pages (expandable)
+  defaultExpanded?: boolean; // Initial expansion state
+}
+
+// Fixed navigation items (always at top, not draggable)
+const fixedNavigation: NavItem[] = [
+  {
+    icon: '🏠',
+    label: 'Dashboard',
+    path: '/',
+    shortcut: 'D',
+    hasSettings: true,
+    defaultExpanded: true,
+    children: [
+      { icon: '🔗', label: 'Link Library', path: '/links' },
+    ],
+  },
+  {
+    icon: '📅',
+    label: 'Schedule',
+    path: '/schedule',
+    shortcut: 'P',
+    hasSettings: false,
+    defaultExpanded: false,
+    children: [
+      { icon: '⏱️', label: 'Timer', path: '/schedule?tab=timer' },
+      { icon: '📋', label: 'Entries', path: '/schedule?tab=entries' },
+      { icon: '📊', label: 'Summary', path: '/schedule?tab=summary' },
+      { icon: '📆', label: 'Calendar', path: '/schedule?tab=calendar' },
+      { icon: '📁', label: 'Projects', path: '/schedule?tab=projects' },
+    ],
+  },
+];
+
+// Draggable navigation items (user can reorganize)
+const draggableNavigation: NavItem[] = [
+  { icon: '📝', label: 'Notes', path: '/notes', shortcut: 'N', hasSettings: false },
+  { icon: '✓', label: 'Tasks', path: '/tasks', shortcut: 'T', hasSettings: false },
+];
+
+// Sortable Navigation Item Component
+interface SortableNavItemProps {
+  item: NavItem;
+  isCollapsed: boolean;
+  isActive: boolean;
+  onPageSettings: (e: React.MouseEvent, path: string) => void;
+  justDragged: boolean;
+}
+
+const SortableNavItem: React.FC<SortableNavItemProps> = ({ item, isCollapsed, isActive, onPageSettings, justDragged }) => {
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({ id: item.path });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    opacity: isDragging ? 0.5 : 1,
+  };
+
+  return (
+    <li ref={setNodeRef} style={style} {...attributes}>
+      <Link
+        to={item.path}
+        onClick={(e) => {
+          if (justDragged) {
+            e.preventDefault();
+          }
+        }}
+        className={`
+          flex items-center gap-3 px-3 h-10 rounded-button
+          transition-all duration-standard ease-smooth
+          relative group
+          ${
+            isActive
+              ? 'bg-surface-light-elevated dark:bg-surface-dark-elevated text-text-light-primary dark:text-text-dark-primary'
+              : 'text-text-light-secondary dark:text-text-dark-secondary hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated'
+          }
+        `}
+        title={isCollapsed ? item.label : undefined}
+      >
+        {/* Active indicator (left accent) */}
+        {isActive && (
+          <div className="absolute left-0 top-2 bottom-2 w-[3px] bg-accent-blue rounded-r" />
+        )}
+
+        {/* Icon - Fixed 20px size */}
+        <span className="w-5 h-5 flex items-center justify-center flex-shrink-0 text-lg">
+          {item.icon}
+        </span>
+
+        {/* Label (hidden when collapsed) */}
+        {!isCollapsed && (
+          <>
+            <span className="flex-1 text-base leading-5 font-medium truncate">
+              {item.label}
+            </span>
+
+            {/* Page Settings Icon (shown on hover) */}
+            {item.hasSettings && (
+              <button
+                onClick={(e) => onPageSettings(e, item.path)}
+                className="
+                  opacity-0 group-hover:opacity-100
+                  w-5 h-5 flex items-center justify-center flex-shrink-0
+                  text-text-light-secondary dark:text-text-dark-secondary
+                  hover:text-text-light-primary dark:hover:text-text-dark-primary
+                  transition-opacity duration-200
+                "
+                title="Page Settings"
+                aria-label={`${item.label} page settings`}
+              >
+                <span className="text-sm">⚙</span>
+              </button>
+            )}
+
+            {/* Drag handle - visible on hover (right side) */}
+            <div
+              {...listeners}
+              className="cursor-grab active:cursor-grabbing opacity-0 group-hover:opacity-100 transition-opacity w-5 h-5 flex items-center justify-center flex-shrink-0"
+              title="Drag to reorder"
+              role="button"
+              aria-label={`Drag ${item.label} to reorder`}
+              tabIndex={0}
+            >
+              <span className="text-xs text-text-light-secondary dark:text-text-dark-secondary">⋮⋮</span>
+            </div>
+          </>
+        )}
+
+        {/* Tooltip for collapsed state */}
+        {isCollapsed && (
+          <div className="
+            absolute left-full ml-2 px-2 py-1
+            bg-surface-light-elevated dark:bg-surface-dark-elevated
+            text-text-light-primary dark:text-text-dark-primary text-xs rounded
+            opacity-0 group-hover:opacity-100
+            pointer-events-none transition-opacity duration-200
+            whitespace-nowrap z-50
+          ">
+            {item.label}
+          </div>
+        )}
+      </Link>
+    </li>
+  );
+};
+
+export const Sidebar: React.FC = () => {
+  const { isCollapsed, toggleCollapse, isMobileMenuOpen, setMobileMenuOpen } = useSidebarStore();
+  const { mode, toggleTheme } = useThemeStore();
+  const navOrder = useSidebarNavStore((state) => state.navOrder);
+  const setNavOrder = useSidebarNavStore((state) => state.setNavOrder);
+  const { isExpanded, toggleExpanded } = useNavExpansionStore();
+  const location = useLocation();
+  const [pageSettingsOpen, setPageSettingsOpen] = useState<string | null>(null);
+  const [justDragged, setJustDragged] = useState(false);
+
+  // Check if a nav path is active (handles both pathname and query params)
+  const isActive = (path: string) => {
+    // Handle paths with query params (e.g., /schedule?tab=calendar)
+    if (path.includes('?')) {
+      const [pathname, query] = path.split('?');
+      if (location.pathname !== pathname) return false;
+      const params = new URLSearchParams(query);
+      const currentParams = new URLSearchParams(location.search);
+      // Check if all specified params match
+      for (const [key, value] of params.entries()) {
+        if (currentParams.get(key) !== value) return false;
+      }
+      return true;
+    }
+    // Simple pathname match
+    return location.pathname === path;
+  };
+
+  // Check if any child of a parent is active (for highlighting parent when child is active)
+  const isChildActive = (item: NavItem) => {
+    if (!item.children) return false;
+    return item.children.some((child) => isActive(child.path));
+  };
+
+  // Configure drag sensors (require 5px movement to start dragging)
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 5,
+      },
+    })
+  );
+
+  // Sort draggable navigation items by saved order
+  const sortedDraggableNavigation = [...draggableNavigation].sort((a, b) => {
+    const aIndex = navOrder.indexOf(a.path);
+    const bIndex = navOrder.indexOf(b.path);
+    // If path not found in order, put it at the end
+    return (aIndex === -1 ? 999 : aIndex) - (bIndex === -1 ? 999 : bIndex);
+  });
+
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+
+    setJustDragged(true);
+
+    if (over && active.id !== over.id) {
+      const oldIndex = navOrder.indexOf(active.id as string);
+      const newIndex = navOrder.indexOf(over.id as string);
+
+      if (oldIndex !== -1 && newIndex !== -1) {
+        const newOrder = arrayMove(navOrder, oldIndex, newIndex);
+        setNavOrder(newOrder);
+      }
+    }
+
+    // Reset justDragged flag after a short delay
+    setTimeout(() => setJustDragged(false), 100);
+  };
+
+  const handlePageSettings = (e: React.MouseEvent, path: string) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setPageSettingsOpen(path);
+  };
+
+  // Close mobile menu on route change
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [location.pathname, setMobileMenuOpen]);
+
+  // Keyboard shortcut: Cmd/Ctrl + B to toggle
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'b') {
+        e.preventDefault();
+        toggleCollapse();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [toggleCollapse]);
+
+  return (
+    <>
+      {/* Mobile backdrop */}
+      {isMobileMenuOpen && (
+        <div
+          className="lg:hidden fixed inset-0 bg-black/50 z-30"
+          onClick={() => setMobileMenuOpen(false)}
+        />
+      )}
+
+      {/* Sidebar */}
+      <aside
+        aria-label="Main navigation sidebar"
+        className={`
+          fixed left-0 top-0 h-screen
+          bg-surface-light-elevated dark:bg-surface-dark
+          border-r border-border-light dark:border-border-dark
+          transition-all duration-200 ease-in-out
+          flex flex-col
+          z-40
+          ${isCollapsed ? 'w-[60px]' : 'w-[210px]'}
+
+          ${/* Mobile: slide in/out as drawer */ ''}
+          lg:translate-x-0
+          ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+        `}
+      >
+      {/* Logo Section */}
+      <div className="p-4 border-b border-border-light dark:border-border-dark">
+        <Link
+          to="/"
+          className="flex items-center gap-3 overflow-hidden"
+        >
+          <img
+            src="/images/logos/nb3.png"
+            alt="Neuman Brain"
+            className="w-8 h-8 flex-shrink-0 rounded-button"
+          />
+          {!isCollapsed && (
+            <div className="flex flex-col min-w-0">
+              <h1 className="text-sm font-semibold text-text-light-primary dark:text-text-dark-primary truncate">
+                NEUMAN BRAIN
+              </h1>
+              <p className="text-xs text-text-light-secondary dark:text-text-dark-secondary truncate">
+                Management Platform
+              </p>
+            </div>
+          )}
+        </Link>
+      </div>
+
+      {/* Navigation Items */}
+      <nav aria-label="Primary navigation" className="flex-1 overflow-y-auto py-4">
+        <ul className="space-y-1 px-2">
+          {/* Fixed Navigation Items (Dashboard - not draggable, supports children) */}
+          {fixedNavigation.map((item) => {
+            const hasChildren = item.children && item.children.length > 0;
+            const expanded = isExpanded(item.path);
+            const parentActive = isActive(item.path);
+            const childActive = isChildActive(item);
+
+            return (
+              <li key={item.path}>
+                {/* Parent Item */}
+                <div className="flex items-center">
+                  <Link
+                    to={item.path}
+                    className={`
+                      flex-1 flex items-center gap-3 px-3 h-10 rounded-button
+                      transition-all duration-standard ease-smooth
+                      relative group
+                      ${
+                        parentActive || childActive
+                          ? 'bg-surface-light-elevated dark:bg-surface-dark-elevated text-text-light-primary dark:text-text-dark-primary'
+                          : 'text-text-light-secondary dark:text-text-dark-secondary hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated'
+                      }
+                    `}
+                    title={isCollapsed ? item.label : undefined}
+                  >
+                    {/* Active indicator (left accent) */}
+                    {parentActive && (
+                      <div className="absolute left-0 top-2 bottom-2 w-[3px] bg-accent-blue rounded-r" />
+                    )}
+
+                    {/* Icon - Fixed 20px size */}
+                    <span className="w-5 h-5 flex items-center justify-center flex-shrink-0 text-lg">
+                      {item.icon}
+                    </span>
+
+                    {/* Label (hidden when collapsed) */}
+                    {!isCollapsed && (
+                      <>
+                        <span className="flex-1 text-base leading-5 font-medium truncate">
+                          {item.label}
+                        </span>
+
+                        {/* Page Settings Icon (shown on hover) */}
+                        {item.hasSettings && (
+                          <button
+                            onClick={(e) => handlePageSettings(e, item.path)}
+                            className="
+                              opacity-0 group-hover:opacity-100
+                              w-5 h-5 flex items-center justify-center flex-shrink-0
+                              text-text-light-secondary dark:text-text-dark-secondary
+                              hover:text-text-light-primary dark:hover:text-text-dark-primary
+                              transition-opacity duration-200
+                            "
+                            title="Page Settings"
+                          >
+                            <span className="text-sm">⚙</span>
+                          </button>
+                        )}
+
+                        {/* Expand/Collapse Chevron (for items with children) */}
+                        {hasChildren && (
+                          <button
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              toggleExpanded(item.path);
+                            }}
+                            className="
+                              w-5 h-5 flex items-center justify-center flex-shrink-0
+                              text-text-light-secondary dark:text-text-dark-secondary
+                              hover:text-text-light-primary dark:hover:text-text-dark-primary
+                              transition-transform duration-200
+                            "
+                            title={expanded ? 'Collapse' : 'Expand'}
+                          >
+                            <span
+                              className={`text-xs transition-transform duration-200 ${
+                                expanded ? 'rotate-90' : ''
+                              }`}
+                            >
+                              ▶
+                            </span>
+                          </button>
+                        )}
+                      </>
+                    )}
+
+                    {/* Tooltip for collapsed state */}
+                    {isCollapsed && (
+                      <div className="
+                        absolute left-full ml-2 px-2 py-1
+                        bg-surface-light-elevated dark:bg-surface-dark-elevated
+                        text-text-light-primary dark:text-text-dark-primary text-xs rounded
+                        opacity-0 group-hover:opacity-100
+                        pointer-events-none transition-opacity duration-200
+                        whitespace-nowrap z-50
+                      ">
+                        {item.label}
+                      </div>
+                    )}
+                  </Link>
+                </div>
+
+                {/* Children (Sub-pages) - only show when expanded and not collapsed */}
+                {hasChildren && expanded && !isCollapsed && (
+                  <ul className="ml-6 mt-1 space-y-1">
+                    {item.children!.map((child) => (
+                      <li key={child.path}>
+                        <Link
+                          to={child.path}
+                          className={`
+                            flex items-center gap-3 px-3 h-9 rounded-button
+                            transition-all duration-standard ease-smooth
+                            relative group
+                            ${
+                              isActive(child.path)
+                                ? 'bg-surface-light-elevated dark:bg-surface-dark-elevated text-text-light-primary dark:text-text-dark-primary'
+                                : 'text-text-light-secondary dark:text-text-dark-secondary hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated'
+                            }
+                          `}
+                        >
+                          {/* Active indicator (left accent) */}
+                          {isActive(child.path) && (
+                            <div className="absolute left-0 top-1.5 bottom-1.5 w-[3px] bg-accent-blue rounded-r" />
+                          )}
+
+                          {/* Icon */}
+                          <span className="w-4 h-4 flex items-center justify-center flex-shrink-0 text-sm">
+                            {child.icon}
+                          </span>
+
+                          {/* Label */}
+                          <span className="flex-1 text-sm leading-5 font-medium truncate">
+                            {child.label}
+                          </span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            );
+          })}
+
+          {/* Draggable Navigation Items (Notes, Planning, Tasks) */}
+          <DndContext
+            sensors={sensors}
+            collisionDetection={closestCenter}
+            onDragEnd={handleDragEnd}
+          >
+            <SortableContext items={navOrder} strategy={verticalListSortingStrategy}>
+              {sortedDraggableNavigation.map((item) => (
+                <SortableNavItem
+                  key={item.path}
+                  item={item}
+                  isCollapsed={isCollapsed}
+                  isActive={isActive(item.path)}
+                  onPageSettings={handlePageSettings}
+                  justDragged={justDragged}
+                />
+              ))}
+            </SortableContext>
+          </DndContext>
+        </ul>
+      </nav>
+
+      {/* Time Tracking Panel - only visible when expanded */}
+      {!isCollapsed && <TimeTrackingPanel />}
+
+      {/* Bottom Section */}
+      <div className="border-t border-border-light dark:border-border-dark p-2 space-y-1">
+        {/* Settings (Fixed) */}
+        <Link
+          to="/settings"
+          className={`
+            w-full flex items-center gap-3 px-3 h-10 rounded-button
+            ${isActive('/settings')
+              ? 'bg-surface-light-elevated dark:bg-surface-dark-elevated text-text-light-primary dark:text-text-dark-primary'
+              : 'text-text-light-secondary dark:text-text-dark-secondary hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated'
+            }
+            transition-all duration-standard ease-smooth
+            group relative
+          `}
+          title={isCollapsed ? 'Settings' : undefined}
+        >
+          {/* Active indicator (left accent) */}
+          {isActive('/settings') && (
+            <div className="absolute left-0 top-2 bottom-2 w-[3px] bg-accent-blue rounded-r" />
+          )}
+
+          <span className="w-5 h-5 flex items-center justify-center flex-shrink-0 text-lg">⚙️</span>
+          {!isCollapsed && (
+            <span className="flex-1 text-base leading-5 font-medium text-left truncate">
+              Settings
+            </span>
+          )}
+          {isCollapsed && (
+            <div className="
+              absolute left-full ml-2 px-2 py-1
+              bg-surface-dark text-text-dark-primary text-xs rounded
+              opacity-0 group-hover:opacity-100
+              pointer-events-none transition-opacity duration-200
+              whitespace-nowrap z-50
+            ">
+              Settings
+            </div>
+          )}
+        </Link>
+
+        {/* Theme Toggle */}
+        <button
+          onClick={toggleTheme}
+          className={`
+            w-full flex items-center gap-3 px-3 h-10 rounded-button
+            text-text-light-secondary dark:text-text-dark-secondary
+            hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated
+            transition-all duration-standard ease-smooth
+            group relative
+          `}
+          title={isCollapsed ? (mode === 'dark' ? 'Light Mode' : 'Dark Mode') : undefined}
+        >
+          <span className="w-5 h-5 flex items-center justify-center flex-shrink-0 text-lg">
+            {mode === 'dark' ? '☀️' : '🌙'}
+          </span>
+          {!isCollapsed && (
+            <span className="flex-1 text-base leading-5 font-medium text-left">
+              {mode === 'dark' ? 'Light Mode' : 'Dark Mode'}
+            </span>
+          )}
+          {isCollapsed && (
+            <div className="
+              absolute left-full ml-2 px-2 py-1
+              bg-surface-dark text-text-dark-primary text-xs rounded
+              opacity-0 group-hover:opacity-100
+              pointer-events-none transition-opacity duration-200
+              whitespace-nowrap z-50
+            ">
+              {mode === 'dark' ? 'Light Mode' : 'Dark Mode'}
+            </div>
+          )}
+        </button>
+
+        {/* Collapse Toggle */}
+        <button
+          onClick={toggleCollapse}
+          className={`
+            w-full flex items-center gap-3 px-3 h-10 rounded-button
+            text-text-light-secondary dark:text-text-dark-secondary
+            hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated
+            transition-all duration-standard ease-smooth
+            group relative
+          `}
+          title={isCollapsed ? 'Expand Sidebar' : undefined}
+        >
+          <span className="w-5 h-5 flex items-center justify-center flex-shrink-0 text-lg">
+            {isCollapsed ? '▶' : '◀'}
+          </span>
+          {!isCollapsed && (
+            <span className="flex-1 text-base leading-5 font-medium text-left">
+              Collapse
+            </span>
+          )}
+          {isCollapsed && (
+            <div className="
+              absolute left-full ml-2 px-2 py-1
+              bg-surface-dark text-text-dark-primary text-xs rounded
+              opacity-0 group-hover:opacity-100
+              pointer-events-none transition-opacity duration-200
+              whitespace-nowrap z-50
+            ">
+              Expand Sidebar
+            </div>
+          )}
+        </button>
+      </div>
+    </aside>
+
+    {/* Page Settings Panel */}
+    {pageSettingsOpen && (
+      <PageSettingsPanel
+        isOpen={true}
+        onClose={() => setPageSettingsOpen(null)}
+        pagePath={pageSettingsOpen}
+      />
+    )}
+    </>
+  );
+};

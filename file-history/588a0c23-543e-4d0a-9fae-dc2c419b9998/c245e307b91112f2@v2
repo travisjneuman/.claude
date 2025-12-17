@@ -1,0 +1,361 @@
+# Archive - Historical Reference Files
+
+**Last Updated:** November 24, 2025
+**Purpose:** Preserve historical brainstorming, exploration, superseded documentation, and completed tasks for reference
+
+---
+
+## Important Context
+
+### Single Source of Truth
+
+**`docs/` = CURRENT & AUTHORITATIVE**
+- All files in `docs/` are the most recent, actively maintained official documentation
+- This is the single source of truth for the project
+- Last updated: November 13-14, 2025
+
+**`.archive/` = HISTORICAL REFERENCE ONLY**
+- Files here are for historical context and inspiration
+- Some content has been extracted and integrated into current docs
+- These files may contain outdated information or alternative product visions
+- **Do not use as primary reference** - always check `docs/` first
+
+---
+
+## Directory Structure
+
+### `completed-tasks/`
+
+**Purpose:** Archive for completed task planning documents from `tasks/` directory
+
+**Archival Process:**
+- When a task is 100% complete and committed to git, move task file here
+- Preserves execution history and lessons learned
+- Keeps active `tasks/` directory clean and focused
+
+**Naming Convention:**
+- Preserve original filename: `[feature-name].md`
+- Task files include completion date in review section
+
+**Contents:**
+- **78 completed task files** from `tasks/` directory (as of November 24, 2025)
+  - 59 files from November 19, 2025 cleanup
+  - 19 additional files from November 24, 2025 cleanup
+- Each file contains: overview, plan, checklist, and comprehensive review section
+- All tasks include **Created:** and **Completed:** dates based on git history
+
+**Why Archive Tasks:**
+- Keeps `tasks/` directory clean (only active/upcoming work)
+- Preserves execution history and lessons learned
+- Searchable reference for "how we solved X before"
+- Tracks actual time spent vs estimates for future planning
+
+---
+
+### `superseded-tasks/`
+
+**Purpose:** Archive for obsolete/superseded task planning documents from `tasks/` directory
+
+**Archival Process:**
+- When a task becomes obsolete or is superseded by other work, move task file here
+- Preserves planning history even when tasks were never executed
+- Documents what was considered but not pursued
+
+**Naming Convention:**
+- Preserve original filename: `[feature-name].md`
+- Add note at top of file explaining why superseded
+
+**Contents:**
+- **11 superseded task files** from November 24, 2025 cleanup
+- Tasks that were planned but never executed (e.g., AI Terminal redesigns, abandoned roadmaps)
+- Tasks that were replaced by different approaches (e.g., IndexedDB migration via different path)
+- Tasks that became obsolete due to product direction changes
+
+**Why Archive Superseded Tasks:**
+- Preserves planning rationale even when not executed
+- Documents alternative approaches that were considered
+- Prevents re-proposing already-rejected ideas
+- Tracks product evolution and direction changes
+
+---
+
+### `gemini-analysis-2025-11-19/`
+
+**Source:** Gemini 3.0 Pro Agentic AI codebase analysis session (November 19, 2025)
+
+**Contents:** Gemini-generated documentation files and analysis
+
+**Files:**
+- `GEMINI.md` - Gemini's interpretation of CLAUDE.md (simplified, 6x shorter)
+- `sprint4-notes-mvp-plan.md` - Sprint 4 Notes MVP plan (archived as completed)
+- `gemini/` directory:
+  - `api_integration_guide.md` - AI provider integration guide
+  - `widget_development_guide.md` - Widget development guide
+  - `bug_report_2025_11_19.md` - Codebase audit bug report
+  - `feature_gap_analysis.md` - Missing features analysis
+  - `archival_plan.md` - Documentation cleanup recommendations
+
+**Status:**
+- ✅ **All Gemini docs validated** against actual codebase - 100% accurate
+- ✅ **Bug reports confirmed** - All TODOs exist exactly where reported
+- ✅ **API Integration Guide** - Extracted and integrated into `docs/technical/ai_provider_integration.md`
+- ✅ **Widget Development Guide** - Extracted and integrated into `docs/technical/widget_development.md`
+- ✅ **Feature Gap Analysis** - Insights integrated into `docs/product/feature_roadmap.md`
+- ❌ **GEMINI.md** - Not integrated (CLAUDE.md is canonical, GEMINI.md adds no new value)
+- ✅ **Sprint 4 plan** - Archived (Sprint 4 Notes MVP completed, plan outdated)
+
+**Why Archived:**
+Gemini provided excellent analysis and accurate bug reports. The valuable content (API guide, widget guide, feature gaps) has been extracted and integrated into official documentation. GEMINI.md is superseded by the more comprehensive CLAUDE.md. Sprint 4 plan is archived as the work is complete.
+
+---
+
+### `chatgpt-brainstorming/`
+
+**Source:** `.notes/ChatGPT (Inspiration Reference Only)`
+
+**Contents:** ChatGPT brainstorming sessions and RFC specifications from November 2025
+
+**Files:**
+- `neuman-brain-automations-rfc-20251112-023402.md` - Automation engine specification
+- `neuman-brain-import-export-testkit-20251112-023402/` - Import/export test data
+
+**Status:**
+- ✅ **Automation RFC** extracted and integrated into `docs/technical/automation_system.md`
+  - Complete automation engine specification (~7,500 words)
+  - Trigger → Condition → Action model
+  - JSON schemas, safety mechanisms, example automations
+- ✅ **Import/Export specs** extracted and integrated into `docs/technical/import_export_spec.md`
+  - Complete data portability specification (~6,000 words)
+  - Export formats (.brain, CSV, ICS)
+  - Import formats (Trello, Asana, Generic CSV, ICS)
+  - Dry-run preview system
+  - Test data preserved in archive for reference
+
+**Why Archived:**
+These brainstorming sessions were valuable for extracting technical specifications, but the content is now properly integrated into official documentation. The files are preserved here for historical reference and to track the evolution of ideas.
+
+---
+
+### `claude-exploration/`
+
+**Source:** `.notes/Claude (Inspiration Reference Only)`
+
+**Contents:** Claude AI exploration sessions exploring alternative product visions (October-November 2025)
+
+**Files:**
+- 12 comprehensive exploration documents covering:
+  - Personal Knowledge Management (PKM) vision
+  - Note-taking and AI features
+  - Graph view and advanced search
+  - Real-time collaboration
+  - Visual planning tools
+  - Alternative feature prioritizations
+
+**CRITICAL CONTEXT:**
+⚠️ **These files represent a DIFFERENT product vision than the current direction.**
+
+**Current Vision (docs/):**
+- All-in-one productivity dashboard
+- Habit tracking + time tracking + tasks + calendar + gamification
+- Beautiful bento-card UI
+- Privacy-first, local-first architecture
+- Q1 2026 focus: IndexedDB migration, Notes MVP, File System Access API
+
+**Claude Exploration Vision (archived):**
+- Personal Knowledge Management (PKM) focus
+- Note-taking with AI features as primary value proposition
+- Graph view, backlinks, advanced search as core features
+- Different feature prioritization and roadmap
+
+**Why These Visions Differ:**
+During exploration sessions, Claude investigated alternative approaches to building a "Second Brain" product. While the PKM/notes-first approach is valid and explored in depth, the current product direction focuses on productivity dashboard with habit tracking as the primary differentiator.
+
+**Status:**
+- ❌ **NOT integrated** into current docs (represents alternative product direction)
+- ℹ️ **Preserved for reference** - these explorations contain valuable insights about PKM features, AI integration, and graph databases that may be relevant for future feature development (Q2-Q4 2026)
+
+**Valuable Content to Consider Later:**
+- Graph view architecture (Cytoscape.js, D3.js, force-directed layouts)
+- Advanced search with semantic search and fuzzy matching
+- AI features (auto-tagging, smart suggestions, content generation)
+- Backlink system design
+- Real-time collaboration architecture
+- Visual planning tools (mind maps, flowcharts)
+
+**Why Archived:**
+These explorations were valuable for understanding different product approaches, but they don't align with the current product vision. They're preserved here in case we want to revisit PKM features in the future (e.g., Q3-Q4 2026 after core dashboard is mature).
+
+---
+
+### `superseded-docs/`
+
+**Source:** `.notes/Official Documentation`
+
+**Contents:** Old official documentation (pre-November 2025 reorganization)
+
+**Files:**
+- Old competitive analysis
+- Old feature specifications (Gantt charts, time tracking)
+- Outdated Firebase/Google Drive architecture docs
+- Historical roadmaps and feature lists
+
+**Status:**
+- ✅ **Competitive analysis** - Detailed competitor feature matrices extracted and integrated into `docs/strategy/competitive_landscape.md`
+  - Added executive summary with market gap analysis
+  - Added complete feature comparison matrices (20 features × 5 competitors)
+  - Added habit & productivity apps comparison
+  - Added competitive scoring, positioning statements, threat analysis
+  - Enhanced from 217 lines to ~375 lines
+- ⚠️ **Firebase/Google Drive docs** - OUTDATED (Firebase removed in Sprint 2, Week 3-4)
+- ℹ️ **Feature specs** - Some specs (Gantt, time tracking) may have valuable details not yet in current docs
+  - Consider extracting to `docs/technical/` if implementing these features
+
+**Why Archived:**
+These were the official docs before the November 2025 comprehensive documentation rewrite. The competitive analysis had valuable detailed competitor matrices that were integrated into current docs. Other content is outdated (Firebase) or may be valuable for future feature implementation.
+
+---
+
+### `examples/`
+
+**Source:** `.notes/Examples`
+
+**Contents:** Example files, test data, and reference materials
+
+**Files:**
+- Sample task exports
+- Example automation rules
+- Reference screenshots
+- Test data sets
+
+**Status:**
+- ℹ️ **Preserved as-is** - Examples are useful for testing and reference
+
+**Why Archived:**
+These examples are valuable for testing import/export functionality and for reference when implementing features. They're not part of official documentation but are useful to keep around.
+
+---
+
+## What Was Extracted and Integrated
+
+### From ChatGPT Brainstorming:
+
+**Created `docs/technical/automation_system.md`** (~7,500 words)
+- Complete automation engine specification
+- Data model with TypeScript interfaces and JSON Schema
+- Trigger types: onCreate, onUpdate, onMove, onDue, cron
+- Action types: set, move, addTag, create, notify, snooze
+- Safety mechanisms: loop prevention, rate limiting, idempotency
+- IndexedDB storage and Service Worker integration
+- 5 detailed example automations
+
+**Created `docs/technical/import_export_spec.md`** (~6,000 words)
+- Complete data portability specification
+- Export formats: JSON Bundle (.brain), CSV, ICS
+- Import formats: .brain, Trello JSON, Asana CSV, Generic CSV, ICS
+- Dry-run preview system with conflict resolution
+- Field mapping UI specification
+- Lossless round-trip guarantees
+
+### From Superseded Docs:
+
+**Enhanced `docs/strategy/competitive_landscape.md`** (~375 lines, enhanced from 217)
+- Added executive summary with market gap analysis
+- Added complete feature comparison matrices (All-in-One platforms)
+- Added habit & productivity apps comparison table
+- Added competitive scoring summary (current 4.5/10 → target 9.5/10 by Q4 2026)
+- Added strategic recommendations by sprint
+- Added positioning statements for marketing
+- Added threat analysis (High/Medium/Low threats with mitigations)
+
+### From Claude Exploration:
+
+**Nothing integrated** - Represents alternative product vision (PKM/notes-first vs current productivity dashboard)
+- Preserved for future reference when implementing:
+  - Graph view (Q3 2026)
+  - Advanced search (Q3 2026)
+  - AI features (Q4 2026+)
+  - Real-time collaboration (Q2 2026)
+
+---
+
+## How to Use This Archive
+
+### When to Reference Archive Files:
+
+1. **Implementing automations** → Check `chatgpt-brainstorming/neuman-brain-automations-rfc-*`
+2. **Implementing import/export** → Check test data in `chatgpt-brainstorming/neuman-brain-import-export-testkit-*`
+3. **Implementing PKM features** (Q3-Q4 2026) → Check `claude-exploration/` for graph view, AI features
+4. **Competitive analysis deep-dive** → Check `superseded-docs/` for detailed competitor feature matrices (already integrated into current docs)
+5. **Testing with example data** → Check `examples/`
+
+### When NOT to Use Archive Files:
+
+1. **Looking for current project information** → Always use `docs/` first
+2. **Understanding current product vision** → Use `docs/product/product_vision.md` (NOT Claude exploration files)
+3. **Current architecture** → Use `docs/technical/` (NOT superseded Firebase docs)
+4. **Current roadmap** → Use `docs/product/feature_roadmap.md` (NOT archived roadmaps)
+
+---
+
+## File Preservation Philosophy
+
+**Why archive instead of delete?**
+
+1. **Historical context** - Track evolution of ideas and product decisions
+2. **Future reference** - PKM features, AI integration, graph databases may be relevant in Q3-Q4 2026
+3. **Test data** - Import/export test data valuable for implementation
+4. **Learning** - See what approaches were explored and why they weren't chosen
+5. **Reversibility** - If we change direction, we have the context
+
+**Storage cost:** Minimal (~2MB total) - archive costs are negligible compared to value of historical context
+
+---
+
+## Maintenance
+
+### When to Add to Archive:
+
+- Old official docs that are superseded by new comprehensive docs
+- Brainstorming sessions that produce extracted specifications
+- Alternative product vision explorations
+- Historical roadmaps and feature lists (after major pivots)
+
+### When to Clean Archive:
+
+- **Never delete without review** - storage is cheap, context is valuable
+- Consider moving to `archive/deprecated/` if truly obsolete
+- Update this README when adding new categories
+
+### Archive Organization:
+
+```
+.archive/
+├── README.md                          # This file
+├── gemini-analysis-2025-11-19/       # Gemini codebase analysis (guides extracted to docs/technical/)
+├── chatgpt-brainstorming/            # ChatGPT RFC specs (extracted to docs/technical/)
+├── claude-exploration/               # Alternative PKM vision (preserved for Q3-Q4 2026)
+├── superseded-docs/                  # Old official docs (competitive analysis extracted)
+└── examples/                         # Test data and reference materials
+```
+
+---
+
+## Questions?
+
+- **"Should I reference archive files?"** → Only for historical context or future features (PKM, AI)
+- **"Where's the current info?"** → Always check `docs/` first
+- **"Why keep Claude exploration files?"** → Valuable for Q3-Q4 2026 PKM features, even though not current direction
+- **"Can I delete .notes/ now?"** → Yes, all content copied to .archive/
+
+---
+
+**Last Review:** November 24, 2025 (Task cleanup: 78 completed + 11 superseded tasks archived, 12 active tasks remain)
+**Summary of November 24, 2025 Cleanup:**
+- Started with: 50 task files in tasks/
+- Archived: 19 completed tasks (100% complete with review sections)
+- Superseded: 11 obsolete tasks (planned but never executed or replaced by other work)
+- Combined: 12 related tasks → 4 consolidated master files
+- Created: 4 new consolidated task files (dashboard, calendar, phase-4, widget-refinements)
+- **Result:** 12 active task files (76% reduction in clutter)
+
+**Next Review:** When adding major new archive content or implementing archived features (Q2-Q4 2026)

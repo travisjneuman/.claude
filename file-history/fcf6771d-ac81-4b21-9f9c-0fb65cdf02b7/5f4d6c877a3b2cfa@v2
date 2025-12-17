@@ -1,0 +1,1298 @@
+/**
+ * Notes Store
+ *
+ * Zustand store for managing notes state
+ * Persisted to IndexedDB via syncedStorage
+ */
+
+import { create } from 'zustand';
+import { persist, createJSONStorage } from 'zustand/middleware';
+import { v4 as uuidv4 } from 'uuid';
+import { logger } from '../services/logger';
+import type {
+  Note,
+  NoteUpdate,
+  NoteSortConfig,
+  NoteFilter,
+  NoteTemplate,
+} from '../types/notes';
+import { NOTE_CONSTANTS } from '../types/notes';
+import { createSyncedStorage } from '../lib/syncedStorage';
+import { useUndoStore } from './useUndoStore';
+import { extractWikiLinks, resolveLinksToIds, getBacklinks as getBacklinksUtil } from '../utils/backlinks';
+import { getDailyNote as getDailyNoteUtil, createDailyNote as createDailyNoteUtil } from '../services/dailyNotes';
+import { useSettingsStore } from './useSettingsStore';
+import { findBlockInContent } from '../utils/blockReferences';
+import { createNotePreview } from '../utils/notePreview';
+import { useProjectContextStore } from './useProjectContextStore';
+
+const log = logger.module('NotesStore');
+
+/**
+ * Phase 4: Default note templates for quick note creation
+ */
+const DEFAULT_NOTE_TEMPLATES: NoteTemplate[] = [
+  {
+    id: 'meeting-notes',
+    name: 'Meeting Notes',
+    description: '## Meeting Notes\n\n**Date:** \n**Attendees:** \n\n### Agenda\n1. \n\n### Discussion Points\n- \n\n### Action Items\n- [ ] \n\n### Next Steps\n',
+    icon: '📋',
+    category: 'Work',
+    defaultTags: ['meeting'],
+    isBuiltIn: true,
+  },
+  {
+    id: 'daily-journal',
+    name: 'Daily Journal',
+    description: '## Daily Journal\n\n**Date:** \n\n### Gratitude\n- \n\n### Today\'s Goals\n- [ ] \n\n### Reflections\n\n\n### Tomorrow\'s Focus\n',
+    icon: '📔',
+    category: 'Personal',
+    defaultTags: ['journal'],
+    isBuiltIn: true,
+  },
+  {
+    id: 'project-plan',
+    name: 'Project Plan',
+    description: '## Project: \n\n### Overview\n\n\n### Goals\n- \n\n### Timeline\n| Phase | Start | End | Status |\n|-------|-------|-----|--------|\n| Planning | | | |\n| Development | | | |\n| Testing | | | |\n\n### Resources\n- \n\n### Risks\n- \n',
+    icon: '📊',
+    category: 'Work',
+    defaultTags: ['project'],
+    isBuiltIn: true,
+  },
+  {
+    id: 'todo-list',
+    name: 'Todo List',
+    description: '## Todo List\n\n### High Priority\n- [ ] \n\n### Medium Priority\n- [ ] \n\n### Low Priority\n- [ ] \n\n### Completed\n- [x] \n',
+    icon: '✅',
+    category: 'Productivity',
+    defaultTags: ['todo'],
+    isBuiltIn: true,
+  },
+  {
+    id: 'weekly-review',
+    name: 'Weekly Review',
+    description: '## Weekly Review\n\n**Week of:** \n\n### Accomplishments\n- \n\n### Challenges\n- \n\n### Lessons Learned\n- \n\n### Next Week\'s Goals\n- [ ] \n\n### Notes\n',
+    icon: '📅',
+    category: 'Personal',
+    defaultTags: ['review', 'weekly'],
+    isBuiltIn: true,
+  },
+];
+
+/**
+ * Notes Store State
+ */
+interface NotesStore {
+  // State
+  notes: Record<string, Note>; // Map of note ID -> Note
+  activeNoteId: string | null; // Currently open note
+  sortConfig: NoteSortConfig;
+  filter: NoteFilter;
+  customNoteTemplates: NoteTemplate[]; // User-created templates
+
+  // Actions - CRUD
+  createNote: (params?: Partial<Note>) => Note;
+  getNote: (id: string) => Note | undefined;
+  updateNote: (id: string, updates: NoteUpdate) => void;
+  deleteNote: (id: string) => void;
+  duplicateNote: (id: string) => Note | null;
+
+  // Actions - Bulk operations
+  deleteNotes: (ids: string[]) => void;
+  moveNote: (noteId: string, targetFolderId: string | null) => void;
+  moveNotesToFolder: (noteIds: string[], folderId: string | null) => void;
+  archiveNotes: (noteIds: string[]) => void;
+  unarchiveNotes: (noteIds: string[]) => void;
+
+  // Actions - Queries
+  getAllNotes: () => Note[];
+  getFilteredNotes: () => Note[];
+  getNotesByFolder: (folderId: string | null) => Note[];
+  getNotesBy: (predicate: (note: Note) => boolean) => Note[];
+  searchNotes: (query: string) => Note[];
+
+  // Actions - Pin/Archive/Favorite
+  togglePin: (id: string) => void;
+  toggleArchive: (id: string) => void;
+  toggleFavorite: (id: string) => void;
+
+  // Actions - Tags
+  addTag: (id: string, tag: string) => void;
+  removeTag: (id: string, tag: string) => void;
+  getAllTags: () => string[];
+  getTagUsageCounts: () => Map<string, number>;
+  renameTag: (oldTag: string, newTag: string) => void;
+  mergeTags: (sourceTags: string[], targetTag: string) => void;
+  deleteTag: (tag: string) => void;
+  renameTagGlobally: (oldTag: string, newTag: string) => void;
+  deleteTagGlobally: (tag: string) => void;
+
+  // P2: Bulk tag operations
+  bulkAddTag: (noteIds: string[], tag: string) => void;
+  bulkRemoveTag: (noteIds: string[], tag: string) => void;
+  replaceTag: (oldTag: string, newTag: string) => void;
+
+  // Actions - UI state
+  setActiveNote: (id: string | null) => void;
+  setSortConfig: (config: NoteSortConfig) => void;
+  setFilter: (filter: NoteFilter) => void;
+
+  // Actions - Utility
+  getNoteCount: () => number;
+  getNotesInFolder: (folderId: string | null) => Note[];
+  exportNotes: () => Note[];
+  importNotes: (notes: Note[], merge: boolean) => void;
+  clearAllNotes: () => void;
+
+  // Actions - Backlinks (Phase 4)
+  getBacklinks: (noteId: string) => Note[];
+  updateLinkedNotes: (noteId: string, content: string) => void;
+
+  // P1: Unlinked mentions - Convert text to wiki link
+  convertToWikiLink: (noteId: string, position: number, targetTitle: string) => void;
+
+  // Actions - Templates (Phase 4)
+  getNoteTemplates: () => NoteTemplate[];
+  createNoteFromTemplate: (templateId: string) => Note | null;
+  createNoteTemplate: (params: Partial<NoteTemplate>) => NoteTemplate;
+  updateNoteTemplate: (id: string, updates: Partial<NoteTemplate>) => void;
+  deleteNoteTemplate: (id: string) => void;
+  getNoteTemplate: (id: string) => NoteTemplate | undefined;
+  getAllNoteTemplates: () => NoteTemplate[];
+
+  // Actions - Daily Notes
+  getDailyNote: (date: Date) => Note | null;
+  createDailyNote: (date: Date) => Note;
+  getOrCreateDailyNote: (date: Date) => Note;
+
+  // P2: Block-level links & hover preview helpers
+  getBlockContent: (noteId: string, blockId: string) => string | null;
+  getNotePreview: (noteId: string, blockId?: string) => import('../types/notes').NotePreview | null;
+}
+
+/**
+ * Default note values
+ */
+const createDefaultNote = (overrides?: Partial<Note>): Note => {
+  const now = new Date();
+  return {
+    id: uuidv4(),
+    folderId: null,
+    title: NOTE_CONSTANTS.DEFAULT_TITLE,
+    content: '', // Empty Lexical state
+    contentText: '',
+    tags: [],
+    projectIds: [],
+    createdAt: now,
+    updatedAt: now,
+    isPinned: false,
+    isArchived: false,
+    ...overrides,
+  };
+};
+
+/**
+ * Sort notes based on sort config
+ */
+const sortNotes = (notes: Note[], config: NoteSortConfig): Note[] => {
+  const sorted = [...notes];
+
+  sorted.sort((a, b) => {
+    let comparison = 0;
+
+    switch (config.field) {
+      case 'title':
+        comparison = a.title.localeCompare(b.title);
+        break;
+      case 'createdAt':
+        comparison = a.createdAt.getTime() - b.createdAt.getTime();
+        break;
+      case 'updatedAt':
+        comparison = a.updatedAt.getTime() - b.updatedAt.getTime();
+        break;
+      case 'manual':
+        // Manual sort - preserve order (could add sortOrder field in future)
+        comparison = 0;
+        break;
+    }
+
+    return config.order === 'asc' ? comparison : -comparison;
+  });
+
+  // Always pin pinned notes to top
+  return sorted.sort((a, b) => {
+    if (a.isPinned && !b.isPinned) return -1;
+    if (!a.isPinned && b.isPinned) return 1;
+    return 0;
+  });
+};
+
+/**
+ * Filter notes based on filter type
+ */
+const filterNotes = (notes: Note[], filter: NoteFilter): Note[] => {
+  switch (filter) {
+    case 'favorites':
+      return notes.filter((note) => note.isFavorite);
+    case 'pinned':
+      return notes.filter((note) => note.isPinned);
+    case 'archived':
+      return notes.filter((note) => note.isArchived);
+    case 'unarchived':
+      return notes.filter((note) => !note.isArchived);
+    case 'all':
+    default:
+      return notes;
+  }
+};
+
+/**
+ * Create the Notes store
+ */
+export const useNotesStore = create<NotesStore>()(
+  persist(
+    (set, get) => ({
+      // Initial state
+      notes: {},
+      activeNoteId: null,
+      sortConfig: {
+        field: 'updatedAt',
+        order: 'desc',
+      },
+      filter: 'unarchived',
+      customNoteTemplates: [],
+
+      // CRUD Operations
+      createNote: (params) => {
+        const newNote = createDefaultNote(params);
+        set((state) => ({
+          notes: {
+            ...state.notes,
+            [newNote.id]: newNote,
+          },
+          activeNoteId: newNote.id, // Auto-select new note
+        }));
+        log.debug('Note created', { id: newNote.id });
+        return newNote;
+      },
+
+      getNote: (id) => {
+        return get().notes[id];
+      },
+
+      updateNote: (id, updates) => {
+        const note = get().notes[id];
+        if (!note) {
+          log.warn('Note not found', { id });
+          return;
+        }
+
+        // Only update timestamp if content/title/tags actually changed
+        // Skip timestamp update for UI-only changes (like folderId without content change)
+        const shouldUpdateTimestamp =
+          updates.content !== undefined ||
+          updates.title !== undefined ||
+          updates.tags !== undefined;
+
+        set((state) => ({
+          notes: {
+            ...state.notes,
+            [id]: {
+              ...note,
+              ...updates,
+              ...(shouldUpdateTimestamp ? { updatedAt: new Date() } : {}),
+            },
+          },
+        }));
+        log.debug('Note updated', { id, timestampUpdated: shouldUpdateTimestamp });
+      },
+
+      deleteNote: (id) => {
+        // Save note for undo
+        const noteToDelete = get().notes[id];
+        if (!noteToDelete) {
+          log.warn('Note not found', { id });
+          return;
+        }
+
+        // Store the previous activeNoteId for undo
+        const wasActive = get().activeNoteId === id;
+
+        // Delete the note
+        set((state) => {
+          const { [id]: deleted, ...remainingNotes } = state.notes;
+          return {
+            notes: remainingNotes,
+            activeNoteId: state.activeNoteId === id ? null : state.activeNoteId,
+          };
+        });
+
+        log.debug('Note deleted', { id });
+
+        // Delete associated images from IndexedDB (async, fire-and-forget)
+        import('../services/indexedDB').then(({ indexedDBService }) => {
+          indexedDBService.deleteNoteImages(id).catch((err) => {
+            log.error('Failed to delete note images', { id, error: err });
+          });
+        });
+
+        // Add undo action
+        useUndoStore.getState().addUndoAction(
+          `Note "${noteToDelete.title}" deleted`,
+          () => {
+            // Restore the note
+            set((state) => ({
+              notes: {
+                ...state.notes,
+                [id]: noteToDelete,
+              },
+              activeNoteId: wasActive ? id : state.activeNoteId,
+            }));
+            log.debug('Note restored (undo)', { id });
+          }
+        );
+      },
+
+      duplicateNote: (id) => {
+        const original = get().notes[id];
+        if (!original) {
+          log.warn('Note not found', { id });
+          return null;
+        }
+
+        const duplicate = createDefaultNote({
+          ...original,
+          title: `${original.title} (Copy)`,
+          isPinned: false, // Don't copy pin status
+        });
+
+        set((state) => ({
+          notes: {
+            ...state.notes,
+            [duplicate.id]: duplicate,
+          },
+        }));
+
+        log.debug('Note duplicated', { original: id, duplicate: duplicate.id });
+        return duplicate;
+      },
+
+      // Bulk operations
+      deleteNotes: (ids) => {
+        set((state) => {
+          const remainingNotes = { ...state.notes };
+          ids.forEach((id) => delete remainingNotes[id]);
+          return {
+            notes: remainingNotes,
+            activeNoteId: ids.includes(state.activeNoteId || '')
+              ? null
+              : state.activeNoteId,
+          };
+        });
+        log.debug('Deleted notes', { count: ids.length });
+
+        // Delete associated images from IndexedDB (async, fire-and-forget)
+        import('../services/indexedDB').then(({ indexedDBService }) => {
+          ids.forEach((id) => {
+            indexedDBService.deleteNoteImages(id).catch((err) => {
+              log.error('Failed to delete images for note', { id, error: err });
+            });
+          });
+        });
+      },
+
+      moveNote: (noteId, targetFolderId) => {
+        const note = get().notes[noteId];
+        if (!note) {
+          log.warn('Note not found', { noteId });
+          return;
+        }
+
+        const previousFolderId = note.folderId;
+
+        // Don't move if already in target folder
+        if (previousFolderId === targetFolderId) {
+          log.debug('Note already in target folder', { noteId, folderId: targetFolderId });
+          return;
+        }
+
+        set((state) => ({
+          notes: {
+            ...state.notes,
+            [noteId]: {
+              ...note,
+              folderId: targetFolderId,
+              // Don't update timestamp for folder moves (UI-only change)
+            },
+          },
+        }));
+
+        log.debug('Moved note to folder', { noteId, from: previousFolderId, to: targetFolderId });
+
+        // Add undo action
+        useUndoStore.getState().addUndoAction(
+          `Note "${note.title}" moved`,
+          () => {
+            set((state) => {
+              const currentNote = state.notes[noteId];
+              if (!currentNote) return state;
+              return {
+                notes: {
+                  ...state.notes,
+                  [noteId]: {
+                    ...currentNote,
+                    folderId: previousFolderId,
+                  },
+                },
+              };
+            });
+            log.debug('Moved note restored (undo)', { noteId, to: previousFolderId });
+          }
+        );
+      },
+
+      moveNotesToFolder: (noteIds, folderId) => {
+        set((state) => {
+          const updatedNotes = { ...state.notes };
+          noteIds.forEach((id) => {
+            if (updatedNotes[id]) {
+              updatedNotes[id] = {
+                ...updatedNotes[id],
+                folderId,
+                updatedAt: new Date(),
+              };
+            }
+          });
+          return { notes: updatedNotes };
+        });
+        log.debug('Moved notes to folder', { count: noteIds.length, folderId });
+      },
+
+      archiveNotes: (noteIds) => {
+        set((state) => {
+          const updatedNotes = { ...state.notes };
+          noteIds.forEach((id) => {
+            if (updatedNotes[id]) {
+              updatedNotes[id] = {
+                ...updatedNotes[id],
+                isArchived: true,
+                updatedAt: new Date(),
+              };
+            }
+          });
+          return { notes: updatedNotes };
+        });
+        log.debug('Archived notes', { count: noteIds.length });
+      },
+
+      unarchiveNotes: (noteIds) => {
+        set((state) => {
+          const updatedNotes = { ...state.notes };
+          noteIds.forEach((id) => {
+            if (updatedNotes[id]) {
+              updatedNotes[id] = {
+                ...updatedNotes[id],
+                isArchived: false,
+                updatedAt: new Date(),
+              };
+            }
+          });
+          return { notes: updatedNotes };
+        });
+        log.debug('Unarchived notes', { count: noteIds.length });
+      },
+
+      // Queries
+      getAllNotes: () => {
+        const state = get();
+        const notes = Object.values(state.notes);
+        const filtered = filterNotes(notes, state.filter);
+        return sortNotes(filtered, state.sortConfig);
+      },
+
+      getFilteredNotes: () => {
+        const { activeProjectIds } = useProjectContextStore.getState();
+        const state = get();
+        let notes = Object.values(state.notes);
+
+        // Apply archive filter
+        notes = filterNotes(notes, state.filter);
+
+        // "All" mode - no project filter applied
+        if (activeProjectIds.length === 0) {
+          return sortNotes(notes, state.sortConfig);
+        }
+
+        // Filter notes that have ANY of the active project IDs
+        const projectFiltered = notes.filter((note) =>
+          note.projectIds.some((pid) => activeProjectIds.includes(pid))
+        );
+
+        return sortNotes(projectFiltered, state.sortConfig);
+      },
+
+      getNotesByFolder: (folderId) => {
+        const state = get();
+        const notes = Object.values(state.notes).filter(
+          (note) => note.folderId === folderId
+        );
+        const filtered = filterNotes(notes, state.filter);
+        return sortNotes(filtered, state.sortConfig);
+      },
+
+      getNotesBy: (predicate) => {
+        const notes = Object.values(get().notes).filter(predicate);
+        return sortNotes(notes, get().sortConfig);
+      },
+
+      searchNotes: (query) => {
+        if (!query.trim()) return [];
+
+        const lowerQuery = query.toLowerCase();
+        const notes = Object.values(get().notes).filter((note) => {
+          // Search in title, content text, and tags
+          return (
+            note.title.toLowerCase().includes(lowerQuery) ||
+            note.contentText.toLowerCase().includes(lowerQuery) ||
+            note.tags.some((tag) => tag.toLowerCase().includes(lowerQuery))
+          );
+        });
+
+        return sortNotes(notes, get().sortConfig);
+      },
+
+      // Pin/Archive
+      togglePin: (id) => {
+        const note = get().notes[id];
+        if (!note) return;
+
+        set((state) => ({
+          notes: {
+            ...state.notes,
+            [id]: {
+              ...note,
+              isPinned: !note.isPinned,
+              updatedAt: new Date(),
+            },
+          },
+        }));
+        log.debug('Toggled pin', { id, isPinned: !note.isPinned });
+      },
+
+      toggleArchive: (id) => {
+        const note = get().notes[id];
+        if (!note) return;
+
+        set((state) => ({
+          notes: {
+            ...state.notes,
+            [id]: {
+              ...note,
+              isArchived: !note.isArchived,
+              updatedAt: new Date(),
+            },
+          },
+        }));
+        log.debug('Toggled archive', { id, isArchived: !note.isArchived });
+      },
+
+      toggleFavorite: (id) => {
+        const note = get().notes[id];
+        if (!note) return;
+
+        set((state) => ({
+          notes: {
+            ...state.notes,
+            [id]: {
+              ...note,
+              isFavorite: !note.isFavorite,
+              updatedAt: new Date(),
+            },
+          },
+        }));
+        log.debug('Toggled favorite', { id, isFavorite: !note.isFavorite });
+      },
+
+      // Tags
+      addTag: (id, tag) => {
+        const note = get().notes[id];
+        if (!note) return;
+
+        // Don't add duplicate tags
+        if (note.tags.includes(tag)) return;
+
+        // Check max tags limit
+        if (note.tags.length >= NOTE_CONSTANTS.MAX_TAGS) {
+          log.warn('Max tags reached', { max: NOTE_CONSTANTS.MAX_TAGS });
+          return;
+        }
+
+        set((state) => ({
+          notes: {
+            ...state.notes,
+            [id]: {
+              ...note,
+              tags: [...note.tags, tag],
+              updatedAt: new Date(),
+            },
+          },
+        }));
+        log.debug('Added tag', { id, tag });
+      },
+
+      removeTag: (id, tag) => {
+        const note = get().notes[id];
+        if (!note) return;
+
+        set((state) => ({
+          notes: {
+            ...state.notes,
+            [id]: {
+              ...note,
+              tags: note.tags.filter((t) => t !== tag),
+              updatedAt: new Date(),
+            },
+          },
+        }));
+        log.debug('Removed tag', { id, tag });
+      },
+
+      getAllTags: () => {
+        const notes = Object.values(get().notes);
+        const tagSet = new Set<string>();
+        notes.forEach((note) => {
+          note.tags.forEach((tag) => tagSet.add(tag));
+        });
+        return Array.from(tagSet).sort();
+      },
+
+      getTagUsageCounts: () => {
+        const notes = Object.values(get().notes);
+        const counts = new Map<string, number>();
+        notes.forEach((note) => {
+          note.tags.forEach((tag) => {
+            counts.set(tag, (counts.get(tag) || 0) + 1);
+          });
+        });
+        return counts;
+      },
+
+      renameTag: (oldTag, newTag) => {
+        const notes = get().notes;
+        const updatedNotes: Record<string, Note> = {};
+
+        Object.entries(notes).forEach(([id, note]) => {
+          if (note.tags.includes(oldTag)) {
+            updatedNotes[id] = {
+              ...note,
+              tags: note.tags.map((tag) => (tag === oldTag ? newTag : tag)),
+              updatedAt: new Date(),
+            };
+          }
+        });
+
+        if (Object.keys(updatedNotes).length > 0) {
+          set((state) => ({
+            notes: {
+              ...state.notes,
+              ...updatedNotes,
+            },
+          }));
+          log.info('Tag renamed', { oldTag, newTag, count: Object.keys(updatedNotes).length });
+        }
+      },
+
+      mergeTags: (sourceTags, targetTag) => {
+        const notes = get().notes;
+        const updatedNotes: Record<string, Note> = {};
+
+        Object.entries(notes).forEach(([id, note]) => {
+          const hasSourceTag = sourceTags.some((tag) => note.tags.includes(tag));
+          if (hasSourceTag) {
+            // Remove all source tags and add target tag
+            const filteredTags = note.tags.filter((tag) => !sourceTags.includes(tag));
+            const newTags = filteredTags.includes(targetTag)
+              ? filteredTags
+              : [...filteredTags, targetTag];
+
+            updatedNotes[id] = {
+              ...note,
+              tags: newTags,
+              updatedAt: new Date(),
+            };
+          }
+        });
+
+        if (Object.keys(updatedNotes).length > 0) {
+          set((state) => ({
+            notes: {
+              ...state.notes,
+              ...updatedNotes,
+            },
+          }));
+          log.info('Tags merged', {
+            sourceTags,
+            targetTag,
+            count: Object.keys(updatedNotes).length,
+          });
+        }
+      },
+
+      deleteTag: (tag) => {
+        const notes = get().notes;
+        const updatedNotes: Record<string, Note> = {};
+
+        Object.entries(notes).forEach(([id, note]) => {
+          if (note.tags.includes(tag)) {
+            updatedNotes[id] = {
+              ...note,
+              tags: note.tags.filter((t) => t !== tag),
+              updatedAt: new Date(),
+            };
+          }
+        });
+
+        if (Object.keys(updatedNotes).length > 0) {
+          set((state) => ({
+            notes: {
+              ...state.notes,
+              ...updatedNotes,
+            },
+          }));
+          log.info('Tag deleted', { tag, count: Object.keys(updatedNotes).length });
+        }
+      },
+
+      renameTagGlobally: (oldTag, newTag) => {
+        const notes = get().notes;
+        const updatedNotes: Record<string, Note> = {};
+
+        Object.entries(notes).forEach(([id, note]) => {
+          if (note.tags.includes(oldTag)) {
+            updatedNotes[id] = {
+              ...note,
+              tags: note.tags.map((tag) => (tag === oldTag ? newTag : tag)),
+              updatedAt: new Date(),
+            };
+          }
+        });
+
+        if (Object.keys(updatedNotes).length > 0) {
+          set((state) => ({
+            notes: {
+              ...state.notes,
+              ...updatedNotes,
+            },
+          }));
+          log.info('Tag renamed globally', { oldTag, newTag, count: Object.keys(updatedNotes).length });
+        }
+      },
+
+      deleteTagGlobally: (tag) => {
+        const notes = get().notes;
+        const updatedNotes: Record<string, Note> = {};
+
+        Object.entries(notes).forEach(([id, note]) => {
+          if (note.tags.includes(tag)) {
+            updatedNotes[id] = {
+              ...note,
+              tags: note.tags.filter((t) => t !== tag),
+              updatedAt: new Date(),
+            };
+          }
+        });
+
+        if (Object.keys(updatedNotes).length > 0) {
+          set((state) => ({
+            notes: {
+              ...state.notes,
+              ...updatedNotes,
+            },
+          }));
+          log.info('Tag deleted globally', { tag, count: Object.keys(updatedNotes).length });
+        }
+      },
+
+      // ==================== BULK TAG OPERATIONS (P2) ====================
+
+      bulkAddTag: (noteIds, tag) => {
+        const notes = get().notes;
+        const updatedNotes: Record<string, Note> = {};
+
+        noteIds.forEach((id) => {
+          const note = notes[id];
+          if (note && !note.tags.includes(tag)) {
+            updatedNotes[id] = {
+              ...note,
+              tags: [...note.tags, tag],
+              updatedAt: new Date(),
+            };
+          }
+        });
+
+        if (Object.keys(updatedNotes).length > 0) {
+          set((state) => ({
+            notes: {
+              ...state.notes,
+              ...updatedNotes,
+            },
+          }));
+          log.info('Bulk added tag', { tag, count: Object.keys(updatedNotes).length });
+        }
+      },
+
+      bulkRemoveTag: (noteIds, tag) => {
+        const notes = get().notes;
+        const updatedNotes: Record<string, Note> = {};
+
+        noteIds.forEach((id) => {
+          const note = notes[id];
+          if (note && note.tags.includes(tag)) {
+            updatedNotes[id] = {
+              ...note,
+              tags: note.tags.filter((t) => t !== tag),
+              updatedAt: new Date(),
+            };
+          }
+        });
+
+        if (Object.keys(updatedNotes).length > 0) {
+          set((state) => ({
+            notes: {
+              ...state.notes,
+              ...updatedNotes,
+            },
+          }));
+          log.info('Bulk removed tag', { tag, count: Object.keys(updatedNotes).length });
+        }
+      },
+
+      replaceTag: (oldTag, newTag) => {
+        const notes = get().notes;
+        const updatedNotes: Record<string, Note> = {};
+
+        Object.entries(notes).forEach(([id, note]) => {
+          if (note.tags.includes(oldTag)) {
+            const newTags = note.tags.map((t) => (t === oldTag ? newTag : t));
+            // Remove duplicates if newTag already exists
+            const uniqueTags = Array.from(new Set(newTags));
+
+            updatedNotes[id] = {
+              ...note,
+              tags: uniqueTags,
+              updatedAt: new Date(),
+            };
+          }
+        });
+
+        if (Object.keys(updatedNotes).length > 0) {
+          set((state) => ({
+            notes: {
+              ...state.notes,
+              ...updatedNotes,
+            },
+          }));
+          log.info('Tag replaced', { oldTag, newTag, count: Object.keys(updatedNotes).length });
+        }
+      },
+
+      // UI state
+      setActiveNote: (id) => {
+        set({ activeNoteId: id });
+        log.debug('Active note set', { id });
+      },
+
+      setSortConfig: (config) => {
+        set({ sortConfig: config });
+        log.debug('Sort config updated', { config });
+      },
+
+      setFilter: (filter) => {
+        set({ filter });
+        log.debug('Filter updated', { filter });
+      },
+
+      // Utility
+      getNoteCount: () => {
+        return Object.keys(get().notes).length;
+      },
+
+      getNotesInFolder: (folderId) => {
+        return Object.values(get().notes).filter(
+          (note) => note.folderId === folderId
+        );
+      },
+
+      exportNotes: () => {
+        return Object.values(get().notes);
+      },
+
+      importNotes: (notes, merge) => {
+        if (!merge) {
+          // Replace all notes
+          set({
+            notes: Object.fromEntries(notes.map((note) => [note.id, note])),
+            activeNoteId: null,
+          });
+          log.info('Imported notes', { count: notes.length, mode: 'replace' });
+        } else {
+          // Merge with existing notes
+          set((state) => {
+            const updatedNotes = { ...state.notes };
+            notes.forEach((note) => {
+              updatedNotes[note.id] = note;
+            });
+            return { notes: updatedNotes };
+          });
+          log.info('Imported notes', { count: notes.length, mode: 'merge' });
+        }
+      },
+
+      clearAllNotes: () => {
+        set({ notes: {}, activeNoteId: null });
+        log.info('All notes cleared');
+      },
+
+      // ==================== BACKLINKS (Phase 4) ====================
+
+      getBacklinks: (noteId: string) => {
+        const state = get();
+        const note = state.notes[noteId];
+        if (!note) return [];
+
+        return getBacklinksUtil(noteId, note.title, state.notes);
+      },
+
+      updateLinkedNotes: (noteId: string, content: string) => {
+        const state = get();
+        const linkTitles = extractWikiLinks(content);
+        const linkedNoteIds = resolveLinksToIds(linkTitles, state.notes);
+
+        set((currentState) => {
+          const note = currentState.notes[noteId];
+          if (!note) return currentState;
+
+          return {
+            notes: {
+              ...currentState.notes,
+              [noteId]: {
+                ...note,
+                linkedNotes: linkedNoteIds,
+              },
+            },
+          };
+        });
+      },
+
+      // ==================== P1: UNLINKED MENTIONS ====================
+
+      convertToWikiLink: (noteId: string, position: number, targetTitle: string) => {
+        const state = get();
+        const note = state.notes[noteId];
+        if (!note) {
+          log.warn('Note not found for converting to wiki link', { noteId });
+          return;
+        }
+
+        const content = note.contentText;
+
+        // Find the exact text match at the position
+        const titleLength = targetTitle.length;
+        const endPosition = position + titleLength;
+
+        // Extract the text at the position to verify it matches
+        const textAtPosition = content.substring(position, endPosition);
+
+        // Case-insensitive match check
+        if (textAtPosition.toLowerCase() !== targetTitle.toLowerCase()) {
+          log.warn('Text at position does not match target title', {
+            noteId,
+            position,
+            targetTitle,
+            textAtPosition,
+          });
+          return;
+        }
+
+        // Build the new content with wiki link
+        const before = content.substring(0, position);
+        const after = content.substring(endPosition);
+        const wikiLink = `[[${textAtPosition}]]`; // Preserve original case
+        const newContentText = before + wikiLink + after;
+
+        // Update the note using the updateNote action to ensure proper handling
+        get().updateNote(noteId, { contentText: newContentText });
+
+        log.debug('Converted text to wiki link', {
+          noteId,
+          position,
+          targetTitle,
+          originalText: textAtPosition,
+        });
+      },
+
+      // ==================== TEMPLATES (Phase 4) ====================
+
+      getNoteTemplates: () => {
+        return DEFAULT_NOTE_TEMPLATES;
+      },
+
+      createNoteFromTemplate: (templateId: string) => {
+        const allTemplates = get().getAllNoteTemplates();
+        const template = allTemplates.find((t) => t.id === templateId);
+        if (!template) return null;
+
+        const newNote = createDefaultNote({
+          title: template.name,
+          contentText: template.description,
+          tags: template.defaultTags || [],
+          icon: template.icon,
+        });
+
+        set((state) => ({
+          notes: {
+            ...state.notes,
+            [newNote.id]: newNote,
+          },
+          activeNoteId: newNote.id,
+        }));
+
+        log.debug('Created note from template', { template: template.name });
+        return newNote;
+      },
+
+      createNoteTemplate: (params: Partial<NoteTemplate>): NoteTemplate => {
+        const newTemplate: NoteTemplate = {
+          id: `template-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+          name: params.name || 'Untitled Template',
+          description: params.description || '',
+          icon: params.icon,
+          category: params.category,
+          defaultTags: params.defaultTags || [],
+          isBuiltIn: false,
+        };
+
+        set((state) => ({
+          customNoteTemplates: [...state.customNoteTemplates, newTemplate],
+        }));
+
+        log.debug('Created note template', { templateId: newTemplate.id, name: newTemplate.name });
+        return newTemplate;
+      },
+
+      updateNoteTemplate: (id: string, updates: Partial<NoteTemplate>): void => {
+        const state = get();
+        const template = state.customNoteTemplates.find((t) => t.id === id);
+
+        if (!template) {
+          log.warn('Template not found', { id });
+          return;
+        }
+
+        // Prevent updating built-in templates (safety check)
+        if (template.isBuiltIn) {
+          log.warn('Cannot update built-in template', { id });
+          return;
+        }
+
+        set((state) => ({
+          customNoteTemplates: state.customNoteTemplates.map((t) =>
+            t.id === id ? { ...t, ...updates, isBuiltIn: false } : t
+          ),
+        }));
+
+        log.debug('Updated note template', { templateId: id });
+      },
+
+      deleteNoteTemplate: (id: string): void => {
+        const state = get();
+        const template = state.customNoteTemplates.find((t) => t.id === id);
+
+        if (!template) {
+          log.warn('Template not found', { id });
+          return;
+        }
+
+        // Prevent deleting built-in templates
+        if (template.isBuiltIn) {
+          log.warn('Cannot delete built-in template', { id });
+          return;
+        }
+
+        set((state) => ({
+          customNoteTemplates: state.customNoteTemplates.filter((t) => t.id !== id),
+        }));
+
+        log.debug('Deleted note template', { templateId: id });
+      },
+
+      getNoteTemplate: (id: string): NoteTemplate | undefined => {
+        const allTemplates = get().getAllNoteTemplates();
+        return allTemplates.find((t) => t.id === id);
+      },
+
+      getAllNoteTemplates: (): NoteTemplate[] => {
+        const state = get();
+        // Return built-in templates + custom templates
+        return [...DEFAULT_NOTE_TEMPLATES, ...state.customNoteTemplates];
+      },
+
+      // ==================== DAILY NOTES ====================
+
+      getDailyNote: (date: Date) => {
+        const state = get();
+        const settings = useSettingsStore.getState().dailyNotes;
+        return getDailyNoteUtil(date, state.notes, settings);
+      },
+
+      createDailyNote: (date: Date) => {
+        const settings = useSettingsStore.getState().dailyNotes;
+        const newNote = createDailyNoteUtil(date, settings);
+
+        set((state) => ({
+          notes: {
+            ...state.notes,
+            [newNote.id]: newNote,
+          },
+          activeNoteId: newNote.id,
+        }));
+
+        log.info('Created daily note', { date: newNote.title, id: newNote.id });
+        return newNote;
+      },
+
+      getOrCreateDailyNote: (date: Date) => {
+        const state = get();
+        const settings = useSettingsStore.getState().dailyNotes;
+
+        // Try to find existing note
+        const existingNote = getDailyNoteUtil(date, state.notes, settings);
+        if (existingNote) {
+          // Set as active note
+          set({ activeNoteId: existingNote.id });
+          log.debug('Found existing daily note', { date: existingNote.title });
+          return existingNote;
+        }
+
+        // Create new note
+        const newNote = createDailyNoteUtil(date, settings);
+        set((currentState) => ({
+          notes: {
+            ...currentState.notes,
+            [newNote.id]: newNote,
+          },
+          activeNoteId: newNote.id,
+        }));
+
+        log.info('Auto-created daily note', { date: newNote.title, id: newNote.id });
+        return newNote;
+      },
+
+      // ==================== P2: BLOCK-LEVEL LINKS & HOVER PREVIEW ====================
+
+      getBlockContent: (noteId: string, blockId: string) => {
+        const note = get().notes[noteId];
+        if (!note) return null;
+
+        const blockInfo = findBlockInContent(note.contentText, blockId);
+        return blockInfo ? blockInfo.content : null;
+      },
+
+      getNotePreview: (noteId: string, blockId?: string) => {
+        const note = get().notes[noteId];
+        if (!note) return null;
+
+        return createNotePreview(note, blockId);
+      },
+    }),
+    {
+      name: 'notes', // IndexedDB key
+      storage: createJSONStorage(() => createSyncedStorage()),
+      version: 3, // v3: Add projectIds for global project context filter
+      partialize: (state) => ({
+        // Only persist notes and custom templates, not UI state
+        notes: state.notes,
+        customNoteTemplates: state.customNoteTemplates,
+      }),
+      migrate: (persistedState: unknown, version: number) => {
+        let state = persistedState as any;
+
+        // Version 1 -> 2: Add customNoteTemplates
+        if (version < 2) {
+          state = {
+            ...state,
+            customNoteTemplates: [],
+          };
+        }
+
+        // Version 2 -> 3: Add projectIds field to all notes
+        if (version < 3 && state.notes) {
+          log.info('Adding projectIds field to all notes');
+          const updatedNotes: Record<string, any> = {};
+          Object.entries(state.notes).forEach(([id, note]: [string, any]) => {
+            updatedNotes[id] = {
+              ...note,
+              projectIds: note.projectIds ?? [],
+            };
+          });
+          state = {
+            ...state,
+            notes: updatedNotes,
+          };
+        }
+
+        return state;
+      },
+      // Handle date serialization
+      onRehydrateStorage: () => (state) => {
+        log.debug('Notes store rehydrating');
+        if (state) {
+          try {
+            // Ensure notes object exists and is valid
+            if (state.notes && typeof state.notes === 'object') {
+              // Convert date strings back to Date objects
+              Object.values(state.notes).forEach((note) => {
+                if (typeof note.createdAt === 'string') {
+                  note.createdAt = new Date(note.createdAt);
+                }
+                if (typeof note.updatedAt === 'string') {
+                  note.updatedAt = new Date(note.updatedAt);
+                }
+              });
+            } else {
+              log.warn('Corrupted notes data detected, resetting to empty');
+              state.notes = {};
+            }
+
+            // Ensure customNoteTemplates is initialized
+            if (!state.customNoteTemplates || !Array.isArray(state.customNoteTemplates)) {
+              log.warn('Missing customNoteTemplates, initializing to empty array');
+              state.customNoteTemplates = [];
+            }
+          } catch (err) {
+            log.error('Error during notes store rehydration', { error: err });
+            // Reset to safe defaults
+            state.notes = {};
+            state.activeNoteId = null;
+            state.customNoteTemplates = [];
+          }
+        }
+        log.info('Notes store rehydrated');
+      },
+    }
+  )
+);
+
+/**
+ * Selector hooks for optimized re-renders
+ */
+export const useActiveNote = () =>
+  useNotesStore((state) => {
+    const activeId = state.activeNoteId;
+    return activeId ? state.notes[activeId] : null;
+  });
+
+export const useNotesByFolder = (folderId: string | null) =>
+  useNotesStore((state) => state.getNotesByFolder(folderId));
+
+export const useAllTags = () => useNotesStore((state) => state.getAllTags());

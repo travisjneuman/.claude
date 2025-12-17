@@ -1,0 +1,373 @@
+# Phantom Shell: Browser-Native Terminal Implementation
+
+**Created:** 2025-11-25
+**Status:** PLANNING
+**Priority:** P0 - Strategic Differentiator
+**Constraint:** Zero Installation Required (Pure Browser-Based)
+
+---
+
+## Executive Summary
+
+Transform the existing AI Terminal sidebar into a full-featured browser-native development environment where users can:
+- Interact with AI in a true terminal interface
+- Execute real commands (npm, node, git) via WebContainers
+- Build full projects stored entirely in IndexedDB/.brain exports
+- Maintain 100% privacy - everything runs locally in the browser
+
+---
+
+## Current State Analysis
+
+### Existing AI Terminal (`src/components/AITerminal.tsx`)
+- **Location:** Right sidebar slide-in panel (300-375px wide)
+- **UI:** Chat bubble interface with user/AI messages
+- **Features:**
+  - Multi-provider AI support (8 providers)
+  - Streaming responses
+  - Encrypted API key storage
+  - Markdown rendering with XSS protection
+- **Store:** `useTerminalStore.ts` - manages messages, providers, encryption
+
+### What Needs to Change
+| Current | Target |
+|---------|--------|
+| Chat bubbles | xterm.js terminal emulator |
+| Text-only AI responses | Executable commands + AI |
+| No file system | Virtual FS in IndexedDB |
+| AI chat only | Real npm/node/git execution |
+
+---
+
+## Technical Architecture
+
+### Core Technologies
+
+1. **[@webcontainer/api](https://www.npmjs.com/package/@webcontainer/api)** - Browser-based Node.js runtime
+   - Runs npm, node, pnpm, yarn in browser
+   - Boots in milliseconds
+   - 5-10x faster than local for package installs
+   - **Requirement:** Cross-Origin Isolation headers
+
+2. **[xterm.js](https://xtermjs.org/)** + **[react-xtermjs](https://github.com/Qovery/react-xtermjs)** - Terminal emulator
+   - Full terminal emulation in browser
+   - VS Code uses this internally
+   - Addon support (fit, search, webgl)
+
+3. **[isomorphic-git](https://github.com/isomorphic-git/isomorphic-git)** - Git in JavaScript
+   - Full git implementation for browser
+   - Works with virtual file systems
+
+4. **IndexedDB Virtual File System** - Persistent storage
+   - Projects stored in IndexedDB (survives browser restart)
+   - Exported/imported via .brain files
+   - No node_modules persisted (reinstalled on boot)
+
+### Architecture Diagram
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    Neuman Brain Browser                      │
+├─────────────────────────────────────────────────────────────┤
+│  ┌─────────────────┐     ┌─────────────────────────────────┐│
+│  │   xterm.js UI   │────▶│        Command Router           ││
+│  │  (Terminal UI)  │     │  ┌───────────┬───────────────┐  ││
+│  └─────────────────┘     │  │ AI Ghost  │ Direct Shell  │  ││
+│                          │  │ Commands  │   Commands    │  ││
+│                          │  └─────┬─────┴───────┬───────┘  ││
+│                          └────────┼─────────────┼──────────┘│
+│                                   │             │           │
+│  ┌────────────────────────────────▼─────────────▼─────────┐ │
+│  │              WebContainer Runtime                       │ │
+│  │  ┌─────────────────────────────────────────────────┐   │ │
+│  │  │  Virtual File System (in-memory)                │   │ │
+│  │  │  - /src, /package.json, etc.                    │   │ │
+│  │  └─────────────────────────────────────────────────┘   │ │
+│  │  ┌─────────────────────────────────────────────────┐   │ │
+│  │  │  Process Manager                                │   │ │
+│  │  │  - npm install, npm run dev, node scripts       │   │ │
+│  │  └─────────────────────────────────────────────────┘   │ │
+│  └────────────────────────────────────────────────────────┘ │
+│                              │                              │
+│                              ▼                              │
+│  ┌────────────────────────────────────────────────────────┐ │
+│  │           IndexedDB Persistence Layer                   │ │
+│  │  - Project files (src, config)                         │ │
+│  │  - NO node_modules (reinstalled on boot)               │ │
+│  │  - Included in .brain export                           │ │
+│  └────────────────────────────────────────────────────────┘ │
+└─────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## Implementation Phases
+
+### Phase 1: Terminal UI Foundation (Week 1)
+**Goal:** Replace chat UI with xterm.js terminal
+
+#### Files to Create
+- [ ] `src/components/PhantomTerminal.tsx` - Main terminal component
+- [ ] `src/hooks/useXterm.ts` - xterm.js React hook
+- [ ] `src/stores/usePhantomShellStore.ts` - Terminal state management
+- [ ] `src/services/commandRouter.ts` - Route commands to handlers
+
+#### Files to Modify
+- [ ] `src/components/AITerminal.tsx` - Add toggle for "Terminal Mode" vs "Chat Mode"
+- [ ] `vite.config.ts` - Add COOP/COEP headers for dev server
+- [ ] `public/_headers` or server config - Add headers for production
+
+#### Tasks
+- [ ] Install dependencies: `npm install @webcontainer/api xterm @xterm/addon-fit react-xtermjs`
+- [ ] Configure Vite dev server with cross-origin isolation headers
+- [ ] Create basic xterm.js terminal component
+- [ ] Implement command input/output display
+- [ ] Add terminal theming (match Neuman Brain dark theme)
+- [ ] Test terminal renders and accepts input
+
+#### Acceptance Criteria
+- Terminal renders in sidebar with proper styling
+- User can type commands and see output
+- Toggle between "Chat Mode" and "Terminal Mode"
+
+---
+
+### Phase 2: WebContainer Integration (Week 2)
+**Goal:** Execute real npm/node commands in browser
+
+#### Files to Create
+- [ ] `src/services/webcontainer.ts` - WebContainer singleton manager
+- [ ] `src/services/virtualFS.ts` - Virtual file system abstraction
+- [ ] `src/types/phantom.ts` - TypeScript types for terminal system
+
+#### Tasks
+- [ ] Initialize WebContainer on first terminal use (lazy boot)
+- [ ] Implement `spawn()` wrapper for running commands
+- [ ] Stream stdout/stderr to xterm.js
+- [ ] Handle process lifecycle (start, running, exit)
+- [ ] Implement basic commands: `ls`, `pwd`, `cat`, `echo`
+- [ ] Test `npm init` and `npm install` work
+
+#### Acceptance Criteria
+- User can run `npm init -y` and see package.json created
+- User can run `npm install lodash` and see progress
+- User can run `node -e "console.log('hello')"` and see output
+
+---
+
+### Phase 3: IndexedDB Project Persistence (Week 3)
+**Goal:** Projects persist across browser sessions
+
+#### Files to Create
+- [ ] `src/services/projectStorage.ts` - Project file persistence
+- [ ] `src/stores/useProjectStore.ts` - Project management state
+- [ ] `src/components/ProjectSelector.tsx` - UI for project switching
+
+#### Tasks
+- [ ] Define project schema for IndexedDB (name, files, lastModified)
+- [ ] Implement save project files to IndexedDB on change
+- [ ] Implement load project files from IndexedDB on boot
+- [ ] Mount IndexedDB files into WebContainer on startup
+- [ ] Sync WebContainer file changes back to IndexedDB
+- [ ] Add "New Project" / "Open Project" UI
+- [ ] Exclude node_modules from persistence (reinstall on boot)
+- [ ] Add project to .brain export format
+
+#### Acceptance Criteria
+- User creates project, closes browser, reopens, project still exists
+- User exports .brain file, imports on new device, project works
+- `npm install` runs automatically on project open (if package.json exists)
+
+---
+
+### Phase 4: AI Ghost Commands (Week 4)
+**Goal:** Natural language commands executed as terminal operations
+
+#### Files to Create
+- [ ] `src/services/ghostCommand.ts` - NL to command translator
+- [ ] `src/services/aiTerminalAgent.ts` - AI agent with file system context
+
+#### Tasks
+- [ ] Detect AI commands (prefix `/ai` or natural language heuristics)
+- [ ] Pass file system context to AI (tree structure, key files)
+- [ ] AI generates shell commands from natural language
+- [ ] Show AI reasoning before execution
+- [ ] Execute generated commands with user confirmation (optional)
+- [ ] Implement auto-fix loops (error → AI reads → fixes → retries)
+
+#### Example Interactions
+```
+> /ai create a react component for a todo list
+AI: I'll create a TodoList component...
+Creating: src/components/TodoList.tsx
+[file contents shown]
+Done!
+
+> /ai fix the build error
+AI: I see the error is a missing import. Fixing...
+Editing: src/App.tsx
+Running: npm run build
+Build successful!
+```
+
+#### Acceptance Criteria
+- `/ai create react app` scaffolds a working React project
+- `/ai install tailwind` runs correct npm commands
+- AI can read error output and suggest/apply fixes
+
+---
+
+### Phase 5: Dev Server & Preview (Week 5)
+**Goal:** Run dev servers and preview apps in-browser
+
+#### Files to Create
+- [ ] `src/components/PreviewPane.tsx` - iframe preview component
+- [ ] `src/components/SplitTerminal.tsx` - Terminal + Preview layout
+
+#### Tasks
+- [ ] Listen for WebContainer `server-ready` event
+- [ ] Display running app in iframe preview pane
+- [ ] Add split view: terminal left, preview right
+- [ ] Handle port conflicts and multiple servers
+- [ ] Add "Open in new tab" option
+- [ ] Hot reload support (changes reflected in preview)
+
+#### Acceptance Criteria
+- `npm run dev` starts server and shows preview
+- Changes to files trigger hot reload in preview
+- User can work in split terminal/preview mode
+
+---
+
+### Phase 6: Git Integration (Week 6)
+**Goal:** Version control for brain-native projects
+
+#### Files to Create
+- [ ] `src/services/git.ts` - isomorphic-git wrapper
+
+#### Tasks
+- [ ] Integrate isomorphic-git for WASM git
+- [ ] Implement: `git init`, `git add`, `git commit`
+- [ ] Implement: `git status`, `git log`, `git diff`
+- [ ] Store git history in IndexedDB
+- [ ] Visual git status in terminal prompt
+- [ ] (Future) Clone from GitHub via CORS proxy
+
+#### Acceptance Criteria
+- `git init` creates .git folder (virtual)
+- `git add . && git commit -m "init"` works
+- `git log` shows commit history
+
+---
+
+## Server Configuration
+
+### Development (Vite)
+```typescript
+// vite.config.ts
+export default defineConfig({
+  server: {
+    headers: {
+      'Cross-Origin-Embedder-Policy': 'require-corp',
+      'Cross-Origin-Opener-Policy': 'same-origin',
+    },
+  },
+});
+```
+
+### Production (Cloudflare Pages)
+```
+// public/_headers
+/*
+  Cross-Origin-Embedder-Policy: require-corp
+  Cross-Origin-Opener-Policy: same-origin
+```
+
+---
+
+## Data Model
+
+### Project Schema (IndexedDB)
+```typescript
+interface PhantomProject {
+  id: string;
+  name: string;
+  description?: string;
+  files: Record<string, string>; // path -> content
+  createdAt: string;
+  updatedAt: string;
+  framework?: 'react' | 'vue' | 'svelte' | 'vanilla';
+}
+```
+
+### Terminal State (Zustand)
+```typescript
+interface PhantomShellState {
+  // Terminal
+  isTerminalMode: boolean;
+  currentProject: string | null;
+  processes: Map<number, ProcessInfo>;
+
+  // WebContainer
+  isBooted: boolean;
+  bootProgress: number;
+
+  // Server
+  runningServers: Array<{ port: number; url: string }>;
+  previewUrl: string | null;
+}
+```
+
+---
+
+## Security Considerations
+
+1. **Sandbox Isolation:** WebContainers run in browser sandbox - cannot access host OS
+2. **No Network Access:** External requests go through browser (subject to CORS)
+3. **Local-Only:** All data stays in IndexedDB - never leaves device
+4. **XSS Prevention:** Continue using rehype-sanitize for AI outputs
+5. **File System Scoped:** Only "mounted" virtual files are accessible
+
+---
+
+## Performance Considerations
+
+1. **Lazy Boot:** Don't boot WebContainer until terminal is opened
+2. **No node_modules Persistence:** Reinstall on boot (WebContainers cache aggressively)
+3. **File Sync Debouncing:** Don't sync every keystroke to IndexedDB
+4. **Memory Management:** Dispose WebContainer when terminal closes (if supported)
+
+---
+
+## Dependencies to Add
+
+```bash
+npm install @webcontainer/api xterm @xterm/addon-fit @xterm/addon-webgl isomorphic-git
+npm install -D @types/xterm
+```
+
+---
+
+## Success Metrics
+
+- [ ] Full React project created and running in < 60 seconds
+- [ ] Project survives browser restart
+- [ ] AI can scaffold, debug, and fix projects autonomously
+- [ ] .brain export includes all project files
+- [ ] Zero server-side infrastructure required
+
+---
+
+## References
+
+- [WebContainers API Docs](https://webcontainers.io/)
+- [xterm.js Documentation](https://xtermjs.org/)
+- [react-xtermjs](https://github.com/Qovery/react-xtermjs)
+- [isomorphic-git](https://isomorphic-git.org/)
+- [File System Access API](https://developer.mozilla.org/en-US/docs/Web/API/File_System_Access_API)
+
+---
+
+## Original Research Reference
+
+See `.archive/completed-tasks/research-local-terminal-integration.md` for the original "Phantom Shell" vision document.

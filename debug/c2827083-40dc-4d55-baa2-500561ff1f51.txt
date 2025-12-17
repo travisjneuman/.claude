@@ -1,0 +1,186 @@
+2025-12-17T13:38:10.153Z [DEBUG] Getting matching hook commands for SessionEnd with query: clear
+2025-12-17T13:38:10.153Z [DEBUG] Found 0 hook matchers in settings
+2025-12-17T13:38:10.153Z [DEBUG] Matched 0 unique hooks for query "clear" (0 before deduplication)
+2025-12-17T13:38:10.153Z [DEBUG] Cleared all session hooks for session efc46a61-83ad-4f39-85c2-9561894ebff2
+2025-12-17T13:38:10.155Z [DEBUG] Getting matching hook commands for SessionStart with query: clear
+2025-12-17T13:38:10.155Z [DEBUG] Found 0 hook matchers in settings
+2025-12-17T13:38:10.155Z [DEBUG] Matched 0 unique hooks for query "clear" (0 before deduplication)
+2025-12-17T13:38:10.171Z [DEBUG] FileHistory: Added snapshot for 21a673af-6a5a-4afd-9b83-c7611a67f9b9, tracking 0 files
+2025-12-17T13:38:10.417Z [DEBUG] AutoUpdaterWrapper: Installation type: unknown
+2025-12-17T13:38:12.139Z [DEBUG] AutoUpdaterWrapper: Installation type: unknown
+2025-12-17T13:38:12.277Z [DEBUG] Session environment not yet supported on Windows
+2025-12-17T13:38:12.993Z [DEBUG] Metadata string for gsd:create-roadmap:
+2025-12-17T13:38:12.993Z [DEBUG] <command-message>gsd:create-roadmap is running…</command-message>
+<command-name>/gsd:create-roadmap</command-name>
+2025-12-17T13:38:12.993Z [DEBUG] command-message tags in metadata: 1
+2025-12-17T13:38:14.026Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T13:38:14.026Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T13:38:14.026Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T13:38:14.026Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T13:38:14.704Z [DEBUG] processPromptSlashCommand creating 7 messages for gsd:create-roadmap
+2025-12-17T13:38:14.704Z [DEBUG] Message 1: <command-message>gsd:create-roadmap is running…</command-message>
+<command-name>/gsd:create-roadmap</command-name>
+2025-12-17T13:38:14.704Z [DEBUG] Message 2 [META]: [{"type":"text","text":"<objective>\nCreate project roadmap, optionally incorporating research findings from /gsd:research-project.\n\nRoadmaps define the phase breakdown - what work happens in what o
+2025-12-17T13:38:14.704Z [DEBUG] Message 3: [ATTACHMENT]
+2025-12-17T13:38:14.704Z [DEBUG] Message 4: [ATTACHMENT]
+2025-12-17T13:38:14.704Z [DEBUG] Message 5: [ATTACHMENT]
+2025-12-17T13:38:14.704Z [DEBUG] Message 6: [ATTACHMENT]
+2025-12-17T13:38:14.704Z [DEBUG] Message 7: [ATTACHMENT]
+2025-12-17T13:38:14.714Z [DEBUG] Getting matching hook commands for UserPromptSubmit with query: undefined
+2025-12-17T13:38:14.714Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T13:38:14.714Z [DEBUG] Matched 1 unique hooks for query "no match query" (1 before deduplication)
+2025-12-17T13:38:14.849Z [DEBUG] FileHistory: Making snapshot for message 35e1f630-bdbc-49d8-8d32-5d992dd45a90
+2025-12-17T13:38:14.849Z [DEBUG] FileHistory: Added snapshot for 35e1f630-bdbc-49d8-8d32-5d992dd45a90, tracking 0 files
+2025-12-17T13:38:14.853Z [DEBUG] UserCommandMessage rendering: "gsd:create-roadmap is running…" (args: "none")
+2025-12-17T13:38:14.853Z [DEBUG] isSkillFormat: false, prefix: "/"
+2025-12-17T13:38:15.090Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude.json.tmp.19236.1765978695090
+2025-12-17T13:38:15.090Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T13:38:15.097Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (6.7ms)
+2025-12-17T13:38:15.097Z [DEBUG] Temp file written successfully, size: 65780 bytes
+2025-12-17T13:38:15.097Z [DEBUG] Applied original permissions to temp file
+2025-12-17T13:38:15.097Z [DEBUG] Renaming C:\Users\tjn\.claude.json.tmp.19236.1765978695090 to C:\Users\tjn\.claude.json
+2025-12-17T13:38:15.098Z [DEBUG] File C:\Users\tjn\.claude.json written atomically
+2025-12-17T13:38:16.316Z [DEBUG] Stream started - received first chunk
+2025-12-17T13:38:19.962Z [DEBUG] Stream started - received first chunk
+2025-12-17T13:38:26.178Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-17T13:38:26.184Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-17T13:38:26.184Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T13:38:26.184Z [DEBUG] Matched 1 unique hooks for query "Bash" (1 before deduplication)
+2025-12-17T13:38:26.794Z [DEBUG] Session environment not yet supported on Windows
+2025-12-17T13:38:27.560Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-17T13:38:27.560Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T13:38:27.560Z [DEBUG] Matched 1 unique hooks for query "Bash" (1 before deduplication)
+2025-12-17T13:38:27.687Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-17T13:38:27.694Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-17T13:38:27.694Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-17T13:38:27.694Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T13:38:27.694Z [DEBUG] Matched 1 unique hooks for query "Bash" (1 before deduplication)
+2025-12-17T13:38:27.725Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-17T13:38:27.725Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T13:38:27.725Z [DEBUG] Matched 1 unique hooks for query "Bash" (1 before deduplication)
+2025-12-17T13:38:28.385Z [DEBUG] Session environment not yet supported on Windows
+2025-12-17T13:38:28.825Z [DEBUG] Session environment not yet supported on Windows
+2025-12-17T13:38:28.829Z [DEBUG] Stream started - received first chunk
+2025-12-17T13:38:29.094Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-17T13:38:29.094Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T13:38:29.094Z [DEBUG] Matched 1 unique hooks for query "Bash" (1 before deduplication)
+2025-12-17T13:38:29.496Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-17T13:38:29.496Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T13:38:29.496Z [DEBUG] Matched 1 unique hooks for query "Bash" (1 before deduplication)
+2025-12-17T13:38:29.630Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T13:38:29.630Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T13:38:29.630Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T13:38:29.630Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T13:38:29.705Z [DEBUG] Stream started - received first chunk
+2025-12-17T13:38:30.542Z [DEBUG] Stream started - received first chunk
+2025-12-17T13:38:32.287Z [DEBUG] Stream started - received first chunk
+2025-12-17T13:38:34.411Z [DEBUG] executePreToolHooks called for tool: Read
+2025-12-17T13:38:34.412Z [DEBUG] executePreToolHooks called for tool: Read
+2025-12-17T13:38:34.412Z [DEBUG] executePreToolHooks called for tool: Read
+2025-12-17T13:38:34.418Z [DEBUG] Getting matching hook commands for PreToolUse with query: Read
+2025-12-17T13:38:34.418Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T13:38:34.418Z [DEBUG] Matched 1 unique hooks for query "Read" (1 before deduplication)
+2025-12-17T13:38:34.418Z [DEBUG] Getting matching hook commands for PreToolUse with query: Read
+2025-12-17T13:38:34.418Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T13:38:34.418Z [DEBUG] Matched 1 unique hooks for query "Read" (1 before deduplication)
+2025-12-17T13:38:34.419Z [DEBUG] Getting matching hook commands for PreToolUse with query: Read
+2025-12-17T13:38:34.419Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T13:38:34.419Z [DEBUG] Matched 1 unique hooks for query "Read" (1 before deduplication)
+2025-12-17T13:38:39.771Z [DEBUG] Getting matching hook commands for PostToolUse with query: Read
+2025-12-17T13:38:39.771Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T13:38:39.771Z [DEBUG] Matched 1 unique hooks for query "Read" (1 before deduplication)
+2025-12-17T13:38:40.000Z [DEBUG] Getting matching hook commands for PostToolUse with query: Read
+2025-12-17T13:38:40.000Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T13:38:40.000Z [DEBUG] Matched 1 unique hooks for query "Read" (1 before deduplication)
+2025-12-17T13:38:40.124Z [DEBUG] Plugin hook stdin error for "python3 C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\hookify\0.1.0/hooks/posttooluse.py": write EOF
+2025-12-17T13:38:40.380Z [DEBUG] Getting matching hook commands for PostToolUse with query: Read
+2025-12-17T13:38:40.380Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T13:38:40.380Z [DEBUG] Matched 1 unique hooks for query "Read" (1 before deduplication)
+2025-12-17T13:38:40.506Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T13:38:40.506Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T13:38:40.506Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T13:38:40.506Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T13:38:45.180Z [DEBUG] Stream started - received first chunk
+2025-12-17T13:38:58.908Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-17T13:38:58.915Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-17T13:38:58.915Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T13:38:58.915Z [DEBUG] Matched 1 unique hooks for query "Bash" (1 before deduplication)
+2025-12-17T13:39:00.341Z [DEBUG] Session environment not yet supported on Windows
+2025-12-17T13:39:01.099Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-17T13:39:01.099Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T13:39:01.099Z [DEBUG] Matched 1 unique hooks for query "Bash" (1 before deduplication)
+2025-12-17T13:39:01.224Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T13:39:01.225Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T13:39:01.225Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T13:39:01.225Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T13:39:01.956Z [DEBUG] Stream started - received first chunk
+2025-12-17T13:39:05.074Z [DEBUG] Stream started - received first chunk
+2025-12-17T13:39:38.331Z [DEBUG] executePreToolHooks called for tool: Write
+2025-12-17T13:39:38.336Z [DEBUG] Getting matching hook commands for PreToolUse with query: Write
+2025-12-17T13:39:38.336Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T13:39:38.336Z [DEBUG] Matched 2 unique hooks for query "Write" (2 before deduplication)
+2025-12-17T13:39:39.122Z [DEBUG] Writing to temp file: C:\users\tjn\.claude\.planning\ROADMAP.md.tmp.19236.1765978779122
+2025-12-17T13:39:39.127Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (5.3ms)
+2025-12-17T13:39:39.127Z [DEBUG] Temp file written successfully, size: 5845 bytes
+2025-12-17T13:39:39.127Z [DEBUG] Renaming C:\users\tjn\.claude\.planning\ROADMAP.md.tmp.19236.1765978779122 to C:\users\tjn\.claude\.planning\ROADMAP.md
+2025-12-17T13:39:39.127Z [DEBUG] File C:\users\tjn\.claude\.planning\ROADMAP.md written atomically
+2025-12-17T13:39:39.144Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (10.7ms)
+2025-12-17T13:39:39.146Z [DEBUG] FileHistory: Tracked file modification for C:\users\tjn\.claude\.planning\ROADMAP.md
+2025-12-17T13:39:39.158Z [DEBUG] Getting matching hook commands for PostToolUse with query: Write
+2025-12-17T13:39:39.158Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T13:39:39.158Z [DEBUG] Matched 1 unique hooks for query "Write" (1 before deduplication)
+2025-12-17T13:39:39.286Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T13:39:39.286Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T13:39:39.286Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T13:39:39.286Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T13:39:42.777Z [DEBUG] Stream started - received first chunk
+2025-12-17T13:39:58.606Z [DEBUG] executePreToolHooks called for tool: Write
+2025-12-17T13:39:58.611Z [DEBUG] Getting matching hook commands for PreToolUse with query: Write
+2025-12-17T13:39:58.611Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T13:39:58.611Z [DEBUG] Matched 2 unique hooks for query "Write" (2 before deduplication)
+2025-12-17T13:39:59.364Z [DEBUG] Writing to temp file: C:\users\tjn\.claude\.planning\STATE.md.tmp.19236.1765978799363
+2025-12-17T13:39:59.367Z [DEBUG] Temp file written successfully, size: 1851 bytes
+2025-12-17T13:39:59.367Z [DEBUG] Renaming C:\users\tjn\.claude\.planning\STATE.md.tmp.19236.1765978799363 to C:\users\tjn\.claude\.planning\STATE.md
+2025-12-17T13:39:59.368Z [DEBUG] File C:\users\tjn\.claude\.planning\STATE.md written atomically
+2025-12-17T13:39:59.380Z [DEBUG] FileHistory: Tracked file modification for C:\users\tjn\.claude\.planning\STATE.md
+2025-12-17T13:39:59.392Z [DEBUG] Getting matching hook commands for PostToolUse with query: Write
+2025-12-17T13:39:59.392Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T13:39:59.392Z [DEBUG] Matched 1 unique hooks for query "Write" (1 before deduplication)
+2025-12-17T13:39:59.516Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T13:39:59.516Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T13:39:59.516Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T13:39:59.516Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T13:40:02.659Z [DEBUG] Stream started - received first chunk
+2025-12-17T13:40:08.096Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-17T13:40:08.103Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-17T13:40:08.103Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T13:40:08.103Z [DEBUG] Matched 1 unique hooks for query "Bash" (1 before deduplication)
+2025-12-17T13:40:08.823Z [DEBUG] Session environment not yet supported on Windows
+2025-12-17T13:40:09.749Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-17T13:40:09.749Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T13:40:09.749Z [DEBUG] Matched 1 unique hooks for query "Bash" (1 before deduplication)
+2025-12-17T13:40:09.878Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T13:40:09.878Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T13:40:09.878Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T13:40:09.878Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T13:40:11.041Z [DEBUG] Stream started - received first chunk
+2025-12-17T13:40:11.608Z [ERROR] Error: Error: EISDIR: illegal operation on a directory, read
+    at Module.readFileSync (node:fs:440:20)
+    at file:///C:/Users/tjn/AppData/Local/nvm/v24.11.0/node_modules/@anthropic-ai/claude-code/cli.js:9:429
+    at nX (file:///C:/Users/tjn/AppData/Local/nvm/v24.11.0/node_modules/@anthropic-ai/claude-code/cli.js:8:8084)
+    at Object.readFileSync (file:///C:/Users/tjn/AppData/Local/nvm/v24.11.0/node_modules/@anthropic-ai/claude-code/cli.js:9:404)
+    at j_B (file:///C:/Users/tjn/AppData/Local/nvm/v24.11.0/node_modules/@anthropic-ai/claude-code/cli.js:4758:21977)
+    at Object.call (file:///C:/Users/tjn/AppData/Local/nvm/v24.11.0/node_modules/@anthropic-ai/claude-code/cli.js:967:942)
+    at file:///C:/Users/tjn/AppData/Local/nvm/v24.11.0/node_modules/@anthropic-ai/claude-code/cli.js:3556:1468
+    at runNextTicks (node:internal/process/task_queues:65:5)
+    at process.processImmediate (node:internal/timers:473:9)
+2025-12-17T13:40:13.013Z [DEBUG] Stream started - received first chunk
+2025-12-17T13:40:15.676Z [DEBUG] Language not supported while highlighting code, falling back to markdown:
+2025-12-17T13:40:15.677Z [DEBUG] Language not supported while highlighting code, falling back to markdown:
+2025-12-17T13:40:15.741Z [DEBUG] Getting matching hook commands for Stop with query: undefined
+2025-12-17T13:40:15.741Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T13:40:15.741Z [DEBUG] Matched 2 unique hooks for query "no match query" (2 before deduplication)
+2025-12-17T13:40:18.663Z [DEBUG] Stream started - received first chunk
+2025-12-17T13:40:19.212Z [DEBUG] Getting matching hook commands for SubagentStop with query: undefined
+2025-12-17T13:40:19.212Z [DEBUG] Found 0 hook matchers in settings
+2025-12-17T13:40:19.212Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)

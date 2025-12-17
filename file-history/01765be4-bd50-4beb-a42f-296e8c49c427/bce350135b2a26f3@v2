@@ -1,0 +1,630 @@
+/**
+ * Notes Editor Component
+ *
+ * Rich text editor using Lexical
+ * Auto-saves changes to Notes store (debounced)
+ */
+
+import React, { useState, useRef, useCallback, useEffect, useMemo } from 'react';
+import { LexicalComposer } from '@lexical/react/LexicalComposer';
+import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
+import { ContentEditable } from '@lexical/react/LexicalContentEditable';
+import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
+import { OnChangePlugin } from '@lexical/react/LexicalOnChangePlugin';
+import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
+import { LexicalErrorBoundary } from '@lexical/react/LexicalErrorBoundary';
+import { HeadingNode, QuoteNode } from '@lexical/rich-text';
+import { ListNode, ListItemNode } from '@lexical/list';
+import { CodeNode, CodeHighlightNode } from '@lexical/code';
+import { LinkNode } from '@lexical/link';
+import { TableNode, TableCellNode, TableRowNode } from '@lexical/table';
+import { ListPlugin } from '@lexical/react/LexicalListPlugin';
+import { TablePlugin } from '@lexical/react/LexicalTablePlugin';
+import { MarkdownShortcutPlugin } from '@lexical/react/LexicalMarkdownShortcutPlugin';
+import { AutoLinkPlugin } from '@lexical/react/LexicalAutoLinkPlugin';
+import { AutoLinkNode } from '@lexical/link';
+import { TRANSFORMERS } from '@lexical/markdown';
+import {
+  $getRoot,
+  $getSelection,
+  FORMAT_TEXT_COMMAND,
+  $isRangeSelection,
+  $createParagraphNode,
+  UNDO_COMMAND,
+  REDO_COMMAND
+} from 'lexical';
+import type { EditorState } from 'lexical';
+import {
+  registerRichText,
+  $createHeadingNode,
+  $createQuoteNode
+} from '@lexical/rich-text';
+import type { HeadingTagType } from '@lexical/rich-text';
+import {
+  INSERT_UNORDERED_LIST_COMMAND,
+  INSERT_ORDERED_LIST_COMMAND,
+  $isListNode
+} from '@lexical/list';
+
+// URL matcher for AutoLinkPlugin
+const URL_MATCHER =
+  /((https?:\/\/(www\.)?)|(www\.))[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/;
+
+const MATCHERS = [
+  (text: string) => {
+    const match = URL_MATCHER.exec(text);
+    if (match === null) {
+      return null;
+    }
+    const fullMatch = match[0];
+    return {
+      index: match.index,
+      length: fullMatch.length,
+      text: fullMatch,
+      url: fullMatch.startsWith('http') ? fullMatch : `https://${fullMatch}`,
+    };
+  },
+];
+import { motion } from 'framer-motion';
+import { useNotesStore } from '../stores/useNotesStore';
+import { NOTE_CONSTANTS } from '../types/notes';
+import { ImageNode, $createImageNode } from './NotesEditor/ImageNode';
+
+/**
+ * Keyboard Shortcuts Plugin
+ * Registers rich text keyboard shortcuts (Cmd+B, Cmd+I, Cmd+U)
+ */
+const KeyboardShortcutsPlugin: React.FC = () => {
+  const [editor] = useLexicalComposerContext();
+
+  useEffect(() => {
+    return registerRichText(editor);
+  }, [editor]);
+
+  return null;
+};
+
+/**
+ * Word Count Plugin
+ * Tracks word and character count from editor content
+ */
+const WordCountPlugin: React.FC<{ onUpdate: (words: number, chars: number) => void }> = ({ onUpdate }) => {
+  const [editor] = useLexicalComposerContext();
+
+  useEffect(() => {
+    return editor.registerTextContentListener((textContent) => {
+      const words = textContent.trim().split(/\s+/).filter(Boolean).length;
+      const chars = textContent.length;
+      onUpdate(words, chars);
+    });
+  }, [editor, onUpdate]);
+
+  return null;
+};
+
+/**
+ * Slash Command Plugin
+ * Detects '/' and shows command menu
+ */
+const SlashCommandPlugin: React.FC = () => {
+  const [editor] = useLexicalComposerContext();
+  const [showMenu, setShowMenu] = useState(false);
+  const [query, setQuery] = useState('');
+  const [menuPosition, setMenuPosition] = useState({ top: 0, left: 0 });
+
+  const commands = [
+    { label: 'Heading 1', icon: 'H1', action: () => {
+      editor.update(() => {
+        const selection = $getSelection();
+        if (selection) {
+          // Convert to heading - will implement with format commands
+          console.log('Heading 1');
+        }
+      });
+    }},
+    { label: 'Heading 2', icon: 'H2', action: () => console.log('Heading 2') },
+    { label: 'Heading 3', icon: 'H3', action: () => console.log('Heading 3') },
+    { label: 'Bullet List', icon: '•', action: () => console.log('Bullet List') },
+    { label: 'Numbered List', icon: '1.', action: () => console.log('Numbered List') },
+    { label: 'Code Block', icon: '</>', action: () => console.log('Code Block') },
+    { label: 'Quote', icon: '"', action: () => console.log('Quote') },
+  ];
+
+  const filteredCommands = commands.filter(cmd =>
+    cmd.label.toLowerCase().includes(query.toLowerCase())
+  );
+
+  useEffect(() => {
+    return editor.registerUpdateListener(({ editorState }) => {
+      editorState.read(() => {
+        const selection = $getSelection();
+        if (!selection) {
+          setShowMenu(false);
+          return;
+        }
+
+        const text = selection.getTextContent();
+        if (text.startsWith('/')) {
+          setQuery(text.slice(1));
+          setShowMenu(true);
+
+          // Get cursor position for menu placement
+          const nativeSelection = window.getSelection();
+          if (nativeSelection && nativeSelection.rangeCount > 0) {
+            const range = nativeSelection.getRangeAt(0);
+            const rect = range.getBoundingClientRect();
+            setMenuPosition({
+              top: rect.bottom + window.scrollY + 5,
+              left: rect.left + window.scrollX,
+            });
+          }
+        } else {
+          setShowMenu(false);
+        }
+      });
+    });
+  }, [editor]);
+
+  if (!showMenu || filteredCommands.length === 0) {
+    return null;
+  }
+
+  return (
+    <div
+      style={{
+        position: 'absolute',
+        top: `${menuPosition.top}px`,
+        left: `${menuPosition.left}px`,
+        zIndex: 1000,
+      }}
+      className="bg-surface-light-elevated dark:bg-surface-dark-elevated border border-border-light dark:border-border-dark rounded-lg shadow-lg py-2 min-w-[200px]"
+    >
+      {filteredCommands.map((cmd, index) => (
+        <button
+          key={index}
+          onClick={() => {
+            cmd.action();
+            setShowMenu(false);
+          }}
+          className="w-full px-4 py-2 text-left hover:bg-surface-light dark:hover:bg-surface-dark transition-colors flex items-center gap-3"
+        >
+          <span className="text-text-light-secondary dark:text-text-dark-secondary font-mono">
+            {cmd.icon}
+          </span>
+          <span className="text-text-light-primary dark:text-text-dark-primary">
+            {cmd.label}
+          </span>
+        </button>
+      ))}
+    </div>
+  );
+};
+
+/**
+ * Editor Toolbar Component
+ */
+const EditorToolbar: React.FC<{ wordCount: number; charCount: number }> = ({ wordCount, charCount }) => {
+  const [editor] = useLexicalComposerContext();
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const formatText = (format: 'bold' | 'italic' | 'underline' | 'strikethrough' | 'code') => {
+    editor.dispatchCommand(FORMAT_TEXT_COMMAND, format);
+  };
+
+  const formatHeading = (headingSize: HeadingTagType) => {
+    editor.update(() => {
+      const selection = $getSelection();
+      if ($isRangeSelection(selection)) {
+        const nodes = selection.getNodes();
+        nodes.forEach((node) => {
+          const parent = node.getParent();
+          if (parent) {
+            const heading = $createHeadingNode(headingSize);
+            parent.replace(heading);
+            heading.append(node);
+          }
+        });
+      }
+    });
+  };
+
+  const formatParagraph = () => {
+    editor.update(() => {
+      const selection = $getSelection();
+      if ($isRangeSelection(selection)) {
+        const nodes = selection.getNodes();
+        nodes.forEach((node) => {
+          const parent = node.getParent();
+          if (parent && !$isListNode(parent)) {
+            const paragraph = $createParagraphNode();
+            parent.replace(paragraph);
+            paragraph.append(node);
+          }
+        });
+      }
+    });
+  };
+
+  const formatQuote = () => {
+    editor.update(() => {
+      const selection = $getSelection();
+      if ($isRangeSelection(selection)) {
+        const nodes = selection.getNodes();
+        nodes.forEach((node) => {
+          const parent = node.getParent();
+          if (parent) {
+            const quote = $createQuoteNode();
+            parent.replace(quote);
+            quote.append(node);
+          }
+        });
+      }
+    });
+  };
+
+  const formatBulletList = () => {
+    editor.dispatchCommand(INSERT_UNORDERED_LIST_COMMAND, undefined);
+  };
+
+  const formatNumberedList = () => {
+    editor.dispatchCommand(INSERT_ORDERED_LIST_COMMAND, undefined);
+  };
+
+  const undo = () => {
+    editor.dispatchCommand(UNDO_COMMAND, undefined);
+  };
+
+  const redo = () => {
+    editor.dispatchCommand(REDO_COMMAND, undefined);
+  };
+
+  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    // Create data URL from file
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const src = e.target?.result as string;
+      if (src) {
+        editor.update(() => {
+          const selection = $getSelection();
+          if ($isRangeSelection(selection)) {
+            const imageNode = $createImageNode({
+              altText: file.name,
+              src,
+            });
+            selection.insertNodes([imageNode]);
+          }
+        });
+      }
+    };
+    reader.readAsDataURL(file);
+
+    // Reset input
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+  };
+
+  const btnClass = "p-2 hover:bg-surface-light-elevated dark:hover:bg-surface-dark rounded transition-all duration-standard text-text-light-primary dark:text-text-dark-primary";
+  const dividerClass = "w-px h-6 bg-border-light dark:bg-border-dark";
+
+  return (
+    <div className="border-b border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark-elevated p-3 flex items-center gap-2 flex-wrap">
+      {/* Undo/Redo */}
+      <button onClick={undo} className={btnClass} title="Undo (Cmd+Z)">
+        ↶
+      </button>
+      <button onClick={redo} className={btnClass} title="Redo (Cmd+Shift+Z)">
+        ↷
+      </button>
+
+      <div className={dividerClass} />
+
+      {/* Text Format */}
+      <button onClick={() => formatText('bold')} className={btnClass} title="Bold (Cmd+B)">
+        <span className="font-bold">B</span>
+      </button>
+      <button onClick={() => formatText('italic')} className={btnClass} title="Italic (Cmd+I)">
+        <span className="italic">I</span>
+      </button>
+      <button onClick={() => formatText('underline')} className={btnClass} title="Underline (Cmd+U)">
+        <span className="underline">U</span>
+      </button>
+      <button onClick={() => formatText('strikethrough')} className={btnClass} title="Strikethrough">
+        <span className="line-through">S</span>
+      </button>
+      <button onClick={() => formatText('code')} className={btnClass} title="Code">
+        <span className="font-mono text-sm">&lt;/&gt;</span>
+      </button>
+
+      <div className={dividerClass} />
+
+      {/* Headings */}
+      <button onClick={() => formatHeading('h1')} className={btnClass} title="Heading 1">
+        <span className="font-bold text-lg">H1</span>
+      </button>
+      <button onClick={() => formatHeading('h2')} className={btnClass} title="Heading 2">
+        <span className="font-bold">H2</span>
+      </button>
+      <button onClick={() => formatHeading('h3')} className={btnClass} title="Heading 3">
+        <span className="font-bold text-sm">H3</span>
+      </button>
+      <button onClick={formatParagraph} className={btnClass} title="Paragraph">
+        <span className="text-sm">P</span>
+      </button>
+
+      <div className={dividerClass} />
+
+      {/* Lists */}
+      <button onClick={formatBulletList} className={btnClass} title="Bullet List">
+        ≡
+      </button>
+      <button onClick={formatNumberedList} className={btnClass} title="Numbered List">
+        ⋮
+      </button>
+      <button onClick={formatQuote} className={btnClass} title="Quote">
+        "
+      </button>
+
+      <div className={dividerClass} />
+
+      {/* Image Upload */}
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept="image/*"
+        onChange={handleImageUpload}
+        className="hidden"
+      />
+      <button
+        onClick={() => fileInputRef.current?.click()}
+        className={btnClass}
+        title="Insert Image"
+      >
+        🖼️
+      </button>
+
+      <div className="flex-1" />
+
+      {/* Word count */}
+      <span className="text-xs text-text-light-secondary dark:text-text-dark-secondary">
+        {wordCount} {wordCount === 1 ? 'word' : 'words'} · {charCount} {charCount === 1 ? 'char' : 'chars'}
+      </span>
+    </div>
+  );
+};
+
+/**
+ * Auto-save Plugin
+ * Debounces editor changes and saves to store
+ */
+const AutoSavePlugin: React.FC<{ noteId: string }> = ({ noteId }) => {
+  const [isSaving, setIsSaving] = useState(false);
+  const updateNote = useNotesStore((state) => state.updateNote);
+
+  // Track timeout ID and last saved content to prevent redundant saves
+  const timeoutIdRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const lastContentRef = useRef<string>('');
+  const lastTextRef = useRef<string>('');
+
+  const handleChange = useCallback((editorState: EditorState) => {
+    // Extract plain text for search
+    editorState.read(() => {
+      const root = $getRoot();
+      const contentText = root.getTextContent();
+      const contentJson = JSON.stringify(editorState.toJSON());
+
+      // Skip save if content hasn't actually changed
+      if (contentJson === lastContentRef.current && contentText === lastTextRef.current) {
+        return;
+      }
+
+      // Clear previous timeout to implement proper debouncing
+      if (timeoutIdRef.current) {
+        clearTimeout(timeoutIdRef.current);
+      }
+
+      // Debounced save
+      timeoutIdRef.current = setTimeout(() => {
+        setIsSaving(true);
+        updateNote(noteId, {
+          content: contentJson,
+          contentText,
+        });
+
+        // Update refs with saved content
+        lastContentRef.current = contentJson;
+        lastTextRef.current = contentText;
+
+        // Reset saving state after a brief delay
+        setTimeout(() => setIsSaving(false), 300);
+      }, NOTE_CONSTANTS.AUTOSAVE_DEBOUNCE_MS);
+    });
+  }, [noteId, updateNote]);
+
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (timeoutIdRef.current) {
+        clearTimeout(timeoutIdRef.current);
+      }
+    };
+  }, []);
+
+  return (
+    <>
+      <OnChangePlugin onChange={handleChange} />
+      {isSaving && (
+        <div className="absolute top-2 right-2 text-xs text-text-light-secondary dark:text-text-dark-secondary">
+          Saving...
+        </div>
+      )}
+    </>
+  );
+};
+
+/**
+ * Lexical Editor Configuration
+ */
+const getEditorConfig = (initialContent?: string) => ({
+  namespace: 'NotesEditor',
+  editorState: initialContent || null,
+  theme: {
+    root: 'editor-root',
+    paragraph: 'editor-paragraph',
+    text: {
+      bold: 'font-bold',
+      italic: 'italic',
+      underline: 'underline',
+      strikethrough: 'line-through',
+      code: 'font-mono bg-neutral-100 dark:bg-neutral-800 px-1 rounded',
+    },
+    heading: {
+      h1: 'text-4xl font-bold mt-6 mb-4',
+      h2: 'text-3xl font-bold mt-5 mb-3',
+      h3: 'text-2xl font-bold mt-4 mb-2',
+    },
+    list: {
+      ul: 'list-disc list-inside my-4',
+      ol: 'list-decimal list-inside my-4',
+      listitem: 'my-1',
+    },
+    quote: 'border-l-4 border-border-light dark:border-border-dark pl-4 italic my-4',
+    code: 'bg-neutral-900 text-neutral-100 p-4 rounded-lg font-mono text-sm my-4 overflow-x-auto',
+    link: 'text-primary-cyan hover:underline',
+  },
+  nodes: [
+    HeadingNode,
+    QuoteNode,
+    ListNode,
+    ListItemNode,
+    CodeNode,
+    CodeHighlightNode,
+    LinkNode,
+    AutoLinkNode,
+    TableNode,
+    TableCellNode,
+    TableRowNode,
+    ImageNode,
+  ],
+  onError: (error: Error) => {
+    console.error('Lexical error:', error);
+  },
+});
+
+/**
+ * Notes Editor Props
+ */
+interface NotesEditorProps {
+  noteId: string;
+}
+
+/**
+ * Notes Editor Component
+ */
+export const NotesEditor: React.FC<NotesEditorProps> = ({ noteId }) => {
+  const note = useNotesStore((state) => state.getNote(noteId));
+  const [wordCount, setWordCount] = useState(0);
+  const [charCount, setCharCount] = useState(0);
+
+  // Memoize editor config to prevent Lexical re-initialization
+  // Only recreate when noteId changes, not when content changes
+  const editorConfig = useMemo(
+    () => getEditorConfig(note?.content),
+    [noteId] // Key on noteId only, not note.content
+  );
+
+  const handleWordCountUpdate = useCallback((words: number, chars: number) => {
+    setWordCount(words);
+    setCharCount(chars);
+  }, []);
+
+  if (!note) {
+    return (
+      <div className="h-full flex items-center justify-center text-text-light-secondary dark:text-text-dark-secondary">
+        Note not found
+      </div>
+    );
+  }
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.2 }}
+      className="h-full flex flex-col bg-surface-light dark:bg-surface-dark"
+    >
+      {/* Note Title */}
+      <div className="border-b border-border-light dark:border-border-dark px-6 py-4 flex-shrink-0">
+        <input
+          type="text"
+          value={note.title}
+          onChange={(e) =>
+            useNotesStore.getState().updateNote(noteId, { title: e.target.value })
+          }
+          placeholder="Untitled Note"
+          className="w-full text-3xl font-bold bg-transparent border-none outline-none text-text-light-primary dark:text-text-dark-primary placeholder-text-light-secondary dark:placeholder-text-dark-secondary"
+        />
+      </div>
+
+      {/* Lexical Editor */}
+      <LexicalComposer key={noteId} initialConfig={editorConfig}>
+        <div className="flex-1 flex flex-col relative overflow-hidden shadow-card">
+          {/* Toolbar */}
+          <div className="flex-shrink-0">
+            <EditorToolbar wordCount={wordCount} charCount={charCount} />
+          </div>
+
+          {/* Editor Content */}
+          <div className="flex-1 overflow-y-auto">
+            <div className="max-w-4xl mx-auto px-8 py-6">
+              <div className="border border-border-light dark:border-border-dark rounded-lg p-4 min-h-[600px] bg-surface-light dark:bg-surface-dark">
+                <RichTextPlugin
+                  contentEditable={
+                    <ContentEditable className="editor-content outline-none min-h-[600px] text-text-light-primary dark:text-text-dark-primary" />
+                  }
+                  placeholder={
+                    <div className="editor-placeholder absolute top-10 left-12 text-text-light-secondary dark:text-text-dark-secondary pointer-events-none opacity-60">
+                      Start writing...
+                    </div>
+                  }
+                  ErrorBoundary={LexicalErrorBoundary}
+                />
+              <HistoryPlugin />
+              <ListPlugin />
+              <TablePlugin />
+              <MarkdownShortcutPlugin transformers={TRANSFORMERS} />
+              <AutoLinkPlugin matchers={MATCHERS} />
+              <KeyboardShortcutsPlugin />
+              <WordCountPlugin onUpdate={handleWordCountUpdate} />
+              <SlashCommandPlugin />
+              <AutoSavePlugin noteId={noteId} />
+              </div>
+            </div>
+          </div>
+        </div>
+      </LexicalComposer>
+    </motion.div>
+  );
+};
+
+/**
+ * Empty State - No Note Selected
+ */
+export const NotesEditorEmpty: React.FC = () => {
+  return (
+    <div className="h-full flex items-center justify-center bg-surface-light-elevated dark:bg-surface-dark">
+      <div className="text-center">
+        <div className="text-6xl mb-4">📝</div>
+        <h2 className="text-2xl font-bold text-text-light-primary dark:text-text-dark-primary mb-2">
+          No Note Selected
+        </h2>
+        <p className="text-text-light-secondary dark:text-text-dark-secondary">
+          Select a note from the sidebar or create a new one
+        </p>
+      </div>
+    </div>
+  );
+};

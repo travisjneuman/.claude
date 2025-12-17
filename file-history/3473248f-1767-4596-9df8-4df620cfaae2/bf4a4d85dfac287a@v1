@@ -1,0 +1,248 @@
+#!/usr/bin/env python3
+"""
+Fast PDF to Markdown Converter
+Extracts typed text from PDFs and marks handwriting regions.
+NO OCR - just extracts existing text and notes where drawings exist.
+Much faster than full OCR pipeline.
+"""
+
+import os
+import zipfile
+import json
+import fitz  # PyMuPDF
+from pathlib import Path
+from datetime import datetime
+
+# Configuration
+BASE_PATH = Path(r"D:\Proton Drive\My files\Documents\Personal\Notebooks")
+OUTPUT_DIR = BASE_PATH / "_converted" / "markdown_fast"
+LOG_FILE = BASE_PATH / "_scripts" / "output" / "fast_conversion_log.json"
+
+# Drawing threshold for "has handwriting"
+DRAWING_THRESHOLD = 50  # More than 50 vector paths = likely has handwriting
+
+
+def sanitize_filename(name: str) -> str:
+    """Sanitize filename for filesystem."""
+    import re
+    invalid_chars = '<>:"/\\|?*'
+    for char in invalid_chars:
+        name = name.replace(char, '_')
+    name = re.sub(r'[_\s]+', ' ', name).strip()
+    if len(name) > 150:
+        name = name[:150]
+    return name
+
+
+def extract_pdf_text(pdf_data: bytes) -> dict:
+    """Extract text and detect handwriting regions from PDF."""
+    doc = fitz.open(stream=pdf_data, filetype='pdf')
+
+    pages = []
+    for page_num in range(doc.page_count):
+        page = doc[page_num]
+
+        # Extract all text
+        text = page.get_text("text").strip()
+
+        # Count drawings (potential handwriting)
+        drawings = page.get_drawings()
+        has_handwriting = len(drawings) > DRAWING_THRESHOLD
+
+        pages.append({
+            'page_num': page_num + 1,
+            'text': text,
+            'has_handwriting': has_handwriting,
+            'drawing_count': len(drawings),
+        })
+
+    doc.close()
+    return {
+        'page_count': len(pages),
+        'pages': pages
+    }
+
+
+def generate_markdown(note_name: str, content: dict, image_path: str = None) -> str:
+    """Generate Markdown from extracted content."""
+    lines = []
+
+    # YAML frontmatter
+    lines.append('---')
+    lines.append(f'title: "{note_name}"')
+    lines.append(f'source: notability')
+    lines.append(f'converted: {datetime.now().isoformat()}')
+    lines.append(f'pages: {content["page_count"]}')
+    lines.append('---')
+    lines.append('')
+
+    # Title
+    lines.append(f'# {note_name}')
+    lines.append('')
+
+    # Process each page
+    for page in content['pages']:
+        if content['page_count'] > 1:
+            lines.append(f'## Page {page["page_num"]}')
+            lines.append('')
+
+        # Add text content
+        if page['text']:
+            lines.append(page['text'])
+            lines.append('')
+
+        # Note about handwriting
+        if page['has_handwriting']:
+            lines.append('')
+            lines.append(f'> **[Handwritten Annotations Present]**')
+            lines.append(f'> *This page contains {page["drawing_count"]} handwritten strokes.*')
+            lines.append(f'> *See rendered image: `_converted/pdf_rendered/{sanitize_filename(note_name)}/`*')
+            lines.append('')
+
+        if content['page_count'] > 1 and page['page_num'] < content['page_count']:
+            lines.append('---')
+            lines.append('')
+
+    return '\n'.join(lines)
+
+
+def process_note_file(note_path: Path, output_dir: Path) -> dict:
+    """Process a single .note file."""
+    result = {
+        'source': str(note_path),
+        'success': False,
+        'pages': 0,
+        'has_handwriting': False,
+    }
+
+    try:
+        with zipfile.ZipFile(note_path, 'r') as z:
+            # Find PDFs
+            pdf_files = [n for n in z.namelist() if n.endswith('.pdf')]
+
+            if not pdf_files:
+                result['error'] = 'No PDFs found'
+                return result
+
+            # Process first/main PDF
+            pdf_data = z.read(pdf_files[0])
+            content = extract_pdf_text(pdf_data)
+
+            result['pages'] = content['page_count']
+            result['has_handwriting'] = any(p['has_handwriting'] for p in content['pages'])
+
+            # Generate Markdown
+            safe_name = sanitize_filename(note_path.stem)
+            md_content = generate_markdown(safe_name, content)
+
+            # Write output
+            output_path = output_dir / f"{safe_name}.md"
+            counter = 1
+            while output_path.exists():
+                output_path = output_dir / f"{safe_name}_{counter}.md"
+                counter += 1
+
+            with open(output_path, 'w', encoding='utf-8') as f:
+                f.write(md_content)
+
+            result['success'] = True
+            result['output'] = str(output_path)
+
+    except Exception as e:
+        result['error'] = str(e)
+
+    return result
+
+
+def find_note_files_with_pdfs() -> list:
+    """Find all .note files that contain PDFs."""
+    files = []
+    for root, dirs, filenames in os.walk(BASE_PATH):
+        if '_converted' in root or '_scripts' in root or '_organized' in root:
+            continue
+        for f in filenames:
+            if f.endswith('.note'):
+                note_path = Path(root) / f
+                try:
+                    with zipfile.ZipFile(note_path, 'r') as z:
+                        if any(n.endswith('.pdf') for n in z.namelist()):
+                            files.append(note_path)
+                except:
+                    pass
+    return files
+
+
+def main():
+    print("=" * 60)
+    print("Fast PDF to Markdown Converter")
+    print("(Extracts typed text, marks handwriting regions)")
+    print("=" * 60)
+
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+
+    # Find notes with PDFs
+    print("\nScanning for notes with PDFs...")
+    files = find_note_files_with_pdfs()
+    print(f"Found {len(files)} notes with embedded PDFs")
+
+    if not files:
+        print("No files to process!")
+        return
+
+    log = {
+        'processed': [],
+        'errors': [],
+        'stats': {
+            'total': len(files),
+            'success': 0,
+            'with_handwriting': 0,
+            'total_pages': 0,
+            'errors': 0,
+        }
+    }
+
+    for i, note_path in enumerate(files):
+        if i % 50 == 0:
+            print(f"\r  Processing {i+1}/{len(files)}...", end='', flush=True)
+
+        result = process_note_file(note_path, OUTPUT_DIR)
+
+        if result['success']:
+            log['stats']['success'] += 1
+            log['stats']['total_pages'] += result['pages']
+            if result['has_handwriting']:
+                log['stats']['with_handwriting'] += 1
+            log['processed'].append({
+                'source': str(note_path),
+                'output': result.get('output'),
+                'pages': result['pages'],
+                'has_handwriting': result['has_handwriting'],
+            })
+        else:
+            log['stats']['errors'] += 1
+            log['errors'].append({
+                'source': str(note_path),
+                'error': result.get('error'),
+            })
+
+    # Save log
+    print(f"\n\nWriting log to: {LOG_FILE}")
+    with open(LOG_FILE, 'w', encoding='utf-8') as f:
+        json.dump(log, f, indent=2, default=str)
+
+    print("\n" + "=" * 60)
+    print("FAST CONVERSION RESULTS")
+    print("=" * 60)
+    print(f"Total notes: {log['stats']['total']}")
+    print(f"Successfully converted: {log['stats']['success']}")
+    print(f"With handwriting annotations: {log['stats']['with_handwriting']}")
+    print(f"Total pages: {log['stats']['total_pages']}")
+    print(f"Errors: {log['stats']['errors']}")
+    print(f"\nMarkdown files saved to: {OUTPUT_DIR}")
+    print("\nNote: Handwritten content is preserved in rendered images at:")
+    print(f"  {BASE_PATH / '_converted' / 'pdf_rendered'}")
+    print("=" * 60)
+
+
+if __name__ == '__main__':
+    main()

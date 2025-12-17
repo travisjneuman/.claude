@@ -1,0 +1,423 @@
+# Backend Proxy Setup Guide
+
+> Advanced guide for setting up your own proxy server to use AI providers that don't support CORS (OpenAI, xAI, DeepSeek, Gemini).
+
+---
+
+## Table of Contents
+
+1. [Why You Might Need This](#why-you-might-need-this)
+2. [Option 1: Use OpenRouter](#option-1-use-openrouter-easiest)
+3. [Option 2: Cloudflare Worker](#option-2-cloudflare-worker)
+4. [Option 3: Self-Hosted Node.js Proxy](#option-3-self-hosted-nodejs-proxy)
+5. [Security Considerations](#security-considerations)
+
+---
+
+## Why You Might Need This
+
+Neuman Brain runs entirely in your browser for maximum privacy. However, some AI providers block direct browser requests due to CORS (Cross-Origin Resource Sharing) security policies:
+
+| Provider | Direct Access | Needs Proxy |
+|----------|--------------|-------------|
+| OpenRouter | ✅ Yes | No |
+| Anthropic | ✅ Yes | No |
+| HuggingFace | ✅ Yes | No |
+| **OpenAI** | ❌ No | **Yes** |
+| **xAI (Grok)** | ❌ No | **Yes** |
+| **DeepSeek** | ❌ No | **Yes** |
+| **Gemini** | ❌ No | **Yes** |
+
+**Before setting up a proxy, consider:**
+- **OpenRouter** provides access to OpenAI, Anthropic, and 200+ other models through one API that works directly in browsers
+- Setting up your own proxy adds complexity and potential security concerns
+
+---
+
+## Option 1: Use OpenRouter (Easiest)
+
+OpenRouter acts as a proxy service that provides browser-compatible access to many providers.
+
+### Setup
+
+1. Go to [openrouter.ai](https://openrouter.ai)
+2. Create an account
+3. Get your API key from [openrouter.ai/keys](https://openrouter.ai/keys)
+4. Add the key to Neuman Brain's OpenRouter provider
+
+### Benefits
+
+- ✅ No server setup required
+- ✅ Access to 200+ models including GPT-4, Claude, Llama
+- ✅ Unified billing across providers
+- ✅ Works immediately in browser
+
+### Models Available via OpenRouter
+
+```
+openai/gpt-4o
+openai/gpt-4-turbo
+anthropic/claude-3-5-sonnet
+meta-llama/llama-3.3-70b-instruct
+google/gemini-pro
+mistralai/mistral-large
+deepseek/deepseek-chat
+```
+
+---
+
+## Option 2: Cloudflare Worker
+
+A Cloudflare Worker is a serverless function that runs at the edge. Free tier includes 100,000 requests/day.
+
+### Prerequisites
+
+- Cloudflare account (free)
+- Wrangler CLI installed: `npm install -g wrangler`
+
+### Step 1: Create the Worker
+
+```bash
+# Login to Cloudflare
+wrangler login
+
+# Create new worker project
+wrangler init ai-proxy
+cd ai-proxy
+```
+
+### Step 2: Add the Proxy Code
+
+Replace `src/index.js` with:
+
+```javascript
+/**
+ * AI Provider Proxy Worker
+ * Forwards requests to AI providers, adding CORS headers
+ */
+
+const ALLOWED_ORIGINS = [
+  'https://your-domain.com',
+  'http://localhost:5173',
+  'http://localhost:3000'
+];
+
+const PROVIDER_URLS = {
+  openai: 'https://api.openai.com',
+  deepseek: 'https://api.deepseek.com',
+  xai: 'https://api.x.ai',
+  gemini: 'https://generativelanguage.googleapis.com'
+};
+
+export default {
+  async fetch(request, env) {
+    // Handle CORS preflight
+    if (request.method === 'OPTIONS') {
+      return handleCORS(request);
+    }
+
+    const url = new URL(request.url);
+    const provider = url.searchParams.get('provider');
+
+    if (!provider || !PROVIDER_URLS[provider]) {
+      return new Response('Invalid provider', { status: 400 });
+    }
+
+    // Verify origin
+    const origin = request.headers.get('Origin');
+    if (!ALLOWED_ORIGINS.includes(origin)) {
+      return new Response('Forbidden', { status: 403 });
+    }
+
+    // Forward request to provider
+    const targetUrl = PROVIDER_URLS[provider] + url.pathname.replace('/proxy', '');
+
+    const response = await fetch(targetUrl, {
+      method: request.method,
+      headers: {
+        ...Object.fromEntries(request.headers),
+        'Host': new URL(PROVIDER_URLS[provider]).host
+      },
+      body: request.method !== 'GET' ? await request.text() : undefined
+    });
+
+    // Add CORS headers to response
+    const newResponse = new Response(response.body, response);
+    newResponse.headers.set('Access-Control-Allow-Origin', origin);
+    newResponse.headers.set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    newResponse.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+
+    return newResponse;
+  }
+};
+
+function handleCORS(request) {
+  const origin = request.headers.get('Origin');
+
+  if (!ALLOWED_ORIGINS.includes(origin)) {
+    return new Response('Forbidden', { status: 403 });
+  }
+
+  return new Response(null, {
+    headers: {
+      'Access-Control-Allow-Origin': origin,
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+      'Access-Control-Max-Age': '86400'
+    }
+  });
+}
+```
+
+### Step 3: Configure Allowed Origins
+
+Edit the `ALLOWED_ORIGINS` array to include your domains:
+
+```javascript
+const ALLOWED_ORIGINS = [
+  'https://your-actual-domain.com',
+  'http://localhost:5173'  // For local development
+];
+```
+
+### Step 4: Deploy
+
+```bash
+wrangler deploy
+```
+
+You'll get a URL like: `https://ai-proxy.your-subdomain.workers.dev`
+
+### Step 5: Use in Neuman Brain
+
+Configure the proxy URL in Neuman Brain settings (feature coming soon).
+
+---
+
+## Option 3: Self-Hosted Node.js Proxy
+
+For full control, run your own proxy server.
+
+### Prerequisites
+
+- Node.js 18+
+- A server (VPS, cloud instance, or local machine)
+
+### Step 1: Create the Project
+
+```bash
+mkdir ai-proxy && cd ai-proxy
+npm init -y
+npm install express cors helmet
+```
+
+### Step 2: Create the Server
+
+Create `server.js`:
+
+```javascript
+const express = require('express');
+const cors = require('cors');
+const helmet = require('helmet');
+
+const app = express();
+const PORT = process.env.PORT || 3001;
+
+// Security middleware
+app.use(helmet());
+
+// CORS configuration
+const allowedOrigins = [
+  'https://your-domain.com',
+  'http://localhost:5173',
+  'http://localhost:3000'
+];
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+}));
+
+app.use(express.json({ limit: '10mb' }));
+
+// Provider endpoints
+const PROVIDERS = {
+  openai: 'https://api.openai.com',
+  deepseek: 'https://api.deepseek.com',
+  xai: 'https://api.x.ai',
+  gemini: 'https://generativelanguage.googleapis.com'
+};
+
+// Proxy endpoint
+app.all('/proxy/:provider/*', async (req, res) => {
+  const { provider } = req.params;
+  const baseUrl = PROVIDERS[provider];
+
+  if (!baseUrl) {
+    return res.status(400).json({ error: 'Invalid provider' });
+  }
+
+  // Get the path after /proxy/:provider/
+  const path = req.params[0];
+  const targetUrl = `${baseUrl}/${path}`;
+
+  try {
+    const response = await fetch(targetUrl, {
+      method: req.method,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': req.headers.authorization
+      },
+      body: req.method !== 'GET' ? JSON.stringify(req.body) : undefined
+    });
+
+    const data = await response.json();
+    res.status(response.status).json(data);
+  } catch (error) {
+    console.error('Proxy error:', error);
+    res.status(500).json({ error: 'Proxy request failed' });
+  }
+});
+
+// Health check
+app.get('/health', (req, res) => {
+  res.json({ status: 'ok' });
+});
+
+app.listen(PORT, () => {
+  console.log(`AI Proxy running on port ${PORT}`);
+});
+```
+
+### Step 3: Run the Server
+
+```bash
+# Development
+node server.js
+
+# Production (use PM2 or similar)
+npm install -g pm2
+pm2 start server.js --name ai-proxy
+```
+
+### Step 4: Deploy Options
+
+**Railway (Easy):**
+```bash
+npm install -g @railway/cli
+railway login
+railway init
+railway up
+```
+
+**Docker:**
+```dockerfile
+FROM node:18-alpine
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci --production
+COPY . .
+EXPOSE 3001
+CMD ["node", "server.js"]
+```
+
+**Manual VPS:**
+1. Upload files to your server
+2. Install dependencies: `npm install`
+3. Run with PM2: `pm2 start server.js`
+4. Set up nginx reverse proxy with SSL
+
+---
+
+## Security Considerations
+
+### Do's
+
+- ✅ **Restrict origins** - Only allow your specific domains
+- ✅ **Use HTTPS** - Always encrypt traffic in production
+- ✅ **Rate limit** - Prevent abuse with request limits
+- ✅ **Log requests** - Monitor for suspicious activity
+- ✅ **Keep secrets secure** - Never commit API keys
+
+### Don'ts
+
+- ❌ **Don't allow all origins** - `Access-Control-Allow-Origin: *` is dangerous
+- ❌ **Don't expose your proxy publicly** - Restrict to your app only
+- ❌ **Don't store user API keys on server** - Keys should stay in browser
+- ❌ **Don't skip input validation** - Validate all incoming requests
+
+### Rate Limiting Example
+
+Add to the Node.js proxy:
+
+```javascript
+const rateLimit = require('express-rate-limit');
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // 100 requests per window
+  message: { error: 'Too many requests' }
+});
+
+app.use('/proxy', limiter);
+```
+
+### Authentication (Optional)
+
+For additional security, require a proxy token:
+
+```javascript
+app.use('/proxy', (req, res, next) => {
+  const proxyToken = req.headers['x-proxy-token'];
+
+  if (proxyToken !== process.env.PROXY_SECRET) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
+
+  next();
+});
+```
+
+---
+
+## Troubleshooting
+
+### "CORS error" after setting up proxy
+
+1. Check your proxy is running: `curl https://your-proxy.com/health`
+2. Verify your origin is in the allowed list
+3. Check browser console for specific error message
+
+### "502 Bad Gateway"
+
+1. Check the target provider is accessible
+2. Verify your API key is correct
+3. Check proxy server logs for errors
+
+### Requests are slow
+
+1. Choose a proxy location close to the AI provider
+2. Cloudflare Workers are globally distributed and typically fastest
+3. Consider connection pooling for self-hosted solutions
+
+---
+
+## Summary
+
+| Option | Difficulty | Cost | Best For |
+|--------|-----------|------|----------|
+| OpenRouter | Easy | Pay per use | Most users |
+| Cloudflare Worker | Medium | Free (100k/day) | Developers |
+| Self-hosted | Hard | Server costs | Full control |
+
+**Recommendation:** Start with OpenRouter. Only set up your own proxy if you have specific requirements (compliance, latency, cost optimization).
+
+---
+
+*Last updated: November 2025*

@@ -1,0 +1,36 @@
+{
+	"nodes":[
+		{"id":"title","x":-200,"y":-600,"width":600,"height":80,"type":"text","text":"# Neuman Development Workspace\n*Visual architecture of all projects and concepts*"},
+		{"id":"trinity-group","x":-500,"y":-450,"width":450,"height":900,"type":"group","label":"Trinity Architecture (AI)","color":"6"},
+		{"id":"archon","x":-480,"y":-400,"width":400,"height":180,"type":"file","file":"Projects/Archon.md"},
+		{"id":"adk","x":-480,"y":-180,"width":400,"height":180,"type":"file","file":"Projects/Agent Development Kit.md"},
+		{"id":"bench","x":-480,"y":40,"width":400,"height":180,"type":"file","file":"Projects/AgentBench.md"},
+		{"id":"trinity-flow","x":-480,"y":260,"width":400,"height":120,"type":"text","text":"**Trinity Flow:**\n1. Archon *builds* agents\n2. ADK *runs* agents at scale\n3. AgentBench *evaluates* quality"},
+		{"id":"infra","x":0,"y":-450,"width":320,"height":500,"type":"group","label":"Infrastructure","color":"3"},
+		{"id":"vllm","x":20,"y":-400,"width":280,"height":80,"type":"file","file":"Concepts/vLLM.md"},
+		{"id":"supa","x":20,"y":-300,"width":280,"height":80,"type":"file","file":"Concepts/Supabase.md"},
+		{"id":"mcp","x":20,"y":-200,"width":280,"height":80,"type":"file","file":"Concepts/MCP.md"},
+		{"id":"rag","x":20,"y":-100,"width":280,"height":80,"type":"file","file":"Concepts/RAG.md"},
+		{"id":"local-first","x":20,"y":0,"width":280,"height":80,"type":"file","file":"Concepts/Local-First.md"},
+		{"id":"active-group","x":380,"y":-450,"width":350,"height":400,"type":"group","label":"Active Projects (P0-P1)","color":"4"},
+		{"id":"brain","x":400,"y":-400,"width":310,"height":100,"type":"file","file":"Projects/Neuman Brain.md"},
+		{"id":"lzg","x":400,"y":-280,"width":310,"height":100,"type":"file","file":"Projects/Lazy Golfing.md"},
+		{"id":"portfolio","x":400,"y":-160,"width":310,"height":100,"type":"file","file":"Projects/TJN Portfolio.md"},
+		{"id":"live-group","x":380,"y":0,"width":350,"height":400,"type":"group","label":"Live Projects (P2-P3)","color":"5"},
+		{"id":"robot","x":400,"y":50,"width":310,"height":80,"type":"file","file":"Projects/The Dead Robot.md"},
+		{"id":"home","x":400,"y":150,"width":310,"height":80,"type":"file","file":"Projects/TJN Home.md"},
+		{"id":"toker","x":400,"y":250,"width":310,"height":80,"type":"file","file":"Projects/Toker League.md"},
+		{"id":"business-group","x":0,"y":100,"width":320,"height":300,"type":"group","label":"Business Planning","color":"2"},
+		{"id":"business-text","x":20,"y":140,"width":280,"height":220,"type":"text","text":"**Kikman Enterprises**\n\n- [[LazyGolf]] - Golf brand\n- [[ndev Consulting]] - IT services\n- [[Rent-a-Nerd]] - Tech support\n- [[MVNO]] - Cell service\n\n*See Business/README for details*"}
+	],
+	"edges":[
+		{"id":"e1","fromNode":"archon","fromSide":"right","toNode":"supa","toSide":"left","label":"Memory"},
+		{"id":"e2","fromNode":"archon","fromSide":"right","toNode":"mcp","toSide":"left","label":"IDE Integration"},
+		{"id":"e3","fromNode":"adk","fromSide":"right","toNode":"vllm","toSide":"left","label":"Inference"},
+		{"id":"e4","fromNode":"bench","fromSide":"right","toNode":"vllm","toSide":"left","label":"Benchmarks"},
+		{"id":"e5","fromNode":"archon","fromSide":"bottom","toNode":"adk","toSide":"top","label":"Deploys Agents"},
+		{"id":"e6","fromNode":"adk","fromSide":"bottom","toNode":"bench","toSide":"top","label":"Feeds Data"},
+		{"id":"e7","fromNode":"brain","fromSide":"left","toNode":"local-first","toSide":"right","label":"Architecture"},
+		{"id":"e8","fromNode":"lzg","fromSide":"left","toNode":"supa","toSide":"right","label":"Backend"}
+	]
+}

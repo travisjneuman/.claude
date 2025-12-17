@@ -1,0 +1,335 @@
+# Manual Testing Guide - Phase 4-6
+
+**Purpose:** Comprehensive testing checklist for performance, accessibility, and responsive design
+**Created:** 2025-01-18
+**Dev Server:** http://localhost:5174
+
+---
+
+## 🧪 Performance Testing (Phase 4, Part 1)
+
+### Test 1: Generate Test Data
+
+**Using Browser Console:**
+```javascript
+// 1. Open browser DevTools Console (F12)
+// 2. Navigate to Tasks page (Kanban)
+// 3. Run this code:
+
+// Generate 100 test tasks
+const tasks = Array.from({ length: 100 }, (_, i) => ({
+  id: `test-${i}`,
+  title: `Test Task ${i + 1}`,
+  description: `Description for task ${i + 1}`,
+  status: ['backlog', 'todo', 'in-progress', 'review', 'done'][i % 5],
+  priority: ['low', 'medium', 'high'][i % 3],
+  tags: [`tag-${i % 5}`],
+  subtasks: i % 3 === 0 ? [
+    { id: `st-${i}-1`, title: 'Subtask 1', completed: i % 2 === 0, priority: 'medium' }
+  ] : [],
+  createdAt: new Date().toISOString(),
+  cardNumber: i + 1,
+}));
+
+// Add to store
+const store = window.__ZUSTAND__;  // If devtools enabled
+// OR use localStorage:
+localStorage.setItem('kanban', JSON.stringify({ state: { tasks }, version: 0 }));
+location.reload();
+```
+
+### Test 2: Measure Render Performance
+
+**Board View:**
+1. Navigate to Tasks page
+2. Open DevTools → Performance tab
+3. Click Record
+4. Reload page
+5. Stop recording after page loads
+6. Check "Scripting" time - should be < 1000ms for 100 tasks
+
+**List View:**
+1. Switch to List view (toggle button)
+2. Open DevTools → Performance tab
+3. Click Record
+4. Sort by each column (Title, Status, Priority, Due Date)
+5. Stop recording
+6. Check interaction times - should be < 300ms per sort
+
+**Expected Results:**
+- ✅ 100 tasks render: < 1s
+- ✅ 500 tasks render: < 3s
+- ✅ Sorting: < 300ms
+- ✅ Filtering: < 200ms
+- ✅ Scrolling: 60fps (no jank)
+
+---
+
+## ♿ Accessibility Testing (Phase 4, Part 2)
+
+### Test 1: Keyboard Navigation
+
+**Dashboard:**
+- [ ] Press Tab - focus moves to first widget
+- [ ] Press Tab repeatedly - cycles through all widgets
+- [ ] Press Enter on widget - opens widget (if interactive)
+- [ ] Press Tab on WidgetManager - opens dialog
+- [ ] Press Esc - closes dialog
+- [ ] Focus visible on all elements (blue outline)
+
+**Kanban Board View:**
+- [ ] Press Tab - cycles through cards
+- [ ] Press Enter on card - opens detail panel
+- [ ] Press Esc in detail panel - closes panel
+- [ ] Press Tab in detail panel - cycles through inputs
+- [ ] Can't Tab outside detail panel (focus trap) ⚠️ **May need fix**
+
+**Kanban List View:**
+- [ ] Press Tab - cycles through table rows
+- [ ] Press Space on checkbox - selects row
+- [ ] Press Enter on row - opens detail panel
+- [ ] Arrow Up/Down - navigate rows ⚠️ **Enhancement**
+
+**Notes:**
+- [ ] Press Tab - moves between sidebar and editor
+- [ ] Press Cmd+K - opens search (quick switcher)
+- [ ] Press Esc - closes search
+- [ ] Can create/edit note with keyboard only
+
+**Calendar:**
+- [ ] Press Tab - cycles through days/events
+- [ ] Arrow keys - navigate days ⚠️ **Enhancement**
+- [ ] Press Enter on day - opens event dialog
+- [ ] Press Esc - closes dialog
+
+### Test 2: Screen Reader (macOS VoiceOver)
+
+**Enable VoiceOver:**
+- Press Cmd+F5
+- Or System Preferences → Accessibility → VoiceOver
+
+**Test:**
+- [ ] Navigate to Dashboard
+- [ ] VoiceOver announces "Dashboard" heading
+- [ ] Tab to widget - VoiceOver announces widget title
+- [ ] Tab to button - VoiceOver announces button label
+- [ ] Open modal - VoiceOver announces modal title
+- [ ] Form inputs - VoiceOver announces labels
+
+**Windows (NVDA):**
+- Download NVDA (free): https://www.nvaccess.org/
+- Press Ctrl+Alt+N to start
+- Same tests as VoiceOver
+
+**Expected Results:**
+- ✅ All interactive elements have labels
+- ✅ All headings are announced
+- ✅ Form inputs have associated labels
+- ✅ Modals announce title when opened
+- ✅ Status changes are announced (aria-live)
+
+### Test 3: Color Contrast
+
+**Tool:** WebAIM Contrast Checker
+**URL:** https://webaim.org/resources/contrastchecker/
+
+**Test Light Mode:**
+1. Screenshot any text on white background
+2. Use color picker to get text color hex
+3. Check contrast ratio - must be ≥ 4.5:1 for WCAG AA
+
+**Test Dark Mode:**
+1. Toggle dark mode (Settings → Theme → Dark)
+2. Screenshot any text on dark background
+3. Check contrast ratio - must be ≥ 4.5:1
+
+**Priority Items to Check:**
+- [ ] Body text (text-light-primary / text-dark-primary)
+- [ ] Secondary text (text-light-secondary / text-dark-secondary)
+- [ ] Priority badges (high=red, medium=yellow, low=blue)
+- [ ] Status labels
+- [ ] Button text
+- [ ] Links
+
+**Expected Results:**
+- ✅ All text ≥ 4.5:1 contrast ratio
+- ⚠️ If failing, note which colors need adjustment
+
+---
+
+## 📱 Responsive Design Testing (Phase 4, Part 3)
+
+### Test 1: Mobile Breakpoints
+
+**Chrome DevTools Device Mode:**
+1. Press F12 → Click device icon (or Ctrl+Shift+M)
+2. Test these breakpoints:
+
+**iPhone SE (320px width):**
+- [ ] Dashboard: Widgets stack vertically (1 column)
+- [ ] Kanban Board: Horizontal scroll (columns side-by-side)
+- [ ] Kanban List: Some columns hidden, horizontal scroll
+- [ ] Notes: Sidebar toggles to hamburger menu
+- [ ] Calendar: Month view readable, events truncated
+- [ ] Settings: All inputs fit width
+
+**iPhone 12/13 (375px width):**
+- [ ] Dashboard: Still 1 column
+- [ ] Kanban: Same as 320px
+- [ ] Notes: Better spacing
+- [ ] Calendar: More room for events
+
+**iPad (768px width):**
+- [ ] Dashboard: 2 columns
+- [ ] Kanban Board: Show 3-4 columns
+- [ ] Kanban List: Show most columns
+- [ ] Notes: Sidebar + editor side-by-side
+- [ ] Calendar: Month view comfortable
+
+**Desktop (1024px+ width):**
+- [ ] Dashboard: 3 columns
+- [ ] Kanban Board: Show all columns
+- [ ] Kanban List: Show all columns
+- [ ] Everything spacious and readable
+
+### Test 2: Touch Targets
+
+**Minimum:** 48x48px (Apple/Google guidelines)
+
+**Test:**
+1. Enable Device Mode (mobile)
+2. Try tapping small buttons/icons
+3. Check if all taps register easily
+
+**Items to Check:**
+- [ ] Dashboard widget controls (drag, remove)
+- [ ] Kanban card actions (edit, delete)
+- [ ] Notes sidebar items
+- [ ] Calendar day cells
+- [ ] Modal close buttons
+- [ ] Dropdown selectors
+
+**Expected Results:**
+- ✅ All interactive elements ≥ 48x48px
+- ✅ Adequate spacing between tap targets
+- ⚠️ If too small, note which elements
+
+### Test 3: Mobile Safari Issues
+
+**Test on Real iPhone (if available):**
+1. Open Safari on iPhone
+2. Navigate to http://192.168.1.4:5174 (check dev server network URL)
+
+**Common Issues to Check:**
+- [ ] 100vh includes URL bar (may cut off content)
+- [ ] Input focus doesn't zoom page (font-size ≥ 16px)
+- [ ] Touch interactions feel responsive (no 300ms delay)
+- [ ] Swipe gestures work (if implemented)
+- [ ] Page doesn't bounce/scroll weirdly
+
+**Expected Results:**
+- ✅ Page height adapts to viewport (including URL bar)
+- ✅ Inputs don't trigger zoom
+- ✅ Touch feels immediate
+- ⚠️ Note any iOS-specific issues
+
+---
+
+## 📊 Results Documentation
+
+### Performance Results
+
+**100 Tasks:**
+- Board view render: ____ms (target: < 1000ms)
+- List view render: ____ms (target: < 1000ms)
+- Sorting: ____ms (target: < 300ms)
+
+**500 Tasks:**
+- Board view render: ____ms (target: < 3000ms)
+- List view render: ____ms (target: < 3000ms)
+
+**Pass/Fail:** ________
+
+---
+
+### Accessibility Results
+
+**Keyboard Navigation:**
+- Dashboard: PASS / FAIL
+- Kanban: PASS / FAIL
+- Notes: PASS / FAIL
+- Calendar: PASS / FAIL
+
+**Screen Reader:**
+- All labels present: PASS / FAIL
+- Modals announced: PASS / FAIL
+- Form labels work: PASS / FAIL
+
+**Color Contrast:**
+- Light mode: PASS / FAIL
+- Dark mode: PASS / FAIL
+
+**Pass/Fail:** ________
+
+---
+
+### Responsive Results
+
+**Breakpoints:**
+- 320px: PASS / FAIL
+- 375px: PASS / FAIL
+- 768px: PASS / FAIL
+- 1024px+: PASS / FAIL
+
+**Touch Targets:**
+- All ≥ 48px: PASS / FAIL
+
+**Mobile Safari:**
+- Works correctly: PASS / FAIL
+
+**Pass/Fail:** ________
+
+---
+
+## 🐛 Issues Found
+
+**List issues encountered during testing:**
+
+1. **Performance:**
+   - Issue: _______________
+   - Severity: Low / Medium / High
+   - Fix needed: _______________
+
+2. **Accessibility:**
+   - Issue: _______________
+   - Severity: Low / Medium / High
+   - Fix needed: _______________
+
+3. **Responsive:**
+   - Issue: _______________
+   - Severity: Low / Medium / High
+   - Fix needed: _______________
+
+---
+
+## ✅ Checklist Summary
+
+- [ ] Performance testing complete (100 + 500 tasks)
+- [ ] Keyboard navigation tested (all pages)
+- [ ] Screen reader tested (VoiceOver or NVDA)
+- [ ] Color contrast checked (light + dark mode)
+- [ ] Mobile breakpoints tested (320px, 375px, 768px, 1024px)
+- [ ] Touch targets verified (≥ 48px)
+- [ ] Mobile Safari tested (real device preferred)
+- [ ] Issues documented in task file
+- [ ] Ready for fixes (if issues found)
+
+---
+
+**Next Steps:**
+1. Complete manual testing using this guide
+2. Document results in `tasks/phase-4-final-polish.md` review section
+3. Create GitHub issues for any bugs found
+4. Proceed to Phase 5 (Dashboard enhancements) once Phase 4 passes
+
+**Questions?** Check `tasks/phase-4-final-polish.md` for detailed guidance.

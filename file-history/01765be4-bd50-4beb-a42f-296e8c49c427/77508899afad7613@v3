@@ -1,0 +1,32 @@
+/**
+ * Sidebar Navigation Order Store
+ *
+ * Manages the custom order of navigation items in the sidebar.
+ * Users can drag-drop to reorder items, and the order persists across sessions.
+ */
+
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
+
+interface SidebarNavStore {
+  navOrder: string[]; // Array of paths in custom order
+  setNavOrder: (order: string[]) => void;
+  resetToDefault: () => void;
+}
+
+// Dashboard (/) is fixed at top and not part of drag-drop order
+const DEFAULT_NAV_ORDER = ['/notes', '/planning', '/tasks'];
+
+export const useSidebarNavStore = create<SidebarNavStore>()(
+  persist(
+    (set) => ({
+      navOrder: DEFAULT_NAV_ORDER,
+      setNavOrder: (order) => set({ navOrder: order }),
+      resetToDefault: () => set({ navOrder: DEFAULT_NAV_ORDER }),
+    }),
+    {
+      name: 'sidebar-nav-order',
+      version: 1,
+    }
+  )
+);

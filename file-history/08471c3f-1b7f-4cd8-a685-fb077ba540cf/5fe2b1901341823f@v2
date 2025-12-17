@@ -1,0 +1,195 @@
+/**
+ * Forms Store
+ * Manages form templates and responses with IndexedDB persistence
+ */
+
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
+import type {
+  FormTemplate,
+  FormResponse,
+  FormWithStats,
+} from '../types/forms';
+
+interface FormsState {
+  // Form templates
+  forms: FormTemplate[];
+  createForm: (title: string, description?: string) => FormTemplate;
+  updateForm: (id: string, updates: Partial<FormTemplate>) => void;
+  deleteForm: (id: string) => void;
+  getForm: (id: string) => FormTemplate | undefined;
+  duplicateForm: (id: string) => FormTemplate | undefined;
+
+  // Form responses
+  responses: FormResponse[];
+  submitResponse: (formId: string, answers: Record<string, any>) => FormResponse;
+  deleteResponse: (id: string) => void;
+  getResponses: (formId: string) => FormResponse[];
+  clearFormResponses: (formId: string) => void;
+
+  // Statistics
+  getFormWithStats: (id: string) => FormWithStats | undefined;
+  getAllFormsWithStats: () => FormWithStats[];
+}
+
+export const useFormsStore = create<FormsState>()(
+  persist(
+    (set, get) => ({
+      forms: [],
+      responses: [],
+
+      // Create new form template
+      createForm: (title, description) => {
+        const newForm: FormTemplate = {
+          id: crypto.randomUUID(),
+          title,
+          description,
+          fields: [],
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          settings: {
+            allowMultipleSubmissions: true,
+            showSubmissionCount: true,
+            resetPeriod: 'never',
+          },
+        };
+
+        set((state) => ({
+          forms: [...state.forms, newForm],
+        }));
+
+        return newForm;
+      },
+
+      // Update existing form
+      updateForm: (id, updates) => {
+        set((state) => ({
+          forms: state.forms.map((form) =>
+            form.id === id
+              ? { ...form, ...updates, updatedAt: new Date() }
+              : form
+          ),
+        }));
+      },
+
+      // Delete form and all its responses
+      deleteForm: (id) => {
+        set((state) => ({
+          forms: state.forms.filter((form) => form.id !== id),
+          responses: state.responses.filter((response) => response.formId !== id),
+        }));
+      },
+
+      // Get form by ID
+      getForm: (id) => {
+        return get().forms.find((form) => form.id === id);
+      },
+
+      // Duplicate form
+      duplicateForm: (id) => {
+        const original = get().getForm(id);
+        if (!original) return undefined;
+
+        const duplicate: FormTemplate = {
+          ...original,
+          id: crypto.randomUUID(),
+          title: `${original.title} (Copy)`,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          fields: original.fields.map((field) => ({
+            ...field,
+            id: crypto.randomUUID(), // New IDs for fields
+          })),
+        };
+
+        set((state) => ({
+          forms: [...state.forms, duplicate],
+        }));
+
+        return duplicate;
+      },
+
+      // Submit form response
+      submitResponse: (formId, answers) => {
+        const newResponse: FormResponse = {
+          id: crypto.randomUUID(),
+          formId,
+          answers,
+          submittedAt: new Date(),
+        };
+
+        set((state) => ({
+          responses: [...state.responses, newResponse],
+        }));
+
+        return newResponse;
+      },
+
+      // Delete single response
+      deleteResponse: (id) => {
+        set((state) => ({
+          responses: state.responses.filter((response) => response.id !== id),
+        }));
+      },
+
+      // Get all responses for a form
+      getResponses: (formId) => {
+        return get().responses.filter((response) => response.formId === formId);
+      },
+
+      // Clear all responses for a form
+      clearFormResponses: (formId) => {
+        set((state) => ({
+          responses: state.responses.filter((response) => response.formId !== formId),
+        }));
+      },
+
+      // Get form with statistics
+      getFormWithStats: (id) => {
+        const form = get().getForm(id);
+        if (!form) return undefined;
+
+        const formResponses = get().getResponses(id);
+        const sortedResponses = formResponses.sort(
+          (a, b) =>
+            new Date(b.submittedAt).getTime() - new Date(a.submittedAt).getTime()
+        );
+
+        return {
+          ...form,
+          responseCount: formResponses.length,
+          lastSubmittedAt:
+            sortedResponses.length > 0 ? sortedResponses[0].submittedAt : undefined,
+        };
+      },
+
+      // Get all forms with statistics
+      getAllFormsWithStats: () => {
+        return get().forms.map((form) => {
+          const formResponses = get().getResponses(form.id);
+          const sortedResponses = formResponses.sort(
+            (a, b) =>
+              new Date(b.submittedAt).getTime() - new Date(a.submittedAt).getTime()
+          );
+
+          return {
+            ...form,
+            responseCount: formResponses.length,
+            lastSubmittedAt:
+              sortedResponses.length > 0
+                ? sortedResponses[0].submittedAt
+                : undefined,
+          };
+        });
+      },
+    }),
+    {
+      name: 'forms-store',
+      version: 1,
+      partialize: (state) => ({
+        forms: state.forms,
+        responses: state.responses,
+      }),
+    }
+  )
+);

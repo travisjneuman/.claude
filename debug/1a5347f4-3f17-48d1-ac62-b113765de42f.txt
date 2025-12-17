@@ -1,0 +1,1585 @@
+2025-12-17T14:07:23.153Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:07:23.294Z [DEBUG] Getting matching hook commands for SessionEnd with query: clear
+2025-12-17T14:07:23.294Z [DEBUG] Found 0 hook matchers in settings
+2025-12-17T14:07:23.294Z [DEBUG] Matched 0 unique hooks for query "clear" (0 before deduplication)
+2025-12-17T14:07:23.294Z [DEBUG] Cleared all session hooks for session bf0b5470-2f3e-454e-93cc-0d04e779c16b
+2025-12-17T14:07:23.296Z [DEBUG] Getting matching hook commands for SessionStart with query: clear
+2025-12-17T14:07:23.296Z [DEBUG] Found 0 hook matchers in settings
+2025-12-17T14:07:23.296Z [DEBUG] Matched 0 unique hooks for query "clear" (0 before deduplication)
+2025-12-17T14:07:23.311Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (9.3ms)
+2025-12-17T14:07:23.311Z [DEBUG] FileHistory: Added snapshot for 5e7d8485-9edc-47bd-89f5-1e55bb7f7e83, tracking 0 files
+2025-12-17T14:07:23.315Z [DEBUG] UserCommandMessage rendering: "clear" (args: "none")
+2025-12-17T14:07:23.315Z [DEBUG] isSkillFormat: false, prefix: "/"
+2025-12-17T14:07:23.567Z [DEBUG] AutoUpdaterWrapper: Installation type: unknown
+2025-12-17T14:07:23.714Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:07:24.096Z [DEBUG] Summarizing all 44 messages (~53336 tokens)
+2025-12-17T14:07:24.613Z [DEBUG] Metadata string for gsd:execute-plan:
+2025-12-17T14:07:24.613Z [DEBUG] <command-message>gsd:execute-plan is running…</command-message>
+<command-name>/gsd:execute-plan</command-name>
+<command-args>.planning/phases/02-base-generic-skills/02-01-PLAN.md</command-args>
+2025-12-17T14:07:24.613Z [DEBUG] command-message tags in metadata: 1
+2025-12-17T14:07:25.307Z [DEBUG] Getting matching hook commands for SubagentStop with query: undefined
+2025-12-17T14:07:25.307Z [DEBUG] Found 0 hook matchers in settings
+2025-12-17T14:07:25.307Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-17T14:07:25.684Z [DEBUG] Getting matching hook commands for SubagentStop with query: undefined
+2025-12-17T14:07:25.684Z [DEBUG] Found 0 hook matchers in settings
+2025-12-17T14:07:25.684Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-17T14:07:25.729Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:07:25.962Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:07:25.962Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:07:25.962Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:07:25.962Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:07:26.675Z [DEBUG] processPromptSlashCommand creating 7 messages for gsd:execute-plan
+2025-12-17T14:07:26.675Z [DEBUG] Message 1: <command-message>gsd:execute-plan is running…</command-message>
+<command-name>/gsd:execute-plan</command-name>
+<command-args>.planning/phases/02-base-generic-skills/02-01-PLAN.md</command-args>
+2025-12-17T14:07:26.675Z [DEBUG] Message 2 [META]: [{"type":"text","text":"<objective>\nExecute a PLAN.md file, create SUMMARY.md, update project state, commit.\n\nUses intelligent segmentation:\n\n- Plans without checkpoints → spawn subagent for full
+2025-12-17T14:07:26.675Z [DEBUG] Message 3: [ATTACHMENT]
+2025-12-17T14:07:26.675Z [DEBUG] Message 4: [ATTACHMENT]
+2025-12-17T14:07:26.675Z [DEBUG] Message 5: [ATTACHMENT]
+2025-12-17T14:07:26.675Z [DEBUG] Message 6: [ATTACHMENT]
+2025-12-17T14:07:26.675Z [DEBUG] Message 7: [ATTACHMENT]
+2025-12-17T14:07:26.686Z [DEBUG] Getting matching hook commands for UserPromptSubmit with query: undefined
+2025-12-17T14:07:26.687Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:07:26.687Z [DEBUG] Matched 1 unique hooks for query "no match query" (1 before deduplication)
+2025-12-17T14:07:26.694Z [DEBUG] Summarizing all 31 messages (~47153 tokens)
+2025-12-17T14:07:26.819Z [DEBUG] FileHistory: Making snapshot for message 12b83ef7-dc9e-49b0-8268-a85c2dbe34c9
+2025-12-17T14:07:26.820Z [DEBUG] FileHistory: Added snapshot for 12b83ef7-dc9e-49b0-8268-a85c2dbe34c9, tracking 0 files
+2025-12-17T14:07:26.823Z [DEBUG] UserCommandMessage rendering: "gsd:execute-plan is running…" (args: ".planning/phases/02-base-generic-skills/02-01-PLAN.md")
+2025-12-17T14:07:26.823Z [DEBUG] isSkillFormat: false, prefix: "/"
+2025-12-17T14:07:26.916Z [DEBUG] Total plugin output styles loaded: 0
+2025-12-17T14:07:28.559Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:07:29.027Z [DEBUG] Summarizing all 33 messages (~13603 tokens)
+2025-12-17T14:07:29.165Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:07:30.105Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:07:32.991Z [DEBUG] executePreToolHooks called for tool: Glob
+2025-12-17T14:07:32.998Z [DEBUG] Getting matching hook commands for PreToolUse with query: Glob
+2025-12-17T14:07:32.998Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:07:32.999Z [DEBUG] Matched 1 unique hooks for query "Glob" (1 before deduplication)
+2025-12-17T14:07:32.999Z [DEBUG] executePreToolHooks called for tool: Read
+2025-12-17T14:07:33.000Z [DEBUG] executePreToolHooks called for tool: Read
+2025-12-17T14:07:33.012Z [DEBUG] Getting matching hook commands for PreToolUse with query: Read
+2025-12-17T14:07:33.012Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:07:33.012Z [DEBUG] Matched 1 unique hooks for query "Read" (1 before deduplication)
+2025-12-17T14:07:33.012Z [DEBUG] Getting matching hook commands for PreToolUse with query: Read
+2025-12-17T14:07:33.012Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:07:33.012Z [DEBUG] Matched 1 unique hooks for query "Read" (1 before deduplication)
+2025-12-17T14:07:35.631Z [DEBUG] Getting matching hook commands for PostToolUse with query: Read
+2025-12-17T14:07:35.631Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:07:35.631Z [DEBUG] Matched 1 unique hooks for query "Read" (1 before deduplication)
+2025-12-17T14:07:35.646Z [DEBUG] Getting matching hook commands for PostToolUse with query: Read
+2025-12-17T14:07:35.646Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:07:35.646Z [DEBUG] Matched 1 unique hooks for query "Read" (1 before deduplication)
+2025-12-17T14:07:35.731Z [DEBUG] Getting matching hook commands for PostToolUse with query: Glob
+2025-12-17T14:07:35.731Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:07:35.731Z [DEBUG] Matched 1 unique hooks for query "Glob" (1 before deduplication)
+2025-12-17T14:07:35.833Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:07:35.833Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:07:35.833Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:07:35.833Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:07:41.857Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:07:47.254Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-17T14:07:47.261Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-17T14:07:47.261Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:07:47.261Z [DEBUG] Matched 1 unique hooks for query "Bash" (1 before deduplication)
+2025-12-17T14:07:47.414Z [DEBUG] tree-sitter: loaded from disk
+2025-12-17T14:07:47.564Z [DEBUG] Session environment not yet supported on Windows
+2025-12-17T14:07:48.439Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-17T14:07:48.439Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:07:48.439Z [DEBUG] Matched 1 unique hooks for query "Bash" (1 before deduplication)
+2025-12-17T14:07:48.801Z [DEBUG] executePreToolHooks called for tool: Read
+2025-12-17T14:07:48.822Z [DEBUG] Getting matching hook commands for PreToolUse with query: Read
+2025-12-17T14:07:48.822Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:07:48.822Z [DEBUG] Matched 1 unique hooks for query "Read" (1 before deduplication)
+2025-12-17T14:07:48.823Z [DEBUG] executePreToolHooks called for tool: Read
+2025-12-17T14:07:48.823Z [DEBUG] executePreToolHooks called for tool: Read
+2025-12-17T14:07:48.839Z [DEBUG] Getting matching hook commands for PreToolUse with query: Read
+2025-12-17T14:07:48.839Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:07:48.839Z [DEBUG] Matched 1 unique hooks for query "Read" (1 before deduplication)
+2025-12-17T14:07:48.839Z [DEBUG] Getting matching hook commands for PreToolUse with query: Read
+2025-12-17T14:07:48.839Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:07:48.839Z [DEBUG] Matched 1 unique hooks for query "Read" (1 before deduplication)
+2025-12-17T14:07:49.829Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:07:50.746Z [DEBUG] Getting matching hook commands for PostToolUse with query: Read
+2025-12-17T14:07:50.746Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:07:50.746Z [DEBUG] Matched 1 unique hooks for query "Read" (1 before deduplication)
+2025-12-17T14:07:51.644Z [DEBUG] Getting matching hook commands for PostToolUse with query: Read
+2025-12-17T14:07:51.644Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:07:51.644Z [DEBUG] Matched 1 unique hooks for query "Read" (1 before deduplication)
+2025-12-17T14:07:51.673Z [DEBUG] Getting matching hook commands for PostToolUse with query: Read
+2025-12-17T14:07:51.673Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:07:51.673Z [DEBUG] Matched 1 unique hooks for query "Read" (1 before deduplication)
+2025-12-17T14:07:51.796Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:07:51.796Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:07:51.796Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:07:51.796Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:07:54.533Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:07:58.901Z [DEBUG] executePreToolHooks called for tool: TodoWrite
+2025-12-17T14:07:58.908Z [DEBUG] Getting matching hook commands for PreToolUse with query: TodoWrite
+2025-12-17T14:07:58.908Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:07:58.908Z [DEBUG] Matched 1 unique hooks for query "TodoWrite" (1 before deduplication)
+2025-12-17T14:07:59.049Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json.tmp.22168.1765980479049
+2025-12-17T14:07:59.056Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (6.5ms)
+2025-12-17T14:07:59.056Z [DEBUG] Temp file written successfully, size: 2 bytes
+2025-12-17T14:07:59.056Z [DEBUG] Renaming C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json.tmp.22168.1765980479049 to C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json
+2025-12-17T14:07:59.056Z [DEBUG] File C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json written atomically
+2025-12-17T14:07:59.056Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json.tmp.22168.1765980479056
+2025-12-17T14:07:59.065Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (9.0ms)
+2025-12-17T14:07:59.065Z [DEBUG] Temp file written successfully, size: 512 bytes
+2025-12-17T14:07:59.065Z [DEBUG] Renaming C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json.tmp.22168.1765980479056 to C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json
+2025-12-17T14:07:59.065Z [DEBUG] File C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json written atomically
+2025-12-17T14:07:59.078Z [DEBUG] Getting matching hook commands for PostToolUse with query: TodoWrite
+2025-12-17T14:07:59.078Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:07:59.078Z [DEBUG] Matched 1 unique hooks for query "TodoWrite" (1 before deduplication)
+2025-12-17T14:07:59.214Z [DEBUG] executePreToolHooks called for tool: Glob
+2025-12-17T14:07:59.222Z [DEBUG] Getting matching hook commands for PreToolUse with query: Glob
+2025-12-17T14:07:59.222Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:07:59.222Z [DEBUG] Matched 1 unique hooks for query "Glob" (1 before deduplication)
+2025-12-17T14:08:00.275Z [DEBUG] Getting matching hook commands for PostToolUse with query: Glob
+2025-12-17T14:08:00.275Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:08:00.275Z [DEBUG] Matched 1 unique hooks for query "Glob" (1 before deduplication)
+2025-12-17T14:08:00.402Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:08:00.402Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:08:00.402Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:08:00.402Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:08:03.858Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:08:13.296Z [DEBUG] executePreToolHooks called for tool: TodoWrite
+2025-12-17T14:08:13.302Z [DEBUG] Getting matching hook commands for PreToolUse with query: TodoWrite
+2025-12-17T14:08:13.302Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:08:13.302Z [DEBUG] Matched 1 unique hooks for query "TodoWrite" (1 before deduplication)
+2025-12-17T14:08:13.451Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json.tmp.22168.1765980493451
+2025-12-17T14:08:13.451Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:08:13.458Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (7.4ms)
+2025-12-17T14:08:13.458Z [DEBUG] Temp file written successfully, size: 2 bytes
+2025-12-17T14:08:13.458Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:08:13.458Z [DEBUG] Renaming C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json.tmp.22168.1765980493451 to C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json
+2025-12-17T14:08:13.459Z [DEBUG] File C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json written atomically
+2025-12-17T14:08:13.459Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json.tmp.22168.1765980493459
+2025-12-17T14:08:13.459Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:08:13.463Z [DEBUG] Temp file written successfully, size: 514 bytes
+2025-12-17T14:08:13.463Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:08:13.463Z [DEBUG] Renaming C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json.tmp.22168.1765980493459 to C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json
+2025-12-17T14:08:13.463Z [DEBUG] File C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json written atomically
+2025-12-17T14:08:13.474Z [DEBUG] Getting matching hook commands for PostToolUse with query: TodoWrite
+2025-12-17T14:08:13.474Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:08:13.474Z [DEBUG] Matched 1 unique hooks for query "TodoWrite" (1 before deduplication)
+2025-12-17T14:08:13.601Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:08:13.601Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:08:13.601Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:08:13.601Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:08:15.982Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:08:23.495Z [DEBUG] executePreToolHooks called for tool: Edit
+2025-12-17T14:08:23.500Z [DEBUG] Getting matching hook commands for PreToolUse with query: Edit
+2025-12-17T14:08:23.500Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:08:23.500Z [DEBUG] Matched 2 unique hooks for query "Edit" (2 before deduplication)
+2025-12-17T14:08:24.242Z [DEBUG] Writing to temp file: C:\users\tjn\.claude\skills\generic-code-reviewer\SKILL.md.tmp.22168.1765980504242
+2025-12-17T14:08:24.242Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:08:24.248Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (5.5ms)
+2025-12-17T14:08:24.248Z [DEBUG] Temp file written successfully, size: 2978 bytes
+2025-12-17T14:08:24.248Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:08:24.248Z [DEBUG] Renaming C:\users\tjn\.claude\skills\generic-code-reviewer\SKILL.md.tmp.22168.1765980504242 to C:\users\tjn\.claude\skills\generic-code-reviewer\SKILL.md
+2025-12-17T14:08:24.248Z [DEBUG] File C:\users\tjn\.claude\skills\generic-code-reviewer\SKILL.md written atomically
+2025-12-17T14:08:24.263Z [DEBUG] FileHistory: Tracked file modification for C:\users\tjn\.claude\skills\generic-code-reviewer\SKILL.md
+2025-12-17T14:08:24.276Z [DEBUG] Getting matching hook commands for PostToolUse with query: Edit
+2025-12-17T14:08:24.276Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:08:24.276Z [DEBUG] Matched 1 unique hooks for query "Edit" (1 before deduplication)
+2025-12-17T14:08:24.408Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:08:24.408Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:08:24.408Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:08:24.408Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:08:26.312Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:08:34.276Z [DEBUG] executePreToolHooks called for tool: Edit
+2025-12-17T14:08:34.282Z [DEBUG] Getting matching hook commands for PreToolUse with query: Edit
+2025-12-17T14:08:34.282Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:08:34.282Z [DEBUG] Matched 2 unique hooks for query "Edit" (2 before deduplication)
+2025-12-17T14:08:35.037Z [DEBUG] Writing to temp file: C:\users\tjn\.claude\skills\generic-code-reviewer\SKILL.md.tmp.22168.1765980515037
+2025-12-17T14:08:35.037Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:08:35.042Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (5.7ms)
+2025-12-17T14:08:35.043Z [DEBUG] Temp file written successfully, size: 3022 bytes
+2025-12-17T14:08:35.043Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:08:35.043Z [DEBUG] Renaming C:\users\tjn\.claude\skills\generic-code-reviewer\SKILL.md.tmp.22168.1765980515037 to C:\users\tjn\.claude\skills\generic-code-reviewer\SKILL.md
+2025-12-17T14:08:35.043Z [DEBUG] File C:\users\tjn\.claude\skills\generic-code-reviewer\SKILL.md written atomically
+2025-12-17T14:08:35.064Z [DEBUG] Getting matching hook commands for PostToolUse with query: Edit
+2025-12-17T14:08:35.064Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:08:35.064Z [DEBUG] Matched 1 unique hooks for query "Edit" (1 before deduplication)
+2025-12-17T14:08:35.193Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:08:35.193Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:08:35.193Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:08:35.193Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:08:37.639Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:08:50.109Z [DEBUG] executePreToolHooks called for tool: Edit
+2025-12-17T14:08:50.114Z [DEBUG] Getting matching hook commands for PreToolUse with query: Edit
+2025-12-17T14:08:50.114Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:08:50.114Z [DEBUG] Matched 2 unique hooks for query "Edit" (2 before deduplication)
+2025-12-17T14:08:50.915Z [DEBUG] Writing to temp file: C:\users\tjn\.claude\skills\generic-code-reviewer\SKILL.md.tmp.22168.1765980530915
+2025-12-17T14:08:50.915Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:08:50.920Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (5.0ms)
+2025-12-17T14:08:50.920Z [DEBUG] Temp file written successfully, size: 3682 bytes
+2025-12-17T14:08:50.920Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:08:50.920Z [DEBUG] Renaming C:\users\tjn\.claude\skills\generic-code-reviewer\SKILL.md.tmp.22168.1765980530915 to C:\users\tjn\.claude\skills\generic-code-reviewer\SKILL.md
+2025-12-17T14:08:50.920Z [DEBUG] File C:\users\tjn\.claude\skills\generic-code-reviewer\SKILL.md written atomically
+2025-12-17T14:08:50.938Z [DEBUG] Getting matching hook commands for PostToolUse with query: Edit
+2025-12-17T14:08:50.938Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:08:50.938Z [DEBUG] Matched 1 unique hooks for query "Edit" (1 before deduplication)
+2025-12-17T14:08:51.073Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:08:51.073Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:08:51.073Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:08:51.073Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:08:52.920Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:08:54.739Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-17T14:08:54.744Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-17T14:08:54.745Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:08:54.745Z [DEBUG] Matched 1 unique hooks for query "Bash" (1 before deduplication)
+2025-12-17T14:08:55.403Z [DEBUG] Session environment not yet supported on Windows
+2025-12-17T14:08:56.157Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-17T14:08:56.157Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:08:56.157Z [DEBUG] Matched 1 unique hooks for query "Bash" (1 before deduplication)
+2025-12-17T14:08:56.285Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:08:56.285Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:08:56.285Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:08:56.285Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:08:57.461Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:09:00.398Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:09:03.608Z [DEBUG] executePreToolHooks called for tool: TodoWrite
+2025-12-17T14:09:03.614Z [DEBUG] Getting matching hook commands for PreToolUse with query: TodoWrite
+2025-12-17T14:09:03.614Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:09:03.614Z [DEBUG] Matched 1 unique hooks for query "TodoWrite" (1 before deduplication)
+2025-12-17T14:09:03.756Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json.tmp.22168.1765980543756
+2025-12-17T14:09:03.756Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:09:03.763Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (6.9ms)
+2025-12-17T14:09:03.763Z [DEBUG] Temp file written successfully, size: 2 bytes
+2025-12-17T14:09:03.763Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:09:03.763Z [DEBUG] Renaming C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json.tmp.22168.1765980543756 to C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json
+2025-12-17T14:09:03.763Z [DEBUG] File C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json written atomically
+2025-12-17T14:09:03.763Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json.tmp.22168.1765980543763
+2025-12-17T14:09:03.763Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:09:03.767Z [DEBUG] Temp file written successfully, size: 516 bytes
+2025-12-17T14:09:03.767Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:09:03.767Z [DEBUG] Renaming C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json.tmp.22168.1765980543763 to C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json
+2025-12-17T14:09:03.767Z [DEBUG] File C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json written atomically
+2025-12-17T14:09:03.777Z [DEBUG] Getting matching hook commands for PostToolUse with query: TodoWrite
+2025-12-17T14:09:03.777Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:09:03.777Z [DEBUG] Matched 1 unique hooks for query "TodoWrite" (1 before deduplication)
+2025-12-17T14:09:03.910Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:09:03.910Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:09:03.910Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:09:03.910Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:09:05.903Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:09:07.393Z [DEBUG] executePreToolHooks called for tool: Read
+2025-12-17T14:09:07.398Z [DEBUG] Getting matching hook commands for PreToolUse with query: Read
+2025-12-17T14:09:07.398Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:09:07.398Z [DEBUG] Matched 1 unique hooks for query "Read" (1 before deduplication)
+2025-12-17T14:09:08.407Z [DEBUG] Getting matching hook commands for PostToolUse with query: Read
+2025-12-17T14:09:08.407Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:09:08.407Z [DEBUG] Matched 1 unique hooks for query "Read" (1 before deduplication)
+2025-12-17T14:09:08.534Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:09:08.534Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:09:08.534Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:09:08.534Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:09:11.229Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:09:20.559Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-17T14:09:20.565Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-17T14:09:20.565Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:09:20.565Z [DEBUG] Matched 1 unique hooks for query "Bash" (1 before deduplication)
+2025-12-17T14:09:20.813Z [DEBUG] Session environment not yet supported on Windows
+2025-12-17T14:09:21.624Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-17T14:09:21.624Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:09:21.624Z [DEBUG] Matched 1 unique hooks for query "Bash" (1 before deduplication)
+2025-12-17T14:09:21.757Z [DEBUG] executePreToolHooks called for tool: TodoWrite
+2025-12-17T14:09:21.765Z [DEBUG] Getting matching hook commands for PreToolUse with query: TodoWrite
+2025-12-17T14:09:21.765Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:09:21.765Z [DEBUG] Matched 1 unique hooks for query "TodoWrite" (1 before deduplication)
+2025-12-17T14:09:21.911Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json.tmp.22168.1765980561911
+2025-12-17T14:09:21.911Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:09:21.919Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (8.0ms)
+2025-12-17T14:09:21.919Z [DEBUG] Temp file written successfully, size: 2 bytes
+2025-12-17T14:09:21.919Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:09:21.919Z [DEBUG] Renaming C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json.tmp.22168.1765980561911 to C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json
+2025-12-17T14:09:21.919Z [DEBUG] File C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json written atomically
+2025-12-17T14:09:21.920Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json.tmp.22168.1765980561920
+2025-12-17T14:09:21.920Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:09:21.927Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (7.1ms)
+2025-12-17T14:09:21.927Z [DEBUG] Temp file written successfully, size: 2 bytes
+2025-12-17T14:09:21.927Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:09:21.927Z [DEBUG] Renaming C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json.tmp.22168.1765980561920 to C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json
+2025-12-17T14:09:21.927Z [DEBUG] File C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json written atomically
+2025-12-17T14:09:21.944Z [DEBUG] Getting matching hook commands for PostToolUse with query: TodoWrite
+2025-12-17T14:09:21.944Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:09:21.944Z [DEBUG] Matched 1 unique hooks for query "TodoWrite" (1 before deduplication)
+2025-12-17T14:09:22.070Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:09:22.070Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:09:22.070Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:09:22.070Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:09:22.545Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:09:24.122Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:09:41.317Z [DEBUG] executePreToolHooks called for tool: Write
+2025-12-17T14:09:41.323Z [DEBUG] Getting matching hook commands for PreToolUse with query: Write
+2025-12-17T14:09:41.323Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:09:41.323Z [DEBUG] Matched 2 unique hooks for query "Write" (2 before deduplication)
+2025-12-17T14:09:42.111Z [DEBUG] FileHistory: Tracked file modification for C:\users\tjn\.claude\.planning\phases\02-base-generic-skills\02-01-SUMMARY.md
+2025-12-17T14:09:42.280Z [DEBUG] rg error (signal=null, code=2, stderr: rg: C:\users\tjn\.claude\nul: Incorrect function. (os error 1)
+), 5311 results
+2025-12-17T14:09:42.284Z [DEBUG] Writing to temp file: C:\users\tjn\.claude\.planning\phases\02-base-generic-skills\02-01-SUMMARY.md.tmp.22168.1765980582284
+2025-12-17T14:09:42.304Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (19.7ms)
+2025-12-17T14:09:42.304Z [DEBUG] Temp file written successfully, size: 2018 bytes
+2025-12-17T14:09:42.304Z [DEBUG] Renaming C:\users\tjn\.claude\.planning\phases\02-base-generic-skills\02-01-SUMMARY.md.tmp.22168.1765980582284 to C:\users\tjn\.claude\.planning\phases\02-base-generic-skills\02-01-SUMMARY.md
+2025-12-17T14:09:42.304Z [DEBUG] File C:\users\tjn\.claude\.planning\phases\02-base-generic-skills\02-01-SUMMARY.md written atomically
+2025-12-17T14:09:42.315Z [DEBUG] Getting matching hook commands for PostToolUse with query: Write
+2025-12-17T14:09:42.315Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:09:42.315Z [DEBUG] Matched 1 unique hooks for query "Write" (1 before deduplication)
+2025-12-17T14:09:42.444Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:09:42.444Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:09:42.444Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:09:42.444Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:09:44.337Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:09:48.606Z [DEBUG] executePreToolHooks called for tool: Edit
+2025-12-17T14:09:48.611Z [DEBUG] Getting matching hook commands for PreToolUse with query: Edit
+2025-12-17T14:09:48.611Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:09:48.611Z [DEBUG] Matched 2 unique hooks for query "Edit" (2 before deduplication)
+2025-12-17T14:09:49.352Z [DEBUG] Writing to temp file: C:\users\tjn\.claude\.planning\STATE.md.tmp.22168.1765980589352
+2025-12-17T14:09:49.352Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:09:49.357Z [DEBUG] Temp file written successfully, size: 2244 bytes
+2025-12-17T14:09:49.357Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:09:49.357Z [DEBUG] Renaming C:\users\tjn\.claude\.planning\STATE.md.tmp.22168.1765980589352 to C:\users\tjn\.claude\.planning\STATE.md
+2025-12-17T14:09:49.357Z [DEBUG] File C:\users\tjn\.claude\.planning\STATE.md written atomically
+2025-12-17T14:09:49.374Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (9.3ms)
+2025-12-17T14:09:49.376Z [DEBUG] FileHistory: Tracked file modification for C:\users\tjn\.claude\.planning\STATE.md
+2025-12-17T14:09:49.389Z [DEBUG] Getting matching hook commands for PostToolUse with query: Edit
+2025-12-17T14:09:49.389Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:09:49.389Z [DEBUG] Matched 1 unique hooks for query "Edit" (1 before deduplication)
+2025-12-17T14:09:49.527Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:09:49.527Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:09:49.527Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:09:49.527Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:09:51.627Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:09:57.425Z [DEBUG] executePreToolHooks called for tool: Edit
+2025-12-17T14:09:57.430Z [DEBUG] Getting matching hook commands for PreToolUse with query: Edit
+2025-12-17T14:09:57.430Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:09:57.430Z [DEBUG] Matched 2 unique hooks for query "Edit" (2 before deduplication)
+2025-12-17T14:09:58.203Z [DEBUG] Writing to temp file: C:\users\tjn\.claude\.planning\STATE.md.tmp.22168.1765980598203
+2025-12-17T14:09:58.203Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:09:58.207Z [DEBUG] Temp file written successfully, size: 2298 bytes
+2025-12-17T14:09:58.207Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:09:58.207Z [DEBUG] Renaming C:\users\tjn\.claude\.planning\STATE.md.tmp.22168.1765980598203 to C:\users\tjn\.claude\.planning\STATE.md
+2025-12-17T14:09:58.207Z [DEBUG] File C:\users\tjn\.claude\.planning\STATE.md written atomically
+2025-12-17T14:09:58.226Z [DEBUG] Getting matching hook commands for PostToolUse with query: Edit
+2025-12-17T14:09:58.226Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:09:58.226Z [DEBUG] Matched 1 unique hooks for query "Edit" (1 before deduplication)
+2025-12-17T14:09:58.353Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:09:58.353Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:09:58.353Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:09:58.353Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:10:00.139Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:10:02.933Z [DEBUG] executePreToolHooks called for tool: Edit
+2025-12-17T14:10:02.938Z [DEBUG] Getting matching hook commands for PreToolUse with query: Edit
+2025-12-17T14:10:02.938Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:10:02.938Z [DEBUG] Matched 2 unique hooks for query "Edit" (2 before deduplication)
+2025-12-17T14:10:03.725Z [DEBUG] Writing to temp file: C:\users\tjn\.claude\.planning\STATE.md.tmp.22168.1765980603725
+2025-12-17T14:10:03.725Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:10:03.735Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (10.4ms)
+2025-12-17T14:10:03.735Z [DEBUG] Temp file written successfully, size: 2319 bytes
+2025-12-17T14:10:03.735Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:10:03.735Z [DEBUG] Renaming C:\users\tjn\.claude\.planning\STATE.md.tmp.22168.1765980603725 to C:\users\tjn\.claude\.planning\STATE.md
+2025-12-17T14:10:03.735Z [DEBUG] File C:\users\tjn\.claude\.planning\STATE.md written atomically
+2025-12-17T14:10:03.753Z [DEBUG] Getting matching hook commands for PostToolUse with query: Edit
+2025-12-17T14:10:03.753Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:10:03.753Z [DEBUG] Matched 1 unique hooks for query "Edit" (1 before deduplication)
+2025-12-17T14:10:03.879Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:10:03.879Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:10:03.879Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:10:03.879Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:10:06.667Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:10:09.636Z [DEBUG] executePreToolHooks called for tool: Edit
+2025-12-17T14:10:09.641Z [DEBUG] Getting matching hook commands for PreToolUse with query: Edit
+2025-12-17T14:10:09.641Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:10:09.641Z [DEBUG] Matched 2 unique hooks for query "Edit" (2 before deduplication)
+2025-12-17T14:10:10.446Z [DEBUG] Writing to temp file: C:\users\tjn\.claude\.planning\ROADMAP.md.tmp.22168.1765980610446
+2025-12-17T14:10:10.446Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:10:10.452Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (5.8ms)
+2025-12-17T14:10:10.452Z [DEBUG] Temp file written successfully, size: 5865 bytes
+2025-12-17T14:10:10.452Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:10:10.452Z [DEBUG] Renaming C:\users\tjn\.claude\.planning\ROADMAP.md.tmp.22168.1765980610446 to C:\users\tjn\.claude\.planning\ROADMAP.md
+2025-12-17T14:10:10.452Z [DEBUG] File C:\users\tjn\.claude\.planning\ROADMAP.md written atomically
+2025-12-17T14:10:10.465Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (5.6ms)
+2025-12-17T14:10:10.467Z [DEBUG] FileHistory: Tracked file modification for C:\users\tjn\.claude\.planning\ROADMAP.md
+2025-12-17T14:10:10.479Z [DEBUG] Getting matching hook commands for PostToolUse with query: Edit
+2025-12-17T14:10:10.479Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:10:10.479Z [DEBUG] Matched 1 unique hooks for query "Edit" (1 before deduplication)
+2025-12-17T14:10:10.609Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:10:10.609Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:10:10.609Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:10:10.609Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:10:12.549Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:10:14.881Z [DEBUG] executePreToolHooks called for tool: Edit
+2025-12-17T14:10:14.887Z [DEBUG] Getting matching hook commands for PreToolUse with query: Edit
+2025-12-17T14:10:14.887Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:10:14.887Z [DEBUG] Matched 2 unique hooks for query "Edit" (2 before deduplication)
+2025-12-17T14:10:15.671Z [DEBUG] Writing to temp file: C:\users\tjn\.claude\.planning\ROADMAP.md.tmp.22168.1765980615671
+2025-12-17T14:10:15.671Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:10:15.677Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (6.2ms)
+2025-12-17T14:10:15.677Z [DEBUG] Temp file written successfully, size: 5865 bytes
+2025-12-17T14:10:15.677Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:10:15.677Z [DEBUG] Renaming C:\users\tjn\.claude\.planning\ROADMAP.md.tmp.22168.1765980615671 to C:\users\tjn\.claude\.planning\ROADMAP.md
+2025-12-17T14:10:15.677Z [DEBUG] File C:\users\tjn\.claude\.planning\ROADMAP.md written atomically
+2025-12-17T14:10:15.696Z [DEBUG] Getting matching hook commands for PostToolUse with query: Edit
+2025-12-17T14:10:15.696Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:10:15.696Z [DEBUG] Matched 1 unique hooks for query "Edit" (1 before deduplication)
+2025-12-17T14:10:15.822Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:10:15.822Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:10:15.822Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:10:15.822Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:10:18.120Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:10:20.184Z [DEBUG] executePreToolHooks called for tool: Edit
+2025-12-17T14:10:20.189Z [DEBUG] Getting matching hook commands for PreToolUse with query: Edit
+2025-12-17T14:10:20.189Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:10:20.189Z [DEBUG] Matched 2 unique hooks for query "Edit" (2 before deduplication)
+2025-12-17T14:10:20.912Z [DEBUG] Writing to temp file: C:\users\tjn\.claude\.planning\ROADMAP.md.tmp.22168.1765980620912
+2025-12-17T14:10:20.912Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:10:20.917Z [DEBUG] Temp file written successfully, size: 5865 bytes
+2025-12-17T14:10:20.917Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:10:20.917Z [DEBUG] Renaming C:\users\tjn\.claude\.planning\ROADMAP.md.tmp.22168.1765980620912 to C:\users\tjn\.claude\.planning\ROADMAP.md
+2025-12-17T14:10:20.918Z [DEBUG] File C:\users\tjn\.claude\.planning\ROADMAP.md written atomically
+2025-12-17T14:10:20.936Z [DEBUG] Getting matching hook commands for PostToolUse with query: Edit
+2025-12-17T14:10:20.936Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:10:20.936Z [DEBUG] Matched 1 unique hooks for query "Edit" (1 before deduplication)
+2025-12-17T14:10:21.069Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:10:21.069Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:10:21.069Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:10:21.069Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:10:23.013Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:10:25.926Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-17T14:10:25.931Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-17T14:10:25.931Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:10:25.931Z [DEBUG] Matched 1 unique hooks for query "Bash" (1 before deduplication)
+2025-12-17T14:10:26.589Z [DEBUG] Session environment not yet supported on Windows
+2025-12-17T14:10:27.481Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-17T14:10:27.481Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:10:27.481Z [DEBUG] Matched 1 unique hooks for query "Bash" (1 before deduplication)
+2025-12-17T14:10:27.609Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:10:27.609Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:10:27.610Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:10:27.610Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:10:27.993Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:10:29.904Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:10:35.019Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-17T14:10:35.027Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-17T14:10:35.027Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:10:35.027Z [DEBUG] Matched 1 unique hooks for query "Bash" (1 before deduplication)
+2025-12-17T14:10:35.759Z [DEBUG] Session environment not yet supported on Windows
+2025-12-17T14:10:36.690Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-17T14:10:36.690Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:10:36.690Z [DEBUG] Matched 1 unique hooks for query "Bash" (1 before deduplication)
+2025-12-17T14:10:36.822Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:10:36.822Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:10:36.822Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:10:36.822Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:10:37.637Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:10:38.860Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:10:41.574Z [DEBUG] Language not supported while highlighting code, falling back to markdown:
+2025-12-17T14:10:43.910Z [DEBUG] executePreToolHooks called for tool: Read
+2025-12-17T14:10:43.917Z [DEBUG] Getting matching hook commands for PreToolUse with query: Read
+2025-12-17T14:10:43.917Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:10:43.917Z [DEBUG] Matched 1 unique hooks for query "Read" (1 before deduplication)
+2025-12-17T14:10:44.956Z [DEBUG] Getting matching hook commands for PostToolUse with query: Read
+2025-12-17T14:10:44.956Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:10:44.956Z [DEBUG] Matched 1 unique hooks for query "Read" (1 before deduplication)
+2025-12-17T14:10:45.090Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-17T14:10:45.097Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-17T14:10:45.097Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:10:45.097Z [DEBUG] Matched 1 unique hooks for query "Bash" (1 before deduplication)
+2025-12-17T14:10:45.395Z [DEBUG] Session environment not yet supported on Windows
+2025-12-17T14:10:46.248Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-17T14:10:46.248Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:10:46.248Z [DEBUG] Matched 1 unique hooks for query "Bash" (1 before deduplication)
+2025-12-17T14:10:46.376Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:10:46.376Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:10:46.376Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:10:46.376Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:10:46.974Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:10:49.852Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:10:53.470Z [DEBUG] executePreToolHooks called for tool: TodoWrite
+2025-12-17T14:10:53.476Z [DEBUG] Getting matching hook commands for PreToolUse with query: TodoWrite
+2025-12-17T14:10:53.476Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:10:53.476Z [DEBUG] Matched 1 unique hooks for query "TodoWrite" (1 before deduplication)
+2025-12-17T14:10:53.628Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json.tmp.22168.1765980653628
+2025-12-17T14:10:53.628Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:10:53.640Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (11.4ms)
+2025-12-17T14:10:53.640Z [DEBUG] Temp file written successfully, size: 2 bytes
+2025-12-17T14:10:53.640Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:10:53.640Z [DEBUG] Renaming C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json.tmp.22168.1765980653628 to C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json
+2025-12-17T14:10:53.640Z [DEBUG] File C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json written atomically
+2025-12-17T14:10:53.640Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json.tmp.22168.1765980653640
+2025-12-17T14:10:53.640Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:10:53.645Z [DEBUG] Temp file written successfully, size: 529 bytes
+2025-12-17T14:10:53.645Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:10:53.645Z [DEBUG] Renaming C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json.tmp.22168.1765980653640 to C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json
+2025-12-17T14:10:53.645Z [DEBUG] File C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json written atomically
+2025-12-17T14:10:53.659Z [DEBUG] Getting matching hook commands for PostToolUse with query: TodoWrite
+2025-12-17T14:10:53.659Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:10:53.659Z [DEBUG] Matched 1 unique hooks for query "TodoWrite" (1 before deduplication)
+2025-12-17T14:10:53.860Z [DEBUG] executePreToolHooks called for tool: Read
+2025-12-17T14:10:53.886Z [DEBUG] Getting matching hook commands for PreToolUse with query: Read
+2025-12-17T14:10:53.886Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:10:53.886Z [DEBUG] Matched 1 unique hooks for query "Read" (1 before deduplication)
+2025-12-17T14:10:54.827Z [DEBUG] Getting matching hook commands for PostToolUse with query: Read
+2025-12-17T14:10:54.827Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:10:54.827Z [DEBUG] Matched 1 unique hooks for query "Read" (1 before deduplication)
+2025-12-17T14:10:54.958Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:10:54.958Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:10:54.958Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:10:54.958Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:10:57.426Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:11:07.517Z [DEBUG] executePreToolHooks called for tool: Edit
+2025-12-17T14:11:07.522Z [DEBUG] Getting matching hook commands for PreToolUse with query: Edit
+2025-12-17T14:11:07.522Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:11:07.522Z [DEBUG] Matched 2 unique hooks for query "Edit" (2 before deduplication)
+2025-12-17T14:11:08.325Z [DEBUG] Writing to temp file: C:\users\tjn\.claude\skills\generic-design-system\SKILL.md.tmp.22168.1765980668325
+2025-12-17T14:11:08.325Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:11:08.330Z [DEBUG] Temp file written successfully, size: 3469 bytes
+2025-12-17T14:11:08.330Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:11:08.330Z [DEBUG] Renaming C:\users\tjn\.claude\skills\generic-design-system\SKILL.md.tmp.22168.1765980668325 to C:\users\tjn\.claude\skills\generic-design-system\SKILL.md
+2025-12-17T14:11:08.331Z [DEBUG] File C:\users\tjn\.claude\skills\generic-design-system\SKILL.md written atomically
+2025-12-17T14:11:08.345Z [DEBUG] FileHistory: Tracked file modification for C:\users\tjn\.claude\skills\generic-design-system\SKILL.md
+2025-12-17T14:11:08.358Z [DEBUG] Getting matching hook commands for PostToolUse with query: Edit
+2025-12-17T14:11:08.358Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:11:08.358Z [DEBUG] Matched 1 unique hooks for query "Edit" (1 before deduplication)
+2025-12-17T14:11:08.482Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:11:08.482Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:11:08.482Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:11:08.482Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:11:10.552Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:11:13.165Z [DEBUG] executePreToolHooks called for tool: TodoWrite
+2025-12-17T14:11:13.183Z [DEBUG] Getting matching hook commands for PreToolUse with query: TodoWrite
+2025-12-17T14:11:13.183Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:11:13.183Z [DEBUG] Matched 1 unique hooks for query "TodoWrite" (1 before deduplication)
+2025-12-17T14:11:13.327Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json.tmp.22168.1765980673327
+2025-12-17T14:11:13.327Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:11:13.334Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (7.3ms)
+2025-12-17T14:11:13.334Z [DEBUG] Temp file written successfully, size: 2 bytes
+2025-12-17T14:11:13.334Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:11:13.334Z [DEBUG] Renaming C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json.tmp.22168.1765980673327 to C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json
+2025-12-17T14:11:13.335Z [DEBUG] File C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json written atomically
+2025-12-17T14:11:13.335Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json.tmp.22168.1765980673335
+2025-12-17T14:11:13.335Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:11:13.344Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (8.4ms)
+2025-12-17T14:11:13.344Z [DEBUG] Temp file written successfully, size: 531 bytes
+2025-12-17T14:11:13.344Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:11:13.344Z [DEBUG] Renaming C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json.tmp.22168.1765980673335 to C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json
+2025-12-17T14:11:13.344Z [DEBUG] File C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json written atomically
+2025-12-17T14:11:13.356Z [DEBUG] Getting matching hook commands for PostToolUse with query: TodoWrite
+2025-12-17T14:11:13.356Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:11:13.356Z [DEBUG] Matched 1 unique hooks for query "TodoWrite" (1 before deduplication)
+2025-12-17T14:11:13.483Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:11:13.483Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:11:13.483Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:11:13.483Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:11:15.185Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:11:24.716Z [DEBUG] executePreToolHooks called for tool: Edit
+2025-12-17T14:11:24.722Z [DEBUG] Getting matching hook commands for PreToolUse with query: Edit
+2025-12-17T14:11:24.722Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:11:24.722Z [DEBUG] Matched 2 unique hooks for query "Edit" (2 before deduplication)
+2025-12-17T14:11:25.453Z [DEBUG] Writing to temp file: C:\users\tjn\.claude\skills\generic-design-system\SKILL.md.tmp.22168.1765980685453
+2025-12-17T14:11:25.453Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:11:25.458Z [DEBUG] Temp file written successfully, size: 4164 bytes
+2025-12-17T14:11:25.458Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:11:25.458Z [DEBUG] Renaming C:\users\tjn\.claude\skills\generic-design-system\SKILL.md.tmp.22168.1765980685453 to C:\users\tjn\.claude\skills\generic-design-system\SKILL.md
+2025-12-17T14:11:25.459Z [DEBUG] File C:\users\tjn\.claude\skills\generic-design-system\SKILL.md written atomically
+2025-12-17T14:11:25.478Z [DEBUG] Getting matching hook commands for PostToolUse with query: Edit
+2025-12-17T14:11:25.478Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:11:25.478Z [DEBUG] Matched 1 unique hooks for query "Edit" (1 before deduplication)
+2025-12-17T14:11:25.612Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:11:25.612Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:11:25.612Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:11:25.612Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:11:27.725Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:11:30.578Z [DEBUG] executePreToolHooks called for tool: TodoWrite
+2025-12-17T14:11:30.599Z [DEBUG] Getting matching hook commands for PreToolUse with query: TodoWrite
+2025-12-17T14:11:30.599Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:11:30.599Z [DEBUG] Matched 1 unique hooks for query "TodoWrite" (1 before deduplication)
+2025-12-17T14:11:30.749Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json.tmp.22168.1765980690749
+2025-12-17T14:11:30.749Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:11:30.757Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (7.4ms)
+2025-12-17T14:11:30.757Z [DEBUG] Temp file written successfully, size: 2 bytes
+2025-12-17T14:11:30.757Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:11:30.757Z [DEBUG] Renaming C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json.tmp.22168.1765980690749 to C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json
+2025-12-17T14:11:30.757Z [DEBUG] File C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json written atomically
+2025-12-17T14:11:30.757Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json.tmp.22168.1765980690757
+2025-12-17T14:11:30.757Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:11:30.762Z [DEBUG] Temp file written successfully, size: 533 bytes
+2025-12-17T14:11:30.762Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:11:30.762Z [DEBUG] Renaming C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json.tmp.22168.1765980690757 to C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json
+2025-12-17T14:11:30.763Z [DEBUG] File C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json written atomically
+2025-12-17T14:11:30.774Z [DEBUG] Getting matching hook commands for PostToolUse with query: TodoWrite
+2025-12-17T14:11:30.774Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:11:30.774Z [DEBUG] Matched 1 unique hooks for query "TodoWrite" (1 before deduplication)
+2025-12-17T14:11:30.899Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:11:30.899Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:11:30.899Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:11:30.899Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:11:32.978Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:11:39.586Z [DEBUG] executePreToolHooks called for tool: Edit
+2025-12-17T14:11:39.592Z [DEBUG] Getting matching hook commands for PreToolUse with query: Edit
+2025-12-17T14:11:39.592Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:11:39.592Z [DEBUG] Matched 2 unique hooks for query "Edit" (2 before deduplication)
+2025-12-17T14:11:40.332Z [DEBUG] Writing to temp file: C:\users\tjn\.claude\skills\generic-design-system\SKILL.md.tmp.22168.1765980700332
+2025-12-17T14:11:40.332Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:11:40.337Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (5.0ms)
+2025-12-17T14:11:40.337Z [DEBUG] Temp file written successfully, size: 4572 bytes
+2025-12-17T14:11:40.337Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:11:40.337Z [DEBUG] Renaming C:\users\tjn\.claude\skills\generic-design-system\SKILL.md.tmp.22168.1765980700332 to C:\users\tjn\.claude\skills\generic-design-system\SKILL.md
+2025-12-17T14:11:40.337Z [DEBUG] File C:\users\tjn\.claude\skills\generic-design-system\SKILL.md written atomically
+2025-12-17T14:11:40.362Z [DEBUG] Getting matching hook commands for PostToolUse with query: Edit
+2025-12-17T14:11:40.362Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:11:40.362Z [DEBUG] Matched 1 unique hooks for query "Edit" (1 before deduplication)
+2025-12-17T14:11:40.492Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:11:40.492Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:11:40.492Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:11:40.492Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:11:43.769Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:11:48.858Z [DEBUG] executePreToolHooks called for tool: Edit
+2025-12-17T14:11:48.864Z [DEBUG] Getting matching hook commands for PreToolUse with query: Edit
+2025-12-17T14:11:48.864Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:11:48.864Z [DEBUG] Matched 2 unique hooks for query "Edit" (2 before deduplication)
+2025-12-17T14:11:49.494Z [DEBUG] Writing to temp file: C:\users\tjn\.claude\skills\generic-design-system\SKILL.md.tmp.22168.1765980709494
+2025-12-17T14:11:49.495Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:11:49.500Z [DEBUG] Temp file written successfully, size: 4851 bytes
+2025-12-17T14:11:49.500Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:11:49.500Z [DEBUG] Renaming C:\users\tjn\.claude\skills\generic-design-system\SKILL.md.tmp.22168.1765980709494 to C:\users\tjn\.claude\skills\generic-design-system\SKILL.md
+2025-12-17T14:11:49.500Z [DEBUG] File C:\users\tjn\.claude\skills\generic-design-system\SKILL.md written atomically
+2025-12-17T14:11:49.517Z [DEBUG] Getting matching hook commands for PostToolUse with query: Edit
+2025-12-17T14:11:49.517Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:11:49.517Z [DEBUG] Matched 1 unique hooks for query "Edit" (1 before deduplication)
+2025-12-17T14:11:49.645Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:11:49.645Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:11:49.645Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:11:49.645Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:11:51.746Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:11:52.923Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-17T14:11:52.933Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-17T14:11:52.933Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:11:52.933Z [DEBUG] Matched 1 unique hooks for query "Bash" (1 before deduplication)
+2025-12-17T14:11:53.592Z [DEBUG] Session environment not yet supported on Windows
+2025-12-17T14:11:54.276Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-17T14:11:54.276Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:11:54.276Z [DEBUG] Matched 1 unique hooks for query "Bash" (1 before deduplication)
+2025-12-17T14:11:54.403Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:11:54.403Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:11:54.403Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:11:54.403Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:11:55.196Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:11:56.512Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:12:01.653Z [DEBUG] executePreToolHooks called for tool: TodoWrite
+2025-12-17T14:12:01.659Z [DEBUG] Getting matching hook commands for PreToolUse with query: TodoWrite
+2025-12-17T14:12:01.659Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:12:01.659Z [DEBUG] Matched 1 unique hooks for query "TodoWrite" (1 before deduplication)
+2025-12-17T14:12:01.805Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json.tmp.22168.1765980721805
+2025-12-17T14:12:01.806Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:12:01.812Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (6.8ms)
+2025-12-17T14:12:01.812Z [DEBUG] Temp file written successfully, size: 2 bytes
+2025-12-17T14:12:01.812Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:12:01.812Z [DEBUG] Renaming C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json.tmp.22168.1765980721805 to C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json
+2025-12-17T14:12:01.813Z [DEBUG] File C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json written atomically
+2025-12-17T14:12:01.813Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json.tmp.22168.1765980721813
+2025-12-17T14:12:01.813Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:12:01.819Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (6.2ms)
+2025-12-17T14:12:01.819Z [DEBUG] Temp file written successfully, size: 2 bytes
+2025-12-17T14:12:01.819Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:12:01.819Z [DEBUG] Renaming C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json.tmp.22168.1765980721813 to C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json
+2025-12-17T14:12:01.819Z [DEBUG] File C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json written atomically
+2025-12-17T14:12:01.831Z [DEBUG] Getting matching hook commands for PostToolUse with query: TodoWrite
+2025-12-17T14:12:01.831Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:12:01.831Z [DEBUG] Matched 1 unique hooks for query "TodoWrite" (1 before deduplication)
+2025-12-17T14:12:01.957Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-17T14:12:01.964Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-17T14:12:01.964Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:12:01.964Z [DEBUG] Matched 1 unique hooks for query "Bash" (1 before deduplication)
+2025-12-17T14:12:02.244Z [DEBUG] Session environment not yet supported on Windows
+2025-12-17T14:12:03.137Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-17T14:12:03.137Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:12:03.137Z [DEBUG] Matched 1 unique hooks for query "Bash" (1 before deduplication)
+2025-12-17T14:12:03.266Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:12:03.266Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:12:03.266Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:12:03.266Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:12:03.919Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:12:06.846Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:12:27.321Z [DEBUG] executePreToolHooks called for tool: Write
+2025-12-17T14:12:27.328Z [DEBUG] Getting matching hook commands for PreToolUse with query: Write
+2025-12-17T14:12:27.328Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:12:27.328Z [DEBUG] Matched 2 unique hooks for query "Write" (2 before deduplication)
+2025-12-17T14:12:28.079Z [DEBUG] Writing to temp file: C:\users\tjn\.claude\.planning\phases\02-base-generic-skills\02-02-SUMMARY.md.tmp.22168.1765980748079
+2025-12-17T14:12:28.083Z [DEBUG] Temp file written successfully, size: 1457 bytes
+2025-12-17T14:12:28.083Z [DEBUG] Renaming C:\users\tjn\.claude\.planning\phases\02-base-generic-skills\02-02-SUMMARY.md.tmp.22168.1765980748079 to C:\users\tjn\.claude\.planning\phases\02-base-generic-skills\02-02-SUMMARY.md
+2025-12-17T14:12:28.083Z [DEBUG] File C:\users\tjn\.claude\.planning\phases\02-base-generic-skills\02-02-SUMMARY.md written atomically
+2025-12-17T14:12:28.096Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (5.2ms)
+2025-12-17T14:12:28.097Z [DEBUG] FileHistory: Tracked file modification for C:\users\tjn\.claude\.planning\phases\02-base-generic-skills\02-02-SUMMARY.md
+2025-12-17T14:12:28.110Z [DEBUG] Getting matching hook commands for PostToolUse with query: Write
+2025-12-17T14:12:28.110Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:12:28.111Z [DEBUG] Matched 1 unique hooks for query "Write" (1 before deduplication)
+2025-12-17T14:12:28.244Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:12:28.244Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:12:28.244Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:12:28.244Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:12:32.412Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:12:36.681Z [DEBUG] executePreToolHooks called for tool: Edit
+2025-12-17T14:12:36.686Z [DEBUG] Getting matching hook commands for PreToolUse with query: Edit
+2025-12-17T14:12:36.686Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:12:36.686Z [DEBUG] Matched 2 unique hooks for query "Edit" (2 before deduplication)
+2025-12-17T14:12:37.446Z [DEBUG] Writing to temp file: C:\users\tjn\.claude\.planning\STATE.md.tmp.22168.1765980757446
+2025-12-17T14:12:37.446Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:12:37.451Z [DEBUG] Temp file written successfully, size: 2319 bytes
+2025-12-17T14:12:37.451Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:12:37.451Z [DEBUG] Renaming C:\users\tjn\.claude\.planning\STATE.md.tmp.22168.1765980757446 to C:\users\tjn\.claude\.planning\STATE.md
+2025-12-17T14:12:37.451Z [DEBUG] File C:\users\tjn\.claude\.planning\STATE.md written atomically
+2025-12-17T14:12:37.472Z [DEBUG] Getting matching hook commands for PostToolUse with query: Edit
+2025-12-17T14:12:37.472Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:12:37.472Z [DEBUG] Matched 1 unique hooks for query "Edit" (1 before deduplication)
+2025-12-17T14:12:37.601Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:12:37.601Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:12:37.601Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:12:37.601Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:12:39.612Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:12:45.405Z [DEBUG] executePreToolHooks called for tool: Edit
+2025-12-17T14:12:45.410Z [DEBUG] Getting matching hook commands for PreToolUse with query: Edit
+2025-12-17T14:12:45.410Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:12:45.410Z [DEBUG] Matched 2 unique hooks for query "Edit" (2 before deduplication)
+2025-12-17T14:12:46.217Z [DEBUG] Writing to temp file: C:\users\tjn\.claude\.planning\STATE.md.tmp.22168.1765980766217
+2025-12-17T14:12:46.217Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:12:46.222Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (5.0ms)
+2025-12-17T14:12:46.222Z [DEBUG] Temp file written successfully, size: 2328 bytes
+2025-12-17T14:12:46.223Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:12:46.223Z [DEBUG] Renaming C:\users\tjn\.claude\.planning\STATE.md.tmp.22168.1765980766217 to C:\users\tjn\.claude\.planning\STATE.md
+2025-12-17T14:12:46.223Z [DEBUG] File C:\users\tjn\.claude\.planning\STATE.md written atomically
+2025-12-17T14:12:46.239Z [DEBUG] Getting matching hook commands for PostToolUse with query: Edit
+2025-12-17T14:12:46.239Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:12:46.240Z [DEBUG] Matched 1 unique hooks for query "Edit" (1 before deduplication)
+2025-12-17T14:12:46.367Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:12:46.367Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:12:46.367Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:12:46.367Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:12:50.077Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:12:53.172Z [DEBUG] executePreToolHooks called for tool: Edit
+2025-12-17T14:12:53.178Z [DEBUG] Getting matching hook commands for PreToolUse with query: Edit
+2025-12-17T14:12:53.178Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:12:53.178Z [DEBUG] Matched 2 unique hooks for query "Edit" (2 before deduplication)
+2025-12-17T14:12:53.946Z [DEBUG] Writing to temp file: C:\users\tjn\.claude\.planning\STATE.md.tmp.22168.1765980773946
+2025-12-17T14:12:53.946Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:12:53.950Z [DEBUG] Temp file written successfully, size: 2328 bytes
+2025-12-17T14:12:53.950Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:12:53.950Z [DEBUG] Renaming C:\users\tjn\.claude\.planning\STATE.md.tmp.22168.1765980773946 to C:\users\tjn\.claude\.planning\STATE.md
+2025-12-17T14:12:53.950Z [DEBUG] File C:\users\tjn\.claude\.planning\STATE.md written atomically
+2025-12-17T14:12:53.971Z [DEBUG] Getting matching hook commands for PostToolUse with query: Edit
+2025-12-17T14:12:53.971Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:12:53.971Z [DEBUG] Matched 1 unique hooks for query "Edit" (1 before deduplication)
+2025-12-17T14:12:54.103Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:12:54.103Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:12:54.103Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:12:54.103Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:12:58.011Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:13:04.653Z [DEBUG] executePreToolHooks called for tool: Edit
+2025-12-17T14:13:04.660Z [DEBUG] Getting matching hook commands for PreToolUse with query: Edit
+2025-12-17T14:13:04.660Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:13:04.660Z [DEBUG] Matched 2 unique hooks for query "Edit" (2 before deduplication)
+2025-12-17T14:13:05.381Z [DEBUG] Writing to temp file: C:\users\tjn\.claude\.planning\ROADMAP.md.tmp.22168.1765980785381
+2025-12-17T14:13:05.381Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:13:05.391Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (10.0ms)
+2025-12-17T14:13:05.391Z [DEBUG] Temp file written successfully, size: 5865 bytes
+2025-12-17T14:13:05.391Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:13:05.391Z [DEBUG] Renaming C:\users\tjn\.claude\.planning\ROADMAP.md.tmp.22168.1765980785381 to C:\users\tjn\.claude\.planning\ROADMAP.md
+2025-12-17T14:13:05.391Z [DEBUG] File C:\users\tjn\.claude\.planning\ROADMAP.md written atomically
+2025-12-17T14:13:05.409Z [DEBUG] Getting matching hook commands for PostToolUse with query: Edit
+2025-12-17T14:13:05.409Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:13:05.409Z [DEBUG] Matched 1 unique hooks for query "Edit" (1 before deduplication)
+2025-12-17T14:13:05.537Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:13:05.537Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:13:05.537Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:13:05.537Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:13:07.906Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:13:09.702Z [DEBUG] executePreToolHooks called for tool: Edit
+2025-12-17T14:13:09.707Z [DEBUG] Getting matching hook commands for PreToolUse with query: Edit
+2025-12-17T14:13:09.707Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:13:09.707Z [DEBUG] Matched 2 unique hooks for query "Edit" (2 before deduplication)
+2025-12-17T14:13:10.431Z [DEBUG] Writing to temp file: C:\users\tjn\.claude\.planning\ROADMAP.md.tmp.22168.1765980790431
+2025-12-17T14:13:10.431Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:13:10.436Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (5.1ms)
+2025-12-17T14:13:10.436Z [DEBUG] Temp file written successfully, size: 5865 bytes
+2025-12-17T14:13:10.436Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:13:10.436Z [DEBUG] Renaming C:\users\tjn\.claude\.planning\ROADMAP.md.tmp.22168.1765980790431 to C:\users\tjn\.claude\.planning\ROADMAP.md
+2025-12-17T14:13:10.436Z [DEBUG] File C:\users\tjn\.claude\.planning\ROADMAP.md written atomically
+2025-12-17T14:13:10.458Z [DEBUG] Getting matching hook commands for PostToolUse with query: Edit
+2025-12-17T14:13:10.458Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:13:10.458Z [DEBUG] Matched 1 unique hooks for query "Edit" (1 before deduplication)
+2025-12-17T14:13:10.585Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:13:10.585Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:13:10.585Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:13:10.585Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:13:14.046Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:13:16.868Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-17T14:13:16.875Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-17T14:13:16.875Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:13:16.875Z [DEBUG] Matched 1 unique hooks for query "Bash" (1 before deduplication)
+2025-12-17T14:13:17.519Z [DEBUG] Session environment not yet supported on Windows
+2025-12-17T14:13:18.396Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-17T14:13:18.396Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:13:18.396Z [DEBUG] Matched 1 unique hooks for query "Bash" (1 before deduplication)
+2025-12-17T14:13:18.525Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:13:18.525Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:13:18.525Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:13:18.525Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:13:19.561Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:13:21.846Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:13:26.048Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-17T14:13:26.056Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-17T14:13:26.056Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:13:26.056Z [DEBUG] Matched 1 unique hooks for query "Bash" (1 before deduplication)
+2025-12-17T14:13:26.765Z [DEBUG] Session environment not yet supported on Windows
+2025-12-17T14:13:27.650Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-17T14:13:27.650Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:13:27.650Z [DEBUG] Matched 1 unique hooks for query "Bash" (1 before deduplication)
+2025-12-17T14:13:27.781Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:13:27.781Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:13:27.781Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:13:27.781Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:13:28.205Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:13:29.685Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:13:31.961Z [DEBUG] Language not supported while highlighting code, falling back to markdown:
+2025-12-17T14:13:34.413Z [DEBUG] executePreToolHooks called for tool: Read
+2025-12-17T14:13:34.420Z [DEBUG] Getting matching hook commands for PreToolUse with query: Read
+2025-12-17T14:13:34.420Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:13:34.420Z [DEBUG] Matched 1 unique hooks for query "Read" (1 before deduplication)
+2025-12-17T14:13:35.406Z [DEBUG] Getting matching hook commands for PostToolUse with query: Read
+2025-12-17T14:13:35.406Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:13:35.406Z [DEBUG] Matched 1 unique hooks for query "Read" (1 before deduplication)
+2025-12-17T14:13:35.535Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-17T14:13:35.543Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-17T14:13:35.543Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:13:35.543Z [DEBUG] Matched 1 unique hooks for query "Bash" (1 before deduplication)
+2025-12-17T14:13:35.845Z [DEBUG] Session environment not yet supported on Windows
+2025-12-17T14:13:36.681Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-17T14:13:36.681Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:13:36.681Z [DEBUG] Matched 1 unique hooks for query "Bash" (1 before deduplication)
+2025-12-17T14:13:36.809Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:13:36.809Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:13:36.809Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:13:36.809Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:13:37.557Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:13:41.436Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:13:44.900Z [DEBUG] executePreToolHooks called for tool: TodoWrite
+2025-12-17T14:13:44.906Z [DEBUG] Getting matching hook commands for PreToolUse with query: TodoWrite
+2025-12-17T14:13:44.906Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:13:44.906Z [DEBUG] Matched 1 unique hooks for query "TodoWrite" (1 before deduplication)
+2025-12-17T14:13:45.053Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json.tmp.22168.1765980825053
+2025-12-17T14:13:45.053Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:13:45.061Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (8.4ms)
+2025-12-17T14:13:45.061Z [DEBUG] Temp file written successfully, size: 2 bytes
+2025-12-17T14:13:45.061Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:13:45.061Z [DEBUG] Renaming C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json.tmp.22168.1765980825053 to C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json
+2025-12-17T14:13:45.061Z [DEBUG] File C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json written atomically
+2025-12-17T14:13:45.062Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json.tmp.22168.1765980825062
+2025-12-17T14:13:45.062Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:13:45.070Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (8.1ms)
+2025-12-17T14:13:45.070Z [DEBUG] Temp file written successfully, size: 504 bytes
+2025-12-17T14:13:45.070Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:13:45.070Z [DEBUG] Renaming C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json.tmp.22168.1765980825062 to C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json
+2025-12-17T14:13:45.070Z [DEBUG] File C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json written atomically
+2025-12-17T14:13:45.084Z [DEBUG] Getting matching hook commands for PostToolUse with query: TodoWrite
+2025-12-17T14:13:45.084Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:13:45.084Z [DEBUG] Matched 1 unique hooks for query "TodoWrite" (1 before deduplication)
+2025-12-17T14:13:45.267Z [DEBUG] executePreToolHooks called for tool: Read
+2025-12-17T14:13:45.288Z [DEBUG] Getting matching hook commands for PreToolUse with query: Read
+2025-12-17T14:13:45.288Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:13:45.288Z [DEBUG] Matched 1 unique hooks for query "Read" (1 before deduplication)
+2025-12-17T14:13:46.217Z [DEBUG] Getting matching hook commands for PostToolUse with query: Read
+2025-12-17T14:13:46.217Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:13:46.217Z [DEBUG] Matched 1 unique hooks for query "Read" (1 before deduplication)
+2025-12-17T14:13:46.343Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:13:46.343Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:13:46.343Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:13:46.343Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:13:48.450Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:14:00.258Z [DEBUG] executePreToolHooks called for tool: Edit
+2025-12-17T14:14:00.264Z [DEBUG] Getting matching hook commands for PreToolUse with query: Edit
+2025-12-17T14:14:00.264Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:14:00.264Z [DEBUG] Matched 2 unique hooks for query "Edit" (2 before deduplication)
+2025-12-17T14:14:01.002Z [DEBUG] Writing to temp file: C:\users\tjn\.claude\skills\generic-feature-developer\SKILL.md.tmp.22168.1765980841002
+2025-12-17T14:14:01.002Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:14:01.011Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (8.6ms)
+2025-12-17T14:14:01.011Z [DEBUG] Temp file written successfully, size: 3822 bytes
+2025-12-17T14:14:01.011Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:14:01.011Z [DEBUG] Renaming C:\users\tjn\.claude\skills\generic-feature-developer\SKILL.md.tmp.22168.1765980841002 to C:\users\tjn\.claude\skills\generic-feature-developer\SKILL.md
+2025-12-17T14:14:01.011Z [DEBUG] File C:\users\tjn\.claude\skills\generic-feature-developer\SKILL.md written atomically
+2025-12-17T14:14:01.025Z [DEBUG] FileHistory: Tracked file modification for C:\users\tjn\.claude\skills\generic-feature-developer\SKILL.md
+2025-12-17T14:14:01.039Z [DEBUG] Getting matching hook commands for PostToolUse with query: Edit
+2025-12-17T14:14:01.039Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:14:01.039Z [DEBUG] Matched 1 unique hooks for query "Edit" (1 before deduplication)
+2025-12-17T14:14:01.169Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:14:01.169Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:14:01.169Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:14:01.169Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:14:04.061Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:14:07.461Z [DEBUG] executePreToolHooks called for tool: TodoWrite
+2025-12-17T14:14:07.468Z [DEBUG] Getting matching hook commands for PreToolUse with query: TodoWrite
+2025-12-17T14:14:07.468Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:14:07.468Z [DEBUG] Matched 1 unique hooks for query "TodoWrite" (1 before deduplication)
+2025-12-17T14:14:07.617Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json.tmp.22168.1765980847617
+2025-12-17T14:14:07.618Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:14:07.629Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (11.5ms)
+2025-12-17T14:14:07.629Z [DEBUG] Temp file written successfully, size: 2 bytes
+2025-12-17T14:14:07.629Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:14:07.629Z [DEBUG] Renaming C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json.tmp.22168.1765980847617 to C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json
+2025-12-17T14:14:07.629Z [DEBUG] File C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json written atomically
+2025-12-17T14:14:07.630Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json.tmp.22168.1765980847630
+2025-12-17T14:14:07.630Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:14:07.633Z [DEBUG] Temp file written successfully, size: 506 bytes
+2025-12-17T14:14:07.633Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:14:07.633Z [DEBUG] Renaming C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json.tmp.22168.1765980847630 to C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json
+2025-12-17T14:14:07.634Z [DEBUG] File C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json written atomically
+2025-12-17T14:14:07.647Z [DEBUG] Getting matching hook commands for PostToolUse with query: TodoWrite
+2025-12-17T14:14:07.647Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:14:07.647Z [DEBUG] Matched 1 unique hooks for query "TodoWrite" (1 before deduplication)
+2025-12-17T14:14:07.774Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:14:07.774Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:14:07.774Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:14:07.774Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:14:09.942Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:14:22.265Z [DEBUG] executePreToolHooks called for tool: Edit
+2025-12-17T14:14:22.271Z [DEBUG] Getting matching hook commands for PreToolUse with query: Edit
+2025-12-17T14:14:22.271Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:14:22.271Z [DEBUG] Matched 2 unique hooks for query "Edit" (2 before deduplication)
+2025-12-17T14:14:22.910Z [DEBUG] Writing to temp file: C:\users\tjn\.claude\skills\generic-feature-developer\SKILL.md.tmp.22168.1765980862910
+2025-12-17T14:14:22.910Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:14:22.915Z [DEBUG] Temp file written successfully, size: 4784 bytes
+2025-12-17T14:14:22.915Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:14:22.915Z [DEBUG] Renaming C:\users\tjn\.claude\skills\generic-feature-developer\SKILL.md.tmp.22168.1765980862910 to C:\users\tjn\.claude\skills\generic-feature-developer\SKILL.md
+2025-12-17T14:14:22.915Z [DEBUG] File C:\users\tjn\.claude\skills\generic-feature-developer\SKILL.md written atomically
+2025-12-17T14:14:22.933Z [DEBUG] Getting matching hook commands for PostToolUse with query: Edit
+2025-12-17T14:14:22.933Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:14:22.933Z [DEBUG] Matched 1 unique hooks for query "Edit" (1 before deduplication)
+2025-12-17T14:14:23.059Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:14:23.059Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:14:23.059Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:14:23.059Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:14:25.477Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:14:28.245Z [DEBUG] executePreToolHooks called for tool: TodoWrite
+2025-12-17T14:14:28.251Z [DEBUG] Getting matching hook commands for PreToolUse with query: TodoWrite
+2025-12-17T14:14:28.251Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:14:28.251Z [DEBUG] Matched 1 unique hooks for query "TodoWrite" (1 before deduplication)
+2025-12-17T14:14:28.398Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json.tmp.22168.1765980868398
+2025-12-17T14:14:28.398Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:14:28.406Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (7.6ms)
+2025-12-17T14:14:28.406Z [DEBUG] Temp file written successfully, size: 2 bytes
+2025-12-17T14:14:28.406Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:14:28.406Z [DEBUG] Renaming C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json.tmp.22168.1765980868398 to C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json
+2025-12-17T14:14:28.406Z [DEBUG] File C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json written atomically
+2025-12-17T14:14:28.406Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json.tmp.22168.1765980868406
+2025-12-17T14:14:28.406Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:14:28.411Z [DEBUG] Temp file written successfully, size: 508 bytes
+2025-12-17T14:14:28.411Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:14:28.411Z [DEBUG] Renaming C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json.tmp.22168.1765980868406 to C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json
+2025-12-17T14:14:28.411Z [DEBUG] File C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json written atomically
+2025-12-17T14:14:28.423Z [DEBUG] Getting matching hook commands for PostToolUse with query: TodoWrite
+2025-12-17T14:14:28.423Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:14:28.423Z [DEBUG] Matched 1 unique hooks for query "TodoWrite" (1 before deduplication)
+2025-12-17T14:14:28.549Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:14:28.549Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:14:28.549Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:14:28.549Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:14:31.181Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:14:36.471Z [DEBUG] executePreToolHooks called for tool: Edit
+2025-12-17T14:14:36.478Z [DEBUG] Getting matching hook commands for PreToolUse with query: Edit
+2025-12-17T14:14:36.478Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:14:36.478Z [DEBUG] Matched 2 unique hooks for query "Edit" (2 before deduplication)
+2025-12-17T14:14:37.213Z [DEBUG] Writing to temp file: C:\users\tjn\.claude\skills\generic-feature-developer\SKILL.md.tmp.22168.1765980877213
+2025-12-17T14:14:37.213Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:14:37.218Z [DEBUG] Temp file written successfully, size: 5199 bytes
+2025-12-17T14:14:37.219Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:14:37.219Z [DEBUG] Renaming C:\users\tjn\.claude\skills\generic-feature-developer\SKILL.md.tmp.22168.1765980877213 to C:\users\tjn\.claude\skills\generic-feature-developer\SKILL.md
+2025-12-17T14:14:37.219Z [DEBUG] File C:\users\tjn\.claude\skills\generic-feature-developer\SKILL.md written atomically
+2025-12-17T14:14:37.237Z [DEBUG] Getting matching hook commands for PostToolUse with query: Edit
+2025-12-17T14:14:37.237Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:14:37.237Z [DEBUG] Matched 1 unique hooks for query "Edit" (1 before deduplication)
+2025-12-17T14:14:37.365Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:14:37.365Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:14:37.365Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:14:37.365Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:14:39.533Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:14:46.097Z [DEBUG] executePreToolHooks called for tool: Edit
+2025-12-17T14:14:46.102Z [DEBUG] Getting matching hook commands for PreToolUse with query: Edit
+2025-12-17T14:14:46.102Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:14:46.102Z [DEBUG] Matched 2 unique hooks for query "Edit" (2 before deduplication)
+2025-12-17T14:14:46.871Z [DEBUG] Writing to temp file: C:\users\tjn\.claude\skills\generic-feature-developer\SKILL.md.tmp.22168.1765980886871
+2025-12-17T14:14:46.871Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:14:46.876Z [DEBUG] Temp file written successfully, size: 5752 bytes
+2025-12-17T14:14:46.876Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:14:46.876Z [DEBUG] Renaming C:\users\tjn\.claude\skills\generic-feature-developer\SKILL.md.tmp.22168.1765980886871 to C:\users\tjn\.claude\skills\generic-feature-developer\SKILL.md
+2025-12-17T14:14:46.877Z [DEBUG] File C:\users\tjn\.claude\skills\generic-feature-developer\SKILL.md written atomically
+2025-12-17T14:14:46.895Z [DEBUG] Getting matching hook commands for PostToolUse with query: Edit
+2025-12-17T14:14:46.895Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:14:46.895Z [DEBUG] Matched 1 unique hooks for query "Edit" (1 before deduplication)
+2025-12-17T14:14:47.027Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:14:47.027Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:14:47.027Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:14:47.027Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:14:49.626Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:14:50.737Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-17T14:14:50.745Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-17T14:14:50.745Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:14:50.745Z [DEBUG] Matched 1 unique hooks for query "Bash" (1 before deduplication)
+2025-12-17T14:14:51.468Z [DEBUG] Session environment not yet supported on Windows
+2025-12-17T14:14:52.196Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-17T14:14:52.196Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:14:52.196Z [DEBUG] Matched 1 unique hooks for query "Bash" (1 before deduplication)
+2025-12-17T14:14:52.324Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:14:52.324Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:14:52.324Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:14:52.324Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:14:53.073Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:14:54.570Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:14:59.726Z [DEBUG] executePreToolHooks called for tool: TodoWrite
+2025-12-17T14:14:59.732Z [DEBUG] Getting matching hook commands for PreToolUse with query: TodoWrite
+2025-12-17T14:14:59.732Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:14:59.732Z [DEBUG] Matched 1 unique hooks for query "TodoWrite" (1 before deduplication)
+2025-12-17T14:14:59.880Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json.tmp.22168.1765980899880
+2025-12-17T14:14:59.880Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:14:59.892Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (11.1ms)
+2025-12-17T14:14:59.892Z [DEBUG] Temp file written successfully, size: 2 bytes
+2025-12-17T14:14:59.892Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:14:59.892Z [DEBUG] Renaming C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json.tmp.22168.1765980899880 to C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json
+2025-12-17T14:14:59.892Z [DEBUG] File C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json written atomically
+2025-12-17T14:14:59.892Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json.tmp.22168.1765980899892
+2025-12-17T14:14:59.892Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:14:59.904Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (11.7ms)
+2025-12-17T14:14:59.904Z [DEBUG] Temp file written successfully, size: 2 bytes
+2025-12-17T14:14:59.904Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:14:59.904Z [DEBUG] Renaming C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json.tmp.22168.1765980899892 to C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json
+2025-12-17T14:14:59.904Z [DEBUG] File C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json written atomically
+2025-12-17T14:14:59.918Z [DEBUG] Getting matching hook commands for PostToolUse with query: TodoWrite
+2025-12-17T14:14:59.918Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:14:59.918Z [DEBUG] Matched 1 unique hooks for query "TodoWrite" (1 before deduplication)
+2025-12-17T14:15:00.048Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-17T14:15:00.054Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-17T14:15:00.054Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:15:00.055Z [DEBUG] Matched 1 unique hooks for query "Bash" (1 before deduplication)
+2025-12-17T14:15:00.337Z [DEBUG] Session environment not yet supported on Windows
+2025-12-17T14:15:01.155Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-17T14:15:01.155Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:15:01.155Z [DEBUG] Matched 1 unique hooks for query "Bash" (1 before deduplication)
+2025-12-17T14:15:01.288Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:15:01.288Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:15:01.288Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:15:01.288Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:15:03.596Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:15:03.890Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:15:15.899Z [DEBUG] executePreToolHooks called for tool: Write
+2025-12-17T14:15:15.906Z [DEBUG] Getting matching hook commands for PreToolUse with query: Write
+2025-12-17T14:15:15.906Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:15:15.906Z [DEBUG] Matched 2 unique hooks for query "Write" (2 before deduplication)
+2025-12-17T14:15:16.641Z [DEBUG] Writing to temp file: C:\users\tjn\.claude\.planning\phases\02-base-generic-skills\02-03-SUMMARY.md.tmp.22168.1765980916641
+2025-12-17T14:15:16.651Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (9.6ms)
+2025-12-17T14:15:16.651Z [DEBUG] Temp file written successfully, size: 1569 bytes
+2025-12-17T14:15:16.651Z [DEBUG] Renaming C:\users\tjn\.claude\.planning\phases\02-base-generic-skills\02-03-SUMMARY.md.tmp.22168.1765980916641 to C:\users\tjn\.claude\.planning\phases\02-base-generic-skills\02-03-SUMMARY.md
+2025-12-17T14:15:16.651Z [DEBUG] File C:\users\tjn\.claude\.planning\phases\02-base-generic-skills\02-03-SUMMARY.md written atomically
+2025-12-17T14:15:16.664Z [DEBUG] FileHistory: Tracked file modification for C:\users\tjn\.claude\.planning\phases\02-base-generic-skills\02-03-SUMMARY.md
+2025-12-17T14:15:16.679Z [DEBUG] Getting matching hook commands for PostToolUse with query: Write
+2025-12-17T14:15:16.679Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:15:16.679Z [DEBUG] Matched 1 unique hooks for query "Write" (1 before deduplication)
+2025-12-17T14:15:16.805Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:15:16.805Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:15:16.806Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:15:16.806Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:15:19.281Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:15:23.167Z [DEBUG] executePreToolHooks called for tool: Edit
+2025-12-17T14:15:23.172Z [DEBUG] Getting matching hook commands for PreToolUse with query: Edit
+2025-12-17T14:15:23.172Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:15:23.172Z [DEBUG] Matched 2 unique hooks for query "Edit" (2 before deduplication)
+2025-12-17T14:15:23.913Z [DEBUG] Writing to temp file: C:\users\tjn\.claude\.planning\STATE.md.tmp.22168.1765980923913
+2025-12-17T14:15:23.913Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:15:23.918Z [DEBUG] Temp file written successfully, size: 2328 bytes
+2025-12-17T14:15:23.918Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:15:23.918Z [DEBUG] Renaming C:\users\tjn\.claude\.planning\STATE.md.tmp.22168.1765980923913 to C:\users\tjn\.claude\.planning\STATE.md
+2025-12-17T14:15:23.919Z [DEBUG] File C:\users\tjn\.claude\.planning\STATE.md written atomically
+2025-12-17T14:15:23.944Z [DEBUG] Getting matching hook commands for PostToolUse with query: Edit
+2025-12-17T14:15:23.944Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:15:23.944Z [DEBUG] Matched 1 unique hooks for query "Edit" (1 before deduplication)
+2025-12-17T14:15:24.071Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:15:24.071Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:15:24.071Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:15:24.071Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:15:27.316Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:15:33.189Z [DEBUG] executePreToolHooks called for tool: Edit
+2025-12-17T14:15:33.195Z [DEBUG] Getting matching hook commands for PreToolUse with query: Edit
+2025-12-17T14:15:33.195Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:15:33.195Z [DEBUG] Matched 2 unique hooks for query "Edit" (2 before deduplication)
+2025-12-17T14:15:33.983Z [DEBUG] Writing to temp file: C:\users\tjn\.claude\.planning\STATE.md.tmp.22168.1765980933983
+2025-12-17T14:15:33.984Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:15:33.989Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (5.0ms)
+2025-12-17T14:15:33.989Z [DEBUG] Temp file written successfully, size: 2337 bytes
+2025-12-17T14:15:33.989Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:15:33.989Z [DEBUG] Renaming C:\users\tjn\.claude\.planning\STATE.md.tmp.22168.1765980933983 to C:\users\tjn\.claude\.planning\STATE.md
+2025-12-17T14:15:33.989Z [DEBUG] File C:\users\tjn\.claude\.planning\STATE.md written atomically
+2025-12-17T14:15:34.008Z [DEBUG] Getting matching hook commands for PostToolUse with query: Edit
+2025-12-17T14:15:34.008Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:15:34.008Z [DEBUG] Matched 1 unique hooks for query "Edit" (1 before deduplication)
+2025-12-17T14:15:34.138Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:15:34.138Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:15:34.138Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:15:34.138Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:15:37.245Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:15:39.691Z [DEBUG] executePreToolHooks called for tool: Edit
+2025-12-17T14:15:39.698Z [DEBUG] Getting matching hook commands for PreToolUse with query: Edit
+2025-12-17T14:15:39.698Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:15:39.698Z [DEBUG] Matched 2 unique hooks for query "Edit" (2 before deduplication)
+2025-12-17T14:15:40.421Z [DEBUG] Writing to temp file: C:\users\tjn\.claude\.planning\STATE.md.tmp.22168.1765980940421
+2025-12-17T14:15:40.421Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:15:40.427Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (6.5ms)
+2025-12-17T14:15:40.427Z [DEBUG] Temp file written successfully, size: 2337 bytes
+2025-12-17T14:15:40.428Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:15:40.428Z [DEBUG] Renaming C:\users\tjn\.claude\.planning\STATE.md.tmp.22168.1765980940421 to C:\users\tjn\.claude\.planning\STATE.md
+2025-12-17T14:15:40.428Z [DEBUG] File C:\users\tjn\.claude\.planning\STATE.md written atomically
+2025-12-17T14:15:40.445Z [DEBUG] Getting matching hook commands for PostToolUse with query: Edit
+2025-12-17T14:15:40.445Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:15:40.445Z [DEBUG] Matched 1 unique hooks for query "Edit" (1 before deduplication)
+2025-12-17T14:15:40.573Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:15:40.573Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:15:40.573Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:15:40.573Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:15:42.918Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:15:45.930Z [DEBUG] executePreToolHooks called for tool: Edit
+2025-12-17T14:15:45.936Z [DEBUG] Getting matching hook commands for PreToolUse with query: Edit
+2025-12-17T14:15:45.936Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:15:45.937Z [DEBUG] Matched 2 unique hooks for query "Edit" (2 before deduplication)
+2025-12-17T14:15:46.654Z [DEBUG] Writing to temp file: C:\users\tjn\.claude\.planning\ROADMAP.md.tmp.22168.1765980946654
+2025-12-17T14:15:46.654Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:15:46.659Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (5.2ms)
+2025-12-17T14:15:46.659Z [DEBUG] Temp file written successfully, size: 5865 bytes
+2025-12-17T14:15:46.659Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:15:46.659Z [DEBUG] Renaming C:\users\tjn\.claude\.planning\ROADMAP.md.tmp.22168.1765980946654 to C:\users\tjn\.claude\.planning\ROADMAP.md
+2025-12-17T14:15:46.660Z [DEBUG] File C:\users\tjn\.claude\.planning\ROADMAP.md written atomically
+2025-12-17T14:15:46.680Z [DEBUG] Getting matching hook commands for PostToolUse with query: Edit
+2025-12-17T14:15:46.680Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:15:46.680Z [DEBUG] Matched 1 unique hooks for query "Edit" (1 before deduplication)
+2025-12-17T14:15:46.811Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:15:46.811Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:15:46.811Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:15:46.811Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:15:49.437Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:15:52.899Z [DEBUG] executePreToolHooks called for tool: Edit
+2025-12-17T14:15:52.905Z [DEBUG] Getting matching hook commands for PreToolUse with query: Edit
+2025-12-17T14:15:52.905Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:15:52.905Z [DEBUG] Matched 2 unique hooks for query "Edit" (2 before deduplication)
+2025-12-17T14:15:53.642Z [DEBUG] Writing to temp file: C:\users\tjn\.claude\.planning\ROADMAP.md.tmp.22168.1765980953642
+2025-12-17T14:15:53.642Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:15:53.647Z [DEBUG] Temp file written successfully, size: 5865 bytes
+2025-12-17T14:15:53.647Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:15:53.647Z [DEBUG] Renaming C:\users\tjn\.claude\.planning\ROADMAP.md.tmp.22168.1765980953642 to C:\users\tjn\.claude\.planning\ROADMAP.md
+2025-12-17T14:15:53.647Z [DEBUG] File C:\users\tjn\.claude\.planning\ROADMAP.md written atomically
+2025-12-17T14:15:53.665Z [DEBUG] Getting matching hook commands for PostToolUse with query: Edit
+2025-12-17T14:15:53.665Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:15:53.665Z [DEBUG] Matched 1 unique hooks for query "Edit" (1 before deduplication)
+2025-12-17T14:15:53.792Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:15:53.792Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:15:53.792Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:15:53.792Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:15:56.345Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:16:02.078Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-17T14:16:02.102Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-17T14:16:02.102Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:16:02.102Z [DEBUG] Matched 1 unique hooks for query "Bash" (1 before deduplication)
+2025-12-17T14:16:02.734Z [DEBUG] Session environment not yet supported on Windows
+2025-12-17T14:16:03.710Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-17T14:16:03.710Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:16:03.710Z [DEBUG] Matched 1 unique hooks for query "Bash" (1 before deduplication)
+2025-12-17T14:16:03.838Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:16:03.838Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:16:03.838Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:16:03.838Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:16:04.274Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:16:06.226Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:16:08.365Z [DEBUG] Language not supported while highlighting code, falling back to markdown:
+2025-12-17T14:16:10.497Z [DEBUG] executePreToolHooks called for tool: Read
+2025-12-17T14:16:10.504Z [DEBUG] Getting matching hook commands for PreToolUse with query: Read
+2025-12-17T14:16:10.504Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:16:10.504Z [DEBUG] Matched 1 unique hooks for query "Read" (1 before deduplication)
+2025-12-17T14:16:11.487Z [DEBUG] Getting matching hook commands for PostToolUse with query: Read
+2025-12-17T14:16:11.487Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:16:11.487Z [DEBUG] Matched 1 unique hooks for query "Read" (1 before deduplication)
+2025-12-17T14:16:11.613Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-17T14:16:11.622Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-17T14:16:11.622Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:16:11.622Z [DEBUG] Matched 1 unique hooks for query "Bash" (1 before deduplication)
+2025-12-17T14:16:11.907Z [DEBUG] Session environment not yet supported on Windows
+2025-12-17T14:16:12.820Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-17T14:16:12.820Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:16:12.820Z [DEBUG] Matched 1 unique hooks for query "Bash" (1 before deduplication)
+2025-12-17T14:16:12.947Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:16:12.947Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:16:12.947Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:16:12.947Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:16:14.602Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:16:18.023Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:16:22.874Z [DEBUG] executePreToolHooks called for tool: TodoWrite
+2025-12-17T14:16:22.880Z [DEBUG] Getting matching hook commands for PreToolUse with query: TodoWrite
+2025-12-17T14:16:22.880Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:16:22.880Z [DEBUG] Matched 1 unique hooks for query "TodoWrite" (1 before deduplication)
+2025-12-17T14:16:23.023Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json.tmp.22168.1765980983023
+2025-12-17T14:16:23.023Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:16:23.031Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (7.3ms)
+2025-12-17T14:16:23.031Z [DEBUG] Temp file written successfully, size: 2 bytes
+2025-12-17T14:16:23.031Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:16:23.031Z [DEBUG] Renaming C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json.tmp.22168.1765980983023 to C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json
+2025-12-17T14:16:23.031Z [DEBUG] File C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json written atomically
+2025-12-17T14:16:23.031Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json.tmp.22168.1765980983031
+2025-12-17T14:16:23.031Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:16:23.035Z [DEBUG] Temp file written successfully, size: 481 bytes
+2025-12-17T14:16:23.035Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:16:23.035Z [DEBUG] Renaming C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json.tmp.22168.1765980983031 to C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json
+2025-12-17T14:16:23.035Z [DEBUG] File C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json written atomically
+2025-12-17T14:16:23.049Z [DEBUG] Getting matching hook commands for PostToolUse with query: TodoWrite
+2025-12-17T14:16:23.049Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:16:23.049Z [DEBUG] Matched 1 unique hooks for query "TodoWrite" (1 before deduplication)
+2025-12-17T14:16:23.223Z [DEBUG] executePreToolHooks called for tool: Read
+2025-12-17T14:16:23.246Z [DEBUG] Getting matching hook commands for PreToolUse with query: Read
+2025-12-17T14:16:23.246Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:16:23.246Z [DEBUG] Matched 1 unique hooks for query "Read" (1 before deduplication)
+2025-12-17T14:16:24.218Z [DEBUG] Getting matching hook commands for PostToolUse with query: Read
+2025-12-17T14:16:24.218Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:16:24.218Z [DEBUG] Matched 1 unique hooks for query "Read" (1 before deduplication)
+2025-12-17T14:16:24.345Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:16:24.345Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:16:24.345Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:16:24.345Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:16:26.705Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:16:34.984Z [DEBUG] executePreToolHooks called for tool: Edit
+2025-12-17T14:16:34.991Z [DEBUG] Getting matching hook commands for PreToolUse with query: Edit
+2025-12-17T14:16:34.991Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:16:34.991Z [DEBUG] Matched 2 unique hooks for query "Edit" (2 before deduplication)
+2025-12-17T14:16:35.762Z [DEBUG] Writing to temp file: C:\users\tjn\.claude\skills\generic-ux-designer\SKILL.md.tmp.22168.1765980995762
+2025-12-17T14:16:35.762Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:16:35.768Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (5.2ms)
+2025-12-17T14:16:35.768Z [DEBUG] Temp file written successfully, size: 3895 bytes
+2025-12-17T14:16:35.768Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:16:35.768Z [DEBUG] Renaming C:\users\tjn\.claude\skills\generic-ux-designer\SKILL.md.tmp.22168.1765980995762 to C:\users\tjn\.claude\skills\generic-ux-designer\SKILL.md
+2025-12-17T14:16:35.768Z [DEBUG] File C:\users\tjn\.claude\skills\generic-ux-designer\SKILL.md written atomically
+2025-12-17T14:16:35.782Z [DEBUG] FileHistory: Tracked file modification for C:\users\tjn\.claude\skills\generic-ux-designer\SKILL.md
+2025-12-17T14:16:35.796Z [DEBUG] Getting matching hook commands for PostToolUse with query: Edit
+2025-12-17T14:16:35.796Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:16:35.796Z [DEBUG] Matched 1 unique hooks for query "Edit" (1 before deduplication)
+2025-12-17T14:16:35.923Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:16:35.924Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:16:35.924Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:16:35.924Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:16:39.355Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:16:41.872Z [DEBUG] executePreToolHooks called for tool: TodoWrite
+2025-12-17T14:16:41.892Z [DEBUG] Getting matching hook commands for PreToolUse with query: TodoWrite
+2025-12-17T14:16:41.892Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:16:41.892Z [DEBUG] Matched 1 unique hooks for query "TodoWrite" (1 before deduplication)
+2025-12-17T14:16:42.041Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json.tmp.22168.1765981002041
+2025-12-17T14:16:42.041Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:16:42.049Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (7.8ms)
+2025-12-17T14:16:42.049Z [DEBUG] Temp file written successfully, size: 2 bytes
+2025-12-17T14:16:42.049Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:16:42.049Z [DEBUG] Renaming C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json.tmp.22168.1765981002041 to C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json
+2025-12-17T14:16:42.049Z [DEBUG] File C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json written atomically
+2025-12-17T14:16:42.049Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json.tmp.22168.1765981002049
+2025-12-17T14:16:42.049Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:16:42.056Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (6.6ms)
+2025-12-17T14:16:42.056Z [DEBUG] Temp file written successfully, size: 483 bytes
+2025-12-17T14:16:42.056Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:16:42.056Z [DEBUG] Renaming C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json.tmp.22168.1765981002049 to C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json
+2025-12-17T14:16:42.056Z [DEBUG] File C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json written atomically
+2025-12-17T14:16:42.068Z [DEBUG] Getting matching hook commands for PostToolUse with query: TodoWrite
+2025-12-17T14:16:42.068Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:16:42.068Z [DEBUG] Matched 1 unique hooks for query "TodoWrite" (1 before deduplication)
+2025-12-17T14:16:42.198Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:16:42.198Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:16:42.198Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:16:42.198Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:16:44.580Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:16:53.998Z [DEBUG] executePreToolHooks called for tool: Edit
+2025-12-17T14:16:54.004Z [DEBUG] Getting matching hook commands for PreToolUse with query: Edit
+2025-12-17T14:16:54.004Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:16:54.004Z [DEBUG] Matched 2 unique hooks for query "Edit" (2 before deduplication)
+2025-12-17T14:16:54.763Z [DEBUG] Writing to temp file: C:\users\tjn\.claude\skills\generic-ux-designer\SKILL.md.tmp.22168.1765981014763
+2025-12-17T14:16:54.764Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:16:54.769Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (5.0ms)
+2025-12-17T14:16:54.769Z [DEBUG] Temp file written successfully, size: 4677 bytes
+2025-12-17T14:16:54.769Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:16:54.769Z [DEBUG] Renaming C:\users\tjn\.claude\skills\generic-ux-designer\SKILL.md.tmp.22168.1765981014763 to C:\users\tjn\.claude\skills\generic-ux-designer\SKILL.md
+2025-12-17T14:16:54.769Z [DEBUG] File C:\users\tjn\.claude\skills\generic-ux-designer\SKILL.md written atomically
+2025-12-17T14:16:54.788Z [DEBUG] Getting matching hook commands for PostToolUse with query: Edit
+2025-12-17T14:16:54.788Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:16:54.788Z [DEBUG] Matched 1 unique hooks for query "Edit" (1 before deduplication)
+2025-12-17T14:16:54.915Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:16:54.915Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:16:54.915Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:16:54.915Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:16:57.986Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:17:00.758Z [DEBUG] executePreToolHooks called for tool: TodoWrite
+2025-12-17T14:17:00.781Z [DEBUG] Getting matching hook commands for PreToolUse with query: TodoWrite
+2025-12-17T14:17:00.781Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:17:00.781Z [DEBUG] Matched 1 unique hooks for query "TodoWrite" (1 before deduplication)
+2025-12-17T14:17:00.925Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json.tmp.22168.1765981020925
+2025-12-17T14:17:00.925Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:17:00.932Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (6.9ms)
+2025-12-17T14:17:00.932Z [DEBUG] Temp file written successfully, size: 2 bytes
+2025-12-17T14:17:00.932Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:17:00.932Z [DEBUG] Renaming C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json.tmp.22168.1765981020925 to C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json
+2025-12-17T14:17:00.932Z [DEBUG] File C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json written atomically
+2025-12-17T14:17:00.933Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json.tmp.22168.1765981020933
+2025-12-17T14:17:00.933Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:17:00.942Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (9.7ms)
+2025-12-17T14:17:00.942Z [DEBUG] Temp file written successfully, size: 485 bytes
+2025-12-17T14:17:00.942Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:17:00.942Z [DEBUG] Renaming C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json.tmp.22168.1765981020933 to C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json
+2025-12-17T14:17:00.943Z [DEBUG] File C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json written atomically
+2025-12-17T14:17:00.955Z [DEBUG] Getting matching hook commands for PostToolUse with query: TodoWrite
+2025-12-17T14:17:00.955Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:17:00.955Z [DEBUG] Matched 1 unique hooks for query "TodoWrite" (1 before deduplication)
+2025-12-17T14:17:01.079Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:17:01.079Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:17:01.079Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:17:01.079Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:17:03.787Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:17:10.311Z [DEBUG] executePreToolHooks called for tool: Edit
+2025-12-17T14:17:10.317Z [DEBUG] Getting matching hook commands for PreToolUse with query: Edit
+2025-12-17T14:17:10.317Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:17:10.317Z [DEBUG] Matched 2 unique hooks for query "Edit" (2 before deduplication)
+2025-12-17T14:17:11.052Z [DEBUG] Writing to temp file: C:\users\tjn\.claude\skills\generic-ux-designer\SKILL.md.tmp.22168.1765981031052
+2025-12-17T14:17:11.052Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:17:11.057Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (5.2ms)
+2025-12-17T14:17:11.057Z [DEBUG] Temp file written successfully, size: 5121 bytes
+2025-12-17T14:17:11.057Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:17:11.057Z [DEBUG] Renaming C:\users\tjn\.claude\skills\generic-ux-designer\SKILL.md.tmp.22168.1765981031052 to C:\users\tjn\.claude\skills\generic-ux-designer\SKILL.md
+2025-12-17T14:17:11.058Z [DEBUG] File C:\users\tjn\.claude\skills\generic-ux-designer\SKILL.md written atomically
+2025-12-17T14:17:11.076Z [DEBUG] Getting matching hook commands for PostToolUse with query: Edit
+2025-12-17T14:17:11.076Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:17:11.076Z [DEBUG] Matched 1 unique hooks for query "Edit" (1 before deduplication)
+2025-12-17T14:17:11.206Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:17:11.206Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:17:11.206Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:17:11.206Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:17:13.817Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:17:22.960Z [DEBUG] executePreToolHooks called for tool: Edit
+2025-12-17T14:17:22.966Z [DEBUG] Getting matching hook commands for PreToolUse with query: Edit
+2025-12-17T14:17:22.966Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:17:22.966Z [DEBUG] Matched 2 unique hooks for query "Edit" (2 before deduplication)
+2025-12-17T14:17:23.718Z [DEBUG] Writing to temp file: C:\users\tjn\.claude\skills\generic-ux-designer\SKILL.md.tmp.22168.1765981043718
+2025-12-17T14:17:23.718Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:17:23.723Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (5.1ms)
+2025-12-17T14:17:23.723Z [DEBUG] Temp file written successfully, size: 5764 bytes
+2025-12-17T14:17:23.723Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:17:23.723Z [DEBUG] Renaming C:\users\tjn\.claude\skills\generic-ux-designer\SKILL.md.tmp.22168.1765981043718 to C:\users\tjn\.claude\skills\generic-ux-designer\SKILL.md
+2025-12-17T14:17:23.723Z [DEBUG] File C:\users\tjn\.claude\skills\generic-ux-designer\SKILL.md written atomically
+2025-12-17T14:17:23.745Z [DEBUG] Getting matching hook commands for PostToolUse with query: Edit
+2025-12-17T14:17:23.745Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:17:23.745Z [DEBUG] Matched 1 unique hooks for query "Edit" (1 before deduplication)
+2025-12-17T14:17:23.871Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:17:23.871Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:17:23.871Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:17:23.871Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:17:26.527Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:17:27.709Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-17T14:17:27.716Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-17T14:17:27.716Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:17:27.716Z [DEBUG] Matched 1 unique hooks for query "Bash" (1 before deduplication)
+2025-12-17T14:17:28.404Z [DEBUG] Session environment not yet supported on Windows
+2025-12-17T14:17:29.189Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-17T14:17:29.189Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:17:29.189Z [DEBUG] Matched 1 unique hooks for query "Bash" (1 before deduplication)
+2025-12-17T14:17:29.321Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:17:29.321Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:17:29.321Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:17:29.321Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:17:29.876Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:17:32.302Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:17:37.194Z [DEBUG] executePreToolHooks called for tool: TodoWrite
+2025-12-17T14:17:37.202Z [DEBUG] Getting matching hook commands for PreToolUse with query: TodoWrite
+2025-12-17T14:17:37.202Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:17:37.202Z [DEBUG] Matched 1 unique hooks for query "TodoWrite" (1 before deduplication)
+2025-12-17T14:17:37.353Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json.tmp.22168.1765981057353
+2025-12-17T14:17:37.353Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:17:37.359Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (6.2ms)
+2025-12-17T14:17:37.359Z [DEBUG] Temp file written successfully, size: 2 bytes
+2025-12-17T14:17:37.359Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:17:37.359Z [DEBUG] Renaming C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json.tmp.22168.1765981057353 to C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json
+2025-12-17T14:17:37.359Z [DEBUG] File C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-bf0b5470-2f3e-454e-93cc-0d04e779c16b.json written atomically
+2025-12-17T14:17:37.360Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json.tmp.22168.1765981057360
+2025-12-17T14:17:37.360Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:17:37.366Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (6.3ms)
+2025-12-17T14:17:37.366Z [DEBUG] Temp file written successfully, size: 2 bytes
+2025-12-17T14:17:37.366Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:17:37.366Z [DEBUG] Renaming C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json.tmp.22168.1765981057360 to C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json
+2025-12-17T14:17:37.366Z [DEBUG] File C:\Users\tjn\.claude\todos\1a5347f4-3f17-48d1-ac62-b113765de42f-agent-1a5347f4-3f17-48d1-ac62-b113765de42f.json written atomically
+2025-12-17T14:17:37.378Z [DEBUG] Getting matching hook commands for PostToolUse with query: TodoWrite
+2025-12-17T14:17:37.378Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:17:37.378Z [DEBUG] Matched 1 unique hooks for query "TodoWrite" (1 before deduplication)
+2025-12-17T14:17:37.504Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-17T14:17:37.511Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-17T14:17:37.511Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:17:37.511Z [DEBUG] Matched 1 unique hooks for query "Bash" (1 before deduplication)
+2025-12-17T14:17:37.786Z [DEBUG] Session environment not yet supported on Windows
+2025-12-17T14:17:38.691Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-17T14:17:38.691Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:17:38.691Z [DEBUG] Matched 1 unique hooks for query "Bash" (1 before deduplication)
+2025-12-17T14:17:38.819Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:17:38.819Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:17:38.819Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:17:38.819Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:17:39.844Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:17:41.268Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:17:57.196Z [DEBUG] executePreToolHooks called for tool: Write
+2025-12-17T14:17:57.203Z [DEBUG] Getting matching hook commands for PreToolUse with query: Write
+2025-12-17T14:17:57.203Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:17:57.203Z [DEBUG] Matched 2 unique hooks for query "Write" (2 before deduplication)
+2025-12-17T14:17:57.929Z [DEBUG] Writing to temp file: C:\users\tjn\.claude\.planning\phases\02-base-generic-skills\02-04-SUMMARY.md.tmp.22168.1765981077929
+2025-12-17T14:17:57.933Z [DEBUG] Temp file written successfully, size: 1960 bytes
+2025-12-17T14:17:57.933Z [DEBUG] Renaming C:\users\tjn\.claude\.planning\phases\02-base-generic-skills\02-04-SUMMARY.md.tmp.22168.1765981077929 to C:\users\tjn\.claude\.planning\phases\02-base-generic-skills\02-04-SUMMARY.md
+2025-12-17T14:17:57.933Z [DEBUG] File C:\users\tjn\.claude\.planning\phases\02-base-generic-skills\02-04-SUMMARY.md written atomically
+2025-12-17T14:17:57.945Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (5.0ms)
+2025-12-17T14:17:57.946Z [DEBUG] FileHistory: Tracked file modification for C:\users\tjn\.claude\.planning\phases\02-base-generic-skills\02-04-SUMMARY.md
+2025-12-17T14:17:57.960Z [DEBUG] Getting matching hook commands for PostToolUse with query: Write
+2025-12-17T14:17:57.960Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:17:57.960Z [DEBUG] Matched 1 unique hooks for query "Write" (1 before deduplication)
+2025-12-17T14:17:58.087Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:17:58.087Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:17:58.087Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:17:58.087Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:18:01.251Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:18:05.185Z [DEBUG] executePreToolHooks called for tool: Edit
+2025-12-17T14:18:05.191Z [DEBUG] Getting matching hook commands for PreToolUse with query: Edit
+2025-12-17T14:18:05.191Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:18:05.191Z [DEBUG] Matched 2 unique hooks for query "Edit" (2 before deduplication)
+2025-12-17T14:18:05.941Z [DEBUG] Writing to temp file: C:\users\tjn\.claude\.planning\STATE.md.tmp.22168.1765981085941
+2025-12-17T14:18:05.941Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:18:05.947Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (5.7ms)
+2025-12-17T14:18:05.947Z [DEBUG] Temp file written successfully, size: 2351 bytes
+2025-12-17T14:18:05.947Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:18:05.947Z [DEBUG] Renaming C:\users\tjn\.claude\.planning\STATE.md.tmp.22168.1765981085941 to C:\users\tjn\.claude\.planning\STATE.md
+2025-12-17T14:18:05.947Z [DEBUG] File C:\users\tjn\.claude\.planning\STATE.md written atomically
+2025-12-17T14:18:05.965Z [DEBUG] Getting matching hook commands for PostToolUse with query: Edit
+2025-12-17T14:18:05.965Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:18:05.965Z [DEBUG] Matched 1 unique hooks for query "Edit" (1 before deduplication)
+2025-12-17T14:18:06.093Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:18:06.093Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:18:06.093Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:18:06.093Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:18:08.741Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:18:15.140Z [DEBUG] executePreToolHooks called for tool: Edit
+2025-12-17T14:18:15.146Z [DEBUG] Getting matching hook commands for PreToolUse with query: Edit
+2025-12-17T14:18:15.146Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:18:15.146Z [DEBUG] Matched 2 unique hooks for query "Edit" (2 before deduplication)
+2025-12-17T14:18:15.910Z [DEBUG] Writing to temp file: C:\users\tjn\.claude\.planning\STATE.md.tmp.22168.1765981095910
+2025-12-17T14:18:15.910Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:18:15.914Z [DEBUG] Temp file written successfully, size: 2355 bytes
+2025-12-17T14:18:15.914Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:18:15.914Z [DEBUG] Renaming C:\users\tjn\.claude\.planning\STATE.md.tmp.22168.1765981095910 to C:\users\tjn\.claude\.planning\STATE.md
+2025-12-17T14:18:15.914Z [DEBUG] File C:\users\tjn\.claude\.planning\STATE.md written atomically
+2025-12-17T14:18:15.936Z [DEBUG] Getting matching hook commands for PostToolUse with query: Edit
+2025-12-17T14:18:15.936Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:18:15.936Z [DEBUG] Matched 1 unique hooks for query "Edit" (1 before deduplication)
+2025-12-17T14:18:16.065Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:18:16.065Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:18:16.065Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:18:16.065Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:18:19.097Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:18:22.001Z [DEBUG] executePreToolHooks called for tool: Edit
+2025-12-17T14:18:22.007Z [DEBUG] Getting matching hook commands for PreToolUse with query: Edit
+2025-12-17T14:18:22.007Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:18:22.007Z [DEBUG] Matched 2 unique hooks for query "Edit" (2 before deduplication)
+2025-12-17T14:18:22.777Z [DEBUG] Writing to temp file: C:\users\tjn\.claude\.planning\STATE.md.tmp.22168.1765981102777
+2025-12-17T14:18:22.777Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:18:22.787Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (9.9ms)
+2025-12-17T14:18:22.787Z [DEBUG] Temp file written successfully, size: 2334 bytes
+2025-12-17T14:18:22.787Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:18:22.787Z [DEBUG] Renaming C:\users\tjn\.claude\.planning\STATE.md.tmp.22168.1765981102777 to C:\users\tjn\.claude\.planning\STATE.md
+2025-12-17T14:18:22.788Z [DEBUG] File C:\users\tjn\.claude\.planning\STATE.md written atomically
+2025-12-17T14:18:22.807Z [DEBUG] Getting matching hook commands for PostToolUse with query: Edit
+2025-12-17T14:18:22.807Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:18:22.807Z [DEBUG] Matched 1 unique hooks for query "Edit" (1 before deduplication)
+2025-12-17T14:18:22.934Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:18:22.934Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:18:22.934Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:18:22.934Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:18:26.009Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:18:28.521Z [DEBUG] executePreToolHooks called for tool: Edit
+2025-12-17T14:18:28.527Z [DEBUG] Getting matching hook commands for PreToolUse with query: Edit
+2025-12-17T14:18:28.527Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:18:28.527Z [DEBUG] Matched 2 unique hooks for query "Edit" (2 before deduplication)
+2025-12-17T14:18:29.319Z [DEBUG] Writing to temp file: C:\users\tjn\.claude\.planning\ROADMAP.md.tmp.22168.1765981109319
+2025-12-17T14:18:29.319Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:18:29.325Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (5.9ms)
+2025-12-17T14:18:29.325Z [DEBUG] Temp file written successfully, size: 5851 bytes
+2025-12-17T14:18:29.325Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:18:29.325Z [DEBUG] Renaming C:\users\tjn\.claude\.planning\ROADMAP.md.tmp.22168.1765981109319 to C:\users\tjn\.claude\.planning\ROADMAP.md
+2025-12-17T14:18:29.325Z [DEBUG] File C:\users\tjn\.claude\.planning\ROADMAP.md written atomically
+2025-12-17T14:18:29.343Z [DEBUG] Getting matching hook commands for PostToolUse with query: Edit
+2025-12-17T14:18:29.343Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:18:29.343Z [DEBUG] Matched 1 unique hooks for query "Edit" (1 before deduplication)
+2025-12-17T14:18:29.472Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:18:29.472Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:18:29.472Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:18:29.472Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:18:33.317Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:18:37.749Z [DEBUG] executePreToolHooks called for tool: Edit
+2025-12-17T14:18:37.755Z [DEBUG] Getting matching hook commands for PreToolUse with query: Edit
+2025-12-17T14:18:37.755Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:18:37.755Z [DEBUG] Matched 2 unique hooks for query "Edit" (2 before deduplication)
+2025-12-17T14:18:38.490Z [DEBUG] Writing to temp file: C:\users\tjn\.claude\.planning\ROADMAP.md.tmp.22168.1765981118490
+2025-12-17T14:18:38.490Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:18:38.495Z [DEBUG] Temp file written successfully, size: 5851 bytes
+2025-12-17T14:18:38.495Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:18:38.495Z [DEBUG] Renaming C:\users\tjn\.claude\.planning\ROADMAP.md.tmp.22168.1765981118490 to C:\users\tjn\.claude\.planning\ROADMAP.md
+2025-12-17T14:18:38.495Z [DEBUG] File C:\users\tjn\.claude\.planning\ROADMAP.md written atomically
+2025-12-17T14:18:38.514Z [DEBUG] Getting matching hook commands for PostToolUse with query: Edit
+2025-12-17T14:18:38.514Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:18:38.514Z [DEBUG] Matched 1 unique hooks for query "Edit" (1 before deduplication)
+2025-12-17T14:18:38.641Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:18:38.641Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:18:38.641Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:18:38.641Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:18:41.894Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:18:44.294Z [DEBUG] executePreToolHooks called for tool: Edit
+2025-12-17T14:18:44.301Z [DEBUG] Getting matching hook commands for PreToolUse with query: Edit
+2025-12-17T14:18:44.301Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:18:44.301Z [DEBUG] Matched 2 unique hooks for query "Edit" (2 before deduplication)
+2025-12-17T14:18:45.006Z [DEBUG] Writing to temp file: C:\users\tjn\.claude\.planning\ROADMAP.md.tmp.22168.1765981125006
+2025-12-17T14:18:45.006Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T14:18:45.011Z [DEBUG] Temp file written successfully, size: 5857 bytes
+2025-12-17T14:18:45.011Z [DEBUG] Applied original permissions to temp file
+2025-12-17T14:18:45.011Z [DEBUG] Renaming C:\users\tjn\.claude\.planning\ROADMAP.md.tmp.22168.1765981125006 to C:\users\tjn\.claude\.planning\ROADMAP.md
+2025-12-17T14:18:45.012Z [DEBUG] File C:\users\tjn\.claude\.planning\ROADMAP.md written atomically
+2025-12-17T14:18:45.030Z [DEBUG] Getting matching hook commands for PostToolUse with query: Edit
+2025-12-17T14:18:45.030Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:18:45.030Z [DEBUG] Matched 1 unique hooks for query "Edit" (1 before deduplication)
+2025-12-17T14:18:45.158Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:18:45.158Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:18:45.158Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:18:45.158Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:18:48.643Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:18:54.073Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-17T14:18:54.081Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-17T14:18:54.081Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:18:54.081Z [DEBUG] Matched 1 unique hooks for query "Bash" (1 before deduplication)
+2025-12-17T14:18:54.772Z [DEBUG] Session environment not yet supported on Windows
+2025-12-17T14:18:55.734Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-17T14:18:55.734Z [DEBUG] Found 1 hook matchers in settings
+2025-12-17T14:18:55.734Z [DEBUG] Matched 1 unique hooks for query "Bash" (1 before deduplication)
+2025-12-17T14:18:55.866Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-17T14:18:55.866Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-17T14:18:55.866Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-17T14:18:55.866Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-17T14:18:56.406Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:18:59.311Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:19:07.992Z [DEBUG] Language not supported while highlighting code, falling back to markdown:
+2025-12-17T14:19:07.994Z [DEBUG] Language not supported while highlighting code, falling back to markdown:
+2025-12-17T14:19:07.994Z [DEBUG] Language not supported while highlighting code, falling back to markdown:
+2025-12-17T14:19:08.192Z [DEBUG] Getting matching hook commands for Stop with query: undefined
+2025-12-17T14:19:08.192Z [DEBUG] Found 2 hook matchers in settings
+2025-12-17T14:19:08.192Z [DEBUG] Matched 2 unique hooks for query "no match query" (2 before deduplication)
+2025-12-17T14:19:11.781Z [DEBUG] Stream started - received first chunk
+2025-12-17T14:19:12.515Z [DEBUG] Getting matching hook commands for SubagentStop with query: undefined
+2025-12-17T14:19:12.515Z [DEBUG] Found 0 hook matchers in settings
+2025-12-17T14:19:12.515Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-17T14:20:08.433Z [DEBUG] Getting matching hook commands for Notification with query: idle_prompt
+2025-12-17T14:20:08.433Z [DEBUG] Found 0 hook matchers in settings
+2025-12-17T14:20:08.433Z [DEBUG] Matched 0 unique hooks for query "idle_prompt" (0 before deduplication)

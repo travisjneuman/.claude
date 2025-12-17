@@ -1,0 +1,844 @@
+---
+type: venture
+status: active
+stage: active
+founder: Travis Neuman
+tags: [business, consulting, it, software, freelance, ai]
+created: 2025-12-14
+updated: 2025-12-14
+---
+# ndev Consulting
+
+> Travis Neuman's personal IT consulting and software development practice.
+
+---
+
+## Executive Summary
+
+**ndev Consulting** (Neuman Development) is Travis's independent consulting firm offering IT services, software development, and technical advisory to businesses and individuals.
+
+**Status:** Active / Ongoing - revenue-generating independent practice
+
+**Key Value Proposition:**
+- Full-stack development and AI integration expertise
+- Agency-quality work at independent consultant pricing
+- Modern tech stack specialization (React 19, Next.js 15, TypeScript, AI/LLM)
+- Partnership-oriented client relationships
+
+**Business Snapshot:**
+| Metric | Current | Target |
+|--------|---------|--------|
+| Hourly Rate | $100-200/hr | $150-250/hr |
+| Monthly Revenue Target | - | $10,000+ |
+| Ideal Client Size | 5-200 employees | Maintained |
+| Project Size | $5K-100K | $15K+ average |
+
+---
+
+## Market Opportunity
+
+### IT Consulting Market Overview
+
+The U.S. IT consulting market is projected to surpass **$70 billion in 2024**, with significant demand for specialized expertise in AI, cybersecurity, and modern development frameworks.
+
+> Source: [TATEEDA Global](https://tateeda.com/blog/it-consulting-rates-per-hour)
+
+**Key Market Drivers:**
+- 78% of organizations now use AI in at least one business function (up from 55% twelve months prior)
+- 92% of Fortune 500 companies report using generative AI in workflows
+- 37% of companies cite lack of in-house expertise as key barrier to AI adoption
+- Enterprises are accelerating LLM spending: $3.5B to $8.4B in mid-2025
+
+> Sources: [Grand View Research](https://www.grandviewresearch.com/industry-analysis/enterprise-llm-market-report), [GM Insights](https://www.gminsights.com/industry-analysis/enterprise-llm-market)
+
+### AI/LLM Integration Market
+
+The enterprise LLM market presents a massive growth opportunity:
+
+| Metric | 2024 | Projected |
+|--------|------|-----------|
+| Market Size | $4.6B - $6.7B | $41.6B - $71.1B by 2033-34 |
+| CAGR | - | 26-28% |
+
+**Key Insight:** "Enterprises rely on consulting, implementation, and managed services to accelerate deployment, ensure regulatory compliance, and optimize model performance."
+
+> Source: [GM Insights](https://www.gminsights.com/industry-analysis/enterprise-llm-market)
+
+---
+
+## Services Deep Dive
+
+### Service Line 1: Software Development
+
+| Service | Description | Typical Range | Timeline |
+|---------|-------------|---------------|----------|
+| **Web Applications** | Full-stack custom development | $15,000-50,000 | 4-12 weeks |
+| **API Development** | Backend services, integrations | $5,000-25,000 | 2-6 weeks |
+| **Frontend Development** | React, Next.js, modern UI | $5,000-30,000 | 2-8 weeks |
+| **MVP Development** | Startup idea validation | $10,000-40,000 | 6-12 weeks |
+| **Legacy Modernization** | Upgrade older systems | $10,000-75,000 | 8-16 weeks |
+
+**Tech Stack Expertise:**
+```
+Frontend:     React 19, Next.js 15, TypeScript, Tailwind CSS, Vite
+Backend:      NestJS, Node.js, Python/FastAPI
+Database:     PostgreSQL, Prisma, Dexie (IndexedDB), Supabase
+AI/ML:        LLM integration, RAG systems, Agentic AI, Vector stores
+DevOps:       Docker, GitHub Actions, Vercel, Railway
+Mobile:       React Native (learning priority)
+```
+
+### Service Line 2: AI & Automation
+
+**High-Growth Specialization Area**
+
+| Service | Description | Market Demand | Range |
+|---------|-------------|---------------|-------|
+| **LLM Integration** | Add AI features to existing apps | Very High | $10,000-50,000 |
+| **RAG Systems** | Knowledge base + AI retrieval | High | $15,000-75,000 |
+| **Workflow Automation** | Business process automation | High | $5,000-25,000 |
+| **Agent Development** | Autonomous AI systems | Cutting Edge | $20,000-100,000 |
+| **AI Consulting** | Strategy, vendor selection | High | Hourly/retainer |
+
+**Why This Is The Opportunity:**
+- Nearly 70% of businesses are implementing or planning AI integration
+- 37% cite lack of in-house expertise as key barrier
+- Large enterprises driving 27.9% CAGR in AI consulting services
+
+> Source: [GlobeNewswire](https://www.globenewswire.com/news-release/2025/11/21/3192566/28124/en/AI-Consulting-and-Support-Services-Market-Analysis-Report-2025-2032-Adoption-Surges-as-70-of-Businesses-Accelerate-Integration-Across-Healthcare-Finance-Retail-and-Manufacturing.html)
+
+### Service Line 3: IT Consulting & Advisory
+
+| Service | Description | Model | Rate Range |
+|---------|-------------|-------|------------|
+| **Technical Advisory** | Architecture, tech stack decisions | Hourly/retainer | $150-200/hr |
+| **Code Review** | Quality assessment, security audit | Per-project | $2,000-10,000 |
+| **System Design** | Infrastructure planning | Per-project | $3,000-15,000 |
+| **Vendor Selection** | Evaluating tools/platforms | Hourly | $150-200/hr |
+| **Fractional CTO** | Part-time technical leadership | Retainer | $3,000-8,000/mo |
+
+---
+
+## Pricing Strategy
+
+### Market Rate Comparison
+
+**Industry Benchmarks (2024 US Rates):**
+| Level/Type | Hourly Rate |
+|------------|-------------|
+| Junior Developer | $50-75 |
+| Mid-Level Developer | $75-125 |
+| Senior Developer | $125-175 |
+| Specialist/Architect | $175-250+ |
+| Mid-Size Consulting Firm | $150-250 |
+| Top-Tier Agency | $250-500+ |
+| AI/ML Specialist | $175-300+ |
+| Healthcare/Finance Specialist | $200-400 |
+
+> Sources: [TATEEDA](https://tateeda.com/blog/it-consulting-rates-per-hour), [FullStack Labs](https://www.fullstack.com/labs/resources/blog/2024-price-guide), [Sigma Solve](https://www.sigmasolve.com/blog/it-consulting-rates-per-hour/)
+
+### ndev Pricing Structure
+
+#### Hourly Rates
+| Service Type | Current Rate | Target Rate |
+|--------------|--------------|-------------|
+| General development | $100-150/hr | $125-175/hr |
+| Senior architecture | $150-200/hr | $175-225/hr |
+| AI/ML specialized | $175-250/hr | $200-300/hr |
+| Emergency/rush | 1.5x standard | Maintained |
+
+#### Project-Based Pricing
+| Project Type | Range | Notes |
+|--------------|-------|-------|
+| Simple website | $3,000-8,000 | Landing pages, brochure sites |
+| Web application MVP | $15,000-40,000 | Core features, 6-12 week build |
+| Full web application | $30,000-75,000 | Complete feature set |
+| API development | $5,000-25,000 | Integration complexity dependent |
+| AI feature integration | $10,000-50,000 | Model, RAG, or agent integration |
+
+#### Retainer Packages
+
+| Tier | Hours/Month | Rate | Monthly Cost | Best For |
+|------|-------------|------|--------------|----------|
+| **Advisory** | 5 hrs | $150/hr | $750/mo | Technical guidance, questions |
+| **Standard** | 20 hrs | $125/hr | $2,500/mo | Ongoing development, support |
+| **Growth** | 40 hrs | $112/hr | $4,500/mo | Active product development |
+| **Dedicated** | 80 hrs | $112/hr | $9,000/mo | Near-full-time engagement |
+
+**Pricing Philosophy:**
+- Premium positioning: quality over volume
+- Value-based when possible (outcome pricing)
+- Transparent, no hidden fees
+- Retainer discounts for commitment
+
+### Pricing Models Comparison
+
+| Model | Best For | Pros | Cons |
+|-------|----------|------|------|
+| **Fixed Price** | Well-defined projects | Budget certainty, clear scope | Scope creep risk, requires detailed spec |
+| **Time & Materials** | Evolving requirements | Flexible, pay for actual work | Less budget predictability |
+| **Retainer** | Ongoing relationships | Guaranteed availability, discounted rate | Requires commitment |
+| **Value-Based** | High-impact projects | Aligned incentives | Hard to quantify value upfront |
+
+> Source: [Consulting Success](https://www.consultingsuccess.com/consulting-pricing-models), [Acropolium](https://acropolium.com/blog/software-development-pricing-models/)
+
+---
+
+## Target Market Analysis
+
+### Ideal Client Profile (ICP)
+
+| Attribute | Ideal | Why |
+|-----------|-------|-----|
+| **Company Size** | 5-200 employees | Big enough to have budget, small enough to need external help |
+| **Budget** | $15K-100K projects | Sweet spot for solo consultant |
+| **Technical Sophistication** | Some tech, needs expertise | Can communicate requirements, values guidance |
+| **Decision Speed** | < 2 weeks | Avoids bureaucratic delays |
+| **Relationship Style** | Partnership | Values ongoing relationship, not just transaction |
+
+### Target Industries
+
+| Industry | Opportunity | Why |
+|----------|-------------|-----|
+| **SaaS Companies** | High | Always building, need feature velocity |
+| **Startups (Funded)** | High | MVP needs, limited in-house team |
+| **Traditional Business Digitization** | Medium | Big opportunity, longer sales cycle |
+| **Agencies (Overflow)** | Medium | Consistent work, lower margin |
+| **Enterprise AI Exploration** | High | Budget, high demand, specialized |
+
+### Industries with Higher Rates
+
+Per market research, certain industries command premium consulting rates:
+- **Finance:** $200-400/hr due to system complexity and security requirements
+- **Healthcare:** $300+/hr due to HIPAA compliance and regulatory needs
+- **Enterprise AI:** Premium rates for specialized LLM/RAG expertise
+
+> Source: [TATEEDA](https://tateeda.com/blog/it-consulting-rates-per-hour)
+
+### Clients to Avoid
+
+| Red Flag | Why |
+|----------|-----|
+| Doesn't value quality | Will push for shortcuts, bad for reputation |
+| Spec work requests | "Build it and we'll pay if we like it" = unpaid work |
+| Unclear requirements + fixed budget | Recipe for scope disputes |
+| Micromanagers | Hourly check-ins destroy productivity |
+| Price shoppers only | Will leave for cheaper option |
+| No technical contact | Can't get decisions, requirements unclear |
+
+---
+
+## Business Structure & Legal
+
+### Entity Structure Recommendation
+
+**Recommendation: Single-Member LLC**
+
+| Option | Pros | Cons |
+|--------|------|------|
+| **Sole Proprietorship** | Simple, no state fees | Personal liability exposure, less professional |
+| **LLC** | Liability protection, tax flexibility, professional | Annual fees, slightly more paperwork |
+| **S-Corp** | Tax savings at higher income | Complexity, payroll requirements |
+
+**Why LLC:**
+- Liability protection separates personal assets from business
+- Pass-through taxation (no double taxation)
+- Professional appearance for clients
+- Required for some contracts/insurance
+- Can elect S-Corp taxation later if beneficial
+
+> Source: [SCORE](https://www.score.org/resource/blog-post/llcs-freelancers-understanding-liability-protection)
+
+**Formation Steps:**
+- [ ] File LLC with Wyoming (low fees, privacy, remote-friendly)
+- [ ] Obtain EIN from IRS
+- [ ] Create Operating Agreement
+- [ ] Register for state business license (if required)
+- [ ] Open business bank account
+
+### Insurance Requirements
+
+**Essential Coverage:**
+
+| Coverage | Purpose | Estimated Cost |
+|----------|---------|----------------|
+| **Professional Liability (E&O)** | Protects against negligence claims, work errors | $61/mo (~$730/yr) |
+| **General Liability** | Property damage, bodily injury | $42/mo (~$500/yr) |
+| **Cyber Liability** | Data breaches, security incidents | $50-150/mo |
+| **TOTAL** | | **$1,500-2,500/yr** |
+
+> Sources: [Insureon](https://www.insureon.com/small-business-insurance/professional-liability/independent-contractors), [The Hartford](https://www.thehartford.com/professional-liability-insurance/sole-proprietorship)
+
+**Why Professional Liability Matters:**
+- Client contracts often require proof of E&O coverage
+- Protects against claims of missed deadlines, undelivered services, negligence
+- Single lawsuit without coverage can cost more than years of premiums
+- Demonstrates professionalism to clients
+
+**Important Note:** E&O coverage cannot be extended to subcontractors - they need their own coverage.
+
+### Contract & Legal Documents
+
+**Essential Documents:**
+
+| Document | Purpose | When Used |
+|----------|---------|-----------|
+| **Master Services Agreement (MSA)** | Establishes ongoing relationship terms | Long-term clients |
+| **Statement of Work (SOW)** | Project-specific deliverables, timeline, cost | Each project |
+| **Proposal Template** | Win new business | Sales process |
+| **Invoice Template** | Request payment | Monthly/milestone |
+| **NDA (Mutual)** | Protect confidential information | Before discovery |
+| **Independent Contractor Agreement** | For subcontractors | If hiring help |
+
+**SOW Best Practices:**
+Per [Consulting Success](https://www.consultingsuccess.com/consulting-statement-of-work-template):
+- Be specific enough to prevent misunderstandings
+- Include clear deliverables with acceptance criteria
+- Note dependencies and assumptions
+- Include change control process
+- Separate from broader legal terms (use with MSA)
+
+**Resources:**
+- [Docracy](https://www.docracy.com/) - Free legal document templates
+- [HelloSign](https://www.hellosign.com/) / DocuSign - Digital signatures
+- [Bonsai](https://www.hellobonsai.com/) - Freelance contract templates
+
+---
+
+## Operations & Infrastructure
+
+### Business Tools Stack
+
+| Purpose | Recommended | Cost | Why |
+|---------|-------------|------|-----|
+| **Invoicing** | Wave | Free | Unlimited invoices, Stripe/PayPal integration |
+| **Accounting** | Wave | Free | Built-in with invoicing, tracks expenses |
+| **Contracts** | HelloSign | $15/mo | Simple, professional e-signatures |
+| **Time Tracking** | Toggl | Free tier | Clean UI, integrations |
+| **Project Management** | Linear | Free tier | Modern, developer-focused |
+| **Communication** | Slack + Email | Free/$8/mo | Industry standard |
+| **CRM** | Notion | Free tier | Flexible, tracks leads and projects |
+| **Code Hosting** | GitHub | Free | Industry standard |
+| **Deployment** | Vercel/Railway | Free tiers | Modern, fast |
+| **Email** | Google Workspace | $6/mo | Professional domain email |
+
+**Total Monthly Cost:** ~$30-50/month (minimal viable setup)
+
+> Source: [Wave vs FreshBooks comparison](https://www.cashflowcalendar.app/blog/wave-vs-freshbooks-best-invoicing-tool-for-freelancers)
+
+**Wave Recommendation:**
+- Free accounting and invoicing (Starter Plan)
+- Unlimited invoices, bills, estimates
+- Stripe and PayPal integration
+- US/Canada businesses only
+- Best for freelancers with multiple clients
+
+> Source: [ZarMoney](https://www.zarmoney.com/blog/best-accounting-software-for-freelancers)
+
+### Client Onboarding Process
+
+**7-Step Onboarding Flow:**
+
+```
+1. DISCOVERY CALL (30-60 min)
+   ├── Understand problem/opportunity
+   ├── Assess technical requirements
+   ├── Evaluate fit (both directions)
+   └── Identify decision maker, timeline
+
+2. PROPOSAL (1-3 days)
+   ├── Executive summary
+   ├── Scope of work
+   ├── Deliverables with acceptance criteria
+   ├── Timeline and milestones
+   ├── Investment (pricing)
+   └── Terms and next steps
+
+3. CONTRACT SIGNING
+   ├── MSA for new clients
+   ├── SOW for project specifics
+   ├── NDA if needed
+   └── Digital signatures via HelloSign
+
+4. KICKOFF MEETING (60 min)
+   ├── Introductions (if multiple stakeholders)
+   ├── Confirm scope and priorities
+   ├── Establish communication channels
+   ├── Set up access (repos, tools, environments)
+   └── Schedule first milestone check-in
+
+5. DEPOSIT/PAYMENT
+   ├── 50% upfront for projects
+   ├── Or first retainer payment
+   └── Net-15 terms for ongoing
+
+6. PROJECT EXECUTION
+   ├── Weekly status updates
+   ├── Milestone demos
+   ├── Change requests via process
+   └── Documentation as we go
+
+7. PROJECT CLOSEOUT
+   ├── Final delivery and acceptance
+   ├── Knowledge transfer if needed
+   ├── Final invoice
+   ├── Request testimonial/referral
+   └── Schedule follow-up check-in
+```
+
+> Sources: [Rocketlane](https://www.rocketlane.com/blogs/client-onboarding-template), [Dock](https://www.dock.us/library/client-onboarding-process)
+
+**Key Insight:** "88% of customers are more likely to remain loyal to businesses prioritizing onboarding and education."
+
+---
+
+## Marketing & Lead Generation
+
+### Current Channels
+
+| Channel | Status | Effectiveness |
+|---------|--------|---------------|
+| Word of mouth / referrals | Active | High - best quality leads |
+| LinkedIn presence | Minimal | Medium - needs optimization |
+| Past client relationships | Active | High |
+| Network connections | Active | Medium |
+
+### LinkedIn Strategy
+
+**Why LinkedIn Matters:**
+- 75% of buyers say thought leadership helps them determine vendor shortlist
+- 70% say LinkedIn is one of the most trusted sources of information
+- Less than 1% of LinkedIn's 1B+ users actively create content
+- Effective lead generation begins with client targeting, not content
+
+> Sources: [ResearchGate](https://www.researchgate.net/publication/380433146_Digital_Marketing_on_LinkedIn_In-Depth_Strategies_for_Lead_Generation), [LinkedIn Marketing Solutions](https://business.linkedin.com/marketing-solutions/success/lead-generation)
+
+**Profile Optimization:**
+- [ ] Professional headshot
+- [ ] Captivating banner showing expertise
+- [ ] Headline with value proposition (not just title)
+- [ ] Summary that defines expertise, values, and how you add value
+- [ ] Call to action: "Explore my portfolio" or "Let's discuss your project"
+- [ ] Strategic keywords for discoverability
+
+**Content Strategy:**
+| Content Type | Frequency | Purpose |
+|--------------|-----------|---------|
+| Technical insights | 2x/week | Demonstrate expertise |
+| Project case studies | 1x/month | Show results |
+| Industry commentary | 1x/week | Thought leadership |
+| Engagement on others' posts | Daily | Visibility, networking |
+
+**2024 Algorithm Tips:**
+- Avoid too many hashtags (limits reach)
+- Early engagement increases distribution
+- Minimize outgoing links in posts
+- Quality over quantity in connections
+
+> Source: [IMPACTABLE](https://impactable.com/linkedin-lead-generation-2024/)
+
+### Freelance Platform Strategy
+
+**Platform Comparison:**
+
+| Platform | Fee Structure | Best For | Quality | Notes |
+|----------|---------------|----------|---------|-------|
+| **Toptal** | No fee to freelancer | High-rate, premium clients | Top 3% vetted | $300 client deposit, 48hr hire |
+| **Upwork** | 20% fee to freelancer | Volume, variety | Unvetted | $15-90/hr typical rates |
+| **Arc.dev** | Varies | Quality + speed | Pre-vetted | 24hr hiring, 92% satisfaction |
+
+> Sources: [Arc.dev](https://arc.dev/employer-blog/toptal-vs-upwork-vs-arc/), [Upwork](https://www.upwork.com/resources/upwork-vs-toptal)
+
+**Recommendation:** Selective use of Toptal or Arc.dev for overflow, avoid Upwork fee structure unless building reputation from scratch.
+
+### Referral Program
+
+| Referrer Type | Incentive |
+|---------------|-----------|
+| Past clients | 10% of first project value (up to $2,000) |
+| Professional contacts | $500 for closed project |
+| Ongoing partner (agencies) | Revenue share arrangement |
+
+### Marketing Channels to Develop
+
+- [ ] **Portfolio website refresh** - Updated case studies, modern design
+- [ ] **Technical blog** - SEO for "React consultant," "AI integration," etc.
+- [ ] **Open source contributions** - Visibility, credibility
+- [ ] **Conference speaking** - Authority positioning
+- [ ] **GitHub presence** - Showcase quality code
+
+### Positioning Statement
+
+**Current:**
+> "Full-stack development and AI integration for companies that want to build modern, scalable software without hiring a full engineering team."
+
+**Alternative Options:**
+- "Modern web development and AI integration for startups and growing companies"
+- "React, TypeScript, and AI expertise on demand - senior talent, without the overhead"
+- "From MVP to scale - full-stack development for ambitious teams"
+
+---
+
+## Professional Development
+
+### Current Expertise
+
+**Core Competencies (Expert Level):**
+- React 19 / Next.js 15 ecosystem
+- TypeScript strict mode patterns
+- NestJS backend architecture
+- PostgreSQL + Prisma ORM
+- Modern CSS (Tailwind, CSS-in-JS)
+
+**Growing Competencies (Intermediate):**
+- AI/LLM integration (Claude, OpenAI APIs)
+- RAG system architecture
+- Agentic AI patterns
+- Vector databases (Supabase pgvector)
+
+### Learning Priorities
+
+| Skill | Why | Priority | Timeline |
+|-------|-----|----------|----------|
+| **Advanced AI agents** | Highest market demand, cutting edge | P0 | Ongoing |
+| **AWS/Cloud architecture** | Enterprise client requirements | P1 | Q1 2025 |
+| **React Native** | Expand to mobile offerings | P2 | Q2 2025 |
+| **Kubernetes basics** | Enterprise deployment patterns | P3 | Q3 2025 |
+
+### Certifications to Consider
+
+| Certification | Value | Investment |
+|---------------|-------|------------|
+| AWS Solutions Architect | Enterprise credibility | ~$300 + prep time |
+| Google Cloud Professional | Multi-cloud expertise | ~$300 + prep time |
+| Anthropic/OpenAI Partner | AI specialization | Varies |
+
+### Learning Resources
+
+**Technical:**
+- [Total TypeScript](https://totaltypescript.com/) - Deep TS patterns
+- [Kent C. Dodds](https://kentcdodds.com/) - React/testing
+- [Anthropic Docs](https://docs.anthropic.com/) - Claude integration
+- [LangChain](https://python.langchain.com/) - AI orchestration
+
+**Business:**
+- [Consulting Success](https://www.consultingsuccess.com/) - Consulting strategy
+- [Jonathan Stark](https://jonathanstark.com/) - Value pricing
+- [Brennan Dunn](https://doubleyourfreelancing.com/) - Freelance business
+
+---
+
+## Financial Projections
+
+### Year 1 Scenarios
+
+**Conservative (20 hrs/week billable average):**
+| Quarter | Billable Hours | Avg Rate | Revenue |
+|---------|----------------|----------|---------|
+| Q1 | 260 hrs | $125/hr | $32,500 |
+| Q2 | 260 hrs | $135/hr | $35,100 |
+| Q3 | 260 hrs | $145/hr | $37,700 |
+| Q4 | 260 hrs | $150/hr | $39,000 |
+| **Year 1** | 1,040 hrs | - | **$144,300** |
+
+**Moderate (25 hrs/week billable average):**
+| Quarter | Billable Hours | Avg Rate | Revenue |
+|---------|----------------|----------|---------|
+| Q1 | 325 hrs | $135/hr | $43,875 |
+| Q2 | 325 hrs | $145/hr | $47,125 |
+| Q3 | 325 hrs | $155/hr | $50,375 |
+| Q4 | 325 hrs | $165/hr | $53,625 |
+| **Year 1** | 1,300 hrs | - | **$195,000** |
+
+**Optimistic (30 hrs/week + project premiums):**
+| Quarter | Billable Hours | Avg Rate | Revenue |
+|---------|----------------|----------|---------|
+| Q1 | 390 hrs | $150/hr | $58,500 |
+| Q2 | 390 hrs | $165/hr | $64,350 |
+| Q3 | 390 hrs | $175/hr | $68,250 |
+| Q4 | 390 hrs | $185/hr | $72,150 |
+| **Year 1** | 1,560 hrs | - | **$263,250** |
+
+### Expense Projections (Annual)
+
+| Category | Low | High |
+|----------|-----|------|
+| Insurance (E&O, GL) | $1,500 | $2,500 |
+| Software/Tools | $500 | $1,500 |
+| Professional Development | $500 | $2,000 |
+| Marketing | $500 | $3,000 |
+| Legal/Accounting | $500 | $2,000 |
+| Hardware/Equipment | $500 | $2,000 |
+| Travel/Conferences | $0 | $3,000 |
+| Misc/Buffer | $500 | $2,000 |
+| **TOTAL** | **$5,000** | **$18,000** |
+
+### Unit Economics
+
+**Target Metrics:**
+| Metric | Target |
+|--------|--------|
+| Effective hourly rate | $150+ |
+| Utilization (billable/available) | 60-70% |
+| Average project size | $15,000+ |
+| Client lifetime value | $25,000+ |
+| Client acquisition cost | < $500 (referral-based) |
+
+**Profit Margins:**
+For IT service providers, profit margins typically range 10-30%. Solo consultants with low overhead can achieve 60-80% profit margins.
+
+> Source: [ScopeStack](https://scopestack.io/blog/pricing-strategies-for-it-service-businesses)
+
+---
+
+## Growth Strategy
+
+### Scale Path Options
+
+**Option A: Stay Solo (Current Preference)**
+| Aspect | Details |
+|--------|---------|
+| Revenue Cap | $200-300K |
+| Hours | 25-30 billable/week |
+| Pros | Maximum flexibility, quality control, low overhead |
+| Cons | Income ceiling, no leverage |
+| Strategy | Maximize hourly rate, cherry-pick best projects |
+
+**Option B: Subcontractor Network**
+| Aspect | Details |
+|--------|---------|
+| Revenue Cap | $400-600K |
+| Model | Take larger projects, subcontract overflow |
+| Margin | 20-30% on subcontractor work |
+| Pros | Larger projects, some leverage |
+| Cons | Management overhead, quality risk |
+| Strategy | Build trusted contractor network, premium positioning |
+
+**Option C: Small Agency**
+| Aspect | Details |
+|--------|---------|
+| Revenue Cap | $1M+ |
+| Model | 2-4 developers, project manager |
+| Margin | 30-40% on employee work |
+| Pros | Scale, sellable business |
+| Cons | Significant overhead, management focus |
+| Strategy | Would require different business structure |
+
+**Current Preference:** Stay solo with selective subcontracting. Prioritize quality of life, interesting work, and flexibility over maximum revenue.
+
+### Milestone-Based Growth
+
+| Milestone | Trigger | Action |
+|-----------|---------|--------|
+| $10K/month consistent | Validated demand | Raise rates 10-15% |
+| Full utilization | Turning down work | Consider subcontractor for overflow |
+| $15K/month consistent | Strong positioning | Productize most common service |
+| $20K/month consistent | Market recognition | Consider Strategic hires or agency transition |
+
+---
+
+## Portfolio & Case Studies
+
+### Active Portfolio Pieces
+
+| Project | Type | Technologies | Status | Link |
+|---------|------|--------------|--------|------|
+| [[Projects/Neuman Brain]] | Personal | React 19, Dexie, AI | Active | - |
+| [[Projects/Lazy Golfing]] | Startup | Next.js 15, NestJS, Prisma | Alpha | - |
+| [[Projects/The Dead Robot]] | Automation | Python, GitHub Actions, AI | Live | thedeadrobot.com |
+| [[Projects/TJN Portfolio]] | Personal | React, Vite, Tailwind | Live | travisjneuman.com |
+
+### Case Study Template
+
+**For each client project, document:**
+
+```markdown
+# Case Study: [Project Name]
+
+## Client Overview
+- Industry:
+- Company Size:
+- Challenge:
+
+## Solution
+- Approach:
+- Technologies:
+- Timeline:
+
+## Results
+- Quantifiable outcomes
+- Client testimonial
+
+## Technical Highlights
+- Interesting patterns used
+- Problems solved
+
+## Learnings
+- What went well
+- What we'd do differently
+```
+
+---
+
+## Synergies with Kikman Enterprises
+
+### Cross-Promotion
+
+| Direction | Benefit |
+|-----------|---------|
+| ndev → Kikman Ventures | Technical credibility, portfolio pieces |
+| Kikman Ventures → ndev | Client referrals, real-world case studies |
+
+### Resource Sharing
+
+| Resource | How Shared |
+|----------|------------|
+| Technical expertise | ndev handles development for LazyGolf, Rent-a-Nerd tech |
+| Network | Shared connections, referrals both directions |
+| Brand | "A Kikman Enterprises Company" endorsement |
+
+### Boundaries (Important)
+
+| Aspect | ndev | Kikman Ventures |
+|--------|------|-----------------|
+| Ownership | Travis solo | Travis + Trenton partnership |
+| Revenue | Separate | Separate |
+| Branding | Personal brand | Partnership brands |
+| Decision making | Travis only | Shared |
+
+---
+
+## Metrics Dashboard
+
+### Key Performance Indicators
+
+| Metric | Target | Current | Trend |
+|--------|--------|---------|-------|
+| Monthly revenue | $10,000+ | *TBD* | - |
+| Active clients | 2-3 | *TBD* | - |
+| Utilization rate | 60-70% | *TBD* | - |
+| Average project size | $15,000+ | *TBD* | - |
+| Client satisfaction | 9/10+ | *TBD* | - |
+| Referral rate | 50%+ of new clients | *TBD* | - |
+| Effective hourly rate | $150+ | *TBD* | - |
+
+### Monthly Review Checklist
+
+- [ ] Revenue vs target
+- [ ] Pipeline health (leads, proposals out)
+- [ ] Utilization rate calculation
+- [ ] Client satisfaction check-ins
+- [ ] Rate analysis (effective hourly)
+- [ ] Learning/skill development progress
+- [ ] Marketing activity (content, outreach)
+
+---
+
+## Implementation Roadmap
+
+### Immediate (Week 1-2)
+
+**Legal/Financial Setup:**
+- [ ] File Wyoming LLC
+- [ ] Obtain EIN
+- [ ] Open Mercury business bank account
+- [ ] Set up Wave for invoicing/accounting
+- [ ] Get professional liability insurance quote
+
+**Operations:**
+- [ ] Create proposal template
+- [ ] Create SOW template
+- [ ] Create invoice template in Wave
+- [ ] Set up Toggl for time tracking
+
+### Short-term (Month 1)
+
+**Legal:**
+- [ ] Purchase E&O insurance
+- [ ] Create MSA template (or use Bonsai)
+- [ ] Create NDA template
+
+**Marketing:**
+- [ ] LinkedIn profile optimization
+- [ ] Portfolio website audit/refresh plan
+- [ ] Define 3 service packages clearly
+
+**Process:**
+- [ ] Document onboarding process
+- [ ] Create project kickoff checklist
+- [ ] Define communication expectations template
+
+### Medium-term (Months 2-3)
+
+- [ ] Complete portfolio website refresh
+- [ ] Publish first 2 technical blog posts
+- [ ] Reach out to 5 past contacts for referrals
+- [ ] Create 2-3 case study documents
+- [ ] First LinkedIn content sprint (2 weeks)
+
+### Ongoing
+
+- [ ] Weekly: LinkedIn engagement (30 min/day)
+- [ ] Monthly: One technical blog post
+- [ ] Monthly: Review metrics dashboard
+- [ ] Quarterly: Rate review and adjustment
+- [ ] Quarterly: Professional development review
+- [ ] Annually: Insurance renewal
+- [ ] Annually: LLC annual report
+
+---
+
+## Risk Assessment
+
+| Risk | Probability | Impact | Mitigation |
+|------|-------------|--------|------------|
+| Client concentration | Medium | High | Diversify to 3+ clients |
+| Scope creep | High | Medium | Clear SOWs, change process |
+| Payment issues | Medium | Medium | Deposits, net-15 terms, contracts |
+| Burnout | Medium | High | Utilization caps, project selection |
+| Rate resistance | Medium | Medium | Value positioning, niche expertise |
+| Skills obsolescence | Low | High | Continuous learning, AI focus |
+| Legal/liability issues | Low | High | LLC + insurance coverage |
+| Referral dependency | Medium | Medium | Diversify marketing channels |
+
+---
+
+## Resources & Links
+
+### Business Resources
+- [Consulting Success](https://www.consultingsuccess.com/) - Business strategy
+- [Double Your Freelancing](https://doubleyourfreelancing.com/) - Freelance growth
+- [Jonathan Stark](https://jonathanstark.com/) - Value-based pricing
+
+### Legal/Contracts
+- [Docracy](https://www.docracy.com/) - Free contract templates
+- [Bonsai](https://www.hellobonsai.com/) - Freelance-specific templates
+- [HelloSign](https://www.hellosign.com/) - E-signatures
+
+### Tools
+- [Wave](https://www.waveapps.com/) - Free invoicing/accounting
+- [Toggl](https://toggl.com/) - Time tracking
+- [Linear](https://linear.app/) - Project management
+- [Notion](https://notion.so/) - CRM/documentation
+
+### Learning
+- [Total TypeScript](https://totaltypescript.com/)
+- [Kent C. Dodds](https://kentcdodds.com/)
+- [Anthropic Docs](https://docs.anthropic.com/)
+
+---
+
+## Related Links
+
+- [[Kikman Enterprises]] - Partner ventures umbrella
+- [[LazyGolf]] - Active development project
+- [[Rent-a-Nerd]] - Tech support synergy
+- [[Projects/TJN Portfolio]] - Personal portfolio site
+- [[Concepts/TypeScript]] - Core technology
+- [[Concepts/React]] - Core technology
+- [[Concepts/NestJS]] - Core technology
+
+---
+
+*Last updated: 2025-12-14*
+*Status: Active - Comprehensive business plan ready for execution*

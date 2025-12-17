@@ -1,0 +1,237 @@
+# Phase 4 and Beyond - Planning & Roadmap
+
+**Status:** ✅ FINALIZED (Ready for Reference)
+**Priority:** P2 - MEDIUM
+**Created:** 2025-11-24 (Consolidated from 2 related tasks)
+**Finalized:** 2025-11-24
+
+---
+
+## Overview
+
+Consolidated planning document for Phase 4 remaining features and future phases beyond Phase 4.
+
+---
+
+## Consolidated From
+
+This task consolidates the following 2 related task files:
+1. `fix-template-bug-and-continue-phase4.md` - Template bug fix + Phase 4 continuation
+2. `phase-4-remaining-features.md` - Phase 4 feature roadmap
+
+**Reason for Consolidation:** Both tasks plan Phase 4 work and should be a unified roadmap to avoid duplication.
+
+---
+
+## Current Project Status
+
+### Completed Phases
+- ✅ **Phase 1:** Critical Fixes & Foundation
+- ✅ **Phase 2:** Notes Production-Ready
+- ✅ **Phase 3:** Core Features & UI Standardization
+- 🔄 **Phase 3.7:** System Consolidation (In Progress)
+
+### Phase 4 Scope
+**Focus:** Complete remaining core features and polish existing functionality
+
+---
+
+## Phase 4: Remaining Features
+
+### Priority 1: Template System Bug Fix
+**From:** `fix-template-bug-and-continue-phase4.md`
+
+**Issue:** Template system has bugs that need addressing before Phase 4 features
+**Status:** ✅ RESOLVED (2025-11-24)
+
+**Findings:**
+- [x] Kanban column templates work correctly (dev, pm, marketing)
+- [x] `replaceAllColumns` has undo support and smart task mapping
+- [x] No bug found - original file reference not found in archives
+- [x] Note templates are a NEW FEATURE (not yet implemented), not a bug
+
+**Note Templates (Future Feature):**
+- Type interface exists in `src/types/notes.ts` (commented out)
+- Not yet implemented - tracked as P4 Notes improvement
+
+### Priority 2: Core Feature Completion
+
+**Status Update (2025-11-24):** Audit revealed many features already implemented.
+
+**1. Kanban Enhancements**
+   - ✅ Drag-drop between columns (working via @dnd-kit)
+   - ✅ Bulk card operations (bulkUpdateStatus, bulkUpdatePriority, bulkDeleteTasks in ListView)
+   - ✅ Column templates (dev, pm, marketing in ColumnManager.tsx)
+   - ✅ Advanced filtering (search, priority, tags in Kanban.tsx)
+   - ❌ Card templates (not yet - would create new cards from templates)
+
+**2. Calendar Features**
+   - ✅ Multi-day events (expandMultiDayEvent in recurrence.ts, visual hints in month view)
+   - ✅ Recurring events (full UI: frequency, daysOfWeek, dayOfMonth, endType in EventCreateModal)
+   - ⬜ Multi-day spanning bars (Google Calendar style visual bars - enhancement)
+   - ❌ Calendar export/import (.ics files)
+   - ⬜ Integration with Tasks (partially - tasks widget exists)
+
+**3. Notes Improvements**
+   - ✅ Rich text editing (Lexical with toolbar, keyboard shortcuts Cmd+B/I/U)
+   - ✅ Search (searchNotes function, search UI in Notes.tsx)
+   - ❌ Note linking/backlinking (Backlink interface exists, not implemented)
+   - ❌ Note templates (NoteTemplate interface exists, not implemented)
+
+**4. Dashboard Polish**
+   - ✅ 50+ widgets implemented with categories
+   - ✅ Widget customization (drag-drop, resize)
+   - ✅ Layout saving (persisted to store)
+   - ✅ Widget performance (lazy loading, bundle optimization)
+   - ⬜ Widget presets (quick layout templates)
+   - ⬜ Custom widget creation (user-defined widgets)
+
+### Priority 3: Integration Features
+
+**Cross-Feature Integrations:**
+- Notes ↔ Tasks (link notes to kanban cards)
+- Calendar ↔ Tasks (convert events to tasks)
+- Dashboard ↔ All (unified quick-add)
+
+---
+
+## Beyond Phase 4: Future Phases
+
+### Phase 5: Mobile & PWA (Estimated: 4-6 weeks)
+- Mobile-optimized UI
+- PWA installation
+- Offline-first architecture
+- Mobile gestures and navigation
+
+### Phase 6: Advanced Features (Estimated: 6-8 weeks)
+- AI integration (smart suggestions, auto-tagging)
+- **Local Terminal Integration** (NEW - see `research-local-terminal-integration.md`)
+  - Execute local CLI commands from AI Terminal
+  - Cross-platform support (Windows, macOS, Linux)
+  - Vision: "When somebody turns on any device, they just come to Neuman Brain and can do anything"
+- Collaboration features (if multi-user)
+- Advanced analytics and insights
+- Custom themes and branding
+
+### Phase 7: Performance & Scale (Estimated: 3-4 weeks)
+- Bundle size optimization
+- Lazy loading improvements
+- IndexedDB performance tuning
+- Large dataset handling (10,000+ items)
+
+### Phase 8: Polish & Launch (Estimated: 2-3 weeks)
+- Final UX audit
+- Accessibility compliance (WCAG AAA)
+- Documentation completion
+- Public launch preparation
+
+---
+
+## Implementation Strategy
+
+### Template Bug Fix First
+**Why:** Blocking other Phase 4 work
+**Estimated Time:** 1-2 days
+**Files to Investigate:**
+- Template creation logic
+- Template storage (IndexedDB)
+- Template application to notes
+
+### Then: Feature Rollout
+**Approach:** Incremental rollout by feature area
+**Order:**
+1. Kanban (most requested)
+2. Calendar (builds on existing work)
+3. Notes (enhances core functionality)
+4. Dashboard (polish and optimization)
+
+### Finally: Integration Layer
+**Why Last:** Requires stable individual features
+**Approach:** Build unified API layer for cross-feature operations
+
+---
+
+## Success Criteria
+
+### Phase 4 Complete When:
+- ✅ Template system bugs resolved
+- ✅ All Priority 1 features implemented
+- ✅ Cross-feature integrations working
+- ✅ Zero P0/P1 bugs
+- ✅ Performance targets met (< 100KB bundle)
+- ✅ Accessibility compliance (WCAG AA)
+
+### Ready for Phase 5 When:
+- ✅ Phase 4 complete
+- ✅ Mobile audit completed
+- ✅ PWA requirements documented
+- ✅ User feedback incorporated
+
+---
+
+## Timeline Estimates
+
+| Phase | Duration | Start | End |
+|-------|----------|-------|-----|
+| **Phase 4** | 8-10 weeks | TBD | TBD |
+| **Phase 5** | 4-6 weeks | TBD | TBD |
+| **Phase 6** | 6-8 weeks | TBD | TBD |
+| **Phase 7** | 3-4 weeks | TBD | TBD |
+| **Phase 8** | 2-3 weeks | TBD | TBD |
+| **Total** | **23-31 weeks** (~6-8 months) | | |
+
+---
+
+## Remaining Work Summary (2025-11-24 Audit)
+
+**Actually Remaining (❌ = not implemented):**
+1. **Kanban:** Card templates (pre-fill new cards from templates)
+2. **Calendar:** Export/import .ics files
+3. **Notes:** Backlinks (bidirectional linking between notes)
+4. **Notes:** Note templates (pre-fill new notes from templates)
+
+**Enhancement Opportunities (⬜ = partially done, could be improved):**
+1. Multi-day spanning bars (Google Calendar visual style)
+2. Widget presets (quick layout templates)
+3. Custom widget creation
+4. Task-Calendar deeper integration
+
+**Original Questions - Updated:**
+
+**Q1: Should we ship incrementally?**
+- **Answer:** Yes, since most P4 features are DONE. Ship remaining as they complete.
+
+**Q2: What's MVP vs nice-to-have?**
+- **MVP (Actually Remaining):** Note templates, Calendar export/import
+- **Nice-to-have:** Backlinks, card templates, visual spanning bars, custom widgets
+
+**Q3: Mobile (P5) vs Advanced Features (P6)?**
+- **Recommendation:** With P4 ~70% complete, assess Mobile/PWA readiness sooner
+
+---
+
+## Notes
+
+**Why Consolidate?**
+- Avoids duplicate Phase 4 planning
+- Single source of truth for project roadmap
+- Easier to coordinate long-term planning
+- Clear phase boundaries and dependencies
+
+**Original Task Files:**
+- Both planning-stage tasks, no implementation yet
+- Safe to consolidate without losing progress
+
+**Next Steps:**
+1. ✅ Template bug investigation complete (no bug found)
+2. ✅ Feature audit complete (many P4 features already done)
+3. Decide on remaining 4 features priority:
+   - Card templates, Calendar .ics export, Note backlinks, Note templates
+4. Optionally pursue enhancement opportunities
+5. Consider starting Phase 5 Mobile/PWA assessment
+
+---
+
+**Document Status:** ✅ Audited - Phase 4 ~70% Complete
+**Last Updated:** 2025-11-24
+**Audit Completed:** 2025-11-24 (Most P4 features found to be already implemented)

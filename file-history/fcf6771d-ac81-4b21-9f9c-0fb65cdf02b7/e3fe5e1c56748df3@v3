@@ -1,0 +1,387 @@
+# src/components/CLAUDE.md — Shared Components
+
+## Scope
+Reusable React components under `src/components/`. These are shared across pages and widgets.
+
+## Component Categories
+| Category | Purpose | Examples |
+|----------|---------|----------|
+| **Layout** | Page structure | `Layout.tsx`, `Sidebar.tsx`, `Header.tsx`, `Footer.tsx`, `PageHeader.tsx`, `PageContent.tsx` |
+| **Modals** | Dialog overlays | `Modal.tsx`, `ConfirmDialog.tsx`, `PromptDialog.tsx`, `*Modal.tsx` |
+| **Calendar/Time** | Date/time UI | `DayView.tsx`, `WeekView.tsx`, `AgendaView.tsx`, `TimeEntry*.tsx` |
+| **Widget System** | Widget infrastructure | `Widget.tsx`, `WidgetControls.tsx`, `WidgetManager.tsx`, `WidgetErrorBoundary.tsx` |
+| **Analytics** | Charts & metrics | `Analytics/*` (MetricCard, CompletionRateChart, PriorityDistribution, StatusBreakdown, TimeByProjectChart, HourlyHeatmap, SessionDurationChart, MeetingVsFocusChart, TagFrequencyChart, AnalyticsPeriodSelector) |
+| **Graph** | Knowledge graph visualization | `Graph/GraphCanvas.tsx` (D3 force-directed graph with zoom/pan/drag) |
+| **Diagrams** | Diagram editor | `DiagramCanvas/Canvas.tsx` (Konva Stage with shapes, grid, transformer), `DiagramCanvas/Toolbar.tsx` (tool selection) |
+| **Settings** | Configuration UI | `BackupSettings.tsx`, `ProviderSettings.tsx`, `ModelSelector.tsx`, `PresetManager.tsx` |
+| **Error Handling** | Error UI | `StoreErrorBoundary.tsx`, `ErrorToast.tsx`, `Toast.tsx` |
+| **Terminal** | AI/Shell UI | `AITerminal.tsx`, `TerminalHelpModal.tsx`, `PhantomShell/*` |
+| **Editors** | Rich text/specialized | `editor/*`, `RecurrencePicker.tsx`, `BackgroundCustomizer.tsx` |
+| **Tags** | Tag management UI | `TagPicker.tsx`, `TagFilter.tsx`, `TagManager.tsx` |
+| **Projects** | Project context UI | `ProjectTree.tsx`, `ProjectContextDropdown.tsx`, `ProjectPicker.tsx`, `ProjectSettingsModal.tsx` |
+
+## Non-negotiables
+- **Props typing:** All props must have TypeScript interfaces. No `any`.
+- **Semantic tokens:** Use Tailwind semantic classes (`bg-surface-*`, `text-text-*`). No hardcoded colors.
+- **Accessibility:** ARIA labels, keyboard navigation, focus management.
+- **Error boundaries:** Wrap async/complex components in error boundaries.
+- **Keep focused:** One component = one responsibility. Split if >300 lines.
+
+## Component Pattern
+```tsx
+interface MyComponentProps {
+  title: string;
+  onAction: () => void;
+  variant?: 'primary' | 'secondary';
+}
+
+export function MyComponent({ title, onAction, variant = 'primary' }: MyComponentProps) {
+  return (
+    <div className="bg-surface-light p-4 rounded-lg">
+      <h2 className="text-text-light-primary font-semibold">{title}</h2>
+      <button
+        onClick={onAction}
+        className="btn-primary"
+        aria-label={`Perform ${title} action`}
+      >
+        Action
+      </button>
+    </div>
+  );
+}
+```
+
+## Subfolders
+- `__tests__/` — Component tests (Vitest + Testing Library)
+- `Analytics/` — Analytics charts and metric components (Recharts-based)
+- `auth/` — Authentication-related components
+- `CommandPalette/` — Global search & command palette (Ctrl+K/Cmd+K)
+- `DiagramCanvas/` — Diagram editor components (Konva-based)
+- `editor/` — Rich text editor components (Lexical)
+- `notes/` — Notes page components (Notes Page Revolution)
+- `PhantomShell/` — Terminal emulation components
+- `search/` — Search-related components
+- `shared/` — Common primitives
+- `sidebar/` — Sidebar-specific components
+
+## Notes Folder (Notes Page Revolution)
+
+### Layout System (3 User-Selectable Layouts)
+| Component | Purpose |
+|-----------|---------|
+| `NotesLayout.tsx` | Main layout router - switches between 3 layouts based on user preference |
+| `ThreeColumnLayout.tsx` | Apple Notes/Bear style: Folders \| Notes List \| Editor (3 resizable columns) |
+| `FileTreeLayout.tsx` | Obsidian/VS Code style: Unified file tree with notes inside folders \| Editor |
+| `TabbedSidebarLayout.tsx` | Notion style: Tabs for Folders/Tags/All Notes \| Editor |
+| `LayoutSwitcher.tsx` | Modal for switching between layouts with visual previews |
+
+### Core Components
+| Component | Purpose |
+|-----------|---------|
+| `FolderTreeNode.tsx` | Recursive folder tree item with animated expand/collapse |
+| `FolderSidebar.tsx` | Folder tree + search + tag filtering |
+| `NoteListItem.tsx` | Individual note card with hover actions |
+| `NotesList.tsx` | Filtered/sorted notes list with bulk operations |
+| `SidebarResizer.tsx` | Vertical resize handle (sidebar width) with 8px hit area |
+| `HorizontalSplitter.tsx` | Horizontal resize handle (folder/notes pane division) |
+| `KeyboardShortcutsModal.tsx` | Keyboard shortcuts help modal (press ?) |
+| `index.ts` | Barrel export for all notes components |
+
+**Key Features:**
+- **3 layout architectures**: Three-Column (Apple Notes), File Tree (Obsidian), Tabbed Sidebar (Notion)
+- **Layout switching**: `Cmd+Shift+L` cycles layouts, or use LayoutSwitcher modal
+- Flexbox layout (no hardcoded heights like `h-[calc(100vh-340px)]`)
+- Persisted layout preferences via `useSettingsStore.notesLayout`
+- Linear-inspired active states (left accent bar instead of tinted background)
+- Progressive disclosure (hover actions appear on hover)
+- Keyboard accessible (J/K navigation, Cmd+\ for sidebar toggle, ? for help)
+- View mode cycling (Cmd+Shift+\ cycles split → editor-only → list-only)
+- Mobile drawer overlay (slides from left on small screens)
+- Animated folder expand/collapse with prefers-reduced-motion support
+
+## Component Development
+
+**For component API design** (choosing props, simplification):
+- Use **`/consider:via-negativa`** to identify what props/features to remove
+- Use **`/consider:occams-razor`** when choosing between complex patterns
+- Example: "Should we support both controlled and uncontrolled modes, or just controlled?"
+
+**For creating project-specific component scaffolding**:
+- Use **`/create-slash-command`** to build component scaffolding command
+- Example: Create `/scaffold-component` for consistent component boilerplate
+
+See [Tache Integration Guide § Component Development](../../docs/technical/tache-integration-guide.md#workflow-component-development) for complete workflow.
+
+---
+
+## Patterns & Solutions
+
+### Drag-and-Drop with Navigation Links (@dnd-kit)
+**Problem:** When using @dnd-kit with React Router Links, native browser click events can fire during/after drag operations, causing unwanted navigation.
+
+**Solution Pattern (from Sidebar.tsx):**
+```tsx
+const [isDisablingClicks, setIsDisablingClicks] = useState(false);
+const disableTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+const handleDragStart = () => {
+  // Disable clicks IMMEDIATELY when drag starts
+  if (disableTimeoutRef.current) clearTimeout(disableTimeoutRef.current);
+  setIsDisablingClicks(true);
+};
+
+const handleDragEnd = (event: DragEndEvent) => {
+  // Keep clicks disabled for 150ms after drag ends
+  disableTimeoutRef.current = setTimeout(() => {
+    setIsDisablingClicks(false);
+    disableTimeoutRef.current = null;
+  }, 150);
+};
+
+// Apply pointer-events control to list items
+<li style={{pointerEvents: isDisablingClicks ? 'none' : 'auto'}}>
+  <Link onClick={(e) => {
+    if (isDisablingClicks) {
+      e.preventDefault();
+      return false;
+    }
+  }}>
+</li>
+
+<DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
+  {/* sortable items */}
+</DndContext>
+```
+
+**Why both approaches:**
+- `pointer-events: none` blocks native browser clicks (most important)
+- `onClick preventDefault` provides React-level safety (defense in depth)
+- Timeout in ref survives component re-renders from state updates
+
+**Key insights:**
+- Disable clicks on `onDragStart`, not just `onDragEnd`
+- Mouse release can occur over Link text, not just drag handle
+- @dnd-kit can fire native clicks BEFORE React handlers execute
+- Store timeout ID in ref to survive re-renders
+
+---
+
+### PageContent Variants and Scrolling
+**Problem:** When fixing virtualized scrolling (react-window) for pages like Link Library, setting `overflow-hidden` on Layout.tsx breaks scrolling on pages that need traditional document scrolling (Settings, Dashboard, etc.).
+
+**Root Cause (commit 752a7d9):**
+- Layout.tsx main element had `overflow-hidden` to prevent outer page scrollbar
+- This blocked ALL scrolling, including for pages with long content
+- Pages using `variant="default"` had no scroll capability
+
+**Solution Pattern (PageContent.tsx):**
+```tsx
+const variantClasses: Record<PageVariant, string> = {
+  // Standard page - scrolls within flex container (Settings, Dashboard, etc.)
+  default: 'flex-1 overflow-y-auto min-h-0',
+  // Full-height - fills viewport, internal scrolling (Graph, Notes, Kanban)
+  'full-height': 'flex flex-col flex-1 min-h-0 overflow-hidden',
+  // Split-view - horizontal layout for sidebar + content (Link Library)
+  'split-view': 'flex flex-1 min-h-0 overflow-hidden',
+};
+```
+
+**Key principles:**
+1. **`default` variant:** Enables `overflow-y-auto` for traditional page scrolling
+2. **`full-height`/`split-view`:** Use `overflow-hidden` so children handle their own scrolling (virtualized lists, canvas, etc.)
+3. **`min-h-0`:** Required on all variants for flexbox children to shrink and scroll properly
+
+**When to use each variant:**
+| Variant | Use Case | Examples |
+|---------|----------|----------|
+| `default` | Long-form content, forms | Settings, Dashboard, Habits |
+| `full-height` | Canvas, virtualized content | Graph, Diagrams |
+| `split-view` | Sidebar + scrollable main | Link Library, Notes |
+
+**Anti-pattern:**
+- Setting `overflow-hidden` at layout level without providing scroll capability in PageContent variants
+- Forgetting `min-h-0` on flex containers (children won't scroll)
+
+---
+
+### Hover Actions without Overlap
+**Problem:** Absolute positioned hover actions (edit, delete, etc.) can overlap with content titles/text, making both unreadable. Common in card/list item components.
+
+**Solution Pattern (from Notes.tsx):**
+```tsx
+// ❌ BEFORE: Absolute positioning causes overlap
+<div className="group relative p-4">
+  {/* Static indicators compete with hover actions */}
+  <div className="absolute top-2 right-2">
+    {note.isFavorite && <Star />}
+    {note.isPinned && <Pin />}
+  </div>
+
+  {/* Title can overflow into action space */}
+  <h4 className="font-medium pr-6 truncate">
+    {note.title}
+  </h4>
+
+  {/* Actions overlap title when revealed */}
+  <div className="absolute top-2 right-8 opacity-0 group-hover:opacity-100">
+    {/* 5 buttons - can overlap long titles */}
+  </div>
+</div>
+
+// ✅ AFTER: Flex layout with reserved action zone
+<div className="group p-4">
+  {/* Header row: Title + Actions */}
+  <div className="flex items-start gap-2 mb-1 min-h-[24px]">
+    {/* Title: grows to fill space, truncates before actions */}
+    <h4 className="font-medium flex-1 truncate min-w-0">
+      {note.title}
+    </h4>
+
+    {/* Reserved action zone: prevents overlap */}
+    <div className="flex items-center gap-0.5 shrink-0">
+      {/* Static indicators: always visible */}
+      <div className="flex items-center gap-0.5">
+        {note.isFavorite && <Star className="w-4 h-4" />}
+        {note.isPinned && <Pin className="w-4 h-4" />}
+      </div>
+
+      {/* Hover actions: occupy space even when invisible */}
+      <div className="flex items-center gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+        <button><Download className="w-4 h-4" /></button>
+        <button><Star className="w-4 h-4" /></button>
+        <button><Trash2 className="w-4 h-4" /></button>
+      </div>
+    </div>
+  </div>
+
+  {/* Content below */}
+  <p className="text-sm">{content}</p>
+</div>
+```
+
+**For images/media with controls (from ImageNode.tsx):**
+```tsx
+// ❌ BEFORE: Negative margin can overlap content below
+<div className="relative group">
+  <img src={src} alt={alt} />
+  <div className="absolute -bottom-10 opacity-0 group-hover:opacity-100">
+    {/* Controls overlap content below image */}
+  </div>
+</div>
+
+// ✅ AFTER: Controls positioned with positive margin
+<div className="group">
+  <img src={src} alt={alt} />
+  <div className="flex gap-2 mt-2 opacity-0 group-hover:opacity-100 transition-opacity">
+    <button>Edit Alt Text</button>
+    <button>Delete</button>
+  </div>
+</div>
+```
+
+**Key principles:**
+1. **Flex over Absolute:** Use flex layout for title + actions in same row
+2. **Reserve Space:** Actions use `opacity-0` (not `hidden`) to preserve layout
+3. **Title Flexibility:** `flex-1 min-w-0` allows title to shrink/truncate gracefully
+4. **Action Zone:** `shrink-0` prevents action container from collapsing
+5. **Positive Spacing:** Use `mt-*` instead of negative margins for media controls
+
+**Advantages:**
+- ✅ Zero overlap at any viewport width or content length
+- ✅ No layout shift when actions appear/disappear
+- ✅ Predictable behavior with fixed action widths
+- ✅ Responsive title truncation
+
+**When to use:**
+- Card components with hover actions (Notes, Tasks, Forms, etc.)
+- List items with edit/delete/duplicate buttons
+- Media elements (images, videos) with control overlays
+
+---
+
+### Avoiding Tab/Button Redundancy
+**Problem:** Creating tabs that filter the same content (e.g., "Documents", "Spreadsheets", "Presentations" tabs that all show docs filtered by type) when direct action buttons would be simpler and more discoverable.
+
+**Bad Pattern (from Docs.tsx - fixed 2025-12-11):**
+```tsx
+// ❌ BEFORE: 4 tabs that show the same content with filters
+const CREATE_TABS: Tab[] = [
+  { id: 'create', label: 'Create', icon: Sparkles },
+  { id: 'documents', label: 'Documents', icon: FileText },      // Redundant
+  { id: 'spreadsheets', label: 'Spreadsheets', icon: Table2 },  // Redundant
+  { id: 'presentations', label: 'Presentations', icon: Presentation }, // Redundant
+];
+
+// + A dropdown button in sidebar:
+<button onClick={() => setShowMenu(!showMenu)}>
+  <Plus /> New
+</button>
+{showMenu && <CreateMenu />}  // Dropdown with Document/Sheet/Slides
+
+// + Another dropdown in empty state center (same options)
+<button onClick={() => setShowMenu(!showMenu)}>
+  <Plus /> Create New
+</button>
+```
+
+**Good Pattern:**
+```tsx
+// ✅ AFTER: Only meaningful tabs (distinct content types)
+const CREATE_TABS: Tab[] = [
+  { id: 'create', label: 'Create', icon: Sparkles },  // All docs
+  { id: 'diagrams', label: 'Diagrams', icon: Shapes }, // Different content
+  { id: 'forms', label: 'Forms', icon: ClipboardList }, // Different content
+];
+
+// Direct action buttons (no dropdown needed):
+<div className="space-y-1.5">
+  <button onClick={() => handleCreateDoc('doc')}>
+    <Plus /> <FileText /> Document
+  </button>
+  <button onClick={() => handleCreateDoc('sheet')}>
+    <Plus /> <Table2 /> Spreadsheet
+  </button>
+  <button onClick={() => handleCreateDoc('slides')}>
+    <Plus /> <Presentation /> Presentation
+  </button>
+</div>
+
+// Empty state: Just informational (actions in sidebar)
+<div className="text-center">
+  <h2>Documents, Spreadsheets & Presentations</h2>
+  <p>Create professional documents...</p>
+  {/* No duplicate create buttons */}
+</div>
+```
+
+**Key principles:**
+1. **Tabs = Distinct Content:** Tabs should show meaningfully different content, not filtered versions of the same list
+2. **Direct Actions > Dropdowns:** If you have 2-4 primary actions and space allows, use direct buttons instead of a dropdown menu
+3. **Single Point of Action:** Don't duplicate the same action in multiple places (sidebar + center empty state)
+4. **Discoverability:** Direct buttons are more discoverable than dropdown menus
+
+**Questions to ask:**
+- "Do these tabs show genuinely different content, or just filtered views?"
+- "Is the dropdown hiding actions that could be direct buttons?"
+- "Am I duplicating the same action in multiple places?"
+
+---
+
+## Anti-patterns
+- Hardcoded colors/sizes (use semantic tokens).
+- Business logic in components (move to stores/services).
+- Props drilling >2 levels (use stores or context).
+- Missing TypeScript types.
+- No accessibility attributes on interactive elements.
+- Over-engineering component APIs (use **`/consider:via-negativa`** to simplify).
+- Using @dnd-kit with Links without click protection (see Patterns section above).
+- Absolute positioning for hover actions near text content (causes overlap - see Hover Actions pattern).
+- Negative margins for hover controls (can overlap adjacent content - use positive spacing instead).
+- Using `hidden` class for hover actions (causes layout shift - use `opacity-0` to preserve space).
+- Creating tabs that filter the same content instead of using direct action buttons (see Tab/Button Redundancy pattern).
+- Duplicating the same action in multiple UI locations (e.g., sidebar + empty state center).
+
+## Related
+- Widgets (consumers): `src/widgets/CLAUDE.md`
+- Stores (state): `src/stores/CLAUDE.md`
+- Tests: `tests/CLAUDE.md`

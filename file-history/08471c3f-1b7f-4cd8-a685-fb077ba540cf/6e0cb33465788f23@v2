@@ -1,0 +1,131 @@
+/**
+ * Form Renderer Component
+ * Renders form fields from template and handles submission
+ */
+
+import { useState } from 'react';
+import type { FormTemplate, FormValidationResult } from '../../types/forms';
+import {
+  TextField,
+  TextAreaField,
+  NumberField,
+  DateField,
+  TimeField,
+  SelectField,
+  MultiSelectField,
+  RadioField,
+  CheckboxField,
+  RatingField,
+  ScaleField,
+} from './FieldComponents';
+
+interface FormRendererProps {
+  form: FormTemplate;
+  onSubmit: (answers: Record<string, any>) => void;
+  initialValues?: Record<string, any>;
+}
+
+export function FormRenderer({ form, onSubmit, initialValues = {} }: FormRendererProps) {
+  const [answers, setAnswers] = useState<Record<string, any>>(initialValues);
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
+  const handleFieldChange = (fieldId: string, value: any) => {
+    setAnswers({ ...answers, [fieldId]: value });
+    // Clear error when user starts typing
+    if (errors[fieldId]) {
+      setErrors({ ...errors, [fieldId]: '' });
+    }
+  };
+
+  const validateForm = (): FormValidationResult => {
+    const newErrors: Record<string, string> = {};
+
+    form.fields.forEach((field) => {
+      const value = answers[field.id];
+
+      // Required validation
+      if (field.required) {
+        if (value === undefined || value === null || value === '') {
+          newErrors[field.id] = 'This field is required';
+        } else if (Array.isArray(value) && value.length === 0) {
+          newErrors[field.id] = 'Please select at least one option';
+        }
+      }
+
+      // Number validation
+      if (field.type === 'number' && value !== null && value !== undefined && value !== '') {
+        if (field.validation?.min !== undefined && Number(value) < field.validation.min) {
+          newErrors[field.id] = `Minimum value is ${field.validation.min}`;
+        }
+        if (field.validation?.max !== undefined && Number(value) > field.validation.max) {
+          newErrors[field.id] = `Maximum value is ${field.validation.max}`;
+        }
+      }
+    });
+
+    return {
+      isValid: Object.keys(newErrors).length === 0,
+      errors: newErrors,
+    };
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const validation = validateForm();
+
+    if (!validation.isValid) {
+      setErrors(validation.errors);
+      // Scroll to first error
+      const firstErrorField = form.fields.find((field) => validation.errors[field.id]);
+      if (firstErrorField) {
+        const element = document.getElementById(`field-${firstErrorField.id}`);
+        element?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      return;
+    }
+
+    onSubmit(answers);
+  };
+
+  // Sort fields by order
+  const sortedFields = [...form.fields].sort((a, b) => a.order - b.order);
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-6">
+      {sortedFields.map((field) => {
+        const fieldProps = {
+          field,
+          value: answers[field.id],
+          onChange: (value: any) => handleFieldChange(field.id, value),
+          error: errors[field.id],
+        };
+
+        return (
+          <div key={field.id} id={`field-${field.id}`}>
+            {field.type === 'text' && <TextField {...fieldProps} />}
+            {field.type === 'textarea' && <TextAreaField {...fieldProps} />}
+            {field.type === 'number' && <NumberField {...fieldProps} />}
+            {field.type === 'date' && <DateField {...fieldProps} />}
+            {field.type === 'time' && <TimeField {...fieldProps} />}
+            {field.type === 'select' && <SelectField {...fieldProps} />}
+            {field.type === 'multiselect' && <MultiSelectField {...fieldProps} />}
+            {field.type === 'radio' && <RadioField {...fieldProps} />}
+            {field.type === 'checkbox' && <CheckboxField {...fieldProps} />}
+            {field.type === 'rating' && <RatingField {...fieldProps} />}
+            {field.type === 'scale' && <ScaleField {...fieldProps} />}
+          </div>
+        );
+      })}
+
+      <div className="flex justify-end pt-4">
+        <button
+          type="submit"
+          className="px-6 py-3 bg-primary-light dark:bg-primary-dark text-white rounded-lg hover:opacity-90 transition-opacity font-medium"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+  );
+}

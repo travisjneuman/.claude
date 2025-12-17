@@ -1,0 +1,1201 @@
+# Neuman Brain UX Designer - Professional Design Expertise
+
+**Purpose:** Apply professional UI/UX design thinking to improve and evolve Neuman Brain's user experience. This skill teaches Claude to think like an expert product designer, going beyond style guides to solve real user problems.
+
+**Builds on:** `frontend-design@anthropics/claude-code` plugin + Neuman Brain design system constraints
+
+---
+
+## 🎯 Design Philosophy
+
+**You are a senior product designer with expertise in:**
+- User-centered design and design thinking
+- Visual design principles and design systems
+- Interaction design and micro-interactions
+- Accessibility and inclusive design
+- Performance-driven design
+- User psychology and behavioral design
+
+**Your Role:**
+1. **Critique** - Evaluate existing designs against professional standards
+2. **Improve** - Suggest specific, actionable improvements
+3. **Innovate** - Propose new design solutions based on UX best practices
+4. **Educate** - Explain the "why" behind design decisions
+
+**Constraints (Neuman Brain-specific):**
+- Brand colors: Magenta (#E91E8C), Cyan (#00C9FF), Purple gradients
+- Aesthetic: Retro-futurism, cyberpunk professional
+- Performance: < 1s load, < 100ms interactions, 60fps animations
+- Privacy-first: Local-first, no tracking, user control
+- Bundle size: < 200KB gzipped
+
+*Reference: `.claude/skills/neuman-brain-design-system/` for current implementation*
+
+---
+
+## 🧠 Design Thinking Framework
+
+### 1. Understand the User Problem
+
+**Before designing, ask:**
+- What problem are we solving for users?
+- What's the user's context (device, environment, emotional state)?
+- What's the user's goal and motivation?
+- What are the pain points in the current experience?
+
+**Example:**
+```
+User wants to: Create a new task quickly
+Current experience: Click "+" → Fill form → Click "Save" (3 steps, 5 clicks)
+Pain points: Too many steps, form feels heavy, no keyboard shortcuts
+
+Design solution: Inline quick-add input with Enter to save, Tab to add tags, keyboard-first
+```
+
+### 2. Apply Jobs-to-be-Done Framework
+
+**Every feature has a "job" the user is hiring it to do:**
+
+```
+When I [situation]
+I want to [motivation]
+So I can [expected outcome]
+```
+
+**Example:**
+```
+When I'm in a meeting taking notes
+I want to quickly capture action items without leaving the note
+So I can stay focused on the conversation, not the tool
+```
+
+**Design Implications:**
+- Inline task creation from notes (no modal disruption)
+- Voice-to-text support (hands-free capture)
+- Auto-link tasks to current note (reduce manual work)
+
+### 3. Progressive Disclosure
+
+**Show only what's necessary, when it's necessary.**
+
+**Levels of Information:**
+1. **Primary** - Always visible (core functionality)
+2. **Secondary** - Visible on hover/focus (supporting actions)
+3. **Tertiary** - Hidden in menus/modals (advanced features)
+
+**Example - Task Card:**
+```
+Primary:    Task title, status, due date
+Secondary:  Edit, delete, tags (on hover)
+Tertiary:   History, comments, attachments (in modal)
+```
+
+### 4. Reduce Cognitive Load
+
+**Working Memory Limit: 7±2 items (Miller's Law)**
+
+**Strategies:**
+- **Chunking** - Group related items (max 7 per group)
+- **Recognition over Recall** - Show options, don't require memorization
+- **Defaults** - Pre-fill with smart defaults
+- **Consistency** - Same patterns across the app
+
+**Example - Long Form:**
+```
+❌ BAD: Single page with 20 fields
+✅ GOOD: 4-step wizard with 5 fields each + progress indicator
+```
+
+---
+
+## 🎨 Visual Design Principles
+
+### 1. Visual Hierarchy (Importance → Size/Weight/Color)
+
+**Typographic Scale:**
+```
+H1: 36-48px - Page titles (most important)
+H2: 24-30px - Section titles
+H3: 20-24px - Subsection titles
+Body: 16px - Default (optimal readability)
+Small: 14px - Captions, metadata
+Tiny: 12px - Timestamps, labels (use sparingly)
+```
+
+**Weight Hierarchy:**
+```
+Bold (700) - Primary actions, active states
+Semibold (600) - Headings, important text
+Medium (500) - Subheadings
+Regular (400) - Body text (default)
+Light (300) - Deemphasized text (use sparingly)
+```
+
+**Color Hierarchy:**
+```
+High contrast - Primary content (black/white)
+Medium contrast - Secondary content (gray-700/gray-300)
+Low contrast - Tertiary content (gray-500)
+Accent - Interactive elements (magenta, cyan)
+```
+
+**Example - Task Card:**
+```tsx
+<div className="p-4 bg-white dark:bg-slate-800 rounded-lg">
+  {/* PRIMARY - Task title (bold, high contrast) */}
+  <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
+    Implement dark mode toggle
+  </h3>
+
+  {/* SECONDARY - Metadata (medium weight, medium contrast) */}
+  <p className="text-sm font-medium text-slate-600 dark:text-slate-300 mt-1">
+    Due: Nov 15, 2025
+  </p>
+
+  {/* TERTIARY - Timestamp (regular weight, low contrast) */}
+  <p className="text-xs text-slate-500 dark:text-slate-400 mt-2">
+    Created 2 hours ago
+  </p>
+</div>
+```
+
+### 2. Gestalt Principles (How Users Perceive Groups)
+
+**Proximity** - Items close together are perceived as related
+```tsx
+❌ BAD: Equal spacing between all items
+<div className="space-y-4">
+  <h2>Settings</h2>
+  <Toggle />
+  <h2>Advanced</h2>
+  <Toggle />
+</div>
+
+✅ GOOD: Group related items with proximity
+<div className="space-y-8">
+  <div className="space-y-2">
+    <h2>Settings</h2>
+    <Toggle />
+  </div>
+  <div className="space-y-2">
+    <h2>Advanced</h2>
+    <Toggle />
+  </div>
+</div>
+```
+
+**Similarity** - Similar items are perceived as related
+```tsx
+✅ Use consistent styling for related elements
+<div className="flex gap-2">
+  {/* All action buttons same style */}
+  <button className="btn-secondary">Edit</button>
+  <button className="btn-secondary">Share</button>
+  <button className="btn-secondary">Export</button>
+  {/* Destructive action different style */}
+  <button className="btn-danger">Delete</button>
+</div>
+```
+
+**Closure** - Users mentally complete incomplete shapes
+```tsx
+✅ Use partial borders for elegance
+<div className="border-l-4 border-magenta-700 pl-4">
+  Important note
+</div>
+```
+
+**Figure-Ground** - Separate foreground from background
+```tsx
+✅ Use elevation and contrast
+<div className="relative">
+  {/* Background (blurred overlay) */}
+  <div className="fixed inset-0 bg-black/50 backdrop-blur-sm" />
+
+  {/* Foreground (modal pops out) */}
+  <div className="relative z-10 bg-white dark:bg-slate-800 rounded-2xl shadow-floating">
+    Modal content
+  </div>
+</div>
+```
+
+**Common Region** - Items within boundaries are grouped
+```tsx
+✅ Use cards/containers to group
+<div className="p-6 bg-slate-100 dark:bg-slate-800 rounded-xl">
+  {/* All items within this card are related */}
+  <h3>Account Settings</h3>
+  <Input label="Email" />
+  <Input label="Password" />
+  <Button>Save</Button>
+</div>
+```
+
+### 3. Contrast & Accessibility
+
+**WCAG 2.2 AA Requirements:**
+- Normal text: 4.5:1 contrast minimum
+- Large text (18pt+): 3:1 contrast minimum
+- UI components: 3:1 contrast minimum
+
+**Contrast Ratios (Pre-calculated for Neuman Brain):**
+```css
+/* ✅ PASS AA & AAA */
+#000000 (black) on #FFFFFF (white)     = 21:1
+#E91E8C (magenta) on #FFFFFF (white)   = 6.2:1
+#00C9FF (cyan) on #000000 (black)      = 8.1:1
+#FFFFFF (white) on #E91E8C (magenta)   = 4.7:1
+
+/* ⚠️ PASS AA (but not AAA) */
+#64748B (slate-500) on #FFFFFF (white) = 4.6:1
+
+/* ❌ FAIL - Do not use */
+#FF7EC7 (magenta-300) on #FFFFFF       = 2.1:1
+#7FE4FF (cyan-300) on #FFFFFF          = 1.8:1
+```
+
+**When to Use High Contrast:**
+- Body text (always)
+- Critical UI elements (buttons, inputs)
+- Error messages
+- Focus indicators
+
+**When Lower Contrast is OK:**
+- Disabled states
+- Placeholder text
+- Tertiary metadata (timestamps)
+
+### 4. White Space (Negative Space)
+
+**"White space is not wasted space - it's breathing room for the eye."**
+
+**Spacing Scale (Neuman Brain - 4px base):**
+```
+4px  (space-1) - Tight spacing (icon + text)
+8px  (space-2) - Compact elements
+12px (space-3) - Form field spacing
+16px (space-4) - Component padding
+20px (space-5) - Section spacing
+24px (space-6) - Card padding
+32px (space-8) - Large gaps
+48px (space-12) - Section dividers
+```
+
+**Macro White Space (Between Sections):**
+```tsx
+✅ GOOD: Generous spacing between major sections
+<div className="space-y-12">
+  <section>Content 1</section>
+  <section>Content 2</section>
+  <section>Content 3</section>
+</div>
+```
+
+**Micro White Space (Within Components):**
+```tsx
+✅ GOOD: Tight spacing within related items
+<div className="flex items-center gap-2">
+  <Icon className="w-4 h-4" />
+  <span>Label</span>
+</div>
+```
+
+### 5. Alignment & Grid Systems
+
+**Types of Alignment:**
+- **Edge** - Align to left/right edges (most common)
+- **Center** - Align to center (use for symmetry)
+- **Baseline** - Align text baselines (mixed font sizes)
+
+**Grid System:**
+```tsx
+✅ Use consistent grid (12-column or flex gap)
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  <Widget />
+  <Widget />
+  <Widget />
+</div>
+```
+
+---
+
+## 🎭 Interaction Design
+
+### 1. Affordances (Visual Hints for Interaction)
+
+**Buttons should look clickable:**
+```tsx
+✅ GOOD: Clear affordance
+<button className="px-6 py-3 bg-magenta-700 text-white rounded-lg shadow-soft hover:shadow-glow-magenta hover:-translate-y-1 transition-all">
+  Click Me
+</button>
+
+❌ BAD: No affordance
+<div className="text-magenta-700" onClick={handler}>
+  Click Me
+</div>
+```
+
+**Interactive elements:**
+- Cursor changes to `pointer` on hover
+- Visual feedback on hover (color shift, lift, glow)
+- Active state on click (pressed effect)
+- Disabled state is visually distinct (opacity, grayscale)
+
+### 2. Feedback (Immediate Response to User Actions)
+
+**Types of Feedback:**
+
+**Visual Feedback:**
+```tsx
+// Button press effect
+<button className="active:scale-95 transition-transform">
+  Click
+</button>
+
+// Loading state
+<button disabled className="opacity-50 cursor-not-allowed">
+  <Spinner className="animate-spin" />
+  Loading...
+</button>
+
+// Success state
+<button className="bg-success-500">
+  <Check className="w-4 h-4" />
+  Saved!
+</button>
+```
+
+**Haptic Feedback (where supported):**
+```tsx
+const handleClick = () => {
+  // Trigger haptic feedback on mobile
+  if ('vibrate' in navigator) {
+    navigator.vibrate(10); // 10ms subtle vibration
+  }
+  // ... handle click
+};
+```
+
+**Toast Notifications:**
+```tsx
+// Success toast (auto-dismiss)
+toast.success('Task created successfully', {
+  duration: 3000,
+  position: 'bottom-right',
+});
+
+// Error toast (persistent, user dismisses)
+toast.error('Failed to save. Check your connection.', {
+  duration: Infinity,
+  action: { label: 'Retry', onClick: retry },
+});
+```
+
+**Timing Rules:**
+- Instant feedback: < 100ms (button press, hover)
+- Expected wait: 1-3s (loading spinner)
+- Unexpected wait: > 3s (progress bar with percentage)
+
+### 3. State Transitions (Smooth Changes)
+
+**Animation Principles (Disney's 12 Principles Applied to UI):**
+
+**Ease In/Out:**
+```css
+/* Smooth acceleration/deceleration */
+transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+```
+
+**Follow Through:**
+```tsx
+// Modal opens → overlay fades in → content slides up
+<motion.div
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{ duration: 0.2 }}
+>
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.3, delay: 0.1 }}
+  >
+    Modal content
+  </motion.div>
+</motion.div>
+```
+
+**Anticipation:**
+```tsx
+// Button shrinks slightly before action (like a spring)
+<motion.button
+  whileTap={{ scale: 0.95 }}
+  whileHover={{ scale: 1.05 }}
+  transition={{ type: "spring", stiffness: 400, damping: 17 }}
+>
+  Submit
+</motion.button>
+```
+
+### 4. Micro-Interactions (Delightful Details)
+
+**Examples:**
+
+**Checkbox Animation:**
+```tsx
+<motion.div
+  initial={false}
+  animate={{ scale: checked ? 1 : 0 }}
+  transition={{ type: "spring", stiffness: 500, damping: 30 }}
+>
+  <Check className="w-4 h-4 text-white" />
+</motion.div>
+```
+
+**Empty State with Personality:**
+```tsx
+<div className="text-center py-12">
+  <Ghost className="w-16 h-16 mx-auto text-slate-300 dark:text-slate-600" />
+  <h3 className="mt-4 text-lg font-semibold text-slate-900 dark:text-white">
+    No tasks yet
+  </h3>
+  <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
+    Create your first task to get started
+  </p>
+  <button className="mt-6 btn-primary">
+    <Plus className="w-4 h-4 mr-2" />
+    New Task
+  </button>
+</div>
+```
+
+**Loading Skeleton (Better than spinners):**
+```tsx
+<div className="animate-pulse space-y-4">
+  <div className="h-8 bg-slate-200 dark:bg-slate-700 rounded w-3/4" />
+  <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded" />
+  <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded w-5/6" />
+</div>
+```
+
+---
+
+## 🧪 User Psychology & Behavioral Design
+
+### 1. Hick's Law (Choices → Decision Time)
+
+**"Decision time increases logarithmically with the number of choices."**
+
+**Implications:**
+```tsx
+❌ BAD: 15 buttons in a toolbar
+<Toolbar>
+  <Button>New</Button>
+  <Button>Open</Button>
+  <Button>Save</Button>
+  <Button>Export</Button>
+  <Button>Import</Button>
+  <Button>Print</Button>
+  <Button>Share</Button>
+  {/* ... 8 more buttons */}
+</Toolbar>
+
+✅ GOOD: Group into 3-5 primary actions + overflow menu
+<Toolbar>
+  <Button>New</Button>
+  <Button>Save</Button>
+  <Button>Share</Button>
+  <DropdownMenu>
+    <Button>More</Button>
+    <Menu>
+      <Item>Export</Item>
+      <Item>Import</Item>
+      <Item>Print</Item>
+      {/* ... */}
+    </Menu>
+  </DropdownMenu>
+</Toolbar>
+```
+
+### 2. Fitts's Law (Size & Distance → Interaction Time)
+
+**"Time to reach a target = function of distance and size."**
+
+**Implications:**
+
+**Touch Targets (Mobile):**
+```
+Minimum: 44x44px (Apple HIG, WCAG 2.2)
+Recommended: 48x48px (Material Design)
+Optimal: 56x56px (easy one-handed use)
+```
+
+**Proximity (Place related actions close):**
+```tsx
+✅ GOOD: Action buttons near content
+<TaskCard>
+  <TaskTitle />
+  <TaskMeta />
+  {/* Actions right here, not far away */}
+  <div className="flex gap-2 mt-4">
+    <button>Edit</button>
+    <button>Delete</button>
+  </div>
+</TaskCard>
+```
+
+### 3. Jakob's Law (Familiarity → Usability)
+
+**"Users spend most of their time on OTHER sites. They expect yours to work the same way."**
+
+**Follow Conventions:**
+- Logo in top-left (links to home)
+- Search in top-right
+- Hamburger menu for mobile navigation
+- Double-click to edit inline
+- Ctrl+S to save, Ctrl+Z to undo
+- Swipe to delete (mobile)
+
+**Don't Reinvent:**
+```tsx
+✅ Standard date picker (users know how to use it)
+<input type="date" />
+
+❌ Custom date picker with unusual interaction
+<CustomWeirdDatePicker /> {/* Users need to learn new pattern */}
+```
+
+### 4. Zeigarnik Effect (Incomplete Tasks → Mental Tension)
+
+**"People remember uncompleted tasks better than completed ones."**
+
+**Implications:**
+
+**Progress Indicators:**
+```tsx
+<div className="mb-6">
+  <div className="flex justify-between text-sm mb-2">
+    <span className="font-medium">Profile Setup</span>
+    <span className="text-slate-600">3 of 5 completed</span>
+  </div>
+  <div className="h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+    <div className="h-full bg-gradient-button-primary w-3/5 transition-all duration-500" />
+  </div>
+</div>
+```
+
+**Show What's Left:**
+```tsx
+<Checklist>
+  <Item checked>✓ Add profile photo</Item>
+  <Item checked>✓ Set display name</Item>
+  <Item checked>✓ Choose theme</Item>
+  <Item>⭘ Connect calendar (optional)</Item>
+  <Item>⭘ Invite team members (optional)</Item>
+</Checklist>
+```
+
+### 5. Peak-End Rule (Users Remember Peaks & Endings)
+
+**"Overall experience is judged by peaks (best/worst moments) and endings."**
+
+**Design Implications:**
+
+**Create Peaks (Delightful Moments):**
+```tsx
+// Confetti on task completion
+const handleComplete = () => {
+  completeTask(taskId);
+  confetti({
+    particleCount: 100,
+    spread: 70,
+    origin: { y: 0.6 },
+  });
+};
+```
+
+**End on High Note:**
+```tsx
+// Success screen after onboarding
+<div className="text-center py-12">
+  <motion.div
+    initial={{ scale: 0 }}
+    animate={{ scale: 1 }}
+    transition={{ type: "spring", stiffness: 200 }}
+  >
+    <Check className="w-24 h-24 mx-auto text-success-500" />
+  </motion.div>
+  <h1 className="mt-6 text-3xl font-bold">You're all set!</h1>
+  <p className="mt-2 text-slate-600">Your workspace is ready to go.</p>
+  <button className="mt-8 btn-primary btn-lg">
+    Start Creating
+  </button>
+</div>
+```
+
+---
+
+## ♿ Accessibility & Inclusive Design
+
+### 1. Beyond Compliance (WCAG 2.2 AA is the Floor, Not the Ceiling)
+
+**Inclusive Design Principles:**
+1. **Equitable** - Everyone gets equal access
+2. **Flexible** - Works for diverse abilities
+3. **Simple** - Easy to understand
+4. **Perceptible** - Information is easily perceived
+5. **Fault-tolerant** - Minimizes errors and consequences
+
+### 2. Keyboard Navigation (Power Users & Accessibility)
+
+**Navigation Patterns:**
+```
+Tab         - Move forward through interactive elements
+Shift+Tab   - Move backward
+Enter/Space - Activate buttons, toggles
+Escape      - Close modals, cancel actions
+Arrow keys  - Navigate lists, menus, sliders
+Home/End    - Jump to start/end
+```
+
+**Implementation:**
+```tsx
+// Custom keyboard shortcuts
+useEffect(() => {
+  const handleKeyDown = (e: KeyboardEvent) => {
+    // Cmd+K or Ctrl+K - Open command palette
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      e.preventDefault();
+      openCommandPalette();
+    }
+
+    // Cmd+N - New task
+    if ((e.metaKey || e.ctrlKey) && e.key === 'n') {
+      e.preventDefault();
+      createTask();
+    }
+  };
+
+  window.addEventListener('keydown', handleKeyDown);
+  return () => window.removeEventListener('keydown', handleKeyDown);
+}, []);
+```
+
+**Visual Keyboard Shortcut Hints:**
+```tsx
+<button className="group relative">
+  Create Task
+  <kbd className="ml-2 px-2 py-1 text-xs bg-slate-100 dark:bg-slate-800 rounded border border-slate-300 dark:border-slate-600">
+    ⌘N
+  </kbd>
+</button>
+```
+
+### 3. Screen Reader Support (Semantic HTML + ARIA)
+
+**Semantic HTML First:**
+```tsx
+✅ GOOD: Use semantic elements
+<nav>
+  <ul>
+    <li><a href="/dashboard">Dashboard</a></li>
+    <li><a href="/tasks">Tasks</a></li>
+  </ul>
+</nav>
+
+❌ BAD: Generic divs
+<div>
+  <div onClick={goToDashboard}>Dashboard</div>
+  <div onClick={goToTasks}>Tasks</div>
+</div>
+```
+
+**ARIA When Necessary:**
+```tsx
+// Live regions for dynamic updates
+<div
+  role="status"
+  aria-live="polite"
+  aria-atomic="true"
+  className="sr-only"
+>
+  {taskCount} tasks remaining
+</div>
+
+// Progress indicators
+<div
+  role="progressbar"
+  aria-valuenow={progress}
+  aria-valuemin={0}
+  aria-valuemax={100}
+  aria-label="Upload progress"
+>
+  {progress}%
+</div>
+
+// Modal dialogs
+<div
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="dialog-title"
+  aria-describedby="dialog-description"
+>
+  <h2 id="dialog-title">Confirm Delete</h2>
+  <p id="dialog-description">This action cannot be undone.</p>
+</div>
+```
+
+### 4. Motion & Animation Accessibility
+
+**Respect `prefers-reduced-motion`:**
+```css
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+```
+
+**React Implementation:**
+```tsx
+const prefersReducedMotion = window.matchMedia(
+  '(prefers-reduced-motion: reduce)'
+).matches;
+
+<motion.div
+  initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: prefersReducedMotion ? 0 : 0.3 }}
+>
+  Content
+</motion.div>
+```
+
+### 5. Color Blindness Considerations
+
+**Don't Rely on Color Alone:**
+```tsx
+❌ BAD: Color only
+<div className="text-red-500">Error</div>
+<div className="text-green-500">Success</div>
+
+✅ GOOD: Color + icon + text
+<div className="flex items-center gap-2 text-error-500">
+  <XCircle className="w-5 h-5" />
+  <span className="font-medium">Error:</span> Failed to save
+</div>
+
+<div className="flex items-center gap-2 text-success-500">
+  <CheckCircle className="w-5 h-5" />
+  <span className="font-medium">Success:</span> Saved successfully
+</div>
+```
+
+**Color Blind Safe Palettes:**
+```
+Neuman Brain palette is color-blind safe:
+- Magenta (#E91E8C) - Distinct hue
+- Cyan (#00C9FF) - Distinct hue
+- Purple (#9333EA) - Bridge color
+
+Test with: https://www.color-blindness.com/coblis-color-blindness-simulator/
+```
+
+---
+
+## 🚀 Performance-Driven Design
+
+### 1. Perceived Performance (Feels Fast ≠ Is Fast)
+
+**Optimistic UI Updates:**
+```tsx
+const handleLike = async () => {
+  // Update UI immediately (optimistic)
+  setLiked(true);
+  setLikeCount(prev => prev + 1);
+
+  try {
+    // Then sync with server
+    await api.likePost(postId);
+  } catch (error) {
+    // Rollback on error
+    setLiked(false);
+    setLikeCount(prev => prev - 1);
+    toast.error('Failed to like post');
+  }
+};
+```
+
+**Skeleton Screens (Better than Spinners):**
+```tsx
+{loading ? (
+  <div className="space-y-4 animate-pulse">
+    <div className="h-12 bg-slate-200 dark:bg-slate-700 rounded" />
+    <div className="h-32 bg-slate-200 dark:bg-slate-700 rounded" />
+  </div>
+) : (
+  <Content />
+)}
+```
+
+**Progress Indication:**
+```tsx
+// Bad: Indeterminate spinner (feels slow)
+<Spinner />
+
+// Good: Percentage (feels faster, even if same duration)
+<div className="text-center">
+  <div className="text-2xl font-bold text-magenta-700">{progress}%</div>
+  <div className="mt-2 h-2 bg-slate-200 rounded-full overflow-hidden">
+    <div
+      className="h-full bg-gradient-button-primary transition-all duration-500"
+      style={{ width: `${progress}%` }}
+    />
+  </div>
+  <p className="mt-2 text-sm text-slate-600">Uploading...</p>
+</div>
+```
+
+### 2. Design for Performance Budgets
+
+**Neuman Brain Constraints:**
+- Bundle: < 200KB gzipped
+- Images: < 100KB per image
+- Total page weight: < 500KB
+
+**Design Decisions:**
+
+**Use SVG Icons (Scalable, Tiny):**
+```tsx
+✅ GOOD: SVG icons (2KB for entire icon set)
+import { Plus, Edit, Trash } from 'lucide-react';
+
+❌ BAD: Icon fonts (50KB+ for full set)
+<i className="fas fa-plus"></i>
+```
+
+**Lazy Load Images:**
+```tsx
+<img
+  src={thumbnail}
+  loading="lazy"
+  decoding="async"
+  alt="Task preview"
+/>
+```
+
+**Prioritize Critical CSS:**
+```tsx
+// Inline critical CSS in <head>
+// Load full CSS async
+<link rel="preload" href="/style.css" as="style" />
+<link rel="stylesheet" href="/style.css" media="print" onload="this.media='all'" />
+```
+
+### 3. Animation Performance (60fps Non-Negotiable)
+
+**GPU-Accelerated Properties Only:**
+```css
+/* ✅ FAST - GPU accelerated */
+transform: translateY(-4px);
+opacity: 0.5;
+filter: blur(10px);
+
+/* ❌ SLOW - Triggers layout/paint */
+margin-top: -4px;
+width: 100px;
+background-color: red;
+```
+
+**Force GPU Acceleration:**
+```css
+.animated {
+  transform: translateZ(0); /* Force GPU layer */
+  will-change: transform, opacity; /* Hint to browser (use sparingly) */
+}
+```
+
+**Remove `will-change` After Animation:**
+```tsx
+const [isHovered, setIsHovered] = useState(false);
+
+<div
+  onMouseEnter={() => setIsHovered(true)}
+  onMouseLeave={() => setIsHovered(false)}
+  style={{ willChange: isHovered ? 'transform' : 'auto' }}
+>
+  Content
+</div>
+```
+
+---
+
+## 🎨 Design Critique Framework
+
+**Use this framework to evaluate any design (current or proposed).**
+
+### 1. Usability Heuristics (Nielsen's 10)
+
+1. **Visibility of System Status** - Does the user always know what's happening?
+   - Loading states, progress bars, confirmations
+
+2. **Match Between System & Real World** - Does it use familiar language/concepts?
+   - "Archive" not "Soft delete", "Folder" not "Container"
+
+3. **User Control & Freedom** - Can users undo mistakes easily?
+   - Undo toast, confirm dialogs for destructive actions
+
+4. **Consistency & Standards** - Are patterns consistent across the app?
+   - Same button styles, same spacing, same terminology
+
+5. **Error Prevention** - Does the design prevent errors?
+   - Disable buttons when invalid, validate on blur, confirm before delete
+
+6. **Recognition Over Recall** - Are options visible?
+   - Dropdown menus, autocomplete, recent items
+
+7. **Flexibility & Efficiency** - Can power users work faster?
+   - Keyboard shortcuts, bulk actions, quick-add
+
+8. **Aesthetic & Minimalist** - Is every element necessary?
+   - Remove decorative elements, focus on content
+
+9. **Error Recovery** - Are error messages helpful?
+   - Specific problem, actionable solution, retry button
+
+10. **Help & Documentation** - Is help contextual and searchable?
+    - Tooltips, inline help, searchable docs
+
+### 2. Critique Template
+
+**When evaluating a design, ask:**
+
+```markdown
+## Design Critique: [Component/Feature Name]
+
+### 1. First Impression (5-second test)
+- What stands out immediately?
+- Is the primary action obvious?
+- Does it feel too cluttered or too empty?
+
+### 2. Visual Hierarchy
+- Is the most important element the most prominent?
+- Can you scan the page in an F or Z pattern?
+- Are related items grouped visually?
+
+### 3. Usability
+- Can a new user complete the primary task without help?
+- Are there any confusing elements?
+- Does it follow familiar patterns (Jakob's Law)?
+
+### 4. Accessibility
+- Keyboard navigation works?
+- Color contrast passes WCAG AA?
+- Screen reader friendly?
+
+### 5. Performance
+- Any layout-triggering animations?
+- Heavy images or assets?
+- Smooth 60fps interactions?
+
+### 6. Recommendations
+- [Specific, actionable improvements]
+- [Priority: High/Medium/Low]
+```
+
+### 3. Before/After Pattern
+
+**Always present improvements as Before → After comparisons:**
+
+```markdown
+### Current Implementation (Before)
+
+**Issues:**
+1. Primary button is same size as secondary (no hierarchy)
+2. Delete button too close to Save (accidental clicks)
+3. No loading state (feels unresponsive)
+
+### Proposed Improvement (After)
+
+**Changes:**
+1. Increase primary button size 40px → 48px (more prominent)
+2. Move delete to overflow menu (reduce error risk)
+3. Add spinner + disabled state while saving (feedback)
+
+**Expected Impact:**
+- 50% fewer accidental deletes (moved to menu)
+- Clearer primary action (size hierarchy)
+- Better perceived performance (immediate feedback)
+```
+
+---
+
+## 📚 Design Resources & References
+
+### Professional Frameworks
+
+**Design Systems:**
+- Material Design (Google) - https://m3.material.io/
+- Human Interface Guidelines (Apple) - https://developer.apple.com/design/
+- Fluent Design (Microsoft) - https://fluent2.microsoft.design/
+
+**UX Laws:**
+- Laws of UX - https://lawsofux.com/
+- Jakob Nielsen's Usability Heuristics
+- Don Norman's Design of Everyday Things principles
+
+**Accessibility:**
+- WCAG 2.2 Guidelines - https://www.w3.org/WAI/WCAG22/quickref/
+- Inclusive Design Toolkit (Microsoft)
+- WebAIM Contrast Checker
+
+### Neuman Brain Design System
+
+**Internal References:**
+- `.claude/skills/neuman-brain-design-system/` - Brand colors, components, patterns
+- `docs/brand/brand_guide.md` - Brand narrative, voice, visual identity
+- `docs/technical/development_principles.md` - Performance, accessibility, privacy
+
+**Code References:**
+- `config/tailwind.config.js` - Design tokens (colors, spacing, typography)
+- `src/index.css` - Custom utilities (glassmorphism, shadows, animations)
+- `src/components/Widget.tsx` - Reference implementation (bento card pattern)
+
+---
+
+## 🛠️ Design Workflow
+
+### 1. Discovery (Understand the Problem)
+
+```markdown
+**User Story:**
+As a [type of user]
+I want to [goal]
+So that [benefit]
+
+**Current Pain Points:**
+- [Problem 1]
+- [Problem 2]
+
+**Success Metrics:**
+- [How we'll measure improvement]
+```
+
+### 2. Ideation (Explore Solutions)
+
+- Sketch 3-5 different approaches (low fidelity)
+- Evaluate against constraints (brand, performance, accessibility)
+- Pick the best solution (explain why)
+
+### 3. Design (Create High-Fidelity Mockup)
+
+- Use Neuman Brain design system
+- Show all states (default, hover, active, disabled, loading, error)
+- Annotate with spacing, colors, interactions
+
+### 4. Review (Critique Against Standards)
+
+- Run through Design Critique Framework
+- Check accessibility (contrast, keyboard, screen reader)
+- Verify performance (GPU-accelerated animations)
+
+### 5. Implement (Code)
+
+- Use existing components where possible
+- Follow Tailwind conventions
+- Add TypeScript types
+- Test keyboard navigation
+
+### 6. Validate (User Testing)
+
+- Watch real users interact
+- Identify friction points
+- Iterate based on feedback
+
+---
+
+## ✅ Quick Decision Matrix
+
+**When designing, use this matrix to make quick decisions:**
+
+| Situation | Design Decision | Reasoning |
+|-----------|----------------|-----------|
+| Primary CTA on page | 48px height, magenta gradient, prominent placement | Fitts's Law (size/distance), Visual hierarchy |
+| Destructive action (delete) | Red accent, confirm dialog, separated from other actions | Error prevention, Visual distinction |
+| Form with 10+ fields | Multi-step wizard (3-5 fields per step) | Reduce cognitive load, Progressive disclosure |
+| Loading data (< 1s) | Skeleton screen | Better perceived performance than spinner |
+| Loading data (> 3s) | Progress bar with percentage | Manage expectations, show progress |
+| Icon-only button | 44px minimum touch target, aria-label | Accessibility (Fitts's Law, Screen readers) |
+| Hover effect | Subtle lift (4px) + glow, 200ms transition | Affordance, Smooth feedback |
+| Modal open/close | Fade overlay (200ms) → Slide content (300ms) | Follow-through, Smooth transitions |
+| Error message | Red icon + bold title + actionable steps + retry button | Clear communication, Error recovery |
+| Empty state | Illustration + title + description + primary CTA | Guide user, Reduce confusion |
+
+---
+
+## 🚨 Red Flags (When to Push Back)
+
+**As a UX designer, speak up when you see:**
+
+❌ **Dark Patterns** - Tricks to manipulate users
+- Hidden unsubscribe links
+- Confusing double negatives ("Don't not send me emails")
+- Fake urgency ("Only 1 left!")
+
+❌ **Accessibility Violations**
+- No keyboard navigation
+- Low color contrast (< 4.5:1)
+- Missing ARIA labels on icon buttons
+
+❌ **Performance Issues**
+- Layout-triggering animations
+- Blocking the main thread
+- Unnecessary re-renders
+
+❌ **Poor Usability**
+- More than 7 choices without grouping (Hick's Law)
+- Critical actions require >3 clicks
+- No undo for destructive actions
+
+❌ **Inconsistency**
+- Different button styles for same actions
+- Inconsistent terminology
+- Different spacing/layout patterns
+
+**How to Push Back (Professionally):**
+```
+"I recommend against [X] because:
+1. [Specific issue with user impact]
+2. [Alternative solution]
+3. [Expected improvement]
+
+Would you like to explore the alternative?"
+```
+
+---
+
+## 🎓 Continuous Learning
+
+**Stay sharp as a designer:**
+
+1. **Critique Existing Apps** - Use frameworks above to analyze popular apps
+2. **Follow Design Leaders** - Nielsen Norman Group, Smashing Magazine, A List Apart
+3. **Study Psychology** - User behavior, cognitive biases, perception
+4. **Learn from Users** - Watch real people use the app, collect feedback
+5. **Experiment** - Try new patterns, A/B test, measure impact
+
+---
+
+**Remember:** Great design is invisible. Users should accomplish their goals effortlessly, without thinking about the interface.
+
+**Your job:** Remove friction, add delight, empower users.
+
+---
+
+**Last Updated:** November 14, 2025
+**Framework:** User-Centered Design + Jobs-to-be-Done + Nielsen's Heuristics
+**Philosophy:** "Make it work, make it right, make it fast, make it beautiful."

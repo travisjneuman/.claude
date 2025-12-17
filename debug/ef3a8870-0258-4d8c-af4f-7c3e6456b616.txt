@@ -1,0 +1,909 @@
+2025-12-14T01:17:16.743Z [DEBUG] Watching for changes in setting files C:\Users\tjn\.claude\settings.json, C:\Users\tjn\.claude\.claude\settings.local.json...
+2025-12-14T01:17:16.772Z [DEBUG] Using bash path: "C:\Program Files\Git\bin\bash.exe"
+2025-12-14T01:17:16.806Z [DEBUG] [LSP MANAGER] initializeLspServerManager() called
+2025-12-14T01:17:16.806Z [DEBUG] [LSP MANAGER] Created manager instance, state=pending
+2025-12-14T01:17:16.806Z [DEBUG] [LSP MANAGER] Starting async initialization (generation 1)
+2025-12-14T01:17:16.809Z [DEBUG] LSP server manager initialized successfully
+2025-12-14T01:17:16.809Z [DEBUG] LSP notification handlers registered successfully for all 0 server(s)
+2025-12-14T01:17:16.814Z [DEBUG] Applying permission update: Adding 45 allow rule(s) to destination 'userSettings': ["SlashCommand(/run-prompt:*)","Bash(git add:*)","Bash(test:*)","Bash(git rm:*)","Bash(git commit:*)","Bash(git worktree:*)","Bash(findstr:*)","Bash(git fetch:*)","Bash(git merge:*)","SlashCommand(/taches-cc-resources:check-todos)","SlashCommand(/taches-cc-resources:\\consider:pareto:*)","Bash(npm run test)","SlashCommand(/taches-cc-resources:\\consider:second-order:*)","Bash(dir:*)","Bash(npx playwright test:*)","Bash(git reset:*)","Bash(timeout 45 npx playwright test:*)","Bash(Select-Object -First 50)","Bash(npx tsc:*)","Bash(npm run build:*)","Skill(tech-debt-analyzer)","Bash(python .claude/skills/tech-debt-analyzer/scripts/detect_code_smells.py:*)","Bash(python:*)","Bash(cat:*)","Bash(npx ts-unused-exports:*)","Bash(node:*)","Bash(Get-NetTCPConnection -LocalPort 4173 -ErrorAction SilentlyContinue)","Bash(Select-Object -ExpandProperty OwningProcess)","Bash(ForEach-Object { Stop-Process -Id $_ -Force })","Bash(powershell -Command:*)","Bash(npx depcheck:*)","Bash(npm uninstall:*)","Bash(npm run type-check:*)","Bash(npm audit:*)","Skill(debug-like-expert)","WebSearch","Bash(find:*)","Bash(ls:*)","Bash(Get-ChildItem -Path \"C:\\Users\\tjn\\.claude\" -Recurse -Force)","Bash(Select-Object FullName, Length, LastWriteTime, PSIsContainer)","Bash(Format-Table -AutoSize -Wrap)","WebFetch(domain:docs.anthropic.com)","WebFetch(domain:awesomeclaude.ai)","WebFetch(domain:docs.claude.com)","WebFetch(domain:claudemarketplaces.com)"]
+2025-12-14T01:17:16.814Z [DEBUG] Applying permission update: Adding 6 allow rule(s) to destination 'localSettings': ["Bash(claude /doctor)","Bash(for skill in \"C:/Users/tjn/.claude/skills\"/*/SKILL.md)","Bash(do if [ -f \"$skill\" ])","Bash(then head -1 \"$skill\")","Bash(fi)","Bash(done)"]
+2025-12-14T01:17:16.824Z [DEBUG] Loading plugin agent-sdk-dev from source: "./plugins/agent-sdk-dev"
+2025-12-14T01:17:16.825Z [DEBUG] Using manifest version for agent-sdk-dev@claude-code-plugins: 1.0.0
+2025-12-14T01:17:16.827Z [DEBUG] Plugin agent-sdk-dev@claude-code-plugins version 1.0.0 already cached at C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\agent-sdk-dev\1.0.0
+2025-12-14T01:17:16.827Z [DEBUG] Copied local plugin agent-sdk-dev to versioned cache: C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\agent-sdk-dev\1.0.0
+2025-12-14T01:17:16.829Z [DEBUG] Loading plugin pr-review-toolkit from source: "./plugins/pr-review-toolkit"
+2025-12-14T01:17:16.829Z [DEBUG] Using manifest version for pr-review-toolkit@claude-code-plugins: 1.0.0
+2025-12-14T01:17:16.829Z [DEBUG] Plugin pr-review-toolkit@claude-code-plugins version 1.0.0 already cached at C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\pr-review-toolkit\1.0.0
+2025-12-14T01:17:16.829Z [DEBUG] Copied local plugin pr-review-toolkit to versioned cache: C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\pr-review-toolkit\1.0.0
+2025-12-14T01:17:16.831Z [DEBUG] Loading plugin commit-commands from source: "./plugins/commit-commands"
+2025-12-14T01:17:16.831Z [DEBUG] Using manifest version for commit-commands@claude-code-plugins: 1.0.0
+2025-12-14T01:17:16.831Z [DEBUG] Plugin commit-commands@claude-code-plugins version 1.0.0 already cached at C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\commit-commands\1.0.0
+2025-12-14T01:17:16.831Z [DEBUG] Copied local plugin commit-commands to versioned cache: C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\commit-commands\1.0.0
+2025-12-14T01:17:16.832Z [DEBUG] Loading plugin feature-dev from source: "./plugins/feature-dev"
+2025-12-14T01:17:16.833Z [DEBUG] Using manifest version for feature-dev@claude-code-plugins: 1.0.0
+2025-12-14T01:17:16.833Z [DEBUG] Plugin feature-dev@claude-code-plugins version 1.0.0 already cached at C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\feature-dev\1.0.0
+2025-12-14T01:17:16.833Z [DEBUG] Copied local plugin feature-dev to versioned cache: C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\feature-dev\1.0.0
+2025-12-14T01:17:16.834Z [DEBUG] Loading plugin security-guidance from source: "./plugins/security-guidance"
+2025-12-14T01:17:16.835Z [DEBUG] Using manifest version for security-guidance@claude-code-plugins: 1.0.0
+2025-12-14T01:17:16.835Z [DEBUG] Plugin security-guidance@claude-code-plugins version 1.0.0 already cached at C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\security-guidance\1.0.0
+2025-12-14T01:17:16.835Z [DEBUG] Copied local plugin security-guidance to versioned cache: C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\security-guidance\1.0.0
+2025-12-14T01:17:16.836Z [DEBUG] Loaded hooks from standard location for plugin security-guidance: C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\security-guidance\1.0.0\hooks\hooks.json
+2025-12-14T01:17:16.837Z [DEBUG] Loading plugin code-review from source: "./plugins/code-review"
+2025-12-14T01:17:16.837Z [DEBUG] Using manifest version for code-review@claude-code-plugins: 1.0.0
+2025-12-14T01:17:16.837Z [DEBUG] Plugin code-review@claude-code-plugins version 1.0.0 already cached at C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\code-review\1.0.0
+2025-12-14T01:17:16.837Z [DEBUG] Copied local plugin code-review to versioned cache: C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\code-review\1.0.0
+2025-12-14T01:17:16.839Z [DEBUG] Loading plugin explanatory-output-style from source: "./plugins/explanatory-output-style"
+2025-12-14T01:17:16.839Z [DEBUG] Using manifest version for explanatory-output-style@claude-code-plugins: 1.0.0
+2025-12-14T01:17:16.839Z [DEBUG] Plugin explanatory-output-style@claude-code-plugins version 1.0.0 already cached at C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\explanatory-output-style\1.0.0
+2025-12-14T01:17:16.839Z [DEBUG] Copied local plugin explanatory-output-style to versioned cache: C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\explanatory-output-style\1.0.0
+2025-12-14T01:17:16.840Z [DEBUG] Loaded hooks from standard location for plugin explanatory-output-style: C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\explanatory-output-style\1.0.0\hooks\hooks.json
+2025-12-14T01:17:16.841Z [DEBUG] Loading plugin learning-output-style from source: "./plugins/learning-output-style"
+2025-12-14T01:17:16.841Z [DEBUG] Using manifest version for learning-output-style@claude-code-plugins: 1.0.0
+2025-12-14T01:17:16.841Z [DEBUG] Plugin learning-output-style@claude-code-plugins version 1.0.0 already cached at C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\learning-output-style\1.0.0
+2025-12-14T01:17:16.841Z [DEBUG] Copied local plugin learning-output-style to versioned cache: C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\learning-output-style\1.0.0
+2025-12-14T01:17:16.842Z [DEBUG] Loaded hooks from standard location for plugin learning-output-style: C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\learning-output-style\1.0.0\hooks\hooks.json
+2025-12-14T01:17:16.843Z [DEBUG] Loading plugin frontend-design from source: "./plugins/frontend-design"
+2025-12-14T01:17:16.843Z [DEBUG] Using manifest version for frontend-design@claude-code-plugins: 1.0.0
+2025-12-14T01:17:16.843Z [DEBUG] Plugin frontend-design@claude-code-plugins version 1.0.0 already cached at C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\frontend-design\1.0.0
+2025-12-14T01:17:16.843Z [DEBUG] Copied local plugin frontend-design to versioned cache: C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\frontend-design\1.0.0
+2025-12-14T01:17:16.844Z [DEBUG] Loading plugin document-skills from source: "./"
+2025-12-14T01:17:16.865Z [DEBUG] Git remote URL: null
+2025-12-14T01:17:16.865Z [DEBUG] No git remote URL found
+2025-12-14T01:17:16.865Z [DEBUG] Not in a GitHub repository, skipping path mapping update
+2025-12-14T01:17:16.893Z [DEBUG] Using git SHA for document-skills@anthropic-agent-skills: 00756142ab04
+2025-12-14T01:17:16.893Z [DEBUG] Plugin document-skills@anthropic-agent-skills version 00756142ab04 already cached at C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\document-skills\00756142ab04
+2025-12-14T01:17:16.893Z [DEBUG] Copied local plugin document-skills to versioned cache: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\document-skills\00756142ab04
+2025-12-14T01:17:16.893Z [DEBUG] Processing 4 skill paths for plugin document-skills
+2025-12-14T01:17:16.893Z [DEBUG] Checking skill path: ./skills/xlsx -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\document-skills\00756142ab04\skills\xlsx (exists: true)
+2025-12-14T01:17:16.893Z [DEBUG] Checking skill path: ./skills/docx -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\document-skills\00756142ab04\skills\docx (exists: true)
+2025-12-14T01:17:16.894Z [DEBUG] Checking skill path: ./skills/pptx -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\document-skills\00756142ab04\skills\pptx (exists: true)
+2025-12-14T01:17:16.894Z [DEBUG] Checking skill path: ./skills/pdf -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\document-skills\00756142ab04\skills\pdf (exists: true)
+2025-12-14T01:17:16.894Z [DEBUG] Found 4 valid skill paths for plugin document-skills, setting skillsPaths
+2025-12-14T01:17:16.895Z [DEBUG] Loading plugin example-skills from source: "./"
+2025-12-14T01:17:16.940Z [DEBUG] Using git SHA for example-skills@anthropic-agent-skills: 00756142ab04
+2025-12-14T01:17:16.940Z [DEBUG] Plugin example-skills@anthropic-agent-skills version 00756142ab04 already cached at C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04
+2025-12-14T01:17:16.940Z [DEBUG] Copied local plugin example-skills to versioned cache: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04
+2025-12-14T01:17:16.940Z [DEBUG] Processing 12 skill paths for plugin example-skills
+2025-12-14T01:17:16.940Z [DEBUG] Checking skill path: ./skills/algorithmic-art -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\algorithmic-art (exists: true)
+2025-12-14T01:17:16.941Z [DEBUG] Checking skill path: ./skills/brand-guidelines -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\brand-guidelines (exists: true)
+2025-12-14T01:17:16.941Z [DEBUG] Checking skill path: ./skills/canvas-design -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\canvas-design (exists: true)
+2025-12-14T01:17:16.941Z [DEBUG] Checking skill path: ./skills/doc-coauthoring -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\doc-coauthoring (exists: true)
+2025-12-14T01:17:16.941Z [DEBUG] Checking skill path: ./skills/frontend-design -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\frontend-design (exists: true)
+2025-12-14T01:17:16.941Z [DEBUG] Checking skill path: ./skills/internal-comms -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\internal-comms (exists: true)
+2025-12-14T01:17:16.941Z [DEBUG] Checking skill path: ./skills/mcp-builder -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\mcp-builder (exists: true)
+2025-12-14T01:17:16.941Z [DEBUG] Checking skill path: ./skills/skill-creator -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\skill-creator (exists: true)
+2025-12-14T01:17:16.941Z [DEBUG] Checking skill path: ./skills/slack-gif-creator -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\slack-gif-creator (exists: true)
+2025-12-14T01:17:16.941Z [DEBUG] Checking skill path: ./skills/theme-factory -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\theme-factory (exists: true)
+2025-12-14T01:17:16.941Z [DEBUG] Checking skill path: ./skills/web-artifacts-builder -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\web-artifacts-builder (exists: true)
+2025-12-14T01:17:16.942Z [DEBUG] Checking skill path: ./skills/webapp-testing -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\webapp-testing (exists: true)
+2025-12-14T01:17:16.942Z [DEBUG] Found 12 valid skill paths for plugin example-skills, setting skillsPaths
+2025-12-14T01:17:16.942Z [DEBUG] Loading plugin taches-cc-resources from source: "./"
+2025-12-14T01:17:16.943Z [DEBUG] Using manifest version for taches-cc-resources@taches-cc-resources: 1.0.0
+2025-12-14T01:17:16.943Z [DEBUG] Plugin taches-cc-resources@taches-cc-resources version 1.0.0 already cached at C:\Users\tjn\.claude\plugins\cache\taches-cc-resources\taches-cc-resources\1.0.0
+2025-12-14T01:17:16.943Z [DEBUG] Copied local plugin taches-cc-resources to versioned cache: C:\Users\tjn\.claude\plugins\cache\taches-cc-resources\taches-cc-resources\1.0.0
+2025-12-14T01:17:16.943Z [DEBUG] Found 12 plugins (10 enabled, 2 disabled)
+2025-12-14T01:17:16.952Z [DEBUG] Stats cache is up to date
+2025-12-14T01:17:16.958Z [DEBUG] Loading skills from directories: managed=C:\ProgramData\ClaudeCode\.claude\skills, user=C:\Users\tjn\.claude\skills, project=[]
+2025-12-14T01:17:16.962Z [DEBUG] Passes: Using fresh cached eligibility data
+2025-12-14T01:17:17.245Z [DEBUG] [SLOW OPERATION DETECTED] execSyncWithDefaults (271.8ms): tasklist | findstr /I "Code.exe Cursor.exe Windsurf.exe idea64.exe pycharm64.exe webstorm64.exe phps
+2025-12-14T01:17:17.247Z [DEBUG] Loaded 12 installed plugins from C:\Users\tjn\.claude\plugins\installed_plugins.json
+2025-12-14T01:17:17.247Z [DEBUG] Official marketplace auto-install already attempted, skipping
+2025-12-14T01:17:17.298Z [DEBUG] Creating shell snapshot for bash (C:\Program Files\Git\bin\bash.exe)
+2025-12-14T01:17:17.299Z [DEBUG] Looking for shell config file: C:\Users\tjn\.bashrc
+2025-12-14T01:17:17.299Z [DEBUG] Shell config file not found: C:\Users\tjn\.bashrc, creating snapshot with Claude Code defaults only
+2025-12-14T01:17:17.299Z [DEBUG] Snapshots directory: C:\Users\tjn\.claude\shell-snapshots
+2025-12-14T01:17:17.307Z [DEBUG] Creating snapshot at: C:\Users\tjn\.claude\shell-snapshots\snapshot-bash-1765675037299-kpofth.sh
+2025-12-14T01:17:17.307Z [DEBUG] Shell binary exists: true
+2025-12-14T01:17:17.307Z [DEBUG] Execution timeout: 10000ms
+2025-12-14T01:17:17.310Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\todos\ef3a8870-0258-4d8c-af4f-7c3e6456b616-agent-ef3a8870-0258-4d8c-af4f-7c3e6456b616.json.tmp.17580.1765675037310
+2025-12-14T01:17:17.319Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (9.2ms)
+2025-12-14T01:17:17.319Z [DEBUG] Temp file written successfully, size: 2 bytes
+2025-12-14T01:17:17.320Z [DEBUG] Renaming C:\Users\tjn\.claude\todos\ef3a8870-0258-4d8c-af4f-7c3e6456b616-agent-ef3a8870-0258-4d8c-af4f-7c3e6456b616.json.tmp.17580.1765675037310 to C:\Users\tjn\.claude\todos\ef3a8870-0258-4d8c-af4f-7c3e6456b616-agent-ef3a8870-0258-4d8c-af4f-7c3e6456b616.json
+2025-12-14T01:17:17.321Z [DEBUG] File C:\Users\tjn\.claude\todos\ef3a8870-0258-4d8c-af4f-7c3e6456b616-agent-ef3a8870-0258-4d8c-af4f-7c3e6456b616.json written atomically
+2025-12-14T01:17:17.336Z [DEBUG] Auto-updating 3 installed marketplaces in background
+2025-12-14T01:17:17.336Z [DEBUG] Auto-updating marketplace "claude-code-plugins"
+2025-12-14T01:17:17.336Z [DEBUG] Auto-updating marketplace "anthropic-agent-skills"
+2025-12-14T01:17:17.336Z [DEBUG] Auto-updating marketplace "taches-cc-resources"
+2025-12-14T01:17:17.341Z [DEBUG] getPluginSkills: Processing 10 enabled plugins
+2025-12-14T01:17:17.341Z [DEBUG] Checking plugin agent-sdk-dev: skillsPath=none, skillsPaths=0 paths
+2025-12-14T01:17:17.341Z [DEBUG] Checking plugin pr-review-toolkit: skillsPath=none, skillsPaths=0 paths
+2025-12-14T01:17:17.341Z [DEBUG] Checking plugin commit-commands: skillsPath=none, skillsPaths=0 paths
+2025-12-14T01:17:17.342Z [DEBUG] Checking plugin feature-dev: skillsPath=none, skillsPaths=0 paths
+2025-12-14T01:17:17.342Z [DEBUG] Checking plugin security-guidance: skillsPath=none, skillsPaths=0 paths
+2025-12-14T01:17:17.342Z [DEBUG] Checking plugin code-review: skillsPath=none, skillsPaths=0 paths
+2025-12-14T01:17:17.342Z [DEBUG] Checking plugin frontend-design: skillsPath=exists, skillsPaths=0 paths
+2025-12-14T01:17:17.342Z [DEBUG] Attempting to load skills from plugin frontend-design default skillsPath: C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\frontend-design\1.0.0\skills
+2025-12-14T01:17:17.343Z [DEBUG] Loading hooks from plugin: security-guidance
+2025-12-14T01:17:17.343Z [DEBUG] Registered 1 hooks from 10 plugins
+2025-12-14T01:17:17.404Z [DEBUG] Loaded 21 unique skills (managed: 0, user: 21, project: 0, duplicates removed: 0)
+2025-12-14T01:17:17.404Z [DEBUG] Loaded 1 skills from plugin frontend-design default directory
+2025-12-14T01:17:17.404Z [DEBUG] Checking plugin document-skills: skillsPath=exists, skillsPaths=4 paths
+2025-12-14T01:17:17.404Z [DEBUG] Attempting to load skills from plugin document-skills default skillsPath: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\document-skills\00756142ab04\skills
+2025-12-14T01:17:17.407Z [DEBUG] Loaded 1 commands from plugin agent-sdk-dev default directory
+2025-12-14T01:17:17.418Z [DEBUG] Loaded 16 skills from plugin document-skills default directory
+2025-12-14T01:17:17.418Z [DEBUG] Attempting to load skills from plugin document-skills skillsPaths: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\document-skills\00756142ab04\skills\xlsx, C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\document-skills\00756142ab04\skills\docx, C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\document-skills\00756142ab04\skills\pptx, C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\document-skills\00756142ab04\skills\pdf
+2025-12-14T01:17:17.418Z [DEBUG] Loading from skillPath: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\document-skills\00756142ab04\skills\xlsx for plugin document-skills
+2025-12-14T01:17:17.418Z [DEBUG] Loaded 1 commands from plugin pr-review-toolkit default directory
+2025-12-14T01:17:17.418Z [DEBUG] Loaded 1 skills from plugin document-skills custom path: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\document-skills\00756142ab04\skills\xlsx
+2025-12-14T01:17:17.418Z [DEBUG] Loading from skillPath: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\document-skills\00756142ab04\skills\docx for plugin document-skills
+2025-12-14T01:17:17.419Z [DEBUG] Loaded 3 commands from plugin commit-commands default directory
+2025-12-14T01:17:17.419Z [DEBUG] Loaded 1 skills from plugin document-skills custom path: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\document-skills\00756142ab04\skills\docx
+2025-12-14T01:17:17.419Z [DEBUG] Loading from skillPath: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\document-skills\00756142ab04\skills\pptx for plugin document-skills
+2025-12-14T01:17:17.419Z [DEBUG] Loaded 1 commands from plugin feature-dev default directory
+2025-12-14T01:17:17.422Z [DEBUG] Loaded 1 skills from plugin document-skills custom path: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\document-skills\00756142ab04\skills\pptx
+2025-12-14T01:17:17.422Z [DEBUG] Loading from skillPath: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\document-skills\00756142ab04\skills\pdf for plugin document-skills
+2025-12-14T01:17:17.422Z [DEBUG] Loaded 1 commands from plugin code-review default directory
+2025-12-14T01:17:17.427Z [DEBUG] Loaded 1 skills from plugin document-skills custom path: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\document-skills\00756142ab04\skills\pdf
+2025-12-14T01:17:17.427Z [DEBUG] Checking plugin example-skills: skillsPath=exists, skillsPaths=12 paths
+2025-12-14T01:17:17.427Z [DEBUG] Attempting to load skills from plugin example-skills default skillsPath: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills
+2025-12-14T01:17:17.431Z [DEBUG] Loaded 29 commands from plugin taches-cc-resources default directory
+2025-12-14T01:17:17.431Z [DEBUG] Total plugin commands loaded: 36
+2025-12-14T01:17:17.434Z [DEBUG] Loaded 2 agents from plugin agent-sdk-dev default directory
+2025-12-14T01:17:17.434Z [DEBUG] Loaded 6 agents from plugin pr-review-toolkit default directory
+2025-12-14T01:17:17.435Z [DEBUG] Loaded 3 agents from plugin feature-dev default directory
+2025-12-14T01:17:17.435Z [DEBUG] Loaded 3 agents from plugin taches-cc-resources default directory
+2025-12-14T01:17:17.435Z [DEBUG] Total plugin agents loaded: 14
+2025-12-14T01:17:17.435Z [DEBUG] Loaded 16 skills from plugin example-skills default directory
+2025-12-14T01:17:17.435Z [DEBUG] Attempting to load skills from plugin example-skills skillsPaths: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\algorithmic-art, C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\brand-guidelines, C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\canvas-design, C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\doc-coauthoring, C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\frontend-design, C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\internal-comms, C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\mcp-builder, C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\skill-creator, C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\slack-gif-creator, C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\theme-factory, C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\web-artifacts-builder, C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\webapp-testing
+2025-12-14T01:17:17.435Z [DEBUG] Loading from skillPath: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\algorithmic-art for plugin example-skills
+2025-12-14T01:17:17.436Z [DEBUG] Loaded 1 skills from plugin example-skills custom path: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\algorithmic-art
+2025-12-14T01:17:17.436Z [DEBUG] Loading from skillPath: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\brand-guidelines for plugin example-skills
+2025-12-14T01:17:17.436Z [DEBUG] Loaded 1 skills from plugin example-skills custom path: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\brand-guidelines
+2025-12-14T01:17:17.436Z [DEBUG] Loading from skillPath: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\canvas-design for plugin example-skills
+2025-12-14T01:17:17.436Z [DEBUG] Loaded 1 skills from plugin example-skills custom path: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\canvas-design
+2025-12-14T01:17:17.436Z [DEBUG] Loading from skillPath: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\doc-coauthoring for plugin example-skills
+2025-12-14T01:17:17.436Z [DEBUG] Loaded 1 skills from plugin example-skills custom path: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\doc-coauthoring
+2025-12-14T01:17:17.436Z [DEBUG] Loading from skillPath: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\frontend-design for plugin example-skills
+2025-12-14T01:17:17.437Z [DEBUG] Loaded 1 skills from plugin example-skills custom path: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\frontend-design
+2025-12-14T01:17:17.437Z [DEBUG] Loading from skillPath: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\internal-comms for plugin example-skills
+2025-12-14T01:17:17.437Z [DEBUG] Loaded 1 skills from plugin example-skills custom path: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\internal-comms
+2025-12-14T01:17:17.437Z [DEBUG] Loading from skillPath: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\mcp-builder for plugin example-skills
+2025-12-14T01:17:17.437Z [DEBUG] Loaded 1 skills from plugin example-skills custom path: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\mcp-builder
+2025-12-14T01:17:17.437Z [DEBUG] Loading from skillPath: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\skill-creator for plugin example-skills
+2025-12-14T01:17:17.437Z [DEBUG] Loaded 1 skills from plugin example-skills custom path: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\skill-creator
+2025-12-14T01:17:17.437Z [DEBUG] Loading from skillPath: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\slack-gif-creator for plugin example-skills
+2025-12-14T01:17:17.437Z [DEBUG] Loaded 1 skills from plugin example-skills custom path: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\slack-gif-creator
+2025-12-14T01:17:17.437Z [DEBUG] Loading from skillPath: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\theme-factory for plugin example-skills
+2025-12-14T01:17:17.438Z [DEBUG] Loaded 1 skills from plugin example-skills custom path: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\theme-factory
+2025-12-14T01:17:17.438Z [DEBUG] Loading from skillPath: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\web-artifacts-builder for plugin example-skills
+2025-12-14T01:17:17.438Z [DEBUG] Loaded 1 skills from plugin example-skills custom path: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\web-artifacts-builder
+2025-12-14T01:17:17.438Z [DEBUG] Loading from skillPath: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\webapp-testing for plugin example-skills
+2025-12-14T01:17:17.438Z [DEBUG] Loaded 1 skills from plugin example-skills custom path: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\webapp-testing
+2025-12-14T01:17:17.438Z [DEBUG] Checking plugin taches-cc-resources: skillsPath=exists, skillsPaths=0 paths
+2025-12-14T01:17:17.438Z [DEBUG] Attempting to load skills from plugin taches-cc-resources default skillsPath: C:\Users\tjn\.claude\plugins\cache\taches-cc-resources\taches-cc-resources\1.0.0\skills
+2025-12-14T01:17:17.439Z [DEBUG] Loaded 7 skills from plugin taches-cc-resources default directory
+2025-12-14T01:17:17.439Z [DEBUG] Total plugin skills loaded: 56
+2025-12-14T01:17:17.439Z [DEBUG] getSkills returning: 21 skill dir commands, 56 plugin skills
+2025-12-14T01:17:17.494Z [DEBUG] Ripgrep first use test: PASSED (mode=builtin, path=C:\Users\tjn\AppData\Local\nvm\v24.11.0\node_modules\@anthropic-ai\claude-code\vendor\ripgrep\x64-win32\rg.exe)
+2025-12-14T01:17:17.596Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude.json.tmp.17580.1765675037596
+2025-12-14T01:17:17.596Z [DEBUG] Preserving file permissions: 100666
+2025-12-14T01:17:17.609Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (12.7ms)
+2025-12-14T01:17:17.609Z [DEBUG] Temp file written successfully, size: 52376 bytes
+2025-12-14T01:17:17.609Z [DEBUG] Applied original permissions to temp file
+2025-12-14T01:17:17.609Z [DEBUG] Renaming C:\Users\tjn\.claude.json.tmp.17580.1765675037596 to C:\Users\tjn\.claude.json
+2025-12-14T01:17:17.609Z [DEBUG] File C:\Users\tjn\.claude.json written atomically
+2025-12-14T01:17:17.806Z [DEBUG] Passes: Using fresh cached eligibility data
+2025-12-14T01:17:17.834Z [DEBUG] MCP server "sequential-thinking": Starting connection with timeout of 30000ms
+2025-12-14T01:17:17.842Z [DEBUG] MCP server "playwright": Starting connection with timeout of 30000ms
+2025-12-14T01:17:17.847Z [DEBUG] MCP server "memory": Starting connection with timeout of 30000ms
+2025-12-14T01:17:17.867Z [DEBUG] All plugins already exist, skipping migration
+2025-12-14T01:17:17.924Z [DEBUG] Initialized versioned plugins system with 12 plugins
+2025-12-14T01:17:17.930Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude.json.tmp.17580.1765675037930
+2025-12-14T01:17:17.931Z [DEBUG] Preserving file permissions: 100666
+2025-12-14T01:17:17.945Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (14.0ms)
+2025-12-14T01:17:17.945Z [DEBUG] Temp file written successfully, size: 52376 bytes
+2025-12-14T01:17:17.945Z [DEBUG] Applied original permissions to temp file
+2025-12-14T01:17:17.945Z [DEBUG] Renaming C:\Users\tjn\.claude.json.tmp.17580.1765675037930 to C:\Users\tjn\.claude.json
+2025-12-14T01:17:17.945Z [DEBUG] File C:\Users\tjn\.claude.json written atomically
+2025-12-14T01:17:17.961Z [DEBUG] Getting matching hook commands for SessionStart with query: startup
+2025-12-14T01:17:17.961Z [DEBUG] Found 0 hook matchers in settings
+2025-12-14T01:17:17.961Z [DEBUG] Matched 0 unique hooks for query "startup" (0 before deduplication)
+2025-12-14T01:17:18.012Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude.json.tmp.17580.1765675038012
+2025-12-14T01:17:18.012Z [DEBUG] Preserving file permissions: 100666
+2025-12-14T01:17:18.025Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (12.6ms)
+2025-12-14T01:17:18.025Z [DEBUG] Temp file written successfully, size: 52303 bytes
+2025-12-14T01:17:18.025Z [DEBUG] Applied original permissions to temp file
+2025-12-14T01:17:18.025Z [DEBUG] Renaming C:\Users\tjn\.claude.json.tmp.17580.1765675038012 to C:\Users\tjn\.claude.json
+2025-12-14T01:17:18.025Z [DEBUG] File C:\Users\tjn\.claude.json written atomically
+2025-12-14T01:17:18.040Z [DEBUG] performStartupChecks called
+2025-12-14T01:17:18.040Z [DEBUG] Starting background plugin installations
+2025-12-14T01:17:18.041Z [DEBUG] performBackgroundPluginInstallations called
+2025-12-14T01:17:18.061Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude.json.tmp.17580.1765675038061
+2025-12-14T01:17:18.061Z [DEBUG] Preserving file permissions: 100666
+2025-12-14T01:17:18.069Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (8.4ms)
+2025-12-14T01:17:18.069Z [DEBUG] Temp file written successfully, size: 52376 bytes
+2025-12-14T01:17:18.069Z [DEBUG] Applied original permissions to temp file
+2025-12-14T01:17:18.069Z [DEBUG] Renaming C:\Users\tjn\.claude.json.tmp.17580.1765675038061 to C:\Users\tjn\.claude.json
+2025-12-14T01:17:18.070Z [DEBUG] File C:\Users\tjn\.claude.json written atomically
+2025-12-14T01:17:18.073Z [DEBUG] Found 10 enabled plugins
+2025-12-14T01:17:18.073Z [DEBUG] All plugins already exist, skipping migration
+2025-12-14T01:17:18.073Z [DEBUG] Found 12 installed plugins (V2 format)
+2025-12-14T01:17:18.074Z [DEBUG] Loaded plugins - Enabled: 10, Disabled: 2, Commands: 36, Agents: 14, Errors: 0
+2025-12-14T01:17:18.074Z [DEBUG] Found 0 missing plugins (not installed):
+2025-12-14T01:17:18.074Z [DEBUG] Setting installation status: 0 marketplaces, 0 installable plugins, 0 uninstallable plugins
+2025-12-14T01:17:18.099Z [DEBUG] Getting matching hook commands for SubagentStart with query: Explore
+2025-12-14T01:17:18.099Z [DEBUG] Found 0 hook matchers in settings
+2025-12-14T01:17:18.099Z [DEBUG] Matched 0 unique hooks for query "Explore" (0 before deduplication)
+2025-12-14T01:17:18.116Z [DEBUG] Getting matching hook commands for SubagentStart with query: Plan
+2025-12-14T01:17:18.116Z [DEBUG] Found 0 hook matchers in settings
+2025-12-14T01:17:18.116Z [DEBUG] Matched 0 unique hooks for query "Plan" (0 before deduplication)
+2025-12-14T01:17:18.146Z [DEBUG] Shell snapshot created successfully (347 bytes)
+2025-12-14T01:17:18.160Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (10.4ms)
+2025-12-14T01:17:18.160Z [DEBUG] Successfully refreshed marketplace: anthropic-agent-skills
+2025-12-14T01:17:18.160Z [DEBUG] Successfully auto-updated marketplace "anthropic-agent-skills"
+2025-12-14T01:17:18.166Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (5.3ms)
+2025-12-14T01:17:18.166Z [DEBUG] Successfully refreshed marketplace: taches-cc-resources
+2025-12-14T01:17:18.166Z [DEBUG] Successfully auto-updated marketplace "taches-cc-resources"
+2025-12-14T01:17:18.170Z [DEBUG] Successfully refreshed marketplace: claude-code-plugins
+2025-12-14T01:17:18.170Z [DEBUG] Successfully auto-updated marketplace "claude-code-plugins"
+2025-12-14T01:17:18.185Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude.json.tmp.17580.1765675038185
+2025-12-14T01:17:18.185Z [DEBUG] Preserving file permissions: 100666
+2025-12-14T01:17:18.191Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (5.5ms)
+2025-12-14T01:17:18.191Z [DEBUG] Temp file written successfully, size: 52376 bytes
+2025-12-14T01:17:18.191Z [DEBUG] Applied original permissions to temp file
+2025-12-14T01:17:18.191Z [DEBUG] Renaming C:\Users\tjn\.claude.json.tmp.17580.1765675038185 to C:\Users\tjn\.claude.json
+2025-12-14T01:17:18.191Z [DEBUG] File C:\Users\tjn\.claude.json written atomically
+2025-12-14T01:17:18.369Z [DEBUG] AutoUpdaterWrapper: Installation type: unknown
+2025-12-14T01:17:19.132Z [DEBUG] Stream started - received first chunk
+2025-12-14T01:17:19.422Z [ERROR] MCP server "memory" Server stderr: Knowledge Graph MCP Server running on stdio
+2025-12-14T01:17:19.429Z [DEBUG] MCP server "memory": Successfully connected to stdio server in 1583ms
+2025-12-14T01:17:19.429Z [DEBUG] MCP server "memory": Connection established with capabilities: {"hasTools":true,"hasPrompts":false,"hasResources":false,"serverVersion":{"name":"memory-server","version":"0.6.3"}}
+2025-12-14T01:17:19.443Z [ERROR] MCP server "sequential-thinking" Server stderr: Sequential Thinking MCP Server running on stdio
+2025-12-14T01:17:19.443Z [DEBUG] MCP server "sequential-thinking": Successfully connected to stdio server in 1627ms
+2025-12-14T01:17:19.443Z [DEBUG] MCP server "sequential-thinking": Connection established with capabilities: {"hasTools":true,"hasPrompts":false,"hasResources":false,"serverVersion":{"name":"sequential-thinking-server","version":"0.2.0"}}
+2025-12-14T01:17:19.705Z [DEBUG] MCP server "playwright": Successfully connected to stdio server in 1866ms
+2025-12-14T01:17:19.705Z [DEBUG] MCP server "playwright": Connection established with capabilities: {"hasTools":true,"hasPrompts":false,"hasResources":false,"serverVersion":{"name":"Playwright","version":"0.0.52"}}
+2025-12-14T01:17:19.712Z [DEBUG] MCP server "filesystem": Starting connection with timeout of 30000ms
+2025-12-14T01:17:19.717Z [DEBUG] MCP server "sqlite": Starting connection with timeout of 30000ms
+2025-12-14T01:17:20.439Z [DEBUG] MCP server "sqlite": Successfully connected to stdio server in 723ms
+2025-12-14T01:17:20.439Z [DEBUG] MCP server "sqlite": Connection established with capabilities: {"hasTools":true,"hasPrompts":true,"hasResources":true,"serverVersion":{"name":"sqlite","version":"0.1.0"}}
+2025-12-14T01:17:20.552Z [DEBUG] Stream started - received first chunk
+2025-12-14T01:17:21.068Z [ERROR] MCP server "filesystem" Server stderr: Secure MCP Filesystem Server running on stdio
+2025-12-14T01:17:21.076Z [DEBUG] MCP server "filesystem": Successfully connected to stdio server in 1364ms
+2025-12-14T01:17:21.076Z [DEBUG] MCP server "filesystem": Connection established with capabilities: {"hasTools":true,"hasPrompts":false,"hasResources":false,"serverVersion":{"name":"secure-filesystem-server","version":"0.2.0"}}
+2025-12-14T01:17:21.079Z [DEBUG] MCP server "filesystem": Received ListRoots request from server
+2025-12-14T01:17:21.149Z [ERROR] MCP server "filesystem" Server stderr: Updated allowed directories from MCP roots: 1 valid directories
+2025-12-14T01:17:21.163Z [DEBUG] Getting matching hook commands for SubagentStop with query: undefined
+2025-12-14T01:17:21.163Z [DEBUG] Found 0 hook matchers in settings
+2025-12-14T01:17:21.163Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-14T01:17:21.258Z [DEBUG] Getting matching hook commands for SubagentStop with query: undefined
+2025-12-14T01:17:21.258Z [DEBUG] Found 0 hook matchers in settings
+2025-12-14T01:17:21.258Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-14T01:17:22.289Z [DEBUG] Skill prompt: showing "frontend-design:frontend-design" (userFacingName="frontend-design")
+2025-12-14T01:17:22.289Z [DEBUG] Skill prompt: showing "document-skills:algorithmic-art" (userFacingName="algorithmic-art")
+2025-12-14T01:17:22.289Z [DEBUG] Skill prompt: showing "document-skills:brand-guidelines" (userFacingName="brand-guidelines")
+2025-12-14T01:17:22.289Z [DEBUG] Skill prompt: showing "document-skills:canvas-design" (userFacingName="canvas-design")
+2025-12-14T01:17:22.289Z [DEBUG] Skill prompt: showing "document-skills:doc-coauthoring" (userFacingName="doc-coauthoring")
+2025-12-14T01:17:22.289Z [DEBUG] Skill prompt: showing "document-skills:docx" (userFacingName="docx")
+2025-12-14T01:17:22.289Z [DEBUG] Skill prompt: showing "document-skills:frontend-design" (userFacingName="frontend-design")
+2025-12-14T01:17:22.289Z [DEBUG] Skill prompt: showing "document-skills:internal-comms" (userFacingName="internal-comms")
+2025-12-14T01:17:22.289Z [DEBUG] Skill prompt: showing "document-skills:mcp-builder" (userFacingName="mcp-builder")
+2025-12-14T01:17:22.289Z [DEBUG] Skill prompt: showing "document-skills:pdf" (userFacingName="pdf")
+2025-12-14T01:17:22.289Z [DEBUG] Skill prompt: showing "document-skills:pptx" (userFacingName="pptx")
+2025-12-14T01:17:22.289Z [DEBUG] Skill prompt: showing "document-skills:skill-creator" (userFacingName="skill-creator")
+2025-12-14T01:17:22.289Z [DEBUG] Skill prompt: showing "document-skills:slack-gif-creator" (userFacingName="slack-gif-creator")
+2025-12-14T01:17:22.289Z [DEBUG] Skill prompt: showing "document-skills:theme-factory" (userFacingName="theme-factory")
+2025-12-14T01:17:22.289Z [DEBUG] Skill prompt: showing "document-skills:web-artifacts-builder" (userFacingName="web-artifacts-builder")
+2025-12-14T01:17:22.289Z [DEBUG] Skills and commands included in Skill tool: codebase-documenter, frontend-enhancer, generic-code-reviewer, generic-design-system, generic-feature-developer, generic-fullstack-code-reviewer, generic-fullstack-design-system, generic-fullstack-feature-developer, generic-fullstack-ux-designer, generic-react-code-reviewer, generic-react-design-system, generic-react-feature-developer, generic-react-ux-designer, generic-static-code-reviewer, generic-static-design-system, generic-static-feature-developer, generic-static-ux-designer, generic-ux-designer, tech-debt-analyzer, test-specialist, frontend-design, algorithmic-art, brand-guidelines, canvas-design, doc-coauthoring, docx, frontend-design, internal-comms, mcp-builder, pdf, pptx, skill-creator, slack-gif-creator, theme-factory
+2025-12-14T01:17:22.289Z [DEBUG] Skill prompt: showing "frontend-design:frontend-design" (userFacingName="frontend-design")
+2025-12-14T01:17:22.289Z [DEBUG] Skill prompt: showing "document-skills:algorithmic-art" (userFacingName="algorithmic-art")
+2025-12-14T01:17:22.289Z [DEBUG] Skill prompt: showing "document-skills:brand-guidelines" (userFacingName="brand-guidelines")
+2025-12-14T01:17:22.289Z [DEBUG] Skill prompt: showing "document-skills:canvas-design" (userFacingName="canvas-design")
+2025-12-14T01:17:22.289Z [DEBUG] Skill prompt: showing "document-skills:doc-coauthoring" (userFacingName="doc-coauthoring")
+2025-12-14T01:17:22.289Z [DEBUG] Skill prompt: showing "document-skills:docx" (userFacingName="docx")
+2025-12-14T01:17:22.289Z [DEBUG] Skill prompt: showing "document-skills:frontend-design" (userFacingName="frontend-design")
+2025-12-14T01:17:22.289Z [DEBUG] Skill prompt: showing "document-skills:internal-comms" (userFacingName="internal-comms")
+2025-12-14T01:17:22.289Z [DEBUG] Skill prompt: showing "document-skills:mcp-builder" (userFacingName="mcp-builder")
+2025-12-14T01:17:22.289Z [DEBUG] Skill prompt: showing "document-skills:pdf" (userFacingName="pdf")
+2025-12-14T01:17:22.289Z [DEBUG] Skill prompt: showing "document-skills:pptx" (userFacingName="pptx")
+2025-12-14T01:17:22.289Z [DEBUG] Skill prompt: showing "document-skills:skill-creator" (userFacingName="skill-creator")
+2025-12-14T01:17:22.289Z [DEBUG] Skill prompt: showing "document-skills:slack-gif-creator" (userFacingName="slack-gif-creator")
+2025-12-14T01:17:22.289Z [DEBUG] Skill prompt: showing "document-skills:theme-factory" (userFacingName="theme-factory")
+2025-12-14T01:17:22.290Z [DEBUG] Slash commands included in SlashCommand tool: /run, /start-task, /agent-sdk-dev:new-sdk-app, /pr-review-toolkit:review-pr, /commit-commands:clean_gone, /commit-commands:commit-push-pr, /commit-commands:commit, /feature-dev:feature-dev, /code-review:code-review, /taches-cc-resources:add-to-todos, /taches-cc-resources:audit-skill, /taches-cc-resources:audit-slash-command, /taches-cc-resources:audit-subagent, /taches-cc-resources:check-todos, /taches-cc-resources:create-agent-skill, /taches-cc-resources:create-hook, /taches-cc-resources:create-meta-prompt, /taches-cc-resources:create-plan, /taches-cc-resources:create-prompt, /taches-cc-resources:create-slash-command, /taches-cc-resources:create-subagent, /taches-cc-resources:debug, /taches-cc-resources:heal-skill, /taches-cc-resources:run-plan, /run-prompt, /whats-next, /taches-cc-resources:\consider:10-10-10, /taches-cc-resources:\consider:5-whys, /taches-cc-resources:\consider:eisenhower-matrix, /taches-cc-resources:\consider:first-principles, /taches-cc-resources:\consider:inversion, /taches-cc-resources:\consider:occams-razor, /taches-cc-resources:\consider:one-thing, /taches-cc-resources:\consider:opportunity-cost, /taches-cc-resources:\consider:pareto, /taches-cc-resources:\consider:second-order, /taches-cc-resources:\consider:swot, /taches-cc-resources:\consider:via-negativa
+2025-12-14T01:17:24.324Z [DEBUG] AutoUpdaterWrapper: Installation type: unknown
+2025-12-14T01:17:28.671Z [DEBUG] Metadata string for start-task:
+2025-12-14T01:17:28.671Z [DEBUG] <command-message>start-task is running…</command-message>
+<command-name>/start-task</command-name>
+<command-args>PS C:\Users\tjn\.claude> claude doctor                        1 MCP server failed · /mc
+2025-12-14T01:17:28.671Z [DEBUG] command-message tags in metadata: 1
+2025-12-14T01:17:28.710Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-14T01:17:28.711Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-14T01:17:28.711Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-14T01:17:28.711Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-14T01:17:28.947Z [DEBUG] processPromptSlashCommand creating 3 messages for start-task
+2025-12-14T01:17:28.947Z [DEBUG] Message 1: <command-message>start-task is running…</command-message>
+<command-name>/start-task</command-name>
+<command-args>PS C:\Users\tjn\.claude> claude doctor                        1 MCP server failed · /mc
+2025-12-14T01:17:28.947Z [DEBUG] Message 2 [META]: [{"type":"text","text":"# Start Task - Intelligent Workflow Router\n\nAnalyzes task and routes to optimal execution strategy.\n\n## Routing Logic\n\n**No task provided:** → `/check-todos`\n\n**Task pr
+2025-12-14T01:17:28.947Z [DEBUG] Message 3: [ATTACHMENT]
+2025-12-14T01:17:28.963Z [DEBUG] Getting matching hook commands for UserPromptSubmit with query: undefined
+2025-12-14T01:17:28.963Z [DEBUG] Found 0 hook matchers in settings
+2025-12-14T01:17:28.963Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-14T01:17:28.965Z [DEBUG] FileHistory: Added snapshot for c0b6e007-c407-4c3e-8166-b997a1268282, tracking 0 files
+2025-12-14T01:17:28.967Z [DEBUG] UserCommandMessage rendering: "start-task is running…" (args: "PS C:\Users\tjn\.claude> claude doctor                        1 MCP server failed · /mcp for info
+
+ Diagnostics
+ └ Currently running: unknown (2.0.69)
+ └ Path: C:\nvm4w\nodejs\node.exe
+ └ Invoked: C:\nvm4w\nodejs\node_modules\@anthropic-ai\claude-code\cli.js
+ └ Config install method: unknown
+ └ Auto-updates: enabled
+ └ Search: OK (vendor)
+
+ Context Usage Warnings
+ └ ‼ Large MCP tools context (~34,452 tokens > 25,000)
+   └ MCP servers:
+     └ playwright: 22 tools (~14,446 tokens)
+     └ filesystem: 14 tools (~9,220 tokens)
+     └ memory: 9 tools (~5,795 tokens)
+     └ sqlite: 6 tools (~3,437 tokens)
+     └ sequential-thinking: 1 tools (~1,554 tokens)
+
+
+> /mcp
+─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ Manage MCP servers
+ 5 servers
+
+ > 1. filesystem                     √ connected · Enter to view details
+   2. memory                         √ connected · Enter to view details
+   3. playwright                     √ connected · Enter to view details
+   4. sequential-thinking            √ connected · Enter to view details
+   5. sqlite                         √ connected · Enter to view details
+
+ MCP Config locations (by scope):
+  • User config (available in all your projects):
+    • C:\Users\tjn\.claude.json
+  • Project config (shared via .mcp.json):
+    • C:\Users\tjn\.claude\.mcp.json (file does not exist)
+  • Local config (private to you in this project):
+    • C:\Users\tjn\.claude.json [project: C:\Users\tjn\.claude]
+
+ Tip: Use /mcp enable or /mcp disable to quickly toggle all servers
+
+ For help configuring MCP servers, see: https://code.claude.com/docs/en/mcp
+
+
+I don't see any MCP servers failing even though it says 1 MCP server failed up at the beginning. Also, are we sure everything is setup properly to not enable / connect to MCP servers unless their specific use case is needed at that time? And then immediately when it's use is complete we disconnect / turn it off? Can we get that added into the CLAUDE.md file in the optimal location?")
+2025-12-14T01:17:28.967Z [DEBUG] isSkillFormat: false, prefix: "/"
+2025-12-14T01:17:29.035Z [DEBUG] Total plugin output styles loaded: 0
+2025-12-14T01:17:31.483Z [DEBUG] Stream started - received first chunk
+2025-12-14T01:17:34.770Z [DEBUG] executePreToolHooks called for tool: TodoWrite
+2025-12-14T01:17:34.775Z [DEBUG] Getting matching hook commands for PreToolUse with query: TodoWrite
+2025-12-14T01:17:34.775Z [DEBUG] Found 1 hook matchers in settings
+2025-12-14T01:17:34.775Z [DEBUG] Matched 0 unique hooks for query "TodoWrite" (0 before deduplication)
+2025-12-14T01:17:34.799Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\todos\ef3a8870-0258-4d8c-af4f-7c3e6456b616-agent-ef3a8870-0258-4d8c-af4f-7c3e6456b616.json.tmp.17580.1765675054799
+2025-12-14T01:17:34.799Z [DEBUG] Preserving file permissions: 100666
+2025-12-14T01:17:34.805Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (6.3ms)
+2025-12-14T01:17:34.805Z [DEBUG] Temp file written successfully, size: 511 bytes
+2025-12-14T01:17:34.805Z [DEBUG] Applied original permissions to temp file
+2025-12-14T01:17:34.805Z [DEBUG] Renaming C:\Users\tjn\.claude\todos\ef3a8870-0258-4d8c-af4f-7c3e6456b616-agent-ef3a8870-0258-4d8c-af4f-7c3e6456b616.json.tmp.17580.1765675054799 to C:\Users\tjn\.claude\todos\ef3a8870-0258-4d8c-af4f-7c3e6456b616-agent-ef3a8870-0258-4d8c-af4f-7c3e6456b616.json
+2025-12-14T01:17:34.805Z [DEBUG] File C:\Users\tjn\.claude\todos\ef3a8870-0258-4d8c-af4f-7c3e6456b616-agent-ef3a8870-0258-4d8c-af4f-7c3e6456b616.json written atomically
+2025-12-14T01:17:34.818Z [DEBUG] Getting matching hook commands for PostToolUse with query: TodoWrite
+2025-12-14T01:17:34.818Z [DEBUG] Found 0 hook matchers in settings
+2025-12-14T01:17:34.818Z [DEBUG] Matched 0 unique hooks for query "TodoWrite" (0 before deduplication)
+2025-12-14T01:17:34.841Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-14T01:17:34.841Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-14T01:17:34.841Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-14T01:17:34.841Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-14T01:17:37.748Z [DEBUG] Stream started - received first chunk
+2025-12-14T01:17:38.263Z [DEBUG] executePreToolHooks called for tool: Read
+2025-12-14T01:17:38.270Z [DEBUG] Getting matching hook commands for PreToolUse with query: Read
+2025-12-14T01:17:38.270Z [DEBUG] Found 1 hook matchers in settings
+2025-12-14T01:17:38.270Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2025-12-14T01:17:40.002Z [DEBUG] Getting matching hook commands for PostToolUse with query: Read
+2025-12-14T01:17:40.002Z [DEBUG] Found 0 hook matchers in settings
+2025-12-14T01:17:40.002Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2025-12-14T01:17:40.027Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-14T01:17:40.027Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-14T01:17:40.027Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-14T01:17:40.027Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-14T01:17:43.374Z [DEBUG] Stream started - received first chunk
+2025-12-14T01:17:49.142Z [DEBUG] executePreToolHooks called for tool: Task
+2025-12-14T01:17:49.150Z [DEBUG] Getting matching hook commands for PreToolUse with query: Task
+2025-12-14T01:17:49.150Z [DEBUG] Found 1 hook matchers in settings
+2025-12-14T01:17:49.150Z [DEBUG] Matched 0 unique hooks for query "Task" (0 before deduplication)
+2025-12-14T01:17:49.218Z [DEBUG] Getting matching hook commands for SubagentStart with query: claude-code-guide
+2025-12-14T01:17:49.218Z [DEBUG] Found 0 hook matchers in settings
+2025-12-14T01:17:49.218Z [DEBUG] Matched 0 unique hooks for query "claude-code-guide" (0 before deduplication)
+2025-12-14T01:17:49.271Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (5.7ms)
+2025-12-14T01:17:50.384Z [DEBUG] Stream started - received first chunk
+2025-12-14T01:17:52.212Z [DEBUG] executePreToolHooks called for tool: WebFetch
+2025-12-14T01:17:52.212Z [DEBUG] executePreToolHooks called for tool: WebFetch
+2025-12-14T01:17:52.235Z [DEBUG] Getting matching hook commands for PreToolUse with query: WebFetch
+2025-12-14T01:17:52.235Z [DEBUG] Found 1 hook matchers in settings
+2025-12-14T01:17:52.235Z [DEBUG] Matched 0 unique hooks for query "WebFetch" (0 before deduplication)
+2025-12-14T01:17:52.235Z [DEBUG] Getting matching hook commands for PreToolUse with query: WebFetch
+2025-12-14T01:17:52.235Z [DEBUG] Found 1 hook matchers in settings
+2025-12-14T01:17:52.235Z [DEBUG] Matched 0 unique hooks for query "WebFetch" (0 before deduplication)
+2025-12-14T01:17:52.506Z [DEBUG] Getting matching hook commands for PostToolUse with query: WebFetch
+2025-12-14T01:17:52.506Z [DEBUG] Found 0 hook matchers in settings
+2025-12-14T01:17:52.506Z [DEBUG] Matched 0 unique hooks for query "WebFetch" (0 before deduplication)
+2025-12-14T01:17:53.378Z [DEBUG] Stream started - received first chunk
+2025-12-14T01:18:00.983Z [DEBUG] Getting matching hook commands for PostToolUse with query: WebFetch
+2025-12-14T01:18:00.983Z [DEBUG] Found 0 hook matchers in settings
+2025-12-14T01:18:00.983Z [DEBUG] Matched 0 unique hooks for query "WebFetch" (0 before deduplication)
+2025-12-14T01:18:02.014Z [DEBUG] Stream started - received first chunk
+2025-12-14T01:18:03.686Z [DEBUG] executePreToolHooks called for tool: WebFetch
+2025-12-14T01:18:03.686Z [DEBUG] executePreToolHooks called for tool: WebFetch
+2025-12-14T01:18:03.708Z [DEBUG] Getting matching hook commands for PreToolUse with query: WebFetch
+2025-12-14T01:18:03.708Z [DEBUG] Found 1 hook matchers in settings
+2025-12-14T01:18:03.708Z [DEBUG] Matched 0 unique hooks for query "WebFetch" (0 before deduplication)
+2025-12-14T01:18:03.708Z [DEBUG] Getting matching hook commands for PreToolUse with query: WebFetch
+2025-12-14T01:18:03.708Z [DEBUG] Found 1 hook matchers in settings
+2025-12-14T01:18:03.708Z [DEBUG] Matched 0 unique hooks for query "WebFetch" (0 before deduplication)
+2025-12-14T01:18:03.979Z [DEBUG] Getting matching hook commands for PostToolUse with query: WebFetch
+2025-12-14T01:18:03.979Z [DEBUG] Found 0 hook matchers in settings
+2025-12-14T01:18:03.979Z [DEBUG] Matched 0 unique hooks for query "WebFetch" (0 before deduplication)
+2025-12-14T01:18:04.072Z [DEBUG] Getting matching hook commands for PostToolUse with query: WebFetch
+2025-12-14T01:18:04.072Z [DEBUG] Found 0 hook matchers in settings
+2025-12-14T01:18:04.072Z [DEBUG] Matched 0 unique hooks for query "WebFetch" (0 before deduplication)
+2025-12-14T01:18:05.227Z [DEBUG] Stream started - received first chunk
+2025-12-14T01:18:20.328Z [DEBUG] Getting matching hook commands for SubagentStop with query: undefined
+2025-12-14T01:18:20.328Z [DEBUG] Found 0 hook matchers in settings
+2025-12-14T01:18:20.328Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-14T01:18:20.346Z [DEBUG] Getting matching hook commands for PostToolUse with query: Task
+2025-12-14T01:18:20.346Z [DEBUG] Found 0 hook matchers in settings
+2025-12-14T01:18:20.346Z [DEBUG] Matched 0 unique hooks for query "Task" (0 before deduplication)
+2025-12-14T01:18:20.370Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-14T01:18:20.370Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-14T01:18:20.370Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-14T01:18:20.370Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-14T01:18:23.083Z [DEBUG] Stream started - received first chunk
+2025-12-14T01:18:25.753Z [DEBUG] executePreToolHooks called for tool: TodoWrite
+2025-12-14T01:18:25.773Z [DEBUG] Getting matching hook commands for PreToolUse with query: TodoWrite
+2025-12-14T01:18:25.773Z [DEBUG] Found 1 hook matchers in settings
+2025-12-14T01:18:25.773Z [DEBUG] Matched 0 unique hooks for query "TodoWrite" (0 before deduplication)
+2025-12-14T01:18:25.800Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\todos\ef3a8870-0258-4d8c-af4f-7c3e6456b616-agent-ef3a8870-0258-4d8c-af4f-7c3e6456b616.json.tmp.17580.1765675105800
+2025-12-14T01:18:25.800Z [DEBUG] Preserving file permissions: 100666
+2025-12-14T01:18:25.805Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (5.3ms)
+2025-12-14T01:18:25.805Z [DEBUG] Temp file written successfully, size: 515 bytes
+2025-12-14T01:18:25.805Z [DEBUG] Applied original permissions to temp file
+2025-12-14T01:18:25.805Z [DEBUG] Renaming C:\Users\tjn\.claude\todos\ef3a8870-0258-4d8c-af4f-7c3e6456b616-agent-ef3a8870-0258-4d8c-af4f-7c3e6456b616.json.tmp.17580.1765675105800 to C:\Users\tjn\.claude\todos\ef3a8870-0258-4d8c-af4f-7c3e6456b616-agent-ef3a8870-0258-4d8c-af4f-7c3e6456b616.json
+2025-12-14T01:18:25.806Z [DEBUG] File C:\Users\tjn\.claude\todos\ef3a8870-0258-4d8c-af4f-7c3e6456b616-agent-ef3a8870-0258-4d8c-af4f-7c3e6456b616.json written atomically
+2025-12-14T01:18:25.818Z [DEBUG] Getting matching hook commands for PostToolUse with query: TodoWrite
+2025-12-14T01:18:25.818Z [DEBUG] Found 0 hook matchers in settings
+2025-12-14T01:18:25.818Z [DEBUG] Matched 0 unique hooks for query "TodoWrite" (0 before deduplication)
+2025-12-14T01:18:25.839Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-14T01:18:25.839Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-14T01:18:25.839Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-14T01:18:25.839Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-14T01:18:28.501Z [DEBUG] Stream started - received first chunk
+2025-12-14T01:18:30.046Z [DEBUG] executePreToolHooks called for tool: Read
+2025-12-14T01:18:30.052Z [DEBUG] Getting matching hook commands for PreToolUse with query: Read
+2025-12-14T01:18:30.052Z [DEBUG] Found 1 hook matchers in settings
+2025-12-14T01:18:30.052Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2025-12-14T01:18:30.941Z [DEBUG] Getting matching hook commands for PostToolUse with query: Read
+2025-12-14T01:18:30.941Z [DEBUG] Found 0 hook matchers in settings
+2025-12-14T01:18:30.941Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2025-12-14T01:18:30.963Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-14T01:18:30.963Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-14T01:18:30.963Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-14T01:18:30.963Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-14T01:18:33.678Z [DEBUG] Stream started - received first chunk
+2025-12-14T01:18:46.111Z [DEBUG] executePreToolHooks called for tool: Edit
+2025-12-14T01:18:46.122Z [DEBUG] Getting matching hook commands for PreToolUse with query: Edit
+2025-12-14T01:18:46.122Z [DEBUG] Found 1 hook matchers in settings
+2025-12-14T01:18:46.122Z [DEBUG] Matched 1 unique hooks for query "Edit" (1 before deduplication)
+2025-12-14T01:18:47.343Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\CLAUDE.md.tmp.17580.1765675127343
+2025-12-14T01:18:47.344Z [DEBUG] Preserving file permissions: 100666
+2025-12-14T01:18:47.348Z [DEBUG] Temp file written successfully, size: 15114 bytes
+2025-12-14T01:18:47.348Z [DEBUG] Applied original permissions to temp file
+2025-12-14T01:18:47.348Z [DEBUG] Renaming C:\Users\tjn\.claude\CLAUDE.md.tmp.17580.1765675127343 to C:\Users\tjn\.claude\CLAUDE.md
+2025-12-14T01:18:47.349Z [DEBUG] File C:\Users\tjn\.claude\CLAUDE.md written atomically
+2025-12-14T01:18:47.375Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (9.8ms)
+2025-12-14T01:18:47.378Z [DEBUG] FileHistory: Tracked file modification for C:\Users\tjn\.claude\CLAUDE.md
+2025-12-14T01:18:47.395Z [DEBUG] Getting matching hook commands for PostToolUse with query: Edit
+2025-12-14T01:18:47.395Z [DEBUG] Found 0 hook matchers in settings
+2025-12-14T01:18:47.395Z [DEBUG] Matched 0 unique hooks for query "Edit" (0 before deduplication)
+2025-12-14T01:18:47.458Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-14T01:18:47.458Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-14T01:18:47.458Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-14T01:18:47.458Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-14T01:18:50.123Z [DEBUG] Stream started - received first chunk
+2025-12-14T01:18:52.344Z [DEBUG] executePreToolHooks called for tool: TodoWrite
+2025-12-14T01:18:52.358Z [DEBUG] Getting matching hook commands for PreToolUse with query: TodoWrite
+2025-12-14T01:18:52.358Z [DEBUG] Found 1 hook matchers in settings
+2025-12-14T01:18:52.358Z [DEBUG] Matched 0 unique hooks for query "TodoWrite" (0 before deduplication)
+2025-12-14T01:18:52.387Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\todos\ef3a8870-0258-4d8c-af4f-7c3e6456b616-agent-ef3a8870-0258-4d8c-af4f-7c3e6456b616.json.tmp.17580.1765675132387
+2025-12-14T01:18:52.387Z [DEBUG] Preserving file permissions: 100666
+2025-12-14T01:18:52.397Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (9.3ms)
+2025-12-14T01:18:52.397Z [DEBUG] Temp file written successfully, size: 2 bytes
+2025-12-14T01:18:52.397Z [DEBUG] Applied original permissions to temp file
+2025-12-14T01:18:52.397Z [DEBUG] Renaming C:\Users\tjn\.claude\todos\ef3a8870-0258-4d8c-af4f-7c3e6456b616-agent-ef3a8870-0258-4d8c-af4f-7c3e6456b616.json.tmp.17580.1765675132387 to C:\Users\tjn\.claude\todos\ef3a8870-0258-4d8c-af4f-7c3e6456b616-agent-ef3a8870-0258-4d8c-af4f-7c3e6456b616.json
+2025-12-14T01:18:52.397Z [DEBUG] File C:\Users\tjn\.claude\todos\ef3a8870-0258-4d8c-af4f-7c3e6456b616-agent-ef3a8870-0258-4d8c-af4f-7c3e6456b616.json written atomically
+2025-12-14T01:18:52.408Z [DEBUG] Getting matching hook commands for PostToolUse with query: TodoWrite
+2025-12-14T01:18:52.408Z [DEBUG] Found 0 hook matchers in settings
+2025-12-14T01:18:52.408Z [DEBUG] Matched 0 unique hooks for query "TodoWrite" (0 before deduplication)
+2025-12-14T01:18:52.430Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-14T01:18:52.430Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-14T01:18:52.430Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-14T01:18:52.430Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-14T01:18:55.078Z [DEBUG] Stream started - received first chunk
+2025-12-14T01:19:02.364Z [DEBUG] Getting matching hook commands for Stop with query: undefined
+2025-12-14T01:19:02.364Z [DEBUG] Found 0 hook matchers in settings
+2025-12-14T01:19:02.364Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-14T01:19:05.015Z [DEBUG] Stream started - received first chunk
+2025-12-14T01:19:05.579Z [DEBUG] Getting matching hook commands for SubagentStop with query: undefined
+2025-12-14T01:19:05.579Z [DEBUG] Found 0 hook matchers in settings
+2025-12-14T01:19:05.579Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-14T01:20:02.375Z [DEBUG] Getting matching hook commands for Notification with query: idle_prompt
+2025-12-14T01:20:02.375Z [DEBUG] Found 0 hook matchers in settings
+2025-12-14T01:20:02.375Z [DEBUG] Matched 0 unique hooks for query "idle_prompt" (0 before deduplication)
+2025-12-14T01:21:36.387Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-14T01:21:36.387Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-14T01:21:36.387Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-14T01:21:36.387Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-14T01:21:36.481Z [DEBUG] Getting matching hook commands for UserPromptSubmit with query: undefined
+2025-12-14T01:21:36.481Z [DEBUG] Found 0 hook matchers in settings
+2025-12-14T01:21:36.481Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-14T01:21:36.481Z [DEBUG] FileHistory: Making snapshot for message d2047820-b399-45c8-ba1a-0db6faf03373
+2025-12-14T01:21:36.482Z [DEBUG] FileHistory: Added snapshot for d2047820-b399-45c8-ba1a-0db6faf03373, tracking 1 files
+2025-12-14T01:21:37.256Z [DEBUG] Stream started - received first chunk
+2025-12-14T01:21:39.527Z [DEBUG] Stream started - received first chunk
+2025-12-14T01:21:44.739Z [DEBUG] executePreToolHooks called for tool: Task
+2025-12-14T01:21:44.746Z [DEBUG] Getting matching hook commands for PreToolUse with query: Task
+2025-12-14T01:21:44.746Z [DEBUG] Found 1 hook matchers in settings
+2025-12-14T01:21:44.747Z [DEBUG] Matched 0 unique hooks for query "Task" (0 before deduplication)
+2025-12-14T01:21:44.813Z [DEBUG] Getting matching hook commands for SubagentStart with query: claude-code-guide
+2025-12-14T01:21:44.813Z [DEBUG] Found 0 hook matchers in settings
+2025-12-14T01:21:44.813Z [DEBUG] Matched 0 unique hooks for query "claude-code-guide" (0 before deduplication)
+2025-12-14T01:21:44.872Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (7.4ms)
+2025-12-14T01:21:46.048Z [DEBUG] Stream started - received first chunk
+2025-12-14T01:21:47.049Z [DEBUG] executePreToolHooks called for tool: WebFetch
+2025-12-14T01:21:47.069Z [DEBUG] Getting matching hook commands for PreToolUse with query: WebFetch
+2025-12-14T01:21:47.069Z [DEBUG] Found 1 hook matchers in settings
+2025-12-14T01:21:47.069Z [DEBUG] Matched 0 unique hooks for query "WebFetch" (0 before deduplication)
+2025-12-14T01:21:47.113Z [DEBUG] Getting matching hook commands for PostToolUse with query: WebFetch
+2025-12-14T01:21:47.113Z [DEBUG] Found 0 hook matchers in settings
+2025-12-14T01:21:47.113Z [DEBUG] Matched 0 unique hooks for query "WebFetch" (0 before deduplication)
+2025-12-14T01:21:48.741Z [DEBUG] Stream started - received first chunk
+2025-12-14T01:21:49.876Z [DEBUG] executePreToolHooks called for tool: WebFetch
+2025-12-14T01:21:49.896Z [DEBUG] Getting matching hook commands for PreToolUse with query: WebFetch
+2025-12-14T01:21:49.896Z [DEBUG] Found 1 hook matchers in settings
+2025-12-14T01:21:49.896Z [DEBUG] Matched 0 unique hooks for query "WebFetch" (0 before deduplication)
+2025-12-14T01:21:49.929Z [DEBUG] Getting matching hook commands for PostToolUse with query: WebFetch
+2025-12-14T01:21:49.929Z [DEBUG] Found 0 hook matchers in settings
+2025-12-14T01:21:49.929Z [DEBUG] Matched 0 unique hooks for query "WebFetch" (0 before deduplication)
+2025-12-14T01:21:51.773Z [DEBUG] Stream started - received first chunk
+2025-12-14T01:21:52.778Z [DEBUG] executePreToolHooks called for tool: WebFetch
+2025-12-14T01:21:52.799Z [DEBUG] Getting matching hook commands for PreToolUse with query: WebFetch
+2025-12-14T01:21:52.799Z [DEBUG] Found 1 hook matchers in settings
+2025-12-14T01:21:52.799Z [DEBUG] Matched 0 unique hooks for query "WebFetch" (0 before deduplication)
+2025-12-14T01:21:53.067Z [DEBUG] Getting matching hook commands for PostToolUse with query: WebFetch
+2025-12-14T01:21:53.067Z [DEBUG] Found 0 hook matchers in settings
+2025-12-14T01:21:53.067Z [DEBUG] Matched 0 unique hooks for query "WebFetch" (0 before deduplication)
+2025-12-14T01:21:54.985Z [DEBUG] Stream started - received first chunk
+2025-12-14T01:22:06.270Z [DEBUG] Getting matching hook commands for SubagentStop with query: undefined
+2025-12-14T01:22:06.270Z [DEBUG] Found 0 hook matchers in settings
+2025-12-14T01:22:06.270Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-14T01:22:06.287Z [DEBUG] Getting matching hook commands for PostToolUse with query: Task
+2025-12-14T01:22:06.287Z [DEBUG] Found 0 hook matchers in settings
+2025-12-14T01:22:06.287Z [DEBUG] Matched 0 unique hooks for query "Task" (0 before deduplication)
+2025-12-14T01:22:06.309Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-14T01:22:06.309Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-14T01:22:06.309Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-14T01:22:06.309Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-14T01:22:08.821Z [DEBUG] Stream started - received first chunk
+2025-12-14T01:22:20.594Z [DEBUG] executePreToolHooks called for tool: TodoWrite
+2025-12-14T01:22:20.600Z [DEBUG] Getting matching hook commands for PreToolUse with query: TodoWrite
+2025-12-14T01:22:20.600Z [DEBUG] Found 1 hook matchers in settings
+2025-12-14T01:22:20.600Z [DEBUG] Matched 0 unique hooks for query "TodoWrite" (0 before deduplication)
+2025-12-14T01:22:20.622Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\todos\ef3a8870-0258-4d8c-af4f-7c3e6456b616-agent-ef3a8870-0258-4d8c-af4f-7c3e6456b616.json.tmp.17580.1765675340622
+2025-12-14T01:22:20.622Z [DEBUG] Preserving file permissions: 100666
+2025-12-14T01:22:20.628Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (5.4ms)
+2025-12-14T01:22:20.628Z [DEBUG] Temp file written successfully, size: 794 bytes
+2025-12-14T01:22:20.628Z [DEBUG] Applied original permissions to temp file
+2025-12-14T01:22:20.628Z [DEBUG] Renaming C:\Users\tjn\.claude\todos\ef3a8870-0258-4d8c-af4f-7c3e6456b616-agent-ef3a8870-0258-4d8c-af4f-7c3e6456b616.json.tmp.17580.1765675340622 to C:\Users\tjn\.claude\todos\ef3a8870-0258-4d8c-af4f-7c3e6456b616-agent-ef3a8870-0258-4d8c-af4f-7c3e6456b616.json
+2025-12-14T01:22:20.628Z [DEBUG] File C:\Users\tjn\.claude\todos\ef3a8870-0258-4d8c-af4f-7c3e6456b616-agent-ef3a8870-0258-4d8c-af4f-7c3e6456b616.json written atomically
+2025-12-14T01:22:20.642Z [DEBUG] Getting matching hook commands for PostToolUse with query: TodoWrite
+2025-12-14T01:22:20.642Z [DEBUG] Found 0 hook matchers in settings
+2025-12-14T01:22:20.642Z [DEBUG] Matched 0 unique hooks for query "TodoWrite" (0 before deduplication)
+2025-12-14T01:22:20.661Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-14T01:22:20.661Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-14T01:22:20.661Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-14T01:22:20.661Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-14T01:22:23.728Z [DEBUG] Stream started - received first chunk
+2025-12-14T01:22:25.420Z [DEBUG] executePreToolHooks called for tool: Glob
+2025-12-14T01:22:25.428Z [DEBUG] Getting matching hook commands for PreToolUse with query: Glob
+2025-12-14T01:22:25.428Z [DEBUG] Found 1 hook matchers in settings
+2025-12-14T01:22:25.428Z [DEBUG] Matched 0 unique hooks for query "Glob" (0 before deduplication)
+2025-12-14T01:22:26.382Z [DEBUG] Getting matching hook commands for PostToolUse with query: Glob
+2025-12-14T01:22:26.382Z [DEBUG] Found 0 hook matchers in settings
+2025-12-14T01:22:26.382Z [DEBUG] Matched 0 unique hooks for query "Glob" (0 before deduplication)
+2025-12-14T01:22:26.404Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-14T01:22:26.404Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-14T01:22:26.404Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-14T01:22:26.404Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-14T01:22:28.885Z [DEBUG] Stream started - received first chunk
+2025-12-14T01:22:29.783Z [DEBUG] executePreToolHooks called for tool: Read
+2025-12-14T01:22:29.789Z [DEBUG] Getting matching hook commands for PreToolUse with query: Read
+2025-12-14T01:22:29.789Z [DEBUG] Found 1 hook matchers in settings
+2025-12-14T01:22:29.790Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2025-12-14T01:22:30.133Z [DEBUG] Getting matching hook commands for PostToolUse with query: Read
+2025-12-14T01:22:30.133Z [DEBUG] Found 0 hook matchers in settings
+2025-12-14T01:22:30.133Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2025-12-14T01:22:30.155Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-14T01:22:30.155Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-14T01:22:30.155Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-14T01:22:30.155Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-14T01:22:33.394Z [DEBUG] Stream started - received first chunk
+2025-12-14T01:22:39.511Z [DEBUG] executePreToolHooks called for tool: Write
+2025-12-14T01:22:39.518Z [DEBUG] Getting matching hook commands for PreToolUse with query: Write
+2025-12-14T01:22:39.518Z [DEBUG] Found 1 hook matchers in settings
+2025-12-14T01:22:39.518Z [DEBUG] Matched 1 unique hooks for query "Write" (1 before deduplication)
+2025-12-14T01:22:40.324Z [DEBUG] FileHistory: Tracked file modification for C:\Users\tjn\.claude\.mcp.json
+2025-12-14T01:22:40.510Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\.mcp.json.tmp.17580.1765675360510
+2025-12-14T01:22:40.516Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (5.7ms)
+2025-12-14T01:22:40.516Z [DEBUG] Temp file written successfully, size: 818 bytes
+2025-12-14T01:22:40.516Z [DEBUG] Renaming C:\Users\tjn\.claude\.mcp.json.tmp.17580.1765675360510 to C:\Users\tjn\.claude\.mcp.json
+2025-12-14T01:22:40.516Z [DEBUG] File C:\Users\tjn\.claude\.mcp.json written atomically
+2025-12-14T01:22:40.534Z [DEBUG] Getting matching hook commands for PostToolUse with query: Write
+2025-12-14T01:22:40.534Z [DEBUG] Found 0 hook matchers in settings
+2025-12-14T01:22:40.534Z [DEBUG] Matched 0 unique hooks for query "Write" (0 before deduplication)
+2025-12-14T01:22:40.573Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-14T01:22:40.573Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-14T01:22:40.573Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-14T01:22:40.573Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-14T01:22:43.243Z [DEBUG] Stream started - received first chunk
+2025-12-14T01:22:45.214Z [DEBUG] executePreToolHooks called for tool: TodoWrite
+2025-12-14T01:22:45.237Z [DEBUG] Getting matching hook commands for PreToolUse with query: TodoWrite
+2025-12-14T01:22:45.237Z [DEBUG] Found 1 hook matchers in settings
+2025-12-14T01:22:45.237Z [DEBUG] Matched 0 unique hooks for query "TodoWrite" (0 before deduplication)
+2025-12-14T01:22:45.262Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\todos\ef3a8870-0258-4d8c-af4f-7c3e6456b616-agent-ef3a8870-0258-4d8c-af4f-7c3e6456b616.json.tmp.17580.1765675365262
+2025-12-14T01:22:45.262Z [DEBUG] Preserving file permissions: 100666
+2025-12-14T01:22:45.268Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (5.8ms)
+2025-12-14T01:22:45.268Z [DEBUG] Temp file written successfully, size: 796 bytes
+2025-12-14T01:22:45.268Z [DEBUG] Applied original permissions to temp file
+2025-12-14T01:22:45.268Z [DEBUG] Renaming C:\Users\tjn\.claude\todos\ef3a8870-0258-4d8c-af4f-7c3e6456b616-agent-ef3a8870-0258-4d8c-af4f-7c3e6456b616.json.tmp.17580.1765675365262 to C:\Users\tjn\.claude\todos\ef3a8870-0258-4d8c-af4f-7c3e6456b616-agent-ef3a8870-0258-4d8c-af4f-7c3e6456b616.json
+2025-12-14T01:22:45.268Z [DEBUG] File C:\Users\tjn\.claude\todos\ef3a8870-0258-4d8c-af4f-7c3e6456b616-agent-ef3a8870-0258-4d8c-af4f-7c3e6456b616.json written atomically
+2025-12-14T01:22:45.282Z [DEBUG] Getting matching hook commands for PostToolUse with query: TodoWrite
+2025-12-14T01:22:45.283Z [DEBUG] Found 0 hook matchers in settings
+2025-12-14T01:22:45.283Z [DEBUG] Matched 0 unique hooks for query "TodoWrite" (0 before deduplication)
+2025-12-14T01:22:45.304Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-14T01:22:45.304Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-14T01:22:45.304Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-14T01:22:45.304Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-14T01:22:47.745Z [DEBUG] Stream started - received first chunk
+2025-12-14T01:22:50.687Z [DEBUG] executePreToolHooks called for tool: Edit
+2025-12-14T01:22:50.694Z [DEBUG] Getting matching hook commands for PreToolUse with query: Edit
+2025-12-14T01:22:50.695Z [DEBUG] Found 1 hook matchers in settings
+2025-12-14T01:22:50.695Z [DEBUG] Matched 1 unique hooks for query "Edit" (1 before deduplication)
+2025-12-14T01:22:50.955Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\settings.json.tmp.17580.1765675370955
+2025-12-14T01:22:50.955Z [DEBUG] Preserving file permissions: 100666
+2025-12-14T01:22:50.962Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (6.6ms)
+2025-12-14T01:22:50.962Z [DEBUG] Temp file written successfully, size: 2764 bytes
+2025-12-14T01:22:50.962Z [DEBUG] Applied original permissions to temp file
+2025-12-14T01:22:50.962Z [DEBUG] Renaming C:\Users\tjn\.claude\settings.json.tmp.17580.1765675370955 to C:\Users\tjn\.claude\settings.json
+2025-12-14T01:22:50.962Z [DEBUG] File C:\Users\tjn\.claude\settings.json written atomically
+2025-12-14T01:22:50.978Z [DEBUG] FileHistory: Tracked file modification for C:\Users\tjn\.claude\settings.json
+2025-12-14T01:22:50.994Z [DEBUG] Getting matching hook commands for PostToolUse with query: Edit
+2025-12-14T01:22:50.994Z [DEBUG] Found 0 hook matchers in settings
+2025-12-14T01:22:50.994Z [DEBUG] Matched 0 unique hooks for query "Edit" (0 before deduplication)
+2025-12-14T01:22:51.020Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-14T01:22:51.020Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-14T01:22:51.020Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-14T01:22:51.020Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-14T01:22:52.000Z [DEBUG] Detected change to C:\Users\tjn\.claude\settings.json
+2025-12-14T01:22:52.009Z [DEBUG] Settings changed from userSettings, updating AppState
+2025-12-14T01:22:52.012Z [DEBUG] Replacing all allow rules for destination 'userSettings' with 45 rule(s): ["SlashCommand(/run-prompt:*)","Bash(git add:*)","Bash(test:*)","Bash(git rm:*)","Bash(git commit:*)","Bash(git worktree:*)","Bash(findstr:*)","Bash(git fetch:*)","Bash(git merge:*)","SlashCommand(/taches-cc-resources:check-todos)","SlashCommand(/taches-cc-resources:\\consider:pareto:*)","Bash(npm run test)","SlashCommand(/taches-cc-resources:\\consider:second-order:*)","Bash(dir:*)","Bash(npx playwright test:*)","Bash(git reset:*)","Bash(timeout 45 npx playwright test:*)","Bash(Select-Object -First 50)","Bash(npx tsc:*)","Bash(npm run build:*)","Skill(tech-debt-analyzer)","Bash(python .claude/skills/tech-debt-analyzer/scripts/detect_code_smells.py:*)","Bash(python:*)","Bash(cat:*)","Bash(npx ts-unused-exports:*)","Bash(node:*)","Bash(Get-NetTCPConnection -LocalPort 4173 -ErrorAction SilentlyContinue)","Bash(Select-Object -ExpandProperty OwningProcess)","Bash(ForEach-Object { Stop-Process -Id $_ -Force })","Bash(powershell -Command:*)","Bash(npx depcheck:*)","Bash(npm uninstall:*)","Bash(npm run type-check:*)","Bash(npm audit:*)","Skill(debug-like-expert)","WebSearch","Bash(find:*)","Bash(ls:*)","Bash(Get-ChildItem -Path \"C:\\Users\\tjn\\.claude\" -Recurse -Force)","Bash(Select-Object FullName, Length, LastWriteTime, PSIsContainer)","Bash(Format-Table -AutoSize -Wrap)","WebFetch(domain:docs.anthropic.com)","WebFetch(domain:awesomeclaude.ai)","WebFetch(domain:docs.claude.com)","WebFetch(domain:claudemarketplaces.com)"]
+2025-12-14T01:22:52.012Z [DEBUG] Replacing all allow rules for destination 'localSettings' with 6 rule(s): ["Bash(claude /doctor)","Bash(for skill in \"C:/Users/tjn/.claude/skills\"/*/SKILL.md)","Bash(do if [ -f \"$skill\" ])","Bash(then head -1 \"$skill\")","Bash(fi)","Bash(done)"]
+2025-12-14T01:22:53.673Z [DEBUG] Stream started - received first chunk
+2025-12-14T01:22:56.601Z [DEBUG] executePreToolHooks called for tool: TodoWrite
+2025-12-14T01:22:56.608Z [DEBUG] Getting matching hook commands for PreToolUse with query: TodoWrite
+2025-12-14T01:22:56.608Z [DEBUG] Found 1 hook matchers in settings
+2025-12-14T01:22:56.608Z [DEBUG] Matched 0 unique hooks for query "TodoWrite" (0 before deduplication)
+2025-12-14T01:22:56.631Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\todos\ef3a8870-0258-4d8c-af4f-7c3e6456b616-agent-ef3a8870-0258-4d8c-af4f-7c3e6456b616.json.tmp.17580.1765675376631
+2025-12-14T01:22:56.631Z [DEBUG] Preserving file permissions: 100666
+2025-12-14T01:22:56.637Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (5.5ms)
+2025-12-14T01:22:56.637Z [DEBUG] Temp file written successfully, size: 798 bytes
+2025-12-14T01:22:56.637Z [DEBUG] Applied original permissions to temp file
+2025-12-14T01:22:56.637Z [DEBUG] Renaming C:\Users\tjn\.claude\todos\ef3a8870-0258-4d8c-af4f-7c3e6456b616-agent-ef3a8870-0258-4d8c-af4f-7c3e6456b616.json.tmp.17580.1765675376631 to C:\Users\tjn\.claude\todos\ef3a8870-0258-4d8c-af4f-7c3e6456b616-agent-ef3a8870-0258-4d8c-af4f-7c3e6456b616.json
+2025-12-14T01:22:56.637Z [DEBUG] File C:\Users\tjn\.claude\todos\ef3a8870-0258-4d8c-af4f-7c3e6456b616-agent-ef3a8870-0258-4d8c-af4f-7c3e6456b616.json written atomically
+2025-12-14T01:22:56.650Z [DEBUG] Getting matching hook commands for PostToolUse with query: TodoWrite
+2025-12-14T01:22:56.650Z [DEBUG] Found 0 hook matchers in settings
+2025-12-14T01:22:56.650Z [DEBUG] Matched 0 unique hooks for query "TodoWrite" (0 before deduplication)
+2025-12-14T01:22:56.670Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-14T01:22:56.670Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-14T01:22:56.670Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-14T01:22:56.670Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-14T01:22:59.646Z [DEBUG] Stream started - received first chunk
+2025-12-14T01:23:03.394Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-14T01:23:03.394Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-14T01:23:03.394Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-14T01:23:03.394Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-14T01:23:06.340Z [DEBUG] Stream started - received first chunk
+2025-12-14T01:23:07.156Z [DEBUG] executePreToolHooks called for tool: Read
+2025-12-14T01:23:07.162Z [DEBUG] Getting matching hook commands for PreToolUse with query: Read
+2025-12-14T01:23:07.162Z [DEBUG] Found 1 hook matchers in settings
+2025-12-14T01:23:07.162Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2025-12-14T01:23:08.990Z [DEBUG] Getting matching hook commands for PostToolUse with query: Read
+2025-12-14T01:23:08.990Z [DEBUG] Found 0 hook matchers in settings
+2025-12-14T01:23:08.990Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2025-12-14T01:23:09.011Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-14T01:23:09.011Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-14T01:23:09.011Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-14T01:23:09.011Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-14T01:23:12.790Z [DEBUG] Stream started - received first chunk
+2025-12-14T01:23:18.346Z [DEBUG] executePreToolHooks called for tool: Edit
+2025-12-14T01:23:18.354Z [DEBUG] Getting matching hook commands for PreToolUse with query: Edit
+2025-12-14T01:23:18.354Z [DEBUG] Found 1 hook matchers in settings
+2025-12-14T01:23:18.354Z [DEBUG] Matched 1 unique hooks for query "Edit" (1 before deduplication)
+2025-12-14T01:23:19.395Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude.json.tmp.17580.1765675399395
+2025-12-14T01:23:19.395Z [DEBUG] Preserving file permissions: 100666
+2025-12-14T01:23:19.401Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (6.1ms)
+2025-12-14T01:23:19.401Z [DEBUG] Temp file written successfully, size: 51992 bytes
+2025-12-14T01:23:19.401Z [DEBUG] Applied original permissions to temp file
+2025-12-14T01:23:19.401Z [DEBUG] Renaming C:\Users\tjn\.claude.json.tmp.17580.1765675399395 to C:\Users\tjn\.claude.json
+2025-12-14T01:23:19.401Z [DEBUG] File C:\Users\tjn\.claude.json written atomically
+2025-12-14T01:23:19.421Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (10.5ms)
+2025-12-14T01:23:19.423Z [DEBUG] FileHistory: Tracked file modification for C:\Users\tjn\.claude.json
+2025-12-14T01:23:19.437Z [DEBUG] Getting matching hook commands for PostToolUse with query: Edit
+2025-12-14T01:23:19.437Z [DEBUG] Found 0 hook matchers in settings
+2025-12-14T01:23:19.437Z [DEBUG] Matched 0 unique hooks for query "Edit" (0 before deduplication)
+2025-12-14T01:23:19.475Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-14T01:23:19.475Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-14T01:23:19.475Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-14T01:23:19.475Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-14T01:23:22.689Z [DEBUG] Stream started - received first chunk
+2025-12-14T01:23:26.428Z [DEBUG] executePreToolHooks called for tool: TodoWrite
+2025-12-14T01:23:26.446Z [DEBUG] Getting matching hook commands for PreToolUse with query: TodoWrite
+2025-12-14T01:23:26.446Z [DEBUG] Found 1 hook matchers in settings
+2025-12-14T01:23:26.446Z [DEBUG] Matched 0 unique hooks for query "TodoWrite" (0 before deduplication)
+2025-12-14T01:23:26.471Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\todos\ef3a8870-0258-4d8c-af4f-7c3e6456b616-agent-ef3a8870-0258-4d8c-af4f-7c3e6456b616.json.tmp.17580.1765675406471
+2025-12-14T01:23:26.471Z [DEBUG] Preserving file permissions: 100666
+2025-12-14T01:23:26.479Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (7.6ms)
+2025-12-14T01:23:26.479Z [DEBUG] Temp file written successfully, size: 800 bytes
+2025-12-14T01:23:26.479Z [DEBUG] Applied original permissions to temp file
+2025-12-14T01:23:26.479Z [DEBUG] Renaming C:\Users\tjn\.claude\todos\ef3a8870-0258-4d8c-af4f-7c3e6456b616-agent-ef3a8870-0258-4d8c-af4f-7c3e6456b616.json.tmp.17580.1765675406471 to C:\Users\tjn\.claude\todos\ef3a8870-0258-4d8c-af4f-7c3e6456b616-agent-ef3a8870-0258-4d8c-af4f-7c3e6456b616.json
+2025-12-14T01:23:26.479Z [DEBUG] File C:\Users\tjn\.claude\todos\ef3a8870-0258-4d8c-af4f-7c3e6456b616-agent-ef3a8870-0258-4d8c-af4f-7c3e6456b616.json written atomically
+2025-12-14T01:23:26.494Z [DEBUG] Getting matching hook commands for PostToolUse with query: TodoWrite
+2025-12-14T01:23:26.494Z [DEBUG] Found 0 hook matchers in settings
+2025-12-14T01:23:26.494Z [DEBUG] Matched 0 unique hooks for query "TodoWrite" (0 before deduplication)
+2025-12-14T01:23:26.513Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-14T01:23:26.513Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-14T01:23:26.513Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-14T01:23:26.513Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-14T01:23:29.399Z [DEBUG] Stream started - received first chunk
+2025-12-14T01:23:30.839Z [DEBUG] executePreToolHooks called for tool: Glob
+2025-12-14T01:23:30.846Z [DEBUG] Getting matching hook commands for PreToolUse with query: Glob
+2025-12-14T01:23:30.846Z [DEBUG] Found 1 hook matchers in settings
+2025-12-14T01:23:30.846Z [DEBUG] Matched 0 unique hooks for query "Glob" (0 before deduplication)
+2025-12-14T01:23:31.872Z [DEBUG] Getting matching hook commands for PostToolUse with query: Glob
+2025-12-14T01:23:31.872Z [DEBUG] Found 0 hook matchers in settings
+2025-12-14T01:23:31.872Z [DEBUG] Matched 0 unique hooks for query "Glob" (0 before deduplication)
+2025-12-14T01:23:31.894Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-14T01:23:31.894Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-14T01:23:31.894Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-14T01:23:31.894Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-14T01:23:34.828Z [DEBUG] Stream started - received first chunk
+2025-12-14T01:23:36.358Z [DEBUG] executePreToolHooks called for tool: Read
+2025-12-14T01:23:36.365Z [DEBUG] Getting matching hook commands for PreToolUse with query: Read
+2025-12-14T01:23:36.365Z [DEBUG] Found 1 hook matchers in settings
+2025-12-14T01:23:36.365Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2025-12-14T01:23:37.316Z [DEBUG] Getting matching hook commands for PostToolUse with query: Read
+2025-12-14T01:23:37.316Z [DEBUG] Found 0 hook matchers in settings
+2025-12-14T01:23:37.316Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2025-12-14T01:23:37.337Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-14T01:23:37.337Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-14T01:23:37.337Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-14T01:23:37.337Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-14T01:23:37.634Z [ERROR] Error: Error: 1P event logging: 13 events failed to export
+    at Pj1.queueFailedEvents (file:///C:/Users/tjn/AppData/Local/nvm/v24.11.0/node_modules/@anthropic-ai/claude-code/cli.js:201:90771)
+    at Pj1.doExport (file:///C:/Users/tjn/AppData/Local/nvm/v24.11.0/node_modules/@anthropic-ai/claude-code/cli.js:201:89870)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-12-14T01:23:37.634Z [ERROR] Error: Error: {"stack":"Error: Failed to export 13 events\n    at Pj1.doExport (file:///C:/Users/tjn/AppData/Local/nvm/v24.11.0/node_modules/@anthropic-ai/claude-code/cli.js:201:89960)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)","message":"Failed to export 13 events","name":"Error"}
+    at ne1.error (file:///C:/Users/tjn/AppData/Local/nvm/v24.11.0/node_modules/@anthropic-ai/claude-code/cli.js:1558:35484)
+    at I_1.error (file:///C:/Users/tjn/AppData/Local/nvm/v24.11.0/node_modules/@anthropic-ai/claude-code/cli.js:192:33347)
+    at file:///C:/Users/tjn/AppData/Local/nvm/v24.11.0/node_modules/@anthropic-ai/claude-code/cli.js:192:64695
+    at TO6 (file:///C:/Users/tjn/AppData/Local/nvm/v24.11.0/node_modules/@anthropic-ai/claude-code/cli.js:192:65241)
+    at file:///C:/Users/tjn/AppData/Local/nvm/v24.11.0/node_modules/@anthropic-ai/claude-code/cli.js:193:20014
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-12-14T01:23:41.679Z [DEBUG] Stream started - received first chunk
+2025-12-14T01:23:55.462Z [DEBUG] executePreToolHooks called for tool: Edit
+2025-12-14T01:23:55.468Z [DEBUG] Getting matching hook commands for PreToolUse with query: Edit
+2025-12-14T01:23:55.468Z [DEBUG] Found 1 hook matchers in settings
+2025-12-14T01:23:55.468Z [DEBUG] Matched 1 unique hooks for query "Edit" (1 before deduplication)
+2025-12-14T01:23:56.271Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\README.md.tmp.17580.1765675436271
+2025-12-14T01:23:56.271Z [DEBUG] Preserving file permissions: 100666
+2025-12-14T01:23:56.276Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (5.2ms)
+2025-12-14T01:23:56.276Z [DEBUG] Temp file written successfully, size: 4319 bytes
+2025-12-14T01:23:56.276Z [DEBUG] Applied original permissions to temp file
+2025-12-14T01:23:56.276Z [DEBUG] Renaming C:\Users\tjn\.claude\README.md.tmp.17580.1765675436271 to C:\Users\tjn\.claude\README.md
+2025-12-14T01:23:56.277Z [DEBUG] File C:\Users\tjn\.claude\README.md written atomically
+2025-12-14T01:23:56.292Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (6.8ms)
+2025-12-14T01:23:56.293Z [DEBUG] FileHistory: Tracked file modification for C:\Users\tjn\.claude\README.md
+2025-12-14T01:23:56.308Z [DEBUG] Getting matching hook commands for PostToolUse with query: Edit
+2025-12-14T01:23:56.308Z [DEBUG] Found 0 hook matchers in settings
+2025-12-14T01:23:56.308Z [DEBUG] Matched 0 unique hooks for query "Edit" (0 before deduplication)
+2025-12-14T01:23:56.350Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-14T01:23:56.350Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-14T01:23:56.350Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-14T01:23:56.350Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-14T01:23:59.499Z [DEBUG] Stream started - received first chunk
+2025-12-14T01:24:03.500Z [DEBUG] executePreToolHooks called for tool: TodoWrite
+2025-12-14T01:24:03.519Z [DEBUG] Getting matching hook commands for PreToolUse with query: TodoWrite
+2025-12-14T01:24:03.519Z [DEBUG] Found 1 hook matchers in settings
+2025-12-14T01:24:03.519Z [DEBUG] Matched 0 unique hooks for query "TodoWrite" (0 before deduplication)
+2025-12-14T01:24:03.544Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\todos\ef3a8870-0258-4d8c-af4f-7c3e6456b616-agent-ef3a8870-0258-4d8c-af4f-7c3e6456b616.json.tmp.17580.1765675443544
+2025-12-14T01:24:03.544Z [DEBUG] Preserving file permissions: 100666
+2025-12-14T01:24:03.549Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (5.5ms)
+2025-12-14T01:24:03.549Z [DEBUG] Temp file written successfully, size: 802 bytes
+2025-12-14T01:24:03.549Z [DEBUG] Applied original permissions to temp file
+2025-12-14T01:24:03.549Z [DEBUG] Renaming C:\Users\tjn\.claude\todos\ef3a8870-0258-4d8c-af4f-7c3e6456b616-agent-ef3a8870-0258-4d8c-af4f-7c3e6456b616.json.tmp.17580.1765675443544 to C:\Users\tjn\.claude\todos\ef3a8870-0258-4d8c-af4f-7c3e6456b616-agent-ef3a8870-0258-4d8c-af4f-7c3e6456b616.json
+2025-12-14T01:24:03.550Z [DEBUG] File C:\Users\tjn\.claude\todos\ef3a8870-0258-4d8c-af4f-7c3e6456b616-agent-ef3a8870-0258-4d8c-af4f-7c3e6456b616.json written atomically
+2025-12-14T01:24:03.563Z [DEBUG] Getting matching hook commands for PostToolUse with query: TodoWrite
+2025-12-14T01:24:03.563Z [DEBUG] Found 0 hook matchers in settings
+2025-12-14T01:24:03.563Z [DEBUG] Matched 0 unique hooks for query "TodoWrite" (0 before deduplication)
+2025-12-14T01:24:03.583Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-14T01:24:03.583Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-14T01:24:03.583Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-14T01:24:03.583Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-14T01:24:06.695Z [DEBUG] Stream started - received first chunk
+2025-12-14T01:24:15.652Z [DEBUG] executePreToolHooks called for tool: Edit
+2025-12-14T01:24:15.658Z [DEBUG] Getting matching hook commands for PreToolUse with query: Edit
+2025-12-14T01:24:15.658Z [DEBUG] Found 1 hook matchers in settings
+2025-12-14T01:24:15.658Z [DEBUG] Matched 1 unique hooks for query "Edit" (1 before deduplication)
+2025-12-14T01:24:16.471Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\CLAUDE.md.tmp.17580.1765675456471
+2025-12-14T01:24:16.471Z [DEBUG] Preserving file permissions: 100666
+2025-12-14T01:24:16.476Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (5.1ms)
+2025-12-14T01:24:16.476Z [DEBUG] Temp file written successfully, size: 13948 bytes
+2025-12-14T01:24:16.476Z [DEBUG] Applied original permissions to temp file
+2025-12-14T01:24:16.477Z [DEBUG] Renaming C:\Users\tjn\.claude\CLAUDE.md.tmp.17580.1765675456471 to C:\Users\tjn\.claude\CLAUDE.md
+2025-12-14T01:24:16.477Z [DEBUG] File C:\Users\tjn\.claude\CLAUDE.md written atomically
+2025-12-14T01:24:16.500Z [DEBUG] Getting matching hook commands for PostToolUse with query: Edit
+2025-12-14T01:24:16.500Z [DEBUG] Found 0 hook matchers in settings
+2025-12-14T01:24:16.500Z [DEBUG] Matched 0 unique hooks for query "Edit" (0 before deduplication)
+2025-12-14T01:24:16.529Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-14T01:24:16.529Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-14T01:24:16.529Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-14T01:24:16.529Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-14T01:24:19.632Z [DEBUG] Stream started - received first chunk
+2025-12-14T01:24:21.902Z [DEBUG] executePreToolHooks called for tool: TodoWrite
+2025-12-14T01:24:21.921Z [DEBUG] Getting matching hook commands for PreToolUse with query: TodoWrite
+2025-12-14T01:24:21.921Z [DEBUG] Found 1 hook matchers in settings
+2025-12-14T01:24:21.921Z [DEBUG] Matched 0 unique hooks for query "TodoWrite" (0 before deduplication)
+2025-12-14T01:24:21.946Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\todos\ef3a8870-0258-4d8c-af4f-7c3e6456b616-agent-ef3a8870-0258-4d8c-af4f-7c3e6456b616.json.tmp.17580.1765675461946
+2025-12-14T01:24:21.946Z [DEBUG] Preserving file permissions: 100666
+2025-12-14T01:24:21.959Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (13.5ms)
+2025-12-14T01:24:21.959Z [DEBUG] Temp file written successfully, size: 2 bytes
+2025-12-14T01:24:21.960Z [DEBUG] Applied original permissions to temp file
+2025-12-14T01:24:21.960Z [DEBUG] Renaming C:\Users\tjn\.claude\todos\ef3a8870-0258-4d8c-af4f-7c3e6456b616-agent-ef3a8870-0258-4d8c-af4f-7c3e6456b616.json.tmp.17580.1765675461946 to C:\Users\tjn\.claude\todos\ef3a8870-0258-4d8c-af4f-7c3e6456b616-agent-ef3a8870-0258-4d8c-af4f-7c3e6456b616.json
+2025-12-14T01:24:21.960Z [DEBUG] File C:\Users\tjn\.claude\todos\ef3a8870-0258-4d8c-af4f-7c3e6456b616-agent-ef3a8870-0258-4d8c-af4f-7c3e6456b616.json written atomically
+2025-12-14T01:24:21.973Z [DEBUG] Getting matching hook commands for PostToolUse with query: TodoWrite
+2025-12-14T01:24:21.973Z [DEBUG] Found 0 hook matchers in settings
+2025-12-14T01:24:21.973Z [DEBUG] Matched 0 unique hooks for query "TodoWrite" (0 before deduplication)
+2025-12-14T01:24:21.993Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-14T01:24:21.993Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-14T01:24:21.993Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-14T01:24:21.993Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-14T01:24:25.004Z [DEBUG] Stream started - received first chunk
+2025-12-14T01:24:31.821Z [DEBUG] Getting matching hook commands for Stop with query: undefined
+2025-12-14T01:24:31.821Z [DEBUG] Found 0 hook matchers in settings
+2025-12-14T01:24:31.821Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-14T01:24:34.488Z [DEBUG] Stream started - received first chunk
+2025-12-14T01:24:38.768Z [DEBUG] Getting matching hook commands for SubagentStop with query: undefined
+2025-12-14T01:24:38.768Z [DEBUG] Found 0 hook matchers in settings
+2025-12-14T01:24:38.768Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-14T01:25:31.831Z [DEBUG] Getting matching hook commands for Notification with query: idle_prompt
+2025-12-14T01:25:31.832Z [DEBUG] Found 0 hook matchers in settings
+2025-12-14T01:25:31.832Z [DEBUG] Matched 0 unique hooks for query "idle_prompt" (0 before deduplication)
+2025-12-14T01:32:42.832Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-14T01:32:42.832Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-14T01:32:42.832Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-14T01:32:42.832Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-14T01:32:43.221Z [DEBUG] Getting matching hook commands for UserPromptSubmit with query: undefined
+2025-12-14T01:32:43.221Z [DEBUG] Found 0 hook matchers in settings
+2025-12-14T01:32:43.221Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-14T01:32:43.222Z [DEBUG] FileHistory: Making snapshot for message 0d9a1890-407f-45c6-889f-f3a85cf8851e
+2025-12-14T01:32:43.233Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (10.7ms)
+2025-12-14T01:32:43.239Z [DEBUG] FileHistory: Added snapshot for 0d9a1890-407f-45c6-889f-f3a85cf8851e, tracking 5 files
+2025-12-14T01:32:43.908Z [DEBUG] Stream started - received first chunk
+2025-12-14T01:32:46.543Z [DEBUG] Stream started - received first chunk
+2025-12-14T01:32:49.961Z [DEBUG] Getting matching hook commands for Stop with query: undefined
+2025-12-14T01:32:49.961Z [DEBUG] Found 0 hook matchers in settings
+2025-12-14T01:32:49.961Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-14T01:32:51.637Z [DEBUG] Stream started - received first chunk
+2025-12-14T01:32:56.838Z [DEBUG] Getting matching hook commands for SubagentStop with query: undefined
+2025-12-14T01:32:56.838Z [DEBUG] Found 0 hook matchers in settings
+2025-12-14T01:32:56.838Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)

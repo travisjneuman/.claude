@@ -1,0 +1,64 @@
+# CLAUDE.md for Hooks
+
+## Scope
+
+Guidelines for writing custom React hooks under `src/hooks`. Hooks encapsulate reusable logic and side effects. This document extends the root `CLAUDE.md` and provides hook‑specific best practices.
+
+## Non‑negotiable requirements
+
+* **Prefix with `use`:** Every hook must be named starting with `use` to follow React’s hook naming convention and allow the Rules of Hooks linting to catch misuse.
+* **Single purpose:** Each hook should do one thing. If it grows beyond ~100 lines or mixes concerns (e.g. API calls and DOM listeners), split it into multiple hooks.
+* **State isolation:** Use `useState`, `useReducer`, or zustand stores for state. Do not mutate global variables or rely on module‑level state within hooks.
+* **No conditional calls:** Hooks must be called unconditionally at the top level of a React component or another hook. Do not call hooks inside loops, conditions, or nested functions.
+* **Proper effect cleanup:** When using `useEffect` or `useLayoutEffect`, always return a cleanup function if side effects attach event listeners, timers, or subscriptions. Avoid memory leaks.
+* **Parameterisation:** Accept parameters instead of reading directly from props outside the hook. This improves reusability and testability.
+* **Return values:** Return only what consumers need—typically an object containing state and actions. Do not expose internal helper functions or unnecessary values.
+* **Avoid heavy logic in hooks:** For expensive computations, use memoization (`useMemo`) or move the logic into services. Hooks should remain light.
+
+## Structure guidelines
+
+Typical hook pattern:
+
+```ts
+// src/hooks/useExample.ts
+import { useEffect, useState } from "react";
+import { fetchData } from "@/services/apiService";
+
+export function useExample(param: string) {
+  const [data, setData] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    async function load() {
+      setLoading(true);
+      try {
+        const result = await fetchData(param);
+        if (!cancelled) setData(result);
+      } catch (err) {
+        if (!cancelled) setError(err as Error);
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    }
+    load();
+    return () => {
+      cancelled = true;
+    };
+  }, [param]);
+
+  return { data, loading, error };
+}
+```
+
+## Anti‑patterns
+
+* **DOM manipulation:** Hooks must not directly manipulate the DOM (e.g. via `document.querySelector`). Use refs and effect callbacks within components instead.
+* **Shared mutable state:** Avoid using module‑scoped variables to share state between hook instances. Use stores or context instead.
+* **Complex object comparison:** Passing objects/arrays into dependency arrays can lead to unnecessary re‑runs. Use `useMemo` or `JSON.stringify` judiciously or restructure dependencies.
+* **Overgeneralising:** Don’t create “catch‑all” hooks that accept many flags and behave differently. It’s better to compose small hooks.
+
+## Additional documentation
+
+Refer to the React Hooks documentation for fundamentals, and `docs/technical/development_principles.md` for general principles. When integrating with stores, see `CLAUDE_stores.md`. If a hook becomes complicated, consider moving logic into a service or splitting it into smaller hooks.

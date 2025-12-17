@@ -1,0 +1,1494 @@
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { format } from 'date-fns';
+import {
+  exportBrainFile,
+  importBrainFile,
+  validateBrainFile,
+  formatFileSize,
+  isFileSystemAccessSupported,
+  requestAutoSaveDirectory,
+  autoSave,
+} from '../services/brainBackup';
+import {
+  loadPreferences,
+  savePreferences,
+  getBackupHistory,
+  shouldShowBackupReminder,
+  getTimeSinceLastBackup,
+  addHistoryEntry,
+  type BackupPreferences,
+  type BackupHistoryEntry,
+} from '../services/backupPreferences';
+import { indexedDBService } from '../services/indexedDB';
+import { autoSaveManager } from '../services/autoSave';
+import { exportToICS, importFromICS, downloadICS, readICSFile } from '../services/icsImportExport';
+import { requestNotificationPermission } from '../services/eventReminders';
+import { useCalendarStore } from '../stores/useCalendarStore';
+import { useTerminalStore } from '../stores/useTerminalStore';
+import { BackupSettings } from '../components/BackupSettings';
+import { PresetManager } from '../components/PresetManager';
+import { BackgroundCustomizer, type BackgroundSettings } from '../components/BackgroundCustomizer';
+
+/**
+ * Settings Page - Local-First Privacy
+ * Comprehensive backup management with compression, auto-save, and history
+ * 100% local storage - no cloud dependencies
+ */
+export const Settings: React.FC = () => {
+  // State management
+  const [isExporting, setIsExporting] = useState(false);
+  const [isImporting, setIsImporting] = useState(false);
+  const [message, setMessage] = useState<{ type: 'success' | 'error' | 'info' | 'warning'; text: string } | null>(null);
+
+  // Preferences
+  const [preferences, setPreferences] = useState<BackupPreferences | null>(null);
+  const [backupHistory, setBackupHistory] = useState<BackupHistoryEntry[]>([]);
+  const [timeSinceLastBackup, setTimeSinceLastBackup] = useState<string | null>(null);
+  const [backupReminder, setBackupReminder] = useState<any>(null);
+
+  // Auto-save
+  const [autoSaveDirectory, setAutoSaveDirectory] = useState<FileSystemDirectoryHandle | null>(null);
+
+  // Advanced Details
+  const [showAdvancedDetails, setShowAdvancedDetails] = useState(false);
+  const [storageInfo, setStorageInfo] = useState<any>(null);
+
+  // Auto-save visual feedback
+  const [recentlySaved, setRecentlySaved] = useState<'compression' | 'reminder' | 'autoSave' | null>(null);
+
+  // New Browser Warning
+  const [showNewBrowserWarning, setShowNewBrowserWarning] = useState(false);
+  const [hasData, setHasData] = useState(true);
+
+  // Auto-Save customization
+  const [customFilename, setCustomFilename] = useState('');
+
+  // Site-wide Settings modals
+  const [showBackgroundCustomizer, setShowBackgroundCustomizer] = useState(false);
+  const [showPresetManager, setShowPresetManager] = useState(false);
+
+  // Background settings (persisted to localStorage)
+  const [bgSettings, setBgSettings] = useState<BackgroundSettings>(() => {
+    const saved = localStorage.getItem('dashboard-background');
+    return saved
+      ? JSON.parse(saved)
+      : { type: 'none' as const, value: '', opacity: 100, blur: 0 };
+  });
+
+  const handleBackgroundChange = (newSettings: BackgroundSettings) => {
+    setBgSettings(newSettings);
+    localStorage.setItem('dashboard-background', JSON.stringify(newSettings));
+  };
+  const [versionCount, setVersionCount] = useState(7);
+
+  // Calendar Import/Export
+  const [isExportingCalendar, setIsExportingCalendar] = useState(false);
+  const [isImportingCalendar, setIsImportingCalendar] = useState(false);
+  const { events, addEvent } = useCalendarStore();
+
+  // Notification Permission
+  const [notificationPermission, setNotificationPermission] = useState<NotificationPermission>('default');
+  const [requestingPermission, setRequestingPermission] = useState(false);
+
+  // AI Terminal (legacy - now using multi-provider system)
+  const { apiKey, model: _model, setApiKey: _setApiKey, setModel: _setModel } = useTerminalStore();
+  const [_tempApiKey, _setTempApiKey] = useState('');
+  const [_showApiKey, _setShowApiKey] = useState(false);
+
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const icsFileInputRef = useRef<HTMLInputElement>(null);
+
+  // Check notification permission on mount
+  useEffect(() => {
+    if ('Notification' in window) {
+      setNotificationPermission(Notification.permission);
+    }
+  }, []);
+
+  const loadAllData = useCallback(async () => {
+    // Load preferences
+    const prefs = await loadPreferences();
+    setPreferences(prefs);
+
+    // Initialize auto-save customization state (strip .brain extension for display)
+    const filename = prefs.customFilename || 'Neuman.Brain';
+    const nameWithoutExt = filename.replace(/\.brain$/i, '');
+    setCustomFilename(nameWithoutExt);
+    setVersionCount(prefs.versionCount || 7);
+
+    // Load backup history
+    const history = await getBackupHistory();
+    setBackupHistory(history);
+
+    // Get time since last backup
+    const timeSince = await getTimeSinceLastBackup();
+    setTimeSinceLastBackup(timeSince);
+
+    // Check backup reminder
+    const reminder = await shouldShowBackupReminder();
+    setBackupReminder(reminder);
+
+    // Load storage quota info
+    try {
+      const quota = await indexedDBService.getQuota();
+      setStorageInfo(quota);
+
+      // Check if this is a new browser (no data in IndexedDB)
+      const keys = await indexedDBService.getAllKeys();
+      const hasAnyData = keys.length > 0;
+      setHasData(hasAnyData);
+
+      // Show new browser warning if no data AND not dismissed
+      const dismissed = localStorage.getItem('new-browser-warning-dismissed');
+      if (!hasAnyData && !dismissed) {
+        setShowNewBrowserWarning(true);
+      }
+    } catch (error) {
+      console.error('Failed to load storage info:', error);
+    }
+  }, []);
+
+  // Load data on mount
+  useEffect(() => {
+    document.title = 'Settings - Neuman Brain';
+    loadAllData();
+    // Initialize temp API key from store (legacy - now using ProviderSettings)
+    // if (apiKey) {
+    //   setTempApiKey(apiKey);
+    // }
+  }, [loadAllData, apiKey]);
+
+  // Scroll to hash anchor on mount (for #account navigation)
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash) {
+      // Small delay to ensure DOM is ready
+      setTimeout(() => {
+        const element = document.querySelector(hash);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    }
+  }, []);
+
+  // Export handlers
+  const handleExport = async (compressed: boolean = true) => {
+    try {
+      setIsExporting(true);
+      setMessage(null);
+
+      const result = await exportBrainFile({ compressed, prettyPrint: !compressed });
+
+      // Add to history
+      await addHistoryEntry({
+        filename: result.filename,
+        size: result.size,
+        compressed: result.compressed,
+        type: 'manual',
+        status: 'success',
+      });
+
+      await loadAllData(); // Refresh
+
+      const sizeInfo = formatFileSize(result.size);
+      const compressionNote = compressed ? ' (compressed)' : '';
+      setMessage({
+        type: 'success',
+        text: `Brain data exported successfully! File size: ${sizeInfo}${compressionNote}`
+      });
+    } catch (error) {
+      setMessage({ type: 'error', text: `Export failed: ${error}` });
+    } finally {
+      setIsExporting(false);
+    }
+  };
+
+  // Import handler
+  const handleImportClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleFileSelect = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    try {
+      setIsImporting(true);
+      setMessage(null);
+
+      // Validate file
+      const validation = await validateBrainFile(file);
+      if (!validation.valid) {
+        setMessage({ type: 'error', text: validation.message });
+        return;
+      }
+
+      // Show validation info
+      if (validation.info) {
+        setMessage({
+          type: 'info',
+          text: `Found ${validation.info.itemCount} items (${validation.info.fileSize}) from ${new Date(validation.info.exportDate).toLocaleString()}. Importing...`,
+        });
+      }
+
+      // Import file
+      const result = await importBrainFile(file);
+      if (result.success) {
+        setMessage({ type: 'success', text: result.message });
+        setTimeout(() => window.location.reload(), 2000);
+      } else {
+        setMessage({ type: 'error', text: result.message });
+      }
+    } catch (error) {
+      setMessage({ type: 'error', text: `Import failed: ${error}` });
+    } finally {
+      setIsImporting(false);
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+    }
+  };
+
+  // Auto-save handlers
+  const handleSetupAutoSave = async () => {
+    try {
+      const dirHandle = await requestAutoSaveDirectory();
+      setAutoSaveDirectory(dirHandle);
+
+      // Enable auto-save with directory handle
+      await autoSaveManager.enableLocal(dirHandle);
+
+      await loadAllData();
+      setMessage({ type: 'success', text: 'Auto-save enabled! Your data will be automatically saved to the selected folder.' });
+    } catch (error) {
+      setMessage({ type: 'error', text: `${error}` });
+    }
+  };
+
+  const handleAutoSaveNow = async () => {
+    if (!autoSaveDirectory) {
+      setMessage({ type: 'error', text: 'Please configure auto-save directory first' });
+      return;
+    }
+
+    try {
+      setMessage({ type: 'info', text: 'Saving...' });
+      const result = await autoSave(autoSaveDirectory);
+
+      await addHistoryEntry({
+        filename: result.filename,
+        size: result.size,
+        compressed: result.compressed,
+        type: 'auto',
+        destination: 'local',
+        status: 'success',
+      });
+
+      await loadAllData();
+      setMessage({ type: 'success', text: `Auto-saved: ${result.filename} (${formatFileSize(result.size)})` });
+    } catch (error) {
+      setMessage({ type: 'error', text: `Auto-save failed: ${error}` });
+    }
+  };
+
+  // Calendar Import/Export handlers
+  const handleExportCalendar = async () => {
+    try {
+      setIsExportingCalendar(true);
+      setMessage(null);
+
+      const result = exportToICS(events);
+
+      if (!result.success || !result.data) {
+        setMessage({ type: 'error', text: result.error || 'Export failed' });
+        return;
+      }
+
+      downloadICS(result.data, `calendar-${format(new Date(), 'yyyy-MM-dd')}.ics`);
+
+      const eventCount = Object.values(events).reduce((acc, arr) => acc + arr.length, 0);
+      setMessage({
+        type: 'success',
+        text: `Calendar exported successfully! ${eventCount} events saved to .ics file.`
+      });
+    } catch (error) {
+      setMessage({ type: 'error', text: `Calendar export failed: ${error}` });
+    } finally {
+      setIsExportingCalendar(false);
+    }
+  };
+
+  const handleImportCalendarClick = () => {
+    icsFileInputRef.current?.click();
+  };
+
+  // Request notification permission handler
+  const handleRequestNotificationPermission = async () => {
+    try {
+      setRequestingPermission(true);
+      const granted = await requestNotificationPermission();
+      setNotificationPermission(granted ? 'granted' : 'denied');
+      setMessage({
+        type: granted ? 'success' : 'warning',
+        text: granted
+          ? 'Notifications enabled! You will now receive event reminders.'
+          : 'Notification permission denied. You can enable it later in your browser settings.',
+      });
+    } catch (error) {
+      console.error('Failed to request notification permission:', error);
+      setMessage({ type: 'error', text: 'Failed to request notification permission' });
+    } finally {
+      setRequestingPermission(false);
+    }
+  };
+
+  const handleICSFileSelect = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    try {
+      setIsImportingCalendar(true);
+      setMessage(null);
+
+      const icsData = await readICSFile(file);
+      const result = importFromICS(icsData);
+
+      if (!result.success || !result.events) {
+        setMessage({ type: 'error', text: result.error || 'Import failed' });
+        return;
+      }
+
+      // Add all imported events to the calendar store
+      result.events.forEach((event) => {
+        // Determine dateKey from event ID or use today
+        const dateKey = format(new Date(), 'yyyy-MM-dd');
+        addEvent(dateKey, event.title, event.description, event);
+      });
+
+      setMessage({
+        type: 'success',
+        text: `Calendar imported successfully! ${result.events.length} events added.`
+      });
+    } catch (error) {
+      setMessage({ type: 'error', text: `Calendar import failed: ${error}` });
+    } finally {
+      setIsImportingCalendar(false);
+      if (icsFileInputRef.current) {
+        icsFileInputRef.current.value = '';
+      }
+    }
+  };
+
+  // Preferences handlers
+  const toggleCompression = async () => {
+    if (!preferences) return;
+    const newValue = !preferences.compressionEnabled;
+    await savePreferences({ compressionEnabled: newValue });
+    await loadAllData();
+    setMessage({ type: 'info', text: `Compression ${newValue ? 'enabled' : 'disabled'}` });
+
+    // Show visual feedback
+    setRecentlySaved('compression');
+    setTimeout(() => setRecentlySaved(null), 2000);
+  };
+
+  const toggleReminder = async () => {
+    if (!preferences) return;
+    const newValue = !preferences.reminderEnabled;
+    await savePreferences({ reminderEnabled: newValue });
+    await loadAllData();
+    setMessage({ type: 'info', text: `Backup reminders ${newValue ? 'enabled' : 'disabled'}` });
+
+    // Show visual feedback
+    setRecentlySaved('reminder');
+    setTimeout(() => setRecentlySaved(null), 2000);
+  };
+
+  const toggleAutoSave = async () => {
+    if (!preferences) return;
+
+    if (preferences.autoSaveEnabled) {
+      // Disable auto-save
+      await autoSaveManager.disableLocal();
+      setAutoSaveDirectory(null);
+      await loadAllData();
+      setMessage({ type: 'info', text: 'Auto-save disabled' });
+
+      // Show visual feedback
+      setRecentlySaved('autoSave');
+      setTimeout(() => setRecentlySaved(null), 2000);
+    } else {
+      // Enable auto-save - request directory
+      await handleSetupAutoSave();
+    }
+  };
+
+  const handleSaveCustomization = async () => {
+    if (!preferences) return;
+
+    // Validate inputs
+    if (!customFilename.trim()) {
+      setMessage({ type: 'error', text: 'Filename cannot be empty' });
+      return;
+    }
+
+    if (versionCount < 1 || versionCount > 100) {
+      setMessage({ type: 'error', text: 'Version count must be between 1 and 100' });
+      return;
+    }
+
+    try {
+      // Always append .brain extension
+      const filenameWithExtension = `${customFilename.trim()}.brain`;
+
+      await savePreferences({
+        customFilename: filenameWithExtension,
+        versionCount: versionCount,
+      });
+
+      await loadAllData();
+      setMessage({ type: 'success', text: 'Auto-save preferences updated!' });
+    } catch (error) {
+      setMessage({ type: 'error', text: `Failed to save preferences: ${error}` });
+    }
+  };
+
+  // AI Terminal handlers (legacy - now using ProviderSettings component)
+  // Commented out to avoid unused variable errors
+  // const handleSaveApiKey = () => {
+  //   if (!tempApiKey.trim()) {
+  //     setMessage({ type: 'error', text: 'API key cannot be empty' });
+  //     return;
+  //   }
+  //   setApiKey(tempApiKey.trim());
+  //   setMessage({ type: 'success', text: 'API key saved! You can now use the AI Terminal.' });
+  // };
+  // const handleRemoveApiKey = () => {
+  //   setApiKey(null);
+  //   setTempApiKey('');
+  //   setMessage({ type: 'info', text: 'API key removed' });
+  // };
+
+  if (!preferences) {
+    return <div className="p-6">Loading...</div>;
+  }
+
+  return (
+    <div className="settings-page">
+      {/* Header */}
+      <div className="mb-8">
+        <h1 className="text-xl font-semibold text-text-light-primary dark:text-text-dark-primary mb-2">
+          Settings
+        </h1>
+        <p className="text-base text-text-light-secondary dark:text-text-dark-secondary">
+          Manage your data, backups, and preferences
+        </p>
+      </div>
+
+      {/* Backup Reminder Banner */}
+      {backupReminder?.show && (
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mb-6 p-4 rounded-lg bg-status-warning-bg dark:bg-status-warning-bg-dark text-status-warning-text dark:text-status-warning-text-dark border border-status-warning-border dark:border-status-warning-border-dark flex items-start gap-3"
+        >
+          <span className="text-2xl">⚠️</span>
+          <div className="flex-1">
+            <p className="font-semibold">{backupReminder.message}</p>
+            <button
+              onClick={() => handleExport(preferences.compressionEnabled)}
+              className="mt-2 text-sm underline hover:no-underline"
+            >
+              Create Backup Now
+            </button>
+          </div>
+        </motion.div>
+      )}
+
+      {/* Message Banner */}
+      <AnimatePresence>
+        {message && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className={`mb-6 p-4 rounded-lg ${
+              message.type === 'success'
+                ? 'bg-status-success-bg dark:bg-status-success-bg-dark text-status-success-text dark:text-status-success-text-dark border border-status-success-border dark:border-status-success-border-dark'
+                : message.type === 'error'
+                ? 'bg-status-error-bg dark:bg-status-error-bg-dark text-status-error-text dark:text-status-error-text-dark border border-status-error-border dark:border-status-error-border-dark'
+                : message.type === 'warning'
+                ? 'bg-status-warning-bg dark:bg-status-warning-bg-dark text-status-warning-text dark:text-status-warning-text-dark border border-status-warning-border dark:border-status-warning-border-dark'
+                : 'bg-status-info-bg dark:bg-status-info-bg-dark text-status-info-text dark:text-status-info-text-dark border border-status-info-border dark:border-status-info-border-dark'
+            }`}
+          >
+            {message.text}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Privacy-First Local Storage Notice */}
+      <div className="mb-6 p-4 rounded-lg bg-status-success-bg dark:bg-status-success-bg-dark border border-status-success-border dark:border-status-success-border-dark">
+        <p className="text-sm text-status-success-text dark:text-status-success-text-dark">
+          <strong>🔒 100% Private:</strong> All data stored locally in your browser using IndexedDB (50GB+ capacity).
+          No cloud dependencies, no tracking, no third-party services.
+        </p>
+      </div>
+
+      {/* New Browser Warning */}
+      {showNewBrowserWarning && (
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mb-6 p-6 rounded-lg bg-status-warning-bg dark:bg-status-warning-bg-dark border-2 border-status-warning-border dark:border-status-warning-border-dark"
+        >
+          <div className="flex items-start gap-4">
+            <span className="text-3xl flex-shrink-0">⚠️</span>
+            <div className="flex-1">
+              <h3 className="text-xl font-bold text-status-warning-text dark:text-status-warning-text-dark mb-2">
+                First Time in This Browser?
+              </h3>
+              <p className="text-sm text-status-warning-text dark:text-status-warning-text-dark mb-3">
+                <strong>Your data is stored locally in each browser.</strong> If you have data in another browser
+                (Chrome, Safari, Firefox, Edge, etc.), you'll need to export it and import it here.
+              </p>
+
+              <div className="bg-surface-light-elevated dark:bg-surface-dark-elevated p-4 rounded-lg mb-4 border border-border-light dark:border-border-dark">
+                <p className="text-sm font-semibold text-text-light-primary dark:text-text-dark-primary mb-2">
+                  How to transfer your data:
+                </p>
+                <ol className="text-sm text-text-light-secondary dark:text-text-dark-secondary space-y-1 list-decimal list-inside ml-2">
+                  <li>Go to your other browser where you have data</li>
+                  <li>Open this app → Settings → Backup & Restore</li>
+                  <li>Click <strong>"Export Brain"</strong> to download a .brain file</li>
+                  <li>Come back to this browser</li>
+                  <li>Click <strong>"Import Brain"</strong> below and select the .brain file</li>
+                </ol>
+              </div>
+
+              <div className="flex flex-wrap gap-2">
+                <button
+                  onClick={() => setShowNewBrowserWarning(false)}
+                  className="px-4 py-2 bg-status-warning hover:bg-status-warning text-white rounded-lg font-medium transition-colors"
+                >
+                  Got It
+                </button>
+                <button
+                  onClick={() => {
+                    setShowNewBrowserWarning(false);
+                    localStorage.setItem('new-browser-warning-dismissed', 'true');
+                  }}
+                  className="px-4 py-2 bg-surface-light-elevated dark:bg-surface-dark-elevated hover:bg-border-light dark:hover:bg-border-dark text-text-light-primary dark:text-text-dark-primary rounded-lg font-medium transition-colors border border-border-light dark:border-border-dark"
+                >
+                  Don't Show Again
+                </button>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      )}
+
+      {/* Permanent Important Note in Settings */}
+      {!hasData && (
+        <div className="mb-6 p-4 rounded-lg bg-status-info-bg dark:bg-status-info-bg-dark border border-status-info-border dark:border-status-info-border-dark">
+          <p className="text-sm text-status-info-text dark:text-status-info-text-dark">
+            <strong>📌 Note:</strong> This browser has no data yet. If you're switching from another browser,
+            use <strong>Export → Import</strong> to transfer your data.
+          </p>
+        </div>
+      )}
+
+      {/* Backup Content */}
+      <div className="space-y-6">
+        {/* Account Settings */}
+        <div id="account" className="bento-card p-6">
+          <div className="flex items-center gap-3 mb-4">
+            <span className="text-2xl">👤</span>
+            <h2 className="text-lg font-semibold text-text-light-primary dark:text-text-dark-primary">
+              Account Settings
+            </h2>
+          </div>
+
+          <div className="space-y-4">
+            {/* Display Name */}
+            <div>
+              <label className="block text-sm font-medium text-text-light-primary dark:text-text-dark-primary mb-2">
+                Display Name
+              </label>
+              <input
+                type="text"
+                defaultValue="Travis Neuman"
+                className="w-full px-3 py-2 bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-lg text-text-light-primary dark:text-text-dark-primary focus:outline-none focus:ring-2 focus:ring-accent-blue"
+                placeholder="Enter your name"
+              />
+              <p className="mt-1 text-xs text-text-light-secondary dark:text-text-dark-secondary">
+                This name appears in the sidebar and throughout the app.
+              </p>
+            </div>
+
+            {/* Email (Placeholder) */}
+            <div>
+              <label className="block text-sm font-medium text-text-light-primary dark:text-text-dark-primary mb-2">
+                Email
+              </label>
+              <input
+                type="email"
+                className="w-full px-3 py-2 bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-lg text-text-light-primary dark:text-text-dark-primary focus:outline-none focus:ring-2 focus:ring-accent-blue"
+                placeholder="email@example.com"
+              />
+              <p className="mt-1 text-xs text-text-light-secondary dark:text-text-dark-secondary">
+                Optional. Used for notifications and account recovery (future feature).
+              </p>
+            </div>
+
+            {/* Privacy Notice */}
+            <div className="mt-4 p-3 bg-status-info-bg dark:bg-status-info-bg-dark border border-status-info-border dark:border-status-info-border-dark rounded-lg">
+              <p className="text-xs text-status-info-text dark:text-status-info-text-dark">
+                <strong>🔒 Privacy:</strong> All account data is stored locally on your device. Nothing is sent to any server.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Site-wide Settings */}
+        <div className="bento-card p-6">
+          <h2 className="text-lg font-semibold text-text-light-primary dark:text-text-dark-primary mb-4">
+            Site-wide Settings
+          </h2>
+          <p className="text-sm text-text-light-secondary dark:text-text-dark-secondary mb-4">
+            Customize settings that affect the entire application.
+          </p>
+
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-text-light-primary dark:text-text-dark-primary mb-2">
+                Background
+              </label>
+              <button
+                onClick={() => setShowBackgroundCustomizer(true)}
+                className="flex items-center gap-2 px-4 py-2 bg-accent-blue hover:bg-accent-blue-hover text-white rounded-lg font-medium transition-colors"
+              >
+                <span>🎨</span>
+                <span>Customize Background</span>
+              </button>
+              <p className="text-xs text-text-light-secondary dark:text-text-dark-secondary mt-2">
+                Customize the background for the entire application
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Dashboard Settings */}
+        <div className="bento-card p-6">
+          <h2 className="text-lg font-semibold text-text-light-primary dark:text-text-dark-primary mb-4">
+            Dashboard Settings
+          </h2>
+          <p className="text-sm text-text-light-secondary dark:text-text-dark-secondary mb-4">
+            Customize which widgets appear on your dashboard and manage their settings.
+          </p>
+
+          <button
+            onClick={() => {
+              // Navigate to dashboard and open widget manager
+              window.location.href = '/#customize-widgets';
+            }}
+            className="flex items-center gap-2 px-4 py-2 bg-accent-blue text-white rounded-lg hover:bg-accent-blue-hover transition-colors"
+          >
+            <span>⚙️</span>
+            <span>Customize Dashboard Widgets</span>
+          </button>
+
+          <p className="text-xs text-text-light-secondary dark:text-text-dark-secondary mt-3">
+            Tip: You can also access widget settings by hovering over "Dashboard" in the sidebar and clicking the ⚙ icon.
+          </p>
+
+          <div className="mt-4">
+            <label className="block text-sm font-medium text-text-light-primary dark:text-text-dark-primary mb-2">
+              Layout Presets
+            </label>
+            <button
+              onClick={() => setShowPresetManager(true)}
+              className="flex items-center gap-2 px-4 py-2 bg-accent-blue hover:bg-accent-blue-hover text-white rounded-lg font-medium transition-colors"
+            >
+              <span>📐</span>
+              <span>Manage Dashboard Presets</span>
+            </button>
+            <p className="text-xs text-text-light-secondary dark:text-text-dark-secondary mt-2">
+              Save and load custom dashboard layouts
+            </p>
+          </div>
+        </div>
+
+        {/* AI Terminal Settings - Multi-Provider */}
+        <div className="bento-card p-6">
+          <div className="flex items-center gap-3 mb-4">
+            <span className="text-2xl">🤖</span>
+            <h2 className="text-lg font-semibold text-text-light-primary dark:text-text-dark-primary">
+              AI Terminal
+            </h2>
+          </div>
+
+          <p className="text-sm text-text-light-secondary dark:text-text-dark-secondary mb-4">
+            Multi-provider AI assistant with 8 providers including free options. Automatic fallback ensures reliability.
+          </p>
+
+          {/* Quick Info */}
+          <div className="mb-6 p-4 bg-status-info-bg dark:bg-status-info-bg-dark border border-status-info-border dark:border-status-info-border-dark rounded-lg">
+            <p className="text-sm text-status-info-text dark:text-status-info-text-dark mb-2">
+              <strong>🎯 New Multi-Provider System</strong>
+            </p>
+            <ul className="text-xs text-status-info-text dark:text-status-info-text-dark space-y-1">
+              <li>• Choose from 8 AI providers (OpenRouter, Groq, HuggingFace, Mistral, Gemini, OpenAI, Claude, Grok)</li>
+              <li>• Free models available (OpenRouter, Groq, HuggingFace, Mistral)</li>
+              <li>• Automatic fallback if primary provider fails</li>
+              <li>• Encrypted API key storage with password protection</li>
+              <li>• Usage tracking per provider</li>
+            </ul>
+          </div>
+
+          {/* Configure Providers Button */}
+          <div className="space-y-4">
+            <p className="text-sm font-medium text-text-light-primary dark:text-text-dark-primary">
+              Click the AI Terminal button in the bottom-right corner, then click ⚙️ Settings to configure providers.
+            </p>
+
+            <div className="p-4 bg-surface-light-elevated dark:bg-surface-dark-elevated rounded-lg">
+              <p className="text-sm font-semibold text-text-light-primary dark:text-text-dark-primary mb-2">
+                How to set up:
+              </p>
+              <ol className="text-sm text-text-light-secondary dark:text-text-dark-secondary space-y-1 list-decimal list-inside">
+                <li>Open the AI Terminal (🤖 button in bottom-right)</li>
+                <li>Click the ⚙️ Settings button in the terminal header</li>
+                <li>Add API keys for your preferred providers</li>
+                <li>Select your model using the 🔀 button</li>
+                <li>Start chatting!</li>
+              </ol>
+            </div>
+
+            {/* Free Provider Quick Links */}
+            <div className="p-4 bg-status-success-bg dark:bg-status-success-bg-dark border border-status-success-border dark:border-status-success-border-dark rounded-lg">
+              <p className="text-sm font-semibold text-status-success-text dark:text-status-success-text-dark mb-2">
+                Free Provider API Keys:
+              </p>
+              <ul className="text-sm text-status-success-text dark:text-status-success-text-dark space-y-1">
+                <li>
+                  • <a href="https://openrouter.ai/keys" target="_blank" rel="noopener noreferrer" className="underline hover:no-underline">OpenRouter</a> - Access 200+ models (Llama 3.3, Gemini 2.0)
+                </li>
+                <li>
+                  • <a href="https://console.groq.com/keys" target="_blank" rel="noopener noreferrer" className="underline hover:no-underline">Groq</a> - Lightning-fast inference
+                </li>
+                <li>
+                  • <a href="https://huggingface.co/settings/tokens" target="_blank" rel="noopener noreferrer" className="underline hover:no-underline">HuggingFace</a> - Thousands of open models
+                </li>
+                <li>
+                  • <a href="https://console.mistral.ai/api-keys/" target="_blank" rel="noopener noreferrer" className="underline hover:no-underline">Mistral</a> - European AI provider
+                </li>
+              </ul>
+            </div>
+
+            {/* Legacy Gemini Note */}
+            {apiKey && (
+              <div className="p-4 bg-status-warning-bg dark:bg-status-warning-bg-dark border border-status-warning-border dark:border-status-warning-border-dark rounded-lg">
+                <p className="text-sm text-status-warning-text dark:text-status-warning-text-dark">
+                  <strong>ℹ️ Legacy Gemini Key Detected:</strong> Your existing Gemini API key is still active. You can continue using it or configure additional providers for more options.
+                </p>
+              </div>
+            )}
+          </div>
+
+          {/* Features List */}
+          <div className="mt-6 p-4 bg-surface-light-elevated dark:bg-surface-dark-elevated rounded-lg">
+            <p className="text-sm font-semibold text-text-light-primary dark:text-text-dark-primary mb-2">
+              What can the AI Terminal do?
+            </p>
+            <ul className="text-sm text-text-light-secondary dark:text-text-dark-secondary space-y-1">
+              <li>💬 Answer questions on any topic</li>
+              <li>💻 Generate and explain code (React, TypeScript, JavaScript)</li>
+              <li>🔧 Help debug errors and issues</li>
+              <li>📝 Assist with productivity and planning</li>
+              <li>🔄 Automatic fallback if provider fails</li>
+              <li>📊 Track usage across all providers</li>
+            </ul>
+          </div>
+        </div>
+
+            {/* Quick Actions */}
+            <div className="bento-card p-6">
+              <h2 className="text-lg font-semibold text-text-light-primary dark:text-text-dark-primary mb-4">
+                Quick Actions
+              </h2>
+
+              {timeSinceLastBackup && (
+                <p className="text-sm text-text-light-secondary dark:text-text-dark-secondary mb-4">
+                  Last backup: {timeSinceLastBackup}
+                </p>
+              )}
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/* Export */}
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={() => handleExport(preferences.compressionEnabled)}
+                  disabled={isExporting}
+                  className="p-6 rounded-card bg-gradient-button-magenta text-white transition-all duration-standard shadow-card hover:shadow-card-hover disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  <div className="flex items-center justify-center gap-3 mb-2">
+                    <span className="text-2xl">📦</span>
+                    <span className="text-lg font-semibold">
+                      {isExporting ? 'Exporting...' : 'Export Brain'}
+                    </span>
+                  </div>
+                  <p className="text-sm opacity-90">
+                    Download all your data as a .brain file
+                  </p>
+                </motion.button>
+
+                {/* Import */}
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={handleImportClick}
+                  disabled={isImporting}
+                  className="p-6 rounded-card bg-gradient-button-cyan text-white transition-all duration-standard shadow-card hover:shadow-card-hover disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  <div className="flex items-center justify-center gap-3 mb-2">
+                    <span className="text-2xl">📥</span>
+                    <span className="text-lg font-semibold">
+                      {isImporting ? 'Importing...' : 'Import Brain'}
+                    </span>
+                  </div>
+                  <p className="text-sm opacity-90">
+                    Restore data from a .brain file
+                  </p>
+                </motion.button>
+
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept=".brain"
+                  onChange={handleFileSelect}
+                  className="hidden"
+                />
+              </div>
+            </div>
+
+            {/* Auto-Save */}
+            {isFileSystemAccessSupported() && (
+              <div className="bento-card p-6">
+                <h2 className="text-lg font-semibold text-text-light-primary dark:text-text-dark-primary mb-4">
+                  Auto-Save
+                </h2>
+                <p className="text-text-light-secondary dark:text-text-dark-secondary mb-4">
+                  Automatically save backups to a folder on your computer
+                </p>
+
+                {!autoSaveDirectory ? (
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={handleSetupAutoSave}
+                    className="w-full p-4 rounded-lg bg-neutral-800 dark:bg-neutral-700 text-white hover:bg-neutral-900 dark:hover:bg-neutral-600 transition-colors"
+                  >
+                    📁 Choose Auto-Save Folder
+                  </motion.button>
+                ) : (
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-2 text-status-success-text dark:text-status-success-text-dark">
+                      <span>✅</span>
+                      <span>Auto-save folder configured</span>
+                    </div>
+                    <motion.button
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      onClick={handleAutoSaveNow}
+                      className="w-full p-4 rounded-lg bg-status-success text-white hover:bg-status-success transition-colors"
+                    >
+                      💾 Save Now
+                    </motion.button>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Backup History */}
+            <div className="bento-card p-6">
+              <h2 className="text-lg font-semibold text-text-light-primary dark:text-text-dark-primary mb-4">
+                Backup History
+              </h2>
+
+              {backupHistory.length === 0 ? (
+                <p className="text-text-light-secondary dark:text-text-dark-secondary">No backups yet</p>
+                ) : (
+                  <div className="space-y-2 max-h-64 overflow-y-auto">
+                    {backupHistory.map((entry) => {
+                      const statusClasses =
+                        entry.status === 'success'
+                          ? 'text-status-success-text dark:text-status-success-text-dark'
+                          : 'text-status-error-text dark:text-status-error-text-dark';
+                      const destinationLabel =
+                        entry.destination === 'google-drive'
+                          ? 'Google Drive'
+                          : entry.destination === 'local'
+                            ? 'Local Folder'
+                            : 'Download';
+                      const attemptsLabel =
+                        entry.attempts && entry.attempts > 1
+                          ? `${entry.attempts} attempts`
+                          : entry.attempts === 1
+                            ? '1 attempt'
+                            : undefined;
+                      const icon =
+                        entry.destination === 'google-drive'
+                          ? '☁️'
+                          : entry.type === 'auto'
+                            ? '🔄'
+                            : '📦';
+
+                      return (
+                        <div
+                          key={entry.id}
+                          className="p-3 bg-surface-light-elevated dark:bg-surface-dark-elevated rounded-lg flex items-center justify-between gap-4"
+                        >
+                          <div className="flex-1">
+                            <p className="font-medium text-text-light-primary dark:text-text-dark-primary">{entry.filename}</p>
+                            <p className="text-sm text-text-light-secondary dark:text-text-dark-secondary">
+                              {new Date(entry.timestamp).toLocaleString()} • {formatFileSize(entry.size)}
+                              {entry.compressed && ' • Compressed'} • {destinationLabel}
+                            </p>
+                            <p className={`text-sm ${statusClasses}`}>
+                              {entry.status === 'success' ? 'Success' : 'Failed'}
+                              {attemptsLabel ? ` • ${attemptsLabel}` : ''}
+                            </p>
+                            {entry.errorMessage && (
+                              <p className="text-sm text-status-error-text dark:text-status-error-text-dark">
+                                ⚠️ {entry.errorMessage}
+                              </p>
+                            )}
+                          </div>
+                          <div className="text-right flex flex-col items-end gap-1">
+                            <span className="text-2xl">{icon}</span>
+                            <span className={`text-xs font-semibold ${statusClasses}`}>
+                              {entry.status === 'success' ? 'SUCCESS' : 'FAILED'}
+                            </span>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+
+            {/* Options */}
+            <div className="bento-card p-6">
+              <h2 className="text-lg font-semibold text-text-light-primary dark:text-text-dark-primary mb-4">
+                Backup Options
+              </h2>
+
+              <div className="space-y-4">
+                {/* Compression */}
+                <label className="flex items-center justify-between p-4 bg-surface-light-elevated dark:bg-surface-dark-elevated rounded-lg cursor-pointer hover:bg-border-light dark:hover:bg-border-dark transition-colors">
+                  <div>
+                    <p className="font-medium text-text-light-primary dark:text-text-dark-primary">Enable Compression</p>
+                    <p className="text-sm text-text-light-secondary dark:text-text-dark-secondary">
+                      Reduces file size by ~70% (recommended)
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    {recentlySaved === 'compression' && (
+                      <span className="text-sm font-medium text-status-success-text dark:text-status-success-text-dark animate-fade-in">
+                        ✓ Saved
+                      </span>
+                    )}
+                    <input
+                      type="checkbox"
+                      checked={preferences.compressionEnabled}
+                      onChange={toggleCompression}
+                      className="w-6 h-6 rounded"
+                    />
+                  </div>
+                </label>
+
+                {/* Reminders */}
+                <label className="flex items-center justify-between p-4 bg-surface-light-elevated dark:bg-surface-dark-elevated rounded-lg cursor-pointer hover:bg-border-light dark:hover:bg-border-dark transition-colors">
+                  <div>
+                    <p className="font-medium text-text-light-primary dark:text-text-dark-primary">Backup Reminders</p>
+                    <p className="text-sm text-text-light-secondary dark:text-text-dark-secondary">
+                      Remind me every {preferences.reminderDays} days
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    {recentlySaved === 'reminder' && (
+                      <span className="text-sm font-medium text-status-success-text dark:text-status-success-text-dark animate-fade-in">
+                        ✓ Saved
+                      </span>
+                    )}
+                    <input
+                      type="checkbox"
+                      checked={preferences.reminderEnabled}
+                      onChange={toggleReminder}
+                      className="w-6 h-6 rounded"
+                    />
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            {/* Auto-Save Configuration */}
+            <div className="bento-card p-6">
+              <h2 className="text-lg font-semibold text-text-light-primary dark:text-text-dark-primary mb-4">
+                Auto-Save to File
+              </h2>
+
+              {!isFileSystemAccessSupported() ? (
+                <div className="p-4 bg-status-warning-bg dark:bg-status-warning-bg-dark border border-status-warning-border dark:border-status-warning-border-dark rounded-lg">
+                  <p className="text-sm text-status-warning-text dark:text-status-warning-text-dark">
+                    <strong>⚠️ Not Supported in {navigator.userAgent.includes('Firefox') ? 'Firefox' : navigator.userAgent.includes('Safari') ? 'Safari' : 'this browser'}</strong>
+                    <br />
+                    Auto-save to file requires a Chromium-based browser (Chrome, Edge, Brave, Arc, Opera, etc.).
+                    <br />
+                    Your data is still automatically saved to IndexedDB. You can manually export backups anytime.
+                  </p>
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  {/* Enable/Disable Toggle */}
+                  <label className="flex items-center justify-between p-4 bg-surface-light-elevated dark:bg-surface-dark-elevated rounded-lg cursor-pointer hover:bg-border-light dark:hover:bg-border-dark transition-colors">
+                    <div>
+                      <p className="font-medium text-text-light-primary dark:text-text-dark-primary">Enable Auto-Save</p>
+                      <p className="text-sm text-text-light-secondary dark:text-text-dark-secondary">
+                        {preferences.autoSaveEnabled
+                          ? 'Your data is automatically saved to the selected folder'
+                          : 'Automatically save your data to a local file'}
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      {recentlySaved === 'autoSave' && (
+                        <span className="text-sm font-medium text-status-success-text dark:text-status-success-text-dark animate-fade-in">
+                          ✓ Saved
+                        </span>
+                      )}
+                      <input
+                        type="checkbox"
+                        checked={preferences.autoSaveEnabled}
+                        onChange={toggleAutoSave}
+                        className="w-6 h-6 rounded"
+                      />
+                    </div>
+                  </label>
+
+                  {/* Auto-Save Status */}
+                  {preferences.autoSaveEnabled && (
+                    <div className="p-4 bg-status-success-bg dark:bg-status-success-bg-dark border border-status-success-border dark:border-status-success-border-dark rounded-lg">
+                      <div className="flex items-start gap-3">
+                        <span className="text-2xl">✅</span>
+                        <div className="flex-1">
+                          <p className="font-semibold text-status-success-text dark:text-status-success-text-dark mb-1">
+                            Auto-Save Enabled
+                          </p>
+                          <p className="text-sm text-status-success-text dark:text-status-success-text-dark">
+                            Your data is automatically backed up to your selected folder whenever changes are made.
+                            {preferences.lastAutoSave && (
+                              <>
+                                <br />
+                                <strong>Last auto-save:</strong> {new Date(preferences.lastAutoSave).toLocaleString()}
+                              </>
+                            )}
+                          </p>
+                          {preferences.customFilename && (
+                            <p className="text-sm text-status-success-text dark:text-status-success-text-dark mt-2">
+                              <strong>Filename:</strong> {preferences.customFilename}
+                              <br />
+                              <strong>Versions kept:</strong> {preferences.versionCount || 7}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Customization Settings */}
+                  <div className="space-y-4">
+                    <h3 className="text-lg font-semibold text-text-light-primary dark:text-text-dark-primary">
+                      Customize Auto-Save
+                    </h3>
+
+                    {/* Filename Input */}
+                    <div>
+                      <label className="block text-sm font-medium text-text-light-secondary dark:text-text-dark-secondary mb-2">
+                        Backup Filename
+                      </label>
+                      <div className="flex items-center gap-2">
+                        <input
+                          type="text"
+                          value={customFilename}
+                          onChange={(e) => setCustomFilename(e.target.value)}
+                          placeholder="Neuman"
+                          className="flex-1 px-4 py-2 bg-white dark:bg-surface-dark-elevated border border-border-light dark:border-border-dark rounded-lg text-text-light-primary dark:text-text-dark-primary focus:ring-2 focus:ring-accent-magenta focus:border-transparent transition-all"
+                        />
+                        <span className="text-sm font-medium text-text-light-secondary dark:text-text-dark-secondary">.brain</span>
+                      </div>
+                      <p className="text-xs text-text-light-secondary dark:text-text-dark-secondary mt-1">
+                        Enter the filename (e.g., "Neuman", "MyBackup"). The .brain extension is automatically added.
+                      </p>
+                    </div>
+
+                    {/* Version Count Input */}
+                    <div>
+                      <label className="block text-sm font-medium text-text-light-secondary dark:text-text-dark-secondary mb-2">
+                        Versions to Keep
+                      </label>
+                      <input
+                        type="number"
+                        min="1"
+                        max="100"
+                        value={versionCount}
+                        onChange={(e) => setVersionCount(parseInt(e.target.value) || 7)}
+                        className="w-full px-4 py-2 bg-white dark:bg-surface-dark-elevated border border-border-light dark:border-border-dark rounded-lg text-text-light-primary dark:text-text-dark-primary focus:ring-2 focus:ring-accent-magenta focus:border-transparent transition-all"
+                      />
+                      <p className="text-xs text-text-light-secondary dark:text-text-dark-secondary mt-1">
+                        Number of timestamped backups to keep in the hidden .neuman-backups folder (1-100)
+                      </p>
+                    </div>
+
+                    {/* Save Button */}
+                    <button
+                      onClick={handleSaveCustomization}
+                      className="w-full px-4 py-2 bg-accent-magenta hover:bg-accent-magenta-hover text-white rounded-lg font-medium shadow-soft hover:shadow-medium transition-all duration-200"
+                    >
+                      💾 Save Preferences
+                    </button>
+                  </div>
+
+                  {/* Manual Save Now Button */}
+                  {preferences.autoSaveEnabled && (
+                    <button
+                      onClick={handleAutoSaveNow}
+                      className="w-full px-4 py-3 bg-accent-cyan hover:bg-accent-cyan-hover text-white rounded-lg font-medium shadow-soft hover:shadow-medium transition-all duration-200"
+                    >
+                      💾 Save Now (Manual Trigger)
+                    </button>
+                  )}
+                </div>
+              )}
+            </div>
+
+            {/* Backup & Sync Settings (New UI) */}
+            <div className="bento-card p-6">
+              <BackupSettings />
+            </div>
+
+            {/* Calendar Import/Export */}
+            <div className="bento-card p-6">
+              <h2 className="text-lg font-semibold text-text-light-primary dark:text-text-dark-primary mb-4">
+                📅 Calendar Import/Export
+              </h2>
+              <p className="text-sm text-text-light-secondary dark:text-text-dark-secondary mb-6">
+                Import events from Google Calendar or export your events to .ics format for use in other calendar applications.
+              </p>
+
+              <div className="space-y-3">
+                {/* Export Calendar */}
+                <button
+                  onClick={handleExportCalendar}
+                  disabled={isExportingCalendar}
+                  className="w-full px-4 py-3 bg-accent-magenta hover:bg-accent-magenta-hover disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-lg font-medium shadow-soft hover:shadow-medium transition-all duration-200"
+                >
+                  {isExportingCalendar ? '⏳ Exporting...' : '📤 Export Calendar (.ics)'}
+                </button>
+
+                {/* Import Calendar */}
+                <button
+                  onClick={handleImportCalendarClick}
+                  disabled={isImportingCalendar}
+                  className="w-full px-4 py-3 bg-accent-cyan hover:bg-accent-cyan-hover disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-lg font-medium shadow-soft hover:shadow-medium transition-all duration-200"
+                >
+                  {isImportingCalendar ? '⏳ Importing...' : '📥 Import Calendar (.ics)'}
+                </button>
+
+                {/* Hidden file input */}
+                <input
+                  ref={icsFileInputRef}
+                  type="file"
+                  accept=".ics,.ical"
+                  onChange={handleICSFileSelect}
+                  className="hidden"
+                />
+              </div>
+
+              <div className="mt-4 p-4 bg-surface-light-elevated dark:bg-surface-dark-elevated rounded-lg">
+                <p className="text-xs text-text-light-secondary dark:text-text-dark-secondary">
+                  <strong>Note:</strong> .ics files are compatible with Google Calendar, Apple Calendar, Outlook, and most calendar applications.
+                  Recurring events and event details are preserved during import/export.
+                </p>
+              </div>
+            </div>
+
+            {/* Calendar Notifications */}
+            <div className="bento-card p-6">
+              <h2 className="text-lg font-semibold text-text-light-primary dark:text-text-dark-primary mb-4">
+                🔔 Calendar Notifications
+              </h2>
+              <p className="text-sm text-text-light-secondary dark:text-text-dark-secondary mb-6">
+                Enable browser notifications to receive reminders for your calendar events.
+              </p>
+
+              {/* Notification Permission Status */}
+              <div className="mb-4 p-4 bg-surface-light-elevated dark:bg-surface-dark-elevated rounded-lg">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-text-light-primary dark:text-text-dark-primary">
+                      Notification Status
+                    </p>
+                    <p className="text-xs text-text-light-secondary dark:text-text-dark-secondary mt-1">
+                      {notificationPermission === 'granted' && '✅ Notifications are enabled'}
+                      {notificationPermission === 'denied' && '❌ Notifications are blocked'}
+                      {notificationPermission === 'default' && '⏸️ Notifications not yet requested'}
+                    </p>
+                  </div>
+                  <div>
+                    {notificationPermission === 'granted' && (
+                      <span className="px-3 py-1 bg-status-success/10 text-status-success text-xs font-medium rounded-full">
+                        Enabled
+                      </span>
+                    )}
+                    {notificationPermission === 'denied' && (
+                      <span className="px-3 py-1 bg-status-error/10 text-status-error text-xs font-medium rounded-full">
+                        Blocked
+                      </span>
+                    )}
+                    {notificationPermission === 'default' && (
+                      <span className="px-3 py-1 bg-status-warning/10 text-status-warning text-xs font-medium rounded-full">
+                        Not Set
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              {/* Enable Button */}
+              {notificationPermission !== 'granted' && (
+                <button
+                  onClick={handleRequestNotificationPermission}
+                  disabled={requestingPermission || notificationPermission === 'denied'}
+                  className="w-full px-4 py-3 bg-accent-cyan hover:bg-accent-cyan-hover disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-lg font-medium shadow-soft hover:shadow-medium transition-all duration-200"
+                >
+                  {requestingPermission ? '⏳ Requesting...' : '🔔 Enable Notifications'}
+                </button>
+              )}
+
+              {/* Help Text */}
+              <div className="mt-4 p-4 bg-surface-light-elevated dark:bg-surface-dark-elevated rounded-lg">
+                <p className="text-xs text-text-light-secondary dark:text-text-dark-secondary">
+                  {notificationPermission === 'denied' ? (
+                    <>
+                      <strong>Note:</strong> Notifications are blocked. To enable them, please update your browser
+                      settings for this site and reload the page.
+                    </>
+                  ) : (
+                    <>
+                      <strong>Note:</strong> Event reminders will appear as browser notifications at the scheduled time.
+                      Notifications only work when this tab is open.
+                    </>
+                  )}
+                </p>
+              </div>
+            </div>
+
+            {/* Advanced Details */}
+            <div className="bento-card p-6">
+              <button
+                onClick={() => setShowAdvancedDetails(!showAdvancedDetails)}
+                className="w-full flex items-center justify-between text-left hover:opacity-80 transition-opacity"
+              >
+                <h2 className="text-lg font-semibold text-text-light-primary dark:text-text-dark-primary">
+                  Advanced Details
+                </h2>
+                <span className="text-2xl text-text-light-secondary dark:text-text-dark-secondary">
+                  {showAdvancedDetails ? '▼' : '▶'}
+                </span>
+              </button>
+
+              {showAdvancedDetails && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  className="mt-6 space-y-6"
+                >
+                  {/* Storage Usage */}
+                  <div>
+                    <h3 className="text-lg font-semibold text-text-light-primary dark:text-text-dark-primary mb-3">
+                      IndexedDB Storage
+                    </h3>
+                    {storageInfo ? (
+                      <div className="p-4 bg-surface-light-elevated dark:bg-surface-dark-elevated rounded-lg space-y-2">
+                        <div className="flex justify-between text-sm">
+                          <span className="text-text-light-secondary dark:text-text-dark-secondary">Used:</span>
+                          <span className="font-semibold text-text-light-primary dark:text-text-dark-primary">
+                            {storageInfo.usageFormatted}
+                          </span>
+                        </div>
+                        <div className="flex justify-between text-sm">
+                          <span className="text-text-light-secondary dark:text-text-dark-secondary">Available:</span>
+                          <span className="font-semibold text-text-light-primary dark:text-text-dark-primary">
+                            {storageInfo.availableFormatted}
+                          </span>
+                        </div>
+                        <div className="flex justify-between text-sm">
+                          <span className="text-text-light-secondary dark:text-text-dark-secondary">Total Quota:</span>
+                          <span className="font-semibold text-text-light-primary dark:text-text-dark-primary">
+                            {storageInfo.quotaFormatted}
+                          </span>
+                        </div>
+
+                        {/* Progress Bar */}
+                        <div className="mt-3">
+                          <div className="w-full bg-neutral-300 dark:bg-neutral-700 rounded-full h-3 overflow-hidden">
+                            <div
+                              className={`h-3 rounded-full transition-all duration-300 ${
+                                storageInfo.percentUsed > 80 ? 'bg-status-error' :
+                                storageInfo.percentUsed > 60 ? 'bg-status-warning' :
+                                'bg-status-success'
+                              }`}
+                              style={{ width: `${Math.min(storageInfo.percentUsed, 100)}%` }}
+                            />
+                          </div>
+                          <p className="text-xs text-text-light-secondary dark:text-text-dark-secondary mt-1">
+                            {storageInfo.percentUsed.toFixed(1)}% used
+                            {storageInfo.percentUsed > 80 && (
+                              <span className="text-status-error-text dark:text-status-error-text-dark ml-2">
+                                ⚠️ Running low on space
+                              </span>
+                            )}
+                          </p>
+                        </div>
+                      </div>
+                    ) : (
+                      <p className="text-sm text-text-light-secondary dark:text-text-dark-secondary">
+                        Loading storage info...
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Last Backup Info */}
+                  <div>
+                    <h3 className="text-lg font-semibold text-text-light-primary dark:text-text-dark-primary mb-3">
+                      Last Backup
+                    </h3>
+                    {backupHistory.length > 0 ? (
+                      <div className="p-4 bg-surface-light-elevated dark:bg-surface-dark-elevated rounded-lg space-y-2">
+                        <div className="flex justify-between text-sm">
+                          <span className="text-text-light-secondary dark:text-text-dark-secondary">Time:</span>
+                          <span className="font-semibold text-text-light-primary dark:text-text-dark-primary">
+                            {new Date(backupHistory[0].timestamp).toLocaleString()}
+                          </span>
+                        </div>
+                        <div className="flex justify-between text-sm">
+                          <span className="text-text-light-secondary dark:text-text-dark-secondary">Size:</span>
+                          <span className="font-semibold text-text-light-primary dark:text-text-dark-primary">
+                            {formatFileSize(backupHistory[0].size)}
+                          </span>
+                        </div>
+                        <div className="flex justify-between text-sm">
+                          <span className="text-text-light-secondary dark:text-text-dark-secondary">Status:</span>
+                          <span className={`font-semibold ${
+                            backupHistory[0].status === 'success'
+                              ? 'text-status-success-text dark:text-status-success-text-dark'
+                              : 'text-status-error-text dark:text-status-error-text-dark'
+                          }`}>
+                            {backupHistory[0].status === 'success' ? '✅ Success' : '❌ Failed'}
+                          </span>
+                        </div>
+                        {backupHistory[0].compressed && (
+                          <div className="flex justify-between text-sm">
+                            <span className="text-text-light-secondary dark:text-text-dark-secondary">Compressed:</span>
+                            <span className="font-semibold text-status-success-text dark:text-status-success-text-dark">
+                              ✅ Yes (~70% smaller)
+                            </span>
+                          </div>
+                        )}
+                      </div>
+                    ) : (
+                      <p className="text-sm text-text-light-secondary dark:text-text-dark-secondary p-4 bg-surface-light-elevated dark:bg-surface-dark-elevated rounded-lg">
+                        No backups yet. Create your first backup above!
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Browser Info */}
+                  <div>
+                    <h3 className="text-lg font-semibold text-text-light-primary dark:text-text-dark-primary mb-3">
+                      Browser & Capabilities
+                    </h3>
+                    <div className="p-4 bg-surface-light-elevated dark:bg-surface-dark-elevated rounded-lg space-y-2">
+                      <div className="flex justify-between text-sm">
+                        <span className="text-text-light-secondary dark:text-text-dark-secondary">Browser:</span>
+                        <span className="font-mono text-xs text-text-light-primary dark:text-text-dark-primary">
+                          {navigator.userAgent.match(/(?:Firefox|Chrome|Safari|Edge)\/[\d.]+/)?.[0] || 'Unknown'}
+                        </span>
+                      </div>
+                      <div className="flex justify-between text-sm">
+                        <span className="text-text-light-secondary dark:text-text-dark-secondary">IndexedDB:</span>
+                        <span className="font-semibold text-status-success-text dark:text-status-success-text-dark">
+                          ✅ Supported
+                        </span>
+                      </div>
+                      <div className="flex justify-between text-sm">
+                        <span className="text-text-light-secondary dark:text-text-dark-secondary">File System Access API:</span>
+                        <span className={`font-semibold ${
+                          isFileSystemAccessSupported()
+                            ? 'text-status-success-text dark:text-status-success-text-dark'
+                            : 'text-status-warning-text dark:text-status-warning-text-dark'
+                        }`}>
+                          {isFileSystemAccessSupported() ? '✅ Supported' : '⚠️ Not Supported'}
+                        </span>
+                      </div>
+                      {!isFileSystemAccessSupported() && (
+                        <p className="text-xs text-status-warning-text dark:text-status-warning-text-dark mt-2 p-2 bg-status-warning-bg dark:bg-status-warning-bg-dark rounded">
+                          Auto-save to folder requires a Chromium-based browser (Chrome, Edge, Brave, Arc, Opera, etc.). Manual export/import still works!
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </div>
+
+            {/* Privacy Policy Link */}
+            <div className="mt-8 pt-6 border-t border-border-light dark:border-border-dark">
+              <div className="text-center">
+                <a
+                  href="/privacy"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-sm text-accent-blue hover:text-accent-blue-hover hover:underline transition-colors"
+                >
+                  <span>🔒</span>
+                  <span>Privacy Policy & Analytics Disclosure</span>
+                </a>
+                <p className="mt-2 text-xs text-text-light-secondary dark:text-text-dark-secondary">
+                  Learn how we protect your privacy and what analytics we collect
+                </p>
+              </div>
+            </div>
+      </div>
+
+      {/* Background Customizer Modal */}
+      <BackgroundCustomizer
+        isOpen={showBackgroundCustomizer}
+        onClose={() => setShowBackgroundCustomizer(false)}
+        settings={bgSettings}
+        onSettingsChange={handleBackgroundChange}
+      />
+
+      {/* Preset Manager Modal */}
+      <PresetManager
+        isOpen={showPresetManager}
+        onClose={() => setShowPresetManager(false)}
+      />
+    </div>
+  );
+};

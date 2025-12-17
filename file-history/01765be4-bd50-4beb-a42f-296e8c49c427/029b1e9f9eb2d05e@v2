@@ -1,0 +1,102 @@
+# Fix Production Blank Page - React Undefined Error
+
+**Created:** 2025-01-16
+**Status:** 🔴 CRITICAL - Production site completely broken
+**Priority:** P0 - IMMEDIATE FIX REQUIRED
+
+## Overview
+
+Production site (brain.neuman.dev) shows blank page after bundle optimization deploy. Console error shows React is undefined in vendor bundle.
+
+## Problem Statement
+
+**Error:** `Uncaught TypeError: can't access property "createContext" of undefined`
+**Location:** `vendor-CgJRPTqa.js:1`
+**Impact:** Entire site broken - blank page, no functionality
+
+**Root Cause Hypothesis:**
+The vendor code splitting in vite.config.ts is likely causing React to be split incorrectly, resulting in:
+1. React code trying to access `React.createContext` before React is loaded
+2. Circular dependency between vendor chunks
+3. Incorrect chunk loading order
+
+**Evidence:**
+- Build succeeds locally
+- Deploy succeeds on Cloudflare
+- Error only appears in production browser
+- Error is in vendor-CgJRPTqa.js (the 425KB vendor chunk we created)
+
+## Files to Investigate
+
+- [ ] `vite.config.ts` - manualChunks configuration (lines 31-52)
+- [ ] `dist/index.html` - Check script tag order
+- [ ] Browser Network tab - Check chunk load order
+- [ ] `vendor-CgJRPTqa.js` - What's trying to use React before it loads?
+
+## Proposed Changes
+
+**Option 1: Revert manualChunks (SAFEST - do this first)**
+- Remove the custom manualChunks function
+- Let Vite handle code splitting automatically
+- Deploy and test
+
+**Option 2: Fix chunk dependencies**
+- Ensure react-vendor loads BEFORE vendor chunk
+- Add explicit chunk dependencies in vite config
+- May require `modulepreload` hints
+
+**Option 3: Simplify vendor splitting**
+- Only split react/react-dom
+- Put everything else in main vendor
+- Less optimal but safer
+
+## Todo Checklist
+
+- [ ] **Phase 1: Immediate Rollback (5 min) 🔴 CRITICAL**
+  - [ ] Check git log for last working deploy
+  - [ ] Consider reverting commit 556f4a3 if needed
+  - [ ] OR fix vite.config.ts manualChunks
+
+- [ ] **Phase 2: Investigate Root Cause (10 min)**
+  - [ ] Read vite.config.ts manualChunks function
+  - [ ] Check if React is in react-vendor or vendor chunk
+  - [ ] Verify chunk loading order in index.html
+  - [ ] Test production build locally
+
+- [ ] **Phase 3: Fix & Test (15 min)**
+  - [ ] Apply fix to vite.config.ts
+  - [ ] Run `npm run build`
+  - [ ] Test dist/index.html locally with `npm run preview`
+  - [ ] Verify no React errors in console
+
+- [ ] **Phase 4: Deploy Fix (5 min)**
+  - [ ] Commit fix
+  - [ ] Push to main
+  - [ ] Monitor Cloudflare deploy
+  - [ ] Test production site
+
+**Estimated Time:** 35 minutes
+**Impact:** Site functional again
+
+## Expected Results
+
+- Production site loads without errors
+- React loads before vendor chunk
+- All pages/widgets work
+- Bundle optimization maintained (if possible)
+
+## Review Section
+
+_(To be filled when complete)_
+
+**Completed:** TBD
+**Actual Time:** TBD
+
+### Summary of Changes
+_(Document the fix)_
+
+### Root Cause Analysis
+_(What exactly caused React to be undefined?)_
+
+### Verification
+_(Confirm production site works)_

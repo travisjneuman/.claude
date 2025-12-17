@@ -1,0 +1,265 @@
+---
+type: hub
+purpose: Personal command center for thoughts, prompts, and ideas
+created: 2025-12-14
+updated: 2025-12-14
+---
+
+# Personal Command Center
+
+> Your private space for capturing thoughts, queuing prompts for Claude, and parking ideas until they're ready to become projects.
+
+---
+
+## Where to Write
+
+| I want to... | Go to | Look for |
+|--------------|-------|----------|
+| **Dump a random thought** | [[Personal/Thoughts\|Thoughts.md]] | `> [!tip] Write Here` callout |
+| **Queue work for Claude** | [[Personal/Prompts\|Prompts.md]] | `> [!tip] Add Your Prompts Here` callout |
+| **Park a future idea** | [[Personal/Ideas\|Ideas.md]] | `> [!tip] Add Your Ideas Here` callout |
+| **Record a lesson learned** | [[Personal/Learning\|Learning.md]] | `> [!tip] Add Your Learnings Here` callout |
+| **Log a quick decision** | [[Personal/Decisions\|Decisions.md]] | `> [!tip] Add Your Decisions Here` callout |
+
+**Every file has a highlighted callout showing exactly where to add your content.**
+
+---
+
+## How This Works
+
+```
+Capture → Process → Act → Archive
+```
+
+1. **Capture** — Quick-dump thoughts, prompts, ideas without friction
+2. **Process** — Claude reads and triages during sessions
+3. **Act** — Items become plans, research, or implementations
+4. **Archive** — Completed items move to archive for reference
+
+---
+
+## Active Documents
+
+| Document | Purpose | Workflow |
+|----------|---------|----------|
+| [[Personal/Thoughts\|Thoughts]] | Stream of consciousness, observations, half-formed ideas | Claude reads → suggests actions or creates plans |
+| [[Personal/Prompts\|Prompts]] | Queued instructions for Claude to execute | Claude processes → marks complete → archives |
+| [[Personal/Ideas\|Ideas]] | Parking lot for future features, projects, experiments | Review periodically → promote to Projects or discard |
+| [[Personal/Learning\|Learning]] | Insights, lessons learned, "aha" moments | Reference during similar work |
+| [[Personal/Decisions\|Quick Decisions]] | Small decisions that don't need full ADRs | Quick reference for "why did I do X?" |
+
+---
+
+## Quick Capture
+
+### Add a Thought
+Open [[Personal/Thoughts]], find the `> [!tip] Write Here` callout, add below it:
+```markdown
+### 2025-12-14 — My thought title
+Whatever is on my mind...
+```
+
+### Queue a Prompt
+Open [[Personal/Prompts]], find the `> [!tip] Add Your Prompts Here` callout, add below it:
+```markdown
+### My Task Title
+- **Priority:** P1
+- **Status:** pending
+- **Created:** 2025-12-14
+
+#### Instruction
+/start-task Do the thing I need done
+
+#### Context
+Relevant details...
+
+#### Expected Output
+What success looks like...
+```
+
+### Park an Idea
+Open [[Personal/Ideas]], find the `> [!tip] Add Your Ideas Here` callout, add below it:
+```markdown
+#### My Idea Title 💡
+- **Category:** feature
+- **Effort:** medium
+
+Brief description of the idea...
+```
+
+---
+
+## Claude's Processing Rules
+
+### When Starting a Session
+
+1. **Check Prompts first** — Look for `status: pending` items
+2. **Scan Thoughts** — Look for actionable items since last check
+3. **Review Ideas** — If working on related project, check for relevant ideas
+
+### Processing Thoughts
+
+When Claude reads a thought:
+- **Actionable?** → Create task, plan, or research doc
+- **Question?** → Research and respond inline
+- **Observation?** → Acknowledge and link to relevant concepts
+- **Vague?** → Ask clarifying questions
+
+After processing, add:
+```markdown
+> [!PROCESSED] 2025-12-14
+> Created [[link-to-output]] / Responded inline / No action needed
+```
+
+### Processing Prompts
+
+When Claude executes a prompt:
+1. Complete the requested work
+2. Update status: `status: completed`
+3. Add completion note with output link
+4. Prompt automatically excluded from future context
+
+---
+
+## Folder Structure
+
+```
+Personal/
+├── README.md           # This file - hub and instructions
+├── Thoughts.md         # Stream of consciousness capture
+├── Prompts.md          # Queued prompts for Claude
+├── Ideas.md            # Parking lot for future work
+├── Learning.md         # Insights and lessons learned
+├── Decisions.md        # Quick decisions log
+└── Archive/            # Completed prompts and processed thoughts
+    ├── Prompts-2025-12.md
+    └── ...
+```
+
+---
+
+## Dataview Queries
+
+### Pending Prompts Count
+
+```dataviewjs
+const prompts = dv.page("Personal/Prompts");
+if (prompts) {
+  const content = await dv.io.load(prompts.file.path);
+  const pendingCount = (content.match(/status:\s*pending/gi) || []).length;
+  dv.paragraph(`**Pending Prompts:** ${pendingCount}`);
+}
+```
+
+### Recent Thoughts (Last 7 Days)
+
+Check [[Personal/Thoughts]] for new entries.
+
+---
+
+## Templates
+
+### Thought Entry
+```markdown
+### 2025-12-14 — [Optional Title]
+
+[Your thought here]
+```
+
+### Prompt Entry
+```markdown
+---
+
+## [Prompt Title]
+- **Priority:** P1
+- **Status:** pending
+- **Created:** 2025-12-14
+
+### Instruction
+
+/start-task [What you want Claude to do]
+
+### Context
+
+[Any relevant context, files, or constraints]
+
+### Expected Output
+
+[What success looks like]
+
+---
+```
+
+> All prompt instructions start with `/start-task` for intelligent routing.
+
+### Idea Entry
+```markdown
+### [Idea Title]
+- **Category:** feature | project | experiment | tool
+- **Related:** [[Project Name]] (if any)
+- **Effort:** small | medium | large | unknown
+
+[Brief description]
+
+**Why it matters:**
+[Value proposition]
+```
+
+---
+
+## Monthly Maintenance
+
+1. **Archive completed prompts** → Move to `Archive/Prompts-YYYY-MM.md`
+2. **Review stale thoughts** → Process or delete
+3. **Prune ideas** → Promote good ones, discard dead ends
+4. **Extract learnings** → Move insights to Concepts if reusable
+
+---
+
+## Integration with Workflow
+
+### From Thought to Action
+
+```
+Thought: "We should add dark mode to TJN Home"
+    ↓
+Claude reads, creates:
+    → tasks/tjn-home-dark-mode.md (if complex)
+    → or direct implementation (if simple)
+    ↓
+Thought marked as processed
+```
+
+### From Prompt to Completion
+
+```
+Prompt: "Research OAuth providers for Lazy Golfing"
+    ↓
+Claude executes:
+    → Creates research document
+    → Summarizes findings
+    → Updates prompt status to 'completed'
+    ↓
+Prompt excluded from future reads
+```
+
+### From Idea to Project
+
+```
+Idea: "Mobile app for Lazy Golfing"
+    ↓
+When ready:
+    → Create Project note
+    → Create planning tasks
+    → Move idea to 'promoted' status
+```
+
+---
+
+## Privacy Note
+
+This folder is for **your eyes and Claude's only**. Write freely without worrying about external audiences. Raw thoughts are valuable — don't self-censor.
+
+---
+
+*Your personal command center — capture everything, process systematically, act decisively.*

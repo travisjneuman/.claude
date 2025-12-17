@@ -1,0 +1,78 @@
+import React, { useState, useEffect } from 'react';
+import { useSettingsStore, formatTime } from '../stores/useSettingsStore';
+
+/**
+ * PageHeader Component
+ *
+ * Consistent page header with:
+ * - Title and optional subtitle (left)
+ * - Optional action buttons (left, below title)
+ * - Date & Time display (right)
+ *
+ * Used across all pages for consistent layout.
+ */
+
+interface PageHeaderProps {
+  title: string;
+  subtitle?: string;
+  children?: React.ReactNode; // Action buttons or other content
+}
+
+export const PageHeader: React.FC<PageHeaderProps> = ({ title, subtitle, children }) => {
+  const timeFormat = useSettingsStore((state) => state.timeFormat);
+  const [currentTime, setCurrentTime] = useState(new Date());
+
+  // Update time every minute
+  useEffect(() => {
+    setCurrentTime(new Date());
+
+    // Calculate ms until next minute to sync updates
+    const now = new Date();
+    const msUntilNextMinute = (60 - now.getSeconds()) * 1000 - now.getMilliseconds();
+
+    const initialTimeout = setTimeout(() => {
+      setCurrentTime(new Date());
+      const interval = setInterval(() => {
+        setCurrentTime(new Date());
+      }, 60000);
+
+      return () => clearInterval(interval);
+    }, msUntilNextMinute);
+
+    return () => clearTimeout(initialTimeout);
+  }, []);
+
+  // Format date
+  const dateString = currentTime.toLocaleDateString('en-US', {
+    weekday: 'long',
+    month: 'long',
+    day: 'numeric',
+  });
+
+  return (
+    <div className="flex items-start justify-between gap-4 mb-4 sm:mb-8">
+      {/* Left: Title, Subtitle, Actions */}
+      <div className="flex-1 min-w-0">
+        <h1 className="text-xl sm:text-2xl font-semibold text-text-light-primary dark:text-text-dark-primary mb-1">
+          {title}
+        </h1>
+        {subtitle && (
+          <p className="text-sm sm:text-base text-text-light-secondary dark:text-text-dark-secondary mb-2 sm:mb-3">
+            {subtitle}
+          </p>
+        )}
+        {children && <div className="flex flex-wrap gap-2">{children}</div>}
+      </div>
+
+      {/* Right: Date & Time */}
+      <div className="flex-shrink-0 text-right">
+        <div className="text-2xl sm:text-3xl font-bold text-text-light-primary dark:text-text-dark-primary">
+          {formatTime(currentTime, timeFormat)}
+        </div>
+        <div className="text-sm text-text-light-secondary dark:text-text-dark-secondary">
+          {dateString}
+        </div>
+      </div>
+    </div>
+  );
+};

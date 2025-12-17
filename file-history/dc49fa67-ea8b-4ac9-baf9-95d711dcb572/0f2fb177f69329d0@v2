@@ -1,0 +1,235 @@
+# Dashboard Polish & Features Plan
+
+## Overview
+This plan addresses multiple UI/UX issues and feature requests organized into separate task files for atomic, reviewable work.
+
+---
+
+## Task 1: Weather Forecast Date Bug Fix
+**File:** `tasks/fix-weather-forecast-date-bug.md`
+
+### Problem
+5-day forecast shows yesterday instead of today due to:
+1. Hard-coded NYC coordinates (40.7128, -74.0060)
+2. No explicit `start_date` parameter in API call
+3. Timezone mismatch with user's actual location
+
+### Solution
+- Use location from LocationWidget store (user's configured location)
+- Add explicit `start_date=today` and `end_date=today+4` parameters
+- Use user's timezone from their location settings
+
+### Files to Modify
+- `src/widgets/Dashboard/WeatherForecastWidget.tsx` (lines 28-39)
+- May need to read from `useLocationStore` or similar
+
+---
+
+## Task 2: Remove Widget Resize Buttons
+**File:** `tasks/remove-widget-resize-buttons.md`
+
+### Problem
+Resize buttons (1x/2x/3x) appear on widget hover in bottom-right corner. User wants these removed - resizing should only happen via Widget Manager.
+
+### Solution
+- Remove `WidgetResizeHandle` component usage from `SortableWidget.tsx`
+- Keep drag handle (6-dot icon) for reordering
+- Users resize via Widget Manager modal only
+
+### Files to Modify
+- `src/components/SortableWidget.tsx` (line 74 - remove WidgetResizeHandle)
+- `src/components/WidgetResizeHandle.tsx` (delete or deprecate)
+
+---
+
+## Task 3: Widget Height Uniformity
+**File:** `tasks/standardize-widget-heights.md`
+
+### Problem
+Adjacent widgets with similar content have slightly different heights, breaking visual alignment. Button placement also varies.
+
+### Solution
+- Define min-height tiers: `min-h-[200px]`, `min-h-[280px]`, `min-h-[400px]`
+- BaseWidget applies appropriate tier based on widget category
+- Standardize button/action placement (always bottom of widget, consistent padding)
+- Content still grows beyond min-height when needed
+
+### Files to Modify
+- `src/widgets/Dashboard/BaseWidget.tsx` (add height tier system)
+- `src/config/gridLayout.ts` or new `widgetHeights.ts` config
+- Individual widget files for button placement consistency
+
+---
+
+## Task 4: Fix Background Selection
+**File:** `tasks/fix-background-selection.md`
+
+### Problem
+User clicks Apply on gradient selection but background doesn't appear.
+
+### Code Analysis
+The wiring looks correct:
+- `BackgroundCustomizer` calls `onSettingsChange(localSettings)` on Apply (line 103)
+- `Dashboard` receives via `handleBackgroundChange` which updates state + localStorage
+- Background div renders with `zIndex: -1` when type !== 'none'
+
+### Likely Root Causes
+1. **z-index stacking context**: `zIndex: -1` may be hidden behind Layout's main content area
+2. **Opacity issue**: Default opacity of 100 should work, but verify
+3. **CSS specificity**: Other background colors may be overriding
+4. **Container isolation**: `position: fixed` with negative z-index needs proper stacking context
+
+### Solution
+Debug during implementation:
+1. Add console.log to verify handleBackgroundChange is called
+2. Inspect DOM to see if background div exists with correct styles
+3. Try `zIndex: 0` or higher with adjusted container positioning
+4. May need to move background layer outside the dashboard-page container
+
+### Files to Modify
+- `src/pages/Dashboard.tsx` (lines 146-159 - background div)
+
+---
+
+## Task 5: Add Default Widget Preset
+**File:** `tasks/add-default-widget-preset.md`
+
+### Problem
+No "Default" option in preset manager to restore Core4+Weather configuration.
+
+### Solution
+Add a "Default" preset that restores:
+- Widgets: weathermap, taskssummary, tasksquickadd, upcomingevents, recentnotes
+- Sizes: weathermap (3x), others (1x)
+
+### Files to Modify
+- `src/components/PresetManager.tsx` (add to default presets array)
+
+---
+
+## Task 6: Standardize Page Layouts
+**File:** `tasks/standardize-page-layouts.md`
+
+### Problem
+Schedule page uses `max-w-7xl mx-auto` while Dashboard/Notes/Tasks use full viewport width.
+
+### Solution (User Choice: Full Viewport Width)
+- Update Schedule/TimeTracking page to use full viewport width
+- Remove `max-w-7xl mx-auto` constraint
+
+### Files to Modify
+- `src/pages/TimeTracking.tsx` (line 23)
+
+---
+
+## Task 7: Header Clock + Global Settings
+**File:** `tasks/add-header-clock-global-settings.md`
+
+### Problem
+1. No current time display near "Dashboard" title
+2. Time format (12h/24h) only exists in TimeTracking, not global
+3. No temperature unit (F/C) preference
+
+### Solution
+1. **Header Clock Component**: Display current time to the right of page title
+   - Updates every minute (or second if user prefers)
+   - Respects global time format setting
+
+2. **Global Settings Store**: Create `useSettingsStore.ts`
+   - `timeFormat: '12h' | '24h'` (default: '12h')
+   - `temperatureUnit: 'fahrenheit' | 'celsius'` (default: 'fahrenheit')
+   - Persist to localStorage
+
+3. **Settings Page**: Add UI to configure these preferences
+
+### Files to Create/Modify
+- `src/stores/useSettingsStore.ts` (new)
+- `src/components/HeaderClock.tsx` (new)
+- `src/components/Header.tsx` (add clock component)
+- `src/pages/Settings.tsx` (add preferences section)
+- Update weather widgets to use temperature setting
+
+---
+
+## Task 8: Enhanced Uptime Widget
+**File:** `tasks/enhance-uptime-widget.md`
+
+### Problem
+Current UptimeWidget is basic - no history, graphs, or uptime percentage.
+
+### Solution
+- Add uptime history tracking (IndexedDB)
+- Calculate uptime percentage (24h, 7d, 30d)
+- Response time graph (sparkline)
+- Last checked timestamp
+- Optional notifications on status change
+
+### Files to Modify
+- `src/widgets/Dashboard/UptimeWidget.tsx`
+- May need new store for history persistence
+
+---
+
+## Task 9: Bookmark Sync System
+**File:** `tasks/add-bookmark-sync-system.md`
+
+### Problem
+User wants browser bookmark import/export with auto-categorization.
+
+### Solution
+1. **Bookmark Store**: `useBookmarkStore.ts` with IndexedDB persistence
+2. **Import/Export**: Support Netscape HTML format (browser standard)
+3. **Auto-categorization**: Parse folder structure, extract domains
+4. **Favicon loading**: Use Google Favicon API or direct fetch
+5. **Widget**: BookmarksWidget for dashboard display
+6. **Full Page**: Dedicated bookmarks management page
+
+### Files to Create
+- `src/stores/useBookmarkStore.ts`
+- `src/widgets/Dashboard/BookmarksWidget.tsx`
+- `src/pages/Bookmarks.tsx`
+- `src/utils/bookmarkParser.ts`
+
+---
+
+## Implementation Order (Priority)
+
+### Phase 1: Bug Fixes (Immediate)
+1. Fix weather forecast date bug
+2. Fix background selection (verify & fix)
+3. Remove widget resize buttons
+
+### Phase 2: UI Polish
+4. Standardize widget heights
+5. Standardize page layouts (Schedule → full width)
+6. Add default widget preset
+
+### Phase 3: New Features
+7. Header clock + global settings (time format, temp units)
+8. Enhanced uptime widget
+9. Bookmark sync system
+
+---
+
+## Critical Files Reference
+
+| Feature | Primary File | Key Lines |
+|---------|--------------|-----------|
+| Weather Bug | `src/widgets/Dashboard/WeatherForecastWidget.tsx` | 28-39 |
+| Resize Buttons | `src/components/SortableWidget.tsx` | 74 |
+| Widget Heights | `src/widgets/Dashboard/BaseWidget.tsx` | 91 |
+| Background | `src/pages/Dashboard.tsx` | 138-159 |
+| Presets | `src/components/PresetManager.tsx` | 14-59 |
+| Page Layout | `src/pages/TimeTracking.tsx` | 23 |
+| Header | `src/components/Header.tsx` | 14-76 |
+| Settings Store | `src/stores/useThemeStore.ts` | (reference pattern) |
+| Uptime Widget | `src/widgets/Dashboard/UptimeWidget.tsx` | all |
+
+---
+
+## Notes
+
+- Each task should have its own `tasks/[name].md` file created before implementation
+- Follow CLAUDE.md workflow: Plan → Approve → Execute → Verify → Review
+- Keep changes atomic and reviewable
+- Run `npm run type-check && npm run lint` after each task

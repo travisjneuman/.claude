@@ -1,0 +1,10 @@
+# OakStone Properties - robots.txt
+
+User-agent: *
+Allow: /
+
+# Block admin area from indexing
+Disallow: /admin/
+
+# Sitemap location (update domain when purchased)
+Sitemap: https://oakstoneproperties.com/sitemap-index.xml

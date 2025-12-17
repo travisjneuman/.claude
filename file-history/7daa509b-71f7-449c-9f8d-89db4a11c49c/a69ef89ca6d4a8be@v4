@@ -1,0 +1,346 @@
+# _meta.notes — Obsidian Documentation Vault
+
+> The ultimate documentation hub for all active projects, future ideas, architecture decisions, and reusable knowledge.
+
+---
+
+## Purpose
+
+This Obsidian vault serves as the **single source of truth** for:
+- Project metadata and status tracking
+- Technology knowledge base (concepts wiki)
+- Architecture Decision Records (ADRs)
+- Reusable code snippets and patterns
+- Document templates for consistency
+- Dynamic dashboards via Dataview
+
+**Philosophy:** Documentation lives here. Code lives in project folders.
+
+---
+
+## Scope & Editing Rules
+
+**You MAY:**
+- Create/edit any `.md` file inside `_meta.notes/`
+- Add new concepts, snippets, templates, project files
+- Update dashboards and journal entries
+- Maintain the Home.md central hub
+
+**You MAY NOT:**
+- Edit code files (those belong in project directories)
+- Modify project configurations or package.json files
+- Run build/test commands from here
+- Make git commits (this vault may not be version-controlled)
+
+---
+
+## Folder Structure
+
+```
+_meta.notes/
+├── Home.md                 # Central dashboard & navigation hub
+├── CLAUDE.md               # THIS FILE - vault guidelines
+├── Obsidian Setup.md       # Plugin configuration guide
+│
+├── Concepts/               # Technology knowledge wiki (20+ files)
+│   ├── React.md, TypeScript.md, Local-First.md
+│   ├── NestJS.md, Prisma.md, Dexie.md, Lexical.md
+│   ├── Python.md, LLM.md, RAG.md, Agentic AI.md
+│   ├── vLLM.md, MCP.md, Supabase.md
+│   ├── Next.js.md, Zustand.md, Tailwind.md
+│   ├── Vite.md, Docker.md, FastAPI.md
+│
+├── Business/               # Business planning & ventures
+│   ├── README.md               # Business hub navigation
+│   ├── Ventures/               # Individual venture concepts
+│   │   ├── Kikman Enterprises.md   # Parent company
+│   │   ├── LazyGolf.md             # Golf lifestyle brand
+│   │   ├── Rent-a-Nerd.md          # Services company
+│   │   ├── MVNO Cell Service.md    # Telecom concept
+│   │   └── ndev Consulting.md      # IT consulting
+│   ├── Templates/              # Business templates
+│   │   └── Venture Canvas.md       # Business model canvas
+│   └── Research/               # Market research (future)
+│
+├── Decisions/              # Architecture Decision Records (2 ADRs)
+│   ├── LZG-001 CSV Source of Truth.md
+│   └── NB-001 Dexie Primary Storage.md
+│
+├── Snippets/               # Reusable code patterns (7 files)
+│   ├── Python: Note Serialization, RAG Pipeline, Ollama Health, Sandboxed Execution
+│   ├── React: Expandable Text component
+│   └── Storage: Note Validation patterns
+│
+├── Templates/              # Document templates (10 files)
+│   ├── Project Template.md, Feature Specification.md
+│   ├── Bug Report.md, ADR - Decision Record.md
+│   ├── Dev Session Log.md, Meeting Notes.md
+│   ├── Code Snippet.md, Retrospective.md
+│   ├── Weekly Review.md, Monthly Review.md
+│
+├── Dashboards/             # Dynamic views (7 files)
+│   ├── Active Projects.md      # Dataview project table
+│   ├── Project Health.md       # DataviewJS health scoring
+│   ├── Tech Debt.md            # Debt tracker
+│   ├── Task Master.md          # Tasks plugin integration
+│   ├── AI Engineering MOC.md   # Map of Content for AI projects
+│   ├── Workspace Map.canvas    # Visual architecture diagram
+│   └── Obsidian Setup.canvas   # Visual plugin guide
+│
+├── Projects/               # Project metadata files (9 projects)
+│   ├── Active: Neuman Brain, Lazy Golfing, TJN Portfolio
+│   ├── Live: The Dead Robot, TJN Home, Toker League
+│   └── Incubating: Archon, Agent Development Kit, AgentBench
+│
+├── Journal/                # Daily work logs
+│   └── YYYY-MM-DD.md files
+│
+└── Meetings/               # Meeting notes (empty)
+```
+
+---
+
+## Quick Navigation
+
+| I want to... | Go to... |
+|--------------|----------|
+| See all projects | `Home.md` or `Dashboards/Active Projects.md` |
+| Learn about a technology | `Concepts/<technology>.md` |
+| Find a code pattern | `Snippets/*.md` |
+| Create a new document | `Templates/*.md` |
+| Check project health | `Dashboards/Project Health.md` |
+| Track tasks | `Dashboards/Task Master.md` |
+| Review architecture decisions | `Decisions/*.md` |
+| Log today's work | `Journal/YYYY-MM-DD.md` |
+| Plan a business venture | `Business/Ventures/*.md` |
+| See venture overview | `Business/README.md` |
+
+---
+
+## Projects Inventory
+
+### Active Web Applications
+
+| Project | Directory | Status | Priority | Tech Stack |
+|---------|-----------|--------|----------|------------|
+| Neuman Brain | `system.knowledgebase` | Active | P0 | React 19, TypeScript, Dexie, Zustand |
+| Lazy Golfing | `.lzg_platform/Lazy Golfing` | Alpha | P1 | Next.js 15, NestJS 11, Prisma, PostgreSQL |
+| TJN Portfolio | `tjn.portfolio` | Maintenance | P1 | React 19, Vite, Tailwind (V2 ready) |
+| The Dead Robot | `tdr.portfolio` | Live | P2 | Python, GitHub Actions, Groq |
+| TJN Home | `tjn.home` | Stable | P3 | Vanilla JS, CSV config |
+| Toker League | `tkl.home` | Maintenance | P3 | Node.js, Yahoo Fantasy API |
+
+### Incubating AI Systems ("Trinity Architecture")
+
+| Project | Role | Tech Stack |
+|---------|------|------------|
+| Archon | **Builder** - AI meta-agent that builds other agents | Python, Streamlit, Supabase, MCP |
+| Agent Development Kit | **Runtime** - Distributed agent execution framework | FastAPI, vLLM, AsyncIO |
+| AgentBench | **Evaluator** - Training data generation pipeline | Python, RAG, Docker |
+
+---
+
+## Concepts Coverage
+
+The `Concepts/` folder documents technologies used across projects:
+
+### Frontend
+- **React.md** - UI library (React 19 features, hooks patterns)
+- **TypeScript.md** - Type system and strict mode patterns
+- **Lexical.md** - Meta's text editor framework
+
+### Architecture
+- **Local-First.md** - Offline-capable, user-owned data philosophy
+- **RAG.md** - Retrieval Augmented Generation patterns
+- **MCP.md** - Model Context Protocol for AI-tool integration
+
+### Backend
+- **NestJS.md** - Node.js framework (modules, guards, pipes)
+- **Prisma.md** - Database ORM
+- **Dexie.md** - IndexedDB wrapper for browser storage
+- **Supabase.md** - Backend-as-a-service with vector store
+
+### AI/ML
+- **LLM.md** - Large Language Model patterns
+- **Agentic AI.md** - Autonomous AI systems with tools
+- **vLLM.md** - High-throughput inference engine
+- **Python.md** - AI/automation language patterns
+
+---
+
+## Architecture Decisions (ADRs)
+
+| ID | Project | Decision | Status |
+|----|---------|----------|--------|
+| LZG-001 | Lazy Golfing | CSV files as source of truth for static data, PostgreSQL for dynamic | Accepted |
+| NB-001 | Neuman Brain | IndexedDB (Dexie) as primary and only database | Accepted |
+
+**Template:** Use `Templates/ADR - Decision Record.md` for new decisions.
+
+---
+
+## Code Snippets Library
+
+### Python (Backend/AI)
+| Snippet | Purpose | Used In |
+|---------|---------|---------|
+| Python Note Serialization | Load/save/validate JSON objects | AgentBench |
+| RAG Context Generator | 4-stage LLM context pipeline | AgentBench |
+| RAG Context Pipeline | Needs→Enhance→Expert→Critic flow | AgentBench |
+| Ollama Health Check | Local LLM service status check | AgentBench |
+| Sandboxed Code Execution | Docker-based Python sandbox | AgentBench |
+| Note Storage Validation | File I/O with integrity verification | AgentBench |
+
+### React/TypeScript (Frontend)
+| Snippet | Purpose | Used In |
+|---------|---------|---------|
+| React Expandable Text | Show More/Less toggle component | AgentBench |
+
+---
+
+## Templates Reference
+
+| Template | Use For | Key Sections |
+|----------|---------|--------------|
+| Project Template | New project setup | Summary, Status, Architecture, Tasks |
+| Feature Specification | Feature planning | User story, Technical approach, Acceptance criteria |
+| Bug Report | Issue tracking | Steps to reproduce, Expected vs actual |
+| ADR - Decision Record | Architecture decisions | Context, Decision, Consequences |
+| Dev Session Log | Daily logs | Objective, Time log, Outcomes |
+| Meeting Notes | Meeting records | Agenda, Notes, Action items |
+| Code Snippet | Document patterns | Language, Code, Usage |
+| Retrospective | Post-project reviews | What worked, What didn't, Learnings |
+
+---
+
+## Dashboards Guide
+
+### Active Projects (`Dashboards/Active Projects.md`)
+- Dataview table of all projects
+- Grouped by: Enterprise AI, Web Applications, Automation
+- Shows: Project name, Status, Tech stack
+
+### Project Health (`Dashboards/Project Health.md`)
+- DataviewJS health scoring
+- Freshness: 🟢 <7d, 🟡 >14d, 🔴 >30d
+- Tracks: Debt items, Documentation gaps
+
+### Task Master (`Dashboards/Task Master.md`)
+- Multi-filter Kanban view
+- Sections: High Priority (P0), Architecture Debt, By Project, Inbox
+- Uses Obsidian Tasks plugin
+
+### Tech Debt (`Dashboards/Tech Debt.md`)
+- Tracker for critical architecture debt
+- Organized by project
+- Links to related ADRs
+
+### AI Engineering MOC (`Dashboards/AI Engineering MOC.md`)
+- Map of Content for AI projects
+- Trinity Architecture overview
+- Code snippets by category
+
+---
+
+## File Conventions
+
+### YAML Frontmatter (Required for Projects)
+
+```yaml
+---
+type: project
+status: active | alpha | maintenance | stable | live | incubating
+priority: P0 | P1 | P2 | P3
+tech-stack:
+  - "[[Concepts/React|React]]"
+  - "[[Concepts/TypeScript|TypeScript]]"
+repo-path: folder-name-in-workspace
+live-url: https://...
+created: YYYY-MM-DD
+updated: YYYY-MM-DD
+---
+```
+
+### Obsidian Linking
+
+```markdown
+# Internal links
+[[Projects/Neuman Brain]]
+[[Projects/Neuman Brain|Brain]]  # With alias
+[[Concepts/React]]
+
+# External file links (to code)
+[[../system.knowledgebase/CLAUDE.md|Project Guidelines]]
+
+# Dataview queries
+```dataview
+TABLE status, priority FROM "Projects" WHERE type = "project"
+```
+```
+
+### Naming Conventions
+
+| Type | Convention | Example |
+|------|------------|---------|
+| Projects | Title Case | `Neuman Brain.md` |
+| Concepts | Title Case | `Local-First.md` |
+| Decisions | ID + Title | `LZG-001 CSV Source of Truth.md` |
+| Snippets | Descriptive | `RAG Context Generator.md` |
+| Journal | Date format | `2025-12-14.md` |
+
+---
+
+## Maintenance Tasks
+
+### Daily
+- [ ] Update `Journal/YYYY-MM-DD.md` with session logs
+
+### When Adding a Project
+1. Create `Projects/<Name>.md` using template
+2. Add to `Home.md` project table
+3. Create any needed ADRs in `Decisions/`
+4. Update `Dashboards/Active Projects.md` if manual entries exist
+
+### When Learning New Tech
+1. Create `Concepts/<Technology>.md`
+2. Link from relevant project files
+3. Add useful snippets to `Snippets/`
+
+### When Making Architecture Decisions
+1. Use `Templates/ADR - Decision Record.md`
+2. Save as `Decisions/<ID>-<Title>.md`
+3. Link from affected project files
+
+---
+
+## Integration with Claude Code
+
+This vault complements the Claude Code setup:
+
+| Location | Purpose |
+|----------|---------|
+| `_meta.notes/` | Human-readable documentation hub |
+| `~/.claude/CLAUDE.md` | Global AI coding rules |
+| `<workspace>/CLAUDE.md` | Workspace-specific rules |
+| `<project>/CLAUDE.md` | Project-specific rules |
+
+**Workflow:** Document decisions here → Reference in CLAUDE.md files → Claude follows the rules.
+
+---
+
+## Obsidian Plugins Used
+
+| Plugin | Purpose |
+|--------|---------|
+| **Dataview** | Dynamic tables and queries |
+| **Tasks** | Task tracking with due dates |
+| **Templater** | Template system with variables |
+| **Calendar** | Daily notes integration |
+| **Excalidraw** | Visual diagrams (.canvas files) |
+| **Advanced Tables** | Markdown table editing |
+
+See `Obsidian Setup.md` for configuration details.
+
+---
+
+*Last updated: 2025-12-14*

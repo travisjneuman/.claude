@@ -1,0 +1,270 @@
+---
+type: project
+status: active
+priority: P0
+tech-stack:
+  - "[[Concepts/React|React 19]]"
+  - "[[Concepts/TypeScript|TypeScript 5.9]]"
+  - "[[Concepts/Local-First|Local-First]]"
+  - "[[Vite|Vite 7]]"
+  - "[[Zustand|Zustand 5]]"
+  - "[[Concepts/Dexie|Dexie 4]]"
+  - "[[Concepts/Lexical|Lexical]]"
+  - "[[Tailwind|Tailwind CSS 3]]"
+repo-path: system.knowledgebase
+live-url: https://brain.neuman.dev
+created: 2025-11-19
+updated: 2025-12-14
+---
+
+# Neuman Brain
+
+> [!INFO] Summary
+> A privacy-first, local-only productivity platform combining notes, tasks, time tracking, calendar, and AI capabilities in a single unified dashboard. All data stays on user's device (IndexedDB-based, 50GB+ capacity). "Your Brain. Your Data. Your Device."
+
+---
+
+## 📊 Metrics & Status
+
+| Metric | Current | Target |
+|--------|---------|--------|
+| **Bundle Size** | 198KB gzipped | <200KB |
+| **Test Coverage** | 221 tests passing | High |
+| **Source Files** | 515 TypeScript/TSX | - |
+| **Feature Parity** | 70-98% vs alternatives | 100% |
+| **License** | MIT (Open Source) | - |
+
+**Current Phase:** Public Beta (Foundation through Docs System complete)
+
+---
+
+## 🛠 Tech Stack (Comprehensive)
+
+### Frontend
+| Layer | Technology | Version |
+|-------|------------|---------|
+| **Framework** | [[Concepts/React\|React]] | 19 |
+| **Language** | [[Concepts/TypeScript\|TypeScript]] | 5.9 (strict mode) |
+| **Build Tool** | [[Vite]] | 7 |
+| **Styling** | [[Tailwind\|Tailwind CSS]] | 3 |
+
+### State & Storage
+| Layer | Technology | Version |
+|-------|------------|---------|
+| **State Management** | [[Zustand]] | 5 (with persist middleware) |
+| **Database** | [[Concepts/Dexie\|Dexie]] (IndexedDB) | 4 |
+| **Architecture** | [[Decisions/NB-001 Dexie Primary Storage\|Zero-Data-Host]] | - |
+
+### Rich Text & Visualization
+| Layer | Technology | Purpose |
+|-------|------------|---------|
+| **Rich Text** | [[Concepts/Lexical\|Lexical]] | Notes editor |
+| **Charts** | Recharts | Analytics |
+| **Knowledge Graph** | D3 | Visualization |
+| **Diagrams** | Konva | Canvas editor |
+| **Terminal** | XTerm.js | Terminal emulation |
+
+### AI Integration (8 Providers, 200+ Models)
+| Provider | Models |
+|----------|--------|
+| **OpenAI** | GPT-4o, o1 |
+| **Anthropic** | Claude 3.5 Sonnet/Opus |
+| **Google** | Gemini |
+| **Groq** | LPU-powered models |
+| **HuggingFace** | Open-source models |
+| **Mistral** | European GDPR-friendly |
+| **xAI** | Grok (real-time info) |
+| **DeepSeek** | Cost-effective reasoning |
+
+### Drag & Drop
+- @dnd-kit/core 6.3.1 (modern DnD)
+- @dnd-kit/sortable 10.0.0 (sortable lists)
+
+---
+
+## 🧠 Architecture: Local-First Data Flow
+
+```mermaid
+graph TD
+    User[User Action] --> Zustand[Zustand Store]
+    Zustand --> UI[React UI]
+    Zustand -->|Persist| IDB[(IndexedDB)]
+    IDB -->|Load on Boot| Zustand
+
+    subgraph "Local Device"
+    Zustand
+    UI
+    IDB
+    end
+
+    subgraph "Future Sync"
+    IDB -.->|Encrypted Blob| Cloud[Cloud Storage]
+    end
+```
+
+### Project Structure
+```
+src/
+├── app/              # App initialization
+├── components/       # Reusable UI (40+ folders)
+│   ├── notes/        # 3 selectable layout architectures
+│   ├── Analytics/    # Charts and metrics
+│   ├── DiagramCanvas/# Diagram editor
+│   ├── Graph/        # Knowledge graph
+│   ├── PhantomShell/ # Terminal emulator
+│   └── CommandPalette/ # Ctrl+K search
+├── hooks/            # 22+ custom React hooks
+├── pages/            # 7 lazy-loaded routes
+├── services/         # 11+ business logic services
+├── stores/           # 8+ Zustand stores
+├── types/            # TypeScript definitions
+└── utils/            # Utility functions
+```
+
+---
+
+## 🔑 Key Features by Module
+
+### Notes & Knowledge Management (70% Obsidian / 60% Notion parity)
+- Rich text editor (Lexical-powered)
+- Full markdown support
+- **3 selectable layout architectures:**
+  - Three-Column Layout (Apple Notes style)
+  - File Tree Layout (Obsidian/VS Code style)
+  - Tabbed Sidebar Layout (Notion style)
+- Unlimited folder nesting with drag-and-drop
+- Wiki-links with autocomplete
+- D3 knowledge graph visualization
+- Nested tags, daily journals
+- Multi-select and bulk operations
+
+### Tasks & Project Management (98% Jira/Linear parity)
+- Kanban board with drag-and-drop
+- Custom workflow columns
+- Subtasks with full properties
+- Task dependencies (Blocked By, Blocks)
+- Due dates + calendar integration
+- Priority levels (H/M/L)
+- Timeline view, habits tracking with streaks
+- 3-color badge system (progress indicators)
+
+### Time Tracking (74% Toggl parity)
+- Start/stop/pause/resume controls
+- Sidebar persistent timer
+- 48-hour recent entries
+- Project support + filtering
+- Daily/weekly/monthly stats with heat maps
+- CSV export, bulk operations
+
+### Calendar & Scheduling (65% Google Calendar parity)
+- Month/week/day views
+- Drag-and-drop event rescheduling
+- Recurring events, multi-day event support
+- Browser notifications
+- ICS import/export
+- Task integration with due dates
+
+### Dashboard & Widgets (70% Notion Dashboard parity)
+- **44+ widgets** across 5 categories:
+  - *Productivity*: TaskSummary, UpcomingEvents, RecentNotes, Pomodoro
+  - *Information*: Weather, HackerNews, Reddit, DevTo, GitHub, Quotes
+  - *Utilities*: Calculator, QRCode, ColorPalette, Countdown, WorldClock
+  - *Finance*: Crypto, Currency, StockMarket
+  - *Media*: Unsplash
+- Drag-and-drop grid layout, resizable widgets, lazy loading
+
+### AI Terminal (8 providers, 200+ models)
+- Multi-provider support with fallback
+- AES-256-GCM encrypted key storage (WebCrypto)
+- Phantom Shell: Browser terminal with Node.js via WebContainers
+- Live dev server preview
+- AI ghost commands (/ai prefix)
+
+---
+
+## 📁 Current Tasks
+
+### Active Task Files
+| Task | Status | Description |
+|------|--------|-------------|
+| `notes-dnd-and-multiselect-fixes.md` | Partial | DnD fixes, multi-select, bulk operations |
+| `notes-folder-management-batch0.md` | Complete | Bug fixes, hover actions, folder nesting |
+
+### Recent Commits
+- `45d3230` - docs: format user guides and design analysis
+- `f9a4e37` - feat(notes): add DnD and multi-select capabilities
+- `75a8170` - chore: archive completed sidebar button styling task
+
+**Archived Tasks:** 30+ completed tasks in `.archive/completed-tasks/`
+
+---
+
+## 📚 Documentation Structure
+
+### Technical Docs (`docs/technical/`)
+- `development_principles.md` - Core engineering philosophy
+- `widget_development_guide.md` - Widget system patterns
+- `local_first_architecture.md` - Data persistence patterns
+- `brain_file_format.md` - Backup/export format spec
+
+### Product Docs (`docs/product/`)
+- `feature_map.md` - Current feature status (source of truth)
+- `feature_roadmap.md` - Phased delivery plan
+- `product_vision.md` - Strategic direction
+
+### User Guides (`docs/user-guide/`)
+- Getting started, notes, tasks, calendar, time tracking, automation
+
+---
+
+## 📝 Recent Context
+
+**Completed Phases:**
+- Phase 0-6: Foundation, Notes, Graph, Habits, Docs System
+
+**Current Focus:**
+- Notes page refinement (3 layouts, DnD, multi-select)
+- Testing infrastructure validation
+- Performance optimization (bundle size review)
+
+**Next Priorities:**
+- Advanced PM (Gantt charts)
+- AI provider stability
+- Dashboard widget polish
+
+---
+
+## 🔧 Development Commands
+
+```bash
+npm run dev              # Start Vite dev server (port 5173)
+npm run build            # Production build
+npm run test             # Run Vitest
+npm run test:coverage    # Coverage report
+npm run test:e2e         # Playwright tests
+npm run type-check       # TypeScript check
+npm run lint             # ESLint
+```
+
+---
+
+## ⚡ Critical Invariants
+
+1. **Data Integrity** - Never lose user data; graceful failure handling
+2. **Privacy** - Local-first, no PII, E2EE exports, no server exfiltration
+3. **Security** - Input sanitization, no innerHTML, WebCrypto only
+4. **Date Format** - `YYYY-M-D` (non-zero-padded) across Calendar/TimeTracking
+5. **Bundle Size** - <200KB gzipped target
+
+---
+
+## 🔗 Links
+
+- [[../system.knowledgebase/CLAUDE.md|AI Guidelines]]
+- [[../system.knowledgebase/GEMINI.md|Developer Guide]]
+- [[../system.knowledgebase/README.md|README]]
+- [[Decisions/NB-001 Dexie Primary Storage|Architecture Decision: Dexie Primary Storage]]
+
+---
+
+*Last updated: 2025-12-14*

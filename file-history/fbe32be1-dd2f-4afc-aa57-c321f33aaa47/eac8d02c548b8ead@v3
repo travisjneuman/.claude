@@ -1,0 +1,717 @@
+# Code Review Remaining Items - Technical Implementation Plans
+
+**Created:** 2025-11-24
+**Status:** 🎯 READY FOR EXECUTION
+**Priority:** P1-P3 (varies by item)
+**Source:** comprehensive-code-review-opus.md
+
+---
+
+## Overview
+
+This document contains detailed technical plans for the 7 remaining items from the comprehensive code review. Items are categorized as:
+
+- **Simple** (can be done incrementally): Console logging cleanup, CSS tokens audit, documentation
+- **Complex** (require dedicated planning): State persistence, test infrastructure, widget optimizations
+
+---
+
+## SIMPLE ITEMS (Incremental Work)
+
+### Item 1: Console Log Cleanup (P3)
+
+**Status:** ✅ MAJOR SERVICES COMPLETE (270 → 108 calls remaining)
+
+**Scope:** Originally 270 console calls across 54 files → 108 remaining across 39 files
+
+**Pattern Established:**
+```typescript
+// Before
+console.log('✅ Auto-save initialized');
+console.warn('No directory configured');
+console.error('❌ Save failed:', error);
+
+// After
+import { logger } from './logger';
+const log = logger.module('ModuleName');
+
+log.info('Auto-save initialized');
+log.warn('No directory configured');
+log.error('Save failed', { error });
+```
+
+**Files by Priority:**
+
+**High Priority (Services - Production Code):**
+| File | Count | Status |
+|------|-------|--------|
+| `src/services/autoSave.ts` | 12 | ✅ DONE |
+| `src/services/brainBackup.ts` | 23 | ✅ DONE |
+| `src/services/indexedDB.ts` | 18 | ✅ DONE |
+| `src/services/storageMigration.ts` | 11 | ✅ DONE |
+| `src/services/migration.ts` | 5 | ✅ DONE |
+| `src/services/backupPreferences.ts` | 5 | ✅ DONE |
+| `src/services/eventReminders.ts` | 2 | ✅ DONE |
+| `src/services/ai/providerRouter.ts` | 3 | ✅ DONE |
+
+**Medium Priority (Stores):**
+| File | Count | Status |
+|------|-------|--------|
+| `src/stores/useFoldersStore.ts` | 29 | ✅ DONE |
+| `src/stores/useNotesStore.ts` | 31 | ✅ DONE |
+| `src/stores/useKanbanStore.ts` | 9 | ✅ DONE |
+| `src/stores/useTerminalStore.ts` | 3 | ✅ DONE |
+| `src/stores/useUndoStore.ts` | 7 | ✅ DONE |
+| `src/stores/useCalendarStore.ts` | 1 | ✅ DONE |
+| `src/stores/useTimeTrackingStore.ts` | 1 | ✅ DONE |
+
+**Low Priority (Components - Debug Only):**
+- Components can keep console.log for now (stripped by minifier in production)
+- AI provider validation errors (1 call each) - only triggered during setup
+- errorService.ts (6 calls) - intentional development debugging with formatted output
+- logger.ts (8 calls) - the logger itself, intentional
+
+**Remaining 108 calls are in:**
+- UI components (debug-only, stripped in production)
+- testDataGenerator.ts (test utility)
+- AI providers (validation errors only)
+
+**Execution:** ✅ Critical services complete. Remaining can be addressed incrementally.
+
+---
+
+### Item 2: CSS Design Tokens Audit (P3)
+
+**Status:** ✅ COMPLETE
+
+**What Was Done:**
+1. [x] Audited `tailwind.config.js` for existing tokens
+2. [x] Found CSS variables were referenced but NOT defined in :root
+3. [x] Added all missing CSS custom properties to `src/index.css`
+4. [x] Added tertiary text colors to tailwind.config.js
+
+**CSS Variables Added to index.css:**
+```css
+:root {
+  /* Surface colors (backgrounds) */
+  --surface-light: #FFFFFF;
+  --surface-light-elevated: #F3F4F6;
+  --surface-dark: #000000;
+  --surface-dark-elevated: #1A1A1A;
+
+  /* Text colors */
+  --text-light-primary: #000000;
+  --text-light-secondary: #6B7280;
+  --text-light-tertiary: #9CA3AF;
+  --text-dark-primary: #FFFFFF;
+  --text-dark-secondary: #D1D5DB;
+  --text-dark-tertiary: #6B7280;
+
+  /* Border colors */
+  --border-light: #E2E8F0;
+  --border-dark: rgba(255, 255, 255, 0.1);
+
+  /* Accent colors */
+  --accent-blue: #3B82F6;
+  --accent-blue-hover: #2563EB;
+  --accent-magenta: #E91E8C;
+  --accent-magenta-hover: #D11A7C;
+  --accent-cyan: #00C9FF;
+  --accent-cyan-hover: #00B3E6;
+
+  /* Status colors */
+  --status-success: #10B981;
+  --status-warning: #F59E0B;
+  --status-error: #EF4444;
+  --status-info: #3B82F6;
+}
+```
+
+**Execution:** Single session audit + documentation.
+
+---
+
+### Item 3: Documentation Gaps (P3)
+
+**Status:** 🔲 NOT STARTED
+
+**Scope:** Add JSDoc to undocumented exports in key files.
+
+**Files Needing Documentation:**
+1. `src/types.ts` - Core type definitions
+2. `src/stores/*.ts` - Store interfaces and actions
+3. `src/services/*.ts` - Service APIs
+4. `src/hooks/*.ts` - Custom hook parameters/returns
+
+**Documentation Standard:**
+```typescript
+/**
+ * Brief description of what this does
+ * @param paramName - Description
+ * @returns Description of return value
+ * @example
+ * const result = myFunction('value');
+ */
+```
+
+**Execution:** Add docs when touching files for other work.
+
+---
+
+## COMPLEX ITEMS (Require Dedicated Sessions)
+
+### Item 4: Unified State Persistence Layer (P1)
+
+**Status:** ✅ COMPLETE
+
+**Problem Statement:**
+Different stores use inconsistent persistence strategies:
+- `useWidgetStore.ts` - Zustand persist middleware only
+- `useTimeTrackingStore.ts` - Zustand persist + IndexedDB + localStorage backup
+- `useCalendarStore.ts` - Mixed approach
+- Dashboard background - Direct localStorage in component
+
+**Goal:** Single source of truth through IndexedDB with Zustand as cache.
+
+**Architecture:**
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                    React Components                      │
+└────────────────────────┬────────────────────────────────┘
+                         │
+┌────────────────────────▼────────────────────────────────┐
+│                    Zustand Stores                        │
+│  (In-memory state + optimistic updates)                  │
+└────────────────────────┬────────────────────────────────┘
+                         │
+┌────────────────────────▼────────────────────────────────┐
+│              Persistence Layer (NEW)                     │
+│  - Debounced writes to IndexedDB                        │
+│  - Conflict resolution                                   │
+│  - Version migration                                     │
+└────────────────────────┬────────────────────────────────┘
+                         │
+┌────────────────────────▼────────────────────────────────┐
+│                    IndexedDB                             │
+│  (Single source of truth)                                │
+└─────────────────────────────────────────────────────────┘
+```
+
+**Implementation Phases:**
+
+**Phase 1: Create Persistence Service (2-3 hours)**
+```typescript
+// src/services/persistenceService.ts
+interface PersistenceConfig {
+  storeName: string;
+  version: number;
+  debounceMs: number;
+  migrations: Migration[];
+}
+
+class PersistenceService {
+  // Write state to IndexedDB with debouncing
+  persist<T>(key: string, data: T): Promise<void>;
+
+  // Read state from IndexedDB
+  hydrate<T>(key: string): Promise<T | null>;
+
+  // Subscribe to external changes (other tabs)
+  subscribe(callback: (key: string, data: unknown) => void): () => void;
+}
+```
+
+**Phase 2: Create Zustand Middleware (2-3 hours)**
+```typescript
+// src/stores/middleware/indexedDBPersist.ts
+export const indexedDBPersist = <T>(
+  config: PersistenceConfig,
+  persistenceService: PersistenceService
+) => (
+  set: SetState<T>,
+  get: GetState<T>,
+  api: StoreApi<T>
+) => {
+  // Hydrate on init
+  // Persist on changes (debounced)
+  // Listen for external changes
+};
+```
+
+**Phase 3: Migrate Stores (4-6 hours)**
+1. `useWidgetStore.ts` - Simplest, start here
+2. `useTimeTrackingStore.ts` - Most complex, has existing IndexedDB
+3. `useNotesStore.ts` - Large data, needs chunking
+4. `useCalendarStore.ts` - Events data
+5. `useFoldersStore.ts` - Folder structure
+6. `useKanbanStore.ts` - Board data
+
+**Phase 4: Remove Legacy Persistence (1-2 hours)**
+- Remove Zustand persist middleware
+- Remove direct localStorage calls
+- Remove duplicate IndexedDB logic
+
+**Estimated Total:** 10-14 hours
+
+**Risks:**
+- Data migration from existing persistence
+- Cross-tab synchronization edge cases
+- Large state causing IndexedDB quota issues
+
+**Success Criteria:**
+- [ ] All stores use single persistence layer
+- [ ] Data survives page refresh
+- [ ] Cross-tab sync works
+- [ ] No data loss during migration
+- [ ] Performance within 100ms for hydration
+
+---
+
+### Item 5: Test Infrastructure Setup (P1)
+
+**Status:** ✅ COMPLETE
+
+**Current State:** 79 tests passing across stores, components, and widgets.
+
+**Goal:** Vitest setup with 80%+ coverage on critical paths.
+
+**Architecture:**
+
+```
+tests/
+├── setup.ts              # Test configuration
+├── mocks/
+│   ├── indexedDB.ts      # IndexedDB mock
+│   ├── crypto.ts         # WebCrypto mock
+│   └── fileSystem.ts     # File System Access mock
+├── unit/
+│   ├── services/         # Service unit tests
+│   ├── stores/           # Store unit tests
+│   └── utils/            # Utility unit tests
+├── integration/
+│   └── persistence/      # Persistence layer tests
+└── e2e/                  # End-to-end tests (future)
+```
+
+**Implementation Phases:**
+
+**Phase 1: Setup Vitest (1-2 hours)**
+```typescript
+// vitest.config.ts
+export default defineConfig({
+  test: {
+    environment: 'jsdom',
+    globals: true,
+    setupFiles: ['./tests/setup.ts'],
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'json', 'html'],
+      include: ['src/services/**', 'src/stores/**'],
+      exclude: ['**/*.d.ts', '**/index.ts'],
+    },
+  },
+});
+```
+
+**Phase 2: Create Mocks (2-3 hours)**
+```typescript
+// tests/mocks/indexedDB.ts
+import { vi } from 'vitest';
+
+export const mockIndexedDB = () => {
+  const stores = new Map<string, Map<string, unknown>>();
+
+  return {
+    open: vi.fn().mockResolvedValue({
+      transaction: vi.fn(),
+      objectStoreNames: { contains: vi.fn() },
+      // ... full mock
+    }),
+  };
+};
+```
+
+**Phase 3: Write Critical Tests (4-6 hours)**
+
+**Priority 1 - Security (encryption)**
+```typescript
+// tests/unit/services/encryptionWebCrypto.test.ts
+describe('encryptionWebCrypto', () => {
+  test('encrypts and decrypts correctly', async () => {
+    const plaintext = 'secret-api-key';
+    const password = 'test-password-123';
+
+    const encrypted = await encrypt(plaintext, password);
+    const decrypted = await decrypt(encrypted, password);
+
+    expect(decrypted).toBe(plaintext);
+  });
+
+  test('fails with wrong password', async () => {
+    const encrypted = await encrypt('secret', 'correct');
+    await expect(decrypt(encrypted, 'wrong')).rejects.toThrow();
+  });
+
+  test('uses 600k PBKDF2 iterations', async () => {
+    // Verify config
+  });
+});
+```
+
+**Priority 2 - Data Persistence**
+```typescript
+// tests/unit/services/indexedDB.test.ts
+describe('indexedDB service', () => {
+  test('saves and retrieves data');
+  test('handles large data');
+  test('runs migrations');
+  test('recovers from corruption');
+});
+```
+
+**Priority 3 - State Management**
+```typescript
+// tests/unit/stores/useTimeTrackingStore.test.ts
+describe('useTimeTrackingStore', () => {
+  test('adds time entry');
+  test('updates time entry');
+  test('deletes time entry');
+  test('persists to storage');
+});
+```
+
+**Phase 4: CI Integration (1 hour)**
+- Add test step to pre-commit hook
+- Add coverage reporting
+- Set minimum coverage thresholds
+
+**Estimated Total:** 8-12 hours
+
+**Success Criteria:**
+- [ ] Vitest runs with `npm run test`
+- [ ] Coverage report generated
+- [ ] 80%+ coverage on src/services/encryption*.ts
+- [ ] 60%+ coverage on src/stores/*.ts
+- [ ] Tests pass in CI
+
+---
+
+### Item 6: Widget Registry Optimization (P2)
+
+**Status:** ✅ COMPLETE
+
+**Problem Statement:**
+Dashboard.tsx has 45+ individual lazy imports:
+```typescript
+const QuoteWidget = lazy(() => import('../widgets/Dashboard/QuoteWidget').then(m => ({ default: m.QuoteWidget })));
+// Repeated 45+ times
+```
+
+**Goal:** Centralized registry with dynamic loading and better code splitting.
+
+**Architecture:**
+
+```typescript
+// src/widgets/Dashboard/registry.ts
+export interface WidgetDefinition {
+  id: string;
+  name: string;
+  category: WidgetCategory;
+  component: LazyExoticComponent<ComponentType<WidgetProps>>;
+  defaultSize: 'small' | 'medium' | 'large';
+  minSize?: { cols: number; rows: number };
+  icon: string;
+}
+
+// Auto-discovery using Vite glob imports
+const widgetModules = import.meta.glob<{ default: ComponentType }>('./*/index.tsx');
+
+export const widgetRegistry: Map<string, WidgetDefinition> = new Map();
+
+// Register all widgets
+for (const [path, loader] of Object.entries(widgetModules)) {
+  const id = path.match(/\.\/(.+)\/index\.tsx/)?.[1];
+  if (id) {
+    widgetRegistry.set(id, {
+      id,
+      component: lazy(loader),
+      // ... metadata from widget's config export
+    });
+  }
+}
+```
+
+**Implementation Phases:**
+
+**Phase 1: Create Registry Types (1 hour)**
+```typescript
+// src/widgets/Dashboard/types.ts
+export interface WidgetConfig {
+  id: string;
+  name: string;
+  description: string;
+  category: WidgetCategory;
+  icon: string;
+  defaultSize: WidgetSize;
+  minSize?: { cols: number; rows: number };
+  maxSize?: { cols: number; rows: number };
+}
+```
+
+**Phase 2: Update Widget Structure (2-3 hours)**
+```
+widgets/Dashboard/
+├── registry.ts           # Central registry
+├── types.ts             # Widget types
+├── QuoteWidget/
+│   ├── index.tsx        # Widget component
+│   └── config.ts        # Widget metadata
+├── WeatherWidget/
+│   ├── index.tsx
+│   └── config.ts
+└── ...
+```
+
+**Phase 3: Implement Registry (2-3 hours)**
+- Vite glob imports for auto-discovery
+- Lazy loading with error boundaries
+- Preloading for visible widgets
+
+**Phase 4: Migrate Dashboard.tsx (2-3 hours)**
+```typescript
+// Before: 45+ individual imports
+const QuoteWidget = lazy(() => ...);
+
+// After: Single registry lookup
+const WidgetComponent = widgetRegistry.get(widgetId)?.component;
+```
+
+**Phase 5: Chunk Optimization (1-2 hours)**
+- Group related widgets into chunks
+- Configure Vite manual chunks
+- Verify bundle sizes
+
+**Estimated Total:** 8-12 hours
+
+**Success Criteria:**
+- [ ] Single registry for all widgets
+- [ ] Dashboard.tsx under 200 lines
+- [ ] Widget metadata centralized
+- [ ] Bundle size unchanged or smaller
+- [ ] Load time unchanged or faster
+
+---
+
+### Item 7: Widget Loading/Error State Integration (P2)
+
+**Status:** ✅ COMPLETE
+
+**Problem Statement:**
+- `Widget.tsx` (container) has no loading/error states
+- `BaseWidget.tsx` (content) has loading/error states
+- Inconsistent UX across widgets
+
+**Goal:** Unified loading/error handling for all widgets.
+
+**Architecture:**
+
+```
+┌────────────────────────────────────────┐
+│  Widget.tsx (Container)                 │
+│  - Drag handle, controls, header       │
+│  - Error boundary (already added)      │
+│  ┌──────────────────────────────────┐  │
+│  │  BaseWidget.tsx (Content)        │  │
+│  │  - Loading spinner               │  │
+│  │  - Error state with retry        │  │
+│  │  - Empty state                   │  │
+│  │  ┌────────────────────────────┐  │  │
+│  │  │  Actual Widget Content     │  │  │
+│  │  └────────────────────────────┘  │  │
+│  └──────────────────────────────────┘  │
+└────────────────────────────────────────┘
+```
+
+**Implementation Phases:**
+
+**Phase 1: Enhance BaseWidget (1-2 hours)**
+```typescript
+export interface BaseWidgetProps {
+  // Existing
+  title: string;
+  icon: string;
+  children: React.ReactNode;
+  loading?: boolean;
+  error?: string | null;
+  onRefresh?: () => void;
+
+  // New
+  isEmpty?: boolean;
+  emptyMessage?: string;
+  emptyAction?: { label: string; onClick: () => void };
+  retryCount?: number;
+  maxRetries?: number;
+}
+```
+
+**Phase 2: Create useWidgetData Hook (2-3 hours)**
+```typescript
+// src/hooks/useWidgetData.ts
+export function useWidgetData<T>(
+  fetcher: () => Promise<T>,
+  options: {
+    refreshInterval?: number;
+    retryOnError?: boolean;
+    maxRetries?: number;
+  } = {}
+) {
+  const [data, setData] = useState<T | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [retryCount, setRetryCount] = useState(0);
+
+  const refresh = useCallback(async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const result = await fetcher();
+      setData(result);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : 'Unknown error');
+      if (options.retryOnError && retryCount < (options.maxRetries ?? 3)) {
+        setRetryCount(c => c + 1);
+      }
+    } finally {
+      setLoading(false);
+    }
+  }, [fetcher, retryCount, options]);
+
+  return { data, loading, error, refresh, retryCount };
+}
+```
+
+**Phase 3: Migrate Widgets (4-6 hours)**
+```typescript
+// Example: WeatherWidget migration
+export const WeatherWidget: React.FC = () => {
+  const { data, loading, error, refresh } = useWidgetData(
+    () => fetchWeather(),
+    { refreshInterval: 300000 } // 5 minutes
+  );
+
+  return (
+    <BaseWidget
+      title="Weather"
+      icon="🌤️"
+      loading={loading}
+      error={error}
+      onRefresh={refresh}
+      isEmpty={!data}
+      emptyMessage="No weather data available"
+    >
+      {data && <WeatherDisplay data={data} />}
+    </BaseWidget>
+  );
+};
+```
+
+**Estimated Total:** 7-11 hours
+
+**Success Criteria:**
+- [ ] All widgets have loading states
+- [ ] All widgets have error states with retry
+- [ ] Empty states are handled consistently
+- [ ] useWidgetData hook documented
+- [ ] No widget crashes break the dashboard
+
+---
+
+## Execution Order
+
+**Recommended sequence:**
+
+1. **Simple Items** (ongoing, parallel)
+   - Console log cleanup (2-3 files/session)
+   - CSS tokens audit (1 session)
+   - Documentation (as needed)
+
+2. **Test Infrastructure** (P1, do first)
+   - Enables validation of other changes
+   - 8-12 hours
+
+3. **Widget Loading/Error Integration** (P2)
+   - Lower risk, immediate UX benefit
+   - 7-11 hours
+
+4. **Widget Registry Optimization** (P2)
+   - Depends on widget error integration
+   - 8-12 hours
+
+5. **Unified State Persistence** (P1, do last)
+   - Highest risk, most impact
+   - Needs thorough testing
+   - 10-14 hours
+
+**Total Estimated Time:** 33-49 hours (spread over multiple sessions)
+
+---
+
+## Review Section
+
+### Session: 2025-11-24/25
+
+**Items Completed:**
+
+**Item 4: Unified State Persistence Layer ✅**
+- Enhanced `src/lib/syncedStorage.ts` with comprehensive documentation
+- Added pre-configured `indexedDBStorage` export for Zustand persist
+- Added `createPersistConfig<T>()` utility function
+- Documented two-tier storage strategy (IndexedDB for user data, localStorage for UI preferences)
+- Existing stores already use the pattern via `createSyncedStorage()`
+
+**Item 5: Test Infrastructure Setup ✅**
+- Fixed 7 failing tests → 79 tests now passing
+- Fixed calendar week navigation tests (timezone issue with Date parsing)
+- Fixed calendar deleteEvent test (unique ID issue with Date.now())
+- Updated localStorage persistence tests to be storage-agnostic
+- Added `eventReminders` mock to vitest.setup.ts
+
+**Item 6: Widget Registry Optimization ✅**
+- Enhanced `src/widgets/Dashboard/WidgetRegistry.ts` with:
+  - `WIDGET_FILE_NAMES` mapping (44+ widget IDs → file names)
+  - `createLazyWidget()` function for dynamic lazy loading
+  - `getWidgetComponent()` and `getWidgetComponentMap()` exports
+- Updated `src/pages/Dashboard.tsx`:
+  - Removed ~100 lines of individual lazy imports
+  - Now uses centralized registry via `getWidgetComponentMap()`
+- Fixed Vite dynamic import warning by adding `.tsx` extension
+
+**Item 7: Widget Loading/Error State Integration ✅**
+- Enhanced `src/components/Widget.tsx` with:
+  - `loading`, `error`, `onRefresh` props
+  - Loading spinner with proper styling
+  - Error state with retry button
+  - Refresh button in header when `onRefresh` provided
+- Updated `src/widgets/Weather.tsx` as reference implementation
+- Added 6 new Widget tests for loading/error states
+- Total tests: 73 → 79
+
+**Remaining Work:**
+- Item 1 (Console Log Cleanup): Major services done, 108 calls remain in low-priority files
+- Item 2 (CSS Tokens): Complete
+- Item 3 (Documentation): Not started, low priority
+
+**Files Modified:**
+- `config/vitest.setup.ts`
+- `src/types/index.ts`
+- `src/components/Widget.tsx`
+- `src/widgets/Weather.tsx`
+- `src/widgets/Dashboard/WidgetRegistry.ts`
+- `src/pages/Dashboard.tsx`
+- `src/lib/syncedStorage.ts`
+- `src/stores/__tests__/useCalendarStore.test.ts`
+- `src/stores/__tests__/useKanbanStore.test.ts`
+- `src/stores/__tests__/useWeatherStore.test.ts`
+- `src/components/__tests__/Widget.test.tsx`
+- `src/widgets/Kanban/__tests__/KanbanCard.test.tsx`

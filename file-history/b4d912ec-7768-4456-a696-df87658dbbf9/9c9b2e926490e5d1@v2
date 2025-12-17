@@ -1,0 +1,339 @@
+# Sidebar Navigation Component Guide
+
+**Last Updated:** 2025-11-27
+**Status:** Active Standard
+**Applies To:** `src/components/Sidebar.tsx`
+
+---
+
+## Purpose
+
+This guide establishes the standard pattern for sidebar navigation items in Neuman Brain. Following this guide ensures:
+- Visual consistency across all navigation items
+- Proper alignment of expand/collapse buttons
+- Consistent drag-and-drop behavior
+- Predictable user experience
+- Easier maintenance and future additions
+
+---
+
+## Navigation Item Types
+
+### Fixed Navigation Items
+**Definition:** Items that remain at the top of the sidebar and cannot be reordered by users.
+
+**Current Implementation:**
+- Dashboard (always first, includes Link Library as child)
+
+**Pattern:**
+```typescript
+const fixedNavigation: NavItem[] = [
+  {
+    icon: '🏠',
+    label: 'Dashboard',
+    path: '/',
+    shortcut: 'D',
+    hasSettings: true,          // Optional: adds settings button
+    defaultExpanded: true,       // Optional: starts expanded
+    children: [                  // Optional: sub-pages
+      { icon: '🔗', label: 'Link Library', path: '/links' },
+    ],
+  },
+];
+```
+
+### Draggable Navigation Items
+**Definition:** Items that users can drag to reorder according to their preference.
+
+**Current Implementation:**
+- Schedule (with sub-pages: Timer, Entries, Summary, Calendar, Projects)
+- Notes (with sub-pages: Graph, Diagrams, Forms)
+- Tasks (no sub-pages)
+
+**Pattern:**
+```typescript
+const draggableNavigation: NavItem[] = [
+  {
+    icon: '📅',
+    label: 'Schedule',
+    path: '/schedule',
+    shortcut: 'P',
+    hasSettings: false,
+    defaultExpanded: false,
+    children: [
+      { icon: '⏱️', label: 'Timer', path: '/schedule?tab=timer' },
+      { icon: '📋', label: 'Entries', path: '/schedule?tab=entries' },
+      // ... more children
+    ],
+  },
+];
+```
+
+---
+
+## NavItem Interface
+
+```typescript
+interface NavItem {
+  icon: string;              // Emoji icon (20px display size)
+  label: string;             // Display name
+  path: string;              // Route path
+  shortcut?: string;         // Optional keyboard shortcut letter
+  hasSettings?: boolean;     // Show settings gear button (hover)
+  children?: NavItem[];      // Sub-pages (makes item expandable)
+  defaultExpanded?: boolean; // Initial expansion state
+}
+```
+
+---
+
+## Visual Specifications
+
+### Spacing & Sizing
+- **Item Height:** `h-10` (40px) for parent items
+- **Child Height:** `h-9` (36px) for sub-items
+- **Icon Size:** `w-5 h-5` (20px) for main icons
+- **Child Icon Size:** `w-4 h-4` (16px) for child icons
+- **Button Size:** `w-5 h-5` (20px) for expand/collapse buttons
+- **Gap:** `gap-3` (12px) between elements
+- **Padding:** `px-3` (12px horizontal padding)
+- **Child Indentation:** `ml-6` (24px left margin)
+
+### Button Alignment (Critical!)
+All buttons within a navigation item must be aligned horizontally:
+1. Icon (left, 20px)
+2. Label (flex-1, takes remaining space)
+3. Settings button (if `hasSettings: true`, 20px)
+4. Expand/collapse button (if has children, 20px)
+
+**Layout Pattern:**
+```
+[Icon] [Label................] [⚙️] [▶]
+  20px  flex-1                20px  20px
+```
+
+### Drag Behavior
+- **Entire Item Draggable:** The whole `<li>` element has drag listeners
+- **Cursor:** `cursor-grab` on hover, `cursor-grabbing` when dragging
+- **No Separate Handle:** No drag handle icon (removed as of 2025-11-27)
+- **Activation Distance:** 5px movement required to start drag
+- **Visual Feedback:** `opacity: 0.5` while dragging
+
+---
+
+## Rendering Patterns
+
+### Fixed Items (Dashboard)
+Fixed items render inline without drag-and-drop wrapper:
+
+```tsx
+<li key={item.path}>
+  <Link to={item.path} className="...">
+    {/* Icon */}
+    <span className="w-5 h-5 flex items-center justify-center flex-shrink-0 text-lg">
+      {item.icon}
+    </span>
+
+    {/* Label */}
+    <span className="flex-1 text-base leading-5 font-medium truncate">
+      {item.label}
+    </span>
+
+    {/* Settings button (if hasSettings) */}
+    {item.hasSettings && (
+      <button className="w-5 h-5 flex items-center justify-center flex-shrink-0">
+        <span className="text-sm">⚙</span>
+      </button>
+    )}
+
+    {/* Expand/collapse button (if children) */}
+    {hasChildren && (
+      <button className="w-5 h-5 flex items-center justify-center flex-shrink-0">
+        <span className={`text-xs ${expanded ? 'rotate-90' : ''}`}>▶</span>
+      </button>
+    )}
+  </Link>
+</li>
+```
+
+### Draggable Items (Schedule, Notes, Tasks)
+Draggable items use `SortableNavItem` component with `@dnd-kit`:
+
+```tsx
+const SortableNavItem = ({ item, isCollapsed, isActive }) => {
+  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
+    id: item.path
+  });
+
+  return (
+    <li
+      ref={setNodeRef}
+      style={{ transform, transition }}
+      {...attributes}
+      {...listeners}
+      className="cursor-grab active:cursor-grabbing"
+    >
+      <Link to={item.path} className="...">
+        {/* Same structure as fixed items */}
+      </Link>
+    </li>
+  );
+};
+```
+
+**Key Difference:** Drag listeners are on the `<li>` element, not a separate handle.
+
+---
+
+## Sub-Pages (Children)
+
+### When to Use
+Add children when a top-level page has multiple distinct views/sections:
+- Schedule → Timer, Entries, Summary, Calendar, Projects
+- Notes → Graph, Diagrams, Forms
+
+### Pattern
+```tsx
+{hasChildren && expanded && !isCollapsed && (
+  <ul className="ml-6 mt-1 space-y-1">
+    {item.children!.map((child) => (
+      <li key={child.path}>
+        <Link to={child.path} className="...">
+          {/* Smaller icon (w-4 h-4) */}
+          <span className="w-4 h-4 flex items-center justify-center flex-shrink-0 text-sm">
+            {child.icon}
+          </span>
+          {/* Smaller label (text-sm) */}
+          <span className="flex-1 text-sm leading-5 font-medium truncate">
+            {child.label}
+          </span>
+        </Link>
+      </li>
+    ))}
+  </ul>
+)}
+```
+
+---
+
+## Keyboard & Accessibility
+
+### Keyboard Shortcuts
+- **Cmd/Ctrl + B:** Toggle sidebar collapse
+- **Cmd/Ctrl + D:** Open today's daily note (if enabled)
+
+### ARIA Attributes
+- Sidebar: `aria-label="Main navigation sidebar"`
+- Navigation: `aria-label="Primary navigation"`
+- Expand button: `title="Expand" or "Collapse"`
+- Settings button: `aria-label="{label} page settings"`
+
+### Focus Management
+- All buttons must be keyboard accessible
+- Focus states must be visible (`:focus-visible`)
+- Tab order must be logical
+
+---
+
+## Adding a New Navigation Item
+
+### Checklist
+
+#### 1. Decide: Fixed or Draggable?
+- **Fixed:** Only if it should always be first (like Dashboard)
+- **Draggable:** For all other top-level pages
+
+#### 2. Add to Navigation Array
+```typescript
+// For draggable items (most common)
+const draggableNavigation: NavItem[] = [
+  // ... existing items
+  {
+    icon: '🆕',
+    label: 'New Feature',
+    path: '/new-feature',
+    shortcut: 'F',
+    hasSettings: false,
+    children: [], // Optional
+  },
+];
+```
+
+#### 3. Update Store Default Order
+If adding a draggable item, update `useSidebarNavStore.ts`:
+
+```typescript
+const DEFAULT_NAV_ORDER = ['/schedule', '/notes', '/tasks', '/new-feature'];
+```
+
+#### 4. Test Checklist
+- [ ] Icon displays correctly (20px size)
+- [ ] Label truncates if too long
+- [ ] Hover states work (background color change)
+- [ ] Active state shows blue accent bar
+- [ ] If draggable: can be reordered
+- [ ] If draggable: order persists after refresh
+- [ ] If has children: expand/collapse works
+- [ ] If has children: button aligns with other expand buttons
+- [ ] If has settings: gear icon appears on hover
+- [ ] Works in collapsed sidebar mode
+- [ ] Works in mobile drawer mode
+- [ ] Keyboard navigation works
+
+---
+
+## Common Pitfalls
+
+### ❌ Wrong: Hardcoded Colors
+```tsx
+<div className="bg-blue-500 text-white">
+```
+
+### ✅ Right: Semantic Tokens
+```tsx
+<div className="bg-surface-light-elevated dark:bg-surface-dark-elevated text-text-light-primary dark:text-text-dark-primary">
+```
+
+### ❌ Wrong: Inconsistent Button Sizes
+```tsx
+<button className="w-6 h-6"> {/* 24px - wrong! */}
+```
+
+### ✅ Right: Standard Button Size
+```tsx
+<button className="w-5 h-5"> {/* 20px - correct */}
+```
+
+### ❌ Wrong: Missing Expand Button Alignment
+```tsx
+{/* Settings and expand buttons in separate containers */}
+<div>{settingsButton}</div>
+<div>{expandButton}</div>
+```
+
+### ✅ Right: Buttons in Same Flex Container
+```tsx
+{/* Both buttons in same parent, using flex gap */}
+<>
+  {settingsButton}
+  {expandButton}
+</>
+```
+
+---
+
+## Version History
+
+### 2025-11-27: Initial Standard
+- Moved Schedule from fixed to draggable navigation
+- Removed separate drag handle icon (entire item is draggable)
+- Documented alignment specifications for expand/collapse buttons
+- Established fixed vs draggable navigation patterns
+
+---
+
+## Related Documentation
+- **Component CLAUDE.md:** `src/components/CLAUDE.md`
+- **Sidebar Stores:** `src/stores/useSidebarStore.ts`, `src/stores/useSidebarNavStore.ts`, `src/stores/useNavExpansionStore.ts`
+- **Development Principles:** `docs/technical/development_principles.md`
+- **Widget System:** `docs/technical/widget_development_guide.md` (similar component patterns)

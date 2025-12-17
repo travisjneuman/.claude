@@ -1,0 +1,105 @@
+import { describe, it, expect, beforeEach } from 'vitest';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { Header } from '../Header';
+import { useThemeStore } from '../../stores/useThemeStore';
+
+describe('Header', () => {
+  beforeEach(() => {
+    // Reset theme to dark mode before each test
+    useThemeStore.setState({ mode: 'dark' });
+  });
+
+  it('should render branding', () => {
+    render(<Header />);
+
+    expect(screen.getByText(/NEUMAN/)).toBeInTheDocument();
+    expect(screen.getByText(/BRAIN/)).toBeInTheDocument();
+    expect(screen.getByText('Ultimate Management Tool')).toBeInTheDocument();
+  });
+
+  it('should render logo image', () => {
+    render(<Header />);
+
+    const logo = screen.getByAltText('Neuman Brain Logo');
+    expect(logo).toBeInTheDocument();
+    expect(logo).toHaveAttribute('src', '/images/logos/nb3.png');
+  });
+
+  it('should render theme toggle button', () => {
+    render(<Header />);
+
+    const toggleButton = screen.getByTitle(/Switch to/);
+    expect(toggleButton).toBeInTheDocument();
+  });
+
+  it('should show sun icon in dark mode', () => {
+    useThemeStore.setState({ mode: 'dark' });
+    render(<Header />);
+
+    const toggleButton = screen.getByTitle('Switch to light mode');
+    expect(toggleButton).toBeInTheDocument();
+    expect(toggleButton.textContent).toBe('☀️');
+  });
+
+  it('should show moon icon in light mode', () => {
+    useThemeStore.setState({ mode: 'light' });
+    render(<Header />);
+
+    const toggleButton = screen.getByTitle('Switch to dark mode');
+    expect(toggleButton).toBeInTheDocument();
+    expect(toggleButton.textContent).toBe('🌙');
+  });
+
+  it('should toggle theme when button is clicked', async () => {
+    const user = userEvent.setup();
+    render(<Header />);
+
+    // Start in dark mode
+    expect(useThemeStore.getState().mode).toBe('dark');
+
+    const toggleButton = screen.getByTitle('Switch to light mode');
+    await user.click(toggleButton);
+
+    // Should now be in light mode
+    expect(useThemeStore.getState().mode).toBe('light');
+  });
+
+  it('should toggle theme multiple times', async () => {
+    const user = userEvent.setup();
+    const { rerender } = render(<Header />);
+
+    // Start: dark mode
+    expect(useThemeStore.getState().mode).toBe('dark');
+
+    // Click 1: dark -> light
+    let toggleButton = screen.getByTitle('Switch to light mode');
+    await user.click(toggleButton);
+    expect(useThemeStore.getState().mode).toBe('light');
+
+    // Rerender to reflect state change
+    rerender(<Header />);
+
+    // Click 2: light -> dark
+    toggleButton = screen.getByTitle('Switch to dark mode');
+    await user.click(toggleButton);
+    expect(useThemeStore.getState().mode).toBe('dark');
+  });
+
+  it('should have correct header styling classes', () => {
+    const { container } = render(<Header />);
+
+    const header = container.querySelector('header');
+    expect(header).toHaveClass('bg-gradient-to-r');
+    expect(header).toHaveClass('from-primary-navy');
+    expect(header).toHaveClass('to-primary-cyan');
+  });
+
+  it('should hide subtitle on mobile screens', () => {
+    const { container } = render(<Header />);
+
+    const subtitle = container.querySelector('.md\\:block');
+    expect(subtitle).toHaveClass('hidden');
+    expect(subtitle).toHaveTextContent('Ultimate Management Tool');
+  });
+});

@@ -1,0 +1,519 @@
+/**
+ * Dashboard Widget Registry
+ *
+ * Central registry of all available widgets with metadata and API configuration
+ */
+
+export type WidgetCategory = 'core' | 'productivity' | 'news' | 'fun' | 'finance' | 'visual' | 'dev' | 'utility';
+
+export interface WidgetDefinition {
+  id: string;
+  name: string;
+  description: string;
+  icon: string; // Emoji icon
+  category: WidgetCategory;
+  apiUrl?: string;
+  apiKey?: string; // 'DEMO_KEY' for APIs that need keys but offer demo access
+  requiresAuth?: boolean; // If user needs to provide API key/username
+  defaultEnabled: boolean;
+}
+
+export const WIDGET_REGISTRY: Record<string, WidgetDefinition> = {
+  // Core App Widgets (always useful, enabled by default)
+  tasksummary: {
+    id: 'tasksummary',
+    name: 'Task Summary',
+    description: 'Overview of your tasks',
+    icon: '✅',
+    category: 'core',
+    defaultEnabled: true,
+  },
+
+  upcomingevents: {
+    id: 'upcomingevents',
+    name: 'Upcoming Events',
+    description: 'Your next calendar events',
+    icon: '📅',
+    category: 'core',
+    defaultEnabled: true,
+  },
+
+  recentnotes: {
+    id: 'recentnotes',
+    name: 'Recent Notes',
+    description: 'Recently updated notes',
+    icon: '📝',
+    category: 'core',
+    defaultEnabled: true,
+  },
+
+  quickadd: {
+    id: 'quickadd',
+    name: 'Quick Add Task',
+    description: 'Quickly add new tasks',
+    icon: '➕',
+    category: 'core',
+    defaultEnabled: true,
+  },
+
+  quote: {
+    id: 'quote',
+    name: 'Daily Quote',
+    description: 'Inspirational quotes to start your day',
+    icon: '💭',
+    category: 'productivity',
+    apiUrl: 'https://api.quotable.io/random',
+    defaultEnabled: true,
+  },
+
+
+  crypto: {
+    id: 'crypto',
+    name: 'Crypto Tracker',
+    description: 'BTC, ETH, SOL prices with 24h change',
+    icon: '₿',
+    category: 'finance',
+    apiUrl: 'https://api.coingecko.com/api/v3/simple/price',
+    defaultEnabled: true,
+  },
+
+  hackernews: {
+    id: 'hackernews',
+    name: 'Hacker News',
+    description: 'Top tech stories from HN',
+    icon: '📰',
+    category: 'news',
+    apiUrl: 'https://hacker-news.firebaseio.com/v0',
+    defaultEnabled: true,
+  },
+
+  facts: {
+    id: 'facts',
+    name: 'Random Facts',
+    description: 'Interesting facts and trivia',
+    icon: '🧠',
+    category: 'fun',
+    apiUrl: 'https://uselessfacts.jsph.pl/random.json',
+    defaultEnabled: false,
+  },
+
+  github: {
+    id: 'github',
+    name: 'GitHub Activity',
+    description: 'Your contributions and trending repos',
+    icon: '🐙',
+    category: 'dev',
+    apiUrl: 'https://api.github.com',
+    requiresAuth: true, // Needs username in settings
+    defaultEnabled: false,
+  },
+
+  weather: {
+    id: 'weather',
+    name: 'Weather Forecast',
+    description: '5-day weather forecast',
+    icon: '🌤️',
+    category: 'productivity',
+    apiUrl: 'https://api.open-meteo.com/v1/forecast',
+    defaultEnabled: false,
+  },
+
+  joke: {
+    id: 'joke',
+    name: 'Developer Jokes',
+    description: 'Programming jokes for a laugh',
+    icon: '😄',
+    category: 'fun',
+    apiUrl: 'https://v2.jokeapi.dev/joke/Programming',
+    defaultEnabled: false,
+  },
+
+  unsplash: {
+    id: 'unsplash',
+    name: 'Photo of the Day',
+    description: 'Beautiful photography from Unsplash',
+    icon: '📸',
+    category: 'visual',
+    apiUrl: 'https://source.unsplash.com/random',
+    defaultEnabled: false,
+  },
+
+  pomodoro: {
+    id: 'pomodoro',
+    name: 'Pomodoro Timer',
+    description: 'Focus timer for productivity',
+    icon: '⏱️',
+    category: 'productivity',
+    defaultEnabled: false,
+  },
+
+  // News & Info Widgets
+  reddit: {
+    id: 'reddit',
+    name: 'Reddit Posts',
+    description: 'Hot posts from programming subreddits',
+    icon: '📰',
+    category: 'news',
+    apiUrl: 'https://www.reddit.com/r/programming/hot.json',
+    defaultEnabled: false,
+  },
+
+  devto: {
+    id: 'devto',
+    name: 'Dev.to Articles',
+    description: 'Latest dev articles from Dev.to',
+    icon: '📝',
+    category: 'news',
+    apiUrl: 'https://dev.to/api/articles',
+    defaultEnabled: false,
+  },
+
+  // Productivity Widgets
+  wordofday: {
+    id: 'wordofday',
+    name: 'Word of the Day',
+    description: 'Expand your vocabulary',
+    icon: '📖',
+    category: 'productivity',
+    apiUrl: 'https://api.dictionaryapi.dev/api/v2/entries/en',
+    defaultEnabled: false,
+  },
+
+  currency: {
+    id: 'currency',
+    name: 'Currency Exchange',
+    description: 'Real-time exchange rates',
+    icon: '💱',
+    category: 'productivity',
+    apiUrl: 'https://api.exchangerate-api.com/v4/latest/USD',
+    defaultEnabled: false,
+  },
+
+  worldclock: {
+    id: 'worldclock',
+    name: 'World Clock',
+    description: 'Time in multiple timezones',
+    icon: '🌍',
+    category: 'productivity',
+    defaultEnabled: false,
+  },
+
+  // Utility Widgets
+  ipinfo: {
+    id: 'ipinfo',
+    name: 'IP Information',
+    description: 'Your IP address and location',
+    icon: '🌐',
+    category: 'utility',
+    apiUrl: 'https://ipapi.co/json/',
+    defaultEnabled: false,
+  },
+
+  qrcode: {
+    id: 'qrcode',
+    name: 'QR Code Generator',
+    description: 'Generate QR codes instantly',
+    icon: '📱',
+    category: 'utility',
+    defaultEnabled: false,
+  },
+
+  colorpalette: {
+    id: 'colorpalette',
+    name: 'Color Palette',
+    description: 'Random color combinations',
+    icon: '🎨',
+    category: 'utility',
+    defaultEnabled: false,
+  },
+
+  // Visual Widgets
+  weathermap: {
+    id: 'weathermap',
+    name: 'Weather & Map',
+    description: 'Interactive weather map with location',
+    icon: '🗺️',
+    category: 'visual',
+    apiUrl: 'https://api.open-meteo.com/v1/forecast',
+    defaultEnabled: true,
+  },
+
+  // Utility Widgets (New)
+  calculator: {
+    id: 'calculator',
+    name: 'Calculator',
+    description: 'Basic calculator with memory functions',
+    icon: '🔢',
+    category: 'utility',
+    defaultEnabled: false,
+  },
+
+  unitconverter: {
+    id: 'unitconverter',
+    name: 'Unit Converter',
+    description: 'Convert temperature, length, and weight units',
+    icon: '📏',
+    category: 'utility',
+    defaultEnabled: false,
+  },
+
+  countdown: {
+    id: 'countdown',
+    name: 'Countdown Timer',
+    description: 'Track countdowns to important events',
+    icon: '⏳',
+    category: 'productivity',
+    defaultEnabled: false,
+  },
+
+  shortcuts: {
+    id: 'shortcuts',
+    name: 'Keyboard Shortcuts',
+    description: 'Quick reference for app shortcuts',
+    icon: '⌨️',
+    category: 'utility',
+    defaultEnabled: false,
+  },
+
+  stockmarket: {
+    id: 'stockmarket',
+    name: 'Stock Market',
+    description: 'Real-time stock prices (AAPL, GOOGL, TSLA)',
+    icon: '📈',
+    category: 'finance',
+    apiUrl: 'https://finnhub.io/api/v1/quote',
+    defaultEnabled: false,
+  },
+
+  wikipedia: {
+    id: 'wikipedia',
+    name: 'Wikipedia',
+    description: 'Random Wikipedia articles for daily learning',
+    icon: '📚',
+    category: 'news',
+    apiUrl: 'https://en.wikipedia.org/api/rest_v1/page/random/summary',
+    defaultEnabled: false,
+  },
+
+  // Phase 2: Simple API Widgets
+  bored: {
+    id: 'bored',
+    name: 'Bored?',
+    description: 'Random activity suggestions when you\'re bored',
+    icon: '🎲',
+    category: 'fun',
+    apiUrl: 'https://www.boredapi.com/api/activity',
+    defaultEnabled: false,
+  },
+
+  dictionary: {
+    id: 'dictionary',
+    name: 'Dictionary',
+    description: 'Look up word definitions and synonyms',
+    icon: '📖',
+    category: 'utility',
+    apiUrl: 'https://api.dictionaryapi.dev/api/v2/entries/en',
+    defaultEnabled: false,
+  },
+
+  producthunt: {
+    id: 'producthunt',
+    name: 'Product Hunt',
+    description: 'Top products from Product Hunt',
+    icon: '🚀',
+    category: 'news',
+    apiUrl: 'https://www.producthunt.com/feed',
+    defaultEnabled: false,
+  },
+
+  ainews: {
+    id: 'ainews',
+    name: 'AI Research',
+    description: 'Latest AI research papers from arXiv',
+    icon: '🤖',
+    category: 'news',
+    apiUrl: 'https://export.arxiv.org/api/query',
+    defaultEnabled: false,
+  },
+
+  airquality: {
+    id: 'airquality',
+    name: 'Air Quality',
+    description: 'Current air quality index for your location',
+    icon: '🌫️',
+    category: 'productivity',
+    apiUrl: 'https://api.waqi.info',
+    defaultEnabled: false,
+  },
+
+  packagestats: {
+    id: 'packagestats',
+    name: 'NPM Stats',
+    description: 'NPM package download statistics',
+    icon: '📦',
+    category: 'dev',
+    apiUrl: 'https://api.npmjs.org/downloads',
+    defaultEnabled: false,
+  },
+
+  // Phase 3: Creative & Utility Widgets
+  pixelart: {
+    id: 'pixelart',
+    name: 'Pixel Art',
+    description: 'Simple pixel art drawing tool',
+    icon: '🎨',
+    category: 'fun',
+    defaultEnabled: false,
+  },
+
+  typingtest: {
+    id: 'typingtest',
+    name: 'Typing Test',
+    description: 'Test your typing speed (WPM)',
+    icon: '⌨️',
+    category: 'fun',
+    defaultEnabled: false,
+  },
+
+  memorygame: {
+    id: 'memorygame',
+    name: 'Memory Game',
+    description: 'Classic memory matching card game',
+    icon: '🧠',
+    category: 'fun',
+    defaultEnabled: false,
+  },
+
+  motivational: {
+    id: 'motivational',
+    name: 'Daily Motivation',
+    description: 'Inspirational quotes with beautiful images',
+    icon: '✨',
+    category: 'productivity',
+    defaultEnabled: false,
+  },
+
+  // Phase 3: Complex API Widgets
+  githubtrending: {
+    id: 'githubtrending',
+    name: 'GitHub Trending',
+    description: 'Top trending repositories on GitHub',
+    icon: '🔥',
+    category: 'dev',
+    apiUrl: 'https://api.github.com/search/repositories',
+    defaultEnabled: false,
+  },
+
+  awesomelists: {
+    id: 'awesomelists',
+    name: 'Awesome Lists',
+    description: 'Curated awesome lists (highest stars)',
+    icon: '📋',
+    category: 'dev',
+    apiUrl: 'https://api.github.com/search/repositories',
+    defaultEnabled: false,
+  },
+
+  repostats: {
+    id: 'repostats',
+    name: 'Repo Stats',
+    description: 'GitHub repository statistics',
+    icon: '📊',
+    category: 'dev',
+    apiUrl: 'https://api.github.com/repos',
+    requiresAuth: true,
+    defaultEnabled: false,
+  },
+
+  sports: {
+    id: 'sports',
+    name: 'NBA Scores',
+    description: 'Live NBA scores and game status',
+    icon: '🏀',
+    category: 'news',
+    apiUrl: 'http://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard',
+    defaultEnabled: false,
+  },
+
+
+  twitch: {
+    id: 'twitch',
+    name: 'Twitch',
+    description: 'Track your favorite Twitch streamers',
+    icon: '🎮',
+    category: 'fun',
+    requiresAuth: true,
+    defaultEnabled: false,
+  },
+
+  youtube: {
+    id: 'youtube',
+    name: 'YouTube',
+    description: 'Track YouTube channels',
+    icon: '📺',
+    category: 'fun',
+    requiresAuth: true,
+    defaultEnabled: false,
+  },
+
+  analytics: {
+    id: 'analytics',
+    name: 'Analytics',
+    description: 'Website analytics tracker',
+    icon: '📈',
+    category: 'utility',
+    requiresAuth: true,
+    defaultEnabled: false,
+  },
+
+  clipboard: {
+    id: 'clipboard',
+    name: 'Clipboard',
+    description: 'Clipboard history manager',
+    icon: '📋',
+    category: 'utility',
+    defaultEnabled: false,
+  },
+
+  tabmanager: {
+    id: 'tabmanager',
+    name: 'Tab Manager',
+    description: 'Manage browser tabs and quick links',
+    icon: '🗂️',
+    category: 'utility',
+    requiresAuth: true,
+    defaultEnabled: false,
+  },
+
+  uptime: {
+    id: 'uptime',
+    name: 'Uptime Monitor',
+    description: 'Monitor website uptime status',
+    icon: '🔔',
+    category: 'utility',
+    requiresAuth: true,
+    defaultEnabled: false,
+  },
+};
+
+// Helper to get widgets by category
+export function getWidgetsByCategory(category: WidgetCategory): WidgetDefinition[] {
+  return Object.values(WIDGET_REGISTRY).filter((w) => w.category === category);
+}
+
+// Helper to get all available widgets
+export function getAllWidgets(): WidgetDefinition[] {
+  return Object.values(WIDGET_REGISTRY);
+}
+
+// Helper to get widget by ID
+export function getWidget(id: string): WidgetDefinition | undefined {
+  return WIDGET_REGISTRY[id];
+}
+
+// Helper to get default enabled widgets
+export function getDefaultEnabledWidgets(): string[] {
+  return Object.values(WIDGET_REGISTRY)
+    .filter((w) => w.defaultEnabled)
+    .map((w) => w.id);
+}

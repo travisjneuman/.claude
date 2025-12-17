@@ -1,0 +1,552 @@
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
+import type { TimeEntry, TimeTrackingProject, EntryFilters, TimeViewMode, TimeTrackingState } from '../types';
+import { timeTrackingDb } from '../db/timeTrackingDb';
+
+interface TimeTrackingStore extends TimeTrackingState {
+  // ==================== TIMER ACTIONS ====================
+
+  /**
+   * Start a new timer
+   */
+  startTimer: (description: string, projectId?: string, taskId?: string) => void;
+
+  /**
+   * Stop the currently running timer
+   */
+  stopTimer: () => Promise<void>;
+
+  /**
+   * Update the active timer (e.g., change description or project)
+   */
+  updateActiveEntry: (updates: Partial<TimeEntry>) => void;
+
+  // ==================== ENTRY ACTIONS ====================
+
+  /**
+   * Add a manual time entry (retroactive logging)
+   */
+  addManualEntry: (entry: Omit<TimeEntry, 'id' | 'createdAt' | 'updatedAt' | 'workspaceId'>) => Promise<void>;
+
+  /**
+   * Update an existing time entry
+   */
+  updateEntry: (id: string, updates: Partial<TimeEntry>) => Promise<void>;
+
+  /**
+   * Delete a time entry
+   */
+  deleteEntry: (id: string) => Promise<void>;
+
+  /**
+   * Duplicate a time entry (for quick re-entry)
+   */
+  duplicateEntry: (id: string) => Promise<void>;
+
+  /**
+   * Continue from a previous entry (start new timer with same details)
+   */
+  continueEntry: (id: string) => void;
+
+  // ==================== PROJECT ACTIONS ====================
+
+  /**
+   * Add a new project
+   */
+  addProject: (project: Omit<TimeTrackingProject, 'id' | 'createdAt' | 'updatedAt'>) => Promise<void>;
+
+  /**
+   * Update an existing project
+   */
+  updateProject: (id: string, updates: Partial<TimeTrackingProject>) => Promise<void>;
+
+  /**
+   * Delete a project (and all its entries)
+   */
+  deleteProject: (id: string) => Promise<void>;
+
+  /**
+   * Archive a project
+   */
+  archiveProject: (id: string) => Promise<void>;
+
+  /**
+   * Unarchive a project
+   */
+  unarchiveProject: (id: string) => Promise<void>;
+
+  // ==================== QUERY ACTIONS ====================
+
+  /**
+   * Load entries from database with optional filters
+   */
+  loadEntries: (filters?: EntryFilters) => Promise<void>;
+
+  /**
+   * Load projects from database
+   */
+  loadProjects: () => Promise<void>;
+
+  /**
+   * Get entries by date range
+   */
+  getEntriesByDateRange: (start: Date, end: Date) => TimeEntry[];
+
+  /**
+   * Get entries by project
+   */
+  getEntriesByProject: (projectId: string) => TimeEntry[];
+
+  // ==================== FILTER ACTIONS ====================
+
+  /**
+   * Set filters for entry list
+   */
+  setFilters: (filters: Partial<EntryFilters>) => void;
+
+  /**
+   * Clear all filters
+   */
+  clearFilters: () => void;
+
+  /**
+   * Set view mode
+   */
+  setViewMode: (mode: TimeViewMode) => void;
+
+  // ==================== UTILITY ACTIONS ====================
+
+  /**
+   * Get total time tracked for current filters
+   */
+  getTotalTime: () => number;
+
+  /**
+   * Get time tracked by project (for reports)
+   */
+  getTimeByProject: () => Record<string, number>;
+
+  // ==================== PHASE A: KANBAN INTEGRATION ====================
+
+  /**
+   * Get all time entries for a specific Kanban card
+   */
+  getEntriesForCard: (cardId: string) => TimeEntry[];
+
+  /**
+   * Get total time logged for a specific Kanban card (in seconds)
+   */
+  getTotalTimeForCard: (cardId: string) => number;
+
+  /**
+   * Start timer for a specific Kanban card
+   */
+  startTimerForCard: (cardId: string, taskName: string) => void;
+}
+
+const DEFAULT_WORKSPACE_ID = 'default';
+
+export const useTimeTrackingStore = create<TimeTrackingStore>()(
+  persist(
+    (set, get) => ({
+      // ==================== INITIAL STATE ====================
+      activeEntry: null,
+      entries: [],
+      projects: [],
+      selectedDate: new Date().toISOString().split('T')[0],
+      selectedProject: null,
+      selectedTags: [],
+      viewMode: 'list',
+      filters: {
+        dateRange: 'last7days',
+        projectIds: [],
+        tags: [],
+        searchQuery: ''
+      },
+      reminderEnabled: false,
+      idleDetectionMinutes: 0,
+      roundingMinutes: 0,
+
+      // ==================== TIMER ACTIONS ====================
+
+      startTimer: (description, projectId, taskId) => {
+        const entry: TimeEntry = {
+          id: crypto.randomUUID(),
+          workspaceId: DEFAULT_WORKSPACE_ID,
+          description,
+          projectId,
+          taskId,
+          startTime: new Date().toISOString(),
+          duration: 0,
+          billable: false,
+          tags: [],
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        };
+
+        set({ activeEntry: entry });
+
+        // Save to localStorage for persistence (backup)
+        localStorage.setItem('activeTimer', JSON.stringify(entry));
+      },
+
+      stopTimer: async () => {
+        const { activeEntry, entries } = get();
+        if (!activeEntry) return;
+
+        const endTime = new Date().toISOString();
+        const duration = Math.floor(
+          (new Date(endTime).getTime() - new Date(activeEntry.startTime).getTime()) / 1000
+        );
+
+        const completedEntry: TimeEntry = {
+          ...activeEntry,
+          endTime,
+          duration,
+          updatedAt: new Date().toISOString()
+        };
+
+        // Save to IndexedDB
+        await timeTrackingDb.addEntry(completedEntry);
+
+        // Update state
+        set({
+          activeEntry: null,
+          entries: [completedEntry, ...entries]
+        });
+
+        // Clear localStorage backup
+        localStorage.removeItem('activeTimer');
+      },
+
+      updateActiveEntry: (updates) => {
+        const { activeEntry } = get();
+        if (!activeEntry) return;
+
+        const updatedEntry = {
+          ...activeEntry,
+          ...updates,
+          updatedAt: new Date().toISOString()
+        };
+
+        set({ activeEntry: updatedEntry });
+
+        // Update localStorage backup
+        localStorage.setItem('activeTimer', JSON.stringify(updatedEntry));
+      },
+
+      // ==================== ENTRY ACTIONS ====================
+
+      addManualEntry: async (entryData) => {
+        const { entries } = get();
+
+        const entry: TimeEntry = {
+          ...entryData,
+          id: crypto.randomUUID(),
+          workspaceId: DEFAULT_WORKSPACE_ID,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        };
+
+        // Save to IndexedDB
+        await timeTrackingDb.addEntry(entry);
+
+        // Update state
+        set({ entries: [entry, ...entries] });
+      },
+
+      updateEntry: async (id, updates) => {
+        const { entries } = get();
+
+        // Update in IndexedDB
+        await timeTrackingDb.updateEntry(id, updates);
+
+        // Update state
+        const updatedEntries = entries.map(entry =>
+          entry.id === id
+            ? { ...entry, ...updates, updatedAt: new Date().toISOString() }
+            : entry
+        );
+
+        set({ entries: updatedEntries });
+      },
+
+      deleteEntry: async (id) => {
+        const { entries } = get();
+
+        // Delete from IndexedDB
+        await timeTrackingDb.deleteEntry(id);
+
+        // Update state
+        set({ entries: entries.filter(entry => entry.id !== id) });
+      },
+
+      duplicateEntry: async (id) => {
+        const { entries } = get();
+        const entry = entries.find(e => e.id === id);
+        if (!entry) return;
+
+        const newEntry: TimeEntry = {
+          ...entry,
+          id: crypto.randomUUID(),
+          startTime: new Date().toISOString(),
+          endTime: undefined,
+          duration: 0,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        };
+
+        // Save to IndexedDB
+        await timeTrackingDb.addEntry(newEntry);
+
+        // Update state
+        set({ entries: [newEntry, ...entries] });
+      },
+
+      continueEntry: (id) => {
+        const { entries, startTimer } = get();
+        const entry = entries.find(e => e.id === id);
+        if (!entry) return;
+
+        // Start a new timer with the same details
+        startTimer(entry.description, entry.projectId, entry.taskId);
+
+        // Copy tags if any
+        const { activeEntry } = get();
+        if (activeEntry) {
+          get().updateActiveEntry({ tags: entry.tags });
+        }
+      },
+
+      // ==================== PROJECT ACTIONS ====================
+
+      addProject: async (projectData) => {
+        const { projects } = get();
+
+        const project: TimeTrackingProject = {
+          ...projectData,
+          id: crypto.randomUUID(),
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        };
+
+        // Save to IndexedDB
+        await timeTrackingDb.addProject(project);
+
+        // Update state
+        set({ projects: [...projects, project] });
+      },
+
+      updateProject: async (id, updates) => {
+        const { projects } = get();
+
+        // Update in IndexedDB
+        await timeTrackingDb.updateProject(id, updates);
+
+        // Update state
+        const updatedProjects = projects.map(project =>
+          project.id === id
+            ? { ...project, ...updates, updatedAt: new Date().toISOString() }
+            : project
+        );
+
+        set({ projects: updatedProjects });
+      },
+
+      deleteProject: async (id) => {
+        const { projects } = get();
+
+        // Delete from IndexedDB (will also delete all entries)
+        await timeTrackingDb.deleteProject(id);
+
+        // Update state
+        set({ projects: projects.filter(project => project.id !== id) });
+
+        // Reload entries to remove deleted project's entries
+        await get().loadEntries();
+      },
+
+      archiveProject: async (id) => {
+        await timeTrackingDb.archiveProject(id);
+        await get().loadProjects();
+      },
+
+      unarchiveProject: async (id) => {
+        await timeTrackingDb.unarchiveProject(id);
+        await get().loadProjects();
+      },
+
+      // ==================== QUERY ACTIONS ====================
+
+      loadEntries: async (filters) => {
+        let startDate: Date | undefined;
+        let endDate: Date | undefined;
+
+        // Calculate date range based on filter
+        if (filters?.dateRange) {
+          const now = new Date();
+          switch (filters.dateRange) {
+            case 'today':
+              startDate = new Date(now.setHours(0, 0, 0, 0));
+              endDate = new Date(now.setHours(23, 59, 59, 999));
+              break;
+            case 'yesterday':
+              startDate = new Date(now.setDate(now.getDate() - 1));
+              startDate.setHours(0, 0, 0, 0);
+              endDate = new Date(startDate);
+              endDate.setHours(23, 59, 59, 999);
+              break;
+            case 'last7days':
+              startDate = new Date(now.setDate(now.getDate() - 7));
+              startDate.setHours(0, 0, 0, 0);
+              endDate = new Date();
+              break;
+            case 'last30days':
+              startDate = new Date(now.setDate(now.getDate() - 30));
+              startDate.setHours(0, 0, 0, 0);
+              endDate = new Date();
+              break;
+            case 'custom':
+              if (filters.startDate) startDate = new Date(filters.startDate);
+              if (filters.endDate) endDate = new Date(filters.endDate);
+              break;
+          }
+        }
+
+        const entries = await timeTrackingDb.getEntries({
+          startDate,
+          endDate,
+          projectId: filters?.projectIds?.[0], // For now, single project filter
+          searchQuery: filters?.searchQuery
+        });
+
+        set({ entries });
+      },
+
+      loadProjects: async () => {
+        const projects = await timeTrackingDb.getProjects();
+        set({ projects });
+      },
+
+      getEntriesByDateRange: (start, end) => {
+        const { entries } = get();
+        return entries.filter(entry => {
+          const entryDate = new Date(entry.startTime);
+          return entryDate >= start && entryDate <= end;
+        });
+      },
+
+      getEntriesByProject: (projectId) => {
+        const { entries } = get();
+        return entries.filter(entry => entry.projectId === projectId);
+      },
+
+      // ==================== FILTER ACTIONS ====================
+
+      setFilters: (newFilters) => {
+        const { filters } = get();
+        const updatedFilters = { ...filters, ...newFilters };
+        set({ filters: updatedFilters });
+
+        // Reload entries with new filters
+        get().loadEntries(updatedFilters);
+      },
+
+      clearFilters: () => {
+        const defaultFilters: EntryFilters = {
+          dateRange: 'last7days',
+          projectIds: [],
+          tags: [],
+          searchQuery: ''
+        };
+        set({ filters: defaultFilters });
+        get().loadEntries(defaultFilters);
+      },
+
+      setViewMode: (mode) => {
+        set({ viewMode: mode });
+      },
+
+      // ==================== UTILITY ACTIONS ====================
+
+      getTotalTime: () => {
+        const { entries } = get();
+        return entries.reduce((total, entry) => total + entry.duration, 0);
+      },
+
+      getTimeByProject: () => {
+        const { entries } = get();
+        const timeByProject: Record<string, number> = {};
+
+        entries.forEach(entry => {
+          const projectId = entry.projectId || 'no-project';
+          timeByProject[projectId] = (timeByProject[projectId] || 0) + entry.duration;
+        });
+
+        return timeByProject;
+      },
+
+      // ==================== PHASE A: KANBAN INTEGRATION ====================
+
+      getEntriesForCard: (cardId) => {
+        const { entries, activeEntry } = get();
+        const cardEntries = entries.filter(entry => entry.taskId === cardId);
+
+        // Include active entry if it's for this card
+        if (activeEntry && activeEntry.taskId === cardId) {
+          // Calculate current duration for active entry
+          const now = new Date().getTime();
+          const start = new Date(activeEntry.startTime).getTime();
+          const currentDuration = Math.floor((now - start) / 1000);
+
+          return [{ ...activeEntry, duration: currentDuration }, ...cardEntries];
+        }
+
+        return cardEntries;
+      },
+
+      getTotalTimeForCard: (cardId) => {
+        const entries = get().getEntriesForCard(cardId);
+        return entries.reduce((total, entry) => total + entry.duration, 0);
+      },
+
+      startTimerForCard: (cardId, taskName) => {
+        get().startTimer(taskName, undefined, cardId);
+      }
+    }),
+    {
+      name: 'time-tracking-storage',
+      partialize: (state) => ({
+        // Only persist active timer and settings (entries stored in IndexedDB)
+        activeEntry: state.activeEntry,
+        reminderEnabled: state.reminderEnabled,
+        idleDetectionMinutes: state.idleDetectionMinutes,
+        roundingMinutes: state.roundingMinutes,
+        defaultProjectId: state.defaultProjectId
+      })
+    }
+  )
+);
+
+// Initialize store by loading data from IndexedDB
+export const initializeTimeTracking = async () => {
+  const store = useTimeTrackingStore.getState();
+
+  // Load projects
+  await store.loadProjects();
+
+  // Load entries with default filters
+  await store.loadEntries(store.filters);
+
+  // Restore active timer from localStorage if exists
+  const savedTimer = localStorage.getItem('activeTimer');
+  if (savedTimer) {
+    try {
+      const activeEntry = JSON.parse(savedTimer);
+      useTimeTrackingStore.setState({ activeEntry });
+    } catch (error) {
+      console.error('Failed to restore active timer:', error);
+      localStorage.removeItem('activeTimer');
+    }
+  }
+};

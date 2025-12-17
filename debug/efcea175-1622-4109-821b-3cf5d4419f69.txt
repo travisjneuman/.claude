@@ -1,0 +1,17 @@
+2025-12-16T20:53:20.175Z [DEBUG] Getting matching hook commands for SessionEnd with query: clear
+2025-12-16T20:53:20.175Z [DEBUG] Found 0 hook matchers in settings
+2025-12-16T20:53:20.175Z [DEBUG] Matched 0 unique hooks for query "clear" (0 before deduplication)
+2025-12-16T20:53:20.175Z [DEBUG] Cleared all session hooks for session 55ad7c19-ee24-498c-ac66-9aa08a171bb3
+2025-12-16T20:53:20.176Z [DEBUG] Loading hooks from plugin: security-guidance
+2025-12-16T20:53:20.176Z [DEBUG] Loading hooks from plugin: hookify
+2025-12-16T20:53:20.176Z [DEBUG] Loading hooks from plugin: ralph-wiggum
+2025-12-16T20:53:20.176Z [DEBUG] Registered 6 hooks from 14 plugins
+2025-12-16T20:53:20.177Z [DEBUG] Getting matching hook commands for SessionStart with query: clear
+2025-12-16T20:53:20.177Z [DEBUG] Found 0 hook matchers in settings
+2025-12-16T20:53:20.177Z [DEBUG] Matched 0 unique hooks for query "clear" (0 before deduplication)
+2025-12-16T20:53:20.185Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (5.2ms)
+2025-12-16T20:53:20.186Z [DEBUG] FileHistory: Added snapshot for e3ce079b-2256-4426-9e8a-a0da696560e2, tracking 0 files
+2025-12-16T20:53:20.460Z [DEBUG] AutoUpdaterWrapper: Installation type: unknown
+2025-12-16T20:53:21.689Z [DEBUG] Getting matching hook commands for SessionEnd with query: prompt_input_exit
+2025-12-16T20:53:21.689Z [DEBUG] Found 0 hook matchers in settings
+2025-12-16T20:53:21.689Z [DEBUG] Matched 0 unique hooks for query "prompt_input_exit" (0 before deduplication)

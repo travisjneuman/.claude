@@ -1,0 +1,363 @@
+/**
+ * Collection Sidebar
+ *
+ * Sidebar for Link Library showing:
+ * - Quick filters (All, Favorites, Archived)
+ * - User-created collections
+ * - Collection CRUD operations
+ */
+
+import React, { useState, useCallback } from 'react';
+import { useLinkLibraryStore } from '../stores/useLinkLibraryStore';
+
+interface CollectionSidebarProps {
+  isCollapsed?: boolean;
+  onToggleCollapse?: () => void;
+}
+
+export const CollectionSidebar: React.FC<CollectionSidebarProps> = ({
+  isCollapsed = false,
+  onToggleCollapse,
+}) => {
+  const {
+    collections,
+    links,
+    activeCollectionId,
+    setActiveCollection,
+    addCollection,
+    updateCollection,
+    deleteCollection,
+  } = useLinkLibraryStore();
+
+  const [isAddingCollection, setIsAddingCollection] = useState(false);
+  const [newCollectionName, setNewCollectionName] = useState('');
+  const [editingCollectionId, setEditingCollectionId] = useState<string | null>(null);
+  const [editingName, setEditingName] = useState('');
+
+  // Calculate counts
+  const totalLinks = Object.keys(links).length;
+  const favoriteCount = Object.values(links).filter((l) => l.isFavorite).length;
+  const archivedCount = Object.values(links).filter((l) => l.isArchived).length;
+
+  // Get sorted collections
+  const sortedCollections = Object.values(collections).sort(
+    (a, b) => a.sortOrder - b.sortOrder
+  );
+
+  // Handle add collection
+  const handleAddCollection = useCallback(() => {
+    if (newCollectionName.trim()) {
+      addCollection({
+        name: newCollectionName.trim(),
+        linkIds: [],
+        isExpanded: true,
+      });
+      setNewCollectionName('');
+      setIsAddingCollection(false);
+    }
+  }, [newCollectionName, addCollection]);
+
+  // Handle edit collection
+  const handleEditCollection = useCallback(
+    (id: string) => {
+      if (editingName.trim()) {
+        updateCollection(id, { name: editingName.trim() });
+        setEditingCollectionId(null);
+        setEditingName('');
+      }
+    },
+    [editingName, updateCollection]
+  );
+
+  // Handle delete collection
+  const handleDeleteCollection = useCallback(
+    (id: string) => {
+      if (window.confirm('Delete this collection? Links will not be deleted.')) {
+        deleteCollection(id);
+        if (activeCollectionId === id) {
+          setActiveCollection(null);
+        }
+      }
+    },
+    [deleteCollection, activeCollectionId, setActiveCollection]
+  );
+
+  // Start editing
+  const startEditing = useCallback((id: string, currentName: string) => {
+    setEditingCollectionId(id);
+    setEditingName(currentName);
+  }, []);
+
+  if (isCollapsed) {
+    return (
+      <div className="w-12 flex flex-col items-center py-4 border-r border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark">
+        <button
+          onClick={onToggleCollapse}
+          className="p-2 rounded-button hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+          title="Expand sidebar"
+        >
+          <span className="text-lg">›</span>
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <div className="w-64 flex flex-col border-r border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark">
+      {/* Header */}
+      <div className="flex items-center justify-between px-4 py-3 border-b border-border-light dark:border-border-dark">
+        <h3 className="font-semibold text-text-light-primary dark:text-text-dark-primary">
+          Library
+        </h3>
+        {onToggleCollapse && (
+          <button
+            onClick={onToggleCollapse}
+            className="p-1 rounded hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+            title="Collapse sidebar"
+          >
+            <span className="text-lg">‹</span>
+          </button>
+        )}
+      </div>
+
+      {/* Quick Filters */}
+      <div className="p-2">
+        <SidebarItem
+          icon="📚"
+          label="All Links"
+          count={totalLinks}
+          isActive={activeCollectionId === null}
+          onClick={() => setActiveCollection(null)}
+        />
+        <SidebarItem
+          icon="⭐"
+          label="Favorites"
+          count={favoriteCount}
+          isActive={activeCollectionId === 'favorites'}
+          onClick={() => setActiveCollection('favorites')}
+        />
+        <SidebarItem
+          icon="📥"
+          label="Archived"
+          count={archivedCount}
+          isActive={activeCollectionId === 'archived'}
+          onClick={() => setActiveCollection('archived')}
+        />
+      </div>
+
+      {/* Collections Header */}
+      <div className="flex items-center justify-between px-4 py-2 mt-2 border-t border-border-light dark:border-border-dark">
+        <span className="text-xs font-medium uppercase tracking-wider text-text-light-secondary dark:text-text-dark-secondary">
+          Collections
+        </span>
+        <button
+          onClick={() => setIsAddingCollection(true)}
+          className="p-1 rounded hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+          title="Add collection"
+        >
+          <span className="text-sm">+</span>
+        </button>
+      </div>
+
+      {/* Add Collection Form */}
+      {isAddingCollection && (
+        <div className="px-2 py-2">
+          <div className="flex items-center gap-2">
+            <input
+              type="text"
+              value={newCollectionName}
+              onChange={(e) => setNewCollectionName(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') handleAddCollection();
+                if (e.key === 'Escape') {
+                  setIsAddingCollection(false);
+                  setNewCollectionName('');
+                }
+              }}
+              placeholder="Collection name..."
+              autoFocus
+              className="flex-1 px-2 py-1 text-sm rounded border border-border-light dark:border-border-dark
+                         bg-white dark:bg-surface-dark
+                         text-text-light-primary dark:text-text-dark-primary
+                         focus:outline-none focus:ring-1 focus:ring-accent-blue"
+            />
+            <button
+              onClick={handleAddCollection}
+              className="p-1 text-status-success hover:bg-status-success/10 rounded transition-colors"
+            >
+              ✓
+            </button>
+            <button
+              onClick={() => {
+                setIsAddingCollection(false);
+                setNewCollectionName('');
+              }}
+              className="p-1 text-status-error hover:bg-status-error/10 rounded transition-colors"
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Collections List */}
+      <div className="flex-1 overflow-y-auto p-2">
+        {sortedCollections.length === 0 && !isAddingCollection ? (
+          <p className="px-2 py-4 text-sm text-center text-text-light-secondary dark:text-text-dark-secondary">
+            No collections yet.
+            <br />
+            <button
+              onClick={() => setIsAddingCollection(true)}
+              className="text-accent-blue hover:underline mt-1"
+            >
+              Create one
+            </button>
+          </p>
+        ) : (
+          sortedCollections.map((collection) => (
+            <div key={collection.id} className="group relative">
+              {editingCollectionId === collection.id ? (
+                <div className="flex items-center gap-2 px-2 py-1">
+                  <input
+                    type="text"
+                    value={editingName}
+                    onChange={(e) => setEditingName(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') handleEditCollection(collection.id);
+                      if (e.key === 'Escape') {
+                        setEditingCollectionId(null);
+                        setEditingName('');
+                      }
+                    }}
+                    autoFocus
+                    className="flex-1 px-2 py-1 text-sm rounded border border-border-light dark:border-border-dark
+                               bg-white dark:bg-surface-dark
+                               text-text-light-primary dark:text-text-dark-primary
+                               focus:outline-none focus:ring-1 focus:ring-accent-blue"
+                  />
+                  <button
+                    onClick={() => handleEditCollection(collection.id)}
+                    className="p-1 text-status-success hover:bg-status-success/10 rounded transition-colors"
+                  >
+                    ✓
+                  </button>
+                  <button
+                    onClick={() => {
+                      setEditingCollectionId(null);
+                      setEditingName('');
+                    }}
+                    className="p-1 text-status-error hover:bg-status-error/10 rounded transition-colors"
+                  >
+                    ✕
+                  </button>
+                </div>
+              ) : (
+                <SidebarItem
+                  icon={collection.icon || '📁'}
+                  label={collection.name}
+                  count={collection.linkIds.length}
+                  isActive={activeCollectionId === collection.id}
+                  onClick={() => setActiveCollection(collection.id)}
+                  onEdit={() => startEditing(collection.id, collection.name)}
+                  onDelete={() => handleDeleteCollection(collection.id)}
+                  color={collection.color}
+                />
+              )}
+            </div>
+          ))
+        )}
+      </div>
+    </div>
+  );
+};
+
+// ============================================================================
+// Sidebar Item Component
+// ============================================================================
+
+interface SidebarItemProps {
+  icon: string;
+  label: string;
+  count?: number;
+  isActive: boolean;
+  onClick: () => void;
+  onEdit?: () => void;
+  onDelete?: () => void;
+  color?: string;
+}
+
+const SidebarItem: React.FC<SidebarItemProps> = ({
+  icon,
+  label,
+  count,
+  isActive,
+  onClick,
+  onEdit,
+  onDelete,
+  color,
+}) => {
+  return (
+    <button
+      onClick={onClick}
+      className={`
+        group w-full flex items-center gap-3 px-3 py-2 rounded-button
+        text-left transition-colors
+        ${
+          isActive
+            ? 'bg-accent-blue/10 text-accent-blue'
+            : 'text-text-light-primary dark:text-text-dark-primary hover:bg-neutral-100 dark:hover:bg-neutral-800'
+        }
+      `}
+    >
+      <span
+        className="text-base"
+        style={color ? { filter: `drop-shadow(0 0 2px ${color})` } : undefined}
+      >
+        {icon}
+      </span>
+      <span className="flex-1 text-sm font-medium truncate">{label}</span>
+      {typeof count === 'number' && (
+        <span
+          className={`text-xs ${
+            isActive
+              ? 'text-accent-blue/70'
+              : 'text-text-light-secondary dark:text-text-dark-secondary'
+          }`}
+        >
+          {count}
+        </span>
+      )}
+      {/* Edit/Delete buttons for collections */}
+      {(onEdit || onDelete) && (
+        <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+          {onEdit && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                onEdit();
+              }}
+              className="p-1 rounded hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors"
+              title="Edit"
+            >
+              <span className="text-xs">✏️</span>
+            </button>
+          )}
+          {onDelete && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                onDelete();
+              }}
+              className="p-1 rounded hover:bg-status-error/20 text-status-error transition-colors"
+              title="Delete"
+            >
+              <span className="text-xs">🗑️</span>
+            </button>
+          )}
+        </div>
+      )}
+    </button>
+  );
+};
+
+export default CollectionSidebar;

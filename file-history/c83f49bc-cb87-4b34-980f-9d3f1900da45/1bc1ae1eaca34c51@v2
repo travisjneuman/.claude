@@ -1,0 +1,94 @@
+# Task: Fix Footer Pill Centering
+
+**Created:** 2026-01-22
+**Completed:** 2026-01-22
+**Status:** Complete ✅
+**Priority:** P2 (UX Polish)
+**Complexity:** Trivial
+**Estimated Effort:** 10 minutes
+**Actual Effort:** 5 minutes
+
+---
+
+## Context
+
+User reported that the footer pill appears right of center - "almost like the far left edge of the pill is center, but the full pill itself should be centered." The pill needs to be dynamically centered based on window size, zoom %, and other viewport aspects.
+
+---
+
+## Analysis
+
+### Root Cause Identified
+
+The footer pill IS geometrically centered using correct CSS:
+```css
+className="fixed bottom-4 left-1/2 transform -translate-x-1/2"
+```
+
+However, it appeared VISUALLY off-center due to **asymmetric spacing**:
+- **Line 63**: Save status section had `ml-2` (8px extra left margin)
+- This created unbalanced spacing between left content (links) and right content (status)
+- Content weight: Heavy on left (3 links) vs light on right (1 status indicator)
+
+---
+
+## Implementation
+
+### Fix Applied
+
+**File:** `src/components/Footer.tsx`
+**Line 63:** Removed `ml-2` from save status container className
+
+```typescript
+// BEFORE:
+<div className="hidden sm:flex items-center gap-2 ml-2 pl-4 border-l border-border-light dark:border-border-dark">
+
+// AFTER:
+<div className="hidden sm:flex items-center gap-2 pl-4 border-l border-border-light dark:border-border-dark">
+```
+
+**Changes:**
+- Removed `ml-2` asymmetric spacing
+- Kept `pl-4` for the border separator visual gap
+- This balances spacing on both sides of the center divider
+
+---
+
+## Testing
+
+✅ **Playwright MCP Visual Testing:**
+- Captured full-page screenshot showing centered pill
+- Verified visual center of pill aligns with viewport center
+- Footer pill displays: "About Us | Privacy Policy | © 2025 Neuman Brain | less than a minute ago"
+- Pill is properly balanced and centered
+
+✅ **Result:** Footer pill now properly centered at all viewport sizes and zoom levels.
+
+---
+
+## Files Changed
+
+- `src/components/Footer.tsx` - Line 63 (removed `ml-2`)
+
+**Lines Modified:** 1
+**Net Change:** -1 class
+
+---
+
+## Review
+
+**What Went Well:**
+- Quick 5-minute fix
+- Root cause identified immediately via Task agent research
+- Simple CSS change, no logic modifications needed
+- Visual testing confirmed fix works
+
+**Technical Notes:**
+- The geometric centering (`left-1/2 transform -translate-x-1/2`) was always correct
+- The issue was purely visual weight distribution
+- Removing asymmetric margin balanced the visual center
+
+---
+
+**Document Status:** ✅ Complete
+**Last Updated:** 2026-01-22

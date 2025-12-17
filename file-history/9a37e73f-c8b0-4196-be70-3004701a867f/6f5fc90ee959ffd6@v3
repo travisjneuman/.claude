@@ -1,0 +1,55 @@
+/**
+ * Upcoming Events Widget
+ *
+ * Shows next 3 upcoming calendar events
+ */
+
+import React from 'react';
+import { BaseWidget } from './BaseWidget';
+import { useCalendarStore } from '../../stores/useCalendarStore';
+import { useNavigate } from 'react-router-dom';
+
+export const UpcomingEventsWidget: React.FC = () => {
+  const { events } = useCalendarStore();
+  const navigate = useNavigate();
+
+  const upcomingEvents = Object.entries(events)
+    .flatMap(([dateKey, eventList]) =>
+      eventList.map((event) => ({ ...event, date: dateKey }))
+    )
+    .filter((event) => new Date(event.date) >= new Date())
+    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+    .slice(0, 3);
+
+  return (
+    <BaseWidget title="Upcoming Events" icon="📅">
+      <div className="space-y-4">
+        {upcomingEvents.length > 0 ? (
+          <div className="space-y-3">
+            {upcomingEvents.map((event) => (
+              <div key={event.id} className="flex items-start gap-3 p-2 rounded hover:bg-surface-light dark:hover:bg-surface-dark transition-all duration-standard ease-smooth">
+                <div className="text-sm text-text-light-secondary dark:text-text-dark-secondary w-20 flex-shrink-0">
+                  {new Date(event.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="font-medium text-text-light-primary dark:text-text-dark-primary">{event.title}</div>
+                  {event.startTime && (
+                    <div className="text-sm text-accent-blue dark:text-accent-blue-hover">{event.startTime}</div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p className="text-text-light-secondary dark:text-text-dark-secondary">No upcoming events</p>
+        )}
+        <button
+          onClick={() => navigate('/schedule')}
+          className="w-full px-4 py-2 bg-accent-magenta hover:bg-accent-magenta-hover text-white rounded-button font-medium transition-all duration-standard ease-smooth"
+        >
+          View Calendar →
+        </button>
+      </div>
+    </BaseWidget>
+  );
+};

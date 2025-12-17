@@ -1,0 +1,457 @@
+# Neuman Brain - Privacy-First Personal & Work Management Platform
+
+**Your second brain. Your data. Your device.**
+
+Neuman Brain is a free, open-source platform combining **notes**, **tasks**, **projects**, and **time tracking** with a privacy-first, local-first architecture. Unlike cloud-only tools that lock in your data, Neuman Brain puts you in control.
+
+[![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue)](https://www.typescriptlang.org/)
+[![React](https://img.shields.io/badge/React-19-blue)](https://react.dev/)
+[![Tests](https://img.shields.io/badge/Tests-71%20passing-green)](https://vitest.dev/)
+
+**Live Demo:** [brain.neuman.dev](https://brain.neuman.dev)
+
+---
+
+## 🔒 Privacy-First Architecture
+
+**100% local-only. Zero cloud dependencies.** Your notes, tasks, and data stay on **your device** in your browser's IndexedDB (50GB+ capacity). No servers, no tracking, no data mining, no Google, no Firebase.
+
+**Local backups only:** Export/import your data as .brain files (encrypted backups coming Q2 2026). Optional auto-save to local folder using File System Access API. The platform works fully offline, fully local, with zero external dependencies.
+
+**Why this matters:**
+- ✅ No vendor can access your private notes or tasks
+- ✅ No monthly fees to access your own data
+- ✅ Works offline forever (no internet required)
+- ✅ Export your data anytime (JSON, Markdown)
+- ✅ Zero tracking, zero analytics (unless you opt in)
+
+---
+
+## ✨ What Makes Neuman Brain Different?
+
+| Feature | Neuman Brain | Notion | Obsidian | Monday.com | Apple Notes |
+|---------|--------------|--------|----------|------------|-------------|
+| **Cost** | 100% Free | $10-15/user/month | Free (Sync $10/mo) | $12-20/user/month | Free (Apple only) |
+| **Data Privacy** | Local-first, you own | Cloud-only | Local files | Cloud-only | iCloud (Apple only) |
+| **Platform** | Web, PWA (any device) | Web, apps | Desktop-first | Web, apps | Apple ecosystem only |
+| **Offline** | Full offline support | Limited | Full offline | No | Requires iCloud |
+| **Notes + Tasks** | Integrated ✅ | Separate | Plugin-based | Weak notes | No tasks |
+| **Speed** | 60KB, <2s load | 2-4MB, slow | Fast | 3MB+, slow | Fast |
+| **Open Source** | ✅ MIT License | ❌ | ⚠️ Source available | ❌ | ❌ |
+
+---
+
+## 🚀 Current Features (v2.0)
+
+### 📝 Notes & Knowledge Management *(Coming Q1 2026)*
+**Status:** 🔜 **Top Priority - In Development**
+
+- Markdown editor with live preview
+- Folders, tags, and powerful search
+- [[Wikilinks]] and backlinks (PKM features)
+- Rich media (images, files, attachments)
+- Note-to-task linking
+- Daily notes and templates
+- Export to Markdown, PDF, HTML
+
+**Why delayed?** We rebuilt the entire platform from scratch in React/TypeScript (v2.0) to establish a solid foundation. Notes are our #1 priority for Q1 2026.
+
+### ✅ Current Task & Project Management
+
+- **Kanban Board:** Drag-and-drop tasks across Todo → In Progress → Done
+- **Calendar:** Monthly & weekly views, sync tasks with dates
+- **Time Tracking:** Toggl-style timer, billable hours, project tracking
+- **Advanced PM (planned):** Gantt charts, dependencies, resource management
+
+### 🎮 Habit Tracking & Gamification *(Coming Q1 2026)*
+
+- Daily habits with streak counters
+- XP, levels, and achievement badges
+- Visualizations (heatmaps, progress charts)
+- Integrated with tasks (habits generate recurring tasks)
+
+### 🛠️ IT & Helpdesk Features *(Planned)*
+
+- Personal ticketing system (track issues, bugs, projects as tickets)
+- Incident tracking (SEV0-4, timeline, postmortem)
+- System monitoring (types defined, UI planned)
+
+---
+
+## 🏗️ Architecture & Tech Stack
+
+**Frontend:**
+- React 19 + TypeScript 5.9
+- Vite 7 (lightning-fast builds)
+- Zustand 5 (1KB state management)
+- Tailwind CSS 3 (utility-first styling)
+
+**Data Storage (Local-First):**
+1. **Primary:** IndexedDB (50GB+ capacity, async, high-performance)
+2. **Legacy:** LocalStorage (migrated to IndexedDB automatically)
+3. **Backups:** Local .brain file export/import + optional auto-save to local folder
+
+**Deployment:**
+- Static hosting (Cloudflare Pages, Netlify, Vercel)
+- Zero server costs for personal use
+- Self-hostable (just serve the built `/dist` folder)
+
+**Bundle Size:** 117 KB gzipped (50% smaller after Firebase removal!)
+
+---
+
+## 🚀 Quick Start
+
+### For Users (No Installation Required)
+
+**Web App:** Just visit [brain.neuman.dev](https://brain.neuman.dev)
+
+Your data is stored locally in your browser. No account required.
+
+### For Developers
+
+**Prerequisites:**
+- Node.js 22+ (see `.node-version`)
+- npm or pnpm
+
+**Setup:**
+
+```bash
+# Clone repository
+git clone https://github.com/travisjneuman/system.knowledgebase.git
+cd system.knowledgebase
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+# Open http://localhost:5173
+
+# Run tests
+npm run test
+
+# Build for production
+npm run build
+```
+
+### Developer Workflow & Automation ⚙️
+
+**Before contributing code,** please familiarize yourself with our CLAUDE.md workflow and automation tools:
+
+#### 1. Read CLAUDE.md First ⭐
+
+**File:** [`CLAUDE.md`](CLAUDE.md)
+**Purpose:** Mandatory workflow guide with 12 core rules for all development work
+
+**TL;DR:**
+1. Think → Plan → Create task file first (`tasks/[feature-name].md`)
+2. Get approval before coding (via ExitPlanMode tool if using Claude Code)
+3. Update task file as you work
+4. Add comprehensive review section when done
+5. Update documentation if architecture changes
+6. Sync with main branch at start of every session
+
+**Key Rules:**
+- **Rule #1:** Create task file BEFORE coding (not after!)
+- **Rule #7:** Add review section when complete (what changed, testing, issues)
+- **Rule #8:** Never be lazy - find root causes, no temporary fixes
+- **Rule #10:** Update documentation for architectural changes
+- **Rule #12:** Perfect Foundation Mindset - Build for 99% future work, execute flawlessly
+
+#### 2. Automation Tools 🤖
+
+We have automation tools to **enforce CLAUDE.md compliance automatically**:
+
+**Git Pre-Commit Hook ✅** (`.git/hooks/pre-commit`)
+- Automatically **blocks commits** if you change code (`src/`) without updating a task file
+- Prevents forgetting documentation
+- Emergency bypass: `git commit --no-verify` (use sparingly!)
+
+**Workflow Checklist** (`.claude/workflow-checklist.md`)
+- Step-by-step checklist for every task
+- Reference before starting, during work, and before commits
+
+**Task Template** (`.claude/templates/task-template.md`)
+- Standardized format for all task files
+- Includes all required sections (overview, files to read/modify, todos, review)
+- Create new task: `cp .claude/templates/task-template.md tasks/[feature-name].md`
+
+**Custom Commands** (`.claude/commands/`)
+- `/start-task` - Reminder of full CLAUDE.md workflow
+
+**Complete Guide** (`.claude/automation-guide.md`)
+- Detailed setup, troubleshooting, customization guide
+- Read this if git hook issues or workflow questions
+
+#### 3. Developer Onboarding Checklist
+
+**First Time Setup:**
+- [ ] Read [`CLAUDE.md`](CLAUDE.md) (especially rules #1-12)
+- [ ] Read [`.claude/workflow-checklist.md`](.claude/workflow-checklist.md)
+- [ ] Understand git pre-commit hook (`.git/hooks/pre-commit`)
+- [ ] Test the workflow with a small change (see below)
+
+**Test the Workflow:**
+```bash
+# 1. Sync with main (Rule #11)
+git fetch origin main && git merge origin/main --no-edit
+
+# 2. Create task file from template
+cp .claude/templates/task-template.md tasks/test-workflow.md
+# Fill out the task file sections
+
+# 3. Make a small code change
+echo "// test" >> src/main.tsx
+
+# 4. Try to commit without staging task file (should BLOCK)
+git add src/main.tsx
+git commit -m "test: Testing workflow"
+# ❌ Should be blocked by pre-commit hook
+
+# 5. Stage task file and retry (should succeed)
+git add tasks/test-workflow.md
+git commit -m "test: Testing workflow"
+# ✅ Should succeed
+
+# 6. Clean up
+git reset HEAD~1
+git checkout src/main.tsx
+rm tasks/test-workflow.md
+```
+
+**Every New Task:**
+1. Sync with main: `git fetch origin main && git merge origin/main --no-edit`
+2. Create task file: `cp .claude/templates/task-template.md tasks/[feature-name].md`
+3. Fill out plan (overview, files to read, proposed changes, todo checklist)
+4. Start coding (mark todos as you complete them)
+5. When done, add comprehensive review section to task file
+6. Update docs if architecture changed
+7. Commit code AND task file together
+
+**Resources:**
+- Full workflow: [`CLAUDE.md`](CLAUDE.md)
+- Detailed checklist: [`.claude/workflow-checklist.md`](.claude/workflow-checklist.md)
+- Automation guide: [`.claude/automation-guide.md`](.claude/automation-guide.md)
+- Task template: [`.claude/templates/task-template.md`](.claude/templates/task-template.md)
+- Example task: [`tasks/notes-ux-improvements.md`](tasks/notes-ux-improvements.md)
+
+#### 4. Why This Workflow?
+
+**Before automation:**
+- ❌ Frequently forgot to document changes
+- ❌ Inconsistent task tracking
+- ❌ Manual reminders needed every session
+- ❌ Lost context between sessions
+
+**After automation:**
+- ✅ Git hook prevents commits without documentation
+- ✅ Standardized task file format
+- ✅ Complete project history in `tasks/` directory
+- ✅ Never lose context - everything documented
+
+**Result:** Better code quality, complete documentation, easier collaboration.
+
+---
+
+## 📁 Project Structure
+
+```
+system.knowledgebase/
+├── src/
+│   ├── widgets/          # Calendar, Kanban, Weather, Map
+│   ├── stores/           # Zustand state management (Kanban, Calendar, etc.)
+│   ├── services/         # Data persistence, backup, sync
+│   ├── components/       # Reusable UI components
+│   ├── types/            # TypeScript definitions
+│   └── pages/            # Dashboard, Planning, Tasks, Settings
+├── docs/                 # 📚 Current official documentation (24 files)
+├── .archive/             # 🗄️ Historical docs, brainstorming (see .archive/README.md)
+├── tasks/                # 📋 Task tracking and development plans
+├── public/               # Static assets
+└── config/               # Build configuration (Vite, Tailwind, TypeScript)
+```
+
+---
+
+## 🗺️ Roadmap
+
+### Phase 0: Foundation ✅ **(COMPLETE)**
+- React/TypeScript rebuild
+- Kanban, Calendar, Time Tracking
+- Privacy-first local storage
+
+### Phase 1: Notes & PKM 🔜 **(Q1 2026 - TOP PRIORITY)**
+- Markdown editor
+- Folders, tags, search
+- Wikilinks & backlinks
+- Daily notes
+- Note-to-task linking
+
+### Phase 2: Habit Tracking & Gamification 🔜 **(Q1 2026)**
+- Habit tracking with streaks
+- XP, levels, badges
+- Analytics and visualizations
+
+### Phase 3: Collaboration **(Q2 2026)**
+- Real-time sync
+- Comments & @mentions
+- Shared workspaces
+
+### Phase 4: Advanced PM **(Q2-Q3 2026)**
+- Gantt charts with critical path
+- Resource management
+- Risk tracking
+
+### Phase 5: Integrations **(Q3-Q4 2026)**
+- Calendar sync (Google Cal, Outlook)
+- Browser extension
+- Mobile apps (PWA)
+
+**Full Roadmap:** [docs/product/feature_roadmap.md](docs/product/feature_roadmap.md)
+
+---
+
+## 🔐 Privacy & Security
+
+### What Data is Stored Where?
+
+| Data Type | Storage Location | You Control? |
+|-----------|-----------------|--------------|
+| Tasks | IndexedDB (50GB+) | ✅ Yes - 100% local |
+| Calendar Events | IndexedDB (50GB+) | ✅ Yes - 100% local |
+| Time Entries | IndexedDB (50GB+) | ✅ Yes - 100% local |
+| Notes *(future)* | IndexedDB (50GB+) | ✅ Yes - 100% local |
+| User Preferences | IndexedDB (50GB+) | ✅ Yes - 100% local |
+
+### Privacy Guarantees
+
+1. **No data EVER leaves your device** - Everything stays in your browser's IndexedDB, period.
+2. **Zero tracking, zero analytics** - No telemetry, no Google Analytics, no Firebase Analytics.
+3. **No account required** - Use the app anonymously with local storage.
+4. **No cloud dependencies** - No Firebase, no Google Drive, no third-party services.
+5. **Full data export always available** - Export to .brain files anytime (E2EE coming Q2 2026).
+6. **Open source** - Audit the code yourself: [github.com/travisjneuman/system.knowledgebase](https://github.com/travisjneuman/system.knowledgebase)
+
+### Local Backups (Your Control)
+
+Want to backup or sync across devices?
+- **Export .brain files** - Download encrypted backups to your computer
+- **Auto-save to local folder** - Choose a folder on your device, app saves automatically
+- **Sync via cloud** - Put auto-save folder in Dropbox/iCloud/Google Drive (you control sync, not us!)
+
+**We NEVER see your data. Ever.** Zero-data-host architecture means your data never touches our servers.
+
+**More:** [docs/security_privacy/privacy_model.md](docs/security_privacy/privacy_model.md)
+
+---
+
+## 💰 Business Model & Sustainability
+
+**Q: How is this free? What's the catch?**
+
+**A:** No catch. Neuman Brain is designed to have **zero hosting costs** for the maintainer:
+- Static hosting (Cloudflare Pages free tier)
+- No backend servers
+- No database hosting fees
+- Users store their own data locally
+
+**Q: How will you make money?**
+
+**A:** We're exploring sustainable models that respect privacy:
+
+**Option 1: Donations/Sponsorships** (Preferred)
+- GitHub Sponsors, Open Collective
+- Optional "buy me a coffee" for users who love the product
+
+**Option 2: Optional Premium (Future)**
+- **Self-hosted Pro:** Advanced features for self-hosted installs (SSO, LDAP, advanced admin)
+- **Client-side Pro:** Paid features that run entirely locally (advanced analytics, AI assist with your own API key)
+- **Core features always free** - Notes, tasks, calendar, time tracking will never be paywalled
+
+**Option 3: Professional Services**
+- Custom integrations for teams
+- Training/consulting for organizations adopting Neuman Brain
+
+**Commitment:** Core functionality (notes, tasks, calendar, time tracking) will **always be free**.
+
+**More:** [docs/business/business_model.md](docs/business/business_model.md)
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! Neuman Brain is open source (MIT License).
+
+### How to Contribute
+
+1. **Report bugs:** [GitHub Issues](https://github.com/travisjneuman/system.knowledgebase/issues)
+2. **Request features:** [GitHub Discussions](https://github.com/travisjneuman/system.knowledgebase/discussions)
+3. **Submit code:** Fork repo → Create feature branch → Submit PR
+4. **Improve docs:** Documentation PRs are especially welcome!
+
+### Development Guidelines
+
+- **TypeScript:** Strict mode, no `any` types
+- **Tests:** Add tests for new features (Vitest + Testing Library)
+- **Code Style:** Follow existing patterns, run `npm run lint`
+- **Documentation:** Update relevant docs in `/docs`
+
+**More:** [CONTRIBUTING.md](CONTRIBUTING.md) and [docs/development/getting_started.md](docs/development/getting_started.md)
+
+---
+
+## 📄 License
+
+**MIT License** - Use for anything, including commercial projects.
+
+See [LICENSE](LICENSE) for full terms.
+
+**In short:** You can use, modify, and distribute this code freely, as long as you include the original license.
+
+---
+
+## 🙏 Acknowledgments
+
+**Built With:**
+- [React](https://react.dev/) - UI framework
+- [TypeScript](https://www.typescriptlang.org/) - Type safety
+- [Vite](https://vitejs.dev/) - Build tool
+- [Zustand](https://github.com/pmndrs/zustand) - State management
+- [Tailwind CSS](https://tailwindcss.com/) - Styling
+- [Vitest](https://vitest.dev/) - Testing
+- [Leaflet](https://leafletjs.com/) - Maps
+- [Open-Meteo](https://open-meteo.com/) - Weather data (free API)
+
+**Inspired By:**
+- **Notion** - All-in-one flexibility
+- **Obsidian** - Local-first, Markdown, powerful linking
+- **Apple Notes** - Simplicity and speed
+- **Monday.com** - Professional project management
+- **Habitica** - Gamification for productivity
+- **Spiceworks** - Free IT helpdesk
+
+---
+
+## 📞 Contact & Links
+
+- **Live App:** [brain.neuman.dev](https://brain.neuman.dev)
+- **GitHub:** [github.com/travisjneuman/system.knowledgebase](https://github.com/travisjneuman/system.knowledgebase)
+- **Issues:** [GitHub Issues](https://github.com/travisjneuman/system.knowledgebase/issues)
+- **Discussions:** [GitHub Discussions](https://github.com/travisjneuman/system.knowledgebase/discussions)
+- **Documentation:** [docs/](docs/) (current) & [.archive/](.archive/) (historical)
+
+---
+
+## ⭐ Star This Repo!
+
+If you find Neuman Brain useful, please star the repository on GitHub! It helps others discover the project.
+
+---
+
+**Made with ❤️ for privacy, productivity, and open source**
+
+**Your data. Your device. Your second brain.**
+
+**Last updated; 11/13/2025**

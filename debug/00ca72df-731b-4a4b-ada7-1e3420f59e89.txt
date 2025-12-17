@@ -1,0 +1,946 @@
+2025-12-13T18:39:34.151Z [DEBUG] Session environment not yet supported on Windows
+2025-12-13T18:39:34.292Z [DEBUG] AutoUpdaterWrapper: Installation type: unknown
+2025-12-13T18:39:35.090Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-13T18:39:35.090Z [DEBUG] Found 0 hook matchers in settings
+2025-12-13T18:39:35.090Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-13T18:39:35.122Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-13T18:39:35.122Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-13T18:39:35.122Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-13T18:39:35.122Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-13T18:39:36.005Z [DEBUG] Stream started - received first chunk
+2025-12-13T18:39:38.518Z [DEBUG] Stream started - received first chunk
+2025-12-13T18:39:41.835Z [DEBUG] executePreToolHooks called for tool: TodoWrite
+2025-12-13T18:39:41.864Z [DEBUG] Getting matching hook commands for PreToolUse with query: TodoWrite
+2025-12-13T18:39:41.864Z [DEBUG] Found 1 hook matchers in settings
+2025-12-13T18:39:41.864Z [DEBUG] Matched 0 unique hooks for query "TodoWrite" (0 before deduplication)
+2025-12-13T18:39:41.912Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\todos\00ca72df-731b-4a4b-ada7-1e3420f59e89-agent-00ca72df-731b-4a4b-ada7-1e3420f59e89.json.tmp.21972.1765651181912
+2025-12-13T18:39:41.919Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (6.6ms)
+2025-12-13T18:39:41.919Z [DEBUG] Temp file written successfully, size: 1288 bytes
+2025-12-13T18:39:41.919Z [DEBUG] Renaming C:\Users\tjn\.claude\todos\00ca72df-731b-4a4b-ada7-1e3420f59e89-agent-00ca72df-731b-4a4b-ada7-1e3420f59e89.json.tmp.21972.1765651181912 to C:\Users\tjn\.claude\todos\00ca72df-731b-4a4b-ada7-1e3420f59e89-agent-00ca72df-731b-4a4b-ada7-1e3420f59e89.json
+2025-12-13T18:39:41.919Z [DEBUG] File C:\Users\tjn\.claude\todos\00ca72df-731b-4a4b-ada7-1e3420f59e89-agent-00ca72df-731b-4a4b-ada7-1e3420f59e89.json written atomically
+2025-12-13T18:39:41.940Z [DEBUG] Getting matching hook commands for PostToolUse with query: TodoWrite
+2025-12-13T18:39:41.940Z [DEBUG] Found 0 hook matchers in settings
+2025-12-13T18:39:41.940Z [DEBUG] Matched 0 unique hooks for query "TodoWrite" (0 before deduplication)
+2025-12-13T18:39:41.975Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-13T18:39:41.975Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-13T18:39:41.975Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-13T18:39:41.975Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-13T18:39:44.698Z [DEBUG] Stream started - received first chunk
+2025-12-13T18:39:45.610Z [DEBUG] executePreToolHooks called for tool: Read
+2025-12-13T18:39:45.623Z [DEBUG] Getting matching hook commands for PreToolUse with query: Read
+2025-12-13T18:39:45.623Z [DEBUG] Found 1 hook matchers in settings
+2025-12-13T18:39:45.623Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2025-12-13T18:39:46.511Z [DEBUG] Getting matching hook commands for PostToolUse with query: Read
+2025-12-13T18:39:46.511Z [DEBUG] Found 0 hook matchers in settings
+2025-12-13T18:39:46.511Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2025-12-13T18:39:46.542Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-13T18:39:46.542Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-13T18:39:46.542Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-13T18:39:46.542Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-13T18:39:49.544Z [DEBUG] Stream started - received first chunk
+2025-12-13T18:39:57.172Z [DEBUG] executePreToolHooks called for tool: Edit
+2025-12-13T18:39:57.186Z [DEBUG] Getting matching hook commands for PreToolUse with query: Edit
+2025-12-13T18:39:57.186Z [DEBUG] Found 1 hook matchers in settings
+2025-12-13T18:39:57.186Z [DEBUG] Matched 1 unique hooks for query "Edit" (1 before deduplication)
+2025-12-13T18:39:58.196Z [DEBUG] executePermissionRequestHooks called for tool: Edit
+2025-12-13T18:39:58.379Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Edit
+2025-12-13T18:39:58.379Z [DEBUG] Found 0 hook matchers in settings
+2025-12-13T18:39:58.379Z [DEBUG] Matched 0 unique hooks for query "Edit" (0 before deduplication)
+2025-12-13T18:40:04.219Z [DEBUG] Getting matching hook commands for Notification with query: permission_prompt
+2025-12-13T18:40:04.219Z [DEBUG] Found 0 hook matchers in settings
+2025-12-13T18:40:04.219Z [DEBUG] Matched 0 unique hooks for query "permission_prompt" (0 before deduplication)
+2025-12-13T18:40:08.864Z [DEBUG] Applying permission update: Setting mode to 'acceptEdits'
+2025-12-13T18:40:08.868Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\skills\README.md.tmp.21972.1765651208868
+2025-12-13T18:40:08.868Z [DEBUG] Preserving file permissions: 100666
+2025-12-13T18:40:08.873Z [DEBUG] Temp file written successfully, size: 5577 bytes
+2025-12-13T18:40:08.873Z [DEBUG] Applied original permissions to temp file
+2025-12-13T18:40:08.873Z [DEBUG] Renaming C:\Users\tjn\.claude\skills\README.md.tmp.21972.1765651208868 to C:\Users\tjn\.claude\skills\README.md
+2025-12-13T18:40:08.873Z [DEBUG] File C:\Users\tjn\.claude\skills\README.md written atomically
+2025-12-13T18:40:08.909Z [DEBUG] Getting matching hook commands for PostToolUse with query: Edit
+2025-12-13T18:40:08.909Z [DEBUG] Found 0 hook matchers in settings
+2025-12-13T18:40:08.909Z [DEBUG] Matched 0 unique hooks for query "Edit" (0 before deduplication)
+2025-12-13T18:40:08.956Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-13T18:40:08.956Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-13T18:40:08.956Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-13T18:40:08.956Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-13T18:40:09.248Z [DEBUG] AutoUpdaterWrapper: Installation type: unknown
+2025-12-13T18:40:11.737Z [DEBUG] Stream started - received first chunk
+2025-12-13T18:40:14.716Z [DEBUG] executePreToolHooks called for tool: Edit
+2025-12-13T18:40:14.726Z [DEBUG] Getting matching hook commands for PreToolUse with query: Edit
+2025-12-13T18:40:14.726Z [DEBUG] Found 1 hook matchers in settings
+2025-12-13T18:40:14.726Z [DEBUG] Matched 1 unique hooks for query "Edit" (1 before deduplication)
+2025-12-13T18:40:15.669Z [DEBUG] executePermissionRequestHooks called for tool: Edit
+2025-12-13T18:40:15.809Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Edit
+2025-12-13T18:40:15.809Z [DEBUG] Found 0 hook matchers in settings
+2025-12-13T18:40:15.809Z [DEBUG] Matched 0 unique hooks for query "Edit" (0 before deduplication)
+2025-12-13T18:40:21.691Z [DEBUG] Getting matching hook commands for Notification with query: permission_prompt
+2025-12-13T18:40:21.691Z [DEBUG] Found 0 hook matchers in settings
+2025-12-13T18:40:21.691Z [DEBUG] Matched 0 unique hooks for query "permission_prompt" (0 before deduplication)
+2025-12-13T18:40:47.389Z [DEBUG] Applying permission update: Setting mode to 'acceptEdits'
+2025-12-13T18:40:47.393Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\skills\README.md.tmp.21972.1765651247393
+2025-12-13T18:40:47.393Z [DEBUG] Preserving file permissions: 100666
+2025-12-13T18:40:47.398Z [DEBUG] Temp file written successfully, size: 5603 bytes
+2025-12-13T18:40:47.398Z [DEBUG] Applied original permissions to temp file
+2025-12-13T18:40:47.398Z [DEBUG] Renaming C:\Users\tjn\.claude\skills\README.md.tmp.21972.1765651247393 to C:\Users\tjn\.claude\skills\README.md
+2025-12-13T18:40:47.398Z [DEBUG] File C:\Users\tjn\.claude\skills\README.md written atomically
+2025-12-13T18:40:47.431Z [DEBUG] Getting matching hook commands for PostToolUse with query: Edit
+2025-12-13T18:40:47.431Z [DEBUG] Found 0 hook matchers in settings
+2025-12-13T18:40:47.431Z [DEBUG] Matched 0 unique hooks for query "Edit" (0 before deduplication)
+2025-12-13T18:40:47.468Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-13T18:40:47.468Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-13T18:40:47.468Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-13T18:40:47.468Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-13T18:40:47.769Z [DEBUG] AutoUpdaterWrapper: Installation type: unknown
+2025-12-13T18:40:50.717Z [DEBUG] Stream started - received first chunk
+2025-12-13T18:40:56.626Z [DEBUG] executePreToolHooks called for tool: TodoWrite
+2025-12-13T18:40:56.638Z [DEBUG] Getting matching hook commands for PreToolUse with query: TodoWrite
+2025-12-13T18:40:56.638Z [DEBUG] Found 1 hook matchers in settings
+2025-12-13T18:40:56.639Z [DEBUG] Matched 0 unique hooks for query "TodoWrite" (0 before deduplication)
+2025-12-13T18:40:56.694Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\todos\00ca72df-731b-4a4b-ada7-1e3420f59e89-agent-00ca72df-731b-4a4b-ada7-1e3420f59e89.json.tmp.21972.1765651256694
+2025-12-13T18:40:56.694Z [DEBUG] Preserving file permissions: 100666
+2025-12-13T18:40:56.708Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (13.6ms)
+2025-12-13T18:40:56.708Z [DEBUG] Temp file written successfully, size: 2 bytes
+2025-12-13T18:40:56.708Z [DEBUG] Applied original permissions to temp file
+2025-12-13T18:40:56.708Z [DEBUG] Renaming C:\Users\tjn\.claude\todos\00ca72df-731b-4a4b-ada7-1e3420f59e89-agent-00ca72df-731b-4a4b-ada7-1e3420f59e89.json.tmp.21972.1765651256694 to C:\Users\tjn\.claude\todos\00ca72df-731b-4a4b-ada7-1e3420f59e89-agent-00ca72df-731b-4a4b-ada7-1e3420f59e89.json
+2025-12-13T18:40:56.708Z [DEBUG] File C:\Users\tjn\.claude\todos\00ca72df-731b-4a4b-ada7-1e3420f59e89-agent-00ca72df-731b-4a4b-ada7-1e3420f59e89.json written atomically
+2025-12-13T18:40:56.726Z [DEBUG] Getting matching hook commands for PostToolUse with query: TodoWrite
+2025-12-13T18:40:56.726Z [DEBUG] Found 0 hook matchers in settings
+2025-12-13T18:40:56.726Z [DEBUG] Matched 0 unique hooks for query "TodoWrite" (0 before deduplication)
+2025-12-13T18:40:56.753Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-13T18:40:56.753Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-13T18:40:56.753Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-13T18:40:56.753Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-13T18:40:59.618Z [DEBUG] Stream started - received first chunk
+2025-12-13T18:41:14.416Z [DEBUG] Getting matching hook commands for Stop with query: undefined
+2025-12-13T18:41:14.417Z [DEBUG] Found 0 hook matchers in settings
+2025-12-13T18:41:14.417Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-13T18:41:17.388Z [DEBUG] Stream started - received first chunk
+2025-12-13T18:41:22.937Z [DEBUG] Getting matching hook commands for SubagentStop with query: undefined
+2025-12-13T18:41:22.937Z [DEBUG] Found 0 hook matchers in settings
+2025-12-13T18:41:22.937Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-13T18:47:08.200Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-13T18:47:08.201Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-13T18:47:08.201Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-13T18:47:08.201Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-13T18:47:08.539Z [DEBUG] Getting matching hook commands for UserPromptSubmit with query: undefined
+2025-12-13T18:47:08.539Z [DEBUG] Found 0 hook matchers in settings
+2025-12-13T18:47:08.539Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-13T18:47:09.683Z [DEBUG] Stream started - received first chunk
+2025-12-13T18:47:11.841Z [DEBUG] Stream started - received first chunk
+2025-12-13T18:47:28.910Z [DEBUG] executePreToolHooks called for tool: Read
+2025-12-13T18:47:28.918Z [DEBUG] Getting matching hook commands for PreToolUse with query: Read
+2025-12-13T18:47:28.918Z [DEBUG] Found 1 hook matchers in settings
+2025-12-13T18:47:28.918Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2025-12-13T18:47:30.066Z [DEBUG] Getting matching hook commands for PostToolUse with query: Read
+2025-12-13T18:47:30.066Z [DEBUG] Found 0 hook matchers in settings
+2025-12-13T18:47:30.066Z [DEBUG] Matched 0 unique hooks for query "Read" (0 before deduplication)
+2025-12-13T18:47:30.089Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-13T18:47:30.089Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-13T18:47:30.089Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-13T18:47:30.089Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-13T18:47:33.497Z [DEBUG] Stream started - received first chunk
+2025-12-13T18:47:59.590Z [DEBUG] executePreToolHooks called for tool: Write
+2025-12-13T18:47:59.597Z [DEBUG] Getting matching hook commands for PreToolUse with query: Write
+2025-12-13T18:47:59.597Z [DEBUG] Found 1 hook matchers in settings
+2025-12-13T18:47:59.597Z [DEBUG] Matched 1 unique hooks for query "Write" (1 before deduplication)
+2025-12-13T18:48:01.002Z [DEBUG] executePermissionRequestHooks called for tool: Write
+2025-12-13T18:48:01.179Z [DEBUG] [SLOW OPERATION DETECTED] fs.readFileSync (5.2ms)
+2025-12-13T18:48:01.557Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Write
+2025-12-13T18:48:01.557Z [DEBUG] Found 0 hook matchers in settings
+2025-12-13T18:48:01.557Z [DEBUG] Matched 0 unique hooks for query "Write" (0 before deduplication)
+2025-12-13T18:48:03.831Z [DEBUG] Applying permission update: Setting mode to 'acceptEdits'
+2025-12-13T18:48:03.834Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\.claude.json.tmp.21972.1765651683834
+2025-12-13T18:48:03.834Z [DEBUG] Preserving file permissions: 100666
+2025-12-13T18:48:03.839Z [DEBUG] Temp file written successfully, size: 766 bytes
+2025-12-13T18:48:03.839Z [DEBUG] Applied original permissions to temp file
+2025-12-13T18:48:03.839Z [DEBUG] Renaming C:\Users\tjn\.claude\.claude.json.tmp.21972.1765651683834 to C:\Users\tjn\.claude\.claude.json
+2025-12-13T18:48:03.839Z [DEBUG] File C:\Users\tjn\.claude\.claude.json written atomically
+2025-12-13T18:48:03.888Z [DEBUG] Getting matching hook commands for PostToolUse with query: Write
+2025-12-13T18:48:03.888Z [DEBUG] Found 0 hook matchers in settings
+2025-12-13T18:48:03.888Z [DEBUG] Matched 0 unique hooks for query "Write" (0 before deduplication)
+2025-12-13T18:48:04.273Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-13T18:48:04.277Z [DEBUG] AutoUpdaterWrapper: Installation type: unknown
+2025-12-13T18:48:04.454Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-13T18:48:04.454Z [DEBUG] Found 1 hook matchers in settings
+2025-12-13T18:48:04.454Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-13T18:48:06.397Z [DEBUG] Permission suggestions for Bash: [
+  {
+    "type": "addDirectories",
+    "directories": [
+      "C:\\Users\\tjn\\.claude"
+    ],
+    "destination": "session"
+  },
+  {
+    "type": "setMode",
+    "mode": "acceptEdits",
+    "destination": "session"
+  }
+]
+2025-12-13T18:48:06.880Z [DEBUG] executePermissionRequestHooks called for tool: Bash
+2025-12-13T18:48:07.056Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Bash
+2025-12-13T18:48:07.056Z [DEBUG] Found 0 hook matchers in settings
+2025-12-13T18:48:07.056Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-13T18:48:11.911Z [DEBUG] Applying permission update: Adding 1 directory with destination 'session': ["C:\\Users\\tjn\\.claude"]
+2025-12-13T18:48:11.911Z [DEBUG] Applying permission update: Setting mode to 'acceptEdits'
+2025-12-13T18:48:11.987Z [DEBUG] Snapshot file missing, recreating: C:\Users\tjn\.claude\shell-snapshots\snapshot-bash-1765642179405-yaa7no.sh
+2025-12-13T18:48:12.007Z [DEBUG] Creating shell snapshot for bash (C:\Program Files\Git\bin\bash.exe)
+2025-12-13T18:48:12.007Z [DEBUG] Looking for shell config file: C:\Users\tjn\.bashrc
+2025-12-13T18:48:12.007Z [DEBUG] Shell config file not found: C:\Users\tjn\.bashrc, creating snapshot with Claude Code defaults only
+2025-12-13T18:48:12.007Z [DEBUG] Snapshots directory: C:\Users\tjn\.claude\shell-snapshots
+2025-12-13T18:48:12.015Z [DEBUG] Creating snapshot at: C:\Users\tjn\.claude\shell-snapshots\snapshot-bash-1765651692007-add6q7.sh
+2025-12-13T18:48:12.015Z [DEBUG] Shell binary exists: true
+2025-12-13T18:48:12.015Z [DEBUG] Execution timeout: 10000ms
+2025-12-13T18:48:12.504Z [DEBUG] AutoUpdaterWrapper: Installation type: unknown
+2025-12-13T18:48:12.661Z [DEBUG] Shell snapshot created successfully (347 bytes)
+2025-12-13T18:48:12.722Z [DEBUG] Session environment not yet supported on Windows
+2025-12-13T18:48:13.933Z [DEBUG] Getting matching hook commands for PostToolUse with query: Bash
+2025-12-13T18:48:13.933Z [DEBUG] Found 0 hook matchers in settings
+2025-12-13T18:48:13.933Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-13T18:48:14.167Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-13T18:48:14.167Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-13T18:48:14.167Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-13T18:48:14.167Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-13T18:48:14.779Z [DEBUG] Stream started - received first chunk
+2025-12-13T18:48:18.400Z [DEBUG] Stream started - received first chunk
+2025-12-13T18:48:30.239Z [DEBUG] executePreToolHooks called for tool: Edit
+2025-12-13T18:48:30.246Z [DEBUG] Getting matching hook commands for PreToolUse with query: Edit
+2025-12-13T18:48:30.246Z [DEBUG] Found 1 hook matchers in settings
+2025-12-13T18:48:30.246Z [DEBUG] Matched 1 unique hooks for query "Edit" (1 before deduplication)
+2025-12-13T18:48:31.212Z [DEBUG] executePermissionRequestHooks called for tool: Edit
+2025-12-13T18:48:31.412Z [DEBUG] Getting matching hook commands for PermissionRequest with query: Edit
+2025-12-13T18:48:31.412Z [DEBUG] Found 0 hook matchers in settings
+2025-12-13T18:48:31.412Z [DEBUG] Matched 0 unique hooks for query "Edit" (0 before deduplication)
+2025-12-13T18:48:37.233Z [DEBUG] Getting matching hook commands for Notification with query: permission_prompt
+2025-12-13T18:48:37.233Z [DEBUG] Found 0 hook matchers in settings
+2025-12-13T18:48:37.233Z [DEBUG] Matched 0 unique hooks for query "permission_prompt" (0 before deduplication)
+2025-12-13T18:49:25.292Z [DEBUG] Applying permission update: Setting mode to 'acceptEdits'
+2025-12-13T18:49:25.296Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\CLAUDE-CODE-RESOURCES.md.tmp.21972.1765651765296
+2025-12-13T18:49:25.296Z [DEBUG] Preserving file permissions: 100666
+2025-12-13T18:49:25.303Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (7.0ms)
+2025-12-13T18:49:25.303Z [DEBUG] Temp file written successfully, size: 22059 bytes
+2025-12-13T18:49:25.304Z [DEBUG] Applied original permissions to temp file
+2025-12-13T18:49:25.304Z [DEBUG] Renaming C:\Users\tjn\.claude\CLAUDE-CODE-RESOURCES.md.tmp.21972.1765651765296 to C:\Users\tjn\.claude\CLAUDE-CODE-RESOURCES.md
+2025-12-13T18:49:25.304Z [DEBUG] File C:\Users\tjn\.claude\CLAUDE-CODE-RESOURCES.md written atomically
+2025-12-13T18:49:25.343Z [DEBUG] Getting matching hook commands for PostToolUse with query: Edit
+2025-12-13T18:49:25.343Z [DEBUG] Found 0 hook matchers in settings
+2025-12-13T18:49:25.343Z [DEBUG] Matched 0 unique hooks for query "Edit" (0 before deduplication)
+2025-12-13T18:49:25.386Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-13T18:49:25.386Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-13T18:49:25.386Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-13T18:49:25.386Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-13T18:49:25.755Z [DEBUG] AutoUpdaterWrapper: Installation type: unknown
+2025-12-13T18:49:28.885Z [DEBUG] Stream started - received first chunk
+2025-12-13T18:49:37.700Z [DEBUG] Language not supported while highlighting code, falling back to markdown:
+2025-12-13T18:49:37.781Z [DEBUG] Getting matching hook commands for Stop with query: undefined
+2025-12-13T18:49:37.781Z [DEBUG] Found 0 hook matchers in settings
+2025-12-13T18:49:37.781Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-13T18:49:40.376Z [DEBUG] Stream started - received first chunk
+2025-12-13T18:49:45.095Z [DEBUG] Getting matching hook commands for SubagentStop with query: undefined
+2025-12-13T18:49:45.095Z [DEBUG] Found 0 hook matchers in settings
+2025-12-13T18:49:45.095Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-13T18:50:37.809Z [DEBUG] Getting matching hook commands for Notification with query: idle_prompt
+2025-12-13T18:50:37.809Z [DEBUG] Found 0 hook matchers in settings
+2025-12-13T18:50:37.809Z [DEBUG] Matched 0 unique hooks for query "idle_prompt" (0 before deduplication)
+2025-12-13T19:09:53.589Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude.json.tmp.21972.1765652993589
+2025-12-13T19:09:53.589Z [DEBUG] Preserving file permissions: 100666
+2025-12-13T19:09:53.594Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (5.8ms)
+2025-12-13T19:09:53.594Z [DEBUG] Temp file written successfully, size: 965 bytes
+2025-12-13T19:09:53.595Z [DEBUG] Applied original permissions to temp file
+2025-12-13T19:09:53.595Z [DEBUG] Renaming C:\Users\tjn\.claude.json.tmp.21972.1765652993589 to C:\Users\tjn\.claude.json
+2025-12-13T19:09:53.595Z [DEBUG] File C:\Users\tjn\.claude.json written atomically
+2025-12-13T19:12:56.058Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude.json.tmp.21972.1765653176058
+2025-12-13T19:12:56.058Z [DEBUG] Preserving file permissions: 100666
+2025-12-13T19:12:56.065Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (6.8ms)
+2025-12-13T19:12:56.065Z [DEBUG] Temp file written successfully, size: 993 bytes
+2025-12-13T19:12:56.065Z [DEBUG] Applied original permissions to temp file
+2025-12-13T19:12:56.065Z [DEBUG] Renaming C:\Users\tjn\.claude.json.tmp.21972.1765653176058 to C:\Users\tjn\.claude.json
+2025-12-13T19:12:56.065Z [DEBUG] File C:\Users\tjn\.claude.json written atomically
+2025-12-13T19:12:56.075Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-13T19:12:56.075Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-13T19:12:56.075Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-13T19:12:56.075Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-13T19:12:56.388Z [DEBUG] Skipping UserPromptSubmit hook execution - workspace trust not accepted
+2025-12-13T19:12:56.391Z [DEBUG] FileHistory: Added snapshot for ec50f948-b47c-4f8a-8ad2-f7d4a4fbc5a5, tracking 0 files
+2025-12-13T19:12:56.418Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude.json.tmp.21972.1765653176418
+2025-12-13T19:12:56.419Z [DEBUG] Preserving file permissions: 100666
+2025-12-13T19:12:56.425Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (6.1ms)
+2025-12-13T19:12:56.425Z [DEBUG] Temp file written successfully, size: 1455 bytes
+2025-12-13T19:12:56.425Z [DEBUG] Applied original permissions to temp file
+2025-12-13T19:12:56.425Z [DEBUG] Renaming C:\Users\tjn\.claude.json.tmp.21972.1765653176418 to C:\Users\tjn\.claude.json
+2025-12-13T19:12:56.425Z [DEBUG] File C:\Users\tjn\.claude.json written atomically
+2025-12-13T19:12:57.110Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:13:00.733Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:13:06.378Z [DEBUG] executePreToolHooks called for tool: TodoWrite
+2025-12-13T19:13:06.378Z [DEBUG] Skipping PreToolUse:TodoWrite hook execution - workspace trust not accepted
+2025-12-13T19:13:06.401Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\todos\00ca72df-731b-4a4b-ada7-1e3420f59e89-agent-00ca72df-731b-4a4b-ada7-1e3420f59e89.json.tmp.21972.1765653186401
+2025-12-13T19:13:06.401Z [DEBUG] Preserving file permissions: 100666
+2025-12-13T19:13:06.410Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (9.0ms)
+2025-12-13T19:13:06.410Z [DEBUG] Temp file written successfully, size: 265 bytes
+2025-12-13T19:13:06.410Z [DEBUG] Applied original permissions to temp file
+2025-12-13T19:13:06.410Z [DEBUG] Renaming C:\Users\tjn\.claude\todos\00ca72df-731b-4a4b-ada7-1e3420f59e89-agent-00ca72df-731b-4a4b-ada7-1e3420f59e89.json.tmp.21972.1765653186401 to C:\Users\tjn\.claude\todos\00ca72df-731b-4a4b-ada7-1e3420f59e89-agent-00ca72df-731b-4a4b-ada7-1e3420f59e89.json
+2025-12-13T19:13:06.411Z [DEBUG] File C:\Users\tjn\.claude\todos\00ca72df-731b-4a4b-ada7-1e3420f59e89-agent-00ca72df-731b-4a4b-ada7-1e3420f59e89.json written atomically
+2025-12-13T19:13:06.417Z [DEBUG] Skipping PostToolUse:TodoWrite hook execution - workspace trust not accepted
+2025-12-13T19:13:06.426Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-13T19:13:06.426Z [DEBUG] Skipping PreToolUse:Bash hook execution - workspace trust not accepted
+2025-12-13T19:13:06.613Z [DEBUG] Session environment not yet supported on Windows
+2025-12-13T19:13:09.187Z [DEBUG] Skipping PostToolUseFailure:Bash hook execution - workspace trust not accepted
+2025-12-13T19:13:09.212Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-13T19:13:09.212Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-13T19:13:09.212Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-13T19:13:09.212Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-13T19:13:12.866Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:13:16.221Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-13T19:13:16.222Z [DEBUG] Skipping PreToolUse:Bash hook execution - workspace trust not accepted
+2025-12-13T19:13:16.408Z [DEBUG] Session environment not yet supported on Windows
+2025-12-13T19:14:16.960Z [DEBUG] Skipping PostToolUse:Bash hook execution - workspace trust not accepted
+2025-12-13T19:14:16.986Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-13T19:14:16.986Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-13T19:14:16.986Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-13T19:14:16.986Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-13T19:14:18.104Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:14:20.592Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:14:21.706Z [DEBUG] executePreToolHooks called for tool: TaskOutput
+2025-12-13T19:14:21.706Z [DEBUG] Skipping PreToolUse:TaskOutput hook execution - workspace trust not accepted
+2025-12-13T19:14:51.862Z [DEBUG] Skipping PostToolUse:TaskOutput hook execution - workspace trust not accepted
+2025-12-13T19:14:51.887Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-13T19:14:51.887Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-13T19:14:51.887Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-13T19:14:51.887Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-13T19:14:55.318Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:14:56.939Z [DEBUG] executePreToolHooks called for tool: KillShell
+2025-12-13T19:14:56.939Z [DEBUG] Skipping PreToolUse:KillShell hook execution - workspace trust not accepted
+2025-12-13T19:14:56.982Z [DEBUG] LocalBashTask bbf0db9 kill requested
+2025-12-13T19:14:56.990Z [DEBUG] Skipping PostToolUse:KillShell hook execution - workspace trust not accepted
+2025-12-13T19:14:57.021Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude.json.tmp.21972.1765653297021
+2025-12-13T19:14:57.021Z [DEBUG] Preserving file permissions: 100666
+2025-12-13T19:14:57.048Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (27.2ms)
+2025-12-13T19:14:57.048Z [DEBUG] Temp file written successfully, size: 1483 bytes
+2025-12-13T19:14:57.049Z [DEBUG] Applied original permissions to temp file
+2025-12-13T19:14:57.049Z [DEBUG] Renaming C:\Users\tjn\.claude.json.tmp.21972.1765653297021 to C:\Users\tjn\.claude.json
+2025-12-13T19:14:57.049Z [DEBUG] File C:\Users\tjn\.claude.json written atomically
+2025-12-13T19:14:57.052Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-13T19:14:57.052Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-13T19:14:57.052Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-13T19:14:57.052Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-13T19:15:00.775Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:15:05.365Z [DEBUG] executePreToolHooks called for tool: Read
+2025-12-13T19:15:05.366Z [DEBUG] Skipping PreToolUse:Read hook execution - workspace trust not accepted
+2025-12-13T19:15:05.753Z [DEBUG] Skipping PostToolUse:Read hook execution - workspace trust not accepted
+2025-12-13T19:15:05.778Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-13T19:15:05.778Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-13T19:15:05.778Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-13T19:15:05.778Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-13T19:15:09.776Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:15:18.921Z [DEBUG] executePreToolHooks called for tool: Edit
+2025-12-13T19:15:18.922Z [DEBUG] Skipping PreToolUse:Edit hook execution - workspace trust not accepted
+2025-12-13T19:15:19.693Z [DEBUG] executePermissionRequestHooks called for tool: Edit
+2025-12-13T19:15:19.693Z [DEBUG] Skipping PermissionRequest:Edit hook execution - workspace trust not accepted
+2025-12-13T19:15:25.716Z [DEBUG] Skipping Notification:permission_prompt hook execution - workspace trust not accepted
+2025-12-13T19:24:40.062Z [DEBUG] Applying permission update: Setting mode to 'acceptEdits'
+2025-12-13T19:24:40.067Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\CLAUDE-CODE-RESOURCES.md.tmp.21972.1765653880067
+2025-12-13T19:24:40.067Z [DEBUG] Preserving file permissions: 100666
+2025-12-13T19:24:40.080Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (13.2ms)
+2025-12-13T19:24:40.080Z [DEBUG] Temp file written successfully, size: 22306 bytes
+2025-12-13T19:24:40.080Z [DEBUG] Applied original permissions to temp file
+2025-12-13T19:24:40.080Z [DEBUG] Renaming C:\Users\tjn\.claude\CLAUDE-CODE-RESOURCES.md.tmp.21972.1765653880067 to C:\Users\tjn\.claude\CLAUDE-CODE-RESOURCES.md
+2025-12-13T19:24:40.081Z [DEBUG] File C:\Users\tjn\.claude\CLAUDE-CODE-RESOURCES.md written atomically
+2025-12-13T19:24:40.098Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (6.9ms)
+2025-12-13T19:24:40.099Z [DEBUG] FileHistory: Tracked file modification for C:\Users\tjn\.claude\CLAUDE-CODE-RESOURCES.md
+2025-12-13T19:24:40.113Z [DEBUG] Skipping PostToolUse:Edit hook execution - workspace trust not accepted
+2025-12-13T19:24:40.154Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-13T19:24:40.154Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-13T19:24:40.154Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-13T19:24:40.154Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-13T19:24:40.521Z [DEBUG] AutoUpdaterWrapper: Installation type: unknown
+2025-12-13T19:24:43.718Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:24:45.112Z [DEBUG] executePreToolHooks called for tool: TodoWrite
+2025-12-13T19:24:45.112Z [DEBUG] Skipping PreToolUse:TodoWrite hook execution - workspace trust not accepted
+2025-12-13T19:24:45.159Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\todos\00ca72df-731b-4a4b-ada7-1e3420f59e89-agent-00ca72df-731b-4a4b-ada7-1e3420f59e89.json.tmp.21972.1765653885159
+2025-12-13T19:24:45.159Z [DEBUG] Preserving file permissions: 100666
+2025-12-13T19:24:45.173Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (14.3ms)
+2025-12-13T19:24:45.173Z [DEBUG] Temp file written successfully, size: 2 bytes
+2025-12-13T19:24:45.173Z [DEBUG] Applied original permissions to temp file
+2025-12-13T19:24:45.173Z [DEBUG] Renaming C:\Users\tjn\.claude\todos\00ca72df-731b-4a4b-ada7-1e3420f59e89-agent-00ca72df-731b-4a4b-ada7-1e3420f59e89.json.tmp.21972.1765653885159 to C:\Users\tjn\.claude\todos\00ca72df-731b-4a4b-ada7-1e3420f59e89-agent-00ca72df-731b-4a4b-ada7-1e3420f59e89.json
+2025-12-13T19:24:45.173Z [DEBUG] File C:\Users\tjn\.claude\todos\00ca72df-731b-4a4b-ada7-1e3420f59e89-agent-00ca72df-731b-4a4b-ada7-1e3420f59e89.json written atomically
+2025-12-13T19:24:45.178Z [DEBUG] Skipping PostToolUse:TodoWrite hook execution - workspace trust not accepted
+2025-12-13T19:24:45.201Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-13T19:24:45.201Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-13T19:24:45.201Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-13T19:24:45.201Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-13T19:24:48.290Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:24:52.092Z [DEBUG] Language not supported while highlighting code, falling back to markdown:
+2025-12-13T19:24:52.144Z [DEBUG] Skipping Stop hook execution - workspace trust not accepted
+2025-12-13T19:24:54.981Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:24:58.721Z [DEBUG] Skipping SubagentStop hook execution - workspace trust not accepted
+2025-12-13T19:42:16.648Z [DEBUG] AutoUpdaterWrapper: Installation type: unknown
+2025-12-13T19:43:37.204Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-13T19:43:37.204Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-13T19:43:37.204Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-13T19:43:37.204Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-13T19:43:37.523Z [DEBUG] Skipping UserPromptSubmit hook execution - workspace trust not accepted
+2025-12-13T19:43:37.527Z [DEBUG] FileHistory: Making snapshot for message 0b8fb147-58da-4bcc-ba0f-4aaa436a71c7
+2025-12-13T19:43:37.527Z [DEBUG] FileHistory: Added snapshot for 0b8fb147-58da-4bcc-ba0f-4aaa436a71c7, tracking 1 files
+2025-12-13T19:43:38.288Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:43:41.612Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:43:46.902Z [DEBUG] executePreToolHooks called for tool: TodoWrite
+2025-12-13T19:43:46.903Z [DEBUG] Skipping PreToolUse:TodoWrite hook execution - workspace trust not accepted
+2025-12-13T19:43:46.943Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\todos\00ca72df-731b-4a4b-ada7-1e3420f59e89-agent-00ca72df-731b-4a4b-ada7-1e3420f59e89.json.tmp.21972.1765655026943
+2025-12-13T19:43:46.943Z [DEBUG] Preserving file permissions: 100666
+2025-12-13T19:43:46.958Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (14.7ms)
+2025-12-13T19:43:46.958Z [DEBUG] Temp file written successfully, size: 986 bytes
+2025-12-13T19:43:46.958Z [DEBUG] Applied original permissions to temp file
+2025-12-13T19:43:46.958Z [DEBUG] Renaming C:\Users\tjn\.claude\todos\00ca72df-731b-4a4b-ada7-1e3420f59e89-agent-00ca72df-731b-4a4b-ada7-1e3420f59e89.json.tmp.21972.1765655026943 to C:\Users\tjn\.claude\todos\00ca72df-731b-4a4b-ada7-1e3420f59e89-agent-00ca72df-731b-4a4b-ada7-1e3420f59e89.json
+2025-12-13T19:43:46.958Z [DEBUG] File C:\Users\tjn\.claude\todos\00ca72df-731b-4a4b-ada7-1e3420f59e89-agent-00ca72df-731b-4a4b-ada7-1e3420f59e89.json written atomically
+2025-12-13T19:43:46.966Z [DEBUG] Skipping PostToolUse:TodoWrite hook execution - workspace trust not accepted
+2025-12-13T19:43:46.978Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-13T19:43:46.979Z [DEBUG] Skipping PreToolUse:Bash hook execution - workspace trust not accepted
+2025-12-13T19:43:48.327Z [DEBUG] Permission suggestions for Bash: [
+  {
+    "type": "addDirectories",
+    "directories": [
+      "C:\\Users\\tjn\\.claude"
+    ],
+    "destination": "session"
+  },
+  {
+    "type": "setMode",
+    "mode": "acceptEdits",
+    "destination": "session"
+  }
+]
+2025-12-13T19:43:48.352Z [DEBUG] executePermissionRequestHooks called for tool: Bash
+2025-12-13T19:43:48.352Z [DEBUG] Skipping PermissionRequest:Bash hook execution - workspace trust not accepted
+2025-12-13T19:43:54.376Z [DEBUG] Skipping Notification:permission_prompt hook execution - workspace trust not accepted
+2025-12-13T19:44:36.523Z [DEBUG] Applying permission update: Adding 1 directory with destination 'session': ["C:\\Users\\tjn\\.claude"]
+2025-12-13T19:44:36.523Z [DEBUG] Applying permission update: Setting mode to 'acceptEdits'
+2025-12-13T19:44:36.692Z [DEBUG] Session environment not yet supported on Windows
+2025-12-13T19:44:36.987Z [DEBUG] AutoUpdaterWrapper: Installation type: unknown
+2025-12-13T19:44:37.553Z [DEBUG] Skipping PostToolUse:Bash hook execution - workspace trust not accepted
+2025-12-13T19:44:37.580Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-13T19:44:37.580Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-13T19:44:37.581Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-13T19:44:37.581Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-13T19:44:37.949Z [ERROR] Error streaming, falling back to non-streaming mode: Connection error.
+2025-12-13T19:44:42.098Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:45:07.775Z [DEBUG] executePreToolHooks called for tool: TodoWrite
+2025-12-13T19:45:07.775Z [DEBUG] Skipping PreToolUse:TodoWrite hook execution - workspace trust not accepted
+2025-12-13T19:45:07.827Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\todos\00ca72df-731b-4a4b-ada7-1e3420f59e89-agent-00ca72df-731b-4a4b-ada7-1e3420f59e89.json.tmp.21972.1765655107827
+2025-12-13T19:45:07.827Z [DEBUG] Preserving file permissions: 100666
+2025-12-13T19:45:07.833Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (6.0ms)
+2025-12-13T19:45:07.833Z [DEBUG] Temp file written successfully, size: 988 bytes
+2025-12-13T19:45:07.833Z [DEBUG] Applied original permissions to temp file
+2025-12-13T19:45:07.833Z [DEBUG] Renaming C:\Users\tjn\.claude\todos\00ca72df-731b-4a4b-ada7-1e3420f59e89-agent-00ca72df-731b-4a4b-ada7-1e3420f59e89.json.tmp.21972.1765655107827 to C:\Users\tjn\.claude\todos\00ca72df-731b-4a4b-ada7-1e3420f59e89-agent-00ca72df-731b-4a4b-ada7-1e3420f59e89.json
+2025-12-13T19:45:07.833Z [DEBUG] File C:\Users\tjn\.claude\todos\00ca72df-731b-4a4b-ada7-1e3420f59e89-agent-00ca72df-731b-4a4b-ada7-1e3420f59e89.json written atomically
+2025-12-13T19:45:07.840Z [DEBUG] Skipping PostToolUse:TodoWrite hook execution - workspace trust not accepted
+2025-12-13T19:45:07.941Z [DEBUG] executePreToolHooks called for tool: Write
+2025-12-13T19:45:07.941Z [DEBUG] Skipping PreToolUse:Write hook execution - workspace trust not accepted
+2025-12-13T19:45:08.782Z [DEBUG] executePermissionRequestHooks called for tool: Write
+2025-12-13T19:45:08.782Z [DEBUG] Skipping PermissionRequest:Write hook execution - workspace trust not accepted
+2025-12-13T19:45:14.801Z [DEBUG] Skipping Notification:permission_prompt hook execution - workspace trust not accepted
+2025-12-13T19:46:15.866Z [DEBUG] Applying permission update: Setting mode to 'acceptEdits'
+2025-12-13T19:46:15.869Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\docs\README.md.tmp.21972.1765655175869
+2025-12-13T19:46:15.878Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (9.6ms)
+2025-12-13T19:46:15.878Z [DEBUG] Temp file written successfully, size: 4447 bytes
+2025-12-13T19:46:15.878Z [DEBUG] Renaming C:\Users\tjn\.claude\docs\README.md.tmp.21972.1765655175869 to C:\Users\tjn\.claude\docs\README.md
+2025-12-13T19:46:15.879Z [DEBUG] File C:\Users\tjn\.claude\docs\README.md written atomically
+2025-12-13T19:46:15.891Z [DEBUG] FileHistory: Tracked file modification for C:\Users\tjn\.claude\docs\README.md
+2025-12-13T19:46:15.918Z [DEBUG] Skipping PostToolUse:Write hook execution - workspace trust not accepted
+2025-12-13T19:46:15.960Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-13T19:46:15.960Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-13T19:46:15.960Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-13T19:46:15.960Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-13T19:46:16.422Z [DEBUG] AutoUpdaterWrapper: Installation type: unknown
+2025-12-13T19:46:19.119Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:46:50.562Z [DEBUG] executePreToolHooks called for tool: TodoWrite
+2025-12-13T19:46:50.563Z [DEBUG] Skipping PreToolUse:TodoWrite hook execution - workspace trust not accepted
+2025-12-13T19:46:50.608Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\todos\00ca72df-731b-4a4b-ada7-1e3420f59e89-agent-00ca72df-731b-4a4b-ada7-1e3420f59e89.json.tmp.21972.1765655210608
+2025-12-13T19:46:50.608Z [DEBUG] Preserving file permissions: 100666
+2025-12-13T19:46:50.613Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (5.7ms)
+2025-12-13T19:46:50.613Z [DEBUG] Temp file written successfully, size: 990 bytes
+2025-12-13T19:46:50.613Z [DEBUG] Applied original permissions to temp file
+2025-12-13T19:46:50.613Z [DEBUG] Renaming C:\Users\tjn\.claude\todos\00ca72df-731b-4a4b-ada7-1e3420f59e89-agent-00ca72df-731b-4a4b-ada7-1e3420f59e89.json.tmp.21972.1765655210608 to C:\Users\tjn\.claude\todos\00ca72df-731b-4a4b-ada7-1e3420f59e89-agent-00ca72df-731b-4a4b-ada7-1e3420f59e89.json
+2025-12-13T19:46:50.614Z [DEBUG] File C:\Users\tjn\.claude\todos\00ca72df-731b-4a4b-ada7-1e3420f59e89-agent-00ca72df-731b-4a4b-ada7-1e3420f59e89.json written atomically
+2025-12-13T19:46:50.621Z [DEBUG] Skipping PostToolUse:TodoWrite hook execution - workspace trust not accepted
+2025-12-13T19:46:50.739Z [DEBUG] executePreToolHooks called for tool: Write
+2025-12-13T19:46:50.740Z [DEBUG] Skipping PreToolUse:Write hook execution - workspace trust not accepted
+2025-12-13T19:46:51.653Z [DEBUG] executePermissionRequestHooks called for tool: Write
+2025-12-13T19:46:51.653Z [DEBUG] Skipping PermissionRequest:Write hook execution - workspace trust not accepted
+2025-12-13T19:46:57.679Z [DEBUG] Skipping Notification:permission_prompt hook execution - workspace trust not accepted
+2025-12-13T19:47:05.321Z [DEBUG] Applying permission update: Setting mode to 'acceptEdits'
+2025-12-13T19:47:05.323Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\docs\FOLDER-STRUCTURE.md.tmp.21972.1765655225323
+2025-12-13T19:47:05.328Z [DEBUG] Temp file written successfully, size: 6130 bytes
+2025-12-13T19:47:05.328Z [DEBUG] Renaming C:\Users\tjn\.claude\docs\FOLDER-STRUCTURE.md.tmp.21972.1765655225323 to C:\Users\tjn\.claude\docs\FOLDER-STRUCTURE.md
+2025-12-13T19:47:05.328Z [DEBUG] File C:\Users\tjn\.claude\docs\FOLDER-STRUCTURE.md written atomically
+2025-12-13T19:47:05.344Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (8.8ms)
+2025-12-13T19:47:05.345Z [DEBUG] FileHistory: Tracked file modification for C:\Users\tjn\.claude\docs\FOLDER-STRUCTURE.md
+2025-12-13T19:47:05.372Z [DEBUG] Skipping PostToolUse:Write hook execution - workspace trust not accepted
+2025-12-13T19:47:05.404Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-13T19:47:05.404Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-13T19:47:05.404Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-13T19:47:05.404Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-13T19:47:05.879Z [DEBUG] AutoUpdaterWrapper: Installation type: unknown
+2025-12-13T19:47:08.506Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:47:42.542Z [WARN] Streaming stall detected: 31.5s gap between events (stall #1)
+2025-12-13T19:47:42.834Z [WARN] Streaming completed with 1 stall(s), total stall time: 31.5s
+2025-12-13T19:47:42.847Z [DEBUG] executePreToolHooks called for tool: TodoWrite
+2025-12-13T19:47:42.847Z [DEBUG] Skipping PreToolUse:TodoWrite hook execution - workspace trust not accepted
+2025-12-13T19:47:42.894Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\todos\00ca72df-731b-4a4b-ada7-1e3420f59e89-agent-00ca72df-731b-4a4b-ada7-1e3420f59e89.json.tmp.21972.1765655262894
+2025-12-13T19:47:42.894Z [DEBUG] Preserving file permissions: 100666
+2025-12-13T19:47:42.900Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (6.4ms)
+2025-12-13T19:47:42.900Z [DEBUG] Temp file written successfully, size: 992 bytes
+2025-12-13T19:47:42.900Z [DEBUG] Applied original permissions to temp file
+2025-12-13T19:47:42.900Z [DEBUG] Renaming C:\Users\tjn\.claude\todos\00ca72df-731b-4a4b-ada7-1e3420f59e89-agent-00ca72df-731b-4a4b-ada7-1e3420f59e89.json.tmp.21972.1765655262894 to C:\Users\tjn\.claude\todos\00ca72df-731b-4a4b-ada7-1e3420f59e89-agent-00ca72df-731b-4a4b-ada7-1e3420f59e89.json
+2025-12-13T19:47:42.901Z [DEBUG] File C:\Users\tjn\.claude\todos\00ca72df-731b-4a4b-ada7-1e3420f59e89-agent-00ca72df-731b-4a4b-ada7-1e3420f59e89.json written atomically
+2025-12-13T19:47:42.908Z [DEBUG] Skipping PostToolUse:TodoWrite hook execution - workspace trust not accepted
+2025-12-13T19:47:43.006Z [DEBUG] executePreToolHooks called for tool: Write
+2025-12-13T19:47:43.006Z [DEBUG] Skipping PreToolUse:Write hook execution - workspace trust not accepted
+2025-12-13T19:47:43.903Z [DEBUG] executePermissionRequestHooks called for tool: Write
+2025-12-13T19:47:43.903Z [DEBUG] Skipping PermissionRequest:Write hook execution - workspace trust not accepted
+2025-12-13T19:47:49.928Z [DEBUG] Skipping Notification:permission_prompt hook execution - workspace trust not accepted
+2025-12-13T19:48:17.746Z [DEBUG] Applying permission update: Setting mode to 'acceptEdits'
+2025-12-13T19:48:17.748Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\docs\CONFIGURATION.md.tmp.21972.1765655297748
+2025-12-13T19:48:17.753Z [DEBUG] Temp file written successfully, size: 6330 bytes
+2025-12-13T19:48:17.753Z [DEBUG] Renaming C:\Users\tjn\.claude\docs\CONFIGURATION.md.tmp.21972.1765655297748 to C:\Users\tjn\.claude\docs\CONFIGURATION.md
+2025-12-13T19:48:17.753Z [DEBUG] File C:\Users\tjn\.claude\docs\CONFIGURATION.md written atomically
+2025-12-13T19:48:17.766Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (6.8ms)
+2025-12-13T19:48:17.767Z [DEBUG] FileHistory: Tracked file modification for C:\Users\tjn\.claude\docs\CONFIGURATION.md
+2025-12-13T19:48:17.794Z [DEBUG] Skipping PostToolUse:Write hook execution - workspace trust not accepted
+2025-12-13T19:48:17.824Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-13T19:48:17.824Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-13T19:48:17.824Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-13T19:48:17.824Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-13T19:48:18.410Z [DEBUG] AutoUpdaterWrapper: Installation type: unknown
+2025-12-13T19:48:21.128Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:48:56.399Z [WARN] Streaming stall detected: 32.6s gap between events (stall #1)
+2025-12-13T19:48:56.712Z [WARN] Streaming completed with 1 stall(s), total stall time: 32.6s
+2025-12-13T19:48:56.742Z [DEBUG] executePreToolHooks called for tool: TodoWrite
+2025-12-13T19:48:56.743Z [DEBUG] Skipping PreToolUse:TodoWrite hook execution - workspace trust not accepted
+2025-12-13T19:48:56.789Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\todos\00ca72df-731b-4a4b-ada7-1e3420f59e89-agent-00ca72df-731b-4a4b-ada7-1e3420f59e89.json.tmp.21972.1765655336789
+2025-12-13T19:48:56.789Z [DEBUG] Preserving file permissions: 100666
+2025-12-13T19:48:56.795Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (6.7ms)
+2025-12-13T19:48:56.795Z [DEBUG] Temp file written successfully, size: 994 bytes
+2025-12-13T19:48:56.795Z [DEBUG] Applied original permissions to temp file
+2025-12-13T19:48:56.795Z [DEBUG] Renaming C:\Users\tjn\.claude\todos\00ca72df-731b-4a4b-ada7-1e3420f59e89-agent-00ca72df-731b-4a4b-ada7-1e3420f59e89.json.tmp.21972.1765655336789 to C:\Users\tjn\.claude\todos\00ca72df-731b-4a4b-ada7-1e3420f59e89-agent-00ca72df-731b-4a4b-ada7-1e3420f59e89.json
+2025-12-13T19:48:56.796Z [DEBUG] File C:\Users\tjn\.claude\todos\00ca72df-731b-4a4b-ada7-1e3420f59e89-agent-00ca72df-731b-4a4b-ada7-1e3420f59e89.json written atomically
+2025-12-13T19:48:56.803Z [DEBUG] Skipping PostToolUse:TodoWrite hook execution - workspace trust not accepted
+2025-12-13T19:48:56.894Z [DEBUG] executePreToolHooks called for tool: Write
+2025-12-13T19:48:56.894Z [DEBUG] Skipping PreToolUse:Write hook execution - workspace trust not accepted
+2025-12-13T19:48:57.753Z [DEBUG] executePermissionRequestHooks called for tool: Write
+2025-12-13T19:48:57.753Z [DEBUG] Skipping PermissionRequest:Write hook execution - workspace trust not accepted
+2025-12-13T19:49:03.775Z [DEBUG] Skipping Notification:permission_prompt hook execution - workspace trust not accepted
+2025-12-13T19:49:18.326Z [DEBUG] Applying permission update: Setting mode to 'acceptEdits'
+2025-12-13T19:49:18.329Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\docs\SKILLS.md.tmp.21972.1765655358329
+2025-12-13T19:49:18.339Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (9.9ms)
+2025-12-13T19:49:18.339Z [DEBUG] Temp file written successfully, size: 6928 bytes
+2025-12-13T19:49:18.339Z [DEBUG] Renaming C:\Users\tjn\.claude\docs\SKILLS.md.tmp.21972.1765655358329 to C:\Users\tjn\.claude\docs\SKILLS.md
+2025-12-13T19:49:18.339Z [DEBUG] File C:\Users\tjn\.claude\docs\SKILLS.md written atomically
+2025-12-13T19:49:18.351Z [DEBUG] FileHistory: Tracked file modification for C:\Users\tjn\.claude\docs\SKILLS.md
+2025-12-13T19:49:18.380Z [DEBUG] Skipping PostToolUse:Write hook execution - workspace trust not accepted
+2025-12-13T19:49:18.410Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-13T19:49:18.410Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-13T19:49:18.410Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-13T19:49:18.410Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-13T19:49:19.084Z [DEBUG] AutoUpdaterWrapper: Installation type: unknown
+2025-12-13T19:49:21.927Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:49:54.821Z [WARN] Streaming stall detected: 30.6s gap between events (stall #1)
+2025-12-13T19:49:55.200Z [WARN] Streaming completed with 1 stall(s), total stall time: 30.6s
+2025-12-13T19:49:55.213Z [DEBUG] executePreToolHooks called for tool: TodoWrite
+2025-12-13T19:49:55.213Z [DEBUG] Skipping PreToolUse:TodoWrite hook execution - workspace trust not accepted
+2025-12-13T19:49:55.260Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\todos\00ca72df-731b-4a4b-ada7-1e3420f59e89-agent-00ca72df-731b-4a4b-ada7-1e3420f59e89.json.tmp.21972.1765655395260
+2025-12-13T19:49:55.260Z [DEBUG] Preserving file permissions: 100666
+2025-12-13T19:49:55.265Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (5.2ms)
+2025-12-13T19:49:55.265Z [DEBUG] Temp file written successfully, size: 996 bytes
+2025-12-13T19:49:55.265Z [DEBUG] Applied original permissions to temp file
+2025-12-13T19:49:55.265Z [DEBUG] Renaming C:\Users\tjn\.claude\todos\00ca72df-731b-4a4b-ada7-1e3420f59e89-agent-00ca72df-731b-4a4b-ada7-1e3420f59e89.json.tmp.21972.1765655395260 to C:\Users\tjn\.claude\todos\00ca72df-731b-4a4b-ada7-1e3420f59e89-agent-00ca72df-731b-4a4b-ada7-1e3420f59e89.json
+2025-12-13T19:49:55.265Z [DEBUG] File C:\Users\tjn\.claude\todos\00ca72df-731b-4a4b-ada7-1e3420f59e89-agent-00ca72df-731b-4a4b-ada7-1e3420f59e89.json written atomically
+2025-12-13T19:49:55.272Z [DEBUG] Skipping PostToolUse:TodoWrite hook execution - workspace trust not accepted
+2025-12-13T19:49:55.388Z [DEBUG] executePreToolHooks called for tool: Write
+2025-12-13T19:49:55.388Z [DEBUG] Skipping PreToolUse:Write hook execution - workspace trust not accepted
+2025-12-13T19:49:56.294Z [DEBUG] executePermissionRequestHooks called for tool: Write
+2025-12-13T19:49:56.295Z [DEBUG] Skipping PermissionRequest:Write hook execution - workspace trust not accepted
+2025-12-13T19:50:02.325Z [DEBUG] Skipping Notification:permission_prompt hook execution - workspace trust not accepted
+2025-12-13T19:51:07.142Z [DEBUG] Applying permission update: Setting mode to 'acceptEdits'
+2025-12-13T19:51:07.144Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\docs\MCP-SERVERS.md.tmp.21972.1765655467144
+2025-12-13T19:51:07.150Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (5.1ms)
+2025-12-13T19:51:07.150Z [DEBUG] Temp file written successfully, size: 6672 bytes
+2025-12-13T19:51:07.150Z [DEBUG] Renaming C:\Users\tjn\.claude\docs\MCP-SERVERS.md.tmp.21972.1765655467144 to C:\Users\tjn\.claude\docs\MCP-SERVERS.md
+2025-12-13T19:51:07.150Z [DEBUG] File C:\Users\tjn\.claude\docs\MCP-SERVERS.md written atomically
+2025-12-13T19:51:07.162Z [DEBUG] FileHistory: Tracked file modification for C:\Users\tjn\.claude\docs\MCP-SERVERS.md
+2025-12-13T19:51:07.193Z [DEBUG] Skipping PostToolUse:Write hook execution - workspace trust not accepted
+2025-12-13T19:51:07.230Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-13T19:51:07.230Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-13T19:51:07.230Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-13T19:51:07.230Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-13T19:51:07.955Z [DEBUG] AutoUpdaterWrapper: Installation type: unknown
+2025-12-13T19:51:10.671Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:51:48.798Z [WARN] Streaming stall detected: 35.8s gap between events (stall #1)
+2025-12-13T19:51:49.136Z [WARN] Streaming completed with 1 stall(s), total stall time: 35.8s
+2025-12-13T19:51:49.150Z [DEBUG] executePreToolHooks called for tool: TodoWrite
+2025-12-13T19:51:49.151Z [DEBUG] Skipping PreToolUse:TodoWrite hook execution - workspace trust not accepted
+2025-12-13T19:51:49.198Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\todos\00ca72df-731b-4a4b-ada7-1e3420f59e89-agent-00ca72df-731b-4a4b-ada7-1e3420f59e89.json.tmp.21972.1765655509198
+2025-12-13T19:51:49.198Z [DEBUG] Preserving file permissions: 100666
+2025-12-13T19:51:49.209Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (10.6ms)
+2025-12-13T19:51:49.209Z [DEBUG] Temp file written successfully, size: 998 bytes
+2025-12-13T19:51:49.209Z [DEBUG] Applied original permissions to temp file
+2025-12-13T19:51:49.209Z [DEBUG] Renaming C:\Users\tjn\.claude\todos\00ca72df-731b-4a4b-ada7-1e3420f59e89-agent-00ca72df-731b-4a4b-ada7-1e3420f59e89.json.tmp.21972.1765655509198 to C:\Users\tjn\.claude\todos\00ca72df-731b-4a4b-ada7-1e3420f59e89-agent-00ca72df-731b-4a4b-ada7-1e3420f59e89.json
+2025-12-13T19:51:49.209Z [DEBUG] File C:\Users\tjn\.claude\todos\00ca72df-731b-4a4b-ada7-1e3420f59e89-agent-00ca72df-731b-4a4b-ada7-1e3420f59e89.json written atomically
+2025-12-13T19:51:49.216Z [DEBUG] Skipping PostToolUse:TodoWrite hook execution - workspace trust not accepted
+2025-12-13T19:51:49.327Z [DEBUG] executePreToolHooks called for tool: Write
+2025-12-13T19:51:49.327Z [DEBUG] Skipping PreToolUse:Write hook execution - workspace trust not accepted
+2025-12-13T19:51:50.004Z [DEBUG] [SLOW OPERATION DETECTED] fs.appendFileSync (5.1ms)
+2025-12-13T19:51:50.224Z [DEBUG] executePermissionRequestHooks called for tool: Write
+2025-12-13T19:51:50.225Z [DEBUG] Skipping PermissionRequest:Write hook execution - workspace trust not accepted
+2025-12-13T19:51:52.909Z [DEBUG] Applying permission update: Setting mode to 'acceptEdits'
+2025-12-13T19:51:52.911Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\docs\SETUP-GUIDE.md.tmp.21972.1765655512911
+2025-12-13T19:51:52.917Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (5.0ms)
+2025-12-13T19:51:52.917Z [DEBUG] Temp file written successfully, size: 7041 bytes
+2025-12-13T19:51:52.917Z [DEBUG] Renaming C:\Users\tjn\.claude\docs\SETUP-GUIDE.md.tmp.21972.1765655512911 to C:\Users\tjn\.claude\docs\SETUP-GUIDE.md
+2025-12-13T19:51:52.917Z [DEBUG] File C:\Users\tjn\.claude\docs\SETUP-GUIDE.md written atomically
+2025-12-13T19:51:52.928Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (6.4ms)
+2025-12-13T19:51:52.929Z [DEBUG] FileHistory: Tracked file modification for C:\Users\tjn\.claude\docs\SETUP-GUIDE.md
+2025-12-13T19:51:52.957Z [DEBUG] Skipping PostToolUse:Write hook execution - workspace trust not accepted
+2025-12-13T19:51:52.989Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-13T19:51:52.989Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-13T19:51:52.989Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-13T19:51:52.989Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-13T19:51:53.777Z [DEBUG] AutoUpdaterWrapper: Installation type: unknown
+2025-12-13T19:51:56.511Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:52:29.569Z [WARN] Streaming stall detected: 30.6s gap between events (stall #1)
+2025-12-13T19:52:30.183Z [WARN] Streaming completed with 1 stall(s), total stall time: 30.6s
+2025-12-13T19:52:30.213Z [DEBUG] executePreToolHooks called for tool: TodoWrite
+2025-12-13T19:52:30.213Z [DEBUG] Skipping PreToolUse:TodoWrite hook execution - workspace trust not accepted
+2025-12-13T19:52:30.261Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\todos\00ca72df-731b-4a4b-ada7-1e3420f59e89-agent-00ca72df-731b-4a4b-ada7-1e3420f59e89.json.tmp.21972.1765655550261
+2025-12-13T19:52:30.261Z [DEBUG] Preserving file permissions: 100666
+2025-12-13T19:52:30.267Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (6.1ms)
+2025-12-13T19:52:30.267Z [DEBUG] Temp file written successfully, size: 1000 bytes
+2025-12-13T19:52:30.267Z [DEBUG] Applied original permissions to temp file
+2025-12-13T19:52:30.267Z [DEBUG] Renaming C:\Users\tjn\.claude\todos\00ca72df-731b-4a4b-ada7-1e3420f59e89-agent-00ca72df-731b-4a4b-ada7-1e3420f59e89.json.tmp.21972.1765655550261 to C:\Users\tjn\.claude\todos\00ca72df-731b-4a4b-ada7-1e3420f59e89-agent-00ca72df-731b-4a4b-ada7-1e3420f59e89.json
+2025-12-13T19:52:30.268Z [DEBUG] File C:\Users\tjn\.claude\todos\00ca72df-731b-4a4b-ada7-1e3420f59e89-agent-00ca72df-731b-4a4b-ada7-1e3420f59e89.json written atomically
+2025-12-13T19:52:30.275Z [DEBUG] Skipping PostToolUse:TodoWrite hook execution - workspace trust not accepted
+2025-12-13T19:52:30.389Z [DEBUG] executePreToolHooks called for tool: Write
+2025-12-13T19:52:30.389Z [DEBUG] Skipping PreToolUse:Write hook execution - workspace trust not accepted
+2025-12-13T19:52:31.248Z [DEBUG] executePermissionRequestHooks called for tool: Write
+2025-12-13T19:52:31.248Z [DEBUG] Skipping PermissionRequest:Write hook execution - workspace trust not accepted
+2025-12-13T19:52:36.130Z [DEBUG] Applying permission update: Setting mode to 'acceptEdits'
+2025-12-13T19:52:36.132Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\docs\MAINTENANCE.md.tmp.21972.1765655556132
+2025-12-13T19:52:36.137Z [DEBUG] Temp file written successfully, size: 7047 bytes
+2025-12-13T19:52:36.137Z [DEBUG] Renaming C:\Users\tjn\.claude\docs\MAINTENANCE.md.tmp.21972.1765655556132 to C:\Users\tjn\.claude\docs\MAINTENANCE.md
+2025-12-13T19:52:36.138Z [DEBUG] File C:\Users\tjn\.claude\docs\MAINTENANCE.md written atomically
+2025-12-13T19:52:36.149Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (5.1ms)
+2025-12-13T19:52:36.150Z [DEBUG] FileHistory: Tracked file modification for C:\Users\tjn\.claude\docs\MAINTENANCE.md
+2025-12-13T19:52:36.178Z [DEBUG] Skipping PostToolUse:Write hook execution - workspace trust not accepted
+2025-12-13T19:52:36.209Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-13T19:52:36.209Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-13T19:52:36.209Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-13T19:52:36.209Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-13T19:52:37.095Z [DEBUG] AutoUpdaterWrapper: Installation type: unknown
+2025-12-13T19:52:39.928Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:52:42.408Z [DEBUG] executePreToolHooks called for tool: TodoWrite
+2025-12-13T19:52:42.409Z [DEBUG] Skipping PreToolUse:TodoWrite hook execution - workspace trust not accepted
+2025-12-13T19:52:42.454Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\todos\00ca72df-731b-4a4b-ada7-1e3420f59e89-agent-00ca72df-731b-4a4b-ada7-1e3420f59e89.json.tmp.21972.1765655562454
+2025-12-13T19:52:42.454Z [DEBUG] Preserving file permissions: 100666
+2025-12-13T19:52:42.469Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (14.9ms)
+2025-12-13T19:52:42.469Z [DEBUG] Temp file written successfully, size: 2 bytes
+2025-12-13T19:52:42.470Z [DEBUG] Applied original permissions to temp file
+2025-12-13T19:52:42.470Z [DEBUG] Renaming C:\Users\tjn\.claude\todos\00ca72df-731b-4a4b-ada7-1e3420f59e89-agent-00ca72df-731b-4a4b-ada7-1e3420f59e89.json.tmp.21972.1765655562454 to C:\Users\tjn\.claude\todos\00ca72df-731b-4a4b-ada7-1e3420f59e89-agent-00ca72df-731b-4a4b-ada7-1e3420f59e89.json
+2025-12-13T19:52:42.470Z [DEBUG] File C:\Users\tjn\.claude\todos\00ca72df-731b-4a4b-ada7-1e3420f59e89-agent-00ca72df-731b-4a4b-ada7-1e3420f59e89.json written atomically
+2025-12-13T19:52:42.475Z [DEBUG] Skipping PostToolUse:TodoWrite hook execution - workspace trust not accepted
+2025-12-13T19:52:42.498Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-13T19:52:42.498Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-13T19:52:42.498Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-13T19:52:42.498Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-13T19:52:45.956Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:52:52.744Z [DEBUG] Language not supported while highlighting code, falling back to markdown:
+2025-12-13T19:52:52.891Z [DEBUG] Skipping Stop hook execution - workspace trust not accepted
+2025-12-13T19:52:55.328Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:53:00.642Z [DEBUG] Skipping SubagentStop hook execution - workspace trust not accepted
+2025-12-13T19:53:33.176Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-13T19:53:33.176Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-13T19:53:33.176Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-13T19:53:33.176Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-13T19:53:34.004Z [DEBUG] Skipping UserPromptSubmit hook execution - workspace trust not accepted
+2025-12-13T19:53:34.008Z [DEBUG] FileHistory: Making snapshot for message 14ac2bf0-191d-4f03-826c-ba66ebabafd9
+2025-12-13T19:53:34.010Z [DEBUG] FileHistory: Added snapshot for 14ac2bf0-191d-4f03-826c-ba66ebabafd9, tracking 8 files
+2025-12-13T19:53:34.868Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:53:37.311Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:53:41.055Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-13T19:53:41.056Z [DEBUG] Skipping PreToolUse:Bash hook execution - workspace trust not accepted
+2025-12-13T19:53:41.056Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-13T19:53:41.056Z [DEBUG] Skipping PreToolUse:Bash hook execution - workspace trust not accepted
+2025-12-13T19:53:41.056Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-13T19:53:41.056Z [DEBUG] Skipping PreToolUse:Bash hook execution - workspace trust not accepted
+2025-12-13T19:53:42.438Z [DEBUG] Session environment not yet supported on Windows
+2025-12-13T19:53:42.564Z [DEBUG] Session environment not yet supported on Windows
+2025-12-13T19:53:42.690Z [DEBUG] Session environment not yet supported on Windows
+2025-12-13T19:53:43.220Z [DEBUG] Skipping PostToolUse:Bash hook execution - workspace trust not accepted
+2025-12-13T19:53:43.432Z [DEBUG] Skipping PostToolUse:Bash hook execution - workspace trust not accepted
+2025-12-13T19:53:43.632Z [DEBUG] Skipping PostToolUse:Bash hook execution - workspace trust not accepted
+2025-12-13T19:53:43.667Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-13T19:53:43.667Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-13T19:53:43.667Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-13T19:53:43.667Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-13T19:53:44.632Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:53:44.798Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:53:45.055Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:53:47.297Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:53:53.305Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-13T19:53:53.305Z [DEBUG] Skipping PreToolUse:Bash hook execution - workspace trust not accepted
+2025-12-13T19:53:53.939Z [DEBUG] Session environment not yet supported on Windows
+2025-12-13T19:53:54.860Z [DEBUG] Skipping PostToolUse:Bash hook execution - workspace trust not accepted
+2025-12-13T19:53:54.870Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-13T19:53:54.870Z [DEBUG] Skipping PreToolUse:Bash hook execution - workspace trust not accepted
+2025-12-13T19:53:56.170Z [DEBUG] Permission suggestions for Bash: [
+  {
+    "type": "addDirectories",
+    "directories": [
+      "C:\\Users\\tjn\\.claude"
+    ],
+    "destination": "session"
+  },
+  {
+    "type": "setMode",
+    "mode": "acceptEdits",
+    "destination": "session"
+  }
+]
+2025-12-13T19:53:56.192Z [DEBUG] executePermissionRequestHooks called for tool: Bash
+2025-12-13T19:53:56.192Z [DEBUG] Skipping PermissionRequest:Bash hook execution - workspace trust not accepted
+2025-12-13T19:53:56.700Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:54:02.216Z [DEBUG] Skipping Notification:permission_prompt hook execution - workspace trust not accepted
+2025-12-13T19:54:18.830Z [DEBUG] Applying permission update: Adding 1 directory with destination 'session': ["C:\\Users\\tjn\\.claude"]
+2025-12-13T19:54:18.830Z [DEBUG] Applying permission update: Setting mode to 'acceptEdits'
+2025-12-13T19:54:18.969Z [DEBUG] Session environment not yet supported on Windows
+2025-12-13T19:54:19.273Z [DEBUG] AutoUpdaterWrapper: Installation type: unknown
+2025-12-13T19:54:19.722Z [DEBUG] Skipping PostToolUse:Bash hook execution - workspace trust not accepted
+2025-12-13T19:54:19.750Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-13T19:54:19.750Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-13T19:54:19.750Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-13T19:54:19.750Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-13T19:54:20.557Z [ERROR] Error streaming, falling back to non-streaming mode: Connection error.
+2025-12-13T19:54:23.470Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:54:36.192Z [DEBUG] Language not supported while highlighting code, falling back to markdown:
+2025-12-13T19:54:36.238Z [DEBUG] Skipping Stop hook execution - workspace trust not accepted
+2025-12-13T19:54:38.924Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:54:44.465Z [DEBUG] Skipping SubagentStop hook execution - workspace trust not accepted
+2025-12-13T19:55:36.261Z [DEBUG] Skipping Notification:idle_prompt hook execution - workspace trust not accepted
+2025-12-13T19:56:17.058Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-13T19:56:17.058Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-13T19:56:17.058Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-13T19:56:17.058Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-13T19:56:17.874Z [DEBUG] Skipping UserPromptSubmit hook execution - workspace trust not accepted
+2025-12-13T19:56:17.878Z [DEBUG] FileHistory: Making snapshot for message df7e4f7f-2cd7-498f-9a11-6bdfaf1473eb
+2025-12-13T19:56:17.880Z [DEBUG] FileHistory: Added snapshot for df7e4f7f-2cd7-498f-9a11-6bdfaf1473eb, tracking 8 files
+2025-12-13T19:56:18.521Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:56:20.616Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:56:22.775Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-13T19:56:22.775Z [DEBUG] Skipping PreToolUse:Bash hook execution - workspace trust not accepted
+2025-12-13T19:56:23.344Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:56:23.442Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:56:23.491Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:56:23.836Z [DEBUG] Permission suggestions for Bash: [
+  {
+    "type": "addRules",
+    "rules": [
+      {
+        "toolName": "Bash",
+        "ruleContent": "claude /doctor"
+      }
+    ],
+    "behavior": "allow",
+    "destination": "localSettings"
+  }
+]
+2025-12-13T19:56:23.856Z [DEBUG] executePermissionRequestHooks called for tool: Bash
+2025-12-13T19:56:23.856Z [DEBUG] Skipping PermissionRequest:Bash hook execution - workspace trust not accepted
+2025-12-13T19:56:29.883Z [DEBUG] Skipping Notification:permission_prompt hook execution - workspace trust not accepted
+2025-12-13T19:56:49.528Z [DEBUG] Persisting permission update: addRules to source 'localSettings'
+2025-12-13T19:56:49.528Z [DEBUG] Persisting 1 allow rule(s) to localSettings
+2025-12-13T19:56:49.529Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\.claude\settings.local.json.tmp.21972.1765655809529
+2025-12-13T19:56:49.537Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (8.5ms)
+2025-12-13T19:56:49.537Z [DEBUG] Temp file written successfully, size: 77 bytes
+2025-12-13T19:56:49.537Z [DEBUG] Renaming C:\Users\tjn\.claude\.claude\settings.local.json.tmp.21972.1765655809529 to C:\Users\tjn\.claude\.claude\settings.local.json
+2025-12-13T19:56:49.538Z [DEBUG] File C:\Users\tjn\.claude\.claude\settings.local.json written atomically
+2025-12-13T19:56:49.552Z [DEBUG] Applying permission update: Adding 1 allow rule(s) to destination 'localSettings': ["Bash(claude /doctor)"]
+2025-12-13T19:56:49.718Z [DEBUG] Session environment not yet supported on Windows
+2025-12-13T19:56:50.010Z [DEBUG] AutoUpdaterWrapper: Installation type: unknown
+2025-12-13T19:58:50.728Z [DEBUG] Skipping PostToolUse:Bash hook execution - workspace trust not accepted
+2025-12-13T19:58:50.754Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-13T19:58:50.754Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-13T19:58:50.754Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-13T19:58:50.754Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-13T19:58:52.597Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:58:54.494Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:58:55.475Z [DEBUG] executePreToolHooks called for tool: TaskOutput
+2025-12-13T19:58:55.475Z [DEBUG] Skipping PreToolUse:TaskOutput hook execution - workspace trust not accepted
+2025-12-13T19:59:25.586Z [DEBUG] Skipping PostToolUse:TaskOutput hook execution - workspace trust not accepted
+2025-12-13T19:59:25.615Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-13T19:59:25.615Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-13T19:59:25.615Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-13T19:59:25.615Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-13T19:59:29.169Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:59:30.957Z [DEBUG] executePreToolHooks called for tool: KillShell
+2025-12-13T19:59:30.957Z [DEBUG] Skipping PreToolUse:KillShell hook execution - workspace trust not accepted
+2025-12-13T19:59:30.983Z [DEBUG] LocalBashTask b30dd7b kill requested
+2025-12-13T19:59:30.993Z [DEBUG] Skipping PostToolUse:KillShell hook execution - workspace trust not accepted
+2025-12-13T19:59:31.046Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude.json.tmp.21972.1765655971046
+2025-12-13T19:59:31.046Z [DEBUG] Preserving file permissions: 100666
+2025-12-13T19:59:31.053Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (6.6ms)
+2025-12-13T19:59:31.053Z [DEBUG] Temp file written successfully, size: 1976 bytes
+2025-12-13T19:59:31.053Z [DEBUG] Applied original permissions to temp file
+2025-12-13T19:59:31.053Z [DEBUG] Renaming C:\Users\tjn\.claude.json.tmp.21972.1765655971046 to C:\Users\tjn\.claude.json
+2025-12-13T19:59:31.053Z [DEBUG] File C:\Users\tjn\.claude.json written atomically
+2025-12-13T19:59:31.056Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-13T19:59:31.056Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-13T19:59:31.056Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-13T19:59:31.056Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-13T19:59:35.086Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:59:44.531Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-13T19:59:44.532Z [DEBUG] Skipping PreToolUse:Bash hook execution - workspace trust not accepted
+2025-12-13T19:59:45.162Z [DEBUG] Session environment not yet supported on Windows
+2025-12-13T19:59:45.975Z [DEBUG] Skipping PostToolUse:Bash hook execution - workspace trust not accepted
+2025-12-13T19:59:45.989Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-13T19:59:45.989Z [DEBUG] Skipping PreToolUse:Bash hook execution - workspace trust not accepted
+2025-12-13T19:59:46.677Z [DEBUG] Session environment not yet supported on Windows
+2025-12-13T19:59:46.719Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:59:47.503Z [DEBUG] Skipping PostToolUse:Bash hook execution - workspace trust not accepted
+2025-12-13T19:59:47.514Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-13T19:59:47.514Z [DEBUG] Skipping PreToolUse:Bash hook execution - workspace trust not accepted
+2025-12-13T19:59:49.536Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:59:49.815Z [DEBUG] Session environment not yet supported on Windows
+2025-12-13T19:59:50.645Z [DEBUG] Skipping PostToolUse:Bash hook execution - workspace trust not accepted
+2025-12-13T19:59:50.659Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-13T19:59:50.659Z [DEBUG] Skipping PreToolUse:Bash hook execution - workspace trust not accepted
+2025-12-13T19:59:51.337Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:59:51.369Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:59:51.471Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:59:51.754Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:59:51.924Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:59:52.192Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:59:53.152Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:59:53.213Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:59:53.243Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:59:53.262Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:59:53.301Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:59:53.431Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:59:53.907Z [DEBUG] Permission suggestions for Bash: [
+  {
+    "type": "addRules",
+    "rules": [
+      {
+        "toolName": "Bash",
+        "ruleContent": "for skill in \"C:/Users/tjn/.claude/skills\"/*/SKILL.md"
+      },
+      {
+        "toolName": "Bash",
+        "ruleContent": "do if [ -f \"$skill\" ]"
+      },
+      {
+        "toolName": "Bash",
+        "ruleContent": "then head -1 \"$skill\""
+      }
+    ],
+    "behavior": "allow",
+    "destination": "localSettings"
+  },
+  {
+    "type": "addRules",
+    "rules": [
+      {
+        "toolName": "Bash",
+        "ruleContent": "fi"
+      },
+      {
+        "toolName": "Bash",
+        "ruleContent": "done"
+      }
+    ],
+    "behavior": "allow",
+    "destination": "localSettings"
+  }
+]
+2025-12-13T19:59:53.939Z [DEBUG] executePermissionRequestHooks called for tool: Bash
+2025-12-13T19:59:53.939Z [DEBUG] Skipping PermissionRequest:Bash hook execution - workspace trust not accepted
+2025-12-13T19:59:59.968Z [DEBUG] Skipping Notification:permission_prompt hook execution - workspace trust not accepted
+2025-12-13T20:00:01.896Z [DEBUG] Persisting permission update: addRules to source 'localSettings'
+2025-12-13T20:00:01.896Z [DEBUG] Persisting 3 allow rule(s) to localSettings
+2025-12-13T20:00:01.898Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\.claude\settings.local.json.tmp.21972.1765656001898
+2025-12-13T20:00:01.898Z [DEBUG] Preserving file permissions: 100666
+2025-12-13T20:00:01.905Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (6.5ms)
+2025-12-13T20:00:01.905Z [DEBUG] Temp file written successfully, size: 226 bytes
+2025-12-13T20:00:01.905Z [DEBUG] Applied original permissions to temp file
+2025-12-13T20:00:01.905Z [DEBUG] Renaming C:\Users\tjn\.claude\.claude\settings.local.json.tmp.21972.1765656001898 to C:\Users\tjn\.claude\.claude\settings.local.json
+2025-12-13T20:00:01.905Z [DEBUG] File C:\Users\tjn\.claude\.claude\settings.local.json written atomically
+2025-12-13T20:00:01.921Z [DEBUG] Persisting permission update: addRules to source 'localSettings'
+2025-12-13T20:00:01.921Z [DEBUG] Persisting 2 allow rule(s) to localSettings
+2025-12-13T20:00:01.922Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\.claude\settings.local.json.tmp.21972.1765656001922
+2025-12-13T20:00:01.923Z [DEBUG] Preserving file permissions: 100666
+2025-12-13T20:00:01.929Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (6.5ms)
+2025-12-13T20:00:01.929Z [DEBUG] Temp file written successfully, size: 264 bytes
+2025-12-13T20:00:01.929Z [DEBUG] Applied original permissions to temp file
+2025-12-13T20:00:01.929Z [DEBUG] Renaming C:\Users\tjn\.claude\.claude\settings.local.json.tmp.21972.1765656001922 to C:\Users\tjn\.claude\.claude\settings.local.json
+2025-12-13T20:00:01.929Z [DEBUG] File C:\Users\tjn\.claude\.claude\settings.local.json written atomically
+2025-12-13T20:00:01.946Z [DEBUG] Applying permission update: Adding 3 allow rule(s) to destination 'localSettings': ["Bash(for skill in \"C:/Users/tjn/.claude/skills\"/*/SKILL.md)","Bash(do if [ -f \"$skill\" ])","Bash(then head -1 \"$skill\")"]
+2025-12-13T20:00:01.946Z [DEBUG] Applying permission update: Adding 2 allow rule(s) to destination 'localSettings': ["Bash(fi)","Bash(done)"]
+2025-12-13T20:00:02.112Z [DEBUG] Session environment not yet supported on Windows
+2025-12-13T20:00:02.407Z [DEBUG] AutoUpdaterWrapper: Installation type: unknown
+2025-12-13T20:00:02.867Z [DEBUG] Skipping PostToolUse:Bash hook execution - workspace trust not accepted
+2025-12-13T20:00:02.903Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-13T20:00:02.903Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-13T20:00:02.903Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-13T20:00:02.903Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-13T20:00:03.730Z [ERROR] Error streaming, falling back to non-streaming mode: Connection error.
+2025-12-13T20:00:08.433Z [DEBUG] Stream started - received first chunk
+2025-12-13T20:00:15.761Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-13T20:00:15.761Z [DEBUG] Skipping PreToolUse:Bash hook execution - workspace trust not accepted
+2025-12-13T20:00:16.411Z [DEBUG] Session environment not yet supported on Windows
+2025-12-13T20:00:17.303Z [DEBUG] Skipping PostToolUse:Bash hook execution - workspace trust not accepted
+2025-12-13T20:00:17.318Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-13T20:00:17.318Z [DEBUG] Skipping PreToolUse:Bash hook execution - workspace trust not accepted
+2025-12-13T20:00:17.973Z [DEBUG] Session environment not yet supported on Windows
+2025-12-13T20:00:18.393Z [DEBUG] Stream started - received first chunk
+2025-12-13T20:00:18.821Z [DEBUG] Skipping PostToolUse:Bash hook execution - workspace trust not accepted
+2025-12-13T20:00:18.833Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-13T20:00:18.833Z [DEBUG] Skipping PreToolUse:Bash hook execution - workspace trust not accepted
+2025-12-13T20:00:20.728Z [DEBUG] Stream started - received first chunk
+2025-12-13T20:00:20.895Z [DEBUG] Session environment not yet supported on Windows
+2025-12-13T20:00:21.765Z [DEBUG] Skipping PostToolUseFailure:Bash hook execution - workspace trust not accepted
+2025-12-13T20:00:21.778Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-13T20:00:21.778Z [DEBUG] Skipping PreToolUse:Bash hook execution - workspace trust not accepted
+2025-12-13T20:00:22.457Z [DEBUG] Session environment not yet supported on Windows
+2025-12-13T20:00:23.236Z [DEBUG] Skipping PostToolUseFailure:Bash hook execution - workspace trust not accepted
+2025-12-13T20:00:23.254Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-13T20:00:23.254Z [DEBUG] Skipping PreToolUse:Bash hook execution - workspace trust not accepted
+2025-12-13T20:00:23.895Z [DEBUG] Session environment not yet supported on Windows
+2025-12-13T20:00:24.726Z [DEBUG] Skipping PostToolUse:Bash hook execution - workspace trust not accepted
+2025-12-13T20:00:24.759Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-13T20:00:24.759Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-13T20:00:24.759Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-13T20:00:24.759Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-13T20:00:26.626Z [DEBUG] Stream started - received first chunk
+2025-12-13T20:00:29.531Z [DEBUG] Stream started - received first chunk
+2025-12-13T20:00:34.236Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-13T20:00:34.236Z [DEBUG] Skipping PreToolUse:Bash hook execution - workspace trust not accepted
+2025-12-13T20:00:36.441Z [DEBUG] Session environment not yet supported on Windows
+2025-12-13T20:00:37.303Z [DEBUG] Skipping PostToolUse:Bash hook execution - workspace trust not accepted
+2025-12-13T20:00:37.317Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-13T20:00:37.318Z [DEBUG] Skipping PreToolUse:Bash hook execution - workspace trust not accepted
+2025-12-13T20:00:37.972Z [DEBUG] Session environment not yet supported on Windows
+2025-12-13T20:00:37.976Z [DEBUG] Stream started - received first chunk
+2025-12-13T20:00:38.787Z [DEBUG] Skipping PostToolUse:Bash hook execution - workspace trust not accepted
+2025-12-13T20:00:38.798Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-13T20:00:38.799Z [DEBUG] Skipping PreToolUse:Bash hook execution - workspace trust not accepted
+2025-12-13T20:00:39.440Z [DEBUG] Session environment not yet supported on Windows
+2025-12-13T20:00:39.616Z [DEBUG] Stream started - received first chunk
+2025-12-13T20:00:40.207Z [DEBUG] Skipping PostToolUse:Bash hook execution - workspace trust not accepted
+2025-12-13T20:00:40.316Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-13T20:00:40.316Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-13T20:00:40.316Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-13T20:00:40.316Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-13T20:00:41.156Z [ERROR] Error streaming, falling back to non-streaming mode: Connection error.
+2025-12-13T20:00:44.946Z [DEBUG] Stream started - received first chunk
+2025-12-13T20:00:51.316Z [DEBUG] Skipping Stop hook execution - workspace trust not accepted
+2025-12-13T20:00:53.990Z [DEBUG] Stream started - received first chunk
+2025-12-13T20:00:59.750Z [DEBUG] Skipping SubagentStop hook execution - workspace trust not accepted
+2025-12-13T20:01:51.363Z [DEBUG] Skipping Notification:idle_prompt hook execution - workspace trust not accepted
+2025-12-13T20:02:57.720Z [DEBUG] Skipping SessionEnd:prompt_input_exit hook execution - workspace trust not accepted

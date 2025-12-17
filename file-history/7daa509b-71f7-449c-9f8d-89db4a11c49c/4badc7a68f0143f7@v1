@@ -1,0 +1,506 @@
+# Dataview Query Library
+
+> Ready-to-use Dataview queries for common use cases. Copy, paste, and customize for your vault.
+
+---
+
+## Query Basics
+
+### Query Types
+
+| Type | Purpose | Output |
+|------|---------|--------|
+| `LIST` | Simple list | Bullet points |
+| `TABLE` | Structured data | Columns |
+| `TASK` | Task aggregation | Checkboxes |
+| `CALENDAR` | Date visualization | Calendar grid |
+
+### Basic Syntax
+
+```dataview
+QUERY_TYPE [fields]
+FROM [source]
+WHERE [condition]
+SORT [field] [ASC/DESC]
+LIMIT [number]
+GROUP BY [field]
+FLATTEN [field]
+```
+
+---
+
+## Project Queries
+
+### All Projects with Status
+
+```dataview
+TABLE
+  status as "Status",
+  priority as "Priority",
+  tech-stack as "Stack"
+FROM "Projects"
+WHERE type = "project"
+SORT priority ASC
+```
+
+### Active Projects Only
+
+```dataview
+TABLE
+  status as "Status",
+  live-url as "URL"
+FROM "Projects"
+WHERE type = "project" AND status = "active"
+SORT file.mtime DESC
+```
+
+### Projects by Priority
+
+```dataview
+TABLE WITHOUT ID
+  file.link as "Project",
+  status as "Status"
+FROM "Projects"
+WHERE type = "project"
+GROUP BY priority
+```
+
+### Recently Updated Projects
+
+```dataview
+TABLE
+  status as "Status",
+  dateformat(file.mtime, "yyyy-MM-dd") as "Modified"
+FROM "Projects"
+WHERE type = "project"
+SORT file.mtime DESC
+LIMIT 5
+```
+
+---
+
+## Task Queries
+
+### All Open Tasks
+
+```dataview
+TASK
+FROM "Projects" OR "Journal"
+WHERE !completed
+SORT file.mtime DESC
+```
+
+### Tasks Due This Week
+
+```dataview
+TASK
+WHERE !completed AND due >= date(today) AND due <= date(today) + dur(7 days)
+SORT due ASC
+```
+
+### Overdue Tasks
+
+```dataview
+TASK
+WHERE !completed AND due < date(today)
+SORT due ASC
+```
+
+### High Priority Tasks (P0)
+
+```dataview
+TASK
+FROM ""
+WHERE !completed AND contains(text, "P0") OR contains(text, "⏫")
+```
+
+### Tasks by Project
+
+```dataview
+TASK
+FROM "Projects/Neuman Brain"
+WHERE !completed
+GROUP BY file.link
+```
+
+### Completed Today
+
+```dataview
+TASK
+WHERE completed AND completion = date(today)
+```
+
+---
+
+## Journal Queries
+
+### Recent Journal Entries
+
+```dataview
+LIST
+FROM "Journal"
+WHERE file.day
+SORT file.day DESC
+LIMIT 10
+```
+
+### Journal Entries This Month
+
+```dataview
+TABLE WITHOUT ID
+  file.link as "Day",
+  file.size as "Size"
+FROM "Journal"
+WHERE file.day.month = date(today).month AND file.day.year = date(today).year
+SORT file.day DESC
+```
+
+### Journal with Specific Tag
+
+```dataview
+LIST
+FROM "Journal"
+WHERE contains(file.tags, "#reflection")
+SORT file.day DESC
+```
+
+---
+
+## Concept/Wiki Queries
+
+### All Concepts
+
+```dataview
+TABLE WITHOUT ID
+  file.link as "Concept",
+  length(file.inlinks) as "Backlinks"
+FROM "Concepts"
+SORT length(file.inlinks) DESC
+```
+
+### Most Referenced Concepts
+
+```dataview
+TABLE WITHOUT ID
+  file.link as "Concept",
+  length(file.inlinks) as "References"
+FROM "Concepts"
+WHERE length(file.inlinks) > 2
+SORT length(file.inlinks) DESC
+LIMIT 10
+```
+
+### Orphan Concepts (No Backlinks)
+
+```dataview
+LIST
+FROM "Concepts"
+WHERE length(file.inlinks) = 0
+```
+
+### Concepts by Tag
+
+```dataview
+LIST
+FROM "Concepts"
+WHERE contains(file.tags, "#frontend")
+```
+
+---
+
+## Decision (ADR) Queries
+
+### All Decisions
+
+```dataview
+TABLE
+  status as "Status",
+  date as "Date"
+FROM "Decisions"
+SORT date DESC
+```
+
+### Accepted Decisions
+
+```dataview
+TABLE
+  date as "Date",
+  file.link as "Decision"
+FROM "Decisions"
+WHERE status = "accepted"
+SORT date DESC
+```
+
+### Decisions by Project
+
+```dataview
+LIST
+FROM "Decisions"
+WHERE contains(file.name, "LZG")
+```
+
+---
+
+## File Management Queries
+
+### Recently Modified Files
+
+```dataview
+TABLE
+  dateformat(file.mtime, "yyyy-MM-dd HH:mm") as "Modified",
+  file.folder as "Folder"
+FROM ""
+WHERE file.name != "Home"
+SORT file.mtime DESC
+LIMIT 15
+```
+
+### Largest Files
+
+```dataview
+TABLE
+  round(file.size / 1000, 2) + " KB" as "Size",
+  file.folder as "Folder"
+FROM ""
+SORT file.size DESC
+LIMIT 10
+```
+
+### Files Without Tags
+
+```dataview
+LIST
+FROM "Projects" OR "Concepts"
+WHERE length(file.tags) = 0
+```
+
+### Files Created Today
+
+```dataview
+LIST
+FROM ""
+WHERE file.cday = date(today)
+```
+
+### Stale Files (Not Modified in 30 Days)
+
+```dataview
+TABLE
+  dateformat(file.mtime, "yyyy-MM-dd") as "Last Modified"
+FROM "Projects"
+WHERE file.mtime < date(today) - dur(30 days)
+SORT file.mtime ASC
+```
+
+---
+
+## Snippet Queries
+
+### All Code Snippets
+
+```dataview
+TABLE
+  language as "Language",
+  length(file.inlinks) as "Uses"
+FROM "Snippets"
+SORT language ASC
+```
+
+### Python Snippets
+
+```dataview
+LIST
+FROM "Snippets"
+WHERE language = "python" OR contains(file.tags, "#python")
+```
+
+---
+
+## Calendar Queries
+
+### Calendar View of Journal
+
+```dataview
+CALENDAR file.day
+FROM "Journal"
+```
+
+### Calendar of Due Dates
+
+```dataview
+CALENDAR due
+FROM ""
+WHERE due
+```
+
+---
+
+## Inline Queries
+
+Use these inline for dynamic content within notes.
+
+### Current File Info
+
+```markdown
+Last modified: `= this.file.mtime`
+Created: `= this.file.ctime`
+Word count: `= length(this.file.content)`
+```
+
+### Metadata Display
+
+```markdown
+Status: `= this.status`
+Priority: `= this.priority`
+Updated: `= this.updated`
+```
+
+### Link Count
+
+```markdown
+This note has `= length(this.file.inlinks)` backlinks.
+```
+
+### Days Since Created
+
+```markdown
+Created `= (date(today) - this.file.cday).days` days ago.
+```
+
+---
+
+## DataviewJS Examples
+
+For complex queries requiring JavaScript.
+
+### Project Health Dashboard
+
+```dataviewjs
+const projects = dv.pages('"Projects"')
+  .where(p => p.type === "project");
+
+const healthy = projects.filter(p => {
+  const daysSinceUpdate = (Date.now() - p.file.mtime) / (1000 * 60 * 60 * 24);
+  return daysSinceUpdate < 7;
+});
+
+const stale = projects.filter(p => {
+  const daysSinceUpdate = (Date.now() - p.file.mtime) / (1000 * 60 * 60 * 24);
+  return daysSinceUpdate >= 7 && daysSinceUpdate < 30;
+});
+
+const rotting = projects.filter(p => {
+  const daysSinceUpdate = (Date.now() - p.file.mtime) / (1000 * 60 * 60 * 24);
+  return daysSinceUpdate >= 30;
+});
+
+dv.paragraph(`🟢 Fresh: ${healthy.length} | 🟡 Stale: ${stale.length} | 🔴 Rotting: ${rotting.length}`);
+```
+
+### Task Statistics
+
+```dataviewjs
+const tasks = dv.pages().file.tasks;
+const completed = tasks.where(t => t.completed).length;
+const open = tasks.where(t => !t.completed).length;
+const overdue = tasks.where(t => !t.completed && t.due && t.due < dv.date("today")).length;
+
+dv.paragraph(`📊 Tasks: ${open} open, ${completed} completed, ${overdue} overdue`);
+```
+
+### Recent Activity Timeline
+
+```dataviewjs
+const recentFiles = dv.pages()
+  .sort(p => p.file.mtime, 'desc')
+  .limit(10);
+
+for (let file of recentFiles) {
+  const timeAgo = Math.round((Date.now() - file.file.mtime) / (1000 * 60 * 60));
+  dv.paragraph(`${file.file.link} - ${timeAgo}h ago`);
+}
+```
+
+---
+
+## Query Patterns
+
+### Filtering Patterns
+
+```
+// Contains text
+WHERE contains(field, "value")
+
+// Starts with
+WHERE startswith(field, "prefix")
+
+// Multiple conditions
+WHERE condition1 AND condition2
+WHERE condition1 OR condition2
+
+// Negation
+WHERE !completed
+WHERE field != "value"
+
+// Date comparisons
+WHERE date >= date(today)
+WHERE date < date(today) - dur(7 days)
+
+// Array contains
+WHERE contains(tags, "#important")
+WHERE contains(file.tags, "project")
+```
+
+### Formatting Patterns
+
+```
+// Date formatting
+dateformat(date, "yyyy-MM-dd")
+dateformat(date, "MMMM dd, yyyy")
+
+// Number formatting
+round(number, 2)
+
+// String operations
+upper(text)
+lower(text)
+length(text)
+
+// Null handling
+default(field, "N/A")
+```
+
+---
+
+## Performance Tips
+
+1. **Use `FROM` to limit scope**: Always specify source folders
+2. **Add `LIMIT`**: Especially for large vaults
+3. **Avoid `FROM ""`**: Queries entire vault
+4. **Use specific fields**: Don't select `*`
+5. **Minimize DataviewJS**: DQL is faster
+
+### Example: Optimized Query
+
+```dataview
+// SLOW
+TABLE * FROM "" WHERE type = "project"
+
+// FAST
+TABLE status, priority
+FROM "Projects"
+WHERE type = "project"
+LIMIT 20
+```
+
+---
+
+## Resources
+
+- [Dataview Documentation](https://blacksmithgu.github.io/obsidian-dataview/)
+- [Dataview Example Vault](https://github.com/s-blu/obsidian_dataview_example_vault)
+- [Dataview Query Wizard GPT](https://www.obsidianstats.com/posts/2025-04-10-obsidian-dataview-query-wizard)
+
+---
+
+*Last updated: 2025-12-14*

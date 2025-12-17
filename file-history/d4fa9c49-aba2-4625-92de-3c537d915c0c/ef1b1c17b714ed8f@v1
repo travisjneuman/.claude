@@ -1,0 +1,84 @@
+# CLAUDE.md for Services layer
+
+## Scope
+
+This document defines patterns for implementing service modules (e.g. encryption, storage, validation, remote API wrappers) in the Neuman Brain codebase. It extends the root rules, focusing on isolation of business logic and safe handling of external I/O.
+
+## Non‑negotiable requirements
+
+* **Single responsibility:** Each service file must encapsulate a single domain of logic (for example, `cryptoService.ts` for encryption/decryption, `apiService.ts` for REST requests). Do not mix unrelated concerns.
+* **Strong typing:** Use explicit TypeScript types and `zod` schemas. Avoid `any` or dynamic typing. Expose typed APIs so consumers know exactly what to pass and expect in return.
+* **No UI dependencies:** Services may not reference React, shadcn/ui components, `window`, `document` or DOM APIs. They should run in any environment (browser, worker, tests).
+* **Centralised I/O:** All network and storage access must go through service modules. Components should never call `fetch` or `localStorage` directly. Include a `baseURL` constant and unify error handling. Implement retry logic and exponential backoff only in services.
+* **Security first:** Do not hard‑code API keys, secrets or encryption keys. Load them from secure configuration (`import.meta.env`) and pass them into service constructors. Apply encryption/decryption consistently when storing sensitive data, using the utilities in `@/services/crypto`.
+* **Input validation:** Parse and validate every inbound payload with `zod` (or similar) before use. Validate outbound responses too. Throw descriptive errors on invalid data; never silently coerce or ignore fields.
+* **Statelessness:** Services should be stateless by default. If a service maintains state (like open WebSocket connections), provide an explicit `connect`/`disconnect` or `cleanup` API and document when to call it.
+* **Documentation:** Annotate all functions with JSDoc, including params, return types and side effects. Link to relevant docs (e.g. API spec) where appropriate.
+* **Hooks separation:** If you need React hooks (e.g. `useCrypto`), implement them in a separate file that imports the service. Never embed hooks directly in service files.
+* **Test coverage:** Every service must have associated unit/integration tests. See `CLAUDE_tests.md` for guidelines.
+* **No silent failure:** Always propagate or handle errors. Do not wrap `try/catch` around a call and ignore the error; instead, throw or return a typed error.
+
+## Structure guidelines
+
+Service modules follow a consistent shape. A typical pattern looks like this:
+
+```ts
+// src/services/apiService.ts
+import { z } from "zod";
+import { encryptData, decryptData } from "@/services/crypto";
+
+// Define request and response schemas
+const Payload = z.object({
+  id: z.string(),
+  payload: z.any(),
+});
+const Response = z.object({
+  status: z.literal("ok"),
+  data: z.any(),
+});
+
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
+export async function sendPayload(payload: z.infer<typeof Payload>): Promise<z.infer<typeof Response>> {
+  const parsed = Payload.parse(payload);
+  const encrypted = encryptData(parsed);
+  const res = await fetch(`${BASE_URL}/endpoint`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(encrypted),
+  });
+  if (!res.ok) {
+    throw new Error(`sendPayload failed: ${res.status} ${res.statusText}`);
+  }
+  const raw = await res.json();
+  const decrypted = decryptData(raw);
+  return Response.parse(decrypted);
+}
+
+// Additional functions…
+```
+
+### Patterns
+
+* **Schemas up top:** Define all `zod` schemas at the top of the file. Reuse them across functions.
+* **Constants:** Centralise `BASE_URL`, timeouts, retry limits, etc. Avoid scattering magic strings.
+* **Helper functions:** Extract repeated logic (e.g. `handleResponse`, `withRetry`) into private helpers within the module.
+* **Exports:** Export only the public API functions. Keep helpers internal by not exporting them.
+
+## Anti‑patterns
+
+* Avoid mixing UI and service logic (no DOM access, no CSS classes).
+* Do not catch errors and return undefined; always throw or return a typed error object.
+* Do not bypass validation for performance. Parsing with `zod` is fast and ensures safety.
+* Never leak secrets in logs or error messages.
+* Do not copy/paste entire services to create a variant. Extract common logic into helpers.
+
+## Additional documentation
+
+For deeper guidance on the architecture and the rationale behind service patterns, refer to:
+
+* `docs/technical/local_first_architecture.md` – design principles for local‑first apps
+* `docs/technical/ai_provider_integration.md` – patterns when talking to AI providers
+* `docs/technical/implementation_plan.md` – high‑level implementation blueprint
+
+Consult these documents whenever you create or modify a service. If in doubt, ask for clarification in the task discussion.

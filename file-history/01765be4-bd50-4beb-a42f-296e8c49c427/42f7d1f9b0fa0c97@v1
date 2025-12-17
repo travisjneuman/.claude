@@ -1,0 +1,61 @@
+import { create } from 'zustand';
+import { persist, createJSONStorage } from 'zustand/middleware';
+import type { KanbanState, Task, TaskStatus } from '../types';
+import { createSyncedStorage } from '../lib/syncedStorage';
+
+interface KanbanStore extends KanbanState {
+  addTask: (task: Omit<Task, 'id' | 'created'>) => void;
+  updateTask: (id: string, updates: Partial<Task>) => void;
+  deleteTask: (id: string) => void;
+  moveTask: (id: string, newStatus: TaskStatus) => void;
+  getTasksByStatus: (status: TaskStatus) => Task[];
+}
+
+export const useKanbanStore = create<KanbanStore>()(
+  persist(
+    (set, get) => ({
+      // Initial state
+      tasks: [],
+
+      // Actions
+      addTask: (taskData) =>
+        set((state) => ({
+          tasks: [
+            ...state.tasks,
+            {
+              ...taskData,
+              id: Date.now().toString(),
+              created: new Date().toISOString(),
+            },
+          ],
+        })),
+
+      updateTask: (id, updates) =>
+        set((state) => ({
+          tasks: state.tasks.map((task) =>
+            task.id === id ? { ...task, ...updates } : task
+          ),
+        })),
+
+      deleteTask: (id) =>
+        set((state) => ({
+          tasks: state.tasks.filter((task) => task.id !== id),
+        })),
+
+      moveTask: (id, newStatus) =>
+        set((state) => ({
+          tasks: state.tasks.map((task) =>
+            task.id === id ? { ...task, status: newStatus } : task
+          ),
+        })),
+
+      getTasksByStatus: (status) => {
+        return get().tasks.filter((task) => task.status === status);
+      },
+    }),
+    {
+      name: 'kanban-tasks',
+      storage: createJSONStorage(() => createSyncedStorage()),
+    }
+  )
+);

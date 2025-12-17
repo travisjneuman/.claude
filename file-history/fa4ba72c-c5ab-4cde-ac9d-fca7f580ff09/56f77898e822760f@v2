@@ -1,0 +1,321 @@
+# Research: Local Terminal Integration for AI Terminal
+
+**Status:** RESEARCH
+**Priority:** P1 - HIGH (Strategic Feature)
+**Created:** 2025-11-24
+**Type:** Research & Planning
+
+---
+
+## Vision Statement
+
+> "When somebody turns on any device, they just come to Neuman Brain and can do anything."
+
+Transform the AI Terminal from a chat-only interface into a **full local system terminal** that can execute CLI commands, run development tools, and interact with the user's local filesystem - all from within Neuman Brain.
+
+---
+
+## Feature Request Summary
+
+**Goal:** Enable users to interact with their local system through Neuman Brain's AI Terminal.
+
+**Use Cases:**
+1. Developer working on a local project with notes/tasks in Neuman Brain
+2. Running CLI tools: `npm run dev`, `git status`, `docker ps`
+3. Using AI-powered CLI tools: Claude Code CLI, GitHub Copilot CLI
+4. System administration: `ping`, `curl`, `ssh`, file operations
+5. Cross-platform support: Linux, macOS, Windows (PowerShell/CMD/Bash)
+
+**User Experience:**
+- Single interface for AI chat AND terminal commands
+- Seamless context switching between AI assistance and command execution
+- AI can suggest commands, user can execute them directly
+- Output displayed inline, integrated with conversation flow
+
+---
+
+## Research Questions
+
+### 1. Technical Feasibility
+
+**Q1.1: How can a web app execute local system commands?**
+- Browser sandbox restrictions
+- WebAssembly possibilities
+- Native messaging / browser extensions
+- Electron/Tauri wrapper approach
+- Local companion server approach
+
+**Q1.2: What are the security implications?**
+- Arbitrary code execution risks
+- Sandboxing requirements
+- Permission models
+- User consent flows
+
+**Q1.3: Cross-platform considerations?**
+- Windows: PowerShell, CMD, WSL
+- macOS: zsh, bash, Terminal.app
+- Linux: Various shells (bash, zsh, fish)
+
+### 2. Architecture Options
+
+**Option A: Browser Extension + Native Messaging**
+- Chrome/Firefox extension with native host
+- Requires user to install extension + native component
+- Full local access via native host
+- Complex setup, but powerful
+
+**Option B: Electron/Tauri Desktop App**
+- Package Neuman Brain as desktop app
+- Full Node.js/Rust access to system
+- Cross-platform binaries
+- No browser limitations
+- Larger distribution footprint
+
+**Option C: Local Companion Server**
+- Lightweight local server (Node.js/Python/Rust)
+- Web app communicates via localhost API
+- User installs once, runs in background
+- WebSocket for real-time output streaming
+- Similar to VS Code Remote, Jupyter notebooks
+
+**Option D: WebContainer/WASM Approach**
+- StackBlitz WebContainers (browser-native Node.js)
+- Limited to Node.js ecosystem
+- No true system access
+- Good for development workflows, not full terminal
+
+**Option E: PWA + File System Access API**
+- Progressive Web App with FSA API
+- Limited to file operations
+- Cannot execute arbitrary commands
+- Good for file management, not terminal
+
+### 3. Competitive Analysis
+
+**Products to Research:**
+- [ ] VS Code Server / code-server (browser-based VS Code)
+- [ ] JupyterLab (browser terminal)
+- [ ] Replit (browser IDE with terminal)
+- [ ] GitHub Codespaces (cloud dev environments)
+- [ ] StackBlitz (WebContainers)
+- [ ] Gitpod (browser-based development)
+- [ ] Brev.dev (cloud development)
+- [ ] Railway.app (deployment + terminal)
+- [ ] Warp terminal (AI-native terminal)
+- [ ] Fig (AI terminal autocomplete)
+
+### 4. Implementation Approaches
+
+**Approach 1: Hybrid AI + Terminal**
+```
+User types: "npm run dev"
+→ Detected as command (starts with known CLI tool)
+→ Execute via local companion server
+→ Stream output to terminal panel
+→ AI can interpret errors, suggest fixes
+
+User types: "Why did that fail?"
+→ Detected as natural language
+→ AI analyzes previous command output
+→ Provides explanation and fix
+```
+
+**Approach 2: AI-First with Command Execution**
+```
+User types: "Start my dev server"
+→ AI interprets intent
+→ Suggests: "I'll run `npm run dev` for you"
+→ User confirms or AI auto-executes
+→ Output streamed, AI monitors for errors
+```
+
+**Approach 3: Explicit Mode Switching**
+```
+[AI Mode] [Terminal Mode] [Hybrid Mode]
+- AI Mode: Chat only
+- Terminal Mode: Direct command execution
+- Hybrid Mode: AI interprets and can execute
+```
+
+---
+
+## Technical Deep Dives Needed
+
+### Local Companion Server Architecture
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                    Neuman Brain (Browser)                │
+│  ┌─────────────────────────────────────────────────────┐│
+│  │                   AI Terminal                        ││
+│  │  ┌─────────────────┐  ┌─────────────────────────┐  ││
+│  │  │   AI Chat Panel │  │   Terminal Output Panel │  ││
+│  │  └─────────────────┘  └─────────────────────────┘  ││
+│  └─────────────────────────────────────────────────────┘│
+│                           │                              │
+│                     WebSocket                            │
+│                           │                              │
+└───────────────────────────┼──────────────────────────────┘
+                            │
+                            ▼
+┌───────────────────────────────────────────────────────────┐
+│              Local Companion Server (localhost:7777)       │
+│  ┌─────────────────────────────────────────────────────┐  │
+│  │  - Spawn shell processes (bash/zsh/PowerShell)      │  │
+│  │  - PTY (pseudo-terminal) for full terminal emulation│  │
+│  │  - Stream stdout/stderr via WebSocket               │  │
+│  │  - Handle stdin for interactive commands            │  │
+│  │  - Sandboxing options (restricted directories)      │  │
+│  │  - Session management (multiple terminals)          │  │
+│  └─────────────────────────────────────────────────────┘  │
+│                                                           │
+│  Tech Stack Options:                                      │
+│  - Node.js + node-pty (proven: VS Code uses this)        │
+│  - Rust + portable-pty (fast, small binary)              │
+│  - Go + creack/pty (simple, cross-platform)              │
+└───────────────────────────────────────────────────────────┘
+```
+
+### Security Model
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                    Security Layers                       │
+├─────────────────────────────────────────────────────────┤
+│ Layer 1: Connection Authentication                       │
+│   - Local-only binding (127.0.0.1)                      │
+│   - Token-based auth (generated on server start)        │
+│   - Origin validation (only Neuman Brain domain)        │
+├─────────────────────────────────────────────────────────┤
+│ Layer 2: Command Filtering (Optional)                    │
+│   - Allowlist mode: Only approved commands              │
+│   - Blocklist mode: Block dangerous commands            │
+│   - Confirmation prompts for destructive operations     │
+├─────────────────────────────────────────────────────────┤
+│ Layer 3: Directory Sandboxing (Optional)                 │
+│   - Restrict to specific directories                    │
+│   - User configures "workspace" directories             │
+│   - Prevent access to system directories                │
+├─────────────────────────────────────────────────────────┤
+│ Layer 4: User Consent                                    │
+│   - Clear warnings about local execution                │
+│   - "Power User Mode" opt-in                            │
+│   - Audit log of all executed commands                  │
+└─────────────────────────────────────────────────────────┘
+```
+
+---
+
+## Implementation Phases
+
+### Phase 1: Research & Proof of Concept (1-2 weeks)
+- [ ] Research competitor implementations
+- [ ] Build minimal Node.js companion server with node-pty
+- [ ] Test WebSocket streaming from browser to local terminal
+- [ ] Evaluate security implications
+- [ ] Document findings and recommendations
+
+### Phase 2: Core Integration (2-3 weeks)
+- [ ] Design UI for terminal panel in AI Terminal
+- [ ] Implement WebSocket client in Neuman Brain
+- [ ] Build terminal output rendering (xterm.js integration)
+- [ ] Handle stdin for interactive commands
+- [ ] Cross-platform testing (Windows, macOS, Linux)
+
+### Phase 3: AI Integration (2 weeks)
+- [ ] Command detection (distinguish AI chat vs terminal commands)
+- [ ] AI command suggestions based on context
+- [ ] Error interpretation and fix suggestions
+- [ ] Context passing (current directory, recent output)
+
+### Phase 4: Distribution & UX (2 weeks)
+- [ ] Package companion server for easy installation
+- [ ] Auto-update mechanism for companion
+- [ ] First-run setup wizard
+- [ ] Documentation and user guides
+
+---
+
+## Success Criteria
+
+### MVP Success:
+- [ ] User can execute basic commands (`ls`, `pwd`, `echo`)
+- [ ] Output streams in real-time to browser
+- [ ] Works on Windows, macOS, Linux
+- [ ] Secure local-only connection
+- [ ] Clear setup instructions
+
+### Full Success:
+- [ ] Full PTY support (vim, htop, interactive programs)
+- [ ] Multiple terminal sessions
+- [ ] AI-assisted command execution
+- [ ] Seamless context switching between AI and terminal
+- [ ] One-click installer for companion server
+
+---
+
+## Risks & Mitigations
+
+| Risk | Severity | Mitigation |
+|------|----------|------------|
+| Security vulnerabilities | HIGH | Local-only binding, auth tokens, sandboxing |
+| Complex user setup | MEDIUM | One-click installers, clear docs, setup wizard |
+| Cross-platform bugs | MEDIUM | Extensive testing matrix, CI/CD for all platforms |
+| Browser limitations | LOW | Companion server bypasses browser sandbox |
+| Maintenance burden | MEDIUM | Use proven libraries (node-pty), minimal custom code |
+
+---
+
+## Open Questions
+
+1. **Should this be opt-in or default?**
+   - Opt-in for security, but reduces adoption
+   - Default requires very careful security model
+
+2. **How to handle the companion server lifecycle?**
+   - System service (always running)?
+   - On-demand startup (launched by browser)?
+   - Manual start by user?
+
+3. **Should we support remote servers too?**
+   - SSH into remote machines via Neuman Brain?
+   - Could expand use cases significantly
+   - More complex security model
+
+4. **Integration with AI providers?**
+   - Could Claude/GPT see terminal output for better assistance?
+   - Privacy implications of sharing local command output with AI
+
+---
+
+## Related Vision
+
+This feature supports the broader vision:
+
+> "Neuman Brain becomes the **universal interface** for all computing tasks"
+
+- Notes and tasks (current)
+- Calendar and planning (current)
+- AI assistance (current)
+- **Local development** (this feature)
+- Remote server management (future)
+- File management (future)
+- System monitoring (future)
+
+---
+
+## Next Steps
+
+1. [ ] Web research on competitor implementations
+2. [ ] Build proof-of-concept Node.js companion server
+3. [ ] Test with simple command execution
+4. [ ] Evaluate xterm.js for terminal rendering
+5. [ ] Document architecture recommendation
+6. [ ] Add to Phase 5 or Phase 6 roadmap
+
+---
+
+**Document Status:** Research Phase
+**Last Updated:** 2025-11-24
+**Owner:** TBD
+**ETA for Research Completion:** TBD

@@ -1,0 +1,278 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==================== CSS DESIGN TOKENS ==================== */
+/* These CSS variables power the semantic color system in Tailwind */
+/* Source: src/config/theme.ts */
+
+:root {
+  /* Surface colors (backgrounds) */
+  --surface-light: #FFFFFF;
+  --surface-light-elevated: #F3F4F6;
+  --surface-dark: #000000;
+  --surface-dark-elevated: #1A1A1A;
+
+  /* Text colors */
+  --text-light-primary: #000000;
+  --text-light-secondary: #6B7280;
+  --text-light-tertiary: #9CA3AF;
+  --text-dark-primary: #FFFFFF;
+  --text-dark-secondary: #D1D5DB;
+  --text-dark-tertiary: #6B7280;
+
+  /* Border colors */
+  --border-light: #E2E8F0;
+  --border-dark: rgba(255, 255, 255, 0.1);
+
+  /* Accent colors (from logo: magenta, cyan) */
+  --accent-blue: #3B82F6;
+  --accent-blue-hover: #2563EB;
+  --accent-magenta: #E91E8C;
+  --accent-magenta-hover: #D11A7C;
+  --accent-cyan: #00C9FF;
+  --accent-cyan-hover: #00B3E6;
+
+  /* Status colors */
+  --status-success: #10B981;
+  --status-warning: #F59E0B;
+  --status-error: #EF4444;
+  --status-info: #3B82F6;
+}
+
+@layer base {
+  body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 16px; /* Increased from 14px for better readability */
+    line-height: 1.5; /* Professional line-height */
+    @apply bg-surface-light dark:bg-surface-dark;
+    @apply text-text-light-primary dark:text-text-dark-primary;
+  }
+
+  /* Professional Typography Hierarchy */
+  h1 {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  h2 {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+  }
+
+  h3 {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  h4 {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  h5, h6 {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.5;
+  }
+
+  p {
+    line-height: 1.6; /* Slightly taller for body text readability */
+  }
+
+  /* Professional emphasis weights */
+  strong, b {
+    font-weight: 600; /* Medium weight for emphasis */
+  }
+
+  .font-emphasis {
+    font-weight: 500; /* Light emphasis */
+  }
+
+  /* Focus styles for accessibility (WCAG 2.2 compliant) */
+  *:focus-visible {
+    @apply outline-2 outline-accent-blue-hover;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Mobile optimizations (Phase 6) */
+  button, a, input, textarea, select {
+    /* Prevent 300ms touch delay on mobile */
+    touch-action: manipulation;
+    /* Remove tap highlight on mobile */
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Prevent zoom on input focus (iOS Safari) */
+  input, textarea, select {
+    font-size: max(16px, 1em); /* Minimum 16px to prevent zoom */
+  }
+
+  /* Dynamic viewport height for Mobile Safari (URL bar) */
+  .full-height {
+    height: 100dvh; /* Dynamic viewport height */
+  }
+}
+
+/* Scrollbar styling for sidebar */
+@layer utilities {
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    @apply bg-border-light;
+    border-radius: 3px;
+  }
+
+  .dark .scrollbar-thin::-webkit-scrollbar-thumb {
+    @apply bg-border-dark;
+  }
+
+  /* Dashboard grid layout - CSS Grid supports native column spanning */
+  .dashboard-grid {
+    /* Grid is defined in Dashboard.tsx using Tailwind classes:
+       - Mobile: 1 column (grid-cols-1)
+       - Tablet: 2 columns (md:grid-cols-2)
+       - Desktop: 3 columns (lg:grid-cols-3)
+
+       Column spanning uses Tailwind's col-span utilities:
+       - 1x: (default, no class)
+       - 2x: lg:col-span-2
+       - 3x: lg:col-span-3 md:col-span-2
+    */
+  }
+
+  /* ==================== BACKGROUND CONTRAST UTILITIES ==================== */
+  /* Smart contrast detection for dashboard backgrounds */
+  /* Applied to .dashboard-page to override text colors when background conflicts with theme */
+
+  /* Dark content: Force dark text on light backgrounds (in dark mode) */
+  .dark-content h1,
+  .dark-content h2,
+  .dark-content h3,
+  .dark-content p,
+  .dark-content span:not([class*="text-white"]):not([class*="bg-"]) {
+    color: var(--text-light-primary) !important;
+  }
+
+  .dark-content .text-text-light-secondary,
+  .dark-content .text-text-dark-secondary {
+    color: var(--text-light-secondary) !important;
+  }
+
+  /* Ensure buttons and UI elements remain visible on light backgrounds */
+  .dark-content .bg-neutral-200 {
+    background-color: rgba(0, 0, 0, 0.1) !important;
+  }
+  .dark-content .dark\:bg-neutral-700 {
+    background-color: rgba(0, 0, 0, 0.15) !important;
+  }
+
+  /* Light content: Force light text on dark backgrounds (in light mode) */
+  .light-content h1,
+  .light-content h2,
+  .light-content h3,
+  .light-content p,
+  .light-content span:not([class*="text-black"]):not([class*="bg-"]) {
+    color: var(--text-dark-primary) !important;
+  }
+
+  .light-content .text-text-light-secondary,
+  .light-content .text-text-dark-secondary {
+    color: var(--text-dark-secondary) !important;
+  }
+
+  /* Ensure buttons and UI elements remain visible on dark backgrounds */
+  .light-content .bg-neutral-200 {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+  }
+}
+
+/* Print Styles - Calendar Print View (Quick Win #6) */
+@media print {
+  /* Hide all navigation, sidebars, buttons, and dashboard UI */
+  header,
+  nav,
+  aside,
+  footer,
+  .sidebar,
+  button.no-print,
+  .no-print {
+    display: none !important;
+  }
+
+  /* Force white background, black text (ignore dark mode) */
+  body,
+  html {
+    margin: 0;
+    padding: 0;
+    background: white !important;
+    color: black !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Remove all dark mode colors */
+  * {
+    background: white !important;
+    color: black !important;
+    border-color: #333 !important;
+  }
+
+  /* Calendar-specific print styles */
+  .calendar-container,
+  [class*="calendar"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 1cm !important;
+    page-break-inside: avoid;
+  }
+
+  /* Calendar grid */
+  table,
+  [class*="grid"] {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th,
+  td,
+  [class*="day"],
+  [class*="event"] {
+    border: 1px solid #333 !important;
+    padding: 0.3cm !important;
+    font-size: 10pt !important;
+    page-break-inside: avoid;
+  }
+
+  /* Events */
+  [class*="event"],
+  [class*="item"] {
+    background: #f0f0f0 !important;
+    border: 1px solid #666 !important;
+    padding: 2mm !important;
+    margin: 1mm 0 !important;
+    font-size: 9pt !important;
+  }
+
+  /* Landscape orientation for better calendar fit */
+  @page {
+    size: landscape;
+    margin: 1cm;
+  }
+}

@@ -1,0 +1,175 @@
+/**
+ * HorizontalSplitter Component
+ *
+ * Resizable horizontal splitter for dividing folder pane from notes list.
+ * Part of the Notes Page Revolution - Phase 2.
+ *
+ * Features:
+ * - 8px hit area for easy grabbing
+ * - Visual feedback on hover/drag
+ * - Keyboard accessible (arrow keys)
+ * - Double-click to reset to default
+ * - Grip dots on hover for affordance
+ */
+
+import React, { useCallback, useEffect, useState, useRef } from 'react';
+
+export interface HorizontalSplitterProps {
+  /** Current position as percentage (0-100) */
+  position: number;
+  /** Minimum position constraint (percentage) */
+  minPosition?: number;
+  /** Maximum position constraint (percentage) */
+  maxPosition?: number;
+  /** Default position for double-click reset (percentage) */
+  defaultPosition?: number;
+  /** Callback when position changes */
+  onPositionChange: (position: number) => void;
+  /** Container height reference for calculating position */
+  containerRef: React.RefObject<HTMLElement | null>;
+}
+
+export const HorizontalSplitter: React.FC<HorizontalSplitterProps> = ({
+  position,
+  minPosition = 20,
+  maxPosition = 80,
+  defaultPosition = 40,
+  onPositionChange,
+  containerRef,
+}) => {
+  const [isDragging, setIsDragging] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
+  const splitterRef = useRef<HTMLDivElement>(null);
+
+  // Handle mouse down to start dragging
+  const handleMouseDown = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsDragging(true);
+  }, []);
+
+  // Handle double-click to reset to default
+  const handleDoubleClick = useCallback(() => {
+    onPositionChange(defaultPosition);
+  }, [defaultPosition, onPositionChange]);
+
+  // Handle keyboard navigation
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      const step = e.shiftKey ? 10 : 2; // Larger steps with Shift
+      let newPosition = position;
+
+      switch (e.key) {
+        case 'ArrowUp':
+          e.preventDefault();
+          newPosition = Math.max(minPosition, position - step);
+          break;
+        case 'ArrowDown':
+          e.preventDefault();
+          newPosition = Math.min(maxPosition, position + step);
+          break;
+        case 'Home':
+          e.preventDefault();
+          newPosition = minPosition;
+          break;
+        case 'End':
+          e.preventDefault();
+          newPosition = maxPosition;
+          break;
+        case 'Enter':
+        case ' ':
+          e.preventDefault();
+          newPosition = defaultPosition;
+          break;
+        default:
+          return;
+      }
+
+      onPositionChange(newPosition);
+    },
+    [position, minPosition, maxPosition, defaultPosition, onPositionChange]
+  );
+
+  // Handle mouse move during drag
+  useEffect(() => {
+    if (!isDragging || !containerRef.current) return;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const container = containerRef.current;
+      if (!container) return;
+
+      const rect = container.getBoundingClientRect();
+      const relativeY = e.clientY - rect.top;
+      const percentage = (relativeY / rect.height) * 100;
+      const clamped = Math.max(minPosition, Math.min(maxPosition, percentage));
+
+      onPositionChange(clamped);
+    };
+
+    const handleMouseUp = () => {
+      setIsDragging(false);
+    };
+
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseup', handleMouseUp);
+
+    // Set cursor and prevent text selection during drag
+    document.body.style.cursor = 'ns-resize';
+    document.body.style.userSelect = 'none';
+
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+      document.body.style.cursor = '';
+      document.body.style.userSelect = '';
+    };
+  }, [isDragging, minPosition, maxPosition, containerRef, onPositionChange]);
+
+  return (
+    <div
+      ref={splitterRef}
+      role="separator"
+      aria-orientation="horizontal"
+      aria-valuenow={Math.round(position)}
+      aria-valuemin={minPosition}
+      aria-valuemax={maxPosition}
+      aria-label="Resize folder and notes panes"
+      tabIndex={0}
+      onMouseDown={handleMouseDown}
+      onDoubleClick={handleDoubleClick}
+      onKeyDown={handleKeyDown}
+      onFocus={() => setIsFocused(true)}
+      onBlur={() => setIsFocused(false)}
+      className={`
+        group relative h-2 cursor-ns-resize flex-shrink-0
+        transition-colors duration-100
+        ${isFocused ? 'outline-2 outline-accent-cyan outline-offset-2' : ''}
+      `}
+      title="Drag to resize, double-click to reset"
+    >
+      {/* 8px hit area with 2px visible line */}
+      <div
+        className={`
+          absolute left-0 right-0 top-1/2 h-0.5 -translate-y-1/2
+          transition-all duration-100
+          ${
+            isDragging
+              ? 'bg-accent-cyan dark:bg-accent-magenta'
+              : 'bg-border-light dark:bg-border-dark group-hover:bg-accent-cyan/50 dark:group-hover:bg-accent-magenta/50'
+          }
+        `}
+      />
+
+      {/* Grip dots - visible on hover for affordance */}
+      <div
+        className={`
+          absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2
+          flex gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity duration-100
+        `}
+      >
+        <div className="w-1 h-1 rounded-full bg-text-light-tertiary dark:bg-text-dark-tertiary" />
+        <div className="w-1 h-1 rounded-full bg-text-light-tertiary dark:bg-text-dark-tertiary" />
+        <div className="w-1 h-1 rounded-full bg-text-light-tertiary dark:bg-text-dark-tertiary" />
+      </div>
+    </div>
+  );
+};

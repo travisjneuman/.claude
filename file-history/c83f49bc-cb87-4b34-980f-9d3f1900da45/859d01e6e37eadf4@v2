@@ -1,0 +1,77 @@
+# Plans Directory
+
+This directory contains high-level strategic plans and proposals for Neuman Brain features.
+
+---
+
+## Active Plans
+
+### Time Tracking System
+- **Original Proposal:** `project_chronos_workplan.md` (Gemini 3 Pro)
+- **Modified Implementation Plan:** `../tasks/implement-advanced-time-tracking.md` (Claude Sonnet 4.5)
+- **Status:** Ready for implementation
+- **Target:** 85-90% Toggl parity in 8 weeks (4 phases)
+
+**Key Features:**
+- Manual time tracking (timer widget, time entries page)
+- Reporting & analytics (daily/weekly/monthly summaries, charts)
+- Billing & invoicing (billable hours, PDF invoices)
+- Smart features (natural language input, Kanban/Calendar integration, idle detection)
+- Advanced analytics (focus quality metrics, deep work score, productivity insights)
+
+**Architecture:**
+- Integrates with existing widget system (dashboard widgets)
+- Uses existing database layer (Dexie.js `timeTrackingDb.ts`)
+- Zustand store for state management (`useTimeTrackingStore.ts`)
+- Privacy-first (local IndexedDB, optional E2EE sync)
+
+---
+
+## Plan Lifecycle
+
+1. **Proposal:** External AI (Gemini, etc.) or team member creates initial plan
+2. **Review:** Claude Sonnet 4.5 reviews for compatibility with:
+   - Neuman Brain architecture (widget system, Zustand, Dexie.js)
+   - Privacy-first principles (local-first, E2EE, zero-data-host)
+   - Development principles (TypeScript strict mode, bundle size, performance)
+3. **Modification:** Claude adapts plan to fit existing codebase
+4. **Task Creation:** Detailed implementation task created in `tasks/` directory
+5. **Approval:** User reviews modified plan before implementation
+6. **Implementation:** Phased delivery (typically 4-8 weeks)
+7. **Archive:** Original proposal marked as archived with link to modified plan
+
+---
+
+## How to Use This Directory
+
+### For New Proposals:
+1. Place high-level vision document here (e.g., `project_name_proposal.md`)
+2. Ask Claude to review and create implementation plan
+3. Claude will create detailed task in `tasks/` directory
+4. Original proposal is archived with reference to task file
+
+### For Implementation:
+- **Don't implement from plans directly** - Use task files in `tasks/` directory
+- Plans are strategic vision, tasks are tactical execution
+- Always check for modified/adapted version before starting work
+
+---
+
+## Directory Structure
+
+```
+docs/plans/
+├── README.md                         # This file
+├── project_chronos_workplan.md       # Gemini: Time tracking proposal (archived)
+└── [future_proposals].md             # Additional strategic plans
+```
+
+---
+
+**Related:**
+- Implementation Tasks: `tasks/`
+- Feature Map: `docs/product/feature_map.md`
+- Development Principles: `docs/technical/development_principles.md`
+
+**Document Status:** ✅ Active
+**Last Updated:** 2025-11-22

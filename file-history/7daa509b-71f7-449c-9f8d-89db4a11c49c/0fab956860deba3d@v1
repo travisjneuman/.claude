@@ -1,0 +1,457 @@
+# Obsidian Setup — Complete Configuration Guide
+
+> Comprehensive plugin configuration and customization guide for a developer-focused knowledge management system.
+
+---
+
+## Core Plugins (Built-in)
+
+### Daily Notes
+- **Folder**: `Journal/`
+- **Date Format**: `YYYY-MM-DD`
+- **Template**: `Templates/Dev Session Log.md`
+
+### Templates (Core)
+- **Template Folder**: `Templates/`
+- **Note**: Prefer Templater plugin for advanced features
+
+### Backlinks
+- **Show backlinks in document**: ON
+- **Collapse backlinks pane**: OFF (keep visible for discovery)
+
+### Outgoing Links
+- **Show links to unresolved notes**: ON (reveals gaps in knowledge)
+
+### Tags
+- **Show nested tags**: ON
+
+### Page Preview
+- **Enable**: ON (hover over links to preview)
+
+---
+
+## Essential Community Plugins
+
+### 1. Dataview (Required)
+**Purpose**: Dynamic queries and data aggregation
+
+**Settings**:
+| Setting | Value | Why |
+|---------|-------|-----|
+| Enable JavaScript Queries | ON | Required for DataviewJS dashboards |
+| Enable Inline Queries | ON | Allows `= this.updated` in text |
+| Automatic View Refreshing | ON | Keeps queries current |
+| Refresh Interval | 2500ms | Balance between freshness and performance |
+
+**Query Types**:
+- `LIST` — Simple bullet list
+- `TABLE` — Structured data with columns
+- `TASK` — Task aggregation
+- `CALENDAR` — Date-based visualization
+
+### 2. Templater (Required)
+**Purpose**: Advanced templates with JavaScript
+
+**Settings**:
+| Setting | Value | Why |
+|---------|-------|-----|
+| Template Folder Location | `Templates/` | Central template storage |
+| Trigger on New File Creation | ON | Auto-apply templates |
+| Enable Folder Templates | ON | Different templates per folder |
+
+**Folder Templates**:
+| Folder | Template |
+|--------|----------|
+| `Journal/` | `Templates/Dev Session Log.md` |
+| `Projects/` | `Templates/Project Template.md` |
+| `Decisions/` | `Templates/ADR - Decision Record.md` |
+
+**Useful Templater Syntax**:
+```markdown
+<%* /* JavaScript code */ _%>
+<% tp.date.now("YYYY-MM-DD") %>
+<% tp.file.title %>
+<% tp.file.cursor() %>
+```
+
+### 3. Tasks (Required)
+**Purpose**: Task management with due dates and priorities
+
+**Settings**:
+| Setting | Value | Why |
+|---------|-------|-----|
+| Global Task Filter | (empty) | All checkboxes are tasks |
+| Auto-suggest | ON | Task syntax completion |
+| Set done date | ON | Track completion |
+
+**Task Syntax**:
+```markdown
+- [ ] Basic task
+- [ ] Task with due date 📅 2025-12-20
+- [ ] High priority task ⏫
+- [ ] Task with scheduled date ⏳ 2025-12-15
+- [x] Completed task ✅ 2025-12-14
+```
+
+**Priority Emojis**:
+- ⏫ High
+- 🔼 Medium
+- 🔽 Low
+
+### 4. Calendar (Required)
+**Purpose**: Visual daily note navigation
+
+**Settings**:
+| Setting | Value | Why |
+|---------|-------|-----|
+| Week Start | Monday | Standard work week |
+| Show Week Number | ON | Integrates with Periodic Notes |
+| Words per dot | 250 | Visual indication of note size |
+
+**Usage**: Click any date to create/open that day's note.
+
+### 5. Periodic Notes (Recommended)
+**Purpose**: Weekly, monthly, quarterly, yearly notes
+
+**Settings**:
+| Period | Folder | Format | Template |
+|--------|--------|--------|----------|
+| Weekly | `Journal/Weekly/` | `gggg-[W]ww` | `Templates/Weekly Review.md` |
+| Monthly | `Journal/Monthly/` | `YYYY-MM` | `Templates/Monthly Review.md` |
+| Quarterly | `Journal/Quarterly/` | `YYYY-[Q]Q` | `Templates/Quarterly Review.md` |
+| Yearly | `Journal/Yearly/` | `YYYY` | `Templates/Yearly Review.md` |
+
+---
+
+## Productivity Plugins
+
+### 6. QuickAdd
+**Purpose**: Rapid capture and file creation
+
+**Macros**:
+| Macro | Action |
+|-------|--------|
+| New Project | Create project note with template |
+| Quick Task | Add task to daily note |
+| Capture Idea | Add to Inbox |
+
+### 7. Commander
+**Purpose**: Custom toolbar buttons and command palette
+
+**Custom Buttons**:
+- Toggle left sidebar
+- Open daily note
+- Create new project
+- Search vault
+
+### 8. Auto Note Mover
+**Purpose**: Automatically organize notes by rules
+
+**Rules**:
+| Condition | Destination |
+|-----------|-------------|
+| Tag `#inbox` removed | Based on other tags |
+| Created in root | Move to `Inbox/` |
+
+### 9. Kanban
+**Purpose**: Visual task boards
+
+**Use Cases**:
+- Sprint planning
+- Content pipeline
+- Project phases
+
+---
+
+## Visual & Organization Plugins
+
+### 10. Excalidraw
+**Purpose**: Visual thinking and diagrams
+
+**Settings**:
+| Setting | Value |
+|---------|-------|
+| Excalidraw Folder | `Attachments/Excalidraw/` |
+| Auto-export to PNG | ON |
+
+**Use Cases**:
+- Architecture diagrams
+- Workflow visualizations
+- Mind maps
+
+### 11. Advanced Tables
+**Purpose**: Better table editing
+
+**Features**:
+- Tab to move between cells
+- Auto-align columns
+- Spreadsheet-like formulas
+
+**Shortcuts**:
+| Action | Shortcut |
+|--------|----------|
+| Next cell | Tab |
+| Previous cell | Shift+Tab |
+| Add row | Enter |
+
+### 12. Outliner
+**Purpose**: Enhanced list manipulation
+
+**Settings**:
+| Setting | Value |
+|---------|-------|
+| Vertical lines | ON |
+| Stick cursor to content | ON |
+
+**Shortcuts**:
+| Action | Shortcut |
+|--------|----------|
+| Move item up | Ctrl+Shift+Up |
+| Move item down | Ctrl+Shift+Down |
+| Indent | Tab |
+| Outdent | Shift+Tab |
+
+### 13. Style Settings
+**Purpose**: Theme customization without CSS
+
+**Use With**: Minimal theme or any theme with Style Settings support
+
+---
+
+## Developer-Specific Plugins
+
+### 14. Git
+**Purpose**: Version control for your vault
+
+**Settings**:
+| Setting | Value |
+|---------|-------|
+| Auto backup interval | 10 minutes |
+| Auto pull on open | ON |
+| Commit message | `vault backup: {{date}}` |
+
+**Commands**:
+- `Git: Commit all changes`
+- `Git: Push`
+- `Git: Pull`
+
+### 15. Linter
+**Purpose**: Consistent markdown formatting
+
+**Rules**:
+- YAML frontmatter formatting
+- Heading consistency
+- Trailing whitespace removal
+
+### 16. Various Complements
+**Purpose**: Auto-completion for internal links
+
+**Features**:
+- Suggest links as you type
+- Front matter key completion
+- Custom dictionary
+
+---
+
+## Recommended Theme
+
+### Minimal Theme
+**Why Minimal?**
+- Clean, distraction-free
+- Excellent Style Settings integration
+- Active development
+- Large CSS snippet ecosystem
+
+**Style Settings Customizations**:
+| Setting | Recommendation |
+|---------|---------------|
+| Color scheme | Match your IDE |
+| Base font | System default or coding font |
+| Line width | 700px for readability |
+| Focus mode | ON for writing |
+
+---
+
+## CSS Snippets
+
+### Location
+`vault/.obsidian/snippets/`
+
+### Useful Snippets
+
+**1. Pretty Tables**
+```css
+/* Rounded corners and better spacing */
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+```
+
+**2. Colored Folders**
+```css
+/* Add colors to specific folders in file explorer */
+.nav-folder-title[data-path="Projects"] {
+  color: var(--color-green);
+}
+.nav-folder-title[data-path="Archive"] {
+  color: var(--color-gray);
+}
+```
+
+**3. Compact File Explorer**
+```css
+.nav-file-title, .nav-folder-title {
+  padding: 2px 8px;
+}
+```
+
+### Snippet Resources
+- [Obsidian CSS Snippets Repository](https://github.com/r-u-s-h-i-k-e-s-h/Obsidian-CSS-Snippets)
+- [Minimal Theme Snippets](https://github.com/replete/obsidian-minimal-theme-css-snippets)
+
+---
+
+## Keyboard Shortcuts
+
+### Essential Shortcuts
+| Action | Default | Recommended |
+|--------|---------|-------------|
+| Quick switcher | Ctrl+O | — |
+| Command palette | Ctrl+P | — |
+| Search in files | Ctrl+Shift+F | — |
+| Toggle left sidebar | — | Ctrl+\ |
+| Toggle right sidebar | — | Ctrl+Shift+\ |
+| Open daily note | — | Alt+D |
+| New note in folder | — | Ctrl+Shift+N |
+| Insert template | — | Alt+T |
+
+### Vim Mode
+Enable in Settings > Editor > Vim key bindings
+
+**Why Vim?**
+- Faster text editing
+- Familiar for developers
+- Works with other plugins
+
+---
+
+## Folder Structure (This Vault)
+
+```
+_meta.notes/
+├── Home.md                 # Central dashboard
+├── CLAUDE.md               # AI assistant guidelines
+├── Obsidian Setup.md       # THIS FILE
+│
+├── Projects/               # Active project notes
+│   └── {Project Name}.md
+│
+├── Concepts/               # Technology wiki
+│   ├── React.md
+│   ├── TypeScript.md
+│   └── ...
+│
+├── Decisions/              # ADRs
+│   └── {ID}-{Title}.md
+│
+├── Snippets/               # Code patterns
+│   └── {Pattern Name}.md
+│
+├── Templates/              # Note templates
+│   ├── Project Template.md
+│   ├── Dev Session Log.md
+│   └── ...
+│
+├── Dashboards/             # Dynamic views
+│   ├── Active Projects.md
+│   ├── Project Health.md
+│   └── ...
+│
+├── Journal/                # Time-based notes
+│   ├── 2025-12-14.md
+│   ├── Weekly/
+│   ├── Monthly/
+│   └── Yearly/
+│
+└── Meetings/               # Meeting notes
+```
+
+---
+
+## Performance Optimization
+
+### For Large Vaults (1000+ notes)
+
+1. **Limit Dataview queries**: Use `LIMIT` in queries
+2. **Disable live preview for large files**: Editor > Live Preview
+3. **Exclude folders from search**: Settings > Files & Links
+4. **Use lazy loading**: Settings > Appearance > Native scrollbars
+
+### Startup Speed
+
+1. Disable unused plugins
+2. Clear plugin cache periodically
+3. Use folder exclusions for large attachment directories
+
+---
+
+## Backup Strategy
+
+### Git (Primary)
+```bash
+# Recommended .gitignore
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache
+.trash/
+```
+
+### Cloud Sync (Secondary)
+Options:
+- Obsidian Sync (official, E2E encrypted)
+- iCloud/Dropbox/OneDrive (with caution)
+- Syncthing (self-hosted)
+
+**Warning**: Avoid syncing `.obsidian/` folder across multiple services simultaneously.
+
+---
+
+## Troubleshooting
+
+### Common Issues
+
+| Issue | Solution |
+|-------|----------|
+| Dataview queries not updating | Check "Automatic View Refreshing" |
+| Templates not appearing | Verify Template Folder Location |
+| Git conflicts | Pull before editing, commit often |
+| Slow startup | Disable unused plugins |
+| Search not finding notes | Rebuild search index (Ctrl+P → "Rebuild") |
+
+### Reset Plugin
+
+If a plugin misbehaves:
+1. Disable plugin
+2. Delete plugin folder from `.obsidian/plugins/`
+3. Reinstall from Community Plugins
+
+---
+
+## Resources
+
+### Official
+- [Obsidian Help](https://help.obsidian.md/)
+- [Obsidian Forum](https://forum.obsidian.md/)
+- [Plugin Directory](https://obsidian.md/plugins)
+
+### Community
+- [Obsidian Stats](https://www.obsidianstats.com/) - Plugin statistics
+- [Dataview Example Vault](https://github.com/s-blu/obsidian_dataview_example_vault)
+- [Templater Documentation](https://silentvoid13.github.io/Templater/)
+
+---
+
+*Last updated: 2025-12-14*

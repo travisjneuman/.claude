@@ -1,0 +1,333 @@
+/**
+ * Notes Type Definitions
+ *
+ * Core types for the Notes MVP feature
+ * Designed to be extensible for future enhancements
+ */
+
+import type { CustomFieldsMap } from './customFields';
+
+/**
+ * Note - Individual note document
+ *
+ * Storage: IndexedDB via Zustand persist
+ * Format: Lexical JSON state in content field
+ */
+export interface Note {
+  /** Unique identifier (UUID v4) */
+  id: string;
+
+  /** Parent folder ID (null = root level) */
+  folderId: string | null;
+
+  /** Note title (plain text) */
+  title: string;
+
+  /** Rich text content (Lexical JSON state) */
+  content: string;
+
+  /** Plain text version of content (for search indexing) */
+  contentText: string;
+
+  /** Optional tags for categorization */
+  tags: string[];
+
+  /** Creation timestamp */
+  createdAt: Date;
+
+  /** Last update timestamp */
+  updatedAt: Date;
+
+  /** Pin to top of folder */
+  isPinned: boolean;
+
+  /** Archive note (hide from main view) */
+  isArchived: boolean;
+
+  /** Optional color for note card */
+  color?: string;
+
+  /** Optional emoji icon */
+  icon?: string;
+
+  /** Star/favorite notes - Quick Win #3 (November 2025) */
+  isFavorite?: boolean;
+
+  /** Phase 4: Backlinks - Notes that this note links TO (via [[Note Title]] syntax) */
+  linkedNotes?: string[];
+
+  /** P2 #3: Custom fields - User-defined metadata */
+  customFields?: CustomFieldsMap;
+
+  /**
+   * Future extensibility fields (not yet implemented)
+   * Uncomment when ready to use
+   */
+  // isTemplate?: boolean;           // Mark as template
+  // mentions?: string[];            // @mentions of other notes
+  // attachments?: Attachment[];     // File attachments (future)
+  // collaborators?: string[];       // Shared with (future collaboration)
+  // version?: number;               // Version number for conflict resolution
+  // encryptionKey?: string;         // Encrypted note marker (Q2 2026)
+}
+
+/**
+ * Folder - Hierarchical folder structure
+ *
+ * Supports unlimited nesting depth
+ * Storage: IndexedDB via Zustand persist
+ */
+export interface Folder {
+  /** Unique identifier (UUID v4) */
+  id: string;
+
+  /** Parent folder ID (null = root level) */
+  parentId: string | null;
+
+  /** Folder name */
+  name: string;
+
+  /** Optional color (hex code) */
+  color?: string;
+
+  /** Optional emoji icon */
+  icon?: string;
+
+  /** Creation timestamp */
+  createdAt: Date;
+
+  /** Last update timestamp */
+  updatedAt: Date;
+
+  /** UI state - is folder expanded in tree view */
+  isExpanded: boolean;
+
+  /** Sort order within parent folder */
+  sortOrder?: number;
+
+  /**
+   * Future extensibility fields
+   */
+  // isShared?: boolean;             // Shared folder (future collaboration)
+  // permissions?: FolderPermissions; // Access control (future)
+  // template?: string;              // Default template for notes
+  // defaultTags?: string[];         // Auto-tag notes in this folder
+}
+
+/**
+ * Search Index Entry
+ *
+ * Stores searchable text for fast full-text search
+ * Storage: IndexedDB (separate from notes store)
+ */
+export interface SearchIndex {
+  /** Note ID this entry indexes */
+  noteId: string;
+
+  /** Searchable plain text (title + content) */
+  text: string;
+
+  /** When this entry was last indexed */
+  lastIndexed: Date;
+
+  /** Note title (for display in results) */
+  title: string;
+
+  /** Folder ID (for filtering search results) */
+  folderId: string | null;
+
+  /** First 200 chars of content (for snippets) */
+  snippet: string;
+}
+
+/**
+ * Note Sort Options
+ */
+export type NoteSortField = 'updatedAt' | 'createdAt' | 'title' | 'manual';
+export type NoteSortOrder = 'asc' | 'desc';
+
+export interface NoteSortConfig {
+  field: NoteSortField;
+  order: NoteSortOrder;
+}
+
+/**
+ * Note Filter Options
+ */
+export type NoteFilter = 'all' | 'favorites' | 'pinned' | 'archived' | 'unarchived';
+
+/**
+ * Folder Tree Node (for rendering)
+ *
+ * Computed from Folder data
+ * Used for tree view rendering
+ */
+export interface FolderTreeNode extends Folder {
+  /** Nested children folders */
+  children: FolderTreeNode[];
+
+  /** Depth level (0 = root) */
+  depth: number;
+
+  /** Full path from root (for breadcrumbs) */
+  path: string[];
+
+  /** Number of notes in this folder (direct children only) */
+  noteCount: number;
+
+  /** Total notes including subfolders */
+  totalNoteCount: number;
+}
+
+/**
+ * Search Result
+ */
+export interface SearchResult {
+  /** Matching note */
+  note: Note;
+
+  /** Match score (0-1, higher = better match) */
+  score: number;
+
+  /** Highlighted snippet with search terms */
+  highlightedSnippet: string;
+
+  /** Matching indices for highlighting */
+  matches: Array<{
+    start: number;
+    end: number;
+  }>;
+}
+
+/**
+ * Editor State (UI state for editor component)
+ */
+export interface EditorState {
+  /** Currently open note ID (null = no note selected) */
+  activeNoteId: string | null;
+
+  /** Currently selected folder ID (null = root) */
+  activeFolderId: string | null;
+
+  /** Is editor in full-screen mode */
+  isFullscreen: boolean;
+
+  /** Is sidebar collapsed (mobile) */
+  isSidebarCollapsed: boolean;
+
+  /** Show note metadata panel */
+  showMetadata: boolean;
+
+  /** Character count */
+  characterCount: number;
+
+  /** Word count */
+  wordCount: number;
+
+  /** Is note being saved */
+  isSaving: boolean;
+
+  /** Last save timestamp */
+  lastSaved: Date | null;
+}
+
+/**
+ * Future: Attachment types (not yet implemented)
+ */
+export interface Attachment {
+  id: string;
+  noteId: string;
+  filename: string;
+  mimeType: string;
+  size: number; // bytes
+  url: string; // base64 data URL or file system handle
+  uploadedAt: Date;
+}
+
+/**
+ * Phase 4: Note template for quick note creation
+ */
+export interface NoteTemplate {
+  id: string;
+  name: string;
+  description: string; // Plain text description to pre-fill
+  icon?: string;
+  category?: string;
+  defaultTags?: string[];
+  isBuiltIn: boolean;
+}
+
+/**
+ * Future: Backlink (bidirectional note linking)
+ */
+export interface Backlink {
+  sourceNoteId: string;
+  targetNoteId: string;
+  context: string; // Surrounding text where link appears
+  createdAt: Date;
+}
+
+/**
+ * Helper type: Partial note for updates
+ */
+export type NoteUpdate = Partial<Omit<Note, 'id' | 'createdAt'>>;
+
+/**
+ * Helper type: Partial folder for updates
+ */
+export type FolderUpdate = Partial<Omit<Folder, 'id' | 'createdAt'>>;
+
+/**
+ * Constants
+ */
+export const NOTE_CONSTANTS = {
+  /** Default new note title */
+  DEFAULT_TITLE: 'Untitled Note',
+
+  /** Max title length */
+  MAX_TITLE_LENGTH: 200,
+
+  /** Max content length (characters) */
+  MAX_CONTENT_LENGTH: 1000000, // 1 million chars
+
+  /** Max tags per note */
+  MAX_TAGS: 50,
+
+  /** Max tag length */
+  MAX_TAG_LENGTH: 50,
+
+  /** Search debounce (ms) */
+  SEARCH_DEBOUNCE_MS: 150,
+
+  /** Auto-save debounce (ms) */
+  AUTOSAVE_DEBOUNCE_MS: 2000,
+
+  /** Max search results */
+  MAX_SEARCH_RESULTS: 50,
+
+  /** Snippet length for search results */
+  SEARCH_SNIPPET_LENGTH: 200,
+} as const;
+
+export const FOLDER_CONSTANTS = {
+  /** Default new folder name */
+  DEFAULT_NAME: 'New Folder',
+
+  /** Max folder name length */
+  MAX_NAME_LENGTH: 100,
+
+  /** Max folder depth */
+  MAX_DEPTH: 10,
+
+  /** Default folder colors */
+  DEFAULT_COLORS: [
+    '#3b82f6', // blue
+    '#10b981', // green
+    '#f59e0b', // amber
+    '#ef4444', // red
+    '#8b5cf6', // purple
+    '#ec4899', // pink
+    '#06b6d4', // cyan
+    '#84cc16', // lime
+  ],
+} as const;

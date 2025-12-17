@@ -1,0 +1,351 @@
+/**
+ * Provider Settings Modal
+ * Configure AI provider API keys with encryption
+ *
+ * Features:
+ * - Configure all 8 AI providers (OpenRouter, Groq, HuggingFace, Mistral, Gemini, OpenAI, Anthropic, xAI)
+ * - Encrypted API key storage
+ * - Visual provider status (configured/unconfigured)
+ * - Test API key validation
+ * - Provider documentation links
+ * - Free vs paid tier indicators
+ * - CORS compatibility warnings
+ */
+
+import { useState, useEffect } from 'react';
+import { Modal } from './Modal';
+import { PasswordPrompt } from './PasswordPrompt';
+import { useTerminalStore } from '../stores/useTerminalStore';
+import { AIProviderRouter } from '../services/ai/providerRouter';
+
+interface ProviderSettingsProps {
+  isOpen: boolean;
+  onClose: () => void;
+  router: AIProviderRouter;
+}
+
+export function ProviderSettings({ isOpen, onClose, router }: ProviderSettingsProps) {
+  const {
+    // providers is unused (using router.getAllProviders() instead)
+    encryptionPassword,
+    passwordHash,
+    isPasswordExpired,
+    setProviderApiKey,
+    clearProviderApiKey,
+    setEncryptionPassword,
+    setActiveProvider,
+  } = useTerminalStore();
+
+  const [showPasswordPrompt, setShowPasswordPrompt] = useState(false);
+  const [selectedProvider, setSelectedProvider] = useState<string | null>(null);
+  const [apiKeyInputs, setApiKeyInputs] = useState<Record<string, string>>({});
+  const [showApiKeys, setShowApiKeys] = useState<Record<string, boolean>>({});
+  const [validating, setValidating] = useState<Record<string, boolean>>({});
+  const [validationResults, setValidationResults] = useState<Record<string, boolean | null>>({});
+
+  // Get all providers from router
+  const allProviders = router.getAllProviders();
+  const providerStatus = router.getProviderStatus();
+
+  // Check if password is needed
+  useEffect(() => {
+    if (!encryptionPassword || isPasswordExpired()) {
+      // Password needed but don't show prompt automatically
+      // User will trigger it when trying to save an API key
+    }
+  }, [encryptionPassword, isPasswordExpired]);
+
+  const handlePasswordSubmit = (password: string, hash: string, duration: 'daily' | 'weekly' | 'monthly') => {
+    setEncryptionPassword(password, hash, duration);
+    setShowPasswordPrompt(false);
+
+    // If user was trying to save a provider, save it now
+    if (selectedProvider && apiKeyInputs[selectedProvider]) {
+      saveProviderKey(selectedProvider, apiKeyInputs[selectedProvider], password);
+    }
+  };
+
+  const saveProviderKey = async (providerId: string, apiKey: string, password: string) => {
+    try {
+      await setProviderApiKey(providerId, apiKey, password);
+      setApiKeyInputs((prev) => ({ ...prev, [providerId]: '' }));
+      setValidationResults((prev) => ({ ...prev, [providerId]: null }));
+
+      // Set the API key on the provider instance so it can be used immediately
+      const provider = router.getProvider(providerId);
+      if (provider) {
+        provider.setApiKey(apiKey);
+
+        // Auto-switch to this provider after saving
+        const defaultModel = provider.getDefaultModel();
+        if (defaultModel) {
+          setActiveProvider(providerId, defaultModel.id);
+        }
+      }
+    } catch (error) {
+      console.error('Failed to save API key:', error);
+      alert('Failed to save API key. Please try again.');
+    }
+  };
+
+  const handleSaveApiKey = (providerId: string) => {
+    const apiKey = apiKeyInputs[providerId];
+    if (!apiKey || !apiKey.trim()) return;
+
+    // Check if password is needed
+    if (!encryptionPassword || isPasswordExpired()) {
+      setSelectedProvider(providerId);
+      setShowPasswordPrompt(true);
+      return;
+    }
+
+    saveProviderKey(providerId, apiKey, encryptionPassword);
+  };
+
+  const handleClearApiKey = (providerId: string) => {
+    if (confirm(`Remove API key for ${providerStatus[providerId]?.name}? You'll need to re-enter it to use this provider.`)) {
+      clearProviderApiKey(providerId);
+      setApiKeyInputs((prev) => ({ ...prev, [providerId]: '' }));
+      setValidationResults((prev) => ({ ...prev, [providerId]: null }));
+    }
+  };
+
+  const handleTestApiKey = async (providerId: string) => {
+    const apiKey = apiKeyInputs[providerId];
+    if (!apiKey || !apiKey.trim()) {
+      alert('Please enter an API key first.');
+      return;
+    }
+
+    setValidating((prev) => ({ ...prev, [providerId]: true }));
+
+    try {
+      const provider = router.getProvider(providerId);
+      if (!provider) {
+        throw new Error('Provider not found');
+      }
+
+      const isValid = await provider.validateApiKey(apiKey);
+      setValidationResults((prev) => ({ ...prev, [providerId]: isValid }));
+
+      if (isValid) {
+        alert(`✓ API key is valid for ${providerStatus[providerId]?.name}!`);
+      } else {
+        alert(`✗ API key validation failed for ${providerStatus[providerId]?.name}. Please check your key.`);
+      }
+    } catch (error: any) {
+      console.error('API key validation error:', error);
+      setValidationResults((prev) => ({ ...prev, [providerId]: false }));
+      alert(`Error validating API key: ${error.message || 'Unknown error'}`);
+    } finally {
+      setValidating((prev) => ({ ...prev, [providerId]: false }));
+    }
+  };
+
+  const toggleShowApiKey = (providerId: string) => {
+    setShowApiKeys((prev) => ({ ...prev, [providerId]: !prev[providerId] }));
+  };
+
+  return (
+    <>
+      <Modal
+        isOpen={isOpen}
+        onClose={onClose}
+        title="AI Provider Settings"
+        maxWidth="2xl"
+      >
+        <div className="space-y-6">
+          {/* Header Description */}
+          <div className="text-sm text-text-light-secondary dark:text-text-dark-secondary">
+            <p className="mb-2">
+              Configure API keys for AI providers. Your keys are encrypted with AES-256-CBC and stored locally.
+            </p>
+            <p className="text-xs">
+              <span className="text-green-500">🟢 Free</span> models available
+              {' • '}
+              <span className="text-blue-500">🔵 Paid</span> BYOK (Bring Your Own Key)
+              {' • '}
+              <span className="text-yellow-500">⚠️</span> Requires backend proxy (CORS)
+            </p>
+          </div>
+
+          {/* Provider List */}
+          <div className="space-y-4 max-h-[60vh] overflow-y-auto">
+            {Object.entries(allProviders).map(([providerId, provider]) => {
+              const status = providerStatus[providerId];
+              const isConfigured = status?.configured || false;
+              const metadata = provider.metadata;
+
+              return (
+                <div
+                  key={providerId}
+                  className="p-4 bg-surface-light-elevated dark:bg-surface-dark-elevated border border-border-light dark:border-border-dark rounded-button"
+                >
+                  {/* Provider Header */}
+                  <div className="flex items-start justify-between mb-3">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        <h3 className="font-medium text-text-light-primary dark:text-text-dark-primary">
+                          {metadata.displayName}
+                        </h3>
+                        {metadata.hasFreeModels && (
+                          <span className="text-xs px-2 py-0.5 bg-green-500/10 text-green-500 rounded">
+                            Free Models
+                          </span>
+                        )}
+                        {!metadata.supportsCORS && metadata.requiresProxy && (
+                          <span
+                            className="text-xs px-2 py-0.5 bg-yellow-500/10 text-yellow-500 rounded cursor-help"
+                            title="This provider blocks direct browser requests (CORS). Use OpenRouter instead - it can access this provider's models and works directly in your browser."
+                          >
+                            ⚠️ Proxy Required
+                          </span>
+                        )}
+                      </div>
+                      <p className="text-sm text-text-light-secondary dark:text-text-dark-secondary">
+                        {metadata.description}
+                      </p>
+                      <div className="mt-1 flex items-center gap-3 text-xs text-text-light-secondary dark:text-text-dark-secondary">
+                        <span>{status?.modelCount || 0} models</span>
+                        {metadata.apiKeyUrl && (
+                          <>
+                            <span>•</span>
+                            <a
+                              href={metadata.apiKeyUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-accent-blue hover:text-accent-blue-hover"
+                            >
+                              Get API Key →
+                            </a>
+                          </>
+                        )}
+                        {metadata.docsUrl && (
+                          <>
+                            <span>•</span>
+                            <a
+                              href={metadata.docsUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-accent-blue hover:text-accent-blue-hover"
+                            >
+                              Documentation →
+                            </a>
+                          </>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Status Badge */}
+                    <div className="flex items-center gap-2">
+                      {isConfigured ? (
+                        <span className="text-xs px-2 py-1 bg-green-500/10 text-green-500 rounded">
+                          ✓ Configured
+                        </span>
+                      ) : (
+                        <span className="text-xs px-2 py-1 bg-slate-500/10 text-slate-500 rounded">
+                          Not Configured
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* API Key Input */}
+                  <div className="space-y-2">
+                    <div className="flex gap-2">
+                      <div className="flex-1 relative">
+                        <input
+                          type={showApiKeys[providerId] ? 'text' : 'password'}
+                          value={apiKeyInputs[providerId] || ''}
+                          onChange={(e) =>
+                            setApiKeyInputs((prev) => ({ ...prev, [providerId]: e.target.value }))
+                          }
+                          placeholder={
+                            isConfigured
+                              ? 'Enter new API key to replace existing'
+                              : `Enter your ${metadata.apiKeyLabel || 'API key'}`
+                          }
+                          className="w-full px-3 py-2 bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-button focus:outline-none focus:ring-2 focus:ring-accent-blue text-text-light-primary dark:text-text-dark-primary text-sm"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => toggleShowApiKey(providerId)}
+                          className="absolute right-2 top-1/2 -translate-y-1/2 text-text-light-secondary dark:text-text-dark-secondary hover:text-text-light-primary dark:hover:text-text-dark-primary text-xs"
+                        >
+                          {showApiKeys[providerId] ? 'Hide' : 'Show'}
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Action Buttons */}
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => handleSaveApiKey(providerId)}
+                        disabled={!apiKeyInputs[providerId]?.trim()}
+                        className="px-3 py-1.5 bg-accent-blue hover:bg-accent-blue-hover disabled:bg-slate-500/20 disabled:text-slate-500 disabled:cursor-not-allowed text-white rounded-button text-sm transition-all duration-standard ease-smooth"
+                      >
+                        {isConfigured ? 'Update' : 'Save'}
+                      </button>
+
+                      <button
+                        onClick={() => handleTestApiKey(providerId)}
+                        disabled={!apiKeyInputs[providerId]?.trim() || validating[providerId]}
+                        className="px-3 py-1.5 bg-surface-light-elevated dark:bg-surface-dark-elevated hover:bg-surface-light dark:hover:bg-neutral-800 disabled:opacity-50 disabled:cursor-not-allowed border border-border-light dark:border-border-dark rounded-button text-sm text-text-light-primary dark:text-text-dark-primary transition-all duration-standard ease-smooth"
+                      >
+                        {validating[providerId] ? 'Testing...' : 'Test Key'}
+                      </button>
+
+                      {isConfigured && (
+                        <button
+                          onClick={() => handleClearApiKey(providerId)}
+                          className="px-3 py-1.5 bg-red-500/10 hover:bg-red-500/20 border border-red-500/20 rounded-button text-sm text-red-500 transition-all duration-standard ease-smooth"
+                        >
+                          Remove
+                        </button>
+                      )}
+
+                      {/* Validation Result */}
+                      {validationResults[providerId] !== null && (
+                        <span
+                          className={`px-2 py-1.5 text-xs rounded-button ${
+                            validationResults[providerId]
+                              ? 'bg-green-500/10 text-green-500'
+                              : 'bg-red-500/10 text-red-500'
+                          }`}
+                        >
+                          {validationResults[providerId] ? '✓ Valid' : '✗ Invalid'}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Footer Actions */}
+          <div className="flex justify-end pt-4 border-t border-border-light dark:border-border-dark">
+            <button
+              onClick={onClose}
+              className="px-4 py-2 bg-accent-blue hover:bg-accent-blue-hover text-white rounded-button transition-all duration-standard ease-smooth"
+            >
+              Done
+            </button>
+          </div>
+        </div>
+      </Modal>
+
+      {/* Password Prompt Modal */}
+      <PasswordPrompt
+        isOpen={showPasswordPrompt}
+        onSubmit={handlePasswordSubmit}
+        onCancel={() => {
+          setShowPasswordPrompt(false);
+          setSelectedProvider(null);
+        }}
+        mode={passwordHash ? 'unlock' : 'setup'}
+        existingPasswordHash={passwordHash || undefined}
+      />
+    </>
+  );
+}

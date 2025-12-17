@@ -1,0 +1,127 @@
+# Fix AI Terminal UI Issues - Z-Index and Minimize Button
+
+**Created:** 2025-01-16
+**Status:** Planning
+
+## Overview
+
+Fix remaining z-index issue where WeatherMap widget overlays AI Terminal panel, and remove redundant minimize button from AI Terminal header.
+
+## Problem Statement
+
+**Issues:**
+1. **Z-Index Still Incorrect:** WeatherMap widget overlays on top of AI Terminal panel when opened
+   - Previous fix (tasks/fix-ui-overlapping-issues.md) addressed save indicator and button z-index
+   - BUT WeatherMap widget itself still has higher z-index than AI Terminal panel
+   - Root cause: WeatherMap widget or its map controls have z-index > 40
+
+2. **Redundant Minimize Button:** AI Terminal has minimize button in header bar
+   - Close button (X) already minimizes back to floating button (great UX!)
+   - Minimize button serves same function as close button (redundant)
+   - Should remove minimize button to simplify UI
+
+**Impact:**
+- Poor UX: Map overlays terminal making it unusable
+- Cluttered UI: Unnecessary minimize button
+- Inconsistent z-index hierarchy
+
+## Files to Read
+
+- [ ] `src/components/AITerminal.tsx` - Find minimize button in header
+- [ ] `src/widgets/WeatherMap.tsx` - Check z-index on map container
+- [ ] `src/stores/useTerminalStore.ts` - Verify close/minimize behavior
+- [ ] Search for WeatherMap z-index usage in styles
+
+## Proposed Changes
+
+### 1. Fix WeatherMap Z-Index
+
+**Current hierarchy (from tasks/fix-ui-overlapping-issues.md):**
+- z-10: Widget content
+- z-20: Save indicator
+- z-30: WeatherMap search controls
+- z-40: AI Terminal button + panel
+- z-50+: Modals
+
+**Problem:** WeatherMap widget container may have z-index that conflicts
+
+**Solution Options:**
+- **Option A:** Set WeatherMap container to z-10 (base widget level)
+- **Option B:** Find specific map control with high z-index and reduce it
+- **Option C:** Increase AI Terminal panel to z-50 (modal level)
+
+**Recommendation:** Option A - WeatherMap should be z-10 (widget level)
+
+### 2. Remove Minimize Button
+
+**Current:** AI Terminal header likely has two buttons:
+```tsx
+<div className="header">
+  <button onClick={minimize}>Minimize</button>
+  <button onClick={close}>Close (X)</button>
+</div>
+```
+
+**Desired:** Only close button (which minimizes):
+```tsx
+<div className="header">
+  <button onClick={close}>Close (X)</button>
+</div>
+```
+
+**Verify:** Ensure `close` function in useTerminalStore minimizes (doesn't destroy)
+
+## Todo Checklist
+
+- [ ] **Phase 1: Investigation (5 min)**
+  - [ ] Read AITerminal.tsx to find minimize button
+  - [ ] Read WeatherMap.tsx to find z-index values
+  - [ ] Read useTerminalStore.ts to verify close behavior
+  - [ ] Search codebase for WeatherMap z-index styles
+
+- [ ] **Phase 2: Get User Approval (Interactive)**
+  - [ ] Present findings
+  - [ ] Confirm which z-index option to use
+  - [ ] Confirm minimize button removal
+
+- [ ] **Phase 3: Fix WeatherMap Z-Index (5 min)**
+  - [ ] Update WeatherMap container z-index to z-10
+  - [ ] Update any map controls to appropriate z-index
+  - [ ] Verify no hardcoded z-index values that conflict
+
+- [ ] **Phase 4: Remove Minimize Button (5 min)**
+  - [ ] Remove minimize button from AITerminal.tsx header
+  - [ ] Verify close button still works (minimizes to button)
+  - [ ] Clean up any unused minimize handler code
+
+- [ ] **Phase 5: Testing (5 min)**
+  - [ ] Open AI Terminal
+  - [ ] Open WeatherMap widget
+  - [ ] Verify map stays below terminal (z-index correct)
+  - [ ] Click close button - verify it minimizes (not destroys)
+  - [ ] Test responsive behavior
+
+- [ ] **Phase 6: Commit & Push (5 min)**
+  - [ ] Run type-check
+  - [ ] Stage changes
+  - [ ] Create commit
+  - [ ] Push to main
+
+**Estimated Time:** 25-30 minutes
+**Impact:** Fixed z-index hierarchy, cleaner AI Terminal UI
+
+## Review Section
+
+_(To be filled when complete)_
+
+**Completed:** TBD
+**Actual Time:** TBD
+
+### Summary of Changes
+_(Document what was fixed)_
+
+### Files Modified
+_(List all files with line numbers)_
+
+### Verification
+_(Confirm z-index works, minimize button removed)_

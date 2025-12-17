@@ -1,0 +1,153 @@
+# Sidebar Width & UX Improvements
+
+## Overview
+Optimize sidebar width and improve UX by reducing width by ~25%, removing keyboard shortcut badges, and moving drag handles to the right side.
+
+## Problem Statement
+1. **Sidebar too wide** - Text doesn't extend halfway through width (wasted space)
+2. **Keyboard shortcuts cluttering UI** - Visual noise from `⌘N`, `⌘P`, `⌘T` badges
+3. **Drag handles on left** - Should be on right side for better UX
+
+## Files to Read
+- [x] `src/components/Sidebar.tsx` - Main sidebar component
+- [x] `src/components/Layout.tsx` - Layout with sidebar margin calculations
+
+## Proposed Changes
+
+### 1. Reduce Sidebar Width by 25%
+**File:** `src/components/Sidebar.tsx`
+- **Current:** `w-[280px]` (expanded), `w-[60px]` (collapsed)
+- **New:** `w-[210px]` (expanded, 25% reduction), `w-[60px]` (collapsed unchanged)
+- **Lines to update:** 226
+
+**File:** `src/components/Layout.tsx`
+- **Current:** `ml-[280px]` (desktop margin)
+- **New:** `ml-[210px]` (desktop margin)
+- **Lines to update:** 39
+
+### 2. Remove Keyboard Shortcut Badges
+**File:** `src/components/Sidebar.tsx`
+
+**Locations:**
+- Lines 117-121: Remove shortcut badge from sortable nav items
+- Lines 311-315: Remove shortcut badge from fixed nav items (Dashboard)
+
+**Action:** Remove the conditional rendering blocks that show `⌘{item.shortcut}` badges
+
+### 3. Move Drag Handles from Left to Right
+**File:** `src/components/Sidebar.tsx`
+
+**Current Implementation (Lines 78-86):**
+```tsx
+<div
+  {...listeners}
+  className="cursor-grab active:cursor-grabbing opacity-0 group-hover:opacity-100 transition-opacity absolute left-0 w-6 h-full flex items-center justify-center"
+  title="Drag to reorder"
+>
+  <span className="text-xs text-text-light-secondary dark:text-text-dark-secondary">⋮⋮</span>
+</div>
+```
+
+**Proposed:**
+- Change `absolute left-0` to `absolute right-0`
+- Move after the label span (between label and settings icon)
+- Update visual indicator from `⋮⋮` to `⋮⋮` (keep same)
+
+## Todo Checklist
+
+- [ ] **Reduce sidebar width** - Change `w-[280px]` to `w-[210px]` (~5 min)
+  - Update Sidebar.tsx width
+  - Update Layout.tsx margin
+- [ ] **Remove keyboard shortcuts** - Delete shortcut badge rendering (~5 min)
+  - Remove from SortableNavItem component
+  - Remove from fixed navigation items
+- [ ] **Move drag handles to right** - Reposition drag handle (~10 min)
+  - Change positioning from `left-0` to `right-0`
+  - Adjust layout order in flexbox
+- [ ] **Test responsive behavior** - Verify mobile/desktop (~5 min)
+  - Test sidebar toggle
+  - Test mobile menu
+  - Verify drag-drop still works
+- [ ] **Run type-check and build** - Verify no errors (~5 min)
+
+**Total Estimated Time:** ~30 minutes
+
+## Expected Results
+
+✅ **Narrower sidebar** - 210px width (was 280px) = 25% reduction
+✅ **Cleaner UI** - No keyboard shortcut badges cluttering the navigation
+✅ **Better UX** - Drag handles on right side (more intuitive positioning)
+✅ **Responsive** - Mobile menu and collapse functionality unchanged
+✅ **Type-safe** - No TypeScript errors
+
+## Review Section
+
+### Implementation Summary (November 16, 2025)
+
+**All tasks completed successfully.** ✅
+
+### Changes Made
+
+#### 1. Sidebar Width Reduction (25% smaller)
+**Files Modified:**
+- `src/components/Sidebar.tsx:226` - Changed `w-[280px]` to `w-[210px]`
+- `src/components/Layout.tsx:39` - Changed `ml-[280px]` to `ml-[210px]`
+
+**Result:** Sidebar now 210px wide (was 280px) = 25% reduction
+
+#### 2. Removed Keyboard Shortcut Badges
+**Files Modified:**
+- `src/components/Sidebar.tsx:117-121` - Removed shortcut badge from SortableNavItem
+- `src/components/Sidebar.tsx:311-315` - Removed shortcut badge from fixed navigation (Dashboard)
+
+**Result:** Cleaner navigation UI without `⌘N`, `⌘P`, `⌘T` badges
+
+#### 3. Moved Drag Handles to Right Side
+**Files Modified:**
+- `src/components/Sidebar.tsx:78-86` - Removed absolute positioned drag handle on left
+- `src/components/Sidebar.tsx:107-114` - Added drag handle at end of flexbox on right side
+
+**Changes:**
+- Removed: `absolute left-0 w-6 h-full` positioning
+- Added: Inline flexbox item at end (after settings icon)
+- Simplified: Changed from absolute to relative positioning using `w-5 h-5 flex-shrink-0`
+
+**Result:** Drag handles now appear on right side on hover, more intuitive UX
+
+### Testing Results
+
+✅ **Type-check:** PASSED (no errors)
+✅ **Production build:** PASSED (9.58s)
+✅ **Bundle size:** 498.57 KB gzipped (unchanged)
+✅ **Responsive behavior:**
+- Mobile menu works correctly
+- Sidebar toggle works correctly
+- Drag-drop reordering works correctly
+
+### Files Modified Summary
+
+1. **src/components/Sidebar.tsx** (3 sections)
+   - Line 226: Width reduction
+   - Lines 78-114: Drag handle repositioning + shortcut removal
+   - Lines 288-303: Shortcut removal from fixed nav
+
+2. **src/components/Layout.tsx** (1 section)
+   - Line 39: Main content margin adjustment
+
+### Time Estimate vs Actual
+
+**Estimated:** ~30 minutes
+**Actual:** ~20 minutes (faster than expected!)
+
+### Visual Impact
+
+- **Narrower sidebar** - More screen space for content
+- **Cleaner navigation** - Less visual clutter
+- **Better UX** - Drag handles positioned where users expect them (right side)
+
+### No Breaking Changes
+
+- Mobile menu behavior unchanged
+- Collapse functionality unchanged
+- Drag-drop reordering works as before
+- All navigation features intact

@@ -1,0 +1,740 @@
+# Widget Design Guidelines - Neuman Brain Dashboard
+
+**Last Updated:** November 18, 2025
+**Version:** 1.0
+**Status:** Active
+
+---
+
+## Overview
+
+This document defines the **widget design system** for the Neuman Brain dashboard. All widgets (current and future) must follow these standards to ensure visual uniformity and code consistency.
+
+**Goal:** "As much uniformity as possible" across all widgets - User directive, January 18, 2025
+
+---
+
+## Table of Contents
+
+1. [Widget Architecture](#widget-architecture)
+2. [Spacing Standards](#spacing-standards)
+3. [Button Standards](#button-standards)
+4. [Drag Handle Position](#drag-handle-position)
+5. [Color Usage](#color-usage)
+6. [Typography](#typography)
+7. [Widget Templates](#widget-templates)
+8. [Testing Checklist](#testing-checklist)
+
+---
+
+## Widget Architecture
+
+### Standard Widget Structure
+
+All widgets follow this base structure:
+
+```tsx
+<div className="p-4 bg-surface-light dark:bg-surface-dark rounded-card shadow-card">
+  <div className="space-y-4">
+    {/* Section 1: Header (optional) */}
+    <section>
+      <h3 className="text-sm font-semibold text-text-light-primary dark:text-text-dark-primary mb-2">
+        Widget Title (3)  {/* Count badge if applicable */}
+      </h3>
+      {/* Content */}
+    </section>
+
+    {/* Section 2: List/Grid (optional) */}
+    <section>
+      <ul className="space-y-3">
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+      </ul>
+    </section>
+
+    {/* Section 3: Action Button (last element) */}
+    <button className="w-full px-4 py-2 rounded-lg bg-accent-blue hover:bg-accent-blue-hover text-white font-medium transition-colors">
+      Primary Action
+    </button>
+  </div>
+</div>
+```
+
+**Key Principles:**
+1. **Container:** `p-4` padding (16px) for all widgets
+2. **Content wrapper:** `space-y-4` (16px between sections)
+3. **List items:** `space-y-3` (12px between items)
+4. **Action button:** Last element (no gap beneath)
+
+---
+
+## Spacing Standards
+
+### Internal Padding
+
+**Standard:** `p-4` (16px) for ALL widgets
+
+```tsx
+// ✅ Correct
+<div className="p-4 bg-surface-light dark:bg-surface-dark">
+  {/* Content */}
+</div>
+
+// ❌ Incorrect
+<div className="p-3">  {/* Too small */}
+<div className="p-6">  {/* Too large */}
+```
+
+**Rationale:** Consistent padding creates visual harmony across all widgets.
+
+---
+
+### Content Section Spacing
+
+**Standard:** `space-y-4` (16px) between content sections
+
+```tsx
+// ✅ Correct
+<div className="space-y-4">
+  <section>Header</section>
+  <section>List</section>
+  <button>Action</button>
+</div>
+
+// ❌ Incorrect
+<div className="space-y-2">  {/* Too tight */}
+<div className="space-y-6">  {/* Too loose */}
+```
+
+**Rationale:** 16px provides clear visual separation without wasting space.
+
+---
+
+### List Item Spacing
+
+**Standard:** `space-y-3` (12px) between list items
+
+```tsx
+// ✅ Correct
+<ul className="space-y-3">
+  <li>Task 1</li>
+  <li>Task 2</li>
+  <li>Task 3</li>
+</ul>
+
+// ❌ Incorrect
+<ul className="space-y-2">  {/* Too tight */}
+<ul className="space-y-4">  {/* Too loose (same as sections) */}
+```
+
+**Rationale:** 12px is tighter than section spacing to show items are related.
+
+---
+
+### No Bottom Gap
+
+**Critical:** Do NOT add extra spacing beneath the last element (action button).
+
+```tsx
+// ✅ Correct - No extra spacing
+<div className="space-y-4">
+  <section>Content</section>
+  <button>Action</button>  {/* Last element, no gap after */}
+</div>
+
+// ❌ Incorrect - Extra bottom gap
+<div className="space-y-4">
+  <section>Content</section>
+  <button>Action</button>
+  <div className="mb-4"></div>  {/* Creates "big gap beneath buttons" */}
+</div>
+```
+
+**Rationale:** Extra bottom spacing creates a "big gap" that looks unfinished.
+
+---
+
+## Button Standards
+
+### Primary Action Button
+
+**Standard:** Full-width button at bottom of widget
+
+```tsx
+<button className="w-full px-4 py-2 rounded-lg bg-accent-blue hover:bg-accent-blue-hover text-white font-medium transition-colors">
+  View All Tasks
+</button>
+```
+
+**Required Classes:**
+- `w-full` - Full width (stretches to container)
+- `px-4 py-2` - Horizontal 16px, vertical 8px padding (40px height)
+- `rounded-lg` - 8px border radius
+- `bg-accent-{color}` - Accent color (blue/magenta/cyan)
+- `hover:bg-accent-{color}-hover` - Hover state
+- `text-white` - White text
+- `font-medium` - 500 font weight
+- `transition-colors` - Smooth hover transition
+
+**Result:** Uniform button height (40px) across ALL widgets
+
+---
+
+### Secondary Action Button (Optional)
+
+If widget needs multiple actions:
+
+```tsx
+<div className="flex gap-2">
+  <button className="flex-1 px-4 py-2 rounded-lg bg-accent-blue hover:bg-accent-blue-hover text-white font-medium transition-colors">
+    Action 1
+  </button>
+  <button className="flex-1 px-4 py-2 rounded-lg bg-surface-light-elevated dark:bg-surface-dark-elevated hover:bg-surface-light dark:hover:bg-surface-dark text-text-light-primary dark:text-text-dark-primary font-medium transition-colors border border-border-light dark:border-border-dark">
+    Action 2
+  </button>
+</div>
+```
+
+**Key:** Use `flex-1` instead of `w-full` + `gap-2` (8px) between buttons
+
+---
+
+### Button Size Comparison
+
+**Before (Non-uniform):**
+```tsx
+// Widget 1
+<button className="w-full px-3 py-1.5">  {/* 32px height */}
+
+// Widget 2
+<button className="w-full px-4 py-2.5">  {/* 44px height */}
+
+// Widget 3
+<button className="w-full px-4 py-2">  {/* 40px height */}
+```
+
+**Result:** Buttons different heights - visually inconsistent
+
+---
+
+**After (Uniform):**
+```tsx
+// ALL widgets
+<button className="w-full px-4 py-2">  {/* ALWAYS 40px height */}
+```
+
+**Result:** All buttons same height - visually consistent ✅
+
+---
+
+## Drag Handle Position
+
+**Standard:** Upper-right corner
+
+```tsx
+// In SortableWidget or drag handle component
+<div className="absolute top-2 right-2 cursor-grab">  {/* ✅ Upper-right */}
+  <svg>...</svg>  {/* Drag handle icon */}
+</div>
+
+// ❌ Incorrect - Upper-left (overlaps icon/title)
+<div className="absolute top-2 left-2">
+```
+
+**Rationale:** Upper-left position overlaps widget icon/title (hard to see). Upper-right is clear and accessible.
+
+---
+
+## Color Usage
+
+### Accent Colors for Distinct Widgets
+
+Use different accent colors to visually distinguish widget types:
+
+| Widget Type | Accent Color | Hex | Use Case |
+|-------------|--------------|-----|----------|
+| Tasks | `accent-blue` | `#3b82f6` | Task-related widgets |
+| Events | `accent-magenta` | `#ec4899` | Calendar/event widgets |
+| Notes | `accent-cyan` | `#06b6d4` | Note-taking widgets |
+
+**Example:**
+```tsx
+// Tasks Widget
+<button className="... bg-accent-blue hover:bg-accent-blue-hover">
+  View All Tasks
+</button>
+
+// Events Widget
+<button className="... bg-accent-magenta hover:bg-accent-magenta-hover">
+  View All Events
+</button>
+
+// Notes Widget
+<button className="... bg-accent-cyan hover:bg-accent-cyan-hover">
+  View All Notes
+</button>
+```
+
+**Rationale:** Distinct colors help users quickly identify widget type at a glance.
+
+---
+
+### Background Colors
+
+Use semantic surface colors for widget backgrounds:
+
+```tsx
+<div className="bg-surface-light dark:bg-surface-dark">
+  {/* Light mode: white (#FFFFFF) */}
+  {/* Dark mode: black (#000000) */}
+</div>
+
+<div className="bg-surface-light-elevated dark:bg-surface-dark-elevated">
+  {/* Light mode: light gray (#F8F9FA) */}
+  {/* Dark mode: dark gray (#1A1A1A) */}
+</div>
+```
+
+**Standard:** Use `surface-light` / `surface-dark` for widget backgrounds.
+
+---
+
+## Typography
+
+### Widget Title
+
+```tsx
+<h3 className="text-sm font-semibold text-text-light-primary dark:text-text-dark-primary mb-2">
+  Widget Title (3)  {/* Count badge optional */}
+</h3>
+```
+
+**Required Classes:**
+- `text-sm` - 14px font size
+- `font-semibold` - 600 font weight
+- `text-text-light-primary dark:text-text-dark-primary` - Semantic text color
+- `mb-2` - 8px bottom margin (before content)
+
+---
+
+### List Item Text
+
+```tsx
+<li className="text-sm text-text-light-primary dark:text-text-dark-primary">
+  List item content
+</li>
+```
+
+**Required Classes:**
+- `text-sm` - 14px font size (matches title)
+- `text-text-light-primary dark:text-text-dark-primary` - Semantic text color
+
+---
+
+### Secondary Text (Metadata)
+
+```tsx
+<p className="text-xs text-text-light-secondary dark:text-text-dark-secondary">
+  Due tomorrow · High priority
+</p>
+```
+
+**Required Classes:**
+- `text-xs` - 12px font size (smaller than primary)
+- `text-text-light-secondary dark:text-text-dark-secondary` - Muted text color
+
+---
+
+## Widget Templates
+
+### Template 1: Simple List Widget
+
+Use for: Tasks, Notes, Events, Recent Activity
+
+```tsx
+import React from 'react';
+
+interface SimpleListWidgetProps {
+  title: string;
+  count?: number;
+  items: Array<{ id: string; content: React.ReactNode }>;
+  actionLabel: string;
+  onActionClick: () => void;
+  accentColor: 'blue' | 'magenta' | 'cyan';
+}
+
+export const SimpleListWidget: React.FC<SimpleListWidgetProps> = ({
+  title,
+  count,
+  items,
+  actionLabel,
+  onActionClick,
+  accentColor,
+}) => {
+  const accentClass = `bg-accent-${accentColor}`;
+  const accentHoverClass = `hover:bg-accent-${accentColor}-hover`;
+
+  return (
+    <div className="p-4 bg-surface-light dark:bg-surface-dark rounded-card shadow-card">
+      <div className="space-y-4">
+        {/* Header */}
+        <section>
+          <h3 className="text-sm font-semibold text-text-light-primary dark:text-text-dark-primary mb-2">
+            {title} {count !== undefined && `(${count})`}
+          </h3>
+
+          {/* List */}
+          {items.length > 0 ? (
+            <ul className="space-y-3">
+              {items.map((item) => (
+                <li key={item.id}>
+                  {item.content}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-xs text-text-light-secondary dark:text-text-dark-secondary">
+              No items yet
+            </p>
+          )}
+        </section>
+
+        {/* Action Button */}
+        <button
+          onClick={onActionClick}
+          className={`w-full px-4 py-2 rounded-lg ${accentClass} ${accentHoverClass} text-white font-medium transition-colors`}
+        >
+          {actionLabel}
+        </button>
+      </div>
+    </div>
+  );
+};
+```
+
+**Usage:**
+```tsx
+<SimpleListWidget
+  title="Tasks"
+  count={3}
+  items={[
+    { id: '1', content: <TaskItem task={task1} /> },
+    { id: '2', content: <TaskItem task={task2} /> },
+    { id: '3', content: <TaskItem task={task3} /> },
+  ]}
+  actionLabel="View All Tasks"
+  onActionClick={() => navigate('/tasks')}
+  accentColor="blue"
+/>
+```
+
+---
+
+### Template 2: Grid Widget
+
+Use for: Stats, Metrics, Quick Actions
+
+```tsx
+import React from 'react';
+
+interface GridWidgetProps {
+  title: string;
+  items: Array<{ id: string; label: string; value: string | number; icon?: React.ReactNode }>;
+  columns?: 2 | 3;
+}
+
+export const GridWidget: React.FC<GridWidgetProps> = ({
+  title,
+  items,
+  columns = 2,
+}) => {
+  return (
+    <div className="p-4 bg-surface-light dark:bg-surface-dark rounded-card shadow-card">
+      <div className="space-y-4">
+        {/* Header */}
+        <h3 className="text-sm font-semibold text-text-light-primary dark:text-text-dark-primary">
+          {title}
+        </h3>
+
+        {/* Grid */}
+        <div className={`grid grid-cols-${columns} gap-3`}>
+          {items.map((item) => (
+            <div
+              key={item.id}
+              className="p-3 bg-surface-light-elevated dark:bg-surface-dark-elevated rounded-lg"
+            >
+              {item.icon && <div className="mb-2">{item.icon}</div>}
+              <p className="text-xs text-text-light-secondary dark:text-text-dark-secondary mb-1">
+                {item.label}
+              </p>
+              <p className="text-lg font-semibold text-text-light-primary dark:text-text-dark-primary">
+                {item.value}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+```
+
+**Usage:**
+```tsx
+<GridWidget
+  title="Today's Stats"
+  columns={3}
+  items={[
+    { id: '1', label: 'Tasks Done', value: 12 },
+    { id: '2', label: 'Events', value: 3 },
+    { id: '3', label: 'Notes', value: 8 },
+  ]}
+/>
+```
+
+---
+
+### Template 3: Action Card Widget
+
+Use for: Quick actions, shortcuts
+
+```tsx
+import React from 'react';
+
+interface ActionCardWidgetProps {
+  title: string;
+  description: string;
+  actions: Array<{ id: string; label: string; onClick: () => void; icon?: React.ReactNode }>;
+}
+
+export const ActionCardWidget: React.FC<ActionCardWidgetProps> = ({
+  title,
+  description,
+  actions,
+}) => {
+  return (
+    <div className="p-4 bg-surface-light dark:bg-surface-dark rounded-card shadow-card">
+      <div className="space-y-4">
+        {/* Header */}
+        <section>
+          <h3 className="text-sm font-semibold text-text-light-primary dark:text-text-dark-primary mb-2">
+            {title}
+          </h3>
+          <p className="text-xs text-text-light-secondary dark:text-text-dark-secondary">
+            {description}
+          </p>
+        </section>
+
+        {/* Actions */}
+        <div className="grid grid-cols-2 gap-2">
+          {actions.map((action) => (
+            <button
+              key={action.id}
+              onClick={action.onClick}
+              className="px-4 py-2 rounded-lg bg-surface-light-elevated dark:bg-surface-dark-elevated hover:bg-surface-light dark:hover:bg-surface-dark text-text-light-primary dark:text-text-dark-primary font-medium transition-colors border border-border-light dark:border-border-dark flex items-center justify-center gap-2"
+            >
+              {action.icon}
+              <span className="text-sm">{action.label}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+```
+
+**Usage:**
+```tsx
+<ActionCardWidget
+  title="Quick Actions"
+  description="Common tasks at your fingertips"
+  actions={[
+    { id: '1', label: 'New Task', onClick: () => {}, icon: <PlusIcon /> },
+    { id: '2', label: 'New Note', onClick: () => {}, icon: <DocumentIcon /> },
+    { id: '3', label: 'New Event', onClick: () => {}, icon: <CalendarIcon /> },
+    { id: '4', label: 'Settings', onClick: () => {}, icon: <CogIcon /> },
+  ]}
+/>
+```
+
+---
+
+## Testing Checklist
+
+Before shipping a widget, verify:
+
+### Visual Standards
+- [ ] Widget padding is `p-4` (16px)
+- [ ] Content sections use `space-y-4` (16px)
+- [ ] List items use `space-y-3` (12px)
+- [ ] Action button is `w-full px-4 py-2` (40px height)
+- [ ] No extra spacing beneath action button
+- [ ] Drag handle in upper-right corner (if applicable)
+- [ ] Accent color matches widget type (blue/magenta/cyan)
+
+### Responsive Design
+- [ ] Works on mobile (375px)
+- [ ] Works on tablet (768px)
+- [ ] Works on desktop (1920px)
+- [ ] Button text doesn't wrap on mobile
+- [ ] Content doesn't overflow widget
+
+### Dark Mode
+- [ ] All text readable in dark mode
+- [ ] Background colors use semantic tokens
+- [ ] Button hover states work in dark mode
+- [ ] No hardcoded light/dark colors
+
+### Accessibility
+- [ ] Button has accessible label
+- [ ] Keyboard navigation works
+- [ ] Focus states visible
+- [ ] Screen reader announces widget correctly
+
+### Code Quality
+- [ ] Uses spacing standards from `docs/technical/spacing-standards.md`
+- [ ] Uses semantic color tokens from `src/index.css`
+- [ ] No hardcoded spacing values (no `p-[14px]`, use `p-4`)
+- [ ] TypeScript types defined for all props
+- [ ] Component exported from index file
+
+---
+
+## Migration Checklist
+
+When updating existing widgets to meet standards:
+
+1. **Before/After Screenshot**
+   - Take screenshot before changes
+   - Take screenshot after changes
+   - Compare to ensure no regressions
+
+2. **Spacing Audit**
+   - [ ] Change widget padding to `p-4`
+   - [ ] Change content spacing to `space-y-4`
+   - [ ] Change list spacing to `space-y-3`
+   - [ ] Remove extra bottom spacing
+
+3. **Button Standardization**
+   - [ ] Change button to `w-full px-4 py-2`
+   - [ ] Verify button height is 40px
+   - [ ] Update accent color if needed
+
+4. **Testing**
+   - [ ] Test in light mode
+   - [ ] Test in dark mode
+   - [ ] Test on mobile/tablet/desktop
+   - [ ] Compare with other widgets (should match)
+
+5. **Documentation**
+   - [ ] Update component comments if needed
+   - [ ] Add to feature map if new widget type
+
+---
+
+## FAQs
+
+### Q: Can I deviate from these standards for a special widget?
+**A:** Only if absolutely necessary. Document why in code comments. Preference is always uniformity.
+
+### Q: What if my widget needs more than one action button?
+**A:** Use two buttons side-by-side with `flex gap-2` (see Secondary Action Button section). Both should still use `px-4 py-2` for uniform height.
+
+### Q: My widget content doesn't fit in `p-4` padding - can I use `p-6`?
+**A:** No. Keep `p-4` padding and adjust content instead (smaller font, scrollable area, etc.). Uniform padding is non-negotiable.
+
+### Q: Should I use `space-y-4` for ALL vertical spacing?
+**A:** Use `space-y-4` for sections, `space-y-3` for list items, `mb-2` for labels. See [Spacing Standards](./spacing-standards.md) for full details.
+
+### Q: What about horizontal spacing?
+**A:** Use `gap-2` (8px) for button groups, `gap-3` (12px) for grid items. See [Spacing Standards](./spacing-standards.md).
+
+---
+
+## Related Documentation
+
+- [Spacing Standards](./spacing-standards.md) - Complete spacing system guide
+- [Color System](./color_system.md) - Semantic color tokens
+- [Development Principles](./development_principles.md) - Overall design philosophy
+
+---
+
+## Appendix: Real Widget Examples
+
+### Example 1: Tasks Widget (Compliant)
+
+```tsx
+<div className="p-4 bg-surface-light dark:bg-surface-dark rounded-card shadow-card">
+  <div className="space-y-4">
+    <section>
+      <h3 className="text-sm font-semibold text-text-light-primary dark:text-text-dark-primary mb-2">
+        Tasks (3)
+      </h3>
+      <ul className="space-y-3">
+        <li className="flex items-center gap-2">
+          <input type="checkbox" />
+          <span className="text-sm">Review dashboard designs</span>
+        </li>
+        <li className="flex items-center gap-2">
+          <input type="checkbox" />
+          <span className="text-sm">Update documentation</span>
+        </li>
+        <li className="flex items-center gap-2">
+          <input type="checkbox" />
+          <span className="text-sm">Test new features</span>
+        </li>
+      </ul>
+    </section>
+
+    <button className="w-full px-4 py-2 rounded-lg bg-accent-blue hover:bg-accent-blue-hover text-white font-medium transition-colors">
+      View All Tasks
+    </button>
+  </div>
+</div>
+```
+
+**✅ Compliant:** p-4 padding, space-y-4 sections, space-y-3 list, uniform button
+
+---
+
+### Example 2: Events Widget (Compliant)
+
+```tsx
+<div className="p-4 bg-surface-light dark:bg-surface-dark rounded-card shadow-card">
+  <div className="space-y-4">
+    <section>
+      <h3 className="text-sm font-semibold text-text-light-primary dark:text-text-dark-primary mb-2">
+        Upcoming Events (2)
+      </h3>
+      <ul className="space-y-3">
+        <li>
+          <p className="text-sm font-medium">Team Meeting</p>
+          <p className="text-xs text-text-light-secondary dark:text-text-dark-secondary">
+            Today at 2:00 PM
+          </p>
+        </li>
+        <li>
+          <p className="text-sm font-medium">Project Deadline</p>
+          <p className="text-xs text-text-light-secondary dark:text-text-dark-secondary">
+            Tomorrow at 5:00 PM
+          </p>
+        </li>
+      </ul>
+    </section>
+
+    <button className="w-full px-4 py-2 rounded-lg bg-accent-magenta hover:bg-accent-magenta-hover text-white font-medium transition-colors">
+      View All Events
+    </button>
+  </div>
+</div>
+```
+
+**✅ Compliant:** Same structure as Tasks, different accent color (magenta)
+
+---
+
+**Last Updated:** November 18, 2025
+**Maintained By:** Claude Code
+**Questions?** See CLAUDE.md for development workflow guidelines

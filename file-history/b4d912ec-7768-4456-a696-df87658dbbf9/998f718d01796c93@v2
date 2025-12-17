@@ -1,0 +1,131 @@
+# Fix Sidebar Drag Twice Navigation Bug
+
+**Date:** 2025-11-27
+**Status:** Planning
+**Priority:** High
+**Estimated Time:** 30 minutes
+
+---
+
+## Overview
+
+Fix bug where dragging the same navigation link twice in a row causes page navigation and white screen flash, despite having a `justDragged` timeout mechanism.
+
+---
+
+## Problem Statement
+
+**Current behavior:**
+- First drag of a link works correctly (no navigation)
+- Second drag of the SAME link causes:
+  - White screen flash
+  - Page navigates to that link's route
+  - Defeats the purpose of the drag-and-drop reordering
+
+**Expected behavior:**
+- User can drag the same link multiple times in a row
+- No page navigation should occur after any drag operation
+- No white screen flash
+
+**Root cause hypothesis:**
+The `justDragged` state is being set on the SortableNavItem component instance, but when you drag the same item twice, the state might not be persisting correctly between drag operations, or the timeout is clearing before the Link onClick fires.
+
+---
+
+## Files to Read
+
+- [x] `src/components/Sidebar.tsx` - Current drag implementation (lines 131-165, 346)
+
+---
+
+## Proposed Changes
+
+### Investigation Needed
+
+**Check these possibilities:**
+
+1. **Timeout too short:** 300ms might not be enough for React Router Link onClick
+2. **State scope issue:** `justDragged` is local to SortableNavItem - might reset between renders
+3. **Event timing:** onClick might fire after timeout clears
+4. **Drag detection:** Second drag might not be triggering `onDragEnd` properly
+
+### Likely Fix
+
+Move `justDragged` state up to parent component or use a ref instead of state to ensure it persists across renders and doesn't cause re-renders that might interfere with timing.
+
+**Option 1: Use useRef instead of useState**
+```typescript
+const justDraggedRef = useRef(false);
+
+// In onDragEnd:
+justDraggedRef.current = true;
+setTimeout(() => {
+  justDraggedRef.current = false;
+}, 500); // Increase timeout
+
+// In Link onClick:
+if (justDraggedRef.current) {
+  e.preventDefault();
+  return;
+}
+```
+
+**Option 2: Move state to parent**
+Track which item was just dragged at the parent level, ensuring state persists.
+
+---
+
+## Todo Checklist
+
+### Phase 1: Investigation (10 min) ✅ COMPLETE
+- [x] Read current drag implementation in Sidebar.tsx
+- [x] Identify exact timing of Link onClick vs timeout clearing
+- [x] Determine if state is resetting between drags
+
+**Finding:** `justDragged` uses `useState` which causes re-renders. On second drag, the re-render might cause React to miss the preventDefault in Link onClick. Solution: Use `useRef` to avoid re-renders and ensure flag is always current.
+
+### Phase 2: Implement Fix (15 min)
+- [ ] Change `justDragged` from useState to useRef
+- [ ] Increase timeout from 300ms to 500ms
+- [ ] Test dragging same link multiple times
+
+### Phase 3: Verification (5 min)
+- [ ] Test drag same link 3+ times in a row
+- [ ] Test drag different links
+- [ ] Test rapid drag operations
+- [ ] Verify no navigation occurs
+- [ ] Verify no white screen flash
+
+---
+
+## Design Considerations
+
+### Performance
+- Using `useRef` instead of `useState` prevents unnecessary re-renders
+- Timeout increase minimal performance impact
+
+### UX
+- 500ms timeout is still fast enough for normal navigation clicks
+- Prevents accidental navigation during drag
+
+---
+
+## Testing Checklist
+
+### Functionality
+- [ ] Drag same link twice in a row - no navigation
+- [ ] Drag same link 5 times in a row - no navigation
+- [ ] Drag different links - no navigation
+- [ ] Normal click after drag completes - navigation works
+- [ ] Rapid drag operations - no race conditions
+
+---
+
+## Risk Assessment
+
+| Risk | Severity | Likelihood | Mitigation |
+|------|----------|------------|------------|
+| Timeout too long blocks valid clicks | Low | Low | 500ms is reasonable for post-drag |
+| Ref not clearing properly | Low | Low | Timeout ensures it clears |
+
+---

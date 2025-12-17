@@ -1,0 +1,54 @@
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [react()],
+
+  // CSS configuration with PostCSS
+  css: {
+    postcss: './config/postcss.config.js',
+  },
+
+  // Base public path - use '/' for root domain deployment
+  base: '/',
+
+  // Build optimizations
+  build: {
+    // Output directory
+    outDir: 'dist',
+
+    // Generate sourcemaps for production debugging (optional)
+    sourcemap: false,
+
+    // Chunk size warnings
+    chunkSizeWarningLimit: 1000,
+
+    // Rollup options - Let Vite handle chunking naturally
+    // Vite automatically splits dynamic imports and preserves dependency order
+    rollupOptions: {
+      // No manual chunks - Vite's automatic chunking based on dynamic imports
+      // works better for React 19 and preserves dependency load order
+    },
+  },
+
+  // Development server
+  server: {
+    port: 5173,
+    strictPort: false,
+    host: true,
+    // Cross-Origin Isolation headers for WebContainer (Phantom Shell)
+    // Using 'credentialless' to allow OpenStreetMap tiles while enabling SharedArrayBuffer
+    headers: {
+      'Cross-Origin-Embedder-Policy': 'credentialless',
+      'Cross-Origin-Opener-Policy': 'same-origin',
+    },
+  },
+
+  // Preview server (for testing production build)
+  preview: {
+    port: 4173,
+    strictPort: false,
+    host: true,
+  },
+})

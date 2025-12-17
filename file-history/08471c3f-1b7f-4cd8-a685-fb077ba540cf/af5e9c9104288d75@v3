@@ -1,0 +1,95 @@
+/**
+ * Diagrams Store
+ * Manages diagram CRUD operations and persistence
+ */
+
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
+import type { Diagram, CanvasState } from '../types/diagrams';
+
+interface DiagramsState {
+  diagrams: Diagram[];
+
+  // Actions
+  createDiagram: (title: string) => Diagram;
+  getDiagram: (id: string) => Diagram | undefined;
+  updateDiagram: (id: string, updates: Partial<Diagram>) => void;
+  deleteDiagram: (id: string) => void;
+  duplicateDiagram: (id: string) => Diagram | undefined;
+}
+
+const defaultCanvasState: CanvasState = {
+  zoom: 1,
+  pan: { x: 0, y: 0 },
+  gridSize: 20,
+  snapToGrid: false,
+};
+
+export const useDiagramsStore = create<DiagramsState>()(
+  persist(
+    (set, get) => ({
+      diagrams: [],
+
+      createDiagram: (title: string) => {
+        const newDiagram: Diagram = {
+          id: crypto.randomUUID(),
+          title,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          canvasState: { ...defaultCanvasState },
+          elements: [],
+        };
+
+        set((state) => ({
+          diagrams: [...state.diagrams, newDiagram],
+        }));
+
+        return newDiagram;
+      },
+
+      getDiagram: (id: string) => {
+        return get().diagrams.find((d) => d.id === id);
+      },
+
+      updateDiagram: (id: string, updates: Partial<Diagram>) => {
+        set((state) => ({
+          diagrams: state.diagrams.map((d) =>
+            d.id === id
+              ? { ...d, ...updates, updatedAt: new Date() }
+              : d
+          ),
+        }));
+      },
+
+      deleteDiagram: (id: string) => {
+        set((state) => ({
+          diagrams: state.diagrams.filter((d) => d.id !== id),
+        }));
+      },
+
+      duplicateDiagram: (id: string) => {
+        const original = get().getDiagram(id);
+        if (!original) return undefined;
+
+        const duplicate: Diagram = {
+          ...original,
+          id: crypto.randomUUID(),
+          title: `${original.title} (Copy)`,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          // Deep clone elements to avoid reference issues
+          elements: original.elements.map((el) => ({ ...el, id: crypto.randomUUID() })),
+        };
+
+        set((state) => ({
+          diagrams: [...state.diagrams, duplicate],
+        }));
+
+        return duplicate;
+      },
+    }),
+    {
+      name: 'neuman-brain-diagrams',
+    }
+  )
+);

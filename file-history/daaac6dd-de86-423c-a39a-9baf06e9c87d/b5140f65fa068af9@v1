@@ -1,0 +1,50 @@
+---
+title: "Modern 1BR Apartment at Riverside"
+status: "available"
+featured: false
+rent: 1200
+deposit: 1200
+beds: 1
+baths: 1
+sqft: 750
+propertyType: "apartment"
+neighborhood: "Riverside"
+city: "Sample City"
+state: "SC"
+features:
+  - "Central AC"
+  - "Dishwasher"
+  - "Balcony"
+  - "Modern finishes"
+  - "Walk-in closet"
+petPolicy: "cats-only"
+parking: "covered"
+laundry: "shared"
+photos:
+  - "/images/properties/sample/placeholder.svg"
+applyUrl: "https://example.com/apply"
+applicationFee: 50
+availableDate: 2025-01-01
+publishedDate: 2025-12-14
+---
+
+A sleek, modern 1-bedroom apartment with stunning views of the river. Perfect for young professionals.
+
+## Features
+
+- Open floor plan with modern finishes
+- Private balcony with river views
+- Walk-in closet in bedroom
+- Stainless steel appliances
+- Shared laundry on-site
+
+## Neighborhood
+
+Riverside offers a vibrant atmosphere with walking trails along the river, local cafes, and easy commute options. Public transportation is within walking distance.
+
+## Move-In Requirements
+
+- First month's rent
+- Security deposit (equal to one month's rent)
+- Application fee: $50 (non-refundable)
+- Credit and background check required

@@ -1,0 +1,283 @@
+import { useEffect, useState } from 'react';
+import { ChevronLeft, ChevronRight, Calendar as CalendarIcon } from 'lucide-react';
+import { useTimeTrackingStore } from '../stores/useTimeTrackingStore';
+import { formatDuration, formatTime } from '../utils/timeFormatters';
+import type { TimeEntry } from '../types';
+
+interface TimeEntryCalendarProps {
+  onEditEntry?: (entry: TimeEntry) => void;
+}
+
+/**
+ * TimeEntryCalendar Component
+ * Full calendar view showing time entries as visual blocks
+ */
+export function TimeEntryCalendar({ onEditEntry }: TimeEntryCalendarProps) {
+  const { entries, projects, loadEntries, loadProjects } = useTimeTrackingStore();
+
+  const [loading, setLoading] = useState(true);
+  const [currentDate, setCurrentDate] = useState(new Date());
+
+  const year = currentDate.getFullYear();
+  const month = currentDate.getMonth(); // 0-11
+
+  useEffect(() => {
+    const loadData = async () => {
+      setLoading(true);
+      try {
+        // Load entries for the entire month
+        const monthStart = new Date(year, month, 1);
+        const monthEnd = new Date(year, month + 1, 0, 23, 59, 59);
+
+        await Promise.all([
+          loadEntries({
+            dateRange: 'custom',
+            startDate: monthStart.toISOString(),
+            endDate: monthEnd.toISOString(),
+            projectIds: [],
+            tags: [],
+            searchQuery: ''
+          }),
+          loadProjects()
+        ]);
+      } catch (error) {
+        console.error('Failed to load calendar data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadData();
+  }, [loadEntries, loadProjects, year, month]);
+
+  const handlePreviousMonth = () => {
+    setCurrentDate(new Date(year, month - 1, 1));
+  };
+
+  const handleNextMonth = () => {
+    setCurrentDate(new Date(year, month + 1, 1));
+  };
+
+  const handleToday = () => {
+    setCurrentDate(new Date());
+  };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-12">
+        <div className="text-text-light-secondary dark:text-text-dark-secondary">
+          Loading calendar...
+        </div>
+      </div>
+    );
+  }
+
+  const monthName = new Date(year, month, 1).toLocaleDateString('en-US', {
+    month: 'long',
+    year: 'numeric'
+  });
+
+  // Get day of week for first day of month (0 = Sunday)
+  const firstDayOfWeek = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+  // Group entries by date
+  const entriesByDate = new Map<string, TimeEntry[]>();
+  entries.forEach(entry => {
+    const date = new Date(entry.startTime).toISOString().split('T')[0];
+    if (!entriesByDate.has(date)) {
+      entriesByDate.set(date, []);
+    }
+    entriesByDate.get(date)!.push(entry);
+  });
+
+  // Create calendar grid
+  const calendarDays: (number | null)[] = [];
+  for (let i = 0; i < firstDayOfWeek; i++) {
+    calendarDays.push(null); // Empty cells before month starts
+  }
+  for (let day = 1; day <= daysInMonth; day++) {
+    calendarDays.push(day);
+  }
+
+  const getProjectColor = (projectId?: string) => {
+    if (!projectId) return '#94A3B8'; // Default gray
+    return projects.find(p => p.id === projectId)?.color || '#94A3B8';
+  };
+
+  const getProjectName = (projectId?: string) => {
+    if (!projectId) return 'No Project';
+    return projects.find(p => p.id === projectId)?.name || 'Unknown';
+  };
+
+  return (
+    <div className="space-y-6">
+      {/* Month Navigation */}
+      <div className="bg-surface-light dark:bg-surface-dark rounded-lg border border-border-light dark:border-border-dark p-4">
+        <div className="flex items-center justify-between">
+          <button
+            onClick={handlePreviousMonth}
+            className="p-2 rounded hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated text-text-light-secondary dark:text-text-dark-secondary transition-colors"
+            aria-label="Previous month"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2">
+              <CalendarIcon className="w-5 h-5 text-accent-magenta dark:text-accent-cyan" />
+              <h2 className="text-xl font-semibold text-text-light-primary dark:text-text-dark-primary">
+                {monthName}
+              </h2>
+            </div>
+            <button
+              onClick={handleToday}
+              className="px-3 py-1 text-sm font-medium text-accent-magenta dark:text-accent-cyan hover:bg-accent-magenta/10 dark:hover:bg-accent-cyan/10 rounded transition-colors"
+            >
+              Today
+            </button>
+          </div>
+
+          <button
+            onClick={handleNextMonth}
+            className="p-2 rounded hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated text-text-light-secondary dark:text-text-dark-secondary transition-colors"
+            aria-label="Next month"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        </div>
+      </div>
+
+      {/* Calendar Grid */}
+      <div className="bg-surface-light dark:bg-surface-dark rounded-lg border border-border-light dark:border-border-dark p-6">
+        {/* Day Headers */}
+        <div className="grid grid-cols-7 gap-2 mb-2">
+          {['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'].map(day => (
+            <div
+              key={day}
+              className="text-center text-sm font-semibold text-text-light-secondary dark:text-text-dark-secondary py-2"
+            >
+              {day}
+            </div>
+          ))}
+        </div>
+
+        {/* Calendar Days */}
+        <div className="grid grid-cols-7 gap-2">
+          {calendarDays.map((day, index) => {
+            if (day === null) {
+              // Empty cell before month starts
+              return (
+                <div
+                  key={`empty-${index}`}
+                  className="min-h-[120px] bg-surface-light-elevated dark:bg-surface-dark-elevated rounded border border-border-light dark:border-border-dark opacity-30"
+                />
+              );
+            }
+
+            const dateStr = `${year}-${(month + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+            const dayEntries = entriesByDate.get(dateStr) || [];
+            const isToday = dateStr === new Date().toISOString().split('T')[0];
+            const totalDuration = dayEntries.reduce((sum, entry) => sum + entry.duration, 0);
+
+            return (
+              <div
+                key={dateStr}
+                className={`min-h-[120px] rounded border p-2 transition-colors ${
+                  isToday
+                    ? 'border-accent-magenta dark:border-accent-cyan border-2 bg-accent-magenta/5 dark:bg-accent-cyan/5'
+                    : 'border-border-light dark:border-border-dark bg-surface-light-elevated dark:bg-surface-dark-elevated'
+                } ${
+                  dayEntries.length > 0
+                    ? 'hover:border-accent-magenta/50 dark:hover:border-accent-cyan/50'
+                    : ''
+                }`}
+              >
+                {/* Day Number */}
+                <div className="flex items-center justify-between mb-2">
+                  <span
+                    className={`text-sm font-semibold ${
+                      isToday
+                        ? 'text-accent-magenta dark:text-accent-cyan'
+                        : dayEntries.length > 0
+                        ? 'text-text-light-primary dark:text-text-dark-primary'
+                        : 'text-text-light-tertiary dark:text-text-dark-tertiary'
+                    }`}
+                  >
+                    {day}
+                  </span>
+                  {totalDuration > 0 && (
+                    <span className="text-xs font-mono text-accent-magenta dark:text-accent-cyan">
+                      {formatDuration(totalDuration, { showSeconds: false })}
+                    </span>
+                  )}
+                </div>
+
+                {/* Time Entries */}
+                <div className="space-y-1 max-h-[80px] overflow-y-auto">
+                  {dayEntries.slice(0, 4).map((entry) => (
+                    <button
+                      key={entry.id}
+                      onClick={() => onEditEntry?.(entry)}
+                      className="w-full text-left px-2 py-1 rounded text-xs transition-colors hover:opacity-80"
+                      style={{
+                        backgroundColor: `${getProjectColor(entry.projectId)}20`,
+                        borderLeft: `3px solid ${getProjectColor(entry.projectId)}`
+                      }}
+                      title={`${entry.description}\n${getProjectName(entry.projectId)}\n${formatTime(new Date(entry.startTime), '24h')} - ${entry.endTime ? formatTime(new Date(entry.endTime), '24h') : 'Running'}\n${formatDuration(entry.duration, { showSeconds: false })}`}
+                    >
+                      <div className="truncate font-medium text-text-light-primary dark:text-text-dark-primary">
+                        {entry.description}
+                      </div>
+                      <div className="flex items-center justify-between text-text-light-tertiary dark:text-text-dark-tertiary">
+                        <span className="truncate text-[10px]">
+                          {formatTime(new Date(entry.startTime), '24h')}
+                        </span>
+                        <span className="text-[10px] font-mono">
+                          {formatDuration(entry.duration, { showSeconds: false })}
+                        </span>
+                      </div>
+                    </button>
+                  ))}
+                  {dayEntries.length > 4 && (
+                    <div className="text-center text-xs text-text-light-tertiary dark:text-text-dark-tertiary py-1">
+                      +{dayEntries.length - 4} more
+                    </div>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Legend */}
+      {projects.filter(p => p.active && !p.archived).length > 0 && (
+        <div className="bg-surface-light dark:bg-surface-dark rounded-lg border border-border-light dark:border-border-dark p-4">
+          <h3 className="text-sm font-semibold text-text-light-primary dark:text-text-dark-primary mb-3">
+            Project Legend
+          </h3>
+          <div className="flex flex-wrap gap-3">
+            {projects.filter(p => p.active && !p.archived).map(project => (
+              <div key={project.id} className="flex items-center gap-2">
+                <div
+                  className="w-3 h-3 rounded"
+                  style={{ backgroundColor: project.color }}
+                />
+                <span className="text-sm text-text-light-secondary dark:text-text-dark-secondary">
+                  {project.name}
+                </span>
+              </div>
+            ))}
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded bg-gray-400" />
+              <span className="text-sm text-text-light-secondary dark:text-text-dark-secondary">
+                No Project
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}

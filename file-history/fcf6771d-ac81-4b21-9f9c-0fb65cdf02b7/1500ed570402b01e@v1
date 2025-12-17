@@ -1,0 +1,132 @@
+/**
+ * KeyboardShortcutsModal Component
+ *
+ * Modal displaying keyboard shortcuts for the Notes page.
+ * Part of the Notes Page Revolution - Phase 4.
+ *
+ * Triggered by pressing ? key on the Notes page.
+ */
+
+import React from 'react';
+import { X, Keyboard } from 'lucide-react';
+import { Modal } from '../Modal';
+
+interface ShortcutGroup {
+  title: string;
+  shortcuts: { keys: string[]; description: string }[];
+}
+
+const SHORTCUT_GROUPS: ShortcutGroup[] = [
+  {
+    title: 'Folder Navigation',
+    shortcuts: [
+      { keys: ['↓', 'J'], description: 'Next folder' },
+      { keys: ['↑', 'K'], description: 'Previous folder' },
+      { keys: ['→', 'L'], description: 'Expand or enter folder' },
+      { keys: ['←', 'H'], description: 'Collapse or go to parent' },
+      { keys: ['Enter'], description: 'Toggle expand/collapse' },
+      { keys: ['Home'], description: 'Go to All Notes' },
+      { keys: ['End'], description: 'Go to last folder' },
+    ],
+  },
+  {
+    title: 'Notes List Navigation',
+    shortcuts: [
+      { keys: ['↓', 'J'], description: 'Next note' },
+      { keys: ['↑', 'K'], description: 'Previous note' },
+      { keys: ['Enter'], description: 'Open note in editor' },
+      { keys: ['F'], description: 'Toggle favorite' },
+      { keys: ['P'], description: 'Toggle pin' },
+      { keys: ['D'], description: 'Delete note (confirm)' },
+      { keys: ['Space'], description: 'Toggle selection (bulk mode)' },
+      { keys: ['Home'], description: 'First note' },
+      { keys: ['End'], description: 'Last note' },
+    ],
+  },
+  {
+    title: 'Global Shortcuts',
+    shortcuts: [
+      { keys: ['Cmd', 'K'], description: 'Focus search' },
+      { keys: ['Cmd', 'N'], description: 'New note' },
+      { keys: ['Cmd', '\\'], description: 'Toggle sidebar' },
+      { keys: ['Cmd', 'Shift', 'E'], description: 'Export notes' },
+      { keys: ['?'], description: 'Show this help' },
+      { keys: ['Escape'], description: 'Close dialogs/help' },
+    ],
+  },
+];
+
+export interface KeyboardShortcutsModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+export const KeyboardShortcutsModal: React.FC<KeyboardShortcutsModalProps> = ({
+  isOpen,
+  onClose,
+}) => {
+  return (
+    <Modal isOpen={isOpen} onClose={onClose} title="Keyboard Shortcuts" size="lg">
+      <div className="p-6">
+        {/* Header */}
+        <div className="flex items-center gap-3 mb-6">
+          <div className="p-2 bg-accent-cyan/10 dark:bg-accent-magenta/10 rounded-lg">
+            <Keyboard className="w-6 h-6 text-accent-cyan dark:text-accent-magenta" />
+          </div>
+          <div>
+            <h2 className="text-lg font-semibold text-text-light-primary dark:text-text-dark-primary">
+              Keyboard Shortcuts
+            </h2>
+            <p className="text-sm text-text-light-secondary dark:text-text-dark-secondary">
+              Navigate and manage notes efficiently with keyboard
+            </p>
+          </div>
+        </div>
+
+        {/* Shortcut Groups */}
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {SHORTCUT_GROUPS.map((group) => (
+            <div key={group.title}>
+              <h3 className="text-sm font-medium uppercase tracking-wide text-text-light-secondary dark:text-text-dark-secondary mb-3">
+                {group.title}
+              </h3>
+              <div className="space-y-2">
+                {group.shortcuts.map((shortcut, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center justify-between py-1.5"
+                  >
+                    <span className="text-sm text-text-light-primary dark:text-text-dark-primary">
+                      {shortcut.description}
+                    </span>
+                    <div className="flex items-center gap-1">
+                      {shortcut.keys.map((key, keyIndex) => (
+                        <React.Fragment key={keyIndex}>
+                          <kbd className="px-2 py-1 text-xs font-mono bg-surface-light-elevated dark:bg-surface-dark-elevated border border-border-light dark:border-border-dark rounded">
+                            {key}
+                          </kbd>
+                          {keyIndex < shortcut.keys.length - 1 && (
+                            <span className="text-text-light-tertiary dark:text-text-dark-tertiary text-xs">
+                              +
+                            </span>
+                          )}
+                        </React.Fragment>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Footer */}
+        <div className="mt-6 pt-4 border-t border-border-light dark:border-border-dark">
+          <p className="text-xs text-text-light-tertiary dark:text-text-dark-tertiary text-center">
+            Press <kbd className="px-1.5 py-0.5 text-xs font-mono bg-surface-light-elevated dark:bg-surface-dark-elevated border border-border-light dark:border-border-dark rounded">?</kbd> anytime to show this help
+          </p>
+        </div>
+      </div>
+    </Modal>
+  );
+};

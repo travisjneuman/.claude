@@ -1,0 +1,205 @@
+import React, { useState, useRef, useEffect } from 'react';
+import { useWidgetStore } from '../stores/useWidgetStore';
+
+/**
+ * Widget control buttons for drag, settings, expand, and close actions
+ */
+interface WidgetControlsProps {
+  widgetId: string;
+  draggable?: boolean;
+  onSettings?: () => void;
+  onExpand?: () => void;
+  onClose?: () => void;
+}
+
+export const WidgetControls: React.FC<WidgetControlsProps> = ({
+  widgetId,
+  draggable = true,
+  onSettings,
+  onExpand,
+  onClose,
+}) => {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const widgetSizes = useWidgetStore((state) => state.widgetSizes);
+  const setWidgetSize = useWidgetStore((state) => state.setWidgetSize);
+  const disableWidget = useWidgetStore((state) => state.disableWidget);
+  const currentSize = widgetSizes[widgetId] || 1;
+
+  // Close menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setMenuOpen(false);
+      }
+    };
+
+    if (menuOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [menuOpen]);
+
+  const handleRemoveWidget = () => {
+    disableWidget(widgetId);
+    setMenuOpen(false);
+  };
+
+  return (
+    <div className="widget-controls flex items-center gap-1 relative" ref={menuRef}>
+      {/* Drag Handle - Only visible on hover */}
+      {draggable && (
+        <button
+          className="drag-handle p-1.5 hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated rounded transition-colors"
+          title="Drag to reorder"
+          aria-label="Drag handle"
+        >
+          <svg
+            className="w-4 h-4 text-text-light-secondary dark:text-text-dark-secondary"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path d="M7 2a2 2 0 1 0 .001 4.001A2 2 0 0 0 7 2zm0 6a2 2 0 1 0 .001 4.001A2 2 0 0 0 7 8zm0 6a2 2 0 1 0 .001 4.001A2 2 0 0 0 7 14zm6-8a2 2 0 1 0-.001-4.001A2 2 0 0 0 13 6zm0 2a2 2 0 1 0 .001 4.001A2 2 0 0 0 13 8zm0 6a2 2 0 1 0 .001 4.001A2 2 0 0 0 13 14z" />
+          </svg>
+        </button>
+      )}
+
+      {/* Settings Button */}
+      {onSettings && (
+        <button
+          onClick={onSettings}
+          className="p-1.5 hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated rounded transition-colors"
+          title="Widget settings"
+          aria-label="Widget settings"
+        >
+          <svg
+            className="w-4 h-4 text-text-light-secondary dark:text-text-dark-secondary"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+            />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+            />
+          </svg>
+        </button>
+      )}
+
+      {/* Expand Button */}
+      {onExpand && (
+        <button
+          onClick={onExpand}
+          className="p-1.5 hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated rounded transition-colors"
+          title="Expand to fullscreen"
+          aria-label="Expand widget"
+        >
+          <svg
+            className="w-4 h-4 text-text-light-secondary dark:text-text-dark-secondary"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"
+            />
+          </svg>
+        </button>
+      )}
+
+      {/* Widget Menu (Size + Remove) */}
+      <button
+        onClick={() => setMenuOpen(!menuOpen)}
+        className="p-1.5 hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated rounded transition-colors"
+        title="Widget options"
+        aria-label="Widget options"
+      >
+        <svg
+          className="w-4 h-4 text-text-light-secondary dark:text-text-dark-secondary"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+        >
+          <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
+        </svg>
+      </button>
+
+      {/* Dropdown Menu */}
+      {menuOpen && (
+        <div className="absolute right-0 top-full mt-1 bg-white dark:bg-surface-dark-elevated rounded-lg shadow-xl border border-border-light dark:border-border-dark p-2 z-50 min-w-[140px]">
+          {/* Size selector */}
+          <div className="mb-2 pb-2 border-b border-border-light dark:border-border-dark">
+            <div className="text-xs text-text-light-secondary dark:text-text-dark-secondary mb-1.5 px-1">
+              Widget Size
+            </div>
+            <div className="flex gap-1">
+              {[1, 2, 3].map((size) => (
+                <button
+                  key={size}
+                  onClick={() => {
+                    setWidgetSize(widgetId, size as 1 | 2 | 3);
+                    setMenuOpen(false);
+                  }}
+                  className={`
+                    flex-1 px-2 py-1 text-xs rounded transition-colors font-medium
+                    ${currentSize === size
+                      ? 'bg-accent-cyan text-white'
+                      : 'bg-surface-light-elevated dark:bg-surface-dark text-text-light-secondary dark:text-text-dark-secondary hover:bg-surface-light dark:hover:bg-surface-dark'
+                    }
+                  `}
+                >
+                  {size}x
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Remove button */}
+          <button
+            onClick={handleRemoveWidget}
+            className="w-full px-2 py-1.5 text-xs text-left text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded transition-colors"
+          >
+            Remove Widget
+          </button>
+        </div>
+      )}
+
+      {/* Close Button */}
+      {onClose && (
+        <button
+          onClick={onClose}
+          className="p-1.5 hover:bg-red-100 dark:hover:bg-red-900/30 rounded transition-colors group"
+          title="Hide widget"
+          aria-label="Hide widget"
+        >
+          <svg
+            className="w-4 h-4 text-text-light-secondary dark:text-text-dark-secondary group-hover:text-red-600 dark:group-hover:text-red-400"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      )}
+    </div>
+  );
+};

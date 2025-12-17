@@ -1,0 +1,185 @@
+# .claude/ Directory
+
+This folder is **fully portable**. Copy it anywhere and it works.
+
+---
+
+## Quick Setup on New Machine
+
+```powershell
+# 1. Copy entire folder to new location
+cp -r /path/to/.claude ~/.claude
+
+# 2. Copy the template to parent directory
+cp ~/.claude/claude.json.template ~/.claude.json
+
+# 3. Run claude and login
+claude
+```
+
+That's it. Claude Code will populate OAuth tokens and other runtime data on first login.
+
+---
+
+## Folder Structure
+
+```
+.claude/
+├── README.md                 # This file
+├── CLAUDE.md                 # Global instructions (your "constitution")
+├── claude.json.template      # ← PORTABLE: Copy to parent as .claude.json
+│
+├── settings.json             # Permissions, plugins, preferences
+├── settings.local.json       # Local overrides
+│
+├── commands/                 # Custom slash commands
+│   ├── run.md               # /run
+│   └── start-task.md        # /start-task
+│
+├── skills/                   # Reusable skills
+│   ├── _shared/             # Shared standards
+│   ├── generic-*/           # Stack-agnostic skills
+│   ├── codebase-documenter/
+│   ├── frontend-enhancer/
+│   ├── tech-debt-analyzer/
+│   ├── test-specialist/
+│   └── ...
+│
+├── templates/                # Task templates
+├── docs/                     # Documentation
+├── CLAUDE.md Reference/      # Reference files from other projects
+│
+├── .claude.json              # Full backup (contains auth - regenerate on new machine)
+├── .credentials.json         # Auth credentials (regenerated on login)
+│
+├── history.jsonl             # Conversation history
+├── plans/                    # Session plan files
+├── todos/                    # Todo states
+├── debug/                    # Debug logs
+│
+├── projects/                 # Per-project state (auto-generated per path)
+├── plugins/                  # Downloaded plugins
+├── file-history/             # File change tracking
+├── shell-snapshots/          # Bash state
+├── statsig/                  # Feature flags
+├── stats-cache.json          # Usage stats
+├── telemetry/                # Telemetry
+├── ide/                      # IDE connection
+├── downloads/                # Temp files
+└── sqlite_mcp_server.db      # MCP database
+```
+
+---
+
+## Key Files
+
+### claude.json.template
+**This is the portable config.** Contains only:
+- MCP server definitions (with Windows `cmd /c` wrappers)
+- No OAuth tokens (regenerated on login)
+- No path-specific data
+
+Copy this to `~/.claude.json` on any new machine.
+
+### .claude.json (internal backup)
+Full copy of the active config. Contains OAuth tokens and path-encoded project data.
+Useful as a backup but **will need re-authentication** on a new machine.
+
+### CLAUDE.md
+Your global instructions that apply to all projects. This is the "constitution" for Claude's behavior.
+
+### settings.json
+```json
+{
+  "permissions": {
+    "allow": ["Bash(npm run:*)", "WebSearch", ...],
+    "deny": [],
+    "defaultMode": "default"
+  },
+  "enabledPlugins": { ... },
+  "alwaysThinkingEnabled": true
+}
+```
+
+### commands/
+Markdown files → slash commands. Filename = command name.
+
+### skills/
+Each skill has:
+- `SKILL.md` - Definition and instructions
+- `references/` - Supporting docs
+- `scripts/` - Executable scripts
+- `assets/` - Templates, examples
+
+---
+
+## Copying to New Machine
+
+### Full Copy (Recommended)
+```powershell
+# Copy everything
+robocopy "C:\Users\tjn\.claude" "D:\new-machine\.claude" /E
+
+# Create the parent config from template
+copy "D:\new-machine\.claude\claude.json.template" "D:\new-machine\.claude.json"
+
+# Login to regenerate auth
+claude
+```
+
+### What Happens After Copy
+| Item | Behavior |
+|------|----------|
+| `claude.json.template` | You copy to parent as `.claude.json` |
+| MCP servers | Work immediately (paths are relative/global) |
+| OAuth tokens | Regenerated on first `claude` login |
+| `projects/` | Old paths ignored, new ones created as you work |
+| `plugins/cache/` | Reused or regenerated as needed |
+| `history.jsonl` | Your old conversations, viewable with `/resume` |
+
+---
+
+## Platform Notes
+
+### Windows
+MCP servers need `cmd /c` wrapper for npx commands. The template already has this.
+
+### Linux/Mac
+Change MCP server commands from:
+```json
+"command": "cmd",
+"args": ["/c", "npx", ...]
+```
+To:
+```json
+"command": "npx",
+"args": [...]
+```
+
+---
+
+## Maintenance
+
+| Task | When | Command |
+|------|------|---------|
+| Sync template with live config | After MCP changes | Copy `mcpServers` from `~/.claude.json` to `claude.json.template` |
+| Clear old plans | Monthly | `rm -rf plans/*` |
+| Clear history | When too large | `rm history.jsonl` |
+| Clear debug logs | As needed | `rm -rf debug/*` |
+
+---
+
+## Sync Your MCP Servers
+
+When you add/change MCP servers, update the template:
+
+```powershell
+# Extract just mcpServers from live config and update template
+# (Or manually copy the mcpServers section)
+```
+
+Or simply keep `.claude.json` and `claude.json.template` in sync manually when you change MCP config.
+
+---
+
+*This folder is designed to be copied wholesale. Everything works relative to itself.*

@@ -1,0 +1,172 @@
+/**
+ * Calculator Widget
+ *
+ * Basic calculator with arithmetic operations and memory functions
+ */
+
+import React, { useState } from 'react';
+import { BaseWidget } from './BaseWidget';
+
+export const CalculatorWidget: React.FC = () => {
+  const [display, setDisplay] = useState('0');
+  const [previousValue, setPreviousValue] = useState<number | null>(null);
+  const [operation, setOperation] = useState<string | null>(null);
+  const [newNumber, setNewNumber] = useState(true);
+  const [memory, setMemory] = useState(0);
+
+  const handleNumber = (num: string) => {
+    if (newNumber) {
+      setDisplay(num);
+      setNewNumber(false);
+    } else {
+      setDisplay(display === '0' ? num : display + num);
+    }
+  };
+
+  const handleDecimal = () => {
+    if (newNumber) {
+      setDisplay('0.');
+      setNewNumber(false);
+    } else if (!display.includes('.')) {
+      setDisplay(display + '.');
+    }
+  };
+
+  const handleOperation = (op: string) => {
+    const current = parseFloat(display);
+
+    if (previousValue !== null && operation && !newNumber) {
+      // Complete previous operation
+      const result = calculate(previousValue, current, operation);
+      setDisplay(String(result));
+      setPreviousValue(result);
+    } else {
+      setPreviousValue(current);
+    }
+
+    setOperation(op);
+    setNewNumber(true);
+  };
+
+  const calculate = (prev: number, current: number, op: string): number => {
+    switch (op) {
+      case '+': return prev + current;
+      case '-': return prev - current;
+      case '×': return prev * current;
+      case '÷': return current !== 0 ? prev / current : 0;
+      default: return current;
+    }
+  };
+
+  const handleEquals = () => {
+    if (previousValue !== null && operation) {
+      const current = parseFloat(display);
+      const result = calculate(previousValue, current, operation);
+      setDisplay(String(result));
+      setPreviousValue(null);
+      setOperation(null);
+      setNewNumber(true);
+    }
+  };
+
+  const handleClear = () => {
+    setDisplay('0');
+    setPreviousValue(null);
+    setOperation(null);
+    setNewNumber(true);
+  };
+
+  const handleBackspace = () => {
+    if (display.length > 1) {
+      setDisplay(display.slice(0, -1));
+    } else {
+      setDisplay('0');
+      setNewNumber(true);
+    }
+  };
+
+  const handleMemoryAdd = () => setMemory(memory + parseFloat(display));
+  const handleMemorySubtract = () => setMemory(memory - parseFloat(display));
+  const handleMemoryRecall = () => {
+    setDisplay(String(memory));
+    setNewNumber(true);
+  };
+  const handleMemoryClear = () => setMemory(0);
+
+  const Button: React.FC<{ value: string; onClick: () => void; className?: string; colspan?: boolean }> = ({
+    value,
+    onClick,
+    className = '',
+    colspan = false
+  }) => (
+    <button
+      onClick={onClick}
+      className={`
+        ${colspan ? 'col-span-2' : ''}
+        px-3 py-2 rounded-button font-medium
+        bg-surface-light-elevated dark:bg-surface-dark-elevated
+        hover:bg-neutral-200 dark:hover:bg-neutral-700
+        text-text-light-primary dark:text-text-dark-primary
+        transition-all duration-standard ease-smooth active:scale-95
+        ${className}
+      `}
+    >
+      {value}
+    </button>
+  );
+
+  return (
+    <BaseWidget title="Calculator" icon="🔢">
+      <div className="space-y-3">
+        {/* Display */}
+        <div className="bg-surface-light dark:bg-surface-dark p-4 rounded-button transition-all duration-standard ease-smooth text-right">
+          <div className="text-2xl font-bold text-text-light-primary dark:text-text-dark-primary font-mono truncate">
+            {display}
+          </div>
+          {memory !== 0 && (
+            <div className="text-xs text-accent-blue mt-1">
+              M: {memory}
+            </div>
+          )}
+        </div>
+
+        {/* Buttons */}
+        <div className="grid grid-cols-4 gap-2">
+          {/* Row 1: Memory + Clear */}
+          <Button value="MC" onClick={handleMemoryClear} className="text-sm" />
+          <Button value="MR" onClick={handleMemoryRecall} className="text-sm" />
+          <Button value="M+" onClick={handleMemoryAdd} className="text-sm" />
+          <Button value="M-" onClick={handleMemorySubtract} className="text-sm" />
+
+          {/* Row 2: Numbers 7-9 + Divide */}
+          <Button value="7" onClick={() => handleNumber('7')} />
+          <Button value="8" onClick={() => handleNumber('8')} />
+          <Button value="9" onClick={() => handleNumber('9')} />
+          <Button value="÷" onClick={() => handleOperation('÷')} className="text-accent-blue font-bold" />
+
+          {/* Row 3: Numbers 4-6 + Multiply */}
+          <Button value="4" onClick={() => handleNumber('4')} />
+          <Button value="5" onClick={() => handleNumber('5')} />
+          <Button value="6" onClick={() => handleNumber('6')} />
+          <Button value="×" onClick={() => handleOperation('×')} className="text-accent-blue font-bold" />
+
+          {/* Row 4: Numbers 1-3 + Subtract */}
+          <Button value="1" onClick={() => handleNumber('1')} />
+          <Button value="2" onClick={() => handleNumber('2')} />
+          <Button value="3" onClick={() => handleNumber('3')} />
+          <Button value="-" onClick={() => handleOperation('-')} className="text-accent-blue font-bold" />
+
+          {/* Row 5: 0, Decimal, Clear, Add */}
+          <Button value="0" onClick={() => handleNumber('0')} />
+          <Button value="." onClick={handleDecimal} />
+          <Button value="C" onClick={handleClear} className="text-status-error" />
+          <Button value="+" onClick={() => handleOperation('+')} className="text-accent-blue font-bold" />
+
+          {/* Row 6: Backspace + Equals */}
+          <Button value="⌫" onClick={handleBackspace} className="text-sm" />
+          <Button value="=" onClick={handleEquals} colspan className="bg-accent-blue hover:bg-accent-blue-hover text-white font-bold" />
+        </div>
+      </div>
+    </BaseWidget>
+  );
+};

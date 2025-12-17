@@ -1,0 +1,80 @@
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
+
+export type TimeFormat = '12h' | '24h';
+export type TemperatureUnit = 'fahrenheit' | 'celsius';
+
+export interface SettingsState {
+  // Display preferences
+  timeFormat: TimeFormat;
+  temperatureUnit: TemperatureUnit;
+
+  // Actions
+  setTimeFormat: (format: TimeFormat) => void;
+  setTemperatureUnit: (unit: TemperatureUnit) => void;
+}
+
+/**
+ * Global Settings Store
+ *
+ * Persisted user preferences for:
+ * - Time format (12h/24h)
+ * - Temperature unit (F/C)
+ *
+ * Used by:
+ * - HeaderClock component
+ * - Weather widgets (WeatherMap, Weather, WeatherForecast)
+ * - TimeTracking page (if applicable)
+ */
+export const useSettingsStore = create<SettingsState>()(
+  persist(
+    (set) => ({
+      // Default: 12-hour time, Fahrenheit
+      timeFormat: '12h',
+      temperatureUnit: 'fahrenheit',
+
+      setTimeFormat: (format) => set({ timeFormat: format }),
+      setTemperatureUnit: (unit) => set({ temperatureUnit: unit }),
+    }),
+    {
+      name: 'settings-storage',
+    }
+  )
+);
+
+/**
+ * Helper functions for formatting
+ */
+
+/**
+ * Format temperature with unit
+ */
+export function formatTemperature(
+  tempF: number,
+  unit: TemperatureUnit,
+  showUnit = true
+): string {
+  if (unit === 'celsius') {
+    const tempC = Math.round((tempF - 32) * (5 / 9));
+    return showUnit ? `${tempC}°C` : `${tempC}°`;
+  }
+  return showUnit ? `${tempF}°F` : `${tempF}°`;
+}
+
+/**
+ * Format time with format preference
+ */
+export function formatTime(date: Date, format: TimeFormat): string {
+  if (format === '24h') {
+    return date.toLocaleTimeString('en-US', {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false,
+    });
+  }
+  return date.toLocaleTimeString('en-US', {
+    hour: 'numeric',
+    minute: '2-digit',
+    hour12: true,
+  });
+}

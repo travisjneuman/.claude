@@ -1,0 +1,183 @@
+# Privacy & Security Model
+
+**Last Updated:** November 16, 2025
+**Purpose:** Path to zero-data-host architecture
+**Audience:** Engineering, product, security-conscious users
+
+---
+
+## Analytics & Telemetry
+
+### What We Collect (Cloudflare Web Analytics)
+
+**Purpose:** Understand basic site usage to improve the product
+
+**Data Collected (Aggregate Only):**
+- Page views, unique visitors (estimated, not tracked individually)
+- Referrer URLs (where visitors came from)
+- Browser type, device category (desktop/mobile/tablet)
+- Country-level geographic data (not city, not IP address)
+- Page load performance metrics
+
+**Privacy Features:**
+- ✅ **No cookies** - No client-side state stored
+- ✅ **No fingerprinting** - No tracking of individual users
+- ✅ **No cross-site tracking** - Data doesn't follow users across web
+- ✅ **IP addresses anonymized** - By Cloudflare automatically
+- ✅ **GDPR/CCPA compliant** - Designed for privacy regulations
+
+**Transparency:**
+- Full disclosure at `/privacy` route
+- Link from Settings page
+- Users can block via browser extensions (uBlock Origin, Privacy Badger)
+- Enhanced Tracking Protection in Firefox blocks by default
+
+**Why Cloudflare?**
+- Privacy-focused by design (no cookies, no fingerprinting)
+- Minimal data collection (aggregate only)
+- Free tier sufficient for our needs
+- Alternative (self-hosted analytics) requires infrastructure costs
+
+**Trade-offs:**
+- We get basic usage insights (what pages, what features)
+- Users retain full privacy (no individual tracking)
+- Some users may still prefer zero analytics (can block it)
+
+---
+
+## Current State vs. Zero-Data-Host Goal
+
+### Current Reality:
+✅ **LocalStorage by default** - Data stays on device  
+✅ **No server-side code** - Static hosting only  
+⚠️ **Optional Firebase** - If enabled, data goes to Google Firestore  
+⚠️ **Optional Google Drive** - If enabled, backups go to Google  
+❌ **No encryption** - Data stored in plain text
+
+### Gap:
+Current is "local-first with optional cloud" **NOT** "zero-data-host"
+
+---
+
+## Path to True Zero-Data-Host
+
+### Tier 1: Default Local-Only ✅ MOSTLY ACHIEVED
+
+**Storage:** LocalStorage + IndexedDB, no external sync
+
+**Actions Needed:**
+1. Migrate LocalStorage → IndexedDB as primary (Q1 2026)
+2. Make Firebase opt-in only (don't auto-init)
+3. Add "Privacy Status" indicator: "🟢 All data local" or "🟡 Syncing"
+
+---
+
+### Tier 2: Self-Hosted Sync 🔜 FUTURE
+
+**Option A: P2P Sync (WebRTC)**
+- Device-to-device, no central server
+- **Pros:** True zero-data-host, no costs
+- **Cons:** Complex, both devices must be online
+- **Effort:** 150-250 hours
+
+**Option B: Self-Hosted Sync Server**
+- User runs own Docker container
+- **Pros:** Reliable, user owns infrastructure
+- **Cons:** Technical knowledge required
+- **Effort:** 200-300 hours
+
+**Option C: Encrypted Cloud (E2EE + User's Cloud)** ⭐ RECOMMENDED FIRST
+- User provides own S3/Drive/Dropbox
+- All data encrypted client-side
+- **Pros:** Works with existing providers
+- **Cons:** Still third-party cloud (but user owns account)
+- **Effort:** 80-120 hours
+
+**Recommendation:** Implement C first (Q3 2026), then B (2027)
+
+---
+
+### Tier 3: End-to-End Encryption 🔜 Q2-Q3 2026
+
+**Current:** No encryption - plain text if Firebase enabled
+
+**Implementation:**
+1. User sets encryption passphrase
+2. Encrypt with AES-256-GCM (WebCrypto API) before upload
+3. Decrypt client-side after download
+4. **No one can read except user** (not Google, not us)
+
+**Libraries:** WebCrypto API (built-in)
+
+**Key Management:**
+- PBKDF2 key derivation (100K iterations)
+- **Warning:** Lost passphrase = unrecoverable data (by design)
+
+**Priority:** HIGH - Must implement before claiming "most secure"
+
+**Effort:** 60-80 hours
+
+---
+
+## Security Threat Model
+
+### Threats Considered:
+
+1. **Malicious Cloud Provider** 🔴 HIGH (current)
+   - **Threat:** Google reads user's notes/tasks
+   - **Mitigation:** E2EE or local-only
+
+2. **Government/Legal Request**
+   - **Threat:** Law enforcement requests data
+   - **Mitigation:** "We don't have your data" or "Encrypted, can't decrypt"
+
+3. **Hacker/Data Breach**
+   - **Threat:** Attacker gains cloud access
+   - **Mitigation:** E2EE makes stolen data useless
+
+4. **XSS Attack** 🟡 MEDIUM
+   - **Threat:** Attacker injects JavaScript
+   - **Mitigation:** Strict CSP, React's XSS protection
+
+---
+
+## Data Handling
+
+| Data Type | Default Storage | Size | Encrypted? | Leaves Device? |
+|-----------|----------------|------|------------|----------------|
+| Tasks | LocalStorage | < 1MB | ❌ No | ❌ No (unless Firebase) |
+| Calendar | LocalStorage | < 1MB | ❌ No | ❌ No (unless Firebase) |
+| Time Entries | IndexedDB | < 10MB | ❌ No | ❌ No (unless Drive backup) |
+| Preferences | LocalStorage | < 100KB | ❌ No | ❌ No |
+| Notes (future) | IndexedDB | 1MB-10GB | ❌ No | ❌ No (unless sync) |
+
+---
+
+## What We Never Collect
+
+❌ PII (name, email, address, phone)  
+❌ Usage analytics (unless user opts in)  
+❌ IP addresses, browser fingerprints  
+❌ Content of notes/tasks
+
+---
+
+## Privacy Roadmap
+
+- **Q1 2026:** Migrate to IndexedDB, make Firebase truly optional
+- **Q2 2026:** Implement E2EE (client-side encryption)
+- **Q3 2026:** Encrypted cloud sync (user's own cloud + E2EE)
+- **2027:** Self-hosted sync server option
+
+---
+
+**Related Documents:**
+- [Marketing Claims](../strategy/marketing_claims_vs_reality.md) - What we can claim
+- [Compliance](compliance.md) - GDPR/CCPA analysis
+- [Business Model](../business/business_model.md) - Privacy-respecting monetization
+
+---
+
+**Document Status:** ✅ Active  
+**Last Updated:** November 13, 2025  
+**Next Review:** Q1 2026

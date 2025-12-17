@@ -1,0 +1,171 @@
+/**
+ * TaskBar Component
+ * Draggable/resizable task bar for Gantt timeline
+ */
+
+import { useState, useRef, useEffect } from 'react';
+import type { Task, TaskPriority } from '../../types';
+import { TASK_BAR_HEIGHT, type ZoomLevel, dateToX, xToDate, calculateBarWidth, isValidDateRange, snapToGrid } from './utils';
+
+interface TaskBarProps {
+  task: Task;
+  startDate: Date;
+  zoom: ZoomLevel;
+  rowY: number;
+  onUpdate: (taskId: string, updates: Partial<Task>) => void;
+  onClick: (task: Task) => void;
+}
+
+export function TaskBar({ task, startDate, zoom, rowY, onUpdate, onClick }: TaskBarProps) {
+  const barRef = useRef<HTMLDivElement>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [isResizing, setIsResizing] = useState(false);
+  const [dragStart, setDragStart] = useState({ x: 0, startDate: new Date(), dueDate: new Date() });
+
+  // Get task dates (use defaults if missing)
+  const taskStartDate = task.startDate ? new Date(task.startDate) : task.dueDate ? new Date(task.dueDate) : new Date();
+  const taskDueDate = task.dueDate ? new Date(task.dueDate) : task.startDate ? new Date(task.startDate) : new Date();
+
+  // Calculate bar position and width
+  const x = dateToX(taskStartDate, startDate, zoom);
+  const width = calculateBarWidth(taskStartDate, taskDueDate, zoom);
+  const y = rowY + (60 - TASK_BAR_HEIGHT) / 2; // Center in row
+
+  // Priority colors
+  const getPriorityColor = (priority: TaskPriority | undefined) => {
+    switch (priority) {
+      case 'high':
+        return 'bg-status-error text-white';
+      case 'medium':
+        return 'bg-accent-magenta dark:bg-accent-cyan text-white dark:text-dark-background';
+      case 'low':
+        return 'bg-status-info text-white';
+      default:
+        return 'bg-neutral-400 text-text-light-primary dark:text-text-dark-primary';
+    }
+  };
+
+  // Handle drag start
+  const handleDragStart = (e: React.MouseEvent) => {
+    if (isResizing) return;
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    setIsDragging(true);
+    setDragStart({
+      x: e.clientX,
+      startDate: taskStartDate,
+      dueDate: taskDueDate,
+    });
+  };
+
+  // Handle resize start
+  const handleResizeStart = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    setIsResizing(true);
+    setDragStart({
+      x: e.clientX,
+      startDate: taskStartDate,
+      dueDate: taskDueDate,
+    });
+  };
+
+  // Global mouse move handler
+  useEffect(() => {
+    if (!isDragging && !isResizing) return;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const deltaX = e.clientX - dragStart.x;
+
+      if (isDragging) {
+        // Calculate new dates based on drag offset
+        const newStartDate = xToDate(dateToX(dragStart.startDate, startDate, zoom) + deltaX, startDate, zoom);
+        const newDueDate = xToDate(dateToX(dragStart.dueDate, startDate, zoom) + deltaX, startDate, zoom);
+
+        // Snap to grid
+        const snappedStart = snapToGrid(newStartDate);
+        const snappedDue = snapToGrid(newDueDate);
+
+        // Update task dates
+        if (isValidDateRange(snappedStart, snappedDue)) {
+          onUpdate(task.id, {
+            startDate: snappedStart.toISOString(),
+            dueDate: snappedDue.toISOString(),
+          });
+        }
+      } else if (isResizing) {
+        // Calculate new due date based on resize
+        const newDueDate = xToDate(dateToX(dragStart.dueDate, startDate, zoom) + deltaX, startDate, zoom);
+        const snappedDue = snapToGrid(newDueDate);
+
+        // Ensure valid range
+        if (isValidDateRange(dragStart.startDate, snappedDue)) {
+          onUpdate(task.id, {
+            dueDate: snappedDue.toISOString(),
+          });
+        }
+      }
+    };
+
+    const handleMouseUp = () => {
+      setIsDragging(false);
+      setIsResizing(false);
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseup', handleMouseUp);
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, [isDragging, isResizing, dragStart, task.id, startDate, zoom, onUpdate]);
+
+  // Progress percentage (0-100)
+  const progress = task.progress || 0;
+
+  return (
+    <div
+      ref={barRef}
+      className={`absolute rounded-button border border-border-light dark:border-border-dark shadow-sm transition-shadow hover:shadow-md cursor-pointer ${getPriorityColor(task.priority)} ${
+        isDragging || isResizing ? 'opacity-70' : ''
+      }`}
+      style={{
+        left: x,
+        top: y,
+        width: Math.max(width, 40), // Minimum width
+        height: TASK_BAR_HEIGHT,
+      }}
+      onMouseDown={handleDragStart}
+      onClick={(e) => {
+        if (!isDragging && !isResizing) {
+          e.stopPropagation();
+          onClick(task);
+        }
+      }}
+    >
+      {/* Progress indicator */}
+      {progress > 0 && (
+        <div
+          className="absolute inset-0 bg-white/20 dark:bg-black/20 rounded-button"
+          style={{ width: `${progress}%` }}
+        />
+      )}
+
+      {/* Task title */}
+      <div className="absolute inset-0 flex items-center px-2 text-xs font-medium truncate">
+        {task.title}
+      </div>
+
+      {/* Resize handle (right edge) */}
+      <div
+        className="absolute top-0 right-0 bottom-0 w-2 cursor-ew-resize hover:bg-white/30 dark:hover:bg-black/30 transition-colors"
+        onMouseDown={handleResizeStart}
+        onClick={(e) => e.stopPropagation()}
+      />
+    </div>
+  );
+}

@@ -1,0 +1,13 @@
+2025-12-14T05:07:22.672Z [DEBUG] Getting matching hook commands for SessionEnd with query: clear
+2025-12-14T05:07:22.672Z [DEBUG] Found 0 hook matchers in settings
+2025-12-14T05:07:22.672Z [DEBUG] Matched 0 unique hooks for query "clear" (0 before deduplication)
+2025-12-14T05:07:22.672Z [DEBUG] Cleared all session hooks for session 3473248f-1767-4596-9df8-4df620cfaae2
+2025-12-14T05:07:22.674Z [DEBUG] Getting matching hook commands for SessionStart with query: clear
+2025-12-14T05:07:22.674Z [DEBUG] Found 0 hook matchers in settings
+2025-12-14T05:07:22.674Z [DEBUG] Matched 0 unique hooks for query "clear" (0 before deduplication)
+2025-12-14T05:07:22.686Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (5.3ms)
+2025-12-14T05:07:22.687Z [DEBUG] FileHistory: Added snapshot for 3ba94976-89fe-41d8-b0fe-2e4c05c8e6f3, tracking 0 files
+2025-12-14T05:07:22.950Z [DEBUG] AutoUpdaterWrapper: Installation type: unknown
+2025-12-14T05:07:24.888Z [DEBUG] Getting matching hook commands for SessionEnd with query: prompt_input_exit
+2025-12-14T05:07:24.888Z [DEBUG] Found 0 hook matchers in settings
+2025-12-14T05:07:24.888Z [DEBUG] Matched 0 unique hooks for query "prompt_input_exit" (0 before deduplication)

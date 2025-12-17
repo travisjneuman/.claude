@@ -1,0 +1,106 @@
+/**
+ * Tasks & Quick Add Widget
+ *
+ * Combined widget showing task summary and quick add form
+ * Side-by-side on desktop, stacked on mobile
+ */
+
+import React, { useState } from 'react';
+import { BaseWidget } from './BaseWidget';
+import { useKanbanStore } from '../../stores/useKanbanStore';
+import { useNavigate } from 'react-router-dom';
+
+export const TasksQuickAddWidget: React.FC = () => {
+  const { tasks, addTask } = useKanbanStore();
+  const navigate = useNavigate();
+  const [input, setInput] = useState('');
+
+  // Task statistics
+  const dueToday = tasks.filter((t) => {
+    if (!t.dueDate) return false;
+    const due = new Date(t.dueDate);
+    const today = new Date();
+    return due.toDateString() === today.toDateString();
+  });
+
+  const inProgress = tasks.filter((t) => t.status === 'inprogress');
+  const completed = tasks.filter((t) => t.status === 'done');
+
+  // Quick add handler
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (input.trim()) {
+      addTask({
+        title: input.trim(),
+        description: '',
+        status: 'todo',
+        priority: 'medium',
+        tags: [],
+        startDate: null,
+        dueDate: null,
+      });
+      setInput('');
+    }
+  };
+
+  return (
+    <BaseWidget title="Tasks" icon="✅">
+      <div className="flex flex-col lg:flex-row gap-6">
+        {/* Left: Current Tasks Summary (Desktop 50%, Mobile 100%) */}
+        <div className="flex-1">
+          <h3 className="text-sm font-semibold text-text-light-primary dark:text-text-dark-primary mb-3">
+            Current
+          </h3>
+          <div className="space-y-4">
+            <div className="grid grid-cols-3 gap-4">
+              <div>
+                <div className="text-3xl font-bold text-status-warning">{dueToday.length}</div>
+                <div className="text-sm text-text-light-secondary dark:text-text-dark-secondary">Due Today</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-accent-blue">{inProgress.length}</div>
+                <div className="text-sm text-text-light-secondary dark:text-text-dark-secondary">In Progress</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-status-success">{completed.length}</div>
+                <div className="text-sm text-text-light-secondary dark:text-text-dark-secondary">Completed</div>
+              </div>
+            </div>
+            <button
+              onClick={() => navigate('/tasks')}
+              className="w-full px-4 py-2 bg-accent-blue hover:bg-accent-blue-hover text-white rounded-button transition-all duration-standard ease-smooth text-sm"
+            >
+              View All Tasks →
+            </button>
+          </div>
+        </div>
+
+        {/* Right: Quick Add (Desktop 50%, Mobile 100%) */}
+        <div className="flex-1">
+          <h3 className="text-sm font-semibold text-text-light-primary dark:text-text-dark-primary mb-3 text-right">
+            Quick Add
+          </h3>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <input
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder="Add a task..."
+              className="w-full px-4 py-2 border rounded-button transition-all duration-standard ease-smooth
+                         bg-white dark:bg-surface-dark
+                         text-text-light-primary dark:text-text-dark-primary
+                         border-border-light dark:border-border-dark
+                         focus:outline-none focus:ring-2 focus:ring-accent-blue"
+            />
+            <button
+              type="submit"
+              className="w-full px-4 py-2 bg-accent-blue hover:bg-accent-blue-hover text-white rounded-button transition-all duration-standard ease-smooth"
+            >
+              Add Task
+            </button>
+          </form>
+        </div>
+      </div>
+    </BaseWidget>
+  );
+};

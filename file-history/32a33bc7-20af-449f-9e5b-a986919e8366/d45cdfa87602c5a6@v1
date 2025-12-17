@@ -1,0 +1,131 @@
+# tests/CLAUDE.md — Testing Guidelines
+
+## Scope
+Test infrastructure for Neuman Brain. Unit/integration tests use Vitest + Testing Library. E2E tests use Playwright.
+
+## Test Locations
+| Type | Location | Runner |
+|------|----------|--------|
+| Unit/Integration | `src/**/__tests__/*.test.ts` | Vitest |
+| Store tests | `src/stores/__tests__/` | Vitest |
+| Component tests | `src/components/__tests__/` | Vitest + Testing Library |
+| E2E tests | `tests/e2e/*.spec.ts` | Playwright |
+| Test fixtures | `tests/fixtures/` | Shared test utilities |
+
+## Commands
+```bash
+# Vitest (unit/integration)
+npm run test              # Run all tests
+npm run test:ui           # Interactive UI mode
+npm run test:coverage     # With coverage report
+
+# Playwright (E2E)
+npx playwright test                    # Run all E2E tests
+npx playwright test --ui               # Interactive UI mode
+npx playwright test --project=chromium # Specific browser
+npx playwright show-report             # View HTML report
+```
+
+## Non-negotiables
+- **Test with changes:** New features/fixes should include tests. Justify skipping.
+- **Determinism:** Mock network (`msw`), timers (`vi.useFakeTimers()`), dates. No external dependencies.
+- **Isolation:** Each test resets state. Use `beforeEach`/`afterEach` for cleanup.
+- **No skipped tests:** Don't commit `it.skip`. Fix or remove.
+- **Semantic assertions:** Prefer behavior checks over snapshots.
+
+## Unit Test Pattern
+```ts
+import { describe, it, expect, vi, beforeEach } from 'vitest';
+
+describe('featureName', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it('does expected behavior', () => {
+    const result = functionUnderTest(input);
+    expect(result).toBe(expectedOutput);
+  });
+});
+```
+
+## Component Test Pattern
+```tsx
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { MyComponent } from '@/components/MyComponent';
+
+describe('MyComponent', () => {
+  it('renders and handles interaction', async () => {
+    const user = userEvent.setup();
+    render(<MyComponent />);
+
+    await user.click(screen.getByRole('button', { name: /submit/i }));
+    expect(screen.getByText('Success')).toBeInTheDocument();
+  });
+});
+```
+
+## E2E Test Pattern (Playwright)
+```ts
+import { test, expect } from '@playwright/test';
+
+test.describe('critical flow', () => {
+  test('user can complete action', async ({ page }) => {
+    await page.goto('/');
+    await page.getByRole('button', { name: /action/i }).click();
+    await expect(page.getByText('Result')).toBeVisible();
+  });
+});
+```
+
+## E2E Test Files
+| File | Coverage |
+|------|----------|
+| `app.spec.ts` | App basics, navigation, theme, accessibility |
+
+## Critical Flows for E2E
+Prioritize these for E2E coverage:
+- Backup/restore round-trip
+- Task CRUD operations
+- Event creation + recurrence
+- Automation rule execution
+- Schema migrations
+
+## Debugging Test Failures
+
+**For test debugging** (failures, flakiness, unexpected behavior):
+- Use **`/debug`** for clear test failures with reproducible steps
+- Use **`debug-like-expert` skill** for intermittent/flaky tests
+- Example: "Test fails only in CI, passes locally"
+
+**For understanding recurring test failures**:
+- Use **`/consider:5-whys`** to drill to root cause
+- Example: "Why do E2E tests keep failing on navigation?"
+
+**For test coverage optimization** (prioritizing what to test):
+- Use **`/consider:pareto`** to identify 20% of tests covering 80% of value
+- Focus on critical paths, high-risk areas
+
+See [Tache Integration Guide § Testing Workflows](../../docs/technical/tache-integration-guide.md#workflow-testing) for complete debugging patterns.
+
+---
+
+## Anti-patterns
+- Real API calls (use mocks/msw).
+- `waitForTimeout` sleeps (wait for elements).
+- Full DOM snapshots (brittle).
+- Testing framework internals.
+- Debugging flaky tests manually (use **`debug-like-expert`** for systematic approach).
+
+## Setup Files
+| File | Purpose |
+|------|---------|
+| `playwright.config.ts` | Playwright configuration |
+| `config/vitest.config.ts` | Vitest configuration |
+| `tests/fixtures/test-utils.ts` | Shared E2E helpers |
+| `src/vitest-env.d.ts` | Vitest type definitions |
+
+## Related
+- Services (primary test targets): `src/services/CLAUDE.md`
+- Stores (primary test targets): `src/stores/CLAUDE.md`

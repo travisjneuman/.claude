@@ -1,0 +1,309 @@
+/**
+ * FolderPickerModal Component
+ *
+ * Modal for selecting a destination folder.
+ * Used by "Move to..." action in context menus.
+ *
+ * Features:
+ * - Search/filter folders
+ * - Hierarchical folder display
+ * - Root level option
+ * - Disabled invalid targets (for folders: self, descendants)
+ * - Current location indicator
+ */
+
+import React, { useState, useMemo } from 'react';
+import { X, Search, FolderOpen, Folder, ChevronRight, ChevronDown, Home } from 'lucide-react';
+import { useFoldersStore } from '../../stores/useFoldersStore';
+import type { FolderNode } from './FolderTreeNode';
+
+export interface FolderPickerModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  onSelect: (folderId: string | null) => void;
+  title?: string;
+  /** Current folder ID (for highlighting) */
+  currentFolderId?: string | null;
+  /** Folder ID to exclude (and its descendants) - used when moving a folder */
+  excludeFolderId?: string;
+  /** Type of item being moved */
+  itemType?: 'folder' | 'note';
+}
+
+export const FolderPickerModal: React.FC<FolderPickerModalProps> = ({
+  isOpen,
+  onClose,
+  onSelect,
+  title = 'Move to Folder',
+  currentFolderId,
+  excludeFolderId,
+  itemType = 'note',
+}) => {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set());
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+
+  const getTree = useFoldersStore((state) => state.getTree);
+  const isDescendantOf = useFoldersStore((state) => state.isDescendantOf);
+  const folderTree = useMemo(() => getTree(), [getTree]);
+
+  // Get all folders as flat list for search
+  const allFolders = useMemo(() => {
+    const folders: { id: string; name: string; depth: number }[] = [];
+    const collect = (nodes: FolderNode[], depth: number) => {
+      for (const node of nodes) {
+        folders.push({ id: node.id, name: node.name, depth });
+        if (node.children) {
+          collect(node.children, depth + 1);
+        }
+      }
+    };
+    collect(folderTree, 0);
+    return folders;
+  }, [folderTree]);
+
+  // Filter folders by search
+  const filteredFolders = useMemo(() => {
+    if (!searchQuery.trim()) return null; // Use tree view when not searching
+    const query = searchQuery.toLowerCase();
+    return allFolders.filter((f) => f.name.toLowerCase().includes(query));
+  }, [allFolders, searchQuery]);
+
+  // Check if a folder should be disabled
+  const isDisabled = (folderId: string): boolean => {
+    if (!excludeFolderId) return false;
+    // Disable the folder being moved and all its descendants
+    return folderId === excludeFolderId || isDescendantOf(folderId, excludeFolderId);
+  };
+
+  // Toggle folder expansion
+  const toggleExpand = (folderId: string) => {
+    setExpandedIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(folderId)) {
+        next.delete(folderId);
+      } else {
+        next.add(folderId);
+      }
+      return next;
+    });
+  };
+
+  // Handle selection
+  const handleSelect = (folderId: string | null) => {
+    if (folderId && isDisabled(folderId)) return;
+    setSelectedId(folderId);
+  };
+
+  // Confirm selection
+  const handleConfirm = () => {
+    onSelect(selectedId);
+    onClose();
+  };
+
+  // Render a folder item in tree view
+  const renderFolderItem = (node: FolderNode, depth: number) => {
+    const hasChildren = node.children && node.children.length > 0;
+    const isExpanded = expandedIds.has(node.id);
+    const disabled = isDisabled(node.id);
+    const isSelected = selectedId === node.id;
+    const isCurrent = currentFolderId === node.id;
+
+    return (
+      <div key={node.id}>
+        <div
+          className={`flex items-center gap-2 px-3 py-2 rounded-lg cursor-pointer transition-colors ${
+            disabled
+              ? 'opacity-40 cursor-not-allowed'
+              : isSelected
+              ? 'bg-accent-cyan/20 dark:bg-accent-magenta/20 text-accent-cyan dark:text-accent-magenta'
+              : isCurrent
+              ? 'bg-surface-light-elevated dark:bg-surface-dark-elevated text-text-light-primary dark:text-text-dark-primary'
+              : 'hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated text-text-light-primary dark:text-text-dark-primary'
+          }`}
+          style={{ paddingLeft: `${depth * 16 + 12}px` }}
+          onClick={() => !disabled && handleSelect(node.id)}
+          role="option"
+          aria-selected={isSelected}
+          aria-disabled={disabled}
+        >
+          {hasChildren ? (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                toggleExpand(node.id);
+              }}
+              className="p-0.5 hover:bg-surface-light dark:hover:bg-surface-dark rounded"
+            >
+              {isExpanded ? (
+                <ChevronDown className="w-4 h-4" />
+              ) : (
+                <ChevronRight className="w-4 h-4" />
+              )}
+            </button>
+          ) : (
+            <span className="w-5" />
+          )}
+          {hasChildren && isExpanded ? (
+            <FolderOpen className="w-4 h-4 shrink-0" />
+          ) : (
+            <Folder className="w-4 h-4 shrink-0" />
+          )}
+          <span className="text-sm font-medium truncate">{node.name}</span>
+          {isCurrent && (
+            <span className="text-xs text-text-light-tertiary dark:text-text-dark-tertiary ml-auto">
+              (current)
+            </span>
+          )}
+        </div>
+
+        {/* Children */}
+        {hasChildren && isExpanded && (
+          <div>
+            {node.children!.map((child) => renderFolderItem(child, depth + 1))}
+          </div>
+        )}
+      </div>
+    );
+  };
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+      <div
+        className="bg-surface-light dark:bg-surface-dark rounded-xl shadow-xl border border-border-light dark:border-border-dark w-full max-w-md max-h-[80vh] flex flex-col"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="folder-picker-title"
+      >
+        {/* Header */}
+        <div className="flex items-center justify-between px-5 py-4 border-b border-border-light dark:border-border-dark shrink-0">
+          <h2
+            id="folder-picker-title"
+            className="text-lg font-semibold text-text-light-primary dark:text-text-dark-primary"
+          >
+            {title}
+          </h2>
+          <button
+            onClick={onClose}
+            className="p-1.5 hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated rounded-lg transition-colors"
+            aria-label="Close"
+          >
+            <X className="w-5 h-5 text-text-light-secondary dark:text-text-dark-secondary" />
+          </button>
+        </div>
+
+        {/* Search */}
+        <div className="px-5 py-3 border-b border-border-light dark:border-border-dark shrink-0">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-text-light-tertiary dark:text-text-dark-tertiary" />
+            <input
+              type="text"
+              placeholder="Search folders..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full pl-10 pr-4 py-2 text-sm border border-border-light dark:border-border-dark rounded-lg bg-surface-light dark:bg-surface-dark text-text-light-primary dark:text-text-dark-primary placeholder-text-light-tertiary dark:placeholder-text-dark-tertiary focus:outline-none focus:ring-2 focus:ring-accent-cyan transition-all"
+              autoFocus
+            />
+          </div>
+        </div>
+
+        {/* Folder List */}
+        <div className="flex-1 overflow-y-auto px-3 py-3 min-h-0" role="listbox">
+          {/* Root Option (No Folder) */}
+          {itemType === 'note' && (
+            <div
+              className={`flex items-center gap-2 px-3 py-2 rounded-lg cursor-pointer transition-colors mb-1 ${
+                selectedId === null
+                  ? 'bg-accent-cyan/20 dark:bg-accent-magenta/20 text-accent-cyan dark:text-accent-magenta'
+                  : currentFolderId === null
+                  ? 'bg-surface-light-elevated dark:bg-surface-dark-elevated text-text-light-primary dark:text-text-dark-primary'
+                  : 'hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated text-text-light-primary dark:text-text-dark-primary'
+              }`}
+              onClick={() => handleSelect(null)}
+              role="option"
+              aria-selected={selectedId === null}
+            >
+              <Home className="w-4 h-4 shrink-0" />
+              <span className="text-sm font-medium">Root (No Folder)</span>
+              {currentFolderId === null && (
+                <span className="text-xs text-text-light-tertiary dark:text-text-dark-tertiary ml-auto">
+                  (current)
+                </span>
+              )}
+            </div>
+          )}
+
+          {/* Search Results or Tree View */}
+          {filteredFolders ? (
+            // Search results (flat list)
+            filteredFolders.length > 0 ? (
+              filteredFolders.map((folder) => {
+                const disabled = isDisabled(folder.id);
+                const isSelected = selectedId === folder.id;
+                const isCurrent = currentFolderId === folder.id;
+
+                return (
+                  <div
+                    key={folder.id}
+                    className={`flex items-center gap-2 px-3 py-2 rounded-lg cursor-pointer transition-colors ${
+                      disabled
+                        ? 'opacity-40 cursor-not-allowed'
+                        : isSelected
+                        ? 'bg-accent-cyan/20 dark:bg-accent-magenta/20 text-accent-cyan dark:text-accent-magenta'
+                        : isCurrent
+                        ? 'bg-surface-light-elevated dark:bg-surface-dark-elevated'
+                        : 'hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated'
+                    } text-text-light-primary dark:text-text-dark-primary`}
+                    onClick={() => !disabled && handleSelect(folder.id)}
+                    role="option"
+                    aria-selected={isSelected}
+                    aria-disabled={disabled}
+                  >
+                    <Folder className="w-4 h-4 shrink-0" />
+                    <span className="text-sm font-medium truncate">{folder.name}</span>
+                    {isCurrent && (
+                      <span className="text-xs text-text-light-tertiary dark:text-text-dark-tertiary ml-auto">
+                        (current)
+                      </span>
+                    )}
+                  </div>
+                );
+              })
+            ) : (
+              <div className="text-center py-8 text-text-light-secondary dark:text-text-dark-secondary text-sm">
+                No folders found for "{searchQuery}"
+              </div>
+            )
+          ) : (
+            // Tree view
+            folderTree.length > 0 ? (
+              folderTree.map((node) => renderFolderItem(node, 0))
+            ) : (
+              <div className="text-center py-8 text-text-light-secondary dark:text-text-dark-secondary text-sm">
+                No folders yet
+              </div>
+            )
+          )}
+        </div>
+
+        {/* Footer */}
+        <div className="flex items-center justify-end gap-3 px-5 py-4 border-t border-border-light dark:border-border-dark shrink-0">
+          <button
+            onClick={onClose}
+            className="px-4 py-2 text-sm font-medium rounded-lg border border-border-light dark:border-border-dark text-text-light-secondary dark:text-text-dark-secondary hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated transition-colors"
+          >
+            Cancel
+          </button>
+          <button
+            onClick={handleConfirm}
+            className="px-4 py-2 text-sm font-medium rounded-lg bg-accent-cyan text-white hover:bg-accent-cyan-hover transition-colors"
+          >
+            Move Here
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};

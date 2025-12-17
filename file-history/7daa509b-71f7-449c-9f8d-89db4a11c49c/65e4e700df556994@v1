@@ -1,0 +1,353 @@
+---
+type: concept
+category: backend
+adoption: standard
+aliases: [asyncio, async/await]
+related:
+  - "[[Python]]"
+  - "[[FastAPI]]"
+  - "[[vLLM]]"
+projects:
+  - "[[Projects/Agent Development Kit]]"
+created: 2025-12-14
+updated: 2025-12-14
+---
+
+# AsyncIO
+
+> Python's built-in library for writing concurrent code using async/await syntax. Essential for I/O-bound applications like web servers, API clients, and distributed systems.
+
+---
+
+## Overview
+
+AsyncIO enables efficient concurrency in Python:
+- **Single-threaded concurrency** — No GIL issues for I/O operations
+- **Non-blocking I/O** — Wait efficiently for network, disk, etc.
+- **Coroutines** — Functions that can pause and resume
+- **Event loop** — Manages execution of concurrent tasks
+
+### Why AsyncIO?
+
+| Scenario | Sync | Async |
+|----------|------|-------|
+| 100 API calls | ~10s (sequential) | ~0.5s (concurrent) |
+| 1000 connections | Memory explosion | Handles easily |
+| DB + cache + API | Blocked waiting | Parallel I/O |
+
+---
+
+## Usage in Our Stack
+
+### Agent Development Kit (ADK)
+
+AsyncIO powers ADK's distributed agent execution:
+
+```python
+# adk/worker.py
+import asyncio
+from adk.agent import Agent
+from adk.queue import TaskQueue
+
+class Worker:
+    def __init__(self, worker_id: str, queue: TaskQueue):
+        self.worker_id = worker_id
+        self.queue = queue
+        self.agents: dict[str, Agent] = {}
+
+    async def process_task(self, task: Task):
+        """Execute a single task with the appropriate agent."""
+        agent = self.agents.get(task.agent_id)
+        if not agent:
+            agent = await Agent.load(task.agent_id)
+            self.agents[task.agent_id] = agent
+
+        result = await agent.execute(task.input)
+        await self.queue.complete(task.id, result)
+
+    async def run(self):
+        """Main worker loop - process tasks concurrently."""
+        while True:
+            tasks = await self.queue.get_batch(max_tasks=10)
+            if tasks:
+                await asyncio.gather(*[
+                    self.process_task(task) for task in tasks
+                ])
+            else:
+                await asyncio.sleep(0.1)
+```
+
+**Key patterns:**
+- Concurrent task processing with `asyncio.gather`
+- Non-blocking queue operations
+- Graceful shutdown handling
+- Connection pooling for databases
+
+---
+
+## Key Concepts
+
+### Coroutines
+
+```python
+async def fetch_data(url: str) -> dict:
+    """A coroutine function."""
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url) as response:
+            return await response.json()
+
+# Call it
+result = await fetch_data("https://api.example.com")
+```
+
+### Tasks
+
+```python
+# Create a task
+task = asyncio.create_task(fetch_data(url))
+
+# Wait for completion
+result = await task
+
+# Get result later
+if task.done():
+    result = task.result()
+```
+
+### Event Loop
+
+```python
+# Modern Python (3.10+)
+asyncio.run(main())
+
+# Or explicit loop management
+async def main():
+    # Your async code
+    pass
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+
+---
+
+## Common Patterns
+
+### Concurrent Execution
+
+```python
+# Run multiple coroutines concurrently
+results = await asyncio.gather(
+    fetch_user(user_id),
+    fetch_orders(user_id),
+    fetch_preferences(user_id)
+)
+user, orders, prefs = results
+
+# With exception handling
+results = await asyncio.gather(
+    *tasks,
+    return_exceptions=True  # Don't fail if one task fails
+)
+```
+
+### Timeouts
+
+```python
+try:
+    result = await asyncio.wait_for(
+        slow_operation(),
+        timeout=5.0
+    )
+except asyncio.TimeoutError:
+    print("Operation timed out")
+```
+
+### Semaphores (Rate Limiting)
+
+```python
+semaphore = asyncio.Semaphore(10)  # Max 10 concurrent
+
+async def limited_fetch(url: str):
+    async with semaphore:
+        return await fetch(url)
+
+# Process 1000 URLs, 10 at a time
+results = await asyncio.gather(*[
+    limited_fetch(url) for url in urls
+])
+```
+
+### Producer-Consumer
+
+```python
+queue = asyncio.Queue(maxsize=100)
+
+async def producer():
+    while True:
+        item = await generate_item()
+        await queue.put(item)
+
+async def consumer():
+    while True:
+        item = await queue.get()
+        await process(item)
+        queue.task_done()
+
+# Run both
+await asyncio.gather(
+    producer(),
+    *[consumer() for _ in range(5)]  # 5 consumers
+)
+```
+
+---
+
+## Async Context Managers
+
+```python
+class AsyncDatabasePool:
+    async def __aenter__(self):
+        self.pool = await create_pool()
+        return self.pool
+
+    async def __aexit__(self, exc_type, exc_val, exc_tb):
+        await self.pool.close()
+
+async def main():
+    async with AsyncDatabasePool() as pool:
+        await pool.execute(...)
+```
+
+---
+
+## Async Iteration
+
+```python
+# Async generator
+async def fetch_pages(url: str):
+    page = 1
+    while True:
+        data = await fetch(f"{url}?page={page}")
+        if not data:
+            break
+        yield data
+        page += 1
+
+# Async for
+async for page in fetch_pages(url):
+    process(page)
+
+# Async list comprehension
+results = [item async for item in async_iterator]
+```
+
+---
+
+## Best Practices
+
+### Don't Block the Event Loop
+
+```python
+# BAD: Blocks event loop
+def sync_io():
+    time.sleep(1)  # Blocks everything!
+    return requests.get(url)  # Also blocks!
+
+# GOOD: Use async versions
+async def async_io():
+    await asyncio.sleep(1)
+    async with aiohttp.ClientSession() as session:
+        return await session.get(url)
+
+# For unavoidable sync code, use executor
+result = await asyncio.get_event_loop().run_in_executor(
+    None,  # Default executor
+    sync_function,
+    arg1, arg2
+)
+```
+
+### Error Handling
+
+```python
+async def safe_operation():
+    try:
+        return await risky_operation()
+    except SpecificError as e:
+        logger.error(f"Operation failed: {e}")
+        return None
+
+# For gather, handle per-task
+results = await asyncio.gather(*tasks, return_exceptions=True)
+for result in results:
+    if isinstance(result, Exception):
+        handle_error(result)
+```
+
+### Graceful Shutdown
+
+```python
+async def main():
+    tasks = []
+    try:
+        # Start background tasks
+        tasks.append(asyncio.create_task(worker()))
+        tasks.append(asyncio.create_task(monitor()))
+
+        # Wait for shutdown signal
+        await shutdown_event.wait()
+    finally:
+        # Cancel all tasks
+        for task in tasks:
+            task.cancel()
+        await asyncio.gather(*tasks, return_exceptions=True)
+```
+
+---
+
+## Debugging
+
+### Debug Mode
+
+```python
+# Enable debug mode
+asyncio.run(main(), debug=True)
+
+# Or environment variable
+# PYTHONASYNCIODEBUG=1
+```
+
+### Common Issues
+
+| Issue | Cause | Solution |
+|-------|-------|----------|
+| "Event loop is closed" | Running after shutdown | Check loop lifecycle |
+| Blocking | Sync I/O in async code | Use async libraries or executor |
+| Task never completes | Missing await | Check all coroutine calls |
+| Memory leak | Tasks not awaited | Store and await all tasks |
+
+---
+
+## Libraries
+
+| Library | Purpose |
+|---------|---------|
+| **aiohttp** | HTTP client/server |
+| **asyncpg** | PostgreSQL |
+| **aioredis** | Redis |
+| **aioboto3** | AWS services |
+| **aiofiles** | File I/O |
+| **motor** | MongoDB |
+
+---
+
+## Resources
+
+- [Python AsyncIO Documentation](https://docs.python.org/3/library/asyncio.html)
+- [Real Python: Async IO](https://realpython.com/async-io-python/)
+- [asyncio Cheatsheet](https://www.pythonsheets.com/notes/python-asyncio.html)
+
+---
+
+*Last updated: 2025-12-14*

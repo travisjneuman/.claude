@@ -1,0 +1,326 @@
+#!/usr/bin/env python3
+"""
+Render Handwriting from Notability Files
+Extracts curve/stroke data from Session.plist and renders to PNG.
+Based on: https://jvns.ca/blog/2018/03/31/reverse-engineering-notability-format/
+"""
+
+import os
+import zipfile
+import plistlib
+import struct
+import base64
+from pathlib import Path
+from PIL import Image, ImageDraw
+import json
+
+# Configuration
+BASE_PATH = Path(r"D:\Proton Drive\My files\Documents\Personal\Notebooks")
+OUTPUT_DIR = BASE_PATH / "_converted" / "handwriting_rendered"
+LOG_FILE = BASE_PATH / "_scripts" / "output" / "handwriting_render_log.json"
+
+def parse_float_array(data: bytes) -> list:
+    """Parse binary data as array of 32-bit floats."""
+    num_floats = len(data) // 4
+    return list(struct.unpack(f'<{num_floats}f', data[:num_floats * 4]))
+
+def parse_int_array(data: bytes) -> list:
+    """Parse binary data as array of 32-bit integers."""
+    num_ints = len(data) // 4
+    return list(struct.unpack(f'<{num_ints}i', data[:num_ints * 4]))
+
+def parse_color_array(data: bytes) -> list:
+    """Parse binary data as array of RGBA colors (4 bytes each)."""
+    colors = []
+    for i in range(0, len(data), 4):
+        if i + 4 <= len(data):
+            r, g, b, a = struct.unpack('BBBB', data[i:i+4])
+            colors.append((r, g, b, a))
+    return colors
+
+def find_curve_data_old_format(plist: dict) -> dict:
+    """Extract curve data from older Notability format (direct keys)."""
+    result = {}
+
+    for key in ['curvespoints', 'curvesnumpoints', 'curveswidth', 'curvescolors', 'curvesfractionalwidths']:
+        if key in plist:
+            data = plist[key]
+            if isinstance(data, bytes):
+                result[key] = data
+            elif isinstance(data, str):
+                result[key] = base64.b64decode(data)
+
+    return result
+
+def find_curve_data_new_format(plist: dict) -> dict:
+    """Extract curve data from newer NSKeyedArchiver/GLKeyedArchiver format."""
+    result = {}
+
+    if '$objects' not in plist:
+        return result
+
+    objects = plist['$objects']
+
+    # Find the curve object with actual data (largest curvespoints)
+    best_curve = None
+    best_size = 0
+
+    for i, obj in enumerate(objects):
+        if isinstance(obj, dict) and 'curvespoints' in obj:
+            points = obj.get('curvespoints', b'')
+            if isinstance(points, bytes) and len(points) > best_size:
+                best_size = len(points)
+                best_curve = obj
+
+    if best_curve and best_size > 0:
+        result['curvespoints'] = best_curve.get('curvespoints', b'')
+        result['curvescolors'] = best_curve.get('curvescolors', b'')
+        result['curvesnumpoints'] = best_curve.get('curvesnumpoints', b'')
+        result['curveswidth'] = best_curve.get('curveswidth', b'')
+        result['curvesfractionalwidths'] = best_curve.get('curvesfractionalwidths', b'')
+
+    return result
+
+def extract_handwriting_data(note_path: Path) -> dict:
+    """Extract handwriting/curve data from a .note file."""
+    result = {
+        'success': False,
+        'format': None,
+        'curves': None,
+        'canvas_size': (1118, 1484),  # Default Notability canvas
+    }
+
+    try:
+        with zipfile.ZipFile(note_path, 'r') as z:
+            # Find Session.plist
+            session_path = None
+            for name in z.namelist():
+                if 'Session.plist' in name:
+                    session_path = name
+                    break
+
+            if not session_path:
+                result['error'] = 'No Session.plist found'
+                return result
+
+            data = z.read(session_path)
+            plist = plistlib.loads(data)
+
+            # Check format
+            if '$archiver' in plist:
+                result['format'] = plist['$archiver']
+                curves = find_curve_data_new_format(plist)
+            else:
+                result['format'] = 'legacy'
+                curves = find_curve_data_old_format(plist)
+
+            result['curves'] = curves
+            result['success'] = bool(curves)
+
+    except Exception as e:
+        result['error'] = str(e)
+
+    return result
+
+def render_strokes(curves: dict, canvas_size: tuple = None) -> Image.Image:
+    """Render strokes to an image."""
+    if 'curvespoints' not in curves or len(curves['curvespoints']) == 0:
+        return Image.new('RGB', (1118, 1484), (255, 255, 255))
+
+    # Parse data
+    points = parse_float_array(curves['curvespoints'])
+
+    if len(points) < 2:
+        return Image.new('RGB', (1118, 1484), (255, 255, 255))
+
+    # Calculate bounding box from points
+    x_coords = points[0::2]
+    y_coords = points[1::2]
+
+    min_x, max_x = min(x_coords), max(x_coords)
+    min_y, max_y = min(y_coords), max(y_coords)
+
+    # Add padding
+    padding = 50
+    width = int(max_x - min_x + 2 * padding)
+    height = int(max_y - min_y + 2 * padding)
+
+    # Limit size for very large notes
+    max_dim = 4000
+    scale = 1.0
+    if width > max_dim or height > max_dim:
+        scale = max_dim / max(width, height)
+        width = int(width * scale)
+        height = int(height * scale)
+
+    # Ensure minimum size
+    width = max(width, 100)
+    height = max(height, 100)
+
+    # Create white canvas
+    img = Image.new('RGB', (width, height), (255, 255, 255))
+    draw = ImageDraw.Draw(img)
+
+    if 'curvesnumpoints' in curves and len(curves['curvesnumpoints']) > 0:
+        num_points = parse_int_array(curves['curvesnumpoints'])
+    else:
+        num_points = [len(points) // 2]
+
+    if 'curvescolors' in curves and len(curves['curvescolors']) > 0:
+        colors = parse_color_array(curves['curvescolors'])
+    else:
+        colors = [(0, 0, 0, 255)] * len(num_points)
+
+    if 'curveswidth' in curves and len(curves['curveswidth']) > 0:
+        widths = parse_float_array(curves['curveswidth'])
+    else:
+        widths = [2.0] * len(num_points)
+
+    # Draw strokes
+    point_idx = 0
+    for stroke_idx, num_pts in enumerate(num_points):
+        if stroke_idx >= len(colors):
+            color = (0, 0, 0, 255)
+        else:
+            color = colors[stroke_idx]
+
+        if stroke_idx >= len(widths):
+            width = 2
+        else:
+            width = max(1, int(widths[stroke_idx] * scale))
+
+        # Get points for this stroke
+        stroke_points = []
+        for _ in range(num_pts):
+            if point_idx * 2 + 1 < len(points):
+                x = (points[point_idx * 2] - min_x + padding) * scale
+                y = (points[point_idx * 2 + 1] - min_y + padding) * scale
+                stroke_points.append((x, y))
+            point_idx += 1
+
+        # Draw the stroke
+        if len(stroke_points) >= 2:
+            rgb = (color[0], color[1], color[2])
+            try:
+                draw.line(stroke_points, fill=rgb, width=width)
+            except:
+                # Fallback for very long strokes
+                for i in range(len(stroke_points) - 1):
+                    draw.line([stroke_points[i], stroke_points[i+1]], fill=rgb, width=width)
+
+    return img
+
+def process_note_file(note_path: Path, output_dir: Path) -> dict:
+    """Process a single .note file and render handwriting."""
+    result = {
+        'source': str(note_path),
+        'success': False,
+    }
+
+    data = extract_handwriting_data(note_path)
+
+    if not data['success']:
+        result['error'] = data.get('error', 'No curve data found')
+        result['format'] = data.get('format')
+        return result
+
+    if data['curves'] and ('curvespoints' in data['curves'] or data['curves'].get('strokes')):
+        try:
+            img = render_strokes(data['curves'], data['canvas_size'])
+
+            # Save output
+            safe_name = note_path.stem.replace('/', '_').replace('\\', '_')
+            output_path = output_dir / f"{safe_name}.png"
+
+            counter = 1
+            while output_path.exists():
+                output_path = output_dir / f"{safe_name}_{counter}.png"
+                counter += 1
+
+            img.save(output_path)
+
+            result['success'] = True
+            result['output'] = str(output_path)
+            result['format'] = data['format']
+        except Exception as e:
+            result['error'] = str(e)
+    else:
+        result['error'] = 'No renderable curve data'
+        result['format'] = data.get('format')
+
+    return result
+
+def find_note_files() -> list:
+    """Find all .note files."""
+    files = []
+    for root, dirs, filenames in os.walk(BASE_PATH):
+        if '_converted' in root or '_scripts' in root or '_organized' in root:
+            continue
+        for f in filenames:
+            if f.endswith('.note'):
+                files.append(Path(root) / f)
+    return files
+
+def main():
+    print("=" * 60)
+    print("Render Handwriting from Notability Files")
+    print("=" * 60)
+
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+
+    # Get all note files
+    files = find_note_files()
+    print(f"\nFound {len(files)} .note files")
+
+    log = {
+        'processed': [],
+        'with_handwriting': [],
+        'no_handwriting': [],
+        'errors': [],
+        'stats': {
+            'total': len(files),
+            'rendered': 0,
+            'no_data': 0,
+            'errors': 0,
+        }
+    }
+
+    for i, note_path in enumerate(files):
+        if i % 100 == 0:
+            print(f"\r  Processing {i+1}/{len(files)}...", end='', flush=True)
+
+        result = process_note_file(note_path, OUTPUT_DIR)
+
+        if result['success']:
+            log['stats']['rendered'] += 1
+            log['with_handwriting'].append({
+                'source': str(note_path),
+                'output': result.get('output'),
+            })
+        elif 'error' in result and 'No renderable' in result['error']:
+            log['stats']['no_data'] += 1
+            log['no_handwriting'].append(str(note_path))
+        else:
+            log['stats']['errors'] += 1
+            log['errors'].append({
+                'source': str(note_path),
+                'error': result.get('error'),
+            })
+
+    # Save log
+    print(f"\n\nWriting log to: {LOG_FILE}")
+    with open(LOG_FILE, 'w', encoding='utf-8') as f:
+        json.dump(log, f, indent=2, default=str)
+
+    print("\n" + "=" * 60)
+    print("HANDWRITING RENDER RESULTS")
+    print("=" * 60)
+    print(f"Total .note files: {log['stats']['total']}")
+    print(f"With handwriting (rendered): {log['stats']['rendered']}")
+    print(f"No handwriting data: {log['stats']['no_data']}")
+    print(f"Errors: {log['stats']['errors']}")
+    print(f"\nRendered files saved to: {OUTPUT_DIR}")
+    print("=" * 60)
+
+if __name__ == '__main__':
+    main()

@@ -1,0 +1,346 @@
+# Obsidian Best Practices
+
+> Curated best practices from official documentation, community forums, and expert workflows for building an effective knowledge management system.
+
+---
+
+## Philosophy: Files Over Apps
+
+Obsidian stores notes as plain Markdown files in a folder (vault) on your local machine. This **file-over-app philosophy** ensures:
+- Your data is always yours
+- Notes are portable and future-proof
+- Version control with Git is trivial
+- No vendor lock-in
+
+> "If you want to create digital artifacts that last, they must be files you can control, in formats that are easy to retrieve and read."
+> — [Steph Ango (Obsidian CEO)](https://stephango.com/vault)
+
+---
+
+## Vault Structure Best Practices
+
+### The Minimal Folders Approach
+
+**Recommended:** Use very few folders. Organize by **note type**, not topic.
+
+```
+vault/
+├── Inbox/              # Unsorted captures
+├── Journal/            # Daily/periodic notes
+├── Reference/          # External material (books, articles)
+├── Templates/          # Required for Templater
+├── Projects/           # Active work
+├── Areas/              # Ongoing responsibilities
+├── Archive/            # Completed work
+└── Attachments/        # Images, PDFs
+```
+
+**Why minimal folders?**
+- Many notes belong to multiple categories
+- Folders add overhead (where does this go?)
+- Links and tags provide better organization
+- The system should enable speed and laziness
+
+### When to Use Folders
+
+Use folders for:
+- **Note types** (not topics): Journal, Reference, Templates
+- **Attachment management**: Keep media separate
+- **Plugin requirements**: Templates folder for Templater
+
+Avoid folders for:
+- Topic-based categorization (use tags instead)
+- Hierarchical organization (use MOCs instead)
+
+---
+
+## Linking Strategy
+
+### Link Liberally
+
+Use internal links `[[note]]` profusely. Links are the backbone of your knowledge graph.
+
+**Benefits:**
+- Create connections between ideas
+- Enable serendipitous discovery
+- Build a web of interconnected knowledge
+- Surface relationships through backlinks
+
+### Linking Best Practices
+
+1. **Link as you write** — Don't wait to organize later
+2. **Use aliases** — `[[Long Note Name|short]]` for readability
+3. **Create notes even if empty** — Links to non-existent notes are valid
+4. **Check backlinks regularly** — Discover unexpected connections
+
+---
+
+## Tagging Strategy
+
+### Tag Guidelines
+
+```
+# DO
+- Pluralize tags: #projects, #concepts, #people
+- Use lowercase: #typescript, #react
+- Keep it minimal: Start with few tags, add only when needed
+- Use camelCase for multi-word: #codeReview, #techDebt
+
+# DON'T
+- Duplicate folder structure with tags
+- Create tags for every possible category
+- Mix singular/plural inconsistently
+```
+
+### Tag Use Cases
+
+| Tag Type | Example | Purpose |
+|----------|---------|---------|
+| Status | #status/active, #status/archived | Track note lifecycle |
+| Type | #type/concept, #type/project | Classify content |
+| Priority | #P0, #P1, #P2 | Rank importance |
+| Context | #work, #personal | Separate domains |
+
+---
+
+## Maps of Content (MOCs)
+
+### What is a MOC?
+
+A Map of Content is a note that primarily links to other related notes — an index or table of contents for a topic.
+
+> "Any time you start to feel overwhelmed by how many notes you're trying to juggle, create a map of content."
+> — Nick Milo
+
+### MOC Best Practices
+
+1. **Keep MOCs under 25 items** — A list of 100 links is still overwhelming
+2. **Use consistent conceptual levels** — Don't mix "Math" with "Quadratic Equations"
+3. **Add structure with sections** — Use headers to organize within the MOC
+4. **Create Sub-MOCs for scalability** — English MOC → Literature MOC, Grammar MOC
+5. **Notes can appear in multiple MOCs** — Unlike folders, links are flexible
+
+### MOC Structure Template
+
+```markdown
+# Topic MOC
+
+## Overview
+Brief description of this knowledge area.
+
+## Core Concepts
+- [[Concept 1]]
+- [[Concept 2]]
+
+## Related Notes
+- [[Related Topic 1]]
+- [[Related Topic 2]]
+
+## Unsorted
+Notes not yet categorized (trigger for creating sub-MOCs when >6 items).
+```
+
+### MOC vs Folders
+
+| Folders | MOCs |
+|---------|------|
+| Binary: note in one place | Flexible: note in multiple MOCs |
+| No structure within folder | Headers, sections, annotations |
+| Can't see relationships | Visual map of connections |
+| Hard to reorganize | Easy to evolve |
+
+---
+
+## PARA + Zettelkasten Integration
+
+### The Dual-Engine Model
+
+Rather than forcing a merger, use PARA and Zettelkasten as complementary systems:
+
+- **PARA** = Execution Engine (organize by actionability)
+- **Zettelkasten** = Insight Engine (cultivate atomic ideas)
+
+### Hub-and-Spoke Architecture
+
+```
+PARA (Hub of Action)          Zettelkasten (Spoke of Insight)
+├── Projects/                 └── Permanent Notes/
+│   └── Project Note ─────────────→ [[Atomic Idea 1]]
+├── Areas/                           [[Atomic Idea 2]]
+├── Resources/                       [[Atomic Idea 3]]
+└── Archives/
+```
+
+**Key insight:** Connect systems through bidirectional links, not file moves.
+
+### Implementation
+
+1. **PARA folders** for actionable items
+2. **Zettelkasten folder** at top level for permanent notes
+3. **Link** from project notes to relevant permanent notes
+4. **Resources folder** = Literature notes (other's ideas)
+5. **Zettelkasten folder** = Your synthesized ideas
+
+---
+
+## Review Workflows
+
+### Fractal Review System
+
+```
+Daily → compile to Weekly → compile to Monthly → compile to Yearly
+```
+
+**Daily:** Capture everything (journal, tasks, ideas)
+**Weekly:** Review daily notes, extract patterns
+**Monthly:** Review weekly notes, identify themes
+**Yearly:** Review monthly notes, see the big picture
+
+> "The result is a fractal web of your life that you can zoom in and out of at varying degrees of detail."
+
+### Weekly Review Template
+
+```markdown
+# Week {{date:gggg-[W]ww}}
+
+## Review
+- What went well?
+- What didn't go well?
+- What did I learn?
+
+## Metrics
+```dataview
+TABLE WITHOUT ID
+  file.link as "Day",
+  mood as "Mood",
+  energy as "Energy"
+FROM "Journal"
+WHERE file.day >= date(this.file.name) - dur(7 days)
+SORT file.day ASC
+```
+
+## Next Week
+- Key priorities
+- Habit focus
+```
+
+---
+
+## Style Guide
+
+### Why a Style Guide?
+
+> "Having a consistent style collapses hundreds of future decisions into one and gives you focus."
+
+### Recommended Conventions
+
+| Element | Convention | Example |
+|---------|------------|---------|
+| Dates | YYYY-MM-DD | 2025-12-14 |
+| Tags | Plural, lowercase | #projects, #concepts |
+| File names | Title Case | My New Note.md |
+| Aliases | Lowercase for search | `aliases: [react, reactjs]` |
+| Properties | snake_case or camelCase | `created_at` or `createdAt` |
+
+### Date Formatting
+
+Always use `YYYY-MM-DD` format:
+- Sorts correctly alphabetically
+- Unambiguous internationally
+- Works with Dataview queries
+
+---
+
+## Developer-Specific Practices
+
+### Code Documentation
+
+```markdown
+## Code Snippet
+\`\`\`typescript
+// Your code here
+\`\`\`
+
+## Usage
+When to use this pattern.
+
+## Related
+- [[Related Concept]]
+- [[Project Using This]]
+```
+
+### Technical Note Types
+
+| Type | Folder | Purpose |
+|------|--------|---------|
+| Concept | Concepts/ | Technology/pattern knowledge |
+| Snippet | Snippets/ | Reusable code patterns |
+| ADR | Decisions/ | Architecture decisions |
+| Debug Log | Journal/ | Issue investigation |
+| Project | Projects/ | Active development |
+
+### Git Integration
+
+Obsidian + Git = Version-controlled knowledge base
+
+```bash
+# .gitignore for Obsidian vault
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache
+.trash/
+```
+
+**Commit messages for notes:**
+- `docs: add concept note for React hooks`
+- `feat: create new project MOC`
+- `update: weekly review 2025-W50`
+
+---
+
+## Common Anti-Patterns
+
+### What to Avoid
+
+| Anti-Pattern | Why It's Bad | Better Approach |
+|--------------|--------------|-----------------|
+| Multiple vaults | Fragments knowledge | Single vault with areas |
+| Deep folder hierarchies | Decision fatigue | Flat + MOCs + tags |
+| Topic-based folders | Notes span topics | Note-type folders + links |
+| Inconsistent naming | Search friction | Style guide |
+| Over-tagging | Noise | Minimal, purposeful tags |
+| Non-standard markdown | Portability issues | Stick to CommonMark |
+| Perfectionism | Analysis paralysis | Start messy, refine later |
+
+### The "Collector's Fallacy"
+
+Collecting information ≠ Understanding it
+
+**Solution:** Process notes regularly:
+1. Capture to Inbox
+2. Process daily
+3. Create permanent notes from fleeting notes
+4. Link to existing knowledge
+
+---
+
+## Sources & Further Reading
+
+### Official Resources
+- [Obsidian Help](https://help.obsidian.md/)
+- [Obsidian Forum](https://forum.obsidian.md/)
+
+### Community Wisdom
+- [Steph Ango's Vault Philosophy](https://stephango.com/vault)
+- [Nick Milo's Linking Your Thinking](https://www.linkingyourthinking.com/)
+- [kepano's Obsidian Vault Template](https://github.com/kepano/kepano-obsidian)
+- [PARA + Zettelkasten Template](https://forum.obsidian.md/t/para-zettelkasten-vault-template-powerful-organization-task-tracking-and-focus-tools-all-in-one/91380)
+
+### Developer-Focused
+- [Obsidian for Developers - Sam Julien](https://www.samjulien.com/get-started-with-obsidian-as-a-developer/)
+- [Engineering Project Management in Obsidian](https://ltroj.medium.com/engineering-project-management-in-obsidian-e6aade82dfff)
+- [Using Obsidian as an ADR Tool](https://medium.com/@mttpla/using-obsidian-as-an-adr-tool-5f63d187de6b)
+
+---
+
+*Last updated: 2025-12-14*

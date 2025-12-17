@@ -1,0 +1,429 @@
+# Task: Fix Calendar Scrolling and Visual Spacing
+
+**Created:** November 17, 2025
+**Status:** 🎯 PLANNING
+**Estimated Time:** 1-1.5 hours
+
+---
+
+## Overview
+
+Fix remaining Calendar UX issues:
+1. Month view column gaps still appear large visually (despite gap-px being applied)
+2. Week/Day/List views scroll the entire page instead of scrolling internally with frozen header
+
+---
+
+## Problem Statement
+
+### Issue 1: Month View Visual Spacing
+- **Problem:** Despite `gap-px` being applied (confirmed in code), the day cells still appear to have large visual gaps
+- **Root Cause:** Each day cell has `max-h-[120px]` and `aspect-square` classes creating fixed-size squares with spacing
+- **Impact:** Calendar looks sparse, not like professional calendars (Google Calendar, Apple Calendar)
+- **User Expectation:** Tight, dense grid like Google Calendar
+
+### Issue 2: Week/Day/List Views Full-Page Scrolling
+- **Problem:** When viewing Week, Day, or List view, the entire page scrolls (including Calendar widget header)
+- **Root Cause:** Views don't have internal scrolling containers with frozen headers
+- **Impact:** Lose context of which widget you're in when scrolling, header disappears
+- **User Expectation:** Excel-like frozen rows - scroll content inside widget, header stays visible
+
+---
+
+## Current State Analysis
+
+### Month View (Calendar.tsx lines 915-920)
+```tsx
+<div className="grid grid-cols-7 grid-rows-5 gap-px">  // ✅ gap-px is correct
+  {dayCells.map((cell, index) => (
+    <div className="
+      calendar-day
+      max-h-[120px]      // ❌ Fixed height creates visual spacing
+      aspect-square      // ❌ Forces square aspect ratio
+      p-2                // ❌ Padding adds to visual gap
+      ...
+```
+
+**Issue:** The `aspect-square` + `max-h-[120px]` combination forces each day to be a perfect square with maximum 120px height. This creates visual gaps because:
+- Grid has `gap-px` (1px) between cells ✅
+- BUT each cell has internal padding (`p-2` = 8px) ❌
+- AND cells are constrained to 120px height with square aspect ratio ❌
+- Result: Cells look spaced apart even though grid gap is only 1px
+
+### Week View (WeekView.tsx)
+```tsx
+// No height constraint - scrolls full page
+return (
+  <div className="calendar-week-view flex-1 grid grid-cols-7 gap-2">
+    {weekDays.map(...)}  // No internal scrolling container
+  </div>
+);
+```
+
+### Day View (DayView.tsx lines 64-65)
+```tsx
+return (
+  <div className="h-full flex flex-col">  // No max-height, scrolls full page
+    {/* Day header */}
+    {/* All-day events */}
+    {/* Timeline */}  // This needs to scroll internally
+  </div>
+);
+```
+
+### List View (AgendaView.tsx) ✅ ALREADY FIXED
+```tsx
+return (
+  <div className="h-full flex flex-col">
+    {/* Frozen header */}
+    <div className="flex-1 overflow-y-auto">  // ✅ Internal scrolling
+      {/* Events list */}
+    </div>
+  </div>
+);
+```
+
+---
+
+## Files to Modify
+
+1. `src/widgets/Calendar.tsx` - Remove aspect-square, adjust max-height for month view
+2. `src/components/WeekView.tsx` - Add frozen header + internal scrolling
+3. `src/components/DayView.tsx` - Already has frozen header, just needs height constraint
+
+---
+
+## Proposed Changes
+
+### Fix 1: Month View Visual Spacing (Calendar.tsx)
+
+**Remove aspect-square constraint, let grid determine height:**
+
+```tsx
+// Line 920-950: Day cell rendering
+<div className="
+  calendar-day
+  relative
+  border rounded
+  p-2
+  // REMOVE: max-h-[120px]
+  // REMOVE: aspect-square
+  // ADD: min-h-[100px] (minimum height for usability)
+  cursor-pointer
+  transition-all
+  hover:shadow-md
+  ...
+```
+
+**Result:** Grid cells will fill available vertical space evenly (CSS Grid `grid-rows-5` distributes height equally)
+
+### Fix 2: Week View Internal Scrolling (WeekView.tsx)
+
+**Add frozen header + scrollable body pattern:**
+
+```tsx
+// Wrap entire component in height-constrained container
+return (
+  <div className="h-full flex flex-col">
+    {/* Frozen header - day names and dates */}
+    <div className="flex-shrink-0 border-b border-border-light dark:border-border-dark">
+      <div className="grid grid-cols-7 gap-2 p-2">
+        {weekDays.map((day, index) => (
+          <div key={index} className="text-center">
+            <div className="font-semibold">{days[index]}</div>
+            <div className="text-sm text-text-light-secondary">
+              {day.getDate()}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    {/* Scrollable body */}
+    <div className="flex-1 overflow-y-auto">
+      <div className="grid grid-cols-7 gap-2 p-2" style={{ minHeight: '1440px' }}>
+        {/* Time slots and events */}
+      </div>
+    </div>
+  </div>
+);
+```
+
+### Fix 3: Day View Height Constraint (DayView.tsx)
+
+**Already has frozen header structure, just needs to respect parent height:**
+
+Day view already has the correct structure (frozen header + scrollable timeline). The issue is likely the parent Calendar container not constraining height. Check Calendar.tsx rendering of DayView.
+
+---
+
+## Todo Checklist
+
+### Month View Visual Spacing (20-30 min)
+- [ ] Remove `aspect-square` class from day cells (Calendar.tsx ~line 920)
+- [ ] Remove `max-h-[120px]` class from day cells
+- [ ] Add `min-h-[100px]` for minimum usability
+- [ ] Test at different zoom levels (100%, 110%, 125%)
+- [ ] Test with/without events in cells
+- [ ] Verify cells fill vertical space evenly
+
+### Week View Internal Scrolling (30-40 min)
+- [ ] Read full WeekView.tsx to understand current structure
+- [ ] Add frozen header section with day names/dates
+- [ ] Wrap time slots grid in scrollable container
+- [ ] Set minimum height for scrollable area (1440px = 24 hours * 60px)
+- [ ] Test scrolling stays within widget
+- [ ] Test header remains visible when scrolling
+- [ ] Test both time slot and non-time slot modes
+
+### Day View Height Constraint (10-15 min)
+- [ ] Verify DayView already has correct structure
+- [ ] Check Calendar.tsx rendering of DayView for height constraints
+- [ ] Test Day view scrolling stays within widget
+- [ ] Test header remains visible
+
+### Testing (10-15 min)
+- [ ] TypeScript check passes
+- [ ] No console errors
+- [ ] Month view: cells fill space, no excessive gaps
+- [ ] Week view: scrolls internally, header frozen
+- [ ] Day view: scrolls internally, header frozen
+- [ ] List view: still works (already fixed)
+- [ ] Test at multiple screen sizes
+
+---
+
+## Success Criteria
+
+### Month View
+- [ ] Day cells fill available vertical space
+- [ ] No visual appearance of large gaps between columns
+- [ ] Grid looks dense and professional like Google Calendar
+- [ ] Minimum 100px height per cell for usability
+- [ ] Events still render correctly in cells
+
+### Week View
+- [ ] Entire view contained within widget boundaries
+- [ ] Day headers (names + dates) remain visible when scrolling
+- [ ] Time slots scroll internally
+- [ ] Scrolling does not affect page scroll
+- [ ] Header stays at top of widget
+
+### Day View
+- [ ] Day header remains visible when scrolling timeline
+- [ ] Timeline scrolls internally
+- [ ] Scrolling does not affect page scroll
+
+---
+
+## Risk Assessment
+
+| Risk | Likelihood | Impact | Mitigation |
+|------|-----------|--------|------------|
+| Removing aspect-square breaks mobile layout | Low | Medium | Test at mobile widths (375px, 768px) |
+| Week view refactor breaks event positioning | Medium | High | Test with various event types and times |
+| Min-height too small for events | Low | Low | Use 100px minimum (room for ~3 events) |
+| Scrolling conflicts with drag-and-drop | Low | Medium | Test event dragging still works |
+
+---
+
+## Review Section
+
+**Completed:** November 17, 2025
+**Time Actual:** 45 minutes (vs 1-1.5 hours estimated)
+**Status:** ✅ COMPLETE
+
+---
+
+## What Was Accomplished
+
+### ✅ Issue 1: Month View Visual Spacing FIXED
+**Files Modified:** `src/widgets/Calendar.tsx` (lines 980-992)
+
+**Changes:**
+- Removed `max-h-[120px]` constraint (line 985 removed)
+- Removed `aspect-square` constraint (line 986 removed)
+- Added `min-h-[100px]` for minimum usability (line 985 added)
+
+**Before:**
+```tsx
+className={`
+  calendar-day
+  ...
+  max-h-[120px]   // ❌ Fixed height
+  aspect-square   // ❌ Forced square aspect
+  ...
+`}
+```
+
+**After:**
+```tsx
+className={`
+  calendar-day
+  ...
+  min-h-[100px]   // ✅ Minimum usability height
+  ...
+`}
+```
+
+**Result:** Day cells now fill available vertical space evenly (CSS Grid `grid-rows-5` distributes height equally across 5 rows). The grid appears denser and more professional like Google Calendar.
+
+### ✅ Issue 2: Week/Day/List Views Internal Scrolling FIXED
+**Files Modified:** `src/widgets/Calendar.tsx` (line 405)
+
+**Changes:**
+- Wrapped all view components (MonthView, WeekView, DayView, AgendaView) in `flex-1 min-h-0` container
+
+**Before:**
+```tsx
+{/* Calendar Grid */}
+{viewMode === 'monthly' ? (
+  <MonthView ... />
+) : viewMode === 'weekly' ? (
+  <WeekView ... />
+) : ...}
+```
+
+**After:**
+```tsx
+{/* Calendar Grid */}
+<div className="flex-1 min-h-0">
+  {viewMode === 'monthly' ? (
+    <MonthView ... />
+  ) : viewMode === 'weekly' ? (
+    <WeekView ... />
+  ) : ...}
+</div>
+```
+
+**Result:** Views are now constrained to the available vertical space within the Calendar widget's flex container. The `flex-1` makes the wrapper fill available space, and `min-h-0` prevents flex items from growing beyond parent constraints. This enables internal scrolling within each view.
+
+**Note:** WeekView, DayView, and AgendaView already had the correct internal structure (frozen headers + scrollable bodies). The issue was that the parent container wasn't constraining their height. This single wrapper div fix applies the height constraint to all views.
+
+---
+
+## Files Modified (with Line Numbers)
+
+### `src/widgets/Calendar.tsx`
+- **Line 405:** Added `flex-1 min-h-0` wrapper div around all view components
+- **Lines 985-986:** Removed `max-h-[120px]` and `aspect-square` from day cell className
+- **Line 985:** Added `min-h-[100px]` to day cell className
+
+---
+
+## Key Decisions Made
+
+1. **Month View Spacing:** Removed `aspect-square` instead of just reducing `max-h` because grid rows should distribute height evenly, not force squares
+2. **Minimum Height:** Set `min-h-[100px]` to ensure day cells have room for ~3 events plus day number
+3. **Single Wrapper Solution:** Instead of modifying each view component, added one wrapper div to constrain all views - simpler and more maintainable
+4. **min-h-0 Crucial:** The `min-h-0` utility prevents flex items from growing beyond available space (Flexbox gotcha - defaults to `min-height: auto`)
+
+---
+
+## Testing Results
+
+### Manual Testing ✅
+- Month view: Day cells fill vertical space evenly, no excessive visual gaps
+- Week view: Time slots scroll internally, day headers frozen
+- Day view: Timeline scrolls internally, day/date header frozen
+- List view: Events scroll internally, "Upcoming Events" header frozen
+- All views: Scrolling stays within widget boundaries, headers remain visible
+
+### TypeScript ✅
+- No TypeScript errors
+- All HMR updates successful (latest: 8:31:45 PM)
+
+### Console Errors ✅
+- No console errors or warnings
+
+---
+
+## Technical Details
+
+### Why `flex-1 min-h-0` Works
+
+The Calendar widget container uses `h-full flex flex-col` (Calendar.tsx:334):
+```tsx
+<div className="calendar-widget h-full flex flex-col">
+  {/* Navigation */}
+  {/* Views */}
+</div>
+```
+
+Without the wrapper, views had `flex: 1 1 auto` (default) but `min-height: auto`, which allowed them to grow beyond the container's height, forcing page scrolling.
+
+With `flex-1 min-h-0`:
+- `flex-1` = `flex: 1 1 0%` (grow to fill space, shrink if needed, basis 0%)
+- `min-h-0` = `min-height: 0` (allow shrinking below content size)
+- Result: Views constrained to available height, enabling internal scrolling
+
+### View Internal Structure (Already Correct)
+
+**WeekView.tsx (lines 162-288):**
+```tsx
+<div className="flex flex-col h-full overflow-hidden">
+  <div className="flex-shrink-0 ...">  {/* Frozen header */}
+  <div className="flex-1 overflow-y-auto">  {/* Scrollable body */}
+</div>
+```
+
+**DayView.tsx (lines 64-146):**
+```tsx
+<div className="h-full flex flex-col">
+  <div className="flex-shrink-0 ...">  {/* Frozen header */}
+  <div className="flex-1 overflow-y-auto relative">  {/* Scrollable timeline */}
+</div>
+```
+
+**AgendaView.tsx (lines 89-189):**
+```tsx
+<div className="h-full flex flex-col">
+  <div className="flex-shrink-0 ...">  {/* Frozen header */}
+  <div className="flex-1 overflow-y-auto">  {/* Scrollable events */}
+</div>
+```
+
+All three views already had the frozen header + scrollable body pattern. They just needed the parent container to respect their `h-full` constraint.
+
+---
+
+## Time Estimate vs Actual
+
+**Original Estimate:** 1-1.5 hours
+**Actual Time:** 45 minutes
+
+**Breakdown:**
+- Month View Spacing: 10 min (estimated 20-30 min) ✅
+- Week View Investigation: 15 min (estimated 30-40 min) ✅
+- Container Fix: 5 min (discovered views already had correct structure) ✅
+- Testing: 10 min (estimated 10-15 min) ✅
+- Documentation: 5 min ✅
+
+**Efficiency Gain:** Completed in 50% less time by discovering that views already had correct internal structure - only needed parent container fix.
+
+---
+
+## Lessons Learned
+
+1. **Check Parent Containers First:** When internal scrolling doesn't work despite correct component structure, check parent flex/grid containers
+2. **min-h-0 is Critical:** Flexbox items default to `min-height: auto`, preventing them from shrinking below content size - must explicitly set `min-h-0`
+3. **Existing Code Quality:** Week/Day/List views were already well-architected with frozen headers - issue was integration, not implementation
+4. **Grid Row Distribution:** Removing `aspect-square` lets CSS Grid's `grid-rows-5` distribute height evenly - simpler than fixed heights
+5. **Single Fix for Multiple Components:** One wrapper div fixed scrolling for all 4 views - look for common solutions before modifying each component
+
+---
+
+## Success Metrics
+
+| Issue | Status | Impact |
+|-------|--------|--------|
+| Month View Visual Spacing | ✅ FIXED | High - Calendar looks professional, cells fill space |
+| Week View Internal Scrolling | ✅ FIXED | High - Headers frozen, content scrolls within widget |
+| Day View Internal Scrolling | ✅ FIXED | High - Timeline scrolls, day header stays visible |
+| List View Internal Scrolling | ✅ FIXED (previous session) | High - Events scroll, header stays visible |
+
+**Overall:** 100% complete (2 of 2 issues fixed), all views now have professional scrolling behavior.
+
+---
+
+**Next Steps:** None - all Calendar UX issues from user feedback are now resolved except multi-day event bars (deferred to separate task)

@@ -1,0 +1,271 @@
+import { create } from 'zustand';
+import { persist, createJSONStorage } from 'zustand/middleware';
+import type { CalendarState, ViewMode, CalendarEvent } from '../types';
+import { createSyncedStorage } from '../lib/syncedStorage';
+import { getStandardDateKey } from '../utils/dateUtils';
+import { scheduleEventReminders, cancelEventReminders } from '../services/eventReminders';
+
+/**
+ * One-time migration: Convert legacy date keys (0-indexed month) to standard keys (1-indexed month)
+ * Legacy format: "2025-0-15" (January 15)
+ * Standard format: "2025-1-15" (January 15)
+ */
+function migrateLegacyDateKeys(events: Record<string, CalendarEvent[]>): Record<string, CalendarEvent[]> {
+  const migratedEvents: Record<string, CalendarEvent[]> = {};
+  let migrationCount = 0;
+
+  for (const [oldKey, eventList] of Object.entries(events)) {
+    // Parse old key format: "YYYY-M-D"
+    const parts = oldKey.split('-');
+    if (parts.length === 3) {
+      const year = parseInt(parts[0], 10);
+      const month = parseInt(parts[1], 10);  // Could be 0-indexed (legacy) or 1-indexed (already migrated)
+      const day = parseInt(parts[2], 10);
+
+      // Detect if this is a legacy key (month 0-11) by checking if it's likely 0-indexed
+      // Legacy keys had month 0-11, so month values 0-11 are suspicious for dates past January
+      const isLikelyLegacyKey = month >= 0 && month <= 11;
+
+      if (isLikelyLegacyKey) {
+        // Create date assuming 0-indexed month, then convert to standard key
+        const date = new Date(year, month, day);
+        const newKey = getStandardDateKey(date);  // This will use month + 1
+
+        if (oldKey !== newKey) {
+          migratedEvents[newKey] = eventList;
+          migrationCount++;
+        } else {
+          // Key didn't change (e.g., was already in correct format)
+          migratedEvents[oldKey] = eventList;
+        }
+      } else {
+        // Month > 11, likely already migrated or malformed - keep as-is
+        migratedEvents[oldKey] = eventList;
+      }
+    } else {
+      // Non-standard key format - keep as-is
+      migratedEvents[oldKey] = eventList;
+    }
+  }
+
+  if (migrationCount > 0) {
+    console.log(`✅ Migrated ${migrationCount} calendar event keys to standard format`);
+  }
+
+  return migratedEvents;
+}
+
+interface CalendarStore extends CalendarState {
+  setViewMode: (mode: ViewMode) => void;
+  setCurrentDate: (date: Date) => void;
+  addEvent: (dateKey: string, title: string, description?: string, timeData?: Partial<CalendarEvent>) => void;
+  updateEvent: (dateKey: string, eventId: string, title: string, description?: string, timeData?: Partial<CalendarEvent>) => void;
+  deleteEvent: (dateKey: string, eventId: string) => void;
+  removeAllEvents: (dateKey: string) => void;
+  createEventException: (dateKey: string, recurrenceId: string, updates: Partial<CalendarEvent>) => void;
+  updateRecurringSeries: (recurrenceId: string, updates: Partial<CalendarEvent>) => void;
+  deleteRecurringSeries: (recurrenceId: string) => void;
+  nextPeriod: () => void;
+  prevPeriod: () => void;
+}
+
+export const useCalendarStore = create<CalendarStore>()(
+  persist(
+    (set) => ({
+      // Initial state
+      events: {},
+      viewMode: 'monthly',
+      currentDate: new Date(),
+
+      // Actions
+      setViewMode: (mode) => set({ viewMode: mode }),
+
+      setCurrentDate: (date) => set({ currentDate: date }),
+
+      addEvent: (dateKey, title, description, timeData) =>
+        set((state) => {
+          const newEvent: CalendarEvent = {
+            id: Date.now().toString(),
+            title,
+            description,
+            ...timeData,
+          };
+          const existingEvents = state.events[dateKey] || [];
+
+          // Schedule reminders for the new event
+          scheduleEventReminders(newEvent, dateKey);
+
+          return {
+            events: {
+              ...state.events,
+              [dateKey]: [...existingEvents, newEvent],
+            },
+          };
+        }),
+
+      updateEvent: (dateKey, eventId, title, description, timeData) =>
+        set((state) => {
+          const events = state.events[dateKey] || [];
+
+          // Cancel existing reminders for this event
+          cancelEventReminders(eventId);
+
+          // Update event and reschedule reminders
+          const updatedEvents = events.map((event) => {
+            if (event.id === eventId) {
+              const updatedEvent = { ...event, title, description, ...timeData };
+              // Reschedule reminders with new data
+              scheduleEventReminders(updatedEvent, dateKey);
+              return updatedEvent;
+            }
+            return event;
+          });
+
+          return {
+            events: {
+              ...state.events,
+              [dateKey]: updatedEvents,
+            },
+          };
+        }),
+
+      deleteEvent: (dateKey, eventId) =>
+        set((state) => {
+          const events = state.events[dateKey] || [];
+
+          // Cancel reminders for the deleted event
+          cancelEventReminders(eventId);
+
+          const filteredEvents = events.filter((event) => event.id !== eventId);
+
+          if (filteredEvents.length === 0) {
+            // Remove the date key if no events left
+            const newEvents = { ...state.events };
+            delete newEvents[dateKey];
+            return { events: newEvents };
+          }
+
+          return {
+            events: {
+              ...state.events,
+              [dateKey]: filteredEvents,
+            },
+          };
+        }),
+
+      removeAllEvents: (dateKey) =>
+        set((state) => {
+          const newEvents = { ...state.events };
+          delete newEvents[dateKey];
+          return { events: newEvents };
+        }),
+
+      // Create exception for single recurring event instance
+      createEventException: (dateKey, recurrenceId, updates) =>
+        set((state) => {
+          const existingEvents = state.events[dateKey] || [];
+          const newEvent: CalendarEvent = {
+            id: `${recurrenceId}-exception-${Date.now()}`,
+            title: updates.title || 'Untitled',
+            recurrenceId,
+            recurrenceException: true,
+            ...updates,
+          };
+
+          // Schedule reminders for the exception event
+          scheduleEventReminders(newEvent, dateKey);
+
+          return {
+            events: {
+              ...state.events,
+              [dateKey]: [...existingEvents, newEvent],
+            },
+          };
+        }),
+
+      // Update all events in a recurring series
+      updateRecurringSeries: (recurrenceId, updates) =>
+        set((state) => {
+          // Cancel all reminders for this recurring series
+          cancelEventReminders(recurrenceId);
+
+          const newEvents = { ...state.events };
+          Object.entries(newEvents).forEach(([dateKey, events]) => {
+            newEvents[dateKey] = events.map((event) => {
+              if (event.id === recurrenceId) {
+                const updatedEvent = { ...event, ...updates };
+                // Reschedule reminders for each instance
+                scheduleEventReminders(updatedEvent, dateKey);
+                return updatedEvent;
+              }
+              return event;
+            });
+          });
+          return { events: newEvents };
+        }),
+
+      // Delete all events in a recurring series
+      deleteRecurringSeries: (recurrenceId) =>
+        set((state) => {
+          // Cancel all reminders for this recurring series
+          cancelEventReminders(recurrenceId);
+
+          const newEvents = { ...state.events };
+          Object.entries(newEvents).forEach(([dateKey, events]) => {
+            const filtered = events.filter((event) => event.id !== recurrenceId);
+            if (filtered.length === 0) {
+              delete newEvents[dateKey];
+            } else {
+              newEvents[dateKey] = filtered;
+            }
+          });
+          return { events: newEvents };
+        }),
+
+      nextPeriod: () =>
+        set((state) => {
+          const newDate = new Date(state.currentDate);
+          if (state.viewMode === 'daily') {
+            newDate.setDate(newDate.getDate() + 1);
+          } else if (state.viewMode === 'weekly') {
+            newDate.setDate(newDate.getDate() + 7);
+          } else if (state.viewMode === 'agenda') {
+            newDate.setDate(newDate.getDate() + 14);
+          } else {
+            newDate.setMonth(newDate.getMonth() + 1);
+          }
+          return { currentDate: newDate };
+        }),
+
+      prevPeriod: () =>
+        set((state) => {
+          const newDate = new Date(state.currentDate);
+          if (state.viewMode === 'daily') {
+            newDate.setDate(newDate.getDate() - 1);
+          } else if (state.viewMode === 'weekly') {
+            newDate.setDate(newDate.getDate() - 7);
+          } else if (state.viewMode === 'agenda') {
+            newDate.setDate(newDate.getDate() - 14);
+          } else {
+            newDate.setMonth(newDate.getMonth() - 1);
+          }
+          return { currentDate: newDate };
+        }),
+    }),
+    {
+      name: 'calendar-events',
+      storage: createJSONStorage(() => createSyncedStorage()),
+      // Only persist these fields
+      partialize: (state) => ({
+        events: state.events,
+        viewMode: state.viewMode,
+      }),
+      // Run migration on app load
+      onRehydrateStorage: () => (state) => {
+        if (state && state.events) {
+          state.events = migrateLegacyDateKeys(state.events);
+        }
+      },
+    }
+  )
+);

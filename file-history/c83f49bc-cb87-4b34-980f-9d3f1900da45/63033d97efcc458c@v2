@@ -1,0 +1,759 @@
+# Time Tracking Phase 3 - Manual Testing Guide
+
+**Version:** 1.0
+**Date:** 2025-01-22
+**Coverage:** Phase 3.0-3.5 Features
+**Status:** Ready for Testing
+
+---
+
+## Overview
+
+This guide provides comprehensive manual testing procedures for all Phase 3 time tracking features. Each test includes prerequisites, steps, and expected results.
+
+**Feature Coverage:**
+- ✅ Project System (3.0)
+- ✅ Manual Time Entry (3.1)
+- ✅ Monthly Reporting (3.2)
+- ✅ Export & Bulk Operations (3.3)
+- ✅ Calendar View (3.4)
+- ✅ Undo System & Polish (3.5)
+
+---
+
+## Test Environment Setup
+
+**Prerequisites:**
+1. Dev server running: `npm run dev`
+2. Browser with DevTools open (check console for errors)
+3. Clean IndexedDB state (or existing test data)
+4. Both light and dark mode testing
+
+**Test Data Recommendations:**
+- At least 3 projects with different colors
+- At least 20 time entries spanning 2+ weeks
+- Mix of entries with/without projects
+- Mix of entries with/without notes
+
+---
+
+## Test Suite 1: Project System (Phase 3.0)
+
+### Test 1.1: Create Project
+
+**Steps:**
+1. Navigate to Time Tracking page
+2. Click "Projects" tab
+3. Click "Create Project" button
+4. Fill in project details:
+   - Name: "Test Project Alpha"
+   - Color: Select blue (#45B7D1)
+   - Description: "Testing project creation"
+5. Click "Create Project"
+
+**Expected Results:**
+- ✅ Project appears in project list
+- ✅ Color dot displays correctly next to name
+- ✅ Success message or visual feedback
+- ✅ Project appears in project selectors throughout app
+
+**Dark Mode Verification:**
+- ✅ All text readable in dark mode
+- ✅ Color dot visible against dark background
+
+---
+
+### Test 1.2: Edit Project
+
+**Steps:**
+1. In Projects tab, click "Edit" on existing project
+2. Change name to "Test Project Beta"
+3. Change color to orange (#FFA07A)
+4. Update description
+5. Click "Save"
+
+**Expected Results:**
+- ✅ Changes persist in project list
+- ✅ Time entries with this project show updated color
+- ✅ No data loss or corruption
+
+---
+
+### Test 1.3: Delete Project
+
+**Steps:**
+1. Create a new project "Temp Project"
+2. Assign it to 2-3 time entries
+3. Click "Delete" on the project
+4. Confirm deletion in modal
+
+**Expected Results:**
+- ✅ Project removed from list
+- ✅ Time entries with this project show "No Project" or project ID
+- ✅ No broken references in database
+- ✅ Other projects unaffected
+
+---
+
+### Test 1.4: Project Selector (Timer)
+
+**Steps:**
+1. Go to Time Tracking page, "Timer" tab
+2. Click project selector dropdown
+3. Select "Test Project Alpha"
+4. Start timer
+5. Stop timer after 10 seconds
+
+**Expected Results:**
+- ✅ Project dropdown shows all active projects
+- ✅ Selected project displays with color dot
+- ✅ New time entry has project assigned
+- ✅ Recent entries show project name and color
+
+---
+
+### Test 1.5: Project Filter
+
+**Steps:**
+1. Go to "Entries" tab
+2. Open project filter dropdown
+3. Select "Test Project Alpha"
+4. Verify filtered results
+5. Change to "Test Project Beta"
+6. Select "All Projects" to clear filter
+
+**Expected Results:**
+- ✅ Only entries matching selected project display
+- ✅ Entry count updates correctly
+- ✅ Filter persists during pagination
+- ✅ "All Projects" shows all entries
+
+---
+
+## Test Suite 2: Manual Time Entry (Phase 3.1)
+
+### Test 2.1: Create Manual Entry (End Time Mode)
+
+**Steps:**
+1. Click "Manual Entry" button in timer panel
+2. Fill in fields:
+   - Description: "Manual test entry"
+   - Project: "Test Project Alpha"
+   - Start: Today at 09:00
+   - End: Today at 10:30
+3. Click "Create Entry"
+
+**Expected Results:**
+- ✅ Modal closes
+- ✅ New entry appears in entries list
+- ✅ Duration calculated correctly (1h 30m)
+- ✅ Project assigned correctly
+- ✅ Start/end times match input
+
+---
+
+### Test 2.2: Create Manual Entry (Duration Mode)
+
+**Steps:**
+1. Click "Manual Entry" button
+2. Fill in fields:
+   - Description: "Duration mode test"
+   - Project: None
+   - Start: Today at 14:00
+   - Duration: 2h 15m
+3. Click "Create Entry"
+
+**Expected Results:**
+- ✅ End time auto-calculated (16:15)
+- ✅ Duration preview shows "2h 15m"
+- ✅ Entry saved with correct times
+- ✅ No project assigned (shows blank/dash)
+
+---
+
+### Test 2.3: Validation - End Before Start
+
+**Steps:**
+1. Open manual entry modal
+2. Set start time: Today at 15:00
+3. Set end time: Today at 14:00
+4. Try to save
+
+**Expected Results:**
+- ✅ Error message: "End time must be after start time"
+- ✅ Form does not submit
+- ✅ No invalid entry created
+
+---
+
+### Test 2.4: Validation - Missing Required Fields
+
+**Steps:**
+1. Open manual entry modal
+2. Leave description blank
+3. Set times
+4. Try to save
+
+**Expected Results:**
+- ✅ Error message: "Description is required"
+- ✅ Form does not submit
+
+**Repeat with:**
+- Missing start time
+- Missing end time (in end time mode)
+- Missing duration (in duration mode)
+
+---
+
+### Test 2.5: Manual Entry with Notes
+
+**Steps:**
+1. Create manual entry with all fields
+2. Add detailed notes: "This is a test entry with comprehensive notes to verify the notes field works correctly across all views."
+3. Save entry
+4. View entry in list (click to expand)
+5. Edit entry and verify notes preserved
+
+**Expected Results:**
+- ✅ Notes saved correctly
+- ✅ Notes visible in entry details
+- ✅ Notes preserved during edit
+- ✅ Notes appear in exported CSV
+
+---
+
+## Test Suite 3: Monthly Reporting (Phase 3.2)
+
+### Test 3.1: Monthly Report View
+
+**Steps:**
+1. Go to "Reports" tab
+2. Select "Monthly" view
+3. Verify current month displays
+4. Check daily breakdown grid
+
+**Expected Results:**
+- ✅ 28-31 day grid based on month
+- ✅ Daily totals show correct durations
+- ✅ Today's date highlighted
+- ✅ Weekend days visually distinct
+- ✅ Monthly total card displays
+
+---
+
+### Test 3.2: Monthly Navigation
+
+**Steps:**
+1. In monthly report, click "Previous Month"
+2. Verify data changes to previous month
+3. Click "Next Month" twice
+4. Click "Today" button
+
+**Expected Results:**
+- ✅ Month/year updates in header
+- ✅ Daily data recalculates correctly
+- ✅ "Today" returns to current month
+- ✅ No data corruption during navigation
+
+---
+
+### Test 3.3: Project Breakdown
+
+**Steps:**
+1. In monthly report, scroll to "Time by Project" section
+2. Verify all projects listed
+3. Check percentages sum to 100%
+4. Hover over progress bars
+
+**Expected Results:**
+- ✅ All projects with time show in breakdown
+- ✅ Percentages accurate (±0.1% rounding)
+- ✅ Project colors match project settings
+- ✅ Duration totals match monthly total
+- ✅ "No Project" time shown if any exists
+
+---
+
+### Test 3.4: Heat Map Visualization
+
+**Steps:**
+1. Create entries on multiple days with varying durations:
+   - Day 1: 2 hours
+   - Day 2: 6 hours
+   - Day 3: 10 hours
+   - Day 4: 1 hour
+2. View monthly report
+3. Observe heat map intensity
+
+**Expected Results:**
+- ✅ Higher durations = darker/more intense colors
+- ✅ Visual gradient is intuitive
+- ✅ Hover shows exact duration
+- ✅ Zero-duration days have minimal/no color
+
+---
+
+## Test Suite 4: Export & Bulk Operations (Phase 3.3)
+
+### Test 4.1: CSV Export (All Entries)
+
+**Steps:**
+1. Go to "Entries" tab
+2. Clear all filters
+3. Click "Export CSV" button
+4. Save file
+5. Open in Excel or Google Sheets
+
+**Expected Results:**
+- ✅ File downloads as `time-entries-YYYY-MM-DD.csv`
+- ✅ All entries exported
+- ✅ Columns: Date, Start, End, Duration, Description, Project, Notes
+- ✅ Dates formatted correctly (YYYY-MM-DD)
+- ✅ Times formatted correctly (HH:MM)
+- ✅ Duration formatted (Xh Ym)
+- ✅ UTF-8 encoding (special characters preserved)
+- ✅ Commas in descriptions properly escaped
+
+---
+
+### Test 4.2: CSV Export (Filtered Entries)
+
+**Steps:**
+1. Apply filters:
+   - Project: "Test Project Alpha"
+   - Date range: Last 7 days
+2. Click "Export CSV"
+3. Open exported file
+
+**Expected Results:**
+- ✅ Only filtered entries exported
+- ✅ File name includes filter info or date
+- ✅ Entry count matches visible entries
+
+---
+
+### Test 4.3: Bulk Select
+
+**Steps:**
+1. In entries list, check 5 entry checkboxes
+2. Verify bulk actions bar appears
+3. Click "Select All" button
+4. Click "Clear Selection"
+
+**Expected Results:**
+- ✅ Individual checkboxes toggle selection
+- ✅ Bulk actions bar shows count
+- ✅ "Select All" selects all visible entries
+- ✅ "Clear Selection" unchecks all
+- ✅ Selection state visual feedback
+
+---
+
+### Test 4.4: Bulk Delete
+
+**Steps:**
+1. Select 3 time entries
+2. Click "Delete" in bulk actions bar
+3. Wait for undo toast to appear
+4. Let toast auto-expire (10 seconds)
+
+**Expected Results:**
+- ✅ Entries removed from list immediately
+- ✅ Undo toast shows "3 entries deleted"
+- ✅ Entry count updates
+- ✅ Toast auto-dismisses after 10 seconds
+- ✅ Entries permanently deleted after expiry
+
+---
+
+### Test 4.5: Bulk Update Project
+
+**Steps:**
+1. Select 5 entries with different projects
+2. Click "Change Project" in bulk actions bar
+3. Select "Test Project Beta"
+4. Confirm action
+
+**Expected Results:**
+- ✅ All selected entries now show "Test Project Beta"
+- ✅ Project colors update in list
+- ✅ Undo toast appears
+- ✅ Monthly report updates with new project distribution
+
+---
+
+## Test Suite 5: Calendar View (Phase 3.4)
+
+### Test 5.1: Calendar Rendering
+
+**Steps:**
+1. Go to "Calendar" tab
+2. Verify current month displays
+3. Check that time entries appear as blocks
+
+**Expected Results:**
+- ✅ Calendar grid shows 28-31 days
+- ✅ Time entries render on correct dates
+- ✅ Entry blocks color-coded by project
+- ✅ Multiple entries on same day stack vertically
+- ✅ Day totals display at bottom of each cell
+
+---
+
+### Test 5.2: Calendar Navigation
+
+**Steps:**
+1. Click "Previous Month"
+2. Click "Next Month" twice
+3. Click "Today" button
+
+**Expected Results:**
+- ✅ Calendar updates to show different months
+- ✅ Entries load correctly for each month
+- ✅ "Today" navigates to current month
+- ✅ Current day highlighted
+
+---
+
+### Test 5.3: Entry Interaction
+
+**Steps:**
+1. Click on a time entry block in calendar
+2. Verify edit modal opens
+3. Make changes and save
+4. Verify calendar updates
+
+**Expected Results:**
+- ✅ Click opens EditTimeEntryModal
+- ✅ Modal pre-filled with entry data
+- ✅ Changes reflect in calendar immediately
+- ✅ Day total recalculates
+
+---
+
+### Test 5.4: Project Legend
+
+**Steps:**
+1. In calendar view, locate project legend
+2. Verify all projects with entries display
+3. Check color dots match entry blocks
+
+**Expected Results:**
+- ✅ Legend shows all projects used in current month
+- ✅ Colors accurate
+- ✅ "No Project" shown if any entries have no project
+- ✅ Legend updates when month changes
+
+---
+
+### Test 5.5: Overflow Handling
+
+**Steps:**
+1. Create 10+ entries on a single day
+2. View that day in calendar
+
+**Expected Results:**
+- ✅ Entries truncate gracefully (show first 3-5)
+- ✅ "+X more" indicator displays
+- ✅ Click day to see all entries in list/modal
+- ✅ No layout breaking
+
+---
+
+## Test Suite 6: Undo System & Polish (Phase 3.5)
+
+### Test 6.1: Undo Single Delete
+
+**Steps:**
+1. Delete a time entry
+2. Verify undo toast appears
+3. Click "Undo" button within 10 seconds
+
+**Expected Results:**
+- ✅ Toast shows "Time entry deleted"
+- ✅ "Undo" button visible
+- ✅ Clicking undo restores entry
+- ✅ Entry reappears in list with all data intact
+- ✅ Toast dismisses after undo
+
+---
+
+### Test 6.2: Undo Auto-Expire
+
+**Steps:**
+1. Delete a time entry
+2. Wait 10+ seconds without clicking undo
+3. Verify toast disappears
+
+**Expected Results:**
+- ✅ Toast auto-dismisses at 10 seconds
+- ✅ Entry remains deleted
+- ✅ No errors in console
+
+---
+
+### Test 6.3: Undo Bulk Delete
+
+**Steps:**
+1. Select 7 time entries
+2. Bulk delete them
+3. Click "Undo" within 10 seconds
+
+**Expected Results:**
+- ✅ Toast shows "7 entries deleted"
+- ✅ All 7 entries restore correctly
+- ✅ Order preserved
+- ✅ All metadata intact (projects, notes, etc.)
+
+---
+
+### Test 6.4: Multiple Undo Actions
+
+**Steps:**
+1. Delete entry A
+2. Delete entry B (before first toast expires)
+3. Delete entry C
+4. Undo entry B
+5. Undo entry C
+6. Let entry A expire
+
+**Expected Results:**
+- ✅ Multiple toasts stack vertically
+- ✅ Each undo acts on correct entry
+- ✅ Expired actions cannot be undone
+- ✅ No state corruption
+
+---
+
+### Test 6.5: Edit Modal - Project & Notes
+
+**Steps:**
+1. Click "Edit" on a time entry
+2. Change project to different project
+3. Add/modify notes
+4. Save changes
+
+**Expected Results:**
+- ✅ Project selector shows current project
+- ✅ Can change to any project or "No Project"
+- ✅ Notes textarea preserves line breaks
+- ✅ Changes save correctly
+- ✅ Entry list updates immediately
+
+---
+
+## Cross-Feature Integration Tests
+
+### Integration Test 1: Full Workflow
+
+**Steps:**
+1. Create project "Client Work"
+2. Create manual entry with project, notes
+3. View entry in calendar
+4. Export to CSV, verify entry present
+5. Edit entry to change project
+6. Bulk delete entry
+7. Undo deletion
+8. View monthly report, verify entry counted
+
+**Expected Results:**
+- ✅ All features work together seamlessly
+- ✅ Data consistency across all views
+- ✅ No errors or warnings
+
+---
+
+### Integration Test 2: Dark Mode Consistency
+
+**Steps:**
+1. Toggle to dark mode
+2. Test each feature:
+   - Create project (check color visibility)
+   - Manual entry modal (check form readability)
+   - Monthly report (check heat map contrast)
+   - Calendar view (check entry blocks)
+   - Undo toast (check button contrast)
+
+**Expected Results:**
+- ✅ All text readable (WCAG AA contrast)
+- ✅ Project colors visible on dark backgrounds
+- ✅ No white/light flashes
+- ✅ Interactive elements clearly visible
+
+---
+
+## Performance Tests
+
+### Performance Test 1: Large Dataset
+
+**Steps:**
+1. Create 50+ time entries spanning multiple months
+2. Navigate between views (Entries, Calendar, Reports)
+3. Apply filters
+4. Export CSV
+
+**Expected Results:**
+- ✅ No lag or freezing
+- ✅ Pagination handles large lists
+- ✅ Calendar renders smoothly
+- ✅ Export completes in <5 seconds
+
+---
+
+### Performance Test 2: Rapid Interactions
+
+**Steps:**
+1. Quickly toggle between months in calendar
+2. Rapidly select/deselect entries
+3. Spam bulk operations (with undo)
+
+**Expected Results:**
+- ✅ UI remains responsive
+- ✅ No race conditions
+- ✅ No duplicate toasts or actions
+- ✅ State updates correctly
+
+---
+
+## Edge Cases & Error Handling
+
+### Edge Case 1: Empty States
+
+**Steps:**
+1. Delete all time entries
+2. Delete all projects
+3. View each tab: Timer, Entries, Calendar, Reports
+
+**Expected Results:**
+- ✅ "No entries" messages display
+- ✅ "No projects" messages display
+- ✅ No JavaScript errors
+- ✅ UI prompts user to create first entry/project
+
+---
+
+### Edge Case 2: Long Text
+
+**Steps:**
+1. Create entry with 500-character description
+2. Create project with 100-character name
+3. Add 1000-character notes
+
+**Expected Results:**
+- ✅ Text truncates gracefully in lists
+- ✅ Full text visible in edit modals
+- ✅ CSV export includes full text
+- ✅ No layout breaking
+
+---
+
+### Edge Case 3: Special Characters
+
+**Steps:**
+1. Create entry with description: `Test "quotes", commas, and 日本語`
+2. Export to CSV
+3. Open CSV and verify
+
+**Expected Results:**
+- ✅ Special characters preserved
+- ✅ Quotes properly escaped in CSV
+- ✅ Unicode characters (emoji, CJK) display correctly
+
+---
+
+### Edge Case 4: Time Zones
+
+**Steps:**
+1. Create entry at 23:30 (near midnight)
+2. Create entry spanning midnight (23:30 - 00:30)
+3. View in calendar and reports
+
+**Expected Results:**
+- ✅ Times stored in local timezone
+- ✅ Dates display correctly
+- ✅ Midnight-spanning entries show on correct days
+- ✅ Duration calculations accurate
+
+---
+
+## Browser Compatibility
+
+**Test in:**
+- ✅ Chrome/Edge (latest)
+- ✅ Firefox (latest)
+- ✅ Safari (latest, if on Mac)
+
+**Verify:**
+- ✅ All features work identically
+- ✅ IndexedDB operations successful
+- ✅ CSV download works
+- ✅ No browser-specific errors
+
+---
+
+## Final Verification Checklist
+
+### Code Quality
+- ✅ TypeScript compilation passes (`npm run type-check`)
+- ✅ No console errors during testing
+- ✅ No console warnings (or documented exceptions)
+- ✅ Build succeeds (`npm run build`)
+- ✅ Bundle size <100KB gzipped
+
+### Accessibility (WCAG AA)
+- ✅ All interactive elements keyboard accessible
+- ✅ Focus indicators visible
+- ✅ Color contrast ratios compliant
+- ✅ Screen reader labels present (aria-label)
+
+### Security
+- ✅ No XSS vulnerabilities (user input sanitized)
+- ✅ No SQL injection (using IndexedDB parameterized queries)
+- ✅ No sensitive data in localStorage/console
+
+### Privacy
+- ✅ All data stored locally (IndexedDB)
+- ✅ No network requests to external servers
+- ✅ Export data contains only user data
+
+---
+
+## Test Result Template
+
+**Tester Name:** _______________
+**Date:** _______________
+**Environment:** Browser: _____ OS: _____ Mode: Light/Dark
+
+**Test Results:**
+
+| Test Suite | Pass | Fail | Notes |
+|------------|------|------|-------|
+| 1. Project System | ☐ | ☐ | |
+| 2. Manual Time Entry | ☐ | ☐ | |
+| 3. Monthly Reporting | ☐ | ☐ | |
+| 4. Export & Bulk Ops | ☐ | ☐ | |
+| 5. Calendar View | ☐ | ☐ | |
+| 6. Undo System | ☐ | ☐ | |
+| Integration Tests | ☐ | ☐ | |
+| Performance Tests | ☐ | ☐ | |
+| Edge Cases | ☐ | ☐ | |
+
+**Overall Assessment:** ☐ PASS ☐ FAIL
+
+**Critical Issues Found:**
+1. _______________
+2. _______________
+
+**Minor Issues Found:**
+1. _______________
+2. _______________
+
+**Notes:**
+_______________
+_______________
+
+---
+
+**Document Version:** 1.0
+**Last Updated:** 2025-01-22
+**Next Review:** After Phase 4 implementation

@@ -1,0 +1,792 @@
+# Claude Code Resources - Comprehensive Research Summary
+
+**Compiled:** December 2025
+**Purpose:** Reference guide for optimizing Claude Code utilization
+
+---
+
+## Table of Contents
+
+1. [Awesome Lists & Plugin Collections](#awesome-lists--plugin-collections)
+2. [Frameworks](#frameworks)
+3. [Subagents Collections](#subagents-collections)
+4. [Hooks & Automation](#hooks--automation)
+5. [Slash Commands](#slash-commands)
+6. [CLAUDE.md Best Practices](#claudemd-best-practices)
+7. [Status Line Tools](#status-line-tools)
+8. [Output Styles](#output-styles)
+9. [MCP Servers](#mcp-servers)
+10. [IDE Integrations](#ide-integrations)
+11. [Tips & Tricks](#tips--tricks)
+12. [Key Resources](#key-resources)
+13. [Installation Plan & Recommendations](#installation-plan--recommendations)
+14. [Portable .claude Folder Guide](#portable-claude-folder-guide)
+
+---
+
+## Awesome Lists & Plugin Collections
+
+### Primary Collections
+
+| Repository | Stars | Description |
+|------------|-------|-------------|
+| [ccplugins/awesome-claude-code-plugins](https://github.com/ccplugins/awesome-claude-code-plugins) | - | Curated list of slash commands, subagents, MCP servers, hooks |
+| [jqueryscript/awesome-claude-code](https://github.com/jqueryscript/awesome-claude-code) | - | Tools, IDE integrations, frameworks, 100+ subagents |
+| [jeremylongshore/claude-code-plugins-plus](https://github.com/jeremylongshore/claude-code-plugins-plus) | - | 243 plugins, 175 with Agent Skills v1.2.0 |
+| [hesreallyhim/awesome-claude-code](https://github.com/hesreallyhim/awesome-claude-code) | - | Hooks, slash commands, subagent files, workflows |
+| [quemsah/awesome-claude-plugins](https://github.com/quemsah/awesome-claude-plugins) | - | 1,269 indexed repositories, automated metrics |
+| [alvinunreal/awesome-claude](https://github.com/alvinunreal/awesome-claude) | - | General Claude resources |
+
+### Official Plugin System (October 2025)
+- Install plugins with `/plugin` command
+- Works across terminal and VS Code
+- Bundle slash commands, subagents, MCP servers, and hooks
+
+---
+
+## Frameworks
+
+### SuperClaude Framework
+
+**Repository:** [SuperClaude-Org/SuperClaude_Framework](https://github.com/SuperClaude-Org/SuperClaude_Framework)
+**Website:** [superclaude.org](https://superclaude.org/)
+
+**Features:**
+- 25 specialized commands (`/sc:*` prefix)
+- 9 Cognitive Personas with automatic activation
+- Behavioral instruction injection
+- Component orchestration
+
+**Cognitive Personas:**
+| Persona | Domain | Activation Triggers |
+|---------|--------|---------------------|
+| architect | System design | Architecture discussions |
+| frontend | UI/UX | .tsx files, styling |
+| backend | API/Database | Server code, APIs |
+| security | Security audit | Security keywords |
+| analyzer | Debugging | "bug", "error" keywords |
+| qa | Testing | Test discussions |
+| performance | Optimization | Performance issues |
+| refactorer | Code cleanup | Refactoring tasks |
+| mentor | Teaching | Explanations needed |
+
+**Installation:**
+```bash
+pipx install superclaude
+superclaude install
+```
+
+**Example Commands:**
+```bash
+/design --api --ddd --architect
+/build --feature --tdd --backend
+/test --coverage --e2e
+/analyze
+/troubleshoot
+```
+
+### Other Orchestrators
+
+| Tool | Description |
+|------|-------------|
+| claude-flow | Multi-agent orchestration |
+| claude-squad | Team coordination |
+| ccpm | Claude Code Package Manager |
+
+---
+
+## Subagents Collections
+
+### Official Structure
+
+Location: `.claude/agents/` (project) or `~/.claude/agents/` (global)
+
+**Configuration Format:**
+```yaml
+---
+name: agent-name
+description: When to use this agent
+tools: [Read, Write, Edit, Bash, Glob, Grep]
+model: sonnet  # or opus, haiku, inherit
+permissionMode: default
+skills: [optional-skills]
+---
+
+System prompt content here...
+```
+
+**Model Options:**
+- `sonnet` - Default, balanced
+- `opus` - Most capable
+- `haiku` - Fastest, cheapest
+- `inherit` - Use parent model
+
+### Popular Collections
+
+| Repository | Agents | Focus |
+|------------|--------|-------|
+| [VoltAgent/awesome-claude-code-subagents](https://github.com/VoltAgent/awesome-claude-code-subagents) | 100+ | Full-stack, DevOps, data science |
+| [wshobson/agents](https://github.com/wshobson/agents) | 91 | 15 orchestrators, 47 skills, 45 tools |
+| [0xfurai/claude-code-subagents](https://github.com/0xfurai/claude-code-subagents) | 100+ | Production-ready, domain experts |
+| [lst97/claude-code-sub-agents](https://github.com/lst97/claude-code-sub-agents) | - | Full-stack development |
+| [zhsama/claude-sub-agent](https://github.com/zhsama/claude-sub-agent) | - | Phased workflow system |
+| [vanzan01/claude-code-sub-agent-collective](https://github.com/vanzan01/claude-code-sub-agent-collective) | - | Context engineering, hub-spoke coordination |
+
+### Tool Assignment Guidelines
+
+| Agent Type | Recommended Tools |
+|------------|-------------------|
+| Read-only/Research | Read, Grep, Glob |
+| Web Research | WebFetch, WebSearch |
+| Code Writers | Read, Write, Edit, Bash |
+| Full Access | All tools |
+
+---
+
+## Hooks & Automation
+
+### Hook Types
+
+| Hook | Trigger | Use Cases |
+|------|---------|-----------|
+| PreToolUse | Before any tool executes | Validation, blocking |
+| PostToolUse | After tool completes | Logging, formatting |
+| Stop | Session ends | Cleanup, notifications |
+| SessionStart | Session begins | Environment setup |
+| UserPromptSubmit | User submits prompt | Input validation |
+
+### Configuration Locations
+
+- **Global:** `~/.claude/settings.json`
+- **Project:** `.claude/settings.json`
+
+### Example: Pre-Commit Linting
+
+```json
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash(git commit:*)",
+        "command": "~/.claude/hooks/pre-commit.sh"
+      }
+    ]
+  }
+}
+```
+
+### Common Hook Use Cases
+
+**Pre-Commit:**
+- Run linters (ESLint, Prettier, Rubocop)
+- Run tests before commit
+- Secret scanning
+- TODO/FIXME detection
+- Automatic ticket ID association
+- Co-author trailer addition
+
+**Post-Commit:**
+- Notifications
+- Sync with external services
+- Logging
+
+**Blocking Protected Files:**
+```python
+# Return exit code 2 to block
+if file_path in ['.env', 'package-lock.json']:
+    sys.exit(2)
+```
+
+### Headless Mode for CI
+
+```bash
+claude -p "Your prompt" --output-format stream-json
+```
+
+---
+
+## Slash Commands
+
+### Built-in Commands
+
+| Command | Purpose |
+|---------|---------|
+| `/init` | Generate CLAUDE.md from project analysis |
+| `/clear` | Clear context, start fresh |
+| `/compact` | Summarize conversation (auto at 80%) |
+| `/memory` | Manage CLAUDE.md content |
+| `/output-style` | Change response formatting |
+| `/statusline` | Configure status line |
+| `/terminal-setup` | Fix terminal keybindings |
+| `/plugin` | Browse/install plugins |
+| `/install-github-app` | Enable PR auto-review |
+
+### Custom Commands
+
+**Location:** `.claude/commands/` (project) or `~/.claude/commands/` (global)
+
+**Format:** Markdown files that become slash commands
+
+```markdown
+<!-- .claude/commands/debug-loop.md -->
+# Debug Loop
+
+Analyze the error, propose fixes, and test until resolved.
+Focus on: $ARGUMENTS
+```
+
+**Usage:** `/debug-loop TypeError in auth module`
+
+### Popular Command Collections
+
+- [awattar/claude-code-best-practices](https://github.com/awattar/claude-code-best-practices) - `/custom-init`, `/help-commands`
+- SuperClaude - 25 specialized commands
+
+---
+
+## CLAUDE.md Best Practices
+
+### File Locations
+
+| Location | Scope | Use For |
+|----------|-------|---------|
+| `./CLAUDE.md` | Project | Architecture, standards, deployment |
+| `~/.claude/CLAUDE.md` | Global | Personal preferences, workflows |
+
+### Key Principles
+
+1. **Initialize with `/init`** - Generates from project analysis
+2. **Iterate and refine** - Like any frequently used prompt
+3. **Keep concise** - Human-readable, no fluff
+4. **Use `#` key** - Add instructions you repeat often
+5. **Share via git** - Project CLAUDE.md benefits whole team
+
+### Recommended Content
+
+```markdown
+# Project Name
+
+## Architecture
+- Key patterns and decisions
+- Folder structure explanation
+
+## Coding Standards
+- Style guide references
+- Naming conventions
+
+## Common Commands
+- Build: `npm run build`
+- Test: `npm test`
+- Deploy: `./deploy.sh`
+
+## Important Files
+- Entry point: src/index.ts
+- Config: config/settings.ts
+
+## Things That Work
+- Pattern X for problem Y
+
+## Things That Don't Work
+- Avoid pattern Z because...
+```
+
+### Performance Impact
+
+- Repository-specific optimization: **+11% better code**
+- System prompt optimization: **+5% general performance**
+
+### Key Resources
+
+- [Cranot/claude-code-guide](https://github.com/Cranot/claude-code-guide)
+- [zebbern/claude-code-guide](https://github.com/zebbern/claude-code-guide)
+- [awattar/claude-code-best-practices](https://github.com/awattar/claude-code-best-practices)
+- [Official Blog](https://claude.com/blog/using-claude-md-files)
+
+---
+
+## Status Line Tools
+
+### Official Configuration
+
+**Location:** `.claude/settings.json`
+
+```json
+{
+  "statusLine": {
+    "type": "command",
+    "command": "~/.claude/statusline.sh",
+    "padding": 0
+  }
+}
+```
+
+Claude passes session JSON via stdin (model, directories, git info).
+
+### Popular Tools
+
+| Tool | Stars | Features |
+|------|-------|----------|
+| [sirmalloc/ccstatusline](https://github.com/sirmalloc/ccstatusline) | 2.3k | Multi-line, TUI config, themes, powerline |
+| [rz1989s/claude-code-statusline](https://github.com/rz1989s/claude-code-statusline) | - | Cost tracking, MCP monitoring, themes |
+| [chongdashu/cc-statusline](https://github.com/chongdashu/cc-statusline) | - | Bash-first, zero dependencies |
+| [gabriel-dehan/claude_monitor_statusline](https://github.com/gabriel-dehan/claude_monitor_statusline) | - | Usage info display |
+
+### Installation (ccstatusline)
+
+```bash
+npx ccstatusline@latest
+# or
+bunx ccstatusline@latest
+```
+
+### Key Metrics to Display
+
+- **Context usage %** - Most important (stop around 60%)
+- Model name
+- Current directory
+- Git branch
+- Uncommitted file count
+- Token usage progress bar
+- Cost tracking
+
+**Why Monitor Context:**
+- 200K token window
+- Auto-compacts at 80%
+- Performance degrades as context fills
+
+---
+
+## Output Styles
+
+### Configuration
+
+```json
+{
+  "outputStyle": "default"
+}
+```
+
+### Custom Styles
+
+**Locations:**
+- `~/.claude/output-styles/` (global)
+- `.claude/output-styles/` (project)
+
+**Selection:** `/output-style` command
+
+**Persistence:** Stored in `.claude/settings.local.json`
+
+### Verbose Mode
+
+```bash
+claude --verbose  # Detailed logging for debugging
+```
+
+---
+
+## MCP Servers
+
+### Recommended Servers
+
+| Server | Package | Purpose |
+|--------|---------|---------|
+| sequential-thinking | `@modelcontextprotocol/server-sequential-thinking` | Complex reasoning |
+| playwright | `@playwright/mcp@latest` | Browser automation |
+| filesystem | `@modelcontextprotocol/server-filesystem` | File operations |
+| sqlite | `uvx mcp-server-sqlite` | Database queries |
+| memory | `@modelcontextprotocol/server-memory` | Persistent memory |
+| fetch | `@modelcontextprotocol/server-fetch` | Web fetching |
+| puppeteer | `@modelcontextprotocol/server-puppeteer` | Browser control |
+| brave-search | `@modelcontextprotocol/server-brave-search` | Web search |
+
+### Configuration
+
+**Location:** `~/.claude.json`
+
+```json
+{
+  "mcpServers": {
+    "sequential-thinking": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"]
+    }
+  }
+}
+```
+
+### Lazy Loading
+
+Set `"enableAllProjectMcpServers": false` in settings to only load MCP servers when explicitly called.
+
+---
+
+## IDE Integrations
+
+| IDE | Extension | Features |
+|-----|-----------|----------|
+| VS Code | Official Claude Code | Inline diffs, real-time edits |
+| VS Code | Claude Code Chat | Native chat interface, history |
+| Neovim | claudecode.nvim | Pure Lua integration |
+| Cursor | Claude-Autopilot | Task automation |
+| GitButler | Hooks integration | Branch management |
+
+---
+
+## Tips & Tricks
+
+### Permission Management
+
+```bash
+# Skip all permission prompts (use carefully)
+claude --dangerously-skip-permissions
+
+# Pre-approve common commands
+claude allow "git commit"
+claude allow "npm install"
+```
+
+### Keyboard Shortcuts
+
+| Action | Key |
+|--------|-----|
+| Stop Claude | `Escape` |
+| Previous messages | `Escape` twice |
+| Paste images | `Ctrl+V` (not Cmd+V) |
+| New line | Run `/terminal-setup` first |
+
+### Thinking Depth
+
+| Phrase | Depth |
+|--------|-------|
+| "think" | Standard analysis |
+| "think hard" | Deeper analysis |
+| "ultrathink" | Maximum depth |
+
+### Context Management
+
+- **Start fresh:** `/clear` regularly
+- **Auto-compact:** Happens at 80% context
+- **Monitor:** Use status line for context %
+- **Subagents:** Use for complex tasks to preserve main context
+
+### Parallel Sessions
+
+```bash
+# Use git worktree for parallel branches
+git worktree add ../feature-branch feature-branch
+cd ../feature-branch
+claude  # Separate session
+```
+
+### Best Practices
+
+1. **Read before modifying** - Never propose changes to unread code
+2. **Use subagents early** - Preserves main context
+3. **Clear prompts** - Use XML-like tags for structure
+4. **Structured prompting** - Specify exact tasks, files, outputs
+5. **Fresh sessions** - Reduce prompt-drift
+
+---
+
+## Key Resources
+
+### Official Documentation
+- [Claude Code Docs](https://code.claude.com/docs)
+- [Best Practices](https://www.anthropic.com/engineering/claude-code-best-practices)
+- [CLAUDE.md Guide](https://claude.com/blog/using-claude-md-files)
+- [Hooks Guide](https://code.claude.com/docs/en/hooks-guide)
+
+### Community Guides
+- [ClaudeLog](https://claudelog.com/) - Docs, tutorials, best practices
+- [awesomeclaude.ai](https://awesomeclaude.ai/) - Comprehensive resource hub
+- [32 Claude Code Tips](https://agenticcoding.substack.com/p/32-claude-code-tips-from-basics-to)
+- [Cooking with Claude Code](https://www.siddharthbharath.com/claude-code-the-complete-guide/)
+
+### GitHub Guides
+- [Cranot/claude-code-guide](https://github.com/Cranot/claude-code-guide)
+- [zebbern/claude-code-guide](https://github.com/zebbern/claude-code-guide)
+- [wesammustafa/Claude-Code-Everything-You-Need-to-Know](https://github.com/wesammustafa/Claude-Code-Everything-You-Need-to-Know)
+
+### Blog Posts
+- [Demystifying Claude Code Hooks](https://www.brethorsting.com/blog/2025/08/demystifying-claude-code-hooks/)
+- [Hooks for Automated Quality Checks](https://www.letanure.dev/blog/2025-08-06--claude-code-part-8-hooks-automated-quality-checks)
+- [Optimizing CLAUDE.md](https://arize.com/blog/claude-md-best-practices-learned-from-optimizing-claude-code-with-prompt-learning/)
+
+---
+
+## Quick Reference
+
+### File Locations Summary
+
+| Purpose | Project Location | Global Location |
+|---------|------------------|-----------------|
+| Memory/Context | `./CLAUDE.md` | `~/.claude/CLAUDE.md` |
+| Settings | `.claude/settings.json` | `~/.claude/settings.json` |
+| Local Settings | `.claude/settings.local.json` | `~/.claude/settings.local.json` |
+| Slash Commands | `.claude/commands/` | `~/.claude/commands/` |
+| Subagents | `.claude/agents/` | `~/.claude/agents/` |
+| Skills | `.claude/skills/` | `~/.claude/skills/` |
+| Output Styles | `.claude/output-styles/` | `~/.claude/output-styles/` |
+| MCP Config | - | `~/.claude.json` |
+
+### Essential Commands
+
+```bash
+# Initialize project
+/init
+
+# Clear context
+/clear
+
+# Configure status line
+/statusline
+
+# Configure output style
+/output-style
+
+# Browse plugins
+/plugin
+
+# Setup terminal
+/terminal-setup
+```
+
+---
+
+## Installation Plan & Recommendations
+
+### What to Install
+
+| Resource | Recommendation | Reasoning |
+|----------|---------------|-----------|
+| **ccstatusline** | **INSTALL** | Essential for context monitoring. Simple npx setup. |
+| **SuperClaude Framework** | **SKIP** | Conflicts with taches-cc-resources plugin. Complex pipx setup. |
+| **100+ Subagent Collections** | **SKIP** | Already have good generic agents from plugins. Would bloat context. |
+| **Additional MCP Servers** | **AS NEEDED** | Only add specific servers when a project requires them. |
+| **More Slash Commands** | **SELECTIVE** | Browse awesome lists for specific needs. |
+| **Custom Hooks** | **ADD GRADUALLY** | Start with pre-commit linting, expand as needed. |
+
+### Recommended Installation Steps
+
+#### Step 1: Configure Status Line (Recommended)
+
+**Option A - Built-in (easiest):**
+```
+/statusline
+```
+Run inside Claude Code to configure interactively.
+
+**Option B - ccstatusline (more features):**
+```bash
+npx ccstatusline@latest
+```
+Run in terminal for TUI config with themes, multi-line, powerline support.
+
+**Why use a status line:**
+- Real-time context usage monitoring
+- Stop working around 60% context (auto-compacts at 80%)
+- Prevents performance degradation from context bloat
+
+#### Step 2: Add Pre-Commit Hook (Optional)
+Create `~/.claude/hooks/pre-commit.sh`:
+```bash
+#!/bin/bash
+# Run linter on staged files
+npm run lint --quiet || exit 2
+```
+
+Add to `~/.claude/settings.json`:
+```json
+{
+  "hooks": {
+    "PreToolUse": [{
+      "matcher": "Bash(git commit:*)",
+      "command": "~/.claude/hooks/pre-commit.sh"
+    }]
+  }
+}
+```
+
+#### Step 3: Add MCP Servers as Needed
+Current recommended setup (already configured):
+- `sequential-thinking` - Complex reasoning chains
+- `playwright` - Browser automation/testing
+- `memory` - Persistent memory across sessions
+- `sqlite` - Database operations
+- `filesystem` - File operations (scoped to `.`)
+
+### What NOT to Install
+
+| Resource | Why Skip |
+|----------|----------|
+| **Multiple agent collections** | Context bloat, conflicting patterns |
+| **SuperClaude + taches-cc-resources** | Command conflicts |
+| **All 243 plugins** | Most are unused, slows startup |
+| **GitHub MCP** | Requires API key management, permissions unclear |
+
+### Philosophy: Less is More
+
+- Each skill/agent/command loads into context window
+- More tools = less room for actual work
+- Add tools only when you have a specific use case
+- Remove unused tools periodically
+
+---
+
+## Portable .claude Folder Guide
+
+### Files to INCLUDE When Copying
+
+| Path | Purpose | Notes |
+|------|---------|-------|
+| `settings.json` | Permissions, plugins | Core config |
+| `settings.local.json` | Local overrides | Usually same as settings.json |
+| `commands/` | Custom slash commands | Your workflow |
+| `skills/` | Custom skills | Domain knowledge |
+| `templates/` | Task templates | Workflows |
+| `plans/` | Planning documents | Reference |
+| `automation-guide.md` | Workflow docs | Reference |
+| `workflow-checklist.md` | Checklist | Reference |
+| `CLAUDE-CODE-RESOURCES.md` | This doc | Reference |
+| `CLAUDE.md` | Global memory | Personal preferences |
+
+### Files to EXCLUDE When Copying
+
+| Path | Why Exclude |
+|------|-------------|
+| `.claude/` (nested) | Accidental duplicate |
+| `debug/` | Session logs |
+| `file-history/` | Machine-specific edit history |
+| `ide/` | IDE lock files |
+| `projects/` | Machine-specific path hashes |
+| `shell-snapshots/` | Shell state backups |
+| `statsig/` | Analytics cache |
+| `telemetry/` | Telemetry data |
+| `todos/` | Old agent task data |
+| `security_warnings_*.json` | Session-specific |
+| `history.jsonl` | Conversation history |
+| `stats-cache.json` | Usage statistics |
+| `.credentials.json` | Authentication |
+| `sqlite_mcp_server.db` | Local MCP database |
+
+### MCP Server Configuration
+
+**Important:** The `.claude.json` file and `.claude/` folder are **siblings**, not parent-child:
+```
+~/ (home directory)
+├── .claude.json      ← MCP servers config (NOT inside .claude/)
+└── .claude/          ← Skills, commands, settings folder
+    ├── settings.json
+    ├── commands/
+    └── skills/
+```
+
+**For portability**, we keep an optimized `.claude.json` inside `.claude/` as a backup:
+
+**File: `.claude/.claude.json`** (portable MCP config)
+```json
+{
+  "mcpServers": {
+    "sequential-thinking": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
+      "env": {}
+    },
+    "playwright": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@playwright/mcp@latest"],
+      "env": {}
+    },
+    "memory": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-memory"],
+      "env": {}
+    },
+    "filesystem": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "."],
+      "env": {}
+    },
+    "sqlite": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": ["mcp-server-sqlite"],
+      "env": {}
+    }
+  }
+}
+```
+
+**On a new machine:**
+1. Copy `.claude/` folder to `~/.claude/`
+2. Copy `.claude/.claude.json` to `~/.claude.json` (one level UP from the folder)
+
+**Note:** The real `~/.claude.json` will accumulate machine-specific data (projects, caches, etc.) over time. That's fine - Claude Code regenerates what it needs. The backup in `.claude/.claude.json` stays clean and portable.
+
+### Copying to a New Location
+
+```bash
+# From source machine
+cd ~/.claude
+# Create portable archive (excluding machine-specific files)
+tar --exclude='debug' \
+    --exclude='file-history' \
+    --exclude='ide' \
+    --exclude='projects' \
+    --exclude='shell-snapshots' \
+    --exclude='statsig' \
+    --exclude='telemetry' \
+    --exclude='todos' \
+    --exclude='downloads' \
+    --exclude='security_warnings_*' \
+    --exclude='history.jsonl' \
+    --exclude='stats-cache.json' \
+    --exclude='.credentials.json' \
+    --exclude='sqlite_mcp_server.db' \
+    --exclude='.claude' \
+    -cvf claude-portable.tar .
+
+# On destination machine
+mkdir -p ~/.claude
+cd ~/.claude
+tar -xvf /path/to/claude-portable.tar
+
+# Merge MCP servers into ~/.claude.json if needed
+```
+
+### For Windows (PowerShell)
+
+```powershell
+# Create list of files to copy
+$include = @(
+    'settings.json',
+    'settings.local.json',
+    'commands',
+    'skills',
+    'templates',
+    'plans',
+    'plugins',
+    'automation-guide.md',
+    'workflow-checklist.md',
+    'CLAUDE-CODE-RESOURCES.md',
+    'CLAUDE.md'
+)
+
+# Copy to destination
+$dest = "D:\path\to\destination\.claude"
+New-Item -ItemType Directory -Force -Path $dest
+foreach ($item in $include) {
+    $src = Join-Path "C:\Users\tjn\.claude" $item
+    if (Test-Path $src) {
+        Copy-Item -Path $src -Destination $dest -Recurse -Force
+    }
+}
+```
+
+---
+
+*This document is a living reference. Update as new tools and practices emerge.*

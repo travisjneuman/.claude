@@ -1,0 +1,75 @@
+# Foundation Optimization Task
+
+**Goal**: Clean, optimize, and refactor codebase for lean, stable, secure foundation before adding new features.
+
+## Context
+- Current state: Production stable, tests passing (12/29 E2E, 79/79 unit)
+- Objective: Remove dead code, audit tech debt, optimize performance
+- Philosophy: Build solid foundation before adding more features
+
+## Phase 1: Safe Dead Code Removal ✅
+
+### Checklist
+- [x] Scan for unused exports using TypeScript compiler
+- [x] Identify unused imports
+- [x] Find unused files (no imports)
+- [x] Remove safe candidates
+- [x] Run full test suite (unit + type-check)
+- [x] Commit dead code removal
+
+## Phase 2: Full Foundation Audit
+
+### Checklist
+- [ ] Run tech-debt-analyzer skill
+- [ ] Check bundle size vs budget (<100KB target)
+- [ ] Security audit (XSS, sanitization, crypto)
+- [ ] Use /consider:pareto to identify 80/20 issues
+- [ ] Document all findings in this file
+- [ ] Create prioritized refactoring plan
+
+## Phase 3: Systematic Cleanup
+
+### Checklist
+- [ ] Address P0 issues (security, critical bugs)
+- [ ] Address P1 issues (performance, major tech debt)
+- [ ] Address P2 issues (code quality, minor tech debt)
+- [ ] Test after each fix
+- [ ] Commit incrementally
+- [ ] Final verification (all tests pass, bundle size check)
+
+## Findings
+
+### Dead Code Removed
+
+**Scan Results:**
+- Unused exports: **0** (excellent! ✅)
+- Unused imports: **0** (excellent! ✅)
+- Unused dependencies: **1 removed** (`ai-labs-claude-skills`)
+
+**Removed:**
+1. Package `ai-labs-claude-skills` (unused dependency)
+
+**Notes:**
+- Found 101 console statements across 40 files - these are intentional debug/development aids, not dead code
+- Found 77 `any` types across 32 files - this is typing debt, addressed in Phase 2
+- Found 10 debt markers (TODO/FIXME/etc) - very low number, good code hygiene
+
+**Test Results After Removal:**
+- Unit tests: 79/79 passing ✅
+- Type check: passing ✅
+
+### Tech Debt Identified
+(Will be populated in Phase 2)
+
+### Refactoring Plan
+(Will be populated in Phase 2)
+
+### Issues Fixed
+(Will be populated in Phase 3)
+
+## Verification
+- [ ] All tests pass (unit + E2E)
+- [ ] Type checking passes
+- [ ] Bundle size within budget
+- [ ] No security vulnerabilities introduced
+- [ ] Performance maintained or improved

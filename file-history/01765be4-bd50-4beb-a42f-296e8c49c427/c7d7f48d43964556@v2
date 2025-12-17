@@ -1,0 +1,99 @@
+# Dashboard Layout & Widget Defaults Improvements
+
+## Overview
+Improve dashboard layout with better row alignment, smarter defaults, and optimized spacing to reduce scrolling while maintaining visual quality.
+
+## Problem Statement
+1. **Different height widgets** create misaligned rows with visual "holes"
+2. **API widgets enabled by default** - Core platform widgets mixed with optional API widgets
+3. **WeatherMap too narrow** - At 2x width, side-by-side layout feels cramped
+4. **Excessive scrolling** - Natural widget heights create large gaps
+
+## Solution
+
+### Phase 1: Update Widget Defaults
+**File:** `src/stores/useWidgetStore.ts`
+
+Changed default enabled widgets from:
+```ts
+['tasksummary', 'upcomingevents', 'recentnotes', 'quickadd', 'quote', 'crypto', 'hackernews', 'weathermap']
+```
+
+To core widgets only:
+```ts
+['weathermap', 'tasksummary', 'upcomingevents', 'recentnotes', 'quickadd']
+```
+
+Updated default widget sizes:
+- WeatherMap: `3x` (full row width, locked)
+- Core widgets: `2x` (~1.5 widgets per row in 3-column grid)
+
+Added migration (version 2 → 3):
+- Existing users: weathermap updated to 3x, core widgets set to 2x if not sized
+- User preferences preserved (doesn't force-remove API widgets if already enabled)
+
+### Phase 2: CSS Grid Dense Packing
+**File:** `src/pages/Dashboard.tsx`
+
+Added `grid-auto-flow: dense` to dashboard grid:
+```tsx
+<div className="dashboard-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-min"
+     style={{ gridAutoFlow: 'dense' }}>
+```
+
+**How it works:**
+- Widgets "pack" into available spaces, eliminating vertical gaps
+- Maintains natural heights while dramatically reducing scrolling
+- Creates masonry-like effect without Masonry library
+
+### Phase 3: Lock WeatherMap Size
+**File:** `src/components/WidgetControls.tsx`
+
+Hide size selector for weathermap widget:
+```tsx
+{widgetId !== 'weathermap' && (
+  <div className="size-selector">
+    {/* Size buttons */}
+  </div>
+)}
+```
+
+WeatherMap is now locked to 3x width (full row) and cannot be resized.
+
+### Phase 4: Responsive Layout
+**WeatherMap already responsive:** `flex-col lg:flex-row`
+- Desktop (≥1024px): Side-by-side (map + forecast)
+- Mobile (<1024px): Stacked vertically (map on top, forecast below)
+
+## Files Modified
+1. `src/stores/useWidgetStore.ts` - Defaults, sizes, migration
+2. `src/pages/Dashboard.tsx` - Grid dense packing
+3. `src/components/WidgetControls.tsx` - Lock WeatherMap size
+
+## Results
+
+✅ **Better defaults** - Core widgets only, WeatherMap full-width
+✅ **Reduced scrolling** - Dense packing fills gaps
+✅ **Natural heights** - Widgets determine own height, no forced blank space
+✅ **Locked WeatherMap** - 3x width, cannot be resized
+✅ **API widgets available** - Still in Widget Manager, just disabled by default
+✅ **Responsive** - Mobile stacks properly, desktop side-by-side
+
+## Testing
+- Type-check: PASSED ✅
+- Production build: PASSED ✅ (9.65s)
+- Bundle: 498.57 KB gzipped (unchanged)
+
+## Migration Notes
+- Version bumped from 2 to 3
+- Existing users automatically upgraded:
+  - WeatherMap: 2x → 3x
+  - Core widgets: sized to 2x if not already set
+  - User preferences preserved (no forced removals)
+
+## Time Estimate vs Actual
+- **Estimated:** ~1.5 hours
+- **Actual:** ~1 hour (faster than expected!)
+
+## Next Steps
+Discussed with user: After seeing this in action, have a comprehensive discussion to further improve dashboard usefulness, professional appearance, and overall value for both personal and professional users.

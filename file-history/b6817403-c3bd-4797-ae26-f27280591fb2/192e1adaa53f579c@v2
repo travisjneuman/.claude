@@ -1,0 +1,266 @@
+# Phantom Shell User Guide
+
+**Browser-Native Development Environment**
+
+---
+
+## What is Phantom Shell?
+
+Phantom Shell is a **browser-native terminal** that runs directly in your browser. It provides a real development environment without installing anything on your computer.
+
+**Key Features:**
+- Full terminal emulator (not a chat interface)
+- Runs Node.js and npm commands in your browser via WebContainers
+- Command history with up/down arrow navigation
+- Project persistence (saved to IndexedDB)
+- Works entirely offline after initial load
+- Zero data sent to servers - privacy-first
+
+---
+
+## Accessing Phantom Shell
+
+1. Click the **AI Terminal** button (💬) in the header or press `Ctrl+Shift+A` / `Cmd+Shift+A`
+2. You'll see two tabs at the top: **💬 Chat** and **⌨️ Shell**
+3. Click **⌨️ Shell** to switch to Phantom Shell mode
+
+---
+
+## Built-in Commands
+
+Phantom Shell supports several built-in commands (prefix with `/`):
+
+### Help & Info
+
+| Command | Description |
+|---------|-------------|
+| `/help` | Show all available commands |
+| `/version` | Show version info and WebContainer status |
+| `/about` | About Phantom Shell |
+| `/clear` | Clear the terminal screen |
+| `/history` | Show your recent command history |
+
+### Project Management
+
+| Command | Description |
+|---------|-------------|
+| `/projects` | List all your projects |
+| `/new <name>` | Create a new project |
+| `/open <name>` | Open an existing project |
+| `/close` | Close the current project |
+| `/export` | Export project to .brain file (coming soon) |
+
+### AI Commands (Coming Soon)
+
+| Command | Description |
+|---------|-------------|
+| `/ai <prompt>` | Ask AI to help with development |
+
+---
+
+## Keyboard Shortcuts
+
+| Shortcut | Action |
+|----------|--------|
+| `Enter` | Execute command |
+| `↑` / `↓` | Navigate command history |
+| `Ctrl+C` | Cancel current input |
+| `Backspace` | Delete last character |
+
+---
+
+## System Commands (WebContainer)
+
+Once WebContainer boots, you can run standard Node.js commands:
+
+```bash
+# Check Node.js version
+node -v
+
+# Initialize a project
+npm init -y
+
+# Install packages
+npm install lodash
+
+# Run Node.js scripts
+node index.js
+
+# Run npm scripts
+npm run dev
+```
+
+**Note:** WebContainer requires Cross-Origin Isolation headers. You'll see a ✓ or ✗ status in `/version` output.
+
+---
+
+## What Works vs What Doesn't
+
+WebContainer runs **Node.js in your browser** via WebAssembly - it's NOT a full Linux/Unix system.
+
+### ✅ Commands That WORK
+
+| Command | Example | Notes |
+|---------|---------|-------|
+| **npm** | `npm install`, `npm run dev` | Full npm support |
+| **node** | `node script.js`, `node -v` | Node.js execution |
+| **npx** | `npx create-react-app` | Package runner |
+| **ls** | `ls -la` | List files |
+| **cd** | `cd src` | Change directory |
+| **cat** | `cat package.json` | View file contents |
+| **mkdir** | `mkdir components` | Create directory |
+| **touch** | `touch index.js` | Create file |
+| **rm** | `rm file.txt` | Remove file |
+| **mv** | `mv old.js new.js` | Move/rename |
+| **cp** | `cp src.js dest.js` | Copy file |
+| **echo** | `echo "hello"` | Print text |
+| **pwd** | `pwd` | Print working directory |
+
+### ❌ Commands That DON'T Work
+
+| Command | Why | Alternative |
+|---------|-----|-------------|
+| **git** | Not installed in WebContainer | Use GitHub widget or external git client |
+| **docker** | Requires system-level access | Not available in browser |
+| **python** | Not installed | Use Node.js instead |
+| **pip** | Python not available | Use npm instead |
+| **ping** | Network syscalls not supported | Use `node -e "fetch('url')"` |
+| **curl** | Network syscalls not supported | Use `node -e "fetch('url')"` |
+| **wget** | Network syscalls not supported | Use npm packages |
+| **ssh** | System networking not available | Not available in browser |
+| **sudo** | No privilege escalation | Not applicable |
+| **apt/brew** | No system package manager | Use npm |
+| **chmod** | Limited file permissions | Usually not needed |
+
+### Why These Limitations?
+
+WebContainer runs in a **sandboxed browser environment**:
+
+1. **Security**: Browsers can't access system-level features like raw sockets
+2. **Isolation**: Each session runs in its own sandbox
+3. **Portability**: Works anywhere without installation
+
+**Good news**: Most web development tasks work perfectly! You can:
+- Build React/Vue/Angular apps
+- Run Express/Fastify servers
+- Use TypeScript, Vite, Webpack
+- Install any npm package
+- Run tests with Jest/Vitest
+
+### Workarounds
+
+**For git operations:**
+- Use the GitHub widget in Neuman Brain
+- Export your project and use git externally
+- Plan: isomorphic-git integration coming in Phase 6
+
+**For network testing:**
+```bash
+# Instead of: ping google.com
+node -e "fetch('https://google.com').then(r => console.log('Status:', r.status))"
+
+# Instead of: curl https://api.example.com
+node -e "fetch('https://api.example.com').then(r => r.json()).then(console.log)"
+```
+
+**For Python scripts:**
+- Rewrite in JavaScript/TypeScript
+- Use a Python-to-JS converter
+- Run Python externally and use the output
+
+---
+
+## Browser Requirements
+
+Phantom Shell uses WebContainers which requires modern browser features:
+
+| Browser | Support |
+|---------|---------|
+| Chrome 89+ | ✅ Full support |
+| Edge 89+ | ✅ Full support |
+| Firefox 89+ | ✅ Full support |
+| Safari 16.4+ | ✅ Full support |
+
+**Technical Requirements:**
+- SharedArrayBuffer support
+- Cross-Origin Isolation (COEP/COOP headers)
+
+---
+
+## Project Templates
+
+When creating a new project with `/new`, you can use templates:
+
+### React + Vite (`react-vite`)
+- React 18 with Vite bundler
+- Hot module replacement (HMR)
+- Ready to run `npm run dev`
+
+### Node.js Basic (`node-basic`)
+- Minimal Node.js project
+- ES Modules enabled
+- Ready for server-side development
+
+---
+
+## Data Storage
+
+All your Phantom Shell data is stored locally:
+
+- **Projects:** Saved to IndexedDB (persists across sessions)
+- **Command History:** Saved locally (last 1000 commands)
+- **Files:** Stored in browser memory during session, persisted to IndexedDB
+
+**Privacy:** No data is sent to any server. Everything runs locally in your browser.
+
+---
+
+## Troubleshooting
+
+### WebContainer Not Available
+
+If you see "WebContainer requires Cross-Origin Isolation":
+
+1. Make sure you're using a supported browser
+2. Check that you're accessing via `https://` or `localhost`
+3. Verify headers are configured (for self-hosted deployments)
+
+### Commands Not Executing
+
+1. Wait for WebContainer to finish booting (2-5 seconds)
+2. Check `/version` for WebContainer status
+3. Try `/help` to verify built-in commands work
+
+### Terminal Not Responding
+
+1. Try pressing `Ctrl+C` to cancel
+2. Click the **💬 Chat** tab and back to **⌨️ Shell**
+3. Refresh the page if needed (your projects are saved)
+
+---
+
+## Coming Soon
+
+- **Phase 3:** IndexedDB persistence verification
+- **Phase 4:** AI-assisted development (`/ai create react app`)
+- **Phase 5:** Live preview pane for dev servers
+- **Phase 6:** Git integration via isomorphic-git
+
+---
+
+## Technical Details
+
+Phantom Shell is built with:
+
+- **xterm.js** - Full-featured terminal emulator
+- **WebContainers** - Node.js runtime in browser (WebAssembly)
+- **Zustand** - State management with persistence
+- **IndexedDB** - Local project storage
+
+**Bundle Impact:** ~200KB (lazy loaded when you open the terminal)
+
+---
+
+**Related Docs:**
+- [AI Terminal Guide](./ai_terminal_guide.md) - Chat with AI providers
+- [Feature Map](./feature_map.md) - Full feature inventory

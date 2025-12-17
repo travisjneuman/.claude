@@ -1,0 +1,2079 @@
+# Master Implementation Status - Neuman Brain Dashboard
+**Created:** 2025-11-26
+**Purpose:** Comprehensive audit of ALL features across user notes, research docs, and competitive analysis
+**Status:** Draft - Awaiting User Approval
+**Source Documents:**
+- `tasks/Neuman Brain User Notes 11252025.txt` (User testing feedback)
+- `tasks/research-document.md` (26 feature categories researched)
+- `tasks/research-document-expanded-initial-dig.md` (50+ competitor analysis)
+
+---
+
+## Table of Contents
+1. [Implementation Status Legend](#implementation-status-legend)
+2. [Completed Features (100% Parity)](#completed-features-100-parity)
+3. [Partial Implementation (<100% Parity)](#partial-implementation-100-parity)
+4. [Missing All-in-One Platform Features](#missing-all-in-one-platform-features)
+5. [Productivity Widget Ideas](#productivity-widget-ideas)
+6. [Not Started](#not-started)
+7. [Research Needed](#research-needed)
+8. [Foundation & Infrastructure](#foundation--infrastructure)
+9. [Competitor Feature Matrix](#competitor-feature-matrix)
+
+---
+
+## Implementation Status Legend
+
+- **COMPLETED (100%)** - Feature fully implemented with all desired functionality
+- **PARTIAL (<100%)** - Feature exists but missing key capabilities or polish
+- **NOT STARTED** - Feature identified but no implementation yet
+- **RESEARCH NEEDED** - Requires investigation before implementation planning
+
+---
+
+## COMPLETED FEATURES (100% Parity)
+
+### Dashboard & Widgets
+✅ **Task Summary Widget** - Dynamically updates with Quick Add (Fixed 2025-11-25)
+✅ **Upcoming Events Widget** - Height fixed, displays upcoming events (Fixed 2025-11-25)
+✅ **Quick Add Task Button** - Color contrast fixed (Fixed 2025-11-25)
+✅ **Widget Layout System** - Flexible dashboard widget grid
+
+### Schedule & Calendar
+✅ **ICS Calendar Import** - Date format fixed, now working (Fixed 2025-11-25)
+✅ **Calendar "Today" Highlighting** - Current day clearly marked
+✅ **Double-Click Day Behavior** - Opens DayDetailModal with events/tasks (Fixed 2025-11-25)
+  - Shows all events for selected day
+  - Shows all tasks due that day with navigation
+  - "Add New Event" button
+  - Goes straight to add if empty
+✅ **Kanban Tasks on Calendar** - Tasks with due dates appear on calendar (Fixed 2025-11-25)
+  - Blue styling to distinguish from events
+  - Shows title, priority, status
+  - Clickable in DayDetailModal
+✅ **Monthly Calendar Unification** - Summary tab calendar matches Calendar tab style (Fixed 2025-11-26)
+  - Added min-h-[80px] cells
+  - Clickable days open detail modal
+  - Shows time entries for selected day
+✅ **Sidebar Navigation** - Expandable children for Schedule sections
+✅ **Event Start Date Picker** - Events can be created for any date (Fixed 2025-11-26)
+  - Editable start date field
+  - Defaults to clicked calendar day
+  - End date validation
+
+### Notes
+✅ **Folders Sidebar** - Button overlap fixed (Fixed 2025-11-25, Enhanced 2025-11-26)
+  - Collapse button at right edge (no overlap)
+  - Expand button when collapsed
+  - Resize functionality with drag handle
+  - Width persists 200-500px range
+✅ **Notes CRUD** - Create, read, update, delete notes
+✅ **Folder Organization** - Organize notes in folders
+✅ **Daily Notes Pattern** - Obsidian/Roam-style daily journaling (Implemented 2025-11-26)
+  - Keyboard shortcut (Ctrl/Cmd + D) to open today's note
+  - Auto-create with customizable templates
+  - Calendar view showing daily notes indicators
+  - Settings UI: date format, template editor, folder selection
+  - Auto-links to yesterday/tomorrow notes
+  - Template variables: {date}, {yesterday}, {tomorrow}, {weekday}
+
+### Settings
+✅ **Display Name Autofill Prevention** - autoComplete="off" added (Fixed 2025-11-25)
+✅ **Auto-Save Folder Display** - Shows configured folder correctly (Fixed 2025-11-25)
+✅ **Backup Filename Format** - Shows "Neuman" with ".brain" outside (Fixed 2025-11-25)
+✅ **Privacy Footer Cleanup** - Removed duplicate footer (Fixed 2025-11-25)
+
+### Foundation & Data Integrity (2025-11-25)
+✅ **Data Validation Layer** - src/services/validation.ts
+  - Centralized Zod schemas
+  - Date key format validation (YYYY-M-D)
+  - Time format validation (HH:mm)
+  - Legacy date normalization
+✅ **Error Boundaries** - src/components/StoreErrorBoundary.tsx
+  - Recovery UI with Try Again/Clear Data/Restore
+  - Wrapped critical routes
+✅ **Import Safety** - src/services/brainBackup.ts
+  - Pre-import validation
+  - Rollback snapshot
+  - Automatic date normalization
+  - Invalid data filtered
+
+### UI Polish (2025-11-26)
+✅ **Modal Overflow Fixes**
+  - CardDetailPanel: Removed nested scroll
+  - QuickAddModal: Added max-h-[85vh]
+  - Proper content containment
+✅ **MonthlyTimeReport Day Detail Modal**
+  - Click any day to see entries
+  - Shows project colors, descriptions, durations
+  - "Add Time Entry" button
+
+### AI & Terminal
+✅ **AI Terminal Shell** - Basic shell emulation with error messaging
+✅ **Error Messaging** - Clear explanations for unsupported commands
+
+### Tasks & Project Management
+✅ **Task CRUD** - Create, read, update, delete tasks
+✅ **Task Due Dates** - Tasks can have due dates (start + due dates supported)
+✅ **Task Priorities** - Priority levels (low/medium/high) with color coding
+✅ **Task Status** - Status tracking with customizable columns
+
+---
+
+## PARTIAL IMPLEMENTATION (<100% Parity)
+
+### Tasks & Project Management
+🔶 **Kanban Board** (Status: PARTIAL - Reclassified 2025-11-28)
+- **Audit Date:** 2025-11-28
+- **Competitors Analyzed:** Trello, Asana Board View, Monday.com Kanban View
+- **Current Features:**
+  - ✅ Drag-and-drop between columns (@dnd-kit with pointer + touch sensors)
+  - ✅ Customizable columns (ColumnManager, 3-7 column view options)
+  - ✅ Card numbers (KAN-#) with search support - **UNIQUE ADVANTAGE**
+  - ✅ Priority levels (low/medium/high) with color coding
+  - ✅ Tags with autocomplete and filtering
+  - ✅ Start dates + due dates
+  - ✅ Checklists with real-time persistence
+  - ✅ Comments with timestamps and activity log
+  - ✅ Subtasks
+  - ✅ Board and List views with toggle
+  - ✅ Search (by title, description, or card number)
+  - ✅ Advanced filters (priority, tags) with collapsible panel
+  - ✅ Archived tasks view
+  - ✅ Quick Add modal (Cmd/Ctrl+K global shortcut)
+  - ✅ Keyboard navigation (arrow keys, Enter, Delete, ? for help)
+  - ✅ Undo/Redo with toast notifications - **UNIQUE ADVANTAGE**
+  - ✅ Auto-save on blur
+  - ✅ View mode persistence (localStorage)
+  - ✅ Effort estimates (XS/S/M/L/XL)
+  - ✅ Custom status support
+  - ✅ Time estimates and tracking integration
+  - ✅ Custom fields integration
+  - ✅ Recurring tasks integration
+  - ✅ Task dependencies (blocks/blocked-by relationships)
+- **Critical Gaps (Preventing 100%+ Parity):**
+  1. ❌ **Assignees/Members** - Cannot assign tasks to team members
+     - Trello: ✅ Multiple assignees per card
+     - Asana: ✅ Single assignee + followers
+     - Monday.com: ✅ Multiple people per task
+     - **Impact:** MAJOR blocker for team collaboration - baseline feature in ALL competitors
+  2. ❌ **File Attachments** - Cannot attach files to cards
+     - Trello: ✅ Drag-drop images/docs, cloud storage integration
+     - Asana: ✅ File attachments with preview
+     - Monday.com: ✅ File columns with covers (crop/fit modes)
+     - **Impact:** Limits use case to simple text-only tasks - baseline in ALL competitors
+  3. ❌ **WIP Limits** - Cannot set column task limits
+     - Monday.com: ✅ Task limits per column with warnings
+     - Trello: Available via Power-Up
+     - **Impact:** Missing key Kanban methodology feature
+  4. ❌ **Card Covers/Images** - No visual covers on cards
+     - Trello: ✅ Image covers from attachments
+     - Monday.com: ✅ File column covers (crop/fit modes)
+     - **Impact:** Less visual, harder to scan board at a glance
+  5. ⚠️ **Calendar View Integration** - Calendar exists but on separate page
+     - Trello: Premium feature, integrated view
+     - Asana: ✅ One-click view switch
+     - Monday.com: ✅ Instant view toggle
+     - **Impact:** Less convenient workflow, requires navigation
+- **Our Unique Advantages:**
+  - ✅ Card numbers (KAN-#) - Unique to us, professional tracking
+  - ✅ Undo/Redo - Unique to us, prevents mistakes
+  - ✅ Better keyboard shortcuts than competitors
+  - ✅ Offline-first, local storage (privacy advantage)
+  - ✅ No paywalls (Timeline/Gantt included for free)
+  - ✅ Faster performance (60KB vs 2-4MB competitors)
+- **Files:** `src/widgets/Kanban.tsx`, `src/widgets/Kanban/CardDetailPanel.tsx`, `src/widgets/Kanban/KanbanCard.tsx`, `src/widgets/Kanban/KanbanColumn.tsx`, `src/widgets/Kanban/ListView.tsx`
+- **Priority:** **P0** (Assignees, File Attachments), **P1** (WIP Limits, Card Covers)
+- **Verdict:** MVP-level Kanban with excellent offline/keyboard UX, but missing baseline team collaboration features
+- **Sources:** [Trello Kanban Features](https://www.projectmanager.com/blog/trello-kanban-board), [Asana Board View](https://help.asana.com/s/article/board-view?language=en_US), [Monday.com Kanban](https://support.monday.com/hc/en-us/articles/360000661379-The-Kanban-View)
+
+🔶 **Timeline/Gantt View** (Status: PARTIAL - Reclassified 2025-11-28)
+- **Audit Date:** 2025-11-28
+- **Competitors Analyzed:** Monday.com Gantt Chart, Asana Gantt View, Microsoft Project
+- **Current Features:**
+  - ✅ Task bars with start/due dates visualization
+  - ✅ Drag bars to reschedule (updates startDate/dueDate in real-time)
+  - ✅ Resize bars to change duration
+  - ✅ 3 zoom levels (day/week/month) with responsive scale
+  - ✅ Today marker with indicator dot and label
+  - ✅ Swimlanes by task status (backlog/todo/inprogress/review/done) - **UNIQUE ADVANTAGE**
+  - ✅ Priority-based color coding
+  - ✅ Dependency arrows (SimpleTaskDependency with SVG overlay)
+  - ✅ Row-based positioning for clarity
+  - ✅ Responsive scrolling and empty state handling
+  - ✅ Tab interface in Tasks page (Board/List/Timeline toggle)
+- **Critical Gaps (Preventing 100%+ Parity):**
+  1. ❌ **Auto-shift Dependent Tasks** - When parent task moves, children don't auto-adjust
+     - Monday.com: ✅ "Shift all dependent tasks by however many days needed"
+     - Asana: ✅ "Auto-scheduling" - blocked tasks automatically adjust dates
+     - MS Project: ✅ Standard behavior, cascading date updates
+     - **Impact:** Manual rescheduling required defeats purpose of dependencies - baseline in ALL competitors
+  2. ❌ **Critical Path Analysis** - Cannot identify project bottlenecks
+     - Monday.com: ✅ Critical path visualization with highlighting
+     - Asana: ✅ Premium+ feature, shows longest sequence
+     - MS Project: ✅ Core feature, red highlighting
+     - **Impact:** Can't optimize project timeline or identify delays - professional PM baseline
+  3. ❌ **Baseline Comparison** - Cannot track planned vs actual schedule
+     - Monday.com: ✅ Baseline snapshot, green/red variance indicators
+     - MS Project: ✅ Up to 10 baselines with variance tracking
+     - **Impact:** No way to measure schedule variance or slippage - project management necessity
+  4. ❌ **Progress Tracking (% Complete)** - No visual completion indicators on bars
+     - Monday.com: ✅ Shows progress percentage within bars
+     - Asana: ✅ Task percentage of completion display
+     - MS Project: ✅ Progress bars within Gantt bars (filled portion)
+     - **Impact:** Can't see task progress at a glance - baseline feature
+  5. ❌ **Milestone Markers** - No way to mark key deadlines on timeline
+     - Monday.com: ✅ Milestone tracking with diamond markers
+     - Asana: ✅ Milestones as specialized tasks
+     - MS Project: ✅ Diamond milestone markers on timeline
+     - **Impact:** Can't highlight critical dates/deliverables - essential for project planning
+  6. ❌ **Professional Dependency Types** - Only simple blocks/blocked-by
+     - MS Project: ✅ 4 dependency types (FS/SS/FF/SF) + lag time
+     - **Note:** Type definitions EXIST in `src/types/index.ts` (TaskDependency interface with DependencyType enum) but only SimpleTaskDependency is implemented
+     - **Impact:** Can't model complex project relationships (parallel tasks, delayed starts)
+  7. ❌ **Subitem Support on Timeline** - Subtasks don't appear on Gantt
+     - Monday.com: ✅ Subitems visible on timeline
+     - MS Project: ✅ Summary tasks with subtask rollup
+     - **Impact:** Can't see task breakdown hierarchy visually
+  8. ❌ **Export Timeline** - Cannot export Gantt to PDF/Excel/image
+     - Monday.com: ✅ Export to Excel
+     - MS Project: ✅ Export to PDF, Excel, images
+     - **Impact:** Can't share timeline with stakeholders outside app
+- **Our Unique Advantages:**
+  - ✅ Swimlanes by status (clearer organization than Asana)
+  - ✅ Integrated with Kanban in single page (seamless workflow)
+  - ✅ Free (Asana Gantt is Premium+ only)
+  - ✅ Offline-first (works without internet)
+  - ✅ Lightweight (no heavy dependencies)
+- **Files:** `src/components/GanttView/GanttTimeline.tsx`, `src/components/GanttView/TimelineScale.tsx`, `src/components/GanttView/TaskBar.tsx`, `src/components/GanttView/DependencyLine.tsx`
+- **Priority:** **P0** (Auto-shift, Critical Path, Baseline), **P1** (Progress %, Milestones, Professional Dependencies), **P2** (Export, Subitem support)
+- **Verdict:** MVP-level Gantt with unique swimlane visualization, but missing professional project management capabilities
+- **Sources:** [Monday.com Gantt Chart](https://support.monday.com/hc/en-us/articles/360015643840-The-Gantt-Chart-View-and-Widget), [Asana Gantt](https://help.asana.com/s/article/gantt-view?language=en_US), [MS Project Gantt](https://www.projectmanager.com/blog/microsoft-project-gantt-chart)
+
+🔶 **Recurring Tasks** (Status: PARTIAL - Audited 2025-11-28)
+- **Audit Date:** 2025-11-28
+- **Competitors Analyzed:** Todoist, Asana, ClickUp
+- **Current Features:**
+  - ✅ Frequency patterns (daily, weekly, monthly, yearly) with intervals
+  - ✅ Weekly: Days of week selection (M/T/W/Th/F/Sa/Su checkboxes)
+  - ✅ Monthly: Day of month specification
+  - ✅ End conditions: Never / After N occurrences / Until specific date
+  - ✅ Auto-generation of next instance when current is completed
+  - ✅ Next occurrence calculation and display
+  - ✅ Parent-instance relationship tracking (recurrenceId, isRecurringParent)
+  - ✅ RecurrencePicker UI component with all options
+  - ✅ Integration with Kanban CardDetailPanel
+  - ✅ Instance management (view all instances of recurring task)
+- **Critical Gaps (Preventing 100%+ Parity):**
+  1. ❌ **Recur from Completion Date** - Only recurs from original due date
+     - Todoist: ✅ "every day" (from due) vs "every! day" (from completion)
+     - ClickUp: ✅ "Recur from due date" vs "Recur from completion date" toggle
+     - Asana: ✅ Same behavior with toggle
+     - **Impact:** Flexible tasks (e.g., "call client every 5 days") can't be modeled - major use case gap
+  2. ❌ **Natural Language Input** - No "every 2 weeks on Monday" parser
+     - Todoist: ✅ Smart parser ("every weekday", "every 2 weeks", "every month on the 15th")
+     - ClickUp: ✅ Natural language + visual picker hybrid
+     - **Impact:** Slower to set up, requires clicking through UI - UX friction
+  3. ❌ **Template Integration** - Recurring tasks don't pre-fill checklists/description
+     - ClickUp: ✅ Recurring tasks can use templates (checklists, custom fields, etc.)
+     - Asana: ✅ Task templates can be recurring
+     - **Impact:** Repetitive setup work for complex recurring tasks (e.g., weekly report with same checklist)
+  4. ⚠️ **Advanced Patterns** - No "last Friday of month" or "2nd Tuesday"
+     - Todoist: ✅ "every last friday" pattern
+     - **Impact:** Some business patterns can't be expressed (e.g., monthly all-hands meeting on first Monday)
+- **Our Advantages:**
+  - ✅ Full UI integration (not hidden in advanced settings)
+  - ✅ Instance relationship tracking (can see all occurrences)
+  - ✅ Free (Todoist advanced recurrence requires Premium)
+  - ✅ Offline-first
+- **Files:** `src/services/taskRecurrence.ts`, `src/components/RecurrencePicker.tsx`, `src/stores/useKanbanStore.ts` (lines 362-424)
+- **Priority:** **P1** (Recur from completion - high user value), **P2** (Natural language, Template integration), **P3** (Advanced patterns)
+- **Verdict:** Solid recurrence engine with all core patterns, but missing flexibility for real-world use cases
+- **Sources:** [Todoist Recurring Tasks](https://todoist.com/help/articles/set-a-recurring-due-date-YUYVJJAV), [ClickUp Recurring Tasks](https://help.clickup.com/hc/en-us/articles/6310449699351-Recurring-Tasks), [Asana Recurring Tasks](https://help.asana.com/s/article/recurring-tasks?language=en_US)
+
+🔶 **Task Dependencies** (Status: PARTIAL - Audited 2025-11-28)
+- **Audit Date:** 2025-11-28
+- **Competitors Analyzed:** Asana, ClickUp, Monday.com
+- **Current Implementation:**
+  - ✅ SimpleTaskDependency: Basic blocks/blocked-by relationships
+  - ✅ UI in CardDetailPanel (lines 615-750): Add blocker/blocked tasks with dropdowns
+  - ✅ Visual indicators: ⚠️ Blocked By (yellow), 🔒 Blocks (blue accent)
+  - ✅ Click dependency to navigate to related task
+  - ✅ Remove dependencies with × button on hover
+  - ✅ Circular dependency prevention in addDependency()
+  - ✅ Self-dependency prevention
+  - ✅ Validation: Can't complete task with incomplete blockers (useKanbanStore.ts:274-287)
+  - ✅ Activity log tracking for dependency changes
+  - ✅ Gantt timeline visualization (DependencyLine.tsx with SVG arrows)
+- **Critical Gaps (Preventing 100%+ Parity):**
+  1. ❌ **Professional Dependency Types** - Only Finish-to-Start implemented
+     - **IMPORTANT:** Full TaskDependency interface DEFINED in `src/types/index.ts` but NOT USED:
+       ```typescript
+       export type DependencyType = 'finish-to-start' | 'start-to-start' | 'finish-to-finish' | 'start-to-finish';
+       export interface TaskDependency {
+         taskId: string;
+         type: DependencyType;
+         lag: number; // Lag time in days (can be negative for lead)
+       }
+       ```
+     - Asana: ✅ Basic dependencies only (similar to our current)
+     - ClickUp: ✅ 4 types + waiting on/blocking
+     - MS Project: ✅ All 4 types (FS/SS/FF/SF) + lag/lead time
+     - **Impact:** Can't model parallel work (SS), coordinated finishes (FF), or complex schedules - professional PM baseline
+  2. ❌ **Auto-shift Dependent Tasks** - Date changes don't cascade (already noted in Gantt audit)
+     - ClickUp: ✅ "Rescheduling dependencies" option
+     - MS Project: ✅ Automatic cascading by default
+     - **Impact:** Manual rescheduling burden, defeats dependency purpose
+  3. ❌ **Lag/Lead Time** - No "+3 days after" or "-2 days before"
+     - MS Project: ✅ Lag time in dependency definition
+     - **Impact:** Can't express "start QA 2 days before dev finishes" - real-world scheduling need
+  4. ❌ **Dependency Warnings** - No alerts when blocker is overdue
+     - ClickUp: ✅ Warning badges when blocked by overdue tasks
+     - Monday.com: ✅ Dependency status indicators
+     - **Impact:** Silent failures, tasks stuck without visibility
+- **Quick Win Opportunity:** TaskDependency types already defined, just need to:
+  1. Add type selector to CardDetailPanel dependency UI
+  2. Update addDependency() to accept type + lag parameters
+  3. Implement cascading date logic in GanttTimeline
+  4. Add lag time input to dependency creation
+- **Files:** `src/stores/useKanbanStore.ts` (lines 1019-1105), `src/widgets/Kanban/CardDetailPanel.tsx` (lines 615-750), `src/types/index.ts` (lines 53-63, 98-103), `src/components/GanttView/DependencyLine.tsx`
+- **Priority:** **P0** (Professional types + lag - types already defined!), **P1** (Auto-shift, Warnings)
+- **Verdict:** Basic dependency tracking works, but professional PM features are defined but unimplemented - low-hanging fruit
+- **Sources:** [Asana Dependencies](https://help.asana.com/s/article/dependencies?language=en_US), [ClickUp Task Dependencies](https://help.clickup.com/hc/en-us/articles/6305955166359-Task-Dependencies), [MS Project Dependencies](https://support.microsoft.com/en-us/office/link-tasks-in-a-project-d7c17100-6dc7-49b6-b5f1-30ed86dbd079)
+
+🔶 **Custom Fields** (Status: PARTIAL - Audited 2025-11-28)
+- **Audit Date:** 2025-11-28
+- **Competitors Analyzed:** Monday.com, ClickUp, Airtable
+- **Current Implementation:**
+  - ✅ 5 field types: text, number, date, select, checkbox (src/types/customFields.ts)
+  - ✅ FieldDefinition schema: id, name, type, defaultValue, options, required, description, timestamps
+  - ✅ Field validation with validateFieldValue() function
+  - ✅ CustomFieldEditor component for rendering appropriate inputs (src/components/CustomFieldEditor.tsx)
+  - ✅ Accessibility: ARIA labels, required indicators, error messaging
+  - ✅ Semantic styling with Tailwind tokens
+  - ✅ Integration with useSettingsStore for field definitions
+  - ✅ CustomFieldsMap type for storing values on tasks/notes
+- **Critical Gaps (Preventing 100%+ Parity):**
+  1. ❌ **Field Management UI** - No interface to create/edit/delete field definitions
+     - Monday.com: ✅ Column center for adding/managing custom columns
+     - ClickUp: ✅ Custom fields manager with templates
+     - Airtable: ✅ Field type selector with full customization
+     - **Impact:** Users can't actually USE the custom fields system - implementation is backend-only
+  2. ❌ **Additional Field Types** - Missing common types
+     - Monday.com: ✅ Also has: Person, Status, Timeline, Rating, File, Link, Formula
+     - ClickUp: ✅ Also has: Dropdown (multi-select), Progress, Labels, Relationships, Email, Phone, URL
+     - Airtable: ✅ Also has: Multi-select, Long text, Attachment, URL, Email, Phone, Rating, Barcode, Formula, Rollup, Lookup
+     - **Impact:** Can't model real-world data (file uploads, user assignment, calculations)
+  3. ❌ **Field Display in Lists** - Custom fields not shown in Kanban card list/board views
+     - Monday.com: ✅ Custom columns visible in board view
+     - ClickUp: ✅ Custom fields show in list/board with toggles
+     - **Impact:** Fields are hidden unless you open card detail - low visibility
+  4. ❌ **Field Templates** - No reusable field sets
+     - ClickUp: ✅ Custom field templates (e.g., "Bug Report" field set)
+     - **Impact:** Repetitive setup for similar task types
+  5. ❌ **Formulas & Rollups** - No computed fields
+     - Airtable: ✅ Formula fields, rollup from linked records
+     - Monday.com: ✅ Formula columns
+     - **Impact:** Can't auto-calculate totals, averages, or derive values
+- **Our Foundation Strengths:**
+  - ✅ Type-safe field definitions with Zod validation
+  - ✅ Reusable CustomFieldEditor component
+  - ✅ Accessible UI patterns established
+  - ✅ Clean separation of concerns (types, validation, rendering)
+- **Files:** `src/types/customFields.ts`, `src/components/CustomFieldEditor.tsx`, `src/components/CustomFieldsSettings.tsx`, `src/stores/useSettingsStore.ts`
+- **Priority:** **P0** (Field Management UI - without it, feature is unusable), **P1** (Display in views, Additional types), **P2** (Templates, Formulas)
+- **Verdict:** Well-architected foundation with NO user-facing interface - feature is 90% invisible
+- **Sources:** [Monday.com Custom Columns](https://support.monday.com/hc/en-us/articles/115005348365-Custom-Columns), [ClickUp Custom Fields](https://help.clickup.com/hc/en-us/articles/6305790296087-Custom-Fields), [Airtable Field Types](https://www.airtable.com/guides/start/field-types)
+
+### Notes & Knowledge Management
+🔶 **Notes - Backlinks/Wikilinks** (Status: PARTIAL - Audited 2025-11-28)
+- **Audit Date:** 2025-11-28
+- **Competitors Analyzed:** Obsidian, Roam Research, Logseq
+- **Current Implementation:**
+  - ✅ Wiki-style link syntax: `[[Note Title]]` (LINK_PATTERN regex in backlinks.ts)
+  - ✅ Link extraction from note content (`extractWikiLinks()`)
+  - ✅ Link resolution: Exact + partial title matching (`resolveLinksToIds()`)
+  - ✅ Backlinks panel component (BacklinksPanel.tsx) with count badge
+  - ✅ Click backlink to navigate to source note
+  - ✅ Empty state: "Use [[Note Title]] to create links" instruction
+  - ✅ Auto-update linked notes when content changes (`updateLinkedNotes()`)
+  - ✅ linkedNotes array stored on Note type
+  - ✅ Backlinks panel integrated in NotesEditor
+- **Critical Gaps (Preventing 100%+ Parity):**
+  1. ❌ **Unlinked Mentions** - No detection of note titles mentioned without brackets
+     - Obsidian: ✅ "Unlinked mentions" section showing implicit references
+     - Roam: ✅ Detects unlinked references automatically
+     - Logseq: ✅ Shows both linked and unlinked references
+     - **Impact:** Miss implicit connections, manual linking burden
+  2. ❌ **Link Autocomplete** - No `[[` trigger for note picker
+     - Obsidian: ✅ Type `[[` to open note search popup
+     - Roam: ✅ Instant search on `[[` with fuzzy matching
+     - Logseq: ✅ Page autocomplete on `[[`
+     - **Impact:** Must remember exact titles, typos create broken links
+  3. ❌ **Broken Link Detection** - No warnings for links to non-existent notes
+     - Obsidian: ✅ Purple color for broken links, "Create note" option
+     - Roam: ✅ Auto-creates page on click
+     - Logseq: ✅ Broken link styling + creation option
+     - **Impact:** Silent failures, unclear if link is valid
+  4. ❌ **Block-level Links** - Can't link to specific paragraphs/headings
+     - Obsidian: ✅ `[[Note#Heading]]` and `[[Note^block-id]]` syntax
+     - Roam: ✅ Block references with `((block-id))`
+     - Logseq: ✅ Block embedding and references
+     - **Impact:** Must link to entire note, not specific sections
+  5. ❌ **Link Preview on Hover** - No popover showing linked note content
+     - Obsidian: ✅ Hover preview with note excerpt
+     - Roam: ✅ Inline preview on hover
+     - **Impact:** Must click links to see content, slows research flow
+- **Our Advantages:**
+  - ✅ Partial matching (finds "JavaScript Basics" when linking "JavaScript")
+  - ✅ Clean UI with count badges
+  - ✅ Offline-first
+- **Files:** `src/utils/backlinks.ts`, `src/components/BacklinksPanel.tsx`, `src/widgets/NotesEditor.tsx` (line 79), `src/stores/useNotesStore.ts`
+- **Priority:** **P0** (Link autocomplete - UX blocker), **P1** (Unlinked mentions, Broken link detection), **P2** (Block links, Hover preview)
+- **Verdict:** Basic bidirectional linking works, but missing PKM essentials for serious knowledge work
+- **Sources:** [Obsidian Linking](https://help.obsidian.md/Linking+notes+and+files/Internal+links), [Roam Research Bidirectional Links](https://roamresearch.com/#/app/help/page/Roam_Research_White_Paper), [Logseq Backlinks](https://docs.logseq.com/#/page/contents)
+
+🔶 **Notes - Graph View** (Status: PARTIAL - Audited 2025-11-28)
+- **Audit Date:** 2025-11-28
+- **Competitors Analyzed:** Obsidian, Roam Research, Logseq
+- **Current Implementation:**
+  - ✅ D3 force-directed graph (GraphCanvas.tsx using d3.forceSimulation)
+  - ✅ Node types: Notes (circles) and Tags (differentiated)
+  - ✅ Edge types: Backlinks (cyan arrows), Tag relationships
+  - ✅ Zoom/pan with d3.zoom (scale 0.1-4x)
+  - ✅ Drag nodes to reposition (with physics simulation)
+  - ✅ Click node to navigate (onNodeClick callback)
+  - ✅ Physics forces: collision, charge (repulsion), centering, link distance
+  - ✅ Arrow markers for directed edges
+  - ✅ Color coding: backlinks (cyan), regular edges (border color)
+  - ✅ SVG-based rendering for performance
+  - ✅ Graph data processing utilities (graphDataProcessor.ts)
+  - ✅ Dedicated /graph-view page
+- **Critical Gaps (Preventing 100%+ Parity):**
+  1. ❌ **Local Graph** - No focused view for single note's connections
+     - Obsidian: ✅ Local graph showing 1-2 hop neighbors
+     - Roam: ✅ Page graph for current page
+     - Logseq: ✅ Local graph with depth slider
+     - **Impact:** Can't focus on specific note's neighborhood, overwhelming for large graphs
+  2. ❌ **Filters** - No ability to filter by tags, folders, date ranges
+     - Obsidian: ✅ Filter by tags, folders, paths, search terms
+     - Logseq: ✅ Filter by page properties, tags, namespaces
+     - **Impact:** Graph becomes unusable with 100+ notes, no way to focus
+  3. ❌ **Node Sizing** - All nodes same size, no indication of importance
+     - Obsidian: ✅ Node size = number of connections (degree centrality)
+     - Roam: ✅ Node size based on reference count
+     - **Impact:** Can't identify hub notes or important concepts visually
+  4. ❌ **Link Strength** - No indication of connection frequency
+     - Obsidian: ✅ Link thickness = number of references
+     - **Impact:** All connections appear equal weight
+  5. ❌ **Color Groups** - No automatic clustering or coloring by category
+     - Obsidian: ✅ Color groups by tags, folders, or custom groups
+     - Logseq: ✅ Namespace-based coloring
+     - **Impact:** Hard to see thematic clusters in knowledge base
+  6. ❌ **Orphan Detection** - No highlighting of isolated notes
+     - Obsidian: ✅ Shows orphan notes (no connections)
+     - **Impact:** Can't identify disconnected knowledge
+  7. ❌ **Search in Graph** - No search to highlight specific nodes
+     - Obsidian: ✅ Search bar highlights matching nodes
+     - **Impact:** Must visually scan to find notes
+- **Our Advantages:**
+  - ✅ Tag relationships visualized (not just note-to-note)
+  - ✅ Smooth physics simulation
+  - ✅ Free (comparable to Obsidian which is also free for local graphs)
+- **Files:** `src/components/Graph/GraphCanvas.tsx`, `src/utils/graphSimulation.ts`, `src/utils/graphDataProcessor.ts`, `src/pages/GraphView.tsx`
+- **Priority:** **P0** (Local graph, Filters - unusable without these at scale), **P1** (Node sizing, Color groups), **P2** (Link strength, Search, Orphans)
+- **Verdict:** Beautiful graph visualization, but impractical for actual knowledge management at scale
+- **Sources:** [Obsidian Graph View](https://help.obsidian.md/Plugins/Graph+view), [Logseq Graph](https://docs.logseq.com/#/page/graph%20view), [Roam Graph](https://roamresearch.com/#/app/help/page/graph-view)
+
+🔶 **Notes - Tags System** (Status: PARTIAL - Audited 2025-11-28)
+- **Audit Date:** 2025-11-28
+- **Competitors Analyzed:** Bear, Notion, Obsidian
+- **Current Implementation:**
+  - ✅ Array of string tags on Note type (`tags: string[]`)
+  - ✅ TagPicker component with autocomplete (TagPicker.tsx)
+  - ✅ Tag filtering in Notes page
+  - ✅ Tag display on note cards
+  - ✅ Free-text tag creation
+  - ✅ Tags integrated with Graph View (tag nodes + relationships)
+  - ✅ Daily notes auto-tags: `daily-note`, `{year}`, `month-{MM}`
+- **Critical Gaps (Preventing 100%+ Parity):**
+  1. ❌ **Nested Tags** - No hierarchy like `projects/web` or `archive/2023`
+     - Bear: ✅ Multi-level tag hierarchy with `/` separator
+     - Obsidian: ✅ Nested tags with `#parent/child` syntax
+     - Notion: ✅ Tag groups with parent-child relationships
+     - **Impact:** Flat tag namespace becomes messy with 50+ tags
+  2. ❌ **Tag Manager** - No centralized tag management UI
+     - Bear: ✅ Sidebar shows all tags with count and hierarchy
+     - Notion: ✅ Tag database with rename/merge/delete
+     - Obsidian: ✅ Tag pane with usage counts
+     - **Impact:** Can't rename tags globally, typos create duplicates
+  3. ❌ **Tag Colors** - No custom colors for visual organization
+     - Bear: ✅ Custom tag colors/icons
+     - Notion: ✅ Color-coded tags
+     - **Impact:** All tags look the same, harder to scan
+  4. ❌ **Tag Suggestions** - No smart tag recommendations based on content
+     - Notion: ✅ AI-powered tag suggestions
+     - **Impact:** Manual tagging burden, inconsistent taxonomy
+  5. ❌ **Multi-tag Operations** - Can't bulk add/remove tags
+     - Bear: ✅ Select multiple notes → add/remove tags
+     - Notion: ✅ Bulk property editing
+     - **Impact:** Tedious to reorganize or reclassify notes
+  6. ❌ **Inline Tags** - Tags only in metadata, not in note body
+     - Obsidian: ✅ `#tag` anywhere in note content
+     - Roam: ✅ `#tag` and `#[[multi-word tag]]` inline
+     - **Impact:** Must use separate UI, interrupts writing flow
+- **Our Implementation:**
+  - ✅ Works with autocomplete
+  - ✅ Graph integration (unique)
+  - ✅ Auto-tags for daily notes (helpful)
+- **Files:** `src/types/notes.ts`, `src/components/TagPicker.tsx`, `src/components/TagFilter.tsx`, `src/stores/useNotesStore.ts`
+- **Priority:** **P0** (Nested tags - essential for organization), **P1** (Tag Manager, Inline tags), **P2** (Colors, Suggestions, Bulk ops)
+- **Verdict:** Basic tagging works, but missing organizational features for large note collections
+- **Sources:** [Bear Tags](https://bear.app/faq/Tags%20&%20Linking/), [Notion Tags](https://www.notion.so/help/database-properties#select-and-multi-select), [Obsidian Tags](https://help.obsidian.md/Editing+and+formatting/Tags)
+🔶 **Recurring Tasks** (Status: PARTIAL - Reclassified 2025-11-28)
+- **Audit Date:** 2025-11-28
+- **Competitors Analyzed:** Todoist, ClickUp, Asana
+- **Current Features:**
+  - ✅ Frequency patterns: daily/weekly/monthly/yearly
+  - ✅ Custom intervals (every 2 weeks, every 3 months, etc.)
+  - ✅ Days of week selection (for weekly recurrence)
+  - ✅ Day of month selection (for monthly recurrence, 1-31)
+  - ✅ End conditions: never/after N occurrences/until date
+  - ✅ On-demand instance generation (not pre-generated)
+  - ✅ Parent/instance relationship tracking (recurrenceId, isRecurringParent)
+  - ✅ Next occurrence calculation
+  - ✅ Instance deduplication (prevents duplicate instances)
+  - ✅ Series end detection (respects endCount and endDate)
+  - ✅ RecurrencePicker UI component integrated into CardDetailPanel
+  - ✅ Visual recurrence editor (matches Calendar Events pattern)
+  - ✅ Full RRULE-like pattern support
+- **Critical Gaps (Preventing 100%+ Parity):**
+  1. ❌ **Recur from Completion Date** - Tasks always recur from original date, not completion date
+     - Todoist: ✅ "every" vs "every!" syntax - "every! 3 months" recurs 3 months from completion
+     - Asana: ✅ "Periodically" option - repeats 1-30 days after task is completed
+     - ClickUp: ✅ "Recur only after completion" checkbox
+     - **Impact:** CRITICAL for maintenance tasks, habits, and periodic reviews where completion date matters
+     - **Example:** "Change oil filter every 3 months" should be 3 months from LAST change, not original date
+  2. ❌ **Natural Language Input** - No "every Monday" or "monthly" parsing
+     - Todoist: ✅ Full natural language parsing ("every third Thursday", "monthly", "every 2 weeks on Friday")
+     - ClickUp: Partial (date picker focused)
+     - Asana: ❌ No natural language
+     - **Impact:** Slower task creation, requires clicking through UI
+  3. ❌ **Template Integration** - Recurring tasks don't use task templates
+     - ClickUp: ✅ Recurring tasks can use task templates - each instance starts with same structure/checklists
+     - Asana: ⚠️ Subtasks copy but not full templates
+     - Todoist: ❌ No templates
+     - **Impact:** Each recurring instance is identical copy - can't have dynamic checklists or varying structure
+  4. ⚠️ **Recurrence Exceptions** - Can edit instances but no visual indication
+     - Have `recurrenceException` field in types but not fully implemented in UI
+     - No "edit just this instance" vs "edit all future instances" workflow
+     - **Impact:** Confusing UX when instances are modified
+- **Our Unique Advantages:**
+  - ✅ On-demand generation (doesn't clutter task list with future instances)
+  - ✅ Matches Calendar Events pattern (consistent UX)
+  - ✅ Offline-first (works without internet)
+  - ✅ Clean parent/instance relationship model
+- **Files:** `src/services/taskRecurrence.ts` (lines 1-201), `src/utils/recurrence.ts`, `src/components/RecurrencePicker.tsx`, `src/types/index.ts` (lines 209-221)
+- **Priority:** **P0** (Recur from completion), **P1** (Natural language, Template integration), **P2** (Exception handling UI)
+- **Verdict:** Strong recurrence engine with professional patterns, but missing key flexibility (completion-based recurrence) that users expect
+- **Sources:** [Todoist Recurring Tasks](https://www.todoist.com/help/articles/introduction-to-recurring-dates-YUYVJJAV), [ClickUp Recurring Tasks](https://help.clickup.com/hc/en-us/articles/6309885016471-Use-recurring-tasks), [Asana Recurring Tasks](https://blog.coupler.io/asana-recurring-tasks/)
+
+### Dashboard Widgets
+🔶 **Upcoming Events Configuration** (Status: PARTIAL)
+- **Current:** Shows upcoming events
+- **Missing:** Configuration for "how far out" or "how many events"
+- **Recommendation:** Show next 5 events regardless of date
+- **File:** src/widgets/Dashboard/UpcomingEventsWidget.tsx
+
+🔶 **Recent Notes Timeframe** (Status: PARTIAL)
+- **Current:** Shows 5 most recently updated (with subtitle)
+- **Missing:** Configurable timeframe filter
+- **Question:** Should filter to last 24h only?
+- **Recommendation:** Make timeframe configurable
+
+### Notes System
+🔶 **Notes UI Polish** (Status: PARTIAL)
+- **Current:** Functional but "unpolished and childish feeling" (user feedback)
+- **Missing:** Many modern note-taking features
+- **Research Needed:** See [Research Needed](#research-needed) section
+
+### Forms & Data Collection
+🔶 **Form Builder** (Status: PARTIAL - Reclassified 2025-11-28)
+- **Audit Date:** 2025-11-28
+- **Competitors Analyzed:** Google Forms, Typeform, Tally
+- **Current Features:**
+  - ✅ 11 field types: text, textarea, number, date, time, select, multiselect, radio, checkbox, rating, scale
+  - ✅ Field validation (required, min/max for numbers)
+  - ✅ Drag-to-reorder fields (up/down buttons)
+  - ✅ Field duplication and deletion
+  - ✅ Form settings (title, description, allowMultipleSubmissions, resetPeriod)
+  - ✅ Dynamic form rendering (FormRenderer component)
+  - ✅ Client-side validation with error messages
+  - ✅ Response storage with timestamps
+  - ✅ Response viewing and CSV export
+  - ✅ Forms Dashboard Widget (stats, top forms, navigation)
+  - ✅ Form duplication
+  - ✅ Success state after submission
+- **Critical Gaps (Preventing 100%+ Parity):**
+  1. ❌ **Conditional Logic/Branching** - Can't show/hide fields based on answers
+     - Google Forms: ✅ Section-based branching
+     - Typeform: ✅ Advanced logic with scoring, calculations
+     - Tally: ✅ FREE intuitive block-based logic builder
+     - **Impact:** Can't create dynamic forms that adapt to responses - major limitation for complex workflows
+  2. ❌ **File Upload** - Can't collect documents, images, resumes
+     - ALL 3 competitors: ✅ File upload capability
+     - **Impact:** Unusable for job applications, document collection, portfolio submissions - baseline feature
+  3. ❌ **Progress Bar** - Users can't see how far through form they are
+     - ALL 3 competitors: ✅ Show progress indicator
+     - **Impact:** Higher abandon rates on long forms - standard UX practice
+  4. ❌ **Response Analytics** - No insights into form performance
+     - Google Forms: ✅ Basic analytics
+     - Typeform: ✅ Advanced analytics (paid)
+     - Tally: ✅ Response analytics
+     - **Impact:** Can't optimize forms or understand user behavior
+  5. ❌ **Spam Protection** - No reCAPTCHA or honeypot
+     - Typeform: ✅ Spam protection (paid)
+     - Tally: ✅ Built-in spam protection
+     - **Impact:** Vulnerable to spam submissions
+  6. ❌ **Answer Piping** - Can't reference previous answers in questions
+     - Typeform: ✅ Answer piping (paid)
+     - Tally: ✅ FREE answer piping
+     - **Impact:** Can't create personalized form experiences
+  7. ❌ **Hidden Fields** - No UTM parameter tracking
+     - Typeform: ✅ Hidden fields (paid)
+     - Tally: ✅ FREE hidden fields for URL params
+     - **Impact:** Can't track marketing campaigns via forms
+  8. ❌ **Quiz Mode** - No auto-scoring or feedback per answer
+     - Google Forms: ✅ Quiz mode with auto-scoring
+     - Typeform: ✅ Quiz mode (paid)
+     - Tally: ✅ Quiz features
+     - **Impact:** Can't create assessments or knowledge tests
+  9. ❌ **Custom Thank You Page** - No redirect after submission
+     - Google Forms: ✅ Custom confirmation message
+     - Typeform: ✅ Custom thank you page
+     - Tally: ✅ Redirect after submission
+     - **Impact:** Can't guide users to next action
+- **Our Advantages:**
+  - ✅ FREE (Typeform charges for logic, scoring, hidden fields)
+  - ✅ Offline-first, local storage
+  - ✅ Clean, minimal UI
+  - ✅ Well-typed TypeScript implementation
+  - ✅ No data on external servers (privacy)
+- **Files:** `src/pages/FormBuilder.tsx`, `src/components/FormRenderer/FormRenderer.tsx`, `src/types/forms.ts`, `src/stores/useFormsStore.ts`
+- **Priority:** **P0** (Conditional logic, File upload, Progress bar, Analytics, Spam protection), **P1** (Answer piping, Hidden fields, Quiz mode)
+- **Verdict:** MVP-level form builder with core functionality, but missing advanced features users expect from modern form tools - Tally offers more features for FREE
+- **Sources:** [Typeform vs Tally](https://www.typeform.com/blog/typeform-vs-tally), [Google Forms Features](https://clickydrip.com/google-forms-features/), [Form Builder Must-Haves](https://www.thehumancapitalhub.com/articles/the-7-best-form-builder-tools-for-20252026)
+
+### Diagramming & Visual Tools
+🔶 **Diagram Editor** (Status: PARTIAL - Reclassified 2025-11-28)
+- **Audit Date:** 2025-11-28
+- **Competitors Analyzed:** Excalidraw, Draw.io (diagrams.net), Lucidchart
+- **Current Features:**
+  - ✅ Konva-based canvas rendering (~50KB library)
+  - ✅ 11 shape types: rectangle, circle, ellipse, triangle, diamond, line, arrow, text, freehand, connector (straight/curved/orthogonal)
+  - ✅ Drag-to-move shapes with physics
+  - ✅ Resize/rotate shapes with transform handles
+  - ✅ Multi-select via Shift+click
+  - ✅ Undo/Redo (50-step history)
+  - ✅ Copy/Paste (Ctrl+C/V)
+  - ✅ Delete (Delete key)
+  - ✅ Z-index management (bring to front/send to back)
+  - ✅ Canvas zoom/pan (0.1x-4x scale)
+  - ✅ Grid background with snap-to-grid (20px, configurable)
+  - ✅ Shape styling (fill, stroke, strokeWidth, strokeStyle)
+  - ✅ Text formatting (fontSize, fontWeight, textAlign)
+  - ✅ Smart connectors (attach to shapes)
+  - ✅ Export options (PNG, SVG, PDF, JSON)
+  - ✅ Auto-save (2s debounce)
+  - ✅ Keyboard shortcuts (Delete, Copy/Paste, Undo/Redo, Select All, Escape)
+  - ✅ Freehand drawing tool
+  - ✅ Arrow markers (start/end arrows)
+  - ✅ Full-screen editor at `/diagrams/:id`
+  - ✅ Library view with grid/list modes, search, create/delete
+- **Critical Gaps (Preventing 100%+ Parity):**
+  1. ❌ **Shape Libraries** - No pre-built shapes (flowchart, UML, network, AWS, etc.)
+     - Draw.io: ✅ 1000+ shapes across 50+ categories (flowcharts, UML, network diagrams, cloud architecture)
+     - Lucidchart: ✅ Extensive professional shape libraries
+     - Excalidraw: ✅ Built-in shape library
+     - **Impact:** Users must draw everything from basic shapes - tedious for professional diagrams
+  2. ❌ **Templates** - No starting points for common diagrams
+     - Draw.io: ✅ 100+ free templates
+     - Lucidchart: ✅ 1000+ templates (flowcharts, org charts, wireframes, network diagrams)
+     - **Impact:** Slow to create standard diagram types, no best practices guidance
+  3. ❌ **Grouping** - Can't group shapes to move as a unit
+     - ALL 3 competitors: ✅ Support shape grouping/ungrouping
+     - **Impact:** Managing complex diagrams with many shapes is painful - baseline feature
+  4. ❌ **Alignment Tools** - No align left/center/right/top/bottom or distribute evenly
+     - Draw.io & Lucidchart: ✅ Full alignment/distribution toolbar
+     - Excalidraw: ✅ Alignment tools
+     - **Impact:** Manual pixel-perfect alignment required, unprofessional-looking diagrams
+  5. ❌ **Layers** - Only basic z-index, no layer management
+     - Draw.io: ✅ Layer panel with show/hide/lock
+     - Lucidchart: ✅ Layer management
+     - **Impact:** Hard to organize complex diagrams with many overlapping elements
+  6. ❌ **Auto-Layout** - No automatic arrangement for flowcharts/org charts
+     - Draw.io: ✅ Auto-layout algorithms
+     - Lucidchart: ✅ Smart container auto-resize
+     - **Impact:** Manual layout adjustments when structure changes
+  7. ❌ **Hand-drawn Style** - No Excalidraw-style sketchy rendering
+     - Excalidraw: ✅ Signature hand-drawn aesthetic
+     - **Impact:** All diagrams look formal/rigid, no casual brainstorming style
+- **Our Advantages:**
+  - ✅ Freehand drawing (Draw.io doesn't have this)
+  - ✅ Clean, fast Konva rendering
+  - ✅ Undo/Redo with 50 steps
+  - ✅ Offline-first, local storage
+  - ✅ FREE (Lucidchart is paid, $7.95/mo+)
+  - ✅ Privacy-focused (no cloud, no tracking)
+  - ✅ Custom-built per CLAUDE.md "Build vs Buy" philosophy
+- **Files:** `src/pages/DiagramEditor.tsx`, `src/components/DiagramCanvas/Canvas.tsx`, `src/types/diagrams.ts`, `src/stores/useDiagramEditorStore.ts`
+- **Priority:** **P0** (Shape libraries, Grouping, Alignment tools), **P1** (Templates, Auto-layout, Layers), **P2** (Hand-drawn style)
+- **Verdict:** Canvas editing works well with unique freehand feature, but missing shape libraries makes it impractical for professional diagrams - can't compete without pre-built shapes
+- **Sources:** [Excalidraw Features 2024](https://plus.excalidraw.com/blog/excalidraw-in-2024), [Diagramming Software Comparison](https://zapier.com/blog/flowchart-diagramming-software/), [Lucidchart Features](https://www.lucidchart.com/pages)
+
+### Time Tracking
+🔶 **Time Tracking System** (Status: PARTIAL - Reclassified 2025-11-28)
+- **Audit Date:** 2025-11-28
+- **Competitors Analyzed:** Toggl Track, Clockify, Harvest
+- **Current Features:**
+  - ✅ Timer tab with start/stop/pause functionality
+  - ✅ Manual time entry creation
+  - ✅ Project assignment
+  - ✅ Description field for entries
+  - ✅ Time entry list with edit/delete
+  - ✅ Calendar view of time entries (integrated with events)
+  - ✅ Summary/reports tab (monthly time report)
+  - ✅ Projects management UI
+  - ✅ Time entries grouped by date
+  - ✅ Day detail modal (click day to see entries)
+  - ✅ "Add Time Entry" quick button
+  - ✅ Duration calculations
+  - ✅ Project color coding
+  - ✅ Unified Schedule page with 5 tabs
+- **Critical Gaps (Preventing 100%+ Parity):**
+  1. ❌ **Billable Hours System** - No billable/non-billable marking
+     - Toggl Track: ✅ Mark entries as billable
+     - Clockify: ✅ Billable/non-billable toggle FREE
+     - Harvest: ✅ Billable hours tracking with rates
+     - **Impact:** Can't track what to invoice clients for - baseline feature for freelancers
+  2. ❌ **Billable Rates** - No per-project or per-task hourly rates
+     - Toggl Track: ✅ Set billable rates per project
+     - Clockify: ✅ Hourly rates FREE
+     - Harvest: ✅ Per-person, per-project rates
+     - **Impact:** Manual calculation of billable amounts - can't generate invoices
+  3. ❌ **Idle Detection** - Timer runs when away from keyboard
+     - Toggl Track: ✅ Idle detection with prompts
+     - Clockify: ✅ Idle detection FREE
+     - Harvest: ✅ Auto-stop idle timer
+     - **Impact:** Inaccurate time tracking, over-billing risk
+  4. ❌ **Invoicing** - No invoice generation from tracked time
+     - Harvest: ✅ Comprehensive invoicing + payment acceptance
+     - Clockify: ✅ One-click invoice generation
+     - Toggl Track: ✅ Basic invoicing
+     - **Impact:** Must use separate tool for billing - major workflow gap
+  5. ❌ **Automatic Time Tracking** - No app/website monitoring
+     - Toggl Track: ✅ Automatic tracking (paid)
+     - Clockify: ✅ Automatic tracking FREE
+     - **Impact:** Must remember to start/stop timer manually
+  6. ❌ **Advanced Reporting** - Only basic monthly summary
+     - ALL 3 competitors: ✅ Detailed reports with filters, exports, charts
+     - **Impact:** Can't analyze productivity patterns or project profitability
+  7. ❌ **Project Profitability** - No cost vs. billable analysis
+     - Toggl Track: ✅ Profitability tracking
+     - Harvest: ✅ Budget vs. actual, project margins
+     - **Impact:** Don't know if projects are profitable
+  8. ❌ **Pomodoro Integration** - No focus timer mode
+     - Toggl Track: ✅ Pomodoro timer mode
+     - Clockify: ✅ Pomodoro integration
+     - **Impact:** Can't use for focused work sessions
+- **Our Advantages:**
+  - ✅ Calendar view integration (nice UX vs competitors' separate calendar)
+  - ✅ Unified with events (all-in-one schedule page)
+  - ✅ Offline-first, local storage
+  - ✅ FREE (Toggl charges for many features, $10-20/user/mo)
+  - ✅ Privacy-focused (no time data sent to cloud)
+- **Files:** `src/pages/TimeTracking.tsx`, `src/components/TimeTrackingTimer.tsx`, `src/components/TimeEntryList.tsx`, `src/components/TimeEntrySummary.tsx`
+- **Priority:** **P0** (Billable hours, Rates, Idle detection), **P1** (Invoicing, Advanced reports, Automatic tracking), **P2** (Pomodoro, Project profitability)
+- **Verdict:** Basic time tracking works, but missing ALL professional freelancer features - can't be used for client billing, no competitive advantage vs Clockify free tier
+- **Sources:** [Toggl vs Clockify vs Harvest](https://toggl.com/blog/clockify-vs-harvest), [Time Tracking Essential Features](https://thedigitalprojectmanager.com/tools/time-tracking-software/), [Idle Detection Features](https://hubstaff.com/idle-time-tracking-software)
+
+### AI Terminal
+🔶 **Phantom Shell Web Alternatives** (Status: PARTIAL)
+- **Current:** Shows "not supported" for native commands
+- **Missing:** Web-compatible alternatives
+- **Needed Commands:**
+  - `/ping` - fetch-based latency test
+  - `/curl` - fetch wrapper
+  - `/git` - isomorphic-git integration
+  - `/python` - Pyodide integration (heavy)
+  - `/docker` - N/A (cannot emulate)
+  - `/ssh` - N/A (cannot emulate)
+
+### Link Library
+🔶 **Browser Bookmark Sync** (Status: RESEARCH NEEDED → PARTIAL)
+- **Current:** Manual export/import
+- **Desired:** Direct browser API integration
+- **See:** Browser Integration section
+
+---
+
+## MISSING ALL-IN-ONE PLATFORM FEATURES
+
+Based on research into Notion, Coda, Airtable, ClickUp, Monday.com - features that all-in-one platforms have that we're missing:
+
+### Database & Data Management
+
+**Missing Core Features:**
+1. **❌ Database Views** - We have forms/tables but no:
+   - Gallery view (visual cards with covers)
+   - Calendar view of database items
+   - Timeline view
+   - Board view (Kanban from database)
+   - List view with customization
+   - **Impact:** Limited ways to visualize and interact with structured data
+
+2. **❌ Relations** - Can't link databases together
+   - Notion/Airtable: Link tasks to projects, contacts to companies
+   - **Impact:** Data is siloed, no cross-referencing between types
+
+3. **❌ Rollups** - Can't aggregate data from related items
+   - Notion: Sum/count/average values from linked records
+   - **Impact:** Manual calculation required for summaries
+
+4. **❌ Formulas** - No computed fields
+   - Notion: Formula columns for calculations
+   - Airtable: Complex formulas, lookups
+   - **Impact:** Static data only, no automation of calculations
+
+5. **❌ Advanced Sorting & Filtering** - Limited compared to competitors
+   - Notion: Multi-level sorting, complex filters
+   - **Impact:** Can't create sophisticated views of data
+
+### Automation Gaps
+
+**Missing Automation Features:**
+1. **❌ Visual Automation Builder** - Our automation is code/JSON only
+   - Coda: Buttons that trigger workflows
+   - Monday.com: No-code automation builder
+   - **Impact:** Only technical users can create automations
+
+2. **❌ Cross-Database Automations** - Can't trigger across features
+   - Example: Completing task → create time entry → update project status
+   - **Impact:** Manual workflow coordination required
+
+3. **❌ Scheduled Automations** - No time-based triggers
+   - Notion: Run automation daily/weekly/monthly
+   - **Impact:** Can't automate recurring workflows
+
+### Integration & Extensibility
+
+**Missing Features:**
+1. **❌ API / Webhooks** - No external integration capability
+   - Notion/Coda/Airtable: REST APIs for external tools
+   - **Impact:** Isolated system, can't connect to other tools
+
+2. **❌ Import/Export Beyond Backup** - Limited data portability
+   - Missing: CSV import for tasks/notes
+   - Missing: Markdown export for notes
+   - **Impact:** Data lock-in, migration difficulty
+
+3. **❌ Embeds** - Can't embed external content
+   - Notion: Embed Google Docs, Figma, YouTube, etc.
+   - **Impact:** Must leave app to view external resources
+
+### AI Features (2025 Standard)
+
+**What Competitors Have:**
+1. **❌ AI Writing Assistant** - No AI help with notes
+   - Notion AI: Continue writing, summarize, improve writing
+   - **Impact:** Manual writing only
+
+2. **❌ AI Summaries** - Can't auto-summarize content
+   - Notion: Summarize meeting notes, long documents
+   - **Impact:** Must read everything manually
+
+3. **❌ AI Task/Event Generation** - Can't extract from text
+   - Notion: "Add event: Team meeting Friday 3pm" → creates event
+   - **Impact:** Manual entry required
+
+**Sources:**
+- [Notion vs Coda vs Airtable](https://www.whalesync.com/blog/coda-vs-notion-the-ultimate-guide)
+- [Notion Database Features](https://www.notion.com/help/relations-and-rollups)
+- [Airtable Features](https://www.airtable.com/)
+
+---
+
+## PRODUCTIVITY WIDGET IDEAS
+
+Based on research into user demands and competitor features:
+
+### Financial Tracking Widgets (HIGH DEMAND - Not Implemented)
+
+1. **❌ Expense Tracker Widget**
+   - Quick expense entry with categories
+   - Monthly spending by category
+   - Budget vs actual comparison
+   - **Competitors:** Mint, YNAB, Quicken
+   - **Priority:** HIGH (common user request)
+
+2. **❌ Savings Goals Widget**
+   - Progress bars for savings goals
+   - Projected completion dates
+   - Visual motivation
+   - **Competitors:** YNAB, EveryDollar
+   - **Priority:** MEDIUM
+
+3. **❌ Net Worth Tracker Widget**
+   - Assets - liabilities = net worth
+   - Month-over-month change
+   - Trend graph
+   - **Competitors:** Personal Capital, Kubera
+   - **Priority:** MEDIUM
+
+4. **❌ Investment Portfolio Widget**
+   - Stock/crypto ticker integration
+   - Portfolio allocation pie chart
+   - Gains/losses tracking
+   - **Competitors:** Personal Capital, Kubera
+   - **Priority:** LOW (privacy concerns with API keys)
+
+### Focus & Well-being Widgets
+
+1. **✅ Pomodoro Widget** - WE HAVE THIS
+   - **Status:** COMPLETE
+
+2. **❌ Mood Tracker Widget**
+   - Daily mood logging with emoji
+   - Mood statistics over time
+   - Correlation with habits/tasks
+   - **Competitors:** Daylio, Moodfit
+   - **Priority:** HIGH (mental health awareness)
+
+3. **❌ Habit Streaks Widget**
+   - Visual streak counters
+   - Heatmap calendar view
+   - Preset + custom habits
+   - **Competitors:** Habitica, Streaks, Loop Habit Tracker
+   - **Priority:** HIGH (user requests)
+
+4. **❌ Daily Gratitude Widget**
+   - Journal prompt
+   - Archive of past gratitude entries
+   - **Competitors:** Grateful, Day One
+   - **Priority:** MEDIUM
+
+5. **❌ Focus Session Widget**
+   - Deep work time blocking
+   - Distraction-free mode trigger
+   - Focus time analytics
+   - **Competitors:** Freedom, Forest
+   - **Priority:** MEDIUM
+
+### Productivity & Insights Widgets
+
+1. **❌ Productivity Score Widget**
+   - Tasks completed vs planned
+   - Time tracked vs estimated
+   - Weekly/monthly trends
+   - **Competitors:** RescueTime
+   - **Priority:** HIGH (analytics expansion)
+
+2. **❌ Goal Progress Widget**
+   - OKR tracking
+   - Milestone progress bars
+   - Deadline countdowns
+   - **Competitors:** Asana Goals, ClickUp Goals
+   - **Priority:** MEDIUM
+
+3. **❌ Daily/Weekly Review Widget**
+   - Reflection prompts
+   - What went well / what to improve
+   - Wins archive
+   - **Competitors:** Notion templates
+   - **Priority:** MEDIUM
+
+**Sources:**
+- [Personal Dashboard Best Practices](https://blog.adenin.com/best-personal-dashboards/)
+- [Finance Dashboard Widgets](https://www.kubera.com/blog/financial-dashboard)
+- [Habit Tracking Apps](https://www.widgetly.co/blog/best-habit-tracking-apps)
+
+---
+
+## NOT STARTED
+
+### Time Tracking Enhancement
+⬜ **Time Tracking Tab in Schedule Page**
+- **Request:** Dedicated tab/section for time tracking within Schedule
+- **Current:** Only accessible via sidebar
+- **Benefits:** Greater customization, analytics, insights
+- **Priority:** HIGH (user requested)
+- **Research:** See Time Tracking Solutions section
+
+### Task Management Advanced Features
+**Note:** See PARTIAL IMPLEMENTATION section above for comprehensive audits of:
+- 🔶 Kanban Board (reclassified from COMPLETED - 2025-11-28)
+- 🔶 Timeline/Gantt View (reclassified from COMPLETED - 2025-11-28)
+- 🔶 Recurring Tasks (reclassified from COMPLETED - 2025-11-28)
+- Task Dependencies (audit pending)
+- Custom Fields (audit pending)
+
+⬜ **Task Templates**
+- **Competitors:** ClickUp, Asana
+- **Use Case:** Repeatable workflows
+
+⬜ **Natural Language Task Entry**
+- **Competitors:** Todoist, ClickUp
+- **Example:** "Meeting tomorrow at 2pm" → creates task
+- **Privacy:** Can parse locally
+
+⬜ **Subtasks/Checklist Items**
+- **Competitors:** Trello, Asana, ClickUp
+- **Current:** May exist in basic form
+- **Enhancement:** Full nested hierarchy
+
+⬜ **Task Time Estimation vs Actual**
+- **Competitors:** ClickUp, Jira
+- **Use Case:** Project planning
+
+⬜ **Custom Task Fields**
+- **Status:** Mentioned as planned
+- **Competitors:** Monday.com, ClickUp, Asana (paid)
+- **Implementation:** User-defined field types
+
+⬜ **Task Automation Rules**
+- **Status:** Planned local automation engine
+- **Competitors:** Monday.com, Asana, Trello Butler
+- **Examples:**
+  - "When status → Done, notify"
+  - "Daily at 9am, create standup task"
+- **Implementation:** Service Worker + IndexedDB timers
+
+⬜ **My Day Dashboard**
+- **Inspiration:** Asana's "Today" view
+- **Enhancement:** Calendar events + tasks + habits unified
+- **Priority:** HIGH (core UX improvement)
+
+### Calendar & Scheduling
+⬜ **Recurring Events**
+- **Competitors:** All calendar apps
+- **Implementation:** Pattern storage in IndexedDB
+
+⬜ **Event Reminders/Notifications**
+- **Competitors:** Google Calendar, Apple Calendar
+- **Implementation:** Browser notifications API
+
+⬜ **Calendar Invites/Sharing**
+- **Competitors:** Outlook, Google Calendar
+- **Scope:** May conflict with local-first philosophy
+
+⬜ **Multiple Calendars**
+- **Competitors:** All calendar apps
+- **Use Case:** Personal vs Work separation
+
+⬜ **Calendar Sync** (External)
+- **Competitors:** All calendar apps
+- **Implementation:** Import from Google Cal, Outlook, etc.
+
+### Notes Enhancement
+⬜ **Block-Based Editor**
+- **Current:** Traditional editor
+- **Competitors:** Notion, Obsidian, Logseq
+- **Benefits:** Flexible content blocks
+
+✅ **Backlinks/Wikilinks** (COMPLETE - 2025-11-26)
+- **Competitors:** Obsidian, Roam, Logseq, Notion
+- **Implementation:** [[link]] syntax already implemented in src/utils/backlinks.ts
+- **UI:** BacklinksPanel component integrated into NotesEditor
+- **Status:** Production-ready, infrastructure was already complete
+
+✅ **Graph View** (Implemented 2025-11-26 - MVP Complete)
+- **Competitors:** Obsidian, Roam, Logseq
+- **Use Case:** Visualize note connections
+- **Implementation:** Interactive D3.js force-directed graph at /graph
+- **Phase 1 Features (COMPLETE):**
+  - Nodes for notes (cyan) and tags (magenta)
+  - Edges from linkedNotes (backlinks)
+  - Zoom, pan, drag interactions
+  - Search filter, hide orphans toggle
+  - Click nodes to navigate
+  - Legend and instructions
+  - Dark mode compatible
+  - Stats display (node count, connection count)
+- **Status:** MVP COMPLETE - Phase 2 enhancements optional (tag/folder filters, tooltips)
+
+⬜ **Tags System**
+- **Competitors:** Bear, Notion, Obsidian
+- **Implementation:** #tag syntax
+
+⬜ **Smart Folders/Filters**
+- **Competitors:** Apple Notes, Notion
+- **Examples:** "All notes modified this week"
+
+⬜ **Note Templates**
+- **Competitors:** Notion, Obsidian
+- **Use Case:** Meeting notes, daily notes, etc.
+
+⬜ **Daily Notes Pattern**
+- **Competitors:** Roam, Logseq, Obsidian
+- **Use Case:** Journaling, automatic daily entry
+
+⬜ **Focus/Zen Mode**
+- **Competitors:** Bear, iA Writer
+- **Use Case:** Distraction-free writing
+
+⬜ **Document Scanning**
+- **Competitors:** Apple Notes, OneNote
+- **Implementation:** Camera API + OCR
+
+⬜ **Rich Text Enhancements**
+- **Current:** Basic rich text (likely)
+- **Missing:** Tables, code blocks, embeds
+- **Competitors:** Notion, OneNote
+
+⬜ **Note Search Improvements**
+- **Current:** Basic search (likely)
+- **Missing:** Full-text search, filters
+- **Implementation:** Indexing layer
+
+⬜ **Export Formats**
+- **Current:** .brain backup
+- **Missing:** Markdown, PDF, DOCX, HTML
+- **Competitors:** All note apps
+
+### Diagramming & Visual Tools
+⬜ **Mind Map Widget**
+- **Competitors:** MindNode, XMind
+- **Use Case:** Brainstorming, hierarchy
+
+### Spreadsheet & Data
+⬜ **Spreadsheet Widget**
+- **Competitors:** Excel, Google Sheets, Airtable
+- **Libraries:** Handsontable, Luckysheet, Univer
+- **Features:**
+  - Formulas (SUM, AVERAGE, IF, VLOOKUP)
+  - Cell formatting
+  - Charts
+  - CSV/Excel import/export
+- **Priority:** LOW-MEDIUM
+
+⬜ **Database Widget**
+- **Competitors:** Airtable, Notion databases, NocoDB
+- **Features:**
+  - Table view
+  - Field types (text, number, date, select, relation)
+  - Filtering/sorting
+  - Multiple views (table, cards, calendar)
+- **Priority:** LOW-MEDIUM
+
+### Time Tracking Advanced
+⬜ **Enhanced Time Tracking Features**
+- **Competitors:** Toggl, Clockify, Harvest
+- **Features:**
+  - One-click timer start/stop
+  - Project/client association
+  - Visual reports (charts, heat maps)
+  - Billable hours tracking
+  - Weekly/monthly summary views
+  - Export to invoice
+  - Automatic time suggestions
+  - Pomodoro mode integration
+- **Priority:** HIGH (user requested dedicated section)
+
+### Analytics & Reporting
+✅ **Personal Analytics Dashboard** (Implemented 2025-11-26, P2 #9)
+- **Status:** COMPLETE - All MVP features implemented
+- **Competitors:** RescueTime, ClickUp analytics, Monday dashboards
+- **Implementation:**
+  - Period selection: Today/Week/Month/Year/Custom
+  - 6 metric cards: Completion rate, time tracked, events, notes, overdue, productivity placeholder
+  - 8 interactive charts powered by Recharts
+- **Task Analytics:**
+  - Completion rate trend (line chart)
+  - Priority distribution (pie chart)
+  - Status breakdown (bar chart)
+- **Time Tracking Analytics:**
+  - Time by project (bar chart)
+  - Hourly distribution 0-23 (bar chart heatmap)
+  - Session duration trend (line chart)
+- **Calendar Analytics:**
+  - Meeting vs focus time (pie chart)
+- **Notes Analytics:**
+  - Tag frequency (bar chart, top 10)
+- **Features:**
+  - Dark mode support via semantic tokens
+  - Responsive layouts (mobile to desktop)
+  - Empty state handling
+  - Lazy-loaded widget (no initial bundle impact)
+  - Memoized calculations for performance
+- **Files:** 15 total (~1,200 lines of code)
+  - Store: `src/stores/useAnalyticsStore.ts`
+  - Utils: `src/utils/analyticsCalculations.ts`
+  - Components: `src/components/Analytics/*` (10 components)
+  - Widget: `src/widgets/Dashboard/AnalyticsWidget.tsx`
+- **Time:** 5.25 hours (vs 10 estimated, 47% ahead of schedule)
+- **Priority:** MEDIUM (✅ COMPLETE)
+
+⬜ **Goal Tracking**
+- **Competitors:** Asana Goals, ClickUp Goals
+- **Features:**
+  - Define goals/OKRs
+  - Track progress
+  - Link tasks to goals
+  - Visual progress indicators
+- **Priority:** MEDIUM
+
+### Widgets (New)
+⬜ **Calculator Widget**
+- **Inspiration:** Apple Calculator
+- **Features:** Basic + scientific modes, unit conversion
+- **Priority:** LOW
+
+⬜ **Dictionary Widget**
+- **API:** Free dictionary API
+- **Features:** Definitions, thesaurus, word of the day
+- **Privacy:** Cache locally
+- **Priority:** LOW
+
+⬜ **World Clock Enhancement**
+- **Current:** Already exists (✅)
+- **Enhancement:** Multiple cities, time zone converter
+- **Priority:** LOW
+
+⬜ **Weather Widget**
+- **API:** OpenWeatherMap or similar
+- **Privacy:** User provides API key
+- **Priority:** LOW
+
+⬜ **Habit Tracker Widget**
+- **Competitors:** Habitica, Streaks, Loop Habit Tracker
+- **Features:**
+  - Daily check-ins
+  - Streak tracking
+  - Visual calendar
+  - Habit chains
+- **Priority:** MEDIUM
+
+⬜ **Countdown/Timer Widget**
+- **Features:** Multiple timers, stopwatch, countdown
+- **Use Case:** Pomodoro, event countdowns
+- **Priority:** LOW
+
+⬜ **Quote of the Day Widget**
+- **Source:** Local quotes database or API
+- **Priority:** LOW
+
+⬜ **Sticky Notes Widget**
+- **Inspiration:** Apple Stickies
+- **Features:** Quick notes, always visible
+- **Priority:** LOW
+
+### Presentation & Publishing
+⬜ **Presentation Builder**
+- **Competitors:** PowerPoint, Google Slides, Reveal.js
+- **Library:** Reveal.js integration
+- **Features:**
+  - Markdown-based slides
+  - Basic transitions
+  - Presenter mode
+  - Export to PDF
+  - Embed in notes
+- **Priority:** LOW
+
+⬜ **Publishing Mode**
+- **Competitors:** Medium, Substack, Ghost
+- **Features:**
+  - Export notes to web
+  - Static site generation
+  - Portfolio/showcase
+- **Priority:** LOW
+
+### Security & Privacy
+⬜ **Encrypted Notes Section**
+- **Use Case:** Sensitive information
+- **Implementation:** WebCrypto API, user password
+- **Priority:** MEDIUM
+
+⬜ **Password Generator Tool**
+- **Competitors:** 1Password, Bitwarden
+- **Scope:** Utility, not full password manager
+- **Priority:** LOW
+
+⬜ **API Key Secure Storage**
+- **Use Case:** Store API keys for integrations
+- **Implementation:** IndexedDB encrypted storage
+- **Priority:** MEDIUM
+
+### Voice & Audio
+⬜ **Voice Input for Notes**
+- **API:** Web Speech API (browser-native)
+- **Privacy:** On-device processing
+- **Priority:** MEDIUM
+
+⬜ **Voice Commands**
+- **Examples:** "Create task...", "Open notes"
+- **Priority:** LOW
+
+⬜ **Meeting Transcription**
+- **API:** Web Speech API or Otter.ai-like
+- **Privacy:** Consider on-device only
+- **Priority:** LOW
+
+⬜ **Voice Memos**
+- **Competitors:** Apple Voice Memos
+- **Features:** Record, transcribe, search
+- **Priority:** LOW
+
+### Reminders & Alerts
+⬜ **Enhanced Reminder System**
+- **Competitors:** Apple Reminders, Due
+- **Features:**
+  - Time-based reminders
+  - Location-based (if mobile)
+  - Persistent notifications
+  - Natural language input
+  - Smart scheduling
+  - Integration with calendar events
+- **Priority:** MEDIUM
+
+### Automation & Integration
+⬜ **Workflow Automation Engine**
+- **Competitors:** Zapier, IFTTT, n8n
+- **Scope:** Internal automation (tasks, events, habits)
+- **Status:** Planned local automation
+- **Examples:**
+  - "When task marked done, create next task"
+  - "Every Monday 9am, create weekly review"
+  - "If habit missed 3 days, send reminder"
+- **Priority:** HIGH
+
+⬜ **Browser Extension**
+- **Features:**
+  - Bookmark sync to Link Library
+  - Web clipper (save pages to notes)
+  - Quick capture
+  - Tab sync with Tab Manager widget
+- **Priority:** HIGH
+
+⬜ **Integration Plugins**
+- **Examples:**
+  - Import from Trello/Asana/Todoist
+  - Sync with external calendars
+  - Export to productivity tools
+- **Status:** Some import planned
+- **Priority:** MEDIUM
+
+### Creative Tools
+⬜ **Drawing/Sketch Tool**
+- **Competitors:** Microsoft Paint, Photopea
+- **Features:**
+  - Canvas-based drawing
+  - Basic shapes and brushes
+  - Color picker
+  - Export to PNG/SVG
+  - Inline in notes
+- **Priority:** LOW
+
+### Developer Tools
+⬜ **Phantom Shell Enhancements**
+- **Status:** PARTIAL (see above)
+- **Missing:**
+  - `/git` integration (isomorphic-git)
+  - `/sql` queries (sql.js for local data)
+  - `/jq` for JSON processing
+- **Priority:** MEDIUM
+
+⬜ **Script Editor/Macros**
+- **Inspiration:** Apple Automator, Script Editor
+- **Use Case:** User scripting for automation
+- **Priority:** LOW
+
+---
+
+## RESEARCH NEEDED
+
+### 1. Diagramming & Visual Tools
+**Research Status:** Documented but not executed
+**Competitors to Research:**
+- Draw.io (diagrams.net) - Open source, browser-based, offline
+- Microsoft Visio - Industry standard
+- Lucidchart - Modern UX patterns
+- Excalidraw - Local-first, hand-drawn aesthetic (BEST FIT)
+- Miro - Collaborative whiteboard
+
+**Key Questions:**
+- Canvas rendering approach (SVG vs Canvas API)?
+- Shape definition format?
+- Export to standard formats?
+- Touch/stylus support?
+
+**Priority:** HIGH (user likely wants this)
+
+---
+
+### 2. Task & Project Management Deep Dive
+**Research Status:** Partial (competitive analysis done)
+**Remaining Research:**
+- How to handle recurring task patterns?
+- Natural language date parsing libraries?
+- Task dependencies implementation patterns?
+- Time estimation algorithms?
+
+**Competitors Analyzed:**
+- ✅ Monday.com (Done)
+- ✅ ClickUp (Done)
+- ✅ Asana (Done)
+- ✅ Trello (Done)
+- ⬜ Todoist (Not started)
+- ⬜ TickTick (Not started)
+- ⬜ Things 3 (Not started)
+
+**Priority:** HIGH
+
+---
+
+### 3. Note-Taking Polish & Features
+**Research Status:** Competitors identified, not researched
+**User Feedback:** "Unpolished and childish feeling"
+
+**Competitors to Research:**
+- Google NotebookLM - AI-powered research, cutting edge
+- Microsoft OneNote - Free-form canvas, flexible
+- Notion - Block-based editing, modern standard
+- Obsidian - Local-first markdown, plugins (CLOSEST MATCH)
+- Apple Notes - Simple, integrated UX
+- Bear - Design excellence, markdown
+- Roam Research - Bidirectional linking pioneer
+- Logseq - Open source outliner
+- Craft - Beautiful documents
+- Reflect - Privacy + AI
+
+**Key Questions:**
+- What makes notes feel "polished"?
+- Block-based vs document-based editing?
+- Linking and backlinks implementation?
+- Graph view feasibility?
+- Typography improvements?
+- AI features (local vs cloud)?
+
+**Priority:** CRITICAL (user dissatisfaction noted)
+
+---
+
+### 4. Browser Bookmark Sync
+**Research Status:** Problem identified, no solution
+**User Request:** Direct sync with browser bookmarks
+
+**Research Topics:**
+- Chrome bookmarks API capabilities
+- Firefox bookmarks API capabilities
+- Edge bookmarks API capabilities
+- Browser extension development (Manifest V3)
+- Cross-browser compatibility
+- IndexedDB access from extension
+- Native messaging between extension and web app
+
+**Potential Solutions:**
+1. Browser extension that syncs with Neuman Brain
+2. Read browser bookmark files directly (file system API)
+3. Manual import/export improvement
+
+**Priority:** HIGH (user requested)
+
+---
+
+### 5. Time Tracking Solutions
+**Research Status:** Competitors identified, not researched
+**User Request:** Dedicated time tracking section in Schedule
+
+**Competitors to Research:**
+- Toggl Track - Industry leader, one-click timer
+- Clockify - Free tier, team features
+- Harvest - Invoicing, business features
+- RescueTime - Automatic tracking
+- Timeular - Physical tracker UX innovation
+
+**Key Questions:**
+- Essential features vs advanced?
+- Reports and visualization patterns?
+- Billable hours tracking?
+- Automatic time suggestions?
+- Pomodoro integration?
+
+**Priority:** HIGH (user requested)
+
+---
+
+### 6. Terminal & Shell Emulation
+**Research Status:** Problem identified, partial research
+**User Request:** Web alternatives to native commands
+
+**Web-Based Terminals to Research:**
+- StackBlitz WebContainers
+- CodeSandbox
+- Replit
+- Gitpod
+
+**Commands Needing Alternatives:**
+| Native | Web Alternative | Implementation |
+|--------|----------------|----------------|
+| ping | fetch() timing | Measure latency |
+| curl | fetch() | HTTP requests |
+| wget | fetch() + download | File downloads |
+| git | isomorphic-git | Full git in browser |
+| python | Pyodide | Python via WebAssembly |
+| ssh | N/A | Cannot emulate |
+| docker | N/A | Cannot emulate |
+
+**Libraries to Research:**
+- isomorphic-git - Git in JavaScript
+- Pyodide - Python in WebAssembly (HEAVY)
+- jq-web - JSON processing
+- sql.js - SQLite in browser
+
+**Priority:** MEDIUM
+
+---
+
+### 7. Spreadsheet Implementation
+**Research Status:** Competitors identified, not researched
+
+**Competitors to Research:**
+- Microsoft Excel - Industry standard
+- Google Sheets - Web-first, real-time collab
+- Apple Numbers - Design-focused, canvas-based
+- LibreOffice Calc - Open source
+- Luckysheet / Univer - Open source browser-based
+- Handsontable - JavaScript library (EMBEDDABLE)
+
+**Key Questions:**
+- Essential features vs nice-to-have?
+- Formula support requirements?
+- Use existing library or build from scratch?
+- Performance with large datasets?
+
+**Priority:** LOW-MEDIUM
+
+---
+
+### 8. Database Widget Feasibility
+**Research Status:** Competitors identified, not researched
+
+**Competitors to Research:**
+- Microsoft Access - Desktop database paradigm
+- Airtable - Spreadsheet-database hybrid (BEST UX)
+- Notion Databases - Inline with notes
+- NocoDB - Open source Airtable alternative
+- Baserow - Open source, API-first
+
+**Key Questions:**
+- Balance between power and simplicity?
+- Field types to support?
+- Query capabilities?
+- Integration with other NB data?
+
+**Priority:** LOW-MEDIUM
+
+---
+
+### 9. Privacy-Focused Services Analysis
+**Research Status:** Competitors identified, not researched
+**Purpose:** Learn from Proton's approach
+
+**Services to Research:**
+- Proton Drive - E2EE file storage
+- Proton Notes - Encrypted notes (if exists)
+- Proton Docs - Collaboration with encryption
+- Proton Calendar - Encrypted events
+- Proton Lumo AI - Privacy-preserving AI
+
+**Key Questions:**
+- How to implement E2EE sync?
+- Privacy-first collaboration patterns?
+- Secure sharing options?
+
+**Priority:** MEDIUM (aligns with NB philosophy)
+
+---
+
+### 10. Real-Time Collaboration (Future)
+**Research Status:** Competitors identified, not researched
+**Scope:** Future feature, not immediate
+
+**Frameworks to Research:**
+- Microsoft Fluid Framework - Distributed data structures
+- Yjs - CRDT-based, multiple providers (BEST FIT)
+- Automerge - CRDT library, local-first
+
+**Key Questions:**
+- How to sync with local-first architecture?
+- Conflict resolution patterns?
+- P2P vs server-based?
+
+**Priority:** LOW (future consideration)
+
+---
+
+### 11. Apple Ecosystem Deep Dive
+**Research Status:** Apps listed, not researched
+**Purpose:** Identify features worth adopting
+
+**High Priority Apps:**
+- Freeform - Infinite canvas, collaboration
+- Reminders - Smart lists, location triggers
+- Shortcuts - Automation workflows
+- Keychain - Password management patterns
+- Voice Memos - Audio recording
+- Stickies - Quick notes
+
+**Low Priority/N/A:**
+- Health apps, system utilities, specialized tools
+
+**Priority:** LOW-MEDIUM
+
+---
+
+### 12. AI Integration Patterns
+**Research Status:** Competitors identified, not researched
+**Current:** AI Terminal exists
+
+**Competitors to Research:**
+- ChatGPT/Claude - Conversational interface
+- Notion AI - Inline suggestions, summarization
+- Google NotebookLM - Source grounding, research
+- Mem.ai - AI-native notes, auto-organization
+
+**Key Questions:**
+- What AI features preserve privacy?
+- Local AI options (on-device models)?
+- AI summarization for notes?
+- Smart task suggestions?
+- Natural language queries?
+
+**Priority:** MEDIUM
+
+---
+
+### 13. Forms & Surveys
+**Research Status:** Competitors identified, not researched
+
+**Competitors to Research:**
+- Microsoft Forms - Simple form building
+- Google Forms - Web forms standard
+- Typeform - UX innovation
+- Tally - Notion-like builder
+
+**Use Cases for NB:**
+- Personal habit tracking forms
+- Daily check-in templates
+- Mood/wellness tracking
+- Data collection for analytics
+
+**Priority:** LOW-MEDIUM
+
+---
+
+### 14. Project Planning & Gantt
+**Research Status:** Competitors identified, not researched
+**Status:** Gantt planned Q2 2026
+
+**Competitors to Research:**
+- Microsoft Project - Industry standard
+- GanttProject - Open source
+- TeamGantt - Web-based
+- Instagantt - Asana integration
+
+**Key Questions:**
+- How to integrate with existing Kanban?
+- Task dependencies visualization?
+- Critical path algorithms?
+- Resource allocation?
+
+**Priority:** MEDIUM (already planned)
+
+---
+
+### 15. Presentation Tools
+**Research Status:** Competitors identified, not researched
+
+**Competitors to Research:**
+- PowerPoint/Google Slides/Keynote - Standards
+- Prezi - Non-linear presentations
+- Reveal.js - HTML/Markdown (EMBEDDABLE)
+- Slides.com - Browser-based Reveal.js
+
+**Priority:** LOW
+
+---
+
+### 16. Content Creation & Publishing
+**Research Status:** Competitors identified, not researched
+
+**Competitors:**
+- Microsoft Sway - Story-based
+- Medium - Writing UX
+- Substack - Newsletters
+- Ghost - Open source publishing
+
+**Priority:** LOW
+
+---
+
+### 17. Document Processing
+**Research Status:** Competitors identified, not researched
+
+**Competitors:**
+- Word/Google Docs/Pages - Standards
+- LibreOffice Writer - Open source
+- Quill - Embeddable editor
+- TipTap - ProseMirror-based (MAY ALREADY USE)
+
+**Priority:** LOW (likely already have editor)
+
+---
+
+### 18. Business Intelligence & Analytics
+**Research Status:** Competitors identified, not researched
+
+**Competitors:**
+- Power BI - Leading BI tool
+- Metabase - Open source
+- Apache Superset - Open source
+- Tableau - Industry leader
+
+**Use Case:** Visualize NB data (tasks, time, events)
+
+**Priority:** MEDIUM
+
+---
+
+### 19. Wiki & Knowledge Base
+**Research Status:** Competitors identified, not researched
+
+**Competitors:**
+- Confluence - Enterprise standard
+- SharePoint - Content management
+- BookStack - Open source (BEST FIT)
+- Wiki.js - Modern open source
+- GitBook - Documentation patterns
+
+**Priority:** LOW-MEDIUM
+
+---
+
+### 20. Security & Password Management
+**Research Status:** Competitors identified, not researched
+
+**Competitors:**
+- Bitwarden - Open source, privacy-focused
+- 1Password - UX patterns
+- Apple Keychain - System integration
+
+**Scope for NB:** Secure notes, password generator, API key storage (not full password manager)
+
+**Priority:** LOW-MEDIUM
+
+---
+
+## FOUNDATION & INFRASTRUCTURE
+
+### Current Foundation (✅ Completed)
+- **Tech Stack:** React 19, TypeScript 5.9, Vite 7, Zustand 5, Tailwind 3, IndexedDB
+- **Architecture:** Local-first, zero-cloud by default, privacy-first
+- **Data Layer:** IndexedDB with Zustand state management
+- **Validation:** Zod schemas for data integrity
+- **Error Handling:** Error boundaries, recovery UI
+- **Import/Export:** .brain format, ICS import, CSV export (planned)
+- **Performance:** 60KB bundle size (vs 2-4MB competitors)
+- **Offline:** Full offline functionality
+
+### Infrastructure Gaps
+⬜ **End-to-End Encryption for Sync**
+- **Status:** Planned 2026
+- **Implementation:** WebCrypto API, user keys
+- **Priority:** HIGH (privacy differentiator)
+
+⬜ **Service Worker for Offline Automation**
+- **Use Case:** Run automations without browser open
+- **Examples:** Daily task creation, reminders
+- **Implementation:** Service Worker + Background Sync API
+- **Priority:** HIGH (for automation features)
+
+⬜ **IndexedDB Query Optimization**
+- **Current:** Basic IndexedDB usage
+- **Needed:** Compound indexes, full-text search
+- **Priority:** MEDIUM
+
+⬜ **Plugin System**
+- **Inspiration:** Obsidian plugins
+- **Use Case:** User-created extensions
+- **Implementation:** Sandboxed JavaScript API
+- **Priority:** LOW (future)
+
+⬜ **Theme System**
+- **Current:** Single theme
+- **Needed:** Multiple themes, user-created
+- **Priority:** LOW
+
+⬜ **Export Formats**
+- **Current:** .brain backup
+- **Needed:** JSON, Markdown, CSV, PDF
+- **Priority:** MEDIUM
+
+⬜ **Import From Competitors**
+- **Planned:** Trello, Asana, Todoist
+- **Status:** Some work started
+- **Priority:** HIGH (acquisition funnel)
+
+---
+
+## COMPETITOR FEATURE MATRIX
+
+### Project/Task Management
+| Feature | Monday | ClickUp | Asana | Trello | Todoist | NB Status |
+|---------|--------|---------|-------|--------|---------|-----------|
+| Kanban Board | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ COMPLETE |
+| List View | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ COMPLETE |
+| Calendar View | ✅ | ✅ | ✅ | Power-Up | ✅ | ✅ COMPLETE |
+| Timeline/Gantt | ✅ | ✅ | Paid | Power-Up | ❌ | ⬜ Planned Q2 2026 |
+| Custom Fields | ✅ | ✅ | Paid | Power-Up | ❌ | ⬜ Planned |
+| Task Dependencies | ✅ | ✅ | Paid | ❌ | ❌ | ⬜ Planned |
+| Recurring Tasks | ✅ | ✅ | ✅ | Power-Up | ✅ | ✅ COMPLETE |
+| Subtasks | ✅ | ✅ | ✅ | ✅ | ✅ | 🔶 Basic |
+| Automation | ✅ | ✅ | Paid | Butler | ❌ | ⬜ Planned Engine |
+| Time Tracking | ✅ | ✅ | ❌ | Power-Up | ❌ | 🔶 Basic |
+| Offline Mode | Mobile | ❌ | Mobile | Mobile | ✅ | ✅ Full |
+| Price (annual) | $144+ | $108+ | $162+ | $60+ | $48+ | ✅ $0 |
+
+### Notes & PKM
+| Feature | Notion | Obsidian | Logseq | OneNote | Bear | NB Status |
+|---------|--------|----------|--------|---------|------|-----------|
+| Rich Text Editor | ✅ | Markdown | Markdown | ✅ | Markdown | 🔶 Basic |
+| Folders | ✅ | ✅ | ❌ | ✅ | ❌ | ✅ COMPLETE |
+| Tags | ✅ | ✅ | ✅ | ✅ | ✅ | ⬜ Not Started |
+| Backlinks | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ COMPLETE |
+| Graph View | ❌ | ✅ | ✅ | ❌ | ❌ | ✅ Phase 1 |
+| Block References | ✅ | ✅ | ✅ | ❌ | ❌ | ⬜ Not Started |
+| Daily Notes | ✅ | ✅ | ✅ | ❌ | ❌ | ⬜ Not Started |
+| Templates | ✅ | ✅ | ✅ | ✅ | ❌ | ⬜ Not Started |
+| Offline Mode | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ Full |
+| Local-First | ❌ | ✅ | ✅ | ❌ | ❌ | ✅ Yes |
+| E2EE | ❌ | ❌ | ❌ | ❌ | ❌ | ⬜ Planned 2026 |
+
+### Time Tracking
+| Feature | Toggl | Clockify | Harvest | RescueTime | NB Status |
+|---------|-------|----------|---------|------------|-----------|
+| One-Click Timer | ✅ | ✅ | ✅ | N/A | 🔶 Basic |
+| Projects | ✅ | ✅ | ✅ | N/A | 🔶 Basic |
+| Reports | ✅ | ✅ | ✅ | ✅ | ⬜ Not Started |
+| Calendar Integration | ✅ | ✅ | ✅ | ❌ | 🔶 Partial |
+| Billable Hours | ✅ | ✅ | ✅ | ❌ | ⬜ Not Started |
+| Pomodoro | ✅ | ❌ | ❌ | ❌ | ⬜ Not Started |
+| Automatic Tracking | ❌ | ❌ | ❌ | ✅ | ⬜ Not Started |
+| Offline Mode | ✅ | ✅ | ✅ | ❌ | ✅ Full |
+
+---
+
+## MARKET POSITIONING
+
+### Neuman Brain's Blue Ocean Opportunity
+**No competitor combines:**
+1. ✅ Professional project management tools
+2. ⬜ Personal habit tracking + gamification
+3. ✅ Local-first privacy (no forced login)
+4. ⬜ Offline automation
+5. ✅ 100% free (no paywalls)
+6. ✅ Fast (60KB vs 2-4MB)
+
+### Cost Advantage
+| Competitor | Annual Cost (10 users) |
+|------------|------------------------|
+| Monday.com | $1,440 - $2,400 |
+| ClickUp | $1,080 - $2,280 |
+| Asana | $1,620 - $3,660 |
+| Todoist | $480 - $840 |
+| Toggl Track | $1,080 - $2,160 |
+| **Neuman Brain** | **$0** |
+
+### Speed Advantage
+- **NB:** 60KB bundle, <1s load time
+- **Competitors:** 2-4MB, 3-10s load time
+- **Result:** 10x-40x faster
+
+### Privacy Advantage
+- **NB:** Local-first by default, no tracking, optional E2EE sync
+- **Competitors:** Cloud-only, data on their servers, telemetry
+
+---
+
+## PRIORITIZATION FRAMEWORK
+
+### P0 - CRITICAL (Now)
+1. ✅ All P0 bugs fixed (per user testing notes)
+2. ✅ Notes polish research + implementation (COMPLETE - 5 Quick Wins implemented in 4 hours)
+3. ✅ Time tracking dedicated section (ALREADY IMPLEMENTED - /schedule page with 5 tabs)
+4. ✅ Browser bookmark sync research (Implementation pending user approval)
+
+### P1 - HIGH (Next 3 months) ✅ 100% COMPLETE! 🎉
+1. ✅ Recurring tasks (COMPLETE - 2025-11-26)
+2. ✅ Task automation engine (MVP COMPLETE - 2025-11-26)
+3. ✅ My Day dashboard (COMPLETE - 2025-11-26)
+4. ✅ Import from competitors (COMPLETE - 2025-11-26) - Trello, Asana, Todoist, ClickUp, Monday, Notion
+5. ✅ Backlinks/wikilinks for notes (COMPLETE - 2025-11-26) - Integration only, infrastructure already existed
+6. ✅ Enhanced time tracking (COMPLETE - 2025-11-26) - MVP with billable hours & revenue analytics
+   - ✅ Billable hours tracking UI
+   - ✅ Revenue analytics card in monthly summary
+   - ✅ Billable indicators in entry list
+   - ✅ Real-time revenue calculations
+   - ✅ CSV export (already existed)
+
+**ALL P1 PRIORITIES SHIPPED!** 6/6 complete in single session.
+
+### P2 - MEDIUM (3-6 months)
+1. ✅ Gantt/Timeline view (COMPLETE - 2025-11-26) - Professional timeline visualization
+   - ✅ Timeline view with day/week/month zoom levels
+   - ✅ Drag task bars to reschedule (updates startDate/dueDate)
+   - ✅ Resize bars to change duration
+   - ✅ Dependency arrows connecting related tasks
+   - ✅ Swimlanes grouped by task status
+   - ✅ Priority-based color coding
+   - ✅ Today marker indicator
+   - ✅ Tab interface in Tasks page
+   - Time: ~2 hours (6 hours under estimate)
+2. ✅ Task dependencies (DISCOVERED COMPLETE - existed in CardDetailPanel)
+   - ✅ Blocks/blocked-by relationship management
+   - ✅ Full UI in CardDetailPanel (lines 559-706)
+   - ✅ SimpleTaskDependency system
+3. ✅ Custom fields (COMPLETE - 2025-11-26) - User-defined metadata fields
+   - ✅ Field definitions for tasks and notes (text/number/date/select/checkbox)
+   - ✅ CRUD UI in Settings page (src/components/CustomFieldsSettings.tsx)
+   - ✅ Type-aware field editor with validation (src/components/CustomFieldEditor.tsx)
+   - ✅ Integration in CardDetailPanel and NotesEditor
+   - ✅ Optional fields (backward compatible)
+   - Time: ~3.2 hours
+4. ✅ Tags system for notes (COMPLETE - 2025-11-26) - Comprehensive tag management
+   - ✅ Tag picker with autocomplete (src/components/TagPicker.tsx)
+   - ✅ Tag filter sidebar with AND logic (src/components/TagFilter.tsx)
+   - ✅ Tag manager modal with rename/delete (src/components/TagManager.tsx)
+   - ✅ Global tag operations (rename/delete across all notes)
+   - ✅ Tag statistics and recent tags
+   - ✅ Custom hooks (useTags, useTagCounts, useNotesWithTags, useRecentTags)
+   - ✅ Integrated into Notes page sidebar
+   - Time: ~2.5 hours
+5. ✅ Daily notes pattern (COMPLETE - 2025-11-26) - Obsidian/Roam-style daily journaling
+   - ✅ Auto-create daily notes with keyboard shortcut (Ctrl/Cmd + D)
+   - ✅ Customizable templates with date variables
+   - ✅ Calendar view with daily notes indicators
+   - ✅ Full settings UI (date format, template editor, folder selection)
+   - ✅ Auto-linking to yesterday/tomorrow notes
+6. ✅ Graph view (Phase 1 complete 2025-11-26)
+   - ✅ Interactive D3.js force-directed graph visualization
+   - ✅ Nodes for notes (cyan) and tags (magenta)
+   - ✅ Edges from linkedNotes (backlinks)
+   - ✅ Zoom, pan, and drag node interactions
+   - ✅ Search filter and hide orphans toggle
+   - ✅ Click nodes to navigate to notes
+   - ✅ Dark mode compatible with semantic tokens
+   - 🔶 Phase 2: Enhanced controls (tag/folder filters), tooltips, legend
+7. ⬜ Personal analytics dashboard
+
+### P3 - LOW (6-12 months)
+1. ⬜ Spreadsheet widget
+2. ⬜ Database widget
+3. ⬜ Presentation builder
+4. ⬜ Drawing tool
+5. ⬜ Voice input
+6. ⬜ Habit tracker widget
+7. ⬜ Additional utility widgets
+
+### P4 - FUTURE (12+ months)
+1. ⬜ Real-time collaboration (Yjs)
+2. ⬜ Plugin system
+3. ⬜ Mobile apps
+4. ⬜ Publishing mode
+5. ⬜ Advanced automation
+
+---
+
+## IMPLEMENTATION RECOMMENDATIONS
+
+### Immediate Next Steps
+1. **Research Notes Competitors** - Understand what makes notes feel "polished"
+2. **Design Time Tracking Section** - Create mockup for Schedule page integration
+3. **Browser Extension Feasibility** - Research bookmark sync approach
+4. **Automation Engine Architecture** - Plan Service Worker + IndexedDB system
+
+### Quick Wins (Low Effort, High Impact)
+1. ⬜ Tags for notes (hashtag syntax)
+2. ⬜ Note templates (basic version)
+3. ⬜ Task completion celebrations (animations)
+4. ⬜ Natural language task dates
+5. ⬜ Export to Markdown
+
+### Technical Debt to Address
+1. ⬜ IndexedDB query optimization (compound indexes)
+2. ⬜ Full-text search implementation
+3. ⬜ Service Worker setup for offline automation
+4. ⬜ Bundle size analysis and optimization
+
+### Architecture Decisions Needed
+1. **Block-based editor?** - Research Notion/Obsidian approaches
+2. **Graph database for notes?** - For backlinks/graph view
+3. **Local AI models?** - Feasibility for on-device processing
+4. **CRDT library?** - For future collaboration
+
+---
+
+## SUCCESS METRICS
+
+### User Acquisition
+- **Target:** Users switching from paid competitors
+- **Funnel:** Import tools from Monday, ClickUp, Asana, Trello, Todoist
+
+### Feature Parity
+- **Goal:** Match 80% of Asana/Notion features (core 20% use cases)
+- **Current:** ~40% estimated
+- **Timeline:** 80% by Q4 2026
+
+### Performance
+- **Goal:** Maintain <100KB bundle size
+- **Current:** 60KB ✅
+- **Goal:** <1s load time (95th percentile)
+- **Goal:** <100ms interaction latency
+
+### Privacy
+- **Goal:** Zero telemetry by default
+- **Current:** ✅ Achieved
+- **Goal:** E2EE sync by Q2 2026
+
+---
+
+## APPENDIX: SOURCE DOCUMENTS
+
+### A. User Testing Notes (11/25/2025)
+- 14 completed features
+- 4 partial implementations
+- 3 remaining items
+- 5 research topics identified
+
+### B. Research Document (26 Categories)
+- 50+ competitors identified
+- 200+ features documented
+- Implementation considerations for each
+
+### C. Expanded Competitive Analysis
+- Deep dive on 10+ competitors
+- Technical implementation details
+- UX strategies
+- Privacy/security analysis
+- 50,000+ word analysis
+
+---
+
+**Document Status:** DRAFT
+**Next Steps:**
+1. Review with user
+2. Prioritize features
+3. Create individual task files for P0/P1 features
+4. Begin execution
+
+**Estimated Scope:** 18-24 months to reach full feature parity with top competitors while maintaining differentiators (privacy, speed, cost)

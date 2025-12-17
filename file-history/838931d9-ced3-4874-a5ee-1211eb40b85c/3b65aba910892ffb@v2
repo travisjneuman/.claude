@@ -1,0 +1,414 @@
+import React, { useState, useMemo } from 'react';
+import { ConfirmDialog } from '../../components/ConfirmDialog';
+import { useKanbanStore } from '../../stores/useKanbanStore';
+import type { Task, KanbanColumn, TaskPriority, TaskStatus } from '../../types';
+
+interface ListViewProps {
+  tasks: Task[];
+  columns: KanbanColumn[];
+  onTaskClick: (task: Task) => void;
+}
+
+type SortColumn = 'title' | 'status' | 'priority' | 'dueDate' | null;
+type SortDirection = 'asc' | 'desc' | null;
+
+/**
+ * ListView Component
+ * Table format alternative to board view
+ *
+ * Features:
+ * - Sortable columns (title, status, priority, due date)
+ * - Bulk select with checkboxes
+ * - Bulk actions (change status, priority, delete)
+ * - Export to CSV
+ * - Row click opens detail panel
+ */
+export const ListView: React.FC<ListViewProps> = ({ tasks, columns, onTaskClick }) => {
+  const { bulkUpdateStatus, bulkUpdatePriority, bulkDeleteTasks } = useKanbanStore();
+
+  // Sorting state
+  const [sortColumn, setSortColumn] = useState<SortColumn>(null);
+  const [sortDirection, setSortDirection] = useState<SortDirection>(null);
+
+  // Bulk selection state
+  const [selectedTaskIds, setSelectedTaskIds] = useState<Set<string>>(new Set());
+
+  // Bulk action dialogs
+  const [showStatusDialog, setShowStatusDialog] = useState(false);
+  const [showPriorityDialog, setShowPriorityDialog] = useState(false);
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+
+  // Handle column header click for sorting
+  const handleSort = (column: SortColumn) => {
+    if (sortColumn === column) {
+      // Cycle: asc → desc → null
+      if (sortDirection === 'asc') {
+        setSortDirection('desc');
+      } else if (sortDirection === 'desc') {
+        setSortColumn(null);
+        setSortDirection(null);
+      }
+    } else {
+      setSortColumn(column);
+      setSortDirection('asc');
+    }
+  };
+
+  // Sort tasks based on current sort state
+  const sortedTasks = useMemo(() => {
+    if (!sortColumn || !sortDirection) return tasks;
+
+    return [...tasks].sort((a, b) => {
+      let aValue: string | number | null = null;
+      let bValue: string | number | null = null;
+
+      switch (sortColumn) {
+        case 'title':
+          aValue = a.title.toLowerCase();
+          bValue = b.title.toLowerCase();
+          break;
+        case 'status':
+          aValue = columns.findIndex(col => col.id === a.status);
+          bValue = columns.findIndex(col => col.id === b.status);
+          break;
+        case 'priority':
+          const priorityOrder = { low: 0, medium: 1, high: 2 };
+          aValue = priorityOrder[a.priority];
+          bValue = priorityOrder[b.priority];
+          break;
+        case 'dueDate':
+          aValue = a.dueDate ? new Date(a.dueDate).getTime() : Infinity;
+          bValue = b.dueDate ? new Date(b.dueDate).getTime() : Infinity;
+          break;
+      }
+
+      if (aValue === null || aValue === undefined) return 1;
+      if (bValue === null || bValue === undefined) return -1;
+
+      if (aValue < bValue) return sortDirection === 'asc' ? -1 : 1;
+      if (aValue > bValue) return sortDirection === 'asc' ? 1 : -1;
+      return 0;
+    });
+  }, [tasks, sortColumn, sortDirection, columns]);
+
+  // Toggle select all
+  const handleSelectAll = (checked: boolean) => {
+    if (checked) {
+      setSelectedTaskIds(new Set(tasks.map(t => t.id)));
+    } else {
+      setSelectedTaskIds(new Set());
+    }
+  };
+
+  // Toggle individual task selection
+  const handleSelectTask = (taskId: string, checked: boolean) => {
+    const newSet = new Set(selectedTaskIds);
+    if (checked) {
+      newSet.add(taskId);
+    } else {
+      newSet.delete(taskId);
+    }
+    setSelectedTaskIds(newSet);
+  };
+
+  // Bulk actions
+  const handleBulkStatusChange = (status: TaskStatus) => {
+    bulkUpdateStatus(Array.from(selectedTaskIds), status);
+    setSelectedTaskIds(new Set());
+    setShowStatusDialog(false);
+  };
+
+  const handleBulkPriorityChange = (priority: TaskPriority) => {
+    bulkUpdatePriority(Array.from(selectedTaskIds), priority);
+    setSelectedTaskIds(new Set());
+    setShowPriorityDialog(false);
+  };
+
+  const handleBulkDelete = () => {
+    bulkDeleteTasks(Array.from(selectedTaskIds));
+    setSelectedTaskIds(new Set());
+    setShowDeleteDialog(false);
+  };
+
+  // Export CSV
+  const handleExportCSV = () => {
+    const headers = ['Title', 'Status', 'Priority', 'Due Date', 'Tags', 'Checklist Progress'];
+    const rows = tasks.map(task => {
+      const statusColumn = columns.find(col => col.id === task.status);
+      const status = statusColumn?.title || task.status;
+      const completedItems = task.checklist?.filter(item => item.completed).length || 0;
+      const totalItems = task.checklist?.length || 0;
+      const progress = totalItems > 0 ? `${completedItems}/${totalItems}` : 'N/A';
+
+      return [
+        `"${task.title.replace(/"/g, '""')}"`, // Escape quotes
+        status,
+        task.priority,
+        task.dueDate || 'N/A',
+        task.tags.join('; '),
+        progress,
+      ];
+    });
+
+    const csv = [headers.join(','), ...rows.map(row => row.join(','))].join('\n');
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `kanban-tasks-${new Date().toISOString().split('T')[0]}.csv`;
+    link.click();
+    URL.revokeObjectURL(url);
+  };
+
+  // Priority colors
+  const priorityColors = {
+    low: 'text-status-info',
+    medium: 'text-status-warning',
+    high: 'text-status-error',
+  };
+
+  // Sort indicator
+  const getSortIndicator = (column: SortColumn) => {
+    if (sortColumn !== column) return null;
+    return sortDirection === 'asc' ? ' ▲' : ' ▼';
+  };
+
+  const allSelected = tasks.length > 0 && selectedTaskIds.size === tasks.length;
+  const someSelected = selectedTaskIds.size > 0 && selectedTaskIds.size < tasks.length;
+
+  return (
+    <div className="list-view">
+      {/* Bulk Actions Toolbar */}
+      {selectedTaskIds.size > 0 && (
+        <div className="mb-4 p-3 bg-accent-blue/10 dark:bg-accent-blue/20 border border-accent-blue rounded-lg flex items-center gap-3 flex-wrap">
+          <span className="text-sm font-medium text-text-light-primary dark:text-text-dark-primary">
+            {selectedTaskIds.size} selected
+          </span>
+          <button
+            onClick={() => setShowStatusDialog(true)}
+            className="px-3 py-1.5 text-sm bg-white dark:bg-neutral-800 border border-border-light dark:border-border-dark rounded hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-colors"
+          >
+            Change Status
+          </button>
+          <button
+            onClick={() => setShowPriorityDialog(true)}
+            className="px-3 py-1.5 text-sm bg-white dark:bg-neutral-800 border border-border-light dark:border-border-dark rounded hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-colors"
+          >
+            Change Priority
+          </button>
+          <button
+            onClick={() => setShowDeleteDialog(true)}
+            className="px-3 py-1.5 text-sm bg-status-error text-white rounded hover:opacity-80 transition-opacity"
+          >
+            Delete
+          </button>
+          <button
+            onClick={handleExportCSV}
+            className="px-3 py-1.5 text-sm bg-accent-blue text-white rounded hover:bg-accent-blue-hover transition-colors ml-auto"
+          >
+            Export CSV
+          </button>
+        </div>
+      )}
+
+      {/* Table */}
+      <div className="overflow-x-auto">
+        <table className="w-full border-collapse">
+          <thead>
+            <tr className="border-b-2 border-border-light dark:border-border-dark">
+              <th className="p-3 text-left">
+                <input
+                  type="checkbox"
+                  checked={allSelected}
+                  ref={input => {
+                    if (input) input.indeterminate = someSelected;
+                  }}
+                  onChange={(e) => handleSelectAll(e.target.checked)}
+                  className="cursor-pointer"
+                />
+              </th>
+              <th
+                className="p-3 text-left font-semibold text-text-light-primary dark:text-text-dark-primary cursor-pointer hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors"
+                onClick={() => handleSort('title')}
+              >
+                Title{getSortIndicator('title')}
+              </th>
+              <th
+                className="p-3 text-left font-semibold text-text-light-primary dark:text-text-dark-primary cursor-pointer hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors"
+                onClick={() => handleSort('status')}
+              >
+                Status{getSortIndicator('status')}
+              </th>
+              <th
+                className="p-3 text-left font-semibold text-text-light-primary dark:text-text-dark-primary cursor-pointer hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors"
+                onClick={() => handleSort('priority')}
+              >
+                Priority{getSortIndicator('priority')}
+              </th>
+              <th
+                className="p-3 text-left font-semibold text-text-light-primary dark:text-text-dark-primary cursor-pointer hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors"
+                onClick={() => handleSort('dueDate')}
+              >
+                Due Date{getSortIndicator('dueDate')}
+              </th>
+              <th className="p-3 text-left font-semibold text-text-light-primary dark:text-text-dark-primary">
+                Tags
+              </th>
+              <th className="p-3 text-left font-semibold text-text-light-primary dark:text-text-dark-primary">
+                Progress
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {sortedTasks.length > 0 ? (
+              sortedTasks.map((task) => {
+                const statusColumn = columns.find(col => col.id === task.status);
+                const completedItems = task.checklist?.filter(item => item.completed).length || 0;
+                const totalItems = task.checklist?.length || 0;
+
+                return (
+                  <tr
+                    key={task.id}
+                    className="border-b border-border-light dark:border-border-dark hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors cursor-pointer"
+                    onClick={(e) => {
+                      // Don't trigger if clicking checkbox
+                      const target = e.target as HTMLElement;
+                      if (target.tagName !== 'INPUT') {
+                        onTaskClick(task);
+                      }
+                    }}
+                  >
+                    <td className="p-3" onClick={(e) => e.stopPropagation()}>
+                      <input
+                        type="checkbox"
+                        checked={selectedTaskIds.has(task.id)}
+                        onChange={(e) => handleSelectTask(task.id, e.target.checked)}
+                        className="cursor-pointer"
+                      />
+                    </td>
+                    <td className="p-3 font-medium text-text-light-primary dark:text-text-dark-primary">
+                      {task.title}
+                    </td>
+                    <td className="p-3">
+                      <span className={`px-2 py-1 text-xs rounded ${statusColumn?.color || 'bg-neutral-200 dark:bg-neutral-700'} text-white`}>
+                        {statusColumn?.title || task.status}
+                      </span>
+                    </td>
+                    <td className="p-3">
+                      <span className={`text-sm font-medium ${priorityColors[task.priority]}`}>
+                        {task.priority.charAt(0).toUpperCase() + task.priority.slice(1)}
+                      </span>
+                    </td>
+                    <td className="p-3 text-sm text-text-light-secondary dark:text-text-dark-secondary">
+                      {task.dueDate ? new Date(task.dueDate).toLocaleDateString() : '—'}
+                    </td>
+                    <td className="p-3">
+                      <div className="flex gap-1 flex-wrap">
+                        {task.tags.slice(0, 3).map(tag => (
+                          <span key={tag} className="px-2 py-0.5 text-xs rounded bg-accent-blue/10 dark:bg-accent-blue/20 text-accent-blue">
+                            #{tag}
+                          </span>
+                        ))}
+                        {task.tags.length > 3 && (
+                          <span className="text-xs text-text-light-secondary dark:text-text-dark-secondary">
+                            +{task.tags.length - 3}
+                          </span>
+                        )}
+                      </div>
+                    </td>
+                    <td className="p-3">
+                      {totalItems > 0 && (
+                        <span className={`px-2 py-1 text-xs rounded font-medium ${
+                          completedItems === totalItems
+                            ? 'bg-status-success text-white'
+                            : 'bg-accent-blue text-white'
+                        }`}>
+                          ✓ {completedItems}/{totalItems}
+                        </span>
+                      )}
+                    </td>
+                  </tr>
+                );
+              })
+            ) : (
+              <tr>
+                <td colSpan={7} className="p-12 text-center text-text-light-secondary dark:text-text-dark-secondary">
+                  No tasks to display
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Bulk Status Change Dialog */}
+      {showStatusDialog && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-surface-light dark:bg-surface-dark rounded-lg p-6 max-w-md w-full mx-4">
+            <h3 className="text-lg font-semibold mb-4 text-text-light-primary dark:text-text-dark-primary">
+              Change Status ({selectedTaskIds.size} tasks)
+            </h3>
+            <div className="space-y-2 mb-6">
+              {columns.map(column => (
+                <button
+                  key={column.id}
+                  onClick={() => handleBulkStatusChange(column.id as TaskStatus)}
+                  className="w-full text-left px-4 py-2 rounded hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors"
+                >
+                  <span className={`inline-block w-3 h-3 rounded-full mr-2 ${column.color}`}></span>
+                  {column.title}
+                </button>
+              ))}
+            </div>
+            <button
+              onClick={() => setShowStatusDialog(false)}
+              className="w-full px-4 py-2 bg-neutral-200 dark:bg-neutral-700 rounded hover:opacity-80 transition-opacity"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Bulk Priority Change Dialog */}
+      {showPriorityDialog && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-surface-light dark:bg-surface-dark rounded-lg p-6 max-w-md w-full mx-4">
+            <h3 className="text-lg font-semibold mb-4 text-text-light-primary dark:text-text-dark-primary">
+              Change Priority ({selectedTaskIds.size} tasks)
+            </h3>
+            <div className="space-y-2 mb-6">
+              {(['low', 'medium', 'high'] as TaskPriority[]).map(priority => (
+                <button
+                  key={priority}
+                  onClick={() => handleBulkPriorityChange(priority)}
+                  className="w-full text-left px-4 py-2 rounded hover:bg-neutral-100 dark:hover:bg-neutral-700 transition-colors"
+                >
+                  <span className={`font-medium ${priorityColors[priority]}`}>
+                    {priority.charAt(0).toUpperCase() + priority.slice(1)}
+                  </span>
+                </button>
+              ))}
+            </div>
+            <button
+              onClick={() => setShowPriorityDialog(false)}
+              className="w-full px-4 py-2 bg-neutral-200 dark:bg-neutral-700 rounded hover:opacity-80 transition-opacity"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Bulk Delete Confirmation */}
+      <ConfirmDialog
+        isOpen={showDeleteDialog}
+        onClose={() => setShowDeleteDialog(false)}
+        onConfirm={handleBulkDelete}
+        title="Delete Tasks"
+        message={`Are you sure you want to delete ${selectedTaskIds.size} task(s)? This action cannot be undone.`}
+        variant="danger"
+      />
+    </div>
+  );
+};

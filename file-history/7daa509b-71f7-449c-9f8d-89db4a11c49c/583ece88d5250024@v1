@@ -1,0 +1,70 @@
+---
+type: archive
+purpose: Completed prompts and processed items
+created: 2025-12-14
+---
+
+# Personal Archive
+
+> Storage for completed prompts and processed thoughts. Organized by month for easy reference.
+
+---
+
+## Structure
+
+```
+Archive/
+├── README.md           # This file
+├── Prompts-2025-12.md  # December 2025 completed prompts
+├── Prompts-2025-11.md  # November 2025 completed prompts
+└── ...
+```
+
+---
+
+## Archival Process
+
+### Monthly Prompt Archive
+
+At month end:
+1. Copy all `status: completed` prompts from [[Personal/Prompts]]
+2. Create `Prompts-YYYY-MM.md` file
+3. Remove archived prompts from main Prompts.md
+4. Keep only pending/in-progress in active file
+
+### File Template
+
+```markdown
+---
+type: archive
+period: YYYY-MM
+items: [count]
+---
+
+# Prompts Archive — Month YYYY
+
+[Paste completed prompts here]
+```
+
+---
+
+## Why Archive?
+
+1. **Clean active files** — Keep working documents focused
+2. **Preserve history** — Reference what was requested and delivered
+3. **Pattern analysis** — See what kinds of prompts you create
+4. **Accountability** — Track productivity over time
+
+---
+
+## Retrieval
+
+Need to find an old prompt?
+
+1. **By date:** Browse `Prompts-YYYY-MM.md` files
+2. **By content:** Use Obsidian search across Archive folder
+3. **By output:** Follow links in completion notes
+
+---
+
+*Completed work doesn't disappear — it just moves here.*

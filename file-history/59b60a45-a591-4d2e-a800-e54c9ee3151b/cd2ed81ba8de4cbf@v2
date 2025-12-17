@@ -1,0 +1,389 @@
+# Phase 2: Documentation Improvements & Feature Implementation
+
+**Session ID:** [Current Session]
+**Created:** 2025-11-18
+**Status:** 🎯 IN PROGRESS
+**Estimated Time:** 130-165 hours (Week 1: 12-15h, Month 1: 50-60h, Month 2: 60-80h)
+**Goal:** Complete documentation audit + ship critical features + Phase 7 integration
+
+---
+
+## Overview
+
+Multi-track implementation plan based on comprehensive audit findings:
+- **Track 1:** Phase 2 Documentation (4-6 hours) - Complete audit
+- **Track 2:** Quick Wins (20 hours) - 6 high-value features
+- **Track 3:** Critical Features (85-110 hours) - Competitive gaps
+- **Track 4:** Phase 7 Integration (25-30 hours) - Cross-feature
+
+**Major Discovery:** Kanban is 98% Jira/Linear parity (docs say 65%)!
+- ✅ Subtasks, dependencies, custom columns, ListView ALL SHIPPED
+- ⚠️ Gantt store exists (just needs UI)
+
+---
+
+## Track 1: Phase 2 Documentation (4-6 hours)
+
+### Task 1.1: Update feature_map.md (1.5 hours)
+
+**Fix Implementation Status:**
+- Mark subtasks as ✅ SHIPPED (currently shows "planned")
+- Mark dependencies as ✅ SHIPPED
+- Mark ListView as ✅ SHIPPED
+- Mark custom columns as ✅ SHIPPED
+- Update Kanban parity: 65% → 98% Jira/Linear
+
+### Task 1.2: Create Dashboard Widgets Guide (2 hours)
+
+**File:** `docs/user/dashboard-widgets-guide.md`
+
+**Content:**
+- List all 49 widgets with descriptions
+- Categorize: Productivity (6), Information (9), Utility (14), Developer (20)
+- Configuration examples
+- Use cases for each widget
+
+### Task 1.3: Expand AI Terminal Guide (1 hour)
+
+**File:** `docs/user/ai_terminal_guide.md` (expand existing)
+
+**Add:**
+- How to get API keys for each provider
+- Cost comparison table (free tiers)
+- Best models for different tasks
+- Troubleshooting common errors
+
+### Task 1.4: Create Bundle Optimization Guide (30 minutes)
+
+**File:** `docs/technical/bundle-optimization-guide.md`
+
+**Content:**
+- Sprint 7 vendor splitting strategy
+- Performance budgets per feature
+- How to add features without bloat
+
+### Task 1.5: Add Feature Parity Methodology (30 minutes)
+
+**File:** `docs/product/feature_map.md` (appendix)
+
+**Content:**
+- How percentages were calculated
+- Feature count comparisons (Notes: 18/36 Obsidian features = 50%)
+- Document methodology for transparency
+
+---
+
+## Track 2: Quick Wins (20 hours)
+
+### Quick Win #1: Export Tasks to CSV (3 hours)
+
+**File:** `src/widgets/Kanban/ListView.tsx`
+
+**Implementation:**
+- Add "Export CSV" button to ListView toolbar
+- Generate CSV from filtered tasks
+- Include columns: title, status, priority, assignee, dueDate, tags
+- Download as `tasks-export-YYYY-MM-DD.csv`
+
+**User Value:** HIGH - Professional workflow requirement
+
+### Quick Win #2: Task Comments (4 hours)
+
+**Files:**
+- `src/types/index.ts` - TaskComment type already exists!
+- `src/widgets/Kanban/CardDetailPanel.tsx` - Add comments section
+
+**Implementation:**
+- Add comments array to Task type
+- Comments UI in detail panel (textarea + submit)
+- Display comments list with timestamps
+- Delete comment button
+
+**User Value:** HIGH - Collaboration requirement
+
+### Quick Win #3: Note Favorites (2 hours)
+
+**Files:**
+- `src/types/index.ts` - Add `isFavorite` to Note type
+- `src/pages/Notes.tsx` - Add star icon, favorites filter
+
+**Implementation:**
+- Add star/unstar button to note header
+- Add "Favorites" filter in sidebar
+- Sort favorites to top
+
+**User Value:** MEDIUM - Quick access to important notes
+
+### Quick Win #4: Export Notes to PDF (4 hours)
+
+**Files:**
+- `src/services/noteExport.ts` - Add PDF export
+- `src/pages/Notes.tsx` - Add PDF export button
+
+**Implementation:**
+- Integrate jsPDF library
+- Convert Lexical state to PDF
+- Preserve formatting (headings, lists, tables)
+- Download as `note-title-YYYY-MM-DD.pdf`
+
+**User Value:** HIGH - Share notes externally
+
+### Quick Win #5: Widget Search (4 hours)
+
+**Files:**
+- `src/pages/Dashboard.tsx` - Add search input to widget picker
+
+**Implementation:**
+- Search input in widget library modal
+- Filter by name, description, category
+- Highlight matching text
+- Keyboard navigation (arrow keys)
+
+**User Value:** MEDIUM - Faster widget discovery
+
+### Quick Win #6: Calendar Print View (3 hours)
+
+**Files:**
+- `src/widgets/Calendar.tsx` - Add print button
+- `src/styles/print.css` - Print-specific styles
+
+**Implementation:**
+- Print button in calendar header
+- CSS media query for print
+- Clean layout (remove controls, optimize for paper)
+- Week/month view print support
+
+**User Value:** MEDIUM - Physical calendar needs
+
+---
+
+## Track 3: Critical Features (85-110 hours)
+
+### Critical #1: Images in Notes (15-20 hours) ⚠️ BLOCKS "SECOND BRAIN" CLAIM
+
+**Phases:**
+1. **IndexedDB Blob Storage** (4h)
+   - Add image blob storage to indexedDB.ts
+   - Image compression (resize large images)
+   - Quota management
+
+2. **Lexical ImagePlugin** (4h)
+   - Integrate @lexical/react ImagePlugin
+   - Image node type
+   - Image rendering component
+
+3. **Upload UI** (4h)
+   - Drag-and-drop upload
+   - File picker button
+   - Paste from clipboard
+   - Upload progress indicator
+
+4. **Image Controls** (4h)
+   - Resize handles
+   - Alt text editor
+   - Delete image
+   - Image gallery view
+
+5. **Mobile Support** (3h)
+   - Camera upload (mobile browsers)
+   - Touch-friendly resize
+   - Responsive images
+
+**User Value:** CRITICAL - Required for visual note-taking
+
+### Critical #2: Manual Time Entry (8 hours)
+
+**Files:**
+- `src/stores/useTimeTrackingStore.ts` - Add manual entry actions
+- `src/components/TimeTracking/ManualEntryModal.tsx` (NEW)
+
+**Implementation:**
+- Manual entry modal (date, start time, end time, description, project)
+- Validate time ranges (no overlaps)
+- Edit existing entries
+- Bulk import from CSV
+
+**User Value:** CRITICAL - Professional workflow blocker
+
+### Critical #3: Weekly Time Reports (8 hours)
+
+**Files:**
+- `src/components/TimeTracking/WeeklyReport.tsx` (NEW)
+- `src/services/timeReportService.ts` (NEW)
+
+**Implementation:**
+- Weekly summary table (Mon-Sun, hours per day)
+- Total hours, billable hours, projects breakdown
+- Export to CSV/PDF for hour booking
+- Date range selector (week, month, custom)
+
+**User Value:** CRITICAL - Required for professional use
+
+### Critical #4: Link Notes to Tasks (8-12 hours) - PHASE 7
+
+**Files:**
+- `src/types/index.ts` - Add linkedNotes[] to Task, linkedTasks[] to Note
+- `src/widgets/Kanban/CardDetailPanel.tsx` - Add notes linking UI
+- `src/pages/Notes.tsx` - Add tasks linking UI
+
+**Implementation:**
+- Bidirectional linking (note ↔ task)
+- Link browser (show all connections)
+- Quick link from note text ("Create task from selection")
+- Link preview (hover to see note content)
+
+**User Value:** HIGH - Makes app cohesive
+
+### Critical #5: [[Wiki-Links]] (20-25 hours)
+
+**Phases:**
+1. **Custom Lexical Node** (8h)
+   - WikiLinkNode type
+   - Parse `[[Note Name]]` syntax
+   - Render as clickable link
+
+2. **Autocomplete** (6h)
+   - Trigger on `[[`
+   - Fuzzy search existing notes
+   - Keyboard navigation (arrow keys, enter)
+
+3. **Backlink Indexing** (4h)
+   - Track all links between notes
+   - Update index on note save
+   - Bidirectional relationship
+
+4. **Backlinks Panel** (4h)
+   - Show all notes linking to current note
+   - Click to navigate
+   - Preview context (snippet of linking text)
+
+**User Value:** HIGH - Expected Obsidian feature
+
+### Critical #6: Global Search (12-16 hours) - PHASE 7
+
+**Files:**
+- `src/services/globalSearch.ts` (NEW)
+- `src/components/GlobalSearchModal.tsx` (NEW)
+
+**Implementation:**
+- Search all entities: notes, tasks, events, time entries
+- Fuzzy search with Fuse.js
+- Result filtering (type, date range, status)
+- Keyboard shortcut (Cmd+K enhancement)
+- Result preview (show context)
+- Jump to result (navigate + highlight)
+
+**User Value:** HIGH - Productivity multiplier
+
+### Critical #7: Task Deadline → Calendar (4-6 hours) - PHASE 7
+
+**Files:**
+- `src/stores/useKanbanStore.ts` - Auto-sync on dueDate change
+- `src/stores/useCalendarStore.ts` - Auto-sync from tasks
+
+**Implementation:**
+- When task dueDate set → create calendar event (all-day)
+- When task dueDate removed → delete calendar event
+- When task completed → mark calendar event as done
+- Bidirectional sync (calendar event → task deadline)
+
+**User Value:** HIGH - Eliminates duplicate entry
+
+### Critical #8: Drag-Drop Dashboard (8-12 hours)
+
+**Files:**
+- `src/pages/Dashboard.tsx` - Enable layout customization
+- `src/stores/useThemeStore.ts` - Persist layouts
+
+**Implementation:**
+- Widget resize handles (react-grid-layout)
+- Save layout to store
+- Load saved layout on mount
+- Reset to default layout button
+- Layout presets (default, wide, compact)
+
+**User Value:** HIGH - Expected customization
+
+---
+
+## Track 4: Phase 7 Integration (Remaining)
+
+### Convert Note Text → Tasks (6-8 hours)
+
+**Implementation:**
+- Parse note for checkbox syntax (`- [ ] Task`)
+- Extract task text, context
+- Create task with link to source note
+- Bidirectional link (task → note, note → task)
+
+### Embed Calendar in Notes (4-6 hours)
+
+**Implementation:**
+- Lexical CalendarWidget node
+- Insert via slash command `/calendar`
+- Mini month view embedded in note
+- Click date → navigate to full calendar
+
+### Template Automation (15-20 hours)
+
+**Implementation:**
+- Trigger: onCreate (note, task, event)
+- Action: Apply template (preset fields, tags, checklist)
+- Template library (meeting notes, project plan, daily log)
+- Variable substitution (`{{date}}`, `{{time}}`, `{{title}}`)
+
+---
+
+## Week 1 Execution Plan (12-15 hours)
+
+**Day 1 (3-4 hours):**
+- ✅ Sync with main
+- Task 1.1: Update feature_map.md (1.5h)
+- Task 1.4: Bundle optimization guide (0.5h)
+- Task 1.5: Parity methodology (0.5h)
+- Quick Win #1: CSV export (partial, 1h)
+
+**Day 2 (3-4 hours):**
+- Quick Win #1: CSV export (complete, 2h)
+- Task 1.2: Widgets guide (partial, 2h)
+
+**Day 3 (3-4 hours):**
+- Task 1.2: Widgets guide (complete, 1h)
+- Task 1.3: AI guide expansion (1h)
+- Quick Win #2: Task comments (partial, 2h)
+
+**Day 4 (3-4 hours):**
+- Quick Win #2: Task comments (complete, 2h)
+- Quick Win #3: Note favorites (2h)
+
+**Deliverables:**
+- Phase 2 documentation complete
+- 3 new features shipped
+- Docs 100% accurate
+
+---
+
+## Success Criteria
+
+**Week 1:**
+- ✅ Phase 2 documentation complete (all 5 tasks)
+- ✅ 3 quick wins shipped (CSV, comments, favorites)
+- ✅ feature_map.md reflects reality (Kanban 98% parity)
+
+**Month 1:**
+- ✅ 6 quick wins shipped
+- ✅ 4 critical features shipped (images, time entry, reports, note-task linking)
+- ✅ Notes: 55% → 70% Obsidian parity
+- ✅ Time Tracking: 23% → 60% Toggl parity
+
+**Month 2:**
+- ✅ Phase 7 complete (cross-feature integration)
+- ✅ 8 critical features shipped
+- ✅ Notes: 70% → 75% Obsidian parity
+- ✅ Overall: 50% → 80% feature complete
+
+---
+
+## Review Section
+
+(To be filled as work progresses)

@@ -1,0 +1,130 @@
+---
+type: review
+period: monthly
+month: <% tp.date.now("YYYY-MM") %>
+created: <% tp.date.now("YYYY-MM-DD") %>
+---
+
+# <% tp.date.now("MMMM YYYY") %> Review
+
+---
+
+## Month Overview
+
+### Highlights
+-
+
+### Challenges
+-
+
+### Key Learnings
+-
+
+---
+
+## Weekly Summaries
+
+```dataview
+TABLE WITHOUT ID
+  file.link as "Week",
+  length(file.outlinks) as "Links"
+FROM "Journal/Weekly"
+WHERE file.name contains "<% tp.date.now("YYYY") %>"
+SORT file.name DESC
+LIMIT 5
+```
+
+---
+
+## Projects
+
+### Progress Summary
+
+```dataview
+TABLE
+  status as "Status",
+  priority as "Priority"
+FROM "Projects"
+WHERE type = "project"
+SORT priority ASC
+```
+
+### Major Milestones Achieved
+1.
+2.
+3.
+
+### Projects Started
+-
+
+### Projects Completed
+-
+
+---
+
+## Metrics
+
+### Task Completion
+
+```dataviewjs
+const tasks = dv.pages('"Journal" OR "Projects"').file.tasks;
+const thisMonth = tasks.where(t => t.completion && t.completion.month == <% tp.date.now("M") %> && t.completion.year == <% tp.date.now("YYYY") %>);
+dv.paragraph(`Completed tasks this month: **${thisMonth.length}**`);
+```
+
+### Notes Created
+
+```dataview
+LIST
+FROM ""
+WHERE file.cday.month = <% tp.date.now("M") %> AND file.cday.year = <% tp.date.now("YYYY") %>
+SORT file.cday DESC
+LIMIT 10
+```
+
+---
+
+## Areas of Life
+
+### Work/Career
+-
+
+### Learning/Growth
+-
+
+### Health/Wellness
+-
+
+### Relationships
+-
+
+---
+
+## Next Month
+
+### Goals
+1.
+2.
+3.
+
+### Focus Projects
+-
+
+### Habits to Build
+- [ ]
+
+### Habits to Break
+- [ ]
+
+---
+
+## Gratitude
+
+Three things I'm grateful for this month:
+1.
+2.
+3.
+
+---
+
+*<% tp.date.now("MMMM YYYY") %>*

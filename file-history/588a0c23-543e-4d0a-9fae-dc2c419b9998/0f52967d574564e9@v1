@@ -1,0 +1,56 @@
+# Task: Fix Footer Pill Alignment & Mobile Research
+
+**Created:** 2025-11-23
+**Status:** In Progress
+**Priority:** P2
+
+## Objectives
+- [x] Fix desktop alignment (currently pushed right)
+  - [x] Update `Footer.tsx` to use Framer Motion `x` prop instead of `style` transform to avoid conflicts.
+- [ ] Research mobile footer improvements
+  - [ ] Analyze current mobile footprint.
+  - [ ] Propose 2-3 alternative designs for mobile (e.g., icon-only, stacked, or integrated into nav).
+
+## Context
+User reports the footer pill is pushed to the right on desktop. This is likely due to a conflict between CSS `transform` in `style` prop and Framer Motion's animation of `y`, which overwrites the transform string.
+For mobile, the pill is too large (width, height, font size).
+
+## Implementation Plan
+1. Modify `src/components/Footer.tsx` to move `translateX(-50%)` into `initial` and `animate` props.
+2. Verify the fix visually (if possible) or by code logic.
+3. Document mobile research findings in `tasks/fix-footer-pill.md` or a separate note.
+
+## Mobile Research Findings
+
+### Problem Analysis
+The current footer uses `px-6 py-3` (24px horizontal, 12px vertical padding) and `gap-4` (16px gap). On mobile, this creates a large visual footprint that obscures content.
+
+### Proposed Solutions
+
+#### Option 1: The "Micro-Pill" (Recommended)
+Drastically reduce padding and gaps for screens `< 640px`.
+- **Padding**: `px-3 py-1.5` (vs `px-6 py-3`)
+- **Font**: `text-[10px]` (vs `text-xs`)
+- **Content**: Abbreviate text.
+    - "Privacy Policy" -> "Privacy"
+    - "About Us" -> "About"
+    - "© 2025 Neuman Brain" -> "© 2025"
+
+#### Option 2: The "Glass Bar"
+Instead of a floating pill, use a full-width thin bar at the bottom.
+- **Height**: Fixed small height (e.g., 24px).
+- **Position**: `bottom-0` (no floating margin).
+- **Pros**: Doesn't float over content, feels more like system UI.
+- **Cons**: Less "modern/dynamic" than the pill.
+
+#### Option 3: "Icon Only"
+Collapse everything into a single "Info" icon or a small set of icons.
+- **Default**: Just a small `(i)` icon or copyright symbol in the corner.
+- **Interaction**: Tap to expand to full footer.
+- **Pros**: Minimal footprint.
+- **Cons**: Low discoverability for links.
+
+### Recommendation
+Implement **Option 1 (Micro-Pill)**. It maintains the design language but scales it down appropriately for the device.
+- Add `sm:` prefixes to current padding/gap classes.
+- Add smaller base classes for mobile.

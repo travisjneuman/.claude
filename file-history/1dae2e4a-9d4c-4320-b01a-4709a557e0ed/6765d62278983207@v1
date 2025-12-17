@@ -1,0 +1,139 @@
+AI Terminal > Shell:
+This is more clear now. How can we imitate these functions (or at least basic ones like ping) similar to other websites that run these, but make it look like we are running it as a terminal command?
+ - ✗ Doesn't work: git, docker, python, ping, curl, ssh
+
+Dashboard > Link Library:
+ - How can I sync directly with the browser I am using Neuman Brain inside of, so I don't have to go through the manual process of exporting my bookmarks from the browser to the local storage of my device, and the import from the local storage into Neuman Brain?
+
+Dashboard:
+ - Task Summary widget now dynamically updates when adding tasks through Quick Add Task widget. The Quick Add Task button is a light gray with white text, making it hard to read. Please review and adjust the button to be a darker gray as it properly turns blue when you start typing in a task to add and it should stay that way.
+
+ - Upcoming Events widget height doesn't match the other 3 any longer when initially loading the site. It is just a tiny bit shorter than all the others that get loaded by default.
+
+ - I can't add events other than to the current day (that functionality was added before we merged the calendar page into the current schedule page) so that needs to be added back in... Therefore I cannot test "Upcoming Events widget isn't showing the events of a calendar I just imported in the settings to test import a google cal export .ics file. I can see the events in the calendar, but I also think that went wrong too." I tried importing the Neuman.brain file I exported for testing and it killed the platform. Nothing was showing in calendar, when I go to tasks I get a blank screen, same with notes (although on the dashboard I can see it imported my test note). I can now see Upcoming Events in the widget - How far out does this show events? Is it a day count, or an event count? We should do the next 5 events I think.
+
+ - Recent Notes widget shows a note I just created, how long is "Recent" set to consider? Should be last 24h; I think?
+
+Notes:
+ - Seems to be working fine, it not unpolished and a bit "childish" feeling. The folders/notes internal sidebar close/expand button is overlapping the word Folders. Overall this function seems to work well, but we just need to research more competitors/alternatives and try to implement more features and a better look & feel. Also, this hasn't been mentioned yet - but google's NotebookLM as a competitor.
+
+Schedule:
+ - Sidebar all set!
+ - Calendar import of a Google .ics still did not work properly. Now importing a calendar does the same thing as importing a Neuman.brain backup. Just a blank screen. It did note that it successfully imported 127 (* i think) events, but they didn't dynamically appear on the calendar so I refreshed and then the page wouldn't load. If I go back to http://localhost:5173 I can't still get to all the other pages and open all the other tabs in the scheduling page, but if I try going to calendar just a blank screen.
+ - The "Today" is fixed. I thought I would like double clicking a day to see its list view. Maybe instead of that, double clicking a day opens a modal that shows all the days events, with an option to "Add New Event" and if there are not events on that day it just goes straight to the "Add New Event" modal.
+ - There should probably be another tab or section inside the Schedule page where the users can also track their time in the schedule page instead of being forced to use the sidebar. This would allow for much greater customization, options, insight, analytics, etc. We need to continue researching alternatives and implementing features relating to this.
+ - When I add tasks to the Kanban board they should show up on the calendar. If I add an end date to the task, it should show up as a multi day event on the calendar.
+ - When you go to Summary > Monthly, you see a calendar that looks different than the calendar in the Calendar tab. It also isn't properly displaying all the days of the month (stopping short while adding in the last day of the previous month...?). Why not just use the same calendar from the calendar tab, but instead of showing event's you show Time Tracked? I assume that is what this is for anyways. It should be formatted and sized and styled the exact same way so it is familiar and uniform for UX/UI. 
+
+
+Settings:
+ - Settings > Account Settings: Default Display Name in settings still shows my name. It should not have anything. What is this even for? I don't see it show up anywhere. Same with Email.
+
+ - Settings > Auto-Save: Not sure if I had to, but the auto-save folder didn't appear as configured even though I did it through the modal upon first load. When I chose to select a folder, it did however, default to opening the folder I initially chose so it was easy to just click "Select Folder" again in the Windows Explorer window that came up. It makes me think it worked from the initial modal, but the settings section just didn't update dynamically.
+
+ - Settings > Backup & Sync > File Name: Please make this show the same as the Backup Filename under Customize Auto-Save, so the user doesn't think they are changing the extension of have to type the extension in. The Customize Auto-Save text box by default just says "Neuman" and then outside of the text box at the end it says .brain - This is how it should be. The File Name text box under Configuration under Backup & Sync is a full width text box that by default says "Neuman.Brain" and the users can erase and put anything there.
+
+ - Bottom of the settings page still shows "🔒Privacy Policy & Analytics Disclosure
+Learn how we protect your privacy and what analytics we collect" when all of that is accessible in the footer floating pill which is already visible (and overlapping this text at the bottom of settings). Please make sure there is no footer content anywhere on the platform other than the floating pill. Should that pill be turned into a partial as well? I know we have it already persistent across the platform and that it dynamically changes based on screensize / zoom percentage, so just a thought.
+
+
+Lots of research to be done, please develop a doc to list all of these items and any related services / software / platform to research along side of all of these. Do NOT do the research at this time, just create a nice document inside tasks.
+ - Draw.IO / Visio Alternative/Competitor Research and Implementation
+ - MS To Do & MS Planner vs Kanban research? Any feature to pull from MS Planner?
+ - MS Paint
+ - MS Access
+ - MS Excel / Google Sheets / MacOS Numbers / Libre / OpenOffice
+ - MS OneNote / Google NotebookLM / Apple Notes / Obsidian / Notion
+ - MS Outlook (Not really sure we need communication features, and if we did what could/would they look like?)
+ - MS Powerpoint / Google / Apple Keynote / Libre / OpenOffice
+ - MS PowerBI
+ - MS Sway
+ - MS Word / Google Docs / Apple Pages / Libre / OpenOffice
+ - Proton Notes / Docs / Services
+ - Proton Lumo AI?
+ - MS Forms / Google Forms
+ - MS Project (Gantt autofill and integration with todo/planner/Kanban/calendar?)
+ - Viva Engage / X Posting (potentially when users can share Neuman Brain instances and work off the same one together at the same time?)
+ - Atlassin Wiki / MS SharePoint
+ - MS Fluid Framework (https://github.com/microsoft/FluidFramework) What is this and what could this idea do for us?
+ - Apple Include Apps (MacOS) - https://support.apple.com/guide/mac-help/apps-on-your-mac-mchl110b00b7/mac
+ - Voice Memos (Apple) aka dictation integration into any possible text entry section of Neuman Brain
+ - Apple Reminders
+ - Apple Freeform
+ - Bitwarden / Password Manager
+ - Apple (Lot's of irrelevant junk, but it doesn't hurt to see what each app is, what it does, and if it is something we could potentially create and implement into Neuman Brain following our platform guidelines):
+    Activity Monitor
+    Alarms
+    Apple Business Essentials
+    Apple Configurator
+    Apple Developer
+    Apple Remote Desktop
+    Apple Store
+    Apple Support
+    Audio MIDI Setup
+    Automator
+    Bluetooth File Exchange
+    Calculator
+    Camera Remote
+    Chess
+    Classroom
+    Clock
+    ColorSync Utility
+    Compass
+    Compressor
+    Console
+    Create ML
+    Depth
+    Dictionary
+    Digital Color Meter
+    Disk Utility
+    DVD Player
+    ECG
+    Find Devices
+    Find Items
+    Find People
+    Font Book
+    Grapher
+    Image Capture
+    iTunes Remote
+    iTunes Store
+    Keychain Access
+    Logic Remote
+    Magnifier
+    Measure
+    Medications
+    Memoji
+    Migration Assistant
+    Mission Control
+    Motion
+    Move to iOS
+    Noise
+    Now Playing
+    Photo Booth
+    Preview
+    QuickTime Player
+    Reality Composer
+    Remote
+    Schoolwork
+    Screenshot
+    Script Editor
+    Settings
+    Shazam: Music Discovery
+    Siren
+    Stickies
+    Stopwatch
+    Swift Playgrounds
+    System Information
+    System Settings
+    Terminal
+    TestFlight
+    Texas Hold’em
+    TextEdit
+    Tides
+    Time Machine
+    Timers
+    Tips
+    VoiceOver Utility
+    Windows Migration Assistant
+    World Clock
+    Xcode

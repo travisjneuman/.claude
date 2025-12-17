@@ -1,0 +1,373 @@
+# Task: Time Tracking Phase 3 - Professional Features
+
+**Created:** 2025-01-22
+**Status:** Planning 📋
+**Priority:** P0 (Product Core)
+**Complexity:** High
+**Estimated Effort:** 3-4 hours
+**Phase:** Phase 3 (following Phase 2 reporting)
+
+---
+
+## Context
+
+Phase 1+2 delivered:
+- ✅ Persistent sidebar timer with start/stop/pause/resume
+- ✅ Recent entries (48h) with click-to-continue
+- ✅ Detailed entry list with filters and pagination
+- ✅ Daily/weekly summaries with bar charts
+- ✅ Edit/delete time entries
+- ✅ Drag-to-resize panel
+
+**Current Parity:** 50% Toggl (18/35 features)
+
+**Phase 3 Goal:** Add professional features to reach 70%+ Toggl parity and complete MVP.
+
+---
+
+## Scope
+
+### MVP Phase 3 Features (Priority Order)
+
+**P0 - Core Missing Features:**
+1. **Manual Time Entry** - Add time without running timer
+2. **Project Support** - Create projects, assign to entries, filter by project
+3. **Monthly Summary** - 30-day breakdown with totals
+
+**P1 - Professional Features:**
+4. **Export to CSV** - Download entries for external analysis
+5. **Calendar View** - Visual month view of time entries
+6. **Bulk Operations** - Select multiple entries, batch edit/delete
+
+**P2 - Polish & UX:**
+7. **Undo System** - Toast-based undo for delete operations
+8. **Quick-start from Task** - Start timer directly from Kanban task
+9. **Time Entry Notes** - Add detailed notes to entries
+
+**Deferred to Phase 4:**
+- Billable vs non-billable toggle
+- Hourly rates
+- Invoice generation
+- Idle detection
+- Auto-tracking
+- Team features
+
+---
+
+## Architecture Plan
+
+### New Components
+
+**`src/components/ManualTimeEntryModal.tsx`**
+- Modal for creating time entries without timer
+- Fields: Description, Project, Start date/time, End date/time (or duration)
+- Duration calculator: Can enter either end time OR duration
+- Validation: End time must be after start time
+- Save to IndexedDB via store
+
+**`src/components/ProjectManager.tsx`**
+- Project CRUD interface (create, edit, delete projects)
+- Project list with color coding
+- Used in Settings page or TimeTracking page
+- Fields: Name, Color, Description, Active status
+
+**`src/components/ProjectSelector.tsx`**
+- Dropdown component for selecting project
+- Used in timer panel and manual entry modal
+- Shows project color dot + name
+- "No Project" option
+
+**`src/components/MonthlyTimeReport.tsx`**
+- 30-day calendar grid with daily totals
+- Hover to see entries for that day
+- Monthly total card
+- Average per day calculation
+- Project breakdown (if projects enabled)
+
+**`src/components/TimeEntryCalendar.tsx`**
+- Full calendar view (similar to Calendar widget)
+- Time entries shown as blocks on calendar
+- Click to view/edit entry
+- Visual representation of work distribution
+
+**`src/components/BulkActionsBar.tsx`**
+- Appears when entries selected in TimeEntryList
+- Actions: Delete, Change project, Export selected
+- Select all / Clear selection buttons
+
+### Modified Components
+
+**`src/components/TimeTrackingPanel.tsx`**
+- Add "Manual Entry" button next to timer
+- Add project selector dropdown
+- Show project color in recent entries
+
+**`src/components/TimeEntryList.tsx`**
+- Add project column to table
+- Add bulk select checkboxes
+- Add project filter dropdown
+- Add "Export" button (CSV download)
+
+**`src/components/TimeEntrySummary.tsx`**
+- Add monthly summary tab
+- Add project breakdown section
+- Show time by project pie chart or list
+
+**`src/pages/TimeTracking.tsx`**
+- Add third tab: "Calendar"
+- Integrate ProjectManager (settings button)
+- Add manual entry modal state
+
+### Store Updates
+
+**`src/stores/useTimeTrackingStore.ts`**
+- Add `projects` array to state
+- Add `createProject(name, color)` action
+- Add `updateProject(id, updates)` action
+- Add `deleteProject(id)` action
+- Add `getMonthlyReport(year, month)` method
+- Add `getProjectSummary()` method
+- Add `exportEntriesToCSV(entries)` method
+- Add `bulkDeleteEntries(ids)` action
+- Add `bulkUpdateEntries(ids, updates)` action
+- Update `startTimer()` to support project assignment
+
+**`src/services/timeTrackingDb.ts`**
+- Add `projects` table to schema
+- Add `projectId` field to TimeEntry
+- Add indexes for project queries
+
+### Types
+
+**`src/types/index.ts`**
+```typescript
+interface TimeTrackingProject {
+  id: string;
+  name: string;
+  color: string; // hex color
+  description?: string;
+  active: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+interface TimeEntry {
+  // ... existing fields
+  projectId?: string; // NEW
+  notes?: string; // NEW (detailed notes, different from description)
+}
+
+interface MonthlyReport {
+  year: number;
+  month: number; // 0-11
+  totalDuration: number;
+  entryCount: number;
+  dailyBreakdown: DailySummary[]; // 30 or 31 days
+  projectBreakdown: ProjectSummary[];
+}
+
+interface ProjectSummary {
+  projectId: string;
+  projectName: string;
+  projectColor: string;
+  totalDuration: number;
+  entryCount: number;
+  percentage: number; // of total time
+}
+```
+
+---
+
+## Implementation Checklist
+
+### Phase 3.0: Project System ✅
+- [x] Add `TimeTrackingProject` type to types/index.ts (already existed)
+- [x] Update TimeEntry type with `projectId` and `notes` fields (already existed)
+- [x] Add `projects` table to timeTrackingDb schema (already existed)
+- [x] Implement project CRUD actions in store (already existed)
+- [x] Create ProjectSelector component
+- [x] Add project column to TimeEntryList
+- [x] Add project filter to TimeEntryList
+- [x] Create ProjectManager component
+- [x] Integrate ProjectManager into TimeTracking page (Projects tab)
+- [x] Migrate IndexedDB schema (projects work with existing schema)
+
+### Phase 3.1: Manual Time Entry ✅
+- [x] Create ManualTimeEntryModal component
+- [x] Duration calculator logic (end time OR duration input)
+- [x] Validation (end > start, no overlaps)
+- [x] Add "Manual Entry" button to TimeTrackingPanel
+- [x] Store action: `createManualEntry(entry)` (addManualEntry exists)
+- [x] Save to IndexedDB
+- [ ] Test with various time ranges
+
+### Phase 3.2: Monthly Reporting ✅ (Backend Complete)
+- [x] Add `MonthlyReport` and `ProjectSummary` types
+- [x] Implement `getMonthlyReport(year, month)` store method
+- [x] Implement `getProjectSummary()` store method
+- [ ] Create MonthlyTimeReport component
+- [ ] 30-day grid layout with daily totals
+- [ ] Monthly total card
+- [ ] Project breakdown pie chart or list
+- [ ] Add to TimeEntrySummary component
+
+### Phase 3.3: Export & Bulk Operations ✅ (Backend Complete)
+- [x] Implement `exportEntriesToCSV(entries)` method
+- [x] CSV format: Date, Description, Project, Start, End, Duration, Notes
+- [x] Add "Export" button to TimeEntryList
+- [x] Implement `bulkDeleteEntries(ids)` action
+- [x] Implement `bulkUpdateEntries(ids, updates)` action (project assignment)
+- [ ] Add bulk select checkboxes to table
+- [ ] Create BulkActionsBar component
+
+### Phase 3.4: Calendar View ⏳
+- [ ] Create TimeEntryCalendar component
+- [ ] Month grid layout similar to Calendar widget
+- [ ] Render time entries as blocks on dates
+- [ ] Click to view/edit entry
+- [ ] Show total duration per day
+- [ ] Color-code by project
+- [ ] Add "Calendar" tab to TimeTracking page
+
+### Phase 3.5: Undo System & Polish ⏳
+- [ ] Create useUndoStore.ts (global undo queue)
+- [ ] Toast component for undo notifications
+- [ ] 10-second undo window
+- [ ] Undo delete entry
+- [ ] Undo bulk delete
+- [ ] Add notes field to EditTimeEntryModal
+- [ ] Quick-start button in Kanban task cards (optional)
+
+### Phase 3.6: Testing & Verification ⏳
+- [ ] Test manual entry creation
+- [ ] Test project assignment and filtering
+- [ ] Test monthly report calculations
+- [ ] Test CSV export with various filters
+- [ ] Test calendar view rendering
+- [ ] Test bulk operations (delete, update)
+- [ ] Test undo system
+- [ ] TypeScript compilation passes
+- [ ] Dark mode styling verified
+
+---
+
+## Technical Details
+
+### Project Color Palette
+```typescript
+const PROJECT_COLORS = [
+  '#FF6B6B', // Red
+  '#4ECDC4', // Cyan
+  '#45B7D1', // Blue
+  '#FFA07A', // Orange
+  '#98D8C8', // Mint
+  '#F7DC6F', // Yellow
+  '#BB8FCE', // Purple
+  '#85C1E2', // Light Blue
+  '#52B788', // Green
+  '#F8B500', // Gold
+];
+```
+
+### CSV Export Format
+```csv
+Date,Start Time,End Time,Duration,Description,Project,Notes
+2026-01-22,09:00,10:30,1h 30m,"Feature development","Neuman Brain","Implemented Phase 3"
+2026-01-22,14:00,16:45,2h 45m,"Bug fixes","Client Project","Fixed authentication issues"
+```
+
+### Monthly Report Date Logic
+```typescript
+// Get all days in month (28-31 days)
+const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+// Create DailySummary for each day (even if 0 entries)
+for (let day = 1; day <= daysInMonth; day++) {
+  const dateStr = `${year}-${(month + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+  // ... aggregate entries for this date
+}
+```
+
+### Undo System Architecture
+```typescript
+interface UndoAction {
+  id: string;
+  type: 'delete_entry' | 'bulk_delete' | 'edit_entry';
+  timestamp: number;
+  data: any; // Original data for restoration
+  expiresAt: number; // timestamp + 10000ms
+}
+
+// Store undo actions in memory (useUndoStore)
+// Show toast with "Undo" button
+// Auto-expire after 10 seconds
+// Restore data to IndexedDB on undo
+```
+
+---
+
+## Files to Create
+
+- `src/components/ManualTimeEntryModal.tsx`
+- `src/components/ProjectManager.tsx`
+- `src/components/ProjectSelector.tsx`
+- `src/components/MonthlyTimeReport.tsx`
+- `src/components/TimeEntryCalendar.tsx`
+- `src/components/BulkActionsBar.tsx`
+- `src/stores/useUndoStore.ts` (optional)
+- `src/utils/csvExport.ts`
+
+## Files to Modify
+
+- `src/types/index.ts` (add Project types, update TimeEntry)
+- `src/services/timeTrackingDb.ts` (add projects table, migration)
+- `src/stores/useTimeTrackingStore.ts` (add project actions, reports, export)
+- `src/components/TimeTrackingPanel.tsx` (manual entry button, project selector)
+- `src/components/TimeEntryList.tsx` (project column, bulk select, export)
+- `src/components/TimeEntrySummary.tsx` (monthly report, project breakdown)
+- `src/pages/TimeTracking.tsx` (calendar tab, project manager)
+
+---
+
+## Success Criteria
+
+### Functional Requirements
+- [ ] Users can create/edit/delete projects with colors
+- [ ] Users can manually create time entries without running timer
+- [ ] Users can assign projects to time entries
+- [ ] Users can filter entries by project
+- [ ] Users can view monthly report (30-day breakdown)
+- [ ] Users can see time by project breakdown
+- [ ] Users can export entries to CSV
+- [ ] Users can select multiple entries for bulk operations
+- [ ] Users can view time entries in calendar format
+- [ ] Users can undo delete operations within 10 seconds
+
+### Quality Requirements
+- [ ] TypeScript type-check passes
+- [ ] No performance issues with 1000+ entries
+- [ ] All operations work in dark mode
+- [ ] CSV export opens correctly in Excel/Google Sheets
+- [ ] Undo system is reliable and intuitive
+- [ ] Project colors are WCAG AA compliant
+
+### Parity Goal
+**Target:** 70% Toggl parity (25/35 features)
+- Current: 18 features (50%)
+- Phase 3 adds: 7 new features
+- Projected: 25 features (71%)
+
+---
+
+## Progress Log
+
+### 2025-01-22 - Phase 3 Planning
+- Created task file
+- Defined scope and architecture
+- Ready for user approval
+
+---
+
+**Document Status:** 📋 Planning
+**Last Updated:** 2025-01-22
+**Next Step:** Get user approval via ExitPlanMode

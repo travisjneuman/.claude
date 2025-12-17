@@ -1,0 +1,85 @@
+/**
+ * Priority Distribution Chart
+ * Pie chart showing task distribution by priority (high/medium/low)
+ */
+
+import { useMemo } from 'react';
+import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from 'recharts';
+import type { Task } from '../../types';
+import type { DateRange } from '../../stores/useAnalyticsStore';
+import { getTasksByPriority } from '../../utils/analyticsCalculations';
+
+interface PriorityDistributionProps {
+  tasks: Task[];
+  dateRange: DateRange;
+}
+
+const COLORS = {
+  high: '#ef4444', // Red for high priority
+  medium: '#f59e0b', // Orange for medium priority
+  low: '#10b981', // Green for low priority
+};
+
+const LABELS = {
+  high: 'High Priority',
+  medium: 'Medium Priority',
+  low: 'Low Priority',
+};
+
+export function PriorityDistribution({ tasks, dateRange }: PriorityDistributionProps) {
+  const chartData = useMemo(() => {
+    const priorities = getTasksByPriority(tasks, dateRange);
+
+    return [
+      { name: LABELS.high, value: priorities.high, priority: 'high' },
+      { name: LABELS.medium, value: priorities.medium, priority: 'medium' },
+      { name: LABELS.low, value: priorities.low, priority: 'low' },
+    ].filter((item) => item.value > 0); // Only show priorities that have tasks
+  }, [tasks, dateRange]);
+
+  if (chartData.length === 0) {
+    return (
+      <div className="w-full h-64 flex items-center justify-center">
+        <p className="text-text-light-tertiary dark:text-text-dark-tertiary text-sm">
+          No tasks in selected period
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="w-full h-64">
+      <ResponsiveContainer width="100%" height="100%">
+        <PieChart>
+          <Pie
+            data={chartData}
+            cx="50%"
+            cy="50%"
+            labelLine={false}
+            label={({ name, percent }) => `${name}: ${((percent ?? 0) * 100).toFixed(0)}%`}
+            outerRadius={80}
+            fill="#8884d8"
+            dataKey="value"
+          >
+            {chartData.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={COLORS[entry.priority as keyof typeof COLORS]} />
+            ))}
+          </Pie>
+          <Tooltip
+            contentStyle={{
+              backgroundColor: 'var(--surface-light-elevated)',
+              border: '1px solid var(--border-light)',
+              borderRadius: '8px',
+            }}
+            formatter={(value: number) => [`${value} tasks`, 'Count']}
+          />
+          <Legend
+            wrapperStyle={{
+              fontSize: '12px',
+            }}
+          />
+        </PieChart>
+      </ResponsiveContainer>
+    </div>
+  );
+}

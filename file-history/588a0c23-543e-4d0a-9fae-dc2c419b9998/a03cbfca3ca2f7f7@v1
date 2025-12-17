@@ -1,0 +1,261 @@
+# Fix Kanban Card Delete → Detail Panel Bug
+
+**Session ID:** 011CWKtxzgM5qHHf9DhdBYy6
+
+**Status:** 🎯 PLANNING
+**Estimated Time:** 30 minutes
+
+---
+
+## Overview
+
+Fix bug where deleting a task from the card menu causes the detail panel to open after deletion is confirmed.
+
+---
+
+## Problem Statement
+
+### Current Behavior (Bug)
+
+1. User clicks "⋮" menu on a Kanban card
+2. User clicks "Delete" in the dropdown menu
+3. Confirmation dialog appears
+4. User confirms deletion
+5. Task is deleted ✅
+6. **BUG:** Card detail panel opens even though the task no longer exists ❌
+
+### Root Cause Analysis
+
+The card component has a click handler on the entire card div that opens the detail panel. When clicking the delete button in the menu, we added `e.stopPropagation()` to prevent the immediate panel opening. However, after the delete confirmation dialog closes, something is triggering the card's onClick handler.
+
+**Likely Issue:** The menu button's stopPropagation prevents the immediate click, but when the dialog closes, React might be re-rendering or the click event is bubbling up after the dialog unmounts.
+
+### Desired Behavior
+
+1. User clicks "⋮" menu on a Kanban card
+2. User clicks "Delete" in the dropdown menu
+3. Confirmation dialog appears
+4. User confirms deletion
+5. Task is deleted ✅
+6. No detail panel opens ✅
+
+---
+
+## Files to Read
+
+- [x] `src/widgets/Kanban/KanbanCard.tsx` - Card component with menu and delete logic
+- [x] `src/widgets/Kanban/KanbanColumn.tsx` - Column component that may be triggering card click
+- [x] `src/components/ConfirmDialog.tsx` - Delete confirmation dialog
+
+---
+
+## Root Cause Investigation
+
+### KanbanCard.tsx Structure
+
+The card has multiple click handlers:
+1. **Card div** (lines 165-177): Opens detail panel via `onCardClick` prop
+2. **Menu button** (lines 183-191): Opens menu, has stopPropagation ✅
+3. **Edit button** (lines 194-203): Opens edit mode, has stopPropagation ✅
+4. **Delete button** (lines 204-213): Opens delete dialog, has stopPropagation ✅
+
+### Current Delete Flow
+
+```typescript
+// Line 77-80
+const handleDelete = useCallback(() => {
+  setShowDeleteDialog(true);
+  setShowMenu(false);
+}, []);
+
+// Line 82-85
+const confirmDelete = useCallback(() => {
+  deleteTask(task.id);
+  setShowDeleteDialog(false);
+}, [task.id, deleteTask]);
+```
+
+**Problem:** After `confirmDelete()` executes and the dialog closes, the card component is still mounted briefly before React removes it from the DOM. During this brief moment, a click event might be propagating to the card's onClick handler.
+
+---
+
+## Proposed Solution
+
+### Option A: Flag to Prevent Click After Delete (RECOMMENDED)
+
+Add a local state flag `isDeleting` that prevents the card click handler from firing:
+
+```typescript
+const [isDeleting, setIsDeleting] = useState(false);
+
+const handleDelete = useCallback(() => {
+  setIsDeleting(true); // Prevent future clicks
+  setShowDeleteDialog(true);
+  setShowMenu(false);
+}, []);
+
+const confirmDelete = useCallback(() => {
+  deleteTask(task.id);
+  setShowDeleteDialog(false);
+}, [task.id, deleteTask]);
+
+const handleCardClick = useCallback(() => {
+  if (!isDeleting) {
+    onCardClick(task);
+  }
+}, [isDeleting, task, onCardClick]);
+
+// Update card div onClick
+<div onClick={handleCardClick}>
+```
+
+**Pros:**
+- Simple, surgical fix
+- Prevents any click events after delete is initiated
+- No side effects
+
+**Cons:**
+- Adds one extra state variable
+
+### Option B: Remove Card Click Handler During Delete
+
+Conditionally render the card without the onClick handler when deleting:
+
+```typescript
+const cardProps = isDeleting ? {} : {
+  onClick: () => onCardClick(task)
+};
+
+<div {...cardProps}>
+```
+
+**Pros:**
+- Cleaner - no handler means no possibility of triggering
+
+**Cons:**
+- More complex conditional logic
+
+### Decision: Option A
+
+Option A is cleaner and more explicit. It clearly signals "this card is being deleted, don't respond to clicks."
+
+---
+
+## Implementation Plan
+
+### Step 1: Add `isDeleting` State (5 min)
+
+**File:** `src/widgets/Kanban/KanbanCard.tsx`
+
+Add state:
+```typescript
+const [isDeleting, setIsDeleting] = useState(false);
+```
+
+### Step 2: Set Flag on Delete (5 min)
+
+Update `handleDelete`:
+```typescript
+const handleDelete = useCallback(() => {
+  setIsDeleting(true);
+  setShowDeleteDialog(true);
+  setShowMenu(false);
+}, []);
+```
+
+### Step 3: Extract Card Click Handler (10 min)
+
+Currently, the card div has an inline arrow function:
+```typescript
+<div onClick={() => onCardClick(task)}>
+```
+
+Extract to named function with guard:
+```typescript
+const handleCardClick = useCallback(() => {
+  if (!isDeleting && onCardClick) {
+    onCardClick(task);
+  }
+}, [isDeleting, task, onCardClick]);
+
+// Update card div
+<div onClick={handleCardClick}>
+```
+
+### Step 4: Handle Cancel Case (5 min)
+
+Reset flag if user cancels delete:
+```typescript
+const cancelDelete = useCallback(() => {
+  setShowDeleteDialog(false);
+  setIsDeleting(false); // Reset flag
+}, []);
+```
+
+### Step 5: Test (5 min)
+
+Test scenarios:
+1. Delete task → confirm → detail panel should NOT open ✅
+2. Delete task → cancel → card should still be clickable ✅
+3. Edit task → card should still open detail panel ✅
+
+---
+
+## Todo Checklist
+
+- [ ] Add `isDeleting` state to KanbanCard (5 min)
+- [ ] Update `handleDelete` to set flag (5 min)
+- [ ] Extract card click handler with guard (10 min)
+- [ ] Update `cancelDelete` to reset flag (5 min)
+- [ ] Test delete → confirm (no panel) (2 min)
+- [ ] Test delete → cancel (card still clickable) (2 min)
+- [ ] Test normal card click (still works) (1 min)
+- [ ] Run type-check (2 min)
+- [ ] Commit changes (2 min)
+
+**Total Estimated Time:** 34 minutes
+
+---
+
+## Files to Modify
+
+1. **src/widgets/Kanban/KanbanCard.tsx**
+   - Add `isDeleting` state (line ~24)
+   - Update `handleDelete` (line ~77)
+   - Extract `handleCardClick` with guard (new function ~87)
+   - Update card div onClick (line ~165)
+   - Update `cancelDelete` (line ~87)
+
+---
+
+## Testing Strategy
+
+### Manual Testing
+
+1. **Delete Flow:**
+   - Click card menu → Delete → Confirm
+   - **Expected:** Task deleted, no detail panel opens
+   - **Bug if:** Detail panel opens
+
+2. **Cancel Delete Flow:**
+   - Click card menu → Delete → Cancel
+   - Click card body
+   - **Expected:** Detail panel opens
+   - **Bug if:** Detail panel doesn't open
+
+3. **Normal Click Flow:**
+   - Click card body (not menu)
+   - **Expected:** Detail panel opens
+   - **Bug if:** Detail panel doesn't open
+
+---
+
+## Review Section
+
+**To be filled when work is complete.**
+
+---
+
+**Status:** 🎯 AWAITING USER APPROVAL
+
+**Created:** November 17, 2025

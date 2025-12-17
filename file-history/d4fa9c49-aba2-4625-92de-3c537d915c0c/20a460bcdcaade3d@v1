@@ -1,0 +1,81 @@
+# src/widgets/Dashboard/CLAUDE.md — Dashboard Widget Guidelines
+
+## Purpose
+
+Define conventions for creating and maintaining dashboard widgets in Neuman Brain. Each widget encapsulates a specific feature (e.g., tasks summary, jokes, weather) and is rendered inside the dashboard grid. Consistency and performance are critical to providing a smooth user experience.
+
+## Non‑negotiables
+
+- **Self‑contained components:** Each widget lives in its own file (`[Name]Widget.tsx`) under `src/widgets/Dashboard/` and exports a single React functional component. Widgets **must** use the `BaseWidget` wrapper to provide loading, error, and refresh behaviour.
+- **Lazy loading:** Widgets are code‑split and loaded on demand. Do not import widgets directly in other modules. They are discovered through Vite glob imports in `WidgetRegistry.ts`.
+- **Registration:** All widgets must be registered in `WidgetRegistry.ts` by adding their file name to `WIDGET_FILE_NAMES` and an entry in `WIDGET_REGISTRY` specifying:
+  - `id`: unique string identifier;
+  - `title`: human‑friendly name;
+  - `category`: one of `core`, `productivity`, `news`, `finance`, `fun`, `visual`, `dev`, `utility`;
+  - `icon`: lucide‑react icon component;
+  - `description`: short description used in the widget selector;
+  - `size`: optional sizing hints;
+  - `config` schema if the widget is user‑configurable.
+- **Semantic styling:** Use Tailwind semantic tokens (`bg-surface-light`, `text-text-light-primary`, etc.) and flexbox/grid utilities. Do **not** hard‑code colours or sizes. Provide skeleton placeholders while loading data.
+- **Accessibility:** Provide descriptive ARIA labels for interactive elements, ensure keyboard navigability, and use visible focus indicators.
+- **State:** Widgets may read from Zustand stores or manage local state via `useState`. Persist widget preferences using a store when necessary (e.g. collapsed state). Do not create global variables.
+- **Network & side effects:** Fetch data inside `useEffect` hooks; handle loading and error states gracefully. Respect rate limits for external APIs. Use services (`src/services/`) for complex logic.
+
+## Adding a widget
+
+1. Create `src/widgets/Dashboard/MyWidget.tsx` using the following skeleton:
+
+   ```tsx
+   import { BaseWidget } from './BaseWidget';
+   import { Loader } from '@/components/ui/loader';
+   import { ErrorMessage } from '@/components/ui/error-message';
+
+   export default function MyWidget() {
+     const [data, setData] = useState<DataType | null>(null);
+     const [error, setError] = useState<string | null>(null);
+
+     useEffect(() => {
+       let canceled = false;
+       async function fetchData() {
+         try {
+           const result = await myService();
+           if (!canceled) setData(result);
+         } catch (err) {
+           if (!canceled) setError(err instanceof Error ? err.message : String(err));
+         }
+       }
+       fetchData();
+       return () => { canceled = true; };
+     }, []);
+
+     if (error) return <ErrorMessage message={error} />;
+     if (!data) return <Loader />;
+
+     return (
+       <BaseWidget title="My Widget">
+         {/* render your widget UI with `data` here */}
+       </BaseWidget>
+     );
+   }
+   ```
+
+2. Add the file name (`'MyWidget'`) to `WIDGET_FILE_NAMES` in `WidgetRegistry.ts`.
+3. Add an entry to `WIDGET_REGISTRY` specifying metadata (id, title, category, icon, description, optional config).
+4. Run `npm run build` to ensure the widget is included and passes the bundle size target.
+5. Write unit tests if complex logic is involved; otherwise rely on manual verification.
+
+## Categories
+
+Widgets fall into one of eight categories: **core**, **productivity**, **news**, **finance**, **fun**, **visual**, **dev**, **utility**. Choose the category that best describes the widget’s primary function. For multiple functions, split into separate widgets.
+
+## Anti‑patterns
+
+- Do not register widgets outside `WidgetRegistry.ts`.
+- Do not call network APIs in the component body; always use `useEffect`.
+- Do not block the main thread with heavy computations or loops; offload to a web worker or memoize.
+- Do not manage state outside hooks or stores.
+- Do not hard‑code `div` sizes or rely on pixel values; use responsive units (`flex`, `grid`, `gap`).
+
+## Additional references
+
+For a comprehensive guide on widget architecture, see `@docs/technical/widget_development_guide.md`. For performance tuning, review the documentation on lazy loading and bundle size budgets.

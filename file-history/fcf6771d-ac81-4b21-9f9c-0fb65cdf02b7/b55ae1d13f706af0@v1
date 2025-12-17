@@ -1,0 +1,255 @@
+/**
+ * SidebarResizer Component
+ *
+ * Accessible resize handle for sidebar width adjustment.
+ * Part of the Notes Page Revolution.
+ *
+ * Features:
+ * - 8px hit area (4px visible + 4px each side)
+ * - Visual feedback on hover/drag
+ * - Keyboard accessible (arrow keys)
+ * - Double-click to reset to default
+ * - Grip dots on hover for affordance
+ */
+
+import React, { useCallback, useEffect, useState, useRef } from 'react';
+
+export interface SidebarResizerProps {
+  /** Current width in pixels */
+  currentWidth: number;
+  /** Minimum width constraint */
+  minWidth?: number;
+  /** Maximum width constraint */
+  maxWidth?: number;
+  /** Default width for double-click reset */
+  defaultWidth?: number;
+  /** Callback when width changes */
+  onWidthChange: (width: number) => void;
+  /** Callback when drag starts */
+  onDragStart?: () => void;
+  /** Callback when drag ends */
+  onDragEnd?: () => void;
+  /** Orientation: vertical or horizontal */
+  orientation?: 'vertical' | 'horizontal';
+  /** Offset from left edge (for calculating mouse position) */
+  offsetLeft?: number;
+}
+
+export const SidebarResizer: React.FC<SidebarResizerProps> = ({
+  currentWidth,
+  minWidth = 200,
+  maxWidth = 500,
+  defaultWidth = 320,
+  onWidthChange,
+  onDragStart,
+  onDragEnd,
+  orientation = 'vertical',
+  offsetLeft = 72,
+}) => {
+  const [isDragging, setIsDragging] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
+  const resizerRef = useRef<HTMLDivElement>(null);
+
+  // Handle mouse down to start dragging
+  const handleMouseDown = useCallback(
+    (e: React.MouseEvent) => {
+      e.preventDefault();
+      setIsDragging(true);
+      onDragStart?.();
+    },
+    [onDragStart]
+  );
+
+  // Handle double-click to reset to default
+  const handleDoubleClick = useCallback(() => {
+    onWidthChange(defaultWidth);
+  }, [defaultWidth, onWidthChange]);
+
+  // Handle keyboard navigation
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      const step = e.shiftKey ? 50 : 10; // Larger steps with Shift
+      let newWidth = currentWidth;
+
+      switch (e.key) {
+        case 'ArrowLeft':
+        case 'ArrowUp':
+          e.preventDefault();
+          newWidth = Math.max(minWidth, currentWidth - step);
+          break;
+        case 'ArrowRight':
+        case 'ArrowDown':
+          e.preventDefault();
+          newWidth = Math.min(maxWidth, currentWidth + step);
+          break;
+        case 'Home':
+          e.preventDefault();
+          newWidth = minWidth;
+          break;
+        case 'End':
+          e.preventDefault();
+          newWidth = maxWidth;
+          break;
+        case 'Enter':
+        case ' ':
+          e.preventDefault();
+          newWidth = defaultWidth;
+          break;
+        default:
+          return;
+      }
+
+      onWidthChange(newWidth);
+    },
+    [currentWidth, minWidth, maxWidth, defaultWidth, onWidthChange]
+  );
+
+  // Handle mouse move during drag
+  useEffect(() => {
+    if (!isDragging) return;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const newWidth = Math.max(minWidth, Math.min(maxWidth, e.clientX - offsetLeft));
+      onWidthChange(newWidth);
+    };
+
+    const handleMouseUp = () => {
+      setIsDragging(false);
+      onDragEnd?.();
+    };
+
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseup', handleMouseUp);
+
+    // Set cursor and prevent text selection during drag
+    document.body.style.cursor = orientation === 'vertical' ? 'ew-resize' : 'ns-resize';
+    document.body.style.userSelect = 'none';
+
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+      document.body.style.cursor = '';
+      document.body.style.userSelect = '';
+    };
+  }, [isDragging, minWidth, maxWidth, offsetLeft, orientation, onWidthChange, onDragEnd]);
+
+  const isVertical = orientation === 'vertical';
+  const cursorClass = isVertical ? 'cursor-ew-resize' : 'cursor-ns-resize';
+
+  // Calculate percentage for ARIA valuenow
+  const valuePercent = Math.round(((currentWidth - minWidth) / (maxWidth - minWidth)) * 100);
+
+  return (
+    <div
+      ref={resizerRef}
+      role="separator"
+      aria-orientation={orientation}
+      aria-valuenow={valuePercent}
+      aria-valuemin={0}
+      aria-valuemax={100}
+      aria-label="Resize sidebar"
+      tabIndex={0}
+      onMouseDown={handleMouseDown}
+      onDoubleClick={handleDoubleClick}
+      onKeyDown={handleKeyDown}
+      onFocus={() => setIsFocused(true)}
+      onBlur={() => setIsFocused(false)}
+      className={`
+        group absolute right-0 top-0 bottom-0 z-10
+        ${isVertical ? 'w-2' : 'h-2'}
+        ${cursorClass}
+        transition-colors duration-100
+        ${isFocused ? 'outline-2 outline-accent-cyan outline-offset-2' : ''}
+      `}
+      title="Drag to resize, double-click to reset"
+    >
+      {/* 8px hit area with 2px visible line */}
+      <div
+        className={`
+          absolute
+          ${isVertical ? 'right-0 top-0 bottom-0 w-0.5' : 'bottom-0 left-0 right-0 h-0.5'}
+          transition-all duration-100
+          ${
+            isDragging
+              ? 'bg-accent-cyan dark:bg-accent-magenta'
+              : 'bg-border-light dark:bg-border-dark group-hover:bg-accent-cyan/50 dark:group-hover:bg-accent-magenta/50'
+          }
+        `}
+      />
+
+      {/* Grip dots - visible on hover for affordance */}
+      <div
+        className={`
+          absolute opacity-0 group-hover:opacity-100 transition-opacity duration-100
+          ${
+            isVertical
+              ? 'right-0 top-1/2 -translate-y-1/2 flex flex-col gap-0.5 pr-0.5'
+              : 'bottom-0 left-1/2 -translate-x-1/2 flex gap-0.5 pb-0.5'
+          }
+        `}
+      >
+        <div className="w-1 h-1 rounded-full bg-text-light-tertiary dark:bg-text-dark-tertiary" />
+        <div className="w-1 h-1 rounded-full bg-text-light-tertiary dark:bg-text-dark-tertiary" />
+        <div className="w-1 h-1 rounded-full bg-text-light-tertiary dark:bg-text-dark-tertiary" />
+      </div>
+    </div>
+  );
+};
+
+/**
+ * Hook for using resizable splitter logic
+ * Can be used for both sidebar width and folder/notes pane height
+ */
+export interface UseResizableSplitterOptions {
+  initialValue: number;
+  minValue: number;
+  maxValue: number;
+  defaultValue: number;
+  persistKey?: string;
+}
+
+export function useResizableSplitter({
+  initialValue,
+  minValue,
+  maxValue,
+  defaultValue,
+  persistKey,
+}: UseResizableSplitterOptions) {
+  const [value, setValue] = useState(() => {
+    if (persistKey) {
+      const stored = localStorage.getItem(persistKey);
+      if (stored) {
+        const parsed = parseFloat(stored);
+        if (!isNaN(parsed) && parsed >= minValue && parsed <= maxValue) {
+          return parsed;
+        }
+      }
+    }
+    return initialValue;
+  });
+
+  const [isDragging, setIsDragging] = useState(false);
+
+  const handleChange = useCallback(
+    (newValue: number) => {
+      const clamped = Math.max(minValue, Math.min(maxValue, newValue));
+      setValue(clamped);
+      if (persistKey) {
+        localStorage.setItem(persistKey, String(clamped));
+      }
+    },
+    [minValue, maxValue, persistKey]
+  );
+
+  const reset = useCallback(() => {
+    handleChange(defaultValue);
+  }, [defaultValue, handleChange]);
+
+  return {
+    value,
+    isDragging,
+    setIsDragging,
+    handleChange,
+    reset,
+  };
+}

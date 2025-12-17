@@ -1,0 +1,85 @@
+import React from 'react';
+import { Modal } from './Modal';
+
+interface ConfirmDialogProps {
+  isOpen: boolean;
+  onClose: () => void;
+  onConfirm: () => void;
+  title: string;
+  message: string;
+  confirmText?: string;
+  cancelText?: string;
+  variant?: 'danger' | 'warning' | 'info';
+}
+
+/**
+ * ConfirmDialog component for in-app confirmations
+ * Replaces browser confirm() dialogs
+ */
+export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
+  isOpen,
+  onClose,
+  onConfirm,
+  title,
+  message,
+  confirmText = 'Confirm',
+  cancelText = 'Cancel',
+  variant = 'info',
+}) => {
+  const handleConfirm = () => {
+    onConfirm();
+    onClose();
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleConfirm();
+    }
+  };
+
+  const variantStyles = {
+    danger: {
+      button: 'bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800',
+      icon: '🚨',
+    },
+    warning: {
+      button: 'bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800',
+      icon: '⚠️',
+    },
+    info: {
+      button: 'bg-gradient-button-primary hover:shadow-glow-magenta',
+      icon: 'ℹ️',
+    },
+  };
+
+  const style = variantStyles[variant];
+
+  return (
+    <Modal isOpen={isOpen} onClose={onClose} title={title} maxWidth="sm">
+      <div className="space-y-4" onKeyDown={handleKeyDown}>
+        {/* Icon + Message */}
+        <div className="flex items-start gap-4">
+          <div className="flex-shrink-0 text-3xl">{style.icon}</div>
+          <p className="text-text-light-secondary dark:text-text-dark-secondary flex-1">{message}</p>
+        </div>
+
+        {/* Action Buttons */}
+        <div className="flex gap-3 justify-end pt-2">
+          <button
+            onClick={onClose}
+            className="px-4 py-2 rounded-button border border-border-light dark:border-border-dark text-text-light-secondary dark:text-text-dark-secondary hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated transition-all duration-standard ease-smooth"
+            autoFocus
+          >
+            {cancelText}
+          </button>
+          <button
+            onClick={handleConfirm}
+            className={`px-4 py-2 rounded-button text-white font-medium transition-all duration-standard ease-smooth ${style.button}`}
+          >
+            {confirmText}
+          </button>
+        </div>
+      </div>
+    </Modal>
+  );
+};

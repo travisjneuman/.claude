@@ -1,0 +1,299 @@
+#!/usr/bin/env python3
+"""
+Reorganize Converted Notes
+Organizes converted Markdown files into topic-based folders and
+moves cryptic/unclear filenames to .review/ for manual inspection.
+"""
+
+import os
+import re
+import json
+import shutil
+from pathlib import Path
+from datetime import datetime
+
+# Configuration
+BASE_PATH = Path(r"D:\Proton Drive\My files\Documents\Personal\Notebooks")
+CONVERTED_DIR = BASE_PATH / "_converted"
+MARKDOWN_DIR = CONVERTED_DIR / "markdown"
+OUTPUT_DIR = BASE_PATH / "_scripts" / "output"
+REORG_LOG = OUTPUT_DIR / "reorganization_log.json"
+
+# Target structure
+ORGANIZED_DIR = BASE_PATH / "_organized"
+
+# Category patterns (case-insensitive regex)
+CATEGORY_PATTERNS = {
+    "Business/Aloha": [
+        r"aloha", r"pos\s*system", r"restaurant.*pos",
+    ],
+    "Business/OLO": [
+        r"\bolo\b", r"ordering.*platform",
+    ],
+    "Business/insITe": [
+        r"insite", r"it.*consulting",
+    ],
+    "Business/BarFly": [
+        r"barfly", r"bar\s*fly", r"site.*check",
+    ],
+    "Personal/Finance": [
+        r"finance", r"budget", r"money", r"bank", r"invest", r"tax",
+        r"credit", r"loan", r"mortgage", r"bills?",
+    ],
+    "Personal/Recipes": [
+        r"recipe", r"cook", r"food", r"meal", r"ingredient",
+        r"dinner", r"lunch", r"breakfast", r"baking",
+    ],
+    "Personal/Home": [
+        r"home", r"house", r"apartment", r"furniture", r"garden",
+        r"cleaning", r"renovation", r"repair",
+    ],
+    "Personal/Health": [
+        r"health", r"medical", r"doctor", r"prescription", r"fitness",
+        r"exercise", r"workout", r"diet", r"weight",
+    ],
+    "Property/67-River-Road": [
+        r"67.*river", r"river.*road", r"river.*rd",
+    ],
+    "Work/IT-Notes": [
+        r"technical", r"troubleshoot", r"network", r"server",
+        r"computer", r"software", r"hardware", r"system.*admin",
+    ],
+    "Work/Weekly-Notes": [
+        r"weekly", r"week\s*of", r"w/e\s*\d", r"week.*notes?",
+    ],
+    "Work/Meetings": [
+        r"meeting", r"agenda", r"minutes", r"standup", r"sync",
+    ],
+    "Work/Projects": [
+        r"project", r"sprint", r"milestone", r"deadline",
+    ],
+    "Learning/Courses": [
+        r"course", r"class", r"lecture", r"lesson", r"study",
+        r"learning", r"training", r"tutorial",
+    ],
+    "Learning/Notes": [
+        r"notes?$", r"notebook",
+    ],
+    "Travel": [
+        r"travel", r"trip", r"vacation", r"flight", r"hotel",
+        r"itinerary", r"passport",
+    ],
+    "Shopping": [
+        r"shopping", r"purchase", r"buy", r"order", r"amazon",
+        r"wishlist", r"cart",
+    ],
+}
+
+# Patterns that indicate cryptic/unclear filenames
+CRYPTIC_PATTERNS = [
+    r"^[A-Za-z0-9]{6,12}$",  # Random alphanumeric like "3qhi6zj7c7n11"
+    r"^[A-Z0-9]{10,}$",  # All caps random
+    r"^\d+[A-Za-z]+\d*$",  # Mixed number/letter like "61njx1IfMVL"
+    r"^IMG_\d+$",  # Generic image names
+    r"^DSC_?\d+$",  # Camera default names
+    r"^Screen\s*Shot",  # Screenshot names
+    r"^Untitled",  # Untitled documents
+    r"^New\s*(Note|Document)",  # Default new file names
+    r"_SX\d+_",  # Amazon image sizing
+    r"^[A-Z]\d+[A-Z]\d+",  # Product codes
+]
+
+def is_cryptic_filename(name: str) -> bool:
+    """Check if filename appears cryptic or unclear."""
+    # Remove extension and common suffixes
+    base = re.sub(r'\s*\(\d+\)\s*$', '', name)
+    base = re.sub(r'\s*\(OneNote\)\s*$', '', base)
+    base = re.sub(r'\s*\(Notability\)\s*$', '', base)
+    base = base.strip()
+
+    # Very short names are suspicious
+    if len(base) <= 3:
+        return True
+
+    # Check against cryptic patterns
+    for pattern in CRYPTIC_PATTERNS:
+        if re.search(pattern, base, re.IGNORECASE):
+            return True
+
+    # Check if mostly non-alphanumeric or no vowels (likely random)
+    letters = re.sub(r'[^a-zA-Z]', '', base)
+    if letters:
+        vowels = sum(1 for c in letters.lower() if c in 'aeiou')
+        if len(letters) > 5 and vowels / len(letters) < 0.15:
+            return True
+
+    return False
+
+def categorize_file(filename: str, content: str = "") -> str:
+    """Determine the category for a file based on name and content."""
+    combined = f"{filename} {content}".lower()
+
+    # Check against category patterns
+    for category, patterns in CATEGORY_PATTERNS.items():
+        for pattern in patterns:
+            if re.search(pattern, combined, re.IGNORECASE):
+                return category
+
+    # Default category for uncategorized files
+    return "Uncategorized"
+
+def read_markdown_frontmatter(filepath: Path) -> dict:
+    """Extract frontmatter from Markdown file."""
+    try:
+        with open(filepath, 'r', encoding='utf-8') as f:
+            content = f.read()
+
+        if content.startswith('---'):
+            end = content.find('---', 3)
+            if end > 0:
+                frontmatter_str = content[3:end].strip()
+                frontmatter = {}
+                for line in frontmatter_str.split('\n'):
+                    if ':' in line:
+                        key, value = line.split(':', 1)
+                        frontmatter[key.strip()] = value.strip().strip('"')
+                return frontmatter
+    except:
+        pass
+    return {}
+
+def ensure_dirs():
+    """Create output directories."""
+    ORGANIZED_DIR.mkdir(parents=True, exist_ok=True)
+    (ORGANIZED_DIR / ".review").mkdir(exist_ok=True)
+    (ORGANIZED_DIR / ".archive").mkdir(exist_ok=True)
+
+def copy_with_assets(md_path: Path, dest_path: Path, assets_dir: Path):
+    """Copy Markdown file and its associated assets."""
+    # Ensure destination directory exists
+    dest_path.parent.mkdir(parents=True, exist_ok=True)
+
+    # Copy the Markdown file
+    shutil.copy2(md_path, dest_path)
+
+    # Check for associated assets folder
+    asset_folder_name = md_path.stem
+    # Remove common suffixes to match asset folder name
+    for suffix in [' (OneNote)', ' (Notability)']:
+        asset_folder_name = asset_folder_name.replace(suffix, '')
+
+    source_asset_dir = assets_dir / asset_folder_name
+    if source_asset_dir.exists():
+        dest_asset_dir = dest_path.parent / "assets" / asset_folder_name
+        if not dest_asset_dir.exists():
+            shutil.copytree(source_asset_dir, dest_asset_dir)
+        return True
+    return False
+
+def main():
+    print("=" * 60)
+    print("Reorganize Converted Notes")
+    print("=" * 60)
+
+    ensure_dirs()
+
+    # Find all Markdown files
+    if not MARKDOWN_DIR.exists():
+        print(f"ERROR: {MARKDOWN_DIR} not found. Run extraction scripts first.")
+        return
+
+    md_files = list(MARKDOWN_DIR.glob("*.md"))
+    print(f"\nFound {len(md_files)} Markdown files to organize")
+
+    if not md_files:
+        print("No files to process!")
+        return
+
+    # Process each file
+    log = {
+        'processed': [],
+        'cryptic': [],
+        'categories': {},
+        'errors': [],
+        'stats': {
+            'total': len(md_files),
+            'organized': 0,
+            'cryptic': 0,
+            'errors': 0,
+        }
+    }
+
+    assets_dir = CONVERTED_DIR / "assets"
+
+    for i, md_path in enumerate(md_files):
+        print(f"\r  Processing {i+1}/{len(md_files)}: {md_path.stem[:40]}...", end='', flush=True)
+
+        try:
+            filename = md_path.stem
+
+            # Read frontmatter for additional context
+            frontmatter = read_markdown_frontmatter(md_path)
+            title = frontmatter.get('title', filename)
+            subject = frontmatter.get('subject', '')
+
+            # Check if cryptic
+            if is_cryptic_filename(filename):
+                dest_path = ORGANIZED_DIR / ".review" / md_path.name
+                has_assets = copy_with_assets(md_path, dest_path, assets_dir)
+
+                log['cryptic'].append({
+                    'source': str(md_path),
+                    'dest': str(dest_path),
+                    'original_name': filename,
+                    'has_assets': has_assets,
+                })
+                log['stats']['cryptic'] += 1
+            else:
+                # Categorize the file
+                category = categorize_file(filename, f"{title} {subject}")
+
+                # Copy to organized folder
+                dest_path = ORGANIZED_DIR / category / md_path.name
+                has_assets = copy_with_assets(md_path, dest_path, assets_dir)
+
+                # Track category counts
+                if category not in log['categories']:
+                    log['categories'][category] = 0
+                log['categories'][category] += 1
+
+                log['processed'].append({
+                    'source': str(md_path),
+                    'dest': str(dest_path),
+                    'category': category,
+                    'has_assets': has_assets,
+                })
+                log['stats']['organized'] += 1
+
+        except Exception as e:
+            log['errors'].append({
+                'file': str(md_path),
+                'error': str(e),
+            })
+            log['stats']['errors'] += 1
+
+    # Write log
+    print(f"\n\nWriting log to: {REORG_LOG}")
+    with open(REORG_LOG, 'w', encoding='utf-8') as f:
+        json.dump(log, f, indent=2)
+
+    # Print summary
+    print("\n" + "=" * 60)
+    print("REORGANIZATION SUMMARY")
+    print("=" * 60)
+    print(f"Total files: {log['stats']['total']}")
+    print(f"Organized: {log['stats']['organized']}")
+    print(f"Cryptic (to .review/): {log['stats']['cryptic']}")
+    print(f"Errors: {log['stats']['errors']}")
+
+    print("\nCategory breakdown:")
+    for category, count in sorted(log['categories'].items()):
+        print(f"  {category}: {count}")
+
+    print("\n" + "=" * 60)
+    print(f"Organized files saved to: {ORGANIZED_DIR}")
+    print(f"Cryptic files saved to: {ORGANIZED_DIR / '.review'}")
+    print("=" * 60)
+
+if __name__ == '__main__':
+    main()

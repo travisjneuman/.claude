@@ -1,0 +1,183 @@
+---
+type: project
+status: maintenance
+priority: P1
+tech-stack:
+  - "[[Concepts/React|React 19]]"
+  - "[[Concepts/TypeScript|TypeScript 5.9]]"
+  - "[[Vite|Vite 7]]"
+  - "[[Tailwind|Tailwind CSS 4]]"
+  - "[[Framer Motion]]"
+repo-path: tjn.portfolio
+live-url: https://travisjneuman.com
+github: https://github.com/travisjneuman/tjn.portfolio
+created: 2025-11-19
+updated: 2025-12-14
+---
+
+# TJN Portfolio
+
+> [!INFO] Summary
+> Travis J. Neuman's professional IT portfolio. V1 (live) is a minimal HTML/CSS/JS MVP. V2 (complete, ready for deployment) is a modern React 19 build with animations, dark mode, and command palette. Evolving toward a comprehensive IT services, learning, and community platform.
+
+---
+
+## 📊 Metrics & Status
+
+| Version | Status | Stack |
+|---------|--------|-------|
+| **V1** | Live | HTML5, CSS3, Vanilla JS |
+| **V2** | Ready (in `/new`) | React 19, TypeScript 5.9, Vite 7 |
+
+**Current Phase:** V2 complete, awaiting deployment
+
+---
+
+## 🛠 Tech Stack
+
+### V1 (Currently Live)
+| Layer | Technology |
+|-------|------------|
+| **Markup** | HTML5 (semantic, meta tags, accessibility) |
+| **Styling** | CSS3 (keyframes, gradients, flexbox) |
+| **Interactivity** | Vanilla JavaScript |
+| **Typography** | Google Fonts (Source Sans Pro) |
+| **Icons** | Font Awesome 5 |
+| **Hosting** | GitHub Pages + Cloudflare |
+| **Analytics** | Cloudflare Web Analytics + GA4 |
+
+### V2 (Ready in `/new`)
+| Layer | Technology | Version |
+|-------|------------|---------|
+| **Framework** | [[Concepts/React\|React]] | 19.2.0 |
+| **Language** | [[Concepts/TypeScript\|TypeScript]] | 5.9.3 |
+| **Build Tool** | [[Vite]] | 7.2.4 |
+| **Styling** | [[Tailwind\|Tailwind CSS]] | 4.1.17 |
+| **Animation** | Framer Motion | 12.23.25 |
+| **Smooth Scroll** | Lenis | 1.3.15 |
+| **Command Palette** | cmdk | 1.1.1 |
+| **Icons** | Lucide React | 0.556.0 |
+| **Font** | Geist | 1.5.1 |
+
+---
+
+## 📁 Project Structure
+
+```
+tjn.portfolio/
+├── index.html           # V1 Production (live)
+├── 404.html             # Error page
+├── new/                 # V2 React Build (CURRENT)
+│   ├── src/             # React components
+│   ├── package.json     # V2 dependencies
+│   ├── vite.config.ts   # Build configuration
+│   └── dist/            # Production build output
+├── v1/                  # V1 archived copy
+├── docs/                # Architecture docs
+│   ├── PROJECT_STRUCTURE.md
+│   └── V1_TO_V2_MIGRATION.md
+├── tasks/               # Task management
+│   ├── google-search-console-setup.md
+│   ├── social-media-validation-guide.md
+│   └── .archive/        # 12 completed task files
+├── assets/              # Images, fonts, favicons
+├── CLAUDE.md            # Development instructions
+├── README.md            # Comprehensive docs (598 lines)
+└── .claude/             # Claude Code automation
+```
+
+---
+
+## 📁 Current Tasks
+
+### Active Tasks
+| Task | Status | Description |
+|------|--------|-------------|
+| `google-search-console-setup.md` | Ready | GSC verification, sitemap submission |
+| `social-media-validation-guide.md` | Ready | OG/Twitter card testing |
+
+### Archived Tasks (12 completed)
+- accessibility-audit-phase1.md
+- analytics-seo-social-enhancement.md
+- v2-implementation-plan.md
+- v2-research-and-spec.md
+- v2-content-population.md
+
+---
+
+## 🔑 Key Features
+
+### SEO & Analytics
+- Google Analytics 4 (G-TH91NDGH4G) with IP anonymization
+- Cloudflare Web Analytics (cookie-less, privacy-first)
+- Complete SEO: sitemap, robots.txt, canonical URLs
+- Schema.org Person JSON-LD
+- Open Graph + Twitter Card tags
+
+### Accessibility (WCAG 2.1 AA)
+- Semantic HTML structure
+- Skip links, ARIA labels
+- Keyboard navigation
+- Focus visibility
+- High contrast
+
+### V2 Features (Ready)
+- Dark/light theme toggle
+- Command palette (Cmd/Ctrl+K)
+- Smooth scroll with Lenis
+- Framer Motion animations
+- Mobile-responsive design
+
+---
+
+## 📝 Roadmap
+
+### Completed
+- [x] **Phase 1:** Core portfolio (V1 - Live)
+- [x] **Phase 2:** V2 React migration (complete)
+
+### Upcoming
+- [ ] **Phase 3:** Content expansion (case studies, resume download)
+- [ ] **Phase 4:** Blog/learning resources
+- [ ] **Phase 5:** Interactive features (booking, newsletter)
+- [ ] **Phase 5+:** Professional services hub, community platform
+
+---
+
+## 📈 Performance Targets
+
+| Metric | Target |
+|--------|--------|
+| Page load | <1s |
+| Lighthouse Performance | 95+ |
+| Accessibility | WCAG AA |
+| Bundle size (V2) | <300KB gzipped |
+| LCP | <2.5s |
+| INP | <200ms |
+| CLS | <0.1 |
+
+---
+
+## 🔧 Development Commands
+
+### V2 Commands
+```bash
+cd new/
+npm run dev       # Vite dev server
+npm run build     # TypeScript check + Vite build
+npm run lint      # ESLint check
+npm run preview   # Preview production build
+```
+
+---
+
+## 🔗 Links
+
+- [[../tjn.portfolio/README.md|README (598 lines)]]
+- [[../tjn.portfolio/CLAUDE.md|AI Guidelines]]
+- [[../tjn.portfolio/docs/V1_TO_V2_MIGRATION.md|Migration Guide]]
+- [[Business/Ventures/ndev Consulting|Business Planning]]
+
+---
+
+*Last updated: 2025-12-14*

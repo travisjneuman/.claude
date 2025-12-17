@@ -1,0 +1,437 @@
+# Form Builder Widget - Implementation Plan
+
+**Date:** 2025-11-27
+**Status:** Planning
+**Priority:** Medium (P2 #8)
+**Estimated Time:** 8-12 hours
+
+---
+
+## Overview
+
+Build a custom form builder widget that allows users to create, store, and fill out forms for personal use cases like habit tracking, daily check-ins, mood logging, and data collection for analytics.
+
+**User Problem:**
+Users need a way to track structured data (habits, moods, metrics) with custom forms that can be reused daily/weekly. Currently, they would need to manually create notes or use external tools.
+
+**Technical Problem:**
+Need a form builder system with:
+- Visual form editor (drag-drop or list-based)
+- Form template storage
+- Form submission/response storage
+- Data visualization/export
+
+---
+
+## Problem Statement
+
+**Current State:**
+- No structured data collection mechanism
+- Users can only use freeform notes or external tools
+- No way to create repeatable data entry patterns
+- Analytics dashboard exists but has no custom data sources
+
+**Desired State:**
+- Users can create form templates with multiple field types
+- Forms can be filled out repeatedly (like a daily habit tracker)
+- Responses stored in IndexedDB
+- Forms can be embedded in dashboard as widgets
+- Form data can feed into analytics
+
+**User Impact:**
+- Habit trackers who want to log daily metrics
+- Users tracking mood, wellness, or custom KPIs
+- Anyone needing structured data collection
+- Users wanting personal surveys or checklists
+
+**Competitors:**
+- **Google Forms** - Feature-rich but cloud-only
+- **Typeform** - Beautiful UX, cloud-only, expensive
+- **Tally** - Notion-like builder, privacy-focused
+- **Microsoft Forms** - Simple, cloud-only
+
+---
+
+## Files to Read
+
+- [ ] `src/stores/useWidgetStore.ts` - Widget registration pattern
+- [ ] `src/widgets/Dashboard/` - Existing widget examples
+- [ ] `src/components/CustomFieldEditor.tsx` - Custom field UI patterns (already exists!)
+- [ ] `src/stores/useSettingsStore.ts` - Settings persistence patterns
+- [ ] `src/types/` - Type definition patterns
+- [ ] `docs/technical/widget_development_guide.md` - Widget development standards
+
+---
+
+## Proposed Changes
+
+### Architecture Decision: Build vs Buy
+
+Per CLAUDE.md "Build vs Buy" philosophy:
+- **NOT using:** react-hook-form (too opinionated), survey.js (bloated), formik (complex)
+- **Building:** Custom form builder with our own field registry
+- **Reusing:** Our existing CustomFieldEditor component for field definitions
+- **Total control:** 90% custom code, 10% utility libraries (uuid, date-fns if needed)
+
+### Data Model
+
+**Form Template:**
+```typescript
+interface FormTemplate {
+  id: string;
+  title: string;
+  description?: string;
+  fields: FormField[];
+  createdAt: Date;
+  updatedAt: Date;
+  settings: {
+    allowMultipleSubmissions: boolean;
+    showSubmissionCount: boolean;
+    resetPeriod?: 'daily' | 'weekly' | 'monthly' | 'never';
+  };
+}
+
+interface FormField {
+  id: string;
+  type: 'text' | 'number' | 'date' | 'time' | 'select' | 'multiselect' | 'checkbox' | 'radio' | 'textarea' | 'rating' | 'scale';
+  label: string;
+  description?: string;
+  required: boolean;
+  options?: string[]; // For select/radio/multiselect
+  validation?: {
+    min?: number;
+    max?: number;
+    pattern?: string;
+  };
+  order: number;
+}
+```
+
+**Form Response:**
+```typescript
+interface FormResponse {
+  id: string;
+  formId: string;
+  answers: Record<string, any>; // field.id -> value
+  submittedAt: Date;
+}
+```
+
+### Files to Create
+
+**1. `src/types/forms.ts`** (80 lines)
+- **Purpose:** Type definitions for forms system
+- **Key Types:**
+  - FormTemplate, FormField, FormResponse
+  - FieldType union type
+  - Form settings interfaces
+- **Integration:** Imported by stores and components
+
+**2. `src/stores/useFormsStore.ts`** (200 lines)
+- **Purpose:** Form templates and responses state management
+- **Features:**
+  - CRUD for form templates
+  - Submit/retrieve form responses
+  - IndexedDB persistence via Zustand persist
+  - Form statistics (submission counts, last submitted)
+- **Actions:**
+  - `createForm(template)`
+  - `updateForm(id, updates)`
+  - `deleteForm(id)`
+  - `submitResponse(formId, answers)`
+  - `getResponses(formId, filters)`
+  - `exportResponses(formId)` → CSV
+
+**3. `src/pages/Forms.tsx`** (250 lines)
+- **Purpose:** Form library page (like Diagrams, Notes)
+- **Route:** `/forms`
+- **Features:**
+  - Grid/list view of form templates
+  - Create new form button
+  - Open form builder
+  - Open form filler
+  - View responses
+  - Delete forms
+  - Search/filter
+
+**4. `src/pages/FormBuilder.tsx`** (400 lines)
+- **Purpose:** Visual form builder editor
+- **Route:** `/forms/:id/edit`
+- **Features:**
+  - Drag-and-drop field ordering (or simple up/down buttons)
+  - Add field button with type selector
+  - Field configuration panel
+  - Live preview on right side
+  - Form settings (title, description, submission rules)
+  - Auto-save with debounce
+  - Keyboard shortcuts (Delete field, duplicate field)
+
+**5. `src/pages/FormFiller.tsx`** (200 lines)
+- **Purpose:** Fill out a form
+- **Route:** `/forms/:id/fill`
+- **Features:**
+  - Render form fields based on template
+  - Client-side validation
+  - Submit response
+  - Success/error states
+  - Previous responses (if allowed)
+
+**6. `src/pages/FormResponses.tsx`** (300 lines)
+- **Purpose:** View/analyze form responses
+- **Route:** `/forms/:id/responses`
+- **Features:**
+  - Table view of all responses
+  - Sortable/filterable columns
+  - Individual response detail view
+  - Export to CSV
+  - Delete responses
+  - Summary statistics (if numeric fields)
+
+**7. `src/components/FormBuilder/FieldEditor.tsx`** (250 lines)
+- **Purpose:** Edit individual field configuration
+- **Features:**
+  - Field type selector
+  - Label/description inputs
+  - Required toggle
+  - Type-specific options (min/max for number, options for select)
+  - Validation rules
+  - Preview of field
+
+**8. `src/components/FormBuilder/FieldList.tsx`** (150 lines)
+- **Purpose:** List of fields in form with drag/reorder
+- **Features:**
+  - List of current fields
+  - Drag handles (or up/down buttons)
+  - Delete field button
+  - Duplicate field button
+  - Click to edit
+
+**9. `src/components/FormRenderer/FormRenderer.tsx`** (300 lines)
+- **Purpose:** Render form fields from template
+- **Features:**
+  - Map field types to input components
+  - Handle field state
+  - Validation display
+  - Submit handler
+  - Error states
+
+**10. `src/components/FormRenderer/FieldComponents.tsx`** (400 lines)
+- **Purpose:** Individual field components
+- **Components:**
+  - TextInput, NumberInput, DateInput, TimeInput
+  - Select, MultiSelect, Radio, Checkbox
+  - TextArea, Rating (1-5 stars), Scale (1-10)
+- **Features:**
+  - Type-specific validation
+  - Accessible (ARIA labels, keyboard nav)
+  - Dark mode support
+
+**11. `src/widgets/Dashboard/FormWidget.tsx`** (150 lines)
+- **Purpose:** Dashboard widget to quick-fill a specific form
+- **Features:**
+  - Select which form to display
+  - Embedded form renderer
+  - Quick submit
+  - Show submission count
+  - "View Responses" link
+
+**12. `src/utils/formExport.ts`** (100 lines)
+- **Purpose:** Export form responses to CSV
+- **Features:**
+  - Convert responses to CSV rows
+  - Handle all field types
+  - Download as .csv file
+
+### Files to Modify
+
+**1. `src/App.tsx`** (Add routes)
+- **Changes:**
+  - Add `/forms` route → Forms page (lazy)
+  - Add `/forms/:id/edit` route → FormBuilder (lazy)
+  - Add `/forms/:id/fill` route → FormFiller (lazy)
+  - Add `/forms/:id/responses` route → FormResponses (lazy)
+- **Impact:** Route config, lazy loading
+
+**2. `src/components/Sidebar.tsx`** (Add Forms link)
+- **Changes:**
+  - Add Forms section under Notes or standalone
+  - Icon: 📋 or similar
+  - Path: `/forms`
+- **Impact:** Navigation
+
+**3. `src/widgets/WidgetRegistry.ts`** (Register FormWidget)
+- **Changes:**
+  - Add FormWidget to registry
+  - Category: "Productivity" or "Data"
+- **Impact:** Widget can be added to dashboard
+
+**4. `tasks/master-implementation-status.md`** (Update status)
+- **Changes:**
+  - Mark P2 #7 (Diagram) as complete
+  - Mark P2 #8 (Form builder) as complete when done
+  - Mark P2 #9 (Analytics) as complete (already is)
+- **Impact:** Roadmap tracking
+
+**5. `docs/product/feature_map.md`** (Document new feature)
+- **Changes:**
+  - Add Forms section with all capabilities
+- **Impact:** Product documentation
+
+**6. `src/pages/CLAUDE.md`** (Add Forms pages)
+- **Changes:**
+  - Add Forms, FormBuilder, FormFiller, FormResponses to inventory
+- **Impact:** Codebase documentation
+
+**7. `src/components/CLAUDE.md`** (Add Form components)
+- **Changes:**
+  - Add FormBuilder and FormRenderer categories
+- **Impact:** Component inventory
+
+---
+
+## Todo Checklist
+
+### Phase 1: Foundation (Estimated: 3 hours)
+- [ ] Create `src/types/forms.ts` with all type definitions (30 min)
+- [ ] Create `src/stores/useFormsStore.ts` with CRUD actions (1 hour)
+- [ ] Create `src/utils/formExport.ts` for CSV export (30 min)
+- [ ] Create `src/pages/Forms.tsx` library page (1 hour)
+- [ ] Update `src/App.tsx` with `/forms` route (10 min)
+- [ ] Update `src/components/Sidebar.tsx` with Forms link (10 min)
+
+### Phase 2: Form Builder (Estimated: 4 hours)
+- [ ] Create `src/components/FormBuilder/FieldEditor.tsx` (1.5 hours)
+- [ ] Create `src/components/FormBuilder/FieldList.tsx` (1 hour)
+- [ ] Create `src/pages/FormBuilder.tsx` with live preview (1.5 hours)
+- [ ] Update `src/App.tsx` with `/forms/:id/edit` route (5 min)
+
+### Phase 3: Form Renderer (Estimated: 3 hours)
+- [ ] Create `src/components/FormRenderer/FieldComponents.tsx` (2 hours)
+- [ ] Create `src/components/FormRenderer/FormRenderer.tsx` (45 min)
+- [ ] Create `src/pages/FormFiller.tsx` (30 min)
+- [ ] Update `src/App.tsx` with `/forms/:id/fill` route (5 min)
+
+### Phase 4: Responses View (Estimated: 2 hours)
+- [ ] Create `src/pages/FormResponses.tsx` (1.5 hours)
+- [ ] Update `src/App.tsx` with `/forms/:id/responses` route (5 min)
+- [ ] Implement CSV export functionality (30 min)
+
+### Phase 5: Dashboard Widget (Estimated: 1 hour)
+- [ ] Create `src/widgets/Dashboard/FormWidget.tsx` (45 min)
+- [ ] Register in `src/widgets/WidgetRegistry.ts` (5 min)
+- [ ] Test widget on dashboard (10 min)
+
+### Phase 6: Testing & Documentation (Estimated: 1 hour)
+- [ ] Test all form field types
+- [ ] Test form submission/retrieval
+- [ ] Test CSV export
+- [ ] Test dark mode
+- [ ] Test responsive design
+- [ ] Run `npm run type-check`
+- [ ] Run `npm run lint`
+- [ ] Run `npm run build` (verify bundle size)
+- [ ] Update `tasks/master-implementation-status.md`
+- [ ] Update `docs/product/feature_map.md`
+- [ ] Update `src/pages/CLAUDE.md`
+- [ ] Update `src/components/CLAUDE.md`
+
+**Total Estimated Time:** 14 hours (buffer included)
+
+---
+
+## Design Considerations
+
+### Design System Compliance
+- **Colors:** Use semantic tokens (bg-surface-*, text-text-*, border-border-*)
+- **Components:** Bento cards for form cards, gradient buttons
+- **Field styling:** Consistent with existing inputs (Notes editor, Task editor)
+- **Typography:** Inter font stack, standard sizes
+- **Spacing:** 4px base unit (gap-2, gap-4, p-4, etc.)
+- **Dark Mode:** All components dark-mode compatible
+
+### Field Type Priorities
+**Phase 1 (MVP):**
+- Text, Number, Date, Select, Checkbox, TextArea
+
+**Phase 2 (Future):**
+- Time, MultiSelect, Radio, Rating, Scale
+
+### Performance
+- **Bundle Size Impact:** ~50-60KB for all form components
+- **Lazy Loading:** All form pages lazy-loaded
+- **Optimization:** FormRenderer memoized, field components pure
+
+### Accessibility
+- **Keyboard Nav:** Tab through fields, Enter to submit
+- **Screen Reader:** All fields have proper labels, ARIA roles
+- **Focus Management:** Clear focus states, focus trap in modals
+- **Validation:** Error messages announced to screen readers
+
+---
+
+## Implementation Notes
+
+### Key Design Decisions
+
+**1. No Drag-and-Drop (Initially)**
+- **Decision:** Use simple up/down buttons for field ordering
+- **Reasoning:** Simpler implementation, better accessibility, works on mobile
+- **Future:** Can add drag-drop later with react-beautiful-dnd if needed
+
+**2. Reuse CustomField Infrastructure**
+- **Decision:** Leverage existing CustomFieldEditor component patterns
+- **Reasoning:** Code reuse, consistency with Tasks/Notes
+- **Implementation:** Similar field type definitions, different storage
+
+**3. CSV Export Only (Initially)**
+- **Decision:** Only support CSV export for responses
+- **Reasoning:** Simple, universal format, lightweight
+- **Future:** Can add JSON, Excel if needed
+
+**4. Local-First Storage**
+- **Decision:** All forms and responses in IndexedDB
+- **Reasoning:** Privacy-first, offline-capable, aligns with NB philosophy
+- **Note:** No cloud sync initially (consistent with other features)
+
+**5. No Complex Logic (Initially)**
+- **Decision:** No conditional fields, branching logic, or formulas
+- **Reasoning:** Keep MVP simple, add later if needed
+- **Future:** Can add "show field if X" logic later
+
+---
+
+## Risk Assessment
+
+| Risk | Severity | Likelihood | Mitigation |
+|------|----------|------------|------------|
+| Form builder UX too complex | Medium | Medium | Start simple (list-based, not visual canvas) |
+| Field types incomplete | Low | Low | Start with core 6 types, add more later |
+| Bundle size increase | Medium | Low | Lazy-load all pages, code-split field components |
+| CSV export fails on edge cases | Low | Medium | Test with all field types, handle nulls |
+| Performance with large forms | Low | Low | Memoize components, virtualize if >50 fields |
+
+---
+
+## Rollback Plan
+
+1. Remove Forms routes from `src/App.tsx`
+2. Remove Forms link from Sidebar
+3. Revert `useFormsStore.ts` (IndexedDB will retain data but won't be accessed)
+4. Remove Form pages and components
+5. Unregister FormWidget from registry
+6. Verify app loads without errors
+
+---
+
+## Related Work
+
+- **Inspiration:** Tally.so (Notion-like builder, privacy-focused)
+- **Existing Patterns:** CustomFieldEditor component
+- **Future Integration:** Analytics dashboard can consume form response data
+- **Extensibility:** Forms could be embedded in Notes pages later
+
+---
+
+# Review Section
+
+**TO BE FILLED WHEN WORK IS COMPLETE**

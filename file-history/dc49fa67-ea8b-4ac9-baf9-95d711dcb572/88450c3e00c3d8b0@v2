@@ -1,0 +1,356 @@
+import React, { useState, useEffect } from 'react';
+import { useWidgetStore } from '../stores/useWidgetStore';
+
+export interface WidgetPreset {
+  id: string;
+  name: string;
+  description?: string;
+  enabledWidgets: string[];
+  widgetSizes: Record<string, 1 | 2 | 3>;
+  createdAt: string;
+  isDefault?: boolean;
+}
+
+// Default preset layouts
+const DEFAULT_PRESETS: WidgetPreset[] = [
+  {
+    id: 'default',
+    name: 'Default',
+    description: 'Core widgets: Weather, Tasks Summary, Quick Add, Events & Notes',
+    enabledWidgets: ['weathermap', 'taskssummary', 'tasksquickadd', 'upcomingevents', 'recentnotes'],
+    widgetSizes: {
+      weathermap: 3,
+      taskssummary: 1,
+      tasksquickadd: 1,
+      upcomingevents: 1,
+      recentnotes: 1,
+    },
+    createdAt: new Date().toISOString(),
+    isDefault: true,
+  },
+  {
+    id: 'productivity',
+    name: 'Productivity Focus',
+    description: 'Task-focused layout for getting work done',
+    enabledWidgets: ['weathermap', 'tasksquickadd', 'upcomingevents', 'recentnotes', 'pomodoro'],
+    widgetSizes: {
+      weathermap: 3,
+      tasksquickadd: 3,
+      upcomingevents: 1,
+      recentnotes: 1,
+      pomodoro: 1,
+    },
+    createdAt: new Date().toISOString(),
+    isDefault: true,
+  },
+  {
+    id: 'developer',
+    name: 'Developer Dashboard',
+    description: 'GitHub, Hacker News, and dev tools',
+    enabledWidgets: ['weathermap', 'github', 'hackernews', 'recentnotes', 'shortcuts', 'calculator'],
+    widgetSizes: {
+      weathermap: 3,
+      github: 2,
+      hackernews: 2,
+      recentnotes: 1,
+      shortcuts: 1,
+      calculator: 1,
+    },
+    createdAt: new Date().toISOString(),
+    isDefault: true,
+  },
+  {
+    id: 'minimal',
+    name: 'Minimal',
+    description: 'Just the essentials',
+    enabledWidgets: ['weathermap', 'tasksquickadd'],
+    widgetSizes: {
+      weathermap: 3,
+      tasksquickadd: 3,
+    },
+    createdAt: new Date().toISOString(),
+    isDefault: true,
+  },
+];
+
+interface PresetManagerProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+/**
+ * Preset Manager Component
+ *
+ * Allows users to:
+ * - Save current layout as named preset
+ * - Load saved presets
+ * - Delete custom presets
+ * - Use default presets
+ * - Export/import presets as JSON
+ */
+export const PresetManager: React.FC<PresetManagerProps> = ({ isOpen, onClose }) => {
+  const [presets, setPresets] = useState<WidgetPreset[]>([]);
+  const [showSaveDialog, setShowSaveDialog] = useState(false);
+  const [presetName, setPresetName] = useState('');
+  const [presetDescription, setPresetDescription] = useState('');
+
+  const enabledWidgets = useWidgetStore((state) => state.enabledWidgets);
+  const widgetSizes = useWidgetStore((state) => state.widgetSizes);
+  const reorderWidgets = useWidgetStore((state) => state.reorderWidgets);
+  const setWidgetSize = useWidgetStore((state) => state.setWidgetSize);
+  const enableWidget = useWidgetStore((state) => state.enableWidget);
+  const disableWidget = useWidgetStore((state) => state.disableWidget);
+
+  // Load presets from localStorage on mount
+  useEffect(() => {
+    const saved = localStorage.getItem('dashboard-presets');
+    if (saved) {
+      try {
+        const customPresets = JSON.parse(saved) as WidgetPreset[];
+        setPresets([...DEFAULT_PRESETS, ...customPresets]);
+      } catch (error) {
+        console.error('Failed to load presets:', error);
+        setPresets(DEFAULT_PRESETS);
+      }
+    } else {
+      setPresets(DEFAULT_PRESETS);
+    }
+  }, []);
+
+  const savePreset = () => {
+    if (!presetName.trim()) return;
+
+    const newPreset: WidgetPreset = {
+      id: Date.now().toString(),
+      name: presetName,
+      description: presetDescription || undefined,
+      enabledWidgets: [...enabledWidgets],
+      widgetSizes: { ...widgetSizes },
+      createdAt: new Date().toISOString(),
+      isDefault: false,
+    };
+
+    const customPresets = presets.filter((p) => !p.isDefault);
+    const updatedCustom = [...customPresets, newPreset];
+    localStorage.setItem('dashboard-presets', JSON.stringify(updatedCustom));
+
+    setPresets([...DEFAULT_PRESETS, ...updatedCustom]);
+    setShowSaveDialog(false);
+    setPresetName('');
+    setPresetDescription('');
+  };
+
+  const loadPreset = (preset: WidgetPreset) => {
+    // Disable all current widgets
+    enabledWidgets.forEach((widgetId) => {
+      disableWidget(widgetId);
+    });
+
+    // Enable preset widgets in order
+    preset.enabledWidgets.forEach((widgetId) => {
+      enableWidget(widgetId);
+    });
+
+    // Set widget sizes
+    Object.entries(preset.widgetSizes).forEach(([widgetId, size]) => {
+      setWidgetSize(widgetId, size);
+    });
+
+    // Reorder to match preset
+    reorderWidgets(preset.enabledWidgets);
+
+    onClose();
+  };
+
+  const deletePreset = (presetId: string) => {
+    const customPresets = presets.filter((p) => !p.isDefault && p.id !== presetId);
+    localStorage.setItem('dashboard-presets', JSON.stringify(customPresets));
+    setPresets([...DEFAULT_PRESETS, ...customPresets]);
+  };
+
+  const exportPreset = (preset: WidgetPreset) => {
+    const json = JSON.stringify(preset, null, 2);
+    const blob = new Blob([json], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${preset.name.replace(/\s+/g, '-').toLowerCase()}-preset.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const importPreset = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    try {
+      const text = await file.text();
+      const preset = JSON.parse(text) as WidgetPreset;
+
+      // Validate preset structure
+      if (!preset.name || !preset.enabledWidgets || !preset.widgetSizes) {
+        alert('Invalid preset file format');
+        return;
+      }
+
+      // Generate new ID and timestamp
+      preset.id = Date.now().toString();
+      preset.createdAt = new Date().toISOString();
+      preset.isDefault = false;
+
+      const customPresets = presets.filter((p) => !p.isDefault);
+      const updatedCustom = [...customPresets, preset];
+      localStorage.setItem('dashboard-presets', JSON.stringify(updatedCustom));
+      setPresets([...DEFAULT_PRESETS, ...updatedCustom]);
+    } catch (error) {
+      console.error('Failed to import preset:', error);
+      alert('Failed to import preset. Please check the file format.');
+    }
+  };
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+      <div className="bg-surface-light dark:bg-surface-dark rounded-button shadow-2xl w-full max-w-2xl max-h-[80vh] overflow-hidden flex flex-col">
+        {/* Header */}
+        <div className="flex items-center justify-between p-6 border-b border-border-light dark:border-border-dark">
+          <h2 className="text-xl font-semibold text-text-light-primary dark:text-text-dark-primary">
+            Layout Presets
+          </h2>
+          <button
+            onClick={onClose}
+            className="text-text-light-secondary dark:text-text-dark-secondary hover:text-text-light-primary dark:hover:text-text-dark-primary"
+            aria-label="Close preset manager"
+          >
+            ✕
+          </button>
+        </div>
+
+        {/* Content */}
+        <div className="flex-1 overflow-y-auto p-6">
+          {/* Save Current Layout Button */}
+          <div className="mb-6">
+            <button
+              onClick={() => setShowSaveDialog(true)}
+              className="w-full px-4 py-3 bg-accent-blue dark:bg-accent-cyan hover:bg-accent-blue-hover dark:hover:bg-accent-cyan-hover text-white rounded-button font-medium transition-all duration-standard ease-smooth"
+            >
+              💾 Save Current Layout
+            </button>
+          </div>
+
+          {/* Save Dialog */}
+          {showSaveDialog && (
+            <div className="mb-6 p-4 bg-surface-light-elevated dark:bg-surface-dark-elevated rounded-button border border-border-light dark:border-border-dark">
+              <h3 className="text-lg font-medium text-text-light-primary dark:text-text-dark-primary mb-3">
+                Save Current Layout
+              </h3>
+              <input
+                type="text"
+                value={presetName}
+                onChange={(e) => setPresetName(e.target.value)}
+                placeholder="Preset name (e.g., My Workflow)"
+                className="w-full px-3 py-2 mb-3 bg-white dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-buttontext-text-light-primary dark:text-text-dark-primary"
+              />
+              <textarea
+                value={presetDescription}
+                onChange={(e) => setPresetDescription(e.target.value)}
+                placeholder="Description (optional)"
+                rows={2}
+                className="w-full px-3 py-2 mb-3 bg-white dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-buttontext-text-light-primary dark:text-text-dark-primary"
+              />
+              <div className="flex gap-2">
+                <button
+                  onClick={savePreset}
+                  disabled={!presetName.trim()}
+                  className="px-4 py-2 bg-accent-blue dark:bg-accent-cyan hover:bg-accent-blue-hover dark:hover:bg-accent-cyan-hover text-white rounded-buttonfont-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  Save
+                </button>
+                <button
+                  onClick={() => {
+                    setShowSaveDialog(false);
+                    setPresetName('');
+                    setPresetDescription('');
+                  }}
+                  className="px-4 py-2 bg-neutral-200 dark:bg-neutral-700 hover:bg-neutral-300 dark:hover:bg-neutral-600 text-text-light-primary dark:text-text-dark-primary rounded-buttonfont-medium"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Import Preset Button */}
+          <div className="mb-6">
+            <label className="block w-full px-4 py-3 bg-neutral-200 dark:bg-neutral-700 hover:bg-neutral-300 dark:hover:bg-neutral-600 text-text-light-primary dark:text-text-dark-primary rounded-button font-medium transition-all duration-standard ease-smooth cursor-pointer text-center">
+              📥 Import Preset
+              <input
+                type="file"
+                accept=".json"
+                onChange={importPreset}
+                className="hidden"
+              />
+            </label>
+          </div>
+
+          {/* Preset List */}
+          <div className="space-y-3">
+            <h3 className="text-sm font-medium text-text-light-secondary dark:text-text-dark-secondary uppercase">
+              Available Presets
+            </h3>
+            {presets.map((preset) => (
+              <div
+                key={preset.id}
+                className="p-4 bg-surface-light-elevated dark:bg-surface-dark-elevated rounded-button border border-border-light dark:border-border-dark"
+              >
+                <div className="flex items-start justify-between mb-2">
+                  <div className="flex-1">
+                    <h4 className="text-base font-medium text-text-light-primary dark:text-text-dark-primary">
+                      {preset.name}
+                      {preset.isDefault && (
+                        <span className="ml-2 text-xs px-2 py-0.5 bg-accent-blue/20 dark:bg-accent-cyan/20 text-accent-blue dark:text-accent-cyan rounded">
+                          Default
+                        </span>
+                      )}
+                    </h4>
+                    {preset.description && (
+                      <p className="text-sm text-text-light-secondary dark:text-text-dark-secondary mt-1">
+                        {preset.description}
+                      </p>
+                    )}
+                    <p className="text-xs text-text-light-secondary dark:text-text-dark-secondary mt-1">
+                      {preset.enabledWidgets.length} widgets
+                    </p>
+                  </div>
+                </div>
+                <div className="flex gap-2 mt-3">
+                  <button
+                    onClick={() => loadPreset(preset)}
+                    className="px-3 py-1.5 bg-accent-blue dark:bg-accent-cyan hover:bg-accent-blue-hover dark:hover:bg-accent-cyan-hover text-white rounded-buttontext-sm font-medium"
+                  >
+                    Load
+                  </button>
+                  <button
+                    onClick={() => exportPreset(preset)}
+                    className="px-3 py-1.5 bg-neutral-200 dark:bg-neutral-700 hover:bg-neutral-300 dark:hover:bg-neutral-600 text-text-light-primary dark:text-text-dark-primary rounded-buttontext-sm font-medium"
+                  >
+                    Export
+                  </button>
+                  {!preset.isDefault && (
+                    <button
+                      onClick={() => deletePreset(preset.id)}
+                      className="px-3 py-1.5 bg-red-600 hover:bg-red-700 text-white rounded-buttontext-sm font-medium"
+                    >
+                      Delete
+                    </button>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};

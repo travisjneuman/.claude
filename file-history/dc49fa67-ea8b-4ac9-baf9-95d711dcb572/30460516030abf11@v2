@@ -1,0 +1,309 @@
+import React, { useEffect, useState } from 'react';
+import { Widget } from '../components/Widget';
+import { useWeatherStore } from '../stores/useWeatherStore';
+import { useSettingsStore, formatTemperature } from '../stores/useSettingsStore';
+import { getWeatherIcon } from '../utils/weatherCodes';
+import { logger } from '../services/logger';
+import type { WeatherData } from '../types';
+
+const log = logger.module('Weather');
+
+/**
+ * Weather Widget - Real-time weather using Open-Meteo API
+ *
+ * Features:
+ * - Auto-location via browser geolocation
+ * - Manual city input with geocoding
+ * - Current conditions + 5-day forecast
+ * - Auto-refresh every 30 minutes
+ * - Free API with no authentication required
+ */
+export const Weather: React.FC = () => {
+  const {
+    city,
+    coords,
+    weatherData,
+    loading,
+    error,
+    useGeolocation,
+    setCity,
+    setCoords,
+    setWeatherData,
+    setLoading,
+    setError,
+    setUseGeolocation,
+  } = useWeatherStore();
+
+  // Get temperature unit preference
+  const temperatureUnit = useSettingsStore((state) => state.temperatureUnit);
+
+  const [cityInput, setCityInput] = useState(city);
+  const [showCityInput, setShowCityInput] = useState(!useGeolocation);
+
+  // Fetch weather on mount and coords change
+  useEffect(() => {
+    fetchWeather();
+
+    // Also update city name via reverse geocoding when coords change
+    reverseGeocode(coords.lat, coords.lng).then((cityName) => {
+      if (cityName) setCity(cityName);
+    });
+
+    // Auto-refresh every 30 minutes
+    const interval = setInterval(fetchWeather, 30 * 60 * 1000);
+    return () => clearInterval(interval);
+  }, [coords.lat, coords.lng]);
+
+  // Get user's location on mount if using geolocation
+  useEffect(() => {
+    if (useGeolocation && !city) {
+      getUserLocation();
+    }
+  }, []);
+
+  const getUserLocation = async () => {
+    if (!navigator.geolocation) {
+      setError('Geolocation not supported by your browser');
+      setUseGeolocation(false);
+      return;
+    }
+
+    setLoading(true);
+    setError(null);
+
+    navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        const coords = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        };
+        setCoords(coords);
+
+        // Reverse geocode to get city name
+        const cityName = await reverseGeocode(coords.lat, coords.lng);
+        if (cityName) setCity(cityName);
+
+        setLoading(false);
+      },
+      (error) => {
+        log.error('Geolocation error', { error });
+        setError('Could not get your location. Please enter city manually.');
+        setUseGeolocation(false);
+        setShowCityInput(true);
+        setLoading(false);
+      }
+    );
+  };
+
+  const reverseGeocode = async (lat: number, lng: number): Promise<string | null> => {
+    try {
+      const response = await fetch(
+        `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=10`
+      );
+      const data = await response.json();
+      return data.address?.city || data.address?.town || data.address?.village || data.display_name;
+    } catch (error) {
+      log.error('Reverse geocoding failed', { error });
+      return null;
+    }
+  };
+
+  const geocodeCity = async (cityName: string): Promise<{ lat: number; lng: number } | null> => {
+    try {
+      const response = await fetch(
+        `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(cityName)}&limit=1`
+      );
+      const data = await response.json();
+      if (data.length === 0) return null;
+
+      return {
+        lat: parseFloat(data[0].lat),
+        lng: parseFloat(data[0].lon),
+      };
+    } catch (error) {
+      log.error('Geocoding failed', { error });
+      return null;
+    }
+  };
+
+  const fetchWeather = async () => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      // Open-Meteo API - free weather data
+      const response = await fetch(
+        `https://api.open-meteo.com/v1/forecast?latitude=${coords.lat}&longitude=${coords.lng}&current=temperature_2m,apparent_temperature,relative_humidity_2m,weather_code,wind_speed_10m,precipitation_probability&daily=weather_code,temperature_2m_max,temperature_2m_min&temperature_unit=fahrenheit&wind_speed_unit=mph&timezone=auto&forecast_days=5`
+      );
+
+      if (!response.ok) throw new Error('Weather API request failed');
+
+      const data = await response.json();
+
+      const weather: WeatherData = {
+        location: city || 'Unknown Location',
+        temp: Math.round(data.current.temperature_2m),
+        feelsLike: Math.round(data.current.apparent_temperature),
+        desc: getWeatherDescription(data.current.weather_code),
+        humidity: data.current.relative_humidity_2m,
+        windSpeed: Math.round(data.current.wind_speed_10m),
+        precipProbability: data.current.precipitation_probability ?? 0,
+        icon: getWeatherIcon(data.current.weather_code),
+      };
+
+      setWeatherData(weather);
+      setLoading(false);
+    } catch (err) {
+      log.error('Weather fetch error', { error: err });
+      setError('Failed to fetch weather data');
+      setLoading(false);
+    }
+  };
+
+  const handleCitySubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!cityInput.trim()) return;
+
+    setLoading(true);
+    setError(null);
+
+    const coords = await geocodeCity(cityInput.trim());
+    if (!coords) {
+      setError(`Could not find city "${cityInput}". Please try again.`);
+      setLoading(false);
+      return;
+    }
+
+    setCity(cityInput.trim());
+    setCoords(coords);
+    setUseGeolocation(false);
+    setShowCityInput(false);
+  };
+
+  // Show loading state only during initial load (no cached data)
+  const isInitialLoading = loading && !weatherData;
+
+  return (
+    <Widget
+      id="weather"
+      title="Weather"
+      category="Information"
+      loading={isInitialLoading}
+      error={!weatherData && error ? error : null}
+      onRefresh={fetchWeather}
+    >
+      <div className="weather-widget h-full flex flex-col p-4">
+        {/* Location Controls */}
+        <div className="mb-4">
+          {showCityInput ? (
+            <form onSubmit={handleCitySubmit} className="flex gap-2">
+              <input
+                type="text"
+                value={cityInput}
+                onChange={(e) => setCityInput(e.target.value)}
+                placeholder="Enter city name..."
+                className="flex-1 px-3 py-2 text-sm border border-neutral-300 dark:border-neutral-600 rounded bg-white dark:bg-neutral-700 text-text-light-primary dark:text-text-dark-primary focus:outline-none focus:ring-2 focus:ring-accent-cyan"
+              />
+              <button
+                type="submit"
+                className="px-4 py-2 text-sm bg-primary-cyan text-white rounded hover:opacity-80"
+                disabled={loading}
+              >
+                {loading ? '...' : 'Go'}
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setShowCityInput(false);
+                  getUserLocation();
+                }}
+                className="px-3 py-2 text-sm bg-neutral-300 dark:bg-neutral-600 text-text-light-secondary dark:text-text-dark-secondary rounded hover:opacity-80"
+                title="Use my location"
+              >
+                📍
+              </button>
+            </form>
+          ) : (
+            <button
+              onClick={() => setShowCityInput(true)}
+              className="text-sm text-text-light-secondary dark:text-text-dark-secondary hover:text-accent-cyan transition-colors"
+            >
+              📍 {city || 'Set Location'} ✏️
+            </button>
+          )}
+        </div>
+
+        {/* Inline error for location search failures (when we have cached data) */}
+        {error && weatherData && (
+          <div className="mb-4 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded text-sm text-red-700 dark:text-red-400">
+            {error}
+          </div>
+        )}
+
+        {/* Weather Display */}
+        {weatherData && (
+          <div className="flex-1">
+            {/* Current Conditions */}
+            <div className="text-center mb-6">
+              <div className="text-6xl mb-2">{weatherData.icon}</div>
+              <div className="text-4xl font-bold text-text-light-primary dark:text-text-dark-primary mb-1">
+                {formatTemperature(weatherData.temp, temperatureUnit)}
+              </div>
+              <div className="text-lg text-text-light-secondary dark:text-text-dark-secondary mb-4">
+                {weatherData.desc}
+              </div>
+
+              {/* Weather Details */}
+              <div className="grid grid-cols-2 gap-4 text-sm">
+                <div className="bg-neutral-100 dark:bg-neutral-700 rounded-lg p-3">
+                  <div className="text-text-light-secondary dark:text-text-dark-secondary mb-1">Humidity</div>
+                  <div className="text-xl font-semibold text-text-light-primary dark:text-text-dark-primary">
+                    {weatherData.humidity}%
+                  </div>
+                </div>
+                <div className="bg-neutral-100 dark:bg-neutral-700 rounded-lg p-3">
+                  <div className="text-text-light-secondary dark:text-text-dark-secondary mb-1">Wind Speed</div>
+                  <div className="text-xl font-semibold text-text-light-primary dark:text-text-dark-primary">
+                    {weatherData.windSpeed} mph
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </Widget>
+  );
+};
+
+// Weather code to description mapping
+function getWeatherDescription(code: number): string {
+  const descriptions: Record<number, string> = {
+    0: 'Clear Sky',
+    1: 'Mainly Clear',
+    2: 'Partly Cloudy',
+    3: 'Overcast',
+    45: 'Foggy',
+    48: 'Depositing Rime Fog',
+    51: 'Light Drizzle',
+    53: 'Moderate Drizzle',
+    55: 'Dense Drizzle',
+    61: 'Slight Rain',
+    63: 'Moderate Rain',
+    65: 'Heavy Rain',
+    71: 'Slight Snow',
+    73: 'Moderate Snow',
+    75: 'Heavy Snow',
+    77: 'Snow Grains',
+    80: 'Slight Rain Showers',
+    81: 'Moderate Rain Showers',
+    82: 'Violent Rain Showers',
+    85: 'Slight Snow Showers',
+    86: 'Heavy Snow Showers',
+    95: 'Thunderstorm',
+    96: 'Thunderstorm with Slight Hail',
+    99: 'Thunderstorm with Heavy Hail',
+  };
+
+  return descriptions[code] || 'Unknown';
+}

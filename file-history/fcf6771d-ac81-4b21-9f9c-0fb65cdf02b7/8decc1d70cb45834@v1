@@ -1,0 +1,41 @@
+# Notes Layout Fixes
+
+## Overview
+Fix visual and UX issues in the 3 Notes page layouts identified from user screenshots.
+
+## Issues Identified
+1. **Vertical space not being used**: All 3 layouts (Three-column, File Tree, Tabbed Sidebar) have editors not filling the full viewport vertically
+2. **Items mushing together**: When dragging sidebars to small sizes in three-column layout, content collapses improperly
+3. **Wrong default layout**: File Tree should be the default, not Three-column
+4. **Inconsistent sidebar toggle button position**: When sidebar is open, collapse button is at top; when collapsed, expand button moves to center - should remain at top in both states
+
+## Files Modified
+- `src/pages/Notes.tsx` - Added `variant="full-height"` to PageContent
+- `src/widgets/NotesEditor.tsx` - Changed `h-full` to `flex-1 min-h-0`
+- `src/stores/useSettingsStore.ts` - Changed default layout from 'three-column' to 'file-tree'
+- `src/components/notes/ThreeColumnLayout.tsx` - Fixed collapsed button positioning, added minimum widths
+- `src/components/notes/FileTreeLayout.tsx` - Same fixes as ThreeColumnLayout
+- `src/components/notes/TabbedSidebarLayout.tsx` - Same fixes as ThreeColumnLayout
+
+## Checklist
+- [x] Fix vertical space - editor not filling viewport in all 3 layouts
+- [x] Add minimum widths to prevent columns from collapsing too small
+- [x] Change default layout from three-column to file-tree
+- [x] Fix sidebar toggle button position - keep at top when collapsed
+
+## Review
+**What Changed:**
+- PageContent now uses `variant="full-height"` for proper flexbox behavior
+- NotesEditor uses `flex-1 min-h-0` instead of `h-full` for flex container compatibility
+- Default layout changed to 'file-tree' (Obsidian/VS Code style)
+- Collapsed buttons wrapped in flex-col container to stay at top
+- Columns enforce minimum widths (160px folders, 200px notes, 220px sidebar)
+- Added `min-w-0 overflow-hidden` to prevent content overflow
+
+**Verification:**
+- Type check: Passed
+- Tests: 221/221 passed
+- Build: Succeeded (32.28s)
+
+## Status
+COMPLETE - 2025-12-14

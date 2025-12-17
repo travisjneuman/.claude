@@ -1,0 +1,89 @@
+import React from 'react';
+import { Modal } from './Modal';
+
+interface RecurringEventDialogProps {
+  isOpen: boolean;
+  onClose: () => void;
+  onThisEvent: () => void;
+  onAllEvents: () => void;
+  action: 'edit' | 'delete';
+  eventTitle: string;
+}
+
+/**
+ * RecurringEventDialog - Choice dialog for recurring events
+ * User selects whether to modify this instance or all instances
+ */
+export const RecurringEventDialog: React.FC<RecurringEventDialogProps> = ({
+  isOpen,
+  onClose,
+  onThisEvent,
+  onAllEvents,
+  action,
+  eventTitle,
+}) => {
+  const handleThisEvent = () => {
+    onThisEvent();
+    onClose();
+  };
+
+  const handleAllEvents = () => {
+    onAllEvents();
+    onClose();
+  };
+
+  const title = action === 'edit' ? 'Edit Recurring Event' : 'Delete Recurring Event';
+  const icon = action === 'edit' ? '✏️' : '🗑️';
+
+  return (
+    <Modal isOpen={isOpen} onClose={onClose} title={title} maxWidth="md">
+      <div className="space-y-4">
+        {/* Icon + Message */}
+        <div className="flex items-start gap-4">
+          <div className="flex-shrink-0 text-3xl">{icon}</div>
+          <div className="flex-1">
+            <p className="text-text-light-primary dark:text-text-dark-primary font-medium mb-2">
+              "{eventTitle}"
+            </p>
+            <p className="text-text-light-secondary dark:text-text-dark-secondary">
+              This is a recurring event. Would you like to {action} only this occurrence, or all events in the series?
+            </p>
+          </div>
+        </div>
+
+        {/* Action Buttons */}
+        <div className="flex flex-col gap-3 pt-2">
+          <button
+            onClick={handleThisEvent}
+            className="w-full px-4 py-3 rounded-lg bg-accent-blue hover:bg-accent-blue-hover text-white font-medium transition-all duration-200 text-left"
+          >
+            <div className="font-semibold">This event only</div>
+            <div className="text-sm opacity-90 mt-1">
+              {action === 'edit'
+                ? 'Modify only this occurrence'
+                : 'Delete only this occurrence'}
+            </div>
+          </button>
+          <button
+            onClick={handleAllEvents}
+            className="w-full px-4 py-3 rounded-lg bg-accent-magenta hover:bg-accent-magenta-hover text-white font-medium transition-all duration-200 text-left"
+          >
+            <div className="font-semibold">All events in series</div>
+            <div className="text-sm opacity-90 mt-1">
+              {action === 'edit'
+                ? 'Modify all recurring events'
+                : 'Delete all recurring events'}
+            </div>
+          </button>
+          <button
+            onClick={onClose}
+            className="w-full px-4 py-2 rounded-lg border border-border-light dark:border-border-dark text-text-light-secondary dark:text-text-dark-secondary hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated transition-all duration-200"
+            autoFocus
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    </Modal>
+  );
+};

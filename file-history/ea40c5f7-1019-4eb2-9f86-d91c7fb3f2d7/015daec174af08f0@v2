@@ -1,0 +1,207 @@
+<objective>
+Create comprehensive integration documentation that teaches developers and Claude Code sessions how to optimally use taches-cc-resources features within the Neuman Brain project workflow.
+
+This guide bridges the gap between the audit (what exists) and practical application (how to use it), providing concrete examples, best practices, and integration patterns specific to this codebase.
+</objective>
+
+<context>
+This prompt depends on completion of prompt 001-audit-tache-features.md.
+
+**Input**: Read the completed audit document at ./docs/technical/tache-features-audit.md
+
+The Neuman Brain project has specific workflows documented in:
+- CLAUDE.md (root project instructions)
+- .claude/workflow-checklist.md (session protocols)
+- .claude/automation-guide.md (automation patterns)
+- Folder-specific CLAUDE.md files (domain-specific conventions)
+
+The integration guide must align with existing project conventions while introducing tache features as workflow enhancements, not replacements.
+</context>
+
+<requirements>
+Create a comprehensive integration guide that:
+
+1. **Explains the 'Why'**: For each tache feature, explain why it exists and what problem it solves in the context of Neuman Brain development
+
+2. **Provides Concrete Examples**: Show real-world usage examples specific to this project:
+   - Creating a new widget → which tache features help?
+   - Debugging a complex issue → which frameworks apply?
+   - Planning a feature → which workflow to use?
+   - Reviewing code → which auditors to invoke?
+
+3. **Documents Workflows**: Map common development tasks to tache feature workflows:
+   - Solo development workflow
+   - Code review workflow
+   - Feature development workflow
+   - Debugging workflow
+   - Documentation workflow
+
+4. **Establishes Conventions**: Create project-specific conventions for:
+   - When to use skills vs slash commands
+   - How to structure prompts for this codebase
+   - Naming conventions for created prompts/plans
+   - Where to save outputs (plans, prompts, analyses)
+
+5. **Provides Decision Trees**: Help developers choose the right tool:
+   - "I need to..." → use this tache feature
+   - Feature selection flowcharts
+   - Troubleshooting guides
+
+6. **Integrates with Existing Patterns**: Show how tache features complement:
+   - Task-driven development (tasks/*.md)
+   - Widget development guide
+   - Test specialist patterns
+   - Feature development workflows
+</requirements>
+
+<structure>
+Create the integration guide at: `./docs/technical/tache-integration-guide.md`
+
+Use this structure:
+
+# Taches-CC-Resources Integration Guide
+## Introduction
+### What is taches-cc-resources?
+### Why integrate it into Neuman Brain?
+### How this guide is organized
+
+## Part 1: Quick Start
+### Your First Tache Workflow
+[Step-by-step example of a complete workflow]
+
+### Essential Features (80/20 rule)
+[The 20% of features you'll use 80% of the time]
+
+### Integration Checklist
+[Quick checklist for using tache features in daily work]
+
+## Part 2: Feature Deep Dive
+### Skills
+[For each skill, provide: purpose, scenarios, examples, integration with project workflows]
+
+### Slash Commands
+[For each command category, provide: usage patterns, examples, when to use vs alternatives]
+
+### Subagents
+[For each agent, provide: specialization, example invocations, integration points]
+
+### Thinking Frameworks
+[For each /consider:* command, provide: framework explanation, example decisions, project-specific use cases]
+
+## Part 3: Workflows
+### Workflow 1: Feature Development
+**Scenario**: Adding a new dashboard widget
+**Tache features used**: [list]
+**Steps**: [detailed workflow]
+**Example**: [concrete example with actual commands]
+
+[Repeat for each core workflow]
+
+### Workflow Comparison Matrix
+[Table comparing different approaches and when to use each]
+
+## Part 4: Integration Patterns
+### Pattern 1: [Pattern Name]
+**Problem**: [what problem this solves]
+**Solution**: [how tache features solve it]
+**Implementation**: [concrete steps]
+**Example**: [real example]
+
+[Repeat for each pattern]
+
+## Part 5: Best Practices
+### Do's and Don'ts
+### Performance Considerations
+### Common Pitfalls
+### Advanced Techniques
+
+## Part 6: Reference
+### Feature Decision Tree
+[Flowchart: I need to... → use this feature]
+
+### Command Quick Reference
+[Cheat sheet of most common commands]
+
+### Folder Integration Map
+[Which tache features are relevant to which folders]
+
+### Further Reading
+[Links to audit, skills documentation, etc.]
+</structure>
+
+<writing_guidelines>
+- **Be specific**: Use Neuman Brain examples, not generic ones
+- **Be practical**: Focus on real workflows developers will use
+- **Be comprehensive**: Cover beginner to advanced usage
+- **Be clear**: Explain the 'why' behind conventions, not just 'what'
+- **Cross-reference**: Link to relevant project docs (CLAUDE.md, widget guide, etc.)
+- **Use examples**: Every section should have at least one concrete example
+- **Think workflows**: Organize by developer tasks, not just feature lists
+</writing_guidelines>
+
+<examples>
+Include examples such as:
+
+**Example 1: Creating a New Analytics Widget**
+```
+Developer goal: Build a new "AI Usage Analytics" widget
+
+Step 1: Use /create-plan to create a phase plan
+/create-plan AI Usage Analytics widget with chart visualization
+
+Step 2: Review plan, then use /run-plan to execute
+/run-plan .planning/phases/[number]-ai-analytics/PLAN.md
+
+Step 3: After implementation, use skill-auditor on the widget
+/audit-skill .claude/skills/neuman-brain-feature-developer
+
+Step 4: Create prompts for documentation
+/create-prompt Document the new AI Analytics widget API and usage patterns
+```
+
+**Example 2: Debugging a Complex Store Issue**
+```
+Issue: Zustand store persistence failing inconsistently
+
+Step 1: Use debug-like-expert skill
+/debug Zustand persistence intermittent failures in timeTrackingStore
+
+Step 2: Apply thinking framework to analyze root cause
+/consider:5-whys Why is persistence failing?
+
+Step 3: Create verification prompts
+/create-prompt Verify all Zustand stores follow persistence best practices
+```
+
+[Provide 6-10 such examples covering different scenarios]
+</examples>
+
+<verification>
+Before declaring complete, ensure:
+
+1. ✓ All major tache features are covered with examples
+2. ✓ At least 6 complete workflow examples are documented
+3. ✓ Decision trees help developers choose the right tool
+4. ✓ Examples use actual Neuman Brain project context (widgets, stores, etc.)
+5. ✓ Integration with existing CLAUDE.md conventions is clear
+6. ✓ Both beginner and advanced usage patterns are covered
+7. ✓ Cross-references to other project docs are accurate
+8. ✓ Guide is actionable (developers can immediately apply it)
+</verification>
+
+<output>
+Save the integration guide to: `./docs/technical/tache-integration-guide.md`
+
+This guide will be used as the reference when updating CLAUDE.md files in the next prompt.
+</output>
+
+<success_criteria>
+- Comprehensive guide that covers all tache features with project-specific examples
+- Clear workflows mapping common tasks to tache features
+- Decision trees and quick reference for feature selection
+- Integration patterns documented with concrete implementations
+- Best practices established for this codebase
+- Examples use actual Neuman Brain contexts (widgets, stores, pages, etc.)
+- Guide is immediately actionable by developers and Claude Code sessions
+- Document saved to ./docs/technical/tache-integration-guide.md
+</success_criteria>

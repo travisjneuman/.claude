@@ -1,0 +1,377 @@
+# AI Provider Integration Guide
+
+**Last Updated:** November 19, 2025
+**Status:** ✅ Active
+**Source:** Validated from codebase audit + Gemini analysis
+
+---
+
+## Overview
+
+This guide outlines the standard procedure for integrating new AI providers into the Neuman Brain ecosystem. Our architecture uses a unified `AIProvider` interface to ensure consistency, security, and error handling across all AI services.
+
+## Current Architecture
+
+**Location:** `src/services/ai/`
+
+**Core Files:**
+- **`types.ts`** - Defines the `AIProvider` interface and shared types
+- **`providerRouter.ts`** - Handles fallback logic and provider selection
+- **`[providerName]Provider.ts`** - Individual provider implementations
+
+**Supported Providers (8 total):**
+1. OpenRouter - 200+ models, free tier (primary)
+2. Groq - Fast inference
+3. HuggingFace - Open-source models
+4. Mistral - European AI, GDPR compliant
+5. Gemini - Google AI, 1M token context
+6. OpenAI - GPT-4o, o1 models
+7. Anthropic - Claude 3.5 Sonnet
+8. xAI - Grok models
+
+---
+
+## Adding a New Provider
+
+### Step 1: Define the Provider
+
+Create a new file: `src/services/ai/[providerName]Provider.ts`
+
+**Template:**
+```typescript
+import { AIProvider, AIModel, AIMessageOptions, AIResponse } from './types';
+import { ProviderError, ProviderErrorType } from './types';
+
+// Define available models
+const MODELS: AIModel[] = [
+  {
+    id: 'model-id',
+    name: 'Model Display Name',
+    provider: 'my-provider',
+    speedRating: 4, // 1-5 (1=slow, 5=lightning fast)
+    qualityRating: 4, // 1-5 (1=basic, 5=excellent)
+    contextWindow: 128000, // Max tokens
+    maxOutputTokens: 4096,
+    supportsStreaming: true,
+    supportsVision: false,
+    supportsFunctionCalling: true,
+    isFree: true, // Available on free tier?
+    costPer1MTokens: 0.01, // Cost if paid
+    requiresApiKey: true,
+    useCases: ['chat', 'code', 'reasoning'], // Use case tags
+    description: 'Brief description of model strengths',
+  },
+];
+
+// Provider implementation
+export const myNewProvider: AIProvider = {
+  metadata: {
+    id: 'my-provider',
+    name: 'My Provider',
+    displayName: 'My Provider AI',
+    description: 'Description of the provider',
+    requiresApiKey: true,
+    apiKeyUrl: 'https://provider.com/api-keys',
+    apiKeyLabel: 'My Provider API Key',
+    hasFreeModels: true,
+    freeModelIds: ['free-model-id'],
+    freeTierLimits: {
+      requestsPerMinute: 10,
+      requestsPerDay: 100,
+      tokensPerMinute: 10000,
+      description: '10 req/min, 100 req/day (free tier)',
+    },
+    supportsCORS: true, // Can be called from browser?
+    requiresProxy: false,
+    supportsStreaming: true,
+    websiteUrl: 'https://provider.com',
+    docsUrl: 'https://provider.com/docs',
+  },
+
+  models: MODELS,
+
+  // API key stored in IndexedDB (AES-256-GCM encrypted)
+  isConfigured(): boolean {
+    const { useTerminalStore } = require('../../stores/useTerminalStore');
+    const providers = useTerminalStore.getState().providers;
+    return providers['my-provider']?.apiKey !== undefined;
+  },
+
+  setApiKey(apiKey: string): void {
+    const { useTerminalStore } = require('../../stores/useTerminalStore');
+    useTerminalStore.getState().setProviderApiKey('my-provider', apiKey);
+  },
+
+  getApiKey(): string | null {
+    const { useTerminalStore } = require('../../stores/useTerminalStore');
+    const providers = useTerminalStore.getState().providers;
+    return providers['my-provider']?.apiKey || null;
+  },
+
+  clearApiKey(): void {
+    const { useTerminalStore } = require('../../stores/useTerminalStore');
+    useTerminalStore.getState().clearProviderApiKey('my-provider');
+  },
+
+  async validateApiKey(apiKey: string): Promise<boolean> {
+    try {
+      // Make a test API call to validate the key
+      const response = await fetch('https://api.provider.com/v1/models', {
+        headers: {
+          'Authorization': `Bearer ${apiKey}`,
+        },
+      });
+      return response.ok;
+    } catch {
+      return false;
+    }
+  },
+
+  getModel(modelId: string): AIModel | null {
+    return MODELS.find((m) => m.id === modelId) || null;
+  },
+
+  getDefaultModel(): AIModel {
+    return MODELS[0]; // Return first free model
+  },
+
+  getFreeModels(): AIModel[] {
+    return MODELS.filter((m) => m.isFree);
+  },
+
+  async sendMessage(modelId: string, options: AIMessageOptions): Promise<AIResponse> {
+    const apiKey = this.getApiKey();
+    if (!apiKey) {
+      throw new ProviderError(
+        ProviderErrorType.INVALID_API_KEY,
+        'API key required',
+        'my-provider',
+        false
+      );
+    }
+
+    try {
+      const response = await fetch('https://api.provider.com/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${apiKey}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          model: modelId,
+          messages: [
+            ...(options.systemPrompt ? [{ role: 'system', content: options.systemPrompt }] : []),
+            ...(options.conversationHistory || []),
+            { role: 'user', content: options.prompt },
+          ],
+          temperature: options.temperature || 0.7,
+          max_tokens: options.maxTokens || 2048,
+          stream: options.stream || false,
+        }),
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+
+        // Map provider errors to standard error types
+        if (response.status === 401) {
+          throw new ProviderError(
+            ProviderErrorType.INVALID_API_KEY,
+            'Invalid API key',
+            'my-provider',
+            false
+          );
+        } else if (response.status === 429) {
+          throw new ProviderError(
+            ProviderErrorType.RATE_LIMIT,
+            'Rate limit exceeded',
+            'my-provider',
+            true // Retryable
+          );
+        } else {
+          throw new ProviderError(
+            ProviderErrorType.UNKNOWN,
+            error.message || 'Provider error',
+            'my-provider',
+            false
+          );
+        }
+      }
+
+      const data = await response.json();
+
+      return {
+        content: data.choices[0].message.content,
+        model: modelId,
+        provider: 'my-provider',
+        finishReason: 'stop',
+        usage: {
+          promptTokens: data.usage?.prompt_tokens || 0,
+          completionTokens: data.usage?.completion_tokens || 0,
+          totalTokens: data.usage?.total_tokens || 0,
+        },
+      };
+    } catch (error) {
+      if (error instanceof ProviderError) {
+        throw error;
+      }
+      throw new ProviderError(
+        ProviderErrorType.NETWORK_ERROR,
+        error instanceof Error ? error.message : 'Network error',
+        'my-provider',
+        true // Network errors are retryable
+      );
+    }
+  },
+};
+```
+
+### Step 2: Register the Provider
+
+Update `src/services/ai/providerRouter.ts`:
+
+```typescript
+import { myNewProvider } from './myNewProvider';
+
+const PROVIDERS: Record<string, AIProvider> = {
+  openrouter: openRouterProvider,
+  groq: groqProvider,
+  huggingface: huggingFaceProvider,
+  mistral: mistralProvider,
+  gemini: geminiProvider,
+  openai: openaiProvider,
+  anthropic: anthropicProvider,
+  xai: xaiProvider,
+  'my-provider': myNewProvider, // Add here
+};
+```
+
+### Step 3: Update UI (Automatic)
+
+The UI automatically renders all registered providers:
+- `src/components/ProviderSettings.tsx` - Shows provider in settings
+- `src/components/ModelSelector.tsx` - Shows models in selector
+
+**No manual UI updates needed!**
+
+---
+
+## Security Requirements
+
+### API Key Storage
+
+**NEVER hardcode API keys.** All keys are:
+1. Encrypted using **AES-256-GCM** (WebCrypto API)
+2. Stored in **IndexedDB** (not localStorage)
+3. Password-protected with **PBKDF2** (100,000 iterations, SHA-256)
+4. Keys expire after 30 days (user must re-enter password)
+
+**Implementation:**
+```typescript
+// Keys stored in useTerminalStore via encrypted IndexedDB
+const { useTerminalStore } = require('../../stores/useTerminalStore');
+useTerminalStore.getState().setProviderApiKey('provider-id', apiKey);
+```
+
+### CORS & Privacy
+
+**Preferred:** Direct browser-to-API calls (Zero-Data-Host architecture)
+- No server proxy
+- User's API key stays on their device
+- Privacy-first approach
+
+**If CORS is an issue:**
+- User can configure their own proxy
+- **NEVER** use a central proxy (violates privacy model)
+
+---
+
+## Error Handling
+
+### Standard Error Types
+
+All providers must use `ProviderError` class:
+
+```typescript
+import { ProviderError, ProviderErrorType } from './types';
+
+// Error types:
+ProviderErrorType.INVALID_API_KEY  // 401 - API key invalid
+ProviderErrorType.RATE_LIMIT       // 429 - Rate limit exceeded (retryable)
+ProviderErrorType.QUOTA_EXCEEDED   // 429 - Quota exceeded (retryable)
+ProviderErrorType.MODEL_NOT_FOUND  // 404 - Model doesn't exist
+ProviderErrorType.NETWORK_ERROR    // Network/timeout (retryable)
+ProviderErrorType.TIMEOUT          // Request timeout (retryable)
+ProviderErrorType.UNKNOWN          // Other errors
+```
+
+### Auto-Fallback System
+
+The `AIProviderRouter` automatically falls back to alternative providers when:
+- Rate limit exceeded
+- Quota exceeded
+- Network errors
+- Timeouts
+
+**Fallback order (default):**
+1. OpenRouter (best flexibility)
+2. Groq (best speed)
+3. HuggingFace (free fallback)
+4. Mistral (European option)
+5. Gemini (Google fallback)
+
+**User is notified** when fallback occurs (configurable).
+
+---
+
+## Testing Checklist
+
+Before submitting a new provider integration:
+
+**Functionality:**
+- [ ] API key validation works
+- [ ] sendMessage returns correct response format
+- [ ] Error handling maps provider errors correctly
+- [ ] Free models identified correctly
+- [ ] Streaming works (if supported)
+
+**Security:**
+- [ ] No hardcoded API keys
+- [ ] Uses encrypted storage (useTerminalStore)
+- [ ] Validates API key before requests
+- [ ] Proper error messages (no sensitive data leaked)
+
+**UX:**
+- [ ] Provider appears in Settings > AI Terminal
+- [ ] Models appear in Model Selector
+- [ ] Free models marked correctly
+- [ ] Rate limits documented in metadata
+
+**Performance:**
+- [ ] No unnecessary API calls
+- [ ] Proper timeout handling
+- [ ] Streaming works smoothly (if supported)
+
+---
+
+## Related Documentation
+
+- **Type Definitions:** `src/services/ai/types.ts`
+- **Provider Router:** `src/services/ai/providerRouter.ts`
+- **AI Terminal UI:** `src/components/AITerminal.tsx`
+- **Encrypted Storage:** `src/stores/useTerminalStore.ts`
+- **Multi-Provider Terminal:** `docs/technical/multi_provider_ai_terminal.md` (if exists)
+
+---
+
+## Examples
+
+See existing providers for reference:
+- **Simple:** `src/services/ai/groqProvider.ts` (minimal implementation)
+- **Complex:** `src/services/ai/openRouterProvider.ts` (200+ models, advanced features)
+- **Streaming:** `src/services/ai/anthropicProvider.ts` (SSE streaming implementation)
+
+---
+
+**Last Validated:** November 19, 2025 (Gemini 3.0 Pro audit)
+**Codebase Version:** React 19.0, TypeScript 5.9

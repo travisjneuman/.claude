@@ -1,0 +1,56 @@
+# Claude Code Portable Template
+
+This folder contains portable assets that can be copied to any project workspace.
+
+## What's Included
+
+```
+portable-template/
+├── .claude/
+│   ├── commands/       # Custom slash commands
+│   ├── skills/         # Reusable skills (symlinked from global)
+│   ├── templates/      # Task templates
+│   └── settings.json   # Project settings template
+├── CLAUDE.md           # Project instructions template
+└── setup.ps1           # Windows setup script
+```
+
+## Usage
+
+### Option 1: Copy to Project (Fresh Start)
+```powershell
+# From your project root:
+cp -r ~/.claude/portable-template/.claude .
+cp ~/.claude/portable-template/CLAUDE.md .
+```
+
+### Option 2: Symlink Skills (Shared Updates)
+```powershell
+# From your project root:
+mkdir .claude
+# Copy commands (project-specific customization)
+cp -r ~/.claude/portable-template/.claude/commands .claude/
+# Symlink skills (shared across projects)
+New-Item -ItemType SymbolicLink -Path ".claude/skills" -Target "$env:USERPROFILE\.claude\skills"
+```
+
+### Option 3: Run Setup Script
+```powershell
+# From your project root:
+~/.claude/portable-template/setup.ps1 -ProjectPath .
+```
+
+## Customization
+
+After copying, customize these files for your project:
+1. `CLAUDE.md` - Add project-specific instructions, stack info, conventions
+2. `.claude/commands/` - Add project-specific slash commands
+3. `.claude/settings.json` - Configure permissions and plugins
+
+## What NOT to Copy
+
+These stay in `~/.claude/` (global):
+- `.claude.json` - Auth tokens, MCP servers
+- `history.jsonl` - Conversation history
+- `plans/` - Session-specific plans
+- `projects/` - Per-project state

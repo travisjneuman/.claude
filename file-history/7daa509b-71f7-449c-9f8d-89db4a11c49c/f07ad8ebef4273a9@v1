@@ -1,0 +1,308 @@
+---
+type: concept
+category: ai
+adoption: experimental
+aliases: [langgraph]
+related:
+  - "[[LLM]]"
+  - "[[Agentic AI]]"
+  - "[[Python]]"
+projects:
+  - "[[Projects/Archon]]"
+created: 2025-12-14
+updated: 2025-12-14
+---
+
+# LangGraph
+
+> Build stateful, multi-actor applications with LLMs. Create complex agent workflows using graph-based control flow.
+
+---
+
+## Overview
+
+LangGraph extends LangChain for building sophisticated agents:
+- **Graph-based workflows** — Nodes and edges define agent behavior
+- **State management** — Persistent state across conversation turns
+- **Human-in-the-loop** — Interrupt and resume workflows
+- **Streaming** — Real-time token and event streaming
+- **Checkpointing** — Save and restore conversation state
+
+### Why LangGraph?
+
+| Feature | Benefit |
+|---------|---------|
+| **Explicit control flow** | Predictable agent behavior |
+| **State persistence** | Memory across interactions |
+| **Cycles & branches** | Complex multi-step reasoning |
+| **Tool integration** | Call external APIs and functions |
+| **Debugging** | Visualize and trace execution |
+
+---
+
+## Usage in Our Stack
+
+### Archon — Agent Orchestration
+
+LangGraph defines the workflow for Archon's agent-building process:
+
+```python
+# archon/graph.py
+from langgraph.graph import StateGraph, END
+
+class AgentBuilderState(TypedDict):
+    requirements: str
+    analysis: str
+    tools: list[str]
+    config: dict
+    agent: Agent | None
+
+def analyze_requirements(state: AgentBuilderState):
+    """LLM analyzes user requirements."""
+    response = llm.invoke(f"Analyze: {state['requirements']}")
+    return {"analysis": response}
+
+def select_tools(state: AgentBuilderState):
+    """Select appropriate tools based on analysis."""
+    tools = tool_selector.select(state["analysis"])
+    return {"tools": tools}
+
+def generate_config(state: AgentBuilderState):
+    """Generate agent configuration."""
+    config = config_generator.create(
+        analysis=state["analysis"],
+        tools=state["tools"]
+    )
+    return {"config": config}
+
+# Build the graph
+builder = StateGraph(AgentBuilderState)
+builder.add_node("analyze", analyze_requirements)
+builder.add_node("tools", select_tools)
+builder.add_node("config", generate_config)
+
+builder.add_edge("analyze", "tools")
+builder.add_edge("tools", "config")
+builder.add_edge("config", END)
+
+builder.set_entry_point("analyze")
+graph = builder.compile()
+```
+
+---
+
+## Key Concepts
+
+### StateGraph
+
+Graphs manage state through TypedDict:
+
+```python
+from typing import TypedDict, Annotated
+from langgraph.graph import StateGraph
+
+class State(TypedDict):
+    messages: Annotated[list, add_messages]
+    context: str
+    result: str | None
+
+graph = StateGraph(State)
+```
+
+### Nodes
+
+Functions that process and update state:
+
+```python
+def process_node(state: State):
+    # Process state
+    result = do_something(state["context"])
+    # Return partial state update
+    return {"result": result}
+
+graph.add_node("process", process_node)
+```
+
+### Edges
+
+Define control flow:
+
+```python
+# Simple edge
+graph.add_edge("node_a", "node_b")
+
+# Conditional edge
+def router(state: State) -> str:
+    if state["result"]:
+        return "success"
+    return "retry"
+
+graph.add_conditional_edges(
+    "process",
+    router,
+    {"success": "finish", "retry": "process"}
+)
+
+# Entry and end
+graph.set_entry_point("start")
+graph.add_edge("finish", END)
+```
+
+---
+
+## Common Patterns
+
+### ReAct Agent
+
+Reason and Act loop:
+
+```python
+from langgraph.prebuilt import create_react_agent
+
+tools = [search_tool, calculator_tool]
+agent = create_react_agent(llm, tools)
+
+result = agent.invoke({"messages": [("user", "What's 2+2?")]})
+```
+
+### Tool Calling
+
+```python
+from langchain_core.tools import tool
+
+@tool
+def search(query: str) -> str:
+    """Search the web for information."""
+    return web_search(query)
+
+tools = [search]
+
+def call_model(state: State):
+    response = model.bind_tools(tools).invoke(state["messages"])
+    return {"messages": [response]}
+
+def call_tools(state: State):
+    last_message = state["messages"][-1]
+    results = []
+    for tool_call in last_message.tool_calls:
+        result = tools_by_name[tool_call["name"]].invoke(tool_call["args"])
+        results.append(ToolMessage(content=result, tool_call_id=tool_call["id"]))
+    return {"messages": results}
+```
+
+### Human-in-the-Loop
+
+```python
+from langgraph.checkpoint.memory import MemorySaver
+
+checkpointer = MemorySaver()
+graph = builder.compile(checkpointer=checkpointer, interrupt_before=["sensitive_action"])
+
+# Run until interrupt
+config = {"configurable": {"thread_id": "1"}}
+result = graph.invoke(input, config)
+
+# User reviews, then continue
+graph.invoke(None, config)  # Resume from checkpoint
+```
+
+### Streaming
+
+```python
+# Stream events
+async for event in graph.astream_events(input, version="v2"):
+    print(event)
+
+# Stream tokens
+async for chunk in graph.astream(input):
+    if "messages" in chunk:
+        print(chunk["messages"][-1].content, end="")
+```
+
+---
+
+## State Management
+
+### Reducers
+
+Define how state updates are merged:
+
+```python
+from langgraph.graph import add_messages
+
+class State(TypedDict):
+    # Messages are appended, not replaced
+    messages: Annotated[list, add_messages]
+    # This gets replaced
+    current_step: str
+```
+
+### Checkpointing
+
+Persist state to storage:
+
+```python
+# Memory (development)
+from langgraph.checkpoint.memory import MemorySaver
+checkpointer = MemorySaver()
+
+# SQLite (production)
+from langgraph.checkpoint.sqlite import SqliteSaver
+checkpointer = SqliteSaver.from_conn_string("state.db")
+
+graph = builder.compile(checkpointer=checkpointer)
+```
+
+---
+
+## Best Practices
+
+### Design
+
+1. **Keep nodes focused** — One responsibility per node
+2. **Use typed state** — TypedDict for type safety
+3. **Handle errors** — Add error nodes and fallback edges
+4. **Test components** — Unit test nodes independently
+
+### Performance
+
+1. **Async operations** — Use `ainvoke` for I/O-bound tasks
+2. **Streaming** — Provide feedback during long operations
+3. **Caching** — Cache expensive LLM calls when appropriate
+
+### Debugging
+
+```python
+# Visualize graph
+from IPython.display import Image
+Image(graph.get_graph().draw_mermaid_png())
+
+# Trace execution
+from langchain.callbacks import tracing_enabled
+with tracing_enabled():
+    result = graph.invoke(input)
+```
+
+---
+
+## Comparison
+
+| Feature | LangGraph | LangChain Agents | AutoGen |
+|---------|-----------|------------------|---------|
+| Control flow | Explicit graph | Implicit loop | Multi-agent |
+| State | First-class | Limited | Session-based |
+| Debugging | Visual graph | Verbose output | Message log |
+| Complexity | Medium | Low | High |
+
+---
+
+## Resources
+
+- [LangGraph Documentation](https://langchain-ai.github.io/langgraph/)
+- [Tutorials](https://langchain-ai.github.io/langgraph/tutorials/)
+- [How-to Guides](https://langchain-ai.github.io/langgraph/how-tos/)
+- [API Reference](https://langchain-ai.github.io/langgraph/reference/)
+
+---
+
+*Last updated: 2025-12-14*

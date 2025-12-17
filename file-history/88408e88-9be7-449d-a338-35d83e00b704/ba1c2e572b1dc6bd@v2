@@ -1,0 +1,899 @@
+# Widget Development Guide
+
+**Last Updated:** November 19, 2025
+**Status:** ✅ Active
+**Source:** Validated from codebase audit + Gemini analysis
+
+---
+
+## Overview
+
+The Neuman Brain Dashboard features a modular widget system with 49+ widgets across 7 categories. This guide provides the complete specification for creating, registering, and deploying new dashboard widgets.
+
+## Widget System Architecture
+
+**Location:** `src/widgets/Dashboard/`
+
+**Core Components:**
+- **`BaseWidget.tsx`** - Reusable wrapper providing loading states, error handling, refresh buttons, and consistent styling
+- **`WidgetRegistry.ts`** - Central registry mapping widget IDs to metadata, API configuration, and categories
+- **Individual widget files** - Self-contained React components (e.g., `QuoteWidget.tsx`, `CryptoWidget.tsx`)
+
+**Current Widget Count (Nov 2025):** 49 widgets
+- **Core:** 2 widgets (Upcoming Events, Recent Notes)
+- **Productivity:** 7 widgets (Quote, Pomodoro, Word of Day, Currency, World Clock, etc.)
+- **News:** 7 widgets (Hacker News, Reddit, Dev.to, AI Research, Wikipedia, etc.)
+- **Finance:** 3 widgets (Crypto, Stock Market)
+- **Fun:** 5 widgets (Jokes, Facts, Bored, Memory Game, Typing Test)
+- **Visual:** 1 widget (Weather Map)
+- **Dev:** 8 widgets (GitHub, NPM Stats, GitHub Trending, Repo Stats, etc.)
+- **Utility:** 16 widgets (IP Info, QR Code, Calculator, Unit Converter, Clipboard, etc.)
+
+---
+
+## Creating a Widget: Step-by-Step Guide
+
+### Step 1: Create the Widget Component
+
+Create a new file: `src/widgets/Dashboard/[WidgetName]Widget.tsx`
+
+**Minimal Widget Template:**
+```typescript
+/**
+ * [Widget Name] Widget
+ *
+ * [Brief description of what this widget does]
+ */
+
+import React, { useState, useEffect, useCallback } from 'react';
+import { BaseWidget } from './BaseWidget';
+
+export const MyNewWidget: React.FC = () => {
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const fetchData = useCallback(async () => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      // Your data fetching logic here
+      setLoading(false);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to load data');
+      setLoading(false);
+    }
+  }, []);
+
+  // Initial fetch
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
+  return (
+    <BaseWidget
+      title="My Widget"
+      icon="⚡"
+      loading={loading}
+      error={error}
+      onRefresh={fetchData}
+    >
+      {/* Your widget content here */}
+      <div className="flex flex-col gap-2">
+        <p className="text-text-light-primary dark:text-text-dark-primary">
+          Widget content goes here
+        </p>
+      </div>
+    </BaseWidget>
+  );
+};
+```
+
+### Step 2: Register the Widget
+
+Add your widget to `src/widgets/Dashboard/WidgetRegistry.ts`:
+
+```typescript
+// 1. Import the widget component (at top of file)
+import { MyNewWidget } from './MyNewWidget';
+
+// 2. Add to WIDGET_REGISTRY object
+export const WIDGET_REGISTRY: Record<string, WidgetDefinition> = {
+  // ... existing widgets
+
+  mynewwidget: {
+    id: 'mynewwidget',
+    name: 'My New Widget',
+    description: 'Brief description for settings UI',
+    icon: '⚡',
+    category: 'utility', // core | productivity | news | finance | fun | visual | dev | utility
+    apiUrl: 'https://api.example.com/endpoint', // Optional - only if using external API
+    requiresAuth: false, // Set true if widget needs user configuration (API key, username)
+    defaultEnabled: false, // Set true to auto-enable for new users
+  },
+};
+```
+
+### Step 3: Add to Dashboard Page
+
+The widget will **automatically appear** in the Dashboard's widget selector once registered. No manual updates needed to `Dashboard.tsx`.
+
+**How it works:**
+- `Dashboard.tsx` reads `WIDGET_REGISTRY` at runtime
+- User can enable/disable widgets from Settings
+- Widget positions are saved to IndexedDB
+
+---
+
+## BaseWidget API Reference
+
+The `BaseWidget` component provides a consistent wrapper for all dashboard widgets.
+
+**Props:**
+```typescript
+interface BaseWidgetProps {
+  title: string;           // Widget title (displays in header)
+  icon: string;            // Emoji icon (displays next to title)
+  children: React.ReactNode; // Widget content
+  loading?: boolean;       // Shows loading spinner if true
+  error?: string | null;   // Shows error message if not null
+  onRefresh?: () => void;  // Refresh button handler (optional)
+  onSettings?: () => void; // Settings button handler (optional)
+  className?: string;      // Additional CSS classes (optional)
+}
+```
+
+**Features Provided by BaseWidget:**
+- ✅ **Loading state** - Animated spinner with "Loading..." text
+- ✅ **Error handling** - User-friendly error display with retry button
+- ✅ **Refresh button** - Automatic refresh UI with spin animation
+- ✅ **Settings button** - Optional configuration UI
+- ✅ **Dark mode support** - Automatic theme switching
+- ✅ **Animations** - Smooth fade-in on mount (Framer Motion)
+- ✅ **Consistent styling** - Matches design system (surface colors, text colors, shadows)
+
+**Example Usage:**
+```typescript
+<BaseWidget
+  title="Weather Forecast"
+  icon="🌤️"
+  loading={isLoading}
+  error={errorMessage}
+  onRefresh={fetchWeather}
+  onSettings={openSettingsModal}
+>
+  {/* Your widget content */}
+</BaseWidget>
+```
+
+---
+
+## Widget Examples
+
+### Example 1: Static Widget (No API)
+
+**Use case:** Calculator, Pomodoro Timer, Pixel Art
+
+```typescript
+import React, { useState } from 'react';
+import { BaseWidget } from './BaseWidget';
+
+export const CalculatorWidget: React.FC = () => {
+  const [result, setResult] = useState<string>('0');
+
+  const handleButtonClick = (value: string) => {
+    // Calculator logic
+    setResult(value);
+  };
+
+  return (
+    <BaseWidget title="Calculator" icon="🔢">
+      <div className="grid grid-cols-4 gap-2 p-2">
+        {/* Calculator buttons */}
+        <div className="col-span-4 bg-surface-light-elevated dark:bg-surface-dark p-3 rounded text-right text-2xl font-mono">
+          {result}
+        </div>
+        {/* Number buttons... */}
+      </div>
+    </BaseWidget>
+  );
+};
+```
+
+### Example 2: Simple API Widget
+
+**Use case:** Quote of the Day, Random Facts, Crypto Prices
+
+```typescript
+import React, { useState, useEffect, useCallback } from 'react';
+import { BaseWidget } from './BaseWidget';
+
+interface Quote {
+  content: string;
+  author: string;
+}
+
+export const QuoteWidget: React.FC = () => {
+  const [quote, setQuote] = useState<Quote | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const fetchQuote = useCallback(async () => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch('https://api.quotable.io/random');
+      if (!response.ok) throw new Error('Failed to fetch quote');
+
+      const data = await response.json();
+      setQuote({ content: data.content, author: data.author });
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to load quote');
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchQuote();
+  }, [fetchQuote]);
+
+  return (
+    <BaseWidget
+      title="Daily Quote"
+      icon="💭"
+      loading={loading}
+      error={error}
+      onRefresh={fetchQuote}
+    >
+      {quote && (
+        <div className="flex flex-col gap-4">
+          <blockquote className="text-base italic text-text-light-primary dark:text-text-dark-primary">
+            "{quote.content}"
+          </blockquote>
+          <p className="text-sm text-text-light-secondary dark:text-text-dark-secondary text-right">
+            — {quote.author}
+          </p>
+        </div>
+      )}
+    </BaseWidget>
+  );
+};
+```
+
+### Example 3: Weather Widget with Open-Meteo API
+
+**Use case:** Weather Forecast, Air Quality, Location-based data
+
+```typescript
+import React, { useState, useEffect, useCallback } from 'react';
+import { BaseWidget } from './BaseWidget';
+
+interface ForecastDay {
+  date: string;
+  tempMax: number;
+  tempMin: number;
+  weatherCode: number;
+}
+
+export const WeatherForecastWidget: React.FC = () => {
+  const [forecast, setForecast] = useState<ForecastDay[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const fetchForecast = useCallback(async () => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      // Open-Meteo API (free, no API key needed)
+      const response = await fetch(
+        'https://api.open-meteo.com/v1/forecast?latitude=40.7128&longitude=-74.0060&daily=temperature_2m_max,temperature_2m_min,weathercode&temperature_unit=fahrenheit&timezone=America/New_York'
+      );
+      if (!response.ok) throw new Error('Failed to fetch forecast');
+
+      const data = await response.json();
+      const days: ForecastDay[] = data.daily.time.slice(0, 5).map((date: string, i: number) => ({
+        date,
+        tempMax: Math.round(data.daily.temperature_2m_max[i]),
+        tempMin: Math.round(data.daily.temperature_2m_min[i]),
+        weatherCode: data.daily.weathercode[i],
+      }));
+
+      setForecast(days);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to load forecast');
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchForecast();
+  }, [fetchForecast]);
+
+  const getWeatherIcon = (code: number) => {
+    if (code === 0) return '☀️';
+    if (code <= 3) return '⛅';
+    if (code <= 67) return '🌧️';
+    if (code <= 77) return '❄️';
+    return '🌤️';
+  };
+
+  const formatDate = (dateStr: string) => {
+    const date = new Date(dateStr);
+    return date.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+  };
+
+  return (
+    <BaseWidget
+      title="Weather Forecast"
+      icon="🌤️"
+      loading={loading}
+      error={error}
+      onRefresh={fetchForecast}
+    >
+      {forecast.length > 0 && (
+        <div className="space-y-2">
+          {forecast.map((day) => (
+            <div
+              key={day.date}
+              className="flex items-center justify-between p-2 bg-surface-light-elevated dark:bg-surface-dark rounded"
+            >
+              <span className="text-sm text-text-light-secondary dark:text-text-dark-secondary min-w-[80px]">
+                {formatDate(day.date)}
+              </span>
+              <span className="text-2xl">{getWeatherIcon(day.weatherCode)}</span>
+              <div className="flex gap-2 text-sm font-medium text-text-light-primary dark:text-text-dark-primary">
+                <span>{day.tempMax}°</span>
+                <span className="text-text-light-secondary dark:text-text-dark-secondary">
+                  {day.tempMin}°
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </BaseWidget>
+  );
+};
+```
+
+---
+
+## Styling Guidelines
+
+### Color System
+
+**IMPORTANT:** Always use semantic color tokens, never hardcoded colors.
+
+**Available color tokens:**
+```typescript
+// Surface colors (backgrounds)
+bg-surface-light                    // Light mode widget background
+bg-surface-light-elevated           // Light mode elevated elements (cards)
+bg-surface-dark                     // Dark mode widget background (#000000)
+bg-surface-dark-elevated            // Dark mode elevated elements (#121212)
+
+// Text colors
+text-text-light-primary             // Primary text (light mode)
+text-text-light-secondary           // Secondary text (light mode)
+text-text-dark-primary              // Primary text (dark mode)
+text-text-dark-secondary            // Secondary text (dark mode)
+
+// Accent colors (buttons, links, highlights)
+bg-accent-blue                      // Primary action blue
+bg-accent-blue-hover                // Blue hover state
+bg-accent-magenta                   // Secondary accent magenta
+bg-accent-cyan                      // Tertiary accent cyan
+text-accent-blue                    // Blue text
+
+// Status colors
+text-status-error                   // Error red
+text-status-success                 // Success green
+text-status-warning                 // Warning orange
+
+// Border colors
+border-border-light                 // Light mode borders
+border-border-dark                  // Dark mode borders
+```
+
+**Example:**
+```typescript
+// ✅ CORRECT - Uses semantic tokens
+<div className="bg-surface-light-elevated dark:bg-surface-dark rounded p-3">
+  <h3 className="text-text-light-primary dark:text-text-dark-primary font-semibold">
+    Title
+  </h3>
+  <p className="text-text-light-secondary dark:text-text-dark-secondary text-sm">
+    Description
+  </p>
+</div>
+
+// ❌ WRONG - Hardcoded colors
+<div className="bg-gray-100 dark:bg-gray-800">
+  <h3 className="text-black dark:text-white">Title</h3>
+</div>
+```
+
+### Responsive Design
+
+Widgets must adapt to different container sizes (resizable in Dashboard):
+
+```typescript
+// ✅ Use responsive utilities
+<div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+  {/* Grid adapts to widget width */}
+</div>
+
+// ✅ Use flexbox for flexibility
+<div className="flex flex-col gap-2 h-full">
+  {/* Content stretches to fill height */}
+</div>
+
+// ✅ Use w-full and h-full
+<div className="w-full h-full overflow-auto">
+  {/* Widget fills available space */}
+</div>
+```
+
+### Accessibility
+
+All widgets must meet WCAG AA standards:
+
+```typescript
+// ✅ Use semantic HTML
+<button onClick={handleClick}>Click me</button> // Not <div onClick>
+
+// ✅ Add ARIA labels
+<button aria-label="Refresh weather data" onClick={refresh}>
+  🔄
+</button>
+
+// ✅ Keyboard navigation
+<input
+  onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
+  aria-label="Search query"
+/>
+
+// ✅ Focus states
+<button className="focus:ring-2 focus:ring-accent-blue">
+  Submit
+</button>
+```
+
+---
+
+## Data Handling & State Management
+
+### Local State (useState)
+
+Use for widget-specific UI state:
+
+```typescript
+const [selectedTab, setSelectedTab] = useState<'overview' | 'details'>('overview');
+const [isExpanded, setIsExpanded] = useState(false);
+const [inputValue, setInputValue] = useState('');
+```
+
+### Global State (Zustand Stores)
+
+Use for app-wide data shared across widgets:
+
+```typescript
+import { useNotesStore } from '../../stores/useNotesStore';
+import { useKanbanStore } from '../../stores/useKanbanStore';
+import { useCalendarStore } from '../../stores/useCalendarStore';
+
+export const TaskSummaryWidget: React.FC = () => {
+  // Access global Kanban state
+  const tasks = useKanbanStore((state) => state.tasks);
+  const todoCount = tasks.filter(t => t.status === 'todo').length;
+
+  return (
+    <BaseWidget title="Task Summary" icon="✅">
+      <p>{todoCount} tasks remaining</p>
+    </BaseWidget>
+  );
+};
+```
+
+### Widget Settings (useWidgetStore)
+
+For widget-specific configuration (saved to IndexedDB):
+
+```typescript
+import { useWidgetStore } from '../../stores/useWidgetStore';
+
+export const WeatherWidget: React.FC = () => {
+  const widgetSettings = useWidgetStore((state) => state.widgetSettings);
+  const updateWidgetSettings = useWidgetStore((state) => state.updateWidgetSettings);
+
+  // Get widget-specific settings
+  const city = widgetSettings.weather?.city || 'New York';
+  const unit = widgetSettings.weather?.unit || 'fahrenheit';
+
+  // Update settings
+  const handleCityChange = (newCity: string) => {
+    updateWidgetSettings('weather', { city: newCity, unit });
+  };
+
+  // Use settings in API call
+  const fetchWeather = async () => {
+    const response = await fetch(`https://api.example.com/weather?city=${city}&unit=${unit}`);
+    // ...
+  };
+};
+```
+
+---
+
+## API Integration Best Practices
+
+### 1. Error Handling
+
+Always handle network errors gracefully:
+
+```typescript
+const fetchData = async () => {
+  setLoading(true);
+  setError(null);
+
+  try {
+    const response = await fetch('https://api.example.com/data');
+
+    // Check HTTP status
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+
+    // Validate response structure
+    if (!data || !data.results) {
+      throw new Error('Invalid response format');
+    }
+
+    setData(data.results);
+  } catch (err) {
+    // User-friendly error messages
+    if (err instanceof TypeError && err.message.includes('Failed to fetch')) {
+      setError('Network error. Check your connection.');
+    } else {
+      setError(err instanceof Error ? err.message : 'Failed to load data');
+    }
+  } finally {
+    setLoading(false);
+  }
+};
+```
+
+### 2. CORS Handling
+
+Many APIs don't support CORS from browser. Options:
+
+**Option 1: Use CORS-friendly APIs** (preferred)
+- Open-Meteo (weather)
+- CoinGecko (crypto)
+- Hacker News API
+- Reddit JSON API
+
+**Option 2: User configures proxy**
+- Allow users to set custom CORS proxy in Settings
+- Never use central proxy (violates privacy model)
+
+**Example:**
+```typescript
+// Check if user has configured CORS proxy
+const corsProxy = useWidgetStore((state) => state.settings.corsProxy);
+const apiUrl = corsProxy
+  ? `${corsProxy}/https://api.example.com/data`
+  : 'https://api.example.com/data';
+```
+
+### 3. Rate Limiting
+
+Respect API rate limits:
+
+```typescript
+// Debounce user input
+import { debounce } from 'lodash';
+
+const debouncedSearch = debounce((query: string) => {
+  fetchSearchResults(query);
+}, 500); // Wait 500ms after user stops typing
+
+// Cache responses
+const [cache, setCache] = useState<Map<string, any>>(new Map());
+
+const fetchData = async (key: string) => {
+  // Check cache first
+  if (cache.has(key)) {
+    return cache.get(key);
+  }
+
+  const data = await fetch(`https://api.example.com?q=${key}`);
+  setCache(new Map(cache.set(key, data)));
+  return data;
+};
+
+// Limit refresh frequency
+const [lastRefresh, setLastRefresh] = useState(Date.now());
+
+const handleRefresh = () => {
+  const now = Date.now();
+  if (now - lastRefresh < 60000) { // 1 minute
+    setError('Please wait before refreshing again');
+    return;
+  }
+
+  setLastRefresh(now);
+  fetchData();
+};
+```
+
+### 4. Privacy-First API Usage
+
+**Preferred:** Static data (no API calls)
+- Local quote collections
+- Offline calculators
+- Client-side utilities
+
+**Acceptable:** Public APIs without authentication
+- Open-Meteo (weather)
+- Hacker News
+- CoinGecko
+
+**Requires user consent:** APIs with authentication
+- GitHub (requires username in settings)
+- API keys stored encrypted in IndexedDB
+
+**Example:**
+```typescript
+// Privacy-first: Static fallback data
+import { getRandomQuote } from '../../data/staticQuotes';
+
+const fetchQuote = async () => {
+  // Use static data (no API call, no tracking)
+  setQuote(getRandomQuote());
+};
+```
+
+---
+
+## Performance Optimization
+
+### 1. Lazy Loading
+
+Widgets with heavy dependencies should be lazy-loaded:
+
+```typescript
+// In Dashboard.tsx
+import { lazy, Suspense } from 'react';
+
+const WeatherMapWidget = lazy(() => import('./Dashboard/WeatherMapWidget'));
+
+// Render with Suspense
+<Suspense fallback={<LoadingSpinner />}>
+  <WeatherMapWidget />
+</Suspense>
+```
+
+### 2. Memoization
+
+Prevent unnecessary re-renders:
+
+```typescript
+import React, { useMemo, memo } from 'react';
+
+// Memoize expensive calculations
+const sortedTasks = useMemo(() => {
+  return tasks.sort((a, b) => a.priority - b.priority);
+}, [tasks]);
+
+// Memoize entire component if props rarely change
+export const TaskListWidget = memo(() => {
+  // Component implementation
+});
+```
+
+### 3. Virtualization
+
+For long lists (> 50 items), use virtualization:
+
+```typescript
+import { FixedSizeList as List } from 'react-window';
+
+<List
+  height={400}
+  itemCount={items.length}
+  itemSize={50}
+  width="100%"
+>
+  {({ index, style }) => (
+    <div style={style}>{items[index].title}</div>
+  )}
+</List>
+```
+
+---
+
+## Testing Checklist
+
+Before submitting a new widget:
+
+**Functionality:**
+- [ ] Widget renders without errors
+- [ ] Loading state displays correctly
+- [ ] Error handling works (test with network offline)
+- [ ] Refresh button updates data
+- [ ] Data persists across page refreshes (if using widget settings)
+
+**UI/UX:**
+- [ ] Widget works in light + dark mode
+- [ ] Text is readable (WCAG AA contrast)
+- [ ] Responsive design (test at different widget sizes)
+- [ ] Animations smooth (no jank)
+- [ ] Keyboard navigation works (Tab, Enter, ESC)
+
+**Performance:**
+- [ ] No excessive re-renders (check with React DevTools Profiler)
+- [ ] API calls debounced/throttled (if user input)
+- [ ] Bundle size impact < 50KB (check with `npm run build`)
+- [ ] Lazy loading used for heavy dependencies
+
+**Accessibility:**
+- [ ] Semantic HTML used (`<button>`, `<nav>`, `<article>`)
+- [ ] ARIA labels present
+- [ ] Focus states visible
+- [ ] Screen reader friendly (test with NVDA/JAWS)
+
+---
+
+## Widget Categories
+
+Choose the most appropriate category for your widget:
+
+**`core`** - Core app integrations (Notes, Calendar, Tasks)
+- Examples: Recent Notes, Upcoming Events
+- Always useful, enabled by default
+
+**`productivity`** - Productivity tools and utilities
+- Examples: Pomodoro Timer, World Clock, Currency Converter, Quote of the Day
+- Helps users work more efficiently
+
+**`news`** - News and information feeds
+- Examples: Hacker News, Reddit, Dev.to, Wikipedia
+- Keeps users informed
+
+**`finance`** - Financial data and tracking
+- Examples: Crypto Tracker, Stock Market
+- Displays market data
+
+**`fun`** - Games and entertainment
+- Examples: Memory Game, Typing Test, Developer Jokes
+- Provides breaks and entertainment
+
+**`visual`** - Visual and creative tools
+- Examples: Weather Map, Unsplash Photos
+- Emphasizes visual design
+
+**`dev`** - Developer tools and information
+- Examples: GitHub Trending, NPM Stats, Repo Stats
+- Developer-focused content
+
+**`utility`** - Utilities and tools
+- Examples: Calculator, QR Code Generator, Unit Converter, IP Info
+- General-purpose utilities
+
+---
+
+## Common Pitfalls & Solutions
+
+### Pitfall 1: CORS Errors
+
+**Problem:** API returns CORS error in browser console
+
+**Solution:**
+- Use CORS-friendly public APIs (Open-Meteo, Hacker News, Reddit JSON)
+- For APIs without CORS: Allow user to configure proxy in Settings
+- Never use central proxy (privacy violation)
+
+### Pitfall 2: Excessive Re-renders
+
+**Problem:** Widget re-renders on every parent state change
+
+**Solution:**
+```typescript
+// Use React.memo to prevent unnecessary re-renders
+export const MyWidget = memo(() => {
+  // Widget implementation
+});
+
+// Or useMemo for expensive calculations
+const processedData = useMemo(() => {
+  return data.map(item => expensiveTransform(item));
+}, [data]);
+```
+
+### Pitfall 3: API Rate Limits
+
+**Problem:** Too many API requests trigger rate limiting
+
+**Solution:**
+```typescript
+// Implement caching
+const [cache, setCache] = useState<Map<string, any>>(new Map());
+
+// Add cooldown to refresh button
+const [lastRefresh, setLastRefresh] = useState(0);
+const canRefresh = Date.now() - lastRefresh > 60000; // 1 minute cooldown
+```
+
+### Pitfall 4: Missing Dark Mode Support
+
+**Problem:** Widget looks broken in dark mode
+
+**Solution:**
+```typescript
+// Always use semantic color tokens with dark: variants
+<div className="bg-surface-light dark:bg-surface-dark">
+  <p className="text-text-light-primary dark:text-text-dark-primary">
+    Content
+  </p>
+</div>
+```
+
+### Pitfall 5: Bundle Size Bloat
+
+**Problem:** Widget adds 500KB+ to bundle
+
+**Solution:**
+```typescript
+// Lazy load heavy widgets
+const HeavyWidget = lazy(() => import('./HeavyWidget'));
+
+// Use lightweight alternatives
+// ❌ Moment.js (67KB)
+// ✅ date-fns (15KB)
+
+// ❌ Lodash (entire library 70KB)
+// ✅ Lodash (named imports, tree-shaken)
+import { debounce } from 'lodash';
+```
+
+---
+
+## Related Documentation
+
+- **Widget Registry:** `src/widgets/Dashboard/WidgetRegistry.ts`
+- **BaseWidget Component:** `src/widgets/Dashboard/BaseWidget.tsx`
+- **Widget Store:** `src/stores/useWidgetStore.ts`
+- **Dashboard Page:** `src/pages/Dashboard.tsx`
+- **Color System:** `docs/technical/color_system.md`
+- **Feature Map:** `docs/product/feature_map.md`
+
+---
+
+## Examples in Codebase
+
+**Simple Widgets:**
+- `QuoteWidget.tsx` - Static fallback data (privacy-first)
+- `CalculatorWidget.tsx` - No API, pure UI logic
+
+**API Widgets:**
+- `CryptoWidget.tsx` - CoinGecko API (free, CORS-friendly)
+- `WeatherForecastWidget.tsx` - Open-Meteo API (free, no key needed)
+- `HackerNewsWidget.tsx` - Hacker News API (public, no auth)
+
+**Complex Widgets:**
+- `WeatherMapWidget.tsx` - Leaflet map + weather API integration
+- `GitHubWidget.tsx` - Requires user configuration (username)
+- `PomodoroWidget.tsx` - Timer logic with audio notifications
+
+---
+
+**Last Validated:** November 19, 2025 (Codebase audit)
+**Current Widget Count:** 49 widgets (70% Notion Dashboard parity)
+**Bundle Impact:** Widgets lazy-loaded via code splitting

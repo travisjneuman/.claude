@@ -1,0 +1,504 @@
+# WeatherMap UX Fixes + Dashboard Drag-Drop
+
+**Created:** November 16, 2025
+**Status:** 🟡 PLANNING
+**Priority:** P1 - CRITICAL (User-reported bugs + missing feature)
+
+---
+
+## Overview
+
+Fix critical UX issues in WeatherMap widget and implement drag-drop widget rearrangement directly on dashboard (not just in widget menu modal).
+
+---
+
+## Problem Statement
+
+### Issue 1: WeatherMap Layout Problems
+**User Feedback:** "The weather forecast + weather/map widget doesn't look great. The text box still extends off the widget, when you click the 5 day forecast option and then go back to the map it doesn't load."
+
+**Current Problems:**
+1. **Location input still overflows** - Despite previous fix, input extends beyond widget boundaries
+2. **Map doesn't reload** - When switching from "5-Day Forecast" tab back to "Current" tab, map disappears/doesn't re-initialize
+3. **Tabs instead of side-by-side** - User wants map AND forecast visible simultaneously, not tabbed UI
+
+**Desired Behavior:**
+- Map on left, forecast on right (side-by-side layout)
+- WeatherMap widget defaults to 2x or 3x width
+- No input overflow issues
+- Map always visible (no tab switching)
+
+### Issue 2: Dashboard Widget Reorganization
+**User Feedback:** "I also cannot move widgets around outside of in the widget menu to reorder them. I should be able to reorganize, move around and resize without HAVING to go into the widgets menu."
+
+**Current Behavior:**
+- Can only resize via three-dot menu → size selector
+- Can only reorder via widget menu modal → drag-drop list
+- No direct manipulation on dashboard
+
+**Desired Behavior:**
+- Drag widgets directly on dashboard to reorder
+- Resize widgets directly on dashboard (corner handles or similar)
+- No need to open menu modals for basic layout adjustments
+
+---
+
+## Technical Analysis
+
+### WeatherMap Current Implementation
+
+**File:** `src/widgets/WeatherMap.tsx`
+
+**Current Structure:**
+```tsx
+<Widget>
+  {/* Tabbed UI */}
+  <div className="flex gap-2 mb-4">
+    <button onClick={() => setActiveTab('current')}>Current</button>
+    <button onClick={() => setActiveTab('forecast')}>5-Day Forecast</button>
+  </div>
+
+  {/* Conditional rendering */}
+  {activeTab === 'current' && (
+    <div className="map-container">
+      <div ref={mapRef} /> {/* Leaflet map */}
+    </div>
+  )}
+
+  {activeTab === 'forecast' && (
+    <div className="forecast-container">
+      {forecast.map(...)} {/* 5-day forecast list */}
+    </div>
+  )}
+</Widget>
+```
+
+**Why map doesn't reload:**
+- When `activeTab === 'forecast'`, the map container is unmounted (conditional rendering)
+- Leaflet map instance (`leafletMapRef.current`) still exists but is detached from DOM
+- When switching back to 'current', the map div re-mounts but Leaflet doesn't re-initialize
+- **Root cause:** Map initialization only happens in `useEffect(() => { ... }, [])` on first render
+
+**Solution:**
+- Remove tabbed UI
+- Show map AND forecast side-by-side
+- Use CSS Grid or Flexbox for layout
+- Map always mounted (no conditional rendering)
+
+### Dashboard Drag-Drop Current State
+
+**Masonry Layout Challenge:**
+- Dashboard uses `react-masonry-css` for Pinterest-style layout
+- Masonry calculates dynamic positioning based on column heights
+- Drag-drop libraries (react-dnd, @dnd-kit) expect fixed grid positions
+- **Conflict:** Masonry's dynamic layout incompatible with drag-drop reordering
+
+**Options:**
+1. **Option A:** Replace Masonry with react-grid-layout (drag-drop built-in, but loses Pinterest aesthetic)
+2. **Option B:** Keep Masonry, add drag-drop to widget order only (update `enabledWidgets` array order)
+3. **Option C:** Hybrid - Masonry for display, drag-drop updates order, Masonry re-renders
+
+**Recommended:** Option B/C - Keep Masonry, use @dnd-kit to update widget order in store, Masonry reflects new order
+
+**Implementation Strategy:**
+1. Wrap each widget in `<Sortable>` from @dnd-kit
+2. On drag end, update `useWidgetStore.reorderWidgets(newOrder)`
+3. Masonry automatically re-renders with new order
+4. No need to fight Masonry's layout algorithm
+
+### Resize Widget Challenge
+
+**Direct Resize Options:**
+1. **Corner handles** - Drag corners to resize (complex with Masonry)
+2. **Edge handles** - Drag left/right edges (simpler but Masonry may resist)
+3. **Keep menu-based resize** - Current three-dot menu works fine
+
+**Recommendation:** Keep menu-based resize for now (works well), focus on drag-drop reorder
+
+---
+
+## Proposed Changes
+
+### Change 1: Fix WeatherMap Side-by-Side Layout
+
+**File:** `src/widgets/WeatherMap.tsx`
+
+**Remove Tabs, Add Side-by-Side:**
+```tsx
+<Widget id="weathermap" title="Weather & Location" headerAccessory={weatherStatsDisplay}>
+  <div className="weathermap-widget flex gap-4 h-full">
+    {/* Left: Map (60% width) */}
+    <div className="map-section flex-[3] min-h-[320px]">
+      <div ref={mapRef} className="w-full h-full rounded-xl overflow-hidden" />
+
+      {/* Error overlay */}
+      {error && <div className="error-banner">⚠️ {error}</div>}
+
+      {/* GPS button */}
+      <button onClick={getUserLocation} className="gps-button">📍</button>
+    </div>
+
+    {/* Right: 5-Day Forecast (40% width) */}
+    <div className="forecast-section flex-[2] overflow-y-auto">
+      <h3 className="text-sm font-semibold mb-3">5-Day Forecast</h3>
+      {forecastLoading ? (
+        <p>Loading...</p>
+      ) : forecast.length > 0 ? (
+        <div className="space-y-2">
+          {forecast.map((day) => (
+            <div key={day.date} className="forecast-day">
+              <span>{formatDate(day.date)}</span>
+              <span>{getWeatherIcon(day.weatherCode)}</span>
+              <div>
+                <div>High: {day.tempMax}°F</div>
+                <div>Low: {day.tempMin}°F</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <p>No forecast data</p>
+      )}
+    </div>
+  </div>
+</Widget>
+```
+
+**Key Changes:**
+- Remove `activeTab` state and tab buttons
+- Use `flex` with `gap-4` for side-by-side layout
+- Map: `flex-[3]` (60% width), Forecast: `flex-[2]` (40% width)
+- Map always mounted (no conditional rendering)
+- Auto-fetch forecast on mount (no tab switching needed)
+
+**Responsive Behavior:**
+- Desktop (>= 1024px): Side-by-side layout
+- Tablet/Mobile (< 1024px): Stack vertically (map top, forecast bottom)
+
+### Change 2: Set WeatherMap Default Size to 2x
+
+**File:** `src/stores/useWidgetStore.ts`
+
+**Update `enableWidget` to use widget-specific defaults:**
+```typescript
+enableWidget: (widgetId) => {
+  set((state) => {
+    if (!state.enabledWidgets.includes(widgetId)) {
+      // Default sizes for specific widgets
+      const defaultSize = widgetId === 'weathermap' ? 2 : 1;
+
+      return {
+        enabledWidgets: [...state.enabledWidgets, widgetId],
+        widgetSizes: { ...state.widgetSizes, [widgetId]: state.widgetSizes[widgetId] || defaultSize },
+      };
+    }
+    return state;
+  });
+},
+```
+
+**Alternative (Better):** Set initial size in `enabledWidgets` array init:
+```typescript
+enabledWidgets: [
+  'tasksummary',
+  'upcomingevents',
+  'recentnotes',
+  'quickadd',
+  'quote',
+  'crypto',
+  'hackernews',
+  'weathermap'
+],
+widgetSizes: {
+  weathermap: 2, // Default to 2x width
+},
+```
+
+### Change 3: Fix Location Input Overflow (Final Fix)
+
+**File:** `src/widgets/WeatherMap.tsx`
+
+**Issue:** Input extends beyond widget boundaries on narrow screens.
+
+**Root Cause:** Input is in `headerAccessory` which has limited space.
+
+**Solution:** Move location controls below header or inside map overlay:
+
+**Option A:** Move to map overlay (recommended):
+```tsx
+{/* Inside map container */}
+<div className="map-container relative">
+  <div ref={mapRef} />
+
+  {/* Location controls overlay - top-left */}
+  <div className="absolute top-4 left-4 z-10 bg-white dark:bg-surface-dark-elevated rounded-lg shadow-lg p-2 max-w-[250px]">
+    {showCityInput ? (
+      <form onSubmit={handleCitySubmit} className="flex gap-2">
+        <input
+          value={cityInput}
+          onChange={(e) => setCityInput(e.target.value)}
+          placeholder="Enter city..."
+          className="flex-1 min-w-0 px-2 py-1 text-xs..."
+        />
+        <button type="submit">Go</button>
+        <button onClick={() => { setShowCityInput(false); getUserLocation(); }}>📍</button>
+      </form>
+    ) : (
+      <button onClick={() => setShowCityInput(true)} className="text-xs">
+        📍 {city || 'Set Location'} ✏️
+      </button>
+    )}
+  </div>
+</div>
+```
+
+**Option B:** Keep in header but fix overflow:
+```tsx
+<div className="flex items-center gap-2 max-w-[200px] min-w-0">
+  <form className="flex gap-1 min-w-0 flex-1">
+    <input className="flex-1 min-w-0 w-0 px-2 py-1 text-xs..." />
+    <button>Go</button>
+  </form>
+</div>
+```
+
+**Recommendation:** Option A (map overlay) - cleaner separation, more space
+
+### Change 4: Dashboard Drag-Drop Reordering
+
+**File:** `src/pages/Dashboard.tsx`
+
+**Current:**
+```tsx
+<Masonry>
+  {enabledWidgets.map((widgetId) => (
+    <div className="mb-6 ${sizeClass}">
+      <Suspense fallback={<WidgetLoader />}>
+        <WidgetComponent />
+      </Suspense>
+    </div>
+  ))}
+</Masonry>
+```
+
+**Proposed (with @dnd-kit):**
+```tsx
+import { DndContext, closestCenter, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
+import { SortableContext, verticalListSortingStrategy, useSortable, arrayMove } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
+
+// Sortable Widget Wrapper
+const SortableWidget: React.FC<{ widgetId: string; sizeClass: string; children: React.ReactNode }> = ({
+  widgetId,
+  sizeClass,
+  children,
+}) => {
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
+    id: widgetId,
+  });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    opacity: isDragging ? 0.5 : 1,
+  };
+
+  return (
+    <div ref={setNodeRef} style={style} className={`mb-6 ${sizeClass}`}>
+      {/* Drag handle overlay (invisible but covers widget for dragging) */}
+      <div {...attributes} {...listeners} className="absolute inset-0 cursor-move z-10 opacity-0 hover:opacity-100 hover:bg-accent-cyan/10" />
+      {children}
+    </div>
+  );
+};
+
+// Dashboard render
+const sensors = useSensors(
+  useSensor(PointerSensor, {
+    activationConstraint: { distance: 5 }, // Require 5px movement to start drag
+  })
+);
+
+const handleDragEnd = (event: DragEndEvent) => {
+  const { active, over } = event;
+  if (over && active.id !== over.id) {
+    const oldIndex = enabledWidgets.indexOf(active.id as string);
+    const newIndex = enabledWidgets.indexOf(over.id as string);
+    const newOrder = arrayMove(enabledWidgets, oldIndex, newIndex);
+    reorderWidgets(newOrder);
+  }
+};
+
+<DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+  <SortableContext items={enabledWidgets} strategy={verticalListSortingStrategy}>
+    <Masonry>
+      {enabledWidgets.map((widgetId) => {
+        const size = widgetSizes[widgetId] || 1;
+        const sizeClass = size === 3 ? 'col-span-3' : size === 2 ? 'col-span-2' : '';
+        const WidgetComponent = WIDGET_COMPONENTS[baseWidgetType];
+
+        return (
+          <SortableWidget key={widgetId} widgetId={widgetId} sizeClass={sizeClass}>
+            <Suspense fallback={<WidgetLoader />}>
+              <WidgetComponent />
+            </Suspense>
+          </SortableWidget>
+        );
+      })}
+    </Masonry>
+  </SortableContext>
+</DndContext>
+```
+
+**Key Features:**
+- Wrap each widget in `SortableWidget` component
+- Drag handle overlays entire widget (cursor-move on hover)
+- 5px activation distance (prevents accidental drags)
+- Semi-transparent during drag (opacity: 0.5)
+- Updates `enabledWidgets` order in store
+- Masonry automatically repositions widgets
+
+**Challenge:** Masonry vs Sortable
+- Masonry dynamically positions widgets in columns
+- @dnd-kit expects static positioning
+- **Solution:** Use `verticalListSortingStrategy` (treats widgets as vertical list, ignores Masonry positioning)
+- Masonry re-renders after order change, widgets settle into new positions
+
+---
+
+## Todo Checklist
+
+### Phase 1: WeatherMap Side-by-Side Layout (1.5 hours)
+- [ ] **Task 1.1:** Remove `activeTab` state and tab buttons from WeatherMap.tsx
+- [ ] **Task 1.2:** Replace conditional rendering with side-by-side flex layout
+- [ ] **Task 1.3:** Map section (60% width, `flex-[3]`)
+- [ ] **Task 1.4:** Forecast section (40% width, `flex-[2]`)
+- [ ] **Task 1.5:** Auto-fetch forecast on component mount (no tab switch needed)
+- [ ] **Task 1.6:** Add responsive CSS (stack vertically on mobile < 1024px)
+- [ ] **Task 1.7:** Test map stays loaded when forecast renders
+
+### Phase 2: Fix Location Input Overflow (30 min)
+- [ ] **Task 2.1:** Move location controls to map overlay (top-left corner)
+- [ ] **Task 2.2:** Add max-width constraint (250px)
+- [ ] **Task 2.3:** Style overlay with background + shadow
+- [ ] **Task 2.4:** Test on narrow screens (no overflow)
+
+### Phase 3: Set WeatherMap Default to 2x Width (15 min)
+- [ ] **Task 3.1:** Update `widgetSizes` initial state in useWidgetStore
+- [ ] **Task 3.2:** Set `weathermap: 2` as default size
+- [ ] **Task 3.3:** Test new users get 2x width, existing users unchanged
+
+### Phase 4: Dashboard Drag-Drop Reordering (2-3 hours)
+- [ ] **Task 4.1:** Create `SortableWidget` wrapper component
+- [ ] **Task 4.2:** Add @dnd-kit imports (DndContext, SortableContext, useSortable)
+- [ ] **Task 4.3:** Wrap Masonry in DndContext + SortableContext
+- [ ] **Task 4.4:** Wrap each widget in SortableWidget
+- [ ] **Task 4.5:** Implement `handleDragEnd` to reorder widgets
+- [ ] **Task 4.6:** Add drag handle overlay (invisible, cursor-move)
+- [ ] **Task 4.7:** Add visual feedback (opacity 0.5 during drag)
+- [ ] **Task 4.8:** Test drag-drop updates widget order correctly
+
+### Phase 5: Testing & Polish (30 min)
+- [ ] **Task 5.1:** Test WeatherMap side-by-side layout (desktop)
+- [ ] **Task 5.2:** Test WeatherMap responsive layout (tablet, mobile)
+- [ ] **Task 5.3:** Test location input doesn't overflow
+- [ ] **Task 5.4:** Test map stays loaded (no disappearing)
+- [ ] **Task 5.5:** Test drag-drop reordering on dashboard
+- [ ] **Task 5.6:** Test drag-drop with different widget sizes (1x, 2x, 3x)
+- [ ] **Task 5.7:** Run type-check (`npm run type-check`)
+- [ ] **Task 5.8:** Run build (`npm run build`)
+
+### Phase 6: Documentation (15 min)
+- [ ] **Task 6.1:** Update task file with review section
+- [ ] **Task 6.2:** Document drag-drop behavior in user guide (if exists)
+
+---
+
+## Time Estimates
+
+**Phase 1 (WeatherMap Layout):** 1.5 hours
+**Phase 2 (Location Input):** 30 minutes
+**Phase 3 (Default Size):** 15 minutes
+**Phase 4 (Drag-Drop):** 2-3 hours
+**Phase 5 (Testing):** 30 minutes
+**Phase 6 (Docs):** 15 minutes
+
+**Total Estimate:** 5-6 hours
+
+---
+
+## Success Criteria
+
+**WeatherMap Complete When:**
+- ✅ Map and forecast visible side-by-side (no tabs)
+- ✅ Map stays loaded when switching views
+- ✅ Location input doesn't overflow widget
+- ✅ WeatherMap defaults to 2x width for new users
+- ✅ Responsive layout works (stack on mobile)
+
+**Dashboard Drag-Drop Complete When:**
+- ✅ Can drag widgets directly on dashboard to reorder
+- ✅ Visual feedback during drag (opacity, cursor)
+- ✅ Widget order persists after drag
+- ✅ Works with all widget sizes (1x, 2x, 3x)
+- ✅ No conflicts with Masonry layout
+- ✅ TypeScript type-check passes
+- ✅ Production build succeeds
+
+---
+
+## Risk Assessment
+
+**Low Risk:**
+- WeatherMap layout change (CSS Grid/Flexbox)
+- Location input move (simple DOM change)
+- Default size setting (one-line change)
+
+**Medium Risk:**
+- Drag-drop with Masonry (potential positioning conflicts)
+- Forecast auto-fetch (performance impact)
+
+**High Risk:**
+- None (all changes are UI-only, no data model changes)
+
+**Mitigation:**
+- Test drag-drop thoroughly with different widget combinations
+- Use `verticalListSortingStrategy` to avoid Masonry conflicts
+- Lazy-load forecast data (fetch only when needed)
+
+---
+
+## Open Questions
+
+**Q1: Should drag-drop work on mobile?**
+- Touch events may conflict with scrolling
+- **Recommendation:** Disable drag-drop on mobile (< 1024px), use widget menu instead
+
+**Q2: Should we add visual drag handles (like ⋮⋮)?**
+- Current plan: Invisible overlay on entire widget
+- **Alternative:** Show drag handle icon on hover
+- **Recommendation:** Start with overlay, add handle if users confused
+
+**Q3: Should resize also be drag-based (corner handles)?**
+- Complex with Masonry layout
+- **Recommendation:** Keep menu-based resize (works well), focus on drag-drop reorder
+
+---
+
+## Review Section
+**To be completed when work is done**
+
+### Summary of Changes
+(List files modified, features added)
+
+### Verification
+(TypeScript checks, build success, testing results)
+
+### Impact
+(UX improvements, user feedback)
+
+### Issues Encountered
+(Problems, workarounds, technical debt)
+
+### Time Comparison
+(Estimated vs actual time spent)

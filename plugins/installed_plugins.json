@@ -1,0 +1,177 @@
+{
+  "version": 2,
+  "plugins": {
+    "agent-sdk-dev@claude-code-plugins": [
+      {
+        "scope": "user",
+        "installPath": "C:\\Users\\tjn\\.claude\\plugins\\cache\\claude-code-plugins\\agent-sdk-dev\\1.0.0",
+        "version": "1.0.0",
+        "installedAt": "2025-11-15T01:45:19.830Z",
+        "lastUpdated": "2025-11-15T01:45:19.830Z",
+        "gitCommitSha": "5dd91a9fe23cf68da641cc4f01d90931c0f530ce",
+        "isLocal": true
+      }
+    ],
+    "pr-review-toolkit@claude-code-plugins": [
+      {
+        "scope": "user",
+        "installPath": "C:\\Users\\tjn\\.claude\\plugins\\cache\\claude-code-plugins\\pr-review-toolkit\\1.0.0",
+        "version": "1.0.0",
+        "installedAt": "2025-11-15T01:45:19.830Z",
+        "lastUpdated": "2025-11-15T01:45:19.830Z",
+        "gitCommitSha": "5dd91a9fe23cf68da641cc4f01d90931c0f530ce",
+        "isLocal": true
+      }
+    ],
+    "commit-commands@claude-code-plugins": [
+      {
+        "scope": "user",
+        "installPath": "C:\\Users\\tjn\\.claude\\plugins\\cache\\claude-code-plugins\\commit-commands\\1.0.0",
+        "version": "1.0.0",
+        "installedAt": "2025-11-15T01:45:19.830Z",
+        "lastUpdated": "2025-11-15T01:45:19.830Z",
+        "gitCommitSha": "5dd91a9fe23cf68da641cc4f01d90931c0f530ce",
+        "isLocal": true
+      }
+    ],
+    "feature-dev@claude-code-plugins": [
+      {
+        "scope": "user",
+        "installPath": "C:\\Users\\tjn\\.claude\\plugins\\cache\\claude-code-plugins\\feature-dev\\1.0.0",
+        "version": "1.0.0",
+        "installedAt": "2025-11-15T01:45:19.830Z",
+        "lastUpdated": "2025-11-15T01:45:19.830Z",
+        "gitCommitSha": "5dd91a9fe23cf68da641cc4f01d90931c0f530ce",
+        "isLocal": true
+      }
+    ],
+    "security-guidance@claude-code-plugins": [
+      {
+        "scope": "user",
+        "installPath": "C:\\Users\\tjn\\.claude\\plugins\\cache\\claude-code-plugins\\security-guidance\\1.0.0",
+        "version": "1.0.0",
+        "installedAt": "2025-11-15T01:45:19.830Z",
+        "lastUpdated": "2025-11-15T01:45:19.830Z",
+        "gitCommitSha": "5dd91a9fe23cf68da641cc4f01d90931c0f530ce",
+        "isLocal": true
+      }
+    ],
+    "code-review@claude-code-plugins": [
+      {
+        "scope": "user",
+        "installPath": "C:\\Users\\tjn\\.claude\\plugins\\cache\\claude-code-plugins\\code-review\\1.0.0",
+        "version": "1.0.0",
+        "installedAt": "2025-11-15T01:45:19.830Z",
+        "lastUpdated": "2025-11-15T01:45:19.830Z",
+        "gitCommitSha": "5dd91a9fe23cf68da641cc4f01d90931c0f530ce",
+        "isLocal": true
+      }
+    ],
+    "explanatory-output-style@claude-code-plugins": [
+      {
+        "scope": "user",
+        "installPath": "C:\\Users\\tjn\\.claude\\plugins\\cache\\claude-code-plugins\\explanatory-output-style\\1.0.0",
+        "version": "1.0.0",
+        "installedAt": "2025-11-15T01:45:19.830Z",
+        "lastUpdated": "2025-11-15T01:45:19.830Z",
+        "gitCommitSha": "5dd91a9fe23cf68da641cc4f01d90931c0f530ce",
+        "isLocal": true
+      }
+    ],
+    "learning-output-style@claude-code-plugins": [
+      {
+        "scope": "user",
+        "installPath": "C:\\Users\\tjn\\.claude\\plugins\\cache\\claude-code-plugins\\learning-output-style\\1.0.0",
+        "version": "1.0.0",
+        "installedAt": "2025-11-15T01:45:19.830Z",
+        "lastUpdated": "2025-11-15T01:45:19.830Z",
+        "gitCommitSha": "5dd91a9fe23cf68da641cc4f01d90931c0f530ce",
+        "isLocal": true
+      }
+    ],
+    "frontend-design@claude-code-plugins": [
+      {
+        "scope": "user",
+        "installPath": "C:\\Users\\tjn\\.claude\\plugins\\cache\\claude-code-plugins\\frontend-design\\1.0.0",
+        "version": "1.0.0",
+        "installedAt": "2025-11-15T01:45:19.830Z",
+        "lastUpdated": "2025-11-15T01:45:19.830Z",
+        "gitCommitSha": "5dd91a9fe23cf68da641cc4f01d90931c0f530ce",
+        "isLocal": true
+      }
+    ],
+    "document-skills@anthropic-agent-skills": [
+      {
+        "scope": "user",
+        "installPath": "C:\\Users\\tjn\\.claude\\plugins\\cache\\anthropic-agent-skills\\document-skills\\unknown",
+        "version": "unknown",
+        "installedAt": "2025-11-15T01:45:19.830Z",
+        "lastUpdated": "2025-11-15T01:45:19.830Z",
+        "gitCommitSha": "e5c60158df67e67d7609065ba3ad5605a6794e93",
+        "isLocal": true
+      }
+    ],
+    "example-skills@anthropic-agent-skills": [
+      {
+        "scope": "user",
+        "installPath": "C:\\Users\\tjn\\.claude\\plugins\\cache\\anthropic-agent-skills\\example-skills\\unknown",
+        "version": "unknown",
+        "installedAt": "2025-11-15T01:45:19.830Z",
+        "lastUpdated": "2025-11-15T01:45:19.830Z",
+        "gitCommitSha": "e5c60158df67e67d7609065ba3ad5605a6794e93",
+        "isLocal": true
+      }
+    ],
+    "taches-cc-resources@taches-cc-resources": [
+      {
+        "scope": "user",
+        "installPath": "C:\\Users\\tjn\\.claude\\plugins\\cache\\taches-cc-resources\\taches-cc-resources\\1.0.0",
+        "version": "1.0.0",
+        "installedAt": "2025-12-03T23:09:41.001Z",
+        "lastUpdated": "2025-12-03T23:09:41.001Z",
+        "gitCommitSha": "62378fb1c095c2988348dd4f33e4c8f3efaaa4fa",
+        "isLocal": true
+      }
+    ],
+    "claude-opus-4-5-migration@claude-code-plugins": [
+      {
+        "scope": "user",
+        "installPath": "C:\\Users\\tjn\\.claude\\plugins\\cache\\claude-code-plugins\\claude-opus-4-5-migration\\1.0.0",
+        "version": "1.0.0",
+        "installedAt": "2025-12-16T20:52:48.726Z",
+        "lastUpdated": "2025-12-16T20:52:48.726Z",
+        "isLocal": true
+      }
+    ],
+    "hookify@claude-code-plugins": [
+      {
+        "scope": "user",
+        "installPath": "C:\\Users\\tjn\\.claude\\plugins\\cache\\claude-code-plugins\\hookify\\0.1.0",
+        "version": "0.1.0",
+        "installedAt": "2025-12-16T20:52:48.807Z",
+        "lastUpdated": "2025-12-16T20:52:48.807Z",
+        "isLocal": true
+      }
+    ],
+    "plugin-dev@claude-code-plugins": [
+      {
+        "scope": "user",
+        "installPath": "C:\\Users\\tjn\\.claude\\plugins\\cache\\claude-code-plugins\\plugin-dev\\0.1.0",
+        "version": "0.1.0",
+        "installedAt": "2025-12-16T20:52:48.899Z",
+        "lastUpdated": "2025-12-16T20:52:48.899Z",
+        "isLocal": true
+      }
+    ],
+    "ralph-wiggum@claude-code-plugins": [
+      {
+        "scope": "user",
+        "installPath": "C:\\Users\\tjn\\.claude\\plugins\\cache\\claude-code-plugins\\ralph-wiggum\\1.0.0",
+        "version": "1.0.0",
+        "installedAt": "2025-12-16T20:52:48.966Z",
+        "lastUpdated": "2025-12-16T20:52:48.966Z",
+        "isLocal": true
+      }
+    ]
+  }
+}

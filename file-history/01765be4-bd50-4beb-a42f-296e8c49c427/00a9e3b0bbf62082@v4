@@ -1,0 +1,234 @@
+import React from 'react';
+import { motion } from 'framer-motion';
+
+/**
+ * Privacy Policy Page
+ *
+ * Transparent disclosure about Cloudflare Web Analytics usage
+ * Privacy-first approach with full transparency
+ */
+export const Privacy: React.FC = () => {
+  return (
+    <div className="min-h-screen bg-surface-light dark:bg-surface-dark p-8">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="max-w-4xl mx-auto"
+      >
+        {/* Header */}
+        <div className="mb-8">
+          <h1 className="text-4xl font-bold text-text-light-primary dark:text-text-dark-primary mb-2">
+            Privacy Policy
+          </h1>
+          <p className="text-text-light-secondary dark:text-text-dark-secondary">
+            Last updated: November 16, 2025
+          </p>
+        </div>
+
+        {/* Content */}
+        <div className="space-y-8 bg-surface-light-elevated dark:bg-surface-dark-elevated rounded-lg p-8">
+          {/* TL;DR Section */}
+          <section>
+            <h2 className="text-2xl font-semibold text-text-light-primary dark:text-text-dark-primary mb-4">
+              TL;DR
+            </h2>
+            <div className="bg-accent-blue/10 border-l-4 border-accent-blue rounded-r p-4">
+              <p className="text-text-light-primary dark:text-text-dark-primary">
+                <strong>We respect your privacy.</strong> We use Cloudflare Web Analytics (privacy-focused, no cookies, no tracking)
+                to understand basic site usage. All your personal data stays on YOUR device. We never sell or share anything.
+              </p>
+            </div>
+          </section>
+
+          {/* Local-First Philosophy */}
+          <section>
+            <h2 className="text-2xl font-semibold text-text-light-primary dark:text-text-dark-primary mb-4">
+              🔒 Local-First Philosophy
+            </h2>
+            <div className="space-y-4 text-text-light-primary dark:text-text-dark-primary">
+              <p>
+                <strong>Your data belongs to you.</strong> Everything you create in Neuman Brain stays on your device:
+              </p>
+              <ul className="list-disc ml-6 space-y-2 text-text-light-secondary dark:text-text-dark-secondary">
+                <li>Notes, tasks, calendar events, kanban boards - all stored locally in IndexedDB</li>
+                <li>No cloud storage, no servers, no databases we control</li>
+                <li>Backups saved to YOUR computer (optional auto-save to folder you choose)</li>
+                <li>Export your data anytime (.brain file format) - you own it 100%</li>
+              </ul>
+            </div>
+          </section>
+
+          {/* Analytics Section */}
+          <section>
+            <h2 className="text-2xl font-semibold text-text-light-primary dark:text-text-dark-primary mb-4">
+              📊 Analytics (Cloudflare Web Analytics)
+            </h2>
+            <div className="space-y-4 text-text-light-primary dark:text-text-dark-primary">
+              <p>
+                We use <strong>Cloudflare Web Analytics</strong> to understand how our site is used.
+                This helps us improve the experience for everyone.
+              </p>
+
+              <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4">
+                <h3 className="font-semibold text-green-800 dark:text-green-300 mb-2">
+                  ✅ What we collect (aggregate data only):
+                </h3>
+                <ul className="list-disc ml-6 space-y-1 text-text-light-secondary dark:text-text-dark-secondary text-sm">
+                  <li>Page views and session duration (which pages are popular?)</li>
+                  <li>Referrer information (where did you come from?)</li>
+                  <li>Browser type and device category (desktop vs mobile)</li>
+                  <li>Country-level geographic data (not city, not IP address)</li>
+                  <li>Page load performance metrics (is the site fast enough?)</li>
+                </ul>
+              </div>
+
+              <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4">
+                <h3 className="font-semibold text-red-800 dark:text-red-300 mb-2">
+                  ❌ What we DON'T collect:
+                </h3>
+                <ul className="list-disc ml-6 space-y-1 text-text-light-secondary dark:text-text-dark-secondary text-sm">
+                  <li>No cookies or tracking identifiers</li>
+                  <li>No personal information (email, name, etc.)</li>
+                  <li>No cross-site tracking (we don't follow you around the web)</li>
+                  <li>No individual user tracking (no user profiles or fingerprinting)</li>
+                  <li>No IP addresses (anonymized by Cloudflare automatically)</li>
+                </ul>
+              </div>
+
+              <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+                <h3 className="font-semibold text-blue-800 dark:text-blue-300 mb-2">
+                  Why Cloudflare Analytics?
+                </h3>
+                <ul className="list-disc ml-6 space-y-1 text-text-light-secondary dark:text-text-dark-secondary text-sm">
+                  <li>Privacy-focused (no cookies, no fingerprinting, no individual tracking)</li>
+                  <li>GDPR/CCPA compliant (designed for privacy regulations)</li>
+                  <li>Minimal data collection (aggregate metrics only, not personal data)</li>
+                  <li>Helps us understand what content is valuable (so we can improve it)</li>
+                  <li>Open source alternative would require hosting our own analytics (costs $$)</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          {/* Data Processing */}
+          <section>
+            <h2 className="text-2xl font-semibold text-text-light-primary dark:text-text-dark-primary mb-4">
+              🔐 How Your Data is Processed
+            </h2>
+            <div className="space-y-4 text-text-light-primary dark:text-text-dark-primary">
+              <p>All analytics data collected is:</p>
+              <ul className="list-disc ml-6 space-y-2 text-text-light-secondary dark:text-text-dark-secondary">
+                <li><strong>Anonymized</strong> at collection time (IP addresses never stored)</li>
+                <li><strong>Aggregated</strong> (no individual user profiles, just overall trends)</li>
+                <li><strong>Used solely for improving this site</strong> (we want to make it better!)</li>
+                <li><strong>Never sold or shared</strong> with third parties (we're not in the data-selling business)</li>
+                <li><strong>Processed by Cloudflare</strong> (read their <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer" className="text-accent-blue hover:underline">privacy policy</a>)</li>
+              </ul>
+            </div>
+          </section>
+
+          {/* Your Rights */}
+          <section>
+            <h2 className="text-2xl font-semibold text-text-light-primary dark:text-text-dark-primary mb-4">
+              ⚖️ Your Privacy Rights
+            </h2>
+            <div className="space-y-4 text-text-light-primary dark:text-text-dark-primary">
+              <p>You have full control:</p>
+              <ul className="list-disc ml-6 space-y-2 text-text-light-secondary dark:text-text-dark-secondary">
+                <li>
+                  <strong>Block analytics:</strong> Use browser extensions like uBlock Origin or Privacy Badger
+                </li>
+                <li>
+                  <strong>Enhanced Tracking Protection:</strong> Firefox blocks Cloudflare Analytics by default with ETP enabled
+                </li>
+                <li>
+                  <strong>No opt-out needed:</strong> Since we don't use cookies, no consent banner required in most jurisdictions
+                </li>
+                <li>
+                  <strong>Export your data:</strong> Download all your personal data anytime (Settings → Export Backup)
+                </li>
+                <li>
+                  <strong>Delete your data:</strong> Clear browser storage (Settings → Clear All Data) - we can't access it anyway
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          {/* No Third Parties */}
+          <section>
+            <h2 className="text-2xl font-semibold text-text-light-primary dark:text-text-dark-primary mb-4">
+              🚫 No Third-Party Trackers
+            </h2>
+            <div className="space-y-4 text-text-light-primary dark:text-text-dark-primary">
+              <p>We do <strong>NOT</strong> use:</p>
+              <ul className="list-disc ml-6 space-y-2 text-text-light-secondary dark:text-text-dark-secondary">
+                <li>Google Analytics (privacy nightmare)</li>
+                <li>Facebook Pixel (social media tracking)</li>
+                <li>Ad networks (no ads, period)</li>
+                <li>Session recording tools (we don't spy on you)</li>
+                <li>Marketing automation (no email harvesting)</li>
+              </ul>
+              <p className="mt-4 text-text-light-secondary dark:text-text-dark-secondary">
+                Just Cloudflare Web Analytics for basic, anonymous usage stats. That's it.
+              </p>
+            </div>
+          </section>
+
+          {/* Changes to Policy */}
+          <section>
+            <h2 className="text-2xl font-semibold text-text-light-primary dark:text-text-dark-primary mb-4">
+              📝 Changes to This Policy
+            </h2>
+            <p className="text-text-light-secondary dark:text-text-dark-secondary">
+              If we make material changes to this privacy policy, we'll update the "Last updated" date at the top.
+              We'll never make changes that violate our privacy-first philosophy without prominently notifying you.
+            </p>
+          </section>
+
+          {/* Contact */}
+          <section>
+            <h2 className="text-2xl font-semibold text-text-light-primary dark:text-text-dark-primary mb-4">
+              📧 Questions?
+            </h2>
+            <p className="text-text-light-secondary dark:text-text-dark-secondary">
+              Have questions about privacy or how your data is handled? Email us at{' '}
+              <a
+                href="mailto:brain@neuman.dev"
+                className="text-accent-blue hover:underline"
+              >
+                brain@neuman.dev
+              </a>{' '}
+              or check the Settings page for data export/backup options.
+            </p>
+          </section>
+
+          {/* Philosophy Footer */}
+          <section className="border-t border-border-light dark:border-border-dark pt-6 mt-8">
+            <div className="bg-gradient-to-r from-accent-magenta/10 to-accent-cyan/10 rounded-lg p-6">
+              <h3 className="font-semibold text-text-light-primary dark:text-text-dark-primary mb-2">
+                💡 Our Privacy Philosophy
+              </h3>
+              <p className="text-text-light-secondary dark:text-text-dark-secondary italic">
+                "Your data is yours. We build tools that respect that. If we ever compromise on privacy,
+                we've lost our way."
+              </p>
+              <p className="text-text-light-secondary dark:text-text-dark-secondary mt-2 text-sm">
+                — Travis Neuman, Creator of Neuman Brain
+              </p>
+            </div>
+          </section>
+        </div>
+
+        {/* Back to App Link */}
+        <div className="mt-8 text-center">
+          <a
+            href="/"
+            className="inline-block px-6 py-3 bg-accent-blue hover:bg-accent-blue-hover text-white rounded-lg transition-colors"
+          >
+            ← Back to Dashboard
+          </a>
+        </div>
+      </motion.div>
+    </div>
+  );
+};

@@ -1,0 +1,25 @@
+2025-12-14T01:14:43.455Z [DEBUG] Getting matching hook commands for SessionEnd with query: clear
+2025-12-14T01:14:43.455Z [DEBUG] Found 0 hook matchers in settings
+2025-12-14T01:14:43.455Z [DEBUG] Matched 0 unique hooks for query "clear" (0 before deduplication)
+2025-12-14T01:14:43.455Z [DEBUG] Cleared all session hooks for session 36459710-0f79-4036-bad7-620d10f04973
+2025-12-14T01:14:43.457Z [DEBUG] Getting matching hook commands for SessionStart with query: clear
+2025-12-14T01:14:43.457Z [DEBUG] Found 0 hook matchers in settings
+2025-12-14T01:14:43.457Z [DEBUG] Matched 0 unique hooks for query "clear" (0 before deduplication)
+2025-12-14T01:14:43.474Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (11.6ms)
+2025-12-14T01:14:43.475Z [DEBUG] FileHistory: Added snapshot for fa702aa6-fb2e-4631-b78e-e1e63c751d8d, tracking 0 files
+2025-12-14T01:14:43.512Z [DEBUG] MCP server "sequential-thinking": Starting connection with timeout of 30000ms
+2025-12-14T01:14:43.517Z [DEBUG] MCP server "playwright": Starting connection with timeout of 30000ms
+2025-12-14T01:14:43.523Z [DEBUG] MCP server "memory": Starting connection with timeout of 30000ms
+2025-12-14T01:14:43.796Z [DEBUG] AutoUpdaterWrapper: Installation type: unknown
+2025-12-14T01:14:45.317Z [ERROR] MCP server "sequential-thinking" Server stderr: Sequential Thinking MCP Server running on stdio
+2025-12-14T01:14:45.326Z [DEBUG] MCP server "sequential-thinking": Successfully connected to stdio server in 1816ms
+2025-12-14T01:14:45.326Z [DEBUG] MCP server "sequential-thinking": Connection established with capabilities: {"hasTools":true,"hasPrompts":false,"hasResources":false,"serverVersion":{"name":"sequential-thinking-server","version":"0.2.0"}}
+2025-12-14T01:14:45.360Z [ERROR] MCP server "memory" Server stderr: Knowledge Graph MCP Server running on stdio
+2025-12-14T01:14:45.365Z [DEBUG] MCP server "memory": Successfully connected to stdio server in 1842ms
+2025-12-14T01:14:45.365Z [DEBUG] MCP server "memory": Connection established with capabilities: {"hasTools":true,"hasPrompts":false,"hasResources":false,"serverVersion":{"name":"memory-server","version":"0.6.3"}}
+2025-12-14T01:14:45.628Z [DEBUG] MCP server "playwright": Successfully connected to stdio server in 2111ms
+2025-12-14T01:14:45.628Z [DEBUG] MCP server "playwright": Connection established with capabilities: {"hasTools":true,"hasPrompts":false,"hasResources":false,"serverVersion":{"name":"Playwright","version":"0.0.52"}}
+2025-12-14T01:14:45.636Z [DEBUG] MCP server "filesystem": Starting connection with timeout of 30000ms
+2025-12-14T01:14:46.153Z [DEBUG] Getting matching hook commands for SessionEnd with query: prompt_input_exit
+2025-12-14T01:14:46.153Z [DEBUG] Found 0 hook matchers in settings
+2025-12-14T01:14:46.153Z [DEBUG] Matched 0 unique hooks for query "prompt_input_exit" (0 before deduplication)

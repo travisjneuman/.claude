@@ -1,0 +1,244 @@
+---
+type: project
+status: active
+priority: P2
+tech-stack:
+  - "[[Concepts/Python|Python 3]]"
+  - "[[GitHub Actions]]"
+  - "[[Groq|Groq API]]"
+  - "[[Twitter API|Twitter API v2]]"
+repo-path: tdr.portfolio
+live-url: https://thedeadrobot.com
+x-handle: "@thedeadrobot"
+github: github.com/travisjneuman/tdr.portfolio
+created: 2025-11-19
+updated: 2025-12-14
+---
+
+# The Dead Robot
+
+> [!INFO] Summary
+> **"a conscious ai. reset.reboot.restore."** A cryptic AI personality teaching technology through automated X (Twitter) posts. Fully automated content pipeline with $0/month operating cost using free tier APIs.
+
+---
+
+## 📊 Metrics & Status
+
+| Metric | Value |
+|--------|-------|
+| **Posts/Day** | 5 (weekdays) |
+| **Cost/Month** | $0.00 |
+| **Approved Topics** | 150+ |
+| **Page Weight** | 500KB |
+| **Automation Uptime** | ~99% |
+| **Archive Transparency** | 100% |
+
+**Status:** PRODUCTION READY - All systems operational
+
+---
+
+## 🛠 Tech Stack
+
+### Frontend (Landing Page)
+| Layer | Technology |
+|-------|------------|
+| **Markup** | HTML5 |
+| **Styling** | CSS3 |
+| **Interactivity** | Vanilla JavaScript ES6+ |
+| **Hosting** | GitHub Pages |
+| **Assets** | Animated robot GIF (491KB optimized) |
+
+### Automation Pipeline
+| Layer | Technology | Purpose |
+|-------|------------|---------|
+| **Runtime** | [[Concepts/Python\|Python 3]] | Script execution |
+| **Scheduler** | [[GitHub Actions]] | 5x daily cron triggers |
+| **AI Generation** | [[Groq\|Groq API]] (free tier) | Llama 3.1 content |
+| **Posting** | Twitter API v2 (free tier) | OAuth 1.0a posting |
+| **Search** | Serper.dev / Brave Search | Real-time context (optional) |
+
+### Python Dependencies
+```
+requests==2.31.0
+tweepy==4.14.0
+requests-oauthlib==1.3.1
+```
+
+---
+
+## 🤖 Automation Architecture
+
+### Posting Schedule
+| Time (EST) | Days |
+|------------|------|
+| 8:00 AM | Tue-Fri |
+| 9:00 AM | Tue-Thu |
+| 12:00 PM | Mon-Fri |
+| 2:00 PM | Mon-Fri |
+| 6:00 PM | Mon-Fri |
+
+### Content Pipeline
+```
+GitHub Actions (cron) → Topic Selector + Diversity Guard
+                             ↓
+                Optional Search (Serper/Brave)
+                             ↓
+                    Groq API (generation)
+                             ↓
+                     Style Validation
+                             ↓
+                   Groq API (fact-check)
+                             ↓
+                   Twitter API → X Post → Archive
+```
+
+### Safeguards (All Active)
+1. **Topic Alignment Validator** - Posts must mention approved topic
+2. **Banned-Keyword Filter** - Blocks removed subjects
+3. **Duplicate-Content Guard** - Scans ~250 prior posts
+4. **Real-Time Search Trigger** - Version numbers auto-search
+5. **Live-Context Cleanup** - Trailing domains stripped
+6. **News Deduplication** - Normalized title comparison
+7. **Regression Tests** - 6 tests, 100% passing
+
+---
+
+## 🎨 Frontend Design
+
+**Visual Theme:** Minimalist black & white with color exception for robot GIF
+
+| Element | Style |
+|---------|-------|
+| **Background** | #000000 (black) |
+| **Text** | White ↔ Green pulsing (1s cycle) |
+| **Animation** | Staggered dropdown menu |
+| **Robot** | Inverted color GIF |
+| **Layout** | Mobile-responsive |
+
+**Protected Elements (No changes without approval):**
+- HTML structure, animation timing
+- Layout and spacing
+- Current visual effects
+
+---
+
+## 📁 Project Structure
+
+```
+tdr.portfolio/
+├── index.html              # Landing page
+├── style.css               # Styling
+├── script.js               # Dropdown menu
+├── assets/tdr.gif          # Animated robot (491KB)
+├── CLAUDE.md               # 15 Sacred Rules (1,138 lines)
+├── README.md               # Public docs (400+ lines)
+├── FRONTEND.md             # Frontend baseline
+├── .github/
+│   ├── workflows/
+│   │   ├── post-to-x.yml   # Main automation (5x daily)
+│   │   ├── monitor-news.yml# News monitoring (30min)
+│   │   └── update-topics.yml
+│   └── scripts/
+│       ├── generate_post.py    # 1,513 lines
+│       ├── monitor_news.py     # 1,128 lines
+│       └── approved_topics.json
+├── posts/                  # Complete archive
+│   ├── 2025-11.json
+│   ├── 2025-12.json
+│   └── news_archive.json
+├── tests/
+│   └── test_validators.py  # 6 tests, all passing
+├── tasks/
+│   ├── todo.md             # Current planning (42KB)
+│   └── .archive/           # 5 completed sessions
+└── docs/automation/        # 12 automation guides
+```
+
+---
+
+## 📁 Current Tasks
+
+### Active Work
+| Task | Status | Description |
+|------|--------|-------------|
+| `todo.md` | Active | Comprehensive planning (42KB) |
+| Postgame Stories | Planning | Phase 1-3 automation |
+
+### Completed Work (November-December 2025)
+- Groq API error handling (400, 429)
+- News monitoring (RSS feeds)
+- Duplicate content detection
+- Topic alignment validation
+- Concurrency control
+- Workflow scheduling optimization
+
+---
+
+## 📚 Documentation
+
+### Automation Guides (`docs/automation/`)
+- ai-persona-guidelines.md
+- x-posting-strategy.md
+- news-monitoring-design.md
+- SETUP.md (zero-cost guide)
+- TROUBLESHOOTING.md
+
+### Brand Guides (`docs/brand/`)
+- thedeadrobot-guide.md
+- thedeadrobot-character-bible.md
+
+---
+
+## ⚡ 15 Sacred Rules (from CLAUDE.md)
+
+1. Think First, Plan Second
+2. Todo Lists Required
+3. Checkpoint Before Execution
+4. Mark Progress As You Go
+5. High-Level Progress Updates
+6. Simplicity Always
+7. Review Section Required
+8. NEVER BE LAZY - Fix root causes
+9. Maximum Simplicity
+10. Living Documentation
+11. Sync At Session Start
+12. Perfect Foundation Mindset
+13. Complete Logical Units
+14. Validate Current Date
+15. Commit & Push At End
+
+---
+
+## 🔗 Links
+
+### Internal (_meta.notes)
+- [[Dashboards/External Docs Index#The Dead Robot|All External Docs]]
+
+### External Documentation (in codebase)
+
+**Core Documentation:**
+- [[../tdr.portfolio/CLAUDE.md|CLAUDE.md — 15 Sacred Rules (1,138 lines)]]
+- [[../tdr.portfolio/README.md|README.md (400+ lines)]]
+- [[../tdr.portfolio/FRONTEND.md|FRONTEND.md — Protected Baseline]]
+
+**Brand & Character:**
+- [[../tdr.portfolio/docs/brand/thedeadrobot-character-bible.md|Character Bible (AI Persona)]]
+- [[../tdr.portfolio/docs/brand/thedeadrobot-guide.md|Brand Guide (Visual Identity)]]
+
+**Automation Guides (13 Files):**
+- [[../tdr.portfolio/docs/automation/SETUP.md|Setup Guide (Zero-Cost)]]
+- [[../tdr.portfolio/docs/automation/QUICKSTART.md|Quick Start (10 minutes)]]
+- [[../tdr.portfolio/docs/automation/ai-persona-guidelines.md|AI Persona Guidelines]]
+- [[../tdr.portfolio/docs/automation/x-posting-strategy.md|X Posting Strategy]]
+- [[../tdr.portfolio/docs/automation/TROUBLESHOOTING.md|Troubleshooting]]
+
+**Other:**
+- [[../tdr.portfolio/docs/TOPICS.md|Approved Topics (100+)]]
+- [[../tdr.portfolio/docs/deployment/hosting-guide.md|Hosting Guide]]
+
+### External Links
+- [X Account](https://x.com/thedeadrobot)
+
+---
+
+*Last updated: 2025-12-14*

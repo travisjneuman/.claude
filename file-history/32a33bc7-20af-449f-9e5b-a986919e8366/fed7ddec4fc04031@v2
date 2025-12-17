@@ -1,0 +1,455 @@
+import type { Page } from '@playwright/test';
+import type {
+  Task,
+  TaskStatus,
+  TaskPriority,
+  CalendarEvent,
+  Subtask,
+} from '../../src/types';
+
+/**
+ * Test Data Factories for E2E Tests
+ *
+ * Provides factory functions to create realistic test data.
+ * All factories use deterministic data for reliable tests.
+ */
+
+// ==================== TASK FACTORIES ====================
+
+let taskIdCounter = 1;
+
+export interface TaskFactoryOptions {
+  title?: string;
+  description?: string;
+  status?: TaskStatus;
+  priority?: TaskPriority;
+  dueDate?: string; // YYYY-M-D format
+  tags?: string[];
+  subtasks?: Partial<Subtask>[];
+  recurrence?: Task['recurrence'];
+}
+
+/**
+ * Create a mock task with default or custom values
+ */
+export function createMockTask(options: TaskFactoryOptions = {}): Task {
+  const id = `test-task-${taskIdCounter++}`;
+  const now = new Date().toISOString();
+
+  return {
+    id,
+    title: options.title || `Test Task ${id}`,
+    description: options.description || `Description for ${id}`,
+    status: options.status || 'todo',
+    priority: options.priority || 'medium',
+    created: now,
+    startDate: null,
+    dueDate: options.dueDate || null,
+    tags: options.tags || [],
+    order: taskIdCounter,
+    subtasks: options.subtasks?.map((subtask, index) => ({
+      id: subtask.id || `${id}-subtask-${index}`,
+      parentTaskId: id,
+      title: subtask.title || `Subtask ${index + 1}`,
+      description: subtask.description,
+      completed: subtask.completed || false,
+      priority: subtask.priority || 'medium',
+      dueDate: subtask.dueDate,
+      order: index,
+      createdAt: now,
+      completedAt: subtask.completedAt,
+    })),
+    recurrence: options.recurrence,
+  };
+}
+
+/**
+ * Create multiple tasks at once
+ */
+export function createMockTasks(
+  count: number,
+  baseOptions: TaskFactoryOptions = {}
+): Task[] {
+  return Array.from({ length: count }, (_, i) =>
+    createMockTask({
+      ...baseOptions,
+      title: baseOptions.title || `Task ${i + 1}`,
+    })
+  );
+}
+
+// ==================== EVENT FACTORIES ====================
+
+let eventIdCounter = 1;
+
+export interface EventFactoryOptions {
+  title?: string;
+  description?: string;
+  startTime?: string; // HH:mm format
+  endTime?: string;
+  isAllDay?: boolean;
+  recurrence?: CalendarEvent['recurrence'];
+  location?: string;
+  reminders?: number[];
+}
+
+/**
+ * Create a mock calendar event
+ */
+export function createMockEvent(
+  dateKey: string, // YYYY-M-D format
+  options: EventFactoryOptions = {}
+): CalendarEvent {
+  const id = `test-event-${eventIdCounter++}`;
+
+  return {
+    id,
+    title: options.title || `Test Event ${id}`,
+    description: options.description || `Event description for ${id}`,
+    startTime: options.startTime,
+    endTime: options.endTime,
+    isAllDay: options.isAllDay ?? (!options.startTime && !options.endTime),
+    recurrence: options.recurrence,
+    location: options.location,
+    reminders: options.reminders,
+  };
+}
+
+/**
+ * Create a recurring event
+ */
+export function createRecurringEvent(
+  dateKey: string,
+  frequency: 'daily' | 'weekly' | 'monthly' | 'yearly',
+  options: EventFactoryOptions = {}
+): CalendarEvent {
+  return createMockEvent(dateKey, {
+    ...options,
+    recurrence: {
+      frequency,
+      interval: 1,
+      endType: 'never',
+      ...options.recurrence,
+    },
+  });
+}
+
+// ==================== NOTE FACTORIES ====================
+
+let noteIdCounter = 1;
+
+export interface NoteFactoryOptions {
+  title?: string;
+  content?: string;
+  folderId?: string;
+  tags?: string[];
+}
+
+export interface MockNote {
+  id: string;
+  title: string;
+  content: string;
+  folderId: string | null;
+  tags: string[];
+  linkedNotes: string[];
+  created: string;
+  updated: string;
+}
+
+/**
+ * Create a mock note
+ */
+export function createMockNote(options: NoteFactoryOptions = {}): MockNote {
+  const id = `test-note-${noteIdCounter++}`;
+  const now = new Date().toISOString();
+
+  return {
+    id,
+    title: options.title || `Test Note ${id}`,
+    content: options.content || `Content for note ${id}`,
+    folderId: options.folderId || null,
+    tags: options.tags || [],
+    linkedNotes: [],
+    created: now,
+    updated: now,
+  };
+}
+
+/**
+ * Create a note with wikilinks
+ */
+export function createNoteWithLinks(
+  linkedNoteIds: string[],
+  options: NoteFactoryOptions = {}
+): MockNote {
+  const note = createMockNote(options);
+  note.linkedNotes = linkedNoteIds;
+  note.content = linkedNoteIds
+    .map((id) => `[[${id}]]`)
+    .join(' ') + ` ${note.content}`;
+  return note;
+}
+
+// ==================== TIME ENTRY FACTORIES ====================
+
+let timeEntryIdCounter = 1;
+
+export interface TimeEntryFactoryOptions {
+  description?: string;
+  startTime?: string; // ISO date
+  endTime?: string;   // ISO date
+  duration?: number;  // seconds
+  projectId?: string;
+  isBillable?: boolean;
+}
+
+export interface MockTimeEntry {
+  id: string;
+  description: string;
+  startTime: string;
+  endTime: string;
+  duration: number;
+  projectId: string | null;
+  isBillable: boolean;
+}
+
+/**
+ * Create a mock time entry
+ */
+export function createMockTimeEntry(
+  options: TimeEntryFactoryOptions = {}
+): MockTimeEntry {
+  const id = `test-time-entry-${timeEntryIdCounter++}`;
+  const startTime = options.startTime || new Date().toISOString();
+  const duration = options.duration || 3600; // 1 hour default
+  const endTime = options.endTime || new Date(Date.parse(startTime) + duration * 1000).toISOString();
+
+  return {
+    id,
+    description: options.description || `Time entry ${id}`,
+    startTime,
+    endTime,
+    duration,
+    projectId: options.projectId || null,
+    isBillable: options.isBillable || false,
+  };
+}
+
+// ==================== AUTOMATION RULE FACTORIES ====================
+
+let ruleIdCounter = 1;
+
+export interface AutomationRuleFactoryOptions {
+  name?: string;
+  trigger?: string;
+  condition?: string;
+  action?: string;
+  enabled?: boolean;
+}
+
+export interface MockAutomationRule {
+  id: string;
+  name: string;
+  trigger: {
+    event: string;
+    entityType: string;
+  };
+  condition: string;
+  action: {
+    type: string;
+    params: Record<string, unknown>;
+  };
+  enabled: boolean;
+  createdAt: string;
+}
+
+/**
+ * Create a mock automation rule
+ */
+export function createMockAutomationRule(
+  options: AutomationRuleFactoryOptions = {}
+): MockAutomationRule {
+  const id = `test-rule-${ruleIdCounter++}`;
+  const now = new Date().toISOString();
+
+  return {
+    id,
+    name: options.name || `Test Rule ${id}`,
+    trigger: {
+      event: options.trigger || 'task.completed',
+      entityType: 'task',
+    },
+    condition: options.condition || 'true',
+    action: {
+      type: options.action || 'createTask',
+      params: {
+        title: 'Auto-created task',
+        status: 'todo',
+      },
+    },
+    enabled: options.enabled ?? true,
+    createdAt: now,
+  };
+}
+
+// ==================== BROWSER HELPERS ====================
+
+/**
+ * Clear all IndexedDB stores for test isolation
+ */
+export async function clearAllStores(page: Page): Promise<void> {
+  await page.evaluate(async () => {
+    const databases = await indexedDB.databases();
+    for (const db of databases) {
+      if (db.name) {
+        indexedDB.deleteDatabase(db.name);
+      }
+    }
+  });
+
+  // Wait for deletion to complete
+  await page.waitForTimeout(100);
+}
+
+/**
+ * Wait for IndexedDB operations to complete
+ *
+ * Usage: await waitForIndexedDB(page);
+ */
+export async function waitForIndexedDB(page: Page, timeout = 1000): Promise<void> {
+  await page.waitForTimeout(timeout);
+}
+
+/**
+ * Get all items from a specific IndexedDB store
+ */
+export async function getStoreData<T = unknown>(
+  page: Page,
+  storeName: string
+): Promise<T | null> {
+  return page.evaluate(async (name) => {
+    const dbName = 'neuman-brain-db';
+    return new Promise((resolve, reject) => {
+      const request = indexedDB.open(dbName);
+
+      request.onerror = () => reject(request.error);
+
+      request.onsuccess = () => {
+        const db = request.result;
+        const transaction = db.transaction('brain-data', 'readonly');
+        const store = transaction.objectStore('brain-data');
+        const getRequest = store.get(name);
+
+        getRequest.onsuccess = () => {
+          const value = getRequest.result;
+          resolve(value ? JSON.parse(value) : null);
+        };
+
+        getRequest.onerror = () => reject(getRequest.error);
+      };
+    });
+  }, storeName);
+}
+
+/**
+ * Set data directly into IndexedDB (for test setup)
+ */
+export async function setStoreData<T = unknown>(
+  page: Page,
+  storeName: string,
+  data: T
+): Promise<void> {
+  await page.evaluate(
+    async ({ name, value }) => {
+      const dbName = 'neuman-brain-db';
+      return new Promise((resolve, reject) => {
+        const request = indexedDB.open(dbName);
+
+        request.onerror = () => reject(request.error);
+
+        request.onsuccess = () => {
+          const db = request.result;
+          const transaction = db.transaction('brain-data', 'readwrite');
+          const store = transaction.objectStore('brain-data');
+          const putRequest = store.put(JSON.stringify(value), name);
+
+          putRequest.onsuccess = () => resolve();
+          putRequest.onerror = () => reject(putRequest.error);
+        };
+      });
+    },
+    { name: storeName, value: data }
+  );
+}
+
+/**
+ * Check if app has finished loading and IndexedDB is ready
+ */
+export async function waitForAppLoaded(page: Page): Promise<void> {
+  // Wait for main content
+  await page.waitForSelector('[role="main"], main, #root', { state: 'visible' });
+
+  // Wait for IndexedDB to be initialized
+  await page.evaluate(async () => {
+    return new Promise<void>((resolve) => {
+      const checkDB = () => {
+        const request = indexedDB.open('neuman-brain-db');
+        request.onsuccess = () => {
+          request.result.close();
+          resolve();
+        };
+        request.onerror = () => {
+          setTimeout(checkDB, 100);
+        };
+      };
+      checkDB();
+    });
+  });
+}
+
+// ==================== RESET COUNTERS (FOR TEST ISOLATION) ====================
+
+/**
+ * Reset all ID counters (call in beforeEach)
+ */
+export function resetTestCounters(): void {
+  taskIdCounter = 1;
+  eventIdCounter = 1;
+  noteIdCounter = 1;
+  timeEntryIdCounter = 1;
+  ruleIdCounter = 1;
+}
+
+// ==================== DATE HELPERS ====================
+
+/**
+ * Format date to YYYY-M-D (Neuman Brain's canonical format)
+ */
+export function formatDateKey(date: Date): string {
+  return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+}
+
+/**
+ * Get today's date key
+ */
+export function getTodayKey(): string {
+  return formatDateKey(new Date());
+}
+
+/**
+ * Get date N days from now
+ */
+export function getFutureDateKey(daysFromNow: number): string {
+  const date = new Date();
+  date.setDate(date.getDate() + daysFromNow);
+  return formatDateKey(date);
+}
+
+/**
+ * Get date N days ago
+ */
+export function getPastDateKey(daysAgo: number): string {
+  const date = new Date();
+  date.setDate(date.getDate() - daysAgo);
+  return formatDateKey(date);
+}

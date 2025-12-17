@@ -1,0 +1,206 @@
+/**
+ * Dashboard Widget Store
+ *
+ * Manages widget state: enabled widgets, order, and settings
+ * Persists to localStorage for user preferences
+ */
+
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
+
+export interface WidgetSettings {
+  refreshRate?: number; // Minutes between auto-refresh
+  [key: string]: any; // Widget-specific settings
+}
+
+export interface WidgetState {
+  // Enabled widget IDs in display order
+  enabledWidgets: string[];
+
+  // Widget-specific settings
+  widgetSettings: Record<string, WidgetSettings>;
+
+  // Widget sizes (1x, 2x, or 3x width)
+  widgetSizes: Record<string, 1 | 2 | 3>;
+
+  // Actions
+  enableWidget: (widgetId: string) => void;
+  disableWidget: (widgetId: string) => void;
+  reorderWidgets: (newOrder: string[]) => void;
+  updateWidgetSettings: (widgetId: string, settings: Partial<WidgetSettings>) => void;
+  setWidgetSize: (widgetId: string, size: 1 | 2 | 3) => void;
+  isWidgetEnabled: (widgetId: string) => boolean;
+  getWidgetSettings: (widgetId: string) => WidgetSettings;
+}
+
+export const useWidgetStore = create<WidgetState>()(
+  persist(
+    (set, get) => ({
+      // Default enabled widgets (core widgets + weathermap only)
+      // API widgets (quote, crypto, hackernews, etc.) available in Widget Manager but disabled by default
+      enabledWidgets: ['weathermap', 'tasksquickadd', 'upcomingevents', 'recentnotes'],
+
+      // Default widget sizes (2-column grid)
+      // WeatherMap: 3x (renders as 2 columns = full row width, locked)
+      // TasksQuickAdd: 3x (renders as 2 columns = full row width)
+      // Other core widgets: 1x (1 column = 50% = 2 widgets per row side-by-side)
+      widgetSizes: {
+        weathermap: 3,
+        tasksquickadd: 3,
+        upcomingevents: 1,
+        recentnotes: 1,
+      },
+
+      // Default settings
+      widgetSettings: {
+        quote: { refreshRate: 60 }, // 1 hour
+        crypto: { refreshRate: 1 }, // 1 minute
+        hackernews: { refreshRate: 15 }, // 15 minutes
+        facts: { refreshRate: 60 },
+        github: { refreshRate: 60, username: '' },
+        weather: { refreshRate: 60 },
+        joke: { refreshRate: 30 },
+        unsplash: { refreshRate: 60, category: 'nature' },
+        pomodoro: { duration: 25 }, // 25 minutes
+        reddit: { refreshRate: 15, subreddit: 'programming' },
+        devto: { refreshRate: 30 },
+        wordofday: { refreshRate: 1440 }, // Once per day
+        currency: { refreshRate: 60 },
+        worldclock: {},
+        ipinfo: { refreshRate: 60 },
+        qrcode: {},
+        colorpalette: {},
+        weathermap: { refreshRate: 60 },
+      },
+
+      enableWidget: (widgetId) => {
+        set((state) => {
+          if (!state.enabledWidgets.includes(widgetId)) {
+            return {
+              enabledWidgets: [...state.enabledWidgets, widgetId],
+              widgetSizes: { ...state.widgetSizes, [widgetId]: state.widgetSizes[widgetId] || 1 },
+            };
+          }
+          return state;
+        });
+      },
+
+      disableWidget: (widgetId) => {
+        set((state) => {
+          const { [widgetId]: _, ...remainingSizes } = state.widgetSizes;
+          return {
+            enabledWidgets: state.enabledWidgets.filter((id) => id !== widgetId),
+            widgetSizes: remainingSizes,
+          };
+        });
+      },
+
+      reorderWidgets: (newOrder) => {
+        set({ enabledWidgets: newOrder });
+      },
+
+      updateWidgetSettings: (widgetId, settings) => {
+        set((state) => ({
+          widgetSettings: {
+            ...state.widgetSettings,
+            [widgetId]: {
+              ...state.widgetSettings[widgetId],
+              ...settings,
+            },
+          },
+        }));
+      },
+
+      setWidgetSize: (widgetId, size) => {
+        set((state) => ({
+          widgetSizes: {
+            ...state.widgetSizes,
+            [widgetId]: size,
+          },
+        }));
+      },
+
+      isWidgetEnabled: (widgetId) => {
+        return get().enabledWidgets.includes(widgetId);
+      },
+
+      getWidgetSettings: (widgetId) => {
+        return get().widgetSettings[widgetId] || {};
+      },
+    }),
+    {
+      name: 'dashboard-widgets',
+      version: 4, // Increment this when you need to trigger migrations
+      migrate: (persistedState: any, version: number) => {
+        const state = persistedState as WidgetState;
+
+        // Migration for version 0 -> 1: Add weathermap to enabled widgets if missing
+        if (version === 0) {
+          if (!state.enabledWidgets.includes('weathermap')) {
+            state.enabledWidgets.push('weathermap');
+          }
+          if (!state.widgetSettings.weathermap) {
+            state.widgetSettings.weathermap = { refreshRate: 60 };
+          }
+        }
+
+        // Migration for version 1 -> 2: Add widgetSizes if missing, set weathermap to 2x
+        if (version < 2) {
+          if (!state.widgetSizes) {
+            state.widgetSizes = {};
+          }
+          // Set weathermap to 2x width by default
+          if (!state.widgetSizes.weathermap) {
+            state.widgetSizes.weathermap = 2;
+          }
+        }
+
+        // Migration for version 2 -> 3: Update widget defaults (2-column grid)
+        if (version < 3) {
+          // Update weathermap to 3x (full row in 2-column grid)
+          state.widgetSizes.weathermap = 3;
+
+          // Set core widgets to 1x width (50% = half row in 2-column grid)
+          const coreWidgets = ['tasksummary', 'upcomingevents', 'recentnotes', 'quickadd'];
+          coreWidgets.forEach((widgetId) => {
+            if (!state.widgetSizes[widgetId]) {
+              state.widgetSizes[widgetId] = 1;
+            }
+          });
+
+          // Note: API widgets (quote, crypto, hackernews) are now disabled by default
+          // but remain available in Widget Manager. This migration doesn't force-remove
+          // them if user already has them enabled - existing preferences are preserved.
+        }
+
+        // Migration for version 3 -> 4: Merge tasksummary + quickadd into tasksquickadd
+        if (version < 4) {
+          // Replace tasksummary and quickadd with tasksquickadd
+          const hasTaskSummary = state.enabledWidgets.includes('tasksummary');
+          const hasQuickAdd = state.enabledWidgets.includes('quickadd');
+
+          if (hasTaskSummary || hasQuickAdd) {
+            // Remove old widgets
+            state.enabledWidgets = state.enabledWidgets.filter(
+              (id) => id !== 'tasksummary' && id !== 'quickadd'
+            );
+
+            // Add new combined widget at position 1 (after weathermap at position 0)
+            if (!state.enabledWidgets.includes('tasksquickadd')) {
+              state.enabledWidgets.splice(1, 0, 'tasksquickadd');
+            }
+
+            // Set size to 3x (full row)
+            state.widgetSizes.tasksquickadd = 3;
+
+            // Clean up old widget sizes
+            delete state.widgetSizes.tasksummary;
+            delete state.widgetSizes.quickadd;
+          }
+        }
+
+        return persistedState;
+      },
+    }
+  )
+);

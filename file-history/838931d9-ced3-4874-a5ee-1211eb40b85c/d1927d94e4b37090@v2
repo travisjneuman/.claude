@@ -1,0 +1,465 @@
+# Task: Fix Calendar UX Issues
+
+**Created:** November 17, 2025
+**Status:** 🎯 PLANNING
+**Estimated Time:** 3-4 hours
+
+---
+
+## Overview
+
+Fix 7 major UX and functionality issues in the Calendar widget to bring it up to professional standards comparable to Google Calendar, Apple Calendar, and Notion Calendar.
+
+---
+
+## Problem Statement
+
+The Calendar widget has multiple UX issues that make it difficult to use:
+
+### Issue 1: Monthly View Column Gaps ⚠️ HIGH PRIORITY
+- **Problem:** Days have huge column gaps (gap-1 = 4px + borders), making the calendar feel sparse
+- **Impact:** Multi-day events appear disconnected, hard to see event continuity
+- **User Expectation:** Tight spacing like Google Calendar (1px gaps max)
+
+### Issue 2: Multi-Day Event Bars Missing ⚠️ HIGH PRIORITY
+- **Problem:** Multi-day events show arrows (← →) but no background bar spanning days
+- **Impact:** Hard to visually see which days an event spans
+- **User Expectation:** Continuous colored bar behind event text (like Week view, Google Calendar)
+
+### Issue 3: Navigation Only Changes Months 🔴 CRITICAL
+- **Problem:** Prev/Next buttons change months regardless of view mode
+- **Impact:** Can't navigate days in Day view, can't navigate weeks in Week view
+- **User Expectation:** Navigation should match view mode (day → +/- 1 day, week → +/- 7 days)
+
+### Issue 4: Dark Mode Text Visibility Issues 🔴 CRITICAL
+- **Problem:** Event edit modal has white text on white background in dark mode
+- **Root Cause:** Using non-existent color classes (accent-primary, accent-pale, neutral-gray)
+- **Impact:** Can't read form labels or edit events in dark mode
+
+### Issue 5: Light Mode Button Visibility Issues 🔴 CRITICAL
+- **Problem:** Add/Save buttons have white text on white background in light mode
+- **Root Cause:** Same as Issue 4 - incorrect color classes
+- **Impact:** Can't see action buttons in light mode
+
+### Issue 6: List View Shows No Events ⚠️ HIGH PRIORITY
+- **Problem:** Agenda (List) view always shows "No upcoming events" even when events exist
+- **Root Cause:** Possibly incorrect event expansion or date filtering
+- **Impact:** Agenda view is completely unusable
+
+### Issue 7: Widget Controls Showing on Non-Dashboard Pages
+- **Problem:** Rearrange/resize/delete controls show on Calendar widget everywhere
+- **User Expectation:** These controls should ONLY show on Dashboard widgets (where rearranging makes sense)
+- **Impact:** Visual clutter, confusing UI on dedicated Calendar page
+
+---
+
+## Research: Best-in-Class Calendar UX
+
+### Google Calendar
+- **Column Spacing:** 1px hairline borders, no gaps
+- **Multi-day Events:** Colored bars spanning days with rounded left/right edges
+- **Event Density:** Shows 3-4 events per day cell, "+N more" link
+- **Navigation:** Month/Week/Day buttons + Prev/Next that match view mode
+- **Color System:** Semantic colors with opacity variations
+
+### Apple Calendar
+- **Column Spacing:** Minimal gaps (1px), clean grid
+- **Multi-day Events:** Bars with left/right continuation indicators
+- **Event Layout:** Events stacked vertically with slight overlap
+- **Visual Hierarchy:** Today highlighted, weekend shading
+
+### Notion Calendar (Cron)
+- **Column Spacing:** Tight spacing, emphasizes density
+- **Multi-day Events:** Full-width bars with gradient edges
+- **Event Interactions:** Hover states, quick actions
+- **Dark Mode:** Excellent contrast, semantic colors
+
+### Linear Calendar
+- **Column Spacing:** 1px gaps, precise alignment
+- **Multi-day Events:** Minimalist bars with clear start/end
+- **Typography:** Clear hierarchy, consistent spacing
+
+### Key Takeaways
+1. **Spacing:** All use 1px gaps or less between day columns
+2. **Multi-day Events:** All render as continuous bars, not disconnected text
+3. **Navigation:** All match Prev/Next to current view mode
+4. **Color System:** All use semantic color tokens for accessibility
+5. **Visual Density:** Balance between showing many events and readability
+
+---
+
+## Files to Read
+
+1. ✅ `src/widgets/Calendar.tsx` - Main component (1079 lines)
+2. ✅ `src/stores/useCalendarStore.ts` - Zustand store (169 lines)
+3. ✅ `src/components/AgendaView.tsx` - List view (182 lines)
+4. ✅ `src/components/WeekView.tsx` - Week view (291 lines)
+5. ✅ `src/components/DayView.tsx` - Day view (149 lines)
+6. ✅ `src/components/Widget.tsx` - Widget wrapper (62 lines)
+7. ✅ `src/utils/recurrence.ts` - Event expansion logic (227 lines)
+
+---
+
+## Proposed Changes
+
+### Priority 1: Fix Critical Visibility Issues (30-45 min)
+
+**Step 1: Fix Dark/Light Mode Color Classes in Calendar.tsx**
+
+Replace all non-existent color classes with semantic tokens from CLAUDE.md:
+
+```tsx
+// Line 494-495: Event card background
+// BEFORE:
+className={`p-3 rounded-lg transition-all ${
+  editingEventId === event.id
+    ? 'bg-accent-pale dark:bg-accent-primary/20 ring-2 ring-accent-primary'
+    : 'bg-neutral-50 dark:bg-neutral-700'
+}`}
+
+// AFTER:
+className={`p-3 rounded-lg transition-all ${
+  editingEventId === event.id
+    ? 'bg-accent-blue/10 dark:bg-accent-blue/20 ring-2 ring-accent-blue'
+    : 'bg-surface-light-elevated dark:bg-surface-dark-elevated'
+}`}
+
+// Lines 515, 521: Button colors
+// BEFORE:
+<button className="px-3 py-1 text-sm bg-accent-primary text-white rounded hover:bg-accent-hover">Edit</button>
+<button className="px-3 py-1 text-sm bg-error text-white rounded hover:opacity-80">Delete</button>
+
+// AFTER:
+<button className="px-3 py-1 text-sm bg-accent-blue text-white rounded hover:bg-accent-blue-hover">Edit</button>
+<button className="px-3 py-1 text-sm bg-status-error text-white rounded hover:opacity-80">Delete</button>
+
+// Lines 547-799: Form inputs (replace ~15 instances)
+// BEFORE: neutral-lightGray, neutral-darkGray, neutral-charcoal, accent-primary, neutral-gray
+// AFTER: border-border-light dark:border-border-dark, bg-surface-light dark:bg-surface-dark, etc.
+```
+
+**Full list of lines to update:**
+- 494, 495: Event card background
+- 515, 521: Edit/Delete buttons
+- 547, 558, 567, 592, 603, 620, 638: Form input borders/backgrounds
+- 695, 709, 724, 737: Date/time picker backgrounds
+- 779, 786, 799: Cancel/Close/Save buttons
+
+**Step 2: Fix Navigation for All View Modes in useCalendarStore.ts**
+
+```tsx
+// Lines 136-156: Add daily and agenda navigation
+nextPeriod: () =>
+  set((state) => {
+    const newDate = new Date(state.currentDate);
+    if (state.viewMode === 'daily') {
+      newDate.setDate(newDate.getDate() + 1);  // Next day
+    } else if (state.viewMode === 'weekly') {
+      newDate.setDate(newDate.getDate() + 7);  // Next week
+    } else if (state.viewMode === 'agenda') {
+      newDate.setDate(newDate.getDate() + 14);  // Next 2 weeks
+    } else {
+      newDate.setMonth(newDate.getMonth() + 1);  // Next month
+    }
+    return { currentDate: newDate };
+  }),
+
+prevPeriod: () =>
+  set((state) => {
+    const newDate = new Date(state.currentDate);
+    if (state.viewMode === 'daily') {
+      newDate.setDate(newDate.getDate() - 1);  // Previous day
+    } else if (state.viewMode === 'weekly') {
+      newDate.setDate(newDate.getDate() - 7);  // Previous week
+    } else if (state.viewMode === 'agenda') {
+      newDate.setDate(newDate.getDate() - 14);  // Previous 2 weeks
+    } else {
+      newDate.setMonth(newDate.getMonth() - 1);  // Previous month
+    }
+    return { currentDate: newDate };
+  }),
+```
+
+### Priority 2: Fix Monthly View Spacing & Multi-Day Events (60-90 min)
+
+**Step 1: Reduce Column Gaps in Calendar.tsx**
+
+```tsx
+// Line 903: Day headers
+// BEFORE:
+<div className="grid grid-cols-7 gap-1">
+
+// AFTER:
+<div className="grid grid-cols-7 gap-px">
+
+// Line 915: Day cells
+// BEFORE:
+<div className="grid grid-cols-7 grid-rows-5 gap-1">
+
+// AFTER:
+<div className="grid grid-cols-7 grid-rows-5 gap-px">
+```
+
+**Step 2: Implement Multi-Day Event Bars**
+
+This is the most complex change - requires redesigning how multi-day events are rendered.
+
+**Current approach:** Each day cell shows event text with arrows
+**New approach:** Render multi-day events as absolute-positioned bars spanning columns
+
+```tsx
+// NEW: Add multi-day event bar rendering BEFORE the day cells grid
+
+// Calculate multi-day event bars
+const multiDayEventBars = useMemo(() => {
+  const bars: {
+    event: CalendarEvent;
+    startCol: number;  // 1-7 (day of week)
+    endCol: number;    // 1-7
+    row: number;       // 1-5 (week of month)
+    dateKey: string;
+  }[] = [];
+
+  dayCells.forEach((cell, index) => {
+    const dateKey = format(cell.date, 'yyyy-MM-dd');
+    const dayEvents = events[dateKey] || [];
+
+    dayEvents.forEach((event) => {
+      // Only process first occurrence of multi-day event
+      if (event._isMultiDayPart && event._isMultiDayFirst) {
+        const startCol = (index % 7) + 1;  // 1-7
+        const row = Math.floor(index / 7) + 1;  // 1-5
+
+        // Find end column (how many days it spans)
+        let endCol = startCol;
+        let checkIndex = index + 1;
+        while (checkIndex < dayCells.length && checkIndex % 7 !== 0) {
+          const checkDateKey = format(dayCells[checkIndex].date, 'yyyy-MM-dd');
+          const checkEvents = events[checkDateKey] || [];
+          if (checkEvents.find(e => e.id === event.id)) {
+            endCol++;
+            if (event._isMultiDayLast) break;
+          } else {
+            break;
+          }
+          checkIndex++;
+        }
+
+        bars.push({ event, startCol, endCol, row, dateKey });
+      }
+    });
+  });
+
+  return bars;
+}, [dayCells, events]);
+
+// RENDER: Multi-day event bars layer (absolute positioned)
+<div className="relative">
+  {/* Multi-day event bars */}
+  {multiDayEventBars.map(({ event, startCol, endCol, row, dateKey }) => (
+    <div
+      key={`${event.id}-${dateKey}`}
+      className="absolute h-5 px-2 rounded-sm bg-accent-magenta/20 dark:bg-accent-magenta/30 border-l-2 border-accent-magenta text-xs text-accent-magenta font-medium flex items-center truncate cursor-pointer hover:bg-accent-magenta/30 dark:hover:bg-accent-magenta/40 transition-colors"
+      style={{
+        gridColumnStart: startCol,
+        gridColumnEnd: endCol + 1,
+        gridRowStart: row,
+        top: `${(row - 1) * 120 + 30}px`,  // Position below day number
+        left: `calc(${((startCol - 1) / 7) * 100}% + 2px)`,
+        width: `calc(${((endCol - startCol + 1) / 7) * 100}% - 4px)`,
+      }}
+      onClick={() => handleEventClick(event, dateKey)}
+    >
+      {event.title}
+    </div>
+  ))}
+
+  {/* Day cells grid */}
+  <div className="grid grid-cols-7 grid-rows-5 gap-px">
+    {dayCells.map((cell, index) => {
+      // ... existing day cell rendering
+      // REMOVE multi-day event text rendering (lines 1012-1033)
+      // Keep only single-day events in day cells
+    })}
+  </div>
+</div>
+```
+
+**Alternative (Simpler):** Use CSS Grid instead of absolute positioning
+- Render multi-day events as grid items with `grid-column: span N`
+- Requires restructuring the day cells to allow interleaved event bars
+
+### Priority 3: Fix List View & Widget Controls (20-30 min)
+
+**Step 1: Debug List View Events**
+
+```tsx
+// AgendaView.tsx: Add debug logging to investigate why events aren't showing
+
+const upcomingEvents = useMemo(() => {
+  const today = startOfDay(currentDate);
+  const endDate = addDays(today, daysToShow);
+
+  console.log('AgendaView Debug:', {
+    currentDate,
+    today,
+    endDate,
+    eventsKeys: Object.keys(events),
+    eventsCount: Object.keys(events).length,
+  });
+
+  // ... rest of filtering logic
+
+  console.log('Filtered events:', grouped.length);
+  return grouped;
+}, [events, currentDate, daysToShow]);
+```
+
+**Step 2: Verify Event Expansion**
+
+```tsx
+// Calendar.tsx: Check if expandedEvents includes all dates
+
+const expandedEvents = useMemo(() => {
+  const expanded: Record<string, CalendarEvent[]> = {};
+
+  Object.entries(events).forEach(([dateKey, dayEvents]) => {
+    dayEvents.forEach((event) => {
+      // ... expansion logic
+    });
+  });
+
+  console.log('Expanded events:', Object.keys(expanded).length, 'dates');
+  return expanded;
+}, [events]);
+```
+
+**Step 3: Hide Widget Controls**
+
+```tsx
+// Calendar.tsx, line 333: Add draggable={false}
+
+<Widget
+  id="calendar"
+  title="Calendar"
+  category="Planning"
+  draggable={false}  // ← ADD THIS
+  headerAccessory={...}
+>
+```
+
+---
+
+## Todo Checklist
+
+### Priority 1: Fix Critical Visibility Issues (30-45 min)
+- [ ] Find and replace all non-semantic color classes in Calendar.tsx
+- [ ] Replace `accent-primary` with `accent-blue` (lines 494, 515, 638, 695, 709)
+- [ ] Replace `accent-pale` with `accent-blue/10` (line 494)
+- [ ] Replace `accent-hover` with `accent-blue-hover` (line 515)
+- [ ] Replace `bg-error` with `bg-status-error` (line 521)
+- [ ] Replace `neutral-lightGray` with `border-border-light` (lines 547, 558, 567, 592, 603, 620)
+- [ ] Replace `neutral-darkGray` with `border-border-dark` (same lines)
+- [ ] Replace `neutral-charcoal` with `surface-dark` (lines 547, 558, 567)
+- [ ] Replace `neutral-gray` with `surface-light-elevated` (lines 779, 786)
+- [ ] Replace `neutral-300/600` with semantic tokens (line 799)
+- [ ] Fix daily navigation in useCalendarStore.ts (lines 136-145)
+- [ ] Fix agenda navigation in useCalendarStore.ts (lines 147-156)
+- [ ] Test navigation in all 4 view modes (Monthly, Weekly, Daily, Agenda)
+
+### Priority 2: Fix Monthly View Spacing (15-20 min)
+- [ ] Change gap-1 to gap-px on day headers grid (line 903)
+- [ ] Change gap-1 to gap-px on day cells grid (line 915)
+- [ ] Test monthly view spacing at different zoom levels
+- [ ] Verify grid alignment with reduced gaps
+
+### Priority 3: Implement Multi-Day Event Bars (45-75 min)
+- [ ] Add multiDayEventBars calculation in useMemo (before day cells)
+- [ ] Implement bar rendering logic (calculate startCol, endCol, row)
+- [ ] Add absolute-positioned bar layer with proper styling
+- [ ] Remove old multi-day event text rendering from day cells (lines 1012-1033)
+- [ ] Add hover states and click handlers to bars
+- [ ] Test with various multi-day event scenarios:
+  - [ ] 2-day event
+  - [ ] 7-day event (full week)
+  - [ ] Event spanning weeks
+  - [ ] Multiple overlapping multi-day events
+- [ ] Verify bars align with day columns
+- [ ] Test in light and dark mode
+
+### Priority 4: Fix List View (15-20 min)
+- [ ] Add console logging to AgendaView event filtering
+- [ ] Add console logging to Calendar expandedEvents
+- [ ] Run Calendar in browser, open console, switch to List view
+- [ ] Identify why events aren't showing (check logs)
+- [ ] Fix root cause (likely event expansion or date filtering)
+- [ ] Remove debug logs
+- [ ] Test list view with various event types
+
+### Priority 5: Hide Widget Controls (5 min)
+- [ ] Add draggable={false} to Calendar Widget component
+- [ ] Test that controls don't show on Calendar page
+- [ ] Verify controls still show on Dashboard widgets
+
+### Final Testing (15-20 min)
+- [ ] TypeScript checks pass
+- [ ] No console errors or warnings
+- [ ] Test all 4 view modes (Monthly, Weekly, Daily, Agenda)
+- [ ] Test navigation in all view modes
+- [ ] Test event creation/editing in light and dark mode
+- [ ] Test multi-day events display correctly
+- [ ] Test list view shows events
+- [ ] Test at multiple zoom levels (100%, 110%, 125%)
+
+---
+
+## Success Criteria
+
+### Monthly View
+- [x] Column gaps reduced to 1px (gap-px)
+- [x] Multi-day events render as continuous bars spanning days
+- [x] Bars have proper styling (color, rounded edges, hover states)
+- [x] Bars align perfectly with day columns
+- [x] Multiple multi-day events stack vertically without overlap
+
+### Navigation
+- [x] Monthly view: Prev/Next changes months
+- [x] Weekly view: Prev/Next changes weeks (+/- 7 days)
+- [x] Daily view: Prev/Next changes days (+/- 1 day)
+- [x] Agenda view: Prev/Next changes by daysToShow (+/- 14 days)
+
+### Event Edit Modal
+- [x] Dark mode: All text visible (no white on white)
+- [x] Light mode: All buttons visible (no white on white)
+- [x] All colors use semantic tokens from CLAUDE.md
+- [x] Form inputs have proper borders and backgrounds
+- [x] Buttons have proper hover states
+
+### List View
+- [x] Events display in chronological order
+- [x] Shows all events within daysToShow window
+- [x] Empty state shows only when no events exist
+- [x] Event cards are clickable and show details
+
+### Widget Controls
+- [x] Controls don't show on Calendar page
+- [x] Controls still show on Dashboard (if Calendar widget added there)
+- [x] No visual clutter
+
+---
+
+## Risks & Mitigations
+
+| Risk | Likelihood | Impact | Mitigation |
+|------|-----------|--------|------------|
+| Multi-day bar positioning breaks grid layout | Medium | High | Use CSS Grid `grid-column: span N` instead of absolute positioning |
+| Color replacements break existing themes | Low | Medium | Test both light and dark mode thoroughly |
+| List view issue is deeper than filtering | Medium | Medium | Add extensive debug logging, investigate event expansion |
+| Multi-day bars overlap with day numbers | Medium | Low | Add top padding to bars, adjust vertical positioning |
+| Performance issues with many multi-day events | Low | Low | Use useMemo for bar calculations, limit re-renders |
+
+---
+
+# Review Section
+
+**TO BE FILLED WHEN WORK IS COMPLETE** (CLAUDE.md Rule #12)

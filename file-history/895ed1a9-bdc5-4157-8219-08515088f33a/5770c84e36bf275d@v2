@@ -1,0 +1,126 @@
+import React, { useState, useEffect } from 'react';
+import { Modal } from './Modal';
+import { aboutUsContent } from '../content/aboutUs';
+
+interface AboutModalProps {
+  onClose: () => void;
+}
+
+/**
+ * About Modal Component
+ * Shows the story of Neuman Brain with 2 narrative versions:
+ * 1. Platform & Principles - About the platform vision and core principles
+ * 2. Values & Background - From the founder's perspective
+ *
+ * Responsive: Uses compact versions on mobile for better readability
+ */
+export const AboutModal: React.FC<AboutModalProps> = ({ onClose }) => {
+  const [selectedNarrative, setSelectedNarrative] = useState<'platform' | 'founder'>('platform');
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect mobile viewport
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 640);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Get appropriate content based on screen size
+  const getContent = () => {
+    if (isMobile) {
+      return selectedNarrative === 'platform'
+        ? aboutUsContent.compact.platform
+        : aboutUsContent.compact.founder;
+    }
+    return selectedNarrative === 'platform'
+      ? aboutUsContent.stories.platform
+      : aboutUsContent.stories.founder;
+  };
+
+  const content = getContent();
+
+  return (
+    <Modal
+      isOpen={true}
+      title="About Neuman Brain"
+      onClose={onClose}
+      maxWidth="2xl"
+    >
+      <div className="space-y-6">
+        {/* Photo Placeholder */}
+        <div className="flex justify-center">
+          <div className="w-32 h-32 sm:w-48 sm:h-48 bg-surface-light dark:bg-surface-dark border-2 border-border-light dark:border-border-dark rounded-button flex items-center justify-center">
+            <div className="text-center text-text-light-secondary dark:text-text-dark-secondary">
+              <div className="text-4xl sm:text-6xl mb-1 sm:mb-2">📸</div>
+              <div className="text-xs sm:text-sm">Photo Placeholder</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Narrative Selector */}
+        <div className="flex gap-2 sm:gap-3 justify-center">
+          <button
+            onClick={() => setSelectedNarrative('platform')}
+            className={`px-3 sm:px-4 py-2 rounded-button text-sm sm:text-base font-medium transition-all duration-standard ease-smooth ${selectedNarrative === 'platform'
+                ? 'bg-accent-blue text-white'
+                : 'bg-surface-light dark:bg-surface-dark text-text-light-primary dark:text-text-dark-primary hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated'
+              }`}
+          >
+            <span className="hidden sm:inline">Platform & Principles</span>
+            <span className="sm:hidden">Platform</span>
+          </button>
+          <button
+            onClick={() => setSelectedNarrative('founder')}
+            className={`px-3 sm:px-4 py-2 rounded-button text-sm sm:text-base font-medium transition-all duration-standard ease-smooth ${selectedNarrative === 'founder'
+                ? 'bg-accent-magenta text-white'
+                : 'bg-surface-light dark:bg-surface-dark text-text-light-primary dark:text-text-dark-primary hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated'
+              }`}
+          >
+            <span className="hidden sm:inline">Values & Background</span>
+            <span className="sm:hidden">Founder</span>
+          </button>
+        </div>
+
+        {/* Content Title */}
+        <div className="text-center">
+          <h3 className="text-lg sm:text-xl font-semibold text-text-light-primary dark:text-text-dark-primary">
+            {content.title}
+          </h3>
+          {content.subtitle && (
+            <p className="text-sm text-text-light-secondary dark:text-text-dark-secondary mt-1">
+              {content.subtitle}
+            </p>
+          )}
+        </div>
+
+        {/* Selected Narrative */}
+        <div className="prose prose-sm max-w-none dark:prose-invert max-h-[40vh] sm:max-h-[50vh] overflow-y-auto pr-2">
+          <div className="text-text-light-primary dark:text-text-dark-primary whitespace-pre-line leading-relaxed text-sm sm:text-base">
+            {content.content}
+          </div>
+        </div>
+
+        {/* Footer Links */}
+        <div className="border-t border-border-light dark:border-border-dark pt-4 mt-6">
+          <div className="flex flex-wrap gap-4 justify-center text-sm">
+            <a
+              href="https://brain.neuman.dev"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-accent-blue hover:text-accent-blue-hover hover:underline transition-all duration-standard ease-smooth"
+            >
+              Official Website
+            </a>
+            <a
+              href="mailto:travis@neuman.dev"
+              className="text-accent-blue hover:text-accent-blue-hover hover:underline transition-all duration-standard ease-smooth"
+            >
+              Contact
+            </a>
+          </div>
+        </div>
+      </div>
+    </Modal>
+  );
+};

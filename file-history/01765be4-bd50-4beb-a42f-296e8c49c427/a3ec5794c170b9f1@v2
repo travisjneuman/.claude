@@ -1,0 +1,84 @@
+import React from 'react';
+import { Sidebar } from './Sidebar';
+import { Footer as SaveStatusFooter } from './Footer';
+import { AITerminal } from './AITerminal';
+import { useSidebarStore } from '../stores/useSidebarStore';
+import { useTerminalStore } from '../stores/useTerminalStore';
+
+/**
+ * Layout Component with Sidebar Navigation
+ */
+interface LayoutProps {
+  children: React.ReactNode;
+}
+
+export const Layout: React.FC<LayoutProps> = ({ children }) => {
+  const { isCollapsed, toggleMobileMenu } = useSidebarStore();
+  const { toggleTerminal } = useTerminalStore();
+
+  return (
+    <div className="app min-h-screen bg-surface-light dark:bg-surface-dark flex">
+      {/* Mobile hamburger button */}
+      <button
+        onClick={toggleMobileMenu}
+        className="lg:hidden fixed top-4 left-4 z-50 p-2 rounded-lg bg-surface-light dark:bg-surface-dark-elevated border border-border-light dark:border-border-dark shadow-lg"
+        aria-label="Toggle menu"
+      >
+        <span className="text-xl">☰</span>
+      </button>
+
+      <Sidebar />
+
+      {/* Main content area with margin for sidebar */}
+      <div className="flex-1 flex flex-col transition-all duration-200">
+        <main
+          className={`
+            flex-1 px-6 py-6
+            transition-[margin-left] duration-200
+            ${/* Desktop: margin for sidebar */ ''}
+            lg:${isCollapsed ? 'ml-[60px]' : 'ml-[280px]'}
+            ${/* Mobile: no margin (sidebar is overlay) */ ''}
+            ml-0
+          `}
+        >
+          <div className="max-w-7xl mx-auto">
+            {children}
+          </div>
+        </main>
+
+        {/* Footer */}
+        <footer className="border-t border-border-light dark:border-border-dark py-4 ml-[60px] lg:ml-0">
+          <div className="px-6 text-center">
+            <p className="text-xs text-text-light-secondary dark:text-text-dark-secondary">
+              <span className="font-semibold">Neuman Brain</span> © 2025{' '}
+              <a
+                href="https://travisjneuman.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-accent-blue transition-colors underline decoration-dotted"
+              >
+                Travis J. Neuman
+              </a>
+            </p>
+          </div>
+        </footer>
+      </div>
+
+      {/* Save Status Footer (fixed bottom-right) */}
+      <SaveStatusFooter />
+
+      {/* AI Terminal Toggle Button (floating action button) */}
+      <button
+        onClick={toggleTerminal}
+        className="fixed bottom-4 right-4 w-14 h-14 rounded-full bg-gradient-to-r from-accent-blue to-accent-magenta text-white shadow-lg hover:shadow-xl transition-all z-40 flex items-center justify-center"
+        title="AI Terminal"
+        aria-label="Toggle AI Terminal"
+      >
+        🤖
+      </button>
+
+      {/* AI Terminal Component */}
+      <AITerminal />
+    </div>
+  );
+};

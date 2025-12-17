@@ -1,0 +1,377 @@
+# Personal Analytics Dashboard (P2 #9)
+
+**Priority:** P2 (Medium)
+**Estimated Time:** 8-10 hours
+**Status:** Planning
+**Created:** 2025-11-26
+
+---
+
+## Overview
+
+Add a comprehensive Personal Analytics Dashboard widget that visualizes productivity metrics, trends, and insights across all modules (Tasks, Time Tracking, Notes, Events). Provides actionable insights to help users understand their work patterns and optimize productivity.
+
+## Problem Statement
+
+Users currently lack visibility into their productivity patterns:
+- **No metrics** - Can't see completion rates, time spent, or trends
+- **No insights** - Don't know peak productivity hours or patterns
+- **No goals** - Can't track progress toward objectives
+- **Fragmented data** - Metrics scattered across different modules
+
+**Use Cases:**
+- **Freelancers:** Track billable hours, project time, completion rates
+- **Students:** Monitor study time, assignment completion, productivity trends
+- **Professionals:** Analyze meeting time, deep work blocks, task velocity
+- **Personal:** Daily/weekly reviews, habit tracking, goal progress
+
+## Requirements
+
+### Must Have (MVP)
+1. **Task Metrics**
+   - Completion rate (today/week/month)
+   - Tasks by priority distribution
+   - Tasks by status breakdown
+   - Average completion time
+   - Overdue task count
+
+2. **Time Tracking Metrics**
+   - Total time tracked (today/week/month)
+   - Time by project breakdown
+   - Time by hour of day heatmap
+   - Billable vs non-billable hours
+   - Average session duration
+
+3. **Calendar Metrics**
+   - Events count (today/week/month)
+   - Meeting time vs focus time
+   - Event type distribution
+   - Busiest days/hours
+
+4. **Notes Metrics**
+   - Notes created (today/week/month)
+   - Average note length
+   - Most used tags
+   - Notes by folder
+
+5. **Trend Visualization**
+   - 7-day/30-day sparklines
+   - Week-over-week comparisons
+   - Month-over-month trends
+   - Year-to-date summaries
+
+6. **Time Period Selector**
+   - Today, This Week, This Month, This Year
+   - Custom date range picker
+   - Persistent selection
+
+### Should Have (Phase 2)
+- Productivity score calculation
+- Goal tracking integration
+- Export analytics as PDF/CSV
+- Customizable widget cards
+- Alerts for unusual patterns
+
+### Won't Have (Out of Scope)
+- AI-powered insights (future P4)
+- Cross-user comparisons (no collaboration yet)
+- Predictive analytics (future)
+- Integration with external tools
+
+## Competitor Analysis
+
+| Feature | RescueTime | Toggl Track | Clockify | NB Target |
+|---------|------------|-------------|----------|-----------|
+| Time tracking charts | ✅ | ✅ | ✅ | ✅ Phase 1 |
+| Productivity scores | ✅ | ⬜ | ⬜ | 🔶 Phase 2 |
+| Goal tracking | ✅ | ✅ | ⬜ | 🔶 Phase 2 |
+| Task completion metrics | ⬜ | ⬜ | ⬜ | ✅ Phase 1 |
+| Heatmaps | ✅ | ✅ | ✅ | ✅ Phase 1 |
+| Custom date ranges | ✅ | ✅ | ✅ | ✅ Phase 1 |
+
+## Technical Approach
+
+### Library Evaluation
+
+**Chart Libraries:**
+1. **Recharts** (Recommended)
+   - ✅ React-friendly, composable
+   - ✅ Responsive by default
+   - ✅ Good TypeScript support
+   - ✅ Small bundle (~50KB gzipped)
+   - ✅ Used in many projects
+
+2. **Chart.js with react-chartjs-2**
+   - ✅ Full-featured
+   - ❌ Larger bundle (~150KB)
+   - ❌ More imperative API
+
+3. **Victory**
+   - ✅ Very composable
+   - ❌ Larger bundle (~200KB)
+   - ❌ Performance issues with large datasets
+
+**Decision:** Use **Recharts** for lightweight, React-first charting.
+
+## Architecture
+
+### Component Structure
+```
+AnalyticsWidget (Dashboard widget)
+├── AnalyticsPeriodSelector (time range picker)
+├── MetricsGrid (card layout)
+│   ├── MetricCard (reusable card)
+│   │   ├── MetricValue (big number)
+│   │   ├── MetricTrend (sparkline/trend)
+│   │   └── MetricIcon (visual indicator)
+│   └── ...
+├── TasksAnalytics (task-specific charts)
+│   ├── CompletionRateChart (line chart)
+│   ├── PriorityDistribution (pie chart)
+│   └── StatusBreakdown (bar chart)
+├── TimeAnalytics (time tracking charts)
+│   ├── TimeByProjectChart (bar chart)
+│   ├── HourlyHeatmap (heatmap)
+│   └── SessionDurationTrend (line chart)
+├── CalendarAnalytics (event charts)
+│   ├── EventTypeDistribution (pie chart)
+│   └── MeetingVsFocusTime (stacked bar)
+└── NotesAnalytics (notes charts)
+    ├── NotesCreatedTrend (line chart)
+    └── TagCloud (tag frequency)
+```
+
+### Data Flow
+1. Pull data from all stores (useKanbanStore, useTimeTrackingStore, useCalendarStore, useNotesStore)
+2. Filter by selected time period
+3. Calculate metrics (useMemo for performance)
+4. Render charts with Recharts
+5. Store period selection in useAnalyticsStore (persistent)
+
+### Calculation Examples
+
+**Task Completion Rate:**
+```typescript
+const completionRate = (completedTasks / totalTasks) * 100;
+```
+
+**Time by Hour Heatmap:**
+```typescript
+const hourlyData = entries.reduce((acc, entry) => {
+  const hour = new Date(entry.startTime).getHours();
+  acc[hour] = (acc[hour] || 0) + entry.duration;
+  return acc;
+}, {} as Record<number, number>);
+```
+
+**Week-over-Week Trend:**
+```typescript
+const thisWeekTotal = getWeekTotal(thisWeekStart, thisWeekEnd);
+const lastWeekTotal = getWeekTotal(lastWeekStart, lastWeekEnd);
+const change = ((thisWeekTotal - lastWeekTotal) / lastWeekTotal) * 100;
+```
+
+## Files to Read
+
+### Existing Stores
+- [x] `src/stores/useKanbanStore.ts` - Task data
+- [x] `src/stores/useTimeTrackingStore.ts` - Time entries
+- [ ] `src/stores/useCalendarStore.ts` - Events
+- [ ] `src/stores/useNotesStore.ts` - Notes data
+
+### Related Components
+- [ ] `src/widgets/Dashboard/AnalyticsWidget.tsx` - If exists
+- [ ] `src/widgets/Dashboard/TaskSummaryWidget.tsx` - Reference patterns
+- [ ] `src/widgets/Dashboard/MyDayWidget.tsx` - Reference patterns
+
+## Proposed Changes
+
+### Phase 1: Core Analytics Widget (4 hours)
+
+**Files to Create:**
+1. `src/stores/useAnalyticsStore.ts` - Analytics preferences (period selection)
+2. `src/widgets/Dashboard/AnalyticsWidget.tsx` - Main widget container
+3. `src/components/Analytics/AnalyticsPeriodSelector.tsx` - Time range picker
+4. `src/components/Analytics/MetricCard.tsx` - Reusable metric display
+5. `src/utils/analyticsCalculations.ts` - Metric calculation helpers
+
+**Checklist:**
+- [ ] Install Recharts: `npm install recharts`
+- [ ] Create useAnalyticsStore with period selection
+- [ ] Create AnalyticsWidget shell component
+- [ ] Create AnalyticsPeriodSelector (Today/Week/Month/Year)
+- [ ] Create MetricCard component
+- [ ] Implement date range filtering
+- [ ] Type-check
+
+### Phase 2: Task Metrics (2 hours)
+
+**Files to Create:**
+1. `src/components/Analytics/TasksAnalytics.tsx` - Task charts container
+2. `src/components/Analytics/CompletionRateChart.tsx` - Line chart
+3. `src/components/Analytics/PriorityDistribution.tsx` - Pie chart
+
+**Checklist:**
+- [ ] Calculate task completion rate
+- [ ] Render completion trend (7-day sparkline)
+- [ ] Calculate priority distribution
+- [ ] Render priority pie chart
+- [ ] Calculate average completion time
+- [ ] Add status breakdown chart
+- [ ] Type-check
+
+### Phase 3: Time Tracking Metrics (2 hours)
+
+**Files to Create:**
+1. `src/components/Analytics/TimeAnalytics.tsx` - Time charts container
+2. `src/components/Analytics/TimeByProjectChart.tsx` - Bar chart
+3. `src/components/Analytics/HourlyHeatmap.tsx` - Heatmap component
+
+**Checklist:**
+- [ ] Calculate total time tracked
+- [ ] Calculate time by project breakdown
+- [ ] Render time by project bar chart
+- [ ] Calculate hourly distribution
+- [ ] Render heatmap (24-hour grid)
+- [ ] Calculate average session duration
+- [ ] Type-check
+
+### Phase 4: Calendar & Notes Metrics (1.5 hours)
+
+**Files to Create:**
+1. `src/components/Analytics/CalendarAnalytics.tsx` - Calendar charts
+2. `src/components/Analytics/NotesAnalytics.tsx` - Notes charts
+
+**Checklist:**
+- [ ] Calculate events count
+- [ ] Calculate meeting vs focus time
+- [ ] Render event type distribution
+- [ ] Calculate notes created count
+- [ ] Calculate most used tags
+- [ ] Render tag cloud/frequency chart
+- [ ] Type-check
+
+### Phase 5: Polish & Integration (30 min)
+
+**Files to Modify:**
+1. `src/widgets/WidgetRegistry.ts` - Register AnalyticsWidget
+
+**Checklist:**
+- [ ] Register widget in WidgetRegistry
+- [ ] Add responsive layout (grid/flex)
+- [ ] Dark mode styling
+- [ ] Loading states
+- [ ] Empty states (no data)
+- [ ] Build verification
+- [ ] Manual testing
+
+---
+
+## Time Estimate Breakdown
+
+| Phase | Description | Estimate |
+|-------|-------------|----------|
+| 1 | Core analytics widget | 4 hours |
+| 2 | Task metrics | 2 hours |
+| 3 | Time tracking metrics | 2 hours |
+| 4 | Calendar & notes metrics | 1.5 hours |
+| 5 | Polish & integration | 30 min |
+| **Total** | | **10 hours** |
+
+---
+
+## Technical Decisions
+
+### Why Recharts?
+- Recharts: React-first, composable, lightweight
+- Chart.js: More features but imperative API
+- Victory: Too large for our needs
+- **Decision:** Recharts for React patterns + bundle size
+
+### Metric Storage?
+- Store calculations in component state (useMemo)
+- Persist period selection only (useAnalyticsStore)
+- Don't cache metric results (always fresh)
+- **Decision:** Calculate on-demand for accuracy
+
+### Period Selection?
+- Store in persistent Zustand store
+- URL query params for sharing
+- Default to "This Week"
+- **Decision:** Both store + URL for flexibility
+
+---
+
+## Dependencies
+
+**Before:**
+- ✅ Time tracking system (complete)
+- ✅ Calendar/events (complete)
+- ✅ Task management (complete)
+- ✅ Notes system (complete)
+
+**After (Enables):**
+- **Future:** Goal tracking integration
+- **Future:** Productivity scoring
+- **Future:** AI insights
+
+---
+
+## Success Criteria
+
+1. **Functional**
+   - ✅ Displays task completion metrics
+   - ✅ Displays time tracking metrics
+   - ✅ Displays calendar/notes metrics
+   - ✅ Period selector works (Today/Week/Month/Year)
+   - ✅ Charts render correctly
+   - ✅ Data updates in real-time
+
+2. **Quality**
+   - ✅ TypeScript type-check passes
+   - ✅ Production build succeeds
+   - ✅ No console errors/warnings
+   - ✅ Dark mode support
+   - ✅ Responsive layout
+
+3. **UX**
+   - ✅ Clear metric labels
+   - ✅ Intuitive visualizations
+   - ✅ Smooth animations
+   - ✅ Loading states
+
+---
+
+## Known Challenges
+
+1. **Recharts Bundle Size:**
+   - Mitigation: Tree-shake unused components, lazy load widget
+
+2. **Performance with Large Datasets:**
+   - 1000+ tasks may slow calculations
+   - Mitigation: useMemo, web workers for heavy calculations
+
+3. **Heatmap Complexity:**
+   - 24-hour x 7-day grid can be complex
+   - Mitigation: Use existing heatmap libraries or simplified view
+
+4. **Date Range Logic:**
+   - Timezone handling, DST edge cases
+   - Mitigation: Use date-fns for all date math
+
+---
+
+## Rollback Plan
+
+If issues arise:
+1. **Disable Widget** - Remove from WidgetRegistry
+2. **Keep Recharts** - Small bundle impact
+3. **Fix Forward** - Iterate on calculations/styling
+
+No risk to existing data - Analytics is read-only.
+
+---
+
+## Review
+
+*(To be completed after implementation)*

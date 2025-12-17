@@ -1,0 +1,298 @@
+# Decap CMS Configuration for OakStone Properties
+# Documentation: https://decapcms.org/docs/
+
+# Backend Configuration
+# Note: Update repo and base_url once GitHub repo and OAuth proxy are set up
+backend:
+  name: github
+  repo: owner/oakstone-properties  # TODO: Update with actual GitHub repo
+  branch: main
+  # base_url: https://your-oauth-proxy.workers.dev  # TODO: Add OAuth proxy URL
+
+# Local development backend (uncomment for testing without auth)
+# backend:
+#   name: git-gateway
+
+# Media settings
+media_folder: public/images/properties
+public_folder: /images/properties
+
+# Site URL for preview
+site_url: https://oakstoneproperties.com
+
+# Logo for admin interface
+logo_url: /images/logos/logo.png
+
+# Collections
+collections:
+  # Properties Collection
+  - name: properties
+    label: Properties
+    label_singular: Property
+    folder: src/content/properties
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    preview_path: properties/{{slug}}
+    sortable_fields:
+      - title
+      - rent
+      - status
+      - publishedDate
+    view_filters:
+      - label: Available
+        field: status
+        pattern: available
+      - label: Pending
+        field: status
+        pattern: pending
+      - label: Rented
+        field: status
+        pattern: rented
+    view_groups:
+      - label: Status
+        field: status
+      - label: City
+        field: city
+      - label: Property Type
+        field: propertyType
+    fields:
+      # Basic Info
+      - name: title
+        label: Property Title
+        widget: string
+        hint: "e.g., 'Cozy 2BR Apartment in Downtown'"
+
+      - name: status
+        label: Status
+        widget: select
+        options:
+          - { label: "Available", value: "available" }
+          - { label: "Application Pending", value: "pending" }
+          - { label: "Rented", value: "rented" }
+        default: available
+
+      - name: featured
+        label: Featured Property
+        widget: boolean
+        default: false
+        hint: "Featured properties appear on the homepage"
+
+      # Pricing
+      - name: rent
+        label: Monthly Rent ($)
+        widget: number
+        value_type: int
+        min: 0
+        hint: "Enter the monthly rent amount without $ sign"
+
+      - name: deposit
+        label: Security Deposit ($)
+        widget: number
+        value_type: int
+        min: 0
+        hint: "Usually equal to one month's rent"
+
+      # Property Details
+      - name: beds
+        label: Bedrooms
+        widget: number
+        value_type: int
+        min: 0
+        max: 10
+
+      - name: baths
+        label: Bathrooms
+        widget: number
+        value_type: float
+        min: 0
+        max: 10
+        step: 0.5
+        hint: "Use 0.5 for half baths"
+
+      - name: sqft
+        label: Square Feet
+        widget: number
+        value_type: int
+        min: 0
+        required: false
+
+      - name: propertyType
+        label: Property Type
+        widget: select
+        options:
+          - { label: "Apartment", value: "apartment" }
+          - { label: "House", value: "house" }
+          - { label: "Townhome", value: "townhome" }
+          - { label: "Condo", value: "condo" }
+          - { label: "Duplex", value: "duplex" }
+        default: apartment
+
+      # Location
+      - name: neighborhood
+        label: Neighborhood
+        widget: string
+        hint: "e.g., 'Downtown', 'Oakwood'"
+
+      - name: city
+        label: City
+        widget: string
+
+      - name: state
+        label: State
+        widget: string
+        hint: "Two-letter state code (e.g., SC)"
+        pattern:
+          - "^[A-Z]{2}$"
+          - "Please enter a 2-letter state code"
+
+      # Features & Policies
+      - name: features
+        label: Features
+        widget: list
+        allow_add: true
+        default: []
+        field:
+          name: feature
+          widget: string
+        hint: "Add features like 'Central AC', 'Dishwasher', etc."
+
+      - name: petPolicy
+        label: Pet Policy
+        widget: select
+        options:
+          - { label: "No Pets Allowed", value: "no-pets" }
+          - { label: "Cats Only", value: "cats-only" }
+          - { label: "Dogs Only", value: "dogs-only" }
+          - { label: "Cats & Dogs OK", value: "cats-dogs" }
+          - { label: "Pets Negotiable", value: "negotiable" }
+        default: no-pets
+
+      - name: parking
+        label: Parking
+        widget: select
+        options:
+          - { label: "No Parking", value: "none" }
+          - { label: "Street Parking", value: "street" }
+          - { label: "Parking Lot", value: "lot" }
+          - { label: "Garage", value: "garage" }
+          - { label: "Covered Parking", value: "covered" }
+        default: none
+
+      - name: laundry
+        label: Laundry
+        widget: select
+        options:
+          - { label: "No Laundry", value: "none" }
+          - { label: "Shared Laundry", value: "shared" }
+          - { label: "In-Unit Laundry", value: "in-unit" }
+          - { label: "Washer/Dryer Hookups", value: "hookups" }
+        default: none
+
+      # Media
+      - name: photos
+        label: Property Photos
+        widget: list
+        min: 1
+        summary: "{{fields.photo}}"
+        field:
+          name: photo
+          widget: image
+          choose_url: true
+          allow_multiple: false
+        hint: "Upload at least one photo. First photo will be the main image."
+
+      # Application
+      - name: applyUrl
+        label: Application URL
+        widget: string
+        hint: "Link to application form (e.g., RentSpree URL)"
+
+      - name: applicationFee
+        label: Application Fee ($)
+        widget: number
+        value_type: int
+        min: 0
+        required: false
+
+      # Dates
+      - name: availableDate
+        label: Available Date
+        widget: datetime
+        date_format: YYYY-MM-DD
+        time_format: false
+        required: false
+        hint: "When is the property available for move-in?"
+
+      - name: publishedDate
+        label: Published Date
+        widget: datetime
+        date_format: YYYY-MM-DD
+        time_format: false
+        default: "{{now}}"
+
+      # Description (body content)
+      - name: body
+        label: Full Description
+        widget: markdown
+        hint: "Include details about the property, neighborhood, and move-in requirements"
+
+  # Site Settings
+  - name: settings
+    label: Site Settings
+    files:
+      - name: contact
+        label: Contact Information
+        file: src/content/settings/contact.json
+        fields:
+          - name: phone
+            label: Phone Number
+            widget: string
+
+          - name: email
+            label: Email Address
+            widget: string
+
+          - name: address
+            label: Office Address
+            widget: text
+            required: false
+
+          - name: hours
+            label: Office Hours
+            widget: string
+            hint: "e.g., 'Mon-Fri 9am-5pm'"
+
+  # Static Pages
+  - name: pages
+    label: Pages
+    files:
+      - name: about
+        label: About Page
+        file: src/content/pages/about.md
+        fields:
+          - name: title
+            label: Title
+            widget: string
+          - name: body
+            label: Content
+            widget: markdown
+
+      - name: faq
+        label: FAQ Page
+        file: src/content/pages/faq.md
+        fields:
+          - name: title
+            label: Title
+            widget: string
+          - name: questions
+            label: Questions
+            label_singular: Question
+            widget: list
+            fields:
+              - name: question
+                label: Question
+                widget: string
+              - name: answer
+                label: Answer
+                widget: markdown

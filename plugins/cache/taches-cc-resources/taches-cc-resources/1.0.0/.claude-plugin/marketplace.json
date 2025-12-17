@@ -1,0 +1,20 @@
+{
+  "name": "taches-cc-resources",
+  "owner": {
+    "name": "Lex Christopherson",
+    "email": "lex@glittercowboy.com"
+  },
+  "metadata": {
+    "description": "Curated Claude Code skills and commands for prompt engineering and productivity",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "taches-cc-resources",
+      "source": "./",
+      "description": "Skills and commands for prompt engineering, MCP servers, subagents, hooks, and productivity workflows",
+      "version": "1.0.0",
+      "strict": true
+    }
+  ]
+}

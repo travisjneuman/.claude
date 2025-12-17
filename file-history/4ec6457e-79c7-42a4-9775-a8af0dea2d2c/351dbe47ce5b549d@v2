@@ -1,0 +1,295 @@
+# Optimize .claude/ Folder - Context Reduction Plan
+
+**Goal:** Reduce context consumption while preserving all functionality
+**Constraint:** No deletions - only restructuring and condensing
+
+---
+
+## User Preferences (Confirmed)
+
+1. **Reference Style:** Markdown links - all paths relative within .claude/ (portable)
+2. **Project Skills:** Make example-* skills fully generic while preserving all rules/guidelines
+3. **Code Examples:** Reduce to 2-3 essentials per concept
+
+---
+
+## Executive Summary
+
+### Current State
+- **Total SKILL.md content:** ~290 KB across 25 files (~8,600 lines)
+- **Largest files:** example-react-app-ux-designer (32KB/1,206 lines), document-skills/pptx (25.5KB), example-react-app-design-system (24KB)
+- **Key finding:** ~50-60% redundancy across similar skill types
+
+### Target Outcome
+- **Estimated reduction:** 30-40% (~90-120 KB savings)
+- **Method:** Extract shared patterns, genericize project skills, reduce examples
+- **Preserved:** All functionality, all rules/guidelines, essential examples
+
+---
+
+## Phase 1: Create Shared Reference Library
+
+Create `C:\Users\tjn\.claude\skills\_shared\` directory with extracted common patterns.
+
+### 1.1 Create CODE_REVIEW_STANDARDS.md (~80 lines)
+Extract from 4 code-reviewer skills:
+- Security checks (Frontend/Backend/General)
+- Performance requirements table
+- Accessibility (WCAG AA) requirements
+- Review checklist template
+
+**Files affected:**
+- `generic-code-reviewer/SKILL.md`
+- `example-react-app-code-reviewer/SKILL.md`
+- `example-fullstack-code-reviewer/SKILL.md`
+- `example-static-site-code-reviewer/SKILL.md`
+
+**Estimated savings:** 300+ lines across 4 files
+
+### 1.2 Create DESIGN_PATTERNS.md (~100 lines)
+Extract from design system and UX skills:
+- Typography scale table
+- Spacing system (4px/8px base)
+- Color theory principles
+- Visual hierarchy patterns
+- Breakpoint table
+
+**Files affected:**
+- `generic-design-system/SKILL.md`
+- `generic-ux-designer/SKILL.md`
+- `frontend-enhancer/SKILL.md`
+- All example-*-design-system skills
+
+**Estimated savings:** 200+ lines across 6 files
+
+### 1.3 Create UX_PRINCIPLES.md (~120 lines)
+Extract from UX designer skills:
+- Hick's Law, Fitts's Law, Jakob's Law
+- Cognitive load (Miller's Law)
+- Design Thinking framework (5 steps)
+- User psychology principles
+- Interaction patterns tables
+
+**Files affected:**
+- `generic-ux-designer/SKILL.md`
+- `example-react-app-ux-designer/SKILL.md`
+- `example-fullstack-ux-designer/SKILL.md`
+- `example-static-site-ux-designer/SKILL.md`
+
+**Estimated savings:** 400+ lines across 4 files
+
+---
+
+## Phase 2: Genericize Project-Specific Skills
+
+**Goal:** Transform example-* skills into generic variants while preserving ALL rules, guidelines, and instructions.
+
+### 2.1 example-react-app-ux-designer.md → generic-react-ux-designer.md
+**Current:** 1,206 lines with Neuman Brain references
+**Target:** ~400 lines of generic React UX guidance
+
+**Transformation:**
+- Replace "Neuman Brain" → "React applications"
+- Remove specific brand colors, keep pattern: "Use project's design tokens"
+- Keep ALL UX principles (Hick's Law, Fitts's Law, etc.)
+- Keep ALL design thinking frameworks
+- Keep ALL accessibility requirements
+- Reduce code examples from 20+ to 6-8 representative patterns
+- Reference `_shared/UX_PRINCIPLES.md` for foundational concepts
+
+**Estimated result:** ~400 lines (savings: ~800 lines)
+
+### 2.2 example-react-app-design-system.md → generic-react-design-system.md
+**Current:** 871 lines with Neuman Brain tokens
+**Target:** ~300 lines of generic React design system guidance
+
+**Transformation:**
+- Replace specific colors → "Follow project's color palette"
+- Keep typography scale principles (not specific sizes)
+- Keep spacing system pattern (4px base unit concept)
+- Keep component pattern guidance
+- Keep animation performance requirements
+- Reduce code examples to 3-4 essential patterns
+- Reference `_shared/DESIGN_PATTERNS.md`
+
+**Estimated result:** ~300 lines (savings: ~570 lines)
+
+### 2.3 example-fullstack-* skills (4 files)
+**Current:** ~1,000 lines total across 4 files
+**Target:** ~500 lines total
+
+**Transformation:**
+- Same genericization approach
+- "Lazy Golfing" → "Full-stack Next.js/NestJS applications"
+- Preserve all architectural patterns
+- Preserve all testing requirements
+- Reduce project-specific examples
+
+### 2.4 example-static-site-* skills (4 files)
+**Current:** ~900 lines total across 4 files
+**Target:** ~500 lines total
+
+**Transformation:**
+- "thedeadrobot" → "Static HTML/CSS/JS sites"
+- Preserve all patterns and guidelines
+- Keep vanilla JS best practices
+
+---
+
+## Phase 3: Condense Utility Skills
+
+### 3.1 tech-debt-analyzer.md (619 → ~400 lines)
+**Changes:**
+- Remove theoretical tool descriptions (Python scripts don't exist)
+- Condense "Success Metrics" to bullet list
+- Keep practical analysis workflow
+- Keep code smell patterns
+
+### 3.2 test-specialist.md (566 → ~350 lines)
+**Changes:**
+- Reduce examples from 15+ to 5-7 essentials
+- Generalize language-specific guidance
+- Keep core testing strategies
+
+### 3.3 frontend-enhancer.md (335 → ~200 lines)
+**Changes:**
+- Reference shared design patterns
+- Focus on enhancement workflow
+- Reduce redundant examples
+
+---
+
+## Phase 4: Standardize Skill Structure
+
+### 4.1 Implement Import References
+Add front matter with relative imports (portable):
+
+```yaml
+---
+name: generic-react-ux-designer
+imports:
+  - ./_shared/UX_PRINCIPLES.md
+  - ./_shared/DESIGN_PATTERNS.md
+description: ...
+---
+```
+
+### 4.2 Standardize "See Also" Sections
+**Current:** Verbose, inconsistent
+**Target:** Single-line relative links
+
+```markdown
+## See Also
+- [UX Principles](./_shared/UX_PRINCIPLES.md)
+- [Design Patterns](./_shared/DESIGN_PATTERNS.md)
+```
+
+**Savings:** ~50 lines across all skills
+
+### 4.3 Remove Verbose Introductions
+**Current:** 20-30 line intros explaining "what this skill does"
+**Target:** 2-3 lines max (description field handles discovery)
+
+**Savings:** ~200 lines across all skills
+
+---
+
+## Phase 5: Command & Documentation Optimization
+
+### 5.1 start-task.md (162 → ~100 lines)
+- Reduce examples from 6 to 3
+- Condense routing logic
+- Keep all functionality
+
+### 5.2 CLAUDE-CODE-RESOURCES.md (793 → ~600 lines)
+- Convert verbose sections to tables
+- Remove redundant explanations
+- Tighten reference content
+
+---
+
+## Implementation Order
+
+| Step | Task | Files | Est. Savings |
+|------|------|-------|--------------|
+| 1 | Create `skills/_shared/` + 3 reference files | 3 new | Foundation |
+| 2 | Genericize + condense example-react-app-* (4 files) | 4 modify | ~1,500 lines |
+| 3 | Genericize + condense example-fullstack-* (4 files) | 4 modify | ~500 lines |
+| 4 | Genericize + condense example-static-site-* (4 files) | 4 modify | ~400 lines |
+| 5 | Update generic-* skills to reference shared | 4 modify | ~200 lines |
+| 6 | Condense utility skills (tech-debt, test, frontend) | 3 modify | ~450 lines |
+| 7 | Standardize all See Also + intros | All skills | ~250 lines |
+| 8 | Optimize start-task.md | 1 modify | ~60 lines |
+| 9 | Optimize CLAUDE-CODE-RESOURCES.md | 1 modify | ~190 lines |
+
+**Total estimated reduction:** ~3,500+ lines (35-40%)
+
+---
+
+## Files to Modify (All paths relative to .claude/)
+
+### New Files (3)
+```
+skills/_shared/CODE_REVIEW_STANDARDS.md   (~80 lines)
+skills/_shared/DESIGN_PATTERNS.md         (~100 lines)
+skills/_shared/UX_PRINCIPLES.md           (~120 lines)
+```
+
+### Rename + Genericize (12 files)
+```
+skills/example-react-app-ux-designer/      → skills/generic-react-ux-designer/
+skills/example-react-app-design-system/    → skills/generic-react-design-system/
+skills/example-react-app-code-reviewer/    → skills/generic-react-code-reviewer/
+skills/example-react-app-feature-developer/ → skills/generic-react-feature-developer/
+
+skills/example-fullstack-ux-designer/      → skills/generic-fullstack-ux-designer/
+skills/example-fullstack-design-system/    → skills/generic-fullstack-design-system/
+skills/example-fullstack-code-reviewer/    → skills/generic-fullstack-code-reviewer/
+skills/example-fullstack-feature-developer/ → skills/generic-fullstack-feature-developer/
+
+skills/example-static-site-ux-designer/    → skills/generic-static-ux-designer/
+skills/example-static-site-design-system/  → skills/generic-static-design-system/
+skills/example-static-site-code-reviewer/  → skills/generic-static-code-reviewer/
+skills/example-static-site-feature-developer/ → skills/generic-static-feature-developer/
+```
+
+### Update Existing (7 files)
+```
+skills/generic-code-reviewer/SKILL.md      (add _shared references)
+skills/generic-ux-designer/SKILL.md        (add _shared references)
+skills/generic-design-system/SKILL.md      (add _shared references)
+skills/generic-feature-developer/SKILL.md  (add _shared references)
+skills/tech-debt-analyzer/SKILL.md         (condense)
+skills/test-specialist/SKILL.md            (condense)
+skills/frontend-enhancer/SKILL.md          (condense)
+```
+
+### Optimize (2 files)
+```
+commands/start-task.md                     (reduce examples)
+CLAUDE-CODE-RESOURCES.md                   (tighten prose)
+```
+
+---
+
+## Validation Strategy
+
+After each phase:
+1. Verify skill activates correctly when invoked
+2. Test that relative links resolve within .claude/
+3. Confirm no broken references
+4. Spot-check key rules/guidelines preserved
+
+---
+
+## Summary
+
+| Metric | Before | After | Change |
+|--------|--------|-------|--------|
+| Total SKILL.md lines | ~8,600 | ~5,100 | -40% |
+| Number of skills | 25 | 25 | 0 |
+| Shared references | 0 | 3 | +3 |
+| Project-specific refs | Many | 0 | Genericized |
+| Code examples | 50+ | ~25 | -50% |
+
+**All rules, guidelines, and instructions preserved - only redundancy and verbosity removed.**

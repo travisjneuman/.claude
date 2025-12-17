@@ -1,0 +1,67 @@
+import { useEffect } from 'react';
+import { useTimeTrackingStore } from '../stores/useTimeTrackingStore';
+
+interface ProjectSelectorProps {
+  value: string | null | undefined;
+  onChange: (projectId: string | null) => void;
+  className?: string;
+  placeholder?: string;
+  showNoProject?: boolean;
+}
+
+/**
+ * ProjectSelector Component
+ * Dropdown for selecting a project with color-coded visual indicators
+ */
+export function ProjectSelector({
+  value,
+  onChange,
+  className = '',
+  placeholder = 'Select project...',
+  showNoProject = true
+}: ProjectSelectorProps) {
+  const { projects, loadProjects } = useTimeTrackingStore();
+
+  useEffect(() => {
+    loadProjects();
+  }, [loadProjects]);
+
+  // Filter to show only active projects
+  const activeProjects = projects.filter(p => p.active && !p.archived);
+
+  const selectedProject = value ? projects.find(p => p.id === value) : null;
+
+  return (
+    <div className="relative">
+      <select
+        value={value || ''}
+        onChange={(e) => onChange(e.target.value || null)}
+        className={`w-full px-3 py-2 text-sm bg-surface-light-elevated dark:bg-surface-dark-elevated border border-border-light dark:border-border-dark rounded focus:outline-none focus:ring-2 focus:ring-accent-magenta dark:focus:ring-accent-cyan text-text-light-primary dark:text-text-dark-primary appearance-none cursor-pointer ${className}`}
+      >
+        {showNoProject && (
+          <option value="">{placeholder}</option>
+        )}
+        {activeProjects.map(project => (
+          <option key={project.id} value={project.id}>
+            {project.name}
+          </option>
+        ))}
+      </select>
+
+      {/* Color indicator dot */}
+      {selectedProject && (
+        <div
+          className="absolute left-3 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full pointer-events-none"
+          style={{ backgroundColor: selectedProject.color }}
+        />
+      )}
+
+      {/* Dropdown arrow */}
+      <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-text-light-secondary dark:text-text-dark-secondary">
+        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+        </svg>
+      </div>
+    </div>
+  );
+}

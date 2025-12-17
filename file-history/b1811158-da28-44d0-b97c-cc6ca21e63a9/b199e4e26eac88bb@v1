@@ -1,0 +1,624 @@
+import { useEffect, useState, useMemo, useRef } from 'react';
+import { ChevronLeft, ChevronRight, Calendar as CalendarIcon, Plus, Printer, Download, Upload, Clock } from 'lucide-react';
+import { useTimeTrackingStore } from '../stores/useTimeTrackingStore';
+import { useCalendarStore } from '../stores/useCalendarStore';
+import { useKanbanStore } from '../stores/useKanbanStore';
+import { formatDuration } from '../utils/timeFormatters';
+import { getStandardDateKey } from '../utils/dateUtils';
+import { generateRecurringInstances, expandMultiDayEvent } from '../utils/recurrence';
+import { exportToICS, importFromICS, downloadICS, readICSFile } from '../services/icsImportExport';
+import { WeekView } from './WeekView';
+import { DayView } from './DayView';
+import { AgendaView } from './AgendaView';
+import { DayDetailModal } from './DayDetailModal';
+import type { TimeEntry, CalendarEvent, ViewMode, Task } from '../types';
+
+interface TimeEntryCalendarProps {
+  onEditEntry?: (entry: TimeEntry) => void;
+  onCreateEvent?: (dateKey: string) => void;
+  onEditEvent?: (event: CalendarEvent, dateKey: string) => void;
+}
+
+/**
+ * TimeEntryCalendar Component (UNIFIED)
+ * Full calendar view showing time entries AND calendar events
+ * Supports 4 view modes: Monthly, Weekly, Daily, Agenda/List
+ * Migrated all functionality from Planning Calendar Widget
+ */
+export function TimeEntryCalendar({ onEditEntry, onCreateEvent, onEditEvent }: TimeEntryCalendarProps) {
+  const { entries, projects, loadEntries, loadProjects } = useTimeTrackingStore();
+  const { events, importEvents } = useCalendarStore();
+  const { tasks } = useKanbanStore();
+
+  const [loading, setLoading] = useState(true);
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const [viewMode, setViewMode] = useState<ViewMode>('monthly');
+  const [importStatus, setImportStatus] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
+  const [dayDetailModal, setDayDetailModal] = useState<{ dateKey: string; events: CalendarEvent[]; tasks: Task[]; timeEntries: TimeEntry[]; totalDuration: number } | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // Group tasks by their due date (convert ISO date to standard date key)
+  const tasksByDate = useMemo(() => {
+    const result: Record<string, Task[]> = {};
+    tasks.forEach((task) => {
+      if (task.dueDate && task.status !== 'done') {
+        // Convert YYYY-MM-DD to YYYY-M-D standard format
+        const [year, month, day] = task.dueDate.split('-').map(Number);
+        const dateKey = `${year}-${month}-${day}`;
+        if (!result[dateKey]) result[dateKey] = [];
+        result[dateKey].push(task);
+      }
+    });
+    return result;
+  }, [tasks]);
+
+  // Handle ICS export
+  const handleExport = () => {
+    const result = exportToICS(events);
+    if (result.success && result.data) {
+      const filename = `calendar-${new Date().toISOString().split('T')[0]}.ics`;
+      downloadICS(result.data, filename);
+    } else {
+      setImportStatus({ message: result.error || 'Export failed', type: 'error' });
+      setTimeout(() => setImportStatus(null), 3000);
+    }
+  };
+
+  // Handle ICS import
+  const handleImport = async (file: File) => {
+    try {
+      const icsData = await readICSFile(file);
+      const result = importFromICS(icsData);
+
+      if (result.success && result.events) {
+        const count = importEvents(result.events);
+        setImportStatus({ message: `Imported ${count} event${count !== 1 ? 's' : ''}`, type: 'success' });
+      } else {
+        setImportStatus({ message: result.error || 'Import failed', type: 'error' });
+      }
+    } catch (error) {
+      setImportStatus({ message: String(error), type: 'error' });
+    }
+    setTimeout(() => setImportStatus(null), 3000);
+  };
+
+  const year = currentDate.getFullYear();
+  const month = currentDate.getMonth(); // 0-11
+
+  useEffect(() => {
+    const loadData = async () => {
+      setLoading(true);
+      try {
+        // Load entries for the entire month (or more for weekly/agenda views)
+        const monthStart = new Date(year, month, 1);
+        const monthEnd = new Date(year, month + 1, 0, 23, 59, 59);
+
+        await Promise.all([
+          loadEntries({
+            dateRange: 'custom',
+            startDate: monthStart.toISOString(),
+            endDate: monthEnd.toISOString(),
+            projectIds: [],
+            tags: [],
+            searchQuery: ''
+          }),
+          loadProjects()
+        ]);
+      } catch (error) {
+        console.error('Failed to load calendar data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadData();
+  }, [loadEntries, loadProjects, year, month]);
+
+  const handlePrevious = () => {
+    if (viewMode === 'monthly') {
+      setCurrentDate(new Date(year, month - 1, 1));
+    } else if (viewMode === 'weekly') {
+      const newDate = new Date(currentDate);
+      newDate.setDate(newDate.getDate() - 7);
+      setCurrentDate(newDate);
+    } else if (viewMode === 'daily') {
+      const newDate = new Date(currentDate);
+      newDate.setDate(newDate.getDate() - 1);
+      setCurrentDate(newDate);
+    }
+    // Agenda view doesn't have prev/next (it's always forward-looking)
+  };
+
+  const handleNext = () => {
+    if (viewMode === 'monthly') {
+      setCurrentDate(new Date(year, month + 1, 1));
+    } else if (viewMode === 'weekly') {
+      const newDate = new Date(currentDate);
+      newDate.setDate(newDate.getDate() + 7);
+      setCurrentDate(newDate);
+    } else if (viewMode === 'daily') {
+      const newDate = new Date(currentDate);
+      newDate.setDate(newDate.getDate() + 1);
+      setCurrentDate(newDate);
+    }
+  };
+
+  const handleToday = () => {
+    setCurrentDate(new Date());
+  };
+
+  const handlePrint = () => {
+    window.print();
+  };
+
+  // Expand recurring and multi-day events for current month
+  // NOTE: Must be called before early return to maintain consistent hook order
+  const expandedEvents = useMemo(() => {
+    const result: Record<string, CalendarEvent[]> = {};
+
+    const monthStart = new Date(year, month, 1);
+    const monthEnd = new Date(year, month + 1, 0);
+
+    Object.entries(events).forEach(([dateKey, dayEvents]) => {
+      dayEvents.forEach((event) => {
+        if (event.recurrence) {
+          // Generate recurring instances for this month
+          const instances = generateRecurringInstances(event, dateKey, monthStart, monthEnd);
+          instances.forEach(({ date, event: instanceEvent }) => {
+            // Also expand multi-day for each recurring instance
+            const multiDayInstances = expandMultiDayEvent(instanceEvent, date);
+            multiDayInstances.forEach((multiDayEvent, multiDayDate) => {
+              if (!result[multiDayDate]) result[multiDayDate] = [];
+              result[multiDayDate].push(multiDayEvent);
+            });
+          });
+        } else {
+          // Non-recurring event - check if multi-day
+          const multiDayInstances = expandMultiDayEvent(event, dateKey);
+          multiDayInstances.forEach((multiDayEvent, multiDayDate) => {
+            if (!result[multiDayDate]) result[multiDayDate] = [];
+            result[multiDayDate].push(multiDayEvent);
+          });
+        }
+      });
+    });
+
+    return result;
+  }, [events, year, month]);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-12">
+        <div className="text-text-light-secondary dark:text-text-dark-secondary">
+          Loading calendar...
+        </div>
+      </div>
+    );
+  }
+
+  // Get display text for current period
+  const getDisplayText = () => {
+    if (viewMode === 'monthly') {
+      return new Date(year, month, 1).toLocaleDateString('en-US', {
+        month: 'long',
+        year: 'numeric'
+      });
+    } else if (viewMode === 'weekly') {
+      const startOfWeek = new Date(currentDate);
+      startOfWeek.setDate(startOfWeek.getDate() - startOfWeek.getDay());
+      const endOfWeek = new Date(startOfWeek);
+      endOfWeek.setDate(endOfWeek.getDate() + 6);
+
+      if (startOfWeek.getMonth() === endOfWeek.getMonth()) {
+        return `${startOfWeek.toLocaleDateString('en-US', { month: 'long' })} ${startOfWeek.getDate()}-${endOfWeek.getDate()}, ${startOfWeek.getFullYear()}`;
+      } else {
+        return `${startOfWeek.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} - ${endOfWeek.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`;
+      }
+    } else if (viewMode === 'daily') {
+      return currentDate.toLocaleDateString('en-US', {
+        weekday: 'long',
+        month: 'long',
+        day: 'numeric',
+        year: 'numeric'
+      });
+    } else {
+      // Agenda
+      return 'Upcoming Events';
+    }
+  };
+
+  // Get day of week for first day of month (0 = Sunday)
+  const firstDayOfWeek = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+  // Group entries by date
+  const entriesByDate = new Map<string, TimeEntry[]>();
+  entries.forEach(entry => {
+    const date = new Date(entry.startTime).toISOString().split('T')[0];
+    if (!entriesByDate.has(date)) {
+      entriesByDate.set(date, []);
+    }
+    entriesByDate.get(date)!.push(entry);
+  });
+
+  // Create calendar grid (for monthly view)
+  const calendarDays: (number | null)[] = [];
+  for (let i = 0; i < firstDayOfWeek; i++) {
+    calendarDays.push(null); // Empty cells before month starts
+  }
+  for (let day = 1; day <= daysInMonth; day++) {
+    calendarDays.push(day);
+  }
+
+  const handleDayClick = (dateKey: string) => {
+    // Click on a day opens the DayDetailModal
+    const dayEvents = expandedEvents[dateKey] || [];
+    const dayTasks = tasksByDate[dateKey] || [];
+
+    // Get time entries for this day (need to convert dateKey to ISO format)
+    const [year, month, day] = dateKey.split('-').map(Number);
+    const isoDateStr = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+    const dayEntries = entriesByDate.get(isoDateStr) || [];
+    const totalDuration = dayEntries.reduce((sum, entry) => sum + entry.duration, 0);
+
+    // If no content, go straight to create event modal
+    if (dayEvents.length === 0 && dayTasks.length === 0 && dayEntries.length === 0) {
+      if (onCreateEvent) {
+        onCreateEvent(dateKey);
+      }
+    } else {
+      // Show modal with all events, tasks, and time entries for this day
+      setDayDetailModal({ dateKey, events: dayEvents, tasks: dayTasks, timeEntries: dayEntries, totalDuration });
+    }
+  };
+
+  const handleEventClick = (event: CalendarEvent, dateKey: string) => {
+    if (onEditEvent) {
+      onEditEvent(event, dateKey);
+    }
+  };
+
+  return (
+    <div className="space-y-6">
+      {/* Navigation Header */}
+      <div className="bg-surface-light dark:bg-surface-dark rounded-button border border-border-light dark:border-border-dark p-4">
+        <div className="flex items-center justify-between mb-4">
+          {/* Left: Navigation Arrows */}
+          <div className="flex items-center gap-2">
+            {viewMode !== 'agenda' && (
+              <>
+                <button
+                  onClick={handlePrevious}
+                  className="p-2 rounded-buttonhover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated text-text-light-secondary dark:text-text-dark-secondary transition-all duration-standard ease-smooth"
+                  aria-label="Previous"
+                >
+                  <ChevronLeft className="w-5 h-5" />
+                </button>
+                <button
+                  onClick={handleNext}
+                  className="p-2 rounded-buttonhover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated text-text-light-secondary dark:text-text-dark-secondary transition-all duration-standard ease-smooth"
+                  aria-label="Next"
+                >
+                  <ChevronRight className="w-5 h-5" />
+                </button>
+              </>
+            )}
+          </div>
+
+          {/* Center: Period Display + Actions */}
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2">
+              <CalendarIcon className="w-5 h-5 text-accent-magenta dark:text-accent-cyan" />
+              <h2 className="text-xl font-semibold text-text-light-primary dark:text-text-dark-primary">
+                {getDisplayText()}
+              </h2>
+            </div>
+            <button
+              onClick={handleToday}
+              className="px-3 py-1 text-sm font-medium text-accent-magenta dark:text-accent-cyan hover:bg-accent-magenta/10 dark:hover:bg-accent-cyan/10 rounded-buttontransition-all duration-standard ease-smooth"
+            >
+              Today
+            </button>
+            {onCreateEvent && (
+              <button
+                onClick={() => onCreateEvent(getStandardDateKey(new Date()))}
+                className="flex items-center gap-2 px-3 py-1 text-sm font-medium bg-accent-magenta dark:bg-accent-cyan text-white hover:opacity-90 rounded-buttontransition-opacity"
+              >
+                <Plus className="w-4 h-4" />
+                New Event
+              </button>
+            )}
+            <button
+              onClick={handlePrint}
+              className="p-2 hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated rounded-buttontransition-all duration-standard ease-smooth no-print"
+              title="Print calendar"
+              aria-label="Print calendar"
+            >
+              <Printer className="w-4 h-4 text-text-light-secondary dark:text-text-dark-secondary" />
+            </button>
+            {/* Export/Import buttons */}
+            <button
+              onClick={handleExport}
+              className="p-2 hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated rounded-buttontransition-all duration-standard ease-smooth no-print"
+              title="Export to .ics file"
+              aria-label="Export calendar"
+            >
+              <Download className="w-4 h-4 text-text-light-secondary dark:text-text-dark-secondary" />
+            </button>
+            <button
+              onClick={() => fileInputRef.current?.click()}
+              className="p-2 hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated rounded-buttontransition-all duration-standard ease-smooth no-print"
+              title="Import from .ics file"
+              aria-label="Import calendar"
+            >
+              <Upload className="w-4 h-4 text-text-light-secondary dark:text-text-dark-secondary" />
+            </button>
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept=".ics"
+              className="hidden"
+              onChange={(e) => {
+                const file = e.target.files?.[0];
+                if (file) {
+                  handleImport(file);
+                  e.target.value = ''; // Reset for re-import
+                }
+              }}
+            />
+          </div>
+
+          {/* Right: Status message or placeholder */}
+          <div className="w-[88px] flex items-center justify-end">
+            {importStatus && (
+              <span className={`text-xs px-2 py-1 rounded ${
+                importStatus.type === 'success'
+                  ? 'bg-status-success/20 text-status-success'
+                  : 'bg-status-error/20 text-status-error'
+              }`}>
+                {importStatus.message}
+              </span>
+            )}
+          </div>
+        </div>
+
+        {/* View Mode Switcher */}
+        <div className="flex justify-center">
+          <div className="flex gap-1 bg-surface-light-elevated dark:bg-surface-dark-elevated rounded-buttonp-1">
+            <button
+              onClick={() => setViewMode('monthly')}
+              className={`px-3 py-1 rounded-buttontext-sm transition-all duration-standard ease-smooth ${
+                viewMode === 'monthly'
+                  ? 'bg-accent-magenta dark:bg-accent-cyan text-white'
+                  : 'text-text-light-secondary dark:text-text-dark-secondary hover:bg-surface-light dark:hover:bg-neutral-800'
+              }`}
+            >
+              Month
+            </button>
+            <button
+              onClick={() => setViewMode('weekly')}
+              className={`px-3 py-1 rounded-buttontext-sm transition-all duration-standard ease-smooth ${
+                viewMode === 'weekly'
+                  ? 'bg-accent-magenta dark:bg-accent-cyan text-white'
+                  : 'text-text-light-secondary dark:text-text-dark-secondary hover:bg-surface-light dark:hover:bg-neutral-800'
+              }`}
+            >
+              Week
+            </button>
+            <button
+              onClick={() => setViewMode('daily')}
+              className={`px-3 py-1 rounded-buttontext-sm transition-all duration-standard ease-smooth ${
+                viewMode === 'daily'
+                  ? 'bg-accent-magenta dark:bg-accent-cyan text-white'
+                  : 'text-text-light-secondary dark:text-text-dark-secondary hover:bg-surface-light dark:hover:bg-neutral-800'
+              }`}
+            >
+              Day
+            </button>
+            <button
+              onClick={() => setViewMode('agenda')}
+              className={`px-3 py-1 rounded-buttontext-sm transition-all duration-standard ease-smooth ${
+                viewMode === 'agenda'
+                  ? 'bg-accent-magenta dark:bg-accent-cyan text-white'
+                  : 'text-text-light-secondary dark:text-text-dark-secondary hover:bg-surface-light dark:hover:bg-neutral-800'
+              }`}
+            >
+              List
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* View Content */}
+      {viewMode === 'monthly' ? (
+        /* Monthly View */
+        <div className="bg-surface-light dark:bg-surface-dark rounded-button border border-border-light dark:border-border-dark p-6">
+          {/* Day Headers */}
+          <div className="grid grid-cols-7 gap-1 mb-1">
+            {['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'].map(day => (
+              <div
+                key={day}
+                className="text-center text-sm font-semibold text-text-light-secondary dark:text-text-dark-secondary py-2"
+              >
+                {day}
+              </div>
+            ))}
+          </div>
+
+          {/* Calendar Days */}
+          <div className="grid grid-cols-7 gap-1">
+            {calendarDays.map((day, index) => {
+              if (day === null) {
+                // Empty cell before month starts
+                return (
+                  <div
+                    key={`empty-${index}`}
+                    className="min-h-[80px] bg-surface-light-elevated dark:bg-surface-dark-elevated rounded-button border border-border-light dark:border-border-dark opacity-30"
+                  />
+                );
+              }
+
+              // ISO format for time entry lookups (compatible with Date.toISOString)
+              const isoDateStr = `${year}-${(month + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+              // Standard format for calendar store (YYYY-M-D)
+              const standardDateKey = `${year}-${month + 1}-${day}`;
+              const dayEntries = entriesByDate.get(isoDateStr) || [];
+              const dayEvents = expandedEvents[standardDateKey] || [];
+              const dayTasks = tasksByDate[standardDateKey] || [];
+              // Use local date comparison (not UTC via toISOString) to determine "today"
+              const today = new Date();
+              const isToday = year === today.getFullYear() && month === today.getMonth() && day === today.getDate();
+              const totalDuration = dayEntries.reduce((sum, entry) => sum + entry.duration, 0);
+              const hasContent = dayEntries.length > 0 || dayEvents.length > 0 || dayTasks.length > 0;
+
+              return (
+                <button
+                  key={standardDateKey}
+                  onClick={() => handleDayClick(standardDateKey)}
+                  className={`min-h-[80px] p-2 rounded-button border transition-all text-left ${
+                    isToday
+                      ? 'border-accent-magenta dark:border-accent-cyan border-2 bg-accent-magenta/5 dark:bg-accent-cyan/5'
+                      : 'border-border-light dark:border-border-dark'
+                  } ${
+                    hasContent
+                      ? 'bg-surface-light dark:bg-surface-dark hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated'
+                      : 'bg-surface-light-elevated dark:bg-surface-dark-elevated hover:bg-surface-light dark:hover:bg-surface-dark'
+                  }`}
+                  title={hasContent ? 'Click to view details' : 'Click to add event'}
+                >
+                  {/* Day Number */}
+                  <div
+                    className={`text-sm font-semibold mb-1 ${
+                      isToday
+                        ? 'text-accent-magenta dark:text-accent-cyan'
+                        : 'text-text-light-primary dark:text-text-dark-primary'
+                    }`}
+                  >
+                    {day}
+                  </div>
+
+                  {/* Compact Summary */}
+                  {hasContent && (
+                    <div className="space-y-1">
+                      {/* Time Tracked */}
+                      {totalDuration > 0 && (
+                        <div className="flex items-center gap-1 text-xs text-accent-magenta dark:text-accent-cyan font-medium">
+                          <Clock className="w-3 h-3" />
+                          {formatDuration(totalDuration, { showSeconds: false })}
+                        </div>
+                      )}
+
+                      {/* Entry Count */}
+                      {dayEntries.length > 0 && (
+                        <div className="text-[10px] text-text-light-tertiary dark:text-text-dark-tertiary">
+                          {dayEntries.length} {dayEntries.length === 1 ? 'entry' : 'entries'}
+                        </div>
+                      )}
+
+                      {/* Event Count */}
+                      {dayEvents.length > 0 && (
+                        <div className="text-[10px] text-accent-purple dark:text-accent-purple">
+                          📅 {dayEvents.length} {dayEvents.length === 1 ? 'event' : 'events'}
+                        </div>
+                      )}
+
+                      {/* Task Count */}
+                      {dayTasks.length > 0 && (
+                        <div className="text-[10px] text-accent-blue">
+                          📋 {dayTasks.length} {dayTasks.length === 1 ? 'task' : 'tasks'}
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Empty state hint */}
+                  {!hasContent && (
+                    <div className="text-[10px] text-text-light-tertiary dark:text-text-dark-tertiary opacity-0 group-hover:opacity-100">
+                      Click to add
+                    </div>
+                  )}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      ) : viewMode === 'weekly' ? (
+        /* Weekly View */
+        <WeekView
+          currentDate={currentDate}
+          events={expandedEvents}
+          tasks={[]} // No tasks in time tracking context
+          onDayClick={handleDayClick}
+          onEventClick={handleEventClick}
+          showTimeSlots={true}
+        />
+      ) : viewMode === 'daily' ? (
+        /* Daily View */
+        <DayView
+          date={currentDate}
+          events={expandedEvents[getStandardDateKey(currentDate)] || []}
+          onEventClick={handleEventClick}
+          onTimeSlotClick={() => {
+            const dateKey = getStandardDateKey(currentDate);
+            handleDayClick(dateKey);
+          }}
+        />
+      ) : (
+        /* Agenda/List View */
+        <AgendaView
+          events={expandedEvents}
+          currentDate={currentDate}
+          daysToShow={14}
+          onEventClick={handleEventClick}
+        />
+      )}
+
+      {/* Legend */}
+      {projects.filter(p => p.active && !p.archived).length > 0 && (
+        <div className="bg-surface-light dark:bg-surface-dark rounded-button border border-border-light dark:border-border-dark p-4">
+          <h3 className="text-sm font-semibold text-text-light-primary dark:text-text-dark-primary mb-3">
+            Project Legend
+          </h3>
+          <div className="flex flex-wrap gap-3">
+            {projects.filter(p => p.active && !p.archived).map(project => (
+              <div key={project.id} className="flex items-center gap-2">
+                <div
+                  className="w-3 h-3 rounded"
+                  style={{ backgroundColor: project.color }}
+                />
+                <span className="text-sm text-text-light-secondary dark:text-text-dark-secondary">
+                  {project.name}
+                </span>
+              </div>
+            ))}
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded-buttonbg-gray-400" />
+              <span className="text-sm text-text-light-secondary dark:text-text-dark-secondary">
+                No Project
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Day Detail Modal */}
+      {dayDetailModal && (
+        <DayDetailModal
+          dateKey={dayDetailModal.dateKey}
+          events={dayDetailModal.events}
+          tasks={dayDetailModal.tasks}
+          timeEntries={dayDetailModal.timeEntries}
+          totalDuration={dayDetailModal.totalDuration}
+          onClose={() => setDayDetailModal(null)}
+          onCreateEvent={() => {
+            if (onCreateEvent) {
+              onCreateEvent(dayDetailModal.dateKey);
+            }
+          }}
+          onEditEvent={onEditEvent}
+          onEditEntry={onEditEntry}
+        />
+      )}
+    </div>
+  );
+}

@@ -1,0 +1,126 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="About Us"
+  description="Learn about OakStone Properties - your trusted partner in finding quality rental homes."
+>
+  <!-- Hero Section -->
+  <section class="gradient-primary text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <h1 class="text-3xl md:text-4xl font-bold mb-4">About OakStone Properties</h1>
+      <p class="text-primary-100 text-lg max-w-3xl">
+        Providing quality rental homes with exceptional service since day one.
+      </p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section class="py-16 bg-theme-primary">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="prose prose-lg max-w-none">
+        <h2 class="text-theme-primary">Our Mission</h2>
+        <p class="text-theme-secondary">
+          At OakStone Properties, we believe that everyone deserves a quality place to call home.
+          We're dedicated to providing well-maintained rental properties and responsive,
+          personal service to all of our tenants.
+        </p>
+
+        <h2 class="text-theme-primary">What Sets Us Apart</h2>
+        <ul class="text-theme-secondary">
+          <li><strong class="text-theme-primary">Quality Properties:</strong> Every home in our portfolio is carefully selected
+          and maintained to ensure comfort and reliability.</li>
+          <li><strong class="text-theme-primary">Responsive Service:</strong> We pride ourselves on quick response times to
+          maintenance requests and tenant inquiries.</li>
+          <li><strong class="text-theme-primary">Personal Touch:</strong> As a locally-owned company, we treat every tenant
+          with the respect and attention they deserve.</li>
+          <li><strong class="text-theme-primary">Transparency:</strong> No hidden fees, clear lease terms, and honest
+          communication from start to finish.</li>
+        </ul>
+
+        <h2 class="text-theme-primary">Our Properties</h2>
+        <p class="text-theme-secondary">
+          We manage a diverse portfolio of rental properties including apartments, houses,
+          townhomes, and condos across the greater Sample City area. Each property is inspected
+          regularly and maintained to high standards.
+        </p>
+
+        <h2 class="text-theme-primary">Contact Us</h2>
+        <p class="text-theme-secondary">
+          Ready to find your next home? Browse our <a href="/properties" class="text-primary-500 hover:text-primary-600">available properties</a>
+          or <a href="/contact" class="text-primary-500 hover:text-primary-600">contact us</a> to learn more about what we have to offer.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values Section -->
+  <section class="py-16 bg-theme-secondary">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl font-bold text-theme-primary text-center mb-12">Our Values</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="text-center p-6 bg-theme-primary rounded-xl shadow-sm">
+          <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-theme-primary mb-2">Quality First</h3>
+          <p class="text-theme-secondary">
+            We never compromise on the quality of our properties or service.
+          </p>
+        </div>
+
+        <div class="text-center p-6 bg-theme-primary rounded-xl shadow-sm">
+          <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-theme-primary mb-2">Timely Response</h3>
+          <p class="text-theme-secondary">
+            Your time matters. We respond quickly to all inquiries and requests.
+          </p>
+        </div>
+
+        <div class="text-center p-6 bg-theme-primary rounded-xl shadow-sm">
+          <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-theme-primary mb-2">Trust & Integrity</h3>
+          <p class="text-theme-secondary">
+            Honest, transparent dealings in everything we do.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-16 gradient-primary text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-2xl font-bold mb-4">Ready to Find Your Next Home?</h2>
+      <p class="text-primary-100 mb-8 max-w-2xl mx-auto">
+        Browse our available properties or get in touch with us today.
+      </p>
+      <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <a
+          href="/properties"
+          class="inline-flex items-center justify-center px-6 py-3 bg-white text-primary-700 font-semibold rounded-lg hover:bg-primary-50 transition-colors touch-target"
+        >
+          View Properties
+        </a>
+        <a
+          href="/contact"
+          class="inline-flex items-center justify-center px-6 py-3 border-2 border-white text-white font-semibold rounded-lg hover:bg-white/10 transition-colors touch-target"
+        >
+          Contact Us
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

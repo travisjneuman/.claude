@@ -1,0 +1,499 @@
+---
+type: idea-collection
+tags: [business, ideas, digital-products, templates, courses, passive-income]
+created: 2025-12-14
+---
+# Digital Products Ideas
+
+> One-time purchase products that create passive/semi-passive income streams.
+
+---
+
+## Why Digital Products?
+
+**The Appeal:**
+- Create once, sell forever
+- No inventory, no shipping
+- Near-100% profit margin after creation
+- Can complement consulting/services
+
+**The Reality:**
+- Requires marketing effort to sell
+- Competition is fierce
+- "Passive" still requires support/updates
+- Takes time to build audience
+
+**Best Approach:** Build products that solve problems you've already solved for clients.
+
+---
+
+## Idea 1: Claude Code Resource Pack
+
+**Context:** You've built an extensive collection of Claude Code skills, commands, and configurations. Others are building similar things.
+
+> Marketplaces like [Claude Marketplaces](https://claudemarketplaces.com/) and [MCP Market](https://mcpmarket.com/) show growing demand.
+
+### Product Definition
+
+**What:** Curated collection of professional-grade Claude Code resources
+
+| Component | Details |
+|-----------|---------|
+| Price | $49-99 (or $9-19/mo subscription) |
+| Format | GitHub repo access or downloadable ZIP |
+| Audience | Developers using Claude Code professionally |
+
+### Potential Contents
+
+**Skills:**
+- Code review skill (language-agnostic)
+- Feature development workflow
+- Tech debt analyzer
+- Debug methodology
+- Design system implementation guide
+
+**Slash Commands:**
+- Task management workflow
+- Git commit assistant
+- PR review automation
+- Documentation generator
+
+**Subagents:**
+- Research agents
+- Code analysis agents
+- Documentation agents
+
+**CLAUDE.md Templates:**
+- Global constitution template
+- Project-specific templates
+- Folder-level patterns
+- Stack-specific templates (React, NestJS, Python)
+
+### Viability Assessment
+
+| Factor | Assessment |
+|--------|------------|
+| Viability | Medium |
+| Effort | Low (curate existing work) |
+| Revenue | $5K-20K/yr |
+| Moat | Quality + curation + updates |
+
+### Go-to-Market
+
+1. Create landing page showcasing contents
+2. Post on developer communities (HN, Reddit, Twitter/X)
+3. Write blog posts about individual tips
+4. Partner with Claude Code community creators
+
+---
+
+## Idea 2: Golf League Starter Kit
+
+**Synergy with [[Ventures/LazyGolf]]**
+
+### Product Definition
+
+**What:** Complete guide + templates for starting a golf league
+
+| Component | Details |
+|-----------|---------|
+| Price | $29-49 |
+| Format | PDF guide + Notion/Airtable templates |
+| Audience | Golf enthusiasts wanting to start leagues |
+
+### Contents
+
+**The Guide (PDF/eBook):**
+1. Choosing a league format
+2. Finding members and setting expectations
+3. Scheduling and course selection
+4. Handicap systems explained
+5. Prize fund structures
+6. Side games and betting
+7. Communication best practices
+8. End-of-season events
+
+**Templates Included:**
+- League bylaws template (editable)
+- Schedule generator spreadsheet
+- Handicap tracking spreadsheet
+- Prize payout calculator
+- Member roster template
+- Email templates for communication
+- Scoring sheets (printable)
+
+### Viability Assessment
+
+| Factor | Assessment |
+|--------|------------|
+| Viability | Medium |
+| Effort | Low-Medium |
+| Revenue | $5K-15K/yr |
+| Moat | Low - quality + LazyGolf brand |
+
+### Strategic Value
+
+Even if direct revenue is modest:
+- Builds email list of league organizers
+- Perfect upsell to LazyGolf platform
+- Establishes authority in golf space
+- Content marketing for LazyGolf
+
+---
+
+## Idea 3: Web Developer Project Templates
+
+### Product Definition
+
+**What:** Production-ready starter templates with best practices baked in
+
+| Component | Details |
+|-----------|---------|
+| Price | $49-199 per template |
+| Format | GitHub repo with docs |
+| Audience | Developers wanting faster project starts |
+
+### Template Ideas
+
+#### A. Next.js 15 + NestJS Monorepo Starter
+
+**Price:** $149
+
+**Includes:**
+- Complete monorepo setup (Turborepo)
+- Next.js 15 frontend with Tailwind, shadcn/ui
+- NestJS backend with Prisma
+- Auth system (NextAuth/Lucia)
+- Database migrations setup
+- Docker development environment
+- CI/CD GitHub Actions
+- Deployment configs (Vercel + Railway)
+- Testing setup (Vitest, Playwright)
+- Documentation template
+
+**Why This Sells:**
+- Setting this up from scratch takes 20-40 hours
+- Saves $3,000-6,000 in developer time
+- Best practices already implemented
+- Can be customized for any project
+
+#### B. React 19 + Vite SaaS Starter
+
+**Price:** $99
+
+**Includes:**
+- React 19 with TypeScript strict mode
+- Vite + Tailwind + shadcn/ui
+- Authentication UI components
+- Dashboard layout
+- Settings pages
+- Subscription/billing UI (Stripe-ready)
+- Dark mode support
+- Mobile-responsive
+
+#### C. Local-First App Template (Dexie + React)
+
+**Price:** $99
+
+**Includes:**
+- React 19 + TypeScript
+- Dexie for IndexedDB
+- Sync-ready architecture
+- Offline support patterns
+- Import/export functionality
+- Migration system
+
+**Unique Value:** Based on Neuman Brain architecture - proven patterns
+
+### Viability Assessment
+
+| Factor | Assessment |
+|--------|------------|
+| Viability | Medium-High |
+| Effort | Medium (build on existing work) |
+| Revenue | $10K-40K/yr |
+| Moat | Quality + documentation + support |
+
+### Marketing Strategy
+
+1. Write blog posts about specific patterns in templates
+2. Open source partial versions (lead magnet)
+3. YouTube walkthrough videos
+4. Partner with course creators
+
+---
+
+## Idea 4: Technical Interview Prep Guide
+
+### Product Definition
+
+**What:** Practical guide to frontend/full-stack technical interviews
+
+| Component | Details |
+|-----------|---------|
+| Price | $39-79 |
+| Format | eBook + code examples repo |
+| Audience | Junior-mid developers job hunting |
+
+### Contents
+
+1. **System Design for Frontend**
+   - Component architecture patterns
+   - State management decisions
+   - API design considerations
+   - Performance optimization
+
+2. **React Interview Deep Dive**
+   - Hooks patterns and pitfalls
+   - Performance optimization
+   - Testing strategies
+   - Common interview questions with answers
+
+3. **TypeScript Mastery**
+   - Type system fundamentals
+   - Advanced patterns
+   - Common gotchas
+   - Interview-style problems
+
+4. **Coding Challenges**
+   - 50 solved problems with explanations
+   - Big O analysis
+   - Multiple solutions per problem
+
+### Viability Assessment
+
+| Factor | Assessment |
+|--------|------------|
+| Viability | Medium |
+| Effort | High |
+| Revenue | $10K-30K/yr |
+| Moat | Low - competitive space |
+
+**Consideration:** This market is crowded. Would need strong differentiation or niche focus.
+
+---
+
+## Idea 5: Notion/Obsidian Template Packs
+
+### A. Developer Knowledge Base Template
+
+**What:** Complete second brain setup for developers
+
+| Component | Details |
+|-----------|---------|
+| Price | $19-39 |
+| Format | Obsidian vault or Notion template |
+| Audience | Developers wanting organized knowledge |
+
+**Includes:**
+- Project tracking system
+- Code snippet library
+- Technology concept notes
+- Architecture decision records
+- Meeting notes templates
+- Daily/weekly review system
+- Dashboard configurations
+
+**Your Advantage:** Already built this for yourself (this vault!)
+
+### B. Business Planning Template Pack
+
+**What:** Templates for indie hackers and solo founders
+
+| Component | Details |
+|-----------|---------|
+| Price | $29-49 |
+| Format | Notion template |
+| Audience | Solo founders, indie hackers |
+
+**Includes:**
+- Venture concept template
+- Business model canvas
+- Financial projections spreadsheet
+- Go-to-market planner
+- Competitor analysis framework
+- Launch checklist
+
+### Viability Assessment
+
+| Factor | Assessment |
+|--------|------------|
+| Viability | Medium |
+| Effort | Low |
+| Revenue | $5K-20K/yr |
+| Moat | Low - easy to replicate |
+
+### Marketing
+
+- Gumroad/Lemon Squeezy for sales
+- Twitter/X for audience building
+- r/Obsidian, r/Notion communities
+- Product Hunt launch
+
+---
+
+## Idea 6: Golf Content Templates
+
+**Synergy with LazyGolf**
+
+### Product Definition
+
+**What:** Content templates for golf businesses
+
+| Component | Details |
+|-----------|---------|
+| Price | $29-79 |
+| Format | Notion + Canva templates |
+| Audience | Golf course marketers, pros, influencers |
+
+### Contents
+
+**Social Media Templates (Canva):**
+- Instagram post templates (20+)
+- Story templates (10+)
+- Facebook cover photos
+- Twitter/X headers
+- YouTube thumbnails
+
+**Content Calendar:**
+- 52-week content plan
+- Seasonal content ideas
+- Holiday tie-ins
+- Event promotion templates
+
+**Email Templates:**
+- Welcome sequence (5 emails)
+- Tee time reminder
+- Weather update
+- Tournament announcement
+- Member newsletter
+
+**Copy Templates:**
+- Course description template
+- Hole-by-hole descriptions
+- Pro tip posts
+- Equipment review structure
+
+### Viability Assessment
+
+| Factor | Assessment |
+|--------|------------|
+| Viability | Medium |
+| Effort | Low-Medium |
+| Revenue | $5K-15K/yr |
+| Moat | Niche focus |
+
+---
+
+## Idea 7: AI Prompt Libraries
+
+### Product Definition
+
+**What:** Curated, tested prompts for specific use cases
+
+| Component | Details |
+|-----------|---------|
+| Price | $19-49 |
+| Format | Notion database or web app |
+| Audience | Professionals wanting better AI results |
+
+### Niche Options
+
+#### A. Developer Prompt Pack
+- Code review prompts
+- Documentation generation
+- Test writing prompts
+- Debug assistance
+- Architecture advice
+
+#### B. Content Creator Prompts
+- Blog post frameworks
+- Social media formulas
+- Email templates
+- Video script structures
+- SEO optimization
+
+#### C. Business Analysis Prompts
+- Market research frameworks
+- Competitor analysis
+- Financial modeling assistance
+- Strategy development
+
+### Viability Assessment
+
+| Factor | Assessment |
+|--------|------------|
+| Viability | Medium |
+| Effort | Low |
+| Revenue | $5K-15K/yr |
+| Moat | Low - easy to replicate |
+
+**Note:** This market is getting saturated. Would need strong niche focus or unique angle.
+
+---
+
+## Evaluation Summary
+
+| Product | Viability | Effort | Revenue/Year | Best Synergy |
+|---------|-----------|--------|--------------|--------------|
+| Claude Code Pack | Medium | Low | $5K-20K | ndev |
+| Golf League Kit | Medium | Low-Med | $5K-15K | LazyGolf |
+| Next.js/NestJS Starter | Medium-High | Medium | $15K-40K | ndev |
+| Local-First Template | Medium-High | Medium | $10K-25K | ndev |
+| Dev Knowledge Base | Medium | Low | $5K-15K | ndev |
+| Business Planning Pack | Medium | Low | $5K-15K | All |
+| Golf Content Templates | Medium | Low-Med | $5K-15K | LazyGolf |
+
+---
+
+## Recommended Approach
+
+### Quick Wins (Launch in 2-4 weeks)
+
+1. **Claude Code Resource Pack**
+   - Already built most of it
+   - Just needs packaging and docs
+   - Small but engaged market
+
+2. **Developer Knowledge Base Template**
+   - Based on existing _meta.notes vault
+   - Clean up and document
+   - Easy to maintain
+
+### Strategic Builds (2-3 months)
+
+3. **Next.js + NestJS Starter**
+   - Extract from LazyGolf development
+   - Document extensively
+   - Higher price point justified
+
+4. **Golf League Starter Kit**
+   - Positions LazyGolf as authority
+   - Perfect lead magnet
+   - List building opportunity
+
+---
+
+## Sales Platforms
+
+| Platform | Best For | Fee |
+|----------|----------|-----|
+| Gumroad | Quick setup, digital products | 9% |
+| Lemon Squeezy | Modern alternative to Gumroad | 5% + $0.50 |
+| Paddle | SaaS, international | 5% + $0.50 |
+| Stripe (direct) | Custom checkout, control | 2.9% + $0.30 |
+| GitHub Sponsors | Developer tools | 0% (for sponsors) |
+
+---
+
+## Related Links
+
+- [[README|Ideas Hub]]
+- [[Micro-SaaS-Ideas]] - Software products
+- [[Productized-Services]] - Service packages
+- [[Ventures/LazyGolf]] - Golf synergies
+- [[Ventures/ndev Consulting]] - Developer expertise
+
+---
+
+*Last updated: 2025-12-14*

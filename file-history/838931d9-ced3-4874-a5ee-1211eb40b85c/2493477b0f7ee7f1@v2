@@ -1,0 +1,576 @@
+# Task: Fix Template Bug + Continue Phase 4 (Parts 3-7)
+
+**Session ID:** 011CW64h6DbBNB3fJxxpTxQH
+**Created:** 2025-01-17
+**Status:** 🎯 PLANNING
+**Estimated Time:** 45-60 hours total (1h fix + 44-59h Phase 4 Parts 3-7)
+
+---
+
+## Overview
+
+**Part A: CRITICAL BUG FIX** (1 hour)
+Fix template application bug where columns duplicate instead of fully replacing.
+
+**Part B: CONTINUE PHASE 4** (44-59 hours)
+Continue Phase 4: Kanban to PM Powerhouse (Parts 3-7) to complete the transformation from basic board to professional PM tool.
+
+---
+
+## Problem Statement
+
+### Part A: Template Bug (CRITICAL)
+
+**Current Broken Behavior:**
+- User has 5 columns: Backlog, Todo, In Progress, Review, Done
+- User clicks "Dev Template" (should replace with 5 new columns)
+- Result: Board now has 10 columns (duplicated instead of replaced)
+
+**Root Cause:**
+`confirmTemplate` function in ColumnManager.tsx (lines 274-286) calls `deleteColumn` in a loop, but the Zustand store action is **synchronous**. The loop doesn't wait for deletions to complete before adding new columns.
+
+**Current code (BROKEN):**
+```typescript
+const confirmTemplate = () => {
+  if (pendingTemplate) {
+    // Clear all existing columns
+    columns.forEach((col) => deleteColumn(col.id)); // ❌ Doesn't wait!
+
+    // Add template columns
+    TEMPLATES[pendingTemplate].forEach((col) => {
+      addColumn(col); // ❌ Adds BEFORE deletions finish
+    });
+
+    setPendingTemplate(null);
+  }
+};
+```
+
+**Why it's broken:**
+Zustand's `set` is synchronous within React's render cycle, but multiple rapid `deleteColumn` calls don't batch properly. The `addColumn` calls happen before the state updates from deletions propagate.
+
+**Expected Behavior:**
+1. User clicks "Dev Template"
+2. ConfirmDialog appears: "Replace all columns with Dev Template?"
+3. User clicks "Confirm"
+4. ALL existing columns deleted (board briefly empty or shows loading)
+5. New template columns added
+6. Board now has exactly 5 columns (from template)
+
+### Part B: Phase 4 Remaining Work
+
+**Completed:**
+- ✅ Phase 1: Data Model & Store (3h)
+- ✅ Phase 2: Custom Columns UI - Part 1 (5h)
+- ✅ Phase 2: Custom Columns UI - Part 2 (2h bug fixes)
+
+**Remaining (Parts 3-7):**
+- Phase 2: Custom Columns - Part 3: WIP limit indicators, testing
+- Phase 3: Card Detail Panel
+- Phase 4: Checklist/Subtasks
+- Phase 5: Comments & Activity Log
+- Phase 6: List View
+- Phase 7: Polish & Testing
+
+---
+
+## Files to Read
+
+### For Template Bug Fix:
+- [x] `src/widgets/Kanban/ColumnManager.tsx` (lines 274-286) - confirmTemplate function (ALREADY READ)
+- [x] `src/stores/useKanbanStore.ts` (lines 135-164) - Column actions (ALREADY READ)
+- [ ] `src/widgets/Kanban.tsx` - Verify column rendering logic
+
+### For Phase 4 Continuation:
+- [x] `tasks/phase-4-kanban-pm-powerhouse.md` - Full Phase 4 plan (ALREADY READ)
+- [ ] `src/components/Modal.tsx` - For CardDetailPanel
+- [ ] `src/widgets/Kanban/KanbanCard.tsx` - For detail panel integration
+- [ ] `src/types/index.ts` - Verify new interfaces
+
+---
+
+## Proposed Changes
+
+## PART A: FIX TEMPLATE BUG (1 hour)
+
+### Root Cause Analysis
+
+The issue is a **state update batching problem**. Here's what's happening:
+
+```typescript
+// Current code
+columns.forEach((col) => deleteColumn(col.id)); // Multiple set() calls queued
+TEMPLATES[pendingTemplate].forEach((col) => addColumn(col)); // More set() calls queued
+// React batches all updates → race condition
+```
+
+### Solution: Add `replaceAllColumns` Store Action
+
+Instead of looping delete + add, create a **single atomic operation** that replaces the entire columns array.
+
+**File:** `src/stores/useKanbanStore.ts`
+
+**Add new action:**
+```typescript
+// NEW: Replace all columns atomically (for templates)
+replaceAllColumns: (newColumns: Omit<KanbanColumn, 'id' | 'order'>[]) => {
+  const state = get();
+
+  // Generate new columns with fresh IDs
+  const columns: KanbanColumn[] = newColumns.map((col, index) => ({
+    ...col,
+    id: `col-${Date.now()}-${index}`,
+    order: index,
+  }));
+
+  // Move all tasks to first column (Backlog equivalent)
+  const firstColumnId = columns[0]?.id;
+  if (!firstColumnId) return; // Safety check
+
+  set({
+    columns,
+    tasks: state.tasks.map(task => ({
+      ...task,
+      status: firstColumnId as TaskStatus, // Move all to first column
+    })),
+  });
+},
+```
+
+**Update ColumnManager.tsx confirmTemplate:**
+```typescript
+const confirmTemplate = () => {
+  if (pendingTemplate) {
+    // Use atomic replace instead of loop
+    replaceAllColumns(TEMPLATES[pendingTemplate]);
+    setPendingTemplate(null);
+    setError(null);
+  }
+};
+```
+
+**Why this works:**
+- Single `set()` call = no race condition
+- All tasks moved to first column atomically
+- Clean, predictable state transition
+
+---
+
+## PART B: CONTINUE PHASE 4 (44-59 hours)
+
+### Phase 2: Custom Columns - Part 3 (Remaining: 4-6 hours)
+
+**WIP Limit Indicators (Already done in Part 2!):**
+- ✅ WIP limit passed to KanbanColumn.tsx
+- ✅ Visual indicator shows "X/Y" on column headers
+- ✅ Red styling when at/over limit
+
+**Remaining Tasks:**
+- [ ] Manual testing of all column management features (2h)
+- [ ] Test WIP limits at various thresholds (1h)
+- [ ] Column collapse/expand feature (deferred - not in Phase 2 plan)
+
+### Phase 3: Card Detail Panel (16-20 hours)
+
+**Base Panel (6-8 hours):**
+- [ ] Create `CardDetailPanel.tsx` with Modal wrapper
+- [ ] Left side: task metadata (title, description, dates, priority, tags)
+- [ ] Inline editing for all fields
+- [ ] Keyboard shortcuts (Enter to open, Esc to close, Cmd+Enter to save)
+- [ ] Mobile responsive layout
+
+**Right Side Tabs (6-8 hours):**
+- [ ] Tab navigation (Checklist / Comments / Activity)
+- [ ] Integrate Checklist.tsx
+- [ ] Integrate Comments.tsx
+- [ ] Integrate ActivityLog.tsx
+- [ ] Unread indicators (e.g., "Comments (3)")
+- [ ] Persist active tab preference
+
+**Integration (4-5 hours):**
+- [ ] Update KanbanCard to open detail panel on click
+- [ ] Real-time sync when task changes
+- [ ] Loading state (skeleton)
+- [ ] Test keyboard navigation
+
+### Phase 4: Checklist/Subtasks (10-12 hours)
+
+**Checklist Component (6-8 hours):**
+- [ ] Create Checklist.tsx component
+- [ ] Checklist item list with checkboxes
+- [ ] "Add item" input field
+- [ ] Drag-drop reordering (@dnd-kit)
+- [ ] Delete item button
+- [ ] Progress bar (3/5 complete)
+
+**Store Integration (2-3 hours):**
+- [ ] Wire checklist actions to store
+- [ ] Auto-update activity log
+- [ ] Test persistence
+
+**Card Display (2-3 hours):**
+- [ ] Show checklist progress on card ("✓ 3/5")
+- [ ] Show first 2 checklist items in preview
+- [ ] Expand/collapse preview
+
+### Phase 5: Comments & Activity Log (12-16 hours)
+
+**Comments Component (6-8 hours):**
+- [ ] Create Comments.tsx component
+- [ ] Comment list (newest first)
+- [ ] Comment textarea (Markdown preview)
+- [ ] Edit/delete own comments
+- [ ] Relative timestamps ("2 hours ago")
+- [ ] Empty state
+
+**Activity Log Component (4-6 hours):**
+- [ ] Create ActivityLog.tsx component
+- [ ] Timeline view with icons per action
+- [ ] Relative timestamps
+- [ ] Filter (All / Moves / Comments / Checklist)
+- [ ] Empty state
+
+**Integration (2-3 hours):**
+- [ ] Wire comments to store
+- [ ] Auto-log activity
+- [ ] Test persistence
+
+### Phase 6: List View (10-14 hours)
+
+**List View Component (8-10 hours):**
+- [ ] Create ListView.tsx component
+- [ ] Table: [☑️, Title, Status, Priority, Due Date, Tags, Progress]
+- [ ] Sortable columns (click header)
+- [ ] Row click → open CardDetailPanel
+- [ ] Bulk select (checkboxes)
+- [ ] Bulk actions toolbar
+
+**Export Feature (2-3 hours):**
+- [ ] "Export to CSV" button
+- [ ] CSV generation
+- [ ] Download trigger
+
+**Integration (2-3 hours):**
+- [ ] View Toggle in header (Board / List)
+- [ ] Persist view preference
+- [ ] Performance test (50+ tasks)
+
+### Phase 7: Polish & Testing (10-12 hours)
+
+**Visual Polish (4-5 hours):**
+- [ ] Design system compliance
+- [ ] Loading states (skeletons)
+- [ ] Empty states
+- [ ] Animations
+- [ ] Dark mode review
+
+**Accessibility (3-4 hours):**
+- [ ] Keyboard navigation
+- [ ] Screen reader labels
+- [ ] Focus management
+- [ ] Color contrast (WCAG AA)
+
+**Testing (3-4 hours):**
+- [ ] TypeScript type-check
+- [ ] ESLint
+- [ ] Build (verify bundle size)
+- [ ] Manual testing (all features)
+- [ ] Mobile responsive test
+
+---
+
+## Todo Checklist
+
+### PART A: Template Bug Fix (1 hour) - PRIORITY 1
+
+- [ ] Add `replaceAllColumns` action to useKanbanStore.ts (20 min)
+- [ ] Import `replaceAllColumns` in ColumnManager.tsx (5 min)
+- [ ] Update `confirmTemplate` to use `replaceAllColumns` (10 min)
+- [ ] Test Dev template (all columns replaced, not duplicated) (5 min)
+- [ ] Test PM template (all columns replaced) (5 min)
+- [ ] Test Marketing template (all columns replaced) (5 min)
+- [ ] Verify tasks moved to first column (Backlog equivalent) (5 min)
+- [ ] Type-check passes (5 min)
+
+### PART B: Phase 2 Completion (2-3 hours)
+
+- [ ] Manual test: Add column with custom name/color (15 min)
+- [ ] Manual test: Rename existing column (15 min)
+- [ ] Manual test: Delete column (verify tasks move to Backlog) (15 min)
+- [ ] Manual test: Reorder columns (drag-drop) (15 min)
+- [ ] Manual test: Set WIP limit, verify indicator shows (15 min)
+- [ ] Manual test: Exceed WIP limit, verify red styling (15 min)
+- [ ] Manual test: Apply each template (Dev, PM, Marketing) (15 min)
+- [ ] Test in light mode (30 min)
+- [ ] Test in dark mode (30 min)
+- [ ] Update phase-4-kanban-pm-powerhouse.md (mark Phase 2 complete) (15 min)
+
+### PART B: Phase 3 - Card Detail Panel (16-20 hours)
+
+**Base Panel (6-8 hours):**
+- [ ] Create `src/widgets/Kanban/CardDetailPanel.tsx` file (30 min)
+- [ ] Add Modal wrapper with proper props (1 hour)
+- [ ] Create left side layout: task metadata section (1.5 hours)
+  - Title (editable)
+  - Description (editable textarea)
+  - Due date (date picker)
+  - Priority (dropdown)
+  - Tags (tag input)
+- [ ] Implement inline editing for all fields (2 hours)
+- [ ] Add keyboard shortcuts (Enter, Esc, Cmd+Enter) (1 hour)
+- [ ] Add close button (X in top right) (15 min)
+- [ ] Make responsive (mobile: full screen, desktop: centered) (1.5 hours)
+
+**Right Side Tabs (6-8 hours):**
+- [ ] Create tab navigation component (Checklist / Comments / Activity) (1.5 hours)
+- [ ] Create placeholder Checklist tab (1 hour)
+- [ ] Create placeholder Comments tab (1 hour)
+- [ ] Create placeholder Activity tab (1 hour)
+- [ ] Add unread indicators ("Comments (3)") (1 hour)
+- [ ] Persist active tab in localStorage (1 hour)
+- [ ] Add smooth tab switching animation (30 min)
+
+**Integration (4-5 hours):**
+- [ ] Add `selectedTask` state to Kanban.tsx (30 min)
+- [ ] Update KanbanCard to set selectedTask on click (30 min)
+- [ ] Render CardDetailPanel when selectedTask is set (30 min)
+- [ ] Pass task data and update handlers to panel (1 hour)
+- [ ] Update panel when task changes (real-time sync) (1 hour)
+- [ ] Add loading state (skeleton) for panel (30 min)
+- [ ] Test keyboard navigation (Tab, Shift+Tab, Enter, Esc) (1 hour)
+
+### PART B: Phase 4 - Checklist/Subtasks (10-12 hours)
+
+**Checklist Component (6-8 hours):**
+- [ ] Create `src/widgets/Kanban/Checklist.tsx` file (30 min)
+- [ ] Add checklist item list with checkboxes (1.5 hours)
+- [ ] Add "Add item" input field (1 hour)
+- [ ] Implement drag-drop reordering with @dnd-kit (2 hours)
+- [ ] Add delete item button (trash icon) (30 min)
+- [ ] Add progress bar (3/5 complete) (1 hour)
+- [ ] Add empty state ("No checklist items yet") (30 min)
+
+**Store Integration (2-3 hours):**
+- [ ] Wire add/toggle/delete/reorder to store actions (1.5 hours)
+- [ ] Verify activity log updates on checklist changes (1 hour)
+- [ ] Test checklist persistence in IndexedDB (30 min)
+
+**Card Display (2-3 hours):**
+- [ ] Update KanbanCard to show checklist progress ("✓ 3/5") (1 hour)
+- [ ] Show first 2 checklist items in card preview (1 hour)
+- [ ] Add expand/collapse for card checklist preview (30 min)
+
+### PART B: Phase 5 - Comments & Activity Log (12-16 hours)
+
+**Comments Component (6-8 hours):**
+- [ ] Create `src/widgets/Kanban/Comments.tsx` file (30 min)
+- [ ] Add comment list (newest first) (1 hour)
+- [ ] Add comment textarea with auto-resize (1 hour)
+- [ ] Add Markdown preview toggle (optional) (1.5 hours)
+- [ ] Implement edit comment (inline edit mode) (1.5 hours)
+- [ ] Implement delete comment (with confirmation) (1 hour)
+- [ ] Add relative timestamps ("2 hours ago" using date-fns) (30 min)
+- [ ] Add empty state ("No comments yet") (30 min)
+
+**Activity Log Component (4-6 hours):**
+- [ ] Create `src/widgets/Kanban/ActivityLog.tsx` file (30 min)
+- [ ] Add timeline view with icons per action type (1.5 hours)
+  - 🎉 Created
+  - ➡️ Moved
+  - 💬 Commented
+  - ✅ Checklist updated
+  - ✏️ Updated
+- [ ] Add relative timestamps (1 hour)
+- [ ] Add filter dropdown (All / Moves / Comments / Checklist) (1 hour)
+- [ ] Add empty state ("No activity yet") (30 min)
+- [ ] Limit to last 50 entries for performance (30 min)
+
+**Integration (2-3 hours):**
+- [ ] Wire Comments to store actions (add, update, delete) (1 hour)
+- [ ] Verify activity log auto-updates on comment changes (1 hour)
+- [ ] Test comment persistence in IndexedDB (30 min)
+
+### PART B: Phase 6 - List View (10-14 hours)
+
+**List View Component (8-10 hours):**
+- [ ] Create `src/widgets/Kanban/ListView.tsx` file (30 min)
+- [ ] Add HTML table with columns (2 hours)
+  - Checkbox column (for bulk select)
+  - Title
+  - Status
+  - Priority
+  - Due Date
+  - Tags
+  - Progress (checklist)
+- [ ] Implement sortable columns (click header to sort) (2 hours)
+- [ ] Add row click → open CardDetailPanel (1 hour)
+- [ ] Add bulk select (checkboxes in first column) (1.5 hours)
+- [ ] Add bulk actions toolbar (Change Status, Change Priority, Delete) (1.5 hours)
+- [ ] Add keyboard shortcuts (Space to select, Cmd+A to select all) (1 hour)
+
+**Export Feature (2-3 hours):**
+- [ ] Add "Export to CSV" button in toolbar (30 min)
+- [ ] Implement CSV generation (tasks to CSV format) (1 hour)
+- [ ] Trigger download using browser download API (30 min)
+- [ ] Test CSV with special characters (commas, quotes) (30 min)
+
+**Integration (2-3 hours):**
+- [ ] Add View Toggle in Kanban header (Board / List icons) (1 hour)
+- [ ] Persist view preference in localStorage (30 min)
+- [ ] Test list view with 50+ tasks (performance check) (30 min)
+- [ ] Test view switching (no data loss) (30 min)
+
+### PART B: Phase 7 - Polish & Testing (10-12 hours)
+
+**Visual Polish (4-5 hours):**
+- [ ] Design system compliance check (colors, typography, spacing) (1 hour)
+- [ ] Add loading states (skeletons for card detail panel, list view) (1 hour)
+- [ ] Add empty states (no tasks, no comments, no checklist) (1 hour)
+- [ ] Add animations (card detail panel slide-in, checklist item fade) (1.5 hours)
+- [ ] Dark mode review (test all new components) (1 hour)
+
+**Accessibility (3-4 hours):**
+- [ ] Test keyboard navigation (Tab, Enter, Esc, Arrow keys) (1.5 hours)
+- [ ] Add screen reader labels (aria-label for all buttons) (1 hour)
+- [ ] Implement focus management (trap focus in modal, return on close) (1 hour)
+- [ ] Color contrast check with WCAG tool (30 min)
+
+**Testing (3-4 hours):**
+- [ ] Run `npm run type-check` (5 min)
+- [ ] Run `npm run lint` (5 min)
+- [ ] Run `npm run build` (verify bundle size < 150KB for Kanban chunk) (10 min)
+- [ ] Manual test: Full workflow (create column, add task, add checklist, comment) (1 hour)
+- [ ] Manual test: Delete column (confirm task migration to Backlog) (30 min)
+- [ ] Manual test: List view bulk actions (select multiple, change status) (30 min)
+- [ ] Manual test: Export to CSV (open in Excel/Google Sheets) (15 min)
+- [ ] Mobile responsive test (375px, 768px, 1024px) (1 hour)
+- [ ] Test in Safari, Chrome, Firefox (30 min)
+
+---
+
+## Time Estimates
+
+### Part A: Template Bug Fix
+| Task | Estimated Time |
+|------|----------------|
+| Add replaceAllColumns action | 20 min |
+| Update ColumnManager | 10 min |
+| Testing (all 3 templates) | 30 min |
+| **Total** | **1 hour** |
+
+### Part B: Phase 4 Continuation
+| Phase | Estimated Time |
+|-------|----------------|
+| Phase 2 Completion (testing) | 2-3 hours |
+| Phase 3: Card Detail Panel | 16-20 hours |
+| Phase 4: Checklist/Subtasks | 10-12 hours |
+| Phase 5: Comments & Activity Log | 12-16 hours |
+| Phase 6: List View | 10-14 hours |
+| Phase 7: Polish & Testing | 10-12 hours |
+| **Total Part B** | **60-77 hours** |
+
+**GRAND TOTAL: 61-78 hours (≈ 3-4 weeks)**
+
+---
+
+## Testing Checklist
+
+### Part A: Template Bug Fix
+
+**Template Application:**
+- [ ] Apply Dev template → All previous columns removed, 5 new columns added
+- [ ] Apply PM template → All previous columns removed, 7 new columns added
+- [ ] Apply Marketing template → All previous columns removed, 6 new columns added
+- [ ] All tasks moved to first column (Backlog equivalent)
+- [ ] No duplicate columns
+- [ ] No orphaned tasks (all tasks have valid status)
+
+### Part B: Phase 4 Features
+
+**Custom Columns:**
+- [ ] Can add column (name, color, WIP limit)
+- [ ] Can rename column
+- [ ] Can delete column (tasks move to Backlog)
+- [ ] Can reorder columns (drag-drop)
+- [ ] WIP limit shows warning when exceeded (red text)
+- [ ] Templates work correctly (no duplicates)
+
+**Card Detail Panel:**
+- [ ] Opens on card click
+- [ ] Shows all task metadata
+- [ ] Can edit all fields inline
+- [ ] Saves changes to store
+- [ ] Closes on Esc key
+- [ ] Keyboard shortcuts work (Cmd+Enter to save)
+- [ ] Responsive (mobile + desktop)
+
+**Checklist:**
+- [ ] Can add checklist items
+- [ ] Can mark items complete/incomplete
+- [ ] Can delete items
+- [ ] Can reorder items (drag-drop)
+- [ ] Progress bar updates (3/5)
+- [ ] Progress shows on card ("✓ 3/5")
+
+**Comments:**
+- [ ] Can add comments
+- [ ] Can edit own comments
+- [ ] Can delete own comments
+- [ ] Markdown renders correctly
+- [ ] Timestamps show relative time (2h ago)
+- [ ] Comments persist across sessions
+
+**Activity Log:**
+- [ ] Shows task creation, updates, moves
+- [ ] Shows comment activity
+- [ ] Shows checklist changes
+- [ ] Timestamps are relative
+- [ ] Filter works (All / Moves / Comments)
+
+**List View:**
+- [ ] Table renders all tasks
+- [ ] Sortable columns work
+- [ ] Row click opens card detail panel
+- [ ] Bulk select works
+- [ ] Bulk actions work (Change Status, Delete)
+- [ ] Export to CSV downloads file
+
+---
+
+## Dependencies
+
+**Blocked By:**
+- None (all prerequisites complete)
+
+**Blocks:**
+- Phase 5: Dashboard Command Center
+- Phase 7: Cross-Feature Integration
+
+---
+
+## Success Criteria
+
+**Part A: Template Bug Fix**
+- ✅ Templates fully replace columns (no duplicates)
+- ✅ All tasks migrate to first column
+- ✅ No TypeScript errors
+- ✅ All 3 templates tested and working
+
+**Part B: Phase 4 Complete**
+- ✅ 70% Linear parity, 60% Jira parity (from 65% Trello, 45% Linear)
+- ✅ All 5 major features implemented (Columns, Detail Panel, Checklist, Comments, List View)
+- ✅ Bundle size < 150KB for Kanban chunk (currently ~80KB)
+- ✅ All tests passing (type-check, lint, build)
+- ✅ Mobile responsive
+- ✅ WCAG AA accessibility
+- ✅ Beautiful, professional UX
+
+---
+
+## Review Section
+
+**To be filled when work is complete.**
+
+---
+
+**Status:** 🎯 AWAITING USER APPROVAL

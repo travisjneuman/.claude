@@ -1,0 +1,82 @@
+---
+type: index
+tags: [business, ideas, opportunities, ventures]
+created: 2025-12-14
+---
+# Venture Ideas Hub
+
+> Researched, realistic business opportunities aligned with existing skills, projects, and market trends.
+
+---
+
+## Purpose
+
+This folder contains **vetted venture ideas** that leverage:
+- Travis's tech stack expertise (React, TypeScript, NestJS, AI/LLM)
+- Existing projects and infrastructure (LazyGolf, Rent-a-Nerd, ndev)
+- Market opportunities with validated demand
+- Realistic paths to revenue
+
+**Philosophy:** Ideas here have passed an initial filter for feasibility. Not pipe dreams like MVNO.
+
+---
+
+## Ideas Overview
+
+```dataview
+TABLE viability, effort, revenue_model as "Model", synergies
+FROM "Business/Ideas"
+WHERE type = "idea"
+SORT viability DESC
+```
+
+---
+
+## Quick Navigation
+
+| Category | Ideas |
+|----------|-------|
+| **Micro SaaS** | [[Golf League Analytics]], [[AI Content Tools]], [[Developer Tooling]] |
+| **Productized Services** | [[Website Care Plans]], [[AI Integration Packages]] |
+| **Digital Products** | [[Claude Code Resources]], [[Golf Template Store]] |
+| **Platform Extensions** | [[LazyGolf Spinoffs]] |
+
+---
+
+## Evaluation Criteria
+
+Ideas are rated on:
+
+| Criterion | What It Means |
+|-----------|---------------|
+| **Viability** | High/Medium/Low - Can this realistically make money? |
+| **Effort** | Low/Medium/High - Time/capital to launch |
+| **Alignment** | How well does this fit existing skills and projects? |
+| **Moat** | Is there defensibility or just a race to the bottom? |
+| **Revenue Model** | One-time, recurring, or hybrid |
+
+---
+
+## Folder Structure
+
+```
+Ideas/
+├── README.md                  # THIS FILE
+├── Micro-SaaS-Ideas.md        # Software products
+├── Productized-Services.md    # Packaged consulting
+├── Digital-Products.md        # Templates, courses, tools
+└── Platform-Extensions.md     # Extensions of existing ventures
+```
+
+---
+
+## Related Links
+
+- [[Business/README|Business Planning Hub]]
+- [[Ventures/ndev Consulting]] - Consulting that could productize
+- [[Ventures/LazyGolf]] - Platform with spinoff potential
+- [[Ventures/Rent-a-Nerd]] - Service with tech opportunities
+
+---
+
+*Last updated: 2025-12-14*

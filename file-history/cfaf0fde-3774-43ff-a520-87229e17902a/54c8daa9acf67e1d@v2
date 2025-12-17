@@ -1,0 +1,187 @@
+# Task: Evaluate E2E CI Strategy
+
+**Created:** 2025-11-29
+**Status:** Planning
+
+---
+
+## Overview
+Decide whether to keep E2E tests running in CI or remove them entirely, given that this is a local-first, privacy-focused app primarily used for local development.
+
+---
+
+## Problem Statement
+
+**Current State:**
+- E2E tests run on every push to main via GitHub Actions
+- "report" job is failing (likely because it expects multiple browser reports to merge)
+- Chromium E2E tests pass, but the merge-reports step fails
+
+**User Question:**
+> "Not sure why these are running in GitHub anyways? Aren't these E2E tests for local testing and development work anyways?"
+
+**Valid Point:**
+For a **privacy-first, local-only productivity app** like Neuman Brain:
+- No server-side components to test in production-like environment
+- No deployment to verify
+- No multi-user scenarios
+- App runs entirely in the browser with local IndexedDB
+- Primary use case: Local development and testing
+
+---
+
+## Options Analysis
+
+### Option A: Remove E2E Tests from CI Entirely ⭐ (RECOMMENDED)
+
+**Changes:**
+1. Delete `.github/workflows/e2e-tests.yml` entirely
+2. Keep E2E tests in codebase for local development
+3. Developers run `npx playwright test` locally before committing
+
+**Pros:**
+- ✅ Faster CI (no E2E overhead - saves ~2-3 minutes per push)
+- ✅ Simpler CI pipeline (fewer moving parts)
+- ✅ More appropriate for local-first app architecture
+- ✅ Developers test locally where the app actually runs
+- ✅ No CI flakiness from E2E tests
+- ✅ Lower GitHub Actions minutes usage (cost savings if ever needed)
+
+**Cons:**
+- ⚠️ Relies on developers running tests locally (can add pre-commit hook)
+- ⚠️ No automated regression testing on push (but unit tests still run)
+- ⚠️ Could miss cross-environment issues (though unlikely for local-only app)
+
+**Mitigation for Cons:**
+- Add pre-commit hook that runs E2E tests locally before allowing commit
+- Keep unit tests in CI (fast, reliable, catch most bugs)
+- Document in CLAUDE.md that E2E tests must pass locally before push
+
+---
+
+### Option B: Fix the Report Job (Keep E2E in CI)
+
+**Changes:**
+1. Keep `.github/workflows/e2e-tests.yml`
+2. Fix or remove the "report" job (lines 67-86)
+3. Simplify to just run Chromium tests and upload artifacts
+
+**Pros:**
+- ✅ Automated regression testing on every push
+- ✅ Catches bugs before they reach main
+- ✅ CI badge shows test status
+
+**Cons:**
+- ❌ Slower CI (2-3 min per push for E2E tests)
+- ❌ More complex CI pipeline
+- ❌ E2E tests can be flaky (timeouts, race conditions)
+- ❌ Doesn't align with local-first architecture
+- ❌ Overkill for an app with no server/deployment
+
+---
+
+### Option C: Hybrid - E2E on PR Only (Not on Push)
+
+**Changes:**
+1. Update `.github/workflows/e2e-tests.yml` line 4-7
+2. Remove `push:` trigger, keep only `pull_request:` and `workflow_dispatch:`
+3. E2E tests run on PRs but not every push to main
+
+**Pros:**
+- ✅ Automated testing for PRs (review gate)
+- ✅ No E2E overhead on direct pushes to main
+- ✅ Can manually trigger with `workflow_dispatch:`
+
+**Cons:**
+- ⚠️ If you commit directly to main (no PRs), no E2E testing
+- ⚠️ Still have CI complexity and potential flakiness
+
+---
+
+## Recommendation: **Option A - Remove E2E from CI**
+
+**Rationale:**
+1. **Architecture alignment:** Local-first app = local testing makes sense
+2. **CI efficiency:** Unit tests catch most bugs faster and more reliably
+3. **Developer workflow:** E2E tests are most valuable when run locally during development
+4. **No deployment:** There's no production environment to verify, so CI E2E adds little value
+5. **Simplicity:** Fewer moving parts = less maintenance
+
+**What We Keep:**
+- ✅ E2E tests in codebase (`tests/e2e/**/*.spec.ts`)
+- ✅ Local E2E testing (`npx playwright test`)
+- ✅ Unit tests in CI (fast, reliable, comprehensive)
+- ✅ Type checking in CI (`npm run type-check`)
+
+**What We Remove:**
+- ❌ `.github/workflows/e2e-tests.yml` workflow file
+- ❌ E2E test runs on every push to main
+- ❌ Flaky CI failures from E2E timeouts
+
+---
+
+## Files to Modify
+
+### If Option A (Recommended):
+1. **Delete:** `.github/workflows/e2e-tests.yml`
+2. **Update:** `CLAUDE.md` - Add note that E2E tests run locally, not in CI
+3. **Optional:** Add pre-commit hook to run E2E tests locally
+
+### If Option B:
+1. **Modify:** `.github/workflows/e2e-tests.yml` lines 67-86
+2. Either remove "report" job or fix merge command for single browser
+
+### If Option C:
+1. **Modify:** `.github/workflows/e2e-tests.yml` lines 4-7
+2. Remove `push:` trigger
+
+---
+
+## Questions for User
+
+1. **Do you use PRs or commit directly to main?** (affects Option C viability)
+2. **Are you willing to run E2E tests locally before pushing?** (affects Option A viability)
+3. **How important is automated E2E testing to you?** (low/medium/high)
+
+---
+
+## Proposed Solution (Pending Approval)
+
+**Option A:** Remove E2E tests from CI entirely
+- Keep E2E tests for local development
+- Add documentation that E2E tests should be run locally
+- Optional: Add pre-commit hook reminder to run tests
+
+**Why:**
+- Aligns with local-first architecture
+- Faster CI, simpler pipeline
+- Developers test where app runs (locally)
+- Unit tests in CI still catch most issues
+
+---
+
+## Time Estimate
+**Total:** ~5 minutes (if Option A chosen)
+- Remove workflow file: 1 min
+- Update CLAUDE.md: 2 min
+- Verification: 2 min
+
+---
+
+## Review Section
+*(To be filled after completion)*
+
+### Changes Made
+-
+
+### Files Modified
+-
+
+### Verification Results
+-
+
+### Issues Encountered
+-
+
+### Actual Time
+-

@@ -1,0 +1,350 @@
+/**
+ * Field Components
+ * Individual field types for form rendering
+ */
+
+import type { FormField } from '../../types/forms';
+
+interface FieldComponentProps {
+  field: FormField;
+  value: any;
+  onChange: (value: any) => void;
+  error?: string;
+}
+
+export function TextField({ field, value, onChange, error }: FieldComponentProps) {
+  return (
+    <div>
+      <label className="block text-sm font-medium text-text-light-primary dark:text-text-dark-primary mb-1">
+        {field.label}
+        {field.required && <span className="text-red-500 ml-1">*</span>}
+      </label>
+      {field.description && (
+        <p className="text-xs text-text-light-tertiary dark:text-text-dark-tertiary mb-2">
+          {field.description}
+        </p>
+      )}
+      <input
+        type="text"
+        value={value || ''}
+        onChange={(e) => onChange(e.target.value)}
+        required={field.required}
+        className="w-full px-3 py-2 bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-light dark:focus:ring-primary-dark"
+      />
+      {error && <p className="text-xs text-red-500 mt-1">{error}</p>}
+    </div>
+  );
+}
+
+export function TextAreaField({ field, value, onChange, error }: FieldComponentProps) {
+  return (
+    <div>
+      <label className="block text-sm font-medium text-text-light-primary dark:text-text-dark-primary mb-1">
+        {field.label}
+        {field.required && <span className="text-red-500 ml-1">*</span>}
+      </label>
+      {field.description && (
+        <p className="text-xs text-text-light-tertiary dark:text-text-dark-tertiary mb-2">
+          {field.description}
+        </p>
+      )}
+      <textarea
+        value={value || ''}
+        onChange={(e) => onChange(e.target.value)}
+        required={field.required}
+        rows={4}
+        className="w-full px-3 py-2 bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-light dark:focus:ring-primary-dark"
+      />
+      {error && <p className="text-xs text-red-500 mt-1">{error}</p>}
+    </div>
+  );
+}
+
+export function NumberField({ field, value, onChange, error }: FieldComponentProps) {
+  return (
+    <div>
+      <label className="block text-sm font-medium text-text-light-primary dark:text-text-dark-primary mb-1">
+        {field.label}
+        {field.required && <span className="text-red-500 ml-1">*</span>}
+      </label>
+      {field.description && (
+        <p className="text-xs text-text-light-tertiary dark:text-text-dark-tertiary mb-2">
+          {field.description}
+        </p>
+      )}
+      <input
+        type="number"
+        value={value ?? ''}
+        onChange={(e) => onChange(e.target.value ? Number(e.target.value) : null)}
+        required={field.required}
+        min={field.validation?.min}
+        max={field.validation?.max}
+        className="w-full px-3 py-2 bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-light dark:focus:ring-primary-dark"
+      />
+      {error && <p className="text-xs text-red-500 mt-1">{error}</p>}
+    </div>
+  );
+}
+
+export function DateField({ field, value, onChange, error }: FieldComponentProps) {
+  return (
+    <div>
+      <label className="block text-sm font-medium text-text-light-primary dark:text-text-dark-primary mb-1">
+        {field.label}
+        {field.required && <span className="text-red-500 ml-1">*</span>}
+      </label>
+      {field.description && (
+        <p className="text-xs text-text-light-tertiary dark:text-text-dark-tertiary mb-2">
+          {field.description}
+        </p>
+      )}
+      <input
+        type="date"
+        value={value || ''}
+        onChange={(e) => onChange(e.target.value)}
+        required={field.required}
+        className="w-full px-3 py-2 bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-light dark:focus:ring-primary-dark"
+      />
+      {error && <p className="text-xs text-red-500 mt-1">{error}</p>}
+    </div>
+  );
+}
+
+export function TimeField({ field, value, onChange, error }: FieldComponentProps) {
+  return (
+    <div>
+      <label className="block text-sm font-medium text-text-light-primary dark:text-text-dark-primary mb-1">
+        {field.label}
+        {field.required && <span className="text-red-500 ml-1">*</span>}
+      </label>
+      {field.description && (
+        <p className="text-xs text-text-light-tertiary dark:text-text-dark-tertiary mb-2">
+          {field.description}
+        </p>
+      )}
+      <input
+        type="time"
+        value={value || ''}
+        onChange={(e) => onChange(e.target.value)}
+        required={field.required}
+        className="w-full px-3 py-2 bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-light dark:focus:ring-primary-dark"
+      />
+      {error && <p className="text-xs text-red-500 mt-1">{error}</p>}
+    </div>
+  );
+}
+
+export function SelectField({ field, value, onChange, error }: FieldComponentProps) {
+  return (
+    <div>
+      <label className="block text-sm font-medium text-text-light-primary dark:text-text-dark-primary mb-1">
+        {field.label}
+        {field.required && <span className="text-red-500 ml-1">*</span>}
+      </label>
+      {field.description && (
+        <p className="text-xs text-text-light-tertiary dark:text-text-dark-tertiary mb-2">
+          {field.description}
+        </p>
+      )}
+      <select
+        value={value || ''}
+        onChange={(e) => onChange(e.target.value)}
+        required={field.required}
+        className="w-full px-3 py-2 bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-light dark:focus:ring-primary-dark"
+      >
+        <option value="">Select an option...</option>
+        {field.options?.map((option) => (
+          <option key={option} value={option}>
+            {option}
+          </option>
+        ))}
+      </select>
+      {error && <p className="text-xs text-red-500 mt-1">{error}</p>}
+    </div>
+  );
+}
+
+export function MultiSelectField({ field, value, onChange, error }: FieldComponentProps) {
+  const selectedValues: string[] = value || [];
+
+  const handleToggle = (option: string) => {
+    if (selectedValues.includes(option)) {
+      onChange(selectedValues.filter((v) => v !== option));
+    } else {
+      onChange([...selectedValues, option]);
+    }
+  };
+
+  return (
+    <div>
+      <label className="block text-sm font-medium text-text-light-primary dark:text-text-dark-primary mb-1">
+        {field.label}
+        {field.required && <span className="text-red-500 ml-1">*</span>}
+      </label>
+      {field.description && (
+        <p className="text-xs text-text-light-tertiary dark:text-text-dark-tertiary mb-2">
+          {field.description}
+        </p>
+      )}
+      <div className="space-y-2">
+        {field.options?.map((option) => (
+          <label key={option} className="flex items-center gap-2 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={selectedValues.includes(option)}
+              onChange={() => handleToggle(option)}
+              className="w-4 h-4"
+            />
+            <span className="text-sm text-text-light-primary dark:text-text-dark-primary">
+              {option}
+            </span>
+          </label>
+        ))}
+      </div>
+      {error && <p className="text-xs text-red-500 mt-1">{error}</p>}
+    </div>
+  );
+}
+
+export function RadioField({ field, value, onChange, error }: FieldComponentProps) {
+  return (
+    <div>
+      <label className="block text-sm font-medium text-text-light-primary dark:text-text-dark-primary mb-1">
+        {field.label}
+        {field.required && <span className="text-red-500 ml-1">*</span>}
+      </label>
+      {field.description && (
+        <p className="text-xs text-text-light-tertiary dark:text-text-dark-tertiary mb-2">
+          {field.description}
+        </p>
+      )}
+      <div className="space-y-2">
+        {field.options?.map((option) => (
+          <label key={option} className="flex items-center gap-2 cursor-pointer">
+            <input
+              type="radio"
+              name={field.id}
+              value={option}
+              checked={value === option}
+              onChange={(e) => onChange(e.target.value)}
+              required={field.required}
+              className="w-4 h-4"
+            />
+            <span className="text-sm text-text-light-primary dark:text-text-dark-primary">
+              {option}
+            </span>
+          </label>
+        ))}
+      </div>
+      {error && <p className="text-xs text-red-500 mt-1">{error}</p>}
+    </div>
+  );
+}
+
+export function CheckboxField({ field, value, onChange, error }: FieldComponentProps) {
+  return (
+    <div>
+      <label className="flex items-start gap-2 cursor-pointer">
+        <input
+          type="checkbox"
+          checked={value || false}
+          onChange={(e) => onChange(e.target.checked)}
+          required={field.required}
+          className="w-4 h-4 mt-1"
+        />
+        <div className="flex-1">
+          <span className="text-sm font-medium text-text-light-primary dark:text-text-dark-primary">
+            {field.label}
+            {field.required && <span className="text-red-500 ml-1">*</span>}
+          </span>
+          {field.description && (
+            <p className="text-xs text-text-light-tertiary dark:text-text-dark-tertiary mt-1">
+              {field.description}
+            </p>
+          )}
+        </div>
+      </label>
+      {error && <p className="text-xs text-red-500 mt-1">{error}</p>}
+    </div>
+  );
+}
+
+export function RatingField({ field, value, onChange, error }: FieldComponentProps) {
+  const rating = value || 0;
+
+  return (
+    <div>
+      <label className="block text-sm font-medium text-text-light-primary dark:text-text-dark-primary mb-1">
+        {field.label}
+        {field.required && <span className="text-red-500 ml-1">*</span>}
+      </label>
+      {field.description && (
+        <p className="text-xs text-text-light-tertiary dark:text-text-dark-tertiary mb-2">
+          {field.description}
+        </p>
+      )}
+      <div className="flex gap-2">
+        {[1, 2, 3, 4, 5].map((star) => (
+          <button
+            key={star}
+            type="button"
+            onClick={() => onChange(star)}
+            className={`text-3xl transition-colors ${
+              star <= rating
+                ? 'text-yellow-500'
+                : 'text-text-light-tertiary dark:text-text-dark-tertiary'
+            }`}
+          >
+            ★
+          </button>
+        ))}
+        {rating > 0 && (
+          <span className="ml-2 text-sm text-text-light-secondary dark:text-text-dark-secondary">
+            {rating} / 5
+          </span>
+        )}
+      </div>
+      {error && <p className="text-xs text-red-500 mt-1">{error}</p>}
+    </div>
+  );
+}
+
+export function ScaleField({ field, value, onChange, error }: FieldComponentProps) {
+  const scaleValue = value || 0;
+
+  return (
+    <div>
+      <label className="block text-sm font-medium text-text-light-primary dark:text-text-dark-primary mb-1">
+        {field.label}
+        {field.required && <span className="text-red-500 ml-1">*</span>}
+      </label>
+      {field.description && (
+        <p className="text-xs text-text-light-tertiary dark:text-text-dark-tertiary mb-2">
+          {field.description}
+        </p>
+      )}
+      <div className="flex flex-wrap gap-2">
+        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
+          <button
+            key={num}
+            type="button"
+            onClick={() => onChange(num)}
+            className={`w-10 h-10 rounded-lg transition-colors ${
+              num === scaleValue
+                ? 'bg-primary-light dark:bg-primary-dark text-white'
+                : 'bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark hover:bg-surface-hover-light dark:hover:bg-surface-hover-dark'
+            }`}
+          >
+            {num}
+          </button>
+        ))}
+      </div>
+      {scaleValue > 0 && (
+        <p className="text-sm text-text-light-secondary dark:text-text-dark-secondary mt-2">
+          Selected: {scaleValue} / 10
+        </p>
+      )}
+      {error && <p className="text-xs text-red-500 mt-1">{error}</p>}
+    </div>
+  );
+}

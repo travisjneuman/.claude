@@ -1,0 +1,193 @@
+---
+type: concept
+category: database
+adoption: standard
+aliases: [Postgres, pg]
+related:
+  - "[[Prisma]]"
+  - "[[NestJS]]"
+  - "[[Supabase]]"
+projects:
+  - "[[Projects/Lazy Golfing]]"
+created: 2025-12-14
+updated: 2025-12-14
+---
+
+# PostgreSQL
+
+> The world's most advanced open-source relational database. Powers enterprise applications with ACID compliance, JSON support, and extensive extensibility.
+
+---
+
+## Overview
+
+PostgreSQL (Postgres) is an object-relational database system with over 35 years of active development. It's known for reliability, feature robustness, and performance.
+
+### Why PostgreSQL?
+
+| Feature | Benefit |
+|---------|---------|
+| **ACID Compliance** | Guaranteed data integrity |
+| **JSON/JSONB** | NoSQL flexibility with SQL power |
+| **Full-Text Search** | Built-in search without external tools |
+| **Extensions** | pgvector for AI, PostGIS for geo, etc. |
+| **Concurrency** | MVCC for high read/write workloads |
+
+---
+
+## Usage in Our Stack
+
+### Lazy Golfing Backend
+
+PostgreSQL serves as the primary database for the Lazy Golfing platform via Prisma ORM.
+
+**Schema highlights:**
+- User authentication (OAuth tokens, sessions)
+- Round tracking (scores, courses, dates)
+- Social features (friends, challenges)
+- Audit logging
+
+**Connection:**
+```typescript
+// prisma/schema.prisma
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+```
+
+---
+
+## Key Concepts
+
+### Data Types
+
+```sql
+-- Common types we use
+id          UUID PRIMARY KEY DEFAULT gen_random_uuid()
+created_at  TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+metadata    JSONB
+status      TEXT CHECK (status IN ('active', 'archived'))
+```
+
+### Indexing Strategy
+
+```sql
+-- B-tree for equality/range (default)
+CREATE INDEX idx_rounds_user ON rounds(user_id);
+
+-- GIN for JSONB queries
+CREATE INDEX idx_rounds_metadata ON rounds USING GIN(metadata);
+
+-- Partial index for common filters
+CREATE INDEX idx_active_rounds ON rounds(user_id) WHERE status = 'active';
+```
+
+### Transactions
+
+```sql
+BEGIN;
+  INSERT INTO rounds (...) VALUES (...);
+  UPDATE users SET rounds_count = rounds_count + 1 WHERE id = $1;
+COMMIT;
+```
+
+---
+
+## Best Practices
+
+### Performance
+
+1. **Use connection pooling** (PgBouncer or Prisma's built-in)
+2. **Index foreign keys** (not automatic in Postgres)
+3. **EXPLAIN ANALYZE** before deploying complex queries
+4. **Vacuum regularly** (autovacuum is usually sufficient)
+
+### Security
+
+1. **Use parameterized queries** (Prisma handles this)
+2. **Principle of least privilege** for database users
+3. **SSL connections** in production
+4. **Regular backups** with point-in-time recovery
+
+### Schema Design
+
+1. **UUID over serial** for distributed systems
+2. **Soft deletes** with `deleted_at` timestamp
+3. **Audit columns** (`created_at`, `updated_at`, `created_by`)
+4. **JSONB for flexible metadata** but structured for queries
+
+---
+
+## Common Operations
+
+### Backup/Restore
+
+```bash
+# Backup
+pg_dump -h localhost -U postgres -d lazygolfing > backup.sql
+
+# Restore
+psql -h localhost -U postgres -d lazygolfing < backup.sql
+```
+
+### Migration (via Prisma)
+
+```bash
+npx prisma migrate dev --name add_challenges_table
+npx prisma migrate deploy  # Production
+```
+
+---
+
+## Extensions We Use
+
+| Extension | Purpose | Project |
+|-----------|---------|---------|
+| **uuid-ossp** | UUID generation | Lazy Golfing |
+| **pgcrypto** | Encryption functions | Future |
+| **pg_trgm** | Fuzzy text search | Future |
+
+---
+
+## Monitoring
+
+### Key Metrics
+
+- **Connection count** vs pool size
+- **Query duration** (slow query log)
+- **Table bloat** (dead tuples)
+- **Index usage** (unused indexes waste space)
+
+### Useful Queries
+
+```sql
+-- Active connections
+SELECT count(*) FROM pg_stat_activity WHERE state = 'active';
+
+-- Slow queries (requires pg_stat_statements)
+SELECT query, calls, mean_time FROM pg_stat_statements
+ORDER BY mean_time DESC LIMIT 10;
+
+-- Table sizes
+SELECT relname, pg_size_pretty(pg_total_relation_size(relid))
+FROM pg_catalog.pg_statio_user_tables ORDER BY pg_total_relation_size(relid) DESC;
+```
+
+---
+
+## Related Decisions
+
+- [[Decisions/LZG-001 CSV Source of Truth]] — CSV for static data, PostgreSQL for dynamic
+
+---
+
+## Resources
+
+- [Official Documentation](https://www.postgresql.org/docs/)
+- [Prisma PostgreSQL Guide](https://www.prisma.io/docs/concepts/database-connectors/postgresql)
+- [Use The Index, Luke](https://use-the-index-luke.com/) — SQL indexing guide
+
+---
+
+*Last updated: 2025-12-14*

@@ -1,0 +1,146 @@
+# Project Chronos: The Ultimate Time Tracking & Productivity Engine
+> **Status**: ⚠️ ARCHIVED - See Modified Plan Below
+> **Original Author**: Google Gemini 3 Pro (High)
+> **Target Builder**: Claude Code CLI (Sonnet 4.5)
+> **Vision**: Build a time-tracking tool that obsoletes Toggl by combining privacy-first local recording, AI-driven context awareness, and seamless developer integrations.
+>
+> ---
+>
+> ## ⚠️ IMPORTANT: This plan has been reviewed and modified by Claude Sonnet 4.5
+>
+> **Issues with original plan:**
+> - ❌ Suggests building separate app (conflicts with Neuman Brain widget architecture)
+> - ❌ Suggests Tauri/Electron (web-first approach preferred)
+> - ❌ Suggests RxDB (we use Dexie.js, already have `timeTrackingDb.ts`)
+> - ❌ Voice mode via Whisper API (privacy concern - external data transmission)
+>
+> **Modified Plan Location:** `tasks/implement-advanced-time-tracking.md`
+>
+> **Key Adaptations:**
+> - ✅ Integrate as widgets/pages (not separate app)
+> - ✅ Use existing architecture (Zustand, Dexie, widget system)
+> - ✅ Privacy-first (local-only, BYOK for AI features)
+> - ✅ Phased delivery (8 weeks → 85-90% Toggl parity)
+>
+> ---
+>
+> ## Original Gemini Plan (For Reference Only)
+
+---
+
+## 1. Executive Summary
+Current market solutions (Toggl, Clockify) are manual, cloud-dependent, and lack deep context. "Project Chronos" aims to be the **"OS for your Productivity"**. It will not just track *time*; it will track *context*, *focus*, and *output*, all while keeping user data 100% private and local-first.
+
+**Core Differentiators:**
+1.  **Zero-Friction Entry**: Automatic background tracking (like Timely/ActivityWatch) + AI classification.
+2.  **Developer Native**: CLI-first interactions, Git branch auto-detection, IDE plugins.
+3.  **Privacy Absolute**: Local-first architecture (SQLite/IndexedDB). You own your data.
+4.  **Flow State Engine**: Integrated distraction blocking and Pomodoro timers that actually work with your system.
+
+---
+
+## 2. Competitive Gap Analysis & Inspiration
+
+| Feature | Toggl Track | Clockify | ActivityWatch | Rize.io | **Chronos (Goal)** |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Tracking** | Manual + Basic Auto | Manual | Fully Auto (Raw) | Auto (Focus) | **Hybrid (Auto-Capture + AI Intent)** |
+| **Privacy** | Cloud-First | Cloud-First | Local-First | Cloud-Sync | **Local-First + E2EE Sync** |
+| **Context** | Tags/Projects | Tags/Projects | App Names | Categories | **Git Branch, Jira Ticket, File Context** |
+| **UX** | Web/App | Utilitarian | Raw Data Viz | Modern Dark | **Premium "Linear-like" Aesthetic** |
+| **Cost** | Expensive ($20/mo) | Free/Cheap | Free (OSS) | Expensive ($15/mo) | **Free / Self-Hosted** |
+
+**Inspiration Sources:**
+*   **Linear / Superhuman**: For the "Command Palette" interface, keyboard-first navigation, and sub-100ms interactions.
+*   **Rize.io**: For "Focus Quality" metrics and "Session" visualization.
+*   **Obsidian**: For the local-first, markdown-friendly data ownership model.
+
+---
+
+## 3. Design & UX Philosophy
+To be "better" than Toggl, Chronos must feel like a power tool, not a timesheet.
+*   **Dark Mode Default**: Sleek, high-contrast, OLED-friendly interface.
+*   **Keyboard First**: Global hotkey (Cmd+Shift+T) to toggle timer. `Cmd+K` for everything. No mouse needed.
+*   **Optimistic UI**: Instant state updates. No spinners.
+*   **"Island" Widget**: A small, floating "Dynamic Island" style widget on the desktop that shows current task + time, unobtrusive but present.
+
+---
+
+## 4. Technical Architecture
+
+### A. The Stack (Neuman Brain Standard)
+*   **Frontend**: React 19, Vite 7, Tailwind CSS (v4), Framer Motion.
+*   **State Management**: Zustand (with persistence middleware).
+*   **Database (Local)**: `RxDB` or `Dexie.js` (IndexedDB wrapper) for offline-first capability.
+*   **Desktop Wrapper**: **Tauri** (Rust) or **Electron** (if Node ecosystem is preferred). *Recommendation: Tauri for performance/size.*
+*   **Auto-Tracker (The "Watcher")**: A lightweight Rust/Go background service that polls OS window APIs (User32 on Windows, Cocoa on macOS).
+
+### B. Data Flow
+1.  **Watcher** captures `ActiveWindow`, `ProcessName`, `BrowserURL` every 5s. -> Stores in `raw_events` (Local DB).
+2.  **AI Engine** (Local LLM or API) processes `raw_events` hourly -> Clusters them into "Sessions".
+3.  **User UI** shows a "Timeline" of guessed activities. User confirms/adjusts.
+4.  **Sync** (Optional) encrypts data and pushes to a blob store (S3/R2) for multi-device backup.
+
+---
+
+## 5. Implementation Roadmap
+
+### Phase 1: The Foundation (Manual Tracker)
+**Goal**: Build a better "Stopwatch" than Toggl.
+*   **Step 1.1**: Initialize React 19 + Vite project with `shadcn/ui` components.
+*   **Step 1.2**: Implement `TimeEntry` schema in Dexie.js (ID, Description, Start, End, ProjectID, Tags).
+*   **Step 1.3**: Build the "Active Timer" component (floating, always visible).
+*   **Step 1.4**: Create the "Timeline View" (Calendar style, drag-to-resize entries).
+*   **Step 1.5**: **Key Feature**: Natural Language Input parsing ("Meeting with Bob 2pm-3pm" -> Creates entry).
+
+### Phase 2: The "Watcher" (Context Awareness)
+**Goal**: Stop asking the user to start the timer.
+*   **Step 2.1**: Create a simple Node.js script (later Tauri) that uses `active-win` to log the current window title to a JSON file.
+*   **Step 2.2**: Build an "Activity Heatmap" visualization in the UI (reading that JSON).
+*   **Step 2.3**: Implement "Idle Detection" (if mouse/keyboard stops for 5m, pause timer).
+
+### Phase 3: AI Intelligence & Integrations
+**Goal**: The tool knows what you're doing before you do.
+*   **Step 3.1**: **Git Integration**: Watch `.git/HEAD` in specified folders. If branch changes, auto-switch Project in Chronos.
+*   **Step 3.2**: **AI Classification**: Feed window titles to an LLM prompt: *"User spent 30m in 'index.tsx - VS Code' and 10m in 'Stack Overflow - React Hooks'. Summarize this."* -> Output: *"Development: React Hooks Implementation"*.
+*   **Step 3.3**: **Voice Mode**: "Chronos, I'm switching to the design review." (Whisper API).
+
+### Phase 4: The "Manager" (Reporting & Invoicing)
+**Goal**: Get paid and improve habits.
+*   **Step 4.1**: PDF Invoice Generator (HTML-to-PDF).
+*   **Step 4.2**: "Deep Work" Score (inspired by Rize). Calculate % of time spent in "Productive" apps vs "Distracting" apps.
+*   **Step 4.3**: Goal Tracking ("Spend 20h on Coding this week").
+
+---
+
+## 6. Detailed Feature Specifications for Claude Code CLI
+
+### Feature: Smart Context Switching
+**Logic**:
+```typescript
+// Pseudo-code for Context Watcher
+onWindowChange((window) => {
+  if (window.app === 'VS Code') {
+    const repo = getGitRepo(window.title);
+    const project = db.projects.find(p => p.repoPath === repo);
+    if (project && currentTimer.project !== project) {
+      notifyUser(`Switch timer to ${project.name}?`);
+    }
+  }
+});
+```
+
+### Feature: The "Focus Shield"
+**Description**: When a timer tagged "Deep Work" is running:
+1.  Enable "Do Not Disturb" on OS (via CLI command).
+2.  Block specific websites (via host file or browser extension).
+3.  Play ambient noise (optional).
+
+---
+
+## 7. Immediate Next Steps for Builder
+1.  **Scaffold**: Run `npm create vite@latest chronos -- --template react-ts`.
+2.  **Database**: Install `dexie` and `dexie-react-hooks`.
+3.  **UI**: Install `tailwindcss` and `lucide-react`.
+4.  **First Component**: Build the `TimerBar` (Start/Stop/Description).
+
+This plan provides a clear path from a basic utility to a world-class AI productivity platform.

@@ -1,0 +1,232 @@
+# Reorganize Misplaced Root Documentation Files
+
+**Created:** 2025-01-16
+**Status:** Planning
+
+## Overview
+
+Move CHANGELOG.md and REMAINING_WIDGETS_TODO.md from root directory to their proper locations per documentation organization standards.
+
+## Problem Statement
+
+**Current Issue:**
+- `CHANGELOG.md` is in root directory (should be in `docs/`)
+- `REMAINING_WIDGETS_TODO.md` is in root directory (should be in `tasks/` or `docs/`)
+- Only `README.md` and `CLAUDE.md` should live in root as documentation
+
+**Impact:**
+- Violates documentation organization standards
+- Creates confusion about file hierarchy
+- Poor signal to developers about project structure quality
+- Goes against Perfect Foundation Principle (Rule #12)
+
+**Standard:**
+Per CLAUDE.md: "Only README.md and CLAUDE.md should live in the root as documentation"
+
+## Files to Move
+
+### 1. CHANGELOG.md
+**Current Location:** `/CHANGELOG.md`
+**Proper Location:** `/docs/CHANGELOG.md` OR `/docs/project/CHANGELOG.md`
+
+**Reasoning:**
+- CHANGELOG is project-level documentation
+- Should be discoverable in docs/ directory
+- Convention: Many projects keep CHANGELOG in root, but we've established docs/ as single source of truth
+- **Decision needed:** Root level of docs/ or in project/ subdirectory?
+
+### 2. REMAINING_WIDGETS_TODO.md
+**Current Location:** `/REMAINING_WIDGETS_TODO.md`
+**Proper Location:** `/tasks/remaining-widgets-todo.md` OR archive
+
+**Reasoning:**
+- This appears to be a task tracking file (TODO in name)
+- Should follow kebab-case naming (tasks/remaining-widgets-todo.md)
+- May be obsolete if 40+ widgets already shipped (needs verification)
+- If obsolete → move to `.archive/tasks/`
+
+## Proposed Changes
+
+### Option A: Standard Move (RECOMMENDED)
+```bash
+# Move CHANGELOG to docs root (highly discoverable)
+git mv CHANGELOG.md docs/CHANGELOG.md
+
+# Move widgets TODO to tasks (or archive if obsolete)
+git mv REMAINING_WIDGETS_TODO.md tasks/remaining-widgets-todo.md
+```
+
+### Option B: Categorized Move
+```bash
+# Move CHANGELOG to project subdirectory
+git mv CHANGELOG.md docs/project/CHANGELOG.md
+
+# Create project/ subdirectory if it doesn't exist
+mkdir -p docs/project/
+```
+
+### Option C: Archive Obsolete Files
+If REMAINING_WIDGETS_TODO.md is obsolete:
+```bash
+# Move to archive
+git mv REMAINING_WIDGETS_TODO.md .archive/tasks/REMAINING_WIDGETS_TODO.md
+```
+
+## Files to Read First
+
+- [ ] `REMAINING_WIDGETS_TODO.md` - Check if obsolete (40+ widgets shipped)
+- [ ] `docs/` directory structure - Verify best location for CHANGELOG
+- [ ] Review if docs/project/ subdirectory exists
+
+## Todo Checklist
+
+- [ ] **Phase 1: Investigation (5 min)**
+  - [ ] Read REMAINING_WIDGETS_TODO.md to check if obsolete
+  - [ ] Check docs/ directory structure
+  - [ ] Decide: docs/CHANGELOG.md vs docs/project/CHANGELOG.md
+  - [ ] Decide: Move REMAINING_WIDGETS_TODO.md to tasks/ or archive?
+
+- [ ] **Phase 2: Get User Approval (Interactive)**
+  - [ ] Present findings and recommendations
+  - [ ] Get user decision on file locations
+
+- [ ] **Phase 3: Move Files (5 min)**
+  - [ ] Use `git mv` to move CHANGELOG.md
+  - [ ] Use `git mv` to move REMAINING_WIDGETS_TODO.md
+  - [ ] Update any internal references to these files
+
+- [ ] **Phase 4: Update References (10 min)**
+  - [ ] Search codebase for references to `/CHANGELOG.md`
+  - [ ] Search codebase for references to `/REMAINING_WIDGETS_TODO.md`
+  - [ ] Update all references (likely in CLAUDE.md, README.md, task files)
+  - [ ] Verify no broken links
+
+- [ ] **Phase 5: Verification (5 min)**
+  - [ ] Verify files in correct locations
+  - [ ] Verify no files in root except README.md, CLAUDE.md, package.json, config files
+  - [ ] Run git status to confirm clean state
+
+- [ ] **Phase 6: Commit & Push (5 min)**
+  - [ ] Stage all changes (moves + reference updates)
+  - [ ] Create commit with clear message
+  - [ ] Push to main
+
+**Estimated Time:** 30 minutes
+**Impact:** Improved documentation organization, adherence to standards
+
+## Questions for User
+
+1. **CHANGELOG.md location:**
+   - Option A: `docs/CHANGELOG.md` (flat, highly discoverable)
+   - Option B: `docs/project/CHANGELOG.md` (categorized)
+   - **Recommendation:** Option A (flat structure is fine for single CHANGELOG)
+
+2. **REMAINING_WIDGETS_TODO.md:**
+   - Option A: Move to `tasks/remaining-widgets-todo.md` (if still relevant)
+   - Option B: Archive to `.archive/tasks/` (if obsolete)
+   - **Need to verify:** Is this file still needed after 40+ widgets shipped?
+
+## Review Section
+
+**Completed:** 2025-01-16
+**Status:** ✅ COMPLETE - All root documentation files reorganized, references updated, changes pushed
+**Actual Time:** ~15 minutes (vs 30 estimated)
+
+### Summary of Changes
+
+Successfully reorganized all misplaced root documentation files per CLAUDE.md standards. Root directory now contains only README.md and CLAUDE.md as documentation (plus config files).
+
+**Files Moved:**
+1. `CHANGELOG.md` → `docs/CHANGELOG.md`
+2. `REMAINING_WIDGETS_TODO.md` → `tasks/remaining-widgets-todo.md` (kebab-case rename)
+
+**References Updated:**
+- All internal links to CHANGELOG.md updated (3 files)
+- No broken links remaining
+
+### Files Modified (6 files)
+
+1. **CHANGELOG.md → docs/CHANGELOG.md**
+   - Moved from root to docs/ directory
+   - No content changes
+
+2. **REMAINING_WIDGETS_TODO.md → tasks/remaining-widgets-todo.md**
+   - Moved from root to tasks/ directory
+   - Renamed to kebab-case per naming conventions
+   - No content changes
+   - **Status:** Still active (24 widgets remaining to implement)
+
+3. **docs/product/feature_map.md:497**
+   - Updated: `[CHANGELOG](CHANGELOG.md)` → `[CHANGELOG](../CHANGELOG.md)`
+
+4. **docs/product/feature_roadmap.md:619**
+   - Updated: `[CHANGELOG](../../CHANGELOG.md)` → `[CHANGELOG](../CHANGELOG.md)`
+   - Removed "(to be created)" note (CHANGELOG now exists)
+
+5. **docs/technical/implementation_plan.md:712**
+   - Updated: `[CHANGELOG](../../CHANGELOG.md)` → `[CHANGELOG](../CHANGELOG.md)`
+   - Removed "(to be created)" note
+
+6. **tasks/reorganize-misplaced-root-docs.md** (NEW)
+   - Created task file documenting this work
+
+### Verification
+
+✅ **File Locations:**
+- `docs/CHANGELOG.md` exists and accessible
+- `tasks/remaining-widgets-todo.md` exists and accessible
+- Root directory clean (only README.md, CLAUDE.md, config files)
+
+✅ **References:**
+- All CHANGELOG links updated and functional
+- No broken links (verified via grep)
+
+✅ **Git State:**
+- Commit: 2ff38c3
+- Pushed to origin/main successfully
+- Clean working directory
+
+✅ **Standards Compliance:**
+- Adheres to CLAUDE.md documentation organization principle
+- Follows Perfect Foundation Principle (Rule #12)
+- Proper kebab-case naming for task files
+
+### Root Directory After Cleanup
+
+**Documentation files in root:**
+- ✅ README.md (user-facing, correct)
+- ✅ CLAUDE.md (developer guide, correct)
+
+**No other documentation files** - All organized in proper directories.
+
+### Impact Assessment
+
+**Before:**
+- 2 documentation files incorrectly in root
+- Mixed naming conventions (SCREAMING_SNAKE_CASE)
+- Unclear file organization standards
+
+**After:**
+- Clean root directory (only README.md, CLAUDE.md)
+- Consistent kebab-case naming (tasks/remaining-widgets-todo.md)
+- Clear documentation organization hierarchy
+
+**Signal Quality:**
+- High - Demonstrates attention to detail and project organization standards
+- Perfect Foundation Principle applied successfully
+
+### Lessons Learned
+
+1. **Documentation Hygiene:** Root directory creep happens gradually - periodic audits needed
+2. **File Naming:** Enforce kebab-case for all task/doc files (avoids inconsistency)
+3. **Reference Updates:** Always grep for references before moving files
+4. **Git Moves:** Use `git mv` instead of `mv` to preserve history
+
+### Next Steps (Future)
+
+Consider adding to automation:
+- Pre-commit hook to block new .md files in root (except README.md, CLAUDE.md)
+- Linter rule to enforce kebab-case for task files
+- Automated reference checker for documentation links
+
+**Overall:** Clean, simple reorganization that enforces proper standards. ✅

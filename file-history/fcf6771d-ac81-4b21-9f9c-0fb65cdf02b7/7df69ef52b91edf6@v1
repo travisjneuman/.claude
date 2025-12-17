@@ -1,0 +1,190 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  darkMode: 'class',
+  safelist: [
+    // Ensure all accent color text variants are generated
+    'text-accent-blue', 'text-accent-blue-hover',
+    'text-accent-magenta', 'text-accent-magenta-hover',
+    'text-accent-cyan', 'text-accent-cyan-hover',
+    'text-accent-green', 'text-accent-green-hover',
+    'text-accent-purple', 'text-accent-purple-hover',
+    'text-accent-red', 'text-accent-red-hover',
+    'text-accent-yellow', 'text-accent-yellow-hover',
+    'text-accent-orange', 'text-accent-orange-hover',
+    // Ensure gradient button backgrounds are generated
+    'bg-gradient-button-primary',
+    'bg-gradient-button-danger',
+    'bg-gradient-button-success',
+  ],
+  theme: {
+    extend: {
+      // Custom spacing tokens for consistency across the entire application
+      spacing: {
+        // Widget spacing standards
+        'widget-padding': '16px',       // Internal padding for all widgets (p-4 equivalent)
+        'content-gap': '16px',          // Vertical spacing between content sections (space-y-4 equivalent)
+        'button-gap': '8px',            // Gap between buttons in button groups (gap-2 equivalent)
+        'grid-gap': '24px',             // Gap between widgets in grid layout (gap-6 equivalent)
+
+        // Section spacing standards
+        'section-margin': '24px',       // Standard section bottom margin (mb-6 equivalent)
+        'section-margin-lg': '32px',    // Large section bottom margin (mb-8 equivalent)
+
+        // Form spacing standards
+        'form-field-gap': '12px',       // Gap between form fields (space-y-3 equivalent)
+        'form-label-gap': '8px',        // Gap between label and input (mb-2 equivalent)
+      },
+
+      // Semantic color tokens (already defined in index.css)
+      colors: {
+        'surface-light': 'var(--surface-light)',
+        'surface-light-elevated': 'var(--surface-light-elevated)',
+        'surface-dark': 'var(--surface-dark)',
+        'surface-dark-elevated': 'var(--surface-dark-elevated)',
+
+        'text-light-primary': 'var(--text-light-primary)',
+        'text-light-secondary': 'var(--text-light-secondary)',
+        'text-light-tertiary': 'var(--text-light-tertiary)',
+        'text-dark-primary': 'var(--text-dark-primary)',
+        'text-dark-secondary': 'var(--text-dark-secondary)',
+        'text-dark-tertiary': 'var(--text-dark-tertiary)',
+
+        'border-light': 'var(--border-light)',
+        'border-dark': 'var(--border-dark)',
+
+        'accent-blue': 'var(--accent-blue)',
+        'accent-blue-hover': 'var(--accent-blue-hover)',
+        'accent-magenta': 'var(--accent-magenta)',
+        'accent-magenta-hover': 'var(--accent-magenta-hover)',
+        'accent-cyan': 'var(--accent-cyan)',
+        'accent-cyan-hover': 'var(--accent-cyan-hover)',
+        'accent-green': 'var(--accent-green)',
+        'accent-green-hover': 'var(--accent-green-hover)',
+        'accent-purple': 'var(--accent-purple)',
+        'accent-purple-hover': 'var(--accent-purple-hover)',
+        'accent-red': 'var(--accent-red)',
+        'accent-red-hover': 'var(--accent-red-hover)',
+        'accent-yellow': 'var(--accent-yellow)',
+        'accent-yellow-hover': 'var(--accent-yellow-hover)',
+        'accent-orange': 'var(--accent-orange)',
+        'accent-orange-hover': 'var(--accent-orange-hover)',
+
+        'status-success': 'var(--status-success)',
+        'status-warning': 'var(--status-warning)',
+        'status-error': 'var(--status-error)',
+        'status-info': 'var(--status-info)',
+      },
+
+      // Border radius standards
+      borderRadius: {
+        'card': '12px',                 // Standard card border radius
+        'button': '8px',                // Standard button border radius
+        'input': '6px',                 // Standard input border radius
+      },
+
+      // Shadow standards
+      boxShadow: {
+        'modal': '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+        'card': '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+        'card-hover': '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
+        'glow-magenta': '0 0 20px rgba(233, 30, 140, 0.3)',
+        'glow-cyan': '0 0 20px rgba(0, 201, 255, 0.3)',
+        'glow-purple': '0 0 20px rgba(168, 85, 247, 0.3)',
+      },
+
+      // Background gradient utilities
+      backgroundImage: {
+        'gradient-button-primary': 'linear-gradient(to right, var(--accent-magenta), var(--accent-cyan))',
+        'gradient-button-danger': 'linear-gradient(to right, var(--accent-red), var(--accent-orange))',
+        'gradient-button-success': 'linear-gradient(to right, var(--accent-green), var(--accent-cyan))',
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+      },
+
+      // Text color extensions (ensures text- variants are generated)
+      textColor: {
+        'accent-blue': 'var(--accent-blue)',
+        'accent-blue-hover': 'var(--accent-blue-hover)',
+        'accent-magenta': 'var(--accent-magenta)',
+        'accent-magenta-hover': 'var(--accent-magenta-hover)',
+        'accent-cyan': 'var(--accent-cyan)',
+        'accent-cyan-hover': 'var(--accent-cyan-hover)',
+        'accent-green': 'var(--accent-green)',
+        'accent-green-hover': 'var(--accent-green-hover)',
+        'accent-purple': 'var(--accent-purple)',
+        'accent-purple-hover': 'var(--accent-purple-hover)',
+        'accent-red': 'var(--accent-red)',
+        'accent-red-hover': 'var(--accent-red-hover)',
+        'accent-yellow': 'var(--accent-yellow)',
+        'accent-yellow-hover': 'var(--accent-yellow-hover)',
+        'accent-orange': 'var(--accent-orange)',
+        'accent-orange-hover': 'var(--accent-orange-hover)',
+      },
+
+      // Typography standards
+      fontSize: {
+        'widget-title': ['14px', { lineHeight: '20px', fontWeight: '600' }],
+        'card-title': ['16px', { lineHeight: '24px', fontWeight: '600' }],
+        'section-title': ['18px', { lineHeight: '28px', fontWeight: '700' }],
+      },
+
+      // Animation & Transition Standards
+      // GPU-accelerated via transform/opacity, will-change hints
+      transitionDuration: {
+        'fast': '100ms',      // Micro-interactions (hover, focus)
+        'standard': '200ms',  // Default for most UI elements
+        'slow': '300ms',      // Modals, sidebars, larger elements
+        'slower': '500ms',    // Page transitions, complex animations
+      },
+
+      transitionTimingFunction: {
+        'smooth': 'cubic-bezier(0.4, 0, 0.2, 1)',        // Material Design standard
+        'smooth-in': 'cubic-bezier(0.4, 0, 1, 1)',      // Accelerate
+        'smooth-out': 'cubic-bezier(0, 0, 0.2, 1)',     // Decelerate
+        'bounce': 'cubic-bezier(0.68, -0.55, 0.265, 1.55)', // Playful bounce
+      },
+
+      // Custom animations for loading states and micro-interactions
+      animation: {
+        'fade-in': 'fadeIn 200ms ease-out',
+        'fade-out': 'fadeOut 200ms ease-in',
+        'slide-up': 'slideUp 200ms ease-out',
+        'slide-down': 'slideDown 200ms ease-out',
+        'scale-in': 'scaleIn 200ms ease-out',
+        'shimmer': 'shimmer 2s infinite',
+        'spin-slow': 'spin 3s linear infinite',
+      },
+
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        fadeOut: {
+          '0%': { opacity: '1' },
+          '100%': { opacity: '0' },
+        },
+        slideUp: {
+          '0%': { opacity: '0', transform: 'translateY(10px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        slideDown: {
+          '0%': { opacity: '0', transform: 'translateY(-10px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        scaleIn: {
+          '0%': { opacity: '0', transform: 'scale(0.95)' },
+          '100%': { opacity: '1', transform: 'scale(1)' },
+        },
+        shimmer: {
+          '0%': { backgroundPosition: '-200% 0' },
+          '100%': { backgroundPosition: '200% 0' },
+        },
+      },
+    },
+  },
+  plugins: [],
+};

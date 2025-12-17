@@ -1,0 +1,82 @@
+# CLAUDE.md for Tests
+
+## Scope
+
+This file defines how to structure and write tests across the Neuman Brain codebase. It supplements the root `CLAUDE.md` and covers unit tests, integration tests, and end‑to‑end (E2E) tests. Good tests ensure reliability, catch regressions, and document intended behaviour.
+
+## Non‑negotiable requirements
+
+* **Every change requires tests:** New features and bug fixes must include appropriate tests. Pull requests without tests will be rejected unless explicitly justified (e.g. doc updates, micro‑typos).
+* **Use Vitest for unit and integration:** Our setup uses `vitest` with `@testing-library/react` for component testing. Do not mix frameworks. Put unit/integration tests alongside source under `src/**/__tests__/`.
+* **Use Playwright for E2E flows:** End‑to‑end tests live in `tests/e2e/` and use Playwright. Reserve these for critical flows listed in the root `CLAUDE.md` (e.g. backup/restore, task CRUD, event parsing, automation execution, migrations). Keep them minimal to avoid slow CI.
+* **Determinism:** Tests must not depend on external services, network conditions, or unpredictable timers. Mock fetch calls, random values, and dates with libraries like `msw` and `vi.useFakeTimers()`. Avoid `await page.waitForTimeout`; instead wait for specific selectors or events.
+* **Coverage:** Aim for high coverage on business logic, state stores, and services. UI snapshot tests should be used sparingly; prefer semantic assertions over pixel‑perfect snapshots.
+* **Descriptive names:** Group tests with `describe()` and give each `it()` a concise description of the behaviour being tested. Use `test()` or `it()` consistently.
+* **Isolation:** Each test should reset state and not rely on side effects from previous tests. Clear stores, mocks, and timers using `beforeEach()` and `afterEach()` hooks.
+* **Config centralisation:** Global setups (e.g. mocking `fetch`, registering custom matchers) belong in `vitest.setup.ts` or Playwright’s `fixtures` file. Do not duplicate boilerplate across tests.
+
+## Structure guidelines
+
+### Unit/Integration tests
+
+* **Location:** Place tests in `src/someModule/__tests__/someModule.test.ts` or `someComponent.test.ts` adjacent to the code under test.
+* **Imports:** Use absolute imports (e.g. `@/services/apiService`) instead of relative paths. This helps with refactoring and reduces import chaos.
+* **Rendering:** For React components, wrap them in the necessary providers (theme, store, router) using a custom `renderWithProviders()` helper imported from `src/tests/utils.ts`.
+* **Async tests:** Mark your test as `async` when awaiting operations. Use `await` on asynchronous actions and rely on `findBy*` queries from Testing Library which automatically wait for elements.
+* **Mocking:** Use `vi.mock()` or `msw` to stub external modules and network requests. Do not call real APIs.
+
+Example unit test:
+
+```ts
+import { describe, it, expect } from "vitest";
+import { calculateDueDate } from "@/utils/date";
+
+describe("calculateDueDate", () => {
+  it("adds days correctly", () => {
+    const result = calculateDueDate(new Date("2023-01-01"), 5);
+    expect(result.toISOString()).toContain("2023-01-06");
+  });
+});
+```
+
+### End‑to‑end tests (Playwright)
+
+* **Location:** Place Playwright specs in `tests/e2e/`. Use the `.spec.ts` extension.
+* **Fixtures:** Use the shared fixtures defined in `tests/playwright.config.ts` for authentication and environment setup. Avoid duplicating login code in every test.
+* **Scope:** E2E tests should exercise user journeys end‑to‑end. Limit them to critical flows to keep the suite maintainable and fast. For non‑critical flows, rely on unit/integration tests.
+* **Selectors:** Prefer [aria roles](https://playwright.dev/docs/selectors#best-practices) and test IDs (e.g. `data-testid="submit-button"`) over brittle CSS selectors. This improves resilience to UI changes.
+
+Example Playwright test:
+
+```ts
+import { test, expect } from "@playwright/test";
+
+test.describe("task CRUD", () => {
+  test("user can create, edit, and delete a task", async ({ page }) => {
+    await page.goto("/");
+    // Example interactions – adapt to actual UI
+    await page.getByRole("button", { name: /new task/i }).click();
+    await page.getByPlaceholder("Task title").fill("My new task");
+    await page.getByRole("button", { name: /save/i }).click();
+    await expect(page.getByText("My new task")).toBeVisible();
+    // ... further edit and delete actions
+  });
+});
+```
+
+## Anti‑patterns
+
+* **Network dependence:** Do not hit live APIs in tests. Use mocks.
+* **Implicit waits:** Avoid arbitrary sleeps (`waitForTimeout`). Always wait for elements or events.
+* **Testing library internals:** Do not test framework code (e.g. `React` itself). Focus on your own logic.
+* **Skipped or commented‑out tests:** Do not commit skipped tests. Fix them or remove them.
+* **Long snapshots:** Avoid full DOM snapshots; they are brittle. If you must use snapshots, keep them small and targeted.
+
+## Additional documentation
+
+Refer to:
+
+* `docs/technical/local_first_architecture.md` – explains how local‑first behaviour affects tests and offline scenarios.
+* `docs/user/terminal-complete-guide.md` – contains instructions on running tests via CLI and troubleshooting common issues.
+
+These documents provide context on why our testing strategy is structured this way and how to run the suites effectively.

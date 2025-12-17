@@ -1,0 +1,591 @@
+2025-12-13T19:56:51.253Z [DEBUG] Watching for changes in setting files C:\Users\tjn\.claude\settings.json, C:\Users\tjn\.claude\.claude\settings.local.json...
+2025-12-13T19:56:51.286Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude.json.tmp.220.1765655811286
+2025-12-13T19:56:51.286Z [DEBUG] Preserving file permissions: 100666
+2025-12-13T19:56:51.291Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (5.1ms)
+2025-12-13T19:56:51.291Z [DEBUG] Temp file written successfully, size: 1531 bytes
+2025-12-13T19:56:51.291Z [DEBUG] Applied original permissions to temp file
+2025-12-13T19:56:51.291Z [DEBUG] Renaming C:\Users\tjn\.claude.json.tmp.220.1765655811286 to C:\Users\tjn\.claude.json
+2025-12-13T19:56:51.292Z [DEBUG] File C:\Users\tjn\.claude.json written atomically
+2025-12-13T19:56:51.310Z [DEBUG] Using bash path: "C:\Program Files\Git\bin\bash.exe"
+2025-12-13T19:56:51.318Z [DEBUG] [LSP MANAGER] initializeLspServerManager() called
+2025-12-13T19:56:51.318Z [DEBUG] [LSP MANAGER] Created manager instance, state=pending
+2025-12-13T19:56:51.318Z [DEBUG] [LSP MANAGER] Starting async initialization (generation 1)
+2025-12-13T19:56:51.321Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude.json.tmp.220.1765655811321
+2025-12-13T19:56:51.321Z [DEBUG] Preserving file permissions: 100666
+2025-12-13T19:56:51.328Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (7.0ms)
+2025-12-13T19:56:51.328Z [DEBUG] Temp file written successfully, size: 1568 bytes
+2025-12-13T19:56:51.328Z [DEBUG] Applied original permissions to temp file
+2025-12-13T19:56:51.328Z [DEBUG] Renaming C:\Users\tjn\.claude.json.tmp.220.1765655811321 to C:\Users\tjn\.claude.json
+2025-12-13T19:56:51.328Z [DEBUG] File C:\Users\tjn\.claude.json written atomically
+2025-12-13T19:56:51.330Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude.json.tmp.220.1765655811330
+2025-12-13T19:56:51.331Z [DEBUG] Preserving file permissions: 100666
+2025-12-13T19:56:51.335Z [DEBUG] Temp file written successfully, size: 1603 bytes
+2025-12-13T19:56:51.335Z [DEBUG] Applied original permissions to temp file
+2025-12-13T19:56:51.335Z [DEBUG] Renaming C:\Users\tjn\.claude.json.tmp.220.1765655811330 to C:\Users\tjn\.claude.json
+2025-12-13T19:56:51.335Z [DEBUG] File C:\Users\tjn\.claude.json written atomically
+2025-12-13T19:56:51.337Z [DEBUG] LSP server manager initialized successfully
+2025-12-13T19:56:51.337Z [DEBUG] LSP notification handlers registered successfully for all 0 server(s)
+2025-12-13T19:56:51.342Z [DEBUG] Applying permission update: Adding 45 allow rule(s) to destination 'userSettings': ["SlashCommand(/run-prompt:*)","Bash(git add:*)","Bash(test:*)","Bash(git rm:*)","Bash(git commit:*)","Bash(git worktree:*)","Bash(findstr:*)","Bash(git fetch:*)","Bash(git merge:*)","SlashCommand(/taches-cc-resources:check-todos)","SlashCommand(/taches-cc-resources:\\consider:pareto:*)","Bash(npm run test)","SlashCommand(/taches-cc-resources:\\consider:second-order:*)","Bash(dir:*)","Bash(npx playwright test:*)","Bash(git reset:*)","Bash(timeout 45 npx playwright test:*)","Bash(Select-Object -First 50)","Bash(npx tsc:*)","Bash(npm run build:*)","Skill(tech-debt-analyzer)","Bash(python .claude/skills/tech-debt-analyzer/scripts/detect_code_smells.py:*)","Bash(python:*)","Bash(cat:*)","Bash(npx ts-unused-exports:*)","Bash(node:*)","Bash(Get-NetTCPConnection -LocalPort 4173 -ErrorAction SilentlyContinue)","Bash(Select-Object -ExpandProperty OwningProcess)","Bash(ForEach-Object { Stop-Process -Id $_ -Force })","Bash(powershell -Command:*)","Bash(npx depcheck:*)","Bash(npm uninstall:*)","Bash(npm run type-check:*)","Bash(npm audit:*)","Skill(debug-like-expert)","WebSearch","Bash(find:*)","Bash(ls:*)","Bash(Get-ChildItem -Path \"C:\\Users\\tjn\\.claude\" -Recurse -Force)","Bash(Select-Object FullName, Length, LastWriteTime, PSIsContainer)","Bash(Format-Table -AutoSize -Wrap)","WebFetch(domain:docs.anthropic.com)","WebFetch(domain:awesomeclaude.ai)","WebFetch(domain:docs.claude.com)","WebFetch(domain:claudemarketplaces.com)"]
+2025-12-13T19:56:51.342Z [DEBUG] Applying permission update: Adding 1 allow rule(s) to destination 'localSettings': ["Bash(claude /doctor)"]
+2025-12-13T19:56:51.352Z [DEBUG] Loading plugin agent-sdk-dev from source: "./plugins/agent-sdk-dev"
+2025-12-13T19:56:51.353Z [DEBUG] Using manifest version for agent-sdk-dev@claude-code-plugins: 1.0.0
+2025-12-13T19:56:51.355Z [DEBUG] Plugin agent-sdk-dev@claude-code-plugins version 1.0.0 already cached at C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\agent-sdk-dev\1.0.0
+2025-12-13T19:56:51.355Z [DEBUG] Copied local plugin agent-sdk-dev to versioned cache: C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\agent-sdk-dev\1.0.0
+2025-12-13T19:56:51.356Z [DEBUG] Loading plugin pr-review-toolkit from source: "./plugins/pr-review-toolkit"
+2025-12-13T19:56:51.357Z [DEBUG] Using manifest version for pr-review-toolkit@claude-code-plugins: 1.0.0
+2025-12-13T19:56:51.357Z [DEBUG] Plugin pr-review-toolkit@claude-code-plugins version 1.0.0 already cached at C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\pr-review-toolkit\1.0.0
+2025-12-13T19:56:51.357Z [DEBUG] Copied local plugin pr-review-toolkit to versioned cache: C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\pr-review-toolkit\1.0.0
+2025-12-13T19:56:51.358Z [DEBUG] Loading plugin commit-commands from source: "./plugins/commit-commands"
+2025-12-13T19:56:51.359Z [DEBUG] Using manifest version for commit-commands@claude-code-plugins: 1.0.0
+2025-12-13T19:56:51.359Z [DEBUG] Plugin commit-commands@claude-code-plugins version 1.0.0 already cached at C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\commit-commands\1.0.0
+2025-12-13T19:56:51.359Z [DEBUG] Copied local plugin commit-commands to versioned cache: C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\commit-commands\1.0.0
+2025-12-13T19:56:51.360Z [DEBUG] Loading plugin feature-dev from source: "./plugins/feature-dev"
+2025-12-13T19:56:51.360Z [DEBUG] Using manifest version for feature-dev@claude-code-plugins: 1.0.0
+2025-12-13T19:56:51.361Z [DEBUG] Plugin feature-dev@claude-code-plugins version 1.0.0 already cached at C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\feature-dev\1.0.0
+2025-12-13T19:56:51.361Z [DEBUG] Copied local plugin feature-dev to versioned cache: C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\feature-dev\1.0.0
+2025-12-13T19:56:51.362Z [DEBUG] Loading plugin security-guidance from source: "./plugins/security-guidance"
+2025-12-13T19:56:51.362Z [DEBUG] Using manifest version for security-guidance@claude-code-plugins: 1.0.0
+2025-12-13T19:56:51.362Z [DEBUG] Plugin security-guidance@claude-code-plugins version 1.0.0 already cached at C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\security-guidance\1.0.0
+2025-12-13T19:56:51.362Z [DEBUG] Copied local plugin security-guidance to versioned cache: C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\security-guidance\1.0.0
+2025-12-13T19:56:51.363Z [DEBUG] Loaded hooks from standard location for plugin security-guidance: C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\security-guidance\1.0.0\hooks\hooks.json
+2025-12-13T19:56:51.364Z [DEBUG] Loading plugin code-review from source: "./plugins/code-review"
+2025-12-13T19:56:51.364Z [DEBUG] Using manifest version for code-review@claude-code-plugins: 1.0.0
+2025-12-13T19:56:51.365Z [DEBUG] Plugin code-review@claude-code-plugins version 1.0.0 already cached at C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\code-review\1.0.0
+2025-12-13T19:56:51.365Z [DEBUG] Copied local plugin code-review to versioned cache: C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\code-review\1.0.0
+2025-12-13T19:56:51.366Z [DEBUG] Loading plugin explanatory-output-style from source: "./plugins/explanatory-output-style"
+2025-12-13T19:56:51.366Z [DEBUG] Using manifest version for explanatory-output-style@claude-code-plugins: 1.0.0
+2025-12-13T19:56:51.366Z [DEBUG] Plugin explanatory-output-style@claude-code-plugins version 1.0.0 already cached at C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\explanatory-output-style\1.0.0
+2025-12-13T19:56:51.366Z [DEBUG] Copied local plugin explanatory-output-style to versioned cache: C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\explanatory-output-style\1.0.0
+2025-12-13T19:56:51.367Z [DEBUG] Loaded hooks from standard location for plugin explanatory-output-style: C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\explanatory-output-style\1.0.0\hooks\hooks.json
+2025-12-13T19:56:51.368Z [DEBUG] Loading plugin learning-output-style from source: "./plugins/learning-output-style"
+2025-12-13T19:56:51.368Z [DEBUG] Using manifest version for learning-output-style@claude-code-plugins: 1.0.0
+2025-12-13T19:56:51.368Z [DEBUG] Plugin learning-output-style@claude-code-plugins version 1.0.0 already cached at C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\learning-output-style\1.0.0
+2025-12-13T19:56:51.368Z [DEBUG] Copied local plugin learning-output-style to versioned cache: C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\learning-output-style\1.0.0
+2025-12-13T19:56:51.369Z [DEBUG] Loaded hooks from standard location for plugin learning-output-style: C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\learning-output-style\1.0.0\hooks\hooks.json
+2025-12-13T19:56:51.370Z [DEBUG] Loading plugin frontend-design from source: "./plugins/frontend-design"
+2025-12-13T19:56:51.370Z [DEBUG] Using manifest version for frontend-design@claude-code-plugins: 1.0.0
+2025-12-13T19:56:51.370Z [DEBUG] Plugin frontend-design@claude-code-plugins version 1.0.0 already cached at C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\frontend-design\1.0.0
+2025-12-13T19:56:51.370Z [DEBUG] Copied local plugin frontend-design to versioned cache: C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\frontend-design\1.0.0
+2025-12-13T19:56:51.371Z [DEBUG] Loading plugin document-skills from source: "./"
+2025-12-13T19:56:51.385Z [DEBUG] Git remote URL: null
+2025-12-13T19:56:51.385Z [DEBUG] No git remote URL found
+2025-12-13T19:56:51.385Z [DEBUG] Not in a GitHub repository, skipping path mapping update
+2025-12-13T19:56:51.404Z [DEBUG] Using git SHA for document-skills@anthropic-agent-skills: e5c60158df67
+2025-12-13T19:56:51.404Z [DEBUG] Plugin document-skills@anthropic-agent-skills version e5c60158df67 already cached at C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\document-skills\e5c60158df67
+2025-12-13T19:56:51.404Z [DEBUG] Copied local plugin document-skills to versioned cache: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\document-skills\e5c60158df67
+2025-12-13T19:56:51.404Z [DEBUG] Processing 4 skill paths for plugin document-skills
+2025-12-13T19:56:51.404Z [DEBUG] Checking skill path: ./document-skills/xlsx -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\document-skills\e5c60158df67\document-skills\xlsx (exists: true)
+2025-12-13T19:56:51.404Z [DEBUG] Checking skill path: ./document-skills/docx -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\document-skills\e5c60158df67\document-skills\docx (exists: true)
+2025-12-13T19:56:51.404Z [DEBUG] Checking skill path: ./document-skills/pptx -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\document-skills\e5c60158df67\document-skills\pptx (exists: true)
+2025-12-13T19:56:51.405Z [DEBUG] Checking skill path: ./document-skills/pdf -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\document-skills\e5c60158df67\document-skills\pdf (exists: true)
+2025-12-13T19:56:51.405Z [DEBUG] Found 4 valid skill paths for plugin document-skills, setting skillsPaths
+2025-12-13T19:56:51.406Z [DEBUG] Loading plugin example-skills from source: "./"
+2025-12-13T19:56:51.436Z [DEBUG] Using git SHA for example-skills@anthropic-agent-skills: e5c60158df67
+2025-12-13T19:56:51.436Z [DEBUG] Plugin example-skills@anthropic-agent-skills version e5c60158df67 already cached at C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\e5c60158df67
+2025-12-13T19:56:51.436Z [DEBUG] Copied local plugin example-skills to versioned cache: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\e5c60158df67
+2025-12-13T19:56:51.437Z [DEBUG] Processing 11 skill paths for plugin example-skills
+2025-12-13T19:56:51.437Z [DEBUG] Checking skill path: ./algorithmic-art -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\e5c60158df67\algorithmic-art (exists: true)
+2025-12-13T19:56:51.437Z [DEBUG] Checking skill path: ./artifacts-builder -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\e5c60158df67\artifacts-builder (exists: true)
+2025-12-13T19:56:51.437Z [DEBUG] Checking skill path: ./brand-guidelines -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\e5c60158df67\brand-guidelines (exists: true)
+2025-12-13T19:56:51.437Z [DEBUG] Checking skill path: ./canvas-design -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\e5c60158df67\canvas-design (exists: true)
+2025-12-13T19:56:51.437Z [DEBUG] Checking skill path: ./frontend-design -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\e5c60158df67\frontend-design (exists: true)
+2025-12-13T19:56:51.437Z [DEBUG] Checking skill path: ./internal-comms -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\e5c60158df67\internal-comms (exists: true)
+2025-12-13T19:56:51.437Z [DEBUG] Checking skill path: ./mcp-builder -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\e5c60158df67\mcp-builder (exists: true)
+2025-12-13T19:56:51.437Z [DEBUG] Checking skill path: ./skill-creator -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\e5c60158df67\skill-creator (exists: true)
+2025-12-13T19:56:51.437Z [DEBUG] Checking skill path: ./slack-gif-creator -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\e5c60158df67\slack-gif-creator (exists: true)
+2025-12-13T19:56:51.438Z [DEBUG] Checking skill path: ./theme-factory -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\e5c60158df67\theme-factory (exists: true)
+2025-12-13T19:56:51.438Z [DEBUG] Checking skill path: ./webapp-testing -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\e5c60158df67\webapp-testing (exists: true)
+2025-12-13T19:56:51.438Z [DEBUG] Found 11 valid skill paths for plugin example-skills, setting skillsPaths
+2025-12-13T19:56:51.438Z [DEBUG] Loading plugin taches-cc-resources from source: "./"
+2025-12-13T19:56:51.439Z [DEBUG] Using manifest version for taches-cc-resources@taches-cc-resources: 1.0.0
+2025-12-13T19:56:51.440Z [DEBUG] Plugin taches-cc-resources@taches-cc-resources version 1.0.0 already cached at C:\Users\tjn\.claude\plugins\cache\taches-cc-resources\taches-cc-resources\1.0.0
+2025-12-13T19:56:51.440Z [DEBUG] Copied local plugin taches-cc-resources to versioned cache: C:\Users\tjn\.claude\plugins\cache\taches-cc-resources\taches-cc-resources\1.0.0
+2025-12-13T19:56:51.441Z [DEBUG] Found 12 plugins (10 enabled, 2 disabled)
+2025-12-13T19:56:51.500Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude.json.tmp.220.1765655811500
+2025-12-13T19:56:51.500Z [DEBUG] Preserving file permissions: 100666
+2025-12-13T19:56:51.511Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (10.2ms)
+2025-12-13T19:56:51.511Z [DEBUG] Temp file written successfully, size: 1666 bytes
+2025-12-13T19:56:51.511Z [DEBUG] Applied original permissions to temp file
+2025-12-13T19:56:51.511Z [DEBUG] Renaming C:\Users\tjn\.claude.json.tmp.220.1765655811500 to C:\Users\tjn\.claude.json
+2025-12-13T19:56:51.511Z [DEBUG] File C:\Users\tjn\.claude.json written atomically
+2025-12-13T19:56:51.513Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude.json.tmp.220.1765655811513
+2025-12-13T19:56:51.513Z [DEBUG] Preserving file permissions: 100666
+2025-12-13T19:56:51.518Z [DEBUG] Temp file written successfully, size: 1718 bytes
+2025-12-13T19:56:51.518Z [DEBUG] Applied original permissions to temp file
+2025-12-13T19:56:51.518Z [DEBUG] Renaming C:\Users\tjn\.claude.json.tmp.220.1765655811513 to C:\Users\tjn\.claude.json
+2025-12-13T19:56:51.518Z [DEBUG] File C:\Users\tjn\.claude.json written atomically
+2025-12-13T19:56:51.538Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude.json.tmp.220.1765655811538
+2025-12-13T19:56:51.538Z [DEBUG] Preserving file permissions: 100666
+2025-12-13T19:56:51.542Z [DEBUG] Temp file written successfully, size: 1976 bytes
+2025-12-13T19:56:51.542Z [DEBUG] Applied original permissions to temp file
+2025-12-13T19:56:51.542Z [DEBUG] Renaming C:\Users\tjn\.claude.json.tmp.220.1765655811538 to C:\Users\tjn\.claude.json
+2025-12-13T19:56:51.542Z [DEBUG] File C:\Users\tjn\.claude.json written atomically
+2025-12-13T19:59:31.914Z [DEBUG] Stats cache is up to date
+2025-12-13T19:59:31.921Z [DEBUG] Loading skills from directories: managed=C:\ProgramData\ClaudeCode\.claude\skills, user=C:\Users\tjn\.claude\skills, project=[]
+2025-12-13T19:59:31.927Z [DEBUG] Passes: No cache, fetching eligibility
+2025-12-13T19:59:31.935Z [DEBUG] Loaded 12 installed plugins from C:\Users\tjn\.claude\plugins\installed_plugins.json
+2025-12-13T19:59:31.958Z [DEBUG] Creating shell snapshot for bash (C:\Program Files\Git\bin\bash.exe)
+2025-12-13T19:59:31.958Z [DEBUG] Looking for shell config file: C:\Users\tjn\.bashrc
+2025-12-13T19:59:31.958Z [DEBUG] Shell config file not found: C:\Users\tjn\.bashrc, creating snapshot with Claude Code defaults only
+2025-12-13T19:59:31.958Z [DEBUG] Snapshots directory: C:\Users\tjn\.claude\shell-snapshots
+2025-12-13T19:59:31.964Z [DEBUG] Creating snapshot at: C:\Users\tjn\.claude\shell-snapshots\snapshot-bash-1765655971958-lhkejy.sh
+2025-12-13T19:59:31.964Z [DEBUG] Shell binary exists: true
+2025-12-13T19:59:31.964Z [DEBUG] Execution timeout: 10000ms
+2025-12-13T19:59:31.966Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude\todos\281e1a6c-7bf3-4463-837a-ee9252d3335f-agent-281e1a6c-7bf3-4463-837a-ee9252d3335f.json.tmp.220.1765655971966
+2025-12-13T19:59:31.975Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (8.9ms)
+2025-12-13T19:59:31.975Z [DEBUG] Temp file written successfully, size: 2 bytes
+2025-12-13T19:59:31.975Z [DEBUG] Renaming C:\Users\tjn\.claude\todos\281e1a6c-7bf3-4463-837a-ee9252d3335f-agent-281e1a6c-7bf3-4463-837a-ee9252d3335f.json.tmp.220.1765655971966 to C:\Users\tjn\.claude\todos\281e1a6c-7bf3-4463-837a-ee9252d3335f-agent-281e1a6c-7bf3-4463-837a-ee9252d3335f.json
+2025-12-13T19:59:31.976Z [DEBUG] File C:\Users\tjn\.claude\todos\281e1a6c-7bf3-4463-837a-ee9252d3335f-agent-281e1a6c-7bf3-4463-837a-ee9252d3335f.json written atomically
+2025-12-13T19:59:31.978Z [DEBUG] Auto-updating 3 installed marketplaces in background
+2025-12-13T19:59:31.978Z [DEBUG] Auto-updating marketplace "claude-code-plugins"
+2025-12-13T19:59:31.978Z [DEBUG] Auto-updating marketplace "anthropic-agent-skills"
+2025-12-13T19:59:31.978Z [DEBUG] Auto-updating marketplace "taches-cc-resources"
+2025-12-13T19:59:31.984Z [DEBUG] getPluginSkills: Processing 10 enabled plugins
+2025-12-13T19:59:31.984Z [DEBUG] Checking plugin agent-sdk-dev: skillsPath=none, skillsPaths=0 paths
+2025-12-13T19:59:31.984Z [DEBUG] Checking plugin pr-review-toolkit: skillsPath=none, skillsPaths=0 paths
+2025-12-13T19:59:31.984Z [DEBUG] Checking plugin commit-commands: skillsPath=none, skillsPaths=0 paths
+2025-12-13T19:59:31.984Z [DEBUG] Checking plugin feature-dev: skillsPath=none, skillsPaths=0 paths
+2025-12-13T19:59:31.984Z [DEBUG] Checking plugin security-guidance: skillsPath=none, skillsPaths=0 paths
+2025-12-13T19:59:31.984Z [DEBUG] Checking plugin code-review: skillsPath=none, skillsPaths=0 paths
+2025-12-13T19:59:31.984Z [DEBUG] Checking plugin frontend-design: skillsPath=exists, skillsPaths=0 paths
+2025-12-13T19:59:31.984Z [DEBUG] Attempting to load skills from plugin frontend-design default skillsPath: C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\frontend-design\1.0.0\skills
+2025-12-13T19:59:31.986Z [DEBUG] Loading hooks from plugin: security-guidance
+2025-12-13T19:59:31.987Z [DEBUG] Registered 1 hooks from 10 plugins
+2025-12-13T19:59:32.021Z [DEBUG] Loaded 21 unique skills (managed: 0, user: 21, project: 0, duplicates removed: 0)
+2025-12-13T19:59:32.021Z [DEBUG] Loaded 1 skills from plugin frontend-design default directory
+2025-12-13T19:59:32.021Z [DEBUG] Checking plugin document-skills: skillsPath=none, skillsPaths=4 paths
+2025-12-13T19:59:32.021Z [DEBUG] Attempting to load skills from plugin document-skills skillsPaths: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\document-skills\e5c60158df67\document-skills\xlsx, C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\document-skills\e5c60158df67\document-skills\docx, C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\document-skills\e5c60158df67\document-skills\pptx, C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\document-skills\e5c60158df67\document-skills\pdf
+2025-12-13T19:59:32.021Z [DEBUG] Loading from skillPath: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\document-skills\e5c60158df67\document-skills\xlsx for plugin document-skills
+2025-12-13T19:59:32.022Z [DEBUG] Loaded 1 commands from plugin agent-sdk-dev default directory
+2025-12-13T19:59:32.041Z [DEBUG] Loaded 1 skills from plugin document-skills custom path: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\document-skills\e5c60158df67\document-skills\xlsx
+2025-12-13T19:59:32.041Z [DEBUG] Loading from skillPath: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\document-skills\e5c60158df67\document-skills\docx for plugin document-skills
+2025-12-13T19:59:32.041Z [DEBUG] Loaded 1 commands from plugin pr-review-toolkit default directory
+2025-12-13T19:59:32.043Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude.json.tmp.220.1765655972043
+2025-12-13T19:59:32.044Z [DEBUG] Preserving file permissions: 100666
+2025-12-13T19:59:32.049Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (5.3ms)
+2025-12-13T19:59:32.049Z [DEBUG] Temp file written successfully, size: 2006 bytes
+2025-12-13T19:59:32.049Z [DEBUG] Applied original permissions to temp file
+2025-12-13T19:59:32.049Z [DEBUG] Renaming C:\Users\tjn\.claude.json.tmp.220.1765655972043 to C:\Users\tjn\.claude.json
+2025-12-13T19:59:32.049Z [DEBUG] File C:\Users\tjn\.claude.json written atomically
+2025-12-13T19:59:32.059Z [DEBUG] Loaded 1 skills from plugin document-skills custom path: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\document-skills\e5c60158df67\document-skills\docx
+2025-12-13T19:59:32.059Z [DEBUG] Loading from skillPath: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\document-skills\e5c60158df67\document-skills\pptx for plugin document-skills
+2025-12-13T19:59:32.059Z [DEBUG] Loaded 3 commands from plugin commit-commands default directory
+2025-12-13T19:59:32.059Z [DEBUG] Attempting to auto-install official marketplace
+2025-12-13T19:59:32.066Z [DEBUG] Loaded 1 skills from plugin document-skills custom path: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\document-skills\e5c60158df67\document-skills\pptx
+2025-12-13T19:59:32.066Z [DEBUG] Loading from skillPath: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\document-skills\e5c60158df67\document-skills\pdf for plugin document-skills
+2025-12-13T19:59:32.066Z [DEBUG] Loaded 1 commands from plugin feature-dev default directory
+2025-12-13T19:59:32.068Z [DEBUG] Loaded 1 skills from plugin document-skills custom path: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\document-skills\e5c60158df67\document-skills\pdf
+2025-12-13T19:59:32.068Z [DEBUG] Checking plugin example-skills: skillsPath=none, skillsPaths=11 paths
+2025-12-13T19:59:32.068Z [DEBUG] Attempting to load skills from plugin example-skills skillsPaths: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\e5c60158df67\algorithmic-art, C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\e5c60158df67\artifacts-builder, C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\e5c60158df67\brand-guidelines, C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\e5c60158df67\canvas-design, C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\e5c60158df67\frontend-design, C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\e5c60158df67\internal-comms, C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\e5c60158df67\mcp-builder, C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\e5c60158df67\skill-creator, C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\e5c60158df67\slack-gif-creator, C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\e5c60158df67\theme-factory, C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\e5c60158df67\webapp-testing
+2025-12-13T19:59:32.068Z [DEBUG] Loading from skillPath: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\e5c60158df67\algorithmic-art for plugin example-skills
+2025-12-13T19:59:32.068Z [DEBUG] Loaded 1 commands from plugin code-review default directory
+2025-12-13T19:59:32.073Z [DEBUG] Loaded 1 skills from plugin example-skills custom path: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\e5c60158df67\algorithmic-art
+2025-12-13T19:59:32.073Z [DEBUG] Loading from skillPath: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\e5c60158df67\artifacts-builder for plugin example-skills
+2025-12-13T19:59:32.073Z [DEBUG] Loaded 29 commands from plugin taches-cc-resources default directory
+2025-12-13T19:59:32.073Z [DEBUG] Total plugin commands loaded: 36
+2025-12-13T19:59:32.074Z [DEBUG] Loaded 2 agents from plugin agent-sdk-dev default directory
+2025-12-13T19:59:32.075Z [DEBUG] Loaded 6 agents from plugin pr-review-toolkit default directory
+2025-12-13T19:59:32.075Z [DEBUG] Loaded 3 agents from plugin feature-dev default directory
+2025-12-13T19:59:32.076Z [DEBUG] Loaded 3 agents from plugin taches-cc-resources default directory
+2025-12-13T19:59:32.076Z [DEBUG] Total plugin agents loaded: 14
+2025-12-13T19:59:32.076Z [DEBUG] Loaded 1 skills from plugin example-skills custom path: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\e5c60158df67\artifacts-builder
+2025-12-13T19:59:32.076Z [DEBUG] Loading from skillPath: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\e5c60158df67\brand-guidelines for plugin example-skills
+2025-12-13T19:59:32.076Z [DEBUG] Loaded 1 skills from plugin example-skills custom path: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\e5c60158df67\brand-guidelines
+2025-12-13T19:59:32.076Z [DEBUG] Loading from skillPath: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\e5c60158df67\canvas-design for plugin example-skills
+2025-12-13T19:59:32.079Z [DEBUG] Loaded 1 skills from plugin example-skills custom path: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\e5c60158df67\canvas-design
+2025-12-13T19:59:32.079Z [DEBUG] Loading from skillPath: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\e5c60158df67\frontend-design for plugin example-skills
+2025-12-13T19:59:32.079Z [DEBUG] Loaded 1 skills from plugin example-skills custom path: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\e5c60158df67\frontend-design
+2025-12-13T19:59:32.079Z [DEBUG] Loading from skillPath: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\e5c60158df67\internal-comms for plugin example-skills
+2025-12-13T19:59:32.081Z [DEBUG] Loaded 1 skills from plugin example-skills custom path: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\e5c60158df67\internal-comms
+2025-12-13T19:59:32.081Z [DEBUG] Loading from skillPath: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\e5c60158df67\mcp-builder for plugin example-skills
+2025-12-13T19:59:32.081Z [DEBUG] Loaded 1 skills from plugin example-skills custom path: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\e5c60158df67\mcp-builder
+2025-12-13T19:59:32.081Z [DEBUG] Loading from skillPath: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\e5c60158df67\skill-creator for plugin example-skills
+2025-12-13T19:59:32.085Z [DEBUG] Loaded 1 skills from plugin example-skills custom path: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\e5c60158df67\skill-creator
+2025-12-13T19:59:32.085Z [DEBUG] Loading from skillPath: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\e5c60158df67\slack-gif-creator for plugin example-skills
+2025-12-13T19:59:32.088Z [DEBUG] Loaded 1 skills from plugin example-skills custom path: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\e5c60158df67\slack-gif-creator
+2025-12-13T19:59:32.088Z [DEBUG] Loading from skillPath: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\e5c60158df67\theme-factory for plugin example-skills
+2025-12-13T19:59:32.088Z [DEBUG] Loaded 1 skills from plugin example-skills custom path: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\e5c60158df67\theme-factory
+2025-12-13T19:59:32.088Z [DEBUG] Loading from skillPath: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\e5c60158df67\webapp-testing for plugin example-skills
+2025-12-13T19:59:32.088Z [DEBUG] Loaded 1 skills from plugin example-skills custom path: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\e5c60158df67\webapp-testing
+2025-12-13T19:59:32.088Z [DEBUG] Checking plugin taches-cc-resources: skillsPath=exists, skillsPaths=0 paths
+2025-12-13T19:59:32.088Z [DEBUG] Attempting to load skills from plugin taches-cc-resources default skillsPath: C:\Users\tjn\.claude\plugins\cache\taches-cc-resources\taches-cc-resources\1.0.0\skills
+2025-12-13T19:59:32.091Z [DEBUG] Loaded 7 skills from plugin taches-cc-resources default directory
+2025-12-13T19:59:32.091Z [DEBUG] Total plugin skills loaded: 23
+2025-12-13T19:59:32.091Z [DEBUG] getSkills returning: 21 skill dir commands, 23 plugin skills
+2025-12-13T19:59:32.142Z [DEBUG] Ripgrep first use test: PASSED (mode=builtin, path=C:\Users\tjn\AppData\Local\nvm\v24.11.0\node_modules\@anthropic-ai\claude-code\vendor\ripgrep\x64-win32\rg.exe)
+2025-12-13T19:59:32.145Z [DEBUG] rg error (signal=null, code=3221225794, stderr: ), 0 results
+2025-12-13T19:59:32.146Z [ERROR] Error: Error: Command failed: C:\Users\tjn\AppData\Local\nvm\v24.11.0\node_modules\@anthropic-ai\claude-code\vendor\ripgrep\x64-win32\rg.exe --files --hidden C:\Users\tjn\.claude
+
+    at genericNodeError (node:internal/errors:985:15)
+    at wrappedFn (node:internal/errors:539:14)
+    at ChildProcess.exithandler (node:child_process:417:12)
+    at ChildProcess.emit (node:events:508:28)
+    at ChildProcess.emit (node:domain:489:12)
+    at maybeClose (node:internal/child_process:1101:16)
+    at Socket.<anonymous> (node:internal/child_process:457:11)
+    at Socket.emit (node:events:508:28)
+    at Socket.emit (node:domain:489:12)
+    at Pipe.<anonymous> (node:net:346:12)
+2025-12-13T19:59:32.146Z [DEBUG] rg error (signal=null, code=3221225794, stderr: ), 0 results
+2025-12-13T19:59:32.146Z [ERROR] Error: Error: Command failed: C:\Users\tjn\AppData\Local\nvm\v24.11.0\node_modules\@anthropic-ai\claude-code\vendor\ripgrep\x64-win32\rg.exe --files --hidden --follow --no-ignore --glob *.md C:\Users\tjn\.claude\commands
+
+    at genericNodeError (node:internal/errors:985:15)
+    at wrappedFn (node:internal/errors:539:14)
+    at ChildProcess.exithandler (node:child_process:417:12)
+    at ChildProcess.emit (node:events:508:28)
+    at ChildProcess.emit (node:domain:489:12)
+    at maybeClose (node:internal/child_process:1101:16)
+    at Socket.<anonymous> (node:internal/child_process:457:11)
+    at Socket.emit (node:events:508:28)
+    at Socket.emit (node:domain:489:12)
+    at Pipe.<anonymous> (node:net:346:12)
+2025-12-13T19:59:32.149Z [DEBUG] Shell snapshot creation failed: Command failed: C:\Program Files\Git\bin\bash.exe -c -l SNAPSHOT_FILE='C:\Users\tjn\.claude\shell-snapshots\snapshot-bash-1765655971958-lhkejy.sh'
+      # No user config file to source
+
+      # First, create/clear the snapshot file
+      echo "# Snapshot file" >| "$SNAPSHOT_FILE"
+
+      # When this file is sourced, we first unalias to avoid conflicts
+      # This is necessary because aliases get "frozen" inside function definitions at definition time,
+      # which can cause unexpected behavior when functions use commands that conflict with aliases
+      echo "# Unset all aliases to avoid conflicts with functions" >> "$SNAPSHOT_FILE"
+      echo "unalias -a 2>/dev/null || true" >> "$SNAPSHOT_FILE"
+
+      echo "shopt -s expand_aliases" >> "$SNAPSHOT_FILE"
+
+      
+      # Check for rg availability
+      echo "# Check for rg availability" >> "$SNAPSHOT_FILE"
+      echo "if ! command -v rg >/dev/null 2>&1; then" >> "$SNAPSHOT_FILE"
+      echo '  alias rg='"''\''C:\Users\tjn\AppData\Local\nvm\v24.11.0\node_modules\@anthropic-ai\claude-code\vendor\ripgrep\x64-win32\rg.exe'\'''" >> "$SNAPSHOT_FILE"
+      echo "fi" >> "$SNAPSHOT_FILE"
+  
+
+      # Add PATH to the file
+      echo "export PATH='C:\Users\tjn\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\tjn\bin;C:\Program Files\Python312\Scripts;C:\Program Files\Python312;C:\Users\tjn\AppData\Local\Programs\cursor\resources\app\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\ProgramData\chocolatey\bin;C:\Program Files\dotnet;C:\Users\tjn\Desktop\platform-tools_r34.0.5-windows;C:\Users\tjn\AppData\Local\Microsoft\WindowsApps;C:\Users\tjn\AppData\Local\GitHubDesktop\bin;C:\Program Files\PuTTY;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files\Git\cmd;C:\Program Files\PowerToys;C:\Users\tjn\AppData\Local\nvm;C:\nvm4w\nodejs;C:\Program Files\nodejs;C:\nvm4w\nodejs;C:\Users\tjn\AppData\Local\Programs\Microsoft VS Code\_\Code.exe;C:\Users\tjn\AppData\Local\Programs\Microsoft VS Code\_\bin;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\Microsoft VS Code Insiders\bin;C:\Program Files\PowerShell\7;C:\Users\tjn\.local\bin;C:\Users\tjn\AppData\Local\Microsoft\WindowsApps;C:\Users\tjn\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\tjn\AppData\Local\GitHubDesktop\bin;C:\Users\tjn\AppData\Local\Programs\Ollama;C:\Users\tjn\AppData\Local\Programs\cursor\resources\app\bin;C:\Program Files\OneCommander;C:\Users\tjn\AppData\Local\nvm;C:\nvm4w\nodejs;C:\Users\tjn\AppData\Roaming\npm;C:\Users\tjn\AppData\Local\Programs\Antigravity\bin;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl'" >> "$SNAPSHOT_FILE"
+  
+
+      # Exit silently on success, only report errors
+      if [ ! -f "$SNAPSHOT_FILE" ]; then
+        echo "Error: Snapshot file was not created at $SNAPSHOT_FILE" >&2
+        exit 1
+      fi
+2025-12-13T19:59:32.149Z [DEBUG] Error details:
+2025-12-13T19:59:32.149Z [DEBUG] - Error code: 3221225794
+2025-12-13T19:59:32.149Z [DEBUG] - Error signal: null
+2025-12-13T19:59:32.149Z [DEBUG] - Error killed: false
+2025-12-13T19:59:32.149Z [DEBUG] - Shell path: C:\Program Files\Git\bin\bash.exe
+2025-12-13T19:59:32.149Z [DEBUG] - Config file: C:\Users\tjn\.bashrc
+2025-12-13T19:59:32.149Z [DEBUG] - Config file exists: false
+2025-12-13T19:59:32.149Z [DEBUG] - Working directory: C:\Users\tjn\.claude
+2025-12-13T19:59:32.149Z [DEBUG] - Claude home: C:\Users\tjn\.claude
+2025-12-13T19:59:32.149Z [DEBUG] Full snapshot script:
+SNAPSHOT_FILE='C:\Users\tjn\.claude\shell-snapshots\snapshot-bash-1765655971958-lhkejy.sh'
+      # No user config file to source
+
+      # First, create/clear the snapshot file
+      echo "# Snapshot file" >| "$SNAPSHOT_FILE"
+
+      # When this file is sourced, we first unalias to avoid conflicts
+      # This is necessary because aliases get "frozen" inside function definitions at definition time,
+      # which can cause unexpected behavior when functions use commands that conflict with aliases
+      echo "# Unset all aliases to avoid conflicts with functions" >> "$SNAPSHOT_FILE"
+      echo "unalias -a 2>/dev/null || true" >> "$SNAPSHOT_FILE"
+
+      echo "shopt -s expand_aliases" >> "$SNAPSHOT_FILE"
+
+      
+      # Check for rg availability
+      echo "# Check for rg availability" >> "$SNAPSHOT_FILE"
+      echo "if ! command -v rg >/dev/null 2>&1; then" >> "$SNAPSHOT_FILE"
+      echo '  alias rg='"''\''C:\Users\tjn\AppData\Local\nvm\v24.11.0\node_modules\@anthropic-ai\claude-code\vendor\ripgrep\x64-win32\rg.exe'\'''" >> "$SNAPSHOT_FILE"
+      echo "fi" >> "$SNAPSHOT_FILE"
+  
+
+      # Add PATH to the file
+      echo "export PATH='C:\Users\tjn\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\tjn\bin;C:\Program Files\Python312\Scripts;C:\Program Files\Python312;C:\Users\tjn\AppData\Local\Programs\cursor\resources\app\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\ProgramData\chocolatey\bin;C:\Program Files\dotnet;C:\Users\tjn\Desktop\platform-tools_r34.0.5-windows;C:\Users\tjn\AppData\Local\Microsoft\WindowsApps;C:\Users\tjn\AppData\Local\GitHubDesktop\bin;C:\Program Files\PuTTY;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files\Git\cmd;C:\Program Files\PowerToys;C:\Users\tjn\AppData\Local\nvm;C:\nvm4w\nodejs;C:\Program Files\nodejs;C:\nvm4w\nodejs;C:\Users\tjn\AppData\Local\Programs\Microsoft VS Code\_\Code.exe;C:\Users\tjn\AppData\Local\Programs\Microsoft VS Code\_\bin;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\Microsoft VS Code Insiders\bin;C:\Program Files\PowerShell\7;C:\Users\tjn\.local\bin;C:\Users\tjn\AppData\Local\Microsoft\WindowsApps;C:\Users\tjn\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\tjn\AppData\Local\GitHubDesktop\bin;C:\Users\tjn\AppData\Local\Programs\Ollama;C:\Users\tjn\AppData\Local\Programs\cursor\resources\app\bin;C:\Program Files\OneCommander;C:\Users\tjn\AppData\Local\nvm;C:\nvm4w\nodejs;C:\Users\tjn\AppData\Roaming\npm;C:\Users\tjn\AppData\Local\Programs\Antigravity\bin;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl'" >> "$SNAPSHOT_FILE"
+  
+
+      # Exit silently on success, only report errors
+      if [ ! -f "$SNAPSHOT_FILE" ]; then
+        echo "Error: Snapshot file was not created at $SNAPSHOT_FILE" >&2
+        exit 1
+      fi
+2025-12-13T19:59:32.149Z [DEBUG] No stdout output captured
+2025-12-13T19:59:32.149Z [DEBUG] No stderr output captured
+2025-12-13T19:59:32.161Z [ERROR] Error: Error: Failed to create shell snapshot: Command failed: C:\Program Files\Git\bin\bash.exe -c -l SNAPSHOT_FILE='C:\Users\tjn\.claude\shell-snapshots\snapshot-bash-1765655971958-lhkejy.sh'
+      # No user config file to source
+
+      # First, create/clear the snapshot file
+      echo "# Snapshot file" >| "$SNAPSHOT_FILE"
+
+      # When this file is sourced, we first unalias to avoid conflicts
+      # This is necessary because aliases get "frozen" inside function definitions at definition time,
+      # which can cause unexpected behavior when functions use commands that conflict with aliases
+      echo "# Unset all aliases to avoid conflicts with functions" >> "$SNAPSHOT_FILE"
+      echo "unalias -a 2>/dev/null || true" >> "$SNAPSHOT_FILE"
+
+      echo "shopt -s expand_aliases" >> "$SNAPSHOT_FILE"
+
+      
+      # Check for rg availability
+      echo "# Check for rg availability" >> "$SNAPSHOT_FILE"
+      echo "if ! command -v rg >/dev/null 2>&1; then" >> "$SNAPSHOT_FILE"
+      echo '  alias rg='"''\''C:\Users\tjn\AppData\Local\nvm\v24.11.0\node_modules\@anthropic-ai\claude-code\vendor\ripgrep\x64-win32\rg.exe'\'''" >> "$SNAPSHOT_FILE"
+      echo "fi" >> "$SNAPSHOT_FILE"
+  
+
+      # Add PATH to the file
+      echo "export PATH='C:\Users\tjn\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\tjn\bin;C:\Program Files\Python312\Scripts;C:\Program Files\Python312;C:\Users\tjn\AppData\Local\Programs\cursor\resources\app\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\ProgramData\chocolatey\bin;C:\Program Files\dotnet;C:\Users\tjn\Desktop\platform-tools_r34.0.5-windows;C:\Users\tjn\AppData\Local\Microsoft\WindowsApps;C:\Users\tjn\AppData\Local\GitHubDesktop\bin;C:\Program Files\PuTTY;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files\Git\cmd;C:\Program Files\PowerToys;C:\Users\tjn\AppData\Local\nvm;C:\nvm4w\nodejs;C:\Program Files\nodejs;C:\nvm4w\nodejs;C:\Users\tjn\AppData\Local\Programs\Microsoft VS Code\_\Code.exe;C:\Users\tjn\AppData\Local\Programs\Microsoft VS Code\_\bin;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\Microsoft VS Code Insiders\bin;C:\Program Files\PowerShell\7;C:\Users\tjn\.local\bin;C:\Users\tjn\AppData\Local\Microsoft\WindowsApps;C:\Users\tjn\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\tjn\AppData\Local\GitHubDesktop\bin;C:\Users\tjn\AppData\Local\Programs\Ollama;C:\Users\tjn\AppData\Local\Programs\cursor\resources\app\bin;C:\Program Files\OneCommander;C:\Users\tjn\AppData\Local\nvm;C:\nvm4w\nodejs;C:\Users\tjn\AppData\Roaming\npm;C:\Users\tjn\AppData\Local\Programs\Antigravity\bin;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl'" >> "$SNAPSHOT_FILE"
+  
+
+      # Exit silently on success, only report errors
+      if [ ! -f "$SNAPSHOT_FILE" ]; then
+        echo "Error: Snapshot file was not created at $SNAPSHOT_FILE" >&2
+        exit 1
+      fi
+    
+
+    at file:///C:/Users/tjn/AppData/Local/nvm/v24.11.0/node_modules/@anthropic-ai/claude-code/cli.js:2418:132
+    at ChildProcess.exithandler (node:child_process:424:5)
+    at ChildProcess.emit (node:events:508:28)
+    at ChildProcess.emit (node:domain:489:12)
+    at maybeClose (node:internal/child_process:1101:16)
+    at Socket.<anonymous> (node:internal/child_process:457:11)
+    at Socket.emit (node:events:508:28)
+    at Socket.emit (node:domain:489:12)
+    at Pipe.<anonymous> (node:net:346:12)
+2025-12-13T19:59:32.321Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude.json.tmp.220.1765655972321
+2025-12-13T19:59:32.321Z [DEBUG] Preserving file permissions: 100666
+2025-12-13T19:59:32.327Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (6.2ms)
+2025-12-13T19:59:32.327Z [DEBUG] Temp file written successfully, size: 2087 bytes
+2025-12-13T19:59:32.327Z [DEBUG] Applied original permissions to temp file
+2025-12-13T19:59:32.327Z [DEBUG] Renaming C:\Users\tjn\.claude.json.tmp.220.1765655972321 to C:\Users\tjn\.claude.json
+2025-12-13T19:59:32.328Z [DEBUG] File C:\Users\tjn\.claude.json written atomically
+2025-12-13T19:59:32.330Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude.json.tmp.220.1765655972330
+2025-12-13T19:59:32.330Z [DEBUG] Preserving file permissions: 100666
+2025-12-13T19:59:32.334Z [DEBUG] Temp file written successfully, size: 2123 bytes
+2025-12-13T19:59:32.334Z [DEBUG] Applied original permissions to temp file
+2025-12-13T19:59:32.334Z [DEBUG] Renaming C:\Users\tjn\.claude.json.tmp.220.1765655972330 to C:\Users\tjn\.claude.json
+2025-12-13T19:59:32.334Z [DEBUG] File C:\Users\tjn\.claude.json written atomically
+2025-12-13T19:59:32.337Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude.json.tmp.220.1765655972337
+2025-12-13T19:59:32.338Z [DEBUG] Preserving file permissions: 100666
+2025-12-13T19:59:32.341Z [DEBUG] Temp file written successfully, size: 2450 bytes
+2025-12-13T19:59:32.342Z [DEBUG] Applied original permissions to temp file
+2025-12-13T19:59:32.342Z [DEBUG] Renaming C:\Users\tjn\.claude.json.tmp.220.1765655972337 to C:\Users\tjn\.claude.json
+2025-12-13T19:59:32.342Z [DEBUG] File C:\Users\tjn\.claude.json written atomically
+2025-12-13T19:59:32.342Z [DEBUG] Passes eligibility cached for org e5d20f5d-79a8-473c-8089-85516545d8a7: true
+2025-12-13T19:59:32.346Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude.json.tmp.220.1765655972346
+2025-12-13T19:59:32.347Z [DEBUG] Preserving file permissions: 100666
+2025-12-13T19:59:32.351Z [DEBUG] Temp file written successfully, size: 2494 bytes
+2025-12-13T19:59:32.351Z [DEBUG] Applied original permissions to temp file
+2025-12-13T19:59:32.351Z [DEBUG] Renaming C:\Users\tjn\.claude.json.tmp.220.1765655972346 to C:\Users\tjn\.claude.json
+2025-12-13T19:59:32.351Z [DEBUG] File C:\Users\tjn\.claude.json written atomically
+2025-12-13T19:59:32.353Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude.json.tmp.220.1765655972353
+2025-12-13T19:59:32.353Z [DEBUG] Preserving file permissions: 100666
+2025-12-13T19:59:32.357Z [DEBUG] Temp file written successfully, size: 2552 bytes
+2025-12-13T19:59:32.357Z [DEBUG] Applied original permissions to temp file
+2025-12-13T19:59:32.357Z [DEBUG] Renaming C:\Users\tjn\.claude.json.tmp.220.1765655972353 to C:\Users\tjn\.claude.json
+2025-12-13T19:59:32.357Z [DEBUG] File C:\Users\tjn\.claude.json written atomically
+2025-12-13T19:59:32.359Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude.json.tmp.220.1765655972359
+2025-12-13T19:59:32.359Z [DEBUG] Preserving file permissions: 100666
+2025-12-13T19:59:32.363Z [DEBUG] Temp file written successfully, size: 2582 bytes
+2025-12-13T19:59:32.363Z [DEBUG] Applied original permissions to temp file
+2025-12-13T19:59:32.363Z [DEBUG] Renaming C:\Users\tjn\.claude.json.tmp.220.1765655972359 to C:\Users\tjn\.claude.json
+2025-12-13T19:59:32.363Z [DEBUG] File C:\Users\tjn\.claude.json written atomically
+2025-12-13T19:59:32.366Z [DEBUG] Passes: Using fresh cached eligibility data
+2025-12-13T19:59:32.392Z [DEBUG] MCP server "sequential-thinking": Starting connection with timeout of 30000ms
+2025-12-13T19:59:32.413Z [DEBUG] MCP server "playwright": Starting connection with timeout of 30000ms
+2025-12-13T19:59:32.428Z [DEBUG] MCP server "memory": Starting connection with timeout of 30000ms
+2025-12-13T19:59:32.463Z [DEBUG] MCP server "memory": Connection failed after 36ms: MCP error -32000: Connection closed
+2025-12-13T19:59:32.463Z [ERROR] MCP server "memory" Connection failed: MCP error -32000: Connection closed
+2025-12-13T19:59:32.465Z [DEBUG] MCP server "playwright": Connection failed after 55ms: MCP error -32000: Connection closed
+2025-12-13T19:59:32.465Z [ERROR] MCP server "playwright" Connection failed: MCP error -32000: Connection closed
+2025-12-13T19:59:32.467Z [DEBUG] MCP server "sequential-thinking": Connection failed after 97ms: MCP error -32000: Connection closed
+2025-12-13T19:59:32.467Z [ERROR] MCP server "sequential-thinking" Connection failed: MCP error -32000: Connection closed
+2025-12-13T19:59:32.469Z [DEBUG] MCP server "filesystem": Starting connection with timeout of 30000ms
+2025-12-13T19:59:32.485Z [DEBUG] MCP server "sqlite": Starting connection with timeout of 30000ms
+2025-12-13T19:59:32.515Z [DEBUG] Getting matching hook commands for SubagentStart with query: Explore
+2025-12-13T19:59:32.515Z [DEBUG] Found 0 hook matchers in settings
+2025-12-13T19:59:32.515Z [DEBUG] Matched 0 unique hooks for query "Explore" (0 before deduplication)
+2025-12-13T19:59:32.521Z [DEBUG] Getting matching hook commands for SubagentStart with query: Plan
+2025-12-13T19:59:32.521Z [DEBUG] Found 0 hook matchers in settings
+2025-12-13T19:59:32.521Z [DEBUG] Matched 0 unique hooks for query "Plan" (0 before deduplication)
+2025-12-13T19:59:32.525Z [INFO] SSH not configured for GitHub, using HTTPS for anthropics/claude-plugins-official
+2025-12-13T19:59:32.529Z [DEBUG] MCP server "filesystem": Connection failed after 61ms: MCP error -32000: Connection closed
+2025-12-13T19:59:32.529Z [ERROR] MCP server "filesystem" Connection failed: MCP error -32000: Connection closed
+2025-12-13T19:59:32.532Z [DEBUG] MCP server "sqlite": Connection failed after 47ms: MCP error -32000: Connection closed
+2025-12-13T19:59:32.532Z [ERROR] MCP server "sqlite" Connection failed: MCP error -32000: Connection closed
+2025-12-13T19:59:32.540Z [DEBUG] All plugins already exist, skipping migration
+2025-12-13T19:59:32.540Z [DEBUG] Initialized versioned plugins system with 12 plugins
+2025-12-13T19:59:32.550Z [DEBUG] Skill prompt: showing "frontend-design:frontend-design" (userFacingName="frontend-design")
+2025-12-13T19:59:32.550Z [DEBUG] Skill prompt: showing "document-skills:xlsx" (userFacingName="xlsx")
+2025-12-13T19:59:32.550Z [DEBUG] Skill prompt: showing "document-skills:docx" (userFacingName="docx")
+2025-12-13T19:59:32.550Z [DEBUG] Skill prompt: showing "document-skills:pptx" (userFacingName="pptx")
+2025-12-13T19:59:32.550Z [DEBUG] Skill prompt: showing "document-skills:pdf" (userFacingName="pdf")
+2025-12-13T19:59:32.550Z [DEBUG] Skill prompt: showing "example-skills:algorithmic-art" (userFacingName="algorithmic-art")
+2025-12-13T19:59:32.550Z [DEBUG] Skill prompt: showing "example-skills:artifacts-builder" (userFacingName="artifacts-builder")
+2025-12-13T19:59:32.550Z [DEBUG] Skill prompt: showing "example-skills:brand-guidelines" (userFacingName="brand-guidelines")
+2025-12-13T19:59:32.550Z [DEBUG] Skill prompt: showing "example-skills:canvas-design" (userFacingName="canvas-design")
+2025-12-13T19:59:32.550Z [DEBUG] Skill prompt: showing "example-skills:frontend-design" (userFacingName="frontend-design")
+2025-12-13T19:59:32.550Z [DEBUG] Skill prompt: showing "example-skills:internal-comms" (userFacingName="internal-comms")
+2025-12-13T19:59:32.550Z [DEBUG] Skill prompt: showing "example-skills:mcp-builder" (userFacingName="mcp-builder")
+2025-12-13T19:59:32.550Z [DEBUG] Skill prompt: showing "example-skills:skill-creator" (userFacingName="skill-creator")
+2025-12-13T19:59:32.550Z [DEBUG] Skills and commands included in Skill tool: codebase-documenter, example-fullstack-code-reviewer, example-fullstack-design-system, example-fullstack-feature-developer, example-fullstack-ux-designer, example-react-app-code-reviewer, example-react-app-design-system, example-react-app-feature-developer, example-react-app-ux-designer, example-static-site-code-reviewer, example-static-site-design-system, example-static-site-feature-developer, example-static-site-ux-designer, frontend-enhancer, generic-code-reviewer, generic-design-system, generic-feature-developer, generic-ux-designer, tech-debt-analyzer, test-specialist, frontend-design, xlsx, docx, pptx, pdf, algorithmic-art, artifacts-builder, brand-guidelines, canvas-design, frontend-design, internal-comms, mcp-builder
+2025-12-13T19:59:32.551Z [DEBUG] Skill prompt: showing "frontend-design:frontend-design" (userFacingName="frontend-design")
+2025-12-13T19:59:32.551Z [DEBUG] Skill prompt: showing "document-skills:xlsx" (userFacingName="xlsx")
+2025-12-13T19:59:32.551Z [DEBUG] Skill prompt: showing "document-skills:docx" (userFacingName="docx")
+2025-12-13T19:59:32.551Z [DEBUG] Skill prompt: showing "document-skills:pptx" (userFacingName="pptx")
+2025-12-13T19:59:32.551Z [DEBUG] Skill prompt: showing "document-skills:pdf" (userFacingName="pdf")
+2025-12-13T19:59:32.551Z [DEBUG] Skill prompt: showing "example-skills:algorithmic-art" (userFacingName="algorithmic-art")
+2025-12-13T19:59:32.551Z [DEBUG] Skill prompt: showing "example-skills:artifacts-builder" (userFacingName="artifacts-builder")
+2025-12-13T19:59:32.551Z [DEBUG] Skill prompt: showing "example-skills:brand-guidelines" (userFacingName="brand-guidelines")
+2025-12-13T19:59:32.551Z [DEBUG] Skill prompt: showing "example-skills:canvas-design" (userFacingName="canvas-design")
+2025-12-13T19:59:32.551Z [DEBUG] Skill prompt: showing "example-skills:frontend-design" (userFacingName="frontend-design")
+2025-12-13T19:59:32.551Z [DEBUG] Skill prompt: showing "example-skills:internal-comms" (userFacingName="internal-comms")
+2025-12-13T19:59:32.551Z [DEBUG] Skill prompt: showing "example-skills:mcp-builder" (userFacingName="mcp-builder")
+2025-12-13T19:59:32.551Z [DEBUG] Slash commands included in SlashCommand tool: /agent-sdk-dev:new-sdk-app, /pr-review-toolkit:review-pr, /commit-commands:clean_gone, /commit-commands:commit-push-pr, /commit-commands:commit, /feature-dev:feature-dev, /code-review:code-review, /taches-cc-resources:add-to-todos, /taches-cc-resources:audit-skill, /taches-cc-resources:audit-slash-command, /taches-cc-resources:audit-subagent, /taches-cc-resources:check-todos, /taches-cc-resources:create-agent-skill, /taches-cc-resources:create-hook, /taches-cc-resources:create-meta-prompt, /taches-cc-resources:create-plan, /taches-cc-resources:create-prompt, /taches-cc-resources:create-slash-command, /taches-cc-resources:create-subagent, /taches-cc-resources:debug, /taches-cc-resources:heal-skill, /taches-cc-resources:run-plan, /run-prompt, /whats-next, /taches-cc-resources:\consider:10-10-10, /taches-cc-resources:\consider:5-whys, /taches-cc-resources:\consider:eisenhower-matrix, /taches-cc-resources:\consider:first-principles, /taches-cc-resources:\consider:inversion, /taches-cc-resources:\consider:occams-razor, /taches-cc-resources:\consider:one-thing, /taches-cc-resources:\consider:opportunity-cost, /taches-cc-resources:\consider:pareto, /taches-cc-resources:\consider:second-order, /taches-cc-resources:\consider:swot, /taches-cc-resources:\consider:via-negativa
+2025-12-13T19:59:32.608Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude.json.tmp.220.1765655972608
+2025-12-13T19:59:32.608Z [DEBUG] Preserving file permissions: 100666
+2025-12-13T19:59:32.613Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (5.4ms)
+2025-12-13T19:59:32.613Z [DEBUG] Temp file written successfully, size: 2758 bytes
+2025-12-13T19:59:32.613Z [DEBUG] Applied original permissions to temp file
+2025-12-13T19:59:32.613Z [DEBUG] Renaming C:\Users\tjn\.claude.json.tmp.220.1765655972608 to C:\Users\tjn\.claude.json
+2025-12-13T19:59:32.613Z [DEBUG] File C:\Users\tjn\.claude.json written atomically
+2025-12-13T19:59:32.669Z [DEBUG] Successfully refreshed marketplace: taches-cc-resources
+2025-12-13T19:59:32.669Z [DEBUG] Successfully auto-updated marketplace "taches-cc-resources"
+2025-12-13T19:59:32.919Z [DEBUG] Getting matching hook commands for SessionStart with query: startup
+2025-12-13T19:59:32.919Z [DEBUG] Found 0 hook matchers in settings
+2025-12-13T19:59:32.919Z [DEBUG] Matched 0 unique hooks for query "startup" (0 before deduplication)
+2025-12-13T19:59:32.930Z [DEBUG] Total plugin output styles loaded: 0
+2025-12-13T19:59:32.989Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-13T19:59:32.989Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-13T19:59:32.989Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-13T19:59:32.989Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-13T19:59:32.992Z [DEBUG] Getting matching hook commands for UserPromptSubmit with query: undefined
+2025-12-13T19:59:32.992Z [DEBUG] Found 0 hook matchers in settings
+2025-12-13T19:59:32.992Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-13T19:59:33.014Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (7.5ms)
+2025-12-13T19:59:33.014Z [DEBUG] Successfully refreshed marketplace: claude-code-plugins
+2025-12-13T19:59:33.014Z [DEBUG] Successfully auto-updated marketplace "claude-code-plugins"
+2025-12-13T19:59:33.319Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (13.5ms)
+2025-12-13T19:59:33.319Z [DEBUG] Added marketplace source: claude-plugins-official
+2025-12-13T19:59:33.319Z [DEBUG] Successfully auto-installed official marketplace
+2025-12-13T19:59:33.320Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude.json.tmp.220.1765655973320
+2025-12-13T19:59:33.320Z [DEBUG] Preserving file permissions: 100666
+2025-12-13T19:59:33.324Z [DEBUG] Temp file written successfully, size: 2853 bytes
+2025-12-13T19:59:33.324Z [DEBUG] Applied original permissions to temp file
+2025-12-13T19:59:33.324Z [DEBUG] Renaming C:\Users\tjn\.claude.json.tmp.220.1765655973320 to C:\Users\tjn\.claude.json
+2025-12-13T19:59:33.324Z [DEBUG] File C:\Users\tjn\.claude.json written atomically
+2025-12-13T19:59:33.395Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (5.9ms)
+2025-12-13T19:59:33.395Z [DEBUG] Successfully refreshed marketplace: anthropic-agent-skills
+2025-12-13T19:59:33.395Z [DEBUG] Successfully auto-updated marketplace "anthropic-agent-skills"
+2025-12-13T19:59:33.432Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:59:34.815Z [DEBUG] Getting matching hook commands for SubagentStop with query: undefined
+2025-12-13T19:59:34.815Z [DEBUG] Found 0 hook matchers in settings
+2025-12-13T19:59:34.815Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-13T19:59:35.014Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:59:36.491Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:59:37.551Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-13T19:59:37.552Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-13T19:59:37.552Z [DEBUG] Found 1 hook matchers in settings
+2025-12-13T19:59:37.552Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-13T19:59:37.578Z [DEBUG] tree-sitter: loaded from disk
+2025-12-13T19:59:37.596Z [ERROR] Error: Error: Command failed: cygpath -u 'C:\Users\tjn\AppData\Local\Temp'
+    at genericNodeError (node:internal/errors:985:15)
+    at wrappedFn (node:internal/errors:539:14)
+    at checkExecSyncError (node:child_process:925:11)
+    at execSync (node:child_process:997:15)
+    at hj (file:///C:/Users/tjn/AppData/Local/nvm/v24.11.0/node_modules/@anthropic-ai/claude-code/cli.js:76:408)
+    at f61 (file:///C:/Users/tjn/AppData/Local/nvm/v24.11.0/node_modules/@anthropic-ai/claude-code/cli.js:2418:3139)
+    at async hY5 (file:///C:/Users/tjn/AppData/Local/nvm/v24.11.0/node_modules/@anthropic-ai/claude-code/cli.js:3179:19714)
+    at async Object.call (file:///C:/Users/tjn/AppData/Local/nvm/v24.11.0/node_modules/@anthropic-ai/claude-code/cli.js:3198:287)
+    at async GF8 (file:///C:/Users/tjn/AppData/Local/nvm/v24.11.0/node_modules/@anthropic-ai/claude-code/cli.js:1780:17096)
+2025-12-13T19:59:37.598Z [DEBUG] Getting matching hook commands for PostToolUseFailure with query: Bash
+2025-12-13T19:59:37.598Z [DEBUG] Found 0 hook matchers in settings
+2025-12-13T19:59:37.598Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-13T19:59:37.608Z [DEBUG] Getting matching hook commands for SubagentStop with query: undefined
+2025-12-13T19:59:37.608Z [DEBUG] Found 0 hook matchers in settings
+2025-12-13T19:59:37.608Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-13T19:59:37.630Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-13T19:59:37.630Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-13T19:59:37.630Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-13T19:59:37.630Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-13T19:59:40.100Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:59:41.130Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-13T19:59:41.131Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-13T19:59:41.131Z [DEBUG] Found 1 hook matchers in settings
+2025-12-13T19:59:41.131Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-13T19:59:42.514Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:59:42.747Z [ERROR] Error: Error: Command failed: cygpath -u 'C:\Users\tjn\AppData\Local\Temp'
+    at genericNodeError (node:internal/errors:985:15)
+    at wrappedFn (node:internal/errors:539:14)
+    at checkExecSyncError (node:child_process:925:11)
+    at execSync (node:child_process:997:15)
+    at hj (file:///C:/Users/tjn/AppData/Local/nvm/v24.11.0/node_modules/@anthropic-ai/claude-code/cli.js:76:408)
+    at f61 (file:///C:/Users/tjn/AppData/Local/nvm/v24.11.0/node_modules/@anthropic-ai/claude-code/cli.js:2418:3139)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async hY5 (file:///C:/Users/tjn/AppData/Local/nvm/v24.11.0/node_modules/@anthropic-ai/claude-code/cli.js:3179:19714)
+    at async Object.call (file:///C:/Users/tjn/AppData/Local/nvm/v24.11.0/node_modules/@anthropic-ai/claude-code/cli.js:3198:287)
+    at async GF8 (file:///C:/Users/tjn/AppData/Local/nvm/v24.11.0/node_modules/@anthropic-ai/claude-code/cli.js:1780:17096)
+2025-12-13T19:59:42.748Z [DEBUG] Getting matching hook commands for PostToolUseFailure with query: Bash
+2025-12-13T19:59:42.748Z [DEBUG] Found 0 hook matchers in settings
+2025-12-13T19:59:42.748Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-13T19:59:42.779Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-13T19:59:42.779Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-13T19:59:42.779Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-13T19:59:42.779Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-13T19:59:45.437Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:59:46.698Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-13T19:59:46.699Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-13T19:59:46.699Z [DEBUG] Found 1 hook matchers in settings
+2025-12-13T19:59:46.699Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-13T19:59:46.706Z [ERROR] Error: Error: Command failed: cygpath -u 'C:\Users\tjn\AppData\Local\Temp'
+    at genericNodeError (node:internal/errors:985:15)
+    at wrappedFn (node:internal/errors:539:14)
+    at checkExecSyncError (node:child_process:925:11)
+    at execSync (node:child_process:997:15)
+    at hj (file:///C:/Users/tjn/AppData/Local/nvm/v24.11.0/node_modules/@anthropic-ai/claude-code/cli.js:76:408)
+    at f61 (file:///C:/Users/tjn/AppData/Local/nvm/v24.11.0/node_modules/@anthropic-ai/claude-code/cli.js:2418:3139)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async hY5 (file:///C:/Users/tjn/AppData/Local/nvm/v24.11.0/node_modules/@anthropic-ai/claude-code/cli.js:3179:19714)
+    at async Object.call (file:///C:/Users/tjn/AppData/Local/nvm/v24.11.0/node_modules/@anthropic-ai/claude-code/cli.js:3198:287)
+    at async GF8 (file:///C:/Users/tjn/AppData/Local/nvm/v24.11.0/node_modules/@anthropic-ai/claude-code/cli.js:1780:17096)
+2025-12-13T19:59:46.707Z [DEBUG] Getting matching hook commands for PostToolUseFailure with query: Bash
+2025-12-13T19:59:46.707Z [DEBUG] Found 0 hook matchers in settings
+2025-12-13T19:59:46.707Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-13T19:59:46.739Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-13T19:59:46.739Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-13T19:59:46.739Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-13T19:59:46.739Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-13T19:59:49.045Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:59:49.558Z [DEBUG] executePreToolHooks called for tool: Bash
+2025-12-13T19:59:49.558Z [DEBUG] Getting matching hook commands for PreToolUse with query: Bash
+2025-12-13T19:59:49.558Z [DEBUG] Found 1 hook matchers in settings
+2025-12-13T19:59:49.558Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-13T19:59:51.469Z [DEBUG] Stream started - received first chunk
+2025-12-13T19:59:52.132Z [ERROR] Error: Error: Command failed: cygpath -u 'C:\Users\tjn\AppData\Local\Temp'
+    at genericNodeError (node:internal/errors:985:15)
+    at wrappedFn (node:internal/errors:539:14)
+    at checkExecSyncError (node:child_process:925:11)
+    at execSync (node:child_process:997:15)
+    at hj (file:///C:/Users/tjn/AppData/Local/nvm/v24.11.0/node_modules/@anthropic-ai/claude-code/cli.js:76:408)
+    at f61 (file:///C:/Users/tjn/AppData/Local/nvm/v24.11.0/node_modules/@anthropic-ai/claude-code/cli.js:2418:3139)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async hY5 (file:///C:/Users/tjn/AppData/Local/nvm/v24.11.0/node_modules/@anthropic-ai/claude-code/cli.js:3179:19714)
+    at async Object.call (file:///C:/Users/tjn/AppData/Local/nvm/v24.11.0/node_modules/@anthropic-ai/claude-code/cli.js:3198:287)
+    at async GF8 (file:///C:/Users/tjn/AppData/Local/nvm/v24.11.0/node_modules/@anthropic-ai/claude-code/cli.js:1780:17096)
+2025-12-13T19:59:52.133Z [DEBUG] Getting matching hook commands for PostToolUseFailure with query: Bash
+2025-12-13T19:59:52.133Z [DEBUG] Found 0 hook matchers in settings
+2025-12-13T19:59:52.133Z [DEBUG] Matched 0 unique hooks for query "Bash" (0 before deduplication)
+2025-12-13T19:59:52.164Z [DEBUG] LSP Diagnostics: getLSPDiagnosticAttachments called
+2025-12-13T19:59:52.164Z [DEBUG] LSP Diagnostics: Checking registry - 0 pending
+2025-12-13T19:59:52.164Z [DEBUG] Hooks: Found 0 total hooks in registry
+2025-12-13T19:59:52.164Z [DEBUG] Hooks: checkForNewResponses returning 0 responses
+2025-12-13T19:59:54.683Z [DEBUG] Stream started - received first chunk
+2025-12-13T20:00:00.198Z [DEBUG] Getting matching hook commands for Stop with query: undefined
+2025-12-13T20:00:00.198Z [DEBUG] Found 0 hook matchers in settings
+2025-12-13T20:00:00.198Z [DEBUG] Matched 0 unique hooks for query "no match query" (0 before deduplication)
+2025-12-13T20:00:00.199Z [DEBUG] Getting matching hook commands for SessionEnd with query: other
+2025-12-13T20:00:00.199Z [DEBUG] Found 0 hook matchers in settings
+2025-12-13T20:00:00.199Z [DEBUG] Matched 0 unique hooks for query "other" (0 before deduplication)

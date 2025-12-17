@@ -1,0 +1,92 @@
+# Task: Platform Polish - Replace Browser Dialogs
+
+**Created:** December 14, 2025
+**Status:** In Progress
+**Estimated:** 2-3 hours
+
+## Overview
+Replace all `alert()` and `confirm()` browser dialogs with the proper toast notification system and ConfirmDialog component.
+
+## Requirements
+- Replace `alert()` calls with `toast.success()`, `toast.error()`, or `toast.warning()` as appropriate
+- Replace `confirm()` calls with `ConfirmDialog` component pattern
+- Maintain all existing functionality
+- Preserve error messages and user feedback
+
+## Files to Update (17 total)
+
+### Group 1: Simple alert() → toast replacements
+- [ ] `src/components/ProviderSettings.tsx` (5 alerts)
+- [ ] `src/components/FormBuilder/FieldEditor.tsx`
+- [ ] `src/components/FormBuilder/DependentValidationEditor.tsx`
+- [ ] `src/components/FormBuilder/ConditionalRuleEditor.tsx`
+- [ ] `src/widgets/NotesEditor.tsx`
+- [ ] `src/components/InvoiceBuilder.tsx`
+- [ ] `src/widgets/Automations/RuleBuilder.tsx`
+- [ ] `src/components/BulkActionsBar.tsx` (error only)
+
+### Group 2: confirm() → ConfirmDialog pattern
+- [ ] `src/pages/FormResponses.tsx`
+- [ ] `src/pages/FormBuilder.tsx`
+- [ ] `src/components/TimeEntryList.tsx`
+- [ ] `src/components/WidgetManager.tsx`
+- [ ] `src/components/PresetManager.tsx`
+- [ ] `src/components/MemberSettings.tsx`
+- [ ] `src/widgets/Kanban/CardDetailPanel.tsx`
+- [ ] `src/components/CustomFieldsSettings.tsx`
+
+### Skip
+- [ ] `src/components/ConfirmDialog.tsx` - Internal fallback, keep as-is
+
+## Implementation Pattern
+
+### For alert() → toast:
+```tsx
+// Before
+alert('Task created');
+
+// After
+import { toast } from '../stores/useToastStore';
+toast.success('Task created');
+
+// For errors
+toast.error('Failed to save', 'Please try again');
+
+// For validation
+toast.warning('Please enter a value');
+```
+
+### For confirm() → ConfirmDialog:
+```tsx
+// Before
+if (confirm('Delete this item?')) { deleteItem(); }
+
+// After
+const [itemToDelete, setItemToDelete] = useState<Item | null>(null);
+
+// Trigger:
+setItemToDelete(item);
+
+// In render:
+<ConfirmDialog
+  isOpen={!!itemToDelete}
+  onClose={() => setItemToDelete(null)}
+  onConfirm={() => { deleteItem(itemToDelete.id); setItemToDelete(null); }}
+  title="Delete Item"
+  message="Are you sure you want to delete this item?"
+  confirmLabel="Delete"
+  variant="danger"
+/>
+```
+
+## Verification
+- [ ] `npm run test` passes
+- [ ] `npm run type-check` passes
+- [ ] `npm run build` succeeds
+- [ ] No `alert()` or `confirm()` calls remain (except ConfirmDialog.tsx fallback)
+
+## Key Decisions
+- Use `toast.error()` for failures with descriptions
+- Use `toast.success()` for validation success messages
+- Use `toast.warning()` for empty field validation
+- Use `variant="danger"` for destructive ConfirmDialogs

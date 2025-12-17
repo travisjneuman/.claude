@@ -1,0 +1,100 @@
+# Task: Optimize CLAUDE.md File Hierarchy
+
+## Overview
+Review, optimize, and properly organize all CLAUDE.md files throughout the codebase. This establishes a clean hierarchical structure where the root CLAUDE.md contains global rules/identity while folder-specific files contain domain-specific guidance.
+
+## Problem Statement
+Multiple CLAUDE.md files were created with temporary names (e.g., `src_hooks_CLAUDE.md`) and need to be:
+1. Reviewed for accuracy and usefulness
+2. Optimized for token efficiency
+3. Renamed to standard `CLAUDE.md` naming
+4. Integrated into a coherent hierarchy
+
+## Todo Checklist
+- [x] Compare root files, delete duplicate (`root_CLAUDE.md` was identical, deleted)
+- [x] Review + rename hooks CLAUDE.md
+- [x] Review + rename pages CLAUDE.md
+- [x] Review + rename services CLAUDE.md
+- [x] Review + rename stores CLAUDE.md
+- [x] Review + rename widgets CLAUDE.md
+- [x] Review + rename tests CLAUDE.md
+- [x] Analyze for additional CLAUDE.md candidates (added `src/components/CLAUDE.md`)
+- [x] Optimize root CLAUDE.md (added folder reference table + updated anti-patterns)
+
+---
+
+## Review Section
+
+### Summary of Changes
+
+**Files Deleted:**
+- `root_CLAUDE.md` — Identical duplicate of root CLAUDE.md
+
+**Files Renamed & Optimized:**
+| Original | New Location | Key Improvements |
+|----------|--------------|------------------|
+| `src/hooks/src_hooks_CLAUDE.md` | `src/hooks/CLAUDE.md` | Added hooks inventory table, fixed broken reference to `CLAUDE_stores.md`, condensed |
+| `src/pages/src_pages_CLAUDE.md` | `src/pages/CLAUDE.md` | Removed Next.js/SSR references (we use Vite), added pages inventory, fixed patterns |
+| `src/services/src_services_CLAUDE.md` | `src/services/CLAUDE.md` | Added comprehensive services inventory, condensed examples, fixed reference to tests |
+| `src/stores/src_stores_CLAUDE.md` | `src/stores/CLAUDE.md` | Added complete stores inventory (20+ stores), emphasized date key invariant |
+| `src/widgets/src_widgets_CLAUDE.md` | `src/widgets/CLAUDE.md` | Fixed title (was in wrong subfolder), added widget categories with all ~50 widgets |
+| `tests/tests_CLAUDE.md` | `tests/CLAUDE.md` | Noted Playwright config pending, added test commands, updated patterns |
+
+**Files Created:**
+- `src/components/CLAUDE.md` — New file for the large components folder (60+ files)
+
+**Root CLAUDE.md Updates:**
+1. Added "Folder-specific CLAUDE.md files" section with table of all folder files
+2. Added explicit instruction to always read folder CLAUDE.md when working in that area
+3. Condensed "Repo map" section to be more concise
+4. Fixed anti-pattern wording: "Ignoring folder-specific CLAUDE.md files"
+
+### Key Design Decisions
+
+1. **Inventory Tables:** Each folder CLAUDE.md now has a table showing what files exist. This helps me quickly understand what's available without searching.
+
+2. **Token Efficiency:** Files average ~60-80 lines (down from ~80-100 original). Removed verbose explanations, kept essential patterns and anti-patterns.
+
+3. **Cross-References:** Each file references related folder CLAUDE.md files (e.g., stores references services, widgets references stores).
+
+4. **Accuracy Fixes:**
+   - Pages: Removed Next.js/SSR content (project uses Vite + React Router)
+   - Tests: Noted Playwright config is pending (dep installed but no config)
+   - Services: Fixed reference from `CLAUDE_tests.md` to `tests/CLAUDE.md`
+
+5. **Additional Folder Analysis:**
+   - `src/components/` — Added (large folder with 60+ files)
+   - `src/types/` — Not needed (3 simple files)
+   - `src/utils/` — Not needed (11 pure utility files)
+   - `docs/` — Not needed (documentation, not code)
+   - `.claude/` — Not needed (config files)
+
+### How This Architecture Works
+
+**Root CLAUDE.md** contains:
+- Identity/personality
+- Non-negotiable rules (P0)
+- Session protocol
+- Workflow process
+- Stack constraints
+- Performance budgets
+- Critical invariants
+- Git conventions
+- Anti-patterns
+
+**Folder CLAUDE.md files** contain:
+- Scope/purpose of that folder
+- Inventory of existing files
+- Domain-specific non-negotiables
+- Code patterns/examples
+- Anti-patterns specific to that domain
+- Cross-references to related folders
+
+### Verification
+- All files renamed correctly
+- All files contain accurate, up-to-date information
+- Root CLAUDE.md properly references all folder files
+- No broken references in any file
+
+### Tests Run
+None required — documentation changes only.

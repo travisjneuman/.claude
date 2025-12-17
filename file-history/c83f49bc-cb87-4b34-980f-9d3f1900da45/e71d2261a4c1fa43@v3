@@ -1,0 +1,104 @@
+# Task: Time Tracking Panel UX Improvements
+
+**Created:** 2026-01-22
+**Completed:** 2026-01-22
+**Status:** Complete ✅
+**Priority:** P2 (UX Polish)
+**Complexity:** Low
+**Estimated Effort:** 30 minutes
+**Actual Effort:** 25 minutes
+
+---
+
+## Context
+
+User feedback on Phase 1 implementation requested two UX improvements:
+1. Allow users to drag the panel to resize it (expand up to show more history, shrink down to show less)
+2. Make the visual separator under "View All" button more prominent to distinguish panel from Settings section
+
+---
+
+## Implementation
+
+### Changes Made
+
+**File:** `src/components/TimeTrackingPanel.tsx`
+
+#### 1. Resizable Drag Handle ✅
+- [x] Added drag handle UI at top of panel (subtle horizontal line)
+- [x] Implemented mouse event listeners (onMouseDown, onMouseMove, onMouseUp)
+- [x] Used refs for drag state to avoid stale closures
+- [x] More responsive calculation: 5px mouse movement = 1% height change
+- [x] Min/max constraints: 15% minimum, 60% maximum of sidebar height
+- [x] Cursor changes to `ns-resize` on hover
+- [x] Height persists to `useTimeTrackingPanelStore` during drag
+
+#### 2. Stronger Visual Separator ✅
+- [x] Changed border from `border-t` to `border-t-2` (thicker)
+- [x] Added opacity: `border-light-divider/60 dark:border-dark-divider/60`
+- [x] Added subtle shadow: `shadow-sm`
+- [x] Increased padding: `py-2` → `py-3`
+
+---
+
+## Testing Results
+
+✅ **All features tested via browser MCP:**
+- Drag handle visible at top of panel
+- Drag up expands panel to show more entries
+- Drag down shrinks panel to show fewer entries
+- Height persists across page reloads
+- Visual separator clearly distinguishes panel from Settings
+- TypeScript type check: PASSED
+- No runtime errors
+
+---
+
+## Technical Details
+
+**Drag Implementation:**
+- Used `useRef` for `dragStartYRef` and `dragStartHeightRef` to avoid stale closures in event handlers
+- Wrapped handlers in `useRef(...).current` to maintain stable references
+- Attached global `mousemove` and `mouseup` listeners when dragging starts
+- Cleaned up listeners on drag end or component unmount
+
+**Calculation:**
+```typescript
+const deltaY = dragStartYRef.current - e.clientY;
+const heightChange = deltaY / 5; // 5px = 1% height
+const newHeight = Math.max(15, Math.min(60, dragStartHeightRef.current + heightChange));
+```
+
+---
+
+## Files Changed
+
+- `src/components/TimeTrackingPanel.tsx` - Added drag handle, improved separator
+
+**Lines Added:** ~40
+**Lines Modified:** ~10
+
+---
+
+## Review
+
+**What Went Well:**
+- Quick implementation (25 minutes vs 30 estimated)
+- Drag feels responsive and natural
+- Visual separator clearly improves UX
+- No TypeScript errors, clean implementation
+
+**Lessons Learned:**
+- Using `useRef` for values accessed in event handlers prevents stale closure bugs
+- `useRef(...).current` pattern keeps event handler references stable
+- Small UX polish like this significantly improves perceived quality
+
+**Future Improvements:**
+- Could add snap points (e.g., 20%, 30%, 40% heights)
+- Could add double-click on handle to reset to default height
+- Could add visual feedback during drag (e.g., highlight expanding/shrinking)
+
+---
+
+**Document Status:** ✅ Complete
+**Last Updated:** 2026-01-22

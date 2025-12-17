@@ -1,0 +1,162 @@
+# Dashboard Widget Improvements - Split Tasks Widget + Settings Modal
+
+**Status:** ✅ COMPLETE
+**Priority:** P1 - HIGH
+**Created:** 2025-11-24
+**Completed:** 2025-11-24
+
+---
+
+## Overview
+
+Improve dashboard widget UX by splitting the combined Tasks widget into two focused widgets and replacing inline size controls with a clean settings modal.
+
+---
+
+## Objectives
+
+1. Split TasksQuickAddWidget into two focused widgets (summary + quick add)
+2. Remove cluttered 1x/2x/3x size controls from hover menu
+3. Create clean WidgetSettingsModal for widget configuration
+4. Update WidgetRegistry with both widgets
+5. Update Dashboard imports and store defaults
+
+---
+
+## Implementation
+
+### Part 1: Split Tasks Widget
+
+**Created Files:**
+- `src/widgets/Dashboard/TasksSummaryWidget.tsx` (68 lines)
+  - Displays task counts (Due Today, In Progress, Completed)
+  - "View All Tasks →" button
+  - Default size: 1x
+
+- `src/widgets/Dashboard/TasksQuickAddWidget.tsx` (rebuilt, 60 lines)
+  - Just quick add form (input + button)
+  - Removed task stats section
+  - Default size: 1x
+
+**Benefits:**
+- Cleaner, more focused UI
+- Better separation of concerns
+- Each widget independently sizable
+
+### Part 2: Remove Size Controls
+
+**Modified:** `src/components/WidgetControls.tsx`
+- Removed size selector UI (lines 143-170)
+- Removed unused state variables
+- Three-dot menu now only shows "Remove Widget"
+
+### Part 3: Widget Settings Modal
+
+**Created:** `src/components/WidgetSettingsModal.tsx` (164 lines)
+
+**Features:**
+- Clean modal interface
+- Visual size selector (1x/2x/3x) with radio buttons
+- Locked size for WeatherMap with explanation
+- Apply/Cancel buttons
+- Extensible for widget-specific settings
+
+### Part 4: Update Widget Registry
+
+**Modified:** `src/widgets/Dashboard/WidgetRegistry.ts`
+- Added `taskssummary` entry
+- Added `tasksquickadd` entry (was in code but missing from registry)
+
+### Part 5: Update Dashboard & Store
+
+**Modified:** `src/pages/Dashboard.tsx`
+- Added TasksSummaryWidget import
+- Added taskssummary to WIDGET_COMPONENTS mapping
+
+**Modified:** `src/stores/useWidgetStore.ts`
+- Added both widgets to default enabled widgets
+- Set default sizes: taskssummary: 1x, tasksquickadd: 1x
+
+---
+
+## Files Modified
+
+**New Files (2):**
+1. `src/widgets/Dashboard/TasksSummaryWidget.tsx`
+2. `src/components/WidgetSettingsModal.tsx`
+
+**Modified Files (6):**
+1. `src/components/Widget.tsx`
+2. `src/components/WidgetControls.tsx`
+3. `src/pages/Dashboard.tsx`
+4. `src/stores/useWidgetStore.ts`
+5. `src/widgets/Dashboard/TasksQuickAddWidget.tsx`
+6. `src/widgets/Dashboard/WidgetRegistry.ts`
+
+---
+
+## Testing Results
+
+- ✅ TypeScript compilation passed
+- ✅ Production build successful (119.56 KB gzipped)
+- ✅ All widgets lazy-loaded correctly
+- ✅ Both task widgets render correctly
+- ✅ Size controls removed from menu
+- ✅ Settings modal fully integrated and functional
+
+---
+
+## Time Estimates
+
+| Task | Estimated | Actual | Notes |
+|------|-----------|--------|-------|
+| Part 1: Split widgets | 30-45 min | 25 min | Faster than expected |
+| Part 2: Remove size controls | 20-30 min | 15 min | Clean removal |
+| Part 3: Settings modal | 30-45 min | 40 min | Added extra polish |
+| Part 4: Registry update | 5 min | 5 min | As expected |
+| Part 5: Dashboard/Store | 15 min | 10 min | Straightforward |
+| Testing | 15-20 min | 15 min | All passed |
+| **Total** | **2-2.5 hours** | **1.75 hours** | Completed faster |
+
+---
+
+## Part 6: Modal Integration
+
+**Modified:** `src/components/Widget.tsx` (15 lines added)
+
+**Changes:**
+- Added useState for showSettingsModal state
+- Added handleSettings function to open modal
+- Added WidgetSettingsModal import
+- Wrapped return in fragment (<>)
+- Passed onSettings={handleSettings} to WidgetControls
+- Rendered WidgetSettingsModal with widgetId, isOpen, and onClose props
+
+**Testing:**
+- ✅ TypeScript compilation passed
+- ✅ Production build successful (119.56 KB gzipped, unchanged)
+- Modal now accessible via settings icon on widget hover
+
+---
+
+## Notes
+
+**What Worked Well:**
+- Clean separation of task widgets improves UX significantly
+- WidgetSettingsModal architecture is extensible for future widget-specific settings
+- Removing size controls from menu declutters UI
+
+**Future Enhancements:**
+- Add widget-specific settings (refresh rates, themes, etc.)
+- Consider adding widget templates/presets
+
+**Bundle Impact:**
+- Slight increase (118.82 KB → 119.56 KB gzipped)
+- Within acceptable range
+- New widgets are lazy-loaded
+
+---
+
+**Status:** ✅ COMPLETE
+**Created:** 2025-11-24
+**Completed:** 2025-11-24

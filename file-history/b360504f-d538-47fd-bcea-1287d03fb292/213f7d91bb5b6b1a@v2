@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/images/favicon/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="/images/favicon/site.webmanifest" />
+
+    <!-- SEO Meta Tags -->
+    <title>Neuman Brain</title>
+    <meta name="description" content="The ultimate management platform for your personal and professional life. Calendar, Kanban boards, weather, maps, and more - all powered by React + TypeScript." />
+    <meta name="keywords" content="management platform, dashboard, task management, calendar, kanban, productivity, neuman brain, react, typescript" />
+    <meta name="author" content="Travis Neuman" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://brain.neuman.dev" />
+    <meta property="og:title" content="Neuman Brain - Ultimate Management Platform" />
+    <meta property="og:description" content="The ultimate management platform for your personal and professional life. Calendar, Kanban boards, weather, maps, and more." />
+    <meta property="og:image" content="https://brain.neuman.dev/images/logos/nb3.png" />
+    <meta property="og:image:alt" content="Neuman Brain Logo" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Neuman Brain" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://brain.neuman.dev" />
+    <meta name="twitter:title" content="Neuman Brain - Ultimate Management Platform" />
+    <meta name="twitter:description" content="The ultimate management platform for your personal and professional life." />
+    <meta name="twitter:image" content="https://brain.neuman.dev/images/logos/nb3.png" />
+    <meta name="twitter:image:alt" content="Neuman Brain Logo" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Leaflet CSS (for map widget) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin="" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+
+    <!-- Leaflet JS (for map widget) -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""></script>
+  </body>
+</html>

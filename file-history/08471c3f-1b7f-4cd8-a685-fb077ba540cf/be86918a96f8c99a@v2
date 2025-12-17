@@ -1,0 +1,74 @@
+/**
+ * MetricCard Component
+ * Reusable card for displaying a single metric with icon and trend
+ */
+
+import type { LucideIcon } from 'lucide-react';
+import { TrendingUp, TrendingDown, Minus } from 'lucide-react';
+
+interface MetricCardProps {
+  title: string;
+  value: string | number;
+  icon: LucideIcon;
+  trend?: {
+    value: number; // Percentage change
+    direction: 'up' | 'down' | 'neutral';
+  };
+  subtitle?: string;
+  color?: 'magenta' | 'cyan' | 'success' | 'warning' | 'info';
+}
+
+export function MetricCard({ title, value, icon: Icon, trend, subtitle, color = 'magenta' }: MetricCardProps) {
+  const colorClasses = {
+    magenta: 'text-accent-magenta dark:text-accent-magenta',
+    cyan: 'text-accent-cyan dark:text-accent-cyan',
+    success: 'text-status-success dark:text-status-success',
+    warning: 'text-status-warning dark:text-status-warning',
+    info: 'text-status-info dark:text-status-info',
+  };
+
+  const trendColorClasses = {
+    up: 'text-status-success dark:text-status-success',
+    down: 'text-status-error dark:text-status-error',
+    neutral: 'text-text-light-tertiary dark:text-text-dark-tertiary',
+  };
+
+  const TrendIcon = trend
+    ? trend.direction === 'up'
+      ? TrendingUp
+      : trend.direction === 'down'
+      ? TrendingDown
+      : Minus
+    : null;
+
+  return (
+    <div className="bento-card p-4 hover:border-accent-magenta dark:hover:border-accent-cyan transition-all duration-standard ease-smooth">
+      <div className="flex items-start justify-between mb-2">
+        <div className="flex-1">
+          <p className="text-xs font-medium text-text-light-secondary dark:text-text-dark-secondary uppercase tracking-wide">
+            {title}
+          </p>
+          <p className={`text-2xl font-bold mt-1 ${colorClasses[color]}`}>
+            {value}
+          </p>
+          {subtitle && (
+            <p className="text-xs text-text-light-tertiary dark:text-text-dark-tertiary mt-1">
+              {subtitle}
+            </p>
+          )}
+        </div>
+        <div className={`p-2 rounded-button bg-surface-light-elevated dark:bg-surface-dark-elevated ${colorClasses[color]}`}>
+          <Icon className="w-5 h-5" />
+        </div>
+      </div>
+
+      {trend && TrendIcon && (
+        <div className={`flex items-center gap-1 text-xs font-medium ${trendColorClasses[trend.direction]}`}>
+          <TrendIcon className="w-3 h-3" />
+          <span>{Math.abs(trend.value).toFixed(1)}%</span>
+          <span className="text-text-light-tertiary dark:text-text-dark-tertiary">vs last period</span>
+        </div>
+      )}
+    </div>
+  );
+}

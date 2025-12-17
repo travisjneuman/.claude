@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 14px;
+    @apply bg-surface-light dark:bg-surface-dark;
+    @apply text-text-light-primary dark:text-text-dark-primary;
+  }
+
+  /* Focus styles for accessibility (WCAG 2.2 compliant) */
+  *:focus-visible {
+    @apply outline-2 outline-accent-blue-hover;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Mobile optimizations (Phase 6) */
+  button, a, input, textarea, select {
+    /* Prevent 300ms touch delay on mobile */
+    touch-action: manipulation;
+    /* Remove tap highlight on mobile */
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Prevent zoom on input focus (iOS Safari) */
+  input, textarea, select {
+    font-size: max(16px, 1em); /* Minimum 16px to prevent zoom */
+  }
+
+  /* Dynamic viewport height for Mobile Safari (URL bar) */
+  .full-height {
+    height: 100dvh; /* Dynamic viewport height */
+  }
+}
+
+/* Scrollbar styling for sidebar */
+@layer utilities {
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    @apply bg-border-light;
+    border-radius: 3px;
+  }
+
+  .dark .scrollbar-thin::-webkit-scrollbar-thumb {
+    @apply bg-border-dark;
+  }
+
+  /* Dashboard grid layout - CSS Grid supports native column spanning */
+  .dashboard-grid {
+    /* Grid is defined in Dashboard.tsx using Tailwind classes:
+       - Mobile: 1 column (grid-cols-1)
+       - Tablet: 2 columns (md:grid-cols-2)
+       - Desktop: 3 columns (lg:grid-cols-3)
+
+       Column spanning uses Tailwind's col-span utilities:
+       - 1x: (default, no class)
+       - 2x: lg:col-span-2
+       - 3x: lg:col-span-3 md:col-span-2
+    */
+  }
+}

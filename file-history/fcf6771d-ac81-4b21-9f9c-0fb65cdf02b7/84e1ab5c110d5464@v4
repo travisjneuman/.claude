@@ -1,0 +1,380 @@
+/**
+ * NoteListItem Component
+ *
+ * Individual note card for the Notes list.
+ * Extracted from Notes.tsx as part of the Notes Page Revolution.
+ *
+ * Features:
+ * - Progressive disclosure: hover actions appear on hover
+ * - Active state with left accent bar (Linear-inspired)
+ * - Favorite/Pin indicators always visible when set
+ * - Tag display with colors
+ * - Export to Markdown/PDF
+ * - Selection mode support for bulk operations
+ */
+
+import React, { useState, useCallback } from 'react';
+import { useDraggable, useDroppable } from '@dnd-kit/core';
+import { CSS } from '@dnd-kit/utilities';
+import {
+  Download,
+  FileDown,
+  FileText,
+  Loader2,
+  Star,
+  Pin,
+  Trash2,
+  Tag,
+  Check,
+  Circle,
+  CheckCircle2,
+} from 'lucide-react';
+import { useNotesStore } from '../../stores/useNotesStore';
+import { useSettingsStore } from '../../stores/useSettingsStore';
+import { ConfirmDialog } from '../ConfirmDialog';
+import { exportNoteToMarkdown } from '../../services/noteExport';
+import { exportNoteToPDF } from '../../services/notePdfExport';
+import { logger } from '../../services/logger';
+import type { Note } from '../../types/notes';
+
+const log = logger.module('NoteListItem');
+
+export interface NoteListItemProps {
+  note: Note;
+  isActive: boolean;
+  isSelectionMode?: boolean;
+  isSelected?: boolean;
+  onToggleSelection?: (id: string) => void;
+  /** Handler for click with modifiers (Ctrl/Shift for multi-select) */
+  onMultiSelectClick?: (noteId: string, event: React.MouseEvent) => void;
+  /** Whether dragging is enabled */
+  isDraggable?: boolean;
+  /** Whether clicks are disabled (during drag) */
+  isDisablingClicks?: boolean;
+  /** Context menu handler for note */
+  onContextMenu?: (e: React.MouseEvent, note: Note) => void;
+}
+
+export const NoteListItem: React.FC<NoteListItemProps> = ({
+  note,
+  isActive,
+  isSelectionMode = false,
+  isSelected = false,
+  onToggleSelection,
+  onMultiSelectClick,
+  isDraggable = false,
+  isDisablingClicks = false,
+  onContextMenu,
+}) => {
+  const setActiveNote = useNotesStore((state) => state.setActiveNote);
+  const deleteNote = useNotesStore((state) => state.deleteNote);
+  const togglePin = useNotesStore((state) => state.togglePin);
+  const toggleFavorite = useNotesStore((state) => state.toggleFavorite);
+  const tagColors = useSettingsStore((state) => state.tagColors);
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+  const [isExporting, setIsExporting] = useState(false);
+  const [exportSuccess, setExportSuccess] = useState<string | null>(null);
+
+  // Draggable hook for note movement between folders
+  const {
+    attributes,
+    listeners,
+    setNodeRef: setDragNodeRef,
+    transform,
+    isDragging,
+  } = useDraggable({
+    id: `note-${note.id}`,
+    data: { type: 'note', noteId: note.id },
+    disabled: !isDraggable || isSelectionMode,
+  });
+
+  // Droppable hook for receiving notes as subnotes
+  const {
+    setNodeRef: setDropNodeRef,
+    isOver,
+  } = useDroppable({
+    id: `note-drop-${note.id}`,
+    data: { type: 'note-target', noteId: note.id },
+    disabled: isSelectionMode || isDragging, // Can't drop on self while dragging
+  });
+
+  // Combine draggable and droppable refs
+  const setNodeRef = useCallback(
+    (node: HTMLElement | null) => {
+      setDragNodeRef(node);
+      setDropNodeRef(node);
+    },
+    [setDragNodeRef, setDropNodeRef]
+  );
+
+  // Exclude role and tabIndex from attributes to avoid duplication
+  const { role: _role, tabIndex: _tabIndex, ...restAttributes } = attributes;
+
+  const dragStyle = {
+    transform: CSS.Translate.toString(transform),
+    opacity: isDragging ? 0.5 : 1,
+    cursor: isDragging ? 'grabbing' : undefined,
+  };
+
+  // Handle PDF export with loading state
+  const handlePDFExport = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIsExporting(true);
+    try {
+      await exportNoteToPDF(note, (filename) => {
+        setExportSuccess(filename);
+        setTimeout(() => setExportSuccess(null), 3000);
+      });
+    } catch (error) {
+      log.error('PDF export failed', { error });
+    } finally {
+      setIsExporting(false);
+    }
+  };
+
+  // Format date
+  const formatDate = (date: Date) => {
+    const now = new Date();
+    const diff = now.getTime() - new Date(date).getTime();
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+    if (days === 0) return 'Today';
+    if (days === 1) return 'Yesterday';
+    if (days < 7) return `${days} days ago`;
+    return new Date(date).toLocaleDateString();
+  };
+
+  // First line of content for preview
+  const preview = note.contentText.split('\n')[0] || 'No content';
+
+  return (
+    <div
+      ref={setNodeRef}
+      className={`group relative p-5 rounded-lg cursor-pointer transition-all duration-150 ${
+        isOver && !isDragging
+          ? 'bg-accent-cyan/10 dark:bg-accent-magenta/10 border-l-2 border-accent-cyan dark:border-accent-magenta ring-2 ring-accent-cyan/50 dark:ring-accent-magenta/50'
+          : isActive
+            ? 'bg-transparent border-l-2 border-accent-cyan dark:border-accent-magenta shadow-sm'
+            : 'hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated border-l-2 border-transparent hover:shadow-sm'
+      }`}
+      style={{
+        ...dragStyle,
+        pointerEvents: isDisablingClicks ? 'none' : 'auto',
+      }}
+      onClick={(e) => {
+        if (isDisablingClicks) return;
+
+        // Check for Ctrl/Cmd or Shift modifiers for multi-select
+        if ((e.ctrlKey || e.metaKey || e.shiftKey) && onMultiSelectClick) {
+          onMultiSelectClick(note.id, e);
+          return;
+        }
+
+        setActiveNote(note.id);
+      }}
+      onContextMenu={(e) => onContextMenu?.(e, note)}
+      role="button"
+      tabIndex={0}
+      aria-selected={isActive}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          setActiveNote(note.id);
+        }
+      }}
+      {...restAttributes}
+    >
+      {/* Export Success Notification */}
+      {exportSuccess && (
+        <div className="absolute -top-8 left-0 right-0 bg-accent-green text-white text-xs py-1 px-2 rounded shadow-lg z-10 text-center flex items-center justify-center gap-1">
+          <Check className="w-3 h-3" />
+          Exported: {exportSuccess}
+        </div>
+      )}
+
+      {/* Main layout: Vertical actions on left + Content on right */}
+      <div className="flex items-start gap-3">
+        {/* Selection checkbox or Drag handle icon */}
+        {isSelectionMode ? (
+          /* Circular checkbox for selection mode */
+          <button
+            className={`w-6 h-6 flex items-center justify-center flex-shrink-0 self-center transition-colors ${
+              isSelected
+                ? 'text-accent-cyan dark:text-accent-magenta'
+                : 'text-text-light-tertiary dark:text-text-dark-tertiary hover:text-text-light-secondary dark:hover:text-text-dark-secondary'
+            }`}
+            onClick={(e) => {
+              e.stopPropagation();
+              onToggleSelection?.(note.id);
+            }}
+            aria-label={isSelected ? `Deselect ${note.title}` : `Select ${note.title}`}
+          >
+            {isSelected ? (
+              <CheckCircle2 className="w-5 h-5 fill-accent-cyan dark:fill-accent-magenta" />
+            ) : (
+              <Circle className="w-5 h-5" />
+            )}
+          </button>
+        ) : isDraggable ? (
+          /* Note icon IS the drag handle (matching main Sidebar.tsx pattern) */
+          <span
+            {...listeners}
+            className={`w-6 h-6 flex items-center justify-center flex-shrink-0 cursor-grab active:cursor-grabbing self-center ${
+              isActive
+                ? 'text-accent-cyan dark:text-accent-magenta'
+                : 'text-text-light-tertiary dark:text-text-dark-tertiary'
+            }`}
+            role="button"
+            aria-label={`Drag ${note.title || 'note'} to move`}
+            tabIndex={0}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <FileText className="w-5 h-5" />
+          </span>
+        ) : null}
+
+        {/* Vertical action column - progressive disclosure */}
+        <div className="flex flex-col gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-100 shrink-0 w-7">
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              exportNoteToMarkdown(note);
+            }}
+            className="p-1.5 hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated rounded transition-colors"
+            title="Export to Markdown"
+            aria-label="Export to Markdown"
+          >
+            <Download className="w-4 h-4 text-text-light-secondary dark:text-text-dark-secondary" />
+          </button>
+          <button
+            onClick={handlePDFExport}
+            disabled={isExporting}
+            className="p-1.5 hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated rounded transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            title={isExporting ? 'Exporting...' : 'Export to PDF'}
+            aria-label={isExporting ? 'Exporting to PDF' : 'Export to PDF'}
+          >
+            {isExporting ? (
+              <Loader2 className="w-4 h-4 text-text-light-secondary dark:text-text-dark-secondary animate-spin" />
+            ) : (
+              <FileDown className="w-4 h-4 text-text-light-secondary dark:text-text-dark-secondary" />
+            )}
+          </button>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              toggleFavorite(note.id);
+            }}
+            className="p-1.5 hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated rounded transition-colors"
+            title={note.isFavorite ? 'Unfavorite' : 'Favorite'}
+            aria-label={note.isFavorite ? 'Remove from favorites' : 'Add to favorites'}
+          >
+            <Star
+              className={`w-4 h-4 transition-colors ${
+                note.isFavorite
+                  ? 'fill-accent-yellow text-accent-yellow'
+                  : 'text-text-light-secondary dark:text-text-dark-secondary'
+              }`}
+            />
+          </button>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              togglePin(note.id);
+            }}
+            className="p-1.5 hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated rounded transition-colors"
+            title={note.isPinned ? 'Unpin' : 'Pin'}
+            aria-label={note.isPinned ? 'Unpin note' : 'Pin note'}
+          >
+            <Pin
+              className={`w-4 h-4 ${
+                note.isPinned
+                  ? 'text-accent-yellow'
+                  : 'text-text-light-secondary dark:text-text-dark-secondary'
+              }`}
+            />
+          </button>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setShowDeleteDialog(true);
+            }}
+            className="p-1.5 hover:bg-accent-red/10 dark:hover:bg-accent-red/20 rounded text-accent-red transition-colors"
+            title="Delete"
+            aria-label="Delete note"
+          >
+            <Trash2 className="w-4 h-4" />
+          </button>
+        </div>
+
+        {/* Content area */}
+        <div className="flex-1 min-w-0">
+          {/* Title row with static indicators */}
+          <div className="flex items-start gap-2 mb-2">
+            <h4 className="text-sm font-semibold text-text-light-primary dark:text-text-dark-primary flex-1 truncate">
+              {note.title}
+            </h4>
+            {/* Static indicators: always visible when present */}
+            <div className="flex items-center gap-1 shrink-0">
+              {note.isFavorite && (
+                <Star className="w-4 h-4 fill-accent-yellow text-accent-yellow" />
+              )}
+              {note.isPinned && <Pin className="w-4 h-4 text-accent-yellow" />}
+            </div>
+          </div>
+
+          {/* Preview */}
+          <p className="text-xs text-text-light-secondary dark:text-text-dark-secondary line-clamp-2 mb-3">
+            {preview}
+          </p>
+
+          {/* Tags Display */}
+          {note.tags.length > 0 && (
+            <div className="flex flex-wrap gap-1 mb-2">
+              {note.tags.slice(0, 3).map((tag) => {
+                const color = tagColors[tag];
+                return (
+                  <span
+                    key={tag}
+                    className={`inline-flex items-center gap-1 px-2 py-0.5 text-xs font-medium rounded ${
+                      color
+                        ? `bg-${color}/10 text-${color} dark:bg-${color}/20`
+                        : 'bg-accent-purple/10 text-accent-purple dark:bg-accent-cyan/10 dark:text-accent-cyan'
+                    }`}
+                  >
+                    <Tag className="w-3 h-3" />
+                    {tag}
+                  </span>
+                );
+              })}
+              {note.tags.length > 3 && (
+                <span className="text-xs text-text-light-tertiary dark:text-text-dark-tertiary px-1">
+                  +{note.tags.length - 3} more
+                </span>
+              )}
+            </div>
+          )}
+
+          {/* Meta */}
+          <div className="flex items-center justify-between text-xs text-text-light-tertiary dark:text-text-dark-tertiary">
+            <span>{formatDate(note.updatedAt)}</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Delete Confirmation Dialog */}
+      {showDeleteDialog && (
+        <ConfirmDialog
+          isOpen={true}
+          onClose={() => setShowDeleteDialog(false)}
+          onConfirm={() => {
+            deleteNote(note.id);
+            setShowDeleteDialog(false);
+          }}
+          title="Delete Note"
+          message={`Are you sure you want to delete "${note.title}"? This action cannot be undone.`}
+          variant="danger"
+        />
+      )}
+    </div>
+  );
+};

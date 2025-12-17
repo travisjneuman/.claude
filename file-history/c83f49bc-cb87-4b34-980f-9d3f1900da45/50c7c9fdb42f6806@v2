@@ -1,0 +1,719 @@
+# Task: Implement Advanced Time Tracking System
+
+**Created:** 2025-11-22
+**Status:** Planning
+**Priority:** P1 (High - Core Feature Gap)
+**Complexity:** High
+**Estimated Effort:** 6-8 weeks (phased)
+
+---
+
+## Context
+
+Neuman Brain currently has **23% Toggl parity** for time tracking (see `docs/product/feature_map.md:769-806`). This is our biggest feature gap. We have:
+- ✅ Time tracking database (`src/db/timeTrackingDb.ts`)
+- ✅ Basic timer service in Kanban store (start/stop/pause)
+- ✅ Pomodoro widget (`src/widgets/Dashboard/PomodoroWidget.tsx`)
+- ❌ No manual time entry UI
+- ❌ No reporting/analytics
+- ❌ No timer widget on dashboard
+- ❌ No time entry editing
+- ❌ No invoicing/billing features
+
+**Research completed:** Analyzed Toggl, Clockify, ActivityWatch, Rize, Timely, RescueTime, and developer-focused tools (WakaTime, Taskwarrior+Timewarrior, Linear, Super Productivity).
+
+**Goal:** Achieve **85-90% parity** with Toggl Track while maintaining Neuman Brain's privacy-first, widget-based architecture.
+
+---
+
+## Gemini Plan Analysis
+
+Reviewed `docs/plans/project_chronos_workplan.md` created by Google Gemini 3 Pro. Key findings:
+
+### ✅ Good Ideas from Gemini Plan:
+1. **Hybrid tracking:** Manual + automatic (with user control)
+2. **Context awareness:** Git branch detection, IDE integration
+3. **Natural language input:** "Meeting with Bob 2pm-3pm" → auto-create entry
+4. **Keyboard-first UX:** Global hotkeys, command palette
+5. **Privacy absolute:** Local-first, E2EE sync
+6. **AI classification:** Smart categorization of activities
+7. **Focus tracking:** Deep work metrics, distraction blocking
+8. **Competitive feature parity:** Match Toggl + add unique features
+
+### ❌ Conflicts with Neuman Brain Architecture:
+1. **Separate app approach:** Gemini suggests `npm create vite@latest chronos`
+   - ❌ Wrong: Should integrate as widgets/pages in existing app
+2. **Tauri/Electron wrapper:** Desktop app focus
+   - ❌ Wrong: Web-first (PWA already exists), desktop later
+3. **RxDB suggestion:** Different database layer
+   - ❌ Wrong: We use Dexie.js (already have `timeTrackingDb.ts`)
+4. **Floating "Dynamic Island" widget:** macOS-style persistent overlay
+   - ❌ Wrong: Use dashboard widget system (already 40+ widgets)
+5. **Voice mode (Whisper API):** External dependency
+   - ❌ Privacy concern: Voice data sent to API (conflicts with local-first)
+
+### 🔄 Adapted from Gemini Plan:
+- Phase 1: Manual tracker → **Time Entry Widget + Page**
+- Phase 2: Watcher → **Optional browser extension (privacy-controlled)**
+- Phase 3: AI Intelligence → **Local AI via user's API keys (BYOK)**
+- Phase 4: Reporting → **Analytics widgets + export**
+
+---
+
+## Modified Implementation Plan
+
+### Phase 1: Core Time Tracking (Weeks 1-2) - P0
+**Goal:** Build manual time tracking that surpasses Toggl's basic features.
+
+#### 1.1: Active Timer Widget (Dashboard)
+**File:** `src/widgets/Dashboard/ActiveTimerWidget.tsx`
+- [ ] Floating timer widget (always visible on dashboard)
+- [ ] Start/Stop/Pause buttons
+- [ ] Description input (inline editing)
+- [ ] Project/task selector (links to Kanban tasks)
+- [ ] Real-time duration display (HH:MM:SS)
+- [ ] Keyboard shortcut: `Cmd/Ctrl + Shift + T` (start/stop)
+- [ ] Integrates with existing `timeTrackingDb.ts`
+
+**Design:**
+```tsx
+// Compact widget (2x1 grid size)
+┌─────────────────────────┐
+│ ⏱️  Timer Running       │
+│ 02:34:18  ⏸️ ⏹️        │
+│ Working on Login Bug    │
+│ 📁 Project: Neuman Brain│
+└─────────────────────────┘
+```
+
+#### 1.2: Time Entries Page (Manual Entry)
+**File:** `src/pages/TimeTracking.tsx`
+- [ ] Calendar view of time entries (week/month grid)
+- [ ] Add manual time entry (date, start, end, description, project)
+- [ ] Edit existing entries (inline or modal)
+- [ ] Delete entries (with undo)
+- [ ] Bulk actions (select multiple → delete, change project)
+- [ ] Search/filter by project, date range, description
+- [ ] **Natural language input:** "2 hours on React refactor yesterday" → parses to time entry
+
+**Layout:**
+```
+┌────────────────────────────────────────────┐
+│ 📊 Time Tracking                           │
+├────────────────────────────────────────────┤
+│ [This Week ▼] [+ Manual Entry] [Export ▼] │
+├────────────────────────────────────────────┤
+│ Monday, Nov 18                             │
+│ ├─ 09:00-11:30  Sprint Planning (2.5h)    │
+│ ├─ 13:00-17:00  React Development (4h)    │
+│ └─ 17:00-18:00  Code Review (1h)          │
+│                                     Total: 7.5h │
+├────────────────────────────────────────────┤
+│ Tuesday, Nov 19                            │
+│ ├─ 10:00-12:00  Bug Fixes (2h)            │
+│ └─ 14:00-16:30  Documentation (2.5h)      │
+│                                     Total: 4.5h │
+└────────────────────────────────────────────┘
+```
+
+#### 1.3: Time Summary Widget
+**File:** `src/widgets/Dashboard/TimeSummaryWidget.tsx`
+- [ ] Today's total time
+- [ ] This week's total time
+- [ ] Most-worked project
+- [ ] Visual progress bar (vs goal, if set)
+
+**Parity After Phase 1:** 40% Toggl (manual tracking complete)
+
+---
+
+### Phase 2: Reporting & Analytics (Weeks 3-4) - P1
+**Goal:** Professional reporting for freelancers/agencies.
+
+#### 2.1: Time Reports Page
+**File:** `src/pages/TimeReports.tsx`
+- [ ] Daily summary (bar chart of hours per day)
+- [ ] Weekly summary (stacked bar chart by project)
+- [ ] Monthly summary (heatmap calendar)
+- [ ] Project breakdown (pie chart)
+- [ ] Export to CSV (all entries or filtered)
+- [ ] Export to PDF (formatted invoice-ready)
+- [ ] Date range picker (custom ranges)
+- [ ] Filter by project, billable/non-billable
+
+**Features:**
+```typescript
+interface TimeReport {
+  dateRange: { start: Date; end: Date };
+  totalTime: number; // seconds
+  billableTime: number;
+  nonBillableTime: number;
+  projectBreakdown: { projectId: string; time: number }[];
+  dailyBreakdown: { date: string; time: number }[];
+  averageHoursPerDay: number;
+}
+```
+
+#### 2.2: Analytics Widgets
+**Files:** `src/widgets/Dashboard/TimeAnalyticsWidget.tsx`
+- [ ] **Weekly Time Chart:** Bar chart of hours per day
+- [ ] **Project Time Pie Chart:** Distribution of time by project
+- [ ] **Productivity Score:** % of time in "deep work" (>2hr sessions)
+- [ ] **Streak Counter:** Days tracked consecutively
+
+#### 2.3: Billable Hours & Invoicing
+**File:** `src/pages/Invoicing.tsx` (Pro feature candidate)
+- [ ] Mark time entries as billable/non-billable
+- [ ] Set hourly rates per project
+- [ ] Generate invoice (HTML → PDF export)
+- [ ] Invoice templates (customizable)
+- [ ] Client management (simple contact info)
+- [ ] Invoice history
+
+**Parity After Phase 2:** 65% Toggl (reporting + billing)
+
+---
+
+### Phase 3: Smart Features & Automation (Weeks 5-6) - P2
+**Goal:** Reduce manual tracking burden with context awareness.
+
+#### 3.1: Kanban Integration (Task Timer)
+**File:** `src/widgets/Kanban/TaskCard.tsx` (extend existing)
+- [ ] "Start Timer" button on each Kanban card
+- [ ] Auto-create time entry linked to task (`taskId` field)
+- [ ] Show total time tracked on card
+- [ ] Timer badge (if running) on card
+
+**UI Enhancement:**
+```tsx
+// Add to KanbanCard component
+<div className="task-card">
+  <h3>{task.title}</h3>
+  <div className="task-meta">
+    <button onClick={() => startTimer(task.id)}>
+      {isRunning ? '⏸️ Pause' : '▶️ Start Timer'}
+    </button>
+    <span>⏱️ {formatDuration(task.timeTracking?.actual || 0)}</span>
+  </div>
+</div>
+```
+
+#### 3.2: Calendar Integration (Event Timer)
+**File:** `src/components/EventDialog.tsx` (extend existing)
+- [ ] "Track Time" checkbox on calendar events
+- [ ] Auto-create time entry from event duration
+- [ ] Link time entry to calendar event
+
+#### 3.3: Natural Language Parser
+**File:** `src/services/timeEntryParser.ts`
+- [ ] Parse "2 hours on React" → `{ duration: 7200, description: "React" }`
+- [ ] Parse "Yesterday 9am-5pm bug fixes" → `{ start: ..., end: ..., description: "bug fixes" }`
+- [ ] Parse "30m meeting with Bob" → `{ duration: 1800, description: "meeting with Bob" }`
+- [ ] Support relative dates: today, yesterday, Monday, last Friday
+
+**Implementation:**
+```typescript
+interface ParsedTimeEntry {
+  description: string;
+  startTime?: Date;
+  endTime?: Date;
+  duration?: number; // seconds
+  projectId?: string;
+  tags?: string[];
+}
+
+export function parseNaturalLanguage(input: string): ParsedTimeEntry;
+```
+
+#### 3.4: Idle Detection (Browser-based)
+**File:** `src/services/idleDetection.ts`
+- [ ] Use Page Visibility API (when tab inactive)
+- [ ] Show "You've been idle" notification after 5min
+- [ ] Options: Discard time, Keep time, Adjust end time
+- [ ] Respects privacy (no screenshots, no activity logging)
+
+**Parity After Phase 3:** 75% Toggl (smart features + integrations)
+
+---
+
+### Phase 4: Advanced Analytics & Insights (Weeks 7-8) - P3
+**Goal:** Unique features that surpass Toggl (inspired by Rize.io).
+
+#### 4.1: Focus Quality Metrics
+**File:** `src/pages/FocusInsights.tsx`
+- [ ] **Deep Work Score:** % of time in uninterrupted sessions (>2hrs)
+- [ ] **Context Switching:** Number of project switches per day
+- [ ] **Session Length Distribution:** Histogram of session durations
+- [ ] **Best Productivity Time:** Heatmap of hours (e.g., 9-11am most productive)
+- [ ] **Weekly Insights:** AI-generated summary (via user's API key)
+
+**Example Insights:**
+```
+🎯 This week you had 12 hours of deep work (60% of total).
+📈 Your longest focus session was 3.5 hours on Tuesday.
+⚠️ You switched projects 8 times on Wednesday (high context switching).
+💡 Suggestion: Block 2-hour focus sessions in the morning.
+```
+
+#### 4.2: Goals & Targets
+**File:** `src/stores/useTimeTrackingStore.ts` (extend)
+- [ ] Set weekly time goal (e.g., "Track 40 hours/week")
+- [ ] Set project time budget (e.g., "Max 10 hours on Bug Fixes")
+- [ ] Visual progress bars on dashboard
+- [ ] Notifications when approaching/exceeding goals
+
+#### 4.3: Pomodoro Integration
+**File:** `src/widgets/Dashboard/PomodoroWidget.tsx` (extend existing)
+- [ ] Link Pomodoro sessions to time entries
+- [ ] Auto-create time entry after each Pomodoro
+- [ ] Pomodoro stats (sessions completed, average focus time)
+
+#### 4.4: Browser Extension (Optional - Privacy-Controlled)
+**Future:** Chrome/Firefox extension
+- [ ] Detect active tab (domain only, not full URL)
+- [ ] Categorize time (e.g., GitHub = Development, Slack = Communication)
+- [ ] **Privacy:** User whitelists domains to track
+- [ ] **Privacy:** No screenshots, no keystroke logging
+- [ ] **Privacy:** All data stays local (syncs to IndexedDB)
+
+**Parity After Phase 4:** 85-90% Toggl + unique features (Focus Score, Context Switching)
+
+---
+
+## Architecture Integration
+
+### 1. Database Schema (Already Exists)
+**File:** `src/db/timeTrackingDb.ts` (already implemented ✅)
+
+**Extensions Needed:**
+```typescript
+// Add to TimeEntry interface (in src/types.ts)
+interface TimeEntry {
+  // Existing fields
+  id: string;
+  startTime: string;
+  endTime?: string;
+  duration: number;
+  description: string;
+  projectId?: string;
+  taskId?: string; // Link to Kanban task
+
+  // New fields for Phase 2+
+  billable?: boolean; // Phase 2
+  hourlyRate?: number; // Phase 2
+  invoiceId?: string; // Phase 2
+  tags?: string[]; // Phase 3
+  categoryId?: string; // Phase 4 (Work, Meeting, Break)
+  focusQuality?: number; // Phase 4 (1-10 score)
+}
+
+interface TimeTrackingProject {
+  // Existing
+  id: string;
+  name: string;
+  color?: string;
+  active: number;
+  archived: boolean;
+
+  // New fields
+  defaultHourlyRate?: number; // Phase 2
+  client?: string; // Phase 2
+  budget?: number; // Phase 4 (hours)
+}
+```
+
+### 2. Store Architecture
+**File:** `src/stores/useTimeTrackingStore.ts` (new)
+
+```typescript
+interface TimeTrackingStore {
+  // Active timer state
+  activeTimer: {
+    id?: string;
+    startTime?: string;
+    description?: string;
+    projectId?: string;
+    taskId?: string;
+  } | null;
+
+  // Actions
+  startTimer: (description: string, projectId?: string, taskId?: string) => void;
+  stopTimer: () => Promise<void>;
+  pauseTimer: () => void;
+  resumeTimer: () => void;
+
+  // Manual entry
+  addTimeEntry: (entry: Omit<TimeEntry, 'id'>) => Promise<void>;
+  updateTimeEntry: (id: string, updates: Partial<TimeEntry>) => Promise<void>;
+  deleteTimeEntry: (id: string) => Promise<void>;
+
+  // Queries (cached)
+  getTodayEntries: () => Promise<TimeEntry[]>;
+  getWeekEntries: () => Promise<TimeEntry[]>;
+  getEntriesByDateRange: (start: Date, end: Date) => Promise<TimeEntry[]>;
+
+  // Analytics
+  getTodayTotal: () => number;
+  getWeekTotal: () => number;
+  getProjectBreakdown: (start: Date, end: Date) => Record<string, number>;
+
+  // Goals
+  weeklyGoal?: number; // hours
+  setWeeklyGoal: (hours: number) => void;
+}
+```
+
+### 3. Widget Registration
+**File:** `src/config/widgetRegistry.ts` (extend existing)
+
+```typescript
+// Add new time tracking widgets
+export const TIME_TRACKING_WIDGETS = {
+  'active-timer': {
+    id: 'active-timer',
+    name: 'Active Timer',
+    description: 'Start/stop timer for current task',
+    component: lazy(() => import('../widgets/Dashboard/ActiveTimerWidget')),
+    defaultSize: { w: 2, h: 1 },
+    minSize: { w: 2, h: 1 },
+    category: 'Productivity',
+  },
+  'time-summary': {
+    id: 'time-summary',
+    name: 'Time Summary',
+    description: 'Today and week time totals',
+    component: lazy(() => import('../widgets/Dashboard/TimeSummaryWidget')),
+    defaultSize: { w: 2, h: 2 },
+    category: 'Productivity',
+  },
+  'time-analytics': {
+    id: 'time-analytics',
+    name: 'Time Analytics',
+    description: 'Charts and insights',
+    component: lazy(() => import('../widgets/Dashboard/TimeAnalyticsWidget')),
+    defaultSize: { w: 4, h: 3 },
+    category: 'Productivity',
+  },
+  'focus-score': {
+    id: 'focus-score',
+    name: 'Focus Quality',
+    description: 'Deep work metrics',
+    component: lazy(() => import('../widgets/Dashboard/FocusScoreWidget')),
+    defaultSize: { w: 2, h: 2 },
+    category: 'Productivity',
+  },
+};
+```
+
+### 4. Navigation Integration
+**File:** `src/components/Header.tsx` (extend existing)
+
+```tsx
+// Add to navigation menu
+const navItems = [
+  { path: '/', label: 'Dashboard' },
+  { path: '/notes', label: 'Notes' },
+  { path: '/tasks', label: 'Tasks' },
+  { path: '/calendar', label: 'Calendar' },
+  { path: '/time-tracking', label: 'Time' }, // NEW
+  { path: '/planning', label: 'Planning' },
+  { path: '/settings', label: 'Settings' },
+];
+```
+
+---
+
+## Competitive Differentiation
+
+### What makes Neuman Brain time tracking BETTER than Toggl:
+
+1. **Privacy Absolute**
+   - ❌ Toggl: Cloud-first (data on their servers)
+   - ✅ Neuman Brain: Local-first (IndexedDB), optional E2EE sync
+
+2. **Zero Cost**
+   - ❌ Toggl: $9-20/user/month for Pro features
+   - ✅ Neuman Brain: Free (advanced features in future Pro tier, but core always free)
+
+3. **Seamless Integration**
+   - ❌ Toggl: Separate app, manual project creation
+   - ✅ Neuman Brain: Kanban tasks → timer, Calendar events → time entries
+
+4. **Focus Quality Metrics**
+   - ❌ Toggl: Basic time tracking only
+   - ✅ Neuman Brain: Deep work score, context switching analysis (inspired by Rize.io)
+
+5. **Keyboard-First UX**
+   - ❌ Toggl: Mouse-heavy interface
+   - ✅ Neuman Brain: Global hotkeys, natural language input, command palette
+
+6. **AI-Powered Insights (BYOK)**
+   - ❌ Toggl: No AI features
+   - ✅ Neuman Brain: Weekly summaries, smart categorization (via user's API key, private)
+
+7. **Widget Customization**
+   - ❌ Toggl: Fixed layout
+   - ✅ Neuman Brain: Drag-drop dashboard, choose which widgets to show
+
+---
+
+## Technical Requirements
+
+### Frontend
+- **Framework:** React 19 (existing)
+- **State:** Zustand (new `useTimeTrackingStore.ts`)
+- **Database:** Dexie.js (existing `timeTrackingDb.ts`)
+- **Charts:** `recharts` library (already used in Analytics widgets)
+- **Date Parsing:** `chrono-node` for natural language parsing
+
+### Backend (None)
+- **Local-First:** All data in IndexedDB
+- **Export:** Generate CSV/PDF client-side (no server)
+- **Sync (Future):** E2EE to user's cloud (S3, R2, etc.)
+
+### Dependencies to Add
+```json
+{
+  "dependencies": {
+    "chrono-node": "^2.7.0", // Natural language date parsing
+    "recharts": "^2.8.0", // Already have this
+    "date-fns": "^2.30.0" // Date utilities (already have this)
+  }
+}
+```
+
+### Bundle Size Impact
+- Phase 1: +15KB (timer widget, time entries page)
+- Phase 2: +25KB (charts library, PDF export)
+- Phase 3: +10KB (NLP parser, idle detection)
+- Phase 4: +20KB (advanced analytics, insights)
+- **Total:** ~70KB (within 200KB bundle limit ✅)
+
+---
+
+## File Structure
+
+```
+src/
+├── pages/
+│   ├── TimeTracking.tsx         # Main time tracking page (manual entries)
+│   ├── TimeReports.tsx          # Reporting & analytics page
+│   ├── Invoicing.tsx            # Invoice generation (Phase 2)
+│   └── FocusInsights.tsx        # Focus quality metrics (Phase 4)
+├── widgets/
+│   └── Dashboard/
+│       ├── ActiveTimerWidget.tsx      # Floating timer (Phase 1)
+│       ├── TimeSummaryWidget.tsx      # Today/week totals (Phase 1)
+│       ├── TimeAnalyticsWidget.tsx    # Charts (Phase 2)
+│       ├── FocusScoreWidget.tsx       # Deep work metrics (Phase 4)
+│       └── PomodoroWidget.tsx         # Extend existing (Phase 4)
+├── stores/
+│   └── useTimeTrackingStore.ts  # Time tracking Zustand store
+├── services/
+│   ├── timeEntryParser.ts       # Natural language parsing (Phase 3)
+│   ├── idleDetection.ts         # Idle time tracking (Phase 3)
+│   └── focusAnalytics.ts        # Focus quality calculations (Phase 4)
+├── db/
+│   └── timeTrackingDb.ts        # Existing (extend schema)
+└── types/
+    └── timeTracking.ts          # TypeScript interfaces
+```
+
+---
+
+## Testing Strategy
+
+### Unit Tests (Vitest)
+- [ ] `timeTrackingDb.test.ts` - Database CRUD operations
+- [ ] `useTimeTrackingStore.test.ts` - Store actions and state
+- [ ] `timeEntryParser.test.ts` - Natural language parsing accuracy
+
+### Integration Tests (Vitest + React Testing Library)
+- [ ] Timer start/stop flow
+- [ ] Manual entry creation
+- [ ] Report generation
+- [ ] Export to CSV/PDF
+
+### E2E Tests (Playwright MCP)
+- [ ] Complete timer workflow (start → work → stop → view entry)
+- [ ] Natural language entry parsing
+- [ ] Bulk operations (delete multiple entries)
+- [ ] Accessibility (keyboard navigation, WCAG AA)
+
+---
+
+## Documentation Updates
+
+### User Documentation
+- [ ] `docs/user/time_tracking_guide.md` - How to use time tracking
+- [ ] `docs/user/natural_language_examples.md` - NLP parsing examples
+- [ ] `docs/user/focus_insights_guide.md` - Understanding focus metrics
+
+### Technical Documentation
+- [ ] `docs/technical/time_tracking_architecture.md` - System design
+- [ ] `docs/technical/time_tracking_schema.md` - Database schema
+- [ ] `docs/api/time_tracking_api.md` - Store API reference
+
+### Feature Map Updates
+- [ ] Update `docs/product/feature_map.md` - Mark time tracking features as shipped
+- [ ] Update parity calculations (target: 85% Toggl parity)
+
+---
+
+## Privacy & Security Checklist
+
+- [x] All data stored locally (IndexedDB) ✅
+- [ ] No telemetry or tracking (unless user opts in)
+- [ ] E2EE for cloud sync (Phase 5 - future)
+- [ ] No external API calls for time tracking (only for AI insights via BYOK)
+- [ ] Idle detection uses Page Visibility API (no OS-level tracking)
+- [ ] Browser extension (if built) requires explicit user permission
+- [ ] Export features don't send data to servers (client-side PDF generation)
+
+---
+
+## Success Metrics
+
+### Feature Parity
+- **Current:** 23% Toggl parity
+- **Phase 1 Target:** 40% (manual tracking)
+- **Phase 2 Target:** 65% (reporting + billing)
+- **Phase 3 Target:** 75% (smart features)
+- **Phase 4 Target:** 85-90% (analytics + unique features)
+
+### User Experience
+- [ ] < 1s to start timer (keyboard shortcut)
+- [ ] < 100ms to update timer display (smooth 1s ticks)
+- [ ] < 500ms to load time entries page (lazy loading, pagination)
+- [ ] Natural language parsing accuracy > 90% for common phrases
+
+### Bundle Size
+- [ ] Phase 1: +15KB
+- [ ] Total (all phases): < 70KB additional
+- [ ] Overall bundle: < 200KB gzipped (maintain current 117KB target)
+
+---
+
+## Implementation Order (Recommended)
+
+### Week 1: Foundation
+- [ ] Create `useTimeTrackingStore.ts` store
+- [ ] Extend `timeTrackingDb.ts` schema (add billable, tags fields)
+- [ ] Build `ActiveTimerWidget.tsx` (basic start/stop)
+
+### Week 2: Manual Entry
+- [ ] Build `TimeTracking.tsx` page (calendar view)
+- [ ] Manual time entry form (date, start, end, description, project)
+- [ ] Edit/delete time entries
+- [ ] Search and filter
+
+### Week 3: Reporting
+- [ ] Build `TimeReports.tsx` page
+- [ ] Daily/weekly/monthly summaries
+- [ ] Export to CSV
+- [ ] Time analytics charts (bar chart, pie chart)
+
+### Week 4: Billing
+- [ ] Billable/non-billable toggle
+- [ ] Hourly rates per project
+- [ ] Invoice generation (HTML → PDF)
+- [ ] Invoice templates
+
+### Week 5: Smart Features
+- [ ] Natural language parser (`timeEntryParser.ts`)
+- [ ] Kanban integration (timer button on cards)
+- [ ] Calendar integration (event → time entry)
+- [ ] Idle detection (browser-based)
+
+### Week 6: Analytics
+- [ ] Focus quality metrics (`focusAnalytics.ts`)
+- [ ] Deep work score calculation
+- [ ] Context switching detection
+- [ ] Productivity insights
+
+### Week 7-8: Polish & Testing
+- [ ] Unit tests (Vitest)
+- [ ] E2E tests (Playwright MCP)
+- [ ] Documentation (user + technical)
+- [ ] Accessibility audit (WCAG AA)
+- [ ] Performance optimization (bundle size, lazy loading)
+
+---
+
+## Future Enhancements (Post-MVP)
+
+### Phase 5: Advanced Features (Q2 2026)
+- [ ] Browser extension (context-aware tracking)
+- [ ] Desktop app (Tauri wrapper for global hotkeys)
+- [ ] Git integration (auto-detect branch, auto-switch project)
+- [ ] Calendar sync (Google Calendar, Outlook)
+- [ ] Zapier integration (export to other tools)
+
+### Phase 6: Collaboration (Q3 2026)
+- [ ] Team time tracking (multi-user workspaces)
+- [ ] Project budgets (shared across team)
+- [ ] Time approval workflow (manager review)
+- [ ] Team analytics (aggregated, privacy-preserving)
+
+### Phase 7: AI Intelligence (Q4 2026)
+- [ ] AI time entry suggestions (based on patterns)
+- [ ] Smart project categorization (ML-based)
+- [ ] Predictive time estimates (based on history)
+- [ ] Weekly AI coach (personalized productivity tips)
+
+---
+
+## Review Section
+
+### After Phase 1 (Weeks 1-2):
+- [ ] Test timer accuracy (compare to system clock)
+- [ ] Test manual entry UX (can create entry in < 10 seconds?)
+- [ ] Test Kanban integration (timer button works on all cards?)
+- [ ] Review bundle size impact (< 15KB added?)
+
+### After Phase 2 (Weeks 3-4):
+- [ ] Test report accuracy (verify calculations)
+- [ ] Test CSV export (imports into Excel correctly?)
+- [ ] Test PDF invoice generation (professional appearance?)
+- [ ] User testing (freelancers, ask if invoice feature is usable)
+
+### After Phase 3 (Weeks 5-6):
+- [ ] Test NLP accuracy (parse 20 common phrases, > 90% accuracy?)
+- [ ] Test idle detection (triggers after 5min consistently?)
+- [ ] Test Kanban integration (no regressions in existing features?)
+- [ ] Review privacy implications (no data leakage?)
+
+### After Phase 4 (Weeks 7-8):
+- [ ] Test focus metrics (verify deep work score calculation)
+- [ ] Test goal tracking (progress bars accurate?)
+- [ ] E2E testing (complete workflows work end-to-end?)
+- [ ] Accessibility audit (WCAG AA compliant?)
+- [ ] Documentation review (all features documented?)
+- [ ] Performance benchmark (load times, bundle size)
+
+---
+
+## References
+
+- **Feature Map:** `docs/product/feature_map.md` (lines 153-176)
+- **Time Tracking DB:** `src/db/timeTrackingDb.ts`
+- **Kanban Store:** `src/stores/useKanbanStore.ts` (lines 979-1079)
+- **Pomodoro Widget:** `src/widgets/Dashboard/PomodoroWidget.tsx`
+- **Development Principles:** `docs/technical/development_principles.md`
+- **Gemini Plan:** `docs/plans/project_chronos_workplan.md`
+
+---
+
+## Notes
+
+- **Privacy-first:** All time tracking data stays local (IndexedDB). No cloud storage unless user explicitly opts in with E2EE.
+- **Widget-first:** Use existing dashboard widget system (40+ widgets). Don't build separate app.
+- **Integration-first:** Connect to Kanban tasks, Calendar events. Don't duplicate data.
+- **Keyboard-first:** Global hotkeys, natural language input, command palette. Optimize for power users.
+- **Free-first:** Core time tracking always free. Invoicing/advanced analytics can be Pro tier (but local-first remains free).
+
+---
+
+**Document Status:** ✅ Complete
+**Last Updated:** 2025-11-22
+**Next Steps:** Begin Phase 1 implementation (create `useTimeTrackingStore.ts`)

@@ -1,0 +1,110 @@
+---
+type: index
+tags: [business, ventures, planning]
+created: 2025-12-14
+---
+# Business Planning Hub
+
+> Strategic planning, venture concepts, and business development documentation for Kikman Enterprises and affiliated ventures.
+
+---
+
+## Purpose
+
+This folder contains **business planning documentation** separate from active project development:
+- Venture concepts and feasibility analysis
+- Business model canvases
+- Market research and competitive analysis
+- Revenue strategies and pricing models
+- Partnership and growth planning
+
+**Philosophy:** Think it through here. Build it in project folders.
+
+---
+
+## Ventures Overview
+
+```dataview
+TABLE status, stage, founders
+FROM "Business/Ventures"
+WHERE type = "venture"
+SORT stage ASC
+```
+
+---
+
+## Quick Navigation
+
+| I want to... | Go to... |
+|--------------|----------|
+| See parent company info | [[Ventures/Kikman Enterprises]] |
+| Explore golf ventures | [[Ventures/LazyGolf]] |
+| Review tech support concept | [[Ventures/Rent-a-Nerd]] |
+| See consulting profile | [[Ventures/ndev Consulting]] |
+| **Browse new ideas** | [[Ideas/README\|Ideas Hub]] |
+| Explore micro SaaS opportunities | [[Ideas/Micro-SaaS-Ideas]] |
+| Review productized services | [[Ideas/Productized-Services]] |
+| Check digital product ideas | [[Ideas/Digital-Products]] |
+| See platform extensions | [[Ideas/Platform-Extensions]] |
+
+---
+
+## Folder Structure
+
+```
+Business/
+├── README.md               # THIS FILE - navigation hub
+│
+├── Ventures/               # Active venture concepts
+│   ├── Kikman Enterprises.md   # Parent company
+│   ├── LazyGolf.md             # Golf lifestyle brand
+│   ├── Rent-a-Nerd.md          # Services company
+│   └── ndev Consulting.md      # IT consulting
+│
+├── Ideas/                  # Future opportunity research
+│   ├── README.md               # Ideas navigation hub
+│   ├── Micro-SaaS-Ideas.md     # Software product opportunities
+│   ├── Productized-Services.md # Packaged service offerings
+│   ├── Digital-Products.md     # Templates, courses, tools
+│   └── Platform-Extensions.md  # Spinoffs from existing ventures
+│
+├── Templates/              # Business document templates
+│   └── Venture Canvas.md       # Business model canvas
+│
+└── Research/               # Market research & analysis
+    └── (future research docs)
+```
+
+---
+
+## Venture Stages
+
+| Stage | Description | Ventures |
+|-------|-------------|----------|
+| **Concept** | Early idea, needs validation | Rent-a-Nerd |
+| **Planning** | Active business planning | LazyGolf |
+| **Active** | Generating revenue or in development | ndev Consulting |
+| **Holding** | Parent company / umbrella | Kikman Enterprises |
+
+---
+
+## Ideas Pipeline
+
+| Category | Count | Top Opportunities |
+|----------|-------|-------------------|
+| [[Ideas/Micro-SaaS-Ideas\|Micro SaaS]] | 9 ideas | Golf Betting Calculator, AI Content Tools |
+| [[Ideas/Productized-Services\|Productized Services]] | 6 ideas | Website Care Plans, AI Integration Packages |
+| [[Ideas/Digital-Products\|Digital Products]] | 7 ideas | Claude Code Pack, Dev Templates |
+| [[Ideas/Platform-Extensions\|Platform Extensions]] | 9 ideas | LazyGolf Pro B2B, Rent-a-Nerd Training |
+
+---
+
+## Related Links
+
+- [[Home]] - Main workspace hub
+- [[Projects/Lazy Golfing]] - LazyGolf platform development
+- [[Dashboards/Active Projects]] - All active projects
+
+---
+
+*Last updated: 2025-12-14*

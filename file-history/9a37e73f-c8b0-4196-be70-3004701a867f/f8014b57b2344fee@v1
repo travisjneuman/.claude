@@ -1,0 +1,173 @@
+/**
+ * GitHub Repo Stats Widget
+ * Statistics for a specific GitHub repository
+ */
+
+import React, { useState } from 'react';
+import { BaseWidget } from './BaseWidget';
+import { useWidgetStore } from '../../stores/useWidgetStore';
+
+interface RepoStats {
+  name: string;
+  owner: string;
+  description: string;
+  stars: number;
+  forks: number;
+  watchers: number;
+  openIssues: number;
+  language: string;
+  url: string;
+}
+
+interface RepoStatsWidgetProps {
+  widgetId?: string;
+}
+
+export const RepoStatsWidget: React.FC<RepoStatsWidgetProps> = ({ widgetId = 'repostats' }) => {
+  const repoUrl = useWidgetStore((state) => state.widgetSettings[widgetId]?.repoUrl);
+  const updateWidgetSettings = useWidgetStore((state) => state.updateWidgetSettings);
+
+  const [inputUrl, setInputUrl] = useState('');
+  const [stats, setStats] = useState<RepoStats | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const fetchStats = async (url: string) => {
+    if (!url.trim()) return;
+
+    setLoading(true);
+    setError(null);
+
+    try {
+      // Parse various input formats
+      let owner: string;
+      let repo: string;
+
+      // Remove trailing slashes and whitespace
+      const cleaned = url.trim().replace(/\/$/, '');
+
+      // Try parsing as full URL (https://github.com/owner/repo or github.com/owner/repo)
+      const urlMatch = cleaned.match(/github\.com\/([^\/]+)\/([^\/]+)/);
+      if (urlMatch) {
+        [, owner, repo] = urlMatch;
+      }
+      // Try parsing as owner/repo format
+      else if (cleaned.includes('/')) {
+        [owner, repo] = cleaned.split('/');
+        if (!owner || !repo) throw new Error('Invalid format');
+      }
+      // Single word - treat as username, fetch user stats instead
+      else {
+        // For username only, we could fetch user stats, but for now show error
+        throw new Error('Please enter owner/repo or full URL');
+      }
+
+      const response = await fetch(`https://api.github.com/repos/${owner}/${repo}`);
+      if (!response.ok) throw new Error('Repository not found');
+
+      const data = await response.json();
+      setStats({
+        name: data.name,
+        owner: data.owner.login,
+        description: data.description || 'No description',
+        stars: data.stargazers_count,
+        forks: data.forks_count,
+        watchers: data.watchers_count,
+        openIssues: data.open_issues_count,
+        language: data.language || 'Unknown',
+        url: data.html_url,
+      });
+
+      updateWidgetSettings(widgetId, { repoUrl: url });
+    } catch (err) {
+      setError('Repository not found');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    fetchStats(inputUrl);
+  };
+
+  const formatNumber = (num: number) => {
+    if (num >= 1000) return `${(num / 1000).toFixed(1)}k`;
+    return num.toString();
+  };
+
+  // Auto-fetch if repoUrl exists
+  React.useEffect(() => {
+    if (repoUrl && !stats) {
+      setInputUrl(repoUrl);
+      fetchStats(repoUrl);
+    }
+  }, [repoUrl]);
+
+  return (
+    <BaseWidget title={stats ? `${stats.owner}/${stats.name}` : 'Repo Stats'} icon="📊" loading={loading} error={error}>
+      <div className="space-y-3">
+        {!stats && (
+          <form onSubmit={handleSubmit} className="flex gap-2">
+            <input
+              type="text"
+              value={inputUrl}
+              onChange={(e) => setInputUrl(e.target.value)}
+              placeholder="owner/repo or full URL"
+              className="flex-1 px-3 py-2 text-sm rounded-lg bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark text-text-light-primary dark:text-text-dark-primary focus:ring-2 focus:ring-accent-blue"
+            />
+            <button
+              type="submit"
+              className="px-4 py-2 bg-accent-blue hover:bg-accent-blue-hover text-white rounded-lg text-sm font-medium"
+            >
+              Load
+            </button>
+          </form>
+        )}
+
+        {stats && (
+          <div className="space-y-2">
+            <p className="text-xs text-text-light-secondary dark:text-text-dark-secondary line-clamp-2">
+              {stats.description}
+            </p>
+
+            <div className="grid grid-cols-2 gap-2 text-sm">
+              <div className="bg-surface-light-elevated dark:bg-surface-dark rounded-lg p-2 text-center">
+                <div className="text-lg font-bold text-accent-blue">{formatNumber(stats.stars)}</div>
+                <div className="text-xs text-text-light-secondary dark:text-text-dark-secondary">Stars</div>
+              </div>
+              <div className="bg-surface-light-elevated dark:bg-surface-dark rounded-lg p-2 text-center">
+                <div className="text-lg font-bold text-accent-magenta">{formatNumber(stats.forks)}</div>
+                <div className="text-xs text-text-light-secondary dark:text-text-dark-secondary">Forks</div>
+              </div>
+              <div className="bg-surface-light-elevated dark:bg-surface-dark rounded-lg p-2 text-center">
+                <div className="text-lg font-bold text-accent-cyan">{formatNumber(stats.watchers)}</div>
+                <div className="text-xs text-text-light-secondary dark:text-text-dark-secondary">Watchers</div>
+              </div>
+              <div className="bg-surface-light-elevated dark:bg-surface-dark rounded-lg p-2 text-center">
+                <div className="text-lg font-bold text-text-light-primary dark:text-text-dark-primary">
+                  {stats.openIssues}
+                </div>
+                <div className="text-xs text-text-light-secondary dark:text-text-dark-secondary">Issues</div>
+              </div>
+            </div>
+
+            <div className="flex items-center justify-between text-xs">
+              <span className="text-text-light-secondary dark:text-text-dark-secondary">
+                Language: <span className="text-text-light-primary dark:text-text-dark-primary font-medium">{stats.language}</span>
+              </span>
+              <a
+                href={stats.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-accent-blue hover:underline"
+              >
+                View on GitHub →
+              </a>
+            </div>
+          </div>
+        )}
+      </div>
+    </BaseWidget>
+  );
+};

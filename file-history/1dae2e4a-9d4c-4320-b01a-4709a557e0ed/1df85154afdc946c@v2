@@ -1,0 +1,54 @@
+/**
+ * Recent Notes Widget
+ *
+ * Shows 5 most recently updated notes
+ */
+
+import React from 'react';
+import { BaseWidget } from './BaseWidget';
+import { useNotesStore } from '../../stores/useNotesStore';
+import { useNavigate } from 'react-router-dom';
+
+export const RecentNotesWidget: React.FC = () => {
+  const notes = useNotesStore((state) => state.notes);
+  const navigate = useNavigate();
+
+  const recentNotes = Object.values(notes)
+    .sort((a, b) => {
+      const aTime = a.updatedAt instanceof Date ? a.updatedAt.getTime() : new Date(a.updatedAt).getTime();
+      const bTime = b.updatedAt instanceof Date ? b.updatedAt.getTime() : new Date(b.updatedAt).getTime();
+      return bTime - aTime;
+    })
+    .slice(0, 5);
+
+  return (
+    <BaseWidget title="Recent Notes" icon="📝" subtitle="Last 5 updated">
+      <div className="flex flex-col h-full min-h-[160px]">
+        {recentNotes.length > 0 ? (
+          <div className="space-y-2 mb-4">
+            {recentNotes.map((note) => (
+              <button
+                key={note.id}
+                onClick={() => navigate('/notes')}
+                className="w-full text-left p-2 rounded hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-all duration-standard ease-smooth"
+              >
+                <div className="font-medium text-text-light-primary dark:text-text-dark-primary">{note.title || 'Untitled'}</div>
+                <div className="text-sm text-text-light-secondary dark:text-text-dark-secondary">
+                  {new Date(note.updatedAt).toLocaleDateString()}
+                </div>
+              </button>
+            ))}
+          </div>
+        ) : (
+          <p className="text-text-light-secondary dark:text-text-dark-secondary mb-4">No notes yet</p>
+        )}
+        <button
+          onClick={() => navigate('/notes')}
+          className="w-full mt-auto px-4 py-2.5 bg-accent-cyan hover:bg-accent-cyan-hover text-white rounded-button text-sm font-medium transition-all duration-standard ease-smooth"
+        >
+          View All Notes →
+        </button>
+      </div>
+    </BaseWidget>
+  );
+};

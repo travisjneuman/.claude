@@ -1,0 +1,88 @@
+/**
+ * Stock Market Widget
+ * Real-time stock prices using Finnhub API
+ */
+
+import React, { useState, useEffect, useCallback } from 'react';
+import { BaseWidget } from './BaseWidget';
+
+interface StockData {
+  symbol: string;
+  price: number;
+  change: number;
+  percentChange: number;
+}
+
+const DEFAULT_STOCKS = ['AAPL', 'GOOGL', 'TSLA', 'MSFT'];
+
+export const StockMarketWidget: React.FC = () => {
+  const [stocks, setStocks] = useState<StockData[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const fetchStocks = useCallback(async () => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      // Using Finnhub free tier (demo token - rate limited)
+      const stockPromises = DEFAULT_STOCKS.map(async (symbol) => {
+        const response = await fetch(
+          `https://finnhub.io/api/v1/quote?symbol=${symbol}&token=demo`
+        );
+        if (!response.ok) throw new Error('API limit reached');
+
+        const data = await response.json();
+        return {
+          symbol,
+          price: data.c || 0,
+          change: data.d || 0,
+          percentChange: data.dp || 0,
+        };
+      });
+
+      const stockData = await Promise.all(stockPromises);
+      setStocks(stockData);
+    } catch (err) {
+      setError('API rate limit. Try again later.');
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchStocks();
+    const interval = setInterval(fetchStocks, 60000); // Every minute
+    return () => clearInterval(interval);
+  }, [fetchStocks]);
+
+  return (
+    <BaseWidget title="Stock Market" icon="📈" loading={loading} error={error} onRefresh={fetchStocks}>
+      <div className="space-y-2">
+        {stocks.map((stock) => (
+          <div
+            key={stock.symbol}
+            className="flex justify-between items-center p-2 bg-surface-light-elevated dark:bg-surface-dark rounded-lg"
+          >
+            <div>
+              <div className="font-semibold text-text-light-primary dark:text-text-dark-primary">
+                {stock.symbol}
+              </div>
+              <div className="text-sm text-text-light-secondary dark:text-text-dark-secondary">
+                ${stock.price.toFixed(2)}
+              </div>
+            </div>
+            <div className={`text-right ${stock.change >= 0 ? 'text-status-success' : 'text-status-error'}`}>
+              <div className="font-semibold">
+                {stock.change >= 0 ? '+' : ''}{stock.change.toFixed(2)}
+              </div>
+              <div className="text-sm">
+                {stock.percentChange >= 0 ? '+' : ''}{stock.percentChange.toFixed(2)}%
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </BaseWidget>
+  );
+};

@@ -1,0 +1,64 @@
+# Notes Page Revolution: 3 Layout Architectures
+
+## Status: COMPLETE
+
+## Overview
+Complete rebuild of the Notes page providing 3 distinct, user-selectable layout architectures to address user feedback about cramped sidebar, limited editor space, and lack of customization.
+
+## Requirements
+- [x] Three-Column Layout (Apple Notes/Bear style)
+- [x] File Tree Layout (Obsidian/VS Code style)
+- [x] Tabbed Sidebar Layout (Notion style)
+- [x] Layout switching mechanism (modal + keyboard shortcut)
+- [x] Persisted layout preference
+- [x] Extracted components from monolithic Notes.tsx
+- [x] Keyboard navigation for folder tree and notes list
+- [x] Reduced motion support
+
+## Files Created
+- `src/components/notes/ThreeColumnLayout.tsx` - Folders | Notes List | Editor
+- `src/components/notes/FileTreeLayout.tsx` - Unified file tree | Editor
+- `src/components/notes/TabbedSidebarLayout.tsx` - Tabs for Folders/Tags/All | Editor
+- `src/components/notes/LayoutSwitcher.tsx` - Modal for switching layouts
+- `src/components/notes/NotesLayout.tsx` - Layout router
+- `src/components/notes/FolderSidebar.tsx` - Folder tree + search
+- `src/components/notes/FolderTreeNode.tsx` - Recursive folder item
+- `src/components/notes/NoteListItem.tsx` - Individual note card
+- `src/components/notes/NotesList.tsx` - Filtered/sorted notes list
+- `src/components/notes/SidebarResizer.tsx` - Vertical resize handle
+- `src/components/notes/HorizontalSplitter.tsx` - Horizontal resize handle
+- `src/components/notes/KeyboardShortcutsModal.tsx` - Help modal
+- `src/components/notes/index.ts` - Barrel exports
+- `src/hooks/useFolderTreeKeyboard.ts` - Folder tree navigation
+- `src/hooks/useNotesListKeyboard.ts` - Notes list navigation
+- `src/hooks/useReducedMotion.ts` - Motion preference detection
+
+## Files Modified
+- `src/stores/useSettingsStore.ts` - Added `layoutStyle` preference
+- `src/pages/Notes.tsx` - Slimmed from 1377 to ~200 lines
+- `src/components/CLAUDE.md` - Updated documentation
+- `src/hooks/CLAUDE.md` - Updated documentation
+
+## Key Decisions
+1. **Three distinct layouts** - Rather than one-size-fits-all, let users choose
+2. **Cmd+Shift+L to cycle** - Fast switching without opening settings
+3. **Flexbox layouts** - No hardcoded heights, fills available space
+4. **Persisted to localStorage** - Via Zustand persist middleware
+
+## Verification
+- Type check: Passed
+- Tests: 221/221 passed
+- Build: Succeeded (32.52s)
+
+## Review
+The Notes Page Revolution is complete. All 3 layout architectures are implemented and verified. Users can switch between layouts using:
+- Settings gear icon -> LayoutSwitcher modal
+- Keyboard shortcut: Cmd+Shift+L
+
+Each layout addresses different user preferences:
+- **Three-Column**: Clear visual separation, good for organizing
+- **File Tree**: Unified view, good for large collections
+- **Tabbed Sidebar**: Tag-based organization, compact view
+
+---
+Date: 2025-12-14

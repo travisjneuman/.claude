@@ -1,0 +1,970 @@
+import { create } from 'zustand';
+import { persist, createJSONStorage } from 'zustand/middleware';
+import type {
+  KanbanState,
+  Task,
+  TaskStatus,
+  TaskPriority,
+  KanbanColumn,
+  ChecklistItem,
+  TaskComment,
+  ActivityLogEntry,
+  UndoHistoryEntry,
+  Subtask,
+  SimpleTaskDependency
+} from '../types';
+import { createSyncedStorage } from '../lib/syncedStorage';
+
+// Phase 4: Default columns (replaces hardcoded columns)
+const DEFAULT_COLUMNS: KanbanColumn[] = [
+  { id: 'backlog', title: 'Backlog', color: 'bg-neutral-400', order: 0 },
+  { id: 'todo', title: 'To Do', color: 'bg-status-info', order: 1 },
+  { id: 'inprogress', title: 'In Progress', color: 'bg-status-warning', order: 2 },
+  { id: 'review', title: 'In Review', color: 'bg-accent-blue', order: 3 },
+  { id: 'done', title: 'Done', color: 'bg-status-success', order: 4 },
+];
+
+interface KanbanStore extends KanbanState {
+  // Existing task actions
+  addTask: (task: Omit<Task, 'id' | 'created'>) => void;
+  updateTask: (id: string, updates: Partial<Task>) => void;
+  deleteTask: (id: string) => void;
+  moveTask: (id: string, newStatus: TaskStatus) => void;
+  getTasksByStatus: (status: TaskStatus) => Task[];
+
+  // Phase 4: Column management
+  addColumn: (column: Omit<KanbanColumn, 'id' | 'order'>) => void;
+  updateColumn: (id: string, updates: Partial<KanbanColumn>) => void;
+  deleteColumn: (id: string) => void;
+  reorderColumns: (columnIds: string[]) => void;
+  replaceAllColumns: (newColumns: Omit<KanbanColumn, 'id' | 'order'>[]) => void;
+
+  // Phase 4: Checklist management
+  addChecklistItem: (taskId: string, text: string) => void;
+  updateChecklistItem: (taskId: string, itemId: string, updates: Partial<ChecklistItem>) => void;
+  deleteChecklistItem: (taskId: string, itemId: string) => void;
+  toggleChecklistItem: (taskId: string, itemId: string) => void;
+  reorderChecklistItems: (taskId: string, itemIds: string[]) => void;
+
+  // Phase 4: Comment management
+  addComment: (taskId: string, text: string) => void;
+  updateComment: (taskId: string, commentId: string, text: string) => void;
+  deleteComment: (taskId: string, commentId: string) => void;
+
+  // Phase 4: Activity log (auto-tracked)
+  logActivity: (taskId: string, entry: Omit<ActivityLogEntry, 'id' | 'timestamp'>) => void;
+
+  // Phase 4: Bulk actions
+  bulkUpdateStatus: (taskIds: string[], newStatus: TaskStatus) => void;
+  bulkUpdatePriority: (taskIds: string[], newPriority: TaskPriority) => void;
+  bulkDeleteTasks: (taskIds: string[]) => void;
+
+  // Phase 5: Subtask management
+  addSubtask: (taskId: string, subtaskData: Omit<Subtask, 'id' | 'parentTaskId' | 'createdAt' | 'order'>) => void;
+  updateSubtask: (taskId: string, subtaskId: string, updates: Partial<Subtask>) => void;
+  deleteSubtask: (taskId: string, subtaskId: string) => void;
+  toggleSubtask: (taskId: string, subtaskId: string) => void;
+  reorderSubtasks: (taskId: string, subtaskIds: string[]) => void;
+
+  // Phase 5: Dependency management
+  addDependency: (sourceTaskId: string, targetTaskId: string) => void;
+  removeDependency: (dependencyId: string) => void;
+  getBlockers: (taskId: string) => Task[];
+  getBlocked: (taskId: string) => Task[];
+
+  // Phase A: Archive management
+  archiveTask: (id: string) => void;
+  restoreTask: (id: string) => void;
+  deleteArchivedTask: (id: string) => void;
+  getArchivedTasks: () => Task[];
+  autoArchiveCompletedTasks: () => void;
+
+  // Undo system
+  undoHistory: UndoHistoryEntry[];
+  addToUndoHistory: (entry: Omit<UndoHistoryEntry, 'id' | 'timestamp'>) => void;
+  undo: () => void;
+  clearUndoHistory: () => void;
+}
+
+export const useKanbanStore = create<KanbanStore>()(
+  persist(
+    (set, get) => ({
+      // Initial state
+      tasks: [],
+      columns: DEFAULT_COLUMNS,
+      dependencies: [], // Phase 5: Task dependencies
+      archivedTasks: [], // Phase A: Archived tasks
+      nextCardNumber: 1, // Phase A: Auto-incrementing card number counter
+      undoHistory: [], // Undo system: stores last 5 actions
+
+      // ==================== TASK ACTIONS ====================
+
+      addTask: (taskData) => {
+        const currentNumber = get().nextCardNumber || 1;
+
+        const newTask: Task = {
+          ...taskData,
+          id: Date.now().toString(),
+          created: new Date().toISOString(),
+          cardNumber: currentNumber, // Phase A: Assign auto-incrementing card number
+          checklist: [],
+          comments: [],
+          activityLog: [],
+        };
+
+        set((state) => ({
+          tasks: [...state.tasks, newTask],
+          nextCardNumber: currentNumber + 1, // Increment counter
+        }));
+
+        // Log creation
+        get().logActivity(newTask.id, {
+          action: 'created',
+        });
+      },
+
+      updateTask: (id, updates) => {
+        const oldTask = get().tasks.find((t) => t.id === id);
+        if (!oldTask) return;
+
+        set((state) => ({
+          tasks: state.tasks.map((task) =>
+            task.id === id ? { ...task, ...updates } : task
+          ),
+        }));
+
+        // Log updates (track specific fields)
+        Object.keys(updates).forEach((field) => {
+          if (field !== 'activityLog') { // Don't log the log itself
+            get().logActivity(id, {
+              action: 'updated',
+              field,
+              oldValue: String(oldTask[field as keyof Task] ?? ''),
+              newValue: String(updates[field as keyof Task] ?? ''),
+            });
+          }
+        });
+      },
+
+      deleteTask: (id) =>
+        set((state) => ({
+          tasks: state.tasks.filter((task) => task.id !== id),
+        })),
+
+      moveTask: (id, newStatus) => {
+        const oldTask = get().tasks.find((t) => t.id === id);
+        if (!oldTask) return;
+
+        // PHASE 5 PART 6: Validate dependencies before moving to "done"
+        if (newStatus === 'done') {
+          const blockers = get().getBlockers(id);
+          const incompleteBlockers = blockers.filter((b) => b.status !== 'done');
+
+          if (incompleteBlockers.length > 0) {
+            console.warn(
+              `Cannot complete task "${oldTask.title}": Blocked by ${incompleteBlockers.length} incomplete task(s)`
+            );
+            // TODO: Show toast notification in UI
+            return; // Prevent move
+          }
+        }
+
+        // PHASE A: Track when task is completed (for auto-archive)
+        const updates: Partial<Task> = { status: newStatus };
+        if (newStatus === 'done' && oldTask.status !== 'done') {
+          updates.lastCompletedAt = new Date().toISOString();
+        }
+
+        set((state) => ({
+          tasks: state.tasks.map((task) =>
+            task.id === id ? { ...task, ...updates } : task
+          ),
+        }));
+
+        // Log move
+        get().logActivity(id, {
+          action: 'moved',
+          field: 'status',
+          oldValue: oldTask.status,
+          newValue: newStatus,
+        });
+      },
+
+      getTasksByStatus: (status) => {
+        return get().tasks.filter((task) => task.status === status);
+      },
+
+      // ==================== COLUMN ACTIONS ====================
+
+      addColumn: (columnData) => {
+        const columns = get().columns;
+        const newColumn: KanbanColumn = {
+          ...columnData,
+          id: `col-${Date.now()}`,
+          order: columns.length,
+        };
+
+        set((state) => ({
+          columns: [...state.columns, newColumn],
+        }));
+      },
+
+      updateColumn: (id, updates) => {
+        set((state) => ({
+          columns: state.columns.map((col) =>
+            col.id === id ? { ...col, ...updates } : col
+          ),
+        }));
+      },
+
+      deleteColumn: (id) => {
+        const state = get();
+        const columnToDelete = state.columns.find(col => col.id === id);
+
+        if (!columnToDelete) {
+          console.warn(`deleteColumn: Column with id '${id}' not found`);
+          return;
+        }
+
+        // Save undo entry BEFORE making changes
+        get().addToUndoHistory({
+          action: 'deleteColumn',
+          description: `Deleted column '${columnToDelete.title}'`,
+          previousState: {
+            columns: state.columns,
+            tasks: state.tasks,
+          },
+        });
+
+        // Find first remaining column (fallback, not hardcoded 'backlog')
+        const firstRemainingColumn = state.columns.find(col => col.id !== id);
+
+        if (!firstRemainingColumn) {
+          console.error('deleteColumn: Cannot delete last column');
+          return;
+        }
+
+        // Move all tasks from deleted column to first remaining column
+        set((state) => ({
+          columns: state.columns.filter((col) => col.id !== id),
+          tasks: state.tasks.map((task) =>
+            task.status === id as TaskStatus
+              ? { ...task, status: firstRemainingColumn.id as TaskStatus }
+              : task
+          ),
+        }));
+      },
+
+      reorderColumns: (columnIds) => {
+        const columns = get().columns;
+        const reordered = columnIds
+          .map((id) => columns.find((col) => col.id === id))
+          .filter((col): col is KanbanColumn => col !== undefined)
+          .map((col, index) => ({ ...col, order: index }));
+
+        set({ columns: reordered });
+      },
+
+      replaceAllColumns: (newColumns: Omit<KanbanColumn, 'id' | 'order'>[]) => {
+        const state = get();
+
+        // Save undo entry BEFORE making changes
+        get().addToUndoHistory({
+          action: 'replaceAllColumns',
+          description: `Applied template`,
+          previousState: {
+            columns: state.columns,
+            tasks: state.tasks,
+          },
+        });
+
+        // Generate new columns with fresh IDs and correct order
+        const columns: KanbanColumn[] = newColumns.map((col, index) => ({
+          ...col,
+          id: `col-${Date.now()}-${index}`,
+          order: index,
+        }));
+
+        if (columns.length === 0) {
+          console.error('replaceAllColumns: No columns provided');
+          return;
+        }
+
+        // Smart mapping: Try to preserve task positions based on column titles
+        const tasks = state.tasks.map(task => {
+          const oldColumn = state.columns.find(c => c.id === task.status);
+          if (!oldColumn) {
+            // Task has invalid status, move to first column
+            return { ...task, status: columns[0].id as TaskStatus };
+          }
+
+          // Try exact match first (case-insensitive)
+          let newColumn = columns.find(c =>
+            c.title.toLowerCase() === oldColumn.title.toLowerCase()
+          );
+
+          // If no exact match, try partial match (contains)
+          if (!newColumn) {
+            newColumn = columns.find(c =>
+              c.title.toLowerCase().includes(oldColumn.title.toLowerCase()) ||
+              oldColumn.title.toLowerCase().includes(c.title.toLowerCase())
+            );
+          }
+
+          // Fallback: first column
+          if (!newColumn) {
+            newColumn = columns[0];
+          }
+
+          return { ...task, status: newColumn.id as TaskStatus };
+        });
+
+        set({ columns, tasks });
+      },
+
+      // ==================== CHECKLIST ACTIONS ====================
+
+      addChecklistItem: (taskId, text) => {
+        const task = get().tasks.find((t) => t.id === taskId);
+        if (!task) return;
+
+        const newItem: ChecklistItem = {
+          id: `check-${Date.now()}`,
+          text,
+          completed: false,
+          order: (task.checklist || []).length,
+          createdAt: new Date().toISOString(),
+        };
+
+        set((state) => ({
+          tasks: state.tasks.map((t) =>
+            t.id === taskId
+              ? { ...t, checklist: [...(t.checklist || []), newItem] }
+              : t
+          ),
+        }));
+
+        // Log checklist update
+        get().logActivity(taskId, {
+          action: 'checklist_updated',
+          newValue: `Added: ${text}`,
+        });
+      },
+
+      updateChecklistItem: (taskId, itemId, updates) => {
+        set((state) => ({
+          tasks: state.tasks.map((t) =>
+            t.id === taskId
+              ? {
+                  ...t,
+                  checklist: (t.checklist || []).map((item) =>
+                    item.id === itemId ? { ...item, ...updates } : item
+                  ),
+                }
+              : t
+          ),
+        }));
+      },
+
+      deleteChecklistItem: (taskId, itemId) => {
+        const task = get().tasks.find((t) => t.id === taskId);
+        if (!task) return;
+
+        const item = task.checklist?.find((i) => i.id === itemId);
+        if (!item) return;
+
+        set((state) => ({
+          tasks: state.tasks.map((t) =>
+            t.id === taskId
+              ? {
+                  ...t,
+                  checklist: (t.checklist || []).filter((i) => i.id !== itemId),
+                }
+              : t
+          ),
+        }));
+
+        // Log deletion
+        get().logActivity(taskId, {
+          action: 'checklist_updated',
+          oldValue: `Removed: ${item.text}`,
+        });
+      },
+
+      toggleChecklistItem: (taskId, itemId) => {
+        const task = get().tasks.find((t) => t.id === taskId);
+        if (!task) return;
+
+        const item = task.checklist?.find((i) => i.id === itemId);
+        if (!item) return;
+
+        set((state) => ({
+          tasks: state.tasks.map((t) =>
+            t.id === taskId
+              ? {
+                  ...t,
+                  checklist: (t.checklist || []).map((i) =>
+                    i.id === itemId ? { ...i, completed: !i.completed } : i
+                  ),
+                }
+              : t
+          ),
+        }));
+
+        // Log toggle
+        get().logActivity(taskId, {
+          action: 'checklist_updated',
+          newValue: `${!item.completed ? 'Completed' : 'Unchecked'}: ${item.text}`,
+        });
+      },
+
+      reorderChecklistItems: (taskId, itemIds) => {
+        const task = get().tasks.find((t) => t.id === taskId);
+        if (!task) return;
+
+        const reordered = itemIds
+          .map((id) => task.checklist?.find((item) => item.id === id))
+          .filter((item): item is ChecklistItem => item !== undefined)
+          .map((item, index) => ({ ...item, order: index }));
+
+        set((state) => ({
+          tasks: state.tasks.map((t) =>
+            t.id === taskId ? { ...t, checklist: reordered } : t
+          ),
+        }));
+      },
+
+      // ==================== COMMENT ACTIONS ====================
+
+      addComment: (taskId, text) => {
+        const newComment: TaskComment = {
+          id: `comment-${Date.now()}`,
+          taskId,
+          text,
+          author: 'You', // For now, always "You". Future: user ID
+          createdAt: new Date().toISOString(),
+        };
+
+        set((state) => ({
+          tasks: state.tasks.map((t) =>
+            t.id === taskId
+              ? { ...t, comments: [...(t.comments || []), newComment] }
+              : t
+          ),
+        }));
+
+        // Log comment
+        get().logActivity(taskId, {
+          action: 'commented',
+          newValue: text.substring(0, 50) + (text.length > 50 ? '...' : ''),
+        });
+      },
+
+      updateComment: (taskId, commentId, text) => {
+        set((state) => ({
+          tasks: state.tasks.map((t) =>
+            t.id === taskId
+              ? {
+                  ...t,
+                  comments: (t.comments || []).map((c) =>
+                    c.id === commentId
+                      ? { ...c, text, updatedAt: new Date().toISOString() }
+                      : c
+                  ),
+                }
+              : t
+          ),
+        }));
+      },
+
+      deleteComment: (taskId, commentId) => {
+        set((state) => ({
+          tasks: state.tasks.map((t) =>
+            t.id === taskId
+              ? {
+                  ...t,
+                  comments: (t.comments || []).filter((c) => c.id !== commentId),
+                }
+              : t
+          ),
+        }));
+      },
+
+      // ==================== ACTIVITY LOG ====================
+
+      logActivity: (taskId, entry) => {
+        const newEntry: ActivityLogEntry = {
+          ...entry,
+          id: `activity-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+          timestamp: new Date().toISOString(),
+          userId: 'You', // For now, always "You"
+        };
+
+        set((state) => ({
+          tasks: state.tasks.map((t) =>
+            t.id === taskId
+              ? {
+                  ...t,
+                  activityLog: [
+                    ...(t.activityLog || []),
+                    newEntry,
+                  ].slice(-100), // Keep last 100 entries max (prevent bloat)
+                }
+              : t
+          ),
+        }));
+      },
+
+      // ==================== UNDO SYSTEM ====================
+
+      addToUndoHistory: (entry) => {
+        const newEntry: UndoHistoryEntry = {
+          ...entry,
+          id: `undo-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+          timestamp: new Date().toISOString(),
+        };
+
+        set((state) => ({
+          undoHistory: [
+            ...state.undoHistory,
+            newEntry,
+          ].slice(-5), // Keep last 5 entries max (prevent memory bloat)
+        }));
+      },
+
+      undo: () => {
+        const history = get().undoHistory;
+        if (history.length === 0) {
+          console.warn('undo: No undo history available');
+          return;
+        }
+
+        // Get most recent entry
+        const lastEntry = history[history.length - 1];
+
+        // Restore previous state
+        set({
+          columns: lastEntry.previousState.columns,
+          tasks: lastEntry.previousState.tasks,
+          undoHistory: history.slice(0, -1), // Remove this entry from history
+        });
+      },
+
+      clearUndoHistory: () => {
+        set({ undoHistory: [] });
+      },
+
+      // ==================== BULK ACTIONS ====================
+
+      bulkUpdateStatus: (taskIds, newStatus) => {
+        const state = get();
+
+        // Save undo state
+        get().addToUndoHistory({
+          action: 'bulkDelete',
+          description: `Changed status of ${taskIds.length} tasks`,
+          previousState: {
+            columns: state.columns,
+            tasks: state.tasks,
+          },
+        });
+
+        set((state) => ({
+          tasks: state.tasks.map((task) =>
+            taskIds.includes(task.id)
+              ? { ...task, status: newStatus }
+              : task
+          ),
+        }));
+
+        // Log activity for each task
+        taskIds.forEach(taskId => {
+          const task = state.tasks.find(t => t.id === taskId);
+          if (task) {
+            get().logActivity(taskId, {
+              action: 'updated',
+              field: 'status',
+              oldValue: task.status,
+              newValue: newStatus,
+            });
+          }
+        });
+      },
+
+      bulkUpdatePriority: (taskIds, newPriority) => {
+        const state = get();
+
+        // Save undo state
+        get().addToUndoHistory({
+          action: 'bulkDelete',
+          description: `Changed priority of ${taskIds.length} tasks`,
+          previousState: {
+            columns: state.columns,
+            tasks: state.tasks,
+          },
+        });
+
+        set((state) => ({
+          tasks: state.tasks.map((task) =>
+            taskIds.includes(task.id)
+              ? { ...task, priority: newPriority }
+              : task
+          ),
+        }));
+
+        // Log activity for each task
+        taskIds.forEach(taskId => {
+          const task = state.tasks.find(t => t.id === taskId);
+          if (task) {
+            get().logActivity(taskId, {
+              action: 'updated',
+              field: 'priority',
+              oldValue: task.priority,
+              newValue: newPriority,
+            });
+          }
+        });
+      },
+
+      bulkDeleteTasks: (taskIds) => {
+        const state = get();
+
+        // Save undo state
+        get().addToUndoHistory({
+          action: 'bulkDelete',
+          description: `Deleted ${taskIds.length} tasks`,
+          previousState: {
+            columns: state.columns,
+            tasks: state.tasks,
+          },
+        });
+
+        set((state) => ({
+          tasks: state.tasks.filter((task) => !taskIds.includes(task.id)),
+        }));
+      },
+
+      // ==================== PHASE 5: SUBTASK ACTIONS ====================
+
+      addSubtask: (taskId, subtaskData) => {
+        set((state) => ({
+          tasks: state.tasks.map((task) => {
+            if (task.id === taskId) {
+              const subtasks = task.subtasks || [];
+              const newSubtask: Subtask = {
+                ...subtaskData,
+                id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+                parentTaskId: taskId,
+                order: subtasks.length,
+                createdAt: new Date().toISOString(),
+              };
+              return {
+                ...task,
+                subtasks: [...subtasks, newSubtask],
+              };
+            }
+            return task;
+          }),
+        }));
+
+        // Log activity
+        get().logActivity(taskId, {
+          action: 'created',
+          field: 'subtask',
+          newValue: subtaskData.title,
+        });
+      },
+
+      updateSubtask: (taskId, subtaskId, updates) => {
+        set((state) => ({
+          tasks: state.tasks.map((task) => {
+            if (task.id === taskId && task.subtasks) {
+              return {
+                ...task,
+                subtasks: task.subtasks.map((subtask) =>
+                  subtask.id === subtaskId ? { ...subtask, ...updates } : subtask
+                ),
+              };
+            }
+            return task;
+          }),
+        }));
+
+        // Log activity
+        get().logActivity(taskId, {
+          action: 'updated',
+          field: 'subtask',
+          newValue: JSON.stringify(updates),
+        });
+      },
+
+      deleteSubtask: (taskId, subtaskId) => {
+        const task = get().tasks.find((t) => t.id === taskId);
+        const subtask = task?.subtasks?.find((s) => s.id === subtaskId);
+
+        set((state) => ({
+          tasks: state.tasks.map((task) => {
+            if (task.id === taskId && task.subtasks) {
+              return {
+                ...task,
+                subtasks: task.subtasks.filter((s) => s.id !== subtaskId),
+              };
+            }
+            return task;
+          }),
+        }));
+
+        // Log activity
+        if (subtask) {
+          get().logActivity(taskId, {
+            action: 'created',
+            field: 'subtask',
+            oldValue: subtask.title,
+          });
+        }
+      },
+
+      toggleSubtask: (taskId, subtaskId) => {
+        set((state) => ({
+          tasks: state.tasks.map((task) => {
+            if (task.id === taskId && task.subtasks) {
+              return {
+                ...task,
+                subtasks: task.subtasks.map((subtask) => {
+                  if (subtask.id === subtaskId) {
+                    const completed = !subtask.completed;
+                    return {
+                      ...subtask,
+                      completed,
+                      completedAt: completed ? new Date().toISOString() : undefined,
+                    };
+                  }
+                  return subtask;
+                }),
+              };
+            }
+            return task;
+          }),
+        }));
+
+        // Log activity
+        const task = get().tasks.find((t) => t.id === taskId);
+        const subtask = task?.subtasks?.find((s) => s.id === subtaskId);
+        if (subtask) {
+          get().logActivity(taskId, {
+            action: 'updated',
+            field: 'subtask',
+            newValue: subtask.completed ? 'completed' : 'uncompleted',
+          });
+        }
+      },
+
+      reorderSubtasks: (taskId, subtaskIds) => {
+        set((state) => ({
+          tasks: state.tasks.map((task) => {
+            if (task.id === taskId && task.subtasks) {
+              const reorderedSubtasks = subtaskIds
+                .map((id, index) => {
+                  const subtask = task.subtasks!.find((s) => s.id === id);
+                  return subtask ? { ...subtask, order: index } : null;
+                })
+                .filter((s): s is Subtask => s !== null);
+
+              return {
+                ...task,
+                subtasks: reorderedSubtasks,
+              };
+            }
+            return task;
+          }),
+        }));
+
+        // Log activity
+        get().logActivity(taskId, {
+          action: 'updated',
+          field: 'subtasks',
+          newValue: 'reordered',
+        });
+      },
+
+      // ==================== PHASE 5: DEPENDENCY ACTIONS ====================
+
+      addDependency: (sourceTaskId, targetTaskId) => {
+        // Prevent self-dependency
+        if (sourceTaskId === targetTaskId) {
+          console.error('Task cannot depend on itself');
+          return;
+        }
+
+        // Check for circular dependency
+        const dependencies = get().dependencies || [];
+        const wouldCreateCycle = (source: string, target: string): boolean => {
+          if (source === target) return true;
+          const childDeps = dependencies.filter((d) => d.sourceTaskId === target);
+          return childDeps.some((d) => wouldCreateCycle(source, d.targetTaskId));
+        };
+
+        if (wouldCreateCycle(sourceTaskId, targetTaskId)) {
+          console.error('This would create a circular dependency');
+          return;
+        }
+
+        const newDependency: SimpleTaskDependency = {
+          id: `dep-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+          sourceTaskId,
+          targetTaskId,
+          createdAt: new Date().toISOString(),
+        };
+
+        set((state) => ({
+          dependencies: [...(state.dependencies || []), newDependency],
+        }));
+
+        // Log activity for both tasks
+        get().logActivity(sourceTaskId, {
+          action: 'created',
+          field: 'dependency',
+          newValue: `Blocks task ${targetTaskId}`,
+        });
+
+        get().logActivity(targetTaskId, {
+          action: 'created',
+          field: 'dependency',
+          newValue: `Blocked by task ${sourceTaskId}`,
+        });
+      },
+
+      removeDependency: (dependencyId) => {
+        const dependency = get().dependencies?.find((d) => d.id === dependencyId);
+
+        set((state) => ({
+          dependencies: (state.dependencies || []).filter((d) => d.id !== dependencyId),
+        }));
+
+        // Log activity
+        if (dependency) {
+          get().logActivity(dependency.sourceTaskId, {
+            action: 'updated',
+            field: 'dependency',
+            oldValue: `Blocks task ${dependency.targetTaskId}`,
+          });
+
+          get().logActivity(dependency.targetTaskId, {
+            action: 'updated',
+            field: 'dependency',
+            oldValue: `Blocked by task ${dependency.sourceTaskId}`,
+          });
+        }
+      },
+
+      getBlockers: (taskId) => {
+        const dependencies = get().dependencies || [];
+        const blockerIds = dependencies
+          .filter((d) => d.targetTaskId === taskId)
+          .map((d) => d.sourceTaskId);
+
+        return get().tasks.filter((t) => blockerIds.includes(t.id));
+      },
+
+      getBlocked: (taskId) => {
+        const dependencies = get().dependencies || [];
+        const blockedIds = dependencies
+          .filter((d) => d.sourceTaskId === taskId)
+          .map((d) => d.targetTaskId);
+
+        return get().tasks.filter((t) => blockedIds.includes(t.id));
+      },
+
+      // ==================== PHASE A: ARCHIVE ACTIONS ====================
+
+      archiveTask: (id) => {
+        const task = get().tasks.find((t) => t.id === id);
+        if (!task) return;
+
+        const archivedTask: Task = {
+          ...task,
+          archivedAt: new Date().toISOString(),
+        };
+
+        set((state) => ({
+          tasks: state.tasks.filter((t) => t.id !== id),
+          archivedTasks: [...(state.archivedTasks || []), archivedTask],
+        }));
+
+        // Log archive action
+        get().logActivity(id, {
+          action: 'updated',
+          field: 'archived',
+          newValue: 'true',
+        });
+      },
+
+      restoreTask: (id) => {
+        const archivedTask = get().archivedTasks?.find((t) => t.id === id);
+        if (!archivedTask) return;
+
+        // Remove archivedAt field when restoring
+        const { archivedAt, ...restoredTask } = archivedTask;
+
+        set((state) => ({
+          archivedTasks: (state.archivedTasks || []).filter((t) => t.id !== id),
+          tasks: [...state.tasks, restoredTask as Task],
+        }));
+
+        // Log restore action
+        get().logActivity(id, {
+          action: 'updated',
+          field: 'archived',
+          oldValue: 'true',
+          newValue: 'false',
+        });
+      },
+
+      deleteArchivedTask: (id) => {
+        set((state) => ({
+          archivedTasks: (state.archivedTasks || []).filter((t) => t.id !== id),
+        }));
+      },
+
+      getArchivedTasks: () => {
+        return (get().archivedTasks || []).sort((a, b) => {
+          // Sort by archive date (most recent first)
+          const dateA = new Date(a.archivedAt || 0).getTime();
+          const dateB = new Date(b.archivedAt || 0).getTime();
+          return dateB - dateA;
+        });
+      },
+
+      autoArchiveCompletedTasks: () => {
+        const now = new Date();
+        const fourteenDaysAgo = new Date(now.getTime() - 14 * 24 * 60 * 60 * 1000);
+
+        const tasksToArchive = get().tasks.filter((task) => {
+          // Only archive tasks in "done" status
+          if (task.status !== 'done') return false;
+
+          // Check if task has been completed for > 14 days
+          if (task.lastCompletedAt) {
+            const completedDate = new Date(task.lastCompletedAt);
+            return completedDate < fourteenDaysAgo;
+          }
+
+          return false;
+        });
+
+        // Archive each task
+        tasksToArchive.forEach((task) => {
+          get().archiveTask(task.id);
+        });
+
+        if (tasksToArchive.length > 0) {
+          console.log(`Auto-archived ${tasksToArchive.length} completed task(s)`);
+        }
+      },
+    }),
+    {
+      name: 'kanban-tasks',
+      storage: createJSONStorage(() => createSyncedStorage()),
+    }
+  )
+);

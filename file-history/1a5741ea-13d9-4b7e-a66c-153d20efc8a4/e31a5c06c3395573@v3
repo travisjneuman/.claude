@@ -1,0 +1,256 @@
+# Plan: Comprehensive .claude Folder Audit & Reorganization
+
+**Date:** December 16, 2025
+**Scope:** Full audit of C:\Users\tjn\.claude\ folder
+
+---
+
+## Executive Summary
+
+| Area | Files | Size | Issues Found | Action Required |
+|------|-------|------|--------------|-----------------|
+| `/docs/` | 10 | ~118KB | 15-20% redundancy | Merge 2 pairs |
+| `/skills/` root docs | 6 | ~107KB | Poor cross-linking, duplicate sections | Create index, extract maintenance |
+| `/plans/` | 31 | ~6KB | 10 complete not archived | Archive system |
+| `/CLAUDE.md Reference/` | 18 | **228KB** | Stale snapshots | DELETE or archive |
+| `/templates/` | 1 | ~2KB | None | Keep as-is |
+| `/commands/` | 2 | ~1KB | None | Keep as-is |
+| Root files | 2 | ~19KB | Minor overlap | Keep as-is |
+
+**Total cleanup potential:** ~228KB deletion + ~40KB consolidation
+
+---
+
+## PART 1: Files to MERGE (with rationale)
+
+### Merge 1: Skills Documentation Consolidation
+
+**Problem:** 4 Fortune 50 overview files have significant overlap
+
+| File | Size | Unique Content |
+|------|------|----------------|
+| `FORTUNE-50-SKILLS-SUMMARY.md` | 10KB | Complete inventory of all 18 skills |
+| `FORTUNE-50-SKILLS-README.md` | 16KB | User guide for Product & Data Science skills |
+| `fortune50-health-sustainability-skills-overview.md` | 18KB | Health/Wellness + ESG deep dive |
+| `innovation-rd-skills-summary.md` | 14KB | Innovation + R&D deep dive |
+
+**Overlap:**
+- Skill enumeration repeated in 3-4 files (~50-100 duplicate lines)
+- Maintenance guidance repeated in 3 files (~40-60 duplicate lines)
+- Usage patterns explained 3 different ways
+
+**Proposed Merge → `FORTUNE-50-COMPLETE-GUIDE.md` (~45KB)**
+- Section 1: Complete Inventory (from SUMMARY)
+- Section 2: How to Use (consolidated from all 4)
+- Section 3: Skill Deep Dives (organized by domain)
+- Section 4: Maintenance (single consolidated section)
+
+**Content preserved:** 100% - just reorganized
+
+---
+
+### Merge 2: Docs Workflow Consolidation
+
+**Problem:** Two files cover same workflow topic
+
+| File | Size | Focus |
+|------|------|-------|
+| `automation-guide.md` | 24KB | Comprehensive automation reference |
+| `workflow-checklist.md` | 7KB | Quick step-by-step checklist |
+
+**Proposed Merge → `workflow-automation.md` (~28KB)**
+- Add workflow-checklist content as "Quick Checklist" section at top
+- Keep detailed automation-guide content below
+- Single authoritative source for workflow
+
+**Content preserved:** 100%
+
+---
+
+### Merge 3: Skills Maintenance Extraction
+
+**Problem:** 3 files have duplicate maintenance guidance
+
+**Files affected:**
+- `FORTUNE-50-SKILLS-README.md` (lines 296-315)
+- `fortune50-health-sustainability-skills-overview.md` (lines 278-320)
+- `innovation-rd-skills-summary.md` (lines 312-333)
+
+**Proposed:** Extract to `SKILLS_MAINTENANCE.md` (~3KB)
+- Single source of truth for skill update procedures
+- Replace duplicates with link: "See SKILLS_MAINTENANCE.md"
+
+---
+
+## PART 2: Files to DELETE (with rationale)
+
+### Delete: `/CLAUDE.md Reference/` folder (228KB, 18 files)
+
+**What it contains:**
+- Archived copies of project CLAUDE.md files
+- Projects: lzg (5), neumanbrain (8), tdrportfolio (1), tjn projects (3), tokerleague (1)
+- Last updated: Dec 13, 2025 (already 3 days stale)
+
+**Why delete:**
+1. **Redundant:** Each project has current CLAUDE.md in its repo
+2. **Stale:** These become outdated as projects evolve
+3. **Token waste:** 228KB loaded into context unnecessarily
+4. **No maintenance:** Would require manual re-export on every project change
+
+**Risk:** NONE - originals exist in project repos
+
+**Alternative:** Move to `.archive/project-claude-snapshots-2025-12-13/` if you want historical record
+
+---
+
+## PART 3: Files to CREATE
+
+### Create 1: `/skills/MASTER_INDEX.md` (~3KB)
+
+**Purpose:** Navigation hub for all 6 skills documentation files
+
+**Content:**
+- Table linking all docs with descriptions
+- "Read this first" guide
+- Skill portfolio matrix (which file covers which skills)
+
+---
+
+### Create 2: `/plans/.archive/` folder
+
+**Purpose:** Store completed plans
+
+**Action:** Move 10 completed plans from active folders to archive
+
+---
+
+## PART 4: Incomplete Files to COMPLETE
+
+### Incomplete 1: `FORTUNE-50-SKILLS-README.md` (lines 142-178)
+
+**Issue:** "Converting to Claude Code Plugin Skills" section describes theoretical conversion but has no completed examples
+
+**To complete:** Add 1-2 concrete examples of converted skills, or mark section as "Future Enhancement"
+
+---
+
+### Incomplete 2: `/skills/README.md` (lines 33-55)
+
+**Issue:** "Example Skills" section mentions templates but doesn't link to actual example skill locations
+
+**To complete:** Add actual file paths to example skills
+
+---
+
+### Incomplete 3: Navigation gaps in all docs
+
+**Issue:** No file links to others or explains relationship
+
+**To complete:** Add "Related Documents" section to each file
+
+---
+
+## PART 5: Reference Updates Required
+
+After merges, these files need path updates:
+
+| File | References to Update |
+|------|---------------------|
+| `/docs/README.md` | Links to workflow-checklist.md → workflow-automation.md |
+| `/skills/README.md` | Links to Fortune 50 files → FORTUNE-50-COMPLETE-GUIDE.md |
+| `/docs/FOLDER-STRUCTURE.md` | File inventory |
+| Root `README.md` | Any docs/ references |
+
+---
+
+## Execution Order
+
+### Phase 1: Safe Deletions (5 min)
+1. Delete or archive `/CLAUDE.md Reference/` folder
+
+### Phase 2: Skills Consolidation (45 min)
+1. Create `/skills/MASTER_INDEX.md`
+2. Create `/skills/SKILLS_MAINTENANCE.md` (extract from 3 files)
+3. Merge 4 Fortune 50 files → `FORTUNE-50-COMPLETE-GUIDE.md`
+4. Delete original 4 files
+5. Update cross-references
+
+### Phase 3: Docs Consolidation (30 min)
+1. Merge workflow-checklist.md + automation-guide.md → `workflow-automation.md`
+2. Delete original 2 files
+3. Update cross-references
+
+### Phase 4: Plans Archival (15 min)
+1. Create `/plans/.archive/`
+2. Identify and move completed plans
+3. Add status markers to remaining plans
+
+### Phase 5: Complete Incomplete Sections (20 min)
+1. Add examples to FORTUNE-50-SKILLS-README.md (or merged file)
+2. Add example skill paths to README.md
+3. Add navigation links to all docs
+
+### Phase 6: Verify All References (15 min)
+1. Grep for old file paths
+2. Update all broken references
+3. Test navigation
+
+---
+
+## User Decisions (December 16, 2025)
+
+| Decision | Choice |
+|----------|--------|
+| CLAUDE.md Reference folder | **Archive** to `.archive/project-claude-snapshots-2025-12-13/` |
+| Fortune 50 files | **Merge all 4** into `FORTUNE-50-COMPLETE-GUIDE.md` |
+| Workflow docs | **Merge** into `workflow-automation.md` |
+| Incomplete sections | **Add concrete examples** to complete them |
+
+---
+
+## Final Execution Checklist
+
+### Phase 1: Archive Reference Folder
+- [ ] Create `.archive/project-claude-snapshots-2025-12-13/`
+- [ ] Move all 18 files from `/CLAUDE.md Reference/` to archive
+- [ ] Delete empty `/CLAUDE.md Reference/` folder
+
+### Phase 2: Skills Documentation Consolidation
+- [ ] Read all 4 Fortune 50 files completely
+- [ ] Create `/skills/FORTUNE-50-COMPLETE-GUIDE.md` with merged content:
+  - Section 1: Complete Inventory (from SUMMARY)
+  - Section 2: How to Use Skills (consolidated)
+  - Section 3: Skill Deep Dives by Domain
+  - Section 4: Maintenance (single section)
+- [ ] Add concrete examples to "Converting to Plugin Skills" section
+- [ ] Create `/skills/MASTER_INDEX.md` navigation hub
+- [ ] Delete original 4 files after verification
+- [ ] Update `/skills/README.md` with example skill paths
+- [ ] Update cross-references
+
+### Phase 3: Docs Workflow Consolidation
+- [ ] Read both workflow files completely
+- [ ] Create `/docs/workflow-automation.md`:
+  - Quick Checklist section at top (from workflow-checklist.md)
+  - Detailed guide below (from automation-guide.md)
+- [ ] Delete original 2 files after verification
+- [ ] Update `/docs/README.md` references
+- [ ] Update `/docs/FOLDER-STRUCTURE.md` inventory
+
+### Phase 4: Plans Archival System
+- [ ] Create `/plans/.archive/`
+- [ ] Review 31 plans, identify completed ones
+- [ ] Move completed plans to archive
+- [ ] Add status markers to remaining active plans
+
+### Phase 5: Navigation & Cross-References
+- [ ] Add "Related Documents" section to all docs
+- [ ] Grep for old file paths across entire .claude folder
+- [ ] Update all broken references
+- [ ] Verify all navigation links work
+
+### Phase 6: Final Verification
+- [ ] Confirm no content was lost
+- [ ] Confirm all references updated
+- [ ] Update root README.md if needed
+- [ ] Update FOLDER-STRUCTURE.md with final state

@@ -1,0 +1,54 @@
+# Investigation: Why Plans Go to ~/.claude/plans/
+
+## Finding: Two Separate Planning Systems
+
+There are **two different planning systems** at play:
+
+### 1. Claude Code Built-in Plan Mode (Current System)
+- **Source:** Claude Code CLI itself
+- **Location:** `~/.claude/plans/` (hardcoded in Claude Code)
+- **Naming:** Auto-generated creative names like `indexed-scribbling-kahan.md`
+- **Purpose:** Quick exploration/planning before making changes
+- **This is NOT configurable** - it's built into Claude Code
+
+### 2. `/create-plan` Skill (from taches-cc-resources plugin)
+- **Source:** `~/.claude/plugins/marketplaces/taches-cc-resources/skills/create-plans/`
+- **Location:** `.planning/` within the **project directory**
+- **Naming:** Structured names like `01-01-PLAN.md`, `02-auth/PLAN.md`
+- **Purpose:** Proper project planning with briefs, roadmaps, phases
+- **This DOES store plans in the project** and syncs to GitHub
+
+## Root Cause
+
+The 25 plan files in `~/.claude/plans/` are from **Claude Code's built-in Plan Mode**, not from the `/create-plan` command. When you:
+1. Use `/plan` or `EnterPlanMode` → Goes to `~/.claude/plans/`
+2. Use `/create-plan` skill → Goes to project's `.planning/` folder
+
+## Impact
+
+- Built-in plan mode plans **never sync to GitHub** (stored in global ~/.claude/)
+- `/create-plan` skill plans **do sync to GitHub** (stored in project repo)
+
+## Recommendation
+
+Since you want project plans to sync to GitHub, you should:
+
+1. **Continue using `/create-plan` for project work** - These go to the right place
+2. **The built-in Plan Mode is for quick, exploratory work** - Not meant for permanent project docs
+3. **Optionally:** Update `plans/CLAUDE.md` to clarify this is for exploratory/quick plans only, not project-level planning
+
+---
+
+## Files Involved
+
+| File | Purpose |
+|------|---------|
+| `~/.claude/plans/*.md` | Built-in Plan Mode output (exploratory) |
+| `<project>/.planning/` | `/create-plan` skill output (project docs) |
+| `~/.claude/plugins/.../skills/create-plans/SKILL.md` | Skill config (line 401-430 shows `.planning/` structure) |
+
+## Next Steps
+
+1. Keep the organization we just did (by project folder) for historical/reference purposes
+2. Update `plans/CLAUDE.md` to clarify this folder is for exploratory Plan Mode, not project planning
+3. For new project plans, use `/create-plan` which properly stores in project repo

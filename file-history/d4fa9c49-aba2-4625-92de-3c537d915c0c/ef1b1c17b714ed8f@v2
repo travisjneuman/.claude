@@ -1,0 +1,63 @@
+# src/services/CLAUDE.md — Business Logic Layer
+
+## Scope
+Service modules under `src/services/`. Services encapsulate business logic, I/O, validation, and external integrations. They are framework-agnostic (no React, no DOM).
+
+## Existing Services
+| Service | Purpose |
+|---------|---------|
+| `indexedDB.ts` | Dexie wrapper for local persistence |
+| `automationEngine.ts` | Rule evaluation + action execution |
+| `brainBackup.ts` | Encrypted `.brain` export/import (E2EE) |
+| `validation.ts` | Zod schemas + canonical parsing |
+| `encryption.ts` / `encryptionWebCrypto.ts` | WebCrypto-based encryption |
+| `errorService.ts` | Centralized error handling |
+| `logger.ts` | Structured logging |
+| `migration.ts` / `storageMigration.ts` | Schema migrations |
+| `eventReminders.ts` | Notification scheduling |
+| `taskRecurrence.ts` | Recurring task generation |
+| `icsImportExport.ts` | Calendar ICS format support |
+| `csvTimeEntryExport.ts` | Time tracking CSV export |
+| `noteExport.ts` / `notePdfExport.ts` | Note export formats |
+| `linkCategorizer.ts` | Bookmark categorization |
+| `autoSave.ts` | Debounced auto-save logic |
+| `backupPreferences.ts` | Backup configuration |
+| `aiTerminal.ts` | AI terminal integration |
+| `ai/*` | Multi-provider AI integrations |
+| `phantomShell/*` | Terminal emulation services |
+
+## Non-negotiables
+- **No UI dependencies:** Services must not import React, DOM APIs, or UI components.
+- **Strong typing:** Use explicit TypeScript types + Zod schemas. No `any`.
+- **Validate I/O:** Parse all inputs/outputs with Zod. Never silently coerce.
+- **No silent failures:** Always propagate errors. Never `catch` and ignore.
+- **Secrets via env:** Load from `import.meta.env`, never hardcode.
+- **Stateless default:** If stateful (e.g., WebSocket), provide explicit cleanup API.
+
+## Pattern
+```ts
+import { z } from 'zod';
+
+// Schemas at top
+const InputSchema = z.object({ id: z.string() });
+const OutputSchema = z.object({ data: z.unknown() });
+
+export async function processData(
+  input: z.infer<typeof InputSchema>
+): Promise<z.infer<typeof OutputSchema>> {
+  const parsed = InputSchema.parse(input);
+  // Business logic...
+  return OutputSchema.parse(result);
+}
+```
+
+## Anti-patterns
+- DOM/React references in services.
+- `catch` + `return undefined` (always throw or return typed error).
+- Hardcoded secrets or magic strings.
+- Copy-pasting entire services (extract shared helpers).
+
+## Related
+- Tests: `tests/CLAUDE.md`
+- Stores (consumers): `src/stores/CLAUDE.md`
+- Docs: `docs/technical/local_first_architecture.md`

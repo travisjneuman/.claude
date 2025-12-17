@@ -1,0 +1,315 @@
+/**
+ * FolderSidebar Component
+ *
+ * Folder tree sidebar with search and tag filtering.
+ * Extracted from Notes.tsx as part of the Notes Page Revolution.
+ *
+ * Features:
+ * - Hierarchical folder tree with expand/collapse
+ * - Search notes with Cmd+K shortcut
+ * - Tag filtering with TagFilter component
+ * - Folder CRUD operations (create, rename, delete)
+ * - Resizable via parent container
+ */
+
+import React, { useEffect, useState, useRef, useMemo } from 'react';
+import { FolderOpen } from 'lucide-react';
+import { useFoldersStore } from '../../stores/useFoldersStore';
+import { useNotesStore } from '../../stores/useNotesStore';
+import { useUndoStore } from '../../stores/useUndoStore';
+import { ConfirmDialog } from '../ConfirmDialog';
+import { PromptDialog } from '../PromptDialog';
+import { TagFilter } from '../TagFilter';
+import { FolderTreeNode } from './FolderTreeNode';
+import { logger } from '../../services/logger';
+
+const log = logger.module('FolderSidebar');
+
+export interface FolderSidebarProps {
+  activeTags: string[];
+  onAddTag: (tag: string) => void;
+  onRemoveTag: (tag: string) => void;
+  onClearAllTags: () => void;
+  onOpenTagManager: () => void;
+}
+
+export const FolderSidebar: React.FC<FolderSidebarProps> = ({
+  activeTags,
+  onAddTag,
+  onRemoveTag,
+  onClearAllTags,
+  onOpenTagManager,
+}) => {
+  // Get raw folders object (stable reference unless folders change)
+  const foldersObj = useFoldersStore((state) => state.folders);
+  const activeFolderId = useFoldersStore((state) => state.activeFolderId);
+  const setActiveFolder = useFoldersStore((state) => state.setActiveFolder);
+  const createFolder = useFoldersStore((state) => state.createFolder);
+  const deleteFolder = useFoldersStore((state) => state.deleteFolder);
+  const updateFolder = useFoldersStore((state) => state.updateFolder);
+  const notesObj = useNotesStore((state) => state.notes);
+  const searchNotes = useNotesStore((state) => state.searchNotes);
+
+  // Dialog state
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [renameDialogOpen, setRenameDialogOpen] = useState(false);
+  const [selectedFolderId, setSelectedFolderId] = useState<string | null>(null);
+  const [selectedFolderName, setSelectedFolderName] = useState('');
+
+  // Search state
+  const [searchQuery, setSearchQuery] = useState('');
+  const searchInputRef = useRef<HTMLInputElement>(null);
+
+  // Keyboard shortcut for search (Cmd+K)
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        searchInputRef.current?.focus();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
+  // Get tree structure for nested folders
+  const getTree = useFoldersStore((state) => state.getTree);
+  const toggleExpanded = useFoldersStore((state) => state.toggleExpanded);
+  const expandedFolderIds = useFoldersStore((state) => state.expandedFolderIds);
+
+  const folderTree = useMemo(() => getTree(), [foldersObj, getTree]);
+
+  // Get note count for a folder
+  const getFolderNoteCount = (folderId: string) => {
+    return Object.values(notesObj).filter((note) => note.folderId === folderId).length;
+  };
+
+  // Handle folder deletion
+  const handleDeleteFolder = (folderId: string, folderName: string) => {
+    setSelectedFolderId(folderId);
+    setSelectedFolderName(folderName);
+    setDeleteDialogOpen(true);
+  };
+
+  const confirmDeleteFolder = () => {
+    if (!selectedFolderId) return;
+
+    // Save folder and notes for undo
+    const folderToDelete = foldersObj[selectedFolderId];
+    if (!folderToDelete) {
+      log.warn('Folder not found', { folderId: selectedFolderId });
+      return;
+    }
+
+    const notesToDelete = Object.values(notesObj).filter(
+      (note) => note.folderId === selectedFolderId
+    );
+    const noteCount = notesToDelete.length;
+
+    // Delete all notes in this folder
+    notesToDelete.forEach((note) => {
+      useNotesStore.setState((state) => {
+        const { [note.id]: deleted, ...remainingNotes } = state.notes;
+        return {
+          notes: remainingNotes,
+          activeNoteId: state.activeNoteId === note.id ? null : state.activeNoteId,
+        };
+      });
+    });
+
+    // Delete the folder
+    deleteFolder(selectedFolderId);
+
+    log.info(`Folder "${folderToDelete.name}" deleted`, { noteCount });
+
+    // Add undo action to restore folder AND notes
+    useUndoStore.getState().addUndoAction(
+      `Folder "${folderToDelete.name}" and ${noteCount} note(s) deleted`,
+      () => {
+        // Restore the folder
+        useFoldersStore.setState((state) => ({
+          folders: {
+            ...state.folders,
+            [folderToDelete.id]: folderToDelete,
+          },
+        }));
+
+        // Restore all notes
+        useNotesStore.setState((state) => {
+          const restoredNotes = { ...state.notes };
+          notesToDelete.forEach((note) => {
+            restoredNotes[note.id] = note;
+          });
+          return {
+            notes: restoredNotes,
+          };
+        });
+
+        log.info(`Folder "${folderToDelete.name}" and ${noteCount} note(s) restored (undo)`);
+      }
+    );
+  };
+
+  // Handle folder rename
+  const handleRenameFolder = (folderId: string, currentName: string) => {
+    setSelectedFolderId(folderId);
+    setSelectedFolderName(currentName);
+    setRenameDialogOpen(true);
+  };
+
+  const confirmRenameFolder = (newName: string) => {
+    if (!selectedFolderId || !newName.trim()) return;
+    updateFolder(selectedFolderId, { name: newName.trim() });
+  };
+
+  return (
+    <div className="h-full p-5 flex flex-col overflow-hidden border-b border-border-light dark:border-border-dark">
+      {/* Folders header */}
+      <div className="flex items-center justify-between mb-4 flex-shrink-0">
+        <h3 className="text-sm font-medium uppercase tracking-wide text-text-light-secondary dark:text-text-dark-secondary">
+          Folders
+        </h3>
+        <button
+          onClick={() => createFolder()}
+          className="text-xs px-3 h-8 bg-accent-blue hover:bg-accent-blue-hover text-white rounded transition-colors font-medium"
+          title="New Folder"
+        >
+          + Folder
+        </button>
+      </div>
+
+      {/* Search Input */}
+      <div className="mb-3 flex-shrink-0">
+        <input
+          type="text"
+          placeholder="Search notes... (Cmd+K)"
+          className="w-full px-3 py-2 text-sm border border-border-light dark:border-border-dark rounded-lg
+                     bg-surface-light dark:bg-surface-dark
+                     text-text-light-primary dark:text-text-dark-primary
+                     placeholder-text-light-tertiary dark:placeholder-text-dark-tertiary
+                     focus:outline-none focus:ring-2 focus:ring-accent-cyan transition-all"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          ref={searchInputRef}
+        />
+      </div>
+
+      {/* All Notes (root level) */}
+      {!searchQuery.trim() && (
+        <button
+          onClick={() => setActiveFolder(null)}
+          className={`w-full text-left px-3 h-10 rounded-lg transition-colors mb-2 flex-shrink-0 flex items-center gap-2 ${
+            activeFolderId === null
+              ? 'bg-transparent border-l-2 border-accent-cyan dark:border-accent-magenta pl-[14px] text-accent-cyan dark:text-accent-magenta font-medium'
+              : 'border-l-2 border-transparent pl-[14px] hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated text-text-light-secondary dark:text-text-dark-secondary'
+          }`}
+        >
+          <FolderOpen className="w-4 h-4" />
+          <span className="text-sm font-medium">All Notes</span>
+        </button>
+      )}
+
+      {/* Search Results OR Folder list */}
+      {searchQuery.trim() ? (
+        /* Search Results */
+        <div className="overflow-y-auto flex-1 min-h-0">
+          <h3 className="text-xs font-medium uppercase tracking-wide text-text-light-tertiary dark:text-text-dark-tertiary mb-2">
+            {searchNotes(searchQuery).length} results for "{searchQuery}"
+          </h3>
+          <div className="space-y-2">
+            {searchNotes(searchQuery).map((note) => (
+              <div
+                key={note.id}
+                onClick={() => {
+                  setSearchQuery('');
+                  useNotesStore.getState().setActiveNote(note.id);
+                }}
+                className="p-3 rounded-lg cursor-pointer hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated transition-colors"
+              >
+                <div className="font-medium text-sm text-text-light-primary dark:text-text-dark-primary mb-1 truncate">
+                  {note.title || 'Untitled'}
+                </div>
+                <div className="text-xs text-text-light-secondary dark:text-text-dark-secondary line-clamp-2">
+                  {note.contentText?.slice(0, 150)}...
+                </div>
+                <div className="text-xs text-text-light-tertiary dark:text-text-dark-tertiary mt-1">
+                  {new Date(note.updatedAt).toLocaleDateString()}
+                </div>
+              </div>
+            ))}
+            {searchNotes(searchQuery).length === 0 && (
+              <div className="text-sm text-text-light-secondary dark:text-text-dark-secondary text-center py-8">
+                No notes found for "{searchQuery}"
+              </div>
+            )}
+          </div>
+        </div>
+      ) : (
+        /* Folder tree - Scrollable */
+        <div role="tree" className="space-y-1 overflow-y-auto flex-1 min-h-0">
+          {folderTree.map((node) => (
+            <FolderTreeNode
+              key={node.id}
+              node={node}
+              depth={0}
+              activeFolderId={activeFolderId}
+              expandedFolderIds={expandedFolderIds}
+              onSelect={setActiveFolder}
+              onToggleExpanded={toggleExpanded}
+              onDelete={handleDeleteFolder}
+              onRename={handleRenameFolder}
+              getFolderNoteCount={getFolderNoteCount}
+            />
+          ))}
+
+          {/* Empty state */}
+          {folderTree.length === 0 && (
+            <div className="text-sm text-text-light-secondary dark:text-text-dark-secondary text-center py-4">
+              No folders yet
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Tag Filter Section */}
+      <div className="pt-3 border-t border-border-light dark:border-border-dark mt-3 flex-shrink-0">
+        <TagFilter
+          activeTags={activeTags}
+          onAddTag={onAddTag}
+          onRemoveTag={onRemoveTag}
+          onClearAll={onClearAllTags}
+        />
+        <button
+          onClick={onOpenTagManager}
+          className="w-full mt-3 px-3 py-2 text-xs font-medium rounded border border-border-light dark:border-border-dark hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated text-text-light-secondary dark:text-text-dark-secondary transition-colors"
+        >
+          Manage Tags
+        </button>
+      </div>
+
+      {/* Delete Folder Confirmation Dialog */}
+      <ConfirmDialog
+        isOpen={deleteDialogOpen}
+        onClose={() => setDeleteDialogOpen(false)}
+        onConfirm={confirmDeleteFolder}
+        title="Delete Folder"
+        message={`Delete folder "${selectedFolderName}"? This will also delete ${selectedFolderId ? getFolderNoteCount(selectedFolderId) : 0} note(s) inside.`}
+        confirmText="Delete"
+        variant="danger"
+      />
+
+      {/* Rename Folder Prompt Dialog */}
+      <PromptDialog
+        isOpen={renameDialogOpen}
+        onClose={() => setRenameDialogOpen(false)}
+        onConfirm={confirmRenameFolder}
+        title="Rename Folder"
+        message="Enter a new name for this folder:"
+        defaultValue={selectedFolderName}
+        placeholder="Folder name"
+        confirmText="Rename"
+      />
+    </div>
+  );
+};

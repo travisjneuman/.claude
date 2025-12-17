@@ -1,0 +1,40 @@
+/**
+ * AnalyticsPeriodSelector Component
+ * Time range selector for analytics dashboard
+ */
+
+import { Calendar } from 'lucide-react';
+import { useAnalyticsStore, type AnalyticsPeriod } from '../../stores/useAnalyticsStore';
+
+export function AnalyticsPeriodSelector() {
+  const period = useAnalyticsStore((state) => state.period);
+  const setPeriod = useAnalyticsStore((state) => state.setPeriod);
+
+  const periods: Array<{ value: AnalyticsPeriod; label: string }> = [
+    { value: 'today', label: 'Today' },
+    { value: 'week', label: 'This Week' },
+    { value: 'month', label: 'This Month' },
+    { value: 'year', label: 'This Year' },
+  ];
+
+  return (
+    <div className="flex items-center gap-2">
+      <Calendar className="w-4 h-4 text-text-light-secondary dark:text-text-dark-secondary" />
+      <div className="flex items-center gap-1">
+        {periods.map((p) => (
+          <button
+            key={p.value}
+            onClick={() => setPeriod(p.value)}
+            className={`px-3 py-1.5 text-sm font-medium rounded-button transition-all duration-standard ease-smooth ${
+              period === p.value
+                ? 'bg-accent-magenta dark:bg-accent-cyan text-white dark:text-dark-background'
+                : 'bg-surface-light-elevated dark:bg-surface-dark-elevated border border-border-light dark:border-border-dark text-text-light-primary dark:text-text-dark-primary hover:bg-surface-light dark:hover:bg-neutral-800'
+            }`}
+          >
+            {p.label}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
