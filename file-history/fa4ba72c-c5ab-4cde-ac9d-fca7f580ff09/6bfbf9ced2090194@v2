@@ -1,0 +1,117 @@
+/**
+ * Backlinks Utility
+ * Handles parsing and managing wiki-style links between notes
+ * Uses [[Note Title]] syntax similar to Obsidian/Roam
+ */
+
+import type { Note } from '../types/notes';
+
+/**
+ * Pattern to match wiki-style links: [[Note Title]]
+ */
+const LINK_PATTERN = /\[\[([^\]]+)\]\]/g;
+
+/**
+ * Extract all wiki-style links from text content
+ */
+export function extractWikiLinks(content: string): string[] {
+  const links: string[] = [];
+  let match;
+  const pattern = new RegExp(LINK_PATTERN.source, 'g');
+
+  while ((match = pattern.exec(content)) !== null) {
+    const linkTitle = match[1].trim();
+    if (linkTitle && !links.includes(linkTitle)) {
+      links.push(linkTitle);
+    }
+  }
+
+  return links;
+}
+
+/**
+ * Resolve link titles to note IDs
+ */
+export function resolveLinksToIds(
+  linkTitles: string[],
+  allNotes: Record<string, Note>
+): string[] {
+  const noteIds: string[] = [];
+  const notesArray = Object.values(allNotes);
+
+  linkTitles.forEach((title) => {
+    // Try exact title match first
+    let foundNote = notesArray.find(
+      (note) => note.title.toLowerCase() === title.toLowerCase()
+    );
+
+    // If not found, try partial match
+    if (!foundNote) {
+      foundNote = notesArray.find(
+        (note) => note.title.toLowerCase().startsWith(title.toLowerCase())
+      );
+    }
+
+    if (foundNote && !noteIds.includes(foundNote.id)) {
+      noteIds.push(foundNote.id);
+    }
+  });
+
+  return noteIds;
+}
+
+/**
+ * Get all notes that link TO the given note (backlinks)
+ */
+export function getBacklinks(
+  noteId: string,
+  noteTitle: string,
+  allNotes: Record<string, Note>
+): Note[] {
+  const backlinks: Note[] = [];
+  const titleLower = noteTitle.toLowerCase();
+
+  Object.values(allNotes).forEach((note) => {
+    if (note.id === noteId) return;
+
+    // Check linkedNotes array
+    if (note.linkedNotes?.includes(noteId)) {
+      backlinks.push(note);
+      return;
+    }
+
+    // Fallback: check content for link pattern
+    const links = extractWikiLinks(note.contentText);
+    if (links.some((link) => link.toLowerCase() === titleLower)) {
+      backlinks.push(note);
+    }
+  });
+
+  return backlinks;
+}
+
+/**
+ * Update linked notes when content changes
+ */
+export function updateLinkedNotes(
+  content: string,
+  allNotes: Record<string, Note>
+): string[] {
+  const linkTitles = extractWikiLinks(content);
+  return resolveLinksToIds(linkTitles, allNotes);
+}
+
+/**
+ * Create a wiki link string
+ */
+export function createWikiLink(title: string): string {
+  return `[[${title}]]`;
+}
+
+/**
+ * Check if text contains wiki links
+ */
+export function hasWikiLinks(content: string): boolean {
+  const pattern = new RegExp(LINK_PATTERN.source);
+  return pattern.test(content);
+}

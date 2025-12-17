@@ -1,0 +1,87 @@
+import React, { useEffect } from 'react';
+import { useEscapeKey } from '../hooks/useEscapeKey';
+
+interface ModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  title: string;
+  children: React.ReactNode;
+  maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+}
+
+/**
+ * Simple Modal component - minimal styling
+ */
+export const Modal: React.FC<ModalProps> = ({
+  isOpen,
+  onClose,
+  title,
+  children,
+  maxWidth = 'md',
+}) => {
+  // Handle escape key with high priority (z-9999)
+  useEscapeKey({ enabled: isOpen, onEscape: onClose, priority: 9999 });
+
+  // Handle body overflow
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    }
+
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen]);
+
+  const maxWidthClasses = {
+    sm: 'max-w-sm',
+    md: 'max-w-md',
+    lg: 'max-w-lg',
+    xl: 'max-w-xl',
+    '2xl': 'max-w-2xl',
+  };
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4">
+      {/* Backdrop */}
+      <div
+        className="absolute inset-0 bg-black bg-opacity-50"
+        onClick={onClose}
+      />
+
+      {/* Modal */}
+      <div
+        className={`relative bg-surface-light dark:bg-surface-dark rounded-card shadow-modal ${maxWidthClasses[maxWidth]} w-full max-w-[90vw]`}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-title"
+      >
+        {/* Modal Header */}
+        <div className="flex items-center justify-between px-4 py-3 border-b border-border-light dark:border-border-dark">
+          <h3
+            id="modal-title"
+            className="text-lg font-semibold text-text-light-primary dark:text-text-dark-primary truncate"
+          >
+            {title}
+          </h3>
+
+          {/* Close button */}
+          <button
+            onClick={onClose}
+            className="p-1 text-text-light-secondary hover:text-text-light-primary dark:text-text-dark-secondary dark:hover:text-text-dark-primary"
+            aria-label="Close modal"
+          >
+            <span className="text-xl">×</span>
+          </button>
+        </div>
+
+        {/* Modal Content */}
+        <div className="p-3 sm:p-4 overflow-auto max-h-[70vh] max-w-full">
+          {children}
+        </div>
+      </div>
+    </div>
+  );
+};

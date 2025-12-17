@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "SlashCommand(/run-prompt:*)",
+      "Bash(git add:*)",
+      "Bash(test:*)",
+      "Bash(git rm:*)",
+      "Bash(git commit:*)"
+    ],
+    "deny": [],
+    "ask": []
+  },
+  "enableAllProjectMcpServers": true
+}

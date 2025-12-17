@@ -1,0 +1,223 @@
+# Widget System Refinements - UI Polish & Bug Fixes
+
+**Status:** 🎯 PLANNING
+**Priority:** P2 - MEDIUM
+**Created:** 2025-11-24 (Consolidated from 2 related tasks)
+
+---
+
+## Overview
+
+Consolidated plan for widget system UI polish, bug fixes, and refinements.
+
+---
+
+## Consolidated From
+
+This task consolidates the following 2 related task files:
+1. `widget-ui-fixes.md` - Widget UI bug fixes
+2. `widget-ui-refinements.md` - Widget UI polish and improvements
+
+**Reason for Consolidation:** Both tasks focus on widget UI polish and refinements with similar scope.
+
+---
+
+## Objectives
+
+### Phase 1: Bug Fixes
+- Fix widget rendering edge cases
+- Resolve widget control visibility issues
+- Fix widget state persistence bugs
+- Ensure cross-browser compatibility
+
+### Phase 2: UI Polish
+- Improve widget animations and transitions
+- Enhance widget loading states
+- Polish widget hover/focus states
+- Standardize widget spacing and padding
+
+### Phase 3: Refinements
+- Optimize widget performance
+- Improve widget accessibility
+- Enhance widget error handling
+- Add widget customization options
+
+---
+
+## Known Issues to Fix
+
+### High Priority
+1. **Widget Controls Overlap** - Controls overlap content on narrow widgets
+2. **Loading State Flicker** - Widgets flicker during lazy load
+3. **Drag Handle Visibility** - Not clear when widget is draggable
+4. **Error State Handling** - Widget errors crash entire dashboard
+
+### Medium Priority
+1. **Animation Performance** - Some widget transitions janky on mobile
+2. **Focus States** - Keyboard navigation not obvious
+3. **Dark Mode Contrast** - Some widgets have low contrast in dark mode
+4. **Mobile Responsiveness** - Widget controls too small on mobile
+
+### Low Priority
+1. **Widget Skeleton** - Loading skeleton doesn't match widget content
+2. **Tooltip Positioning** - Tooltips cut off at screen edges
+3. **Icon Consistency** - Some widgets use different icon styles
+4. **Padding Inconsistency** - Widget internal padding varies
+
+---
+
+## UI Refinements
+
+### Visual Improvements
+1. **Consistent Shadows**
+   - Standardize widget shadow depth
+   - Use semantic shadow tokens
+   - Ensure shadows work in light/dark mode
+
+2. **Improved Borders**
+   - Use consistent border radius (8px rounded-button)
+   - Standardize border colors (semantic tokens)
+   - Add subtle borders for better widget definition
+
+3. **Better Spacing**
+   - Consistent internal padding (16px/24px)
+   - Standardize gap between widget elements
+   - Improve header/content/footer spacing
+
+4. **Enhanced Interactions**
+   - Smooth hover states (200ms transitions)
+   - Clear focus indicators (accent-blue ring)
+   - Better drag-drop feedback
+
+---
+
+## Implementation Plan
+
+### Week 1: Critical Bug Fixes
+- [ ] Fix widget controls overlap
+- [ ] Fix loading state flicker
+- [ ] Improve drag handle visibility
+- [ ] Add error boundaries to widgets
+
+### Week 2: UI Polish
+- [ ] Standardize widget shadows
+- [ ] Improve widget borders
+- [ ] Fix spacing inconsistencies
+- [ ] Polish animations and transitions
+
+### Week 3: Refinements
+- [ ] Improve widget accessibility (ARIA labels, keyboard nav)
+- [ ] Optimize widget performance (lazy loading, bundle splitting)
+- [ ] Enhance error handling (fallback UI, error messages)
+- [ ] Add widget customization (themes, layouts)
+
+### Week 4: Testing & Documentation
+- [ ] Cross-browser testing (Chrome, Firefox, Safari, Edge)
+- [ ] Mobile device testing (iOS, Android)
+- [ ] Accessibility audit (WCAG AA compliance)
+- [ ] Update widget documentation
+
+---
+
+## Success Criteria
+
+### Bug Fixes Complete When:
+- ✅ Zero widget rendering errors
+- ✅ Controls don't overlap on any widget size
+- ✅ No loading state flicker
+- ✅ Drag handles clearly visible
+
+### UI Polish Complete When:
+- ✅ Consistent shadows, borders, spacing across all widgets
+- ✅ Smooth animations (no jank on 60fps devices)
+- ✅ Clear hover/focus states
+- ✅ Mobile-friendly controls
+
+### Refinements Complete When:
+- ✅ WCAG AA compliant
+- ✅ < 1s widget load time
+- ✅ Graceful error handling
+- ✅ Customization options available
+
+---
+
+## Files to Modify
+
+### Core Widget System
+- `src/components/Widget.tsx` - Main widget wrapper
+- `src/components/WidgetControls.tsx` - Widget controls component
+- `src/pages/Dashboard.tsx` - Dashboard layout
+- `src/index.css` - Widget styles
+
+### Individual Widgets
+- `src/widgets/Dashboard/*.tsx` - All dashboard widgets (as needed)
+
+---
+
+## Design System Alignment
+
+### Semantic Tokens to Use
+- **Backgrounds:** `bg-surface-light`, `bg-surface-dark`, `bg-surface-light-elevated`
+- **Borders:** `border-border-light`, `border-border-dark`
+- **Text:** `text-text-light-primary`, `text-text-dark-primary`
+- **Shadows:** `shadow-card`, `shadow-elevated`
+- **Spacing:** 4px base unit (0.25rem multiples)
+
+### Component Standards
+- **Border Radius:** `rounded-button` (8px)
+- **Transitions:** `transition-all duration-standard ease-smooth` (200ms)
+- **Focus Ring:** `ring-2 ring-accent-blue`
+- **Hover States:** Subtle background change, smooth transition
+
+---
+
+## Testing Checklist
+
+### Visual Testing
+- [ ] Light mode - all widgets
+- [ ] Dark mode - all widgets
+- [ ] Mobile (< 640px) - all widgets
+- [ ] Tablet (640-1024px) - all widgets
+- [ ] Desktop (> 1024px) - all widgets
+
+### Functional Testing
+- [ ] Widget loading (lazy load)
+- [ ] Widget controls (resize, remove, settings)
+- [ ] Drag-drop reordering
+- [ ] Error states and recovery
+- [ ] State persistence
+
+### Accessibility Testing
+- [ ] Keyboard navigation
+- [ ] Screen reader compatibility
+- [ ] Focus indicators
+- [ ] ARIA labels
+- [ ] Color contrast (WCAG AA)
+
+---
+
+## Notes
+
+**Why Consolidate?**
+- Both tasks focus on widget UI improvements
+- Overlapping scope (bugs vs polish)
+- Easier to coordinate changes
+- Single source of truth for widget refinements
+
+**Priority Order:**
+1. Bug fixes first (blocking issues)
+2. UI polish second (user-facing improvements)
+3. Refinements third (nice-to-have enhancements)
+
+**Time Estimates:**
+- Bug fixes: 1 week
+- UI polish: 1 week
+- Refinements: 1 week
+- Testing: 1 week
+- **Total:** 4 weeks to complete all work
+
+---
+
+**Document Status:** Active Planning
+**Last Updated:** 2025-11-24
+**Next Review:** After completing bug fixes

@@ -1,0 +1,673 @@
+# Foundation Stability Phase 2 - Backend 100%+ Stability
+
+**Date:** 2025-11-25
+**Status:** Planning
+**Priority:** P0 - Critical
+**Philosophy:** Perfect Foundation - Every fix must strengthen the foundation for the 99% remaining
+
+---
+
+## Executive Summary
+
+After comprehensive architectural analysis, the critical issues stem from **3 root causes**:
+
+1. **No Data Validation on Import** - Corrupted/malformed data silently persists
+2. **No Error Boundaries** - Store errors cause blank screens instead of graceful degradation
+3. **Missing Integration Layers** - Calendar/Kanban/Settings operate as islands
+
+This task addresses all P0/P1 issues through **foundational fixes**, not band-aids.
+
+---
+
+## Architectural Findings
+
+### Current State
+- 23 Zustand stores (well-partitioned)
+- IndexedDB persistence via createSyncedStorage
+- No data validation layer
+- No error recovery layer
+- Import operations are fire-and-forget
+
+### Critical Gaps
+| Gap | Impact | Root Cause |
+|-----|--------|------------|
+| Blank screens after import | P0 - App unusable | No validation, no error boundary |
+| Events on wrong dates | P0 - Data corruption | ICS parsing assumptions |
+| Event creation regression | P0 - Feature broken | Unknown - needs trace |
+| Settings not syncing | P2 - UX issue | Dual state (store + service) |
+
+---
+
+## Phase 1: Data Validation Layer (Foundation)
+
+### 1.1 Create Validation Service
+
+**File:** `src/services/validation.ts`
+
+**Purpose:** Centralized validation for all data entering stores.
+
+```typescript
+// Validation schemas using Zod (already in package.json)
+import { z } from 'zod';
+
+// Calendar Event Schema
+export const CalendarEventSchema = z.object({
+  id: z.string().min(1),
+  title: z.string().min(1),
+  description: z.string().optional(),
+  startTime: z.string().regex(/^\d{2}:\d{2}$/).optional(),
+  endTime: z.string().regex(/^\d{2}:\d{2}$/).optional(),
+  isAllDay: z.boolean().optional(),
+  location: z.string().optional(),
+  // ... rest of fields
+});
+
+// Note Schema
+export const NoteSchema = z.object({
+  id: z.string().min(1),
+  title: z.string(),
+  content: z.string(),
+  folderId: z.string().nullable(),
+  createdAt: z.union([z.date(), z.string()]),
+  updatedAt: z.union([z.date(), z.string()]),
+  // ... rest
+});
+
+// Task Schema
+export const TaskSchema = z.object({
+  id: z.string().min(1),
+  title: z.string().min(1),
+  status: z.enum(['backlog', 'todo', 'inprogress', 'review', 'done']),
+  // ... rest
+});
+
+// DateKey Schema - CRITICAL
+export const DateKeySchema = z.string().regex(
+  /^\d{4}-(1[0-2]|[1-9])-([1-9]|[12]\d|3[01])$/,
+  'Invalid date key format. Expected: YYYY-M-D'
+);
+
+// Brain Backup Schema
+export const BrainBackupSchema = z.object({
+  version: z.string(),
+  appVersion: z.string(),
+  exportDate: z.string().datetime(),
+  data: z.object({
+    notes: z.record(z.unknown()).optional(),
+    'kanban-tasks': z.unknown().optional(),
+    'calendar-events': z.unknown().optional(),
+    folders: z.unknown().optional(),
+  }),
+});
+```
+
+**Benefits:**
+- Single source of truth for data shapes
+- Runtime validation before persistence
+- Clear error messages for debugging
+- Type inference for TypeScript
+
+### 1.2 Add Validation to Import Functions
+
+**File:** `src/services/brainBackup.ts`
+
+```typescript
+import { BrainBackupSchema, validateOrThrow } from './validation';
+
+export async function importBrainFile(file: File): Promise<ImportResult> {
+  try {
+    const data = await readBrainFile(file);
+
+    // Validate backup structure
+    const validated = validateOrThrow(BrainBackupSchema, data, 'Brain backup');
+
+    // Validate individual records
+    const validationErrors: ValidationError[] = [];
+
+    // Validate notes
+    if (validated.data.notes) {
+      for (const [id, note] of Object.entries(validated.data.notes)) {
+        const result = NoteSchema.safeParse(note);
+        if (!result.success) {
+          validationErrors.push({ type: 'note', id, errors: result.error.issues });
+        }
+      }
+    }
+
+    // Return partial success if some records invalid
+    if (validationErrors.length > 0) {
+      return {
+        success: 'partial',
+        imported: { ... },
+        errors: validationErrors,
+      };
+    }
+
+    // Full success
+    return { success: true, imported: { ... } };
+
+  } catch (error) {
+    return {
+      success: false,
+      error: error.message,
+    };
+  }
+}
+```
+
+### 1.3 Add Validation to ICS Import
+
+**File:** `src/services/icsImportExport.ts`
+
+```typescript
+export function parseICSEvent(vevent: string): ParseResult<CalendarEvent> {
+  // ... existing parsing ...
+
+  // CRITICAL: Validate dateKey before returning
+  const dateKey = extractDateKey(dtstart);
+
+  if (!DateKeySchema.safeParse(dateKey).success) {
+    return {
+      success: false,
+      error: `Invalid date in event: ${summary}. Date: ${dtstart}`,
+    };
+  }
+
+  return {
+    success: true,
+    data: { ...event, _importedDate: dateKey },
+  };
+}
+```
+
+---
+
+## Phase 2: Error Boundary Layer (Resilience)
+
+### 2.1 Create Store Error Boundary
+
+**File:** `src/components/StoreErrorBoundary.tsx`
+
+**Purpose:** Catch store-related render errors, show recovery UI instead of blank screen.
+
+```typescript
+interface StoreErrorBoundaryProps {
+  storeName: string;
+  children: React.ReactNode;
+  fallback?: React.ReactNode;
+}
+
+export class StoreErrorBoundary extends React.Component<
+  StoreErrorBoundaryProps,
+  { hasError: boolean; error: Error | null }
+> {
+  state = { hasError: false, error: null };
+
+  static getDerivedStateFromError(error: Error) {
+    return { hasError: true, error };
+  }
+
+  componentDidCatch(error: Error, info: ErrorInfo) {
+    logger.error(`Store error in ${this.props.storeName}`, { error, info });
+
+    // Optionally report to error service
+    errorService.report(error, {
+      context: 'store-error-boundary',
+      store: this.props.storeName,
+    });
+  }
+
+  handleReset = async () => {
+    // Option 1: Clear this store's data
+    // Option 2: Reload from last backup
+    // Option 3: Full app reset
+
+    this.setState({ hasError: false, error: null });
+  };
+
+  render() {
+    if (this.state.hasError) {
+      return this.props.fallback || (
+        <ErrorRecoveryUI
+          storeName={this.props.storeName}
+          error={this.state.error}
+          onReset={this.handleReset}
+        />
+      );
+    }
+    return this.props.children;
+  }
+}
+```
+
+### 2.2 Wrap Critical Routes
+
+**File:** `src/App.tsx`
+
+```typescript
+<Route path="/schedule" element={
+  <StoreErrorBoundary storeName="calendar">
+    <TimeTracking />
+  </StoreErrorBoundary>
+} />
+
+<Route path="/tasks" element={
+  <StoreErrorBoundary storeName="kanban">
+    <Kanban />
+  </StoreErrorBoundary>
+} />
+
+<Route path="/notes" element={
+  <StoreErrorBoundary storeName="notes">
+    <Notes />
+  </StoreErrorBoundary>
+} />
+```
+
+### 2.3 Create Recovery UI Component
+
+**File:** `src/components/ErrorRecoveryUI.tsx`
+
+```typescript
+export function ErrorRecoveryUI({ storeName, error, onReset }) {
+  return (
+    <div className="flex flex-col items-center justify-center min-h-[400px] p-8">
+      <div className="text-6xl mb-4">⚠️</div>
+      <h2 className="text-xl font-semibold mb-2">
+        Something went wrong loading {storeName}
+      </h2>
+      <p className="text-text-light-secondary dark:text-text-dark-secondary mb-4 max-w-md text-center">
+        This usually happens after importing corrupted data. Your other data is safe.
+      </p>
+
+      <div className="flex gap-3">
+        <button onClick={onReset} className="btn-primary">
+          Try Again
+        </button>
+        <button onClick={() => clearStoreData(storeName)} className="btn-secondary">
+          Clear {storeName} Data
+        </button>
+        <Link to="/settings" className="btn-secondary">
+          Restore from Backup
+        </Link>
+      </div>
+
+      <details className="mt-4 text-sm text-text-light-tertiary">
+        <summary>Technical Details</summary>
+        <pre className="mt-2 p-2 bg-gray-100 dark:bg-gray-800 rounded">
+          {error?.message}
+        </pre>
+      </details>
+    </div>
+  );
+}
+```
+
+---
+
+## Phase 3: Fix Critical Bugs
+
+### 3.1 Fix ICS Import (P0)
+
+**Root Cause Analysis:**
+1. ICS import calls `importFromICS()` which parses events
+2. Events are returned with `_importedDate` metadata
+3. `useCalendarStore.importEvents()` uses `_importedDate` as dateKey
+4. **BUG:** If parsing fails mid-stream, partial data is committed
+5. **BUG:** If dateKey is invalid, event stored but never rendered
+6. **BUG:** Large imports may cause render loop / memory issues
+
+**Fix Strategy:**
+```typescript
+// 1. Parse ALL events first (don't commit yet)
+const parseResults = await parseAllICSEvents(icsContent);
+
+// 2. Validate all events
+const { valid, invalid } = validateEvents(parseResults);
+
+// 3. Show preview to user with counts
+await showImportPreview({
+  valid: valid.length,
+  invalid: invalid.length,
+  errors: invalid.map(e => e.error),
+});
+
+// 4. User confirms → commit in transaction
+if (userConfirmed) {
+  await batchImportEvents(valid);
+}
+
+// 5. Show results
+showImportResults({ imported: valid.length, skipped: invalid.length });
+```
+
+**Files to Modify:**
+- `src/services/icsImportExport.ts` - Add validation, preview mode
+- `src/stores/useCalendarStore.ts` - Add batch import, rollback support
+- `src/pages/Settings.tsx` - Add import preview modal
+
+### 3.2 Fix .brain Import (P0)
+
+**Root Cause Analysis:**
+1. Import reads JSON and directly merges into stores
+2. No validation of data format
+3. If any store data is malformed → render error → blank screen
+4. No rollback if import fails mid-stream
+
+**Fix Strategy:**
+```typescript
+// 1. Validate entire backup before importing
+const validation = await validateBrainBackup(backupData);
+if (!validation.success) {
+  showError('Invalid backup file', validation.errors);
+  return;
+}
+
+// 2. Create checkpoint of current data
+const checkpoint = await createDataCheckpoint();
+
+// 3. Import in transaction with rollback
+try {
+  await importWithTransaction(backupData, { merge: true });
+} catch (error) {
+  await restoreFromCheckpoint(checkpoint);
+  throw error;
+}
+
+// 4. Verify stores can render
+await verifyStoreIntegrity();
+```
+
+**Files to Modify:**
+- `src/services/brainBackup.ts` - Add validation, transaction, rollback
+- `src/services/validation.ts` - Add backup validation
+- `src/pages/Settings.tsx` - Improve import UX
+
+### 3.3 Fix Event Creation Regression (P0)
+
+**Hypothesis:** After Schedule page merge, event creation modal only receives current date.
+
+**Investigation Steps:**
+1. Trace double-click handler in TimeEntryCalendar
+2. Check what date is passed to EventCreateModal
+3. Verify modal uses passed date, not hardcoded today
+
+**Likely Fix:**
+```typescript
+// TimeEntryCalendar.tsx - onDayDoubleClick
+const handleDayDoubleClick = (dateKey: string) => {
+  // WRONG: setEventModalData({ dateKey: todayKey })
+  // RIGHT: setEventModalData({ dateKey })  // Use clicked date!
+};
+```
+
+### 3.4 Fix Kanban → Calendar Integration (P1)
+
+**Current State:** No integration - tasks and events are separate.
+
+**Design Decision:** Should tasks appear as calendar events?
+
+**Option A: Read-Only Display**
+- Calendar reads from Kanban store
+- Renders tasks with due dates as "task events"
+- Different styling (color/icon)
+- No modification from calendar
+
+**Option B: Bidirectional Sync**
+- Create event from task and vice versa
+- Changes sync both ways
+- More complex, higher risk
+
+**Recommendation:** Option A for stability.
+
+**Implementation:**
+```typescript
+// useCalendarStore.ts - Add selector
+export const getTasksAsEvents = (tasks: Task[], dateKey: string) => {
+  return tasks
+    .filter(t => t.dueDate === dateKey)
+    .map(t => ({
+      id: `task-${t.id}`,
+      title: `📋 ${t.title}`,
+      isTask: true,
+      taskId: t.id,
+      // ... map other fields
+    }));
+};
+
+// TimeEntryCalendar.tsx
+const calendarEvents = useCalendarStore(s => s.events[dateKey] || []);
+const kanbanTasks = useKanbanStore(s => s.tasks);
+const taskEvents = getTasksAsEvents(kanbanTasks, dateKey);
+const allEvents = [...calendarEvents, ...taskEvents];
+```
+
+### 3.5 Fix Double-Click Modal (P1)
+
+**New Requirement:** Double-click day → modal showing day's events + "Add New" button.
+
+**Implementation:**
+```typescript
+// New component: DayDetailModal.tsx
+export function DayDetailModal({ dateKey, onClose, onCreateEvent }) {
+  const events = useCalendarStore(s => s.events[dateKey] || []);
+
+  // If no events, go straight to create
+  if (events.length === 0) {
+    return <EventCreateModal dateKey={dateKey} onClose={onClose} />;
+  }
+
+  return (
+    <Modal title={formatDateKey(dateKey)} onClose={onClose}>
+      <div className="space-y-2">
+        {events.map(event => (
+          <EventCard key={event.id} event={event} />
+        ))}
+      </div>
+
+      <button onClick={onCreateEvent} className="btn-primary mt-4">
+        + Add New Event
+      </button>
+    </Modal>
+  );
+}
+```
+
+---
+
+## Phase 4: Settings & State Sync
+
+### 4.1 Unify Backup Preferences
+
+**Problem:** Two sources of truth:
+1. `useThemeStore.backupPreferences` (localStorage)
+2. `backupPreferences` service (IndexedDB)
+
+**Fix:** Single source of truth in `useThemeStore`, remove IndexedDB service.
+
+```typescript
+// Remove: src/services/backupPreferences.ts (move to store)
+
+// useThemeStore.ts - Add full backup preferences
+backupPreferences: {
+  hasBackupFolder: false,
+  backupFolderPath: null,
+  autoSaveEnabled: false,
+  saveInterval: 30000,
+  versionsToKeep: 7,
+  customFileName: 'Neuman.brain',
+  reminderPreference: 'every-session',
+  nextReminderDate: null,
+  lastBackupDate: null,
+  backupHistory: [],
+},
+```
+
+### 4.2 Fix Display Name
+
+**Investigation:** Where is display name used?
+- Settings page input
+- Nowhere else found
+
+**Action:**
+1. Remove default value "Travis Neuman"
+2. Add placeholder text explaining purpose
+3. Consider removing if not used
+
+### 4.3 Fix Auto-Save Folder Display
+
+**Root Cause:** Settings page loads preferences from IndexedDB, but modal updates `useThemeStore`.
+
+**Fix:** Use single source (useThemeStore) + restore handle on Settings mount.
+
+---
+
+## Phase 5: UI Polish Fixes
+
+### 5.1 Quick Add Button Color
+
+**File:** `src/widgets/Dashboard/TasksQuickAddWidget.tsx`
+
+**Fix:** Change default button from light gray to darker or always blue.
+
+```typescript
+// BEFORE
+className={`btn ${hasText ? 'btn-primary' : 'btn-secondary'}`}
+
+// AFTER - Always visible contrast
+className="btn btn-primary"
+// OR
+className={`btn ${hasText ? 'btn-primary' : 'bg-gray-600 text-white hover:bg-gray-700'}`}
+```
+
+### 5.2 Widget Height Consistency
+
+**File:** `src/widgets/Dashboard/BaseWidget.tsx`
+
+**Fix:** Add minimum height to ensure consistency.
+
+```typescript
+<motion.div
+  className={`... min-h-[200px] ...`}  // Add min-height
+>
+```
+
+### 5.3 Notes Folder Button Overlap
+
+**File:** `src/pages/Notes.tsx`
+
+**Fix:** Adjust button positioning or add padding.
+
+### 5.4 Summary Calendar Consistency
+
+**File:** `src/components/TimeEntrySummary.tsx`
+
+**Fix:** Replace custom calendar with shared CalendarGrid component.
+
+---
+
+## Implementation Order
+
+### Day 1: Foundation (2-3 hours)
+1. [ ] Create validation service with Zod schemas
+2. [ ] Add StoreErrorBoundary component
+3. [ ] Wrap critical routes with error boundaries
+4. [ ] Add ErrorRecoveryUI component
+
+### Day 2: Critical Fixes (3-4 hours)
+5. [ ] Fix ICS import with validation + preview
+6. [ ] Fix .brain import with validation + rollback
+7. [ ] Fix event creation regression
+8. [ ] Test all import scenarios
+
+### Day 3: Integration & Polish (2-3 hours)
+9. [ ] Add Kanban → Calendar display
+10. [ ] Implement DayDetailModal
+11. [ ] Fix Quick Add button color
+12. [ ] Fix widget heights
+13. [ ] Fix Notes folder button
+
+### Day 4: Settings & Verification (1-2 hours)
+14. [ ] Unify backup preferences
+15. [ ] Fix display name
+16. [ ] Fix auto-save folder display
+17. [ ] Run full test suite
+18. [ ] Manual testing checklist
+
+---
+
+## Testing Checklist
+
+### Import/Export
+- [ ] Import valid .brain file → success, data appears
+- [ ] Import corrupted .brain file → error shown, app still works
+- [ ] Import valid .ics file → events on correct dates
+- [ ] Import malformed .ics file → error shown, partial import offered
+- [ ] Import 500+ events → no performance degradation
+
+### Error Recovery
+- [ ] Navigate to /schedule with corrupted calendar data → recovery UI shown
+- [ ] Click "Try Again" → attempts reload
+- [ ] Click "Clear Data" → clears and allows fresh start
+- [ ] Click "Restore from Backup" → navigates to settings
+
+### Calendar
+- [ ] Today highlighted correctly
+- [ ] Double-click day → modal with events
+- [ ] Double-click empty day → create event modal
+- [ ] Create event on future date → success
+- [ ] Tasks with due dates appear on calendar
+
+### Settings
+- [ ] Auto-save folder shows after modal setup
+- [ ] Backup filename shows correctly
+- [ ] Display name empty by default
+
+---
+
+## Success Criteria
+
+### Backend Stability (100%+)
+- [ ] No blank screens on any import failure
+- [ ] All imports validate data before committing
+- [ ] Error boundaries catch all store errors
+- [ ] Rollback available for failed imports
+
+### Data Integrity
+- [ ] All events have valid dateKeys
+- [ ] No ghost data (data stored but never rendered)
+- [ ] Backup format versioned for future migrations
+
+### User Experience
+- [ ] Clear error messages for all failure modes
+- [ ] Recovery options always available
+- [ ] Import preview before commit
+- [ ] Consistent UI across all widgets
+
+---
+
+## Files to Create
+
+1. `src/services/validation.ts` - Zod schemas + validators
+2. `src/components/StoreErrorBoundary.tsx` - Error boundary
+3. `src/components/ErrorRecoveryUI.tsx` - Recovery UI
+4. `src/components/DayDetailModal.tsx` - Day events modal
+5. `src/components/ImportPreviewModal.tsx` - Import preview
+
+## Files to Modify
+
+1. `src/services/brainBackup.ts` - Add validation, rollback
+2. `src/services/icsImportExport.ts` - Add validation, preview
+3. `src/stores/useCalendarStore.ts` - Batch import, task display
+4. `src/stores/useThemeStore.ts` - Unified backup preferences
+5. `src/pages/Settings.tsx` - Import UX, preference fixes
+6. `src/pages/TimeTracking.tsx` - DayDetailModal integration
+7. `src/components/TimeEntryCalendar.tsx` - Double-click, task display
+8. `src/widgets/Dashboard/TasksQuickAddWidget.tsx` - Button color
+9. `src/widgets/Dashboard/BaseWidget.tsx` - Min height
+10. `src/pages/Notes.tsx` - Button overlap fix
+11. `src/App.tsx` - Error boundaries
+
+---
+
+**Next Step:** Get user approval, then begin Phase 1 (Foundation)

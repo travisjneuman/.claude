@@ -1,0 +1,74 @@
+/**
+ * Completion Rate Chart
+ * Line chart showing task completion rate trend over time
+ */
+
+import { useMemo } from 'react';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import type { Task } from '../../types';
+import type { DateRange } from '../../stores/useAnalyticsStore';
+import { getDailyTrend } from '../../utils/analyticsCalculations';
+
+interface CompletionRateChartProps {
+  tasks: Task[];
+  dateRange: DateRange;
+}
+
+export function CompletionRateChart({ tasks, dateRange }: CompletionRateChartProps) {
+  const chartData = useMemo(() => {
+    return getDailyTrend(
+      tasks,
+      dateRange,
+      (task) => new Date(task.created),
+      (dayTasks) => {
+        if (dayTasks.length === 0) return 0;
+        const completed = dayTasks.filter((t) => t.status === 'done').length;
+        return Math.round((completed / dayTasks.length) * 100);
+      }
+    );
+  }, [tasks, dateRange]);
+
+  return (
+    <div className="w-full h-64">
+      <ResponsiveContainer width="100%" height="100%">
+        <LineChart data={chartData} margin={{ top: 5, right: 20, left: 0, bottom: 5 }}>
+          <CartesianGrid strokeDasharray="3 3" className="stroke-border-light dark:stroke-border-dark" />
+          <XAxis
+            dataKey="date"
+            tick={{ fontSize: 12 }}
+            className="fill-text-light-secondary dark:fill-text-dark-secondary"
+            tickFormatter={(date) => {
+              const d = new Date(date);
+              return `${d.getMonth() + 1}/${d.getDate()}`;
+            }}
+          />
+          <YAxis
+            tick={{ fontSize: 12 }}
+            className="fill-text-light-secondary dark:fill-text-dark-secondary"
+            label={{ value: 'Completion %', angle: -90, position: 'insideLeft', className: 'fill-text-light-secondary dark:fill-text-dark-secondary' }}
+          />
+          <Tooltip
+            contentStyle={{
+              backgroundColor: 'var(--surface-light-elevated)',
+              border: '1px solid var(--border-light)',
+              borderRadius: '8px',
+            }}
+            labelFormatter={(date) => {
+              const d = new Date(date);
+              return d.toLocaleDateString();
+            }}
+            formatter={(value: number) => [`${value}%`, 'Completion Rate']}
+          />
+          <Line
+            type="monotone"
+            dataKey="value"
+            stroke="var(--accent-magenta)"
+            strokeWidth={2}
+            dot={{ fill: 'var(--accent-magenta)', r: 4 }}
+            activeDot={{ r: 6 }}
+          />
+        </LineChart>
+      </ResponsiveContainer>
+    </div>
+  );
+}

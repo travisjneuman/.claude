@@ -1,0 +1,491 @@
+# Taches-CC-Resources Integration Summary
+
+## Overview
+
+This document summarizes the integration of **taches-cc-resources** features into Neuman Brain's CLAUDE.md files, making tache features the **default transparent behavior** for all development workflows.
+
+**Integration Date**: 2025-11-28
+**Scope**: 8 CLAUDE.md files updated (root + 7 folder-specific)
+**Status**: Complete
+
+---
+
+## What Was Integrated
+
+### Critical: Intelligent Routing System (Root CLAUDE.md)
+
+**Most Important Addition**: Automatic prompt analysis and routing to optimal tache features.
+
+**Key Changes**:
+- **Workflow § Intelligent Prompt Routing (AUTOMATIC)**: Routing logic now DEFAULT behavior
+- **Routing is transparent**: Users describe what they need; system determines best workflow
+- **Comprehensive routing table**: Planning → `/create-plan`, Debugging → `debug-like-expert`, Decisions → `/consider:*`
+- **Full specification reference**: Links to integration guide for complete routing algorithm
+
+**Routing Coverage**:
+- ✅ Planning prompts → `/create-plan`
+- ✅ Debug prompts → `/debug` or `debug-like-expert` skill
+- ✅ Decision prompts → Appropriate `/consider:*` framework
+- ✅ Moderate complexity → `/create-prompt` + `/run-prompt`
+- ✅ Multi-stage features → `/create-meta-prompt`
+
+---
+
+### Enhanced Sections in Root CLAUDE.md
+
+#### 1. Context Hygiene § Smart Delegation
+**Added**:
+- **`/create-prompt`** + **`/run-prompt`** for moderate tasks (30 min - 2 hours)
+- **`/create-meta-prompt`** for multi-stage features (research → plan → implement)
+- **`/whats-next`** + **`/clear`** for session boundaries
+- Clear triggers: >100k tokens → delegate; multi-stage → pipeline
+
+#### 2. Session Protocol § Start
+**Added**:
+- **`/check-todos`** as primary task selection (step 4)
+- Routing guidance: "describe naturally, let routing determine workflow"
+
+#### 3. Session Protocol § End
+**Added**:
+- **`/audit-skill`**, **`/audit-slash-command`**, **`/audit-subagent`** for QA before commits
+- **`/add-to-todos`** to capture follow-up items
+
+#### 4. New Section: Thinking Frameworks
+**Added**:
+- Complete table of 12 **`/consider:*` frameworks** with use cases
+- Decision type → framework mapping
+- Reference to integration guide for deep dive
+
+#### 5. Tooling Policy (Restructured & Enhanced)
+**Added subsections**:
+- **File/Code Operations**: Read, Grep, Glob, Task/subagents
+- **Development Workflows**: `/create-plan`, `/debug`, `debug-like-expert`, `/consider:*`, `/create-prompt`, `/create-meta-prompt`
+- **Decision-Making**: AskUserQuestion, `/consider:*` frameworks
+- **Code Creation & Modification**: ExitPlanMode, `/create-agent-skill`, `/create-slash-command`, `/create-subagent`
+- **Quality Assurance**: `/audit-*` commands, `/heal-skill`
+- **Verification**: Playwright, test/type-check
+
+#### 6. Anti-Patterns (Extended)
+**Added**:
+- Forcing direct execution for complex features (use `/create-plan`)
+- Letting context bloat (use `/create-prompt`)
+- Manual decision-making when frameworks exist (use `/consider:*`)
+- Debugging intermittent issues manually (use `debug-like-expert`)
+- Creating tools without audit (use `/audit-*`)
+
+---
+
+## Folder-Specific CLAUDE.md Updates
+
+### 1. src/widgets/CLAUDE.md
+
+**Integration Points**:
+- **Adding a Dashboard Widget**: Use **`/create-plan`** for complex widgets (new category, multi-feature, external API)
+- **Performance**: Use **`/consider:pareto`** to identify high-impact optimizations
+- **Anti-patterns**: Added warnings about complex development without planning, over-engineering APIs
+- **Reference**: Links to integration guide § Widget Development
+
+**Use Cases**:
+- Planning multi-phase widget development
+- Optimizing widget performance systematically
+- Simplifying widget configuration APIs
+
+---
+
+### 2. src/stores/CLAUDE.md
+
+**Integration Points**:
+- **New Section: Debugging Store Issues**:
+  - **`debug-like-expert` skill** for intermittent bugs (data loss, race conditions)
+  - **`/consider:5-whys`** for recurring problems
+  - **`/consider:via-negativa`** for store simplification
+  - **`/consider:first-principles`** for rethinking store design
+- **Anti-patterns**: Added complex refactoring and debugging warnings
+- **Reference**: Links to integration guide § Store Development
+
+**Use Cases**:
+- Debugging mysterious store persistence issues
+- Understanding why recurring problems happen
+- Simplifying complex store architecture
+
+---
+
+### 3. src/hooks/CLAUDE.md
+
+**Integration Points**:
+- **New Section: Creating Custom Hooks**:
+  - **`/create-hook`** for event-driven automation hooks (Claude Code hooks, not React)
+  - **`/debug`** for clear hook issues
+  - **`debug-like-expert` skill** for mysterious hook behavior
+  - **`/consider:5-whys`** to understand why bugs happened
+- **Anti-patterns**: Added debugging dependency issues warning
+- **Reference**: Links to integration guide § Hook Development
+
+**Use Cases**:
+- Creating Claude Code automation hooks (PreToolUse, PostToolUse, etc.)
+- Debugging stale closures and dependency issues
+- Understanding hook failure patterns
+
+---
+
+### 4. src/services/CLAUDE.md
+
+**Integration Points**:
+- **New Section: Debugging Service Issues**:
+  - **`/debug`** for clear service failures
+  - **`debug-like-expert` skill** for intermittent service failures
+  - **`/consider:second-order`** for API change analysis
+  - **`/consider:10-10-10`** for long-term service decisions
+  - **`/consider:5-whys`** for recurring service failures
+- **Anti-patterns**: Added intermittent failure debugging warning
+- **Reference**: Links to integration guide § Service Development
+
+**Use Cases**:
+- Debugging IndexedDB transaction failures
+- Analyzing ripple effects of API changes
+- Understanding recurring service failure patterns
+
+---
+
+### 5. src/pages/CLAUDE.md
+
+**Integration Points**:
+- **New Section: Developing New Pages**:
+  - **`/create-plan`** for complex page features (multi-phase, new patterns)
+  - **`/consider:opportunity-cost`** for lazy loading decisions
+  - **`/consider:pareto`** to identify high-impact lazy loading opportunities
+- **Anti-patterns**: Added complex page development warning
+- **Reference**: Links to integration guide § Page Development
+
+**Use Cases**:
+- Planning multi-phase page features
+- Deciding where to place lazy loading boundaries
+- Prioritizing lazy loading optimizations
+
+---
+
+### 6. src/components/CLAUDE.md
+
+**Integration Points**:
+- **New Section: Component Development**:
+  - **`/consider:via-negativa`** for component API simplification
+  - **`/consider:occams-razor`** for pattern selection
+  - **`/create-slash-command`** for component scaffolding automation
+- **Anti-patterns**: Added over-engineering component APIs warning
+- **Reference**: Links to integration guide § Component Development
+
+**Use Cases**:
+- Simplifying component props and APIs
+- Choosing between controlled/uncontrolled patterns
+- Creating `/scaffold-component` automation
+
+---
+
+### 7. tests/CLAUDE.md
+
+**Integration Points**:
+- **New Section: Debugging Test Failures**:
+  - **`/debug`** for clear test failures
+  - **`debug-like-expert` skill** for intermittent/flaky tests
+  - **`/consider:5-whys`** for recurring test failures
+  - **`/consider:pareto`** for test coverage optimization
+- **Anti-patterns**: Added flaky test debugging warning
+- **Reference**: Links to integration guide § Testing Workflows
+
+**Use Cases**:
+- Debugging tests that fail only in CI
+- Understanding why E2E tests keep failing
+- Prioritizing test coverage efforts
+
+---
+
+## Integration Principles Followed
+
+### 1. Lean & High-Signal
+- ✅ Additions are concise (1-3 sentences per reference)
+- ✅ No bloat: only contextually relevant features mentioned
+- ✅ Links to integration guide for deep dives
+
+### 2. Contextual Integration
+- ✅ Features integrated into existing sections, not separate "Tache Features" sections
+- ✅ Clear "when to use" triggers for each feature
+- ✅ Domain-specific examples (widgets, stores, services, etc.)
+
+### 3. Maintain Existing Structure
+- ✅ No existing content removed (only additions)
+- ✅ Existing voice and style preserved
+- ✅ Document structure maintained
+
+### 4. Proper Cross-References
+- ✅ All folder CLAUDE.md files link to integration guide
+- ✅ Integration guide links are anchor-tagged to relevant sections
+- ✅ No conflicts with root CLAUDE.md authority
+
+### 5. Routing as Default Behavior
+- ✅ **CRITICAL**: Routing system implemented in root CLAUDE.md
+- ✅ Routing is transparent and automatic
+- ✅ Routing covers ALL tache features (not just subset)
+- ✅ Clear routing table with examples
+
+---
+
+## How to Verify Integration Is Working
+
+### 1. Test Intelligent Routing
+
+**Simple Task**:
+```
+You: "Fix the typo in the button label"
+Expected: Direct execution (no routing)
+```
+
+**Moderate Task**:
+```
+You: "Refactor all components to use new spacing tokens"
+Expected: Routing suggests /create-prompt for delegation
+```
+
+**Complex Planning**:
+```
+You: "Plan the offline-first mode implementation"
+Expected: Routing invokes /create-plan
+```
+
+**Debugging**:
+```
+You: "The widget sometimes shows stale data after switching tabs"
+Expected: Routing invokes debug-like-expert skill
+```
+
+**Decision**:
+```
+You: "Should we use SQLite or IndexedDB long-term?"
+Expected: Routing suggests /consider:swot or /consider:10-10-10
+```
+
+### 2. Verify Folder-Specific Integration
+
+**Widget Development**:
+```
+You: "Create a new analytics widget with real-time updates"
+Expected: /create-plan suggested for complex widget
+```
+
+**Store Debugging**:
+```
+You: "TimeTrackingStore loses date selections intermittently"
+Expected: debug-like-expert skill invoked
+```
+
+**Service Failure**:
+```
+You: "IndexedDB transaction fails sometimes"
+Expected: debug-like-expert skill or /debug invoked
+```
+
+**Component Simplification**:
+```
+You: "Simplify the widget configuration API"
+Expected: /consider:via-negativa suggested
+```
+
+### 3. Check Cross-References
+
+Run this command to verify all integration guide links are present:
+```bash
+grep -r "tache-integration-guide.md" *.md src/*/CLAUDE.md tests/CLAUDE.md
+```
+
+Expected: All 8 CLAUDE.md files reference the integration guide.
+
+### 4. Verify Session Protocol Integration
+
+**Session Start**:
+```
+You: (Start new session)
+Expected: /check-todos listed in session start protocol (step 4)
+```
+
+**Session End**:
+```
+You: (Create custom skill)
+Expected: /audit-skill referenced in session end protocol (step 4)
+```
+
+---
+
+## Next Steps for Developers
+
+### Immediate Actions
+1. **Read** [Tache Integration Guide](./tache-integration-guide.md) (at minimum Part 1 + Part 2)
+2. **Bookmark** the Intelligent Routing System specification (Part 2)
+3. **Test** routing with sample prompts (see Verification section above)
+
+### During Development
+- **Let routing work transparently**: Describe tasks naturally; routing determines workflow
+- **Use `/check-todos`** at session start for task selection
+- **Use `/consider:*` frameworks** for architectural decisions
+- **Use `/create-plan`** for complex features before coding
+- **Use `debug-like-expert`** for mysterious bugs
+- **Use `/whats-next` + `/clear`** at session boundaries
+
+### Before Committing
+- **Audit custom tools**: Use `/audit-skill`, `/audit-slash-command`, `/audit-subagent`
+- **Capture follow-ups**: Use `/add-to-todos` for discovered tasks
+- **Run quality checks**: `npm run test && npm run type-check`
+
+---
+
+## Files Updated
+
+| File | Changes | Status |
+|------|---------|--------|
+| **CLAUDE.md** | **Intelligent routing system, thinking frameworks, enhanced tooling policy** | ✅ Complete |
+| src/widgets/CLAUDE.md | Widget planning, performance optimization | ✅ Complete |
+| src/stores/CLAUDE.md | Store debugging, simplification workflows | ✅ Complete |
+| src/hooks/CLAUDE.md | Hook creation, debugging | ✅ Complete |
+| src/services/CLAUDE.md | Service debugging, API decision analysis | ✅ Complete |
+| src/pages/CLAUDE.md | Page planning, lazy loading decisions | ✅ Complete |
+| src/components/CLAUDE.md | Component API design, simplification | ✅ Complete |
+| tests/CLAUDE.md | Test debugging, coverage optimization | ✅ Complete |
+
+**Total**: 8 files updated, 0 files removed or replaced
+
+---
+
+## Success Criteria Met
+
+### CRITICAL SUCCESS CRITERIA
+- ✅ **Intelligent routing system fully implemented in root CLAUDE.md**
+- ✅ **Routing is automatic and applies to ALL user prompts**
+- ✅ **Routing logic includes ALL tache features with comprehensive rules**
+- ✅ **Routing algorithm from integration guide is accurately implemented**
+- ✅ **NO existing CLAUDE.md content was removed**
+- ✅ **System makes tache features the DEFAULT behavior transparently**
+
+### GENERAL SUCCESS CRITERIA
+- ✅ All 8 CLAUDE.md files updated with contextual tache feature references
+- ✅ References are strategic, relevant, and maintain lean principle
+- ✅ "When to use" triggers are clear for each tache feature
+- ✅ Domain-specific examples provided in each folder's CLAUDE.md
+- ✅ No conflicts with root CLAUDE.md authority
+- ✅ Consistent formatting and cross-referencing
+- ✅ Integration guide properly linked from all files
+- ✅ Summary document created documenting all changes
+- ✅ Verification checklist confirms quality standards met
+
+---
+
+## Quality Metrics
+
+**Lean Principle Adherence**:
+- Average addition per file: 10-20 lines
+- No separate "Tache Features" sections (contextual integration)
+- All additions high-signal, actionable
+
+**Cross-Reference Quality**:
+- 8/8 files link to integration guide
+- All links anchor-tagged to relevant sections
+- No broken references
+
+**Routing Coverage**:
+- Planning: `/create-plan` ✅
+- Debugging: `/debug`, `debug-like-expert` ✅
+- Decisions: All 12 `/consider:*` frameworks ✅
+- Delegation: `/create-prompt`, `/run-prompt` ✅
+- Pipelines: `/create-meta-prompt` ✅
+- Task management: `/check-todos`, `/add-to-todos` ✅
+- Quality: `/audit-*` commands ✅
+- Tool creation: `/create-agent-skill`, `/create-slash-command`, `/create-subagent` ✅
+- Context handoff: `/whats-next`, `/clear` ✅
+
+**Coverage**: 100% of tache features integrated
+
+---
+
+## Troubleshooting
+
+### Issue: Routing Doesn't Seem to Work
+
+**Diagnosis**:
+1. Check if prompt is clear about intent (planning, debugging, decision, etc.)
+2. Verify keywords are present ("plan", "debug", "should we", etc.)
+3. Check complexity matches routing thresholds (simple vs moderate vs complex)
+
+**Resolution**:
+- Be more explicit in prompts if routing is ambiguous
+- Reference routing table in CLAUDE.md § Workflow
+- Consult integration guide § Intelligent Routing System
+
+### Issue: Don't Know Which `/consider:*` Framework to Use
+
+**Diagnosis**: Multiple frameworks could apply, unclear which is best
+
+**Resolution**:
+1. Check Thinking Frameworks table in root CLAUDE.md
+2. Use primary concern to select framework:
+   - Long-term → 10-10-10
+   - Root cause → 5-whys
+   - Prioritization → eisenhower-matrix
+   - Simplification → via-negativa or occams-razor
+   - Risks → inversion
+   - Evaluation → swot
+3. Can chain multiple frameworks for complex decisions
+
+### Issue: Context Is Getting Heavy But Task Isn't Done
+
+**Diagnosis**: Token usage >100k, task still in progress
+
+**Resolution**:
+1. Use `/create-prompt` to delegate remaining work to fresh context
+2. OR use `/whats-next` to create handoff document → `/clear` → resume
+3. Routing should auto-suggest this for moderate complexity tasks
+
+### Issue: Created Custom Tool, Unsure About Quality
+
+**Diagnosis**: Created skill/command/agent, want to verify quality
+
+**Resolution**:
+1. Use appropriate audit command:
+   - `/audit-skill <path>` for skills
+   - `/audit-slash-command <path>` for commands
+   - `/audit-subagent <path>` for agents
+2. Iterate based on audit findings
+3. This is required before committing (session protocol § End step 4)
+
+---
+
+## Related Documentation
+
+| Document | Purpose |
+|----------|---------|
+| [Tache Features Audit](./tache-features-audit.md) | Complete inventory of all tache features |
+| [Tache Integration Guide](./tache-integration-guide.md) | **Primary reference**: How to use tache features in Neuman Brain |
+| CLAUDE.md (root) | **Project constitution** with intelligent routing system |
+| Folder-specific CLAUDE.md files | Domain-specific tache feature usage |
+
+---
+
+## Document Metadata
+
+- **Created**: 2025-11-28
+- **Author**: Claude Code (Sonnet 4.5)
+- **Purpose**: Summary of taches-cc-resources integration into Neuman Brain CLAUDE.md files
+- **Status**: Complete
+- **Integration Scope**: 8 CLAUDE.md files (root + 7 folder-specific)
+- **Key Achievement**: Intelligent routing system makes tache features the transparent default behavior
+
+---
+
+## Conclusion
+
+The taches-cc-resources plugin is now **fully integrated** into Neuman Brain's development workflow through:
+
+1. **Intelligent routing system** (root CLAUDE.md) - **AUTOMATIC** prompt analysis and feature routing
+2. **Contextual folder integration** (7 folder-specific CLAUDE.md files) - Domain-specific tache feature usage
+3. **Comprehensive cross-referencing** - All files link to integration guide for deep dives
+4. **Transparent default behavior** - No manual decision-making required; system routes optimally
+
+**Developers can now describe tasks naturally and let the routing system determine the best workflow transparently.**
+
+For detailed usage patterns, examples, and complete routing specification, see the [Tache Integration Guide](./tache-integration-guide.md).

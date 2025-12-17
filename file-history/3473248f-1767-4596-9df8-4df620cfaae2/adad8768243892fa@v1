@@ -1,0 +1,309 @@
+#!/usr/bin/env python3
+"""
+Notebook Inventory Script
+Scans all files in the Notebooks folder and generates a comprehensive CSV catalog.
+For .note files: extracts Notability metadata (title, dates, embedded content counts)
+For .one files: records basic file info (pyOneNote parsing can be added later)
+"""
+
+import os
+import sys
+import csv
+import json
+import hashlib
+import zipfile
+import plistlib
+from datetime import datetime
+from pathlib import Path
+from collections import defaultdict
+
+# Configuration
+BASE_PATH = Path(r"D:\Proton Drive\My files\Documents\Personal\Notebooks")
+OUTPUT_DIR = BASE_PATH / "_scripts" / "output"
+OUTPUT_CSV = OUTPUT_DIR / "inventory.csv"
+OUTPUT_STATS = OUTPUT_DIR / "inventory_stats.json"
+
+def ensure_output_dir():
+    """Create output directory if it doesn't exist."""
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+
+def hash_file(filepath: Path, algorithm='sha256', chunk_size=65536) -> str:
+    """Calculate hash of a file."""
+    hasher = hashlib.new(algorithm)
+    try:
+        with open(filepath, 'rb') as f:
+            while chunk := f.read(chunk_size):
+                hasher.update(chunk)
+        return hasher.hexdigest()
+    except (IOError, OSError):
+        return "ERROR"
+
+def check_zip_integrity(filepath: Path) -> tuple[bool, str]:
+    """Check if a ZIP file is valid."""
+    try:
+        with zipfile.ZipFile(filepath, 'r') as z:
+            bad = z.testzip()
+            if bad is None:
+                return True, "OK"
+            return False, f"Corrupted: {bad}"
+    except zipfile.BadZipFile as e:
+        return False, f"Bad ZIP: {e}"
+    except Exception as e:
+        return False, f"Error: {e}"
+
+def extract_notability_metadata(filepath: Path) -> dict:
+    """Extract metadata from a Notability .note file."""
+    result = {
+        'title': '',
+        'subject': '',
+        'created_date': '',
+        'modified_date': '',
+        'uuid': '',
+        'has_recording': False,
+        'pdf_count': 0,
+        'image_count': 0,
+        'session_size': 0,
+        'internal_files': 0,
+        'integrity': 'OK',
+    }
+
+    try:
+        with zipfile.ZipFile(filepath, 'r') as z:
+            # Count internal files
+            names = z.namelist()
+            result['internal_files'] = len(names)
+
+            # Count PDFs and images
+            result['pdf_count'] = sum(1 for n in names if n.lower().endswith('.pdf'))
+            result['image_count'] = sum(1 for n in names if any(n.lower().endswith(ext) for ext in ['.jpg', '.jpeg', '.png', '.gif']))
+
+            # Get Session.plist size
+            for name in names:
+                if name.endswith('Session.plist'):
+                    info = z.getinfo(name)
+                    result['session_size'] = info.file_size
+                    break
+
+            # Parse metadata.plist
+            for name in names:
+                if name.endswith('metadata.plist'):
+                    with z.open(name) as f:
+                        try:
+                            meta = plistlib.load(f)
+                            objects = meta.get('$objects', [])
+
+                            # Extract strings from objects
+                            strings = [o for o in objects if isinstance(o, str) and len(o) > 1 and o != '$null']
+
+                            # Try to find title (usually the filename without extension)
+                            if len(strings) >= 1:
+                                # Filter out UUIDs and common strings
+                                potential_titles = [s for s in strings if not (
+                                    len(s) == 36 and s.count('-') == 4 or  # UUID
+                                    s in ['unsortedNotesKey', 'NSKeyedArchiver', 'NSDate', 'SessionInfo']
+                                )]
+                                if potential_titles:
+                                    result['title'] = potential_titles[0]
+                                if len(potential_titles) > 1:
+                                    result['subject'] = potential_titles[1] if potential_titles[1] != result['title'] else ''
+
+                            # Find UUID
+                            for s in strings:
+                                if len(s) == 36 and s.count('-') == 4:
+                                    result['uuid'] = s
+                                    break
+
+                            # Check for recordings
+                            root_obj = meta.get('$top', {}).get('root')
+                            if isinstance(root_obj, dict):
+                                result['has_recording'] = root_obj.get('noteHasRecordingKey', False)
+
+                            # Try to extract dates from NSDate objects
+                            for obj in objects:
+                                if isinstance(obj, dict) and 'NS.time' in obj:
+                                    # Convert Apple timestamp (seconds since 2001-01-01)
+                                    apple_epoch = datetime(2001, 1, 1)
+                                    try:
+                                        dt = apple_epoch + datetime.timedelta(seconds=obj['NS.time'])
+                                        if not result['created_date']:
+                                            result['created_date'] = dt.isoformat()
+                                        elif not result['modified_date']:
+                                            result['modified_date'] = dt.isoformat()
+                                    except:
+                                        pass
+                        except Exception as e:
+                            result['integrity'] = f"Metadata parse error: {e}"
+                    break
+    except zipfile.BadZipFile:
+        result['integrity'] = "Bad ZIP file"
+    except Exception as e:
+        result['integrity'] = f"Error: {e}"
+
+    return result
+
+def scan_file(filepath: Path) -> dict:
+    """Scan a single file and return its metadata."""
+    stat = filepath.stat()
+    ext = filepath.suffix.lower()
+
+    record = {
+        'path': str(filepath),
+        'filename': filepath.name,
+        'extension': ext,
+        'size_bytes': stat.st_size,
+        'modified_time': datetime.fromtimestamp(stat.st_mtime).isoformat(),
+        'hash': '',
+        'title': '',
+        'subject': '',
+        'created_date': '',
+        'note_modified_date': '',
+        'uuid': '',
+        'has_recording': False,
+        'pdf_count': 0,
+        'image_count': 0,
+        'session_size': 0,
+        'internal_files': 0,
+        'integrity': 'OK',
+    }
+
+    # Calculate hash (skip for very large files to save time)
+    if stat.st_size < 100 * 1024 * 1024:  # Skip files > 100MB
+        record['hash'] = hash_file(filepath)
+    else:
+        record['hash'] = 'SKIPPED_LARGE_FILE'
+
+    # Extract format-specific metadata
+    if ext == '.note':
+        meta = extract_notability_metadata(filepath)
+        record.update({
+            'title': meta['title'],
+            'subject': meta['subject'],
+            'created_date': meta['created_date'],
+            'note_modified_date': meta['modified_date'],
+            'uuid': meta['uuid'],
+            'has_recording': meta['has_recording'],
+            'pdf_count': meta['pdf_count'],
+            'image_count': meta['image_count'],
+            'session_size': meta['session_size'],
+            'internal_files': meta['internal_files'],
+            'integrity': meta['integrity'],
+        })
+    elif ext == '.one':
+        # Basic integrity check for OneNote files
+        # Full parsing would require pyOneNote
+        record['integrity'] = 'OneNote file - not parsed'
+    elif ext in ['.pdf', '.rtf', '.docx', '.doc']:
+        record['integrity'] = 'Document file - not parsed'
+    elif ext == '.url':
+        # Parse URL shortcut
+        try:
+            with open(filepath, 'r', encoding='utf-8', errors='ignore') as f:
+                content = f.read()
+                for line in content.split('\n'):
+                    if line.startswith('URL='):
+                        record['title'] = line[4:].strip()
+                        break
+        except:
+            pass
+    elif ext == '.zip':
+        is_valid, msg = check_zip_integrity(filepath)
+        record['integrity'] = msg
+
+    return record
+
+def scan_directory(base_path: Path):
+    """Scan all files in directory and subdirectories."""
+    files = []
+    stats = defaultdict(int)
+
+    print(f"Scanning: {base_path}")
+
+    for root, dirs, filenames in os.walk(base_path):
+        # Skip our output directory
+        if '_scripts' in root:
+            continue
+
+        for filename in filenames:
+            filepath = Path(root) / filename
+            ext = filepath.suffix.lower()
+
+            stats['total_files'] += 1
+            stats[f'ext_{ext}'] += 1
+
+            print(f"\r  Processing: {stats['total_files']} files...", end='', flush=True)
+
+            record = scan_file(filepath)
+            files.append(record)
+
+    print(f"\n  Completed: {stats['total_files']} files scanned")
+    return files, dict(stats)
+
+def write_csv(records: list, output_path: Path):
+    """Write records to CSV file."""
+    if not records:
+        print("No records to write!")
+        return
+
+    fieldnames = records[0].keys()
+
+    with open(output_path, 'w', newline='', encoding='utf-8') as f:
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(records)
+
+    print(f"  Written: {output_path}")
+
+def write_stats(stats: dict, output_path: Path):
+    """Write statistics to JSON file."""
+    with open(output_path, 'w', encoding='utf-8') as f:
+        json.dump(stats, f, indent=2)
+    print(f"  Written: {output_path}")
+
+def main():
+    print("=" * 60)
+    print("Notebook Inventory Script")
+    print("=" * 60)
+
+    ensure_output_dir()
+
+    # Scan all files
+    records, stats = scan_directory(BASE_PATH)
+
+    # Calculate additional statistics
+    stats['total_size_bytes'] = sum(r['size_bytes'] for r in records)
+    stats['total_size_gb'] = stats['total_size_bytes'] / (1024 ** 3)
+
+    # Count integrity issues
+    stats['integrity_ok'] = sum(1 for r in records if r['integrity'] == 'OK')
+    stats['integrity_issues'] = sum(1 for r in records if r['integrity'] != 'OK' and r['integrity'] != 'OneNote file - not parsed' and r['integrity'] != 'Document file - not parsed')
+
+    # Count unique hashes (for duplicate detection)
+    hashes = [r['hash'] for r in records if r['hash'] not in ['', 'ERROR', 'SKIPPED_LARGE_FILE']]
+    stats['unique_hashes'] = len(set(hashes))
+    stats['potential_duplicates'] = len(hashes) - stats['unique_hashes']
+
+    # Write outputs
+    print("\nWriting output files...")
+    write_csv(records, OUTPUT_CSV)
+    write_stats(stats, OUTPUT_STATS)
+
+    # Print summary
+    print("\n" + "=" * 60)
+    print("INVENTORY SUMMARY")
+    print("=" * 60)
+    print(f"Total files: {stats['total_files']}")
+    print(f"Total size: {stats['total_size_gb']:.2f} GB")
+    print(f"\nBy extension:")
+    for key, value in sorted(stats.items()):
+        if key.startswith('ext_'):
+            print(f"  {key[4:]:15} {value:5} files")
+    print(f"\nIntegrity:")
+    print(f"  OK:           {stats['integrity_ok']} files")
+    print(f"  Issues:       {stats['integrity_issues']} files")
+    print(f"\nDuplicates:")
+    print(f"  Unique hashes: {stats['unique_hashes']}")
+    print(f"  Potential dups: {stats['potential_duplicates']}")
+    print("=" * 60)
+
+if __name__ == '__main__':
+    main()

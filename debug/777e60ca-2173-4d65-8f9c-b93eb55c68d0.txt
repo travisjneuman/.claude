@@ -1,0 +1,124 @@
+2025-12-14T00:36:35.610Z [DEBUG] Watching for changes in setting files C:\Users\tjn\.claude\settings.json, C:\Users\tjn\.claude\.claude\settings.local.json...
+2025-12-14T00:36:35.639Z [DEBUG] Using bash path: "C:\Program Files\Git\bin\bash.exe"
+2025-12-14T00:36:35.672Z [DEBUG] [LSP MANAGER] initializeLspServerManager() called
+2025-12-14T00:36:35.673Z [DEBUG] [LSP MANAGER] Created manager instance, state=pending
+2025-12-14T00:36:35.673Z [DEBUG] [LSP MANAGER] Starting async initialization (generation 1)
+2025-12-14T00:36:35.675Z [DEBUG] LSP server manager initialized successfully
+2025-12-14T00:36:35.676Z [DEBUG] LSP notification handlers registered successfully for all 0 server(s)
+2025-12-14T00:36:35.723Z [DEBUG] Git remote URL: null
+2025-12-14T00:36:35.723Z [DEBUG] No git remote URL found
+2025-12-14T00:36:35.723Z [DEBUG] Not in a GitHub repository, skipping path mapping update
+2025-12-14T00:36:35.758Z [DEBUG] Loading plugin agent-sdk-dev from source: "./plugins/agent-sdk-dev"
+2025-12-14T00:36:35.758Z [DEBUG] Using manifest version for agent-sdk-dev@claude-code-plugins: 1.0.0
+2025-12-14T00:36:35.759Z [DEBUG] Plugin agent-sdk-dev@claude-code-plugins version 1.0.0 already cached at C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\agent-sdk-dev\1.0.0
+2025-12-14T00:36:35.759Z [DEBUG] Copied local plugin agent-sdk-dev to versioned cache: C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\agent-sdk-dev\1.0.0
+2025-12-14T00:36:35.761Z [DEBUG] Loading plugin pr-review-toolkit from source: "./plugins/pr-review-toolkit"
+2025-12-14T00:36:35.762Z [DEBUG] Using manifest version for pr-review-toolkit@claude-code-plugins: 1.0.0
+2025-12-14T00:36:35.762Z [DEBUG] Plugin pr-review-toolkit@claude-code-plugins version 1.0.0 already cached at C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\pr-review-toolkit\1.0.0
+2025-12-14T00:36:35.762Z [DEBUG] Copied local plugin pr-review-toolkit to versioned cache: C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\pr-review-toolkit\1.0.0
+2025-12-14T00:36:35.763Z [DEBUG] Loading plugin commit-commands from source: "./plugins/commit-commands"
+2025-12-14T00:36:35.763Z [DEBUG] Using manifest version for commit-commands@claude-code-plugins: 1.0.0
+2025-12-14T00:36:35.764Z [DEBUG] Plugin commit-commands@claude-code-plugins version 1.0.0 already cached at C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\commit-commands\1.0.0
+2025-12-14T00:36:35.764Z [DEBUG] Copied local plugin commit-commands to versioned cache: C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\commit-commands\1.0.0
+2025-12-14T00:36:35.765Z [DEBUG] Loading plugin feature-dev from source: "./plugins/feature-dev"
+2025-12-14T00:36:35.765Z [DEBUG] Using manifest version for feature-dev@claude-code-plugins: 1.0.0
+2025-12-14T00:36:35.766Z [DEBUG] Plugin feature-dev@claude-code-plugins version 1.0.0 already cached at C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\feature-dev\1.0.0
+2025-12-14T00:36:35.766Z [DEBUG] Copied local plugin feature-dev to versioned cache: C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\feature-dev\1.0.0
+2025-12-14T00:36:35.768Z [DEBUG] Loading plugin security-guidance from source: "./plugins/security-guidance"
+2025-12-14T00:36:35.768Z [DEBUG] Using manifest version for security-guidance@claude-code-plugins: 1.0.0
+2025-12-14T00:36:35.768Z [DEBUG] Plugin security-guidance@claude-code-plugins version 1.0.0 already cached at C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\security-guidance\1.0.0
+2025-12-14T00:36:35.768Z [DEBUG] Copied local plugin security-guidance to versioned cache: C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\security-guidance\1.0.0
+2025-12-14T00:36:35.769Z [DEBUG] Loaded hooks from standard location for plugin security-guidance: C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\security-guidance\1.0.0\hooks\hooks.json
+2025-12-14T00:36:35.778Z [DEBUG] Loading plugin code-review from source: "./plugins/code-review"
+2025-12-14T00:36:35.779Z [DEBUG] Using manifest version for code-review@claude-code-plugins: 1.0.0
+2025-12-14T00:36:35.779Z [DEBUG] Plugin code-review@claude-code-plugins version 1.0.0 already cached at C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\code-review\1.0.0
+2025-12-14T00:36:35.779Z [DEBUG] Copied local plugin code-review to versioned cache: C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\code-review\1.0.0
+2025-12-14T00:36:35.780Z [DEBUG] Loading plugin explanatory-output-style from source: "./plugins/explanatory-output-style"
+2025-12-14T00:36:35.780Z [DEBUG] Using manifest version for explanatory-output-style@claude-code-plugins: 1.0.0
+2025-12-14T00:36:35.781Z [DEBUG] Plugin explanatory-output-style@claude-code-plugins version 1.0.0 already cached at C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\explanatory-output-style\1.0.0
+2025-12-14T00:36:35.781Z [DEBUG] Copied local plugin explanatory-output-style to versioned cache: C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\explanatory-output-style\1.0.0
+2025-12-14T00:36:35.782Z [DEBUG] Loaded hooks from standard location for plugin explanatory-output-style: C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\explanatory-output-style\1.0.0\hooks\hooks.json
+2025-12-14T00:36:35.782Z [DEBUG] Loading plugin learning-output-style from source: "./plugins/learning-output-style"
+2025-12-14T00:36:35.783Z [DEBUG] Using manifest version for learning-output-style@claude-code-plugins: 1.0.0
+2025-12-14T00:36:35.783Z [DEBUG] Plugin learning-output-style@claude-code-plugins version 1.0.0 already cached at C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\learning-output-style\1.0.0
+2025-12-14T00:36:35.783Z [DEBUG] Copied local plugin learning-output-style to versioned cache: C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\learning-output-style\1.0.0
+2025-12-14T00:36:35.784Z [DEBUG] Loaded hooks from standard location for plugin learning-output-style: C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\learning-output-style\1.0.0\hooks\hooks.json
+2025-12-14T00:36:35.784Z [DEBUG] Loading plugin frontend-design from source: "./plugins/frontend-design"
+2025-12-14T00:36:35.785Z [DEBUG] Using manifest version for frontend-design@claude-code-plugins: 1.0.0
+2025-12-14T00:36:35.785Z [DEBUG] Plugin frontend-design@claude-code-plugins version 1.0.0 already cached at C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\frontend-design\1.0.0
+2025-12-14T00:36:35.785Z [DEBUG] Copied local plugin frontend-design to versioned cache: C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\frontend-design\1.0.0
+2025-12-14T00:36:35.786Z [DEBUG] Loading plugin document-skills from source: "./"
+2025-12-14T00:36:35.835Z [DEBUG] Using git SHA for document-skills@anthropic-agent-skills: 00756142ab04
+2025-12-14T00:36:35.835Z [DEBUG] Plugin document-skills@anthropic-agent-skills version 00756142ab04 already cached at C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\document-skills\00756142ab04
+2025-12-14T00:36:35.835Z [DEBUG] Copied local plugin document-skills to versioned cache: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\document-skills\00756142ab04
+2025-12-14T00:36:35.835Z [DEBUG] Processing 4 skill paths for plugin document-skills
+2025-12-14T00:36:35.835Z [DEBUG] Checking skill path: ./skills/xlsx -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\document-skills\00756142ab04\skills\xlsx (exists: true)
+2025-12-14T00:36:35.835Z [DEBUG] Checking skill path: ./skills/docx -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\document-skills\00756142ab04\skills\docx (exists: true)
+2025-12-14T00:36:35.835Z [DEBUG] Checking skill path: ./skills/pptx -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\document-skills\00756142ab04\skills\pptx (exists: true)
+2025-12-14T00:36:35.835Z [DEBUG] Checking skill path: ./skills/pdf -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\document-skills\00756142ab04\skills\pdf (exists: true)
+2025-12-14T00:36:35.835Z [DEBUG] Found 4 valid skill paths for plugin document-skills, setting skillsPaths
+2025-12-14T00:36:35.836Z [DEBUG] Loading plugin example-skills from source: "./"
+2025-12-14T00:36:35.883Z [DEBUG] Using git SHA for example-skills@anthropic-agent-skills: 00756142ab04
+2025-12-14T00:36:35.883Z [DEBUG] Plugin example-skills@anthropic-agent-skills version 00756142ab04 already cached at C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04
+2025-12-14T00:36:35.883Z [DEBUG] Copied local plugin example-skills to versioned cache: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04
+2025-12-14T00:36:35.883Z [DEBUG] Processing 12 skill paths for plugin example-skills
+2025-12-14T00:36:35.883Z [DEBUG] Checking skill path: ./skills/algorithmic-art -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\algorithmic-art (exists: true)
+2025-12-14T00:36:35.883Z [DEBUG] Checking skill path: ./skills/brand-guidelines -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\brand-guidelines (exists: true)
+2025-12-14T00:36:35.883Z [DEBUG] Checking skill path: ./skills/canvas-design -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\canvas-design (exists: true)
+2025-12-14T00:36:35.884Z [DEBUG] Checking skill path: ./skills/doc-coauthoring -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\doc-coauthoring (exists: true)
+2025-12-14T00:36:35.884Z [DEBUG] Checking skill path: ./skills/frontend-design -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\frontend-design (exists: true)
+2025-12-14T00:36:35.884Z [DEBUG] Checking skill path: ./skills/internal-comms -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\internal-comms (exists: true)
+2025-12-14T00:36:35.884Z [DEBUG] Checking skill path: ./skills/mcp-builder -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\mcp-builder (exists: true)
+2025-12-14T00:36:35.884Z [DEBUG] Checking skill path: ./skills/skill-creator -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\skill-creator (exists: true)
+2025-12-14T00:36:35.884Z [DEBUG] Checking skill path: ./skills/slack-gif-creator -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\slack-gif-creator (exists: true)
+2025-12-14T00:36:35.884Z [DEBUG] Checking skill path: ./skills/theme-factory -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\theme-factory (exists: true)
+2025-12-14T00:36:35.884Z [DEBUG] Checking skill path: ./skills/web-artifacts-builder -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\web-artifacts-builder (exists: true)
+2025-12-14T00:36:35.884Z [DEBUG] Checking skill path: ./skills/webapp-testing -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\00756142ab04\skills\webapp-testing (exists: true)
+2025-12-14T00:36:35.884Z [DEBUG] Found 12 valid skill paths for plugin example-skills, setting skillsPaths
+2025-12-14T00:36:35.885Z [DEBUG] Loading plugin taches-cc-resources from source: "./"
+2025-12-14T00:36:35.885Z [DEBUG] Using manifest version for taches-cc-resources@taches-cc-resources: 1.0.0
+2025-12-14T00:36:35.885Z [DEBUG] Plugin taches-cc-resources@taches-cc-resources version 1.0.0 already cached at C:\Users\tjn\.claude\plugins\cache\taches-cc-resources\taches-cc-resources\1.0.0
+2025-12-14T00:36:35.885Z [DEBUG] Copied local plugin taches-cc-resources to versioned cache: C:\Users\tjn\.claude\plugins\cache\taches-cc-resources\taches-cc-resources\1.0.0
+2025-12-14T00:36:35.886Z [DEBUG] Found 12 plugins (10 enabled, 2 disabled)
+2025-12-14T00:36:35.887Z [DEBUG] Loaded 1 commands from plugin agent-sdk-dev default directory
+2025-12-14T00:36:35.888Z [DEBUG] Loaded 1 commands from plugin pr-review-toolkit default directory
+2025-12-14T00:36:35.888Z [DEBUG] Loaded 3 commands from plugin commit-commands default directory
+2025-12-14T00:36:35.888Z [DEBUG] Loaded 1 commands from plugin feature-dev default directory
+2025-12-14T00:36:35.888Z [DEBUG] Loaded 1 commands from plugin code-review default directory
+2025-12-14T00:36:35.892Z [DEBUG] Loaded 29 commands from plugin taches-cc-resources default directory
+2025-12-14T00:36:35.892Z [DEBUG] Total plugin commands loaded: 36
+2025-12-14T00:36:35.893Z [DEBUG] Loaded 2 agents from plugin agent-sdk-dev default directory
+2025-12-14T00:36:35.893Z [DEBUG] Loaded 6 agents from plugin pr-review-toolkit default directory
+2025-12-14T00:36:35.894Z [DEBUG] Loaded 3 agents from plugin feature-dev default directory
+2025-12-14T00:36:35.894Z [DEBUG] Loaded 3 agents from plugin taches-cc-resources default directory
+2025-12-14T00:36:35.894Z [DEBUG] Total plugin agents loaded: 14
+2025-12-14T00:36:35.894Z [DEBUG] Loading hooks from plugin: security-guidance
+2025-12-14T00:36:35.894Z [DEBUG] Registered 1 hooks from 10 plugins
+2025-12-14T00:36:35.894Z [DEBUG] Loaded plugins - Enabled: 10, Disabled: 2, Commands: 36, Agents: 14, Errors: 0
+2025-12-14T00:36:35.914Z [DEBUG] MCP server "sequential-thinking": Starting connection with timeout of 30000ms
+2025-12-14T00:36:35.928Z [DEBUG] MCP server "playwright": Starting connection with timeout of 30000ms
+2025-12-14T00:36:35.941Z [DEBUG] MCP server "memory": Starting connection with timeout of 30000ms
+2025-12-14T00:36:35.970Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude.json.tmp.8140.1765672595970
+2025-12-14T00:36:35.970Z [DEBUG] Preserving file permissions: 100666
+2025-12-14T00:36:35.976Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (5.3ms)
+2025-12-14T00:36:35.976Z [DEBUG] Temp file written successfully, size: 52337 bytes
+2025-12-14T00:36:35.976Z [DEBUG] Applied original permissions to temp file
+2025-12-14T00:36:35.976Z [DEBUG] Renaming C:\Users\tjn\.claude.json.tmp.8140.1765672595970 to C:\Users\tjn\.claude.json
+2025-12-14T00:36:35.976Z [DEBUG] File C:\Users\tjn\.claude.json written atomically
+2025-12-14T00:36:37.450Z [ERROR] MCP server "sequential-thinking" Server stderr: Sequential Thinking MCP Server running on stdio
+2025-12-14T00:36:37.455Z [ERROR] MCP server "memory" Server stderr: Knowledge Graph MCP Server running on stdio
+2025-12-14T00:36:37.461Z [DEBUG] MCP server "sequential-thinking": Successfully connected to stdio server in 1565ms
+2025-12-14T00:36:37.461Z [DEBUG] MCP server "sequential-thinking": Connection established with capabilities: {"hasTools":true,"hasPrompts":false,"hasResources":false,"serverVersion":{"name":"sequential-thinking-server","version":"0.2.0"}}
+2025-12-14T00:36:37.462Z [DEBUG] MCP server "memory": Successfully connected to stdio server in 1522ms
+2025-12-14T00:36:37.462Z [DEBUG] MCP server "memory": Connection established with capabilities: {"hasTools":true,"hasPrompts":false,"hasResources":false,"serverVersion":{"name":"memory-server","version":"0.6.3"}}
+2025-12-14T00:36:37.728Z [DEBUG] MCP server "playwright": Successfully connected to stdio server in 1802ms
+2025-12-14T00:36:37.728Z [DEBUG] MCP server "playwright": Connection established with capabilities: {"hasTools":true,"hasPrompts":false,"hasResources":false,"serverVersion":{"name":"Playwright","version":"0.0.52"}}
+2025-12-14T00:36:37.739Z [DEBUG] MCP server "filesystem": Starting connection with timeout of 30000ms
+2025-12-14T00:36:37.752Z [DEBUG] MCP server "sqlite": Starting connection with timeout of 30000ms
+2025-12-14T00:36:38.877Z [DEBUG] MCP server "sqlite": Successfully connected to stdio server in 1125ms
+2025-12-14T00:36:38.877Z [DEBUG] MCP server "sqlite": Connection established with capabilities: {"hasTools":true,"hasPrompts":true,"hasResources":true,"serverVersion":{"name":"sqlite","version":"0.1.0"}}
+2025-12-14T00:36:39.180Z [ERROR] MCP server "filesystem" Server stderr: Secure MCP Filesystem Server running on stdio
+2025-12-14T00:36:39.182Z [DEBUG] MCP server "filesystem": Successfully connected to stdio server in 1443ms
+2025-12-14T00:36:39.182Z [DEBUG] MCP server "filesystem": Connection established with capabilities: {"hasTools":true,"hasPrompts":false,"hasResources":false,"serverVersion":{"name":"secure-filesystem-server","version":"0.2.0"}}
+2025-12-14T00:36:39.184Z [DEBUG] MCP server "filesystem": Received ListRoots request from server
+2025-12-14T00:36:39.238Z [ERROR] MCP server "filesystem" Server stderr: Updated allowed directories from MCP roots: 1 valid directories

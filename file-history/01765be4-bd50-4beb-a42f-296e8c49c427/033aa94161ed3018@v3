@@ -1,0 +1,72 @@
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [react()],
+
+  // CSS configuration with PostCSS
+  css: {
+    postcss: './config/postcss.config.js',
+  },
+
+  // Base public path - use '/' for root domain deployment
+  base: '/',
+
+  // Build optimizations
+  build: {
+    // Output directory
+    outDir: 'dist',
+
+    // Generate sourcemaps for production debugging (optional)
+    sourcemap: false,
+
+    // Chunk size warnings
+    chunkSizeWarningLimit: 1000,
+
+    // Rollup options - let Vite auto-split based on lazy imports
+    rollupOptions: {
+      output: {
+        // Auto-split chunks based on node_modules
+        // IMPORTANT: Check more specific patterns first!
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            // Check react-router BEFORE react (react-router contains "react")
+            if (id.includes('react-router')) {
+              return 'router-vendor';
+            }
+            // Then check react/react-dom
+            if (id.includes('react') || id.includes('react-dom')) {
+              return 'react-vendor';
+            }
+            if (id.includes('dnd-kit')) {
+              return 'dnd-vendor';
+            }
+            if (id.includes('lexical')) {
+              return 'lexical-vendor';
+            }
+            if (id.includes('leaflet')) {
+              return 'leaflet-vendor';
+            }
+            // Everything else from node_modules goes to vendor chunk
+            return 'vendor';
+          }
+        },
+      },
+    },
+  },
+
+  // Development server
+  server: {
+    port: 5173,
+    strictPort: false,
+    host: true,
+  },
+
+  // Preview server (for testing production build)
+  preview: {
+    port: 4173,
+    strictPort: false,
+    host: true,
+  },
+})

@@ -1,0 +1,86 @@
+import React, { lazy, Suspense, useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { PageHeader } from '../components/PageHeader';
+import { GanttView } from '../components/GanttView';
+import { LayoutGrid, Calendar } from 'lucide-react';
+
+// Lazy load Kanban widget
+const Kanban = lazy(() =>
+  import('../widgets/Kanban').then((module) => ({ default: module.Kanban }))
+);
+
+// Loading fallback
+const WidgetLoader = () => (
+  <div className="bento-card p-6 h-[600px] animate-pulse">
+    <div className="h-full bg-gradient-to-r from-neutral-200 to-neutral-300 dark:from-neutral-800 dark:to-neutral-700 rounded"></div>
+  </div>
+);
+
+type TaskView = 'kanban' | 'gantt';
+
+/**
+ * Tasks Page - Kanban board and Gantt timeline
+ * Full-featured task management with drag-and-drop and timeline views
+ */
+export const Tasks: React.FC = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [activeView, setActiveView] = useState<TaskView>(() => {
+    const view = searchParams.get('view');
+    return view === 'gantt' ? 'gantt' : 'kanban';
+  });
+
+  useEffect(() => {
+    document.title = 'Neuman Brain';
+  }, []);
+
+  // Update URL when view changes
+  const handleViewChange = (view: TaskView) => {
+    setActiveView(view);
+    setSearchParams({ view });
+  };
+
+  return (
+    <div className="tasks-page flex flex-col h-full">
+      <PageHeader />
+
+      {/* View Tabs */}
+      <div className="flex items-center gap-2 px-4 py-2 border-b border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark">
+        <button
+          onClick={() => handleViewChange('kanban')}
+          className={`flex items-center gap-2 px-4 py-2 rounded-buttontransition-all duration-standard ease-smooth ${
+            activeView === 'kanban'
+              ? 'bg-accent-magenta dark:bg-accent-cyan text-white dark:text-dark-background font-medium'
+              : 'bg-surface-light-elevated dark:bg-surface-dark-elevated border border-border-light dark:border-border-dark text-text-light-primary dark:text-text-dark-primary hover:bg-surface-light dark:hover:bg-neutral-800'
+          }`}
+        >
+          <LayoutGrid className="w-4 h-4" />
+          Kanban
+        </button>
+        <button
+          onClick={() => handleViewChange('gantt')}
+          className={`flex items-center gap-2 px-4 py-2 rounded-buttontransition-all duration-standard ease-smooth ${
+            activeView === 'gantt'
+              ? 'bg-accent-magenta dark:bg-accent-cyan text-white dark:text-dark-background font-medium'
+              : 'bg-surface-light-elevated dark:bg-surface-dark-elevated border border-border-light dark:border-border-dark text-text-light-primary dark:text-text-dark-primary hover:bg-surface-light dark:hover:bg-neutral-800'
+          }`}
+        >
+          <Calendar className="w-4 h-4" />
+          Timeline
+        </button>
+      </div>
+
+      {/* View Content */}
+      <div className="flex-1 overflow-hidden">
+        {activeView === 'kanban' ? (
+          <Suspense fallback={<WidgetLoader />}>
+            <Kanban />
+          </Suspense>
+        ) : (
+          <div className="h-full bento-card">
+            <GanttView />
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};

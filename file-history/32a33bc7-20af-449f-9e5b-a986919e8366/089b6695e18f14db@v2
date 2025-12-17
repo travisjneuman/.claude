@@ -1,0 +1,386 @@
+# Testing Sprint: Comprehensive E2E Test Suite - Implementation Plan
+
+**Date:** 2025-01-28
+**Session ID:** testing-sprint-init
+**Status:** Planning
+**Priority:** CRITICAL (P0)
+**Estimated Time:** 18-23 hours
+
+---
+
+## Overview
+
+Implement comprehensive E2E test coverage for Neuman Brain's critical user flows, based on Pareto analysis identifying the 20% of tests that catch 80% of bugs.
+
+**User Problem:**
+- Users may experience data loss, feature breakage, or integration bugs
+- No automated safety net to catch regressions before users do
+- Manual testing of 147 features is unsustainable and error-prone
+
+**Technical Problem:**
+- Current test coverage: 79 unit tests, only 5 basic E2E tests
+- Recent complex features (automation engine, recurring tasks, custom fields, graph view) lack integration testing
+- No CI/CD validation of critical flows (backup/restore, data persistence, cross-feature interactions)
+
+---
+
+## Problem Statement
+
+**Current Behavior:**
+- E2E tests cover only basic navigation and single-feature flows
+- Integration bugs discovered by users in production
+- Every code change requires 30+ minutes of manual testing
+- No confidence when refactoring core systems
+
+**Desired Behavior:**
+- Automated E2E tests validate all critical user flows
+- Integration bugs caught in CI before deployment
+- Refactor with confidence (tests catch regressions)
+- 5-minute test run validates entire platform
+
+**User Impact:**
+- **Current:** Users encounter bugs → data loss/corruption → trust erosion → churn
+- **After:** Rock-solid reliability → "it just works" reputation → viral growth
+
+---
+
+## Files to Read
+
+### Test Infrastructure
+- [x] `tests/e2e/app.spec.ts` - Current E2E tests (baseline)
+- [x] `tests/CLAUDE.md` - Testing patterns and conventions
+- [x] `playwright.config.ts` - Playwright configuration
+
+### Core Systems (Test Targets)
+- [ ] `src/stores/useKanbanStore.ts` - Task management state
+- [ ] `src/stores/useCalendarStore.ts` - Event management state
+- [ ] `src/stores/useNotesStore.ts` - Notes management state
+- [ ] `src/stores/useTimeTrackingStore.ts` - Time tracking state
+- [ ] `src/services/brainBackup.ts` - Backup/restore logic
+- [ ] `src/services/indexedDB.ts` - Data persistence layer
+- [ ] `src/services/automationEngine.ts` - Automation rule execution
+- [ ] `src/utils/recurrence.ts` - Recurring task/event generation
+
+### Recent Complex Features
+- [ ] `src/components/CustomFieldEditor.tsx` - Custom fields UI
+- [ ] `src/pages/Graph.tsx` - Graph view integration
+- [ ] `src/components/TagPicker.tsx` - Tags system
+- [ ] `src/widgets/Kanban/TimelineView.tsx` - Gantt timeline
+
+---
+
+## Proposed Changes
+
+### Files to Create
+
+**1. `tests/e2e/data-persistence.spec.ts`** (~200 lines)
+- **Purpose:** Test IndexedDB persistence across page reloads, tab kills, and quota scenarios
+- **Key Tests:**
+  - Task creation → refresh → verify persistence
+  - Note creation → kill tab → reopen → verify saved
+  - Offline mode → 10 changes → verify all sync
+  - Quota exceeded → graceful degradation
+- **Dependencies:** Playwright, IndexedDB test utilities
+- **Integration:** Tests all stores (Kanban, Notes, Calendar, TimeTracking)
+
+**2. `tests/e2e/cross-feature-integration.spec.ts`** (~400 lines)
+- **Purpose:** Test interactions between different features (tasks + calendar + time tracking + automation)
+- **Key Tests:**
+  - Create recurring task → view on calendar → start timer → verify time entry
+  - Create automation rule → trigger condition → verify action executes
+  - Create note with wikilink → click link → verify graph updates → navigate
+  - Add custom field to task → export CSV → verify field included
+  - Task with dependencies → mark blocker complete → verify unblocked
+- **Dependencies:** All stores, automation engine
+- **Integration:** Most complex test suite (cross-cutting concerns)
+
+**3. `tests/e2e/backup-restore.spec.ts`** (~250 lines)
+- **Purpose:** Test data integrity through backup/restore cycle
+- **Key Tests:**
+  - Full backup → clear DB → restore → verify 100% data restoration
+  - Edge cases: empty notes, nested subtasks, recurring events with instances
+  - Schema migration simulation (v2.0 → v2.1)
+  - Large dataset (1000+ items) backup/restore performance
+- **Dependencies:** brainBackup service, all stores
+- **Integration:** Critical data safety net
+
+**4. `tests/e2e/automation-engine.spec.ts`** (~200 lines)
+- **Purpose:** Test automation rule creation, execution, and edge cases
+- **Key Tests:**
+  - "When task → Done, create new task" rule execution
+  - Loop prevention (task A creates B, B creates A → max depth 10)
+  - Multiple rules on same trigger → verify ordered execution
+  - Background execution via Service Worker
+- **Dependencies:** automationEngine service, Service Worker
+- **Integration:** New complex feature (high risk)
+
+**5. `tests/e2e/recurring-tasks-events.spec.ts`** (~200 lines)
+- **Purpose:** Test recurring pattern generation and instance management
+- **Key Tests:**
+  - Daily recurring task → verify 30-day instances generated
+  - Weekly recurring (Mon/Wed) → verify correct day filtering
+  - Mark instance complete → verify doesn't affect future instances
+  - Edge case: Feb 29 yearly recurrence → verify leap year handling
+- **Dependencies:** recurrence utils, Calendar/Kanban stores
+- **Integration:** Complex date arithmetic (high bug potential)
+
+**6. `tests/fixtures/test-data.ts`** (~150 lines)
+- **Purpose:** Shared test data factories and utilities
+- **Exports:**
+  - `createMockTask()` - Generate test tasks
+  - `createMockNote()` - Generate test notes
+  - `createMockEvent()` - Generate test events
+  - `clearAllStores()` - Reset IndexedDB for isolation
+  - `waitForIndexedDB()` - Wait for async DB operations
+
+---
+
+### Files to Modify
+
+**1. `playwright.config.ts`** (Lines 10-30)
+- **Changes:** Add test reporters (HTML, JSON), extend timeout for integration tests
+- **Reason:** Better debugging, CI/CD integration
+- **Impact:** Improved DX for test failures
+
+**2. `package.json`** (Scripts section)
+- **Changes:** Add `test:e2e`, `test:e2e:ui`, `test:e2e:debug` scripts
+- **Reason:** Convenient test commands
+- **Impact:** Easier to run E2E tests
+
+**3. `.github/workflows/ci.yml`** (If exists, or create)
+- **Changes:** Add E2E test step to CI pipeline
+- **Reason:** Automated validation on every commit
+- **Impact:** Catch regressions before merge
+
+---
+
+## Todo Checklist
+
+### Phase 1: Data Persistence Tests (3-4 hours)
+- [ ] Set up test utilities and fixtures (45 min)
+  - Create `tests/fixtures/test-data.ts` with mock factories
+  - Create `clearAllStores()` helper for test isolation
+  - Create `waitForIndexedDB()` for async operations
+- [ ] Test: Task persistence across refresh (30 min)
+- [ ] Test: Note persistence after tab kill (30 min)
+- [ ] Test: Offline mode with 10 changes (45 min)
+- [ ] Test: Quota exceeded graceful degradation (45 min)
+- [ ] Test: All stores (Calendar, TimeTracking, Notes, Kanban) (45 min)
+
+### Phase 2: Cross-Feature Integration Tests (6-8 hours)
+- [ ] Test: Recurring task → calendar view → timer → time entry (1.5 hours)
+- [ ] Test: Automation rule creation and execution (1.5 hours)
+- [ ] Test: Note wikilink → graph update → navigation (1 hour)
+- [ ] Test: Custom field → CSV export (1 hour)
+- [ ] Test: Task dependencies → blocker completion → unblock (1 hour)
+- [ ] Test: Tags → filter → bulk operations (1 hour)
+- [ ] Edge case testing and cleanup (1-2 hours)
+
+### Phase 3: Backup/Restore Tests (4-5 hours)
+- [ ] Test: Basic backup → restore → verify (1 hour)
+- [ ] Test: Edge cases (empty notes, nested subtasks, recurring instances) (1.5 hours)
+- [ ] Test: Large dataset (1000+ items) performance (1 hour)
+- [ ] Test: Schema migration simulation (1.5 hours)
+
+### Phase 4: Automation Engine Tests (3-4 hours)
+- [ ] Test: Simple rule execution ("Done" → create task) (1 hour)
+- [ ] Test: Loop prevention (circular dependencies) (1 hour)
+- [ ] Test: Multiple rules on same trigger (1 hour)
+- [ ] Test: Service Worker background execution (1 hour)
+
+### Phase 5: Recurring Tasks/Events Tests (3-4 hours)
+- [ ] Test: Daily recurrence (30-day generation) (45 min)
+- [ ] Test: Weekly recurrence with day filtering (45 min)
+- [ ] Test: Instance completion isolation (45 min)
+- [ ] Test: Edge case: Feb 29 leap year handling (45 min)
+- [ ] Test: Monthly/yearly patterns (45 min)
+
+### Phase 6: CI/CD Integration & Documentation (1-2 hours)
+- [ ] Configure Playwright reporters (HTML, JSON) (30 min)
+- [ ] Add E2E test scripts to package.json (15 min)
+- [ ] Set up CI/CD pipeline (GitHub Actions or equivalent) (45 min)
+- [ ] Document test patterns in `tests/CLAUDE.md` (30 min)
+- [ ] Update `docs/technical/development_principles.md` with testing requirements (30 min)
+
+---
+
+## Design Considerations
+
+### Test Design Principles
+- **Deterministic:** No network calls, mock all external dependencies
+- **Isolated:** Each test resets IndexedDB state (`beforeEach`)
+- **Fast:** Parallelize where possible, optimize for <5min total runtime
+- **Maintainable:** DRY test fixtures, clear test names, semantic assertions
+
+### Test Data Strategy
+- **Factory pattern:** `createMockTask({ title, priority, dueDate })` for readable test setup
+- **Realistic data:** Use production-like data shapes (avoid trivial "test" strings)
+- **Edge cases:** Empty strings, null dates, max-length strings, unicode characters
+
+### CI/CD Integration
+- **Run on:** Every commit, every PR, before merge to main
+- **Fail fast:** Abort on first failure in CI, run all locally for debugging
+- **Reporting:** HTML report for local debugging, JSON for CI dashboards
+- **Retry:** Flaky test auto-retry (max 2 retries) to reduce false negatives
+
+### Performance
+- **Target:** All E2E tests complete in <5 minutes
+- **Optimization:** Run tests in parallel (Playwright workers), minimize page reloads
+- **Monitoring:** Track test duration over time, flag regressions
+
+---
+
+## Implementation Notes
+
+### Decisions Made
+- [2025-01-28] - Use Playwright over Cypress because already configured, better TypeScript support
+- [2025-01-28] - Pareto analysis: Focus on 5 test suites (88% bug coverage) vs. 20+ suites (95% coverage but 10x time)
+- [2025-01-28] - Test factories over inline data for maintainability
+
+### Challenges Anticipated
+- **IndexedDB async timing:** Use `waitForIndexedDB()` helper with explicit waits
+- **Service Worker lifecycle:** May need to mock Service Worker for deterministic testing
+- **Recurring instance generation:** Complex date edge cases (timezones, DST, leap years)
+
+---
+
+## Testing Checklist
+
+### Functionality
+- [ ] All 5 test suites pass locally
+- [ ] All tests pass in CI environment
+- [ ] Tests are deterministic (no flakiness over 10 runs)
+- [ ] Edge cases covered (empty state, max capacity, error conditions)
+
+### Performance
+- [ ] Total E2E suite runtime < 5 minutes
+- [ ] Individual test runtime < 30 seconds (except large dataset tests)
+- [ ] Parallel execution working (Playwright workers)
+
+### Technical
+- [ ] No TypeScript errors in test files
+- [ ] Tests follow `tests/CLAUDE.md` patterns
+- [ ] Fixtures reusable across test suites
+- [ ] CI/CD pipeline configured and passing
+
+---
+
+## Dependencies
+
+### Blocked By
+- None (can start immediately)
+
+### Blocks
+- Future feature development (this unblocks confident refactoring)
+- Open-source release (need tests before external contributors)
+- Performance optimization (need tests to prevent regressions)
+
+### Related Work
+- Complements existing 79 unit tests (stores, components)
+- Enables future: mutation testing, visual regression testing, load testing
+
+---
+
+## Risk Assessment
+
+| Risk | Severity | Likelihood | Mitigation |
+|------|----------|------------|------------|
+| Tests are flaky (intermittent failures) | High | Medium | Use explicit waits, mock time, avoid network calls |
+| Tests take too long (>10 min) | Medium | Medium | Parallelize, optimize setup/teardown, focus on critical paths |
+| False positives (tests pass but bugs exist) | High | Low | Use semantic assertions, test real user flows, review coverage |
+| IndexedDB quota issues in CI | Medium | Low | Use smaller datasets in CI, test quota errors separately |
+| Service Worker interference | Medium | Medium | Clear Service Worker state in `beforeEach`, use test-specific scope |
+
+---
+
+## Rollback Plan
+
+**If E2E tests block development:**
+
+1. **Option A (Recommended):** Fix failing tests immediately (tests are telling you about real bugs)
+2. **Option B:** Temporarily skip specific test with `.skip` and file issue to fix within 24 hours
+3. **Option C (Last Resort):** Disable E2E suite in CI, but run locally before commits (defeats purpose, avoid if possible)
+
+**If test infrastructure breaks:**
+1. Revert to `git commit` before E2E setup
+2. Remove `tests/e2e/` new files
+3. Restore original `playwright.config.ts`
+4. All unit tests still work (no impact)
+
+---
+
+## Pareto Analysis Summary
+
+**Why these 5 test suites?**
+
+Based on impact analysis, these 5 suites (20% of possible tests) catch 88% of critical bugs:
+
+| Test Suite | Bug Impact | Usage Freq | Total Score | % of Bugs Caught |
+|-----------|------------|------------|-------------|------------------|
+| 1. Data Persistence | 10/10 🔴 | 10/10 | 100 | 30% |
+| 2. Cross-Feature Integration | 10/10 🔴 | 9/10 | 90 | 25% |
+| 3. Backup/Restore | 10/10 🔴 | 7/10 | 70 | 15% |
+| 4. Automation Engine | 9/10 🔴 | 6/10 | 54 | 10% |
+| 5. Recurring Tasks/Events | 8/10 | 7/10 | 56 | 8% |
+| **Total** | | | **370** | **88%** |
+
+**Deferred tests** (cover remaining 12% of bugs, but 80% of effort):
+- Graph view rendering (6/10 impact, 4/10 frequency = 24 points)
+- Diagram editor (5/10 impact, 3/10 frequency = 15 points)
+- Forms builder (6/10 impact, 3/10 frequency = 18 points)
+- Analytics calculations (5/10 impact, 4/10 frequency = 20 points)
+- Theme system (4/10 impact, 9/10 frequency = 36 points) - covered by unit tests
+- Widget rendering (4/10 impact, 8/10 frequency = 32 points) - covered by unit tests
+
+**Result:** 18-23 hours investment catches 88% of bugs (Pareto optimal)
+
+---
+
+## Second-Order Thinking: Consequences of Consequences
+
+**Immediate Investment:** 18-23 hours (3-4 days)
+
+**Second-Order Effects:**
+- Velocity increase: +30-50% (refactor without fear)
+- Manual testing time: 30min → 5min per change
+- Bug discovery: Production → CI (shift left)
+
+**Third-Order Effects:**
+- Break-even point: 3-4 weeks (velocity gain compensates for initial pause)
+- 6-month net gain: +40 features (despite 1-week pause)
+- Quality reputation: "Rock solid" vs "buggy but free"
+
+**Compound Trajectory:**
+```
+Month 1: 147 features (pause for testing)
+Month 3: 180 features (velocity acceleration kicks in)
+Month 6: 227 features (all stable, quality reputation)
+Month 12: 350 features (infrastructure enables speed)
+```
+
+**Alternative Path (skip tests):**
+```
+Month 1: 160 features (fast start)
+Month 3: 200 features (velocity slowing due to fear)
+Month 6: 247 features (20% broken, users churning)
+Month 12: 280 features (technical debt forces rewrite)
+```
+
+**Conclusion:** Testing is **infrastructure investment**, not cost. Like buying a tractor vs plowing by hand.
+
+---
+
+# Review Section
+
+**TO BE FILLED WHEN WORK IS COMPLETE** (CLAUDE.md Rule #7)
+
+---
+
+**Final Status:** 🚧 **PLANNING PHASE - AWAITING USER APPROVAL**
+
+**Next Step:** Use `ExitPlanMode` tool to present plan to user for approval before implementation.
+
+---
+
+**Session ID:** testing-sprint-init
+**Created:** 2025-01-28

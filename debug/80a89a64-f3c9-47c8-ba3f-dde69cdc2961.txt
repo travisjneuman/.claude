@@ -1,0 +1,130 @@
+2025-12-17T03:02:53.744Z [DEBUG] Watching for changes in setting files C:\Users\tjn\.claude\settings.json, C:\Users\tjn\.claude\.claude\settings.local.json...
+2025-12-17T03:02:53.771Z [DEBUG] Using bash path: "C:\Program Files\Git\bin\bash.exe"
+2025-12-17T03:02:53.804Z [DEBUG] [LSP MANAGER] initializeLspServerManager() called
+2025-12-17T03:02:53.804Z [DEBUG] [LSP MANAGER] Created manager instance, state=pending
+2025-12-17T03:02:53.804Z [DEBUG] [LSP MANAGER] Starting async initialization (generation 1)
+2025-12-17T03:02:53.807Z [DEBUG] LSP server manager initialized successfully
+2025-12-17T03:02:53.807Z [DEBUG] LSP notification handlers registered successfully for all 0 server(s)
+2025-12-17T03:02:53.860Z [DEBUG] Git remote URL: null
+2025-12-17T03:02:53.860Z [DEBUG] No git remote URL found
+2025-12-17T03:02:53.860Z [DEBUG] Not in a GitHub repository, skipping path mapping update
+2025-12-17T03:02:53.891Z [DEBUG] Loading plugin agent-sdk-dev from source: "./plugins/agent-sdk-dev"
+2025-12-17T03:02:53.892Z [DEBUG] Using manifest version for agent-sdk-dev@claude-code-plugins: 1.0.0
+2025-12-17T03:02:53.892Z [DEBUG] Plugin agent-sdk-dev@claude-code-plugins version 1.0.0 already cached at C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\agent-sdk-dev\1.0.0
+2025-12-17T03:02:53.893Z [DEBUG] Copied local plugin agent-sdk-dev to versioned cache: C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\agent-sdk-dev\1.0.0
+2025-12-17T03:02:53.894Z [DEBUG] Loading plugin pr-review-toolkit from source: "./plugins/pr-review-toolkit"
+2025-12-17T03:02:53.895Z [DEBUG] Using manifest version for pr-review-toolkit@claude-code-plugins: 1.0.0
+2025-12-17T03:02:53.895Z [DEBUG] Plugin pr-review-toolkit@claude-code-plugins version 1.0.0 already cached at C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\pr-review-toolkit\1.0.0
+2025-12-17T03:02:53.895Z [DEBUG] Copied local plugin pr-review-toolkit to versioned cache: C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\pr-review-toolkit\1.0.0
+2025-12-17T03:02:53.896Z [DEBUG] Loading plugin commit-commands from source: "./plugins/commit-commands"
+2025-12-17T03:02:53.896Z [DEBUG] Using manifest version for commit-commands@claude-code-plugins: 1.0.0
+2025-12-17T03:02:53.896Z [DEBUG] Plugin commit-commands@claude-code-plugins version 1.0.0 already cached at C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\commit-commands\1.0.0
+2025-12-17T03:02:53.896Z [DEBUG] Copied local plugin commit-commands to versioned cache: C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\commit-commands\1.0.0
+2025-12-17T03:02:53.897Z [DEBUG] Loading plugin feature-dev from source: "./plugins/feature-dev"
+2025-12-17T03:02:53.898Z [DEBUG] Using manifest version for feature-dev@claude-code-plugins: 1.0.0
+2025-12-17T03:02:53.898Z [DEBUG] Plugin feature-dev@claude-code-plugins version 1.0.0 already cached at C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\feature-dev\1.0.0
+2025-12-17T03:02:53.898Z [DEBUG] Copied local plugin feature-dev to versioned cache: C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\feature-dev\1.0.0
+2025-12-17T03:02:53.899Z [DEBUG] Loading plugin security-guidance from source: "./plugins/security-guidance"
+2025-12-17T03:02:53.899Z [DEBUG] Using manifest version for security-guidance@claude-code-plugins: 1.0.0
+2025-12-17T03:02:53.900Z [DEBUG] Plugin security-guidance@claude-code-plugins version 1.0.0 already cached at C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\security-guidance\1.0.0
+2025-12-17T03:02:53.900Z [DEBUG] Copied local plugin security-guidance to versioned cache: C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\security-guidance\1.0.0
+2025-12-17T03:02:53.901Z [DEBUG] Loaded hooks from standard location for plugin security-guidance: C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\security-guidance\1.0.0\hooks\hooks.json
+2025-12-17T03:02:53.902Z [DEBUG] Loading plugin code-review from source: "./plugins/code-review"
+2025-12-17T03:02:53.902Z [DEBUG] Using manifest version for code-review@claude-code-plugins: 1.0.0
+2025-12-17T03:02:53.902Z [DEBUG] Plugin code-review@claude-code-plugins version 1.0.0 already cached at C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\code-review\1.0.0
+2025-12-17T03:02:53.902Z [DEBUG] Copied local plugin code-review to versioned cache: C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\code-review\1.0.0
+2025-12-17T03:02:53.903Z [DEBUG] Loading plugin explanatory-output-style from source: "./plugins/explanatory-output-style"
+2025-12-17T03:02:53.903Z [DEBUG] Using manifest version for explanatory-output-style@claude-code-plugins: 1.0.0
+2025-12-17T03:02:53.903Z [DEBUG] Plugin explanatory-output-style@claude-code-plugins version 1.0.0 already cached at C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\explanatory-output-style\1.0.0
+2025-12-17T03:02:53.904Z [DEBUG] Copied local plugin explanatory-output-style to versioned cache: C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\explanatory-output-style\1.0.0
+2025-12-17T03:02:53.905Z [DEBUG] Loaded hooks from standard location for plugin explanatory-output-style: C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\explanatory-output-style\1.0.0\hooks\hooks.json
+2025-12-17T03:02:53.905Z [DEBUG] Loading plugin learning-output-style from source: "./plugins/learning-output-style"
+2025-12-17T03:02:53.906Z [DEBUG] Using manifest version for learning-output-style@claude-code-plugins: 1.0.0
+2025-12-17T03:02:53.906Z [DEBUG] Plugin learning-output-style@claude-code-plugins version 1.0.0 already cached at C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\learning-output-style\1.0.0
+2025-12-17T03:02:53.906Z [DEBUG] Copied local plugin learning-output-style to versioned cache: C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\learning-output-style\1.0.0
+2025-12-17T03:02:53.906Z [DEBUG] Loaded hooks from standard location for plugin learning-output-style: C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\learning-output-style\1.0.0\hooks\hooks.json
+2025-12-17T03:02:53.907Z [DEBUG] Loading plugin frontend-design from source: "./plugins/frontend-design"
+2025-12-17T03:02:53.907Z [DEBUG] Using manifest version for frontend-design@claude-code-plugins: 1.0.0
+2025-12-17T03:02:53.907Z [DEBUG] Plugin frontend-design@claude-code-plugins version 1.0.0 already cached at C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\frontend-design\1.0.0
+2025-12-17T03:02:53.907Z [DEBUG] Copied local plugin frontend-design to versioned cache: C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\frontend-design\1.0.0
+2025-12-17T03:02:53.909Z [DEBUG] Loading plugin document-skills from source: "./"
+2025-12-17T03:02:53.959Z [DEBUG] Using git SHA for document-skills@anthropic-agent-skills: f23222824449
+2025-12-17T03:02:53.959Z [DEBUG] Plugin document-skills@anthropic-agent-skills version f23222824449 already cached at C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\document-skills\f23222824449
+2025-12-17T03:02:53.959Z [DEBUG] Copied local plugin document-skills to versioned cache: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\document-skills\f23222824449
+2025-12-17T03:02:53.959Z [DEBUG] Processing 4 skill paths for plugin document-skills
+2025-12-17T03:02:53.959Z [DEBUG] Checking skill path: ./skills/xlsx -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\document-skills\f23222824449\skills\xlsx (exists: true)
+2025-12-17T03:02:53.959Z [DEBUG] Checking skill path: ./skills/docx -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\document-skills\f23222824449\skills\docx (exists: true)
+2025-12-17T03:02:53.959Z [DEBUG] Checking skill path: ./skills/pptx -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\document-skills\f23222824449\skills\pptx (exists: true)
+2025-12-17T03:02:53.959Z [DEBUG] Checking skill path: ./skills/pdf -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\document-skills\f23222824449\skills\pdf (exists: true)
+2025-12-17T03:02:53.959Z [DEBUG] Found 4 valid skill paths for plugin document-skills, setting skillsPaths
+2025-12-17T03:02:53.960Z [DEBUG] Loading plugin example-skills from source: "./"
+2025-12-17T03:02:54.007Z [DEBUG] Using git SHA for example-skills@anthropic-agent-skills: f23222824449
+2025-12-17T03:02:54.007Z [DEBUG] Plugin example-skills@anthropic-agent-skills version f23222824449 already cached at C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\f23222824449
+2025-12-17T03:02:54.007Z [DEBUG] Copied local plugin example-skills to versioned cache: C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\f23222824449
+2025-12-17T03:02:54.007Z [DEBUG] Processing 12 skill paths for plugin example-skills
+2025-12-17T03:02:54.007Z [DEBUG] Checking skill path: ./skills/algorithmic-art -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\f23222824449\skills\algorithmic-art (exists: true)
+2025-12-17T03:02:54.007Z [DEBUG] Checking skill path: ./skills/brand-guidelines -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\f23222824449\skills\brand-guidelines (exists: true)
+2025-12-17T03:02:54.007Z [DEBUG] Checking skill path: ./skills/canvas-design -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\f23222824449\skills\canvas-design (exists: true)
+2025-12-17T03:02:54.007Z [DEBUG] Checking skill path: ./skills/doc-coauthoring -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\f23222824449\skills\doc-coauthoring (exists: true)
+2025-12-17T03:02:54.008Z [DEBUG] Checking skill path: ./skills/frontend-design -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\f23222824449\skills\frontend-design (exists: true)
+2025-12-17T03:02:54.008Z [DEBUG] Checking skill path: ./skills/internal-comms -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\f23222824449\skills\internal-comms (exists: true)
+2025-12-17T03:02:54.008Z [DEBUG] Checking skill path: ./skills/mcp-builder -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\f23222824449\skills\mcp-builder (exists: true)
+2025-12-17T03:02:54.008Z [DEBUG] Checking skill path: ./skills/skill-creator -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\f23222824449\skills\skill-creator (exists: true)
+2025-12-17T03:02:54.008Z [DEBUG] Checking skill path: ./skills/slack-gif-creator -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\f23222824449\skills\slack-gif-creator (exists: true)
+2025-12-17T03:02:54.008Z [DEBUG] Checking skill path: ./skills/theme-factory -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\f23222824449\skills\theme-factory (exists: true)
+2025-12-17T03:02:54.008Z [DEBUG] Checking skill path: ./skills/web-artifacts-builder -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\f23222824449\skills\web-artifacts-builder (exists: true)
+2025-12-17T03:02:54.008Z [DEBUG] Checking skill path: ./skills/webapp-testing -> C:\Users\tjn\.claude\plugins\cache\anthropic-agent-skills\example-skills\f23222824449\skills\webapp-testing (exists: true)
+2025-12-17T03:02:54.008Z [DEBUG] Found 12 valid skill paths for plugin example-skills, setting skillsPaths
+2025-12-17T03:02:54.009Z [DEBUG] Loading plugin taches-cc-resources from source: "./"
+2025-12-17T03:02:54.009Z [DEBUG] Using manifest version for taches-cc-resources@taches-cc-resources: 1.0.0
+2025-12-17T03:02:54.009Z [DEBUG] Plugin taches-cc-resources@taches-cc-resources version 1.0.0 already cached at C:\Users\tjn\.claude\plugins\cache\taches-cc-resources\taches-cc-resources\1.0.0
+2025-12-17T03:02:54.009Z [DEBUG] Copied local plugin taches-cc-resources to versioned cache: C:\Users\tjn\.claude\plugins\cache\taches-cc-resources\taches-cc-resources\1.0.0
+2025-12-17T03:02:54.011Z [DEBUG] Loading plugin claude-opus-4-5-migration from source: "./plugins/claude-opus-4-5-migration"
+2025-12-17T03:02:54.011Z [DEBUG] Using manifest version for claude-opus-4-5-migration@claude-code-plugins: 1.0.0
+2025-12-17T03:02:54.011Z [DEBUG] Plugin claude-opus-4-5-migration@claude-code-plugins version 1.0.0 already cached at C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\claude-opus-4-5-migration\1.0.0
+2025-12-17T03:02:54.011Z [DEBUG] Copied local plugin claude-opus-4-5-migration to versioned cache: C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\claude-opus-4-5-migration\1.0.0
+2025-12-17T03:02:54.012Z [DEBUG] Loading plugin hookify from source: "./plugins/hookify"
+2025-12-17T03:02:54.012Z [DEBUG] Using manifest version for hookify@claude-code-plugins: 0.1.0
+2025-12-17T03:02:54.012Z [DEBUG] Plugin hookify@claude-code-plugins version 0.1.0 already cached at C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\hookify\0.1.0
+2025-12-17T03:02:54.012Z [DEBUG] Copied local plugin hookify to versioned cache: C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\hookify\0.1.0
+2025-12-17T03:02:54.014Z [DEBUG] Loaded hooks from standard location for plugin hookify: C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\hookify\0.1.0\hooks\hooks.json
+2025-12-17T03:02:54.015Z [DEBUG] Loading plugin plugin-dev from source: "./plugins/plugin-dev"
+2025-12-17T03:02:54.015Z [DEBUG] Using provided version for plugin-dev@claude-code-plugins: 0.1.0
+2025-12-17T03:02:54.015Z [DEBUG] Plugin plugin-dev@claude-code-plugins version 0.1.0 already cached at C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\plugin-dev\0.1.0
+2025-12-17T03:02:54.015Z [DEBUG] Copied local plugin plugin-dev to versioned cache: C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\plugin-dev\0.1.0
+2025-12-17T03:02:54.015Z [DEBUG] Plugin plugin-dev has no entry.skills defined
+2025-12-17T03:02:54.016Z [DEBUG] Loading plugin ralph-wiggum from source: "./plugins/ralph-wiggum"
+2025-12-17T03:02:54.016Z [DEBUG] Using manifest version for ralph-wiggum@claude-code-plugins: 1.0.0
+2025-12-17T03:02:54.016Z [DEBUG] Plugin ralph-wiggum@claude-code-plugins version 1.0.0 already cached at C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\ralph-wiggum\1.0.0
+2025-12-17T03:02:54.016Z [DEBUG] Copied local plugin ralph-wiggum to versioned cache: C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\ralph-wiggum\1.0.0
+2025-12-17T03:02:54.017Z [DEBUG] Loaded hooks from standard location for plugin ralph-wiggum: C:\Users\tjn\.claude\plugins\cache\claude-code-plugins\ralph-wiggum\1.0.0\hooks\hooks.json
+2025-12-17T03:02:54.020Z [DEBUG] Found 16 plugins (14 enabled, 2 disabled)
+2025-12-17T03:02:54.021Z [DEBUG] Loaded 1 commands from plugin agent-sdk-dev default directory
+2025-12-17T03:02:54.022Z [DEBUG] Loaded 1 commands from plugin pr-review-toolkit default directory
+2025-12-17T03:02:54.022Z [DEBUG] Loaded 3 commands from plugin commit-commands default directory
+2025-12-17T03:02:54.022Z [DEBUG] Loaded 1 commands from plugin feature-dev default directory
+2025-12-17T03:02:54.023Z [DEBUG] Loaded 1 commands from plugin code-review default directory
+2025-12-17T03:02:54.025Z [DEBUG] Loaded 29 commands from plugin taches-cc-resources default directory
+2025-12-17T03:02:54.026Z [DEBUG] Loaded 4 commands from plugin hookify default directory
+2025-12-17T03:02:54.026Z [DEBUG] Loaded 1 commands from plugin plugin-dev default directory
+2025-12-17T03:02:54.026Z [DEBUG] Loaded 3 commands from plugin ralph-wiggum default directory
+2025-12-17T03:02:54.026Z [DEBUG] Total plugin commands loaded: 44
+2025-12-17T03:02:54.027Z [DEBUG] Loaded 2 agents from plugin agent-sdk-dev default directory
+2025-12-17T03:02:54.028Z [DEBUG] Loaded 6 agents from plugin pr-review-toolkit default directory
+2025-12-17T03:02:54.028Z [DEBUG] Loaded 3 agents from plugin feature-dev default directory
+2025-12-17T03:02:54.028Z [DEBUG] Loaded 3 agents from plugin taches-cc-resources default directory
+2025-12-17T03:02:54.028Z [DEBUG] Loaded 1 agents from plugin hookify default directory
+2025-12-17T03:02:54.029Z [DEBUG] Loaded 3 agents from plugin plugin-dev default directory
+2025-12-17T03:02:54.029Z [DEBUG] Total plugin agents loaded: 18
+2025-12-17T03:02:54.029Z [DEBUG] Loading hooks from plugin: security-guidance
+2025-12-17T03:02:54.029Z [DEBUG] Loading hooks from plugin: hookify
+2025-12-17T03:02:54.029Z [DEBUG] Loading hooks from plugin: ralph-wiggum
+2025-12-17T03:02:54.029Z [DEBUG] Registered 6 hooks from 14 plugins
+2025-12-17T03:02:54.029Z [DEBUG] Loaded plugins - Enabled: 14, Disabled: 2, Commands: 44, Agents: 18, Errors: 0
+2025-12-17T03:02:54.045Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude.json.tmp.5980.1765940574045
+2025-12-17T03:02:54.045Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T03:02:54.050Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (5.3ms)
+2025-12-17T03:02:54.050Z [DEBUG] Temp file written successfully, size: 63386 bytes
+2025-12-17T03:02:54.050Z [DEBUG] Applied original permissions to temp file
+2025-12-17T03:02:54.050Z [DEBUG] Renaming C:\Users\tjn\.claude.json.tmp.5980.1765940574045 to C:\Users\tjn\.claude.json
+2025-12-17T03:02:54.051Z [DEBUG] File C:\Users\tjn\.claude.json written atomically

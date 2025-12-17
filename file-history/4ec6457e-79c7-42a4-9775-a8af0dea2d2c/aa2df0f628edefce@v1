@@ -1,0 +1,47 @@
+---
+description: Intelligent task router - analyzes your request and automatically delegates to optimal workflow (plan/prompt/meta-prompt/direct execution)
+arguments:
+  - name: task_description
+    description: "Describe what you want to accomplish. Can be empty to check todos, or a full task description."
+    required: false
+---
+
+# Start Task - Intelligent Workflow Router
+
+Analyzes task and routes to optimal execution strategy.
+
+## Routing Logic
+
+**No task provided:** → `/check-todos`
+
+**Task provided - analyze and route:**
+
+| Keywords/Signals | Route To |
+|-----------------|----------|
+| "plan", "design", "architecture", "multi-phase" | `/create-plan {{task}}` |
+| "should we", "which", "evaluate", "compare" | `/consider:[framework] {{task}}` |
+| "debug", "intermittent", "mysterious", "race condition" | `Skill(debug-like-expert)` |
+| Moderate complexity (30min-2hr, 3-10 files) | `/create-prompt {{task}}` → `/run` |
+| "research then", "explore then", multi-stage | `/create-meta-prompt {{task}}` |
+| Simple (1-2 files, <30min, clear scope) | Execute directly |
+
+## Decision Framework Selection
+
+| Decision Type | Framework |
+|---------------|-----------|
+| Technical choice | `/consider:first-principles` |
+| Priority/urgency | `/consider:eisenhower-matrix` |
+| Consequences | `/consider:second-order` |
+| Root cause | `/consider:5-whys` |
+
+## Examples
+
+```bash
+/start-task Plan the auth system                    # → /create-plan
+/start-task Should we use WebSockets or SSE?       # → /consider:first-principles
+/start-task Debug intermittent widget failure      # → debug-like-expert
+/start-task Refactor calendar components           # → /create-prompt
+/start-task Research GraphQL then implement        # → /create-meta-prompt
+/start-task Fix typo in README                     # → direct execution
+/start-task                                        # → /check-todos
+```

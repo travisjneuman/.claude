@@ -1,0 +1,151 @@
+# Deploy Check
+
+Pre-deployment verification workflow for OakStone Properties.
+
+## Quick Deploy
+
+If you're confident everything is ready:
+```bash
+git add . && git commit -m "Deploy: <brief description>" && git push origin main
+```
+
+Cloudflare Pages will automatically build and deploy.
+
+## Full Verification Workflow
+
+### 1. Build Check
+
+```bash
+npm run build
+```
+
+Expected output:
+- No errors
+- Build completes successfully
+- Output in `dist/` directory
+
+### 2. TypeScript Validation
+
+```bash
+npm run astro check
+```
+
+Expected:
+- No type errors
+- No unused variables warnings
+
+### 3. Preview Production Build
+
+```bash
+npm run preview
+```
+
+Test in browser:
+- [ ] Homepage loads
+- [ ] Property listings display
+- [ ] Individual property pages work
+- [ ] Navigation functions
+- [ ] Mobile responsive (use DevTools)
+- [ ] Contact form renders (Turnstile loads)
+
+### 4. Lighthouse Audit
+
+In Chrome DevTools > Lighthouse:
+
+| Metric | Target | Action if Below |
+|--------|--------|-----------------|
+| Performance | 95+ | Optimize images, lazy load |
+| Accessibility | 100 | Add alt text, fix contrast |
+| Best Practices | 100 | Fix console errors |
+| SEO | 100 | Add meta descriptions |
+
+### 5. Content Validation
+
+```bash
+# Check all properties have required fields
+npm run astro check
+
+# List properties by status
+grep -r "status:" src/content/properties/
+
+# Verify no draft properties are featured
+grep -l "featured: true" src/content/properties/*.md | xargs grep "status:"
+```
+
+### 6. Image Verification
+
+```bash
+# Check image sizes (should be <500KB each)
+find public/images/properties -type f -size +500k
+
+# Verify all referenced images exist
+# (Run this in Node or check manually)
+```
+
+### 7. Security Check
+
+- [ ] No secrets in codebase (API keys, tokens)
+- [ ] Turnstile site key is public (not secret key)
+- [ ] No `.env` files committed
+- [ ] No hardcoded URLs that should be environment variables
+
+### 8. SEO Verification
+
+- [ ] All pages have unique `<title>` tags
+- [ ] All pages have meta descriptions
+- [ ] Property pages have Schema.org markup
+- [ ] `robots.txt` exists
+- [ ] `sitemap.xml` generates correctly
+
+### 9. Deploy
+
+```bash
+git add .
+git status  # Review changes
+git commit -m "Deploy: <description of changes>"
+git push origin main
+```
+
+### 10. Post-Deploy Verification
+
+After Cloudflare Pages build completes:
+
+1. Visit production URL
+2. Test critical paths:
+   - [ ] Homepage loads
+   - [ ] Property list filters work
+   - [ ] Individual properties display
+   - [ ] Contact form submits (check Turnstile)
+   - [ ] Admin portal accessible (if configured)
+3. Check Cloudflare Pages dashboard for:
+   - [ ] Build succeeded
+   - [ ] No function errors
+   - [ ] Analytics loading
+
+## Troubleshooting
+
+### Build Fails
+
+```bash
+# Clear cache and rebuild
+rm -rf node_modules/.astro
+npm run build
+```
+
+### Images Not Loading
+
+- Check file paths are correct in frontmatter
+- Verify images are in `public/images/` (not `src/`)
+- Check for case sensitivity in filenames
+
+### Cloudflare Deploy Fails
+
+1. Check Cloudflare Pages build logs
+2. Verify `npm run build` works locally
+3. Check environment variables are set in Cloudflare dashboard
+
+### Functions Not Working
+
+- Check `functions/` directory structure
+- Verify TypeScript compiles
+- Check Cloudflare Pages Functions logs

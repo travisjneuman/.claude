@@ -1,0 +1,395 @@
+/**
+ * Terminal Help Modal
+ * In-app help for AI Terminal and Phantom Shell
+ */
+
+import React, { useState } from 'react';
+
+interface TerminalHelpModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+type HelpTab = 'quickstart' | 'providers' | 'shell' | 'troubleshooting';
+
+export const TerminalHelpModal: React.FC<TerminalHelpModalProps> = ({ isOpen, onClose }) => {
+  const [activeTab, setActiveTab] = useState<HelpTab>('quickstart');
+
+  if (!isOpen) return null;
+
+  const tabs: { id: HelpTab; label: string; icon: string }[] = [
+    { id: 'quickstart', label: 'Quick Start', icon: '🚀' },
+    { id: 'providers', label: 'AI Providers', icon: '🤖' },
+    { id: 'shell', label: 'Shell Commands', icon: '⌨️' },
+    { id: 'troubleshooting', label: 'Help', icon: '❓' },
+  ];
+
+  return (
+    <div
+      className="fixed inset-0 bg-black/60 flex items-center justify-center z-[60] p-4"
+      onClick={(e) => e.target === e.currentTarget && onClose()}
+    >
+      <div className="bg-surface-dark border border-neutral-800 rounded-lg w-full max-w-2xl max-h-[80vh] flex flex-col shadow-lg">
+        {/* Header */}
+        <div className="flex items-center justify-between p-4 border-b border-neutral-800">
+          <h2 className="text-lg font-semibold text-text-dark-primary">Terminal Help</h2>
+          <button
+            onClick={onClose}
+            className="p-1 hover:bg-neutral-700 rounded transition-colors"
+            aria-label="Close help"
+          >
+            ✕
+          </button>
+        </div>
+
+        {/* Tabs */}
+        <div className="flex border-b border-neutral-800">
+          {tabs.map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`flex-1 px-4 py-2 text-sm font-medium transition-colors ${
+                activeTab === tab.id
+                  ? 'text-accent-cyan border-b-2 border-accent-cyan bg-neutral-800/50'
+                  : 'text-neutral-400 hover:text-neutral-200 hover:bg-neutral-800/30'
+              }`}
+            >
+              <span className="mr-1">{tab.icon}</span>
+              {tab.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Content */}
+        <div className="flex-1 overflow-y-auto p-4 text-sm text-text-dark-secondary">
+          {activeTab === 'quickstart' && <QuickStartTab />}
+          {activeTab === 'providers' && <ProvidersTab />}
+          {activeTab === 'shell' && <ShellTab />}
+          {activeTab === 'troubleshooting' && <TroubleshootingTab />}
+        </div>
+
+        {/* Footer */}
+        <div className="p-4 border-t border-neutral-800 text-xs text-neutral-500 text-center">
+          <a
+            href="https://github.com/travisjneuman/system.knowledgebase/blob/main/docs/user/terminal-complete-guide.md"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-accent-cyan hover:underline"
+          >
+            View Full Documentation →
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const QuickStartTab: React.FC = () => (
+  <div className="space-y-4">
+    <section>
+      <h3 className="text-base font-semibold text-text-dark-primary mb-2">Two Modes</h3>
+      <div className="grid grid-cols-2 gap-3">
+        <div className="p-3 bg-neutral-800 rounded-lg">
+          <div className="text-lg mb-1">💬 AI Chat</div>
+          <p className="text-xs text-neutral-400">
+            Converse with AI models. Ask questions, get help with code, brainstorm ideas.
+          </p>
+        </div>
+        <div className="p-3 bg-neutral-800 rounded-lg">
+          <div className="text-lg mb-1">⌨️ Phantom Shell</div>
+          <p className="text-xs text-neutral-400">
+            Run npm/node commands in browser. Build projects without installing anything.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h3 className="text-base font-semibold text-text-dark-primary mb-2">Getting Started</h3>
+      <ol className="list-decimal list-inside space-y-2">
+        <li>Click ⚙️ to open <strong>Provider Settings</strong></li>
+        <li>Add an API key (we recommend <strong>OpenRouter</strong> - free!)</li>
+        <li>Start chatting or switch to Shell tab</li>
+      </ol>
+    </section>
+
+    <section>
+      <h3 className="text-base font-semibold text-text-dark-primary mb-2">Keyboard Shortcuts</h3>
+      <div className="grid grid-cols-2 gap-2 text-xs">
+        <div className="flex justify-between p-2 bg-neutral-800 rounded">
+          <span>Open/Close Terminal</span>
+          <kbd className="px-1 bg-neutral-700 rounded">Ctrl+Shift+A</kbd>
+        </div>
+        <div className="flex justify-between p-2 bg-neutral-800 rounded">
+          <span>Send Message</span>
+          <kbd className="px-1 bg-neutral-700 rounded">Enter</kbd>
+        </div>
+        <div className="flex justify-between p-2 bg-neutral-800 rounded">
+          <span>New Line</span>
+          <kbd className="px-1 bg-neutral-700 rounded">Shift+Enter</kbd>
+        </div>
+        <div className="flex justify-between p-2 bg-neutral-800 rounded">
+          <span>Command History</span>
+          <kbd className="px-1 bg-neutral-700 rounded">↑ ↓</kbd>
+        </div>
+      </div>
+    </section>
+  </div>
+);
+
+const ProvidersTab: React.FC = () => (
+  <div className="space-y-4">
+    <section>
+      <h3 className="text-base font-semibold text-text-dark-primary mb-2">Provider Comparison</h3>
+      <div className="overflow-x-auto">
+        <table className="w-full text-xs">
+          <thead>
+            <tr className="text-left border-b border-neutral-700">
+              <th className="p-2">Provider</th>
+              <th className="p-2">Free</th>
+              <th className="p-2">Browser</th>
+              <th className="p-2">Best For</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-neutral-800">
+            <tr className="bg-green-900/20">
+              <td className="p-2 font-medium">OpenRouter</td>
+              <td className="p-2">✅ Yes</td>
+              <td className="p-2">✅ Direct</td>
+              <td className="p-2">Best overall - 200+ models</td>
+            </tr>
+            <tr>
+              <td className="p-2">Groq</td>
+              <td className="p-2">✅ Yes</td>
+              <td className="p-2">⚠️ Limited</td>
+              <td className="p-2">Fastest responses</td>
+            </tr>
+            <tr>
+              <td className="p-2">HuggingFace</td>
+              <td className="p-2">✅ Yes</td>
+              <td className="p-2">✅ Direct</td>
+              <td className="p-2">Open source models</td>
+            </tr>
+            <tr className="bg-blue-900/20">
+              <td className="p-2 font-medium">Anthropic</td>
+              <td className="p-2">❌ No</td>
+              <td className="p-2">✅ Direct</td>
+              <td className="p-2">Best quality (Claude)</td>
+            </tr>
+            <tr>
+              <td className="p-2">OpenAI</td>
+              <td className="p-2">❌ No</td>
+              <td className="p-2">⚠️ Proxy</td>
+              <td className="p-2">GPT-4, o1</td>
+            </tr>
+            <tr>
+              <td className="p-2">DeepSeek</td>
+              <td className="p-2">❌ No</td>
+              <td className="p-2">⚠️ Proxy</td>
+              <td className="p-2">Great value, coding</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h3 className="text-base font-semibold text-text-dark-primary mb-2">
+        What Does "Proxy Required" Mean?
+      </h3>
+      <div className="p-3 bg-yellow-900/20 border border-yellow-700/50 rounded-lg">
+        <p className="mb-2">
+          Some providers (OpenAI, xAI, DeepSeek) block direct browser requests for security (CORS).
+        </p>
+        <p className="font-medium text-yellow-400 mb-1">Easy Solution:</p>
+        <p>
+          Use <strong>OpenRouter</strong> instead - it provides access to GPT-4, Claude, and 200+ other
+          models through one API that works directly in your browser.
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <h3 className="text-base font-semibold text-text-dark-primary mb-2">Free API Keys</h3>
+      <ul className="space-y-1">
+        <li>
+          <a href="https://openrouter.ai/keys" target="_blank" rel="noopener noreferrer" className="text-accent-cyan hover:underline">
+            OpenRouter →
+          </a>{' '}
+          <span className="text-neutral-500">Free tier, 200+ models</span>
+        </li>
+        <li>
+          <a href="https://console.groq.com/keys" target="_blank" rel="noopener noreferrer" className="text-accent-cyan hover:underline">
+            Groq →
+          </a>{' '}
+          <span className="text-neutral-500">Free tier, fastest inference</span>
+        </li>
+        <li>
+          <a href="https://huggingface.co/settings/tokens" target="_blank" rel="noopener noreferrer" className="text-accent-cyan hover:underline">
+            HuggingFace →
+          </a>{' '}
+          <span className="text-neutral-500">Free tier, open models</span>
+        </li>
+      </ul>
+    </section>
+  </div>
+);
+
+const ShellTab: React.FC = () => (
+  <div className="space-y-4">
+    <section>
+      <h3 className="text-base font-semibold text-text-dark-primary mb-2">Built-in Commands</h3>
+      <div className="grid grid-cols-2 gap-2 text-xs">
+        <div className="p-2 bg-neutral-800 rounded font-mono">
+          <span className="text-accent-cyan">/help</span> - Show commands
+        </div>
+        <div className="p-2 bg-neutral-800 rounded font-mono">
+          <span className="text-accent-cyan">/version</span> - Boot WebContainer
+        </div>
+        <div className="p-2 bg-neutral-800 rounded font-mono">
+          <span className="text-accent-cyan">/clear</span> - Clear screen
+        </div>
+        <div className="p-2 bg-neutral-800 rounded font-mono">
+          <span className="text-accent-cyan">/new name</span> - New project
+        </div>
+        <div className="p-2 bg-neutral-800 rounded font-mono">
+          <span className="text-accent-cyan">/ai prompt</span> - Ask AI
+        </div>
+        <div className="p-2 bg-neutral-800 rounded font-mono">
+          <span className="text-accent-cyan">/projects</span> - List projects
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h3 className="text-base font-semibold text-text-dark-primary mb-2">What Works vs Doesn't</h3>
+      <div className="grid grid-cols-2 gap-3">
+        <div className="p-3 bg-green-900/20 border border-green-700/50 rounded-lg">
+          <div className="font-medium text-green-400 mb-1">✅ Works</div>
+          <ul className="text-xs space-y-1">
+            <li><code>npm install</code>, <code>npm run dev</code></li>
+            <li><code>node script.js</code></li>
+            <li><code>npx create-react-app</code></li>
+            <li><code>ls</code>, <code>cd</code>, <code>cat</code>, <code>mkdir</code></li>
+          </ul>
+        </div>
+        <div className="p-3 bg-red-900/20 border border-red-700/50 rounded-lg">
+          <div className="font-medium text-red-400 mb-1">❌ Doesn't Work</div>
+          <ul className="text-xs space-y-1">
+            <li><code>git</code> - Use GitHub widget</li>
+            <li><code>docker</code> - Not available</li>
+            <li><code>python</code> - Use Node.js</li>
+            <li><code>ping</code>, <code>curl</code> - No system calls</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h3 className="text-base font-semibold text-text-dark-primary mb-2">First Time?</h3>
+      <ol className="list-decimal list-inside space-y-1 text-xs">
+        <li>Switch to <strong>Shell</strong> tab</li>
+        <li>Run <code className="bg-neutral-800 px-1 rounded">/version</code> to boot WebContainer (2-5 sec)</li>
+        <li>Try <code className="bg-neutral-800 px-1 rounded">node -v</code> to verify it works</li>
+        <li>Run <code className="bg-neutral-800 px-1 rounded">/new myapp</code> to create a project</li>
+      </ol>
+    </section>
+  </div>
+);
+
+const TroubleshootingTab: React.FC = () => (
+  <div className="space-y-4">
+    <section>
+      <h3 className="text-base font-semibold text-text-dark-primary mb-2">Common Issues</h3>
+
+      <div className="space-y-3">
+        <div className="p-3 bg-neutral-800 rounded-lg">
+          <div className="font-medium text-text-dark-primary mb-1">
+            "Proxy Required" on OpenAI/xAI
+          </div>
+          <p className="text-xs text-neutral-400 mb-2">
+            These providers block browser requests. Use OpenRouter instead - it can access GPT-4 and works directly.
+          </p>
+          <a href="https://openrouter.ai/keys" target="_blank" rel="noopener noreferrer" className="text-xs text-accent-cyan hover:underline">
+            Get OpenRouter Key →
+          </a>
+        </div>
+
+        <div className="p-3 bg-neutral-800 rounded-lg">
+          <div className="font-medium text-text-dark-primary mb-1">
+            "WebContainer not ready"
+          </div>
+          <p className="text-xs text-neutral-400">
+            Run <code className="bg-neutral-700 px-1 rounded">/version</code> first. WebContainer takes 2-5 seconds to boot.
+          </p>
+        </div>
+
+        <div className="p-3 bg-neutral-800 rounded-lg">
+          <div className="font-medium text-text-dark-primary mb-1">
+            "ping" / "git" / "docker" doesn't work
+          </div>
+          <p className="text-xs text-neutral-400">
+            WebContainer only supports Node.js. For git, use the GitHub widget. For networking, use
+            <code className="bg-neutral-700 px-1 rounded ml-1">node -e "fetch('url')"</code>
+          </p>
+        </div>
+
+        <div className="p-3 bg-neutral-800 rounded-lg">
+          <div className="font-medium text-text-dark-primary mb-1">
+            "Invalid API key"
+          </div>
+          <p className="text-xs text-neutral-400">
+            Check: correct provider selected, key copied correctly (no spaces), key not expired/revoked.
+          </p>
+        </div>
+
+        <div className="p-3 bg-neutral-800 rounded-lg">
+          <div className="font-medium text-text-dark-primary mb-1">
+            "Rate limit exceeded"
+          </div>
+          <p className="text-xs text-neutral-400">
+            Wait a few minutes, or configure multiple providers for automatic fallback.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h3 className="text-base font-semibold text-text-dark-primary mb-2">Still Need Help?</h3>
+      <ul className="space-y-1 text-xs">
+        <li>
+          <a
+            href="https://github.com/travisjneuman/system.knowledgebase/blob/main/docs/user/terminal-complete-guide.md"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-accent-cyan hover:underline"
+          >
+            📖 Full Documentation
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://github.com/travisjneuman/system.knowledgebase/blob/main/docs/user/backend-proxy-setup.md"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-accent-cyan hover:underline"
+          >
+            🔧 Backend Proxy Setup (Advanced)
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://github.com/travisjneuman/system.knowledgebase/issues"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-accent-cyan hover:underline"
+          >
+            🐛 Report an Issue
+          </a>
+        </li>
+      </ul>
+    </section>
+  </div>
+);
+
+export default TerminalHelpModal;

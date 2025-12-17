@@ -1,0 +1,301 @@
+import React, { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { useSidebarStore } from '../stores/useSidebarStore';
+import { useThemeStore } from '../stores/useThemeStore';
+import { PageSettingsPanel } from './PageSettingsPanel';
+
+interface NavItem {
+  icon: string;
+  label: string;
+  path: string;
+  shortcut?: string;
+  hasSettings?: boolean; // Whether this page has custom settings
+}
+
+const navigation: NavItem[] = [
+  { icon: '🏠', label: 'Dashboard', path: '/', shortcut: 'D', hasSettings: true },
+  { icon: '📝', label: 'Notes', path: '/notes', shortcut: 'N', hasSettings: false },
+  { icon: '📅', label: 'Planning', path: '/planning', shortcut: 'P', hasSettings: false },
+  { icon: '✓', label: 'Tasks', path: '/tasks', shortcut: 'T', hasSettings: false },
+];
+
+export const Sidebar: React.FC = () => {
+  const { isCollapsed, toggleCollapse, isMobileMenuOpen, setMobileMenuOpen } = useSidebarStore();
+  const { mode, toggleTheme } = useThemeStore();
+  const location = useLocation();
+  const [pageSettingsOpen, setPageSettingsOpen] = useState<string | null>(null);
+
+  const isActive = (path: string) => location.pathname === path;
+
+  const handlePageSettings = (e: React.MouseEvent, path: string) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setPageSettingsOpen(path);
+  };
+
+  // Close mobile menu on route change
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [location.pathname, setMobileMenuOpen]);
+
+  // Keyboard shortcut: Cmd/Ctrl + B to toggle
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'b') {
+        e.preventDefault();
+        toggleCollapse();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [toggleCollapse]);
+
+  return (
+    <>
+      {/* Mobile backdrop */}
+      {isMobileMenuOpen && (
+        <div
+          className="lg:hidden fixed inset-0 bg-black/50 z-30"
+          onClick={() => setMobileMenuOpen(false)}
+        />
+      )}
+
+      {/* Sidebar */}
+      <aside
+        className={`
+          fixed left-0 top-0 h-screen
+          bg-surface-light-elevated dark:bg-surface-dark
+          border-r border-border-light dark:border-border-dark
+          transition-all duration-200 ease-in-out
+          flex flex-col
+          z-40
+          ${isCollapsed ? 'w-[60px]' : 'w-[280px]'}
+
+          ${/* Mobile: slide in/out as drawer */ ''}
+          lg:translate-x-0
+          ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+        `}
+      >
+      {/* Logo Section */}
+      <div className="p-4 border-b border-border-light dark:border-border-dark">
+        <Link
+          to="/"
+          className="flex items-center gap-3 overflow-hidden"
+        >
+          <img
+            src="/images/logos/nb3.png"
+            alt="Neuman Brain"
+            className="w-8 h-8 flex-shrink-0 rounded-lg"
+          />
+          {!isCollapsed && (
+            <div className="flex flex-col min-w-0">
+              <h1 className="text-sm font-semibold text-text-light-primary dark:text-text-dark-primary truncate">
+                NEUMAN BRAIN
+              </h1>
+              <p className="text-xs text-text-light-secondary dark:text-text-dark-secondary truncate">
+                Management Platform
+              </p>
+            </div>
+          )}
+        </Link>
+      </div>
+
+      {/* Navigation Items */}
+      <nav className="flex-1 overflow-y-auto py-4">
+        <ul className="space-y-1 px-2">
+          {navigation.map((item) => (
+            <li key={item.path}>
+              <Link
+                to={item.path}
+                className={`
+                  flex items-center gap-3 px-3 h-10 rounded-lg
+                  transition-all duration-standard ease-smooth
+                  relative group
+                  ${
+                    isActive(item.path)
+                      ? 'bg-surface-light-elevated dark:bg-surface-dark-elevated text-text-light-primary dark:text-text-dark-primary'
+                      : 'text-text-light-secondary dark:text-text-dark-secondary hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated'
+                  }
+                `}
+                title={isCollapsed ? item.label : undefined}
+              >
+                {/* Active indicator (left accent) */}
+                {isActive(item.path) && (
+                  <div className="absolute left-0 top-2 bottom-2 w-[3px] bg-accent-blue rounded-r" />
+                )}
+
+                {/* Icon - Fixed 20px size */}
+                <span className="w-5 h-5 flex items-center justify-center flex-shrink-0 text-lg">
+                  {item.icon}
+                </span>
+
+                {/* Label (hidden when collapsed) */}
+                {!isCollapsed && (
+                  <>
+                    <span className="flex-1 text-base leading-5 font-medium truncate">
+                      {item.label}
+                    </span>
+
+                    {/* Page Settings Icon (shown on hover) */}
+                    {item.hasSettings && (
+                      <button
+                        onClick={(e) => handlePageSettings(e, item.path)}
+                        className="
+                          opacity-0 group-hover:opacity-100
+                          w-5 h-5 flex items-center justify-center flex-shrink-0
+                          text-text-light-secondary dark:text-text-dark-secondary
+                          hover:text-text-light-primary dark:hover:text-text-dark-primary
+                          transition-opacity duration-200
+                        "
+                        title="Page Settings"
+                      >
+                        <span className="text-sm">⚙</span>
+                      </button>
+                    )}
+
+                    {!item.hasSettings && item.shortcut && (
+                      <span className="text-xs text-text-light-secondary dark:text-text-dark-secondary font-mono">
+                        ⌘{item.shortcut}
+                      </span>
+                    )}
+                  </>
+                )}
+
+                {/* Tooltip for collapsed state */}
+                {isCollapsed && (
+                  <div className="
+                    absolute left-full ml-2 px-2 py-1
+                    bg-surface-dark text-text-dark-primary text-xs rounded
+                    opacity-0 group-hover:opacity-100
+                    pointer-events-none transition-opacity duration-200
+                    whitespace-nowrap z-50
+                  ">
+                    {item.label}
+                  </div>
+                )}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      {/* Bottom Section */}
+      <div className="border-t border-border-light dark:border-border-dark p-2 space-y-1">
+        {/* Settings (Fixed) */}
+        <Link
+          to="/settings"
+          className={`
+            w-full flex items-center gap-3 px-3 h-10 rounded-lg
+            ${isActive('/settings')
+              ? 'bg-surface-light-elevated dark:bg-surface-dark-elevated text-text-light-primary dark:text-text-dark-primary'
+              : 'text-text-light-secondary dark:text-text-dark-secondary hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated'
+            }
+            transition-all duration-standard ease-smooth
+            group relative
+          `}
+          title={isCollapsed ? 'Settings' : undefined}
+        >
+          {/* Active indicator (left accent) */}
+          {isActive('/settings') && (
+            <div className="absolute left-0 top-2 bottom-2 w-[3px] bg-accent-blue rounded-r" />
+          )}
+
+          <span className="w-5 h-5 flex items-center justify-center flex-shrink-0 text-lg">⚙️</span>
+          {!isCollapsed && (
+            <span className="flex-1 text-base leading-5 font-medium text-left truncate">
+              Settings
+            </span>
+          )}
+          {isCollapsed && (
+            <div className="
+              absolute left-full ml-2 px-2 py-1
+              bg-surface-dark text-text-dark-primary text-xs rounded
+              opacity-0 group-hover:opacity-100
+              pointer-events-none transition-opacity duration-200
+              whitespace-nowrap z-50
+            ">
+              Settings
+            </div>
+          )}
+        </Link>
+
+        {/* Theme Toggle */}
+        <button
+          onClick={toggleTheme}
+          className={`
+            w-full flex items-center gap-3 px-3 h-10 rounded-lg
+            text-text-light-secondary dark:text-text-dark-secondary
+            hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated
+            transition-all duration-standard ease-smooth
+            group relative
+          `}
+          title={isCollapsed ? (mode === 'dark' ? 'Light Mode' : 'Dark Mode') : undefined}
+        >
+          <span className="w-5 h-5 flex items-center justify-center flex-shrink-0 text-lg">
+            {mode === 'dark' ? '☀️' : '🌙'}
+          </span>
+          {!isCollapsed && (
+            <span className="flex-1 text-base leading-5 font-medium text-left">
+              {mode === 'dark' ? 'Light Mode' : 'Dark Mode'}
+            </span>
+          )}
+          {isCollapsed && (
+            <div className="
+              absolute left-full ml-2 px-2 py-1
+              bg-surface-dark text-text-dark-primary text-xs rounded
+              opacity-0 group-hover:opacity-100
+              pointer-events-none transition-opacity duration-200
+              whitespace-nowrap z-50
+            ">
+              {mode === 'dark' ? 'Light Mode' : 'Dark Mode'}
+            </div>
+          )}
+        </button>
+
+        {/* Collapse Toggle */}
+        <button
+          onClick={toggleCollapse}
+          className={`
+            w-full flex items-center gap-3 px-3 h-10 rounded-lg
+            text-text-light-secondary dark:text-text-dark-secondary
+            hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated
+            transition-all duration-standard ease-smooth
+            group relative
+          `}
+          title={isCollapsed ? 'Expand Sidebar' : undefined}
+        >
+          <span className="w-5 h-5 flex items-center justify-center flex-shrink-0 text-lg">
+            {isCollapsed ? '▶' : '◀'}
+          </span>
+          {!isCollapsed && (
+            <span className="flex-1 text-base leading-5 font-medium text-left">
+              Collapse
+            </span>
+          )}
+          {isCollapsed && (
+            <div className="
+              absolute left-full ml-2 px-2 py-1
+              bg-surface-dark text-text-dark-primary text-xs rounded
+              opacity-0 group-hover:opacity-100
+              pointer-events-none transition-opacity duration-200
+              whitespace-nowrap z-50
+            ">
+              Expand Sidebar
+            </div>
+          )}
+        </button>
+      </div>
+    </aside>
+
+    {/* Page Settings Panel */}
+    {pageSettingsOpen && (
+      <PageSettingsPanel
+        isOpen={true}
+        onClose={() => setPageSettingsOpen(null)}
+        pagePath={pageSettingsOpen}
+      />
+    )}
+    </>
+  );
+};

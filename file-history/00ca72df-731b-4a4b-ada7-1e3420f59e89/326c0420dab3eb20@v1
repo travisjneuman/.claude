@@ -1,0 +1,217 @@
+# Folder Structure
+
+Complete map of the `.claude/` folder and related files.
+
+---
+
+## Overview
+
+```
+~/ (Home Directory: C:\Users\tjn\)
+│
+├── .claude.json                    ← MCP servers (OUTSIDE .claude/)
+│
+└── .claude/                        ← Main configuration folder
+    │
+    ├── .claude.json                ← Portable MCP backup
+    │
+    ├── settings.json               ← Main settings (permissions, plugins)
+    ├── settings.local.json         ← Local overrides
+    │
+    ├── automation-guide.md         ← Workflow automation reference
+    ├── workflow-checklist.md       ← Development checklist
+    ├── CLAUDE-CODE-RESOURCES.md    ← Comprehensive resource guide
+    ├── CLAUDE.md                   ← Global memory/instructions
+    │
+    ├── commands/                   ← Custom slash commands
+    │   ├── run.md                  ← /run - Execute prompts
+    │   └── start-task.md           ← /start-task - Intelligent router
+    │
+    ├── docs/                       ← This documentation
+    │   ├── README.md
+    │   ├── FOLDER-STRUCTURE.md     ← (this file)
+    │   ├── CONFIGURATION.md
+    │   ├── SKILLS.md
+    │   ├── MCP-SERVERS.md
+    │   ├── SETUP-GUIDE.md
+    │   └── MAINTENANCE.md
+    │
+    ├── plans/                      ← Planning documents
+    │
+    ├── plugins/                    ← Installed plugins (managed by system)
+    │
+    ├── skills/                     ← Custom skills
+    │   ├── README.md               ← Skills documentation
+    │   │
+    │   ├── generic-*/              ← Universal skills (use for any project)
+    │   │   ├── generic-code-reviewer/
+    │   │   ├── generic-design-system/
+    │   │   ├── generic-feature-developer/
+    │   │   └── generic-ux-designer/
+    │   │
+    │   ├── example-*/              ← Project-type templates
+    │   │   ├── example-static-site-*/     ← HTML/CSS/JS projects
+    │   │   ├── example-react-app-*/       ← React/TypeScript projects
+    │   │   └── example-fullstack-*/       ← Next.js/NestJS projects
+    │   │
+    │   └── utility skills/
+    │       ├── codebase-documenter/
+    │       ├── document-skills/
+    │       ├── frontend-enhancer/
+    │       ├── seo-analytics-auditor/
+    │       ├── tech-debt-analyzer/
+    │       └── test-specialist/
+    │
+    └── templates/                  ← Task templates
+        └── task-template.md        ← Generic task planning template
+```
+
+---
+
+## Folder Details
+
+### `/commands/` - Custom Slash Commands
+
+Custom commands that appear as `/command-name` in Claude Code.
+
+| File | Command | Purpose |
+|------|---------|---------|
+| `run.md` | `/run` | Execute prompts from `./prompts/` with auto-archiving |
+| `start-task.md` | `/start-task` | Intelligent task router (plans, prompts, debug, etc.) |
+
+**To add a command:** Create a `.md` file with YAML frontmatter.
+
+---
+
+### `/skills/` - Domain Knowledge
+
+Skills provide specialized knowledge and guidelines. They auto-activate based on context.
+
+**Skill Structure:**
+```
+skills/
+└── skill-name/
+    ├── SKILL.md          ← Required: Main skill file
+    ├── references/       ← Optional: Reference materials
+    ├── assets/           ← Optional: Templates, examples
+    └── scripts/          ← Optional: Helper scripts
+```
+
+**Skill Categories:**
+
+| Prefix | Use Case | Example |
+|--------|----------|---------|
+| `generic-*` | Any project | `generic-code-reviewer` |
+| `example-*` | Project templates | `example-react-app-code-reviewer` |
+| (none) | Utilities | `tech-debt-analyzer` |
+
+---
+
+### `/templates/` - Task Templates
+
+Markdown templates for planning work.
+
+| Template | Purpose |
+|----------|---------|
+| `task-template.md` | Comprehensive task planning with phases |
+
+---
+
+### `/docs/` - Documentation
+
+You are here. This folder contains all documentation for understanding and maintaining this configuration.
+
+---
+
+### `/plans/` - Planning Documents
+
+Stores planning documents created during development sessions. Can be cleared periodically.
+
+---
+
+### `/plugins/` - Installed Plugins
+
+Managed by Claude Code's plugin system. Do not edit directly.
+
+**Currently enabled plugins:**
+- agent-sdk-dev
+- pr-review-toolkit
+- commit-commands
+- feature-dev
+- security-guidance
+- code-review
+- frontend-design
+- document-skills
+- example-skills
+- taches-cc-resources
+
+---
+
+## Files Outside `.claude/`
+
+### `~/.claude.json`
+
+**Location:** `C:\Users\tjn\.claude.json` (NOT inside .claude/)
+
+**Purpose:** MCP server configurations
+
+**Contents:**
+```json
+{
+  "mcpServers": {
+    "sequential-thinking": { ... },
+    "playwright": { ... },
+    "memory": { ... },
+    "filesystem": { ... },
+    "sqlite": { ... }
+  }
+}
+```
+
+**Note:** This file accumulates machine-specific data over time (projects, caches). The portable backup at `.claude/.claude.json` contains only MCP servers.
+
+---
+
+## Files That Get Generated (Don't Copy)
+
+These are machine-specific and regenerate automatically:
+
+| Path | Purpose | Safe to Delete |
+|------|---------|----------------|
+| `debug/` | Debug logs | Yes |
+| `file-history/` | Edit history for /rewind | Yes |
+| `ide/` | IDE lock files | Yes |
+| `projects/` | Project trust hashes | Yes |
+| `shell-snapshots/` | Shell state backups | Yes |
+| `statsig/` | Feature flag cache | Yes |
+| `telemetry/` | Telemetry data | Yes |
+| `todos/` | Agent task history | Yes |
+| `downloads/` | Downloaded files | Yes |
+| `security_warnings_*.json` | Session warnings | Yes |
+| `history.jsonl` | Conversation history | Yes |
+| `stats-cache.json` | Usage statistics | Yes |
+| `.credentials.json` | Auth tokens | Yes (re-login) |
+| `sqlite_mcp_server.db` | SQLite MCP data | Yes |
+
+---
+
+## Size Reference
+
+| Path | Typical Size | Notes |
+|------|--------------|-------|
+| `skills/` | ~500KB | Core configuration |
+| `docs/` | ~50KB | Documentation |
+| `commands/` | ~10KB | Slash commands |
+| `templates/` | ~10KB | Templates |
+| `debug/` | 0-100MB | Grows during sessions |
+| `file-history/` | 0-50MB | Grows during sessions |
+
+**Total portable size:** ~1MB
+**With generated files:** Can grow to 100MB+
+
+---
+
+## See Also
+
+- [CONFIGURATION.md](./CONFIGURATION.md) - Settings details
+- [MAINTENANCE.md](./MAINTENANCE.md) - Cleanup procedures

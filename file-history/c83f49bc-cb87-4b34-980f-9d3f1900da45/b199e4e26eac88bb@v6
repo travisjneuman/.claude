@@ -1,0 +1,547 @@
+import { useEffect, useState, useMemo } from 'react';
+import { ChevronLeft, ChevronRight, Calendar as CalendarIcon, Plus, Printer } from 'lucide-react';
+import { useTimeTrackingStore } from '../stores/useTimeTrackingStore';
+import { useCalendarStore } from '../stores/useCalendarStore';
+import { formatDuration, formatTime } from '../utils/timeFormatters';
+import { generateRecurringInstances, expandMultiDayEvent } from '../utils/recurrence';
+import { WeekView } from './WeekView';
+import { DayView } from './DayView';
+import { AgendaView } from './AgendaView';
+import type { TimeEntry, CalendarEvent, ViewMode } from '../types';
+
+interface TimeEntryCalendarProps {
+  onEditEntry?: (entry: TimeEntry) => void;
+  onCreateEvent?: (dateKey: string) => void;
+  onEditEvent?: (event: CalendarEvent, dateKey: string) => void;
+}
+
+/**
+ * TimeEntryCalendar Component (UNIFIED)
+ * Full calendar view showing time entries AND calendar events
+ * Supports 4 view modes: Monthly, Weekly, Daily, Agenda/List
+ * Migrated all functionality from Planning Calendar Widget
+ */
+export function TimeEntryCalendar({ onEditEntry, onCreateEvent, onEditEvent }: TimeEntryCalendarProps) {
+  const { entries, projects, loadEntries, loadProjects } = useTimeTrackingStore();
+  const { events } = useCalendarStore();
+
+  const [loading, setLoading] = useState(true);
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const [viewMode, setViewMode] = useState<ViewMode>('monthly');
+
+  const year = currentDate.getFullYear();
+  const month = currentDate.getMonth(); // 0-11
+
+  useEffect(() => {
+    const loadData = async () => {
+      setLoading(true);
+      try {
+        // Load entries for the entire month (or more for weekly/agenda views)
+        const monthStart = new Date(year, month, 1);
+        const monthEnd = new Date(year, month + 1, 0, 23, 59, 59);
+
+        await Promise.all([
+          loadEntries({
+            dateRange: 'custom',
+            startDate: monthStart.toISOString(),
+            endDate: monthEnd.toISOString(),
+            projectIds: [],
+            tags: [],
+            searchQuery: ''
+          }),
+          loadProjects()
+        ]);
+      } catch (error) {
+        console.error('Failed to load calendar data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadData();
+  }, [loadEntries, loadProjects, year, month]);
+
+  const handlePrevious = () => {
+    if (viewMode === 'monthly') {
+      setCurrentDate(new Date(year, month - 1, 1));
+    } else if (viewMode === 'weekly') {
+      const newDate = new Date(currentDate);
+      newDate.setDate(newDate.getDate() - 7);
+      setCurrentDate(newDate);
+    } else if (viewMode === 'daily') {
+      const newDate = new Date(currentDate);
+      newDate.setDate(newDate.getDate() - 1);
+      setCurrentDate(newDate);
+    }
+    // Agenda view doesn't have prev/next (it's always forward-looking)
+  };
+
+  const handleNext = () => {
+    if (viewMode === 'monthly') {
+      setCurrentDate(new Date(year, month + 1, 1));
+    } else if (viewMode === 'weekly') {
+      const newDate = new Date(currentDate);
+      newDate.setDate(newDate.getDate() + 7);
+      setCurrentDate(newDate);
+    } else if (viewMode === 'daily') {
+      const newDate = new Date(currentDate);
+      newDate.setDate(newDate.getDate() + 1);
+      setCurrentDate(newDate);
+    }
+  };
+
+  const handleToday = () => {
+    setCurrentDate(new Date());
+  };
+
+  const handlePrint = () => {
+    window.print();
+  };
+
+  // Expand recurring and multi-day events for current month
+  // NOTE: Must be called before early return to maintain consistent hook order
+  const expandedEvents = useMemo(() => {
+    const result: Record<string, CalendarEvent[]> = {};
+
+    const monthStart = new Date(year, month, 1);
+    const monthEnd = new Date(year, month + 1, 0);
+
+    Object.entries(events).forEach(([dateKey, dayEvents]) => {
+      dayEvents.forEach((event) => {
+        if (event.recurrence) {
+          // Generate recurring instances for this month
+          const instances = generateRecurringInstances(event, dateKey, monthStart, monthEnd);
+          instances.forEach(({ date, event: instanceEvent }) => {
+            // Also expand multi-day for each recurring instance
+            const multiDayInstances = expandMultiDayEvent(instanceEvent, date);
+            multiDayInstances.forEach((multiDayEvent, multiDayDate) => {
+              if (!result[multiDayDate]) result[multiDayDate] = [];
+              result[multiDayDate].push(multiDayEvent);
+            });
+          });
+        } else {
+          // Non-recurring event - check if multi-day
+          const multiDayInstances = expandMultiDayEvent(event, dateKey);
+          multiDayInstances.forEach((multiDayEvent, multiDayDate) => {
+            if (!result[multiDayDate]) result[multiDayDate] = [];
+            result[multiDayDate].push(multiDayEvent);
+          });
+        }
+      });
+    });
+
+    return result;
+  }, [events, year, month]);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-12">
+        <div className="text-text-light-secondary dark:text-text-dark-secondary">
+          Loading calendar...
+        </div>
+      </div>
+    );
+  }
+
+  // Get display text for current period
+  const getDisplayText = () => {
+    if (viewMode === 'monthly') {
+      return new Date(year, month, 1).toLocaleDateString('en-US', {
+        month: 'long',
+        year: 'numeric'
+      });
+    } else if (viewMode === 'weekly') {
+      const startOfWeek = new Date(currentDate);
+      startOfWeek.setDate(startOfWeek.getDate() - startOfWeek.getDay());
+      const endOfWeek = new Date(startOfWeek);
+      endOfWeek.setDate(endOfWeek.getDate() + 6);
+
+      if (startOfWeek.getMonth() === endOfWeek.getMonth()) {
+        return `${startOfWeek.toLocaleDateString('en-US', { month: 'long' })} ${startOfWeek.getDate()}-${endOfWeek.getDate()}, ${startOfWeek.getFullYear()}`;
+      } else {
+        return `${startOfWeek.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} - ${endOfWeek.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`;
+      }
+    } else if (viewMode === 'daily') {
+      return currentDate.toLocaleDateString('en-US', {
+        weekday: 'long',
+        month: 'long',
+        day: 'numeric',
+        year: 'numeric'
+      });
+    } else {
+      // Agenda
+      return 'Upcoming Events';
+    }
+  };
+
+  // Get day of week for first day of month (0 = Sunday)
+  const firstDayOfWeek = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+  // Group entries by date
+  const entriesByDate = new Map<string, TimeEntry[]>();
+  entries.forEach(entry => {
+    const date = new Date(entry.startTime).toISOString().split('T')[0];
+    if (!entriesByDate.has(date)) {
+      entriesByDate.set(date, []);
+    }
+    entriesByDate.get(date)!.push(entry);
+  });
+
+  // Create calendar grid (for monthly view)
+  const calendarDays: (number | null)[] = [];
+  for (let i = 0; i < firstDayOfWeek; i++) {
+    calendarDays.push(null); // Empty cells before month starts
+  }
+  for (let day = 1; day <= daysInMonth; day++) {
+    calendarDays.push(day);
+  }
+
+  const getProjectColor = (projectId?: string) => {
+    if (!projectId) return '#94A3B8'; // Default gray
+    return projects.find(p => p.id === projectId)?.color || '#94A3B8';
+  };
+
+  const getProjectName = (projectId?: string) => {
+    if (!projectId) return 'No Project';
+    return projects.find(p => p.id === projectId)?.name || 'Unknown';
+  };
+
+  const handleDayClick = (dateKey: string) => {
+    if (onCreateEvent) {
+      onCreateEvent(dateKey);
+    }
+  };
+
+  const handleEventClick = (event: CalendarEvent, dateKey: string) => {
+    if (onEditEvent) {
+      onEditEvent(event, dateKey);
+    }
+  };
+
+  return (
+    <div className="space-y-6">
+      {/* Navigation Header */}
+      <div className="bg-surface-light dark:bg-surface-dark rounded-lg border border-border-light dark:border-border-dark p-4">
+        <div className="flex items-center justify-between mb-4">
+          {/* Left: Navigation Arrows */}
+          <div className="flex items-center gap-2">
+            {viewMode !== 'agenda' && (
+              <>
+                <button
+                  onClick={handlePrevious}
+                  className="p-2 rounded hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated text-text-light-secondary dark:text-text-dark-secondary transition-colors"
+                  aria-label="Previous"
+                >
+                  <ChevronLeft className="w-5 h-5" />
+                </button>
+                <button
+                  onClick={handleNext}
+                  className="p-2 rounded hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated text-text-light-secondary dark:text-text-dark-secondary transition-colors"
+                  aria-label="Next"
+                >
+                  <ChevronRight className="w-5 h-5" />
+                </button>
+              </>
+            )}
+          </div>
+
+          {/* Center: Period Display + Actions */}
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2">
+              <CalendarIcon className="w-5 h-5 text-accent-magenta dark:text-accent-cyan" />
+              <h2 className="text-xl font-semibold text-text-light-primary dark:text-text-dark-primary">
+                {getDisplayText()}
+              </h2>
+            </div>
+            <button
+              onClick={handleToday}
+              className="px-3 py-1 text-sm font-medium text-accent-magenta dark:text-accent-cyan hover:bg-accent-magenta/10 dark:hover:bg-accent-cyan/10 rounded transition-colors"
+            >
+              Today
+            </button>
+            {onCreateEvent && (
+              <button
+                onClick={() => onCreateEvent(new Date().toISOString().split('T')[0])}
+                className="flex items-center gap-2 px-3 py-1 text-sm font-medium bg-accent-magenta dark:bg-accent-cyan text-white hover:opacity-90 rounded transition-opacity"
+              >
+                <Plus className="w-4 h-4" />
+                New Event
+              </button>
+            )}
+            <button
+              onClick={handlePrint}
+              className="p-2 hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated rounded transition-colors no-print"
+              title="Print calendar"
+              aria-label="Print calendar"
+            >
+              <Printer className="w-4 h-4 text-text-light-secondary dark:text-text-dark-secondary" />
+            </button>
+          </div>
+
+          {/* Right: Placeholder for symmetry */}
+          <div className="w-[88px]" />
+        </div>
+
+        {/* View Mode Switcher */}
+        <div className="flex justify-center">
+          <div className="flex gap-1 bg-surface-light-elevated dark:bg-surface-dark-elevated rounded p-1">
+            <button
+              onClick={() => setViewMode('monthly')}
+              className={`px-3 py-1 rounded text-sm transition-colors ${
+                viewMode === 'monthly'
+                  ? 'bg-accent-magenta dark:bg-accent-cyan text-white'
+                  : 'text-text-light-secondary dark:text-text-dark-secondary hover:bg-surface-light dark:hover:bg-surface-dark'
+              }`}
+            >
+              Month
+            </button>
+            <button
+              onClick={() => setViewMode('weekly')}
+              className={`px-3 py-1 rounded text-sm transition-colors ${
+                viewMode === 'weekly'
+                  ? 'bg-accent-magenta dark:bg-accent-cyan text-white'
+                  : 'text-text-light-secondary dark:text-text-dark-secondary hover:bg-surface-light dark:hover:bg-surface-dark'
+              }`}
+            >
+              Week
+            </button>
+            <button
+              onClick={() => setViewMode('daily')}
+              className={`px-3 py-1 rounded text-sm transition-colors ${
+                viewMode === 'daily'
+                  ? 'bg-accent-magenta dark:bg-accent-cyan text-white'
+                  : 'text-text-light-secondary dark:text-text-dark-secondary hover:bg-surface-light dark:hover:bg-surface-dark'
+              }`}
+            >
+              Day
+            </button>
+            <button
+              onClick={() => setViewMode('agenda')}
+              className={`px-3 py-1 rounded text-sm transition-colors ${
+                viewMode === 'agenda'
+                  ? 'bg-accent-magenta dark:bg-accent-cyan text-white'
+                  : 'text-text-light-secondary dark:text-text-dark-secondary hover:bg-surface-light dark:hover:bg-surface-dark'
+              }`}
+            >
+              List
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* View Content */}
+      {viewMode === 'monthly' ? (
+        /* Monthly View */
+        <div className="bg-surface-light dark:bg-surface-dark rounded-lg border border-border-light dark:border-border-dark p-6">
+          {/* Day Headers */}
+          <div className="grid grid-cols-7 gap-2 mb-2">
+            {['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'].map(day => (
+              <div
+                key={day}
+                className="text-center text-sm font-semibold text-text-light-secondary dark:text-text-dark-secondary py-2"
+              >
+                {day}
+              </div>
+            ))}
+          </div>
+
+          {/* Calendar Days */}
+          <div className="grid grid-cols-7 gap-2">
+            {calendarDays.map((day, index) => {
+              if (day === null) {
+                // Empty cell before month starts
+                return (
+                  <div
+                    key={`empty-${index}`}
+                    className="min-h-[120px] bg-surface-light-elevated dark:bg-surface-dark-elevated rounded border border-border-light dark:border-border-dark opacity-30"
+                  />
+                );
+              }
+
+              const dateStr = `${year}-${(month + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+              const dayEntries = entriesByDate.get(dateStr) || [];
+              const dayEvents = expandedEvents[dateStr] || [];
+              const isToday = dateStr === new Date().toISOString().split('T')[0];
+              const totalDuration = dayEntries.reduce((sum, entry) => sum + entry.duration, 0);
+              const hasContent = dayEntries.length > 0 || dayEvents.length > 0;
+
+              return (
+                <div
+                  key={dateStr}
+                  className={`min-h-[140px] rounded border p-2 transition-colors group relative ${
+                    isToday
+                      ? 'border-accent-magenta dark:border-accent-cyan border-2 bg-accent-magenta/5 dark:bg-accent-cyan/5'
+                      : 'border-border-light dark:border-border-dark bg-surface-light-elevated dark:bg-surface-dark-elevated'
+                  } ${
+                    hasContent
+                      ? 'hover:border-accent-magenta/50 dark:hover:border-accent-cyan/50'
+                      : ''
+                  }`}
+                >
+                  {/* Day Number */}
+                  <div className="flex items-center justify-between mb-2">
+                    <span
+                      className={`text-sm font-semibold ${
+                        isToday
+                          ? 'text-accent-magenta dark:text-accent-cyan'
+                          : hasContent
+                          ? 'text-text-light-primary dark:text-text-dark-primary'
+                          : 'text-text-light-tertiary dark:text-text-dark-tertiary'
+                      }`}
+                    >
+                      {day}
+                    </span>
+                    {totalDuration > 0 && (
+                      <span className="text-xs font-mono text-accent-magenta dark:text-accent-cyan">
+                        {formatDuration(totalDuration, { showSeconds: false })}
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Calendar Events */}
+                  {dayEvents.length > 0 && (
+                    <div className="space-y-1 mb-1">
+                      {dayEvents.slice(0, 2).map((event) => {
+                        const isMultiDay = event._isMultiDayPart;
+                        const isFirst = event._isMultiDayFirst;
+                        const isLast = event._isMultiDayLast;
+
+                        return (
+                          <button
+                            key={event.id}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleEventClick(event, dateStr);
+                            }}
+                            className={`w-full text-left px-2 py-1 text-xs transition-colors hover:opacity-80 ${
+                              isMultiDay
+                                ? isFirst
+                                  ? 'rounded-l'
+                                  : isLast
+                                  ? 'rounded-r'
+                                  : ''
+                                : 'rounded'
+                            }`}
+                            style={{
+                              backgroundColor: '#E879F9', // Magenta for events
+                              color: 'white'
+                            }}
+                            title={`${event.title}${event.description ? '\n' + event.description : ''}${
+                              !event.isAllDay && event.startTime
+                                ? '\n' + event.startTime + (event.endTime ? ' - ' + event.endTime : '')
+                                : ''
+                            }${event.recurrence ? '\n🔁 Recurring' : ''}`}
+                          >
+                            <div className="truncate font-medium">
+                              {event.recurrence && '🔁 '}{event.title}
+                            </div>
+                            {!event.isAllDay && event.startTime && (
+                              <div className="text-[10px] opacity-90">
+                                {event.startTime}
+                              </div>
+                            )}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  )}
+
+                  {/* Time Entries */}
+                  <div className="space-y-1 max-h-[80px] overflow-y-auto">
+                    {dayEntries.slice(0, 2).map((entry) => (
+                      <button
+                        key={entry.id}
+                        onClick={() => onEditEntry?.(entry)}
+                        className="w-full text-left px-2 py-1 rounded text-xs transition-colors hover:opacity-80"
+                        style={{
+                          backgroundColor: `${getProjectColor(entry.projectId)}20`,
+                          borderLeft: `3px solid ${getProjectColor(entry.projectId)}`
+                        }}
+                        title={`${entry.description}\n${getProjectName(entry.projectId)}\n${formatTime(new Date(entry.startTime), '24h')} - ${entry.endTime ? formatTime(new Date(entry.endTime), '24h') : 'Running'}\n${formatDuration(entry.duration, { showSeconds: false })}`}
+                      >
+                        <div className="truncate font-medium text-text-light-primary dark:text-text-dark-primary">
+                          {entry.description}
+                        </div>
+                        <div className="flex items-center justify-between text-text-light-tertiary dark:text-text-dark-tertiary">
+                          <span className="truncate text-[10px]">
+                            {formatTime(new Date(entry.startTime), '24h')}
+                          </span>
+                          <span className="text-[10px] font-mono">
+                            {formatDuration(entry.duration, { showSeconds: false })}
+                          </span>
+                        </div>
+                      </button>
+                    ))}
+                    {(dayEntries.length + dayEvents.length) > 4 && (
+                      <div className="text-center text-xs text-text-light-tertiary dark:text-text-dark-tertiary py-1">
+                        +{(dayEntries.length + dayEvents.length) - 4} more
+                      </div>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      ) : viewMode === 'weekly' ? (
+        /* Weekly View */
+        <WeekView
+          currentDate={currentDate}
+          events={expandedEvents}
+          tasks={[]} // No tasks in time tracking context
+          onDayClick={handleDayClick}
+          onEventClick={handleEventClick}
+          showTimeSlots={true}
+        />
+      ) : viewMode === 'daily' ? (
+        /* Daily View */
+        <DayView
+          date={currentDate}
+          events={expandedEvents[currentDate.toISOString().split('T')[0]] || []}
+          onEventClick={handleEventClick}
+          onTimeSlotClick={() => {
+            const dateKey = currentDate.toISOString().split('T')[0];
+            handleDayClick(dateKey);
+          }}
+        />
+      ) : (
+        /* Agenda/List View */
+        <AgendaView
+          events={expandedEvents}
+          currentDate={currentDate}
+          daysToShow={14}
+          onEventClick={handleEventClick}
+        />
+      )}
+
+      {/* Legend */}
+      {projects.filter(p => p.active && !p.archived).length > 0 && (
+        <div className="bg-surface-light dark:bg-surface-dark rounded-lg border border-border-light dark:border-border-dark p-4">
+          <h3 className="text-sm font-semibold text-text-light-primary dark:text-text-dark-primary mb-3">
+            Project Legend
+          </h3>
+          <div className="flex flex-wrap gap-3">
+            {projects.filter(p => p.active && !p.archived).map(project => (
+              <div key={project.id} className="flex items-center gap-2">
+                <div
+                  className="w-3 h-3 rounded"
+                  style={{ backgroundColor: project.color }}
+                />
+                <span className="text-sm text-text-light-secondary dark:text-text-dark-secondary">
+                  {project.name}
+                </span>
+              </div>
+            ))}
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded bg-gray-400" />
+              <span className="text-sm text-text-light-secondary dark:text-text-dark-secondary">
+                No Project
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}

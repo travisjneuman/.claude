@@ -1,0 +1,73 @@
+# src/stores/CLAUDE.md — Zustand Store Guidelines
+
+## Purpose
+
+Define conventions and patterns for Zustand stores in Neuman Brain. Each domain (Kanban, Notes, Calendar, TimeTracking, Automation, Widget, Settings, etc.) has its own store file. These rules ensure state is predictable, persisted safely, and easy to reason about.
+
+## Non‑negotiables
+
+- **One store per domain:** Do not combine multiple concepts in one store. For example, tasks and notes must live in separate stores.
+- **Strict typing:** Use TypeScript with `strict` mode enabled. Define a state interface for each store; avoid `any`.
+- **Persist correctly:** Create stores with `create<State>()(persist(...))`. Provide a unique `name` for the persistence key and use a `partialize` function to persist only serializable fields.
+- **Date keys:** For calendar and scheduling data, store keys as strings in `YYYY‑M‑D` format (non‑padded month and day). Use the same convention across all stores.
+- **Migrations:** When changing the persisted state shape, increment a `version` field and provide a `migrate` function to transform old data. Never drop user data.
+- **Local‑first:** All state should persist to IndexedDB via Dexie. Wrap Dexie calls in `try/catch` to handle browser limitations (incognito, quota, etc.).
+- **No cross‑store mutations:** Stores should not reference or mutate other stores directly. Use selectors or services for cross‑domain interactions.
+- **Pure actions:** All actions should be functions on the store that call `set` with a function update (`set(state => ...)`). Do not mutate state outside of `set`.
+
+## Store file structure
+
+1. **State interface** defining the shape of the store.
+2. **Initial values** for each state property.
+3. **Actions** that modify state (e.g., `addItem`, `removeItem`, `updateItem`). Name actions clearly and avoid ambiguous verbs.
+4. **Persist middleware** configuration with `name` and `partialize` options. Use `version` and `migrate` when changing the state shape.
+5. **Exported hook** (`use<Domain>Store`) to read and mutate state in components.
+6. **Selectors** exported for common derived values, improving component performance.
+
+Example skeleton:
+
+```typescript
+interface KanbanState {
+  tasks: Task[];
+  addTask: (task: Task) => void;
+  // …other actions
+}
+
+export const useKanbanStore = create<KanbanState>()(
+  persist(
+    (set, get) => ({
+      tasks: [],
+      addTask: (task) => set((state) => ({ tasks: [...state.tasks, task] })),
+      // …other actions
+    }),
+    {
+      name: 'kanban-store',
+      partialize: (state) => ({ tasks: state.tasks }),
+      version: 1,
+      migrate: (persisted, version) => persisted,
+    },
+  ),
+);
+```
+
+## Naming conventions
+
+- Store files are named `use<Domain>Store.ts` (e.g., `useNotesStore.ts`).
+- The exported hook uses the same naming (`useNotesStore`).
+- Action names use verb‑noun format (`addTask`, `removeTask`, `setTheme`).
+
+## Testing
+
+- Place store tests in `src/stores/__tests__/`. Use Vitest to verify state mutations, selectors, and persist behavior.
+- Mock Dexie or IndexedDB if necessary for unit tests.
+
+## Anti‑patterns
+
+- Do not share a single store for unrelated domains.
+- Do not store functions, class instances, DOM elements, or Promises in persisted state.
+- Do not circumvent the persist middleware or call Dexie directly from components.
+- Do not use Redux or other state libraries; Zustand is the only approved state management.
+
+## Additional references
+
+Refer to `@docs/technical/development_principles.md` and `@docs/technical/widget_development_guide.md` for overarching principles. For calendar recurrence rules and date handling, see `@docs/technical/date_keys.md`.

@@ -1,0 +1,288 @@
+# Notes Collection Cleanup & Markdown Migration Plan
+
+## Executive Summary
+
+**Collection:** `D:\Proton Drive\My files\Documents\Personal\Notebooks`
+**Size:** 4.18 GB | **Total Files:** ~2,700 items
+**Goal:** Convert all notes to portable Markdown (.md), deduplicate, and organize by topic - with ZERO data loss
+
+---
+
+## File Type Inventory
+
+| Format | Count | Source App | Conversion Path |
+|--------|-------|------------|-----------------|
+| `.note` | 2,478 | Notability (iPad) | Extract PDFs/images → OCR if needed → Markdown |
+| `.one` | 145 | Microsoft OneNote | pyOneNote or HTML export → Markdown |
+| `.pdf` | 24 | Various | Keep as-is or OCR → Markdown |
+| `.rtf` | 9 | Various | Pandoc → Markdown |
+| `.url` | 7 | Web shortcuts | Convert to .md with link |
+| `.zip` | 4 | Archives | Extract and process contents |
+| `.onetoc2` | 3 | OneNote TOC | Metadata only - can skip |
+
+---
+
+## Key Findings
+
+### 1. Notability Files (.note) - 92% of collection
+- **Format:** ZIP archive containing binary plist + embedded PDFs/images
+- **Content type:** Primarily HANDWRITTEN notes (not typed text)
+- **Challenge:** Handwriting stored as drawing vectors, not extractable text
+- **Solution:** Extract embedded PDFs and images; OCR if text needed
+
+### 2. Massive Duplication Problem
+| Category | Count | Notes |
+|----------|-------|-------|
+| Byte-identical duplicates | 60 groups | Safe to auto-dedupe |
+| Version variants (different content) | 281 groups | Need careful comparison |
+| Total duplicate files | 1,647+ | ~66% of collection |
+
+**Critical:** The "(2)" version sometimes has MORE content than the original.
+
+### 3. OneNote Files (.one) - 145 files
+- Backup structure with dated versions
+- Located in `Backup\16.0\Backup\` folders
+- Can extract text using pyOneNote library
+
+### 4. Cryptic Filenames
+- Amazon product images: `61njx1IfMVL._SX425_`, `7B26Vre`
+- Auto-generated: `3qhi6zj7c7n11`
+- **Action:** Move to `.review/` folder for manual inspection
+
+---
+
+## Proposed Solution: 5-Phase Approach
+
+### Phase 1: Safe Backup
+**COMPLETED** - User confirmed backup already exists. Skipping this step.
+
+### Phase 2: Inventory & Analysis
+Build comprehensive catalog of all files.
+
+**Script: `01_inventory.py`**
+- Scan all files by extension
+- For `.note` files: Extract metadata (title, dates, tags, embedded content counts)
+- For `.one` files: Parse with pyOneNote to get text content
+- Generate hashes for duplicate detection
+- Output: `inventory.csv` with full details
+
+**Script: `02_duplicate_analysis.py`**
+- Group files by base name (removing suffixes)
+- Compare versions within each group:
+  - File sizes, content hashes, internal file counts
+  - Identify "best" version (largest content, most recent, most images)
+- Output: `duplicates.json` with recommendations
+
+### Phase 3: Content Extraction & Conversion
+
+**For Notability (.note) files:**
+```
+1. Extract ZIP contents
+2. Extract embedded PDFs → save to assets folder
+3. Extract embedded images → save to assets folder
+4. Parse metadata.plist for title, dates, subject
+5. Create Markdown stub:
+   ---
+   title: [from metadata]
+   date: [from metadata]
+   source: notability
+   assets: [list of extracted files]
+   ---
+
+   # [Title]
+
+   Original Notability note. Assets extracted below.
+
+   ## Embedded PDF
+   ![PDF](./assets/[uuid].pdf)
+
+   ## Images
+   ![Image](./assets/image1.jpg)
+```
+
+**For OneNote (.one) files:**
+```
+1. Use pyOneNote to extract text content
+2. Convert to Markdown with pandoc or markdownify
+3. Extract embedded images
+4. Create proper .md file with frontmatter
+```
+
+**For RTF files:**
+```
+pandoc input.rtf -o output.md
+```
+
+**For URL files:**
+```
+Parse .url file → Create .md with title and link
+```
+
+### Phase 4: Deduplication with Human Review
+
+**For byte-identical groups (60 groups):**
+- Auto-select: Keep file with cleanest name
+- Move duplicates to `_staging/_duplicates/`
+
+**For version variants (281 groups):**
+- Generate comparison report (HTML with thumbnails)
+- Present side-by-side: sizes, dates, content diffs
+- User selects which to keep
+- Merge content if multiple versions have unique data
+
+### Phase 5: Reorganization & Cleanup
+
+**Target Structure:**
+```
+Notebooks/
+├── Business/
+│   ├── Aloha/           # Restaurant POS system
+│   ├── OLO/             # Ordering platform
+│   ├── insITe/          # IT consulting
+│   └── BarFly/          # Site checklists
+├── Personal/
+│   ├── Finance/
+│   ├── Recipes/
+│   └── Home/
+├── Property/
+│   └── 67-River-Road/
+├── Work/
+│   ├── IT-Notes/
+│   ├── Weekly-Notes/
+│   └── Meetings/
+├── .review/              # Cryptic names for manual review
+├── .archive/             # Old versions, dated backups
+├── _staging/
+│   ├── _duplicates/      # Pending deletion review
+│   └── _converted/       # Successfully converted files
+└── assets/               # Extracted PDFs and images
+```
+
+---
+
+## Technical Implementation
+
+### Python Dependencies
+```bash
+pip install pyOneNote      # OneNote parsing
+pip install pypandoc       # Document conversion
+pip install plistlib       # Built-in, Notability metadata
+pip install rich           # Better terminal output
+pip install jinja2         # HTML report generation
+pip install Pillow         # Image handling
+```
+
+### External Tools
+- **Pandoc:** Universal document converter (for RTF, DOCX)
+- **OCR (optional):** For extracting text from handwritten content
+  - Tesseract OCR (free)
+  - Or cloud-based: Google Vision, AWS Textract
+
+### Scripts to Build
+1. **`01_backup.py`** - Automated backup with verification
+2. **`02_inventory.py`** - Scan all files, extract metadata
+3. **`03_analyze_duplicates.py`** - Group and compare versions
+4. **`04_extract_notability.py`** - Extract .note contents to Markdown
+5. **`05_convert_onenote.py`** - Convert .one to Markdown
+6. **`06_convert_others.py`** - Handle RTF, PDF, URL files
+7. **`07_generate_review.py`** - Create HTML comparison report
+8. **`08_execute_cleanup.py`** - Move duplicates to staging
+9. **`09_reorganize.py`** - Apply final folder structure
+
+---
+
+## Safety Measures
+
+### Non-Negotiables
+1. **Full backup BEFORE any processing**
+2. **NO automatic deletion** - All removals go to staging first
+3. **Integrity checks** on every file before processing
+4. **Original files preserved** until conversion verified
+5. **Audit log** of all actions taken
+
+### Verification Checkpoints
+- [ ] Backup verified (file count + size match)
+- [ ] All files pass integrity check
+- [ ] Inventory complete and reviewed
+- [ ] Sample conversions verified manually
+- [ ] Duplicate report reviewed
+- [ ] User approves cleanup decisions
+- [ ] Staging folder reviewed before deletion
+- [ ] Final file count reconciliation
+
+---
+
+## Handling Handwritten Content
+
+Since Notability files are primarily handwritten:
+
+**Option A: Extract Only (Recommended for now)**
+- Pull out embedded PDFs and images
+- Create Markdown stubs linking to assets
+- Handwriting preserved as images/PDFs
+
+**Option B: OCR Conversion (Future)**
+- Use OCR to convert handwriting to text
+- Requires: Tesseract or cloud OCR service
+- Quality depends on handwriting legibility
+- Can be done later on extracted images
+
+**Recommendation:** Start with Option A. You'll have all your content in portable formats. OCR can be applied later to specific important notes.
+
+---
+
+## Expected Outcomes
+
+| Metric | Before | After |
+|--------|--------|-------|
+| Total files | ~2,700 | ~900-1,100 |
+| Unique notes | ~831 | ~831 |
+| File formats | 7+ proprietary | Markdown + assets |
+| Duplicates | 1,647+ | 0 |
+| Portability | Low (app-specific) | High (universal) |
+| Disk space | 4.18 GB | ~2-3 GB estimated |
+
+---
+
+## Execution Order
+
+```
+Week 1: Setup & Analysis
+├── Day 1: Create backup, verify integrity
+├── Day 2: Run inventory script, review results
+└── Day 3: Run duplicate analysis, review report
+
+Week 2: Conversion
+├── Day 4-5: Extract Notability files
+├── Day 6: Convert OneNote files
+└── Day 7: Convert RTF, handle URLs
+
+Week 3: Review & Cleanup
+├── Day 8: Review duplicate report, make decisions
+├── Day 9: Execute moves to staging
+└── Day 10: Reorganize into final structure
+
+Week 4: Verification
+├── Day 11: Verify all conversions
+├── Day 12: Test access to all Markdown files
+└── Day 13: Archive originals, cleanup staging
+```
+
+---
+
+## Ready to Proceed
+
+The plan accounts for:
+- Multiple source formats (Notability, OneNote, RTF, PDF)
+- Conversion to portable Markdown
+- Safe handling of handwritten content (extract as assets)
+- Careful deduplication with version comparison
+- Cryptic filenames moved to `.review/` folder
+- Organization by topic/project
+- Zero data loss through staging and backups
+
+**Next Steps:**
+1. Approve this plan
+2. Create backup
+3. Begin with inventory script
+4. Proceed incrementally with user review at each stage

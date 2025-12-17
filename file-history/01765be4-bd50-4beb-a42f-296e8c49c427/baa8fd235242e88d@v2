@@ -1,0 +1,55 @@
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
+import type { ThemeState, ThemeMode } from '../types';
+
+export const useThemeStore = create<ThemeState>()(
+  persist(
+    (set) => ({
+      mode: 'dark',
+
+      backupPreferences: {
+        hasBackupFolder: false,
+        backupFolderPath: null,
+        autoSaveEnabled: false,
+        saveInterval: 30000, // 30 seconds
+        versionsToKeep: 7,
+        customFileName: 'Neuman.Brain',
+        reminderPreference: 'every-session',
+        nextReminderDate: null,
+      },
+
+      toggleTheme: () =>
+        set((state) => {
+          const newMode: ThemeMode = state.mode === 'dark' ? 'light' : 'dark';
+
+          // Update document class
+          if (newMode === 'dark') {
+            document.documentElement.classList.add('dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+          }
+
+          return { mode: newMode };
+        }),
+
+      updateBackupPreferences: (preferences) =>
+        set((state) => ({
+          backupPreferences: {
+            ...state.backupPreferences,
+            ...preferences,
+          },
+        })),
+    }),
+    {
+      name: 'theme-storage',
+      onRehydrateStorage: () => (state) => {
+        // Apply theme class on hydration
+        if (state?.mode === 'dark') {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      },
+    }
+  )
+);

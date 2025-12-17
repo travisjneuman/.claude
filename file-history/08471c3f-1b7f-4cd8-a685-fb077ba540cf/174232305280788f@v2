@@ -1,0 +1,319 @@
+# Tags System for Notes - Implementation Plan
+
+**Date:** 2025-11-26
+**Status:** 🔵 PLANNING
+**Priority:** P2 - MEDIUM (Priority #4)
+**Estimated Time:** 2-3 hours
+
+---
+
+## Overview
+
+Implement a comprehensive tagging system for notes, inspired by Obsidian, Roam Research, and Notion. Users can tag notes with hashtags (#work, #personal, #ideas), filter by tags, and organize their knowledge base with flexible categorization.
+
+**User Problem:**
+Users building a knowledge base with Daily Notes and regular notes need a flexible way to categorize and find related content. Folders alone are too rigid - a note about "#work #meeting #project-x" belongs in multiple conceptual categories.
+
+**Technical Problem:**
+Notes currently support tags as an array of strings, but there's no UI for managing tags, no tag autocomplete, no filtering by tags, and no tag overview/statistics. We need to build a complete tag management experience.
+
+---
+
+## Problem Statement
+
+**Current behavior:**
+- Notes have a `tags: string[]` field in the data model
+- No UI to add/remove/manage tags
+- No tag picker or autocomplete
+- No way to filter notes by tags
+- No tag overview or statistics
+- Tags are just stored data with no functionality
+
+**Desired behavior:**
+- Click to add tags to any note (inline tag picker)
+- Tag autocomplete from existing tags
+- Filter notes by one or more tags
+- Tag overview showing all tags + note counts
+- Click tag to filter notes
+- Tag renaming (renames across all notes)
+- Tag deletion (removes from all notes)
+- Tag colors/styling for visual distinction
+
+**User impact:**
+- **High** for power users organizing large knowledge bases
+- **Medium** for daily notes users wanting to categorize entries
+- **Core feature** in Obsidian, Roam, Notion - competitive parity
+
+---
+
+## Files to Read
+
+- [x] `src/stores/useNotesStore.ts` - Notes state management, tags field
+- [x] `src/types/notes.ts` - Note type definition with tags
+- [x] `src/widgets/NotesEditor.tsx` - Note editor UI
+- [x] `src/pages/Notes.tsx` - Notes page layout
+- [x] `src/components/Sidebar.tsx` - Sidebar navigation (for tag filters)
+- [x] `src/services/dailyNotes.ts` - Daily notes auto-tagging (already uses tags)
+
+---
+
+## Proposed Changes
+
+### Files to Create
+
+**1. `src/components/TagPicker.tsx`**
+- **Purpose:** Inline tag picker component for adding/removing tags
+- **Key Features:**
+  - Dropdown with existing tags (autocomplete)
+  - Create new tags inline
+  - Remove tags with X button
+  - Keyboard navigation (arrow keys, enter, escape)
+  - Click outside to close
+- **Dependencies:** useNotesStore (for all existing tags)
+- **Integration:** Embedded in NotesEditor
+
+**2. `src/components/TagManager.tsx`**
+- **Purpose:** Tag overview/management modal
+- **Key Features:**
+  - List all tags with note counts
+  - Rename tag (updates all notes)
+  - Delete tag (removes from all notes)
+  - Tag statistics (most used, recently used)
+  - Click tag to filter notes
+- **Dependencies:** useNotesStore
+- **Integration:** Accessible from Notes page or Settings
+
+**3. `src/components/TagFilter.tsx`**
+- **Purpose:** Tag-based filtering UI in notes sidebar
+- **Key Features:**
+  - Show active tag filters
+  - Add/remove tag filters
+  - Combine tags (AND logic: notes must have ALL selected tags)
+  - Clear all filters
+- **Dependencies:** useNotesStore
+- **Integration:** Notes page sidebar
+
+**4. `src/hooks/useTags.ts`**
+- **Purpose:** Custom hook for tag operations
+- **Key Features:**
+  - `getAllTags()` - Get all unique tags across notes
+  - `getTagCounts()` - Get note count per tag
+  - `renameTag(oldName, newName)` - Rename tag everywhere
+  - `deleteTag(tagName)` - Remove tag from all notes
+  - `getNotesWithTags(tags[])` - Filter notes by tags
+- **Dependencies:** useNotesStore
+- **Integration:** Used by TagPicker, TagManager, TagFilter
+
+### Files to Modify
+
+**1. `src/stores/useNotesStore.ts`**
+- **Changes:** Add tag-specific actions
+  - `addTagToNote(noteId, tag)`
+  - `removeTagFromNote(noteId, tag)`
+  - `renameTagGlobally(oldTag, newTag)`
+  - `deleteTagGlobally(tag)`
+  - `getNotesWithTags(tags[])`
+- **Reason:** Centralize tag operations in store
+- **Impact:** Tag operations are atomic and persist to IndexedDB
+
+**2. `src/widgets/NotesEditor.tsx`**
+- **Changes:** Add TagPicker component below note title
+  - Show current tags as chips
+  - Click "Add tag" to open TagPicker
+  - Remove tag with X button on chip
+- **Reason:** Primary interface for tagging notes
+- **Impact:** Visible tag management in every note
+
+**3. `src/pages/Notes.tsx`**
+- **Changes:** Add TagFilter to sidebar
+  - Show active tag filters
+  - Filter notes based on selected tags
+  - Add "Manage Tags" button (opens TagManager)
+- **Reason:** Enable tag-based navigation and filtering
+- **Impact:** Notes list updates based on tag filters
+
+**4. `src/components/Sidebar.tsx` (Optional)**
+- **Changes:** Add "Tags" section with most-used tags
+  - Quick-click tags to filter
+  - Link to TagManager
+- **Reason:** Quick access to tag navigation
+- **Impact:** Faster knowledge base navigation
+
+---
+
+## Todo Checklist
+
+### Phase 1: Tag Hook & Store Actions (1 hour)
+- [ ] Create `src/hooks/useTags.ts` (30 min)
+  - Implement `getAllTags()`
+  - Implement `getTagCounts()`
+  - Implement `getNotesWithTags(tags[])`
+- [ ] Modify `src/stores/useNotesStore.ts` (30 min)
+  - Add `addTagToNote(noteId, tag)` action
+  - Add `removeTagFromNote(noteId, tag)` action
+  - Add `renameTagGlobally(oldTag, newTag)` action
+  - Add `deleteTagGlobally(tag)` action
+
+### Phase 2: Tag Picker Component (45 min)
+- [ ] Create `src/components/TagPicker.tsx` (45 min)
+  - Build dropdown with autocomplete
+  - Implement tag creation
+  - Keyboard navigation
+  - Click-outside-to-close behavior
+  - Type-check
+
+### Phase 3: Tag Display in Notes Editor (30 min)
+- [ ] Modify `src/widgets/NotesEditor.tsx` (30 min)
+  - Show tags as chips below title
+  - Add "Add tag" button
+  - Integrate TagPicker
+  - Remove tag with X button
+  - Type-check
+
+### Phase 4: Tag Filter Component (30 min)
+- [ ] Create `src/components/TagFilter.tsx` (30 min)
+  - Show active filters
+  - Add/remove filters
+  - Clear all button
+  - Type-check
+
+### Phase 5: Tag Manager Modal (45 min)
+- [ ] Create `src/components/TagManager.tsx` (45 min)
+  - List all tags with counts
+  - Rename tag functionality
+  - Delete tag functionality
+  - Tag statistics
+  - Type-check
+
+### Phase 6: Integration & Testing (30 min)
+- [ ] Integrate TagFilter into Notes.tsx (15 min)
+- [ ] Add "Manage Tags" button to Notes.tsx (5 min)
+- [ ] Test tag operations (10 min)
+  - Create tags
+  - Filter by tags
+  - Rename tags
+  - Delete tags
+- [ ] Run `npm run type-check`
+- [ ] Run `npm run build`
+
+---
+
+## Design Considerations
+
+### Design System Compliance
+- **Colors:** Tag chips use `bg-accent-purple/10 text-accent-purple` (matches existing tag styling in widgets)
+- **Components:** Use bento-card for TagManager modal
+- **Typography:** `text-sm` for tags, `text-xs` for counts
+- **Spacing:** `gap-2` between tags, `p-2` padding in chips
+- **Animations:** Framer Motion for modal, subtle hover effects on tags
+- **Dark Mode:** Auto-handled by semantic tokens
+
+### Tag Display Patterns
+**Option 1: Below Title (Recommended)**
+```
+┌─────────────────────────────────┐
+│ Note Title                       │
+│ ─────────────────────────────── │
+│ #work #meeting #project-x [+]   │  ← Tags here
+│ ─────────────────────────────── │
+│ Note content starts here...     │
+└─────────────────────────────────┘
+```
+
+**Option 2: In Title Bar**
+```
+┌─────────────────────────────────┐
+│ Note Title    #work #meeting [+]│  ← Tags inline
+│ ─────────────────────────────── │
+│ Note content starts here...     │
+└─────────────────────────────────┘
+```
+
+**Decision:** Use Option 1 (below title) - cleaner separation, more space for tags
+
+### Tag Filtering Logic
+- **AND logic:** Notes must have ALL selected tags
+- Example: Filter by `#work` AND `#meeting` → only notes with both tags
+- Clear visual indication of active filters
+- Easy to add/remove filters
+
+### Performance
+- **Bundle Size Impact:** ~2-3KB (small components)
+- **Lazy Loading:** No lazy loading needed (core feature)
+- **Optimization:** Memoize tag counts, filter only when tags change
+
+### Accessibility
+- **Keyboard Nav:** Tab through tags, Enter to select, Escape to close
+- **Screen Reader:** `role="button"` on tags, `aria-label="Add tag to note"`
+- **Focus Management:** Focus returns to "Add tag" button after closing picker
+
+---
+
+## Dependencies
+
+### Blocked By
+- ✅ None - notes already have `tags: string[]` field
+
+### Blocks
+- Graph view (#6) - Tags enable tag-based graph connections
+
+### Related Work
+- Daily Notes Pattern (`tasks/daily-notes-pattern.md`) - Already uses auto-tagging
+- Notes infrastructure already complete
+
+---
+
+## Risk Assessment
+
+| Risk | Severity | Likelihood | Mitigation |
+|------|----------|------------|------------|
+| Tag rename breaks references | Medium | Low | Use atomic rename operation in store, update all notes in single transaction |
+| Performance with many tags | Low | Low | Memoize tag lists, only recalculate on note changes |
+| Tag name conflicts (#Work vs #work) | Low | Medium | Normalize tags to lowercase for comparison, preserve display case |
+| Bundle size increase | Low | Low | Components are small, no heavy dependencies |
+
+---
+
+## Rollback Plan
+
+If something goes wrong:
+1. Revert commits: `git reset --hard HEAD~[N]`
+2. Tags are additive - no data migration needed
+3. Existing notes with tags will still have tags in data (just no UI)
+4. Verify with `git diff` before final revert
+
+---
+
+## Success Criteria
+
+- ✅ Can add tags to notes via TagPicker
+- ✅ Tags autocomplete from existing tags
+- ✅ Can filter notes by one or more tags
+- ✅ Can rename tags (updates all notes)
+- ✅ Can delete tags (removes from all notes)
+- ✅ Tag statistics show in TagManager
+- ✅ Type-check and build pass
+- ✅ No bundle size issues
+
+---
+
+## Competitor Feature Comparison
+
+| Feature | Obsidian | Roam | Notion | NB Target |
+|---------|----------|------|--------|-----------|
+| Inline tags (#tag) | ✅ | ✅ | ✅ | ✅ Phase 2 |
+| Tag autocomplete | ✅ | ✅ | ✅ | ✅ Phase 2 |
+| Tag filtering | ✅ | ✅ | ✅ | ✅ Phase 4 |
+| Tag renaming | ✅ | ⬜ | ✅ | ✅ Phase 5 |
+| Tag overview | ✅ | ✅ | ✅ | ✅ Phase 5 |
+| Nested tags (#work/meetings) | ✅ | ⬜ | ⬜ | 🔶 Future |
+| Tag colors | ⬜ | ✅ | ✅ | 🔶 Future |
+
+---
+
+## Notes
+
+- Consider adding nested tags later (#work/meetings, #personal/health)
+- Tag graph visualization pairs well with Graph view (P2 #6)
+- Could integrate with search (search within tagged notes)
+- Daily notes already auto-tag (#daily-note, #YYYY, #month-MM) - foundation works!

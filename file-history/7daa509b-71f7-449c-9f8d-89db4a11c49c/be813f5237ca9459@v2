@@ -1,0 +1,195 @@
+---
+type: project
+status: stable
+priority: P3
+tech-stack:
+  - "[[JavaScript|Vanilla JavaScript ES6+]]"
+  - "[[CSV]]"
+  - "[[DuckDuckGo API]]"
+repo-path: tjn.home
+license: Unlicense (Public Domain)
+created: 2025-11-19
+updated: 2025-12-14
+---
+
+# TJN Home
+
+> [!INFO] Summary
+> A powerful, CSV-driven browser startpage with smart search, DuckDuckGo autocomplete, and keyboard-first navigation. Zero dependencies, 200KB total bundle (99% reduction from original 20MB). Monochrome design with website favicons as the only color.
+
+---
+
+## 📊 Metrics & Status
+
+| Metric | Value |
+|--------|-------|
+| **Bundle Size** | 200KB total |
+| **Icons** | 131 optimized (48x48px) |
+| **JavaScript** | 16KB minified |
+| **CSS** | 5KB minified |
+| **Load Time** | <1s (modern), <3s (3G) |
+| **Lighthouse** | 95+ |
+| **Version** | v1.0 (Production Ready) |
+
+**Optimization Achievement:** 20MB → 200KB (99.5% reduction)
+
+---
+
+## 🛠 Tech Stack
+
+| Layer | Technology |
+|-------|------------|
+| **Core** | Vanilla [[JavaScript\|JavaScript ES6+]] (class-based) |
+| **Config** | [[CSV]] (`script/data.csv`) |
+| **Storage** | localStorage (search history) |
+| **Autocomplete** | DuckDuckGo API |
+| **Styling** | CSS3 (Custom Properties) |
+| **Visualization** | Chart.js (CDN) |
+| **CSV Parsing** | Papa Parse (CDN) |
+| **Deployment** | Cloudflare Workers, GitHub Pages |
+
+---
+
+## 🧠 Architecture
+
+### Project Structure
+```
+tjn.home/
+├── index.html              # Main entry (strict CSP)
+├── script/
+│   ├── script.js           # Core app (957 lines)
+│   ├── script.min.js       # Minified
+│   ├── parse_csv.js        # CSV utility
+│   └── data.csv            # Link configuration
+├── style/
+│   ├── style.css           # Main stylesheet
+│   └── style.min.css       # Minified
+├── assets/
+│   ├── icons/              # 131 favicons (48x48px)
+│   ├── icons-original/     # Backup of originals
+│   ├── fonts/              # Roboto font files
+│   └── favicons/           # Site branding
+├── tasks/
+│   ├── design-guidelines.md      # B&W philosophy
+│   ├── feature-roadmap-v2.md     # v2.0 roadmap (43KB)
+│   ├── security-performance-audit.md
+│   └── update-readme-comprehensive-documentation.md
+├── CLAUDE.md               # Vanilla JS guidelines
+├── CLAUDE2.md              # React guidelines (template)
+├── README.md               # Comprehensive docs (24KB)
+├── LICENSE                 # Unlicense
+└── wrangler.toml           # Cloudflare Workers config
+```
+
+---
+
+## 🔑 Key Features
+
+### CSV Configuration
+- Easy link management without touching code
+- Category organization (single chars or short codes)
+- Website favicons/icons
+- Quick launch functionality
+
+### Smart Search
+- DuckDuckGo-powered autocomplete
+- Search history via localStorage
+- Site-specific search with `:` delimiter (e.g., `g:query`)
+- Path navigation with `/` delimiter
+- Direct URL redirect
+- Fallback to Google search
+
+### Interactive UI
+- Large clock display (12/24 hour format)
+- Help menu with `?` key
+- Quick launch with `!` key
+- Real-time autocomplete suggestions
+- Keyboard-first navigation
+
+### Customization
+- Theme toggle (light/dark/reversed)
+- Search engine configuration
+- Delimiter customization
+- 100+ icons included
+
+---
+
+## 🎨 Design System
+
+**Core Principle:** Minimalist, Black & White Only (except favicons)
+
+| Mode | Background | Foreground |
+|------|------------|------------|
+| **Dark** | #0e0e0e | #cbcbcb |
+| **Light** | #F1F1F1 | #0e0e0e |
+
+**Typography:** Roboto (400, 700), 12px base, 48px clock
+**Grid:** 8px base unit
+**Animations:** Subtle only (200ms fade, no bouncing)
+
+---
+
+## 🔒 Security Implementation
+
+All vulnerabilities fixed in v1.0:
+1. **HTML Sanitization** - `$.sanitizeHTML()` for CSV data
+2. **Content Security Policy** - Strict CSP meta tag
+3. **URL Validation** - Only http/https protocols
+4. **CSV Injection Protection** - Dangerous characters removed
+5. **JSONP Security** - 5-second timeout
+6. **localStorage Validation** - Checked before use
+
+---
+
+## 📁 Current Tasks
+
+### Planning Documents
+| Task | Size | Status |
+|------|------|--------|
+| `design-guidelines.md` | 438 lines | Complete |
+| `feature-roadmap-v2.md` | 500+ lines | Planning |
+| `security-performance-audit.md` | 100+ lines | Complete |
+| `security-performance-implementation.md` | 257 lines | Complete |
+
+### v2.0 Roadmap (Phase 1)
+- Visual Link Manager UI (settings page)
+- Add/Edit/Delete links without CSV editing
+- Drag-and-drop reordering
+- IndexedDB for persistent storage
+- Export to CSV for backup
+
+---
+
+## 🔧 Development Commands
+
+```bash
+# Local Development
+python -m http.server 8000   # Python server
+npx serve .                  # Node.js server
+
+# Deployment
+wrangler deploy              # Cloudflare Workers
+```
+
+---
+
+## 🔗 Links
+
+### Internal (_meta.notes)
+- [[Dashboards/External Docs Index#TJN Home|All External Docs]]
+
+### External Documentation (in codebase)
+
+**Core Documentation:**
+- [[../tjn.home/CLAUDE.md|CLAUDE.md — Vanilla JS Guidelines]]
+- [[../tjn.home/README.md|README.md (738 lines)]]
+
+**Planning & Design:**
+- [[../tjn.home/tasks/design-guidelines.md|Design Guidelines (Monochrome B&W)]]
+- [[../tjn.home/tasks/feature-roadmap-v2.md|Feature Roadmap v2.0 (6 Phases)]]
+- [[../tjn.home/tasks/security-performance-audit.md|Security & Performance Audit]]
+- [[../tjn.home/tasks/security-performance-implementation.md|Security Implementation Plan]]
+
+---
+
+*Last updated: 2025-12-14*

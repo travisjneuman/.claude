@@ -1,0 +1,244 @@
+---
+type: project
+status: alpha
+priority: P1
+tech-stack:
+  - "[[Concepts/React|React 19]]"
+  - "[[Concepts/TypeScript|TypeScript 5.9]]"
+  - "[[Next.js|Next.js 15]]"
+  - "[[Concepts/NestJS|NestJS 11]]"
+  - "[[Concepts/Prisma|Prisma 6]]"
+  - "[[PostgreSQL]]"
+  - "[[Tailwind|Tailwind CSS 3]]"
+  - "[[Shadcn UI]]"
+repo-path: .lzg_platform/Lazy Golfing (ROOT), .lzg_platform/Lazy Golfing/lzg.backend , .lzg_platform/Lazy Golfing/lzg.home
+live-url: https://lazygolfing.com
+api-url: https://api.lazygolfing.com
+created: 2025-12-06
+updated: 2025-12-14
+---
+
+# Lazy Golfing
+
+> [!INFO] Summary
+> "Lazy golf for lazy golfers!" A modern golf score-tracking platform built as a monorepo with Next.js 15 frontend and NestJS 11 API backend. Focuses on simplicity, speed, and mobile-first design with a Miami Vice color theme.
+
+---
+
+## 📊 Metrics & Status
+
+| Metric | Status |
+|--------|--------|
+| **Frontend** | Next.js 15 + React 19 |
+| **Backend** | NestJS 11 + Prisma 6 |
+| **Database** | PostgreSQL |
+| **Auth** | Google OAuth + JWT |
+| **Deployment** | Cloudflare Pages + Ubuntu VM |
+| **Test Coverage** | 100% enforced |
+| **Phase** | Foundation (Beta preparation) |
+
+---
+
+## 🛠 Tech Stack (Comprehensive)
+
+### Frontend (lzg.home)
+| Layer | Technology | Version |
+|-------|------------|---------|
+| **Framework** | [[Next.js]] | 15.0.3 |
+| **UI Library** | [[Concepts/React\|React]] | 19.0.0 |
+| **Language** | [[Concepts/TypeScript\|TypeScript]] | 5.7.2 (strict) |
+| **Styling** | [[Tailwind\|Tailwind CSS]] | 3.4.16 |
+| **Components** | Shadcn UI (Radix primitives) | - |
+| **State** | [[Zustand]] | 5.0.2 |
+| **Theming** | next-themes | 0.4.6 |
+| **Toasts** | Sonner | 2.0.7 |
+| **Error Tracking** | Sentry | 10.29.0 |
+
+### Backend (lzg.backend)
+| Layer | Technology | Version |
+|-------|------------|---------|
+| **Framework** | [[Concepts/NestJS\|NestJS]] | 11.1.6 |
+| **ORM** | [[Concepts/Prisma\|Prisma]] | 6.17.0 |
+| **Database** | PostgreSQL | - |
+| **Auth** | Passport.js + JWT | - |
+| **Validation** | class-validator | 0.14.2 |
+| **Security** | Helmet | 8.1.0 |
+| **Rate Limiting** | @nestjs/throttler | 6.4.0 |
+| **Scheduling** | @nestjs/schedule | 6.0.1 |
+| **Testing** | Jest + Supertest | 30.0.0 |
+| **Documentation** | Swagger | 11.2.3 |
+
+---
+
+## 🧠 Architecture
+
+### Monorepo Structure
+```
+.lzg_platform/Lazy Golfing/
+├── lzg.home/                # Frontend (Next.js 15)
+│   ├── src/
+│   │   ├── app/             # App Router pages
+│   │   ├── components/      # React + shadcn/ui
+│   │   ├── lib/             # Utilities (theme.ts, api.ts)
+│   │   └── hooks/           # useAuth, useNotifications
+│   └── public/              # Static assets
+├── lzg.backend/             # Backend (NestJS API)
+│   ├── src/
+│   │   ├── auth/            # OAuth + JWT + CSRF
+│   │   ├── profile/         # User profiles
+│   │   ├── rounds/          # Golf round CRUD
+│   │   ├── courses/         # Course management
+│   │   ├── friends/         # Friend system
+│   │   ├── challenges/      # Challenges
+│   │   └── notifications/   # Notifications
+│   └── prisma/              # Schema + migrations
+└── docs/                    # Centralized documentation
+```
+
+### Auth Flow
+```mermaid
+sequenceDiagram
+    participant User
+    participant Next[Next.js Frontend]
+    participant Nest[NestJS Backend]
+    participant Google[Google OAuth]
+    participant DB[PostgreSQL]
+
+    User->>Next: Click "Login with Google"
+    Next->>Nest: GET /auth/google
+    Nest->>Google: Redirect to Consent Screen
+    Google->>User: Ask Permission
+    User->>Google: Approve
+    Google->>Nest: Callback with Code
+    Nest->>Google: Exchange Code for Profile
+    Nest->>DB: Find/Create User
+    Nest->>Next: Set HttpOnly Cookie (JWT)
+    Next->>Nest: GET /v1/me (Verify Session)
+    Nest-->>Next: 200 OK { user }
+```
+
+---
+
+## ⚠️ Critical Priorities (Ranked)
+
+1. **Security** - Defense in depth, zero tolerance for secrets, OWASP Top 10
+2. **Foundational** - Solid architecture, single source of truth
+3. **Stability** - Zero crashes, comprehensive error handling
+4. **UX/UI** - <100ms latency, mobile-first, WCAG 2.1 AA
+5. **Lean** - MVP-first, no feature creep
+6. **Clean Code** - Readable over clever
+7. **Retention** - Valuable insights, progress visualization
+8. **Performance** - Core Web Vitals: LCP <2.5s, FID <100ms, CLS <0.1
+
+---
+
+## 🔑 Golden Rules (Non-Negotiable)
+
+1. CSV is source of truth (never edit JSON directly)
+2. Always run `npx prisma generate` after schema.prisma changes
+3. Protected routes need `@UseGuards(JwtAuthGuard, CsrfGuard)`
+4. Admin routes need AdminGuard + all others
+5. All inputs validated via class-validator DTOs
+6. Never commit secrets (.env, API keys)
+7. Test before deploy
+8. Mobile-first for every feature
+
+---
+
+## 📁 Current Tasks
+
+### Master Todo Location
+`docs/todo/MASTER_TODO.md` (Last updated: 2025-12-07)
+
+### Completed P0 Items
+- [x] TypeScript strict mode enabled
+- [x] Rate limiting (120 req/min default, 20 req/min auth)
+- [x] Database indexes added
+- [x] Unit tests (100% coverage)
+- [x] Error handling (GlobalExceptionFilter)
+- [x] Health check endpoint (/health)
+- [x] Pagination (/v1/rounds)
+
+### Completed P1 Items
+- [x] Input sanitization (@Sanitize() decorator)
+- [x] Soft delete cleanup (CleanupService)
+- [x] Audit log query endpoint
+- [x] CI/CD pipeline (GitHub Actions)
+- [x] Automated backups (PostgreSQL daily at 2am UTC)
+- [x] Error monitoring (Sentry)
+
+---
+
+## 🎨 Brand & Design
+
+**Theme:** Miami Vice (Neon 80s aesthetic)
+
+| Mode | Primary | Secondary | Accent |
+|------|---------|-----------|--------|
+| **Light** | Orange (#ff7033) | Yellow (#ffbf00) | Coral (#ff6b6b) |
+| **Dark** | Hot Pink (#ff0080) | Cyan (#00f0ff) | Purple (#9b59ff) |
+
+**Tagline:** "Lazy golf for lazy golfers!" + "Cart Golf Only!"
+**Voice:** Friendly, inclusive, self-aware. Celebrate small wins and funny losses.
+**Source of Truth:** `lzg.home/src/lib/theme.ts`
+
+---
+
+## 🚀 Deployment
+
+### Frontend
+- Build: `npm run build` (static export to `/out`)
+- Hosting: Cloudflare Pages (auto-deploys on main push)
+- URL: https://lazygolfing.com
+
+### Backend
+- Build: `npm run build` (TypeScript → JavaScript)
+- Runtime: PM2 on Ubuntu VM (192.168.1.40)
+- Service: `lg-api`
+- URL: https://api.lazygolfing.com
+- Critical: Must run `npm run build` BEFORE `pm2 restart`
+
+### Database
+- PostgreSQL on VM (Docker)
+- Backups: Daily at 2:00 AM UTC
+- Retention: 30 days auto-cleanup
+
+---
+
+## 📚 Documentation Structure
+
+| Document | Path | Purpose |
+|----------|------|---------|
+| Product Roadmap | `docs/plans/PRODUCT_ROADMAP.md` | Vision, timeline |
+| Feature Roadmap | `docs/plans/FEATURE_ROADMAP.md` | Feature list |
+| Master Todo | `docs/todo/MASTER_TODO.md` | Task tracking |
+| Technical Debt | `docs/technical-debt/DEBT_REGISTER.md` | Code quality |
+| API Reference | `docs/architecture/API_REFERENCE.md` | Endpoints |
+| Database Schema | `docs/architecture/DATABASE_SCHEMA.md` | Models |
+| Design System | `docs/design/DESIGN_INSPIRATION.md` | Miami Vice |
+
+---
+
+## 📈 Target Metrics
+
+| Metric | Current | 6mo | 12mo |
+|--------|---------|-----|------|
+| Users | Beta | 500 | 5,000 |
+| Rounds/week | 100 | 1,000 | 10,000 |
+| 30-day retention | 60% | 65% | 70% |
+
+**North Star:** Rounds logged per week (engagement indicator)
+
+---
+
+## 🔗 Links
+
+- [[../.lzg_platform/Lazy Golfing/CLAUDE.md|Root AI Guidelines]]
+- [[../.lzg_platform/Lazy Golfing/lzg.home/CLAUDE.md|Frontend Guidelines]]
+- [[../.lzg_platform/Lazy Golfing/lzg.backend/CLAUDE.md|Backend Guidelines]]
+- [[Decisions/LZG-001 CSV Source of Truth|Architecture Decision: CSV Source of Truth]]
+- [[Business/Ventures/LazyGolf|Business Planning]]
+
+---
+
+*Last updated: 2025-12-14*

@@ -1,0 +1,69 @@
+---
+name: neuman-brain-code-reviewer
+description: Review Neuman Brain code for bugs, security vulnerabilities, performance issues, accessibility gaps, and CLAUDE.md workflow compliance. Enforces TypeScript strict mode, privacy-first principles, GPU-accelerated animations, WCAG AA accessibility, bundle size limits, and surgical simplicity. Use when completing features, before commits, or reviewing pull requests.
+---
+
+# Neuman Brain Code Reviewer
+
+Review code against Neuman Brain development principles, CLAUDE.md workflow, and production quality standards.
+
+## CLAUDE.md Workflow Compliance
+
+**Before ANY Commit:**
+- Task file exists in `tasks/[feature-name].md`
+- Task file has comprehensive review section
+- Tests passing: `npm run test`
+- TypeScript passing: `npm run type-check`
+- No console errors/warnings
+
+## Security Checks
+
+- Sanitize all user input (use textContent, not direct DOM manipulation)
+- Use `unknown` type for external data, validate before using
+- WebCrypto API for encryption (no custom crypto)
+- No dynamic code execution
+
+## Performance Requirements
+
+- Bundle size < 100KB gzipped initial load
+- GPU-accelerated animations only (transform/opacity)
+- Lazy load non-essential code
+- Check: `npm run build`
+
+## Accessibility (WCAG AA)
+
+- Focus indicators on all interactive elements
+- Keyboard navigation (Tab, Enter, Escape, Arrows)
+- Color contrast ≥ 4.5:1 for text
+- ARIA labels on icon-only buttons
+- Focus trapped in modals
+
+## Type Safety
+
+- TypeScript strict mode enabled
+- No `any` types for user input
+- Validate all external data
+
+## Privacy-First
+
+- Use IndexedDB for large data (not localStorage)
+- Local-first by default
+- User controls their data
+- No tracking without opt-in
+
+## Design System
+
+- Use design system colors only
+- Follow 4px base spacing
+- Existing component patterns
+- Dark mode support
+
+## Surgical Simplicity
+
+Changes should impact minimal code relevant to task only.
+
+## See Also
+
+- `CLAUDE.md` - Workflow rules
+- `.claude/skills/neuman-brain-design-system/` - Design system
+- `docs/technical/development_principles.md` - Full requirements

@@ -1,0 +1,1079 @@
+# CLAUDE.md - Developer Guide for Neuman Brain Dashboard
+
+## 🚀 Phase 1: Session Setup
+
+**1. Sync with Main Branch**
+
+Start EVERY session by pulling latest changes:
+```bash
+git fetch origin main && git merge origin/main --no-edit
+```
+This ensures you're never working on stale code.
+
+**2. Validate Current Date**
+
+Check `<env>` section for "Today's date" before adding timestamps to ANY file:
+- Task files (tasks/*.md)
+- Documentation headers
+- Git commit messages
+- Privacy policies
+
+The `<env>` section contains the accurate current date - NEVER guess or assume.
+
+---
+
+## 🧠 Phase 2: Core Philosophy
+
+**3. Perfect Foundation Mindset**
+
+This project is ~1% complete. EVERY decision must build the perfect foundation for the other 99%. This applies to:
+- **Documentation:** Files in optimal locations
+- **Architecture:** Built for infinite scalability
+- **Features:** Seamless integration, right primitives
+- **Execution:** Flawless, not just "it works"
+
+**See "Perfect Foundation Principle" section below for detailed examples.**
+
+**4. Complete Logical Units of Work**
+
+Once you start a task, continue until it reaches a natural stopping point. Do NOT stop mid-implementation or leave broken code.
+
+**Natural stopping points:**
+- ✅ All phases complete
+- ✅ All tests passing
+- ✅ Documentation updated
+- ✅ Clean git state
+
+If approaching token limits, commit completed work and create clear handoff notes. This ensures code is always in a working state and prevents context loss between sessions.
+
+**5. Root Cause Fixes Only**
+
+Find and fix root causes, never apply temporary band-aids.
+- Bug? Trace it to its source.
+- Tech debt? Refactor properly.
+- Quick fix tempting? Resist it.
+
+You're a senior developer - act like one. No shortcuts, no lazy fixes.
+
+---
+
+## 📋 Phase 3: Workflow Process
+
+**6. Create Task Plan**
+
+Before touching code, read the codebase for relevant files and write a comprehensive plan to `tasks/[feature-name].md` using the template at `.claude/templates/task-template.md`.
+
+**Example:**
+```bash
+tasks/add-dark-mode.md  # Good
+tasks/todo.md           # Bad (too generic)
+```
+
+**7. Structure Todos**
+
+The plan must include:
+- **Overview** and problem statement
+- **Files to read/modify**
+- **Checklist** of todo items (with time estimates)
+- **Review section** (to be filled at completion)
+
+Use the template for consistency.
+
+**8. Get User Approval**
+
+Before beginning work, use the `ExitPlanMode` tool to present the plan and wait for user verification.
+
+This prevents wasted effort on wrong approaches.
+
+**9. Execute with Progress Updates**
+
+Work through todo items using the `TodoWrite` tool, marking each complete as you go.
+
+After each significant change, provide a high-level explanation of what changed:
+- ✅ "Updated sidebar width from 280px to 210px"
+- ❌ Not every line change, but each logical step
+
+**10. Apply Surgical Simplicity**
+
+Make every code change as minimal and focused as possible.
+
+**Principles:**
+- ✅ Changes should ONLY impact code directly relevant to the task
+- ✅ Goal: Solve the problem without introducing new bugs
+- ✅ Avoid massive refactors unless explicitly required
+- ❌ No "while I'm here" improvements
+- ❌ No scope creep
+
+**11. Document as You Go**
+
+If your work requires changes to documentation, update those docs immediately:
+- New feature → Update docs/product/feature_map.md
+- Architecture change → Update docs/technical/
+- API change → Update inline code docs
+
+Don't defer documentation - it becomes stale. Keep docs detailed, clear, and current.
+
+---
+
+## ✅ Phase 4: Session Completion
+
+**12. Add Review Section**
+
+When work is complete, add a comprehensive review section to the task file (from Rule #6) summarizing:
+- ✅ What was accomplished
+- ✅ Files modified (with line numbers)
+- ✅ Key decisions made
+- ✅ Testing results
+- ✅ Time estimate vs. actual
+- ⚠️ Any deviations from plan
+- 📌 Remaining work (if any)
+
+**13. Verify Testing**
+
+Before marking work complete:
+- ✅ **New features:** Write unit tests
+- ✅ **Bug fixes:** Add regression tests
+- ✅ **All changes:** Run `npm run test` and `npm run type-check`
+
+See "Testing Strategy" section for patterns. Tests must pass before final commit.
+
+**14. Commit and Push (with Verification)**
+
+At the end of EVERY session, verify compliance then commit:
+
+**Pre-Commit Checklist:**
+- ✅ Task file exists (tasks/*.md)
+- ✅ Review section added (Rule #12)
+- ✅ Tests passing (Rule #13)
+- ✅ Docs updated (Rule #11)
+- ✅ All todos marked complete
+- ✅ No console errors or warnings
+
+**Then commit:**
+```bash
+git add .
+git commit  # Write comprehensive message
+git push origin main
+```
+
+See "Git Workflow" section for commit message format. This is as critical as Rule #1 (syncing at start).
+
+---
+
+## 🚨 Phase 5: Exception Handling
+
+**15. Scope Discipline**
+
+If a task grows beyond the approved plan, pause and get user approval for the expanded scope.
+
+**Example:**
+- Approved: "Fix login bug"
+- Scope creep: "Also refactor entire auth system"
+- ❌ Don't do it without approval
+
+Document scope changes in task file. Better to ship 80% perfectly than 120% poorly.
+
+**16. Graceful Failure**
+
+If blocked (unclear requirements, missing context, breaking changes):
+
+**Recovery steps:**
+1. Document the blocker in task file
+2. Commit work-in-progress to feature branch (NOT main)
+3. Ask user for guidance using `AskUserQuestion` tool
+
+Never guess or make assumptions that could compound later. It's better to pause and ask than to build on shaky ground.
+
+---
+
+## 🏗️ Perfect Foundation Principle
+
+**Context:** This project is approximately **1% complete**. With 99% of the work ahead, every decision we make now sets the foundation for everything that follows.
+
+### The Principle
+
+**"Build the perfect foundation for the other 99%"**
+
+This isn't about perfection for its own sake—it's about making decisions that compound positively over time, not negatively. A poorly placed file today becomes a migration headache tomorrow. A feature architected without scalability in mind becomes technical debt that blocks future features.
+
+### What This Means in Practice
+
+#### 1. Documentation & File Organization
+**Standard:** Files in optimal locations, documentation comprehensive and current
+- ✅ **Good:** Moving `next_steps_checklist.md` to `docs/strategy/` (better categorization)
+- ❌ **Bad:** "It's just a file move, location doesn't matter"
+- **Why:** File hierarchy is the first thing developers see. Poor organization signals low quality and makes onboarding harder.
+
+**Action:** Before creating/moving any file, ask: "Is this the MOST logical location for this file, considering the entire project structure?"
+
+#### 2. Code Architecture
+**Standard:** Built for infinite scalability, seamless integration
+- ✅ **Good:** Building automation engine with trigger → condition → action primitives that ANY feature can use
+- ❌ **Bad:** Hardcoding automation logic into individual components
+- **Why:** The right primitives (building blocks) let you build infinite features. Wrong primitives create technical debt that limits what's possible.
+
+**Action:** Before architecting a feature, ask: "If we 10x the number of features, does this architecture still work? Are we building reusable primitives or one-off solutions?"
+
+#### 3. Feature Design
+**Standard:** Seamless integration, right level of abstraction
+- ✅ **Good:** Zustand stores with clear separation of concerns (kanban, calendar, theme, time tracking)
+- ❌ **Bad:** One giant "appState" store with everything mixed together
+- **Why:** Features should integrate seamlessly. The right abstractions make adding features easier over time, not harder.
+
+**Action:** Before designing a feature, ask: "How does this integrate with existing features? What primitives do we need to make this AND future features seamless?"
+
+#### 4. Overall Mindset
+**Standard:** Execute flawlessly, not just "it works"
+- ✅ **Good:** Finding root cause of bug, fixing properly, documenting decision
+- ❌ **Bad:** Temporary fix that "works for now"
+- **Why:** "Works for now" compounds into technical debt. Flawless execution compounds into a solid foundation.
+
+**Action:** Before completing any task, ask: "Is this the OPTIMAL solution, or just a solution that works?"
+
+### Examples from This Project
+
+**Documentation Reorganization (November 2025):**
+- **Task:** Organize documentation files
+- **"Works" approach:** Just move files to docs/ and call it done
+- **Perfect Foundation approach:**
+  1. Comprehensive review of ALL documentation (not just quick scan)
+  2. Detailed inventory with content analysis (68 files analyzed)
+  3. Extract valuable content from old docs before archiving
+  4. Create comprehensive .archive/README.md explaining archive structure
+  5. Update ALL internal references (no broken links)
+  6. Add Rule #12 to ensure this mindset persists
+- **Result:** Perfect documentation foundation that won't need reorganization again
+
+**IndexedDB Migration (Sprint 1):**
+- **Task:** Migrate from localStorage to IndexedDB
+- **"Works" approach:** Just swap localStorage calls with IndexedDB
+- **Perfect Foundation approach:**
+  - Built abstraction layer (`src/services/indexedDB.ts`)
+  - Added quota monitoring
+  - Graceful migration (no data loss)
+  - Future-proof for 50GB+ storage needs
+- **Result:** Storage architecture that scales to Notes MVP and beyond
+
+### Why This Matters
+
+**At 1% complete:**
+- One poorly designed feature → Blocks 10 future features
+- One file in wrong location → Creates confusion for years
+- One "temporary" fix → Becomes permanent technical debt
+
+**At 100% complete (if foundation is perfect):**
+- Adding features is EASIER because primitives are right
+- Onboarding is FASTER because organization is logical
+- Code quality is HIGHER because patterns are established
+
+### How to Apply This
+
+**Before starting ANY task:**
+1. **Pause and think:** What's the OPTIMAL solution, not just A solution?
+2. **Consider the 99%:** How does this decision affect future work?
+3. **Build primitives:** Are we building reusable building blocks or one-off solutions?
+4. **Execute flawlessly:** Are we fixing root causes or applying band-aids?
+
+**Questions to ask:**
+- "Is this file in the MOST logical location?"
+- "Does this architecture work if we 10x the features?"
+- "Are we building the right primitives?"
+- "Is this the OPTIMAL solution, or just 'good enough'?"
+- "Will future-me thank me for this decision?"
+
+### Balance: Perfect Foundation ≠ Paralysis
+
+**This principle is NOT:**
+- ❌ Over-engineering
+- ❌ Analysis paralysis
+- ❌ Gold-plating
+- ❌ Perfectionism for its own sake
+
+**This principle IS:**
+- ✅ Thoughtful decisions that compound positively
+- ✅ Right abstractions for long-term scalability
+- ✅ Flawless execution on critical foundation work
+- ✅ "Measure twice, cut once" for architectural decisions
+
+**Rule of thumb:** If it's foundational (architecture, primitives, organization), invest time to get it right. If it's superficial (UI tweaks, copy), iterate quickly.
+
+---
+
+## 🤖 Automation & Compliance Tools
+
+**Purpose:** Enforce rules #1-12 automatically to ensure consistent workflow compliance.
+
+### Git Pre-Commit Hook ✅ ACTIVE
+
+**Location:** `.git/hooks/pre-commit`
+**Enforces:** Rules #1, #2, #7
+
+The pre-commit hook **automatically blocks commits** when:
+- Code files (src/) are changed
+- BUT no task file (tasks/*.md) is staged
+
+**This prevents:**
+- ❌ Forgetting to create task file (Rule #1)
+- ❌ Forgetting to update todos (Rule #2)
+- ❌ Forgetting to add review section (Rule #7)
+
+**Example:**
+```bash
+# This will be BLOCKED:
+git add src/components/Modal.tsx
+git commit -m "feat: Add modal"
+# ❌ ERROR: Missing task file
+
+# This will succeed:
+git add src/components/Modal.tsx
+git add tasks/add-modal-system.md
+git commit -m "feat: Add modal system"
+# ✅ SUCCESS: Task file included
+```
+
+**Emergency bypass** (use sparingly):
+```bash
+git commit --no-verify  # Only for hotfixes, doc-only changes, emergencies
+```
+
+### Workflow Checklist
+
+**Location:** `.claude/workflow-checklist.md`
+**Enforces:** All rules #1-12
+
+Step-by-step checklist to reference:
+- Before starting ANY task
+- During implementation
+- Before marking work complete
+- Before creating git commits
+
+**View checklist:**
+```bash
+cat .claude/workflow-checklist.md
+```
+
+### Task Template
+
+**Location:** `.claude/templates/task-template.md`
+**Enforces:** Rules #1, #2, #7
+
+Standardized template for all task files includes:
+- Overview and problem statement
+- Files to read/modify
+- Todo checklist with time estimates
+- **Review section** (to be filled when complete)
+
+**Create new task:**
+```bash
+cp .claude/templates/task-template.md tasks/[feature-name].md
+```
+
+### Custom Commands
+
+**Location:** `.claude/commands/`
+
+- `/start-task` - Comprehensive reminder of CLAUDE.md workflow before starting any task
+
+### Complete Automation Guide
+
+**See:** `.claude/automation-guide.md` for:
+- Detailed setup instructions
+- How each tool works
+- Troubleshooting guide
+- Customization options
+- Best practices
+
+**Quick reference:**
+```bash
+cat .claude/automation-guide.md
+```
+
+### Why Automation?
+
+**Before automation:**
+- ❌ Frequently forgot to create task files
+- ❌ Updated code without updating documentation
+- ❌ Inconsistent task file format
+- ❌ Manual reminders needed every session
+
+**After automation:**
+- ✅ Git hook **blocks** commits without task files
+- ✅ Template ensures **consistent** task documentation
+- ✅ Checklist provides **step-by-step** guidance
+- ✅ Compliance is **automatic**, not manual
+
+**Result:** It's now harder to forget than to remember.
+
+---
+
+## 🔒 Core Development Principles (MANDATORY)
+
+**Privacy, Security, Beautiful UX & Performance First** - These are non-negotiable requirements for ALL code:
+
+1. **Privacy First** - Local-first by default, user controls their data, E2EE for backups (Q2 2026)
+2. **Security First** - Sanitize inputs, use WebCrypto API, never eval() or custom crypto
+3. **Beautiful UX First** - < 1s load, < 100ms interactions, WCAG AA accessibility, 60fps animations
+4. **Performance & Compression First** - Maximize compression without harming features, keep bundle < 100KB gzipped, optimize all exports
+
+**Performance Requirements:**
+- Bundle size: < 100KB gzipped (10x smaller than Notion's 1.2MB!)
+- Lazy load non-essential pages (Settings, Planning, Tasks)
+- Lazy load heavy widgets (Calendar, Kanban, WeatherMap)
+- Pre-process JSON before compression (sort keys, remove empty values)
+- Tree-shake dependencies (use named imports)
+- .brain export compression: ~70% size reduction via gzip
+
+**See:** [Development Principles](docs/technical/development_principles.md) - Complete privacy/security/UX requirements
+
+---
+
+## Quick Reference
+
+### Tech Stack
+
+```typescript
+// Frontend
+React 19.0
+TypeScript 5.9
+Vite 7 (build tool, HMR)
+Zustand 5 (state management - 1KB vs Redux)
+Tailwind CSS 3 (utility-first styling)
+
+// Storage & Sync
+IndexedDB (50GB+ capacity via src/services/indexedDB.ts)
+LocalStorage (legacy - migrated to IndexedDB)
+
+// APIs (All FREE)
+Open-Meteo (weather)
+Nominatim (geocoding)
+
+// Testing
+Vitest (unit tests)
+React Testing Library
+```
+
+### Project Structure
+
+```
+system.knowledgebase/
+├── CLAUDE.md                    # This file - quick dev guide
+├── README.md                    # User-facing documentation
+├── package.json                 # Dependencies
+├── vite.config.ts              # Build configuration
+├── tsconfig.json               # TypeScript config
+│
+├── src/
+│   ├── main.tsx                # App entry point
+│   ├── App.tsx                 # Root component with routing
+│   ├── components/             # Reusable React components
+│   │   ├── Layout.tsx          # Main app layout
+│   │   ├── Header.tsx          # Top navigation
+│   │   ├── Widget.tsx          # Widget wrapper component
+│   │   ├── Modal.tsx           # Modal dialogs
+│   │   ├── AITerminal.tsx      # AI chat interface (8 providers)
+│   │   ├── ModelSelector.tsx   # AI model picker with filtering
+│   │   ├── ProviderSettings.tsx # AI provider settings UI
+│   │   └── UsageTracker.tsx    # AI usage tracking
+│   ├── pages/                  # Route pages
+│   │   ├── Dashboard.tsx       # Main dashboard view
+│   │   ├── Notes.tsx           # Notes page (Lexical editor)
+│   │   ├── Tasks.tsx           # Tasks page
+│   │   ├── Planning.tsx        # Planning page
+│   │   └── Settings.tsx        # Settings page
+│   ├── widgets/                # Widget components (40+ widgets)
+│   │   ├── Kanban.tsx         # Kanban board
+│   │   ├── Calendar.tsx       # Calendar widget
+│   │   ├── NotesEditor.tsx    # Rich text editor (Lexical)
+│   │   ├── Weather.tsx        # Weather widget
+│   │   ├── Map.tsx            # Map widget
+│   │   ├── WeatherMap.tsx     # Combined weather + map
+│   │   └── [30+ more widgets] # Productivity, Info, Utility widgets
+│   ├── stores/                 # Zustand state stores
+│   │   ├── useKanbanStore.ts  # Kanban state
+│   │   ├── useCalendarStore.ts # Calendar state
+│   │   ├── useNotesStore.ts   # Notes state (new)
+│   │   ├── useTerminalStore.ts # AI Terminal state (new)
+│   │   ├── useThemeStore.ts   # Theme/UI state
+│   │   └── useTimeTrackingStore.ts # Time tracking
+│   ├── services/               # Business logic & APIs
+│   │   ├── indexedDB.ts       # IndexedDB service (50GB+)
+│   │   ├── brainBackup.ts     # .brain file export/import
+│   │   ├── autoSave.ts        # Local auto-save
+│   │   ├── storageMigration.ts # localStorage → IndexedDB migration
+│   │   ├── noteSearch.ts      # Full-text note search (new)
+│   │   ├── noteExport.ts      # Export notes to Markdown (new)
+│   │   └── ai/                # AI provider integrations (new)
+│   │       ├── types.ts       # Type system for all providers
+│   │       ├── providerRouter.ts # Auto-fallback system
+│   │       ├── openRouterProvider.ts # 200+ models, free tier
+│   │       ├── groqProvider.ts # Fast inference
+│   │       ├── huggingFaceProvider.ts # Open-source models
+│   │       ├── mistralProvider.ts # European AI, GDPR
+│   │       ├── geminiProvider.ts # 1M token context
+│   │       ├── openaiProvider.ts # GPT-4o, o1
+│   │       ├── anthropicProvider.ts # Claude 3.5 Sonnet
+│   │       └── xaiProvider.ts # Grok
+│   ├── types/                  # TypeScript type definitions
+│   │   └── index.ts           # Shared types (Task, Event, etc.)
+│   ├── hooks/                  # Custom React hooks
+│   └── lib/                    # Utilities
+│
+├── docs/                       # 📚 24 comprehensive documentation files
+│   ├── technical/
+│   │   ├── development_principles.md  # ⭐ MUST READ - Privacy/Security/UX
+│   │   ├── implementation_plan.md     # Q1 2026 sprint breakdown
+│   │   ├── automation_system.md       # Automation engine spec (Nov 2025)
+│   │   ├── import_export_spec.md      # Data portability spec (Nov 2025)
+│   │   ├── brain_file_format.md       # .brain file specification
+│   │   └── local_first_architecture.md # FSA API proposal
+│   ├── product/
+│   │   ├── product_vision.md          # Strategic vision
+│   │   ├── feature_roadmap.md         # Q1 2026 - 2027 plan
+│   │   └── feature_map.md             # Complete 177-feature taxonomy
+│   ├── strategy/
+│   │   ├── competitive_landscape.md   # 50+ competitor analysis (enhanced)
+│   │   ├── next_steps_checklist.md    # Action items checklist (moved Nov 2025)
+│   │   ├── risk_assessment.md         # Critical risks
+│   │   ├── marketing_claims_vs_reality.md # Truth in advertising
+│   │   └── user_expectations_gaps.md  # User expectations analysis
+│   ├── security_privacy/
+│   │   ├── privacy_model.md           # Zero-data-host architecture
+│   │   └── compliance.md              # GDPR/CCPA guide
+│   ├── business/
+│   │   ├── business_model.md          # Monetization strategy
+│   │   ├── go_to_market.md            # Growth strategy
+│   │   ├── cost_structure.md          # Cost analysis
+│   │   └── metrics_feedback.md        # Success metrics
+│   ├── brand/
+│   │   ├── brand_guide.md             # Brand identity
+│   │   └── messaging.md               # Positioning & messaging
+│   └── overview/
+│       └── system_overview.md         # Architecture overview
+│
+├── .archive/                   # 🗄️ Historical reference (see .archive/README.md)
+│   ├── chatgpt-brainstorming/  # ChatGPT RFC specs (extracted to docs/technical/)
+│   ├── claude-exploration/     # Alternative PKM vision (Q3-Q4 2026 reference)
+│   ├── superseded-docs/        # Old official docs (competitive analysis extracted)
+│   └── examples/               # Test data and reference materials
+│
+└── tasks/                      # Task tracking
+    └── todo.md                 # Current task plan (per Rule #1)
+```
+
+### Common Commands
+
+```bash
+# Development
+npm run dev              # Start dev server (http://localhost:5173)
+npm run build            # Production build
+npm run preview          # Preview production build
+
+# Testing
+npm run test             # Run all tests (Vitest)
+npm run test:watch       # Run tests in watch mode
+npm run test:ui          # Open Vitest UI
+
+# Code Quality
+npm run lint             # ESLint check
+npm run lint:fix         # ESLint auto-fix
+npm run format           # Prettier format
+npm run type-check       # TypeScript check
+
+# Deployment
+npm run build && npm run preview  # Build and test locally before deploy
+```
+
+---
+
+## Code Style & Conventions
+
+### TypeScript
+
+```typescript
+// ✅ ALWAYS use TypeScript strict mode (tsconfig.json)
+// ✅ NO 'any' types for user input (security risk)
+// ✅ Define interfaces for all data structures
+
+// Example: Define types
+interface Task {
+  id: string;
+  title: string;
+  description?: string;
+  status: 'todo' | 'in-progress' | 'done';
+  createdAt: Date;
+}
+
+// Example: Type components props
+interface KanbanProps {
+  initialTasks?: Task[];
+  onTaskUpdate?: (task: Task) => void;
+}
+
+export function Kanban({ initialTasks = [], onTaskUpdate }: KanbanProps) {
+  // Component implementation
+}
+```
+
+### React Patterns
+
+```typescript
+// ✅ Use functional components (no class components)
+// ✅ Use hooks (useState, useEffect, custom hooks)
+// ✅ Zustand for global state (not Redux - 10x simpler)
+
+// Example: Using Zustand store
+import { useKanbanStore } from '@/stores/useKanbanStore';
+
+export function TaskList() {
+  const tasks = useKanbanStore((state) => state.tasks);
+  const addTask = useKanbanStore((state) => state.addTask);
+
+  return (
+    <div>
+      {tasks.map(task => <TaskCard key={task.id} task={task} />)}
+      <button onClick={() => addTask({ title: 'New Task' })}>
+        Add Task
+      </button>
+    </div>
+  );
+}
+```
+
+### Security (MANDATORY)
+
+```typescript
+// ❌ NEVER use innerHTML with user content (XSS risk)
+element.innerHTML = userInput; // DANGEROUS!
+
+// ✅ ALWAYS sanitize user input
+element.textContent = userInput; // Safe
+
+// ✅ Use React (auto-escapes by default)
+<div>{userInput}</div> // Safe in React
+
+// ✅ For rich content, use DOMPurify
+import DOMPurify from 'dompurify';
+const clean = DOMPurify.sanitize(userInput);
+```
+
+### Color System & Styling
+
+**IMPORTANT:** Always use semantic color tokens, never hardcoded colors.
+
+**See:** [Color System Documentation](docs/technical/color_system.md) - Complete guide
+
+```typescript
+// ✅ Use semantic color tokens (auto dark mode support)
+<div className="bg-surface-light dark:bg-surface-dark">
+  <h1 className="text-text-light-primary dark:text-text-dark-primary">Title</h1>
+  <p className="text-text-light-secondary dark:text-text-dark-secondary">Description</p>
+</div>
+
+// ✅ Use accent colors for interactive elements
+<button className="bg-accent-blue hover:bg-accent-blue-hover text-white rounded-lg px-4 py-2">
+  Primary Action
+</button>
+
+// ❌ NEVER use hardcoded colors or old Tailwind classes
+<div className="bg-slate-800">Bad</div>           // Old color
+<div className="bg-white dark:bg-[#121212]">Bad</div>  // Hardcoded
+
+// ✅ Color tokens available:
+// - surface-light, surface-light-elevated, surface-dark, surface-dark-elevated
+// - text-light-primary, text-light-secondary, text-dark-primary, text-dark-secondary
+// - border-light, border-dark
+// - accent-blue, accent-magenta, accent-cyan (with -hover variants)
+```
+
+**Design Philosophy:**
+- **Pure Black & White** - Dark mode uses #000000 / #FFFFFF (no blue-ish tints)
+- **No Colored Backgrounds** - Only blacks, grays, whites for surfaces
+- **Strategic Accents** - Color only for buttons, links, highlights
+- **Professional Minimalism** - Clean, high contrast, accessible
+
+---
+
+## Testing Strategy
+
+### Unit Tests (Vitest + React Testing Library)
+
+```typescript
+// ✅ Test files: *.test.tsx or *.test.ts
+// ✅ Location: src/components/__tests__/
+
+// Example: Component test
+import { render, screen } from '@testing-library/react';
+import { Widget } from '../Widget';
+
+describe('Widget', () => {
+  it('renders widget title', () => {
+    render(<Widget title="My Widget" />);
+    expect(screen.getByText('My Widget')).toBeInTheDocument();
+  });
+
+  it('handles user interactions', async () => {
+    const onClose = vi.fn();
+    render(<Widget title="Test" onClose={onClose} />);
+
+    await userEvent.click(screen.getByLabelText('Close'));
+    expect(onClose).toHaveBeenCalled();
+  });
+});
+```
+
+### Testing Checklist (Before Every PR)
+
+- [ ] All new components have tests
+- [ ] All tests pass (`npm run test`)
+- [ ] No TypeScript errors (`npm run type-check`)
+- [ ] ESLint passes (`npm run lint`)
+- [ ] Bundle size < 100KB gzipped (`npm run build` - check dist/)
+- [ ] Lazy loading works (test page navigation)
+- [ ] Accessibility tested (keyboard nav, screen reader)
+- [ ] Mobile responsive (test at 375px, 768px, 1024px)
+
+---
+
+## Critical Files & Patterns
+
+### State Management (Zustand)
+
+**File:** `src/stores/useKanbanStore.ts`
+
+```typescript
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
+
+interface KanbanState {
+  tasks: Task[];
+  addTask: (task: Task) => void;
+  updateTask: (id: string, updates: Partial<Task>) => void;
+  deleteTask: (id: string) => void;
+}
+
+export const useKanbanStore = create<KanbanState>()(
+  persist(
+    (set) => ({
+      tasks: [],
+      addTask: (task) => set((state) => ({
+        tasks: [...state.tasks, task]
+      })),
+      updateTask: (id, updates) => set((state) => ({
+        tasks: state.tasks.map(t => t.id === id ? { ...t, ...updates } : t)
+      })),
+      deleteTask: (id) => set((state) => ({
+        tasks: state.tasks.filter(t => t.id !== id)
+      })),
+    }),
+    { name: 'kanban' } // localStorage key
+  )
+);
+```
+
+### Data Persistence (IndexedDB)
+
+**File:** `src/services/indexedDB.ts`
+
+```typescript
+// ✅ Use for large data (notes with images)
+// ✅ 50GB+ capacity (vs localStorage 5-10MB)
+// ✅ Async API (doesn't block UI)
+
+import { indexedDBService } from '@/services/indexedDB';
+
+// Save data
+await indexedDBService.setItem('my-key', JSON.stringify(data));
+
+// Load data
+const json = await indexedDBService.getItem('my-key');
+const data = JSON.parse(json);
+
+// Check quota
+const quota = await indexedDBService.getQuota();
+if (quota.percentUsed > 80) {
+  console.warn('Storage almost full!');
+}
+```
+
+### Export/Import (.brain files)
+
+**File:** `src/services/brainBackup.ts`
+
+```typescript
+import { exportBrainFile, importBrainFile } from '@/services/brainBackup';
+
+// Export all data
+const result = await exportBrainFile({ compressed: true });
+console.log(`Exported: ${result.filename}, ${result.size} bytes`);
+
+// Import data
+const file = /* File object from input */;
+const result = await importBrainFile(file);
+if (result.success) {
+  console.log(`Imported ${result.itemsImported} items`);
+}
+```
+
+**See:** [.BRAIN File Format](docs/technical/brain_file_format.md) - Complete specification
+
+---
+
+## Current Status (January 2026)
+
+### Completed Sprints (Nov 2025 - Jan 2026) ✅
+
+**Sprint 1: IndexedDB Migration** ✅ COMPLETE (8 hours)
+- Migrated all stores from localStorage to IndexedDB
+- Added quota monitoring, migration UI
+- **Result:** 50GB+ storage capacity
+
+**Sprint 2: Remove Firebase/Google Drive** ✅ COMPLETE (12 hours)
+- Deleted 2,148+ lines of cloud code
+- Privacy fix - zero Google tracking
+- **Result:** 365KB bundle reduction (50% smaller!)
+
+**Sprint 3: File System Access API** ⏸️ DEFERRED to Q2 2026
+- Deprioritized in favor of Sprint 5+6
+- Will revisit alongside E2EE implementation
+
+**Sprint 4: Notes MVP** ✅ COMPLETE (60-82 hours)
+- Lexical editor with 55% Obsidian parity
+- Tables, slash commands, markdown shortcuts
+- Nested folders, search UI (Cmd+K), auto-save
+- **Result:** 108KB notes chunk (lazy loaded)
+
+**Sprint 5: AI Terminal** ✅ SHIPPED (24 hours)
+- 8 AI providers: OpenRouter, Groq, HuggingFace, Mistral, Gemini, OpenAI, Anthropic, xAI
+- AES-256-CBC encrypted API key storage
+- Automatic fallback system, usage tracking
+- **Result:** 45KB AI chunk (lazy loaded)
+
+**Sprint 6: Dashboard Widgets** ✅ SHIPPED (32 hours)
+- 40+ widgets across 4 categories
+- Productivity, Information, Utility, Media widgets
+- **Result:** 70% Notion Dashboard parity (vs 10% before)
+
+### Current Priorities (Q1 2026)
+
+**20-Week Comprehensive Improvement Plan** (Week 8-10 of 20)
+- Phase 1-3: ✅ COMPLETE (Notes, Calendar, Dashboard improvements)
+- Phase 4: Kanban to PM Powerhouse (Week 10-12) - 🚀 NEXT
+- Phase 5-8: Dashboard, Settings, Integration, Polish
+
+**See:** [Implementation Plan](docs/technical/implementation_plan.md) - All 6 sprint details
+**See:** [Feature Roadmap](docs/product/feature_roadmap.md) - Updated Q1-Q4 2026 plan
+
+---
+
+## Feature Gating (Free vs Pro vs Enterprise)
+
+### 🟢 FREE Forever
+- Core productivity (notes, tasks, calendar, time tracking, habits)
+- **ALL privacy features** (E2EE, local-first, zero telemetry)
+- Beautiful UX (no ads, no nags)
+- Unlimited storage (IndexedDB)
+
+### 🔵 PRO ($7-9/month)
+- Graph view, advanced search
+- Real-time collaboration (2-5 users)
+- Integrations (Google Calendar, Zapier, API)
+- Billable hours, invoice generation
+- Priority support
+
+### 🟣 ENTERPRISE ($49-99/user/month)
+- Unlimited team members
+- SSO, audit logs, compliance (SOC 2, HIPAA)
+- Self-hosted option
+- Custom roles, dedicated support
+
+**See:** [Business Model](docs/business/business_model.md) - Complete monetization strategy
+
+---
+
+## Debugging
+
+### Common Issues
+
+**1. Component not rendering:**
+```bash
+# Check for TypeScript errors
+npm run type-check
+
+# Check browser console for errors
+# Look for: import errors, undefined variables, null references
+```
+
+**2. State not persisting:**
+```typescript
+// Check if Zustand persist middleware is configured
+// Check localStorage/IndexedDB in DevTools
+localStorage.getItem('kanban'); // Should have data
+```
+
+**3. Build errors:**
+```bash
+# Clear node_modules and reinstall
+rm -rf node_modules package-lock.json
+npm install
+
+# Clear Vite cache
+rm -rf node_modules/.vite
+npm run dev
+```
+
+**4. Bundle size too large:**
+```bash
+# Check bundle size
+npm run build
+# Should be < 200KB gzipped
+
+# Analyze bundle
+npx vite-bundle-visualizer
+```
+
+### Browser DevTools
+
+```javascript
+// Access Zustand stores in console
+window.__ZUSTAND__ // If devtools enabled
+
+// Check IndexedDB
+// DevTools → Application → IndexedDB → neumanBrainDB
+
+// Check localStorage (legacy)
+localStorage.getItem('kanban')
+localStorage.clear() // Reset everything
+```
+
+---
+
+## Documentation Reference
+
+**For detailed information, see these comprehensive docs:**
+
+### Technical
+- [Development Principles](docs/technical/development_principles.md) ⭐ **MUST READ**
+- [Implementation Plan](docs/technical/implementation_plan.md) - Sprint-by-sprint guide
+- [.BRAIN File Format](docs/technical/brain_file_format.md) - Backup file spec
+- [Local-First Architecture](docs/technical/local_first_architecture.md) - FSA API proposal
+
+### Product & Strategy
+- [Product Vision](docs/product/product_vision.md) - Strategic direction
+- [Feature Roadmap](docs/product/feature_roadmap.md) - Q1 2026 - 2027
+- [Feature Map](docs/product/feature_map.md) - Complete 177-feature taxonomy
+- [System Overview](docs/overview/system_overview.md) - Architecture overview
+
+### Security & Privacy
+- [Privacy Model](docs/security_privacy/privacy_model.md) - Zero-data-host architecture
+- [Compliance](docs/security_privacy/compliance.md) - GDPR/CCPA guide
+
+### Business
+- [Business Model](docs/business/business_model.md) - Monetization strategy
+- [Go-to-Market](docs/business/go_to_market.md) - Growth strategy
+- [Competitive Landscape](docs/strategy/competitive_landscape.md) - 50+ competitor analysis
+
+**All 21 docs:** See `docs/` directory
+
+---
+
+## Git Workflow
+
+```bash
+# Create feature branch (must start with 'claude/' and end with session ID)
+git checkout -b claude/my-feature-011CV5Gsg45V3QG1GMQHAFFy
+
+# Make changes, commit frequently
+git add .
+git commit -m "feat: Add new component
+
+- Implemented X
+- Updated Y
+- Tested Z"
+
+# Push to remote (use -u for first push)
+git push -u origin claude/my-feature-011CV5Gsg45V3QG1GMQHAFFy
+
+# Create PR when ready
+# Use GitHub UI to create pull request
+```
+
+**Commit Message Format:**
+```
+type: Short description (50 chars max)
+
+- Bullet point details
+- What changed and why
+- Related issues (#123)
+
+Types: feat, fix, docs, style, refactor, test, chore
+```
+
+---
+
+## Resources & Links
+
+**Official Docs:**
+- React 19: https://react.dev
+- TypeScript: https://www.typescriptlang.org/docs
+- Vite: https://vitejs.dev
+- Zustand: https://docs.pmnd.rs/zustand
+- Tailwind CSS: https://tailwindcss.com/docs
+
+**APIs (All FREE):**
+- Open-Meteo: https://open-meteo.com/en/docs
+- Nominatim: https://nominatim.org/release-docs/latest/api/Overview/
+
+**Testing:**
+- Vitest: https://vitest.dev
+- React Testing Library: https://testing-library.com/react
+
+---
+
+## Quick Tips
+
+**Performance:**
+- Use `React.lazy()` for code splitting (Settings, Planning, Tasks, Widgets)
+- Lazy load heavy components (Calendar, Kanban, WeatherMap)
+- Memoize expensive calculations with `useMemo()`
+- Debounce user input (search, auto-save)
+- Keep bundle size < 100KB gzipped (10x smaller than Notion!)
+- Use named imports for tree shaking: `import { fn } from 'lib'`
+- Pre-process JSON before compression (sort keys, remove empty values)
+- Check bundle size: `npm run build` (should be < 100KB)
+
+**Security:**
+- NEVER use `innerHTML` with user content
+- ALWAYS sanitize user inputs
+- Use WebCrypto API for encryption (Q2 2026)
+- No custom crypto implementations
+
+**Accessibility:**
+- Test with keyboard only (Tab, Enter, Escape)
+- Use semantic HTML (`<button>`, not `<div onclick>`)
+- Add ARIA labels for screen readers
+- Maintain focus management in modals
+
+**Privacy:**
+- Local-first by default
+- User controls their data
+- No tracking without explicit opt-in
+- E2EE for all backups (Q2 2026)
+
+---
+
+**Last Updated:** January 16, 2026
+**Codebase:** React 19 + TypeScript 5.9
+**Bundle Size:** 101KB main + 108KB notes + 45KB AI + 35KB widgets (lazy loaded)
+**License:** MIT
+
+**Recent Launches:**
+- ✅ AI Terminal (8 providers, encrypted, auto-fallback)
+- ✅ Notes MVP (55% Obsidian, 50% Notion parity)
+- ✅ Dashboard Widgets (40+ widgets, 70% Notion parity)
+- ✅ Calendar Phase 3 (65% Google Calendar parity)
+
+Be extremely direct and not afraid of offending me. You can tell me when I'm wrong. Tell me when there are better ways to do things. Think like a first principles thinker who uses logic and logic only. Disregard feelings. Our goal is to build revolutionary products that solve challenges and change people's lives. Affirming my feelings and caring about telling me I'm great doesn't matter nearly as much as finding the best solution humanly possible. Directness and honesty are the most important so we can build the greatest solutions ever.
+
+**For questions:** See comprehensive docs in `docs/` directory
+**For bugs:** Create GitHub issue with reproduction steps
+**For features:** Check [Feature Roadmap](docs/product/feature_roadmap.md) (updated Jan 16, 2026)

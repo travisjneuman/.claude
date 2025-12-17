@@ -1,0 +1,1009 @@
+# Backup & Sync Guide
+
+**Last Updated:** November 16, 2025
+**Version:** 1.0
+
+---
+
+## Table of Contents
+
+1. [Why Backup?](#why-backup)
+2. [How Auto-Save Works](#how-auto-save-works)
+3. [Setting Up Your Backup Folder](#setting-up-your-backup-folder)
+4. [Cloud Provider Instructions](#cloud-provider-instructions)
+   - [iCloud Drive (macOS)](#icloud-drive-macos)
+   - [iCloud Drive (Windows)](#icloud-drive-windows)
+   - [Google Drive (macOS)](#google-drive-macos)
+   - [Google Drive (Windows)](#google-drive-windows)
+   - [OneDrive (macOS)](#onedrive-macos)
+   - [OneDrive (Windows)](#onedrive-windows)
+   - [Proton Drive (macOS)](#proton-drive-macos)
+   - [Proton Drive (Windows)](#proton-drive-windows)
+   - [Dropbox (macOS)](#dropbox-macos)
+   - [Dropbox (Windows)](#dropbox-windows)
+5. [Syncing Across Devices](#syncing-across-devices)
+6. [Restoring from Backup](#restoring-from-backup)
+7. [Troubleshooting](#troubleshooting)
+8. [FAQ](#faq)
+
+---
+
+## Why Backup?
+
+### Your Data is Stored Locally
+
+Neuman Brain stores all your data **locally in your browser** using IndexedDB. This ensures:
+
+✅ **100% Privacy** - Your data never leaves your device
+✅ **Zero Tracking** - No servers, no analytics, no third parties
+✅ **Full Control** - You own your data completely
+
+However, local storage also means:
+
+⚠️ **Data can be lost if:**
+- Your browser cache is cleared
+- Your computer crashes or is lost/stolen
+- You switch to a different browser or device
+- Browser storage becomes corrupted
+
+### Auto-Save Protects You
+
+Auto-save automatically backs up your data to a **cloud-synced folder** on your computer:
+
+✅ **Automatic backups** every 30 seconds
+✅ **Sync across all your devices** via your cloud provider
+✅ **Still 100% private** (you control the folder, not us)
+✅ **Easy restore** if anything goes wrong
+
+**Important:** Neuman Brain **never has access** to your backup files. They're stored in **your** cloud folder that **you** control.
+
+---
+
+## How Auto-Save Works
+
+### The Technical Details
+
+1. **You choose a folder** on your computer using the native folder picker
+2. **Neuman Brain saves backups** to that folder every 30 seconds (configurable)
+3. **Your cloud provider syncs** the folder to the cloud (iCloud, Google Drive, etc.)
+4. **The cloud provider syncs** the folder to your other devices
+5. **You can restore** from any backup file on any device
+
+### What Gets Backed Up?
+
+**Everything:**
+- Notes (all content, formatting, images)
+- Tasks (Kanban boards, todos, subtasks)
+- Calendar events (all events, recurring events)
+- Time tracking data
+- Habits tracking
+- All settings and preferences
+
+### Backup File Format
+
+Backups are saved as `.brain` files:
+
+```
+Neuman.Brain-2025-11-16-143022.brain
+```
+
+**Naming format:** `[CustomName]-YYYY-MM-DD-HHmmss.brain`
+
+**File details:**
+- Compressed with gzip (~70% size reduction)
+- JSON format (human-readable when decompressed)
+- Includes metadata (export date, version, item count)
+
+### Versioning
+
+Auto-save keeps **multiple versions** of your backups (default: 7):
+
+```
+.neuman-backups/
+├── Neuman.Brain-2025-11-16-143022.brain  (most recent)
+├── Neuman.Brain-2025-11-16-140511.brain
+├── Neuman.Brain-2025-11-16-133045.brain
+├── Neuman.Brain-2025-11-16-125512.brain
+├── Neuman.Brain-2025-11-16-121834.brain
+├── Neuman.Brain-2025-11-16-114256.brain
+└── Neuman.Brain-2025-11-16-110723.brain
+```
+
+Older backups are automatically deleted when the limit is reached.
+
+---
+
+## Setting Up Your Backup Folder
+
+### Step 1: Choose a Cloud Provider
+
+Pick one of these cloud storage services (or use one you already have):
+
+| Provider | Free Storage | Best For |
+|----------|--------------|----------|
+| **Google Drive** | 15GB | Most storage, works everywhere |
+| **iCloud Drive** | 5GB | Apple users (seamless across Mac/iPhone/iPad) |
+| **OneDrive** | 5GB | Windows users (built-in) |
+| **Proton Drive** | 1GB (encrypted) | Privacy-focused users |
+| **Dropbox** | 2GB | Reliable, widely supported |
+
+**Don't have one?** [See detailed provider comparison](#choosing-a-cloud-provider)
+
+### Step 2: Install the Desktop App
+
+**Critical:** You must install your cloud provider's **desktop app** for automatic syncing.
+
+- **iCloud Drive:** Built into macOS, or download for Windows
+- **Google Drive:** Download from [google.com/drive/download](https://google.com/drive/download)
+- **OneDrive:** Built into Windows 10/11, or download for macOS
+- **Proton Drive:** Download from [proton.me/drive](https://proton.me/drive)
+- **Dropbox:** Download from [dropbox.com/install](https://dropbox.com/install)
+
+### Step 3: Create a Backup Folder
+
+1. Open Finder (macOS) or File Explorer (Windows)
+2. Navigate to your cloud-synced folder
+3. Create a new folder named **"Neuman Brain Backups"** (or any name you prefer)
+
+**Example paths:**
+- **iCloud Drive:** `~/Library/Mobile Documents/com~apple~CloudDocs/Neuman Brain Backups`
+- **Google Drive:** `~/Google Drive/Neuman Brain Backups`
+- **OneDrive:** `~/OneDrive/Neuman Brain Backups`
+- **Proton Drive:** `~/Proton Drive/Neuman Brain Backups`
+- **Dropbox:** `~/Dropbox/Neuman Brain Backups`
+
+### Step 4: Enable Auto-Save in Neuman Brain
+
+1. Open Neuman Brain
+2. Go to **Settings → Backup & Sync**
+3. Click **"Choose Folder"**
+4. Navigate to the folder you created in Step 3
+5. Click **"Select"** (or "Open" on macOS)
+6. Done! Auto-save is now enabled ✅
+
+---
+
+## Cloud Provider Instructions
+
+### iCloud Drive (macOS)
+
+**Requirements:**
+- macOS 10.15 (Catalina) or later
+- Apple ID signed in
+- iCloud Drive enabled
+
+**Setup Steps:**
+
+1. **Enable iCloud Drive:**
+   - Open **System Settings** (or **System Preferences** on older macOS)
+   - Click your **Apple ID** at the top
+   - Click **iCloud**
+   - Enable **iCloud Drive**
+
+2. **Access iCloud Drive:**
+   - Open **Finder**
+   - Look for **iCloud Drive** in the sidebar (under "Favorites")
+   - If you don't see it, click **Finder → Settings → Sidebar** and enable "iCloud Drive"
+
+3. **Create Backup Folder:**
+   - Navigate to **iCloud Drive**
+   - Right-click → **New Folder**
+   - Name it **"Neuman Brain Backups"**
+
+4. **Verify Sync:**
+   - Create a test file in the folder
+   - Check if it appears on iCloud.com within a few minutes
+   - If it does, sync is working ✅
+
+**Common Locations:**
+- **Finder sidebar:** iCloud Drive
+- **Path:** `~/Library/Mobile Documents/com~apple~CloudDocs/`
+
+**Tips:**
+- iCloud Drive syncs automatically when connected to Wi-Fi
+- You can check sync status in **System Settings → Apple ID → iCloud**
+- Files only upload when you have sufficient iCloud storage
+
+---
+
+### iCloud Drive (Windows)
+
+**Requirements:**
+- Windows 10 or later
+- Apple ID
+- iCloud for Windows app
+
+**Setup Steps:**
+
+1. **Install iCloud for Windows:**
+   - Download from [support.apple.com/en-us/HT204283](https://support.apple.com/en-us/HT204283)
+   - Or install from the **Microsoft Store** (search "iCloud")
+   - Run the installer
+
+2. **Sign In:**
+   - Open **iCloud for Windows**
+   - Sign in with your **Apple ID**
+   - Enter verification code if prompted
+
+3. **Enable iCloud Drive:**
+   - In iCloud settings, check **"iCloud Drive"**
+   - Click **"Apply"**
+   - Wait for initial sync to complete
+
+4. **Access iCloud Drive:**
+   - Open **File Explorer**
+   - Look for **iCloud Drive** in the sidebar (under "Quick access")
+   - Or navigate to `C:\Users\[YourUsername]\iCloudDrive\`
+
+5. **Create Backup Folder:**
+   - Navigate to **iCloud Drive**
+   - Right-click → **New → Folder**
+   - Name it **"Neuman Brain Backups"**
+
+**Common Locations:**
+- **File Explorer:** iCloud Drive (sidebar)
+- **Path:** `C:\Users\[YourUsername]\iCloudDrive\`
+
+**Tips:**
+- iCloud for Windows syncs files on-demand (saves disk space)
+- Right-click a file → **"Always keep on this device"** to force download
+- Check sync status in the system tray (cloud icon)
+
+---
+
+### Google Drive (macOS)
+
+**Requirements:**
+- macOS 10.14 (Mojave) or later
+- Google account
+- Google Drive for Desktop app
+
+**Setup Steps:**
+
+1. **Install Google Drive for Desktop:**
+   - Download from [google.com/drive/download](https://google.com/drive/download)
+   - Open the `.dmg` file
+   - Drag **Google Drive** to Applications
+   - Launch **Google Drive**
+
+2. **Sign In:**
+   - Click the **Google Drive** icon in the menu bar
+   - Click **"Sign in"**
+   - Sign in with your **Google account**
+
+3. **Configure Sync:**
+   - In Google Drive settings, choose **"Stream files"** or **"Mirror files"**
+     - **Stream:** Files stored in cloud, downloaded on-demand (saves disk space)
+     - **Mirror:** Full copy on your Mac (recommended for backups)
+   - Click **"Save"**
+
+4. **Access Google Drive:**
+   - Open **Finder**
+   - Look for **Google Drive** in the sidebar (under "Locations")
+   - Or navigate to `~/Google Drive/`
+
+5. **Create Backup Folder:**
+   - Navigate to **Google Drive → My Drive**
+   - Right-click → **New Folder**
+   - Name it **"Neuman Brain Backups"**
+
+**Common Locations:**
+- **Finder sidebar:** Google Drive
+- **Path:** `~/Google Drive/My Drive/`
+
+**Tips:**
+- Google Drive syncs in real-time when online
+- You can access files offline if you enable "Available offline"
+- Check sync status in the menu bar icon
+
+---
+
+### Google Drive (Windows)
+
+**Requirements:**
+- Windows 10 or later
+- Google account
+- Google Drive for Desktop app
+
+**Setup Steps:**
+
+1. **Install Google Drive for Desktop:**
+   - Download from [google.com/drive/download](https://google.com/drive/download)
+   - Run the installer
+   - Follow the installation wizard
+
+2. **Sign In:**
+   - Open **Google Drive** from the Start menu
+   - Or click the **Google Drive** icon in the system tray
+   - Click **"Sign in"**
+   - Sign in with your **Google account**
+
+3. **Configure Sync:**
+   - In Google Drive settings, choose **"Stream files"** or **"Mirror files"**
+     - **Stream:** Files stored in cloud, downloaded on-demand (saves disk space)
+     - **Mirror:** Full copy on your PC (recommended for backups)
+   - Click **"Save"**
+
+4. **Access Google Drive:**
+   - Open **File Explorer**
+   - Look for **Google Drive (G:)** in "This PC"
+   - Or navigate to `G:\My Drive\`
+
+5. **Create Backup Folder:**
+   - Navigate to **Google Drive → My Drive**
+   - Right-click → **New → Folder**
+   - Name it **"Neuman Brain Backups"**
+
+**Common Locations:**
+- **File Explorer:** Google Drive (G:) drive
+- **Path:** `G:\My Drive\`
+
+**Tips:**
+- Google Drive appears as a virtual drive (G:)
+- Files are streamed from the cloud (saved locally only when opened)
+- Right-click → "Available offline" to force download
+
+---
+
+### OneDrive (macOS)
+
+**Requirements:**
+- macOS 10.14 (Mojave) or later
+- Microsoft account
+- OneDrive app
+
+**Setup Steps:**
+
+1. **Install OneDrive:**
+   - Download from the [Mac App Store](https://apps.apple.com/app/onedrive/id823766827)
+   - Or download from [microsoft.com/en-us/microsoft-365/onedrive](https://microsoft.com/en-us/microsoft-365/onedrive)
+   - Install and launch **OneDrive**
+
+2. **Sign In:**
+   - Click **"Sign in"**
+   - Enter your **Microsoft account** email
+   - Enter your password
+
+3. **Configure Sync:**
+   - Choose which folders to sync (select all or specific folders)
+   - Click **"Next"** and **"Done"**
+
+4. **Access OneDrive:**
+   - Open **Finder**
+   - Look for **OneDrive** in the sidebar
+   - Or navigate to `~/OneDrive/`
+
+5. **Create Backup Folder:**
+   - Navigate to **OneDrive**
+   - Right-click → **New Folder**
+   - Name it **"Neuman Brain Backups"**
+
+**Common Locations:**
+- **Finder sidebar:** OneDrive
+- **Path:** `~/OneDrive/`
+
+**Tips:**
+- OneDrive syncs automatically when connected to internet
+- Files are stored locally and in the cloud
+- Check sync status in the menu bar icon
+
+---
+
+### OneDrive (Windows)
+
+**Requirements:**
+- Windows 10 or later (OneDrive is pre-installed)
+- Microsoft account
+
+**Setup Steps:**
+
+1. **OneDrive is Pre-Installed:**
+   - OneDrive comes with Windows 10/11
+   - Look for the **cloud icon** in the system tray (bottom-right)
+
+2. **Sign In (if not already):**
+   - Click the **OneDrive** icon in the system tray
+   - Click **"Sign in"**
+   - Enter your **Microsoft account** email and password
+
+3. **Configure Sync:**
+   - Right-click the **OneDrive** icon → **Settings**
+   - Go to **"Account"** tab → **"Choose folders"**
+   - Select folders to sync
+   - Click **"OK"**
+
+4. **Access OneDrive:**
+   - Open **File Explorer**
+   - Look for **OneDrive** in the sidebar (under "Quick access")
+   - Or navigate to `C:\Users\[YourUsername]\OneDrive\`
+
+5. **Create Backup Folder:**
+   - Navigate to **OneDrive**
+   - Right-click → **New → Folder**
+   - Name it **"Neuman Brain Backups"**
+
+**Common Locations:**
+- **File Explorer:** OneDrive (sidebar)
+- **Path:** `C:\Users\[YourUsername]\OneDrive\`
+
+**Tips:**
+- OneDrive syncs automatically
+- Files with blue cloud icon are online-only (click to download)
+- Files with green checkmark are synced locally
+- Right-click → "Always keep on this device" to force local storage
+
+---
+
+### Proton Drive (macOS)
+
+**Requirements:**
+- macOS 10.15 (Catalina) or later
+- Proton account (free or paid)
+- Proton Drive desktop app
+
+**Setup Steps:**
+
+1. **Create Proton Account (if needed):**
+   - Go to [proton.me](https://proton.me)
+   - Click **"Get Proton for Free"**
+   - Sign up with email and password
+   - Verify your email
+
+2. **Install Proton Drive:**
+   - Download from [proton.me/drive/download](https://proton.me/drive/download)
+   - Open the `.dmg` file
+   - Drag **Proton Drive** to Applications
+   - Launch **Proton Drive**
+
+3. **Sign In:**
+   - Enter your **Proton account** email and password
+   - Complete any 2FA if enabled
+
+4. **Configure Sync:**
+   - Choose sync settings (recommended: sync all folders)
+   - Select local folder location (default: `~/Proton Drive/`)
+   - Click **"Start Sync"**
+
+5. **Access Proton Drive:**
+   - Open **Finder**
+   - Navigate to **Proton Drive** (in sidebar or `~/Proton Drive/`)
+
+6. **Create Backup Folder:**
+   - Navigate to **Proton Drive**
+   - Right-click → **New Folder**
+   - Name it **"Neuman Brain Backups"**
+
+**Common Locations:**
+- **Path:** `~/Proton Drive/`
+
+**Tips:**
+- Proton Drive uses **end-to-end encryption** (extra privacy)
+- Files are encrypted before upload
+- Sync is automatic when online
+- Free plan: 1GB storage, paid plans: 200GB - 3TB
+
+---
+
+### Proton Drive (Windows)
+
+**Requirements:**
+- Windows 10 or later
+- Proton account (free or paid)
+- Proton Drive desktop app
+
+**Setup Steps:**
+
+1. **Create Proton Account (if needed):**
+   - Go to [proton.me](https://proton.me)
+   - Click **"Get Proton for Free"**
+   - Sign up with email and password
+   - Verify your email
+
+2. **Install Proton Drive:**
+   - Download from [proton.me/drive/download](https://proton.me/drive/download)
+   - Run the installer
+   - Follow the installation wizard
+
+3. **Sign In:**
+   - Launch **Proton Drive**
+   - Enter your **Proton account** email and password
+   - Complete any 2FA if enabled
+
+4. **Configure Sync:**
+   - Choose sync settings (recommended: sync all folders)
+   - Select local folder location (default: `C:\Users\[YourUsername]\Proton Drive\`)
+   - Click **"Start Sync"**
+
+5. **Access Proton Drive:**
+   - Open **File Explorer**
+   - Navigate to **Proton Drive** folder
+
+6. **Create Backup Folder:**
+   - Navigate to **Proton Drive**
+   - Right-click → **New → Folder**
+   - Name it **"Neuman Brain Backups"**
+
+**Common Locations:**
+- **Path:** `C:\Users\[YourUsername]\Proton Drive\`
+
+**Tips:**
+- Proton Drive uses **end-to-end encryption**
+- Files are encrypted on your device before upload
+- Only you can decrypt your files (Proton cannot access them)
+- Free plan: 1GB storage
+
+---
+
+### Dropbox (macOS)
+
+**Requirements:**
+- macOS 10.14 (Mojave) or later
+- Dropbox account (free or paid)
+- Dropbox desktop app
+
+**Setup Steps:**
+
+1. **Create Dropbox Account (if needed):**
+   - Go to [dropbox.com](https://dropbox.com)
+   - Click **"Sign up"**
+   - Create account with email and password
+
+2. **Install Dropbox:**
+   - Download from [dropbox.com/install](https://dropbox.com/install)
+   - Open the `.dmg` file
+   - Follow the installer
+   - Launch **Dropbox**
+
+3. **Sign In:**
+   - Enter your **Dropbox** email and password
+   - Click **"Sign in"**
+
+4. **Configure Sync:**
+   - Choose sync method:
+     - **Smart Sync:** Files on-demand (saves disk space)
+     - **Local:** Full copy on your Mac (recommended for backups)
+   - Click **"Continue"**
+
+5. **Access Dropbox:**
+   - Open **Finder**
+   - Look for **Dropbox** in the sidebar
+   - Or navigate to `~/Dropbox/`
+
+6. **Create Backup Folder:**
+   - Navigate to **Dropbox**
+   - Right-click → **New Folder**
+   - Name it **"Neuman Brain Backups"**
+
+**Common Locations:**
+- **Finder sidebar:** Dropbox
+- **Path:** `~/Dropbox/`
+
+**Tips:**
+- Dropbox syncs automatically when online
+- Cloud icon badge shows sync status
+- Right-click → "Make available offline" to force local storage
+- Free plan: 2GB storage
+
+---
+
+### Dropbox (Windows)
+
+**Requirements:**
+- Windows 10 or later
+- Dropbox account (free or paid)
+- Dropbox desktop app
+
+**Setup Steps:**
+
+1. **Create Dropbox Account (if needed):**
+   - Go to [dropbox.com](https://dropbox.com)
+   - Click **"Sign up"**
+   - Create account with email and password
+
+2. **Install Dropbox:**
+   - Download from [dropbox.com/install](https://dropbox.com/install)
+   - Run the installer
+   - Follow the installation wizard
+
+3. **Sign In:**
+   - Launch **Dropbox**
+   - Enter your **Dropbox** email and password
+   - Click **"Sign in"**
+
+4. **Configure Sync:**
+   - Choose sync method:
+     - **Smart Sync:** Files on-demand (saves disk space)
+     - **Local:** Full copy on your PC (recommended for backups)
+   - Click **"Continue"**
+
+5. **Access Dropbox:**
+   - Open **File Explorer**
+   - Look for **Dropbox** in the sidebar (under "Quick access")
+   - Or navigate to `C:\Users\[YourUsername]\Dropbox\`
+
+6. **Create Backup Folder:**
+   - Navigate to **Dropbox**
+   - Right-click → **New → Folder**
+   - Name it **"Neuman Brain Backups"**
+
+**Common Locations:**
+- **File Explorer:** Dropbox (sidebar)
+- **Path:** `C:\Users\[YourUsername]\Dropbox\`
+
+**Tips:**
+- Dropbox appears in File Explorer sidebar
+- Cloud icon badge shows sync status (green checkmark = synced)
+- Right-click → "Make available offline" to force local storage
+- Free plan: 2GB storage
+
+---
+
+## Syncing Across Devices
+
+### How It Works
+
+Once auto-save is enabled, your data syncs automatically across all your devices:
+
+```
+Device 1 (Mac)                Cloud Provider              Device 2 (Windows)
+─────────────                ───────────────             ──────────────────
+Neuman Brain                                             Neuman Brain
+    ↓                                                         ↑
+Auto-save                                                 Desktop app
+    ↓                                                         ↑
+Local folder        →     Syncs to cloud    →           Local folder
+~/Google Drive/           (Google Drive)                C:\...\Google Drive\
+Neuman Brain                                            Neuman Brain
+Backups/                                                Backups/
+```
+
+**Timeline:**
+1. You make changes in Neuman Brain (Device 1)
+2. Auto-save creates backup file (~30 seconds later)
+3. Cloud provider syncs file to cloud (1-5 minutes)
+4. Cloud provider syncs file to Device 2 (1-5 minutes)
+5. You can restore from backup on Device 2
+
+**Total sync time:** Usually 2-10 minutes
+
+### Setting Up Multiple Devices
+
+**On each device:**
+
+1. **Install cloud provider's desktop app**
+2. **Sign in** with the same account
+3. **Wait for initial sync** to complete (may take hours for first sync)
+4. **Install Neuman Brain** (open in Chrome/Edge/Safari)
+5. **Go to Settings → Backup & Sync**
+6. **Click "Choose Folder"**
+7. **Select the same backup folder** (`Neuman Brain Backups`)
+8. **Done!** Auto-save is now syncing across devices ✅
+
+### Restoring on a New Device
+
+**Scenario:** You set up auto-save on Device 1. Now you want to use Neuman Brain on Device 2.
+
+**Steps:**
+
+1. **On Device 2:**
+   - Install cloud provider's desktop app
+   - Sign in with the same account
+   - Wait for backup files to sync
+
+2. **Open Neuman Brain on Device 2**
+
+3. **Import the most recent backup:**
+   - Go to **Settings → Backup & Restore**
+   - Click **"Import Brain"**
+   - Navigate to your backup folder
+   - Select the **most recent `.brain` file**
+   - Click **"Open"**
+
+4. **Enable auto-save on Device 2:**
+   - Go to **Settings → Backup & Sync**
+   - Click **"Choose Folder"**
+   - Select the backup folder
+   - Done! Both devices now sync ✅
+
+---
+
+## Restoring from Backup
+
+### When to Restore
+
+Restore from a backup if:
+- You accidentally deleted data
+- You switched browsers or devices
+- Your browser cache was cleared
+- You want to recover an older version of your data
+
+### How to Restore
+
+1. **Find your backup files:**
+   - Open Finder (macOS) or File Explorer (Windows)
+   - Navigate to your backup folder (e.g., `~/Google Drive/Neuman Brain Backups/`)
+   - Look for `.brain` files
+
+2. **Choose a backup:**
+   - Backups are named with timestamps: `Neuman.Brain-2025-11-16-143022.brain`
+   - Choose the backup you want to restore (usually the most recent)
+
+3. **Import the backup:**
+   - Open **Neuman Brain**
+   - Go to **Settings → Backup & Restore**
+   - Click **"Import Brain"**
+   - Select the `.brain` file
+   - Click **"Open"**
+
+4. **Confirm import:**
+   - Review the preview (item count, file size, export date)
+   - Click **"Import"** to confirm
+   - Wait for import to complete
+   - Your data is restored! ✅
+
+### Partial Restore
+
+**Can I restore just notes, or just tasks?**
+
+Currently, backups restore **all data** at once. Partial restore is not yet supported.
+
+**Workaround:**
+1. Export current data as backup (before restore)
+2. Restore old backup
+3. Manually copy the data you need
+4. Restore your current backup
+
+---
+
+## Troubleshooting
+
+### Auto-Save Not Working
+
+**Symptom:** No backup files appearing in your folder.
+
+**Fixes:**
+
+1. **Check if auto-save is enabled:**
+   - Go to **Settings → Backup & Sync**
+   - Look for "Auto-Save Status: Enabled"
+   - If disabled, click **"Choose Folder"** to re-enable
+
+2. **Check folder permissions:**
+   - Open the backup folder in Finder/File Explorer
+   - Try creating a test file manually
+   - If you can't create files, check folder permissions
+
+3. **Check browser support:**
+   - Auto-save requires Chrome 86+, Edge 86+, or Safari 15.2+
+   - Firefox does **not** support File System Access API
+   - If using Firefox, use manual export instead
+
+4. **Re-select folder:**
+   - Go to **Settings → Backup & Sync**
+   - Click **"Change Folder"**
+   - Select the same folder again (this refreshes permissions)
+
+### Backups Not Syncing to Cloud
+
+**Symptom:** Backup files appear on Device 1 but not Device 2.
+
+**Fixes:**
+
+1. **Check cloud provider sync status:**
+   - Look for the cloud provider icon in menu bar (macOS) or system tray (Windows)
+   - Click it to check sync status
+   - If paused, click "Resume sync"
+
+2. **Check internet connection:**
+   - Cloud sync requires internet
+   - If offline, files will sync when connection is restored
+
+3. **Check storage quota:**
+   - If your cloud storage is full, new files won't sync
+   - Free up space or upgrade your plan
+
+4. **Force sync:**
+   - Right-click the backup folder
+   - Select "Sync now" or "Upload to [provider]" (option varies by provider)
+
+### File Not Found Error
+
+**Symptom:** "Auto-save failed: File not found"
+
+**Cause:** The backup folder was moved, renamed, or deleted.
+
+**Fix:**
+1. Go to **Settings → Backup & Sync**
+2. Click **"Change Folder"**
+3. Navigate to the correct backup folder (or create a new one)
+4. Select it
+5. Auto-save will resume ✅
+
+### Import Failed
+
+**Symptom:** "Import failed: Invalid file format"
+
+**Cause:** File is corrupted or not a valid `.brain` file.
+
+**Fixes:**
+
+1. **Try an older backup:**
+   - Look for other `.brain` files in your backup folder
+   - Try importing a different file
+
+2. **Check file size:**
+   - If file is 0 bytes, it's corrupted
+   - Delete it and try an older backup
+
+3. **Manual export/import:**
+   - Go to **Settings → Backup & Restore**
+   - Click **"Export Brain"** to create a fresh backup
+   - Try importing this fresh backup on the other device
+
+### Multiple Devices Out of Sync
+
+**Symptom:** Device 1 and Device 2 have different data.
+
+**Cause:** One device restored an older backup, or auto-save isn't enabled on both devices.
+
+**Fix:**
+
+1. **Choose the "source of truth" device:**
+   - Which device has the most up-to-date data?
+
+2. **On the source device:**
+   - Go to **Settings → Backup & Restore**
+   - Click **"Export Brain"** (creates manual backup)
+   - Note the filename
+
+3. **On the other device:**
+   - Go to **Settings → Backup & Restore**
+   - Click **"Import Brain"**
+   - Select the backup file from step 2
+   - Your devices are now in sync ✅
+
+4. **Ensure auto-save is enabled on both devices**
+
+---
+
+## FAQ
+
+### Do I need a cloud provider?
+
+**No**, but it's highly recommended.
+
+- **Without cloud provider:** Auto-save works, but backups only stay on that one device
+- **With cloud provider:** Backups automatically sync to all your devices
+
+### Is my data encrypted?
+
+**Depends on your cloud provider:**
+
+- **Proton Drive:** Yes, end-to-end encrypted
+- **Others:** Files are encrypted in transit and at rest on provider's servers, but provider can technically access them
+
+**Neuman Brain itself:** Data is stored unencrypted locally (for performance and compatibility).
+
+**Future:** We plan to add optional E2EE encryption for backups (Q2 2026).
+
+### Can I use multiple cloud providers?
+
+**No**, auto-save only supports one folder at a time.
+
+**Workaround:** Use manual export to create backups in multiple locations.
+
+### How much storage do backups use?
+
+**Typical sizes:**
+- **Empty brain:** ~1 KB
+- **100 notes:** ~50 KB
+- **1,000 notes:** ~500 KB
+- **10,000 notes with images:** ~10-50 MB
+
+**With versioning (7 backups):** Multiply by 7.
+
+**Example:** 1,000 notes = 500 KB × 7 = 3.5 MB total
+
+Even with heavy use, backups rarely exceed 100 MB.
+
+### Can I disable auto-save?
+
+**Yes:**
+1. Go to **Settings → Backup & Sync**
+2. Toggle **"Auto-Save Status"** to off
+3. Backups will stop, but you can still export manually
+
+### What happens if I run out of cloud storage?
+
+- New backups won't sync to the cloud
+- Local backups will continue (on that device only)
+- Old backups won't be deleted
+- You'll need to free up space or upgrade your plan
+
+### Can I change the backup file name?
+
+**Yes:**
+1. Go to **Settings → Backup & Sync**
+2. Under "Configuration", change **"File Name"**
+3. Example: Change "Neuman.Brain" to "MyData"
+4. Future backups will use the new name
+
+### How do I view what's inside a .brain file?
+
+**.brain files are compressed JSON.**
+
+**To view:**
+1. Rename `backup.brain` to `backup.brain.gz`
+2. Decompress with any gzip tool
+3. Open the resulting JSON file in a text editor
+
+**Warning:** Manual editing can corrupt the file. Only do this for inspection.
+
+### Can I schedule backups?
+
+**Auto-save already runs automatically** every 30 seconds.
+
+**To change interval:**
+1. Go to **Settings → Backup & Sync**
+2. Under "Configuration", adjust **"Save Interval"** slider
+3. Range: 10 seconds - 5 minutes
+
+### What browsers support auto-save?
+
+**Supported:**
+- Chrome 86+ (Windows, macOS, Linux)
+- Edge 86+ (Windows, macOS)
+- Safari 15.2+ (macOS)
+- iOS Safari 15.2+ (iOS 15.2+)
+
+**Not supported:**
+- Firefox (File System Access API not implemented)
+- Older browser versions
+
+**Fallback:** Use manual export if your browser doesn't support auto-save.
+
+---
+
+## Choosing a Cloud Provider
+
+### Comparison Table
+
+| Feature | iCloud Drive | Google Drive | OneDrive | Proton Drive | Dropbox |
+|---------|--------------|--------------|----------|--------------|---------|
+| **Free Storage** | 5GB | 15GB | 5GB | 1GB (E2EE) | 2GB |
+| **Desktop App** | macOS built-in, Windows app | Yes | Windows built-in, macOS app | Yes | Yes |
+| **Platforms** | macOS, iOS, Windows | All | All | All | All |
+| **Real-time Sync** | Yes | Yes | Yes | Yes | Yes |
+| **Encryption** | In transit + at rest | In transit + at rest | In transit + at rest | End-to-end | In transit + at rest |
+| **Best For** | Apple users | Most storage | Windows users | Privacy | Reliability |
+| **Paid Plans** | $0.99/mo (50GB) | $1.99/mo (100GB) | $1.99/mo (100GB) | $3.99/mo (200GB) | $9.99/mo (2TB) |
+
+### Recommendations
+
+**For most users:** **Google Drive** (15GB free, works everywhere)
+
+**For Apple users:** **iCloud Drive** (seamless across Mac/iPhone/iPad)
+
+**For Windows users:** **OneDrive** (built-in, no extra app needed)
+
+**For privacy-focused users:** **Proton Drive** (end-to-end encrypted)
+
+**For reliability:** **Dropbox** (been around longest, very stable)
+
+---
+
+## Getting Help
+
+**Need more help?**
+
+- **Documentation:** Check [Neuman Brain Docs](/) for more guides
+- **Settings:** Go to **Settings → Backup & Sync** for inline help
+- **Community:** Join our [Discord community](#) (coming soon)
+- **Support:** Email support@neumanbrain.com (coming soon)
+
+---
+
+**Last Updated:** November 16, 2025
+**Version:** 1.0
+
+**Found an issue with this guide?** Please report it at [github.com/travisjneuman/system.knowledgebase/issues](https://github.com/travisjneuman/system.knowledgebase/issues)

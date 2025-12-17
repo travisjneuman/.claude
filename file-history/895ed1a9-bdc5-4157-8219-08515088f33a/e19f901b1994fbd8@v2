@@ -1,0 +1,139 @@
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import { useSettingsStore } from '../stores/useSettingsStore';
+import { getPageMetadata } from '../config/pageMetadata';
+
+/**
+ * PageHeader Component
+ *
+ * Consistent page header with:
+ * - Title and optional subtitle (left) - auto-detected from route or explicit props
+ * - Optional action buttons (left, below title)
+ * - Date & Time display (right) - full format with seconds, AM/PM, timezone
+ *
+ * Usage Modes:
+ * 1. Auto-detect: <PageHeader /> - automatically uses title/subtitle from pageMetadata registry
+ * 2. Explicit: <PageHeader title="Custom" subtitle="Description" /> - overrides auto-detect
+ *
+ * Responsive: Full format on desktop, compact on mobile.
+ * Used across all pages for consistent layout.
+ */
+
+interface PageHeaderProps {
+  title?: string; // Optional - auto-detected from route if not provided
+  subtitle?: string; // Optional - auto-detected from route if not provided
+  children?: React.ReactNode; // Action buttons or other content
+}
+
+export const PageHeader: React.FC<PageHeaderProps> = ({ title: titleProp, subtitle: subtitleProp, children }) => {
+  const location = useLocation();
+
+  // Auto-detect title/subtitle from route if not provided via props
+  const pageMetadata = getPageMetadata(location.pathname);
+  const title = titleProp ?? pageMetadata?.title ?? 'Neuman Brain';
+  const subtitle = subtitleProp ?? pageMetadata?.subtitle;
+  const timeFormat = useSettingsStore((state) => state.timeFormat);
+  const [currentTime, setCurrentTime] = useState(new Date());
+
+  // Update time every second (for seconds display)
+  useEffect(() => {
+    setCurrentTime(new Date());
+    const interval = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Get timezone abbreviation
+  const timezone = Intl.DateTimeFormat('en-US', { timeZoneName: 'short' })
+    .formatToParts(currentTime)
+    .find((part) => part.type === 'timeZoneName')?.value || '';
+
+  // Format time with seconds, AM/PM
+  const formatFullTime = () => {
+    if (timeFormat === '24h') {
+      return currentTime.toLocaleTimeString('en-US', {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false,
+      });
+    }
+    return currentTime.toLocaleTimeString('en-US', {
+      hour: 'numeric',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: true,
+    });
+  };
+
+  // Format compact time (no seconds, for mobile)
+  const formatCompactTime = () => {
+    if (timeFormat === '24h') {
+      return currentTime.toLocaleTimeString('en-US', {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false,
+      });
+    }
+    return currentTime.toLocaleTimeString('en-US', {
+      hour: 'numeric',
+      minute: '2-digit',
+      hour12: true,
+    });
+  };
+
+  // Format full date with year (desktop)
+  const fullDateString = currentTime.toLocaleDateString('en-US', {
+    weekday: 'long',
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
+  });
+
+  // Format compact date (mobile)
+  const compactDateString = currentTime.toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  });
+
+  return (
+    <div className="flex items-start justify-between gap-4 mb-4 sm:mb-8">
+      {/* Left: Title, Subtitle, Actions */}
+      <div className="flex-1 min-w-0">
+        <h1 className="text-xl sm:text-2xl font-semibold text-text-light-primary dark:text-text-dark-primary mb-1">
+          {title}
+        </h1>
+        {subtitle && (
+          <p className="text-sm sm:text-base text-text-light-secondary dark:text-text-dark-secondary mb-2 sm:mb-3">
+            {subtitle}
+          </p>
+        )}
+        {children && <div className="flex flex-wrap gap-2">{children}</div>}
+      </div>
+
+      {/* Right: Date & Time - Responsive */}
+      <div className="flex-shrink-0 text-right">
+        {/* Desktop: Full format */}
+        <div className="hidden md:block">
+          <div className="text-2xl lg:text-3xl font-bold text-text-light-primary dark:text-text-dark-primary">
+            {formatFullTime()} <span className="text-lg lg:text-xl font-medium text-text-light-secondary dark:text-text-dark-secondary">{timezone}</span>
+          </div>
+          <div className="text-sm lg:text-base text-text-light-secondary dark:text-text-dark-secondary">
+            {fullDateString}
+          </div>
+        </div>
+        {/* Mobile: Compact format */}
+        <div className="md:hidden">
+          <div className="text-lg font-bold text-text-light-primary dark:text-text-dark-primary">
+            {formatCompactTime()}
+          </div>
+          <div className="text-xs text-text-light-secondary dark:text-text-dark-secondary">
+            {compactDateString}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};

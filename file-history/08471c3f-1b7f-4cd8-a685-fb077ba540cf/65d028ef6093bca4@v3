@@ -1,0 +1,325 @@
+/**
+ * Form Builder Page
+ * Full-screen form editor with field management and live preview
+ */
+
+import { useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { StoreErrorBoundary } from '../components/StoreErrorBoundary';
+import { useFormsStore } from '../stores/useFormsStore';
+import { FieldEditor } from '../components/FormBuilder/FieldEditor';
+import { FieldList } from '../components/FormBuilder/FieldList';
+import type { FormField } from '../types/forms';
+import { ArrowLeft, Save, Plus, Eye } from 'lucide-react';
+
+export default function FormBuilder() {
+  const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
+
+  const getForm = useFormsStore((s) => s.getForm);
+  const updateForm = useFormsStore((s) => s.updateForm);
+
+  const [form, setForm] = useState(id ? getForm(id) : null);
+  const [title, setTitle] = useState(form?.title || '');
+  const [description, setDescription] = useState(form?.description || '');
+  const [editingField, setEditingField] = useState<FormField | null>(null);
+  const [isAddingField, setIsAddingField] = useState(false);
+  const [showPreview, setShowPreview] = useState(false);
+
+  useEffect(() => {
+    if (!id) {
+      navigate('/forms');
+      return;
+    }
+
+    const foundForm = getForm(id);
+    if (!foundForm) {
+      navigate('/forms');
+      return;
+    }
+
+    setForm(foundForm);
+    setTitle(foundForm.title);
+    setDescription(foundForm.description || '');
+  }, [id, getForm, navigate]);
+
+  if (!form || !id) return null;
+
+  const handleSave = () => {
+    updateForm(id, {
+      title,
+      description,
+      fields: form.fields,
+    });
+    alert('Form saved successfully!');
+  };
+
+  const handleAddField = (field: FormField) => {
+    const newField = {
+      ...field,
+      order: form.fields.length,
+    };
+
+    const updatedForm = {
+      ...form,
+      fields: [...form.fields, newField],
+    };
+
+    setForm(updatedForm);
+    updateForm(id, { fields: updatedForm.fields });
+    setIsAddingField(false);
+  };
+
+  const handleEditField = (field: FormField) => {
+    const updatedForm = {
+      ...form,
+      fields: form.fields.map((f) => (f.id === field.id ? field : f)),
+    };
+
+    setForm(updatedForm);
+    updateForm(id, { fields: updatedForm.fields });
+    setEditingField(null);
+  };
+
+  const handleDeleteField = (fieldId: string) => {
+    if (!confirm('Delete this field?')) return;
+
+    const updatedFields = form.fields
+      .filter((f) => f.id !== fieldId)
+      .map((f, index) => ({ ...f, order: index }));
+
+    const updatedForm = {
+      ...form,
+      fields: updatedFields,
+    };
+
+    setForm(updatedForm);
+    updateForm(id, { fields: updatedForm.fields });
+  };
+
+  const handleDuplicateField = (field: FormField) => {
+    const newField = {
+      ...field,
+      id: crypto.randomUUID(),
+      label: `${field.label} (Copy)`,
+      order: form.fields.length,
+    };
+
+    const updatedForm = {
+      ...form,
+      fields: [...form.fields, newField],
+    };
+
+    setForm(updatedForm);
+    updateForm(id, { fields: updatedForm.fields });
+  };
+
+  const handleMoveUp = (fieldId: string) => {
+    const currentIndex = form.fields.findIndex((f) => f.id === fieldId);
+    if (currentIndex <= 0) return;
+
+    const newFields = [...form.fields];
+    [newFields[currentIndex - 1], newFields[currentIndex]] = [
+      newFields[currentIndex],
+      newFields[currentIndex - 1],
+    ];
+
+    const reorderedFields = newFields.map((f, index) => ({ ...f, order: index }));
+
+    const updatedForm = {
+      ...form,
+      fields: reorderedFields,
+    };
+
+    setForm(updatedForm);
+    updateForm(id, { fields: updatedForm.fields });
+  };
+
+  const handleMoveDown = (fieldId: string) => {
+    const currentIndex = form.fields.findIndex((f) => f.id === fieldId);
+    if (currentIndex >= form.fields.length - 1) return;
+
+    const newFields = [...form.fields];
+    [newFields[currentIndex + 1], newFields[currentIndex]] = [
+      newFields[currentIndex],
+      newFields[currentIndex + 1],
+    ];
+
+    const reorderedFields = newFields.map((f, index) => ({ ...f, order: index }));
+
+    const updatedForm = {
+      ...form,
+      fields: reorderedFields,
+    };
+
+    setForm(updatedForm);
+    updateForm(id, { fields: updatedForm.fields });
+  };
+
+  return (
+    <StoreErrorBoundary storeName="forms">
+      <div className="flex flex-col h-screen bg-background-light dark:bg-background-dark">
+        {/* Top Bar */}
+        <header className="flex items-center justify-between px-4 py-3 border-b border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark">
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => navigate('/forms')}
+              className="p-2 hover:bg-surface-hover-light dark:hover:bg-surface-hover-dark rounded-lg transition-colors"
+              aria-label="Back to forms"
+            >
+              <ArrowLeft className="w-5 h-5" />
+            </button>
+
+            <div>
+              <input
+                type="text"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                onBlur={handleSave}
+                className="text-lg font-semibold bg-transparent border-none focus:outline-none focus:ring-2 focus:ring-primary-light dark:focus:ring-primary-dark rounded px-2 py-1"
+                placeholder="Form Title"
+              />
+              <input
+                type="text"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                onBlur={handleSave}
+                className="text-sm text-text-light-secondary dark:text-text-dark-secondary bg-transparent border-none focus:outline-none focus:ring-2 focus:ring-primary-light dark:focus:ring-primary-dark rounded px-2 py-1 block mt-1"
+                placeholder="Description (optional)"
+              />
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setShowPreview(!showPreview)}
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
+                showPreview
+                  ? 'bg-primary-light dark:bg-primary-dark text-white'
+                  : 'bg-surface-hover-light dark:bg-surface-hover-dark'
+              }`}
+            >
+              <Eye className="w-4 h-4" />
+              {showPreview ? 'Hide Preview' : 'Show Preview'}
+            </button>
+            <button
+              onClick={handleSave}
+              className="flex items-center gap-2 px-4 py-2 bg-primary-light dark:bg-primary-dark text-white rounded-lg hover:opacity-90 transition-opacity"
+            >
+              <Save className="w-4 h-4" />
+              Save
+            </button>
+          </div>
+        </header>
+
+        {/* Editor Area */}
+        <div className="flex-1 flex overflow-hidden">
+          {/* Left Panel - Field List */}
+          <div className="w-1/2 p-6 overflow-y-auto border-r border-border-light dark:border-border-dark">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-xl font-semibold text-text-light-primary dark:text-text-dark-primary">
+                Fields
+              </h2>
+              <button
+                onClick={() => setIsAddingField(true)}
+                className="flex items-center gap-2 px-4 py-2 bg-primary-light dark:bg-primary-dark text-white rounded-lg hover:opacity-90"
+              >
+                <Plus className="w-4 h-4" />
+                Add Field
+              </button>
+            </div>
+
+            <FieldList
+              fields={form.fields}
+              onEdit={setEditingField}
+              onDelete={handleDeleteField}
+              onDuplicate={handleDuplicateField}
+              onMoveUp={handleMoveUp}
+              onMoveDown={handleMoveDown}
+            />
+          </div>
+
+          {/* Right Panel - Preview */}
+          <div className="w-1/2 p-6 overflow-y-auto bg-background-light dark:bg-background-dark">
+            {showPreview ? (
+              <>
+                <h2 className="text-xl font-semibold text-text-light-primary dark:text-text-dark-primary mb-4">
+                  Preview
+                </h2>
+                <div className="max-w-2xl mx-auto bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-lg p-6">
+                  <h3 className="text-2xl font-bold text-text-light-primary dark:text-text-dark-primary mb-2">
+                    {title || 'Untitled Form'}
+                  </h3>
+                  {description && (
+                    <p className="text-text-light-secondary dark:text-text-dark-secondary mb-6">
+                      {description}
+                    </p>
+                  )}
+                  <div className="space-y-4">
+                    {form.fields.length === 0 ? (
+                      <p className="text-center text-text-light-tertiary dark:text-text-dark-tertiary py-8">
+                        No fields yet. Add fields to see them here.
+                      </p>
+                    ) : (
+                      form.fields
+                        .sort((a, b) => a.order - b.order)
+                        .map((field) => <FieldPreview key={field.id} field={field} />)
+                    )}
+                  </div>
+                </div>
+              </>
+            ) : (
+              <div className="flex items-center justify-center h-full">
+                <p className="text-text-light-tertiary dark:text-text-dark-tertiary">
+                  Click "Show Preview" to see how your form will look
+                </p>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Field Editor Modal */}
+      {(isAddingField || editingField) && (
+        <FieldEditor
+          field={editingField}
+          onSave={editingField ? handleEditField : handleAddField}
+          onCancel={() => {
+            setIsAddingField(false);
+            setEditingField(null);
+          }}
+        />
+      )}
+    </StoreErrorBoundary>
+  );
+}
+
+// Simple field preview component
+function FieldPreview({ field }: { field: FormField }) {
+  return (
+    <div>
+      <label className="block text-sm font-medium text-text-light-primary dark:text-text-dark-primary mb-1">
+        {field.label}
+        {field.required && <span className="text-red-500 ml-1">*</span>}
+      </label>
+      {field.description && (
+        <p className="text-xs text-text-light-tertiary dark:text-text-dark-tertiary mb-2">
+          {field.description}
+        </p>
+      )}
+      <div className="px-3 py-2 bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-lg text-text-light-tertiary dark:text-text-dark-tertiary">
+        {field.type === 'textarea'
+          ? 'Text area input...'
+          : field.type === 'select' || field.type === 'radio' || field.type === 'multiselect'
+          ? `${field.options?.join(', ') || 'No options'}`
+          : field.type === 'checkbox'
+          ? '☐ Checkbox'
+          : field.type === 'rating'
+          ? '★★★★★'
+          : field.type === 'scale'
+          ? '1 2 3 4 5 6 7 8 9 10'
+          : `${field.type} input...`}
+      </div>
+    </div>
+  );
+}

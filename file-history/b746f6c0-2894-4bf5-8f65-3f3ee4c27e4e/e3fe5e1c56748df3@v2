@@ -1,0 +1,241 @@
+# src/components/CLAUDE.md — Shared Components
+
+## Scope
+Reusable React components under `src/components/`. These are shared across pages and widgets.
+
+## Component Categories
+| Category | Purpose | Examples |
+|----------|---------|----------|
+| **Layout** | Page structure | `Layout.tsx`, `Sidebar.tsx`, `Header.tsx`, `Footer.tsx`, `PageHeader.tsx` |
+| **Modals** | Dialog overlays | `Modal.tsx`, `ConfirmDialog.tsx`, `PromptDialog.tsx`, `*Modal.tsx` |
+| **Calendar/Time** | Date/time UI | `DayView.tsx`, `WeekView.tsx`, `AgendaView.tsx`, `TimeEntry*.tsx` |
+| **Widget System** | Widget infrastructure | `Widget.tsx`, `WidgetControls.tsx`, `WidgetManager.tsx`, `WidgetErrorBoundary.tsx` |
+| **Analytics** | Charts & metrics | `Analytics/*` (MetricCard, CompletionRateChart, PriorityDistribution, StatusBreakdown, TimeByProjectChart, HourlyHeatmap, SessionDurationChart, MeetingVsFocusChart, TagFrequencyChart, AnalyticsPeriodSelector) |
+| **Graph** | Knowledge graph visualization | `Graph/GraphCanvas.tsx` (D3 force-directed graph with zoom/pan/drag) |
+| **Diagrams** | Diagram editor | `DiagramCanvas/Canvas.tsx` (Konva Stage with shapes, grid, transformer), `DiagramCanvas/Toolbar.tsx` (tool selection) |
+| **Settings** | Configuration UI | `BackupSettings.tsx`, `ProviderSettings.tsx`, `ModelSelector.tsx`, `PresetManager.tsx` |
+| **Error Handling** | Error UI | `StoreErrorBoundary.tsx`, `ErrorToast.tsx`, `Toast.tsx` |
+| **Terminal** | AI/Shell UI | `AITerminal.tsx`, `TerminalHelpModal.tsx`, `PhantomShell/*` |
+| **Editors** | Rich text/specialized | `editor/*`, `RecurrencePicker.tsx`, `BackgroundCustomizer.tsx` |
+| **Tags** | Tag management UI | `TagPicker.tsx`, `TagFilter.tsx`, `TagManager.tsx` |
+
+## Non-negotiables
+- **Props typing:** All props must have TypeScript interfaces. No `any`.
+- **Semantic tokens:** Use Tailwind semantic classes (`bg-surface-*`, `text-text-*`). No hardcoded colors.
+- **Accessibility:** ARIA labels, keyboard navigation, focus management.
+- **Error boundaries:** Wrap async/complex components in error boundaries.
+- **Keep focused:** One component = one responsibility. Split if >300 lines.
+
+## Component Pattern
+```tsx
+interface MyComponentProps {
+  title: string;
+  onAction: () => void;
+  variant?: 'primary' | 'secondary';
+}
+
+export function MyComponent({ title, onAction, variant = 'primary' }: MyComponentProps) {
+  return (
+    <div className="bg-surface-light p-4 rounded-lg">
+      <h2 className="text-text-light-primary font-semibold">{title}</h2>
+      <button
+        onClick={onAction}
+        className="btn-primary"
+        aria-label={`Perform ${title} action`}
+      >
+        Action
+      </button>
+    </div>
+  );
+}
+```
+
+## Subfolders
+- `__tests__/` — Component tests (Vitest + Testing Library)
+- `Analytics/` — Analytics charts and metric components (Recharts-based)
+- `auth/` — Authentication-related components
+- `DiagramCanvas/` — Diagram editor components (Konva-based)
+- `editor/` — Rich text editor components (Lexical)
+- `PhantomShell/` — Terminal emulation components
+- `search/` — Search-related components
+- `shared/` — Common primitives
+- `sidebar/` — Sidebar-specific components
+
+## Component Development
+
+**For component API design** (choosing props, simplification):
+- Use **`/consider:via-negativa`** to identify what props/features to remove
+- Use **`/consider:occams-razor`** when choosing between complex patterns
+- Example: "Should we support both controlled and uncontrolled modes, or just controlled?"
+
+**For creating project-specific component scaffolding**:
+- Use **`/create-slash-command`** to build component scaffolding command
+- Example: Create `/scaffold-component` for consistent component boilerplate
+
+See [Tache Integration Guide § Component Development](../../docs/technical/tache-integration-guide.md#workflow-component-development) for complete workflow.
+
+---
+
+## Patterns & Solutions
+
+### Drag-and-Drop with Navigation Links (@dnd-kit)
+**Problem:** When using @dnd-kit with React Router Links, native browser click events can fire during/after drag operations, causing unwanted navigation.
+
+**Solution Pattern (from Sidebar.tsx):**
+```tsx
+const [isDisablingClicks, setIsDisablingClicks] = useState(false);
+const disableTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+const handleDragStart = () => {
+  // Disable clicks IMMEDIATELY when drag starts
+  if (disableTimeoutRef.current) clearTimeout(disableTimeoutRef.current);
+  setIsDisablingClicks(true);
+};
+
+const handleDragEnd = (event: DragEndEvent) => {
+  // Keep clicks disabled for 150ms after drag ends
+  disableTimeoutRef.current = setTimeout(() => {
+    setIsDisablingClicks(false);
+    disableTimeoutRef.current = null;
+  }, 150);
+};
+
+// Apply pointer-events control to list items
+<li style={{pointerEvents: isDisablingClicks ? 'none' : 'auto'}}>
+  <Link onClick={(e) => {
+    if (isDisablingClicks) {
+      e.preventDefault();
+      return false;
+    }
+  }}>
+</li>
+
+<DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
+  {/* sortable items */}
+</DndContext>
+```
+
+**Why both approaches:**
+- `pointer-events: none` blocks native browser clicks (most important)
+- `onClick preventDefault` provides React-level safety (defense in depth)
+- Timeout in ref survives component re-renders from state updates
+
+**Key insights:**
+- Disable clicks on `onDragStart`, not just `onDragEnd`
+- Mouse release can occur over Link text, not just drag handle
+- @dnd-kit can fire native clicks BEFORE React handlers execute
+- Store timeout ID in ref to survive re-renders
+
+---
+
+### Hover Actions without Overlap
+**Problem:** Absolute positioned hover actions (edit, delete, etc.) can overlap with content titles/text, making both unreadable. Common in card/list item components.
+
+**Solution Pattern (from Notes.tsx):**
+```tsx
+// ❌ BEFORE: Absolute positioning causes overlap
+<div className="group relative p-4">
+  {/* Static indicators compete with hover actions */}
+  <div className="absolute top-2 right-2">
+    {note.isFavorite && <Star />}
+    {note.isPinned && <Pin />}
+  </div>
+
+  {/* Title can overflow into action space */}
+  <h4 className="font-medium pr-6 truncate">
+    {note.title}
+  </h4>
+
+  {/* Actions overlap title when revealed */}
+  <div className="absolute top-2 right-8 opacity-0 group-hover:opacity-100">
+    {/* 5 buttons - can overlap long titles */}
+  </div>
+</div>
+
+// ✅ AFTER: Flex layout with reserved action zone
+<div className="group p-4">
+  {/* Header row: Title + Actions */}
+  <div className="flex items-start gap-2 mb-1 min-h-[24px]">
+    {/* Title: grows to fill space, truncates before actions */}
+    <h4 className="font-medium flex-1 truncate min-w-0">
+      {note.title}
+    </h4>
+
+    {/* Reserved action zone: prevents overlap */}
+    <div className="flex items-center gap-0.5 shrink-0">
+      {/* Static indicators: always visible */}
+      <div className="flex items-center gap-0.5">
+        {note.isFavorite && <Star className="w-4 h-4" />}
+        {note.isPinned && <Pin className="w-4 h-4" />}
+      </div>
+
+      {/* Hover actions: occupy space even when invisible */}
+      <div className="flex items-center gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+        <button><Download className="w-4 h-4" /></button>
+        <button><Star className="w-4 h-4" /></button>
+        <button><Trash2 className="w-4 h-4" /></button>
+      </div>
+    </div>
+  </div>
+
+  {/* Content below */}
+  <p className="text-sm">{content}</p>
+</div>
+```
+
+**For images/media with controls (from ImageNode.tsx):**
+```tsx
+// ❌ BEFORE: Negative margin can overlap content below
+<div className="relative group">
+  <img src={src} alt={alt} />
+  <div className="absolute -bottom-10 opacity-0 group-hover:opacity-100">
+    {/* Controls overlap content below image */}
+  </div>
+</div>
+
+// ✅ AFTER: Controls positioned with positive margin
+<div className="group">
+  <img src={src} alt={alt} />
+  <div className="flex gap-2 mt-2 opacity-0 group-hover:opacity-100 transition-opacity">
+    <button>Edit Alt Text</button>
+    <button>Delete</button>
+  </div>
+</div>
+```
+
+**Key principles:**
+1. **Flex over Absolute:** Use flex layout for title + actions in same row
+2. **Reserve Space:** Actions use `opacity-0` (not `hidden`) to preserve layout
+3. **Title Flexibility:** `flex-1 min-w-0` allows title to shrink/truncate gracefully
+4. **Action Zone:** `shrink-0` prevents action container from collapsing
+5. **Positive Spacing:** Use `mt-*` instead of negative margins for media controls
+
+**Advantages:**
+- ✅ Zero overlap at any viewport width or content length
+- ✅ No layout shift when actions appear/disappear
+- ✅ Predictable behavior with fixed action widths
+- ✅ Responsive title truncation
+
+**When to use:**
+- Card components with hover actions (Notes, Tasks, Forms, etc.)
+- List items with edit/delete/duplicate buttons
+- Media elements (images, videos) with control overlays
+
+---
+
+## Anti-patterns
+- Hardcoded colors/sizes (use semantic tokens).
+- Business logic in components (move to stores/services).
+- Props drilling >2 levels (use stores or context).
+- Missing TypeScript types.
+- No accessibility attributes on interactive elements.
+- Over-engineering component APIs (use **`/consider:via-negativa`** to simplify).
+- Using @dnd-kit with Links without click protection (see Patterns section above).
+- Absolute positioning for hover actions near text content (causes overlap - see Hover Actions pattern).
+- Negative margins for hover controls (can overlap adjacent content - use positive spacing instead).
+- Using `hidden` class for hover actions (causes layout shift - use `opacity-0` to preserve space).
+
+## Related
+- Widgets (consumers): `src/widgets/CLAUDE.md`
+- Stores (state): `src/stores/CLAUDE.md`
+- Tests: `tests/CLAUDE.md`

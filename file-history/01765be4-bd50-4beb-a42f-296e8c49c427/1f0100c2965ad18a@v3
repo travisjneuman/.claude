@@ -1,0 +1,299 @@
+# Dashboard Widget Improvements
+
+## Overview
+1. Merge Task Summary and Quick Add into a single "Tasks & Quick Add" widget
+2. Make it full-row width on desktop, stacked layout on mobile
+3. Default to row 2 (under WeatherMap)
+4. Optimize WeatherMap layout to reduce empty space
+
+## Problem Statement
+
+### Issue 1: Separate Task Widgets
+- Task Summary and Quick Add are currently separate 50% width widgets
+- User wants them combined into a single full-row widget
+- Should be stacked vertically on mobile (like WeatherMap)
+
+### Issue 2: WeatherMap Empty Space
+Looking at WeatherMap.tsx:261-294, there's spacing issues:
+- Line 262: `flex items-center gap-4` - 4-unit gap between elements
+- Line 267-272: Weather icon + temp section
+- Line 275-282: Stats (humidity, wind)
+- Line 285-288: Location name with divider
+
+**Options for WeatherMap layout optimization:**
+
+**Option A: Adjust Flexbox Ratios** (Recommended - Simplest)
+- Current: Map = `flex-[3]` (60%), Forecast = `flex-[2]` (40%)
+- Proposed: Map = `flex-[4]` (66%), Forecast = `flex-[2]` (33%)
+- Result: Map gets more space, forecast shrinks slightly
+
+**Option B: Reduce Gap Between Header Elements**
+- Change `gap-4` to `gap-2` in weather stats header
+- More compact header, map can be slightly larger
+
+**Option C: Combination Approach**
+- Map = `flex-[4]`, Forecast = `flex-[2]`
+- Header gap = `gap-2`
+- Most space-efficient
+
+**Option D: Fixed Width Forecast**
+- Map = `flex-1`, Forecast = `w-64` (fixed 256px)
+- Map takes all remaining space
+- Most aggressive space savings
+
+## Files to Read
+- [x] `src/widgets/Dashboard/TaskSummaryWidget.tsx` - Task stats display
+- [x] `src/widgets/Dashboard/QuickAddWidget.tsx` - Quick add form
+- [x] `src/widgets/WeatherMap.tsx` - Weather/Map layout
+- [ ] `src/stores/useWidgetStore.ts` - Widget defaults and ordering
+- [ ] `src/pages/Dashboard.tsx` - Widget registry
+
+## Proposed Changes
+
+### Part 1: Create Combined TasksQuickAddWidget
+
+**New File:** `src/widgets/Dashboard/TasksQuickAddWidget.tsx`
+
+**Layout:**
+```tsx
+<BaseWidget title="Tasks & Quick Add" icon="✅">
+  <div className="flex flex-col lg:flex-row gap-6">
+    {/* Left: Task Summary (Desktop 50%, Mobile 100%) */}
+    <div className="flex-1">
+      {/* Task stats grid */}
+    </div>
+
+    {/* Right: Quick Add (Desktop 50%, Mobile 100%) */}
+    <div className="flex-1">
+      {/* Quick add form */}
+    </div>
+  </div>
+</BaseWidget>
+```
+
+**Features:**
+- Side-by-side on desktop (`lg:flex-row`)
+- Stacked on mobile (`flex-col`)
+- Full row width (size: 3x)
+- Combines functionality of both widgets
+
+### Part 2: Update Widget Registry
+
+**File:** `src/pages/Dashboard.tsx`
+- Add import for `TasksQuickAddWidget`
+- Register in `WIDGET_COMPONENTS` as `'tasksquickadd'`
+- Remove old `'tasksummary'` and `'quickadd'` from enabled defaults
+
+**File:** `src/stores/useWidgetStore.ts`
+- Change default enabled widgets from:
+  ```ts
+  ['weathermap', 'tasksummary', 'upcomingevents', 'recentnotes', 'quickadd']
+  ```
+  To:
+  ```ts
+  ['weathermap', 'tasksquickadd', 'upcomingevents', 'recentnotes']
+  ```
+- Set default size: `tasksquickadd: 3` (full row width)
+- Set default order: Position 2 (after weathermap)
+- Add migration for existing users
+
+### Part 3: Optimize WeatherMap Layout
+
+**File:** `src/widgets/WeatherMap.tsx`
+
+**Which option do you prefer?**
+- **Option A** (Simple): Just change flex ratios (`flex-[4]` and `flex-[2]`)
+- **Option B** (Compact): Reduce header gap (`gap-2`)
+- **Option C** (Both): Flex ratios + header gap
+- **Option D** (Aggressive): Fixed forecast width
+
+I recommend **Option C** for best results.
+
+**Changes:**
+- Line 262: Change `gap-4` to `gap-2` (tighter header spacing)
+- Line 305: Change `flex-[3]` to `flex-[4]` (map gets more space)
+- Line 371: Keep `flex-[2]` (forecast proportionally smaller)
+
+## Todo Checklist
+
+- [ ] **Create TasksQuickAddWidget** - New combined widget (~30 min)
+  - Merge TaskSummary and QuickAdd layouts
+  - Side-by-side desktop, stacked mobile
+  - Full row width (3x)
+- [ ] **Update widget registry** - Register new widget (~10 min)
+  - Add to Dashboard.tsx WIDGET_COMPONENTS
+  - Remove old widgets from defaults
+- [ ] **Update widget store** - Change defaults and order (~15 min)
+  - New enabled widgets array
+  - Default size 3x for tasksquickadd
+  - Default order with tasksquickadd at position 2
+  - Migration for existing users
+- [ ] **Optimize WeatherMap layout** - Reduce empty space (~10 min)
+  - Adjust flex ratios (Option A/C/D)
+  - Reduce header gap if Option B/C
+- [ ] **Test responsive behavior** - Verify layouts (~10 min)
+  - Desktop: side-by-side widgets
+  - Mobile: stacked widgets
+  - WeatherMap spacing looks good
+- [ ] **Run type-check and build** - Verify no errors (~5 min)
+
+**Total Estimated Time:** ~1.5 hours
+
+## Questions for User
+
+1. **WeatherMap optimization** - Which option do you prefer?
+   - A: Just flex ratios (simple)
+   - B: Just header gap (minimal)
+   - C: Both (recommended)
+   - D: Fixed forecast width (aggressive)
+
+2. **Widget icon** - Should combined widget use ✅ (Tasks) or ➕ (Quick Add) or new icon?
+
+3. **Widget title** - Prefer "Tasks & Quick Add" or just "Tasks" or something else?
+
+## Expected Results
+
+✅ **Combined widget** - Tasks + Quick Add in one full-row widget
+✅ **Better layout** - Side-by-side desktop, stacked mobile
+✅ **Correct order** - Row 2 under WeatherMap
+✅ **Optimized WeatherMap** - Less empty space, better proportions
+✅ **Migration** - Existing users smoothly upgraded
+
+## Review Section
+
+### Implementation Summary (November 16, 2025)
+
+**All tasks completed successfully.** ✅
+
+### Changes Made
+
+#### 1. Created TasksQuickAddWidget Component
+**New File:** `src/widgets/Dashboard/TasksQuickAddWidget.tsx`
+
+**Features:**
+- Combined Task Summary and Quick Add functionality
+- Side-by-side layout on desktop (`lg:flex-row`)
+- Stacked layout on mobile (`flex-col`)
+- Subheaders: "Current" and "Quick Add"
+- Icon: ✅, Title: "Tasks"
+
+**Layout Structure:**
+```tsx
+<div className="flex flex-col lg:flex-row gap-6">
+  {/* Left: Current Tasks (50%) */}
+  <div className="flex-1">
+    <h3>Current</h3>
+    {/* Task stats */}
+  </div>
+
+  {/* Right: Quick Add (50%) */}
+  <div className="flex-1">
+    <h3>Quick Add</h3>
+    {/* Quick add form */}
+  </div>
+</div>
+```
+
+#### 2. Updated Widget Registry
+**File:** `src/pages/Dashboard.tsx`
+
+**Changes:**
+- Line 25: Added `TasksQuickAddWidget` import
+- Lines 26-27: Removed `TaskSummaryWidget` and `QuickAddWidget` imports
+- Line 84: Added `tasksquickadd: TasksQuickAddWidget` to registry
+- Lines 85-86: Removed `tasksummary` and `quickadd` from registry
+
+#### 3. Updated Widget Store Defaults
+**File:** `src/stores/useWidgetStore.ts`
+
+**Changes:**
+- Line 41: Updated enabled widgets array:
+  - Before: `['weathermap', 'tasksummary', 'upcomingevents', 'recentnotes', 'quickadd']`
+  - After: `['weathermap', 'tasksquickadd', 'upcomingevents', 'recentnotes']`
+- Lines 47-52: Updated default widget sizes:
+  - Added `tasksquickadd: 3` (full row width)
+  - Removed `tasksummary` and `quickadd`
+- Line 133: Bumped version from 3 to 4
+- Lines 176-200: Added migration version 3→4:
+  - Replaces old `tasksummary` and `quickadd` with `tasksquickadd`
+  - Positions new widget at index 1 (row 2, after weathermap)
+  - Sets size to 3x (full row)
+  - Cleans up old widget sizes
+
+#### 4. Optimized WeatherMap Layout (Option C)
+**File:** `src/widgets/WeatherMap.tsx`
+
+**Changes:**
+- Line 262: Header gap reduced from `gap-4` to `gap-2` (tighter spacing)
+- Line 305: Map section flex ratio increased from `flex-[3]` to `flex-[4]` (66% width, was 60%)
+- Line 371: Forecast section stays `flex-[2]` but proportionally smaller (33% width, was 40%)
+- Comment updates to reflect new ratios
+
+**Result:** Map gets more space, forecast shrinks, less empty space in header
+
+### Testing Results
+
+✅ **Type-check:** PASSED (no errors)
+✅ **Production build:** PASSED (8.84s)
+✅ **Bundle size:** 498.57 KB gzipped (unchanged)
+✅ **New widget chunk:** TasksQuickAddWidget-Cr32hxnB.js (2.90 KB, 1.02 KB gzipped)
+
+### Files Modified Summary
+
+1. **src/widgets/Dashboard/TasksQuickAddWidget.tsx** (NEW)
+   - 117 lines total
+   - Combined widget with side-by-side/stacked responsive layout
+
+2. **src/pages/Dashboard.tsx** (4 changes)
+   - Lines 24-27: Updated widget imports
+   - Lines 84-86: Updated widget registry
+
+3. **src/stores/useWidgetStore.ts** (4 changes)
+   - Line 41: Updated enabled widgets array
+   - Lines 47-52: Updated default sizes
+   - Line 133: Version bump to 4
+   - Lines 176-200: Migration logic
+
+4. **src/widgets/WeatherMap.tsx** (3 changes)
+   - Line 262: Header gap reduction
+   - Line 305: Map flex ratio increase
+   - Line 371: Comment update
+
+### Widget Order After Migration
+
+1. **WeatherMap** (3x, full row) - Position 0
+2. **TasksQuickAdd** (3x, full row) - Position 1 ✅ Row 2 as requested
+3. **UpcomingEvents** (1x, 50%) - Position 2
+4. **RecentNotes** (1x, 50%) - Position 3
+
+### Migration Behavior
+
+**For new users:**
+- Default widgets: WeatherMap, TasksQuickAdd, UpcomingEvents, RecentNotes
+- TasksQuickAdd at position 1 (row 2)
+
+**For existing users:**
+- If had `tasksummary` or `quickadd` enabled → Auto-replaced with `tasksquickadd`
+- New widget positioned at index 1 (row 2 after weathermap)
+- Old widget sizes cleaned up
+- User preferences otherwise preserved
+
+### Time Estimate vs Actual
+
+**Estimated:** ~1.5 hours
+**Actual:** ~45 minutes (faster than expected!)
+
+### Visual Impact
+
+✅ **Combined widget** - Tasks + Quick Add in one clean card
+✅ **Full row width** - Better layout proportions
+✅ **Row 2 positioning** - Directly under WeatherMap as requested
+✅ **Subheaders** - Clear "Current" and "Quick Add" sections
+✅ **Optimized WeatherMap** - Less empty space, better map/forecast ratio
+✅ **Responsive** - Side-by-side desktop, stacked mobile
+
+### No Breaking Changes
+
+- Existing widget functionality intact
+- Smooth migration for all users
+- All other widgets unaffected

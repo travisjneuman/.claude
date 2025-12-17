@@ -1,0 +1,289 @@
+/**
+ * Diagram Canvas Component
+ * Konva Stage wrapper with grid, pan, zoom
+ */
+
+import { useRef, useEffect, useState } from 'react';
+import { Stage, Layer, Rect, Line, Circle, Text as KonvaText, Arrow, Transformer } from 'react-konva';
+import type Konva from 'konva';
+import { useDiagramsStore } from '../../stores/useDiagramsStore';
+import { useDiagramEditorStore } from '../../stores/useDiagramEditorStore';
+import type { DiagramElement } from '../../types/diagrams';
+
+interface CanvasProps {
+  diagramId: string;
+  width: number;
+  height: number;
+}
+
+export function Canvas({ diagramId, width, height }: CanvasProps) {
+  const stageRef = useRef<Konva.Stage>(null);
+  const transformerRef = useRef<Konva.Transformer>(null);
+
+  const diagram = useDiagramsStore((s) => s.getDiagram(diagramId));
+  const updateDiagram = useDiagramsStore((s) => s.updateDiagram);
+
+  const currentTool = useDiagramEditorStore((s) => s.currentTool);
+  const selectedElementIds = useDiagramEditorStore((s) => s.selectedElementIds);
+  const selectElement = useDiagramEditorStore((s) => s.selectElement);
+  const clearSelection = useDiagramEditorStore((s) => s.clearSelection);
+
+  const [elements, setElements] = useState<DiagramElement[]>(diagram?.elements || []);
+
+  // Sync elements from diagram store
+  useEffect(() => {
+    if (diagram) {
+      setElements(diagram.elements);
+    }
+  }, [diagram]);
+
+  // Update transformer when selection changes
+  useEffect(() => {
+    if (!transformerRef.current || !stageRef.current) return;
+
+    const selectedNodes = selectedElementIds
+      .map((id) => stageRef.current?.findOne(`#${id}`))
+      .filter((node): node is Konva.Node => node !== undefined);
+
+    transformerRef.current.nodes(selectedNodes);
+    transformerRef.current.getLayer()?.batchDraw();
+  }, [selectedElementIds]);
+
+  if (!diagram) return null;
+
+  const handleStageClick = (e: Konva.KonvaEventObject<MouseEvent>) => {
+    // Click on empty area - deselect
+    if (e.target === e.target.getStage()) {
+      clearSelection();
+      return;
+    }
+  };
+
+  const handleElementClick = (id: string, e: Konva.KonvaEventObject<MouseEvent>) => {
+    if (currentTool === 'select') {
+      e.cancelBubble = true;
+      selectElement(id, e.evt.shiftKey);
+    }
+  };
+
+  const handleElementDragEnd = (id: string, e: Konva.KonvaEventObject<DragEvent>) => {
+    const node = e.target;
+    const updatedElements = elements.map((el) =>
+      el.id === id ? { ...el, x: node.x(), y: node.y() } : el
+    );
+
+    setElements(updatedElements);
+    updateDiagram(diagramId, { elements: updatedElements });
+  };
+
+  const handleTransformEnd = (id: string, e: Konva.KonvaEventObject<Event>) => {
+    const node = e.target;
+    const scaleX = node.scaleX();
+    const scaleY = node.scaleY();
+
+    // Reset scale and update width/height
+    node.scaleX(1);
+    node.scaleY(1);
+
+    const updatedElements = elements.map((el) =>
+      el.id === id
+        ? {
+            ...el,
+            x: node.x(),
+            y: node.y(),
+            width: Math.max(5, node.width() * scaleX),
+            height: Math.max(5, node.height() * scaleY),
+            rotation: node.rotation(),
+          }
+        : el
+    );
+
+    setElements(updatedElements);
+    updateDiagram(diagramId, { elements: updatedElements });
+  };
+
+  return (
+    <Stage
+      ref={stageRef}
+      width={width}
+      height={height}
+      onClick={handleStageClick}
+      draggable={currentTool === 'select'}
+      className="bg-background-light dark:bg-background-dark"
+    >
+      {/* Grid Layer */}
+      <Layer>
+        <GridBackground width={width} height={height} gridSize={diagram.canvasState.gridSize} />
+      </Layer>
+
+      {/* Elements Layer */}
+      <Layer>
+        {elements.map((element) => (
+          <DiagramElementComponent
+            key={element.id}
+            element={element}
+            onClick={(e) => handleElementClick(element.id, e)}
+            onDragEnd={(e) => handleElementDragEnd(element.id, e)}
+            onTransformEnd={(e) => handleTransformEnd(element.id, e)}
+            draggable={currentTool === 'select'}
+          />
+        ))}
+
+        {/* Transformer for selected elements */}
+        <Transformer ref={transformerRef} />
+      </Layer>
+    </Stage>
+  );
+}
+
+// Grid Background Component
+interface GridBackgroundProps {
+  width: number;
+  height: number;
+  gridSize: number;
+}
+
+function GridBackground({ width, height, gridSize }: GridBackgroundProps) {
+  const lines: React.ReactElement[] = [];
+
+  // Vertical lines
+  for (let i = 0; i < width / gridSize; i++) {
+    lines.push(
+      <Line
+        key={`v-${i}`}
+        points={[i * gridSize, 0, i * gridSize, height]}
+        stroke="#e5e5e5"
+        strokeWidth={0.5}
+        listening={false}
+      />
+    );
+  }
+
+  // Horizontal lines
+  for (let i = 0; i < height / gridSize; i++) {
+    lines.push(
+      <Line
+        key={`h-${i}`}
+        points={[0, i * gridSize, width, i * gridSize]}
+        stroke="#e5e5e5"
+        strokeWidth={0.5}
+        listening={false}
+      />
+    );
+  }
+
+  return <>{lines}</>;
+}
+
+// Diagram Element Component (renders different shapes)
+interface DiagramElementComponentProps {
+  element: DiagramElement;
+  onClick: (e: Konva.KonvaEventObject<MouseEvent>) => void;
+  onDragEnd: (e: Konva.KonvaEventObject<DragEvent>) => void;
+  onTransformEnd: (e: Konva.KonvaEventObject<Event>) => void;
+  draggable: boolean;
+}
+
+function DiagramElementComponent({
+  element,
+  onClick,
+  onDragEnd,
+  onTransformEnd,
+  draggable,
+}: DiagramElementComponentProps) {
+  const commonProps = {
+    id: element.id,
+    x: element.x,
+    y: element.y,
+    rotation: element.rotation || 0,
+    draggable,
+    onClick,
+    onDragEnd,
+    onTransformEnd,
+  };
+
+  const styleProps = {
+    fill: element.fill || 'transparent',
+    stroke: element.stroke || '#000000',
+    strokeWidth: element.strokeWidth || 2,
+  };
+
+  switch (element.type) {
+    case 'rectangle':
+      return (
+        <Rect
+          {...commonProps}
+          {...styleProps}
+          width={element.width}
+          height={element.height}
+          cornerRadius={element.cornerRadius || 0}
+        />
+      );
+
+    case 'circle':
+      return (
+        <Circle
+          {...commonProps}
+          {...styleProps}
+          radius={Math.min(element.width, element.height) / 2}
+        />
+      );
+
+    case 'ellipse':
+      return (
+        <Circle
+          {...commonProps}
+          {...styleProps}
+          radiusX={element.width / 2}
+          radiusY={element.height / 2}
+        />
+      );
+
+    case 'text':
+      return (
+        <KonvaText
+          {...commonProps}
+          text={element.text || 'Text'}
+          fontSize={element.fontSize || 16}
+          fontFamily={element.fontFamily || 'Arial'}
+          fontStyle={element.fontWeight === 'bold' ? 'bold' : 'normal'}
+          fill={element.fill || '#000000'}
+          align={element.textAlign || 'left'}
+          width={element.width}
+        />
+      );
+
+    case 'line':
+      return (
+        <Line
+          {...commonProps}
+          {...styleProps}
+          points={[
+            0,
+            0,
+            element.endPoint ? element.endPoint.x - element.x : element.width,
+            element.endPoint ? element.endPoint.y - element.y : element.height,
+          ]}
+        />
+      );
+
+    case 'arrow':
+      return (
+        <Arrow
+          {...commonProps}
+          {...styleProps}
+          points={[
+            0,
+            0,
+            element.endPoint ? element.endPoint.x - element.x : element.width,
+            element.endPoint ? element.endPoint.y - element.y : element.height,
+          ]}
+          pointerLength={10}
+          pointerWidth={10}
+        />
+      );
+
+    default:
+      return null;
+  }
+}

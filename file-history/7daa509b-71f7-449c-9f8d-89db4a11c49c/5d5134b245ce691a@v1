@@ -1,0 +1,573 @@
+---
+type: concept
+tags: [tech, language, backend, ai]
+---
+# Python
+
+> High-level, general-purpose programming language emphasizing readability and simplicity. Primary language for AI/ML and automation.
+
+---
+
+## Overview
+
+Python is used in this workspace for:
+- **AI/ML Engineering**: LLM integration, RAG pipelines, agent systems
+- **Automation**: GitHub Actions, data processing, scripting
+- **Backend APIs**: FastAPI services for AI endpoints
+- **Data Processing**: Evaluation pipelines, training data generation
+
+---
+
+## Why Python for AI
+
+| Benefit | Description |
+|---------|-------------|
+| ML Ecosystem | PyTorch, TensorFlow, HuggingFace, LangChain |
+| Readability | Easy to prototype and iterate |
+| Libraries | NumPy, Pandas, SciPy, scikit-learn |
+| Community | Vast resources for AI/ML |
+| Interoperability | C extensions for performance |
+
+---
+
+## Type Hints
+
+### Basic Types
+
+```python
+from typing import Optional, Union, List, Dict, Tuple, Any
+
+# Basic annotations
+name: str = "John"
+age: int = 30
+score: float = 95.5
+is_active: bool = True
+
+# Optional (can be None)
+middle_name: Optional[str] = None
+
+# Union (multiple types)
+id: Union[str, int] = "abc123"
+
+# Collections
+names: List[str] = ["Alice", "Bob"]
+scores: Dict[str, int] = {"Alice": 95, "Bob": 87}
+point: Tuple[float, float] = (1.0, 2.0)
+
+# Function annotations
+def greet(name: str, age: int = 0) -> str:
+    return f"Hello, {name}!"
+
+# Modern syntax (Python 3.10+)
+def process(value: str | int | None) -> list[str]:
+    ...
+```
+
+### Type Aliases
+
+```python
+from typing import TypeAlias, TypeVar, Generic
+
+# Type alias
+UserId: TypeAlias = str
+UserDict: TypeAlias = Dict[str, "User"]
+
+# TypeVar for generics
+T = TypeVar("T")
+
+def first(items: List[T]) -> Optional[T]:
+    return items[0] if items else None
+
+# Generic class
+class Stack(Generic[T]):
+    def __init__(self) -> None:
+        self._items: List[T] = []
+
+    def push(self, item: T) -> None:
+        self._items.append(item)
+
+    def pop(self) -> T:
+        return self._items.pop()
+```
+
+### Protocols (Structural Typing)
+
+```python
+from typing import Protocol, runtime_checkable
+
+@runtime_checkable
+class Drawable(Protocol):
+    def draw(self) -> None: ...
+
+class Circle:
+    def draw(self) -> None:
+        print("Drawing circle")
+
+def render(shape: Drawable) -> None:
+    shape.draw()
+
+# Circle implements Drawable without explicit inheritance
+render(Circle())  # Works!
+```
+
+---
+
+## Pydantic Models
+
+### Basic Models
+
+```python
+from pydantic import BaseModel, Field, EmailStr
+from typing import Optional, List
+from datetime import datetime
+
+class User(BaseModel):
+    id: str
+    name: str = Field(..., min_length=1, max_length=100)
+    email: EmailStr
+    age: Optional[int] = Field(None, ge=0, le=150)
+    tags: List[str] = Field(default_factory=list)
+    created_at: datetime = Field(default_factory=datetime.now)
+
+    class Config:
+        # Allow ORM mode
+        from_attributes = True
+        # Validate on assignment
+        validate_assignment = True
+
+# Usage
+user = User(id="1", name="John", email="john@example.com")
+print(user.model_dump())  # {'id': '1', 'name': 'John', ...}
+print(user.model_dump_json())  # JSON string
+```
+
+### Validation
+
+```python
+from pydantic import BaseModel, field_validator, model_validator
+
+class Order(BaseModel):
+    product_id: str
+    quantity: int
+    price: float
+
+    @field_validator("quantity")
+    @classmethod
+    def quantity_must_be_positive(cls, v: int) -> int:
+        if v <= 0:
+            raise ValueError("quantity must be positive")
+        return v
+
+    @model_validator(mode="after")
+    def check_total(self) -> "Order":
+        if self.price * self.quantity > 10000:
+            raise ValueError("Order total cannot exceed 10000")
+        return self
+```
+
+### Settings Management
+
+```python
+from pydantic_settings import BaseSettings
+from pydantic import Field
+
+class Settings(BaseSettings):
+    api_key: str = Field(..., env="API_KEY")
+    database_url: str = Field(..., env="DATABASE_URL")
+    debug: bool = Field(False, env="DEBUG")
+    max_retries: int = Field(3, env="MAX_RETRIES")
+
+    class Config:
+        env_file = ".env"
+        env_file_encoding = "utf-8"
+
+settings = Settings()
+```
+
+---
+
+## Async Programming
+
+### Basic Async
+
+```python
+import asyncio
+from typing import List
+
+async def fetch_data(url: str) -> dict:
+    # Simulate async I/O
+    await asyncio.sleep(1)
+    return {"url": url, "data": "..."}
+
+async def main():
+    # Run single coroutine
+    result = await fetch_data("https://api.example.com")
+
+    # Run multiple concurrently
+    urls = ["https://api1.com", "https://api2.com", "https://api3.com"]
+    results = await asyncio.gather(*[fetch_data(url) for url in urls])
+
+    # With timeout
+    try:
+        result = await asyncio.wait_for(fetch_data("..."), timeout=5.0)
+    except asyncio.TimeoutError:
+        print("Timeout!")
+
+asyncio.run(main())
+```
+
+### Async Context Managers
+
+```python
+import aiohttp
+from contextlib import asynccontextmanager
+
+@asynccontextmanager
+async def get_session():
+    async with aiohttp.ClientSession() as session:
+        yield session
+
+async def fetch(url: str) -> str:
+    async with get_session() as session:
+        async with session.get(url) as response:
+            return await response.text()
+```
+
+### Async Generators
+
+```python
+from typing import AsyncGenerator
+
+async def async_range(start: int, stop: int) -> AsyncGenerator[int, None]:
+    for i in range(start, stop):
+        await asyncio.sleep(0.1)
+        yield i
+
+async def main():
+    async for num in async_range(0, 10):
+        print(num)
+```
+
+---
+
+## LLM Integration
+
+### OpenAI Client
+
+```python
+from openai import AsyncOpenAI
+from typing import List, Dict
+
+client = AsyncOpenAI(api_key="...")
+
+async def chat_completion(
+    messages: List[Dict[str, str]],
+    model: str = "gpt-4",
+    temperature: float = 0.7,
+) -> str:
+    response = await client.chat.completions.create(
+        model=model,
+        messages=messages,
+        temperature=temperature,
+    )
+    return response.choices[0].message.content or ""
+
+# Streaming
+async def stream_completion(messages: List[Dict[str, str]]):
+    stream = await client.chat.completions.create(
+        model="gpt-4",
+        messages=messages,
+        stream=True,
+    )
+
+    async for chunk in stream:
+        if chunk.choices[0].delta.content:
+            print(chunk.choices[0].delta.content, end="")
+```
+
+### LangChain Basics
+
+```python
+from langchain_openai import ChatOpenAI
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.output_parsers import StrOutputParser
+
+# Create chain
+llm = ChatOpenAI(model="gpt-4")
+prompt = ChatPromptTemplate.from_messages([
+    ("system", "You are a helpful assistant."),
+    ("user", "{input}"),
+])
+output_parser = StrOutputParser()
+
+chain = prompt | llm | output_parser
+
+# Invoke
+result = chain.invoke({"input": "What is Python?"})
+print(result)
+
+# Stream
+for chunk in chain.stream({"input": "Explain async/await"}):
+    print(chunk, end="")
+```
+
+### RAG Pattern
+
+```python
+from langchain_openai import OpenAIEmbeddings
+from langchain_community.vectorstores import Chroma
+from langchain_core.documents import Document
+
+# Create embeddings
+embeddings = OpenAIEmbeddings()
+
+# Store documents
+documents = [
+    Document(page_content="Python is a programming language."),
+    Document(page_content="JavaScript runs in browsers."),
+]
+
+vectorstore = Chroma.from_documents(documents, embeddings)
+
+# Query
+retriever = vectorstore.as_retriever(search_kwargs={"k": 3})
+docs = retriever.invoke("What is Python?")
+
+# Use in chain
+from langchain_core.runnables import RunnablePassthrough
+
+def format_docs(docs):
+    return "\n\n".join(doc.page_content for doc in docs)
+
+rag_chain = (
+    {"context": retriever | format_docs, "question": RunnablePassthrough()}
+    | prompt
+    | llm
+    | output_parser
+)
+
+result = rag_chain.invoke("What is Python?")
+```
+
+---
+
+## File I/O Patterns
+
+### JSON Handling
+
+```python
+import json
+from pathlib import Path
+from typing import TypeVar, Type
+
+T = TypeVar("T")
+
+def load_json(path: Path, model: Type[T]) -> T:
+    """Load JSON and validate with Pydantic model."""
+    with open(path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+    return model.model_validate(data)
+
+def save_json(path: Path, data: BaseModel) -> None:
+    """Save Pydantic model as JSON."""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with open(path, "w", encoding="utf-8") as f:
+        f.write(data.model_dump_json(indent=2))
+```
+
+### CSV Processing
+
+```python
+import csv
+from pathlib import Path
+from typing import List, Dict
+
+def read_csv(path: Path) -> List[Dict[str, str]]:
+    with open(path, "r", newline="", encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        return list(reader)
+
+def write_csv(path: Path, rows: List[Dict[str, str]]) -> None:
+    if not rows:
+        return
+
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with open(path, "w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=rows[0].keys())
+        writer.writeheader()
+        writer.writerows(rows)
+```
+
+---
+
+## Testing
+
+### pytest Basics
+
+```python
+import pytest
+from typing import List
+
+# Basic test
+def test_addition():
+    assert 1 + 1 == 2
+
+# Fixtures
+@pytest.fixture
+def sample_users() -> List[dict]:
+    return [
+        {"id": "1", "name": "Alice"},
+        {"id": "2", "name": "Bob"},
+    ]
+
+def test_with_fixture(sample_users: List[dict]):
+    assert len(sample_users) == 2
+
+# Parametrized tests
+@pytest.mark.parametrize("input,expected", [
+    ("hello", "HELLO"),
+    ("world", "WORLD"),
+    ("", ""),
+])
+def test_uppercase(input: str, expected: str):
+    assert input.upper() == expected
+
+# Async tests
+@pytest.mark.asyncio
+async def test_async_function():
+    result = await fetch_data("test")
+    assert result is not None
+
+# Exception testing
+def test_raises_error():
+    with pytest.raises(ValueError, match="invalid"):
+        raise ValueError("invalid input")
+```
+
+### Mocking
+
+```python
+from unittest.mock import Mock, patch, AsyncMock
+
+def test_with_mock():
+    mock_client = Mock()
+    mock_client.get_data.return_value = {"key": "value"}
+
+    result = mock_client.get_data()
+    assert result["key"] == "value"
+    mock_client.get_data.assert_called_once()
+
+@patch("module.external_api")
+def test_with_patch(mock_api: Mock):
+    mock_api.return_value = "mocked"
+    # Your code that uses external_api
+
+# Async mocking
+@pytest.mark.asyncio
+async def test_async_mock():
+    mock_fetch = AsyncMock(return_value={"data": "test"})
+    result = await mock_fetch()
+    assert result["data"] == "test"
+```
+
+---
+
+## Project Patterns
+
+### Entry Points
+
+```python
+# __main__.py pattern
+def main() -> int:
+    """Main entry point."""
+    try:
+        run_application()
+        return 0
+    except Exception as e:
+        print(f"Error: {e}")
+        return 1
+
+if __name__ == "__main__":
+    import sys
+    sys.exit(main())
+```
+
+### Logging
+
+```python
+import logging
+from pathlib import Path
+
+def setup_logging(level: str = "INFO", log_file: Path | None = None) -> None:
+    handlers: list[logging.Handler] = [logging.StreamHandler()]
+
+    if log_file:
+        log_file.parent.mkdir(parents=True, exist_ok=True)
+        handlers.append(logging.FileHandler(log_file))
+
+    logging.basicConfig(
+        level=level,
+        format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+        handlers=handlers,
+    )
+
+logger = logging.getLogger(__name__)
+logger.info("Application started")
+```
+
+---
+
+## Projects Using Python
+
+```dataview
+TABLE status, priority, tech-stack as "Stack"
+FROM "Projects"
+WHERE contains(tech-stack, [[Python]]) OR contains(tech-stack, "Python")
+SORT priority ASC
+```
+
+### The Dead Robot
+Python automation for social content generation via GitHub Actions.
+
+### Archon
+Python + Streamlit for AI agent builder interface.
+
+### Agent Development Kit
+FastAPI + Python for distributed agent runtime.
+
+### AgentBench
+Python evaluation pipeline for training data generation.
+
+---
+
+## Snippets Library
+
+```dataview
+LIST
+FROM "Snippets"
+WHERE language = "python"
+```
+
+---
+
+## Resources
+
+- [Python Documentation](https://docs.python.org/3/)
+- [Real Python](https://realpython.com/)
+- [Python Type Hints Cheatsheet](https://mypy.readthedocs.io/en/stable/cheat_sheet_py3.html)
+- [Pydantic Documentation](https://docs.pydantic.dev/)
+- [LangChain Documentation](https://python.langchain.com/)
+
+---
+
+## Related Concepts
+
+- [[FastAPI]] — Python web framework
+- [[RAG]] — Retrieval Augmented Generation
+- [[LLM]] — Large Language Models
+- [[Agentic AI]] — Autonomous AI systems
+- [[Docker]] — Containerization
+
+---
+
+*Last updated: 2025-12-14*

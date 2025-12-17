@@ -1,0 +1,88 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useEffect, lazy, Suspense } from 'react';
+import { Layout } from './components/Layout';
+import { migrateToIndexedDB, isMigrationNeeded } from './services/migration';
+import { UndoToastContainer } from './components/UndoToast';
+import { useUndoStore } from './stores/useUndoStore';
+import { BackupOnboardingModal } from './components/BackupOnboardingModal';
+import { useBackupOnboarding } from './hooks/useBackupOnboarding';
+
+// Lazy load all pages for code splitting (including Dashboard)
+const Dashboard = lazy(() => import('./pages/Dashboard').then((m) => ({ default: m.Dashboard })));
+const Planning = lazy(() => import('./pages/Planning').then((m) => ({ default: m.Planning })));
+const Tasks = lazy(() => import('./pages/Tasks').then((m) => ({ default: m.Tasks })));
+const Settings = lazy(() => import('./pages/Settings').then((m) => ({ default: m.Settings })));
+const Notes = lazy(() => import('./pages/Notes').then((m) => ({ default: m.Notes })));
+const Privacy = lazy(() => import('./pages/Privacy').then((m) => ({ default: m.Privacy })));
+const TimeTracking = lazy(() => import('./pages/TimeTracking').then((m) => ({ default: m.TimeTracking })));
+
+// Loading fallback component
+const PageLoader = () => (
+  <div className="flex items-center justify-center min-h-[60vh]">
+    <div className="text-center">
+      <div className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-primary-cyan border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"></div>
+      <p className="mt-4 text-sm text-text-light-secondary dark:text-text-dark-secondary">Loading...</p>
+    </div>
+  </div>
+);
+
+/**
+ * Main App Component with React Router
+ * Uses Layout component to provide consistent header/footer
+ */
+function App() {
+  // Get undo toasts from store
+  const toasts = useUndoStore((state) => state.toasts);
+  const dismissToast = useUndoStore((state) => state.dismissToast);
+
+  // Backup onboarding
+  const { shouldShowModal, dismissModal } = useBackupOnboarding();
+
+  // Run migration and initialize auto-save on app startup
+  useEffect(() => {
+    const initialize = async () => {
+      // Run migration if needed
+      if (isMigrationNeeded()) {
+        console.log('🚀 Migration needed, starting...');
+        const result = await migrateToIndexedDB();
+        if (result.success) {
+          console.log('✅ Migration complete');
+        } else {
+          console.error('❌ Migration failed:', result.errors);
+        }
+      }
+
+      // Initialize auto-save (dynamic import to reduce main bundle)
+      const { autoSaveManager } = await import('./services/autoSave');
+      await autoSaveManager.initialize();
+    };
+
+    initialize();
+  }, []);
+
+  return (
+    <BrowserRouter>
+      <Layout>
+        <Suspense fallback={<PageLoader />}>
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/notes" element={<Notes />} />
+            <Route path="/planning" element={<Planning />} />
+            <Route path="/tasks" element={<Tasks />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/time-tracking" element={<TimeTracking />} />
+          </Routes>
+        </Suspense>
+      </Layout>
+
+      {/* Undo Toast Container - Global across all pages */}
+      <UndoToastContainer toasts={toasts} onDismiss={dismissToast} />
+
+      {/* Backup Onboarding Modal */}
+      <BackupOnboardingModal isOpen={shouldShowModal} onClose={dismissModal} />
+    </BrowserRouter>
+  );
+}
+
+export default App;

@@ -1,0 +1,584 @@
+# Docker
+
+> Container platform for building, shipping, and running applications in isolated environments.
+
+---
+
+## Overview
+
+Docker provides:
+- **Containers**: Lightweight, portable runtime environments
+- **Images**: Immutable application snapshots
+- **Compose**: Multi-container orchestration
+- **Registry**: Image distribution (Docker Hub)
+- **Isolation**: Process, network, and filesystem separation
+
+---
+
+## Why Docker
+
+| Benefit | Description |
+|---------|-------------|
+| Consistency | Same environment everywhere |
+| Isolation | No dependency conflicts |
+| Portability | Run anywhere Docker runs |
+| Efficiency | Share OS kernel, lighter than VMs |
+| Reproducibility | Version-controlled infrastructure |
+
+---
+
+## Core Concepts
+
+### Images vs Containers
+
+```
+Image (Blueprint)           Container (Running Instance)
+├── Read-only layers       ├── Image + writable layer
+├── Built from Dockerfile  ├── Can be started/stopped
+├── Stored in registry     ├── Isolated process
+└── Shared across hosts    └── Ephemeral by default
+```
+
+### Dockerfile
+
+```dockerfile
+# Base image
+FROM node:20-alpine
+
+# Working directory
+WORKDIR /app
+
+# Copy dependency files first (layer caching)
+COPY package*.json ./
+
+# Install dependencies
+RUN npm ci --only=production
+
+# Copy application code
+COPY . .
+
+# Build application
+RUN npm run build
+
+# Expose port
+EXPOSE 3000
+
+# Runtime command
+CMD ["node", "dist/main.js"]
+```
+
+---
+
+## Essential Commands
+
+### Image Management
+
+```bash
+# Build image from Dockerfile
+docker build -t myapp:1.0 .
+docker build -t myapp:1.0 -f Dockerfile.prod .
+
+# List images
+docker images
+
+# Pull from registry
+docker pull node:20-alpine
+
+# Push to registry
+docker push myrepo/myapp:1.0
+
+# Remove image
+docker rmi myapp:1.0
+docker image prune  # Remove unused images
+```
+
+### Container Management
+
+```bash
+# Run container
+docker run myapp:1.0
+docker run -d myapp:1.0                    # Detached
+docker run -p 3000:3000 myapp:1.0          # Port mapping
+docker run -v $(pwd):/app myapp:1.0        # Volume mount
+docker run -e NODE_ENV=production myapp    # Environment var
+docker run --name my-container myapp:1.0   # Named container
+docker run -it myapp:1.0 /bin/sh           # Interactive shell
+
+# Container lifecycle
+docker ps                     # List running
+docker ps -a                  # List all
+docker stop <container>       # Stop gracefully
+docker start <container>      # Start stopped
+docker restart <container>    # Restart
+docker rm <container>         # Remove stopped
+docker rm -f <container>      # Force remove running
+
+# Container inspection
+docker logs <container>       # View logs
+docker logs -f <container>    # Follow logs
+docker exec -it <container> sh  # Shell into running container
+docker inspect <container>    # Detailed info
+```
+
+---
+
+## Dockerfile Best Practices
+
+### Multi-Stage Builds
+
+```dockerfile
+# Stage 1: Build
+FROM node:20-alpine AS builder
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+COPY . .
+RUN npm run build
+
+# Stage 2: Production
+FROM node:20-alpine AS runner
+WORKDIR /app
+ENV NODE_ENV=production
+
+# Create non-root user
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 appuser
+
+# Copy only production artifacts
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/package.json ./
+
+USER appuser
+EXPOSE 3000
+CMD ["node", "dist/main.js"]
+```
+
+### Layer Optimization
+
+```dockerfile
+# BAD: Invalidates cache on any code change
+COPY . .
+RUN npm install
+
+# GOOD: Dependencies cached separately
+COPY package*.json ./
+RUN npm ci
+COPY . .
+```
+
+### Security Practices
+
+```dockerfile
+# Use specific versions, not :latest
+FROM node:20.10.0-alpine
+
+# Run as non-root
+USER node
+
+# Use .dockerignore
+# .dockerignore:
+# node_modules
+# .git
+# .env
+# *.log
+
+# Scan for vulnerabilities
+# docker scan myapp:1.0
+```
+
+---
+
+## Docker Compose
+
+### Basic docker-compose.yml
+
+```yaml
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=postgresql://postgres:password@db:5432/myapp
+    depends_on:
+      - db
+    volumes:
+      - ./uploads:/app/uploads
+    restart: unless-stopped
+
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: myapp
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres_data:
+```
+
+### Development Setup
+
+```yaml
+# docker-compose.dev.yml
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      # Mount source for hot reload
+      - .:/app
+      - /app/node_modules  # Exclude node_modules
+    environment:
+      - NODE_ENV=development
+    command: npm run dev
+
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: dev
+      POSTGRES_PASSWORD: dev
+      POSTGRES_DB: dev_db
+    ports:
+      - "5432:5432"
+```
+
+### Compose Commands
+
+```bash
+# Start services
+docker-compose up
+docker-compose up -d              # Detached
+docker-compose up --build         # Rebuild images
+docker-compose -f docker-compose.dev.yml up
+
+# Stop services
+docker-compose down
+docker-compose down -v            # Remove volumes too
+
+# Service management
+docker-compose ps                 # List services
+docker-compose logs app           # Service logs
+docker-compose exec app sh        # Shell into service
+docker-compose restart app        # Restart service
+
+# Scaling
+docker-compose up --scale app=3   # Run 3 instances
+```
+
+---
+
+## Networking
+
+### Network Types
+
+```bash
+# Default bridge network
+docker run --network bridge myapp
+
+# Host network (no isolation)
+docker run --network host myapp
+
+# Custom network
+docker network create mynetwork
+docker run --network mynetwork myapp
+
+# None (no networking)
+docker run --network none myapp
+```
+
+### Container Communication
+
+```yaml
+# docker-compose.yml
+services:
+  app:
+    networks:
+      - backend
+      - frontend
+
+  api:
+    networks:
+      - backend
+
+  db:
+    networks:
+      - backend
+
+networks:
+  frontend:
+  backend:
+```
+
+```bash
+# Containers on same network can use service name as hostname
+# From 'app' container:
+curl http://api:3000/health
+psql -h db -U postgres
+```
+
+---
+
+## Volumes and Data
+
+### Volume Types
+
+```bash
+# Named volume (managed by Docker)
+docker volume create mydata
+docker run -v mydata:/app/data myapp
+
+# Bind mount (host path)
+docker run -v /host/path:/container/path myapp
+docker run -v $(pwd):/app myapp
+
+# Anonymous volume
+docker run -v /app/data myapp
+```
+
+### Volume Management
+
+```bash
+docker volume ls
+docker volume inspect mydata
+docker volume rm mydata
+docker volume prune  # Remove unused
+```
+
+### Compose Volumes
+
+```yaml
+services:
+  app:
+    volumes:
+      # Named volume
+      - app_data:/app/data
+      # Bind mount
+      - ./config:/app/config:ro  # Read-only
+      # Anonymous volume (preserve node_modules)
+      - /app/node_modules
+
+volumes:
+  app_data:
+    driver: local
+```
+
+---
+
+## Environment Variables
+
+### Methods
+
+```bash
+# Command line
+docker run -e MY_VAR=value myapp
+docker run --env-file .env myapp
+
+# Dockerfile
+ENV NODE_ENV=production
+ENV PORT=3000
+
+# Compose
+services:
+  app:
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+    env_file:
+      - .env
+      - .env.local
+```
+
+### Secrets (Compose)
+
+```yaml
+services:
+  app:
+    secrets:
+      - db_password
+
+secrets:
+  db_password:
+    file: ./secrets/db_password.txt
+```
+
+---
+
+## Common Patterns
+
+### Node.js Application
+
+```dockerfile
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Install dependencies
+COPY package*.json ./
+RUN npm ci --only=production
+
+# Copy source
+COPY . .
+
+# Build TypeScript
+RUN npm run build
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=3s \
+  CMD wget -qO- http://localhost:3000/health || exit 1
+
+EXPOSE 3000
+CMD ["node", "dist/main.js"]
+```
+
+### Python Application
+
+```dockerfile
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Install dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy source
+COPY . .
+
+EXPOSE 8000
+CMD ["python", "-m", "uvicorn", "main:app", "--host", "0.0.0.0"]
+```
+
+### Full Stack Development
+
+```yaml
+# docker-compose.yml
+version: '3.8'
+
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - VITE_API_URL=http://localhost:4000
+
+  backend:
+    build: ./backend
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/app
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: app
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres_data:
+```
+
+---
+
+## Debugging
+
+### Container Inspection
+
+```bash
+# View logs
+docker logs -f --tail 100 <container>
+
+# Shell access
+docker exec -it <container> /bin/sh
+
+# Process list
+docker top <container>
+
+# Resource usage
+docker stats <container>
+
+# File system changes
+docker diff <container>
+
+# Copy files
+docker cp <container>:/path/file ./local
+docker cp ./local <container>:/path/file
+```
+
+### Troubleshooting
+
+```bash
+# Build with no cache
+docker build --no-cache -t myapp .
+
+# Inspect layers
+docker history myapp:1.0
+
+# Check image size
+docker images myapp
+
+# Network debugging
+docker network inspect bridge
+docker exec -it <container> ping other-container
+```
+
+---
+
+## Project Usage
+
+### AgentBench
+
+The AgentBench project uses Docker for:
+- Sandboxed code execution
+- Isolated agent environments
+- Reproducible evaluation setups
+
+See: [[Projects/AgentBench]]
+
+---
+
+## Resources
+
+- [Docker Documentation](https://docs.docker.com/)
+- [Docker Hub](https://hub.docker.com/)
+- [Docker Compose Documentation](https://docs.docker.com/compose/)
+- [Best Practices Guide](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/)
+
+---
+
+## Related Concepts
+
+- [[Python]] — Backend applications
+- [[NestJS]] — Node.js backend
+- [[FastAPI]] — Python API framework
+
+---
+
+*Last updated: 2025-12-14*

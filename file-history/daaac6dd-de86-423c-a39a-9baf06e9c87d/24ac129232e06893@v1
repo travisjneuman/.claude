@@ -1,0 +1,214 @@
+# SEO Check
+
+Audit search engine optimization for OakStone Properties.
+
+## Quick Audit
+
+```bash
+npm run build
+# Then check dist/ for:
+# - sitemap.xml
+# - robots.txt
+# - Proper meta tags in HTML files
+```
+
+## Full SEO Workflow
+
+### 1. Meta Tags Validation
+
+#### Homepage (`src/pages/index.astro`)
+```html
+<title>OakStone Properties | Rental Homes in [City]</title>
+<meta name="description" content="Browse available rental properties..." />
+<meta property="og:title" content="OakStone Properties" />
+<meta property="og:description" content="..." />
+<meta property="og:image" content="/og-image.jpg" />
+<meta property="og:type" content="website" />
+<link rel="canonical" href="https://domain.com/" />
+```
+
+#### Property Pages (`src/pages/properties/[slug].astro`)
+```html
+<title>{property.title} | OakStone Properties</title>
+<meta name="description" content="{beds}BR/{baths}BA in {neighborhood}. ${rent}/mo..." />
+<meta property="og:title" content="{property.title}" />
+<meta property="og:description" content="..." />
+<meta property="og:image" content="{first photo}" />
+<meta property="og:type" content="article" />
+```
+
+### 2. Schema.org Markup
+
+#### RentalListing Schema (for property pages)
+
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "RentalListing",
+  "name": "Property Title",
+  "description": "Property description",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "City",
+    "addressRegion": "ST",
+    "addressCountry": "US"
+  },
+  "numberOfRooms": 3,
+  "numberOfBedrooms": 2,
+  "numberOfBathroomsTotal": 1,
+  "floorSize": {
+    "@type": "QuantitativeValue",
+    "value": 950,
+    "unitCode": "FTK"
+  },
+  "price": {
+    "@type": "MonetaryAmount",
+    "currency": "USD",
+    "value": 1500
+  },
+  "image": ["photo1.jpg", "photo2.jpg"],
+  "url": "https://domain.com/properties/slug"
+}
+```
+
+Add to property layout:
+```astro
+<script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
+```
+
+#### LocalBusiness Schema (for About page)
+
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "RealEstateAgent",
+  "name": "OakStone Properties",
+  "description": "Property management and rentals",
+  "telephone": "+1-xxx-xxx-xxxx",
+  "email": "contact@domain.com",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "City",
+    "addressRegion": "ST"
+  }
+}
+```
+
+### 3. Technical SEO
+
+#### robots.txt (`public/robots.txt`)
+```
+User-agent: *
+Allow: /
+
+Sitemap: https://domain.com/sitemap.xml
+```
+
+#### Sitemap Configuration
+
+In `astro.config.mjs`:
+```javascript
+import sitemap from '@astrojs/sitemap';
+
+export default defineConfig({
+  site: 'https://domain.com',
+  integrations: [sitemap()],
+});
+```
+
+Verify sitemap includes:
+- [ ] Homepage
+- [ ] All property pages
+- [ ] About, Contact, FAQ pages
+- [ ] Property listing page
+
+### 4. Image SEO
+
+Every image needs:
+- [ ] Descriptive filename (`living-room.webp` not `IMG_1234.webp`)
+- [ ] Alt text describing the content
+- [ ] Proper dimensions (not oversized)
+- [ ] Modern format (WebP preferred)
+
+```astro
+<img
+  src={photo}
+  alt={`Living room of ${property.title}`}
+  width="800"
+  height="600"
+  loading="lazy"
+/>
+```
+
+### 5. URL Structure
+
+Good:
+- `/properties/cozy-2br-downtown`
+- `/properties/` (listing page)
+- `/about`
+- `/contact`
+
+Bad:
+- `/properties/123` (numeric IDs)
+- `/p/abc` (short/cryptic)
+- `/properties.html` (file extensions)
+
+### 6. Performance (Core Web Vitals)
+
+| Metric | Target | Tool |
+|--------|--------|------|
+| LCP | <2.5s | Lighthouse |
+| FID | <100ms | Lighthouse |
+| CLS | <0.1 | Lighthouse |
+
+Impact on SEO:
+- Google uses Core Web Vitals as ranking factors
+- Slow sites get lower rankings
+
+### 7. Mobile-First
+
+- [ ] Viewport meta tag present
+- [ ] Touch targets >= 48px
+- [ ] Text readable without zoom
+- [ ] No horizontal scrolling
+- [ ] Mobile-friendly test passes
+
+```html
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+```
+
+### 8. Local SEO (Important for Rentals)
+
+- [ ] Google Business Profile (owner sets up)
+- [ ] Consistent NAP (Name, Address, Phone) across site
+- [ ] City/neighborhood mentioned in content
+- [ ] Local schema markup
+
+### 9. Audit Checklist
+
+Run through for every page:
+
+| Check | Homepage | Properties | Property Detail | About | Contact |
+|-------|----------|------------|-----------------|-------|---------|
+| Title tag unique | [ ] | [ ] | [ ] | [ ] | [ ] |
+| Meta description | [ ] | [ ] | [ ] | [ ] | [ ] |
+| H1 tag present | [ ] | [ ] | [ ] | [ ] | [ ] |
+| Schema markup | [ ] | [ ] | [ ] | [ ] | [ ] |
+| Open Graph | [ ] | [ ] | [ ] | [ ] | [ ] |
+| Canonical URL | [ ] | [ ] | [ ] | [ ] | [ ] |
+| Image alt text | [ ] | [ ] | [ ] | [ ] | [ ] |
+
+### 10. Tools
+
+- **Google Search Console** - Track indexing, errors
+- **Google PageSpeed Insights** - Performance audit
+- **Schema Validator** - https://validator.schema.org/
+- **Lighthouse** - Chrome DevTools
+- **Mobile-Friendly Test** - Google tool
+
+## After Deployment
+
+1. Submit sitemap to Google Search Console
+2. Request indexing for key pages
+3. Monitor for crawl errors
+4. Track keyword rankings (if desired)

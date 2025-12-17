@@ -1,0 +1,874 @@
+/**
+ * Link Library Page
+ *
+ * Full-featured bookmark management system with:
+ * - Import/Export (Netscape HTML format)
+ * - Collections for organization
+ * - AI-powered categorization
+ * - Search and filter
+ * - Grid/List view toggle
+ */
+
+import React, { useState, useCallback, useMemo } from 'react';
+import { PageHeader } from '../components/PageHeader';
+import { CollectionSidebar } from '../components/CollectionSidebar';
+import { useLinkLibraryStore, type Link } from '../stores/useLinkLibraryStore';
+import {
+  parseNetscapeBookmarks,
+  convertToLinks,
+  readFileAsText,
+  isValidBookmarkFile,
+} from '../utils/bookmarkParser';
+import type { CategorySuggestion } from '../services/linkCategorizer';
+import {
+  exportAndDownload,
+} from '../utils/bookmarkExporter';
+
+export const LinkLibrary: React.FC = () => {
+  const {
+    links,
+    collections,
+    viewMode,
+    sortField,
+    sortDirection,
+    searchQuery,
+    activeCollectionId,
+    selectedLinkIds,
+    setViewMode,
+    setSortField,
+    setSortDirection,
+    setSearchQuery,
+    // setActiveCollection used by CollectionSidebar
+    toggleLinkSelection,
+    selectAllLinks,
+    clearSelection,
+    // addLink will be used for manual link adding
+    deleteLinks,
+    toggleFavorite,
+    toggleArchived,
+    importLinks,
+    updateLink,
+    getAllLinks,
+    getLinksInCollection,
+    getFavoriteLinks,
+    searchLinks,
+  } = useLinkLibraryStore();
+
+  const [isImporting, setIsImporting] = useState(false);
+  const [importError, setImportError] = useState<string | null>(null);
+  const [importStats, setImportStats] = useState<{ total: number; imported: number } | null>(null);
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+
+  // AI Categorization state
+  const [isCategorizing, setIsCategorizing] = useState(false);
+  const [categorizationProgress, setCategorizationProgress] = useState({ processed: 0, total: 0 });
+  const [pendingSuggestions, setPendingSuggestions] = useState<CategorySuggestion[]>([]);
+  const [categorizationError, setCategorizationError] = useState<string | null>(null);
+
+  // Get filtered and sorted links
+  const displayedLinks = useMemo(() => {
+    let result: Link[];
+
+    // Filter by collection or view
+    if (activeCollectionId === 'favorites') {
+      result = getFavoriteLinks();
+    } else if (activeCollectionId) {
+      result = getLinksInCollection(activeCollectionId);
+    } else if (searchQuery) {
+      result = searchLinks(searchQuery);
+    } else {
+      result = getAllLinks();
+    }
+
+    // Sort
+    result = [...result].sort((a, b) => {
+      let comparison = 0;
+      switch (sortField) {
+        case 'title':
+          comparison = a.title.localeCompare(b.title);
+          break;
+        case 'createdAt':
+          comparison = a.createdAt.getTime() - b.createdAt.getTime();
+          break;
+        case 'updatedAt':
+          comparison = a.updatedAt.getTime() - b.updatedAt.getTime();
+          break;
+        case 'visitCount':
+          comparison = a.visitCount - b.visitCount;
+          break;
+      }
+      return sortDirection === 'asc' ? comparison : -comparison;
+    });
+
+    return result;
+  }, [
+    activeCollectionId,
+    searchQuery,
+    sortField,
+    sortDirection,
+    getAllLinks,
+    getLinksInCollection,
+    getFavoriteLinks,
+    searchLinks,
+  ]);
+
+  // Handle file import
+  const handleFileImport = useCallback(
+    async (file: File) => {
+      setIsImporting(true);
+      setImportError(null);
+      setImportStats(null);
+
+      try {
+        const content = await readFileAsText(file);
+
+        if (!isValidBookmarkFile(content)) {
+          throw new Error('Invalid bookmark file format. Please export bookmarks from your browser.');
+        }
+
+        const result = parseNetscapeBookmarks(content);
+        const linksToImport = convertToLinks(result.bookmarks);
+        const imported = importLinks(linksToImport);
+
+        setImportStats({
+          total: result.stats.total,
+          imported: imported.length,
+        });
+      } catch (error) {
+        setImportError(error instanceof Error ? error.message : 'Failed to import bookmarks');
+      } finally {
+        setIsImporting(false);
+      }
+    },
+    [importLinks]
+  );
+
+  // Handle drag and drop
+  const handleDrop = useCallback(
+    (e: React.DragEvent) => {
+      e.preventDefault();
+      const file = e.dataTransfer.files[0];
+      if (file && (file.name.endsWith('.html') || file.name.endsWith('.htm'))) {
+        handleFileImport(file);
+      } else {
+        setImportError('Please drop a valid HTML bookmark file');
+      }
+    },
+    [handleFileImport]
+  );
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+  };
+
+  // Handle file input
+  const handleFileInput = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const file = e.target.files?.[0];
+      if (file) {
+        handleFileImport(file);
+      }
+    },
+    [handleFileImport]
+  );
+
+  // Handle bulk delete
+  const handleBulkDelete = useCallback(() => {
+    if (selectedLinkIds.size > 0) {
+      deleteLinks(Array.from(selectedLinkIds));
+      clearSelection();
+    }
+  }, [selectedLinkIds, deleteLinks, clearSelection]);
+
+  // Handle select all
+  const handleSelectAll = useCallback(() => {
+    if (selectedLinkIds.size === displayedLinks.length) {
+      clearSelection();
+    } else {
+      selectAllLinks(displayedLinks.map((l) => l.id));
+    }
+  }, [selectedLinkIds.size, displayedLinks, selectAllLinks, clearSelection]);
+
+  // Handle AI categorization (lazy-load the categorizer)
+  const handleCategorize = useCallback(async () => {
+    // Get links to categorize (uncategorized ones only)
+    const uncategorizedLinks = displayedLinks.filter((l) => !l.category);
+
+    if (uncategorizedLinks.length === 0) {
+      setCategorizationError('All links are already categorized.');
+      return;
+    }
+
+    setIsCategorizing(true);
+    setCategorizationError(null);
+    setCategorizationProgress({ processed: 0, total: uncategorizedLinks.length });
+
+    try {
+      // Lazy-load the AI categorization service (and providerRouter) only when needed
+      const { categorizeLinksBatched } = await import('../services/linkCategorizer');
+
+      const result = await categorizeLinksBatched(
+        uncategorizedLinks,
+        10, // Batch size
+        (processed, total, _batch) => {
+          setCategorizationProgress({ processed, total });
+        }
+      );
+
+      setIsCategorizing(false);
+
+      if (result.success && result.suggestions.length > 0) {
+        setPendingSuggestions(result.suggestions);
+      } else if (result.error) {
+        setCategorizationError(result.error);
+      }
+    } catch (error) {
+      setIsCategorizing(false);
+      setCategorizationError(error instanceof Error ? error.message : 'Failed to load AI categorization');
+    }
+  }, [displayedLinks]);
+
+  // Accept a category suggestion
+  const handleAcceptSuggestion = useCallback(
+    (suggestion: CategorySuggestion) => {
+      updateLink(suggestion.linkId, {
+        category: suggestion.category,
+        tags: suggestion.tags,
+      });
+      setPendingSuggestions((prev) => prev.filter((s) => s.linkId !== suggestion.linkId));
+    },
+    [updateLink]
+  );
+
+  // Reject a category suggestion
+  const handleRejectSuggestion = useCallback((linkId: string) => {
+    setPendingSuggestions((prev) => prev.filter((s) => s.linkId !== linkId));
+  }, []);
+
+  // Accept all suggestions
+  const handleAcceptAllSuggestions = useCallback(() => {
+    pendingSuggestions.forEach((suggestion) => {
+      updateLink(suggestion.linkId, {
+        category: suggestion.category,
+        tags: suggestion.tags,
+      });
+    });
+    setPendingSuggestions([]);
+  }, [pendingSuggestions, updateLink]);
+
+  // Dismiss all suggestions
+  const handleDismissAllSuggestions = useCallback(() => {
+    setPendingSuggestions([]);
+  }, []);
+
+  // Handle export
+  const handleExport = useCallback(() => {
+    const allLinks = getAllLinks();
+    exportAndDownload(allLinks, { title: 'Neuman Brain Bookmarks' });
+  }, [getAllLinks]);
+
+  const linkCount = Object.keys(links).length;
+  const collectionCount = Object.keys(collections).length;
+
+  return (
+    <div className="link-library-page">
+      <PageHeader />
+
+      {/* Main Layout: Sidebar + Content */}
+      <div className="flex min-h-0" style={{ height: 'calc(100vh - 120px)' }}>
+        {/* Collection Sidebar */}
+        <CollectionSidebar
+          isCollapsed={isSidebarCollapsed}
+          onToggleCollapse={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
+        />
+
+        {/* Main Content Area */}
+        <div className="flex-1 flex flex-col min-h-0 p-4 sm:p-6 lg:p-8 overflow-y-auto">
+          {/* Stats Bar */}
+      <div className="flex items-center gap-4 mb-6 text-sm text-text-light-secondary dark:text-text-dark-secondary">
+        <span>{linkCount} links</span>
+        <span>•</span>
+        <span>{collectionCount} collections</span>
+        {selectedLinkIds.size > 0 && (
+          <>
+            <span>•</span>
+            <span className="text-accent-blue">{selectedLinkIds.size} selected</span>
+          </>
+        )}
+      </div>
+
+      {/* Action Bar */}
+      <div className="flex flex-wrap items-center gap-4 mb-6">
+        {/* Search */}
+        <div className="flex-1 min-w-[200px] max-w-md">
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search links..."
+            className="w-full px-4 py-2 rounded-button border border-border-light dark:border-border-dark
+                       bg-white dark:bg-surface-dark
+                       text-text-light-primary dark:text-text-dark-primary
+                       focus:outline-none focus:ring-2 focus:ring-accent-blue"
+          />
+        </div>
+
+        {/* View Toggle */}
+        <div className="flex items-center gap-1 p-1 rounded-button bg-neutral-100 dark:bg-neutral-800">
+          <button
+            onClick={() => setViewMode('grid')}
+            className={`px-3 py-1.5 rounded text-sm font-medium transition-colors ${viewMode === 'grid'
+                ? 'bg-white dark:bg-surface-dark shadow-sm text-text-light-primary dark:text-text-dark-primary'
+                : 'text-text-light-secondary dark:text-text-dark-secondary hover:text-text-light-primary dark:hover:text-text-dark-primary'
+              }`}
+          >
+            Grid
+          </button>
+          <button
+            onClick={() => setViewMode('list')}
+            className={`px-3 py-1.5 rounded text-sm font-medium transition-colors ${viewMode === 'list'
+                ? 'bg-white dark:bg-surface-dark shadow-sm text-text-light-primary dark:text-text-dark-primary'
+                : 'text-text-light-secondary dark:text-text-dark-secondary hover:text-text-light-primary dark:hover:text-text-dark-primary'
+              }`}
+          >
+            List
+          </button>
+        </div>
+
+        {/* Sort */}
+        <select
+          value={sortField}
+          onChange={(e) => setSortField(e.target.value as typeof sortField)}
+          className="px-3 py-2 rounded-button border border-border-light dark:border-border-dark
+                     bg-white dark:bg-surface-dark
+                     text-text-light-primary dark:text-text-dark-primary text-sm"
+        >
+          <option value="createdAt">Date Added</option>
+          <option value="updatedAt">Last Updated</option>
+          <option value="title">Title</option>
+          <option value="visitCount">Most Visited</option>
+        </select>
+
+        <button
+          onClick={() => setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc')}
+          className="p-2 rounded-button border border-border-light dark:border-border-dark
+                     bg-white dark:bg-surface-dark hover:bg-neutral-50 dark:hover:bg-neutral-800
+                     transition-colors"
+          title={sortDirection === 'asc' ? 'Sort Descending' : 'Sort Ascending'}
+        >
+          {sortDirection === 'asc' ? '↑' : '↓'}
+        </button>
+
+        {/* Import Button */}
+        <label className="px-4 py-2 bg-accent-blue hover:bg-accent-blue-hover text-white rounded-button
+                         text-sm font-medium cursor-pointer transition-colors">
+          Import
+          <input
+            type="file"
+            accept=".html,.htm"
+            onChange={handleFileInput}
+            className="hidden"
+          />
+        </label>
+
+        {/* Export Button */}
+        {linkCount > 0 && (
+          <button
+            onClick={handleExport}
+            className="px-4 py-2 border border-border-light dark:border-border-dark
+                       bg-white dark:bg-surface-dark hover:bg-neutral-50 dark:hover:bg-neutral-800
+                       text-text-light-primary dark:text-text-dark-primary rounded-button
+                       text-sm font-medium transition-colors"
+          >
+            Export
+          </button>
+        )}
+
+        {/* AI Categorize Button - AI provider SDK only loads when clicked */}
+        {linkCount > 0 && (
+          <button
+            onClick={handleCategorize}
+            disabled={isCategorizing}
+            className="px-4 py-2 bg-gradient-to-r from-primary-magenta to-primary-cyan
+                       hover:from-primary-magenta/90 hover:to-primary-cyan/90
+                       text-white rounded-button text-sm font-medium transition-all
+                       disabled:opacity-50 disabled:cursor-not-allowed"
+            title="Use AI to categorize uncategorized links"
+          >
+            {isCategorizing ? (
+              <>
+                <span className="inline-block w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin mr-2" />
+                Categorizing...
+              </>
+            ) : (
+              'AI Categorize'
+            )}
+          </button>
+        )}
+
+        {/* Bulk Actions (when items selected) */}
+        {selectedLinkIds.size > 0 && (
+          <button
+            onClick={handleBulkDelete}
+            className="px-4 py-2 bg-status-error hover:bg-red-600 text-white rounded-button
+                       text-sm font-medium transition-colors"
+          >
+            Delete ({selectedLinkIds.size})
+          </button>
+        )}
+      </div>
+
+      {/* Import Status */}
+      {(importError || importStats) && (
+        <div
+          className={`mb-6 p-4 rounded-button ${importError
+              ? 'bg-status-error/10 border border-status-error text-status-error'
+              : 'bg-status-success/10 border border-status-success text-status-success'
+            }`}
+        >
+          {importError ? (
+            <p>{importError}</p>
+          ) : importStats ? (
+            <p>
+              Successfully imported {importStats.imported} of {importStats.total} bookmarks!
+            </p>
+          ) : null}
+          <button
+            onClick={() => {
+              setImportError(null);
+              setImportStats(null);
+            }}
+            className="mt-2 text-sm underline"
+          >
+            Dismiss
+          </button>
+        </div>
+      )}
+
+      {/* Categorization Progress */}
+      {isCategorizing && (
+        <div className="mb-6 p-4 rounded-button bg-primary-cyan/10 border border-primary-cyan">
+          <div className="flex items-center gap-3">
+            <div className="w-5 h-5 border-2 border-primary-cyan/30 border-t-primary-cyan rounded-full animate-spin" />
+            <div className="flex-1">
+              <p className="text-text-light-primary dark:text-text-dark-primary font-medium">
+                Categorizing links with AI...
+              </p>
+              <p className="text-sm text-text-light-secondary dark:text-text-dark-secondary">
+                {categorizationProgress.processed} of {categorizationProgress.total} processed
+              </p>
+            </div>
+          </div>
+          <div className="mt-3 h-2 bg-neutral-200 dark:bg-neutral-700 rounded-full overflow-hidden">
+            <div
+              className="h-full bg-gradient-to-r from-primary-magenta to-primary-cyan transition-all duration-300"
+              style={{
+                width: `${categorizationProgress.total > 0
+                  ? (categorizationProgress.processed / categorizationProgress.total) * 100
+                  : 0}%`,
+              }}
+            />
+          </div>
+        </div>
+      )}
+
+      {/* Categorization Error */}
+      {categorizationError && (
+        <div className="mb-6 p-4 rounded-button bg-status-error/10 border border-status-error text-status-error">
+          <p>{categorizationError}</p>
+          <button
+            onClick={() => setCategorizationError(null)}
+            className="mt-2 text-sm underline"
+          >
+            Dismiss
+          </button>
+        </div>
+      )}
+
+      {/* AI Category Suggestions */}
+      {pendingSuggestions.length > 0 && (
+        <div className="mb-6 p-4 rounded-card bg-gradient-to-r from-primary-magenta/5 to-primary-cyan/5 border border-primary-cyan/30">
+          <div className="flex items-center justify-between mb-4">
+            <div>
+              <h3 className="font-semibold text-text-light-primary dark:text-text-dark-primary">
+                AI Category Suggestions
+              </h3>
+              <p className="text-sm text-text-light-secondary dark:text-text-dark-secondary">
+                {pendingSuggestions.length} suggestions ready for review
+              </p>
+            </div>
+            <div className="flex gap-2">
+              <button
+                onClick={handleAcceptAllSuggestions}
+                className="px-3 py-1.5 bg-status-success hover:bg-green-600 text-white rounded-button text-sm font-medium transition-colors"
+              >
+                Accept All
+              </button>
+              <button
+                onClick={handleDismissAllSuggestions}
+                className="px-3 py-1.5 border border-border-light dark:border-border-dark
+                           text-text-light-secondary dark:text-text-dark-secondary
+                           hover:bg-neutral-100 dark:hover:bg-neutral-800
+                           rounded-button text-sm font-medium transition-colors"
+              >
+                Dismiss All
+              </button>
+            </div>
+          </div>
+          <div className="space-y-2 max-h-64 overflow-y-auto">
+            {pendingSuggestions.map((suggestion) => {
+              const link = links[suggestion.linkId];
+              if (!link) return null;
+              return (
+                <div
+                  key={suggestion.linkId}
+                  className="flex items-center gap-3 p-3 rounded-button bg-white dark:bg-surface-dark-elevated border border-border-light dark:border-border-dark"
+                >
+                  <div className="flex-1 min-w-0">
+                    <p className="font-medium text-text-light-primary dark:text-text-dark-primary truncate">
+                      {link.title}
+                    </p>
+                    <div className="flex items-center gap-2 mt-1">
+                      <span className="px-2 py-0.5 text-xs rounded-full bg-accent-blue/10 text-accent-blue">
+                        {suggestion.category}
+                      </span>
+                      {suggestion.tags.slice(0, 3).map((tag) => (
+                        <span
+                          key={tag}
+                          className="px-2 py-0.5 text-xs rounded-full bg-neutral-100 dark:bg-neutral-800 text-text-light-secondary dark:text-text-dark-secondary"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                      <span className="text-xs text-text-light-secondary dark:text-text-dark-secondary">
+                        {Math.round(suggestion.confidence * 100)}% confident
+                      </span>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => handleAcceptSuggestion(suggestion)}
+                    className="p-2 text-status-success hover:bg-status-success/10 rounded transition-colors"
+                    title="Accept"
+                  >
+                    ✓
+                  </button>
+                  <button
+                    onClick={() => handleRejectSuggestion(suggestion.linkId)}
+                    className="p-2 text-status-error hover:bg-status-error/10 rounded transition-colors"
+                    title="Reject"
+                  >
+                    ✕
+                  </button>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* Main Content */}
+      {displayedLinks.length === 0 ? (
+        /* Empty State / Drop Zone */
+        <div
+          onDrop={handleDrop}
+          onDragOver={handleDragOver}
+          className="flex-1 flex flex-col items-center justify-center p-8
+                     border-2 border-dashed border-border-light dark:border-border-dark rounded-card
+                     bg-surface-light dark:bg-surface-dark-elevated"
+        >
+          {isImporting ? (
+            <div className="flex flex-col items-center gap-4">
+              <div className="w-12 h-12 border-4 border-accent-blue border-t-transparent rounded-full animate-spin" />
+              <p className="text-text-light-secondary dark:text-text-dark-secondary">
+                Importing bookmarks...
+              </p>
+            </div>
+          ) : (
+            <>
+              <span className="text-6xl mb-4">🔗</span>
+              <h3 className="text-xl font-semibold text-text-light-primary dark:text-text-dark-primary mb-2">
+                {searchQuery ? 'No links found' : 'No links yet'}
+              </h3>
+              <p className="text-text-light-secondary dark:text-text-dark-secondary text-center max-w-md mb-6">
+                {searchQuery
+                  ? `No links match "${searchQuery}"`
+                  : 'Import your browser bookmarks or add links manually to get started.'}
+              </p>
+              {!searchQuery && (
+                <div className="flex flex-col items-center gap-2">
+                  <p className="text-sm text-text-light-secondary dark:text-text-dark-secondary">
+                    Drag and drop a bookmark HTML file here, or
+                  </p>
+                  <label className="px-6 py-3 bg-accent-blue hover:bg-accent-blue-hover text-white rounded-button
+                                   text-base font-medium cursor-pointer transition-colors">
+                    Choose File
+                    <input
+                      type="file"
+                      accept=".html,.htm"
+                      onChange={handleFileInput}
+                      className="hidden"
+                    />
+                  </label>
+                </div>
+              )}
+            </>
+          )}
+        </div>
+      ) : (
+        /* Links Grid/List */
+        <div className="flex-1 overflow-y-auto">
+          {/* Select All Checkbox */}
+          <div className="flex items-center gap-2 mb-4">
+            <input
+              type="checkbox"
+              checked={selectedLinkIds.size === displayedLinks.length && displayedLinks.length > 0}
+              onChange={handleSelectAll}
+              className="w-4 h-4 rounded border-border-light dark:border-border-dark"
+            />
+            <span className="text-sm text-text-light-secondary dark:text-text-dark-secondary">
+              Select All
+            </span>
+          </div>
+
+          {viewMode === 'grid' ? (
+            /* Grid View */
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+              {displayedLinks.map((link) => (
+                <LinkCard
+                  key={link.id}
+                  link={link}
+                  isSelected={selectedLinkIds.has(link.id)}
+                  onToggleSelect={() => toggleLinkSelection(link.id)}
+                  onToggleFavorite={() => toggleFavorite(link.id)}
+                  onToggleArchive={() => toggleArchived(link.id)}
+                />
+              ))}
+            </div>
+          ) : (
+            /* List View */
+            <div className="space-y-2">
+              {displayedLinks.map((link) => (
+                <LinkListItem
+                  key={link.id}
+                  link={link}
+                  isSelected={selectedLinkIds.has(link.id)}
+                  onToggleSelect={() => toggleLinkSelection(link.id)}
+                  onToggleFavorite={() => toggleFavorite(link.id)}
+                  onToggleArchive={() => toggleArchived(link.id)}
+                />
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// ============================================================================
+// Link Card Component (Grid View)
+// ============================================================================
+
+interface LinkCardProps {
+  link: Link;
+  isSelected: boolean;
+  onToggleSelect: () => void;
+  onToggleFavorite: () => void;
+  onToggleArchive: () => void;
+}
+
+const LinkCard: React.FC<LinkCardProps> = ({
+  link,
+  isSelected,
+  onToggleSelect,
+  onToggleFavorite,
+  onToggleArchive,
+}) => {
+  const faviconUrl = `https://www.google.com/s2/favicons?domain=${new URL(link.url).hostname}&sz=32`;
+
+  return (
+    <div
+      className={`
+        p-4 rounded-card bg-surface-light dark:bg-surface-dark-elevated
+        border transition-all duration-200
+        ${isSelected
+          ? 'border-accent-blue ring-2 ring-accent-blue/20'
+          : 'border-border-light dark:border-border-dark hover:border-accent-blue/50'
+        }
+      `}
+    >
+      {/* Header */}
+      <div className="flex items-start gap-3 mb-3">
+        <input
+          type="checkbox"
+          checked={isSelected}
+          onChange={onToggleSelect}
+          className="mt-1 w-4 h-4 rounded border-border-light dark:border-border-dark"
+        />
+        <img
+          src={faviconUrl}
+          alt=""
+          className="w-6 h-6 rounded flex-shrink-0"
+          onError={(e) => {
+            (e.target as HTMLImageElement).src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%236b7280"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>';
+          }}
+        />
+        <div className="flex-1 min-w-0">
+          <a
+            href={link.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block font-medium text-text-light-primary dark:text-text-dark-primary
+                       hover:text-accent-blue truncate"
+          >
+            {link.title}
+          </a>
+          <p className="text-xs text-text-light-secondary dark:text-text-dark-secondary truncate">
+            {new URL(link.url).hostname}
+          </p>
+        </div>
+      </div>
+
+      {/* Category & Tags */}
+      {(link.category || link.tags.length > 0) && (
+        <div className="flex flex-wrap gap-1 mb-3">
+          {link.category && (
+            <span className="px-2 py-0.5 text-xs rounded-full bg-accent-blue/10 text-accent-blue">
+              {link.category}
+            </span>
+          )}
+          {link.tags.slice(0, 2).map((tag) => (
+            <span
+              key={tag}
+              className="px-2 py-0.5 text-xs rounded-full bg-neutral-100 dark:bg-neutral-800
+                         text-text-light-secondary dark:text-text-dark-secondary"
+            >
+              {tag}
+            </span>
+          ))}
+          {link.tags.length > 2 && (
+            <span className="px-2 py-0.5 text-xs text-text-light-secondary dark:text-text-dark-secondary">
+              +{link.tags.length - 2}
+            </span>
+          )}
+        </div>
+      )}
+
+      {/* Actions */}
+      <div className="flex items-center gap-2 pt-2 border-t border-border-light dark:border-border-dark">
+        <button
+          onClick={onToggleFavorite}
+          className={`p-1.5 rounded transition-colors ${link.isFavorite
+              ? 'text-status-warning'
+              : 'text-text-light-secondary dark:text-text-dark-secondary hover:text-status-warning'
+            }`}
+          title={link.isFavorite ? 'Remove from favorites' : 'Add to favorites'}
+        >
+          {link.isFavorite ? '★' : '☆'}
+        </button>
+        <button
+          onClick={onToggleArchive}
+          className="p-1.5 rounded text-text-light-secondary dark:text-text-dark-secondary
+                     hover:text-text-light-primary dark:hover:text-text-dark-primary transition-colors"
+          title={link.isArchived ? 'Unarchive' : 'Archive'}
+        >
+          📥
+        </button>
+        <div className="flex-1" />
+        <span className="text-xs text-text-light-secondary dark:text-text-dark-secondary">
+          {link.visitCount > 0 && `${link.visitCount} visits`}
+        </span>
+      </div>
+    </div>
+  );
+};
+
+// ============================================================================
+// Link List Item Component (List View)
+// ============================================================================
+
+const LinkListItem: React.FC<LinkCardProps> = ({
+  link,
+  isSelected,
+  onToggleSelect,
+  onToggleFavorite,
+  onToggleArchive,
+}) => {
+  const faviconUrl = `https://www.google.com/s2/favicons?domain=${new URL(link.url).hostname}&sz=16`;
+
+  return (
+    <div
+      className={`
+        flex items-center gap-4 px-4 py-3 rounded-button
+        bg-surface-light dark:bg-surface-dark-elevated
+        border transition-all duration-200
+        ${isSelected
+          ? 'border-accent-blue ring-2 ring-accent-blue/20'
+          : 'border-border-light dark:border-border-dark hover:border-accent-blue/50'
+        }
+      `}
+    >
+      <input
+        type="checkbox"
+        checked={isSelected}
+        onChange={onToggleSelect}
+        className="w-4 h-4 rounded border-border-light dark:border-border-dark"
+      />
+
+      <img
+        src={faviconUrl}
+        alt=""
+        className="w-4 h-4 rounded flex-shrink-0"
+        onError={(e) => {
+          (e.target as HTMLImageElement).style.display = 'none';
+        }}
+      />
+
+      <div className="flex-1 min-w-0">
+        <a
+          href={link.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-medium text-text-light-primary dark:text-text-dark-primary
+                     hover:text-accent-blue truncate block"
+        >
+          {link.title}
+        </a>
+      </div>
+
+      <span className="text-sm text-text-light-secondary dark:text-text-dark-secondary truncate max-w-[200px]">
+        {new URL(link.url).hostname}
+      </span>
+
+      {link.category && (
+        <span className="px-2 py-0.5 text-xs rounded-full bg-accent-blue/10 text-accent-blue">
+          {link.category}
+        </span>
+      )}
+
+      <button
+        onClick={onToggleFavorite}
+        className={`p-1.5 rounded transition-colors ${link.isFavorite
+            ? 'text-status-warning'
+            : 'text-text-light-secondary dark:text-text-dark-secondary hover:text-status-warning'
+          }`}
+        title={link.isFavorite ? 'Remove from favorites' : 'Add to favorites'}
+      >
+        {link.isFavorite ? '★' : '☆'}
+      </button>
+
+      <button
+        onClick={onToggleArchive}
+        className="p-1.5 rounded text-text-light-secondary dark:text-text-dark-secondary
+                   hover:text-text-light-primary dark:hover:text-text-dark-primary transition-colors"
+        title={link.isArchived ? 'Unarchive' : 'Archive'}
+      >
+        📥
+      </button>
+    </div>
+  );
+};
+
+export default LinkLibrary;

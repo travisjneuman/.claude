@@ -1,0 +1,115 @@
+# Design Patterns
+
+Shared reference for typography, spacing, colors, and visual design.
+
+## Typography Scale
+
+| Name | Size | Line Height | Use |
+|------|------|-------------|-----|
+| xs | 12px | 16px | Captions, labels |
+| sm | 14px | 20px | Secondary text |
+| base | 16px | 24px | Body text |
+| lg | 18px | 28px | Lead paragraphs |
+| xl | 20px | 28px | Section headers |
+| 2xl | 24px | 32px | Page headers |
+| 3xl | 30px | 36px | Hero text |
+| 4xl | 36px | 40px | Display |
+
+### Font Weights
+| Weight | Value | Use |
+|--------|-------|-----|
+| Normal | 400 | Body text |
+| Medium | 500 | UI elements |
+| Semibold | 600 | Subheadings |
+| Bold | 700 | Headings |
+
+## Spacing System
+
+Use 4px or 8px base unit for consistency.
+
+| Token | 4px Base | 8px Base | Use |
+|-------|----------|----------|-----|
+| 1 | 4px | 8px | Tight spacing |
+| 2 | 8px | 16px | Default gap |
+| 3 | 12px | 24px | Section padding |
+| 4 | 16px | 32px | Card padding |
+| 6 | 24px | 48px | Page margins |
+| 8 | 32px | 64px | Large sections |
+
+## Responsive Breakpoints
+
+| Token | Min Width | Devices |
+|-------|-----------|---------|
+| sm | 640px | Large phones |
+| md | 768px | Tablets |
+| lg | 1024px | Laptops |
+| xl | 1280px | Desktops |
+| 2xl | 1536px | Large desktops |
+
+## Color System
+
+Define for each project:
+- **Primary**: Main brand color
+- **Secondary**: Supporting color
+- **Accent**: Highlight/CTA
+- **Background/Foreground**: Base colors
+- **Destructive/Success/Warning**: State colors
+
+### Contrast Requirements
+| Use Case | Minimum Ratio |
+|----------|---------------|
+| Body text | 4.5:1 (AA) |
+| Large text | 3:1 (AA) |
+| UI components | 3:1 (AA) |
+
+## Border Radius
+
+| Token | Value | Use |
+|-------|-------|-----|
+| sm | 2px | Subtle rounding |
+| DEFAULT | 4px | Buttons, inputs |
+| md | 6px | Cards |
+| lg | 8px | Modals |
+| full | 9999px | Pills, avatars |
+
+## Animation
+
+### Duration
+| Token | Duration | Use |
+|-------|----------|-----|
+| fast | 100ms | Micro-interactions |
+| DEFAULT | 200ms | Most transitions |
+| slow | 300ms | Complex animations |
+
+### GPU-Accelerated Properties
+**DO animate:** transform, opacity
+**AVOID:** width, height, top/left/right/bottom, margin, padding
+
+## Visual Hierarchy
+
+- Size indicates importance
+- Contrast draws attention
+- Whitespace groups elements
+- F-pattern/Z-pattern reading
+
+## Component Patterns
+
+### Buttons
+| Variant | Use |
+|---------|-----|
+| Primary | Main actions |
+| Secondary | Alternative actions |
+| Ghost | Subtle actions |
+| Destructive | Delete/remove |
+
+### Form Inputs
+- Clear focus states
+- Error states with messages
+- Label always visible
+- Required indicator
+
+### Modals
+- Focus trapped inside
+- Escape to close
+- Dark overlay
+- Centered or slide-in

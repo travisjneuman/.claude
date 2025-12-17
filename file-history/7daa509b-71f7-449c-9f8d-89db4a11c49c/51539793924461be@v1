@@ -1,0 +1,306 @@
+---
+type: venture
+status: planning
+stage: planning
+parent: "[[Kikman Enterprises]]"
+founders: [Travis Neuman, Trenton Kik]
+tags: [business, golf, apparel, platform, youtube]
+created: 2025-12-14
+---
+# LazyGolf
+
+> A multi-vertical golf lifestyle brand combining apparel, technology platform, and entertainment content for casual golfers who don't take the game too seriously.
+
+---
+
+## Overview
+
+LazyGolf is the flagship venture of [[Kikman Enterprises]], targeting the underserved market of casual, fun-focused golfers. Unlike traditional golf brands that emphasize performance and prestige, LazyGolf embraces the laid-back approach to the game.
+
+**Tagline Ideas:**
+- "Golf for the rest of us"
+- "Swing lazy, score happy"
+- "Less effort, more fun"
+
+---
+
+## Business Verticals
+
+### 1. LazyGolf Apparel
+
+**Concept:** Comfortable, irreverent golf apparel that mocks traditional golf culture while still being course-appropriate.
+
+#### Product Ideas
+| Category | Products | Notes |
+|----------|----------|-------|
+| Polos | Performance fabric with lazy/funny designs | Course-compliant but irreverent |
+| Hats | Trucker, snapback, visors | "I'd rather be napping" vibes |
+| Shorts | Stretch, comfortable, pockets | Actual functionality |
+| Accessories | Towels, ball markers, divot tools | Conversation starters |
+
+#### Brand Aesthetic
+- **Colors:** Muted pastels, earth tones, nothing too serious
+- **Graphics:** Minimalist lazy characters, clever typography
+- **Style:** Athleisure meets golf, comfort-first
+
+#### Manufacturing & Fulfillment
+- [ ] Research print-on-demand vs inventory model
+- [ ] Identify manufacturers (domestic vs overseas)
+- [ ] Design initial product line (5-10 SKUs)
+- [ ] Set up e-commerce (Shopify likely)
+
+#### Pricing Strategy
+| Product | Cost Est. | Retail | Margin |
+|---------|-----------|--------|--------|
+| Polo | $15-20 | $55-65 | ~65% |
+| Hat | $8-12 | $30-35 | ~65% |
+| Shorts | $18-25 | $60-70 | ~60% |
+
+---
+
+### 2. LazyGolf Platform
+
+**Concept:** Golf league management and social platform that's better than 18Birdies and competitors - essentially "project.hockey for golf."
+
+#### Core Features
+- **League Management:** Create, manage, track golf leagues
+- **Scoring:** Simple round tracking with handicap calculation
+- **Social:** Connect with playing partners, share rounds
+- **Stats:** Personal analytics without the overwhelming complexity
+
+#### Competitive Analysis
+
+| Platform | Strengths | Weaknesses | LazyGolf Opportunity |
+|----------|-----------|------------|---------------------|
+| 18Birdies | GPS, popularity | Bloated, expensive premium | Simpler, focused |
+| Golf Genius | League tools | Enterprise-focused | Consumer-friendly |
+| GHIN | Official handicaps | Dated UX, $$ | Modern alternative |
+| The Grint | Good features | Cluttered interface | Clean, minimal |
+
+#### Tech Stack (from [[Projects/Lazy Golfing]])
+- **Frontend:** Next.js 15, React 19, TypeScript
+- **Backend:** NestJS 11, Prisma ORM
+- **Database:** PostgreSQL
+- **Deployment:** Vercel + Railway (likely)
+
+#### Platform Roadmap
+1. **MVP:** Basic league creation, round tracking, leaderboards
+2. **V1:** Handicap calculation, stats dashboard
+3. **V2:** Social features, matchmaking
+4. **V3:** Tournaments, prizes, sponsorships
+
+---
+
+### 3. LazyGolf Media (YouTube)
+
+**Concept:** Entertainment content for casual golfers, starting with a viral-worthy inaugural video.
+
+#### Inaugural Video Concept
+
+**Title:** "I Dropped My Average from 120 to 60 in ONE MONTH with This Simple Trick!"
+
+**Hook:** Clickbait title promises impossible improvement
+**Reveal:** It's all about "cheating" through lazy rules exploitation
+
+**Content Segments:**
+1. **Intro:** Dramatic before/after scorecards
+2. **The "Tricks":**
+   - Gimme putts (everything inside 10 feet)
+   - Breakfast balls (unlimited mulligans)
+   - Foot wedges (kick it to a better lie)
+   - Gallery rules (ball always found in good spot)
+   - Winter rules (always, regardless of season)
+   - Strict opponent rules (they play by the book)
+3. **The Point:** Emphasize relaxation over competition
+4. **Call to Action:** Subscribe for more lazy golf content
+
+**Tone:** Self-aware, satirical, embracing the "lazy" brand
+
+#### Content Pipeline Ideas
+- Course vlogs with lazy scoring
+- "Worst golf tips that actually work"
+- Budget gear reviews
+- League night highlights
+- Interview casual golfers about their "house rules"
+
+#### Channel Strategy
+- [ ] Create YouTube channel
+- [ ] Design channel art consistent with brand
+- [ ] Script inaugural video
+- [ ] Determine production quality level
+- [ ] Set posting schedule (weekly? bi-weekly?)
+
+---
+
+## Target Market
+
+### Primary Persona: "Weekend Warrior Wally"
+- **Age:** 28-45
+- **Golf Frequency:** 1-2x per month
+- **Skill Level:** 90-110 average (or doesn't track)
+- **Motivation:** Social, relaxation, beer
+- **Pain Points:** Golf is too serious, equipment too expensive, scoring apps too complex
+
+### Secondary Persona: "League Night Larry"
+- **Age:** 35-55
+- **Golf Frequency:** Weekly league
+- **Skill Level:** 85-100
+- **Motivation:** Competition (friendly), camaraderie
+- **Pain Points:** League management is manual and annoying
+
+### Market Size
+- **US Golfers:** ~25 million active
+- **Casual segment:** ~60% = 15 million
+- **Addressable:** 10% = 1.5 million potential customers
+
+---
+
+## Revenue Model
+
+### Apparel
+| Revenue Stream | Model | Target |
+|----------------|-------|--------|
+| Direct sales | E-commerce | $50K Y1 |
+| Wholesale | Golf shops, pro shops | Future |
+
+### Platform
+| Revenue Stream | Model | Target |
+|----------------|-------|--------|
+| Freemium | Basic free, premium features | Critical mass first |
+| Premium subscription | $4.99/mo or $39.99/yr | Y2+ |
+| League fees | Per-league charge for organizers | Y2+ |
+| Sponsorships | Brand partnerships for leagues | Y3+ |
+
+### Media
+| Revenue Stream | Model | Target |
+|----------------|-------|--------|
+| Ad revenue | YouTube Partner Program | After 1K subs |
+| Sponsorships | Brand deals | After 10K+ |
+| Merch integration | Drive apparel sales | Ongoing |
+
+---
+
+## Brand Identity
+
+### Voice & Tone
+- Irreverent but not mean
+- Self-deprecating about golf skill
+- Inclusive - everyone can be lazy
+- Playful wordplay and puns
+
+### Visual Identity
+- **Logo:** TBD - something relaxed (hammock? sleeping golfer? sloth?)
+- **Colors:**
+  - Primary: Sage green, dusty blue
+  - Accent: Burnt orange, cream
+- **Typography:** Rounded, friendly sans-serif
+
+### Brand Pillars
+1. **Laziness is a Virtue:** Efficiency, not sloth
+2. **Golf for Everyone:** Gatekeeping is lame
+3. **Fun > Score:** Experiences over outcomes
+4. **Community:** Find your lazy golf crew
+
+---
+
+## Go-to-Market Strategy
+
+### Phase 1: Brand Building (Q1-Q2 2025)
+- Launch social media presence
+- Release inaugural YouTube video
+- Build email list with waitlist
+- Develop initial apparel designs
+
+### Phase 2: Apparel Launch (Q2-Q3 2025)
+- Launch e-commerce store
+- Limited initial product run
+- Influencer seeding (golf TikTok/Instagram)
+- Content marketing (YouTube + social)
+
+### Phase 3: Platform Beta (Q3-Q4 2025)
+- Soft launch to friends and family
+- Collect feedback, iterate
+- Public beta launch
+- Focus on league organizers as champions
+
+### Phase 4: Scale (2026+)
+- Expand product line
+- Platform premium features
+- Partnership opportunities
+- Potential retail distribution
+
+---
+
+## Competitive Advantages
+
+1. **Brand Differentiation:** No one else owns "lazy golf"
+2. **Authentic Voice:** Actually casual golfers ourselves
+3. **Technical Capability:** Strong dev skills for platform
+4. **Integrated Approach:** Apparel + Platform + Content flywheel
+5. **Low Overhead:** Start lean, validate, scale
+
+---
+
+## Risks & Mitigations
+
+| Risk | Likelihood | Impact | Mitigation |
+|------|------------|--------|------------|
+| Brand doesn't resonate | Medium | High | Test messaging early, iterate |
+| Platform too complex | Medium | Medium | MVP first, feature creep discipline |
+| Apparel quality issues | Low | High | Sample thoroughly, vet suppliers |
+| YouTube doesn't grow | High | Low | It's marketing, not core business |
+| Competition copies | Medium | Low | First mover + authentic brand |
+
+---
+
+## Financial Projections
+
+### Startup Costs
+| Item | Estimate |
+|------|----------|
+| Entity formation | $500-1,000 |
+| Initial inventory | $5,000-10,000 |
+| E-commerce setup | $500-1,000 |
+| Marketing/content | $1,000-2,000 |
+| **Total** | **$7,000-14,000** |
+
+### Year 1 Targets
+| Metric | Target |
+|--------|--------|
+| Apparel Revenue | $30,000-50,000 |
+| Platform Users | 1,000+ |
+| YouTube Subscribers | 5,000+ |
+| Email List | 2,000+ |
+
+---
+
+## Action Items
+
+### Immediate
+- [ ] Finalize brand name (LazyGolf vs Lazy Golfing vs other)
+- [ ] Reserve domains and social handles
+- [ ] Design logo concepts
+- [ ] Outline apparel product line
+
+### Short-term
+- [ ] Complete platform MVP
+- [ ] Source apparel manufacturers
+- [ ] Script YouTube inaugural video
+- [ ] Build landing page with waitlist
+
+### Medium-term
+- [ ] Launch apparel store
+- [ ] Release platform beta
+- [ ] Publish YouTube content consistently
+
+---
+
+## Related Links
+
+- [[Projects/Lazy Golfing]] - Platform development project
+- [[Kikman Enterprises]] - Parent company
+- [[Decisions/LZG-001 CSV Source of Truth]] - Technical decision
+
+---
+
+*Last updated: 2025-12-14*

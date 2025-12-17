@@ -1,0 +1,624 @@
+# Next.js
+
+> Full-stack React framework with hybrid rendering, file-based routing, and built-in optimizations for production applications.
+
+---
+
+## Overview
+
+Next.js is a React framework that provides:
+- **Hybrid Rendering**: SSR, SSG, ISR, and CSR in one app
+- **File-Based Routing**: App Router with layouts and nested routes
+- **API Routes**: Backend endpoints alongside frontend
+- **Built-in Optimizations**: Image, font, and script optimization
+- **Zero Config**: Works out of the box with sensible defaults
+
+---
+
+## Why Next.js
+
+| Feature | Benefit |
+|---------|---------|
+| Server Components | Smaller bundles, faster loads |
+| App Router | Nested layouts, parallel routes |
+| Built-in API | Full-stack in one codebase |
+| Image Optimization | Automatic WebP, lazy loading |
+| Edge Runtime | Deploy globally with low latency |
+
+---
+
+## App Router (v13+)
+
+### File Conventions
+
+```
+app/
+├── layout.tsx          # Root layout (required)
+├── page.tsx            # Home page (/)
+├── loading.tsx         # Loading UI
+├── error.tsx           # Error boundary
+├── not-found.tsx       # 404 page
+├── global-error.tsx    # Global error boundary
+├── route.ts            # API endpoint
+│
+├── dashboard/
+│   ├── layout.tsx      # Nested layout
+│   ├── page.tsx        # /dashboard
+│   ├── loading.tsx     # Dashboard loading
+│   └── [id]/
+│       └── page.tsx    # /dashboard/[id]
+│
+└── (marketing)/        # Route group (no URL impact)
+    ├── about/
+    │   └── page.tsx    # /about
+    └── blog/
+        └── page.tsx    # /blog
+```
+
+### Special Files
+
+| File | Purpose |
+|------|---------|
+| `page.tsx` | UI unique to a route |
+| `layout.tsx` | Shared UI for segment and children |
+| `template.tsx` | Like layout but re-renders on navigation |
+| `loading.tsx` | Loading UI (Suspense boundary) |
+| `error.tsx` | Error UI (Error boundary) |
+| `not-found.tsx` | Not found UI |
+| `route.ts` | API endpoint |
+
+---
+
+## Server vs Client Components
+
+### Server Components (Default)
+
+```tsx
+// app/users/page.tsx
+// No "use client" directive = Server Component
+
+async function UsersPage() {
+  // Direct database access - no API needed
+  const users = await db.user.findMany();
+
+  return (
+    <ul>
+      {users.map(user => (
+        <li key={user.id}>{user.name}</li>
+      ))}
+    </ul>
+  );
+}
+
+export default UsersPage;
+```
+
+**Benefits:**
+- Zero JavaScript sent to client
+- Direct backend access (DB, filesystem)
+- Secrets stay on server
+- Smaller bundle sizes
+
+### Client Components
+
+```tsx
+// components/Counter.tsx
+"use client";
+
+import { useState } from "react";
+
+export function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <button onClick={() => setCount(c => c + 1)}>
+      Count: {count}
+    </button>
+  );
+}
+```
+
+**Use When:**
+- useState, useEffect, useContext needed
+- Browser APIs required (window, localStorage)
+- Event handlers (onClick, onChange)
+- Custom hooks with state
+
+### Composition Pattern
+
+```tsx
+// Server Component with Client child
+// app/dashboard/page.tsx (Server)
+
+import { Counter } from "@/components/Counter";
+import { db } from "@/lib/db";
+
+async function DashboardPage() {
+  const stats = await db.stats.findFirst();
+
+  return (
+    <div>
+      <h1>Dashboard</h1>
+      <p>Total: {stats.total}</p>
+      {/* Client Component */}
+      <Counter />
+    </div>
+  );
+}
+
+export default DashboardPage;
+```
+
+---
+
+## Data Fetching
+
+### Server Components (Recommended)
+
+```tsx
+// Direct fetch in component
+async function PostPage({ params }: { params: { id: string } }) {
+  const post = await fetch(`https://api.example.com/posts/${params.id}`, {
+    cache: "force-cache", // SSG behavior
+    // cache: "no-store", // SSR behavior
+    // next: { revalidate: 60 }, // ISR behavior
+  }).then(res => res.json());
+
+  return <article>{post.title}</article>;
+}
+```
+
+### Caching Strategies
+
+| Strategy | Config | Use Case |
+|----------|--------|----------|
+| Static (SSG) | `cache: "force-cache"` | Blog posts, docs |
+| Dynamic (SSR) | `cache: "no-store"` | User-specific data |
+| ISR | `next: { revalidate: 60 }` | Frequently updated |
+| On-demand | `revalidatePath()` | After mutations |
+
+### Server Actions
+
+```tsx
+// app/actions.ts
+"use server";
+
+import { revalidatePath } from "next/cache";
+import { db } from "@/lib/db";
+
+export async function createPost(formData: FormData) {
+  const title = formData.get("title") as string;
+
+  await db.post.create({ data: { title } });
+
+  revalidatePath("/posts");
+}
+```
+
+```tsx
+// app/posts/new/page.tsx
+import { createPost } from "../actions";
+
+export default function NewPostPage() {
+  return (
+    <form action={createPost}>
+      <input name="title" placeholder="Title" />
+      <button type="submit">Create</button>
+    </form>
+  );
+}
+```
+
+---
+
+## API Routes
+
+### Route Handlers (App Router)
+
+```tsx
+// app/api/users/route.ts
+import { NextRequest, NextResponse } from "next/server";
+
+export async function GET(request: NextRequest) {
+  const users = await db.user.findMany();
+  return NextResponse.json(users);
+}
+
+export async function POST(request: NextRequest) {
+  const body = await request.json();
+  const user = await db.user.create({ data: body });
+  return NextResponse.json(user, { status: 201 });
+}
+```
+
+### Dynamic Routes
+
+```tsx
+// app/api/users/[id]/route.ts
+import { NextRequest, NextResponse } from "next/server";
+
+export async function GET(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  const user = await db.user.findUnique({
+    where: { id: params.id }
+  });
+
+  if (!user) {
+    return NextResponse.json(
+      { error: "Not found" },
+      { status: 404 }
+    );
+  }
+
+  return NextResponse.json(user);
+}
+```
+
+---
+
+## Layouts and Templates
+
+### Root Layout (Required)
+
+```tsx
+// app/layout.tsx
+import { Inter } from "next/font/google";
+import "./globals.css";
+
+const inter = Inter({ subsets: ["latin"] });
+
+export const metadata = {
+  title: "My App",
+  description: "Built with Next.js",
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en">
+      <body className={inter.className}>
+        <nav>...</nav>
+        <main>{children}</main>
+        <footer>...</footer>
+      </body>
+    </html>
+  );
+}
+```
+
+### Nested Layouts
+
+```tsx
+// app/dashboard/layout.tsx
+export default function DashboardLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="dashboard">
+      <Sidebar />
+      <div className="content">{children}</div>
+    </div>
+  );
+}
+```
+
+---
+
+## Metadata and SEO
+
+### Static Metadata
+
+```tsx
+// app/about/page.tsx
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About Us",
+  description: "Learn more about our company",
+  openGraph: {
+    title: "About Us",
+    description: "Learn more about our company",
+    images: ["/og-about.png"],
+  },
+};
+```
+
+### Dynamic Metadata
+
+```tsx
+// app/posts/[slug]/page.tsx
+import type { Metadata } from "next";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
+  const post = await getPost(params.slug);
+
+  return {
+    title: post.title,
+    description: post.excerpt,
+    openGraph: {
+      images: [post.coverImage],
+    },
+  };
+}
+```
+
+---
+
+## Middleware
+
+```tsx
+// middleware.ts (root level)
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+
+export function middleware(request: NextRequest) {
+  // Check auth
+  const token = request.cookies.get("token");
+
+  if (!token && request.nextUrl.pathname.startsWith("/dashboard")) {
+    return NextResponse.redirect(new URL("/login", request.url));
+  }
+
+  // Add headers
+  const response = NextResponse.next();
+  response.headers.set("x-custom-header", "value");
+
+  return response;
+}
+
+export const config = {
+  matcher: ["/dashboard/:path*", "/api/:path*"],
+};
+```
+
+---
+
+## Image Optimization
+
+```tsx
+import Image from "next/image";
+
+// Local image
+import heroImage from "@/public/hero.jpg";
+
+export function Hero() {
+  return (
+    <>
+      {/* Local image - auto-sized */}
+      <Image
+        src={heroImage}
+        alt="Hero"
+        placeholder="blur"
+        priority
+      />
+
+      {/* Remote image - size required */}
+      <Image
+        src="https://example.com/photo.jpg"
+        alt="Photo"
+        width={800}
+        height={600}
+        sizes="(max-width: 768px) 100vw, 800px"
+      />
+
+      {/* Fill container */}
+      <div className="relative h-64">
+        <Image
+          src="/background.jpg"
+          alt="Background"
+          fill
+          className="object-cover"
+        />
+      </div>
+    </>
+  );
+}
+```
+
+### Remote Image Config
+
+```js
+// next.config.js
+module.exports = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**.example.com",
+      },
+    ],
+  },
+};
+```
+
+---
+
+## Environment Variables
+
+```bash
+# .env.local (gitignored)
+DATABASE_URL=postgresql://...
+SECRET_KEY=abc123
+
+# Public (exposed to browser)
+NEXT_PUBLIC_API_URL=https://api.example.com
+```
+
+```tsx
+// Server-only
+const dbUrl = process.env.DATABASE_URL;
+
+// Client-accessible
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+```
+
+---
+
+## Performance Patterns
+
+### Dynamic Imports
+
+```tsx
+import dynamic from "next/dynamic";
+
+// Load only when needed
+const Chart = dynamic(() => import("@/components/Chart"), {
+  loading: () => <p>Loading chart...</p>,
+  ssr: false, // Client-only component
+});
+```
+
+### Parallel Data Fetching
+
+```tsx
+async function Page() {
+  // Start all fetches simultaneously
+  const [users, posts, stats] = await Promise.all([
+    getUsers(),
+    getPosts(),
+    getStats(),
+  ]);
+
+  return (
+    <>
+      <UserList users={users} />
+      <PostList posts={posts} />
+      <Statistics stats={stats} />
+    </>
+  );
+}
+```
+
+### Streaming with Suspense
+
+```tsx
+import { Suspense } from "react";
+
+async function SlowComponent() {
+  const data = await slowFetch(); // 5 second fetch
+  return <div>{data}</div>;
+}
+
+export default function Page() {
+  return (
+    <div>
+      <h1>Dashboard</h1>
+      {/* Fast content renders immediately */}
+      <FastContent />
+
+      {/* Slow content streams in */}
+      <Suspense fallback={<Skeleton />}>
+        <SlowComponent />
+      </Suspense>
+    </div>
+  );
+}
+```
+
+---
+
+## Configuration
+
+### next.config.js
+
+```js
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  // Strict mode for development
+  reactStrictMode: true,
+
+  // Image optimization
+  images: {
+    remotePatterns: [
+      { hostname: "cdn.example.com" },
+    ],
+  },
+
+  // Redirects
+  async redirects() {
+    return [
+      {
+        source: "/old-path",
+        destination: "/new-path",
+        permanent: true,
+      },
+    ];
+  },
+
+  // Rewrites (URL masking)
+  async rewrites() {
+    return [
+      {
+        source: "/api/:path*",
+        destination: "https://backend.example.com/:path*",
+      },
+    ];
+  },
+
+  // Headers
+  async headers() {
+    return [
+      {
+        source: "/(.*)",
+        headers: [
+          {
+            key: "X-Frame-Options",
+            value: "DENY",
+          },
+        ],
+      },
+    ];
+  },
+};
+
+module.exports = nextConfig;
+```
+
+---
+
+## Project Usage
+
+### Lazy Golfing
+
+The Lazy Golfing project uses Next.js 14 with:
+- App Router for file-based routing
+- Server Components for data fetching
+- Server Actions for form mutations
+- API routes for external integrations
+- Tailwind CSS for styling
+
+See: [[Projects/Lazy Golfing]]
+
+---
+
+## Resources
+
+- [Next.js Documentation](https://nextjs.org/docs)
+- [App Router Migration Guide](https://nextjs.org/docs/app/building-your-application/upgrading/app-router-migration)
+- [Server Components](https://nextjs.org/docs/app/building-your-application/rendering/server-components)
+- [Data Fetching Patterns](https://nextjs.org/docs/app/building-your-application/data-fetching)
+
+---
+
+## Related Concepts
+
+- [[React]] — Component library
+- [[TypeScript]] — Type safety
+- [[NestJS]] — Backend companion
+- [[Tailwind]] — Styling
+- [[Prisma]] — Database ORM
+
+---
+
+*Last updated: 2025-12-14*

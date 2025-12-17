@@ -1,0 +1,256 @@
+# Neuman Brain Claude Skills
+
+Custom skills optimized for Neuman Brain development following CLAUDE.md workflow and design principles.
+
+**Last Updated:** November 19, 2025
+**Total Active Skills:** 10 (4 Neuman Brain-specific + 4 customized + 2 unchanged document skills)
+
+---
+
+## 🎨 Design & UX Skills
+
+### neuman-brain-design-system
+**Purpose:** Complete design system reference - brand colors, typography, spacing, component patterns
+
+**When to Use:**
+- Implementing UI components
+- Choosing colors/spacing values
+- Creating animations
+- Ensuring brand consistency
+- Checking accessibility (WCAG AA)
+
+**Key Content:**
+- Brand colors: Magenta (#E91E8C), Cyan (#00C9FF), Purple gradients
+- Typography: Inter font stack, responsive type scale
+- Spacing: 4px base unit system
+- Components: Widget, Modal, Button patterns
+- Animations: GPU-accelerated (transform/opacity only)
+- Glassmorphism effects and shadows
+
+**Invoke:** Automatically when UI/styling context appears
+
+---
+
+### neuman-brain-ux-designer
+**Purpose:** Professional UI/UX design expertise and design thinking
+
+**When to Use:**
+- Designing new features
+- Improving existing UX
+- Solving user problems
+- Creating interaction patterns
+- Optimizing perceived performance
+- Conducting design reviews
+
+**Key Content:**
+- Design thinking framework (Jobs-to-be-Done)
+- User psychology (Hick's Law, Fitts's Law, Jakob's Law)
+- Visual hierarchy and gestalt principles
+- Interaction design patterns
+- Accessibility beyond WCAG
+- Performance-driven design
+- Design critique framework
+
+**Invoke:** Request explicitly: "Use neuman-brain-ux-designer skill to critique this design"
+
+---
+
+## 🛠️ Development Skills
+
+### neuman-brain-code-reviewer
+**Purpose:** Comprehensive code review enforcing CLAUDE.md workflow and production quality
+
+**When to Use:**
+- Before committing code
+- Completing features
+- Reviewing pull requests
+- Checking workflow compliance
+
+**Key Checks:**
+- CLAUDE.md workflow compliance (task files, reviews, tests)
+- Security (no XSS, type safety, input sanitization)
+- Performance (bundle size, GPU animations)
+- Accessibility (WCAG AA, keyboard nav, ARIA)
+- Privacy-first (IndexedDB, local-first)
+- Design system compliance
+- Surgical simplicity (minimal code impact)
+
+**Invoke:** Automatically before commits, or request: "Review this code for Neuman Brain compliance"
+
+---
+
+### neuman-brain-feature-developer
+**Purpose:** Guide feature development with architecture patterns and best practices
+
+**When to Use:**
+- Adding new features
+- Refactoring existing code
+- Planning major changes
+- Understanding architecture
+
+**Key Content:**
+- Zustand store patterns
+- IndexedDB usage and quota management
+- Widget system and lazy loading
+- Feature integration checklist
+- Common patterns (stores, widgets, IndexedDB)
+- Performance guidelines
+
+**Invoke:** Request: "Help me develop [feature] following Neuman Brain architecture"
+
+---
+
+## 📝 Documentation & Analysis Skills
+
+### codebase-documenter
+**Purpose:** Create comprehensive, beginner-friendly documentation
+
+**Customized for Neuman Brain:**
+- Neuman Brain docs structure (`docs/technical/`, `docs/product/`, etc.)
+- Privacy-first documentation (IndexedDB, offline capabilities)
+- Performance documentation (bundle size, lazy loading)
+- TypeScript strict mode examples
+- Zustand store patterns
+- Design system references
+
+**When to Use:**
+- Writing README files
+- Creating architecture docs
+- Adding code comments
+- Documenting APIs
+- Making codebase accessible
+
+**Invoke:** Request: "Document this feature for Neuman Brain"
+
+---
+
+### tech-debt-analyzer
+**Purpose:** Identify technical debt and CLAUDE.md workflow violations
+
+**Customized for Neuman Brain:**
+- CLAUDE.md compliance checks (task files, reviews, dates)
+- Workflow debt (missing task files, unarchived tasks)
+- Code quality debt (root cause not fixed, surgical simplicity violated)
+- Neuman Brain-specific checks (privacy-first, performance, design system)
+
+**When to Use:**
+- Analyzing codebase health
+- Creating technical debt register
+- Assessing code maintainability
+- Checking CLAUDE.md compliance
+
+**Invoke:** Request: "Analyze technical debt in [area]"
+
+---
+
+### test-specialist
+**Purpose:** Write comprehensive tests using Vitest + React Testing Library
+
+**Customized for Neuman Brain:**
+- Vitest patterns (not Jest)
+- React Testing Library best practices
+- User-centric queries (avoid implementation details)
+- Test coverage requirements (Rule #13)
+- Zustand store testing
+- IndexedDB service testing
+- Accessibility testing (keyboard nav, ARIA)
+
+**When to Use:**
+- Writing unit tests
+- Adding regression tests for bugs
+- Improving test coverage
+- Debugging test failures
+
+**Invoke:** Request: "Write tests for this component using Vitest"
+
+---
+
+### frontend-enhancer
+**Purpose:** Generic Next.js frontend enhancement patterns
+
+**⚠️ OVERRIDE WARNING:**
+Neuman Brain has its own design system. This skill provides generic templates - always adapt to Neuman Brain requirements using `neuman-brain-design-system` and `neuman-brain-ux-designer`.
+
+**When to Use:**
+- Generic UI patterns (adapt to Neuman Brain)
+- Next.js best practices
+- Responsive layouts
+
+**Invoke:** Use with caution, prefer Neuman Brain-specific skills
+
+---
+
+## 📄 Document Skills
+
+### document-skills (4 sub-skills)
+**Purpose:** Official Anthropic document manipulation skills
+
+**Sub-skills:**
+- `docx` - Word document creation and editing
+- `pdf` - PDF manipulation and forms
+- `pptx` - PowerPoint presentation creation
+- `xlsx` - Excel spreadsheet operations
+
+**When to Use:**
+- Creating/editing documents
+- Generating reports
+- Exporting data
+
+**Invoke:** Automatically when document context appears
+
+---
+
+## 🔄 How Skills Work Together
+
+**Example: Adding New Widget**
+
+1. **neuman-brain-feature-developer** → Architecture guidance (Zustand, Widget system)
+2. **neuman-brain-ux-designer** → Design interaction patterns
+3. **neuman-brain-design-system** → Apply colors, spacing, components
+4. **test-specialist** → Write Vitest tests
+5. **neuman-brain-code-reviewer** → Review before commit
+6. **codebase-documenter** → Update docs
+
+---
+
+## 📖 Skill Invocation
+
+**Automatic:**
+Skills activate automatically when relevant context appears (e.g., design system loads when implementing UI)
+
+**Explicit:**
+Request skills directly:
+- "Use neuman-brain-ux-designer to critique this layout"
+- "Use neuman-brain-code-reviewer to review this code"
+- "Use neuman-brain-feature-developer to help me build [feature]"
+
+---
+
+## 🗂️ Removed Skills (November 19, 2025)
+
+Removed 19 generic skills not relevant to Neuman Brain development:
+- brand-analyzer, business-analytics-reporter, business-document-generator
+- cicd-pipeline-generator, csv-data-visualizer, data-analyst
+- docker-containerization, finance-manager, nutritional-specialist
+- personal-assistant, pitch-deck, research-paper-writer
+- resume-manager, script-writer, seo-optimizer
+- social-media-generator, startup-validator, storyboard-manager
+- travel-planner
+
+**Reason:** Focus on skills directly supporting Neuman Brain development workflow.
+
+---
+
+## 📚 See Also
+
+- `CLAUDE.md` - Complete workflow and development principles
+- `docs/technical/development_principles.md` - Privacy/security/UX requirements
+- `docs/product/feature_roadmap.md` - Product vision and roadmap
+- `.claude/automation-guide.md` - Workflow automation tools
+
+---
+
+**Questions?**
+- Skills not working? Check skill names match exactly (lowercase, hyphens)
+- Need new skill? Follow `.claude/templates/skill-template.md` pattern
+- Skill conflicts? Review skill descriptions for proper use cases

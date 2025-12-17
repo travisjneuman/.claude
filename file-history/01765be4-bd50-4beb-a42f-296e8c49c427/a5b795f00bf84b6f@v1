@@ -1,0 +1,119 @@
+/**
+ * Dashboard Widget Store
+ *
+ * Manages widget state: enabled widgets, order, and settings
+ * Persists to localStorage for user preferences
+ */
+
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
+
+export interface WidgetSettings {
+  refreshRate?: number; // Minutes between auto-refresh
+  [key: string]: any; // Widget-specific settings
+}
+
+export interface WidgetState {
+  // Enabled widget IDs in display order
+  enabledWidgets: string[];
+
+  // Widget-specific settings
+  widgetSettings: Record<string, WidgetSettings>;
+
+  // Actions
+  enableWidget: (widgetId: string) => void;
+  disableWidget: (widgetId: string) => void;
+  reorderWidgets: (newOrder: string[]) => void;
+  updateWidgetSettings: (widgetId: string, settings: Partial<WidgetSettings>) => void;
+  isWidgetEnabled: (widgetId: string) => boolean;
+  getWidgetSettings: (widgetId: string) => WidgetSettings;
+}
+
+export const useWidgetStore = create<WidgetState>()(
+  persist(
+    (set, get) => ({
+      // Default enabled widgets (core + 3 API widgets + weather map)
+      enabledWidgets: ['tasksummary', 'upcomingevents', 'recentnotes', 'quickadd', 'quote', 'crypto', 'hackernews', 'weathermap'],
+
+      // Default settings
+      widgetSettings: {
+        quote: { refreshRate: 60 }, // 1 hour
+        crypto: { refreshRate: 1 }, // 1 minute
+        hackernews: { refreshRate: 15 }, // 15 minutes
+        facts: { refreshRate: 60 },
+        github: { refreshRate: 60, username: '' },
+        weather: { refreshRate: 60 },
+        joke: { refreshRate: 30 },
+        unsplash: { refreshRate: 60, category: 'nature' },
+        pomodoro: { duration: 25 }, // 25 minutes
+        reddit: { refreshRate: 15, subreddit: 'programming' },
+        devto: { refreshRate: 30 },
+        wordofday: { refreshRate: 1440 }, // Once per day
+        currency: { refreshRate: 60 },
+        worldclock: {},
+        ipinfo: { refreshRate: 60 },
+        qrcode: {},
+        colorpalette: {},
+        weathermap: { refreshRate: 60 },
+      },
+
+      enableWidget: (widgetId) => {
+        set((state) => {
+          if (!state.enabledWidgets.includes(widgetId)) {
+            return {
+              enabledWidgets: [...state.enabledWidgets, widgetId],
+            };
+          }
+          return state;
+        });
+      },
+
+      disableWidget: (widgetId) => {
+        set((state) => ({
+          enabledWidgets: state.enabledWidgets.filter((id) => id !== widgetId),
+        }));
+      },
+
+      reorderWidgets: (newOrder) => {
+        set({ enabledWidgets: newOrder });
+      },
+
+      updateWidgetSettings: (widgetId, settings) => {
+        set((state) => ({
+          widgetSettings: {
+            ...state.widgetSettings,
+            [widgetId]: {
+              ...state.widgetSettings[widgetId],
+              ...settings,
+            },
+          },
+        }));
+      },
+
+      isWidgetEnabled: (widgetId) => {
+        return get().enabledWidgets.includes(widgetId);
+      },
+
+      getWidgetSettings: (widgetId) => {
+        return get().widgetSettings[widgetId] || {};
+      },
+    }),
+    {
+      name: 'dashboard-widgets',
+      version: 1, // Increment this when you need to trigger migrations
+      migrate: (persistedState: any, version: number) => {
+        // Migration for version 0 -> 1: Add weathermap to enabled widgets if missing
+        if (version === 0) {
+          const state = persistedState as WidgetState;
+          if (!state.enabledWidgets.includes('weathermap')) {
+            state.enabledWidgets.push('weathermap');
+          }
+          if (!state.widgetSettings.weathermap) {
+            state.widgetSettings.weathermap = { refreshRate: 60 };
+          }
+        }
+        return persistedState;
+      },
+    }
+  )
+);

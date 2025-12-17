@@ -1,0 +1,71 @@
+/**
+ * Preview Pane Component
+ *
+ * Shows running dev server output in an iframe.
+ * Displays when a dev server is running in WebContainer.
+ */
+
+import React, { useState } from 'react';
+import { usePhantomShellStore } from '../../stores/usePhantomShellStore';
+
+interface PreviewProps {
+  className?: string;
+}
+
+export const Preview: React.FC<PreviewProps> = ({ className = '' }) => {
+  const { devServerUrl, isDevServerRunning, showPreview } = usePhantomShellStore();
+  const [isLoading, setIsLoading] = useState(true);
+
+  if (!showPreview) return null;
+
+  if (!isDevServerRunning || !devServerUrl) {
+    return (
+      <div className={`flex items-center justify-center bg-[#0a0a0f] ${className}`}>
+        <div className="text-center text-neutral-400">
+          <div className="text-4xl mb-4">🚀</div>
+          <p className="text-sm">No dev server running</p>
+          <p className="text-xs mt-2">
+            Run <code className="text-fuchsia-500">npm run dev</code> to start
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className={`relative bg-white ${className}`}>
+      {isLoading && (
+        <div className="absolute inset-0 flex items-center justify-center bg-[#0a0a0f] z-10">
+          <div className="flex flex-col items-center">
+            <div className="animate-spin w-8 h-8 border-2 border-fuchsia-500 border-t-transparent rounded-full" />
+            <p className="mt-4 text-sm text-neutral-400">Loading preview...</p>
+          </div>
+        </div>
+      )}
+
+      <iframe
+        src={devServerUrl}
+        className="w-full h-full border-0"
+        onLoad={() => setIsLoading(false)}
+        title="Preview"
+        sandbox="allow-scripts allow-same-origin allow-forms allow-modals allow-popups"
+      />
+
+      {/* URL bar */}
+      <div className="absolute top-0 left-0 right-0 bg-black/90 backdrop-blur-sm px-3 py-1.5 flex items-center gap-2 border-b border-neutral-800">
+        <div className="w-2 h-2 rounded-full bg-green-500" />
+        <span className="text-xs text-neutral-400 font-mono truncate flex-1">
+          {devServerUrl}
+        </span>
+        <button
+          onClick={() => window.open(devServerUrl, '_blank')}
+          className="text-xs text-cyan-400 hover:underline"
+        >
+          Open ↗
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default Preview;

@@ -1,0 +1,84 @@
+/**
+ * PageContent Component
+ *
+ * Standardized wrapper for page content that provides consistent layout patterns.
+ * Used by all pages to ensure uniform spacing, sizing, and structure.
+ *
+ * Variants:
+ * - default: Standard scrollable content
+ * - full-height: Fills available height (for Kanban, Notes, Graphs)
+ * - split-view: For pages with sidebar + content layout
+ */
+
+import { forwardRef, type ReactNode, type HTMLAttributes } from 'react';
+
+export type PageVariant = 'default' | 'full-height' | 'split-view';
+
+interface PageContentProps extends HTMLAttributes<HTMLDivElement> {
+  /** Page identifier for styling hooks (e.g., 'dashboard', 'tasks') */
+  page: string;
+  /** Layout variant */
+  variant?: PageVariant;
+  /** Page content */
+  children: ReactNode;
+}
+
+/**
+ * Base classes shared by all variants
+ */
+const baseClasses = '';
+
+/**
+ * Variant-specific classes
+ */
+const variantClasses: Record<PageVariant, string> = {
+  // Standard page - scrolls within flex container (Settings, Dashboard, etc.)
+  default: 'flex-1 overflow-y-auto min-h-0',
+  // Full-height - fills viewport, internal scrolling (Graph, Notes, Kanban)
+  'full-height': 'flex flex-col flex-1 min-h-0 overflow-hidden',
+  // Split-view - horizontal layout for sidebar + content (Link Library)
+  'split-view': 'flex flex-1 min-h-0 overflow-hidden',
+};
+
+/**
+ * PageContent provides consistent layout structure for all pages.
+ *
+ * @example
+ * // Standard page
+ * <PageContent page="settings">
+ *   <SettingsContent />
+ * </PageContent>
+ *
+ * @example
+ * // Full-height page (Kanban, Notes)
+ * <PageContent page="tasks" variant="full-height">
+ *   <KanbanBoard />
+ * </PageContent>
+ *
+ * @example
+ * // Split-view page (Notes, Docs)
+ * <PageContent page="notes" variant="split-view">
+ *   <Sidebar />
+ *   <MainContent />
+ * </PageContent>
+ */
+export const PageContent = forwardRef<HTMLDivElement, PageContentProps>(
+  ({ page, variant = 'default', className = '', children, ...props }, ref) => {
+    const pageClass = `${page}-page`;
+    const variantClass = variantClasses[variant];
+
+    return (
+      <div
+        ref={ref}
+        className={`${pageClass} ${baseClasses} ${variantClass} ${className}`.trim()}
+        {...props}
+      >
+        {children}
+      </div>
+    );
+  }
+);
+
+PageContent.displayName = 'PageContent';
+
+export default PageContent;

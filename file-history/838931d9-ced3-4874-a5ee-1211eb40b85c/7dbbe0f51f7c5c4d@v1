@@ -1,0 +1,68 @@
+/**
+ * useBackupOnboarding Hook
+ *
+ * Manages onboarding modal state
+ * - Check if user has backup folder configured
+ * - Check reminder preference (every session / 7 days / never)
+ * - Calculate if modal should show
+ * - Track first content creation
+ */
+
+import { useEffect, useState } from 'react';
+import { useThemeStore } from '../stores/useThemeStore';
+
+export function useBackupOnboarding() {
+  const backupPreferences = useThemeStore((state) => state.backupPreferences);
+  const [shouldShowModal, setShouldShowModal] = useState(false);
+  const [hasChecked, setHasChecked] = useState(false);
+
+  useEffect(() => {
+    // Only check once per session
+    if (hasChecked) return;
+
+    const checkShouldShow = () => {
+      // Don't show if user already has backup configured
+      if (backupPreferences.hasBackupFolder) {
+        setHasChecked(true);
+        return false;
+      }
+
+      // Check reminder preference
+      const { reminderPreference, nextReminderDate } = backupPreferences;
+
+      // Never show again
+      if (reminderPreference === 'never') {
+        setHasChecked(true);
+        return false;
+      }
+
+      // Show every session
+      if (reminderPreference === 'every-session') {
+        setHasChecked(true);
+        return true;
+      }
+
+      // Show in 7 days - check if date has passed
+      if (reminderPreference === 'in-7-days' && nextReminderDate) {
+        const now = new Date();
+        const reminderDate = new Date(nextReminderDate);
+
+        if (now >= reminderDate) {
+          setHasChecked(true);
+          return true;
+        }
+      }
+
+      setHasChecked(true);
+      return false;
+    };
+
+    const shouldShow = checkShouldShow();
+    setShouldShowModal(shouldShow);
+  }, [backupPreferences, hasChecked]);
+
+  return {
+    shouldShowModal,
+    dismissModal: () => setShouldShowModal(false),
+  };
+}

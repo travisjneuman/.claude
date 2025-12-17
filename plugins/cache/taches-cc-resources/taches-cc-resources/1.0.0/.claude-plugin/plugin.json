@@ -1,0 +1,22 @@
+{
+  "name": "taches-cc-resources",
+  "description": "Curated Claude Code skills and commands for prompt engineering, MCP servers, subagents, hooks, and productivity workflows",
+  "version": "1.0.0",
+  "author": {
+    "name": "Lex Christopherson",
+    "email": "lex@glittercowboy.com"
+  },
+  "homepage": "https://github.com/glittercowboy/taches-cc-resources",
+  "repository": "https://github.com/glittercowboy/taches-cc-resources",
+  "license": "MIT",
+  "keywords": [
+    "skills",
+    "prompts",
+    "mcp-servers",
+    "subagents",
+    "hooks",
+    "slash-commands",
+    "prompt-engineering",
+    "meta-prompting"
+  ]
+}

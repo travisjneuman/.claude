@@ -1,0 +1,61 @@
+import React from 'react';
+import type { WidgetProps } from '../types';
+import { WidgetControls } from './WidgetControls';
+
+/**
+ * Minimal Widget component - no cards, elevation layers only
+ */
+export const Widget: React.FC<WidgetProps> = ({
+  id,
+  title,
+  category,
+  className = '',
+  children,
+  headerAccessory,
+  draggable = true,
+}) => {
+  return (
+    <div
+      id={id}
+      className={`h-full flex flex-col border border-border-light dark:border-border-dark rounded-lg bg-transparent ${className}`}
+      data-widget-id={id}
+      data-category={category}
+    >
+      {/* Widget Header */}
+      <div className="flex-shrink-0 px-4 py-3 border-b border-border-light dark:border-border-dark flex items-center justify-between gap-4">
+        <div className="flex-1 min-w-0">
+          <h2 className="text-md font-semibold text-text-light-primary dark:text-text-dark-primary truncate">
+            {title}
+          </h2>
+          {category && (
+            <span className="text-xs text-text-light-secondary dark:text-text-dark-secondary uppercase">
+              {category}
+            </span>
+          )}
+        </div>
+
+        {/* Header Accessory */}
+        {headerAccessory && (
+          <div className="flex-shrink-0 mr-4">
+            {headerAccessory}
+          </div>
+        )}
+
+        {/* Widget Controls */}
+        {draggable && (
+          <div className="flex-shrink-0">
+            <WidgetControls
+              widgetId={id}
+              draggable={true}
+            />
+          </div>
+        )}
+      </div>
+
+      {/* Widget Content */}
+      <div className="flex-1 overflow-auto p-4">
+        {children}
+      </div>
+    </div>
+  );
+};

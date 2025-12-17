@@ -1,0 +1,204 @@
+# CMS Sync
+
+Validate and synchronize Decap CMS configuration with content schema.
+
+## Quick Check
+
+```bash
+# Verify CMS config exists
+cat public/admin/config.yml
+
+# Check content schema
+cat src/content/config.ts
+
+# Validate Astro types
+npm run astro check
+```
+
+## Full Validation Workflow
+
+### 1. Schema Alignment
+
+Ensure `public/admin/config.yml` fields match `src/content/config.ts`:
+
+| config.yml Field | config.ts Field | Type Match |
+|------------------|-----------------|------------|
+| title (string) | title: z.string() | Yes |
+| slug (string) | slug: z.string() | Yes |
+| status (select) | status: z.enum([...]) | Check options |
+| rent (number) | rent: z.number() | Yes |
+| photos (list/image) | photos: z.array(z.string()) | Yes |
+| ... | ... | ... |
+
+### 2. Collection Verification
+
+Check all collections in config.yml have corresponding content folders:
+
+```bash
+# Properties collection
+ls src/content/properties/
+
+# Pages collection (if using)
+ls src/content/pages/
+
+# Settings collection (if using)
+ls src/content/settings/
+```
+
+### 3. Widget Validation
+
+Verify Decap CMS widgets match expected data types:
+
+| Widget | Expected Output |
+|--------|-----------------|
+| string | Plain text |
+| number | Numeric value |
+| boolean | true/false |
+| select | One of defined options |
+| list | Array of items |
+| image | Path to image file |
+| datetime | ISO date string |
+| markdown | Markdown text |
+
+### 4. Media Folder Check
+
+```yaml
+# config.yml should have:
+media_folder: public/images/properties
+public_folder: /images/properties
+```
+
+Verify:
+- [ ] `public/images/properties/` directory exists
+- [ ] Images upload to correct location
+- [ ] Image paths in content are correct
+
+### 5. Backend Configuration
+
+```yaml
+# For GitHub backend:
+backend:
+  name: github
+  repo: owner/oakstone-properties
+  branch: main
+  base_url: https://your-oauth-proxy.workers.dev
+```
+
+Verify:
+- [ ] Repo name matches actual GitHub repo
+- [ ] Branch matches deployment branch
+- [ ] OAuth proxy URL is correct (if using)
+
+### 6. Test CMS Locally
+
+```bash
+npm run dev
+```
+
+1. Visit `http://localhost:4321/admin/`
+2. Check:
+   - [ ] CMS loads without errors
+   - [ ] All collections visible
+   - [ ] Can create new entry (don't save if testing)
+   - [ ] All fields render correctly
+   - [ ] Image upload widget works
+
+### 7. Common Issues
+
+#### Fields Not Showing in CMS
+
+- Check field name in config.yml matches exactly
+- Verify widget type is valid
+- Check for YAML syntax errors
+
+#### Images Not Uploading
+
+- Verify media_folder path exists
+- Check file permissions
+- Ensure public_folder matches site URL structure
+
+#### OAuth Errors
+
+- Verify GitHub OAuth app settings
+- Check OAuth proxy is deployed and running
+- Verify redirect URLs match
+
+### 8. Update Workflow
+
+When adding new fields:
+
+1. Add to `src/content/config.ts`:
+```typescript
+newField: z.string().optional(),
+```
+
+2. Add to `public/admin/config.yml`:
+```yaml
+- { name: newField, label: New Field, widget: string, required: false }
+```
+
+3. Update any components that display the field
+
+4. Test in CMS and on site
+
+5. Commit all changes together:
+```bash
+git add src/content/config.ts public/admin/config.yml
+git commit -m "config: Add newField to property schema"
+```
+
+## Config Templates
+
+### Property Collection Fields
+
+```yaml
+fields:
+  # Identity
+  - { name: title, label: Title, widget: string }
+  - { name: slug, label: URL Slug, widget: string }
+
+  # Status
+  - { name: status, label: Status, widget: select, options: [available, pending, rented] }
+  - { name: featured, label: Featured, widget: boolean, default: false }
+
+  # Pricing
+  - { name: rent, label: Monthly Rent, widget: number, value_type: int }
+  - { name: deposit, label: Security Deposit, widget: number, value_type: int }
+
+  # Details
+  - { name: beds, label: Bedrooms, widget: number, value_type: int }
+  - { name: baths, label: Bathrooms, widget: number, value_type: float }
+  - { name: sqft, label: Square Feet, widget: number, required: false }
+  - { name: propertyType, label: Property Type, widget: select,
+      options: [apartment, house, townhome, condo, duplex] }
+
+  # Location
+  - { name: neighborhood, label: Neighborhood, widget: string }
+  - { name: city, label: City, widget: string }
+  - { name: state, label: State, widget: string }
+
+  # Features
+  - { name: features, label: Features, widget: list }
+  - { name: petPolicy, label: Pet Policy, widget: select,
+      options: [no-pets, cats-only, dogs-only, cats-dogs, negotiable] }
+  - { name: parking, label: Parking, widget: select,
+      options: [none, street, lot, garage, covered] }
+  - { name: laundry, label: Laundry, widget: select,
+      options: [none, shared, in-unit, hookups] }
+
+  # Media
+  - { name: photos, label: Photos, widget: list,
+      field: { name: photo, widget: image } }
+
+  # Application
+  - { name: applyUrl, label: Application URL, widget: string }
+  - { name: applicationFee, label: Application Fee, widget: number, required: false }
+  - { name: stripePaymentLink, label: Stripe Payment Link, widget: string, required: false }
+
+  # Dates
+  - { name: availableDate, label: Available Date, widget: datetime, required: false }
+  - { name: publishedDate, label: Published Date, widget: datetime }
+
+  # Content
+  - { name: body, label: Description, widget: markdown }
+```

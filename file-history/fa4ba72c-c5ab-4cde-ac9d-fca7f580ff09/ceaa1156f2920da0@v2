@@ -1,0 +1,72 @@
+/**
+ * BacklinksPanel Component
+ * Displays notes that link TO the current note (backlinks)
+ * Uses [[Note Title]] wiki-style linking syntax
+ */
+
+import { useMemo } from 'react';
+import { Link2, ChevronRight } from 'lucide-react';
+import { useNotesStore } from '../stores/useNotesStore';
+
+interface BacklinksPanelProps {
+  noteId: string;
+  onNoteClick?: (noteId: string) => void;
+}
+
+export function BacklinksPanel({ noteId, onNoteClick }: BacklinksPanelProps) {
+  const { getBacklinks, setActiveNote } = useNotesStore();
+
+  const backlinks = useMemo(() => {
+    return getBacklinks(noteId);
+  }, [noteId, getBacklinks]);
+
+  const handleNoteClick = (id: string) => {
+    if (onNoteClick) {
+      onNoteClick(id);
+    } else {
+      setActiveNote(id);
+    }
+  };
+
+  if (backlinks.length === 0) {
+    return (
+      <div className="p-4 border-t border-border-light dark:border-border-dark">
+        <div className="flex items-center gap-2 text-sm text-text-light-secondary dark:text-text-dark-secondary mb-2">
+          <Link2 className="w-4 h-4" />
+          <span className="font-medium">Backlinks</span>
+        </div>
+        <p className="text-xs text-text-light-tertiary dark:text-text-dark-tertiary">
+          No notes link to this note yet. Use [[Note Title]] to create links.
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="p-4 border-t border-border-light dark:border-border-dark">
+      <div className="flex items-center gap-2 text-sm text-text-light-secondary dark:text-text-dark-secondary mb-3">
+        <Link2 className="w-4 h-4" />
+        <span className="font-medium">Backlinks</span>
+        <span className="px-1.5 py-0.5 text-xs bg-accent-blue/10 text-accent-blue rounded">
+          {backlinks.length}
+        </span>
+      </div>
+
+      <div className="space-y-1">
+        {backlinks.map((note) => (
+          <button
+            key={note.id}
+            onClick={() => handleNoteClick(note.id)}
+            className="w-full flex items-center gap-2 p-2 text-sm text-left rounded-lg hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated transition-colors group"
+          >
+            <span className="text-lg">{note.icon || '📄'}</span>
+            <span className="flex-1 truncate text-text-light-primary dark:text-text-dark-primary">
+              {note.title}
+            </span>
+            <ChevronRight className="w-4 h-4 text-text-light-tertiary dark:text-text-dark-tertiary opacity-0 group-hover:opacity-100 transition-opacity" />
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}

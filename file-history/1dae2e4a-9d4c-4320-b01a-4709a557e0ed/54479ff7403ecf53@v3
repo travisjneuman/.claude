@@ -1,0 +1,386 @@
+/**
+ * ICS Import/Export Service
+ * Handles .ics file parsing and generation for calendar interoperability
+ */
+
+import { createEvents } from 'ics';
+import type { CalendarEvent } from '../types';
+import { format } from 'date-fns';
+import { logger } from './logger';
+
+const log = logger.module('ICSImport');
+
+/**
+ * Convert ICS date format (YYYY-MM-DD) to standard date key (YYYY-M-D)
+ * ICS uses padded format, but our calendar store uses unpadded 1-indexed format
+ */
+function toStandardDateKey(icsDate: string): string {
+  // Parse yyyy-MM-dd format
+  const match = icsDate.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (!match) {
+    // If not in expected format, try to parse and convert
+    const parts = icsDate.split('-');
+    if (parts.length === 3) {
+      const year = parseInt(parts[0], 10);
+      const month = parseInt(parts[1], 10);
+      const day = parseInt(parts[2], 10);
+      return `${year}-${month}-${day}`;
+    }
+    return icsDate; // Return as-is if unparseable
+  }
+
+  const [, year, month, day] = match;
+  // Remove leading zeros from month and day
+  return `${year}-${parseInt(month, 10)}-${parseInt(day, 10)}`;
+}
+
+/**
+ * Parse standard date key (YYYY-M-D) to Date object
+ */
+function parseStandardDateKey(dateKey: string): Date {
+  const parts = dateKey.split('-').map(Number);
+  if (parts.length !== 3 || parts.some(isNaN)) {
+    throw new Error(`Invalid date key: ${dateKey}`);
+  }
+  const [year, month, day] = parts;
+  return new Date(year, month - 1, day); // month is 0-indexed in JS Date
+}
+
+/**
+ * Export calendar events to .ics file
+ */
+export const exportToICS = (events: Record<string, CalendarEvent[]>): { success: boolean; data?: string; error?: string } => {
+  try {
+    const icsEvents: any[] = [];
+
+    // Convert all events to ICS format
+    Object.entries(events).forEach(([dateKey, dayEvents]) => {
+      dayEvents.forEach((event) => {
+        // Skip recurring instances (only export parent events)
+        if (event.recurrenceId) return;
+
+        // Parse standard date key format (YYYY-M-D)
+        const eventDate = parseStandardDateKey(dateKey);
+        const year = eventDate.getFullYear();
+        const month = eventDate.getMonth() + 1; // ICS uses 1-12
+        const day = eventDate.getDate();
+
+        let startTime: [number, number, number, number, number] | undefined;
+        let endTime: [number, number, number, number, number] | undefined;
+
+        // Parse times if timed event
+        if (event.startTime && !event.isAllDay) {
+          const [startHour, startMinute] = event.startTime.split(':').map(Number);
+          startTime = [year, month, day, startHour, startMinute];
+
+          if (event.endTime) {
+            const [endHour, endMinute] = event.endTime.split(':').map(Number);
+            endTime = [year, month, day, endHour, endMinute];
+          }
+        }
+
+        const icsEvent: any = {
+          title: event.title,
+          description: event.description,
+          start: startTime || [year, month, day],
+          startInputType: 'local',
+          startOutputType: 'local',
+          location: event.location,
+          status: 'CONFIRMED',
+          busyStatus: 'BUSY',
+          uid: event.id,
+        };
+
+        if (endTime) {
+          icsEvent.end = endTime;
+        }
+
+        // Add recurrence rule if present
+        if (event.recurrence) {
+          const { frequency, interval, daysOfWeek, endType, endCount, endDate } = event.recurrence;
+
+          let rrule = `FREQ=${frequency.toUpperCase()}`;
+
+          if (interval > 1) {
+            rrule += `;INTERVAL=${interval}`;
+          }
+
+          if (frequency === 'weekly' && daysOfWeek && daysOfWeek.length > 0) {
+            const days = ['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA'];
+            const byDay = daysOfWeek.map((d: number) => days[d]).join(',');
+            rrule += `;BYDAY=${byDay}`;
+          }
+
+          if (endType === 'after' && endCount) {
+            rrule += `;COUNT=${endCount}`;
+          } else if (endType === 'until' && endDate) {
+            // endDate is in standard format (YYYY-M-D)
+            const untilDate = parseStandardDateKey(endDate);
+            const untilStr = format(untilDate, "yyyyMMdd'T'235959'Z'");
+            rrule += `;UNTIL=${untilStr}`;
+          }
+
+          icsEvent.recurrenceRule = rrule;
+        }
+
+        icsEvents.push(icsEvent);
+      });
+    });
+
+    const { error, value } = createEvents(icsEvents);
+
+    if (error) {
+      return { success: false, error: error.message };
+    }
+
+    return { success: true, data: value };
+  } catch (error) {
+    return { success: false, error: String(error) };
+  }
+};
+
+/**
+ * Parse RRULE string to recurrence object
+ */
+const parseRRule = (rrule: string): CalendarEvent['recurrence'] | undefined => {
+  const parts = rrule.replace('RRULE:', '').split(';');
+  const rules: Record<string, string> = {};
+
+  parts.forEach(part => {
+    const [key, value] = part.split('=');
+    if (key && value) rules[key] = value;
+  });
+
+  const frequency = rules.FREQ?.toLowerCase() as 'daily' | 'weekly' | 'monthly' | 'yearly';
+  if (!frequency) return undefined;
+
+  const recurrence: CalendarEvent['recurrence'] = {
+    frequency,
+    interval: rules.INTERVAL ? parseInt(rules.INTERVAL, 10) : 1,
+    endType: 'never',
+  };
+
+  // Parse BYDAY for weekly/monthly events
+  // BYDAY can be simple (MO, TU) or positional (2FR = second Friday, -1SU = last Sunday)
+  if (rules.BYDAY) {
+    const dayMap: Record<string, number> = { SU: 0, MO: 1, TU: 2, WE: 3, TH: 4, FR: 5, SA: 6 };
+    const byDayParts = rules.BYDAY.split(',');
+
+    recurrence.daysOfWeek = byDayParts
+      .map(d => {
+        // Strip any positional prefix (e.g., "2FR" → "FR", "-1SU" → "SU")
+        const dayCode = d.replace(/^-?\d+/, '').toUpperCase();
+        return dayMap[dayCode];
+      })
+      .filter((d): d is number => d !== undefined);
+  }
+
+  // Parse COUNT or UNTIL
+  if (rules.COUNT) {
+    recurrence.endType = 'after';
+    recurrence.endCount = parseInt(rules.COUNT, 10);
+  } else if (rules.UNTIL) {
+    recurrence.endType = 'until';
+    // Parse UNTIL format (YYYYMMDDTHHmmssZ or YYYYMMDD) to standard date key
+    const untilStr = rules.UNTIL.replace(/[TZ]/g, '');
+    const year = parseInt(untilStr.slice(0, 4), 10);
+    const month = parseInt(untilStr.slice(4, 6), 10); // Already 1-indexed from ICS
+    const day = parseInt(untilStr.slice(6, 8), 10);
+    recurrence.endDate = `${year}-${month}-${day}`; // Standard format YYYY-M-D
+  }
+
+  return recurrence;
+};
+
+/**
+ * Parse ICS date/time string
+ */
+const parseICSDateTime = (value: string): { date: string; time?: string } => {
+  // Handle DTSTART;VALUE=DATE:20231225 or DTSTART:20231225T140000
+  const dateStr = value.includes(':') ? value.split(':')[1] : value;
+  const cleanDate = dateStr.replace('Z', '');
+
+  if (cleanDate.length === 8) {
+    // Date only: YYYYMMDD
+    return {
+      date: `${cleanDate.slice(0, 4)}-${cleanDate.slice(4, 6)}-${cleanDate.slice(6, 8)}`,
+    };
+  } else if (cleanDate.length >= 15) {
+    // Date with time: YYYYMMDDTHHmmss
+    return {
+      date: `${cleanDate.slice(0, 4)}-${cleanDate.slice(4, 6)}-${cleanDate.slice(6, 8)}`,
+      time: `${cleanDate.slice(9, 11)}:${cleanDate.slice(11, 13)}`,
+    };
+  }
+
+  return { date: cleanDate };
+};
+
+/**
+ * Unfold ICS content lines per RFC 5545
+ * Long lines are folded by inserting a CRLF followed by a single space or tab
+ */
+const unfoldICSLines = (content: string): string[] => {
+  // First, normalize line endings and unfold continuation lines
+  // Continuation lines start with a space or tab after CRLF
+  const unfolded = content
+    .replace(/\r\n/g, '\n')  // Normalize to LF
+    .replace(/\n[ \t]/g, '') // Join folded lines (CRLF + space/tab = continuation)
+    .split('\n')
+    .filter(l => l.trim());
+
+  return unfolded;
+};
+
+/**
+ * Import events from .ics file
+ */
+export const importFromICS = (icsData: string): { success: boolean; events?: CalendarEvent[]; error?: string; debug?: string[] } => {
+  try {
+    // Basic validation
+    if (!icsData.includes('BEGIN:VCALENDAR')) {
+      return { success: false, error: 'Invalid ICS file format' };
+    }
+
+    const events: CalendarEvent[] = [];
+    const debugLog: string[] = [];
+
+    // Split into individual events
+    const eventBlocks = icsData.split('BEGIN:VEVENT').slice(1);
+    debugLog.push(`Found ${eventBlocks.length} event blocks`);
+
+    eventBlocks.forEach((block, index) => {
+      const endIndex = block.indexOf('END:VEVENT');
+      if (endIndex === -1) return;
+
+      const eventContent = block.slice(0, endIndex);
+      // Properly unfold lines per ICS spec (RFC 5545)
+      const lines = unfoldICSLines(eventContent);
+
+      const event: Partial<CalendarEvent> = {
+        id: `imported-${Date.now()}-${index}`,
+      };
+
+      let startDate = '';
+      let endDate = '';
+      let startTime: string | undefined;
+      let endTime: string | undefined;
+      let isRecurrenceException = false;
+
+      lines.forEach(line => {
+        // Properties can have parameters like DTSTART;VALUE=DATE:20231225
+        // or DTSTART;TZID=America/New_York:20231225T090000
+        const colonIndex = line.indexOf(':');
+        if (colonIndex === -1) return;
+
+        const propertyPart = line.slice(0, colonIndex);
+        const valuePart = line.slice(colonIndex + 1);
+
+        // Extract the property name (before any semicolon parameters)
+        const propertyName = propertyPart.split(';')[0].toUpperCase();
+
+        if (propertyName === 'SUMMARY') {
+          event.title = valuePart.replace(/\\n/g, '\n').replace(/\\,/g, ',').replace(/\\\\/g, '\\');
+        } else if (propertyName === 'DESCRIPTION') {
+          event.description = valuePart.replace(/\\n/g, '\n').replace(/\\,/g, ',').replace(/\\\\/g, '\\');
+        } else if (propertyName === 'LOCATION') {
+          event.location = valuePart.replace(/\\,/g, ',');
+        } else if (propertyName === 'UID') {
+          // Use UID if available, sanitize for use as ID
+          event.id = valuePart.replace(/[^a-zA-Z0-9-_@.]/g, '_');
+        } else if (propertyName === 'DTSTART') {
+          const parsed = parseICSDateTime(valuePart);
+          startDate = parsed.date;
+          startTime = parsed.time;
+          if (index < 5) {
+            debugLog.push(`Event ${index}: DTSTART raw='${valuePart}' parsed date='${startDate}' time='${startTime}'`);
+          }
+        } else if (propertyName === 'DTEND') {
+          const parsed = parseICSDateTime(valuePart);
+          endDate = parsed.date;
+          endTime = parsed.time;
+        } else if (propertyName === 'RRULE') {
+          event.recurrence = parseRRule(`RRULE:${valuePart}`);
+          if (index < 5) {
+            debugLog.push(`Event ${index}: RRULE='${valuePart}' parsed=${JSON.stringify(event.recurrence)}`);
+          }
+        } else if (propertyName === 'RECURRENCE-ID') {
+          // This is an exception to a recurring event series
+          // Skip these as we'll generate instances from the master event's RRULE
+          isRecurrenceException = true;
+        }
+      });
+
+      // Skip recurrence exceptions (individual overrides of recurring events)
+      if (isRecurrenceException) {
+        debugLog.push(`Event ${index} skipped: recurrence exception`);
+        return;
+      }
+
+      // Only add events with at least a title and date
+      if (event.title && startDate) {
+        event.startTime = startTime;
+        event.endTime = endTime;
+        event.isAllDay = !startTime;
+
+        // Convert date to standard date key format (YYYY-M-D)
+        const standardDateKey = toStandardDateKey(startDate);
+
+        // Set endDate if different from startDate (multi-day event)
+        if (endDate && endDate !== startDate) {
+          event.endDate = toStandardDateKey(endDate);
+        }
+
+        // Add to events with the standard date key
+        events.push({
+          ...event,
+          _importedDate: standardDateKey, // Metadata for the date to store under
+        } as CalendarEvent & { _importedDate: string });
+      } else {
+        debugLog.push(`Event ${index} skipped: title='${event.title}' startDate='${startDate}'`);
+      }
+    });
+
+    debugLog.push(`Successfully parsed ${events.length} events`);
+    log.info('ICS import parsed events', { count: events.length });
+
+    return { success: true, events, debug: debugLog };
+  } catch (error) {
+    console.error('[ICS Import Error]', error);
+    return { success: false, error: String(error) };
+  }
+};
+
+/**
+ * Download .ics file
+ */
+export const downloadICS = (icsData: string, filename: string = 'calendar.ics'): void => {
+  const blob = new Blob([icsData], { type: 'text/calendar;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+};
+
+/**
+ * Read .ics file from file input
+ */
+export const readICSFile = (file: File): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const content = e.target?.result;
+      if (typeof content === 'string') {
+        resolve(content);
+      } else {
+        reject(new Error('Failed to read file as text'));
+      }
+    };
+    reader.onerror = () => reject(new Error('Failed to read file'));
+    reader.readAsText(file);
+  });
+};

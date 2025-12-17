@@ -1,0 +1,551 @@
+import React, { useState, useRef, useMemo, useEffect } from 'react';
+import {
+  DndContext,
+  DragOverlay,
+  PointerSensor,
+  TouchSensor,
+  useSensor,
+  useSensors,
+  closestCorners,
+  type DragEndEvent,
+  type DragStartEvent,
+} from '@dnd-kit/core';
+import { Widget } from '../components/Widget';
+import { KeyboardShortcutsHelp } from '../components/KeyboardShortcutsHelp';
+import { ConfirmDialog } from '../components/ConfirmDialog';
+import { Toast } from '../components/Toast';
+import { useKanbanStore } from '../stores/useKanbanStore';
+import { useKanbanKeyboard } from '../hooks/useKanbanKeyboard';
+import { KanbanColumn } from './Kanban/KanbanColumn';
+import { KanbanCard } from './Kanban/KanbanCard';
+import { ColumnManager } from './Kanban/ColumnManager';
+import { CardDetailPanel } from './Kanban/CardDetailPanel';
+import { ListView } from './Kanban/ListView';
+import { ArchivedView } from './Kanban/ArchivedView';
+import { QuickAddModal } from './Kanban/QuickAddModal';
+import type { Task, TaskStatus } from '../types';
+
+/**
+ * Kanban Board Widget - React Version with Drag & Drop
+ *
+ * Features:
+ * - Three-column board (To Do, In Progress, Done)
+ * - Drag and drop tasks between columns
+ * - Task CRUD operations
+ * - Priority and due date tracking
+ * - Syncs with Calendar widget
+ * - Keyboard shortcuts for navigation and actions
+ */
+export const Kanban: React.FC = () => {
+  const { tasks, columns, moveTask, deleteTask, updateTask, undo, undoHistory, autoArchiveCompletedTasks, visibleColumns = 5, setVisibleColumns } = useKanbanStore();
+  const [activeTask, setActiveTask] = useState<Task | null>(null);
+  const [showColumnManager, setShowColumnManager] = useState(false);
+  const [columnManagerInitialId, setColumnManagerInitialId] = useState<string | undefined>();
+  const [showArchivedView, setShowArchivedView] = useState(false);
+  const [showQuickAdd, setShowQuickAdd] = useState(false);
+  const [toast, setToast] = useState<{ message: string; showUndo: boolean } | null>(null);
+  const [selectedTask, setSelectedTask] = useState<Task | null>(null);
+  const [selectedTab, setSelectedTab] = useState<'subtasks' | 'checklist' | 'comments' | 'activity'>('subtasks');
+
+  // View mode state with persistence
+  const [viewMode, setViewMode] = useState<'board' | 'list'>(() => {
+    const saved = localStorage.getItem('kanban-view-mode');
+    return (saved as 'board' | 'list') || 'board';
+  });
+
+  // Filter state
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedPriorities, setSelectedPriorities] = useState<Set<string>>(new Set());
+  const [selectedTags, setSelectedTags] = useState<Set<string>>(new Set());
+  const [showFilters, setShowFilters] = useState(false);
+
+  // Refs for columns to trigger their add forms
+  const columnRefs = useRef<Record<string, { triggerAdd: () => void }>>({});
+  const cardRefs = useRef<Record<string, { triggerEdit: () => void }>>({});
+
+  // Configure sensors for drag-drop (mouse + touch)
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 8, // 8px movement before drag starts
+      },
+    }),
+    useSensor(TouchSensor, {
+      activationConstraint: {
+        delay: 250, // 250ms long press
+        tolerance: 5, // 5px movement tolerance
+      },
+    })
+  );
+
+  // Sort columns by order
+  const sortedColumns = useMemo(() => {
+    return [...columns].sort((a, b) => a.order - b.order);
+  }, [columns]);
+
+  const columnStatuses = sortedColumns.map((col) => col.id);
+
+  // Get all unique tags from tasks
+  const allTags = useMemo(() => {
+    const tagSet = new Set<string>();
+    tasks.forEach((task) => task.tags.forEach((tag) => tagSet.add(tag)));
+    return Array.from(tagSet).sort();
+  }, [tasks]);
+
+  // Filter tasks based on search and filters
+  const filteredTasks = useMemo(() => {
+    return tasks.filter((task) => {
+      // Search filter (title, description, or card number)
+      if (searchQuery) {
+        const query = searchQuery.toLowerCase();
+
+        // Phase A: Support searching by card number (e.g., "KAN-1", "1", "kan1")
+        const cardNumberStr = task.cardNumber ? `KAN-${task.cardNumber}`.toLowerCase() : '';
+        const cardNumberSimple = task.cardNumber?.toString() || '';
+
+        const matchesSearch =
+          task.title.toLowerCase().includes(query) ||
+          task.description.toLowerCase().includes(query) ||
+          cardNumberStr.includes(query) ||
+          cardNumberSimple.includes(query);
+
+        if (!matchesSearch) return false;
+      }
+
+      // Priority filter
+      if (selectedPriorities.size > 0 && !selectedPriorities.has(task.priority)) {
+        return false;
+      }
+
+      // Tags filter
+      if (selectedTags.size > 0) {
+        const hasSelectedTag = task.tags.some((tag) => selectedTags.has(tag));
+        if (!hasSelectedTag) return false;
+      }
+
+      return true;
+    });
+  }, [tasks, searchQuery, selectedPriorities, selectedTags]);
+
+  // Toggle filter helpers
+  const togglePriority = (priority: string) => {
+    setSelectedPriorities((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(priority)) {
+        newSet.delete(priority);
+      } else {
+        newSet.add(priority);
+      }
+      return newSet;
+    });
+  };
+
+  const toggleTag = (tag: string) => {
+    setSelectedTags((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(tag)) {
+        newSet.delete(tag);
+      } else {
+        newSet.add(tag);
+      }
+      return newSet;
+    });
+  };
+
+  const clearFilters = () => {
+    setSearchQuery('');
+    setSelectedPriorities(new Set());
+    setSelectedTags(new Set());
+  };
+
+  const hasActiveFilters =
+    searchQuery || selectedPriorities.size > 0 || selectedTags.size > 0;
+
+  // Keyboard shortcuts
+  const {
+    selectedColumn,
+    selectedTaskId,
+    showHelp,
+    closeHelp,
+    pendingDeleteTask,
+    confirmDelete,
+    cancelDelete,
+  } = useKanbanKeyboard({
+    columns: columnStatuses,
+    tasks: filteredTasks, // Use filtered tasks for keyboard navigation
+    onAddTask: (status) => {
+      // Trigger the add form in the selected column
+      columnRefs.current[status]?.triggerAdd();
+    },
+    onEditTask: (task) => {
+      // Trigger edit mode for the selected task
+      cardRefs.current[task.id]?.triggerEdit();
+    },
+    onDeleteTask: (taskId) => {
+      deleteTask(taskId);
+    },
+  });
+
+  const handleDragStart = (event: DragStartEvent) => {
+    const taskId = event.active.id as string;
+    const task = tasks.find((t) => t.id === taskId);
+    setActiveTask(task || null);
+  };
+
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+
+    setActiveTask(null);
+
+    if (!over) return;
+
+    const taskId = active.id as string;
+    const newStatus = over.id as TaskStatus;
+
+    // Move task to new column
+    moveTask(taskId, newStatus);
+  };
+
+  const handleEditColumn = (columnId: string) => {
+    setColumnManagerInitialId(columnId);
+    setShowColumnManager(true);
+  };
+
+  // View mode persistence
+  useEffect(() => {
+    localStorage.setItem('kanban-view-mode', viewMode);
+  }, [viewMode]);
+
+  // Phase A: Auto-archive completed tasks on mount
+  useEffect(() => {
+    autoArchiveCompletedTasks();
+  }, []); // Run once on mount
+
+  // Phase A: Global keyboard shortcut for Quick Add (Cmd/Ctrl+K)
+  useEffect(() => {
+    const handleGlobalKeyDown = (e: KeyboardEvent) => {
+      // Cmd/Ctrl+K to open Quick Add
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        // Don't trigger if user is typing in an input/textarea
+        const target = e.target as HTMLElement;
+        if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable) {
+          return;
+        }
+
+        e.preventDefault();
+        setShowQuickAdd(true);
+      }
+    };
+
+    window.addEventListener('keydown', handleGlobalKeyDown);
+    return () => window.removeEventListener('keydown', handleGlobalKeyDown);
+  }, []);
+
+  // Listen for undo history changes and show toast
+  useEffect(() => {
+    if (undoHistory.length > 0) {
+      const lastEntry = undoHistory[undoHistory.length - 1];
+      setToast({
+        message: lastEntry.description,
+        showUndo: true,
+      });
+    }
+  }, [undoHistory]);
+
+  const handleUndo = () => {
+    undo();
+    setToast(null);
+  };
+
+  return (
+    <Widget
+      id="kanban"
+      title="Kanban Board"
+      category="Planning"
+      draggable={false}
+      headerAccessory={
+        <div className="flex items-center gap-1">
+          <span className="text-xs text-text-light-secondary dark:text-text-dark-secondary mr-2">
+            Columns:
+          </span>
+          {[3, 4, 5, 6, 7].map((count) => (
+            <button
+              key={count}
+              onClick={() => setVisibleColumns(count)}
+              className={`px-2 py-1 text-xs font-medium rounded transition-colors ${
+                visibleColumns === count
+                  ? 'bg-accent-blue text-white'
+                  : 'bg-surface-light-elevated dark:bg-surface-dark-elevated text-text-light-secondary dark:text-text-dark-secondary hover:text-text-light-primary dark:hover:text-text-dark-primary hover:bg-neutral-200 dark:hover:bg-neutral-700'
+              }`}
+              title={`Show ${count} columns at once`}
+            >
+              {count}
+            </button>
+          ))}
+        </div>
+      }
+    >
+      {/* Filter Bar */}
+      <div className="mb-4 space-y-3">
+        {/* Search and Filter Toggle */}
+        <div className="flex gap-2">
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search tasks (by title, description, or KAN-#)..."
+            className="flex-1 px-4 py-2 text-sm border border-neutral-lightGray dark:border-neutral-darkGray rounded-lg bg-white dark:bg-neutral-charcoal text-text-light-primary dark:text-text-dark-primary placeholder-text-light-secondary dark:placeholder-text-dark-secondary focus:outline-none focus:ring-2 focus:ring-accent-primary"
+          />
+          <button
+            onClick={() => setShowColumnManager(true)}
+            className="px-4 py-2 text-sm font-medium bg-accent-blue text-white rounded-lg hover:bg-accent-blue-hover transition-colors whitespace-nowrap"
+            title="Manage Columns"
+          >
+            ⚙️ Columns
+          </button>
+          <button
+            onClick={() => setShowArchivedView(true)}
+            className="px-4 py-2 text-sm font-medium bg-surface-light-elevated dark:bg-surface-dark text-text-light-primary dark:text-text-dark-primary rounded-lg border border-border-light dark:border-border-dark hover:bg-surface-light dark:hover:bg-surface-dark-elevated transition-colors whitespace-nowrap"
+            title="View Archived Tasks"
+          >
+            📦 Archived
+          </button>
+          {/* View Toggle */}
+          <div className="flex rounded-lg overflow-hidden border border-border-light dark:border-border-dark">
+            <button
+              onClick={() => setViewMode('board')}
+              className={`px-3 py-2 text-sm font-medium transition-colors whitespace-nowrap ${
+                viewMode === 'board'
+                  ? 'bg-accent-blue text-white'
+                  : 'bg-white dark:bg-neutral-800 text-text-light-secondary dark:text-text-dark-secondary hover:bg-neutral-50 dark:hover:bg-neutral-700'
+              }`}
+              title="Board View"
+            >
+              📋 Board
+            </button>
+            <button
+              onClick={() => setViewMode('list')}
+              className={`px-3 py-2 text-sm font-medium transition-colors whitespace-nowrap border-l border-border-light dark:border-border-dark ${
+                viewMode === 'list'
+                  ? 'bg-accent-blue text-white'
+                  : 'bg-white dark:bg-neutral-800 text-text-light-secondary dark:text-text-dark-secondary hover:bg-neutral-50 dark:hover:bg-neutral-700'
+              }`}
+              title="List View"
+            >
+              📊 List
+            </button>
+          </div>
+          <button
+            onClick={() => setShowFilters(!showFilters)}
+            className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors whitespace-nowrap ${
+              showFilters || hasActiveFilters
+                ? 'bg-accent-primary text-white'
+                : 'bg-neutral-paleGray dark:bg-neutral-darkGray text-text-light-secondary dark:text-text-dark-secondary hover:bg-neutral-lightGray dark:hover:bg-neutral-gray'
+            }`}
+          >
+            🔍 Filters {hasActiveFilters && `(${[...selectedPriorities, ...selectedTags].length})`}
+          </button>
+          {hasActiveFilters && (
+            <button
+              onClick={clearFilters}
+              className="px-4 py-2 text-sm font-medium bg-neutral-gray text-white rounded-lg hover:opacity-80 transition-opacity"
+            >
+              Clear
+            </button>
+          )}
+        </div>
+
+        {/* Advanced Filters (collapsible) */}
+        {showFilters && (
+          <div className="p-4 bg-neutral-paleGray dark:bg-neutral-darkGray rounded-lg space-y-3">
+            {/* Priority Filter */}
+            <div>
+              <label className="block text-xs font-semibold text-text-light-secondary dark:text-text-dark-secondary mb-2 uppercase tracking-wide">
+                Priority
+              </label>
+              <div className="flex gap-2 flex-wrap">
+                {(['low', 'medium', 'high'] as const).map((priority) => (
+                  <button
+                    key={priority}
+                    onClick={() => togglePriority(priority)}
+                    className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-all ${
+                      selectedPriorities.has(priority)
+                        ? 'bg-accent-primary text-white ring-2 ring-accent-primary ring-offset-2 ring-offset-white dark:ring-offset-neutral-darkGray'
+                        : 'bg-white dark:bg-neutral-charcoal text-text-light-secondary dark:text-text-dark-secondary border border-neutral-lightGray dark:border-neutral-gray hover:border-accent-primary'
+                    }`}
+                  >
+                    {priority.charAt(0).toUpperCase() + priority.slice(1)}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Tags Filter */}
+            {allTags.length > 0 && (
+              <div>
+                <label className="block text-xs font-semibold text-text-light-secondary dark:text-text-dark-secondary mb-2 uppercase tracking-wide">
+                  Tags
+                </label>
+                <div className="flex gap-2 flex-wrap">
+                  {allTags.map((tag) => (
+                    <button
+                      key={tag}
+                      onClick={() => toggleTag(tag)}
+                      className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-all ${
+                        selectedTags.has(tag)
+                          ? 'bg-secondary-primary text-white ring-2 ring-secondary-primary ring-offset-2 ring-offset-white dark:ring-offset-neutral-darkGray'
+                          : 'bg-white dark:bg-neutral-charcoal text-text-light-secondary dark:text-text-dark-secondary border border-neutral-lightGray dark:border-neutral-gray hover:border-secondary-primary'
+                      }`}
+                    >
+                      #{tag}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Results Count */}
+        {hasActiveFilters && (
+          <div className="text-xs text-text-light-secondary dark:text-text-dark-secondary">
+            Showing {filteredTasks.length} of {tasks.length} tasks
+          </div>
+        )}
+      </div>
+
+      {/* Keyboard shortcuts hint */}
+      <div className="mb-3 flex items-center justify-between">
+        <div className="text-xs text-text-light-secondary dark:text-text-dark-secondary flex items-center gap-4">
+          <span>
+            Press <kbd className="px-2 py-0.5 text-xs font-mono bg-neutral-paleGray dark:bg-neutral-darkGray rounded border border-neutral-lightGray dark:border-neutral-gray">?</kbd> for keyboard shortcuts
+          </span>
+          <span className="hidden md:inline">
+            <kbd className="px-2 py-0.5 text-xs font-mono bg-neutral-paleGray dark:bg-neutral-darkGray rounded border border-neutral-lightGray dark:border-neutral-gray">⌘K</kbd> to quick add task
+          </span>
+        </div>
+      </div>
+
+      {viewMode === 'board' ? (
+        <DndContext
+          sensors={sensors}
+          collisionDetection={closestCorners}
+          onDragStart={handleDragStart}
+          onDragEnd={handleDragEnd}
+        >
+          <div className="kanban-board min-h-[500px] flex gap-4 overflow-x-auto pb-4 max-w-full">
+            {sortedColumns.map((column, index) => {
+              // Dynamic column width: always calculate based on visibleColumns setting
+              // If visibleColumns > actual columns, columns will be narrower (leaving space on right)
+              // If visibleColumns < actual columns, horizontal scrolling will be enabled
+              const columnWidth = `calc((100% - ${(visibleColumns - 1) * 16}px) / ${visibleColumns})`;
+
+              return (
+                <KanbanColumn
+                  key={column.id}
+                  id={column.id}
+                  title={column.title}
+                  color={column.color}
+                  wipLimit={column.wipLimit}
+                  tasks={filteredTasks.filter((task) => task.status === column.id)}
+                  selectedTaskId={selectedColumn === index ? selectedTaskId : undefined}
+                  columnWidth={columnWidth}
+                  onRegisterRef={(ref) => {
+                    columnRefs.current[column.id] = ref;
+                  }}
+                  onRegisterCardRef={(taskId, ref) => {
+                    cardRefs.current[taskId] = ref;
+                  }}
+                  onCardClick={(task, tab) => {
+                    setSelectedTask(task);
+                    if (tab) setSelectedTab(tab);
+                  }}
+                  onEditColumn={handleEditColumn}
+                />
+              );
+            })}
+          </div>
+
+          {/* Drag overlay - shows ghost of dragged card */}
+          <DragOverlay>
+            {activeTask ? (
+              <div className="opacity-80 rotate-3 scale-105 transition-transform">
+                <KanbanCard task={activeTask} isDragging />
+              </div>
+            ) : null}
+          </DragOverlay>
+        </DndContext>
+      ) : (
+        <ListView
+          tasks={filteredTasks}
+          columns={columns}
+          onTaskClick={(task) => setSelectedTask(task)}
+        />
+      )}
+
+      {/* Keyboard Shortcuts Help Modal */}
+      <KeyboardShortcutsHelp isOpen={showHelp} onClose={closeHelp} />
+
+      {/* Delete Confirmation Dialog */}
+      {pendingDeleteTask && (
+        <ConfirmDialog
+          isOpen={true}
+          onClose={cancelDelete}
+          onConfirm={confirmDelete}
+          title="Delete Task"
+          message={`Are you sure you want to delete "${pendingDeleteTask.title}"? This action cannot be undone.`}
+          variant="danger"
+        />
+      )}
+
+      {/* Column Manager Modal */}
+      <ColumnManager
+        isOpen={showColumnManager}
+        onClose={() => {
+          setShowColumnManager(false);
+          setColumnManagerInitialId(undefined);
+        }}
+        initialEditingColumnId={columnManagerInitialId}
+      />
+
+      {/* Toast Notification */}
+      {toast && (
+        <Toast
+          message={toast.message}
+          action={toast.showUndo ? { label: 'Undo', onClick: handleUndo } : undefined}
+          onClose={() => setToast(null)}
+        />
+      )}
+
+      {/* Card Detail Panel */}
+      <CardDetailPanel
+        task={selectedTask}
+        isOpen={!!selectedTask}
+        onClose={() => {
+          setSelectedTask(null);
+          setSelectedTab('subtasks'); // Reset to default tab
+        }}
+        onSave={(taskId, updates) => {
+          updateTask(taskId, updates);
+        }}
+        columns={columns}
+        initialTab={selectedTab}
+        onCardClick={(task) => {
+          setSelectedTask(task);
+        }}
+      />
+
+      {/* Archived View */}
+      <ArchivedView
+        isOpen={showArchivedView}
+        onClose={() => setShowArchivedView(false)}
+      />
+
+      {/* Quick Add Modal (Phase A: Quick Add Cmd+K) */}
+      <QuickAddModal
+        isOpen={showQuickAdd}
+        onClose={() => setShowQuickAdd(false)}
+      />
+    </Widget>
+  );
+};

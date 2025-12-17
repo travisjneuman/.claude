@@ -1,0 +1,146 @@
+# Dashboard & Widget Improvements - Master Roadmap
+
+**Status:** 🎯 ACTIVE
+**Priority:** P1 - HIGH
+**Created:** 2025-11-24 (Consolidated from 6 related tasks)
+
+---
+
+## Overview
+
+Consolidated master plan for all dashboard and widget improvements. This combines work from multiple related tasks into a unified roadmap.
+
+---
+
+## Consolidated From
+
+This task consolidates the following 6 related task files:
+1. `dashboard-layout-improvements.md`
+2. `dashboard-widget-improvements.md`
+3. `dashboard-widget-system-notes-image-fix.md`
+4. `dashboard-widget-ux-improvements.md`
+5. `fix-widget-issues-add-more-widgets.md`
+6. `remaining-widgets-todo.md`
+
+**Reason for Consolidation:** All tasks focus on dashboard and widget system enhancements. Managing them separately created fragmentation and duplicate planning.
+
+---
+
+## Objectives
+
+### Phase 1: Critical Widget Fixes
+- Fix widget rendering issues
+- Resolve Notes widget image display problems
+- Fix widget control visibility issues
+- Ensure all widgets load correctly
+
+### Phase 2: Dashboard Layout Enhancements
+- Improve masonry layout responsiveness
+- Optimize widget spacing and gaps
+- Enhance drag-drop widget reordering
+- Improve mobile dashboard experience
+
+### Phase 3: Widget System Improvements
+- Add more dashboard widgets (from WidgetRegistry)
+- Improve widget loading states
+- Enhance widget error handling
+- Optimize widget bundle sizes
+
+### Phase 4: UX Polish
+- Improve widget animations and transitions
+- Enhance widget controls (resize, remove, settings)
+- Add widget customization options
+- Improve accessibility (WCAG AA compliance)
+
+---
+
+## Current Status
+
+**Completed:**
+- ✅ Widget sizing system (1x, 2x, 3x width)
+- ✅ Widget controls (three-dot menu)
+- ✅ Basic drag-drop in widget manager
+- ✅ 50+ dashboard widgets available
+
+**In Progress:**
+- 🔄 Dashboard drag-drop reordering
+- 🔄 Widget loading optimization
+- 🔄 Mobile responsiveness improvements
+
+**Planned:**
+- ⏸️ Additional widget types
+- ⏸️ Widget templates/presets
+- ⏸️ Advanced customization options
+
+---
+
+## Implementation Plan
+
+### Priority 1: Fix Critical Issues (Week 1)
+- [ ] Fix Notes widget image display
+- [ ] Fix widget control visibility
+- [ ] Ensure all widgets render correctly
+- [ ] Test on all major browsers
+
+### Priority 2: Layout Improvements (Week 2)
+- [ ] Optimize masonry layout for mobile
+- [ ] Improve widget spacing
+- [ ] Enhance drag-drop UX
+- [ ] Add layout presets
+
+### Priority 3: Add More Widgets (Week 3-4)
+- [ ] Review WidgetRegistry for unused widgets
+- [ ] Implement top-requested widgets
+- [ ] Add widget categories
+- [ ] Improve widget discovery
+
+### Priority 4: Polish & Optimization (Week 5-6)
+- [ ] Optimize widget bundle sizes
+- [ ] Improve loading states
+- [ ] Enhance animations
+- [ ] Accessibility audit
+
+---
+
+## Success Criteria
+
+- ✅ Zero widget rendering errors
+- ✅ Smooth drag-drop experience
+- ✅ Mobile-responsive dashboard
+- ✅ < 100KB main bundle size (maintained)
+- ✅ All widgets load in < 1s
+- ✅ WCAG AA compliant
+
+---
+
+## Files to Monitor
+
+### Core Files
+- `src/pages/Dashboard.tsx` - Main dashboard layout
+- `src/components/Widget.tsx` - Widget wrapper component
+- `src/components/WidgetControls.tsx` - Widget controls
+- `src/stores/useWidgetStore.ts` - Widget state management
+- `src/widgets/Dashboard/WidgetRegistry.ts` - Widget metadata
+
+### Widget Components
+- `src/widgets/Dashboard/*.tsx` - All dashboard widgets
+
+---
+
+## Notes
+
+**Why Consolidate?**
+- Reduces task fragmentation
+- Single source of truth for dashboard work
+- Easier to track overall progress
+- Prevents duplicate planning
+
+**Original Task Files:**
+- All original files archived in `.archive/combined/dashboard-improvements/`
+- Cross-references maintained for historical context
+
+---
+
+**Document Status:** Active Consolidation
+**Last Updated:** 2025-11-24
+**Next Review:** After completing Priority 1 tasks

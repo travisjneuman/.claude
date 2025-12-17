@@ -1,0 +1,217 @@
+---
+type: project
+status: maintenance
+priority: P3
+tech-stack:
+  - "[[JavaScript|Vanilla JavaScript]]"
+  - "[[Node.js|Node.js 18+]]"
+  - "[[Yahoo Fantasy API]]"
+  - "[[Chart.js]]"
+  - "[[GitHub Actions]]"
+repo-path: tkl.home
+live-url: https://tokerleague.com
+created: 2025-11-19
+updated: 2025-12-14
+---
+
+# Toker League
+
+> [!INFO] Summary
+> A sophisticated fantasy football league website with 18+ years of historical data (2007-2025). Static HTML/CSS/JS frontend powered by a Node.js data synchronization pipeline that keeps Yahoo Fantasy Sports API data aligned with the public-facing website.
+
+---
+
+## 📊 Metrics & Status
+
+| Metric | Value |
+|--------|-------|
+| **Historical Seasons** | 19 (2007-2025) |
+| **Total Matchups** | 1000+ |
+| **Franchises** | 14-18 per season |
+| **Awards** | 20+ categories |
+| **Documentation Grade** | A- (90/100) |
+| **Status** | Production (Grade B+) |
+
+---
+
+## 🛠 Tech Stack
+
+### Frontend
+| Layer | Technology |
+|-------|------------|
+| **Framework** | Vanilla [[JavaScript]] (no dependencies) |
+| **Visualization** | Chart.js (CDN) |
+| **CSV Parsing** | Papa Parse (CDN) |
+| **Hosting** | GitHub Pages |
+
+### Backend/Data Pipeline
+| Layer | Technology | Purpose |
+|-------|------------|---------|
+| **Runtime** | [[Node.js\|Node.js 18+]] | Script execution |
+| **API** | yahoo-fantasy ^5.3.0 | Yahoo Fantasy Sports |
+| **Automation** | [[GitHub Actions]] | 6-hour sync cycles |
+| **Email** | imapflow + mailparser | Commissioner notes |
+| **Config** | dotenv | Environment variables |
+
+---
+
+## 🧠 Architecture
+
+### Manifest-Driven System
+```
+manifest.json (registry)
+    ↓
+season files (teams.json, matchups.json, draft.json)
+    ↓
+data.js (lazy-loading cache with IIFE pattern)
+    ↓
+window.codexData (global API)
+    ↓
+main.js, team.js, admin.js (UI scripts)
+```
+
+### Data Directory
+```
+assets/statistics/
+├── manifest.json         # Registry of all seasons
+├── franchises.json       # Franchise identity mapping
+├── 2007/                 # Per-season data
+│   ├── teams.json        # Normalized team data
+│   ├── teams.raw.json    # Raw Yahoo API response
+│   ├── matchups.json     # Game-by-game results
+│   ├── draft.json        # Draft picks
+│   ├── metadata.json     # Season summary
+│   └── transactions.json # Waivers & trades
+├── 2008/, 2009/, ... 2025/
+```
+
+---
+
+## 🔑 Key Features
+
+### Public Pages
+| Page | Purpose |
+|------|---------|
+| **League Hub** | Central dashboard: season explorer, draft lab, awards |
+| **Franchise Pages** | Dynamic franchise history (all-time records) |
+| **Draft Archives** | Browse any season's draft |
+
+### Major UI Sections
+1. Hero & Navigation (origin story, 3-image gallery)
+2. Hero-at-a-Glance Stats
+3. Season Explorer (filter by year)
+4. Draft Archives
+5. League History (championship timeline)
+6. Franchise Spotlight
+7. Yahoo Postgame Stories
+8. Awards (20+ categories)
+
+### Franchise Identity System
+- Stable slugs across seasons (Yahoo IDs change)
+- Aliases mapping team names to franchises
+- Colors for CSS theming
+- Stored in `franchises.json`
+
+---
+
+## 📁 Current Tasks
+
+### Active Tasks
+| Task | Status | Description |
+|------|--------|-------------|
+| `todo.md` | Complete | General planning |
+| `awards-fix-round3-4.md` | Complete | Awards system bug fixes |
+| `postgame-stories-fix-plan.md` | Planning | Automation improvement |
+
+### Recent Completed Work (November 2025)
+- Awards system bug fixes (rounds 1-4)
+- isSeasonComplete() logic fix
+- Championship detection priority
+- Emoji handling in franchise resolution
+- Week 10 cache clearing
+
+---
+
+## 🔧 Development Commands
+
+```bash
+# Authentication & Setup
+npm run yahoo:auth              # Yahoo OAuth setup
+npm run git:configure           # Git auto-commit config
+
+# Data Synchronization
+npm run yahoo:sync              # Sync current season
+npm run yahoo:sync -- --season 2024     # Specific season
+npm run front-office:sync       # Commissioner content
+
+# Local Development
+npm install
+npx http-server .               # Serve locally (port 8080)
+```
+
+### GitHub Actions
+- **yahoo-sync.yml** - Runs every 6 hours
+- **front-office-sync.yml** - Runs every 30 minutes
+
+---
+
+## 📚 Documentation Structure
+
+| Document | Size | Purpose |
+|----------|------|---------|
+| **DOCUMENTATION_INDEX.md** | A+ | Task-based navigation |
+| **PLATFORM_DOCUMENTATION.md** | 18K+ lines | Comprehensive guide |
+| **STRATEGIC_ROADMAP_2025.md** | A+ | 2025-2027 vision |
+| **API_REFERENCE.md** | A | window.codexData API |
+| **AWARDS_ACCURACY_ANALYSIS.md** | 478 lines | Awards deep-dive |
+
+---
+
+## 📝 Strategic Roadmap
+
+### Phase 1 (Q1 2025) - Foundation & Quality
+- Code documentation (JSDoc)
+- Contributing guidelines
+- Troubleshooting guide
+
+### Phase 2 (Q2 2025) - Performance & Accessibility
+- Code splitting (main.js → modules)
+- WCAG AA audit
+- Performance optimization
+
+### Phase 3 (Q3-Q4 2025) - Enhanced Features
+- Advanced filtering
+- Player pool tracking
+- Trade impact analysis
+
+### Phase 4 (2026) - Innovation & Scale
+- Database layer (SQLite/PostgreSQL)
+- API layer
+- Mobile app
+- Real-time notifications
+
+---
+
+## ⚠️ Known Issues
+
+### Currently Blocking
+1. **IMAP Email Integration** - Temporarily disabled
+2. **Postgame Stories Data Loss** - Phase 1 fix pending
+
+### Technical Debt
+- Large monolithic files (main.js: 4341 lines)
+- No schema validation for Yahoo API responses
+- Silent failure modes
+
+---
+
+## 🔗 Links
+
+- [[../tkl.home/README.md|README (285 lines)]]
+- [[../tkl.home/CLAUDE.md|AI Guidelines]]
+- [[../tkl.home/docs/STRATEGIC_ROADMAP_2025.md|Strategic Roadmap]]
+- [[../tkl.home/docs/API_REFERENCE.md|API Reference]]
+
+---
+
+*Last updated: 2025-12-14*

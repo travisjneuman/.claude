@@ -1,0 +1,183 @@
+/**
+ * Graph Canvas Component
+ * Interactive D3 force-directed graph visualization
+ */
+
+import { useEffect, useRef, useState } from 'react';
+import * as d3 from 'd3';
+import type { GraphData } from '../../utils/graphDataProcessor';
+import {
+  createForceSimulation,
+  stopSimulation,
+} from '../../utils/graphSimulation';
+
+interface GraphCanvasProps {
+  data: GraphData;
+  onNodeClick?: (nodeId: string, nodeType: 'note' | 'tag') => void;
+  width?: number;
+  height?: number;
+}
+
+export function GraphCanvas({ data, onNodeClick, width = 1200, height = 800 }: GraphCanvasProps) {
+  const svgRef = useRef<SVGSVGElement>(null);
+  const [isSimulating, setIsSimulating] = useState(true);
+
+  useEffect(() => {
+    if (!svgRef.current || data.nodes.length === 0) return;
+
+    const svg = d3.select(svgRef.current);
+    svg.selectAll('*').remove(); // Clear previous render
+
+    // Create container group for zoom/pan
+    const g = svg.append('g');
+
+    // Setup zoom behavior
+    const zoom = d3
+      .zoom<SVGSVGElement, unknown>()
+      .scaleExtent([0.1, 4])
+      .on('zoom', (event) => {
+        g.attr('transform', event.transform);
+      });
+
+    svg.call(zoom);
+
+    // Create simulation
+    const simulation = createForceSimulation(data.nodes, data.edges, width, height);
+
+    // Create arrow marker for directed edges
+    svg
+      .append('defs')
+      .append('marker')
+      .attr('id', 'arrowhead')
+      .attr('viewBox', '-0 -5 10 10')
+      .attr('refX', 20) // Position at end of line
+      .attr('refY', 0)
+      .attr('orient', 'auto')
+      .attr('markerWidth', 6)
+      .attr('markerHeight', 6)
+      .append('svg:path')
+      .attr('d', 'M 0,-5 L 10 ,0 L 0,5')
+      .attr('fill', 'var(--border-light)')
+      .attr('class', 'dark:fill-border-dark');
+
+    // Create links
+    const link = g
+      .append('g')
+      .attr('class', 'links')
+      .selectAll('line')
+      .data(data.edges)
+      .join('line')
+      .attr('stroke', (d) =>
+        d.type === 'backlink' ? 'var(--accent-cyan)' : 'var(--border-light)'
+      )
+      .attr('stroke-opacity', (d) => (d.type === 'backlink' ? 0.6 : 0.4))
+      .attr('stroke-width', (d) => (d.type === 'backlink' ? 2 : 1))
+      .attr('marker-end', (d) => (d.type === 'backlink' ? 'url(#arrowhead)' : ''));
+
+    // Create node groups
+    const node = g
+      .append('g')
+      .attr('class', 'nodes')
+      .selectAll('g')
+      .data(data.nodes)
+      .join('g')
+      .attr('cursor', 'pointer');
+
+    // Add drag behavior
+    const dragBehavior = d3
+      .drag<SVGGElement, any>()
+      .on('start', (event, d: any) => {
+        if (!event.active) simulation.alphaTarget(0.3).restart();
+        d.fx = d.x;
+        d.fy = d.y;
+      })
+      .on('drag', (event, d: any) => {
+        d.fx = event.x;
+        d.fy = event.y;
+      })
+      .on('end', (event, d: any) => {
+        if (!event.active) simulation.alphaTarget(0);
+        d.fx = null;
+        d.fy = null;
+      });
+
+    node.call(dragBehavior as any);
+
+    // Add circles to nodes
+    node
+      .append('circle')
+      .attr('r', (d) => d.size)
+      .attr('fill', (d) => d.color)
+      .attr('stroke', 'var(--surface-light-base)')
+      .attr('stroke-width', 2)
+      .attr('class', 'dark:stroke-surface-dark-base transition-colors');
+
+    // Add labels to nodes
+    node
+      .append('text')
+      .text((d) => d.label)
+      .attr('x', 0)
+      .attr('y', (d) => d.size + 15)
+      .attr('text-anchor', 'middle')
+      .attr('class', 'text-xs fill-text-light-primary dark:fill-text-dark-primary')
+      .attr('pointer-events', 'none');
+
+    // Add click handler
+    node.on('click', (event, d) => {
+      event.stopPropagation();
+      if (onNodeClick) {
+        onNodeClick(d.id, d.type);
+      }
+    });
+
+    // Add hover effect
+    node.on('mouseenter', function () {
+      d3.select(this).select('circle').attr('stroke-width', 3);
+    });
+
+    node.on('mouseleave', function () {
+      d3.select(this).select('circle').attr('stroke-width', 2);
+    });
+
+    // Update positions on simulation tick
+    simulation.on('tick', () => {
+      link
+        .attr('x1', (d: any) => d.source.x ?? 0)
+        .attr('y1', (d: any) => d.source.y ?? 0)
+        .attr('x2', (d: any) => d.target.x ?? 0)
+        .attr('y2', (d: any) => d.target.y ?? 0);
+
+      node.attr('transform', (d: any) => {
+        const x = d.x ?? 0;
+        const y = d.y ?? 0;
+        return `translate(${x},${y})`;
+      });
+    });
+
+    // Stop simulating after it settles
+    simulation.on('end', () => {
+      setIsSimulating(false);
+    });
+
+    // Cleanup
+    return () => {
+      stopSimulation(simulation);
+    };
+  }, [data, width, height, onNodeClick]);
+
+  return (
+    <div className="relative w-full h-full">
+      {isSimulating && (
+        <div className="absolute top-4 right-4 text-xs text-text-light-tertiary dark:text-text-dark-tertiary">
+          Calculating layout...
+        </div>
+      )}
+      <svg
+        ref={svgRef}
+        width={width}
+        height={height}
+        className="border border-border-light dark:border-border-dark rounded-lg bg-surface-light-base dark:bg-surface-dark-base"
+      />
+    </div>
+  );
+}

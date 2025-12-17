@@ -1,0 +1,330 @@
+# Next Steps Checklist - Strategic Implementation
+
+**Last Updated:** November 25, 2025
+**Purpose:** Actionable tasks from comprehensive strategic review
+**Owner:** Project maintainer
+
+---
+
+## ✅ COMPLETED (November 2025)
+
+### Sprint 1-6 Completed ✅
+- [x] **IndexedDB Migration** (Sprint 1) - 8 hours, 50GB+ capacity, quota monitoring
+- [x] **Firebase/Google Drive Removal** (Sprint 2) - 12 hours, 365KB bundle reduction, privacy fix
+- [x] **Notes MVP** (Sprint 4) - 60-82 hours, Lexical editor, 55% Obsidian parity
+- [x] **AI Terminal** (Sprint 5) - 24 hours, 8 providers, encrypted storage
+- [x] **Dashboard Widgets** (Sprint 6) - 32 hours, 40+ widgets, 70% Notion parity
+- [x] **Calendar Phase 3** (20-Week Plan) - Day view, recurring events, reminders, 65% Google Calendar parity
+
+### Privacy & Security ✅
+- [x] Removed all Firebase/Google Drive code (zero cloud dependencies)
+- [x] Implemented AES-256-CBC encryption for AI Terminal API keys
+- [x] 100% local-first architecture (all data in IndexedDB)
+- [x] Privacy messaging accurate (no false claims)
+
+### Documentation ✅
+- [x] Updated feature_map.md (125+ features marked shipped)
+- [x] Updated feature_roadmap.md (Recent Launches section added)
+- [x] Updated implementation_plan.md (all 6 sprints documented)
+- [x] Updated CLAUDE.md (current status, AI Terminal, widgets)
+
+---
+
+## 🔴 CRITICAL - DO IMMEDIATELY (This Week)
+
+### 1. **Complete Documentation Update** (4 hours remaining)
+- [x] Update feature_map.md ✅
+- [x] Update feature_roadmap.md ✅
+- [x] Update implementation_plan.md ✅
+- [x] Update CLAUDE.md ✅
+- [ ] Update next_steps_checklist.md (in progress)
+- [ ] Create CHANGELOG.md (pending)
+
+### 2. **Launch Preparation** (8-12 hours)
+- [ ] Prepare ProductHunt launch materials
+  - [ ] Screenshots (5-7 key features)
+  - [ ] Demo video (2-3 minutes)
+  - [ ] "Maker story" (why we built this)
+  - [ ] Tagline: "Privacy-First Notion Alternative - Notes, Tasks, AI Terminal"
+- [ ] Schedule launch (Tuesday-Thursday, 8-10 AM PT)
+- [ ] Set up GitHub Sponsors or Open Collective
+
+### 3. **v1.0 Release Prep** (Planning - 2 hours)
+- [ ] Review all shipped features for v1.0 readiness
+- [ ] Create v1.0 release checklist
+- [ ] Plan launch communications (HackerNews, ProductHunt, Reddit)
+- [ ] Prepare press kit (logo, screenshots, product description)
+
+---
+
+## 🟡 HIGH PRIORITY - DO THIS MONTH (January 2026)
+
+### 4. **Complete 20-Week Plan Phase 4** (Week 10-12) 🚀 NEXT
+**Kanban to PM Powerhouse** (40-60 hours)
+- [ ] Custom columns (add/remove/rename)
+- [ ] Card detail panel (full-screen view)
+- [ ] Subtasks/checklist
+- [ ] Comments/discussion
+- [ ] List view (table format)
+- [ ] **Goal:** 70% Linear, 60% Jira parity
+
+### 5. **Testing & Quality Assurance** (20-30 hours)
+- [ ] Write unit tests for critical services:
+  - [ ] autoSave.ts (20+ tests)
+  - [ ] brainBackup.ts (15+ tests)
+  - [ ] indexedDB.ts (10+ tests)
+  - [ ] noteSearch.ts (10+ tests)
+  - [ ] AI provider router (15+ tests)
+- [ ] Add E2E tests with Playwright (10-15 critical user flows):
+  - [ ] Create note → Edit → Save → Export
+  - [ ] Create task → Move columns → Complete
+  - [ ] Create event → Add reminder → Export .ics
+  - [ ] AI Terminal → Send message → Switch providers
+  - [ ] Dashboard → Add widgets → Rearrange
+
+### 6. **Performance Optimization** (8-12 hours)
+- [ ] Bundle size analysis (verify < 100KB main chunk)
+- [ ] Lazy loading verification (Notes, AI, Widgets chunks separate)
+- [ ] Virtual scrolling for large note lists (1000+ notes)
+- [ ] Service worker for offline mode (PWA)
+- [ ] Lighthouse audit (target 90+ performance score)
+
+---
+
+## 🟢 IMPORTANT - DO NEXT MONTH (February 2026)
+
+### 7. **Phase 5: Dashboard as Command Center** (Week 13-14)
+- [ ] Drag-drop widget layout (react-grid-layout)
+- [ ] Resize widgets (adjustable grid cells)
+- [ ] Custom background (image upload, gradients)
+- [ ] Widget presets (save/load layouts)
+- [ ] **Goal:** 80% Notion Dashboard parity
+
+### 8. **Phase 6: Settings & Integrations** (Week 15-16)
+- [ ] Theme customization (accent colors, custom themes)
+- [ ] Keyboard shortcuts config (user-defined shortcuts)
+- [ ] Import from Notion (HTML/Markdown export)
+- [ ] Import from Obsidian (Markdown vault)
+- [ ] Import from CSV (bulk task/event import)
+- [ ] Storage management (clear cache, view quota)
+
+### 9. **Community Building** (Ongoing - 2-4 hours/week)
+- [ ] Launch GitHub Discussions OR Discord (choose one)
+- [ ] Create channels: #announcements, #feedback, #support, #showcase
+- [ ] Post weekly dev updates
+- [ ] Feature request voting system (GitHub Issues + reactions)
+- [ ] Monthly community call (optional)
+
+---
+
+## 🔵 MEDIUM PRIORITY - DO Q2 2026 (March-June)
+
+### 10. **Resume Sprint 3: File System Access API** (16-24 hours)
+- [ ] User picks local folder for auto-save
+- [ ] Backup rotation (keep last 7 files)
+- [ ] File association (.brain files open in app)
+- [ ] **Alternative:** Consider WebDAV sync (broader browser support)
+
+### 11. **Phase 7: Cross-Feature Integration** (Week 17-18)
+- [ ] Link notes to tasks/events (bidirectional)
+- [ ] Convert note text to tasks (highlight → create task)
+- [ ] Embed calendar in notes (inline calendar view)
+- [ ] Task deadlines sync to calendar (auto-create events)
+- [ ] Global search (notes, tasks, events, all in one)
+- [ ] Template automation (daily note templates, task templates)
+
+### 12. **Phase 8: Polish & Performance** (Week 19-20)
+- [ ] Performance optimization (lazy loading, virtual scrolling)
+- [ ] Bundle size < 100KB gzipped (currently 101KB)
+- [ ] Design polish (loading states, skeleton screens, animations)
+- [ ] Accessibility (ARIA labels, keyboard nav, screen reader support)
+- [ ] Mobile responsive (all features work on mobile)
+- [ ] Unit/integration/E2E tests (80%+ coverage)
+
+### 13. **Implement E2EE** (60-80 hours) 🔒
+- [ ] Add encryption passphrase setting (user-chosen password)
+- [ ] Encrypt all data client-side (WebCrypto API, AES-256-GCM)
+- [ ] Decrypt on retrieval (transparent to user)
+- [ ] Key derivation from passphrase (PBKDF2, 100K iterations)
+- [ ] Migration tool (encrypt existing plain-text data)
+- [ ] Warning UI: "If you forget passphrase, data is unrecoverable"
+- [ ] **After this:** Can claim "end-to-end encrypted", "zero-knowledge"
+
+---
+
+## ⚪ NICE-TO-HAVE - DO Q3-Q4 2026
+
+### 14. **Advanced Notes Features** (40-60 hours)
+- [ ] Images & file attachments (IndexedDB blob storage)
+- [ ] [[Wiki-style links]] between notes (custom Lexical node)
+- [ ] Backlinks panel ("What links here")
+- [ ] Note templates (meeting notes, daily log, project brief)
+- [ ] Code syntax highlighting (Prism.js integration)
+- [ ] PDF export (jsPDF library)
+- [ ] Checklists (CheckListPlugin, fix type errors)
+
+### 15. **Complete Time Tracking UI** (40-60 hours)
+- [ ] Time Tracking widget on Dashboard
+- [ ] Running timer indicator (always visible)
+- [ ] Time entry list view (filterable, sortable)
+- [ ] Weekly/monthly reports (charts, totals)
+- [ ] Link time entries to tasks ("Start timer from task card")
+- [ ] Billable hours tracking (Pro feature)
+- [ ] Invoice generation (Pro feature)
+
+### 16. **Habits & Gamification** (100-150 hours)
+- [ ] Habit tracking (daily, weekly, custom frequency)
+- [ ] Streak counters (longest streak, current streak)
+- [ ] XP system (earn XP for completing tasks/habits)
+- [ ] Levels (1-50, visual progression)
+- [ ] Badges ("30-day streak", "100 tasks", "Early adopter")
+- [ ] Heatmap visualization (GitHub-style contribution graph)
+- [ ] Habit journal (notes per check-in)
+
+### 17. **Launch Freemium Pro Tier** (80 hours + Business)
+- [ ] Define Pro features:
+  - [ ] Graph view (note connections visualization)
+  - [ ] Advanced search (regex, filters, operators)
+  - [ ] Real-time collaboration (2-5 users)
+  - [ ] Integrations (Google Calendar, Zapier, API)
+  - [ ] Billable hours, invoice generation
+  - [ ] Priority support (24-48h response)
+- [ ] Implement client-side license key validation
+- [ ] Set up Stripe payment processing
+- [ ] Pricing: $7-9/month or $79-99/year
+- [ ] Add "Upgrade to Pro" in Settings (non-intrusive)
+
+---
+
+## 📊 TRACKING & MEASUREMENT
+
+### 18. **Set Up Privacy-Friendly Analytics** (2 hours)
+- [ ] Deploy Plausible (self-hosted) OR Umami (free, self-hosted)
+- [ ] Add to website (one line of code)
+- [ ] Make dashboard **public** (transparency)
+- [ ] Document in Privacy Policy what's tracked (page views, referrers only)
+
+### 19. **Define Success Metrics** (1 hour + ongoing)
+- [ ] Track: GitHub stars, community members, ProductHunt ranking
+- [ ] Monthly review: WAU (from Plausible), GitHub stars growth, community growth
+- [ ] Quarterly user surveys (satisfaction, feature requests, willingness to pay)
+- [ ] Set goals:
+  - [ ] 100 GitHub stars by March 2026
+  - [ ] 500 GitHub stars by June 2026
+  - [ ] 1K weekly active users by June 2026
+  - [ ] 50+ community members by March 2026
+
+---
+
+## 🎨 BRAND & MARKETING
+
+### 20. **Launch HackerNews "Show HN"** (1 hour + 24h engagement)
+- [ ] Post: "Show HN: Neuman Brain - Privacy-First Notion Alternative (Open Source)"
+- [ ] Best time: Tuesday/Wednesday, 8-10 AM PT
+- [ ] Engage with every comment for 24 hours
+- [ ] Be transparent about what's shipped vs roadmap
+
+### 21. **Content Marketing** (Ongoing - 4-8 hours/month)
+- [ ] Start blog (brain.neuman.dev/blog or Medium/Dev.to)
+- [ ] Write 2-4 posts/month:
+  - [ ] "Why We're Building a Privacy-First Notion Alternative"
+  - [ ] "Notion vs Obsidian vs Neuman Brain: Privacy, Speed, Cost"
+  - [ ] "How We Achieved 101KB Main Bundle (10x smaller than Notion)"
+  - [ ] "Local-First Software: What It Means and Why It Matters"
+  - [ ] "Building an AI Terminal with 8 Providers and Encrypted Storage"
+  - [ ] "From 728KB to 101KB: Our Bundle Size Optimization Journey"
+
+### 22. **SEO Optimization** (4-6 hours)
+- [ ] Create comparison pages: "/vs-notion", "/vs-obsidian", "/vs-linear", "/vs-apple-notes"
+- [ ] Target keywords: "notion alternative", "privacy-first productivity", "local-first notes"
+- [ ] Add structured data (Schema.org) for rich snippets
+- [ ] Get backlinks from:
+  - [ ] Privacy-focused tech blogs
+  - [ ] Open-source directories
+  - [ ] Productivity tool comparison sites
+
+---
+
+## 🛠️ TECHNICAL DEBT
+
+### 23. **Test Coverage** (20-30 hours)
+- [ ] Current coverage: ~10% (estimated)
+- [ ] Target coverage: 80%+ for critical paths
+- [ ] Priority areas:
+  - [ ] Data integrity (backup/restore, import/export)
+  - [ ] Encryption (AI Terminal API keys, future E2EE)
+  - [ ] Storage (IndexedDB, quota management)
+  - [ ] Search (note search, global search)
+
+### 24. **Documentation Maintenance** (Ongoing - 1-2 hours/month)
+- [ ] Review docs monthly at phase boundaries
+- [ ] Update feature_map.md as features ship
+- [ ] Update implementation_plan.md with actual results
+- [ ] Keep CHANGELOG.md current with every release
+- [ ] Archive superseded docs to .archive/
+
+---
+
+## Summary Priorities (TL;DR)
+
+**This Week (Jan 16-23, 2026):**
+1. ✅ Complete documentation update (95% done)
+2. Prepare ProductHunt/HackerNews launch materials
+3. Create CHANGELOG.md
+4. v1.0 release prep
+
+**This Month (January 2026):**
+1. Complete Phase 4: Kanban to PM Powerhouse
+2. Add comprehensive test coverage (80%+ critical paths)
+3. Performance optimization (bundle size, lazy loading)
+4. Launch HackerNews "Show HN"
+
+**Q1 2026 (Jan-Mar):**
+1. Complete 20-Week Plan (Phase 4-8)
+2. Launch ProductHunt
+3. Build community (Discord/Discussions)
+4. v1.0 release (March 2026)
+
+**Q2 2026 (Apr-Jun):**
+1. Implement E2EE (end-to-end encryption)
+2. Resume Sprint 3 (File System Access API or WebDAV)
+3. Advanced Notes features (images, wiki-links, templates)
+4. Launch Freemium Pro tier (optional)
+
+**Q3-Q4 2026:**
+1. Real-time collaboration (2-5 users)
+2. Time Tracking UI complete
+3. Habits & Gamification
+4. Advanced integrations (Google Calendar, Zapier)
+
+**2027+:**
+1. Enterprise self-hosted option
+2. Mobile native apps (iOS, Android)
+3. Advanced PM (Gantt, resources, risks)
+4. Graph view, Canvas mode
+
+---
+
+## Tools & Resources
+
+**Development:**
+- Lexical (Rich text editor): https://lexical.dev/
+- Playwright (E2E testing): https://playwright.dev/
+- Plausible (Analytics): https://plausible.io/
+- React Testing Library: https://testing-library.com/react
+
+**Business:**
+- GitHub Sponsors: https://github.com/sponsors
+- Open Collective: https://opencollective.com/
+- Stripe (Payments): https://stripe.com/
+
+**Marketing:**
+- ProductHunt: https://www.producthunt.com/
+- HackerNews: https://news.ycombinator.com/
+
+---
+
+**Created:** November 13, 2025
+**Last Major Update:** January 16, 2026
+**Source:** Comprehensive Strategic Review by Claude (Sonnet 4.5)
+**Status:** Active - Updated with Jan 2026 shipped features

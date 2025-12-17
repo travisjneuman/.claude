@@ -1,0 +1,181 @@
+---
+type: personal
+purpose: Queued prompts for Claude to execute
+last-processed: 2025-12-14
+created: 2025-12-14
+---
+
+# Prompts Queue
+
+> Structured instructions for Claude to execute. Each prompt is processed once, marked complete, and archived monthly.
+
+---
+
+## How This Works
+
+1. **Add prompts** below with the template format
+2. **Start sessions** with Claude checking this file
+3. **Claude processes** pending prompts in priority order
+4. **Completed prompts** are marked and excluded from future context
+5. **Monthly archive** — Completed prompts move to `Archive/`
+
+---
+
+## Quick Stats
+
+```dataviewjs
+const file = dv.page("Personal/Prompts");
+dv.paragraph("*Stats update when file is re-indexed*");
+```
+
+| Status | Count |
+|--------|-------|
+| 🔴 Pending | Count `status: pending` below |
+| 🟡 In Progress | Count `status: in-progress` below |
+| 🟢 Completed | See Archive |
+
+---
+
+## Priority Guide
+
+| Priority | Meaning | When Claude Should Act |
+|----------|---------|------------------------|
+| **P0** | Urgent | Immediately, before other work |
+| **P1** | Important | This session if time permits |
+| **P2** | Normal | When relevant work is happening |
+| **P3** | Low | When nothing else is pending |
+
+---
+
+## Pending Prompts
+
+<!--
+CLAUDE PROCESSING RULES:
+1. Read prompts with status: pending
+2. Execute in priority order (P0 first)
+3. After completion, change status to: completed
+4. Add completion note with date and output link
+5. DO NOT re-read prompts with status: completed
+-->
+
+---
+
+### Example Prompt (Template)
+- **Priority:** P3
+- **Status:** completed
+- **Created:** 2025-12-14
+- **Completed:** 2025-12-14
+
+#### Instruction
+
+This is an example prompt showing the format. Delete this and add your own prompts below.
+
+#### Context
+
+Any relevant files, constraints, or background information.
+
+#### Expected Output
+
+What success looks like for this prompt.
+
+> [!DONE] 2025-12-14
+> **Result:** Example completed. This is how completion notes look.
+> **Output:** N/A (template example)
+
+---
+
+<!--
+===========================================
+ADD NEW PROMPTS BELOW THIS LINE
+Use the template above as a guide
+===========================================
+-->
+
+## Prompt Template
+
+Copy this for new prompts:
+
+```markdown
+---
+
+### [Prompt Title]
+- **Priority:** P1
+- **Status:** pending
+- **Created:** YYYY-MM-DD
+
+#### Instruction
+
+[Clear, specific instruction for what you want Claude to do]
+
+#### Context
+
+[Relevant files, projects, constraints, or background]
+
+#### Expected Output
+
+[What does success look like? Document? Code? Research summary?]
+
+---
+```
+
+---
+
+## In Progress
+
+> Prompts Claude is currently working on.
+
+*(None currently)*
+
+---
+
+## Recently Completed
+
+> Last 5 completed prompts (full archive in `Archive/Prompts-YYYY-MM.md`)
+
+*(None yet)*
+
+---
+
+## Archive Schedule
+
+At the end of each month:
+1. Move all `status: completed` prompts to `Archive/Prompts-YYYY-MM.md`
+2. Reset this file to just pending/in-progress
+3. Keep the template section
+
+---
+
+## Tips for Effective Prompts
+
+### Do
+- Be specific about expected output
+- Include relevant file paths
+- Set realistic priorities
+- Provide enough context
+
+### Don't
+- Write vague instructions ("make it better")
+- Skip the context section
+- Mark everything P0
+- Duplicate prompts across sessions
+
+---
+
+## Integration
+
+### Slash Command
+Use `/start-task` to have Claude check this file automatically.
+
+### Session Start
+Claude should check this file when you begin a session with no specific task.
+
+### Linking Outputs
+Always link completed prompt outputs:
+```markdown
+> [!DONE] 2025-12-14
+> **Output:** [[path/to/created/document.md]]
+```
+
+---
+
+*Queue it. Execute it. Archive it. Move on.*

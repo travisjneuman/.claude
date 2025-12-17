@@ -1,0 +1,332 @@
+# MCP Servers
+
+Model Context Protocol servers extend Claude's capabilities with external tools.
+
+---
+
+## What Is MCP?
+
+MCP (Model Context Protocol) is a standard for connecting AI models to external tools and services. MCP servers provide Claude with capabilities like:
+
+- Browser automation
+- Database queries
+- File system access
+- Memory persistence
+- Complex reasoning chains
+
+---
+
+## Currently Installed Servers
+
+| Server | Package | Purpose | Status |
+|--------|---------|---------|--------|
+| sequential-thinking | `@modelcontextprotocol/server-sequential-thinking` | Complex reasoning chains | Active |
+| playwright | `@playwright/mcp@latest` | Browser automation | Active |
+| memory | `@modelcontextprotocol/server-memory` | Persistent memory | Active |
+| filesystem | `@modelcontextprotocol/server-filesystem` | File operations | Active |
+| sqlite | `uvx mcp-server-sqlite` | Database queries | Active |
+| context7 | `@upstash/context7-mcp` | Up-to-date library docs | Disabled |
+
+---
+
+## Server Details
+
+### sequential-thinking
+
+**Purpose:** Enables multi-step reasoning with explicit thought chains.
+
+**When to use:**
+- Complex problem solving
+- Multi-step analysis
+- Decision trees
+
+**Invocation:** Automatic when complex reasoning needed.
+
+---
+
+### playwright
+
+**Purpose:** Browser automation and testing.
+
+**Capabilities:**
+- Navigate web pages
+- Click elements
+- Fill forms
+- Take screenshots
+- Extract content
+
+**When to use:**
+- Web scraping
+- UI testing
+- Form automation
+- Screenshot capture
+
+**Example:**
+```
+Navigate to example.com and take a screenshot
+```
+
+---
+
+### memory
+
+**Purpose:** Persistent memory across sessions.
+
+**Capabilities:**
+- Store key-value data
+- Retrieve stored information
+- Persist across conversations
+
+**When to use:**
+- Remembering project context
+- Storing preferences
+- Tracking state
+
+---
+
+### filesystem
+
+**Purpose:** File system operations.
+
+**Capabilities:**
+- List directories
+- Read files
+- Write files
+- File metadata
+
+**Current Scope:** `.` (current working directory)
+
+**Note:** This is scoped for portability. On each machine, it operates relative to where Claude Code is run.
+
+---
+
+### sqlite
+
+**Purpose:** SQLite database operations.
+
+**Capabilities:**
+- Create databases
+- Execute queries
+- Manage schemas
+
+**When to use:**
+- Local data storage
+- Query testing
+- Data analysis
+
+**Note:** Uses `uvx` (Python) instead of npm because the npm version had connection issues.
+
+---
+
+## Configuration
+
+### File Location
+
+MCP servers are configured in `~/.claude.json` (NOT inside `.claude/`).
+
+### Configuration Format
+
+```json
+{
+  "mcpServers": {
+    "server-name": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@package/name"],
+      "env": {}
+    }
+  }
+}
+```
+
+### Fields
+
+| Field | Required | Description |
+|-------|----------|-------------|
+| `type` | Yes | Transport type (`stdio`, `sse`, `http`) |
+| `command` | Yes | Command to run (`npx`, `uvx`, `node`) |
+| `args` | Yes | Command arguments |
+| `env` | No | Environment variables |
+
+---
+
+## Adding New Servers
+
+### Step 1: Find the Package
+
+Search for MCP servers:
+- [Awesome MCP Servers](https://github.com/punkpeye/awesome-mcp-servers)
+- [MCP Hub](https://mcphub.io/)
+
+### Step 2: Add to Configuration
+
+Edit `~/.claude.json`:
+
+```json
+{
+  "mcpServers": {
+    "new-server": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@package/new-server"],
+      "env": {}
+    }
+  }
+}
+```
+
+### Step 3: Test
+
+Restart Claude Code and verify:
+```
+/mcp
+```
+
+Or use the server in conversation.
+
+### Step 4: Update Backup
+
+Copy updated config to `.claude/.claude.json` for portability.
+
+---
+
+## Removing Servers
+
+### Via CLI
+
+```bash
+claude mcp remove server-name
+```
+
+### Via Direct Edit
+
+Remove the server entry from `~/.claude.json`.
+
+---
+
+## Lazy Loading
+
+**Current setting:** `enableAllProjectMcpServers: false`
+
+This means MCP servers only load when explicitly called, not at startup.
+
+**Benefits:**
+- Reduced startup time
+- Lower context usage
+- Only loads what you need
+
+**Trade-off:**
+- First use of a server has slight delay
+
+To change, edit `settings.json`:
+```json
+{
+  "enableAllProjectMcpServers": true
+}
+```
+
+---
+
+## Troubleshooting
+
+### Server Won't Connect
+
+1. Check package name is correct
+2. Verify command (`npx`, `uvx`) is available
+3. Check network connectivity for package download
+4. Run `/doctor` for diagnostics
+
+### Server Times Out
+
+Increase timeout with environment variable:
+```bash
+MCP_TIMEOUT=60000 claude
+```
+
+### Server Errors
+
+Check logs:
+```bash
+claude --mcp-debug
+```
+
+### Common Issues
+
+| Problem | Solution |
+|---------|----------|
+| "Package not found" | Verify package name on npm/PyPI |
+| "Command not found" | Install npx/uvx |
+| "Connection refused" | Check if server requires auth |
+| "Timeout" | Increase MCP_TIMEOUT |
+
+---
+
+## Available MCP Servers (Not Installed)
+
+These are commonly used but not currently installed:
+
+| Server | Package | Purpose |
+|--------|---------|---------|
+| github | `@modelcontextprotocol/server-github` | GitHub API (requires token) |
+| fetch | `@modelcontextprotocol/server-fetch` | Web fetching |
+| puppeteer | `@modelcontextprotocol/server-puppeteer` | Browser control |
+| brave-search | `@modelcontextprotocol/server-brave-search` | Web search (requires API key) |
+| slack | `@modelcontextprotocol/server-slack` | Slack integration |
+| google-drive | `@modelcontextprotocol/server-google-drive` | Google Drive access |
+
+---
+
+## Security Considerations
+
+### API Keys
+
+Some servers require API keys:
+- Store in environment variables, not config files
+- Use `env` field in server config
+- Never commit API keys to repositories
+
+### File System Access
+
+The `filesystem` server has access to files. Current scope is `.` (current directory).
+
+**For broader access:**
+```json
+{
+  "filesystem": {
+    "command": "npx",
+    "args": ["-y", "@modelcontextprotocol/server-filesystem", "C:/Users/tjn"]
+  }
+}
+```
+
+**Warning:** Broader access means Claude can read/write more files.
+
+### Network Access
+
+Servers like `playwright` and `fetch` have network access. Be cautious about:
+- Visiting untrusted URLs
+- Sending data to external services
+- Automated form submissions
+
+---
+
+## Portable Backup
+
+A clean copy of MCP config is maintained at:
+```
+~/.claude/.claude.json
+```
+
+This contains ONLY `mcpServers` - no machine-specific data.
+
+When setting up a new machine:
+1. Copy `.claude/.claude.json` to `~/.claude.json`
+2. Claude Code will add its own tracking data as you use it
+
+---
+
+## See Also
+
+- [CONFIGURATION.md](./CONFIGURATION.md) - Settings including enableAllProjectMcpServers
+- [SETUP-GUIDE.md](./SETUP-GUIDE.md) - Installing on new machines
+- [../CLAUDE-CODE-RESOURCES.md](../CLAUDE-CODE-RESOURCES.md) - More MCP server options

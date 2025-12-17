@@ -1,0 +1,642 @@
+---
+type: concept
+tags: [tech, language]
+---
+# TypeScript
+
+> JavaScript with static type definitions for better tooling, documentation, and error prevention.
+
+---
+
+## Overview
+
+TypeScript is a typed superset of JavaScript that compiles to plain JavaScript:
+- **Static Types**: Catch errors at compile time, not runtime
+- **IDE Support**: Autocomplete, refactoring, go-to-definition
+- **Documentation**: Types serve as inline documentation
+- **Gradual Adoption**: Can be added incrementally to JS projects
+- **Modern Features**: ES6+ features with type safety
+
+---
+
+## Why TypeScript
+
+| Benefit | Description |
+|---------|-------------|
+| Error Prevention | Catch bugs before they ship |
+| Better DX | Autocomplete and refactoring |
+| Self-Documenting | Types explain intent |
+| Safer Refactoring | Compiler catches breaking changes |
+| Industry Standard | Required for most frontend jobs |
+
+---
+
+## Basic Types
+
+```typescript
+// Primitives
+const name: string = "John";
+const age: number = 30;
+const isActive: boolean = true;
+const nothing: null = null;
+const notDefined: undefined = undefined;
+
+// Arrays
+const numbers: number[] = [1, 2, 3];
+const strings: Array<string> = ["a", "b", "c"];
+const mixed: (string | number)[] = [1, "two", 3];
+
+// Tuples
+const pair: [string, number] = ["age", 30];
+const triple: [string, number, boolean] = ["name", 30, true];
+
+// Object
+const user: { name: string; age: number } = {
+  name: "John",
+  age: 30,
+};
+
+// Any (escape hatch - avoid)
+const anything: any = "could be anything";
+
+// Unknown (safer than any)
+const mystery: unknown = getValue();
+if (typeof mystery === "string") {
+  console.log(mystery.toUpperCase()); // Type narrowed
+}
+
+// Never (function never returns)
+function throwError(message: string): never {
+  throw new Error(message);
+}
+
+// Void (function returns nothing)
+function logMessage(message: string): void {
+  console.log(message);
+}
+```
+
+---
+
+## Interfaces & Types
+
+### Interfaces
+
+```typescript
+// Object shape
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  age?: number; // Optional
+  readonly createdAt: Date; // Cannot be modified
+}
+
+// Extending interfaces
+interface Admin extends User {
+  permissions: string[];
+}
+
+// Index signatures
+interface Dictionary {
+  [key: string]: string;
+}
+
+// Function signature
+interface SearchFunction {
+  (query: string, limit?: number): Promise<Result[]>;
+}
+```
+
+### Type Aliases
+
+```typescript
+// Type alias
+type ID = string | number;
+type Status = "pending" | "active" | "archived";
+
+// Object type
+type Point = {
+  x: number;
+  y: number;
+};
+
+// Union type
+type Result = Success | Failure;
+
+// Intersection type
+type AdminUser = User & { permissions: string[] };
+
+// Template literal types
+type EventName = `on${Capitalize<string>}`;
+type HTTPMethod = "GET" | "POST" | "PUT" | "DELETE";
+```
+
+### Interface vs Type
+
+```typescript
+// Interfaces can be extended/merged
+interface Window {
+  customProperty: string;
+}
+
+// Types cannot be re-opened
+// type Window = { ... } // Error if already defined
+
+// Use interfaces for objects that might be extended
+// Use types for unions, primitives, tuples
+```
+
+---
+
+## Generics
+
+### Basic Generics
+
+```typescript
+// Generic function
+function identity<T>(value: T): T {
+  return value;
+}
+
+const str = identity("hello"); // string
+const num = identity(42); // number
+
+// Generic interface
+interface Box<T> {
+  value: T;
+}
+
+const stringBox: Box<string> = { value: "hello" };
+
+// Generic class
+class Stack<T> {
+  private items: T[] = [];
+
+  push(item: T): void {
+    this.items.push(item);
+  }
+
+  pop(): T | undefined {
+    return this.items.pop();
+  }
+}
+```
+
+### Constraints
+
+```typescript
+// Constrain generic to types with length property
+interface Lengthwise {
+  length: number;
+}
+
+function logLength<T extends Lengthwise>(value: T): void {
+  console.log(value.length);
+}
+
+logLength("hello"); // OK
+logLength([1, 2, 3]); // OK
+logLength(42); // Error - number has no length
+
+// Key constraint
+function getProperty<T, K extends keyof T>(obj: T, key: K): T[K] {
+  return obj[key];
+}
+
+const user = { name: "John", age: 30 };
+getProperty(user, "name"); // OK
+getProperty(user, "email"); // Error - 'email' not in user
+```
+
+### Utility Types
+
+```typescript
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  age: number;
+}
+
+// Partial - all properties optional
+type PartialUser = Partial<User>;
+// { id?: string; name?: string; email?: string; age?: number }
+
+// Required - all properties required
+type RequiredUser = Required<PartialUser>;
+
+// Pick - select specific properties
+type UserPreview = Pick<User, "id" | "name">;
+// { id: string; name: string }
+
+// Omit - exclude specific properties
+type UserWithoutId = Omit<User, "id">;
+// { name: string; email: string; age: number }
+
+// Readonly - all properties readonly
+type ReadonlyUser = Readonly<User>;
+
+// Record - create object type
+type UserMap = Record<string, User>;
+// { [key: string]: User }
+
+// Exclude - remove from union
+type Status = "pending" | "active" | "archived";
+type ActiveStatus = Exclude<Status, "archived">;
+// "pending" | "active"
+
+// Extract - keep from union
+type ExtractedStatus = Extract<Status, "active" | "pending">;
+// "pending" | "active"
+
+// NonNullable - remove null and undefined
+type MaybeString = string | null | undefined;
+type DefiniteString = NonNullable<MaybeString>;
+// string
+
+// ReturnType - extract function return type
+function getUser() {
+  return { id: "1", name: "John" };
+}
+type UserReturn = ReturnType<typeof getUser>;
+// { id: string; name: string }
+
+// Parameters - extract function parameters
+function createUser(name: string, age: number) {}
+type CreateUserParams = Parameters<typeof createUser>;
+// [name: string, age: number]
+```
+
+---
+
+## Type Guards
+
+### typeof Guard
+
+```typescript
+function processValue(value: string | number) {
+  if (typeof value === "string") {
+    // value is string here
+    return value.toUpperCase();
+  }
+  // value is number here
+  return value * 2;
+}
+```
+
+### instanceof Guard
+
+```typescript
+class Dog {
+  bark() {
+    console.log("Woof!");
+  }
+}
+
+class Cat {
+  meow() {
+    console.log("Meow!");
+  }
+}
+
+function makeSound(animal: Dog | Cat) {
+  if (animal instanceof Dog) {
+    animal.bark();
+  } else {
+    animal.meow();
+  }
+}
+```
+
+### Custom Type Guards
+
+```typescript
+interface Fish {
+  swim(): void;
+}
+
+interface Bird {
+  fly(): void;
+}
+
+// Type predicate
+function isFish(pet: Fish | Bird): pet is Fish {
+  return (pet as Fish).swim !== undefined;
+}
+
+function move(pet: Fish | Bird) {
+  if (isFish(pet)) {
+    pet.swim(); // TypeScript knows pet is Fish
+  } else {
+    pet.fly(); // TypeScript knows pet is Bird
+  }
+}
+```
+
+### Discriminated Unions
+
+```typescript
+interface Circle {
+  kind: "circle";
+  radius: number;
+}
+
+interface Rectangle {
+  kind: "rectangle";
+  width: number;
+  height: number;
+}
+
+type Shape = Circle | Rectangle;
+
+function getArea(shape: Shape): number {
+  switch (shape.kind) {
+    case "circle":
+      return Math.PI * shape.radius ** 2;
+    case "rectangle":
+      return shape.width * shape.height;
+    default:
+      // Exhaustiveness check
+      const _exhaustive: never = shape;
+      return _exhaustive;
+  }
+}
+```
+
+---
+
+## Advanced Types
+
+### Mapped Types
+
+```typescript
+// Make all properties optional
+type Optional<T> = {
+  [K in keyof T]?: T[K];
+};
+
+// Make all properties nullable
+type Nullable<T> = {
+  [K in keyof T]: T[K] | null;
+};
+
+// Make all properties functions
+type Getters<T> = {
+  [K in keyof T as `get${Capitalize<string & K>}`]: () => T[K];
+};
+
+interface Person {
+  name: string;
+  age: number;
+}
+
+type PersonGetters = Getters<Person>;
+// { getName: () => string; getAge: () => number }
+```
+
+### Conditional Types
+
+```typescript
+// Basic conditional
+type IsString<T> = T extends string ? true : false;
+
+type A = IsString<string>; // true
+type B = IsString<number>; // false
+
+// infer keyword
+type ArrayElementType<T> = T extends (infer E)[] ? E : never;
+
+type StringArrayElement = ArrayElementType<string[]>; // string
+
+// Distributive conditional types
+type ToArray<T> = T extends any ? T[] : never;
+
+type StringOrNumberArray = ToArray<string | number>;
+// string[] | number[]
+```
+
+### Template Literal Types
+
+```typescript
+type HTTPMethod = "GET" | "POST" | "PUT" | "DELETE";
+type Endpoint = "/users" | "/posts";
+
+type APIRoute = `${HTTPMethod} ${Endpoint}`;
+// "GET /users" | "GET /posts" | "POST /users" | "POST /posts" | ...
+
+// String manipulation types
+type Uppercase<S extends string> = intrinsic;
+type Lowercase<S extends string> = intrinsic;
+type Capitalize<S extends string> = intrinsic;
+type Uncapitalize<S extends string> = intrinsic;
+
+type EventHandler = `on${Capitalize<"click" | "focus" | "blur">}`;
+// "onClick" | "onFocus" | "onBlur"
+```
+
+---
+
+## React Patterns
+
+### Component Props
+
+```typescript
+import { ReactNode, ComponentProps } from "react";
+
+// Basic props interface
+interface ButtonProps {
+  children: ReactNode;
+  variant?: "primary" | "secondary";
+  disabled?: boolean;
+  onClick?: () => void;
+}
+
+// Extend HTML element props
+interface InputProps extends ComponentProps<"input"> {
+  label: string;
+  error?: string;
+}
+
+// Generic component
+interface ListProps<T> {
+  items: T[];
+  renderItem: (item: T) => ReactNode;
+  keyExtractor: (item: T) => string;
+}
+
+function List<T>({ items, renderItem, keyExtractor }: ListProps<T>) {
+  return (
+    <ul>
+      {items.map(item => (
+        <li key={keyExtractor(item)}>{renderItem(item)}</li>
+      ))}
+    </ul>
+  );
+}
+```
+
+### Event Handlers
+
+```typescript
+import { ChangeEvent, FormEvent, MouseEvent } from "react";
+
+function Form() {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  };
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.value);
+  };
+
+  const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
+    console.log(e.clientX, e.clientY);
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input onChange={handleChange} />
+      <button onClick={handleClick}>Submit</button>
+    </form>
+  );
+}
+```
+
+### Hooks Types
+
+```typescript
+import { useState, useRef, useCallback, useMemo } from "react";
+
+// useState with explicit type
+const [user, setUser] = useState<User | null>(null);
+
+// useRef with element type
+const inputRef = useRef<HTMLInputElement>(null);
+
+// useCallback with parameter types
+const handleClick = useCallback((id: string) => {
+  console.log(id);
+}, []);
+
+// useMemo with return type
+const expensiveValue = useMemo<number>(() => {
+  return calculateExpensiveValue();
+}, [dependency]);
+```
+
+---
+
+## Strict Mode Settings
+
+```json
+// tsconfig.json
+{
+  "compilerOptions": {
+    "strict": true,
+    // Includes all of these:
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+
+    // Additional strictness
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true
+  }
+}
+```
+
+---
+
+## Best Practices
+
+### Do
+
+```typescript
+// Prefer interfaces for objects
+interface User {
+  id: string;
+  name: string;
+}
+
+// Use explicit return types for public APIs
+function getUser(id: string): User | null {
+  // ...
+}
+
+// Use `unknown` instead of `any`
+function parseJSON(json: string): unknown {
+  return JSON.parse(json);
+}
+
+// Use const assertions for literals
+const COLORS = ["red", "green", "blue"] as const;
+type Color = typeof COLORS[number]; // "red" | "green" | "blue"
+
+// Use discriminated unions for variants
+type Result<T> =
+  | { success: true; data: T }
+  | { success: false; error: Error };
+```
+
+### Don't
+
+```typescript
+// Don't use `any` (use `unknown`)
+function bad(data: any) {} // Bad
+function good(data: unknown) {} // Good
+
+// Don't use non-null assertion unless necessary
+const element = document.getElementById("app")!; // Risky
+const element = document.getElementById("app"); // Better
+if (element) { /* use element */ }
+
+// Don't use `Function` type
+type BadCallback = Function; // Bad
+type GoodCallback = () => void; // Good
+
+// Don't use `Object` or `{}`
+type BadObject = Object; // Bad
+type GoodObject = Record<string, unknown>; // Good
+```
+
+---
+
+## Projects Using TypeScript
+
+```dataview
+TABLE status, priority
+FROM "Projects"
+WHERE contains(tech-stack, [[TypeScript]]) OR contains(tech-stack, "TypeScript")
+SORT priority ASC
+```
+
+---
+
+## Resources
+
+- [TypeScript Documentation](https://www.typescriptlang.org/docs/)
+- [TypeScript Playground](https://www.typescriptlang.org/play)
+- [Type Challenges](https://github.com/type-challenges/type-challenges)
+- [Total TypeScript](https://www.totaltypescript.com/)
+
+---
+
+## Related Concepts
+
+- [[React]] — UI library
+- [[NestJS]] — Backend framework
+- [[Next.js]] — Full-stack framework
+- [[Vite]] — Build tool
+- [[Zustand]] — State management
+
+---
+
+*Last updated: 2025-12-14*

@@ -1,0 +1,114 @@
+---
+name: generic-ux-designer
+description: Professional UX expertise for any project type. Covers user research, design thinking, interaction patterns, accessibility, and design critique. Use when designing new features, improving UX, conducting design reviews, or evaluating user flows.
+---
+
+# Generic UX Designer
+
+Professional UX expertise adapting to any project's constraints.
+
+**Foundational Reference:** See [UX Principles](./../_shared/UX_PRINCIPLES.md)
+
+## Design Thinking Process
+
+1. **Empathize** - Understand user needs, pain points, journeys
+2. **Define** - Problem statements, personas, success metrics
+3. **Ideate** - Brainstorm solutions, explore alternatives
+4. **Prototype** - Low-fidelity first, test assumptions
+5. **Test** - Usability testing, iterate on data
+
+## User Psychology Applied
+
+### Cognitive Load
+- Reduce choices (Hick's Law)
+- Chunk information (Miller's Law)
+- Progressive disclosure
+- Minimize memory load
+
+### Visual Hierarchy
+- Size indicates importance
+- Contrast draws attention
+- Whitespace groups elements
+- F-pattern/Z-pattern reading
+
+## Interaction Patterns
+
+### Navigation
+| Pattern | Use Case |
+|---------|----------|
+| Top nav | Simple sites, < 7 items |
+| Side nav | Complex apps, many sections |
+| Bottom nav | Mobile apps, < 5 items |
+| Tabs | Related content sections |
+
+### Forms
+- Single column layout
+- Inline validation
+- Smart defaults
+- Progress indicators
+
+### Feedback
+| Pattern | Use Case |
+|---------|----------|
+| Toast | Non-blocking info |
+| Modal | Blocking/important |
+| Inline | Contextual feedback |
+| Skeleton | Loading states |
+
+## Mobile Considerations
+
+- Touch targets: 44x44px minimum
+- 8px spacing between targets
+- Thumb-friendly placement
+- Bottom sheets for actions
+
+## Accessibility (UX Perspective)
+
+| Aspect | Approach |
+|--------|----------|
+| Vision | High contrast, scalable text |
+| Motor | Large targets, keyboard nav |
+| Cognitive | Simple language, clear structure |
+| Hearing | Captions, visual indicators |
+
+## Design Critique Framework
+
+| Aspect | Questions |
+|--------|-----------|
+| Usability | Can users complete tasks? |
+| Clarity | Is purpose immediately clear? |
+| Consistency | Follows established patterns? |
+| Hierarchy | Most important stands out? |
+| Feedback | Users know system state? |
+| Accessibility | Works for everyone? |
+
+## UX Patterns
+
+### Empty States
+1. Explain what goes here
+2. Guide to first action
+3. Show example content
+
+### Loading States
+1. Skeleton screens > spinners
+2. Progress for long operations
+3. Optimistic UI when safe
+
+### Error States
+1. Explain what happened
+2. Suggest how to fix
+3. Don't blame user
+
+## Design Review Checklist
+
+- [ ] Primary task achievable
+- [ ] Clear visual hierarchy
+- [ ] Keyboard navigable
+- [ ] Touch targets sized
+- [ ] Copy clear and helpful
+
+## See Also
+
+- [UX Principles](./../_shared/UX_PRINCIPLES.md) - Core psychology
+- [Design Patterns](./../_shared/DESIGN_PATTERNS.md) - Visual patterns
+- Project `CLAUDE.md` - Constraints

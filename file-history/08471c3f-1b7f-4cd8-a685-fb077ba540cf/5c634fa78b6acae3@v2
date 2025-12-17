@@ -1,0 +1,629 @@
+# Custom Diagram Canvas (P2 #7)
+
+**Priority:** P2 (Medium)
+**Estimated Time:** 25-35 hours
+**Status:** Planning
+**Created:** 2025-11-26
+**Philosophy:** Build custom, no external diagram libraries - full control and privacy
+
+---
+
+## Overview
+
+Build a **custom canvas-based diagram editor from scratch** using HTML5 Canvas API and SVG. This provides complete control, privacy, security, and the ability to integrate features from multiple competitors (Excalidraw, Apple Freeform, Draw.io, Microsoft Visio, Miro) into a unified Neuman Brain experience.
+
+## Philosophy & Principles
+
+**Why Build Custom:**
+1. **Privacy & Security** - No external libraries means no external data leakage
+2. **Full Control** - Can add any feature from any competitor
+3. **Integration** - Deep integration with notes, tasks, custom fields
+4. **Performance** - Optimized for our exact needs, no bloat
+5. **IP Ownership** - 100% our technology
+6. **Extensibility** - Foundation for future AI features (P4)
+7. **Aligns with CLAUDE.md** - Build the best custom platform we can
+
+**Competitors We'll Cherry-Pick From:**
+- **Excalidraw** - Hand-drawn aesthetic, shapes library
+- **Apple Freeform** - Infinite canvas, sticky notes, free-form layout
+- **Draw.io/Visio** - Professional diagrams, connector routing, shape libraries
+- **Miro** - Collaboration patterns, templates, frames
+- **Figma** - Vector editing, precise controls, components
+
+---
+
+## Problem Statement
+
+Users currently have:
+- **No diagramming capability** - Can't create visual diagrams
+- **External tool dependency** - Must use separate apps
+- **No integration** - Diagrams disconnected from notes/tasks
+- **Privacy concerns** - External tools collect data
+
+**Use Cases:**
+- **Developers:** Architecture diagrams, flowcharts, system design, ERDs
+- **Project Managers:** Process flows, org charts, Gantt charts, mind maps
+- **Students:** Concept maps, study diagrams, visual notes
+- **Designers:** Wireframes, user flows, sitemaps, mockups
+- **General:** Brainstorming, planning, visual thinking
+
+---
+
+## Requirements
+
+### Must Have (Phase 1 - MVP)
+
+**1. Canvas Foundation**
+- Infinite pan/zoom canvas (like Figma/Miro)
+- Grid with snap-to-grid option
+- Smooth pan (drag background)
+- Zoom (mouse wheel, pinch, buttons)
+- Multi-select (drag box, shift-click)
+- Copy/paste, undo/redo
+
+**2. Shape Primitives**
+- Rectangle, Rounded Rectangle
+- Circle, Ellipse
+- Triangle, Diamond
+- Line, Arrow (single/double head)
+- Freehand pen (smooth curves)
+- Text boxes (editable in-place)
+
+**3. Shape Properties**
+- Fill color (transparent option)
+- Stroke color, width, style (solid, dashed, dotted)
+- Corner radius (for rectangles)
+- Font size, family, weight (for text)
+- Rotation
+- Z-index (bring to front/back)
+
+**4. Connector System**
+- Smart connectors (auto-attach to shapes)
+- Straight, curved, orthogonal (right-angle) connectors
+- Arrow heads (start, end, both, none)
+- Auto-routing (avoid overlaps if possible)
+
+**5. Interaction**
+- Drag to move shapes
+- Resize handles (8 points)
+- Rotate handle
+- Double-click to edit text
+- Right-click context menu
+
+**6. Persistence**
+- Store diagrams in IndexedDB via Zustand
+- Custom JSON format
+- Auto-save (debounced 2s)
+- Multiple diagrams support
+
+**7. Export**
+- PNG (current viewport or full diagram)
+- SVG (vector export)
+- PDF (via jsPDF - already have it!)
+- JSON (native format)
+
+**8. UI/UX**
+- Toolbar: Tools (select, shapes, pen, text, connector)
+- Properties panel: Color pickers, stroke width, etc.
+- Layers panel: Z-order management
+- Page structure: Library (/diagrams), Editor (/diagrams/:id)
+- Dark mode support
+
+### Should Have (Phase 2)
+
+**9. Advanced Features**
+- Grouping (group/ungroup shapes)
+- Alignment tools (align left, center, right, distribute)
+- Sticky notes (Freeform-style)
+- Images (paste/upload into canvas)
+- Templates library (flowchart, org chart, etc.)
+
+**10. Integration**
+- Link shapes to notes/tasks
+- Embed diagrams in notes (iframe or image)
+- Custom fields in shapes
+- Tag diagrams
+
+**11. Polish**
+- Keyboard shortcuts (Del, Ctrl+Z, Ctrl+C/V, etc.)
+- Hand tool (spacebar to pan)
+- Ruler/guides
+- Color palettes (design system colors)
+
+### Won't Have (Out of Scope for P2)
+
+- Real-time collaboration (P4 with Yjs)
+- AI diagram generation (P4)
+- Animation/transitions
+- 3D shapes
+- Advanced path editing (Bezier curves) - Phase 3+
+
+---
+
+## Technical Architecture
+
+### Canvas Rendering Strategy
+
+**Hybrid Approach: SVG + Canvas**
+
+**SVG for Shapes (Primary):**
+- Easier to edit (move, resize, click detection)
+- Native events (mousedown, click)
+- Accessibility (can add ARIA labels)
+- Export to SVG trivial
+- Scales perfectly (vector)
+
+**Canvas for Drawing Tools:**
+- Freehand pen (smooth curves via perfect-freehand algorithm)
+- Performance for complex paths
+- Custom rendering effects
+
+**Why Not Pure Canvas:**
+- Hit detection is manual (harder)
+- No native events (must track mouse state)
+- Accessibility harder
+- Export requires manual serialization
+
+**Why Not Pure SVG:**
+- Performance degrades with 1000+ elements
+- Drawing tools less smooth
+
+### Data Model
+
+**Diagram:**
+```typescript
+interface Diagram {
+  id: string;
+  title: string;
+  createdAt: Date;
+  updatedAt: Date;
+  thumbnail?: string; // base64 PNG
+
+  // Canvas state
+  canvasState: CanvasState;
+
+  // Elements
+  elements: DiagramElement[];
+
+  // Metadata
+  tags?: string[];
+  linkedNotes?: string[];
+  linkedTasks?: string[];
+}
+
+interface CanvasState {
+  zoom: number; // 1.0 = 100%
+  pan: { x: number; y: number }; // viewport offset
+  gridSize: number; // 20px default
+  snapToGrid: boolean;
+}
+
+interface DiagramElement {
+  id: string;
+  type: 'rectangle' | 'circle' | 'ellipse' | 'triangle' | 'diamond' | 'line' | 'arrow' | 'text' | 'freehand' | 'connector';
+
+  // Position & size
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  rotation?: number; // degrees
+
+  // Styling
+  fill?: string; // hex color or 'transparent'
+  stroke?: string;
+  strokeWidth?: number;
+  strokeStyle?: 'solid' | 'dashed' | 'dotted';
+  cornerRadius?: number; // for rectangles
+
+  // Text-specific
+  text?: string;
+  fontSize?: number;
+  fontFamily?: string;
+  fontWeight?: 'normal' | 'bold';
+  textAlign?: 'left' | 'center' | 'right';
+
+  // Connector-specific
+  startPoint?: { x: number; y: number };
+  endPoint?: { x: number; y: number };
+  startArrow?: boolean;
+  endArrow?: boolean;
+  connectorType?: 'straight' | 'curved' | 'orthogonal';
+
+  // Path-specific (freehand)
+  points?: Array<{ x: number; y: number }>;
+
+  // Z-index
+  zIndex: number;
+}
+```
+
+### Component Architecture
+
+**Pages:**
+- `src/pages/Diagrams.tsx` - Library view (grid of diagrams)
+- `src/pages/DiagramEditor.tsx` - Full-screen editor
+
+**Components:**
+- `src/components/DiagramCanvas/`
+  - `Canvas.tsx` - Main canvas component (SVG + Canvas hybrid)
+  - `Toolbar.tsx` - Tool selection (select, shapes, pen, text, connector)
+  - `PropertiesPanel.tsx` - Edit selected shape properties
+  - `LayersPanel.tsx` - Z-order, visibility
+  - `DiagramCard.tsx` - Thumbnail card for library
+
+- `src/components/DiagramCanvas/Elements/`
+  - `Rectangle.tsx` - Rectangle SVG element
+  - `Circle.tsx` - Circle SVG element
+  - `Line.tsx` - Line SVG element
+  - `Arrow.tsx` - Arrow SVG element
+  - `Text.tsx` - Text SVG element
+  - `Freehand.tsx` - Freehand path element
+  - `Connector.tsx` - Smart connector element
+
+- `src/components/DiagramCanvas/Tools/`
+  - `SelectTool.ts` - Selection, move, resize logic
+  - `ShapeTool.ts` - Draw new shapes
+  - `PenTool.ts` - Freehand drawing
+  - `TextTool.ts` - Add/edit text
+  - `ConnectorTool.ts` - Draw connectors
+
+**Stores:**
+- `src/stores/useDiagramsStore.ts` - Diagram CRUD, persistence
+- `src/stores/useDiagramEditorStore.ts` - Editor state (selected tool, selected elements, clipboard, undo/redo)
+
+**Types:**
+- `src/types/diagrams.ts` - All diagram types
+
+**Utilities:**
+- `src/utils/diagramExport.ts` - Export to PNG, SVG, PDF
+- `src/utils/diagramGeometry.ts` - Hit detection, snap-to-grid, alignment
+- `src/utils/diagramHistory.ts` - Undo/redo stack
+
+---
+
+## Implementation Plan
+
+### Phase 1: Foundation (10-12 hours)
+
+**1. Data Model & Store (2 hours)**
+- Create `src/types/diagrams.ts` with all interfaces
+- Create `src/stores/useDiagramsStore.ts` (CRUD, persistence)
+- Create `src/stores/useDiagramEditorStore.ts` (editor state)
+- Test store in console
+
+**2. Pages & Routing (2 hours)**
+- Create `src/pages/Diagrams.tsx` (library grid)
+- Create `src/pages/DiagramEditor.tsx` (editor layout)
+- Add routes to App.tsx (`/diagrams`, `/diagrams/:id`)
+- Add to Sidebar navigation (under Notes, like Graph)
+- Test navigation flow
+
+**3. Canvas Component (3 hours)**
+- Create `src/components/DiagramCanvas/Canvas.tsx`
+  - SVG container with viewBox for pan/zoom
+  - Mouse event handlers (mousedown, mousemove, mouseup)
+  - Pan (drag background)
+  - Zoom (wheel event)
+  - Grid rendering (optional)
+- Render empty canvas in DiagramEditor
+- Test pan/zoom works smoothly
+
+**4. Toolbar Component (1 hour)**
+- Create `src/components/DiagramCanvas/Toolbar.tsx`
+  - Tool buttons: Select, Rectangle, Circle, Line, Text
+  - Active tool state (highlight selected)
+  - Switch tool on click
+- Integrate into DiagramEditor
+- Test tool switching
+
+**5. Select Tool (2 hours)**
+- Create `src/components/DiagramCanvas/Tools/SelectTool.ts`
+  - Click to select element
+  - Drag to move selected element(s)
+  - Multi-select (drag box or shift-click)
+  - Resize handles (8 points)
+  - Rotation handle
+- Test selection, move, resize, rotate
+
+### Phase 2: Basic Shapes (8-10 hours)
+
+**6. Rectangle Element (2 hours)**
+- Create `src/components/DiagramCanvas/Elements/Rectangle.tsx`
+  - SVG rect rendering
+  - Fill, stroke, strokeWidth props
+  - Click to select
+  - Resize logic
+- Integrate with Canvas
+- Create rectangle via ShapeTool
+- Test create, move, resize, style
+
+**7. Circle & Ellipse (1.5 hours)**
+- Create `src/components/DiagramCanvas/Elements/Circle.tsx`
+- SVG circle/ellipse rendering
+- Same props as Rectangle
+- Test create, move, resize
+
+**8. Line & Arrow (2 hours)**
+- Create `src/components/DiagramCanvas/Elements/Line.tsx`
+- Create `src/components/DiagramCanvas/Elements/Arrow.tsx`
+  - SVG line/path with arrow markers
+  - Start/end points
+  - Arrow heads (triangle markers)
+- Test create, move endpoints
+
+**9. Text Element (2 hours)**
+- Create `src/components/DiagramCanvas/Elements/Text.tsx`
+  - SVG text element
+  - Double-click to edit (contentEditable div overlay)
+  - Font size, family, weight
+  - Text align
+- Test create, edit, move, resize
+
+**10. Properties Panel (1.5 hours)**
+- Create `src/components/DiagramCanvas/PropertiesPanel.tsx`
+  - Color pickers (fill, stroke)
+  - Stroke width slider
+  - Font controls (for text)
+  - Update selected element properties
+- Integrate into DiagramEditor
+- Test property changes
+
+**11. Layers Panel (1 hour)**
+- Create `src/components/DiagramCanvas/LayersPanel.tsx`
+  - List all elements
+  - Click to select
+  - Bring to front/back buttons
+  - Z-index management
+- Test layer ordering
+
+### Phase 3: Advanced Features (5-7 hours)
+
+**12. Freehand Pen Tool (2 hours)**
+- Create `src/components/DiagramCanvas/Tools/PenTool.ts`
+  - Capture mouse points on drag
+  - Smooth curve algorithm (simplified Bezier or perfect-freehand)
+  - Render as SVG path
+- Create `src/components/DiagramCanvas/Elements/Freehand.tsx`
+- Test drawing smooth curves
+
+**13. Smart Connectors (3 hours)**
+- Create `src/components/DiagramCanvas/Elements/Connector.tsx`
+  - Detect when endpoints near shapes (snap to edge)
+  - Store connections (startShapeId, endShapeId)
+  - Update when shapes move
+  - Orthogonal routing (right-angle paths)
+- Test connectors between shapes
+
+**14. Copy/Paste & Undo/Redo (1.5 hours)**
+- Implement clipboard (Ctrl+C/V)
+  - Copy selected elements
+  - Paste with offset
+- Implement undo/redo stack
+  - Store history of element states
+  - Undo: revert to previous state
+  - Redo: forward to next state
+- Test copy/paste, undo/redo
+
+**15. Export Functionality (30 min)**
+- Create `src/utils/diagramExport.ts`
+  - exportToPNG: Render SVG to canvas, toBlob
+  - exportToSVG: Serialize SVG elements
+  - exportToPDF: Use jsPDF (already have it)
+  - exportToJSON: Serialize diagram data
+- Add export buttons to Toolbar
+- Test all export formats
+
+### Phase 4: UX Polish (2-3 hours)
+
+**16. Keyboard Shortcuts (1 hour)**
+- Delete key: delete selected
+- Ctrl+Z/Y: undo/redo
+- Ctrl+C/V: copy/paste
+- Ctrl+A: select all
+- Spacebar: hand tool (pan)
+- Arrow keys: nudge selected
+- Test all shortcuts
+
+**17. Context Menu (30 min)**
+- Right-click context menu
+  - Cut, copy, paste
+  - Duplicate
+  - Delete
+  - Bring to front/back
+  - Group (Phase 2)
+- Test context menu
+
+**18. Diagram Library UI (1 hour)**
+- Create `src/components/DiagramCanvas/DiagramCard.tsx`
+  - Thumbnail preview
+  - Title, last modified
+  - Click to open
+  - Delete button
+- Grid layout in Diagrams.tsx
+- Search/filter UI
+- Test library interactions
+
+**19. Dark Mode & Polish (30 min)**
+- Semantic color tokens for UI
+- Canvas background (light/dark)
+- Grid color (light/dark)
+- Test dark mode switching
+
+### Phase 5: Verification (1-2 hours)
+
+**20. Testing**
+- Create multiple diagrams (flowchart, org chart, mind map)
+- Test all shapes, tools, connectors
+- Test export to PNG, SVG, PDF
+- Test copy/paste, undo/redo
+- Test dark mode
+- Test performance (100+ elements)
+- Test on mobile (touch)
+
+**21. Documentation**
+- Update `src/pages/CLAUDE.md`
+- Update `src/components/CLAUDE.md`
+- Update `tasks/master-implementation-status.md`
+- Add Review section to this task
+- Archive task file
+
+---
+
+## File Structure
+
+**New Files:**
+```
+src/pages/
+  ├── Diagrams.tsx                              # Library page
+  └── DiagramEditor.tsx                         # Editor page
+
+src/components/DiagramCanvas/
+  ├── Canvas.tsx                                # Main canvas (SVG + hybrid)
+  ├── Toolbar.tsx                               # Tool selection
+  ├── PropertiesPanel.tsx                       # Edit properties
+  ├── LayersPanel.tsx                           # Z-order management
+  ├── DiagramCard.tsx                           # Thumbnail card
+  ├── Elements/
+  │   ├── Rectangle.tsx                         # Rectangle element
+  │   ├── Circle.tsx                            # Circle/ellipse element
+  │   ├── Line.tsx                              # Line element
+  │   ├── Arrow.tsx                             # Arrow element
+  │   ├── Text.tsx                              # Text element
+  │   ├── Freehand.tsx                          # Freehand path element
+  │   └── Connector.tsx                         # Smart connector
+  └── Tools/
+      ├── SelectTool.ts                         # Selection & transform logic
+      ├── ShapeTool.ts                          # Create shapes
+      ├── PenTool.ts                            # Freehand drawing
+      ├── TextTool.ts                           # Add/edit text
+      └── ConnectorTool.ts                      # Draw connectors
+
+src/stores/
+  ├── useDiagramsStore.ts                       # Diagram CRUD & persistence
+  └── useDiagramEditorStore.ts                  # Editor state (tool, selection, undo)
+
+src/types/
+  └── diagrams.ts                               # All diagram types
+
+src/utils/
+  ├── diagramExport.ts                          # PNG, SVG, PDF export
+  ├── diagramGeometry.ts                        # Hit detection, snapping, alignment
+  └── diagramHistory.ts                         # Undo/redo stack
+```
+
+**Modified Files:**
+```
+src/App.tsx                                     # Add /diagrams routes
+src/components/Sidebar.tsx                      # Add Diagrams to Notes dropdown
+```
+
+---
+
+## Performance Considerations
+
+**Bundle Size:**
+- **Zero external diagram libraries** - All custom code
+- Estimated: ~30-50KB for all diagram code (gzipped)
+- Lazy-loaded: No initial bundle impact
+- **Total Impact**: Minimal, all our own code
+
+**Runtime Performance:**
+- SVG for shapes: Scales to ~500 elements smoothly
+- Canvas for freehand: Hardware accelerated
+- Debounced auto-save (2s)
+- IndexedDB persistence (non-blocking)
+- Optimizations: Virtual rendering for 1000+ elements (Phase 3)
+
+**Export Performance:**
+- PNG: SVG to canvas via foreignObject (~100ms)
+- SVG: Direct serialization (<50ms)
+- PDF: jsPDF generation (~200ms)
+
+---
+
+## Success Criteria
+
+1. **Functional**
+   - ✅ Create, edit, save diagrams
+   - ✅ All basic shapes work (rect, circle, line, arrow, text)
+   - ✅ Pan, zoom, select, move, resize, rotate
+   - ✅ Smart connectors between shapes
+   - ✅ Freehand drawing tool
+   - ✅ Export to PNG, SVG, PDF
+   - ✅ Copy/paste, undo/redo
+   - ✅ Auto-save to IndexedDB
+
+2. **Quality**
+   - ✅ TypeScript type-check passes
+   - ✅ Production build succeeds
+   - ✅ No console errors/warnings
+   - ✅ Dark mode support
+   - ✅ Responsive layout
+
+3. **Performance**
+   - ✅ Smooth pan/zoom
+   - ✅ 100+ elements without lag
+   - ✅ Auto-save debounced properly
+   - ✅ Export completes < 1 second
+
+4. **UX**
+   - ✅ Intuitive tools and controls
+   - ✅ Keyboard shortcuts work
+   - ✅ Professional appearance
+   - ✅ Helpful empty states
+
+---
+
+## Known Challenges
+
+1. **Canvas Complexity**
+   - Building from scratch is complex
+   - Mitigation: Start simple (rectangles, circles), iterate
+
+2. **Hit Detection**
+   - SVG click detection easier than Canvas
+   - Mitigation: Use SVG for shapes primarily
+
+3. **Connector Routing**
+   - Orthogonal routing is algorithmically complex
+   - Mitigation: Start with straight/curved, add orthogonal Phase 2
+
+4. **Undo/Redo**
+   - Need efficient history stack
+   - Mitigation: Snapshot element state, limit to 50 steps
+
+5. **Export Quality**
+   - PNG quality depends on resolution
+   - Mitigation: Export at 2x scale for crisp images
+
+---
+
+## Time Estimates
+
+| Phase | Tasks | Estimated Time |
+|-------|-------|----------------|
+| Phase 1: Foundation | Data model + Pages + Canvas + Toolbar + SelectTool | 10-12 hours |
+| Phase 2: Basic Shapes | Rectangle + Circle + Line + Text + Properties + Layers | 8-10 hours |
+| Phase 3: Advanced Features | Freehand + Connectors + Copy/Paste + Undo/Redo + Export | 5-7 hours |
+| Phase 4: UX Polish | Shortcuts + Context Menu + Library UI + Dark Mode | 2-3 hours |
+| Phase 5: Verification | Testing + Docs | 1-2 hours |
+| **Total** | | **26-34 hours** |
+
+---
+
+## Rollback Plan
+
+If issues arise:
+1. **MVP First** - Ship Phase 1+2 (basic shapes only)
+2. **Iterate** - Add features incrementally
+3. **User Feedback** - Prioritize based on real usage
+4. **No Dependencies** - All our code, easy to modify
+
+No risk to existing data - Diagrams stored separately in IndexedDB.
+
+---
+
+## Review
+
+*(To be completed after implementation)*

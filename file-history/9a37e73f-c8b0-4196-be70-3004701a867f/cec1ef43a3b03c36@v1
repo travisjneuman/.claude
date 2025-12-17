@@ -1,0 +1,290 @@
+/**
+ * Week View Component
+ *
+ * Displays a 7-day week with time slots for each day
+ * Features: time slots (hourly), timed events, all-day events, task bars
+ */
+
+import React, { useMemo } from 'react';
+import type { CalendarEvent, Task } from '../types';
+import { getLegacyDateKey, isToday, isDateBetween } from '../utils/dateUtils';
+
+interface WeekViewProps {
+  currentDate: Date;
+  events: Record<string, CalendarEvent[]>;
+  tasks: Task[];
+  onDayClick: (dateKey: string) => void;
+  onEventClick?: (event: CalendarEvent, dateKey: string) => void;
+  showTimeSlots?: boolean;
+}
+
+export const WeekView: React.FC<WeekViewProps> = ({
+  currentDate,
+  events,
+  tasks,
+  onDayClick,
+  onEventClick,
+  showTimeSlots = true,
+}) => {
+  const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const hours = showTimeSlots ? Array.from({ length: 24 }, (_, i) => i) : [];
+
+  // Get start of week (Sunday)
+  const startOfWeek = new Date(currentDate);
+  startOfWeek.setDate(startOfWeek.getDate() - startOfWeek.getDay());
+
+  const weekDays = useMemo(() => {
+    return Array.from({ length: 7 }, (_, i) => {
+      const day = new Date(startOfWeek);
+      day.setDate(day.getDate() + i);
+      return day;
+    });
+  }, [startOfWeek]);
+
+  const tasksWithDates = useMemo(() => {
+    return tasks.filter((task) => task.startDate && task.dueDate);
+  }, [tasks]);
+
+  // Parse time string "HH:MM" to decimal hours
+  const parseTime = (timeStr: string): number => {
+    const [hours, minutes] = timeStr.split(':').map(Number);
+    return hours + minutes / 60;
+  };
+
+  // Calculate event position and height
+  const getEventStyle = (event: CalendarEvent) => {
+    if (!event.startTime) return null;
+
+    const startHour = parseTime(event.startTime);
+    const endHour = event.endTime ? parseTime(event.endTime) : startHour + 1;
+    const duration = endHour - startHour;
+
+    return {
+      top: `${(startHour / 24) * 100}%`,
+      height: `${(duration / 24) * 100}%`,
+    };
+  };
+
+  // Priority colors for task bars
+  const priorityColors = {
+    low: 'bg-neutral-400 dark:bg-neutral-600',
+    medium: 'bg-accent-blue dark:bg-accent-blue-hover',
+    high: 'bg-status-warning dark:bg-status-warning',
+  };
+
+  if (!showTimeSlots) {
+    // Simple week view without time slots (original style)
+    return (
+      <div className="calendar-week-view flex-1 grid grid-cols-7 gap-2">
+        {weekDays.map((day, index) => {
+          const dateKey = getLegacyDateKey(day);
+          const dayEvents = events[dateKey] || [];
+          const dayIsToday = isToday(day);
+
+          const overlappingTasks = tasksWithDates.filter((task) => {
+            const startDate = new Date(task.startDate!);
+            const dueDate = new Date(task.dueDate!);
+            return isDateBetween(day, startDate, dueDate);
+          });
+
+          return (
+            <div
+              key={index}
+              onClick={() => onDayClick(dateKey)}
+              className={`
+                calendar-week-day flex flex-col border rounded-lg p-3 cursor-pointer transition-all hover:shadow-lg
+                ${dayIsToday ? 'ring-2 ring-accent-cyan bg-accent-cyan/10 dark:bg-accent-cyan/20' : 'bg-white dark:bg-neutral-800'}
+                border-neutral-200 dark:border-neutral-700
+              `}
+            >
+              <div className="week-day-header mb-2">
+                <div className="text-sm font-medium text-text-light-secondary dark:text-text-dark-secondary">
+                  {days[index]}
+                </div>
+                <div
+                  className={`text-2xl font-bold ${
+                    dayIsToday
+                      ? 'text-accent-cyan dark:text-accent-cyan'
+                      : 'text-text-light-primary dark:text-text-dark-primary'
+                  }`}
+                >
+                  {day.getDate()}
+                </div>
+              </div>
+
+              {/* Events */}
+              <div className="space-y-1 mb-2">
+                {dayEvents.map((event) => (
+                  <button
+                    key={event.id}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onEventClick?.(event, dateKey);
+                    }}
+                    className="w-full text-left text-xs px-2 py-1 rounded bg-accent-magenta text-white hover:bg-accent-magenta-hover transition-colors truncate"
+                  >
+                    {event.startTime && `${event.startTime} `}
+                    {event.title}
+                  </button>
+                ))}
+              </div>
+
+              {/* Task bars */}
+              {overlappingTasks.length > 0 && (
+                <div className="mt-1 space-y-1">
+                  {overlappingTasks.slice(0, 2).map((task) => (
+                    <div
+                      key={task.id}
+                      className={`text-xs px-1 py-0.5 rounded text-white truncate ${
+                        priorityColors[task.priority || 'medium']
+                      }`}
+                      title={task.title}
+                    >
+                      {task.title}
+                    </div>
+                  ))}
+                  {overlappingTasks.length > 2 && (
+                    <div className="text-xs text-text-light-secondary dark:text-text-dark-secondary">
+                      +{overlappingTasks.length - 2} more
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
+
+  // Week view with time slots
+  return (
+    <div className="flex flex-col h-full overflow-hidden">
+      {/* Header with day names and dates */}
+      <div className="flex-shrink-0 grid grid-cols-8 border-b border-border-light dark:border-border-dark bg-surface-light-elevated dark:bg-surface-dark-elevated sticky top-0 z-10">
+        <div className="p-2 text-xs text-text-light-secondary dark:text-text-dark-secondary">
+          {/* Empty cell for time column */}
+        </div>
+        {weekDays.map((day, index) => {
+          const dayIsToday = isToday(day);
+          return (
+            <div
+              key={index}
+              className={`p-2 text-center border-l border-border-light dark:border-border-dark ${
+                dayIsToday ? 'bg-accent-cyan/10 dark:bg-accent-cyan/20' : ''
+              }`}
+            >
+              <div className="text-xs font-medium text-text-light-secondary dark:text-text-dark-secondary">
+                {days[index]}
+              </div>
+              <div
+                className={`text-lg font-bold ${
+                  dayIsToday
+                    ? 'text-accent-cyan dark:text-accent-cyan'
+                    : 'text-text-light-primary dark:text-text-dark-primary'
+                }`}
+              >
+                {day.getDate()}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Time slots grid */}
+      <div className="flex-1 overflow-y-auto">
+        <div className="grid grid-cols-8 relative" style={{ minHeight: '1440px' /* 24 hours * 60px */ }}>
+          {/* Time labels column */}
+          <div className="border-r border-border-light dark:border-border-dark">
+            {hours.map((hour) => (
+              <div
+                key={hour}
+                className="relative border-b border-border-light dark:border-border-dark"
+                style={{ height: '60px' }}
+              >
+                <div className="absolute -top-3 left-0 text-xs text-text-light-secondary dark:text-text-dark-secondary w-full text-right pr-2">
+                  {hour === 0 ? '12 AM' : hour < 12 ? `${hour} AM` : hour === 12 ? '12 PM' : `${hour - 12} PM`}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Day columns */}
+          {weekDays.map((day, dayIndex) => {
+            const dateKey = getLegacyDateKey(day);
+            const dayEvents = events[dateKey] || [];
+            const timedEvents = dayEvents.filter((e) => !e.isAllDay && e.startTime);
+            const allDayEvents = dayEvents.filter((e) => e.isAllDay || !e.startTime);
+            const dayIsToday = isToday(day);
+
+            return (
+              <div
+                key={dayIndex}
+                className={`relative border-l border-border-light dark:border-border-dark ${
+                  dayIsToday ? 'bg-accent-cyan/5 dark:bg-accent-cyan/10' : ''
+                }`}
+              >
+                {/* Hour slots */}
+                {hours.map((hour) => (
+                  <div
+                    key={hour}
+                    className="border-b border-border-light dark:border-border-dark hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated transition-colors cursor-pointer"
+                    style={{ height: '60px' }}
+                    onClick={() => onDayClick(dateKey)}
+                  >
+                    {/* 30-minute half line */}
+                    <div className="absolute top-1/2 left-0 right-0 h-px bg-border-light dark:border-border-dark opacity-30" />
+                  </div>
+                ))}
+
+                {/* Timed events */}
+                {timedEvents.map((event) => {
+                  const style = getEventStyle(event);
+                  if (!style) return null;
+
+                  return (
+                    <button
+                      key={event.id}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onEventClick?.(event, dateKey);
+                      }}
+                      className="absolute left-1 right-1 px-2 py-1 rounded text-left overflow-hidden bg-accent-cyan text-white text-xs hover:bg-accent-cyan-hover transition-colors shadow-sm z-20"
+                      style={style}
+                      title={`${event.startTime} - ${event.endTime || ''}: ${event.title}`}
+                    >
+                      <div className="font-medium truncate">{event.title}</div>
+                      {event.startTime && (
+                        <div className="text-xs opacity-90">
+                          {event.startTime} {event.endTime && `- ${event.endTime}`}
+                        </div>
+                      )}
+                    </button>
+                  );
+                })}
+
+                {/* All-day events (floating at top) */}
+                {allDayEvents.length > 0 && (
+                  <div className="absolute top-0 left-0 right-0 p-1 space-y-1 bg-surface-light-elevated dark:bg-surface-dark-elevated z-30">
+                    {allDayEvents.map((event) => (
+                      <button
+                        key={event.id}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onEventClick?.(event, dateKey);
+                        }}
+                        className="w-full text-left text-xs px-2 py-1 rounded bg-accent-blue text-white hover:bg-accent-blue-hover transition-colors truncate"
+                      >
+                        {event.title}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+};

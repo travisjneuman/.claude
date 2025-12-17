@@ -1,0 +1,43 @@
+import React, { lazy, Suspense, useEffect } from 'react';
+
+// Lazy load Calendar widget
+const Calendar = lazy(() =>
+  import('../widgets/Calendar').then((module) => ({ default: module.Calendar }))
+);
+
+// Loading fallback
+const WidgetLoader = () => (
+  <div className="bento-card p-6 h-[800px] animate-pulse">
+    <div className="h-full bg-gradient-to-r from-neutral-200 to-neutral-300 dark:from-neutral-800 dark:to-neutral-700 rounded"></div>
+  </div>
+);
+
+/**
+ * Planning Page - Calendar and scheduling
+ * Full-featured calendar for event and task planning
+ */
+export const Planning: React.FC = () => {
+  useEffect(() => {
+    document.title = 'Neuman Brain';
+  }, []);
+
+  return (
+    <div className="planning-page">
+      <div className="mb-6">
+        <h1 className="text-3xl font-bold text-text-light-primary dark:text-text-dark-primary mb-2">
+          Planning & Calendar
+        </h1>
+        <p className="text-text-light-secondary dark:text-text-dark-secondary">
+          Manage your schedule, events, and task timelines
+        </p>
+      </div>
+
+      {/* Calendar Widget - Fixed height for internal scrolling */}
+      <div className="h-[calc(100vh-220px)]">
+        <Suspense fallback={<WidgetLoader />}>
+          <Calendar />
+        </Suspense>
+      </div>
+    </div>
+  );
+};

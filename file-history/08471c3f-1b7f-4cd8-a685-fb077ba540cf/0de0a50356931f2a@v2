@@ -1,0 +1,468 @@
+# Graph View (P2 #6)
+
+**Priority:** P2 (Medium)
+**Estimated Time:** 8-10 hours
+**Status:** Planning
+**Created:** 2025-11-26
+
+---
+
+## Overview
+
+Add an interactive graph visualization showing relationships between notes, tasks, and other entities via backlinks, tags, and custom connections. Inspired by Obsidian and Roam Research, this provides a visual way to explore knowledge connections and discover insights.
+
+## Problem Statement
+
+Users currently have:
+- **Backlinks** - Working, but only visible in individual notes
+- **Tags** - Working across notes
+- **No visual overview** - Can't see the "big picture" of connections
+- **Discovery challenges** - Hard to find related content or patterns
+
+**Use Cases:**
+- **Knowledge workers:** Visualize PKM (personal knowledge management) graph
+- **Researchers:** See connections between notes, find gaps
+- **Project managers:** Visualize task/note relationships by tags/custom fields
+- **Students:** Map concepts and their connections
+
+**Obsidian shows users love graph views** - it's one of their most iconic features.
+
+## Requirements
+
+### Must Have (MVP)
+1. **Graph Visualization Component**
+   - Interactive force-directed graph using D3.js or similar
+   - Nodes represent notes (potentially tasks too)
+   - Edges represent relationships (backlinks, shared tags)
+   - Zoom and pan controls
+   - Node click opens note/task
+
+2. **Node Types**
+   - Notes (primary)
+   - Tags (as connector nodes)
+   - Optionally: Tasks, Events (future phase)
+
+3. **Edge Types**
+   - Backlinks (bidirectional)
+   - Shared tags
+   - Optionally: Custom field connections (future)
+
+4. **Visual Design**
+   - Color-coded by type (notes vs tags)
+   - Node size based on connection count
+   - Hover shows preview/metadata
+   - Semantic color tokens (dark mode compatible)
+
+5. **Filtering & Controls**
+   - Filter by tags
+   - Filter by folder
+   - Search to highlight specific nodes
+   - Show/hide orphan nodes (no connections)
+   - Depth control (1-hop, 2-hop, all)
+
+6. **Performance**
+   - Handle 100+ notes smoothly
+   - Lazy rendering for large graphs
+   - Debounced updates on data changes
+
+### Should Have (Phase 2)
+- Local graph view (connections for current note only)
+- Export graph as SVG/PNG
+- Different layout algorithms (hierarchical, circular, force)
+- Node grouping by folder/tag
+- Time-based filtering (notes created in date range)
+- Animation on data changes
+
+### Won't Have (Out of Scope)
+- 3D graph visualization (keep 2D for now)
+- Real-time collaborative cursors (no collaboration)
+- AI-suggested connections (future P4)
+- Custom graph styling per user (use design system)
+
+## Competitor Analysis
+
+| Feature | Obsidian | Roam | Logseq | Athens | NB Target |
+|---------|----------|------|---------|---------|-----------|
+| Force-directed layout | ✅ | ✅ | ✅ | ✅ | ✅ Phase 1 |
+| Node filtering | ✅ | ✅ | ✅ | ⬜ | ✅ Phase 1 |
+| Local graph | ✅ | ⬜ | ✅ | ⬜ | 🔶 Phase 2 |
+| Color coding | ✅ | ⬜ | ✅ | ⬜ | ✅ Phase 1 |
+| Export image | ✅ | ⬜ | ⬜ | ⬜ | 🔶 Phase 2 |
+| 3D view | ✅ | ⬜ | ⬜ | ⬜ | ❌ Out of scope |
+| Layout options | ✅ | ⬜ | ⬜ | ⬜ | 🔶 Phase 2 |
+
+**Key Insights:**
+- Obsidian's graph is the gold standard (force-directed, fast, beautiful)
+- Users primarily use it for discovery and overview
+- Local graph (single note connections) is valuable for focused exploration
+- Performance matters - slow graphs frustrate users
+
+## Technical Approach
+
+### Library Evaluation
+
+**Option 1: D3.js (Recommended)**
+- ✅ Industry standard for data visualization
+- ✅ Full control over graph rendering
+- ✅ Force simulation built-in
+- ✅ SVG-based (accessible, scalable)
+- ✅ Tree-shakeable (only use what we need)
+- ❌ Steeper learning curve
+- **Bundle impact:** ~50KB gzipped for force simulation + selection
+
+**Option 2: react-force-graph**
+- ✅ React wrapper around D3
+- ✅ Easier to integrate
+- ❌ Less flexible styling
+- ❌ Larger bundle size
+- ❌ May not support semantic tokens
+
+**Option 3: vis-network**
+- ✅ Easy to use
+- ✅ Good performance
+- ❌ Not React-friendly
+- ❌ Harder to customize for design system
+
+**Decision:** Use D3.js directly for maximum control and design system integration.
+
+### Architecture
+
+**Data Flow:**
+```
+useNotesStore → GraphDataProcessor → D3 Force Simulation → SVG Rendering
+                    ↓
+              Filter/Search State
+```
+
+**Components:**
+- `GraphView.tsx` - Main page/widget container
+- `GraphCanvas.tsx` - D3 force simulation + SVG rendering
+- `GraphControls.tsx` - Filters, search, layout controls
+- `GraphLegend.tsx` - Node type legend
+- `GraphNodeTooltip.tsx` - Hover preview
+
+**Utilities:**
+- `src/utils/graphDataProcessor.ts` - Transform notes/tasks into graph data
+- `src/utils/graphSimulation.ts` - D3 force simulation configuration
+- `src/stores/useGraphStore.ts` (optional) - Graph UI state
+
+### Data Model
+
+**Node:**
+```typescript
+interface GraphNode {
+  id: string;
+  type: 'note' | 'tag' | 'task';
+  label: string;
+  color: string; // Semantic token
+  size: number; // Based on connection count
+  metadata: {
+    createdAt?: string;
+    folder?: string;
+    tags?: string[];
+  };
+}
+```
+
+**Edge:**
+```typescript
+interface GraphEdge {
+  source: string; // Node ID
+  target: string; // Node ID
+  type: 'backlink' | 'tag' | 'custom';
+  strength: number; // For force simulation
+}
+```
+
+**Graph Data:**
+```typescript
+interface GraphData {
+  nodes: GraphNode[];
+  edges: GraphEdge[];
+}
+```
+
+### Implementation Plan
+
+**Phase 1: Core Graph (6-8 hours)**
+1. Install D3.js and types
+2. Create GraphDataProcessor utility
+   - Extract notes from useNotesStore
+   - Build nodes array (notes + tags)
+   - Build edges array (backlinks + shared tags)
+3. Create GraphCanvas component
+   - D3 force simulation setup
+   - SVG rendering with semantic tokens
+   - Zoom/pan behavior
+4. Create GraphView page/component
+   - Graph canvas container
+   - Basic controls (filter orphans, search)
+5. Add to navigation (Notes section or standalone page)
+6. Performance optimization
+   - Memoize graph data processing
+   - Debounce simulation updates
+   - Handle 100+ nodes smoothly
+
+**Phase 2: Polish & Features (2 hours)**
+7. GraphControls component
+   - Tag filter dropdown
+   - Folder filter
+   - Depth control slider
+8. GraphLegend component
+9. Node tooltip on hover
+10. Click to open note/task
+11. Responsive design (hide controls on mobile)
+12. Dark mode verification
+
+### File Structure
+
+**New Files:**
+```
+src/pages/GraphView.tsx                    # Main graph page
+src/components/Graph/
+  ├── GraphCanvas.tsx                      # D3 force simulation
+  ├── GraphControls.tsx                    # Filters and controls
+  ├── GraphLegend.tsx                      # Node type legend
+  └── GraphNodeTooltip.tsx                 # Hover preview
+src/utils/
+  ├── graphDataProcessor.ts                # Notes → graph data
+  └── graphSimulation.ts                   # D3 simulation config
+```
+
+**Modified Files:**
+```
+src/App.tsx or routes                      # Add Graph route
+src/components/Sidebar.tsx                 # Add Graph navigation
+package.json                               # Add d3, @types/d3
+```
+
+### Performance Considerations
+
+**Bundle Size:**
+- D3 force simulation: ~30KB gzipped
+- D3 selection/zoom: ~15KB gzipped
+- Graph page lazy-loaded: No initial bundle impact
+- **Total:** ~45KB for graph functionality
+
+**Runtime Performance:**
+- Force simulation runs in Web Worker (future optimization)
+- Memoize graph data with useMemo
+- Debounce graph updates (300ms)
+- Limit to 500 nodes initially (warn if exceeded)
+- Virtualize nodes outside viewport (future)
+
+### Testing Strategy
+
+**Manual Testing:**
+- [ ] Create 10+ notes with backlinks
+- [ ] Add tags to notes
+- [ ] Verify graph renders all connections
+- [ ] Test zoom/pan behavior
+- [ ] Test filtering (tags, folders, orphans)
+- [ ] Test node click opens note
+- [ ] Test dark mode colors
+- [ ] Test with 100+ notes (performance)
+
+**Edge Cases:**
+- Empty graph (no notes)
+- Single note (no connections)
+- Orphan notes (no backlinks/tags)
+- Very large graph (500+ nodes)
+- Notes with many backlinks (hub nodes)
+
+---
+
+## Dependencies
+
+**Before:**
+- ✅ Backlinks/Wikilinks system (complete)
+- ✅ Tags system (complete)
+- ✅ Notes system (complete)
+
+**After (Enables):**
+- Enhanced note discovery
+- Visual knowledge management
+- Potential integration with custom fields (P2 #3)
+- Future: AI-powered connection suggestions (P4)
+
+---
+
+## Success Criteria
+
+1. **Functional**
+   - ✅ Graph displays notes and their connections
+   - ✅ Backlinks shown as edges
+   - ✅ Tags shown as connector nodes
+   - ✅ Zoom and pan work smoothly
+   - ✅ Click node opens note
+   - ✅ Filtering works (tags, folders, orphans)
+
+2. **Quality**
+   - ✅ TypeScript type-check passes
+   - ✅ Production build succeeds
+   - ✅ No console errors/warnings
+   - ✅ Dark mode support
+   - ✅ Responsive layout
+
+3. **Performance**
+   - ✅ Handles 100+ notes without lag
+   - ✅ Force simulation settles within 3 seconds
+   - ✅ Graph updates debounced properly
+   - ✅ Bundle size < 50KB gzipped
+
+4. **UX**
+   - ✅ Intuitive node/edge visualization
+   - ✅ Clear legend and controls
+   - ✅ Smooth interactions (hover, click, drag)
+   - ✅ Helpful empty state
+
+---
+
+## Known Challenges
+
+1. **D3 Learning Curve**
+   - Mitigation: Follow D3 force simulation examples, use TypeScript types
+
+2. **Performance with Large Graphs**
+   - 500+ notes may slow down
+   - Mitigation: Warn user, add depth limiting, future Web Worker
+
+3. **Layout Algorithms**
+   - Force-directed can be chaotic for large graphs
+   - Mitigation: Tune force parameters, future: add hierarchical layout option
+
+4. **Mobile Experience**
+   - Touch zoom/pan can be tricky
+   - Mitigation: Test on mobile, add simplified view if needed
+
+---
+
+## Rollback Plan
+
+If issues arise:
+1. **Disable Route** - Remove from navigation temporarily
+2. **Keep D3** - Small bundle impact (~45KB)
+3. **Fix Forward** - Iterate on simulation/styling
+4. **Fallback** - Show static list of connections instead
+
+No risk to existing data - Graph is read-only visualization.
+
+---
+
+## Todo Checklist
+
+### Phase 1: Core Graph Implementation (6-8 hours)
+
+**Setup & Dependencies (30 min)**
+- [ ] Install D3.js: `npm install d3 @types/d3`
+- [ ] Verify types work with TypeScript
+- [ ] Research D3 force simulation examples
+
+**Data Processing (1.5 hours)**
+- [ ] Create `src/utils/graphDataProcessor.ts`
+- [ ] Implement `buildGraphData(notes: Record<string, Note>): GraphData`
+  - Extract notes as nodes
+  - Extract tags as nodes
+  - Build backlink edges from note.backlinks
+  - Build tag edges from note.tags
+- [ ] Add TypeScript interfaces (GraphNode, GraphEdge, GraphData)
+- [ ] Test with console.log(graphData) to verify structure
+
+**D3 Force Simulation (2 hours)**
+- [ ] Create `src/utils/graphSimulation.ts`
+- [ ] Configure D3 force simulation
+  - forceLink for edges
+  - forceManyBody for repulsion
+  - forceCenter for centering
+  - forceCollide for node overlap prevention
+- [ ] Tune force parameters for aesthetic layout
+- [ ] Export simulation creation function
+
+**Graph Canvas Component (2.5 hours)**
+- [ ] Create `src/components/Graph/GraphCanvas.tsx`
+- [ ] Set up SVG container with responsive viewBox
+- [ ] Implement D3 zoom behavior
+- [ ] Render nodes as circles (color by type, size by connections)
+- [ ] Render edges as lines (stroke color by type)
+- [ ] Add node labels
+- [ ] Handle simulation tick updates
+- [ ] Clean up simulation on unmount
+- [ ] Add loading state while simulation settles
+
+**Graph View Page (1 hour)**
+- [ ] Create `src/pages/GraphView.tsx`
+- [ ] Import useNotesStore
+- [ ] Use graphDataProcessor to build graph data
+- [ ] Render GraphCanvas with data
+- [ ] Add basic controls (toggle orphans, search input)
+- [ ] Add empty state (no notes)
+- [ ] Add PageHeader
+
+**Integration (30 min)**
+- [ ] Add route to App.tsx or router config
+- [ ] Add "Graph" link to Sidebar (Notes section)
+- [ ] Test navigation works
+
+### Phase 2: Polish & Features (2 hours)
+
+**Controls & Filters (1 hour)**
+- [ ] Create `src/components/Graph/GraphControls.tsx`
+- [ ] Add tag filter dropdown (multi-select)
+- [ ] Add folder filter dropdown
+- [ ] Add "Hide orphans" checkbox
+- [ ] Add search input (highlight matching nodes)
+- [ ] Add depth slider (1-hop, 2-hop, all) - optional
+- [ ] Wire filters to graph data processing
+
+**UX Enhancements (1 hour)**
+- [ ] Create `src/components/Graph/GraphLegend.tsx`
+- [ ] Add node type legend (note, tag, task if applicable)
+- [ ] Create `src/components/Graph/GraphNodeTooltip.tsx`
+- [ ] Show note preview on node hover
+- [ ] Click node to open note (navigate to NotesEditor)
+- [ ] Add node drag behavior (update position on drag)
+- [ ] Test dark mode colors (use semantic tokens)
+- [ ] Responsive layout (stack controls on mobile)
+
+### Phase 3: Verification & Documentation (30 min)
+
+**Testing**
+- [ ] Create 20+ notes with backlinks
+- [ ] Add various tags
+- [ ] Verify all connections render correctly
+- [ ] Test zoom/pan behavior
+- [ ] Test all filters
+- [ ] Test node click navigation
+- [ ] Test with 100+ notes (performance check)
+- [ ] Test dark mode
+- [ ] Test on mobile (touch zoom/pan)
+
+**Quality Checks**
+- [ ] Run `npm run type-check` (0 errors)
+- [ ] Run `npm run build` (success, check bundle size)
+- [ ] No console errors/warnings
+- [ ] All semantic color tokens used
+
+**Documentation**
+- [ ] Update `src/pages/CLAUDE.md` with GraphView
+- [ ] Update `src/components/CLAUDE.md` with Graph components
+- [ ] Update `tasks/master-implementation-status.md` (P2 #6 complete)
+- [ ] Add Review section to this task file
+- [ ] Archive task file to `.archive/completed-tasks/`
+
+---
+
+## Time Estimates
+
+| Phase | Tasks | Estimated Time |
+|-------|-------|----------------|
+| Phase 1: Core Graph | Data processing + D3 simulation + Canvas + Page + Integration | 6-8 hours |
+| Phase 2: Polish | Controls + Filters + UX enhancements | 2 hours |
+| Phase 3: Verification | Testing + Docs | 30 min |
+| **Total** | | **8.5-10.5 hours** |
+
+---
+
+## Review
+
+*(To be completed after implementation)*

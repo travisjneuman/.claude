@@ -1,0 +1,287 @@
+# Notes DnD and Multi-Select Fixes
+
+## Overview
+Continuation of Notes folder management feature - fixing drag-and-drop and adding multi-select capabilities.
+
+## Status: PARTIALLY COMPLETE - NEEDS TESTING
+
+Type check passes, all 221 tests pass, but **manual testing not completed**.
+
+---
+
+## What Was Implemented
+
+### 1. Delete Confirmation Dialog (COMPLETE)
+**Issue**: Browser `window.confirm()` used instead of styled `ConfirmDialog`
+
+**Files Modified**:
+- `src/components/notes/ThreeColumnLayout.tsx` - Added ConfirmDialog for folder/note deletion
+- `src/components/notes/FileTreeLayout.tsx` - Already had ConfirmDialog
+- `src/components/notes/TabbedSidebarLayout.tsx` - Already had ConfirmDialog
+
+**Pattern Used**:
+```tsx
+const [folderToDelete, setFolderToDelete] = useState<{ id: string; name: string } | null>(null);
+const [noteToDelete, setNoteToDelete] = useState<{ id: string; title: string } | null>(null);
+
+// Handler sets state instead of calling window.confirm()
+const handleFolderDelete = (folderId: string, folderName: string) => {
+  setFolderToDelete({ id: folderId, name: folderName });
+};
+
+// Confirm callback does the actual delete
+const confirmFolderDelete = useCallback(() => {
+  if (folderToDelete) {
+    deleteFolder(folderToDelete.id);
+    setFolderToDelete(null);
+  }
+}, [folderToDelete, deleteFolder]);
+
+// ConfirmDialog JSX
+<ConfirmDialog
+  isOpen={!!folderToDelete}
+  onClose={() => setFolderToDelete(null)}
+  onConfirm={confirmFolderDelete}
+  title="Delete Folder"
+  message={`Delete folder "${folderToDelete?.name}"...`}
+  variant="danger"
+/>
+```
+
+---
+
+### 2. Ctrl/Shift Multi-Select (COMPLETE)
+**Issue**: No keyboard modifier support for selecting multiple notes
+
+**Files Modified**:
+- `src/components/notes/NoteListItem.tsx` - Added `onMultiSelectClick` prop
+- `src/components/notes/NotesList.tsx` - Added `handleMultiSelectClick` callback
+
+**Behavior**:
+- **Ctrl/Cmd+click**: Toggle individual note selection
+- **Shift+click**: Range select from last selected note to current
+- Auto-enters selection mode on first modifier+click
+
+**Key Code**:
+```tsx
+// NoteListItem.tsx - onClick handler
+onClick={(e) => {
+  if (isDisablingClicks) return;
+  if ((e.ctrlKey || e.metaKey || e.shiftKey) && onMultiSelectClick) {
+    onMultiSelectClick(note.id, e);
+    return;
+  }
+  setActiveNote(note.id);
+}}
+
+// NotesList.tsx - handleMultiSelectClick
+const handleMultiSelectClick = useCallback(
+  (noteId: string, event: React.MouseEvent) => {
+    if (!selectionMode) setSelectionMode(true);
+
+    if (event.shiftKey && lastSelectedNoteIdRef.current) {
+      // Range selection logic
+    } else {
+      toggleNoteSelection(noteId);
+    }
+  },
+  [selectionMode, notes, toggleNoteSelection]
+);
+```
+
+---
+
+### 3. Circular Checkbox Icons in Selection Mode (COMPLETE)
+**Issue**: Selection mode showed HTML checkbox, not styled circular icons
+
+**Files Modified**:
+- `src/components/notes/NoteListItem.tsx`
+
+**Pattern**:
+```tsx
+import { Circle, CheckCircle2 } from 'lucide-react';
+
+{isSelectionMode ? (
+  <button onClick={() => onToggleSelection?.(note.id)}>
+    {isSelected ? (
+      <CheckCircle2 className="w-5 h-5 fill-accent-cyan" />
+    ) : (
+      <Circle className="w-5 h-5" />
+    )}
+  </button>
+) : isDraggable ? (
+  <span {...listeners}><FileText /></span>
+) : null}
+```
+
+---
+
+### 4. Drag Notes onto Notes for Subnotes (NEEDS TESTING)
+**Issue**: Cannot create child notes by dragging
+
+**Files Modified**:
+- `src/components/notes/NoteListItem.tsx` - Added `useDroppable` hook
+- `src/components/notes/NotesList.tsx` - Updated `handleDragEnd` for note-target drops
+
+**Pattern**:
+```tsx
+// NoteListItem.tsx - droppable
+const { setNodeRef: setDropNodeRef, isOver } = useDroppable({
+  id: `note-drop-${note.id}`,
+  data: { type: 'note-target', noteId: note.id },
+  disabled: isSelectionMode || isDragging,
+});
+
+// Combined ref
+const setNodeRef = useCallback((node) => {
+  setDragNodeRef(node);
+  setDropNodeRef(node);
+}, [setDragNodeRef, setDropNodeRef]);
+
+// NotesList.tsx - handleDragEnd
+if (over.data.current?.type === 'note-target') {
+  const targetNoteId = over.data.current.noteId;
+  if (canSetParentNote(noteId, targetNoteId)) {
+    setParentNote(noteId, targetNoteId);
+  }
+}
+```
+
+**Store Methods Used** (already exist in useNotesStore):
+- `setParentNote(noteId, parentNoteId)` - Sets parent relationship
+- `canSetParentNote(noteId, parentNoteId)` - Validates no cycles
+
+---
+
+### 5. Bulk Operations - Move/Delete (COMPLETE)
+**Issue**: Only tag operations available for bulk selection
+
+**Files Modified**:
+- `src/components/notes/NotesList.tsx`
+
+**Added**:
+- Bulk Delete button with ConfirmDialog
+- Bulk Move button with FolderPickerModal
+
+---
+
+### 6. Folder DnD Fixes (NEEDS TESTING)
+
+#### 6a. Root Drop Zone in FolderSidebar
+**Issue**: Cannot drag folders out of nested folders to root
+
+**Files Modified**:
+- `src/components/notes/FolderSidebar.tsx`
+
+**Added**:
+```tsx
+const RootDropZone: React.FC<{ isOver: boolean; children: ReactNode }> = ({ isOver, children }) => {
+  const { setNodeRef } = useDroppable({ id: 'root-drop-zone' });
+  return (
+    <div ref={setNodeRef} className={isOver ? 'ring-2 ring-accent-cyan' : ''}>
+      {children}
+    </div>
+  );
+};
+
+// Wrapped folder tree with RootDropZone
+<RootDropZone isOver={dragOverFolderId === 'root'}>
+  <SortableContext items={allFolderIds}>
+    {/* folder tree */}
+  </SortableContext>
+</RootDropZone>
+```
+
+#### 6b. Droppable on FolderTreeNode
+**Issue**: Folders not proper drop targets
+
+**Files Modified**:
+- `src/components/notes/FolderTreeNode.tsx`
+
+**Added**:
+```tsx
+const { setNodeRef: setDroppableRef, isOver: isDroppableOver } = useDroppable({
+  id: node.id,
+  data: { type: 'folder', folderId: node.id },
+});
+
+// Combined sortable and droppable refs
+const setNodeRef = useCallback((element) => {
+  setSortableRef(element);
+  setDroppableRef(element);
+}, [setSortableRef, setDroppableRef]);
+```
+
+#### 6c. Collision Detection in NotesList
+**Issue**: Note-on-note drops not detected
+
+**Files Modified**:
+- `src/components/notes/NotesList.tsx`
+
+**Added**:
+```tsx
+import { closestCenter } from '@dnd-kit/core';
+
+<DndContext
+  sensors={sensors}
+  collisionDetection={closestCenter}  // Added
+  onDragStart={handleDragStart}
+  onDragEnd={handleDragEnd}
+>
+```
+
+---
+
+## Known Issues / Testing Needed
+
+1. **Drag folders OUT of nested folders** - Root drop zone added but not manually tested
+2. **Drag folders INTO other folders** - Droppable added but not manually tested
+3. **Reordering within same parent** - May not work (not implemented - only move between parents)
+4. **Drag notes onto notes** - Droppable added but not manually tested
+5. **Subnotes display** - After creating subnotes, unclear if they render correctly in UI
+
+---
+
+## Files Changed Summary
+
+| File | Changes |
+|------|---------|
+| `src/components/notes/NoteListItem.tsx` | useDroppable, CheckCircle icons, onMultiSelectClick |
+| `src/components/notes/NotesList.tsx` | Multi-select handlers, bulk delete/move, closestCenter |
+| `src/components/notes/ThreeColumnLayout.tsx` | ConfirmDialog for delete |
+| `src/components/notes/FolderSidebar.tsx` | RootDropZone component, updated handleDragOver |
+| `src/components/notes/FolderTreeNode.tsx` | useDroppable combined with useSortable |
+
+---
+
+## Testing Checklist for Next Engineer
+
+- [ ] Ctrl+click to toggle select notes
+- [ ] Shift+click to range select notes
+- [ ] Circular checkboxes appear in selection mode
+- [ ] Bulk delete selected notes (with styled ConfirmDialog)
+- [ ] Bulk move selected notes to folder
+- [ ] Drag folder into another folder (nest)
+- [ ] Drag folder to root area (unnest)
+- [ ] Drag note onto note (create subnote)
+- [ ] Subnotes display correctly after creation
+- [ ] Delete confirmation uses styled dialog (not browser popup)
+
+---
+
+## Related Plan
+
+See: `C:\Users\tjn\.claude\plans\rippling-launching-umbrella.md`
+
+This covers the full Notes folder/note management plan including phases not yet implemented.
+
+---
+
+## Verification
+
+```bash
+npm run type-check  # Passes
+npm run test        # 221 tests pass
+```
+
+Last updated: 2024-12-14

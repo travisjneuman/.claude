@@ -1,0 +1,358 @@
+import { useState, useEffect } from 'react';
+import { X, Clock, Calendar } from 'lucide-react';
+import { useTimeTrackingStore } from '../stores/useTimeTrackingStore';
+import { ProjectSelector } from './ProjectSelector';
+
+interface ManualTimeEntryModalProps {
+  onClose: () => void;
+}
+
+type DurationMode = 'endTime' | 'duration';
+
+/**
+ * ManualTimeEntryModal Component
+ * Modal dialog for creating time entries without running a timer
+ */
+export function ManualTimeEntryModal({ onClose }: ManualTimeEntryModalProps) {
+  const { addManualEntry } = useTimeTrackingStore();
+
+  // Form state
+  const [description, setDescription] = useState('');
+  const [projectId, setProjectId] = useState<string | null>(null);
+  const [startTime, setStartTime] = useState('');
+  const [endTime, setEndTime] = useState('');
+  const [durationHours, setDurationHours] = useState('0');
+  const [durationMinutes, setDurationMinutes] = useState('30');
+  const [notes, setNotes] = useState('');
+  const [durationMode, setDurationMode] = useState<DurationMode>('duration');
+
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState('');
+
+  // Initialize start time to current time
+  useEffect(() => {
+    const now = new Date();
+    const formatDateTimeLocal = (date: Date) => {
+      return date.toISOString().slice(0, 16);
+    };
+    setStartTime(formatDateTimeLocal(now));
+  }, []);
+
+  // Calculate duration for preview
+  const calculateDuration = (): { hours: number; minutes: number; seconds: number } | null => {
+    if (!startTime) return null;
+
+    if (durationMode === 'endTime') {
+      if (!endTime) return null;
+      const start = new Date(startTime).getTime();
+      const end = new Date(endTime).getTime();
+      if (end <= start) return null;
+
+      const durationSeconds = Math.floor((end - start) / 1000);
+      const hours = Math.floor(durationSeconds / 3600);
+      const minutes = Math.floor((durationSeconds % 3600) / 60);
+      return { hours, minutes, seconds: durationSeconds };
+    } else {
+      const hours = parseInt(durationHours) || 0;
+      const minutes = parseInt(durationMinutes) || 0;
+      const seconds = hours * 3600 + minutes * 60;
+      return { hours, minutes, seconds };
+    }
+  };
+
+  const handleSave = async () => {
+    setError('');
+
+    // Validation
+    if (!description.trim()) {
+      setError('Description is required');
+      return;
+    }
+
+    if (!startTime) {
+      setError('Start time is required');
+      return;
+    }
+
+    const duration = calculateDuration();
+    if (!duration || duration.seconds <= 0) {
+      setError(durationMode === 'endTime'
+        ? 'End time must be after start time'
+        : 'Duration must be greater than 0');
+      return;
+    }
+
+    setSaving(true);
+    try {
+      const startDate = new Date(startTime);
+      const endDate = durationMode === 'endTime'
+        ? new Date(endTime)
+        : new Date(startDate.getTime() + duration.seconds * 1000);
+
+      await addManualEntry({
+        description: description.trim(),
+        startTime: startDate.toISOString(),
+        endTime: endDate.toISOString(),
+        duration: duration.seconds,
+        projectId: projectId || undefined,
+        notes: notes.trim() || undefined,
+        tags: [],
+        billable: false,
+      });
+
+      onClose();
+    } catch (err) {
+      console.error('Failed to create entry:', err);
+      setError('Failed to create entry. Please try again.');
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Escape') {
+      onClose();
+    } else if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) {
+      handleSave();
+    }
+  };
+
+  const duration = calculateDuration();
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4"
+      onClick={onClose}
+    >
+      <div
+        className="bg-surface-light dark:bg-surface-dark rounded-button border border-border-light dark:border-border-dark shadow-xl max-w-lg w-full max-h-[90vh] overflow-y-auto"
+        onClick={(e) => e.stopPropagation()}
+        onKeyDown={handleKeyDown}
+      >
+        {/* Header */}
+        <div className="flex items-center justify-between px-6 py-4 border-b border-border-light dark:border-border-dark sticky top-0 bg-surface-light dark:bg-surface-dark z-10">
+          <div className="flex items-center gap-2">
+            <Clock className="w-5 h-5 text-accent-magenta dark:text-accent-cyan" />
+            <h2 className="text-lg font-semibold text-text-light-primary dark:text-text-dark-primary">
+              Add Manual Time Entry
+            </h2>
+          </div>
+          <button
+            onClick={onClose}
+            className="p-1 rounded-buttonhover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated text-text-light-secondary dark:text-text-dark-secondary transition-all duration-standard ease-smooth"
+            aria-label="Close modal"
+          >
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+
+        {/* Body */}
+        <div className="p-6 space-y-4">
+          {error && (
+            <div className="px-4 py-3 bg-status-error/10 border border-status-error/20 rounded-buttontext-status-error text-sm">
+              {error}
+            </div>
+          )}
+
+          {/* Description */}
+          <div>
+            <label
+              htmlFor="description"
+              className="block text-sm font-medium text-text-light-primary dark:text-text-dark-primary mb-2"
+            >
+              Description *
+            </label>
+            <input
+              id="description"
+              type="text"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              autoFocus
+              className="w-full px-3 py-2 text-sm bg-surface-light-elevated dark:bg-surface-dark-elevated border border-border-light dark:border-border-dark rounded-buttonfocus:outline-none focus:ring-2 focus:ring-accent-magenta dark:focus:ring-accent-cyan text-text-light-primary dark:text-text-dark-primary placeholder-text-light-secondary dark:placeholder-text-dark-secondary"
+              placeholder="What did you work on?"
+            />
+          </div>
+
+          {/* Project */}
+          <div>
+            <label
+              htmlFor="project"
+              className="block text-sm font-medium text-text-light-primary dark:text-text-dark-primary mb-2"
+            >
+              Project
+            </label>
+            <ProjectSelector
+              value={projectId}
+              onChange={setProjectId}
+              placeholder="No Project"
+              showNoProject={true}
+            />
+          </div>
+
+          {/* Start Time */}
+          <div>
+            <label
+              htmlFor="startTime"
+              className="block text-sm font-medium text-text-light-primary dark:text-text-dark-primary mb-2"
+            >
+              Start Time *
+            </label>
+            <div className="relative">
+              <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-text-light-secondary dark:text-text-dark-secondary pointer-events-none" />
+              <input
+                id="startTime"
+                type="datetime-local"
+                value={startTime}
+                onChange={(e) => setStartTime(e.target.value)}
+                className="w-full pl-10 pr-3 py-2 text-sm bg-surface-light-elevated dark:bg-surface-dark-elevated border border-border-light dark:border-border-dark rounded-buttonfocus:outline-none focus:ring-2 focus:ring-accent-magenta dark:focus:ring-accent-cyan text-text-light-primary dark:text-text-dark-primary"
+              />
+            </div>
+          </div>
+
+          {/* Duration Mode Toggle */}
+          <div>
+            <label className="block text-sm font-medium text-text-light-primary dark:text-text-dark-primary mb-2">
+              Duration Mode
+            </label>
+            <div className="flex gap-2">
+              <button
+                type="button"
+                onClick={() => setDurationMode('duration')}
+                className={`flex-1 px-3 py-2 text-sm font-medium rounded-buttontransition-all duration-standard ease-smooth ${
+                  durationMode === 'duration'
+                    ? 'bg-accent-magenta dark:bg-accent-cyan text-white dark:text-dark-background'
+                    : 'bg-surface-light-elevated dark:bg-surface-dark-elevated text-text-light-secondary dark:text-text-dark-secondary border border-border-light dark:border-border-dark hover:bg-surface-light dark:hover:bg-neutral-800'
+                }`}
+              >
+                Duration
+              </button>
+              <button
+                type="button"
+                onClick={() => setDurationMode('endTime')}
+                className={`flex-1 px-3 py-2 text-sm font-medium rounded-buttontransition-all duration-standard ease-smooth ${
+                  durationMode === 'endTime'
+                    ? 'bg-accent-magenta dark:bg-accent-cyan text-white dark:text-dark-background'
+                    : 'bg-surface-light-elevated dark:bg-surface-dark-elevated text-text-light-secondary dark:text-text-dark-secondary border border-border-light dark:border-border-dark hover:bg-surface-light dark:hover:bg-neutral-800'
+                }`}
+              >
+                End Time
+              </button>
+            </div>
+          </div>
+
+          {/* Duration or End Time Input */}
+          {durationMode === 'endTime' ? (
+            <div>
+              <label
+                htmlFor="endTime"
+                className="block text-sm font-medium text-text-light-primary dark:text-text-dark-primary mb-2"
+              >
+                End Time *
+              </label>
+              <div className="relative">
+                <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-text-light-secondary dark:text-text-dark-secondary pointer-events-none" />
+                <input
+                  id="endTime"
+                  type="datetime-local"
+                  value={endTime}
+                  onChange={(e) => setEndTime(e.target.value)}
+                  className="w-full pl-10 pr-3 py-2 text-sm bg-surface-light-elevated dark:bg-surface-dark-elevated border border-border-light dark:border-border-dark rounded-buttonfocus:outline-none focus:ring-2 focus:ring-accent-magenta dark:focus:ring-accent-cyan text-text-light-primary dark:text-text-dark-primary"
+                />
+              </div>
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 gap-3">
+              <div>
+                <label
+                  htmlFor="durationHours"
+                  className="block text-sm font-medium text-text-light-primary dark:text-text-dark-primary mb-2"
+                >
+                  Hours
+                </label>
+                <input
+                  id="durationHours"
+                  type="number"
+                  min="0"
+                  max="23"
+                  value={durationHours}
+                  onChange={(e) => setDurationHours(e.target.value)}
+                  className="w-full px-3 py-2 text-sm bg-surface-light-elevated dark:bg-surface-dark-elevated border border-border-light dark:border-border-dark rounded-buttonfocus:outline-none focus:ring-2 focus:ring-accent-magenta dark:focus:ring-accent-cyan text-text-light-primary dark:text-text-dark-primary"
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="durationMinutes"
+                  className="block text-sm font-medium text-text-light-primary dark:text-text-dark-primary mb-2"
+                >
+                  Minutes
+                </label>
+                <input
+                  id="durationMinutes"
+                  type="number"
+                  min="0"
+                  max="59"
+                  value={durationMinutes}
+                  onChange={(e) => setDurationMinutes(e.target.value)}
+                  className="w-full px-3 py-2 text-sm bg-surface-light-elevated dark:bg-surface-dark-elevated border border-border-light dark:border-border-dark rounded-buttonfocus:outline-none focus:ring-2 focus:ring-accent-magenta dark:focus:ring-accent-cyan text-text-light-primary dark:text-text-dark-primary"
+                />
+              </div>
+            </div>
+          )}
+
+          {/* Duration Preview */}
+          {duration && duration.seconds > 0 && (
+            <div className="px-4 py-3 bg-surface-light-elevated dark:bg-surface-dark-elevated rounded-buttonborder border-border-light dark:border-border-dark">
+              <div className="text-sm text-text-light-secondary dark:text-text-dark-secondary">
+                Total Duration:{' '}
+                <span className="font-mono font-semibold text-accent-magenta dark:text-accent-cyan">
+                  {duration.hours}h {duration.minutes.toString().padStart(2, '0')}m
+                </span>
+              </div>
+              {durationMode === 'duration' && startTime && (
+                <div className="text-xs text-text-light-tertiary dark:text-text-dark-tertiary mt-1">
+                  Will end at: {new Date(new Date(startTime).getTime() + duration.seconds * 1000).toLocaleString()}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Notes */}
+          <div>
+            <label
+              htmlFor="notes"
+              className="block text-sm font-medium text-text-light-primary dark:text-text-dark-primary mb-2"
+            >
+              Notes <span className="text-text-light-tertiary dark:text-text-dark-tertiary font-normal">(optional)</span>
+            </label>
+            <textarea
+              id="notes"
+              value={notes}
+              onChange={(e) => setNotes(e.target.value)}
+              rows={3}
+              className="w-full px-3 py-2 text-sm bg-surface-light-elevated dark:bg-surface-dark-elevated border border-border-light dark:border-border-dark rounded-buttonfocus:outline-none focus:ring-2 focus:ring-accent-magenta dark:focus:ring-accent-cyan text-text-light-primary dark:text-text-dark-primary placeholder-text-light-secondary dark:placeholder-text-dark-secondary resize-none"
+              placeholder="Additional details about this time entry..."
+            />
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div className="flex items-center justify-end gap-3 px-6 py-4 border-t border-border-light dark:border-border-dark sticky bottom-0 bg-surface-light dark:bg-surface-dark">
+          <button
+            onClick={onClose}
+            disabled={saving}
+            className="px-4 py-2 text-sm font-medium text-text-light-primary dark:text-text-dark-primary bg-surface-light-elevated dark:bg-surface-dark-elevated border border-border-light dark:border-border-dark rounded-buttonhover:bg-surface-light dark:hover:bg-neutral-800 transition-all duration-standard ease-smooth disabled:opacity-50"
+          >
+            Cancel
+          </button>
+          <button
+            onClick={handleSave}
+            disabled={saving}
+            className="px-4 py-2 text-sm font-medium text-white dark:text-dark-background bg-accent-magenta dark:bg-accent-cyan rounded-buttonhover:opacity-90 transition-opacity disabled:opacity-50"
+          >
+            {saving ? 'Creating...' : 'Create Entry'}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}

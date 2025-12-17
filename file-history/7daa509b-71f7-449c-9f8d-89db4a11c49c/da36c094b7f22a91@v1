@@ -1,0 +1,335 @@
+---
+type: dashboard
+purpose: Index of all documentation files across project codebases
+created: 2025-12-14
+updated: 2025-12-14
+---
+
+# External Documentation Index
+
+> A comprehensive map of ALL documentation files scattered across project codebases. This creates the "hub" that connects _meta.notes to every doc in the workspace.
+
+---
+
+## Why This Matters
+
+Obsidian's Graph view shows disconnected nodes when docs don't link to each other. Since we can't edit files in codebases to link BACK to _meta.notes, we solve this by:
+
+1. **Indexing** every doc that exists in codebases
+2. **Linking** to them from _meta.notes using relative paths
+3. **Categorizing** by project and document type
+
+---
+
+## Quick Navigation
+
+| Project | Doc Count | Primary Docs |
+|---------|-----------|--------------|
+| [[#Neuman Brain]] | 66+ | CLAUDE.md, 40+ technical specs |
+| [[#Lazy Golfing]] | 20+ | 5 CLAUDE.md files, architecture docs |
+| [[#TJN Portfolio]] | 58+ | README, migration plan, 29+ skills |
+| [[#The Dead Robot]] | 60+ | Character bible, automation guides |
+| [[#TJN Home]] | 9 | Design guidelines, security audit |
+| [[#Toker League]] | 30+ | Platform docs, awards analysis |
+
+**Total: 240+ documentation files across all projects**
+
+---
+---
+
+# Neuman Brain
+
+> `system.knowledgebase/` — Privacy-first productivity dashboard
+
+## Constitution & Guidelines
+
+| Document | Path | Topics |
+|----------|------|--------|
+| **CLAUDE.md** | [[../system.knowledgebase/CLAUDE.md]] | Project constitution, P0 non-negotiables, workflow |
+| **tests/CLAUDE.md** | [[../system.knowledgebase/tests/CLAUDE.md]] | Testing patterns, Vitest, Playwright |
+
+## Product Documentation
+
+| Document | Path | Topics |
+|----------|------|--------|
+| Product Vision | [[../system.knowledgebase/docs/product/product_vision.md]] | Long-term strategy, success metrics |
+| Feature Map | [[../system.knowledgebase/docs/product/feature_map.md]] | Complete feature inventory |
+| Feature Roadmap | [[../system.knowledgebase/docs/product/feature_roadmap.md]] | Prioritization, timeline |
+| Phantom Shell Guide | [[../system.knowledgebase/docs/product/phantom_shell_guide.md]] | Terminal feature documentation |
+| Notes Page Research | [[../system.knowledgebase/docs/product/notes_page_research.md]] | Notes feature design |
+| UX Improvements Dec 2025 | [[../system.knowledgebase/docs/product/ux_improvements_december_2025.md]] | Recent enhancements |
+
+## Technical Documentation
+
+| Document | Path | Topics |
+|----------|------|--------|
+| Development Principles | [[../system.knowledgebase/docs/technical/development_principles.md]] | Core philosophy, code standards |
+| Widget Development Guide | [[../system.knowledgebase/docs/technical/widget_development_guide.md]] | Widget system architecture |
+| Design System | [[../system.knowledgebase/docs/technical/design_system.md]] | Colors, typography, spacing |
+| Color System | [[../system.knowledgebase/docs/technical/color_system.md]] | Semantic color tokens |
+| Spacing Standards | [[../system.knowledgebase/docs/technical/spacing_standards.md]] | Layout standards |
+| Local-First Architecture | [[../system.knowledgebase/docs/technical/local_first_architecture.md]] | IndexedDB, offline patterns |
+| Brain File Format | [[../system.knowledgebase/docs/technical/brain_file_format.md]] | Data serialization |
+| AI Provider Integration | [[../system.knowledgebase/docs/technical/ai_provider_integration.md]] | Multi-provider setup |
+| Bundle Optimization | [[../system.knowledgebase/docs/technical/bundle_optimization_guide.md]] | Performance techniques |
+| Tache Integration | [[../system.knowledgebase/docs/technical/tache_integration_guide.md]] | Prompt delegation |
+| Automation System | [[../system.knowledgebase/docs/technical/automation_system.md]] | Workflow engine |
+| Undo System | [[../system.knowledgebase/docs/technical/undo_system_architecture.md]] | State management |
+| Import/Export Spec | [[../system.knowledgebase/docs/technical/import_export_spec.md]] | Data formats |
+| Sidebar Component | [[../system.knowledgebase/docs/technical/sidebar_component_guide.md]] | Navigation patterns |
+
+## Security & Privacy
+
+| Document | Path | Topics |
+|----------|------|--------|
+| Privacy Model | [[../system.knowledgebase/docs/security_privacy/privacy_model.md]] | Local-first, E2EE |
+| Compliance | [[../system.knowledgebase/docs/security_privacy/compliance.md]] | GDPR, regulations |
+
+## Brand Documentation
+
+| Document | Path | Topics |
+|----------|------|--------|
+| Brand Guide | [[../system.knowledgebase/docs/brand/brand_guide.md]] | Logo, typography, voice |
+| Messaging | [[../system.knowledgebase/docs/brand/messaging.md]] | Value propositions |
+| Visual Standards | [[../system.knowledgebase/docs/brand/visual_inspiration_and_standards.md]] | Design patterns |
+
+## Business & Strategy
+
+| Document | Path | Topics |
+|----------|------|--------|
+| Master Plan | [[../system.knowledgebase/docs/strategy/master_plan.md]] | Strategic vision |
+| Business Model | [[../system.knowledgebase/docs/business/business_model.md]] | Revenue, pricing |
+| Go-to-Market | [[../system.knowledgebase/docs/business/go_to_market.md]] | Customer acquisition |
+| Competitive Landscape | [[../system.knowledgebase/docs/strategy/competitive_landscape.md]] | Market overview |
+| Risk Assessment | [[../system.knowledgebase/docs/strategy/risk_assessment.md]] | Risk mitigation |
+
+## User Guides
+
+| Document | Path | Topics |
+|----------|------|--------|
+| Getting Started | [[../system.knowledgebase/docs/user/getting_started.md]] | Quick start |
+| Notes Editor | [[../system.knowledgebase/docs/user/notes_editor.md]] | Lexical usage |
+| Tasks/Kanban | [[../system.knowledgebase/docs/user/tasks_kanban.md]] | Task management |
+| Calendar Events | [[../system.knowledgebase/docs/user/calendar_events.md]] | Scheduling |
+| Time Tracking | [[../system.knowledgebase/docs/user/time_tracking.md]] | Time capture |
+| AI Terminal Guide | [[../system.knowledgebase/docs/user/ai_terminal_guide.md]] | Terminal features |
+| Keyboard Shortcuts | [[../system.knowledgebase/docs/user/keyboard_shortcuts.md]] | All shortcuts |
+| Dashboard Widgets | [[../system.knowledgebase/docs/user/dashboard_widgets.md]] | Widget guide |
+| Backup/Sync Guide | [[../system.knowledgebase/docs/user/backup_sync_guide.md]] | Data backup |
+
+---
+
+# Lazy Golfing
+
+> `.lzg_platform/Lazy Golfing/` — Golf lifestyle platform
+
+## CLAUDE.md Files (5 Levels)
+
+| Document | Path | Topics |
+|----------|------|--------|
+| **Root CLAUDE.md** | [[../.lzg_platform/Lazy Golfing/CLAUDE.md]] | Monorepo guidelines, architecture |
+| **Backend CLAUDE.md** | [[../.lzg_platform/Lazy Golfing/lzg.backend/CLAUDE.md]] | NestJS patterns, security |
+| **Frontend CLAUDE.md** | [[../.lzg_platform/Lazy Golfing/lzg.home/CLAUDE.md]] | Next.js patterns, Miami Vice theme |
+| **Auth Module** | [[../.lzg_platform/Lazy Golfing/lzg.backend/src/auth/CLAUDE.md]] | OAuth, JWT, guards |
+| **Components** | [[../.lzg_platform/Lazy Golfing/lzg.home/src/components/CLAUDE.md]] | UI component standards |
+
+## Architecture & Planning
+
+| Document | Path | Topics |
+|----------|------|--------|
+| Product Roadmap | [[../.lzg_platform/Lazy Golfing/docs/plans/PRODUCT_ROADMAP.md]] | Vision, mission |
+| Feature Roadmap | [[../.lzg_platform/Lazy Golfing/docs/plans/FEATURE_ROADMAP.md]] | Feature list |
+| System Overview | [[../.lzg_platform/Lazy Golfing/docs/architecture/SYSTEM_OVERVIEW.md]] | High-level architecture |
+| Golf API Integration | [[../.lzg_platform/Lazy Golfing/lzg.backend/GOLF_API_INTEGRATION_GUIDE.md]] | API reference |
+| Tech Debt Register | [[../.lzg_platform/Lazy Golfing/docs/technical-debt/DEBT_REGISTER.md]] | Debt tracking |
+
+## Research & Design
+
+| Document | Path | Topics |
+|----------|------|--------|
+| Competitive Landscape | [[../.lzg_platform/Lazy Golfing/docs/research/COMPETITIVE_LANDSCAPE.md]] | Market analysis |
+| Design Inspiration | [[../.lzg_platform/Lazy Golfing/docs/design/DESIGN_INSPIRATION.md]] | Miami Vice theme |
+
+---
+
+# TJN Portfolio
+
+> `tjn.portfolio/` — Professional IT portfolio
+
+## Core Documentation
+
+| Document | Path | Topics |
+|----------|------|--------|
+| **CLAUDE.md** | [[../tjn.portfolio/CLAUDE.md]] | Development constitution |
+| **README.md** | [[../tjn.portfolio/README.md]] | Complete project overview |
+| **GEMINI.md** | [[../tjn.portfolio/GEMINI.md]] | Alternative AI guidelines |
+
+## Technical Docs
+
+| Document | Path | Topics |
+|----------|------|--------|
+| Project Structure | [[../tjn.portfolio/docs/PROJECT_STRUCTURE.md]] | Architecture |
+| V1 to V2 Migration | [[../tjn.portfolio/docs/V1_TO_V2_MIGRATION.md]] | Migration strategy |
+| V2 README | [[../tjn.portfolio/v2-src/README.md]] | React 19 stack |
+
+## Claude Automation
+
+| Document | Path | Topics |
+|----------|------|--------|
+| Workflow Checklist | [[../tjn.portfolio/.claude/workflow-checklist.md]] | Compliance |
+| Automation Guide | [[../tjn.portfolio/.claude/automation-guide.md]] | Git hooks |
+| Task Template | [[../tjn.portfolio/.claude/templates/task-template.md]] | Task format |
+
+## Skills (29+ Files)
+
+| Skill | Path | Topics |
+|-------|------|--------|
+| Codebase Documenter | [[../tjn.portfolio/.claude/skills/codebase-documenter/SKILL.md]] | Documentation generation |
+| Frontend Enhancer | [[../tjn.portfolio/.claude/skills/frontend-enhancer/SKILL.md]] | UI/UX design |
+| Test Specialist | [[../tjn.portfolio/.claude/skills/test-specialist/SKILL.md]] | Testing methodology |
+| Tech Debt Analyzer | [[../tjn.portfolio/.claude/skills/tech-debt-analyzer/SKILL.md]] | Debt analysis |
+| SEO Analytics Auditor | [[../tjn.portfolio/.claude/skills/seo-analytics-auditor/SKILL.md]] | SEO/analytics |
+
+---
+
+# The Dead Robot
+
+> `tdr.portfolio/` — Automated X account for tech education
+
+## Core Documentation
+
+| Document | Path | Topics |
+|----------|------|--------|
+| **CLAUDE.md** | [[../tdr.portfolio/CLAUDE.md]] | 15 development rules |
+| **README.md** | [[../tdr.portfolio/README.md]] | Project overview |
+| **FRONTEND.md** | [[../tdr.portfolio/FRONTEND.md]] | Frontend baseline |
+
+## Brand & Character
+
+| Document | Path | Topics |
+|----------|------|--------|
+| Character Bible | [[../tdr.portfolio/docs/brand/thedeadrobot-character-bible.md]] | AI persona definition |
+| Brand Guide | [[../tdr.portfolio/docs/brand/thedeadrobot-guide.md]] | Visual identity |
+
+## Automation Documentation (13 Files)
+
+| Document | Path | Topics |
+|----------|------|--------|
+| Setup Guide | [[../tdr.portfolio/docs/automation/SETUP.md]] | Zero-cost automation |
+| Quick Start | [[../tdr.portfolio/docs/automation/QUICKSTART.md]] | 10-minute setup |
+| AI Persona Guidelines | [[../tdr.portfolio/docs/automation/ai-persona-guidelines.md]] | Content standards |
+| X Posting Strategy | [[../tdr.portfolio/docs/automation/x-posting-strategy.md]] | Architecture overview |
+| Voice Customization | [[../tdr.portfolio/docs/automation/VOICE_CUSTOMIZATION.md]] | Persona customization |
+| Twitter 403 Fix | [[../tdr.portfolio/docs/automation/TWITTER_403_FIX.md]] | OAuth troubleshooting |
+| Troubleshooting | [[../tdr.portfolio/docs/automation/TROUBLESHOOTING.md]] | Common issues |
+| AI API Alternatives | [[../tdr.portfolio/docs/automation/AI_API_ALTERNATIVES.md]] | LLM providers |
+| Topics Management | [[../tdr.portfolio/docs/automation/keeping-topics-current.md]] | Topic updates |
+
+## Other Documentation
+
+| Document | Path | Topics |
+|----------|------|--------|
+| Topics Reference | [[../tdr.portfolio/docs/TOPICS.md]] | 100+ approved topics |
+| Hosting Guide | [[../tdr.portfolio/docs/deployment/hosting-guide.md]] | Deployment options |
+
+---
+
+# TJN Home
+
+> `tjn.home/` — Customizable browser startpage
+
+## Core Documentation
+
+| Document | Path | Topics |
+|----------|------|--------|
+| **CLAUDE.md** | [[../tjn.home/CLAUDE.md]] | Development guidelines |
+| **README.md** | [[../tjn.home/README.md]] | Complete documentation (738 lines) |
+
+## Planning & Design
+
+| Document | Path | Topics |
+|----------|------|--------|
+| Design Guidelines | [[../tjn.home/tasks/design-guidelines.md]] | Monochrome aesthetic |
+| Feature Roadmap V2 | [[../tjn.home/tasks/feature-roadmap-v2.md]] | 6-phase enhancement plan |
+| Security/Performance Audit | [[../tjn.home/tasks/security-performance-audit.md]] | 6 vulnerabilities, fixes |
+| Security Implementation | [[../tjn.home/tasks/security-performance-implementation.md]] | Fix implementation |
+
+---
+
+# Toker League
+
+> `tkl.home/` — Fantasy football league platform
+
+## Core Documentation
+
+| Document | Path | Topics |
+|----------|------|--------|
+| **CLAUDE.md** | [[../tkl.home/CLAUDE.md]] | Project overview |
+| **README.md** | [[../tkl.home/README.md]] | Quick start, features |
+| **CONTRIBUTING.md** | [[../tkl.home/CONTRIBUTING.md]] | Contribution guidelines |
+| **CHANGELOG.md** | [[../tkl.home/CHANGELOG.md]] | Version history |
+
+## Platform Documentation
+
+| Document | Path | Topics |
+|----------|------|--------|
+| Platform Documentation | [[../tkl.home/docs/PLATFORM_DOCUMENTATION.md]] | 2,000+ line tech guide |
+| Documentation Index | [[../tkl.home/docs/DOCUMENTATION_INDEX.md]] | Complete index |
+| Awards Analysis | [[../tkl.home/docs/AWARDS_ACCURACY_ANALYSIS.md]] | Awards system deep-dive |
+| API Reference | [[../tkl.home/docs/API_REFERENCE.md]] | `window.codexData` interface |
+| Troubleshooting | [[../tkl.home/docs/TROUBLESHOOTING.md]] | 10 issue categories |
+| Strategic Roadmap | [[../tkl.home/docs/STRATEGIC_ROADMAP_2025.md]] | Long-term planning |
+
+## Tools Documentation
+
+| Document | Path | Topics |
+|----------|------|--------|
+| Yahoo Sync README | [[../tkl.home/tools/yahoo-sync/README.md]] | Yahoo Fantasy sync |
+
+---
+
+# Document Categories Summary
+
+## By Type Across All Projects
+
+| Type | Count | Key Examples |
+|------|-------|--------------|
+| **CLAUDE.md Files** | 12 | Root + folder-specific guidelines |
+| **README.md Files** | 10+ | Project overviews |
+| **Technical Specs** | 40+ | Architecture, APIs, systems |
+| **User Guides** | 15+ | Feature documentation |
+| **Brand/Design** | 10+ | Visual identity, character bibles |
+| **Roadmaps/Plans** | 8+ | Feature roadmaps, strategies |
+| **Skills/Automation** | 30+ | Claude Code skills |
+| **Audits/Analysis** | 5+ | Security, performance, awards |
+
+---
+
+## Integration with Graph View
+
+To maximize graph connectivity:
+
+1. **Project files** → Link to this index AND specific docs
+2. **Concept files** → Link to relevant technical docs
+3. **This index** → Links OUT to all external docs
+
+### Recommended Links to Add
+
+**From Projects/ files:**
+```markdown
+## External Documentation
+→ [[Dashboards/External Docs Index#Neuman Brain|All Neuman Brain Docs]]
+→ [[../system.knowledgebase/CLAUDE.md|Project Constitution]]
+→ [[../system.knowledgebase/docs/README.md|Docs Hub]]
+```
+
+**From Concepts/ files:**
+```markdown
+## See Also
+→ [[../system.knowledgebase/docs/technical/local_first_architecture.md|Implementation in Neuman Brain]]
+```
+
+---
+
+*Last updated: 2025-12-14*
+*Total indexed: 240+ documentation files across 6 projects*

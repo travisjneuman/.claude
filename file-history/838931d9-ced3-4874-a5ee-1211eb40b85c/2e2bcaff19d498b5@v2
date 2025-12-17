@@ -1,0 +1,499 @@
+# Kanban: 100%+ Jira/Linear Parity Roadmap
+
+**Session ID:** 011CWKtxzgM5qHHf9DhdBYy6
+**Created:** 2025-01-17
+**Status:** 🎯 PLANNING
+**Goal:** Transform Kanban from 85% → 110% parity (beat all competitors)
+
+---
+
+## Executive Summary
+
+**Current State:** 85% Jira/Linear parity (good, but not enough)
+**Target State:** 110% parity (better than any competitor)
+**Philosophy:** Work better, more stable, more inviting for all skill levels, retain users through superior value
+
+**What We Have (Phase 1-4 Complete):**
+- ✅ Custom columns with templates
+- ✅ Rich card details (checklist, comments, activity log)
+- ✅ Visual progress indicators
+- ✅ Dual views (board + table)
+- ✅ Bulk operations
+- ✅ CSV export
+- ✅ Full undo/redo
+- ✅ Search & filters
+
+**What's Missing for 100% Parity:**
+- ❌ Subtasks (nested todo items within cards)
+- ❌ Card dependencies (blockers, blocked by)
+- ❌ Sprint planning (iterations, velocity tracking)
+- ❌ Story points / estimation
+- ❌ Assignees (multi-user support for later)
+- ❌ Labels (separate from tags)
+- ❌ Attachments (files, images)
+- ❌ Card templates
+- ❌ Swimlanes (group by assignee, priority, etc.)
+- ❌ Time tracking per card
+- ❌ Due date notifications
+- ❌ Card linking (relates to, duplicates)
+- ❌ Advanced automation rules
+- ❌ Custom fields
+- ❌ Board templates
+
+**What Will Make Us 110% (Better Than Competitors):**
+- 🚀 **AI-Powered Features** (no competitor has this well)
+  - AI task breakdown (one task → smart subtasks)
+  - AI estimation (analyze complexity, suggest points)
+  - AI standup reports (generate from activity)
+  - AI sprint summaries
+- 🚀 **Privacy-First Collaboration** (Jira/Linear don't have this)
+  - Local-first by default
+  - Optional E2EE sync
+  - Zero telemetry
+- 🚀 **Performance** (we're already 10x faster)
+  - <100ms interactions
+  - <1s load time
+  - Works offline
+- 🚀 **Beautiful UX** (simpler than Jira, more powerful than Linear)
+  - Beginner-friendly onboarding
+  - Progressive disclosure (simple → advanced)
+  - Keyboard-first power users
+  - Visual polish (animations, micro-interactions)
+- 🚀 **Integration with Other Features** (no competitor has this)
+  - Calendar integration (tasks auto-schedule)
+  - Time tracking integration (one-click start/stop)
+  - Notes integration (link cards to notes)
+  - Habit tracking integration (turn habits into recurring tasks)
+
+---
+
+## Gap Analysis: Us vs. Competitors
+
+### Jira (The Gold Standard for Dev Teams)
+
+**What Jira Has That We Don't:**
+1. **Subtasks** - Break tasks into smaller pieces
+2. **Dependencies** - "Blocked by" relationships
+3. **Sprint Planning** - Iterations with velocity tracking
+4. **Story Points** - Estimation and velocity
+5. **Custom Fields** - Infinite extensibility
+6. **JQL** - Advanced search query language
+7. **Workflows** - Custom status transitions
+8. **Swimlanes** - Group by assignee/priority
+9. **Release Management** - Version tracking
+10. **Time Tracking** - Log work, estimate remaining
+
+**What We Have That Jira Doesn't:**
+- ✅ Free forever (Jira: $7.50-15/user/month)
+- ✅ 10x faster (<1s vs 10s load)
+- ✅ Privacy-first (Jira: cloud-only)
+- ✅ Beautiful UX (Jira: cluttered, overwhelming)
+- ✅ Integrated suite (Notes, Calendar, Time Tracking, Habits)
+- ✅ AI-powered (coming)
+
+**Our Strategy:**
+- Implement subtasks, dependencies, story points, time tracking
+- Skip complex workflows (keep simple for 80% use cases)
+- Skip JQL (natural language search instead)
+- Add AI features Jira doesn't have
+
+---
+
+### Linear (The Modern Alternative)
+
+**What Linear Has That We Don't:**
+1. **Subtasks** (called "Sub-issues")
+2. **Dependencies** (blocking relationships)
+3. **Cycles** (sprints/iterations)
+4. **Estimates** (points/t-shirt sizes)
+5. **Projects** (group related issues)
+6. **Roadmaps** (visual timeline)
+7. **Triage** (inbox for new issues)
+8. **Keyboard shortcuts** (extensive)
+9. **Integrations** (GitHub, Slack, Figma)
+10. **Beautiful UI** (sleek, modern)
+
+**What We Have That Linear Doesn't:**
+- ✅ Free forever (Linear: $10-19/user/month)
+- ✅ Privacy-first (Linear: cloud-only)
+- ✅ Integrated suite (Notes, Calendar, Habits, Time Tracking)
+- ✅ Local-first (works offline)
+- ✅ Customizable (more than Linear)
+- ✅ AI-powered (coming)
+
+**Our Strategy:**
+- Match Linear's beautiful UX (we're close)
+- Implement subtasks, cycles, estimates
+- Skip integrations for now (focus on core)
+- Add AI features Linear doesn't have
+
+---
+
+### Notion (The All-In-One Workspace)
+
+**What Notion Has That We Don't:**
+1. **Databases** - Relational tables
+2. **Views** - Table, Board, Calendar, Gallery, Timeline
+3. **Formulas** - Calculated fields
+4. **Relations** - Link databases
+5. **Templates** - Pre-built workflows
+6. **AI** - Notion AI ($10/month)
+7. **Collaboration** - Real-time multi-user
+8. **Beautiful UI** - Polished, modern
+
+**What We Have That Notion Doesn't:**
+- ✅ Free forever (Notion: $10-18/user/month)
+- ✅ 10x faster (60KB vs 2MB bundle)
+- ✅ Privacy-first (Notion: cloud-only, tracks everything)
+- ✅ Local-first (Notion: requires internet)
+- ✅ Better PM features (bulk actions, CSV export, undo)
+- ✅ Integrated time tracking, habits
+
+**Our Strategy:**
+- Skip databases (overkill for 80% of users)
+- Focus on PM excellence (better than Notion's basic boards)
+- Add AI for free (Notion charges $10/month)
+
+---
+
+## Phased Implementation Plan
+
+### Phase 5: Subtasks & Dependencies (Week 11-13)
+
+**Goal:** 90% Jira/Linear parity
+**Estimated Time:** 16-24 hours
+
+**Features:**
+1. **Subtasks**
+   - Nested checklist items become subtasks
+   - Show subtask progress on card badge
+   - Filter by subtask completion
+   - Subtasks in list view
+
+2. **Dependencies**
+   - "Blocked by" and "Blocks" relationships
+   - Visual indicators on cards
+   - Dependency graph view (bonus)
+   - Prevent moving blocked cards
+
+**Why This Matters:**
+- Most requested PM feature
+- Essential for complex projects
+- Differentiates from basic todo apps
+
+---
+
+### Phase 6: Estimation & Time Tracking (Week 14-16)
+
+**Goal:** 95% Jira/Linear parity
+**Estimated Time:** 20-30 hours
+
+**Features:**
+1. **Story Points / Estimation**
+   - T-shirt sizes (XS, S, M, L, XL)
+   - Fibonacci points (1, 2, 3, 5, 8, 13)
+   - Show total points per column
+   - Velocity tracking (points completed per week)
+
+2. **Time Tracking Integration**
+   - One-click start timer from card
+   - Show time logged on card
+   - Time remaining estimate
+   - Burndown chart (bonus)
+
+**Why This Matters:**
+- Professional teams need estimation
+- Time tracking essential for billing
+- Velocity tracking improves planning
+
+---
+
+### Phase 7: Sprint Planning & Cycles (Week 17-19)
+
+**Goal:** 98% Jira/Linear parity
+**Estimated Time:** 24-36 hours
+
+**Features:**
+1. **Sprints / Cycles**
+   - Create sprint (name, start date, end date)
+   - Assign cards to sprint
+   - Sprint view (current/upcoming/past)
+   - Sprint velocity (points completed)
+   - Sprint burndown chart
+
+2. **Backlog Management**
+   - Separate backlog view
+   - Prioritize backlog (drag-drop)
+   - Pull cards into sprint
+   - Icebox (low priority items)
+
+**Why This Matters:**
+- Agile teams require sprints
+- Backlog grooming essential
+- Velocity tracking improves estimates
+
+---
+
+### Phase 8: Advanced Features (Week 20-24)
+
+**Goal:** 100% Jira/Linear parity
+**Estimated Time:** 32-48 hours
+
+**Features:**
+1. **Swimlanes**
+   - Group by assignee, priority, label, etc.
+   - Toggle swimlane view on/off
+   - Collapse/expand swimlanes
+
+2. **Card Linking**
+   - "Relates to" relationships
+   - "Duplicates" relationships
+   - Show linked cards in detail panel
+
+3. **Card Templates**
+   - Save card as template
+   - Create card from template
+   - Template library
+
+4. **Attachments**
+   - Upload files (images, PDFs, docs)
+   - Show thumbnails for images
+   - Download attachments
+   - IndexedDB storage (50GB+)
+
+5. **Custom Fields**
+   - Add custom text/number/date fields
+   - Show in detail panel
+   - Filter by custom fields
+
+**Why This Matters:**
+- Power users need advanced features
+- Custom fields = flexibility
+- Attachments = context
+
+---
+
+### Phase 9: AI-Powered Features (Week 25-30)
+
+**Goal:** 110% parity (better than all competitors)
+**Estimated Time:** 40-60 hours
+
+**Features:**
+1. **AI Task Breakdown**
+   - Input: One big task (e.g., "Build authentication system")
+   - Output: Smart subtasks with estimates
+   - Uses AI Terminal (already built!)
+
+2. **AI Estimation**
+   - Analyze task description + subtasks
+   - Suggest story points / t-shirt size
+   - Learn from past velocity
+
+3. **AI Sprint Summaries**
+   - Generate standup reports
+   - Summarize sprint progress
+   - Identify blockers/risks
+
+4. **AI Natural Language Commands**
+   - "Create task: Fix login bug, high priority, due Friday"
+   - "Move all high priority tasks to In Progress"
+   - "Show me tasks due this week with no assignee"
+
+5. **AI Smart Filters**
+   - "Show me overdue tasks"
+   - "What should I work on next?"
+   - "Find cards with no activity in 7 days"
+
+**Why This Matters:**
+- No competitor has this level of AI integration
+- AI makes PM tools accessible to non-experts
+- AI reduces tedious work (estimation, summarization)
+- We already have AI Terminal infrastructure!
+
+---
+
+### Phase 10: Polish & Delight (Week 31-35)
+
+**Goal:** Best-in-class UX (better than Linear's beautiful UI)
+**Estimated Time:** 32-48 hours
+
+**Features:**
+1. **Onboarding Flow**
+   - Welcome modal with tour
+   - Sample project with cards
+   - "Quick start" guide
+   - Progressive disclosure (hide advanced features)
+
+2. **Visual Polish**
+   - Smooth animations (card drag, column expand)
+   - Micro-interactions (hover states, loading states)
+   - Skeleton screens (no flash of empty)
+   - Dark mode perfection
+
+3. **Keyboard Shortcuts**
+   - Extensive shortcuts (Linear-level)
+   - Shortcut palette (Cmd+K)
+   - Customizable shortcuts
+
+4. **Mobile Responsive**
+   - Touch-friendly cards
+   - Swipe to move cards
+   - Mobile-optimized detail panel
+   - Offline support
+
+5. **Accessibility**
+   - Screen reader support
+   - Keyboard navigation (100%)
+   - Color contrast (WCAG AAA)
+   - Focus management
+
+**Why This Matters:**
+- UX is our competitive advantage
+- "Feels premium, costs nothing"
+- Accessibility = inclusivity = more users
+- Mobile support = always available
+
+---
+
+## Feature Comparison Table
+
+| Feature | Jira | Linear | Notion | **Neuman Brain** |
+|---------|------|--------|--------|------------------|
+| **Basic PM** |
+| Custom columns | ✅ | ✅ | ✅ | ✅ |
+| Card detail panel | ✅ | ✅ | ✅ | ✅ |
+| Comments | ✅ | ✅ | ✅ | ✅ |
+| Activity log | ✅ | ✅ | ✅ | ✅ |
+| Checklists | ✅ | ✅ | ✅ | ✅ |
+| Subtasks | ✅ | ✅ | ❌ | 🔜 Phase 5 |
+| Dependencies | ✅ | ✅ | ❌ | 🔜 Phase 5 |
+| **Views** |
+| Board view | ✅ | ✅ | ✅ | ✅ |
+| List view | ✅ | ✅ | ✅ | ✅ |
+| Calendar view | ✅ | ✅ | ✅ | 🔜 Phase 11 |
+| Timeline view | ✅ | ✅ | ✅ | 🔜 Phase 11 |
+| Swimlanes | ✅ | ✅ | ❌ | 🔜 Phase 8 |
+| **Agile Features** |
+| Sprint planning | ✅ | ✅ (Cycles) | ❌ | 🔜 Phase 7 |
+| Story points | ✅ | ✅ | ❌ | 🔜 Phase 6 |
+| Velocity tracking | ✅ | ✅ | ❌ | 🔜 Phase 7 |
+| Burndown charts | ✅ | ❌ | ❌ | 🔜 Phase 7 |
+| **Productivity** |
+| Bulk actions | ✅ | ✅ | ❌ | ✅ |
+| CSV export | ✅ | ✅ | ✅ | ✅ |
+| Undo/redo | ✅ | ✅ | ✅ | ✅ |
+| Search/filters | ✅ | ✅ | ✅ | ✅ |
+| Time tracking | ✅ | ❌ | ❌ | 🔜 Phase 6 |
+| Attachments | ✅ | ✅ | ✅ | 🔜 Phase 8 |
+| Templates | ✅ | ✅ | ✅ | 🔜 Phase 8 |
+| Custom fields | ✅ | ✅ | ✅ | 🔜 Phase 8 |
+| **AI Features** |
+| AI task breakdown | ❌ | ❌ | ✅ ($10/mo) | 🚀 Phase 9 (FREE) |
+| AI estimation | ❌ | ❌ | ❌ | 🚀 Phase 9 (FREE) |
+| AI summaries | ❌ | ❌ | ✅ ($10/mo) | 🚀 Phase 9 (FREE) |
+| Natural language | ❌ | ❌ | ❌ | 🚀 Phase 9 (FREE) |
+| **Integrations** |
+| Notes | ❌ | ❌ | ✅ | ✅ |
+| Calendar | ❌ | ❌ | ✅ | ✅ |
+| Time Tracking | ✅ | ❌ | ❌ | ✅ |
+| Habits | ❌ | ❌ | ❌ | ✅ |
+| **Core Advantages** |
+| **Price** | $7.50-15/user/mo | $10-19/user/mo | $10-18/user/mo | **FREE** |
+| **Performance** | Slow (10s) | Fast (2s) | Slow (5s) | **Fastest (<1s)** |
+| **Privacy** | Cloud-only | Cloud-only | Cloud-only | **Local-first** |
+| **Offline** | ❌ | ❌ | ❌ | **✅** |
+| **Bundle Size** | ~4MB | ~1.5MB | ~2MB | **60KB** |
+| **Open Source** | ❌ | ❌ | ❌ | **✅** |
+
+---
+
+## Success Metrics
+
+### Quantitative Goals
+
+**Performance:**
+- ✅ <1s page load (already achieved)
+- ✅ <100ms interactions (already achieved)
+- ✅ <100KB main bundle (101KB, close!)
+- 🔜 Works offline (Phase 10)
+
+**Feature Parity:**
+- ✅ 85% Jira/Linear (Phase 4 complete)
+- 🔜 90% parity (Phase 5: subtasks, dependencies)
+- 🔜 95% parity (Phase 6: estimation, time tracking)
+- 🔜 98% parity (Phase 7: sprints, cycles)
+- 🔜 100% parity (Phase 8: advanced features)
+- 🔜 110% parity (Phase 9: AI features)
+
+**User Experience:**
+- 🔜 Onboarding completion rate >80%
+- 🔜 Keyboard shortcut usage >30% of actions
+- 🔜 Mobile usage >20% of sessions
+- 🔜 Accessibility audit score >95%
+
+### Qualitative Goals
+
+**"Work Better"**
+- ✅ Faster than Jira/Linear/Notion
+- ✅ More intuitive than Jira
+- 🔜 As beautiful as Linear
+- 🔜 More powerful than Notion
+
+**"More Stable"**
+- ✅ No crashes (Zustand + IndexedDB = rock solid)
+- ✅ Undo/redo prevents mistakes
+- 🔜 Offline support prevents data loss
+- 🔜 E2EE prevents unauthorized access (Q2 2026)
+
+**"More Inviting"**
+- 🔜 Onboarding flow for beginners
+- 🔜 Progressive disclosure (simple → advanced)
+- ✅ Beautiful UI (minimal, professional)
+- 🔜 Accessible to all skill levels
+
+**"Retain Users"**
+- ✅ Free forever (no paywall surprise)
+- ✅ Privacy-first (no data mining)
+- 🔜 AI features (provide unique value)
+- ✅ Integrated suite (no tool switching)
+
+---
+
+## Time Estimates
+
+| Phase | Features | Hours | Weeks (40hr) |
+|-------|----------|-------|--------------|
+| Phase 5 | Subtasks, Dependencies | 16-24 | 2-3 |
+| Phase 6 | Estimation, Time Tracking | 20-30 | 2-4 |
+| Phase 7 | Sprints, Backlog | 24-36 | 3-5 |
+| Phase 8 | Advanced Features | 32-48 | 4-6 |
+| Phase 9 | AI Features | 40-60 | 5-8 |
+| Phase 10 | Polish & Delight | 32-48 | 4-6 |
+| **Total** | **100% → 110% Parity** | **164-246** | **20-32 weeks** |
+
+**Realistic Timeline:**
+- **Aggressive:** 20 weeks (5 months) - May 2026
+- **Moderate:** 26 weeks (6.5 months) - July 2026
+- **Conservative:** 32 weeks (8 months) - September 2026
+
+**Recommendation:** Moderate pace (26 weeks) to maintain quality and avoid burnout.
+
+---
+
+## Next Immediate Steps
+
+1. **Get User Approval** on this roadmap
+2. **Prioritize Phases 5-6** (subtasks, dependencies, estimation) - highest ROI
+3. **Create detailed task files** for Phase 5 (subtasks + dependencies)
+4. **Implement Phase 5** (2-3 weeks)
+5. **Gather user feedback** before Phase 6
+
+---
+
+## Review Section
+
+**To be filled when work is complete.**
+
+---
+
+**Status:** 🎯 AWAITING USER APPROVAL

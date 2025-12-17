@@ -1,0 +1,512 @@
+/**
+ * NotesList Component
+ *
+ * Notes list container with filtering, sorting, and bulk operations.
+ * Extracted from Notes.tsx as part of the Notes Page Revolution.
+ *
+ * Features:
+ * - Filtered/sorted notes display
+ * - Bulk selection and tag operations
+ * - Template creation integration
+ * - Export modal trigger
+ * - Empty state with call-to-action
+ */
+
+import React, { useState, useMemo, useCallback, useRef } from 'react';
+import {
+  DndContext,
+  PointerSensor,
+  useSensor,
+  useSensors,
+  closestCenter,
+} from '@dnd-kit/core';
+import type { DragEndEvent, DragStartEvent } from '@dnd-kit/core';
+import { FileText, FileDown, Sparkles, Trash2, FolderOpen } from 'lucide-react';
+import { useFoldersStore } from '../../stores/useFoldersStore';
+import { useNotesStore } from '../../stores/useNotesStore';
+import { PromptDialog } from '../PromptDialog';
+import { ConfirmDialog } from '../ConfirmDialog';
+import { FolderPickerModal } from './FolderPickerModal';
+import { NoteListItem } from './NoteListItem';
+import { tagMatchesFilter } from '../../utils/tagHierarchy';
+import { logger } from '../../services/logger';
+import type { Note } from '../../types/notes';
+
+const log = logger.module('NotesList');
+
+export interface NotesListProps {
+  activeTags: string[];
+  onOpenTemplateLibrary: () => void;
+  onOpenExportModal: () => void;
+  /** Context menu handler for notes */
+  onNoteContextMenu?: (e: React.MouseEvent, note: Note) => void;
+}
+
+export const NotesList: React.FC<NotesListProps> = ({
+  activeTags,
+  onOpenTemplateLibrary,
+  onOpenExportModal,
+  onNoteContextMenu,
+}) => {
+  const activeFolderId = useFoldersStore((state) => state.activeFolderId);
+  // Get raw notes and store config (stable references)
+  const notesObj = useNotesStore((state) => state.notes);
+  const sortConfig = useNotesStore((state) => state.sortConfig);
+  const filter = useNotesStore((state) => state.filter);
+  const activeNoteId = useNotesStore((state) => state.activeNoteId);
+  const createNote = useNotesStore((state) => state.createNote);
+  const deleteNote = useNotesStore((state) => state.deleteNote);
+  const bulkAddTag = useNotesStore((state) => state.bulkAddTag);
+  const bulkRemoveTag = useNotesStore((state) => state.bulkRemoveTag);
+  const moveNote = useNotesStore((state) => state.moveNote);
+  const setParentNote = useNotesStore((state) => state.setParentNote);
+  const canSetParentNote = useNotesStore((state) => state.canSetParentNote);
+
+  // DnD state for note movement
+  const [isDisablingClicks, setIsDisablingClicks] = useState(false);
+  const disableTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Configure drag sensors (require 5px movement to start dragging)
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 5,
+      },
+    })
+  );
+
+  // Drag handlers
+  const handleDragStart = useCallback((_event: DragStartEvent) => {
+    if (disableTimeoutRef.current) {
+      clearTimeout(disableTimeoutRef.current);
+    }
+    setIsDisablingClicks(true);
+  }, []);
+
+  const handleDragEnd = useCallback(
+    (event: DragEndEvent) => {
+      const { active, over } = event;
+
+      if (over && active.data.current?.type === 'note') {
+        const noteId = active.data.current.noteId as string;
+        const overId = over.id as string;
+
+        // Handle note dropped on another note (create subnote)
+        if (over.data.current?.type === 'note-target') {
+          const targetNoteId = over.data.current.noteId as string;
+          if (noteId !== targetNoteId && canSetParentNote(noteId, targetNoteId)) {
+            setParentNote(noteId, targetNoteId);
+            log.debug('Note nested as subnote via drag', { noteId, parentNoteId: targetNoteId });
+          }
+        }
+        // Handle note dropped on a folder
+        else if (!overId.startsWith('note-')) {
+          const targetFolderId = overId === 'root-drop-zone' ? null : overId;
+          moveNote(noteId, targetFolderId);
+          log.debug('Note moved via drag', { noteId, targetFolderId });
+        }
+      }
+
+      // Re-enable clicks after a delay
+      disableTimeoutRef.current = setTimeout(() => {
+        setIsDisablingClicks(false);
+        disableTimeoutRef.current = null;
+      }, 150);
+    },
+    [moveNote, setParentNote, canSetParentNote]
+  );
+
+  // Bulk operations state
+  const [selectionMode, setSelectionMode] = useState(false);
+  const [selectedNoteIds, setSelectedNoteIds] = useState<Set<string>>(new Set());
+  const [bulkTagDialogOpen, setBulkTagDialogOpen] = useState(false);
+  const [bulkTagAction, setBulkTagAction] = useState<'add' | 'remove' | null>(null);
+  const [bulkTagValue, setBulkTagValue] = useState('');
+  const [bulkDeleteDialogOpen, setBulkDeleteDialogOpen] = useState(false);
+  const [bulkMoveDialogOpen, setBulkMoveDialogOpen] = useState(false);
+
+  // Track last selected note for shift+click range selection
+  const lastSelectedNoteIdRef = useRef<string | null>(null);
+
+  // Bulk operations handlers
+  const toggleSelectionMode = () => {
+    setSelectionMode(!selectionMode);
+    if (selectionMode) {
+      setSelectedNoteIds(new Set());
+    }
+  };
+
+  const toggleNoteSelection = useCallback((noteId: string) => {
+    setSelectedNoteIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(noteId)) {
+        next.delete(noteId);
+      } else {
+        next.add(noteId);
+      }
+      return next;
+    });
+    lastSelectedNoteIdRef.current = noteId;
+  }, []);
+
+  const deselectAll = () => {
+    setSelectedNoteIds(new Set());
+  };
+
+  const handleBulkAddTag = () => {
+    setBulkTagAction('add');
+    setBulkTagDialogOpen(true);
+  };
+
+  const handleBulkRemoveTag = () => {
+    setBulkTagAction('remove');
+    setBulkTagDialogOpen(true);
+  };
+
+  const confirmBulkTagAction = (value: string) => {
+    if (!value.trim() || selectedNoteIds.size === 0) return;
+
+    if (bulkTagAction === 'add') {
+      bulkAddTag(Array.from(selectedNoteIds), value.trim());
+    } else if (bulkTagAction === 'remove') {
+      bulkRemoveTag(Array.from(selectedNoteIds), value.trim());
+    }
+
+    // Clear selection and close dialog
+    setBulkTagDialogOpen(false);
+    setBulkTagValue('');
+    setSelectedNoteIds(new Set());
+    setSelectionMode(false);
+  };
+
+  // Bulk delete handler
+  const handleBulkDelete = () => {
+    setBulkDeleteDialogOpen(true);
+  };
+
+  const confirmBulkDelete = () => {
+    selectedNoteIds.forEach((noteId) => {
+      deleteNote(noteId);
+    });
+    log.debug('Bulk deleted notes', { count: selectedNoteIds.size });
+    setBulkDeleteDialogOpen(false);
+    setSelectedNoteIds(new Set());
+    setSelectionMode(false);
+  };
+
+  // Bulk move handler
+  const handleBulkMove = () => {
+    setBulkMoveDialogOpen(true);
+  };
+
+  const confirmBulkMove = (targetFolderId: string | null) => {
+    selectedNoteIds.forEach((noteId) => {
+      moveNote(noteId, targetFolderId);
+    });
+    log.debug('Bulk moved notes', { count: selectedNoteIds.size, targetFolderId });
+    setBulkMoveDialogOpen(false);
+    setSelectedNoteIds(new Set());
+    setSelectionMode(false);
+  };
+
+  // Compute filtered/sorted notes with useMemo
+  const notes = useMemo(() => {
+    // Filter by folder
+    // If activeFolderId is null, show ALL notes (not just notes with null folderId)
+    let filtered =
+      activeFolderId === null
+        ? Object.values(notesObj) // Show all notes when "All Notes" is selected
+        : Object.values(notesObj).filter((note) => note.folderId === activeFolderId);
+
+    // Filter by tags (AND logic - note must have ALL selected tags or their children)
+    if (activeTags.length > 0) {
+      filtered = filtered.filter((note) =>
+        activeTags.every((filterTag) =>
+          note.tags.some((noteTag) => tagMatchesFilter(noteTag, filterTag))
+        )
+      );
+    }
+
+    // Apply filter (archived, pinned, favorites, etc.)
+    switch (filter) {
+      case 'favorites':
+        filtered = filtered.filter((note) => note.isFavorite);
+        break;
+      case 'pinned':
+        filtered = filtered.filter((note) => note.isPinned);
+        break;
+      case 'archived':
+        filtered = filtered.filter((note) => note.isArchived);
+        break;
+      case 'unarchived':
+        filtered = filtered.filter((note) => !note.isArchived);
+        break;
+    }
+
+    // Sort notes
+    const sorted = [...filtered].sort((a, b) => {
+      let comparison = 0;
+      switch (sortConfig.field) {
+        case 'title':
+          comparison = a.title.localeCompare(b.title);
+          break;
+        case 'createdAt':
+          comparison = a.createdAt.getTime() - b.createdAt.getTime();
+          break;
+        case 'updatedAt':
+          comparison = a.updatedAt.getTime() - b.updatedAt.getTime();
+          break;
+      }
+      return sortConfig.order === 'asc' ? comparison : -comparison;
+    });
+
+    // Always pin pinned notes to top
+    return sorted.sort((a, b) => {
+      if (a.isPinned && !b.isPinned) return -1;
+      if (!a.isPinned && b.isPinned) return 1;
+      return 0;
+    });
+  }, [notesObj, activeFolderId, sortConfig, filter, activeTags]);
+
+  // selectAll needs notes, so defined after useMemo
+  const selectAll = () => {
+    const allIds = notes.map((n) => n.id);
+    setSelectedNoteIds(new Set(allIds));
+  };
+
+  // Handle Ctrl/Shift+click for multi-select (needs notes for range selection)
+  const handleMultiSelectClick = useCallback(
+    (noteId: string, event: React.MouseEvent) => {
+      // Auto-enter selection mode on first modifier+click
+      if (!selectionMode) {
+        setSelectionMode(true);
+      }
+
+      if (event.shiftKey && lastSelectedNoteIdRef.current) {
+        // Shift+click: Range selection
+        const lastIndex = notes.findIndex((n) => n.id === lastSelectedNoteIdRef.current);
+        const currentIndex = notes.findIndex((n) => n.id === noteId);
+
+        if (lastIndex !== -1 && currentIndex !== -1) {
+          const startIdx = Math.min(lastIndex, currentIndex);
+          const endIdx = Math.max(lastIndex, currentIndex);
+
+          setSelectedNoteIds((prev) => {
+            const next = new Set(prev);
+            for (let i = startIdx; i <= endIdx; i++) {
+              next.add(notes[i].id);
+            }
+            return next;
+          });
+          lastSelectedNoteIdRef.current = noteId;
+        }
+      } else {
+        // Ctrl/Cmd+click: Toggle individual selection
+        toggleNoteSelection(noteId);
+      }
+    },
+    [selectionMode, notes, toggleNoteSelection]
+  );
+
+  return (
+    <div className="flex-1 flex flex-col min-h-0 overflow-hidden">
+      <div className="p-5 flex flex-col flex-1 min-h-0">
+        {/* Notes header */}
+        <div className="flex items-center justify-between mb-4 flex-shrink-0">
+          <h3 className="text-sm font-medium uppercase tracking-wide text-text-light-secondary dark:text-text-dark-secondary">
+            Notes ({notes.length})
+          </h3>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={onOpenExportModal}
+              className="px-3 py-1.5 rounded-lg text-sm font-medium border border-border-light dark:border-border-dark text-text-light-secondary dark:text-text-dark-secondary hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated transition-colors flex items-center gap-1"
+              title="Export notes (Cmd+Shift+E)"
+            >
+              <FileDown className="w-4 h-4" />
+              Export
+            </button>
+            <button
+              onClick={toggleSelectionMode}
+              className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+                selectionMode
+                  ? 'bg-accent-cyan/20 dark:bg-accent-magenta/20 text-accent-cyan dark:text-accent-magenta'
+                  : 'border border-border-light dark:border-border-dark text-text-light-secondary dark:text-text-dark-secondary hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated'
+              }`}
+            >
+              {selectionMode ? 'Cancel' : 'Select'}
+            </button>
+            <button
+              onClick={onOpenTemplateLibrary}
+              className="px-3 py-1.5 bg-accent-purple text-white rounded-lg hover:bg-accent-purple-hover transition-colors text-sm font-medium flex items-center gap-1"
+              title="Create note from template"
+            >
+              <Sparkles className="w-4 h-4" />
+              Template
+            </button>
+            <button
+              onClick={() => createNote({ folderId: activeFolderId })}
+              className="px-3 py-1.5 bg-gradient-button-primary text-white rounded-lg hover:shadow-glow-magenta transition-all text-sm font-medium"
+            >
+              + New
+            </button>
+          </div>
+        </div>
+
+        {/* Bulk Operations Toolbar */}
+        {selectionMode && selectedNoteIds.size > 0 && (
+          <div className="mb-4 p-3 rounded-lg bg-accent-blue/10 dark:bg-accent-blue/20 border border-accent-blue/30 flex-shrink-0">
+            <div className="flex items-center justify-between">
+              <span className="text-sm font-medium text-text-light-primary dark:text-text-dark-primary">
+                {selectedNoteIds.size} note{selectedNoteIds.size !== 1 ? 's' : ''} selected
+              </span>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={selectAll}
+                  className="px-2 py-1 text-xs font-medium rounded border border-border-light dark:border-border-dark hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated transition-colors text-text-light-secondary dark:text-text-dark-secondary"
+                >
+                  Select All
+                </button>
+                <button
+                  onClick={deselectAll}
+                  className="px-2 py-1 text-xs font-medium rounded border border-border-light dark:border-border-dark hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated transition-colors text-text-light-secondary dark:text-text-dark-secondary"
+                >
+                  Deselect All
+                </button>
+                <button
+                  onClick={handleBulkAddTag}
+                  className="px-3 py-1 text-xs font-medium rounded bg-accent-blue text-white hover:bg-accent-blue-hover transition-colors"
+                >
+                  Add Tag
+                </button>
+                <button
+                  onClick={handleBulkRemoveTag}
+                  className="px-3 py-1 text-xs font-medium rounded bg-accent-red/20 text-accent-red hover:bg-accent-red/30 transition-colors"
+                >
+                  Remove Tag
+                </button>
+                <button
+                  onClick={handleBulkMove}
+                  className="px-3 py-1 text-xs font-medium rounded bg-accent-purple/20 text-accent-purple hover:bg-accent-purple/30 transition-colors flex items-center gap-1"
+                >
+                  <FolderOpen className="w-3 h-3" />
+                  Move
+                </button>
+                <button
+                  onClick={handleBulkDelete}
+                  className="px-3 py-1 text-xs font-medium rounded bg-accent-red text-white hover:bg-accent-red-hover transition-colors flex items-center gap-1"
+                >
+                  <Trash2 className="w-3 h-3" />
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Notes list - scrollable with DnD */}
+        <DndContext
+          sensors={sensors}
+          collisionDetection={closestCenter}
+          onDragStart={handleDragStart}
+          onDragEnd={handleDragEnd}
+        >
+          <div className="flex-1 overflow-y-auto space-y-2 min-h-0">
+            {notes.map((note) => (
+              <NoteListItem
+                key={note.id}
+                note={note}
+                isActive={note.id === activeNoteId}
+                isSelectionMode={selectionMode}
+                isSelected={selectedNoteIds.has(note.id)}
+                onToggleSelection={toggleNoteSelection}
+                onMultiSelectClick={handleMultiSelectClick}
+                isDraggable={!selectionMode}
+                isDisablingClicks={isDisablingClicks}
+                onContextMenu={onNoteContextMenu}
+              />
+            ))}
+
+          {/* Empty state */}
+          {notes.length === 0 && (
+            <div className="text-center py-16 animate-fade-in">
+              <div className="flex justify-center mb-6">
+                <div className="p-6 bg-gradient-to-br from-accent-magenta/10 to-accent-cyan/10 dark:from-accent-cyan/10 dark:to-accent-magenta/10 rounded-2xl">
+                  <FileText className="w-16 h-16 text-accent-cyan dark:text-accent-magenta" />
+                </div>
+              </div>
+              <h3 className="text-xl font-bold text-text-light-primary dark:text-text-dark-primary mb-3">
+                {activeTags.length > 0 ? 'No notes match these tags' : 'No notes in this folder'}
+              </h3>
+              <p className="text-text-light-secondary dark:text-text-dark-secondary mb-2 max-w-sm mx-auto">
+                {activeTags.length > 0
+                  ? 'Try removing some tags or create a new note'
+                  : 'Start capturing your thoughts, ideas, and knowledge'}
+              </p>
+              <p className="text-sm text-text-light-tertiary dark:text-text-dark-tertiary mb-6">
+                Tip: Use{' '}
+                <kbd className="px-2 py-1 bg-surface-light-elevated dark:bg-surface-dark-elevated border border-border-light dark:border-border-dark rounded text-xs font-mono">
+                  Cmd+N
+                </kbd>{' '}
+                to create notes quickly
+              </p>
+              <button
+                onClick={() => createNote({ folderId: activeFolderId })}
+                className="px-6 py-3 bg-gradient-button-primary text-white rounded-lg hover:shadow-glow-magenta transition-all font-medium inline-flex items-center gap-2"
+              >
+                <FileText className="w-5 h-5" />
+                Create Your First Note
+              </button>
+            </div>
+          )}
+          </div>
+        </DndContext>
+      </div>
+
+      {/* Bulk Tag Dialog */}
+      {bulkTagDialogOpen && (
+        <PromptDialog
+          isOpen={true}
+          onClose={() => {
+            setBulkTagDialogOpen(false);
+            setBulkTagValue('');
+          }}
+          onConfirm={confirmBulkTagAction}
+          title={
+            bulkTagAction === 'add'
+              ? 'Add Tag to Selected Notes'
+              : 'Remove Tag from Selected Notes'
+          }
+          message={
+            bulkTagAction === 'add'
+              ? `Enter tag name to add to ${selectedNoteIds.size} note${selectedNoteIds.size !== 1 ? 's' : ''}:`
+              : `Enter tag name to remove from ${selectedNoteIds.size} note${selectedNoteIds.size !== 1 ? 's' : ''}:`
+          }
+          defaultValue={bulkTagValue}
+          placeholder="Tag name"
+          confirmText={bulkTagAction === 'add' ? 'Add Tag' : 'Remove Tag'}
+        />
+      )}
+
+      {/* Bulk Delete Confirmation Dialog */}
+      <ConfirmDialog
+        isOpen={bulkDeleteDialogOpen}
+        onClose={() => setBulkDeleteDialogOpen(false)}
+        onConfirm={confirmBulkDelete}
+        title="Delete Selected Notes"
+        message={`Are you sure you want to delete ${selectedNoteIds.size} note${selectedNoteIds.size !== 1 ? 's' : ''}? This action cannot be undone.`}
+        confirmText="Delete"
+        variant="danger"
+      />
+
+      {/* Bulk Move Folder Picker */}
+      <FolderPickerModal
+        isOpen={bulkMoveDialogOpen}
+        onClose={() => setBulkMoveDialogOpen(false)}
+        onSelect={confirmBulkMove}
+        title={`Move ${selectedNoteIds.size} Note${selectedNoteIds.size !== 1 ? 's' : ''} to...`}
+        currentFolderId={activeFolderId}
+        itemType="note"
+      />
+    </div>
+  );
+};

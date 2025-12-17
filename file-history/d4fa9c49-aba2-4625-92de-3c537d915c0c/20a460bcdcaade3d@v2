@@ -1,0 +1,75 @@
+# src/widgets/CLAUDE.md — Widget System
+
+## Scope
+Widget components under `src/widgets/`. Dashboard widgets live in `Dashboard/`, other feature widgets in their respective folders (Kanban, NotesEditor, etc.).
+
+## Widget Categories
+| Category | Examples |
+|----------|----------|
+| **core** | MyDayWidget, TasksSummaryWidget, RecentNotesWidget |
+| **productivity** | PomodoroWidget, QuickAddWidget, TasksQuickAddWidget, UpcomingEventsWidget |
+| **news** | HackerNewsWidget, ProductHuntWidget, AINewsWidget, DevToWidget, RedditWidget |
+| **finance** | CryptoWidget, CurrencyWidget, StockMarketWidget |
+| **fun** | JokeWidget, FactsWidget, QuoteWidget, BoredWidget, TypingTestWidget, MemoryGameWidget |
+| **visual** | ColorPaletteWidget, PixelArtWidget, UnsplashWidget, MotivationalWidget |
+| **dev** | GitHubWidget, GitHubTrendingWidget, AwesomeListsWidget, RepoStatsWidget, PackageStatsWidget |
+| **utility** | WeatherForecastWidget, WorldClockWidget, CalculatorWidget, UnitConverterWidget, QRCodeWidget, CountdownWidget, ClipboardWidget, IPInfoWidget, DictionaryWidget, WikipediaWidget, ShortcutsWidget, UptimeWidget, AirQualityWidget, AnalyticsWidget, TabManagerWidget |
+
+## Key Files
+- `Dashboard/BaseWidget.tsx` — Standard wrapper (loading/error/refresh states)
+- `Dashboard/WidgetRegistry.ts` — Widget discovery + metadata registry
+- `Kanban.tsx`, `NotesEditor.tsx`, `Weather.tsx`, `WeatherMap.tsx`, `Map.tsx` — Feature widgets
+
+## Non-negotiables
+- **Use `BaseWidget`:** All dashboard widgets must wrap in `BaseWidget` for consistent UX.
+- **Lazy loading:** Widgets discovered via Vite glob in `WidgetRegistry.ts`. Never import directly.
+- **Registration required:** Add to `WIDGET_FILE_NAMES` + `WIDGET_REGISTRY` with: `id`, `title`, `category`, `icon`, `description`.
+- **Semantic tokens:** Use Tailwind semantic classes. No hardcoded colors/sizes.
+- **Effect-based fetching:** Network calls in `useEffect` with cancellation handling.
+- **Accessibility:** ARIA labels, keyboard nav, visible focus.
+
+## Adding a Dashboard Widget
+1. Create `Dashboard/MyWidget.tsx`:
+```tsx
+export default function MyWidget() {
+  const [data, setData] = useState<T | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    async function load() {
+      try {
+        const result = await fetchData();
+        if (!cancelled) setData(result);
+      } catch (err) {
+        if (!cancelled) setError(String(err));
+      }
+    }
+    load();
+    return () => { cancelled = true; };
+  }, []);
+
+  if (error) return <ErrorMessage message={error} />;
+  if (!data) return <Loader />;
+
+  return (
+    <BaseWidget title="My Widget">
+      {/* Content */}
+    </BaseWidget>
+  );
+}
+```
+2. Add `'MyWidget'` to `WIDGET_FILE_NAMES` in `WidgetRegistry.ts`
+3. Add registry entry with metadata
+4. Run `npm run build` to verify bundle size
+
+## Anti-patterns
+- Registering widgets outside `WidgetRegistry.ts`.
+- Network calls in component body (use `useEffect`).
+- Hardcoded pixel sizes (use responsive units).
+- Heavy main-thread computation (offload to workers or memoize).
+- Global variables for state (use stores or local state).
+
+## Related
+- Widget guide: `docs/technical/widget_development_guide.md`
+- Stores: `src/stores/CLAUDE.md`

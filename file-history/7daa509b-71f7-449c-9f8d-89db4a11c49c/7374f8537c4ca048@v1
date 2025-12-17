@@ -1,0 +1,338 @@
+---
+type: concept
+category: ai
+adoption: experimental
+aliases: [st]
+related:
+  - "[[Python]]"
+  - "[[LLM]]"
+  - "[[Supabase]]"
+projects:
+  - "[[Projects/Archon]]"
+created: 2025-12-14
+updated: 2025-12-14
+---
+
+# Streamlit
+
+> The fastest way to build data apps in Python. Create interactive web applications with pure Python — no frontend experience required.
+
+---
+
+## Overview
+
+Streamlit transforms Python scripts into shareable web apps:
+- **Pure Python** — No HTML, CSS, or JavaScript required
+- **Reactive** — Widgets automatically trigger reruns
+- **Data-native** — Built-in support for pandas, charts, ML
+- **Rapid prototyping** — From script to app in minutes
+
+### Why Streamlit?
+
+| Feature | Benefit |
+|---------|---------|
+| **No frontend code** | Python developers stay productive |
+| **Hot reload** | See changes instantly |
+| **Widgets** | Buttons, sliders, file uploads built-in |
+| **Deployment** | Streamlit Cloud (free tier) |
+| **Community** | Rich component ecosystem |
+
+---
+
+## Usage in Our Stack
+
+### Archon — Meta-Agent Builder
+
+Streamlit provides the UI for Archon's agent creation workflow:
+
+```python
+# archon/app.py
+import streamlit as st
+from archon.builder import AgentBuilder
+
+st.title("Archon - Agent Builder")
+
+# Agent configuration
+agent_name = st.text_input("Agent Name")
+model = st.selectbox("Model", ["llama-3.1-70b", "mixtral-8x7b"])
+tools = st.multiselect("Tools", ["web_search", "code_exec", "file_ops"])
+
+if st.button("Create Agent"):
+    builder = AgentBuilder()
+    agent = builder.create(name=agent_name, model=model, tools=tools)
+    st.success(f"Created agent: {agent.id}")
+```
+
+**Key UI elements:**
+- Agent configuration forms
+- Tool selection interface
+- Real-time agent testing
+- Deployment status dashboard
+
+---
+
+## Key Concepts
+
+### Basic App Structure
+
+```python
+import streamlit as st
+
+st.title("My App")
+st.write("Hello, world!")
+
+# Sidebar
+with st.sidebar:
+    option = st.selectbox("Choose", ["A", "B", "C"])
+
+# Main content
+if option == "A":
+    st.write("You selected A")
+```
+
+### Widgets
+
+```python
+# Text input
+name = st.text_input("Name")
+
+# Number input
+age = st.number_input("Age", min_value=0, max_value=120)
+
+# Slider
+value = st.slider("Value", 0, 100, 50)
+
+# Select box
+choice = st.selectbox("Select", ["Option 1", "Option 2"])
+
+# Multi-select
+selected = st.multiselect("Select multiple", ["A", "B", "C"])
+
+# File upload
+file = st.file_uploader("Upload file", type=["csv", "txt"])
+
+# Button
+if st.button("Submit"):
+    st.write("Submitted!")
+```
+
+### Session State
+
+Persist values across reruns:
+
+```python
+# Initialize
+if "count" not in st.session_state:
+    st.session_state.count = 0
+
+# Update
+if st.button("Increment"):
+    st.session_state.count += 1
+
+st.write(f"Count: {st.session_state.count}")
+```
+
+### Caching
+
+Prevent expensive recomputation:
+
+```python
+@st.cache_data
+def load_data(path):
+    return pd.read_csv(path)
+
+@st.cache_resource
+def init_model():
+    return load_heavy_model()
+```
+
+---
+
+## Layout
+
+### Columns
+
+```python
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    st.metric("Users", 1000, 10)
+with col2:
+    st.metric("Revenue", "$5K", "-5%")
+with col3:
+    st.metric("Active", 85, "2%")
+```
+
+### Tabs
+
+```python
+tab1, tab2 = st.tabs(["Data", "Charts"])
+
+with tab1:
+    st.dataframe(df)
+with tab2:
+    st.line_chart(df)
+```
+
+### Expanders
+
+```python
+with st.expander("Advanced Options"):
+    advanced_setting = st.checkbox("Enable advanced mode")
+```
+
+### Containers
+
+```python
+placeholder = st.empty()
+placeholder.text("Loading...")
+# Later
+placeholder.text("Done!")
+```
+
+---
+
+## Data Display
+
+### DataFrames
+
+```python
+import pandas as pd
+
+df = pd.DataFrame({"A": [1, 2, 3], "B": [4, 5, 6]})
+
+st.dataframe(df)  # Interactive
+st.table(df)      # Static
+st.data_editor(df)  # Editable
+```
+
+### Charts
+
+```python
+# Built-in charts
+st.line_chart(df)
+st.bar_chart(df)
+st.area_chart(df)
+
+# Matplotlib/Plotly
+import matplotlib.pyplot as plt
+fig, ax = plt.subplots()
+ax.plot([1, 2, 3])
+st.pyplot(fig)
+```
+
+### Metrics
+
+```python
+st.metric(
+    label="Temperature",
+    value="70 °F",
+    delta="1.2 °F"
+)
+```
+
+---
+
+## Best Practices
+
+### Performance
+
+1. **Use caching** — `@st.cache_data` for data, `@st.cache_resource` for models
+2. **Lazy loading** — Don't load all data on start
+3. **Pagination** — For large datasets
+4. **Async operations** — Use spinners for long operations
+
+```python
+with st.spinner("Processing..."):
+    result = expensive_operation()
+st.success("Done!")
+```
+
+### Code Organization
+
+```
+archon/
+├── app.py              # Main Streamlit entry
+├── pages/              # Multi-page app
+│   ├── 1_create.py
+│   ├── 2_test.py
+│   └── 3_deploy.py
+├── components/         # Reusable UI components
+└── utils/              # Business logic
+```
+
+### State Management
+
+1. **Session state for UI** — Form values, selections
+2. **Database for persistence** — User data, agent configs
+3. **Clear separation** — UI state vs app data
+
+---
+
+## Multi-Page Apps
+
+```
+pages/
+├── 1_Home.py
+├── 2_Dashboard.py
+└── 3_Settings.py
+```
+
+Pages automatically appear in sidebar navigation.
+
+---
+
+## Deployment
+
+### Streamlit Cloud
+
+```bash
+# Create requirements.txt
+streamlit
+pandas
+...
+
+# Push to GitHub, connect to Streamlit Cloud
+```
+
+### Docker
+
+```dockerfile
+FROM python:3.11-slim
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+COPY . .
+EXPOSE 8501
+CMD ["streamlit", "run", "app.py", "--server.port=8501"]
+```
+
+---
+
+## Configuration
+
+```toml
+# .streamlit/config.toml
+[theme]
+primaryColor = "#ff0080"
+backgroundColor = "#0e0e0e"
+secondaryBackgroundColor = "#1e1e1e"
+textColor = "#ffffff"
+
+[server]
+port = 8501
+headless = true
+```
+
+---
+
+## Resources
+
+- [Streamlit Documentation](https://docs.streamlit.io/)
+- [Component Gallery](https://streamlit.io/components)
+- [Streamlit Cloud](https://streamlit.io/cloud)
+- [Cheat Sheet](https://docs.streamlit.io/library/cheatsheet)
+
+---
+
+*Last updated: 2025-12-14*

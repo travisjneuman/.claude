@@ -1,0 +1,253 @@
+/**
+ * Password Prompt Component
+ * Handles encryption password setup and unlock for AI provider API keys
+ *
+ * Features:
+ * - Setup mode: Create new password with confirmation
+ * - Unlock mode: Enter existing password
+ * - Password strength validation (min 12 chars, complexity)
+ * - Configurable expiry (daily/weekly/monthly)
+ * - Show/hide password toggle
+ * - Security tips and best practices
+ */
+
+import { useState } from 'react';
+import { Modal } from './Modal';
+import { validatePassword, hashPassword } from '../services/encryption';
+
+interface PasswordPromptProps {
+  isOpen: boolean;
+  onSubmit: (password: string, passwordHash: string, duration: 'daily' | 'weekly' | 'monthly') => void;
+  onCancel: () => void;
+  mode: 'setup' | 'unlock';
+  existingPasswordHash?: string;
+}
+
+export function PasswordPrompt({
+  isOpen,
+  onSubmit,
+  onCancel,
+  mode,
+  existingPasswordHash,
+}: PasswordPromptProps) {
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [duration, setDuration] = useState<'daily' | 'weekly' | 'monthly'>('weekly');
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+
+    // Validate password
+    const validation = validatePassword(password);
+    if (!validation.valid) {
+      setError(validation.message);
+      return;
+    }
+
+    // Setup mode: Check password confirmation
+    if (mode === 'setup') {
+      if (password !== confirmPassword) {
+        setError('Passwords do not match. Please try again.');
+        return;
+      }
+
+      // Create password hash and submit
+      const hash = hashPassword(password);
+      onSubmit(password, hash, duration);
+    } else {
+      // Unlock mode: Verify password against existing hash
+      const hash = hashPassword(password);
+      if (hash !== existingPasswordHash) {
+        setError('Incorrect password. Please try again.');
+        return;
+      }
+
+      onSubmit(password, hash, duration);
+    }
+
+    // Reset form
+    setPassword('');
+    setConfirmPassword('');
+    setError(null);
+  };
+
+  const handleCancel = () => {
+    setPassword('');
+    setConfirmPassword('');
+    setError(null);
+    onCancel();
+  };
+
+  // Real-time password strength indicator
+  const getPasswordStrength = (pwd: string): { strength: 'weak' | 'medium' | 'strong'; color: string } => {
+    if (pwd.length < 12) return { strength: 'weak', color: 'text-red-500' };
+
+    let score = 0;
+    if (pwd.length >= 16) score++;
+    if (/[a-z]/.test(pwd) && /[A-Z]/.test(pwd)) score++;
+    if (/\d/.test(pwd)) score++;
+    if (/[^a-zA-Z0-9]/.test(pwd)) score++;
+
+    if (score >= 3) return { strength: 'strong', color: 'text-green-500' };
+    if (score >= 2) return { strength: 'medium', color: 'text-yellow-500' };
+    return { strength: 'weak', color: 'text-red-500' };
+  };
+
+  const passwordStrength = password ? getPasswordStrength(password) : null;
+
+  return (
+    <Modal
+      isOpen={isOpen}
+      onClose={handleCancel}
+      title={mode === 'setup' ? 'Setup Encryption Password' : 'Unlock API Keys'}
+      maxWidth="md"
+    >
+      <form onSubmit={handleSubmit} className="space-y-4">
+        {/* Mode Description */}
+        <div className="text-sm text-text-light-secondary dark:text-text-dark-secondary">
+          {mode === 'setup' ? (
+            <>
+              <p className="mb-2">
+                Create a strong password to encrypt your AI provider API keys. This password is:
+              </p>
+              <ul className="list-disc list-inside space-y-1 text-xs">
+                <li>Never stored or transmitted</li>
+                <li>Required to decrypt your API keys</li>
+                <li>Cannot be recovered if forgotten</li>
+              </ul>
+            </>
+          ) : (
+            <p>Enter your password to decrypt and access your saved API keys.</p>
+          )}
+        </div>
+
+        {/* Password Input */}
+        <div>
+          <label className="block text-sm font-medium text-text-light-primary dark:text-text-dark-primary mb-1">
+            Password
+          </label>
+          <div className="relative">
+            <input
+              type={showPassword ? 'text' : 'password'}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full px-3 py-2 bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-blue text-text-light-primary dark:text-text-dark-primary"
+              placeholder={mode === 'setup' ? 'Enter a strong password' : 'Enter your password'}
+              required
+              minLength={12}
+              autoFocus
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-2 top-1/2 -translate-y-1/2 text-text-light-secondary dark:text-text-dark-secondary hover:text-text-light-primary dark:hover:text-text-dark-primary text-xs"
+            >
+              {showPassword ? 'Hide' : 'Show'}
+            </button>
+          </div>
+
+          {/* Password Strength Indicator (Setup Mode Only) */}
+          {mode === 'setup' && password && passwordStrength && (
+            <div className="mt-1 flex items-center gap-2">
+              <div className="flex-1 h-1 bg-surface-light-elevated dark:bg-surface-dark-elevated rounded-full overflow-hidden">
+                <div
+                  className={`h-full transition-all duration-300 ${
+                    passwordStrength.strength === 'strong'
+                      ? 'bg-green-500 w-full'
+                      : passwordStrength.strength === 'medium'
+                      ? 'bg-yellow-500 w-2/3'
+                      : 'bg-red-500 w-1/3'
+                  }`}
+                />
+              </div>
+              <span className={`text-xs ${passwordStrength.color}`}>
+                {passwordStrength.strength.charAt(0).toUpperCase() + passwordStrength.strength.slice(1)}
+              </span>
+            </div>
+          )}
+        </div>
+
+        {/* Confirm Password (Setup Mode Only) */}
+        {mode === 'setup' && (
+          <div>
+            <label className="block text-sm font-medium text-text-light-primary dark:text-text-dark-primary mb-1">
+              Confirm Password
+            </label>
+            <input
+              type={showPassword ? 'text' : 'password'}
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              className="w-full px-3 py-2 bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-blue text-text-light-primary dark:text-text-dark-primary"
+              placeholder="Re-enter your password"
+              required
+              minLength={12}
+            />
+          </div>
+        )}
+
+        {/* Password Expiry Duration (Setup Mode Only) */}
+        {mode === 'setup' && (
+          <div>
+            <label className="block text-sm font-medium text-text-light-primary dark:text-text-dark-primary mb-1">
+              Password Expiry
+            </label>
+            <select
+              value={duration}
+              onChange={(e) => setDuration(e.target.value as 'daily' | 'weekly' | 'monthly')}
+              className="w-full px-3 py-2 bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-blue text-text-light-primary dark:text-text-dark-primary"
+            >
+              <option value="daily">Daily (re-enter every day)</option>
+              <option value="weekly">Weekly (re-enter every 7 days)</option>
+              <option value="monthly">Monthly (re-enter every 30 days)</option>
+            </select>
+            <p className="mt-1 text-xs text-text-light-secondary dark:text-text-dark-secondary">
+              You'll be prompted to re-enter your password when it expires. More frequent = more secure.
+            </p>
+          </div>
+        )}
+
+        {/* Error Message */}
+        {error && (
+          <div className="p-3 bg-red-500/10 border border-red-500/20 rounded-lg">
+            <p className="text-sm text-red-500">{error}</p>
+          </div>
+        )}
+
+        {/* Security Tips (Setup Mode Only) */}
+        {mode === 'setup' && (
+          <div className="p-3 bg-accent-blue/10 border border-accent-blue/20 rounded-lg">
+            <p className="text-xs font-medium text-text-light-primary dark:text-text-dark-primary mb-1">
+              Password Tips:
+            </p>
+            <ul className="text-xs text-text-light-secondary dark:text-text-dark-secondary space-y-0.5">
+              <li>• Use at least 12 characters (16+ recommended)</li>
+              <li>• Mix uppercase, lowercase, numbers, and symbols</li>
+              <li>• Use a password manager to generate and store it</li>
+              <li>• Never reuse this password elsewhere</li>
+            </ul>
+          </div>
+        )}
+
+        {/* Action Buttons */}
+        <div className="flex gap-3 pt-2">
+          <button
+            type="button"
+            onClick={handleCancel}
+            className="flex-1 px-4 py-2 bg-surface-light-elevated dark:bg-surface-dark-elevated hover:bg-surface-light dark:hover:bg-surface-dark border border-border-light dark:border-border-dark rounded-lg text-text-light-primary dark:text-text-dark-primary transition-colors"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            className="flex-1 px-4 py-2 bg-accent-blue hover:bg-accent-blue-hover text-white rounded-lg transition-colors font-medium"
+          >
+            {mode === 'setup' ? 'Create Password' : 'Unlock'}
+          </button>
+        </div>
+      </form>
+    </Modal>
+  );
+}

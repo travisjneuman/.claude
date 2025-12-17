@@ -1,0 +1,82 @@
+/**
+ * DependencyLine Component
+ * Renders SVG arrow connecting dependent tasks
+ */
+
+import type { Task } from '../../types';
+import { dateToX, ROW_HEIGHT, type ZoomLevel } from './utils';
+
+interface DependencyLineProps {
+  sourceTask: Task;
+  targetTask: Task;
+  sourceRowIndex: number;
+  targetRowIndex: number;
+  timelineStart: Date;
+  zoom: ZoomLevel;
+}
+
+export function DependencyLine({
+  sourceTask,
+  targetTask,
+  sourceRowIndex,
+  targetRowIndex,
+  timelineStart,
+  zoom,
+}: DependencyLineProps) {
+  // Skip if either task doesn't have dates
+  if (!sourceTask.dueDate || !targetTask.startDate) {
+    return null;
+  }
+
+  // Calculate start/end points
+  const sourceDueDate = new Date(sourceTask.dueDate);
+  const targetStartDate = new Date(targetTask.startDate);
+
+  // X positions (150px offset for swimlane labels)
+  const sourceX = 150 + dateToX(sourceDueDate, timelineStart, zoom);
+  const targetX = 150 + dateToX(targetStartDate, timelineStart, zoom);
+
+  // Y positions (center of each task bar)
+  const sourceY = sourceRowIndex * ROW_HEIGHT + ROW_HEIGHT / 2;
+  const targetY = targetRowIndex * ROW_HEIGHT + ROW_HEIGHT / 2;
+
+  // Generate path for curved arrow
+  // Use bezier curve for smooth connection
+  const midX = (sourceX + targetX) / 2;
+  const path = `M ${sourceX} ${sourceY}
+                Q ${midX} ${sourceY}, ${midX} ${(sourceY + targetY) / 2}
+                Q ${midX} ${targetY}, ${targetX - 10} ${targetY}`;
+
+  return (
+    <g className="dependency-line">
+      {/* Arrow path */}
+      <path
+        d={path}
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={2}
+        className="text-accent-magenta/50 dark:text-accent-cyan/50"
+        markerEnd="url(#arrowhead)"
+      />
+
+      {/* Arrowhead marker */}
+      <defs>
+        <marker
+          id="arrowhead"
+          markerWidth="10"
+          markerHeight="10"
+          refX="9"
+          refY="3"
+          orient="auto"
+          markerUnits="strokeWidth"
+        >
+          <path
+            d="M0,0 L0,6 L9,3 z"
+            fill="currentColor"
+            className="text-accent-magenta/50 dark:text-accent-cyan/50"
+          />
+        </marker>
+      </defs>
+    </g>
+  );
+}

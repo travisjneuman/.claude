@@ -1,0 +1,426 @@
+#!/usr/bin/env python3
+"""
+Notability Extraction Script
+Extracts content from .note files and converts to Markdown format.
+- Extracts embedded PDFs and images to assets folder
+- Creates Markdown files with frontmatter metadata
+- Preserves all content in portable format
+"""
+
+import os
+import re
+import json
+import shutil
+import zipfile
+import plistlib
+from pathlib import Path
+from datetime import datetime, timedelta
+from collections import defaultdict
+import csv
+
+# Configuration
+BASE_PATH = Path(r"D:\Proton Drive\My files\Documents\Personal\Notebooks")
+OUTPUT_DIR = BASE_PATH / "_converted"
+ASSETS_DIR = OUTPUT_DIR / "assets"
+MARKDOWN_DIR = OUTPUT_DIR / "markdown"
+INPUT_CSV = BASE_PATH / "_scripts" / "output" / "inventory.csv"
+DUPLICATES_JSON = BASE_PATH / "_scripts" / "output" / "duplicates.json"
+LOG_FILE = BASE_PATH / "_scripts" / "output" / "extraction_log.json"
+
+# Processing mode
+PROCESS_MODE = "recommended_only"  # Options: "all", "recommended_only", "unique_only"
+
+def ensure_dirs():
+    """Create output directories."""
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    ASSETS_DIR.mkdir(parents=True, exist_ok=True)
+    MARKDOWN_DIR.mkdir(parents=True, exist_ok=True)
+
+def sanitize_filename(name: str) -> str:
+    """Sanitize filename for filesystem."""
+    # Remove or replace invalid characters
+    invalid_chars = '<>:"/\\|?*'
+    for char in invalid_chars:
+        name = name.replace(char, '_')
+    # Collapse multiple underscores/spaces
+    name = re.sub(r'[_\s]+', ' ', name).strip()
+    # Limit length
+    if len(name) > 200:
+        name = name[:200]
+    return name
+
+def parse_apple_date(ns_time: float) -> str:
+    """Convert Apple NSDate timestamp to ISO format."""
+    try:
+        # Apple epoch is January 1, 2001
+        apple_epoch = datetime(2001, 1, 1)
+        dt = apple_epoch + timedelta(seconds=ns_time)
+        return dt.isoformat()
+    except:
+        return ""
+
+def extract_metadata(note_path: Path) -> dict:
+    """Extract metadata from a Notability .note file."""
+    metadata = {
+        'title': note_path.stem,
+        'subject': '',
+        'created_date': '',
+        'modified_date': '',
+        'uuid': '',
+        'has_recording': False,
+        'source_file': str(note_path),
+    }
+
+    try:
+        with zipfile.ZipFile(note_path, 'r') as z:
+            for name in z.namelist():
+                if name.endswith('metadata.plist'):
+                    with z.open(name) as f:
+                        meta = plistlib.load(f)
+                        objects = meta.get('$objects', [])
+
+                        # Extract strings
+                        strings = [o for o in objects if isinstance(o, str) and len(o) > 1 and o != '$null']
+                        potential_titles = [s for s in strings if not (
+                            len(s) == 36 and s.count('-') == 4 or
+                            s in ['unsortedNotesKey', 'NSKeyedArchiver', 'NSDate', 'SessionInfo',
+                                  'NSMutableDictionary', 'NSDictionary', 'NSObject']
+                        )]
+
+                        if potential_titles:
+                            metadata['title'] = potential_titles[0]
+                        if len(potential_titles) > 1 and potential_titles[1] != metadata['title']:
+                            metadata['subject'] = potential_titles[1]
+
+                        # Find UUID
+                        for s in strings:
+                            if len(s) == 36 and s.count('-') == 4:
+                                metadata['uuid'] = s
+                                break
+
+                        # Extract dates
+                        for obj in objects:
+                            if isinstance(obj, dict) and 'NS.time' in obj:
+                                date_str = parse_apple_date(obj['NS.time'])
+                                if date_str:
+                                    if not metadata['created_date']:
+                                        metadata['created_date'] = date_str
+                                    elif not metadata['modified_date']:
+                                        metadata['modified_date'] = date_str
+                    break
+    except Exception as e:
+        metadata['error'] = str(e)
+
+    return metadata
+
+def extract_assets(note_path: Path, output_base: Path) -> list:
+    """Extract PDFs and images from a .note file."""
+    assets = []
+
+    try:
+        with zipfile.ZipFile(note_path, 'r') as z:
+            for name in z.namelist():
+                # Skip directories and non-asset files
+                if name.endswith('/'):
+                    continue
+
+                # Check for PDFs
+                if name.lower().endswith('.pdf'):
+                    asset_name = Path(name).name
+                    output_path = output_base / 'pdfs' / asset_name
+                    output_path.parent.mkdir(parents=True, exist_ok=True)
+
+                    with z.open(name) as src:
+                        with open(output_path, 'wb') as dst:
+                            dst.write(src.read())
+
+                    assets.append({
+                        'type': 'pdf',
+                        'original_path': name,
+                        'output_path': str(output_path.relative_to(OUTPUT_DIR)),
+                        'filename': asset_name,
+                    })
+
+                # Check for images
+                elif any(name.lower().endswith(ext) for ext in ['.jpg', '.jpeg', '.png', '.gif']):
+                    # Skip thumbnails
+                    if 'thumb' in name.lower() or 'thumbnail' in name.lower():
+                        continue
+
+                    asset_name = Path(name).name
+                    output_path = output_base / 'images' / asset_name
+                    output_path.parent.mkdir(parents=True, exist_ok=True)
+
+                    with z.open(name) as src:
+                        with open(output_path, 'wb') as dst:
+                            dst.write(src.read())
+
+                    assets.append({
+                        'type': 'image',
+                        'original_path': name,
+                        'output_path': str(output_path.relative_to(OUTPUT_DIR)),
+                        'filename': asset_name,
+                    })
+
+                # Check for audio recordings
+                elif any(name.lower().endswith(ext) for ext in ['.m4a', '.mp3', '.wav', '.caf']):
+                    asset_name = Path(name).name
+                    output_path = output_base / 'recordings' / asset_name
+                    output_path.parent.mkdir(parents=True, exist_ok=True)
+
+                    with z.open(name) as src:
+                        with open(output_path, 'wb') as dst:
+                            dst.write(src.read())
+
+                    assets.append({
+                        'type': 'recording',
+                        'original_path': name,
+                        'output_path': str(output_path.relative_to(OUTPUT_DIR)),
+                        'filename': asset_name,
+                    })
+
+    except Exception as e:
+        assets.append({'error': str(e)})
+
+    return assets
+
+def extract_thumbnail(note_path: Path, output_base: Path) -> str:
+    """Extract the best thumbnail from a .note file."""
+    try:
+        with zipfile.ZipFile(note_path, 'r') as z:
+            # Prefer higher resolution thumbnails
+            thumb_priorities = ['thumb6x.png', 'thumb3x.png', 'thumb2x.png', 'thumb.png']
+
+            for thumb_name in thumb_priorities:
+                for name in z.namelist():
+                    if name.endswith(thumb_name):
+                        output_path = output_base / 'thumbnails' / f"{note_path.stem}_thumb.png"
+                        output_path.parent.mkdir(parents=True, exist_ok=True)
+
+                        with z.open(name) as src:
+                            with open(output_path, 'wb') as dst:
+                                dst.write(src.read())
+
+                        return str(output_path.relative_to(OUTPUT_DIR))
+    except:
+        pass
+
+    return ""
+
+def create_markdown(metadata: dict, assets: list, thumbnail: str, output_path: Path):
+    """Create a Markdown file with frontmatter and asset links."""
+    lines = []
+
+    # YAML frontmatter
+    lines.append('---')
+    lines.append(f'title: "{metadata.get("title", "Untitled")}"')
+    if metadata.get('subject'):
+        lines.append(f'subject: "{metadata["subject"]}"')
+    if metadata.get('created_date'):
+        lines.append(f'created: {metadata["created_date"]}')
+    if metadata.get('modified_date'):
+        lines.append(f'modified: {metadata["modified_date"]}')
+    lines.append(f'source: notability')
+    lines.append(f'source_file: "{Path(metadata.get("source_file", "")).name}"')
+    if metadata.get('uuid'):
+        lines.append(f'uuid: {metadata["uuid"]}')
+    lines.append('---')
+    lines.append('')
+
+    # Title
+    lines.append(f'# {metadata.get("title", "Untitled")}')
+    lines.append('')
+
+    # Note about original format
+    lines.append('> **Note:** This is a converted Notability file. Original handwritten content')
+    lines.append('> is preserved as embedded PDFs and images below.')
+    lines.append('')
+
+    # Thumbnail preview
+    if thumbnail:
+        lines.append('## Preview')
+        lines.append(f'![Thumbnail](../{thumbnail})')
+        lines.append('')
+
+    # Embedded PDFs
+    pdfs = [a for a in assets if a.get('type') == 'pdf']
+    if pdfs:
+        lines.append('## Embedded PDFs')
+        for pdf in pdfs:
+            lines.append(f'- [{pdf["filename"]}](../{pdf["output_path"]})')
+        lines.append('')
+
+    # Embedded Images
+    images = [a for a in assets if a.get('type') == 'image']
+    if images:
+        lines.append('## Images')
+        for img in images:
+            lines.append(f'![{img["filename"]}](../{img["output_path"]})')
+            lines.append('')
+
+    # Audio Recordings
+    recordings = [a for a in assets if a.get('type') == 'recording']
+    if recordings:
+        lines.append('## Audio Recordings')
+        for rec in recordings:
+            lines.append(f'- [{rec["filename"]}](../{rec["output_path"]})')
+        lines.append('')
+
+    # Write file
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    with open(output_path, 'w', encoding='utf-8') as f:
+        f.write('\n'.join(lines))
+
+def get_files_to_process() -> list:
+    """Determine which .note files to process based on mode."""
+    files_to_process = []
+
+    if PROCESS_MODE == "all":
+        # Process all .note files
+        for root, dirs, files in os.walk(BASE_PATH):
+            # Skip output directories
+            if '_converted' in root or '_scripts' in root:
+                continue
+            for f in files:
+                if f.endswith('.note'):
+                    files_to_process.append(Path(root) / f)
+
+    elif PROCESS_MODE == "recommended_only":
+        # Only process recommended versions from duplicate analysis
+        if not DUPLICATES_JSON.exists():
+            print("ERROR: duplicates.json not found. Run 03_analyze_duplicates.py first.")
+            return []
+
+        with open(DUPLICATES_JSON, 'r', encoding='utf-8') as f:
+            duplicates = json.load(f)
+
+        # Add unique files
+        for item in duplicates.get('unique_files', []):
+            path = Path(item['file'])
+            if path.suffix == '.note':
+                files_to_process.append(path)
+
+        # Add recommended versions from byte-identical groups
+        for group in duplicates.get('byte_identical', []):
+            path = Path(group['keep']['path'])
+            files_to_process.append(path)
+
+        # Add recommended versions from variant groups
+        for group in duplicates.get('version_variants', []):
+            for version in group['versions']:
+                if version['is_recommended']:
+                    files_to_process.append(Path(version['path']))
+                    break
+
+    elif PROCESS_MODE == "unique_only":
+        # Only process files with no duplicates
+        if not DUPLICATES_JSON.exists():
+            print("ERROR: duplicates.json not found. Run 03_analyze_duplicates.py first.")
+            return []
+
+        with open(DUPLICATES_JSON, 'r', encoding='utf-8') as f:
+            duplicates = json.load(f)
+
+        for item in duplicates.get('unique_files', []):
+            path = Path(item['file'])
+            if path.suffix == '.note':
+                files_to_process.append(path)
+
+    return files_to_process
+
+def main():
+    print("=" * 60)
+    print("Notability Extraction Script")
+    print("=" * 60)
+    print(f"Mode: {PROCESS_MODE}")
+
+    ensure_dirs()
+
+    # Get files to process
+    files = get_files_to_process()
+    print(f"\nFiles to process: {len(files)}")
+
+    if not files:
+        print("No files to process!")
+        return
+
+    # Process each file
+    log = {
+        'processed': [],
+        'errors': [],
+        'stats': {
+            'total': len(files),
+            'success': 0,
+            'errors': 0,
+            'pdfs_extracted': 0,
+            'images_extracted': 0,
+            'recordings_extracted': 0,
+        }
+    }
+
+    for i, note_path in enumerate(files):
+        print(f"\r  Processing {i+1}/{len(files)}: {note_path.name[:50]}...", end='', flush=True)
+
+        try:
+            # Create unique output folder based on sanitized filename
+            safe_name = sanitize_filename(note_path.stem)
+            asset_folder = ASSETS_DIR / safe_name
+            md_path = MARKDOWN_DIR / f"{safe_name}.md"
+
+            # Skip if already processed
+            if md_path.exists():
+                continue
+
+            # Extract metadata
+            metadata = extract_metadata(note_path)
+
+            # Extract assets
+            assets = extract_assets(note_path, asset_folder)
+
+            # Extract thumbnail
+            thumbnail = extract_thumbnail(note_path, asset_folder)
+
+            # Create Markdown file
+            create_markdown(metadata, assets, thumbnail, md_path)
+
+            # Update stats
+            log['stats']['success'] += 1
+            log['stats']['pdfs_extracted'] += sum(1 for a in assets if a.get('type') == 'pdf')
+            log['stats']['images_extracted'] += sum(1 for a in assets if a.get('type') == 'image')
+            log['stats']['recordings_extracted'] += sum(1 for a in assets if a.get('type') == 'recording')
+
+            log['processed'].append({
+                'source': str(note_path),
+                'markdown': str(md_path),
+                'assets': len(assets),
+            })
+
+        except Exception as e:
+            log['stats']['errors'] += 1
+            log['errors'].append({
+                'file': str(note_path),
+                'error': str(e),
+            })
+
+    print(f"\n\nWriting log to: {LOG_FILE}")
+    with open(LOG_FILE, 'w', encoding='utf-8') as f:
+        json.dump(log, f, indent=2)
+
+    # Print summary
+    print("\n" + "=" * 60)
+    print("EXTRACTION SUMMARY")
+    print("=" * 60)
+    print(f"Total files: {log['stats']['total']}")
+    print(f"Successfully processed: {log['stats']['success']}")
+    print(f"Errors: {log['stats']['errors']}")
+    print(f"\nAssets extracted:")
+    print(f"  PDFs: {log['stats']['pdfs_extracted']}")
+    print(f"  Images: {log['stats']['images_extracted']}")
+    print(f"  Recordings: {log['stats']['recordings_extracted']}")
+    print(f"\nOutput directories:")
+    print(f"  Markdown: {MARKDOWN_DIR}")
+    print(f"  Assets: {ASSETS_DIR}")
+    print("=" * 60)
+
+if __name__ == '__main__':
+    main()

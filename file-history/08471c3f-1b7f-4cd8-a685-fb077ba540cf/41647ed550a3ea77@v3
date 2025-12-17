@@ -1,0 +1,595 @@
+# Diagram/Whiteboard Page (P2 #7)
+
+**Priority:** P2 (Medium)
+**Estimated Time:** 8-10 hours
+**Status:** Planning
+**Created:** 2025-11-26
+**Updated:** 2025-11-26 - Changed from widget to full page per user request
+
+---
+
+## Overview
+
+Add a dedicated Diagram/Whiteboard page using Excalidraw for local-first, hand-drawn style diagramming. This provides a full-featured diagramming experience accessible from the Notes section navigation, enabling users to create flowcharts, diagrams, mind maps, and freeform sketches directly in Neuman Brain without external tools.
+
+## Problem Statement
+
+Users currently have:
+- **No visual diagramming** - Can't create flowcharts, diagrams, or visual planning
+- **External tool dependency** - Must use Draw.io, Excalidraw web, or Miro separately
+- **No integration** - Diagrams can't link to notes/tasks
+- **Context switching** - Breaks flow when planning visually
+
+**Use Cases:**
+- **Developers:** Architecture diagrams, flowcharts, system design
+- **Project managers:** Process flows, org charts, project planning
+- **Students:** Mind maps, concept diagrams, study notes
+- **Designers:** Wireframes, user flows, brainstorming
+
+**Why Excalidraw:**
+- ✅ Local-first (matches Neuman Brain philosophy)
+- ✅ Hand-drawn aesthetic (friendly, approachable)
+- ✅ Open source MIT license
+- ✅ TypeScript-first with React integration
+- ✅ Embeddable as React component
+- ✅ Supports export to PNG/SVG
+- ✅ IndexedDB persistence built-in
+- ✅ No server required
+- ✅ Actively maintained
+
+## Requirements
+
+### Must Have (MVP)
+1. **Dedicated Page Route**
+   - Full page at `/diagrams` route
+   - Accessible from Notes navigation dropdown (like Graph)
+   - Lazy-loaded route
+   - StoreErrorBoundary wrapper
+
+2. **Diagram Library View**
+   - Grid layout showing all diagrams
+   - Thumbnail previews
+   - Search/filter diagrams
+   - Sort by date/title
+   - "New Diagram" button
+   - Click diagram to open editor
+
+3. **Full-Screen Editor**
+   - Dedicated page for editing single diagram
+   - Route: `/diagrams/:id`
+   - Excalidraw React component (full viewport)
+   - Top toolbar: Title, Save status, Export, Delete, Close
+   - Auto-save on changes (debounced 2s)
+   - Back to library button
+
+4. **Excalidraw Integration**
+   - Embed Excalidraw React component
+   - Full feature set (shapes, arrows, text, images)
+   - Hand-drawn style rendering
+   - Touch/stylus support
+   - Zoom, pan, multi-select
+
+5. **Persistence**
+   - Store diagram data in IndexedDB via Zustand
+   - Multiple diagrams support
+   - Auto-save on changes (debounced)
+   - Diagram metadata (title, dates, thumbnail)
+
+6. **Export/Import**
+   - Export to PNG, SVG
+   - Export to Excalidraw JSON
+   - Import from Excalidraw files
+   - Link to note/task (future Phase 2)
+
+7. **UI Integration**
+   - Semantic color tokens (dark mode)
+   - Matches Neuman Brain design system
+   - Responsive layout
+   - PageHeader component
+
+### Should Have (Phase 2)
+- Link diagrams to notes/tasks
+- Embed diagrams in notes
+- Template library (flowchart, mind map, etc.)
+- Collaborative editing (Yjs integration)
+- Version history
+- Diagram search
+
+### Won't Have (Out of Scope)
+- Real-time collaboration (P4)
+- AI diagram generation (P4)
+- Advanced CAD features
+- 3D diagrams
+
+## Competitor Analysis
+
+| Feature | Excalidraw | Draw.io | Miro | Lucidchart | NB Target |
+|---------|-----------|---------|------|------------|-----------|
+| Local-first | ✅ | ✅ | ❌ | ❌ | ✅ Phase 1 |
+| Hand-drawn style | ✅ | ❌ | ⬜ | ❌ | ✅ Phase 1 |
+| Open source | ✅ | ✅ | ❌ | ❌ | ✅ Use Excalidraw |
+| React component | ✅ | ⬜ | ❌ | ❌ | ✅ Phase 1 |
+| Export PNG/SVG | ✅ | ✅ | ✅ | ✅ | ✅ Phase 1 |
+| Templates | ⬜ | ✅ | ✅ | ✅ | 🔶 Phase 2 |
+| Collaboration | ⬜ | ✅ | ✅ | ✅ | 🔶 P4 |
+
+**Key Insights:**
+- Excalidraw is perfect for our local-first philosophy
+- Hand-drawn aesthetic is unique and friendly
+- React component makes integration seamless
+- No external dependencies or servers needed
+
+## Technical Approach
+
+### Library: Excalidraw
+
+**Installation:**
+```bash
+npm install @excalidraw/excalidraw
+```
+
+**Bundle Size:**
+- ~180KB gzipped (widget lazy-loaded)
+- No initial bundle impact
+- Acceptable for diagramming features
+
+**Integration Pattern:**
+```tsx
+import { Excalidraw } from "@excalidraw/excalidraw";
+
+function DiagramWidget() {
+  return (
+    <div style={{ height: "500px" }}>
+      <Excalidraw
+        onChange={(elements, appState, files) => {
+          // Auto-save to Zustand store
+        }}
+        initialData={{
+          elements: savedElements,
+          appState: savedAppState,
+          files: savedFiles,
+        }}
+      />
+    </div>
+  );
+}
+```
+
+### Architecture
+
+**Data Flow:**
+```
+Diagram Library → Click diagram → Editor Page → Excalidraw → onChange → useDiagramsStore → IndexedDB
+                                                                ↓
+                                                       debounced auto-save (2s)
+```
+
+**Routes:**
+- `/diagrams` - Library view (list all diagrams)
+- `/diagrams/:id` - Editor view (edit specific diagram)
+- `/diagrams/new` - Create new diagram (redirects to `/diagrams/:newId`)
+
+**Pages:**
+- `src/pages/Diagrams.tsx` - Main library page with grid of diagrams
+- `src/pages/DiagramEditor.tsx` - Full-screen editor for single diagram
+
+**Components:**
+- `src/components/Diagram/DiagramCard.tsx` - Thumbnail card in library grid
+- `src/components/Diagram/DiagramToolbar.tsx` - Editor top toolbar (title, export, delete)
+- `src/components/Diagram/ExcalidrawWrapper.tsx` - Excalidraw component with auto-save
+
+**Stores:**
+- `src/stores/useDiagramsStore.ts` - Diagram management (CRUD, persistence)
+
+**Types:**
+- `src/types/diagrams.ts` - Diagram metadata, Excalidraw data
+
+### Data Model
+
+**Diagram:**
+```typescript
+interface Diagram {
+  id: string; // UUID
+  title: string;
+  createdAt: Date;
+  updatedAt: Date;
+  thumbnail?: string; // Base64 PNG for preview
+
+  // Excalidraw data
+  elements: ExcalidrawElement[]; // Shapes, arrows, text
+  appState: Partial<AppState>; // Zoom, grid, theme
+  files: BinaryFiles; // Embedded images
+
+  // Metadata
+  tags?: string[];
+  linkedNotes?: string[]; // Note IDs (Phase 2)
+  linkedTasks?: string[]; // Task IDs (Phase 2)
+}
+```
+
+**Store:**
+```typescript
+interface DiagramsStore {
+  diagrams: Record<string, Diagram>;
+
+  // CRUD
+  createDiagram: (title: string) => string;
+  updateDiagram: (id: string, data: Partial<Diagram>) => void;
+  deleteDiagram: (id: string) => void;
+  getDiagram: (id: string) => Diagram | undefined;
+
+  // Utilities
+  exportDiagramAsPNG: (id: string) => Promise<Blob>;
+  exportDiagramAsSVG: (id: string) => Promise<string>;
+  importDiagram: (file: File) => Promise<string>;
+}
+```
+
+### Implementation Plan
+
+**Phase 1: Core Pages & Routing (4-5 hours)**
+1. Install Excalidraw package
+2. Create diagram types and store
+   - TypeScript interfaces (Diagram, DiagramMetadata)
+   - Zustand store with IndexedDB persistence
+   - CRUD operations (create, update, delete, list)
+3. Create Diagrams library page
+   - `/diagrams` route in App.tsx
+   - Grid layout with diagram cards
+   - "New Diagram" button
+   - Empty state
+   - Search/filter UI
+4. Create DiagramEditor page
+   - `/diagrams/:id` route in App.tsx
+   - Full viewport Excalidraw component
+   - URL parameter handling
+   - Back to library navigation
+5. Add to Sidebar navigation
+   - Add "Diagrams" as child of Notes (like Graph)
+   - Expandable navigation item
+
+**Phase 2: Excalidraw Integration (2-3 hours)**
+6. Create ExcalidrawWrapper component
+   - Excalidraw component wrapper
+   - Auto-save logic (debounced 2s)
+   - Dark mode theme override
+   - onChange handler
+7. Create DiagramToolbar component
+   - Editable title input
+   - Save status indicator
+   - Export buttons (PNG, SVG, JSON)
+   - Delete button with confirmation
+   - Back to library button
+8. Implement export functionality
+   - PNG export via Excalidraw API
+   - SVG export via Excalidraw API
+   - JSON download (.excalidraw file)
+
+**Phase 3: UX Polish (1-2 hours)**
+9. Thumbnail generation
+   - Auto-generate on save using exportToBlob
+   - Store as base64 in diagram metadata
+   - Display in library grid
+10. DiagramCard component
+   - Thumbnail preview
+   - Diagram title
+   - Last modified date
+   - Click to open in editor
+11. Import functionality
+   - File upload for .excalidraw files
+   - Parse and add to store
+12. Empty states
+   - No diagrams yet (library)
+   - New diagram template
+
+**Phase 4: Verification (1 hour)**
+13. Testing
+   - Create multiple diagrams
+   - Test auto-save (watch IndexedDB)
+   - Test export PNG/SVG/JSON
+   - Test import .excalidraw
+   - Test dark mode
+   - Test navigation flow
+14. Performance check
+   - Bundle size impact (~180KB)
+   - Large diagram handling
+15. Documentation
+   - Update pages CLAUDE.md
+   - Update components CLAUDE.md
+   - Update master status
+
+### File Structure
+
+**New Files:**
+```
+src/pages/Diagrams.tsx                         # Library page (/diagrams)
+src/pages/DiagramEditor.tsx                    # Editor page (/diagrams/:id)
+src/components/Diagram/
+  ├── DiagramCard.tsx                          # Thumbnail card in library
+  ├── DiagramToolbar.tsx                       # Editor toolbar
+  └── ExcalidrawWrapper.tsx                    # Excalidraw component wrapper
+src/stores/useDiagramsStore.ts                 # Diagram state management
+src/types/diagrams.ts                          # Diagram types
+```
+
+**Modified Files:**
+```
+src/App.tsx                                    # Add /diagrams routes
+src/components/Sidebar.tsx                     # Add Diagrams to Notes dropdown
+package.json                                   # Add @excalidraw/excalidraw
+```
+
+### Performance Considerations
+
+**Bundle Size:**
+- Excalidraw: ~180KB gzipped
+- Widget lazy-loaded: No initial bundle impact
+- Total impact: Acceptable for diagramming features
+- **Mitigation:** Lazy-load widget on dashboard
+
+**Runtime Performance:**
+- Excalidraw uses Canvas API (hardware accelerated)
+- Debounce auto-save (2 seconds)
+- IndexedDB for persistence (non-blocking)
+- Thumbnail generation (background worker if needed)
+
+### Testing Strategy
+
+**Manual Testing:**
+- [ ] Create new diagram
+- [ ] Draw shapes, arrows, text
+- [ ] Auto-save verification (check IndexedDB)
+- [ ] Export to PNG
+- [ ] Export to SVG
+- [ ] Import Excalidraw file
+- [ ] Dark mode rendering
+- [ ] Widget thumbnail display
+- [ ] Delete diagram
+- [ ] Multiple diagrams
+
+**Edge Cases:**
+- Empty diagram (just created)
+- Very large diagram (100+ elements)
+- Embedded images in diagram
+- Corrupted diagram data
+- Network interruption during save
+
+---
+
+## Dependencies
+
+**Before:**
+- ✅ Widget system (complete)
+- ✅ Dashboard (complete)
+- ✅ IndexedDB persistence (complete)
+- ✅ Zustand stores (complete)
+
+**After (Enables):**
+- Diagram linking to notes (P2 #7 Phase 2)
+- Diagram templates (P3)
+- Collaborative diagramming (P4 with Yjs)
+
+---
+
+## Success Criteria
+
+1. **Functional**
+   - ✅ Create, edit, save diagrams
+   - ✅ Excalidraw features work (shapes, arrows, text, drawing)
+   - ✅ Auto-save to IndexedDB
+   - ✅ Export to PNG/SVG
+   - ✅ Dashboard widget displays recent diagrams
+   - ✅ Thumbnail previews
+
+2. **Quality**
+   - ✅ TypeScript type-check passes
+   - ✅ Production build succeeds
+   - ✅ No console errors/warnings
+   - ✅ Dark mode support
+   - ✅ Responsive layout
+
+3. **Performance**
+   - ✅ Widget lazy-loaded (<200KB impact)
+   - ✅ Auto-save debounced properly
+   - ✅ Large diagrams (100+ elements) smooth
+   - ✅ No blocking during save
+
+4. **UX**
+   - ✅ Intuitive diagram creation
+   - ✅ Clear widget UI
+   - ✅ Smooth modal interactions
+   - ✅ Helpful empty states
+
+---
+
+## Known Challenges
+
+1. **Excalidraw Theming**
+   - Excalidraw has its own theme
+   - Mitigation: Override CSS variables to match semantic tokens
+
+2. **Thumbnail Generation**
+   - Need to generate preview images
+   - Mitigation: Use Excalidraw's export API, store as base64
+
+3. **Bundle Size**
+   - 180KB is significant
+   - Mitigation: Lazy-load widget, only load when user opens diagram
+
+4. **Touch Support**
+   - Excalidraw has touch support but may need tuning
+   - Mitigation: Test on mobile, adjust if needed
+
+---
+
+## Rollback Plan
+
+If issues arise:
+1. **Disable Widget** - Remove from widget registry temporarily
+2. **Keep Excalidraw** - Bundle impact acceptable
+3. **Fix Forward** - Iterate on integration/styling
+4. **Fallback** - Show "Coming soon" widget placeholder
+
+No risk to existing data - Diagrams stored separately in IndexedDB.
+
+---
+
+## Todo Checklist
+
+### Phase 1: Core Pages & Routing (4-5 hours)
+
+**Setup & Dependencies (30 min)**
+- [ ] Install Excalidraw: `npm install @excalidraw/excalidraw`
+- [ ] Verify package installed correctly
+- [ ] Research Excalidraw React API docs
+
+**Data Model & Store (1.5 hours)**
+- [ ] Create `src/types/diagrams.ts`
+  - Diagram interface with metadata
+  - DiagramMetadata type
+  - Export/Import types
+- [ ] Create `src/stores/useDiagramsStore.ts`
+  - Zustand store with IndexedDB persist
+  - CRUD operations (create, update, delete, get, list)
+  - Export helpers (PNG, SVG, JSON)
+  - Import helper
+- [ ] Test store in console (create, save, reload)
+
+**Diagrams Library Page (1.5 hours)**
+- [ ] Create `src/pages/Diagrams.tsx`
+  - PageHeader with "Diagrams" title
+  - "New Diagram" button
+  - Grid layout for diagram cards
+  - Empty state (no diagrams yet)
+  - Search input UI
+  - Sort dropdown UI
+- [ ] Add `/diagrams` route to App.tsx (lazy-loaded)
+- [ ] Wrap in StoreErrorBoundary
+
+**Diagram Editor Page (1.5 hours)**
+- [ ] Create `src/pages/DiagramEditor.tsx`
+  - Full viewport layout
+  - useParams to get diagram ID from URL
+  - Load diagram from store
+  - Placeholder for Excalidraw component
+  - Back to library navigation
+- [ ] Add `/diagrams/:id` route to App.tsx (lazy-loaded)
+- [ ] Handle "new" diagram creation flow
+- [ ] Test navigation between library and editor
+
+**Sidebar Navigation (30 min)**
+- [ ] Add "Diagrams" to Notes dropdown in Sidebar.tsx
+  - Icon: 🎨 or 📐
+  - Path: /diagrams
+  - Position: After "Graph" in Notes children
+- [ ] Test navigation from sidebar
+
+### Phase 2: Excalidraw Integration (2-3 hours)
+
+**ExcalidrawWrapper Component (1.5 hours)**
+- [ ] Create `src/components/Diagram/ExcalidrawWrapper.tsx`
+  - Import and render Excalidraw component
+  - onChange handler with 2s debounce
+  - Save diagram data to store on change
+  - Dark mode theme override
+  - Handle initial data loading
+- [ ] Integrate into DiagramEditor page
+- [ ] Test auto-save functionality (watch IndexedDB)
+
+**DiagramToolbar Component (1 hour)**
+- [ ] Create `src/components/Diagram/DiagramToolbar.tsx`
+  - Editable title input
+  - Save status indicator ("Saving..." / "Saved")
+  - Export PNG button
+  - Export SVG button
+  - Export JSON button (.excalidraw file)
+  - Delete diagram button with confirmation
+  - Back to library button
+- [ ] Integrate into DiagramEditor page
+- [ ] Test all toolbar actions
+
+**Export Functionality (30 min)**
+- [ ] Implement PNG export using Excalidraw API
+  - exportToBlob function
+  - Download file with diagram title
+- [ ] Implement SVG export
+  - exportToSvg function
+  - Download file
+- [ ] Implement JSON export
+  - Serialize Excalidraw data
+  - Download .excalidraw file
+
+### Phase 3: UX Polish (1-2 hours)
+
+**DiagramCard Component (1 hour)**
+- [ ] Create `src/components/Diagram/DiagramCard.tsx`
+  - Thumbnail preview (if available)
+  - Diagram title
+  - Last modified date
+  - Click to navigate to `/diagrams/:id`
+  - Hover effects
+- [ ] Integrate into Diagrams library page
+- [ ] Test click navigation
+
+**Thumbnail Generation (30 min)**
+- [ ] Implement auto-thumbnail generation
+  - On diagram save, call exportToBlob
+  - Convert to base64 string
+  - Store in diagram.thumbnail field
+- [ ] Display thumbnails in DiagramCard
+- [ ] Fallback: generic diagram icon if no thumbnail
+
+**Import & Empty States (30 min)**
+- [ ] Add import button to library page
+  - File input for .excalidraw files
+  - Parse JSON and create new diagram
+  - Navigate to new diagram editor
+- [ ] Empty state for library (no diagrams)
+  - "No diagrams yet" message
+  - "Create your first diagram" CTA
+- [ ] Empty state for new diagram
+  - Welcome message in editor
+  - Quick tips
+
+### Phase 4: Verification & Documentation (1 hour)
+
+**Testing**
+- [ ] Create 5+ diagrams with various content
+- [ ] Test auto-save (watch IndexedDB)
+- [ ] Test export to PNG/SVG
+- [ ] Test import .excalidraw file
+- [ ] Test dark mode
+- [ ] Test diagram deletion
+- [ ] Test with 100+ elements (performance)
+- [ ] Test on mobile (touch support)
+
+**Quality Checks**
+- [ ] Run `npm run type-check` (0 errors)
+- [ ] Run `npm run build` (success, check bundle size ~180KB)
+- [ ] No console errors/warnings
+- [ ] All semantic color tokens used
+
+**Documentation**
+- [ ] Update `src/pages/CLAUDE.md` (add Diagrams.tsx, DiagramEditor.tsx)
+- [ ] Update `src/components/CLAUDE.md` (add Diagram components)
+- [ ] Update `tasks/master-implementation-status.md` (P2 #7 complete)
+- [ ] Add Review section to this task file
+- [ ] Archive task file to `.archive/completed-tasks/`
+
+---
+
+## Time Estimates
+
+| Phase | Tasks | Estimated Time |
+|-------|-------|----------------|
+| Phase 1: Core Pages & Routing | Setup + Store + Library Page + Editor Page + Sidebar | 4-5 hours |
+| Phase 2: Excalidraw Integration | Wrapper + Toolbar + Export | 2-3 hours |
+| Phase 3: UX Polish | DiagramCard + Thumbnails + Import + Empty States | 1-2 hours |
+| Phase 4: Verification | Testing + Docs | 1 hour |
+| **Total** | | **8-11 hours** |
+
+---
+
+## Review
+
+*(To be completed after implementation)*

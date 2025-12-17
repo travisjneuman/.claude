@@ -1,0 +1,258 @@
+/**
+ * Model Selector Component
+ * Select AI provider and model with comparison features
+ *
+ * Features:
+ * - Provider and model selection
+ * - Model comparison (speed, quality, context, cost)
+ * - Free vs paid filtering
+ * - Use case filtering
+ * - Visual model ratings
+ * - Context window and cost display
+ */
+
+import { useState, useMemo } from 'react';
+import { AIProviderRouter } from '../services/ai/providerRouter';
+
+interface ModelSelectorProps {
+  router: AIProviderRouter;
+  onSelect: (providerId: string, modelId: string) => void;
+  currentProvider?: string;
+  currentModel?: string;
+}
+
+export function ModelSelector({
+  router,
+  onSelect,
+  currentProvider,
+  currentModel,
+}: ModelSelectorProps) {
+  const [showOnlyFree, setShowOnlyFree] = useState(false);
+  const [selectedUseCase, setSelectedUseCase] = useState<string>('all');
+  const [selectedProvider, setSelectedProvider] = useState<string>(currentProvider || 'all');
+
+  // Get all available models
+  const allModels = useMemo(() => {
+    return router.getAllAvailableModels();
+  }, [router]);
+
+  // Get unique use cases
+  const useCases = useMemo(() => {
+    const cases = new Set<string>();
+    allModels.forEach((item) => {
+      item.model.useCases?.forEach((useCase: string) => cases.add(useCase));
+    });
+    return Array.from(cases).sort();
+  }, [allModels]);
+
+  // Filter models
+  const filteredModels = useMemo(() => {
+    return allModels.filter((item) => {
+      // Filter by free/paid
+      if (showOnlyFree && !item.model.isFree) return false;
+
+      // Filter by use case
+      if (selectedUseCase !== 'all' && !item.model.useCases?.includes(selectedUseCase)) {
+        return false;
+      }
+
+      // Filter by provider
+      if (selectedProvider !== 'all' && item.providerId !== selectedProvider) {
+        return false;
+      }
+
+      return true;
+    });
+  }, [allModels, showOnlyFree, selectedUseCase, selectedProvider]);
+
+  // Get configured providers
+  const providerStatus = router.getProviderStatus();
+  const configuredProviders = Object.entries(providerStatus).filter(
+    ([, status]) => status.configured // First element intentionally omitted
+  );
+
+  const handleModelSelect = (providerId: string, modelId: string) => {
+    onSelect(providerId, modelId);
+  };
+
+  const renderSpeedRating = (rating: number) => {
+    return (
+      <div className="flex items-center gap-0.5">
+        {[...Array(5)].map((_, i) => (
+          <div
+            key={i}
+            className={`w-1.5 h-3 rounded-sm ${
+              i < rating ? 'bg-accent-cyan' : 'bg-slate-500/20'
+            }`}
+          />
+        ))}
+      </div>
+    );
+  };
+
+  const renderQualityRating = (rating: number) => {
+    return (
+      <div className="flex items-center gap-0.5">
+        {[...Array(5)].map((_, i) => (
+          <div
+            key={i}
+            className={`w-3 h-1.5 rounded-sm ${
+              i < rating ? 'bg-accent-magenta' : 'bg-slate-500/20'
+            }`}
+          />
+        ))}
+      </div>
+    );
+  };
+
+  const formatContextWindow = (tokens: number): string => {
+    if (tokens >= 1000000) return `${(tokens / 1000000).toFixed(1)}M`;
+    if (tokens >= 1000) return `${(tokens / 1000).toFixed(0)}K`;
+    return `${tokens}`;
+  };
+
+  return (
+    <div className="space-y-3">
+      {/* Filters - Compact Vertical Stack */}
+      <div className="space-y-2">
+        <div className="flex gap-2">
+          {/* Provider Filter */}
+          <select
+            value={selectedProvider}
+            onChange={(e) => setSelectedProvider(e.target.value)}
+            className="flex-1 px-2 py-1 bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-button text-xs text-text-light-primary dark:text-text-dark-primary focus:outline-none focus:ring-1 focus:ring-accent-blue"
+          >
+            <option value="all">All Providers</option>
+            {configuredProviders.map(([providerId, status]) => (
+              <option key={providerId} value={providerId}>
+                {status.name}
+              </option>
+            ))}
+          </select>
+
+          {/* Use Case Filter */}
+          <select
+            value={selectedUseCase}
+            onChange={(e) => setSelectedUseCase(e.target.value)}
+            className="flex-1 px-2 py-1 bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark rounded-button text-xs text-text-light-primary dark:text-text-dark-primary focus:outline-none focus:ring-1 focus:ring-accent-blue"
+          >
+            <option value="all">All Uses</option>
+            {useCases.map((useCase) => (
+              <option key={useCase} value={useCase}>
+                {useCase.replace(/-/g, ' ')}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        {/* Free Only Toggle + Count */}
+        <div className="flex items-center justify-between">
+          <label className="flex items-center gap-1.5 text-xs text-text-light-primary dark:text-text-dark-primary cursor-pointer">
+            <input
+              type="checkbox"
+              checked={showOnlyFree}
+              onChange={(e) => setShowOnlyFree(e.target.checked)}
+              className="accent-accent-blue w-3 h-3"
+            />
+            <span>Free Only</span>
+          </label>
+          <span className="text-xs text-text-light-secondary dark:text-text-dark-secondary">
+            {filteredModels.length} model{filteredModels.length !== 1 ? 's' : ''}
+          </span>
+        </div>
+      </div>
+
+      {/* Model List */}
+      <div className="space-y-1.5">
+        {filteredModels.length === 0 ? (
+          <div className="p-4 text-center text-text-light-secondary dark:text-text-dark-secondary">
+            <p className="text-sm mb-1">No models found</p>
+            <p className="text-xs">Adjust filters or add more providers.</p>
+          </div>
+        ) : (
+          filteredModels.map(({ providerId, providerName, model }) => {
+            const isSelected =
+              currentProvider === providerId && currentModel === model.id;
+
+            return (
+              <button
+                key={`${providerId}-${model.id}`}
+                onClick={() => handleModelSelect(providerId, model.id)}
+                className={`w-full p-2 text-left rounded-button border transition-all ${
+                  isSelected
+                    ? 'bg-accent-blue/10 border-accent-blue'
+                    : 'bg-surface-light-elevated dark:bg-surface-dark-elevated border-border-light dark:border-border-dark hover:border-accent-blue/50'
+                }`}
+              >
+                {/* Model Header */}
+                <div className="flex items-center justify-between gap-1 mb-1">
+                  <div className="flex items-center gap-1.5 min-w-0 flex-1">
+                    <h4 className="font-medium text-xs text-text-light-primary dark:text-text-dark-primary truncate">
+                      {model.name}
+                    </h4>
+                    {model.isFree && (
+                      <span className="text-[10px] px-1 py-0.5 bg-green-500/10 text-green-500 rounded flex-shrink-0">
+                        FREE
+                      </span>
+                    )}
+                  </div>
+                  {isSelected && (
+                    <span className="text-[10px] px-1 py-0.5 bg-accent-blue/20 text-accent-blue rounded flex-shrink-0">
+                      ✓
+                    </span>
+                  )}
+                </div>
+
+                <p className="text-[10px] text-text-light-secondary dark:text-text-dark-secondary mb-1.5">
+                  {providerName}
+                </p>
+
+                {/* Compact Stats Row */}
+                <div className="flex items-center gap-3 text-[10px]">
+                  <div className="flex items-center gap-1">
+                    <span className="text-text-light-secondary dark:text-text-dark-secondary">⚡</span>
+                    {renderSpeedRating(model.speedRating)}
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <span className="text-text-light-secondary dark:text-text-dark-secondary">✨</span>
+                    {renderQualityRating(model.qualityRating)}
+                  </div>
+                  <span className="text-text-light-secondary dark:text-text-dark-secondary">
+                    {formatContextWindow(model.contextWindow)}
+                  </span>
+                  <span className="text-text-light-primary dark:text-text-dark-primary font-medium">
+                    {model.isFree ? 'Free' : `$${model.costPer1MTokens?.toFixed(2)}`}
+                  </span>
+                </div>
+
+                {/* Features - only show if any exist */}
+                {(model.supportsVision || model.supportsFunctionCalling) && (
+                  <div className="mt-1.5 flex flex-wrap gap-1">
+                    {model.supportsVision && (
+                      <span className="text-[10px] px-1 py-0.5 bg-slate-500/10 text-slate-500 rounded">
+                        👁 Vision
+                      </span>
+                    )}
+                    {model.supportsFunctionCalling && (
+                      <span className="text-[10px] px-1 py-0.5 bg-slate-500/10 text-slate-500 rounded">
+                        🔧 Fn
+                      </span>
+                    )}
+                  </div>
+                )}
+              </button>
+            );
+          })
+        )}
+      </div>
+
+      {/* Compact Legend */}
+      <div className="pt-2 border-t border-border-light dark:border-border-dark">
+        <div className="flex items-center gap-4 text-[10px] text-text-light-secondary dark:text-text-dark-secondary">
+          <span><span className="text-accent-cyan">━</span> Speed</span>
+          <span><span className="text-accent-magenta">━</span> Quality</span>
+        </div>
+      </div>
+    </div>
+  );
+}

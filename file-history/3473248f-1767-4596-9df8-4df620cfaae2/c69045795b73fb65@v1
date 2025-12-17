@@ -1,0 +1,379 @@
+#!/usr/bin/env python3
+"""
+OCR Notability PDFs to Structured Markdown
+Extracts typed text and OCRs handwritten annotations,
+creating Markdown files with clear handwriting callouts.
+"""
+
+import os
+import zipfile
+import json
+import fitz  # PyMuPDF
+import easyocr
+import cv2
+import numpy as np
+from pathlib import Path
+from datetime import datetime
+from PIL import Image
+import io
+import warnings
+warnings.filterwarnings('ignore')
+
+# Configuration
+BASE_PATH = Path(r"D:\Proton Drive\My files\Documents\Personal\Notebooks")
+OUTPUT_DIR = BASE_PATH / "_converted" / "markdown_ocr"
+LOG_FILE = BASE_PATH / "_scripts" / "output" / "ocr_conversion_log.json"
+
+# OCR settings
+OCR_CONFIDENCE_THRESHOLD = 0.25
+MAX_PAGES = 20  # Limit pages per note for performance
+
+# Initialize OCR reader (lazy load)
+_reader = None
+
+def get_ocr_reader():
+    global _reader
+    if _reader is None:
+        print("  Loading EasyOCR model...")
+        _reader = easyocr.Reader(['en'], gpu=False, verbose=False)
+    return _reader
+
+
+def sanitize_filename(name: str) -> str:
+    """Sanitize filename for filesystem."""
+    import re
+    invalid_chars = '<>:"/\\|?*'
+    for char in invalid_chars:
+        name = name.replace(char, '_')
+    name = re.sub(r'[_\s]+', ' ', name).strip()
+    if len(name) > 150:
+        name = name[:150]
+    return name
+
+
+def extract_pdf_content(pdf_data: bytes) -> dict:
+    """Extract text and identify handwriting regions from PDF."""
+    doc = fitz.open(stream=pdf_data, filetype='pdf')
+
+    pages = []
+    for page_num in range(min(doc.page_count, MAX_PAGES)):
+        page = doc[page_num]
+
+        # Extract typed text with positions
+        text_blocks = []
+        text_dict = page.get_text('dict')
+        for block in text_dict.get('blocks', []):
+            if 'lines' in block:
+                for line in block['lines']:
+                    text = ''.join(span['text'] for span in line['spans'])
+                    if text.strip():
+                        text_blocks.append({
+                            'text': text.strip(),
+                            'bbox': line['bbox'],
+                            'type': 'typed'
+                        })
+
+        # Check for drawings (potential handwriting)
+        drawings = page.get_drawings()
+        has_drawings = len(drawings) > 10  # Threshold for "has handwriting"
+
+        # Render page for OCR if it has drawings
+        handwriting_ocr = []
+        if has_drawings:
+            # Render at higher DPI for better OCR
+            zoom = 2.0
+            mat = fitz.Matrix(zoom, zoom)
+            pix = page.get_pixmap(matrix=mat)
+
+            # Convert to numpy array for OpenCV
+            img_data = pix.tobytes("png")
+            nparr = np.frombuffer(img_data, np.uint8)
+            img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+
+            # Preprocess for handwriting OCR
+            # Convert to grayscale
+            gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+            # Increase contrast
+            clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
+            enhanced = clahe.apply(gray)
+
+            # OCR the enhanced image
+            try:
+                reader = get_ocr_reader()
+                results = reader.readtext(enhanced)
+
+                for bbox, text, conf in results:
+                    if conf > OCR_CONFIDENCE_THRESHOLD and len(text.strip()) > 1:
+                        # Convert bbox back to page coordinates
+                        x0 = bbox[0][0] / zoom
+                        y0 = bbox[0][1] / zoom
+                        x1 = bbox[2][0] / zoom
+                        y1 = bbox[2][1] / zoom
+
+                        handwriting_ocr.append({
+                            'text': text.strip(),
+                            'bbox': [x0, y0, x1, y1],
+                            'confidence': conf,
+                            'type': 'handwritten'
+                        })
+            except Exception as e:
+                pass
+
+        pages.append({
+            'page_num': page_num + 1,
+            'typed_text': text_blocks,
+            'handwritten_text': handwriting_ocr,
+            'has_drawings': has_drawings,
+            'drawing_count': len(drawings) if has_drawings else 0,
+        })
+
+    doc.close()
+    return {
+        'page_count': len(pages),
+        'pages': pages
+    }
+
+
+def merge_text_by_position(typed: list, handwritten: list) -> list:
+    """Merge typed and handwritten text, sorted by vertical position."""
+    all_items = []
+
+    for item in typed:
+        all_items.append({
+            'y': item['bbox'][1],
+            'text': item['text'],
+            'type': 'typed'
+        })
+
+    for item in handwritten:
+        all_items.append({
+            'y': item['bbox'][1],
+            'text': item['text'],
+            'type': 'handwritten',
+            'confidence': item.get('confidence', 0)
+        })
+
+    # Sort by vertical position
+    all_items.sort(key=lambda x: x['y'])
+    return all_items
+
+
+def generate_markdown(note_name: str, content: dict, metadata: dict = None) -> str:
+    """Generate structured Markdown from extracted content."""
+    lines = []
+
+    # YAML frontmatter
+    lines.append('---')
+    lines.append(f'title: "{note_name}"')
+    lines.append(f'source: notability')
+    lines.append(f'converted: {datetime.now().isoformat()}')
+    lines.append(f'pages: {content["page_count"]}')
+    if metadata:
+        if 'created' in metadata:
+            lines.append(f'created: "{metadata["created"]}"')
+        if 'modified' in metadata:
+            lines.append(f'modified: "{metadata["modified"]}"')
+    lines.append('---')
+    lines.append('')
+
+    # Title
+    lines.append(f'# {note_name}')
+    lines.append('')
+
+    # Process each page
+    for page in content['pages']:
+        if content['page_count'] > 1:
+            lines.append(f'## Page {page["page_num"]}')
+            lines.append('')
+
+        # Merge and sort text by position
+        merged = merge_text_by_position(
+            page['typed_text'],
+            page['handwritten_text']
+        )
+
+        current_type = None
+        handwritten_buffer = []
+
+        for item in merged:
+            if item['type'] == 'typed':
+                # Flush handwritten buffer
+                if handwritten_buffer:
+                    lines.append('')
+                    lines.append('> **[Handwritten Notes]**')
+                    for hw in handwritten_buffer:
+                        lines.append(f'> {hw}')
+                    lines.append('')
+                    handwritten_buffer = []
+
+                lines.append(item['text'])
+                current_type = 'typed'
+
+            elif item['type'] == 'handwritten':
+                handwritten_buffer.append(item['text'])
+                current_type = 'handwritten'
+
+        # Flush remaining handwritten
+        if handwritten_buffer:
+            lines.append('')
+            lines.append('> **[Handwritten Notes]**')
+            for hw in handwritten_buffer:
+                lines.append(f'> {hw}')
+            lines.append('')
+
+        # Note about drawings if present but no OCR text
+        if page['has_drawings'] and not page['handwritten_text']:
+            lines.append('')
+            lines.append(f'> *[Note: This page contains {page["drawing_count"]} handwritten strokes that could not be OCR\'d]*')
+            lines.append('')
+
+        if content['page_count'] > 1:
+            lines.append('')
+            lines.append('---')
+            lines.append('')
+
+    return '\n'.join(lines)
+
+
+def process_note_file(note_path: Path, output_dir: Path) -> dict:
+    """Process a single .note file."""
+    result = {
+        'source': str(note_path),
+        'success': False,
+        'pages_processed': 0,
+        'typed_blocks': 0,
+        'handwritten_blocks': 0,
+    }
+
+    try:
+        with zipfile.ZipFile(note_path, 'r') as z:
+            # Find PDFs
+            pdf_files = [n for n in z.namelist() if n.endswith('.pdf')]
+
+            if not pdf_files:
+                result['error'] = 'No PDFs found'
+                return result
+
+            # Process first/main PDF
+            pdf_data = z.read(pdf_files[0])
+            content = extract_pdf_content(pdf_data)
+
+            # Count stats
+            for page in content['pages']:
+                result['typed_blocks'] += len(page['typed_text'])
+                result['handwritten_blocks'] += len(page['handwritten_text'])
+            result['pages_processed'] = content['page_count']
+
+            # Generate Markdown
+            safe_name = sanitize_filename(note_path.stem)
+            md_content = generate_markdown(safe_name, content)
+
+            # Write output
+            output_path = output_dir / f"{safe_name}.md"
+            counter = 1
+            while output_path.exists():
+                output_path = output_dir / f"{safe_name}_{counter}.md"
+                counter += 1
+
+            with open(output_path, 'w', encoding='utf-8') as f:
+                f.write(md_content)
+
+            result['success'] = True
+            result['output'] = str(output_path)
+
+    except Exception as e:
+        result['error'] = str(e)
+
+    return result
+
+
+def find_note_files_with_pdfs() -> list:
+    """Find all .note files that contain PDFs."""
+    files = []
+    for root, dirs, filenames in os.walk(BASE_PATH):
+        if '_converted' in root or '_scripts' in root or '_organized' in root:
+            continue
+        for f in filenames:
+            if f.endswith('.note'):
+                note_path = Path(root) / f
+                try:
+                    with zipfile.ZipFile(note_path, 'r') as z:
+                        if any(n.endswith('.pdf') for n in z.namelist()):
+                            files.append(note_path)
+                except:
+                    pass
+    return files
+
+
+def main():
+    print("=" * 60)
+    print("OCR Notability PDFs to Structured Markdown")
+    print("=" * 60)
+
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+
+    # Find notes with PDFs
+    print("\nScanning for notes with PDFs...")
+    files = find_note_files_with_pdfs()
+    print(f"Found {len(files)} notes with embedded PDFs")
+
+    if not files:
+        print("No files to process!")
+        return
+
+    log = {
+        'processed': [],
+        'errors': [],
+        'stats': {
+            'total': len(files),
+            'success': 0,
+            'errors': 0,
+            'total_pages': 0,
+            'typed_blocks': 0,
+            'handwritten_blocks': 0,
+        }
+    }
+
+    for i, note_path in enumerate(files):
+        print(f"\r  Processing {i+1}/{len(files)}: {note_path.name[:40]}...", end='', flush=True)
+
+        result = process_note_file(note_path, OUTPUT_DIR)
+
+        if result['success']:
+            log['stats']['success'] += 1
+            log['stats']['total_pages'] += result['pages_processed']
+            log['stats']['typed_blocks'] += result['typed_blocks']
+            log['stats']['handwritten_blocks'] += result['handwritten_blocks']
+            log['processed'].append({
+                'source': str(note_path),
+                'output': result.get('output'),
+                'pages': result['pages_processed'],
+            })
+        else:
+            log['stats']['errors'] += 1
+            log['errors'].append({
+                'source': str(note_path),
+                'error': result.get('error'),
+            })
+
+    # Save log
+    print(f"\n\nWriting log to: {LOG_FILE}")
+    with open(LOG_FILE, 'w', encoding='utf-8') as f:
+        json.dump(log, f, indent=2, default=str)
+
+    print("\n" + "=" * 60)
+    print("OCR CONVERSION RESULTS")
+    print("=" * 60)
+    print(f"Total notes processed: {log['stats']['total']}")
+    print(f"Successfully converted: {log['stats']['success']}")
+    print(f"Total pages: {log['stats']['total_pages']}")
+    print(f"Typed text blocks: {log['stats']['typed_blocks']}")
+    print(f"Handwritten text blocks (OCR'd): {log['stats']['handwritten_blocks']}")
+    print(f"Errors: {log['stats']['errors']}")
+    print(f"\nMarkdown files saved to: {OUTPUT_DIR}")
+    print("=" * 60)
+
+
+if __name__ == '__main__':
+    main()

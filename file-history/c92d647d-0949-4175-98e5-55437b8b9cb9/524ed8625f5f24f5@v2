@@ -1,0 +1,225 @@
+/**
+ * AI Command Service
+ *
+ * Translates natural language into shell commands.
+ * Uses the existing provider router for multi-provider support.
+ */
+
+import { createDefaultRouter, type AIProviderRouter } from '../ai/providerRouter';
+import { logger } from '../logger';
+
+const log = logger.module('PhantomShell:AICommand');
+
+// System prompt for shell command generation
+const SYSTEM_PROMPT = `You are Phantom Shell AI, a terminal assistant for a browser-based development environment.
+
+Your job is to translate natural language requests into terminal commands.
+
+CONTEXT:
+- You are running in WebContainers (Node.js in browser)
+- Available: npm, npx, node, basic shell commands (ls, cd, cat, mkdir, rm, etc.)
+- NOT available: git, docker, python, system-level commands
+- File system is in-memory (persisted to IndexedDB)
+
+RESPONSE FORMAT:
+- For simple requests, respond with ONLY the command(s), one per line
+- For complex requests, briefly explain then provide commands
+- Use npm not yarn or pnpm
+- Prefer npx for one-off tools
+
+EXAMPLES:
+User: create a react app
+Response: npm create vite@latest my-app -- --template react
+
+User: install express
+Response: npm install express
+
+User: show files
+Response: ls -la
+
+DO NOT:
+- Suggest git commands (git isn't available)
+- Suggest python/pip commands
+- Output markdown formatting (just plain text)`;
+
+// ==================== TYPES ====================
+
+export interface AICommandResult {
+  commands: string[];
+  explanation?: string;
+  error?: string;
+}
+
+// ==================== SINGLETON ROUTER ====================
+
+let sharedRouter: AIProviderRouter | null = null;
+
+/**
+ * Get or create the shared router instance
+ * Uses the same router configuration as AITerminal
+ */
+export const getRouter = (): AIProviderRouter => {
+  if (!sharedRouter) {
+    sharedRouter = createDefaultRouter();
+  }
+  return sharedRouter;
+};
+
+/**
+ * Set an external router (for sharing with AITerminal)
+ */
+export const setRouter = (router: AIProviderRouter): void => {
+  sharedRouter = router;
+};
+
+// ==================== COMMAND TEMPLATES ====================
+
+/**
+ * Pre-defined templates for common requests (faster than AI)
+ */
+export const COMMAND_TEMPLATES: Record<string, string> = {
+  'create react app': 'npm create vite@latest my-app -- --template react',
+  'create vue app': 'npm create vite@latest my-app -- --template vue',
+  'create svelte app': 'npm create vite@latest my-app -- --template svelte',
+  'create next app': 'npx create-next-app@latest my-app',
+  'run dev': 'npm run dev',
+  'run build': 'npm run build',
+  'run start': 'npm start',
+  'run test': 'npm test',
+  'show files': 'ls -la',
+  'list files': 'ls -la',
+  'current directory': 'pwd',
+  'install dependencies': 'npm install',
+};
+
+/**
+ * Try to match a template before calling AI
+ */
+export const tryTemplate = (prompt: string): string | null => {
+  const lower = prompt.toLowerCase().trim();
+  for (const [pattern, command] of Object.entries(COMMAND_TEMPLATES)) {
+    if (lower.includes(pattern)) {
+      log.debug('Template matched', { pattern, command });
+      return command;
+    }
+  }
+  return null;
+};
+
+// ==================== COMMAND DETECTION ====================
+
+/**
+ * Check if a string looks like a shell command
+ */
+const looksLikeCommand = (str: string): boolean => {
+  const commandPrefixes = [
+    'npm ', 'npx ', 'node ', 'ls', 'cd ', 'cat ', 'mkdir ', 'rm ', 'cp ', 'mv ',
+    'echo ', 'touch ', 'pwd', 'head ', 'tail ', 'clear', 'exit',
+  ];
+  const lower = str.toLowerCase().trim();
+  return commandPrefixes.some(prefix => lower.startsWith(prefix));
+};
+
+// ==================== MAIN FUNCTION ====================
+
+/**
+ * Process an AI command request
+ *
+ * @param prompt - Natural language request from user
+ * @param context - Optional context (current directory, recent output)
+ * @returns Commands to execute and optional explanation
+ */
+export const processAICommand = async (
+  prompt: string,
+  context?: {
+    currentDirectory?: string;
+    recentOutput?: string;
+  }
+): Promise<AICommandResult> => {
+  // Validate input
+  if (!prompt.trim()) {
+    return {
+      commands: [],
+      error: 'Please provide a request\n(e.g., /ai create a react app)',
+    };
+  }
+
+  // Try template match first (instant response)
+  const templateMatch = tryTemplate(prompt);
+  if (templateMatch) {
+    log.info('Using template match', { prompt: prompt.substring(0, 50) });
+    return {
+      commands: [templateMatch],
+      explanation: undefined,
+    };
+  }
+
+  // Get router and check if any provider is configured
+  const router = getRouter();
+  const configuredProviders = router.getConfiguredProviders();
+
+  if (configuredProviders.length === 0) {
+    return {
+      commands: [],
+      error: 'No AI provider configured.\nSet up a provider in Settings.',
+    };
+  }
+
+  log.info('Processing AI command', { prompt: prompt.substring(0, 100) });
+
+  // Build context message
+  let contextMsg = '';
+  if (context?.currentDirectory) {
+    contextMsg += `Current directory: ${context.currentDirectory}\n`;
+  }
+  if (context?.recentOutput) {
+    contextMsg += `Recent terminal output:\n${context.recentOutput.slice(-500)}\n`;
+  }
+
+  const fullPrompt = contextMsg
+    ? `${contextMsg}\n---\nUser request: ${prompt}`
+    : prompt;
+
+  try {
+    // Send to AI via router
+    const response = await router.sendMessage({
+      prompt: fullPrompt,
+      systemPrompt: SYSTEM_PROMPT,
+      temperature: 0.3, // Lower temperature for more deterministic commands
+      maxTokens: 500, // Commands shouldn't be too long
+    });
+
+    // Parse response into commands and explanation
+    const lines = response.content.trim().split('\n');
+    const commands: string[] = [];
+    let explanation = '';
+
+    for (const line of lines) {
+      const trimmed = line.trim();
+      if (!trimmed) continue;
+
+      // Skip markdown code block markers
+      if (trimmed.startsWith('```')) continue;
+
+      if (looksLikeCommand(trimmed)) {
+        commands.push(trimmed);
+      } else {
+        explanation += (explanation ? '\n' : '') + trimmed;
+      }
+    }
+
+    log.debug('AI command processed', { commandCount: commands.length });
+
+    return {
+      commands,
+      explanation: explanation || undefined,
+    };
+  } catch (error) {
+    log.error('AI command failed', { error });
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    return {
+      commands: [],
+      error: `AI request failed:\n${errorMessage}`,
+    };
+  }
+};

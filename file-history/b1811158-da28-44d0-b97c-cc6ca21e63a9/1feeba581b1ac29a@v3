@@ -1,0 +1,346 @@
+import { useEffect, useState, useMemo } from 'react';
+import { X, Plus, Clock } from 'lucide-react';
+import { useTimeTrackingStore } from '../stores/useTimeTrackingStore';
+import { formatDuration } from '../utils/timeFormatters';
+import { MonthlyCalendarGrid } from './shared/MonthlyCalendarGrid';
+import { CalendarHeader } from './shared/CalendarHeader';
+import type { MonthlyReport, TimeEntry } from '../types';
+
+/**
+ * MonthlyTimeReport Component
+ * Displays monthly time tracking report with calendar grid and project breakdown
+ * Uses shared MonthlyCalendarGrid for consistent styling with TimeEntryCalendar
+ */
+interface DayDetail {
+  date: string;
+  entries: TimeEntry[];
+  totalDuration: number;
+}
+
+export function MonthlyTimeReport() {
+  const { getMonthlyReport, entries, projects } = useTimeTrackingStore();
+
+  const [report, setReport] = useState<MonthlyReport | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const [selectedDay, setSelectedDay] = useState<DayDetail | null>(null);
+
+  const year = currentDate.getFullYear();
+  const month = currentDate.getMonth(); // 0-11
+
+  useEffect(() => {
+    const loadReport = async () => {
+      setLoading(true);
+      try {
+        const monthlyReport = await getMonthlyReport(year, month);
+        setReport(monthlyReport);
+      } catch (error) {
+        console.error('Failed to load monthly report:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadReport();
+  }, [getMonthlyReport, year, month]);
+
+  // Create lookup map from dailyBreakdown using ISO date keys
+  const dailyBreakdownMap = useMemo(() => {
+    const map = new Map<string, { totalDuration: number; entryCount: number }>();
+    if (report?.dailyBreakdown) {
+      report.dailyBreakdown.forEach(day => {
+        map.set(day.date, { totalDuration: day.totalDuration, entryCount: day.entryCount });
+      });
+    }
+    return map;
+  }, [report?.dailyBreakdown]);
+
+  const handlePreviousMonth = () => {
+    setCurrentDate(new Date(year, month - 1, 1));
+  };
+
+  const handleNextMonth = () => {
+    setCurrentDate(new Date(year, month + 1, 1));
+  };
+
+  const handleToday = () => {
+    setCurrentDate(new Date());
+  };
+
+  // Handle clicking on a day to show entries
+  const handleDayClick = (dateKey: string) => {
+    // Convert standard dateKey (YYYY-M-D) to ISO format (YYYY-MM-DD) for entry lookup
+    const [y, m, d] = dateKey.split('-').map(Number);
+    const isoDate = `${y}-${m.toString().padStart(2, '0')}-${d.toString().padStart(2, '0')}`;
+
+    // Get entries for this day
+    const dayEntries = entries.filter(entry => {
+      const entryDate = new Date(entry.startTime).toISOString().split('T')[0];
+      return entryDate === isoDate;
+    });
+
+    const daySummary = dailyBreakdownMap.get(isoDate);
+    const totalDuration = daySummary?.totalDuration || dayEntries.reduce((sum, e) => sum + e.duration, 0);
+
+    setSelectedDay({
+      date: isoDate,
+      entries: dayEntries,
+      totalDuration
+    });
+  };
+
+  // Get project name and color by ID
+  const getProject = (projectId: string | null | undefined) => {
+    if (!projectId) return { name: 'No Project', color: '#9CA3AF' };
+    const project = projects.find(p => p.id === projectId);
+    return project ? { name: project.name, color: project.color } : { name: 'Unknown', color: '#9CA3AF' };
+  };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-12">
+        <div className="text-text-light-secondary dark:text-text-dark-secondary">
+          Loading monthly report...
+        </div>
+      </div>
+    );
+  }
+
+  if (!report) {
+    return (
+      <div className="flex items-center justify-center py-12">
+        <div className="text-text-light-secondary dark:text-text-dark-secondary">
+          No data available
+        </div>
+      </div>
+    );
+  }
+
+  const monthName = new Date(year, month, 1).toLocaleDateString('en-US', {
+    month: 'long',
+    year: 'numeric'
+  });
+
+  return (
+    <div className="space-y-6">
+      {/* Month Navigation - Using shared CalendarHeader component */}
+      <CalendarHeader
+        displayText={monthName}
+        onPrevious={handlePreviousMonth}
+        onNext={handleNextMonth}
+        onToday={handleToday}
+      />
+
+      {/* Monthly Summary Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="bg-surface-light dark:bg-surface-dark rounded-button border border-border-light dark:border-border-dark p-6">
+          <div className="text-sm text-text-light-secondary dark:text-text-dark-secondary mb-1">
+            Total Time
+          </div>
+          <div className="text-3xl font-bold text-accent-magenta dark:text-accent-cyan">
+            {formatDuration(report.totalDuration, { showSeconds: false })}
+          </div>
+        </div>
+
+        <div className="bg-surface-light dark:bg-surface-dark rounded-button border border-border-light dark:border-border-dark p-6">
+          <div className="text-sm text-text-light-secondary dark:text-text-dark-secondary mb-1">
+            Total Entries
+          </div>
+          <div className="text-3xl font-bold text-text-light-primary dark:text-text-dark-primary">
+            {report.entryCount}
+          </div>
+        </div>
+
+        <div className="bg-surface-light dark:bg-surface-dark rounded-button border border-border-light dark:border-border-dark p-6">
+          <div className="text-sm text-text-light-secondary dark:text-text-dark-secondary mb-1">
+            Avg Time/Day
+          </div>
+          <div className="text-3xl font-bold text-text-light-primary dark:text-text-dark-primary">
+            {formatDuration(
+              Math.floor(report.totalDuration / Math.max(report.dailyBreakdown.length, 1)),
+              { showSeconds: false }
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Calendar Grid - Using shared MonthlyCalendarGrid for consistent styling */}
+      <div>
+        <h3 className="text-lg font-semibold text-text-light-primary dark:text-text-dark-primary mb-4">
+          Daily Breakdown
+        </h3>
+        <MonthlyCalendarGrid
+          year={year}
+          month={month}
+          onDayClick={handleDayClick}
+          renderDayContent={({ isoDateKey }) => {
+            const daySummary = dailyBreakdownMap.get(isoDateKey);
+            const hasEntries = daySummary && daySummary.entryCount > 0;
+
+            if (!hasEntries) {
+              return (
+                <div className="text-[10px] text-text-light-tertiary dark:text-text-dark-tertiary opacity-0 group-hover:opacity-100">
+                  No entries
+                </div>
+              );
+            }
+
+            return (
+              <div className="space-y-1">
+                <div className="flex items-center gap-1 text-xs text-accent-magenta dark:text-accent-cyan font-medium">
+                  <Clock className="w-3 h-3" />
+                  {formatDuration(daySummary.totalDuration, { showSeconds: false })}
+                </div>
+                <div className="text-[10px] text-text-light-tertiary dark:text-text-dark-tertiary">
+                  {daySummary.entryCount} {daySummary.entryCount === 1 ? 'entry' : 'entries'}
+                </div>
+              </div>
+            );
+          }}
+        />
+      </div>
+
+      {/* Day Detail Modal */}
+      {selectedDay && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          <div
+            className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+            onClick={() => setSelectedDay(null)}
+          />
+          <div className="relative z-10 w-full max-w-lg mx-4 bg-surface-light dark:bg-surface-dark rounded-card shadow-modal max-h-[80vh] overflow-hidden flex flex-col">
+            {/* Header */}
+            <div className="flex items-center justify-between px-6 py-4 border-b border-border-light dark:border-border-dark">
+              <div>
+                <h2 className="text-lg font-semibold text-text-light-primary dark:text-text-dark-primary">
+                  {new Date(selectedDay.date + 'T00:00:00').toLocaleDateString('en-US', {
+                    weekday: 'long',
+                    month: 'long',
+                    day: 'numeric',
+                    year: 'numeric',
+                  })}
+                </h2>
+                <p className="text-sm text-text-light-secondary dark:text-text-dark-secondary">
+                  {selectedDay.entries.length} {selectedDay.entries.length === 1 ? 'entry' : 'entries'} • {formatDuration(selectedDay.totalDuration, { showSeconds: false })}
+                </p>
+              </div>
+              <button
+                onClick={() => setSelectedDay(null)}
+                className="p-2 rounded-button hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated transition-all"
+                aria-label="Close"
+              >
+                <X className="w-5 h-5 text-text-light-secondary dark:text-text-dark-secondary" />
+              </button>
+            </div>
+
+            {/* Content */}
+            <div className="flex-1 overflow-y-auto p-6 space-y-3">
+              {selectedDay.entries.length > 0 ? (
+                selectedDay.entries.map((entry) => {
+                  const project = getProject(entry.projectId);
+                  return (
+                    <div
+                      key={entry.id}
+                      className="p-3 rounded-button bg-surface-light-elevated dark:bg-surface-dark-elevated border border-border-light dark:border-border-dark"
+                    >
+                      <div className="flex items-start gap-3">
+                        <div
+                          className="w-3 h-3 rounded-full flex-shrink-0 mt-1"
+                          style={{ backgroundColor: project.color }}
+                        />
+                        <div className="flex-1 min-w-0">
+                          <div className="font-medium text-text-light-primary dark:text-text-dark-primary">
+                            {entry.description || 'No description'}
+                          </div>
+                          <div className="text-sm text-text-light-secondary dark:text-text-dark-secondary mt-1">
+                            {project.name}
+                          </div>
+                          <div className="flex items-center gap-4 mt-2 text-xs text-text-light-tertiary dark:text-text-dark-tertiary">
+                            <span>
+                              {new Date(entry.startTime).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}
+                              {entry.endTime && ` - ${new Date(entry.endTime).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}`}
+                            </span>
+                            <span className="font-mono text-accent-magenta dark:text-accent-cyan">
+                              {formatDuration(entry.duration, { showSeconds: false })}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })
+              ) : (
+                <div className="text-center py-8 text-text-light-secondary dark:text-text-dark-secondary">
+                  No time entries for this day
+                </div>
+              )}
+            </div>
+
+            {/* Footer */}
+            <div className="px-6 py-4 border-t border-border-light dark:border-border-dark">
+              <button
+                onClick={() => {
+                  setSelectedDay(null);
+                  // Navigate to time tracking or open add entry modal
+                  // For now, just close - time tracking is in sidebar
+                }}
+                className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-accent-magenta hover:bg-accent-magenta-hover dark:bg-accent-cyan dark:hover:bg-accent-cyan-hover text-white rounded-button font-medium transition-all"
+              >
+                <Plus className="w-4 h-4" />
+                Add Time Entry
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Project Breakdown */}
+      {report.projectBreakdown.length > 0 && (
+        <div className="bg-surface-light dark:bg-surface-dark rounded-button border border-border-light dark:border-border-dark p-6">
+          <h3 className="text-lg font-semibold text-text-light-primary dark:text-text-dark-primary mb-4">
+            Time by Project
+          </h3>
+
+          <div className="space-y-3">
+            {report.projectBreakdown.map((project) => (
+              <div key={project.projectId || 'no-project'} className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3 flex-1">
+                    <div
+                      className="w-3 h-3 rounded-full flex-shrink-0"
+                      style={{ backgroundColor: project.projectColor }}
+                    />
+                    <span className="text-sm font-medium text-text-light-primary dark:text-text-dark-primary truncate">
+                      {project.projectName}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <span className="text-xs text-text-light-secondary dark:text-text-dark-secondary">
+                      {project.entryCount} {project.entryCount === 1 ? 'entry' : 'entries'}
+                    </span>
+                    <span className="text-sm font-mono font-semibold text-accent-magenta dark:text-accent-cyan min-w-[80px] text-right">
+                      {formatDuration(project.totalDuration, { showSeconds: false })}
+                    </span>
+                    <span className="text-sm font-medium text-text-light-secondary dark:text-text-dark-secondary min-w-[50px] text-right">
+                      {project.percentage.toFixed(1)}%
+                    </span>
+                  </div>
+                </div>
+
+                {/* Progress Bar */}
+                <div className="h-2 bg-surface-light-elevated dark:bg-surface-dark-elevated rounded-full overflow-hidden">
+                  <div
+                    className="h-full transition-all duration-300"
+                    style={{
+                      width: `${project.percentage}%`,
+                      backgroundColor: project.projectColor
+                    }}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}

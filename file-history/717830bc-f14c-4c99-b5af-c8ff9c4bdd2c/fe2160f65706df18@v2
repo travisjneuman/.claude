@@ -1,0 +1,388 @@
+# Time Tracking Enhancements - Implementation Plan
+
+**Created:** 2025-11-28
+**Priority:** HIGH (User requested "dedicated time tracking section in Schedule")
+**Estimated Time:** 6-10 hours for complete enhancement
+
+---
+
+## Problem Statement
+
+**User Request:** "Dedicated time tracking section in Schedule page with greater customization, analytics, insights"
+
+**Current State** (from master plan):
+- ✅ Basic time tracking exists
+- ✅ Time entries with start/stop times
+- ✅ Project association
+- ✅ CSV export
+- ✅ Billable hours tracking (MVP - implemented Nov 2025)
+- ✅ Monthly time reports
+- ⏭️ **Missing:** Dedicated Schedule tab, advanced features
+
+**Desired State:**
+- Time Tracking as primary tab in Schedule page
+- Toggl/Clockify-level features
+- Advanced analytics and insights
+- Pomodoro integration
+- Automatic time suggestions
+
+---
+
+## Competitive Analysis
+
+### Toggl Track (Industry Leader)
+**Key Features:**
+- One-click timer start/stop
+- Running timer always visible (global widget)
+- Timeline view (visual day breakdown)
+- Reports with charts (by project, by day, by client)
+- Browser extension for tracking time on websites
+- Idle detection ("You've been idle for 5min, discard time?")
+- Keyboard shortcuts (Ctrl+Alt+1 to start/stop)
+
+**Pricing:** $10/user/month (Pro)
+
+### Clockify (Free Alternative)
+**Key Features:**
+- Free tier (unlimited users, unlimited tracking)
+- Manual time entry + timer
+- Project/client/task hierarchy
+- Tags for categorization
+- Kiosk mode (punch in/out for teams)
+- Invoicing integration
+
+**Pricing:** Free (limited reports), $5/user/month (Pro)
+
+### Harvest (Business-Focused)
+**Key Features:**
+- Time tracking + invoicing
+- Expense tracking
+- Team scheduling
+- Approval workflows
+- Integrations (Asana, Trello, etc.)
+
+**Pricing:** $12/user/month
+
+### RescueTime (Automatic Tracking)
+**Key Features:**
+- Automatic activity tracking (passive)
+- Focus sessions (distraction blocking)
+- Productivity score
+- Website/app categorization
+- Goals and alerts
+
+**Pricing:** $12/month
+
+---
+
+## User Needs Analysis
+
+**From master plan research:**
+1. **One-click timer** - Quick start/stop without modals
+2. **Visual reports** - Charts, heat maps, trends
+3. **Pomodoro mode** - 25min focus + 5min break cycles
+4. **Automatic suggestions** - "You spent 3h on Project X yesterday, start timer?"
+5. **Billable tracking** - Already implemented ✅
+6. **Project/client organization** - Basic projects exist, need clients
+7. **Export for invoicing** - CSV exists, need formatted reports
+
+---
+
+## Implementation Plan
+
+### Phase 1: Dedicated Time Tracking Tab (2-3 hours)
+
+**Current:** Time tracking accessible via sidebar only
+**Goal:** Time tracking as primary tab in `/schedule` page
+
+**Implementation:**
+1. Add "Time Tracking" tab to Schedule page (next to Calendar, Events, etc.)
+2. Show active timer prominently at top
+3. Display today's entries below
+4. Add "Start Timer" button (always visible)
+
+**Files to modify:**
+- `src/pages/Schedule.tsx` (add Time Tracking tab)
+- Create `src/components/TimeTracking/TimeTrackingTab.tsx` (new component)
+
+### Phase 2: One-Click Timer Widget (1-2 hours)
+
+**Inspiration:** Toggl's global timer widget
+
+**Implementation:**
+1. Create floating timer widget (bottom-right corner, always visible)
+2. Show: Running timer OR "Start Timer" button
+3. Click to start/stop (no modal)
+4. Small dropdown to select project
+5. Minimize/expand functionality
+
+**Files:**
+- Create `src/widgets/Dashboard/TimerWidget.tsx`
+- Add to global layout (visible on all pages)
+
+### Phase 3: Timeline View (2-3 hours)
+
+**Inspiration:** Toggl's timeline (visual day breakdown)
+
+**Implementation:**
+1. Create timeline component (24-hour day view)
+2. Show time entries as colored blocks
+3. Drag to adjust start/end times
+4. Click empty space to create new entry
+5. Color-code by project
+
+**Files:**
+- Create `src/components/TimeTracking/Timeline.tsx`
+- Use D3.js or custom SVG
+
+### Phase 4: Advanced Analytics (2-3 hours)
+
+**Goal:** Toggl/Clockify-level reports
+
+**Implementation:**
+1. **Weekly Report:**
+   - Total hours per day (bar chart)
+   - Hours by project (pie chart)
+   - Billable vs non-billable breakdown
+
+2. **Monthly Report:**
+   - Already exists ✅ (from Nov 2025 implementation)
+   - Enhance with trend line
+   - Add comparison to previous month
+
+3. **Project Breakdown:**
+   - Time spent per project (last 7/30/90 days)
+   - Average session duration
+   - Most productive hours
+
+4. **Heat Map:**
+   - Hour-of-day productivity (0-23 hours)
+   - Day-of-week productivity
+
+**Files:**
+- Enhance `src/components/TimeTracking/MonthlyTimeReport.tsx`
+- Create `src/components/TimeTracking/AnalyticsCharts.tsx`
+- Use Recharts (already in dependencies)
+
+### Phase 5: Pomodoro Mode (1-2 hours)
+
+**Feature:** Built-in Pomodoro timer (25min work + 5min break)
+
+**Implementation:**
+1. Add "Pomodoro" toggle to timer widget
+2. Auto-stop after 25 minutes, show break notification
+3. Auto-start break timer (5 min)
+4. Track Pomodoros completed
+5. Settings: Customize work/break durations
+
+**Files:**
+- Enhance `src/widgets/Dashboard/TimerWidget.tsx`
+- Add Pomodoro state to `src/stores/useTimeTrackingStore.ts`
+
+### Phase 6: Idle Detection (1-2 hours)
+
+**Inspiration:** Toggl's idle detection
+
+**Implementation:**
+1. Detect user inactivity after 5 minutes
+2. Show modal: "You've been idle. Keep tracking or discard?"
+3. Options: Keep time, Discard time, Edit end time
+4. Use browser visibility API + mouse/keyboard events
+
+**Files:**
+- Create `src/services/idleDetection.ts`
+- Integrate with timer widget
+
+### Phase 7: Automatic Suggestions (1-2 hours)
+
+**Feature:** Smart timer suggestions based on patterns
+
+**Implementation:**
+1. Analyze past entries (same time yesterday, same day last week)
+2. Suggest project to start: "Usually work on Project X at this time"
+3. One-click to start suggested timer
+4. Learn from user behavior
+
+**Files:**
+- Create `src/services/timeSuggestions.ts`
+- Add ML-lite pattern matching
+
+---
+
+## Quick Wins (Ship First - 3-4 hours)
+
+**Priority 1: Dedicated Tab** (2-3 hours)
+- Add Time Tracking tab to Schedule page
+- Show today's entries
+- Start timer button (no modal)
+
+**Priority 2: Timer Widget** (1-2 hours)
+- Floating timer (always visible)
+- One-click start/stop
+- Project dropdown
+
+**Result:** Addresses user request for "dedicated section" + better UX
+
+---
+
+## Medium Priority (Ship Next - 4-6 hours)
+
+**Priority 3: Timeline View** (2-3 hours)
+- Visual day breakdown
+- Drag-to-edit entries
+
+**Priority 4: Analytics** (2-3 hours)
+- Weekly/monthly reports
+- Charts and trends
+
+---
+
+## Long-Term Enhancements (Later - 4-6 hours)
+
+**Priority 5: Pomodoro Mode** (1-2 hours)
+**Priority 6: Idle Detection** (1-2 hours)
+**Priority 7: Auto Suggestions** (1-2 hours)
+
+---
+
+## Success Criteria
+
+**Before:** Basic time tracking, sidebar-only access
+**After:**
+- Dedicated Time Tracking tab in Schedule ✅
+- One-click timer (always visible) ✅
+- Timeline view for visual editing ✅
+- Advanced analytics (weekly/monthly/project) ✅
+- Pomodoro mode (optional) ✅
+- Idle detection (optional) ✅
+
+**Metrics:**
+- Time tracking usage increases 50%+
+- Users track at least 3 sessions per day
+- Billable hours tracking adoption increases
+
+---
+
+## Technical Architecture
+
+### Store Enhancement
+
+```typescript
+interface TimeTrackingStore {
+  // Existing
+  entries: TimeEntry[];
+  projects: Project[];
+  activeEntry: TimeEntry | null;
+
+  // New for enhancements
+  pomodoroSettings: {
+    workDuration: number; // 25 min default
+    breakDuration: number; // 5 min default
+    longBreakDuration: number; // 15 min default
+    pomodorosUntilLongBreak: number; // 4 default
+  };
+  idleDetectionEnabled: boolean;
+  timerWidgetVisible: boolean;
+  timerWidgetMinimized: boolean;
+
+  // New actions
+  startPomodoro: () => void;
+  pausePomodoro: () => void;
+  skipBreak: () => void;
+  detectIdle: (minutes: number) => void;
+  getSuggestions: () => TimerSuggestion[];
+}
+```
+
+### Timer Widget State
+
+```typescript
+interface TimerWidgetState {
+  mode: 'normal' | 'pomodoro';
+  isRunning: boolean;
+  elapsed: number;
+  project: Project | null;
+  pomodoroPhase: 'work' | 'break' | 'longBreak' | null;
+  pomodorosCompleted: number;
+}
+```
+
+---
+
+## Comparison to Competitors
+
+| Feature | Toggl | Clockify | Harvest | NB (After) |
+|---------|-------|----------|---------|------------|
+| **One-click timer** | ✅ | ✅ | ✅ | ✅ |
+| **Timeline view** | ✅ | ❌ | ❌ | ✅ |
+| **Pomodoro mode** | ❌ | ❌ | ❌ | ✅ |
+| **Idle detection** | ✅ | ✅ | ✅ | ✅ |
+| **Auto suggestions** | ❌ | ❌ | ❌ | ✅ (unique!) |
+| **Billable tracking** | ✅ | ✅ | ✅ | ✅ |
+| **Reports/analytics** | ✅ | ✅ | ✅ | ✅ |
+| **Local-first** | ❌ | ❌ | ❌ | ✅ (unique!) |
+| **Free** | ❌ ($10/mo) | ⚠️ (limited) | ❌ ($12/mo) | ✅ |
+
+**NB Competitive Advantages:**
+- Local-first (privacy)
+- Pomodoro built-in
+- Auto suggestions (ML-based)
+- 100% free
+
+---
+
+## Design Mockup (Text-Based)
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  Schedule > Time Tracking                               │
+├─────────────────────────────────────────────────────────┤
+│                                                          │
+│  ┌────────────────────────────────────────────────┐    │
+│  │  ⏱️  RUNNING: Project X  (2:34:12)    [⏸️ Stop] │    │
+│  └────────────────────────────────────────────────┘    │
+│                                                          │
+│  Today - Friday, Nov 28                                  │
+│  ─────────────────────────────────────────────────────  │
+│  📊 Total: 6h 34m  |  💰 Billable: 4h 15m              │
+│                                                          │
+│  Timeline                                                │
+│  ┌──────────────────────────────────────────────────┐  │
+│  │ 8am  ████ Project A (1:30)                       │  │
+│  │10am  ████████ Project B (3:00)                   │  │
+│  │ 2pm  ██████ Project X (2:34) ← RUNNING           │  │
+│  └──────────────────────────────────────────────────┘  │
+│                                                          │
+│  Entries                                                 │
+│  ┌──────────────────────────────────────────────────┐  │
+│  │ 8:00-9:30am  │ Project A  │ 1:30  │ 💰 Billable  │  │
+│  │10:00-1:00pm  │ Project B  │ 3:00  │ 💰 Billable  │  │
+│  │ 2:00-running │ Project X  │ 2:34  │   Non-bill   │  │
+│  └──────────────────────────────────────────────────┘  │
+│                                                          │
+│  [+ Start Timer] [📊 Reports] [⚙️ Settings]            │
+└─────────────────────────────────────────────────────────┘
+
+┌─────────────────────┐  ← Floating Timer Widget
+│ ⏱️ Project X        │     (bottom-right, all pages)
+│ 2:34:12 ⏸️          │
+└─────────────────────┘
+```
+
+---
+
+## Next Steps
+
+1. **Get user approval on phased approach**
+2. **Create task file:** `tasks/time-tracking-enhancements.md`
+3. **Start with Quick Wins (3-4 hours):**
+   - Dedicated tab in Schedule
+   - Floating timer widget
+4. **Ship Medium Priority (4-6 hours):**
+   - Timeline view
+   - Analytics enhancement
+5. **Later: Long-term features**
+
+**Estimated Impact:** HIGH - Directly addresses user request
+**Estimated Effort:** MEDIUM (3-4h quick wins), HIGH (10-16h full)
+**ROI:** Excellent - Makes NB competitive with Toggl/Clockify

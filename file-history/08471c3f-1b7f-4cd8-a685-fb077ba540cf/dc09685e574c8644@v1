@@ -1,0 +1,567 @@
+import { useEffect, useState, useMemo } from 'react';
+import { X, Plus, Clock } from 'lucide-react';
+import { useTimeTrackingStore } from '../stores/useTimeTrackingStore';
+import { formatDuration } from '../utils/timeFormatters';
+import { getStandardDateKey } from '../utils/dateUtils';
+import { exportTimeEntriesToCSV, importTimeEntriesFromCSV, downloadCSV, readCSVFile } from '../services/csvTimeEntryExport';
+import { MonthlyCalendarGrid } from './shared/MonthlyCalendarGrid';
+import { CalendarHeader } from './shared/CalendarHeader';
+import { WeekView } from './WeekView';
+import { DayView } from './DayView';
+import { AgendaView } from './AgendaView';
+import type { MonthlyReport, TimeEntry, ViewMode } from '../types';
+
+/**
+ * TimeEntryReportCalendar Component
+ * Full-featured calendar for viewing time entries with multiple view modes.
+ * Mirrors the Schedule > Calendar tab but focused on time tracking data.
+ */
+interface DayDetail {
+  date: string;
+  entries: TimeEntry[];
+  totalDuration: number;
+}
+
+interface TimeEntryReportCalendarProps {
+  onAddEntry?: (dateKey: string) => void;
+}
+
+export function TimeEntryReportCalendar({ onAddEntry }: TimeEntryReportCalendarProps) {
+  const { getMonthlyReport, entries, projects, loadEntries, loadProjects, addManualEntry } = useTimeTrackingStore();
+
+  const [report, setReport] = useState<MonthlyReport | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const [selectedDay, setSelectedDay] = useState<DayDetail | null>(null);
+  const [viewMode, setViewMode] = useState<ViewMode>('monthly');
+  const [importStatus, setImportStatus] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
+
+  const year = currentDate.getFullYear();
+  const month = currentDate.getMonth(); // 0-11
+
+  useEffect(() => {
+    const loadData = async () => {
+      setLoading(true);
+      try {
+        // Load entries for the month
+        const monthStart = new Date(year, month, 1);
+        const monthEnd = new Date(year, month + 1, 0, 23, 59, 59);
+
+        await Promise.all([
+          loadEntries({
+            dateRange: 'custom',
+            startDate: monthStart.toISOString(),
+            endDate: monthEnd.toISOString(),
+            projectIds: [],
+            tags: [],
+            searchQuery: ''
+          }),
+          loadProjects(),
+          getMonthlyReport(year, month).then(setReport)
+        ]);
+      } catch (error) {
+        console.error('Failed to load time entry data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadData();
+  }, [getMonthlyReport, loadEntries, loadProjects, year, month]);
+
+  // Create lookup map from dailyBreakdown using ISO date keys
+  const dailyBreakdownMap = useMemo(() => {
+    const map = new Map<string, { totalDuration: number; entryCount: number }>();
+    if (report?.dailyBreakdown) {
+      report.dailyBreakdown.forEach(day => {
+        map.set(day.date, { totalDuration: day.totalDuration, entryCount: day.entryCount });
+      });
+    }
+    return map;
+  }, [report?.dailyBreakdown]);
+
+  // Group entries by date for calendar views
+  const entriesByDate = useMemo(() => {
+    const map = new Map<string, TimeEntry[]>();
+    entries.forEach(entry => {
+      const date = new Date(entry.startTime).toISOString().split('T')[0];
+      if (!map.has(date)) {
+        map.set(date, []);
+      }
+      map.get(date)!.push(entry);
+    });
+    return map;
+  }, [entries]);
+
+  // Convert time entries to event-like format for WeekView/DayView compatibility
+  const entriesAsEvents = useMemo(() => {
+    const result: Record<string, { id: string; title: string; startTime: string; endTime?: string; color: string }[]> = {};
+
+    entries.forEach(entry => {
+      const dateKey = getStandardDateKey(new Date(entry.startTime));
+      if (!result[dateKey]) result[dateKey] = [];
+
+      const project = projects.find(p => p.id === entry.projectId);
+      result[dateKey].push({
+        id: entry.id,
+        title: entry.description || 'No description',
+        startTime: entry.startTime,
+        endTime: entry.endTime || undefined,
+        color: project?.color || '#9CA3AF'
+      });
+    });
+
+    return result;
+  }, [entries, projects]);
+
+  const handlePrevious = () => {
+    if (viewMode === 'monthly') {
+      setCurrentDate(new Date(year, month - 1, 1));
+    } else if (viewMode === 'weekly') {
+      const newDate = new Date(currentDate);
+      newDate.setDate(newDate.getDate() - 7);
+      setCurrentDate(newDate);
+    } else if (viewMode === 'daily') {
+      const newDate = new Date(currentDate);
+      newDate.setDate(newDate.getDate() - 1);
+      setCurrentDate(newDate);
+    }
+  };
+
+  const handleNext = () => {
+    if (viewMode === 'monthly') {
+      setCurrentDate(new Date(year, month + 1, 1));
+    } else if (viewMode === 'weekly') {
+      const newDate = new Date(currentDate);
+      newDate.setDate(newDate.getDate() + 7);
+      setCurrentDate(newDate);
+    } else if (viewMode === 'daily') {
+      const newDate = new Date(currentDate);
+      newDate.setDate(newDate.getDate() + 1);
+      setCurrentDate(newDate);
+    }
+  };
+
+  const handleToday = () => {
+    setCurrentDate(new Date());
+  };
+
+  const handlePrint = () => {
+    window.print();
+  };
+
+  // Export time entries to CSV
+  const handleExport = () => {
+    const result = exportTimeEntriesToCSV(entries, projects);
+    if (result.success && result.data) {
+      const filename = `time-entries-${new Date().toISOString().split('T')[0]}.csv`;
+      downloadCSV(result.data, filename);
+      setImportStatus({ message: `Exported ${entries.length} entries`, type: 'success' });
+    } else {
+      setImportStatus({ message: result.error || 'Export failed', type: 'error' });
+    }
+    setTimeout(() => setImportStatus(null), 3000);
+  };
+
+  // Import time entries from CSV
+  const handleImport = async (file: File) => {
+    try {
+      const csvData = await readCSVFile(file);
+      const result = importTimeEntriesFromCSV(csvData, projects);
+
+      if (result.success && result.entries) {
+        // Add each imported entry
+        let importedCount = 0;
+        for (const entry of result.entries) {
+          await addManualEntry(entry);
+          importedCount++;
+        }
+
+        const message = result.skipped
+          ? `Imported ${importedCount} entries (${result.skipped} skipped)`
+          : `Imported ${importedCount} entries`;
+        setImportStatus({ message, type: 'success' });
+
+        // Reload data
+        const monthlyReport = await getMonthlyReport(year, month);
+        setReport(monthlyReport);
+      } else {
+        setImportStatus({ message: result.error || 'Import failed', type: 'error' });
+      }
+    } catch (error) {
+      setImportStatus({ message: String(error), type: 'error' });
+    }
+    setTimeout(() => setImportStatus(null), 3000);
+  };
+
+  // Handle clicking on a day to show entries
+  const handleDayClick = (dateKey: string) => {
+    // Convert standard dateKey (YYYY-M-D) to ISO format (YYYY-MM-DD) for entry lookup
+    const [y, m, d] = dateKey.split('-').map(Number);
+    const isoDate = `${y}-${m.toString().padStart(2, '0')}-${d.toString().padStart(2, '0')}`;
+
+    // Get entries for this day
+    const dayEntries = entriesByDate.get(isoDate) || [];
+    const daySummary = dailyBreakdownMap.get(isoDate);
+    const totalDuration = daySummary?.totalDuration || dayEntries.reduce((sum, e) => sum + e.duration, 0);
+
+    setSelectedDay({
+      date: isoDate,
+      entries: dayEntries,
+      totalDuration
+    });
+  };
+
+  // Get project name and color by ID
+  const getProject = (projectId: string | null | undefined) => {
+    if (!projectId) return { name: 'No Project', color: '#9CA3AF' };
+    const project = projects.find(p => p.id === projectId);
+    return project ? { name: project.name, color: project.color } : { name: 'Unknown', color: '#9CA3AF' };
+  };
+
+  // Get display text for current period
+  const getDisplayText = () => {
+    if (viewMode === 'monthly') {
+      return new Date(year, month, 1).toLocaleDateString('en-US', {
+        month: 'long',
+        year: 'numeric'
+      });
+    } else if (viewMode === 'weekly') {
+      const startOfWeek = new Date(currentDate);
+      startOfWeek.setDate(startOfWeek.getDate() - startOfWeek.getDay());
+      const endOfWeek = new Date(startOfWeek);
+      endOfWeek.setDate(endOfWeek.getDate() + 6);
+
+      if (startOfWeek.getMonth() === endOfWeek.getMonth()) {
+        return `${startOfWeek.toLocaleDateString('en-US', { month: 'long' })} ${startOfWeek.getDate()}-${endOfWeek.getDate()}, ${startOfWeek.getFullYear()}`;
+      } else {
+        return `${startOfWeek.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} - ${endOfWeek.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`;
+      }
+    } else if (viewMode === 'daily') {
+      return currentDate.toLocaleDateString('en-US', {
+        weekday: 'long',
+        month: 'long',
+        day: 'numeric',
+        year: 'numeric'
+      });
+    } else {
+      return 'Time Entries';
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-12">
+        <div className="text-text-light-secondary dark:text-text-dark-secondary">
+          Loading time entries...
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-6">
+      {/* Header - Using shared CalendarHeader with time tracking customizations */}
+      <CalendarHeader
+        displayText={getDisplayText()}
+        icon={Clock}
+        onPrevious={handlePrevious}
+        onNext={handleNext}
+        onToday={handleToday}
+        showNavigation={viewMode !== 'agenda'}
+        viewMode={viewMode}
+        onViewModeChange={setViewMode}
+        onCreate={onAddEntry ? () => onAddEntry(getStandardDateKey(new Date())) : undefined}
+        createButtonText="New Entry"
+        onPrint={handlePrint}
+        onExport={handleExport}
+        exportTooltip="Export to CSV"
+        onImport={handleImport}
+        importTooltip="Import from CSV"
+        importAccept=".csv"
+        statusMessage={importStatus && (
+          <span className={`text-xs px-2 py-1 rounded ${
+            importStatus.type === 'success'
+              ? 'bg-status-success/20 text-status-success'
+              : 'bg-status-error/20 text-status-error'
+          }`}>
+            {importStatus.message}
+          </span>
+        )}
+      />
+
+      {/* Monthly Summary Cards (only in monthly view) */}
+      {viewMode === 'monthly' && report && (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="bg-surface-light dark:bg-surface-dark rounded-button border border-border-light dark:border-border-dark p-6">
+            <div className="text-sm text-text-light-secondary dark:text-text-dark-secondary mb-1">
+              Total Time
+            </div>
+            <div className="text-3xl font-bold text-accent-magenta dark:text-accent-cyan">
+              {formatDuration(report.totalDuration, { showSeconds: false })}
+            </div>
+          </div>
+
+          <div className="bg-surface-light dark:bg-surface-dark rounded-button border border-border-light dark:border-border-dark p-6">
+            <div className="text-sm text-text-light-secondary dark:text-text-dark-secondary mb-1">
+              Total Entries
+            </div>
+            <div className="text-3xl font-bold text-text-light-primary dark:text-text-dark-primary">
+              {report.entryCount}
+            </div>
+          </div>
+
+          <div className="bg-surface-light dark:bg-surface-dark rounded-button border border-border-light dark:border-border-dark p-6">
+            <div className="text-sm text-text-light-secondary dark:text-text-dark-secondary mb-1">
+              Avg Time/Day
+            </div>
+            <div className="text-3xl font-bold text-text-light-primary dark:text-text-dark-primary">
+              {formatDuration(
+                Math.floor(report.totalDuration / Math.max(report.dailyBreakdown.length, 1)),
+                { showSeconds: false }
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* View Content */}
+      {viewMode === 'monthly' ? (
+        /* Monthly View */
+        <>
+          <div>
+            <h3 className="text-lg font-semibold text-text-light-primary dark:text-text-dark-primary mb-4">
+              Daily Breakdown
+            </h3>
+            <MonthlyCalendarGrid
+              year={year}
+              month={month}
+              onDayClick={handleDayClick}
+              renderDayContent={({ isoDateKey }) => {
+                const daySummary = dailyBreakdownMap.get(isoDateKey);
+                const hasEntries = daySummary && daySummary.entryCount > 0;
+
+                if (!hasEntries) {
+                  return (
+                    <div className="text-[10px] text-text-light-tertiary dark:text-text-dark-tertiary opacity-0 group-hover:opacity-100">
+                      No entries
+                    </div>
+                  );
+                }
+
+                return (
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-1 text-xs text-accent-magenta dark:text-accent-cyan font-medium">
+                      <Clock className="w-3 h-3" />
+                      {formatDuration(daySummary.totalDuration, { showSeconds: false })}
+                    </div>
+                    <div className="text-[10px] text-text-light-tertiary dark:text-text-dark-tertiary">
+                      {daySummary.entryCount} {daySummary.entryCount === 1 ? 'entry' : 'entries'}
+                    </div>
+                  </div>
+                );
+              }}
+            />
+          </div>
+
+          {/* Project Breakdown */}
+          {report && report.projectBreakdown.length > 0 && (
+            <div className="bg-surface-light dark:bg-surface-dark rounded-button border border-border-light dark:border-border-dark p-6">
+              <h3 className="text-lg font-semibold text-text-light-primary dark:text-text-dark-primary mb-4">
+                Time by Project
+              </h3>
+
+              <div className="space-y-3">
+                {report.projectBreakdown.map((project) => (
+                  <div key={project.projectId || 'no-project'} className="space-y-2">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3 flex-1">
+                        <div
+                          className="w-3 h-3 rounded-full flex-shrink-0"
+                          style={{ backgroundColor: project.projectColor }}
+                        />
+                        <span className="text-sm font-medium text-text-light-primary dark:text-text-dark-primary truncate">
+                          {project.projectName}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-4">
+                        <span className="text-xs text-text-light-secondary dark:text-text-dark-secondary">
+                          {project.entryCount} {project.entryCount === 1 ? 'entry' : 'entries'}
+                        </span>
+                        <span className="text-sm font-mono font-semibold text-accent-magenta dark:text-accent-cyan min-w-[80px] text-right">
+                          {formatDuration(project.totalDuration, { showSeconds: false })}
+                        </span>
+                        <span className="text-sm font-medium text-text-light-secondary dark:text-text-dark-secondary min-w-[50px] text-right">
+                          {project.percentage.toFixed(1)}%
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Progress Bar */}
+                    <div className="h-2 bg-surface-light-elevated dark:bg-surface-dark-elevated rounded-full overflow-hidden">
+                      <div
+                        className="h-full transition-all duration-300"
+                        style={{
+                          width: `${project.percentage}%`,
+                          backgroundColor: project.projectColor
+                        }}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </>
+      ) : viewMode === 'weekly' ? (
+        /* Weekly View */
+        <WeekView
+          currentDate={currentDate}
+          events={entriesAsEvents as Record<string, import('../types').CalendarEvent[]>}
+          tasks={[]}
+          onDayClick={handleDayClick}
+          onEventClick={() => {}}
+          showTimeSlots={true}
+        />
+      ) : viewMode === 'daily' ? (
+        /* Daily View */
+        <DayView
+          date={currentDate}
+          events={(entriesAsEvents[getStandardDateKey(currentDate)] || []) as import('../types').CalendarEvent[]}
+          onEventClick={() => {}}
+          onTimeSlotClick={() => handleDayClick(getStandardDateKey(currentDate))}
+        />
+      ) : (
+        /* Agenda/List View */
+        <AgendaView
+          events={entriesAsEvents as Record<string, import('../types').CalendarEvent[]>}
+          currentDate={currentDate}
+          daysToShow={14}
+          onEventClick={() => {}}
+        />
+      )}
+
+      {/* Day Detail Modal */}
+      {selectedDay && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          <div
+            className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+            onClick={() => setSelectedDay(null)}
+          />
+          <div className="relative z-10 w-full max-w-lg mx-4 bg-surface-light dark:bg-surface-dark rounded-card shadow-modal max-h-[80vh] overflow-hidden flex flex-col">
+            {/* Header */}
+            <div className="flex items-center justify-between px-6 py-4 border-b border-border-light dark:border-border-dark">
+              <div>
+                <h2 className="text-lg font-semibold text-text-light-primary dark:text-text-dark-primary">
+                  {new Date(selectedDay.date + 'T00:00:00').toLocaleDateString('en-US', {
+                    weekday: 'long',
+                    month: 'long',
+                    day: 'numeric',
+                    year: 'numeric',
+                  })}
+                </h2>
+                <p className="text-sm text-text-light-secondary dark:text-text-dark-secondary">
+                  {selectedDay.entries.length} {selectedDay.entries.length === 1 ? 'entry' : 'entries'} • {formatDuration(selectedDay.totalDuration, { showSeconds: false })}
+                </p>
+              </div>
+              <button
+                onClick={() => setSelectedDay(null)}
+                className="p-2 rounded-button hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated transition-all"
+                aria-label="Close"
+              >
+                <X className="w-5 h-5 text-text-light-secondary dark:text-text-dark-secondary" />
+              </button>
+            </div>
+
+            {/* Content */}
+            <div className="flex-1 overflow-y-auto p-6 space-y-3">
+              {selectedDay.entries.length > 0 ? (
+                selectedDay.entries.map((entry) => {
+                  const project = getProject(entry.projectId);
+                  return (
+                    <div
+                      key={entry.id}
+                      className="p-3 rounded-button bg-surface-light-elevated dark:bg-surface-dark-elevated border border-border-light dark:border-border-dark"
+                    >
+                      <div className="flex items-start gap-3">
+                        <div
+                          className="w-3 h-3 rounded-full flex-shrink-0 mt-1"
+                          style={{ backgroundColor: project.color }}
+                        />
+                        <div className="flex-1 min-w-0">
+                          <div className="font-medium text-text-light-primary dark:text-text-dark-primary">
+                            {entry.description || 'No description'}
+                          </div>
+                          <div className="text-sm text-text-light-secondary dark:text-text-dark-secondary mt-1">
+                            {project.name}
+                          </div>
+                          <div className="flex items-center gap-4 mt-2 text-xs text-text-light-tertiary dark:text-text-dark-tertiary">
+                            <span>
+                              {new Date(entry.startTime).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}
+                              {entry.endTime && ` - ${new Date(entry.endTime).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}`}
+                            </span>
+                            <span className="font-mono text-accent-magenta dark:text-accent-cyan">
+                              {formatDuration(entry.duration, { showSeconds: false })}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })
+              ) : (
+                <div className="text-center py-8 text-text-light-secondary dark:text-text-dark-secondary">
+                  No time entries for this day
+                </div>
+              )}
+            </div>
+
+            {/* Footer */}
+            {onAddEntry && (
+              <div className="px-6 py-4 border-t border-border-light dark:border-border-dark">
+                <button
+                  onClick={() => {
+                    setSelectedDay(null);
+                    onAddEntry(selectedDay.date);
+                  }}
+                  className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-accent-magenta hover:bg-accent-magenta-hover dark:bg-accent-cyan dark:hover:bg-accent-cyan-hover text-white rounded-button font-medium transition-all"
+                >
+                  <Plus className="w-4 h-4" />
+                  Add Time Entry
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* Project Legend */}
+      {projects.filter(p => p.active && !p.archived).length > 0 && (
+        <div className="bg-surface-light dark:bg-surface-dark rounded-button border border-border-light dark:border-border-dark p-4">
+          <h3 className="text-sm font-semibold text-text-light-primary dark:text-text-dark-primary mb-3">
+            Project Legend
+          </h3>
+          <div className="flex flex-wrap gap-3">
+            {projects.filter(p => p.active && !p.archived).map(project => (
+              <div key={project.id} className="flex items-center gap-2">
+                <div
+                  className="w-3 h-3 rounded"
+                  style={{ backgroundColor: project.color }}
+                />
+                <span className="text-sm text-text-light-secondary dark:text-text-dark-secondary">
+                  {project.name}
+                </span>
+              </div>
+            ))}
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded bg-gray-400" />
+              <span className="text-sm text-text-light-secondary dark:text-text-dark-secondary">
+                No Project
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}

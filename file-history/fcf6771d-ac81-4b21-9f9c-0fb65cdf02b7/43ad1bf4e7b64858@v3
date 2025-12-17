@@ -1,0 +1,239 @@
+/**
+ * ThreeColumnLayout Component
+ *
+ * Apple Notes/Bear-inspired 3-column layout for Notes page.
+ * Layout: Folders | Notes List | Editor
+ *
+ * Features:
+ * - Three distinct, resizable columns
+ * - Folders column for navigation
+ * - Notes list column for browsing
+ * - Editor fills remaining space (full height)
+ * - Clean visual separation without cramped splits
+ * - Collapsible columns for focus modes
+ */
+
+import React, { useCallback, useRef, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { PanelLeftClose, PanelLeftOpen, Settings2 } from 'lucide-react';
+import { useSettingsStore } from '../../stores/useSettingsStore';
+import { FolderSidebar } from './FolderSidebar';
+import { NotesList } from './NotesList';
+import { SidebarResizer } from './SidebarResizer';
+
+export interface ThreeColumnLayoutProps {
+  /** Content to render in the editor pane */
+  children: React.ReactNode;
+  /** Active tag filters */
+  activeTags: string[];
+  /** Callback to add a tag filter */
+  onAddTag: (tag: string) => void;
+  /** Callback to remove a tag filter */
+  onRemoveTag: (tag: string) => void;
+  /** Callback to clear all tag filters */
+  onClearAllTags: () => void;
+  /** Callback to open tag manager modal */
+  onOpenTagManager: () => void;
+  /** Callback to open template library modal */
+  onOpenTemplateLibrary: () => void;
+  /** Callback to open export modal */
+  onOpenExportModal: () => void;
+  /** Callback to open layout settings */
+  onOpenLayoutSettings?: () => void;
+}
+
+export const ThreeColumnLayout: React.FC<ThreeColumnLayoutProps> = ({
+  children,
+  activeTags,
+  onAddTag,
+  onRemoveTag,
+  onClearAllTags,
+  onOpenTagManager,
+  onOpenTemplateLibrary,
+  onOpenExportModal,
+  onOpenLayoutSettings,
+}) => {
+  const folderColumnRef = useRef<HTMLDivElement>(null);
+  const notesColumnRef = useRef<HTMLDivElement>(null);
+
+  // Column visibility state
+  const [isFolderColumnCollapsed, setIsFolderColumnCollapsed] = useState(false);
+  const [isNotesColumnCollapsed, setIsNotesColumnCollapsed] = useState(false);
+
+  // Get layout preferences from settings store
+  const notesLayout = useSettingsStore((state) => state.notesLayout);
+  const setNotesLayout = useSettingsStore((state) => state.setNotesLayout);
+
+  const { folderPaneWidth, notesPaneWidth } = notesLayout;
+
+  // Handle column width changes
+  const handleFolderWidthChange = useCallback(
+    (width: number) => {
+      setNotesLayout({ folderPaneWidth: width });
+    },
+    [setNotesLayout]
+  );
+
+  const handleNotesWidthChange = useCallback(
+    (width: number) => {
+      setNotesLayout({ notesPaneWidth: width });
+    },
+    [setNotesLayout]
+  );
+
+  // Toggle columns
+  const toggleFolderColumn = useCallback(() => {
+    setIsFolderColumnCollapsed((prev) => !prev);
+  }, []);
+
+  const toggleNotesColumn = useCallback(() => {
+    setIsNotesColumnCollapsed((prev) => !prev);
+  }, []);
+
+  return (
+    <div className="flex-1 flex min-h-0 overflow-hidden bg-surface-light dark:bg-surface-dark">
+      {/* Column 1: Folders */}
+      <AnimatePresence mode="wait">
+        {!isFolderColumnCollapsed && (
+          <motion.div
+            ref={folderColumnRef}
+            initial={{ width: 0, opacity: 0 }}
+            animate={{ width: Math.max(folderPaneWidth, 160), opacity: 1 }}
+            exit={{ width: 0, opacity: 0 }}
+            transition={{ duration: 0.2, ease: 'easeInOut' }}
+            className="flex-shrink-0 flex flex-col min-h-0 min-w-0 border-r border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark relative overflow-hidden"
+            style={{ width: Math.max(folderPaneWidth, 160) }}
+          >
+            {/* Folder header with controls */}
+            <div className="flex items-center justify-between px-4 py-3 border-b border-border-light dark:border-border-dark flex-shrink-0">
+              <span className="text-xs font-medium uppercase tracking-wide text-text-light-tertiary dark:text-text-dark-tertiary">
+                Folders
+              </span>
+              <div className="flex items-center gap-1">
+                {onOpenLayoutSettings && (
+                  <button
+                    onClick={onOpenLayoutSettings}
+                    className="p-1.5 rounded-md hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated transition-colors"
+                    title="Layout settings"
+                    aria-label="Open layout settings"
+                  >
+                    <Settings2 className="w-3.5 h-3.5 text-text-light-tertiary dark:text-text-dark-tertiary" />
+                  </button>
+                )}
+                <button
+                  onClick={toggleFolderColumn}
+                  className="p-1.5 rounded-md hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated transition-colors"
+                  title="Collapse folders"
+                  aria-label="Collapse folder column"
+                >
+                  <PanelLeftClose className="w-3.5 h-3.5 text-text-light-primary dark:text-text-dark-primary" />
+                </button>
+              </div>
+            </div>
+
+            {/* Folder content */}
+            <div className="flex-1 min-h-0 overflow-y-auto">
+              <FolderSidebar
+                activeTags={activeTags}
+                onAddTag={onAddTag}
+                onRemoveTag={onRemoveTag}
+                onClearAllTags={onClearAllTags}
+                onOpenTagManager={onOpenTagManager}
+              />
+            </div>
+
+            {/* Resize handle */}
+            <SidebarResizer
+              currentWidth={folderPaneWidth}
+              minWidth={160}
+              maxWidth={320}
+              defaultWidth={220}
+              onWidthChange={handleFolderWidthChange}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Expand button for folders (shown when collapsed) */}
+      {isFolderColumnCollapsed && (
+        <div className="flex-shrink-0 flex flex-col border-r border-border-light dark:border-border-dark">
+          <button
+            onClick={toggleFolderColumn}
+            className="p-2 m-1 rounded-md hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated transition-colors"
+            title="Expand folders"
+            aria-label="Expand folder column"
+          >
+            <PanelLeftOpen className="w-4 h-4 text-text-light-primary dark:text-text-dark-primary" />
+          </button>
+        </div>
+      )}
+
+      {/* Column 2: Notes List */}
+      <AnimatePresence mode="wait">
+        {!isNotesColumnCollapsed && (
+          <motion.div
+            ref={notesColumnRef}
+            initial={{ width: 0, opacity: 0 }}
+            animate={{ width: Math.max(notesPaneWidth, 200), opacity: 1 }}
+            exit={{ width: 0, opacity: 0 }}
+            transition={{ duration: 0.2, ease: 'easeInOut' }}
+            className="flex-shrink-0 flex flex-col min-h-0 min-w-0 border-r border-border-light dark:border-border-dark bg-surface-light-elevated/30 dark:bg-surface-dark-elevated/30 relative overflow-hidden"
+            style={{ width: Math.max(notesPaneWidth, 200) }}
+          >
+            {/* Notes header with controls */}
+            <div className="flex items-center justify-between px-4 py-3 border-b border-border-light dark:border-border-dark flex-shrink-0">
+              <span className="text-xs font-medium uppercase tracking-wide text-text-light-tertiary dark:text-text-dark-tertiary">
+                Notes
+              </span>
+              <button
+                onClick={toggleNotesColumn}
+                className="p-1.5 rounded-md hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated transition-colors"
+                title="Collapse notes list"
+                aria-label="Collapse notes column"
+              >
+                <PanelLeftClose className="w-3.5 h-3.5 text-text-light-primary dark:text-text-dark-primary" />
+              </button>
+            </div>
+
+            {/* Notes list content */}
+            <div className="flex-1 min-h-0 overflow-hidden">
+              <NotesList
+                activeTags={activeTags}
+                onOpenTemplateLibrary={onOpenTemplateLibrary}
+                onOpenExportModal={onOpenExportModal}
+              />
+            </div>
+
+            {/* Resize handle */}
+            <SidebarResizer
+              currentWidth={notesPaneWidth}
+              minWidth={200}
+              maxWidth={450}
+              defaultWidth={300}
+              onWidthChange={handleNotesWidthChange}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Expand button for notes (shown when collapsed) */}
+      {isNotesColumnCollapsed && (
+        <div className="flex-shrink-0 flex flex-col border-r border-border-light dark:border-border-dark">
+          <button
+            onClick={toggleNotesColumn}
+            className="p-2 m-1 rounded-md hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated transition-colors"
+            title="Expand notes list"
+            aria-label="Expand notes column"
+          >
+            <PanelLeftOpen className="w-4 h-4 text-text-light-primary dark:text-text-dark-primary" />
+          </button>
+        </div>
+      )}
+
+      {/* Column 3: Editor (fills remaining space) */}
+      <div className="flex-1 flex flex-col min-h-0 overflow-hidden">
+        {children}
+      </div>
+    </div>
+  );
+};

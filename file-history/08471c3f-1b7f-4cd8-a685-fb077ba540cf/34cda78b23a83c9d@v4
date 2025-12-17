@@ -1,0 +1,461 @@
+# Custom Fields System (P2 #3)
+
+**Priority:** P2 (Medium)
+**Estimated Time:** 3-4 hours
+**Status:** Planning
+**Created:** 2025-11-26
+
+---
+
+## Overview
+
+Add custom fields system to tasks and notes, enabling users to add structured metadata beyond the default fields. This is a foundational feature that enables powerful customization, advanced filtering, and analytics.
+
+## Problem Statement
+
+Currently, tasks and notes have fixed schemas with predefined fields. Power users need:
+- **Custom metadata** - Track domain-specific info (Bug ID, Sprint, Client, etc.)
+- **Structured data** - Type-safe fields (text, number, date, select, checkbox)
+- **Filtering/sorting** - Filter and sort by custom field values
+- **Flexibility** - Add fields per workspace/project without code changes
+
+**Use Cases:**
+- Software teams: Bug ID, Sprint, Story Points, Component
+- Agencies: Client, Project Phase, Billable (yes/no), Rate
+- Personal: Energy Level, Mood, Context (home/work/errands)
+- Research: Source, Citation, Review Status
+
+## Requirements
+
+### Must Have (MVP)
+1. **Field Types**
+   - Text (single line)
+   - Number (integer or decimal)
+   - Date (DatePicker integration)
+   - Select (dropdown with predefined options)
+   - Checkbox (boolean)
+
+2. **Field Definition UI**
+   - Create/edit/delete custom field definitions
+   - Field name, type, default value
+   - For Select type: manage options list
+
+3. **Field Management**
+   - Settings page for managing field library
+   - Apply fields to tasks OR notes (separate schemas)
+   - Field values persist in IndexedDB
+
+4. **Field Usage UI**
+   - Show custom fields in task detail panel
+   - Show custom fields in note editor sidebar
+   - Inline editing (same UX as built-in fields)
+
+5. **Data Model**
+   - Extend Task/Note types with `customFields: Record<string, any>`
+   - Field definitions stored in settings/store
+   - Validation based on field type
+
+### Should Have (Future)
+- Multi-select (array of options)
+- User/assignee picker
+- Rich text field
+- Formula fields (calculated values)
+- Field dependencies (show field X only if field Y = value)
+- Import/export field definitions
+- Field presets/templates
+
+### Won't Have (Out of Scope)
+- Filtering by custom fields (saved for Graph view P2 #6)
+- Custom field analytics (saved for Analytics dashboard P2 #9)
+- API for external field sync
+- Field-level permissions
+
+## Files to Read
+
+### Core Stores
+- [x] `src/stores/useTasksStore.ts` - Task data model
+- [x] `src/stores/useNotesStore.ts` - Note data model
+- [x] `src/stores/useSettingsStore.ts` - Settings persistence
+
+### UI Components
+- [x] `src/components/CardDetailPanel.tsx` - Task detail UI (where custom fields will show)
+- [x] `src/widgets/NotesEditor.tsx` - Note editor (for note custom fields)
+- [x] `src/pages/Settings.tsx` - Settings page structure
+
+### Type Definitions
+- [x] `src/types/tasks.ts` - Task type definitions
+- [x] `src/types/notes.ts` - Note type definitions
+
+## Proposed Changes
+
+### Phase 1: Data Model & Types (30 min)
+**Goal:** Define TypeScript types and extend stores
+
+**Files to Create:**
+- `src/types/customFields.ts` - Type definitions for custom fields
+
+```typescript
+export type FieldType = 'text' | 'number' | 'date' | 'select' | 'checkbox';
+
+export interface FieldDefinition {
+  id: string;
+  name: string;
+  type: FieldType;
+  defaultValue?: any;
+  options?: string[]; // For 'select' type
+  required?: boolean;
+  description?: string;
+}
+
+export interface CustomFieldValue {
+  fieldId: string;
+  value: any; // Type varies based on field type
+}
+
+export type CustomFieldsMap = Record<string, any>; // fieldId -> value
+```
+
+**Files to Modify:**
+1. `src/types/tasks.ts`
+   - Add `customFields?: CustomFieldsMap` to Task interface
+
+2. `src/types/notes.ts`
+   - Add `customFields?: CustomFieldsMap` to Note interface
+
+3. `src/stores/useSettingsStore.ts`
+   - Add `customFieldDefinitions: { tasks: FieldDefinition[], notes: FieldDefinition[] }`
+   - Add actions: `addFieldDefinition`, `updateFieldDefinition`, `deleteFieldDefinition`
+
+**Checklist:**
+- [x] Create `src/types/customFields.ts` with type definitions
+- [x] Modify `src/types/index.ts` to add `customFields` optional field to Task
+- [x] Modify `src/types/notes.ts` to add `customFields` optional field
+- [x] Extend `useSettingsStore` with field definitions and CRUD actions
+- [x] Type-check ✅
+
+### Phase 2: Field Definition UI (45 min)
+**Goal:** Settings page for managing custom field library
+
+**Files to Create:**
+- `src/components/CustomFieldsSettings.tsx` - UI for managing field definitions
+
+**Component Features:**
+- List all field definitions (separate tabs for Tasks/Notes)
+- Create new field button → modal
+- Edit field inline or modal
+- Delete field with confirmation
+- Field type selector (dropdown)
+- For Select type: manage options list (add/remove)
+
+**Files to Modify:**
+- `src/pages/Settings.tsx`
+  - Add "Custom Fields" tab
+  - Import and render CustomFieldsSettings component
+
+**Checklist:**
+- [x] Create `src/components/CustomFieldsSettings.tsx`
+  - Field list view (separate tabs for tasks/notes)
+  - Create field modal (name, type, options if select)
+  - Edit field inline editing
+  - Delete field with confirmation
+- [x] Modify `src/pages/Settings.tsx` to add Custom Fields section
+- [x] Type-check ✅
+
+### Phase 3: Field Editor Component (45 min)
+**Goal:** Reusable component for editing custom field values
+
+**Files to Create:**
+- `src/components/CustomFieldEditor.tsx` - Renders input based on field type
+
+```typescript
+interface CustomFieldEditorProps {
+  field: FieldDefinition;
+  value: any;
+  onChange: (value: any) => void;
+}
+```
+
+**Component Logic:**
+- Switch on field.type
+- Render appropriate input:
+  - `text` → `<input type="text">`
+  - `number` → `<input type="number">`
+  - `date` → DatePicker component (reuse from existing calendar)
+  - `select` → `<select>` with field.options
+  - `checkbox` → `<input type="checkbox">`
+- Handle value changes and call onChange
+
+**Checklist:**
+- [x] Create `src/components/CustomFieldEditor.tsx`
+  - Text input
+  - Number input
+  - Date picker integration
+  - Select dropdown
+  - Checkbox
+  - Proper TypeScript types
+- [x] Type-check ✅
+
+### Phase 4: Task Custom Fields Integration (45 min)
+**Goal:** Show/edit custom fields in CardDetailPanel
+
+**Files to Modify:**
+1. `src/components/CardDetailPanel.tsx`
+   - Fetch field definitions from settings store
+   - Render CustomFieldEditor for each field
+   - Update task.customFields on change
+   - Add "Add Custom Field" button (if not all fields shown)
+
+2. `src/stores/useTasksStore.ts`
+   - Update `updateTask` to handle customFields
+   - Ensure customFields persists to IndexedDB
+
+**Checklist:**
+- [x] Modify `src/widgets/Kanban/CardDetailPanel.tsx`
+  - Fetch task field definitions from settings
+  - Render custom fields section below built-in fields
+  - Use CustomFieldEditor for each field
+  - Update task on field value change
+- [x] Verify persistence (auto-saves to IndexedDB via onSave)
+- [x] Type-check ✅
+
+### Phase 5: Note Custom Fields Integration (30 min)
+**Goal:** Show/edit custom fields in NotesEditor sidebar
+
+**Files to Modify:**
+1. `src/widgets/NotesEditor.tsx`
+   - Add custom fields section to sidebar
+   - Render CustomFieldEditor for each note field
+   - Update note.customFields on change
+
+2. `src/stores/useNotesStore.ts`
+   - Update `updateNote` to handle customFields
+   - Ensure customFields persists
+
+**Checklist:**
+- [x] Modify `src/widgets/NotesEditor.tsx`
+  - Fetch note field definitions
+  - Render custom fields in header section (below tags)
+  - Use CustomFieldEditor components
+  - Update note on change
+- [x] Verify persistence (auto-saves via updateNote)
+- [x] Type-check ✅
+
+### Phase 6: UX Fixes + Testing & Polish (45 min)
+**Goal:** Fix critical UX issues, then manual testing and polish
+
+**CRITICAL UX Fixes (15 min):**
+
+**A) Sidebar Collapse Defaults (10 min):**
+- [ ] **Fix Settings sidebar** - All expandable sections closed by default
+  - Audit `src/pages/Settings.tsx` for expandable sections
+  - Ensure initial state is `collapsed: true` or `expanded: false`
+  - Test on fresh load - all sections should be closed
+- [ ] **Fix any other sidebars with expandable links**
+  - Check `src/components/Sidebar.tsx` (main app sidebar)
+  - Check any other components with expand/collapse behavior
+  - Default all to collapsed state
+
+**B) Time Tracking "View All" Button Fix (5 min):**
+- [ ] **Fix sidebar Time Tracking "View All" button navigation**
+  - Currently takes user to Scheduling page's Calendar tab (default)
+  - Should take user directly to "Entries" tab instead
+  - Find Time Tracking widget/component with "View All" button
+  - Update navigation to specify tab parameter for Entries view
+
+**Testing Checklist:**
+- [ ] Create field definitions (all types) for tasks
+- [ ] Create field definitions for notes
+- [ ] Edit field values in task detail panel
+- [ ] Edit field values in note editor
+- [ ] Verify IndexedDB persistence (refresh page)
+- [ ] Delete field definition → ensure values removed
+- [ ] Rename field definition → values persist
+- [ ] Empty states (no fields defined)
+- [ ] Validation (required fields, number format)
+- [ ] Dark mode styling
+- [ ] Accessibility (keyboard nav, ARIA labels)
+- [ ] **Sidebar collapse defaults verified** (CRITICAL)
+
+**Polish:**
+- [ ] Empty state when no custom fields defined
+- [ ] Help text explaining custom fields
+- [ ] Field type icons (visual distinction)
+- [ ] Smooth animations (field add/remove)
+- [ ] Error handling (invalid values)
+
+**Checklist:**
+- [ ] **CRITICAL: Verify all expandable sidebar sections default to collapsed**
+- [ ] Manual testing of all field types
+- [ ] Test persistence across page refresh
+- [ ] Test field definition CRUD
+- [ ] Verify dark mode
+- [ ] Accessibility audit
+- [ ] Build and bundle size check
+
+---
+
+## Technical Design
+
+### Data Flow
+
+**Field Definitions (Settings Store):**
+```
+Settings Store
+  ├─ customFieldDefinitions
+  │   ├─ tasks: FieldDefinition[]
+  │   └─ notes: FieldDefinition[]
+  └─ Actions
+      ├─ addFieldDefinition(target, definition)
+      ├─ updateFieldDefinition(target, id, changes)
+      └─ deleteFieldDefinition(target, id)
+```
+
+**Field Values (Task/Note Stores):**
+```
+Task/Note Object
+  ├─ ...existing fields
+  └─ customFields: {
+      [fieldId]: value,
+      [fieldId]: value,
+      ...
+  }
+```
+
+### Field Type Validation
+
+```typescript
+function validateFieldValue(field: FieldDefinition, value: any): boolean {
+  switch (field.type) {
+    case 'text':
+      return typeof value === 'string';
+    case 'number':
+      return typeof value === 'number' && !isNaN(value);
+    case 'date':
+      return value instanceof Date || typeof value === 'string'; // ISO string
+    case 'select':
+      return field.options?.includes(value) ?? false;
+    case 'checkbox':
+      return typeof value === 'boolean';
+    default:
+      return false;
+  }
+}
+```
+
+### Migration Strategy
+
+**Backward Compatibility:**
+- customFields is optional (`customFields?: CustomFieldsMap`)
+- Existing tasks/notes without customFields continue to work
+- No migration needed
+
+**Forward Migration:**
+- When user creates first field definition, initialize empty customFields: {}
+- When field definition deleted, remove values from all tasks/notes (optional cleanup)
+
+---
+
+## Success Criteria
+
+1. **Functional**
+   - ✅ Users can create/edit/delete field definitions
+   - ✅ Users can set custom field values on tasks
+   - ✅ Users can set custom field values on notes
+   - ✅ Field values persist across page refresh
+   - ✅ All 5 field types work correctly
+
+2. **Quality**
+   - ✅ TypeScript type-check passes
+   - ✅ Production build succeeds
+   - ✅ No console errors/warnings
+   - ✅ Dark mode support
+   - ✅ Accessibility (WCAG AA)
+
+3. **UX**
+   - ✅ Intuitive field definition UI
+   - ✅ Smooth field editing experience
+   - ✅ Clear empty states
+   - ✅ Validation feedback
+
+---
+
+## Dependencies
+
+**Before:**
+- None (standalone feature)
+
+**After (Enables):**
+- P2 #6 Graph view - Filter/color by custom fields
+- P2 #9 Analytics dashboard - Aggregate by custom fields
+- Advanced search - Search by custom field values
+- CSV export - Include custom fields in exports
+
+---
+
+## Rollback Plan
+
+If issues arise:
+1. **Disable UI** - Remove Custom Fields tab from Settings
+2. **Keep data** - customFields data remains in IndexedDB (no data loss)
+3. **Fix forward** - Fix bugs and re-enable
+
+**No destructive changes:**
+- Adding customFields field is non-breaking (optional field)
+- Removing feature doesn't delete user data
+
+---
+
+## Competitor Feature Comparison
+
+| Feature | Notion | Airtable | ClickUp | NB Target |
+|---------|--------|----------|---------|-----------|
+| Custom text fields | ✅ | ✅ | ✅ | ✅ Phase 1 |
+| Custom number fields | ✅ | ✅ | ✅ | ✅ Phase 1 |
+| Custom date fields | ✅ | ✅ | ✅ | ✅ Phase 1 |
+| Custom select fields | ✅ | ✅ | ✅ | ✅ Phase 1 |
+| Custom checkbox | ✅ | ✅ | ✅ | ✅ Phase 1 |
+| Multi-select | ✅ | ✅ | ✅ | 🔶 Future |
+| Formula fields | ✅ | ✅ | ⬜ | 🔶 Future |
+| Relation fields | ✅ | ✅ | ✅ | 🔶 Future |
+| Field templates | ✅ | ✅ | ✅ | 🔶 Future |
+| Field filtering | ✅ | ✅ | ✅ | 🔶 P2 #6 |
+
+---
+
+## Notes
+
+- **CRITICAL:** All expandable sidebar sections MUST default to collapsed state
+  - Settings sidebar sections
+  - Main app sidebar expandable links
+  - Any other expand/collapse UI elements
+  - This is a core UX requirement for clean initial state
+- Start with tasks first (easier to test in Kanban)
+- Notes custom fields are identical implementation
+- Consider adding field icons for visual distinction
+- Future: Field presets (Bug Report template, Client Project template, etc.)
+- Future: Conditional fields (show field X only if field Y has value Z)
+- Custom fields unlock powerful analytics (P2 #9)
+
+---
+
+## Time Estimate Breakdown
+
+| Phase | Description | Estimate |
+|-------|-------------|----------|
+| 1 | Data model & types | 30 min |
+| 2 | Field definition UI (settings) | 45 min |
+| 3 | Field editor component | 45 min |
+| 4 | Task integration | 45 min |
+| 5 | Note integration | 30 min |
+| 6 | **UX fixes** (sidebar collapse + time tracking) + Testing & polish | **45 min** |
+| **Total** | | **4 hours** |
+
+**Note:** Phase 6 includes TWO critical UX fixes:
+- Sidebar collapse defaults (10 min)
+- Time tracking "View All" button navigation (5 min)
+
+---
+
+## Review
+
+*(To be completed after implementation)*

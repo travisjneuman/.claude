@@ -1,0 +1,112 @@
+/**
+ * Hacker News Widget
+ *
+ * Displays top tech stories from Hacker News
+ * https://hacker-news.firebaseio.com/v0
+ */
+
+import React, { useState, useEffect, useCallback } from 'react';
+import { BaseWidget } from './BaseWidget';
+import { useWidgetStore } from '../../stores/useWidgetStore';
+
+interface HNStory {
+  id: number;
+  title: string;
+  url?: string;
+  score: number;
+  by: string;
+  time: number;
+}
+
+export const HackerNewsWidget: React.FC = () => {
+  const [stories, setStories] = useState<HNStory[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const settings = useWidgetStore((state) => state.getWidgetSettings('hackernews'));
+
+  const fetchStories = useCallback(async () => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      // Fetch top story IDs
+      const topStoriesResponse = await fetch(
+        'https://hacker-news.firebaseio.com/v0/topstories.json'
+      );
+      if (!topStoriesResponse.ok) throw new Error('Failed to fetch top stories');
+
+      const topStoryIds: number[] = await topStoriesResponse.json();
+
+      // Fetch first 5 stories
+      const storyPromises = topStoryIds.slice(0, 5).map(async (id) => {
+        const response = await fetch(
+          `https://hacker-news.firebaseio.com/v0/item/${id}.json`
+        );
+        return response.json();
+      });
+
+      const fetchedStories = await Promise.all(storyPromises);
+      setStories(fetchedStories);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to load stories');
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  // Initial fetch
+  useEffect(() => {
+    fetchStories();
+  }, [fetchStories]);
+
+  // Auto-refresh
+  useEffect(() => {
+    if (!settings.refreshRate) return;
+
+    const interval = setInterval(() => {
+      fetchStories();
+    }, settings.refreshRate * 60 * 1000);
+
+    return () => clearInterval(interval);
+  }, [settings.refreshRate, fetchStories]);
+
+  return (
+    <BaseWidget
+      title="Hacker News"
+      icon="📰"
+      loading={loading}
+      error={error}
+      onRefresh={fetchStories}
+    >
+      {stories.length > 0 && (
+        <div className="space-y-2">
+          {stories.map((story, index) => (
+            <a
+              key={story.id}
+              href={story.url || `https://news.ycombinator.com/item?id=${story.id}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block p-3 bg-surface-light-elevated dark:bg-surface-dark rounded-button hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-all duration-standard ease-smooth group"
+            >
+              <div className="flex items-start gap-2">
+                <span className="text-sm font-bold text-text-light-secondary dark:text-text-dark-secondary min-w-[20px]">
+                  {index + 1}.
+                </span>
+                <div className="flex-1 min-w-0">
+                  <h4 className="text-sm font-medium text-text-light-primary dark:text-text-dark-primary line-clamp-2 group-hover:text-accent-blue transition-all duration-standard ease-smooth">
+                    {story.title}
+                  </h4>
+                  <div className="flex items-center gap-2 mt-1 text-xs text-text-light-secondary dark:text-text-dark-secondary">
+                    <span>↑ {story.score}</span>
+                    <span>•</span>
+                    <span>by {story.by}</span>
+                  </div>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      )}
+    </BaseWidget>
+  );
+};

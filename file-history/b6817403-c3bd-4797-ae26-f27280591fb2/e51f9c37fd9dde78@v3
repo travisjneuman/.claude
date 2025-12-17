@@ -1,0 +1,82 @@
+# Task: Add DeepSeek AI Provider
+
+## Overview
+Add DeepSeek as a new AI provider option. DeepSeek offers high-quality LLMs (including DeepSeek-V3 and DeepSeek-Coder) with an OpenAI-compatible API, making integration straightforward.
+
+## Problem Statement
+The user wants to use DeepSeek models in the Neuman Brain dashboard. DeepSeek is known for:
+- Strong reasoning capabilities (DeepSeek-V3 rivals GPT-4)
+- Excellent coding performance (DeepSeek-Coder)
+- Competitive pricing
+- OpenAI-compatible API
+
+## Files to Read
+- [x] `src/services/ai/types.ts` - AIProvider interface and types
+- [x] `src/services/ai/providerRouter.ts` - Provider registry
+- [x] `src/services/ai/xaiProvider.ts` - Reference implementation (uses OpenAI SDK)
+
+## Proposed Changes
+
+### 1. Create `src/services/ai/deepseekProvider.ts`
+Following the xAI provider pattern (OpenAI SDK compatible):
+- DeepSeek API base URL: `https://api.deepseek.com`
+- Models: DeepSeek-V3, DeepSeek-Coder-V2
+- BYOK (Bring Your Own Key) - requires user API key
+
+### 2. Update `src/services/ai/providerRouter.ts`
+- Import deepseekProvider
+- Add to PROVIDERS registry
+
+## Todo Checklist
+
+- [ ] Create `deepseekProvider.ts` with:
+  - [ ] Provider metadata (id, name, apiKeyUrl, etc.)
+  - [ ] Model definitions (deepseek-chat, deepseek-coder)
+  - [ ] DeepSeekProvider class implementing AIProvider
+  - [ ] Singleton export
+- [ ] Register in providerRouter.ts PROVIDERS object
+- [ ] Run type-check and build to verify
+
+## DeepSeek API Details
+
+**Base URL:** `https://api.deepseek.com`
+**API Key URL:** `https://platform.deepseek.com/api_keys`
+**Docs:** `https://platform.deepseek.com/docs`
+
+### Models
+| Model ID | Description | Context | Speed | Quality |
+|----------|-------------|---------|-------|---------|
+| deepseek-chat | DeepSeek-V3 chat model | 64K | 4 | 5 |
+| deepseek-coder | DeepSeek-Coder-V2 for code | 128K | 4 | 5 |
+| deepseek-reasoner | DeepSeek-R1 reasoning model | 64K | 3 | 5 |
+
+### Pricing (as of Jan 2025)
+- Input: ~$0.14/1M tokens
+- Output: ~$0.28/1M tokens
+(Very competitive compared to GPT-4)
+
+## Review Section
+
+### Summary
+Successfully added DeepSeek as a new AI provider option.
+
+### Files Created/Modified
+- **Created:** `src/services/ai/deepseekProvider.ts` (268 lines)
+  - Provider metadata with API key URL, docs, etc.
+  - 3 models: deepseek-chat (V3), deepseek-coder (Coder-V2), deepseek-reasoner (R1)
+  - Full AIProvider implementation using OpenAI SDK
+  - Error handling mapped to ProviderError types
+
+- **Modified:** `src/services/ai/providerRouter.ts`
+  - Added import for deepseekProvider (line 26)
+  - Added to PROVIDERS registry (line 51)
+
+### Testing Status
+- Type-check: PASSED
+- Build: PASSED (bundle size within limits)
+
+### Usage
+Users can now:
+1. Add their DeepSeek API key in settings
+2. Select DeepSeek models (V3, Coder-V2, R1) for AI conversations
+3. Get API key from: https://platform.deepseek.com/api_keys

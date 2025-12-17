@@ -1,0 +1,267 @@
+---
+type: concept
+category: frontend
+adoption: standard
+aliases: [shadcn, shadcn/ui]
+related:
+  - "[[React]]"
+  - "[[Tailwind]]"
+  - "[[Next.js]]"
+projects:
+  - "[[Projects/Lazy Golfing]]"
+created: 2025-12-14
+updated: 2025-12-14
+---
+
+# Shadcn UI
+
+> Not a component library. A collection of beautifully designed, accessible components you copy into your project and own completely.
+
+---
+
+## Overview
+
+Shadcn UI is a different approach to UI components:
+- **Copy-paste, not install** — Components live in your codebase
+- **Full ownership** — Customize everything, no library updates to break things
+- **Radix primitives** — Accessible by default
+- **Tailwind styling** — Consistent with your design system
+
+### Why Shadcn?
+
+| Traditional Libraries | Shadcn Approach |
+|----------------------|-----------------|
+| Install package, import | Copy code, own it |
+| Override with CSS hacks | Edit source directly |
+| Wait for library updates | Change immediately |
+| Black box internals | Transparent code |
+
+---
+
+## Usage in Our Stack
+
+### Lazy Golfing Frontend
+
+Shadcn powers the entire UI with the "New York" style variant.
+
+**Installed components:**
+- Button, Card, Dialog, Dropdown Menu
+- Form, Input, Label, Select
+- Table, Tabs, Toast (via Sonner)
+- Avatar, Badge, Skeleton
+
+**Configuration:**
+```json
+// components.json
+{
+  "style": "new-york",
+  "rsc": false,
+  "tsx": true,
+  "tailwind": {
+    "config": "tailwind.config.ts",
+    "css": "src/app/globals.css",
+    "baseColor": "zinc"
+  },
+  "aliases": {
+    "components": "@/components",
+    "utils": "@/lib/utils"
+  }
+}
+```
+
+---
+
+## Key Patterns
+
+### Adding Components
+
+```bash
+# Add a single component
+npx shadcn@latest add button
+
+# Add multiple
+npx shadcn@latest add card dialog form
+
+# Add all components
+npx shadcn@latest add --all
+```
+
+### Component Structure
+
+```
+src/components/ui/
+├── button.tsx       # Shadcn component
+├── card.tsx
+├── dialog.tsx
+└── ...
+
+src/components/      # Your custom components using shadcn
+├── ScoreCard.tsx
+├── CourseSelector.tsx
+└── ...
+```
+
+### Customization
+
+Since you own the code, customize directly:
+
+```tsx
+// components/ui/button.tsx
+const buttonVariants = cva(
+  "inline-flex items-center justify-center...",
+  {
+    variants: {
+      variant: {
+        default: "bg-primary text-primary-foreground",
+        destructive: "bg-destructive text-destructive-foreground",
+        // Add your own variant
+        miami: "bg-gradient-to-r from-pink-500 to-cyan-500 text-white",
+      },
+    },
+  }
+)
+```
+
+---
+
+## Theming
+
+### CSS Variables (globals.css)
+
+```css
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
+    /* ... */
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    /* ... */
+  }
+}
+```
+
+### Miami Vice Theme (Lazy Golfing)
+
+```css
+/* Light mode */
+:root {
+  --primary: 16 100% 60%;        /* Orange #ff7033 */
+  --secondary: 45 100% 50%;      /* Yellow #ffbf00 */
+  --accent: 0 100% 71%;          /* Coral #ff6b6b */
+}
+
+/* Dark mode */
+.dark {
+  --primary: 330 100% 50%;       /* Hot Pink #ff0080 */
+  --secondary: 187 100% 50%;     /* Cyan #00f0ff */
+  --accent: 263 100% 67%;        /* Purple #9b59ff */
+}
+```
+
+---
+
+## Best Practices
+
+### Component Composition
+
+```tsx
+// Good: Compose shadcn components
+export function ScoreInput({ value, onChange }: Props) {
+  return (
+    <div className="flex items-center gap-2">
+      <Button variant="outline" size="icon" onClick={() => onChange(value - 1)}>
+        <Minus className="h-4 w-4" />
+      </Button>
+      <Input
+        type="number"
+        value={value}
+        className="w-16 text-center"
+        readOnly
+      />
+      <Button variant="outline" size="icon" onClick={() => onChange(value + 1)}>
+        <Plus className="h-4 w-4" />
+      </Button>
+    </div>
+  );
+}
+```
+
+### Form Patterns
+
+```tsx
+// Use shadcn Form with react-hook-form
+<Form {...form}>
+  <FormField
+    control={form.control}
+    name="score"
+    render={({ field }) => (
+      <FormItem>
+        <FormLabel>Score</FormLabel>
+        <FormControl>
+          <Input type="number" {...field} />
+        </FormControl>
+        <FormMessage />
+      </FormItem>
+    )}
+  />
+</Form>
+```
+
+### Accessibility
+
+Shadcn uses Radix primitives which handle:
+- Keyboard navigation
+- Focus management
+- ARIA attributes
+- Screen reader support
+
+**You still need to:**
+- Provide meaningful labels
+- Ensure color contrast
+- Test with keyboard
+
+---
+
+## Common Components
+
+| Component | Use Case |
+|-----------|----------|
+| **Button** | Actions, navigation |
+| **Card** | Content containers |
+| **Dialog** | Modal interactions |
+| **DropdownMenu** | Context menus, actions |
+| **Form** | Data input with validation |
+| **Table** | Data display |
+| **Tabs** | View switching |
+| **Toast** | Notifications (via Sonner) |
+| **Select** | Single choice from list |
+| **Skeleton** | Loading states |
+
+---
+
+## Gotchas
+
+1. **Server Components** — Most shadcn components need `"use client"`
+2. **Form integration** — Use `@hookform/resolvers` for Zod validation
+3. **Dark mode** — Requires `next-themes` or similar
+4. **Icons** — Lucide React is the default, keep it for consistency
+
+---
+
+## Resources
+
+- [Shadcn UI Documentation](https://ui.shadcn.com/)
+- [Radix Primitives](https://www.radix-ui.com/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Component Examples](https://ui.shadcn.com/examples)
+
+---
+
+*Last updated: 2025-12-14*

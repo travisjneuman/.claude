@@ -1,0 +1,31 @@
+# Notes Sidebar Button Styling Fix
+
+## Overview
+Fix inconsistent icon colors and types for sidebar collapse/expand buttons across all 3 Notes layouts.
+
+## Issues Identified
+1. **Color mismatch**: Collapse buttons (when sidebar open) used bright colors, expand buttons (when collapsed) used dim gray
+2. **Icon mismatch**: Expand buttons used `PanelLeft` (no arrow), should use `PanelLeftOpen` (arrow out) to match collapse button's `PanelLeftClose` (arrow in)
+
+## Files Modified
+- `src/components/notes/FileTreeLayout.tsx`
+- `src/components/notes/ThreeColumnLayout.tsx`
+- `src/components/notes/TabbedSidebarLayout.tsx`
+
+## Changes
+For each file:
+1. Changed import from `PanelLeft` to `PanelLeftOpen`
+2. Collapse button: Changed icon color from `text-text-light-tertiary dark:text-text-dark-tertiary` to `text-text-light-primary dark:text-text-dark-primary`
+3. Expand button: Changed icon from `PanelLeft` to `PanelLeftOpen`, color from `text-text-light-secondary dark:text-text-dark-secondary` to `text-text-light-primary dark:text-text-dark-primary`
+
+## Result
+- Both collapse and expand buttons now use primary text color (black in light mode, white in dark mode)
+- Collapse uses `PanelLeftClose` icon (arrow pointing in)
+- Expand uses `PanelLeftOpen` icon (arrow pointing out)
+
+## Verification
+- Type check: Passed
+- Tests: 221/221 passed
+
+## Status
+COMPLETE - 2025-12-14

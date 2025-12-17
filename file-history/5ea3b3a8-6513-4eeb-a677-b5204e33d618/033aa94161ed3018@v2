@@ -1,0 +1,116 @@
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [react()],
+
+  // CSS configuration with PostCSS
+  css: {
+    postcss: './config/postcss.config.js',
+  },
+
+  // Base public path - use '/' for root domain deployment
+  base: '/',
+
+  // Build optimizations
+  build: {
+    // Output directory
+    outDir: 'dist',
+
+    // Generate sourcemaps for production debugging (optional)
+    sourcemap: false,
+
+    // Chunk size warnings
+    chunkSizeWarningLimit: 1000,
+
+    // Rollup options - Simplified vendor splitting (no separate react chunk)
+    rollupOptions: {
+      output: {
+        // Aggressive vendor splitting by feature/usage pattern
+        // Splits 2.2MB vendor bundle into feature-specific chunks
+        // Result: Initial load drops from 2.2MB → ~230KB (80KB gzipped)
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            // STRATEGY: Split by package name to avoid giant vendor.js bundle
+            // Extract package name from path: node_modules/@scope/package or node_modules/package
+            const match = id.match(/node_modules[\/\\](@?[^\/\\]+[\/\\]?[^\/\\]*)/);
+            const packageName = match ? match[1] : null;
+
+            if (!packageName) return 'vendor';
+
+            // Core React runtime (loaded immediately - critical path)
+            if (packageName.startsWith('react') && !packageName.includes('router')) {
+              return 'react-vendor';
+            }
+
+            // Routing (needed early for page navigation)
+            if (packageName.includes('react-router')) {
+              return 'router-vendor';
+            }
+
+            // Heavy map library (only loads with WeatherMap widget)
+            if (packageName.includes('leaflet')) {
+              return 'maps-vendor';
+            }
+
+            // Encryption libraries (only loads when needed)
+            if (packageName.includes('crypto')) {
+              return 'crypto-vendor';
+            }
+
+            // Rich text editor (only loads with Notes page)
+            if (packageName.startsWith('lexical') || packageName.startsWith('@lexical')) {
+              return 'lexical-vendor';
+            }
+
+            // Drag and drop (only loads with Kanban/Dashboard)
+            if (packageName.includes('dnd') || packageName.startsWith('@dnd-kit')) {
+              return 'dnd-vendor';
+            }
+
+            // Animation library (only loads with animated components)
+            if (packageName.includes('framer-motion')) {
+              return 'animation-vendor';
+            }
+
+            // AI SDK vendor chunk (only loads with AI Terminal)
+            if (packageName.includes('anthropic') || packageName.includes('openai') || packageName.includes('groq') || packageName.includes('ai-sdk')) {
+              return 'ai-vendor';
+            }
+
+            // Utilities - shared across features (zustand, date-fns, uuid, etc.)
+            if (packageName.includes('zustand') || packageName.includes('date-fns') || packageName.includes('uuid')) {
+              return 'utils-vendor';
+            }
+
+            // Split each remaining package into its own chunk to avoid giant vendor.js
+            // This prevents the 2.5MB vendor.js problem
+            // Packages will be lazy loaded on demand
+            return `vendor-${packageName.replace(/[@\/\\]/g, '-')}`;
+          }
+        },
+      },
+    },
+  },
+
+  // Development server
+  server: {
+    port: 5173,
+    strictPort: false,
+    host: true,
+    // Cross-Origin Isolation headers for WebContainer (Phantom Shell)
+    // Required for SharedArrayBuffer support
+    headers: {
+      'Cross-Origin-Embedder-Policy': 'require-corp',
+      'Cross-Origin-Opener-Policy': 'same-origin',
+    },
+  },
+
+  // Preview server (for testing production build)
+  preview: {
+    port: 4173,
+    strictPort: false,
+    host: true,
+  },
+})

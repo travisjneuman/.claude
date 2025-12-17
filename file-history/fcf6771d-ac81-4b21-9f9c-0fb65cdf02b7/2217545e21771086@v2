@@ -1,0 +1,520 @@
+import { useState, useEffect } from 'react';
+import { FileText, Download, Save, X } from 'lucide-react';
+import { useTimeTrackingStore } from '../stores/useTimeTrackingStore';
+import { useInvoicingStore } from '../stores/useInvoicingStore';
+import type { InvoiceFilters, Invoice } from '../types/invoicing';
+import { jsPDF } from 'jspdf';
+import { toast } from '../stores/useToastStore';
+
+/**
+ * Invoice Builder Component
+ *
+ * Generate professional invoices from time entries with:
+ * - Flexible filtering (date range, projects, billable only)
+ * - Line item grouping (by project, date, or individual entries)
+ * - Live preview with calculations
+ * - Export to PDF, CSV, or JSON
+ */
+
+export function InvoiceBuilder() {
+  const { entries, projects } = useTimeTrackingStore();
+  const {
+    generateInvoice,
+    createInvoice,
+    settings,
+    exportToCSV,
+    exportToJSON
+  } = useInvoicingStore();
+
+  // Filter state
+  const [filters, setFilters] = useState<InvoiceFilters>({
+    startDate: '',
+    endDate: '',
+    projectIds: [],
+    billableOnly: true,
+    groupBy: 'project'
+  });
+
+  // Client info
+  const [clientName, setClientName] = useState('');
+  const [clientEmail, setClientEmail] = useState('');
+  const [notes, setNotes] = useState('');
+
+  // Generated invoice preview
+  const [preview, setPreview] = useState<Invoice | null>(null);
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+
+  // Set default date range (last 30 days)
+  useEffect(() => {
+    const end = new Date();
+    const start = new Date();
+    start.setDate(start.getDate() - 30);
+
+    setFilters(f => ({
+      ...f,
+      startDate: start.toISOString().split('T')[0],
+      endDate: end.toISOString().split('T')[0]
+    }));
+  }, []);
+
+  // Generate preview
+  const handleGeneratePreview = async () => {
+    if (!clientName.trim()) {
+      toast.warning('Please enter a client name');
+      return;
+    }
+
+    setIsGenerating(true);
+    try {
+      const invoice = await generateInvoice(
+        entries,
+        filters,
+        clientName,
+        clientEmail || undefined,
+        notes || undefined
+      );
+      setPreview(invoice);
+    } catch (error) {
+      console.error('Failed to generate invoice', error);
+      toast.error('Failed to generate invoice', 'Please try again.');
+    } finally {
+      setIsGenerating(false);
+    }
+  };
+
+  // Save invoice
+  const handleSaveInvoice = async () => {
+    if (!preview) return;
+
+    setIsSaving(true);
+    try {
+      await createInvoice(preview);
+      toast.success('Invoice saved', 'Your invoice has been saved successfully.');
+      // Reset form
+      setPreview(null);
+      setClientName('');
+      setClientEmail('');
+      setNotes('');
+    } catch (error) {
+      console.error('Failed to save invoice', error);
+      toast.error('Failed to save invoice', 'Please try again.');
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  // Export to PDF
+  const handleExportPDF = () => {
+    if (!preview) return;
+
+    const doc = new jsPDF();
+    const pageWidth = doc.internal.pageSize.getWidth();
+    let yPos = 20;
+
+    // Header - Company Info
+    doc.setFontSize(20);
+    doc.setFont('helvetica', 'bold');
+    doc.text(settings.companyName || 'Your Company', 20, yPos);
+    yPos += 8;
+
+    doc.setFontSize(10);
+    doc.setFont('helvetica', 'normal');
+    if (settings.companyAddress) {
+      doc.text(settings.companyAddress, 20, yPos);
+      yPos += 5;
+    }
+    if (settings.companyEmail) {
+      doc.text(settings.companyEmail, 20, yPos);
+      yPos += 5;
+    }
+    if (settings.companyPhone) {
+      doc.text(settings.companyPhone, 20, yPos);
+      yPos += 5;
+    }
+
+    // Invoice Title & Number
+    yPos += 5;
+    doc.setFontSize(16);
+    doc.setFont('helvetica', 'bold');
+    doc.text('INVOICE', pageWidth / 2, yPos, { align: 'center' });
+    yPos += 8;
+
+    doc.setFontSize(12);
+    doc.text(preview.invoiceNumber, pageWidth / 2, yPos, { align: 'center' });
+    yPos += 10;
+
+    // Invoice & Due Date
+    doc.setFontSize(10);
+    doc.setFont('helvetica', 'normal');
+    doc.text(`Invoice Date: ${new Date(preview.invoiceDate).toLocaleDateString()}`, 20, yPos);
+    if (preview.dueDate) {
+      doc.text(`Due Date: ${new Date(preview.dueDate).toLocaleDateString()}`, pageWidth - 20, yPos, { align: 'right' });
+    }
+    yPos += 10;
+
+    // Client Info
+    doc.setFont('helvetica', 'bold');
+    doc.text('Bill To:', 20, yPos);
+    yPos += 6;
+
+    doc.setFont('helvetica', 'normal');
+    doc.text(preview.clientName, 20, yPos);
+    yPos += 5;
+    if (preview.clientEmail) {
+      doc.text(preview.clientEmail, 20, yPos);
+      yPos += 5;
+    }
+    if (preview.clientAddress) {
+      doc.text(preview.clientAddress, 20, yPos);
+      yPos += 5;
+    }
+
+    // Line Items Table
+    yPos += 10;
+    doc.setFont('helvetica', 'bold');
+    doc.setFillColor(240, 240, 240);
+    doc.rect(20, yPos - 5, pageWidth - 40, 7, 'F');
+    doc.text('Description', 25, yPos);
+    doc.text('Hours', pageWidth - 80, yPos);
+    doc.text('Rate', pageWidth - 60, yPos);
+    doc.text('Amount', pageWidth - 25, yPos, { align: 'right' });
+    yPos += 8;
+
+    // Line items
+    doc.setFont('helvetica', 'normal');
+    preview.lineItems.forEach(item => {
+      if (yPos > 270) { // Page break
+        doc.addPage();
+        yPos = 20;
+      }
+
+      doc.text(item.description, 25, yPos);
+      doc.text(item.quantity.toFixed(2), pageWidth - 80, yPos);
+      doc.text(`${settings.currencySymbol}${item.rate.toFixed(2)}`, pageWidth - 60, yPos);
+      doc.text(`${settings.currencySymbol}${item.amount.toFixed(2)}`, pageWidth - 25, yPos, { align: 'right' });
+      yPos += 7;
+    });
+
+    // Totals
+    yPos += 5;
+    doc.line(20, yPos, pageWidth - 20, yPos);
+    yPos += 8;
+
+    doc.text('Subtotal:', pageWidth - 80, yPos);
+    doc.text(`${settings.currencySymbol}${preview.subtotal.toFixed(2)}`, pageWidth - 25, yPos, { align: 'right' });
+    yPos += 7;
+
+    if (preview.taxRate > 0) {
+      doc.text(`Tax (${preview.taxRate}%):`, pageWidth - 80, yPos);
+      doc.text(`${settings.currencySymbol}${preview.taxAmount.toFixed(2)}`, pageWidth - 25, yPos, { align: 'right' });
+      yPos += 7;
+    }
+
+    doc.setFont('helvetica', 'bold');
+    doc.text('Total:', pageWidth - 80, yPos);
+    doc.text(`${settings.currencySymbol}${preview.total.toFixed(2)}`, pageWidth - 25, yPos, { align: 'right' });
+
+    // Notes
+    if (preview.notes) {
+      yPos += 15;
+      doc.setFont('helvetica', 'bold');
+      doc.text('Notes:', 20, yPos);
+      yPos += 6;
+      doc.setFont('helvetica', 'normal');
+      const splitNotes = doc.splitTextToSize(preview.notes, pageWidth - 40);
+      doc.text(splitNotes, 20, yPos);
+    }
+
+    // Save PDF
+    doc.save(`${preview.invoiceNumber}.pdf`);
+  };
+
+  // Export to CSV
+  const handleExportCSV = () => {
+    if (!preview) return;
+    const csv = exportToCSV(preview);
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${preview.invoiceNumber}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  // Export to JSON
+  const handleExportJSON = () => {
+    if (!preview) return;
+    const json = exportToJSON(preview);
+    const blob = new Blob([json], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${preview.invoiceNumber}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  return (
+    <div className="space-y-6">
+      {/* Header */}
+      <div className="flex items-center justify-between">
+        <div>
+          <h2 className="text-2xl font-bold text-text-primary">Create Invoice</h2>
+          <p className="text-sm text-text-secondary">Generate invoices from your time entries</p>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Left: Filters & Settings */}
+        <div className="space-y-6">
+          {/* Client Info */}
+          <div className="rounded-lg bg-surface-elevated p-4 space-y-4">
+            <h3 className="font-semibold text-text-primary">Client Information</h3>
+
+            <div>
+              <label className="block text-sm font-medium text-text-light-primary dark:text-text-dark-primary mb-1">
+                Client Name *
+              </label>
+              <input
+                type="text"
+                value={clientName}
+                onChange={(e) => setClientName(e.target.value)}
+                className="w-full rounded-md border border-border-light dark:border-border-dark bg-surface-light-elevated dark:bg-surface-dark-elevated px-3 py-2 text-sm text-text-light-primary dark:text-text-dark-primary focus:border-accent-magenta dark:focus:border-accent-cyan focus:outline-none focus:ring-2 focus:ring-accent-magenta dark:focus:ring-accent-cyan placeholder-text-light-secondary dark:placeholder-text-dark-secondary"
+                placeholder="Acme Corp"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-text-light-primary dark:text-text-dark-primary mb-1">
+                Client Email
+              </label>
+              <input
+                type="email"
+                value={clientEmail}
+                onChange={(e) => setClientEmail(e.target.value)}
+                className="w-full rounded-md border border-border-light dark:border-border-dark bg-surface-light-elevated dark:bg-surface-dark-elevated px-3 py-2 text-sm text-text-light-primary dark:text-text-dark-primary focus:border-accent-magenta dark:focus:border-accent-cyan focus:outline-none focus:ring-2 focus:ring-accent-magenta dark:focus:ring-accent-cyan placeholder-text-light-secondary dark:placeholder-text-dark-secondary"
+                placeholder="billing@acme.com"
+              />
+            </div>
+          </div>
+
+          {/* Filters */}
+          <div className="rounded-lg bg-surface-elevated p-4 space-y-4">
+            <h3 className="font-semibold text-text-primary">Time Entry Filters</h3>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-text-light-primary dark:text-text-dark-primary mb-1">
+                  Start Date
+                </label>
+                <input
+                  type="date"
+                  value={filters.startDate}
+                  onChange={(e) => setFilters({ ...filters, startDate: e.target.value })}
+                  className="w-full rounded-md border border-border-light dark:border-border-dark bg-surface-light-elevated dark:bg-surface-dark-elevated px-3 py-2 text-sm text-text-light-primary dark:text-text-dark-primary focus:border-accent-magenta dark:focus:border-accent-cyan focus:outline-none focus:ring-2 focus:ring-accent-magenta dark:focus:ring-accent-cyan [color-scheme:light] dark:[color-scheme:dark]"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-text-light-primary dark:text-text-dark-primary mb-1">
+                  End Date
+                </label>
+                <input
+                  type="date"
+                  value={filters.endDate}
+                  onChange={(e) => setFilters({ ...filters, endDate: e.target.value })}
+                  className="w-full rounded-md border border-border-light dark:border-border-dark bg-surface-light-elevated dark:bg-surface-dark-elevated px-3 py-2 text-sm text-text-light-primary dark:text-text-dark-primary focus:border-accent-magenta dark:focus:border-accent-cyan focus:outline-none focus:ring-2 focus:ring-accent-magenta dark:focus:ring-accent-cyan [color-scheme:light] dark:[color-scheme:dark]"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-text-light-primary dark:text-text-dark-primary mb-1">
+                Projects
+              </label>
+              <select
+                multiple
+                value={filters.projectIds}
+                onChange={(e) => setFilters({
+                  ...filters,
+                  projectIds: Array.from(e.target.selectedOptions, option => option.value)
+                })}
+                className="w-full rounded-md border border-border-light dark:border-border-dark bg-surface-light-elevated dark:bg-surface-dark-elevated px-3 py-2 text-sm text-text-light-primary dark:text-text-dark-primary focus:border-accent-magenta dark:focus:border-accent-cyan focus:outline-none focus:ring-2 focus:ring-accent-magenta dark:focus:ring-accent-cyan"
+                size={4}
+              >
+                {projects.map(project => (
+                  <option key={project.id} value={project.id}>
+                    {project.name}
+                  </option>
+                ))}
+              </select>
+              <p className="mt-1 text-xs text-text-light-tertiary dark:text-text-dark-tertiary">
+                Hold Ctrl/Cmd to select multiple
+              </p>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-text-light-primary dark:text-text-dark-primary mb-1">
+                Group By
+              </label>
+              <select
+                value={filters.groupBy}
+                onChange={(e) => setFilters({ ...filters, groupBy: e.target.value as any })}
+                className="w-full rounded-md border border-border-light dark:border-border-dark bg-surface-light-elevated dark:bg-surface-dark-elevated px-3 py-2 text-sm text-text-light-primary dark:text-text-dark-primary focus:border-accent-magenta dark:focus:border-accent-cyan focus:outline-none focus:ring-2 focus:ring-accent-magenta dark:focus:ring-accent-cyan"
+              >
+                <option value="project">Project</option>
+                <option value="date">Date</option>
+                <option value="none">Individual Entries</option>
+              </select>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <input
+                type="checkbox"
+                id="billableOnly"
+                checked={filters.billableOnly}
+                onChange={(e) => setFilters({ ...filters, billableOnly: e.target.checked })}
+                className="w-4 h-4 rounded border-border-light dark:border-border-dark text-accent-magenta dark:text-accent-cyan focus:ring-2 focus:ring-accent-magenta dark:focus:ring-accent-cyan"
+              />
+              <label htmlFor="billableOnly" className="text-sm text-text-light-primary dark:text-text-dark-primary">
+                Billable entries only
+              </label>
+            </div>
+          </div>
+
+          {/* Notes */}
+          <div className="rounded-lg bg-surface-elevated p-4 space-y-4">
+            <h3 className="font-semibold text-text-light-primary dark:text-text-dark-primary">Invoice Notes</h3>
+            <textarea
+              value={notes}
+              onChange={(e) => setNotes(e.target.value)}
+              className="w-full rounded-md border border-border-light dark:border-border-dark bg-surface-light-elevated dark:bg-surface-dark-elevated px-3 py-2 text-sm text-text-light-primary dark:text-text-dark-primary focus:border-accent-magenta dark:focus:border-accent-cyan focus:outline-none focus:ring-2 focus:ring-accent-magenta dark:focus:ring-accent-cyan placeholder-text-light-secondary dark:placeholder-text-dark-secondary"
+              rows={4}
+              placeholder="Payment terms, thank you note, etc."
+            />
+          </div>
+
+          <button
+            onClick={handleGeneratePreview}
+            disabled={isGenerating || !clientName.trim()}
+            className="w-full rounded-md bg-accent-primary px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-accent-primary/90 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {isGenerating ? 'Generating...' : 'Generate Preview'}
+          </button>
+        </div>
+
+        {/* Right: Preview */}
+        <div className="rounded-lg bg-surface-elevated p-6">
+          {!preview ? (
+            <div className="flex h-full min-h-[400px] items-center justify-center text-text-tertiary">
+              <div className="text-center">
+                <FileText className="w-12 h-12 mx-auto mb-4 opacity-50" />
+                <p>Invoice preview will appear here</p>
+              </div>
+            </div>
+          ) : (
+            <div className="space-y-6">
+              {/* Preview Header */}
+              <div className="flex items-center justify-between pb-4 border-b border-border-light">
+                <div>
+                  <h3 className="text-xl font-bold text-text-primary">
+                    {preview.invoiceNumber}
+                  </h3>
+                  <p className="text-sm text-text-secondary">
+                    {new Date(preview.invoiceDate).toLocaleDateString()}
+                  </p>
+                </div>
+                <button
+                  onClick={() => setPreview(null)}
+                  className="rounded-md p-2 text-text-secondary hover:bg-surface-hover"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+
+              {/* Client */}
+              <div>
+                <p className="text-xs font-medium text-text-tertiary mb-1">BILL TO</p>
+                <p className="font-medium text-text-primary">{preview.clientName}</p>
+                {preview.clientEmail && (
+                  <p className="text-sm text-text-secondary">{preview.clientEmail}</p>
+                )}
+              </div>
+
+              {/* Line Items */}
+              <div className="space-y-2">
+                <p className="text-xs font-medium text-text-tertiary">LINE ITEMS</p>
+                <div className="space-y-1">
+                  {preview.lineItems.map(item => (
+                    <div key={item.id} className="flex justify-between text-sm">
+                      <span className="text-text-primary">{item.description}</span>
+                      <span className="text-text-secondary">
+                        {item.quantity}h × ${item.rate} = ${item.amount.toFixed(2)}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Totals */}
+              <div className="space-y-2 border-t border-border-light pt-4">
+                <div className="flex justify-between text-sm">
+                  <span className="text-text-secondary">Subtotal</span>
+                  <span className="text-text-primary">${preview.subtotal.toFixed(2)}</span>
+                </div>
+                {preview.taxRate > 0 && (
+                  <div className="flex justify-between text-sm">
+                    <span className="text-text-secondary">Tax ({preview.taxRate}%)</span>
+                    <span className="text-text-primary">${preview.taxAmount.toFixed(2)}</span>
+                  </div>
+                )}
+                <div className="flex justify-between text-lg font-bold border-t border-border-light pt-2">
+                  <span className="text-text-primary">Total</span>
+                  <span className="text-text-primary">${preview.total.toFixed(2)}</span>
+                </div>
+              </div>
+
+              {/* Actions */}
+              <div className="space-y-2">
+                <button
+                  onClick={handleSaveInvoice}
+                  disabled={isSaving}
+                  className="w-full flex items-center justify-center gap-2 rounded-md bg-accent-primary px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-accent-primary/90 disabled:opacity-50"
+                >
+                  <Save className="w-4 h-4" />
+                  {isSaving ? 'Saving...' : 'Save Invoice'}
+                </button>
+
+                <div className="grid grid-cols-3 gap-2">
+                  <button
+                    onClick={handleExportPDF}
+                    className="flex items-center justify-center gap-1 rounded-md bg-surface-base px-3 py-2 text-sm font-medium text-text-primary transition-colors hover:bg-surface-hover"
+                  >
+                    <Download className="w-4 h-4" />
+                    PDF
+                  </button>
+                  <button
+                    onClick={handleExportCSV}
+                    className="flex items-center justify-center gap-1 rounded-md bg-surface-base px-3 py-2 text-sm font-medium text-text-primary transition-colors hover:bg-surface-hover"
+                  >
+                    <Download className="w-4 h-4" />
+                    CSV
+                  </button>
+                  <button
+                    onClick={handleExportJSON}
+                    className="flex items-center justify-center gap-1 rounded-md bg-surface-base px-3 py-2 text-sm font-medium text-text-primary transition-colors hover:bg-surface-hover"
+                  >
+                    <Download className="w-4 h-4" />
+                    JSON
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}

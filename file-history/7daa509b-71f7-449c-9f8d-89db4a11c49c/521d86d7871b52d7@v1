@@ -1,0 +1,113 @@
+---
+type: project
+status: <%* const status = await tp.system.suggester(["active", "alpha", "maintenance", "stable", "live", "incubating"], ["active", "alpha", "maintenance", "stable", "live", "incubating"], false, "Project Status"); %><%status%>
+priority: <%* const priority = await tp.system.suggester(["P0 - Critical", "P1 - High", "P2 - Medium", "P3 - Low"], ["P0", "P1", "P2", "P3"], false, "Priority Level"); %><%priority%>
+tech-stack:
+  - "[[Concepts/<% tp.file.cursor(1) %>]]"
+repo-path: <% tp.file.cursor(2) %>
+live-url: <% tp.file.cursor(3) %>
+api-url:
+architecture-decisions: []
+created: <% tp.date.now("YYYY-MM-DD") %>
+updated: <% tp.date.now("YYYY-MM-DD") %>
+---
+
+# <% tp.file.title %>
+
+> [!INFO] Summary
+> <% tp.file.cursor(4) %>
+
+---
+
+## 📊 Metrics & Status
+
+| Metric | Value |
+|--------|-------|
+| **Status** | <%status%> |
+| **Priority** | <%priority%> |
+| **Repository** | `<% tp.file.cursor(2) %>` |
+| **Live URL** | <% tp.file.cursor(3) %> |
+| **Last Updated** | <% tp.date.now("YYYY-MM-DD") %> |
+
+---
+
+## 🛠 Tech Stack
+
+| Layer | Technology |
+|-------|------------|
+| **Framework** | [[Concepts/<% tp.file.cursor(1) %>]] |
+| **Language** | [[Concepts/TypeScript]] |
+| **Styling** | [[Concepts/Tailwind]] |
+| **Database** | <% tp.file.cursor(5) %> |
+
+---
+
+## 🧠 Architecture
+
+### Overview
+
+<% tp.file.cursor(6) %>
+
+### Key Patterns
+
+- [[Concepts/Local-First]] — If applicable
+- <% tp.file.cursor(7) %>
+
+---
+
+## 📁 Project Structure
+
+```
+project-name/
+├── src/
+├── tests/
+├── docs/
+├── CLAUDE.md
+└── README.md
+```
+
+---
+
+## 📁 Current Tasks
+
+### Active
+
+| Task | Status | Description |
+|------|--------|-------------|
+| <% tp.file.cursor(8) %> | Planning | |
+
+### Completed
+
+- See `.archive/completed-tasks/` in project repo
+
+---
+
+## 🔧 Development Commands
+
+```bash
+npm run dev          # Start dev server
+npm run build        # Production build
+npm run test         # Run tests
+npm run type-check   # TypeScript check
+```
+
+---
+
+## 📚 Documentation
+
+| Document | Purpose |
+|----------|---------|
+| `CLAUDE.md` | AI assistant guidelines |
+| `README.md` | Project overview |
+
+---
+
+## 🔗 Related
+
+- [[Home]] — Workspace hub
+- [[Dashboards/Active Projects]] — All projects
+- [[Dashboards/Project Velocity]] — Health tracking
+
+---
+
+*Last updated: <% tp.date.now("YYYY-MM-DD") %>*

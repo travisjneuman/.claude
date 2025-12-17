@@ -1,0 +1,197 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PropertyCard from '../../components/property/PropertyCard.astro';
+import { getCollection } from 'astro:content';
+
+// Get all properties, sorted by status (available first) then by date
+const allProperties = await getCollection('properties');
+const sortedProperties = allProperties.sort((a, b) => {
+  // Status priority: available > pending > rented
+  const statusOrder = { available: 0, pending: 1, rented: 2 };
+  const statusDiff = statusOrder[a.data.status] - statusOrder[b.data.status];
+  if (statusDiff !== 0) return statusDiff;
+
+  // Then by publish date (newest first)
+  return b.data.publishedDate.getTime() - a.data.publishedDate.getTime();
+});
+
+// Count by status for display
+const availableCount = allProperties.filter(p => p.data.status === 'available').length;
+const pendingCount = allProperties.filter(p => p.data.status === 'pending').length;
+const rentedCount = allProperties.filter(p => p.data.status === 'rented').length;
+---
+
+<BaseLayout
+  title="Available Properties"
+  description="Browse all available rental properties from OakStone Properties. Find apartments, houses, and more."
+>
+  <!-- Page Header -->
+  <section class="gradient-primary text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <h1 class="text-3xl md:text-4xl font-bold mb-2">Our Properties</h1>
+      <p class="text-primary-100 text-lg">
+        {availableCount > 0
+          ? `${availableCount} propert${availableCount === 1 ? 'y' : 'ies'} currently available`
+          : 'Check back soon for new listings'
+        }
+      </p>
+    </div>
+  </section>
+
+  <!-- Filters & Listings -->
+  <section class="py-8 md:py-12 bg-theme-secondary">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Status Tabs -->
+      <div class="flex flex-wrap gap-2 mb-8" role="tablist" aria-label="Filter by status">
+        <button
+          type="button"
+          class="filter-tab active px-4 py-2 rounded-lg text-sm font-medium transition-colors touch-target"
+          data-status="all"
+          role="tab"
+          aria-selected="true"
+        >
+          All ({allProperties.length})
+        </button>
+        <button
+          type="button"
+          class="filter-tab px-4 py-2 rounded-lg text-sm font-medium transition-colors touch-target"
+          data-status="available"
+          role="tab"
+          aria-selected="false"
+        >
+          Available ({availableCount})
+        </button>
+        {pendingCount > 0 && (
+          <button
+            type="button"
+            class="filter-tab px-4 py-2 rounded-lg text-sm font-medium transition-colors touch-target"
+            data-status="pending"
+            role="tab"
+            aria-selected="false"
+          >
+            Pending ({pendingCount})
+          </button>
+        )}
+        {rentedCount > 0 && (
+          <button
+            type="button"
+            class="filter-tab px-4 py-2 rounded-lg text-sm font-medium transition-colors touch-target"
+            data-status="rented"
+            role="tab"
+            aria-selected="false"
+          >
+            Rented ({rentedCount})
+          </button>
+        )}
+      </div>
+
+      <!-- Property Grid -->
+      {sortedProperties.length > 0 ? (
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8" id="property-grid">
+          {sortedProperties.map((property) => (
+            <div class="property-item" data-status={property.data.status}>
+              <PropertyCard property={property} />
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div class="text-center py-16">
+          <svg class="w-16 h-16 text-theme-tertiary mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+          </svg>
+          <h2 class="text-xl font-semibold text-theme-primary mb-2">No Properties Listed</h2>
+          <p class="text-theme-secondary">Check back soon for new listings!</p>
+        </div>
+      )}
+
+      <!-- No Results Message (hidden by default) -->
+      <div id="no-results" class="hidden text-center py-16">
+        <svg class="w-16 h-16 text-theme-tertiary mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+        <h2 class="text-xl font-semibold text-theme-primary mb-2">No Properties Found</h2>
+        <p class="text-theme-secondary">Try adjusting your filters to see more results.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-12 bg-theme-primary">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-2xl font-bold text-theme-primary mb-4">Don't See What You're Looking For?</h2>
+      <p class="text-theme-secondary mb-6 max-w-2xl mx-auto">
+        Contact us to let us know what you're looking for. We may have properties coming available soon that match your needs.
+      </p>
+      <a
+        href="/contact"
+        class="inline-flex items-center justify-center px-6 py-3 bg-primary-600 text-white font-semibold rounded-lg hover:bg-primary-700 transition-colors touch-target"
+      >
+        Contact Us
+      </a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .filter-tab {
+    background-color: var(--bg-primary);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-primary);
+  }
+
+  .filter-tab:hover {
+    background-color: var(--bg-tertiary);
+  }
+
+  .filter-tab.active {
+    background-color: var(--color-primary-600);
+    color: white;
+    border-color: var(--color-primary-600);
+  }
+</style>
+
+<script>
+  // Simple client-side filtering
+  const tabs = document.querySelectorAll('.filter-tab');
+  const propertyItems = document.querySelectorAll('.property-item');
+  const noResults = document.getElementById('no-results');
+  const propertyGrid = document.getElementById('property-grid');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      // Update active tab
+      tabs.forEach(t => {
+        t.classList.remove('active');
+        t.setAttribute('aria-selected', 'false');
+      });
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected', 'true');
+
+      // Filter properties
+      const status = (tab as HTMLElement).dataset.status;
+      let visibleCount = 0;
+
+      propertyItems.forEach(item => {
+        const itemStatus = (item as HTMLElement).dataset.status;
+        const shouldShow = status === 'all' || itemStatus === status;
+
+        if (shouldShow) {
+          item.classList.remove('hidden');
+          visibleCount++;
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+
+      // Show/hide no results message
+      if (visibleCount === 0 && noResults && propertyGrid) {
+        noResults.classList.remove('hidden');
+        propertyGrid.classList.add('hidden');
+      } else if (noResults && propertyGrid) {
+        noResults.classList.add('hidden');
+        propertyGrid.classList.remove('hidden');
+      }
+    });
+  });
+</script>

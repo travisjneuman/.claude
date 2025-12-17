@@ -1,0 +1,139 @@
+/**
+ * Diagram Editor Page
+ * Full-screen diagram editing with Konva canvas
+ */
+
+import { useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { StoreErrorBoundary } from '@/components/StoreErrorBoundary';
+import { useDiagramsStore } from '@/stores/useDiagramsStore';
+import { useDiagramEditorStore } from '@/stores/useDiagramEditorStore';
+import { ArrowLeft, Save } from 'lucide-react';
+import type { Diagram } from '@/types/diagrams';
+
+export default function DiagramEditor() {
+  const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
+
+  const getDiagram = useDiagramsStore((s) => s.getDiagram);
+  const updateDiagram = useDiagramsStore((s) => s.updateDiagram);
+
+  const [diagram, setDiagram] = useState<Diagram | null>(null);
+  const [title, setTitle] = useState('');
+  const [isSaving, setIsSaving] = useState(false);
+
+  useEffect(() => {
+    if (!id) {
+      navigate('/diagrams');
+      return;
+    }
+
+    const foundDiagram = getDiagram(id);
+    if (!foundDiagram) {
+      navigate('/diagrams');
+      return;
+    }
+
+    setDiagram(foundDiagram);
+    setTitle(foundDiagram.title);
+  }, [id, getDiagram, navigate]);
+
+  const handleSave = () => {
+    if (!diagram) return;
+
+    setIsSaving(true);
+    updateDiagram(diagram.id, {
+      title,
+      elements: diagram.elements,
+      canvasState: diagram.canvasState,
+    });
+
+    setTimeout(() => {
+      setIsSaving(false);
+    }, 500);
+  };
+
+  const handleBack = () => {
+    handleSave();
+    navigate('/diagrams');
+  };
+
+  if (!diagram) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="animate-pulse text-text-light-secondary dark:text-text-dark-secondary">
+          Loading diagram...
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <StoreErrorBoundary>
+      <div className="flex flex-col h-screen bg-background-light dark:bg-background-dark">
+        {/* Top Bar */}
+        <header className="flex items-center justify-between px-4 py-3 border-b border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark">
+          <div className="flex items-center gap-3">
+            <button
+              onClick={handleBack}
+              className="p-2 hover:bg-surface-hover-light dark:hover:bg-surface-hover-dark rounded-lg transition-colors"
+              aria-label="Back to diagrams"
+            >
+              <ArrowLeft className="w-5 h-5" />
+            </button>
+
+            <input
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              onBlur={handleSave}
+              className="text-lg font-semibold bg-transparent border-none focus:outline-none focus:ring-2 focus:ring-primary-light dark:focus:ring-primary-dark rounded px-2 py-1"
+              placeholder="Untitled Diagram"
+            />
+
+            {isSaving && (
+              <span className="text-xs text-text-light-tertiary dark:text-text-dark-tertiary">
+                Saving...
+              </span>
+            )}
+          </div>
+
+          <button
+            onClick={handleSave}
+            className="flex items-center gap-2 px-4 py-2 bg-primary-light dark:bg-primary-dark text-white rounded-lg hover:opacity-90 transition-opacity"
+          >
+            <Save className="w-4 h-4" />
+            Save
+          </button>
+        </header>
+
+        {/* Editor Area - Will be replaced with Konva canvas */}
+        <div className="flex-1 flex items-center justify-center bg-background-light dark:bg-background-dark">
+          <div className="text-center">
+            <div className="text-text-light-tertiary dark:text-text-dark-tertiary mb-4">
+              <svg
+                className="w-24 h-24 mx-auto"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={1}
+                  d="M4 5a1 1 0 011-1h4a1 1 0 011 1v7a1 1 0 01-1 1H5a1 1 0 01-1-1V5z M14 5a1 1 0 011-1h4a1 1 0 011 1v2a1 1 0 01-1 1h-4a1 1 0 01-1-1V5z M14 13a1 1 0 011-1h4a1 1 0 011 1v6a1 1 0 01-1 1h-4a1 1 0 01-1-1v-6z"
+                />
+              </svg>
+            </div>
+            <p className="text-text-light-secondary dark:text-text-dark-secondary">
+              Canvas component coming next...
+            </p>
+            <p className="text-sm text-text-light-tertiary dark:text-text-dark-tertiary mt-2">
+              Diagram ID: {diagram.id}
+            </p>
+          </div>
+        </div>
+      </div>
+    </StoreErrorBoundary>
+  );
+}

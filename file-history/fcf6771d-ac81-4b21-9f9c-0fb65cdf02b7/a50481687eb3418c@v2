@@ -1,0 +1,305 @@
+/**
+ * NotesLayout Component
+ *
+ * Main layout container for the Notes page.
+ * Part of the Notes Page Revolution.
+ *
+ * Features:
+ * - Flexbox-based layout (no hardcoded heights)
+ * - Resizable sidebar with persisted width
+ * - Resizable folder/notes splitter (horizontal)
+ * - Collapsible sidebar with animation
+ * - View mode support (split/editor-only/list-only)
+ * - Responsive design with mobile drawer support
+ */
+
+import React, { useEffect, useCallback, useRef, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X } from 'lucide-react';
+import { useSettingsStore, type NotesViewMode } from '../../stores/useSettingsStore';
+import { FolderSidebar } from './FolderSidebar';
+import { NotesList } from './NotesList';
+import { SidebarResizer } from './SidebarResizer';
+import { HorizontalSplitter } from './HorizontalSplitter';
+
+// View mode cycle order
+const VIEW_MODE_CYCLE: NotesViewMode[] = ['split', 'editor-only', 'list-only'];
+
+export interface NotesLayoutProps {
+  /** Content to render in the editor pane */
+  children: React.ReactNode;
+  /** Active tag filters */
+  activeTags: string[];
+  /** Callback to add a tag filter */
+  onAddTag: (tag: string) => void;
+  /** Callback to remove a tag filter */
+  onRemoveTag: (tag: string) => void;
+  /** Callback to clear all tag filters */
+  onClearAllTags: () => void;
+  /** Callback to open tag manager modal */
+  onOpenTagManager: () => void;
+  /** Callback to open template library modal */
+  onOpenTemplateLibrary: () => void;
+  /** Callback to open export modal */
+  onOpenExportModal: () => void;
+}
+
+export const NotesLayout: React.FC<NotesLayoutProps> = ({
+  children,
+  activeTags,
+  onAddTag,
+  onRemoveTag,
+  onClearAllTags,
+  onOpenTagManager,
+  onOpenTemplateLibrary,
+  onOpenExportModal,
+}) => {
+  // Ref for the sidebar container (for horizontal splitter calculations)
+  const sidebarRef = useRef<HTMLDivElement>(null);
+
+  // Mobile drawer state
+  const [isMobileDrawerOpen, setIsMobileDrawerOpen] = useState(false);
+
+  // Get layout preferences from settings store
+  const notesLayout = useSettingsStore((state) => state.notesLayout);
+  const setNotesLayout = useSettingsStore((state) => state.setNotesLayout);
+
+  const { viewMode, sidebarWidth, folderPaneHeight } = notesLayout;
+
+  // Sidebar collapsed state (editor-only mode)
+  const isSidebarCollapsed = viewMode === 'editor-only';
+  const isListOnly = viewMode === 'list-only';
+
+  // Handle sidebar width changes
+  const handleSidebarWidthChange = useCallback(
+    (width: number) => {
+      setNotesLayout({ sidebarWidth: width });
+    },
+    [setNotesLayout]
+  );
+
+  // Handle folder pane height changes (horizontal splitter)
+  const handleFolderPaneHeightChange = useCallback(
+    (height: number) => {
+      setNotesLayout({ folderPaneHeight: height });
+    },
+    [setNotesLayout]
+  );
+
+  // Toggle sidebar visibility
+  const toggleSidebar = useCallback(() => {
+    setNotesLayout({
+      viewMode: viewMode === 'split' ? 'editor-only' : 'split',
+    });
+  }, [viewMode, setNotesLayout]);
+
+  // Cycle through view modes (Cmd+Shift+\)
+  const cycleViewMode = useCallback(() => {
+    const currentIndex = VIEW_MODE_CYCLE.indexOf(viewMode);
+    const nextIndex = (currentIndex + 1) % VIEW_MODE_CYCLE.length;
+    setNotesLayout({ viewMode: VIEW_MODE_CYCLE[nextIndex] });
+  }, [viewMode, setNotesLayout]);
+
+  // Toggle mobile drawer
+  const toggleMobileDrawer = useCallback(() => {
+    setIsMobileDrawerOpen((prev) => !prev);
+  }, []);
+
+  // Close mobile drawer
+  const closeMobileDrawer = useCallback(() => {
+    setIsMobileDrawerOpen(false);
+  }, []);
+
+  // Keyboard shortcuts
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === '\\') {
+        e.preventDefault();
+        if (e.shiftKey) {
+          // Cmd+Shift+\ cycles through view modes
+          cycleViewMode();
+        } else {
+          // Cmd+\ toggles sidebar
+          toggleSidebar();
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [toggleSidebar, cycleViewMode]);
+
+  // Sidebar content (shared between desktop and mobile drawer)
+  const sidebarContent = (
+    <>
+      {/* Folder sidebar - height controlled by folderPaneHeight */}
+      <div style={{ height: `${folderPaneHeight}%` }} className="flex-shrink-0 overflow-hidden">
+        <FolderSidebar
+          activeTags={activeTags}
+          onAddTag={onAddTag}
+          onRemoveTag={onRemoveTag}
+          onClearAllTags={onClearAllTags}
+          onOpenTagManager={onOpenTagManager}
+        />
+      </div>
+
+      {/* Horizontal splitter between folders and notes */}
+      <HorizontalSplitter
+        position={folderPaneHeight}
+        minPosition={20}
+        maxPosition={80}
+        defaultPosition={40}
+        onPositionChange={handleFolderPaneHeightChange}
+        containerRef={sidebarRef}
+      />
+
+      {/* Notes list - fills remaining space */}
+      <div style={{ height: `${100 - folderPaneHeight}%` }} className="flex-1 min-h-0 overflow-hidden">
+        <NotesList
+          activeTags={activeTags}
+          onOpenTemplateLibrary={onOpenTemplateLibrary}
+          onOpenExportModal={onOpenExportModal}
+        />
+      </div>
+    </>
+  );
+
+  return (
+    <div className="flex-1 flex min-h-0 overflow-hidden relative">
+      {/* Mobile menu button - visible only on small screens */}
+      <button
+        onClick={toggleMobileDrawer}
+        className="md:hidden fixed top-20 left-4 z-30 p-2 bg-surface-light dark:bg-surface-dark-elevated border border-border-light dark:border-border-dark rounded-lg shadow-lg hover:bg-surface-light-elevated dark:hover:bg-surface-dark transition-colors"
+        aria-label="Open sidebar menu"
+      >
+        <Menu className="w-5 h-5 text-text-light-secondary dark:text-text-dark-secondary" />
+      </button>
+
+      {/* Mobile drawer overlay */}
+      <AnimatePresence>
+        {isMobileDrawerOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="md:hidden fixed inset-0 bg-black/50 z-40"
+              onClick={closeMobileDrawer}
+              aria-hidden="true"
+            />
+
+            {/* Drawer */}
+            <motion.div
+              ref={sidebarRef}
+              initial={{ x: '-100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '-100%' }}
+              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+              className="md:hidden fixed left-0 top-0 bottom-0 w-80 bg-surface-light dark:bg-surface-dark border-r border-border-light dark:border-border-dark z-50 flex flex-col"
+            >
+              {/* Close button */}
+              <button
+                onClick={closeMobileDrawer}
+                className="absolute top-4 right-4 p-1.5 hover:bg-surface-light-elevated dark:hover:bg-surface-dark-elevated rounded-lg transition-colors"
+                aria-label="Close sidebar menu"
+              >
+                <X className="w-5 h-5 text-text-light-secondary dark:text-text-dark-secondary" />
+              </button>
+
+              {sidebarContent}
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+
+      {/* Desktop sidebar - Folders + Notes List (hidden on mobile) */}
+      <AnimatePresence mode="wait">
+        {!isSidebarCollapsed && !isListOnly && (
+          <motion.div
+            ref={sidebarRef}
+            initial={{ width: 0, opacity: 0 }}
+            animate={{ width: sidebarWidth, opacity: 1 }}
+            exit={{ width: 0, opacity: 0 }}
+            transition={{ duration: 0.2, ease: 'easeInOut' }}
+            className="hidden md:flex flex-shrink-0 border-r border-border-light dark:border-border-dark bg-transparent flex-col relative min-h-0"
+            style={{ width: sidebarWidth }}
+          >
+            {sidebarContent}
+
+            {/* Collapse button - inside sidebar at top right */}
+            <button
+              onClick={toggleSidebar}
+              className="absolute top-4 right-2 z-20 p-1.5 bg-surface-light dark:bg-surface-dark-elevated border border-border-light dark:border-border-dark rounded-button hover:bg-surface-light-elevated dark:hover:bg-surface-dark transition-colors"
+              title="Collapse Sidebar (Cmd+\)"
+              aria-label="Collapse sidebar"
+            >
+              <svg
+                className="w-4 h-4 text-text-light-secondary dark:text-text-dark-secondary"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M11 19l-7-7 7-7m8 14l-7-7 7-7"
+                />
+              </svg>
+            </button>
+
+            {/* Vertical resize handle (sidebar width) */}
+            <SidebarResizer
+              currentWidth={sidebarWidth}
+              minWidth={200}
+              maxWidth={500}
+              defaultWidth={320}
+              onWidthChange={handleSidebarWidthChange}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Sidebar expand button - shown when collapsed (desktop only) */}
+      {isSidebarCollapsed && (
+        <button
+          onClick={toggleSidebar}
+          className="hidden md:flex flex-shrink-0 p-2 bg-surface-light dark:bg-surface-dark-elevated border border-border-light dark:border-border-dark rounded-r-lg hover:bg-surface-light-elevated dark:hover:bg-surface-dark transition-colors self-start mt-4 ml-2"
+          title="Expand Sidebar (Cmd+\)"
+          aria-label="Expand sidebar"
+        >
+          <svg
+            className="w-4 h-4 text-text-light-secondary dark:text-text-dark-secondary"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M13 5l7 7-7 7M5 5l7 7-7 7"
+            />
+          </svg>
+        </button>
+      )}
+
+      {/* Spacer between sidebar and editor (desktop only) */}
+      {!isSidebarCollapsed && !isListOnly && <div className="hidden md:block w-4 flex-shrink-0" />}
+
+      {/* Center - Editor */}
+      <div className="flex-1 overflow-hidden flex flex-col min-w-0">
+        {/* Main Content Area */}
+        <div className="flex-1 overflow-hidden border border-border-light dark:border-border-dark rounded-lg">
+          {children}
+        </div>
+      </div>
+
+      {/* Right Sidebar - Metadata Panel (Future Feature)
+          Will show: creation date, modified date, word count, tags, backlinks
+          See feature_map.md Section 1.4 for planning */}
+    </div>
+  );
+};

@@ -1,0 +1,91 @@
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { formatDistanceToNow } from 'date-fns';
+import { useSaveStatus } from '../stores/useSaveStatus';
+import { AboutModal } from './AboutModal';
+import { PrivacyModal } from './PrivacyModal';
+
+/**
+ * Footer component with save status indicator, Privacy Policy, and About Us
+ * Sticky footer at bottom with links, save status at bottom-right
+ */
+export const Footer: React.FC = () => {
+  const { status, lastSaveTime } = useSaveStatus();
+  const [showAboutModal, setShowAboutModal] = useState(false);
+  const [showPrivacyModal, setShowPrivacyModal] = useState(false);
+
+  // Simplified status text
+  const getStatusText = () => {
+    switch (status) {
+      case 'saving':
+        return 'Saving...';
+      case 'saved':
+        return lastSaveTime ? formatDistanceToNow(lastSaveTime, { addSuffix: true }) : 'Saved';
+      case 'error':
+        return 'Failed';
+      default:
+        return 'Saved';
+    }
+  };
+
+  return (
+    <>
+      {/* Main Footer - Centered Floating Pill */}
+      <motion.footer
+        initial={{ opacity: 0, y: 50, x: "-50%" }}
+        animate={{ opacity: 1, y: 0, x: "-50%" }}
+        transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
+        className="fixed bottom-4 left-1/2 z-30 pointer-events-none"
+      >
+        <div className="flex items-center justify-center gap-2 px-3 py-1.5 sm:gap-4 sm:px-4 sm:py-2 bg-white/90 dark:bg-surface-dark/90 backdrop-blur-lg rounded-full border border-border-light dark:border-border-dark pointer-events-auto shadow-lg">
+          {/* Footer Links - Centered */}
+          <div className="flex items-center gap-2 sm:gap-4 text-[10px] sm:text-xs">
+            <button
+              onClick={() => setShowAboutModal(true)}
+              className="text-text-light-secondary dark:text-text-dark-secondary hover:text-accent-blue dark:hover:text-accent-blue-hover transition-all duration-standard ease-smooth whitespace-nowrap"
+            >
+              About<span className="hidden sm:inline"> Us</span>
+            </button>
+            <span className="text-border-light dark:text-border-dark">|</span>
+            <button
+              onClick={() => setShowPrivacyModal(true)}
+              className="text-text-light-secondary dark:text-text-dark-secondary hover:text-accent-blue dark:hover:text-accent-blue-hover transition-all duration-standard ease-smooth whitespace-nowrap"
+            >
+              Privacy<span className="hidden sm:inline"> Policy</span>
+            </button>
+            <span className="text-border-light dark:text-border-dark">|</span>
+            <span className="text-text-light-secondary dark:text-text-dark-secondary whitespace-nowrap">
+              © {new Date().getFullYear()}<span className="hidden sm:inline"> Neuman Brain</span>
+            </span>
+          </div>
+
+          {/* Save Status (hidden on mobile) - Visually balanced */}
+          <div className="hidden sm:flex items-center gap-2 pl-4 border-l border-border-light dark:border-border-dark">
+            {/* Status Dot */}
+            <span
+              className={`w-2.5 h-2.5 rounded-full ${status === 'saving'
+                  ? 'bg-blue-500 animate-pulse'
+                  : status === 'saved'
+                    ? 'bg-green-500'
+                    : status === 'error'
+                      ? 'bg-red-500'
+                      : 'bg-neutral-400'
+                }`}
+            />
+
+            {/* Status Text */}
+            <span className="text-xs font-medium text-text-light-primary dark:text-text-dark-primary whitespace-nowrap">
+              {getStatusText()}
+            </span>
+          </div>
+        </div>
+      </motion.footer>
+
+      {/* About Modal */}
+      {showAboutModal && <AboutModal onClose={() => setShowAboutModal(false)} />}
+
+      {/* Privacy Modal */}
+      {showPrivacyModal && <PrivacyModal onClose={() => setShowPrivacyModal(false)} />}
+    </>
+  );
+};

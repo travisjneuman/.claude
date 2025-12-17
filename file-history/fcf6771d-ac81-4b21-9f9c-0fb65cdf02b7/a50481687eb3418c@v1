@@ -1,0 +1,192 @@
+/**
+ * NotesLayout Component
+ *
+ * Main layout container for the Notes page.
+ * Part of the Notes Page Revolution.
+ *
+ * Features:
+ * - Flexbox-based layout (no hardcoded heights)
+ * - Resizable sidebar with persisted width
+ * - Collapsible sidebar with animation
+ * - View mode support (split/editor-only/list-only)
+ * - Responsive design with mobile drawer support
+ */
+
+import React, { useEffect, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useSettingsStore } from '../../stores/useSettingsStore';
+import { FolderSidebar } from './FolderSidebar';
+import { NotesList } from './NotesList';
+import { SidebarResizer } from './SidebarResizer';
+
+export interface NotesLayoutProps {
+  /** Content to render in the editor pane */
+  children: React.ReactNode;
+  /** Active tag filters */
+  activeTags: string[];
+  /** Callback to add a tag filter */
+  onAddTag: (tag: string) => void;
+  /** Callback to remove a tag filter */
+  onRemoveTag: (tag: string) => void;
+  /** Callback to clear all tag filters */
+  onClearAllTags: () => void;
+  /** Callback to open tag manager modal */
+  onOpenTagManager: () => void;
+  /** Callback to open template library modal */
+  onOpenTemplateLibrary: () => void;
+  /** Callback to open export modal */
+  onOpenExportModal: () => void;
+}
+
+export const NotesLayout: React.FC<NotesLayoutProps> = ({
+  children,
+  activeTags,
+  onAddTag,
+  onRemoveTag,
+  onClearAllTags,
+  onOpenTagManager,
+  onOpenTemplateLibrary,
+  onOpenExportModal,
+}) => {
+  // Get layout preferences from settings store
+  const notesLayout = useSettingsStore((state) => state.notesLayout);
+  const setNotesLayout = useSettingsStore((state) => state.setNotesLayout);
+
+  const { viewMode, sidebarWidth, folderPaneHeight } = notesLayout;
+
+  // Sidebar collapsed state (editor-only mode)
+  const isSidebarCollapsed = viewMode === 'editor-only';
+
+  // Handle sidebar width changes
+  const handleSidebarWidthChange = useCallback(
+    (width: number) => {
+      setNotesLayout({ sidebarWidth: width });
+    },
+    [setNotesLayout]
+  );
+
+  // Toggle sidebar visibility
+  const toggleSidebar = useCallback(() => {
+    setNotesLayout({
+      viewMode: viewMode === 'split' ? 'editor-only' : 'split',
+    });
+  }, [viewMode, setNotesLayout]);
+
+  // Keyboard shortcut for toggling sidebar (Cmd+\)
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === '\\') {
+        e.preventDefault();
+        toggleSidebar();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [toggleSidebar]);
+
+  return (
+    <div className="flex-1 flex min-h-0 overflow-hidden relative">
+      {/* Left Sidebar - Folders + Notes List */}
+      <AnimatePresence mode="wait">
+        {!isSidebarCollapsed && (
+          <motion.div
+            initial={{ width: 0, opacity: 0 }}
+            animate={{ width: sidebarWidth, opacity: 1 }}
+            exit={{ width: 0, opacity: 0 }}
+            transition={{ duration: 0.2, ease: 'easeInOut' }}
+            className="flex-shrink-0 border-r border-border-light dark:border-border-dark bg-transparent flex flex-col relative min-h-0"
+            style={{ width: sidebarWidth }}
+          >
+            {/* Folder sidebar */}
+            <FolderSidebar
+              activeTags={activeTags}
+              onAddTag={onAddTag}
+              onRemoveTag={onRemoveTag}
+              onClearAllTags={onClearAllTags}
+              onOpenTagManager={onOpenTagManager}
+              folderPaneHeight={folderPaneHeight}
+            />
+
+            {/* Notes list */}
+            <NotesList
+              activeTags={activeTags}
+              onOpenTemplateLibrary={onOpenTemplateLibrary}
+              onOpenExportModal={onOpenExportModal}
+            />
+
+            {/* Collapse button - inside sidebar at top right */}
+            <button
+              onClick={toggleSidebar}
+              className="absolute top-4 right-2 z-20 p-1.5 bg-surface-light dark:bg-surface-dark-elevated border border-border-light dark:border-border-dark rounded-button hover:bg-surface-light-elevated dark:hover:bg-surface-dark transition-colors"
+              title="Collapse Sidebar (Cmd+\)"
+              aria-label="Collapse sidebar"
+            >
+              <svg
+                className="w-4 h-4 text-text-light-secondary dark:text-text-dark-secondary"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M11 19l-7-7 7-7m8 14l-7-7 7-7"
+                />
+              </svg>
+            </button>
+
+            {/* Resize handle */}
+            <SidebarResizer
+              currentWidth={sidebarWidth}
+              minWidth={200}
+              maxWidth={500}
+              defaultWidth={320}
+              onWidthChange={handleSidebarWidthChange}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Sidebar expand button - shown when collapsed */}
+      {isSidebarCollapsed && (
+        <button
+          onClick={toggleSidebar}
+          className="flex-shrink-0 p-2 bg-surface-light dark:bg-surface-dark-elevated border border-border-light dark:border-border-dark rounded-r-lg hover:bg-surface-light-elevated dark:hover:bg-surface-dark transition-colors self-start mt-4 ml-2"
+          title="Expand Sidebar (Cmd+\)"
+          aria-label="Expand sidebar"
+        >
+          <svg
+            className="w-4 h-4 text-text-light-secondary dark:text-text-dark-secondary"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M13 5l7 7-7 7M5 5l7 7-7 7"
+            />
+          </svg>
+        </button>
+      )}
+
+      {/* Spacer between sidebar and editor */}
+      {!isSidebarCollapsed && <div className="w-4 flex-shrink-0" />}
+
+      {/* Center - Editor */}
+      <div className="flex-1 overflow-hidden flex flex-col min-w-0">
+        {/* Main Content Area */}
+        <div className="flex-1 overflow-hidden border border-border-light dark:border-border-dark rounded-lg">
+          {children}
+        </div>
+      </div>
+
+      {/* Right Sidebar - Metadata Panel (Future Feature)
+          Will show: creation date, modified date, word count, tags, backlinks
+          See feature_map.md Section 1.4 for planning */}
+    </div>
+  );
+};

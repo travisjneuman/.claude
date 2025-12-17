@@ -1,0 +1,236 @@
+import { useState, useEffect } from 'react';
+import type { FieldDefinition } from '../types/customFields';
+import { validateFieldValue } from '../types/customFields';
+
+/**
+ * Custom Field Editor Component
+ *
+ * Renders the appropriate input control based on field type.
+ * Handles validation and value changes.
+ *
+ * Supported field types:
+ * - text: Single-line text input
+ * - number: Number input (integer or decimal)
+ * - date: Date picker
+ * - select: Dropdown with predefined options
+ * - checkbox: Boolean toggle
+ */
+
+interface CustomFieldEditorProps {
+  field: FieldDefinition;
+  value: any;
+  onChange: (value: any) => void;
+  className?: string;
+}
+
+export function CustomFieldEditor({ field, value, onChange, className = '' }: CustomFieldEditorProps) {
+  const [localValue, setLocalValue] = useState(value);
+  const [error, setError] = useState<string | null>(null);
+
+  // Sync local value with prop value
+  useEffect(() => {
+    setLocalValue(value);
+  }, [value]);
+
+  const handleChange = (newValue: any) => {
+    setLocalValue(newValue);
+
+    // Validate
+    const validation = validateFieldValue(field, newValue);
+    if (!validation.valid) {
+      setError(validation.error || 'Invalid value');
+    } else {
+      setError(null);
+      onChange(newValue);
+    }
+  };
+
+  const handleBlur = () => {
+    // Final validation on blur
+    const validation = validateFieldValue(field, localValue);
+    if (!validation.valid) {
+      setError(validation.error || 'Invalid value');
+    } else {
+      setError(null);
+    }
+  };
+
+  // Text field
+  if (field.type === 'text') {
+    return (
+      <div className={className}>
+        <input
+          type="text"
+          value={localValue || ''}
+          onChange={(e) => handleChange(e.target.value)}
+          onBlur={handleBlur}
+          placeholder={field.description || `Enter ${field.name.toLowerCase()}`}
+          className={`w-full px-3 py-2 bg-surface-light-elevated dark:bg-surface-dark-elevated border ${
+            error
+              ? 'border-status-error dark:border-status-error'
+              : 'border-border-light dark:border-border-dark'
+          } rounded-lg text-text-light-primary dark:text-text-dark-primary focus:outline-none focus:ring-2 ${
+            error ? 'focus:ring-status-error' : 'focus:ring-accent-blue'
+          }`}
+          aria-label={field.name}
+          aria-required={field.required}
+          aria-invalid={error ? 'true' : 'false'}
+          aria-describedby={error ? `${field.id}-error` : undefined}
+        />
+        {error && (
+          <p id={`${field.id}-error`} className="mt-1 text-xs text-status-error-text dark:text-status-error-text-dark">
+            {error}
+          </p>
+        )}
+      </div>
+    );
+  }
+
+  // Number field
+  if (field.type === 'number') {
+    return (
+      <div className={className}>
+        <input
+          type="number"
+          value={localValue ?? ''}
+          onChange={(e) => {
+            const val = e.target.value === '' ? null : parseFloat(e.target.value);
+            handleChange(val);
+          }}
+          onBlur={handleBlur}
+          placeholder={field.description || `Enter ${field.name.toLowerCase()}`}
+          step="any"
+          className={`w-full px-3 py-2 bg-surface-light-elevated dark:bg-surface-dark-elevated border ${
+            error
+              ? 'border-status-error dark:border-status-error'
+              : 'border-border-light dark:border-border-dark'
+          } rounded-lg text-text-light-primary dark:text-text-dark-primary focus:outline-none focus:ring-2 ${
+            error ? 'focus:ring-status-error' : 'focus:ring-accent-blue'
+          }`}
+          aria-label={field.name}
+          aria-required={field.required}
+          aria-invalid={error ? 'true' : 'false'}
+          aria-describedby={error ? `${field.id}-error` : undefined}
+        />
+        {error && (
+          <p id={`${field.id}-error`} className="mt-1 text-xs text-status-error-text dark:text-status-error-text-dark">
+            {error}
+          </p>
+        )}
+      </div>
+    );
+  }
+
+  // Date field
+  if (field.type === 'date') {
+    const dateValue =
+      localValue instanceof Date
+        ? localValue.toISOString().split('T')[0]
+        : localValue
+        ? new Date(localValue).toISOString().split('T')[0]
+        : '';
+
+    return (
+      <div className={className}>
+        <input
+          type="date"
+          value={dateValue}
+          onChange={(e) => {
+            const val = e.target.value ? new Date(e.target.value) : null;
+            handleChange(val);
+          }}
+          onBlur={handleBlur}
+          className={`w-full px-3 py-2 bg-surface-light-elevated dark:bg-surface-dark-elevated border ${
+            error
+              ? 'border-status-error dark:border-status-error'
+              : 'border-border-light dark:border-border-dark'
+          } rounded-lg text-text-light-primary dark:text-text-dark-primary focus:outline-none focus:ring-2 ${
+            error ? 'focus:ring-status-error' : 'focus:ring-accent-blue'
+          }`}
+          aria-label={field.name}
+          aria-required={field.required}
+          aria-invalid={error ? 'true' : 'false'}
+          aria-describedby={error ? `${field.id}-error` : undefined}
+        />
+        {error && (
+          <p id={`${field.id}-error`} className="mt-1 text-xs text-status-error-text dark:text-status-error-text-dark">
+            {error}
+          </p>
+        )}
+      </div>
+    );
+  }
+
+  // Select field
+  if (field.type === 'select') {
+    return (
+      <div className={className}>
+        <select
+          value={localValue || ''}
+          onChange={(e) => handleChange(e.target.value)}
+          onBlur={handleBlur}
+          className={`w-full px-3 py-2 bg-surface-light-elevated dark:bg-surface-dark-elevated border ${
+            error
+              ? 'border-status-error dark:border-status-error'
+              : 'border-border-light dark:border-border-dark'
+          } rounded-lg text-text-light-primary dark:text-text-dark-primary focus:outline-none focus:ring-2 ${
+            error ? 'focus:ring-status-error' : 'focus:ring-accent-blue'
+          }`}
+          aria-label={field.name}
+          aria-required={field.required}
+          aria-invalid={error ? 'true' : 'false'}
+          aria-describedby={error ? `${field.id}-error` : undefined}
+        >
+          <option value="">-- Select {field.name} --</option>
+          {field.options?.map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
+        {error && (
+          <p id={`${field.id}-error`} className="mt-1 text-xs text-status-error-text dark:text-status-error-text-dark">
+            {error}
+          </p>
+        )}
+      </div>
+    );
+  }
+
+  // Checkbox field
+  if (field.type === 'checkbox') {
+    return (
+      <div className={`flex items-center gap-2 ${className}`}>
+        <input
+          type="checkbox"
+          checked={localValue || false}
+          onChange={(e) => handleChange(e.target.checked)}
+          onBlur={handleBlur}
+          className="w-4 h-4 rounded border-border-light dark:border-border-dark focus:ring-2 focus:ring-accent-blue"
+          aria-label={field.name}
+          aria-required={field.required}
+          aria-invalid={error ? 'true' : 'false'}
+          aria-describedby={error ? `${field.id}-error` : undefined}
+        />
+        <label className="text-sm text-text-light-primary dark:text-text-dark-primary">
+          {field.name}
+          {field.required && <span className="text-status-error-text dark:text-status-error-text-dark ml-1">*</span>}
+        </label>
+        {error && (
+          <p id={`${field.id}-error`} className="ml-6 text-xs text-status-error-text dark:text-status-error-text-dark">
+            {error}
+          </p>
+        )}
+      </div>
+    );
+  }
+
+  // Unknown field type
+  return (
+    <div className={className}>
+      <p className="text-sm text-status-error-text dark:text-status-error-text-dark">
+        Unknown field type: {field.type}
+      </p>
+    </div>
+  );
+}

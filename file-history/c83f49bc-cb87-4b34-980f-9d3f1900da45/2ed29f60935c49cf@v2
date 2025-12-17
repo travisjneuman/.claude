@@ -1,0 +1,90 @@
+/**
+ * TimeTracking Page (Phase 1 - Basic Placeholder)
+ * Full-featured time tracking interface will be implemented in Phase 2
+ * For now, redirects users to use the sidebar panel
+ */
+
+export function TimeTracking() {
+  return (
+    <div className="p-6 max-w-7xl mx-auto">
+      {/* Page Header */}
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold text-text-light-primary dark:text-text-dark-primary mb-2">
+          Time Tracking
+        </h1>
+        <p className="text-text-light-secondary dark:text-text-dark-secondary">
+          Track your time, analyze productivity, and optimize your workflow.
+        </p>
+      </div>
+
+      {/* Phase 1 Notice */}
+      <div className="bg-surface-light-elevated dark:bg-surface-dark-elevated rounded-lg p-8 border border-border-light dark:border-border-dark">
+        <div className="text-center max-w-2xl mx-auto space-y-6">
+          {/* Icon */}
+          <div className="text-6xl mb-4">⏱️</div>
+
+          {/* Title */}
+          <h2 className="text-2xl font-semibold text-text-light-primary dark:text-text-dark-primary">
+            Time Tracking Panel Active
+          </h2>
+
+          {/* Description */}
+          <p className="text-text-light-secondary dark:text-text-dark-secondary leading-relaxed">
+            The time tracking panel is now available in the sidebar (bottom section).
+            You can start/stop timers, view recent entries, and see today's total directly from there.
+          </p>
+
+          {/* Features Coming Soon */}
+          <div className="mt-8 text-left bg-surface-light dark:bg-surface-dark rounded-lg p-6">
+            <h3 className="text-lg font-semibold text-text-light-primary dark:text-text-dark-primary mb-4">
+              Coming Soon (Phase 2 & Beyond):
+            </h3>
+            <ul className="space-y-2 text-text-light-secondary dark:text-text-dark-secondary">
+              <li className="flex items-start gap-2">
+                <span className="text-accent-cyan mt-1">•</span>
+                <span>Detailed time entry list with filters (date range, project, tags)</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-accent-cyan mt-1">•</span>
+                <span>Calendar view showing time entries across dates</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-accent-cyan mt-1">•</span>
+                <span>Project management (create, edit, archive projects)</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-accent-cyan mt-1">•</span>
+                <span>Analytics & reporting (daily/weekly/monthly summaries)</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-accent-cyan mt-1">•</span>
+                <span>Manual time entry creation and bulk editing</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-accent-cyan mt-1">•</span>
+                <span>Export to CSV, PDF, and integration with invoicing tools</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-accent-cyan mt-1">•</span>
+                <span>Kanban task integration (track time directly on cards)</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-accent-cyan mt-1">•</span>
+                <span>Idle detection and automatic time tracking</span>
+              </li>
+            </ul>
+          </div>
+
+          {/* CTA */}
+          <div className="mt-8 pt-6 border-t border-border-light dark:border-border-dark">
+            <p className="text-sm text-text-light-tertiary dark:text-text-dark-tertiary">
+              This page will be fully implemented in Phase 2.
+              <br />
+              For now, use the sidebar panel to track your time!
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

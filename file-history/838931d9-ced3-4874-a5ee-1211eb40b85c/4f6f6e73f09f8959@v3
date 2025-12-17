@@ -1,0 +1,428 @@
+# Fix Dashboard Widgets, AI Terminal & Calendar Features
+
+**Date:** 2025-01-17
+**Session ID:** 011CWKtxzgM5qHHf9DhdBYy6
+**Status:** 🎯 PLANNING
+**Priority:** HIGH
+**Estimated Time:** 8-12 hours (split across multiple sessions)
+
+---
+
+## Overview
+
+Comprehensive UX improvements and feature planning across three major areas:
+1. **Dashboard widgets** - Remove calendar widget, clean up duplicate task widgets
+2. **AI Terminal redesign** - Convert to right sidebar with terminal-style UI
+3. **Calendar feature research** - Plan comprehensive calendar features (Google Calendar + Notion Calendar parity and beyond)
+
+---
+
+## Problem Statement
+
+### Issue 1: Calendar Widget Not Needed
+**User Decision:** Remove the calendar mini widget
+**Reason:** "Way too small" - prefer full calendar page
+**Action:** Delete CalendarWidget.tsx and all references
+
+### Issue 2: Duplicate Task Widgets in Menu
+**Current:** Widget menu shows `tasksummary` and `quickadd` that don't work
+**Root Cause:** Old widget IDs still in WidgetRegistry despite being merged
+**Impact:** Confusing UX, users try to add non-functional widgets
+**Action:** Remove duplicate entries from WidgetRegistry
+
+### Issue 3: AI Terminal Takes Over Screen
+**Current:** AI Terminal is full-width overlay taking 50% of screen height
+**Problem:** "User can't do ANYTHING else when AI Terminal is open"
+**Desired:** Right-hand sidebar (mirrors left nav sidebar)
+- Collapsible (keep current toggle behavior)
+- Terminal-style UI (Windows/MacOS Terminal aesthetic)
+- Users can work while AI is open
+- Potential for image generation support
+
+**Architecture:**
+```
+[Left Nav] [Main Content Area] [AI Terminal Sidebar]
+  210px         flex-1              ~400-500px (collapsible)
+```
+
+### Issue 4: Calendar Needs Comprehensive Feature Planning
+**User Requirement:** "Research as much as possible... implement any and all features that any other competitor or alternative platform may offer, and then some. Value is king."
+
+**Competitors to Research:**
+- Google Calendar (market leader)
+- Notion Calendar/Cron (modern, beautiful)
+- Linear calendar integration (task-calendar sync)
+- Motion (AI scheduling)
+- Reclaim.ai (AI time blocking)
+- Any other calendar innovations
+
+---
+
+## Research Findings: Calendar Features
+
+### Google Calendar Features (2025)
+
+**Core Scheduling:**
+- Multiple calendar views (day/week/month/year/agenda)
+- Recurring events (daily/weekly/monthly/yearly with custom rules)
+- All-day events
+- Multi-day events
+- Time zone support (multiple time zones, travel mode)
+- Event reminders (5min/15min/30min/1hr/1day/custom)
+- Event notifications (email/push/in-app)
+
+**Advanced Features:**
+- **Appointment Scheduling:** Create booking pages with availability
+- **Focus Time:** Block time for deep work (auto-decline meetings)
+- **Office Hours:** Auto-decline meetings outside work hours
+- **Out of Office:** Auto-decline + notify during absence
+- **Working Hours:** Set default work schedule
+- **Working Location:** Track office/home/remote
+- **Tasks Integration:** Link Google Tasks to calendar dates
+- **Goals:** Schedule time for personal goals
+- **Event Color Coding:** Visual organization
+- **Calendar Sharing:** Multiple permission levels (see all/see free-busy/make changes)
+- **Find a Time:** See attendee availability
+- **Speedy Meetings:** Auto-shorten meetings (25min instead of 30min)
+- **World Clock:** Multiple time zones in sidebar
+- **Advanced Search:** Filter by attendees/location/date range
+- **Event Attachments:** Add files/links to events
+- **Video Conferencing:** Built-in Google Meet integration
+
+**Integrations:**
+- Gmail (auto-create events from emails)
+- Google Meet (one-click video calls)
+- Google Tasks (task management)
+- Google Drive (document sharing)
+- Third-party integrations (Zoom, Slack, etc.)
+
+### Notion Calendar Features (formerly Cron)
+
+**Notion Integration:**
+- Connect Notion docs/projects/timelines to events
+- View Notion database items as calendar events (deadlines, milestones)
+- Edit database items from calendar (two-way sync)
+- Quick access to meeting notes in Notion
+
+**Modern UX:**
+- Beautiful light/dark modes
+- Keyboard shortcuts (Cmd+K command palette, "S" to share availability)
+- Menu bar widget (macOS) - see schedule and join meetings from menu bar
+- Widgets (multiple sizes, rich previews, quick-add button)
+- Multiple time zones (drag to "travel to any city")
+
+**Scheduling:**
+- Built-in availability sharing (no external tools needed)
+- Auto-blocking to prevent double-booking
+- Deep Google Calendar sync
+- Zoom and Google Meet integration
+
+**Platform:**
+- Cross-platform (macOS, Windows, iOS, Android, web)
+- 12 languages support
+- **Free** (competitive advantage)
+
+### Linear Calendar Integration (via Reclaim.ai & Morgen)
+
+**Task-Calendar Sync:**
+- Auto-schedule Linear issues in calendar
+- Time blocking for task work
+- Priority-based scheduling
+- Auto-reschedule when priorities shift
+- Plan week with task scheduling
+- Drag tasks to different time blocks
+
+### Motion (AI Scheduling)
+
+**AI Features:**
+- Enter task with time estimate, priority, start/due date
+- AI organizes day and schedules tasks automatically
+- Auto-shift tasks when urgent items arise
+- Intelligent time blocking
+
+---
+
+## Proposed Changes
+
+### Part 1: Remove Calendar Widget (30 min)
+
+**Files to Delete:**
+1. `src/widgets/Dashboard/CalendarWidget.tsx`
+
+**Files to Modify:**
+1. `src/pages/Dashboard.tsx`
+   - Remove `CalendarMiniWidget` lazy import (line 70)
+   - Remove `calendarmini` from `WIDGET_COMPONENTS` (line 135)
+
+2. `src/widgets/Dashboard/WidgetRegistry.ts`
+   - Remove `calendarmini` entry (lines 231-238)
+
+### Part 2: Remove Duplicate Task Widgets (15 min)
+
+**File to Modify:**
+1. `src/widgets/Dashboard/WidgetRegistry.ts`
+   - Remove `tasksummary` entry
+   - Remove `quickadd` entry
+   - Keep only `tasksquickadd` entry
+
+### Part 3: Redesign AI Terminal as Right Sidebar (4-6 hours)
+
+**Current Architecture:**
+```tsx
+// AITerminal.tsx - Full-width overlay
+<div className="fixed inset-x-0 bottom-0 h-1/2 ...">
+  {/* Terminal content */}
+</div>
+```
+
+**New Architecture:**
+```tsx
+// Right sidebar (mirrors left nav)
+<div className={`
+  fixed top-0 right-0 h-screen
+  transition-transform duration-200
+  ${isOpen ? 'translate-x-0' : 'translate-x-full'}
+  w-[400px] lg:w-[500px]
+  bg-black text-green-400  // Terminal-style colors
+  border-l border-border-light dark:border-border-dark
+  z-40
+`}>
+  {/* Terminal UI */}
+</div>
+```
+
+**Design Specs:**
+
+1. **Layout:**
+   - Fixed right sidebar (400px mobile, 500px desktop)
+   - Collapsible with toggle button (keep existing behavior)
+   - Full height (0 to 100vh)
+   - Slide in/out transition (translate-x)
+
+2. **Terminal-Style UI:**
+   - Black background (`bg-black`)
+   - Green text (`text-green-400` for classic terminal look)
+   - Monospace font (`font-mono`)
+   - Terminal prompt style (`user@neuman-brain:~$`)
+   - Command history (up/down arrows)
+   - Clear screen command (`clear` or Cmd+K)
+
+3. **Functionality:**
+   - Keep existing AI provider selection
+   - Keep existing conversation history
+   - Keep existing message input
+   - Add: Image generation support (if provider supports it)
+   - Add: Code syntax highlighting
+   - Add: Copy code button
+   - Add: Terminal commands (clear, help, etc.)
+
+**Files to Modify:**
+1. `src/components/AITerminal.tsx` - Complete redesign
+2. `src/App.tsx` or `src/components/Layout.tsx` - Adjust main content margin when open
+
+**Image Generation Support:**
+- Research which AI providers support image generation
+- Add image preview in terminal
+- Add image download/copy functionality
+
+### Part 4: Comprehensive Calendar Feature Planning (Research Phase)
+
+**Goal:** Plan features to match/exceed Google Calendar + Notion Calendar + innovative competitors
+
+**Features to Implement (Priority Order):**
+
+**Phase 1: Parity with Google Calendar Core (Week 13-14)**
+- ✅ Multiple views (month/week/day/agenda) - DONE
+- ✅ Recurring events - DONE
+- ✅ Event reminders - DONE
+- ✅ Drag-drop events - DONE
+- ✅ .ics import/export - DONE
+- ⏸️ Appointment scheduling (booking pages)
+- ⏸️ Focus time / Do not disturb
+- ⏸️ Working hours / Office hours
+- ⏸️ Out of office auto-decline
+- ⏸️ Event color coding (custom colors per calendar)
+- ⏸️ Calendar sharing (view-only, can edit)
+- ⏸️ Find a time (attendee availability)
+
+**Phase 2: Notion Calendar Features (Week 15-16)**
+- ⏸️ Task-calendar integration (Kanban tasks → calendar)
+- ⏸️ Multiple time zones (travel mode)
+- ⏸️ Keyboard shortcuts (Cmd+K command palette)
+- ⏸️ Meeting notes (link notes to events)
+- ⏸️ Quick availability sharing
+- ⏸️ Beautiful dark mode (already have, enhance)
+
+**Phase 3: AI-Powered Features (Q2 2026)**
+- 💡 Auto-schedule tasks from Kanban (Motion-style)
+- 💡 Priority-based time blocking (Reclaim.ai-style)
+- 💡 Smart meeting scheduling suggestions
+- 💡 Auto-reschedule when priorities change
+- 💡 Natural language event creation ("Meeting with John next Tuesday at 2pm")
+- 💡 Meeting prep suggestions (pull related notes/tasks)
+
+**Phase 4: Beyond Competitors (Q2-Q3 2026)**
+- 💡 Time tracking integration (track time against calendar events)
+- 💡 Habit tracking integration (scheduled habits on calendar)
+- 💡 Energy levels (mark high/low energy times, schedule accordingly)
+- 💡 Calendar analytics (time spent in meetings vs deep work)
+- 💡 Collaborative planning (shared team calendars with voting)
+- 💡 Event templates (recurring meeting agendas)
+
+---
+
+## Todo Checklist
+
+### Part 1: Remove Calendar Widget (30 min)
+- [ ] Delete `src/widgets/Dashboard/CalendarWidget.tsx`
+- [ ] Remove import from `Dashboard.tsx`
+- [ ] Remove from `WIDGET_COMPONENTS` mapping
+- [ ] Remove from `WidgetRegistry.ts`
+- [ ] Test dashboard loads without errors
+
+### Part 2: Remove Duplicate Widgets (15 min)
+- [ ] Remove `tasksummary` from WidgetRegistry
+- [ ] Remove `quickadd` from WidgetRegistry
+- [ ] Test widget menu shows no duplicates
+
+### Part 3: AI Terminal Redesign (4-6 hours)
+- [ ] Research terminal UI best practices
+- [ ] Design right sidebar layout
+- [ ] Implement sidebar structure (fixed right, collapsible)
+- [ ] Add terminal-style colors/fonts
+- [ ] Add terminal prompt UI
+- [ ] Migrate existing AI functionality
+- [ ] Add image generation support (if feasible)
+- [ ] Add code syntax highlighting
+- [ ] Test collapsible behavior
+- [ ] Test with all AI providers
+
+### Part 4: Calendar Feature Planning (1-2 hours research)
+- [x] Research Google Calendar features
+- [x] Research Notion Calendar features
+- [x] Research Linear/Motion/Reclaim.ai features
+- [ ] Create detailed feature roadmap
+- [ ] Prioritize features (Phase 1-4)
+- [ ] Update `docs/product/feature_map.md`
+- [ ] Create individual task files for each phase
+
+---
+
+## Questions for User
+
+**AI Terminal:** ✅ DECISIONS MADE
+1. ✅ Dark mode: Black bg, white user text, green AI text | Light mode: White bg, black user text, orange AI text
+2. ✅ Support both light and dark modes (adapts to theme)
+3. ⏸️ Image generation: Current AI providers are text-only. Will defer to future enhancement when adding DALL-E/Stable Diffusion support.
+
+**Calendar:**
+1. Which calendar features are highest priority for you?
+2. Any specific calendar UX you love from other apps?
+
+---
+
+## Review Section
+
+**Completion Date:** 2025-01-17
+**Parts Completed:** Part 1 & Part 2 (Simple Cleanup Tasks)
+**Status:** ⏸️ PARTIAL (Parts 1-2 ✅ | Parts 3-4 Pending User Input)
+**Total Time:** ~15 minutes (estimated 45 min for Parts 1-2)
+
+---
+
+## Summary of Changes (Parts 1-2 Complete)
+
+### Part 1: Remove Calendar Widget ✅ COMPLETE (15 min)
+
+**Files Deleted:**
+1. `src/widgets/Dashboard/CalendarWidget.tsx` - Deleted entire file (150 lines)
+
+**Files Modified:**
+1. **src/pages/Dashboard.tsx**
+   - Line 70: Removed `CalendarMiniWidget` lazy import
+   - Line 135: Removed `calendarmini` from WIDGET_COMPONENTS mapping
+
+2. **src/widgets/Dashboard/WidgetRegistry.ts**
+   - Lines 231-238: Removed `calendarmini` widget definition
+
+**Reason for Removal:**
+User feedback: "I don't see a calendar widget on the dashboard, and that would be way to small I think. Let's leave it on its own page and just try to make it look nicer."
+
+**Decision:** Focus on improving full calendar page instead of mini widget.
+
+---
+
+### Part 2: Remove Duplicate Task Widgets ✅ COMPLETE (5 min)
+
+**Files Modified:**
+1. **src/widgets/Dashboard/WidgetRegistry.ts**
+   - Removed `tasksummary` entry (lines 23-29)
+   - Removed `quickadd` entry (lines 50-56)
+   - Kept only `tasksquickadd` entry (merged widget)
+
+**Reason for Removal:**
+User feedback: "we combined the tasks and quick tasks widgets, yet i still see the individual ones in the widget menu even though adding them doesnt do anything. those should be removed."
+
+**Impact:** Widget menu now only shows working widgets, no duplicate entries.
+
+---
+
+## Testing Results (Parts 1-2)
+
+✅ **TypeScript Type-Check:** PASSED (no errors)
+✅ **Dev Server HMR:** Running smoothly, no errors
+✅ **Dashboard Loads:** Verified via dev server output
+⏸️ **Manual Browser Testing:** User to verify widget menu cleaned up
+
+---
+
+## Parts 3-4: Awaiting User Input
+
+### Part 3: AI Terminal Redesign (4-6 hours)
+
+**Questions for User:**
+1. **Terminal Colors:** Classic (black/green) or custom theme?
+2. **Light/Dark Mode:** Support both or terminal-only aesthetic?
+3. **Image Generation:** Implement now or defer?
+
+**Reason for Pause:** Need design decisions before proceeding with major redesign.
+
+### Part 4: Calendar Feature Planning (1-2 hours research)
+
+**Research Complete:**
+- ✅ Google Calendar features documented
+- ✅ Notion Calendar features documented
+- ✅ Linear/Motion/Reclaim.ai features documented
+- ⏸️ Feature roadmap creation pending
+- ⏸️ Individual task files for phases pending
+
+**Next Steps:**
+- Prioritize features into phases
+- Create individual task files for each phase
+- Update docs/product/feature_map.md
+
+---
+
+## Time Estimates vs Actual
+
+| Part | Estimated | Actual | Notes |
+|------|-----------|--------|-------|
+| Part 1: Remove Calendar Widget | 30 min | ~10 min | ✅ Simple delete/cleanup |
+| Part 2: Remove Duplicate Widgets | 15 min | ~5 min | ✅ Registry cleanup only |
+| Part 3: AI Terminal Redesign | 4-6 hours | Not started | ⏸️ Awaiting user decisions |
+| Part 4: Calendar Planning | 1-2 hours | Research done | ⏸️ Roadmap creation pending |
+
+---
+
+## Next Session Tasks
+
+**Immediate (no approval needed):**
+- ✅ Part 1 & 2 complete
+
+**Awaiting User Decisions:**
+1. **AI Terminal:** Answer questions about colors, light/dark mode, image generation
+2. **Calendar:** Review feature roadmap, prioritize phases
+
+**Then Proceed With:**
+- Part 3: AI Terminal redesign implementation
+- Part 4: Create individual calendar feature task files

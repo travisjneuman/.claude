@@ -1,0 +1,156 @@
+---
+type: personal
+purpose: Quick decisions log for small choices that don't need full ADRs
+created: 2025-12-14
+updated: 2025-12-14
+---
+
+# Quick Decisions
+
+> For small decisions that matter but don't warrant a full Architecture Decision Record. Quick to write, easy to reference.
+
+---
+
+## Step 1: Copy This Template
+
+```markdown
+---
+
+### 2025-12-14 — [Decision Title]
+**Decision:** [What you decided]
+
+**Why:** [Brief rationale — 1-2 sentences]
+
+**Alternatives:** [What you considered and rejected]
+
+---
+```
+
+---
+
+## Step 2: Paste Below the Line
+
+Scroll down to the section labeled **"YOUR DECISIONS GO HERE"** and paste your copied template there. Fill it in. Newest entries go at the top.
+
+---
+
+## When to Use This vs Full ADRs
+
+| Use Quick Decisions (This File) | Use Full ADRs (Decisions/ folder) |
+|---------------------------------|-----------------------------------|
+| Personal workflow choices | Technology selection |
+| Tool preferences | Architecture patterns |
+| Configuration decisions | Database design |
+| Style choices | Security approaches |
+| Process adjustments | Breaking changes |
+
+**Rule of thumb:** If it affects only you → here. If it affects the codebase architecture → `Decisions/` folder.
+
+---
+---
+
+# ╔═══════════════════════════════════════╗
+# ║      YOUR DECISIONS GO HERE                   ║
+# ╚═══════════════════════════════════════╝
+
+Paste your copied template below this line. Add as many entries as you want. Newest entries go at the top.
+
+---
+
+### 2025-12-14 — Prompt Completion Workflow
+**Decision:** Mark prompts `status: completed` and archive monthly rather than delete
+
+**Why:** Preserves history of what was requested. Can reference past prompts. Avoids accidental re-processing.
+
+**Alternatives:** Delete after completion (loses history), Move immediately (too much file shuffling)
+
+---
+
+### 2025-12-14 — Personal Section Structure
+**Decision:** Create Personal/ folder with Thoughts, Prompts, Ideas, Learning, Decisions
+
+**Why:** Need a frictionless capture system separate from project documentation. Thoughts for raw capture, Prompts for queued Claude work, Ideas for parking lot.
+
+**Alternatives:** Single "Inbox.md" file (too messy), Tags only (hard to process systematically)
+
+---
+
+# ╔═══════════════════════════════════════╗
+# ║    END OF YOUR DECISIONS SECTION      ║
+# ╚═══════════════════════════════════════╝
+
+Everything below this line is reference material. Do not add decisions below here.
+
+---
+---
+
+## Reference: Decision Categories
+
+### Workflow
+- How I process thoughts and prompts
+- Session start/end rituals
+- File organization approaches
+
+### Tools
+- Which Obsidian plugins to use
+- Editor configurations
+- Development environment choices
+
+### Style
+- Formatting conventions
+- Naming patterns
+- Documentation structure
+
+### Process
+- Review cadences
+- Archive schedules
+- Maintenance routines
+
+---
+
+## Reference: Active Decisions Summary
+
+Quick reference of decisions currently in effect:
+
+**Workflow:**
+- Prompt completion → mark complete + monthly archive
+- Thoughts → process inline with callout blocks
+- Ideas → promote to Projects when ready
+
+**Tools:**
+- Templater for dynamic templates
+- Dataview for dynamic queries
+- Tasks plugin for checkbox tracking
+
+**Style:**
+- Emoji indicators for status
+- YYYY-MM-DD date format
+- Callout blocks for processed items
+
+---
+
+## Reference: Reversing Decisions
+
+If a decision isn't working:
+
+1. Add new entry with **"REVERSED:"** prefix
+2. Explain why the original decision didn't work
+3. Document the new approach
+
+Example:
+```markdown
+---
+
+### 2025-12-14 — REVERSED: [Original Decision]
+**Original:** [What was decided]
+
+**Problem:** [Why it didn't work]
+
+**New Decision:** [What you're doing instead]
+
+---
+```
+
+---
+
+*Decide. Document. Move on. Revisit if needed.*

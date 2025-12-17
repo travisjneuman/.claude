@@ -1,0 +1,139 @@
+# Fix Critical Bugs - Map Z-Index and CountdownWidget Infinite Loop
+
+**Created:** 2025-01-16
+**Status:** Planning
+**Priority:** 🔴 CRITICAL (Site crashes)
+
+## Overview
+
+Fix two critical bugs: WeatherMap still covering AI Terminal, and CountdownWidget causing infinite loop crash.
+
+## Problem Statement
+
+### Issue 1: Map Container Still Overlays AI Terminal 🔴 CRITICAL
+**Symptom:** Map itself (not just error overlay) appears on top of AI Terminal
+**Previous Fix:** Only fixed error overlay (z-30 → z-10) in last commit
+**Root Cause:** Map container or Leaflet map likely has high z-index
+
+### Issue 2: CountdownWidget Infinite Loop Crash 🔴 CRITICAL
+**Error:**
+```
+Uncaught Error: Maximum update depth exceeded. This can happen when
+a component repeatedly calls setState inside componentWillUpdate or
+componentDidUpdate. React limits the number of nested updates to
+prevent infinite loops.
+```
+
+**Stack Trace:** Points to `CountdownWidget.tsx:18` (useStore line)
+**Warning:** "The result of getSnapshot should be cached to avoid an infinite loop"
+**Impact:** Site crashes to blank screen when CountdownWidget is enabled
+
+## Error Analysis
+
+**CountdownWidget Error:**
+- React warning about `getSnapshot` not being cached
+- Infinite loop in Zustand store subscription
+- Likely cause: Store selector function recreated every render
+- Common Zustand pitfall: Non-memoized selectors
+
+**Pattern:**
+```tsx
+// ❌ BAD - Creates new function every render (infinite loop)
+const value = useStore((state) => state.value);
+
+// ✅ GOOD - Stable selector (no infinite loop)
+const value = useStore(state => state.value);
+// OR use useCallback for complex selectors
+```
+
+## Files to Read
+
+- [ ] `src/widgets/CountdownWidget.tsx` - Find infinite loop cause
+- [ ] `src/widgets/WeatherMap.tsx` - Find map container z-index
+- [ ] `src/stores/` - Check if CountdownWidget has dedicated store
+- [ ] Search for Leaflet map z-index in WeatherMap
+
+## Proposed Changes
+
+### 1. Fix CountdownWidget Infinite Loop (PRIORITY 1)
+
+**Investigation needed:**
+- Read CountdownWidget.tsx line 18 (useStore call)
+- Check if selector is stable or recreated
+- Verify store subscription pattern
+
+**Likely fix:**
+```tsx
+// If using object selector (common cause):
+// ❌ BAD
+const { value, setValue } = useStore((state) => ({
+  value: state.value,
+  setValue: state.setValue
+}));
+
+// ✅ GOOD
+const value = useStore((state) => state.value);
+const setValue = useStore((state) => state.setValue);
+```
+
+### 2. Fix WeatherMap Z-Index (PRIORITY 2)
+
+**Investigation needed:**
+- Find map container element
+- Check Leaflet map initialization code
+- Look for hardcoded z-index values
+
+**Likely locations:**
+- Map container div
+- Leaflet map options (zIndex property)
+- CSS classes on map elements
+
+**Solution:** Set map container to z-10 (or lower)
+
+## Todo Checklist
+
+- [ ] **Phase 1: Fix CountdownWidget Crash (CRITICAL - 10 min)**
+  - [ ] Read CountdownWidget.tsx to find useStore pattern
+  - [ ] Identify selector issue causing infinite loop
+  - [ ] Fix selector to be stable/memoized
+  - [ ] Test that site doesn't crash
+
+- [ ] **Phase 2: Fix WeatherMap Z-Index (10 min)**
+  - [ ] Read WeatherMap.tsx to find map container
+  - [ ] Find Leaflet map z-index configuration
+  - [ ] Set map container/Leaflet to z-10 or below
+  - [ ] Verify map stays below AI Terminal
+
+- [ ] **Phase 3: Testing (10 min)**
+  - [ ] Enable CountdownWidget - verify no crash
+  - [ ] Open AI Terminal with WeatherMap visible
+  - [ ] Verify terminal appears on top
+  - [ ] Test all widgets (make sure no other crashes)
+
+- [ ] **Phase 4: Commit & Push (5 min)**
+  - [ ] Run type-check
+  - [ ] Stage changes
+  - [ ] Create commit
+  - [ ] Push to main
+
+**Estimated Time:** 30-35 minutes
+**Impact:** Site functional again, no crashes, proper z-index
+
+## Review Section
+
+_(To be filled when complete)_
+
+**Completed:** TBD
+**Actual Time:** TBD
+
+### Summary of Changes
+_(Document what was fixed)_
+
+### Files Modified
+_(List all files with line numbers)_
+
+### Root Causes
+_(Explain why bugs occurred)_
+
+### Verification
+_(Confirm no crashes, z-index correct)_

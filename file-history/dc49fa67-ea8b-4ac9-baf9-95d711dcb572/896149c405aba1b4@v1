@@ -1,0 +1,41 @@
+import React, { lazy, Suspense, useEffect } from 'react';
+
+// Lazy load Kanban widget
+const Kanban = lazy(() =>
+  import('../widgets/Kanban').then((module) => ({ default: module.Kanban }))
+);
+
+// Loading fallback
+const WidgetLoader = () => (
+  <div className="bento-card p-6 h-[600px] animate-pulse">
+    <div className="h-full bg-gradient-to-r from-neutral-200 to-neutral-300 dark:from-neutral-800 dark:to-neutral-700 rounded"></div>
+  </div>
+);
+
+/**
+ * Tasks Page - Kanban board
+ * Full-featured task management with drag-and-drop
+ */
+export const Tasks: React.FC = () => {
+  useEffect(() => {
+    document.title = 'Neuman Brain';
+  }, []);
+
+  return (
+    <div className="tasks-page">
+      <div className="mb-6">
+        <h1 className="text-3xl font-bold text-text-light-primary dark:text-text-dark-primary mb-2">
+          Task Management
+        </h1>
+        <p className="text-text-light-secondary dark:text-text-dark-secondary">
+          Organize and track your tasks with Kanban board
+        </p>
+      </div>
+
+      {/* Kanban Widget */}
+      <Suspense fallback={<WidgetLoader />}>
+        <Kanban />
+      </Suspense>
+    </div>
+  );
+};

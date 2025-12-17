@@ -1,0 +1,225 @@
+# CLAUDE.md Compliance Checklist
+
+**Version:** 2.0 (Merged & Generic)
+**Purpose:** Ensure every development task follows the mandatory CLAUDE.md workflow
+**Usage:** Reference this checklist BEFORE starting ANY coding task
+
+---
+
+## Pre-Flight Checklist
+
+### Before Starting ANY Task
+
+- [ ] **Read CLAUDE.md** (workflow rules and core philosophy)
+- [ ] **Sync with remote branch:**
+  ```bash
+  # For main branch
+  git fetch origin main && git merge origin/main --no-edit
+  # OR for master branch
+  git fetch origin master && git merge origin/master --no-edit
+  ```
+- [ ] **Create task file:** `tasks/[feature-name].md` using template from `.claude/templates/task-template.md`
+- [ ] **Fill out task plan:**
+  - Problem statement
+  - Files to read
+  - Proposed changes
+  - Todo checklist
+- [ ] **Get user approval** via `ExitPlanMode` tool
+- [ ] **ONLY THEN** begin implementation
+
+---
+
+## During Implementation
+
+### As You Work
+
+- [ ] **Update todos** as you complete each item
+- [ ] **Make changes as simple as possible**
+  - Impact minimal code
+  - Avoid complex refactors unless necessary
+  - Keep changes focused on the task
+- [ ] **Give high-level explanations** of changes
+- [ ] **No temporary fixes** - Find and fix root causes
+- [ ] **Follow privacy/security/UX principles**
+
+---
+
+## Project-Type Specific Checklists
+
+### For UI/Visual Changes
+
+- [ ] **Screenshot current state** before making changes
+- [ ] **Make ONE change** at a time (not multiple)
+- [ ] **Test in browsers:** Chrome, Firefox, Safari, Edge
+- [ ] **Test responsiveness:** 375px, 768px, 1024px+
+- [ ] **Compare to baseline** (visual diff)
+- [ ] **Check animations work** (60fps target)
+- [ ] **Get user approval** before committing
+
+### For Node.js/React/TypeScript Projects
+
+- [ ] **Run tests:** `npm run test`
+- [ ] **Type check:** `npm run type-check`
+- [ ] **Lint check:** `npm run lint`
+- [ ] **Build check:** `npm run build`
+- [ ] **Verify bundle size** acceptable
+
+### For Static Sites (HTML/CSS/JS)
+
+- [ ] **Manual verification** in browser
+- [ ] **Check console** for errors
+- [ ] **Resize window** (mobile/desktop)
+- [ ] **Run Lighthouse audit** in DevTools
+
+### For Automation/Scripts
+
+- [ ] **Test with DRY_RUN=true** first
+- [ ] **Verify output matches** expectations
+- [ ] **Check validation rules** work
+- [ ] **Test edge cases**
+- [ ] **Update docs** if behavior changes
+
+---
+
+## When Complete
+
+### Before Marking Work "Done"
+
+- [ ] **Add review section** to `tasks/[feature].md`
+  - Summary of changes
+  - Files created/modified
+  - Testing status
+  - Issues encountered
+  - Time comparison (estimated vs actual)
+- [ ] **Update documentation** if architecture changed
+  - `docs/technical/` for new systems/patterns
+  - `docs/product/` for new features
+  - Any other relevant docs
+- [ ] **Verify in light mode** (if applicable)
+- [ ] **Verify in dark mode** (if applicable)
+- [ ] **Test keyboard navigation** (accessibility)
+- [ ] **Test at different screen sizes** (375px, 768px, 1024px)
+
+---
+
+## Git Commit Checklist
+
+### Before Creating Commit
+
+- [ ] **Stage task file:** `git add tasks/[feature].md` (hook will block if missing)
+- [ ] **Review changes:** `git diff --staged`
+- [ ] **Write clear commit message:**
+  ```
+  type: Short description (50 chars max)
+
+  - Bullet point details
+  - What changed and why
+  - Related issues (#123)
+
+  Generated with Claude Code
+  Co-Authored-By: Claude <noreply@anthropic.com>
+  ```
+- [ ] **Commit types:** feat, fix, docs, style, refactor, test, chore
+
+---
+
+## Workflow Rules Quick Reference
+
+### Core Workflow Rules
+
+| # | Rule | Description |
+|---|------|-------------|
+| 1 | **Think → Plan → Write** | Create task file FIRST before coding |
+| 2 | **Plan has todo list** | Checklist with items to check off |
+| 3 | **Check before working** | Get user approval via ExitPlanMode |
+| 4 | **Mark tasks complete** | Update todos as you go |
+| 5 | **High-level explanations** | Don't overexplain every detail |
+| 6 | **Simple changes** | Minimal code impact |
+| 7 | **Add review section** | Document what changed when done |
+| 8 | **No lazy fixes** | Find root cause, no temporary patches |
+| 9 | **Simplicity is key** | Impact minimal code, avoid bugs |
+| 10 | **Update documentation** | Keep docs detailed, clear, clean |
+| 11 | **Sync with remote** | Start of EVERY session |
+| 12 | **Perfect foundation** | Build for 100% even if 1% complete |
+| 13 | **Complete logical units** | Never stop mid-implementation |
+| 14 | **Validate current date** | Check `<env>` section for today's date |
+| 15 | **Commit & Push at end** | Git add, commit with details, push |
+
+### Core Philosophy Principles
+
+| # | Principle | Description |
+|---|-----------|-------------|
+| 1 | **Correctness & Integrity** | No data loss. Security P0. |
+| 2 | **Coherence** | Follow existing patterns. No competing paradigms. |
+| 3 | **Atomic Execution** | Small, reviewable steps. Explain WHY. |
+| 4 | **Maintainability** | Explicit > Clever. No magic. |
+| 5 | **Optimal Location** | Files must be in the most logical place. |
+| 6 | **Scalable Architecture** | Build primitives (building blocks), not one-offs. |
+| 7 | **Root Cause Only** | Trace bugs to source. No band-aids. |
+| 8 | **Infinite Initiative** | Fix broken windows immediately. Update stale docs. |
+
+---
+
+## Automation Tools
+
+### Available Helpers
+
+- **Git Pre-Commit Hook:** `.git/hooks/pre-commit`
+  - Blocks commits when code changes without task file updates
+  - Can bypass with `--no-verify` (emergencies only)
+
+- **Task Template:** `.claude/templates/task-template.md`
+  - Standard format for all task files
+  - Includes review section template
+
+- **Custom Commands:** `.claude/commands/`
+  - `/start-task` - Intelligent task router
+  - `/run` - Execute prompts with auto-archiving
+
+- **Automation Guide:** `.claude/docs/automation-guide.md`
+  - Detailed setup instructions
+  - Troubleshooting tips
+  - Customization guide
+
+- **Skills:** `.claude/skills/`
+  - Various specialized Claude Code skills
+  - See `.claude/skills/README.md` for list
+
+---
+
+## Emergency Bypass
+
+### When to Override
+
+Use `git commit --no-verify` ONLY for:
+- Hotfix deployments (site down)
+- Reverting broken commits
+- Critical security issues
+- Documentation-only changes (maybe)
+
+**NOT for:**
+- "I'm in a hurry"
+- "I'll update task file later"
+- "It's just a small change"
+
+**Otherwise:** Always follow the full checklist.
+
+---
+
+## Questions?
+
+- See: `CLAUDE.md` for full workflow guide
+- See: `.claude/automation-guide.md` for automation help
+- See: `.claude/skills/README.md` for available skills
+- See: `tasks/` directory for example task files
+
+---
+
+**Remember:** These rules exist to ensure:
+- Quality code
+- Complete documentation
+- No forgotten tasks
+- Consistent workflow
+- Professional results
+
+**Following this checklist = Better code + Better outcomes**

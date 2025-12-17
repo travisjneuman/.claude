@@ -1,0 +1,174 @@
+import { useEffect, useState } from 'react';
+import { useTimeTrackingStore } from '../stores/useTimeTrackingStore';
+import { formatDuration } from '../utils/timeFormatters';
+import type { DailySummary, WeeklySummary } from '../types';
+
+/**
+ * TimeEntrySummary Component
+ * Displays daily and weekly time tracking summaries with visual breakdowns
+ */
+export function TimeEntrySummary() {
+  const { getDailySummary, getWeeklySummary } = useTimeTrackingStore();
+
+  const [dailySummaries, setDailySummaries] = useState<DailySummary[]>([]);
+  const [weeklySummary, setWeeklySummary] = useState<WeeklySummary | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadSummaries = async () => {
+      setLoading(true);
+      try {
+        const [daily, weekly] = await Promise.all([
+          getDailySummary(7),
+          getWeeklySummary()
+        ]);
+        setDailySummaries(daily);
+        setWeeklySummary(weekly);
+      } catch (error) {
+        console.error('Failed to load summaries:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadSummaries();
+  }, [getDailySummary, getWeeklySummary]);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-12">
+        <div className="text-text-light-secondary dark:text-text-dark-secondary">
+          Loading summaries...
+        </div>
+      </div>
+    );
+  }
+
+  // Calculate max duration for bar chart scaling
+  const maxDuration = Math.max(...dailySummaries.map(s => s.totalDuration), 1);
+
+  // Format date for display (e.g., "Mon 22")
+  const formatDateLabel = (dateStr: string) => {
+    const date = new Date(dateStr);
+    const dayName = date.toLocaleDateString('en-US', { weekday: 'short' });
+    const dayNum = date.getDate();
+    return `${dayName} ${dayNum}`;
+  };
+
+  return (
+    <div className="space-y-6">
+      {/* Weekly Summary Card */}
+      {weeklySummary && (
+        <div className="bg-surface-light dark:bg-surface-dark rounded-lg border border-border-light dark:border-border-dark p-6">
+          <h2 className="text-xl font-semibold text-text-light-primary dark:text-text-dark-primary mb-4">
+            Weekly Summary
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="bg-surface-light-elevated dark:bg-surface-dark-elevated rounded-lg p-4">
+              <div className="text-sm text-text-light-secondary dark:text-text-dark-secondary mb-1">
+                Total Time
+              </div>
+              <div className="text-2xl font-bold text-accent-magenta dark:text-accent-cyan">
+                {formatDuration(weeklySummary.totalDuration, { showSeconds: false })}
+              </div>
+            </div>
+            <div className="bg-surface-light-elevated dark:bg-surface-dark-elevated rounded-lg p-4">
+              <div className="text-sm text-text-light-secondary dark:text-text-dark-secondary mb-1">
+                Entries
+              </div>
+              <div className="text-2xl font-bold text-text-light-primary dark:text-text-dark-primary">
+                {weeklySummary.entryCount}
+              </div>
+            </div>
+            <div className="bg-surface-light-elevated dark:bg-surface-dark-elevated rounded-lg p-4">
+              <div className="text-sm text-text-light-secondary dark:text-text-dark-secondary mb-1">
+                Week
+              </div>
+              <div className="text-sm font-medium text-text-light-primary dark:text-text-dark-primary">
+                {new Date(weeklySummary.weekStart).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                {' - '}
+                {new Date(weeklySummary.weekEnd).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Daily Breakdown */}
+      <div className="bg-surface-light dark:bg-surface-dark rounded-lg border border-border-light dark:border-border-dark p-6">
+        <h2 className="text-xl font-semibold text-text-light-primary dark:text-text-dark-primary mb-6">
+          Daily Breakdown (Last 7 Days)
+        </h2>
+
+        {dailySummaries.length === 0 ? (
+          <div className="text-center py-8 text-text-light-secondary dark:text-text-dark-secondary">
+            No time entries found for the last 7 days
+          </div>
+        ) : (
+          <div className="space-y-4">
+            {dailySummaries.map((summary) => {
+              const percentage = (summary.totalDuration / maxDuration) * 100;
+
+              return (
+                <div key={summary.date} className="space-y-2">
+                  {/* Date and Time */}
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-medium text-text-light-primary dark:text-text-dark-primary">
+                      {formatDateLabel(summary.date)}
+                    </span>
+                    <div className="flex items-center gap-3">
+                      <span className="text-xs text-text-light-secondary dark:text-text-dark-secondary">
+                        {summary.entryCount} {summary.entryCount === 1 ? 'entry' : 'entries'}
+                      </span>
+                      <span className="text-sm font-mono font-semibold text-accent-magenta dark:text-accent-cyan min-w-[60px] text-right">
+                        {formatDuration(summary.totalDuration, { showSeconds: false })}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Progress Bar */}
+                  <div className="h-2 bg-surface-light-elevated dark:bg-surface-dark-elevated rounded-full overflow-hidden">
+                    <div
+                      className="h-full bg-gradient-to-r from-accent-magenta to-accent-magenta-hover dark:from-accent-cyan dark:to-accent-cyan-hover transition-all duration-300"
+                      style={{ width: `${percentage}%` }}
+                    />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </div>
+
+      {/* Average Stats */}
+      {dailySummaries.length > 0 && (
+        <div className="bg-surface-light dark:bg-surface-dark rounded-lg border border-border-light dark:border-border-dark p-6">
+          <h3 className="text-lg font-semibold text-text-light-primary dark:text-text-dark-primary mb-4">
+            Averages
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="bg-surface-light-elevated dark:bg-surface-dark-elevated rounded-lg p-4">
+              <div className="text-sm text-text-light-secondary dark:text-text-dark-secondary mb-1">
+                Avg Time/Day
+              </div>
+              <div className="text-lg font-bold text-text-light-primary dark:text-text-dark-primary">
+                {formatDuration(
+                  Math.floor(dailySummaries.reduce((sum, s) => sum + s.totalDuration, 0) / dailySummaries.length),
+                  { showSeconds: false }
+                )}
+              </div>
+            </div>
+            <div className="bg-surface-light-elevated dark:bg-surface-dark-elevated rounded-lg p-4">
+              <div className="text-sm text-text-light-secondary dark:text-text-dark-secondary mb-1">
+                Avg Entries/Day
+              </div>
+              <div className="text-lg font-bold text-text-light-primary dark:text-text-dark-primary">
+                {(dailySummaries.reduce((sum, s) => sum + s.entryCount, 0) / dailySummaries.length).toFixed(1)}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}

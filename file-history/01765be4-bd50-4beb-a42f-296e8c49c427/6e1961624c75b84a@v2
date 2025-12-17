@@ -1,0 +1,136 @@
+import React, { useState, useEffect } from 'react';
+import { useDroppable } from '@dnd-kit/core';
+import { KanbanCard } from './KanbanCard';
+import { useKanbanStore } from '../../stores/useKanbanStore';
+import type { Task, TaskStatus } from '../../types';
+
+interface KanbanColumnProps {
+  id: string; // Changed from TaskStatus to support dynamic columns
+  title: string;
+  color: string;
+  tasks: Task[];
+  selectedTaskId?: string;
+  onRegisterRef: (ref: { triggerAdd: () => void }) => void;
+  onRegisterCardRef: (taskId: string, ref: { triggerEdit: () => void }) => void;
+}
+
+export const KanbanColumn: React.FC<KanbanColumnProps> = ({
+  id,
+  title,
+  color,
+  tasks,
+  selectedTaskId,
+  onRegisterRef,
+  onRegisterCardRef,
+}) => {
+  const { addTask } = useKanbanStore();
+  const { setNodeRef, isOver } = useDroppable({ id });
+  const [showAddForm, setShowAddForm] = useState(false);
+  const [newTaskTitle, setNewTaskTitle] = useState('');
+
+  // Register ref for keyboard shortcut access
+  useEffect(() => {
+    onRegisterRef({
+      triggerAdd: () => setShowAddForm(true),
+    });
+  }, [onRegisterRef]);
+
+  const handleAddTask = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newTaskTitle.trim()) return;
+
+    addTask({
+      title: newTaskTitle.trim(),
+      description: '',
+      status: id as TaskStatus, // Cast to TaskStatus for backward compatibility
+      startDate: null,
+      dueDate: null,
+      priority: 'medium',
+      tags: [],
+    });
+
+    setNewTaskTitle('');
+    setShowAddForm(false);
+  };
+
+  return (
+    <div
+      ref={setNodeRef}
+      className={`kanban-column flex-shrink-0 w-80 flex flex-col bg-neutral-100 dark:bg-neutral-800 rounded-lg ${
+        isOver ? 'ring-2 ring-primary-cyan bg-cyan-50 dark:bg-cyan-900/20' : ''
+      }`}
+    >
+      {/* Column Header */}
+      <div className="column-header p-4 border-b border-neutral-200 dark:border-neutral-700">
+        <div className="flex items-center justify-between mb-2">
+          <div className="flex items-center gap-2">
+            <div className={`w-3 h-3 rounded-full ${color}`}></div>
+            <h3 className="font-semibold text-text-light-primary dark:text-text-dark-primary">
+              {title}
+            </h3>
+            <span className="text-sm text-text-light-secondary dark:text-text-dark-secondary">
+              ({tasks.length})
+            </span>
+          </div>
+        </div>
+
+        {/* Add Task Button */}
+        {!showAddForm ? (
+          <button
+            onClick={() => setShowAddForm(true)}
+            className="w-full text-left text-sm text-text-light-secondary dark:text-text-dark-secondary hover:text-primary-cyan transition-colors"
+          >
+            + Add task
+          </button>
+        ) : (
+          <form onSubmit={handleAddTask} className="space-y-2">
+            <input
+              type="text"
+              value={newTaskTitle}
+              onChange={(e) => setNewTaskTitle(e.target.value)}
+              placeholder="Task title..."
+              className="w-full px-3 py-2 text-sm border border-neutral-300 dark:border-neutral-600 rounded bg-white dark:bg-neutral-700 text-text-light-primary dark:text-text-dark-primary focus:outline-none focus:ring-2 focus:ring-primary-cyan"
+              autoFocus
+            />
+            <div className="flex gap-2">
+              <button
+                type="submit"
+                className="px-3 py-1 text-sm bg-primary-cyan text-white rounded hover:opacity-80"
+              >
+                Add
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setShowAddForm(false);
+                  setNewTaskTitle('');
+                }}
+                className="px-3 py-1 text-sm bg-neutral-300 dark:bg-neutral-600 text-text-light-secondary dark:text-text-dark-secondary rounded hover:opacity-80"
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        )}
+      </div>
+
+      {/* Tasks List */}
+      <div className="column-tasks flex-1 p-4 space-y-3">
+        {tasks.length === 0 ? (
+          <div className="text-center py-8 text-text-light-secondary dark:text-text-dark-secondary text-sm">
+            {isOver ? 'Drop task here' : 'No tasks'}
+          </div>
+        ) : (
+          tasks.map((task) => (
+            <KanbanCard
+              key={task.id}
+              task={task}
+              isSelected={task.id === selectedTaskId}
+              onRegisterRef={(ref) => onRegisterCardRef(task.id, ref)}
+            />
+          ))
+        )}
+      </div>
+    </div>
+  );
+};

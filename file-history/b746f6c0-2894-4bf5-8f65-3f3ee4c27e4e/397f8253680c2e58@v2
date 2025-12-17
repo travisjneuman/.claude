@@ -1,0 +1,171 @@
+# Plan: Fix Hover Action Overlap Platform-Wide
+
+## Problem Summary
+
+The Notes page has overlapping hover actions that make the note title unreadable. When hovering over a note card, action buttons (Download, PDF Export, Star, Pin, Delete) positioned at `absolute top-2 right-8` overlap with the note title "November 28, 2025".
+
+This is a symptom of a platform-wide issue affecting 24 files with hover actions. Three files have high overlap risk, three have medium risk.
+
+## Root Cause
+
+**Immediate cause:** Absolute positioned actions at `top-2 right-8` compete with:
+- Static indicators (Star, Pin) at `top-2 right-2`
+- Title text with only `pr-6` padding (insufficient for 5 buttons × 24px = 120px)
+
+**Systemic cause:** No standard pattern for hover actions that prevents overlap while avoiding layout shift.
+
+## Proposed Solution
+
+### Core Pattern: Reserved Action Zone with Flexbox
+
+Replace absolute positioning with flex-based layout that reserves space for actions:
+
+**Key Principles:**
+1. **Header Row:** Title and actions in same flex container
+2. **Title Flexibility:** `flex-1 min-w-0` allows truncation before overlap
+3. **Fixed Action Width:** `shrink-0` + fixed width (140px) prevents collapse
+4. **Opacity Transition:** Actions occupy space via `opacity-0`, preventing shift
+5. **Logical Grouping:** Static indicators and hover actions separated clearly
+
+**Example:**
+```tsx
+<div className="flex items-start gap-2 min-h-[24px]">
+  {/* Title: grows, truncates when constrained */}
+  <h4 className="font-medium flex-1 truncate min-w-0">
+    {note.title}
+  </h4>
+
+  {/* Reserved action zone: always 140px wide */}
+  <div className="flex items-center gap-1 shrink-0" style={{ width: '140px' }}>
+    {/* Static indicators (always visible) */}
+    <div className="flex gap-1 ml-auto">
+      {note.isFavorite && <Star className="w-4 h-4" />}
+      {note.isPinned && <Pin className="w-4 h-4" />}
+    </div>
+
+    {/* Hover actions (invisible but occupy space) */}
+    <div className="flex gap-1 opacity-0 group-hover:opacity-100">
+      {/* 5 buttons */}
+    </div>
+  </div>
+</div>
+```
+
+**Advantages:**
+- ✅ Zero overlap (flexbox enforces boundaries)
+- ✅ No layout shift (actions always occupy space)
+- ✅ Responsive (title truncates gracefully)
+- ✅ Predictable (fixed action width)
+- ✅ Maintainable (standard flex patterns)
+
+**Tradeoffs:**
+- ⚠️ Cards ~140px wider (acceptable for readability)
+- ⚠️ Titles truncate earlier (but readable vs. overlapped)
+
+## Implementation Plan (6 Phases)
+
+### Phase 1: Create Reusable Component (15-20 min)
+**File:** `src/components/HoverActions/CardWithActions.tsx`
+
+Create generic wrapper with `CardWithActions.Header` subcomponent for flex-based header layout.
+
+**Deliverables:**
+- Component with props: `children`, `actions`, `staticIndicators`, `className`, `onClick`
+- Header subcomponent with fixed 140px action zone
+- Unit tests (0-10 actions, viewport widths)
+- Update `src/components/CLAUDE.md` inventory
+
+### Phase 2: Fix Notes.tsx (10-15 min)
+**File:** `src/pages/Notes.tsx` (lines 495-615)
+
+Refactor note cards to use flex header pattern:
+- Remove absolute positioning (lines 520, 555)
+- Remove `pr-6` from title (line 526)
+- Restructure with flex header
+- Test with various title lengths, tag counts
+
+### Phase 3: Fix ImageNode.tsx (10-15 min)
+**File:** `src/widgets/NotesEditor/ImageNode.tsx` (line 251)
+
+Replace `-bottom-10` absolute positioning with flex layout below image:
+- Use `mt-2` spacing instead of negative margin
+- Add opacity transition
+- Test with multiple images in editor
+
+### Phase 4: Fix Calendar Hover Content (15-20 min)
+**Files:**
+- `src/components/TimeEntryCalendar.tsx` (line 316)
+- `src/components/TimeEntryReportCalendar.tsx` (line 369)
+- `src/components/MonthlyTimeReport.tsx` (line 182)
+
+Convert to tooltip pattern with boundary detection:
+- Position tooltips above/below cells based on available space
+- Add arrow pointing to cell
+- Test at viewport edges
+
+### Phase 5: Documentation (20-25 min)
+Document pattern in:
+- `src/components/CLAUDE.md` (pattern, rules, anti-patterns)
+- `docs/technical/component_patterns.md` (examples)
+- Optional: ESLint rule to catch `absolute` + `group-hover` patterns
+
+### Phase 6: Verification (15-20 min)
+- Manual testing at 320px, 768px, 1024px, 1920px widths
+- Test light/dark mode
+- E2E tests (Playwright) for Notes hover actions
+- Visual regression tests
+- Full test suite: `npm run test && npm run type-check`
+
+## Total Time Estimate
+**85-115 minutes (1.5-2 hours)**
+
+## Files to Modify
+**High Priority (confirmed bugs):**
+- `src/pages/Notes.tsx` (lines 495-615)
+- `src/widgets/NotesEditor/ImageNode.tsx` (line 251)
+- `src/components/TimeEntryCalendar.tsx` (line 316)
+- `src/components/TimeEntryReportCalendar.tsx` (line 369)
+- `src/components/MonthlyTimeReport.tsx` (line 182)
+
+**Documentation:**
+- `src/components/CLAUDE.md`
+- `docs/technical/component_patterns.md` (create if needed)
+
+**New Files:**
+- `src/components/HoverActions/CardWithActions.tsx`
+- `src/components/HoverActions/index.ts`
+- `src/components/HoverActions/__tests__/CardWithActions.test.tsx`
+
+## Success Criteria
+- [ ] Zero overlap between hover actions and content
+- [ ] No layout shift when hovering
+- [ ] Reusable component created and documented
+- [ ] All tests pass
+- [ ] Works at 320px - 2560px widths
+- [ ] Works in light/dark mode
+- [ ] Smooth transitions (200ms)
+
+## Key Decision: Fix High-Risk Components Only
+
+**Options considered:**
+1. Fix only Notes.tsx (immediate bug)
+2. Fix all high-risk components (Notes, ImageNode, Calendars)
+3. Fix entire platform (all 24 files)
+
+**Chosen:** Option 2 (high-risk components)
+
+**Rationale:**
+- Addresses confirmed bug + high-risk issues (80/20 rule)
+- Manageable scope (~90 min)
+- Creates reusable pattern for future use
+- Low-risk components already use safe patterns
+
+## Next Steps After Approval
+1. Create `CardWithActions` component
+2. Fix Notes.tsx note cards
+3. Fix ImageNode.tsx controls
+4. Fix calendar hover content
+5. Document pattern
+6. Run verification tests
+7. Commit with comprehensive message
+8. Archive task file
