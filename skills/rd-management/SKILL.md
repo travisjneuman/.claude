@@ -148,143 +148,7 @@ TRL 7-9: Engineering/Launch funding
 | **Development** | Productization | 1-3 years | Medium |
 | **Engineering** | Commercialization | 6-18 months | Lower |
 
-### Research Methodology
-
-```
-SCIENTIFIC METHOD:
-
-1. OBSERVATION
-   - Literature review
-   - State of the art
-   - Gap identification
-
-2. HYPOTHESIS
-   - Research questions
-   - Testable predictions
-   - Variables definition
-
-3. EXPERIMENTATION
-   - Experimental design
-   - Data collection
-   - Controls
-
-4. ANALYSIS
-   - Statistical analysis
-   - Pattern identification
-   - Interpretation
-
-5. CONCLUSION
-   - Hypothesis validation
-   - Limitations
-   - Future work
-
-6. COMMUNICATION
-   - Publications
-   - Patents
-   - Knowledge transfer
-```
-
-### Lab Management
-
-```
-LAB OPERATIONS:
-
-SAFETY:
-- Safety protocols
-- Training requirements
-- Equipment certification
-- Incident reporting
-
-EQUIPMENT:
-- Inventory management
-- Calibration schedules
-- Maintenance programs
-- Capacity planning
-
-DATA:
-- Electronic lab notebooks
-- Data management
-- Version control
-- Archiving
-
-QUALITY:
-- SOPs
-- Peer review
-- Reproducibility
-- Documentation
-```
-
-## Development Process
-
-### Product Development Framework
-
-```
-PRODUCT DEVELOPMENT STAGES:
-
-CONCEPT:
-- Idea generation
-- Feasibility study
-- Preliminary business case
-- Gate: Concept approval
-
-PLANNING:
-- Detailed requirements
-- Architecture design
-- Project plan
-- Gate: Plan approval
-
-DEVELOPMENT:
-- Detailed design
-- Prototype building
-- Testing
-- Gate: Design freeze
-
-VALIDATION:
-- System testing
-- Customer validation
-- Manufacturing readiness
-- Gate: Launch approval
-
-LAUNCH:
-- Production ramp
-- Market launch
-- Performance tracking
-- Gate: Post-launch review
-```
-
-### Development Methodologies
-
-| Method | Best For | Key Features |
-|--------|----------|--------------|
-| **Waterfall** | Hardware, regulated | Sequential, documented |
-| **Agile** | Software, uncertain | Iterative, flexible |
-| **Stage-Gate** | New products | Phase gates, portfolio |
-| **Lean** | Startup, validation | MVP, pivots |
-| **Hybrid** | Complex products | Combined approaches |
-
-### Engineering Standards
-
-```
-ENGINEERING EXCELLENCE:
-
-DESIGN STANDARDS:
-- Design for manufacturing (DFM)
-- Design for reliability (DFR)
-- Design for test (DFT)
-- Design for service (DFS)
-
-QUALITY STANDARDS:
-- Design reviews
-- FMEA (Failure Mode Effects Analysis)
-- Design verification
-- Design validation
-
-DOCUMENTATION:
-- Requirements specs
-- Design specs
-- Test protocols
-- Manufacturing specs
-```
+For detailed research methodology, lab management, product development frameworks, and engineering standards, see [Research Frameworks Reference](references/research-frameworks.md).
 
 ## Academic Partnerships
 
@@ -328,83 +192,7 @@ SUCCESS METRICS:
 - Hires from program
 ```
 
-## Regulatory Pathways
-
-### Regulatory Strategy
-
-```
-REGULATORY PLANNING:
-
-PRE-SUBMISSION:
-- Regulatory mapping
-- Classification determination
-- Pathway selection
-- Pre-submission meetings
-
-SUBMISSION:
-- Documentation preparation
-- Clinical/technical data
-- Quality system documentation
-- Regulatory application
-
-REVIEW:
-- Agency interaction
-- Information requests
-- Deficiency responses
-- Approval/clearance
-
-POST-MARKET:
-- Compliance monitoring
-- Adverse event reporting
-- Changes/supplements
-- Renewals
-```
-
-### Industry-Specific Pathways
-
-| Industry | Primary Regulator | Key Pathways |
-|----------|-------------------|--------------|
-| **Pharma** | FDA, EMA | NDA, BLA, 505(b)(2) |
-| **Medical Device** | FDA, Notified Bodies | 510(k), PMA, De Novo |
-| **Food** | FDA, USDA | GRAS, Food Additive |
-| **Chemical** | EPA, REACH | TSCA, REACH registration |
-| **Automotive** | NHTSA, EPA | FMVSS, Emissions |
-
-### Clinical Development
-
-```
-CLINICAL TRIAL PHASES:
-
-PRECLINICAL:
-- Lab studies
-- Animal studies
-- Safety pharmacology
-- IND/IMPD preparation
-
-PHASE 1:
-- Safety focus
-- 20-100 subjects
-- Dose finding
-- PK/PD studies
-
-PHASE 2:
-- Efficacy signal
-- 100-500 subjects
-- Dose optimization
-- Safety monitoring
-
-PHASE 3:
-- Pivotal efficacy
-- 1000+ subjects
-- Regulatory endpoints
-- Safety database
-
-PHASE 4:
-- Post-market
-- Real-world evidence
-- Long-term safety
-- Label expansion
-```
+For detailed regulatory pathways and clinical development phases, see [Regulatory & Clinical Development Reference](references/regulatory-clinical.md).
 
 ## R&D Metrics & Governance
 
@@ -508,6 +296,11 @@ RECOGNITION:
 - Publication support
 - Innovation prizes
 ```
+
+## References
+
+- [Research Frameworks Reference](references/research-frameworks.md) - Research methodology, lab management, product development, engineering standards
+- [Regulatory & Clinical Development Reference](references/regulatory-clinical.md) - Regulatory strategy, industry pathways, clinical trial phases
 
 ## See Also
 
