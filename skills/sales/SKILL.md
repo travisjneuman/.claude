@@ -9,143 +9,16 @@ Comprehensive sales frameworks for deal qualification, pipeline management, and 
 
 ## Sales Methodologies
 
-### MEDDIC/MEDDPICC
+### Quick Reference
 
-```
-M - METRICS
-- What business outcomes matter to the customer?
-- How will they measure success?
-- Quantified value of your solution
+| Methodology | Core Focus | Best For |
+|-------------|------------|----------|
+| **MEDDIC** | Deal qualification rigor | Enterprise sales |
+| **SPIN** | Question-based discovery | Complex solutions |
+| **Challenger** | Insight-led selling | Competitive markets |
+| **Solution Selling** | Problem-solving approach | Value-based sales |
 
-E - ECONOMIC BUYER
-- Who has budget authority?
-- Who can approve unbudgeted spend?
-- Single person or committee?
-
-D - DECISION CRITERIA
-- Technical requirements
-- Business requirements
-- Formal vs. informal criteria
-
-D - DECISION PROCESS
-- Steps to reach decision
-- Timeline and milestones
-- Approval chain
-
-P - PAPER PROCESS (MEDDPICC)
-- Legal review requirements
-- Procurement involvement
-- Contract requirements
-
-I - IDENTIFY PAIN
-- Critical business issues
-- Impact of status quo
-- Urgency drivers
-
-C - CHAMPION
-- Internal advocate
-- Has influence and credibility
-- Personal stake in success
-
-C - COMPETITION
-- Who else are they considering?
-- Competitive strengths/weaknesses
-- Our differentiation
-```
-
-### SPIN Selling
-
-```
-SITUATION QUESTIONS:
-- Gather facts about current state
-- Understand context
-- Keep brief, do research beforehand
-Example: "How many reps do you have?"
-
-PROBLEM QUESTIONS:
-- Uncover difficulties and dissatisfaction
-- Identify pain points
-- Areas of improvement
-Example: "What challenges do you face with forecasting?"
-
-IMPLICATION QUESTIONS:
-- Explore consequences of problems
-- Build urgency
-- Quantify impact
-Example: "How does that affect your revenue predictability?"
-
-NEED-PAYOFF QUESTIONS:
-- Focus on value of solving
-- Get buyer to articulate benefits
-- Build desire for solution
-Example: "If you could improve forecast accuracy, how would that help?"
-```
-
-### Challenger Sale
-
-```
-TEACHING:
-- Bring unique insights
-- Challenge assumptions
-- Provide new perspective
-- Focus on their business, not your product
-
-TAILORING:
-- Customize message to stakeholder
-- Speak to their specific outcomes
-- Address individual concerns
-- Resonate personally
-
-TAKING CONTROL:
-- Assert value without being pushy
-- Comfortable with tension
-- Push back appropriately
-- Guide the sale process
-
-COMMERCIAL TEACHING FRAMEWORK:
-1. The Warmer: Build credibility
-2. The Reframe: Challenge their thinking
-3. Rational Drowning: Data showing cost of status quo
-4. Emotional Impact: Stories of others in similar situation
-5. A New Way: Your solution approach
-6. Your Solution: How you uniquely deliver
-```
-
-### Solution Selling
-
-```
-SOLUTION SELLING PROCESS:
-
-1. PROSPECT
-   - Ideal customer profile
-   - Trigger events
-   - Compelling events
-
-2. DIAGNOSE
-   - Pain points
-   - Impact analysis
-   - Stakeholder mapping
-
-3. DEVELOP
-   - Capabilities needed
-   - Solution vision
-   - Value proposition
-
-4. DEMONSTRATE
-   - Proof of concept
-   - Reference customers
-   - Business case
-
-5. NEGOTIATE
-   - Terms alignment
-   - Risk mitigation
-   - Win-win structure
-
-6. CLOSE
-   - Decision facilitation
-   - Paperwork management
-   - Transition planning
-```
+For detailed methodology frameworks (MEDDIC, SPIN, Challenger, Solution Selling), see [Sales Methodologies Reference](references/sales-methodologies.md).
 
 ## Pipeline Management
 
@@ -316,64 +189,6 @@ EXPANSION TRIGGERS:
 - New initiatives announced
 ```
 
-## Sales Enablement
-
-### Content Framework
-
-| Stage | Content Types | Purpose |
-|-------|---------------|---------|
-| **Awareness** | Industry reports, blogs | Establish credibility |
-| **Interest** | Solution overviews, webinars | Educate on options |
-| **Consideration** | Case studies, ROI tools | Prove value |
-| **Decision** | Proposals, contracts | Facilitate close |
-| **Retention** | Best practices, updates | Drive adoption |
-
-### Sales Playbooks
-
-```
-PLAYBOOK COMPONENTS:
-
-IDEAL CUSTOMER PROFILE:
-- Firmographics
-- Technographics
-- Trigger events
-- Qualification criteria
-
-PERSONAS:
-- Roles and responsibilities
-- Goals and challenges
-- Objections and responses
-- Communication preferences
-
-MESSAGING:
-- Value proposition
-- Elevator pitch
-- Competitive positioning
-- Objection handling
-
-PROCESS:
-- Stage definitions
-- Exit criteria
-- Required activities
-- Tools and resources
-
-COMPETITIVE:
-- Competitor profiles
-- Win/loss analysis
-- Battle cards
-- Trap-setting questions
-```
-
-### Sales Training Curriculum
-
-| Program | Audience | Duration | Content |
-|---------|----------|----------|---------|
-| **Onboarding** | New hires | 2-4 weeks | Company, product, process |
-| **Methodology** | All reps | 2-3 days | Sales approach |
-| **Product** | All | Ongoing | Features, updates |
-| **Industry** | Vertical teams | 1-2 days | Domain knowledge |
-| **Skills** | As needed | Varies | Negotiation, presenting |
-
 ## Revenue Operations
 
 ### RevOps Framework
@@ -496,6 +311,11 @@ If low conversion → Skills, messaging
 If low win rate → Qualification, competition
 If low deal size → Targeting, value selling
 ```
+
+## References
+
+- [Sales Methodologies Reference](references/sales-methodologies.md) - MEDDIC, SPIN, Challenger, Solution Selling details
+- [Sales Enablement Reference](references/sales-enablement.md) - Content framework, playbooks, training curriculum
 
 ## See Also
 

@@ -1,0 +1,37 @@
+[
+  {
+    "content": "Split data-science skill (548 lines) - move detailed ML pipelines to references/",
+    "status": "completed",
+    "activeForm": "Splitting data-science skill (548 lines)"
+  },
+  {
+    "content": "Split security skill (540 lines) - move detailed frameworks to references/",
+    "status": "completed",
+    "activeForm": "Splitting security skill (540 lines)"
+  },
+  {
+    "content": "Split sales skill (504 lines) - move detailed methodologies to references/",
+    "status": "completed",
+    "activeForm": "Splitting sales skill (504 lines)"
+  },
+  {
+    "content": "Split rd-management skill (516 lines) - move detailed frameworks to references/",
+    "status": "completed",
+    "activeForm": "Splitting rd-management skill (516 lines)"
+  },
+  {
+    "content": "Optimize marketing skill (455 lines) - remove padding or split if needed",
+    "status": "completed",
+    "activeForm": "Optimizing marketing skill (455 lines)"
+  },
+  {
+    "content": "Optimize sustainability-esg skill (494 lines) - remove padding or split if needed",
+    "status": "completed",
+    "activeForm": "Optimizing sustainability-esg skill (494 lines)"
+  },
+  {
+    "content": "Create SUMMARY.md with audit results and commit changes",
+    "status": "in_progress",
+    "activeForm": "Creating SUMMARY.md and committing changes"
+  }
+]
