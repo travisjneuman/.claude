@@ -67,7 +67,7 @@ Plans:
 Plans:
 - [x] 02-01: Enhance generic-code-reviewer (already solid at 104 lines, verify/polish)
 - [x] 02-02: Enhance generic-design-system (add design tokens, atomic design, accessibility)
-- [ ] 02-03: Enhance generic-feature-developer (add architecture patterns, data flow)
+- [x] 02-03: Enhance generic-feature-developer (add architecture patterns, data flow)
 - [ ] 02-04: Enhance generic-ux-designer (add UX methodology, research methods)
 
 ### Phase 3: Domain Expert Skills
@@ -121,7 +121,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 2/2 | Complete | 2025-12-17 |
-| 2. Base Generic Skills | 2/4 | In progress | - |
+| 2. Base Generic Skills | 3/4 | In progress | - |
 | 3. Domain Expert Skills | 0/4 | Not started | - |
 | 4. Stack-Specific Skills | 0/3 | Not started | - |
 | 5. Utility Skills | 0/2 | Not started | - |
