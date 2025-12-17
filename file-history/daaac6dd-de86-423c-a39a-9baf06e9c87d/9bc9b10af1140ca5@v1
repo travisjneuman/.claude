@@ -1,5 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" fill="none">
-  <rect width="800" height="450" fill="#e5e7eb"/>
-  <path d="M400 150L300 225V325H350V275H450V325H500V225L400 150Z" fill="#9ca3af"/>
-  <text x="400" y="380" text-anchor="middle" fill="#6b7280" font-family="system-ui" font-size="24">Property Photo</text>
-</svg>
