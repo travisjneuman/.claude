@@ -7,6 +7,46 @@ description: This skill should be used when analyzing technical debt in a codeba
 
 Systematically identify, analyze, and document technical debt.
 
+## When to Use
+
+**Use for:**
+- Analyzing code quality issues
+- Creating technical debt registers
+- Assessing code maintainability
+- Identifying dependency problems
+- Documenting security vulnerabilities
+- Planning refactoring efforts
+
+**Don't use when:**
+- Writing new code → use `generic-feature-developer`
+- Code review → use `generic-code-reviewer`
+- Writing tests → use `test-specialist`
+
+## Quick Analysis Commands
+
+```bash
+# Find large files (>500 lines)
+find src -name "*.ts" -exec wc -l {} + | awk '$1 > 500' | sort -rn
+
+# Find TODO/FIXME markers
+grep -rn "TODO\|FIXME\|HACK\|XXX" src/
+
+# Check for console.log in production code
+grep -rn "console.log" src/ --include="*.ts" --include="*.tsx"
+
+# Find TypeScript 'any' usage
+grep -rn ": any" src/ --include="*.ts" --include="*.tsx"
+
+# Check outdated dependencies
+npm outdated
+
+# Security vulnerabilities
+npm audit
+
+# Unused exports (requires ts-unused-exports)
+npx ts-unused-exports tsconfig.json
+```
+
 ## Debt Categories
 
 | Category | Examples |
@@ -31,23 +71,14 @@ Systematically identify, analyze, and document technical debt.
 - `any` types in TypeScript
 - Long parameter lists (>5 params)
 - Deep nesting (>4 levels)
-- Magic numbers
 
 **Dependency Issues:**
 - Deprecated packages
-- Duplicate functionality (multiple libs for same purpose)
+- Duplicate functionality
 - Loose version constraints
 - Known vulnerabilities
 
-### 2. Manual Review Focus
-
-- Architectural issues (coupling, abstractions)
-- Test quality and coverage gaps
-- Documentation completeness
-- Performance bottlenecks
-- Security vulnerabilities
-
-### 3. Severity Assessment
+### 2. Severity Assessment
 
 | Severity | Criteria | Action |
 |----------|----------|--------|
@@ -56,7 +87,7 @@ Systematically identify, analyze, and document technical debt.
 | Medium | Code quality, missing docs | This quarter |
 | Low | Minor smells, optimizations | When convenient |
 
-### 4. Priority Matrix
+### 3. Priority Matrix
 
 | Impact / Effort | Low | Medium | High |
 |----------------|-----|--------|------|
@@ -86,14 +117,6 @@ Systematically identify, analyze, and document technical debt.
 
 ## Prevention Strategies
 
-### Code Review Checklist
-- [ ] No new code smells
-- [ ] Tests added/updated
-- [ ] Documentation updated
-- [ ] No security issues
-- [ ] Performance considered
-- [ ] Follows team patterns
-
 ### Automated Guards
 ```json
 {
@@ -114,14 +137,17 @@ Systematically identify, analyze, and document technical debt.
 | Monthly | Dependency updates, debt review |
 | Quarterly | Full analysis, architecture review |
 
-## Tracking Metrics
+## Self-Critique Checklist
 
-**Quantity:** Total items, items by severity, items per 1000 LOC
-**Quality:** Test coverage, complexity trends, file sizes
-**Velocity:** Items resolved/added per sprint, time to resolve
-**Business:** Bug rate, feature delivery speed
+After completing debt analysis:
+- [ ] All automated checks run
+- [ ] Manual review of critical paths done
+- [ ] Severity assessments justified
+- [ ] Proposed solutions are actionable
+- [ ] Priority matrix applied consistently
+- [ ] Register entries are complete
 
 ## See Also
 
-- [Code Review Standards](./../_shared/CODE_REVIEW_STANDARDS.md) - Quality checks
+- [Code Review Standards](../_shared/CODE_REVIEW_STANDARDS.md) - Quality checks
 - Project `CLAUDE.md` - Workflow rules
