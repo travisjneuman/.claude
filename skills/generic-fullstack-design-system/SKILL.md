@@ -5,22 +5,39 @@ description: Complete design system reference for full-stack applications. Cover
 
 # Fullstack Design System
 
-Design system reference for Next.js/NestJS full-stack applications.
+Design system patterns for Next.js/NestJS full-stack applications.
 
-**Foundational Reference:** See [Design Patterns](./../_shared/DESIGN_PATTERNS.md) for core concepts.
+**Extends:** [Generic Design System](../generic-design-system/SKILL.md) - Read base skill for color theory, typography scale, spacing system, and component states.
 
-## Color System
+## Theme Configuration
 
-### Project Colors (Define in theme.ts)
+### lib/theme.ts Structure
+
+```typescript
+// lib/theme.ts - Single source of truth
+export const theme = {
+  colors: {
+    primary: 'hsl(220, 100%, 55%)',
+    secondary: 'hsl(180, 100%, 50%)',
+    accent: 'hsl(270, 70%, 60%)',
+  },
+  spacing: {
+    xs: '4px',
+    sm: '8px',
+    md: '16px',
+    lg: '24px',
+  },
+};
+```
+
+### CSS Variables (globals.css)
 
 ```css
-/* Theme-adaptive via CSS variables */
 :root {
-  --brand-primary: hsl(220, 100%, 55%);
-  --brand-secondary: hsl(180, 100%, 50%);
-  --brand-accent: hsl(270, 70%, 60%);
   --background: #ffffff;
   --foreground: #0a0a0f;
+  --primary: hsl(220, 100%, 55%);
+  --primary-foreground: #ffffff;
 }
 
 .dark {
@@ -29,56 +46,74 @@ Design system reference for Next.js/NestJS full-stack applications.
 }
 ```
 
-### Semantic Colors
-```css
---success: #10B981;
---warning: #F59E0B;
---destructive: #EF4444;
---info: #3B82F6;
+### Tailwind Integration
+
+```javascript
+// tailwind.config.js
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        background: 'var(--background)',
+        foreground: 'var(--foreground)',
+        primary: 'var(--primary)',
+      },
+    },
+  },
+};
 ```
 
-## Typography
+## shadcn/ui Patterns
 
-### Font Stack
-```css
-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+### Button Variants
+
+```tsx
+import { Button } from '@/components/ui/button';
+
+<Button>Primary</Button>
+<Button variant="outline">Secondary</Button>
+<Button variant="destructive">Delete</Button>
+<Button variant="ghost">Cancel</Button>
+<Button size="sm">Small</Button>
+<Button size="lg">Large</Button>
 ```
 
-### Type Scale
-| Size | Value | Use |
-|------|-------|-----|
-| xs | 12px | Captions |
-| sm | 14px | Secondary |
-| base | 16px | Body |
-| lg | 18px | Subheadings |
-| xl | 20px | Headings |
-| 2xl | 24px | Section titles |
-| 3xl | 30px | Page titles |
+### Form Components
 
-## Spacing
+```tsx
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 
-### Scale (4px base)
-| Token | Value | Use |
-|-------|-------|-----|
-| 1 | 4px | Tight |
-| 2 | 8px | Compact |
-| 4 | 16px | Default padding |
-| 6 | 24px | Card padding |
-| 8 | 32px | Large gaps |
-| 12 | 48px | Sections |
+<div className="space-y-2">
+  <Label htmlFor="email">Email</Label>
+  <Input id="email" type="email" placeholder="user@example.com" />
+</div>
+```
 
-### Border Radius
-| Token | Value | Use |
-|-------|-------|-----|
-| sm | 4px | Subtle |
-| md | 8px | Buttons |
-| lg | 12px | Cards |
-| 2xl | 24px | Containers |
-| full | 9999px | Pills |
+### Dialog/Modal
 
-## Effects
+```tsx
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
+
+<Dialog open={open} onOpenChange={setOpen}>
+  <DialogContent>
+    <DialogHeader>
+      <DialogTitle>Confirm Action</DialogTitle>
+    </DialogHeader>
+    {/* Content */}
+  </DialogContent>
+</Dialog>
+```
+
+## Visual Effects
 
 ### Glassmorphism
+
 ```css
 .glass {
   background: hsl(var(--card) / 0.5);
@@ -87,88 +122,70 @@ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 ```
 
-### Gradients
+### Gradient Backgrounds
+
 ```css
 .bg-gradient {
-  background: linear-gradient(135deg, var(--brand-primary), var(--brand-accent));
+  background: linear-gradient(
+    135deg,
+    var(--primary),
+    var(--accent)
+  );
 }
 ```
 
-## Animations
+## Dark Mode Implementation
 
-### GPU-Accelerated Only
-```css
-/* DO animate */
-transform: translateY(-4px);
-opacity: 0.5;
+### Next.js + next-themes
 
-/* NEVER animate */
-width, height, margin, padding
-```
-
-### Timing
-| Token | Duration | Use |
-|-------|----------|-----|
-| fast | 100ms | Micro-interactions |
-| base | 200ms | Transitions |
-| slow | 300ms | Complex animations |
-
-## Component Patterns (shadcn/ui)
-
-### Buttons
 ```tsx
-import { Button } from '@/components/ui/button';
+// app/layout.tsx
+import { ThemeProvider } from 'next-themes';
 
-<Button>Primary</Button>
-<Button variant="outline">Secondary</Button>
-<Button variant="destructive">Delete</Button>
-<Button variant="ghost">Cancel</Button>
+export default function RootLayout({ children }) {
+  return (
+    <html suppressHydrationWarning>
+      <body>
+        <ThemeProvider attribute="class" defaultTheme="system">
+          {children}
+        </ThemeProvider>
+      </body>
+    </html>
+  );
+}
 ```
 
-### Cards
+### Theme Toggle
+
 ```tsx
-<div className="glass rounded-2xl p-6">
-  {/* Content */}
-</div>
+import { useTheme } from 'next-themes';
+
+function ThemeToggle() {
+  const { theme, setTheme } = useTheme();
+  return (
+    <button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
+      Toggle theme
+    </button>
+  );
+}
 ```
-
-### Loading
-```tsx
-<div className="animate-pulse space-y-4">
-  <div className="h-8 bg-muted rounded w-3/4" />
-  <div className="h-4 bg-muted rounded" />
-</div>
-```
-
-## Accessibility (WCAG AA)
-
-### Focus States
-```css
-focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2
-```
-
-### Contrast
-- Text: 4.5:1 minimum
-- Large text: 3:1 minimum
-- UI components: 3:1 minimum
-
-### Keyboard
-- Tab to navigate
-- Enter/Space to activate
-- Escape to close
-- Arrow keys for menus
 
 ## Asset Organization
 
 ```
 public/
-├── images/        # Logo, OG image
-├── favicons/      # Favicon files
+├── images/
+│   ├── logo.svg
+│   └── og-image.png    # 1200x630, < 1MB
+├── favicons/
+│   ├── favicon.ico
+│   ├── apple-touch-icon.png
+│   └── favicon-32x32.png
 └── site.webmanifest
 ```
 
 ## See Also
 
-- [Design Patterns](./../_shared/DESIGN_PATTERNS.md) - Typography, spacing
-- [Code Review Standards](./../_shared/CODE_REVIEW_STANDARDS.md) - Accessibility
-- [UX Principles](./../_shared/UX_PRINCIPLES.md) - Visual hierarchy
+- [Generic Design System](../generic-design-system/SKILL.md) - Token organization, spacing
+- [Design Patterns](../_shared/DESIGN_PATTERNS.md) - Atomic Design, component docs
+- [UX Principles](../_shared/UX_PRINCIPLES.md) - Visual hierarchy
