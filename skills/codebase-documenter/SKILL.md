@@ -7,6 +7,21 @@ description: This skill should be used when writing documentation for codebases,
 
 Create comprehensive, beginner-friendly documentation for any codebase.
 
+## When to Use
+
+**Use for:**
+- Writing or updating README files
+- Creating architecture documentation
+- Adding meaningful code comments
+- Documenting APIs and endpoints
+- Creating getting-started guides
+- Explaining project structure
+
+**Don't use when:**
+- Code review → use `generic-code-reviewer`
+- UX design decisions → use `generic-ux-designer`
+- Adding code features → use `generic-feature-developer`
+
 ## Core Principles
 
 1. **Start with "Why"** - Explain purpose before implementation
@@ -16,6 +31,13 @@ Create comprehensive, beginner-friendly documentation for any codebase.
 5. **Assume No Prior Knowledge** - Define terms, avoid jargon
 6. **Visual Aids** - Diagrams, file trees, flowcharts
 7. **Quick Wins** - Get something running in 5 minutes
+
+## Documentation Workflow
+
+1. **Analyze** - Entry points, dependencies, core concepts, configuration
+2. **Choose Type** - README → Architecture → API → Comments
+3. **Generate** - Use templates, customize for project
+4. **Verify** - Read as beginner, test examples
 
 ## Documentation Types
 
@@ -81,14 +103,9 @@ if (quota.percentUsed > 80) showStorageWarning();
 [Error codes and meanings]
 ```
 
-## Documentation Workflow
+## Visual Patterns
 
-1. **Analyze** - Entry points, dependencies, core concepts, configuration
-2. **Choose Type** - README → Architecture → API → Comments
-3. **Generate** - Use templates, customize for project
-4. **Review** - Read as beginner, verify examples work
-
-## File Tree Pattern
+### File Tree
 ```
 project/
 ├── src/                    # Source code
@@ -99,7 +116,7 @@ project/
 └── package.json           # Dependencies
 ```
 
-## Data Flow Pattern
+### Data Flow
 ```
 User Request Flow:
 1. User submits → 2. Validation → 3. API → 4. Database → 5. Response
@@ -115,7 +132,7 @@ User Request Flow:
 [5] Form.tsx (updates UI)
 ```
 
-## Design Decision Pattern
+### Design Decision (ADR)
 ```markdown
 ## Why We Use [Technology]
 
@@ -125,7 +142,33 @@ User Request Flow:
 **Trade-offs:** [What we gave up]
 ```
 
+## Documentation Quality Checklist
+
+### Before Publishing
+- [ ] Quick start works in < 5 minutes
+- [ ] Code examples are copy-pasteable
+- [ ] File paths are accurate
+- [ ] Links work
+- [ ] Jargon is defined
+- [ ] Diagrams are included for complex flows
+
+### Common Mistakes to Avoid
+- Assuming reader knows the codebase
+- Outdated code examples
+- Missing prerequisites
+- No visual aids for complex systems
+- Explaining "what" without "why"
+
+## Verification Workflow
+
+After writing documentation:
+1. **Fresh Eyes Test** - Read as if you've never seen the codebase
+2. **Run Examples** - Copy-paste and verify they work
+3. **Check Links** - All internal/external links resolve
+4. **Beginner Review** - Would a new developer understand?
+5. **Update Check** - Does it reflect current code?
+
 ## See Also
 
-- [Code Review Standards](./../_shared/CODE_REVIEW_STANDARDS.md) - Documentation quality
+- [Code Review Standards](../_shared/CODE_REVIEW_STANDARDS.md) - Documentation quality
 - Project `CLAUDE.md` - Documentation rules
