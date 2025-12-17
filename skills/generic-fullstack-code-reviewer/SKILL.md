@@ -7,68 +7,147 @@ description: Review full-stack code for bugs, security vulnerabilities, performa
 
 Review Next.js/NestJS code against production quality standards.
 
-**Full Standards:** See [Code Review Standards](./../_shared/CODE_REVIEW_STANDARDS.md)
+**Extends:** [Generic Code Reviewer](../generic-code-reviewer/SKILL.md) - Read base skill for full code review methodology, P0/P1/P2 priority system, and judgment calls.
 
-## Pre-Commit Checklist
+## Pre-Commit Commands
 
-- [ ] Frontend build: `npm run build`
-- [ ] Backend tests: `npm run test`
-- [ ] No TypeScript errors
-- [ ] No console errors/warnings
-- [ ] Lint passing: `npm run lint`
+```bash
+# Frontend
+npm run build        # Next.js build
+npm run lint         # ESLint
 
-## Security Checks
+# Backend
+npm run test         # NestJS tests
+npm run type-check   # TypeScript
+```
+
+## Fullstack-Specific Checks
 
 ### Backend (NestJS)
-- Protected routes use auth guards
-- Input validated via DTOs (class-validator)
-- No raw SQL (use Prisma/ORM)
-- Secrets in `.env`, never committed
+
+**Authentication & Authorization:**
+```typescript
+// Protected routes MUST have auth guard
+@UseGuards(JwtAuthGuard)
+@Get('profile')
+getProfile(@CurrentUser() user: User) {
+  return this.userService.findById(user.id);
+}
+```
+
+**Input Validation (DTOs):**
+```typescript
+// All inputs validated via class-validator
+export class CreateUserDto {
+  @IsEmail()
+  email: string;
+
+  @IsString()
+  @MinLength(8)
+  password: string;
+}
+```
+
+**Database Safety:**
+```typescript
+// Use Prisma, never raw SQL
+// ✓ Good
+await this.prisma.user.findUnique({ where: { id } });
+
+// ✗ Bad
+await this.prisma.$queryRaw`SELECT * FROM users WHERE id = ${id}`;
+```
 
 ### Frontend (Next.js)
-- Sanitize user input
-- Use `unknown` type for external data
-- No dynamic code execution
-- Proper auth cookie handling
 
-## Performance Requirements
+**Server vs Client Components:**
+```typescript
+// Default: Server Component (can fetch data, no hooks)
+export default async function Page() {
+  const data = await getData();
+  return <div>{data}</div>;
+}
 
-- Images optimized (OG < 1MB)
-- Lazy load non-essential components
-- GPU-accelerated animations only
-- Bundle size awareness
+// Client: Interactive (hooks, event handlers)
+'use client';
+export default function Interactive() {
+  const [state, setState] = useState();
+  return <button onClick={() => setState(...)}>Click</button>;
+}
+```
 
-## Accessibility (WCAG AA)
+**API Route Patterns:**
+```typescript
+// app/api/[route]/route.ts
+export async function POST(request: Request) {
+  const body = await request.json();
+  // Validate body before processing
+  return NextResponse.json({ success: true });
+}
+```
 
-- Focus indicators on interactive elements
-- Keyboard navigation (Tab, Enter, Escape)
-- Color contrast >= 4.5:1
-- ARIA labels on icon-only buttons
-- Focus trapped in modals
+### Cross-Stack Consistency
 
-## Type Safety
+**Shared Types:**
+```typescript
+// types/api.ts - Shared between frontend/backend
+interface UserResponse {
+  id: string;
+  email: string;
+  createdAt: string;
+}
+```
 
-- TypeScript strict mode
-- No `any` for user input
-- Validate external API data
-- ORM types for database models
+**API Contract:**
+- Request DTOs match frontend payloads
+- Response types match frontend expectations
+- Error format consistent (status, message, errors[])
 
-## Design System
+### Environment & Secrets
 
-- Use theme colors only
-- Follow component patterns
-- Dark/light mode support
-- Consistent spacing (4px base)
+```bash
+# .env (never committed)
+DATABASE_URL=postgres://...
+JWT_SECRET=...
 
-## Code Organization
+# Check .env.example exists with placeholder values
+# Verify .gitignore includes .env
+```
 
-- Assets in organized folders
-- Single source of truth
-- Minimal changes per task
-- Follow existing patterns
+## Prisma Checks
+
+```bash
+# After schema changes
+npx prisma migrate dev --name description
+npx prisma generate
+```
+
+- Migrations are reversible
+- Types regenerated after schema changes
+- Relations properly defined
+
+## Testing Requirements
+
+**Backend:**
+- Unit tests for services
+- E2E tests for API endpoints
+- Mocked database for tests
+
+**Frontend:**
+- Component tests for interactivity
+- API mocking for integration tests
+
+## Quick Fullstack Checklist
+
+- [ ] Auth guards on protected routes
+- [ ] DTOs validate all inputs
+- [ ] No raw SQL queries
+- [ ] Shared types match
+- [ ] .env not committed
+- [ ] Prisma types current
 
 ## See Also
 
-- [Code Review Standards](./../_shared/CODE_REVIEW_STANDARDS.md) - Full requirements
-- [Design Patterns](./../_shared/DESIGN_PATTERNS.md) - UI consistency
-- Project `CLAUDE.md` - Workflow rules
+- [Generic Code Reviewer](../generic-code-reviewer/SKILL.md) - Base methodology
+- [Code Review Standards](../_shared/CODE_REVIEW_STANDARDS.md) - Full requirements
+- [Design Patterns](../_shared/DESIGN_PATTERNS.md) - UI consistency
