@@ -7,77 +7,120 @@ description: Review static site code for bugs, security issues, performance prob
 
 Review HTML/CSS/JS code against production quality standards.
 
-**Full Standards:** See [Code Review Standards](./../_shared/CODE_REVIEW_STANDARDS.md)
+**Extends:** [Generic Code Reviewer](../generic-code-reviewer/SKILL.md) - Read base skill for full code review methodology, P0/P1/P2 priority system, and judgment calls.
 
 ## Pre-Commit Checklist
 
+```bash
+# Local testing
+python3 -m http.server 8000
+
+# Visual inspection
+# - Test in Chrome, Firefox, Safari
+# - Test at 375px, 768px, 1024px
+# - Lighthouse audit
+```
+
 - [ ] Visual inspection passed
-- [ ] Works in all browsers
-- [ ] Responsive tested
-- [ ] Lighthouse 95+
-- [ ] Documentation updated
+- [ ] Works in all major browsers
+- [ ] Responsive at all breakpoints
+- [ ] Lighthouse Performance 95+
 
-## Code Quality
+## Static-Specific Checks
 
-### HTML
-- Semantic tags (`<h1>`, `<a>`, `<nav>`)
-- Self-closing void elements
-- Meaningful alt text
-- Proper indentation (2 spaces)
+### No Build Tools Verification
 
-### CSS
-- Mobile-first approach
-- Avoid `!important`
-- CSS custom properties for colors
-- Comment complex animations
-- Consistent naming
+Files should be served as-is:
+- Pure `.html` files (no templating)
+- Pure `.css` files (no Sass/Less)
+- Pure `.js` files (no bundling/transpilation)
+- No `node_modules` required for production
 
-### JavaScript
-- ES6+ syntax (const, let, arrow functions)
-- Event delegation where possible
-- No jQuery dependencies
-- Comments for non-obvious logic
-- Defensive null checks
+### Page Weight Targets (P1)
 
-## Security
+| Target | Max Size |
+|--------|----------|
+| HTML | < 5KB |
+| CSS | < 10KB |
+| JavaScript | < 5KB |
+| **Total (excl. images)** | **< 50KB** |
+| Images (each) | < 500KB |
 
-- No exposed API keys
-- No tracking scripts (if privacy-first)
-- Content validation in scripts
-- No unsanitized user input
+### HTML Quality
 
-## Performance Requirements
+```html
+<!-- Semantic structure -->
+<header>
+  <nav><a href="#">Link</a></nav>
+</header>
+<main>
+  <article>
+    <h1>Title</h1>
+    <p>Content</p>
+  </article>
+</main>
+<footer></footer>
 
-- Total page weight: < 50KB (excluding images)
-- Images: Optimized, < 500KB each
-- First Contentful Paint: < 1s
-- Lighthouse Performance: 95+
+<!-- Void elements (no closing slash needed in HTML5) -->
+<img src="image.jpg" alt="Description">
+<br>
+<input type="text">
+```
 
-## Accessibility (WCAG AA)
+### CSS Quality
 
-- Semantic HTML structure
-- Alt text for all images
-- Keyboard navigation (Tab, Enter)
-- ARIA labels where needed
-- Color contrast > 4.5:1
-- Focus indicators visible
+```css
+/* CSS custom properties for theming */
+:root {
+  --bg-primary: #000000;
+  --text-primary: #ffffff;
+  --accent: #00ff00;
+}
 
-## Design System
+/* Mobile-first responsive */
+.container {
+  padding: 1rem;
+}
 
-- Use defined color palette only
-- Follow typography patterns
-- Consistent spacing
-- Match established aesthetic
+@media (min-width: 768px) {
+  .container {
+    padding: 2rem;
+  }
+}
 
-## Surgical Simplicity
+/* Avoid !important - signals specificity problems */
+```
 
-- Changes impact minimal code
-- Every line intentional
-- No commented-out code
-- Clean and documented
+### JavaScript Quality
+
+```javascript
+// ES6+ syntax (modern browsers support it)
+const items = document.querySelectorAll('.item');
+const handler = (e) => console.log(e.target);
+
+// Event delegation (preferred)
+document.body.addEventListener('click', (e) => {
+  if (e.target.matches('.button')) {
+    handleClick(e.target);
+  }
+});
+
+// No jQuery dependencies
+// No framework overhead
+```
+
+## Lighthouse Requirements (P1)
+
+| Metric | Target |
+|--------|--------|
+| Performance | 95+ |
+| Accessibility | 90+ |
+| Best Practices | 100 |
+| SEO | 100 |
+| First Contentful Paint | < 1s |
 
 ## See Also
 
-- [Code Review Standards](./../_shared/CODE_REVIEW_STANDARDS.md) - Full requirements
-- [Design Patterns](./../_shared/DESIGN_PATTERNS.md) - UI consistency
-- Project `CLAUDE.md` - Workflow rules
+- [Generic Code Reviewer](../generic-code-reviewer/SKILL.md) - Base methodology
+- [Code Review Standards](../_shared/CODE_REVIEW_STANDARDS.md) - Full requirements
+- [Design Patterns](../_shared/DESIGN_PATTERNS.md) - UI consistency

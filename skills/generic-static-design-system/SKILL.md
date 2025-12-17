@@ -5,65 +5,109 @@ description: Complete design system reference for static HTML/CSS/JS sites. Cove
 
 # Static Site Design System
 
-Design system reference for minimalist static sites (HTML/CSS/JS).
+Design system patterns for minimalist static sites (pure HTML/CSS/JS).
 
-**Foundational Reference:** See [Design Patterns](./../_shared/DESIGN_PATTERNS.md) for core concepts.
+**Extends:** [Generic Design System](../generic-design-system/SKILL.md) - Read base skill for color theory, typography scale, spacing system, and component states.
 
-## Color Palette
+## Pure CSS Approach
 
-**Define per project (typically limited):**
+No preprocessors, no Tailwind, no build tools. Just CSS.
+
+### CSS Custom Properties
+
 ```css
 :root {
+  /* Brand colors - keep palette minimal */
   --bg-primary: #000000;
-  --text-primary: #FFFFFF;
-  --text-accent: #00FF00;  /* Brand accent */
+  --text-primary: #ffffff;
+  --accent: #00ff00;
+
+  /* Spacing */
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 2rem;
+
+  /* Timing */
+  --transition-fast: 0.15s;
+  --transition-base: 0.3s;
 }
 ```
 
-**Color Usage:**
-- Background: Primary bg
-- Default text: Primary text
-- Hover/active: Accent color
-- Minimal palette = high impact
+### System Font Stack (No Web Fonts)
 
-## Typography
-
-### System Font Stack
 ```css
-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+/* System fonts = zero load time */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+code {
+  font-family: 'SF Mono', Monaco, 'Courier New', monospace;
+}
 ```
 
-### Size Scale
+### Responsive Typography with clamp()
+
 ```css
-font-size: clamp(1rem, 3vw, 1.5rem);     /* Responsive body */
-font-size: clamp(1.5rem, 5vw, 2.5rem);   /* Responsive heading */
+/* Fluid sizing, no media queries needed */
+h1 {
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
+}
+
+body {
+  font-size: clamp(1rem, 3vw, 1.125rem);
+}
 ```
 
-### Styling
-- Letter-spacing for impact
-- Text-transform for consistency
-- Line-height for readability
+## CSS-Only Animations
 
-## Component Patterns
+### Keyframe Animations
 
-### Interactive Container
-```html
-<div id="title-container">
-  <h1 id="title">Title</h1>
-  <span id="arrow">&#9662;</span>
-</div>
+```css
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
 ```
 
-### Dropdown Menu
-```html
-<div id="menu" class="hidden">
-  <a href="#">Link 1</a>
-  <a href="#">Link 2</a>
-  <a href="#">Link 3</a>
-</div>
+### Transition Patterns
+
+```css
+/* Hover effect - GPU accelerated */
+.link {
+  transition: transform var(--transition-base) ease,
+              color var(--transition-base) ease;
+}
+
+.link:hover {
+  transform: translateY(-2px);
+  color: var(--accent);
+}
 ```
 
-### CSS Structure
+### Staggered Animation with nth-child
+
+```css
+.menu a {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+}
+
+.menu.visible a { opacity: 1; transform: translateY(0); }
+.menu.visible a:nth-child(1) { transition-delay: 0.1s; }
+.menu.visible a:nth-child(2) { transition-delay: 0.2s; }
+.menu.visible a:nth-child(3) { transition-delay: 0.3s; }
+```
+
+## CSS-Only Interactive Patterns
+
+### Hidden/Visible Toggle
+
 ```css
 .hidden {
   max-height: 0;
@@ -72,103 +116,97 @@ font-size: clamp(1.5rem, 5vw, 2.5rem);   /* Responsive heading */
 }
 
 .visible {
-  max-height: 300px;
+  max-height: 300px; /* Must be > content height */
 }
 ```
 
-## Animations
+### Icon Rotation
 
-### Pulse Animation
 ```css
-@keyframes pulse {
-  0%, 100% { color: var(--text-primary); }
-  50% { color: var(--text-accent); }
-}
-
-.pulse {
-  animation: pulse 1s infinite;
-}
-```
-
-### Rotation
-```css
-.rotate {
+.arrow {
   transition: transform 0.3s ease;
 }
 
-.rotated {
+.rotated .arrow {
   transform: rotate(180deg);
 }
 ```
 
-### Stagger Fade
+### Focus States
+
 ```css
-.menu a {
-  opacity: 0;
-  transform: translateY(-10px);
-  transition: all 0.3s ease;
-}
-
-.menu.visible a:nth-child(1) { transition-delay: 0.1s; }
-.menu.visible a:nth-child(2) { transition-delay: 0.2s; }
-.menu.visible a:nth-child(3) { transition-delay: 0.3s; }
-
-.menu.visible a {
-  opacity: 1;
-  transform: translateY(0);
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 ```
 
-## Layout
+## Component Patterns (No JS)
 
-### Page Structure
-```
-body
-├── #container (centered)
-│   ├── #title
-│   └── #arrow
-├── #menu (hidden by default)
-│   └── links
-└── #content
+### Accessible Button
+
+```html
+<button class="btn" type="button">
+  Click Me
+</button>
 ```
 
-### Responsive Breakpoints
-- Mobile: 375px (base)
-- Tablet: 768px
-- Desktop: 1024px+
+```css
+.btn {
+  padding: var(--space-sm) var(--space-md);
+  background: transparent;
+  border: 1px solid var(--text-primary);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all var(--transition-base) ease;
+}
 
-## Accessibility
+.btn:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg-primary);
+}
+```
 
-### Color Contrast
-- Verify 4.5:1 minimum for text
-- Verify 3:1 for large text
+### Navigation
 
-### Keyboard Navigation
-- Tab to interactive elements
-- Enter/Space to activate
-- Focus indicators visible
+```html
+<nav>
+  <a href="#section1">Section 1</a>
+  <a href="#section2">Section 2</a>
+</nav>
+```
 
-### Screen Reader
-- Semantic HTML (`<h1>`, `<a>`, `<nav>`)
-- Alt text on images
-- ARIA labels where needed
+```css
+nav a {
+  padding: var(--space-sm);
+  text-decoration: none;
+  color: var(--text-primary);
+}
 
-## Performance
+nav a:hover {
+  color: var(--accent);
+}
+```
 
-### Page Weight Targets
-- HTML: < 5KB
-- CSS: < 10KB
-- JS: < 5KB
-- Total: < 50KB (excluding images)
+## Performance Targets
 
-### Lighthouse
-- Performance: 95+
-- Accessibility: 90+
-- Best Practices: 100
-- SEO: 100
+| File | Max Size |
+|------|----------|
+| HTML | < 5KB |
+| CSS | < 10KB |
+| JS | < 5KB |
+| Total | < 50KB |
+
+| Lighthouse | Target |
+|------------|--------|
+| Performance | 95+ |
+| Accessibility | 90+ |
+| Best Practices | 100 |
 
 ## See Also
 
-- [Design Patterns](./../_shared/DESIGN_PATTERNS.md) - Core patterns
-- [Code Review Standards](./../_shared/CODE_REVIEW_STANDARDS.md) - Accessibility
-- [UX Principles](./../_shared/UX_PRINCIPLES.md) - User psychology
+- [Generic Design System](../generic-design-system/SKILL.md) - Token organization, spacing
+- [Design Patterns](../_shared/DESIGN_PATTERNS.md) - Core patterns
+- [UX Principles](../_shared/UX_PRINCIPLES.md) - Visual hierarchy
