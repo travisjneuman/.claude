@@ -7,6 +7,20 @@ description: This skill should be used when writing test cases, fixing bugs, ana
 
 Systematic testing methodologies and debugging techniques for JS/TS applications.
 
+## When to Use
+
+**Use for:**
+- Writing unit, integration, or E2E tests
+- Fixing bugs and debugging
+- Improving test coverage
+- Analyzing code for potential issues
+- Security and performance testing
+
+**Don't use when:**
+- Code review → use `generic-code-reviewer`
+- Technical debt → use `tech-debt-analyzer`
+- Feature development → use `generic-feature-developer`
+
 ## Testing Stack by Project
 
 | Project Type | Unit Tests | Component | E2E |
@@ -50,6 +64,27 @@ it('creates item when user clicks Add', async () => {
 });
 ```
 
+### E2E Tests (Playwright)
+```typescript
+import { test, expect } from '@playwright/test';
+
+test('user can complete checkout', async ({ page }) => {
+  await page.goto('/products');
+
+  // Add to cart
+  await page.click('button:has-text("Add to Cart")');
+  await page.click('a:has-text("Cart")');
+
+  // Checkout
+  await page.click('button:has-text("Checkout")');
+  await page.fill('[name="email"]', 'test@example.com');
+  await page.click('button:has-text("Place Order")');
+
+  // Verify
+  await expect(page.locator('h1')).toContainText('Order Confirmed');
+});
+```
+
 ### Integration Tests
 ```typescript
 test('POST /items creates item', async () => {
@@ -69,6 +104,16 @@ test('POST /items creates item', async () => {
 3. **Root Cause** - Trace execution, check assumptions, git blame
 4. **Fix** - Write failing test first, implement fix
 5. **Validate** - Run full suite, test edge cases
+
+## Debugging Checklist
+
+When debugging an issue:
+- [ ] Can reproduce consistently
+- [ ] Minimal reproduction created
+- [ ] Console/network logs checked
+- [ ] State at failure point inspected
+- [ ] Git blame checked for recent changes
+- [ ] Failing test written before fix
 
 ## Common Bug Patterns
 
@@ -156,5 +201,5 @@ test('handles large datasets efficiently', () => {
 
 ## See Also
 
-- [Code Review Standards](./../_shared/CODE_REVIEW_STANDARDS.md) - Quality requirements
+- [Code Review Standards](../_shared/CODE_REVIEW_STANDARDS.md) - Quality requirements
 - Project `CLAUDE.md` - Testing rules
