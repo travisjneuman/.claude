@@ -5,116 +5,282 @@ description: Guide feature development for React applications with architecture 
 
 # React Feature Developer
 
-Guide feature development with React architecture patterns and best practices.
+Guide feature development with React architecture patterns.
 
-## Architecture Patterns
+**Extends:** [Generic Feature Developer](../generic-feature-developer/SKILL.md) - Read base skill for development workflow, scope assessment, and build vs integrate decisions.
 
-### State Management (Zustand)
+## React Architecture
 
-**Store Best Practices:**
-- Use persist middleware for localStorage backup
-- Migrate large data to IndexedDB (>1MB)
-- Keep stores focused (single responsibility)
-- Actions return void (update state directly)
+### Project Structure
 
-**Pattern:**
+```
+src/
+├── components/
+│   ├── ui/          # Reusable primitives (Button, Input)
+│   ├── features/    # Feature-specific components
+│   └── layout/      # Layout components (Header, Sidebar)
+├── hooks/           # Custom hooks (useAuth, useStore)
+├── stores/          # Zustand stores
+├── services/        # API clients, IndexedDB wrappers
+├── types/           # TypeScript interfaces
+└── lib/             # Utilities
+```
+
+## State Management Patterns
+
+### Zustand Store (Preferred)
+
 ```typescript
 // stores/useFeatureStore.ts
 interface FeatureState {
   items: Item[];
+  isLoading: boolean;
+  // Actions
   addItem: (item: Item) => void;
+  removeItem: (id: string) => void;
 }
 
 const useFeatureStore = create<FeatureState>()(
   persist(
     (set) => ({
       items: [],
-      addItem: (item) => set((state) => ({ items: [...state.items, item] })),
+      isLoading: false,
+      addItem: (item) => set((s) => ({ items: [...s.items, item] })),
+      removeItem: (id) => set((s) => ({
+        items: s.items.filter(i => i.id !== id)
+      })),
     }),
-    { name: 'feature-storage' }
+    {
+      name: 'feature-storage',
+      version: 1,
+      migrate: (state, version) => {
+        // Handle migrations between versions
+        return state as FeatureState;
+      }
+    }
   )
 );
 ```
 
-### Data Persistence (IndexedDB)
+### Zustand Selectors (Performance)
 
-**When to use:**
-- Large data (images, file attachments)
-- > 5MB total (localStorage limit)
-- Binary data
-
-**Pattern:**
 ```typescript
-// Use service wrapper, not direct API
-await indexedDBService.setItem('key', largeData);
-const data = await indexedDBService.getItem('key');
+// Avoid re-renders with selectors
+const items = useFeatureStore(state => state.items);
+const addItem = useFeatureStore(state => state.addItem);
+
+// Shallow compare for objects
+import { shallow } from 'zustand/shallow';
+const { items, isLoading } = useFeatureStore(
+  state => ({ items: state.items, isLoading: state.isLoading }),
+  shallow
+);
 ```
 
-### Lazy Loading Strategy
+### Context vs Zustand Decision
 
-**Lazy load:**
-- Pages (Settings, Profile)
-- Heavy components (>20KB)
-- Rich text editors
-- Charts/visualizations
+| Use Context | Use Zustand |
+|-------------|-------------|
+| Theme, locale (rarely changes) | Frequently updated data |
+| Authentication state | Complex state with actions |
+| Provider already exists | Need persistence |
+| Prop drilling 1-2 levels | Cross-cutting concern |
 
-**Pattern:**
+## Server State (React Query)
+
 ```typescript
-const Settings = lazy(() => import('./pages/Settings'));
-const Chart = lazy(() => import('./components/Chart'));
+// Server state - React Query
+const { data, isLoading, error } = useQuery({
+  queryKey: ['items', userId],
+  queryFn: () => fetchItems(userId),
+  staleTime: 5 * 60 * 1000, // 5 minutes
+});
+
+// Mutations
+const mutation = useMutation({
+  mutationFn: createItem,
+  onSuccess: () => {
+    queryClient.invalidateQueries({ queryKey: ['items'] });
+  },
+});
 ```
 
-## Feature Integration Checklist
+## IndexedDB Integration
 
-### Before Starting
-- [ ] Read existing code in affected areas
-- [ ] Check for similar patterns to reuse
-- [ ] Plan data flow: UI → Store → Persistence
+### When to Use
+
+| Scenario | Solution |
+|----------|----------|
+| < 5MB total | localStorage via Zustand persist |
+| > 5MB total | IndexedDB |
+| Binary data (images, files) | IndexedDB |
+| Simple key-value | localStorage |
+| Complex queries | IndexedDB |
+
+### Service Wrapper Pattern
+
+```typescript
+// services/indexedDBService.ts
+class IndexedDBService {
+  private db: IDBDatabase | null = null;
+
+  async init() {
+    return new Promise<void>((resolve, reject) => {
+      const request = indexedDB.open('AppDB', 1);
+      request.onerror = () => reject(request.error);
+      request.onsuccess = () => {
+        this.db = request.result;
+        resolve();
+      };
+      request.onupgradeneeded = (event) => {
+        const db = (event.target as IDBOpenDBRequest).result;
+        db.createObjectStore('items', { keyPath: 'id' });
+      };
+    });
+  }
+
+  async setItem<T>(store: string, value: T): Promise<void> {
+    // Implementation
+  }
+
+  async getItem<T>(store: string, key: string): Promise<T | null> {
+    // Implementation
+  }
+}
+
+export const indexedDBService = new IndexedDBService();
+```
+
+## Lazy Loading
+
+### Component Lazy Loading
+
+```typescript
+// Heavy components (>20KB)
+const HeavyChart = lazy(() => import('./HeavyChart'));
+const RichTextEditor = lazy(() => import('./RichTextEditor'));
+
+// Pages
+const SettingsPage = lazy(() => import('./pages/Settings'));
+
+// Usage with Suspense
+<Suspense fallback={<Skeleton />}>
+  <HeavyChart data={data} />
+</Suspense>
+```
+
+### Route-Level Code Splitting
+
+```typescript
+// React Router example
+const routes = [
+  {
+    path: '/dashboard',
+    element: <DashboardLayout />,
+    children: [
+      {
+        path: 'settings',
+        lazy: () => import('./pages/Settings'),
+      },
+    ],
+  },
+];
+```
+
+## Custom Hook Patterns
+
+### Feature Hook
+
+```typescript
+// hooks/useItems.ts
+function useItems() {
+  const items = useFeatureStore(s => s.items);
+  const addItem = useFeatureStore(s => s.addItem);
+
+  const sortedItems = useMemo(() =>
+    [...items].sort((a, b) => b.createdAt - a.createdAt),
+    [items]
+  );
+
+  return { items: sortedItems, addItem };
+}
+```
+
+### Compound Hook (Combining Sources)
+
+```typescript
+// hooks/useDashboard.ts
+function useDashboard() {
+  // Local state
+  const [filter, setFilter] = useState('all');
+
+  // Server state
+  const { data: items } = useQuery({ queryKey: ['items'] });
+
+  // Client state
+  const preferences = usePreferencesStore(s => s.dashboard);
+
+  // Derived
+  const filteredItems = useMemo(() =>
+    items?.filter(i => filter === 'all' || i.status === filter),
+    [items, filter]
+  );
+
+  return { filter, setFilter, items: filteredItems, preferences };
+}
+```
+
+## Component Composition
+
+### Compound Components
+
+```tsx
+// Usage: <Tabs><Tabs.List /><Tabs.Panel /></Tabs>
+const TabsContext = createContext<TabsContextValue | null>(null);
+
+function Tabs({ children, defaultValue }: TabsProps) {
+  const [active, setActive] = useState(defaultValue);
+  return (
+    <TabsContext.Provider value={{ active, setActive }}>
+      {children}
+    </TabsContext.Provider>
+  );
+}
+
+Tabs.List = function TabsList({ children }: { children: ReactNode }) {
+  return <div role="tablist">{children}</div>;
+};
+
+Tabs.Panel = function TabsPanel({ value, children }: TabsPanelProps) {
+  const { active } = useContext(TabsContext)!;
+  if (value !== active) return null;
+  return <div role="tabpanel">{children}</div>;
+};
+```
+
+## React Feature Checklist
+
+**Before Starting:**
+- [ ] Read CLAUDE.md for project patterns
+- [ ] Check existing components for reuse
+- [ ] Plan state management approach
 - [ ] Estimate bundle size impact
 
-### During Development
-- [ ] Follow design system
-- [ ] Add TypeScript types (strict mode)
+**During Development:**
+- [ ] Follow project design system
+- [ ] TypeScript strict mode
 - [ ] Implement keyboard navigation
 - [ ] Add ARIA labels
-- [ ] Test dark mode
+- [ ] Support dark mode
 
-### Before Completion
-- [ ] Write tests
+**Before Completion:**
+- [ ] Write unit tests
+- [ ] Lazy load heavy components
 - [ ] Check bundle size: `npm run build`
-- [ ] Verify lazy loading works
-- [ ] Review with code reviewer skill
-
-## Common Patterns
-
-### Adding New Store
-1. Create `stores/useFeatureStore.ts`
-2. Use Zustand with persist
-3. Define TypeScript interface
-4. Export actions and selectors
-
-### Adding Component
-1. Create in appropriate directory
-2. Use existing design system patterns
-3. Lazy load if heavy
-4. Test responsiveness
-
-### IndexedDB Integration
-1. Use service wrapper (not direct API)
-2. Check quota before large writes
-3. Handle QuotaExceededError
-4. Provide user feedback
-
-## Performance Guidelines
-
-- Bundle size < 100KB gzipped initial
-- Lazy load non-essential code
-- GPU-accelerated animations only
-- Debounce user input
-- Memoize expensive calculations
+- [ ] Review with code-reviewer skill
 
 ## See Also
 
-- [Code Review Standards](./../_shared/CODE_REVIEW_STANDARDS.md) - Quality requirements
-- [Design Patterns](./../_shared/DESIGN_PATTERNS.md) - UI patterns
-- Project `CLAUDE.md` - Workflow rules
+- [Generic Feature Developer](../generic-feature-developer/SKILL.md) - Workflow, decisions
+- [Code Review Standards](../_shared/CODE_REVIEW_STANDARDS.md) - Quality requirements
+- [Design Patterns](../_shared/DESIGN_PATTERNS.md) - UI patterns

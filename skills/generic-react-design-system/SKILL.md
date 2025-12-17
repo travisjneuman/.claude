@@ -5,177 +5,69 @@ description: Complete design system reference for React applications. Covers col
 
 # React Design System
 
-Complete design system reference for React/TypeScript applications.
+Design system patterns for React/TypeScript applications.
 
-**Foundational Reference:** See [Design Patterns](./../_shared/DESIGN_PATTERNS.md) for core concepts.
+**Extends:** [Generic Design System](../generic-design-system/SKILL.md) - Read base skill for color theory, typography scale, spacing system, and component states.
 
-## Color System
+## Tailwind Configuration
 
-### Project Colors (Define in CLAUDE.md or tailwind.config.js)
-
-```css
-/* Brand colors - customize per project */
---primary: #3b82f6;      /* Main brand color */
---secondary: #10b981;    /* Supporting color */
---accent: #8b5cf6;       /* Highlight/CTA */
-
-/* Surfaces */
---background: #ffffff;   /* Light mode */
---background-dark: #121212; /* Dark mode (not pure black) */
---foreground: #000000;
---muted: #64748b;
-
-/* Semantic */
---success: #10b981;
---warning: #f59e0b;
---error: #ef4444;
---info: #3b82f6;
+```js
+// tailwind.config.js
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        primary: 'var(--primary)',
+        secondary: 'var(--secondary)',
+        accent: 'var(--accent)',
+      },
+      spacing: {
+        '18': '72px',
+      },
+      borderRadius: {
+        'xl': '16px',
+      }
+    }
+  }
+}
 ```
 
-### Dark Mode Strategy
+### CSS Variables Setup
 
 ```css
-:root { --background: #ffffff; --foreground: #000000; }
+:root {
+  /* Brand - customize per project */
+  --primary: #3b82f6;
+  --primary-rgb: 59, 130, 246;
+  --secondary: #10b981;
+  --accent: #8b5cf6;
+
+  /* Surfaces */
+  --background: #ffffff;
+  --foreground: #000000;
+  --muted: #64748b;
+}
 
 [data-theme="dark"] {
-  --background: #121212;  /* Dark gray, easier on eyes */
+  --background: #121212;
   --foreground: #ffffff;
 }
-
-@media (prefers-color-scheme: dark) {
-  :root { --background: #121212; --foreground: #ffffff; }
-}
 ```
 
-## Typography
+## React Component Patterns
 
-### Font Stack
-
-```css
---font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
---font-mono: 'SF Mono', 'Fira Code', monospace;
-```
-
-### Type Scale
-
-| Size | Value | Use |
-|------|-------|-----|
-| xs | 12px | Captions, labels |
-| sm | 14px | Secondary text |
-| base | 16px | Body (default) |
-| lg | 18px | Subheadings |
-| xl | 20px | Headings |
-| 2xl | 24px | Section titles |
-| 3xl | 30px | Page titles |
-| 4xl | 36px | Hero |
-
-## Spacing System
-
-### 4px Base Unit
-
-| Token | Value | Use |
-|-------|-------|-----|
-| 1 | 4px | Tight (icon + text) |
-| 2 | 8px | Compact elements |
-| 3 | 12px | Form field spacing |
-| 4 | 16px | Component padding |
-| 6 | 24px | Card padding |
-| 8 | 32px | Large gaps |
-| 12 | 48px | Section dividers |
-
-### Border Radius
-
-| Token | Value | Use |
-|-------|-------|-----|
-| sm | 4px | Subtle |
-| md | 8px | Buttons, inputs |
-| lg | 12px | Cards |
-| xl | 16px | Modals |
-| full | 9999px | Pills, avatars |
-
-## Visual Effects
-
-### Glassmorphism
-
-```css
-.glass {
-  backdrop-filter: blur(12px) saturate(180%);
-  background: rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(148, 163, 184, 0.25);
-}
-
-.glass-dark {
-  background: rgba(255, 255, 255, 0.05);
-}
-```
-
-### Shadows
-
-```css
---shadow-soft: 0 4px 6px rgba(0, 0, 0, 0.1);
---shadow-medium: 0 10px 15px rgba(0, 0, 0, 0.15);
---shadow-floating: 0 25px 50px rgba(0, 0, 0, 0.3);
-
-/* Glow effects for accents */
---shadow-glow: 0 0 20px rgba(var(--primary-rgb), 0.4);
-```
-
-## Animations
-
-### Performance Requirements (Non-negotiable)
-
-**GPU-accelerated properties ONLY:**
-```css
-/* DO animate */
-transform: translateY(-4px);
-opacity: 0.5;
-filter: blur(10px);
-
-/* NEVER animate */
-width, height, margin, padding, top, left
-```
-
-### Timing
-
-| Token | Duration | Use |
-|-------|----------|-----|
-| fast | 100ms | Micro-interactions |
-| base | 200ms | Most transitions |
-| slow | 300ms | Complex animations |
-
-### Easing
-
-```css
---ease-default: cubic-bezier(0.4, 0, 0.2, 1);
---ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
-```
-
-### Hover Pattern
-
-```css
-.hover-lift {
-  transform: translateZ(0);
-  transition: transform 200ms, box-shadow 200ms;
-}
-
-.hover-lift:hover {
-  transform: translateY(-4px) translateZ(0);
-  box-shadow: var(--shadow-floating);
-}
-```
-
-## Component Patterns
-
-### Buttons
+### Button Variants
 
 ```tsx
 // Primary
-<button className="px-6 py-3 bg-primary text-white rounded-lg shadow hover:shadow-lg transition-all">
+<button className="px-6 py-3 bg-primary text-white rounded-lg shadow
+  hover:shadow-lg hover:-translate-y-0.5 transition-all">
   Primary
 </button>
 
 // Secondary
-<button className="px-6 py-3 border border-primary text-primary rounded-lg hover:bg-primary/10 transition-all">
+<button className="px-6 py-3 border border-primary text-primary rounded-lg
+  hover:bg-primary/10 transition-all">
   Secondary
 </button>
 
@@ -189,7 +81,8 @@ width, height, margin, padding, top, left
 
 ```tsx
 <input
-  className="w-full px-4 py-3 bg-white border border-slate-300 rounded-md focus:border-primary focus:ring-2 focus:ring-primary/50 transition-all"
+  className="w-full px-4 py-3 bg-white border border-slate-300 rounded-md
+    focus:border-primary focus:ring-2 focus:ring-primary/50 transition-all"
   placeholder="Enter text..."
 />
 ```
@@ -202,7 +95,7 @@ width, height, margin, padding, top, left
 </div>
 ```
 
-### Modals
+### Modals with Framer Motion
 
 ```tsx
 <motion.div
@@ -226,81 +119,143 @@ width, height, margin, padding, top, left
 </div>
 ```
 
-## Accessibility (WCAG AA)
+## Visual Effects
 
-### Focus States
+### Glassmorphism
+
+```css
+.glass {
+  backdrop-filter: blur(12px) saturate(180%);
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+}
+
+.glass-dark {
+  background: rgba(255, 255, 255, 0.05);
+}
+```
+
+### Shadows
+
+```css
+--shadow-soft: 0 4px 6px rgba(0, 0, 0, 0.1);
+--shadow-medium: 0 10px 15px rgba(0, 0, 0, 0.15);
+--shadow-floating: 0 25px 50px rgba(0, 0, 0, 0.3);
+--shadow-glow: 0 0 20px rgba(var(--primary-rgb), 0.4);
+```
+
+## Framer Motion Patterns
+
+### Hover Lift
+
+```tsx
+<motion.div
+  whileHover={{ y: -4 }}
+  transition={{ type: "spring", stiffness: 300 }}
+  className="card"
+>
+  {/* Content */}
+</motion.div>
+```
+
+### Page Transitions
+
+```tsx
+<motion.div
+  initial={{ opacity: 0, y: 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  exit={{ opacity: 0, y: -20 }}
+  transition={{ duration: 0.2 }}
+>
+  {/* Page content */}
+</motion.div>
+```
+
+### Stagger Children
+
+```tsx
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1 }
+  }
+};
+
+const item = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0 }
+};
+
+<motion.ul variants={container} initial="hidden" animate="show">
+  {items.map(i => <motion.li key={i} variants={item} />)}
+</motion.ul>
+```
+
+## Dark Mode Implementation
+
+### React Context Approach
+
+```tsx
+// ThemeProvider.tsx
+const ThemeContext = createContext<{
+  theme: 'light' | 'dark';
+  toggle: () => void;
+}>({ theme: 'light', toggle: () => {} });
+
+export function ThemeProvider({ children }: { children: ReactNode }) {
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+  }, [theme]);
+
+  return (
+    <ThemeContext.Provider value={{
+      theme,
+      toggle: () => setTheme(t => t === 'light' ? 'dark' : 'light')
+    }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+}
+```
+
+### System Preference Detection
+
+```tsx
+useEffect(() => {
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+  setTheme(prefersDark.matches ? 'dark' : 'light');
+
+  prefersDark.addEventListener('change', e =>
+    setTheme(e.matches ? 'dark' : 'light')
+  );
+}, []);
+```
+
+## Accessibility in React
+
+### Focus States (Tailwind)
 
 ```css
 *:focus-visible {
-  outline: 2px solid var(--primary);
-  outline-offset: 2px;
+  @apply outline-2 outline-primary outline-offset-2;
 }
 ```
 
-### Contrast Requirements
-
-| Use Case | Minimum |
-|----------|---------|
-| Body text | 4.5:1 |
-| Large text (18pt+) | 3:1 |
-| UI components | 3:1 |
-
-### ARIA Requirements
+### Skip Link
 
 ```tsx
-// Icon-only buttons
-<button aria-label="Close modal"><X className="w-5 h-5" /></button>
-
-// Dialogs
-<div role="dialog" aria-modal="true" aria-labelledby="title">
-  <h2 id="title">Title</h2>
-</div>
-```
-
-## Responsive Breakpoints
-
-| Token | Min Width | Devices |
-|-------|-----------|---------|
-| sm | 640px | Large phones |
-| md | 768px | Tablets |
-| lg | 1024px | Laptops |
-| xl | 1280px | Desktops |
-
-## Implementation
-
-### Tailwind Config Example
-
-```js
-module.exports = {
-  theme: {
-    extend: {
-      colors: {
-        primary: 'var(--primary)',
-        secondary: 'var(--secondary)',
-      },
-      spacing: {
-        '18': '72px',
-      },
-      borderRadius: {
-        'xl': '16px',
-      }
-    }
-  }
-}
-```
-
-### CSS Variables Setup
-
-```css
-:root {
-  --primary: #3b82f6;
-  --primary-rgb: 59, 130, 246;
-  --spacing-unit: 4px;
-}
+<a href="#main" className="sr-only focus:not-sr-only focus:absolute
+  focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2
+  focus:bg-primary focus:text-white focus:rounded">
+  Skip to content
+</a>
 ```
 
 ## See Also
 
-- [Design Patterns](./../_shared/DESIGN_PATTERNS.md) - Typography, spacing, colors reference
-- [Code Review Standards](./../_shared/CODE_REVIEW_STANDARDS.md) - Accessibility, performance
-- [UX Principles](./../_shared/UX_PRINCIPLES.md) - Visual hierarchy, interaction patterns
+- [Generic Design System](../generic-design-system/SKILL.md) - Tokens, spacing, typography
+- [Design Patterns](../_shared/DESIGN_PATTERNS.md) - Atomic Design, component docs
+- [UX Principles](../_shared/UX_PRINCIPLES.md) - Visual hierarchy, interaction patterns
