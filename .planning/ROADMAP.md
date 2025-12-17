@@ -89,7 +89,7 @@ Plans:
 **Plans**: 3 plans (one per stack family)
 
 Plans:
-- [ ] 04-01: React variants (generic-react-code-reviewer, generic-react-design-system, generic-react-feature-developer, generic-react-ux-designer)
+- [x] 04-01: React variants (generic-react-code-reviewer, generic-react-design-system, generic-react-feature-developer, generic-react-ux-designer)
 - [ ] 04-02: Static variants (generic-static-code-reviewer, generic-static-design-system, generic-static-feature-developer, generic-static-ux-designer)
 - [ ] 04-03: Fullstack variants (generic-fullstack-code-reviewer, generic-fullstack-design-system, generic-fullstack-feature-developer, generic-fullstack-ux-designer)
 
@@ -123,6 +123,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | 1. Foundation | 2/2 | Complete | 2025-12-17 |
 | 2. Base Generic Skills | 4/4 | Complete | 2025-12-17 |
 | 3. Domain Expert Skills | 4/4 | Complete | 2025-12-17 |
-| 4. Stack-Specific Skills | 0/3 | Not started | - |
+| 4. Stack-Specific Skills | 1/3 | In progress | - |
 | 5. Utility Skills | 0/2 | Not started | - |
 | 6. Validation | 0/2 | Not started | - |
