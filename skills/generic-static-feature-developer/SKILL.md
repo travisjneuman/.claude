@@ -7,108 +7,183 @@ description: Guide feature development for static HTML/CSS/JS sites. Covers patt
 
 Guide feature development for minimalist static sites.
 
-## Architecture Overview
+**Extends:** [Generic Feature Developer](../generic-feature-developer/SKILL.md) - Read base skill for development workflow, scope assessment, and build vs integrate decisions.
+
+## Static Site Architecture
 
 ### Typical Structure
+
 ```
 project/
 ├── index.html          # Main page
-├── style.css           # Styling
-├── script.js           # Interactions
-├── assets/             # Images, fonts
-├── .github/
-│   └── workflows/      # GitHub Actions (if used)
-├── automation/         # Scripts (if used)
+├── style.css           # All styles
+├── script.js           # All interactions
+├── assets/             # Images, icons
+├── .github/workflows/  # Automation (optional)
 └── docs/               # Documentation
 ```
 
-### No Build Tools
-- Edit → Save → Deploy
-- Pure HTML/CSS/JS
-- Simple development workflow
+### No Build Tools Philosophy
 
-## Feature Development Guidelines
+Edit → Save → Deploy (that's it)
 
-### Landing Page Changes
+- Pure HTML (no templating engines)
+- Pure CSS (no Sass/Less/PostCSS)
+- Pure JS (no bundling, no transpilation)
+- No `node_modules` in production
 
-**Process:**
-1. Test locally: `python3 -m http.server 8000`
-2. Screenshot before/after
-3. Test all browsers (Chrome, Firefox, Safari)
-4. Test responsiveness (375px, 768px, 1024px)
-5. Get approval before committing
+## Development Workflow
 
-**Acceptable (with approval):**
-- Performance optimizations
-- SEO metadata updates
-- Accessibility improvements
+### Local Testing
 
-### Automation Changes (if applicable)
+```bash
+# Start local server
+python3 -m http.server 8000
+# Visit http://localhost:8000
 
-**Adding/Modifying Scripts:**
-1. Test with dry run flag
-2. Verify output matches expectations
-3. Check edge cases
-4. Update documentation
+# Alternative (Node.js)
+npx serve .
+```
 
-**GitHub Actions:**
-1. Use secrets for API keys
-2. Test with workflow_dispatch
-3. Consider rate limits
+### Before Committing
+
+1. Test in Chrome, Firefox, Safari
+2. Test at 375px, 768px, 1024px
+3. Run Lighthouse audit
+4. Screenshot current state (for comparison)
+
+## Progressive Enhancement
+
+### Philosophy
+
+1. **Content first** - Works without CSS/JS
+2. **Enhance with CSS** - Better styling for capable browsers
+3. **Enhance with JS** - Interactivity for JS-enabled browsers
+
+### Example Pattern
+
+```html
+<!-- Works without JS -->
+<details>
+  <summary>Menu</summary>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</details>
+```
+
+```javascript
+// Enhancement: Custom animation when JS available
+if ('IntersectionObserver' in window) {
+  // Progressive enhancement
+}
+```
+
+## Vanilla JavaScript Patterns
+
+### Event Delegation
+
+```javascript
+// One listener for many elements
+document.body.addEventListener('click', (e) => {
+  if (e.target.matches('.menu-toggle')) {
+    toggleMenu();
+  }
+  if (e.target.matches('.close-btn')) {
+    closeModal();
+  }
+});
+```
+
+### DOM Ready
+
+```javascript
+// Modern approach
+document.addEventListener('DOMContentLoaded', () => {
+  initApp();
+});
+
+// Or: script at end of body (no event needed)
+```
+
+### Class Toggling
+
+```javascript
+// Toggle visibility
+element.classList.toggle('visible');
+
+// Add/remove
+element.classList.add('active');
+element.classList.remove('active');
+```
+
+## Automation (GitHub Actions)
+
+### Simple Deploy Workflow
+
+```yaml
+# .github/workflows/deploy.yml
+name: Deploy
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./
+```
+
+### Image Optimization
+
+```bash
+# Optimize before committing
+# PNG
+pngquant --quality=65-80 image.png
+
+# JPEG
+jpegoptim --max=80 image.jpg
+
+# WebP conversion
+cwebp -q 80 image.png -o image.webp
+```
 
 ## Feature Checklist
 
-### Before Starting
-- [ ] Sync with main branch
-- [ ] Read affected files
-- [ ] Check for similar patterns
+**Before Starting:**
+- [ ] Read CLAUDE.md for project constraints
+- [ ] Check existing patterns to reuse
+- [ ] Understand performance budget
 
-### For Page Changes
-- [ ] Screenshot current state
-- [ ] Make ONE change at a time
-- [ ] Test locally in multiple browsers
-- [ ] Compare to baseline
-- [ ] Get approval before committing
+**During Development:**
+- [ ] One change at a time
+- [ ] Test in multiple browsers
+- [ ] Test responsiveness
+- [ ] Keep page weight in budget
 
-### For Script Changes
-- [ ] Test with dry run
-- [ ] Verify outputs
-- [ ] Check validation works
-- [ ] Test edge cases
-- [ ] Update docs if behavior changes
-
-### Before Completion
-- [ ] All tests pass (visual)
+**Before Completion:**
+- [ ] Lighthouse 95+ Performance
+- [ ] All breakpoints tested
+- [ ] Screenshots for comparison
 - [ ] Documentation updated
 
-## Common Patterns
+## Performance Targets
 
-### Adding a Link
-1. Add to HTML
-2. Update CSS if needed (stagger animation)
-3. Test interaction
-
-### Adding Validation Rule
-```python
-def validate_new_rule(content):
-    return not "bad_pattern" in content.lower()
-```
-
-### Adding GitHub Action Step
-```yaml
-env:
-  API_KEY: ${{ secrets.API_KEY }}
-```
-
-## Performance Guidelines
-
-- Total < 50KB (excluding images)
-- Images < 500KB
-- Lighthouse 95+
-- First Contentful Paint < 1s
+| Metric | Target |
+|--------|--------|
+| Total weight | < 50KB |
+| First Contentful Paint | < 1s |
+| Lighthouse Performance | 95+ |
 
 ## See Also
 
-- [Code Review Standards](./../_shared/CODE_REVIEW_STANDARDS.md) - Quality
-- [Design Patterns](./../_shared/DESIGN_PATTERNS.md) - UI patterns
-- Project `CLAUDE.md` - Workflow rules
+- [Generic Feature Developer](../generic-feature-developer/SKILL.md) - Workflow, decisions
+- [Code Review Standards](../_shared/CODE_REVIEW_STANDARDS.md) - Quality requirements
+- [Design Patterns](../_shared/DESIGN_PATTERNS.md) - UI patterns
