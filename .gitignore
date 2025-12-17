@@ -1,0 +1,57 @@
+# ============================================
+# Claude Code - .gitignore for .claude/ repo
+# ============================================
+
+# ----- SESSION/EPHEMERAL DATA -----
+# Debug logs (session-specific)
+debug/
+
+# Conversation history (LARGE, session-specific)
+history.jsonl
+
+# Session project data (conversation JSONL files)
+projects/
+
+# File edit history (session backups, can be rebuilt)
+file-history/
+
+# Session todos (auto-generated per conversation)
+todos/
+
+# Shell state snapshots
+shell-snapshots/
+
+# ----- TELEMETRY/CACHE -----
+statsig/
+telemetry/
+stats-cache.json
+
+# Plugin cache (regenerated automatically)
+plugins/cache/
+
+# ----- SENSITIVE FILES -----
+.credentials.json
+*.db
+security_warnings_state_*.json
+
+# ----- LOCAL/PERSONAL OVERRIDES -----
+settings.local.json
+.claude.json
+
+# ----- OS/EDITOR FILES -----
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# ============================================
+# TRACKED (not ignored):
+# - CLAUDE.md, README.md
+# - commands/, skills/, docs/, templates/
+# - .mcp.json, settings.json
+# - plans/, tasks/, .planning/, get-shit-done/
+# - .archive/ (completed task docs)
+# - plugins/marketplaces/ (read-only upstream)
+# - plugins/known_marketplaces.json
+# ============================================
