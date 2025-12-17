@@ -40,7 +40,7 @@ See .planning/research/*.md for full research findings.
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Foundation** - Templates, shared standards, enhancement checklist
-- [ ] **Phase 2: Base Generic Skills** - Enhance 4 base skills (3-4x multiplier effect)
+- [ ] **Phase 2: Base Generic Skills** - Enhance 4 base skills (3-4x multiplier effect) [In progress]
 - [ ] **Phase 3: Domain Expert Skills** - Audit and enhance 16 domain skills
 - [ ] **Phase 4: Stack-Specific Skills** - Update 12 stack variants
 - [ ] **Phase 5: Utility Skills** - Enhance 6+ utility skills
@@ -65,7 +65,7 @@ Plans:
 **Plans**: 4 plans (one per skill)
 
 Plans:
-- [ ] 02-01: Enhance generic-code-reviewer (already solid at 104 lines, verify/polish)
+- [x] 02-01: Enhance generic-code-reviewer (already solid at 104 lines, verify/polish)
 - [ ] 02-02: Enhance generic-design-system (add design tokens, atomic design, accessibility)
 - [ ] 02-03: Enhance generic-feature-developer (add architecture patterns, data flow)
 - [ ] 02-04: Enhance generic-ux-designer (add UX methodology, research methods)
@@ -121,7 +121,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 2/2 | Complete | 2025-12-17 |
-| 2. Base Generic Skills | 0/4 | Not started | - |
+| 2. Base Generic Skills | 1/4 | In progress | - |
 | 3. Domain Expert Skills | 0/4 | Not started | - |
 | 4. Stack-Specific Skills | 0/3 | Not started | - |
 | 5. Utility Skills | 0/2 | Not started | - |
