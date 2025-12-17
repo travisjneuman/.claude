@@ -5,119 +5,159 @@ description: Professional UI/UX design expertise for static HTML/CSS/JS sites. C
 
 # Static Site UX Designer
 
-Professional UX expertise for minimalist static sites (HTML/CSS/JS).
+Professional UX expertise for minimalist static sites.
 
-**Foundational Reference:** See [UX Principles](./../_shared/UX_PRINCIPLES.md) for core concepts.
+**Extends:** [Generic UX Designer](../generic-ux-designer/SKILL.md) - Read base skill for design thinking process, user psychology, heuristic evaluation, and research methods.
 
-## Design Philosophy
-
-**Your Role:**
-1. **Critique** - Evaluate designs against minimalist principles
-2. **Improve** - Suggest specific, actionable improvements
-3. **Constrain** - Work within established aesthetic
-4. **Protect** - Defend approved design decisions
-
-**Project Constraints (Define in CLAUDE.md):**
-- Color palette (typically limited)
-- Aesthetic style
-- Performance budget (< 50KB typical)
-- Privacy requirements
-- Sacred elements that cannot be changed
-
-## Minimalist Design Principles
+## Minimalist Design Philosophy
 
 ### Less is More
-- Every element has purpose
-- No decorative elements
-- Content-to-chrome ratio maximized
-- Simple code = simple UX
 
-### Visual Hierarchy Through Contrast
-- Size indicates importance
-- Color draws attention
-- Whitespace groups elements
+Every element must earn its place:
+- Does this add value for the user?
+- Can I remove this and still communicate?
+- Is this decoration or function?
+
+### Content-to-Chrome Ratio
+
+Maximize content, minimize interface:
+```
+BAD:  10% content, 90% navigation/chrome
+GOOD: 80% content, 20% essential navigation
+```
+
+### Limited Palette = High Impact
+
+- 2-3 colors maximum
+- 1 accent color for actions
 - Stark contrast over subtle gradients
 
-### Progressive Disclosure
-- Primary content visible immediately
-- Secondary content hidden until needed
-- Reduces cognitive load
+## Performance-Constrained UX
 
-## User Psychology Applied
+### Every KB Matters
 
-### Hick's Law
-- Limit choices (3-5 optimal)
-- Group related options
-- Progressive disclosure for advanced features
+| Element | Impact |
+|---------|--------|
+| Web font | +50-100KB |
+| Hero image | +200-500KB |
+| Animation library | +30-50KB |
+| JavaScript framework | +30-100KB |
 
-### Fitts's Law
-- Large touch targets (44px minimum)
-- Important actions prominent
-- Related actions close together
+Ask: Does this UX improvement justify the weight?
 
-### Jakob's Law
-- Click/tap interactions familiar
-- External links open in new tabs
-- Standard navigation patterns
+### Speed is UX
 
-## Accessibility Within Minimalism
+- < 1s load time is expected
+- < 100ms interaction response
+- Users leave after 3s wait
 
-### WCAG AA Requirements
-- Color contrast 4.5:1 minimum for text
-- Color contrast 3:1 for large text
-- Keyboard navigation supported
-- Alt text on images
+## Static Page Flow Patterns
+
+### Simple Navigation
+
+```
+Home → About → Contact → Back to Home
+```
+
+No infinite scroll, no SPA patterns. Clear page boundaries.
+
+### Anchor Navigation
+
+```html
+<nav>
+  <a href="#section1">Section 1</a>
+  <a href="#section2">Section 2</a>
+</nav>
+
+<section id="section1">...</section>
+<section id="section2">...</section>
+```
+
+## CSS-Only Interaction Patterns
+
+### Accessible Disclosure
+
+```html
+<details>
+  <summary>More info</summary>
+  <p>Additional content here.</p>
+</details>
+```
+
+### Hover States
+
+```css
+.card {
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+}
+```
+
+### No-JavaScript Fallbacks
+
+Always work without JS:
+- Navigation works with `<a>` tags
+- Forms submit normally
+- Content accessible without scripting
+
+## Accessibility in Minimalism
 
 ### What Minimalism Allows
-- ARIA labels on interactive elements
-- Screen reader friendly semantic HTML
-- Focus management
 
-## Performance Guidelines
+| Requirement | Minimalist Solution |
+|-------------|---------------------|
+| Focus indicators | Simple outline |
+| Skip links | Clean text link |
+| Alt text | Concise descriptions |
+| Contrast | High contrast by default |
 
-**Typical Static Site Targets:**
-- HTML: < 5KB
-- CSS: < 10KB
-- JS: < 5KB
-- Images: < 500KB
-- Total: < 50KB (excluding images)
+### Touch Targets
 
-**Lighthouse Targets:**
-- Performance: 95+
-- Accessibility: 90+
-- Best Practices: 100
-- SEO: 100
+- 44x44px minimum
+- 8px spacing between targets
+- Larger is better on mobile
 
-## Animation Guidelines
+## Design Critique for Static Sites
 
-**Principles:**
-- Smooth easing (ease, cubic-bezier)
-- Reasonable durations (0.3s typical)
-- GPU-accelerated (transform, opacity)
-- 60fps performance
+### Questions to Ask
 
-## Design Critique Framework
+1. **Performance impact?**
+   - How many KB does this add?
+   - Is it worth the load time?
 
-**For any proposed change:**
+2. **Works without JS?**
+   - Core function accessible?
+   - Progressive enhancement?
 
-1. **Does it maintain the aesthetic?**
-   - Within color palette
-   - Consistent styling
-   - Minimalist approach
+3. **Adds clarity or noise?**
+   - Does this help users?
+   - Can it be simpler?
 
-2. **Does it respect constraints?**
-   - Check CLAUDE.md forbidden list
-   - Respect sacred elements
+4. **Maintains aesthetic?**
+   - Within color palette?
+   - Consistent with existing?
 
-3. **Does it improve performance?**
-   - Page weight impact
-   - Load time impact
+### Red Flags
 
-4. **Does it need approval?**
-   - Any visual change requires explicit YES
+- Adding web fonts without strong reason
+- Animation libraries for simple effects
+- Complex navigation for few pages
+- JavaScript where CSS suffices
+
+## Static UX Checklist
+
+- [ ] Core content visible without scrolling
+- [ ] Navigation intuitive (< 5 items)
+- [ ] Works without JavaScript
+- [ ] Touch targets 44px minimum
+- [ ] Color contrast 4.5:1+
+- [ ] Page weight < 50KB (excl. images)
 
 ## See Also
 
-- [UX Principles](./../_shared/UX_PRINCIPLES.md) - Core psychology
-- [Design Patterns](./../_shared/DESIGN_PATTERNS.md) - Visual patterns
-- [Code Review Standards](./../_shared/CODE_REVIEW_STANDARDS.md) - Accessibility
+- [Generic UX Designer](../generic-ux-designer/SKILL.md) - Design thinking, psychology
+- [UX Principles](../_shared/UX_PRINCIPLES.md) - Research methods, heuristics
+- [Design Patterns](../_shared/DESIGN_PATTERNS.md) - Visual patterns
