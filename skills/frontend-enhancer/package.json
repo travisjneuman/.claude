@@ -1,0 +1,11 @@
+{
+  "name": "@ai-labs-claude-skills/frontend-enhancer",
+  "version": "1.0.0",
+  "description": "Claude AI skill: frontend-enhancer",
+  "main": "index.js",
+  "files": [
+    "."
+  ],
+  "license": "MIT",
+  "author": "AI Labs"
+}
