@@ -1,0 +1,179 @@
+---
+phase: 04-stack-specific-skills
+plan: 02
+type: execute
+---
+
+<objective>
+Update 4 Static variant skills to properly extend enhanced base skills.
+
+Purpose: Static variants should reference base skills and only add static site-specific patterns (vanilla HTML/CSS/JS).
+Output: 4 updated Static variant SKILL.md files with proper inheritance structure.
+</objective>
+
+<execution_context>
+~/.claude/get-shit-done/workflows/execute-phase.md
+~/.claude/get-shit-done/templates/summary.md
+</execution_context>
+
+<context>
+@.planning/PROJECT.md
+@.planning/ROADMAP.md
+@.planning/STATE.md
+
+**Base skills to reference:**
+@skills/generic-code-reviewer/SKILL.md
+@skills/generic-design-system/SKILL.md
+@skills/generic-feature-developer/SKILL.md
+@skills/generic-ux-designer/SKILL.md
+
+**Previous plan summary (if completed):**
+@.planning/phases/04-stack-specific-skills/04-01-SUMMARY.md
+
+**Prior decisions:**
+- Variants use "extends" pattern from base skills
+- Target ~80-120 lines per variant
+- Static sites have specific constraints: no build tools, pure HTML/CSS/JS, tiny page weight
+
+**Pattern for variants:**
+```markdown
+# [Stack] [Type]
+
+[Brief intro - 1-2 lines]
+
+**Extends:** [generic-base-skill](../generic-base-skill/SKILL.md) - Read base skill first for full context.
+
+## Static Site-Specific [Additions/Checks/Patterns]
+
+[Only static-specific content]
+
+## See Also
+```
+</context>
+
+<tasks>
+
+<task type="auto">
+  <name>Task 1: Update generic-static-code-reviewer</name>
+  <files>skills/generic-static-code-reviewer/SKILL.md</files>
+  <action>
+Rewrite to extend base skill. Currently 84 lines. Structure:
+1. Keep YAML frontmatter
+2. Add "Extends: generic-code-reviewer" with link
+3. REMOVE duplicated content (security basics, accessibility basics - in base)
+4. KEEP static-specific: Lighthouse targets (95+), page weight limits (<50KB), no-build-tools workflow
+5. ADD value: Semantic HTML emphasis, CSS custom properties patterns, ES6+ vanilla JS patterns
+6. Target ~70-90 lines
+
+Static-specific additions:
+- No build tools verification (pure HTML/CSS/JS)
+- Page weight targets (<50KB total, <5KB HTML, <10KB CSS, <5KB JS)
+- Lighthouse 95+ requirement
+- Semantic HTML checklist
+- CSS custom properties usage
+- ES6+ without transpilation
+- Event delegation patterns
+  </action>
+  <verify>File updated, extends base, static-specific checks clear</verify>
+  <done>generic-static-code-reviewer properly extends base with static site checks only</done>
+</task>
+
+<task type="auto">
+  <name>Task 2: Update generic-static-design-system</name>
+  <files>skills/generic-static-design-system/SKILL.md</files>
+  <action>
+Rewrite to extend base skill. Currently 175 lines (reasonable but duplicates base). Structure:
+1. Keep YAML frontmatter
+2. Add "Extends: generic-design-system" with link
+3. REMOVE duplicated content (spacing theory, color theory - in base)
+4. KEEP static-specific: Pure CSS patterns, minimal color palettes, CSS-only animations
+5. KEEP code examples in pure CSS (no Tailwind/preprocessors)
+6. Target ~90-110 lines
+
+Static-specific additions:
+- CSS custom properties (no preprocessors)
+- System font stack (no web fonts for performance)
+- clamp() for responsive typography
+- Pure CSS animations (keyframes)
+- Minimal color palette philosophy
+- CSS-only interactive patterns (hidden/visible toggles)
+- No-JavaScript fallbacks
+  </action>
+  <verify>File updated, reduced from 175 lines, pure CSS patterns only</verify>
+  <done>generic-static-design-system properly extends base with pure CSS patterns only</done>
+</task>
+
+<task type="auto">
+  <name>Task 3: Update generic-static-feature-developer</name>
+  <files>skills/generic-static-feature-developer/SKILL.md</files>
+  <action>
+Rewrite to extend base skill. Currently 115 lines. Structure:
+1. Keep YAML frontmatter
+2. Add "Extends: generic-feature-developer" with link
+3. REMOVE duplicated content (general workflow - in base)
+4. KEEP static-specific: No-build workflow, GitHub Pages deployment, vanilla JS patterns
+5. ADD value: Progressive enhancement, graceful degradation
+6. Target ~80-100 lines
+
+Static-specific additions:
+- No build tools architecture (edit→save→deploy)
+- File structure for static sites
+- Local testing (python -m http.server)
+- GitHub Actions for static site automation
+- Progressive enhancement philosophy
+- Vanilla JS event delegation
+- Content validation patterns
+- Image optimization workflow
+  </action>
+  <verify>File updated, extends base, static site workflow clear</verify>
+  <done>generic-static-feature-developer properly extends base with static site patterns only</done>
+</task>
+
+<task type="auto">
+  <name>Task 4: Update generic-static-ux-designer</name>
+  <files>skills/generic-static-ux-designer/SKILL.md</files>
+  <action>
+Rewrite to extend base skill. Currently 124 lines. Structure:
+1. Keep YAML frontmatter
+2. Add "Extends: generic-ux-designer" with link
+3. REMOVE duplicated content (design thinking, heuristics - in base/shared)
+4. KEEP static-specific: Minimalist design philosophy, performance-constrained UX
+5. ADD value: Less-is-more philosophy, content-focused design
+6. Target ~70-90 lines
+
+Static-specific additions:
+- Minimalist design philosophy (less is more)
+- Performance-constrained UX (every KB matters)
+- Content-to-chrome ratio maximization
+- CSS-only interaction patterns
+- No-JavaScript UX fallbacks
+- Static page flow (no SPA patterns)
+- Limited choices philosophy
+- Simple navigation patterns
+  </action>
+  <verify>File updated, extends base, minimalist UX patterns clear</verify>
+  <done>generic-static-ux-designer properly extends base with static site UX patterns only</done>
+</task>
+
+</tasks>
+
+<verification>
+Before declaring plan complete:
+- [ ] All 4 Static variant files updated
+- [ ] Each file has "Extends:" reference to base skill
+- [ ] No duplicated content from base skills
+- [ ] Static-specific additions emphasize no-build-tools, performance
+- [ ] Line counts in target range (70-110 lines each)
+- [ ] Pure CSS/JS examples (no frameworks)
+</verification>
+
+<success_criteria>
+- All 4 Static variant skills properly extend their base skills
+- Total lines reduced (from ~498 to ~310-390)
+- Static site philosophy (minimal, performant) preserved
+- Consistent structure across all 4 variants
+</success_criteria>
+
+<output>
+After completion, create `.planning/phases/04-stack-specific-skills/04-02-SUMMARY.md`
+</output>

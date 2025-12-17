@@ -1,0 +1,28 @@
+2025-12-17T15:54:42.788Z [DEBUG] Watching for changes in setting files C:\Users\tjn\.claude\settings.json, C:\users\tjn\.claude\.claude\settings.local.json...
+2025-12-17T15:54:42.813Z [DEBUG] Using bash path: "C:\Program Files\Git\bin\bash.exe"
+2025-12-17T15:54:42.847Z [DEBUG] [LSP MANAGER] initializeLspServerManager() called
+2025-12-17T15:54:42.847Z [DEBUG] [LSP MANAGER] Created manager instance, state=pending
+2025-12-17T15:54:42.847Z [DEBUG] [LSP MANAGER] Starting async initialization (generation 1)
+2025-12-17T15:54:42.850Z [DEBUG] LSP server manager initialized successfully
+2025-12-17T15:54:42.850Z [DEBUG] LSP notification handlers registered successfully for all 0 server(s)
+2025-12-17T15:54:42.852Z [DEBUG] update: Starting update check
+2025-12-17T15:54:42.852Z [DEBUG] update: Running diagnostic
+2025-12-17T15:54:42.884Z [DEBUG] Git remote URL: null
+2025-12-17T15:54:42.884Z [DEBUG] No git remote URL found
+2025-12-17T15:54:42.884Z [DEBUG] Not in a GitHub repository, skipping path mapping update
+2025-12-17T15:54:42.965Z [DEBUG] Writing to temp file: C:\Users\tjn\.claude.json.tmp.17204.1765986882965
+2025-12-17T15:54:42.965Z [DEBUG] Preserving file permissions: 100666
+2025-12-17T15:54:42.970Z [DEBUG] [SLOW OPERATION DETECTED] fs.writeFileSync (5.5ms)
+2025-12-17T15:54:42.970Z [DEBUG] Temp file written successfully, size: 66358 bytes
+2025-12-17T15:54:42.970Z [DEBUG] Applied original permissions to temp file
+2025-12-17T15:54:42.970Z [DEBUG] Renaming C:\Users\tjn\.claude.json.tmp.17204.1765986882965 to C:\Users\tjn\.claude.json
+2025-12-17T15:54:42.971Z [DEBUG] File C:\Users\tjn\.claude.json written atomically
+2025-12-17T15:54:43.353Z [DEBUG] update: Installation type: unknown
+2025-12-17T15:54:43.353Z [DEBUG] update: Config install method: unknown
+2025-12-17T15:54:43.353Z [DEBUG] update: Checking npm registry for latest version
+2025-12-17T15:54:43.353Z [DEBUG] update: Package URL: @anthropic-ai/claude-code
+2025-12-17T15:54:43.353Z [DEBUG] update: Running: npm view @anthropic-ai/claude-code@latest version
+2025-12-17T15:54:43.966Z [DEBUG] update: Latest version from npm: 2.0.71
+2025-12-17T15:54:43.968Z [DEBUG] Getting matching hook commands for SessionEnd with query: other
+2025-12-17T15:54:43.968Z [DEBUG] Found 0 hook matchers in settings
+2025-12-17T15:54:43.968Z [DEBUG] Matched 0 unique hooks for query "other" (0 before deduplication)
