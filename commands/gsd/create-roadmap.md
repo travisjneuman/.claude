@@ -9,11 +9,9 @@ allowed-tools:
 ---
 
 <objective>
-Create project roadmap, optionally incorporating research findings from /gsd:research-project.
+Create project roadmap with phase breakdown.
 
-Roadmaps define the phase breakdown - what work happens in what order. This command can be used:
-1. After /gsd:new-project (without research)
-2. After /gsd:research-project (with domain research incorporated)
+Roadmaps define what work happens in what order. Run after /gsd:new-project.
 </objective>
 
 <execution_context>
@@ -24,11 +22,6 @@ Roadmaps define the phase breakdown - what work happens in what order. This comm
 
 <context>
 @.planning/PROJECT.md
-
-**Check for research:**
-!`ls .planning/research/*.md 2>/dev/null || echo "NO_RESEARCH"`
-
-**Load config:**
 @.planning/config.json
 </context>
 
@@ -62,46 +55,12 @@ If "Cancel": Exit
 If "Replace": Continue with workflow
 </step>
 
-<step name="check_research">
-Check for project research:
-
-```bash
-ls .planning/research/*.md 2>/dev/null
-```
-
-**If research found:**
-Load and summarize each research file:
-- ecosystem.md → Key libraries/frameworks recommended
-- architecture.md → Architectural patterns to follow
-- pitfalls.md → Top 2-3 critical pitfalls to avoid
-- standards.md → Standards and conventions to follow
-
-Present summary:
-```
-Found project research:
-
-Ecosystem: [key libraries/frameworks]
-Architecture: [key patterns]
-Pitfalls: [top 2-3 to avoid]
-Standards: [key conventions]
-
-This will inform phase structure.
-```
-
-**If no research found:**
-```
-No project research found.
-Creating roadmap based on PROJECT.md alone.
-(Optional: Run /gsd:research-project first for niche/complex domains)
-```
-</step>
-
 <step name="create_roadmap">
 Follow the create-roadmap.md workflow starting from detect_domain step.
 
 The workflow handles:
 - Domain expertise detection
-- Phase identification (informed by research if present)
+- Phase identification
 - Research flags for each phase
 - Confirmation gates (respecting config mode)
 - ROADMAP.md creation
@@ -117,19 +76,24 @@ Roadmap created:
 - State: .planning/STATE.md
 - [N] phases defined
 
-## To Continue
+---
 
-Run `/clear`, then paste one of:
+## ▶ Next Up
 
-**To discuss Phase 1 context first:**
-```
-/gsd:discuss-phase 1
-```
+**Phase 1: [Name]** — [Goal from ROADMAP.md]
 
-**To plan Phase 1 directly:**
-```
-/gsd:plan-phase 1
-```
+`/gsd:plan-phase 1`
+
+<sub>`/clear` first → fresh context window</sub>
+
+---
+
+**Also available:**
+- `/gsd:discuss-phase 1` — gather context first
+- `/gsd:research-phase 1` — investigate unknowns
+- Review roadmap
+
+---
 ```
 </step>
 
@@ -143,7 +107,6 @@ Run `/clear`, then paste one of:
 
 <success_criteria>
 - [ ] PROJECT.md validated
-- [ ] Research incorporated if present
 - [ ] ROADMAP.md created with phases
 - [ ] STATE.md initialized
 - [ ] Phase directories created

@@ -1,0 +1,81 @@
+{
+  "name": "ultimate-claude-toolkit",
+  "version": "1.0.0",
+  "description": "Comprehensive Claude Code toolkit with 100+ skills, 30+ agents, and complete development workflows for full-stack development across all platforms",
+  "author": "tjn",
+  "repository": "https://github.com/tjn/claude-toolkit",
+  "license": "MIT",
+  "keywords": [
+    "claude-code",
+    "skills",
+    "agents",
+    "development",
+    "productivity",
+    "full-stack",
+    "mobile",
+    "desktop",
+    "web",
+    "design",
+    "business"
+  ],
+  "categories": [
+    "Development",
+    "Productivity",
+    "Design",
+    "Business"
+  ],
+  "components": {
+    "skills": {
+      "path": "skills/",
+      "count": 100,
+      "categories": [
+        "Platform Development",
+        "Creative Design",
+        "Business Strategy",
+        "Code Quality",
+        "Architecture"
+      ]
+    },
+    "agents": {
+      "path": "agents/",
+      "count": 30,
+      "categories": [
+        "Code Quality",
+        "Development",
+        "Architecture",
+        "Platform",
+        "Creative",
+        "Business"
+      ]
+    },
+    "commands": {
+      "path": "commands/",
+      "description": "Custom slash commands for workflows"
+    },
+    "rules": {
+      "path": "rules/",
+      "description": "Contextual guidelines and checklists"
+    },
+    "templates": {
+      "path": "templates/",
+      "description": "Project and task templates"
+    }
+  },
+  "installation": {
+    "type": "symlink",
+    "instructions": "See README.md for detailed installation"
+  },
+  "compatibility": {
+    "claude-code": ">=1.0.0"
+  },
+  "features": [
+    "100+ comprehensive skills covering all development domains",
+    "30+ specialized AI agents for focused assistance",
+    "Platform coverage: iOS, Android, Web, Desktop, PWA",
+    "Creative tools: Design, Video, Audio, Branding",
+    "Business guidance: Startup, Monetization, Strategy",
+    "Technical depth: GraphQL, Microservices, i18n, Real-time",
+    "Quality assurance: Testing, Security, Performance",
+    "Productivity workflows: GSD system, task management"
+  ]
+}

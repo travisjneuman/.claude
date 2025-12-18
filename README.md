@@ -1,163 +1,269 @@
-# .claude/ Directory
+# Ultimate Claude Code Toolkit
 
-Copy this entire folder anywhere. It's self-contained.
+A comprehensive Claude Code enhancement toolkit with 100+ skills, 30+ specialized agents, and complete development workflows for full-stack development across all platforms.
 
 ---
 
-## Setup on New Machine
+## Quick Start
 
-```powershell
-# 1. Copy folder
-cp -r ~/.claude /new/location/.claude
+### Installation
 
-# 2. Copy config to parent (Claude Code expects it there)
-cp /new/location/.claude/.claude.json /new/location/.claude.json
+```bash
+# Option 1: Clone as your .claude directory (fresh install)
+mv ~/.claude ~/.claude-backup  # Backup existing if needed
+git clone https://github.com/YOURREPO/claude-toolkit.git ~/.claude
 
-# 3. Login
-claude
+# Option 2: Merge with existing setup
+git clone https://github.com/YOURREPO/claude-toolkit.git /tmp/claude-toolkit
+cp -r /tmp/claude-toolkit/skills/* ~/.claude/skills/
+cp -r /tmp/claude-toolkit/agents/* ~/.claude/agents/
+cp -r /tmp/claude-toolkit/rules/* ~/.claude/rules/
+```
+
+### Verify Installation
+
+```bash
+claude  # Start Claude Code
+# Test: "Use the graphic-designer agent to suggest a color palette"
 ```
 
 ---
 
-## Folder Structure
+## What's Included
+
+### 100+ Skills
+
+| Category | Coverage |
+|----------|----------|
+| **Platform Development** | iOS, Android, React Native, Flutter, Electron, PWA |
+| **Creative Domain** | Graphic Design, Video, Audio, Branding, Motion |
+| **Business Strategy** | Startup Launch, Monetization, Marketing, Finance |
+| **Technical Depth** | GraphQL, Microservices, i18n, Real-time |
+| **Code Quality** | Testing, Security, Performance, Debugging |
+| **UX/Design Systems** | React, Static, Full-stack patterns |
+
+### 30+ Specialized Agents
+
+| Category | Agents |
+|----------|--------|
+| **Code Quality** | deep-code-reviewer, security-auditor, refactoring-specialist |
+| **Platform** | ios-developer, android-developer, mobile-architect, desktop-developer |
+| **Creative** | graphic-designer, video-producer, audio-engineer, brand-strategist, motion-designer |
+| **Architecture** | graphql-architect, microservices-architect, realtime-specialist |
+| **Business** | startup-advisor, monetization-expert |
+
+### Complete Workflow System
+- GSD (Get Shit Done) project management
+- Task templates and planning tools
+- Git hooks and automation
+- Contextual rules and checklists
+
+---
+
+## Directory Structure
 
 ```
 .claude/
-├── CLAUDE.md                 # Global instructions
-├── README.md                 # This file
-├── .claude.json              # Config backup (copy to parent on new machine)
-├── .mcp.json                 # MCP server definitions
-├── .credentials.json         # Auth (regenerated on login)
-├── settings.json             # Permissions, plugins
-├── settings.local.json       # Local overrides
+├── CLAUDE.md               # Core configuration (constitution)
+├── plugin.json             # Plugin manifest
+├── README.md               # This file
+├── settings.json           # Claude Code settings
 │
-├── commands/                 # Slash commands
-│   └── gsd/                  # GSD workflow (19 commands)
-├── skills/                   # Reusable skills (40+ skills)
-├── templates/                # Task templates
-├── docs/                     # Documentation
-├── get-shit-done/            # GSD workflow resources
-├── .archive/                 # Archived content (not loaded)
+├── skills/                 # Domain expertise (100+)
+│   ├── MASTER_INDEX.md     # Full skill navigation
+│   ├── README.md           # Skills documentation
+│   ├── ios-development/    # Platform skills
+│   ├── graphic-design/     # Creative skills
+│   ├── startup-launch/     # Business skills
+│   └── ...
 │
-├── history.jsonl             # Conversation history
-├── plans/                    # Project planning documents
-├── tasks/                    # Active task files
-├── todos/                    # Todo states
-├── projects/                 # Per-project state
-├── plugins/                  # Downloaded plugins
+├── agents/                 # Specialized AI agents (30+)
+│   ├── README.md           # Agent documentation
+│   └── *.md                # Individual agent files
 │
-├── debug/                    # ◆ Deletable cruft
-├── file-history/             # ◆ Deletable cruft
-├── shell-snapshots/          # ◆ Deletable cruft
-├── statsig/                  # ◆ Deletable cruft
-├── stats-cache.json          # ◆ Deletable cruft
-├── telemetry/                # ◆ Deletable cruft
-└── sqlite_mcp_server.db      # ◆ Deletable cruft
+├── rules/                  # Contextual guidelines
+│   ├── checklists/         # Task-type checklists
+│   ├── stacks/             # Technology-specific rules
+│   └── tooling/            # Tool setup guides
+│
+├── commands/               # Custom slash commands
+├── templates/              # Project templates
+├── docs/                   # Additional documentation
+│
+├── # Session files (auto-generated)
+├── history.jsonl           # Conversation history
+├── plans/                  # Project planning documents
+├── tasks/                  # Active task files
+└── projects/               # Per-project state
 ```
-
-**◆ Deletable cruft** = Safe to delete anytime. Just wastes space. Regenerated as needed.
 
 ---
 
-## After Copying
+## Usage Guide
 
-| What | Happens |
-|------|---------|
-| `.claude.json` | Copy to parent, then login regenerates OAuth tokens |
-| `projects/` | Old paths ignored, new ones created as you work |
-| Everything else | Just works |
+### Using Skills
+
+Skills are automatically loaded. Just ask about a topic:
+
+```
+"I'm building an iOS app with SwiftUI. What architecture should I use?"
+→ Uses ios-development skill
+
+"Help me design pricing tiers for my SaaS"
+→ Uses monetization-strategy skill
+
+"Create a color palette for a fintech app"
+→ Uses graphic-design skill
+```
+
+### Using Agents
+
+Invoke agents explicitly for specialized assistance:
+
+```
+"Use the security-auditor agent to review this auth code"
+"Use the ios-developer agent to implement push notifications"
+"Use the startup-advisor agent to validate my business idea"
+"Use the graphic-designer agent for brand colors"
+```
+
+### Slash Commands
+
+```
+/gsd:progress              # Check project progress
+/gsd:plan-phase           # Plan implementation
+/commit-commands:commit    # Create git commit
+/code-review:code-review   # Review code
+```
+
+---
+
+## Platform Coverage
+
+### Mobile Development
+| Platform | Skill | Agent |
+|----------|-------|-------|
+| iOS/iPadOS/tvOS | `ios-development` | `ios-developer` |
+| Android | `android-development` | `android-developer` |
+| React Native | `react-native` | `mobile-architect` |
+| Flutter | `flutter-development` | `mobile-architect` |
+
+### Desktop & Web
+| Platform | Skill | Agent |
+|----------|-------|-------|
+| Electron/Desktop | `electron-desktop` | `desktop-developer` |
+| PWA | `pwa-development` | (uses web skills) |
+
+### Creative & Business
+| Domain | Skill | Agent |
+|--------|-------|-------|
+| Visual Design | `graphic-design` | `graphic-designer` |
+| Video | `video-production` | `video-producer` |
+| Audio | `audio-production` | `audio-engineer` |
+| Branding | `brand-identity` | `brand-strategist` |
+| Startups | `startup-launch` | `startup-advisor` |
+| Pricing | `monetization-strategy` | `monetization-expert` |
 
 ---
 
 ## MCP Server Management
 
-MCP servers are **disabled by default** to save context tokens (~34k+ with all 5 servers).
+MCP servers are **disabled by default** to save context tokens.
 
 ### Available Servers
 
 | Server | Purpose | Tokens |
 |--------|---------|--------|
-| `playwright` | Browser automation, screenshots, cross-browser testing | ~14,446 |
-| `filesystem` | File operations beyond Claude's built-in tools | ~9,220 |
-| `memory` | Persistent knowledge graph across sessions | ~5,795 |
-| `sqlite` | SQLite database operations | ~3,437 |
-| `sequential-thinking` | Structured multi-step reasoning | ~1,554 |
-| `context7` | Up-to-date library/framework documentation | ~TBD |
-| `chrome-devtools` | Chrome debugging, Core Web Vitals, performance profiling | ~18,000 |
-| `puppeteer` | Simple browser automation, screenshots, PDFs | ~8,000 |
-| `browserbase` | Cloud browser automation, anti-bot, scaling | ~12,000 |
+| `playwright` | Browser automation, testing | ~14,446 |
+| `filesystem` | Extended file operations | ~9,220 |
+| `memory` | Persistent knowledge graph | ~5,795 |
+| `context7` | Up-to-date documentation | ~TBD |
+| `chrome-devtools` | Performance profiling | ~18,000 |
 
-### Browser Automation Quick Reference
+### Enable a Server
 
-| Need | Use |
-|------|-----|
-| Cross-browser testing | `playwright` |
-| Performance profiling | `chrome-devtools` |
-| Simple screenshots | `puppeteer` |
-| Cloud scale / anti-bot | `browserbase` |
-
-See [docs/MCP-SERVERS.md](docs/MCP-SERVERS.md) for detailed comparison.
-
-### Enable a Server (Current Session)
-
-Edit `settings.json` and remove the server from `disabledMcpjsonServers`:
+Edit `settings.json` and remove from `disabledMcpjsonServers`:
 
 ```json
 {
   "disabledMcpjsonServers": [
     "sequential-thinking",
-    // "playwright",  <-- remove from list to enable
-    "memory",
-    "filesystem",
-    "sqlite"
+    // "playwright",  <-- remove to enable
+    "memory"
   ]
 }
 ```
 
-**Changes take effect immediately** - no restart needed.
+---
 
-### Disable a Server
+## Customization
 
-Add the server name back to `disabledMcpjsonServers` in `settings.json`.
+### Adding Skills
 
-### Quick Commands
+Create `skills/my-skill/SKILL.md`:
 
-```bash
-# Check server status
-/mcp
+```yaml
+---
+name: my-skill
+description: When to use this skill
+---
 
-# View which servers are disabled
-# Look at settings.json "disabledMcpjsonServers" array
+# Skill content here
 ```
 
-### Configuration Files
+### Adding Agents
 
-| File | Purpose |
-|------|---------|
-| `.mcp.json` | Server definitions (what servers exist) |
-| `settings.json` | `disabledMcpjsonServers` array (which are disabled) |
+Create `agents/my-agent.md`:
 
-### Workflow
+```yaml
+---
+name: my-agent
+description: Agent purpose
+model: sonnet
+tools:
+  - Read
+  - Write
+---
 
-1. Start session with all servers disabled (default)
-2. Determine which server you need
-3. Edit `settings.json` to remove that server from `disabledMcpjsonServers`
-4. Server becomes available immediately
-5. When done, add server back to disabled list (optional)
-
-### Troubleshooting
-
-- **`claude doctor` shows "1 MCP server failed"**: Often a transient timing issue. Check `/mcp` for actual status.
-- **Server not connecting**: Set `MCP_TIMEOUT=10000` environment variable for slow-starting servers.
-- **High token usage**: Re-disable servers you're not actively using.
+# Agent system prompt here
+```
 
 ---
 
-## Platform Note
+## Maintenance
 
-Windows MCP servers need `cmd /c` wrapper (already configured in `.mcp.json`).
+### Updates
 
-For Linux/Mac, edit `.mcp.json` and change:
+```bash
+cd ~/.claude && git pull
+```
+
+### Cleanup (Optional)
+
+```bash
+# Delete auto-generated cruft
+rm -rf debug file-history shell-snapshots statsig telemetry
+rm stats-cache.json sqlite_mcp_server.db
+```
+
+### Backup
+
+```bash
+# Essential files only
+tar -czf claude-backup.tar.gz \
+  CLAUDE.md settings.json .mcp.json \
+  skills/ agents/ rules/ commands/ templates/
+```
+
+---
+
+## Platform Notes
+
+### Windows
+MCP servers use `cmd /c` wrapper (pre-configured).
+
+### Linux/Mac
+Edit `.mcp.json` to change:
 ```json
 "command": "cmd", "args": ["/c", "npx", ...]
 ```
@@ -168,16 +274,18 @@ To:
 
 ---
 
-## Cleanup (Optional)
+## Resources
 
-Delete cruft to save space:
-```powershell
-rm -rf debug file-history shell-snapshots statsig telemetry
-rm stats-cache.json sqlite_mcp_server.db
-```
+- [Claude Code Documentation](https://docs.anthropic.com/en/docs/claude-code)
+- [awesome-claude-code](https://github.com/hesreallyhim/awesome-claude-code)
+- [awesome-claude-md](https://github.com/josix/awesome-claude-md)
 
 ---
 
-## Last Updated
+## License
 
-December 17, 2025
+MIT License - Use, modify, and distribute freely.
+
+---
+
+*Last Updated: December 2025*

@@ -75,6 +75,7 @@ For non-trivial work, create `tasks/<descriptive-name>.md`:
 - Key decisions + rationale
 
 **NEVER:** `tasks/todo.md`, `tasks/task.md` — use descriptive names.
+**RULE:** One task file per feature. Don't reuse task files.
 
 ### 2. Approval Gate
 Use `ExitPlanMode` before any code edits/writes. Get user buy-in.
@@ -90,6 +91,69 @@ Use `ExitPlanMode` before any code edits/writes. Get user buy-in.
 
 ### 5. Close Out
 Add "Review" section to task file: what changed, verification, issues.
+
+---
+
+## GSD (Get Shit Done) - Multi-Phase Projects
+
+For complex features spanning days/weeks, use **GSD** - a meta-prompting and spec-driven development system.
+
+### When to Use GSD
+
+| Complexity | Use GSD? | Workflow |
+|------------|----------|----------|
+| Simple fix (<30 min) | No | Direct execution |
+| Single feature (30min-2hr) | No | Task file + TodoWrite |
+| Multi-phase feature (days) | **Yes** | GSD workflow |
+| New project/app | **Yes** | GSD from start |
+
+### GSD Quick Start
+
+```bash
+/gsd:new-project       # Initialize with brief + config
+/gsd:create-roadmap    # Create phases and state tracking
+/gsd:plan-phase 1      # Create detailed plan for phase
+/gsd:execute-plan <path>  # Execute the plan
+```
+
+### GSD Commands Reference
+
+| Command | Purpose |
+|---------|---------|
+| `/gsd:progress` | Check status, route to next action |
+| `/gsd:resume-work` | Resume from previous session |
+| `/gsd:pause-work` | Create handoff when pausing |
+| `/gsd:plan-phase <n>` | Create detailed phase plan |
+| `/gsd:execute-plan <path>` | Execute a PLAN.md |
+| `/gsd:add-phase <desc>` | Add phase to roadmap |
+| `/gsd:insert-phase <after> <desc>` | Insert urgent work |
+| `/gsd:complete-milestone <ver>` | Archive and tag release |
+| `/gsd:help` | Full command reference |
+
+### GSD File Structure
+
+```
+.planning/
+├── PROJECT.md          # Vision and requirements
+├── ROADMAP.md          # Phase breakdown
+├── STATE.md            # Project memory (context accumulation)
+├── config.json         # Workflow mode (interactive/yolo)
+└── phases/
+    └── 01-foundation/
+        ├── 01-01-PLAN.md
+        └── 01-01-SUMMARY.md
+```
+
+### Workflow Routing
+
+Use `/start-task` for intelligent routing:
+
+| Signal | Route |
+|--------|-------|
+| "new project", "build app" | `/gsd:new-project` |
+| "where was I", "resume" | `/gsd:progress` |
+| Multi-component scope | GSD (auto-detected) |
+| Single-phase work | Standard workflow |
 
 ---
 
@@ -121,36 +185,15 @@ Add "Review" section to task file: what changed, verification, issues.
 
 ---
 
-## Code Standards
+## Code Standards (Universal)
 
-### Universal
 - **Types:** Strict mode. No `any`. Use `unknown` for external data.
 - **Functions:** Single responsibility. <50 lines. <5 parameters.
 - **Files:** <300 lines. Split if larger.
 - **Names:** Descriptive. Self-documenting.
 - **DRY:** Extract patterns after 3rd repetition.
 
-### Style by Stack
-
-**TypeScript/JavaScript:**
-- ES6+ (const, let, arrow functions)
-- Named exports preferred
-- Destructure imports
-
-**React:**
-- Functional components + hooks
-- No class components
-- Props interface required
-
-**CSS:**
-- Semantic tokens (CSS variables)
-- No hardcoded colors
-- Mobile-first responsive
-
-**Python:**
-- Type hints on all functions
-- Zod-equivalent validation
-- PEP 8 style
+**Stack-specific patterns:** See `~/.claude/rules/stacks/`
 
 ---
 
@@ -180,12 +223,6 @@ Add "Review" section to task file: what changed, verification, issues.
 | Interaction latency | <100ms |
 | Lighthouse Performance | 95+ |
 | Accessibility | WCAG AA minimum |
-
-### Optimization Patterns
-- Lazy load non-essential code
-- Named imports for tree-shaking
-- GPU-accelerated animations (transform, opacity)
-- Memoize expensive calculations
 
 ---
 
@@ -231,10 +268,6 @@ type: Short summary (50 chars max)
 - User requested feature Y
 - Config A needed update
 
-## Impact
-- Users can now do Y
-- System A works with B
-
 ## Testing
 - All tests passing
 - Manual verification done
@@ -246,19 +279,43 @@ type: Short summary (50 chars max)
 - **NEVER** commit secrets (check for `.env`, API keys)
 - Pre-commit bypass is emergency-only (document why)
 
----
+### Auto-Commit on Task Completion
 
-## Documentation Hierarchy
+**When a task or plan is complete, automatically commit without being asked.**
 
-When docs conflict, higher authority wins:
+#### Trigger Conditions
+- Task file completed and verified
+- GSD phase executed successfully
+- Prompt or plan fully implemented
+- Any substantial work unit finished
 
-1. `docs/technical/development_principles.md`
-2. `docs/technical/*_guide.md`
-3. `docs/product/feature_map.md`
-4. `README.md`
-5. Inline code comments
+#### Pre-Commit Checks
+Before auto-committing, verify:
 
-**Living Documentation:** Update docs immediately when anything changes.
+```bash
+# 1. Check this is a user-owned repo (not external)
+git remote get-url origin | grep -q "travisjneuman" && echo "OK: User repo"
+
+# 2. Check push is not blocked
+git remote get-url --push origin | grep -q "no_push" && echo "SKIP: External repo"
+```
+
+#### Rules
+| Condition | Action |
+|-----------|--------|
+| User's own repo | Auto-commit + push |
+| External repo (`no_push`) | **Never commit** - read-only |
+| Submodule (external) | **Never commit** - read-only |
+| Uncommitted secrets detected | **Block** - warn user |
+
+#### Auto-Commit Flow
+1. Stage all relevant changes: `git add .`
+2. Generate descriptive commit title (type + summary)
+3. Write detailed body (What Changed, Why, Testing)
+4. Commit using format from Git Conventions above
+5. Push to origin (user repos only)
+
+**External repos are protected:** GSD, marketplace plugins, and any repo with `no_push` configured will never receive commits.
 
 ---
 
@@ -304,108 +361,88 @@ When docs conflict, higher authority wins:
 
 ---
 
-## Project-Specific Extensions
+## Contextual Rules (Read When Relevant)
 
-### Folder-Level CLAUDE.md
-Place `CLAUDE.md` in subdirectories for domain-specific instructions:
-```
-src/
-├── hooks/CLAUDE.md      # Hook patterns
-├── stores/CLAUDE.md     # State management
-├── components/CLAUDE.md # UI patterns
-└── services/CLAUDE.md   # Business logic
-```
+### Task-Type Checklists
+| Checklist | When to Read |
+|-----------|--------------|
+| `rules/checklists/ui-visual-changes.md` | ANY visual/UI changes |
+| `rules/checklists/automation-scripts.md` | Scripts, batch processing |
+| `rules/checklists/static-sites.md` | HTML/CSS/JS sites |
 
-**Always read relevant folder's CLAUDE.md when working in that area.**
+### Stack-Specific Patterns
+| Stack Guide | When to Read |
+|-------------|--------------|
+| `rules/stacks/react-typescript.md` | React + TypeScript projects |
+| `rules/stacks/python.md` | Python projects |
+| `rules/stacks/fullstack-nextjs-nestjs.md` | Full-stack Next.js/NestJS |
 
-### When to Update Folder CLAUDE.md
-- Adding/removing files → update inventory
-- Changing patterns → update conventions
-- New anti-patterns discovered → document them
-- Breaking changes → add to non-negotiables
+### Tooling & Setup
+| Guide | When to Read |
+|-------|--------------|
+| `rules/tooling/git-hooks-setup.md` | Setting up project automation |
+| `rules/tooling/troubleshooting.md` | Diagnosing common issues |
 
----
-
-## Stack-Specific Patterns
-
-### React + TypeScript
-```typescript
-interface Props {
-  title: string;
-  onAction: () => void;
-}
-
-export function Component({ title, onAction }: Props) {
-  // Implementation
-}
-```
-
-### Zustand Store
-```typescript
-interface State {
-  items: Item[];
-  addItem: (item: Item) => void;
-}
-
-export const useStore = create<State>()(
-  persist(
-    (set) => ({
-      items: [],
-      addItem: (item) => set((s) => ({ items: [...s.items, item] })),
-    }),
-    { name: 'store-name', version: 1 }
-  )
-);
-```
-
-### API Endpoint (NestJS pattern)
-```typescript
-@Post()
-@UseGuards(AuthGuard)
-async create(@Body() dto: CreateDto) {
-  return this.service.create(dto);
-}
-```
-
-### Static Site (Vanilla)
-- Pure HTML/CSS/JS — no build step
-- CSS variables for theming
-- ES6+ syntax
-- Event delegation
+**Full index:** `~/.claude/rules/README.md`
 
 ---
 
-## Quick Reference
+## Skills & Agents System
 
-### Common Commands
-```bash
-# Development
-npm run dev          # Start dev server
-npm run build        # Production build
-npm run test         # Run tests
-npm run type-check   # TypeScript check
-npm run lint         # Lint code
+**100+ skills and 30+ agents** provide domain expertise on demand.
 
-# Git
-git fetch origin main && git merge origin/main --no-edit
-git log -3
-git status
-git diff
+### Quick Trigger Guide
+
+| When Working On... | Use Skill | Or Agent |
+|--------------------|-----------|----------|
+| iOS/iPadOS/tvOS app | `ios-development` | `ios-developer` |
+| Android app | `android-development` | `android-developer` |
+| React Native / Flutter | `react-native`, `flutter-development` | `mobile-architect` |
+| Desktop app (Electron) | `electron-desktop` | `desktop-developer` |
+| PWA | `pwa-development` | — |
+| Visual design / colors | `graphic-design` | `graphic-designer` |
+| Video production | `video-production` | `video-producer` |
+| Audio / podcast | `audio-production` | `audio-engineer` |
+| Branding | `brand-identity` | `brand-strategist` |
+| UI animations | `ui-animation` | `motion-designer` |
+| Startup launch | `startup-launch` | `startup-advisor` |
+| Pricing / monetization | `monetization-strategy` | `monetization-expert` |
+| GraphQL API | `graphql-expert` | `graphql-architect` |
+| Microservices | `microservices-architecture` | `microservices-architect` |
+| i18n / localization | `i18n-localization` | `i18n-specialist` |
+| Real-time / WebSockets | `websockets-realtime` | `realtime-specialist` |
+| Code review | `generic-code-reviewer` | `deep-code-reviewer` |
+| Security audit | `security` | `security-auditor` |
+| Debugging | `debug-systematic` | `debugging-specialist` |
+| Testing / TDD | `test-specialist`, `tdd-workflow` | `test-generator` |
+
+### Skill Categories
+
+| Category | Count | Examples |
+|----------|-------|----------|
+| **Platform Dev** | 6 | iOS, Android, React Native, Flutter, Electron, PWA |
+| **Creative** | 5 | Graphic design, video, audio, branding, motion |
+| **Business** | 7 | Startup, monetization, marketing, sales, finance |
+| **Technical** | 5 | GraphQL, microservices, i18n, WebSockets, API design |
+| **Domain Expert** | 16 | Strategy, leadership, security, data science, etc. |
+| **Stack-Specific** | 12 | Static, React, Full-stack variants |
+| **Utilities** | 6 | Docs, testing, SEO, tech debt |
+
+### How to Invoke
+
+```
+# Skills (knowledge/patterns) - automatic or explicit
+"Help me build a SwiftUI app"          → auto-loads ios-development
+Skill(graphic-design)                   → explicit invocation
+
+# Agents (task execution) - always explicit
+"Use the security-auditor agent to review this code"
+"Use the startup-advisor agent for my pitch deck"
 ```
 
-### File Naming
-| Type | Convention | Example |
-|------|------------|---------|
-| Components | PascalCase | `UserCard.tsx` |
-| Pages | kebab-case folders | `my-page/page.tsx` |
-| Utilities | camelCase | `utils.ts` |
-| Hooks | use prefix | `useAuth.ts` |
-| Tests | `.test.ts` suffix | `utils.test.ts` |
-
-### Critical Invariants (Common)
-- Date keys: `YYYY-M-D` (non-padded) for calendar systems
-- Schema changes require reversible migrations
-- All user data must survive backup/restore round-trip
+**Full indexes:**
+- Skills: `~/.claude/skills/MASTER_INDEX.md`
+- Agents: `~/.claude/agents/README.md`
 
 ---
 
@@ -438,11 +475,7 @@ Use structured decision-making for complex choices:
 5. Verify fix
 
 ### Intermittent/Complex Issues
-Use `debug-like-expert` skill for systematic approach:
-- Hypothesis generation
-- Evidence gathering
-- Root cause analysis
-- Prevention strategy
+Use `debug-like-expert` skill for systematic approach.
 
 ---
 
@@ -450,14 +483,8 @@ Use `debug-like-expert` skill for systematic approach:
 
 **We build features. We use utilities.**
 
-### What We Build (90%+ ownership)
-- All feature logic, business rules, UI/UX
-- All data models, persistence, exports
-- All user-facing functionality
-
-### What We Use (Utilities)
-- **Allowed:** Low-level abstractions (D3, Recharts, Lexical, Konva)
-- **Not Allowed:** Complete feature implementations
+- **Build:** All feature logic, business rules, UI/UX, data models
+- **Use:** Low-level abstractions (D3, Recharts, Lexical, Konva)
 - **Criterion:** We own the feature, library handles complexity
 
 ### License Requirements
@@ -491,53 +518,48 @@ Use `AskUserQuestion` when:
 
 ---
 
-## Resources
-
-### Official
-- [Claude Code Docs](https://code.claude.com/docs)
-- [Anthropic Best Practices](https://www.anthropic.com/engineering/claude-code-best-practices)
-- [CLAUDE.md Guide](https://claude.com/blog/using-claude-md-files)
-
-### Community
-- [awesome-claude-code](https://github.com/hesreallyhim/awesome-claude-code)
-- [awesome-claude-md](https://github.com/josix/awesome-claude-md)
-- [ClaudeLog](https://claudelog.com/)
-
----
-
-## File Organization Guidance
-
-This global CLAUDE.md should be split for specific projects:
+## File Organization
 
 | Content Type | Location |
 |--------------|----------|
 | Universal rules | `~/.claude/CLAUDE.md` (this file) |
-| Project overview | `<project>/CLAUDE.md` |
-| Folder-specific | `<project>/src/<folder>/CLAUDE.md` |
-| Personal preferences | `<project>/CLAUDE.local.md` |
-| Modular rules | `<project>/.claude/rules/*.md` |
-
-**When starting a new project:**
-1. Run `/init` to generate base CLAUDE.md
-2. Review this global file for applicable rules
-3. Copy relevant sections to project CLAUDE.md
-4. Remove project-specific content from global file
+| Contextual rules | `~/.claude/rules/` |
+| Skills | `~/.claude/skills/` |
+| Templates | `~/.claude/templates/` |
+| Commands | `~/.claude/commands/` |
+| Project-specific | `<project>/CLAUDE.md` |
 
 ---
 
-## Maintenance
+## Quick Reference
 
-### Review Triggers
-- After significant project changes
-- When patterns become outdated
-- When new anti-patterns discovered
-- Quarterly review recommended
+### Common Commands
+```bash
+npm run dev          # Start dev server
+npm run build        # Production build
+npm run test         # Run tests
+npm run type-check   # TypeScript check
+```
 
-### Update Process
-1. Identify what needs updating
-2. Make minimal, focused changes
-3. Test that instructions work as expected
-4. Commit with clear message
+### File Naming
+| Type | Convention | Example |
+|------|------------|---------|
+| Components | PascalCase | `UserCard.tsx` |
+| Hooks | use prefix | `useAuth.ts` |
+| Utilities | camelCase | `utils.ts` |
+| Tests | .test.ts | `utils.test.ts` |
+
+---
+
+## Resources
+
+### Official
+- [Claude Code Docs](https://docs.anthropic.com/en/docs/claude-code)
+- [Anthropic Best Practices](https://www.anthropic.com/engineering/claude-code-best-practices)
+
+### Community
+- [awesome-claude-code](https://github.com/hesreallyhim/awesome-claude-code)
+- [awesome-claude-md](https://github.com/josix/awesome-claude-md)
 
 ---
 

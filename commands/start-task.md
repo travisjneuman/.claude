@@ -8,7 +8,21 @@ arguments:
 
 # Start Task - Intelligent Workflow Router
 
-Analyzes your task and automatically routes to the optimal execution strategy per CLAUDE.md's Intelligent Prompt Routing system with ultrathink enabled. Integrates with GSD (Get Shit Done) for multi-phase projects.
+Analyzes your task and automatically routes to the optimal execution strategy.
+
+## Requirements
+
+**ALWAYS read and follow these before executing any routed workflow:**
+
+1. **`~/.claude/CLAUDE.md`** - Global constitution (P0 non-negotiables, workflow rules, code standards)
+2. **GSD System** - For multi-phase projects, uses `/gsd:*` commands from [get-shit-done](https://github.com/glittercowboy/get-shit-done)
+
+## Integration Points
+
+- **CLAUDE.md Workflow Section** - Standard 5-step workflow (Plan → Approve → Execute → Verify → Close)
+- **CLAUDE.md GSD Section** - When to use GSD vs standard workflow
+- **CLAUDE.md Skills & Agents** - Available skills/agents for task execution
+- **CLAUDE.md Contextual Rules** - Stack-specific and task-type checklists
 
 ## Pre-Routing: Project Detection
 

@@ -56,3 +56,4 @@ Thumbs.db
 # - plugins/marketplaces/ (read-only upstream repos)
 # - plugins/known_marketplaces.json
 # ============================================
+.credentials.json
