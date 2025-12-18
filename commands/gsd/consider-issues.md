@@ -17,10 +17,9 @@ This prevents issue pile-up by providing a triage mechanism with codebase awaren
 </objective>
 
 <context>
-Issues file: !`cat .planning/ISSUES.md 2>/dev/null || echo "NO_ISSUES_FILE"`
-Project state: !`cat .planning/STATE.md 2>/dev/null | head -50`
-Current phase: !`grep -E "^Phase:" .planning/STATE.md 2>/dev/null || echo "UNKNOWN"`
-Roadmap phases: !`grep -E "^### Phase [0-9]" .planning/ROADMAP.md 2>/dev/null || echo "NO_ROADMAP"`
+@.planning/ISSUES.md
+@.planning/STATE.md
+@.planning/ROADMAP.md
 </context>
 
 <process>

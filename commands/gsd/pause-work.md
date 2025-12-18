@@ -14,7 +14,6 @@ Enables seamless resumption in fresh session with full context restoration.
 
 <context>
 @.planning/STATE.md
-Current phase: !`ls -lt .planning/phases/*/*.md 2>/dev/null | head -1`
 </context>
 
 <process>

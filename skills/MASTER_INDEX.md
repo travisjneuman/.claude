@@ -1,6 +1,6 @@
 # Skills Documentation - Master Index
 
-Navigate all skills documentation from this central hub.
+Navigate all 100+ skills from this central hub.
 
 ---
 
@@ -9,7 +9,7 @@ Navigate all skills documentation from this central hub.
 | File | Purpose | When to Read |
 |------|---------|--------------|
 | [README.md](./README.md) | Skills library overview | Starting with skills system |
-| [EXPERT-SKILLS-GUIDE.md](./EXPERT-SKILLS-GUIDE.md) | All 16 domain expert skills | Domain expertise |
+| [EXPERT-SKILLS-GUIDE.md](./EXPERT-SKILLS-GUIDE.md) | 16 domain expert skills | Domain expertise |
 
 ---
 
@@ -30,6 +30,54 @@ Navigate all skills documentation from this central hub.
 | `generic-react-*` | React/TypeScript | code-reviewer, design-system, feature-developer, ux-designer |
 | `generic-fullstack-*` | Next.js/NestJS | code-reviewer, design-system, feature-developer, ux-designer |
 
+### Platform Development Skills
+| Skill | Platform | Description |
+|-------|----------|-------------|
+| `ios-development` | iOS/iPadOS/tvOS | Swift, SwiftUI, UIKit, Apple ecosystem |
+| `android-development` | Android | Kotlin, Jetpack Compose, Material Design |
+| `react-native` | Cross-platform | React Native patterns, native modules |
+| `flutter-development` | Cross-platform | Dart, Flutter widgets, state management |
+| `electron-desktop` | Desktop | Electron, Tauri, cross-platform desktop |
+| `pwa-development` | Web | Progressive Web Apps, service workers |
+
+### Creative & Design Skills
+| Skill | Domain | Description |
+|-------|--------|-------------|
+| `graphic-design` | Visual Design | Color theory, typography, layout, composition |
+| `video-production` | Video | Pre/post production, camera, lighting, editing |
+| `audio-production` | Audio | Recording, mixing, mastering, sound design |
+| `brand-identity` | Branding | Brand strategy, positioning, visual identity |
+| `ui-animation` | Motion | Animation principles, micro-interactions, easing |
+
+### Business & Startup Skills
+| Skill | Domain | Description |
+|-------|--------|-------------|
+| `startup-launch` | Startups | Idea validation, MVP, launch phases |
+| `monetization-strategy` | Revenue | Pricing psychology, SaaS metrics, models |
+| `business-strategy` | Strategy | Strategic planning, competitive analysis |
+| `finance` | Finance | Financial modeling, valuation, analysis |
+| `marketing` | Growth | Brand strategy, digital marketing, analytics |
+| `sales` | Revenue | Sales methodologies, pipeline management |
+| `product-management` | Product | Roadmaps, prioritization, product-market fit |
+
+### Technical Architecture Skills
+| Skill | Domain | Description |
+|-------|--------|-------------|
+| `graphql-expert` | APIs | Schema design, resolvers, subscriptions |
+| `microservices-architecture` | Architecture | Service design, resilience, observability |
+| `i18n-localization` | Internationalization | ICU format, RTL, locale handling |
+| `websockets-realtime` | Real-time | WebSocket, SSE, Socket.IO, scaling |
+| `api-design` | APIs | REST/GraphQL design, OpenAPI specs |
+
+### Infrastructure & Operations Skills
+| Skill | Domain | Description |
+|-------|--------|-------------|
+| `devops-cloud` | DevOps | AWS, GCP, Azure, Kubernetes, Terraform, CI/CD |
+| `database-expert` | Databases | PostgreSQL, MongoDB, Redis advanced patterns |
+| `ai-ml-development` | AI/ML | PyTorch, TensorFlow, LLM integration, MLOps |
+| `game-development` | Gaming | Unity, Unreal Engine, Godot |
+| `macos-native` | macOS | AppKit, Catalyst, macOS system integration |
+
 ### Domain Expert Skills
 | Domain | Skills |
 |--------|--------|
@@ -40,6 +88,12 @@ Navigate all skills documentation from this central hub.
 | Innovation & R&D | `innovation`, `rd-management` |
 | Data & Analytics | `data-science` |
 | Sustainability | `sustainability-esg` |
+
+### Development Workflow Skills
+| Skill | Description |
+|-------|-------------|
+| `debug-systematic` | 4-phase debugging methodology (REPRODUCE -> ISOLATE -> DIAGNOSE -> FIX) |
+| `tdd-workflow` | Test-Driven Development with RED-GREEN-REFACTOR cycle |
 
 ### Utility Skills
 | Skill | Description |
@@ -52,22 +106,129 @@ Navigate all skills documentation from this central hub.
 
 ---
 
+## Subagents (30+)
+
+Located in `~/.claude/agents/`. See [agents/README.md](../agents/README.md).
+
+### Code Quality
+| Agent | Purpose | Model |
+|-------|---------|-------|
+| `deep-code-reviewer` | Comprehensive 6-aspect code review | opus |
+| `security-auditor` | OWASP Top 10 and security analysis | sonnet |
+| `refactoring-specialist` | Safe, incremental code improvement | sonnet |
+| `performance-optimizer` | Bottleneck identification | sonnet |
+
+### Development
+| Agent | Purpose | Model |
+|-------|---------|-------|
+| `test-generator` | TDD-focused test suite generation | sonnet |
+| `api-designer` | REST/GraphQL API design | sonnet |
+| `database-expert` | Schema design and query optimization | sonnet |
+| `devops-specialist` | CI/CD, containers, infrastructure | sonnet |
+| `debugging-specialist` | Systematic 4-phase debugging | sonnet |
+
+### Architecture
+| Agent | Purpose | Model |
+|-------|---------|-------|
+| `architecture-analyst` | System design and pattern analysis | opus |
+| `graphql-architect` | GraphQL schema and resolver design | sonnet |
+| `microservices-architect` | Distributed systems and service design | sonnet |
+| `realtime-specialist` | WebSockets and live data systems | sonnet |
+
+### Platform Development
+| Agent | Purpose | Model |
+|-------|---------|-------|
+| `ios-developer` | iOS/iPadOS/tvOS with Swift, SwiftUI | sonnet |
+| `android-developer` | Android with Kotlin, Jetpack Compose | sonnet |
+| `mobile-architect` | Cross-platform mobile decisions | sonnet |
+| `desktop-developer` | Electron, Tauri, desktop apps | sonnet |
+| `i18n-specialist` | Internationalization and localization | sonnet |
+
+### Creative & Design
+| Agent | Purpose | Model |
+|-------|---------|-------|
+| `graphic-designer` | Visual design, color, typography | sonnet |
+| `video-producer` | Video production and editing | sonnet |
+| `audio-engineer` | Audio production and sound design | sonnet |
+| `brand-strategist` | Brand identity and positioning | sonnet |
+| `motion-designer` | UI animation and micro-interactions | sonnet |
+
+### Business & Strategy
+| Agent | Purpose | Model |
+|-------|---------|-------|
+| `startup-advisor` | Startup launch and validation | sonnet |
+| `monetization-expert` | Revenue models and pricing strategy | sonnet |
+
+### Infrastructure & Specialized
+| Agent | Purpose | Model |
+|-------|---------|-------|
+| `devops-engineer` | Cloud infrastructure, Kubernetes, CI/CD | sonnet |
+| `ml-engineer` | Machine learning, LLM integration, MLOps | sonnet |
+| `game-developer` | Unity, Unreal, Godot game development | sonnet |
+| `macos-developer` | Native macOS AppKit development | sonnet |
+| `database-architect` | Schema design, query optimization | sonnet |
+
+### Language Experts
+| Agent | Purpose | Model |
+|-------|---------|-------|
+| `typescript-expert` | Type system mastery | sonnet |
+| `python-expert` | Python best practices | sonnet |
+| `react-expert` | React patterns and hooks | sonnet |
+
+### Support
+| Agent | Purpose | Model |
+|-------|---------|-------|
+| `documentation-writer` | Docs, READMEs, API specs | haiku |
+| `code-explainer` | Clear code explanations | haiku |
+| `accessibility-expert` | WCAG compliance | sonnet |
+
+---
+
 ## Quick Start
 
 **New to skills?** Read [README.md](./README.md) first.
 
 **Need domain expertise?** Jump to [EXPERT-SKILLS-GUIDE.md](./EXPERT-SKILLS-GUIDE.md).
 
-**Working on marketing/sales?** Use `marketing` and `sales` skills.
+### By Task Type
+
+| Task | Skills/Agents |
+|------|---------------|
+| Building iOS app | `ios-development` skill, `ios-developer` agent |
+| Building Android app | `android-development` skill, `android-developer` agent |
+| Cross-platform mobile | `react-native` or `flutter-development` skill, `mobile-architect` agent |
+| Desktop app | `electron-desktop` skill, `desktop-developer` agent |
+| macOS native app | `macos-native` skill, `macos-developer` agent |
+| Real-time features | `websockets-realtime` skill, `realtime-specialist` agent |
+| API design | `api-design` or `graphql-expert` skill, `graphql-architect` agent |
+| Microservices | `microservices-architecture` skill, `microservices-architect` agent |
+| DevOps / Cloud | `devops-cloud` skill, `devops-engineer` agent |
+| Database design | `database-expert` skill, `database-architect` agent |
+| AI / Machine Learning | `ai-ml-development` skill, `ml-engineer` agent |
+| Game development | `game-development` skill, `game-developer` agent |
+| Internationalization | `i18n-localization` skill, `i18n-specialist` agent |
+| Visual design | `graphic-design` skill, `graphic-designer` agent |
+| Video work | `video-production` skill, `video-producer` agent |
+| Audio work | `audio-production` skill, `audio-engineer` agent |
+| Branding | `brand-identity` skill, `brand-strategist` agent |
+| UI animations | `ui-animation` skill, `motion-designer` agent |
+| Starting a startup | `startup-launch` skill, `startup-advisor` agent |
+| Pricing strategy | `monetization-strategy` skill, `monetization-expert` agent |
+| Debugging | `debug-systematic` skill, `debugging-specialist` agent |
+| Writing tests | `tdd-workflow` skill, `test-generator` agent |
+| Code review | `generic-code-reviewer` skill, `deep-code-reviewer` agent |
+| Security audit | `security` skill, `security-auditor` agent |
 
 ---
 
 ## Related Documentation
 
-- `~/.claude/docs/SKILLS.md` - Skills system guide
+- `~/.claude/docs/RESOURCES.md` - External resources and learning
 - `~/.claude/docs/workflow-automation.md` - Workflow automation
+- `~/.claude/agents/README.md` - Subagents reference
 - `~/.claude/CLAUDE.md` - Global instructions
+- `~/.claude/README.md` - Installation guide
 
 ---
 
-*Last updated: December 17, 2025*
+*Last updated: December 2025*
