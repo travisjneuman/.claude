@@ -470,10 +470,15 @@ The `filesystem` server has access to files. Current scope is `.` (current direc
 {
   "filesystem": {
     "command": "npx",
-    "args": ["-y", "@modelcontextprotocol/server-filesystem", "C:/Users/tjn"]
+    "args": ["-y", "@modelcontextprotocol/server-filesystem", "~"]
   }
 }
 ```
+
+**Note:** Replace `~` with your actual home path if needed:
+- Windows: `C:/Users/username`
+- macOS: `/Users/username`
+- Linux: `/home/username`
 
 **Warning:** Broader access means Claude can read/write more files.
 
