@@ -183,6 +183,26 @@ Use `/start-task` for intelligent routing:
 - Subagents for isolated work phases
 - Check `/context` mid-session (aim for <50% usage)
 
+### MCP Server Awareness
+
+All MCP servers are **disabled by default** for efficiency. When tasks would benefit from MCP capabilities, suggest enabling via `/mcp`.
+
+| Task Type | Suggest Enabling |
+|-----------|------------------|
+| Complex reasoning, architecture decisions | `sequential-thinking` |
+| E2E tests, browser automation | `playwright` |
+| Multi-session context persistence | `memory` |
+| SQLite database operations | `sqlite` |
+| Frontend debugging, performance | `chrome-devtools` |
+| Very large codebases (100k+ lines) | `context7` |
+
+**Workflow:**
+1. Suggest: "This task would benefit from the `playwright` MCP server. Enable via `/mcp`."
+2. User enables manually (automatic enable not yet supported)
+3. After task: "You can disable `playwright` via `/mcp` to free context."
+
+**Reference:** `~/.claude/rules/tooling/mcp-servers.md` for full details.
+
 ---
 
 ## Code Standards (Universal)
