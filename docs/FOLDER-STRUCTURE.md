@@ -9,7 +9,7 @@ Complete map of the `.claude/` folder and related files.
 ## Overview
 
 ```
-~/ (Home Directory: C:\Users\tjn\)
+~/                                  ← Home directory (cross-platform)
 │
 ├── .claude.json                    ← MCP servers (OUTSIDE .claude/)
 │
@@ -231,9 +231,14 @@ Stores planning documents organized by project.
 
 ### `~/.claude.json`
 
-**Location:** `C:\Users\tjn\.claude.json` (NOT inside .claude/)
+**Location:** `~/.claude.json` (NOT inside .claude/)
 
 **Purpose:** MCP server configurations
+
+**Platform paths:**
+- Windows: `C:\Users\username\.claude.json`
+- macOS: `/Users/username/.claude.json`
+- Linux: `/home/username/.claude.json`
 
 ---
 

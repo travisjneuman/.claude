@@ -221,7 +221,7 @@ claude
 ### Windows
 
 - Path separators work either way (`/` or `\`)
-- Home directory: `C:\Users\username\`
+- Home directory: `C:\Users\username\` (or `~` in Git Bash/WSL)
 - Use PowerShell for setup commands
 
 ### Mac

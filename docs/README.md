@@ -57,7 +57,7 @@ This `.claude/` folder contains a fully configured, portable Claude Code environ
 ## File Relationships
 
 ```
-C:\Users\tjn\                    (Home Directory)
+~/                               (Home Directory - cross-platform)
 ├── .claude.json                 ← MCP servers config (SIBLING to .claude/)
 │
 └── .claude/                     ← This folder (skills, commands, settings)
@@ -71,6 +71,11 @@ C:\Users\tjn\                    (Home Directory)
     ├── docs/                    ← This documentation
     └── ...
 ```
+
+**Platform-specific paths:**
+- Windows: `C:\Users\username\`
+- macOS: `/Users/username/`
+- Linux: `/home/username/`
 
 **Critical:** The `.claude.json` at `~/.claude.json` is NOT inside `.claude/`. They are siblings.
 
