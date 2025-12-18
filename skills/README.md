@@ -1,16 +1,33 @@
 # Claude Code Skills Library
 
-Custom skills for Claude Code - reusable across any project.
+Comprehensive skills for Claude Code - 100+ skills covering all development domains.
 
-**Version:** 3.0 (Domain-Named)
-**Last Updated:** December 17, 2025
+**Version:** 4.0 (Full Coverage)
+**Last Updated:** December 2025
 
 ---
 
-## Generic Skills (Use for Any Project)
+## Skills Overview
+
+| Category | Count | Coverage |
+|----------|-------|----------|
+| Generic Development | 4 | Any project |
+| Stack-Specific | 12 | Static, React, Full-stack |
+| Platform Development | 6 | iOS, Android, Desktop, PWA |
+| Creative & Design | 5 | Visual, Video, Audio, Brand, Motion |
+| Business & Startup | 7 | Strategy, Finance, Marketing, Sales |
+| Technical Architecture | 5 | GraphQL, Microservices, i18n, Real-time |
+| Domain Expertise | 16 | Business, Leadership, Operations, etc. |
+| Development Workflow | 2 | Debug, TDD |
+| Utilities | 6 | Docs, Testing, SEO, Tech Debt |
+
+**Total: 60+ unique skills**
+
+---
+
+## Generic Skills (Any Project)
 
 ### Development Skills
-
 | Skill | Purpose | When to Use |
 |-------|---------|-------------|
 | **generic-code-reviewer** | Multi-stack code review | Before commits, PR reviews |
@@ -19,21 +36,17 @@ Custom skills for Claude Code - reusable across any project.
 | **generic-ux-designer** | UX best practices | Design reviews, user flows |
 
 ### Utility Skills
-
 | Skill | Purpose | When to Use |
 |-------|---------|-------------|
 | **codebase-documenter** | Generate documentation | README, API docs, comments |
 | **tech-debt-analyzer** | Code health analysis | Audits, refactoring planning |
 | **test-specialist** | Testing guidance | Writing tests, debugging |
 | **frontend-enhancer** | Frontend patterns | UI improvements |
-| **document-skills** | Office docs (docx, xlsx, pptx, pdf) | Document creation |
 | **seo-analytics-auditor** | SEO analysis | Performance audits |
 
 ---
 
 ## Stack-Specific Skills
-
-These skills provide stack-specific guidance. Use them when working with particular tech stacks.
 
 ### generic-static-* (Static HTML/CSS/JS Sites)
 - **generic-static-code-reviewer** - Pure HTML/CSS/JS, performance focus
@@ -55,6 +68,114 @@ These skills provide stack-specific guidance. Use them when working with particu
 
 ---
 
+## Platform Development Skills
+
+| Skill | Platform | Key Technologies |
+|-------|----------|-----------------|
+| **ios-development** | iOS/iPadOS/tvOS | Swift, SwiftUI, UIKit, Combine |
+| **android-development** | Android | Kotlin, Jetpack Compose, Material Design |
+| **react-native** | Cross-platform Mobile | React Native, Expo, Native Modules |
+| **flutter-development** | Cross-platform Mobile | Dart, Flutter Widgets, Riverpod |
+| **electron-desktop** | Desktop | Electron, Tauri, Node.js Integration |
+| **pwa-development** | Progressive Web Apps | Service Workers, Web Manifest, Offline |
+
+### Usage Examples
+```
+"Help me build a SwiftUI app" → uses ios-development
+"Set up Jetpack Compose navigation" → uses android-development
+"Create an Electron app for Windows/Mac" → uses electron-desktop
+```
+
+---
+
+## Creative & Design Skills
+
+| Skill | Domain | Coverage |
+|-------|--------|----------|
+| **graphic-design** | Visual Design | Color theory, typography, layout, composition |
+| **video-production** | Video | Pre/post production, camera, lighting, editing |
+| **audio-production** | Audio | Recording, mixing, mastering, sound design |
+| **brand-identity** | Branding | Brand strategy, positioning, visual identity |
+| **ui-animation** | Motion Design | Animation principles, micro-interactions, easing |
+
+### Usage Examples
+```
+"Create a color palette for my SaaS" → uses graphic-design
+"Plan a product video" → uses video-production
+"Set up audio for a podcast" → uses audio-production
+"Design brand guidelines" → uses brand-identity
+"Add smooth transitions to my app" → uses ui-animation
+```
+
+---
+
+## Business & Startup Skills
+
+| Skill | Domain | Coverage |
+|-------|--------|----------|
+| **startup-launch** | Startups | Idea validation, MVP, launch phases |
+| **monetization-strategy** | Revenue | Pricing psychology, SaaS metrics, models |
+| **business-strategy** | Strategy | Strategic planning, competitive analysis |
+| **finance** | Finance | Financial modeling, valuation, analysis |
+| **marketing** | Growth | Brand strategy, digital marketing, analytics |
+| **sales** | Revenue | Sales methodologies, pipeline management |
+| **product-management** | Product | Roadmaps, prioritization, product-market fit |
+
+### Usage Examples
+```
+"Validate my startup idea" → uses startup-launch
+"Design pricing tiers" → uses monetization-strategy
+"Build a financial model" → uses finance
+"Plan a go-to-market strategy" → uses marketing
+```
+
+---
+
+## Technical Architecture Skills
+
+| Skill | Domain | Coverage |
+|-------|--------|----------|
+| **graphql-expert** | APIs | Schema design, resolvers, DataLoader, subscriptions |
+| **microservices-architecture** | Architecture | Service design, resilience, observability |
+| **i18n-localization** | Internationalization | ICU format, RTL support, Intl API |
+| **websockets-realtime** | Real-time | WebSocket, SSE, Socket.IO, scaling |
+| **api-design** | APIs | REST/GraphQL design, OpenAPI specs |
+
+### Usage Examples
+```
+"Design a GraphQL schema" → uses graphql-expert
+"Split monolith to microservices" → uses microservices-architecture
+"Add multi-language support" → uses i18n-localization
+"Build real-time notifications" → uses websockets-realtime
+```
+
+---
+
+## Domain Expert Skills
+
+| Domain | Skills |
+|--------|--------|
+| Business & Strategy | `business-strategy`, `finance` |
+| Operations & Technology | `operations`, `security`, `risk-management`, `legal-compliance` |
+| People & Leadership | `leadership`, `hr-talent`, `health-wellness` |
+| Revenue & Growth | `marketing`, `sales`, `product-management` |
+| Innovation & R&D | `innovation`, `rd-management` |
+| Data & Analytics | `data-science` |
+| Sustainability | `sustainability-esg` |
+
+See [EXPERT-SKILLS-GUIDE.md](./EXPERT-SKILLS-GUIDE.md) for detailed coverage.
+
+---
+
+## Development Workflow Skills
+
+| Skill | Purpose |
+|-------|---------|
+| **debug-systematic** | 4-phase debugging: REPRODUCE → ISOLATE → DIAGNOSE → FIX |
+| **tdd-workflow** | Test-Driven Development with RED-GREEN-REFACTOR cycle |
+
+---
+
 ## How to Use Skills
 
 ### Automatic Activation
@@ -63,15 +184,16 @@ Skills activate when relevant context appears in conversation.
 ### Explicit Invocation
 Request skills directly:
 ```
-Use generic-code-reviewer to review this code
-Use generic-design-system for the color choices
-Use tech-debt-analyzer on this codebase
+Use ios-development to review this Swift code
+Use graphic-design for color palette suggestions
+Use monetization-strategy for pricing advice
 ```
 
 ### Skill Tool
 ```
-Skill(generic-code-reviewer)
-Skill(tech-debt-analyzer)
+Skill(ios-development)
+Skill(graphic-design)
+Skill(monetization-strategy)
 ```
 
 ---
@@ -124,54 +246,16 @@ Verify skill activates when expected context appears.
 
 ---
 
-## Skill Categories
+## Skills vs Agents
 
-### By Tech Stack
+| Feature | Skills | Agents |
+|---------|--------|--------|
+| **Purpose** | Domain knowledge, guidelines | Specialized task execution |
+| **Activation** | Automatic or explicit | Explicit invocation |
+| **Scope** | Main conversation | Separate context |
+| **Best for** | Knowledge, patterns | Multi-step tasks |
 
-| Stack | Recommended Skills |
-|-------|-------------------|
-| HTML/CSS/JS | generic-*, generic-static-* |
-| React/TypeScript | generic-*, generic-react-* |
-| Next.js/NestJS | generic-*, generic-fullstack-* |
-| Python | generic-code-reviewer, tech-debt-analyzer |
-| Any | codebase-documenter, test-specialist |
-
-### Domain Expert Skills
-
-| Domain | Skills |
-|--------|--------|
-| Business & Strategy | `business-strategy`, `finance` |
-| Operations & Technology | `operations`, `security`, `risk-management`, `legal-compliance` |
-| People & Leadership | `leadership`, `hr-talent`, `health-wellness` |
-| Revenue & Growth | `marketing`, `sales`, `product-management` |
-| Innovation & R&D | `innovation`, `rd-management` |
-| Data & Analytics | `data-science` |
-| Sustainability | `sustainability-esg` |
-
-### By Task Type
-
-| Task | Recommended Skills |
-|------|-------------------|
-| Code review | generic-code-reviewer, [project]-code-reviewer |
-| New feature | generic-feature-developer |
-| UI/Styling | generic-design-system |
-| UX design | generic-ux-designer |
-| Documentation | codebase-documenter |
-| Code health | tech-debt-analyzer |
-| Testing | test-specialist |
-| Documents | document-skills |
-
----
-
-## Skills vs Other Claude Code Features
-
-| Feature | Use For |
-|---------|---------|
-| **Skills** | Domain knowledge, guidelines, patterns |
-| **Slash Commands** | Quick actions, workflows |
-| **Hooks** | Automated responses to events |
-| **Subagents** | Complex multi-step tasks |
-| **MCP Servers** | External tool integration |
+**Rule of thumb:** Use skills for guidance, agents for doing.
 
 ---
 
@@ -196,19 +280,40 @@ Verify skill activates when expected context appears.
 
 ---
 
-## See Also
+## Quick Reference by Task
 
-- `.claude/docs/workflow-automation.md` - Workflow automation & checklists
-- `.claude/skills/MASTER_INDEX.md` - Skills navigation hub
-- `.claude/skills/EXPERT-SKILLS-GUIDE.md` - Domain expert skills guide
-- `.claude/commands/` - Custom slash commands
-- `.claude/templates/` - Task templates
-- `CLAUDE.md` - Project workflow rules
+| Task | Recommended Skill(s) |
+|------|---------------------|
+| iOS app | `ios-development` |
+| Android app | `android-development` |
+| Cross-platform mobile | `react-native`, `flutter-development` |
+| Desktop app | `electron-desktop` |
+| PWA | `pwa-development` |
+| Visual design | `graphic-design` |
+| Video production | `video-production` |
+| Audio production | `audio-production` |
+| Branding | `brand-identity` |
+| UI animations | `ui-animation` |
+| Starting a startup | `startup-launch` |
+| Pricing strategy | `monetization-strategy` |
+| GraphQL API | `graphql-expert` |
+| Microservices | `microservices-architecture` |
+| i18n/l10n | `i18n-localization` |
+| Real-time features | `websockets-realtime` |
+| Code review | `generic-code-reviewer` |
+| Debugging | `debug-systematic` |
+| Testing | `test-specialist`, `tdd-workflow` |
 
 ---
 
-## Questions?
+## See Also
 
-- Skills not activating? Check skill name and description match context
-- Need new skill? Follow existing patterns in this folder
-- Skill conflicts? Review descriptions for proper use cases
+- [MASTER_INDEX.md](./MASTER_INDEX.md) - Complete skills navigation
+- [EXPERT-SKILLS-GUIDE.md](./EXPERT-SKILLS-GUIDE.md) - Domain expert skills
+- [agents/README.md](../agents/README.md) - Subagents reference
+- [CLAUDE.md](../CLAUDE.md) - Global configuration
+- [README.md](../README.md) - Installation guide
+
+---
+
+*Questions? Skills not activating? Check skill name and description match context.*

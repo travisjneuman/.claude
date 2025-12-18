@@ -22,9 +22,6 @@ Creates `.planning/` with PROJECT.md and config.json.
 @~/.claude/get-shit-done/templates/config.json
 </execution_context>
 
-<context>
-!`[ -d .planning ] && echo "PLANNING_EXISTS" || echo "NO_PLANNING"`
-</context>
 
 <process>
 
@@ -33,7 +30,7 @@ Creates `.planning/` with PROJECT.md and config.json.
 
 1. **Abort if project exists:**
    ```bash
-   [ -d .planning ] && echo "ERROR: Project already initialized. Use /gsd:progress" && exit 1
+   [ -f .planning/PROJECT.md ] && echo "ERROR: Project already initialized. Use /gsd:progress" && exit 1
    ```
 
 2. **Initialize git repo in THIS directory** (required even if inside a parent repo):
@@ -47,20 +44,50 @@ Creates `.planning/` with PROJECT.md and config.json.
    fi
    ```
 
-   **You MUST run both bash commands above using the Bash tool before proceeding.**
+3. **Detect existing code (brownfield detection):**
+   ```bash
+   # Check for existing code files
+   CODE_FILES=$(find . -name "*.ts" -o -name "*.js" -o -name "*.py" -o -name "*.go" -o -name "*.rs" -o -name "*.swift" -o -name "*.java" 2>/dev/null | grep -v node_modules | grep -v .git | head -20)
+   HAS_PACKAGE=$([ -f package.json ] || [ -f requirements.txt ] || [ -f Cargo.toml ] || [ -f go.mod ] || [ -f Package.swift ] && echo "yes")
+   HAS_CODEBASE_MAP=$([ -d .planning/codebase ] && echo "yes")
+   ```
+
+   **You MUST run all bash commands above using the Bash tool before proceeding.**
+</step>
+
+<step name="brownfield_offer">
+**If existing code detected and .planning/codebase/ doesn't exist:**
+
+Check the results from setup step:
+- If `CODE_FILES` is non-empty OR `HAS_PACKAGE` is "yes"
+- AND `HAS_CODEBASE_MAP` is NOT "yes"
+
+Use AskUserQuestion:
+- header: "Existing Code"
+- question: "I detected existing code in this directory. Would you like to map the codebase first?"
+- options:
+  - "Map codebase first" - Run /gsd:map-codebase to understand existing architecture (Recommended)
+  - "Skip mapping" - Proceed with project initialization
+
+**If "Map codebase first":**
+```
+Run `/gsd:map-codebase` first, then return to `/gsd:new-project`
+```
+Exit command.
+
+**If "Skip mapping":** Continue to question step.
+
+**If no existing code detected OR codebase already mapped:** Continue to question step.
 </step>
 
 <step name="question">
-**CRITICAL: ALL questions use AskUserQuestion. Never ask inline text questions.**
+**1. Open (FREEFORM - do NOT use AskUserQuestion):**
 
-**1. Open:**
+Ask inline: "What do you want to build?"
 
-Use AskUserQuestion:
-- header: "Vision"
-- question: "What do you want to build?"
-- options: Contextual options if you have any hints, otherwise ["New app/tool", "Feature for existing project", "Let me describe it"]
+Wait for their freeform response. This gives you the context needed to ask intelligent follow-up questions.
 
-**2. Follow the thread:**
+**2. Follow the thread (NOW use AskUserQuestion):**
 
 Based on their response, use AskUserQuestion with options that probe what they mentioned:
 - header: "[Topic they mentioned]"
@@ -139,27 +166,26 @@ EOF
 </step>
 
 <step name="done">
-Present completion inline (not as a question):
+Present completion with next steps (see ~/.claude/get-shit-done/references/continuation-format.md):
 
 ```
 Project initialized:
 
 - Project: .planning/PROJECT.md
 - Config: .planning/config.json (mode: [chosen mode])
+[If .planning/codebase/ exists:] - Codebase: .planning/codebase/ (7 documents)
 
-## To Continue
+---
 
-Run `/clear`, then paste one of:
+## ▶ Next Up
 
-**For niche/complex domains (recommended):**
-```
-/gsd:research-project
-```
+**[Project Name]** — create roadmap
 
-**To skip research and go straight to planning:**
-```
-/gsd:create-roadmap
-```
+`/gsd:create-roadmap`
+
+<sub>`/clear` first → fresh context window</sub>
+
+---
 ```
 </step>
 
