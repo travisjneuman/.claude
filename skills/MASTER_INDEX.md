@@ -43,6 +43,7 @@ Navigate all 100+ skills from this central hub.
 ### Creative & Design Skills
 | Skill | Domain | Description |
 |-------|--------|-------------|
+| `ui-research` | **Research** | **PREREQUISITE for UI work** - Research inspiration sources, avoid AI look |
 | `graphic-design` | Visual Design | Color theory, typography, layout, composition |
 | `video-production` | Video | Pre/post production, camera, lighting, editing |
 | `audio-production` | Audio | Recording, mixing, mastering, sound design |
@@ -101,7 +102,7 @@ Navigate all 100+ skills from this central hub.
 | `codebase-documenter` | Generate documentation |
 | `tech-debt-analyzer` | Code health analysis |
 | `test-specialist` | Testing guidance |
-| `frontend-enhancer` | Frontend patterns |
+| `frontend-enhancer` | Frontend patterns (requires `ui-research` first) |
 | `seo-analytics-auditor` | SEO analysis |
 
 ---
@@ -194,6 +195,7 @@ Located in `~/.claude/agents/`. See [agents/README.md](../agents/README.md).
 
 | Task | Skills/Agents |
 |------|---------------|
+| **UI/Frontend work** | `ui-research` skill (FIRST), then `frontend-enhancer`, `generic-design-system` |
 | Building iOS app | `ios-development` skill, `ios-developer` agent |
 | Building Android app | `android-development` skill, `android-developer` agent |
 | Cross-platform mobile | `react-native` or `flutter-development` skill, `mobile-architect` agent |
