@@ -47,15 +47,34 @@ claude restart
 
 ### Before Starting Work
 
-1. Run `/mcp` to review available servers
-2. Enable ONLY servers needed for current task
-3. Proceed with work
+Claude will provide exact enable commands when a task would benefit:
+
+```
+This task would benefit from MCP servers. Please enable:
+/mcp enable playwright
+/mcp enable sequential-thinking
+```
+
+User runs the exact command(s) provided.
 
 ### After Completing Work
 
-1. Run `/mcp` again
-2. Disable any servers you enabled
-3. This frees context for future sessions
+Claude will IMMEDIATELY provide exact disable commands:
+
+```
+Task complete. Please disable to free context:
+/mcp disable playwright
+/mcp disable sequential-thinking
+```
+
+User runs the exact command(s) to free context.
+
+### Rules for Claude
+
+1. **Always provide exact commands** - Never say "enable via /mcp", always give `/mcp enable <name>`
+2. **Disable immediately** - As soon as the MCP-dependent work is done, provide disable commands
+3. **Never forget** - Leaving servers enabled wastes tokens on every subsequent message
+4. **Multiple servers = multiple lines** - One command per server for easy copy/paste
 
 ---
 
