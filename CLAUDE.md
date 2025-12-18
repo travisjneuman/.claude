@@ -39,6 +39,56 @@
 
 ---
 
+## GSD (Get Shit Done) System
+
+**Primary workflow for multi-phase projects.** The `/start-task` command auto-routes to GSD when appropriate.
+
+| Command | Purpose |
+|---------|---------|
+| `/gsd:new-project` | Initialize new multi-phase project |
+| `/gsd:progress` | Check status, route to next action |
+| `/gsd:plan-phase [n]` | Create execution plan for phase |
+| `/gsd:execute-plan` | Execute a PLAN.md file |
+| `/gsd:resume-work` | Resume with context restoration |
+| `/gsd:help` | Full command reference |
+
+**Auto-detection:** `/start-task` detects GSD projects via `.planning/STATE.md`
+
+---
+
+## Plugin Marketplaces
+
+**4 marketplaces installed** — auto-loaded from `~/.claude/plugins/marketplaces/`
+
+| Marketplace | Source | Contents |
+|-------------|--------|----------|
+| `anthropic-agent-skills` | Anthropic official | Document skills, example skills |
+| `claude-code-plugins` | Anthropic official | PR review, commit commands, feature dev |
+| `claude-plugins-official` | Anthropic official | External plugins collection |
+| `taches-cc-resources` | Taches/GlitterCowboy | Meta-prompting, debugging, hooks, agents |
+
+### Key Commands from Marketplaces
+
+| Command | Source | Purpose |
+|---------|--------|---------|
+| `/taches-cc-resources:create-prompt` | Taches | Create optimized prompts |
+| `/taches-cc-resources:create-meta-prompt` | Taches | Multi-stage prompt chains |
+| `/taches-cc-resources:whats-next` | Taches | Intelligent next-step routing |
+| `/taches-cc-resources:check-todos` | Taches | Review outstanding work |
+| `/consider:*` | Taches | Decision frameworks (first-principles, eisenhower-matrix, etc.) |
+
+### Taches Skills (Load on Demand)
+
+| Skill | Purpose |
+|-------|---------|
+| `debug-like-expert` | Systematic 4-phase debugging |
+| `create-meta-prompts` | Build prompt chains |
+| `create-slash-commands` | Create custom commands |
+| `create-subagents` | Design specialized agents |
+| `create-hooks` | Build automation hooks |
+
+---
+
 ## Tool Policy
 
 | Instead of... | Use... |
@@ -129,6 +179,21 @@ After task, immediately:
 | Contextual rules | `~/.claude/rules/` |
 | Skills | `~/.claude/skills/` |
 | Commands | `~/.claude/commands/` |
+| GSD system | `~/.claude/get-shit-done/` (submodule) |
+| Plugin marketplaces | `~/.claude/plugins/marketplaces/` |
+
+---
+
+## Quick Start Commands
+
+| I want to... | Use |
+|--------------|-----|
+| Start any task | `/start-task [description]` |
+| Check project status | `/gsd:progress` |
+| Start new project | `/gsd:new-project` |
+| Debug an issue | `Skill(debug-like-expert)` |
+| Review outstanding work | `/taches-cc-resources:check-todos` |
+| Make a decision | `/consider:first-principles` |
 
 ---
 
