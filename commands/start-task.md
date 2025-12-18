@@ -1,259 +1,149 @@
 ---
-description: Intelligent task router - analyzes your request and automatically delegates to optimal workflow (plan/prompt/gsd/meta-prompt/direct execution)
+description: Intelligent task router - analyzes your request and automatically routes to optimal workflow
 arguments:
   - name: task_description
-    description: "Describe what you want to accomplish. Can be empty to check todos, or a full task description."
+    description: "What you want to accomplish. Natural language - just describe it."
     required: false
 ---
 
 # Start Task - Intelligent Workflow Router
 
-Analyzes your task and automatically routes to the optimal execution strategy.
+Analyzes ANY prompt and automatically routes to the optimal execution strategy.
 
-## Requirements
+**No special keywords required.** Just describe what you want naturally.
 
-**ALWAYS read and follow these before executing any routed workflow:**
+---
 
-1. **`~/.claude/CLAUDE.md`** - Global constitution (P0 non-negotiables, workflow rules, code standards)
-2. **GSD System** - For multi-phase projects, uses `/gsd:*` commands from [get-shit-done](https://github.com/glittercowboy/get-shit-done)
+## Execution Protocol
 
-## Integration Points
+When this command is invoked, IMMEDIATELY perform these steps:
 
-- **CLAUDE.md Workflow Section** - Standard 5-step workflow (Plan → Approve → Execute → Verify → Close)
-- **CLAUDE.md GSD Section** - When to use GSD vs standard workflow
-- **CLAUDE.md Skills & Agents** - Available skills/agents for task execution
-- **CLAUDE.md Contextual Rules** - Stack-specific and task-type checklists
-
-## Pre-Routing: Project Detection
-
-**Before analyzing task, check for active GSD project:**
+### Step 1: Check for Active GSD Project
 
 ```bash
-# Check for GSD project (STATE.md is the marker)
-[ -f .planning/STATE.md ] && echo "GSD_PROJECT"
+[ -f .planning/STATE.md ] && echo "ACTIVE_GSD_PROJECT"
 ```
 
-**If GSD project detected:**
-- No task provided → `/gsd:progress` (shows status, suggests next action)
-- Task relates to current project → `/gsd:progress` (will route to execute/plan)
-- Unrelated quick task → Continue to standard routing below
+**If active GSD project exists:**
+- Route to `/gsd:progress` (it will show status and suggest next action)
+- The GSD system handles everything from there
+
+**If no active project, continue to Step 2.**
+
+### Step 2: Analyze Task Complexity
+
+Evaluate the task description: `{{task_description}}`
+
+**Complexity Scoring:**
+
+| Signal | Points | Examples |
+|--------|--------|----------|
+| Multiple components/systems | +3 | "API and frontend", "database and UI" |
+| Multiple steps implied | +2 | "first... then...", "set up... configure... deploy" |
+| New feature/system | +3 | "build", "create", "implement", "add [feature]" |
+| Architecture/design work | +2 | "design", "architect", "structure" |
+| Cross-cutting concerns | +2 | "refactor", "migrate", "upgrade" |
+| Research required | +1 | "figure out", "explore", "investigate options" |
+| Bug/issue (singular) | -1 | "fix the bug", "resolve the error" |
+| Single file mentioned | -2 | "update README", "fix typo in X" |
+| Quick/small qualifier | -2 | "quick", "small", "minor", "simple" |
+
+**Thresholds:**
+- **Score ≥ 3** → GSD (multi-phase project management)
+- **Score 1-2** → Planning or direct execution with TodoWrite
+- **Score ≤ 0** → Direct execution (simple task)
+
+### Step 3: Route to Optimal Workflow
+
+**GSD Route (Score ≥ 3):**
+```
+Invoke: /gsd:new-project
+```
+The GSD system will:
+- Gather context through discussion
+- Create PROJECT.md and roadmap
+- Break into phases with PLAN.md files
+- Track state across sessions
+
+**Planning Route (Score 1-2):**
+- Use `EnterPlanMode` for approval-gated planning
+- OR execute directly with `TodoWrite` tracking
+- Invoke relevant skills based on task type
+
+**Direct Route (Score ≤ 0):**
+- Execute immediately in current context
+- No formal planning needed
+- Simple TodoWrite tracking if multiple steps
+
+### Step 4: Invoke Appropriate Skills
+
+Based on task analysis, ALSO invoke relevant skills:
+
+| Task Type | Skill to Load |
+|-----------|---------------|
+| Debugging | `Skill(debug-like-expert)` |
+| UI/Visual | `Skill(frontend-enhancer)` |
+| Code review | `Skill(generic-code-reviewer)` |
+| Testing | `Skill(test-specialist)` |
+| Documentation | `Skill(codebase-documenter)` |
 
 ---
 
-## Routing Logic
+## Examples (Natural Language → Route)
 
-**If no task description provided:**
-- If GSD project detected → `/gsd:progress`
-- Otherwise → `/check-todos` to list outstanding work
-
-**If task description provided, analyze and route:**
-
-### 0. GSD Multi-Phase Projects → `/gsd:*` commands
-**Keywords:** "new project", "start project", "build [app/system]", "where was I", "project status", "resume"
-**Complexity:** Multi-phase features spanning days/weeks, persistent state needed
-**Examples:**
-- "New project for my app" → `/gsd:new-project`
-- "Where was I" → `/gsd:progress`
-- "Plan phase 2" → `/gsd:plan-phase 2`
-
-**Auto-detect signals:**
-- Multiple components mentioned ("API, database, frontend")
-- Sequential dependencies ("first X, then Y, then Z")
-- Large scope ("overhaul", "rewrite", "major feature")
-
-→ Invoke: `/gsd:new-project` or `/gsd:progress` based on context
-
-### 1. Planning Tasks → `/create-plan`
-**Keywords:** "plan", "design", "architecture", "multi-phase", "roadmap"
-**Complexity:** Multi-phase features, complex architecture (when NOT starting a new project)
-**Example:** "Plan the analytics dashboard feature"
-
-→ Invoke: `/create-plan {{task_description}}`
-
-### 2. Decision-Making → `/consider:*` frameworks
-**Keywords:** "should we", "which approach", "evaluate", "compare", "decide"
-**Examples:**
-- "Should we use Redux or Zustand?" → `/consider:first-principles`
-- "Which features to prioritize?" → `/consider:eisenhower-matrix`
-- "Is this the right architecture?" → `/consider:second-order`
-
-→ Analyze decision type and invoke appropriate framework
-
-### 3. Debugging Tasks → `debug-like-expert` skill
-**Keywords:** "debug", "intermittent", "mysterious", "sometimes fails", "race condition"
-**Example:** "Debug the intermittent calendar sync issue"
-
-→ Invoke: `Skill(debug-like-expert)` with task description
-
-### 4. Moderate Complexity → `/create-prompt` + `/run`
-**Criteria:**
-- 30min - 2hr estimated work
-- 3-10 files to modify
-- Clear scope but needs fresh context
-**Example:** "Refactor the widget loading system"
-
-→ Invoke: `/create-prompt {{task_description}}` then offer to `/run`
-
-### 5. Multi-Stage Features → `/create-meta-prompt`
-**Keywords:** "research then implement", "explore options then build", multi-stage
-**Example:** "Research authentication options then implement the best one"
-
-→ Invoke: `/create-meta-prompt {{task_description}}`
-
-### 6. Simple/Direct Tasks → Execute directly
-**Criteria:**
-- 1-2 files
-- <30min work
-- Clear, straightforward
-**Example:** "Fix the typo in the README"
-
-→ Execute directly in current context
+| User Says | Analysis | Route |
+|-----------|----------|-------|
+| "I need to add user authentication to my app" | New feature, multiple components (+6) | `/gsd:new-project` |
+| "Build a dashboard with charts and filters" | New feature, multiple components (+6) | `/gsd:new-project` |
+| "Refactor the payment system" | Cross-cutting, multiple files (+4) | `/gsd:new-project` |
+| "Set up CI/CD pipeline" | Multiple steps, new system (+5) | `/gsd:new-project` |
+| "Add dark mode" | New feature, cross-cutting (+4) | `/gsd:new-project` |
+| "Fix the login bug" | Single issue (-1), bug fix (+0) | Direct + debug skill |
+| "Update the README" | Single file (-2) | Direct execution |
+| "Add a comment to this function" | Single file, simple (-3) | Direct execution |
+| "Check project status" | Meta-task | `/gsd:progress` |
 
 ---
 
-## Implementation
+## Decision Framework Routing
 
-**Step 1: Check for GSD Project**
-```javascript
-const hasGsdProject = fileExists(".planning/STATE.md");
-const taskDescription = "{{task_description}}".trim();
+If the task involves making a decision (not implementation):
 
-if (hasGsdProject && !taskDescription) {
-  return "/gsd:progress";
-}
-```
-
-**Step 2: Parse Arguments**
-```javascript
-if (!taskDescription) {
-  // No task provided, no GSD project - check todos
-  return "/check-todos";
-}
-```
-
-**Step 3: Analyze Task**
-
-Examine task description for:
-- **GSD signals** indicating multi-phase project scope
-- **Keywords** indicating task type
-- **Complexity signals** (file count, time estimate, scope)
-- **Execution pattern** (single-stage, multi-stage, research-heavy)
-
-**Step 4: Route to Optimal Workflow**
-
-Based on analysis:
-
-```javascript
-// GSD multi-phase projects (check first)
-if (matches("new project|start project|build.*app|build.*system")) {
-  invoke("/gsd:new-project");
-}
-else if (matches("where was I|project status|project progress|resume|continue work")) {
-  invoke("/gsd:progress");
-}
-else if (matches("plan phase|next phase")) {
-  invoke("/gsd:plan-phase");
-}
-else if (detectsMultiPhaseComplexity(taskDescription)) {
-  // Multiple components, sequential dependencies, large scope
-  invoke("/gsd:new-project");
-}
-
-// Planning tasks (single-phase)
-else if (matches("plan|design|architecture|roadmap") && !hasGsdProject) {
-  invoke("/create-plan {{task_description}}");
-}
-
-// Decision-making tasks
-else if (matches("should we|which|evaluate|compare|decide")) {
-  determineFramework(); // first-principles, eisenhower-matrix, etc.
-  invoke("/consider:[framework] {{task_description}}");
-}
-
-// Debugging tasks
-else if (matches("debug|intermittent|mysterious|race condition")) {
-  invoke("Skill(debug-like-expert)");
-}
-
-// Moderate complexity - delegate to fresh context
-else if (estimatedComplexity === "moderate") {
-  invoke("/create-prompt {{task_description}}");
-  // Offer to run after creation
-}
-
-// Multi-stage features
-else if (matches("research then|explore then|multi-stage")) {
-  invoke("/create-meta-prompt {{task_description}}");
-}
-
-// Simple/direct - execute in current context
-else {
-  executeDirectly();
-}
-```
-
-**Step 5: Follow Through**
-
-After routing:
-- If GSD: follow GSD workflow (progress → plan → execute → complete)
-- If created prompt/plan: offer to execute with `/run` or `/run-plan`
-- If direct execution: follow standard workflow (plan → approve → implement)
-- If framework: present analysis and next steps
+| Decision Type | Route |
+|---------------|-------|
+| Technical choice between options | `/taches-cc-resources:consider/first-principles` |
+| What to prioritize | `/taches-cc-resources:consider/eisenhower-matrix` |
+| Understanding consequences | `/taches-cc-resources:consider/second-order` |
+| Root cause analysis | `/taches-cc-resources:consider/5-whys` |
 
 ---
 
-## Decision Framework Selection
+## Empty Task Handling
 
-| Decision Type | Framework |
-|---------------|-----------|
-| Technical choice | `/consider:first-principles` |
-| Priority/urgency | `/consider:eisenhower-matrix` |
-| Consequences | `/consider:second-order` |
-| Root cause | `/consider:5-whys` |
+If `{{task_description}}` is empty:
 
----
-
-## Workflow Spectrum
-
-```
-Simple              Moderate            Multi-Stage         Multi-Phase (GSD)
-(Direct)            (/create-prompt)    (/create-meta)      (/gsd:*)
-   │                     │                   │                   │
-<30 min              30min-2hr            2-8 hours          Days/Weeks
-1-2 files            3-10 files           10+ files          Phases
-Clear scope          Defined scope        Research needed    Vision → Execution
-No state             Stateless            Stateless          STATE.md (persistent)
-```
+1. Check for active GSD project → `/gsd:progress`
+2. Check for existing todos → `/taches-cc-resources:check-todos`
+3. If nothing pending → Ask user what they want to work on
 
 ---
 
-## Examples
+## Core Principle
 
-```bash
-# GSD Routes (multi-phase projects)
-/start-task                                        # → /gsd:progress (if in GSD project)
-/start-task new project for my app                 # → /gsd:new-project
-/start-task where was I                            # → /gsd:progress
-/start-task implement auth, profiles, and social   # → /gsd:new-project (multi-phase detected)
+**GSD is the default for real work.** Most tasks that require more than a quick edit benefit from:
+- Structured phases
+- Persistent state (STATE.md)
+- Clear planning (PLAN.md)
+- Progress tracking
 
-# Standard Routes
-/start-task                                        # → /check-todos (if no GSD project)
-/start-task Plan the auth system                   # → /create-plan
-/start-task Should we use WebSockets or SSE?       # → /consider:first-principles
-/start-task Debug intermittent widget failure      # → debug-like-expert
-/start-task Refactor calendar components           # → /create-prompt
-/start-task Research GraphQL then implement        # → /create-meta-prompt
-/start-task Fix typo in README                     # → direct execution
-```
+Only bypass GSD for genuinely trivial tasks (typos, single-line fixes, quick lookups).
 
 ---
 
-## Notes
+## Integration
 
-- **Transparent routing:** User just describes task naturally
-- **GSD detection:** Automatically detects active GSD projects via `.planning/STATE.md`
-- **Smart escalation:** Multi-phase complexity signals auto-route to GSD
-- **Zero configuration:** Analysis and routing happen automatically
-- **Optimal execution:** Each task routed to best-fit workflow
-- **CLAUDE.md compliant:** Follows Intelligent Prompt Routing specification
-- **Composable:** Routes to other slash commands and skills as needed
+This command integrates with:
+- **GSD System** (`~/.claude/commands/gsd/`) - Multi-phase project management
+- **Taches Resources** (`~/.claude/plugins/marketplaces/taches-cc-resources/`) - Skills, frameworks
+- **Local Skills** (`~/.claude/skills/`) - Domain-specific expertise
+- **CLAUDE.md** (`~/.claude/CLAUDE.md`) - Core rules and standards
