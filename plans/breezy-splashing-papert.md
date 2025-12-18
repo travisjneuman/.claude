@@ -1,163 +1,146 @@
-# Plan: Global vs Project Configuration Setup
+# Plan: Settings Files Consolidation (Phase 2)
+
+## Previous Work Complete ✅
+
+All CLAUDE.md files and .claude/ folders cleaned up:
+- system.knowledgebase: 173 files, 63,503 lines removed
+- tdr.portfolio: 173 files, 63,143 lines removed
+- tjn.portfolio: 177 files, 65,752 lines removed
+- tkl.home: CLAUDE.md slimmed to project-specific only
+- oakstone.properties: Duplicate commands removed
+
+---
+
+## Current Issue: Settings Files
+
+### The Two Types of Settings Files
+
+| File | Purpose | Tracked in Git? |
+|------|---------|-----------------|
+| `settings.json` | Team-shareable settings | Yes |
+| `settings.local.json` | User-specific overrides | No (like .gitignore) |
+
+### Current State Analysis
+
+**Global `~/.claude/settings.json`:**
+- ✅ Has comprehensive permissions (npm, git, python, docker, etc.)
+- ✅ Has plugin config
+- ❌ NO HOOKS (missing auto-format, build checks)
+
+**Global `~/.claude/settings.local.json`:**
+- Exists but is mostly duplicate of settings.json
+- Has some incremental permission additions
+
+**Oakstone's `settings.json` (the unique one):**
+```json
+{
+  "permissions": { /* project-specific Astro/Wrangler commands */ },
+  "hooks": {
+    "PostToolUse": [{
+      "matcher": { "toolName": "Write", "filePath": "**/*.{ts,tsx,astro,js,mjs}" },
+      "hooks": [{ "command": "npx prettier --write \"$CLAUDE_FILE_PATH\"" }]
+    }],
+    "PreCommit": [{
+      "command": "npm run build 2>/dev/null || echo 'Build check skipped...'"
+    }]
+  },
+  "context": { /* include/exclude patterns */ },
+  "model": { "default": "sonnet", "thinking": true }
+}
+```
+
+**Project `settings.local.json` files (system, tdr, tjn):**
+- ALL IDENTICAL COPIES - just duplicating global permissions
+- Add nothing project-specific
+- Should be DELETED
+
+---
 
 ## The Problem
 
-**Claude Code precedence: Project > Global (by design)**
+1. **Oakstone's hooks are universally useful** but trapped in a project file
+   - Prettier auto-format → benefits ALL JS/TS projects
+   - Build check before commit → benefits ALL npm projects
 
-This means:
-- Your optimized global `~/.claude/` rules ARE loaded
-- BUT project `.claude/` rules **override** them when they conflict
-- Outdated project rules will "win" over newer global rules
-
-**The ONLY solution**: Remove duplicated/outdated content from project `.claude/` folders so global rules apply by default.
+2. **Three `settings.local.json` files are pure duplicates**
+   - `system.knowledgebase/.claude/settings.local.json`
+   - `tdr.portfolio/.claude/settings.local.json`
+   - `tjn.portfolio/.claude/settings.local.json`
+   - They're byte-for-byte identical, adding nothing
 
 ---
 
 ## Action Plan
 
-### Phase 1: Audit (READ-ONLY) ✅ COMPLETE
+### Step 1: Add Hooks to Global `~/.claude/settings.json`
 
-**Found 7 locations with Claude configs:**
+Add these hooks (from oakstone, but universally useful):
 
-| Location | CLAUDE.md | .claude/ | Status |
-|----------|-----------|----------|--------|
-| `F:\Web Development\` | 10KB | 3.1MB! | **DELETE** - Full duplicate of global |
-| `tdr.portfolio` | 33KB | Yes | Heavy duplication |
-| `system.knowledgebase` | 17KB | Yes | Heavy duplication |
-| `tkl.home` | 11KB | Yes | Moderate duplication |
-| `oakstone.properties` | 7.6KB | Yes | Likely duplication |
-| `tjn.portfolio` | 3.7KB | Yes | Smaller, check |
-| `tjn.home` | 3.6KB | No | **Cleanest** - just CLAUDE.md |
+```json
+"hooks": {
+  "PostToolUse": [
+    {
+      "matcher": {
+        "toolName": "Write",
+        "filePath": "**/*.{ts,tsx,js,jsx,mjs,astro,vue,svelte}"
+      },
+      "hooks": [
+        {
+          "type": "command",
+          "command": "npx prettier --write \"$CLAUDE_FILE_PATH\" 2>/dev/null || true"
+        }
+      ]
+    }
+  ],
+  "PreCommit": [
+    {
+      "type": "command",
+      "command": "npm run build 2>/dev/null || echo 'Build check skipped - no build script'"
+    }
+  ]
+}
+```
+
+### Step 2: Delete Duplicate `settings.local.json` Files
+
+Remove from:
+- `F:/Web Development/system.knowledgebase/.claude/settings.local.json`
+- `F:/Web Development/tdr.portfolio/.claude/settings.local.json`
+- `F:/Web Development/tjn.portfolio/.claude/settings.local.json`
+
+### Step 3: Convert Oakstone's `settings.json` → `settings.local.json`
+
+Keep only the truly project-specific parts:
+- Astro/Wrangler permissions (unique to this project)
+- Context include/exclude patterns
+
+Remove:
+- Hooks (now in global)
+- Generic git/npm permissions (now in global)
+
+### Step 4: Verify tkl.home
+
+Check if `tkl.home/.claude/settings.local.json` exists and if it needs cleanup.
 
 ---
 
-## Detailed Findings
+## Files to Modify
 
-### Duplicated Content (REMOVE from projects)
-
-**In CLAUDE.md files:**
-- Session protocol (start/end checklists)
-- Git conventions
-- P0 non-negotiables
-- Workflow routing
-- 15 Sacred Rules
-- Token hygiene guidelines
-
-**In .claude/ folders:**
-| File/Folder | Projects | Status |
-|-------------|----------|--------|
-| `commands/run.md` | tdr, system | ❌ Now in global |
-| `commands/start-task.md` | tdr, system | ❌ Now in global |
-| `skills/codebase-documenter/` | tdr, system | ❌ Now in global |
-| `skills/frontend-enhancer/` | tdr, system | ❌ Now in global |
-| `skills/tech-debt-analyzer/` | tdr, system | ❌ Now in global |
-| `skills/test-specialist/` | tdr, system | ❌ Now in global |
-| `skills/document-skills/` | tdr, system | ❌ Now in global |
-| `automation-guide.md` | all | ❌ Now in global rules |
-| `workflow-checklist.md` | all | ❌ Now in global rules |
-
-### Project-Specific Content (KEEP)
-
-**tdr.portfolio:**
-- Project description, brand info, tech stack
-- `skills/tdr-code-reviewer/`
-- `skills/tdr-design-system/`
-- `skills/tdr-feature-developer/`
-- `skills/tdr-ux-designer/`
-
-**system.knowledgebase:**
-- Neuman Brain description, architecture
-- `skills/neuman-brain-code-reviewer/`
-- `skills/neuman-brain-design-system/`
-- `skills/neuman-brain-feature-developer/`
-- `skills/neuman-brain-ux-designer/`
-
-### Critical Issue: F:\Web Development\.claude\
-
-This is a **3.1MB duplicate** of your global setup including:
-- `history.jsonl` (2.9MB session history)
-- Full skills/, commands/, plugins/ copies
-- `.credentials.json` (⚠️ SECURITY RISK)
-
-**Recommendation:** Delete entirely. Use global setup instead.
-
-### Phase 2: Cleanup Strategy (When Ready)
-
-**Order of operations:**
-
-1. **Delete `F:\Web Development\.claude\`** (3.1MB duplicate)
-   - Back up `F:\Web Development\CLAUDE.md` first (workspace overview is useful)
-   - Delete entire `.claude/` folder
-
-2. **For each project, slim down CLAUDE.md:**
-   - Extract ONLY project-specific content
-   - Remove all workflow/session/git/testing rules (now in global)
-   - Target: ~50-100 lines per project
-
-3. **For each project .claude/ folder:**
-   - Delete duplicated skills (codebase-documenter, frontend-enhancer, etc.)
-   - KEEP project-specific skills (tdr-*, neuman-brain-*)
-   - Delete duplicated commands (run.md, start-task.md)
-   - Delete automation-guide.md, workflow-checklist.md
-   - Keep settings.json only if it has project-specific permissions
-
-### Phase 3: Template Creation
-
-**Create:** `~/.claude/templates/project-claude-md-template.md`
-
-```markdown
-# [PROJECT NAME] — CLAUDE.md
-
-> Project-specific instructions. Global rules from `~/.claude/` apply automatically.
-
-## Overview
-[What this project does in 2-3 sentences]
-
-## Tech Stack
-- [Framework/language]
-- [Key libraries]
-- [Database if applicable]
-
-## Commands
-```bash
-npm run dev      # [what it does]
-npm run build    # [what it does]
-npm run test     # [what it does]
-```
-
-## Architecture
-```
-[project]/
-├── src/          # [description]
-├── components/   # [description]
-└── ...
-```
-
-## Project-Specific Notes
-- [Key architectural decisions]
-- [Team conventions unique to this project]
-- [Important gotchas]
-
----
-*Global workflow, skills, and standards loaded from `~/.claude/`*
-```
-
-**For team sharing:**
-- Global `~/.claude/` repo is cloned by each team member
-- Project `.claude/` contains only project-specific customizations
-- Team members get full toolkit via global, project consistency via local
+| File | Action |
+|------|--------|
+| `~/.claude/settings.json` | ADD hooks section |
+| `system.knowledgebase/.claude/settings.local.json` | DELETE |
+| `tdr.portfolio/.claude/settings.local.json` | DELETE |
+| `tjn.portfolio/.claude/settings.local.json` | DELETE |
+| `oakstone.properties/.claude/settings.json` | Slim down to project-specific only |
 
 ---
 
-## Summary
+## Expected Result
 
-**Audit complete.** Found significant duplication that's overriding your global setup.
-
-**Next steps when ready:**
-1. Create template first (quick win)
-2. Clean up `F:\Web Development\.claude\` (security risk + 3MB waste)
-3. Slim down project CLAUDE.md files one by one
-4. Clean up project .claude/ folders (keep project-specific skills only)
-
-**Verification:** Run `/memory` in any project to see what's loaded.
+After cleanup:
+- **Global** has hooks that apply to ALL projects
+- **Projects** have NO settings files unless truly project-specific
+- **Oakstone** keeps only Astro/Wrangler-specific permissions
+- No more duplicate files overriding global settings
 
