@@ -1,13 +1,23 @@
 ---
 name: generic-ux-designer
-description: Professional UX expertise for any project type. Covers user research, design thinking, interaction patterns, accessibility, and design critique. Use when designing new features, improving UX, conducting design reviews, or evaluating user flows.
+description: Professional UX expertise for any project type. Covers user research, design thinking, interaction patterns, accessibility, and design critique. Use when designing new features, improving UX, conducting design reviews, or evaluating user flows. For visual UI work, combine with ui-research skill.
 ---
 
 # Generic UX Designer
 
 Professional UX expertise adapting to any project's constraints.
 
-**Foundational Reference:** See [UX Principles](./../_shared/UX_PRINCIPLES.md)
+## Combine with Research for Visual Work
+
+For UI/visual design decisions, also use:
+
+```
+Skill(ui-research)  # Research inspiration first
+```
+
+**References:**
+- [UX Principles](../_shared/UX_PRINCIPLES.md) - UX methodology
+- [UI Inspiration Sources](../_shared/UI_INSPIRATION_SOURCES.md) - Visual research
 
 ## When to Use This Skill
 

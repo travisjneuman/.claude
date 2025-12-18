@@ -1,13 +1,23 @@
 ---
 name: generic-design-system
-description: Complete design system reference for any project - colors, typography, spacing, components, animations. Adapts to project theme and tech stack. Use when implementing UI, choosing colors, creating animations, or ensuring brand consistency.
+description: Complete design system reference for any project - colors, typography, spacing, components, animations. Adapts to project theme and tech stack. Use when implementing UI, choosing colors, creating animations, or ensuring brand consistency. For new design systems, use ui-research skill first.
 ---
 
 # Generic Design System
 
 Design system reference adapting to any project's visual language.
 
-**Foundational Reference:** See [Design Patterns](./../_shared/DESIGN_PATTERNS.md)
+## Research First for New Systems
+
+When creating a NEW design system (not following an existing one):
+
+```
+Skill(ui-research)  # Research modern patterns first
+```
+
+**References:**
+- [UI Inspiration Sources](../_shared/UI_INSPIRATION_SOURCES.md) - Research sources
+- [Design Patterns](../_shared/DESIGN_PATTERNS.md) - Visual tokens
 
 ## When to Use This Skill
 

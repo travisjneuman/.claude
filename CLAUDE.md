@@ -395,6 +395,7 @@ git remote get-url --push origin | grep -q "no_push" && echo "SKIP: External rep
 
 | When Working On... | Use Skill | Or Agent |
 |--------------------|-----------|----------|
+| **UI/Frontend (any)** | `ui-research` (FIRST!) | then `frontend-enhancer` |
 | iOS/iPadOS/tvOS app | `ios-development` | `ios-developer` |
 | Android app | `android-development` | `android-developer` |
 | React Native / Flutter | `react-native`, `flutter-development` | `mobile-architect` |
