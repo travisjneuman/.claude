@@ -15,6 +15,11 @@ Navigate all 100+ skills from this central hub.
 
 ## Skills by Category
 
+### Foundation Skills (Core Workflow)
+| Skill | Description |
+|-------|-------------|
+| `core-workflow` | **Session protocols, git conventions, testing, debugging, communication standards** - Auto-loads for complex tasks |
+
 ### Generic Skills (Any Project)
 | Skill | Description |
 |-------|-------------|
