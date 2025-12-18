@@ -185,10 +185,10 @@ Use `/start-task` for intelligent routing:
 
 ### MCP Server Awareness
 
-All MCP servers are **disabled by default** for efficiency. When tasks would benefit from MCP capabilities, suggest enabling via `/mcp`.
+All MCP servers are **disabled by default** for efficiency. When tasks would benefit from MCP capabilities, provide **exact commands**.
 
-| Task Type | Suggest Enabling |
-|-----------|------------------|
+| Task Type | Server |
+|-----------|--------|
 | Complex reasoning, architecture decisions | `sequential-thinking` |
 | E2E tests, browser automation | `playwright` |
 | Multi-session context persistence | `memory` |
@@ -196,10 +196,25 @@ All MCP servers are **disabled by default** for efficiency. When tasks would ben
 | Frontend debugging, performance | `chrome-devtools` |
 | Very large codebases (100k+ lines) | `context7` |
 
-**Workflow:**
-1. Suggest: "This task would benefit from the `playwright` MCP server. Enable via `/mcp`."
-2. User enables manually (automatic enable not yet supported)
-3. After task: "You can disable `playwright` via `/mcp` to free context."
+**Before task - provide exact enable command(s):**
+```
+This task would benefit from MCP servers. Please enable:
+/mcp enable playwright
+/mcp enable sequential-thinking
+```
+
+**After task completes - IMMEDIATELY provide exact disable command(s):**
+```
+Task complete. Please disable to free context:
+/mcp disable playwright
+/mcp disable sequential-thinking
+```
+
+**Rules:**
+- Always provide the EXACT `/mcp enable <server>` command(s)
+- Always provide the EXACT `/mcp disable <server>` command(s) when done
+- Never leave servers enabled - context/tokens are wasted
+- Multiple servers = multiple commands (one per line)
 
 **Reference:** `~/.claude/rules/tooling/mcp-servers.md` for full details.
 
