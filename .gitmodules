@@ -1,0 +1,15 @@
+[submodule "get-shit-done"]
+	path = get-shit-done
+	url = https://github.com/glittercowboy/get-shit-done.git
+[submodule "plugins/marketplaces/anthropic-agent-skills"]
+	path = plugins/marketplaces/anthropic-agent-skills
+	url = https://github.com/anthropics/skills.git
+[submodule "plugins/marketplaces/claude-code-plugins"]
+	path = plugins/marketplaces/claude-code-plugins
+	url = https://github.com/anthropics/claude-code.git
+[submodule "plugins/marketplaces/claude-plugins-official"]
+	path = plugins/marketplaces/claude-plugins-official
+	url = https://github.com/anthropics/claude-plugins-official.git
+[submodule "plugins/marketplaces/taches-cc-resources"]
+	path = plugins/marketplaces/taches-cc-resources
+	url = https://github.com/glittercowboy/taches-cc-resources.git

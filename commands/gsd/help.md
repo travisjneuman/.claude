@@ -21,10 +21,9 @@ Output ONLY the reference content below. Do NOT add:
 ## Quick Start
 
 1. `/gsd:new-project` - Initialize project with brief
-2. `/gsd:research-project` - (Optional) Research domain ecosystem
-3. `/gsd:create-roadmap` - Create roadmap and phases
-4. `/gsd:plan-phase <number>` - Create detailed plan for first phase
-5. `/gsd:execute-plan <path>` - Execute the plan
+2. `/gsd:create-roadmap` - Create roadmap and phases
+3. `/gsd:plan-phase <number>` - Create detailed plan for first phase
+4. `/gsd:execute-plan <path>` - Execute the plan
 
 ## Core Workflow
 
@@ -44,25 +43,24 @@ Initialize new project with brief and configuration.
 
 Usage: `/gsd:new-project`
 
-**`/gsd:research-project`**
-Research domain ecosystem before creating roadmap.
-
-- Spawns batched subagents to research domain patterns
-- Creates `.planning/research/` with ecosystem findings
-- Optional step for niche/complex domains
-- Run after new-project, before create-roadmap
-
-Usage: `/gsd:research-project`
-
 **`/gsd:create-roadmap`**
 Create roadmap and state tracking for initialized project.
 
 - Creates `.planning/ROADMAP.md` (phase breakdown)
 - Creates `.planning/STATE.md` (project memory)
 - Creates `.planning/phases/` directories
-- Incorporates research findings if present
 
 Usage: `/gsd:create-roadmap`
+
+**`/gsd:map-codebase`**
+Map an existing codebase for brownfield projects.
+
+- Analyzes codebase with parallel Explore agents
+- Creates `.planning/codebase/` with 7 focused documents
+- Covers stack, architecture, structure, conventions, testing, integrations, concerns
+- Use before `/gsd:new-project` on existing codebases
+
+Usage: `/gsd:map-codebase`
 
 ### Phase Planning
 
@@ -229,6 +227,14 @@ Show this command reference.
 ├── STATE.md              # Project memory & context
 ├── ISSUES.md             # Deferred enhancements (created when needed)
 ├── config.json           # Workflow mode & gates
+├── codebase/             # Codebase map (brownfield projects)
+│   ├── STACK.md          # Languages, frameworks, dependencies
+│   ├── ARCHITECTURE.md   # Patterns, layers, data flow
+│   ├── STRUCTURE.md      # Directory layout, key files
+│   ├── CONVENTIONS.md    # Coding standards, naming
+│   ├── TESTING.md        # Test setup, patterns
+│   ├── INTEGRATIONS.md   # External services, APIs
+│   └── CONCERNS.md       # Tech debt, known issues
 └── phases/
     ├── 01-foundation/
     │   ├── 01-01-PLAN.md
@@ -267,16 +273,6 @@ Change anytime by editing `.planning/config.json`
 /gsd:execute-plan .planning/phases/01-foundation/01-01-PLAN.md
 ```
 
-**Building something in a niche domain (3D, games, audio, shaders):**
-
-```
-/gsd:new-project
-/gsd:research-project  # Research domain ecosystem before roadmap
-/gsd:create-roadmap    # Roadmap incorporates research findings
-/gsd:plan-phase 1
-/gsd:execute-plan .planning/phases/01-foundation/01-01-PLAN.md
-```
-
 **Resuming work after a break:**
 
 ```
@@ -304,29 +300,4 @@ Change anytime by editing `.planning/config.json`
 - Read `.planning/STATE.md` for current context
 - Check `.planning/ROADMAP.md` for phase status
 - Run `/gsd:progress` to check where you're up to
-
-## Integration with /start-task
-
-GSD integrates seamlessly with the `/start-task` workflow router:
-
-**Automatic Detection:**
-- `/start-task` checks for `.planning/STATE.md` to detect GSD projects
-- If detected with no task → routes to `/gsd:progress`
-- You can always start work with just `/start-task`
-
-**Keywords that route to GSD:**
-| Input | Routes To |
-|-------|-----------|
-| "new project", "start project" | `/gsd:new-project` |
-| "where was I", "project status" | `/gsd:progress` |
-| Multi-phase complexity detected | `/gsd:new-project` |
-
-**When to use GSD vs simpler workflows:**
-| Scope | Workflow |
-|-------|----------|
-| <30 min, 1-2 files | Direct execution |
-| 30min-2hr, 3-10 files | `/create-prompt` → `/run` |
-| Days/weeks, multi-phase | `/gsd:new-project` |
-
-**Note:** Use `/run` for prompts, `/gsd:execute-plan` for GSD plans.
   </reference>
