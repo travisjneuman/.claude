@@ -4,7 +4,7 @@
       "source": "github",
       "repo": "anthropics/claude-code"
     },
-    "installLocation": "C:\\Users\\tjn\\.claude\\plugins\\marketplaces\\claude-code-plugins",
+    "installLocation": "/Users/tjn/.claude/plugins/marketplaces\\claude-code-plugins",
     "lastUpdated": "2025-12-18T18:31:00.422Z"
   },
   "anthropic-agent-skills": {
@@ -12,7 +12,7 @@
       "source": "github",
       "repo": "anthropics/skills"
     },
-    "installLocation": "C:\\Users\\tjn\\.claude\\plugins\\marketplaces\\anthropic-agent-skills",
+    "installLocation": "/Users/tjn/.claude/plugins/marketplaces\\anthropic-agent-skills",
     "lastUpdated": "2025-12-16T19:48:48.271Z"
   },
   "taches-cc-resources": {
@@ -20,7 +20,7 @@
       "source": "github",
       "repo": "glittercowboy/taches-cc-resources"
     },
-    "installLocation": "C:\\Users\\tjn\\.claude\\plugins\\marketplaces\\taches-cc-resources",
+    "installLocation": "/Users/tjn/.claude/plugins/marketplaces\\taches-cc-resources",
     "lastUpdated": "2025-12-16T20:53:31.927Z"
   },
   "claude-plugins-official": {
@@ -29,6 +29,6 @@
       "repo": "anthropics/claude-plugins-official"
     },
     "installLocation": "/Users/tjn/.claude/plugins/marketplaces/claude-plugins-official",
-    "lastUpdated": "2025-12-18T18:31:21.321Z"
+    "lastUpdated": "2025-12-18T19:27:45.646Z"
   }
 }
