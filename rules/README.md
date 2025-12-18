@@ -20,7 +20,8 @@ rules/
 └── tooling/                  # Tools & setup
     ├── git-hooks-setup.md    # Git hook configuration
     ├── troubleshooting.md    # Common issue fixes
-    └── external-repos.md     # GSD, marketplaces, external deps
+    ├── external-repos.md     # GSD, marketplaces, external deps
+    └── mcp-servers.md        # MCP server lifecycle management
 ```
 
 ---
@@ -50,6 +51,7 @@ rules/
 | `tooling/git-hooks-setup.md` | Setting up project automation |
 | `tooling/troubleshooting.md` | Diagnosing issues |
 | `tooling/external-repos.md` | Updating GSD, marketplaces, external deps |
+| `tooling/mcp-servers.md` | Managing MCP server lifecycle |
 
 ---
 
