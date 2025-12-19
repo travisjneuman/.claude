@@ -58,3 +58,8 @@ Thumbs.db
 # ============================================
 plugins/marketplaces/claude-code-plugins
 get-shit-done
+/image-cache
+stats-cache.json
+stats-cache.json
+stats-cache.json
+/plugins/marketplaces
