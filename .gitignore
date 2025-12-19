@@ -56,3 +56,5 @@ Thumbs.db
 # - plugins/marketplaces/ (read-only upstream repos)
 # - plugins/known_marketplaces.json
 # ============================================
+plugins/marketplaces/claude-code-plugins
+get-shit-done
