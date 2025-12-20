@@ -88,3 +88,5 @@ plugins/marketplaces/
 # MANUAL SETUP REQUIRED PER MACHINE:
 # - .mcp.json (platform-specific MCP server config)
 # ============================================
+plugins/known_marketplaces.json
+stats-cache.json
