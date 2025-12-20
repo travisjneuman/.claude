@@ -179,8 +179,8 @@ After task, immediately:
 | Contextual rules | `~/.claude/rules/` |
 | Skills | `~/.claude/skills/` |
 | Commands | `~/.claude/commands/` |
-| GSD system | `~/.claude/get-shit-done/` (submodule) |
-| Plugin marketplaces | `~/.claude/plugins/marketplaces/` |
+| GSD system | `~/.claude/plugins/marketplaces/get-shit-done/` |
+| External repos | `~/.claude/plugins/marketplaces/` (5 submodules) |
 
 ---
 
