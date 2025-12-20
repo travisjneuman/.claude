@@ -21,6 +21,12 @@ todos/
 # Shell state snapshots
 shell-snapshots/
 
+# Plan files (session-specific)
+plans/
+
+# Image cache
+image-cache/
+
 # ----- TELEMETRY/CACHE -----
 statsig/
 telemetry/
@@ -38,6 +44,14 @@ security_warnings_state_*.json
 settings.local.json
 .claude.json
 
+# ----- PLATFORM-SPECIFIC FILES -----
+# .mcp.json contains platform-specific commands:
+#   - Windows: "command": "cmd", "args": ["/c", "npx", ...]
+#   - Linux/Mac: "command": "npx", "args": [...]
+# Each machine must maintain its own .mcp.json manually.
+# See docs/MCP-SERVERS.md for platform-specific templates.
+.mcp.json
+
 # ----- OS/EDITOR FILES -----
 .DS_Store
 Thumbs.db
@@ -45,21 +59,26 @@ Thumbs.db
 *.swo
 *~
 
+# ----- SUBMODULES (tracked separately) -----
+# These are git submodules with their own repos
+# All external repos are in plugins/marketplaces/:
+#   - anthropic-agent-skills
+#   - claude-code-plugins
+#   - claude-plugins-official
+#   - taches-cc-resources
+#   - get-shit-done
+plugins/marketplaces/
+
 # ============================================
-# TRACKED (not ignored):
-# - CLAUDE.md, README.md
+# TRACKED (committed to this repo):
+# - CLAUDE.md, README.md, CHANGELOG.md
+# - settings.json (shared settings, NOT .mcp.json)
 # - commands/, skills/, docs/, templates/
-# - .mcp.json, settings.json
-# - plans/, tasks/, .planning/, get-shit-done/
-# - .archive/ (completed task docs)
-# - plugins/local/ (YOUR customized plugins)
-# - plugins/marketplaces/ (read-only upstream repos)
+# - agents/, rules/, scripts/
+# - tasks/, .planning/, .archive/
+# - plugins/local/ (your customized plugins)
 # - plugins/known_marketplaces.json
+#
+# MANUAL SETUP REQUIRED PER MACHINE:
+# - .mcp.json (platform-specific MCP server config)
 # ============================================
-plugins/marketplaces/claude-code-plugins
-get-shit-done
-/image-cache
-stats-cache.json
-stats-cache.json
-stats-cache.json
-/plugins/marketplaces

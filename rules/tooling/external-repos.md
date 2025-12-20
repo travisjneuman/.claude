@@ -16,12 +16,15 @@ This prevents accidental modifications to upstream projects while keeping them u
 
 ## External Repos
 
-| Repo | Type | Location |
-|------|------|----------|
-| get-shit-done | Submodule | `~/.claude/get-shit-done/` |
-| claude-code-plugins | Nested repo | `~/.claude/plugins/marketplaces/claude-code-plugins/` |
-| taches-cc-resources | Nested repo | `~/.claude/plugins/marketplaces/taches-cc-resources/` |
-| claude-plugins-official | Nested repo | `~/.claude/plugins/marketplaces/claude-plugins-official/` |
+All external repos are located in `~/.claude/plugins/marketplaces/`:
+
+| Repo | Type | URL |
+|------|------|-----|
+| anthropic-agent-skills | Submodule | https://github.com/anthropics/skills.git |
+| claude-code-plugins | Submodule | https://github.com/anthropics/claude-code.git |
+| claude-plugins-official | Submodule | https://github.com/anthropics/claude-plugins-official.git |
+| taches-cc-resources | Submodule | https://github.com/glittercowboy/taches-cc-resources.git |
+| get-shit-done | Submodule | https://github.com/glittercowboy/get-shit-done.git |
 
 ---
 
@@ -38,16 +41,16 @@ bash ~/.claude/scripts/update-external-repos.sh
 ```bash
 cd ~/.claude
 
-# Update submodules (get-shit-done)
+# Update all submodules
 git submodule update --remote --merge
 
-# Update marketplace repos
+# Or update each individually
 for repo in plugins/marketplaces/*/; do
     (cd "$repo" && git fetch origin && git pull origin main 2>/dev/null || git pull origin master)
 done
 
 # Commit the updates
-git add get-shit-done plugins/marketplaces
+git add plugins/marketplaces
 git commit -m "chore: update external repos"
 ```
 
@@ -59,7 +62,7 @@ Each external repo should have `no_push` as the push URL:
 
 ```bash
 # Check a repo's remotes
-cd ~/.claude/get-shit-done
+cd ~/.claude/plugins/marketplaces/get-shit-done
 git remote -v
 
 # Expected output:
@@ -130,7 +133,7 @@ git submodule update --remote
 ### Detached HEAD in Submodule
 
 ```bash
-cd ~/.claude/get-shit-done
+cd ~/.claude/plugins/marketplaces/get-shit-done
 git checkout main  # or master
 git pull origin main
 ```
@@ -140,7 +143,7 @@ git pull origin main
 ## Related Documentation
 
 - `~/.claude/CLAUDE.md` - GSD integration section
-- `~/.claude/get-shit-done/README.md` - GSD usage guide
+- `~/.claude/plugins/marketplaces/get-shit-done/README.md` - GSD usage guide
 - `~/.claude/plugins/README.md` - Plugin marketplace info
 
 ---
