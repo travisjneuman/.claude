@@ -64,11 +64,6 @@ Complete map of the `.claude/` folder and related files.
     │   ├── document-schemas/       ← Document schemas
     │   └── project-claude-snapshots-2025-12-13/
     │
-    ├── get-shit-done/              ← GSD workflow resources
-    │   ├── references/
-    │   ├── templates/
-    │   └── workflows/
-    │
     ├── plans/                      ← Planning documents (organized by project)
     │   ├── CLAUDE.md               ← Organization guidelines
     │   ├── neuman-brain/           ← Neuman Brain platform plans
@@ -78,7 +73,15 @@ Complete map of the `.claude/` folder and related files.
     │   ├── claude-config/          ← .claude folder optimization plans
     │   └── meta/                   ← Cross-project / general planning
     │
-    ├── plugins/                    ← Installed plugins (managed by system)
+    ├── plugins/                    ← Plugins and external repos
+    │   ├── cache/                  ← Plugin cache (regenerated, gitignored)
+    │   ├── local/                  ← Your custom plugins
+    │   └── marketplaces/           ← External repos (submodules, read-only)
+    │       ├── anthropic-agent-skills/
+    │       ├── claude-code-plugins/
+    │       ├── claude-plugins-official/
+    │       ├── taches-cc-resources/
+    │       └── get-shit-done/      ← GSD workflow system
     │
     ├── skills/                     ← Custom skills
     │   ├── README.md               ← Skills documentation

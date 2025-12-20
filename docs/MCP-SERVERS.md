@@ -299,7 +299,99 @@ We have four browser automation servers. Here's when to use each:
 
 ### File Location
 
-MCP servers are configured in `~/.claude.json` (NOT inside `.claude/`).
+MCP servers are configured in `~/.claude/.mcp.json`.
+
+**IMPORTANT:** The `.mcp.json` file is **platform-specific** and is NOT synced via git.
+Each machine must maintain its own `.mcp.json` file manually.
+
+### Platform-Specific Templates
+
+The `command` field differs between Windows and Linux/Mac:
+
+#### Windows Template
+
+```json
+{
+  "mcpServers": {
+    "sequential-thinking": {
+      "type": "stdio",
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@modelcontextprotocol/server-sequential-thinking"],
+      "env": {}
+    },
+    "playwright": {
+      "type": "stdio",
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@playwright/mcp@latest"],
+      "env": {}
+    },
+    "memory": {
+      "type": "stdio",
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@modelcontextprotocol/server-memory"],
+      "env": {}
+    },
+    "filesystem": {
+      "type": "stdio",
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@modelcontextprotocol/server-filesystem", "."],
+      "env": {}
+    },
+    "sqlite": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": ["mcp-server-sqlite"],
+      "env": {}
+    }
+  }
+}
+```
+
+#### Linux/Mac Template
+
+```json
+{
+  "mcpServers": {
+    "sequential-thinking": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
+      "env": {}
+    },
+    "playwright": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@playwright/mcp@latest"],
+      "env": {}
+    },
+    "memory": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-memory"],
+      "env": {}
+    },
+    "filesystem": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "."],
+      "env": {}
+    },
+    "sqlite": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": ["mcp-server-sqlite"],
+      "env": {}
+    }
+  }
+}
+```
+
+### Key Difference
+
+| Platform | Command | Args |
+|----------|---------|------|
+| Windows | `"cmd"` | `["/c", "npx", "-y", "@package"]` |
+| Linux/Mac | `"npx"` | `["-y", "@package"]` |
 
 ### Configuration Format
 
