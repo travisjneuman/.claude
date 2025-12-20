@@ -131,6 +131,8 @@ After task, immediately:
 - **NEVER** use `--force` without explicit request
 - **NEVER** commit secrets
 - Auto-commit to user repos only (not `no_push` repos)
+- **ALWAYS** use `main` or `master` branch (whichever exists) — no feature branches unless explicitly requested
+- External repos (plugins/marketplaces/*) are read-only — fetch only, never push
 
 ---
 
