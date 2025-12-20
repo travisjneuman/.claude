@@ -13,3 +13,5 @@
 [submodule "plugins/marketplaces/get-shit-done"]
 	path = plugins/marketplaces/get-shit-done
 	url = https://github.com/glittercowboy/get-shit-done.git
+[submodule]
+	recurse = false
