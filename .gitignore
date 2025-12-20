@@ -59,6 +59,11 @@ Thumbs.db
 *.swo
 *~
 
+# ----- VSCODE SERVER FILES -----
+# VSCode remote server files (created on remote hosts)
+# These are machine-specific and regenerated automatically
+.vscode-server*/
+
 # ----- SUBMODULES (tracked separately) -----
 # These are git submodules with their own repos
 # All external repos are in plugins/marketplaces/:
@@ -78,9 +83,8 @@ plugins/marketplaces/
 # - tasks/, .planning/, .archive/
 # - plugins/local/ (your customized plugins)
 # - plugins/known_marketplaces.json
+# - .vscode/ (shared VSCode settings for consistent dev env)
 #
 # MANUAL SETUP REQUIRED PER MACHINE:
 # - .mcp.json (platform-specific MCP server config)
 # ============================================
-.vscode/
-.vscode-server*/
