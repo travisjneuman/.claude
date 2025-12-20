@@ -82,3 +82,5 @@ plugins/marketplaces/
 # MANUAL SETUP REQUIRED PER MACHINE:
 # - .mcp.json (platform-specific MCP server config)
 # ============================================
+.vscode/
+.vscode-server*/
