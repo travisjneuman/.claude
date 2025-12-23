@@ -65,6 +65,17 @@ plugins/marketplaces/
 # Marketplace registry (contains machine-specific paths)
 plugins/known_marketplaces.json
 
+# ----- CREDENTIALS (Private Repo Policy) -----
+# This is a PRIVATE repo - credentials ARE allowed.
+# If you fork this to a PUBLIC repo, add these ignores:
+#   .credentials.json
+#   credentials.json
+#   *.pem
+#   *.key
+#   .env
+#   .env.local
+#   .env.*.local
+
 # ----- SESSION-SPECIFIC FILES -----
 # These contain session IDs and are regenerated
 
