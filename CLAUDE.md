@@ -34,6 +34,7 @@
 3. **Execute** — Use `TodoWrite` to track progress
 4. **Verify** — Tests + manual checks
 5. **Auto-Commit** — Commit when task complete (user repos only)
+6. **Auto-Merge** — Merge to main/master when commit complete (user repos only)
 
 **Multi-phase projects:** Use `/gsd:progress` or `/gsd:new-project`
 
@@ -58,7 +59,7 @@
 
 ## Plugin Marketplaces
 
-**4 marketplaces installed** — auto-loaded from `~/.claude/plugins/marketplaces/`
+**5 marketplaces installed** — auto-loaded from `~/.claude/plugins/marketplaces/`
 
 | Marketplace | Source | Contents |
 |-------------|--------|----------|
@@ -66,6 +67,7 @@
 | `claude-code-plugins` | Anthropic official | PR review, commit commands, feature dev |
 | `claude-plugins-official` | Anthropic official | External plugins collection |
 | `taches-cc-resources` | Taches/GlitterCowboy | Meta-prompting, debugging, hooks, agents |
+| `get-shit-done` | Taches/GlitterCowboy | Multi-phase project management (GSD system) |
 
 ### Key Commands from Marketplaces
 
@@ -148,7 +150,7 @@ After task, immediately:
 
 ## Skills & Agents
 
-**100+ skills, 30+ agents** — load on demand.
+**67 skills, 36 agents** — load on demand.
 
 | Task | Skill |
 |------|-------|

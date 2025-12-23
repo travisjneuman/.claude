@@ -1,6 +1,6 @@
 # Ultimate Claude Code Toolkit
 
-A comprehensive Claude Code enhancement toolkit with 100+ skills, 30+ specialized agents, and complete development workflows for full-stack development across all platforms.
+A comprehensive Claude Code enhancement toolkit with 67 skills, 36 specialized agents, and complete development workflows for full-stack development across all platforms.
 
 ---
 
@@ -31,7 +31,7 @@ claude  # Start Claude Code
 
 ## What's Included
 
-### 100+ Skills
+### 67 Skills
 
 | Category | Coverage |
 |----------|----------|
@@ -42,7 +42,7 @@ claude  # Start Claude Code
 | **Code Quality** | Testing, Security, Performance, Debugging |
 | **UX/Design Systems** | React, Static, Full-stack patterns |
 
-### 30+ Specialized Agents
+### 36 Specialized Agents
 
 | Category | Agents |
 |----------|--------|
@@ -69,7 +69,7 @@ claude  # Start Claude Code
 ├── README.md               # This file
 ├── settings.json           # Claude Code settings
 │
-├── skills/                 # Domain expertise (100+)
+├── skills/                 # Domain expertise (67)
 │   ├── MASTER_INDEX.md     # Full skill navigation
 │   ├── README.md           # Skills documentation
 │   ├── ios-development/    # Platform skills

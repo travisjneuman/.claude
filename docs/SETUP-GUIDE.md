@@ -135,8 +135,8 @@ bash ~/.claude/scripts/update-marketplaces.sh
 +-- CLAUDE.md              <- Core rules
 +-- settings.json          <- Shared settings
 +-- commands/              <- Slash commands
-+-- skills/                <- 100+ skills
-+-- agents/                <- 30+ agents
++-- skills/                <- 67 skills
++-- agents/                <- 36 agents
 +-- rules/                 <- Contextual rules
 +-- templates/             <- Templates
 +-- docs/                  <- Documentation

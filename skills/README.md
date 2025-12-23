@@ -1,6 +1,6 @@
 # Claude Code Skills Library
 
-Comprehensive skills for Claude Code - 100+ skills covering all development domains.
+Comprehensive skills for Claude Code - 67 skills covering all development domains.
 
 **Version:** 4.0 (Full Coverage)
 **Last Updated:** December 2025
@@ -21,7 +21,7 @@ Comprehensive skills for Claude Code - 100+ skills covering all development doma
 | Development Workflow | 2 | Debug, TDD |
 | Utilities | 6 | Docs, Testing, SEO, Tech Debt |
 
-**Total: 60+ unique skills**
+**Total: 67 unique skills**
 
 ---
 
