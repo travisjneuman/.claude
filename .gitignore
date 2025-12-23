@@ -1,18 +1,38 @@
 # ============================================
-# Claude Code - .gitignore for .claude/ repo
+# Claude Code - Cross-Platform .gitignore
+# ============================================
+# This .claude/ setup is designed to be cloned to any
+# Mac, Linux, or Windows system and work for anyone.
+#
+# TRACKED (shared across all machines):
+#   - CLAUDE.md, README.md, CHANGELOG.md, CONTRIBUTING.md
+#   - settings.json (shared settings)
+#   - plugin.json (plugin manifest)
+#   - commands/, skills/, agents/, rules/, docs/, templates/
+#   - scripts/, .vscode/, .planning/, .archive/
+#   - plugins/local/ (customized plugins)
+#   - plugins/known_marketplaces.json (marketplace registry)
+#   - .gitmodules (submodule definitions)
+#
+# IGNORED (machine-specific or auto-generated):
+#   - Session data, caches, credentials
+#   - MCP config (.mcp.json - platform-specific)
+#   - Submodule contents (cloned separately)
 # ============================================
 
 # ----- SESSION/EPHEMERAL DATA -----
-# Debug logs (session-specific)
+# These are regenerated per session and machine-specific
+
+# Debug logs
 debug/
 
-# Conversation history (LARGE, session-specific)
+# Conversation history (LARGE, contains personal data)
 history.jsonl
 
-# Session project data (conversation JSONL files)
+# Session project data
 projects/
 
-# File edit history (session backups, can be rebuilt)
+# File edit history (session backups)
 file-history/
 
 # Session todos (auto-generated per conversation)
@@ -21,72 +41,147 @@ todos/
 # Shell state snapshots
 shell-snapshots/
 
-# Plan files (session-specific)
+# Plan files (session-specific working files)
 plans/
 
 # Image cache
 image-cache/
 
-# ----- TELEMETRY/CACHE -----
+# ----- TELEMETRY/ANALYTICS -----
+# Claude Code telemetry - machine-specific
+
 statsig/
 telemetry/
 stats-cache.json
 
-# Plugin cache (regenerated automatically)
+# ----- PLUGIN SYSTEM -----
+# Plugin cache (regenerated automatically on each machine)
 plugins/cache/
 
-# ----- SENSITIVE FILES -----
+# Marketplace submodules (cloned via git submodule update)
+# Each machine clones these from upstream
+plugins/marketplaces/
+
+# ----- SENSITIVE/CREDENTIALS -----
+# NEVER commit credentials or secrets
+
 .credentials.json
+credentials.json
+*.pem
+*.key
+.env
+.env.local
+.env.*.local
+
+# Database files (may contain sensitive data)
 *.db
+*.sqlite
+*.sqlite3
+
+# Security warning state (contains session IDs)
 security_warnings_state_*.json
 
 # ----- LOCAL/PERSONAL OVERRIDES -----
+# Machine-specific settings that shouldn't be shared
+
 settings.local.json
 .claude.json
 
-# ----- PLATFORM-SPECIFIC FILES -----
-# .mcp.json contains platform-specific commands:
-#   - Windows: "command": "cmd", "args": ["/c", "npx", ...]
-#   - Linux/Mac: "command": "npx", "args": [...]
-# Each machine must maintain its own .mcp.json manually.
-# See docs/MCP-SERVERS.md for platform-specific templates.
+# ----- PLATFORM-SPECIFIC CONFIG -----
+# MCP server config requires platform-specific commands:
+#   Windows: "command": "cmd", "args": ["/c", "npx", ...]
+#   Mac/Linux: "command": "npx", "args": [...]
+# Each machine must configure .mcp.json manually.
+# See docs/MCP-SERVERS.md for templates.
 .mcp.json
 
-# ----- OS/EDITOR FILES -----
+# ----- GIT WORKTREES -----
+# Git worktree data is machine-specific
+.worktrees/
+
+# ----- IDE/EDITOR DIRECTORIES -----
+# IDE-specific directories (except .vscode which we track)
+ide/
+.idea/
+*.code-workspace
+
+# ----- OS-SPECIFIC FILES -----
+# macOS
 .DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
 Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.fuse_hidden*
+.Trash-*
+.nfs*
+
+# ----- EDITOR TEMP FILES -----
+# Vim
 *.swp
 *.swo
+*.swn
 *~
 
-# ----- VSCODE SERVER FILES -----
-# VSCode remote server files (created on remote hosts)
-# These are machine-specific and regenerated automatically
-.vscode-server*/
+# Emacs
+\#*\#
+.#*
 
-# ----- SUBMODULES (tracked separately) -----
-# These are git submodules with their own repos
-# All external repos are in plugins/marketplaces/:
-#   - anthropic-agent-skills
-#   - claude-code-plugins
-#   - claude-plugins-official
-#   - taches-cc-resources
-#   - get-shit-done
-plugins/marketplaces/
+# VSCode (except .vscode/ which we track for shared settings)
+*.code-workspace
+
+# ----- BUILD/DEPENDENCY ARTIFACTS -----
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+.yarn/cache
+.yarn/unplugged
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+*.egg-info/
+.eggs/
+*.egg
+.venv/
+venv/
+ENV/
+env/
+.pytest_cache/
+.mypy_cache/
+
+# ----- LOGS -----
+logs/
+*.log
+
+# ----- ARCHIVES/TEMP -----
+*.zip
+*.tar.gz
+*.rar
+*.7z
+tmp/
+temp/
 
 # ============================================
-# TRACKED (committed to this repo):
-# - CLAUDE.md, README.md, CHANGELOG.md
-# - settings.json (shared settings, NOT .mcp.json)
-# - commands/, skills/, docs/, templates/
-# - agents/, rules/, scripts/
-# - tasks/, .planning/, .archive/
-# - plugins/local/ (your customized plugins)
-# - plugins/known_marketplaces.json
-# - .vscode/ (shared VSCode settings for consistent dev env)
+# SETUP INSTRUCTIONS FOR NEW MACHINES:
 #
-# MANUAL SETUP REQUIRED PER MACHINE:
-# - .mcp.json (platform-specific MCP server config)
+# 1. Clone: git clone <repo-url> ~/.claude
+# 2. Init submodules: git submodule update --init
+# 3. Create .mcp.json from template (see docs/MCP-SERVERS.md)
+# 4. (Optional) Create settings.local.json for personal overrides
 # ============================================
-plugins/known_marketplaces.json
-stats-cache.json
