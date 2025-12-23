@@ -1,6 +1,6 @@
 # Skills Documentation - Master Index
 
-Navigate all 100+ skills from this central hub.
+Navigate all 67 skills from this central hub.
 
 ---
 
