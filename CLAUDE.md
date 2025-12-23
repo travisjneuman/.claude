@@ -14,6 +14,12 @@
 - Explicit > clever — no magic
 - Direct communication — logic over feelings
 
+**Default Thinking Mode:** ULTRATHINK
+- Apply maximum reasoning depth for all non-trivial tasks
+- Architecture, debugging, planning, code review → always ultrathink
+- Only skip extended thinking for trivial tasks (typos, single-line fixes)
+- Press Ctrl+O to view thinking process
+
 ---
 
 ## P0 Non-Negotiables
@@ -59,7 +65,7 @@
 
 ## Plugin Marketplaces
 
-**5 marketplaces installed** — auto-loaded from `~/.claude/plugins/marketplaces/`
+**11 marketplaces installed** — auto-loaded from `~/.claude/plugins/marketplaces/`
 
 | Marketplace | Source | Contents |
 |-------------|--------|----------|
@@ -68,6 +74,12 @@
 | `claude-plugins-official` | Anthropic official | External plugins collection |
 | `taches-cc-resources` | Taches/GlitterCowboy | Meta-prompting, debugging, hooks, agents |
 | `get-shit-done` | Taches/GlitterCowboy | Multi-phase project management (GSD system) |
+| `claude-code-plugins-plus-skills` | Community | 258 plugins, 185 production-ready skills |
+| `wshobson-agents` | Community | 99 agents, 107 skills, 15 orchestrators |
+| `obra-superpowers` | Community | Battle-tested skills: /brainstorm, /write-plan |
+| `voltagent-subagents` | Community | 100+ specialized agents for full-stack dev |
+| `mhattingpete-skills` | Community | Git automation, testing, code review |
+| `skillsforge` | Community | 29 curated quality skills |
 
 ### Key Commands from Marketplaces
 
@@ -99,7 +111,12 @@
 | `grep`, `rg` | **Grep** tool |
 | `find`, `ls` | **Glob** tool |
 
-**Context:** `/clear` between tasks • `/compact` when large • `/context` to check usage
+**Context Hygiene:**
+- `/clear` between unrelated tasks
+- `/compact` when approaching 50% context usage
+- `/context` to monitor token consumption
+- Reset every 20 iterations for optimal performance
+- Custom compact: `/compact summarize only: architectural decisions, file changes, key findings`
 
 ---
 
@@ -150,7 +167,7 @@ After task, immediately:
 
 ## Skills & Agents
 
-**67 skills, 36 agents** — load on demand.
+**65 local skills, 37 local agents** + **350+ marketplace skills, 200+ marketplace agents** — load on demand.
 
 | Task | Skill |
 |------|-------|
@@ -184,7 +201,7 @@ After task, immediately:
 | Skills | `~/.claude/skills/` |
 | Commands | `~/.claude/commands/` |
 | GSD system | `~/.claude/plugins/marketplaces/get-shit-done/` |
-| External repos | `~/.claude/plugins/marketplaces/` (5 submodules) |
+| External repos | `~/.claude/plugins/marketplaces/` (11 marketplaces) |
 
 ---
 
@@ -195,9 +212,12 @@ After task, immediately:
 | Start any task | `/start-task [description]` |
 | Check project status | `/gsd:progress` |
 | Start new project | `/gsd:new-project` |
+| Browse available skills | `/list-skills [domain]` |
+| Find skill for problem | `/skill-finder [problem]` |
 | Debug an issue | `Skill(debug-like-expert)` |
 | Review outstanding work | `/taches-cc-resources:check-todos` |
 | Make a decision | `/consider:first-principles` |
+| Brainstorm ideas | `/obra:brainstorm` |
 
 ---
 

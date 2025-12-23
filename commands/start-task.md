@@ -18,6 +18,21 @@ Analyzes ANY prompt and automatically routes to the optimal execution strategy, 
 
 When this command is invoked, perform these steps IN ORDER:
 
+### Step 0: Apply ULTRATHINK Mode (DEFAULT)
+
+**For ALL non-trivial tasks, apply maximum reasoning depth automatically.**
+
+Detection: If task description contains ANY of these signals, ULTRATHINK is mandatory:
+- Architecture/design keywords: "build", "create", "implement", "design", "architect"
+- Debug keywords: "debug", "fix", "error", "broken", "not working"
+- Review keywords: "review", "check", "audit", "analyze"
+- Planning keywords: "plan", "how to", "strategy", "approach"
+- Complex indicators: multiple steps, multiple systems, research needed
+
+**Only skip ultrathink for trivial tasks:** typos, single-line fixes, quick lookups.
+
+---
+
 ### Step 1: Check for Active GSD Project
 
 ```bash
