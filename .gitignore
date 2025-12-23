@@ -65,16 +65,22 @@ plugins/marketplaces/
 # Marketplace registry (contains machine-specific paths)
 plugins/known_marketplaces.json
 
-# ----- CREDENTIALS (Private Repo Policy) -----
-# This is a PRIVATE repo - credentials ARE allowed.
-# If you fork this to a PUBLIC repo, add these ignores:
-#   .credentials.json
-#   credentials.json
-#   *.pem
-#   *.key
-#   .env
-#   .env.local
-#   .env.*.local
+# ----- CREDENTIALS & AUTH TOKENS -----
+# OAuth tokens are machine-specific and regenerated per device.
+# Even in private repos, these should not be committed:
+# - Tokens expire/rotate
+# - Won't work on other machines
+# - Security best practice
+
+.credentials.json
+credentials.json
+
+# Additional secrets (if you ever add them)
+# *.pem
+# *.key
+# .env
+# .env.local
+# .env.*.local
 
 # ----- SESSION-SPECIFIC FILES -----
 # These contain session IDs and are regenerated
