@@ -62,6 +62,9 @@ plugins/cache/
 # Each machine clones these from upstream
 plugins/marketplaces/
 
+# Marketplace registry (contains machine-specific paths)
+plugins/known_marketplaces.json
+
 # ----- SENSITIVE/CREDENTIALS -----
 # NEVER commit credentials or secrets
 
