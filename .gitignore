@@ -15,7 +15,7 @@
 #   - .gitmodules (submodule definitions)
 #
 # IGNORED (machine-specific or auto-generated):
-#   - Session data, caches, credentials
+#   - Session data, caches
 #   - MCP config (.mcp.json - platform-specific)
 #   - Submodule contents (cloned separately)
 # ============================================
@@ -65,24 +65,16 @@ plugins/marketplaces/
 # Marketplace registry (contains machine-specific paths)
 plugins/known_marketplaces.json
 
-# ----- SENSITIVE/CREDENTIALS -----
-# NEVER commit credentials or secrets
-
-.credentials.json
-credentials.json
-*.pem
-*.key
-.env
-.env.local
-.env.*.local
-
-# Database files (may contain sensitive data)
-*.db
-*.sqlite
-*.sqlite3
+# ----- SESSION-SPECIFIC FILES -----
+# These contain session IDs and are regenerated
 
 # Security warning state (contains session IDs)
 security_warnings_state_*.json
+
+# SQLite databases (session-specific, regenerated)
+*.db
+*.sqlite
+*.sqlite3
 
 # ----- LOCAL/PERSONAL OVERRIDES -----
 # Machine-specific settings that shouldn't be shared
