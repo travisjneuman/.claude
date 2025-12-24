@@ -9,6 +9,8 @@ Load this file when development-related keywords detected.
 | `ios` | ios, swift, swiftui, iphone, ipad, apple, xcode, cocoa, uikit |
 | `android` | android, kotlin, jetpack, compose, gradle, material design |
 | `react` | react, frontend, component, jsx, tsx, next.js, vite, tailwind, shadcn |
+| `vue` | vue, vuejs, nuxt, pinia, composition api, options api, vueuse |
+| `svelte` | svelte, sveltekit, runes, $state, $derived, svelte 5 |
 | `backend` | api, backend, server, endpoint, rest, express, nestjs, fastify |
 | `database` | database, db, sql, postgres, mongodb, redis, prisma, schema, query, migration |
 | `devops` | deploy, ci/cd, docker, kubernetes, aws, gcp, azure, terraform, pipeline, github actions |
@@ -37,6 +39,8 @@ Load this file when development-related keywords detected.
 | `ios` | `Skill(ios-development)` | `ios-developer` | mobile-architect |
 | `android` | `Skill(android-development)` | `android-developer` | mobile-architect |
 | `react` | `Skill(generic-react-feature-developer)` | `react-expert` | frontend-enhancer |
+| `vue` | `Skill(vue-development)` | - | frontend-enhancer |
+| `svelte` | `Skill(svelte-development)` | - | frontend-enhancer |
 | `backend` | `Skill(api-design)` | `api-designer` | database-expert |
 | `database` | `Skill(database-expert)` | `database-architect` | - |
 | `devops` | `Skill(devops-cloud)` | `devops-engineer` | - |
