@@ -171,7 +171,7 @@ After task, immediately:
 
 ## Skills & Agents
 
-**65 local skills, 37 local agents** + **350+ marketplace skills, 200+ marketplace agents** — load on demand.
+**69 local skills, 37 local agents** + **350+ marketplace skills, 200+ marketplace agents** — load on demand.
 
 | Task | Skill |
 |------|-------|

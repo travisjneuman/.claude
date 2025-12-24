@@ -1,130 +1,89 @@
-# Roadmap: Expert Skill Library Enhancement
+# Roadmap: Universal Intelligent Router & Documentation Overhaul
 
-## Overview
+## Phase Overview
 
-Transform ~40 Claude Code skills from basic guidelines to expert-level knowledge systems. Starting with foundational infrastructure (templates, shared standards), then enhancing base skills first (multiplier effect), followed by domain experts, stack variants, and utilities. Final phase validates activation and quality across entire library.
+| Phase | Focus | Plans | Est. Time |
+|-------|-------|-------|-----------|
+| 1 | Universal Router (start-task.md v2.0) | 2 | Core |
+| 2 | Documentation Updates | 2 | Secondary |
+| 3 | Validation | 1 | Final |
 
-## Domain Expertise
+**Total Plans:** 5
 
-None (this is a skill-authoring project, not a domain-specific application)
+---
 
-## Research Context
+## Phase 1: Universal Router (start-task.md v2.0)
 
-Pre-planning research was conducted for this domain. Key findings incorporated into phase planning:
+**Goal:** Create an all-encompassing intelligent router that handles ANY prompt.
 
-**Source:** .planning/research/
+### Plan 1-01: Router Architecture & Domain Detection
+- Design comprehensive detection system for ALL domains
+- Add scientific domain detection (125+ skills worth)
+- Add business domain detection (16 expert skills)
+- Add creative domain detection
+- Add meta/admin task detection
+- Add research need detection
 
-**Key Ecosystem Choices:**
-- Token-optimized structure: SKILL.md (~5-10KB) + references/ for deep content
-- Task-focused descriptions for reliable activation
-- Progressive disclosure: Metadata → Core → References
+### Plan 1-02: Resource Loading & Routing Logic
+- Implement resource auto-loading for all 15 marketplaces
+- Add memory integration (claude-mem check)
+- Add research integration (WebSearch trigger)
+- Add skill generation detection (skill-seekers)
+- Implement complexity scoring
+- Implement routing logic (GSD/Plan/Direct)
+- Add post-work automation
 
-**Architectural Patterns:**
-- P0/P1/P2 tiered priority systems for checklists
-- Decision trees pointing to references
-- Self-critique steps for technical output skills
+**Deliverable:** Complete start-task.md v2.0
 
-**Critical Pitfalls Addressed:**
-- Instruction overload (>10 rules = 19% performance drop) - Phase 1 establishes template with tiered priorities
-- Theory without application - All phases require actionable frameworks, not just explanations
-- Monolithic skills - Phase 1 creates shared standards to prevent duplication
+---
 
-See .planning/research/*.md for full research findings.
+## Phase 2: Documentation Updates
 
-## Phases
+**Goal:** All documentation reflects current state accurately.
 
-**Phase Numbering:**
-- Integer phases (1, 2, 3): Planned milestone work
-- Decimal phases (2.1, 2.2): Urgent insertions (marked with INSERTED)
+### Plan 2-01: Core Documentation
+- Update CLAUDE.md (15 marketplaces)
+- Update README.md (69 skills, 37 agents, 15 marketplaces)
+- Add marketplace capabilities section
 
-Decimal phases appear between their surrounding integers in numeric order.
+### Plan 2-02: Skills & Supporting Docs
+- Update skills/README.md (69 skills)
+- Update skills/MASTER_INDEX.md (69 skills + marketplace reference)
+- Update docs/README.md (add marketplace info)
 
-- [x] **Phase 1: Foundation** - Templates, shared standards, enhancement checklist
-- [x] **Phase 2: Base Generic Skills** - Enhance 4 base skills (3-4x multiplier effect)
-- [x] **Phase 3: Domain Expert Skills** - Audit and enhance 16 domain skills
-- [x] **Phase 4: Stack-Specific Skills** - Update 12 stack variants
-- [x] **Phase 5: Utility Skills** - Enhance 6+ utility skills
-- [x] **Phase 6: Validation** - Test activation, verify quality, document
+**Deliverable:** All documentation accurate and comprehensive
 
-## Phase Details
+---
 
-### Phase 1: Foundation
-**Goal**: Establish templates, shared standards, and enhancement checklist
-**Depends on**: Nothing (first phase)
-**Research**: Unlikely (established patterns from research)
-**Plans**: 2 plans
+## Phase 3: Validation
 
-Plans:
-- [x] 01-01: Create enhancement template and quality checklist based on research findings
-- [x] 01-02: Create/update shared standards (_shared/ folder) for code review, design patterns
+**Goal:** Verify everything works correctly.
 
-### Phase 2: Base Generic Skills
-**Goal**: Enhance 4 base generic skills that all stack variants inherit from
-**Depends on**: Phase 1 (needs templates and shared standards)
-**Research**: Unlikely (patterns established in Phase 1)
-**Plans**: 4 plans (one per skill)
+### Plan 3-01: Testing & Verification
+- Test router with 20+ diverse prompts
+- Verify scientific domain detection
+- Verify research integration
+- Verify routing accuracy
+- Final documentation review
 
-Plans:
-- [x] 02-01: Enhance generic-code-reviewer (already solid at 104 lines, verify/polish)
-- [x] 02-02: Enhance generic-design-system (add design tokens, atomic design, accessibility)
-- [x] 02-03: Enhance generic-feature-developer (add architecture patterns, data flow)
-- [x] 02-04: Enhance generic-ux-designer (add UX methodology, research methods)
+**Deliverable:** Validated, working system
 
-### Phase 3: Domain Expert Skills
-**Goal**: Audit and enhance 16 domain expert skills with current (2024-2025) frameworks
-**Depends on**: Phase 1 (needs quality checklist)
-**Research**: Unlikely (comprehensive research already completed)
-**Plans**: 4 plans (grouped by domain affinity)
+---
 
-Plans:
-- [x] 03-01: Business group (business-strategy, operations, product-management, innovation)
-- [x] 03-02: People group (hr-talent, leadership, health-wellness)
-- [x] 03-03: Finance/Risk group (finance, risk-management, legal-compliance)
-- [x] 03-04: Technical/External group (data-science, security, sales, marketing, sustainability-esg, rd-management)
+## Dependencies
 
-### Phase 4: Stack-Specific Skills
-**Goal**: Update 12 stack-specific variants to properly reference enhanced base skills
-**Depends on**: Phase 2 (base skills must be enhanced first)
-**Research**: Unlikely (inherits from base skills)
-**Plans**: 3 plans (one per stack family)
+```
+Phase 1 (Router) ──────► Phase 2 (Docs) ──────► Phase 3 (Validation)
+     │                        │
+     │                        └── Can start after 1-02 complete
+     │
+     └── 1-01 must complete before 1-02
+```
 
-Plans:
-- [x] 04-01: React variants (generic-react-code-reviewer, generic-react-design-system, generic-react-feature-developer, generic-react-ux-designer)
-- [x] 04-02: Static variants (generic-static-code-reviewer, generic-static-design-system, generic-static-feature-developer, generic-static-ux-designer)
-- [x] 04-03: Fullstack variants (generic-fullstack-code-reviewer, generic-fullstack-design-system, generic-fullstack-feature-developer, generic-fullstack-ux-designer)
+## Risk Mitigation
 
-### Phase 5: Utility Skills
-**Goal**: Enhance 6+ utility skills with workflows and verification steps
-**Depends on**: Phase 1 (needs templates)
-**Research**: Unlikely (patterns from research apply)
-**Plans**: 2 plans
-
-Plans:
-- [x] 05-01: Documentation utilities (codebase-documenter)
-- [x] 05-02: Analysis utilities (tech-debt-analyzer, test-specialist, frontend-enhancer, seo-analytics-auditor)
-
-### Phase 6: Validation
-**Goal**: Test activation patterns, verify expert quality, document results
-**Depends on**: Phases 2-5 (all skills must be enhanced)
-**Research**: Unlikely (validation, not new development)
-**Plans**: 2 plans
-
-Plans:
-- [x] 06-01: Activation testing (41 skills validated, 100% pass rate)
-- [x] 06-02: Quality audit and documentation (PROJECT-COMPLETE.md created)
-
-## Progress
-
-**Execution Order:**
-Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6
-
-| Phase | Plans Complete | Status | Completed |
-|-------|----------------|--------|-----------|
-| 1. Foundation | 2/2 | Complete | 2025-12-17 |
-| 2. Base Generic Skills | 4/4 | Complete | 2025-12-17 |
-| 3. Domain Expert Skills | 4/4 | Complete | 2025-12-17 |
-| 4. Stack-Specific Skills | 3/3 | Complete | 2025-12-17 |
-| 5. Utility Skills | 2/2 | Complete | 2025-12-17 |
-| 6. Validation | 2/2 | Complete | 2025-12-17 |
-
-**PROJECT COMPLETE** - All 16 plans executed, 41 skills enhanced.
+| Risk | Mitigation |
+|------|------------|
+| Router too large (token bloat) | Use tiered loading, reference external files |
+| Missing edge cases | Extensive testing in Phase 3 |
+| Marketplace changes | Reference by name, not hardcoded paths |
