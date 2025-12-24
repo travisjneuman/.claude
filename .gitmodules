@@ -18,3 +18,12 @@
 [submodule "plugins/marketplaces/awesome-claude-skills"]
 	path = plugins/marketplaces/awesome-claude-skills
 	url = https://github.com/ComposioHQ/awesome-claude-skills.git
+[submodule "plugins/marketplaces/claude-mem"]
+	path = plugins/marketplaces/claude-mem
+	url = https://github.com/thedotmack/claude-mem.git
+[submodule "plugins/marketplaces/skill-seekers"]
+	path = plugins/marketplaces/skill-seekers
+	url = https://github.com/yusufkaraaslan/Skill_Seekers.git
+[submodule "plugins/marketplaces/claude-scientific-skills"]
+	path = plugins/marketplaces/claude-scientific-skills
+	url = https://github.com/K-Dense-AI/claude-scientific-skills.git

@@ -26,6 +26,9 @@ All external repos are located in `~/.claude/plugins/marketplaces/`:
 | taches-cc-resources | Submodule | https://github.com/glittercowboy/taches-cc-resources.git |
 | get-shit-done | Submodule | https://github.com/glittercowboy/get-shit-done.git |
 | awesome-claude-skills | Submodule | https://github.com/ComposioHQ/awesome-claude-skills.git |
+| claude-mem | Submodule | https://github.com/thedotmack/claude-mem.git |
+| skill-seekers | Submodule | https://github.com/yusufkaraaslan/Skill_Seekers.git |
+| claude-scientific-skills | Submodule | https://github.com/K-Dense-AI/claude-scientific-skills.git |
 
 ---
 
