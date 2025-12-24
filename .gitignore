@@ -44,6 +44,12 @@ shell-snapshots/
 # Plan files (session-specific working files)
 plans/
 
+# Active GSD project state (user-specific)
+.planning/
+
+# Task files (user-specific work documentation)
+tasks/
+
 # Image cache
 image-cache/
 
@@ -64,6 +70,9 @@ plugins/marketplaces/
 
 # Marketplace registry (contains machine-specific paths)
 plugins/known_marketplaces.json
+
+# Installed plugins registry (contains machine-specific install paths)
+plugins/installed_plugins.json
 
 # ----- CREDENTIALS & AUTH TOKENS -----
 # OAuth tokens are machine-specific and regenerated per device.
@@ -188,6 +197,14 @@ logs/
 *.7z
 tmp/
 temp/
+
+# ----- ARCHIVED SESSION DATA -----
+# Old session todos and agent data (contains session IDs)
+.archive/todos/
+
+# ----- NESTED CLAUDE FOLDER -----
+# This shouldn't exist but ignore if it does
+.claude/
 
 # ============================================
 # SETUP INSTRUCTIONS FOR NEW MACHINES:
