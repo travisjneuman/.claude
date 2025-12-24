@@ -1,62 +1,139 @@
 # Ultimate Claude Code Toolkit
 
-A comprehensive Claude Code enhancement toolkit with 67 skills, 36 specialized agents, and complete development workflows for full-stack development across all platforms.
+A comprehensive Claude Code enhancement toolkit with **69 local skills**, **37 specialized agents**, **15 plugin marketplaces**, and complete development workflows for full-stack development across all platforms.
+
+**Features:**
+- Universal intelligent router that handles ANY prompt automatically
+- Persistent memory across sessions (claude-mem)
+- Research integration (WebSearch for current info)
+- 125+ scientific domain skills
+- Decision frameworks for structured thinking
+- GSD (Get Shit Done) project management
 
 ---
 
 ## Quick Start
 
-### Installation
+### Starting a Task
 
-```bash
-# Option 1: Clone as your .claude directory (fresh install)
-mv ~/.claude ~/.claude-backup  # Backup existing if needed
-git clone https://github.com/YOURREPO/claude-toolkit.git ~/.claude
-
-# Option 2: Merge with existing setup
-git clone https://github.com/YOURREPO/claude-toolkit.git /tmp/claude-toolkit
-cp -r /tmp/claude-toolkit/skills/* ~/.claude/skills/
-cp -r /tmp/claude-toolkit/agents/* ~/.claude/agents/
-cp -r /tmp/claude-toolkit/rules/* ~/.claude/rules/
+```
+/start-task [describe what you want]
 ```
 
-### Verify Installation
+The universal router automatically:
+1. Checks persistent memory for relevant context
+2. Detects the domain(s) from your description
+3. Loads appropriate skills, agents, and resources
+4. Routes to optimal workflow (GSD/Planning/Direct)
 
-```bash
-claude  # Start Claude Code
-# Test: "Use the graphic-designer agent to suggest a color palette"
-```
+**No special keywords required.** Just describe what you want naturally.
+
+### Examples
+
+| You Say | Router Detects | Resources Loaded |
+|---------|----------------|------------------|
+| "Build an iOS app with SwiftUI" | development/ios | ios-development skill, ios-developer agent, GSD |
+| "Analyze this protein sequence" | scientific/proteomics | claude-scientific-skills |
+| "What's new in React 19?" | research + development/react | WebSearch + react skill |
+| "Should I use Redux or Zustand?" | decision/choice | first-principles framework |
+| "Create a pricing strategy" | business/monetization | monetization-strategy skill |
 
 ---
 
 ## What's Included
 
-### 67 Skills
+### 69 Local Skills
 
 | Category | Coverage |
 |----------|----------|
-| **Platform Development** | iOS, Android, React Native, Flutter, Electron, PWA |
-| **Creative Domain** | Graphic Design, Video, Audio, Branding, Motion |
-| **Business Strategy** | Startup Launch, Monetization, Marketing, Finance |
-| **Technical Depth** | GraphQL, Microservices, i18n, Real-time |
-| **Code Quality** | Testing, Security, Performance, Debugging |
-| **UX/Design Systems** | React, Static, Full-stack patterns |
+| **Platform Development** | iOS, Android, React Native, Flutter, Electron, PWA, macOS |
+| **Creative Domain** | Graphic Design, Video, Audio, Branding, Motion, UI/UX |
+| **Business Strategy** | Startup, Monetization, Marketing, Finance, HR, Legal, Operations |
+| **Technical Depth** | GraphQL, Microservices, i18n, Real-time, WebSockets |
+| **Code Quality** | Testing, Security, Performance, Debugging, Code Review |
+| **Design Systems** | React, Static, Full-stack patterns |
 
-### 36 Specialized Agents
+### 37 Specialized Agents
 
 | Category | Agents |
 |----------|--------|
-| **Code Quality** | deep-code-reviewer, security-auditor, refactoring-specialist |
-| **Platform** | ios-developer, android-developer, mobile-architect, desktop-developer |
+| **Code Quality** | deep-code-reviewer, security-auditor, refactoring-specialist, performance-optimizer |
+| **Platform** | ios-developer, android-developer, mobile-architect, desktop-developer, macos-developer |
 | **Creative** | graphic-designer, video-producer, audio-engineer, brand-strategist, motion-designer |
-| **Architecture** | graphql-architect, microservices-architect, realtime-specialist |
+| **Architecture** | graphql-architect, microservices-architect, realtime-specialist, database-architect |
 | **Business** | startup-advisor, monetization-expert |
+| **Specialized** | typescript-expert, python-expert, react-expert, debugging-specialist |
 
-### Complete Workflow System
-- GSD (Get Shit Done) project management
-- Task templates and planning tools
-- Git hooks and automation
-- Contextual rules and checklists
+### 15 Plugin Marketplaces
+
+| Marketplace | Key Capabilities |
+|-------------|------------------|
+| `anthropic-agent-skills` | Document skills, examples |
+| `awesome-claude-skills` | 27 skills: canvas, forensics, invoices |
+| `claude-code-plugins` | PR review, commits, feature dev |
+| `claude-code-plugins-plus-skills` | 258 plugins, 185 production-ready skills |
+| `claude-plugins-official` | External plugins |
+| `get-shit-done` | GSD multi-phase project management |
+| `mhattingpete-skills` | Git automation, testing, code review |
+| `obra-superpowers` | /brainstorm, /write-plan |
+| `skillsforge` | 29 curated quality skills |
+| `taches-cc-resources` | Decision frameworks, meta-prompting, debugging |
+| `voltagent-subagents` | 100+ specialized agents for full-stack dev |
+| `wshobson-agents` | 99 agents, 107 skills, 15 orchestrators |
+| `claude-mem` | Persistent memory, semantic search, session continuity |
+| `skill-seekers` | Auto-generate skills from docs/repos/PDFs |
+| `claude-scientific-skills` | 125+ scientific skills: bioinformatics, chemistry, physics |
+
+**Total Available:** 350+ skills, 200+ agents
+
+---
+
+## Core Capabilities
+
+### Universal Router (`/start-task`)
+
+The router detects and loads resources for ANY prompt type:
+
+**Development:** iOS, Android, React, Backend, Database, DevOps, Testing, Security, GraphQL, Microservices, AI/ML, Desktop, PWA, Flutter, React Native
+
+**Scientific:** Bioinformatics, Chemistry, Proteomics, Clinical, Physics, Astronomy, Materials Science, Lab Automation
+
+**Business:** Startup, Finance, Marketing, Sales, Product, Strategy, Operations, HR, Leadership, Legal, Risk, Innovation, Sustainability, Monetization
+
+**Creative:** Graphic Design, Video, Audio, Brand Identity, Motion Design, UI/UX
+
+**Decision Making:** 5-Whys, Eisenhower Matrix, First Principles, Second-Order Thinking, Occam's Razor, SWOT
+
+**Meta/Admin:** Create skills, hooks, commands, agents; commit/PR; status checks
+
+### Persistent Memory (claude-mem)
+
+Context continuity across sessions:
+- Key decisions remembered
+- Architectural choices preserved
+- Project state maintained
+- Semantic search for relevant past context
+
+### Research Integration (WebSearch)
+
+Automatically triggered for:
+- Current information ("latest", "2025", "what's new")
+- Best practices queries
+- Technology version questions
+- Library/package discovery
+- External documentation
+
+### GSD Project Management
+
+Multi-phase project tracking:
+
+| Command | Purpose |
+|---------|---------|
+| `/gsd:new-project` | Initialize new multi-phase project |
+| `/gsd:progress` | Check status, route to next action |
+| `/gsd:plan-phase [n]` | Create execution plan for phase |
+| `/gsd:execute-plan` | Execute a PLAN.md file |
+| `/gsd:resume-work` | Resume with context restoration |
 
 ---
 
@@ -65,104 +142,134 @@ claude  # Start Claude Code
 ```
 .claude/
 ├── CLAUDE.md               # Core configuration (constitution)
-├── plugin.json             # Plugin manifest
 ├── README.md               # This file
 ├── settings.json           # Claude Code settings
+├── plugin.json             # Plugin manifest
 │
-├── skills/                 # Domain expertise (67)
+├── skills/                 # Domain expertise (69)
 │   ├── MASTER_INDEX.md     # Full skill navigation
 │   ├── README.md           # Skills documentation
-│   ├── ios-development/    # Platform skills
-│   ├── graphic-design/     # Creative skills
-│   ├── startup-launch/     # Business skills
-│   └── ...
+│   └── [domain]/SKILL.md   # Individual skills
 │
-├── agents/                 # Specialized AI agents (30+)
+├── agents/                 # Specialized AI agents (37)
 │   ├── README.md           # Agent documentation
-│   └── *.md                # Individual agent files
+│   └── *.md                # Individual agent definitions
+│
+├── commands/               # Custom slash commands
+│   ├── start-task.md       # Universal router (v2.0)
+│   └── *.md                # Other commands
 │
 ├── rules/                  # Contextual guidelines
 │   ├── checklists/         # Task-type checklists
 │   ├── stacks/             # Technology-specific rules
 │   └── tooling/            # Tool setup guides
 │
-├── commands/               # Custom slash commands
+├── plugins/                # External plugins
+│   └── marketplaces/       # 15 marketplace repos
+│
 ├── templates/              # Project templates
 ├── docs/                   # Additional documentation
 │
-├── # Session files (auto-generated)
-├── history.jsonl           # Conversation history
-├── plans/                  # Project planning documents
-├── tasks/                  # Active task files
-└── projects/               # Per-project state
+└── .planning/              # GSD project files (auto-generated)
+    ├── PROJECT.md
+    ├── ROADMAP.md
+    ├── STATE.md
+    └── phases/
 ```
 
 ---
 
-## Usage Guide
+## Usage Patterns
 
-### Using Skills
+### Skills (Automatic Loading)
 
-Skills are automatically loaded. Just ask about a topic:
+Skills load automatically based on your prompt:
 
 ```
-"I'm building an iOS app with SwiftUI. What architecture should I use?"
-→ Uses ios-development skill
+"I'm building an iOS app with SwiftUI"
+→ Loads ios-development skill
 
 "Help me design pricing tiers for my SaaS"
-→ Uses monetization-strategy skill
+→ Loads monetization-strategy skill
 
-"Create a color palette for a fintech app"
-→ Uses graphic-design skill
+"Analyze this gene sequence for mutations"
+→ Loads claude-scientific-skills/bioinformatics
 ```
 
-### Using Agents
+### Agents (Explicit Invocation)
 
-Invoke agents explicitly for specialized assistance:
+Invoke agents for specialized deep work:
 
 ```
 "Use the security-auditor agent to review this auth code"
 "Use the ios-developer agent to implement push notifications"
 "Use the startup-advisor agent to validate my business idea"
-"Use the graphic-designer agent for brand colors"
 ```
 
-### Slash Commands
+### Decision Frameworks
+
+Structured thinking for complex decisions:
 
 ```
-/gsd:progress              # Check project progress
-/gsd:plan-phase           # Plan implementation
-/commit-commands:commit    # Create git commit
-/code-review:code-review   # Review code
+/consider:first-principles   # Break down to fundamentals
+/consider:5-whys            # Find root cause
+/consider:eisenhower-matrix # Prioritize by urgency/importance
+/consider:swot              # Analyze trade-offs
+```
+
+### Meta Commands
+
+Create Claude Code resources:
+
+```
+/taches-cc-resources:create-agent-skill   # Create new skill
+/taches-cc-resources:create-hook          # Create automation hook
+/taches-cc-resources:create-slash-command # Create command
+/taches-cc-resources:create-subagent      # Create agent
 ```
 
 ---
 
-## Platform Coverage
+## Key Commands Reference
 
-### Mobile Development
-| Platform | Skill | Agent |
-|----------|-------|-------|
-| iOS/iPadOS/tvOS | `ios-development` | `ios-developer` |
-| Android | `android-development` | `android-developer` |
-| React Native | `react-native` | `mobile-architect` |
-| Flutter | `flutter-development` | `mobile-architect` |
+| I want to... | Use |
+|--------------|-----|
+| Start any task | `/start-task [description]` |
+| Check project status | `/gsd:progress` |
+| Start new project | `/gsd:new-project` |
+| Debug an issue | `Skill(debug-like-expert)` |
+| Review my code | `/code-review:code-review` |
+| Create a commit | `/commit-commands:commit` |
+| Create a PR | `/commit-commands:commit-push-pr` |
+| Make a decision | `/consider:first-principles` |
+| Brainstorm ideas | `/obra:brainstorm` |
+| Check outstanding work | `/taches-cc-resources:check-todos` |
 
-### Desktop & Web
-| Platform | Skill | Agent |
-|----------|-------|-------|
-| Electron/Desktop | `electron-desktop` | `desktop-developer` |
-| PWA | `pwa-development` | (uses web skills) |
+---
 
-### Creative & Business
-| Domain | Skill | Agent |
-|--------|-------|-------|
-| Visual Design | `graphic-design` | `graphic-designer` |
-| Video | `video-production` | `video-producer` |
-| Audio | `audio-production` | `audio-engineer` |
-| Branding | `brand-identity` | `brand-strategist` |
-| Startups | `startup-launch` | `startup-advisor` |
-| Pricing | `monetization-strategy` | `monetization-expert` |
+## Installation
+
+### Fresh Install
+
+```bash
+mv ~/.claude ~/.claude-backup  # Backup existing if needed
+git clone https://github.com/YOURREPO/claude-toolkit.git ~/.claude
+cd ~/.claude && git submodule update --init --recursive
+```
+
+### Update Marketplaces
+
+```bash
+cd ~/.claude
+git submodule update --remote --merge
+```
+
+### Verify Installation
+
+```bash
+claude  # Start Claude Code
+# Test: "/start-task Build a simple todo app"
+```
 
 ---
 
@@ -170,29 +277,14 @@ Invoke agents explicitly for specialized assistance:
 
 MCP servers are **disabled by default** to save context tokens.
 
-### Available Servers
+| Server | Purpose | Enable When |
+|--------|---------|-------------|
+| `playwright` | Browser automation | E2E testing |
+| `memory` | Persistent knowledge | Long projects |
+| `chrome-devtools` | Performance profiling | Frontend debugging |
 
-| Server | Purpose | Tokens |
-|--------|---------|--------|
-| `playwright` | Browser automation, testing | ~14,446 |
-| `filesystem` | Extended file operations | ~9,220 |
-| `memory` | Persistent knowledge graph | ~5,795 |
-| `context7` | Up-to-date documentation | ~TBD |
-| `chrome-devtools` | Performance profiling | ~18,000 |
-
-### Enable a Server
-
-Edit `settings.json` and remove from `disabledMcpjsonServers`:
-
-```json
-{
-  "disabledMcpjsonServers": [
-    "sequential-thinking",
-    // "playwright",  <-- remove to enable
-    "memory"
-  ]
-}
-```
+Enable via: `/mcp enable playwright`
+Disable after: `/mcp disable playwright`
 
 ---
 
@@ -208,7 +300,9 @@ name: my-skill
 description: When to use this skill
 ---
 
-# Skill content here
+# My Skill
+
+[Skill content here]
 ```
 
 ### Adding Agents
@@ -225,51 +319,9 @@ tools:
   - Write
 ---
 
-# Agent system prompt here
-```
+# Agent System Prompt
 
----
-
-## Maintenance
-
-### Updates
-
-```bash
-cd ~/.claude && git pull
-```
-
-### Cleanup (Optional)
-
-```bash
-# Delete auto-generated cruft
-rm -rf debug file-history shell-snapshots statsig telemetry
-rm stats-cache.json sqlite_mcp_server.db
-```
-
-### Backup
-
-```bash
-# Essential files only
-tar -czf claude-backup.tar.gz \
-  CLAUDE.md settings.json .mcp.json \
-  skills/ agents/ rules/ commands/ templates/
-```
-
----
-
-## Platform Notes
-
-### Windows
-MCP servers use `cmd /c` wrapper (pre-configured).
-
-### Linux/Mac
-Edit `.mcp.json` to change:
-```json
-"command": "cmd", "args": ["/c", "npx", ...]
-```
-To:
-```json
-"command": "npx", "args": [...]
+[Agent instructions here]
 ```
 
 ---
@@ -278,7 +330,9 @@ To:
 
 - [Claude Code Documentation](https://docs.anthropic.com/en/docs/claude-code)
 - [awesome-claude-code](https://github.com/hesreallyhim/awesome-claude-code)
-- [awesome-claude-md](https://github.com/josix/awesome-claude-md)
+- [MCP Protocol](https://modelcontextprotocol.io)
+- Full skill catalog: `~/.claude/skills/MASTER_INDEX.md`
+- Full agent catalog: `~/.claude/agents/README.md`
 
 ---
 
@@ -288,4 +342,4 @@ MIT License - Use, modify, and distribute freely.
 
 ---
 
-*Last Updated: December 2025*
+*Last Updated: December 2025 | Version 2.0 - Universal Router*
