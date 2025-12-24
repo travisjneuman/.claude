@@ -65,7 +65,7 @@
 
 ## Plugin Marketplaces
 
-**12 marketplaces installed** — auto-loaded from `~/.claude/plugins/marketplaces/`
+**15 marketplaces installed** — auto-loaded from `~/.claude/plugins/marketplaces/`
 
 | Marketplace | Source | Contents |
 |-------------|--------|----------|
@@ -81,6 +81,9 @@
 | `mhattingpete-skills` | Community | Git automation, testing, code review |
 | `skillsforge` | Community | 29 curated quality skills |
 | `awesome-claude-skills` | ComposioHQ | 27 skills: documents, canvas, forensics, invoices |
+| `claude-mem` | thedotmack | Persistent memory, semantic search, session continuity |
+| `skill-seekers` | yusufkaraaslan | Auto-generate skills from docs/repos/PDFs |
+| `claude-scientific-skills` | K-Dense-AI | 125+ scientific skills: bioinformatics, chemistry, physics |
 
 ### Key Commands from Marketplaces
 
@@ -202,7 +205,7 @@ After task, immediately:
 | Skills | `~/.claude/skills/` |
 | Commands | `~/.claude/commands/` |
 | GSD system | `~/.claude/plugins/marketplaces/get-shit-done/` |
-| External repos | `~/.claude/plugins/marketplaces/` (12 marketplaces) |
+| External repos | `~/.claude/plugins/marketplaces/` (15 marketplaces) |
 
 ---
 
