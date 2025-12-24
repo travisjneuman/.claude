@@ -197,3 +197,4 @@ temp/
 # 3. Create .mcp.json from template (see docs/MCP-SERVERS.md)
 # 4. (Optional) Create settings.local.json for personal overrides
 # ============================================
+plugins/install-counts-cache.json
