@@ -1,6 +1,6 @@
 # Skills Documentation - Master Index
 
-Navigate all 69 local skills + 350+ marketplace skills from this central hub.
+Navigate all 71 local skills + 550+ marketplace skills from this central hub.
 
 ---
 
@@ -35,6 +35,12 @@ Navigate all 69 local skills + 350+ marketplace skills from this central hub.
 | `generic-react-*` | React/TypeScript | code-reviewer, design-system, feature-developer, ux-designer |
 | `generic-fullstack-*` | Next.js/NestJS | code-reviewer, design-system, feature-developer, ux-designer |
 
+### Framework Skills (Modern JS Frameworks)
+| Skill | Framework | Key Technologies |
+|-------|-----------|------------------|
+| `vue-development` | Vue.js 3 | Composition API, TypeScript, Pinia, Vue Router, Nuxt 3, Vitest |
+| `svelte-development` | Svelte 5 | Runes ($state, $derived, $effect, $props), SvelteKit, TypeScript |
+
 ### Platform Development Skills
 | Skill | Platform | Description |
 |-------|----------|-------------|
@@ -44,11 +50,14 @@ Navigate all 69 local skills + 350+ marketplace skills from this central hub.
 | `flutter-development` | Cross-platform | Dart, Flutter widgets, state management |
 | `electron-desktop` | Desktop | Electron, Tauri, cross-platform desktop |
 | `pwa-development` | Web | Progressive Web Apps, service workers |
+| `macos-native` | macOS | AppKit, Catalyst, macOS system integration |
+| `game-development` | Gaming | Unity, Unreal Engine, Godot |
 
 ### Creative & Design Skills
 | Skill | Domain | Description |
 |-------|--------|-------------|
 | `ui-research` | **Research** | **PREREQUISITE for UI work** - Research inspiration sources, avoid AI look |
+| `frontend-enhancer` | Enhancement | Modern UI patterns (requires ui-research first) |
 | `graphic-design` | Visual Design | Color theory, typography, layout, composition |
 | `video-production` | Video | Pre/post production, camera, lighting, editing |
 | `audio-production` | Audio | Recording, mixing, mastering, sound design |
@@ -69,11 +78,11 @@ Navigate all 69 local skills + 350+ marketplace skills from this central hub.
 ### Technical Architecture Skills
 | Skill | Domain | Description |
 |-------|--------|-------------|
+| `api-design` | APIs | REST/GraphQL design, OpenAPI specs |
 | `graphql-expert` | APIs | Schema design, resolvers, subscriptions |
 | `microservices-architecture` | Architecture | Service design, resilience, observability |
 | `i18n-localization` | Internationalization | ICU format, RTL, locale handling |
 | `websockets-realtime` | Real-time | WebSocket, SSE, Socket.IO, scaling |
-| `api-design` | APIs | REST/GraphQL design, OpenAPI specs |
 
 ### Infrastructure & Operations Skills
 | Skill | Domain | Description |
@@ -81,8 +90,7 @@ Navigate all 69 local skills + 350+ marketplace skills from this central hub.
 | `devops-cloud` | DevOps | AWS, GCP, Azure, Kubernetes, Terraform, CI/CD |
 | `database-expert` | Databases | PostgreSQL, MongoDB, Redis advanced patterns |
 | `ai-ml-development` | AI/ML | PyTorch, TensorFlow, LLM integration, MLOps |
-| `game-development` | Gaming | Unity, Unreal Engine, Godot |
-| `macos-native` | macOS | AppKit, Catalyst, macOS system integration |
+| `security` | Security | Authentication, OWASP, encryption, vulnerability analysis |
 
 ### Domain Expert Skills
 | Domain | Skills |
@@ -107,12 +115,12 @@ Navigate all 69 local skills + 350+ marketplace skills from this central hub.
 | `codebase-documenter` | Generate documentation |
 | `tech-debt-analyzer` | Code health analysis |
 | `test-specialist` | Testing guidance |
-| `frontend-enhancer` | Frontend patterns (requires `ui-research` first) |
 | `seo-analytics-auditor` | SEO analysis |
+| `document-skills` | Office formats (docx, pdf, pptx, xlsx) |
 
 ---
 
-## Marketplace Skills (350+)
+## Marketplace Skills (550+)
 
 15 marketplace plugins provide additional specialized skills:
 
@@ -124,6 +132,10 @@ Navigate all 69 local skills + 350+ marketplace skills from this central hub.
 | `obra-superpowers` | ~30 | Battle-tested /brainstorm, /write-plan |
 | `skillsforge` | 29 | Curated quality skills |
 | `awesome-claude-skills` | 27 | Documents, canvas, forensics, invoices |
+| `voltagent-subagents` | 100+ | Full-stack, DevOps, data science agents |
+| `taches-cc-resources` | Various | Prompt engineering, hooks, skill creation |
+| `skill-seekers` | Various | Skill discovery tools |
+| `mhattingpete-skills` | 10+ | Git automation, testing, code review |
 
 Access via `/start-task` universal router - automatically detects and loads relevant marketplace skills.
 
@@ -218,6 +230,8 @@ Located in `~/.claude/agents/`. See [agents/README.md](../agents/README.md).
 | Task | Skills/Agents |
 |------|---------------|
 | **UI/Frontend work** | `ui-research` skill (FIRST), then `frontend-enhancer`, `generic-design-system` |
+| **Vue.js development** | `vue-development` skill |
+| **Svelte development** | `svelte-development` skill |
 | Building iOS app | `ios-development` skill, `ios-developer` agent |
 | Building Android app | `android-development` skill, `android-developer` agent |
 | Cross-platform mobile | `react-native` or `flutter-development` skill, `mobile-architect` agent |
@@ -242,6 +256,7 @@ Located in `~/.claude/agents/`. See [agents/README.md](../agents/README.md).
 | Writing tests | `tdd-workflow` skill, `test-generator` agent |
 | Code review | `generic-code-reviewer` skill, `deep-code-reviewer` agent |
 | Security audit | `security` skill, `security-auditor` agent |
+| Scientific work | Check `claude-scientific-skills` marketplace |
 
 ---
 
