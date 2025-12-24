@@ -1,10 +1,10 @@
 # Claude Code Skills Library
 
-Comprehensive skills for Claude Code - 69 skills covering all development domains.
+Comprehensive skills for Claude Code - 71 skills covering all development domains.
 
-**Plus:** 15 marketplace plugins with 350+ additional skills.
+**Plus:** 15 marketplace plugins with 550+ additional skills.
 
-**Version:** 4.1 (Universal Router)
+**Version:** 4.2 (Universal Router + Framework Skills)
 **Last Updated:** December 2025
 
 ---
@@ -15,16 +15,17 @@ Comprehensive skills for Claude Code - 69 skills covering all development domain
 |----------|-------|----------|
 | Generic Development | 4 | Any project |
 | Stack-Specific | 12 | Static, React, Full-stack |
-| Platform Development | 6 | iOS, Android, Desktop, PWA |
-| Creative & Design | 5 | Visual, Video, Audio, Brand, Motion |
+| Framework Skills | 2 | Vue.js 3, Svelte 5 |
+| Platform Development | 8 | iOS, Android, Desktop, PWA, macOS, Gaming |
+| Creative & Design | 7 | Visual, Video, Audio, Brand, Motion, UI Research |
 | Business & Startup | 7 | Strategy, Finance, Marketing, Sales |
 | Technical Architecture | 5 | GraphQL, Microservices, i18n, Real-time |
 | Domain Expertise | 16 | Business, Leadership, Operations, etc. |
 | Development Workflow | 2 | Debug, TDD |
 | Utilities | 6 | Docs, Testing, SEO, Tech Debt |
-| Marketplace | 350+ | From 15 plugin repositories |
+| Marketplace | 550+ | From 15 plugin repositories |
 
-**Local: 69 unique skills | Marketplace: 350+ additional skills**
+**Local: 71 unique skills | Marketplace: 550+ additional skills**
 
 ---
 
@@ -71,6 +72,23 @@ Comprehensive skills for Claude Code - 69 skills covering all development domain
 
 ---
 
+## Framework Skills (Modern JS Frameworks)
+
+| Skill | Framework | Key Technologies |
+|-------|-----------|------------------|
+| **vue-development** | Vue.js 3 | Composition API, TypeScript, Pinia, Vue Router, Nuxt 3, Vitest |
+| **svelte-development** | Svelte 5 | Runes ($state, $derived, $effect, $props), SvelteKit, TypeScript |
+
+### Usage Examples
+```
+"Help me build a Vue 3 app with Pinia" → uses vue-development
+"Create a Svelte 5 component with runes" → uses svelte-development
+"Set up Nuxt 3 with server routes" → uses vue-development
+"Build a SvelteKit app with form actions" → uses svelte-development
+```
+
+---
+
 ## Platform Development Skills
 
 | Skill | Platform | Key Technologies |
@@ -81,12 +99,15 @@ Comprehensive skills for Claude Code - 69 skills covering all development domain
 | **flutter-development** | Cross-platform Mobile | Dart, Flutter Widgets, Riverpod |
 | **electron-desktop** | Desktop | Electron, Tauri, Node.js Integration |
 | **pwa-development** | Progressive Web Apps | Service Workers, Web Manifest, Offline |
+| **macos-native** | macOS | AppKit, Catalyst, macOS system integration |
+| **game-development** | Gaming | Unity, Unreal Engine, Godot |
 
 ### Usage Examples
 ```
 "Help me build a SwiftUI app" → uses ios-development
 "Set up Jetpack Compose navigation" → uses android-development
 "Create an Electron app for Windows/Mac" → uses electron-desktop
+"Build a Unity game with C#" → uses game-development
 ```
 
 ---
@@ -95,6 +116,8 @@ Comprehensive skills for Claude Code - 69 skills covering all development domain
 
 | Skill | Domain | Coverage |
 |-------|--------|----------|
+| **ui-research** | Research | **PREREQUISITE for UI work** - Research inspiration, avoid AI look |
+| **frontend-enhancer** | Enhancement | Modern UI patterns (requires ui-research first) |
 | **graphic-design** | Visual Design | Color theory, typography, layout, composition |
 | **video-production** | Video | Pre/post production, camera, lighting, editing |
 | **audio-production** | Audio | Recording, mixing, mastering, sound design |
@@ -138,11 +161,11 @@ Comprehensive skills for Claude Code - 69 skills covering all development domain
 
 | Skill | Domain | Coverage |
 |-------|--------|----------|
+| **api-design** | APIs | REST/GraphQL design, OpenAPI specs |
 | **graphql-expert** | APIs | Schema design, resolvers, DataLoader, subscriptions |
 | **microservices-architecture** | Architecture | Service design, resilience, observability |
 | **i18n-localization** | Internationalization | ICU format, RTL support, Intl API |
 | **websockets-realtime** | Real-time | WebSocket, SSE, Socket.IO, scaling |
-| **api-design** | APIs | REST/GraphQL design, OpenAPI specs |
 
 ### Usage Examples
 ```
@@ -188,6 +211,7 @@ Skills activate when relevant context appears in conversation.
 Request skills directly:
 ```
 Use ios-development to review this Swift code
+Use vue-development for Pinia store patterns
 Use graphic-design for color palette suggestions
 Use monetization-strategy for pricing advice
 ```
@@ -195,6 +219,8 @@ Use monetization-strategy for pricing advice
 ### Skill Tool
 ```
 Skill(ios-development)
+Skill(vue-development)
+Skill(svelte-development)
 Skill(graphic-design)
 Skill(monetization-strategy)
 ```
@@ -287,6 +313,8 @@ Verify skill activates when expected context appears.
 
 | Task | Recommended Skill(s) |
 |------|---------------------|
+| Vue.js app | `vue-development` |
+| Svelte app | `svelte-development` |
 | iOS app | `ios-development` |
 | Android app | `android-development` |
 | Cross-platform mobile | `react-native`, `flutter-development` |
