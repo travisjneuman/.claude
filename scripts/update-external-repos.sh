@@ -16,6 +16,9 @@ echo "  - claude-plugins-official"
 echo "  - taches-cc-resources"
 echo "  - get-shit-done"
 echo "  - awesome-claude-skills"
+echo "  - claude-mem"
+echo "  - skill-seekers"
+echo "  - claude-scientific-skills"
 echo ""
 
 # Update all submodules
