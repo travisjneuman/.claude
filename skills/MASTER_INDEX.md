@@ -1,6 +1,6 @@
 # Skills Documentation - Master Index
 
-Navigate all 67 skills from this central hub.
+Navigate all 69 local skills + 350+ marketplace skills from this central hub.
 
 ---
 
@@ -112,7 +112,24 @@ Navigate all 67 skills from this central hub.
 
 ---
 
-## Subagents (30+)
+## Marketplace Skills (350+)
+
+15 marketplace plugins provide additional specialized skills:
+
+| Marketplace | Skills | Specialty |
+|-------------|--------|-----------|
+| `claude-scientific-skills` | 125+ | Bioinformatics, chemistry, physics, proteomics |
+| `claude-code-plugins-plus-skills` | 185 | Production-ready skills across all domains |
+| `wshobson-agents` | 107 | Full-stack development skills |
+| `obra-superpowers` | ~30 | Battle-tested /brainstorm, /write-plan |
+| `skillsforge` | 29 | Curated quality skills |
+| `awesome-claude-skills` | 27 | Documents, canvas, forensics, invoices |
+
+Access via `/start-task` universal router - automatically detects and loads relevant marketplace skills.
+
+---
+
+## Subagents (37)
 
 Located in `~/.claude/agents/`. See [agents/README.md](../agents/README.md).
 
