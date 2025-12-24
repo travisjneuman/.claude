@@ -146,7 +146,7 @@ After task, immediately:
 
 ## Git Safety
 
-- **NEVER** push without review (unless instructed)
+- **NEVER** push unapproved work — plan approval (Workflow Step 2) clears commit+push
 - **NEVER** use `--force` without explicit request
 - **NEVER** commit secrets
 - Auto-commit to user repos only (not `no_push` repos)
