@@ -1,5 +1,5 @@
 ---
-description: Universal intelligent router - routes ANY prompt to optimal resources from 15 marketplaces, 69 skills, 37 agents
+description: Universal intelligent router - routes ANY prompt to optimal resources from 15 marketplaces, 71 skills, 37 agents
 arguments:
   - name: task_description
     description: "What you want to accomplish. Natural language - just describe it."
@@ -72,7 +72,7 @@ Scan `{{task_description}}` in this priority order:
 | Meta/Admin | "create skill", "commit", "status", "where was I" |
 | Decision | "should I", "which", "vs", "compare", "better" |
 | Scientific | "protein", "dna", "molecule", "physics", "clinical" |
-| Development | "react", "api", "database", "deploy", "test", "debug" |
+| Development | "react", "vue", "svelte", "api", "database", "deploy", "test", "debug" |
 | Business | "startup", "pricing", "marketing", "finance", "hr" |
 | Creative | "design", "video", "audio", "brand", "animation" |
 

@@ -46,6 +46,66 @@
 
 ---
 
+## Prompt Types: Standard vs /start-task
+
+**Both approaches leverage the full skill ecosystem.** Choose based on your needs:
+
+### Standard Prompts (Just Type Naturally)
+
+```
+"Build a login form with validation"
+"Fix the API timeout issue"
+"Review my authentication code"
+```
+
+**What Happens:**
+1. CLAUDE.md context loads (always)
+2. Skills auto-activate based on description matching
+3. Relevant domain skills load progressively
+4. Direct execution with loaded skills as guidance
+
+**Best For:**
+- Single-focus tasks
+- Quick fixes and bug fixes
+- When you know exactly what you want
+- Tasks with clear scope
+
+### /start-task (Intelligent Routing)
+
+```
+/start-task Build an iOS app with SwiftUI
+/start-task Set up CI/CD with testing and deployment
+```
+
+**What Happens:**
+1. All of the above, PLUS:
+2. Complexity scoring (determines GSD vs Planning vs Direct)
+3. Domain-specific resource loading from router files
+4. GSD project detection and auto-routing
+5. Decision framework invocation (if "should I", "vs", etc.)
+6. Post-work automation triggers
+
+**Best For:**
+- Multi-phase projects (auto-routes to GSD)
+- When unsure about approach (decision frameworks)
+- Complex tasks spanning multiple systems
+- When you want explicit complexity analysis
+
+### Quick Decision Guide
+
+| Scenario | Use |
+|----------|-----|
+| "Fix the typo in header.tsx" | Standard prompt |
+| "Build a new feature with API and UI" | `/start-task` |
+| "Should I use Redux or Zustand?" | `/start-task` (triggers decision framework) |
+| "Debug why tests are failing" | Standard prompt (skill auto-activates) |
+| "Create a full authentication system" | `/start-task` (routes to GSD) |
+| "Update the README" | Standard prompt |
+
+**Both are valid.** Skills auto-activate regardless of approach.
+
+---
+
 ## GSD (Get Shit Done) System
 
 **Primary workflow for multi-phase projects.** The `/start-task` command auto-routes to GSD when appropriate.
@@ -171,7 +231,7 @@ After task, immediately:
 
 ## Skills & Agents
 
-**69 local skills, 37 local agents** + **350+ marketplace skills, 200+ marketplace agents** — load on demand.
+**71 local skills, 37 local agents** + **350+ marketplace skills, 200+ marketplace agents** — load on demand.
 
 | Task | Skill |
 |------|-------|

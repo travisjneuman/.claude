@@ -100,6 +100,13 @@ Complete map of the `.claude/` folder and related files.
     │   ├── generic-react-*/        ← React/TypeScript stack skills
     │   ├── generic-fullstack-*/    ← Next.js/NestJS stack skills
     │   │
+    │   ├── Framework Skills/       ← Framework-specific development
+    │   │   ├── vue-development/    ← Vue 3, Composition API, Pinia, Nuxt 3
+    │   │   ├── svelte-development/ ← Svelte 5 runes, SvelteKit
+    │   │   ├── ios-development/    ← Swift, SwiftUI, UIKit
+    │   │   ├── android-development/← Kotlin, Jetpack Compose
+    │   │   └── flutter-development/← Dart, Flutter widgets
+    │   │
     │   ├── Domain Expert Skills/   ← Task-focused expertise
     │   │   ├── business-strategy/
     │   │   ├── data-science/
