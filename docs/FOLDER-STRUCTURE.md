@@ -143,14 +143,18 @@ Custom commands that appear as `/command-name` in Claude Code.
 | File | Command | Purpose |
 |------|---------|---------|
 | `run.md` | `/run` | Execute prompts with auto-archiving |
-| `start-task.md` | `/start-task` | Intelligent task router |
-| `gsd/*.md` | `/gsd:*` | GSD workflow commands (19 commands) |
+| `start-task.md` | `/start-task` | Intelligent task router (v3.0 modular) |
+| `router/*.md` | (reference) | Domain detection tables (on-demand loading) |
+
+**Note:** GSD commands (`/gsd:*`) come from the `get-shit-done` marketplace plugin.
 
 **To add a command:** Create a `.md` file with YAML frontmatter.
 
 ---
 
-### `/commands/gsd/` - GSD Workflow Commands
+### GSD Workflow Commands (from marketplace)
+
+**Source:** `plugins/marketplaces/get-shit-done/commands/gsd/`
 
 Complete workflow system for multi-phase projects:
 
