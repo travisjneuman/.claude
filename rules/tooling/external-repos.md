@@ -25,6 +25,7 @@ All external repos are located in `~/.claude/plugins/marketplaces/`:
 | claude-plugins-official | Submodule | https://github.com/anthropics/claude-plugins-official.git |
 | taches-cc-resources | Submodule | https://github.com/glittercowboy/taches-cc-resources.git |
 | get-shit-done | Submodule | https://github.com/glittercowboy/get-shit-done.git |
+| awesome-claude-skills | Submodule | https://github.com/ComposioHQ/awesome-claude-skills.git |
 
 ---
 
