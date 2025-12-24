@@ -15,3 +15,6 @@
 	url = https://github.com/glittercowboy/get-shit-done.git
 [submodule]
 	recurse = false
+[submodule "plugins/marketplaces/awesome-claude-skills"]
+	path = plugins/marketplaces/awesome-claude-skills
+	url = https://github.com/ComposioHQ/awesome-claude-skills.git
