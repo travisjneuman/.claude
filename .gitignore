@@ -67,6 +67,7 @@ plugins/cache/
 # Marketplace submodules (cloned via git submodule update)
 # Each machine clones these from upstream
 plugins/marketplaces/
+plugins/marketplaces
 
 # Marketplace registry (contains machine-specific paths)
 plugins/known_marketplaces.json
@@ -215,3 +216,8 @@ temp/
 # 4. (Optional) Create settings.local.json for personal overrides
 # ============================================
 plugins/install-counts-cache.json
+plugins/marketplaces/claude-mem
+plugins/marketplaces/awesome-claude-skills
+plugins/marketplaces/claude-mem
+plugins/marketplaces/get-shit-done
+plugins/marketplaces/skill-seekers
