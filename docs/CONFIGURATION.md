@@ -2,6 +2,8 @@
 
 Detailed documentation of all configuration files and their settings.
 
+**Last Updated:** December 2025
+
 ---
 
 ## Configuration Hierarchy
