@@ -27,3 +27,39 @@
 [submodule "plugins/marketplaces/claude-scientific-skills"]
 	path = plugins/marketplaces/claude-scientific-skills
 	url = https://github.com/K-Dense-AI/claude-scientific-skills.git
+[submodule "plugins/marketplaces/claude-code-plugins-plus-skills"]
+	path = plugins/marketplaces/claude-code-plugins-plus-skills
+	url = https://github.com/jeremylongshore/claude-code-plugins-plus-skills.git
+[submodule "plugins/marketplaces/mhattingpete-skills"]
+	path = plugins/marketplaces/mhattingpete-skills
+	url = https://github.com/mhattingpete/claude-skills-marketplace.git
+[submodule "plugins/marketplaces/obra-superpowers"]
+	path = plugins/marketplaces/obra-superpowers
+	url = https://github.com/obra/superpowers-marketplace.git
+[submodule "plugins/marketplaces/skillsforge"]
+	path = plugins/marketplaces/skillsforge
+	url = https://github.com/rawveg/skillsforge-marketplace.git
+[submodule "plugins/marketplaces/voltagent-subagents"]
+	path = plugins/marketplaces/voltagent-subagents
+	url = https://github.com/VoltAgent/awesome-claude-code-subagents.git
+[submodule "plugins/marketplaces/wshobson-agents"]
+	path = plugins/marketplaces/wshobson-agents
+	url = https://github.com/wshobson/agents.git
+[submodule "plugins/marketplaces/travisvn-awesome-claude-skills"]
+	path = plugins/marketplaces/travisvn-awesome-claude-skills
+	url = https://github.com/travisvn/awesome-claude-skills.git
+[submodule "plugins/marketplaces/hesreallyhim-awesome-claude-code"]
+	path = plugins/marketplaces/hesreallyhim-awesome-claude-code
+	url = https://github.com/hesreallyhim/awesome-claude-code.git
+[submodule "plugins/marketplaces/alirezarezvani-claude-skills"]
+	path = plugins/marketplaces/alirezarezvani-claude-skills
+	url = https://github.com/alirezarezvani/claude-skills.git
+[submodule "plugins/marketplaces/behisecc-awesome-claude-skills"]
+	path = plugins/marketplaces/behisecc-awesome-claude-skills
+	url = https://github.com/BehiSecc/awesome-claude-skills.git
+[submodule "plugins/marketplaces/alvinunreal-awesome-claude"]
+	path = plugins/marketplaces/alvinunreal-awesome-claude
+	url = https://github.com/alvinunreal/awesome-claude.git
+[submodule "plugins/marketplaces/voltagent-awesome-claude-skills"]
+	path = plugins/marketplaces/voltagent-awesome-claude-skills
+	url = https://github.com/VoltAgent/awesome-claude-skills.git
