@@ -2,6 +2,46 @@
 
 All notable changes to the Ultimate Claude Code Toolkit.
 
+## [1.2.0] - December 2025
+
+### Added
+
+#### New Marketplaces (6)
+- `travisvn-awesome-claude-skills` - Curated skills list
+- `hesreallyhim-awesome-claude-code` - Slash commands and CLI tools
+- `alirezarezvani-claude-skills` - Skills and subagents collection
+- `behisecc-awesome-claude-skills` - Categorized skills
+- `alvinunreal-awesome-claude` - Broader Claude resources
+- `voltagent-awesome-claude-skills` - VoltAgent skills collection
+
+#### New Documentation
+- `docs/GSD-TUTORIAL.md` - Comprehensive GSD usage guide
+- `docs/DOMAIN-ROUTING.md` - How /start-task routes requests to skills/agents
+
+#### New Commands
+- `/discover-skills` - Search skillsmp.com API for community skills
+
+### Changed
+
+#### Workflow Enhancement
+- Added "Always Available" section to CLAUDE.md clarifying tools/skills/agents are never blocked by GSD
+- Added "GSD + Tools Integration" section explaining how to use capabilities within GSD phases
+- Updated Quick Start Commands with research and agent invocation examples
+
+#### Documentation Accuracy
+- Fixed marketplace count: 15 → 21
+- Verified skill count: 67 local skills
+- Verified agent count: 36 local agents
+- Added "Last Updated" dates to 7 documentation files
+- Cross-linked MCP documentation (docs and rules/tooling)
+
+#### Infrastructure
+- Converted 6 manual clones to proper git submodules
+- Added 6 new marketplace repositories as submodules
+- All 21 marketplaces now tracked with no_push configuration
+
+---
+
 ## [1.1.0] - December 2025
 
 ### Added
