@@ -2,6 +2,10 @@
 
 Quick reference for Claude Code optimization.
 
+**Last Updated:** December 2025
+
+---
+
 ## File Locations
 
 | Purpose | Project | Global |
