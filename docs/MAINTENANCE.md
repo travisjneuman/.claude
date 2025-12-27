@@ -2,6 +2,8 @@
 
 Ongoing maintenance procedures to keep your Claude Code configuration clean and efficient.
 
+**Last Updated:** December 2025
+
 ---
 
 ## Regular Maintenance Schedule

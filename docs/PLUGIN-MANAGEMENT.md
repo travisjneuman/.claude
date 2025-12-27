@@ -1,5 +1,9 @@
 # Plugin Management Guide
 
+**Last Updated:** December 2025
+
+---
+
 ## Directory Structure
 
 ```

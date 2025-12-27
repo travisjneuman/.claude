@@ -2,6 +2,8 @@
 
 How to use, create, and customize Claude Code skills.
 
+**Last Updated:** December 2025
+
 ---
 
 ## What Are Skills?

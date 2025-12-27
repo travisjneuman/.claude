@@ -2,6 +2,8 @@
 
 How to deploy this Claude Code configuration to a new machine.
 
+**Last Updated:** December 2025
+
 ---
 
 ## Prerequisites
