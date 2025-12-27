@@ -1,6 +1,6 @@
 # Ultimate Claude Code Toolkit
 
-A comprehensive Claude Code enhancement toolkit with **69 local skills**, **37 specialized agents**, **15 plugin marketplaces**, and complete development workflows for full-stack development across all platforms.
+A comprehensive Claude Code enhancement toolkit with **67 local skills**, **36 specialized agents**, **21 plugin marketplaces**, and complete development workflows for full-stack development across all platforms.
 
 **Features:**
 - Universal intelligent router that handles ANY prompt automatically
@@ -42,7 +42,7 @@ The universal router automatically:
 
 ## What's Included
 
-### 69 Local Skills
+### 67 Local Skills
 
 | Category | Coverage |
 |----------|----------|
@@ -53,7 +53,7 @@ The universal router automatically:
 | **Code Quality** | Testing, Security, Performance, Debugging, Code Review |
 | **Design Systems** | React, Static, Full-stack patterns |
 
-### 37 Specialized Agents
+### 36 Specialized Agents
 
 | Category | Agents |
 |----------|--------|
@@ -64,7 +64,7 @@ The universal router automatically:
 | **Business** | startup-advisor, monetization-expert |
 | **Specialized** | typescript-expert, python-expert, react-expert, debugging-specialist |
 
-### 15 Plugin Marketplaces
+### 21 Plugin Marketplaces
 
 | Marketplace | Key Capabilities |
 |-------------|------------------|
@@ -79,12 +79,20 @@ The universal router automatically:
 | `skillsforge` | 29 curated quality skills |
 | `taches-cc-resources` | Decision frameworks, meta-prompting, debugging |
 | `voltagent-subagents` | 100+ specialized agents for full-stack dev |
+| `voltagent-awesome-claude-skills` | Curated Claude skills collection |
 | `wshobson-agents` | 99 agents, 107 skills, 15 orchestrators |
 | `claude-mem` | Persistent memory, semantic search, session continuity |
 | `skill-seekers` | Auto-generate skills from docs/repos/PDFs |
 | `claude-scientific-skills` | 125+ scientific skills: bioinformatics, chemistry, physics |
+| `travisvn-awesome-claude-skills` | Curated skills, resources, tools |
+| `hesreallyhim-awesome-claude-code` | Slash commands, CLAUDE.md files, CLI tools |
+| `alirezarezvani-claude-skills` | Skills + subagents collection |
+| `behisecc-awesome-claude-skills` | Categorized skills by domain |
+| `alvinunreal-awesome-claude` | Broader Claude resources |
 
-**Total Available:** 350+ skills, 200+ agents
+**Discovery:** Use `/discover-skills <query>` to search [skillsmp.com](https://skillsmp.com/) (35,530+ skills)
+
+**Total Available:** 400+ skills, 200+ agents
 
 ---
 
@@ -146,12 +154,12 @@ Multi-phase project tracking:
 ├── settings.json           # Claude Code settings
 ├── plugin.json             # Plugin manifest
 │
-├── skills/                 # Domain expertise (69)
+├── skills/                 # Domain expertise (67)
 │   ├── MASTER_INDEX.md     # Full skill navigation
 │   ├── README.md           # Skills documentation
 │   └── [domain]/SKILL.md   # Individual skills
 │
-├── agents/                 # Specialized AI agents (37)
+├── agents/                 # Specialized AI agents (36)
 │   ├── README.md           # Agent documentation
 │   └── *.md                # Individual agent definitions
 │
@@ -165,7 +173,7 @@ Multi-phase project tracking:
 │   └── tooling/            # Tool setup guides
 │
 ├── plugins/                # External plugins
-│   └── marketplaces/       # 15 marketplace repos
+│   └── marketplaces/       # 21 marketplace repos
 │
 ├── templates/              # Project templates
 ├── docs/                   # Additional documentation

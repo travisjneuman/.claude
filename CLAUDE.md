@@ -40,9 +40,23 @@
 3. **Execute** — Use `TodoWrite` to track progress
 4. **Verify** — Tests + manual checks
 5. **Auto-Commit** — Commit when task complete (user repos only)
-6. **Auto-Merge** — Merge to main/master when commit complete (user repos only)
+6. **Auto-Push** — Push when commit complete (user repos only)
 
 **Multi-phase projects:** Use `/gsd:progress` or `/gsd:new-project`
+
+### Always Available (Never Blocked by GSD)
+
+These capabilities should be used **anytime they're helpful**, regardless of workflow stage:
+
+| Capability | When to Use | How to Invoke |
+|------------|-------------|---------------|
+| **WebSearch** | Current info, docs, best practices, versions | Use tool directly |
+| **Skills** | Domain expertise needed | `Skill(name)` or auto-activates |
+| **Agents** | Deep specialized work | `Task` tool with subagent |
+| **Research** | Explore codebase, find patterns | `Task` with Explore agent |
+| **Decision Frameworks** | Complex choices, trade-offs | `/consider:first-principles` |
+
+**Philosophy:** GSD provides *structure*, not *gates*. Use every tool that helps.
 
 ---
 
@@ -120,6 +134,18 @@
 | `/gsd:help` | Full command reference |
 
 **Auto-detection:** `/start-task` detects GSD projects via `.planning/STATE.md`
+
+### GSD + Tools Integration
+
+**GSD provides structure. Tools provide capabilities.** Use them together:
+
+| Within GSD Phase | Still Use |
+|------------------|-----------|
+| **Planning** | WebSearch for research, Explore agent for codebase discovery |
+| **Execution** | Skills for domain expertise, agents for specialized work |
+| **Any phase** | TodoWrite for tracking, Decision frameworks for choices |
+
+**Key principle:** If a tool, skill, agent, or research would help accomplish the current phase's goals, **use it immediately**. Don't wait for a specific GSD command.
 
 ---
 
@@ -239,7 +265,7 @@ After task, immediately:
 
 ## Skills & Agents
 
-**71 local skills, 37 local agents** + **350+ marketplace skills, 200+ marketplace agents** — load on demand.
+**67 local skills, 36 local agents** + **400+ marketplace skills, 200+ marketplace agents** — load on demand.
 
 | Task | Skill |
 |------|-------|
@@ -273,7 +299,7 @@ After task, immediately:
 | Skills | `~/.claude/skills/` |
 | Commands | `~/.claude/commands/` |
 | GSD system | `~/.claude/plugins/marketplaces/get-shit-done/` |
-| External repos | `~/.claude/plugins/marketplaces/` (15 marketplaces) |
+| External repos | `~/.claude/plugins/marketplaces/` (21 marketplaces) |
 
 ---
 
@@ -290,6 +316,9 @@ After task, immediately:
 | Review outstanding work | `/taches-cc-resources:check-todos` |
 | Make a decision | `/consider:first-principles` |
 | Brainstorm ideas | `/obra:brainstorm` |
+| Discover new skills | `/discover-skills [query]` |
+| Research current info | Use `WebSearch` tool directly |
+| Get deep expertise | Use `Task` tool with specialized agent |
 
 ---
 

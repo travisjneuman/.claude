@@ -1,6 +1,6 @@
 # Skills Documentation - Master Index
 
-Navigate all 71 local skills + 550+ marketplace skills from this central hub.
+Navigate all 67 local skills + 550+ marketplace skills from this central hub.
 
 ---
 
