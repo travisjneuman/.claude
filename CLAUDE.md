@@ -58,6 +58,29 @@ These capabilities should be used **anytime they're helpful**, regardless of wor
 
 **Philosophy:** GSD provides *structure*, not *gates*. Use every tool that helps.
 
+### Proactive Resource Discovery
+
+**Before starting specialized work**, automatically search for relevant resources:
+
+1. **Local Skills First** — Check `~/.claude/skills/` for domain skills
+2. **Marketplace Skills** — Search `~/.claude/plugins/marketplaces/*/` for specialized skills:
+   ```
+   # Scientific work → claude-scientific-skills/scientific-skills/
+   # Full-stack dev → wshobson-agents/, voltagent-subagents/
+   # Documents/invoices → awesome-claude-skills/
+   # Meta-prompting → taches-cc-resources/
+   ```
+3. **WebSearch** — Current best practices, latest documentation, version-specific info
+4. **skillsmp.com** — Use `/discover-skills <query>` for 35,530+ community skills
+
+**Trigger Discovery When:**
+- Task involves unfamiliar domain (bioinformatics, game dev, etc.)
+- Looking for specialized patterns or templates
+- Need domain-specific best practices
+- Standard approaches seem insufficient
+
+**Discovery is NOT optional.** Proactively search before implementing specialized work.
+
 ---
 
 ## Prompt Types: Standard vs /start-task
@@ -151,7 +174,14 @@ These capabilities should be used **anytime they're helpful**, regardless of wor
 
 ## Plugin Marketplaces
 
-**21 marketplaces installed** — auto-loaded from `~/.claude/plugins/marketplaces/`
+**21 marketplaces available** in `~/.claude/plugins/marketplaces/` — search proactively for domain expertise.
+
+### How to Use Marketplace Resources
+
+1. **Search for relevant skills**: `find ~/.claude/plugins/marketplaces -name "SKILL.md" | xargs grep -l "<domain>"`
+2. **Read the skill**: Use the Read tool on discovered SKILL.md files
+3. **Apply the guidance**: Follow the skill's patterns and practices
+4. **For commands**: Check marketplace README for available slash commands
 
 | Marketplace | Source | Contents |
 |-------------|--------|----------|
@@ -265,7 +295,7 @@ After task, immediately:
 
 ## Skills & Agents
 
-**67 local skills, 36 local agents** + **400+ marketplace skills, 200+ marketplace agents** — load on demand.
+**67 local skills, 36 local agents** + **550+ marketplace skills across 21 repos** — discovered and used proactively.
 
 | Task | Skill |
 |------|-------|
