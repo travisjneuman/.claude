@@ -125,7 +125,7 @@
 
 ## Plugin Marketplaces
 
-**15 marketplaces installed** — auto-loaded from `~/.claude/plugins/marketplaces/`
+**21 marketplaces installed** — auto-loaded from `~/.claude/plugins/marketplaces/`
 
 | Marketplace | Source | Contents |
 |-------------|--------|----------|
@@ -138,12 +138,20 @@
 | `wshobson-agents` | Community | 99 agents, 107 skills, 15 orchestrators |
 | `obra-superpowers` | Community | Battle-tested skills: /brainstorm, /write-plan |
 | `voltagent-subagents` | Community | 100+ specialized agents for full-stack dev |
+| `voltagent-awesome-claude-skills` | VoltAgent | Awesome Claude skills collection |
 | `mhattingpete-skills` | Community | Git automation, testing, code review |
 | `skillsforge` | Community | 29 curated quality skills |
 | `awesome-claude-skills` | ComposioHQ | 27 skills: documents, canvas, forensics, invoices |
+| `travisvn-awesome-claude-skills` | travisvn | Curated skills, resources, and tools |
+| `hesreallyhim-awesome-claude-code` | hesreallyhim | Slash-commands, CLAUDE.md files, CLI tools |
+| `alirezarezvani-claude-skills` | alirezarezvani | Skills + subagents collection |
+| `behisecc-awesome-claude-skills` | BehiSecc | Categorized skills by domain |
+| `alvinunreal-awesome-claude` | alvinunreal | Broader Claude resources |
 | `claude-mem` | thedotmack | Persistent memory, semantic search, session continuity |
 | `skill-seekers` | yusufkaraaslan | Auto-generate skills from docs/repos/PDFs |
 | `claude-scientific-skills` | K-Dense-AI | 125+ scientific skills: bioinformatics, chemistry, physics |
+
+**Discovery:** Use `/discover-skills <query>` to search [skillsmp.com](https://skillsmp.com/) for 35,530+ skills
 
 ### Key Commands from Marketplaces
 
