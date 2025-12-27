@@ -2,6 +2,8 @@
 
 **When to use:** Understanding when to enable/disable MCP servers for optimal efficiency.
 
+**See also:** [MCP Servers Reference](../../docs/MCP-SERVERS.md) for server capabilities and details.
+
 ---
 
 ## Overview
