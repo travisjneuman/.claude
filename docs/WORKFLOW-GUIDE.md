@@ -177,12 +177,31 @@ When facing choices, use structured frameworks:
 
 ---
 
+## Automation Hooks
+
+The toolkit includes lifecycle hooks that automate common tasks:
+
+| Hook | Trigger | Action |
+|------|---------|--------|
+| **SessionStart** | New session begins | Displays toolkit status (71 skills, 37 agents, 21 marketplaces) |
+| **Stop** | Claude awaits input | Windows toast notification |
+| **PreToolUse** | Before Bash execution | Blocks dangerous commands (rm -rf /, format c:, etc.) |
+| **PostToolUse** | After Write/Edit | Auto-runs Prettier for formatting |
+| **Notification** | System notifications | Logs to ~/.claude/.session-log |
+
+### Hook Configuration
+
+Hooks are configured in `~/.claude/settings.json` under the `hooks` key. No Python required - all hooks use bash.
+
+---
+
 ## Related Documentation
 
 - [GSD-TUTORIAL.md](./GSD-TUTORIAL.md) - Multi-phase project management
 - [DOMAIN-ROUTING.md](./DOMAIN-ROUTING.md) - How /start-task routes work
 - [MARKETPLACE-GUIDE.md](./MARKETPLACE-GUIDE.md) - Marketplace resources
 - [../CLAUDE.md](../CLAUDE.md) - Core rules and guardrails
+- [../rules/tooling/git-hooks-setup.md](../rules/tooling/git-hooks-setup.md) - Git hooks setup
 
 ---
 

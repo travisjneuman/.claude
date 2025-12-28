@@ -2,6 +2,38 @@
 
 Specialized AI agents for focused, expert-level assistance across all domains.
 
+**37 agents available** - Covering code quality, development, architecture, languages, platforms, creative, business, and support.
+
+---
+
+## Parallel Execution Capabilities
+
+| Capability | Limit |
+|------------|-------|
+| **Concurrent agents** | Up to 10 simultaneous |
+| **Context per agent** | Independent 200k tokens |
+| **Nesting** | Single-level only (agents cannot spawn sub-agents) |
+| **Overhead** | ~20k tokens per Task tool invocation |
+
+### Parallel Execution Pattern
+
+```
+Main Claude (Orchestrator)
+├── Task(code-reviewer)     ─┐
+├── Task(test-generator)     │ Run simultaneously
+├── Task(security-auditor)  ─┘
+└── Collect results when all complete
+```
+
+### When to Use Parallel Agents
+
+- **Code review + test generation** - Run code-reviewer and test-generator in parallel
+- **Multi-platform builds** - Run ios-developer and android-developer simultaneously
+- **Comprehensive audits** - Run security-auditor, performance-optimizer, and accessibility-expert together
+- **Documentation blitz** - Run documentation-writer on multiple modules
+
+---
+
 ## Available Agents
 
 ### Code Quality

@@ -1,8 +1,8 @@
 # Claude Code Skills Library
 
-Comprehensive skills for Claude Code - 67 skills covering all development domains.
+Comprehensive skills for Claude Code - 71 skills covering all development domains.
 
-**Plus:** 21 marketplace plugins with 550+ additional skills.
+**Plus:** 21 marketplace plugins with 1,328+ additional skills.
 
 **Version:** 4.2 (Universal Router + Framework Skills)
 **Last Updated:** December 2025
@@ -23,9 +23,9 @@ Comprehensive skills for Claude Code - 67 skills covering all development domain
 | Domain Expertise | 16 | Business, Leadership, Operations, etc. |
 | Development Workflow | 2 | Debug, TDD |
 | Utilities | 6 | Docs, Testing, SEO, Tech Debt |
-| Marketplace | 550+ | From 21 plugin repositories |
+| Marketplace | 1,328+ | From 21 plugin repositories |
 
-**Local: 67 unique skills | Marketplace: 550+ additional skills**
+**Local: 71 unique skills | Marketplace: 1,328+ additional skills**
 
 ---
 
