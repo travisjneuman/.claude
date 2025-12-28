@@ -9,15 +9,15 @@
 ### Local Server Options
 
 ```bash
-# Python (built-in)
-python3 -m http.server 8000
-python -m http.server 8000
+# Python (cross-platform)
+python -m http.server 8000   # Windows (and some Linux/Mac)
+python3 -m http.server 8000  # macOS/Linux (if python3 symlink exists)
 
-# Node.js
+# Node.js (recommended - works identically on all platforms)
 npx serve .
 npx http-server .
 
-# VS Code Live Server extension
+# VS Code Live Server extension (cross-platform)
 # Right-click HTML file → "Open with Live Server"
 ```
 

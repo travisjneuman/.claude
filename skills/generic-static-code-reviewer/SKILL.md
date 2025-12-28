@@ -12,8 +12,10 @@ Review HTML/CSS/JS code against production quality standards.
 ## Pre-Commit Checklist
 
 ```bash
-# Local testing
-python3 -m http.server 8000
+# Local testing (cross-platform options)
+python -m http.server 8000   # Windows
+python3 -m http.server 8000  # macOS/Linux
+npx serve .                  # Node.js (recommended - all platforms)
 
 # Visual inspection
 # - Test in Chrome, Firefox, Safari
