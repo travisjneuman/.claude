@@ -19,6 +19,16 @@ Backup and restore Claude Code configuration files.
 /backup-config [action] [name]
 ```
 
+## Platform Compatibility
+
+| Platform | Status | Notes |
+|----------|--------|-------|
+| Windows | ✅ | Requires Git Bash (included with Git for Windows) |
+| macOS | ✅ | Works with bash/zsh |
+| Linux | ✅ | Works with bash |
+
+All commands use POSIX utilities (`mkdir`, `cp`, `ls`, `date`).
+
 ## Arguments
 
 | Argument | Default | Options |

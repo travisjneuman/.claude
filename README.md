@@ -29,7 +29,7 @@
 [![Marketplace Skills](https://img.shields.io/badge/Marketplace_Skills-1,328+-ec4899?style=for-the-badge&logo=package&logoColor=white)](./plugins/marketplaces/)
 [![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge&logo=opensourceinitiative&logoColor=white)](./LICENSE)
 
-**Version 1.4.0** • **December 2025** • **Author: [Travis Neuman](https://travisjneuman.com)**
+**Version 1.4.1** • **December 2025** • **Author: [Travis Neuman](https://travisjneuman.com)**
 
 </div>
 
@@ -45,6 +45,7 @@
 - [❓ What Problem Does This Solve?](#-what-problem-does-this-solve)
 - [👥 Who Is This For?](#-who-is-this-for)
 - [✨ Key Features at a Glance](#-key-features-at-a-glance)
+- [🌐 Platform Compatibility](#-platform-compatibility)
 - [⚡ Quick Start Guide](#-quick-start-guide)
 - [📦 Installation](#-installation)
 
@@ -213,6 +214,105 @@ System:
 ├── 📣 Stop: Send notification when awaiting input
 └── 📊 SessionStart: Display toolkit status
 ```
+
+---
+
+## 🌐 Platform Compatibility
+
+This toolkit is **fully cross-platform** and works on Windows, macOS, and Linux.
+
+| Platform | Status | Requirements |
+|:---------|:------:|:-------------|
+| **Windows 10/11** | ✅ | Git for Windows (includes Git Bash) |
+| **macOS** (Intel/Apple Silicon) | ✅ | Git, Xcode CLI Tools |
+| **Linux** (Ubuntu, Debian, Fedora, etc.) | ✅ | Git, bash |
+
+### 🔧 Platform-Specific Notes
+
+<details>
+<summary><strong>🪟 Windows</strong></summary>
+
+**Requirements:**
+- [Git for Windows](https://git-scm.com/download/win) - includes Git Bash which provides POSIX compatibility
+- Claude Code CLI installed via npm
+
+**Notes:**
+- All bash scripts run in Git Bash automatically
+- PowerShell toast notifications work natively
+- Path: `C:\Users\<username>\.claude\`
+
+**Verification:**
+```powershell
+# Check Git Bash is available
+where bash
+
+# Verify Claude Code
+claude --version
+```
+
+</details>
+
+<details>
+<summary><strong>🍎 macOS</strong></summary>
+
+**Requirements:**
+- Git (via Xcode CLI Tools or Homebrew)
+- Claude Code CLI installed via npm
+
+**Notes:**
+- Native `osascript` notifications supported
+- Works with both bash and zsh shells
+- Path: `~/.claude/`
+
+**Verification:**
+```bash
+# Check git is available
+git --version
+
+# Verify Claude Code
+claude --version
+```
+
+</details>
+
+<details>
+<summary><strong>🐧 Linux</strong></summary>
+
+**Requirements:**
+- Git
+- Claude Code CLI installed via npm
+- Optional: `notify-send` for desktop notifications
+
+**Notes:**
+- All scripts use POSIX-compatible bash
+- Notifications via `notify-send` (install: `apt install libnotify-bin`)
+- Path: `~/.claude/`
+
+**Verification:**
+```bash
+# Check git is available
+git --version
+
+# Verify Claude Code
+claude --version
+
+# Optional: Check notification support
+which notify-send
+```
+
+</details>
+
+### 🔄 Cross-Platform Commands
+
+All toolkit commands use cross-platform syntax:
+
+| Component | Cross-Platform Approach |
+|:----------|:------------------------|
+| **Shell scripts** | POSIX bash (Git Bash on Windows) |
+| **Git operations** | Native git commands |
+| **File paths** | `~/.claude/` expands correctly on all platforms |
+| **Notifications** | OS-detected: PowerShell (Win), osascript (Mac), notify-send (Linux) |
+| **Date/time** | Standard `date` command (GNU/BSD compatible) |
 
 ---
 
