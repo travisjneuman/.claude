@@ -44,7 +44,7 @@
 [![Marketplace Skills](https://img.shields.io/badge/Marketplace_Skills-1,328+-ec4899?style=for-the-badge&logo=package&logoColor=white)](./plugins/marketplaces/)
 [![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge&logo=opensourceinitiative&logoColor=white)](./LICENSE)
 
-**Version 1.3.2** • **December 2025** • **Author: [Travis Neuman](https://github.com/travisjneuman)**
+**Version 1.3.3** • **December 2025** • **Author: [Travis Neuman](https://github.com/travisjneuman)**
 
 </div>
 
@@ -1259,15 +1259,15 @@ Claude Code hooks run at specific lifecycle events. **No Python required** - all
 | Hook | Trigger | Our Usage |
 |:-----|:--------|:---------:|
 | 📊 **SessionStart** | New session begins | ✅ Display toolkit status |
-| 🔚 **SessionEnd** | Session terminates | ❌ Not implemented |
+| 🔚 **SessionEnd** | Session terminates | ✅ Log session end |
 | 📣 **Stop** | Claude awaits input | ✅ Toast notification |
 | 🛡️ **PreToolUse** | Before any tool | ✅ Dangerous command blocking |
 | ✨ **PostToolUse** | After tool completes | ✅ Prettier formatting |
 | 📝 **Notification** | System notifications | ✅ Session logging |
-| 📦 **PreCompact** | Before context compact | ❌ Not implemented |
-| 💬 **UserPromptSubmit** | User sends message | ❌ Not implemented |
-| 🔐 **PermissionRequest** | Tool needs approval | ❌ Not implemented |
-| 🤖 **SubagentStop** | Subagent completes | ❌ Not implemented |
+| 📦 **PreCompact** | Before context compact | ✅ Save checkpoint |
+| 💬 **UserPromptSubmit** | User sends message | ✅ Log user prompts |
+| 🔐 **PermissionRequest** | Tool needs approval | ✅ Log permission requests |
+| 🤖 **SubagentStop** | Subagent completes | ✅ Log agent completion |
 
 ### 📊 SessionStart Hook
 
@@ -1279,7 +1279,7 @@ Claude Code hooks run at specific lifecycle events. **No Python required** - all
     "matcher": "",
     "hooks": [{
       "type": "command",
-      "command": "echo 'Claude Code Toolkit v1.3.2: 71 Skills | 37 Agents | 21 Marketplaces'",
+      "command": "echo 'Claude Code Toolkit v1.3.3: 71 Skills | 37 Agents | 21 Marketplaces'",
       "statusMessage": "Initializing toolkit"
     }]
   }]
@@ -1317,6 +1317,49 @@ Claude Code hooks run at specific lifecycle events. **No Python required** - all
 - Debug session issues
 - Track tool usage patterns
 - Monitor for errors
+
+### 🔚 SessionEnd Hook (Session Logging)
+
+**Purpose:** Log session termination for tracking
+
+**📋 Logs:**
+- Timestamp when session ends
+- Visual separator for log readability
+
+### 📦 PreCompact Hook (Context Checkpoint)
+
+**Purpose:** Log before context gets compacted to track when summarization occurs
+
+**📋 Use Cases:**
+- Track conversation complexity
+- Debug context issues
+- Monitor for unexpected compactions
+
+### 💬 UserPromptSubmit Hook (Prompt Logging)
+
+**Purpose:** Log user prompts (first 100 chars) for session history
+
+**📋 Use Cases:**
+- Track conversation flow
+- Debug interaction issues
+- Review session history
+
+### 🔐 PermissionRequest Hook (Permission Tracking)
+
+**Purpose:** Log when tools request permission for audit trail
+
+**📋 Logs:**
+- Tool name requesting permission
+- Timestamp of request
+
+### 🤖 SubagentStop Hook (Agent Completion)
+
+**Purpose:** Log when subagents complete their tasks
+
+**📋 Use Cases:**
+- Track agent usage patterns
+- Debug multi-agent workflows
+- Monitor task delegation
 
 ---
 
@@ -2002,6 +2045,7 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) for detailed guidelines on:
 
 | Version | Date | Changes |
 |:-------:|:----:|:--------|
+| **1.3.3** | Dec 2025 | 🪝 Complete hook implementation (10/10), 📝 session logging for all events |
 | **1.3.2** | Dec 2025 | 📊 SessionStart + Notification hooks, 🐹 Go + 🦀 Rust stack guides, 📚 documentation overhaul |
 | **1.3.1** | Dec 2025 | 🪝 Git hooks (pre-commit, commit-msg, pre-push), ⚡ Claude Code lifecycle hooks (Stop, PreToolUse, PostToolUse), 📋 .gitignore cleanup |
 | **1.3.0** | Dec 2025 | 📜 CLAUDE.md refactor (45% reduction, ~1,100 tokens), 📚 satellite guides, 💰 token optimization |
@@ -2115,7 +2159,7 @@ See [LICENSE](./LICENSE) for full text.
 
 **Built with ❤️ by [Travis Neuman](https://github.com/travisjneuman)**
 
-**🗓️ Last Updated: December 2025 • 📌 Version 1.3.2**
+**🗓️ Last Updated: December 2025 • 📌 Version 1.3.3**
 
 ---
 

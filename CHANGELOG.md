@@ -2,6 +2,31 @@
 
 All notable changes to the Ultimate Claude Code Toolkit.
 
+## [1.3.3] - December 2025
+
+### Added
+
+#### Complete Hook Implementation (10/10 Hooks)
+All 10 available Claude Code lifecycle hooks are now implemented:
+- **SessionEnd hook** - Logs session termination with timestamp and separator
+- **PreCompact hook** - Logs context compaction events for checkpoint tracking
+- **UserPromptSubmit hook** - Logs user prompts (first 100 chars) for session history
+- **PermissionRequest hook** - Logs tool permission requests for audit trail
+- **SubagentStop hook** - Logs subagent completion events
+
+### Changed
+
+#### Documentation Updates
+- **Updated README.md** - All hooks now marked as implemented with descriptions
+- **Updated README.md** - Added documentation sections for all 5 new hooks
+
+### Notes
+- All hooks write to `~/.claude/.session-log` for unified session tracking
+- Hooks use bash for cross-platform compatibility (Git Bash on Windows)
+- Session log provides complete audit trail of Claude Code interactions
+
+---
+
 ## [1.3.2] - December 2025
 
 ### Added
@@ -31,7 +56,7 @@ All notable changes to the Ultimate Claude Code Toolkit.
 - **Python NOT required** - All hooks use bash, hookify plugin disabled
 
 ### Notes
-- 10 hook events available in total, 5 now implemented (SessionStart, Stop, PreToolUse, PostToolUse, Notification)
+- 5 of 10 hook events implemented in this version (see v1.3.3 for complete implementation)
 - No changes to skills or agents - current counts provide comprehensive coverage
 - Marketplace submodule architecture fully prepared for expansion
 
