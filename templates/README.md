@@ -67,11 +67,32 @@ claude plugin install file://~/my-plugin
 
 ### Create Project CLAUDE.md
 
+**Recommended: Use `/init-project` command** (auto-detects stack, fills template):
+
+```bash
+# In your project directory
+/init-project              # Auto-detects from package.json, etc.
+/init-project react        # Or specify stack explicitly
+/init-project nextjs
+/init-project static
+/init-project python
+```
+
+**Alternative: Manual copy**
+
 ```bash
 # Copy to your project root
 cp ~/.claude/templates/project-CLAUDE.md /path/to/project/CLAUDE.md
 
 # Edit with project-specific instructions
+```
+
+**For existing CLAUDE.md files (add toolkit sections):**
+
+```bash
+# Adds Related Global Rules, Quick Start, footer
+/standardize-claude-md         # Auto-detects stack
+/standardize-claude-md react   # Or specify stack
 ```
 
 ---
@@ -104,12 +125,14 @@ cp ~/.claude/templates/project-CLAUDE.md /path/to/project/CLAUDE.md
 - `agents/` - Sample agent
 - `skills/` - Sample skill
 
-### project-CLAUDE.md
-- Per-project instructions template
-- Architecture section
-- Conventions section
-- Environment setup
-- Common tasks
+### project-CLAUDE.md (v2.0)
+- Per-project instructions template optimized for global toolkit
+- Project Identity table (type, stack, status, priority, URL)
+- Commands, Architecture, Project-Specific Rules sections
+- **Related Global Rules** - points to appropriate `rules/stacks/` and `rules/checklists/`
+- **Quick Start** table with common commands
+- Stack-specific examples (React, Next.js, Static, Python, Automation)
+- Global delegation statement pattern
 
 ### task-template.md
 - Task planning structure
@@ -135,7 +158,9 @@ cp ~/.claude/templates/project-CLAUDE.md /path/to/project/CLAUDE.md
 - `~/.claude/agents/README.md` - Agents directory
 - `~/.claude/CLAUDE.md` - Global configuration
 - `~/.claude/docs/WORKFLOW-GUIDE.md` - Workflow patterns
+- `~/.claude/commands/init-project.md` - Project initialization command
+- `~/.claude/commands/standardize-claude-md.md` - Standardize existing CLAUDE.md
 
 ---
 
-*Templates ensure consistency across the toolkit.*
+*Templates ensure consistency across the toolkit. Use `/init-project` for automatic setup.*
