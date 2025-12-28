@@ -2,6 +2,38 @@
 
 All notable changes to the Ultimate Claude Code Toolkit.
 
+## [1.3.1] - December 2025
+
+### Added
+
+#### Git Hooks (Workflow Automation)
+- **pre-commit hook** - Secret detection, CHANGELOG reminder, SKILL.md validation, gitignore enforcement
+- **commit-msg hook** - Conventional commit format validation (feat|fix|docs|chore|...)
+- **pre-push hook** - Force-push protection, remote validation, submodule awareness
+
+#### Claude Code Lifecycle Hooks
+- **Stop hook** - Windows toast notification when Claude awaits input
+- **PreToolUse hook** - Dangerous command blocking (rm -rf /, format c:, etc.)
+- **PostToolUse hook** - Prettier auto-formatting on Edit operations (added to existing Write)
+
+### Changed
+
+#### .gitignore Cleanup
+- Removed 6 redundant marketplace entries
+- Fixed duplicate entries (*.code-workspace, *~)
+- Moved misplaced entries to proper sections
+- Fixed header accuracy (.planning/ removed from tracked list)
+
+#### Organization
+- Moved CLAUDE.md backup to `.archive/claude-md-versions/`
+- Removed ephemeral shell-snapshots from tracking
+
+### Notes
+- hookify plugin remains disabled (uses `python3` incompatible with Windows)
+- Native hooks in settings.json replicate hookify functionality
+
+---
+
 ## [1.3.0] - December 2025
 
 ### Changed
