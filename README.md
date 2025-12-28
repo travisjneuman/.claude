@@ -29,7 +29,7 @@
 [![Marketplace Skills](https://img.shields.io/badge/Marketplace_Skills-1,328+-ec4899?style=for-the-badge&logo=package&logoColor=white)](./plugins/marketplaces/)
 [![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge&logo=opensourceinitiative&logoColor=white)](./LICENSE)
 
-**Version 1.3.3** • **December 2025** • **Author: [Travis Neuman](https://github.com/travisjneuman)**
+**Version 1.4.0** • **December 2025** • **Author: [Travis Neuman](https://github.com/travisjneuman)**
 
 </div>
 
@@ -77,6 +77,7 @@
 - [🔧 Troubleshooting](#-troubleshooting)
 - [❓ Frequently Asked Questions](#-frequently-asked-questions)
 - [📖 Glossary of Terms](#-glossary-of-terms)
+- [📋 Templates](#-templates)
 
 ### 📎 Resources
 - [🤝 Contributing](#-contributing)
@@ -1680,6 +1681,16 @@ Implement JWT refresh token endpoint
 | ✅ `/taches-cc-resources:check-todos` | Review todos | Check outstanding |
 | ➡️ `/taches-cc-resources:whats-next` | Next suggestion | When stuck |
 
+### 🛠️ Utility & Diagnostics
+
+| Command | Purpose | Example |
+|:--------|:--------|:--------|
+| 🔍 `/review-code [target]` | Code review workflow | `/review-code staged` |
+| 🏥 `/health-check [verbose]` | System diagnostics | `/health-check verbose` |
+| 📊 `/context-stats` | Token usage report | `/context-stats` |
+| 📜 `/session-log [action]` | View session log | `/session-log stats` |
+| 💾 `/backup-config [action]` | Backup/restore config | `/backup-config create` |
+
 ### 🧠 Decision Making
 
 | Command | Purpose |
@@ -2005,6 +2016,37 @@ A: Use `/compact` at 50% and `/clear` at 80% for best performance.
 
 ---
 
+## 📋 Templates
+
+Use these templates to create new skills, agents, commands, and plugins:
+
+| Template | Purpose | Location |
+|:---------|:--------|:---------|
+| 📝 `skill-template.md` | Create new skills | `templates/skill-template.md` |
+| 🤖 `agent-template.md` | Create new subagents | `templates/agent-template.md` |
+| ⌨️ `command-template.md` | Create slash commands | `templates/command-template.md` |
+| 🔌 `plugin-template/` | Create distributable plugins | `templates/plugin-template/` |
+| 📄 `project-CLAUDE.md` | Per-project CLAUDE.md | `templates/project-CLAUDE.md` |
+| 📋 `task-template.md` | Task planning documents | `templates/task-template.md` |
+
+### 🚀 Quick Start
+
+```bash
+# Create a new skill
+cp ~/.claude/templates/skill-template.md ~/.claude/skills/my-skill/SKILL.md
+
+# Create a new agent
+cp ~/.claude/templates/agent-template.md ~/.claude/agents/my-agent.md
+
+# Create a new command
+cp ~/.claude/templates/command-template.md ~/.claude/commands/my-command.md
+
+# Create a new plugin
+cp -r ~/.claude/templates/plugin-template ~/my-plugin
+```
+
+---
+
 ## 🤝 Contributing
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md) for detailed guidelines on:
@@ -2030,6 +2072,7 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) for detailed guidelines on:
 
 | Version | Date | Changes |
 |:-------:|:----:|:--------|
+| **1.4.0** | Dec 2025 | 📋 5 new templates, ⌨️ 5 new commands (/review-code, /health-check, /context-stats, /session-log, /backup-config), 🔌 MCP wildcard permissions |
 | **1.3.3** | Dec 2025 | 🪝 Complete hook implementation (10/10), 📝 session logging for all events |
 | **1.3.2** | Dec 2025 | 📊 SessionStart + Notification hooks, 🐹 Go + 🦀 Rust stack guides, 📚 documentation overhaul |
 | **1.3.1** | Dec 2025 | 🪝 Git hooks (pre-commit, commit-msg, pre-push), ⚡ Claude Code lifecycle hooks (Stop, PreToolUse, PostToolUse), 📋 .gitignore cleanup |
@@ -2131,7 +2174,7 @@ $$$$$$\   $$\ $$$$$$$\      $$$$$$$\ $$ | $$$$$$\  $$\   $$\  $$$$$$$ | $$$$$$\ 
 
 **Built with ❤️ by [Travis Neuman](https://github.com/travisjneuman)**
 
-**🗓️ Last Updated: December 2025 • 📌 Version 1.3.3**
+**🗓️ Last Updated: December 2025 • 📌 Version 1.4.0**
 
 ---
 
