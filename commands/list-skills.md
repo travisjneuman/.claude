@@ -31,7 +31,7 @@ Display comprehensive categorized skill overview:
 
 ---
 
-## Local Skills (67 total)
+## Local Skills (71 total)
 
 ### Foundation
 - `core-workflow` - Session protocols, git conventions, testing, debugging (auto-loads for complex tasks)
@@ -113,7 +113,7 @@ Display comprehensive categorized skill overview:
 
 ---
 
-## Marketplace Skills (550+ total)
+## Marketplace Skills (1,328+ total)
 
 ### Scientific & Research (claude-scientific-skills)
 125+ skills for scientific computing:
@@ -197,4 +197,4 @@ Just describe your task - skills auto-activate based on description matching.
 
 ---
 
-*67 local skills + 21 marketplaces (550+ skills) = comprehensive coverage for any domain*
+*71 local skills + 21 marketplaces (1,328+ skills) = comprehensive coverage for any domain*

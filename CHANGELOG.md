@@ -2,6 +2,41 @@
 
 All notable changes to the Ultimate Claude Code Toolkit.
 
+## [1.3.2] - December 2025
+
+### Added
+
+#### New Claude Code Lifecycle Hooks
+- **SessionStart hook** - Displays toolkit status on session start (71 skills, 37 agents, 21 marketplaces)
+- **Notification hook** - Logs system notifications to ~/.claude/.session-log for debugging
+
+#### New Stack Guides
+- **rules/stacks/go.md** - Comprehensive Go project patterns (modules, testing, concurrency, error handling)
+- **rules/stacks/rust.md** - Comprehensive Rust project patterns (ownership, lifetimes, async, cargo)
+
+### Changed
+
+#### Documentation Overhaul
+- **Corrected marketplace skill count** - Updated from "550+" to "1,328+" across all documentation
+- **Updated CLAUDE.md** - Added Go and Rust to "Load When Relevant" triggers
+- **Updated agents/README.md** - Added parallel execution documentation (max 10 concurrent, 200k context each)
+- **Updated skills/MASTER_INDEX.md** - Corrected skill counts (71 local + 1,328 marketplace)
+- **Updated docs/MARKETPLACE-GUIDE.md** - Corrected skill counts
+- **Updated docs/WORKFLOW-GUIDE.md** - Added automation hooks section
+- **Updated README.md** - Version bump, hook documentation, stack guide additions
+
+#### Strategic Analysis Findings (Documented)
+- **Skills overlap analysis** - 70% of local skills are UNIQUE with no marketplace equivalent
+- **Agent capabilities** - Confirmed parallel execution (up to 10), single-level nesting only
+- **Python NOT required** - All hooks use bash, hookify plugin disabled
+
+### Notes
+- 10 hook events available in total, 5 now implemented (SessionStart, Stop, PreToolUse, PostToolUse, Notification)
+- No changes to skills or agents - current counts provide comprehensive coverage
+- Marketplace submodule architecture fully prepared for expansion
+
+---
+
 ## [1.3.1] - December 2025
 
 ### Added

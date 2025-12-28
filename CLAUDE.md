@@ -117,6 +117,8 @@ Use these **anytime** — never blocked by GSD or workflow stage:
 | **Static HTML/CSS/JS** | `rules/checklists/static-sites.md` |
 | **React + TypeScript** | `rules/stacks/react-typescript.md` |
 | **Python** | `rules/stacks/python.md` |
+| **Go** | `rules/stacks/go.md` |
+| **Rust** | `rules/stacks/rust.md` |
 | **Full-stack Next/NestJS** | `rules/stacks/fullstack-nextjs-nestjs.md` |
 | **MCP server usage** | `rules/tooling/mcp-servers.md` |
 | **Git hooks setup** | `rules/tooling/git-hooks-setup.md` |
@@ -131,7 +133,7 @@ Use these **anytime** — never blocked by GSD or workflow stage:
 
 ## Skill Discovery
 
-**67 local skills, 36 local agents** + **550+ marketplace skills across 21 repos**
+**71 local skills, 37 local agents** + **1,328 marketplace skills across 21 repos**
 
 ### Local Skills
 - Full catalog: `skills/MASTER_INDEX.md`
