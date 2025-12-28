@@ -37,12 +37,11 @@ Edit → Save → Deploy (that's it)
 ### Local Testing
 
 ```bash
-# Start local server
-python3 -m http.server 8000
+# Start local server (cross-platform options)
+python -m http.server 8000   # Windows
+python3 -m http.server 8000  # macOS/Linux
+npx serve .                  # Node.js (recommended - all platforms)
 # Visit http://localhost:8000
-
-# Alternative (Node.js)
-npx serve .
 ```
 
 ### Before Committing
