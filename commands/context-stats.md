@@ -12,6 +12,16 @@ Display current context window usage and provide optimization recommendations.
 /context-stats
 ```
 
+## Platform Compatibility
+
+| Platform | Status | Notes |
+|----------|--------|-------|
+| Windows | ✅ | Fully supported |
+| macOS | ✅ | Fully supported |
+| Linux | ✅ | Fully supported |
+
+This command uses Claude's internal estimation - no platform-specific code.
+
 ## Behavior
 
 ### Step 1: Gather Statistics

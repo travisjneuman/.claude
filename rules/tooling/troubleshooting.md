@@ -4,6 +4,62 @@
 
 ---
 
+## Platform-Specific Issues
+
+### Windows
+
+| Issue | Fix |
+|-------|-----|
+| Bash scripts don't run | Install [Git for Windows](https://git-scm.com/download/win) - includes Git Bash |
+| `~/.claude/` path not found | Use `$HOME/.claude/` or `C:\Users\<username>\.claude\` |
+| Line ending errors | Convert with `dos2unix` or configure Git: `git config --global core.autocrlf false` |
+| Notifications not working | Ensure PowerShell execution policy allows scripts |
+| `python3` not found | Windows uses `python` not `python3` - use `node` for JSON validation |
+
+```powershell
+# Verify Git Bash is available
+where bash
+
+# Check if running in Git Bash
+echo $OSTYPE  # Should output "msys" or "cygwin"
+```
+
+### macOS
+
+| Issue | Fix |
+|-------|-----|
+| Command not found: git | Install Xcode CLI: `xcode-select --install` |
+| Notifications not showing | Check System Preferences → Notifications |
+| Permission denied on scripts | Run `chmod +x script.sh` |
+| zsh compatibility issues | Scripts use `#!/bin/bash` shebang for portability |
+
+```bash
+# Verify bash is available (even on zsh default)
+which bash
+
+# Test notification
+osascript -e 'display notification "Test" with title "Claude Code"'
+```
+
+### Linux
+
+| Issue | Fix |
+|-------|-----|
+| Notifications not working | Install: `sudo apt install libnotify-bin` (Debian/Ubuntu) |
+| Permission denied | Run `chmod +x ~/.claude/scripts/*.sh` |
+| Command not found: bash | Usually pre-installed, verify with `which bash` |
+| File watcher limit | Increase: `echo fs.inotify.max_user_watches=524288 \| sudo tee -a /etc/sysctl.conf` |
+
+```bash
+# Test notification
+notify-send "Claude Code" "Test notification"
+
+# Check notification daemon
+systemctl --user status notification-daemon
+```
+
+---
+
 ## Git Hook Issues
 
 ### Issue: Pre-Commit Hook Not Running

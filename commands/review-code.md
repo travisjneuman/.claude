@@ -16,6 +16,16 @@ Perform comprehensive code review with multi-aspect analysis.
 /review-code [target]
 ```
 
+## Platform Compatibility
+
+| Platform | Status | Notes |
+|----------|--------|-------|
+| Windows | ✅ | Git commands work natively |
+| macOS | ✅ | Fully supported |
+| Linux | ✅ | Fully supported |
+
+Uses standard git commands which are cross-platform.
+
 ## Arguments
 
 | Argument | Default | Description |

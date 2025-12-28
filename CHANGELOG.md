@@ -2,6 +2,35 @@
 
 All notable changes to the Ultimate Claude Code Toolkit.
 
+## [1.4.1] - December 2025
+
+### Changed
+
+#### Cross-Platform Compatibility Overhaul
+Complete cross-platform support for Windows, macOS, and Linux:
+
+- **Stop hook** - Now OS-aware: PowerShell notifications (Windows), osascript (macOS), notify-send (Linux)
+- **All hooks** - Use POSIX-compatible bash syntax that works in Git Bash on Windows
+- **All commands** - Added Platform Compatibility sections with OS-specific notes
+- **All scripts** - Verified to work in Git Bash (Windows), bash (macOS/Linux)
+
+#### Documentation Updates
+- **README.md** - Added comprehensive "Platform Compatibility" section with:
+  - Platform requirements table (Windows 10/11, macOS, Linux)
+  - Detailed OS-specific setup notes (collapsible sections)
+  - Cross-platform command reference table
+- **Updated TOC** - Added Platform Compatibility link
+- **Commands** - Each command now includes Platform Compatibility table
+- **Bumped version** - 1.4.0 → 1.4.1
+
+### Notes
+- Windows users need Git for Windows (provides Git Bash)
+- macOS notifications use native `osascript`
+- Linux notifications use `notify-send` (optional, graceful fallback)
+- All toolkit scripts use POSIX bash, not PowerShell directly
+
+---
+
 ## [1.4.0] - December 2025
 
 ### Added
