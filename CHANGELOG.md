@@ -13,6 +13,7 @@ Complete cross-platform support for Windows, macOS, and Linux:
 - **All hooks** - Use POSIX-compatible bash syntax that works in Git Bash on Windows
 - **All commands** - Added Platform Compatibility sections with OS-specific notes
 - **All scripts** - Verified to work in Git Bash (Windows), bash (macOS/Linux)
+- **Python commands** - Updated to show both `python` (Windows) and `python3` (macOS/Linux) options
 
 #### Documentation Updates
 - **README.md** - Added comprehensive "Platform Compatibility" section with:
@@ -21,13 +22,22 @@ Complete cross-platform support for Windows, macOS, and Linux:
   - Cross-platform command reference table
 - **Updated TOC** - Added Platform Compatibility link
 - **Commands** - Each command now includes Platform Compatibility table
+- **Skills** - Updated `generic-static-*` skills with cross-platform local server commands
+- **Checklists** - Updated `static-sites.md` with cross-platform python options
 - **Bumped version** - 1.4.0 → 1.4.1
+
+### Verified Cross-Platform
+- **Git hooks** (`scripts/hooks/`) - All use POSIX bash, work on all platforms
+- **Shell scripts** - All use `#!/bin/bash` shebang, work in Git Bash
+- **MCP config** - `.mcp.json` not tracked (in .gitignore), templates in docs for each OS
+- **Templates** - All markdown, no OS-specific code
 
 ### Notes
 - Windows users need Git for Windows (provides Git Bash)
 - macOS notifications use native `osascript`
 - Linux notifications use `notify-send` (optional, graceful fallback)
 - All toolkit scripts use POSIX bash, not PowerShell directly
+- MCP server config must be created per-machine using templates in `docs/MCP-SERVERS.md`
 
 ---
 
