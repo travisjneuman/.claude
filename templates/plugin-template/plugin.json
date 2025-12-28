@@ -1,0 +1,45 @@
+{
+  "$schema": "https://cdn.jsdelivr.net/npm/@anthropic/claude-code-plugin-schema@latest/schema.json",
+  "name": "plugin-name",
+  "version": "1.0.0",
+  "description": "Brief description of what this plugin provides",
+  "author": "Your Name",
+  "repository": "https://github.com/username/plugin-name",
+  "license": "MIT",
+  "commands": [
+    {
+      "name": "example-command",
+      "description": "Description shown in command list",
+      "file": "commands/example-command.md"
+    }
+  ],
+  "agents": [
+    {
+      "name": "example-agent",
+      "description": "Agent description for Task tool",
+      "file": "agents/example-agent.md"
+    }
+  ],
+  "skills": [
+    {
+      "name": "example-skill",
+      "description": "Skill description for auto-activation",
+      "file": "skills/example-skill/SKILL.md"
+    }
+  ],
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'Plugin loaded'",
+            "statusMessage": "Loading plugin"
+          }
+        ]
+      }
+    ]
+  },
+  "mcp_servers": []
+}
