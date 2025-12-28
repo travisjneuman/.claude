@@ -9,7 +9,7 @@
 #   - settings.json (shared settings)
 #   - plugin.json (plugin manifest)
 #   - commands/, skills/, agents/, rules/, docs/, templates/
-#   - scripts/, .vscode/, .planning/, .archive/
+#   - scripts/, .vscode/, .archive/
 #   - plugins/local/ (customized plugins)
 #   - plugins/known_marketplaces.json (marketplace registry)
 #   - .gitmodules (submodule definitions)
@@ -67,13 +67,15 @@ plugins/cache/
 # Marketplace submodules (cloned via git submodule update)
 # Each machine clones these from upstream
 plugins/marketplaces/
-plugins/marketplaces
 
 # Marketplace registry (contains machine-specific paths)
 plugins/known_marketplaces.json
 
 # Installed plugins registry (contains machine-specific install paths)
 plugins/installed_plugins.json
+
+# Plugin install counts cache
+plugins/install-counts-cache.json
 
 # ----- CREDENTIALS & AUTH TOKENS -----
 # OAuth tokens are machine-specific and regenerated per device.
@@ -153,14 +155,14 @@ $RECYCLE.BIN/
 *.swp
 *.swo
 *.swn
-*~
+# *~ already covered in Linux section above
 
 # Emacs
 \#*\#
 .#*
 
 # VSCode (except .vscode/ which we track for shared settings)
-*.code-workspace
+# *.code-workspace already covered in IDE section above
 
 # ----- BUILD/DEPENDENCY ARTIFACTS -----
 # Node.js
@@ -215,9 +217,3 @@ temp/
 # 3. Create .mcp.json from template (see docs/MCP-SERVERS.md)
 # 4. (Optional) Create settings.local.json for personal overrides
 # ============================================
-plugins/install-counts-cache.json
-plugins/marketplaces/claude-mem
-plugins/marketplaces/awesome-claude-skills
-plugins/marketplaces/claude-mem
-plugins/marketplaces/get-shit-done
-plugins/marketplaces/skill-seekers
