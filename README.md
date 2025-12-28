@@ -8015,7 +8015,7 @@ $$$$$$\   $$\ $$$$$$$\      $$$$$$$\ $$ | $$$$$$\  $$\   $$\  $$$$$$$ | $$$$$$\ 
 
 **Built with ❤️ by [Travis Neuman](https://github.com/travisjneuman)**
 
-**🗓️ Last Updated: December 2025 • 📌 Version 1.4.0**
+**🗓️ Last Updated: December 2025 • 📌 Version 1.4.1**
 
 ---
 
