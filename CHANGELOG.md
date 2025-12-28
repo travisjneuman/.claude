@@ -2,6 +2,50 @@
 
 All notable changes to the Ultimate Claude Code Toolkit.
 
+## [1.4.0] - December 2025
+
+### Added
+
+#### New Templates (5 total)
+Comprehensive templates for creating toolkit components:
+- **skill-template.md** - Complete guide for creating new skills
+- **agent-template.md** - Template for subagent definitions
+- **command-template.md** - Slash command creation guide
+- **plugin-template/** - Full plugin scaffolding with plugin.json, commands, agents, skills
+- **project-CLAUDE.md** - Per-project CLAUDE.md starter template
+
+#### New Utility Commands (5 total)
+- **`/review-code [target]`** - Comprehensive code review workflow with stack detection
+- **`/health-check [verbose]`** - System diagnostics for toolkit configuration
+- **`/context-stats`** - Token usage report with optimization recommendations
+- **`/session-log [action]`** - View and analyze session log (view/tail/clear/stats)
+- **`/backup-config [action]`** - Backup and restore configuration files
+
+#### MCP Wildcard Permissions
+New granular MCP tool permissions using wildcard syntax:
+- `mcp__memory__*` - All memory tools auto-allowed
+- `mcp__filesystem__read_file` - Read-only filesystem access
+- `mcp__sqlite__read_query` - Read-only database queries
+- `mcp__sequential-thinking__*` - All reasoning tools
+- `mcp__filesystem__write_file` - Explicitly denied for safety
+
+### Changed
+
+#### Documentation
+- **Updated README.md** - Added Templates section with quick start guide
+- **Updated README.md** - Added Utility & Diagnostics command section
+- **Updated README.md** - Table of contents includes new sections
+- **Bumped version** - 1.3.3 → 1.4.0 across all files
+
+### Notes
+- Templates reduce boilerplate when creating new components
+- Utility commands provide essential toolkit management
+- MCP permissions follow least-privilege principle (read allowed, write denied)
+- Total command count: 10 (5 existing + 5 new)
+- Total template count: 6 (1 existing + 5 new)
+
+---
+
 ## [1.3.3] - December 2025
 
 ### Added
