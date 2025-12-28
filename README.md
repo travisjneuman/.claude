@@ -8013,7 +8013,7 @@ $$$$$$\   $$\ $$$$$$$\      $$$$$$$\ $$ | $$$$$$\  $$\   $$\  $$$$$$$ | $$$$$$\ 
 
 ---
 
-**Built with ❤️ by [Travis Neuman](https://github.com/travisjneuman)**
+**Built with ❤️ by [Travis Neuman](https://travisjneuman.com)**
 
 **🗓️ Last Updated: December 28, 2025**
 
