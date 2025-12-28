@@ -1,8 +1,8 @@
 # Ultimate Claude Code Toolkit
 
-> **The most comprehensive Claude Code enhancement system available** - A complete development environment with **71 local skills**, **37 specialized agents**, **21 plugin marketplaces** (550+ additional skills), intelligent task routing, multi-phase project management, and full automation for professional software development.
+> **The most comprehensive Claude Code enhancement system available** - A complete development environment with **71 local skills**, **37 specialized agents**, **21 plugin marketplaces** (1,328+ additional skills), intelligent task routing, multi-phase project management, and full automation for professional software development.
 
-**Version:** 1.3.1 | **Last Updated:** December 2025 | **Author:** Travis Neuman
+**Version:** 1.3.2 | **Last Updated:** December 2025 | **Author:** Travis Neuman
 
 [![Claude Code](https://img.shields.io/badge/Claude-Code-6366f1)](https://claude.com/claude-code)
 [![Skills](https://img.shields.io/badge/Skills-71+-10b981)](./skills/MASTER_INDEX.md)
@@ -57,10 +57,10 @@ The **Ultimate Claude Code Toolkit** transforms Claude Code from a capable AI co
 |-----------|-------|-------------|
 | **Skills** | 71 | Domain expertise modules covering iOS, Android, React, Vue, Svelte, DevOps, AI/ML, scientific computing, business strategy, and more |
 | **Agents** | 37 | Specialized AI subagents for deep expertise in code review, security auditing, architecture analysis, platform development, and creative work |
-| **Marketplaces** | 21 | External repositories containing 550+ additional skills from the community |
+| **Marketplaces** | 21 | External repositories containing 1,328+ additional skills from the community |
 | **Commands** | 30+ | Custom slash commands for task routing, skill discovery, decision frameworks, and workflow automation |
-| **Rules** | 15+ | Contextual guidelines for different tech stacks, checklists for visual changes, automation scripts, and more |
-| **Hooks** | 6 | Git hooks (pre-commit, commit-msg, pre-push) and Claude Code lifecycle hooks (Stop, PreToolUse, PostToolUse) |
+| **Rules** | 17+ | Contextual guidelines for different tech stacks (React, Python, Go, Rust), checklists, and automation |
+| **Hooks** | 8 | Git hooks (pre-commit, commit-msg, pre-push) and Claude Code lifecycle hooks (SessionStart, Stop, PreToolUse, PostToolUse, Notification) |
 
 ### The Core Philosophy
 
@@ -93,7 +93,7 @@ Claude Code out-of-the-box is powerful but generic. Every session starts fresh. 
 | "I forget to check for security issues" | Git hooks auto-block secrets, security-auditor agent catches vulnerabilities |
 | "Each task requires different expertise" | 37 specialized agents spawn for deep work automatically |
 | "I don't know what tools are available" | Universal router detects domains and loads relevant resources |
-| "Claude gives generic advice" | 550+ marketplace skills provide production-tested patterns |
+| "Claude gives generic advice" | 1,328+ marketplace skills provide production-tested patterns |
 
 ---
 
@@ -334,7 +334,7 @@ Standard installation works out of the box.
 │                                                                          │
 │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐     │
 │  │   SKILLS    │  │   AGENTS    │  │    RULES    │  │ MARKETPLACES│     │
-│  │  71 local   │  │ 37 experts  │  │  Checklists │  │  550+ more  │     │
+│  │  71 local   │  │ 37 experts  │  │  Checklists │  │ 1,328+ more │     │
 │  │             │  │  (Task tool)│  │  & stacks   │  │             │     │
 │  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘     │
 └─────────────────────────────────┬───────────────────────────────────────┘
@@ -382,7 +382,7 @@ Standard installation works out of the box.
 │   ├── stacks/ (technology-specific)
 │   └── tooling/ (setup guides)
 │
-├── plugins/marketplaces/ (21 repos, 550+ skills)
+├── plugins/marketplaces/ (21 repos, 1,328+ skills)
 │   └── Searched when local skills insufficient
 │
 └── docs/ (extended documentation)
@@ -616,7 +616,9 @@ Standard installation works out of the box.
 │   ├── stacks/                        # Technology-specific
 │   │   ├── react-typescript.md        # React + TypeScript
 │   │   ├── fullstack-nextjs-nestjs.md # Full-stack patterns
-│   │   └── python.md                  # Python projects
+│   │   ├── python.md                  # Python projects
+│   │   ├── go.md                      # Go projects
+│   │   └── rust.md                    # Rust projects
 │   └── tooling/                       # Tool setup guides
 │       ├── git-hooks-setup.md         # Git hook configuration
 │       ├── mcp-servers.md             # MCP lifecycle management
@@ -1215,15 +1217,50 @@ git push --force --no-verify  # Skip pre-push only
 
 ### Overview
 
-Claude Code hooks run at specific lifecycle events:
+Claude Code hooks run at specific lifecycle events. **No Python required** - all hooks use bash.
 
 ```json
 {
   "hooks": {
-    "Stop": [...],        // When Claude awaits input
-    "PreToolUse": [...],  // Before tool execution
-    "PostToolUse": [...]  // After tool execution
+    "SessionStart": [...],  // When session begins (NEW)
+    "Stop": [...],          // When Claude awaits input
+    "PreToolUse": [...],    // Before tool execution
+    "PostToolUse": [...],   // After tool execution
+    "Notification": [...]   // System notifications (NEW)
   }
+}
+```
+
+### Available Hook Events (10 Total)
+
+| Hook | Trigger | Our Usage |
+|------|---------|-----------|
+| **SessionStart** | New session begins | ✅ Display toolkit status |
+| **SessionEnd** | Session terminates | Not implemented |
+| **Stop** | Claude awaits input | ✅ Toast notification |
+| **PreToolUse** | Before any tool | ✅ Dangerous command blocking |
+| **PostToolUse** | After tool completes | ✅ Prettier formatting |
+| **Notification** | System notifications | ✅ Session logging |
+| **PreCompact** | Before context compact | Not implemented |
+| **UserPromptSubmit** | User sends message | Not implemented |
+| **PermissionRequest** | Tool needs approval | Not implemented |
+| **SubagentStop** | Subagent completes | Not implemented |
+
+### SessionStart Hook (NEW)
+
+**Purpose:** Display toolkit status when session begins
+
+**Configuration:**
+```json
+{
+  "SessionStart": [{
+    "matcher": "",
+    "hooks": [{
+      "type": "command",
+      "command": "echo 'Claude Code Toolkit v1.3.2 Initialized: 71 Skills | 37 Agents | 21 Marketplaces'",
+      "statusMessage": "Initializing toolkit"
+    }]
+  }]
 }
 ```
 
@@ -1301,6 +1338,29 @@ Claude Code hooks run at specific lifecycle events:
   ]
 }
 ```
+
+### Notification Hook (Session Logging)
+
+**Purpose:** Log notifications to session file for debugging
+
+**Configuration:**
+```json
+{
+  "Notification": [{
+    "matcher": "",
+    "hooks": [{
+      "type": "command",
+      "command": "echo \"[$(date +%H:%M:%S)] $CLAUDE_NOTIFICATION\" >> ~/.claude/.session-log 2>/dev/null || true",
+      "statusMessage": "Logging notification"
+    }]
+  }]
+}
+```
+
+**Use Cases:**
+- Debug session issues
+- Track tool usage patterns
+- Monitor for errors
 
 ---
 

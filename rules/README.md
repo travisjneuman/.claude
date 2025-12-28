@@ -16,6 +16,8 @@ rules/
 ├── stacks/                   # Tech stack patterns
 │   ├── react-typescript.md   # React + TypeScript
 │   ├── python.md             # Python projects
+│   ├── go.md                 # Go projects
+│   ├── rust.md               # Rust projects
 │   └── fullstack-nextjs-nestjs.md  # Full-stack
 └── tooling/                  # Tools & setup
     ├── git-hooks-setup.md    # Git hook configuration
@@ -42,6 +44,8 @@ rules/
 |------|--------------|
 | `stacks/react-typescript.md` | React + TypeScript project |
 | `stacks/python.md` | Python project |
+| `stacks/go.md` | Go project |
+| `stacks/rust.md` | Rust project |
 | `stacks/fullstack-nextjs-nestjs.md` | Full-stack Next.js/NestJS |
 
 ### Tooling
