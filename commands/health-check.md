@@ -16,12 +16,23 @@ Comprehensive diagnostics for Claude Code toolkit.
 /health-check [verbose]
 ```
 
+## Platform Compatibility
+
+| Platform | Status | Notes |
+|----------|--------|-------|
+| Windows | ✅ | Requires Git Bash (included with Git for Windows) |
+| macOS | ✅ | Works with bash/zsh |
+| Linux | ✅ | Works with bash |
+
+All commands use POSIX-compatible syntax that works across platforms.
+
 ## Behavior
 
 ### Step 1: Configuration Check
 
 **Check settings.json:**
 ```bash
+# Cross-platform: works in Git Bash (Windows), bash (macOS/Linux)
 [ -f ~/.claude/settings.json ] && echo "OK" || echo "MISSING"
 ```
 
