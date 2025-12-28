@@ -29,7 +29,7 @@
 [![Marketplace Skills](https://img.shields.io/badge/Marketplace_Skills-1,328+-ec4899?style=for-the-badge&logo=package&logoColor=white)](./plugins/marketplaces/)
 [![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge&logo=opensourceinitiative&logoColor=white)](./LICENSE)
 
-**Last Updated: December 2025** • **Author: [Travis Neuman](https://travisjneuman.com)**
+**Last Updated: December 28, 2025** • **Author: [Travis Neuman](https://travisjneuman.com)**
 
 </div>
 
@@ -8015,7 +8015,7 @@ $$$$$$\   $$\ $$$$$$$\      $$$$$$$\ $$ | $$$$$$\  $$\   $$\  $$$$$$$ | $$$$$$\ 
 
 **Built with ❤️ by [Travis Neuman](https://github.com/travisjneuman)**
 
-**🗓️ Last Updated: December 2025**
+**🗓️ Last Updated: December 28, 2025**
 
 ---
 
