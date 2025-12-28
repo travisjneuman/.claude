@@ -5496,6 +5496,18 @@ Implement JWT refresh token endpoint
 | 🚀 `/commit-commands:commit-push-pr` | Full PR flow | When ready for review |
 | 🔍 `/code-review:code-review` | Review code | Before commit |
 
+### 🆕 Project Initialization
+
+| Command | Purpose | Example |
+|:--------|:--------|:--------|
+| 📄 `/init-project [stack]` | Initialize CLAUDE.md with toolkit | `/init-project react` |
+| 🔧 `/standardize-claude-md [stack]` | Add toolkit sections to existing CLAUDE.md | `/standardize-claude-md` |
+
+**Workflow:**
+- **New project (your code):** `/init-project` → auto-detects or asks stack → creates CLAUDE.md
+- **External/OSS code:** `/init` (Claude's) → `/standardize-claude-md` → adds toolkit sections
+- **Existing project:** `/standardize-claude-md` → preserves content, adds missing sections
+
 ### 🔧 Meta & Creation
 
 | Command | Purpose | Example |
@@ -5855,9 +5867,52 @@ Use these templates to create new skills, agents, commands, and plugins:
 | 📄 `project-CLAUDE.md` | Per-project CLAUDE.md | `templates/project-CLAUDE.md` |
 | 📋 `task-template.md` | Task planning documents | `templates/task-template.md` |
 
+### 🆕 Project Initialization Workflow
+
+When starting a new project, use the toolkit's project initialization system:
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│ DECISION: Do you have a CLAUDE.md already?                 │
+├─────────────────────────────────────────────────────────────┤
+│ YES → /standardize-claude-md [stack]                       │
+│       Adds: Related Global Rules, Quick Start, footer      │
+│                                                             │
+│ NO → What kind of project?                                  │
+│      ├── YOUR code → /init-project                         │
+│      │   Auto-detects stack or asks, uses YOUR template    │
+│      │                                                      │
+│      └── External/OSS → /init then /standardize-claude-md  │
+│          Claude analyzes first, then add toolkit sections  │
+└─────────────────────────────────────────────────────────────┘
+```
+
+**Stack options:** `react`, `nextjs`, `static`, `python`, `automation`
+
+**What gets generated:**
+- Global delegation statement: `**Global rules from ~/.claude/ apply automatically.**`
+- Related Global Rules section pointing to appropriate `rules/stacks/` and `rules/checklists/`
+- Quick Start table with common commands
+- Standardized footer
+
 ### 🚀 Quick Start
 
 ```bash
+# Initialize a new project (auto-detects or asks stack)
+/init-project
+
+# Initialize with specific stack
+/init-project react
+/init-project nextjs
+/init-project static
+/init-project python
+
+# Add toolkit sections to existing CLAUDE.md
+/standardize-claude-md
+
+# Manual template copy (traditional approach)
+cp ~/.claude/templates/project-CLAUDE.md ./CLAUDE.md
+
 # Create a new skill
 cp ~/.claude/templates/skill-template.md ~/.claude/skills/my-skill/SKILL.md
 
@@ -5898,6 +5953,7 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) for detailed guidelines on:
 
 | Version | Date | Changes |
 |:-------:|:----:|:--------|
+| **1.4.1** | Dec 2025 | 🆕 Project initialization workflow: `/init-project` (adaptive stack detection), `/standardize-claude-md` (retrofit existing projects), 📄 Updated project-CLAUDE.md template v2.0 |
 | **1.4.0** | Dec 2025 | 📋 5 new templates, ⌨️ 5 new commands (/review-code, /health-check, /context-stats, /session-log, /backup-config), 🔌 MCP wildcard permissions |
 | **1.3.3** | Dec 2025 | 🪝 Complete hook implementation (10/10), 📝 session logging for all events |
 | **1.3.2** | Dec 2025 | 📊 SessionStart + Notification hooks, 🐹 Go + 🦀 Rust stack guides, 📚 documentation overhaul |

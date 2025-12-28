@@ -195,6 +195,20 @@ Hooks are configured in `~/.claude/settings.json` under the `hooks` key. No Pyth
 
 ---
 
+## Project Initialization
+
+When starting a new project, set up your CLAUDE.md with the toolkit's project initialization:
+
+| Scenario | Command |
+|----------|---------|
+| New project (your code) | `/init-project` → auto-detects stack, creates CLAUDE.md |
+| External/OSS codebase | `/init` (Claude's) → `/standardize-claude-md` |
+| Existing project missing sections | `/standardize-claude-md` → adds toolkit sections |
+
+This ensures every project has proper integration with `~/.claude/` including Related Global Rules and Quick Start sections.
+
+---
+
 ## Related Documentation
 
 - [GSD-TUTORIAL.md](./GSD-TUTORIAL.md) - Multi-phase project management
@@ -202,6 +216,7 @@ Hooks are configured in `~/.claude/settings.json` under the `hooks` key. No Pyth
 - [MARKETPLACE-GUIDE.md](./MARKETPLACE-GUIDE.md) - Marketplace resources
 - [../CLAUDE.md](../CLAUDE.md) - Core rules and guardrails
 - [../rules/tooling/git-hooks-setup.md](../rules/tooling/git-hooks-setup.md) - Git hooks setup
+- [../templates/project-CLAUDE.md](../templates/project-CLAUDE.md) - Project CLAUDE.md template
 
 ---
 
