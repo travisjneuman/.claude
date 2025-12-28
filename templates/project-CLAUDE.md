@@ -1,12 +1,6 @@
 # Project CLAUDE.md Template
 
-Use this template to create project-specific CLAUDE.md files.
-
----
-
-## Usage
-
-Copy the template below to your project root as `CLAUDE.md`.
+> Copy to project root as `CLAUDE.md`. Customize placeholders in brackets.
 
 ---
 
@@ -15,20 +9,24 @@ Copy the template below to your project root as `CLAUDE.md`.
 ```markdown
 # CLAUDE.md - [Project Name]
 
-> Project-specific instructions for Claude Code. These extend the global ~/.claude/CLAUDE.md.
+> [One-line description of what this project does]
+> **Global rules from `~/.claude/` apply automatically.**
 
 ---
 
-## Project Overview
+## Project Identity
 
-**Name:** [Project Name]
-**Type:** [Web App / CLI / Library / Mobile App / etc.]
-**Stack:** [Primary technologies]
-**Status:** [Active Development / Maintenance / etc.]
+| Field | Value |
+|-------|-------|
+| **Type** | [Static site / React app / Next.js / NestJS / Python / Monorepo] |
+| **Stack** | [e.g., React 19, TypeScript 5.9, Vite 7, Tailwind 4] |
+| **Status** | [Active / Alpha / Maintenance / Stable] |
+| **Priority** | [P0 / P1 / P2 / P3] |
+| **Live URL** | [URL or N/A] |
 
 ---
 
-## Quick Reference
+## Commands
 
 | Command | Purpose |
 |---------|---------|
@@ -41,183 +39,115 @@ Copy the template below to your project root as `CLAUDE.md`.
 
 ## Architecture
 
-### Directory Structure
-
 ```
 src/
-├── components/     # [Description]
-├── hooks/          # [Description]
-├── services/       # [Description]
-├── stores/         # [Description]
-├── types/          # [Description]
-└── utils/          # [Description]
+├── components/     # [Reusable UI components]
+├── hooks/          # [Custom React hooks]
+├── services/       # [API/business logic]
+├── stores/         # [State management]
+├── types/          # [TypeScript types]
+└── utils/          # [Utility functions]
 ```
-
-### Key Patterns
-
-- **State Management:** [Zustand / Redux / Context / etc.]
-- **Styling:** [Tailwind / CSS Modules / Styled Components / etc.]
-- **Data Fetching:** [React Query / SWR / fetch / etc.]
-- **Routing:** [React Router / Next.js App Router / etc.]
 
 ---
 
-## Conventions
+## Project-Specific Rules
 
-### Naming
-
-| Type | Convention | Example |
-|------|------------|---------|
-| Components | PascalCase | `UserCard.tsx` |
-| Hooks | camelCase with use prefix | `useAuth.ts` |
-| Utilities | camelCase | `formatDate.ts` |
-| Constants | UPPER_SNAKE_CASE | `API_BASE_URL` |
-
-### File Organization
-
-- One component per file
-- Co-locate tests: `Component.test.tsx`
-- Co-locate styles: `Component.module.css`
+[Only rules unique to THIS project - e.g., brand colors, naming conventions, domain logic]
 
 ---
 
-## Code Standards
+## Key Files
 
-### TypeScript
-
-- Strict mode enabled
-- No `any` - use `unknown` for external data
-- Explicit return types for public functions
-- Interface over type for objects
-
-### Components
-
-```typescript
-// Preferred component structure
-interface Props {
-  // Props interface required
-}
-
-export function ComponentName({ prop1, prop2 }: Props) {
-  // Hooks at top
-  // Event handlers
-  // Render
-}
-```
-
-### Testing
-
-- Test files next to source: `*.test.ts`
-- Use [Jest / Vitest / etc.]
-- Minimum coverage: [X]%
+| File | Purpose |
+|------|---------|
+| `src/config.ts` | App configuration |
+| `src/types/index.ts` | Shared types |
 
 ---
 
 ## Environment
 
-### Required Variables
+| Variable | Purpose |
+|----------|---------|
+| `DATABASE_URL` | Database connection |
+| `API_KEY` | External API key |
 
-| Variable | Purpose | Example |
-|----------|---------|---------|
-| `DATABASE_URL` | Database connection | `postgresql://...` |
-| `API_KEY` | External API | `sk-...` |
+---
 
-### Setup
+## Related Global Rules
 
-```bash
-# Install dependencies
-npm install
+Load these `~/.claude/` files when relevant:
+- `rules/stacks/[stack].md` for [stack] patterns
+- `rules/checklists/[checklist].md` for [checklist] work
 
-# Copy environment template
-cp .env.example .env
+---
 
-# Start development
-npm run dev
+## Quick Start
+
+| I want to... | Command |
+|--------------|---------|
+| Start any task | `/start-task [description]` |
+| Check project status | `/gsd:progress` |
+| Debug an issue | `Skill(debug-like-expert)` |
+| Make a decision | `/consider:first-principles` |
+
+---
+
+*Global workflow, skills, and standards loaded from `~/.claude/`*
+*Last Updated: [Date]*
 ```
 
 ---
 
-## Important Files
+## Stack-Specific Related Global Rules
 
-| File | Purpose | Notes |
-|------|---------|-------|
-| `src/config.ts` | App configuration | Environment-based |
-| `src/types/index.ts` | Shared types | Export all types |
-| `prisma/schema.prisma` | Database schema | Run migrate after changes |
+Copy the appropriate section based on your project type:
 
----
+### React + TypeScript
+```markdown
+## Related Global Rules
 
-## Do NOT
-
-- [ ] Commit `.env` files
-- [ ] Use `any` type
-- [ ] Skip tests for new features
-- [ ] Direct DOM manipulation (use React)
-- [ ] [Project-specific anti-pattern]
-
----
-
-## Common Tasks
-
-### Adding a New Feature
-
-1. Create component in `src/components/`
-2. Add types to `src/types/`
-3. Write tests
-4. Update this file if architecture changes
-
-### Database Changes
-
-1. Modify `prisma/schema.prisma`
-2. Run `npx prisma migrate dev --name [description]`
-3. Run `npx prisma generate`
-
----
-
-## Known Issues
-
-- [ ] [Issue 1] - [Workaround]
-- [ ] [Issue 2] - [Workaround]
-
----
-
-## Related Documentation
-
-- [Link to API docs]
-- [Link to design system]
-- [Link to architecture decision records]
-
----
-
-*Last updated: [Date]*
+Load these `~/.claude/` files when relevant:
+- `rules/stacks/react-typescript.md` for React/TypeScript patterns
+- `rules/checklists/ui-visual-changes.md` for UI changes
 ```
 
----
+### Next.js + NestJS (Full-Stack)
+```markdown
+## Related Global Rules
 
-## Best Practices
+Load these `~/.claude/` files when relevant:
+- `rules/stacks/fullstack-nextjs-nestjs.md` for full-stack patterns
+- `rules/stacks/react-typescript.md` for React/TypeScript patterns
+- `rules/checklists/ui-visual-changes.md` for frontend changes
+```
 
-### Keep It Concise
-- Project CLAUDE.md should be < 200 lines
-- Reference external docs rather than duplicating
-- Focus on project-specific deviations from global rules
+### Static HTML/CSS/JS
+```markdown
+## Related Global Rules
 
-### Update Regularly
-- Update when architecture changes
-- Update when new patterns emerge
-- Remove outdated information
+Load these `~/.claude/` files when relevant:
+- `rules/checklists/static-sites.md` for HTML/CSS/JS patterns
+- `rules/checklists/ui-visual-changes.md` for UI changes
+```
 
-### What to Include
-- Project-specific commands
-- Architecture overview
-- Naming conventions
-- Environment setup
-- Common tasks
-- Known issues
+### Python
+```markdown
+## Related Global Rules
 
-### What NOT to Include
-- General coding best practices (covered in global CLAUDE.md)
-- Full API documentation (link to it)
-- Detailed tutorials (create separate docs)
+Load these `~/.claude/` files when relevant:
+- `rules/stacks/python.md` for Python patterns
+- `rules/checklists/automation-scripts.md` for scripts/automation
+```
+
+### Automation/Scripts
+```markdown
+## Related Global Rules
+
+Load these `~/.claude/` files when relevant:
+- `rules/checklists/automation-scripts.md` for automation patterns
+```
 
 ---
 
@@ -231,8 +161,8 @@ Project ./CLAUDE.md           # Project-specific (this template)
 Directory ./src/CLAUDE.md     # Directory-specific (rare)
 ```
 
-Lower levels override higher levels for conflicting rules.
+Lower levels can override higher levels for conflicting rules.
 
 ---
 
-*Template version: 1.0*
+*Template version: 2.0 — Optimized for global toolkit integration*
