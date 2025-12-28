@@ -29,7 +29,7 @@
 [![Marketplace Skills](https://img.shields.io/badge/Marketplace_Skills-1,328+-ec4899?style=for-the-badge&logo=package&logoColor=white)](./plugins/marketplaces/)
 [![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge&logo=opensourceinitiative&logoColor=white)](./LICENSE)
 
-**Version 1.3.3** • **December 2025** • **Author: [Travis Neuman](https://github.com/travisjneuman)**
+**Version 1.3.3** • **December 2025** • **Author: [Travis Neuman](https://travisjneuman.com)**
 
 </div>
 
