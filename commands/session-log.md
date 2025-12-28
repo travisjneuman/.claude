@@ -19,6 +19,16 @@ View and manage the session log created by lifecycle hooks.
 /session-log [action] [lines]
 ```
 
+## Platform Compatibility
+
+| Platform | Status | Notes |
+|----------|--------|-------|
+| Windows | ✅ | Requires Git Bash (included with Git for Windows) |
+| macOS | ✅ | Works with bash/zsh |
+| Linux | ✅ | Works with bash |
+
+All commands use standard POSIX utilities (`tail`, `head`, `wc`, `grep`).
+
 ## Arguments
 
 | Argument | Default | Options |
