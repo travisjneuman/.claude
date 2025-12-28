@@ -2,6 +2,32 @@
 
 All notable changes to the Ultimate Claude Code Toolkit.
 
+## [1.3.0] - December 2025
+
+### Changed
+
+#### Architecture Refactoring (Token Optimization)
+- **CLAUDE.md trimmed** from 355 to 194 lines (45% reduction)
+- **Token savings** of ~1,400 tokens per session (56% reduction)
+- Follows Anthropic's recommendation: "concise guardrails and pointers"
+
+#### New Satellite Guides
+- `docs/WORKFLOW-GUIDE.md` - Detailed workflow patterns, prompt types, discovery
+- `docs/MARKETPLACE-GUIDE.md` - Complete marketplace reference (21 repos)
+
+#### CLAUDE.md Restructure
+- Kept essential guardrails (Identity, P0s, Workflow, Safety)
+- Expanded "Load When Relevant" triggers (14 context-based file loads)
+- Added "Skill Discovery" section with search commands
+- Moved detailed content to satellite files for on-demand loading
+
+#### Philosophy
+- CLAUDE.md = essential guardrails (always loaded, ~1,100 tokens)
+- Satellites = detailed patterns (loaded on-demand when context matches)
+- Discovery triggers ensure right content loads automatically
+
+---
+
 ## [1.2.0] - December 2025
 
 ### Added
