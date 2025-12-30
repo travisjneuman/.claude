@@ -99,11 +99,23 @@ Read `commands/router/routing-logic.md` for complexity scoring.
 1. Load determined skill(s)
 2. Use `TodoWrite` for multi-step tracking
 3. Spawn agents via `Task` tool as needed
-4. Apply post-work automation (code review, commit)
 
 ---
 
-### Step 7: Memory Save
+### Step 7: Verify
+
+Before marking complete, load `rules/checklists/verification-template.md`:
+- [ ] Primary goal achieved
+- [ ] No errors in console/logs
+- [ ] Tests pass (if applicable)
+- [ ] Explicit constraints met
+- [ ] No forbidden patterns (check DO NOT section)
+
+Then apply post-work automation (code review, commit).
+
+---
+
+### Step 8: Memory Save
 
 After significant work, save to claude-mem:
 - Key decisions made
