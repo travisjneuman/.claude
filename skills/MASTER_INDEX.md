@@ -1,6 +1,6 @@
 # Skills Documentation - Master Index
 
-Navigate all 71 local skills + 1,328 marketplace skills from this central hub.
+Navigate all 71 local skills + 1,496 marketplace skills from this central hub.
 
 ---
 
@@ -120,7 +120,7 @@ Navigate all 71 local skills + 1,328 marketplace skills from this central hub.
 
 ---
 
-## Marketplace Skills (1,328+)
+## Marketplace Skills (1,496+)
 
 21 marketplace plugins provide additional specialized skills:
 
