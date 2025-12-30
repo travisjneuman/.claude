@@ -136,7 +136,7 @@ Use these **anytime** — never blocked by GSD or workflow stage:
 
 ## Skill Discovery
 
-**71 local skills, 37 local agents** + **1,328 marketplace skills across 21 repos**
+**71 local skills, 36 local agents** + **1,496 marketplace skills across 21 repos**
 
 ### Local Skills
 - Full catalog: `skills/MASTER_INDEX.md`
