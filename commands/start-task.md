@@ -1,5 +1,5 @@
 ---
-description: Universal intelligent router - routes ANY prompt to optimal resources from 15 marketplaces, 71 skills, 37 agents
+description: Universal intelligent router - routes ANY prompt to optimal resources from 21 marketplaces, 71 skills, 36 agents
 arguments:
   - name: task_description
     description: "What you want to accomplish. Natural language - just describe it."

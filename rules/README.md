@@ -10,6 +10,7 @@ Modular workflow rules, loaded contextually based on task type.
 rules/
 ├── README.md                 # This file
 ├── checklists/               # Task-type specific checklists
+│   ├── verification-template.md  # Task completion verification
 │   ├── ui-visual-changes.md  # Visual/UI work
 │   ├── automation-scripts.md # Scripts/automation
 │   └── static-sites.md       # HTML/CSS/JS sites
@@ -34,6 +35,7 @@ rules/
 
 | File | Read When... |
 |------|--------------|
+| `checklists/verification-template.md` | Completing ANY task (verify before done) |
 | `checklists/ui-visual-changes.md` | Making ANY visual changes |
 | `checklists/automation-scripts.md` | Writing scripts, automation |
 | `checklists/static-sites.md` | Working on HTML/CSS/JS sites |
