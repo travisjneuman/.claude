@@ -96,13 +96,15 @@ Use these **anytime** — never blocked by GSD or workflow stage:
 
 ---
 
-## Anti-Patterns
+## DO NOT (Hard Constraints)
 
-- Using `any` type
-- `innerHTML` for user content
-- Proposing changes to unread code
-- Leaving dev server running
-- Generic task names (`todo.md`)
+- **DO NOT** use `any` type (use `unknown` for external data)
+- **DO NOT** use `innerHTML` for user content (XSS risk)
+- **DO NOT** propose changes to unread code
+- **DO NOT** leave dev server running after task completion
+- **DO NOT** use generic task names (`todo.md`, `task.md`)
+- **DO NOT** add features beyond what was requested (scope creep)
+- **DO NOT** skip verification before marking tasks complete
 
 ---
 
