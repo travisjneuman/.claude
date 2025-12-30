@@ -114,6 +114,7 @@ Use these **anytime** — never blocked by GSD or workflow stage:
 
 | Context | Load |
 |---------|------|
+| **Task completion** | `rules/checklists/verification-template.md` |
 | **Visual/UI changes** | `rules/checklists/ui-visual-changes.md` |
 | **Scripts/automation** | `rules/checklists/automation-scripts.md` |
 | **Static HTML/CSS/JS** | `rules/checklists/static-sites.md` |
