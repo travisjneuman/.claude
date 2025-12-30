@@ -18,17 +18,29 @@ This prevents accidental modifications to upstream projects while keeping them u
 
 All external repos are located in `~/.claude/plugins/marketplaces/`:
 
-| Repo | Type | URL |
-|------|------|-----|
-| anthropic-agent-skills | Submodule | https://github.com/anthropics/skills.git |
-| claude-code-plugins | Submodule | https://github.com/anthropics/claude-code.git |
-| claude-plugins-official | Submodule | https://github.com/anthropics/claude-plugins-official.git |
-| taches-cc-resources | Submodule | https://github.com/glittercowboy/taches-cc-resources.git |
-| get-shit-done | Submodule | https://github.com/glittercowboy/get-shit-done.git |
-| awesome-claude-skills | Submodule | https://github.com/ComposioHQ/awesome-claude-skills.git |
-| claude-mem | Submodule | https://github.com/thedotmack/claude-mem.git |
-| skill-seekers | Submodule | https://github.com/yusufkaraaslan/Skill_Seekers.git |
-| claude-scientific-skills | Submodule | https://github.com/K-Dense-AI/claude-scientific-skills.git |
+| Repo | URL |
+|------|-----|
+| alirezarezvani-claude-skills | https://github.com/alirezarezvani/claude-skills.git |
+| alvinunreal-awesome-claude | https://github.com/alvinunreal/awesome-claude.git |
+| anthropic-agent-skills | https://github.com/anthropics/skills.git |
+| awesome-claude-skills | https://github.com/ComposioHQ/awesome-claude-skills.git |
+| behisecc-awesome-claude-skills | https://github.com/BehiSecc/awesome-claude-skills.git |
+| claude-code-plugins | https://github.com/anthropics/claude-code.git |
+| claude-code-plugins-plus-skills | https://github.com/jeremylongshore/claude-code-plugins-plus-skills.git |
+| claude-mem | https://github.com/thedotmack/claude-mem.git |
+| claude-plugins-official | https://github.com/anthropics/claude-plugins-official.git |
+| claude-scientific-skills | https://github.com/K-Dense-AI/claude-scientific-skills.git |
+| get-shit-done | https://github.com/glittercowboy/get-shit-done.git |
+| hesreallyhim-awesome-claude-code | https://github.com/hesreallyhim/awesome-claude-code.git |
+| mhattingpete-skills | https://github.com/mhattingpete/claude-skills-marketplace.git |
+| obra-superpowers | https://github.com/obra/superpowers-marketplace.git |
+| skill-seekers | https://github.com/yusufkaraaslan/Skill_Seekers.git |
+| skillsforge | https://github.com/rawveg/skillsforge-marketplace.git |
+| taches-cc-resources | https://github.com/glittercowboy/taches-cc-resources.git |
+| travisvn-awesome-claude-skills | https://github.com/travisvn/awesome-claude-skills.git |
+| voltagent-awesome-claude-skills | https://github.com/VoltAgent/awesome-claude-skills.git |
+| voltagent-subagents | https://github.com/VoltAgent/awesome-claude-code-subagents.git |
+| wshobson-agents | https://github.com/wshobson/agents.git |
 
 ---
 
