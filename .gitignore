@@ -9,7 +9,7 @@
 #   - settings.json (shared settings)
 #   - plugin.json (plugin manifest)
 #   - commands/, skills/, agents/, rules/, docs/, templates/
-#   - scripts/, .vscode/, .archive/
+#   - scripts/, .vscode/
 #   - plugins/local/ (customized plugins)
 #   - plugins/known_marketplaces.json (marketplace registry)
 #   - .gitmodules (submodule definitions)
@@ -201,9 +201,10 @@ logs/
 tmp/
 temp/
 
-# ----- ARCHIVED SESSION DATA -----
-# Old session todos and agent data (contains session IDs)
-.archive/todos/
+# ----- ARCHIVE FOLDER -----
+# User-specific archived files (old CLAUDE.md versions, completed tasks, project snapshots)
+# Created at runtime when workflows archive completed work
+.archive/
 
 # ----- NESTED CLAUDE FOLDER -----
 # This shouldn't exist but ignore if it does
