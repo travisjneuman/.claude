@@ -2,6 +2,39 @@
 
 All notable changes to the Ultimate Claude Code Toolkit.
 
+## [1.4.2] - December 30, 2025
+
+### Added
+
+#### Verification Workflow (KERNEL-Inspired)
+Based on research into prompt engineering best practices:
+- **`rules/checklists/verification-template.md`** - Reusable verification checklist based on KERNEL "Easy to verify" principle
+- **Step 7 (Verify)** added to `/start-task` router between Execute and Memory Save
+- **"Task completion"** trigger added to CLAUDE.md "Load When Relevant" table
+
+#### Superpowers Plugin
+- Installed `superpowers@obra-superpowers` for TDD and git worktree workflows
+- Adds RED-GREEN-REFACTOR enforcement, systematic debugging, design-first skills
+
+### Changed
+
+#### Documentation Updates
+- **CLAUDE.md** - "Anti-Patterns" renamed to "DO NOT (Hard Constraints)" with explicit `**DO NOT**` prefixes
+- **CLAUDE.md** - Skill counts updated (1,328 → 1,496 marketplace skills, 37 → 36 agents)
+- **external-repos.md** - Complete list of all 21 marketplaces (was 9)
+- **All 21 marketplaces** - Synced to latest upstream commits
+
+#### Skill Count Update
+- Marketplace skills: 1,328 → **1,496** (+168 new skills from upstream syncs)
+- Largest contributor: `claude-code-plugins-plus-skills` (+2,947 files)
+
+### Notes
+- Research documented in `plans/snuggly-brewing-alpaca.md`
+- Key finding: Explicit constraints reduce unwanted outputs by 91%
+- Duplicate `superpowers-marketplace` removed (now uses `obra-superpowers` submodule)
+
+---
+
 ## [1.4.1] - December 2025
 
 ### Changed

@@ -113,7 +113,7 @@ Display comprehensive categorized skill overview:
 
 ---
 
-## Marketplace Skills (1,328+ total)
+## Marketplace Skills (1,496+ total)
 
 ### Scientific & Research (claude-scientific-skills)
 125+ skills for scientific computing:
@@ -197,4 +197,4 @@ Just describe your task - skills auto-activate based on description matching.
 
 ---
 
-*71 local skills + 21 marketplaces (1,328+ skills) = comprehensive coverage for any domain*
+*71 local skills + 21 marketplaces (1,496+ skills) = comprehensive coverage for any domain*

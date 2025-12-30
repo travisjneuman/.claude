@@ -183,7 +183,7 @@ The toolkit includes lifecycle hooks that automate common tasks:
 
 | Hook | Trigger | Action |
 |------|---------|--------|
-| **SessionStart** | New session begins | Displays toolkit status (71 skills, 37 agents, 21 marketplaces) |
+| **SessionStart** | New session begins | Displays toolkit status (71 skills, 36 agents, 21 marketplaces) |
 | **Stop** | Claude awaits input | Windows toast notification |
 | **PreToolUse** | Before Bash execution | Blocks dangerous commands (rm -rf /, format c:, etc.) |
 | **PostToolUse** | After Write/Edit | Auto-runs Prettier for formatting |
