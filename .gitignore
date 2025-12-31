@@ -124,10 +124,13 @@ settings.local.json
 .worktrees/
 
 # ----- IDE/EDITOR DIRECTORIES -----
-# IDE-specific directories (except .vscode which we track)
+# IDE-specific (except .vscode/ folder structure which we track)
 ide/
 .idea/
 *.code-workspace
+
+# VSCode settings contain machine-specific paths and local network IPs
+.vscode/settings.json
 
 # ----- OS-SPECIFIC FILES -----
 # macOS
