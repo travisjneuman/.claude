@@ -110,38 +110,14 @@
     "browserbase"
   ],
   "hooks": {
-    "SessionStart": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "echo '╔══════════════════════════════════════════════════════════════╗' && echo '║  Claude Code Toolkit v1.4.2 Initialized                      ║' && echo '║  71 Skills | 36 Agents | 21 Marketplaces | 1,496+ Resources  ║' && echo '║  Type /start-task or describe what you need                  ║' && echo '╚══════════════════════════════════════════════════════════════╝'",
-            "statusMessage": "Initializing toolkit"
-          }
-        ]
-      }
-    ],
-    "Stop": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "if [[ \"$OSTYPE\" == \"darwin\"* ]]; then osascript -e 'display notification \"Task completed - awaiting input\" with title \"Claude Code\"' 2>/dev/null; elif [[ \"$OSTYPE\" == \"msys\" ]] || [[ \"$OSTYPE\" == \"cygwin\" ]] || [[ -n \"$WINDIR\" ]]; then powershell -Command \"[Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime] | Out-Null; $t = [Windows.UI.Notifications.ToastNotificationManager]::GetTemplateContent(1); $t.GetElementsByTagName('text')[0].AppendChild($t.CreateTextNode('Claude Code: Task complete')) | Out-Null; [Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier('Claude Code').Show([Windows.UI.Notifications.ToastNotification]::new($t))\" 2>/dev/null; elif command -v notify-send &>/dev/null; then notify-send 'Claude Code' 'Task completed - awaiting input'; fi; echo 'Claude task complete'",
-            "statusMessage": "Sending notification"
-          }
-        ]
-      }
-    ],
     "PostToolUse": [
       {
         "matcher": "Write",
         "hooks": [
           {
             "type": "command",
-            "command": "npx prettier --write \"$CLAUDE_FILE_PATH\" 2>/dev/null || true",
-            "statusMessage": "Running Prettier"
+            "command": "npx prettier --write \"$CLAUDE_FILE_PATH\"",
+            "statusMessage": "Formatting with Prettier"
           }
         ]
       },
@@ -150,92 +126,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "npx prettier --write \"$CLAUDE_FILE_PATH\" 2>/dev/null || true",
-            "statusMessage": "Running Prettier"
-          }
-        ]
-      }
-    ],
-    "PreToolUse": [
-      {
-        "matcher": "Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "if echo \"$CLAUDE_TOOL_INPUT\" | grep -qE '(rm -rf /|rm -rf ~|format c:|del /s /q c:)'; then echo 'BLOCKED: Dangerous command detected' >&2; exit 2; fi",
-            "statusMessage": "Validating command safety"
-          }
-        ]
-      }
-    ],
-    "Notification": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "echo \"[$(date +%H:%M:%S)] $CLAUDE_NOTIFICATION\" >> ~/.claude/.session-log 2>/dev/null || true",
-            "statusMessage": "Logging notification"
-          }
-        ]
-      }
-    ],
-    "SessionEnd": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "echo \"[$(date '+%Y-%m-%d %H:%M:%S')] SESSION END\" >> ~/.claude/.session-log 2>/dev/null && echo '───────────────────────────────────────' >> ~/.claude/.session-log 2>/dev/null || true",
-            "statusMessage": "Logging session end"
-          }
-        ]
-      }
-    ],
-    "PreCompact": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "echo \"[$(date '+%Y-%m-%d %H:%M:%S')] CONTEXT COMPACTION - saving checkpoint\" >> ~/.claude/.session-log 2>/dev/null || true",
-            "statusMessage": "Saving context checkpoint"
-          }
-        ]
-      }
-    ],
-    "UserPromptSubmit": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "echo \"[$(date +%H:%M:%S)] USER: ${CLAUDE_USER_PROMPT:0:100}...\" >> ~/.claude/.session-log 2>/dev/null || true",
-            "statusMessage": "Logging prompt"
-          }
-        ]
-      }
-    ],
-    "PermissionRequest": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "echo \"[$(date +%H:%M:%S)] PERMISSION: $CLAUDE_TOOL_NAME requested\" >> ~/.claude/.session-log 2>/dev/null || true",
-            "statusMessage": "Logging permission request"
-          }
-        ]
-      }
-    ],
-    "SubagentStop": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "echo \"[$(date +%H:%M:%S)] AGENT COMPLETE: $CLAUDE_AGENT_NAME\" >> ~/.claude/.session-log 2>/dev/null || true",
-            "statusMessage": "Logging agent completion"
+            "command": "npx prettier --write \"$CLAUDE_FILE_PATH\"",
+            "statusMessage": "Formatting with Prettier"
           }
         ]
       }
