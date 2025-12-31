@@ -103,7 +103,7 @@ The **Ultimate Claude Code Toolkit** transforms [Claude Code](https://docs.anthr
 | 🏪 **Marketplaces** | **21** | External repositories containing **1,496+** additional skills from the community |
 | ⌨️ **Commands** | **30+** | Custom slash commands for task routing, skill discovery, decision frameworks, and workflow automation |
 | 📋 **Rules** | **17+** | Contextual guidelines for different tech stacks ([React](https://react.dev), [Python](https://python.org), [Go](https://go.dev), [Rust](https://rust-lang.org)), checklists, and automation |
-| 🪝 **Hooks** | **8** | Git hooks (pre-commit, commit-msg, pre-push) and Claude Code lifecycle hooks (SessionStart, Stop, PreToolUse, PostToolUse, Notification) |
+| 🪝 **Hooks** | **5** | Git hooks (pre-commit, commit-msg, pre-push) and Claude Code lifecycle hooks (PostToolUse for Prettier formatting) |
 
 ### 💎 The Core Philosophy
 
@@ -2120,126 +2120,69 @@ git push --force --no-verify  # Skip pre-push only
 
 ### 📋 Overview
 
-Claude Code hooks run at specific lifecycle events. **No Python required** - all hooks use bash.
+Claude Code hooks run at specific lifecycle events. This toolkit uses **PostToolUse** hooks for auto-formatting.
 
 ```json
 {
   "hooks": {
-    "SessionStart": [...],  // 📊 When session begins
-    "Stop": [...],          // 📣 When Claude awaits input
-    "PreToolUse": [...],    // 🛡️ Before tool execution
-    "PostToolUse": [...],   // ✨ After tool execution
-    "Notification": [...]   // 📝 System notifications
+    "PostToolUse": [...]   // ✨ Auto-format after Write/Edit
   }
 }
 ```
 
-### 📊 Available Hook Events (10 Total)
+### 📊 Active Hooks (v1.4.3+)
 
-| Hook | Trigger | Our Usage |
-|:-----|:--------|:---------:|
-| 📊 **SessionStart** | New session begins | ✅ Display toolkit status |
-| 🔚 **SessionEnd** | Session terminates | ✅ Log session end |
-| 📣 **Stop** | Claude awaits input | ✅ Toast notification |
-| 🛡️ **PreToolUse** | Before any tool | ✅ Dangerous command blocking |
-| ✨ **PostToolUse** | After tool completes | ✅ Prettier formatting |
-| 📝 **Notification** | System notifications | ✅ Session logging |
-| 📦 **PreCompact** | Before context compact | ✅ Save checkpoint |
-| 💬 **UserPromptSubmit** | User sends message | ✅ Log user prompts |
-| 🔐 **PermissionRequest** | Tool needs approval | ✅ Log permission requests |
-| 🤖 **SubagentStop** | Subagent completes | ✅ Log agent completion |
-
-### 📊 SessionStart Hook
-
-**Purpose:** Display toolkit status when session begins
-
-```json
-{
-  "SessionStart": [{
-    "matcher": "",
-    "hooks": [{
-      "type": "command",
-      "command": "echo 'Claude Code Toolkit v1.3.3: 71 Skills | 37 Agents | 21 Marketplaces'",
-      "statusMessage": "Initializing toolkit"
-    }]
-  }]
-}
-```
-
-### 📣 Stop Hook (Notification)
-
-**Purpose:** Alert user when Claude completes and awaits input
-
-**💻 Platform Notes:**
-- 🪟 Windows: Uses Windows Toast Notifications
-- 🍎 macOS: Replace with `osascript -e 'display notification'`
-- 🐧 Linux: Replace with `notify-send`
-
-### 🛡️ PreToolUse Hook (Safety)
-
-**Purpose:** Block dangerous commands before execution
-
-**🚫 Blocked Commands:**
-- `rm -rf /` - Delete root filesystem
-- `rm -rf ~` - Delete home directory
-- `format c:` - Format Windows drive
-- `del /s /q c:` - Delete Windows drive
+| Hook | Trigger | Action |
+|:-----|:--------|:-------|
+| ✨ **PostToolUse (Write)** | After file creation | Auto-runs Prettier for formatting |
+| ✨ **PostToolUse (Edit)** | After file edit | Auto-runs Prettier for formatting |
 
 ### ✨ PostToolUse Hook (Formatting)
 
 **Purpose:** Auto-format files after Write/Edit using [Prettier](https://prettier.io)
 
-### 📝 Notification Hook (Session Logging)
+```json
+{
+  "PostToolUse": [
+    {
+      "matcher": "Write",
+      "hooks": [{
+        "type": "command",
+        "command": "npx prettier --write \"$CLAUDE_FILE_PATH\"",
+        "statusMessage": "Formatting with Prettier"
+      }]
+    },
+    {
+      "matcher": "Edit",
+      "hooks": [{
+        "type": "command",
+        "command": "npx prettier --write \"$CLAUDE_FILE_PATH\"",
+        "statusMessage": "Formatting with Prettier"
+      }]
+    }
+  ]
+}
+```
 
-**Purpose:** Log notifications to session file for debugging
+### ⚠️ Removed Hooks (v1.4.3)
 
-**📋 Use Cases:**
-- Debug session issues
-- Track tool usage patterns
-- Monitor for errors
+The following hooks were removed for Windows compatibility:
 
-### 🔚 SessionEnd Hook (Session Logging)
+| Hook | Previous Purpose | Why Removed |
+|:-----|:-----------------|:------------|
+| SessionStart | Display toolkit banner | Unix syntax (`|| true`) |
+| Stop | Desktop notification | Platform-specific commands |
+| SessionEnd | Log session end | Unix `$(date)` syntax |
+| PreCompact | Log context compaction | Unix syntax |
+| Notification | Log notifications | Unix `~/.claude/` paths |
+| UserPromptSubmit | Log prompts | Unix syntax |
+| PermissionRequest | Log permissions | Unix syntax |
+| SubagentStop | Log agent completion | Unix syntax |
+| PreToolUse | Block dangerous commands | Unix `grep` syntax |
 
-**Purpose:** Log session termination for tracking
+**Reason:** These hooks used Unix-specific syntax (`|| true`, `$(date)`, `~/.claude/`, `2>/dev/null`) that fails on Windows PowerShell/CMD. The logging hooks provided minimal value anyway.
 
-**📋 Logs:**
-- Timestamp when session ends
-- Visual separator for log readability
-
-### 📦 PreCompact Hook (Context Checkpoint)
-
-**Purpose:** Log before context gets compacted to track when summarization occurs
-
-**📋 Use Cases:**
-- Track conversation complexity
-- Debug context issues
-- Monitor for unexpected compactions
-
-### 💬 UserPromptSubmit Hook (Prompt Logging)
-
-**Purpose:** Log user prompts (first 100 chars) for session history
-
-**📋 Use Cases:**
-- Track conversation flow
-- Debug interaction issues
-- Review session history
-
-### 🔐 PermissionRequest Hook (Permission Tracking)
-
-**Purpose:** Log when tools request permission for audit trail
-
-**📋 Logs:**
-- Tool name requesting permission
-- Timestamp of request
-
-### 🤖 SubagentStop Hook (Agent Completion)
-
-**Purpose:** Log when subagents complete their tasks
-
-**📋 Use Cases:**
-- Track agent usage patterns
-- Debug multi-agent workflows
-- Monitor task delegation
+See [CHANGELOG.md](CHANGELOG.md) for full details
 
 ---
 
@@ -2680,110 +2623,34 @@ The settings.json file controls Claude Code behavior, permissions, and hooks.
 
   // ═══════════════════════════════════════════════════════════════════════════
   // HOOKS SECTION
-  // Lifecycle event handlers
+  // Lifecycle event handlers (v1.4.3+ - simplified for Windows compatibility)
   // ═══════════════════════════════════════════════════════════════════════════
   "hooks": {
 
-    // SESSION START - Runs when Claude Code starts
-    "SessionStart": [{
-      "matcher": "",      // Empty = match all
-      "hooks": [{
-        "type": "command",
-        "command": "echo 'Claude Code Toolkit v1.4.1: 71 Skills | 37 Agents | 21 Marketplaces'",
-        "statusMessage": "Initializing toolkit"
-      }]
-    }],
+    // POST-TOOL USE - Auto-format after Write/Edit
+    // Only high-value, Windows-compatible hooks are kept
+    "PostToolUse": [
+      {
+        "matcher": "Write",
+        "hooks": [{
+          "type": "command",
+          "command": "npx prettier --write \"$CLAUDE_FILE_PATH\"",
+          "statusMessage": "Formatting with Prettier"
+        }]
+      },
+      {
+        "matcher": "Edit",
+        "hooks": [{
+          "type": "command",
+          "command": "npx prettier --write \"$CLAUDE_FILE_PATH\"",
+          "statusMessage": "Formatting with Prettier"
+        }]
+      }
+    ]
 
-    // STOP - Runs when Claude awaits input
-    "Stop": [{
-      "matcher": "",
-      "hooks": [{
-        "type": "command",
-        "command": "/* Cross-platform notification - see settings.json */",
-        "timeout": 5000
-      }]
-    }],
-
-    // PRE-TOOL USE - Runs BEFORE tool execution (can block!)
-    "PreToolUse": [{
-      "matcher": "Bash",
-      "hooks": [{
-        "type": "command",
-        "command": "/* Dangerous command detection - see settings.json */",
-        "statusMessage": "Checking command safety"
-      }]
-    }],
-
-    // POST-TOOL USE - Runs AFTER tool execution
-    "PostToolUse": [{
-      "matcher": "Write",
-      "hooks": [{
-        "type": "command",
-        "command": "npx prettier --write \"$FILE_PATH\" 2>/dev/null",
-        "statusMessage": "Formatting with Prettier"
-      }]
-    }, {
-      "matcher": "Edit",
-      "hooks": [{
-        "type": "command",
-        "command": "npx prettier --write \"$FILE_PATH\" 2>/dev/null",
-        "statusMessage": "Formatting with Prettier"
-      }]
-    }],
-
-    // NOTIFICATION - System notifications
-    "Notification": [{
-      "matcher": "",
-      "hooks": [{
-        "type": "command",
-        "command": "echo \"[$(date '+%Y-%m-%d %H:%M:%S')] NOTIFICATION: $NOTIFICATION_MESSAGE\" >> ~/.claude/.session-log"
-      }]
-    }],
-
-    // SESSION END - Runs when session terminates
-    "SessionEnd": [{
-      "matcher": "",
-      "hooks": [{
-        "type": "command",
-        "command": "echo \"[$(date '+%Y-%m-%d %H:%M:%S')] SESSION END\" >> ~/.claude/.session-log && echo '─────────────────────────────────────' >> ~/.claude/.session-log"
-      }]
-    }],
-
-    // PRE-COMPACT - Before context compression
-    "PreCompact": [{
-      "matcher": "",
-      "hooks": [{
-        "type": "command",
-        "command": "echo \"[$(date '+%Y-%m-%d %H:%M:%S')] CONTEXT COMPACTION\" >> ~/.claude/.session-log"
-      }]
-    }],
-
-    // USER PROMPT SUBMIT - When user sends message
-    "UserPromptSubmit": [{
-      "matcher": "",
-      "hooks": [{
-        "type": "command",
-        "command": "echo \"[$(date '+%Y-%m-%d %H:%M:%S')] USER: ${USER_PROMPT:0:100}...\" >> ~/.claude/.session-log"
-      }]
-    }],
-
-    // PERMISSION REQUEST - When tool needs approval
-    "PermissionRequest": [{
-      "matcher": "",
-      "hooks": [{
-        "type": "command",
-        "command": "echo \"[$(date '+%Y-%m-%d %H:%M:%S')] PERMISSION: $TOOL_NAME\" >> ~/.claude/.session-log"
-      }]
-    }],
-
-    // SUBAGENT STOP - When agent completes
-    "SubagentStop": [{
-      "matcher": "",
-      "hooks": [{
-        "type": "command",
-        "command": "echo \"[$(date '+%Y-%m-%d %H:%M:%S')] SUBAGENT COMPLETE\" >> ~/.claude/.session-log"
-      }]
-    }]
+    // NOTE: Other hooks (SessionStart, Stop, PreToolUse, etc.) were removed
+    // in v1.4.3 because they used Unix-specific syntax incompatible with
+    // Windows PowerShell/CMD. See CHANGELOG.md for details.
   },
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -3256,7 +3123,7 @@ claude
 ✓ 71 skills available
 ✓ 36 agents available
 ✓ 21 marketplace repos synced
-✓ 10 hooks configured
+✓ 2 hooks configured (PostToolUse for Prettier)
 ✓ MCP servers: all disabled (optimal)
 ```
 
@@ -5949,9 +5816,10 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) for detailed guidelines on:
 
 | Version | Date | Changes |
 |:-------:|:----:|:--------|
+| **1.4.3** | Dec 2025 | 🪝 Hooks simplified for Windows compatibility (removed 9 Unix-specific hooks, kept PostToolUse for Prettier), 🔒 Security audit documentation |
 | **1.4.1** | Dec 2025 | 🆕 Project initialization workflow: `/init-project` (adaptive stack detection), `/standardize-claude-md` (retrofit existing projects), 📄 Updated project-CLAUDE.md template v2.0 |
 | **1.4.0** | Dec 2025 | 📋 5 new templates, ⌨️ 5 new commands (/review-code, /health-check, /context-stats, /session-log, /backup-config), 🔌 MCP wildcard permissions |
-| **1.3.3** | Dec 2025 | 🪝 Complete hook implementation (10/10), 📝 session logging for all events |
+| **1.3.3** | Dec 2025 | 🪝 Original hook implementation (superseded by 1.4.3), 📝 session logging |
 | **1.3.2** | Dec 2025 | 📊 SessionStart + Notification hooks, 🐹 Go + 🦀 Rust stack guides, 📚 documentation overhaul |
 | **1.3.1** | Dec 2025 | 🪝 Git hooks (pre-commit, commit-msg, pre-push), ⚡ Claude Code lifecycle hooks (Stop, PreToolUse, PostToolUse), 📋 .gitignore cleanup |
 | **1.3.0** | Dec 2025 | 📜 CLAUDE.md refactor (45% reduction, ~1,100 tokens), 📚 satellite guides, 💰 token optimization |
@@ -7991,9 +7859,10 @@ The toolkit logs security-relevant events:
 
 | Version | Highlights |
 |---------|------------|
+| **1.4.3** | Hooks simplified for Windows |
 | **1.4.1** | Cross-platform compatibility |
 | **1.4.0** | Templates, utility commands |
-| **1.3.3** | Complete hook implementation |
+| **1.3.3** | Original hook implementation |
 | **1.3.0** | Token optimization (45% reduction) |
 | **1.2.0** | 6 new marketplaces, GSD |
 | **1.0.0** | Initial release |
@@ -8004,12 +7873,12 @@ The toolkit logs security-relevant events:
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│           TOOLKIT v1.4.1 STATISTICS                          │
+│           TOOLKIT v1.4.3 STATISTICS                          │
 ├─────────────────────────────────────────────────────────────┤
 │  Skills:        71 local + 1,496 marketplace                 │
 │  Agents:        37                                           │
 │  Commands:      15                                           │
-│  Hooks:         10 (complete)                                │
+│  Hooks:         2 (PostToolUse for Prettier)                 │
 │  Marketplaces:  21                                           │
 │  Platforms:     Windows, macOS, Linux                        │
 └─────────────────────────────────────────────────────────────┘
