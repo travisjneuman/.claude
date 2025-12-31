@@ -179,19 +179,18 @@ When facing choices, use structured frameworks:
 
 ## Automation Hooks
 
-The toolkit includes lifecycle hooks that automate common tasks:
+The toolkit includes PostToolUse hooks that automate formatting:
 
 | Hook | Trigger | Action |
 |------|---------|--------|
-| **SessionStart** | New session begins | Displays toolkit status (71 skills, 36 agents, 21 marketplaces) |
-| **Stop** | Claude awaits input | Windows toast notification |
-| **PreToolUse** | Before Bash execution | Blocks dangerous commands (rm -rf /, format c:, etc.) |
-| **PostToolUse** | After Write/Edit | Auto-runs Prettier for formatting |
-| **Notification** | System notifications | Logs to ~/.claude/.session-log |
+| **PostToolUse (Write)** | After file creation | Auto-runs Prettier for formatting |
+| **PostToolUse (Edit)** | After file edit | Auto-runs Prettier for formatting |
 
 ### Hook Configuration
 
-Hooks are configured in `~/.claude/settings.json` under the `hooks` key. No Python required - all hooks use bash.
+Hooks are configured in `~/.claude/settings.json` under the `hooks` key.
+
+**Note:** Other lifecycle hooks (SessionStart, Stop, PreToolUse, etc.) were removed in v1.4.3 for Windows compatibility. The logging hooks provided minimal value and used Unix-specific syntax incompatible with PowerShell/CMD. See [CHANGELOG.md](../CHANGELOG.md) for details.
 
 ---
 

@@ -2,6 +2,48 @@
 
 All notable changes to the Ultimate Claude Code Toolkit.
 
+## [1.4.3] - December 30, 2025
+
+### Changed
+
+#### Hooks Simplified for Windows Compatibility
+Removed all Unix-specific hooks that were causing errors on Windows:
+
+**Removed hooks (caused errors, low value):**
+- SessionStart (banner display)
+- Stop (desktop notification)
+- SessionEnd (logging)
+- PreCompact (logging)
+- Notification (logging)
+- UserPromptSubmit (logging)
+- PermissionRequest (logging)
+- SubagentStop (logging)
+- PreToolUse (safety check using grep)
+
+**Kept hooks (high value, Windows-compatible):**
+- PostToolUse (Write) - Auto-format with Prettier
+- PostToolUse (Edit) - Auto-format with Prettier
+
+**Why:** The removed hooks used Unix-specific syntax (`|| true`, `$(date)`, `~/.claude/` paths, `2>/dev/null`) that fails on Windows PowerShell/CMD. The logging hooks provided minimal value anyway.
+
+#### Security & Documentation
+- **docs/SECURITY.md** - NEW: Comprehensive security audit documentation
+- **docs/FOLDER-STRUCTURE.md** - Added settings files explanation, vscode folders distinction
+- **vscode/README.md** - Clarified two VSCode folders, gitignore reasons
+- **.gitignore** - Added security note at top with "DO NOT REVERT" warning
+
+#### Git Configuration Fixed
+- Fixed branch tracking after `git-filter-repo` operations
+- Pre-commit hook disabled (was using WSL bash on Windows)
+
+### Security
+- Removed `.archive/` folder from Git history (139 files with personal data)
+- Removed `vscode/settings.json` from Git history (local paths, IPs)
+- Added `.vscode/` folder to gitignore (VSCode workspace folder)
+- Git history rewritten with `git-filter-repo` to purge sensitive data
+
+---
+
 ## [1.4.2] - December 30, 2025
 
 ### Added
