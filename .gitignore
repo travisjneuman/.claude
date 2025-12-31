@@ -9,7 +9,7 @@
 #   - settings.json (shared settings)
 #   - plugin.json (plugin manifest)
 #   - commands/, skills/, agents/, rules/, docs/, templates/
-#   - scripts/, .vscode/
+#   - scripts/, vscode/ (setup scripts - NOT .vscode/ which is ignored)
 #   - plugins/local/ (customized plugins)
 #   - plugins/known_marketplaces.json (marketplace registry)
 #   - .gitmodules (submodule definitions)
@@ -126,12 +126,14 @@ settings.local.json
 .worktrees/
 
 # ----- IDE/EDITOR DIRECTORIES -----
-# IDE-specific (except .vscode/ folder structure which we track)
+# Standard IDE folders (auto-generated, machine-specific)
 ide/
 .idea/
+.vscode/
 *.code-workspace
 
-# VSCode settings contain machine-specific paths and local network IPs
+# Our custom vscode/ folder (without dot) is tracked for setup scripts
+# But vscode/settings.json contains machine-specific paths and local IPs
 vscode/settings.json
 
 # ----- OS-SPECIFIC FILES -----
