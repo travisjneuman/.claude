@@ -57,21 +57,14 @@ Complete map of the `.claude/` folder and related files.
     │   ├── MAINTENANCE.md
     │   └── workflow-automation.md
     │
-    ├── .archive/                   ← Centralized archive (not loaded into context)
+    ├── .archive/                   ← GITIGNORED - created at runtime by workflows
     │   ├── plans/                  ← Completed plan files
     │   ├── skills/                 ← Archived skills
     │   ├── todos/                  ← Old todo history
-    │   ├── document-schemas/       ← Document schemas
-    │   └── project-claude-snapshots-2025-12-13/
+    │   └── completed-tasks/        ← Archived task files
     │
-    ├── plans/                      ← Planning documents (organized by project)
-    │   ├── CLAUDE.md               ← Organization guidelines
-    │   ├── neuman-brain/           ← Neuman Brain platform plans
-    │   ├── oakstone-properties/    ← OakStone rental website plans
-    │   ├── thedeadrobot/           ← TDR Portfolio / X automation plans
-    │   ├── lazy-golfing/           ← Lazy Golfing platform plans
-    │   ├── claude-config/          ← .claude folder optimization plans
-    │   └── meta/                   ← Cross-project / general planning
+    ├── plans/                      ← GITIGNORED - planning documents
+    │   └── <project-name>/         ← Organized by project
     │
     ├── plugins/                    ← Plugins and external repos
     │   ├── cache/                  ← Plugin cache (regenerated, gitignored)
@@ -216,28 +209,30 @@ This folder contains all documentation for understanding and maintaining this co
 
 ---
 
-### `/plans/` - Planning Documents
+### `/plans/` - Planning Documents (Gitignored)
 
-Stores planning documents organized by project.
+Stores planning documents organized by project. This folder is **gitignored** as contents are user-specific.
 
-**Current projects:**
-- `neuman-brain/` - Neuman Brain platform
-- `oakstone-properties/` - OakStone rental website
-- `thedeadrobot/` - TDR Portfolio + X automation
-- `lazy-golfing/` - Lazy Golfing platform
-- `claude-config/` - This .claude folder
+**Example structure:**
+- `<project-name>/` - Project-specific plans
 - `meta/` - Cross-project documents
 
 ---
 
-### `/.archive/` - Centralized Archive
+### `/.archive/` - Centralized Archive (Gitignored)
 
-**Purpose:** Single location for all archived content. Files here are NOT loaded into Claude's context.
+**Purpose:** Single location for all archived content. This folder is **gitignored** and created at runtime by workflows. Files here are NOT loaded into Claude's context.
 
-**When to archive:**
-- Plans that have been fully executed
-- Historical reference documents no longer actively needed
-- Project snapshots for reference
+**Created automatically when:**
+- Completed tasks are archived via `mv tasks/<task>.md .archive/completed-tasks/`
+- Plans are completed and moved to archive
+- Other workflow archiving operations
+
+**Contents (user-specific, not in repo):**
+- Completed plan files
+- Archived skills
+- Old todo history
+- Completed task files
 
 ---
 
