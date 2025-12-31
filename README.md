@@ -1598,11 +1598,7 @@ PostToolUse("Write") → Run Prettier → Format file
 │   └── 📋 task-template.md               # Task file template
 │
 ├── 🎨 vscode/                            # VS Code settings
-│   ├── ⚙️ settings.json
-│   └── 📜 setup-vscode-settings.ps1
-│
-├── 📦 .archive/                          # Archived files
-│   └── 📁 claude-md-versions/            # Previous CLAUDE.md versions
+│   └── 📜 setup-vscode-settings.ps1     # Setup script (settings.json is gitignored)
 │
 └── 📋 .planning/                         # GSD project files (gitignored)
     ├── 📝 PROJECT.md                     # Project definition
