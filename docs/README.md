@@ -36,7 +36,7 @@ This `.claude/` folder contains a fully configured, portable Claude Code environ
 ### What Was Done (December 2025)
 
 1. **Merged duplicate files** - Combined 4+ versions of workflow docs into single authoritative files
-2. **Made project-specific content generic** - Renamed `tdr-*`, `neuman-brain-*`, `lazy-golfing-*` skills to `example-*` templates
+2. **Made project-specific content generic** - Renamed project-specific skills to `example-*` templates
 3. **Cleaned up temporary files** - Removed debug logs, shell snapshots, old todos, security warnings
 4. **Optimized configurations** - Streamlined settings.json and created portable .claude.json
 5. **Installed MCP servers** - sequential-thinking, playwright, memory, filesystem, sqlite

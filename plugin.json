@@ -2,8 +2,8 @@
   "name": "ultimate-claude-toolkit",
   "version": "1.0.0",
   "description": "Comprehensive Claude Code toolkit with 100+ skills, 30+ agents, and complete development workflows for full-stack development across all platforms",
-  "author": "tjn",
-  "repository": "https://github.com/tjn/claude-toolkit",
+  "author": "travisjneuman",
+  "repository": "https://github.com/travisjneuman/.claude",
   "license": "MIT",
   "keywords": [
     "claude-code",
