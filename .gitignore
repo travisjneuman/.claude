@@ -108,6 +108,7 @@ security_warnings_state_*.json
 # ----- LOCAL/PERSONAL OVERRIDES -----
 # Machine-specific settings that shouldn't be shared
 
+settings.json
 settings.local.json
 .claude.json
 
@@ -130,7 +131,7 @@ ide/
 *.code-workspace
 
 # VSCode settings contain machine-specific paths and local network IPs
-.vscode/settings.json
+vscode/settings.json
 
 # ----- OS-SPECIFIC FILES -----
 # macOS
