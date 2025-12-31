@@ -107,8 +107,9 @@ security_warnings_state_*.json
 
 # ----- LOCAL/PERSONAL OVERRIDES -----
 # Machine-specific settings that shouldn't be shared
+# Note: settings.json (Claude Code config) IS tracked - it's the toolkit config
+# Only settings.local.json is for personal overrides
 
-settings.json
 settings.local.json
 .claude.json
 
