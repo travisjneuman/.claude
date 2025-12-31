@@ -4,20 +4,28 @@
 # This .claude/ setup is designed to be cloned to any
 # Mac, Linux, or Windows system and work for anyone.
 #
+# SECURITY NOTE (December 2025):
+#   This repo underwent a security audit. Files below are
+#   gitignored to protect user privacy. DO NOT REVERT.
+#   See docs/SECURITY.md for full explanation.
+#
 # TRACKED (shared across all machines):
 #   - CLAUDE.md, README.md, CHANGELOG.md, CONTRIBUTING.md
-#   - settings.json (shared settings)
+#   - settings.json (Claude Code toolkit config - permissions, hooks, plugins)
 #   - plugin.json (plugin manifest)
 #   - commands/, skills/, agents/, rules/, docs/, templates/
 #   - scripts/, vscode/ (setup scripts - NOT .vscode/ which is ignored)
 #   - plugins/local/ (customized plugins)
-#   - plugins/known_marketplaces.json (marketplace registry)
 #   - .gitmodules (submodule definitions)
 #
 # IGNORED (machine-specific or auto-generated):
-#   - Session data, caches
-#   - MCP config (.mcp.json - platform-specific)
-#   - Submodule contents (cloned separately)
+#   - .archive/ (personal project archives - NEVER TRACK)
+#   - .vscode/ (VSCode workspace folder - auto-created)
+#   - vscode/settings.json (VSCode settings with local paths/IPs)
+#   - settings.local.json (personal overrides)
+#   - .mcp.json (platform-specific MCP config)
+#   - Session data, caches, credentials
+#
 # ============================================
 
 # ----- SESSION/EPHEMERAL DATA -----

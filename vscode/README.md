@@ -2,6 +2,38 @@
 
 This folder contains global VSCode settings that apply to all VSCode variants.
 
+---
+
+## ⚠️ Important: Two VSCode Folders
+
+There are TWO different VSCode-related folders in this repo:
+
+| Folder | Path | Description | Tracked? |
+|--------|------|-------------|----------|
+| **This folder** | `vscode/` | Our portable setup scripts | ✅ Yes (scripts only) |
+| **VSCode workspace** | `.vscode/` | Auto-created by VSCode | ❌ No (gitignored) |
+
+### Why `vscode/settings.json` is Gitignored
+
+The `settings.json` file in this folder is **intentionally gitignored** because it contains:
+
+1. **Hardcoded paths** - e.g., `C:\Users\tjn\.claude` (machine-specific)
+2. **Local network IPs** - e.g., `192.168.1.40` (security concern for public repos)
+3. **Remote SSH hosts** - Machine-specific remote connections
+
+**You need to create your own `settings.json`** after cloning. The setup script will help, or copy from your existing VSCode settings.
+
+### Why `.vscode/` is Gitignored
+
+The `.vscode/` folder (with dot prefix) is the **standard VSCode workspace folder**:
+
+- Auto-created when you open `.claude/` in VSCode
+- Contains workspace-specific settings
+- Should never be committed to public repos
+- Standard practice in all open-source projects
+
+---
+
 ## Setup (First Time)
 
 ### Windows (Run as Administrator)
@@ -47,17 +79,23 @@ cmd /c mklink "C:\Users\username\AppData\Roaming\Cursor\User\settings.json" "C:\
 
 ## What This Contains
 
-- `settings.json` - Global VSCode settings (Git-tracked)
-- `setup-vscode-settings.ps1` - Setup script for Windows
-- `README.md` - This file
+| File | Description | Tracked? |
+|------|-------------|----------|
+| `README.md` | This documentation | ✅ Yes |
+| `setup-vscode-settings.ps1` | Windows setup script | ✅ Yes |
+| `settings.json` | VSCode settings template | ❌ **No** (gitignored) |
+
+**Note:** You must create `settings.json` yourself after cloning. It's gitignored because it contains machine-specific paths and local network IPs.
 
 ## How It Works
 
-1. Your VSCode settings are stored here (Git-tracked)
-2. Symlinks point from each VSCode variant to this file
-3. Changes in any VSCode update this file
-4. Git tracks the changes
-5. New machines can clone and run setup script
+1. Clone this repo to your machine
+2. Create your own `settings.json` (copy from your existing VSCode settings)
+3. Run the setup script to create symlinks
+4. Your VSCode variants now use the settings in this folder
+5. Changes made in VSCode update the local `settings.json`
+
+**Note:** The `settings.json` file is NOT tracked in Git (it's gitignored). Only the setup scripts are shared. Each user maintains their own settings locally.
 
 ## Supported VSCode Variants
 
