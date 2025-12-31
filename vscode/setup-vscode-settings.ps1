@@ -1,7 +1,7 @@
 # VSCode Settings Symlink Setup Script
 # Run this script as Administrator to set up symlinks
 
-$SourceSettings = "C:\Users\tjn\.claude\vscode\settings.json"
+$SourceSettings = "$env:USERPROFILE\.claude\vscode\settings.json"
 
 # Define VSCode variant paths
 $VSCodePaths = @(
