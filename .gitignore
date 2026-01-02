@@ -233,3 +233,9 @@ temp/
 # 3. Create .mcp.json from template (see docs/MCP-SERVERS.md)
 # 4. (Optional) Create settings.local.json for personal overrides
 # ============================================
+
+# ----- AUTO-CLAUDE ANALYSIS CACHE -----
+# External tool (https://github.com/AndyMik90/Auto-Claude) generates
+# analysis/spec files that are personal documentation, not tracked.
+# Similar to .planning/ and tasks/ which are gitignored for session data.
+.auto-claude/
