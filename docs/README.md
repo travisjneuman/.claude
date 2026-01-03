@@ -1,8 +1,10 @@
 # Claude Code Configuration Documentation
 
-**Last Updated:** December 2025
+**Last Updated:** January 2026 (v2.0)
 **Maintainer:** Travis J. Neuman
 **Purpose:** Portable, optimized Claude Code configuration for any project
+
+**New in v2.0:** Research methodology, frontend aesthetics, PROACTIVE mode, multi-window state management. See [CHANGELOG.md](../CHANGELOG.md#200---january-3-2026).
 
 ---
 
@@ -33,7 +35,17 @@ This `.claude/` folder contains a fully configured, portable Claude Code environ
 
 ## History & Context
 
-### What Was Done (December 2025)
+### What Was Done (January 2026 - v2.0)
+
+**Version 2.0 Release:**
+- Integrated Claude 4.5 best practices (research methodology, frontend aesthetics)
+- Added PROACTIVE WITH INTELLIGENCE action mode
+- Created multi-window workflow templates (research-notes.md, tests.json, progress.md)
+- Enhanced verification with solution quality checks
+- Enhanced UI checklist with anti-"AI slop" design guidance (+230 lines)
+- All features auto-activate based on context (no slash commands needed)
+
+### What Was Done (December 2025 - v1.x)
 
 1. **Merged duplicate files** - Combined 4+ versions of workflow docs into single authoritative files
 2. **Made project-specific content generic** - Renamed project-specific skills to `example-*` templates
