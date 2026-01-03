@@ -2,7 +2,7 @@
 
 Complete reference for the 21 plugin marketplaces and how to use them.
 
-**Last Updated:** December 2025
+**Last Updated:** January 2026 (v2.0)
 
 **Location:** `~/.claude/plugins/marketplaces/`
 

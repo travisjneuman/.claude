@@ -1,7 +1,7 @@
 # Workflow Automation Guide
 
 **Version:** 4.0 (Consolidated)
-**Last Updated:** December 2025
+**Last Updated:** January 2026 (v2.0)
 **Purpose:** Complete workflow compliance guide - checklists + automation tools
 
 ---

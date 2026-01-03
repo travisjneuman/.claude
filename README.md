@@ -29,7 +29,7 @@
 [![Marketplace Skills](https://img.shields.io/badge/Marketplace_Skills-1,496+-ec4899?style=for-the-badge&logo=package&logoColor=white)](./plugins/marketplaces/)
 [![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge&logo=opensourceinitiative&logoColor=white)](./LICENSE)
 
-**Last Updated: December 30, 2025** • **Author: [Travis Neuman](https://travisjneuman.com)**
+**Version 2.0.0** • **Last Updated: January 3, 2026** • **Author: [Travis Neuman](https://travisjneuman.com)**
 
 </div>
 
@@ -114,6 +114,21 @@ The **Ultimate Claude Code Toolkit** transforms [Claude Code](https://docs.anthr
 | 🔄 | **Workflow Flexibility** | Both natural language prompts and explicit `/start-task` routing work identically. |
 | 🔒 | **Safety First** | Git hooks prevent secrets commits, enforce conventions, and block dangerous operations. |
 | ⚡ | **Zero Configuration** | Install once, everything works. No manual setup required for basic usage. |
+
+### 🆕 What's New in v2.0 (January 2026)
+
+**Major Enhancement:** Complete integration of [Anthropic's Claude 4.5 best practices](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-4-best-practices) with intelligent auto-activation.
+
+| Feature | Description | Auto-Activates When... |
+|:--------|:------------|:----------------------|
+| 🔬 **Research Methodology** | Structured hypothesis tracking with confidence calibration | You say "research", "investigate", "compare approaches" |
+| 🎨 **Frontend Aesthetics** | Anti-"AI slop" design guidance (avoid generic fonts, colors) | You work on UI/frontend tasks |
+| ✅ **Solution Quality** | Ensures code works for ALL inputs, not just tests | You write implementations |
+| 🎯 **PROACTIVE Mode** | Implements by default (vs suggesting), reads code first | Always active (configurable to CONSERVATIVE) |
+| 📊 **Multi-Window State** | Seamless continuation across context refreshes | Complex projects with tests.json, progress.md |
+| ⚡ **Parallel Tool Calls** | Maximum efficiency by calling independent tools simultaneously | All operations |
+
+**Result:** More calibrated research, distinctive frontends, general solutions, faster iteration, perfect state persistence. See [CHANGELOG.md](CHANGELOG.md#200---january-3-2026) for complete details.
 
 ---
 
