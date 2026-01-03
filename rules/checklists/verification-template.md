@@ -22,6 +22,32 @@ Based on the KERNEL "Easy to verify" principle - explicit success criteria reduc
 
 ---
 
+## Solution Quality Verification
+
+**Critical:** Solutions must work for ALL valid inputs, not just test cases.
+
+- [ ] Solution implements actual logic, not just pattern matching to pass tests
+- [ ] No hard-coded values specific to test inputs
+- [ ] Edge cases handled beyond what tests explicitly check
+- [ ] Solution would work correctly if tests were different
+- [ ] Algorithm/logic is sound and generalizable
+
+**Anti-Patterns to Avoid:**
+- ❌ Hard-coding expected output values
+- ❌ Creating solutions that only work for specific test inputs
+- ❌ Using helper scripts to work around proper implementation
+- ❌ Focusing on "making tests green" instead of solving the problem
+- ❌ Pattern matching test inputs instead of implementing real logic
+
+**Correct Approach:**
+- ✅ Understand problem requirements independent of tests
+- ✅ Implement proper algorithm/logic
+- ✅ Tests verify correctness, they don't define the solution
+- ✅ Solution is robust, maintainable, and extendable
+- ✅ Follows software design principles and best practices
+
+---
+
 ## Constraint Verification
 
 - [ ] Explicit constraints met (from task requirements)

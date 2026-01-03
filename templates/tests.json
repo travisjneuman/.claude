@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "description": "Structured test tracking for multi-window workflows",
+  "tests": [
+    {
+      "id": 1,
+      "name": "example_test_name",
+      "description": "What this test verifies",
+      "status": "passing",
+      "file": "tests/example.test.ts",
+      "priority": "high",
+      "notes": ""
+    },
+    {
+      "id": 2,
+      "name": "another_test",
+      "description": "Another verification",
+      "status": "failing",
+      "file": "tests/another.test.ts",
+      "priority": "medium",
+      "notes": "Known issue with edge case handling"
+    },
+    {
+      "id": 3,
+      "name": "pending_test",
+      "description": "Not yet implemented",
+      "status": "not_started",
+      "file": "tests/pending.test.ts",
+      "priority": "low",
+      "notes": "Will implement after core features"
+    }
+  ],
+  "summary": {
+    "total": 3,
+    "passing": 1,
+    "failing": 1,
+    "not_started": 1,
+    "coverage": "85%"
+  },
+  "critical_notes": [
+    "Do not remove or edit tests without updating this file",
+    "Missing or buggy functionality could result from test removal",
+    "Always run full test suite before marking work complete"
+  ],
+  "last_updated": "2026-01-03"
+}
