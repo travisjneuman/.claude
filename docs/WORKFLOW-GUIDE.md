@@ -2,9 +2,11 @@
 
 Detailed patterns for getting work done with Claude Code.
 
-**Last Updated:** December 2025
+**Last Updated:** January 2026 (v2.0)
 
 **Quick Start:** Just describe what you want. Skills auto-activate. Use `/start-task` for complex work.
+
+**New in v2.0:** Research methodology, frontend aesthetics, PROACTIVE mode, multi-window state management. See [CHANGELOG.md](../CHANGELOG.md#200---january-3-2026).
 
 ---
 

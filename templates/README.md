@@ -14,6 +14,11 @@ Standardized templates for creating Claude Code toolkit components.
 | `plugin-template/` | Create distributable plugins | Copy entire directory |
 | `project-CLAUDE.md` | Per-project instructions | Copy to project root as `CLAUDE.md` |
 | `task-template.md` | Task planning documents | Copy to `tasks/[name].md` |
+| **NEW in v2.0:** | **Multi-Window Workflows** | **Claude 4.5 Best Practices** |
+| `research-notes.md` | Research tracking with hypothesis tree | Copy to project for research tasks |
+| `tests.json` | Structured test status tracking | Copy to project root for test-heavy work |
+| `init.sh` | Project initialization script | Copy to project root, make executable |
+| `progress.md` | Session notes and state tracking | Copy to project for multi-session work |
 
 ---
 

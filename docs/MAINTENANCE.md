@@ -2,7 +2,7 @@
 
 Ongoing maintenance procedures to keep your Claude Code configuration clean and efficient.
 
-**Last Updated:** December 2025
+**Last Updated:** January 2026 (v2.0)
 
 ---
 

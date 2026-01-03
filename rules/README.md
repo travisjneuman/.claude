@@ -11,9 +11,12 @@ rules/
 ├── README.md                 # This file
 ├── checklists/               # Task-type specific checklists
 │   ├── verification-template.md  # Task completion verification
-│   ├── ui-visual-changes.md  # Visual/UI work
+│   ├── ui-visual-changes.md  # Visual/UI work (enhanced with frontend aesthetics)
 │   ├── automation-scripts.md # Scripts/automation
 │   └── static-sites.md       # HTML/CSS/JS sites
+├── workflows/                # NEW: Workflow methodologies (v2.0)
+│   ├── research-methodology.md  # Structured research with hypothesis tracking
+│   └── action-policy.md      # PROACTIVE vs CONSERVATIVE mode configuration
 ├── stacks/                   # Tech stack patterns
 │   ├── react-typescript.md   # React + TypeScript
 │   ├── python.md             # Python projects
@@ -39,6 +42,13 @@ rules/
 | `checklists/ui-visual-changes.md` | Making ANY visual changes |
 | `checklists/automation-scripts.md` | Writing scripts, automation |
 | `checklists/static-sites.md` | Working on HTML/CSS/JS sites |
+
+### Workflows (NEW in v2.0)
+
+| File | Read When... |
+|------|--------------|
+| `workflows/research-methodology.md` | Researching, investigating, comparing approaches |
+| `workflows/action-policy.md` | Configuring behavior (PROACTIVE vs CONSERVATIVE) |
 
 ### Stacks
 

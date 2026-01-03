@@ -2,7 +2,7 @@
 
 How to deploy this Claude Code configuration to a new machine.
 
-**Last Updated:** December 2025
+**Last Updated:** January 2026 (v2.0)
 
 ---
 
