@@ -2,7 +2,9 @@
 
 A practical guide to using the GSD system for multi-phase projects.
 
-**Last Updated:** December 2025
+**Last Updated:** January 2026 (v2.0)
+
+**New in v2.0:** GSD now integrates with research methodology, multi-window state management, and PROACTIVE mode. See [CHANGELOG.md](../CHANGELOG.md#200---january-3-2026).
 
 ---
 

@@ -2,7 +2,7 @@
 
 A curated collection of resources for expanding and optimizing Claude Code capabilities.
 
-**Last Updated**: December 2025
+**Last Updated**: January 2026 (v2.0)
 
 ---
 
