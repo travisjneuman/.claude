@@ -20,19 +20,33 @@ Routes ANY prompt to optimal execution by loading resources on-demand.
 
 Apply maximum reasoning depth for non-trivial tasks. Skip only for: typos, single-line fixes.
 
+After receiving tool results, reflect on quality and determine optimal next steps before proceeding.
+
 ---
 
-### Step 1: Environment Context
+### Step 1: Environment Context & Research
 
 **Current date from environment:** Use `Today's date` value for temporal reasoning.
 
-**Research triggers (dynamic):**
+**Research triggers (auto-detect):**
 - "latest", "current", "recent", "new", "today"
 - Any year >= current year from environment
 - Version queries ("React 19", "Node 22")
 - "best way to", "recommended", "is there a library"
+- "investigate", "research", "find information about", "compare approaches"
+- "what are the options for", "how should I"
 
-If research needed: Use `WebSearch` first, then continue routing.
+**Research execution:**
+- If research needed: Use `WebSearch` immediately
+- For complex research: Load `rules/workflows/research-methodology.md`
+- Apply structured hypothesis tracking for multi-faceted questions
+- Use multi-source verification for important conclusions
+- Track confidence levels and create research-notes.md if appropriate
+
+**Parallel tool usage:**
+- When multiple independent searches/reads needed, make ALL calls in single message
+- Only call sequentially when tools depend on previous results
+- Never use placeholders or guess parameters
 
 ---
 
@@ -54,7 +68,7 @@ If active: Invoke `/gsd:progress` and EXIT.
 
 ---
 
-### Step 4: Domain Detection (Priority Order)
+### Step 4: Domain Detection & Smart Resource Loading (Priority Order)
 
 Scan `{{task_description}}` in this priority order:
 
@@ -76,6 +90,18 @@ Scan `{{task_description}}` in this priority order:
 | Business | "startup", "pricing", "marketing", "finance", "hr" |
 | Creative | "design", "video", "audio", "brand", "animation" |
 
+**Smart context-specific loading:**
+
+Auto-load additional resources based on task characteristics:
+
+| Trigger Pattern | Auto-Load |
+|-----------------|-----------|
+| "research", "investigate", "find out", "what are the options" | `rules/workflows/research-methodology.md` |
+| "UI", "frontend", "design", "styling", "CSS", "visual" | `rules/checklists/ui-visual-changes.md` |
+| "test", "testing", "verify", "validation" | `rules/checklists/verification-template.md` |
+| First window of multi-phase project | Suggest creating `tests.json`, `init.sh`, `progress.md` |
+| Continuing after context refresh | Check for `progress.md`, `tests.json`, git logs |
+
 Load the relevant domain file(s) and extract:
 - **Skill** to invoke
 - **Agent** to use via Task tool
@@ -94,33 +120,79 @@ Read `commands/router/routing-logic.md` for complexity scoring.
 
 ---
 
-### Step 6: Execute
+### Step 6: Execute with Full Environment
 
-1. Load determined skill(s)
-2. Use `TodoWrite` for multi-step tracking
-3. Spawn agents via `Task` tool as needed
+**1. Load determined resources:**
+- Invoke identified skill(s) from domain files
+- Load contextual rules automatically based on patterns
+- Use `TodoWrite` for multi-step tracking (always for 3+ steps)
+- Spawn agents via `Task` tool as needed
+
+**2. Intelligent marketplace skill discovery:**
+When domain detection identifies a specialized area, check for marketplace skills:
+- Search pattern: Look for relevant skills across 21 marketplace repos
+- Priority: Local skills first, then marketplace skills
+- Auto-suggest highly relevant marketplace skills when found
+- Example: "React animation" → check for animation-specific skills in marketplaces
+
+**3. Multi-window workflow awareness:**
+- First window: Suggest creating `tests.json`, `init.sh`, `progress.md` for complex projects
+- Subsequent windows: Check for these files and use them to orient
+- Always review git logs and progress notes when continuing work
+- Create quality-of-life setup scripts proactively
+
+**4. Execution principles:**
+- Default to implementing changes (PROACTIVE mode from CLAUDE.md)
+- Read code before proposing changes - never speculate
+- Use parallel tool calls for independent operations
+- Reflect on tool results before next action
 
 ---
 
-### Step 7: Verify
+### Step 7: Verify with Quality Checks
 
-Before marking complete, load `rules/checklists/verification-template.md`:
+**Always load before marking complete:** `rules/checklists/verification-template.md`
+
+**Critical verifications:**
 - [ ] Primary goal achieved
 - [ ] No errors in console/logs
 - [ ] Tests pass (if applicable)
+- [ ] Solution works for ALL valid inputs, not just test cases
+- [ ] No hard-coded values or test-specific logic
 - [ ] Explicit constraints met
-- [ ] No forbidden patterns (check DO NOT section)
+- [ ] No forbidden patterns (check DO NOT section in CLAUDE.md)
+- [ ] Temporary files cleaned up
 
-Then apply post-work automation (code review, commit).
+**Context-specific verification:**
+- UI/visual changes → Also verify with `rules/checklists/ui-visual-changes.md`
+- Scripts/automation → Also verify with `rules/checklists/automation-scripts.md`
+- Static sites → Also verify with `rules/checklists/static-sites.md`
+
+**Then apply post-work automation:**
+- Code review agents (pr-review-toolkit)
+- Simplification if needed
+- Type design analysis for new types
+- Test analysis for new functionality
 
 ---
 
-### Step 8: Memory Save
+### Step 8: State Persistence
 
-After significant work, save to claude-mem:
+**Memory save** (for significant work):
+Save to claude-mem:
 - Key decisions made
 - Patterns established
 - Project context
+- Important discoveries
+
+**File-based state** (for multi-window projects):
+Update or create:
+- `progress.md` - Session notes, completed work, next steps
+- `tests.json` - Structured test status (if test-heavy project)
+- Git commits - Descriptive commits as state checkpoints
+
+**Context approaching limit:**
+Before context refresh, ensure state is saved to memory and files for seamless continuation.
 
 ---
 
