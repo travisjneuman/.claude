@@ -66,6 +66,7 @@ Use these **anytime** — never blocked by GSD or workflow stage:
 - **Research** — `Task` tool with Explore agent
 - **Decision Frameworks** — `/consider:first-principles`, `/consider:5-whys`
 - **TodoWrite** — Track multi-step progress
+- **Auto-Claude** — `/auto-claude [description]` for autonomous implementation with QA validation
 
 **Discovery is mandatory.** Before specialized work, search local skills AND marketplaces.
 
