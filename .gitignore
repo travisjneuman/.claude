@@ -239,3 +239,6 @@ temp/
 # analysis/spec files that are personal documentation, not tracked.
 # Similar to .planning/ and tasks/ which are gitignored for session data.
 .auto-claude/
+
+# Database files
+*.db
