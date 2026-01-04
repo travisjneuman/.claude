@@ -99,6 +99,8 @@ Auto-load additional resources based on task characteristics:
 | "research", "investigate", "find out", "what are the options" | `rules/workflows/research-methodology.md` |
 | "UI", "frontend", "design", "styling", "CSS", "visual" | `rules/checklists/ui-visual-changes.md` |
 | "test", "testing", "verify", "validation" | `rules/checklists/verification-template.md` |
+| "autonomous", "auto", "implement feature", "build [complex feature]" | Suggest Auto-Claude |
+| Complexity score >= 3 + "well-defined feature" | Auto-recommend `/auto-claude` |
 | First window of multi-phase project | Suggest creating `tests.json`, `init.sh`, `progress.md` |
 | Continuing after context refresh | Check for `progress.md`, `tests.json`, git logs |
 
@@ -146,6 +148,20 @@ When domain detection identifies a specialized area, check for marketplace skill
 - Read code before proposing changes - never speculate
 - Use parallel tool calls for independent operations
 - Reflect on tool results before next action
+
+**5. Autonomous implementation detection:**
+When task characteristics indicate autonomous coding would be beneficial:
+- Well-defined feature in established codebase
+- Complexity score >= 3
+- Multiple files/components involved
+- User preference for autonomous vs manual
+
+Auto-suggest: "This feature could benefit from autonomous implementation. Would you like to use `/auto-claude` for autonomous coding with QA validation, or proceed with manual step-by-step implementation?"
+
+**Never force Auto-Claude** - always give user choice between:
+- Manual: Traditional /start-task planning + implementation
+- Autonomous: /auto-claude for autonomous coding
+- GSD: Multi-phase project management
 
 ---
 
