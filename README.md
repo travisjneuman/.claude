@@ -58,7 +58,7 @@
 ### 📚 Complete References
 - [🎓 Complete Skills Reference (71 Skills)](#-complete-skills-reference-71-skills)
 - [🤖 Complete Agents Reference (37 Agents)](#-complete-agents-reference-37-agents)
-- [🏪 Complete Marketplaces Reference (21 Marketplaces)](#-complete-marketplaces-reference-21-marketplaces)
+- [🏪 Complete Marketplaces Reference (22 Marketplaces)](#-complete-marketplaces-reference-22-marketplaces)
 
 ### 🔒 Automation & Safety
 - [🪝 Git Hooks System](#-git-hooks-system)
@@ -117,10 +117,11 @@ The **Ultimate Claude Code Toolkit** transforms [Claude Code](https://docs.anthr
 
 ### 🆕 What's New in v2.0 (January 2026)
 
-**Major Enhancement:** Complete integration of [Anthropic's Claude 4.5 best practices](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-4-best-practices) with intelligent auto-activation.
+**Major Enhancements:** Complete integration of [Anthropic's Claude 4.5 best practices](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-4-best-practices) with intelligent auto-activation PLUS autonomous coding framework.
 
 | Feature | Description | Auto-Activates When... |
 |:--------|:------------|:----------------------|
+| 🤖 **Auto-Claude Framework** | Autonomous multi-agent coding with QA validation loops and git worktree isolation | Complexity 3-4 with well-defined requirements, or `/auto-claude` command |
 | 🔬 **Research Methodology** | Structured hypothesis tracking with confidence calibration | You say "research", "investigate", "compare approaches" |
 | 🎨 **Frontend Aesthetics** | Anti-"AI slop" design guidance (avoid generic fonts, colors) | You work on UI/frontend tasks |
 | ✅ **Solution Quality** | Ensures code works for ALL inputs, not just tests | You write implementations |
@@ -128,7 +129,7 @@ The **Ultimate Claude Code Toolkit** transforms [Claude Code](https://docs.anthr
 | 📊 **Multi-Window State** | Seamless continuation across context refreshes | Complex projects with tests.json, progress.md |
 | ⚡ **Parallel Tool Calls** | Maximum efficiency by calling independent tools simultaneously | All operations |
 
-**Result:** More calibrated research, distinctive frontends, general solutions, faster iteration, perfect state persistence. See [CHANGELOG.md](CHANGELOG.md#200---january-3-2026) for complete details.
+**Result:** Autonomous feature implementation, more calibrated research, distinctive frontends, general solutions, faster iteration, perfect state persistence. See [CHANGELOG.md](CHANGELOG.md#200---january-3-2026) for complete details.
 
 ---
 
@@ -215,25 +216,47 @@ System:
 └── 🔄 Tracks progress across sessions
 ```
 
-### 🤖 Autonomous Coding
+### 🤖 Autonomous Coding (Auto-Claude)
+
+**The 22nd marketplace integration** - Autonomous multi-agent framework for complex feature implementation.
 
 ```
 You say: "/auto-claude Add user authentication with JWT tokens"
 System:
-├── 📊 Analyzes codebase structure
-├── 📝 Generates implementation specification
+├── 📊 Analyzes codebase structure (30 seconds)
+├── 📝 Generates implementation specification (1-2 minutes)
 ├── 🌿 Creates isolated git worktree (safe development)
-├── 🤖 Autonomous multi-agent implementation:
+├── 🤖 Autonomous multi-agent implementation (5-15 minutes):
 │   ├── Planner agent creates subtask plan
 │   ├── Coder agent implements features
 │   ├── QA agent validates acceptance criteria
 │   └── Fixer agent resolves issues in loop
-├── 🧠 Uses Graphiti memory for context retention
-└── ✅ Returns completed code for review
+├── 🧠 Uses Graphiti memory for context retention (optional)
+└── ✅ Returns completed code for review (5-10 minutes)
 
-Configuration: ~/.auto-claude/.env
+Total time: 15-30 minutes for most features
+Configuration: ~/.auto-claude/.env (OAuth token from /settings)
 See: docs/AUTO-CLAUDE-GUIDE.md
 ```
+
+**When to Use Auto-Claude:**
+- ✅ Complexity 3-4: Well-defined features in established codebases
+- ✅ Repetitive tasks (CRUD, forms, API endpoints, auth flows)
+- ✅ You prefer autonomous implementation with review-at-end
+- ❌ Complexity 1-2: Use manual `/start-task` instead
+- ❌ Complexity 5+: Use GSD for multi-phase projects
+- ❌ Greenfield projects or exploratory work
+
+**Workflow Comparison:**
+
+| Aspect | Manual (/start-task) | Auto-Claude | GSD |
+|--------|---------------------|-------------|-----|
+| **Complexity** | 1-2 | 3-4 | 5+ |
+| **Control** | Maximum | Medium | Structured |
+| **Speed** | Slower | Faster | Phased |
+| **Review** | Each step | End | Per phase |
+| **Isolation** | Main branch | Git worktree | .planning/ |
+| **Best for** | Learning, exploration | Defined features | Large projects |
 
 ### 🔒 Automatic Safety Enforcement
 
@@ -1976,9 +1999,9 @@ Core rules loaded every session (~1,100 tokens):
 
 ---
 
-## 🏪 Complete Marketplaces Reference (21 Marketplaces)
+## 🏪 Complete Marketplaces Reference (22 Marketplaces)
 
-> **📊 Total: 1,496+ additional skills** from 21 external repositories
+> **📊 Total: 1,496+ additional skills** from 22 external repositories
 
 ### 🏛️ Official Anthropic (3 Marketplaces)
 
@@ -2024,6 +2047,16 @@ Core rules loaded every session (~1,100 tokens):
 | 📂 `behisecc-awesome-claude-skills` | [BehiSecc/awesome-claude-skills](https://github.com/BehiSecc/awesome-claude-skills) | Domain organization |
 | 📚 `alvinunreal-awesome-claude` | [alvinunreal/awesome-claude](https://github.com/alvinunreal/awesome-claude) | Broader Claude resources |
 | 🔍 `skill-seekers` | [yusufkaraaslan/Skill_Seekers](https://github.com/yusufkaraaslan/Skill_Seekers) | Auto-generate skills from docs/repos/PDFs |
+
+### 🤖 Autonomous Development (1 Marketplace)
+
+| Marketplace | GitHub | Key Features |
+|:------------|:-------|:-------------|
+| 🤖 `auto-claude` | [AndyMik90/Auto-Claude](https://github.com/AndyMik90/Auto-Claude) | Multi-agent autonomous coding, QA validation loops, git worktree isolation, Graphiti memory |
+
+**Setup:** Requires Python 3.12+, OAuth token from `/settings`, optional Graphiti embeddings (Gemini/Ollama/Sentence Transformers)
+**Usage:** `/auto-claude [description]` or direct CLI
+**Documentation:** [docs/AUTO-CLAUDE-GUIDE.md](./docs/AUTO-CLAUDE-GUIDE.md)
 
 ### 🧠 Specialized (1 Marketplace)
 
@@ -3010,9 +3043,10 @@ The toolkit uses git submodules for external repositories. Understanding this is
 │   └── marketplaces/
 │       ├── anthropic-agent-skills/     ← Submodule (read-only)
 │       ├── awesome-claude-skills/      ← Submodule (read-only)
+│       ├── auto-claude/                ← Submodule (read-only)
 │       ├── claude-code-plugins/        ← Submodule (read-only)
 │       ├── get-shit-done/              ← Submodule (read-only)
-│       └── ... (21 total)              ← All read-only
+│       └── ... (22 total)              ← All read-only
 ```
 
 #### 📋 Submodule Commands Reference
@@ -5102,8 +5136,9 @@ bash -c 'echo "test" >> ~/.claude/.session-log'
 |-----------|----------|
 | Simple question | Just ask directly |
 | Single-file fix | Direct prompt |
-| New feature | `/start-task` |
-| Multi-phase project | `/gsd:new-project` |
+| Well-defined feature (complexity 3-4) | `/auto-claude` |
+| New feature (needs planning) | `/start-task` |
+| Multi-phase project (complexity 5+) | `/gsd:new-project` |
 | Need specific expertise | `Skill(name)` |
 | Deep analysis needed | `Task(agent-name)` |
 | Stuck on decision | `/consider:first-principles` |
@@ -5168,7 +5203,40 @@ Multi-phase project management:
 └── 📁 phases/       # Phase details
 ```
 
-**✅ Best for:** Multi-session work, complex features, team coordination
+**✅ Best for:** Multi-session work, very complex features, team coordination
+
+### 🤖 Pattern 3.5: Auto-Claude for Autonomous Coding
+
+Autonomous multi-agent implementation:
+
+```
+/auto-claude Add user authentication with JWT tokens
+```
+
+**⚙️ How it works:**
+1. 📊 Analyzes codebase structure (30s)
+2. 📝 Generates implementation spec (1-2min)
+3. 🌿 Creates isolated git worktree
+4. 🤖 Multi-agent implementation (5-15min):
+   - Planner creates subtask plan
+   - Coder implements features
+   - QA validates acceptance criteria
+   - Fixer resolves issues in loop
+5. ✅ Returns completed code for review
+
+**📁 Creates:**
+```
+~/.auto-claude/
+├── 📊 baselines/           # Codebase analysis
+├── 📝 specs/               # Implementation specs
+└── 🔀 .worktrees/          # Isolated git worktrees
+```
+
+**✅ Best for:** Well-defined features (complexity 3-4), established codebases, repetitive tasks (CRUD, forms, API endpoints), autonomous implementation with review-at-end
+
+**❌ Not for:** Greenfield projects, exploratory work, simple tasks (use manual), very complex projects (use GSD)
+
+**See:** [docs/AUTO-CLAUDE-GUIDE.md](./docs/AUTO-CLAUDE-GUIDE.md) for complete setup and usage
 
 ### 🧠 Pattern 4: Decision Frameworks
 
@@ -5209,8 +5277,10 @@ Step 4️⃣: 🏷️ Domain Detection (Priority Order)
          5. 💼 Business → domains-business.md
          6. 🎨 Creative → domains-creative.md
 
-Step 5️⃣: 📊 Complexity Scoring
-         Score >= 3 → 📈 GSD
+Step 5️⃣: 📊 Complexity Scoring & Routing
+         Score >= 5 → 📈 GSD (multi-phase)
+         Score 3-4 (well-defined) → 🤖 Auto-Claude (autonomous)
+         Score 3-4 (exploratory) → 📝 EnterPlanMode
          Score 1-2 → 📝 EnterPlanMode
          Score <= 0 → ⚡ Direct execution
 
@@ -5238,13 +5308,15 @@ Step 7️⃣: 💾 Memory Save
 
 ### 📋 Routing Examples
 
-| Prompt | Score | Route |
-|:-------|:-----:|:------|
-| "Build an iOS app with SwiftUI" | 5 | 📈 GSD |
-| "Add user authentication to the API" | 4 | 📈 GSD |
-| "Create a REST endpoint for users" | 2 | 📝 Planning |
-| "Fix the typo in the header" | -2 | ⚡ Direct |
-| "What's new in React 19?" | 0 | ⚡ Direct (with research) |
+| Prompt | Score | Route | Why |
+|:-------|:-----:|:------|:----|
+| "Build complete e-commerce platform" | 6 | 📈 GSD | Multi-phase, many systems |
+| "Add user authentication with JWT" | 4 | 🤖 Auto-Claude | Well-defined, multiple files, established codebase |
+| "Refactor API to use async/await" | 4 | 🤖 Auto-Claude | Clear transformation, many files |
+| "Explore best state management approach" | 3 | 📝 Planning | Exploratory, needs research |
+| "Create a REST endpoint for users" | 2 | 📝 Planning | Medium complexity, single feature |
+| "Fix the typo in the header" | -2 | ⚡ Direct | Simple, single file |
+| "What's new in React 19?" | 0 | ⚡ Direct (research) | Info retrieval |
 
 ---
 
@@ -5370,13 +5442,19 @@ Implement JWT refresh token endpoint
 
 | Command | Purpose | Example |
 |:--------|:--------|:--------|
-| 🎯 `/start-task [desc]` | Universal router | `/start-task Build login API` |
-| 📈 `/gsd:new-project` | Start GSD project | `/gsd:new-project Auth system` |
-| 📊 `/gsd:progress` | Check status | `/gsd:progress` |
+| 🎯 `/start-task [desc]` | Universal router (manual) | `/start-task Build login API` |
+| 🤖 `/auto-claude [desc]` | Autonomous coding (complexity 3-4) | `/auto-claude Add JWT auth` |
+| 📈 `/gsd:new-project` | Start GSD project (complexity 5+) | `/gsd:new-project Auth system` |
+| 📊 `/gsd:progress` | Check GSD status | `/gsd:progress` |
 | 🗺️ `/gsd:plan-phase [n]` | Plan specific phase | `/gsd:plan-phase 2` |
 | ⚙️ `/gsd:execute-plan` | Execute current plan | `/gsd:execute-plan` |
 | 🔄 `/gsd:resume-work` | Resume with context | `/gsd:resume-work` |
 | ⏸️ `/gsd:pause-work` | Save state | `/gsd:pause-work` |
+
+**Workflow Selection:**
+- **Complexity 1-2:** Use `/start-task` for manual step-by-step implementation
+- **Complexity 3-4:** Use `/auto-claude` for autonomous implementation with QA validation
+- **Complexity 5+:** Use `/gsd:new-project` for multi-phase project management
 
 ### 🔍 Skills & Discovery
 
@@ -5885,7 +5963,8 @@ See [CHANGELOG.md](./CHANGELOG.md) for complete history.
 | 🎓 [Skills Catalog](./skills/MASTER_INDEX.md) | All 71 skills |
 | 🤖 [Agents Catalog](./agents/README.md) | All 36 agents |
 | 🔄 [Workflow Guide](./docs/WORKFLOW-GUIDE.md) | Workflow patterns |
-| 🏪 [Marketplace Guide](./docs/MARKETPLACE-GUIDE.md) | All 21 marketplaces |
+| 🏪 [Marketplace Guide](./docs/MARKETPLACE-GUIDE.md) | All 22 marketplaces |
+| 🤖 [Auto-Claude Guide](./docs/AUTO-CLAUDE-GUIDE.md) | Autonomous coding setup |
 | 📈 [GSD Tutorial](./docs/GSD-TUTORIAL.md) | Project management |
 
 ### 🌐 Community Resources
@@ -7963,7 +8042,7 @@ $$$$$$\   $$\ $$$$$$$\      $$$$$$$\ $$ | $$$$$$\  $$\   $$\  $$$$$$$ | $$$$$$\ 
      \______/                                                                              
 ```
 
-### 🚀 **71 Skills** • 🤖 **37 Agents** • 🏪 **21 Marketplaces** • ⚡ **Complete Automation**
+### 🚀 **71 Skills** • 🤖 **37 Agents** • 🏪 **22 Marketplaces** • ⚡ **Complete Automation**
 
 **Transform Claude Code from a capable assistant into an enterprise-grade development environment.**
 
