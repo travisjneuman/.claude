@@ -25,7 +25,7 @@
 [![Claude Code](https://img.shields.io/badge/Claude_Code-6366f1?style=for-the-badge&logo=anthropic&logoColor=white)](https://claude.com/claude-code)
 [![Skills](https://img.shields.io/badge/Skills-71+-10b981?style=for-the-badge&logo=sparkles&logoColor=white)](./skills/MASTER_INDEX.md)
 [![Agents](https://img.shields.io/badge/Agents-36+-f59e0b?style=for-the-badge&logo=robot&logoColor=white)](./agents/README.md)
-[![Marketplaces](https://img.shields.io/badge/Marketplaces-21-3b82f6?style=for-the-badge&logo=store&logoColor=white)](./docs/MARKETPLACE-GUIDE.md)
+[![Marketplaces](https://img.shields.io/badge/Marketplaces-22-3b82f6?style=for-the-badge&logo=store&logoColor=white)](./docs/MARKETPLACE-GUIDE.md)
 [![Marketplace Skills](https://img.shields.io/badge/Marketplace_Skills-1,496+-ec4899?style=for-the-badge&logo=package&logoColor=white)](./plugins/marketplaces/)
 [![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge&logo=opensourceinitiative&logoColor=white)](./LICENSE)
 
@@ -100,7 +100,7 @@ The **Ultimate Claude Code Toolkit** transforms [Claude Code](https://docs.anthr
 |:---------:|:-----:|:------------|
 | 🎓 **Skills** | **71** | Domain expertise modules covering iOS, Android, React, Vue, Svelte, DevOps, AI/ML, scientific computing, business strategy, and more |
 | 🤖 **Agents** | **37** | Specialized AI subagents for deep expertise in code review, security auditing, architecture analysis, platform development, and creative work |
-| 🏪 **Marketplaces** | **21** | External repositories containing **1,496+** additional skills from the community |
+| 🏪 **Marketplaces** | **22** | External repositories containing **1,496+** additional skills from the community |
 | ⌨️ **Commands** | **30+** | Custom slash commands for task routing, skill discovery, decision frameworks, and workflow automation |
 | 📋 **Rules** | **17+** | Contextual guidelines for different tech stacks ([React](https://react.dev), [Python](https://python.org), [Go](https://go.dev), [Rust](https://rust-lang.org)), checklists, and automation |
 | 🪝 **Hooks** | **5** | Git hooks (pre-commit, commit-msg, pre-push) and Claude Code lifecycle hooks (PostToolUse for Prettier formatting) |
@@ -213,6 +213,26 @@ System:
 │   ├── Phase 3: Frontend Integration
 │   └── Phase 4: Testing & Documentation
 └── 🔄 Tracks progress across sessions
+```
+
+### 🤖 Autonomous Coding
+
+```
+You say: "/auto-claude Add user authentication with JWT tokens"
+System:
+├── 📊 Analyzes codebase structure
+├── 📝 Generates implementation specification
+├── 🌿 Creates isolated git worktree (safe development)
+├── 🤖 Autonomous multi-agent implementation:
+│   ├── Planner agent creates subtask plan
+│   ├── Coder agent implements features
+│   ├── QA agent validates acceptance criteria
+│   └── Fixer agent resolves issues in loop
+├── 🧠 Uses Graphiti memory for context retention
+└── ✅ Returns completed code for review
+
+Configuration: ~/.auto-claude/.env
+See: docs/AUTO-CLAUDE-GUIDE.md
 ```
 
 ### 🔒 Automatic Safety Enforcement

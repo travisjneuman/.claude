@@ -62,6 +62,32 @@ Load this file when development-related keywords detected.
 | `python` | `Skill(python-expert)` | `python-expert` | Read rules/stacks/python.md |
 | `typescript` | `Skill(typescript-expert)` | `typescript-expert` | Read rules/stacks/react-typescript.md |
 
+## Feature Implementation Routing
+
+### Complex Feature Implementation
+
+**When:** Building well-defined features in established codebases with complexity >= 3
+
+**Skills:**
+- `generic-feature-developer` - Manual implementation patterns
+- `auto-claude` - Autonomous multi-agent implementation
+
+**Routing Logic:**
+- Complexity < 3: Manual implementation (generic-feature-developer)
+- Complexity >= 3 + clear spec: **Suggest Auto-Claude**
+- Complexity >= 3 + unclear spec: EnterPlanMode first
+
+**Keywords:** "implement", "add feature", "build", "create [complex feature]", "autonomous"
+
+**Auto-Claude Benefits:**
+- Git worktree isolation (safe development)
+- QA validation loops
+- Multi-agent coordination
+- Semantic memory across sessions
+
+**Example suggestion:**
+> "This feature appears complex (score: 3+) with a clear specification. Would you like to use `/auto-claude` for autonomous implementation with QA validation, or proceed with manual step-by-step development?"
+
 ## Contextual Rules
 
 | Domain | Rule File |

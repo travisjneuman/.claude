@@ -1,6 +1,6 @@
 # Marketplace Guide
 
-Complete reference for the 21 plugin marketplaces and how to use them.
+Complete reference for the 22 plugin marketplaces and how to use them.
 
 **Last Updated:** January 2026 (v2.0)
 
@@ -17,7 +17,7 @@ Complete reference for the 21 plugin marketplaces and how to use them.
 
 ---
 
-## Installed Marketplaces (21)
+## Installed Marketplaces (22)
 
 ### Official (Anthropic)
 
@@ -70,6 +70,12 @@ Complete reference for the 21 plugin marketplaces and how to use them.
 | `claude-mem` | Persistent memory, semantic search | Session continuity |
 | `skill-seekers` | Auto-generate skills from docs/repos/PDFs | Skill creation tools |
 
+### Autonomous Development
+
+| Marketplace | Contents | Key Features |
+|-------------|----------|--------------|
+| `auto-claude` | Autonomous coding framework | Multi-agent development, QA validation, git worktrees, semantic memory |
+
 ---
 
 ## Key Commands by Marketplace
@@ -107,6 +113,17 @@ Complete reference for the 21 plugin marketplaces and how to use them.
 | `/obra:write-plan` | Create detailed plans |
 | `/obra:execute-plan` | Execute a plan step-by-step |
 
+### auto-claude
+
+| Command | Purpose |
+|---------|---------|
+| `/auto-claude [description]` | Autonomous feature implementation with QA validation |
+
+**Backend CLI:**
+```bash
+python ~/.claude/plugins/marketplaces/auto-claude/apps/backend/run.py
+```
+
 ---
 
 ## Taches Skills (Load on Demand)
@@ -133,6 +150,7 @@ Complete reference for the 21 plugin marketplaces and how to use them.
 | **Git/Testing/Review** | `mhattingpete-skills` |
 | **Project management** | `get-shit-done` |
 | **Brainstorming/Planning** | `obra-superpowers` |
+| **Autonomous coding** | `auto-claude` |
 
 ---
 
@@ -203,4 +221,4 @@ All marketplaces are configured with `no_push` - read-only access.
 
 ---
 
-*21 marketplaces, 1,496+ skills, discovered proactively when domain expertise is needed.*
+*22 marketplaces, 1,496+ skills, discovered proactively when domain expertise is needed.*
