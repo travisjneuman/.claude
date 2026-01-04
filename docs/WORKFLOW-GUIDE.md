@@ -80,6 +80,7 @@ These can be used **anytime**, regardless of workflow stage or GSD phase:
 | **Research** | Explore codebase, find patterns | `Task` with Explore agent |
 | **Decision Frameworks** | Complex choices, trade-offs | `/consider:first-principles` |
 | **TodoWrite** | Track multi-step progress | Use tool directly |
+| **Auto-Claude** | Autonomous feature implementation | `/auto-claude [description]` |
 
 **Philosophy:** GSD provides *structure*, not *gates*. Use every tool that helps.
 
@@ -138,6 +139,114 @@ These can be used **anytime**, regardless of workflow stage or GSD phase:
 **Key principle:** If a tool, skill, agent, or research would help accomplish the current phase's goals, **use it immediately**. Don't wait for a specific GSD command.
 
 See [GSD-TUTORIAL.md](./GSD-TUTORIAL.md) for complete GSD documentation.
+
+---
+
+## Three Implementation Approaches
+
+When `/start-task` detects a development task, you have three workflow options:
+
+### 1. Manual Implementation (Traditional)
+
+**Process:**
+```
+/start-task Add user authentication
+→ EnterPlanMode (if complex)
+→ You + Claude work step-by-step
+→ Review each change before applying
+→ Manual testing and verification
+```
+
+**Best For:**
+- Learning new concepts
+- Exploratory work
+- Unclear requirements
+- Maximum control preferred
+
+**Characteristics:**
+- Step-by-step with your input
+- Review after each change
+- Main branch (no isolation)
+- Manual QA
+
+---
+
+### 2. Autonomous Implementation (Auto-Claude)
+
+**Process:**
+```
+/auto-claude Add user authentication
+→ Analyzes codebase automatically
+→ Generates implementation spec
+→ Creates isolated git worktree
+→ Multi-agent autonomous implementation
+→ QA validation loops
+→ Returns completed code for review
+```
+
+**Best For:**
+- Well-defined features (complexity 3-4)
+- Established codebases with clear patterns
+- Repetitive tasks (CRUD, forms, API endpoints)
+- When you prefer review-at-end vs step-by-step
+
+**Characteristics:**
+- Autonomous multi-agent execution
+- Review at end (full worktree)
+- Git worktree isolation
+- Automatic QA validation
+
+**How to Invoke:**
+- Direct: `/auto-claude [description]`
+- Via router: `/start-task` auto-suggests when complexity >= 3
+
+**See:** [AUTO-CLAUDE-GUIDE.md](./AUTO-CLAUDE-GUIDE.md) for complete documentation
+
+---
+
+### 3. Multi-Phase Projects (GSD)
+
+**Process:**
+```
+/start-task Build complete e-commerce platform
+→ Complexity score: 5+ (high)
+→ Routes to GSD automatically
+→ Creates .planning/STATE.md
+→ Breaks into phases
+→ Tracks progress across sessions
+```
+
+**Best For:**
+- Large projects (complexity 5+)
+- Multi-phase work
+- Long-term development
+- Needs project management
+
+**Characteristics:**
+- Phased approach with milestones
+- Persistent state (.planning/)
+- Multi-session support
+- Manual or Auto-Claude per phase
+
+**See:** [GSD-TUTORIAL.md](./GSD-TUTORIAL.md) for complete documentation
+
+---
+
+### Workflow Comparison
+
+| Aspect | Manual | Auto-Claude | GSD |
+|--------|--------|-------------|-----|
+| **Complexity** | 1-2 | 3-4 | 5+ |
+| **Control** | Maximum | Medium | Structured |
+| **Speed** | Slower | Faster | Phased |
+| **Review** | Each step | End | Per phase |
+| **Isolation** | Main branch | Git worktree | .planning/ |
+| **Best for** | Learning, exploration | Defined features | Large projects |
+
+**Combining workflows:**
+- Use Manual for research → Auto-Claude for implementation
+- Use GSD phases → Auto-Claude for individual features within phases
+- Switch between approaches as needs change
 
 ---
 

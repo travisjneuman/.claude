@@ -39,6 +39,41 @@ Four new templates for seamless state persistence across context windows:
 - **`CLAUDE4-BEST-PRACTICES-ANALYSIS.md`** - Comprehensive gap analysis vs Anthropic docs
 - **`IMPLEMENTATION-SUMMARY.md`** - Complete implementation guide and usage
 
+#### Autonomous Coding Framework (Auto-Claude)
+- **Auto-Claude marketplace integration** - 22nd marketplace added
+  - Read-only git submodule at `plugins/marketplaces/auto-claude`
+  - Autonomous multi-agent coding with Claude Agent SDK
+  - Git worktree isolation for safe feature development
+  - QA validation loops with iterative fixing
+  - Semantic memory via Graphiti (LadybugDB embedded graph DB)
+  - No Electron frontend required - fully CLI-based Python backend
+- **`skills/auto-claude/SKILL.md`** - Wrapper skill for Auto-Claude invocation
+- **`commands/auto-claude.md`** - Slash command for autonomous implementation
+- **`docs/AUTO-CLAUDE-GUIDE.md`** (550+ lines) - Comprehensive setup and usage guide
+  - Configuration with multiple embedding providers (Gemini, Ollama, Sentence Transformers)
+  - Workflow examples and troubleshooting
+  - Memory system documentation
+  - Advanced usage patterns
+- **Router integration** - Auto-suggests Auto-Claude for complex features
+  - `commands/start-task.md` - Auto-detection when complexity >= 3 + well-defined spec
+  - `commands/router/domains-development.md` - Complex Feature Implementation routing
+  - Keywords: "autonomous", "auto", "implement feature", "build [complex]"
+- **`.auto-claude/.env` configuration** - Pre-configured with free embedding options
+- **Dependencies:** Python 3.12+ with claude-agent-sdk>=0.1.16, graphiti-core, real_ladybug
+
+**What it provides:**
+- Codebase analysis and spec generation
+- Isolated git worktrees (`.worktrees/`) for safe development
+- Multi-agent implementation (Planner → Coder → QA Reviewer → QA Fixer)
+- Semantic memory retention across sessions
+- Output location: `~/.auto-claude/` (gitignored)
+
+**Integration approach:**
+- Follows established 21-marketplace submodule pattern
+- Natural activation via `/start-task` router
+- User choice between Manual/Autonomous/GSD workflows
+- Compatible with all existing toolkit features
+
 ### Changed
 
 #### CLAUDE.md - Core Configuration Enhanced

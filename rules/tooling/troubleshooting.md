@@ -345,6 +345,184 @@ npx prisma db pull
 
 ---
 
+## Auto-Claude Issues
+
+### Issue: OAuth Token Not Set
+
+**Symptoms:**
+- `CLAUDE_CODE_OAUTH_TOKEN not found`
+- Auto-Claude fails to start
+
+**Fixes:**
+
+```bash
+# Get OAuth token from Claude Code
+# Run: /settings
+# Copy the OAuth token
+
+# Edit .env file
+nano ~/.auto-claude/.env
+
+# Add token
+CLAUDE_CODE_OAUTH_TOKEN=your-token-here
+```
+
+---
+
+### Issue: Python Dependencies Missing
+
+**Symptoms:**
+- `ModuleNotFoundError: No module named 'claude'`
+- Import errors when running Auto-Claude
+
+**Fixes:**
+
+```bash
+cd ~/.claude/plugins/marketplaces/auto-claude/apps/backend
+pip install -r requirements.txt
+
+# Verify installation
+python -c "import claude; print('✓ claude-agent-sdk installed')"
+```
+
+---
+
+### Issue: Git Worktree Already Exists
+
+**Symptoms:**
+- `fatal: 'worktree-name' already exists`
+- Cannot create new worktree
+
+**Fixes:**
+
+```bash
+# List all worktrees
+git worktree list
+
+# Remove specific worktree
+git worktree remove worktree-name --force
+
+# Remove all Auto-Claude worktrees
+git worktree list | grep auto-claude | awk '{print $1}' | xargs -I {} git worktree remove {} --force
+```
+
+---
+
+### Issue: Spec Generation Stuck or Slow
+
+**Symptoms:**
+- Spec generation taking too long
+- Process appears hung
+
+**Fixes:**
+
+```bash
+# 1. Force complexity level for faster spec
+cd ~/.claude/plugins/marketplaces/auto-claude/apps/backend
+python spec_runner.py --task "your task" --complexity simple
+
+# 2. Disable memory for faster generation
+# Edit ~/.auto-claude/.env
+GRAPHITI_ENABLED=false
+
+# 3. Check Python process isn't stuck
+ps aux | grep python
+# Kill if needed: kill -9 <PID>
+```
+
+---
+
+### Issue: QA Validation Failing Repeatedly
+
+**Symptoms:**
+- QA agent rejects implementation multiple times
+- Fixer agent can't resolve issues
+
+**Fixes:**
+
+1. **Review the spec:**
+   ```bash
+   cat ~/.auto-claude/specs/XXX-feature/spec.md
+   # Check if acceptance criteria are clear
+   ```
+
+2. **Provide more specific requirements:**
+   - Instead of: "Add user authentication"
+   - Try: "Add JWT-based user authentication with login, registration, and session expiry after 7 days"
+
+3. **Check QA report:**
+   ```bash
+   cat ~/.auto-claude/specs/XXX-feature/qa_report.md
+   # See what's failing
+   ```
+
+4. **Fall back to manual:**
+   - If Auto-Claude can't satisfy requirements, use `/start-task` instead
+
+---
+
+### Issue: Worktree Merge Conflicts
+
+**Symptoms:**
+- Conflicts when merging Auto-Claude branch
+- Git merge errors
+
+**Fixes:**
+
+```bash
+# Review changes first
+cd .worktrees/feature-name
+git diff master
+
+# Merge with conflict resolution
+git checkout master
+git merge auto-claude/feature-name
+# Resolve conflicts manually
+git add .
+git commit
+
+# Or abort and review
+git merge --abort
+```
+
+---
+
+### Issue: Memory/Embedding Errors
+
+**Symptoms:**
+- Graphiti errors
+- Embedding provider failures
+
+**Fixes:**
+
+**For Gemini:**
+```bash
+# Check API key is valid
+# Edit ~/.auto-claude/.env
+GOOGLE_API_KEY=your-valid-key
+```
+
+**For Ollama:**
+```bash
+# Ensure Ollama is running
+ollama serve
+
+# Pull embedding model
+ollama pull nomic-embed-text
+
+# Configure in ~/.auto-claude/.env
+GRAPHITI_EMBEDDER_PROVIDER=ollama
+GRAPHITI_EMBEDDER_MODEL=nomic-embed-text
+```
+
+**Disable memory entirely:**
+```bash
+# Edit ~/.auto-claude/.env
+GRAPHITI_ENABLED=false
+```
+
+---
+
 ## Common Command Quick Reference
 
 ```bash
@@ -384,6 +562,7 @@ Skill(tech-debt-analyzer)
 
 ## Related Documentation
 
+- `~/.claude/docs/AUTO-CLAUDE-GUIDE.md` - Auto-Claude setup and troubleshooting
 - `~/.claude/rules/tooling/git-hooks-setup.md` - Hook setup
 - `~/.claude/CLAUDE.md` - Core workflow
 - `~/.claude/skills/README.md` - Skills overview
