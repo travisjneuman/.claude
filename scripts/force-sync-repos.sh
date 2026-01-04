@@ -182,7 +182,8 @@ discover_repos() {
             fi
 
             all_repos+=("$repo_path")
-        done < <(find "$expanded_dir" -maxdepth "$SCAN_DEPTH" -name ".git" -type d -print0 2>/dev/null)
+        # Find both .git directories AND .git files (submodule pointers)
+        done < <(find "$expanded_dir" -maxdepth "$SCAN_DEPTH" -name ".git" \( -type d -o -type f \) -print0 2>/dev/null)
     done
 
     # Sort and deduplicate
