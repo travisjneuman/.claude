@@ -21,11 +21,44 @@ Load this file for complexity scoring and route selection.
 
 | Score | Route | Action |
 |-------|-------|--------|
-| >= 3 | **GSD Route** | Invoke `/gsd:new-project` |
+| >= 5 | **GSD Route** | Invoke `/gsd:new-project` |
+| 3-4 | **Auto-Claude Route** (if well-defined) | Suggest `/auto-claude` |
+| 3-4 | **Planning Route** (if exploratory) | Use `EnterPlanMode` |
 | 1-2 | **Planning Route** | Use `EnterPlanMode` |
 | <= 0 | **Direct Route** | Execute immediately |
 
-## GSD Route (Score >= 3)
+**Note on 3-4 complexity:**
+- Well-defined feature + established codebase → **Suggest Auto-Claude**
+- Exploratory/unclear requirements → **Use EnterPlanMode**
+- User choice always honored
+
+## Auto-Claude Route (Score 3-4, Well-Defined)
+
+Autonomous multi-agent implementation:
+1. Suggest `/auto-claude [description]` to user
+2. If user accepts:
+   - Auto-Claude analyzes codebase
+   - Generates implementation spec
+   - Creates isolated git worktree
+   - Autonomous implementation with QA loops
+3. If user declines, fall back to EnterPlanMode
+
+**When to suggest:**
+- Clear, well-defined requirements
+- Established codebase with patterns
+- Multiple files/components involved
+- User prefers autonomous vs step-by-step
+
+**When NOT to suggest:**
+- Greenfield projects
+- Exploratory/research tasks
+- User explicitly requests manual control
+
+See `docs/AUTO-CLAUDE-GUIDE.md` for full documentation.
+
+---
+
+## GSD Route (Score >= 5)
 
 Multi-phase project management:
 1. Invoke `/gsd:new-project` with task description
