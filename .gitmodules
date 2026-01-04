@@ -84,3 +84,7 @@
 	path = plugins/marketplaces/voltagent-awesome-claude-skills
 	url = https://github.com/VoltAgent/awesome-claude-skills.git
 	ignore = all
+[submodule "plugins/marketplaces/auto-claude"]
+	path = plugins/marketplaces/auto-claude
+	url = https://github.com/AndyMik90/Auto-Claude.git
+	ignore = all
