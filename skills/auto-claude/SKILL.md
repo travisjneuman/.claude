@@ -11,16 +11,24 @@ Autonomous multi-agent system for complex feature implementation with QA validat
 ## When to Use
 
 ✅ **Use Auto-Claude for:**
-- Complex features with multiple files/components
-- Well-defined requirements in established codebases
-- Features requiring iterative refinement
-- When you want autonomous implementation with QA loops
+- **Complexity 3-4** - Well-defined features, multiple files
+- Established codebases with clear patterns
+- Repetitive tasks (CRUD, forms, API endpoints, auth flows)
+- When you prefer review-at-end vs step-by-step
+- Features requiring iterative refinement with QA validation
 
 ❌ **Don't use Auto-Claude for:**
-- Greenfield projects (no existing codebase)
-- Exploratory/research tasks
+- **Complexity 1-2** - Use manual `/start-task` instead
+- **Complexity 5+** - Use `/gsd:new-project` instead
+- Greenfield projects (no existing codebase patterns)
+- Exploratory/research tasks (unclear requirements)
 - Simple typo fixes or config changes
-- Tasks requiring human decision-making
+- Tasks requiring human decision-making during implementation
+
+**Quick Guide:**
+- Complexity 1-2 → Manual implementation
+- Complexity 3-4 → **Auto-Claude** (autonomous)
+- Complexity 5+ → GSD (multi-phase)
 
 ## Core Capabilities
 
@@ -90,8 +98,42 @@ Autonomous multi-agent system for complex feature implementation with QA validat
 - Uses tokens for multi-agent iterations
 - Manual merge required after completion
 
+## Examples
+
+**Good use cases:**
+- "Add user authentication with JWT tokens and session management"
+- "Implement dark mode toggle with localStorage persistence"
+- "Refactor API layer to use async/await instead of callbacks"
+- "Add pagination to user list with 20 items per page"
+- "Create export-to-CSV functionality for reports"
+
+**Poor use cases:**
+- "Fix typo in README" (too simple)
+- "Explore best approach for state management" (exploratory)
+- "Build entire e-commerce platform" (too large, use GSD)
+- "Make the app better" (too vague)
+
+## Typical Timeline
+
+- **Analysis:** 30 seconds
+- **Spec Generation:** 1-2 minutes
+- **Implementation:** 5-15 minutes (depends on complexity)
+- **QA Validation:** 2-5 minutes
+- **Your Review:** 5-10 minutes
+
+**Total:** 15-30 minutes for most features
+
 ## Related
 
 - `generic-feature-developer` - Manual implementation patterns
 - `debug-systematic` - Systematic debugging
 - `test-specialist` - Testing strategies
+
+## Documentation
+
+See `~/.claude/docs/AUTO-CLAUDE-GUIDE.md` for:
+- Complete setup instructions
+- Real-world examples with detailed walkthroughs
+- Troubleshooting guide
+- Performance tips
+- Comparison with other workflows
