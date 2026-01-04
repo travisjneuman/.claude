@@ -126,20 +126,31 @@ The router calculates complexity to determine workflow:
 
 | Factor | Points |
 |--------|--------|
-| Multiple components/files | +1 |
-| Unknown codebase area | +1 |
-| Architecture decisions | +1 |
-| External integrations | +1 |
-| Multi-phase work | +1 |
-| Clear, simple task | -1 |
+| Multiple components/systems | +3 |
+| Multiple steps implied | +2 |
+| New feature/system | +3 |
+| Architecture/design work | +2 |
+| Cross-cutting concerns | +2 |
+| Research required | +1 |
+| Scientific/specialized | +2 |
+| Bug/issue (singular) | -1 |
+| Single file mentioned | -2 |
+| Quick/small qualifier | -2 |
 
 ### Route Selection
 
 | Score | Workflow |
 |-------|----------|
-| >= 3 | GSD (multi-phase project) |
-| 1-2 | EnterPlanMode (planning first) |
-| <= 0 | Direct execution |
+| >= 5 | **GSD** (multi-phase project) |
+| 3-4 (well-defined) | **Auto-Claude** (autonomous implementation) |
+| 3-4 (exploratory) | **EnterPlanMode** (planning first) |
+| 1-2 | **EnterPlanMode** (planning first) |
+| <= 0 | **Direct execution** |
+
+**Note on 3-4 complexity:**
+- Well-defined feature + established codebase → Suggest **Auto-Claude**
+- Exploratory/unclear requirements → Use **EnterPlanMode**
+- User choice always honored
 
 ---
 
@@ -189,12 +200,23 @@ Workflow: Direct execution
 Resources: None needed (simple fix)
 ```
 
-### Example 2: New Feature
+### Example 2: New Feature (Auto-Claude)
 ```
-User: Add user notifications with email and push
+User: Add user authentication with JWT tokens
+
+Detected: Development/backend
+Complexity: 4 (multiple files, clear spec, established codebase)
+Workflow: Auto-Claude (autonomous implementation)
+Resources: /auto-claude suggestion, api-design skill
+Action: Suggest autonomous implementation with QA validation
+```
+
+### Example 2b: New Feature (GSD)
+```
+User: Add complete notification system with email, push, and SMS
 
 Detected: Development/backend + development/mobile
-Complexity: 3 (multiple components, integration)
+Complexity: 6 (multiple systems, integration, multi-phase)
 Workflow: GSD
 Resources: api-design skill, notification patterns
 ```
@@ -280,6 +302,8 @@ Skill(ios-development)
 
 ## Related Documentation
 
+- [AUTO-CLAUDE-GUIDE.md](./AUTO-CLAUDE-GUIDE.md) - Auto-Claude setup and usage
+- [WORKFLOW-GUIDE.md](./WORKFLOW-GUIDE.md) - Workflow patterns (Manual, Auto-Claude, GSD)
 - `CLAUDE.md` - Workflow overview
 - `README.md` - Full toolkit capabilities
 - `skills/README.md` - Available skills
