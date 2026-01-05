@@ -48,6 +48,7 @@
 - [🌐 Platform Compatibility](#-platform-compatibility)
 - [⚡ Quick Start Guide](#-quick-start-guide)
 - [📦 Installation](#-installation)
+- [🔄 Multi-Machine Setup & Synchronization](#-multi-machine-setup--synchronization)
 
 ### 🏗️ Architecture
 - [🏛️ Architecture Overview](#️-architecture-overview)
@@ -484,6 +485,301 @@ Git hooks run in Git Bash. Ensure:
 #### 🍎 macOS / 🐧 Linux
 
 Standard installation works out of the box.
+
+---
+
+## 🔄 Multi-Machine Setup & Synchronization
+
+This toolkit is designed to be **cloned and synced across any number of development machines**. This section explains the architecture and setup process for engineers working across multiple systems.
+
+### 🏗️ Two-Layer Architecture
+
+The plugin system has **two distinct layers** that work together:
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                        LAYER 1: GIT SUBMODULES                               │
+│                     (Your repo's external dependencies)                      │
+│                                                                              │
+│  ~/.claude/plugins/marketplaces/                                            │
+│  ├── anthropic-agent-skills/     ← submodule (ignore=all, no_push)          │
+│  ├── claude-code-plugins/        ← submodule (ignore=all, no_push)          │
+│  ├── taches-cc-resources/        ← submodule (ignore=all, no_push)          │
+│  ├── obra-superpowers/           ← submodule (ignore=all, no_push)          │
+│  └── ... (22 total external repos)                                          │
+│                                                                              │
+│  • Updated via: git submodule update --remote --merge                       │
+│  • Changes NOT tracked in parent repo (ignore=all)                          │
+│  • Push BLOCKED to upstream (no_push configured)                            │
+└─────────────────────────────────────────────────────────────────────────────┘
+                                    │
+                                    ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                     LAYER 2: CLAUDE CODE PLUGIN SYSTEM                       │
+│                    (Claude's internal plugin registry)                       │
+│                                                                              │
+│  ~/.claude/plugins/                                                         │
+│  ├── known_marketplaces.json     ← Registered marketplaces                  │
+│  ├── installed_plugins.json      ← Installed plugins                        │
+│  └── cache/                      ← Plugin file cache                        │
+│                                                                              │
+│  • Managed via: claude plugin marketplace add/install                       │
+│  • Points TO the submodule directories                                      │
+│  • Must be configured on each new machine                                   │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+### 🆕 Setting Up on a New Machine
+
+When you clone this repo to a new development machine, follow these steps:
+
+```bash
+# ═══════════════════════════════════════════════════════════════════════════
+# STEP 1: Clone the repository
+# ═══════════════════════════════════════════════════════════════════════════
+git clone https://github.com/travisjneuman/.claude.git ~/.claude
+cd ~/.claude
+
+# ═══════════════════════════════════════════════════════════════════════════
+# STEP 2: Initialize all submodules (22 external repos, ~200MB)
+# ═══════════════════════════════════════════════════════════════════════════
+git submodule update --init --recursive
+
+# ═══════════════════════════════════════════════════════════════════════════
+# STEP 3: Configure no_push protection on all external repos
+# ═══════════════════════════════════════════════════════════════════════════
+# This prevents accidental pushes to repositories you don't own
+bash scripts/update-external-repos.sh
+
+# ═══════════════════════════════════════════════════════════════════════════
+# STEP 4: Register marketplaces with Claude Code's plugin system
+# ═══════════════════════════════════════════════════════════════════════════
+# These commands tell Claude Code where to find the plugins
+
+# Required marketplaces (used by settings.json enabledPlugins)
+claude plugin marketplace add anthropics/claude-code
+claude plugin marketplace add ~/.claude/plugins/marketplaces/anthropic-agent-skills
+claude plugin marketplace add ~/.claude/plugins/marketplaces/taches-cc-resources
+claude plugin marketplace add ~/.claude/plugins/marketplaces/obra-superpowers
+
+# ═══════════════════════════════════════════════════════════════════════════
+# STEP 5: Install enabled plugins
+# ═══════════════════════════════════════════════════════════════════════════
+# Install plugins that are enabled in settings.json
+
+# From claude-code-plugins (official Anthropic)
+claude plugin install agent-sdk-dev@claude-code-plugins
+claude plugin install pr-review-toolkit@claude-code-plugins
+claude plugin install commit-commands@claude-code-plugins
+claude plugin install feature-dev@claude-code-plugins
+claude plugin install security-guidance@claude-code-plugins
+claude plugin install code-review@claude-code-plugins
+claude plugin install frontend-design@claude-code-plugins
+claude plugin install claude-opus-4-5-migration@claude-code-plugins
+claude plugin install plugin-dev@claude-code-plugins
+claude plugin install ralph-wiggum@claude-code-plugins
+
+# From anthropic-agent-skills
+claude plugin install document-skills@anthropic-agent-skills
+claude plugin install example-skills@anthropic-agent-skills
+
+# From taches-cc-resources
+claude plugin install taches-cc-resources@taches-cc-resources
+
+# From superpowers-marketplace
+claude plugin install superpowers@superpowers-marketplace
+
+# ═══════════════════════════════════════════════════════════════════════════
+# STEP 6: Restore no_push (Claude may have overwritten during marketplace add)
+# ═══════════════════════════════════════════════════════════════════════════
+bash scripts/update-external-repos.sh
+
+# ═══════════════════════════════════════════════════════════════════════════
+# STEP 7: Verify setup
+# ═══════════════════════════════════════════════════════════════════════════
+claude doctor
+```
+
+### 📜 Quick Setup Script
+
+For convenience, you can create a setup script for new machines. Save this as `scripts/setup-new-machine.sh`:
+
+```bash
+#!/bin/bash
+# Setup script for new machines
+# Run from ~/.claude directory
+
+set -e
+echo "=== Setting up Claude Code toolkit on new machine ==="
+
+# Step 1: Submodules
+echo "Initializing submodules..."
+git submodule update --init --recursive
+
+# Step 2: No-push protection
+echo "Configuring no_push protection..."
+for dir in plugins/marketplaces/*/; do
+    (cd "$dir" && git remote set-url --push origin no_push 2>/dev/null) || true
+done
+
+# Step 3: Register marketplaces
+echo "Registering marketplaces with Claude Code..."
+claude plugin marketplace add anthropics/claude-code 2>/dev/null || true
+claude plugin marketplace add ~/.claude/plugins/marketplaces/anthropic-agent-skills 2>/dev/null || true
+claude plugin marketplace add ~/.claude/plugins/marketplaces/taches-cc-resources 2>/dev/null || true
+claude plugin marketplace add ~/.claude/plugins/marketplaces/obra-superpowers 2>/dev/null || true
+
+# Step 4: Install plugins
+echo "Installing enabled plugins..."
+claude plugin install agent-sdk-dev@claude-code-plugins 2>/dev/null || true
+claude plugin install pr-review-toolkit@claude-code-plugins 2>/dev/null || true
+claude plugin install commit-commands@claude-code-plugins 2>/dev/null || true
+claude plugin install feature-dev@claude-code-plugins 2>/dev/null || true
+claude plugin install security-guidance@claude-code-plugins 2>/dev/null || true
+claude plugin install code-review@claude-code-plugins 2>/dev/null || true
+claude plugin install frontend-design@claude-code-plugins 2>/dev/null || true
+claude plugin install claude-opus-4-5-migration@claude-code-plugins 2>/dev/null || true
+claude plugin install plugin-dev@claude-code-plugins 2>/dev/null || true
+claude plugin install ralph-wiggum@claude-code-plugins 2>/dev/null || true
+claude plugin install document-skills@anthropic-agent-skills 2>/dev/null || true
+claude plugin install example-skills@anthropic-agent-skills 2>/dev/null || true
+claude plugin install taches-cc-resources@taches-cc-resources 2>/dev/null || true
+claude plugin install superpowers@superpowers-marketplace 2>/dev/null || true
+
+# Step 5: Re-apply no_push (Claude overwrites during marketplace add)
+echo "Re-applying no_push protection..."
+bash scripts/update-external-repos.sh
+
+echo "=== Setup complete! Run 'claude doctor' to verify ==="
+```
+
+### 🔒 Security: The no_push Protection
+
+**Critical:** All 22 external repositories are configured with `no_push` to prevent accidental pushes to upstream repos you don't own.
+
+```bash
+# Check no_push configuration on any repo
+cd ~/.claude/plugins/marketplaces/claude-code-plugins
+git remote -v
+
+# Expected output:
+# origin  https://github.com/anthropics/claude-code.git (fetch)
+# origin  no_push (push)
+
+# If push URL is NOT "no_push", fix it:
+git remote set-url --push origin no_push
+```
+
+**What this protects against:**
+- ❌ Accidentally pushing local changes to Anthropic's repos
+- ❌ Pushing to community repos you don't maintain
+- ❌ Git credential issues causing unexpected pushes
+
+**The only repo you should ever push to:** Your own `~/.claude` repo (e.g., `travisjneuman/.claude`)
+
+### 🔄 Updating External Repos
+
+To pull latest changes from all external marketplace repos:
+
+```bash
+# Use the convenience script (recommended)
+bash ~/.claude/scripts/update-external-repos.sh
+
+# This script:
+# 1. Updates all submodules from their remotes
+# 2. Verifies/restores no_push on each repo
+# 3. Shows status of each update
+```
+
+**Manual update (if needed):**
+
+```bash
+cd ~/.claude
+git submodule update --remote --merge
+```
+
+### ⚠️ Known Quirk: Claude Code Marketplace Updates
+
+When Claude Code updates a GitHub-sourced marketplace (like `claude-code-plugins`), it may **re-clone** the repo, overwriting your submodule and removing `no_push`.
+
+**After running `claude plugin marketplace update`:**
+
+```bash
+# Always run this after Claude marketplace updates
+bash ~/.claude/scripts/update-external-repos.sh
+```
+
+This restores the submodule state and re-applies `no_push` protection.
+
+### 📁 External Repositories Reference
+
+All external repos in `~/.claude/plugins/marketplaces/`:
+
+| Repository | Source | Description |
+|:-----------|:-------|:------------|
+| `anthropic-agent-skills` | anthropics/skills | Official Anthropic skills (PDF, DOCX, XLSX, PPTX) |
+| `claude-code-plugins` | anthropics/claude-code | Official plugins (PR review, commit, feature-dev) |
+| `claude-plugins-official` | anthropics/claude-plugins-official | Official plugin marketplace |
+| `taches-cc-resources` | glittercowboy/taches-cc-resources | Skills & commands for productivity |
+| `get-shit-done` | glittercowboy/get-shit-done | GSD project management system |
+| `obra-superpowers` | obra/superpowers-marketplace | Superpowers skills collection |
+| `auto-claude` | AndyMik90/Auto-Claude | Autonomous coding framework |
+| `claude-mem` | thedotmack/claude-mem | Persistent memory system |
+| `awesome-claude-skills` | ComposioHQ/awesome-claude-skills | Community skills collection |
+| `claude-code-plugins-plus-skills` | jeremylongshore/... | Extended plugins |
+| `skill-seekers` | yusufkaraaslan/Skill_Seekers | Skill discovery |
+| `claude-scientific-skills` | K-Dense-AI/... | Scientific computing skills |
+| + 10 more | Various | Community marketplaces |
+
+### 🔧 Troubleshooting Multi-Machine Setup
+
+#### ❌ "Plugin not found in marketplace"
+
+```bash
+# Verify marketplace is registered
+claude plugin marketplace list
+
+# If missing, re-add it
+claude plugin marketplace add ~/.claude/plugins/marketplaces/[name]
+
+# Then install the plugin
+claude plugin install [plugin]@[marketplace]
+```
+
+#### ❌ Submodule directory is empty
+
+```bash
+cd ~/.claude
+git submodule update --init plugins/marketplaces/[name]
+```
+
+#### ❌ "no_push" is missing
+
+```bash
+cd ~/.claude/plugins/marketplaces/[name]
+git remote set-url --push origin no_push
+```
+
+#### ❌ Claude doctor shows plugin errors
+
+Run the full setup sequence:
+
+```bash
+bash scripts/update-external-repos.sh
+# Then re-register marketplaces and install plugins (see Step 4-5 above)
+```
+
+### 📋 Files That Sync vs Don't Sync
+
+| Syncs with Git (in your repo) | Does NOT sync (machine-specific) |
+|:------------------------------|:---------------------------------|
+| `CLAUDE.md` | `plugins/known_marketplaces.json` |
+| `settings.json` | `plugins/installed_plugins.json` |
+| `rules/`, `skills/`, `commands/` | `plugins/cache/` |
+| `.gitmodules` | Submodule working directories |
+| `scripts/` | Claude Code's internal state |
+
+**Key insight:** Your repo tracks the **configuration** (settings.json, .gitmodules), but each machine must **initialize** the submodules and **register** marketplaces with Claude Code locally.
 
 ---
 
