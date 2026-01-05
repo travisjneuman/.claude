@@ -150,7 +150,7 @@
     "hookify@claude-code-plugins": false,
     "plugin-dev@claude-code-plugins": true,
     "ralph-wiggum@claude-code-plugins": true,
-    "superpowers@obra-superpowers": true
+    "superpowers@superpowers-marketplace": true
   },
   "outputStyle": "default",
   "spinnerTipsEnabled": false,
