@@ -59,14 +59,14 @@ Before running any automation:
 
 ## Testing Matrix
 
-| Test Type | Status |
-|-----------|--------|
-| Happy path (normal data) | [ ] |
-| Empty input | [ ] |
-| Malformed input | [ ] |
-| Large dataset | [ ] |
-| Network failure (if applicable) | [ ] |
-| Permission errors | [ ] |
+| Test Type                       | Status |
+| ------------------------------- | ------ |
+| Happy path (normal data)        | [ ]    |
+| Empty input                     | [ ]    |
+| Malformed input                 | [ ]    |
+| Large dataset                   | [ ]    |
+| Network failure (if applicable) | [ ]    |
+| Permission errors               | [ ]    |
 
 ---
 
@@ -136,14 +136,15 @@ Before committing automation scripts:
 
 ## Related Skills
 
-| Skill | When to Use |
-|-------|-------------|
-| `data-science` | Data processing, ML pipelines |
-| `test-specialist` | Testing automation scripts |
-| `security` | Security considerations |
-| `tech-debt-analyzer` | Script code quality |
+| Skill                | When to Use                   |
+| -------------------- | ----------------------------- |
+| `data-science`       | Data processing, ML pipelines |
+| `test-specialist`    | Testing automation scripts    |
+| `security`           | Security considerations       |
+| `tech-debt-analyzer` | Script code quality           |
 
 ### Invoke with:
+
 ```
 Skill(data-science)
 Skill(test-specialist)
@@ -183,4 +184,4 @@ If automation goes wrong:
 
 ---
 
-*Always DRY_RUN first. Always have a rollback plan.*
+_Always DRY_RUN first. Always have a rollback plan._

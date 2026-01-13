@@ -33,6 +33,7 @@ npx serve .                  # Node.js (recommended - all platforms)
 ### No Build Tools Verification
 
 Files should be served as-is:
+
 - Pure `.html` files (no templating)
 - Pure `.css` files (no Sass/Less)
 - Pure `.js` files (no bundling/transpilation)
@@ -40,13 +41,13 @@ Files should be served as-is:
 
 ### Page Weight Targets (P1)
 
-| Target | Max Size |
-|--------|----------|
-| HTML | < 5KB |
-| CSS | < 10KB |
-| JavaScript | < 5KB |
+| Target                   | Max Size   |
+| ------------------------ | ---------- |
+| HTML                     | < 5KB      |
+| CSS                      | < 10KB     |
+| JavaScript               | < 5KB      |
 | **Total (excl. images)** | **< 50KB** |
-| Images (each) | < 500KB |
+| Images (each)            | < 500KB    |
 
 ### HTML Quality
 
@@ -64,9 +65,9 @@ Files should be served as-is:
 <footer></footer>
 
 <!-- Void elements (no closing slash needed in HTML5) -->
-<img src="image.jpg" alt="Description">
-<br>
-<input type="text">
+<img src="image.jpg" alt="Description" />
+<br />
+<input type="text" />
 ```
 
 ### CSS Quality
@@ -97,12 +98,12 @@ Files should be served as-is:
 
 ```javascript
 // ES6+ syntax (modern browsers support it)
-const items = document.querySelectorAll('.item');
+const items = document.querySelectorAll(".item");
 const handler = (e) => console.log(e.target);
 
 // Event delegation (preferred)
-document.body.addEventListener('click', (e) => {
-  if (e.target.matches('.button')) {
+document.body.addEventListener("click", (e) => {
+  if (e.target.matches(".button")) {
     handleClick(e.target);
   }
 });
@@ -113,13 +114,13 @@ document.body.addEventListener('click', (e) => {
 
 ## Lighthouse Requirements (P1)
 
-| Metric | Target |
-|--------|--------|
-| Performance | 95+ |
-| Accessibility | 90+ |
-| Best Practices | 100 |
-| SEO | 100 |
-| First Contentful Paint | < 1s |
+| Metric                 | Target |
+| ---------------------- | ------ |
+| Performance            | 95+    |
+| Accessibility          | 90+    |
+| Best Practices         | 100    |
+| SEO                    | 100    |
+| First Contentful Paint | < 1s   |
 
 ## See Also
 

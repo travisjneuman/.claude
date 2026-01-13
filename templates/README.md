@@ -6,19 +6,19 @@ Standardized templates for creating Claude Code toolkit components.
 
 ## Available Templates
 
-| Template | Purpose | Usage |
-|:---------|:--------|:------|
-| `skill-template.md` | Create new skills | Copy to `skills/[name]/SKILL.md` |
-| `agent-template.md` | Create subagents | Copy to `agents/[name].md` |
-| `command-template.md` | Create slash commands | Copy to `commands/[name].md` |
-| `plugin-template/` | Create distributable plugins | Copy entire directory |
-| `project-CLAUDE.md` | Per-project instructions | Copy to project root as `CLAUDE.md` |
-| `task-template.md` | Task planning documents | Copy to `tasks/[name].md` |
-| **NEW in v2.0:** | **Multi-Window Workflows** | **Claude 4.5 Best Practices** |
-| `research-notes.md` | Research tracking with hypothesis tree | Copy to project for research tasks |
-| `tests.json` | Structured test status tracking | Copy to project root for test-heavy work |
-| `init.sh` | Project initialization script | Copy to project root, make executable |
-| `progress.md` | Session notes and state tracking | Copy to project for multi-session work |
+| Template              | Purpose                                | Usage                                    |
+| :-------------------- | :------------------------------------- | :--------------------------------------- |
+| `skill-template.md`   | Create new skills                      | Copy to `skills/[name]/SKILL.md`         |
+| `agent-template.md`   | Create subagents                       | Copy to `agents/[name].md`               |
+| `command-template.md` | Create slash commands                  | Copy to `commands/[name].md`             |
+| `plugin-template/`    | Create distributable plugins           | Copy entire directory                    |
+| `project-CLAUDE.md`   | Per-project instructions               | Copy to project root as `CLAUDE.md`      |
+| `task-template.md`    | Task planning documents                | Copy to `tasks/[name].md`                |
+| **NEW in v2.0:**      | **Multi-Window Workflows**             | **Claude 4.5 Best Practices**            |
+| `research-notes.md`   | Research tracking with hypothesis tree | Copy to project for research tasks       |
+| `tests.json`          | Structured test status tracking        | Copy to project root for test-heavy work |
+| `init.sh`             | Project initialization script          | Copy to project root, make executable    |
+| `progress.md`         | Session notes and state tracking       | Copy to project for multi-session work   |
 
 ---
 
@@ -105,12 +105,14 @@ cp ~/.claude/templates/project-CLAUDE.md /path/to/project/CLAUDE.md
 ## Template Contents
 
 ### skill-template.md
+
 - SKILL.md format with YAML frontmatter
 - Sections: Overview, Principles, Patterns, Anti-patterns, Checklist
 - Best practices for skill creation
 - Registration instructions
 
 ### agent-template.md
+
 - Agent definition format
 - Tool selection guide
 - Model selection (haiku/sonnet/opus)
@@ -118,12 +120,14 @@ cp ~/.claude/templates/project-CLAUDE.md /path/to/project/CLAUDE.md
 - Testing and registration
 
 ### command-template.md
+
 - Slash command format
 - Argument handling
 - Implementation structure
 - Examples and testing
 
 ### plugin-template/
+
 - `plugin.json` - Plugin manifest
 - `README.md` - Plugin documentation
 - `commands/` - Sample command
@@ -131,6 +135,7 @@ cp ~/.claude/templates/project-CLAUDE.md /path/to/project/CLAUDE.md
 - `skills/` - Sample skill
 
 ### project-CLAUDE.md (v2.0)
+
 - Per-project instructions template optimized for global toolkit
 - Project Identity table (type, stack, status, priority, URL)
 - Commands, Architecture, Project-Specific Rules sections
@@ -140,6 +145,7 @@ cp ~/.claude/templates/project-CLAUDE.md /path/to/project/CLAUDE.md
 - Global delegation statement pattern
 
 ### task-template.md
+
 - Task planning structure
 - Implementation checklist
 - Review section
@@ -168,4 +174,4 @@ cp ~/.claude/templates/project-CLAUDE.md /path/to/project/CLAUDE.md
 
 ---
 
-*Templates ensure consistency across the toolkit. Use `/init-project` for automatic setup.*
+_Templates ensure consistency across the toolkit. Use `/init-project` for automatic setup._

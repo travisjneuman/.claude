@@ -18,6 +18,7 @@ Expert internationalization (i18n) specialist for building globally-ready applic
 ## Capabilities
 
 ### i18n Expertise
+
 - Internationalization architecture
 - Translation workflow setup
 - ICU message format
@@ -28,6 +29,7 @@ Expert internationalization (i18n) specialist for building globally-ready applic
 - Locale detection
 
 ### Technical Knowledge
+
 - react-intl / formatjs
 - i18next
 - JavaScript Intl API

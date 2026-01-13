@@ -175,13 +175,13 @@ EVENT STREAMING:
 
 ### Communication Comparison
 
-| Pattern | Use Case | Trade-offs |
-|---------|----------|------------|
-| **REST** | CRUD, simple queries | Simple, but chatty |
-| **gRPC** | High performance, internal | Fast, but complex |
-| **GraphQL** | Flexible client needs | Flexible, but overhead |
-| **Message Queue** | Task processing | Decoupled, but delay |
-| **Event Streaming** | Event sourcing, analytics | Scalable, but complex |
+| Pattern             | Use Case                   | Trade-offs             |
+| ------------------- | -------------------------- | ---------------------- |
+| **REST**            | CRUD, simple queries       | Simple, but chatty     |
+| **gRPC**            | High performance, internal | Fast, but complex      |
+| **GraphQL**         | Flexible client needs      | Flexible, but overhead |
+| **Message Queue**   | Task processing            | Decoupled, but delay   |
+| **Event Streaming** | Event sourcing, analytics  | Scalable, but complex  |
 
 ---
 
@@ -372,7 +372,7 @@ Implementation:
 async function withRetry<T>(
   fn: () => Promise<T>,
   maxAttempts: number = 3,
-  backoff: number = 1000
+  backoff: number = 1000,
 ): Promise<T> {
   for (let attempt = 1; attempt <= maxAttempts; attempt++) {
     try {
@@ -411,14 +411,11 @@ Service B calls continue normally.
 ### Timeout Pattern
 
 ```typescript
-async function withTimeout<T>(
-  fn: () => Promise<T>,
-  ms: number
-): Promise<T> {
+async function withTimeout<T>(fn: () => Promise<T>, ms: number): Promise<T> {
   return Promise.race([
     fn(),
     new Promise<T>((_, reject) =>
-      setTimeout(() => reject(new Error('Timeout')), ms)
+      setTimeout(() => reject(new Error("Timeout")), ms),
     ),
   ]);
 }
@@ -426,7 +423,7 @@ async function withTimeout<T>(
 // Always set timeouts on external calls
 const user = await withTimeout(
   () => userService.getUser(id),
-  5000 // 5 second timeout
+  5000, // 5 second timeout
 );
 ```
 
@@ -484,20 +481,20 @@ Tools: Jaeger, Zipkin, AWS X-Ray, Datadog
 
 ```typescript
 // Liveness: Is the service running?
-app.get('/health/live', (req, res) => {
-  res.status(200).json({ status: 'alive' });
+app.get("/health/live", (req, res) => {
+  res.status(200).json({ status: "alive" });
 });
 
 // Readiness: Is the service ready to handle traffic?
-app.get('/health/ready', async (req, res) => {
+app.get("/health/ready", async (req, res) => {
   const dbHealthy = await checkDatabase();
   const cacheHealthy = await checkCache();
 
   if (dbHealthy && cacheHealthy) {
-    res.status(200).json({ status: 'ready' });
+    res.status(200).json({ status: "ready" });
   } else {
     res.status(503).json({
-      status: 'not ready',
+      status: "not ready",
       checks: { database: dbHealthy, cache: cacheHealthy },
     });
   }
@@ -553,8 +550,8 @@ spec:
             - containerPort: 3000
           resources:
             limits:
-              cpu: '500m'
-              memory: '256Mi'
+              cpu: "500m"
+              memory: "256Mi"
           livenessProbe:
             httpGet:
               path: /health/live
@@ -591,22 +588,22 @@ spec:
 
 ```typescript
 // Consumer test (Order Service)
-describe('User Service Contract', () => {
-  it('returns user by ID', async () => {
+describe("User Service Contract", () => {
+  it("returns user by ID", async () => {
     // Define expected interaction
     await provider.addInteraction({
-      state: 'user 123 exists',
-      uponReceiving: 'a request for user 123',
+      state: "user 123 exists",
+      uponReceiving: "a request for user 123",
       withRequest: {
-        method: 'GET',
-        path: '/users/123',
+        method: "GET",
+        path: "/users/123",
       },
       willRespondWith: {
         status: 200,
         body: {
-          id: '123',
-          name: like('John'),
-          email: like('john@example.com'),
+          id: "123",
+          name: like("John"),
+          email: like("john@example.com"),
         },
       },
     });
@@ -621,6 +618,7 @@ describe('User Service Contract', () => {
 ## Best Practices
 
 ### DO:
+
 - Start with a monolith, extract services later
 - Define clear service boundaries
 - Use asynchronous communication where possible
@@ -631,6 +629,7 @@ describe('User Service Contract', () => {
 - Version your APIs
 
 ### DON'T:
+
 - Create too many, too small services
 - Share databases between services
 - Make synchronous chains too deep

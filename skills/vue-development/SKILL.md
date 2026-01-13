@@ -9,15 +9,15 @@ Comprehensive guide for building modern Vue.js applications with the Composition
 
 ## Stack Overview
 
-| Tool | Purpose | Version |
-|------|---------|---------|
-| Vue 3 | Core framework | 3.4+ |
-| TypeScript | Type safety | 5.0+ |
-| Vite | Build tool | 5.0+ |
-| Pinia | State management | 2.1+ |
-| Vue Router | Routing | 4.2+ |
-| Nuxt 3 | Full-stack framework | 3.10+ |
-| Vitest | Testing | 1.0+ |
+| Tool       | Purpose              | Version |
+| ---------- | -------------------- | ------- |
+| Vue 3      | Core framework       | 3.4+    |
+| TypeScript | Type safety          | 5.0+    |
+| Vite       | Build tool           | 5.0+    |
+| Pinia      | State management     | 2.1+    |
+| Vue Router | Routing              | 4.2+    |
+| Nuxt 3     | Full-stack framework | 3.10+   |
+| Vitest     | Testing              | 1.0+    |
 
 ---
 
@@ -27,41 +27,41 @@ Comprehensive guide for building modern Vue.js applications with the Composition
 
 ```vue
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted } from "vue";
 
 // Props with TypeScript
 interface Props {
-  title: string
-  count?: number
+  title: string;
+  count?: number;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  count: 0
-})
+  count: 0,
+});
 
 // Emits with TypeScript
 const emit = defineEmits<{
-  update: [value: number]
-  submit: []
-}>()
+  update: [value: number];
+  submit: [];
+}>();
 
 // Reactive state
-const localCount = ref(props.count)
-const items = ref<string[]>([])
+const localCount = ref(props.count);
+const items = ref<string[]>([]);
 
 // Computed
-const doubleCount = computed(() => localCount.value * 2)
+const doubleCount = computed(() => localCount.value * 2);
 
 // Methods
 function increment() {
-  localCount.value++
-  emit('update', localCount.value)
+  localCount.value++;
+  emit("update", localCount.value);
 }
 
 // Lifecycle
 onMounted(() => {
-  console.log('Component mounted')
-})
+  console.log("Component mounted");
+});
 </script>
 
 <template>
@@ -82,40 +82,40 @@ onMounted(() => {
 ### Reactivity Patterns
 
 ```typescript
-import { ref, reactive, computed, watch, watchEffect } from 'vue'
+import { ref, reactive, computed, watch, watchEffect } from "vue";
 
 // Primitives: use ref()
-const count = ref(0)
-const name = ref('')
-count.value++ // Access via .value
+const count = ref(0);
+const name = ref("");
+count.value++; // Access via .value
 
 // Objects/Arrays: use reactive()
 const state = reactive({
   items: [] as Item[],
   loading: false,
-  error: null as Error | null
-})
-state.items.push(item) // Direct access, no .value
+  error: null as Error | null,
+});
+state.items.push(item); // Direct access, no .value
 
 // Computed values
-const total = computed(() => state.items.reduce((sum, i) => sum + i.price, 0))
+const total = computed(() => state.items.reduce((sum, i) => sum + i.price, 0));
 
 // Watch specific values
 watch(count, (newVal, oldVal) => {
-  console.log(`Count changed: ${oldVal} -> ${newVal}`)
-})
+  console.log(`Count changed: ${oldVal} -> ${newVal}`);
+});
 
 // Watch with options
 watch(
   () => state.items,
   (newItems) => saveToStorage(newItems),
-  { deep: true, immediate: true }
-)
+  { deep: true, immediate: true },
+);
 
 // Automatic dependency tracking
 watchEffect(() => {
-  console.log(`Count is now: ${count.value}`)
-})
+  console.log(`Count is now: ${count.value}`);
+});
 ```
 
 ---
@@ -139,61 +139,65 @@ src/
 
 ```typescript
 // composables/useFetch.ts
-import { ref, toValue, watchEffect, type MaybeRefOrGetter } from 'vue'
+import { ref, toValue, watchEffect, type MaybeRefOrGetter } from "vue";
 
 export function useFetch<T>(url: MaybeRefOrGetter<string>) {
-  const data = ref<T | null>(null)
-  const error = ref<Error | null>(null)
-  const loading = ref(false)
+  const data = ref<T | null>(null);
+  const error = ref<Error | null>(null);
+  const loading = ref(false);
 
   async function fetchData() {
-    loading.value = true
-    error.value = null
+    loading.value = true;
+    error.value = null;
 
     try {
-      const response = await fetch(toValue(url))
-      if (!response.ok) throw new Error(`HTTP ${response.status}`)
-      data.value = await response.json()
+      const response = await fetch(toValue(url));
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      data.value = await response.json();
     } catch (e) {
-      error.value = e instanceof Error ? e : new Error(String(e))
+      error.value = e instanceof Error ? e : new Error(String(e));
     } finally {
-      loading.value = false
+      loading.value = false;
     }
   }
 
   // Auto-refetch when URL changes
   watchEffect(() => {
-    fetchData()
-  })
+    fetchData();
+  });
 
-  return { data, error, loading, refetch: fetchData }
+  return { data, error, loading, refetch: fetchData };
 }
 
 // Usage in component
-const { data, error, loading } = useFetch<User[]>('/api/users')
+const { data, error, loading } = useFetch<User[]>("/api/users");
 
 // With reactive URL
-const userId = ref(1)
-const { data: user } = useFetch(() => `/api/users/${userId.value}`)
+const userId = ref(1);
+const { data: user } = useFetch(() => `/api/users/${userId.value}`);
 ```
 
 ### Composable Best Practices
 
 ```typescript
 // composables/useLocalStorage.ts
-import { ref, watch, type Ref } from 'vue'
+import { ref, watch, type Ref } from "vue";
 
 export function useLocalStorage<T>(key: string, defaultValue: T): Ref<T> {
   // Read initial value
-  const stored = localStorage.getItem(key)
-  const value = ref<T>(stored ? JSON.parse(stored) : defaultValue) as Ref<T>
+  const stored = localStorage.getItem(key);
+  const value = ref<T>(stored ? JSON.parse(stored) : defaultValue) as Ref<T>;
 
   // Sync to storage
-  watch(value, (newValue) => {
-    localStorage.setItem(key, JSON.stringify(newValue))
-  }, { deep: true })
+  watch(
+    value,
+    (newValue) => {
+      localStorage.setItem(key, JSON.stringify(newValue));
+    },
+    { deep: true },
+  );
 
-  return value
+  return value;
 }
 
 // ✅ Good: Accept refs, getters, or plain values
@@ -210,50 +214,50 @@ export function useLocalStorage<T>(key: string, defaultValue: T): Ref<T> {
 
 ```typescript
 // stores/user.ts
-import { defineStore } from 'pinia'
-import { ref, computed } from 'vue'
+import { defineStore } from "pinia";
+import { ref, computed } from "vue";
 
 export interface User {
-  id: number
-  name: string
-  email: string
+  id: number;
+  name: string;
+  email: string;
 }
 
-export const useUserStore = defineStore('user', () => {
+export const useUserStore = defineStore("user", () => {
   // State
-  const user = ref<User | null>(null)
-  const loading = ref(false)
-  const error = ref<string | null>(null)
+  const user = ref<User | null>(null);
+  const loading = ref(false);
+  const error = ref<string | null>(null);
 
   // Getters (computed)
-  const isLoggedIn = computed(() => !!user.value)
-  const displayName = computed(() => user.value?.name ?? 'Guest')
+  const isLoggedIn = computed(() => !!user.value);
+  const displayName = computed(() => user.value?.name ?? "Guest");
 
   // Actions
   async function login(email: string, password: string) {
-    loading.value = true
-    error.value = null
+    loading.value = true;
+    error.value = null;
 
     try {
-      const response = await fetch('/api/auth/login', {
-        method: 'POST',
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
         body: JSON.stringify({ email, password }),
-        headers: { 'Content-Type': 'application/json' }
-      })
+        headers: { "Content-Type": "application/json" },
+      });
 
-      if (!response.ok) throw new Error('Login failed')
+      if (!response.ok) throw new Error("Login failed");
 
-      user.value = await response.json()
+      user.value = await response.json();
     } catch (e) {
-      error.value = e instanceof Error ? e.message : 'Unknown error'
-      throw e
+      error.value = e instanceof Error ? e.message : "Unknown error";
+      throw e;
     } finally {
-      loading.value = false
+      loading.value = false;
     }
   }
 
   function logout() {
-    user.value = null
+    user.value = null;
   }
 
   return {
@@ -266,30 +270,30 @@ export const useUserStore = defineStore('user', () => {
     displayName,
     // Actions
     login,
-    logout
-  }
-})
+    logout,
+  };
+});
 ```
 
 ### Using Stores in Components
 
 ```vue
 <script setup lang="ts">
-import { storeToRefs } from 'pinia'
-import { useUserStore } from '@/stores/user'
+import { storeToRefs } from "pinia";
+import { useUserStore } from "@/stores/user";
 
-const userStore = useUserStore()
+const userStore = useUserStore();
 
 // Use storeToRefs for destructuring state/getters
-const { user, isLoggedIn, loading } = storeToRefs(userStore)
+const { user, isLoggedIn, loading } = storeToRefs(userStore);
 
 // Actions can be destructured directly
-const { login, logout } = userStore
+const { login, logout } = userStore;
 
 async function handleLogin() {
   try {
-    await login(email.value, password.value)
-    router.push('/dashboard')
+    await login(email.value, password.value);
+    router.push("/dashboard");
   } catch {
     // Error handled in store
   }
@@ -301,35 +305,38 @@ async function handleLogin() {
 
 ```typescript
 // stores/settings.ts
-import { defineStore } from 'pinia'
-import { ref, watch } from 'vue'
+import { defineStore } from "pinia";
+import { ref, watch } from "vue";
 
-export const useSettingsStore = defineStore('settings', () => {
-  const theme = ref<'light' | 'dark'>('light')
-  const locale = ref('en')
+export const useSettingsStore = defineStore("settings", () => {
+  const theme = ref<"light" | "dark">("light");
+  const locale = ref("en");
 
   // Load from storage on init
-  const stored = localStorage.getItem('settings')
+  const stored = localStorage.getItem("settings");
   if (stored) {
-    const parsed = JSON.parse(stored)
-    theme.value = parsed.theme ?? 'light'
-    locale.value = parsed.locale ?? 'en'
+    const parsed = JSON.parse(stored);
+    theme.value = parsed.theme ?? "light";
+    locale.value = parsed.locale ?? "en";
   }
 
   // Persist changes
   watch([theme, locale], () => {
-    localStorage.setItem('settings', JSON.stringify({
-      theme: theme.value,
-      locale: locale.value
-    }))
-  })
+    localStorage.setItem(
+      "settings",
+      JSON.stringify({
+        theme: theme.value,
+        locale: locale.value,
+      }),
+    );
+  });
 
   function toggleTheme() {
-    theme.value = theme.value === 'light' ? 'dark' : 'light'
+    theme.value = theme.value === "light" ? "dark" : "light";
   }
 
-  return { theme, locale, toggleTheme }
-})
+  return { theme, locale, toggleTheme };
+});
 ```
 
 ---
@@ -340,40 +347,40 @@ export const useSettingsStore = defineStore('settings', () => {
 
 ```typescript
 // context/auth.ts
-import { provide, inject, type InjectionKey } from 'vue'
+import { provide, inject, type InjectionKey } from "vue";
 
 interface AuthContext {
-  user: Ref<User | null>
-  login: (email: string, password: string) => Promise<void>
-  logout: () => void
+  user: Ref<User | null>;
+  login: (email: string, password: string) => Promise<void>;
+  logout: () => void;
 }
 
-const AuthKey: InjectionKey<AuthContext> = Symbol('auth')
+const AuthKey: InjectionKey<AuthContext> = Symbol("auth");
 
 // Provider component
 export function provideAuth() {
-  const user = ref<User | null>(null)
+  const user = ref<User | null>(null);
 
   async function login(email: string, password: string) {
     // Implementation
   }
 
   function logout() {
-    user.value = null
+    user.value = null;
   }
 
-  const context = { user, login, logout }
-  provide(AuthKey, context)
-  return context
+  const context = { user, login, logout };
+  provide(AuthKey, context);
+  return context;
 }
 
 // Consumer hook
 export function useAuth(): AuthContext {
-  const context = inject(AuthKey)
+  const context = inject(AuthKey);
   if (!context) {
-    throw new Error('useAuth must be used within AuthProvider')
+    throw new Error("useAuth must be used within AuthProvider");
   }
-  return context
+  return context;
 }
 ```
 
@@ -383,13 +390,13 @@ export function useAuth(): AuthContext {
 <!-- components/UserCard.vue (Dumb - Presentational) -->
 <script setup lang="ts">
 interface Props {
-  name: string
-  email: string
-  avatar?: string
+  name: string;
+  email: string;
+  avatar?: string;
 }
 
-defineProps<Props>()
-defineEmits<{ click: [] }>()
+defineProps<Props>();
+defineEmits<{ click: [] }>();
 </script>
 
 <template>
@@ -404,13 +411,13 @@ defineEmits<{ click: [] }>()
 ```vue
 <!-- views/UserList.vue (Smart - Container) -->
 <script setup lang="ts">
-import { useFetch } from '@/composables/useFetch'
-import UserCard from '@/components/UserCard.vue'
+import { useFetch } from "@/composables/useFetch";
+import UserCard from "@/components/UserCard.vue";
 
-const { data: users, loading, error } = useFetch<User[]>('/api/users')
+const { data: users, loading, error } = useFetch<User[]>("/api/users");
 
 function handleUserClick(user: User) {
-  router.push(`/users/${user.id}`)
+  router.push(`/users/${user.id}`);
 }
 </script>
 
@@ -462,23 +469,23 @@ nuxt-app/
 ```typescript
 // server/api/users.ts
 export default defineEventHandler(async (event) => {
-  const method = getMethod(event)
+  const method = getMethod(event);
 
-  if (method === 'GET') {
-    return await prisma.user.findMany()
+  if (method === "GET") {
+    return await prisma.user.findMany();
   }
 
-  if (method === 'POST') {
-    const body = await readBody(event)
-    return await prisma.user.create({ data: body })
+  if (method === "POST") {
+    const body = await readBody(event);
+    return await prisma.user.create({ data: body });
   }
-})
+});
 
 // server/api/users/[id].ts
 export default defineEventHandler(async (event) => {
-  const id = getRouterParam(event, 'id')
-  return await prisma.user.findUnique({ where: { id: Number(id) } })
-})
+  const id = getRouterParam(event, "id");
+  return await prisma.user.findUnique({ where: { id: Number(id) } });
+});
 ```
 
 ### Data Fetching
@@ -486,14 +493,14 @@ export default defineEventHandler(async (event) => {
 ```vue
 <script setup lang="ts">
 // Server-side fetch (SSR)
-const { data: users } = await useFetch('/api/users')
+const { data: users } = await useFetch("/api/users");
 
 // Lazy fetch (client-side)
-const { data: posts, pending } = await useLazyFetch('/api/posts')
+const { data: posts, pending } = await useLazyFetch("/api/posts");
 
 // With parameters
-const route = useRoute()
-const { data: user } = await useFetch(`/api/users/${route.params.id}`)
+const route = useRoute();
+const { data: user } = await useFetch(`/api/users/${route.params.id}`);
 </script>
 ```
 
@@ -505,109 +512,109 @@ const { data: user } = await useFetch(`/api/users/${route.params.id}`)
 
 ```typescript
 // vitest.config.ts
-import { defineConfig } from 'vitest/config'
-import vue from '@vitejs/plugin-vue'
+import { defineConfig } from "vitest/config";
+import vue from "@vitejs/plugin-vue";
 
 export default defineConfig({
   plugins: [vue()],
   test: {
     globals: true,
-    environment: 'jsdom',
-    setupFiles: ['./tests/setup.ts']
-  }
-})
+    environment: "jsdom",
+    setupFiles: ["./tests/setup.ts"],
+  },
+});
 
 // tests/setup.ts
-import { vi } from 'vitest'
-import '@testing-library/jest-dom/vitest'
+import { vi } from "vitest";
+import "@testing-library/jest-dom/vitest";
 ```
 
 ### Component Testing
 
 ```typescript
 // tests/components/UserCard.test.ts
-import { describe, it, expect } from 'vitest'
-import { render, screen, fireEvent } from '@testing-library/vue'
-import UserCard from '@/components/UserCard.vue'
+import { describe, it, expect } from "vitest";
+import { render, screen, fireEvent } from "@testing-library/vue";
+import UserCard from "@/components/UserCard.vue";
 
-describe('UserCard', () => {
-  it('renders user information', () => {
+describe("UserCard", () => {
+  it("renders user information", () => {
     render(UserCard, {
       props: {
-        name: 'John Doe',
-        email: 'john@example.com'
-      }
-    })
+        name: "John Doe",
+        email: "john@example.com",
+      },
+    });
 
-    expect(screen.getByText('John Doe')).toBeInTheDocument()
-    expect(screen.getByText('john@example.com')).toBeInTheDocument()
-  })
+    expect(screen.getByText("John Doe")).toBeInTheDocument();
+    expect(screen.getByText("john@example.com")).toBeInTheDocument();
+  });
 
-  it('emits click event', async () => {
+  it("emits click event", async () => {
     const { emitted } = render(UserCard, {
-      props: { name: 'John', email: 'john@test.com' }
-    })
+      props: { name: "John", email: "john@test.com" },
+    });
 
-    await fireEvent.click(screen.getByRole('article'))
-    expect(emitted().click).toHaveLength(1)
-  })
-})
+    await fireEvent.click(screen.getByRole("article"));
+    expect(emitted().click).toHaveLength(1);
+  });
+});
 ```
 
 ### Composable Testing
 
 ```typescript
 // tests/composables/useFetch.test.ts
-import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { useFetch } from '@/composables/useFetch'
-import { flushPromises } from '@vue/test-utils'
+import { describe, it, expect, vi, beforeEach } from "vitest";
+import { useFetch } from "@/composables/useFetch";
+import { flushPromises } from "@vue/test-utils";
 
-describe('useFetch', () => {
+describe("useFetch", () => {
   beforeEach(() => {
-    vi.stubGlobal('fetch', vi.fn())
-  })
+    vi.stubGlobal("fetch", vi.fn());
+  });
 
-  it('fetches data successfully', async () => {
-    const mockData = [{ id: 1, name: 'Test' }]
+  it("fetches data successfully", async () => {
+    const mockData = [{ id: 1, name: "Test" }];
     vi.mocked(fetch).mockResolvedValueOnce({
       ok: true,
-      json: () => Promise.resolve(mockData)
-    } as Response)
+      json: () => Promise.resolve(mockData),
+    } as Response);
 
-    const { data, loading, error } = useFetch('/api/test')
+    const { data, loading, error } = useFetch("/api/test");
 
-    expect(loading.value).toBe(true)
-    await flushPromises()
+    expect(loading.value).toBe(true);
+    await flushPromises();
 
-    expect(loading.value).toBe(false)
-    expect(data.value).toEqual(mockData)
-    expect(error.value).toBeNull()
-  })
+    expect(loading.value).toBe(false);
+    expect(data.value).toEqual(mockData);
+    expect(error.value).toBeNull();
+  });
 
-  it('handles errors', async () => {
-    vi.mocked(fetch).mockRejectedValueOnce(new Error('Network error'))
+  it("handles errors", async () => {
+    vi.mocked(fetch).mockRejectedValueOnce(new Error("Network error"));
 
-    const { data, error } = useFetch('/api/test')
-    await flushPromises()
+    const { data, error } = useFetch("/api/test");
+    await flushPromises();
 
-    expect(data.value).toBeNull()
-    expect(error.value?.message).toBe('Network error')
-  })
-})
+    expect(data.value).toBeNull();
+    expect(error.value?.message).toBe("Network error");
+  });
+});
 ```
 
 ---
 
 ## Anti-Patterns to Avoid
 
-| Anti-Pattern | Problem | Solution |
-|--------------|---------|----------|
-| Using Options API for complex components | Poor code organization | Use Composition API |
-| Mutating props directly | Breaks one-way data flow | Emit events to parent |
-| Using `$refs` for state | Not reactive | Use `ref()` and props |
-| Deeply nested watchers | Performance issues | Use `computed()` instead |
-| Using mixins | Name collisions, unclear source | Use composables |
-| Not using `storeToRefs()` | Loses reactivity on destructure | Always use with Pinia |
+| Anti-Pattern                             | Problem                         | Solution                 |
+| ---------------------------------------- | ------------------------------- | ------------------------ |
+| Using Options API for complex components | Poor code organization          | Use Composition API      |
+| Mutating props directly                  | Breaks one-way data flow        | Emit events to parent    |
+| Using `$refs` for state                  | Not reactive                    | Use `ref()` and props    |
+| Deeply nested watchers                   | Performance issues              | Use `computed()` instead |
+| Using mixins                             | Name collisions, unclear source | Use composables          |
+| Not using `storeToRefs()`                | Loses reactivity on destructure | Always use with Pinia    |
 
 ---
 

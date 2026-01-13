@@ -29,6 +29,7 @@ After receiving tool results, reflect on quality and determine optimal next step
 **Current date from environment:** Use `Today's date` value for temporal reasoning.
 
 **Research triggers (auto-detect):**
+
 - "latest", "current", "recent", "new", "today"
 - Any year >= current year from environment
 - Version queries ("React 19", "Node 22")
@@ -37,6 +38,7 @@ After receiving tool results, reflect on quality and determine optimal next step
 - "what are the options for", "how should I"
 
 **Research execution:**
+
 - If research needed: Use `WebSearch` immediately
 - For complex research: Load `rules/workflows/research-methodology.md`
 - Apply structured hypothesis tracking for multi-faceted questions
@@ -44,6 +46,7 @@ After receiving tool results, reflect on quality and determine optimal next step
 - Track confidence levels and create research-notes.md if appropriate
 
 **Parallel tool usage:**
+
 - When multiple independent searches/reads needed, make ALL calls in single message
 - Only call sequentially when tools depend on previous results
 - Never use placeholders or guess parameters
@@ -81,30 +84,31 @@ Scan `{{task_description}}` in this priority order:
 
 **Detection hints by category:**
 
-| Category | Sample Keywords |
-|----------|-----------------|
-| Meta/Admin | "create skill", "commit", "status", "where was I" |
-| Decision | "should I", "which", "vs", "compare", "better" |
-| Scientific | "protein", "dna", "molecule", "physics", "clinical" |
+| Category    | Sample Keywords                                                        |
+| ----------- | ---------------------------------------------------------------------- |
+| Meta/Admin  | "create skill", "commit", "status", "where was I"                      |
+| Decision    | "should I", "which", "vs", "compare", "better"                         |
+| Scientific  | "protein", "dna", "molecule", "physics", "clinical"                    |
 | Development | "react", "vue", "svelte", "api", "database", "deploy", "test", "debug" |
-| Business | "startup", "pricing", "marketing", "finance", "hr" |
-| Creative | "design", "video", "audio", "brand", "animation" |
+| Business    | "startup", "pricing", "marketing", "finance", "hr"                     |
+| Creative    | "design", "video", "audio", "brand", "animation"                       |
 
 **Smart context-specific loading:**
 
 Auto-load additional resources based on task characteristics:
 
-| Trigger Pattern | Auto-Load |
-|-----------------|-----------|
-| "research", "investigate", "find out", "what are the options" | `rules/workflows/research-methodology.md` |
-| "UI", "frontend", "design", "styling", "CSS", "visual" | `rules/checklists/ui-visual-changes.md` |
-| "test", "testing", "verify", "validation" | `rules/checklists/verification-template.md` |
-| "autonomous", "auto", "implement feature", "build [complex feature]" | Suggest Auto-Claude |
-| Complexity score >= 3 + "well-defined feature" | Auto-recommend `/auto-claude` |
-| First window of multi-phase project | Suggest creating `tests.json`, `init.sh`, `progress.md` |
-| Continuing after context refresh | Check for `progress.md`, `tests.json`, git logs |
+| Trigger Pattern                                                      | Auto-Load                                               |
+| -------------------------------------------------------------------- | ------------------------------------------------------- |
+| "research", "investigate", "find out", "what are the options"        | `rules/workflows/research-methodology.md`               |
+| "UI", "frontend", "design", "styling", "CSS", "visual"               | `rules/checklists/ui-visual-changes.md`                 |
+| "test", "testing", "verify", "validation"                            | `rules/checklists/verification-template.md`             |
+| "autonomous", "auto", "implement feature", "build [complex feature]" | Suggest Auto-Claude                                     |
+| Complexity score >= 3 + "well-defined feature"                       | Auto-recommend `/auto-claude`                           |
+| First window of multi-phase project                                  | Suggest creating `tests.json`, `init.sh`, `progress.md` |
+| Continuing after context refresh                                     | Check for `progress.md`, `tests.json`, git logs         |
 
 Load the relevant domain file(s) and extract:
+
 - **Skill** to invoke
 - **Agent** to use via Task tool
 - **Contextual rules** to read
@@ -116,6 +120,7 @@ Load the relevant domain file(s) and extract:
 Read `commands/router/routing-logic.md` for complexity scoring.
 
 **Quick reference:**
+
 - Score >= 3 → `/gsd:new-project`
 - Score 1-2 → `EnterPlanMode`
 - Score <= 0 → Execute directly
@@ -125,6 +130,7 @@ Read `commands/router/routing-logic.md` for complexity scoring.
 ### Step 6: Execute with Full Environment
 
 **1. Load determined resources:**
+
 - Invoke identified skill(s) from domain files
 - Load contextual rules automatically based on patterns
 - Use `TodoWrite` for multi-step tracking (always for 3+ steps)
@@ -132,18 +138,21 @@ Read `commands/router/routing-logic.md` for complexity scoring.
 
 **2. Intelligent marketplace skill discovery:**
 When domain detection identifies a specialized area, check for marketplace skills:
+
 - Search pattern: Look for relevant skills across 21 marketplace repos
 - Priority: Local skills first, then marketplace skills
 - Auto-suggest highly relevant marketplace skills when found
 - Example: "React animation" → check for animation-specific skills in marketplaces
 
 **3. Multi-window workflow awareness:**
+
 - First window: Suggest creating `tests.json`, `init.sh`, `progress.md` for complex projects
 - Subsequent windows: Check for these files and use them to orient
 - Always review git logs and progress notes when continuing work
 - Create quality-of-life setup scripts proactively
 
 **4. Execution principles:**
+
 - Default to implementing changes (PROACTIVE mode from CLAUDE.md)
 - Read code before proposing changes - never speculate
 - Use parallel tool calls for independent operations
@@ -151,6 +160,7 @@ When domain detection identifies a specialized area, check for marketplace skill
 
 **5. Autonomous implementation detection:**
 When task characteristics indicate autonomous coding would be beneficial:
+
 - Well-defined feature in established codebase
 - Complexity score >= 3
 - Multiple files/components involved
@@ -159,6 +169,7 @@ When task characteristics indicate autonomous coding would be beneficial:
 Auto-suggest: "This feature could benefit from autonomous implementation. Would you like to use `/auto-claude` for autonomous coding with QA validation, or proceed with manual step-by-step implementation?"
 
 **Never force Auto-Claude** - always give user choice between:
+
 - Manual: Traditional /start-task planning + implementation
 - Autonomous: /auto-claude for autonomous coding
 - GSD: Multi-phase project management
@@ -170,6 +181,7 @@ Auto-suggest: "This feature could benefit from autonomous implementation. Would 
 **Always load before marking complete:** `rules/checklists/verification-template.md`
 
 **Critical verifications:**
+
 - [ ] Primary goal achieved
 - [ ] No errors in console/logs
 - [ ] Tests pass (if applicable)
@@ -180,11 +192,13 @@ Auto-suggest: "This feature could benefit from autonomous implementation. Would 
 - [ ] Temporary files cleaned up
 
 **Context-specific verification:**
+
 - UI/visual changes → Also verify with `rules/checklists/ui-visual-changes.md`
 - Scripts/automation → Also verify with `rules/checklists/automation-scripts.md`
 - Static sites → Also verify with `rules/checklists/static-sites.md`
 
 **Then apply post-work automation:**
+
 - Code review agents (pr-review-toolkit)
 - Simplification if needed
 - Type design analysis for new types
@@ -196,6 +210,7 @@ Auto-suggest: "This feature could benefit from autonomous implementation. Would 
 
 **Memory save** (for significant work):
 Save to claude-mem:
+
 - Key decisions made
 - Patterns established
 - Project context
@@ -203,6 +218,7 @@ Save to claude-mem:
 
 **File-based state** (for multi-window projects):
 Update or create:
+
 - `progress.md` - Session notes, completed work, next steps
 - `tests.json` - Structured test status (if test-heavy project)
 - Git commits - Descriptive commits as state checkpoints
@@ -215,6 +231,7 @@ Before context refresh, ensure state is saved to memory and files for seamless c
 ## Empty Task Handler
 
 If `{{task_description}}` is empty:
+
 1. Check GSD project → `/gsd:progress`
 2. Query claude-mem → Resume if found
 3. Check todos → `/taches-cc-resources:check-todos`
@@ -224,27 +241,27 @@ If `{{task_description}}` is empty:
 
 ## Reference Files
 
-| File | Contains |
-|------|----------|
-| `commands/router/domains-development.md` | 23 development domains |
-| `commands/router/domains-scientific.md` | 8 scientific domains |
-| `commands/router/domains-business.md` | 16 business domains |
-| `commands/router/domains-creative.md` | 6 creative domains |
-| `commands/router/domains-meta.md` | Admin tasks, quality, exploration |
-| `commands/router/decision-frameworks.md` | 6 decision frameworks |
-| `commands/router/routing-logic.md` | Complexity scoring, route selection |
+| File                                     | Contains                            |
+| ---------------------------------------- | ----------------------------------- |
+| `commands/router/domains-development.md` | 23 development domains              |
+| `commands/router/domains-scientific.md`  | 8 scientific domains                |
+| `commands/router/domains-business.md`    | 16 business domains                 |
+| `commands/router/domains-creative.md`    | 6 creative domains                  |
+| `commands/router/domains-meta.md`        | Admin tasks, quality, exploration   |
+| `commands/router/decision-frameworks.md` | 6 decision frameworks               |
+| `commands/router/routing-logic.md`       | Complexity scoring, route selection |
 
 ---
 
 ## Quick Examples
 
-| Prompt | Detection | Route |
-|--------|-----------|-------|
-| "Build an iOS app" | development/ios | GSD |
-| "Analyze this protein" | scientific/proteomics | Direct |
-| "Should I use Redux or Zustand?" | decision | First-principles framework |
-| "Create a skill for X" | meta | `/taches-cc-resources:create-agent-skill` |
-| "What's new in React 19?" | research + development | WebSearch → Direct |
+| Prompt                           | Detection              | Route                                     |
+| -------------------------------- | ---------------------- | ----------------------------------------- |
+| "Build an iOS app"               | development/ios        | GSD                                       |
+| "Analyze this protein"           | scientific/proteomics  | Direct                                    |
+| "Should I use Redux or Zustand?" | decision               | First-principles framework                |
+| "Create a skill for X"           | meta                   | `/taches-cc-resources:create-agent-skill` |
+| "What's new in React 19?"        | research + development | WebSearch → Direct                        |
 
 ---
 
@@ -253,6 +270,7 @@ If `{{task_description}}` is empty:
 **Every prompt gets optimal resources automatically.**
 
 The router ensures:
+
 - Only relevant domain content loads (token efficiency)
 - Research triggers use current date from environment
 - Memory provides continuity across sessions
@@ -262,4 +280,4 @@ Just describe what you want. The system loads what's needed.
 
 ---
 
-*v3.0: Modular architecture with on-demand loading*
+_v3.0: Modular architecture with on-demand loading_

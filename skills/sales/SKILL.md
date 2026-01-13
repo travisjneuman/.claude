@@ -11,12 +11,12 @@ Comprehensive sales frameworks for deal qualification, pipeline management, and 
 
 ### Quick Reference
 
-| Methodology | Core Focus | Best For |
-|-------------|------------|----------|
-| **MEDDIC** | Deal qualification rigor | Enterprise sales |
-| **SPIN** | Question-based discovery | Complex solutions |
-| **Challenger** | Insight-led selling | Competitive markets |
-| **Solution Selling** | Problem-solving approach | Value-based sales |
+| Methodology          | Core Focus               | Best For            |
+| -------------------- | ------------------------ | ------------------- |
+| **MEDDIC**           | Deal qualification rigor | Enterprise sales    |
+| **SPIN**             | Question-based discovery | Complex solutions   |
+| **Challenger**       | Insight-led selling      | Competitive markets |
+| **Solution Selling** | Problem-solving approach | Value-based sales   |
 
 For detailed methodology frameworks (MEDDIC, SPIN, Challenger, Solution Selling), see [Sales Methodologies Reference](references/sales-methodologies.md).
 
@@ -24,25 +24,25 @@ For detailed methodology frameworks (MEDDIC, SPIN, Challenger, Solution Selling)
 
 ### Pipeline Metrics
 
-| Metric | Formula | Benchmark |
-|--------|---------|-----------|
-| **Pipeline Coverage** | Pipeline / Quota | 3-4x |
-| **Win Rate** | Won / (Won + Lost) | 20-30% |
-| **Average Deal Size** | Revenue / Deals | Industry specific |
-| **Sales Cycle** | Days from lead to close | Industry specific |
-| **Pipeline Velocity** | (Opps x Win% x ACV) / Cycle Days | Increasing |
-| **Conversion Rates** | By stage | Stage specific |
+| Metric                | Formula                          | Benchmark         |
+| --------------------- | -------------------------------- | ----------------- |
+| **Pipeline Coverage** | Pipeline / Quota                 | 3-4x              |
+| **Win Rate**          | Won / (Won + Lost)               | 20-30%            |
+| **Average Deal Size** | Revenue / Deals                  | Industry specific |
+| **Sales Cycle**       | Days from lead to close          | Industry specific |
+| **Pipeline Velocity** | (Opps x Win% x ACV) / Cycle Days | Increasing        |
+| **Conversion Rates**  | By stage                         | Stage specific    |
 
 ### Pipeline Stages
 
-| Stage | Definition | Exit Criteria | Probability |
-|-------|------------|---------------|-------------|
-| **Qualification** | Initial fit assessment | BANT qualified | 10% |
-| **Discovery** | Deep dive on needs | Pain confirmed, stakeholders mapped | 20% |
-| **Solution** | Present solution | Technical win | 40% |
-| **Proposal** | Formal proposal | Budget confirmed | 60% |
-| **Negotiation** | Terms discussion | Verbal commitment | 80% |
-| **Closed Won** | Contract signed | Revenue booked | 100% |
+| Stage             | Definition             | Exit Criteria                       | Probability |
+| ----------------- | ---------------------- | ----------------------------------- | ----------- |
+| **Qualification** | Initial fit assessment | BANT qualified                      | 10%         |
+| **Discovery**     | Deep dive on needs     | Pain confirmed, stakeholders mapped | 20%         |
+| **Solution**      | Present solution       | Technical win                       | 40%         |
+| **Proposal**      | Formal proposal        | Budget confirmed                    | 60%         |
+| **Negotiation**   | Terms discussion       | Verbal commitment                   | 80%         |
+| **Closed Won**    | Contract signed        | Revenue booked                      | 100%        |
 
 ### Pipeline Review Framework
 
@@ -74,23 +74,23 @@ Red: Significant risk, may need intervention or removal
 
 ### Forecasting Methods
 
-| Method | Approach | Best For |
-|--------|----------|----------|
+| Method                | Approach                          | Best For          |
+| --------------------- | --------------------------------- | ----------------- |
 | **Weighted Pipeline** | Sum of (Deal value x Probability) | Standard forecast |
-| **Stage-Based** | Historical conversion by stage | Mature sales orgs |
-| **Judgment-Based** | Rep/manager assessment | New markets |
-| **AI/ML** | Predictive models | Large datasets |
-| **Hybrid** | Multiple methods combined | Most accurate |
+| **Stage-Based**       | Historical conversion by stage    | Mature sales orgs |
+| **Judgment-Based**    | Rep/manager assessment            | New markets       |
+| **AI/ML**             | Predictive models                 | Large datasets    |
+| **Hybrid**            | Multiple methods combined         | Most accurate     |
 
 ### Forecast Categories
 
-| Category | Definition | Confidence |
-|----------|------------|------------|
-| **Closed** | Contract signed | 100% |
-| **Commit** | Will close this period | 90%+ |
-| **Best Case** | Could close if everything goes well | 50-70% |
-| **Pipeline** | In qualification stages | 10-40% |
-| **Upside** | Potential but not forecasted | <10% |
+| Category      | Definition                          | Confidence |
+| ------------- | ----------------------------------- | ---------- |
+| **Closed**    | Contract signed                     | 100%       |
+| **Commit**    | Will close this period              | 90%+       |
+| **Best Case** | Could close if everything goes well | 50-70%     |
+| **Pipeline**  | In qualification stages             | 10-40%     |
+| **Upside**    | Potential but not forecasted        | <10%       |
 
 ### Forecast Accuracy
 
@@ -117,12 +117,12 @@ IMPROVEMENT TACTICS:
 
 ### Account Segmentation
 
-| Tier | Criteria | Coverage Model |
-|------|----------|----------------|
-| **Strategic** | Highest revenue/potential | Named rep, dedicated CSM |
-| **Enterprise** | Large accounts | Territory rep, shared CSM |
-| **Mid-Market** | Growth accounts | Pool coverage, tech-touch CSM |
-| **SMB** | Volume accounts | Inside sales, self-service |
+| Tier           | Criteria                  | Coverage Model                |
+| -------------- | ------------------------- | ----------------------------- |
+| **Strategic**  | Highest revenue/potential | Named rep, dedicated CSM      |
+| **Enterprise** | Large accounts            | Territory rep, shared CSM     |
+| **Mid-Market** | Growth accounts           | Pool coverage, tech-touch CSM |
+| **SMB**        | Volume accounts           | Inside sales, self-service    |
 
 ### Account Planning Template
 
@@ -280,13 +280,13 @@ TERRITORY METRICS:
 
 ### Sales Dashboard KPIs
 
-| Category | Metrics |
-|----------|---------|
-| **Activity** | Calls, meetings, emails, proposals |
-| **Pipeline** | Created, coverage, velocity |
-| **Performance** | Quota attainment, win rate, deal size |
+| Category         | Metrics                               |
+| ---------------- | ------------------------------------- |
+| **Activity**     | Calls, meetings, emails, proposals    |
+| **Pipeline**     | Created, coverage, velocity           |
+| **Performance**  | Quota attainment, win rate, deal size |
 | **Productivity** | Revenue per rep, time to productivity |
-| **Customer** | Retention, expansion, NPS |
+| **Customer**     | Retention, expansion, NPS             |
 
 ### Rep Performance Analysis
 

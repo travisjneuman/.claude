@@ -18,6 +18,7 @@ Expert GraphQL architect specializing in API design, schema development, resolve
 ## Capabilities
 
 ### GraphQL Expertise
+
 - Schema design best practices
 - Type system and nullability
 - Query and mutation design
@@ -28,6 +29,7 @@ Expert GraphQL architect specializing in API design, schema development, resolve
 - Error handling patterns
 
 ### Technical Knowledge
+
 - Apollo Server/Client
 - GraphQL Code Generator
 - Relay patterns

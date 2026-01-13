@@ -1,6 +1,7 @@
 # Legal and Compliance Excellence - Fortune 50 Expert Skill
 
 ## Skill Metadata
+
 - **Name**: legal-compliance-excellence
 - **Domain**: Enterprise Legal Operations and Compliance
 - **Level**: Fortune 50 General Counsel / Chief Compliance Officer
@@ -14,6 +15,7 @@ This skill provides expert-level guidance on enterprise legal operations and com
 ## When to Use This Skill
 
 Invoke this skill when the user needs:
+
 - Corporate governance framework design and implementation
 - Contract lifecycle management (CLM) strategy and optimization
 - Regulatory compliance programs (SOX, GDPR, HIPAA, PCI-DSS, etc.)
@@ -2198,39 +2200,20 @@ Q4:
 When advising on legal and compliance matters, gather context:
 
 **General Context**
+
 1. What is the industry and regulatory environment?
 2. What is the company size and structure (public/private, multinational)?
 3. What are the top 3 legal/compliance challenges currently?
 4. What is the legal department size and structure (in-house, outside counsel mix)?
 5. What legal technology is currently in use (CLM, matter management, etc.)?
 
-**Corporate Governance**
-6. What is the current board composition and committee structure?
-7. How effective is board oversight of risk and compliance?
-8. Are there any shareholder activism or governance concerns?
-9. What is the executive compensation structure and say-on-pay history?
-10. How mature is the ESG program and reporting?
+**Corporate Governance** 6. What is the current board composition and committee structure? 7. How effective is board oversight of risk and compliance? 8. Are there any shareholder activism or governance concerns? 9. What is the executive compensation structure and say-on-pay history? 10. How mature is the ESG program and reporting?
 
-**Compliance**
-11. What regulations apply to the business (SOX, GDPR, HIPAA, industry-specific)?
-12. Has the company experienced compliance violations or regulatory inquiries?
-13. What is the compliance program maturity (reactive vs. proactive)?
-14. What compliance metrics are tracked and reported?
-15. How is third-party vendor compliance managed?
+**Compliance** 11. What regulations apply to the business (SOX, GDPR, HIPAA, industry-specific)? 12. Has the company experienced compliance violations or regulatory inquiries? 13. What is the compliance program maturity (reactive vs. proactive)? 14. What compliance metrics are tracked and reported? 15. How is third-party vendor compliance managed?
 
-**Contracts**
-16. What is the current contract volume and cycle time?
-17. What % of contracts use standard templates?
-18. Is there a centralized contract repository?
-19. How are contract obligations and renewals tracked?
-20. What are the pain points in the contract process?
+**Contracts** 16. What is the current contract volume and cycle time? 17. What % of contracts use standard templates? 18. Is there a centralized contract repository? 19. How are contract obligations and renewals tracked? 20. What are the pain points in the contract process?
 
-**Litigation and IP**
-21. What is the current litigation portfolio (volume, exposure, types)?
-22. How is litigation risk assessed and managed?
-23. What IP assets exist (patents, trademarks, trade secrets)?
-24. Is there an IP strategy aligned with business strategy?
-25. How are IP assets valued and monetized?
+**Litigation and IP** 21. What is the current litigation portfolio (volume, exposure, types)? 22. How is litigation risk assessed and managed? 23. What IP assets exist (patents, trademarks, trade secrets)? 24. Is there an IP strategy aligned with business strategy? 25. How are IP assets valued and monetized?
 
 ## Output Format Guidance
 
@@ -2252,6 +2235,7 @@ Always caveat: "This guidance is for informational purposes and does not constit
 ## References and Further Reading
 
 This skill synthesizes best practices from:
+
 - American Bar Association (ABA) - Legal ethics and practice standards
 - Association of Corporate Counsel (ACC) - In-house legal operations
 - COSO - Enterprise risk management and compliance frameworks
@@ -2265,4 +2249,5 @@ This skill synthesizes best practices from:
 ---
 
 **Version History**
+
 - v1.0.0 (2025-12-16): Initial skill creation with comprehensive legal and compliance frameworks

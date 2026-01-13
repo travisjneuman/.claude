@@ -2,15 +2,15 @@
 
 ## Inferential Statistics
 
-| Test | Use Case | Assumptions |
-|------|----------|-------------|
-| **t-test (1 sample)** | Mean vs. target | Normal distribution |
-| **t-test (2 sample)** | Compare two means | Independence, normality |
-| **Paired t-test** | Before/after | Paired observations |
-| **Chi-square** | Categorical association | Expected counts > 5 |
-| **ANOVA** | Compare 3+ means | Normality, homogeneity |
-| **Correlation** | Linear relationship | Linear, continuous |
-| **Regression** | Predict continuous | Linearity, independence |
+| Test                  | Use Case                | Assumptions             |
+| --------------------- | ----------------------- | ----------------------- |
+| **t-test (1 sample)** | Mean vs. target         | Normal distribution     |
+| **t-test (2 sample)** | Compare two means       | Independence, normality |
+| **Paired t-test**     | Before/after            | Paired observations     |
+| **Chi-square**        | Categorical association | Expected counts > 5     |
+| **ANOVA**             | Compare 3+ means        | Normality, homogeneity  |
+| **Correlation**       | Linear relationship     | Linear, continuous      |
+| **Regression**        | Predict continuous      | Linearity, independence |
 
 ## Hypothesis Testing
 

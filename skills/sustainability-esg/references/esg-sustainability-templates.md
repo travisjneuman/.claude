@@ -3,7 +3,9 @@
 ## Template 1: ESG Materiality Assessment
 
 ### Step 1: Stakeholder Identification
+
 **Internal Stakeholders**
+
 - [ ] Board of Directors
 - [ ] Executive Leadership
 - [ ] Employees (all levels)
@@ -11,6 +13,7 @@
 - [ ] Internal ESG/Sustainability Team
 
 **External Stakeholders**
+
 - [ ] Customers/Clients
 - [ ] Suppliers/Vendors
 - [ ] Community Organizations
@@ -21,7 +24,9 @@
 - [ ] ESG Rating Agencies
 
 ### Step 2: Topic Universe (Based on GRI, SASB, ISSB)
+
 **Environmental Topics**
+
 - [ ] GHG Emissions (Scopes 1, 2, 3)
 - [ ] Energy Management & Renewable Energy
 - [ ] Water & Wastewater Management
@@ -33,6 +38,7 @@
 - [ ] Sustainable Packaging & Materials
 
 **Social Topics**
+
 - [ ] Occupational Health & Safety
 - [ ] Employee Wellbeing & Benefits
 - [ ] Diversity, Equity & Inclusion
@@ -46,6 +52,7 @@
 - [ ] Access & Affordability
 
 **Governance Topics**
+
 - [ ] Board Composition & Effectiveness
 - [ ] Executive Compensation
 - [ ] Business Ethics & Anti-Corruption
@@ -57,12 +64,15 @@
 - [ ] Tax Strategy & Transparency
 
 ### Step 3: Stakeholder Engagement Process
+
 **Survey Questions** (Rate 1-5: Not Important to Critical)
+
 1. How important is [Topic] to [Company]'s long-term success?
 2. How significant is [Company]'s impact on [Topic] (positive or negative)?
 3. Should [Company] publicly disclose performance on [Topic]?
 
 **Engagement Methods**
+
 - [ ] Online surveys (quantitative)
 - [ ] Focus groups (qualitative)
 - [ ] One-on-one interviews with key stakeholders
@@ -71,7 +81,9 @@
 - [ ] ESG rating agency feedback
 
 ### Step 4: Business Impact Assessment
+
 For each topic, rate **Impact on Enterprise Value** (1-5):
+
 - Financial impact (revenues, costs, asset value)
 - Regulatory/legal risk exposure
 - Reputational impact
@@ -87,33 +99,40 @@ For each topic, rate **Impact on Enterprise Value** (1-5):
 | [Continue for all topics] | | | | |
 
 ### Step 5: Materiality Matrix
+
 **X-Axis**: Importance to Stakeholders (Low → High)
 **Y-Axis**: Impact on Business (Low → High)
 
 **Quadrant Classification**:
+
 - **High/High (Top Right)**: Material topics—report and prioritize
 - **High/Low**: Stakeholder concern—monitor and communicate
 - **Low/High**: Business risk—manage internally
 - **Low/Low**: Not material—deprioritize
 
 ### Step 6: Material Topics Selection
+
 **Criteria for Material Topics**:
+
 - Combined score ≥ 7.0 (out of 10), OR
 - Business impact ≥ 4.0, OR
 - Stakeholder importance ≥ 4.5 AND business impact ≥ 3.0
 
 **Final Material Topics** (Target: 5-12 topics):
+
 1. [Topic]: [Rationale]
 2. [Topic]: [Rationale]
 3. [Topic]: [Rationale]
 4. [Topic]: [Rationale]
 5. [Topic]: [Rationale]
-[Continue...]
+   [Continue...]
 
 ### Step 7: Alignment with SASB
+
 **Industry**: [Select from 77 SASB industries]
 
 **SASB Material Topics for [Industry]**:
+
 1. [SASB Topic]: [Aligned with our topic X]
 2. [SASB Topic]: [Aligned with our topic Y]
 3. [SASB Topic]: [Not in our assessment—consider adding]
@@ -121,6 +140,7 @@ For each topic, rate **Impact on Enterprise Value** (1-5):
 **Validation**: Ensure all SASB material topics for your industry are considered.
 
 ### Step 8: Annual Review Process
+
 - [ ] Review materiality annually or when significant business changes occur
 - [ ] Re-engage stakeholders every 2-3 years (light refresh annually)
 - [ ] Update materiality matrix and disclose changes in ESG report
@@ -131,6 +151,7 @@ For each topic, rate **Impact on Enterprise Value** (1-5):
 ## Template 2: GHG Emissions Inventory Workbook
 
 ### Company Information
+
 **Company Name**: [Name]
 **Reporting Year**: [Year]
 **Baseline Year**: [Year]
@@ -276,7 +297,7 @@ For each topic, rate **Impact on Enterprise Value** (1-5):
 | **Subtotal** | | | **[Sum]** |
 
 **3.10 Processing of Sold Products** (B2B only)
-*Not applicable for most companies; estimate if material.*
+_Not applicable for most companies; estimate if material._
 
 **3.11 Use of Sold Products**
 | Product Category | Units Sold | Energy per Unit | Emission Factor | Total Emissions (tCO2e) |
@@ -292,7 +313,7 @@ For each topic, rate **Impact on Enterprise Value** (1-5):
 | **Subtotal** | | | | | **[Sum]** |
 
 **3.13 Downstream Leased Assets**
-*Not applicable for most companies.*
+_Not applicable for most companies._
 
 **3.14 Franchises**
 | Franchise Category | Number | Energy Use per Franchise | Emission Factor | Total Emissions (tCO2e) |
@@ -311,16 +332,18 @@ For each topic, rate **Impact on Enterprise Value** (1-5):
 ---
 
 ### Summary
-| Scope | Emissions (tCO2e) | % of Total |
-|-------|------------------|-----------|
-| Scope 1 | [X] | [X%] |
-| Scope 2 (Location-Based) | [X] | [X%] |
-| Scope 2 (Market-Based) | [X] | [X%] |
-| Scope 3 | [X] | [X%] |
-| **Total (Location-Based)** | **[Sum]** | **100%** |
-| **Total (Market-Based)** | **[Sum]** | **100%** |
+
+| Scope                      | Emissions (tCO2e) | % of Total |
+| -------------------------- | ----------------- | ---------- |
+| Scope 1                    | [X]               | [X%]       |
+| Scope 2 (Location-Based)   | [X]               | [X%]       |
+| Scope 2 (Market-Based)     | [X]               | [X%]       |
+| Scope 3                    | [X]               | [X%]       |
+| **Total (Location-Based)** | **[Sum]**         | **100%**   |
+| **Total (Market-Based)**   | **[Sum]**         | **100%**   |
 
 **Intensity Metrics**
+
 - Emissions per $M revenue: [X] tCO2e/$M
 - Emissions per employee: [X] tCO2e/employee
 - Emissions per sq ft: [X] tCO2e/sq ft (if applicable)
@@ -328,11 +351,12 @@ For each topic, rate **Impact on Enterprise Value** (1-5):
 ---
 
 ### Data Quality Assessment
-| Scope | Data Source | Quality Rating | Improvement Opportunities |
-|-------|------------|---------------|--------------------------|
-| Scope 1 | [Fuel bills, fleet records] | [High/Medium/Low] | [Notes] |
-| Scope 2 | [Utility bills] | [High/Medium/Low] | [Notes] |
-| Scope 3 - Category X | [Supplier data / spend-based] | [High/Medium/Low] | [Notes] |
+
+| Scope                | Data Source                   | Quality Rating    | Improvement Opportunities |
+| -------------------- | ----------------------------- | ----------------- | ------------------------- |
+| Scope 1              | [Fuel bills, fleet records]   | [High/Medium/Low] | [Notes]                   |
+| Scope 2              | [Utility bills]               | [High/Medium/Low] | [Notes]                   |
+| Scope 3 - Category X | [Supplier data / spend-based] | [High/Medium/Low] | [Notes]                   |
 
 **Overall Data Quality**: [X%] of emissions based on primary data vs. estimates
 
@@ -343,6 +367,7 @@ For each topic, rate **Impact on Enterprise Value** (1-5):
 ### SBTi Target Setting Template
 
 **Company Information**
+
 - Company Name: [Name]
 - Industry (SASB): [Industry]
 - Baseline Year: [Year]
@@ -353,6 +378,7 @@ For each topic, rate **Impact on Enterprise Value** (1-5):
   - Total: [X] tCO2e
 
 ### Near-Term Science-Based Target (5-10 years)
+
 **Target Year**: 2030
 **Pathway**: 1.5°C pathway (aligned with Paris Agreement)
 
@@ -360,6 +386,7 @@ For each topic, rate **Impact on Enterprise Value** (1-5):
 [Company] commits to reduce absolute Scope 1 and 2 GHG emissions **[42%]** by 2030 from a [baseline year] base year.
 
 **Calculation**:
+
 - Baseline (Scope 1+2): [X] tCO2e
 - Required reduction: 42% (per SBTi 1.5°C pathway)
 - 2030 Target: [X × 0.58] = [Y] tCO2e
@@ -379,12 +406,14 @@ For each topic, rate **Impact on Enterprise Value** (1-5):
 **Recommended**: Option A (absolute) is most rigorous; Option B is practical for Scope 3-heavy companies.
 
 ### Long-Term Net Zero Target
+
 **Target Year**: 2050 (or earlier: 2040, 2045)
 
 **Commitment**:
 [Company] commits to reach net-zero greenhouse gas emissions across the value chain by **[2050]**.
 
 **Net Zero Criteria (per SBTi Net Zero Standard)**:
+
 1. Reduce Scope 1, 2, and 3 emissions by at least **90%** by 2050 (from baseline year)
 2. Neutralize residual emissions (≤10%) through carbon dioxide removal (CDR) only
 3. Set interim targets every 5-10 years
@@ -395,30 +424,35 @@ For each topic, rate **Impact on Enterprise Value** (1-5):
 ### Decarbonization Roadmap (High-Level)
 
 **2024-2027: Foundation**
+
 - Energy efficiency improvements: [X%] reduction
 - Renewable electricity procurement: 100% by 2025 (RE100)
 - Fleet electrification pilot: [X] EVs
 - Supplier engagement launched: [X] suppliers assessed
 
 **2028-2030: Acceleration**
+
 - On-site solar installations: [X] MW capacity
 - Fleet 50% electrified
 - Eliminate fossil fuel heating (electrify or green hydrogen)
 - Top suppliers (50% by emissions) have SBTs
 
 **2031-2040: Deep Decarbonization**
+
 - Breakthrough technologies (green hydrogen, SAF for air travel)
 - 100% of suppliers (by emissions) have SBTs
 - Circular economy at scale (reduce Scope 3 from materials)
 - [X%] emissions reduced
 
 **2041-2050: Net Zero**
+
 - 90%+ total reduction achieved
 - Residual emissions ≤10% of baseline
 - High-quality carbon removal (not offsets) for remaining emissions
 - Nature-based solutions, direct air capture, or other CDR
 
 ### Validation & Commitment
+
 - [ ] Submit commitment letter to SBTi
 - [ ] Develop detailed targets within 24 months
 - [ ] Submit targets to SBTi for validation
@@ -430,19 +464,23 @@ For each topic, rate **Impact on Enterprise Value** (1-5):
 ## Template 4: TCFD Climate Risk Assessment
 
 ### Governance
+
 **Board Oversight**
+
 - Committee responsible: [Sustainability Committee / Risk Committee / Full Board]
 - Frequency of climate review: [Quarterly / Semi-annually]
 - Climate expertise on board: [Number] directors with relevant experience
 - Board training on climate: [Date of last training]
 
 **Management's Role**
+
 - Executive responsible: [Chief Sustainability Officer / CFO / COO]
 - Reporting line: [Reports to CEO / COO]
 - Cross-functional climate team: [Members and roles]
 - Integration into risk management: [Description]
 
 ### Strategy
+
 **Climate-Related Risks & Opportunities**
 
 #### Physical Risks
@@ -489,63 +527,72 @@ For each topic, rate **Impact on Enterprise Value** (1-5):
 | Stakeholder pressure | NGO campaigns, investor divestment | Near-term (2024-2027) | $[X]M cost of capital increase | [Ambitious targets, stakeholder engagement] |
 
 #### Climate Opportunities
-| Opportunity | Description | Time Horizon | Potential Financial Benefit | Strategy to Capture |
-|------------|------------|-------------|---------------------------|-------------------|
-| Resource efficiency | Energy/water savings from efficiency | Near-term (2024-2027) | $[X]M annual savings | [Energy audits, LED lighting, HVAC upgrades] |
-| Low-carbon products | Revenue from sustainable product lines | Medium-term (2027-2035) | $[X]M new revenue | [R&D, marketing, customer education] |
-| Green finance | Lower interest rates on sustainability-linked loans | Near-term (2024-2027) | $[X]M interest savings | [SLL issuance, ESG rating improvement] |
-| Renewable energy | Cost savings from solar/wind vs. grid | Medium-term (2027-2035) | $[X]M annual savings | [PPAs, on-site solar] |
+
+| Opportunity         | Description                                         | Time Horizon            | Potential Financial Benefit | Strategy to Capture                          |
+| ------------------- | --------------------------------------------------- | ----------------------- | --------------------------- | -------------------------------------------- |
+| Resource efficiency | Energy/water savings from efficiency                | Near-term (2024-2027)   | $[X]M annual savings        | [Energy audits, LED lighting, HVAC upgrades] |
+| Low-carbon products | Revenue from sustainable product lines              | Medium-term (2027-2035) | $[X]M new revenue           | [R&D, marketing, customer education]         |
+| Green finance       | Lower interest rates on sustainability-linked loans | Near-term (2024-2027)   | $[X]M interest savings      | [SLL issuance, ESG rating improvement]       |
+| Renewable energy    | Cost savings from solar/wind vs. grid               | Medium-term (2027-2035) | $[X]M annual savings        | [PPAs, on-site solar]                        |
 
 ### Scenario Analysis
+
 **Scenarios Analyzed**
+
 1. **Below 2°C (Aggressive Climate Action)**: Rapid policy action, high carbon prices, fast energy transition
 2. **2-3°C (Moderate Action)**: Gradual policy, moderate carbon prices, slower transition
 3. **3-4°C (Business-as-Usual)**: Minimal policy, low carbon prices, severe physical impacts
 
 **Scenario Assumptions**
 
-| Variable | <2°C (2030) | 2-3°C (2030) | 3-4°C (2030) |
-|----------|------------|-------------|-------------|
-| Carbon Price ($/tCO2) | $150-200 | $50-100 | $10-30 |
-| Renewable Energy Cost | 50% below 2024 | 30% below 2024 | 20% below 2024 |
-| EV Market Share | 60%+ | 35-45% | 15-25% |
+| Variable                  | <2°C (2030)       | 2-3°C (2030)      | 3-4°C (2030)    |
+| ------------------------- | ----------------- | ----------------- | --------------- |
+| Carbon Price ($/tCO2)     | $150-200          | $50-100           | $10-30          |
+| Renewable Energy Cost     | 50% below 2024    | 30% below 2024    | 20% below 2024  |
+| EV Market Share           | 60%+              | 35-45%            | 15-25%          |
 | Extreme Weather Frequency | Moderate increase | Moderate increase | Severe increase |
-| Avg Temperature Rise | +1.5-2°C | +2-3°C | +3-4°C |
+| Avg Temperature Rise      | +1.5-2°C          | +2-3°C            | +3-4°C          |
 
 **Financial Impact by Scenario**
 
-| Scenario | Net Financial Impact (2030) | Key Drivers | Strategic Implications |
-|----------|---------------------------|------------|----------------------|
-| <2°C | [$X]M cost | High carbon price, compliance costs | Accelerate decarbonization to reduce exposure |
-| 2-3°C | [$X]M cost | Moderate carbon price, some physical risks | Balanced approach: decarbonization + adaptation |
-| 3-4°C | [$X]M cost | Low carbon price, high physical risks | Invest in climate resilience and insurance |
+| Scenario | Net Financial Impact (2030) | Key Drivers                                | Strategic Implications                          |
+| -------- | --------------------------- | ------------------------------------------ | ----------------------------------------------- |
+| <2°C     | [$X]M cost                  | High carbon price, compliance costs        | Accelerate decarbonization to reduce exposure   |
+| 2-3°C    | [$X]M cost                  | Moderate carbon price, some physical risks | Balanced approach: decarbonization + adaptation |
+| 3-4°C    | [$X]M cost                  | Low carbon price, high physical risks      | Invest in climate resilience and insurance      |
 
 **Business Resilience**:
 [Company]'s strategy is resilient across all scenarios due to [reasons: diversified portfolio, early decarbonization investments, climate adaptation plans].
 
 ### Risk Management
+
 **Climate Risk Identification**
+
 - Annual climate risk assessment integrated into Enterprise Risk Management (ERM)
 - Cross-functional team: Sustainability, Risk, Operations, Finance
 - Tools: Climate modeling (Third-party platform), TCFD scenario analysis
 
 **Climate Risk Assessment**
+
 - Likelihood assessment (1-5 scale)
 - Impact assessment (1-5 scale: financial, operational, reputational)
 - Risk prioritization (likelihood × impact matrix)
 
 **Climate Risk Mitigation**
+
 - Top climate risks assigned owners (C-suite or SVP level)
 - Mitigation plans with budgets and timelines
 - Quarterly progress reviews
 - Board reporting on top risks
 
 **Integration into ERM**
+
 - Climate risks reviewed alongside traditional risks (cyber, operational, financial)
 - Climate risk included in annual risk register
 - Audit Committee oversight
 
 ### Metrics & Targets
+
 **GHG Emissions**
 | Scope | [Baseline Year] | [Current Year] | 2030 Target | % to Target |
 |-------|----------------|---------------|------------|------------|
@@ -555,22 +602,26 @@ For each topic, rate **Impact on Enterprise Value** (1-5):
 | **Total** | **[X] tCO2e** | **[X] tCO2e** | **[X] tCO2e** | **[X%]** |
 
 **Climate-Related Metrics**
+
 - Renewable energy percentage: [X%] (target: [Y%] by 2030)
 - Carbon intensity: [X] tCO2e/$M revenue (target: [Y] by 2030)
 - Energy intensity: [X] MWh/$M revenue (target: [Y] by 2030)
 - Water intensity: [X] m³/$M revenue (target: [Y] by 2030)
 
 **Climate-Related Financial Metrics**
+
 - Low-carbon revenue: $[X]M ([X%] of total revenue)
 - Green capex: $[X]M ([X%] of total capex)
 - Internal carbon price: $[X]/tCO2e (used for investment decisions)
 
 **Climate Targets**
+
 - Near-term (2030): [SBTi-validated targets]
 - Long-term (2050): Net zero across value chain
 - Interim milestones: [2025, 2027, 2035, 2040]
 
 **Progress Tracking**
+
 - Annual GHG inventory and disclosure
 - Quarterly KPI dashboard for leadership
 - Third-party assurance (Scopes 1 & 2)
@@ -611,6 +662,7 @@ Sincerely,
 ### ESG Highlights
 
 **Environmental**
+
 - ⬇ [X%] reduction in GHG emissions (Scopes 1+2) since [baseline year]
 - ⬆ [X%] renewable electricity (target: 100% by [year])
 - 🔄 [X%] waste diverted from landfill
@@ -618,6 +670,7 @@ Sincerely,
 - 🎯 Science-based emissions targets validated by SBTi
 
 **Social**
+
 - 👥 [X%] employee engagement score
 - 📊 [X%] women in leadership (target: [Y%] by [year])
 - 🏥 [X] recordable incident rate (industry avg: [Y])
@@ -625,6 +678,7 @@ Sincerely,
 - 🤝 $[X]M in community contributions
 
 **Governance**
+
 - 🏛 [X%] independent board directors
 - 🌐 [X%] diverse board (gender + racial/ethnic)
 - 💼 [X%] of exec comp tied to ESG KPIs
@@ -638,6 +692,7 @@ Sincerely,
 Based on stakeholder engagement and business impact analysis, we focus on these material topics:
 
 **Environmental**
+
 1. Climate Change & GHG Emissions
 2. Energy Management & Renewable Energy
 3. Waste & Circular Economy
@@ -645,12 +700,14 @@ Based on stakeholder engagement and business impact analysis, we focus on these 
 5. Sustainable Packaging
 
 **Social**
+
 1. Employee Health, Safety & Wellbeing
 2. Diversity, Equity & Inclusion
 3. Supply Chain Labor Practices
 4. Community Engagement
 
 **Governance**
+
 1. Business Ethics & Compliance
 2. Board Effectiveness & Diversity
 3. Data Privacy & Cybersecurity
@@ -697,20 +754,21 @@ Based on stakeholder engagement and business impact analysis, we focus on these 
 
 We engage with stakeholders throughout the year to understand priorities and ensure accountability.
 
-| Stakeholder Group | Engagement Methods | Key Topics | Our Response |
-|------------------|-------------------|-----------|------------|
-| Investors | Quarterly earnings calls, ESG roadshows, CDP | Climate risk, diversity, governance | TCFD disclosure, SBTs, board diversity |
-| Employees | Annual survey, town halls, focus groups | Wellbeing, DEI, career development | Wellness programs, DEI targets, training investment |
-| Customers | Surveys, product feedback, sustainability requests | Product sustainability, supply chain ethics | Lifecycle assessments, supplier audits |
-| Communities | Listening sessions, partnerships, volunteerism | Local hiring, environmental impact, philanthropy | Community investment, local sourcing, emissions reduction |
-| Suppliers | Assessments, audits, capability building | ESG requirements, support | Supplier Code of Conduct, training programs |
-| NGOs | Partnerships, issue campaigns | Climate action, human rights, biodiversity | SBTs, supplier transparency, deforestation commitments |
+| Stakeholder Group | Engagement Methods                                 | Key Topics                                       | Our Response                                              |
+| ----------------- | -------------------------------------------------- | ------------------------------------------------ | --------------------------------------------------------- |
+| Investors         | Quarterly earnings calls, ESG roadshows, CDP       | Climate risk, diversity, governance              | TCFD disclosure, SBTs, board diversity                    |
+| Employees         | Annual survey, town halls, focus groups            | Wellbeing, DEI, career development               | Wellness programs, DEI targets, training investment       |
+| Customers         | Surveys, product feedback, sustainability requests | Product sustainability, supply chain ethics      | Lifecycle assessments, supplier audits                    |
+| Communities       | Listening sessions, partnerships, volunteerism     | Local hiring, environmental impact, philanthropy | Community investment, local sourcing, emissions reduction |
+| Suppliers         | Assessments, audits, capability building           | ESG requirements, support                        | Supplier Code of Conduct, training programs               |
+| NGOs              | Partnerships, issue campaigns                      | Climate action, human rights, biodiversity       | SBTs, supplier transparency, deforestation commitments    |
 
 ---
 
 ### Recognition & Ratings
 
 **ESG Indices & Rankings**
+
 - ✅ Dow Jones Sustainability Index (DJSI) World
 - ✅ FTSE4Good Index
 - ✅ CDP Climate Change A List
@@ -718,6 +776,7 @@ We engage with stakeholders throughout the year to understand priorities and ens
 - ✅ Fortune Change the World (Honoree)
 
 **ESG Ratings**
+
 - MSCI ESG Rating: [AA / AAA]
 - Sustainalytics ESG Risk: [Low / Negligible] Risk
 - ISS ESG: [Prime / Top-Rated]
@@ -740,6 +799,7 @@ This report aligns with leading ESG reporting frameworks:
 ## Template 6: Supplier Sustainability Assessment
 
 ### Supplier Information
+
 - **Supplier Name**: [Name]
 - **Contact**: [Name, Email, Phone]
 - **Relationship Duration**: [Years]
@@ -748,6 +808,7 @@ This report aligns with leading ESG reporting frameworks:
 - **Risk Rating**: [Low / Medium / High] (based on geography, industry, spend)
 
 ### Assessment Instructions
+
 Complete this assessment to the best of your ability. Your responses help us understand your ESG performance and identify opportunities for collaboration. All information is confidential.
 
 ---
@@ -755,6 +816,7 @@ Complete this assessment to the best of your ability. Your responses help us und
 ### Section 1: Environmental Management
 
 **1.1 Environmental Policy**
+
 1. Does your company have a documented environmental policy?
    - [ ] Yes (attach or provide link)
    - [ ] No
@@ -777,12 +839,12 @@ Complete this assessment to the best of your ability. Your responses help us und
    - [ ] No, but planning to set targets
    - [ ] No
 
-**1.2 Resource Management**
-5. What percentage of your electricity comes from renewable sources?
-   - [ ] 0-25%
-   - [ ] 26-50%
-   - [ ] 51-75%
-   - [ ] 76-100%
+**1.2 Resource Management** 5. What percentage of your electricity comes from renewable sources?
+
+- [ ] 0-25%
+- [ ] 26-50%
+- [ ] 51-75%
+- [ ] 76-100%
 
 6. Do you have water reduction or conservation programs?
    - [ ] Yes (describe): [text]
@@ -795,10 +857,10 @@ Complete this assessment to the best of your ability. Your responses help us und
    - [ ] 76-100%
    - [ ] Don't measure
 
-**1.3 Environmental Compliance**
-8. Have you had any environmental violations or fines in the past 3 years?
-   - [ ] Yes (explain): [text]
-   - [ ] No
+**1.3 Environmental Compliance** 8. Have you had any environmental violations or fines in the past 3 years?
+
+- [ ] Yes (explain): [text]
+- [ ] No
 
 9. Do you have environmental certifications?
    - [ ] ISO 14001 (Environmental Management)
@@ -810,12 +872,7 @@ Complete this assessment to the best of your ability. Your responses help us und
 
 ### Section 2: Social & Labor Practices
 
-**2.1 Labor Rights**
-10. Do you comply with ILO (International Labour Organization) core conventions?
-    - [ ] Yes, fully
-    - [ ] Partially
-    - [ ] No
-    - [ ] Unsure
+**2.1 Labor Rights** 10. Do you comply with ILO (International Labour Organization) core conventions? - [ ] Yes, fully - [ ] Partially - [ ] No - [ ] Unsure
 
 11. Do you prohibit forced labor, child labor, and human trafficking?
     - [ ] Yes, with documented policy
@@ -827,13 +884,7 @@ Complete this assessment to the best of your ability. Your responses help us und
     - [ ] No
     - [ ] Not applicable (no unionization)
 
-**2.2 Health & Safety**
-13. What is your recordable incident rate (per 100 employees)?
-    - [ ] <1.0
-    - [ ] 1.0-2.0
-    - [ ] 2.0-3.0
-    - [ ] >3.0
-    - [ ] Don't measure
+**2.2 Health & Safety** 13. What is your recordable incident rate (per 100 employees)? - [ ] <1.0 - [ ] 1.0-2.0 - [ ] 2.0-3.0 - [ ] >3.0 - [ ] Don't measure
 
 14. Have you had any workplace fatalities in the past 3 years?
     - [ ] Yes (explain): [text]
@@ -844,23 +895,13 @@ Complete this assessment to the best of your ability. Your responses help us und
     - [ ] Other: [specify]
     - [ ] None
 
-**2.3 Diversity & Inclusion**
-16. What percentage of your workforce is female?
-    - [ ] 0-25%
-    - [ ] 26-50%
-    - [ ] 51-75%
-    - [ ] 76-100%
+**2.3 Diversity & Inclusion** 16. What percentage of your workforce is female? - [ ] 0-25% - [ ] 26-50% - [ ] 51-75% - [ ] 76-100%
 
 17. Do you have diversity and inclusion targets or programs?
     - [ ] Yes (describe): [text]
     - [ ] No
 
-**2.4 Human Rights**
-18. Do you conduct human rights due diligence in your supply chain?
-    - [ ] Yes, annually
-    - [ ] Yes, periodically
-    - [ ] No, but planning to
-    - [ ] No
+**2.4 Human Rights** 18. Do you conduct human rights due diligence in your supply chain? - [ ] Yes, annually - [ ] Yes, periodically - [ ] No, but planning to - [ ] No
 
 19. Have you identified any human rights risks in your operations or supply chain?
     - [ ] Yes (describe mitigation): [text]
@@ -871,10 +912,7 @@ Complete this assessment to the best of your ability. Your responses help us und
 
 ### Section 3: Governance & Ethics
 
-**3.1 Business Ethics**
-20. Do you have a Code of Conduct or Code of Ethics?
-    - [ ] Yes (attach or provide link)
-    - [ ] No
+**3.1 Business Ethics** 20. Do you have a Code of Conduct or Code of Ethics? - [ ] Yes (attach or provide link) - [ ] No
 
 21. Do you provide anti-corruption and anti-bribery training?
     - [ ] Yes, annually for all employees
@@ -885,20 +923,13 @@ Complete this assessment to the best of your ability. Your responses help us und
     - [ ] Yes (explain): [text]
     - [ ] No
 
-**3.2 Data Privacy & Cybersecurity**
-23. Do you have data privacy and cybersecurity policies?
-    - [ ] Yes
-    - [ ] No
-    - [ ] Not applicable
+**3.2 Data Privacy & Cybersecurity** 23. Do you have data privacy and cybersecurity policies? - [ ] Yes - [ ] No - [ ] Not applicable
 
 24. Have you experienced any data breaches in the past 3 years?
     - [ ] Yes (explain): [text]
     - [ ] No
 
-**3.3 Supply Chain Management**
-25. Do you have a Supplier Code of Conduct?
-    - [ ] Yes
-    - [ ] No
+**3.3 Supply Chain Management** 25. Do you have a Supplier Code of Conduct? - [ ] Yes - [ ] No
 
 26. Do you assess your own suppliers for ESG risks?
     - [ ] Yes, regularly
@@ -909,23 +940,9 @@ Complete this assessment to the best of your ability. Your responses help us und
 
 ### Section 4: Certifications & Reporting
 
-**4.1 ESG Certifications**
-27. Which of the following certifications do you hold? (Check all that apply)
-    - [ ] ISO 14001 (Environmental)
-    - [ ] ISO 45001 (Health & Safety)
-    - [ ] ISO 50001 (Energy)
-    - [ ] SA 8000 (Social Accountability)
-    - [ ] B Corp
-    - [ ] Fair Trade
-    - [ ] FSC (Forest Stewardship Council)
-    - [ ] Other: [specify]
-    - [ ] None
+**4.1 ESG Certifications** 27. Which of the following certifications do you hold? (Check all that apply) - [ ] ISO 14001 (Environmental) - [ ] ISO 45001 (Health & Safety) - [ ] ISO 50001 (Energy) - [ ] SA 8000 (Social Accountability) - [ ] B Corp - [ ] Fair Trade - [ ] FSC (Forest Stewardship Council) - [ ] Other: [specify] - [ ] None
 
-**4.2 ESG Reporting**
-28. Do you publish a sustainability or ESG report?
-    - [ ] Yes, annually (provide link)
-    - [ ] Yes, periodically
-    - [ ] No
+**4.2 ESG Reporting** 28. Do you publish a sustainability or ESG report? - [ ] Yes, annually (provide link) - [ ] Yes, periodically - [ ] No
 
 29. Do you disclose to any ESG frameworks or rating agencies?
     - [ ] CDP (Carbon Disclosure Project)
@@ -939,30 +956,16 @@ Complete this assessment to the best of your ability. Your responses help us und
 
 ### Section 5: Improvement & Collaboration
 
-**5.1 ESG Goals**
-30. What are your top 3 ESG priorities for the next 2 years?
-    1. [Text]
-    2. [Text]
-    3. [Text]
+**5.1 ESG Goals** 30. What are your top 3 ESG priorities for the next 2 years? 1. [Text] 2. [Text] 3. [Text]
 
-**5.2 Support Needs**
-31. How can [Your Company] support your ESG journey? (Check all that apply)
-    - [ ] Training and capability building
-    - [ ] Access to tools and resources
-    - [ ] Financial support for ESG investments
-    - [ ] Long-term contracts to enable planning
-    - [ ] Collaboration on innovation projects
-    - [ ] Other: [specify]
+**5.2 Support Needs** 31. How can [Your Company] support your ESG journey? (Check all that apply) - [ ] Training and capability building - [ ] Access to tools and resources - [ ] Financial support for ESG investments - [ ] Long-term contracts to enable planning - [ ] Collaboration on innovation projects - [ ] Other: [specify]
 
-**5.3 Commitment**
-32. Are you willing to set science-based emissions reduction targets within the next 2 years?
-    - [ ] Yes
-    - [ ] Considering
-    - [ ] No
+**5.3 Commitment** 32. Are you willing to set science-based emissions reduction targets within the next 2 years? - [ ] Yes - [ ] Considering - [ ] No
 
 ---
 
 ### Supplier Signature
+
 By submitting this assessment, I certify that the information provided is accurate to the best of my knowledge.
 
 **Name**: [Name]
@@ -977,6 +980,7 @@ By submitting this assessment, I certify that the information provided is accura
 **Assessment Score**: [X/100]
 **Risk Rating**: [Low / Medium / High]
 **Follow-Up Actions**:
+
 - [ ] Request additional documentation
 - [ ] Schedule audit
 - [ ] Provide capability building support

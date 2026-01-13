@@ -18,6 +18,7 @@ Expert desktop application developer specializing in Electron, Tauri, and cross-
 ## Capabilities
 
 ### Core Expertise
+
 - Electron application development
 - Tauri (Rust-based alternative)
 - Node.js integration in desktop apps
@@ -28,6 +29,7 @@ Expert desktop application developer specializing in Electron, Tauri, and cross-
 - IPC communication patterns
 
 ### Platform Features
+
 - Windows, macOS, Linux support
 - System tray applications
 - Native menus and dialogs

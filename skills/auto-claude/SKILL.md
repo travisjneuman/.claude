@@ -11,6 +11,7 @@ Autonomous multi-agent system for complex feature implementation with QA validat
 ## When to Use
 
 ✅ **Use Auto-Claude for:**
+
 - **Complexity 3-4** - Well-defined features, multiple files
 - Established codebases with clear patterns
 - Repetitive tasks (CRUD, forms, API endpoints, auth flows)
@@ -18,6 +19,7 @@ Autonomous multi-agent system for complex feature implementation with QA validat
 - Features requiring iterative refinement with QA validation
 
 ❌ **Don't use Auto-Claude for:**
+
 - **Complexity 1-2** - Use manual `/start-task` instead
 - **Complexity 5+** - Use `/gsd:new-project` instead
 - Greenfield projects (no existing codebase patterns)
@@ -26,6 +28,7 @@ Autonomous multi-agent system for complex feature implementation with QA validat
 - Tasks requiring human decision-making during implementation
 
 **Quick Guide:**
+
 - Complexity 1-2 → Manual implementation
 - Complexity 3-4 → **Auto-Claude** (autonomous)
 - Complexity 5+ → GSD (multi-phase)
@@ -47,6 +50,7 @@ Autonomous multi-agent system for complex feature implementation with QA validat
 ```
 
 **What Happens:**
+
 1. Analyzes project structure → generates baseline
 2. Creates implementation spec → stores in ~/.auto-claude/specs/
 3. Creates git worktree → isolated development environment
@@ -58,16 +62,19 @@ Autonomous multi-agent system for complex feature implementation with QA validat
 ## Integration with Existing Workflows
 
 **Manual Implementation:**
+
 ```
 /start-task [description]  → Claude implements step-by-step
 ```
 
 **Autonomous Implementation:**
+
 ```
 /auto-claude [description] → Auto-Claude implements autonomously
 ```
 
 **Multi-Phase Projects:**
+
 ```
 /gsd:new-project          → GSD for project management
 ```
@@ -77,9 +84,11 @@ Autonomous multi-agent system for complex feature implementation with QA validat
 **Location:** `~/.auto-claude/.env`
 
 **Required:**
+
 - `CLAUDE_CODE_OAUTH_TOKEN` - Get from `/settings` in Claude Code
 
 **Optional (Recommended):**
+
 - `GRAPHITI_ENABLED=true` - Semantic memory
 - `GOOGLE_API_KEY` - For Gemini embeddings (memory feature)
 - Alternative: Ollama (local) or disable memory
@@ -87,12 +96,14 @@ Autonomous multi-agent system for complex feature implementation with QA validat
 ## Trade-offs
 
 **Strengths:**
+
 - Autonomous with minimal oversight
 - QA validation ensures quality
 - Git worktree prevents main branch disruption
 - Memory learns from previous sessions
 
 **Limitations:**
+
 - Best for established codebases
 - Requires clear specifications
 - Uses tokens for multi-agent iterations
@@ -101,6 +112,7 @@ Autonomous multi-agent system for complex feature implementation with QA validat
 ## Examples
 
 **Good use cases:**
+
 - "Add user authentication with JWT tokens and session management"
 - "Implement dark mode toggle with localStorage persistence"
 - "Refactor API layer to use async/await instead of callbacks"
@@ -108,6 +120,7 @@ Autonomous multi-agent system for complex feature implementation with QA validat
 - "Create export-to-CSV functionality for reports"
 
 **Poor use cases:**
+
 - "Fix typo in README" (too simple)
 - "Explore best approach for state management" (exploratory)
 - "Build entire e-commerce platform" (too large, use GSD)
@@ -132,6 +145,7 @@ Autonomous multi-agent system for complex feature implementation with QA validat
 ## Documentation
 
 See `~/.claude/docs/AUTO-CLAUDE-GUIDE.md` for:
+
 - Complete setup instructions
 - Real-world examples with detailed walkthroughs
 - Troubleshooting guide

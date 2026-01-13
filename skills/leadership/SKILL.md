@@ -32,23 +32,23 @@ P - Prepare to be wrong
 
 ### Decision Quality Checklist
 
-| Factor | Questions to Ask |
-|--------|------------------|
-| **Frame** | Are we solving the right problem? |
+| Factor           | Questions to Ask                   |
+| ---------------- | ---------------------------------- |
+| **Frame**        | Are we solving the right problem?  |
 | **Alternatives** | Have we considered enough options? |
-| **Information** | Do we have reliable data? |
-| **Values** | Are we clear on what matters? |
-| **Reasoning** | Is our logic sound? |
-| **Commitment** | Will people execute? |
+| **Information**  | Do we have reliable data?          |
+| **Values**       | Are we clear on what matters?      |
+| **Reasoning**    | Is our logic sound?                |
+| **Commitment**   | Will people execute?               |
 
 ### Delegation Matrix
 
-| Importance | Urgency | Decision By |
-|------------|---------|-------------|
-| High | High | Executive (fast) |
-| High | Low | Executive (thoughtful) |
-| Low | High | Delegate with check-in |
-| Low | Low | Delegate fully |
+| Importance | Urgency | Decision By            |
+| ---------- | ------- | ---------------------- |
+| High       | High    | Executive (fast)       |
+| High       | Low     | Executive (thoughtful) |
+| Low        | High    | Delegate with check-in |
+| Low        | Low     | Delegate fully         |
 
 ## Change Management
 
@@ -67,13 +67,13 @@ P - Prepare to be wrong
 
 ### ADKAR Model (Individual Change)
 
-| Element | Definition | Key Actions |
-|---------|------------|-------------|
-| **Awareness** | Understanding why | Communicate business drivers |
-| **Desire** | Want to participate | Address WIIFM, reduce resistance |
-| **Knowledge** | How to change | Training, education |
-| **Ability** | Skills to execute | Practice, coaching |
-| **Reinforcement** | Sustain the change | Recognition, measurement |
+| Element           | Definition          | Key Actions                      |
+| ----------------- | ------------------- | -------------------------------- |
+| **Awareness**     | Understanding why   | Communicate business drivers     |
+| **Desire**        | Want to participate | Address WIIFM, reduce resistance |
+| **Knowledge**     | How to change       | Training, education              |
+| **Ability**       | Skills to execute   | Practice, coaching               |
+| **Reinforcement** | Sustain the change  | Recognition, measurement         |
 
 ### Change Resistance Management
 
@@ -141,14 +141,14 @@ MESSAGE FRAMEWORK:
 
 ### Business Continuity Planning
 
-| Element | Description |
-|---------|-------------|
-| **Risk Assessment** | Identify potential disruptions |
-| **Business Impact Analysis** | Critical processes, RTOs, RPOs |
-| **Recovery Strategies** | Alternate facilities, IT, people |
-| **Plan Development** | Documented procedures |
-| **Testing & Exercises** | Regular drills, tabletops |
-| **Maintenance** | Annual updates, post-incident |
+| Element                      | Description                      |
+| ---------------------------- | -------------------------------- |
+| **Risk Assessment**          | Identify potential disruptions   |
+| **Business Impact Analysis** | Critical processes, RTOs, RPOs   |
+| **Recovery Strategies**      | Alternate facilities, IT, people |
+| **Plan Development**         | Documented procedures            |
+| **Testing & Exercises**      | Regular drills, tabletops        |
+| **Maintenance**              | Annual updates, post-incident    |
 
 ## Stakeholder Management
 
@@ -171,14 +171,14 @@ Low      KEEP SATISFIED  MONITOR
 
 ### Stakeholder Engagement Plan
 
-| Stakeholder | Interest | Influence | Strategy | Frequency |
-|-------------|----------|-----------|----------|-----------|
-| Board | High | High | Partner | Monthly |
-| Investors | High | High | Inform & consult | Quarterly |
-| Employees | High | Medium | Engage | Weekly |
-| Customers | High | Medium | Listen & respond | Ongoing |
-| Regulators | Medium | High | Comply & inform | As needed |
-| Media | Variable | High | Proactive comms | As needed |
+| Stakeholder | Interest | Influence | Strategy         | Frequency |
+| ----------- | -------- | --------- | ---------------- | --------- |
+| Board       | High     | High      | Partner          | Monthly   |
+| Investors   | High     | High      | Inform & consult | Quarterly |
+| Employees   | High     | Medium    | Engage           | Weekly    |
+| Customers   | High     | Medium    | Listen & respond | Ongoing   |
+| Regulators  | Medium   | High      | Comply & inform  | As needed |
+| Media       | Variable | High      | Proactive comms  | As needed |
 
 ### Influence Without Authority
 
@@ -223,14 +223,14 @@ BOARD REPORTING CADENCE:
 
 ### Governance Best Practices
 
-| Practice | Description |
-|----------|-------------|
-| **Independent Chair** | Separate from CEO for oversight |
-| **Executive Sessions** | Independent director meetings |
-| **Board Evaluation** | Annual self-assessment |
-| **Succession Planning** | CEO and board renewal |
-| **Risk Oversight** | Dedicated committee or process |
-| **Shareholder Engagement** | Investor dialogue program |
+| Practice                   | Description                     |
+| -------------------------- | ------------------------------- |
+| **Independent Chair**      | Separate from CEO for oversight |
+| **Executive Sessions**     | Independent director meetings   |
+| **Board Evaluation**       | Annual self-assessment          |
+| **Succession Planning**    | CEO and board renewal           |
+| **Risk Oversight**         | Dedicated committee or process  |
+| **Shareholder Engagement** | Investor dialogue program       |
 
 ## Executive Communication
 
@@ -310,24 +310,24 @@ FOLLOW UP:
 
 ### Leadership Competency Model
 
-| Competency | Behaviors |
-|------------|-----------|
-| **Vision** | Sets direction, inspires others |
+| Competency             | Behaviors                               |
+| ---------------------- | --------------------------------------- |
+| **Vision**             | Sets direction, inspires others         |
 | **Strategic Thinking** | Systems perspective, anticipates trends |
-| **Driving Results** | Accountability, execution focus |
-| **Leading People** | Develops talent, builds teams |
-| **Collaboration** | Influence, partnerships |
-| **Innovation** | Curiosity, courage to experiment |
-| **Integrity** | Ethics, transparency, trust |
-| **Resilience** | Adaptability, learning from setbacks |
+| **Driving Results**    | Accountability, execution focus         |
+| **Leading People**     | Develops talent, builds teams           |
+| **Collaboration**      | Influence, partnerships                 |
+| **Innovation**         | Curiosity, courage to experiment        |
+| **Integrity**          | Ethics, transparency, trust             |
+| **Resilience**         | Adaptability, learning from setbacks    |
 
 ### 70-20-10 Development Model
 
-| Source | % of Development | Examples |
-|--------|------------------|----------|
-| **Experience** | 70% | Stretch assignments, job rotations, projects |
-| **Relationships** | 20% | Mentoring, coaching, feedback, networking |
-| **Education** | 10% | Training, courses, reading, conferences |
+| Source            | % of Development | Examples                                     |
+| ----------------- | ---------------- | -------------------------------------------- |
+| **Experience**    | 70%              | Stretch assignments, job rotations, projects |
+| **Relationships** | 20%              | Mentoring, coaching, feedback, networking    |
+| **Education**     | 10%              | Training, courses, reading, conferences      |
 
 ### Executive Coaching Approach
 
@@ -343,18 +343,18 @@ Will - Action steps, accountability, commitment
 
 ### Culture Change Levers
 
-| Lever | Impact |
-|-------|--------|
-| **What leaders pay attention to** | Highest |
-| **How leaders react to crises** | High |
-| **How resources are allocated** | High |
-| **Role modeling and teaching** | Medium-High |
-| **Who gets rewarded/promoted** | High |
-| **Who gets hired/fired** | High |
-| **Organizational design** | Medium |
-| **Systems and processes** | Medium |
-| **Physical space** | Low-Medium |
-| **Stories and symbols** | Medium |
+| Lever                             | Impact      |
+| --------------------------------- | ----------- |
+| **What leaders pay attention to** | Highest     |
+| **How leaders react to crises**   | High        |
+| **How resources are allocated**   | High        |
+| **Role modeling and teaching**    | Medium-High |
+| **Who gets rewarded/promoted**    | High        |
+| **Who gets hired/fired**          | High        |
+| **Organizational design**         | Medium      |
+| **Systems and processes**         | Medium      |
+| **Physical space**                | Low-Medium  |
+| **Stories and symbols**           | Medium      |
 
 ### Values Activation
 

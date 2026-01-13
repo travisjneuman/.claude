@@ -66,27 +66,27 @@ ATTRIBUTES/FEATURES--------
 
 ### Brand Health Metrics
 
-| Metric | Measurement | Frequency |
-|--------|-------------|-----------|
-| **Awareness** | Aided/unaided recall | Quarterly |
-| **Consideration** | Would consider purchasing | Quarterly |
-| **Preference** | Preferred over competitors | Quarterly |
-| **NPS** | Net Promoter Score | Monthly |
-| **Brand Equity** | Dollar value of brand | Annually |
-| **Share of Voice** | Media mentions vs. competitors | Monthly |
+| Metric             | Measurement                    | Frequency |
+| ------------------ | ------------------------------ | --------- |
+| **Awareness**      | Aided/unaided recall           | Quarterly |
+| **Consideration**  | Would consider purchasing      | Quarterly |
+| **Preference**     | Preferred over competitors     | Quarterly |
+| **NPS**            | Net Promoter Score             | Monthly   |
+| **Brand Equity**   | Dollar value of brand          | Annually  |
+| **Share of Voice** | Media mentions vs. competitors | Monthly   |
 
 ## Market Research
 
 ### Research Methodology Selection
 
-| Method | When to Use | Sample Size | Timeline |
-|--------|-------------|-------------|----------|
-| **Surveys** | Quantify attitudes, behaviors | 400-1000+ | 2-4 weeks |
-| **Focus Groups** | Explore opinions, reactions | 6-10 per group | 2-3 weeks |
-| **In-depth Interviews** | Deep understanding | 15-30 | 3-4 weeks |
-| **Ethnography** | Observe real behavior | 10-20 | 4-8 weeks |
-| **A/B Testing** | Compare options | 1000+ per variant | 2-4 weeks |
-| **Social Listening** | Track conversations | N/A | Ongoing |
+| Method                  | When to Use                   | Sample Size       | Timeline  |
+| ----------------------- | ----------------------------- | ----------------- | --------- |
+| **Surveys**             | Quantify attitudes, behaviors | 400-1000+         | 2-4 weeks |
+| **Focus Groups**        | Explore opinions, reactions   | 6-10 per group    | 2-3 weeks |
+| **In-depth Interviews** | Deep understanding            | 15-30             | 3-4 weeks |
+| **Ethnography**         | Observe real behavior         | 10-20             | 4-8 weeks |
+| **A/B Testing**         | Compare options               | 1000+ per variant | 2-4 weeks |
+| **Social Listening**    | Track conversations           | N/A               | Ongoing   |
 
 ### Customer Journey Mapping
 
@@ -128,14 +128,14 @@ ADVOCACY
 
 ### Segmentation Approaches
 
-| Type | Basis | Examples |
-|------|-------|----------|
-| **Demographic** | Who they are | Age, income, education |
-| **Geographic** | Where they are | Region, urban/rural, climate |
-| **Psychographic** | What they value | Lifestyle, attitudes, interests |
-| **Behavioral** | What they do | Usage, loyalty, occasions |
-| **Needs-based** | What they need | Jobs to be done, pain points |
-| **Value-based** | What they're worth | CLV, profitability |
+| Type              | Basis              | Examples                        |
+| ----------------- | ------------------ | ------------------------------- |
+| **Demographic**   | Who they are       | Age, income, education          |
+| **Geographic**    | Where they are     | Region, urban/rural, climate    |
+| **Psychographic** | What they value    | Lifestyle, attitudes, interests |
+| **Behavioral**    | What they do       | Usage, loyalty, occasions       |
+| **Needs-based**   | What they need     | Jobs to be done, pain points    |
+| **Value-based**   | What they're worth | CLV, profitability              |
 
 ### Segmentation Framework
 
@@ -191,15 +191,15 @@ QUOTE:
 
 ### Channel Strategy
 
-| Channel | Best For | Key Metrics |
-|---------|----------|-------------|
-| **SEO** | Long-term traffic, authority | Organic traffic, rankings, DA |
-| **SEM/PPC** | Immediate visibility, intent | CTR, CPC, ROAS |
-| **Social Media** | Awareness, engagement | Reach, engagement, followers |
-| **Email** | Retention, conversion | Open rate, CTR, conversions |
-| **Content** | Authority, SEO, nurture | Traffic, time on page, shares |
-| **Display** | Awareness, retargeting | Impressions, viewability, CTR |
-| **Affiliate** | Performance-based reach | Conversions, revenue, CAC |
+| Channel          | Best For                     | Key Metrics                   |
+| ---------------- | ---------------------------- | ----------------------------- |
+| **SEO**          | Long-term traffic, authority | Organic traffic, rankings, DA |
+| **SEM/PPC**      | Immediate visibility, intent | CTR, CPC, ROAS                |
+| **Social Media** | Awareness, engagement        | Reach, engagement, followers  |
+| **Email**        | Retention, conversion        | Open rate, CTR, conversions   |
+| **Content**      | Authority, SEO, nurture      | Traffic, time on page, shares |
+| **Display**      | Awareness, retargeting       | Impressions, viewability, CTR |
+| **Affiliate**    | Performance-based reach      | Conversions, revenue, CAC     |
 
 ### Marketing Funnel Metrics
 
@@ -284,44 +284,44 @@ CONTENT MATRIX:
 
 ### Content Calendar
 
-| Element | Frequency | Owner |
-|---------|-----------|-------|
-| **Blog** | 2-4x/week | Content team |
-| **Social** | Daily | Social team |
-| **Email** | Weekly | Email team |
-| **Video** | Weekly | Creative |
-| **Webinar** | Monthly | Demand gen |
+| Element         | Frequency | Owner        |
+| --------------- | --------- | ------------ |
+| **Blog**        | 2-4x/week | Content team |
+| **Social**      | Daily     | Social team  |
+| **Email**       | Weekly    | Email team   |
+| **Video**       | Weekly    | Creative     |
+| **Webinar**     | Monthly   | Demand gen   |
 | **White Paper** | Quarterly | Content team |
 
 ## Marketing Analytics
 
 ### Marketing Metrics Framework
 
-| Category | Metric | Formula |
-|----------|--------|---------|
-| **Acquisition** | CAC | Total marketing spend / New customers |
-| | CPL | Marketing spend / Leads |
-| | ROAS | Revenue / Ad spend |
-| **Engagement** | CTR | Clicks / Impressions |
-| | Engagement Rate | Engagements / Reach |
-| | Time on Site | Average session duration |
-| **Conversion** | Conversion Rate | Conversions / Visitors |
-| | Lead-to-Customer | Customers / Leads |
-| | Cart Abandonment | Abandoned / Started |
-| **Value** | CLV | Average value x Purchase frequency x Lifespan |
-| | CLV:CAC | Customer lifetime value / CAC |
-| | Marketing ROI | (Revenue - Cost) / Cost |
+| Category        | Metric           | Formula                                       |
+| --------------- | ---------------- | --------------------------------------------- |
+| **Acquisition** | CAC              | Total marketing spend / New customers         |
+|                 | CPL              | Marketing spend / Leads                       |
+|                 | ROAS             | Revenue / Ad spend                            |
+| **Engagement**  | CTR              | Clicks / Impressions                          |
+|                 | Engagement Rate  | Engagements / Reach                           |
+|                 | Time on Site     | Average session duration                      |
+| **Conversion**  | Conversion Rate  | Conversions / Visitors                        |
+|                 | Lead-to-Customer | Customers / Leads                             |
+|                 | Cart Abandonment | Abandoned / Started                           |
+| **Value**       | CLV              | Average value x Purchase frequency x Lifespan |
+|                 | CLV:CAC          | Customer lifetime value / CAC                 |
+|                 | Marketing ROI    | (Revenue - Cost) / Cost                       |
 
 ### Attribution Models
 
-| Model | Description | Best For |
-|-------|-------------|----------|
-| **First Touch** | 100% credit to first interaction | Awareness campaigns |
-| **Last Touch** | 100% credit to last interaction | Direct response |
-| **Linear** | Equal credit across all touches | Long sales cycles |
-| **Time Decay** | More credit to recent touches | Nurture campaigns |
-| **Position-Based** | 40% first, 40% last, 20% middle | Balanced view |
-| **Data-Driven** | Algorithmic attribution | Large datasets |
+| Model              | Description                      | Best For            |
+| ------------------ | -------------------------------- | ------------------- |
+| **First Touch**    | 100% credit to first interaction | Awareness campaigns |
+| **Last Touch**     | 100% credit to last interaction  | Direct response     |
+| **Linear**         | Equal credit across all touches  | Long sales cycles   |
+| **Time Decay**     | More credit to recent touches    | Nurture campaigns   |
+| **Position-Based** | 40% first, 40% last, 20% middle  | Balanced view       |
+| **Data-Driven**    | Algorithmic attribution          | Large datasets      |
 
 ## Campaign Management
 

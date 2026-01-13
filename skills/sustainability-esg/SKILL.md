@@ -67,26 +67,26 @@ ASSESSMENT PROCESS:
 
 ### ESG Goals Framework
 
-| Category | Goal Type | Timeline | Example |
-|----------|-----------|----------|---------|
-| **Carbon** | Science-based | 2030/2050 | Net zero by 2050 |
-| **Energy** | Percentage | 2030 | 100% renewable |
-| **Waste** | Absolute | 2030 | Zero waste to landfill |
-| **Water** | Intensity | 2030 | 30% reduction per unit |
-| **Social** | Representation | 2030 | 50% diverse leadership |
-| **Governance** | Structure | 2025 | Board ESG committee |
+| Category       | Goal Type      | Timeline  | Example                |
+| -------------- | -------------- | --------- | ---------------------- |
+| **Carbon**     | Science-based  | 2030/2050 | Net zero by 2050       |
+| **Energy**     | Percentage     | 2030      | 100% renewable         |
+| **Waste**      | Absolute       | 2030      | Zero waste to landfill |
+| **Water**      | Intensity      | 2030      | 30% reduction per unit |
+| **Social**     | Representation | 2030      | 50% diverse leadership |
+| **Governance** | Structure      | 2025      | Board ESG committee    |
 
 ## Carbon Management
 
 ### Carbon Reduction Strategy
 
-| Strategy | Impact | Timeline | Investment |
-|----------|--------|----------|------------|
-| **Energy Efficiency** | 10-30% | Near-term | Low-Medium |
-| **Renewable Energy** | 30-60% Scope 2 | Medium | Medium |
-| **Electrification** | Variable | Medium-Long | High |
-| **Supply Chain** | Scope 3 reduction | Long | Variable |
-| **Offsets** | Net zero gap | Ongoing | Variable |
+| Strategy              | Impact            | Timeline    | Investment |
+| --------------------- | ----------------- | ----------- | ---------- |
+| **Energy Efficiency** | 10-30%            | Near-term   | Low-Medium |
+| **Renewable Energy**  | 30-60% Scope 2    | Medium      | Medium     |
+| **Electrification**   | Variable          | Medium-Long | High       |
+| **Supply Chain**      | Scope 3 reduction | Long        | Variable   |
+| **Offsets**           | Net zero gap      | Ongoing     | Variable   |
 
 For detailed GHG accounting (Scope 1/2/3), science-based targets, circular economy principles, and renewable energy strategy, see [Carbon & Circular Economy Reference](references/carbon-circular-economy.md).
 
@@ -121,12 +121,12 @@ GOVERNANCE:
 
 ### Supplier Assessment
 
-| Tier | Criteria | Assessment |
-|------|----------|------------|
-| **Critical** | High ESG risk, strategic | Full audit, annual |
-| **High** | Significant risk | Desktop + selective audit |
-| **Medium** | Moderate risk | Self-assessment |
-| **Low** | Low risk | Code acknowledgment |
+| Tier         | Criteria                 | Assessment                |
+| ------------ | ------------------------ | ------------------------- |
+| **Critical** | High ESG risk, strategic | Full audit, annual        |
+| **High**     | Significant risk         | Desktop + selective audit |
+| **Medium**   | Moderate risk            | Self-assessment           |
+| **Low**      | Low risk                 | Code acknowledgment       |
 
 ### Sustainable Procurement
 
@@ -161,14 +161,14 @@ For detailed TCFD framework, climate scenario analysis, and risk categorization,
 
 ### Reporting Framework Quick Reference
 
-| Framework | Focus | Use |
-|-----------|-------|-----|
-| **GRI** | Comprehensive sustainability | General reporting |
-| **SASB** | Industry-specific, financial | Investor focus |
-| **TCFD** | Climate risk | Climate disclosure |
-| **CDP** | Environmental data | Benchmarking |
-| **UN SDGs** | Global goals | Impact mapping |
-| **CSRD/ESRS** | EU standards | EU operations |
+| Framework     | Focus                        | Use                |
+| ------------- | ---------------------------- | ------------------ |
+| **GRI**       | Comprehensive sustainability | General reporting  |
+| **SASB**      | Industry-specific, financial | Investor focus     |
+| **TCFD**      | Climate risk                 | Climate disclosure |
+| **CDP**       | Environmental data           | Benchmarking       |
+| **UN SDGs**   | Global goals                 | Impact mapping     |
+| **CSRD/ESRS** | EU standards                 | EU operations      |
 
 For detailed GRI standards, TCFD recommendations, ESG data management, and ESG ratings, see [ESG Reporting Reference](references/esg-reporting.md).
 
@@ -176,14 +176,14 @@ For detailed GRI standards, TCFD recommendations, ESG data management, and ESG r
 
 ### ESG Communication
 
-| Stakeholder | Channel | Frequency | Content |
-|-------------|---------|-----------|---------|
-| **Investors** | Annual report, calls | Quarterly | Performance, strategy |
-| **Customers** | Product info, website | Ongoing | Product sustainability |
-| **Employees** | Intranet, town halls | Monthly | Programs, progress |
-| **Regulators** | Filings, meetings | As required | Compliance |
-| **Communities** | Local engagement | Ongoing | Impact, investment |
-| **NGOs** | Direct dialogue | As needed | Issues, collaboration |
+| Stakeholder     | Channel               | Frequency   | Content                |
+| --------------- | --------------------- | ----------- | ---------------------- |
+| **Investors**   | Annual report, calls  | Quarterly   | Performance, strategy  |
+| **Customers**   | Product info, website | Ongoing     | Product sustainability |
+| **Employees**   | Intranet, town halls  | Monthly     | Programs, progress     |
+| **Regulators**  | Filings, meetings     | As required | Compliance             |
+| **Communities** | Local engagement      | Ongoing     | Impact, investment     |
+| **NGOs**        | Direct dialogue       | As needed   | Issues, collaboration  |
 
 ## References
 

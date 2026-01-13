@@ -29,7 +29,7 @@
 [![Marketplace Skills](https://img.shields.io/badge/Marketplace_Skills-1,496+-ec4899?style=for-the-badge&logo=package&logoColor=white)](./plugins/marketplaces/)
 [![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge&logo=opensourceinitiative&logoColor=white)](./LICENSE)
 
-**Version 2.0.0** • **Last Updated: January 3, 2026** • **Author: [Travis Neuman](https://travisjneuman.com)**
+**Version 2.1.0** • **Last Updated: January 13, 2026** • **Author: [Travis Neuman](https://travisjneuman.com)**
 
 </div>
 
@@ -138,6 +138,19 @@ The **Ultimate Claude Code Toolkit** transforms [Claude Code](https://docs.anthr
 | ⚡ **Parallel Tool Calls**   | Maximum efficiency by calling independent tools simultaneously                    | All operations                                                           |
 
 **Result:** Autonomous feature implementation, more calibrated research, distinctive frontends, general solutions, faster iteration, perfect state persistence. See [CHANGELOG.md](CHANGELOG.md#200---january-3-2026) for complete details.
+
+### 🆕 What's New in v2.1 (January 2026)
+
+**Installation & Setup Improvements:** Zero-friction onboarding for new machines and users.
+
+| Feature                  | Description                                               | Usage                                                                                                  |
+| :----------------------- | :-------------------------------------------------------- | :----------------------------------------------------------------------------------------------------- |
+| 🚀 **One-Line Install**  | Single curl command sets up everything automatically      | `curl -fsSL https://raw.githubusercontent.com/travisjneuman/.claude/master/scripts/install.sh \| bash` |
+| 🔧 **Bootstrap Command** | Verifies and repairs configuration on any machine         | Run `/bootstrap` in Claude Code                                                                        |
+| ⚡ **SessionStart Hook** | Automatic skill/agent routing without explicit invocation | Always active - domain keywords trigger routing                                                        |
+| 🌐 **Cross-Platform**    | Full support for macOS, Linux, and Windows (via Git Bash) | Platform auto-detected during install                                                                  |
+
+**Result:** New users get a fully working setup in under 1 minute. Existing users get automatic routing without needing `/start-task`. See [CHANGELOG.md](CHANGELOG.md#210---january-13-2026) for complete details.
 
 ---
 

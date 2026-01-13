@@ -30,18 +30,18 @@ Locale:
 
 ### What Needs Localization?
 
-| Category | Examples |
-|----------|----------|
-| **Text** | UI labels, messages, errors |
-| **Numbers** | 1,234.56 vs 1.234,56 |
-| **Dates** | MM/DD/YYYY vs DD/MM/YYYY |
-| **Times** | 12-hour vs 24-hour |
-| **Currency** | $1,234.56 vs €1.234,56 |
-| **Plurals** | 1 item vs 2 items vs 5 items |
-| **Direction** | LTR vs RTL |
-| **Images** | Cultural appropriateness |
-| **Colors** | Cultural significance |
-| **Names** | Order, formality |
+| Category      | Examples                     |
+| ------------- | ---------------------------- |
+| **Text**      | UI labels, messages, errors  |
+| **Numbers**   | 1,234.56 vs 1.234,56         |
+| **Dates**     | MM/DD/YYYY vs DD/MM/YYYY     |
+| **Times**     | 12-hour vs 24-hour           |
+| **Currency**  | $1,234.56 vs €1.234,56       |
+| **Plurals**   | 1 item vs 2 items vs 5 items |
+| **Direction** | LTR vs RTL                   |
+| **Images**    | Cultural appropriateness     |
+| **Colors**    | Cultural significance        |
+| **Names**     | Order, formality             |
 
 ---
 
@@ -115,23 +115,23 @@ Always use library pluralization, never DIY:
 
 ```typescript
 // Date formatting
-const date = new Date('2024-03-15');
+const date = new Date("2024-03-15");
 
-new Intl.DateTimeFormat('en-US').format(date);
+new Intl.DateTimeFormat("en-US").format(date);
 // "3/15/2024"
 
-new Intl.DateTimeFormat('de-DE').format(date);
+new Intl.DateTimeFormat("de-DE").format(date);
 // "15.3.2024"
 
-new Intl.DateTimeFormat('ja-JP').format(date);
+new Intl.DateTimeFormat("ja-JP").format(date);
 // "2024/3/15"
 
 // With options
-new Intl.DateTimeFormat('en-US', {
-  weekday: 'long',
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
+new Intl.DateTimeFormat("en-US", {
+  weekday: "long",
+  year: "numeric",
+  month: "long",
+  day: "numeric",
 }).format(date);
 // "Friday, March 15, 2024"
 ```
@@ -144,10 +144,10 @@ const utcDate = new Date().toISOString();
 // "2024-03-15T14:30:00.000Z"
 
 // Display in user's timezone
-new Intl.DateTimeFormat('en-US', {
-  timeZone: 'America/New_York',
-  dateStyle: 'full',
-  timeStyle: 'long',
+new Intl.DateTimeFormat("en-US", {
+  timeZone: "America/New_York",
+  dateStyle: "full",
+  timeStyle: "long",
 }).format(new Date(utcDate));
 // "Friday, March 15, 2024 at 10:30:00 AM EDT"
 
@@ -158,15 +158,15 @@ const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 ### Relative Time
 
 ```typescript
-const rtf = new Intl.RelativeTimeFormat('en', { numeric: 'auto' });
+const rtf = new Intl.RelativeTimeFormat("en", { numeric: "auto" });
 
-rtf.format(-1, 'day');    // "yesterday"
-rtf.format(1, 'day');     // "tomorrow"
-rtf.format(-3, 'hour');   // "3 hours ago"
-rtf.format(2, 'week');    // "in 2 weeks"
+rtf.format(-1, "day"); // "yesterday"
+rtf.format(1, "day"); // "tomorrow"
+rtf.format(-3, "hour"); // "3 hours ago"
+rtf.format(2, "week"); // "in 2 weeks"
 
 // For automatic unit selection, use a library like date-fns
-import { formatDistanceToNow } from 'date-fns';
+import { formatDistanceToNow } from "date-fns";
 formatDistanceToNow(date, { addSuffix: true });
 // "3 days ago"
 ```
@@ -180,18 +180,18 @@ formatDistanceToNow(date, { addSuffix: true });
 ```typescript
 const number = 1234567.89;
 
-new Intl.NumberFormat('en-US').format(number);
+new Intl.NumberFormat("en-US").format(number);
 // "1,234,567.89"
 
-new Intl.NumberFormat('de-DE').format(number);
+new Intl.NumberFormat("de-DE").format(number);
 // "1.234.567,89"
 
-new Intl.NumberFormat('fr-FR').format(number);
+new Intl.NumberFormat("fr-FR").format(number);
 // "1 234 567,89"
 
 // Percentages
-new Intl.NumberFormat('en-US', {
-  style: 'percent',
+new Intl.NumberFormat("en-US", {
+  style: "percent",
   minimumFractionDigits: 1,
 }).format(0.256);
 // "25.6%"
@@ -202,21 +202,21 @@ new Intl.NumberFormat('en-US', {
 ```typescript
 const amount = 1234.56;
 
-new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD',
+new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
 }).format(amount);
 // "$1,234.56"
 
-new Intl.NumberFormat('de-DE', {
-  style: 'currency',
-  currency: 'EUR',
+new Intl.NumberFormat("de-DE", {
+  style: "currency",
+  currency: "EUR",
 }).format(amount);
 // "1.234,56 €"
 
-new Intl.NumberFormat('ja-JP', {
-  style: 'currency',
-  currency: 'JPY',
+new Intl.NumberFormat("ja-JP", {
+  style: "currency",
+  currency: "JPY",
 }).format(amount);
 // "¥1,235" (no decimal for JPY)
 ```
@@ -226,16 +226,16 @@ new Intl.NumberFormat('ja-JP', {
 ```typescript
 // Store amount + currency code
 interface Money {
-  amount: number;      // In smallest unit (cents)
-  currency: string;    // ISO 4217 code (USD, EUR, etc.)
+  amount: number; // In smallest unit (cents)
+  currency: string; // ISO 4217 code (USD, EUR, etc.)
 }
 
 // Format for display
 function formatMoney(money: Money, locale: string): string {
   return new Intl.NumberFormat(locale, {
-    style: 'currency',
+    style: "currency",
     currency: money.currency,
-  }).format(money.amount / 100);  // Convert cents to units
+  }).format(money.amount / 100); // Convert cents to units
 }
 
 // Handle exchange rates on backend
@@ -292,7 +292,7 @@ html[dir="rtl"] {
 
 /* Or use :dir() pseudo-class */
 .icon:dir(rtl) {
-  transform: scaleX(-1);  /* Mirror icons */
+  transform: scaleX(-1); /* Mirror icons */
 }
 
 /* Flexbox auto-reverses in RTL */
@@ -307,17 +307,15 @@ html[dir="rtl"] {
 ```html
 <!-- Set at document level -->
 <html lang="ar" dir="rtl">
+  <!-- Or dynamically -->
+  <div dir="auto">
+    <!-- Auto-detects text direction -->
+    مرحبا بالعالم
+  </div>
 
-<!-- Or dynamically -->
-<div dir="auto">
-  <!-- Auto-detects text direction -->
-  مرحبا بالعالم
-</div>
-
-<!-- Isolate bidirectional text -->
-<p>
-  The word <bdi>مرحبا</bdi> means "hello".
-</p>
+  <!-- Isolate bidirectional text -->
+  <p>The word <bdi>مرحبا</bdi> means "hello".</p>
+</html>
 ```
 
 ---
@@ -365,7 +363,7 @@ function App() {
 ### Using Translations
 
 ```tsx
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from "react-intl";
 
 function ProductCard({ product }) {
   const intl = useIntl();
@@ -380,12 +378,16 @@ function ProductCard({ product }) {
       {/* Hook-based (for attributes, etc.) */}
       <img
         src={product.image}
-        alt={intl.formatMessage({ id: 'product.image_alt' })}
+        alt={intl.formatMessage({ id: "product.image_alt" })}
       />
 
       {/* Numbers */}
       <p>
-        <FormattedNumber value={product.price} style="currency" currency="USD" />
+        <FormattedNumber
+          value={product.price}
+          style="currency"
+          currency="USD"
+        />
       </p>
 
       {/* Dates */}
@@ -434,15 +436,15 @@ function ProductCard({ product }) {
 ### i18next Setup
 
 ```typescript
-import i18next from 'i18next';
-import Backend from 'i18next-fs-backend';
+import i18next from "i18next";
+import Backend from "i18next-fs-backend";
 
 await i18next.use(Backend).init({
-  lng: 'en',
-  fallbackLng: 'en',
-  supportedLngs: ['en', 'es', 'fr', 'de'],
+  lng: "en",
+  fallbackLng: "en",
+  supportedLngs: ["en", "es", "fr", "de"],
   backend: {
-    loadPath: './locales/{{lng}}/{{ns}}.json',
+    loadPath: "./locales/{{lng}}/{{ns}}.json",
   },
   interpolation: {
     escapeValue: false,
@@ -452,25 +454,25 @@ await i18next.use(Backend).init({
 // Usage
 const t = i18next.t;
 
-t('welcome', { name: 'John' });
+t("welcome", { name: "John" });
 // "Welcome, John!"
 
 // Change language
-await i18next.changeLanguage('es');
+await i18next.changeLanguage("es");
 ```
 
 ### Express Middleware
 
 ```typescript
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response, NextFunction } from "express";
 
 function detectLocale(req: Request, res: Response, next: NextFunction) {
   // Priority: Query param > Cookie > Accept-Language header > Default
   const locale =
     req.query.locale ||
     req.cookies.locale ||
-    req.acceptsLanguages(['en', 'es', 'fr']) ||
-    'en';
+    req.acceptsLanguages(["en", "es", "fr"]) ||
+    "en";
 
   req.locale = locale;
   req.t = i18next.getFixedT(locale);
@@ -480,9 +482,9 @@ function detectLocale(req: Request, res: Response, next: NextFunction) {
 
 app.use(detectLocale);
 
-app.get('/api/greeting', (req, res) => {
+app.get("/api/greeting", (req, res) => {
   res.json({
-    message: req.t('greeting', { name: req.user.name }),
+    message: req.t("greeting", { name: req.user.name }),
   });
 });
 ```
@@ -518,7 +520,7 @@ locales/
 
   // Or flat with prefixes
   "btn_login": "Sign In",
-  "err_invalid_credentials": "Invalid email or password",
+  "err_invalid_credentials": "Invalid email or password"
 
   // Consistent, descriptive, unique
 }
@@ -564,17 +566,21 @@ AUTOMATION:
 
 function pseudoLocalize(text: string): string {
   const charMap: Record<string, string> = {
-    a: 'ä', b: 'β', c: 'ç', d: 'δ', e: 'ë',
+    a: "ä",
+    b: "β",
+    c: "ç",
+    d: "δ",
+    e: "ë",
     // ... etc
   };
 
   const transformed = text
-    .split('')
-    .map(c => charMap[c.toLowerCase()] || c)
-    .join('');
+    .split("")
+    .map((c) => charMap[c.toLowerCase()] || c)
+    .join("");
 
   // Add padding (most translations are 30% longer)
-  const padding = '!'.repeat(Math.ceil(text.length * 0.3));
+  const padding = "!".repeat(Math.ceil(text.length * 0.3));
 
   return `[${transformed}${padding}]`;
 }
@@ -602,6 +608,7 @@ FOR EACH LOCALE:
 ## Best Practices
 
 ### DO:
+
 - Externalize ALL user-facing strings
 - Use ICU message format for complex strings
 - Support locale switching without reload
@@ -612,6 +619,7 @@ FOR EACH LOCALE:
 - Support RTL from the start
 
 ### DON'T:
+
 - Hardcode any user-facing text
 - Concatenate strings for messages
 - Assume date/number formats
@@ -626,6 +634,7 @@ FOR EACH LOCALE:
 ## Checklist
 
 ### Initial Setup
+
 - [ ] Choose i18n library
 - [ ] Set up translation file structure
 - [ ] Configure locale detection
@@ -633,6 +642,7 @@ FOR EACH LOCALE:
 - [ ] Set up RTL support
 
 ### Per Feature
+
 - [ ] Extract all strings to translation files
 - [ ] Use message format for variables
 - [ ] Handle plurals correctly
@@ -641,6 +651,7 @@ FOR EACH LOCALE:
 - [ ] Review text in context
 
 ### Launch
+
 - [ ] Professional translations complete
 - [ ] All locales tested
 - [ ] RTL layouts verified

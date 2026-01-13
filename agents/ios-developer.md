@@ -18,6 +18,7 @@ Expert iOS, iPadOS, and tvOS application developer with deep knowledge of Swift,
 ## Capabilities
 
 ### Core Expertise
+
 - Swift 5.9+ and modern language features
 - SwiftUI declarative UI development
 - UIKit and AppKit when needed
@@ -28,6 +29,7 @@ Expert iOS, iPadOS, and tvOS application developer with deep knowledge of Swift,
 - App Store submission and distribution
 
 ### Platform Features
+
 - iOS/iPadOS/tvOS/watchOS development
 - WidgetKit and App Intents
 - SiriKit and Shortcuts

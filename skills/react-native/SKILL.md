@@ -9,17 +9,18 @@ Build native iOS and Android apps with React Native and Expo.
 
 ## Framework Options
 
-| Framework | Use When |
-|-----------|----------|
-| **Expo** (Recommended) | Most apps, faster development, managed workflow |
-| **React Native CLI** | Need custom native modules, brownfield apps |
-| **Expo with Dev Client** | Best of both - Expo DX with native modules |
+| Framework                | Use When                                        |
+| ------------------------ | ----------------------------------------------- |
+| **Expo** (Recommended)   | Most apps, faster development, managed workflow |
+| **React Native CLI**     | Need custom native modules, brownfield apps     |
+| **Expo with Dev Client** | Best of both - Expo DX with native modules      |
 
 ---
 
 ## Project Setup
 
 ### Expo (Recommended)
+
 ```bash
 npx create-expo-app@latest my-app
 cd my-app
@@ -27,6 +28,7 @@ npx expo start
 ```
 
 ### React Native CLI
+
 ```bash
 npx @react-native-community/cli init MyApp
 cd MyApp
@@ -38,8 +40,9 @@ npx react-native run-ios  # or run-android
 ## Core Components
 
 ### Basic Structure
+
 ```tsx
-import { View, Text, StyleSheet, ScrollView, SafeAreaView } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, SafeAreaView } from "react-native";
 
 export default function App() {
   return (
@@ -54,19 +57,20 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
   content: {
     padding: 16,
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
 });
 ```
 
 ### Common Components
+
 ```tsx
 import {
   View,
@@ -117,15 +121,17 @@ import {
 ## Navigation
 
 ### React Navigation Setup
+
 ```bash
 npm install @react-navigation/native @react-navigation/native-stack
 npx expo install react-native-screens react-native-safe-area-context
 ```
 
 ### Stack Navigation
+
 ```tsx
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 type RootStackParamList = {
   Home: undefined;
@@ -141,7 +147,7 @@ export default function App() {
         <Stack.Screen
           name="Home"
           component={HomeScreen}
-          options={{ title: 'My App' }}
+          options={{ title: "My App" }}
         />
         <Stack.Screen
           name="Details"
@@ -154,16 +160,17 @@ export default function App() {
 }
 
 // Navigate
-navigation.navigate('Details', { itemId: '123' });
+navigation.navigate("Details", { itemId: "123" });
 
 // Go back
 navigation.goBack();
 ```
 
 ### Tab Navigation
+
 ```tsx
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Ionicons } from '@expo/vector-icons';
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Ionicons } from "@expo/vector-icons";
 
 const Tab = createBottomTabNavigator();
 
@@ -172,9 +179,14 @@ function TabNavigator() {
     <Tab.Navigator
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
-          const iconName = route.name === 'Home'
-            ? (focused ? 'home' : 'home-outline')
-            : (focused ? 'settings' : 'settings-outline');
+          const iconName =
+            route.name === "Home"
+              ? focused
+                ? "home"
+                : "home-outline"
+              : focused
+                ? "settings"
+                : "settings-outline";
           return <Ionicons name={iconName} size={size} color={color} />;
         },
       })}
@@ -191,10 +203,11 @@ function TabNavigator() {
 ## State Management
 
 ### Zustand (Recommended)
+
 ```tsx
-import { create } from 'zustand';
-import { persist, createJSONStorage } from 'zustand/middleware';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { create } from "zustand";
+import { persist, createJSONStorage } from "zustand/middleware";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface AuthStore {
   user: User | null;
@@ -212,28 +225,33 @@ export const useAuthStore = create<AuthStore>()(
       logout: () => set({ user: null, token: null }),
     }),
     {
-      name: 'auth-storage',
+      name: "auth-storage",
       storage: createJSONStorage(() => AsyncStorage),
-    }
-  )
+    },
+  ),
 );
 ```
 
 ### React Query
+
 ```tsx
-import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+} from "@tanstack/react-query";
 
 const queryClient = new QueryClient();
 
 // Wrap app
 <QueryClientProvider client={queryClient}>
   <App />
-</QueryClientProvider>
+</QueryClientProvider>;
 
 // Use in component
 function ItemList() {
   const { data, isLoading, error, refetch } = useQuery({
-    queryKey: ['items'],
+    queryKey: ["items"],
     queryFn: fetchItems,
   });
 
@@ -257,26 +275,27 @@ function ItemList() {
 ## Styling
 
 ### StyleSheet
+
 ```tsx
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ffffff',
+    backgroundColor: "#ffffff",
   },
   row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     padding: 16,
     borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: '#ccc',
+    borderBottomColor: "#ccc",
   },
   text: {
     fontSize: 16,
-    color: '#333',
+    color: "#333",
   },
   shadow: {
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
@@ -286,22 +305,19 @@ const styles = StyleSheet.create({
 ```
 
 ### NativeWind (Tailwind for RN)
+
 ```bash
 npm install nativewind tailwindcss
 ```
 
 ```tsx
-import { Text, View } from 'react-native';
+import { Text, View } from "react-native";
 
 export function Card() {
   return (
     <View className="bg-white rounded-lg p-4 shadow-md">
-      <Text className="text-lg font-bold text-gray-900">
-        Card Title
-      </Text>
-      <Text className="text-gray-600 mt-2">
-        Card content goes here
-      </Text>
+      <Text className="text-lg font-bold text-gray-900">Card Title</Text>
+      <Text className="text-gray-600 mt-2">Card content goes here</Text>
     </View>
   );
 }
@@ -312,8 +328,9 @@ export function Card() {
 ## Native Features
 
 ### Camera (Expo)
+
 ```tsx
-import { Camera, CameraType } from 'expo-camera';
+import { Camera, CameraType } from "expo-camera";
 
 function CameraScreen() {
   const [permission, requestPermission] = Camera.useCameraPermissions();
@@ -327,9 +344,7 @@ function CameraScreen() {
   };
 
   if (!permission?.granted) {
-    return (
-      <Button title="Grant Permission" onPress={requestPermission} />
-    );
+    return <Button title="Grant Permission" onPress={requestPermission} />;
   }
 
   return (
@@ -343,9 +358,10 @@ function CameraScreen() {
 ```
 
 ### Push Notifications (Expo)
+
 ```tsx
-import * as Notifications from 'expo-notifications';
-import { useEffect } from 'react';
+import * as Notifications from "expo-notifications";
+import { useEffect } from "react";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -357,7 +373,7 @@ Notifications.setNotificationHandler({
 
 async function registerForPushNotifications() {
   const { status } = await Notifications.requestPermissionsAsync();
-  if (status !== 'granted') return;
+  if (status !== "granted") return;
 
   const token = await Notifications.getExpoPushTokenAsync();
   return token.data;
@@ -368,19 +384,20 @@ useEffect(() => {
   const subscription = Notifications.addNotificationReceivedListener(
     (notification) => {
       console.log(notification);
-    }
+    },
   );
   return () => subscription.remove();
 }, []);
 ```
 
 ### Location
+
 ```tsx
-import * as Location from 'expo-location';
+import * as Location from "expo-location";
 
 async function getLocation() {
   const { status } = await Location.requestForegroundPermissionsAsync();
-  if (status !== 'granted') return;
+  if (status !== "granted") return;
 
   const location = await Location.getCurrentPositionAsync({});
   return {
@@ -395,6 +412,7 @@ async function getLocation() {
 ## Performance
 
 ### FlatList Optimization
+
 ```tsx
 <FlatList
   data={items}
@@ -410,12 +428,12 @@ async function getLocation() {
     offset: ITEM_HEIGHT * index,
     index,
   })}
-/>
+/>;
 
 // Memoize render item
 const renderItem = useCallback(
   ({ item }: { item: Item }) => <MemoizedItem item={item} />,
-  []
+  [],
 );
 
 const MemoizedItem = memo(({ item }: { item: Item }) => (
@@ -426,8 +444,9 @@ const MemoizedItem = memo(({ item }: { item: Item }) => (
 ```
 
 ### Image Optimization
+
 ```tsx
-import { Image } from 'expo-image';
+import { Image } from "expo-image";
 
 <Image
   source={{ uri: imageUrl }}
@@ -436,7 +455,7 @@ import { Image } from 'expo-image';
   placeholder={blurhash}
   transition={200}
   cachePolicy="memory-disk"
-/>
+/>;
 ```
 
 ---
@@ -444,31 +463,26 @@ import { Image } from 'expo-image';
 ## Testing
 
 ### Jest + React Native Testing Library
-```tsx
-import { render, fireEvent, waitFor } from '@testing-library/react-native';
-import { LoginScreen } from './LoginScreen';
 
-describe('LoginScreen', () => {
-  it('should login successfully', async () => {
+```tsx
+import { render, fireEvent, waitFor } from "@testing-library/react-native";
+import { LoginScreen } from "./LoginScreen";
+
+describe("LoginScreen", () => {
+  it("should login successfully", async () => {
     const onLogin = jest.fn();
     const { getByPlaceholderText, getByText } = render(
-      <LoginScreen onLogin={onLogin} />
+      <LoginScreen onLogin={onLogin} />,
     );
 
-    fireEvent.changeText(
-      getByPlaceholderText('Email'),
-      'test@example.com'
-    );
-    fireEvent.changeText(
-      getByPlaceholderText('Password'),
-      'password123'
-    );
-    fireEvent.press(getByText('Login'));
+    fireEvent.changeText(getByPlaceholderText("Email"), "test@example.com");
+    fireEvent.changeText(getByPlaceholderText("Password"), "password123");
+    fireEvent.press(getByText("Login"));
 
     await waitFor(() => {
       expect(onLogin).toHaveBeenCalledWith({
-        email: 'test@example.com',
-        password: 'password123',
+        email: "test@example.com",
+        password: "password123",
       });
     });
   });
@@ -480,6 +494,7 @@ describe('LoginScreen', () => {
 ## App Store Deployment
 
 ### Expo EAS Build
+
 ```bash
 # Install EAS CLI
 npm install -g eas-cli
@@ -499,6 +514,7 @@ eas submit --platform android
 ```
 
 ### app.json Configuration
+
 ```json
 {
   "expo": {
@@ -522,6 +538,7 @@ eas submit --platform android
 ## Best Practices
 
 ### DO:
+
 - Use Expo for faster development
 - Implement proper TypeScript types
 - Use FlashList for large lists
@@ -529,6 +546,7 @@ eas submit --platform android
 - Test on real devices
 
 ### DON'T:
+
 - Inline styles in render
 - Skip memoization for lists
 - Ignore platform differences

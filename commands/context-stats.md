@@ -14,11 +14,11 @@ Display current context window usage and provide optimization recommendations.
 
 ## Platform Compatibility
 
-| Platform | Status | Notes |
-|----------|--------|-------|
-| Windows | ✅ | Fully supported |
-| macOS | ✅ | Fully supported |
-| Linux | ✅ | Fully supported |
+| Platform | Status | Notes           |
+| -------- | ------ | --------------- |
+| Windows  | ✅     | Fully supported |
+| macOS    | ✅     | Fully supported |
+| Linux    | ✅     | Fully supported |
 
 This command uses Claude's internal estimation - no platform-specific code.
 
@@ -27,11 +27,13 @@ This command uses Claude's internal estimation - no platform-specific code.
 ### Step 1: Gather Statistics
 
 **Context window info:**
+
 - Model context limit (varies by model)
 - Approximate current usage
 - Available headroom
 
 **Session activity:**
+
 - Messages in conversation
 - Tools invoked
 - Files read
@@ -72,6 +74,7 @@ This command uses Claude's internal estimation - no platform-specific code.
 Based on usage level:
 
 **If > 80% used:**
+
 ```
 ⚠️  Context window nearly full!
 
@@ -82,6 +85,7 @@ Recommendations:
 ```
 
 **If > 50% used:**
+
 ```
 ℹ️  Context window at moderate usage.
 
@@ -92,6 +96,7 @@ Tips:
 ```
 
 **If < 50% used:**
+
 ```
 ✅ Context window healthy.
 
@@ -114,24 +119,26 @@ MCP Server Token Impact:
 ## Technical Notes
 
 **Token estimation:**
+
 - Rough estimate: ~4 characters per token
 - System prompt is fixed overhead
 - Conversation grows with each exchange
 - Files read add to context
 
 **Accuracy:**
+
 - Estimates are approximate
 - Actual tokenization varies
 - Use as guidance, not precise measurement
 
 ## Related Commands
 
-| Command | Purpose |
-|---------|---------|
-| `/compact` | Summarize to reduce context |
-| `/clear` | Clear conversation history |
-| `/mcp` | Manage MCP servers |
-| `/health-check` | Full system diagnostics |
+| Command         | Purpose                     |
+| --------------- | --------------------------- |
+| `/compact`      | Summarize to reduce context |
+| `/clear`        | Clear conversation history  |
+| `/mcp`          | Manage MCP servers          |
+| `/health-check` | Full system diagnostics     |
 
 ## When to Use
 
@@ -142,4 +149,4 @@ MCP Server Token Impact:
 
 ---
 
-*Monitor context usage to maintain optimal Claude Code performance.*
+_Monitor context usage to maintain optimal Claude Code performance._

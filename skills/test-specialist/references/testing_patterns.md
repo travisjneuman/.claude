@@ -3,13 +3,15 @@
 ## Unit Testing Patterns
 
 ### AAA Pattern (Arrange-Act-Assert)
+
 Structure tests in three clear phases:
+
 - **Arrange**: Set up test data and dependencies
 - **Act**: Execute the function/method being tested
 - **Assert**: Verify the expected outcome
 
 ```typescript
-test('calculateTotal adds items correctly', () => {
+test("calculateTotal adds items correctly", () => {
   // Arrange
   const items = [10, 20, 30];
 
@@ -24,34 +26,42 @@ test('calculateTotal adds items correctly', () => {
 ### Test Doubles
 
 #### Mocks
+
 Use mocks to verify interactions and calls:
+
 ```typescript
 const mockFn = jest.fn();
 service.subscribe(mockFn);
-service.notify('event');
-expect(mockFn).toHaveBeenCalledWith('event');
+service.notify("event");
+expect(mockFn).toHaveBeenCalledWith("event");
 ```
 
 #### Stubs
+
 Use stubs to provide predetermined responses:
+
 ```typescript
 const stub = jest.fn().mockReturnValue(42);
 ```
 
 #### Spies
+
 Use spies to track calls while preserving original implementation:
+
 ```typescript
-const spy = jest.spyOn(object, 'method');
+const spy = jest.spyOn(object, "method");
 ```
 
 ### Parameterized Tests
+
 Test multiple scenarios efficiently:
+
 ```typescript
 test.each([
   [1, 1, 2],
   [2, 3, 5],
   [10, -5, 5],
-])('adds %i + %i to equal %i', (a, b, expected) => {
+])("adds %i + %i to equal %i", (a, b, expected) => {
   expect(add(a, b)).toBe(expected);
 });
 ```
@@ -59,7 +69,9 @@ test.each([
 ## Integration Testing Patterns
 
 ### Test Database Setup
+
 Use test-specific databases with proper setup/teardown:
+
 ```typescript
 beforeAll(async () => {
   await database.connect(TEST_DB_URL);
@@ -76,18 +88,20 @@ beforeEach(async () => {
 ```
 
 ### API Testing Pattern
+
 Test API endpoints with proper request/response validation:
+
 ```typescript
-test('POST /users creates user', async () => {
+test("POST /users creates user", async () => {
   const response = await request(app)
-    .post('/users')
-    .send({ name: 'John', email: 'john@test.com' })
+    .post("/users")
+    .send({ name: "John", email: "john@test.com" })
     .expect(201);
 
   expect(response.body).toMatchObject({
     id: expect.any(Number),
-    name: 'John',
-    email: 'john@test.com'
+    name: "John",
+    email: "john@test.com",
   });
 });
 ```
@@ -95,11 +109,13 @@ test('POST /users creates user', async () => {
 ## End-to-End Testing Patterns
 
 ### Page Object Model
+
 Encapsulate page interactions:
+
 ```typescript
 class LoginPage {
   async navigate() {
-    await page.goto('/login');
+    await page.goto("/login");
   }
 
   async login(email: string, password: string) {
@@ -115,11 +131,13 @@ class LoginPage {
 ```
 
 ### User Journey Testing
+
 Test complete user workflows:
+
 ```typescript
-test('user can complete purchase flow', async () => {
+test("user can complete purchase flow", async () => {
   await homePage.navigate();
-  await homePage.searchProduct('laptop');
+  await homePage.searchProduct("laptop");
   await productPage.addToCart();
   await cartPage.proceedToCheckout();
   await checkoutPage.fillShippingInfo(testAddress);
@@ -133,12 +151,14 @@ test('user can complete purchase flow', async () => {
 ## Test Coverage Strategies
 
 ### Coverage Targets
+
 - **Statements**: 80%+ for critical paths
 - **Branches**: 75%+ to ensure all conditionals tested
 - **Functions**: 90%+ for public APIs
 - **Lines**: 80%+ overall
 
 ### Critical Path Priority
+
 1. Business-critical functionality (payment, auth, data integrity)
 2. Complex logic with multiple branches
 3. Bug-prone areas (identified from production issues)
@@ -148,9 +168,11 @@ test('user can complete purchase flow', async () => {
 ## Error and Edge Case Testing
 
 ### Boundary Testing
+
 Test values at boundaries:
+
 ```typescript
-describe('age validation', () => {
+describe("age validation", () => {
   test.each([
     [-1, false],
     [0, true],
@@ -158,51 +180,59 @@ describe('age validation', () => {
     [18, true],
     [120, true],
     [121, false],
-  ])('validates age %i as %s', (age, expected) => {
+  ])("validates age %i as %s", (age, expected) => {
     expect(isValidAge(age)).toBe(expected);
   });
 });
 ```
 
 ### Error Handling
-Test both success and failure paths:
-```typescript
-test('handles network errors gracefully', async () => {
-  mockApi.get.mockRejectedValue(new Error('Network failure'));
 
-  await expect(fetchData()).rejects.toThrow('Network failure');
+Test both success and failure paths:
+
+```typescript
+test("handles network errors gracefully", async () => {
+  mockApi.get.mockRejectedValue(new Error("Network failure"));
+
+  await expect(fetchData()).rejects.toThrow("Network failure");
   expect(logger.error).toHaveBeenCalled();
 });
 ```
 
 ### Null/Undefined Testing
+
 Test with missing or invalid data:
+
 ```typescript
-test.each([null, undefined, '', {}, []])
-  ('handles invalid input: %p', (input) => {
+test.each([null, undefined, "", {}, []])(
+  "handles invalid input: %p",
+  (input) => {
     expect(() => processData(input)).toThrow();
-  });
+  },
+);
 ```
 
 ## Async Testing Patterns
 
 ### Promise Testing
+
 ```typescript
-test('async operation succeeds', async () => {
+test("async operation succeeds", async () => {
   await expect(fetchUser(1)).resolves.toMatchObject({
     id: 1,
-    name: expect.any(String)
+    name: expect.any(String),
   });
 });
 
-test('async operation fails', async () => {
-  await expect(fetchUser(-1)).rejects.toThrow('User not found');
+test("async operation fails", async () => {
+  await expect(fetchUser(-1)).rejects.toThrow("User not found");
 });
 ```
 
 ### Timeout Handling
+
 ```typescript
-test('operation completes within timeout', async () => {
+test("operation completes within timeout", async () => {
   const start = Date.now();
   await performOperation();
   const duration = Date.now() - start;
@@ -214,6 +244,7 @@ test('operation completes within timeout', async () => {
 ## Snapshot Testing
 
 Use snapshots for UI components and data structures:
+
 ```typescript
 test('renders correctly', () => {
   const tree = renderer.create(<Component prop="value" />).toJSON();
@@ -222,11 +253,13 @@ test('renders correctly', () => {
 ```
 
 **When to use snapshots:**
+
 - UI component rendering
 - Large data structure validation
 - API response format verification
 
 **When to avoid snapshots:**
+
 - Dynamic data (timestamps, IDs)
 - Frequently changing structures
 - When specific assertions are clearer
@@ -234,6 +267,7 @@ test('renders correctly', () => {
 ## Test Organization
 
 ### File Structure
+
 ```
 src/
   components/
@@ -250,12 +284,13 @@ src/
 ```
 
 ### Test Naming
+
 ```typescript
-describe('UserService', () => {
-  describe('createUser', () => {
-    test('creates user with valid data', () => {});
-    test('throws error when email is invalid', () => {});
-    test('throws error when email already exists', () => {});
+describe("UserService", () => {
+  describe("createUser", () => {
+    test("creates user with valid data", () => {});
+    test("throws error when email is invalid", () => {});
+    test("throws error when email already exists", () => {});
   });
 });
 ```
@@ -263,8 +298,9 @@ describe('UserService', () => {
 ## Performance Testing
 
 ### Benchmarking
+
 ```typescript
-test('processes large dataset efficiently', () => {
+test("processes large dataset efficiently", () => {
   const largeArray = Array.from({ length: 10000 }, (_, i) => i);
 
   const start = performance.now();
@@ -278,33 +314,33 @@ test('processes large dataset efficiently', () => {
 ## Security Testing Patterns
 
 ### Input Validation
+
 ```typescript
-test('prevents SQL injection', () => {
+test("prevents SQL injection", () => {
   const maliciousInput = "'; DROP TABLE users; --";
   expect(() => queryDatabase(maliciousInput)).not.toThrow();
-  expect(database.getTables()).toContain('users');
+  expect(database.getTables()).toContain("users");
 });
 
-test('prevents XSS attacks', () => {
+test("prevents XSS attacks", () => {
   const maliciousScript = '<script>alert("XSS")</script>';
   const sanitized = sanitizeInput(maliciousScript);
-  expect(sanitized).not.toContain('<script>');
+  expect(sanitized).not.toContain("<script>");
 });
 ```
 
 ### Authentication Testing
+
 ```typescript
-test('requires authentication for protected routes', async () => {
-  const response = await request(app)
-    .get('/api/protected')
-    .expect(401);
+test("requires authentication for protected routes", async () => {
+  const response = await request(app).get("/api/protected").expect(401);
 });
 
-test('validates JWT tokens', async () => {
-  const invalidToken = 'invalid.jwt.token';
+test("validates JWT tokens", async () => {
+  const invalidToken = "invalid.jwt.token";
   const response = await request(app)
-    .get('/api/protected')
-    .set('Authorization', `Bearer ${invalidToken}`)
+    .get("/api/protected")
+    .set("Authorization", `Bearer ${invalidToken}`)
     .expect(401);
 });
 ```

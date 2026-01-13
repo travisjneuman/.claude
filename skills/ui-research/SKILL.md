@@ -16,6 +16,7 @@ This skill ensures UI work is informed by real-world inspiration, modern pattern
 ## When to Use This Skill
 
 **ALWAYS use before:**
+
 - Creating new UI components
 - Designing landing pages
 - Building dashboards or admin UIs
@@ -62,14 +63,14 @@ Why: Specific UI element inspiration
 
 **Search Queries by Task:**
 
-| Building | Search Terms |
-|----------|--------------|
-| Dashboard | "analytics dashboard", "admin panel", "SaaS dashboard" |
+| Building     | Search Terms                                              |
+| ------------ | --------------------------------------------------------- |
+| Dashboard    | "analytics dashboard", "admin panel", "SaaS dashboard"    |
 | Landing page | "[industry] landing page", "hero section", "pricing page" |
-| Mobile app | "[app type] iOS", "mobile [feature]", "[competitor] app" |
-| E-commerce | "product page", "checkout flow", "cart design" |
-| Auth flows | "login screen", "onboarding", "signup form" |
-| Settings | "settings page", "profile settings", "preferences" |
+| Mobile app   | "[app type] iOS", "mobile [feature]", "[competitor] app"  |
+| E-commerce   | "product page", "checkout flow", "cart design"            |
+| Auth flows   | "login screen", "onboarding", "signup form"               |
+| Settings     | "settings page", "profile settings", "preferences"        |
 
 ### Phase 3: Collect (10 min)
 
@@ -112,21 +113,25 @@ Before implementing, document:
 ## UI Research Brief
 
 ### Inspiration Sources
+
 - [Link 1]: [What to adopt]
 - [Link 2]: [What to adopt]
 - [Link 3]: [What to adopt]
 
 ### Key Patterns to Follow
+
 - Layout: [specific approach]
 - Color: [palette direction]
 - Typography: [font choices]
 - Components: [style decisions]
 
 ### Differentiation
+
 - [What makes ours unique]
 - [Brand personality elements]
 
 ### Technical Approach
+
 - Component library: [shadcn/ui, etc.]
 - Animation approach: [Framer Motion, CSS]
 - Responsive strategy: [mobile-first, etc.]
@@ -138,23 +143,23 @@ Before implementing, document:
 
 ### By Project Type
 
-| Project | Primary Sources | Secondary |
-|---------|-----------------|-----------|
-| **SaaS App** | Mobbin, UI Sources | Land-book, shadcn/ui |
-| **Landing Page** | Land-book, Godly | Awwwards, One Page Love |
-| **Mobile App** | Mobbin, Screenlane | Pttrns, Apple HIG |
-| **E-commerce** | Baymard, Awwwards | Mobbin, UI Sources |
-| **Dashboard** | Dribbble, UI Sources | Ant Design, Tremor |
-| **Portfolio** | Awwwards, One Page Love | Godly, personal sites |
+| Project          | Primary Sources         | Secondary               |
+| ---------------- | ----------------------- | ----------------------- |
+| **SaaS App**     | Mobbin, UI Sources      | Land-book, shadcn/ui    |
+| **Landing Page** | Land-book, Godly        | Awwwards, One Page Love |
+| **Mobile App**   | Mobbin, Screenlane      | Pttrns, Apple HIG       |
+| **E-commerce**   | Baymard, Awwwards       | Mobbin, UI Sources      |
+| **Dashboard**    | Dribbble, UI Sources    | Ant Design, Tremor      |
+| **Portfolio**    | Awwwards, One Page Love | Godly, personal sites   |
 
 ### By Platform
 
-| Platform | Required Research |
-|----------|-------------------|
-| **iOS** | Apple HIG, Mobbin (iOS filter) |
-| **Android** | Material 3, Mobbin (Android filter) |
-| **Web** | Awwwards, Land-book, shadcn/ui |
-| **Desktop** | Fluent 2, platform-specific apps |
+| Platform           | Required Research                    |
+| ------------------ | ------------------------------------ |
+| **iOS**            | Apple HIG, Mobbin (iOS filter)       |
+| **Android**        | Material 3, Mobbin (Android filter)  |
+| **Web**            | Awwwards, Land-book, shadcn/ui       |
+| **Desktop**        | Fluent 2, platform-specific apps     |
 | **Cross-platform** | All of the above, find common ground |
 
 ---
@@ -192,29 +197,32 @@ WHAT MAKES DESIGN FEEL HUMAN:
 
 ### Quality Signals
 
-| Aspect | Generic AI | Human-Polished |
-|--------|------------|----------------|
-| **Color** | Default blue | Custom brand palette |
-| **Layout** | Perfect grid | Intentional variation |
-| **Images** | Stock photos | Custom/curated imagery |
-| **Copy** | Lorem ipsum | Real, personality-rich text |
-| **Animation** | Standard fades | Purposeful, branded motion |
-| **Details** | None | Hover states, micro-interactions |
+| Aspect        | Generic AI     | Human-Polished                   |
+| ------------- | -------------- | -------------------------------- |
+| **Color**     | Default blue   | Custom brand palette             |
+| **Layout**    | Perfect grid   | Intentional variation            |
+| **Images**    | Stock photos   | Custom/curated imagery           |
+| **Copy**      | Lorem ipsum    | Real, personality-rich text      |
+| **Animation** | Standard fades | Purposeful, branded motion       |
+| **Details**   | None           | Hover states, micro-interactions |
 
 ---
 
 ## Research Tools
 
 ### Browser Extensions
+
 - **Muzli** - Design inspiration feed
 - **Panda** - News and inspiration dashboard
 - **Stylify Me** - Extract site colors/fonts
 
 ### Screenshot Tools
+
 - **Full Page Screen Capture** - Capture entire pages
 - **Awesome Screenshot** - Annotate and save
 
 ### Organization
+
 - **Figma** - Create mood boards
 - **Notion** - Document research
 - **Eagle** - Visual bookmark manager
@@ -228,6 +236,7 @@ WHAT MAKES DESIGN FEEL HUMAN:
 # UI Research: [Component/Page Name]
 
 ## Context
+
 - **Building:** [what]
 - **Platform:** [where]
 - **Constraints:** [limitations]
@@ -235,40 +244,50 @@ WHAT MAKES DESIGN FEEL HUMAN:
 ## Inspiration (5-10 sources)
 
 ### 1. [Company/Site Name]
+
 - **URL:** [link]
 - **Screenshot:** [attached]
 - **What works:** [specific elements]
 - **Adopt:** [what to use]
 
 ### 2. [Company/Site Name]
+
 ...
 
 ## Pattern Analysis
 
 ### Layout
+
 - [Common layout patterns observed]
 
 ### Color
+
 - [Palette trends]
 
 ### Typography
+
 - [Font and scale patterns]
 
 ### Components
+
 - [UI element patterns]
 
 ## Design Direction
 
 ### Must Have
+
 - [Non-negotiable elements]
 
 ### Nice to Have
+
 - [Enhancement opportunities]
 
 ### Avoid
+
 - [Anti-patterns to skip]
 
 ## Technical Stack
+
 - **Components:** [library choice]
 - **Styling:** [approach]
 - **Animation:** [library/method]
@@ -280,13 +299,13 @@ WHAT MAKES DESIGN FEEL HUMAN:
 
 After research, proceed to:
 
-| Next Step | Skill to Use |
-|-----------|--------------|
-| Visual implementation | `frontend-enhancer` |
-| Design system setup | `generic-design-system` |
-| UX flow design | `generic-ux-designer` |
-| Animation work | `ui-animation` |
-| Brand alignment | `brand-identity` |
+| Next Step             | Skill to Use            |
+| --------------------- | ----------------------- |
+| Visual implementation | `frontend-enhancer`     |
+| Design system setup   | `generic-design-system` |
+| UX flow design        | `generic-ux-designer`   |
+| Animation work        | `ui-animation`          |
+| Brand alignment       | `brand-identity`        |
 
 ---
 
@@ -315,4 +334,4 @@ Before ANY UI work:
 
 ---
 
-*Research is not optional. It's the difference between generic and exceptional.*
+_Research is not optional. It's the difference between generic and exceptional._

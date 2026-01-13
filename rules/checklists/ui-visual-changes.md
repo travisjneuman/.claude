@@ -36,25 +36,26 @@ RIGHT: Change color → test → Change font → test → Change spacing → tes
 
 ## Browser Testing Matrix
 
-| Browser | Status |
-|---------|--------|
-| Chrome (latest) | [ ] |
-| Firefox (latest) | [ ] |
-| Safari (latest) | [ ] |
-| Edge (latest) | [ ] |
+| Browser          | Status |
+| ---------------- | ------ |
+| Chrome (latest)  | [ ]    |
+| Firefox (latest) | [ ]    |
+| Safari (latest)  | [ ]    |
+| Edge (latest)    | [ ]    |
 
 ---
 
 ## Responsive Testing
 
-| Breakpoint | Device | Status |
-|------------|--------|--------|
-| 375px | Mobile (iPhone SE) | [ ] |
-| 768px | Tablet (iPad) | [ ] |
-| 1024px | Small Desktop | [ ] |
-| 1440px+ | Large Desktop | [ ] |
+| Breakpoint | Device             | Status |
+| ---------- | ------------------ | ------ |
+| 375px      | Mobile (iPhone SE) | [ ]    |
+| 768px      | Tablet (iPad)      | [ ]    |
+| 1024px     | Small Desktop      | [ ]    |
+| 1440px+    | Large Desktop      | [ ]    |
 
 ### Test at each breakpoint:
+
 - [ ] Layout doesn't break
 - [ ] Text remains readable
 - [ ] Touch targets >= 44x44px (mobile)
@@ -101,6 +102,7 @@ Before committing:
 ### Typography
 
 **DO:**
+
 - [ ] Choose beautiful, unique, and interesting fonts
 - [ ] Select fonts that elevate the aesthetic and match the context
 - [ ] Vary font choices across different projects
@@ -108,12 +110,14 @@ Before committing:
 - [ ] Use font pairing thoughtfully (display + body, etc.)
 
 **AVOID:**
+
 - [ ] ❌ Generic fonts: Arial, Inter, Roboto, system fonts
 - [ ] ❌ Overused "AI default" fonts: Space Grotesk, Inter everywhere
 - [ ] ❌ Converging on same fonts across projects
 - [ ] ❌ Safe, boring typography choices
 
 **Font Inspiration Sources:**
+
 - Google Fonts: Playfair Display, Crimson Text, Merriweather (editorial)
 - Display fonts: Bebas Neue, Righteous, Bungee
 - Modern: DM Sans, Plus Jakarta Sans, Outfit
@@ -124,6 +128,7 @@ Before committing:
 ### Color & Theme
 
 **DO:**
+
 - [ ] Commit to a cohesive aesthetic with clear theme identity
 - [ ] Use CSS variables for consistency throughout
 - [ ] Create dominant colors with sharp, intentional accents
@@ -132,6 +137,7 @@ Before committing:
 - [ ] Make unexpected color choices that feel genuinely designed
 
 **AVOID:**
+
 - [ ] ❌ Clichéd color schemes (especially purple gradients on white backgrounds)
 - [ ] ❌ Timid, evenly-distributed palettes without visual hierarchy
 - [ ] ❌ Generic "startup blue" (#3b82f6) as default
@@ -139,26 +145,28 @@ Before committing:
 - [ ] ❌ Converging on same color schemes across projects
 
 **Color Approach:**
+
 ```css
 /* GOOD - Dominant color with sharp accents */
 :root {
-  --primary: #d946ef;      /* Bold magenta */
-  --accent: #facc15;       /* Sharp yellow accent */
-  --background: #0a0a0a;   /* Deep dark */
+  --primary: #d946ef; /* Bold magenta */
+  --accent: #facc15; /* Sharp yellow accent */
+  --background: #0a0a0a; /* Deep dark */
   --surface: #171717;
   --text: #fafafa;
 }
 
 /* BAD - Timid, even distribution */
 :root {
-  --primary: #6366f1;      /* Generic indigo */
-  --secondary: #8b5cf6;    /* Similar purple */
-  --accent: #a78bfa;       /* More purple */
-  --background: #ffffff;   /* Plain white */
+  --primary: #6366f1; /* Generic indigo */
+  --secondary: #8b5cf6; /* Similar purple */
+  --accent: #a78bfa; /* More purple */
+  --background: #ffffff; /* Plain white */
 }
 ```
 
 **Theme Inspiration Sources:**
+
 - IDE themes: Dracula, Nord, Tokyo Night, Catppuccin, Gruvbox
 - Cultural: Vaporwave, Y2K, Brutalism, Swiss design, Japanese minimalism
 - Nature: Deep ocean, sunset, forest, desert, aurora
@@ -168,6 +176,7 @@ Before committing:
 ### Motion & Animation
 
 **DO:**
+
 - [ ] Use animations for effects and meaningful micro-interactions
 - [ ] Prioritize CSS-only solutions for HTML (use Motion library for React)
 - [ ] Focus on high-impact moments: page load choreography, reveals, transitions
@@ -175,12 +184,14 @@ Before committing:
 - [ ] Ensure all animations are GPU-accelerated (transform, opacity only)
 
 **AVOID:**
+
 - [ ] ❌ Scattered micro-interactions without purpose
 - [ ] ❌ Over-animation (every element bouncing/fading)
 - [ ] ❌ Under-animation (completely static interfaces)
 - [ ] ❌ Non-GPU-accelerated animations (width, height, top, left, etc.)
 
 **Animation Patterns:**
+
 ```css
 /* GOOD - Orchestrated page load */
 .hero-title {
@@ -214,6 +225,7 @@ Before committing:
 ### Backgrounds & Atmosphere
 
 **DO:**
+
 - [ ] Create atmosphere and depth instead of solid colors
 - [ ] Layer CSS gradients for visual interest
 - [ ] Use geometric patterns or contextual effects
@@ -221,11 +233,13 @@ Before committing:
 - [ ] Consider mesh gradients, noise textures, subtle patterns
 
 **AVOID:**
+
 - [ ] ❌ Plain white or solid color backgrounds everywhere
 - [ ] ❌ Generic gradient backgrounds without thought
 - [ ] ❌ No visual depth or atmosphere
 
 **Background Examples:**
+
 ```css
 /* GOOD - Layered gradient with depth */
 background:
@@ -235,13 +249,19 @@ background:
   #0a0a0a;
 
 /* GOOD - Geometric pattern */
-background-image:
-  repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.05) 35px, rgba(255,255,255,.05) 70px);
+background-image: repeating-linear-gradient(
+  45deg,
+  transparent,
+  transparent 35px,
+  rgba(255, 255, 255, 0.05) 35px,
+  rgba(255, 255, 255, 0.05) 70px
+);
 
 /* GOOD - Mesh gradient feel */
-background: radial-gradient(at 27% 37%, hsla(215, 98%, 61%, 0.2) 0px, transparent 50%),
-            radial-gradient(at 97% 21%, hsla(125, 98%, 72%, 0.2) 0px, transparent 50%),
-            radial-gradient(at 52% 99%, hsla(354, 98%, 61%, 0.2) 0px, transparent 50%);
+background:
+  radial-gradient(at 27% 37%, hsla(215, 98%, 61%, 0.2) 0px, transparent 50%),
+  radial-gradient(at 97% 21%, hsla(125, 98%, 72%, 0.2) 0px, transparent 50%),
+  radial-gradient(at 52% 99%, hsla(354, 98%, 61%, 0.2) 0px, transparent 50%);
 ```
 
 ---
@@ -249,6 +269,7 @@ background: radial-gradient(at 27% 37%, hsla(215, 98%, 61%, 0.2) 0px, transparen
 ### Layout & Composition
 
 **DO:**
+
 - [ ] Create unexpected, creative layouts
 - [ ] Use whitespace intentionally and generously
 - [ ] Break grid systems when appropriate for visual interest
@@ -256,6 +277,7 @@ background: radial-gradient(at 27% 37%, hsla(215, 98%, 61%, 0.2) 0px, transparen
 - [ ] Make layout choices that match content and context
 
 **AVOID:**
+
 - [ ] ❌ Cookie-cutter centered-card layouts
 - [ ] ❌ Predictable grid patterns without variation
 - [ ] ❌ "Bootstrap default" aesthetic
@@ -268,20 +290,24 @@ background: radial-gradient(at 27% 37%, hsla(215, 98%, 61%, 0.2) 0px, transparen
 Before finalizing frontend work, verify you're NOT doing these:
 
 **Typography:**
+
 - [ ] ❌ Using Inter, Roboto, or Arial as primary font
 - [ ] ❌ Same font choice as last 3 projects
 
 **Color:**
+
 - [ ] ❌ Purple gradient on white background
 - [ ] ❌ Generic startup blue (#3b82f6)
 - [ ] ❌ Timid, evenly-distributed palette
 
 **Layout:**
+
 - [ ] ❌ Centered card with rounded corners (unless genuinely appropriate)
 - [ ] ❌ Predictable hero section pattern
 - [ ] ❌ Same layout structure as every other AI-generated site
 
 **Overall:**
+
 - [ ] ❌ Converging toward "on distribution" generic outputs
 - [ ] ❌ Playing it safe instead of thinking outside the box
 - [ ] ❌ Forgetting to vary aesthetics across different projects
@@ -292,14 +318,14 @@ Before finalizing frontend work, verify you're NOT doing these:
 
 Rate your frontend on these dimensions:
 
-| Aspect | Generic (1-3) | Decent (4-6) | Distinctive (7-10) |
-|--------|---------------|--------------|-------------------|
-| **Typography** | Arial/Inter/Roboto | Common but nice fonts | Unexpected, beautiful choices |
-| **Color** | Blue/purple gradients | Solid palette | Bold, cohesive theme |
-| **Motion** | No animation or scattered | Some micro-interactions | Orchestrated moments |
-| **Background** | Solid colors | Simple gradient | Layered, atmospheric |
-| **Layout** | Bootstrap default | Clean, standard | Creative, surprising |
-| **Overall Feel** | "AI generated" | Professional | Memorable, delightful |
+| Aspect           | Generic (1-3)             | Decent (4-6)            | Distinctive (7-10)            |
+| ---------------- | ------------------------- | ----------------------- | ----------------------------- |
+| **Typography**   | Arial/Inter/Roboto        | Common but nice fonts   | Unexpected, beautiful choices |
+| **Color**        | Blue/purple gradients     | Solid palette           | Bold, cohesive theme          |
+| **Motion**       | No animation or scattered | Some micro-interactions | Orchestrated moments          |
+| **Background**   | Solid colors              | Simple gradient         | Layered, atmospheric          |
+| **Layout**       | Bootstrap default         | Clean, standard         | Creative, surprising          |
+| **Overall Feel** | "AI generated"            | Professional            | Memorable, delightful         |
 
 **Target:** 7+ on at least 3 dimensions, 5+ on all others.
 
@@ -309,33 +335,32 @@ Rate your frontend on these dimensions:
 
 Tailor design to the project type:
 
-| Project Type | Aesthetic Direction |
-|--------------|-------------------|
+| Project Type        | Aesthetic Direction                                                    |
+| ------------------- | ---------------------------------------------------------------------- |
 | **Developer Tools** | Monospace fonts, code editor themes (Dracula, Nord), terminal-inspired |
-| **Editorial/Blog** | Serif fonts, generous whitespace, reading-focused hierarchy |
-| **Portfolio** | Bold, distinctive, showcase personality and creativity |
-| **SaaS Product** | Clean but not boring, professional with flair |
-| **Landing Page** | High-impact, conversion-focused, strong visual hierarchy |
-| **Dashboard** | Information density, clear hierarchy, functional beauty |
+| **Editorial/Blog**  | Serif fonts, generous whitespace, reading-focused hierarchy            |
+| **Portfolio**       | Bold, distinctive, showcase personality and creativity                 |
+| **SaaS Product**    | Clean but not boring, professional with flair                          |
+| **Landing Page**    | High-impact, conversion-focused, strong visual hierarchy               |
+| **Dashboard**       | Information density, clear hierarchy, functional beauty                |
 
 ---
-
-
 
 ## Related Skills
 
 Use these skills for UI work:
 
-| Skill | When to Use |
-|-------|-------------|
-| `generic-design-system` | Color choices, spacing, typography |
-| `generic-ux-designer` | User flow, interaction patterns |
-| `generic-react-design-system` | React-specific patterns |
-| `generic-static-design-system` | Static site patterns |
-| `generic-fullstack-design-system` | Full-stack app patterns |
-| `frontend-enhancer` | Modern UI enhancements |
+| Skill                             | When to Use                        |
+| --------------------------------- | ---------------------------------- |
+| `generic-design-system`           | Color choices, spacing, typography |
+| `generic-ux-designer`             | User flow, interaction patterns    |
+| `generic-react-design-system`     | React-specific patterns            |
+| `generic-static-design-system`    | Static site patterns               |
+| `generic-fullstack-design-system` | Full-stack app patterns            |
+| `frontend-enhancer`               | Modern UI enhancements             |
 
 ### Invoke with:
+
 ```
 Skill(generic-design-system)
 Skill(frontend-enhancer)
@@ -362,4 +387,4 @@ Skill(frontend-enhancer)
 
 ---
 
-*Reference this checklist for ANY visual change, no matter how small.*
+_Reference this checklist for ANY visual change, no matter how small._

@@ -88,12 +88,12 @@ See [Customer Research Methods](./references/customer-research-methods.md) for d
 
 ### Roadmap Types
 
-| Type | Timeframe | Audience | Detail Level |
-|------|-----------|----------|--------------|
-| **Vision** | 2-5 years | Board, executives | Themes |
-| **Strategic** | 1-2 years | Leadership | Initiatives |
-| **Release** | 3-6 months | Teams, stakeholders | Features |
-| **Sprint** | 2-4 weeks | Dev team | User stories |
+| Type          | Timeframe  | Audience            | Detail Level |
+| ------------- | ---------- | ------------------- | ------------ |
+| **Vision**    | 2-5 years  | Board, executives   | Themes       |
+| **Strategic** | 1-2 years  | Leadership          | Initiatives  |
+| **Release**   | 3-6 months | Teams, stakeholders | Features     |
+| **Sprint**    | 2-4 weeks  | Dev team            | User stories |
 
 ### OKR Framework for Product
 
@@ -167,12 +167,12 @@ Note: Simpler than RICE, good for quick decisions
 
 ### MoSCoW Method
 
-| Category | Definition | Guidance |
-|----------|------------|----------|
-| **Must Have** | Non-negotiable for release | Core functionality |
-| **Should Have** | Important but not critical | High value, can defer |
-| **Could Have** | Nice to have | If time permits |
-| **Won't Have** | Out of scope (this release) | Future consideration |
+| Category        | Definition                  | Guidance              |
+| --------------- | --------------------------- | --------------------- |
+| **Must Have**   | Non-negotiable for release  | Core functionality    |
+| **Should Have** | Important but not critical  | High value, can defer |
+| **Could Have**  | Nice to have                | If time permits       |
+| **Won't Have**  | Out of scope (this release) | Future consideration  |
 
 ### Kano Model
 
@@ -200,15 +200,15 @@ DELIGHTERS (Excitement):
 
 ### Research Methods
 
-| Method | When to Use | Sample Size | Time |
-|--------|-------------|-------------|------|
-| **User Interviews** | Deep understanding | 5-15 | 2-4 weeks |
-| **Surveys** | Quantify findings | 100-1000+ | 1-2 weeks |
-| **Usability Tests** | Validate designs | 5-8 | 1-2 weeks |
-| **A/B Tests** | Compare options | 1000+ | 2-4 weeks |
-| **Analytics** | Understand behavior | N/A | Ongoing |
-| **Card Sorting** | Information architecture | 15-30 | 1 week |
-| **Diary Studies** | Long-term behavior | 10-20 | 2-4 weeks |
+| Method              | When to Use              | Sample Size | Time      |
+| ------------------- | ------------------------ | ----------- | --------- |
+| **User Interviews** | Deep understanding       | 5-15        | 2-4 weeks |
+| **Surveys**         | Quantify findings        | 100-1000+   | 1-2 weeks |
+| **Usability Tests** | Validate designs         | 5-8         | 1-2 weeks |
+| **A/B Tests**       | Compare options          | 1000+       | 2-4 weeks |
+| **Analytics**       | Understand behavior      | N/A         | Ongoing   |
+| **Card Sorting**    | Information architecture | 15-30       | 1 week    |
+| **Diary Studies**   | Long-term behavior       | 10-20       | 2-4 weeks |
 
 See [Customer Research Methods](./references/customer-research-methods.md) for detailed interview frameworks, persona templates, and usability testing protocols.
 
@@ -242,13 +242,13 @@ REFERRAL:
 
 ### Product Health Metrics
 
-| Metric | Formula | Target |
-|--------|---------|--------|
-| **DAU/MAU** | Daily users / Monthly users | 20-50%+ |
-| **Activation Rate** | Completed setup / Signups | 40-60%+ |
-| **Feature Adoption** | Users using feature / Total users | Varies |
-| **Time to Value** | Days to first value | Minimize |
-| **Power Users** | Heavy users / Total users | 15-25% |
+| Metric               | Formula                           | Target   |
+| -------------------- | --------------------------------- | -------- |
+| **DAU/MAU**          | Daily users / Monthly users       | 20-50%+  |
+| **Activation Rate**  | Completed setup / Signups         | 40-60%+  |
+| **Feature Adoption** | Users using feature / Total users | Varies   |
+| **Time to Value**    | Days to first value               | Minimize |
+| **Power Users**      | Heavy users / Total users         | 15-25%   |
 
 See [Analytics and Experimentation](./references/analytics-and-experimentation.md) for detailed cohort analysis, retention benchmarks, and event tracking strategies.
 
@@ -320,28 +320,28 @@ POST-LAUNCH:
 
 ### Go-to-Market Plan
 
-| Element | Description |
-|---------|-------------|
-| **Target Segment** | Who is this for? |
-| **Value Proposition** | Why will they care? |
-| **Pricing** | How will we charge? |
-| **Distribution** | How will they get it? |
-| **Messaging** | What will we say? |
-| **Enablement** | How will teams sell/support? |
-| **Measurement** | How will we track success? |
+| Element               | Description                  |
+| --------------------- | ---------------------------- |
+| **Target Segment**    | Who is this for?             |
+| **Value Proposition** | Why will they care?          |
+| **Pricing**           | How will we charge?          |
+| **Distribution**      | How will they get it?        |
+| **Messaging**         | What will we say?            |
+| **Enablement**        | How will teams sell/support? |
+| **Measurement**       | How will we track success?   |
 
 ## Product Discovery
 
 ### Discovery Techniques
 
-| Technique | Purpose | When to Use |
-|-----------|---------|-------------|
-| **Opportunity Mapping** | Identify problems | Early discovery |
-| **Story Mapping** | Visualize journeys | Planning releases |
-| **Design Sprints** | Rapid prototyping | Big bets |
-| **Fake Door Tests** | Validate demand | Before building |
-| **Wizard of Oz** | Test concepts | Complex features |
-| **Concierge MVP** | Manual service first | New markets |
+| Technique               | Purpose              | When to Use       |
+| ----------------------- | -------------------- | ----------------- |
+| **Opportunity Mapping** | Identify problems    | Early discovery   |
+| **Story Mapping**       | Visualize journeys   | Planning releases |
+| **Design Sprints**      | Rapid prototyping    | Big bets          |
+| **Fake Door Tests**     | Validate demand      | Before building   |
+| **Wizard of Oz**        | Test concepts        | Complex features  |
+| **Concierge MVP**       | Manual service first | New markets       |
 
 ### Opportunity Assessment
 
@@ -423,6 +423,7 @@ Format: "As a [persona], I want to [action], so that [benefit]"
 ## Additional Resources
 
 For comprehensive product management frameworks and methodologies:
+
 - [Product Strategy Expert](./references/product-strategy-expert.md) - Complete PM reference guide
 - [Customer Research Methods](./references/customer-research-methods.md) - Interview frameworks, personas, usability testing
 - [Analytics and Experimentation](./references/analytics-and-experimentation.md) - Retention analysis, A/B testing, event tracking

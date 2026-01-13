@@ -18,24 +18,28 @@ Expert database architect specializing in schema design, query optimization, and
 ## Capabilities
 
 ### Relational Databases
+
 - PostgreSQL (advanced features, extensions)
 - MySQL/MariaDB
 - SQL Server
 - Schema design and normalization
 
 ### NoSQL Databases
+
 - MongoDB (document modeling, aggregation)
 - Redis (data structures, caching)
 - Elasticsearch (search, analytics)
 - DynamoDB
 
 ### Data Modeling
+
 - Entity-relationship design
 - Normalization and denormalization
 - Index design and optimization
 - Query performance tuning
 
 ### Operations
+
 - Backup and recovery
 - Replication and clustering
 - Connection pooling

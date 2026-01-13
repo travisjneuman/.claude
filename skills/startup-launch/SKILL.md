@@ -47,13 +47,13 @@ Ask yourself:
 
 ### Problem Evaluation Matrix
 
-| Criteria | Score (1-5) | Notes |
-|----------|-------------|-------|
-| **Frequency** | How often does problem occur? | Daily = 5 |
-| **Intensity** | How painful is it? | Critical = 5 |
-| **Willingness to Pay** | Will people pay to solve? | Yes = 5 |
-| **Market Size** | How many have this problem? | Large = 5 |
-| **Accessibility** | Can you reach these people? | Easy = 5 |
+| Criteria               | Score (1-5)                   | Notes        |
+| ---------------------- | ----------------------------- | ------------ |
+| **Frequency**          | How often does problem occur? | Daily = 5    |
+| **Intensity**          | How painful is it?            | Critical = 5 |
+| **Willingness to Pay** | Will people pay to solve?     | Yes = 5      |
+| **Market Size**        | How many have this problem?   | Large = 5    |
+| **Accessibility**      | Can you reach these people?   | Easy = 5     |
 
 **Minimum viable score: 20/25**
 
@@ -126,13 +126,13 @@ Structure (30-45 minutes):
 
 ### Validation Metrics
 
-| Signal | Indicator | Strength |
-|--------|-----------|----------|
-| **Time commitment** | Agree to interview | Low |
-| **Referrals** | Introduce to others | Medium |
-| **Money commitment** | Pre-order/deposit | High |
-| **Work commitment** | Use early prototype | High |
-| **Social commitment** | Public endorsement | High |
+| Signal                | Indicator           | Strength |
+| --------------------- | ------------------- | -------- |
+| **Time commitment**   | Agree to interview  | Low      |
+| **Referrals**         | Introduce to others | Medium   |
+| **Money commitment**  | Pre-order/deposit   | High     |
+| **Work commitment**   | Use early prototype | High     |
+| **Social commitment** | Public endorsement  | High     |
 
 ### Problem-Solution Fit
 
@@ -172,14 +172,14 @@ MVP IS:
 
 ### MVP Types
 
-| Type | Description | Best For |
-|------|-------------|----------|
-| **Concierge** | Manual service disguised as product | Service businesses |
-| **Wizard of Oz** | Human behind automated facade | Complex systems |
-| **Landing Page** | Describe + capture interest | Demand validation |
-| **Video Demo** | Show concept in action | Complex products |
-| **Piecemeal** | Combine existing tools | Quick market test |
-| **Single Feature** | One core feature, done well | Software products |
+| Type               | Description                         | Best For           |
+| ------------------ | ----------------------------------- | ------------------ |
+| **Concierge**      | Manual service disguised as product | Service businesses |
+| **Wizard of Oz**   | Human behind automated facade       | Complex systems    |
+| **Landing Page**   | Describe + capture interest         | Demand validation  |
+| **Video Demo**     | Show concept in action              | Complex products   |
+| **Piecemeal**      | Combine existing tools              | Quick market test  |
+| **Single Feature** | One core feature, done well         | Software products  |
 
 ### MVP Scoping
 
@@ -257,13 +257,13 @@ COMMUNITY:
 
 ### Launch Strategy Options
 
-| Strategy | Description | Best For |
-|----------|-------------|----------|
-| **Big Bang** | Public launch with PR push | Strong network |
-| **Soft Launch** | Quiet release, iterate | Uncertain product |
-| **Waitlist** | Build anticipation | High demand |
-| **Beta Program** | Limited early access | Complex products |
-| **Platform Launch** | Product Hunt, etc. | Consumer products |
+| Strategy            | Description                | Best For          |
+| ------------------- | -------------------------- | ----------------- |
+| **Big Bang**        | Public launch with PR push | Strong network    |
+| **Soft Launch**     | Quiet release, iterate     | Uncertain product |
+| **Waitlist**        | Build anticipation         | High demand       |
+| **Beta Program**    | Limited early access       | Complex products  |
+| **Platform Launch** | Product Hunt, etc.         | Consumer products |
 
 ### Platform Launches
 
@@ -318,13 +318,13 @@ EVENING:
 
 ### Key Metrics (Early Stage)
 
-| Metric | What It Measures | Target |
-|--------|------------------|--------|
-| **Activation** | Complete key action | 40%+ of signups |
-| **Retention** | Return after day 1/7/30 | Varies by type |
-| **NPS** | Would recommend | 50+ |
-| **Time to Value** | First "aha" moment | < 5 minutes |
-| **Support Volume** | Issues per user | Decreasing |
+| Metric             | What It Measures        | Target          |
+| ------------------ | ----------------------- | --------------- |
+| **Activation**     | Complete key action     | 40%+ of signups |
+| **Retention**      | Return after day 1/7/30 | Varies by type  |
+| **NPS**            | Would recommend         | 50+             |
+| **Time to Value**  | First "aha" moment      | < 5 minutes     |
+| **Support Volume** | Issues per user         | Decreasing      |
 
 ### Growth Loops
 
@@ -405,13 +405,13 @@ BUSINESS MISTAKES:
 
 ### Warning Signs
 
-| Signal | What It Means |
-|--------|---------------|
-| No organic growth | Value proposition unclear |
-| High churn | Product doesn't deliver value |
-| Support overload | Product/onboarding issues |
-| Feature requests only | Missing core value |
-| Price complaints | Wrong positioning or audience |
+| Signal                | What It Means                 |
+| --------------------- | ----------------------------- |
+| No organic growth     | Value proposition unclear     |
+| High churn            | Product doesn't deliver value |
+| Support overload      | Product/onboarding issues     |
+| Feature requests only | Missing core value            |
+| Price complaints      | Wrong positioning or audience |
 
 ---
 
@@ -435,12 +435,12 @@ RAISE when:
 
 ### Funding Stages
 
-| Stage | Amount | Purpose |
-|-------|--------|---------|
-| **Pre-seed** | $50K-$500K | Validate and build MVP |
-| **Seed** | $500K-$2M | Find product-market fit |
-| **Series A** | $2M-$15M | Scale proven model |
-| **Series B+** | $15M+ | Accelerate growth |
+| Stage         | Amount     | Purpose                 |
+| ------------- | ---------- | ----------------------- |
+| **Pre-seed**  | $50K-$500K | Validate and build MVP  |
+| **Seed**      | $500K-$2M  | Find product-market fit |
+| **Series A**  | $2M-$15M   | Scale proven model      |
+| **Series B+** | $15M+      | Accelerate growth       |
 
 ---
 
@@ -465,17 +465,18 @@ SOON AFTER:
 
 ### Entity Types (US)
 
-| Type | Best For | Notes |
-|------|----------|-------|
-| **LLC** | Bootstrapped, simple | Tax flexibility |
-| **C-Corp (Delaware)** | Raising VC | Required for VC |
-| **S-Corp** | Profitable, small | Tax advantages |
+| Type                  | Best For             | Notes           |
+| --------------------- | -------------------- | --------------- |
+| **LLC**               | Bootstrapped, simple | Tax flexibility |
+| **C-Corp (Delaware)** | Raising VC           | Required for VC |
+| **S-Corp**            | Profitable, small    | Tax advantages  |
 
 ---
 
 ## Best Practices
 
 ### DO:
+
 - Talk to users constantly (even after launch)
 - Ship fast, learn faster
 - Focus on one metric at a time
@@ -485,6 +486,7 @@ SOON AFTER:
 - Know your runway
 
 ### DON'T:
+
 - Build in secret for too long
 - Assume you know what users want
 - Scale before product-market fit
@@ -498,6 +500,7 @@ SOON AFTER:
 ## Launch Readiness Checklist
 
 ### Product
+
 - [ ] Core value proposition works
 - [ ] Onboarding tested with real users
 - [ ] Critical paths error-free
@@ -505,6 +508,7 @@ SOON AFTER:
 - [ ] Support/feedback mechanism ready
 
 ### Go-to-Market
+
 - [ ] Target customer clearly defined
 - [ ] Positioning statement finalized
 - [ ] Pricing determined and tested
@@ -512,6 +516,7 @@ SOON AFTER:
 - [ ] Early users lined up
 
 ### Operations
+
 - [ ] Team roles clear
 - [ ] Communication channels set up
 - [ ] Monitoring and alerting live

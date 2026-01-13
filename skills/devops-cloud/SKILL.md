@@ -12,6 +12,7 @@ Comprehensive guide for cloud platforms, infrastructure as code, and DevOps prac
 ### AWS (Amazon Web Services)
 
 **Compute:**
+
 ```yaml
 # EC2 Instance Types
 General Purpose: t3, m6i, m7g (ARM)
@@ -28,14 +29,15 @@ aws autoscaling create-auto-scaling-group \
 ```
 
 **Serverless:**
+
 ```typescript
 // Lambda with TypeScript
-import { APIGatewayProxyHandler } from 'aws-lambda';
+import { APIGatewayProxyHandler } from "aws-lambda";
 
 export const handler: APIGatewayProxyHandler = async (event) => {
   return {
     statusCode: 200,
-    body: JSON.stringify({ message: 'Success' }),
+    body: JSON.stringify({ message: "Success" }),
   };
 };
 ```
@@ -51,6 +53,7 @@ export const handler: APIGatewayProxyHandler = async (event) => {
 ### GCP (Google Cloud Platform)
 
 **Key Services:**
+
 ```bash
 # GKE cluster
 gcloud container clusters create my-cluster \
@@ -70,6 +73,7 @@ gcloud run deploy my-service \
 ### Azure
 
 **Key Services:**
+
 ```bash
 # AKS cluster
 az aks create \
@@ -109,29 +113,29 @@ spec:
         app: my-app
     spec:
       containers:
-      - name: my-app
-        image: my-app:1.0.0
-        ports:
-        - containerPort: 8080
-        resources:
-          requests:
-            memory: "128Mi"
-            cpu: "250m"
-          limits:
-            memory: "256Mi"
-            cpu: "500m"
-        livenessProbe:
-          httpGet:
-            path: /health
-            port: 8080
-          initialDelaySeconds: 30
-          periodSeconds: 10
-        readinessProbe:
-          httpGet:
-            path: /ready
-            port: 8080
-          initialDelaySeconds: 5
-          periodSeconds: 5
+        - name: my-app
+          image: my-app:1.0.0
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "250m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 5
 ```
 
 ### Service Types
@@ -147,8 +151,8 @@ spec:
   selector:
     app: my-app
   ports:
-  - port: 80
-    targetPort: 8080
+    - port: 80
+      targetPort: 8080
 
 ---
 # LoadBalancer (external)
@@ -161,8 +165,8 @@ spec:
   selector:
     app: my-app
   ports:
-  - port: 80
-    targetPort: 8080
+    - port: 80
+      targetPort: 8080
 ```
 
 ### Ingress with TLS
@@ -177,20 +181,20 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
   tls:
-  - hosts:
-    - app.example.com
-    secretName: app-tls
+    - hosts:
+        - app.example.com
+      secretName: app-tls
   rules:
-  - host: app.example.com
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: my-service
-            port:
-              number: 80
+    - host: app.example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: my-service
+                port:
+                  number: 80
 ```
 
 ### Helm Charts
@@ -342,8 +346,8 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
+          node-version: "20"
+          cache: "npm"
       - run: npm ci
       - run: npm test
       - run: npm run build
@@ -463,7 +467,7 @@ CMD ["node", "dist/main.js"]
 
 ```yaml
 # docker-compose.yml
-version: '3.8'
+version: "3.8"
 
 services:
   app:
@@ -520,7 +524,7 @@ global:
   scrape_interval: 15s
 
 scrape_configs:
-  - job_name: 'kubernetes-pods'
+  - job_name: "kubernetes-pods"
     kubernetes_sd_configs:
       - role: pod
     relabel_configs:
@@ -533,21 +537,21 @@ scrape_configs:
 
 ```typescript
 // metrics.ts
-import { Counter, Histogram, Registry } from 'prom-client';
+import { Counter, Histogram, Registry } from "prom-client";
 
 export const register = new Registry();
 
 export const httpRequestsTotal = new Counter({
-  name: 'http_requests_total',
-  help: 'Total HTTP requests',
-  labelNames: ['method', 'path', 'status'],
+  name: "http_requests_total",
+  help: "Total HTTP requests",
+  labelNames: ["method", "path", "status"],
   registers: [register],
 });
 
 export const httpRequestDuration = new Histogram({
-  name: 'http_request_duration_seconds',
-  help: 'HTTP request duration',
-  labelNames: ['method', 'path'],
+  name: "http_request_duration_seconds",
+  help: "HTTP request duration",
+  labelNames: ["method", "path"],
   buckets: [0.1, 0.5, 1, 2, 5],
   registers: [register],
 });
@@ -620,6 +624,7 @@ spec:
 ## Checklist
 
 ### Pre-Deployment
+
 - [ ] Infrastructure as Code reviewed
 - [ ] Secrets in secrets manager (not env files)
 - [ ] Resource limits set
@@ -629,6 +634,7 @@ spec:
 - [ ] Backup strategy in place
 
 ### Production Readiness
+
 - [ ] Multi-AZ deployment
 - [ ] Auto-scaling configured
 - [ ] SSL/TLS enabled

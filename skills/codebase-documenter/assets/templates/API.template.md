@@ -31,11 +31,13 @@ This API uses [JWT/API Keys/OAuth/etc.] for authentication.
 2. [Step 2 to use credentials]
 
 **Example authentication header:**
+
 ```
 Authorization: Bearer YOUR_API_TOKEN_HERE
 ```
 
 **Getting your API token:**
+
 ```bash
 # Example command or process to obtain token
 curl -X POST https://api.example.com/v1/auth/login \
@@ -44,6 +46,7 @@ curl -X POST https://api.example.com/v1/auth/login \
 ```
 
 **Response:**
+
 ```json
 {
   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
@@ -71,18 +74,19 @@ All errors follow this format:
 
 ### Common Error Codes
 
-| Status Code | Error Code | Description | Solution |
-|------------|------------|-------------|----------|
-| 400 | `INVALID_REQUEST` | Request validation failed | Check request format and required fields |
-| 401 | `UNAUTHORIZED` | Authentication required or failed | Provide valid authentication token |
-| 403 | `FORBIDDEN` | Insufficient permissions | Check user permissions and role |
-| 404 | `NOT_FOUND` | Resource doesn't exist | Verify resource ID and URL |
-| 429 | `RATE_LIMIT_EXCEEDED` | Too many requests | Wait before retrying (check Retry-After header) |
-| 500 | `INTERNAL_ERROR` | Server error | Contact support if persistent |
+| Status Code | Error Code            | Description                       | Solution                                        |
+| ----------- | --------------------- | --------------------------------- | ----------------------------------------------- |
+| 400         | `INVALID_REQUEST`     | Request validation failed         | Check request format and required fields        |
+| 401         | `UNAUTHORIZED`        | Authentication required or failed | Provide valid authentication token              |
+| 403         | `FORBIDDEN`           | Insufficient permissions          | Check user permissions and role                 |
+| 404         | `NOT_FOUND`           | Resource doesn't exist            | Verify resource ID and URL                      |
+| 429         | `RATE_LIMIT_EXCEEDED` | Too many requests                 | Wait before retrying (check Retry-After header) |
+| 500         | `INTERNAL_ERROR`      | Server error                      | Contact support if persistent                   |
 
 ### Error Examples
 
 **401 Unauthorized:**
+
 ```json
 {
   "error": {
@@ -93,6 +97,7 @@ All errors follow this format:
 ```
 
 **400 Invalid Request:**
+
 ```json
 {
   "error": {
@@ -109,10 +114,12 @@ All errors follow this format:
 ## Rate Limiting
 
 **Rate limits:**
+
 - **Authenticated requests:** 1000 requests per hour
 - **Unauthenticated requests:** 100 requests per hour
 
 **Rate limit headers:**
+
 ```
 X-RateLimit-Limit: 1000
 X-RateLimit-Remaining: 999
@@ -120,6 +127,7 @@ X-RateLimit-Reset: 1640995200
 ```
 
 **When rate limited:**
+
 - Status code: `429 Too Many Requests`
 - Response includes `Retry-After` header (seconds until reset)
 
@@ -134,6 +142,7 @@ X-RateLimit-Reset: 1640995200
 Retrieve a paginated list of [resources].
 
 **Endpoint:**
+
 ```
 GET /api/v1/[resources]
 ```
@@ -142,13 +151,13 @@ GET /api/v1/[resources]
 
 **Query Parameters:**
 
-| Parameter | Type | Required | Default | Description |
-|-----------|------|----------|---------|-------------|
-| `page` | integer | No | 1 | Page number for pagination |
-| `limit` | integer | No | 20 | Number of items per page (max 100) |
-| `sort` | string | No | `created_at` | Sort field (e.g., `name`, `created_at`) |
-| `order` | string | No | `desc` | Sort order (`asc` or `desc`) |
-| `filter` | string | No | - | Filter by [field] |
+| Parameter | Type    | Required | Default      | Description                             |
+| --------- | ------- | -------- | ------------ | --------------------------------------- |
+| `page`    | integer | No       | 1            | Page number for pagination              |
+| `limit`   | integer | No       | 20           | Number of items per page (max 100)      |
+| `sort`    | string  | No       | `created_at` | Sort field (e.g., `name`, `created_at`) |
+| `order`   | string  | No       | `desc`       | Sort order (`asc` or `desc`)            |
+| `filter`  | string  | No       | -            | Filter by [field]                       |
 
 **Example Request:**
 
@@ -190,14 +199,14 @@ curl -X GET "https://api.example.com/v1/users?page=1&limit=10&sort=created_at&or
 
 **Response Fields:**
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `id` | string | Unique identifier |
-| `name` | string | [Resource] name |
-| `email` | string | Email address |
-| `role` | string | User role (`admin`, `user`, `viewer`) |
-| `created_at` | string (ISO 8601) | Creation timestamp |
-| `updated_at` | string (ISO 8601) | Last update timestamp |
+| Field        | Type              | Description                           |
+| ------------ | ----------------- | ------------------------------------- |
+| `id`         | string            | Unique identifier                     |
+| `name`       | string            | [Resource] name                       |
+| `email`      | string            | Email address                         |
+| `role`       | string            | User role (`admin`, `user`, `viewer`) |
+| `created_at` | string (ISO 8601) | Creation timestamp                    |
+| `updated_at` | string (ISO 8601) | Last update timestamp                 |
 
 ---
 
@@ -206,6 +215,7 @@ curl -X GET "https://api.example.com/v1/users?page=1&limit=10&sort=created_at&or
 Retrieve a single [resource] by ID.
 
 **Endpoint:**
+
 ```
 GET /api/v1/[resources]/{id}
 ```
@@ -214,9 +224,9 @@ GET /api/v1/[resources]/{id}
 
 **Path Parameters:**
 
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `id` | string | Yes | [Resource] unique identifier |
+| Parameter | Type   | Required | Description                  |
+| --------- | ------ | -------- | ---------------------------- |
+| `id`      | string | Yes      | [Resource] unique identifier |
 
 **Example Request:**
 
@@ -255,6 +265,7 @@ curl -X GET "https://api.example.com/v1/users/usr_123abc" \
 Create a new [resource].
 
 **Endpoint:**
+
 ```
 POST /api/v1/[resources]
 ```
@@ -263,12 +274,12 @@ POST /api/v1/[resources]
 
 **Request Body:**
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `name` | string | Yes | [Resource] name (3-100 characters) |
-| `email` | string | Yes | Valid email address |
-| `role` | string | No | User role (default: `user`) |
-| `profile` | object | No | Additional profile information |
+| Field     | Type   | Required | Description                        |
+| --------- | ------ | -------- | ---------------------------------- |
+| `name`    | string | Yes      | [Resource] name (3-100 characters) |
+| `email`   | string | Yes      | Valid email address                |
+| `role`    | string | No       | User role (default: `user`)        |
+| `profile` | object | No       | Additional profile information     |
 
 **Example Request:**
 
@@ -318,6 +329,7 @@ curl -X POST "https://api.example.com/v1/users" \
 Update an existing [resource].
 
 **Endpoint:**
+
 ```
 PATCH /api/v1/[resources]/{id}
 ```
@@ -326,18 +338,18 @@ PATCH /api/v1/[resources]/{id}
 
 **Path Parameters:**
 
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `id` | string | Yes | [Resource] unique identifier |
+| Parameter | Type   | Required | Description                  |
+| --------- | ------ | -------- | ---------------------------- |
+| `id`      | string | Yes      | [Resource] unique identifier |
 
 **Request Body:**
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `name` | string | No | [Resource] name (3-100 characters) |
-| `email` | string | No | Valid email address |
-| `role` | string | No | User role |
-| `profile` | object | No | Additional profile information |
+| Field     | Type   | Required | Description                        |
+| --------- | ------ | -------- | ---------------------------------- |
+| `name`    | string | No       | [Resource] name (3-100 characters) |
+| `email`   | string | No       | Valid email address                |
+| `role`    | string | No       | User role                          |
+| `profile` | object | No       | Additional profile information     |
 
 **Note:** Only include fields you want to update. Omitted fields remain unchanged.
 
@@ -386,6 +398,7 @@ curl -X PATCH "https://api.example.com/v1/users/usr_123abc" \
 Delete a [resource].
 
 **Endpoint:**
+
 ```
 DELETE /api/v1/[resources]/{id}
 ```
@@ -394,9 +407,9 @@ DELETE /api/v1/[resources]/{id}
 
 **Path Parameters:**
 
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `id` | string | Yes | [Resource] unique identifier |
+| Parameter | Type   | Required | Description                  |
+| --------- | ------ | -------- | ---------------------------- |
+| `id`      | string | Yes      | [Resource] unique identifier |
 
 **Example Request:**
 
@@ -435,17 +448,18 @@ curl -X DELETE "https://api.example.com/v1/users/usr_123abc" \
 [If your API supports webhooks, document them here]
 
 **Webhook endpoint requirements:**
+
 - Must accept POST requests
 - Must respond with 200 status within 5 seconds
 - Must use HTTPS
 
 ### Available Events
 
-| Event | Description | Triggered When |
-|-------|-------------|----------------|
+| Event                | Description            | Triggered When            |
+| -------------------- | ---------------------- | ------------------------- |
 | `[resource].created` | [Resource] was created | New [resource] is created |
-| `[resource].updated` | [Resource] was updated | [Resource] is modified |
-| `[resource].deleted` | [Resource] was deleted | [Resource] is deleted |
+| `[resource].updated` | [Resource] was updated | [Resource] is modified    |
+| `[resource].deleted` | [Resource] was deleted | [Resource] is deleted     |
 
 ### Webhook Payload
 
@@ -474,34 +488,34 @@ curl -X DELETE "https://api.example.com/v1/users/usr_123abc" \
 ```javascript
 // Install: npm install @example/api-client
 
-import { APIClient } from '@example/api-client';
+import { APIClient } from "@example/api-client";
 
 const client = new APIClient({
-  apiKey: 'YOUR_API_TOKEN'
+  apiKey: "YOUR_API_TOKEN",
 });
 
 // List resources
 const users = await client.users.list({
   page: 1,
-  limit: 10
+  limit: 10,
 });
 
 // Get single resource
-const user = await client.users.get('usr_123abc');
+const user = await client.users.get("usr_123abc");
 
 // Create resource
 const newUser = await client.users.create({
-  name: 'Alice Johnson',
-  email: 'alice@example.com'
+  name: "Alice Johnson",
+  email: "alice@example.com",
 });
 
 // Update resource
-const updatedUser = await client.users.update('usr_123abc', {
-  role: 'admin'
+const updatedUser = await client.users.update("usr_123abc", {
+  role: "admin",
 });
 
 // Delete resource
-await client.users.delete('usr_123abc');
+await client.users.delete("usr_123abc");
 ```
 
 ### Python
@@ -542,6 +556,7 @@ client.users.delete('usr_123abc')
 ### Pagination
 
 Always paginate list endpoints to avoid performance issues:
+
 - Use `limit` parameter to control page size
 - Don't request more than 100 items per page
 - Use `page` parameter for subsequent pages
@@ -549,16 +564,17 @@ Always paginate list endpoints to avoid performance issues:
 ### Error Handling
 
 Implement proper error handling:
+
 ```javascript
 try {
-  const user = await client.users.get('usr_123abc');
+  const user = await client.users.get("usr_123abc");
 } catch (error) {
-  if (error.code === 'NOT_FOUND') {
-    console.log('User not found');
-  } else if (error.code === 'UNAUTHORIZED') {
-    console.log('Authentication failed');
+  if (error.code === "NOT_FOUND") {
+    console.log("User not found");
+  } else if (error.code === "UNAUTHORIZED") {
+    console.log("Authentication failed");
   } else {
-    console.log('Unexpected error:', error.message);
+    console.log("Unexpected error:", error.message);
   }
 }
 ```
@@ -566,12 +582,13 @@ try {
 ### Rate Limiting
 
 Monitor rate limit headers and implement backoff:
+
 ```javascript
 const response = await fetch(url, options);
-const remaining = response.headers.get('X-RateLimit-Remaining');
+const remaining = response.headers.get("X-RateLimit-Remaining");
 
 if (remaining < 10) {
-  console.warn('Approaching rate limit');
+  console.warn("Approaching rate limit");
 }
 ```
 
@@ -580,11 +597,13 @@ if (remaining < 10) {
 ## Support
 
 **Questions or issues?**
+
 - Documentation: [link]
 - Support email: [email]
 - Community forum: [link]
 - Issue tracker: [link]
 
 **API Status:**
+
 - Status page: [link]
 - Uptime: [link]

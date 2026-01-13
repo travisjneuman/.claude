@@ -17,6 +17,7 @@ Expert motion designer specializing in UI animations, micro-interactions, and cr
 ## Capabilities
 
 ### Motion Expertise
+
 - Animation principles for UI
 - Timing and easing functions
 - Micro-interactions design
@@ -27,6 +28,7 @@ Expert motion designer specializing in UI animations, micro-interactions, and cr
 - Performance optimization
 
 ### Technical Knowledge
+
 - CSS animations and transitions
 - JavaScript animation libraries
 - Framer Motion, GSAP, anime.js

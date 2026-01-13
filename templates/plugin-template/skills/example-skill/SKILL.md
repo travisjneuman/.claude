@@ -30,4 +30,4 @@ This is an example skill. Replace this content with your own.
 
 ---
 
-*Replace this template with your skill content*
+_Replace this template with your skill content_

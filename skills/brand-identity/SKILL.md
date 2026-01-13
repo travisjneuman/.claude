@@ -116,20 +116,20 @@ we eliminate food waste and decision fatigue.
 
 ### Brand Archetypes
 
-| Archetype | Desire | Strategy | Examples |
-|-----------|--------|----------|----------|
-| **Innocent** | Safety | Be pure/simple | Coca-Cola, Dove |
-| **Explorer** | Freedom | Discover world | Jeep, North Face |
-| **Sage** | Wisdom | Find truth | Google, TED |
-| **Hero** | Mastery | Act courageously | Nike, FedEx |
-| **Outlaw** | Liberation | Break rules | Harley, Virgin |
-| **Magician** | Power | Transform | Apple, Disney |
-| **Regular** | Belonging | Be authentic | IKEA, Target |
-| **Lover** | Intimacy | Create connection | Chanel, Godiva |
-| **Jester** | Enjoyment | Have fun | M&Ms, Old Spice |
-| **Caregiver** | Service | Help others | Johnson & Johnson |
-| **Creator** | Innovation | Create value | Lego, Adobe |
-| **Ruler** | Control | Take charge | Mercedes, Rolex |
+| Archetype     | Desire     | Strategy          | Examples          |
+| ------------- | ---------- | ----------------- | ----------------- |
+| **Innocent**  | Safety     | Be pure/simple    | Coca-Cola, Dove   |
+| **Explorer**  | Freedom    | Discover world    | Jeep, North Face  |
+| **Sage**      | Wisdom     | Find truth        | Google, TED       |
+| **Hero**      | Mastery    | Act courageously  | Nike, FedEx       |
+| **Outlaw**    | Liberation | Break rules       | Harley, Virgin    |
+| **Magician**  | Power      | Transform         | Apple, Disney     |
+| **Regular**   | Belonging  | Be authentic      | IKEA, Target      |
+| **Lover**     | Intimacy   | Create connection | Chanel, Godiva    |
+| **Jester**    | Enjoyment  | Have fun          | M&Ms, Old Spice   |
+| **Caregiver** | Service    | Help others       | Johnson & Johnson |
+| **Creator**   | Innovation | Create value      | Lego, Adobe       |
+| **Ruler**     | Control    | Take charge       | Mercedes, Rolex   |
 
 ---
 
@@ -150,14 +150,14 @@ Effective Logo Characteristics:
 
 ### Logo Types
 
-| Type | Description | Best For |
-|------|-------------|----------|
-| **Wordmark** | Company name styled | Unique names (Google, Coca-Cola) |
-| **Lettermark** | Initials only | Long names (IBM, HBO) |
-| **Brandmark** | Symbol only | Established brands (Apple, Nike) |
-| **Combination** | Symbol + wordmark | Versatility (Adidas, Burger King) |
-| **Emblem** | Text inside symbol | Traditional (Starbucks, Harley) |
-| **Mascot** | Character | Friendly brands (KFC, Michelin) |
+| Type            | Description         | Best For                          |
+| --------------- | ------------------- | --------------------------------- |
+| **Wordmark**    | Company name styled | Unique names (Google, Coca-Cola)  |
+| **Lettermark**  | Initials only       | Long names (IBM, HBO)             |
+| **Brandmark**   | Symbol only         | Established brands (Apple, Nike)  |
+| **Combination** | Symbol + wordmark   | Versatility (Adidas, Burger King) |
+| **Emblem**      | Text inside symbol  | Traditional (Starbucks, Harley)   |
+| **Mascot**      | Character           | Friendly brands (KFC, Michelin)   |
 
 ### Logo Clearspace
 
@@ -333,33 +333,33 @@ DON'T:
 
 ### Digital Touchpoints
 
-| Touchpoint | Key Considerations |
-|------------|-------------------|
-| **Website** | Navigation, CTAs, content hierarchy |
-| **Mobile App** | Icon, splash screen, UI patterns |
+| Touchpoint       | Key Considerations                      |
+| ---------------- | --------------------------------------- |
+| **Website**      | Navigation, CTAs, content hierarchy     |
+| **Mobile App**   | Icon, splash screen, UI patterns        |
 | **Social Media** | Profile images, cover photos, templates |
-| **Email** | Signatures, newsletters, transactional |
-| **Advertising** | Banner sizes, video formats |
+| **Email**        | Signatures, newsletters, transactional  |
+| **Advertising**  | Banner sizes, video formats             |
 
 ### Print Touchpoints
 
-| Touchpoint | Specifications |
-|------------|---------------|
+| Touchpoint         | Specifications                   |
+| ------------------ | -------------------------------- |
 | **Business Cards** | 3.5" × 2" (US), 85mm × 55mm (EU) |
-| **Letterhead** | 8.5" × 11" (US), A4 (EU) |
-| **Envelopes** | #10 (US), DL (EU) |
-| **Brochures** | Tri-fold, bi-fold, booklet |
-| **Signage** | Variable, high resolution |
+| **Letterhead**     | 8.5" × 11" (US), A4 (EU)         |
+| **Envelopes**      | #10 (US), DL (EU)                |
+| **Brochures**      | Tri-fold, bi-fold, booklet       |
+| **Signage**        | Variable, high resolution        |
 
 ### Social Media Image Sizes (2024)
 
-| Platform | Profile | Cover/Header | Post |
-|----------|---------|--------------|------|
-| **Instagram** | 320×320 | N/A | 1080×1080 |
-| **Facebook** | 170×170 | 851×315 | 1200×630 |
-| **LinkedIn** | 400×400 | 1584×396 | 1200×627 |
-| **Twitter/X** | 400×400 | 1500×500 | 1200×675 |
-| **YouTube** | 800×800 | 2560×1440 | 1280×720 |
+| Platform      | Profile | Cover/Header | Post      |
+| ------------- | ------- | ------------ | --------- |
+| **Instagram** | 320×320 | N/A          | 1080×1080 |
+| **Facebook**  | 170×170 | 851×315      | 1200×630  |
+| **LinkedIn**  | 400×400 | 1584×396     | 1200×627  |
+| **Twitter/X** | 400×400 | 1500×500     | 1200×675  |
+| **YouTube**   | 800×800 | 2560×1440    | 1280×720  |
 
 ---
 
@@ -367,14 +367,14 @@ DON'T:
 
 ### Brand Name Types
 
-| Type | Description | Examples |
-|------|-------------|----------|
-| **Descriptive** | Describes function | General Electric, PayPal |
-| **Invented** | Made-up word | Kodak, Xerox, Spotify |
-| **Founder** | Person's name | Ford, Dell, Disney |
-| **Metaphor** | Symbolic meaning | Amazon, Apple, Nike |
-| **Acronym** | Initials | IBM, BMW, IKEA |
-| **Mashup** | Combined words | Facebook, YouTube, Instagram |
+| Type            | Description        | Examples                     |
+| --------------- | ------------------ | ---------------------------- |
+| **Descriptive** | Describes function | General Electric, PayPal     |
+| **Invented**    | Made-up word       | Kodak, Xerox, Spotify        |
+| **Founder**     | Person's name      | Ford, Dell, Disney           |
+| **Metaphor**    | Symbolic meaning   | Amazon, Apple, Nike          |
+| **Acronym**     | Initials           | IBM, BMW, IKEA               |
+| **Mashup**      | Combined words     | Facebook, YouTube, Instagram |
 
 ### Tagline Formula
 
@@ -428,13 +428,13 @@ COMPETITIVE POSITION
 
 ### Brand Health Metrics
 
-| Metric | What It Measures |
-|--------|------------------|
-| **Awareness** | % who know the brand |
-| **Consideration** | % who would consider buying |
-| **Preference** | % who prefer over competitors |
-| **Loyalty** | Repeat purchase rate |
-| **NPS** | Likelihood to recommend |
+| Metric             | What It Measures               |
+| ------------------ | ------------------------------ |
+| **Awareness**      | % who know the brand           |
+| **Consideration**  | % who would consider buying    |
+| **Preference**     | % who prefer over competitors  |
+| **Loyalty**        | Repeat purchase rate           |
+| **NPS**            | Likelihood to recommend        |
 | **Share of Voice** | Brand mentions vs. competitors |
 
 ---
@@ -460,17 +460,18 @@ DON'T rebrand just because:
 
 ### Rebrand Types
 
-| Type | Scope | When |
-|------|-------|------|
-| **Refresh** | Update existing elements | Every 5-10 years |
-| **Partial** | Significant visual update | Strategy shift |
-| **Full** | Complete overhaul | Transformation |
+| Type        | Scope                     | When             |
+| ----------- | ------------------------- | ---------------- |
+| **Refresh** | Update existing elements  | Every 5-10 years |
+| **Partial** | Significant visual update | Strategy shift   |
+| **Full**    | Complete overhaul         | Transformation   |
 
 ---
 
 ## Best Practices
 
 ### DO:
+
 - Start with strategy before design
 - Research competitors thoroughly
 - Test with target audience
@@ -481,6 +482,7 @@ DON'T rebrand just because:
 - Review and update regularly
 
 ### DON'T:
+
 - Skip the strategy phase
 - Follow trends blindly
 - Create overly rigid systems

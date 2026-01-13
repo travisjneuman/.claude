@@ -59,17 +59,18 @@ Later files override earlier ones.
 
 #### `permissions.defaultMode`
 
-| Value | Behavior |
-|-------|----------|
+| Value                 | Behavior                               |
+| --------------------- | -------------------------------------- |
 | `"bypassPermissions"` | Skip most permission prompts (current) |
-| `"default"` | Ask for permissions as normal |
-| `"plan"` | Always use plan mode |
+| `"default"`           | Ask for permissions as normal          |
+| `"plan"`              | Always use plan mode                   |
 
 #### `permissions.allow`
 
 Pre-approved tool patterns. Format: `ToolName(pattern:*)`
 
 **Examples:**
+
 ```json
 "Bash(git commit:*)"      // Any git commit command
 "Bash(npm run test)"      // Exact command
@@ -80,10 +81,10 @@ Pre-approved tool patterns. Format: `ToolName(pattern:*)`
 
 #### `enableAllProjectMcpServers`
 
-| Value | Behavior |
-|-------|----------|
+| Value   | Behavior                                                     |
+| ------- | ------------------------------------------------------------ |
 | `false` | MCP servers only load when explicitly called (saves context) |
-| `true` | All MCP servers load on startup |
+| `true`  | All MCP servers load on startup                              |
 
 **Current:** `false` - Recommended for context efficiency.
 
@@ -112,6 +113,7 @@ When `false`, disables tip messages during loading spinners.
 **Current state:** Identical to `settings.json` (they were synced).
 
 **Use cases:**
+
 - Machine-specific permissions
 - Personal preferences
 - Testing different configs
@@ -165,6 +167,7 @@ A clean copy is maintained at `~/.claude/.claude.json` containing only MCP serve
 ### Other Fields (Auto-Generated)
 
 The real `~/.claude.json` also contains (all auto-generated):
+
 - `numStartups` - Startup counter
 - `cachedChangelog` - Release notes cache (~55KB)
 - `projects` - Machine-specific project data
@@ -194,17 +197,21 @@ The real `~/.claude.json` also contains (all auto-generated):
 # Global Preferences
 
 ## Coding Standards
+
 - Use TypeScript for all new code
 - Prefer functional patterns
 
 ## Common Tasks
+
 - Build: `npm run build`
 - Test: `npm test`
 
 ## Things That Work
+
 - Pattern X for problem Y
 
 ## Things To Avoid
+
 - Don't use library Z (broken)
 ```
 
@@ -214,26 +221,26 @@ The real `~/.claude.json` also contains (all auto-generated):
 
 ### Tool Types
 
-| Tool | Pattern Format | Example |
-|------|----------------|---------|
-| Bash | `Bash(command:*)` | `Bash(git commit:*)` |
-| Read | `Read(path:*)` | `Read(//c/Users/**)` |
-| Write | `Write(path:*)` | `Write(./src/**)` |
-| Edit | `Edit(path:*)` | `Edit(./src/**)` |
-| Glob | `Glob(pattern:*)` | `Glob(**/*.ts)` |
-| Grep | `Grep(pattern:*)` | `Grep(TODO:*)` |
-| WebFetch | `WebFetch(domain:*)` | `WebFetch(domain:github.com)` |
-| WebSearch | `WebSearch` | `WebSearch` |
-| Skill | `Skill(name)` | `Skill(debug-like-expert)` |
+| Tool         | Pattern Format         | Example                       |
+| ------------ | ---------------------- | ----------------------------- |
+| Bash         | `Bash(command:*)`      | `Bash(git commit:*)`          |
+| Read         | `Read(path:*)`         | `Read(//c/Users/**)`          |
+| Write        | `Write(path:*)`        | `Write(./src/**)`             |
+| Edit         | `Edit(path:*)`         | `Edit(./src/**)`              |
+| Glob         | `Glob(pattern:*)`      | `Glob(**/*.ts)`               |
+| Grep         | `Grep(pattern:*)`      | `Grep(TODO:*)`                |
+| WebFetch     | `WebFetch(domain:*)`   | `WebFetch(domain:github.com)` |
+| WebSearch    | `WebSearch`            | `WebSearch`                   |
+| Skill        | `Skill(name)`          | `Skill(debug-like-expert)`    |
 | SlashCommand | `SlashCommand(/cmd:*)` | `SlashCommand(/run-prompt:*)` |
 
 ### Wildcards
 
-| Pattern | Meaning |
-|---------|---------|
-| `*` | Match anything in this position |
-| `**` | Match any path depth |
-| `:*` | Match any arguments |
+| Pattern | Meaning                         |
+| ------- | ------------------------------- |
+| `*`     | Match anything in this position |
+| `**`    | Match any path depth            |
+| `:*`    | Match any arguments             |
 
 ---
 
@@ -267,6 +274,7 @@ claude allow "Bash(npm run build)"
 Run `/doctor` to check for configuration issues.
 
 Common problems:
+
 - Invalid JSON syntax
 - Unknown setting keys
 - Permission patterns with typos

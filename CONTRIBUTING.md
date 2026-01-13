@@ -133,11 +133,11 @@ Rules provide contextual guidance for specific situations.
 
 ### Rule Categories
 
-| Category | Purpose | Location |
-|----------|---------|----------|
-| Checklists | Task-type specific | `rules/checklists/` |
-| Stacks | Technology patterns | `rules/stacks/` |
-| Tooling | Setup and troubleshooting | `rules/tooling/` |
+| Category   | Purpose                   | Location            |
+| ---------- | ------------------------- | ------------------- |
+| Checklists | Task-type specific        | `rules/checklists/` |
+| Stacks     | Technology patterns       | `rules/stacks/`     |
+| Tooling    | Setup and troubleshooting | `rules/tooling/`    |
 
 ### Rule Format
 
@@ -149,12 +149,13 @@ Rules provide contextual guidance for specific situations.
 ---
 
 ## Section 1
+
 ...
 
 ## Related Skills
 
-| Skill | When to Use |
-|-------|-------------|
+| Skill        | When to Use |
+| ------------ | ----------- |
 | `skill-name` | Description |
 
 ## Related Documentation
@@ -163,7 +164,7 @@ Rules provide contextual guidance for specific situations.
 
 ---
 
-*Brief summary or key takeaway.*
+_Brief summary or key takeaway._
 ```
 
 ---
@@ -182,7 +183,6 @@ arguments:
     description: Argument description
     required: false
 ---
-
 # Command documentation and instructions for Claude
 ```
 
@@ -193,6 +193,7 @@ arguments:
 ### Cross-References
 
 All documentation should include:
+
 - "Related Skills" section linking to relevant skills
 - "Related Documentation" section linking to other docs
 - Clear "When to use" guidance
@@ -242,4 +243,4 @@ All documentation should include:
 
 ---
 
-*Thank you for contributing to making Claude Code more powerful!*
+_Thank you for contributing to making Claude Code more powerful!_

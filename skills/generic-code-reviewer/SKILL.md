@@ -14,6 +14,7 @@ Review code against production quality standards. Adapts to any project's tech s
 **Always check the project's CLAUDE.md for specific rules.**
 
 **Before ANY Commit:**
+
 - Task file exists in `tasks/[feature-name].md`
 - All tests passing
 - Type checking passing (if TypeScript)
@@ -22,29 +23,32 @@ Review code against production quality standards. Adapts to any project's tech s
 
 ## Tech Stack Detection
 
-| Detection | Stack | Key Checks |
-|-----------|-------|------------|
-| React in package.json | React/TS | Components, hooks, state |
-| Next.js in package.json | Next.js | SSR, API routes |
-| NestJS in package.json | NestJS | Guards, DTOs, services |
-| .html files, no build | Vanilla | Semantic HTML, minimal JS |
-| .py files | Python | Type hints, validation |
+| Detection               | Stack    | Key Checks                |
+| ----------------------- | -------- | ------------------------- |
+| React in package.json   | React/TS | Components, hooks, state  |
+| Next.js in package.json | Next.js  | SSR, API routes           |
+| NestJS in package.json  | NestJS   | Guards, DTOs, services    |
+| .html files, no build   | Vanilla  | Semantic HTML, minimal JS |
+| .py files               | Python   | Type hints, validation    |
 
 ## P0 Issues (Block Merge)
 
 ### Security - Frontend
+
 - Sanitize input (textContent, not innerHTML)
 - `unknown` type for external data
 - No exposed API keys
 - HTTPS for external requests
 
 ### Security - Backend
+
 - Input validation on all endpoints
 - Auth on protected routes
 - Parameterized queries (no raw SQL)
 - Secrets in environment variables
 
 ### Correctness
+
 - Logic errors that break functionality
 - Type errors in strict mode
 - Unhandled promise rejections
@@ -52,18 +56,21 @@ Review code against production quality standards. Adapts to any project's tech s
 ## P1 Issues (Should Fix)
 
 ### Performance
-| Project Type | Target |
-|--------------|--------|
-| Static site | < 50KB (excluding media) |
-| SPA/React | < 100KB gzipped initial |
-| Full-stack | < 200KB gzipped initial |
+
+| Project Type | Target                   |
+| ------------ | ------------------------ |
+| Static site  | < 50KB (excluding media) |
+| SPA/React    | < 100KB gzipped initial  |
+| Full-stack   | < 200KB gzipped initial  |
 
 **Animation:**
+
 - GPU-accelerated only (transform, opacity)
 - 60fps target
 - Use requestAnimationFrame
 
 ### Accessibility (WCAG AA)
+
 - Focus indicators on interactive elements
 - Keyboard navigation (Tab, Enter, Escape)
 - Color contrast >= 4.5:1
@@ -74,6 +81,7 @@ Review code against production quality standards. Adapts to any project's tech s
 ## P2 Issues (Nice to Have)
 
 ### Code Quality
+
 - DRY, Single Responsibility
 - No magic numbers/strings
 - Self-documenting code
@@ -85,12 +93,15 @@ Review code against production quality standards. Adapts to any project's tech s
 Only report issues found (don't list empty categories):
 
 **Blocking Issues (P0):**
+
 - [Only if found - security, correctness issues]
 
 **Should Fix (P1):**
+
 - [Only if found - performance, accessibility issues]
 
 **Consider (P2):**
+
 - [Only if found - code quality polish]
 
 **If no issues:** "Code review passed. Ready to merge."
@@ -99,24 +110,26 @@ Only report issues found (don't list empty categories):
 
 When user asks "Is this OK?", consider:
 
-| Context | Stricter | More Lenient |
-|---------|----------|--------------|
-| **Environment** | Production | Prototype/POC |
-| **Path** | Hot path, frequently executed | One-time setup, admin only |
-| **Visibility** | Public API, external interface | Internal helper, private method |
-| **Timeline** | Feature complete | Active iteration |
+| Context         | Stricter                       | More Lenient                    |
+| --------------- | ------------------------------ | ------------------------------- |
+| **Environment** | Production                     | Prototype/POC                   |
+| **Path**        | Hot path, frequently executed  | One-time setup, admin only      |
+| **Visibility**  | Public API, external interface | Internal helper, private method |
+| **Timeline**    | Feature complete               | Active iteration                |
 
 Adjust severity accordingly. P0 security issues are never lenient.
 
 ## Quick Checklist
 
 **Pre-Commit:**
+
 - [ ] Tests pass
 - [ ] Type/lint pass
 - [ ] Build succeeds
 - [ ] No console errors
 
 **Before Merge:**
+
 - [ ] All P0 issues resolved
 - [ ] P1 issues addressed or tracked
 - [ ] P2 issues noted for future

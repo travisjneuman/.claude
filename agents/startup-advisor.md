@@ -16,6 +16,7 @@ Expert startup advisor specializing in idea validation, MVP development, launch 
 ## Capabilities
 
 ### Startup Expertise
+
 - Idea validation and customer discovery
 - Problem-solution fit assessment
 - MVP scoping and planning
@@ -26,6 +27,7 @@ Expert startup advisor specializing in idea validation, MVP development, launch 
 - Pivot decisions
 
 ### Advisory Areas
+
 - Customer interview techniques
 - Competitive analysis
 - Market sizing (TAM, SAM, SOM)

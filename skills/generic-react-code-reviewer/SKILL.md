@@ -39,25 +39,25 @@ npm run build       # Production build
 
 ### Component Patterns
 
-| Pattern | Check |
-|---------|-------|
-| Props | Interface defined, no `any` |
-| State | Typed with Zustand/useState |
-| Events | Typed event handlers |
-| Refs | `useRef<ElementType>(null)` |
+| Pattern | Check                       |
+| ------- | --------------------------- |
+| Props   | Interface defined, no `any` |
+| State   | Typed with Zustand/useState |
+| Events  | Typed event handlers        |
+| Refs    | `useRef<ElementType>(null)` |
 
 ### Hook Dependency Arrays
 
 ```typescript
 // P1 Issue: Missing dependencies
 useEffect(() => {
-  fetchData(userId);  // userId missing from deps
-}, []);  // ❌
+  fetchData(userId); // userId missing from deps
+}, []); // ❌
 
 // Correct
 useEffect(() => {
   fetchData(userId);
-}, [userId]);  // ✓
+}, [userId]); // ✓
 ```
 
 **Rule:** Enable `react-hooks/exhaustive-deps` ESLint rule.
@@ -74,7 +74,7 @@ useEffect(() => {
 ```typescript
 // Proper typing
 const { data } = useQuery<User>({
-  queryKey: ['user', id],
+  queryKey: ["user", id],
   queryFn: () => fetchUser(id),
 });
 
@@ -86,11 +86,11 @@ const { data } = useQuery<User>({
 
 ### Bundle Size Targets
 
-| Target | Threshold |
-|--------|-----------|
-| Initial bundle | < 100KB gzipped |
-| Lazy-loaded chunks | < 50KB each |
-| Total JS | < 300KB |
+| Target             | Threshold       |
+| ------------------ | --------------- |
+| Initial bundle     | < 100KB gzipped |
+| Lazy-loaded chunks | < 50KB each     |
+| Total JS           | < 300KB         |
 
 ### Lazy Loading
 
@@ -144,7 +144,7 @@ width, height, margin, padding, top, left
 // Modal focus trapping
 useEffect(() => {
   if (isOpen) {
-    const firstFocusable = modalRef.current?.querySelector('button, input');
+    const firstFocusable = modalRef.current?.querySelector("button, input");
     firstFocusable?.focus();
   }
 }, [isOpen]);
@@ -152,10 +152,10 @@ useEffect(() => {
 // Escape to close
 useEffect(() => {
   const handleEscape = (e: KeyboardEvent) => {
-    if (e.key === 'Escape') onClose();
+    if (e.key === "Escape") onClose();
   };
-  window.addEventListener('keydown', handleEscape);
-  return () => window.removeEventListener('keydown', handleEscape);
+  window.addEventListener("keydown", handleEscape);
+  return () => window.removeEventListener("keydown", handleEscape);
 }, [onClose]);
 ```
 
@@ -176,6 +176,7 @@ useEffect(() => {
 ## Quick Review Checklist
 
 **React-Specific (add to base checklist):**
+
 - [ ] Hook dependencies correct
 - [ ] Heavy components lazy loaded
 - [ ] State management typed

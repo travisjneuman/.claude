@@ -7,6 +7,7 @@ Expert-level corporate venture capital and open innovation skill for Fortune 50 
 ## Trigger Conditions
 
 Use this skill when the user requests help with:
+
 - Corporate venture capital (CVC) strategy and fund setup
 - Startup investment evaluation and deal structuring
 - Accelerator and incubator program design
@@ -29,6 +30,7 @@ Use this skill when the user requests help with:
 **Strategic Objectives for CVC:**
 
 **Objective 1: Strategic Window on Innovation**
+
 - Gain early visibility into emerging technologies
 - Monitor market trends and disruptions
 - Access to startup talent and thinking
@@ -36,6 +38,7 @@ Use this skill when the user requests help with:
 - **Metrics**: Technologies scouted, trends identified, strategic insights generated
 
 **Objective 2: Access to Innovation & Technology**
+
 - In-license or acquire promising technologies
 - Accelerate internal product development
 - Fill capability gaps
@@ -43,6 +46,7 @@ Use this skill when the user requests help with:
 - **Metrics**: Technologies integrated, time-to-market reduction, cost savings
 
 **Objective 3: Ecosystem Development**
+
 - Build supplier and partner networks
 - Enable platform strategies
 - Develop new markets and channels
@@ -50,6 +54,7 @@ Use this skill when the user requests help with:
 - **Metrics**: Ecosystem participants, platform adoption, network effects
 
 **Objective 4: Financial Returns**
+
 - Generate venture-scale returns (3-5x+ MOIC)
 - Diversify revenue streams
 - Create exit opportunities (IPO, M&A)
@@ -57,6 +62,7 @@ Use this skill when the user requests help with:
 - **Metrics**: IRR, MOIC, portfolio valuation, exits
 
 **Objective 5: Organizational Learning**
+
 - Expose organization to startup culture and methods
 - Import new capabilities and mindsets
 - Challenge internal assumptions
@@ -66,6 +72,7 @@ Use this skill when the user requests help with:
 #### CVC Operating Models
 
 **Model 1: Evergreen Fund**
+
 - **Structure**: Permanent capital from corporate balance sheet
 - **Governance**: CVC team reports to CTO, CFO, or CEO
 - **Investment Pace**: Continuous, no fund lifecycle
@@ -75,6 +82,7 @@ Use this skill when the user requests help with:
 - **Examples**: Intel Capital, Salesforce Ventures, Google Ventures (now GV)
 
 **Model 2: Committed Fund Structure**
+
 - **Structure**: Fixed fund size and term (typically 10 years)
 - **Governance**: Limited partner (LP) structure, professional GPs
 - **Investment Pace**: Deploy over 3-5 years, harvest over remaining term
@@ -84,6 +92,7 @@ Use this skill when the user requests help with:
 - **Examples**: Qualcomm Ventures, BP Ventures
 
 **Model 3: Hybrid Model**
+
 - **Structure**: Evergreen base with committed fund tranches
 - **Governance**: Blended - strategic + financial oversight
 - **Investment Pace**: Flexible within tranches
@@ -93,6 +102,7 @@ Use this skill when the user requests help with:
 - **Examples**: Johnson & Johnson Innovation, Cisco Investments
 
 **Model 4: Fund-of-Funds**
+
 - **Structure**: Invest in VC funds rather than direct deals
 - **Governance**: Partnership with external VCs
 - **Investment Pace**: Fund commitments over time
@@ -102,6 +112,7 @@ Use this skill when the user requests help with:
 - **Examples**: Many corporate LPs in top-tier VC funds
 
 **Model 5: Co-Investment Model**
+
 - **Structure**: No dedicated fund, invest alongside VCs deal-by-deal
 - **Governance**: Opportunistic, lightweight team
 - **Investment Pace**: As opportunities arise
@@ -115,6 +126,7 @@ Use this skill when the user requests help with:
 **Setup Phase (Months 1-6):**
 
 **Step 1: Define Strategy & Objectives**
+
 - Strategic rationale and objectives
 - Investment thesis and focus areas
 - Geographic scope
@@ -123,6 +135,7 @@ Use this skill when the user requests help with:
 - Success metrics and KPIs
 
 **Step 2: Fund Structure & Governance**
+
 - Operating model selection
 - Fund size determination ($50M-$500M+ typical)
 - Legal entity and structure
@@ -131,6 +144,7 @@ Use this skill when the user requests help with:
 - Decision authority and escalation
 
 **Step 3: Team Building**
+
 - Managing Director / Fund Leader
 - Investment professionals (analysts, associates, principals)
 - Operating partners (portfolio support)
@@ -138,6 +152,7 @@ Use this skill when the user requests help with:
 - Typical team: 5-10 people for $100M-$250M fund
 
 **Step 4: Investment Process Design**
+
 - Deal sourcing strategy
 - Diligence framework
 - Investment committee process
@@ -146,6 +161,7 @@ Use this skill when the user requests help with:
 - Exit strategy
 
 **Step 5: Integration with Corporate**
+
 - Strategic alignment mechanisms
 - Business unit engagement model
 - Technology evaluation and transfer process
@@ -153,6 +169,7 @@ Use this skill when the user requests help with:
 - Measurement and reporting
 
 **Step 6: Ecosystem Engagement**
+
 - VC relationships and co-investment
 - Startup community engagement
 - Limited partner (LP) relationships
@@ -161,6 +178,7 @@ Use this skill when the user requests help with:
 **Operational Phase (Ongoing):**
 
 **Deal Sourcing:**
+
 - Inbound referrals (VC partners, entrepreneurs)
 - Outbound scouting (technology themes)
 - Events and conferences
@@ -171,12 +189,14 @@ Use this skill when the user requests help with:
 **Investment Process:**
 
 **Stage 1: Initial Screening (1-2 weeks)**
+
 - Executive summary review
 - Fit with investment thesis
 - Preliminary market and technology assessment
 - Decision: Pass or proceed to deep dive
 
 **Stage 2: Due Diligence (4-8 weeks)**
+
 - Market opportunity sizing
 - Competitive landscape analysis
 - Technology and IP evaluation
@@ -187,6 +207,7 @@ Use this skill when the user requests help with:
 - Decision: Pass, term sheet, or more diligence
 
 **Stage 3: Term Sheet & Negotiation (2-4 weeks)**
+
 - Valuation and investment size
 - Board seat and governance rights
 - Pro-rata and anti-dilution provisions
@@ -194,6 +215,7 @@ Use this skill when the user requests help with:
 - Strategic rights (right of first refusal, co-marketing, etc.)
 
 **Stage 4: Legal & Closing (4-8 weeks)**
+
 - Purchase agreement drafting
 - Legal diligence
 - Regulatory approvals (if needed)
@@ -201,6 +223,7 @@ Use this skill when the user requests help with:
 - Closing and funding
 
 **Stage 5: Portfolio Management (Ongoing)**
+
 - Board participation and support
 - Strategic introductions and partnerships
 - Operational assistance
@@ -210,6 +233,7 @@ Use this skill when the user requests help with:
 **Portfolio Construction:**
 
 **Diversification Dimensions:**
+
 - **Stage**: 30% Seed/A, 50% Series B/C, 20% Late stage
 - **Geography**: Based on strategic priorities
 - **Technology**: Align with corporate focus areas
@@ -217,12 +241,14 @@ Use this skill when the user requests help with:
 - **Risk**: Balance breakthrough vs. incremental
 
 **Investment Sizing:**
+
 - Initial check: $2M-$10M (10-20% of fund per deal)
 - Reserve for follow-ons: 50% of fund
 - Portfolio: 15-25 companies for $100M-$250M fund
 - Concentration limits: No single investment >15% of fund
 
 **Financial Metrics & Reporting:**
+
 - Portfolio valuation (fair value accounting)
 - Unrealized gains/losses
 - Realized returns (exits)
@@ -237,36 +263,42 @@ Use this skill when the user requests help with:
 **Partnership Model Spectrum:**
 
 **Level 1: Monitoring & Engagement**
+
 - **Activities**: Track startup, attend events, periodic check-ins
 - **Commitment**: Low (time only)
 - **Value**: Early visibility, relationship building
 - **Examples**: Advisory board participation, pilot discussions
 
 **Level 2: Pilot / Proof of Concept**
+
 - **Activities**: Time-bound trial of technology or solution
 - **Commitment**: Low-moderate ($50K-$250K, 3-6 months)
 - **Value**: De-risk technology, validate fit
 - **Examples**: Technology integration pilot, co-development POC
 
 **Level 3: Commercial Agreement**
+
 - **Activities**: Vendor/customer relationship, licensing
 - **Commitment**: Moderate ($250K-$2M+, 1-3 year contracts)
 - **Value**: Business value, revenue for startup
 - **Examples**: Software license, component supply, service contract
 
 **Level 4: Strategic Partnership**
+
 - **Activities**: Joint development, co-marketing, deep collaboration
 - **Commitment**: High (multi-million $, multi-year)
 - **Value**: Mutual growth, competitive advantage
 - **Examples**: Co-development agreements, OEM partnerships, reseller agreements
 
 **Level 5: Investment**
+
 - **Activities**: Equity investment (minority stake)
 - **Commitment**: High ($1M-$20M+)
 - **Value**: Alignment, governance rights, financial upside
 - **Examples**: CVC investment, strategic round participation
 
 **Level 6: Acquisition**
+
 - **Activities**: Full acquisition and integration
 - **Commitment**: Very high ($10M-$1B+)
 - **Value**: Full control, talent, technology, customers
@@ -277,36 +309,42 @@ Use this skill when the user requests help with:
 **Evaluation Dimensions:**
 
 **Strategic Fit (0-10):**
+
 - Alignment with corporate strategy
 - Technology or market relevance
 - Competitive positioning impact
 - Platform or ecosystem fit
 
 **Innovation Value (0-10):**
+
 - Technology differentiation
 - IP position and defensibility
 - Innovation pace and roadmap
 - Scalability and platform potential
 
 **Commercial Viability (0-10):**
+
 - Business model strength
 - Market opportunity size
 - Revenue traction and growth
 - Unit economics and path to profitability
 
 **Execution Capability (0-10):**
+
 - Team quality and completeness
 - Operational maturity
 - Funding and runway
 - Partnerships and ecosystem
 
 **Risk Profile (0-10, inverted):**
+
 - Technology risk
 - Market adoption risk
 - Competitive risk
 - Execution and operational risk
 
 **Partnership Scoring:**
+
 ```
 STARTUP PARTNERSHIP SCORECARD
 
@@ -347,30 +385,35 @@ Partnership Recommendation:
 #### Partnership Lifecycle Management
 
 **Phase 1: Discovery & Engagement (Months 1-2)**
+
 - Initial meetings and mutual exploration
 - NDA execution
 - Technology deep dive
 - Fit assessment and opportunity definition
 
 **Phase 2: Pilot / Proof of Concept (Months 3-8)**
+
 - Pilot agreement and scope
 - Success criteria and metrics
 - Pilot execution and iteration
 - Results evaluation and go/no-go decision
 
 **Phase 3: Scale & Operationalization (Months 9-18)**
+
 - Commercial agreement negotiation
 - Integration planning and execution
 - Training and change management
 - Scaling and optimization
 
 **Phase 4: Strategic Partnership (Year 2+)**
+
 - Joint roadmap development
 - Co-innovation and co-development
 - Governance and regular reviews
 - Continuous value creation
 
 **Phase 5: Exit or Evolution**
+
 - Partnership review and renewal
 - Acquisition discussions (if applicable)
 - Wind-down (if partnership not successful)
@@ -381,6 +424,7 @@ Partnership Recommendation:
 #### Program Models
 
 **External Accelerator (Startup-Focused):**
+
 - **Objective**: Scout and engage early-stage startups
 - **Participants**: External startups (seed to Series A)
 - **Duration**: 3-6 months cohort-based
@@ -390,6 +434,7 @@ Partnership Recommendation:
 - **Examples**: Techstars (corporate partnerships), Plug and Play
 
 **Internal Incubator (Employee Innovation):**
+
 - **Objective**: Incubate ideas from employees
 - **Participants**: Employee teams with ideas
 - **Duration**: 6-12 months
@@ -399,6 +444,7 @@ Partnership Recommendation:
 - **Examples**: Google Area 120, Adobe Kickbox
 
 **Hybrid Studio (New Venture Building):**
+
 - **Objective**: Build new ventures from scratch
 - **Participants**: Mix of employees and external entrepreneurs
 - **Duration**: 12-24 months to launch
@@ -408,6 +454,7 @@ Partnership Recommendation:
 - **Examples**: Unilever Foundry, Barclays Rise
 
 **Industry-Specific Accelerator:**
+
 - **Objective**: Accelerate startups in specific vertical
 - **Participants**: Startups in industry domain
 - **Duration**: 3-6 months
@@ -421,6 +468,7 @@ Partnership Recommendation:
 **Program Structure:**
 
 **Pre-Program (Months 1-2 before start):**
+
 - Application and selection process
 - Target: 500-1000 applications for 10-15 cohort members
 - Screening criteria: Strategic fit, team, traction, coachability
@@ -430,36 +478,42 @@ Partnership Recommendation:
 **Program Phase (Months 1-3):**
 
 **Week 1-2: Orientation & Validation**
+
 - Welcome and program orientation
 - Mentor matching
 - Customer discovery and validation
 - Problem-solution fit refinement
 
 **Week 3-6: Product Development**
+
 - MVP development or iteration
 - Product-market fit testing
 - Initial customer pilots
 - Metrics and KPIs establishment
 
 **Week 7-10: Go-to-Market**
+
 - Business model refinement
 - Sales and marketing strategy
 - Pricing and positioning
 - Channel development
 
 **Week 11-12: Scale Preparation**
+
 - Fundraising preparation
 - Pitch deck refinement
 - Corporate partnership discussions
 - Demo day preparation
 
 **Demo Day (End of Month 3):**
+
 - Public pitch event
 - Corporate executives and investors attend
 - Partnership announcements
 - Follow-on investment decisions
 
 **Post-Program (Months 4-12+):**
+
 - Ongoing mentor support
 - Corporate partnership execution
 - Alumni network engagement
@@ -469,12 +523,14 @@ Partnership Recommendation:
 **Program Components:**
 
 **Mentorship:**
+
 - Corporate executives (1-2 hours/month per startup)
 - External entrepreneurs and investors
 - Domain experts and advisors
 - Structured mentor matching
 
 **Workshops & Curriculum:**
+
 - Customer development
 - Product management
 - Fundraising and finance
@@ -483,18 +539,21 @@ Partnership Recommendation:
 - Talent and culture
 
 **Resources:**
+
 - Co-working space
 - Technical infrastructure (cloud credits, tools)
 - Legal and accounting services
 - Marketing and PR support
 
 **Corporate Access:**
+
 - Customer introductions and pilots
 - Distribution channel access
 - Technical resources and APIs
 - Data and insights
 
 **Funding:**
+
 - Seed investment ($25K-$150K typical)
 - Follow-on investment opportunity
 - Introductions to VCs
@@ -502,24 +561,28 @@ Partnership Recommendation:
 #### Program Metrics & Success Indicators
 
 **Input Metrics:**
+
 - Applications received
 - Applicant quality (team, traction)
 - Selection competitiveness (acceptance rate)
 - Diversity (geography, industry, demographics)
 
 **Program Metrics:**
+
 - Participant engagement
 - Mentor satisfaction
 - Workshop attendance
 - Milestone achievement rate
 
 **Output Metrics:**
+
 - Graduates completing program
 - Corporate partnerships formed
 - Pilots launched
 - Demo day attendance and quality
 
 **Outcome Metrics:**
+
 - Follow-on funding raised ($50M+ total typical for 10-15 company cohort)
 - Survival rate (70%+ still operating after 2 years)
 - Valuations and exits
@@ -527,6 +590,7 @@ Partnership Recommendation:
 - Corporate value captured (pilots, partnerships, ROI)
 
 **Strategic Impact:**
+
 - Technologies integrated
 - Market insights gained
 - Organizational learning
@@ -540,6 +604,7 @@ Partnership Recommendation:
 **Chesbrough's Open Innovation Paradigm:**
 
 **Outside-In (Inbound) Open Innovation:**
+
 - **Definition**: Bring external ideas, technologies, and IP inside
 - **Mechanisms**:
   - Technology in-licensing
@@ -551,6 +616,7 @@ Partnership Recommendation:
 - **Value**: Accelerate innovation, reduce R&D cost, access new capabilities
 
 **Inside-Out (Outbound) Open Innovation:**
+
 - **Definition**: Commercialize internal innovations externally
 - **Mechanisms**:
   - Technology out-licensing
@@ -561,6 +627,7 @@ Partnership Recommendation:
 - **Value**: Monetize non-core IP, enable ecosystems, generate revenue
 
 **Coupled Open Innovation:**
+
 - **Definition**: Combine inbound and outbound through partnerships
 - **Mechanisms**:
   - Co-development agreements
@@ -575,6 +642,7 @@ Partnership Recommendation:
 **Model 1: Innovation Challenges & Crowdsourcing**
 
 **Platforms:**
+
 - InnoCentive: Scientific and technical challenges
 - Kaggle: Data science and ML competitions
 - 99designs: Design crowdsourcing
@@ -582,6 +650,7 @@ Partnership Recommendation:
 - Custom platforms (proprietary)
 
 **Process:**
+
 1. **Define Challenge**: Clear problem statement, success criteria, IP terms
 2. **Launch**: Promote to solver community, typical duration 30-90 days
 3. **Submission**: Solvers submit solutions, proposals, or designs
@@ -590,18 +659,21 @@ Partnership Recommendation:
 6. **Implementation**: Integrate winning solution
 
 **Use Cases:**
+
 - Scientific problems (drug discovery, materials science)
 - Engineering challenges (design optimization)
 - Algorithm development (ML models)
 - Creative work (branding, design)
 
 **Advantages:**
+
 - Access to global talent
 - Diversity of approaches
 - Pay-for-success model
 - Speed to solution
 
 **Challenges:**
+
 - IP and confidentiality
 - Solution quality variability
 - Integration overhead
@@ -610,18 +682,21 @@ Partnership Recommendation:
 **Model 2: Innovation Marketplaces**
 
 **Platforms:**
+
 - yet2.com: Technology licensing marketplace
 - Tynax: Patent and IP marketplace
 - Inpart: Pharma/biotech licensing
 - TechConnect: Technology transfer
 
 **How It Works:**
+
 - Companies post technologies available for licensing
 - Buyers search and filter opportunities
 - Platform facilitates connection and deal
 - Licensing agreement negotiated
 
 **Use Cases:**
+
 - In-licensing technologies to accelerate development
 - Out-licensing non-core IP to monetize
 - Technology scouting and landscaping
@@ -629,6 +704,7 @@ Partnership Recommendation:
 **Model 3: University Technology Transfer**
 
 **Mechanisms:**
+
 - Sponsored research agreements
 - Licensing agreements
 - Collaborative research centers
@@ -636,6 +712,7 @@ Partnership Recommendation:
 - Student projects and internships
 
 **Process:**
+
 1. **Identify**: Search university tech transfer databases
 2. **Evaluate**: Review inventions, publications, patents
 3. **Engage**: Contact tech transfer office
@@ -644,6 +721,7 @@ Partnership Recommendation:
 6. **Commercialize**: Product development and launch
 
 **Leading University Partners:**
+
 - MIT, Stanford, UC Berkeley, Caltech (US)
 - Oxford, Cambridge, Imperial (UK)
 - ETH Zurich (Switzerland)
@@ -652,18 +730,21 @@ Partnership Recommendation:
 **Model 4: Consortium & Pre-Competitive Collaboration**
 
 **Structure:**
+
 - Multiple companies fund shared research
 - Typically in pre-competitive areas
 - University or research institute hosts
 - Non-exclusive IP to members
 
 **Examples:**
+
 - SEMATECH (semiconductor manufacturing)
 - IMI (Innovative Medicines Initiative, EU pharma)
 - Open Compute Project (Facebook-initiated hardware)
 - Automotive consortia (vehicle safety, autonomy)
 
 **Benefits:**
+
 - Share R&D costs and risks
 - Accelerate industry progress
 - Set standards
@@ -672,18 +753,21 @@ Partnership Recommendation:
 **Model 5: Platform & Ecosystem Strategies**
 
 **Approach:**
+
 - Open platform or APIs for developers
 - Enable third-party innovation
 - Capture value through platform control
 - Network effects drive growth
 
 **Examples:**
+
 - App stores (Apple, Google)
 - AWS and cloud platforms
 - Salesforce AppExchange
 - Android ecosystem
 
 **Mechanisms:**
+
 - SDK and API access
 - Developer programs and support
 - Revenue sharing models
@@ -694,6 +778,7 @@ Partnership Recommendation:
 #### Ecosystem Strategy
 
 **Ecosystem Definition:**
+
 - Network of organizations (startups, corporates, universities, investors, government)
 - Collaborate and compete to drive innovation
 - Platform or technology domain focus
@@ -702,21 +787,25 @@ Partnership Recommendation:
 **Ecosystem Archetypes:**
 
 **Innovation Hub/Cluster:**
+
 - Geographic concentration (Silicon Valley, Boston, Shenzhen)
 - Talent, capital, infrastructure, culture
 - Corporate participation: Locate labs, invest, partner
 
 **Technology Platform:**
+
 - Core technology or standard
 - Third-party developers build on top
 - Corporate role: Platform owner or major contributor
 
 **Industry Consortium:**
+
 - Industry-wide collaboration
 - Standards, R&D, policy advocacy
 - Corporate role: Member or convener
 
 **Corporate Ecosystem:**
+
 - Company-centric network
 - Partners, suppliers, developers, customers
 - Corporate role: Orchestrator
@@ -726,12 +815,14 @@ Partnership Recommendation:
 **Phase 1: Foundation (Year 1)**
 
 **Define Ecosystem Vision:**
+
 - Strategic purpose (why build ecosystem?)
 - Value proposition for participants
 - Scope and boundaries
 - Success metrics
 
 **Identify Core Participants:**
+
 - Startups (technology providers)
 - Investors (VCs, angels)
 - Universities (research partners)
@@ -740,12 +831,14 @@ Partnership Recommendation:
 - Enablers (accelerators, co-working, service providers)
 
 **Create Engagement Mechanisms:**
+
 - Events (conferences, demo days, meetups)
 - Programs (accelerators, challenges)
 - Platforms (online community, marketplace)
 - Facilities (innovation labs, co-working spaces)
 
 **Seed Initial Activities:**
+
 - Launch pilot programs
 - Host inaugural events
 - Make initial investments
@@ -754,24 +847,28 @@ Partnership Recommendation:
 **Phase 2: Growth (Years 2-3)**
 
 **Scale Programs:**
+
 - Expand accelerator cohorts
 - Increase investment activity
 - Deepen partnerships
 - Geographic expansion
 
 **Build Community:**
+
 - Regular events and convenings
 - Online platforms and content
 - Success stories and publicity
 - Ambassador and champion programs
 
 **Demonstrate Value:**
+
 - Showcase successful partnerships
 - Publicize exits and outcomes
 - Share ecosystem insights
 - Measure and communicate impact
 
 **Attract Participants:**
+
 - Marketing and outreach
 - Recruitment of top startups
 - Partnership with VCs
@@ -780,18 +877,21 @@ Partnership Recommendation:
 **Phase 3: Maturity (Year 4+)**
 
 **Sustain & Evolve:**
+
 - Continuous program improvement
 - Ecosystem health monitoring
 - Adapt to market changes
 - New initiatives and experiments
 
 **Institutionalize:**
+
 - Permanent team and budget
 - Governance structure
 - Measurement systems
 - Knowledge management
 
 **Network Effects:**
+
 - Ecosystem participants collaborate
 - Self-sustaining momentum
 - Corporate role shifts to facilitation
@@ -800,6 +900,7 @@ Partnership Recommendation:
 #### Ecosystem Metrics
 
 **Participation Metrics:**
+
 - Number of startups engaged
 - VC firms collaborating
 - University partnerships
@@ -807,6 +908,7 @@ Partnership Recommendation:
 - Event attendance
 
 **Activity Metrics:**
+
 - Deals and partnerships formed
 - Investments made
 - Technologies scouted
@@ -814,6 +916,7 @@ Partnership Recommendation:
 - Collaborations initiated
 
 **Value Creation Metrics:**
+
 - Startup funding raised (ecosystem total)
 - Corporate revenue from partnerships
 - Cost savings from innovations
@@ -821,6 +924,7 @@ Partnership Recommendation:
 - Market value created
 
 **Strategic Impact:**
+
 - Technology trends identified early
 - Competitive positioning improved
 - Brand and reputation enhanced
@@ -834,30 +938,35 @@ Partnership Recommendation:
 **Strategic Rationales for Innovation M&A:**
 
 **Technology Acquisition:**
+
 - Acquire specific technology or IP
 - Accelerate product roadmap
 - Fill capability gaps
 - Block competitors
 
 **Market Access:**
+
 - Enter new markets or segments
 - Acquire customer base
 - Access distribution channels
 - Geographic expansion
 
 **Talent Acquisition (Acqui-hire):**
+
 - Acquire engineering or product talent
 - Build new capabilities
 - Retain key employees
 - Cultural infusion
 
 **Business Model Innovation:**
+
 - Acquire new business model
 - Transform core business
 - Diversify revenue streams
 - Digital transformation
 
 **Competitive Defense:**
+
 - Prevent competitor acquisition
 - Consolidate market
 - Acquire threat
@@ -868,6 +977,7 @@ Partnership Recommendation:
 **Phase 1: Target Identification & Screening**
 
 **Sourcing Channels:**
+
 - CVC portfolio companies
 - Accelerator participants
 - Technology scouting
@@ -876,6 +986,7 @@ Partnership Recommendation:
 - Academic spin-outs
 
 **Screening Criteria:**
+
 - Strategic fit with corporate priorities
 - Technology or product maturity
 - Team quality and cultural fit
@@ -886,6 +997,7 @@ Partnership Recommendation:
 **Phase 2: Initial Diligence & Valuation**
 
 **Technical Diligence:**
+
 - Technology architecture and scalability
 - Code quality and technical debt
 - IP ownership and FTO
@@ -893,6 +1005,7 @@ Partnership Recommendation:
 - Integration complexity
 
 **Commercial Diligence:**
+
 - Market opportunity and positioning
 - Customer traction and retention
 - Revenue quality and growth
@@ -900,6 +1013,7 @@ Partnership Recommendation:
 - Competitive advantages
 
 **Team & Culture:**
+
 - Key person dependencies
 - Skill gaps and complementarity
 - Cultural compatibility
@@ -907,6 +1021,7 @@ Partnership Recommendation:
 - Organizational structure
 
 **Financial Diligence:**
+
 - Revenue recognition and quality
 - Cost structure and unit economics
 - Burn rate and runway
@@ -916,18 +1031,21 @@ Partnership Recommendation:
 **Valuation Methods:**
 
 **For Pre-Revenue / Early Stage:**
+
 - Scorecard method (vs. comparable startups)
 - Risk factor summation
 - Cost to replicate technology
 - Venture capital method (future value discounted)
 
 **For Revenue-Stage:**
+
 - Comparable company analysis (public comps)
 - Precedent transaction analysis (M&A comps)
 - Discounted cash flow (DCF)
 - Revenue or ARR multiples
 
 **Typical Valuation Ranges:**
+
 - Seed stage: $3M-$10M
 - Series A: $10M-$30M
 - Series B: $30M-$100M
@@ -939,26 +1057,31 @@ Partnership Recommendation:
 **Deal Structure Options:**
 
 **All Cash:**
+
 - Clean, simple, certain value
 - Expensive for acquirer
 - No alignment post-deal
 
 **Stock:**
+
 - Conserve cash
 - Align incentives long-term
 - Valuation risk for seller
 
 **Cash + Stock:**
+
 - Balance benefits
 - Most common structure
 
 **Earnout:**
+
 - Portion contingent on performance
 - Bridge valuation gap
 - Retain and motivate team
 - Typical: 20-40% of total consideration
 
 **Retention Incentives:**
+
 - Stay bonuses for key employees
 - Vesting on equity
 - Performance bonuses
@@ -967,12 +1090,14 @@ Partnership Recommendation:
 **Key Deal Terms:**
 
 **Purchase Price:**
+
 - Upfront consideration
 - Earnout terms and triggers
 - Working capital adjustments
 - Debt and option treatment
 
 **Representations & Warranties:**
+
 - Technology ownership
 - IP and FTO
 - Financial accuracy
@@ -980,12 +1105,14 @@ Partnership Recommendation:
 - Litigation and liabilities
 
 **Conditions to Close:**
+
 - Regulatory approvals (HSR, foreign investment)
 - Third-party consents
 - No material adverse change
 - Employee retention agreements
 
 **Indemnification:**
+
 - Escrow (10-20% of purchase price, 12-24 months)
 - Representation & warranty insurance
 - Caps and baskets
@@ -994,6 +1121,7 @@ Partnership Recommendation:
 **Phase 4: Integration Planning & Execution**
 
 **Pre-Close Integration Planning:**
+
 - Integration team and leadership
 - Day 1 plan (communication, access, operations)
 - 100-day plan (quick wins, milestones)
@@ -1002,6 +1130,7 @@ Partnership Recommendation:
 **Integration Dimensions:**
 
 **Technology Integration:**
+
 - Platform and architecture alignment
 - Code and IP transfer
 - Security and compliance integration
@@ -1009,6 +1138,7 @@ Partnership Recommendation:
 - Product roadmap integration
 
 **People & Culture:**
+
 - Organizational structure
 - Reporting relationships
 - Compensation and benefits alignment
@@ -1016,12 +1146,14 @@ Partnership Recommendation:
 - Communication and transparency
 
 **Customers & Partnerships:**
+
 - Customer communication and retention
 - Contract assignment
 - Partnership continuity
 - Brand and positioning
 
 **Operations:**
+
 - Finance and accounting systems
 - Legal entity and tax structure
 - IT and security
@@ -1031,6 +1163,7 @@ Partnership Recommendation:
 **Integration Models:**
 
 **Full Integration (Absorption):**
+
 - Startup fully integrated into parent
 - Brand often retired
 - Team integrated into org
@@ -1038,6 +1171,7 @@ Partnership Recommendation:
 - **Use Case**: Small acquisitions, technology tuck-ins
 
 **Standalone (Preserve):**
+
 - Startup operates independently
 - Brand and team maintained
 - Light touch oversight
@@ -1045,6 +1179,7 @@ Partnership Recommendation:
 - **Use Case**: Acqui-hires, different business models
 
 **Best-of-Both (Selective):**
+
 - Hybrid approach
 - Integrate where synergies exist
 - Preserve where independence valuable
@@ -1054,18 +1189,21 @@ Partnership Recommendation:
 **Success Metrics:**
 
 **Short-Term (0-6 months):**
+
 - Key employee retention (>90% target)
 - Customer retention (>95%)
 - Integration milestones achieved
 - No major incidents or issues
 
 **Medium-Term (6-18 months):**
+
 - Technology integration complete
 - Revenue synergies realized
 - Cost synergies captured
 - Product launches on track
 
 **Long-Term (18+ months):**
+
 - Strategic objectives achieved
 - Financial returns met (ROI positive)
 - Organizational learning captured
@@ -1095,6 +1233,7 @@ Partnership Recommendation:
    - M&A pipeline and process
 
 ### Ongoing Support
+
 - Investment thesis development
 - Deal sourcing and evaluation
 - Partnership structuring
@@ -1107,18 +1246,21 @@ Partnership Recommendation:
 ## Key Questions to Ask Users
 
 **Strategic Context:**
+
 - What are your corporate strategic priorities?
 - What are your biggest innovation challenges or gaps?
 - How does external innovation complement internal R&D?
 - What is your appetite for venture risk and returns?
 
 **Current State:**
+
 - Do you have a CVC fund or investment activity today?
 - What partnerships or accelerator programs exist?
 - How do you currently engage with startups and ecosystems?
 - What has worked well or poorly in the past?
 
 **Objectives & Scope:**
+
 - What are your primary objectives (strategic vs. financial)?
 - What technology domains or markets are priorities?
 - What stage of startups (seed, growth, late stage)?
@@ -1126,6 +1268,7 @@ Partnership Recommendation:
 - What budget and resources are available?
 
 **Organizational Readiness:**
+
 - What internal support and sponsorship exists?
 - How will external innovation integrate with business units?
 - What capabilities and team do you have?
@@ -1134,30 +1277,35 @@ Partnership Recommendation:
 ## Common Pitfalls to Avoid
 
 **Strategy Pitfalls:**
+
 - Unclear objectives (strategic vs. financial confusion)
 - Misalignment with corporate strategy
 - Copycat programs (not tailored to company needs)
 - Short-term thinking (venture requires patience)
 
 **Operational Pitfalls:**
+
 - Under-resourced teams (need dedicated, skilled people)
 - Slow decision-making (can't compete with VCs)
 - Over-integration (kills startup agility)
 - Poor startup selection (chasing hot deals vs. strategic fit)
 
 **Cultural Pitfalls:**
+
 - Corporate bureaucracy imposed on startups
 - Not invented here syndrome
 - Risk aversion (killing promising ideas too early)
 - Failure to learn from startups
 
 **Financial Pitfalls:**
+
 - Unrealistic return expectations
 - Under-diversification (too few investments)
 - Poor valuation discipline
 - Insufficient follow-on capital reserved
 
 **Relationship Pitfalls:**
+
 - Exploiting startups (taking too much for too little)
 - Reputation damage (slow, opaque, difficult to work with)
 - Conflict of interest (competing with portfolio)
@@ -1166,6 +1314,7 @@ Partnership Recommendation:
 ## Templates & Artifacts
 
 The skill should help users create:
+
 - CVC investment thesis and strategy documents
 - Investment committee memos and scorecards
 - Accelerator program design and curriculum
@@ -1180,24 +1329,28 @@ The skill should help users create:
 ## Success Indicators
 
 **CVC Performance:**
+
 - Strategic objectives achieved (technologies, insights, partnerships)
 - Financial returns competitive (top quartile: 20%+ IRR, 3x+ MOIC)
 - Portfolio company relationships strong
 - Reputation in venture ecosystem positive
 
 **Accelerator Impact:**
+
 - High-quality startup participation
 - Corporate partnerships and pilots launched
 - Follow-on funding success (70%+ of cohort)
 - Organizational learning and culture impact
 
 **Ecosystem Development:**
+
 - Growing participation and engagement
 - Value creation for participants
 - Strategic positioning improved
 - Self-sustaining momentum
 
 **M&A Success:**
+
 - Strategic rationale achieved
 - Financial returns positive
 - Key talent retained
@@ -1207,24 +1360,28 @@ The skill should help users create:
 ## References & Resources
 
 **Books:**
+
 - "Open Innovation" by Henry Chesbrough
 - "The Startup Way" by Eric Ries
 - "Venture Capital" by Andrew Metrick & Ayako Yasuda
 - "The Corporate Startup" by Tendayi Viki et al.
 
 **Frameworks:**
+
 - GCV Analytics (Global Corporate Venturing)
 - CB Insights Corporate Innovation reports
 - Deloitte Corporate Venture Capital reports
 - 500 Startups Accelerator Playbook
 
 **Organizations:**
+
 - NVCA (National Venture Capital Association)
 - GCV (Global Corporate Venturing)
 - GBAN (Global Business Angel Network)
 - Accelerator associations
 
 **Platforms:**
+
 - Crunchbase, PitchBook, CB Insights (deal flow)
 - AngelList, Republic (startup discovery)
 - InnoCentive, Kaggle (crowdsourcing)
@@ -1238,4 +1395,5 @@ The skill should help users create:
 **Review Frequency:** Quarterly
 
 **Change Log:**
+
 - 1.0 (Dec 2025): Initial Fortune 50 enterprise skill creation

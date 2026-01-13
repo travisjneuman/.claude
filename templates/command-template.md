@@ -34,9 +34,10 @@ arguments:
 [Brief explanation of what this command does]
 
 ## Usage
-
 ```
+
 /command-name <arg1> [arg2]
+
 ```
 
 ## Arguments
@@ -68,13 +69,17 @@ When invoked, this command will:
 
 ### Example 1: Basic usage
 ```
+
 /command-name value1
+
 ```
 Result: [What happens]
 
 ### Example 2: With optional argument
 ```
+
 /command-name value1 value2
+
 ```
 Result: [What happens]
 
@@ -119,34 +124,38 @@ description: Command with no arguments
 
 ## Command Categories
 
-| Category | Purpose | Examples |
-|----------|---------|----------|
-| **Workflow** | Task management | `/start-task`, `/gsd:progress` |
-| **Discovery** | Finding resources | `/list-skills`, `/skill-finder` |
-| **Quality** | Code quality | `/review-code`, `/test` |
-| **Utility** | System operations | `/health-check`, `/backup-config` |
-| **Research** | Information gathering | `/discover-skills` |
+| Category      | Purpose               | Examples                          |
+| ------------- | --------------------- | --------------------------------- |
+| **Workflow**  | Task management       | `/start-task`, `/gsd:progress`    |
+| **Discovery** | Finding resources     | `/list-skills`, `/skill-finder`   |
+| **Quality**   | Code quality          | `/review-code`, `/test`           |
+| **Utility**   | System operations     | `/health-check`, `/backup-config` |
+| **Research**  | Information gathering | `/discover-skills`                |
 
 ---
 
 ## Best Practices
 
 ### Naming
+
 - Use `kebab-case`: `/review-code` not `/reviewCode`
 - Be verb-first: `/run-tests` not `/tests-run`
 - Keep short: `/commit` not `/create-git-commit`
 
 ### Description
+
 - Under 80 characters
 - Start with verb: "Run...", "List...", "Check..."
 - Include key functionality
 
 ### Arguments
+
 - Minimize required arguments
 - Provide sensible defaults
 - Use clear, descriptive names
 
 ### Implementation
+
 - Include clear step-by-step instructions
 - Handle edge cases (empty input, invalid args)
 - Provide feedback at each step
@@ -162,6 +171,7 @@ For plugin-specific commands, use namespacing:
 ```
 
 Example:
+
 ```
 /gsd:new-project
 /taches-cc-resources:check-todos
@@ -171,13 +181,13 @@ Example:
 
 ## Command vs Skill vs Agent
 
-| Use Case | Best Choice |
-|----------|-------------|
-| User-triggered action | Command |
-| Domain knowledge/guidance | Skill |
-| Autonomous task execution | Agent |
-| Interactive workflow | Command |
-| Background processing | Agent |
+| Use Case                  | Best Choice |
+| ------------------------- | ----------- |
+| User-triggered action     | Command     |
+| Domain knowledge/guidance | Skill       |
+| Autonomous task execution | Agent       |
+| Interactive workflow      | Command     |
+| Background processing     | Agent       |
 
 ---
 
@@ -197,6 +207,7 @@ Example:
 ## Registering Your Command
 
 After creation:
+
 1. Add to `commands/` directory
 2. Update command count in root `README.md`
 3. Add to relevant documentation sections
@@ -245,9 +256,10 @@ arguments:
 Search codebase with optional filters.
 
 ## Usage
-
 ```
+
 /search <pattern> [file_type] [path]
+
 ```
 
 ## Implementation
@@ -260,4 +272,4 @@ Search codebase with optional filters.
 
 ---
 
-*Template version: 1.0*
+_Template version: 1.0_

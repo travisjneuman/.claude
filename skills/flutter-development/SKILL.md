@@ -9,14 +9,14 @@ Build beautiful, natively compiled applications for mobile, web, desktop, and em
 
 ## Supported Platforms
 
-| Platform | Status | Notes |
-|----------|--------|-------|
-| iOS | Stable | Full native performance |
-| Android | Stable | Full native performance |
-| Web | Stable | PWA support |
-| macOS | Stable | Native desktop |
-| Windows | Stable | Native desktop |
-| Linux | Stable | Native desktop |
+| Platform | Status | Notes                   |
+| -------- | ------ | ----------------------- |
+| iOS      | Stable | Full native performance |
+| Android  | Stable | Full native performance |
+| Web      | Stable | PWA support             |
+| macOS    | Stable | Native desktop          |
+| Windows  | Stable | Native desktop          |
+| Linux    | Stable | Native desktop          |
 
 ---
 
@@ -51,6 +51,7 @@ my_app/
 ## Basic Structure
 
 ### Main Entry
+
 ```dart
 import 'package:flutter/material.dart';
 
@@ -76,6 +77,7 @@ class MyApp extends StatelessWidget {
 ```
 
 ### Stateless Widget
+
 ```dart
 class GreetingCard extends StatelessWidget {
   const GreetingCard({
@@ -101,6 +103,7 @@ class GreetingCard extends StatelessWidget {
 ```
 
 ### Stateful Widget
+
 ```dart
 class Counter extends StatefulWidget {
   const Counter({super.key});
@@ -143,6 +146,7 @@ class _CounterState extends State<Counter> {
 ## State Management
 
 ### Riverpod (Recommended)
+
 ```dart
 // Provider definition
 final counterProvider = StateNotifierProvider<CounterNotifier, int>((ref) {
@@ -184,6 +188,7 @@ final itemsProvider = FutureProvider<List<Item>>((ref) async {
 ```
 
 ### BLoC Pattern
+
 ```dart
 // Events
 abstract class CounterEvent {}
@@ -221,6 +226,7 @@ BlocBuilder<CounterBloc, CounterState>(
 ## Navigation
 
 ### GoRouter (Recommended)
+
 ```dart
 final router = GoRouter(
   initialLocation: '/',
@@ -261,6 +267,7 @@ context.pop();
 ## Common Widgets
 
 ### Lists
+
 ```dart
 ListView.builder(
   itemCount: items.length,
@@ -280,6 +287,7 @@ ListView.builder(
 ```
 
 ### Forms
+
 ```dart
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
@@ -358,6 +366,7 @@ class _LoginFormState extends State<LoginForm> {
 ## Networking
 
 ### Dio HTTP Client
+
 ```dart
 class ApiService {
   final Dio _dio;
@@ -388,6 +397,7 @@ class ApiService {
 ## Local Storage
 
 ### Hive (Recommended)
+
 ```dart
 // Model
 @HiveType(typeId: 0)
@@ -411,6 +421,7 @@ final item = box.get('key');
 ```
 
 ### SharedPreferences
+
 ```dart
 final prefs = await SharedPreferences.getInstance();
 await prefs.setString('token', 'abc123');
@@ -444,6 +455,7 @@ Widget build(BuildContext context) {
 ## Testing
 
 ### Widget Tests
+
 ```dart
 testWidgets('Counter increments', (tester) async {
   await tester.pumpWidget(const MaterialApp(home: Counter()));
@@ -458,6 +470,7 @@ testWidgets('Counter increments', (tester) async {
 ```
 
 ### Unit Tests
+
 ```dart
 test('Item fromJson parses correctly', () {
   final json = {'id': '1', 'name': 'Test'};
@@ -473,6 +486,7 @@ test('Item fromJson parses correctly', () {
 ## Performance
 
 ### Best Practices
+
 ```dart
 // Use const constructors
 const SizedBox(height: 16)
@@ -498,6 +512,7 @@ CachedNetworkImage(
 ## Best Practices
 
 ### DO:
+
 - Use const constructors everywhere possible
 - Split widgets into smaller components
 - Use Riverpod or BLoC for state
@@ -505,6 +520,7 @@ CachedNetworkImage(
 - Write widget tests
 
 ### DON'T:
+
 - Put logic in build methods
 - Create god widgets
 - Use setState for complex state

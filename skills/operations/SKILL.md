@@ -22,16 +22,16 @@ THE 5 PRINCIPLES OF LEAN:
 
 ### 8 Wastes (DOWNTIME)
 
-| Waste | Definition | Examples | Countermeasures |
-|-------|------------|----------|-----------------|
-| **D**efects | Work requiring rework/scrap | Quality issues, errors | Poka-yoke, quality at source |
-| **O**verproduction | Making more than needed | Excess inventory, WIP | Pull systems, kanban |
-| **W**aiting | Idle time between processes | Queue time, approvals | Flow optimization, cross-training |
-| **N**on-utilized talent | Underusing employee skills | Manual data entry, routine tasks | Empowerment, automation |
-| **T**ransportation | Unnecessary movement of materials | Multiple handling, poor layout | Facility layout optimization |
-| **I**nventory | Excess stock/materials | Safety stock, WIP | JIT, demand planning |
-| **M**otion | Unnecessary worker movement | Poor workstation design | 5S, ergonomics |
-| **E**xtra processing | More work than required | Over-engineering, redundant checks | Value stream mapping |
+| Waste                   | Definition                        | Examples                           | Countermeasures                   |
+| ----------------------- | --------------------------------- | ---------------------------------- | --------------------------------- |
+| **D**efects             | Work requiring rework/scrap       | Quality issues, errors             | Poka-yoke, quality at source      |
+| **O**verproduction      | Making more than needed           | Excess inventory, WIP              | Pull systems, kanban              |
+| **W**aiting             | Idle time between processes       | Queue time, approvals              | Flow optimization, cross-training |
+| **N**on-utilized talent | Underusing employee skills        | Manual data entry, routine tasks   | Empowerment, automation           |
+| **T**ransportation      | Unnecessary movement of materials | Multiple handling, poor layout     | Facility layout optimization      |
+| **I**nventory           | Excess stock/materials            | Safety stock, WIP                  | JIT, demand planning              |
+| **M**otion              | Unnecessary worker movement       | Poor workstation design            | 5S, ergonomics                    |
+| **E**xtra processing    | More work than required           | Over-engineering, redundant checks | Value stream mapping              |
 
 ### Six Sigma DMAIC
 
@@ -70,25 +70,25 @@ CONTROL
 
 ### Six Sigma Metrics
 
-| Sigma Level | DPMO | Yield |
-|-------------|------|-------|
-| 1 | 691,462 | 30.9% |
-| 2 | 308,538 | 69.1% |
-| 3 | 66,807 | 93.3% |
-| 4 | 6,210 | 99.4% |
-| 5 | 233 | 99.98% |
-| 6 | 3.4 | 99.9997% |
+| Sigma Level | DPMO    | Yield    |
+| ----------- | ------- | -------- |
+| 1           | 691,462 | 30.9%    |
+| 2           | 308,538 | 69.1%    |
+| 3           | 66,807  | 93.3%    |
+| 4           | 6,210   | 99.4%    |
+| 5           | 233     | 99.98%   |
+| 6           | 3.4     | 99.9997% |
 
 ## Supply Chain Management
 
 ### Supply Chain Strategy
 
-| Strategy | When to Use | Key Characteristics |
-|----------|-------------|---------------------|
-| **Efficient** | Stable demand, commodity products | Low cost, high utilization, minimal inventory |
-| **Responsive** | Unpredictable demand, innovative products | Speed, flexibility, buffer inventory |
-| **Risk-Hedging** | Supply uncertainty | Multiple suppliers, pooled inventory |
-| **Agile** | Demand and supply uncertainty | All above combined, modular design |
+| Strategy         | When to Use                               | Key Characteristics                           |
+| ---------------- | ----------------------------------------- | --------------------------------------------- |
+| **Efficient**    | Stable demand, commodity products         | Low cost, high utilization, minimal inventory |
+| **Responsive**   | Unpredictable demand, innovative products | Speed, flexibility, buffer inventory          |
+| **Risk-Hedging** | Supply uncertainty                        | Multiple suppliers, pooled inventory          |
+| **Agile**        | Demand and supply uncertainty             | All above combined, modular design            |
 
 ### SCOR Model (Supply Chain Operations Reference)
 
@@ -132,31 +132,31 @@ ENABLE
 
 ### Supply Chain KPIs
 
-| Category | Metric | Formula | Target |
-|----------|--------|---------|--------|
-| **Reliability** | Perfect Order | (Complete, On-time, Damage-free, Accurate docs) / Total | 95%+ |
-| | OTIF | Orders On-Time In-Full / Total Orders | 98%+ |
-| **Responsiveness** | Order Cycle Time | Order receipt to delivery | Industry specific |
-| | Lead Time | Request to fulfillment | Minimize |
-| **Agility** | Upside Flexibility | % increase possible in 30 days | 20%+ |
-| | Supply Chain Adaptability | Time to adjust to market change | Minimize |
-| **Cost** | Supply Chain Cost | Total SC cost / Revenue | 5-10% |
-| | COGS | Cost of Goods Sold / Revenue | Industry specific |
-| **Asset Management** | Cash-to-Cash | DIO + DSO - DPO | Industry specific |
-| | Inventory Turns | COGS / Average Inventory | Higher is better |
+| Category             | Metric                    | Formula                                                 | Target            |
+| -------------------- | ------------------------- | ------------------------------------------------------- | ----------------- |
+| **Reliability**      | Perfect Order             | (Complete, On-time, Damage-free, Accurate docs) / Total | 95%+              |
+|                      | OTIF                      | Orders On-Time In-Full / Total Orders                   | 98%+              |
+| **Responsiveness**   | Order Cycle Time          | Order receipt to delivery                               | Industry specific |
+|                      | Lead Time                 | Request to fulfillment                                  | Minimize          |
+| **Agility**          | Upside Flexibility        | % increase possible in 30 days                          | 20%+              |
+|                      | Supply Chain Adaptability | Time to adjust to market change                         | Minimize          |
+| **Cost**             | Supply Chain Cost         | Total SC cost / Revenue                                 | 5-10%             |
+|                      | COGS                      | Cost of Goods Sold / Revenue                            | Industry specific |
+| **Asset Management** | Cash-to-Cash              | DIO + DSO - DPO                                         | Industry specific |
+|                      | Inventory Turns           | COGS / Average Inventory                                | Higher is better  |
 
 ## Demand Planning & Forecasting
 
 ### Forecasting Methods
 
-| Method | Use Case | Accuracy |
-|--------|----------|----------|
-| **Moving Average** | Stable demand | Low-Medium |
-| **Exponential Smoothing** | Trend data | Medium |
-| **Regression** | Causal relationships | Medium-High |
-| **ARIMA** | Complex patterns | High |
-| **Machine Learning** | Large datasets, many variables | High |
-| **Collaborative** | Retail, promotions | Medium-High |
+| Method                    | Use Case                       | Accuracy    |
+| ------------------------- | ------------------------------ | ----------- |
+| **Moving Average**        | Stable demand                  | Low-Medium  |
+| **Exponential Smoothing** | Trend data                     | Medium      |
+| **Regression**            | Causal relationships           | Medium-High |
+| **ARIMA**                 | Complex patterns               | High        |
+| **Machine Learning**      | Large datasets, many variables | High        |
+| **Collaborative**         | Retail, promotions             | Medium-High |
 
 ### S&OP (Sales & Operations Planning)
 
@@ -191,10 +191,10 @@ Week 5: Executive S&OP
 
 ### Inventory Management
 
-| Model | Formula | Use Case |
-|-------|---------|----------|
-| **EOQ** | √(2DS/H) | Constant demand |
-| **Safety Stock** | z × σ × √LT | Buffer uncertainty |
+| Model             | Formula       | Use Case              |
+| ----------------- | ------------- | --------------------- |
+| **EOQ**           | √(2DS/H)      | Constant demand       |
+| **Safety Stock**  | z × σ × √LT   | Buffer uncertainty    |
 | **Reorder Point** | (D × LT) + SS | Trigger replenishment |
 
 ```
@@ -227,15 +227,15 @@ TQM PRINCIPLES:
 
 ### Quality Tools
 
-| Tool | Purpose | When to Use |
-|------|---------|-------------|
-| **Pareto Chart** | Identify vital few | Prioritizing problems |
-| **Fishbone Diagram** | Root cause analysis | Problem investigation |
-| **Control Charts** | Monitor process stability | Ongoing monitoring |
-| **Histogram** | Show distribution | Understanding variation |
-| **Scatter Diagram** | Show correlation | Relationship analysis |
-| **Check Sheet** | Data collection | Systematic recording |
-| **Flowchart** | Visualize process | Process understanding |
+| Tool                 | Purpose                   | When to Use             |
+| -------------------- | ------------------------- | ----------------------- |
+| **Pareto Chart**     | Identify vital few        | Prioritizing problems   |
+| **Fishbone Diagram** | Root cause analysis       | Problem investigation   |
+| **Control Charts**   | Monitor process stability | Ongoing monitoring      |
+| **Histogram**        | Show distribution         | Understanding variation |
+| **Scatter Diagram**  | Show correlation          | Relationship analysis   |
+| **Check Sheet**      | Data collection           | Systematic recording    |
+| **Flowchart**        | Visualize process         | Process understanding   |
 
 ### Statistical Process Control (SPC)
 
@@ -272,11 +272,11 @@ Match: Incrementally match demand
 
 ### Production Planning
 
-| Planning Level | Horizon | Decisions |
-|----------------|---------|-----------|
-| **Strategic** | 1-5 years | Facilities, major equipment |
-| **Tactical** | 3-18 months | Workforce, inventory levels |
-| **Operational** | Days-weeks | Scheduling, sequencing |
+| Planning Level  | Horizon     | Decisions                   |
+| --------------- | ----------- | --------------------------- |
+| **Strategic**   | 1-5 years   | Facilities, major equipment |
+| **Tactical**    | 3-18 months | Workforce, inventory levels |
+| **Operational** | Days-weeks  | Scheduling, sequencing      |
 
 ## Vendor Management
 
@@ -300,12 +300,12 @@ Innovation: 10%
 
 ### Supplier Relationship Tiers
 
-| Tier | Relationship | Characteristics |
-|------|--------------|-----------------|
-| **Strategic** | Partnership | Joint development, long-term, shared risk |
-| **Preferred** | Collaboration | Volume commitment, improvement programs |
-| **Approved** | Transactional | Competitive bidding, standard terms |
-| **Spot** | One-time | Emergency purchases, minimal vetting |
+| Tier          | Relationship  | Characteristics                           |
+| ------------- | ------------- | ----------------------------------------- |
+| **Strategic** | Partnership   | Joint development, long-term, shared risk |
+| **Preferred** | Collaboration | Volume commitment, improvement programs   |
+| **Approved**  | Transactional | Competitive bidding, standard terms       |
+| **Spot**      | One-time      | Emergency purchases, minimal vetting      |
 
 ### Contract Management
 
@@ -348,34 +348,34 @@ FUTURE STATE MAP:
 
 ### Kaizen Events
 
-| Phase | Duration | Activities |
-|-------|----------|------------|
-| **Preparation** | 2-4 weeks | Scope, team, data gathering |
-| **Event** | 3-5 days | Analysis, solution design, implementation |
-| **Follow-up** | 30-60 days | Sustain, measure, adjust |
+| Phase           | Duration   | Activities                                |
+| --------------- | ---------- | ----------------------------------------- |
+| **Preparation** | 2-4 weeks  | Scope, team, data gathering               |
+| **Event**       | 3-5 days   | Analysis, solution design, implementation |
+| **Follow-up**   | 30-60 days | Sustain, measure, adjust                  |
 
 ### 5S Methodology
 
-| Step | Japanese | English | Actions |
-|------|----------|---------|---------|
-| 1 | Seiri | Sort | Remove unnecessary items |
-| 2 | Seiton | Set in Order | Organize remaining items |
-| 3 | Seiso | Shine | Clean work area |
-| 4 | Seiketsu | Standardize | Create standards |
-| 5 | Shitsuke | Sustain | Maintain discipline |
+| Step | Japanese | English      | Actions                  |
+| ---- | -------- | ------------ | ------------------------ |
+| 1    | Seiri    | Sort         | Remove unnecessary items |
+| 2    | Seiton   | Set in Order | Organize remaining items |
+| 3    | Seiso    | Shine        | Clean work area          |
+| 4    | Seiketsu | Standardize  | Create standards         |
+| 5    | Shitsuke | Sustain      | Maintain discipline      |
 
 ## Operational Metrics Dashboard
 
 ### Key Operating Metrics
 
-| Category | Metric | Frequency |
-|----------|--------|-----------|
-| **Safety** | TRIR, Lost Time | Daily |
-| **Quality** | First Pass Yield, Defect Rate | Daily |
-| **Delivery** | OTIF, Lead Time | Daily |
-| **Cost** | Unit Cost, Productivity | Weekly |
-| **Inventory** | Turns, DOS | Weekly |
-| **Equipment** | OEE, Downtime | Daily |
+| Category      | Metric                        | Frequency |
+| ------------- | ----------------------------- | --------- |
+| **Safety**    | TRIR, Lost Time               | Daily     |
+| **Quality**   | First Pass Yield, Defect Rate | Daily     |
+| **Delivery**  | OTIF, Lead Time               | Daily     |
+| **Cost**      | Unit Cost, Productivity       | Weekly    |
+| **Inventory** | Turns, DOS                    | Weekly    |
+| **Equipment** | OEE, Downtime                 | Daily     |
 
 ### OEE (Overall Equipment Effectiveness)
 

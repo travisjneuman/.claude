@@ -41,12 +41,12 @@ HORIZON 3 - TRANSFORMATIONAL (10% of resources):
 
 ### Innovation Types
 
-| Type | Description | Example |
-|------|-------------|---------|
-| **Incremental** | Improvements to existing | Product upgrades |
-| **Adjacent** | New to company | New market entry |
-| **Disruptive** | New to industry | Business model innovation |
-| **Radical** | New to world | Breakthrough technology |
+| Type            | Description              | Example                   |
+| --------------- | ------------------------ | ------------------------- |
+| **Incremental** | Improvements to existing | Product upgrades          |
+| **Adjacent**    | New to company           | New market entry          |
+| **Disruptive**  | New to industry          | Business model innovation |
+| **Radical**     | New to world             | Breakthrough technology   |
 
 ### Innovation Portfolio
 
@@ -172,14 +172,14 @@ ENTERPRISE ADAPTATION:
 
 ### Ideation Techniques
 
-| Technique | Best For | Participants |
-|-----------|----------|--------------|
-| **Brainstorming** | Volume of ideas | 5-10 |
-| **Brainwriting** | Equal contribution | 6-12 |
-| **SCAMPER** | Improving existing | 3-6 |
-| **Analogies** | Novel solutions | 4-8 |
-| **Reverse Brainstorm** | Problem avoidance | 5-10 |
-| **Design Sprint** | Rapid prototyping | 5-7 |
+| Technique              | Best For           | Participants |
+| ---------------------- | ------------------ | ------------ |
+| **Brainstorming**      | Volume of ideas    | 5-10         |
+| **Brainwriting**       | Equal contribution | 6-12         |
+| **SCAMPER**            | Improving existing | 3-6          |
+| **Analogies**          | Novel solutions    | 4-8          |
+| **Reverse Brainstorm** | Problem avoidance  | 5-10         |
+| **Design Sprint**      | Rapid prototyping  | 5-7          |
 
 ### Idea Evaluation
 
@@ -288,14 +288,14 @@ METRICS:
 
 ### Open Innovation Models
 
-| Model | Description | Example |
-|-------|-------------|---------|
-| **Crowdsourcing** | Mass participation | InnoCentive |
-| **Partnerships** | Joint development | Research collaborations |
-| **Licensing In** | Technology acquisition | University tech transfer |
-| **Licensing Out** | IP monetization | Patent licensing |
-| **Spin-offs** | New entities | Internal ventures |
-| **Accelerators** | Startup support | Corporate accelerator |
+| Model             | Description            | Example                  |
+| ----------------- | ---------------------- | ------------------------ |
+| **Crowdsourcing** | Mass participation     | InnoCentive              |
+| **Partnerships**  | Joint development      | Research collaborations  |
+| **Licensing In**  | Technology acquisition | University tech transfer |
+| **Licensing Out** | IP monetization        | Patent licensing         |
+| **Spin-offs**     | New entities           | Internal ventures        |
+| **Accelerators**  | Startup support        | Corporate accelerator    |
 
 ### External Innovation Program
 
@@ -391,13 +391,13 @@ GEOGRAPHIC FILING:
 
 ### Innovation KPIs
 
-| Category | Metric | Target |
-|----------|--------|--------|
-| **Input** | R&D as % of revenue | Industry benchmark |
-| **Pipeline** | Ideas in pipeline | Growing |
-| **Process** | Time to market | Decreasing |
-| **Output** | New product revenue | 20-30% of total |
-| **Efficiency** | R&D ROI | > cost of capital |
+| Category       | Metric              | Target             |
+| -------------- | ------------------- | ------------------ |
+| **Input**      | R&D as % of revenue | Industry benchmark |
+| **Pipeline**   | Ideas in pipeline   | Growing            |
+| **Process**    | Time to market      | Decreasing         |
+| **Output**     | New product revenue | 20-30% of total    |
+| **Efficiency** | R&D ROI             | > cost of capital  |
 
 ### Innovation Accounting
 
@@ -457,19 +457,20 @@ EMPOWERMENT:
 
 ### Innovation Programs
 
-| Program | Purpose | Participants |
-|---------|---------|--------------|
-| **Hackathons** | Rapid ideation | All employees |
-| **Innovation Labs** | Deep exploration | Dedicated team |
+| Program              | Purpose          | Participants      |
+| -------------------- | ---------------- | ----------------- |
+| **Hackathons**       | Rapid ideation   | All employees     |
+| **Innovation Labs**  | Deep exploration | Dedicated team    |
 | **Intrapreneurship** | Venture building | Selected projects |
-| **Idea Challenges** | Problem solving | Open submission |
-| **Learning Days** | Skill building | All employees |
+| **Idea Challenges**  | Problem solving  | Open submission   |
+| **Learning Days**    | Skill building   | All employees     |
 
 See [Innovation Processes](./references/innovation-processes.md) for detailed program formats, governance structures, and best practices.
 
 ## Additional Resources
 
 For comprehensive innovation management frameworks:
+
 - [Innovation Management Skill](./references/innovation-management-skill.md) - Complete innovation reference
 - [Corporate Venture & Open Innovation](./references/corporate-venture-open-innovation-skill.md) - CVC and partnership strategies
 - [Innovation Processes](./references/innovation-processes.md) - Design Thinking, Stage-Gate, Lean Startup details

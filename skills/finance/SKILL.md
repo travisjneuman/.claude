@@ -23,23 +23,23 @@ ROE = (EBIT/Sales) x (Sales/Assets) x (Assets/Equity) x (EBT/EBIT) x (NI/EBT)
 
 ### Key Financial Ratios
 
-| Category | Ratio | Formula | Benchmark |
-|----------|-------|---------|-----------|
-| **Profitability** | Gross Margin | Gross Profit / Revenue | Industry specific |
-| | Operating Margin | EBIT / Revenue | 15-25% (varies) |
-| | Net Margin | Net Income / Revenue | 10-20% (varies) |
-| | ROIC | NOPAT / Invested Capital | > WACC |
-| | ROE | Net Income / Equity | 15-20%+ |
-| **Liquidity** | Current Ratio | Current Assets / Current Liabilities | 1.5-2.0x |
-| | Quick Ratio | (CA - Inventory) / CL | 1.0x+ |
-| | Cash Ratio | Cash / Current Liabilities | 0.2-0.5x |
-| **Leverage** | Debt/Equity | Total Debt / Total Equity | < 1.0x |
-| | Debt/EBITDA | Total Debt / EBITDA | 2-3x (IG), 4-6x (HY) |
-| | Interest Coverage | EBIT / Interest Expense | > 3x |
-| **Efficiency** | Asset Turnover | Revenue / Total Assets | Industry specific |
-| | Inventory Days | Inventory / (COGS/365) | Industry specific |
-| | DSO | AR / (Revenue/365) | 30-45 days |
-| | DPO | AP / (COGS/365) | 30-60 days |
+| Category          | Ratio             | Formula                              | Benchmark            |
+| ----------------- | ----------------- | ------------------------------------ | -------------------- |
+| **Profitability** | Gross Margin      | Gross Profit / Revenue               | Industry specific    |
+|                   | Operating Margin  | EBIT / Revenue                       | 15-25% (varies)      |
+|                   | Net Margin        | Net Income / Revenue                 | 10-20% (varies)      |
+|                   | ROIC              | NOPAT / Invested Capital             | > WACC               |
+|                   | ROE               | Net Income / Equity                  | 15-20%+              |
+| **Liquidity**     | Current Ratio     | Current Assets / Current Liabilities | 1.5-2.0x             |
+|                   | Quick Ratio       | (CA - Inventory) / CL                | 1.0x+                |
+|                   | Cash Ratio        | Cash / Current Liabilities           | 0.2-0.5x             |
+| **Leverage**      | Debt/Equity       | Total Debt / Total Equity            | < 1.0x               |
+|                   | Debt/EBITDA       | Total Debt / EBITDA                  | 2-3x (IG), 4-6x (HY) |
+|                   | Interest Coverage | EBIT / Interest Expense              | > 3x                 |
+| **Efficiency**    | Asset Turnover    | Revenue / Total Assets               | Industry specific    |
+|                   | Inventory Days    | Inventory / (COGS/365)               | Industry specific    |
+|                   | DSO               | AR / (Revenue/365)                   | 30-45 days           |
+|                   | DPO               | AP / (COGS/365)                      | 30-60 days           |
 
 ### Cash Flow Analysis
 
@@ -90,22 +90,22 @@ Equity Value = Enterprise Value - Net Debt + Cash
 
 ### DCF Model Template
 
-| Year | 1 | 2 | 3 | 4 | 5 | Terminal |
-|------|---|---|---|---|---|----------|
-| Revenue | | | | | | |
-| Growth % | | | | | | |
-| EBITDA | | | | | | |
-| Margin % | | | | | | |
-| D&A | | | | | | |
-| EBIT | | | | | | |
-| Tax | | | | | | |
-| NOPAT | | | | | | |
-| + D&A | | | | | | |
-| - CapEx | | | | | | |
-| - NWC Change | | | | | | |
-| **UFCF** | | | | | | |
-| Discount Factor | | | | | | |
-| **PV of UFCF** | | | | | | |
+| Year            | 1   | 2   | 3   | 4   | 5   | Terminal |
+| --------------- | --- | --- | --- | --- | --- | -------- |
+| Revenue         |     |     |     |     |     |          |
+| Growth %        |     |     |     |     |     |          |
+| EBITDA          |     |     |     |     |     |          |
+| Margin %        |     |     |     |     |     |          |
+| D&A             |     |     |     |     |     |          |
+| EBIT            |     |     |     |     |     |          |
+| Tax             |     |     |     |     |     |          |
+| NOPAT           |     |     |     |     |     |          |
+| + D&A           |     |     |     |     |     |          |
+| - CapEx         |     |     |     |     |     |          |
+| - NWC Change    |     |     |     |     |     |          |
+| **UFCF**        |     |     |     |     |     |          |
+| Discount Factor |     |     |     |     |     |          |
+| **PV of UFCF**  |     |     |     |     |     |          |
 
 ### Comparable Company Analysis
 
@@ -193,11 +193,11 @@ KEY METRICS:
 ### LBO Returns Framework
 
 | IRR Target | Hold Period | Required MOIC |
-|------------|-------------|---------------|
-| 20% | 3 years | 1.7x |
-| 20% | 5 years | 2.5x |
-| 25% | 3 years | 2.0x |
-| 25% | 5 years | 3.0x |
+| ---------- | ----------- | ------------- |
+| 20%        | 3 years     | 1.7x          |
+| 20%        | 5 years     | 2.5x          |
+| 25%        | 3 years     | 2.0x          |
+| 25%        | 5 years     | 3.0x          |
 
 ### Value Creation Sources
 
@@ -237,10 +237,10 @@ Synergies needed to make deal EPS neutral
 
 ### Synergy Analysis
 
-| Synergy Type | Typical Range | Realization Timeline |
-|--------------|---------------|----------------------|
-| Cost Synergies | 5-15% of target costs | 1-3 years |
-| Revenue Synergies | 2-5% of combined revenue | 2-5 years |
+| Synergy Type      | Typical Range            | Realization Timeline |
+| ----------------- | ------------------------ | -------------------- |
+| Cost Synergies    | 5-15% of target costs    | 1-3 years            |
+| Revenue Synergies | 2-5% of combined revenue | 2-5 years            |
 
 ### Deal Structure Considerations
 
@@ -284,13 +284,13 @@ FINANCING:
 
 ### Investment Hurdle Rates
 
-| Investment Type | Typical Hurdle | Risk Premium |
-|-----------------|----------------|--------------|
-| Maintenance CapEx | WACC | None |
-| Growth CapEx | WACC + 2-3% | Low |
-| Domestic M&A | WACC + 3-5% | Medium |
-| International M&A | WACC + 5-8% | High |
-| Venture/Innovation | 25-30% IRR | Very High |
+| Investment Type    | Typical Hurdle | Risk Premium |
+| ------------------ | -------------- | ------------ |
+| Maintenance CapEx  | WACC           | None         |
+| Growth CapEx       | WACC + 2-3%    | Low          |
+| Domestic M&A       | WACC + 3-5%    | Medium       |
+| International M&A  | WACC + 5-8%    | High         |
+| Venture/Innovation | 25-30% IRR     | Very High    |
 
 ### ROIC vs WACC Framework
 
@@ -329,12 +329,12 @@ OPTIMIZATION LEVERS:
 
 ### Hedging Strategies
 
-| Risk Type | Hedging Instruments | Strategy |
-|-----------|---------------------|----------|
-| **FX Risk** | Forwards, Options, Swaps | Natural hedging, rolling hedge |
-| **Interest Rate** | Swaps, Caps, Floors | Fixed/floating mix |
-| **Commodity** | Futures, Options | Cost certainty for inputs |
-| **Credit** | CDS, Insurance | Counterparty protection |
+| Risk Type         | Hedging Instruments      | Strategy                       |
+| ----------------- | ------------------------ | ------------------------------ |
+| **FX Risk**       | Forwards, Options, Swaps | Natural hedging, rolling hedge |
+| **Interest Rate** | Swaps, Caps, Floors      | Fixed/floating mix             |
+| **Commodity**     | Futures, Options         | Cost certainty for inputs      |
+| **Credit**        | CDS, Insurance           | Counterparty protection        |
 
 ### Capital Structure Optimization
 
@@ -383,12 +383,12 @@ KEY COMPONENTS:
 
 ### Guidance Framework
 
-| Guidance Type | Frequency | Specificity |
-|---------------|-----------|-------------|
-| Revenue | Quarterly | Range |
-| EPS | Quarterly | Range |
-| Cash Flow | Annual | Target |
-| CapEx | Annual | Range |
+| Guidance Type     | Frequency    | Specificity |
+| ----------------- | ------------ | ----------- |
+| Revenue           | Quarterly    | Range       |
+| EPS               | Quarterly    | Range       |
+| Cash Flow         | Annual       | Target      |
+| CapEx             | Annual       | Range       |
 | Long-term Targets | Investor Day | Directional |
 
 ## Financial Planning & Analysis
@@ -415,13 +415,13 @@ VARIANCE ANALYSIS:
 
 ### Budget Process Timeline
 
-| Phase | Timing | Activities |
-|-------|--------|------------|
-| Strategic Planning | Q2 | Long-range plan update |
-| Guidance Setting | Q3 | Preliminary targets |
-| Detailed Budgeting | Q3-Q4 | Bottom-up plans |
-| Review & Approval | Q4 | Executive/Board approval |
-| Communication | Q4 | Cascaded targets |
+| Phase              | Timing | Activities               |
+| ------------------ | ------ | ------------------------ |
+| Strategic Planning | Q2     | Long-range plan update   |
+| Guidance Setting   | Q3     | Preliminary targets      |
+| Detailed Budgeting | Q3-Q4  | Bottom-up plans          |
+| Review & Approval  | Q4     | Executive/Board approval |
+| Communication      | Q4     | Cascaded targets         |
 
 ## See Also
 

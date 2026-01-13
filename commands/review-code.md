@@ -18,18 +18,18 @@ Perform comprehensive code review with multi-aspect analysis.
 
 ## Platform Compatibility
 
-| Platform | Status | Notes |
-|----------|--------|-------|
-| Windows | ✅ | Git commands work natively |
-| macOS | ✅ | Fully supported |
-| Linux | ✅ | Fully supported |
+| Platform | Status | Notes                      |
+| -------- | ------ | -------------------------- |
+| Windows  | ✅     | Git commands work natively |
+| macOS    | ✅     | Fully supported            |
+| Linux    | ✅     | Fully supported            |
 
 Uses standard git commands which are cross-platform.
 
 ## Arguments
 
-| Argument | Default | Description |
-|----------|---------|-------------|
+| Argument | Default  | Description                                       |
+| -------- | -------- | ------------------------------------------------- |
 | `target` | `staged` | What to review: file path, directory, or `staged` |
 
 ## Behavior
@@ -37,29 +37,32 @@ Uses standard git commands which are cross-platform.
 ### Step 1: Identify Target
 
 **If target is `staged` or not provided:**
+
 ```bash
 git diff --cached --name-only
 ```
 
 **If target is a file:**
+
 - Review that specific file
 
 **If target is a directory:**
+
 - Review all code files in directory
 
 ### Step 2: Load Review Skill
 
 Invoke the appropriate code reviewer skill based on detected stack:
 
-| Stack | Skill |
-|-------|-------|
-| React/TypeScript | `Skill(generic-react-code-reviewer)` |
-| Full-stack | `Skill(generic-fullstack-code-reviewer)` |
-| Static HTML/CSS/JS | `Skill(generic-static-code-reviewer)` |
-| Python | Load `rules/stacks/python.md` |
-| Go | Load `rules/stacks/go.md` |
-| Rust | Load `rules/stacks/rust.md` |
-| Other | `Skill(generic-code-reviewer)` |
+| Stack              | Skill                                    |
+| ------------------ | ---------------------------------------- |
+| React/TypeScript   | `Skill(generic-react-code-reviewer)`     |
+| Full-stack         | `Skill(generic-fullstack-code-reviewer)` |
+| Static HTML/CSS/JS | `Skill(generic-static-code-reviewer)`    |
+| Python             | Load `rules/stacks/python.md`            |
+| Go                 | Load `rules/stacks/go.md`                |
+| Rust               | Load `rules/stacks/rust.md`              |
+| Other              | `Skill(generic-code-reviewer)`           |
 
 ### Step 3: Perform Review
 
@@ -80,34 +83,42 @@ Output structured report:
 ## Code Review: [Target]
 
 ### Summary
+
 [Overall assessment]
 
 ### Critical Issues (Must Fix)
+
 - [ ] [Issue with file:line reference]
 
 ### Recommendations (Should Fix)
+
 - [ ] [Suggestion with reasoning]
 
 ### Minor (Nice to Have)
+
 - [ ] [Small improvement]
 
 ### Positive Observations
+
 - [What's done well]
 ```
 
 ## Examples
 
 ### Review staged changes
+
 ```
 /review-code
 ```
 
 ### Review specific file
+
 ```
 /review-code src/components/UserCard.tsx
 ```
 
 ### Review directory
+
 ```
 /review-code src/services/
 ```
@@ -120,4 +131,4 @@ Output structured report:
 
 ---
 
-*Uses confidence-based filtering to report only actionable issues.*
+_Uses confidence-based filtering to report only actionable issues._
