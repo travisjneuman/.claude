@@ -9,12 +9,12 @@ Comprehensive guide for database design, optimization, and administration.
 
 ## Database Selection
 
-| Database | Type | Best For |
-|----------|------|----------|
+| Database       | Type       | Best For                            |
+| -------------- | ---------- | ----------------------------------- |
 | **PostgreSQL** | Relational | Complex queries, ACID, JSON support |
-| **MongoDB** | Document | Flexible schemas, rapid iteration |
-| **Redis** | Key-Value | Caching, sessions, real-time |
-| **SQLite** | Embedded | Mobile, desktop, testing |
+| **MongoDB**    | Document   | Flexible schemas, rapid iteration   |
+| **Redis**      | Key-Value  | Caching, sessions, real-time        |
+| **SQLite**     | Embedded   | Mobile, desktop, testing            |
 
 ---
 
@@ -173,7 +173,7 @@ const userSchema = {
       type: String,
       street: String,
       city: String,
-    }
+    },
   ],
 };
 
@@ -195,26 +195,26 @@ db.orders.aggregate([
   {
     $match: {
       status: "completed",
-      createdAt: { $gte: ISODate("2024-01-01") }
-    }
+      createdAt: { $gte: ISODate("2024-01-01") },
+    },
   },
   {
     $lookup: {
       from: "users",
       localField: "userId",
       foreignField: "_id",
-      as: "user"
-    }
+      as: "user",
+    },
   },
   { $unwind: "$user" },
   {
     $group: {
       _id: { month: { $month: "$createdAt" } },
       totalRevenue: { $sum: "$total" },
-      orderCount: { $sum: 1 }
-    }
+      orderCount: { $sum: 1 },
+    },
   },
-  { $sort: { totalRevenue: -1 } }
+  { $sort: { totalRevenue: -1 } },
 ]);
 ```
 
@@ -227,13 +227,13 @@ db.posts.createIndex({ authorId: 1, createdAt: -1 });
 // Text index
 db.posts.createIndex(
   { title: "text", content: "text" },
-  { weights: { title: 10, content: 1 } }
+  { weights: { title: 10, content: 1 } },
 );
 
 // Partial index
 db.orders.createIndex(
   { createdAt: 1 },
-  { partialFilterExpression: { status: "pending" } }
+  { partialFilterExpression: { status: "pending" } },
 );
 
 // TTL index (auto-expire)
@@ -292,7 +292,11 @@ async function getUser(userId: string): Promise<User> {
 }
 
 // Rate limiting
-async function checkRateLimit(userId: string, limit: number, window: number): Promise<boolean> {
+async function checkRateLimit(
+  userId: string,
+  limit: number,
+  window: number,
+): Promise<boolean> {
   const key = `ratelimit:${userId}`;
   const current = await redis.incr(key);
 
@@ -304,15 +308,12 @@ async function checkRateLimit(userId: string, limit: number, window: number): Pr
 }
 
 // Distributed lock
-async function acquireLock(resource: string, ttl: number): Promise<string | null> {
+async function acquireLock(
+  resource: string,
+  ttl: number,
+): Promise<string | null> {
   const lockId = crypto.randomUUID();
-  const acquired = await redis.set(
-    `lock:${resource}`,
-    lockId,
-    'NX',
-    'EX',
-    ttl
-  );
+  const acquired = await redis.set(`lock:${resource}`, lockId, "NX", "EX", ttl);
   return acquired ? lockId : null;
 }
 
@@ -337,8 +338,8 @@ async function publishEvent(channel: string, event: object): Promise<void> {
 
 // Subscriber
 const subscriber = redis.duplicate();
-subscriber.subscribe('events');
-subscriber.on('message', (channel, message) => {
+subscriber.subscribe("events");
+subscriber.on("message", (channel, message) => {
   const event = JSON.parse(message);
   handleEvent(event);
 });
@@ -349,6 +350,7 @@ subscriber.on('message', (channel, message) => {
 ## Query Optimization Checklist
 
 ### PostgreSQL
+
 - [ ] Use EXPLAIN ANALYZE for slow queries
 - [ ] Create indexes for WHERE, JOIN, ORDER BY columns
 - [ ] Use partial indexes for filtered queries
@@ -356,12 +358,14 @@ subscriber.on('message', (channel, message) => {
 - [ ] Regular VACUUM and ANALYZE
 
 ### MongoDB
+
 - [ ] Create compound indexes matching query patterns
 - [ ] Use covered queries when possible
 - [ ] Avoid large array fields in documents
 - [ ] Monitor with explain()
 
 ### Redis
+
 - [ ] Use appropriate data structures
 - [ ] Set TTL on cache keys
 - [ ] Use pipelining for bulk operations

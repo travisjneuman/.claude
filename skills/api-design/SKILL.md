@@ -12,6 +12,7 @@ Best practices for designing developer-friendly, maintainable APIs.
 ### Resource Naming
 
 **Use nouns, not verbs**:
+
 ```
 ✓ GET /users
 ✓ GET /users/123
@@ -23,6 +24,7 @@ Best practices for designing developer-friendly, maintainable APIs.
 ```
 
 **Use plural nouns**:
+
 ```
 ✓ /users
 ✓ /orders
@@ -33,6 +35,7 @@ Best practices for designing developer-friendly, maintainable APIs.
 ```
 
 **Hierarchical relationships**:
+
 ```
 /users/{userId}/orders           # User's orders
 /users/{userId}/orders/{orderId} # Specific order
@@ -42,24 +45,26 @@ Best practices for designing developer-friendly, maintainable APIs.
 
 ### HTTP Methods
 
-| Method | Purpose | Idempotent | Request Body |
-|--------|---------|------------|--------------|
-| GET | Retrieve resource(s) | Yes | No |
-| POST | Create resource | No | Yes |
-| PUT | Replace resource entirely | Yes | Yes |
-| PATCH | Update resource partially | No | Yes |
-| DELETE | Remove resource | Yes | No |
+| Method | Purpose                   | Idempotent | Request Body |
+| ------ | ------------------------- | ---------- | ------------ |
+| GET    | Retrieve resource(s)      | Yes        | No           |
+| POST   | Create resource           | No         | Yes          |
+| PUT    | Replace resource entirely | Yes        | Yes          |
+| PATCH  | Update resource partially | No         | Yes          |
+| DELETE | Remove resource           | Yes        | No           |
 
 ---
 
 ### Status Codes
 
 **Success (2xx)**:
+
 - `200 OK` - Request succeeded
 - `201 Created` - Resource created (return Location header)
 - `204 No Content` - Success with no response body
 
 **Client Error (4xx)**:
+
 - `400 Bad Request` - Malformed request
 - `401 Unauthorized` - Authentication required
 - `403 Forbidden` - No permission
@@ -69,6 +74,7 @@ Best practices for designing developer-friendly, maintainable APIs.
 - `429 Too Many Requests` - Rate limited
 
 **Server Error (5xx)**:
+
 - `500 Internal Server Error` - Unexpected error
 - `503 Service Unavailable` - Temporary outage
 
@@ -77,6 +83,7 @@ Best practices for designing developer-friendly, maintainable APIs.
 ### Response Format
 
 **Successful response**:
+
 ```json
 {
   "data": {
@@ -88,6 +95,7 @@ Best practices for designing developer-friendly, maintainable APIs.
 ```
 
 **Collection response**:
+
 ```json
 {
   "data": [
@@ -109,6 +117,7 @@ Best practices for designing developer-friendly, maintainable APIs.
 ```
 
 **Error response**:
+
 ```json
 {
   "error": {
@@ -130,17 +139,20 @@ Best practices for designing developer-friendly, maintainable APIs.
 ### Pagination
 
 **Offset-based** (simple, but slow on large datasets):
+
 ```
 GET /users?page=2&perPage=20
 GET /users?offset=40&limit=20
 ```
 
 **Cursor-based** (efficient, recommended):
+
 ```
 GET /users?cursor=eyJpZCI6MTIzfQ&limit=20
 ```
 
 Response includes next cursor:
+
 ```json
 {
   "data": [...],
@@ -156,6 +168,7 @@ Response includes next cursor:
 ### Filtering, Sorting, Fields
 
 **Filtering**:
+
 ```
 GET /users?status=active
 GET /users?created_after=2024-01-01
@@ -163,6 +176,7 @@ GET /users?role=admin,moderator
 ```
 
 **Sorting**:
+
 ```
 GET /users?sort=name
 GET /users?sort=-created_at         # Descending
@@ -170,6 +184,7 @@ GET /users?sort=status,-created_at  # Multiple fields
 ```
 
 **Field selection**:
+
 ```
 GET /users?fields=id,name,email
 GET /users?include=orders,profile
@@ -180,12 +195,14 @@ GET /users?include=orders,profile
 ### Versioning
 
 **URL path** (recommended):
+
 ```
 /api/v1/users
 /api/v2/users
 ```
 
 **Header**:
+
 ```
 Accept: application/vnd.api+json;version=2
 ```
@@ -216,7 +233,7 @@ paths:
             type: integer
             default: 1
       responses:
-        '200':
+        "200":
           description: List of users
           content:
             application/json:
@@ -226,7 +243,7 @@ paths:
                   data:
                     type: array
                     items:
-                      $ref: '#/components/schemas/User'
+                      $ref: "#/components/schemas/User"
 
 components:
   schemas:
@@ -248,16 +265,19 @@ components:
 ## Authentication
 
 **API Keys** (simple, for server-to-server):
+
 ```
 Authorization: Api-Key YOUR_API_KEY
 ```
 
 **Bearer Tokens** (JWT, OAuth):
+
 ```
 Authorization: Bearer eyJhbGciOiJIUzI1NiIs...
 ```
 
 **Include in OpenAPI**:
+
 ```yaml
 components:
   securitySchemes:
@@ -275,6 +295,7 @@ security:
 ## Rate Limiting
 
 Include headers in responses:
+
 ```
 X-RateLimit-Limit: 1000
 X-RateLimit-Remaining: 999

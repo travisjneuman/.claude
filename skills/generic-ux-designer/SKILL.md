@@ -16,12 +16,14 @@ Skill(ui-research)  # Research inspiration first
 ```
 
 **References:**
+
 - [UX Principles](../_shared/UX_PRINCIPLES.md) - UX methodology
 - [UI Inspiration Sources](../_shared/UI_INSPIRATION_SOURCES.md) - Visual research
 
 ## When to Use This Skill
 
 **Use for:**
+
 - Designing new features or flows
 - Improving existing user experience
 - Conducting design reviews/critiques
@@ -30,6 +32,7 @@ Skill(ui-research)  # Research inspiration first
 - Choosing between design alternatives
 
 **Don't use when:**
+
 - Visual styling/tokens → use `generic-design-system`
 - Code architecture → use `generic-feature-developer`
 - Code quality review → use `generic-code-reviewer`
@@ -45,15 +48,17 @@ Skill(ui-research)  # Research inspiration first
 ## Research Decision Guide
 
 ### When to Research vs Ship
-| Situation | Action |
-|-----------|--------|
-| New product/feature | Full research (interviews + testing) |
-| Incremental change | Quick critique (heuristic review) |
-| Bug fix | No research needed |
-| A/B decision | Analytics + small test |
-| Controversial design | Stakeholder alignment first |
+
+| Situation            | Action                               |
+| -------------------- | ------------------------------------ |
+| New product/feature  | Full research (interviews + testing) |
+| Incremental change   | Quick critique (heuristic review)    |
+| Bug fix              | No research needed                   |
+| A/B decision         | Analytics + small test               |
+| Controversial design | Stakeholder alignment first          |
 
 ### Method Selection
+
 - Need user motivation? → Interviews
 - Need usability feedback? → Testing
 - Need quick quality check? → Heuristic evaluation
@@ -61,23 +66,26 @@ Skill(ui-research)  # Research inspiration first
 - Have no users yet? → Competitor analysis + proto-personas
 
 ### Research Scope by Confidence
-| Confidence Level | Action |
-|------------------|--------|
-| High (established pattern) | Skip research |
-| Medium (some uncertainty) | Quick critique |
-| Low (new territory) | Full research |
+
+| Confidence Level           | Action         |
+| -------------------------- | -------------- |
+| High (established pattern) | Skip research  |
+| Medium (some uncertainty)  | Quick critique |
+| Low (new territory)        | Full research  |
 
 **Reference:** See UX_PRINCIPLES.md for detailed method frameworks
 
 ## User Psychology Applied
 
 ### Cognitive Load
+
 - Reduce choices (Hick's Law)
 - Chunk information (Miller's Law)
 - Progressive disclosure
 - Minimize memory load
 
 ### Visual Hierarchy
+
 - Size indicates importance
 - Contrast draws attention
 - Whitespace groups elements
@@ -86,26 +94,29 @@ Skill(ui-research)  # Research inspiration first
 ## Interaction Patterns
 
 ### Navigation
-| Pattern | Use Case |
-|---------|----------|
-| Top nav | Simple sites, < 7 items |
-| Side nav | Complex apps, many sections |
-| Bottom nav | Mobile apps, < 5 items |
-| Tabs | Related content sections |
+
+| Pattern    | Use Case                    |
+| ---------- | --------------------------- |
+| Top nav    | Simple sites, < 7 items     |
+| Side nav   | Complex apps, many sections |
+| Bottom nav | Mobile apps, < 5 items      |
+| Tabs       | Related content sections    |
 
 ### Forms
+
 - Single column layout
 - Inline validation
 - Smart defaults
 - Progress indicators
 
 ### Feedback
-| Pattern | Use Case |
-|---------|----------|
-| Toast | Non-blocking info |
-| Modal | Blocking/important |
-| Inline | Contextual feedback |
-| Skeleton | Loading states |
+
+| Pattern  | Use Case            |
+| -------- | ------------------- |
+| Toast    | Non-blocking info   |
+| Modal    | Blocking/important  |
+| Inline   | Contextual feedback |
+| Skeleton | Loading states      |
 
 ## Mobile Considerations
 
@@ -116,25 +127,27 @@ Skill(ui-research)  # Research inspiration first
 
 ## Accessibility (UX Perspective)
 
-| Aspect | Approach |
-|--------|----------|
-| Vision | High contrast, scalable text |
-| Motor | Large targets, keyboard nav |
+| Aspect    | Approach                         |
+| --------- | -------------------------------- |
+| Vision    | High contrast, scalable text     |
+| Motor     | Large targets, keyboard nav      |
 | Cognitive | Simple language, clear structure |
-| Hearing | Captions, visual indicators |
+| Hearing   | Captions, visual indicators      |
 
 ## Heuristic Evaluation in Practice
 
 ### Quick Scan (5 minutes)
-| Heuristic | Quick Check |
-|-----------|-------------|
-| Visibility | Is current state obvious? |
-| Feedback | Does every action have response? |
-| Consistency | Do similar things look/work similar? |
-| Error Prevention | Can user easily make mistakes? |
-| Recovery | Can user undo/fix errors? |
+
+| Heuristic        | Quick Check                          |
+| ---------------- | ------------------------------------ |
+| Visibility       | Is current state obvious?            |
+| Feedback         | Does every action have response?     |
+| Consistency      | Do similar things look/work similar? |
+| Error Prevention | Can user easily make mistakes?       |
+| Recovery         | Can user undo/fix errors?            |
 
 ### Common Violations to Flag
+
 - Hidden system state (loading with no indicator)
 - Silent failures (action with no feedback)
 - Inconsistent patterns (different buttons for same action)
@@ -142,6 +155,7 @@ Skill(ui-research)  # Research inspiration first
 - Jargon in user-facing text
 
 ### Presenting Findings
+
 ```
 Issue: [What's wrong]
 Heuristic: [Which violated]
@@ -152,28 +166,31 @@ Priority: P0/P1/P2
 
 ## Design Critique Framework
 
-| Aspect | Questions |
-|--------|-----------|
-| Usability | Can users complete tasks? |
-| Clarity | Is purpose immediately clear? |
-| Consistency | Follows established patterns? |
-| Hierarchy | Most important stands out? |
-| Feedback | Users know system state? |
-| Accessibility | Works for everyone? |
+| Aspect        | Questions                     |
+| ------------- | ----------------------------- |
+| Usability     | Can users complete tasks?     |
+| Clarity       | Is purpose immediately clear? |
+| Consistency   | Follows established patterns? |
+| Hierarchy     | Most important stands out?    |
+| Feedback      | Users know system state?      |
+| Accessibility | Works for everyone?           |
 
 ## UX Patterns
 
 ### Empty States
+
 1. Explain what goes here
 2. Guide to first action
 3. Show example content
 
 ### Loading States
+
 1. Skeleton screens > spinners
 2. Progress for long operations
 3. Optimistic UI when safe
 
 ### Error States
+
 1. Explain what happened
 2. Suggest how to fix
 3. Don't blame user
@@ -181,6 +198,7 @@ Priority: P0/P1/P2
 ## UX Output Checklist
 
 Before presenting UX recommendation:
+
 - [ ] User problem clearly defined
 - [ ] Solution addresses root cause (not symptom)
 - [ ] Accessibility considered
@@ -205,6 +223,7 @@ Before presenting UX recommendation:
 - Project `CLAUDE.md` - Project-specific constraints
 
 **READ UX_PRINCIPLES.md for:**
+
 - Full research method frameworks → methods section
 - Complete Nielsen heuristics → evaluation section
 - Quick critique workflow → critique section

@@ -8,15 +8,15 @@
 
 ## Quick Navigation
 
-| Section | Description |
-|---------|-------------|
-| [Quick Checklists](#quick-checklists) | Pre-flight, implementation, completion |
-| [Automation Tools](#automation-tools) | Git hooks, templates, commands |
-| [Setup Instructions](#setup-instructions) | Initial configuration |
-| [Troubleshooting](#troubleshooting) | Common issues and fixes |
-| [Customization](#customization) | Extend and modify tools |
-| [Best Practices](#best-practices) | Tips for success |
-| [Workflow Selection Guide](#workflow-selection-guide) | When to use GSD vs prompts vs direct |
+| Section                                               | Description                            |
+| ----------------------------------------------------- | -------------------------------------- |
+| [Quick Checklists](#quick-checklists)                 | Pre-flight, implementation, completion |
+| [Automation Tools](#automation-tools)                 | Git hooks, templates, commands         |
+| [Setup Instructions](#setup-instructions)             | Initial configuration                  |
+| [Troubleshooting](#troubleshooting)                   | Common issues and fixes                |
+| [Customization](#customization)                       | Extend and modify tools                |
+| [Best Practices](#best-practices)                     | Tips for success                       |
+| [Workflow Selection Guide](#workflow-selection-guide) | When to use GSD vs prompts vs direct   |
 
 ---
 
@@ -119,6 +119,7 @@
 - [ ] **Stage task file:** `git add tasks/[feature].md`
 - [ ] **Review changes:** `git diff --staged`
 - [ ] **Write clear commit message:**
+
   ```
   type: Short description (50 chars max)
 
@@ -128,6 +129,7 @@
   Generated with Claude Code
   Co-Authored-By: Claude <noreply@anthropic.com>
   ```
+
 - [ ] **Commit types:** feat, fix, docs, style, refactor, test, chore
 
 ---
@@ -136,36 +138,36 @@
 
 ### Core Workflow Rules
 
-| # | Rule | Description |
-|---|------|-------------|
-| 1 | **Think → Plan → Write** | Create task file FIRST before coding |
-| 2 | **Plan has todo list** | Checklist with items to check off |
-| 3 | **Check before working** | Get user approval via ExitPlanMode |
-| 4 | **Mark tasks complete** | Update todos as you go |
-| 5 | **High-level explanations** | Don't overexplain every detail |
-| 6 | **Simple changes** | Minimal code impact |
-| 7 | **Add review section** | Document what changed when done |
-| 8 | **No lazy fixes** | Find root cause, no temporary patches |
-| 9 | **Simplicity is key** | Impact minimal code, avoid bugs |
-| 10 | **Update documentation** | Keep docs detailed, clear, clean |
-| 11 | **Sync with remote** | Start of EVERY session |
-| 12 | **Perfect foundation** | Build for 100% even if 1% complete |
-| 13 | **Complete logical units** | Never stop mid-implementation |
-| 14 | **Validate current date** | Check `<env>` section |
-| 15 | **Commit & Push at end** | Git add, commit with details, push |
+| #   | Rule                        | Description                           |
+| --- | --------------------------- | ------------------------------------- |
+| 1   | **Think → Plan → Write**    | Create task file FIRST before coding  |
+| 2   | **Plan has todo list**      | Checklist with items to check off     |
+| 3   | **Check before working**    | Get user approval via ExitPlanMode    |
+| 4   | **Mark tasks complete**     | Update todos as you go                |
+| 5   | **High-level explanations** | Don't overexplain every detail        |
+| 6   | **Simple changes**          | Minimal code impact                   |
+| 7   | **Add review section**      | Document what changed when done       |
+| 8   | **No lazy fixes**           | Find root cause, no temporary patches |
+| 9   | **Simplicity is key**       | Impact minimal code, avoid bugs       |
+| 10  | **Update documentation**    | Keep docs detailed, clear, clean      |
+| 11  | **Sync with remote**        | Start of EVERY session                |
+| 12  | **Perfect foundation**      | Build for 100% even if 1% complete    |
+| 13  | **Complete logical units**  | Never stop mid-implementation         |
+| 14  | **Validate current date**   | Check `<env>` section                 |
+| 15  | **Commit & Push at end**    | Git add, commit with details, push    |
 
 ### Core Philosophy Principles
 
-| # | Principle | Description |
-|---|-----------|-------------|
-| 1 | **Correctness & Integrity** | No data loss. Security P0. |
-| 2 | **Coherence** | Follow existing patterns. No competing paradigms. |
-| 3 | **Atomic Execution** | Small, reviewable steps. Explain WHY. |
-| 4 | **Maintainability** | Explicit > Clever. No magic. |
-| 5 | **Optimal Location** | Files must be in the most logical place. |
-| 6 | **Scalable Architecture** | Build primitives, not one-offs. |
-| 7 | **Root Cause Only** | Trace bugs to source. No band-aids. |
-| 8 | **Infinite Initiative** | Fix broken windows immediately. |
+| #   | Principle                   | Description                                       |
+| --- | --------------------------- | ------------------------------------------------- |
+| 1   | **Correctness & Integrity** | No data loss. Security P0.                        |
+| 2   | **Coherence**               | Follow existing patterns. No competing paradigms. |
+| 3   | **Atomic Execution**        | Small, reviewable steps. Explain WHY.             |
+| 4   | **Maintainability**         | Explicit > Clever. No magic.                      |
+| 5   | **Optimal Location**        | Files must be in the most logical place.          |
+| 6   | **Scalable Architecture**   | Build primitives, not one-offs.                   |
+| 7   | **Root Cause Only**         | Trace bugs to source. No band-aids.               |
+| 8   | **Infinite Initiative**     | Fix broken windows immediately.                   |
 
 ---
 
@@ -184,12 +186,12 @@ This automation system ensures compliance with CLAUDE.md workflow rules by:
 
 ### Supported Project Types
 
-| Project Type | Tech Stack | Build Tools |
-|--------------|------------|-------------|
-| **Static Sites** | Pure HTML/CSS/JS | None (direct browser) |
-| **React/Vue/Angular** | TypeScript/JavaScript | npm/vite/webpack |
-| **Full-Stack** | Any framework | npm + backend tools |
-| **Automation** | Python/Node.js | pip/npm |
+| Project Type          | Tech Stack            | Build Tools           |
+| --------------------- | --------------------- | --------------------- |
+| **Static Sites**      | Pure HTML/CSS/JS      | None (direct browser) |
+| **React/Vue/Angular** | TypeScript/JavaScript | npm/vite/webpack      |
+| **Full-Stack**        | Any framework         | npm + backend tools   |
+| **Automation**        | Python/Node.js        | pip/npm               |
 
 ---
 
@@ -200,12 +202,14 @@ This automation system ensures compliance with CLAUDE.md workflow rules by:
 **Enforces:** CLAUDE.md Rules #1, #2, #7
 
 **How it works:**
+
 1. Detects if code files (src/, components/, etc.) are staged
-2. Checks if a tasks/*.md file is also staged
+2. Checks if a tasks/\*.md file is also staged
 3. Blocks commit if code changed but no task file staged
 4. Allows commit for non-code changes (docs, config)
 
 **Example Output (Blocked Commit):**
+
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   COMMIT BLOCKED - Missing Task File (CLAUDE.md Rule #1, #2, #7)
@@ -220,9 +224,11 @@ Required Action:
 ```
 
 **Emergency Bypass:**
+
 ```bash
 git commit --no-verify
 ```
+
 **Use only for:** Hotfixes, doc-only changes, reverts, emergencies
 
 ---
@@ -234,6 +240,7 @@ git commit --no-verify
 **Enforces:** Rules #1, #2, #7
 
 **Sections included:**
+
 - Overview and problem statement
 - Files to read
 - Proposed changes (files to create/modify)
@@ -244,16 +251,19 @@ git commit --no-verify
 - **Review section** (to be filled when complete)
 
 **Create new task:**
+
 ```bash
 cp .claude/templates/task-template.md tasks/[feature-name].md
 ```
 
 **Good naming examples:**
+
 - `tasks/add-search-functionality.md`
 - `tasks/fix-calendar-timezone-bug.md`
 - `tasks/refactor-state-management.md`
 
 **Bad naming examples:**
+
 - `tasks/todo.md`
 - `tasks/task1.md`
 - `tasks/stuff.md`
@@ -265,6 +275,7 @@ cp .claude/templates/task-template.md tasks/[feature-name].md
 **Location:** `.claude/commands/`
 
 ### `/start-task` Command
+
 - Routes to appropriate workflow based on task type
 - Creates task files from templates
 - Checks existing todos
@@ -272,6 +283,7 @@ cp .claude/templates/task-template.md tasks/[feature-name].md
 - Gets user approval before implementation
 
 ### `/run` Command
+
 - Execute prompts with auto-archiving
 
 ---
@@ -304,6 +316,7 @@ cp .claude/templates/task-template.md tasks/[feature-name].md
 ## Initial Setup
 
 **Verify setup:**
+
 ```bash
 # Check git hook exists and is executable
 ls -la .git/hooks/pre-commit
@@ -321,6 +334,7 @@ chmod +x .git/hooks/pre-commit
 2. **Read CLAUDE.md** (workflow rules)
 3. **Read this guide** (you're here!)
 4. **Test git hook:**
+
    ```bash
    # Make a small test change
    echo "// test" >> src/main.tsx
@@ -384,6 +398,7 @@ git add tasks/my-feature.txt  # Wrong
 ## Issue 3: Can't Find Task Template
 
 **Fixes:**
+
 ```bash
 # Check if template exists
 ls -la .claude/templates/task-template.md
@@ -410,18 +425,22 @@ CODE_FILES_CHANGED=$(echo "$STAGED_FILES" | grep -E '^(src/|lib/|config/|compone
 **Edit:** `.claude/templates/task-template.md`
 
 Add sections like:
+
 ```markdown
 ## Security Checklist
+
 - [ ] Input validation added
 - [ ] XSS prevention verified
 - [ ] SQL injection prevented
 
 ## Performance Checklist
+
 - [ ] Bundle size impact acceptable
 - [ ] No memory leaks
 - [ ] Animations 60fps
 
 ## Accessibility Checklist
+
 - [ ] Keyboard navigation works
 - [ ] Screen reader compatible
 - [ ] Color contrast sufficient
@@ -469,6 +488,7 @@ cp .claude/templates/task-template.md tasks/my-feature.md
 ## Todo Checklist
 
 ### Phase 1
+
 - [x] ~~Task 1~~ - DONE
 - [ ] Task 2 - IN PROGRESS
 - [ ] Task 3 - Blocked
@@ -477,6 +497,7 @@ cp .claude/templates/task-template.md tasks/my-feature.md
 ## 4. Fill Review Section Immediately
 
 When work is complete, fill out the review section RIGHT AWAY:
+
 - Summary of changes
 - Files created/modified
 - Testing status
@@ -539,9 +560,11 @@ No state             Stateless            Stateless          STATE.md (persisten
 ## When to Use Each System
 
 ### Direct Execution
+
 **Scope:** <30 min, 1-2 files, clear scope
 
 **Examples:**
+
 - Fix typo in README
 - Update a single constant
 - Add a simple test
@@ -550,9 +573,11 @@ No state             Stateless            Stateless          STATE.md (persisten
 **How:** Just describe the task to Claude
 
 ### /create-prompt → /run
+
 **Scope:** 30min-2hr, 3-10 files, defined scope
 
 **Examples:**
+
 - Refactor a component
 - Add a new API endpoint
 - Implement a single feature
@@ -561,9 +586,11 @@ No state             Stateless            Stateless          STATE.md (persisten
 **How:** `/start-task refactor the modal component`
 
 ### /create-meta-prompt
+
 **Scope:** 2-8 hours, 10+ files, research needed
 
 **Examples:**
+
 - "Research auth options then implement"
 - "Explore GraphQL vs REST then build"
 - Multi-stage work with dependencies
@@ -571,9 +598,11 @@ No state             Stateless            Stateless          STATE.md (persisten
 **How:** `/start-task research then implement user auth`
 
 ### GSD (Get Shit Done)
+
 **Scope:** Days/weeks, multiple phases, persistent state
 
 **Examples:**
+
 - New application from scratch
 - Major feature requiring phases
 - Complex system with dependencies
@@ -599,6 +628,7 @@ The `/start-task` command automatically detects:
 ### Escalating from Prompt to GSD
 
 If during `/create-prompt` you realize scope is larger:
+
 1. Complete current prompt if it provides value
 2. Run `/gsd:new-project` to initialize
 3. Import insights from prompt work into PROJECT.md
@@ -606,20 +636,21 @@ If during `/create-prompt` you realize scope is larger:
 ### De-escalating from GSD to Simple
 
 If GSD project turns out simpler than expected:
+
 1. Keep `.planning/` for documentation
 2. Execute remaining work directly
 3. Run `/gsd:complete-milestone` when done
 
 ## Quick Reference Table
 
-| Signal | Workflow | Command |
-|--------|----------|---------|
-| "Fix typo" | Direct | Just do it |
-| "Refactor X" | Prompt | `/start-task refactor X` |
-| "Research then build" | Meta | `/start-task research then...` |
-| "New project" | GSD | `/gsd:new-project` |
-| "Where was I" | GSD | `/gsd:progress` |
-| Multi-component task | GSD | Auto-detected |
+| Signal                | Workflow | Command                        |
+| --------------------- | -------- | ------------------------------ |
+| "Fix typo"            | Direct   | Just do it                     |
+| "Refactor X"          | Prompt   | `/start-task refactor X`       |
+| "Research then build" | Meta     | `/start-task research then...` |
+| "New project"         | GSD      | `/gsd:new-project`             |
+| "Where was I"         | GSD      | `/gsd:progress`                |
+| Multi-component task  | GSD      | Auto-detected                  |
 
 ---
 

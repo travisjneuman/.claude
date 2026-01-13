@@ -74,16 +74,19 @@
 ## Key Findings
 
 ### Finding 1: [Summary]
+
 - **Source:** [Citation]
 - **Confidence:** [Low/Medium/High]
 - **Relevance:** [How this helps answer the question]
 
 ### Finding 2: [Summary]
+
 - **Source:** [Citation]
 - **Confidence:** [Low/Medium/High]
 - **Relevance:** [How this helps answer the question]
 
 ### Finding 3: [Summary]
+
 - **Source:** [Citation]
 - **Confidence:** [Low/Medium/High]
 - **Relevance:** [How this helps answer the question]
@@ -103,6 +106,7 @@
 **Confidence Level:** [%]
 
 **Reasoning:**
+
 - [Why this conclusion is best supported]
 - [What evidence is strongest]
 - [What caveats apply]

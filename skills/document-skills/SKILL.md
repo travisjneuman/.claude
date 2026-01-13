@@ -10,12 +10,12 @@ Comprehensive document handling for Microsoft Office formats and PDFs.
 
 ## Available Sub-Skills
 
-| Skill | Format | Capabilities |
-|-------|--------|--------------|
-| `docx` | Word (.docx) | Create, edit, analyze, tracked changes, comments |
-| `pdf` | PDF (.pdf) | Extract text, tables, metadata, merge/split |
-| `pptx` | PowerPoint (.pptx) | Create, edit presentations, layouts, charts |
-| `xlsx` | Excel (.xlsx) | Spreadsheet manipulation, formulas, charts |
+| Skill  | Format             | Capabilities                                     |
+| ------ | ------------------ | ------------------------------------------------ |
+| `docx` | Word (.docx)       | Create, edit, analyze, tracked changes, comments |
+| `pdf`  | PDF (.pdf)         | Extract text, tables, metadata, merge/split      |
+| `pptx` | PowerPoint (.pptx) | Create, edit presentations, layouts, charts      |
+| `xlsx` | Excel (.xlsx)      | Spreadsheet manipulation, formulas, charts       |
 
 ## When to Use
 
@@ -35,22 +35,26 @@ Comprehensive document handling for Microsoft Office formats and PDFs.
 ## Sub-Skill Details
 
 ### docx (Word Documents)
+
 - **Create**: Use docx-js (JavaScript/TypeScript)
 - **Edit**: Use Document library (Python)
 - **Analyze**: Use pandoc for text extraction
 - See `document-skills/docx/SKILL.md` for full details
 
 ### pdf (PDF Documents)
+
 - Extract text, tables, metadata
 - Merge and split documents
 - See `document-skills/pdf/SKILL.md` for full details
 
 ### pptx (PowerPoint)
+
 - Create and edit presentations
 - Work with layouts and charts
 - See `document-skills/pptx/SKILL.md` for full details
 
 ### xlsx (Excel)
+
 - Spreadsheet manipulation
 - Formulas and analysis
 - See `document-skills/xlsx/SKILL.md` for full details

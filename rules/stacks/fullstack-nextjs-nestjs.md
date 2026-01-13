@@ -127,7 +127,7 @@ export class UsersModule {}
 
 ```typescript
 // src/modules/users/users.controller.ts
-@Controller('users')
+@Controller("users")
 @UseGuards(AuthGuard)
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
@@ -137,8 +137,8 @@ export class UsersController {
     return this.usersService.findAll();
   }
 
-  @Get(':id')
-  async findOne(@Param('id') id: string): Promise<User> {
+  @Get(":id")
+  async findOne(@Param("id") id: string): Promise<User> {
     return this.usersService.findOne(id);
   }
 
@@ -147,16 +147,16 @@ export class UsersController {
     return this.usersService.create(dto);
   }
 
-  @Put(':id')
+  @Put(":id")
   async update(
-    @Param('id') id: string,
+    @Param("id") id: string,
     @Body() dto: UpdateUserDto,
   ): Promise<User> {
     return this.usersService.update(id, dto);
   }
 
-  @Delete(':id')
-  async remove(@Param('id') id: string): Promise<void> {
+  @Delete(":id")
+  async remove(@Param("id") id: string): Promise<void> {
     return this.usersService.remove(id);
   }
 }
@@ -192,7 +192,7 @@ export class UsersService {
 
 ```typescript
 // src/modules/users/dto/create-user.dto.ts
-import { IsEmail, IsString, MinLength } from 'class-validator';
+import { IsEmail, IsString, MinLength } from "class-validator";
 
 export class CreateUserDto {
   @IsString()
@@ -278,12 +278,12 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export async function fetchUsers(): Promise<User[]> {
   const res = await fetch(`${API_URL}/users`, {
-    headers: { 'Content-Type': 'application/json' },
-    credentials: 'include',
+    headers: { "Content-Type": "application/json" },
+    credentials: "include",
   });
 
   if (!res.ok) {
-    throw new Error('Failed to fetch users');
+    throw new Error("Failed to fetch users");
   }
 
   return res.json();
@@ -307,17 +307,18 @@ export async function fetchUsers(): Promise<User[]> {
 
 ## Related Skills
 
-| Skill | When to Use |
-|-------|-------------|
-| `generic-fullstack-code-reviewer` | Code review |
-| `generic-fullstack-design-system` | Design patterns |
-| `generic-fullstack-feature-developer` | Feature implementation |
-| `generic-fullstack-ux-designer` | UX design |
-| `generic-react-*` | React-specific patterns |
-| `security` | Auth, validation |
-| `test-specialist` | Testing guidance |
+| Skill                                 | When to Use             |
+| ------------------------------------- | ----------------------- |
+| `generic-fullstack-code-reviewer`     | Code review             |
+| `generic-fullstack-design-system`     | Design patterns         |
+| `generic-fullstack-feature-developer` | Feature implementation  |
+| `generic-fullstack-ux-designer`       | UX design               |
+| `generic-react-*`                     | React-specific patterns |
+| `security`                            | Auth, validation        |
+| `test-specialist`                     | Testing guidance        |
 
 ### Invoke with:
+
 ```
 Skill(generic-fullstack-code-reviewer)
 Skill(generic-fullstack-feature-developer)
@@ -336,22 +337,25 @@ Skill(generic-fullstack-feature-developer)
 ## Anti-Patterns
 
 ### Frontend
+
 - [ ] Using `any` type
 - [ ] Missing error boundaries
 - [ ] Not using server components when possible
 - [ ] Exposing sensitive env vars
 
 ### Backend
+
 - [ ] No input validation
 - [ ] Missing auth guards
 - [ ] Raw SQL queries (use Prisma)
 - [ ] Secrets in code
 
 ### Database
+
 - [ ] No migrations (manual schema changes)
 - [ ] Missing indexes on query fields
 - [ ] N+1 queries (use includes)
 
 ---
 
-*Full-stack: type-safe from database to UI.*
+_Full-stack: type-safe from database to UI._

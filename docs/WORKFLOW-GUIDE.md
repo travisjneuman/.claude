@@ -2,11 +2,13 @@
 
 Detailed patterns for getting work done with Claude Code.
 
-**Last Updated:** January 2026 (v2.0)
+**Last Updated:** January 2026 (v2.1)
 
-**Quick Start:** Just describe what you want. Skills auto-activate. Use `/start-task` for complex work.
+**Quick Start:** Just describe what you want. Skills auto-activate via SessionStart hook. Use `/start-task` for complex work.
 
-**New in v2.0:** Research methodology, frontend aesthetics, PROACTIVE mode, multi-window state management. See [CHANGELOG.md](../CHANGELOG.md#200---january-3-2026).
+**New in v2.1:** SessionStart hook for automatic skill/agent routing on every prompt. See [CHANGELOG.md](../CHANGELOG.md#210---january-13-2026).
+
+**v2.0 features:** Research methodology, frontend aesthetics, PROACTIVE mode, multi-window state management. See [CHANGELOG.md](../CHANGELOG.md#200---january-3-2026).
 
 ---
 
@@ -23,12 +25,14 @@ Detailed patterns for getting work done with Claude Code.
 ```
 
 **What Happens:**
+
 1. CLAUDE.md context loads (always)
 2. Skills auto-activate based on description matching
 3. Relevant domain skills load progressively
 4. Direct execution with loaded skills as guidance
 
 **Best For:**
+
 - Single-focus tasks
 - Quick fixes and bug fixes
 - When you know exactly what you want
@@ -42,6 +46,7 @@ Detailed patterns for getting work done with Claude Code.
 ```
 
 **What Happens:**
+
 1. All of the above, PLUS:
 2. Complexity scoring (determines GSD vs Planning vs Direct)
 3. Domain-specific resource loading from router files
@@ -50,6 +55,7 @@ Detailed patterns for getting work done with Claude Code.
 6. Post-work automation triggers
 
 **Best For:**
+
 - Multi-phase projects (auto-routes to GSD)
 - When unsure about approach (decision frameworks)
 - Complex tasks spanning multiple systems
@@ -57,14 +63,14 @@ Detailed patterns for getting work done with Claude Code.
 
 ### Quick Decision Guide
 
-| Scenario | Use |
-|----------|-----|
-| "Fix the typo in header.tsx" | Standard prompt |
-| "Build a new feature with API and UI" | `/start-task` |
-| "Should I use Redux or Zustand?" | `/start-task` (triggers decision framework) |
-| "Debug why tests are failing" | Standard prompt (skill auto-activates) |
-| "Create a full authentication system" | `/start-task` (routes to GSD) |
-| "Update the README" | Standard prompt |
+| Scenario                              | Use                                         |
+| ------------------------------------- | ------------------------------------------- |
+| "Fix the typo in header.tsx"          | Standard prompt                             |
+| "Build a new feature with API and UI" | `/start-task`                               |
+| "Should I use Redux or Zustand?"      | `/start-task` (triggers decision framework) |
+| "Debug why tests are failing"         | Standard prompt (skill auto-activates)      |
+| "Create a full authentication system" | `/start-task` (routes to GSD)               |
+| "Update the README"                   | Standard prompt                             |
 
 ---
 
@@ -72,17 +78,17 @@ Detailed patterns for getting work done with Claude Code.
 
 These can be used **anytime**, regardless of workflow stage or GSD phase:
 
-| Capability | When to Use | How to Invoke |
-|------------|-------------|---------------|
-| **WebSearch** | Current info, docs, best practices, versions | Use tool directly |
-| **Skills** | Domain expertise needed | `Skill(name)` or auto-activates |
-| **Agents** | Deep specialized work | `Task` tool with subagent |
-| **Research** | Explore codebase, find patterns | `Task` with Explore agent |
-| **Decision Frameworks** | Complex choices, trade-offs | `/consider:first-principles` |
-| **TodoWrite** | Track multi-step progress | Use tool directly |
-| **Auto-Claude** | Autonomous feature implementation | `/auto-claude [description]` |
+| Capability              | When to Use                                  | How to Invoke                   |
+| ----------------------- | -------------------------------------------- | ------------------------------- |
+| **WebSearch**           | Current info, docs, best practices, versions | Use tool directly               |
+| **Skills**              | Domain expertise needed                      | `Skill(name)` or auto-activates |
+| **Agents**              | Deep specialized work                        | `Task` tool with subagent       |
+| **Research**            | Explore codebase, find patterns              | `Task` with Explore agent       |
+| **Decision Frameworks** | Complex choices, trade-offs                  | `/consider:first-principles`    |
+| **TodoWrite**           | Track multi-step progress                    | Use tool directly               |
+| **Auto-Claude**         | Autonomous feature implementation            | `/auto-claude [description]`    |
 
-**Philosophy:** GSD provides *structure*, not *gates*. Use every tool that helps.
+**Philosophy:** GSD provides _structure_, not _gates_. Use every tool that helps.
 
 ---
 
@@ -100,12 +106,12 @@ These can be used **anytime**, regardless of workflow stage or GSD phase:
    - Search `~/.claude/plugins/marketplaces/*/` for specialized skills
    - See [MARKETPLACE-GUIDE.md](./MARKETPLACE-GUIDE.md) for details
 
-   | Domain | Marketplace |
-   |--------|-------------|
-   | Scientific work | `claude-scientific-skills/scientific-skills/` |
-   | Full-stack dev | `wshobson-agents/`, `voltagent-subagents/` |
-   | Documents/invoices | `awesome-claude-skills/` |
-   | Meta-prompting | `taches-cc-resources/` |
+   | Domain             | Marketplace                                   |
+   | ------------------ | --------------------------------------------- |
+   | Scientific work    | `claude-scientific-skills/scientific-skills/` |
+   | Full-stack dev     | `wshobson-agents/`, `voltagent-subagents/`    |
+   | Documents/invoices | `awesome-claude-skills/`                      |
+   | Meta-prompting     | `taches-cc-resources/`                        |
 
 3. **WebSearch**
    - Current best practices
@@ -130,11 +136,11 @@ These can be used **anytime**, regardless of workflow stage or GSD phase:
 
 **GSD provides structure. Tools provide capabilities.** Use them together:
 
-| Within GSD Phase | Still Use |
-|------------------|-----------|
-| **Planning** | WebSearch for research, Explore agent for codebase discovery |
-| **Execution** | Skills for domain expertise, agents for specialized work |
-| **Any phase** | TodoWrite for tracking, Decision frameworks for choices |
+| Within GSD Phase | Still Use                                                    |
+| ---------------- | ------------------------------------------------------------ |
+| **Planning**     | WebSearch for research, Explore agent for codebase discovery |
+| **Execution**    | Skills for domain expertise, agents for specialized work     |
+| **Any phase**    | TodoWrite for tracking, Decision frameworks for choices      |
 
 **Key principle:** If a tool, skill, agent, or research would help accomplish the current phase's goals, **use it immediately**. Don't wait for a specific GSD command.
 
@@ -149,6 +155,7 @@ When `/start-task` detects a development task, you have three workflow options:
 ### 1. Manual Implementation (Traditional)
 
 **Process:**
+
 ```
 /start-task Add user authentication
 → EnterPlanMode (if complex)
@@ -158,12 +165,14 @@ When `/start-task` detects a development task, you have three workflow options:
 ```
 
 **Best For:**
+
 - Learning new concepts
 - Exploratory work
 - Unclear requirements
 - Maximum control preferred
 
 **Characteristics:**
+
 - Step-by-step with your input
 - Review after each change
 - Main branch (no isolation)
@@ -174,6 +183,7 @@ When `/start-task` detects a development task, you have three workflow options:
 ### 2. Autonomous Implementation (Auto-Claude)
 
 **Process:**
+
 ```
 /auto-claude Add user authentication
 → Analyzes codebase automatically
@@ -185,18 +195,21 @@ When `/start-task` detects a development task, you have three workflow options:
 ```
 
 **Best For:**
+
 - Well-defined features (complexity 3-4)
 - Established codebases with clear patterns
 - Repetitive tasks (CRUD, forms, API endpoints)
 - When you prefer review-at-end vs step-by-step
 
 **Characteristics:**
+
 - Autonomous multi-agent execution
 - Review at end (full worktree)
 - Git worktree isolation
 - Automatic QA validation
 
 **How to Invoke:**
+
 - Direct: `/auto-claude [description]`
 - Via router: `/start-task` auto-suggests when complexity >= 3
 
@@ -207,6 +220,7 @@ When `/start-task` detects a development task, you have three workflow options:
 ### 3. Multi-Phase Projects (GSD)
 
 **Process:**
+
 ```
 /start-task Build complete e-commerce platform
 → Complexity score: 5+ (high)
@@ -217,12 +231,14 @@ When `/start-task` detects a development task, you have three workflow options:
 ```
 
 **Best For:**
+
 - Large projects (complexity 5+)
 - Multi-phase work
 - Long-term development
 - Needs project management
 
 **Characteristics:**
+
 - Phased approach with milestones
 - Persistent state (.planning/)
 - Multi-session support
@@ -234,16 +250,17 @@ When `/start-task` detects a development task, you have three workflow options:
 
 ### Workflow Comparison
 
-| Aspect | Manual | Auto-Claude | GSD |
-|--------|--------|-------------|-----|
-| **Complexity** | 1-2 | 3-4 | 5+ |
-| **Control** | Maximum | Medium | Structured |
-| **Speed** | Slower | Faster | Phased |
-| **Review** | Each step | End | Per phase |
-| **Isolation** | Main branch | Git worktree | .planning/ |
-| **Best for** | Learning, exploration | Defined features | Large projects |
+| Aspect         | Manual                | Auto-Claude      | GSD            |
+| -------------- | --------------------- | ---------------- | -------------- |
+| **Complexity** | 1-2                   | 3-4              | 5+             |
+| **Control**    | Maximum               | Medium           | Structured     |
+| **Speed**      | Slower                | Faster           | Phased         |
+| **Review**     | Each step             | End              | Per phase      |
+| **Isolation**  | Main branch           | Git worktree     | .planning/     |
+| **Best for**   | Learning, exploration | Defined features | Large projects |
 
 **Combining workflows:**
+
 - Use Manual for research → Auto-Claude for implementation
 - Use GSD phases → Auto-Claude for individual features within phases
 - Switch between approaches as needs change
@@ -254,22 +271,22 @@ When `/start-task` detects a development task, you have three workflow options:
 
 The `/start-task` command scores complexity to determine workflow:
 
-| Factor | Points |
-|--------|--------|
-| Multiple components/files | +1 |
-| Unknown codebase area | +1 |
-| Architecture decisions | +1 |
-| External integrations | +1 |
-| Multi-phase work | +1 |
-| Clear, simple task | -1 |
+| Factor                    | Points |
+| ------------------------- | ------ |
+| Multiple components/files | +1     |
+| Unknown codebase area     | +1     |
+| Architecture decisions    | +1     |
+| External integrations     | +1     |
+| Multi-phase work          | +1     |
+| Clear, simple task        | -1     |
 
 ### Route Selection
 
-| Score | Workflow |
-|-------|----------|
-| >= 3 | GSD (multi-phase project) |
-| 1-2 | EnterPlanMode (planning first) |
-| <= 0 | Direct execution |
+| Score | Workflow                       |
+| ----- | ------------------------------ |
+| >= 3  | GSD (multi-phase project)      |
+| 1-2   | EnterPlanMode (planning first) |
+| <= 0  | Direct execution               |
 
 ---
 
@@ -277,14 +294,14 @@ The `/start-task` command scores complexity to determine workflow:
 
 When facing choices, use structured frameworks:
 
-| Framework | When to Use | Command |
-|-----------|-------------|---------|
-| First-Principles | Technical decisions, architecture | `/consider:first-principles` |
-| Eisenhower Matrix | Prioritization, urgency | `/consider:eisenhower-matrix` |
-| 5-Whys | Root cause analysis | `/consider:5-whys` |
-| Pros/Cons | Trade-off evaluation | `/consider:pros-cons` |
-| SWOT | Strategic analysis | `/consider:swot` |
-| Decision Matrix | Multi-criteria decisions | `/consider:decision-matrix` |
+| Framework         | When to Use                       | Command                       |
+| ----------------- | --------------------------------- | ----------------------------- |
+| First-Principles  | Technical decisions, architecture | `/consider:first-principles`  |
+| Eisenhower Matrix | Prioritization, urgency           | `/consider:eisenhower-matrix` |
+| 5-Whys            | Root cause analysis               | `/consider:5-whys`            |
+| Pros/Cons         | Trade-off evaluation              | `/consider:pros-cons`         |
+| SWOT              | Strategic analysis                | `/consider:swot`              |
+| Decision Matrix   | Multi-criteria decisions          | `/consider:decision-matrix`   |
 
 ---
 
@@ -292,10 +309,10 @@ When facing choices, use structured frameworks:
 
 The toolkit includes PostToolUse hooks that automate formatting:
 
-| Hook | Trigger | Action |
-|------|---------|--------|
+| Hook                    | Trigger             | Action                            |
+| ----------------------- | ------------------- | --------------------------------- |
 | **PostToolUse (Write)** | After file creation | Auto-runs Prettier for formatting |
-| **PostToolUse (Edit)** | After file edit | Auto-runs Prettier for formatting |
+| **PostToolUse (Edit)**  | After file edit     | Auto-runs Prettier for formatting |
 
 ### Hook Configuration
 
@@ -309,11 +326,11 @@ Hooks are configured in `~/.claude/settings.json` under the `hooks` key.
 
 When starting a new project, set up your CLAUDE.md with the toolkit's project initialization:
 
-| Scenario | Command |
-|----------|---------|
-| New project (your code) | `/init-project` → auto-detects stack, creates CLAUDE.md |
-| External/OSS codebase | `/init` (Claude's) → `/standardize-claude-md` |
-| Existing project missing sections | `/standardize-claude-md` → adds toolkit sections |
+| Scenario                          | Command                                                 |
+| --------------------------------- | ------------------------------------------------------- |
+| New project (your code)           | `/init-project` → auto-detects stack, creates CLAUDE.md |
+| External/OSS codebase             | `/init` (Claude's) → `/standardize-claude-md`           |
+| Existing project missing sections | `/standardize-claude-md` → adds toolkit sections        |
 
 This ensures every project has proper integration with `~/.claude/` including Related Global Rules and Quick Start sections.
 
@@ -330,4 +347,4 @@ This ensures every project has proper integration with `~/.claude/` including Re
 
 ---
 
-*The workflow adapts to your task. Simple tasks execute directly. Complex tasks get structure.*
+_The workflow adapts to your task. Simple tasks execute directly. Complex tasks get structure._

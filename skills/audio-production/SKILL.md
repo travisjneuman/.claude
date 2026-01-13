@@ -30,13 +30,13 @@ Detailed:
 
 ### Key Audio Concepts
 
-| Concept | Definition | Standard |
-|---------|------------|----------|
-| **Sample Rate** | Samples per second | 44.1kHz, 48kHz, 96kHz |
-| **Bit Depth** | Dynamic range resolution | 16-bit, 24-bit, 32-bit float |
-| **Bit Rate** | Data per second (compressed) | 128-320 kbps (MP3) |
-| **Dynamic Range** | Loudest to quietest | ~96dB (16-bit), ~144dB (24-bit) |
-| **Headroom** | Space below 0 dBFS | -6 to -18 dB typical |
+| Concept           | Definition                   | Standard                        |
+| ----------------- | ---------------------------- | ------------------------------- |
+| **Sample Rate**   | Samples per second           | 44.1kHz, 48kHz, 96kHz           |
+| **Bit Depth**     | Dynamic range resolution     | 16-bit, 24-bit, 32-bit float    |
+| **Bit Rate**      | Data per second (compressed) | 128-320 kbps (MP3)              |
+| **Dynamic Range** | Loudest to quietest          | ~96dB (16-bit), ~144dB (24-bit) |
+| **Headroom**      | Space below 0 dBFS           | -6 to -18 dB typical            |
 
 ### Frequency Spectrum
 
@@ -70,12 +70,12 @@ dBFS (Full Scale):
 
 ### Microphone Types
 
-| Type | Principle | Best For |
-|------|-----------|----------|
-| **Dynamic** | Moving coil | Loud sources, live, durable |
-| **Condenser** | Capacitor | Studio vocals, acoustic, detail |
-| **Ribbon** | Thin metal strip | Vintage tone, smooth highs |
-| **USB** | Built-in ADC | Podcasts, convenience |
+| Type          | Principle        | Best For                        |
+| ------------- | ---------------- | ------------------------------- |
+| **Dynamic**   | Moving coil      | Loud sources, live, durable     |
+| **Condenser** | Capacitor        | Studio vocals, acoustic, detail |
+| **Ribbon**    | Thin metal strip | Vintage tone, smooth highs      |
+| **USB**       | Built-in ADC     | Podcasts, convenience           |
 
 ### Polar Patterns
 
@@ -171,13 +171,13 @@ Common Settings:
 
 ### Reverb
 
-| Type | Character | Use |
-|------|-----------|-----|
-| **Room** | Small, tight | Natural ambience |
-| **Hall** | Large, spacious | Orchestral, ballads |
-| **Plate** | Bright, smooth | Vocals, snare |
-| **Spring** | Vintage, boingy | Guitar, lo-fi |
-| **Chamber** | Warm, dense | Natural depth |
+| Type        | Character       | Use                 |
+| ----------- | --------------- | ------------------- |
+| **Room**    | Small, tight    | Natural ambience    |
+| **Hall**    | Large, spacious | Orchestral, ballads |
+| **Plate**   | Bright, smooth  | Vocals, snare       |
+| **Spring**  | Vintage, boingy | Guitar, lo-fi       |
+| **Chamber** | Warm, dense     | Natural depth       |
 
 ```
 Key Parameters:
@@ -190,12 +190,12 @@ Key Parameters:
 
 ### Delay
 
-| Type | Application |
-|------|-------------|
-| **Slapback** | 50-150ms, rockabilly, presence |
-| **Stereo** | Different L/R times, width |
-| **Ping-pong** | Alternating L/R, interest |
-| **Tempo-sync** | 1/4, 1/8 notes, rhythmic |
+| Type           | Application                    |
+| -------------- | ------------------------------ |
+| **Slapback**   | 50-150ms, rockabilly, presence |
+| **Stereo**     | Different L/R times, width     |
+| **Ping-pong**  | Alternating L/R, interest      |
+| **Tempo-sync** | 1/4, 1/8 notes, rhythmic       |
 
 ---
 
@@ -280,14 +280,14 @@ Leave headroom for mastering.
 
 ### Loudness Standards
 
-| Platform | Target | Measurement |
-|----------|--------|-------------|
-| **Spotify** | -14 LUFS | Integrated |
-| **Apple Music** | -16 LUFS | Integrated |
-| **YouTube** | -14 LUFS | Integrated |
-| **Broadcast (US)** | -24 LUFS | Integrated |
-| **Broadcast (EU)** | -23 LUFS | Integrated |
-| **CD** | -9 to -12 LUFS | Integrated |
+| Platform           | Target         | Measurement |
+| ------------------ | -------------- | ----------- |
+| **Spotify**        | -14 LUFS       | Integrated  |
+| **Apple Music**    | -16 LUFS       | Integrated  |
+| **YouTube**        | -14 LUFS       | Integrated  |
+| **Broadcast (US)** | -24 LUFS       | Integrated  |
+| **Broadcast (EU)** | -23 LUFS       | Integrated  |
+| **CD**             | -9 to -12 LUFS | Integrated  |
 
 ### Mastering Chain (Typical)
 
@@ -386,14 +386,14 @@ Approaches:
 
 ### Synthesis Types
 
-| Type | Method | Sound Character |
-|------|--------|-----------------|
-| **Subtractive** | Filter oscillators | Classic analog |
-| **FM** | Frequency modulation | Metallic, bells |
-| **Wavetable** | Morphing waveforms | Modern, evolving |
-| **Granular** | Tiny sound particles | Texture, pads |
-| **Additive** | Stack sine waves | Precise, organs |
-| **Physical Modeling** | Simulate physics | Realistic instruments |
+| Type                  | Method               | Sound Character       |
+| --------------------- | -------------------- | --------------------- |
+| **Subtractive**       | Filter oscillators   | Classic analog        |
+| **FM**                | Frequency modulation | Metallic, bells       |
+| **Wavetable**         | Morphing waveforms   | Modern, evolving      |
+| **Granular**          | Tiny sound particles | Texture, pads         |
+| **Additive**          | Stack sine waves     | Precise, organs       |
+| **Physical Modeling** | Simulate physics     | Realistic instruments |
 
 ### Layering Formula
 
@@ -414,30 +414,30 @@ Process each layer separately, combine at end.
 
 ## DAWs (Digital Audio Workstations)
 
-| DAW | Strengths | Platform |
-|-----|-----------|----------|
-| **Pro Tools** | Industry standard, editing | All |
-| **Logic Pro** | Complete package, Apple | macOS |
-| **Ableton Live** | Live performance, electronic | All |
-| **FL Studio** | Beat making, workflow | All |
-| **Reaper** | Customizable, affordable | All |
-| **Cubase** | MIDI, composition | All |
-| **Studio One** | Modern workflow | All |
-| **Audacity** | Free, simple editing | All |
+| DAW              | Strengths                    | Platform |
+| ---------------- | ---------------------------- | -------- |
+| **Pro Tools**    | Industry standard, editing   | All      |
+| **Logic Pro**    | Complete package, Apple      | macOS    |
+| **Ableton Live** | Live performance, electronic | All      |
+| **FL Studio**    | Beat making, workflow        | All      |
+| **Reaper**       | Customizable, affordable     | All      |
+| **Cubase**       | MIDI, composition            | All      |
+| **Studio One**   | Modern workflow              | All      |
+| **Audacity**     | Free, simple editing         | All      |
 
 ---
 
 ## File Formats
 
-| Format | Type | Quality | Use |
-|--------|------|---------|-----|
-| **WAV** | Uncompressed | Lossless | Production, archive |
-| **AIFF** | Uncompressed | Lossless | Mac production |
-| **FLAC** | Compressed | Lossless | Archive, audiophile |
-| **ALAC** | Compressed | Lossless | Apple ecosystem |
-| **MP3** | Compressed | Lossy | Distribution |
-| **AAC** | Compressed | Lossy | Streaming, Apple |
-| **OGG** | Compressed | Lossy | Games, open source |
+| Format   | Type         | Quality  | Use                 |
+| -------- | ------------ | -------- | ------------------- |
+| **WAV**  | Uncompressed | Lossless | Production, archive |
+| **AIFF** | Uncompressed | Lossless | Mac production      |
+| **FLAC** | Compressed   | Lossless | Archive, audiophile |
+| **ALAC** | Compressed   | Lossless | Apple ecosystem     |
+| **MP3**  | Compressed   | Lossy    | Distribution        |
+| **AAC**  | Compressed   | Lossy    | Streaming, Apple    |
+| **OGG**  | Compressed   | Lossy    | Games, open source  |
 
 ### Export Specifications
 
@@ -460,6 +460,7 @@ For Distribution:
 ## Best Practices
 
 ### DO:
+
 - Record at proper levels (-18 dBFS average)
 - Use reference tracks
 - Take breaks (ear fatigue is real)
@@ -470,6 +471,7 @@ For Distribution:
 - Export stems for backup
 
 ### DON'T:
+
 - Record with processing (usually)
 - Mix at high volumes
 - Over-compress everything
@@ -484,6 +486,7 @@ For Distribution:
 ## Quality Checklist
 
 ### Pre-Export
+
 - [ ] Gain staging correct throughout
 - [ ] No clipping or distortion
 - [ ] Phase issues resolved
@@ -492,6 +495,7 @@ For Distribution:
 - [ ] High frequencies not harsh
 
 ### Final Check
+
 - [ ] Listen on multiple systems
 - [ ] Check in car, phone, earbuds
 - [ ] Verify format specifications

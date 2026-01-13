@@ -28,12 +28,12 @@ KEY COMMITTEES:
 
 ### Fiduciary Duties
 
-| Duty | Definition | Key Considerations |
-|------|------------|-------------------|
-| **Duty of Care** | Act with reasonable prudence | Informed decisions, due diligence |
-| **Duty of Loyalty** | Act in corporation's best interest | Avoid conflicts, corporate opportunity |
-| **Duty of Good Faith** | Act honestly and fairly | No intentional harm, follow law |
-| **Duty of Disclosure** | Full and fair disclosure | Material information, no omissions |
+| Duty                   | Definition                         | Key Considerations                     |
+| ---------------------- | ---------------------------------- | -------------------------------------- |
+| **Duty of Care**       | Act with reasonable prudence       | Informed decisions, due diligence      |
+| **Duty of Loyalty**    | Act in corporation's best interest | Avoid conflicts, corporate opportunity |
+| **Duty of Good Faith** | Act honestly and fairly            | No intentional harm, follow law        |
+| **Duty of Disclosure** | Full and fair disclosure           | Material information, no omissions     |
 
 ### Business Judgment Rule
 
@@ -81,14 +81,14 @@ COMPLIANCE FRAMEWORK:
 
 ### GDPR Compliance
 
-| Requirement | Description | Penalties |
-|-------------|-------------|-----------|
-| **Lawful Basis** | Consent, contract, legitimate interest | Up to 4% global revenue |
-| **Data Subject Rights** | Access, rectification, erasure, portability | Up to 4% global revenue |
-| **Data Protection Officer** | Required for large-scale processing | Administrative fines |
-| **Breach Notification** | 72 hours to authority, without undue delay to subjects | Up to 4% global revenue |
-| **Privacy by Design** | Built-in privacy controls | Up to 4% global revenue |
-| **Data Processing Agreements** | Required with all processors | Up to 2% global revenue |
+| Requirement                    | Description                                            | Penalties               |
+| ------------------------------ | ------------------------------------------------------ | ----------------------- |
+| **Lawful Basis**               | Consent, contract, legitimate interest                 | Up to 4% global revenue |
+| **Data Subject Rights**        | Access, rectification, erasure, portability            | Up to 4% global revenue |
+| **Data Protection Officer**    | Required for large-scale processing                    | Administrative fines    |
+| **Breach Notification**        | 72 hours to authority, without undue delay to subjects | Up to 4% global revenue |
+| **Privacy by Design**          | Built-in privacy controls                              | Up to 4% global revenue |
+| **Data Processing Agreements** | Required with all processors                           | Up to 2% global revenue |
 
 ### HIPAA Compliance
 
@@ -173,23 +173,23 @@ ESSENTIAL TERMS:
 
 ### Key Contract Provisions
 
-| Provision | Purpose | Negotiation Points |
-|-----------|---------|-------------------|
-| **Limitation of Liability** | Cap damages exposure | Direct vs. consequential, cap amount |
-| **Indemnification** | Allocate third-party risk | Scope, procedure, caps |
-| **IP Ownership** | Define ownership | Work product, background IP, licenses |
-| **Confidentiality** | Protect information | Definition, term, exceptions |
-| **Termination** | Exit rights | For cause vs. convenience, notice period |
-| **Warranties** | Quality assurance | Scope, disclaimers, remedies |
+| Provision                   | Purpose                   | Negotiation Points                       |
+| --------------------------- | ------------------------- | ---------------------------------------- |
+| **Limitation of Liability** | Cap damages exposure      | Direct vs. consequential, cap amount     |
+| **Indemnification**         | Allocate third-party risk | Scope, procedure, caps                   |
+| **IP Ownership**            | Define ownership          | Work product, background IP, licenses    |
+| **Confidentiality**         | Protect information       | Definition, term, exceptions             |
+| **Termination**             | Exit rights               | For cause vs. convenience, notice period |
+| **Warranties**              | Quality assurance         | Scope, disclaimers, remedies             |
 
 ### Contract Risk Matrix
 
-| Risk Level | Contract Value | Approval Level |
-|------------|----------------|----------------|
-| Low | < $100K | Department manager |
-| Medium | $100K - $1M | Director/VP |
-| High | $1M - $10M | SVP/EVP |
-| Critical | > $10M | C-Suite/Board |
+| Risk Level | Contract Value | Approval Level     |
+| ---------- | -------------- | ------------------ |
+| Low        | < $100K        | Department manager |
+| Medium     | $100K - $1M    | Director/VP        |
+| High       | $1M - $10M     | SVP/EVP            |
+| Critical   | > $10M         | C-Suite/Board      |
 
 ## Intellectual Property
 
@@ -221,14 +221,14 @@ TRADE SECRET PROGRAM:
 
 ### IP Due Diligence (M&A)
 
-| Area | Review Items |
-|------|--------------|
-| **Patents** | Ownership, encumbrances, validity, infringement claims |
-| **Trademarks** | Registrations, common law rights, oppositions |
-| **Copyrights** | Work for hire, assignments, licenses |
-| **Trade Secrets** | Protection measures, potential misappropriation |
-| **Licenses** | Inbound/outbound, change of control provisions |
-| **Litigation** | Pending/threatened, settlements |
+| Area              | Review Items                                           |
+| ----------------- | ------------------------------------------------------ |
+| **Patents**       | Ownership, encumbrances, validity, infringement claims |
+| **Trademarks**    | Registrations, common law rights, oppositions          |
+| **Copyrights**    | Work for hire, assignments, licenses                   |
+| **Trade Secrets** | Protection measures, potential misappropriation        |
+| **Licenses**      | Inbound/outbound, change of control provisions         |
+| **Litigation**    | Pending/threatened, settlements                        |
 
 ## Litigation Management
 
@@ -254,14 +254,14 @@ HOLD PROCESS:
 
 ### Litigation Budget Management
 
-| Phase | Activities | Cost Factors |
-|-------|------------|--------------|
-| **Pre-litigation** | Investigation, demand letters | Limited |
-| **Pleadings** | Complaint, answer, motions | Moderate |
-| **Discovery** | Document production, depositions | Highest |
-| **Pre-trial** | Expert reports, motions | High |
-| **Trial** | Preparation, testimony | Very High |
-| **Appeal** | Briefing, oral argument | Moderate |
+| Phase              | Activities                       | Cost Factors |
+| ------------------ | -------------------------------- | ------------ |
+| **Pre-litigation** | Investigation, demand letters    | Limited      |
+| **Pleadings**      | Complaint, answer, motions       | Moderate     |
+| **Discovery**      | Document production, depositions | Highest      |
+| **Pre-trial**      | Expert reports, motions          | High         |
+| **Trial**          | Preparation, testimony           | Very High    |
+| **Appeal**         | Briefing, oral argument          | Moderate     |
 
 ### Settlement Analysis
 
@@ -284,14 +284,14 @@ CONSIDERATIONS:
 
 ### Legal Risk Categories
 
-| Category | Examples | Impact |
-|----------|----------|--------|
-| **Regulatory** | Enforcement, fines, license revocation | High |
-| **Contractual** | Breach, termination, damages | Medium-High |
-| **Litigation** | Class actions, IP disputes, employment | High |
-| **Compliance** | SOX, FCPA, data privacy | Very High |
-| **Transactional** | M&A, JV, financing | Medium |
-| **Reputational** | Public relations, brand damage | High |
+| Category          | Examples                               | Impact      |
+| ----------------- | -------------------------------------- | ----------- |
+| **Regulatory**    | Enforcement, fines, license revocation | High        |
+| **Contractual**   | Breach, termination, damages           | Medium-High |
+| **Litigation**    | Class actions, IP disputes, employment | High        |
+| **Compliance**    | SOX, FCPA, data privacy                | Very High   |
+| **Transactional** | M&A, JV, financing                     | Medium      |
+| **Reputational**  | Public relations, brand damage         | High        |
 
 ### Risk Assessment Matrix
 
@@ -387,25 +387,25 @@ INTERNAL REPORTING:
 
 ### Privacy Program Components
 
-| Component | Description |
-|-----------|-------------|
-| **Governance** | Privacy officer, steering committee, policies |
-| **Data Inventory** | What data, where, purpose, retention |
-| **Legal Basis** | Consent management, legitimate interest |
-| **Rights Management** | DSR process, verification, response |
-| **Vendor Management** | DPAs, assessments, monitoring |
-| **Security** | Technical measures, breach response |
-| **Training** | Role-based, regular updates |
-| **Auditing** | Compliance testing, gap remediation |
+| Component             | Description                                   |
+| --------------------- | --------------------------------------------- |
+| **Governance**        | Privacy officer, steering committee, policies |
+| **Data Inventory**    | What data, where, purpose, retention          |
+| **Legal Basis**       | Consent management, legitimate interest       |
+| **Rights Management** | DSR process, verification, response           |
+| **Vendor Management** | DPAs, assessments, monitoring                 |
+| **Security**          | Technical measures, breach response           |
+| **Training**          | Role-based, regular updates                   |
+| **Auditing**          | Compliance testing, gap remediation           |
 
 ### Data Classification
 
-| Level | Definition | Handling |
-|-------|------------|----------|
-| **Public** | Approved for public release | Standard controls |
-| **Internal** | General business information | Access controls |
-| **Confidential** | Sensitive business data | Encryption, access limits |
-| **Restricted** | Highly sensitive (PII, PHI, etc.) | Strict controls, audit |
+| Level            | Definition                        | Handling                  |
+| ---------------- | --------------------------------- | ------------------------- |
+| **Public**       | Approved for public release       | Standard controls         |
+| **Internal**     | General business information      | Access controls           |
+| **Confidential** | Sensitive business data           | Encryption, access limits |
+| **Restricted**   | Highly sensitive (PII, PHI, etc.) | Strict controls, audit    |
 
 ## See Also
 

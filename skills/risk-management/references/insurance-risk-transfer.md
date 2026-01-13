@@ -2,15 +2,15 @@
 
 ## Corporate Insurance Program
 
-| Coverage | Purpose | Key Terms |
-|----------|---------|-----------|
-| **Property** | Physical assets | Replacement cost, BI |
-| **General Liability** | Third-party claims | Occurrence, aggregate |
-| **D&O** | Executive protection | Entity coverage, Side A |
-| **Cyber** | Data breach, ransomware | First/third party |
-| **E&O/Professional** | Service failures | Claims-made |
-| **Employment** | HR-related claims | Wage & hour, EPLI |
-| **Crime/Fidelity** | Internal theft | Employee dishonesty |
+| Coverage              | Purpose                 | Key Terms               |
+| --------------------- | ----------------------- | ----------------------- |
+| **Property**          | Physical assets         | Replacement cost, BI    |
+| **General Liability** | Third-party claims      | Occurrence, aggregate   |
+| **D&O**               | Executive protection    | Entity coverage, Side A |
+| **Cyber**             | Data breach, ransomware | First/third party       |
+| **E&O/Professional**  | Service failures        | Claims-made             |
+| **Employment**        | HR-related claims       | Wage & hour, EPLI       |
+| **Crime/Fidelity**    | Internal theft          | Employee dishonesty     |
 
 ## Insurance Program Structure
 

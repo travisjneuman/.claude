@@ -26,6 +26,7 @@ npm run type-check   # TypeScript
 ### Backend (NestJS)
 
 **Authentication & Authorization:**
+
 ```typescript
 // Protected routes MUST have auth guard
 @UseGuards(JwtAuthGuard)
@@ -36,6 +37,7 @@ getProfile(@CurrentUser() user: User) {
 ```
 
 **Input Validation (DTOs):**
+
 ```typescript
 // All inputs validated via class-validator
 export class CreateUserDto {
@@ -49,6 +51,7 @@ export class CreateUserDto {
 ```
 
 **Database Safety:**
+
 ```typescript
 // Use Prisma, never raw SQL
 // ✓ Good
@@ -61,6 +64,7 @@ await this.prisma.$queryRaw`SELECT * FROM users WHERE id = ${id}`;
 ### Frontend (Next.js)
 
 **Server vs Client Components:**
+
 ```typescript
 // Default: Server Component (can fetch data, no hooks)
 export default async function Page() {
@@ -77,6 +81,7 @@ export default function Interactive() {
 ```
 
 **API Route Patterns:**
+
 ```typescript
 // app/api/[route]/route.ts
 export async function POST(request: Request) {
@@ -89,6 +94,7 @@ export async function POST(request: Request) {
 ### Cross-Stack Consistency
 
 **Shared Types:**
+
 ```typescript
 // types/api.ts - Shared between frontend/backend
 interface UserResponse {
@@ -99,6 +105,7 @@ interface UserResponse {
 ```
 
 **API Contract:**
+
 - Request DTOs match frontend payloads
 - Response types match frontend expectations
 - Error format consistent (status, message, errors[])
@@ -129,11 +136,13 @@ npx prisma generate
 ## Testing Requirements
 
 **Backend:**
+
 - Unit tests for services
 - E2E tests for API endpoints
 - Mocked database for tests
 
 **Frontend:**
+
 - Component tests for interactivity
 - API mocking for integration tests
 
