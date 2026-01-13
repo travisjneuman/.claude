@@ -44,12 +44,12 @@
 
 ## Recovery Objectives
 
-| Metric | Definition | Example |
-|--------|------------|---------|
-| **RTO** | Recovery Time Objective - Time to restore | 4 hours |
-| **RPO** | Recovery Point Objective - Data loss tolerance | 1 hour |
-| **MTPD** | Maximum Tolerable Period of Disruption | 24 hours |
-| **WRT** | Work Recovery Time - Time to catch up | 8 hours |
+| Metric   | Definition                                     | Example  |
+| -------- | ---------------------------------------------- | -------- |
+| **RTO**  | Recovery Time Objective - Time to restore      | 4 hours  |
+| **RPO**  | Recovery Point Objective - Data loss tolerance | 1 hour   |
+| **MTPD** | Maximum Tolerable Period of Disruption         | 24 hours |
+| **WRT**  | Work Recovery Time - Time to catch up          | 8 hours  |
 
 ## Crisis Management
 

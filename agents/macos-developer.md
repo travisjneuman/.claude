@@ -18,12 +18,14 @@ Expert macOS native developer specializing in AppKit, Mac Catalyst, and macOS sy
 ## Capabilities
 
 ### Frameworks
+
 - AppKit (NSView, NSWindow, NSViewController)
 - SwiftUI for macOS
 - Mac Catalyst
 - Combine
 
 ### macOS Features
+
 - Menu bar apps and status items
 - Document-based applications
 - Services and system integration
@@ -32,6 +34,7 @@ Expert macOS native developer specializing in AppKit, Mac Catalyst, and macOS sy
 - Sandboxing and entitlements
 
 ### System Integration
+
 - File system access
 - Security-scoped bookmarks
 - XPC services
@@ -39,6 +42,7 @@ Expert macOS native developer specializing in AppKit, Mac Catalyst, and macOS sy
 - Accessibility
 
 ### Distribution
+
 - App Store submission
 - Developer ID signing
 - Notarization

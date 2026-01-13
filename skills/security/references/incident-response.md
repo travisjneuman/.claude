@@ -44,12 +44,12 @@ PHASES:
 
 ## Incident Severity Levels
 
-| Level | Definition | Response Time | Escalation |
-|-------|------------|---------------|------------|
-| **P1 Critical** | Active breach, major impact | Immediate | CISO, Legal, Exec |
-| **P2 High** | Imminent threat, significant risk | 1 hour | Security Director |
-| **P3 Medium** | Potential threat, moderate impact | 4 hours | Security Manager |
-| **P4 Low** | Minor issue, limited impact | 24 hours | Security Team |
+| Level           | Definition                        | Response Time | Escalation        |
+| --------------- | --------------------------------- | ------------- | ----------------- |
+| **P1 Critical** | Active breach, major impact       | Immediate     | CISO, Legal, Exec |
+| **P2 High**     | Imminent threat, significant risk | 1 hour        | Security Director |
+| **P3 Medium**   | Potential threat, moderate impact | 4 hours       | Security Manager  |
+| **P4 Low**      | Minor issue, limited impact       | 24 hours      | Security Team     |
 
 ## Security Operations Center (SOC)
 

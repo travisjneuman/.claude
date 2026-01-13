@@ -18,12 +18,7 @@
     "design",
     "business"
   ],
-  "categories": [
-    "Development",
-    "Productivity",
-    "Design",
-    "Business"
-  ],
+  "categories": ["Development", "Productivity", "Design", "Business"],
   "components": {
     "skills": {
       "path": "skills/",

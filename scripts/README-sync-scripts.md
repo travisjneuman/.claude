@@ -27,16 +27,19 @@ Auto-discovers and force-syncs all git repositories to match remote state.
 The script **automatically scans** configured directories for git repos.
 
 **No manual config needed:**
+
 - New repos are found automatically
 - Removed repos cause no errors (gracefully skipped)
 - Submodules handled by their parent repos
 - External/read-only repos excluded via patterns
 
 **Default scan directories:**
+
 - `~/web-dev`
 - `~/.claude`
 
 **Excluded patterns:**
+
 - `node_modules`
 - `/plugins/marketplaces/` (read-only external repos)
 - `/vendor/`
@@ -136,6 +139,7 @@ alias sync-repos-force="~/.claude/scripts/force-sync-repos.sh --force"
 ## Logs
 
 Sync logs are saved to:
+
 ```
 ~/.claude/logs/sync-YYYYMMDD-HHMMSS.log
 ```
@@ -145,16 +149,19 @@ Sync logs are saved to:
 ## Troubleshooting
 
 **"Permission denied"**
+
 ```bash
 chmod +x ~/.claude/scripts/force-sync-repos.sh
 ```
 
 **Repo not being found**
+
 - Check it's under a scanned directory
 - Check scan depth (default: 3 levels)
 - Check it's not matching an exclude pattern
 
 **Submodule issues**
+
 ```bash
 cd ~/path/to/parent-repo
 git submodule update --init --recursive

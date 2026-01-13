@@ -74,7 +74,7 @@ npx serve .                  # Node.js (recommended - all platforms)
 
 ```javascript
 // Enhancement: Custom animation when JS available
-if ('IntersectionObserver' in window) {
+if ("IntersectionObserver" in window) {
   // Progressive enhancement
 }
 ```
@@ -85,11 +85,11 @@ if ('IntersectionObserver' in window) {
 
 ```javascript
 // One listener for many elements
-document.body.addEventListener('click', (e) => {
-  if (e.target.matches('.menu-toggle')) {
+document.body.addEventListener("click", (e) => {
+  if (e.target.matches(".menu-toggle")) {
     toggleMenu();
   }
-  if (e.target.matches('.close-btn')) {
+  if (e.target.matches(".close-btn")) {
     closeModal();
   }
 });
@@ -99,7 +99,7 @@ document.body.addEventListener('click', (e) => {
 
 ```javascript
 // Modern approach
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
   initApp();
 });
 
@@ -110,11 +110,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 ```javascript
 // Toggle visibility
-element.classList.toggle('visible');
+element.classList.toggle("visible");
 
 // Add/remove
-element.classList.add('active');
-element.classList.remove('active');
+element.classList.add("active");
+element.classList.remove("active");
 ```
 
 ## Automation (GitHub Actions)
@@ -157,17 +157,20 @@ cwebp -q 80 image.png -o image.webp
 ## Feature Checklist
 
 **Before Starting:**
+
 - [ ] Read CLAUDE.md for project constraints
 - [ ] Check existing patterns to reuse
 - [ ] Understand performance budget
 
 **During Development:**
+
 - [ ] One change at a time
 - [ ] Test in multiple browsers
 - [ ] Test responsiveness
 - [ ] Keep page weight in budget
 
 **Before Completion:**
+
 - [ ] Lighthouse 95+ Performance
 - [ ] All breakpoints tested
 - [ ] Screenshots for comparison
@@ -175,11 +178,11 @@ cwebp -q 80 image.png -o image.webp
 
 ## Performance Targets
 
-| Metric | Target |
-|--------|--------|
-| Total weight | < 50KB |
-| First Contentful Paint | < 1s |
-| Lighthouse Performance | 95+ |
+| Metric                 | Target |
+| ---------------------- | ------ |
+| Total weight           | < 50KB |
+| First Contentful Paint | < 1s   |
+| Lighthouse Performance | 95+    |
 
 ## See Also
 

@@ -10,6 +10,7 @@ Create comprehensive, beginner-friendly documentation for any codebase.
 ## When to Use
 
 **Use for:**
+
 - Writing or updating README files
 - Creating architecture documentation
 - Adding meaningful code comments
@@ -18,6 +19,7 @@ Create comprehensive, beginner-friendly documentation for any codebase.
 - Explaining project structure
 
 **Don't use when:**
+
 - Code review → use `generic-code-reviewer`
 - UX design decisions → use `generic-ux-designer`
 - Adding code features → use `generic-feature-developer`
@@ -42,43 +44,55 @@ Create comprehensive, beginner-friendly documentation for any codebase.
 ## Documentation Types
 
 ### README (Project Entry Point)
+
 ```markdown
 # Project Name
 
 ## What This Does
+
 [1-2 sentence explanation]
 
 ## Quick Start
+
 [< 5 minute setup]
 
 ## Project Structure
+
 [Visual file tree]
 
 ## Key Concepts
+
 [Core abstractions]
 
 ## Common Tasks
+
 [Step-by-step guides]
 ```
 
 ### Architecture Documentation
+
 ```markdown
 # Architecture Overview
 
 ## System Design
+
 [High-level diagram]
 
 ## Data Flow
+
 [How data moves through system]
 
 ## Key Design Decisions
+
 [Why certain choices were made]
 
 ## Extension Points
+
 [Where to add new features]
 ```
 
 ### Code Comments
+
 ```typescript
 // ✅ GOOD - Explains WHY and context
 // IndexedDB quota check: Prevents silent failures when storage is full.
@@ -90,22 +104,27 @@ if (quota.percentUsed > 80) showStorageWarning();
 ```
 
 ### API Documentation
+
 ```markdown
 ## Endpoint: POST /api/resource
 
 ### What It Does
+
 [Plain-English purpose]
 
 ### Request/Response
+
 [JSON examples]
 
 ### Common Errors
+
 [Error codes and meanings]
 ```
 
 ## Visual Patterns
 
 ### File Tree
+
 ```
 project/
 ├── src/                    # Source code
@@ -117,6 +136,7 @@ project/
 ```
 
 ### Data Flow
+
 ```
 User Request Flow:
 1. User submits → 2. Validation → 3. API → 4. Database → 5. Response
@@ -133,6 +153,7 @@ User Request Flow:
 ```
 
 ### Design Decision (ADR)
+
 ```markdown
 ## Why We Use [Technology]
 
@@ -145,6 +166,7 @@ User Request Flow:
 ## Documentation Quality Checklist
 
 ### Before Publishing
+
 - [ ] Quick start works in < 5 minutes
 - [ ] Code examples are copy-pasteable
 - [ ] File paths are accurate
@@ -153,6 +175,7 @@ User Request Flow:
 - [ ] Diagrams are included for complex flows
 
 ### Common Mistakes to Avoid
+
 - Assuming reader knows the codebase
 - Outdated code examples
 - Missing prerequisites
@@ -162,6 +185,7 @@ User Request Flow:
 ## Verification Workflow
 
 After writing documentation:
+
 1. **Fresh Eyes Test** - Read as if you've never seen the codebase
 2. **Run Examples** - Copy-paste and verify they work
 3. **Check Links** - All internal/external links resolve

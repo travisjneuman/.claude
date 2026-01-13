@@ -22,7 +22,7 @@ skills/
 
 Copy the content below to create your skill:
 
-```markdown
+````markdown
 ---
 name: skill-name
 description: Brief description (shown in skill list and used for auto-activation matching)
@@ -51,9 +51,11 @@ description: Brief description (shown in skill list and used for auto-activation
 **When to use:** [Context]
 
 **Implementation:**
+
 ```[language]
 // Code example
 ```
+````
 
 **Why:** [Explanation]
 
@@ -62,6 +64,7 @@ description: Brief description (shown in skill list and used for auto-activation
 **When to use:** [Context]
 
 **Implementation:**
+
 ```[language]
 // Code example
 ```
@@ -70,9 +73,9 @@ description: Brief description (shown in skill list and used for auto-activation
 
 ## Anti-Patterns
 
-| Anti-Pattern | Why It's Bad | Better Approach |
-|--------------|--------------|-----------------|
-| [Bad practice] | [Reason] | [Good alternative] |
+| Anti-Pattern   | Why It's Bad | Better Approach    |
+| -------------- | ------------ | ------------------ |
+| [Bad practice] | [Reason]     | [Good alternative] |
 
 ---
 
@@ -106,7 +109,8 @@ Before completing work with this skill:
 
 ---
 
-*Last updated: [Date]*
+_Last updated: [Date]_
+
 ```
 
 ---
@@ -176,3 +180,4 @@ After creation:
 ---
 
 *Template version: 1.0*
+```

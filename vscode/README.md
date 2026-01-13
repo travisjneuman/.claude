@@ -8,10 +8,10 @@ This folder contains global VSCode settings that apply to all VSCode variants.
 
 There are TWO different VSCode-related folders in this repo:
 
-| Folder | Path | Description | Tracked? |
-|--------|------|-------------|----------|
-| **This folder** | `vscode/` | Our portable setup scripts | ✅ Yes (scripts only) |
-| **VSCode workspace** | `.vscode/` | Auto-created by VSCode | ❌ No (gitignored) |
+| Folder               | Path       | Description                | Tracked?              |
+| -------------------- | ---------- | -------------------------- | --------------------- |
+| **This folder**      | `vscode/`  | Our portable setup scripts | ✅ Yes (scripts only) |
+| **VSCode workspace** | `.vscode/` | Auto-created by VSCode     | ❌ No (gitignored)    |
 
 ### Why `vscode/settings.json` is Gitignored
 
@@ -71,19 +71,19 @@ cmd /c mklink "C:\Users\username\AppData\Roaming\Cursor\User\settings.json" "C:\
 
 ## VSCode Settings Paths by Platform
 
-| Platform | Path |
-|----------|------|
-| Windows | `%APPDATA%\Code\User\settings.json` |
-| macOS | `~/Library/Application Support/Code/User/settings.json` |
-| Linux | `~/.config/Code/User/settings.json` |
+| Platform | Path                                                    |
+| -------- | ------------------------------------------------------- |
+| Windows  | `%APPDATA%\Code\User\settings.json`                     |
+| macOS    | `~/Library/Application Support/Code/User/settings.json` |
+| Linux    | `~/.config/Code/User/settings.json`                     |
 
 ## What This Contains
 
-| File | Description | Tracked? |
-|------|-------------|----------|
-| `README.md` | This documentation | ✅ Yes |
-| `setup-vscode-settings.ps1` | Windows setup script | ✅ Yes |
-| `settings.json` | VSCode settings template | ❌ **No** (gitignored) |
+| File                        | Description              | Tracked?               |
+| --------------------------- | ------------------------ | ---------------------- |
+| `README.md`                 | This documentation       | ✅ Yes                 |
+| `setup-vscode-settings.ps1` | Windows setup script     | ✅ Yes                 |
+| `settings.json`             | VSCode settings template | ❌ **No** (gitignored) |
 
 **Note:** You must create `settings.json` yourself after cloning. It's gitignored because it contains machine-specific paths and local network IPs.
 

@@ -2,14 +2,14 @@
 
 ## Reporting Frameworks
 
-| Framework | Focus | Use |
-|-----------|-------|-----|
-| **GRI** | Comprehensive sustainability | General reporting |
-| **SASB** | Industry-specific, financial | Investor focus |
-| **TCFD** | Climate risk | Climate disclosure |
-| **CDP** | Environmental data | Benchmarking |
-| **UN SDGs** | Global goals | Impact mapping |
-| **CSRD/ESRS** | EU standards | EU operations |
+| Framework     | Focus                        | Use                |
+| ------------- | ---------------------------- | ------------------ |
+| **GRI**       | Comprehensive sustainability | General reporting  |
+| **SASB**      | Industry-specific, financial | Investor focus     |
+| **TCFD**      | Climate risk                 | Climate disclosure |
+| **CDP**       | Environmental data           | Benchmarking       |
+| **UN SDGs**   | Global goals                 | Impact mapping     |
+| **CSRD/ESRS** | EU standards                 | EU operations      |
 
 ## GRI Standards
 

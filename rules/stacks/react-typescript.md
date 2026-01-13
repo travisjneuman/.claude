@@ -55,12 +55,12 @@ export function MyComponent({ title, onAction, children }: Props) {
 
 ### TypeScript Rules
 
-| Rule | Enforcement |
-|------|-------------|
-| No `any` | Use `unknown` for external data |
-| Strict mode | Always enabled in tsconfig |
-| Props interfaces | Required for all components |
-| Return types | Explicit for complex functions |
+| Rule             | Enforcement                     |
+| ---------------- | ------------------------------- |
+| No `any`         | Use `unknown` for external data |
+| Strict mode      | Always enabled in tsconfig      |
+| Props interfaces | Required for all components     |
+| Return types     | Explicit for complex functions  |
 
 ```typescript
 // WRONG
@@ -86,15 +86,17 @@ export const useStore = create<State>()(
   persist(
     (set) => ({
       items: [],
-      addItem: (item) => set((s) => ({
-        items: [...s.items, item]
-      })),
-      removeItem: (id) => set((s) => ({
-        items: s.items.filter(i => i.id !== id)
-      })),
+      addItem: (item) =>
+        set((s) => ({
+          items: [...s.items, item],
+        })),
+      removeItem: (id) =>
+        set((s) => ({
+          items: s.items.filter((i) => i.id !== id),
+        })),
     }),
-    { name: 'store-name', version: 1 }
-  )
+    { name: "store-name", version: 1 },
+  ),
 );
 ```
 
@@ -120,13 +122,13 @@ src/
 
 ### File Naming
 
-| Type | Convention | Example |
-|------|------------|---------|
-| Components | PascalCase | `UserCard.tsx` |
-| Hooks | use prefix | `useAuth.ts` |
-| Utilities | camelCase | `formatDate.ts` |
-| Types | PascalCase | `User.ts` |
-| Tests | .test.ts | `UserCard.test.tsx` |
+| Type       | Convention | Example             |
+| ---------- | ---------- | ------------------- |
+| Components | PascalCase | `UserCard.tsx`      |
+| Hooks      | use prefix | `useAuth.ts`        |
+| Utilities  | camelCase  | `formatDate.ts`     |
+| Types      | PascalCase | `User.ts`           |
+| Tests      | .test.ts   | `UserCard.test.tsx` |
 
 ---
 
@@ -240,16 +242,17 @@ function useLocalStorage<T>(key: string, initialValue: T) {
 
 ## Related Skills
 
-| Skill | When to Use |
-|-------|-------------|
-| `generic-react-code-reviewer` | Code review |
-| `generic-react-design-system` | Design patterns |
+| Skill                             | When to Use            |
+| --------------------------------- | ---------------------- |
+| `generic-react-code-reviewer`     | Code review            |
+| `generic-react-design-system`     | Design patterns        |
 | `generic-react-feature-developer` | Feature implementation |
-| `generic-react-ux-designer` | UX design |
-| `test-specialist` | Testing guidance |
-| `tech-debt-analyzer` | Code health |
+| `generic-react-ux-designer`       | UX design              |
+| `test-specialist`                 | Testing guidance       |
+| `tech-debt-analyzer`              | Code health            |
 
 ### Invoke with:
+
 ```
 Skill(generic-react-code-reviewer)
 Skill(generic-react-feature-developer)
@@ -276,4 +279,4 @@ Skill(generic-react-feature-developer)
 
 ---
 
-*React + TypeScript = type-safe, maintainable components.*
+_React + TypeScript = type-safe, maintainable components._

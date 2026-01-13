@@ -50,17 +50,17 @@ cargo clippy -- -D warnings   # Treat warnings as errors
 
 ### Naming Conventions
 
-| Type | Convention | Example |
-|------|------------|---------|
-| Modules | snake_case | `user_service`, `http_handler` |
-| Functions | snake_case | `get_user`, `process_data` |
-| Types/Traits | PascalCase | `UserService`, `Serialize` |
-| Constants | SCREAMING_SNAKE_CASE | `MAX_CONNECTIONS` |
-| Lifetimes | short lowercase | `'a`, `'static` |
+| Type         | Convention           | Example                        |
+| ------------ | -------------------- | ------------------------------ |
+| Modules      | snake_case           | `user_service`, `http_handler` |
+| Functions    | snake_case           | `get_user`, `process_data`     |
+| Types/Traits | PascalCase           | `UserService`, `Serialize`     |
+| Constants    | SCREAMING_SNAKE_CASE | `MAX_CONNECTIONS`              |
+| Lifetimes    | short lowercase      | `'a`, `'static`                |
 
 ### Function Guidelines
 
-```rust
+````rust
 // Good - clear result types
 fn get_user(id: &str) -> Result<User, UserError> {
     let user = db.find(id)
@@ -85,7 +85,7 @@ fn get_user(id: &str) -> Result<User, UserError> {
 fn get_user(id: &str) -> Result<User, UserError> {
     // ...
 }
-```
+````
 
 ### Error Handling
 
@@ -378,13 +378,14 @@ impl<'a> Parser<'a> {
 
 ## Related Skills
 
-| Skill | When to Use |
-|-------|-------------|
-| `test-specialist` | Testing guidance |
-| `security` | Security patterns |
+| Skill                   | When to Use        |
+| ----------------------- | ------------------ |
+| `test-specialist`       | Testing guidance   |
+| `security`              | Security patterns  |
 | `performance-optimizer` | Performance tuning |
 
 ### Invoke with:
+
 ```
 Skill(test-specialist)
 Skill(performance-optimizer)
@@ -428,17 +429,17 @@ codegen-units = 1
 
 ## Useful Crates
 
-| Category | Crate | Purpose |
-|----------|-------|---------|
-| Async | `tokio` | Async runtime |
-| HTTP | `reqwest` | HTTP client |
-| Web | `axum`, `actix-web` | Web frameworks |
-| Serialization | `serde` | Serialize/deserialize |
-| CLI | `clap` | Argument parsing |
-| Error | `thiserror`, `anyhow` | Error handling |
-| Logging | `tracing` | Structured logging |
-| Testing | `proptest` | Property testing |
+| Category      | Crate                 | Purpose               |
+| ------------- | --------------------- | --------------------- |
+| Async         | `tokio`               | Async runtime         |
+| HTTP          | `reqwest`             | HTTP client           |
+| Web           | `axum`, `actix-web`   | Web frameworks        |
+| Serialization | `serde`               | Serialize/deserialize |
+| CLI           | `clap`                | Argument parsing      |
+| Error         | `thiserror`, `anyhow` | Error handling        |
+| Logging       | `tracing`             | Structured logging    |
+| Testing       | `proptest`            | Property testing      |
 
 ---
 
-*Rust: safe, fast, and fearless concurrency.*
+_Rust: safe, fast, and fearless concurrency._

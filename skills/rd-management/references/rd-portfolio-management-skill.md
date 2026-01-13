@@ -7,6 +7,7 @@ Expert-level R&D portfolio management skill for Fortune 50 enterprises, covering
 ## Trigger Conditions
 
 Use this skill when the user requests help with:
+
 - R&D strategy development and alignment
 - Technology roadmapping and planning
 - R&D portfolio prioritization and optimization
@@ -27,6 +28,7 @@ Use this skill when the user requests help with:
 **Research Classification System:**
 
 **Basic Research (5-10% of R&D budget):**
+
 - **Objective**: Advance scientific knowledge, no immediate application
 - **Timeline**: 5-10+ years to application
 - **Risk**: Very high (80%+ failure rate)
@@ -35,6 +37,7 @@ Use this skill when the user requests help with:
 - **Funding Model**: University partnerships, government grants, corporate fellowships
 
 **Applied Research (15-25% of R&D budget):**
+
 - **Objective**: Solve specific technical problems, proof of concept
 - **Timeline**: 3-5 years to application
 - **Risk**: High (60-70% failure rate)
@@ -43,6 +46,7 @@ Use this skill when the user requests help with:
 - **Funding Model**: Internal R&D budget, collaborative research programs
 
 **Advanced Development (30-40% of R&D budget):**
+
 - **Objective**: Develop products/technologies toward commercialization
 - **Timeline**: 1-3 years to market
 - **Risk**: Medium (40-50% failure rate)
@@ -51,6 +55,7 @@ Use this skill when the user requests help with:
 - **Funding Model**: Business unit co-funding, development budgets
 
 **Product/Process Development (30-40% of R&D budget):**
+
 - **Objective**: Optimize existing products/processes
 - **Timeline**: 6-18 months to deployment
 - **Risk**: Low (20-30% failure rate)
@@ -59,6 +64,7 @@ Use this skill when the user requests help with:
 - **Funding Model**: Business unit budgets, operations funding
 
 **Technology Intelligence (3-5% of R&D budget):**
+
 - **Objective**: Monitor emerging technologies and competitive landscape
 - **Timeline**: Continuous
 - **Risk**: Low
@@ -71,30 +77,35 @@ Use this skill when the user requests help with:
 **R&D Strategy Cascade:**
 
 **Level 1: Corporate Strategy**
+
 - Business growth objectives
 - Market positioning goals
 - Competitive differentiation strategy
 - Financial targets and constraints
 
 **Level 2: R&D Strategy**
+
 - Technology focus areas
 - Build vs. partner vs. acquire decisions
 - Risk appetite and portfolio balance
 - Capability development priorities
 
 **Level 3: Portfolio Priorities**
+
 - Specific programs and projects
 - Resource allocation by area
 - Timeline and milestone targets
 - Success criteria and gates
 
 **Level 4: Project Execution**
+
 - Research plans and protocols
 - Technical milestones
 - Budget and resource plans
 - Risk management approaches
 
 **Alignment Assessment:**
+
 ```
 STRATEGIC FIT SCORECARD
 
@@ -138,6 +149,7 @@ Decision Thresholds:
 **Multi-Layer Roadmap Architecture:**
 
 **Layer 1: Market/Business Drivers (Top Layer)**
+
 - Market trends and opportunities
 - Customer needs evolution
 - Regulatory changes
@@ -145,6 +157,7 @@ Decision Thresholds:
 - Business objectives and targets
 
 **Layer 2: Product/Service Layer**
+
 - Current products and services
 - Planned product launches
 - Product evolution roadmap
@@ -152,6 +165,7 @@ Decision Thresholds:
 - End-of-life decisions
 
 **Layer 3: Technology/Capability Layer**
+
 - Enabling technologies required
 - Technology maturity timeline
 - Capability development needs
@@ -159,6 +173,7 @@ Decision Thresholds:
 - Integration requirements
 
 **Layer 4: Research/Innovation Layer**
+
 - Research programs required
 - Technology development projects
 - Partnership and collaboration needs
@@ -166,6 +181,7 @@ Decision Thresholds:
 - Capability building initiatives
 
 **Layer 5: Resources/Infrastructure (Bottom Layer)**
+
 - Talent and skills requirements
 - Lab and equipment needs
 - Budget allocation over time
@@ -173,6 +189,7 @@ Decision Thresholds:
 - Facility and infrastructure plans
 
 **Time Horizons:**
+
 - **Now**: Current capabilities and products (0-12 months)
 - **Near**: Committed development programs (1-3 years)
 - **Mid**: Advanced development and research (3-5 years)
@@ -181,12 +198,14 @@ Decision Thresholds:
 #### Roadmapping Process
 
 **Phase 1: Preparation (Weeks 1-2)**
+
 - Define scope and objectives
 - Identify stakeholders and participants
 - Gather inputs (market data, tech trends, strategy docs)
 - Select appropriate roadmap format
 
 **Phase 2: Market & Technology Analysis (Weeks 3-6)**
+
 - Market research and trend analysis
 - Technology landscape assessment
 - Competitive intelligence gathering
@@ -196,42 +215,49 @@ Decision Thresholds:
 **Phase 3: Workshop Facilitation (Weeks 7-8)**
 
 **Workshop 1: Market Drivers & Product Needs**
+
 - Identify critical market drivers
 - Define product/service vision
 - Map customer needs evolution
 - Identify gaps and opportunities
 
 **Workshop 2: Technology Solutions & Timing**
+
 - Brainstorm technology solutions
 - Assess technology readiness levels (TRL)
 - Map technologies to product needs
 - Identify development timeline
 
 **Workshop 3: Research Programs & Resources**
+
 - Define research programs required
 - Identify partnerships and collaborations
 - Assess resource requirements
 - Create integrated timeline
 
 **Phase 4: Roadmap Development (Weeks 9-10)**
+
 - Synthesize workshop outputs
 - Create visual roadmap
 - Identify dependencies and critical paths
 - Validate with stakeholders
 
 **Phase 5: Socialization & Approval (Weeks 11-12)**
+
 - Present to leadership
 - Gather feedback and refine
 - Secure commitment and resources
 - Communicate to organization
 
 **Phase 6: Operationalization (Ongoing)**
+
 - Translate roadmap into project portfolio
 - Align resource allocation
 - Establish monitoring and tracking
 - Set review cadence
 
 **Maintenance Cycle:**
+
 - **Minor Updates**: Quarterly (progress, timing adjustments)
 - **Major Reviews**: Annual (strategic refresh, new inputs)
 - **Horizon Scanning**: Continuous (emerging tech monitoring)
@@ -239,27 +265,32 @@ Decision Thresholds:
 #### Technology Readiness Level (TRL) Framework
 
 **TRL 1-3: Research (Basic & Applied)**
+
 - TRL 1: Basic principles observed
 - TRL 2: Technology concept formulated
 - TRL 3: Experimental proof of concept
 
 **TRL 4-6: Development**
+
 - TRL 4: Technology validated in lab
 - TRL 5: Technology validated in relevant environment
 - TRL 6: Technology demonstrated in relevant environment
 
 **TRL 7-9: Deployment**
+
 - TRL 7: System prototype demonstration in operational environment
 - TRL 8: System complete and qualified
 - TRL 9: Actual system proven in operational environment
 
 **Portfolio Application:**
+
 - Basic Research: TRL 1-3
 - Applied Research: TRL 3-5
 - Advanced Development: TRL 5-7
 - Product Development: TRL 7-9
 
 **Roadmap Integration:**
+
 - Map each technology to current TRL
 - Define target TRL for each time horizon
 - Identify TRL progression requirements
@@ -274,18 +305,21 @@ Decision Thresholds:
 **1. Strategic Value (Weight: 30%)**
 
 **Market Potential (0-10):**
+
 - Market size and growth rate
 - Competitive position improvement
 - Customer willingness to pay
 - Geographic expansion opportunity
 
 **Strategic Fit (0-10):**
+
 - Alignment with corporate strategy
 - Core competency leverage
 - Platform potential
 - Strategic partnership value
 
 **Scoring Example:**
+
 ```
 Strategic Value Score = (Market Potential × 0.6) + (Strategic Fit × 0.4)
 ```
@@ -293,18 +327,21 @@ Strategic Value Score = (Market Potential × 0.6) + (Strategic Fit × 0.4)
 **2. Technical Feasibility (Weight: 25%)**
 
 **Technology Maturity (0-10):**
+
 - Current TRL level
 - Complexity and technical risk
 - Availability of expertise
 - Infrastructure requirements
 
 **Development Confidence (0-10):**
+
 - Team capability and experience
 - Technology proven in similar applications
 - Supplier/partner ecosystem strength
 - Regulatory precedent
 
 **Scoring Example:**
+
 ```
 Technical Feasibility = (Technology Maturity × 0.5) + (Development Confidence × 0.5)
 ```
@@ -312,18 +349,21 @@ Technical Feasibility = (Technology Maturity × 0.5) + (Development Confidence �
 **3. Commercial Viability (Weight: 25%)**
 
 **Financial Attractiveness (0-10):**
+
 - NPV and IRR projections
 - Payback period
 - Revenue potential
 - Margin profile
 
 **Time to Market (0-10):**
+
 - Speed to revenue
 - Development timeline confidence
 - Competitive timing advantage
 - Resource availability
 
 **Scoring Example:**
+
 ```
 Commercial Viability = (Financial Attractiveness × 0.6) + (Time to Market × 0.4)
 ```
@@ -331,18 +371,21 @@ Commercial Viability = (Financial Attractiveness × 0.6) + (Time to Market × 0.
 **4. Risk Profile (Weight: 20%)**
 
 **Technical Risk (0-10, inverted):**
+
 - Proof of concept status
 - Complexity and unknowns
 - Dependency on breakthroughs
 - Integration challenges
 
 **Market/Business Risk (0-10, inverted):**
+
 - Customer adoption uncertainty
 - Competitive response risk
 - Regulatory/compliance risk
 - Supply chain risk
 
 **Scoring Example:**
+
 ```
 Risk Score = 10 - [(Technical Risk × 0.5) + (Market Risk × 0.5)]
 ```
@@ -350,6 +393,7 @@ Risk Score = 10 - [(Technical Risk × 0.5) + (Market Risk × 0.5)]
 #### Portfolio Optimization Model
 
 **Weighted Priority Score:**
+
 ```
 Priority Score = (Strategic Value × 0.30) +
                  (Technical Feasibility × 0.25) +
@@ -366,27 +410,32 @@ Classification:
 **Portfolio Balance Optimization:**
 
 **Dimension 1: Research Type Mix**
+
 - Target: 10% Basic, 20% Applied, 35% Advanced Dev, 35% Product Dev
 - Tolerance: ±5% per category
 - Rationale: Balance short-term results with long-term innovation
 
 **Dimension 2: Technology Domain Diversification**
+
 - No single domain >40% of portfolio
 - Minimum 3 domains represented
 - Strategic domains ≥20% each
 
 **Dimension 3: Timeline Balance**
+
 - 40% projects delivering in 0-2 years
 - 40% projects delivering in 2-5 years
 - 20% projects delivering in 5+ years
 
 **Dimension 4: Risk-Return Profile**
+
 - Expected Value = (Probability of Success) × (Value if Successful)
 - Portfolio Expected Value maximized
 - No single project >15% of total budget
 - High-risk projects balanced with safe bets
 
 **Dimension 5: Resource Constraints**
+
 - Total resource allocation ≤85% of available capacity
 - 15% buffer for emergent opportunities
 - Critical skills not over-allocated (≤90% utilization)
@@ -397,6 +446,7 @@ Classification:
 **Quarterly Portfolio Review:**
 
 **Pre-Meeting Prep:**
+
 - Update all project scores and status
 - Run portfolio analytics and visualizations
 - Identify issues, gaps, and opportunities
@@ -405,36 +455,42 @@ Classification:
 **Meeting Agenda (4 hours):**
 
 **Part 1: Portfolio Health Dashboard (45 min)**
+
 - Overall portfolio metrics vs. targets
 - Resource utilization analysis
 - Financial performance (spend, projections)
 - Risk exposure assessment
 
 **Part 2: Project Reviews (120 min)**
+
 - Red/Yellow projects: deep dive on issues
 - Gate decisions: presentations and deliberations
 - New project proposals: evaluation
 - Kill decisions: projects not progressing
 
 **Part 3: Portfolio Optimization (45 min)**
+
 - Balance assessment (mix, risk, timeline)
 - Gap analysis (strategic priorities uncovered)
 - Rebalancing scenarios
 - Resource reallocation decisions
 
 **Part 4: Strategic Topics (30 min)**
+
 - Emerging technology watch
 - Competitive intelligence updates
 - Regulatory changes and implications
 - Partnership opportunities
 
 **Outputs:**
+
 - Go/Kill/Hold decisions for all reviewed projects
 - Resource reallocation plan
 - New project approvals and budgets
 - Action items and owners
 
 **Annual Strategic Review:**
+
 - Full portfolio strategy refresh
 - Technology roadmap update
 - Resource capacity planning
@@ -447,6 +503,7 @@ Classification:
 **Research Design Principles:**
 
 **Hypothesis-Driven Research:**
+
 - Clear hypothesis statements
 - Testable predictions
 - Experimental design rigor
@@ -454,6 +511,7 @@ Classification:
 - Control and replication requirements
 
 **Agile Research Methodology:**
+
 - Sprint-based research cycles (2-4 weeks)
 - Rapid hypothesis testing
 - Learn-fast, fail-fast culture
@@ -461,6 +519,7 @@ Classification:
 - Pivot/persevere decision points
 
 **Open Science Practices:**
+
 - Pre-registration of studies (where appropriate)
 - Transparent methodology documentation
 - Data sharing and reproducibility
@@ -470,6 +529,7 @@ Classification:
 **Research Quality Gates:**
 
 **Gate R1: Research Proposal**
+
 - Hypothesis and objectives clear
 - Scientific rigor appropriate
 - Resources and timeline reasonable
@@ -477,6 +537,7 @@ Classification:
 - Ethical considerations addressed
 
 **Gate R2: Proof of Concept**
+
 - Key hypothesis validated
 - Technical feasibility demonstrated
 - Unexpected challenges identified
@@ -484,6 +545,7 @@ Classification:
 - Decision to continue or pivot
 
 **Gate R3: Research Completion**
+
 - Objectives achieved or learnings captured
 - Results validated and reproducible
 - IP strategy executed
@@ -495,18 +557,21 @@ Classification:
 **Lab Management Model:**
 
 **Centralized R&D Labs:**
+
 - **Structure**: Corporate R&D center serving all business units
 - **Advantages**: Economies of scale, cross-pollination, infrastructure efficiency
 - **Challenges**: Alignment with BU needs, relevance perception
 - **Best For**: Shared technology platforms, fundamental research
 
 **Federated Lab Network:**
+
 - **Structure**: BU labs with central coordination
 - **Advantages**: Close to market needs, entrepreneurial, responsive
 - **Challenges**: Duplication, siloes, coordination overhead
 - **Best For**: Diverse businesses, local market focus
 
 **Hybrid Lab Model:**
+
 - **Structure**: Central advanced research + BU development labs
 - **Advantages**: Balance of collaboration and focus
 - **Challenges**: Clear roles and handoffs required
@@ -515,6 +580,7 @@ Classification:
 **Lab Infrastructure Planning:**
 
 **Facility Requirements:**
+
 - Specialized equipment and instrumentation
 - Safety and environmental controls
 - Collaboration spaces (open lab, huddle rooms)
@@ -523,6 +589,7 @@ Classification:
 - IP-secure areas for confidential work
 
 **Equipment Lifecycle Management:**
+
 - Asset inventory and utilization tracking
 - Maintenance schedules and calibration
 - Replacement and upgrade planning
@@ -530,6 +597,7 @@ Classification:
 - Total cost of ownership analysis
 
 **Digital Lab Transformation:**
+
 - Electronic lab notebooks (ELN)
 - Lab information management systems (LIMS)
 - Experiment automation and robotics
@@ -538,6 +606,7 @@ Classification:
 - Digital twin simulation environments
 
 **Safety & Compliance:**
+
 - Safety protocols and training programs
 - Chemical and biological hazard management
 - Waste disposal and environmental compliance
@@ -550,6 +619,7 @@ Classification:
 **Research Talent Strategy:**
 
 **Recruiting Excellence:**
+
 - University partnerships for pipeline
 - Postdoc and fellowship programs
 - Industry hiring from competitors
@@ -557,11 +627,13 @@ Classification:
 - Employer brand as research leader
 
 **Career Paths:**
+
 - **Technical Ladder**: Research Scientist → Senior Scientist → Principal Scientist → Fellow
 - **Management Ladder**: Team Lead → Lab Manager → R&D Director → VP/CTO
 - **Dual Ladder**: Technical excellence recognized equally to management
 
 **Development Programs:**
+
 - Continuing education and conference attendance
 - Rotation programs across labs and BUs
 - Sabbaticals and academic collaborations
@@ -569,12 +641,14 @@ Classification:
 - Innovation challenges and hackathons
 
 **Performance Management:**
+
 - Output metrics: Publications, patents, technology transfers
 - Impact metrics: Commercial value realized, capabilities built
 - Collaboration metrics: Cross-functional projects, partnerships
 - Leadership metrics: Mentorship, team building, external visibility
 
 **Retention Strategies:**
+
 - Competitive compensation and benefits
 - Cutting-edge equipment and resources
 - Scientific freedom and autonomy
@@ -588,6 +662,7 @@ Classification:
 **Partnership Model Options:**
 
 **Sponsored Research Agreements:**
+
 - **Structure**: Company funds specific research at university
 - **IP Rights**: Typically license to sponsor with royalties
 - **Duration**: 1-3 years per project
@@ -595,6 +670,7 @@ Classification:
 - **Use Cases**: Explore emerging areas, access specialized expertise
 
 **Collaborative Research Centers:**
+
 - **Structure**: Joint research center on campus or corporate site
 - **IP Rights**: Negotiated, often joint ownership
 - **Duration**: 5-10 year commitment
@@ -602,6 +678,7 @@ Classification:
 - **Use Cases**: Strategic research areas, long-term capability building
 
 **Consortium Partnerships:**
+
 - **Structure**: Multiple companies fund shared research priorities
 - **IP Rights**: Non-exclusive to all members
 - **Duration**: 3-5 years typically
@@ -609,6 +686,7 @@ Classification:
 - **Use Cases**: Pre-competitive research, industry standards
 
 **Licensing Agreements:**
+
 - **Structure**: License university IP for commercialization
 - **IP Rights**: Exclusive or non-exclusive license
 - **Duration**: Life of patent or term agreement
@@ -616,6 +694,7 @@ Classification:
 - **Use Cases**: Access to breakthrough discoveries
 
 **Joint Ventures:**
+
 - **Structure**: Separate entity with university and company
 - **IP Rights**: JV owns, partners have rights
 - **Duration**: 5-10+ years
@@ -627,21 +706,25 @@ Classification:
 **Governance Structure:**
 
 **Steering Committee:**
+
 - **Members**: Executives from company and university leadership
 - **Frequency**: Annual or bi-annual
 - **Responsibilities**: Strategy, funding, major decisions
 
 **Management Committee:**
+
 - **Members**: Research directors and PIs
 - **Frequency**: Quarterly
 - **Responsibilities**: Project oversight, resource allocation, issue resolution
 
 **Technical Working Groups:**
+
 - **Members**: Scientists and engineers
 - **Frequency**: Monthly or as needed
 - **Responsibilities**: Research execution, technical problem-solving
 
 **Partnership Management Office:**
+
 - **Role**: Day-to-day coordination, reporting, contracting
 - **Staffing**: Dedicated partnership manager
 - **Responsibilities**: Communication, compliance, relationship health
@@ -649,6 +732,7 @@ Classification:
 #### Partnership Lifecycle Management
 
 **Phase 1: Partner Selection**
+
 - Research capability assessment
 - Cultural fit evaluation
 - IP and contracting compatibility
@@ -656,6 +740,7 @@ Classification:
 - Strategic alignment
 
 **Phase 2: Partnership Design**
+
 - Scope and objectives definition
 - Governance structure design
 - IP and publication policies
@@ -663,6 +748,7 @@ Classification:
 - Success metrics and milestones
 
 **Phase 3: Contracting & Launch**
+
 - Master agreement negotiation
 - Statement of work development
 - IP agreements finalized
@@ -670,6 +756,7 @@ Classification:
 - Communication and branding
 
 **Phase 4: Execution & Management**
+
 - Regular progress reviews
 - Issue escalation and resolution
 - Budget and scope management
@@ -677,6 +764,7 @@ Classification:
 - Knowledge transfer
 
 **Phase 5: Transition & Renewal**
+
 - Results assessment
 - Technology transfer
 - Publication strategy
@@ -684,6 +772,7 @@ Classification:
 - Lessons learned capture
 
 **Partnership Health Metrics:**
+
 - Scientific output (publications, patents)
 - Technology transfer events
 - Commercial value realized
@@ -695,6 +784,7 @@ Classification:
 #### Technology Transfer Process
 
 **Stage 1: Invention Disclosure**
+
 - Researcher submits invention disclosure form
 - Initial screening by tech transfer office
 - Prior art search and patentability assessment
@@ -702,6 +792,7 @@ Classification:
 - Decision: pursue IP or publish
 
 **Stage 2: IP Protection**
+
 - Patent application filing (provisional or full)
 - Trade secret protection measures
 - Copyright or trademark registration
@@ -709,6 +800,7 @@ Classification:
 - Global filing strategy
 
 **Stage 3: Market Assessment**
+
 - Technology readiness assessment (TRL)
 - Market opportunity sizing
 - Competitive landscape analysis
@@ -718,12 +810,14 @@ Classification:
 **Stage 4: Commercialization Strategy**
 
 **Option A: Internal Development**
+
 - Transfer to business unit
 - Assign product development team
 - Integrate into product roadmap
 - Monitor through stage-gate process
 
 **Option B: Licensing**
+
 - Identify potential licensees
 - Prepare marketing materials
 - Negotiate license terms
@@ -731,6 +825,7 @@ Classification:
 - Ongoing relationship management
 
 **Option C: Spin-out/Startup**
+
 - Form new company around technology
 - Recruit management team
 - Secure initial funding
@@ -738,6 +833,7 @@ Classification:
 - Corporate investment or partnership
 
 **Option D: Strategic Partnership**
+
 - Identify strategic partners
 - Negotiate joint development agreement
 - Co-invest in further development
@@ -745,6 +841,7 @@ Classification:
 - Share risks and rewards
 
 **Stage 5: Commercialization Execution**
+
 - Further development funding
 - Product/market fit validation
 - Scale-up and manufacturing
@@ -752,6 +849,7 @@ Classification:
 - Market launch
 
 **Stage 6: Value Realization**
+
 - Revenue from products or royalties
 - Strategic value (market access, data)
 - Follow-on innovations
@@ -761,6 +859,7 @@ Classification:
 #### Technology Transfer Metrics
 
 **Activity Metrics:**
+
 - Invention disclosures per year
 - Patents filed and granted
 - Licenses executed
@@ -768,6 +867,7 @@ Classification:
 - Material transfer agreements
 
 **Financial Metrics:**
+
 - Licensing revenue
 - Royalty income
 - Equity value from spin-outs
@@ -775,6 +875,7 @@ Classification:
 - Return on R&D investment
 
 **Impact Metrics:**
+
 - Products launched from research
 - Revenue from transferred technologies
 - Market value created
@@ -782,6 +883,7 @@ Classification:
 - Societal impact (health, sustainability)
 
 **Efficiency Metrics:**
+
 - Time from disclosure to license
 - Success rate of disclosures
 - Commercialization rate
@@ -797,6 +899,7 @@ Classification:
 **Pharmaceuticals/Biologics (FDA):**
 
 **Preclinical Phase:**
+
 - Target identification and validation
 - Lead optimization
 - Pharmacology and toxicology studies
@@ -804,12 +907,14 @@ Classification:
 - Regulatory strategy development
 
 **Clinical Trials:**
+
 - Phase 1: Safety and dosing (20-100 healthy volunteers, 1-2 years)
 - Phase 2: Efficacy and side effects (100-300 patients, 2-3 years)
 - Phase 3: Efficacy confirmation and monitoring (1,000-3,000 patients, 3-4 years)
 - NDA/BLA submission and review
 
 **Post-Market:**
+
 - Phase 4: Post-market surveillance
 - Label expansions and line extensions
 - Lifecycle management
@@ -820,11 +925,13 @@ Classification:
 **Medical Devices (FDA/CE Mark):**
 
 **Device Classification:**
+
 - Class I: Low risk, general controls
 - Class II: Moderate risk, special controls, 510(k) clearance
 - Class III: High risk, premarket approval (PMA) required
 
 **Development Pathway:**
+
 - Design controls and risk management (ISO 13485)
 - Verification and validation testing
 - Biocompatibility and safety testing
@@ -836,6 +943,7 @@ Classification:
 **Success Rate: ~60-70% for Class II, ~40-50% for Class III**
 
 **Other Regulated Industries:**
+
 - **Automotive**: NHTSA, EPA, FMVSS regulations
 - **Aerospace**: FAA certification, EASA
 - **Food/Agriculture**: FDA, USDA, EPA
@@ -846,6 +954,7 @@ Classification:
 #### Regulatory Integration in R&D
 
 **Regulatory by Design:**
+
 - Engage regulatory experts early (concept stage)
 - Design studies to meet regulatory requirements
 - Maintain GLP/GCP compliance from start
@@ -853,6 +962,7 @@ Classification:
 - Build quality into process, not inspect in
 
 **Regulatory Milestones in Stage-Gate:**
+
 - **Gate 1**: Regulatory pathway identified, initial strategy
 - **Gate 2**: Regulatory plan detailed, key meetings scheduled
 - **Gate 3**: Pre-submission meetings completed, trial designs approved
@@ -860,6 +970,7 @@ Classification:
 - **Gate 5**: Regulatory approval obtained or submission filed
 
 **Regulatory Affairs Team Integration:**
+
 - Embedded in R&D project teams
 - Early involvement in study design
 - Ongoing monitoring of regulatory landscape
@@ -867,6 +978,7 @@ Classification:
 - Training of R&D teams on requirements
 
 **Risk Management:**
+
 - Identify regulatory risks early
 - Develop mitigation strategies
 - Maintain regulatory risk register
@@ -880,18 +992,21 @@ Classification:
 **Input Metrics (Investment):**
 
 **Financial:**
+
 - R&D spend as % of revenue (target: 5-15% depending on industry)
 - R&D spend by category (basic, applied, development, product)
 - R&D spend by business unit or product line
 - External R&D spend (partnerships, licenses, acquisitions)
 
 **Human Capital:**
+
 - R&D FTEs and % of total workforce
 - PhDs and advanced degrees %
 - External collaborators and partnerships
 - Training investment per researcher
 
 **Infrastructure:**
+
 - Lab space and utilization
 - Equipment investment and age
 - Digital infrastructure spend
@@ -900,18 +1015,21 @@ Classification:
 **Process Metrics (Activity):**
 
 **Portfolio Health:**
+
 - Active projects by stage
 - Projects by research category
 - Projects by technology domain
 - Resource allocation by portfolio dimension
 
 **Pipeline Velocity:**
+
 - Average time in each stage
 - Stage transition rates
 - Time from research to commercial launch
 - Decision cycle time
 
 **Productivity:**
+
 - Projects per researcher FTE
 - Investment per project
 - Resource utilization rates
@@ -920,6 +1038,7 @@ Classification:
 **Output Metrics (Results):**
 
 **Innovation Output:**
+
 - Invention disclosures per year
 - Patents filed and granted
 - Publications in peer-reviewed journals
@@ -927,12 +1046,14 @@ Classification:
 - Products launched from R&D
 
 **Commercial Results:**
+
 - Revenue from new products (<5 years old)
 - Gross margin improvement from R&D
 - Cost savings from process improvements
 - Market share gain from innovation
 
 **IP & Knowledge:**
+
 - Patent portfolio value
 - Citation impact (patents and publications)
 - Licensing revenue
@@ -941,18 +1062,21 @@ Classification:
 **Outcome Metrics (Impact):**
 
 **Business Impact:**
+
 - Incremental revenue from R&D
 - ROIC (Return on Invested Capital) from R&D
 - NPV of R&D portfolio
 - Strategic positioning improvement
 
 **Strategic Objectives:**
+
 - Market leadership in key technologies
 - Technology differentiation vs. competitors
 - Speed to market vs. industry
 - Sustainability and ESG impact
 
 **Organizational Capability:**
+
 - R&D talent quality and retention
 - Research capability maturity
 - Partnership ecosystem strength
@@ -961,6 +1085,7 @@ Classification:
 #### Benchmarking & Target Setting
 
 **External Benchmarking:**
+
 - Industry R&D intensity (R&D/revenue %)
 - Peer company portfolio mix
 - Patent productivity vs. competitors
@@ -968,12 +1093,14 @@ Classification:
 - Success rates by stage
 
 **Internal Trending:**
+
 - Year-over-year improvement
 - Performance by lab or team
 - Best practices identification
 - Root cause analysis of failures
 
 **Target Setting Framework:**
+
 ```
 METRIC: [Name]
 
@@ -1001,6 +1128,7 @@ Review Frequency: [Quarterly/Annual]
 **R&D Governance Tiers:**
 
 **Tier 1: R&D Leadership Council**
+
 - **Members**: CTO, R&D VPs, BU CTOs, Chief Scientist
 - **Frequency**: Monthly
 - **Decisions**:
@@ -1011,6 +1139,7 @@ Review Frequency: [Quarterly/Annual]
   - Major partnerships and M&A
 
 **Tier 2: Portfolio Management Board**
+
 - **Members**: R&D Directors, Portfolio Managers, Finance
 - **Frequency**: Quarterly
 - **Decisions**:
@@ -1021,6 +1150,7 @@ Review Frequency: [Quarterly/Annual]
   - Technology roadmap updates
 
 **Tier 3: Technical Review Boards (by domain)**
+
 - **Members**: Senior scientists, technical experts, project leaders
 - **Frequency**: Monthly or bi-monthly
 - **Decisions**:
@@ -1031,6 +1161,7 @@ Review Frequency: [Quarterly/Annual]
   - Publication and IP decisions
 
 **Tier 4: Project Teams**
+
 - **Members**: Project leader and team members
 - **Frequency**: Weekly or daily standups
 - **Decisions**:
@@ -1065,6 +1196,7 @@ Publication & IP strategy              | Draft   | DECIDE  | Inform  | -
 #### Escalation & Exception Handling
 
 **Escalation Triggers:**
+
 - Budget overrun >10%
 - Timeline delay >20%
 - Technical feasibility concerns
@@ -1074,6 +1206,7 @@ Publication & IP strategy              | Draft   | DECIDE  | Inform  | -
 - External changes (regulatory, competitive)
 
 **Escalation Process:**
+
 1. Issue identified by project team
 2. Documented in issue log with impact assessment
 3. Escalated to next governance tier within 48 hours
@@ -1082,6 +1215,7 @@ Publication & IP strategy              | Draft   | DECIDE  | Inform  | -
 6. Action plan implemented and monitored
 
 **Exception Request Process:**
+
 - For decisions outside standard authority
 - Written request with business case
 - Risk assessment and mitigation plan
@@ -1113,6 +1247,7 @@ Publication & IP strategy              | Draft   | DECIDE  | Inform  | -
    - Technology infrastructure needs
 
 ### Ongoing Support
+
 - Technology roadmap development
 - Portfolio prioritization workshops
 - Research methodology design
@@ -1125,24 +1260,28 @@ Publication & IP strategy              | Draft   | DECIDE  | Inform  | -
 ## Key Questions to Ask Users
 
 **Strategic Context:**
+
 - What is your corporate strategy and how should R&D support it?
 - What are your key technology domains and competitive differentiators?
 - How much of your revenue comes from products launched in the past 5 years?
 - What is your R&D intensity target (% of revenue)?
 
 **Current State:**
+
 - How is your R&D portfolio currently structured?
 - What governance and decision-making processes exist?
 - What are your biggest R&D challenges and bottlenecks?
 - How do you measure R&D performance today?
 
 **Scope & Constraints:**
+
 - Which business units and technology areas are in scope?
 - What is your R&D budget and how is it allocated?
 - What regulatory environments do you operate in?
 - What partnership and collaboration models do you use?
 
 **Success Criteria:**
+
 - What business outcomes are you targeting from R&D?
 - How do you define R&D success?
 - What timeline are you working with for transformation?
@@ -1151,30 +1290,35 @@ Publication & IP strategy              | Draft   | DECIDE  | Inform  | -
 ## Common Pitfalls to Avoid
 
 **Strategy Pitfalls:**
+
 - R&D disconnected from business strategy
 - Over-investment in incremental innovation
 - Under-investment in long-term research
 - Copying competitors instead of differentiating
 
 **Portfolio Pitfalls:**
+
 - Too many projects (under-resourced)
 - Lack of kill discipline (zombie projects)
 - Inadequate risk diversification
 - Short-term focus only
 
 **Process Pitfalls:**
+
 - Bureaucratic governance (slows progress)
 - Insufficient rigor (poor decision-making)
 - Stage-gate misapplied to research
 - Metrics that drive wrong behaviors
 
 **Organizational Pitfalls:**
+
 - R&D isolated from business units
 - Lack of career paths for researchers
 - Inadequate investment in capabilities
 - Poor knowledge management
 
 **Partnership Pitfalls:**
+
 - Unclear IP ownership
 - Misaligned objectives
 - Insufficient governance
@@ -1183,6 +1327,7 @@ Publication & IP strategy              | Draft   | DECIDE  | Inform  | -
 ## Templates & Artifacts
 
 The skill should help users create:
+
 - R&D strategy documents
 - Technology roadmaps (multi-layer)
 - Portfolio prioritization scorecards
@@ -1197,24 +1342,28 @@ The skill should help users create:
 ## Success Indicators
 
 **Portfolio Performance:**
+
 - Balanced portfolio (research mix, risk, timeline)
 - High-quality pipeline across all stages
 - Healthy kill rate (learning fast)
 - ROI targets met or exceeded
 
 **Commercial Impact:**
+
 - Revenue from new products growing
 - Gross margin improvement
 - Market share gains from innovation
 - Technology leadership recognized externally
 
 **Organizational Excellence:**
+
 - Top talent attracted and retained
 - Research capabilities strengthened
 - Partnership ecosystem thriving
 - Culture of innovation and excellence
 
 **Operational Efficiency:**
+
 - Time to market decreasing
 - R&D productivity improving
 - Resource utilization optimized
@@ -1223,23 +1372,27 @@ The skill should help users create:
 ## References & Resources
 
 **Books:**
+
 - "The Lean Startup" by Eric Ries
 - "Crossing the Chasm" by Geoffrey Moore
 - "The Innovator's Dilemma" by Clayton Christensen
 - "Research and Development Management" edited by Ettlie & Elsenbach
 
 **Frameworks:**
+
 - Technology Readiness Levels (TRL) - NASA
 - Stage-Gate for R&D - Robert G. Cooper
 - Technology Roadmapping - Phaal, Farrukh, Probert
 
 **Organizations:**
+
 - IRI (Industrial Research Institute)
 - RACS (Research, Analysis, and Competency Standards)
 - LES (Licensing Executives Society)
 - AUTM (Association of University Technology Managers)
 
 **Regulatory Resources:**
+
 - FDA guidance documents (drugs, biologics, devices)
 - EMA guidelines (Europe)
 - ICH guidelines (harmonized pharma)
@@ -1253,9 +1406,11 @@ The skill should help users create:
 **Review Frequency:** Quarterly
 
 **Change Log:**
+
 - 1.0 (Dec 2025): Initial Fortune 50 enterprise skill creation
 
 Sources:
+
 - [6 Technology Management Best Practices 2025: Better Planning & Results](https://www.itonics-innovation.com/guides/technology-management)
 - [R&D Portfolio Management: How to Prioritize, Fund & Scale R&D Projects](https://www.itonics-innovation.com/blog/rd-portfolio-management)
 - [In the R&D Pipeline: 8 Best Practices to Optimize Project Management](https://www.itonics-innovation.com/blog/rd-pipeline-management)

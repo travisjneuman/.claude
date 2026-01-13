@@ -48,13 +48,13 @@ golangci-lint run                        # Comprehensive linting
 
 ### Naming Conventions
 
-| Type | Convention | Example |
-|------|------------|---------|
-| Packages | lowercase, single word | `http`, `user`, `config` |
-| Exported | PascalCase | `UserService`, `GetUser()` |
-| Unexported | camelCase | `userService`, `getUser()` |
-| Constants | PascalCase or ALL_CAPS | `MaxRetries`, `MAX_RETRIES` |
-| Interfaces | -er suffix | `Reader`, `Writer`, `Handler` |
+| Type       | Convention             | Example                       |
+| ---------- | ---------------------- | ----------------------------- |
+| Packages   | lowercase, single word | `http`, `user`, `config`      |
+| Exported   | PascalCase             | `UserService`, `GetUser()`    |
+| Unexported | camelCase              | `userService`, `getUser()`    |
+| Constants  | PascalCase or ALL_CAPS | `MaxRetries`, `MAX_RETRIES`   |
+| Interfaces | -er suffix             | `Reader`, `Writer`, `Handler` |
 
 ### Function Guidelines
 
@@ -311,14 +311,15 @@ wg.Wait()
 
 ## Related Skills
 
-| Skill | When to Use |
-|-------|-------------|
-| `test-specialist` | Testing guidance |
-| `security` | Security patterns |
-| `microservices-architect` | Service design |
-| `api-designer` | API design |
+| Skill                     | When to Use       |
+| ------------------------- | ----------------- |
+| `test-specialist`         | Testing guidance  |
+| `security`                | Security patterns |
+| `microservices-architect` | Service design    |
+| `api-designer`            | API design        |
 
 ### Invoke with:
+
 ```
 Skill(test-specialist)
 Skill(api-designer)
@@ -355,4 +356,4 @@ go build -gcflags="-m" .
 
 ---
 
-*Go: simple, explicit, and concurrent.*
+_Go: simple, explicit, and concurrent._

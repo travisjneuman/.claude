@@ -38,11 +38,12 @@ No preprocessors, no Tailwind, no build tools. Just CSS.
 ```css
 /* System fonts = zero load time */
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 code {
-  font-family: 'SF Mono', Monaco, 'Courier New', monospace;
+  font-family: "SF Mono", Monaco, "Courier New", monospace;
 }
 ```
 
@@ -65,8 +66,13 @@ body {
 
 ```css
 @keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
 }
 
 .pulse {
@@ -79,8 +85,9 @@ body {
 ```css
 /* Hover effect - GPU accelerated */
 .link {
-  transition: transform var(--transition-base) ease,
-              color var(--transition-base) ease;
+  transition:
+    transform var(--transition-base) ease,
+    color var(--transition-base) ease;
 }
 
 .link:hover {
@@ -98,10 +105,19 @@ body {
   transition: all 0.3s ease;
 }
 
-.menu.visible a { opacity: 1; transform: translateY(0); }
-.menu.visible a:nth-child(1) { transition-delay: 0.1s; }
-.menu.visible a:nth-child(2) { transition-delay: 0.2s; }
-.menu.visible a:nth-child(3) { transition-delay: 0.3s; }
+.menu.visible a {
+  opacity: 1;
+  transform: translateY(0);
+}
+.menu.visible a:nth-child(1) {
+  transition-delay: 0.1s;
+}
+.menu.visible a:nth-child(2) {
+  transition-delay: 0.2s;
+}
+.menu.visible a:nth-child(3) {
+  transition-delay: 0.3s;
+}
 ```
 
 ## CSS-Only Interactive Patterns
@@ -147,9 +163,7 @@ button:focus-visible {
 ### Accessible Button
 
 ```html
-<button class="btn" type="button">
-  Click Me
-</button>
+<button class="btn" type="button">Click Me</button>
 ```
 
 ```css
@@ -192,18 +206,18 @@ nav a:hover {
 
 ## Performance Targets
 
-| File | Max Size |
-|------|----------|
-| HTML | < 5KB |
-| CSS | < 10KB |
-| JS | < 5KB |
-| Total | < 50KB |
+| File  | Max Size |
+| ----- | -------- |
+| HTML  | < 5KB    |
+| CSS   | < 10KB   |
+| JS    | < 5KB    |
+| Total | < 50KB   |
 
-| Lighthouse | Target |
-|------------|--------|
-| Performance | 95+ |
-| Accessibility | 90+ |
-| Best Practices | 100 |
+| Lighthouse     | Target |
+| -------------- | ------ |
+| Performance    | 95+    |
+| Accessibility  | 90+    |
+| Best Practices | 100    |
 
 ## See Also
 

@@ -10,6 +10,7 @@ Systematic testing methodologies and debugging techniques for JS/TS applications
 ## When to Use
 
 **Use for:**
+
 - Writing unit, integration, or E2E tests
 - Fixing bugs and debugging
 - Improving test coverage
@@ -17,24 +18,26 @@ Systematic testing methodologies and debugging techniques for JS/TS applications
 - Security and performance testing
 
 **Don't use when:**
+
 - Code review → use `generic-code-reviewer`
 - Technical debt → use `tech-debt-analyzer`
 - Feature development → use `generic-feature-developer`
 
 ## Testing Stack by Project
 
-| Project Type | Unit Tests | Component | E2E |
-|-------------|------------|-----------|-----|
+| Project Type  | Unit Tests  | Component       | E2E        |
+| ------------- | ----------- | --------------- | ---------- |
 | React/Next.js | Vitest/Jest | Testing Library | Playwright |
-| Node.js | Vitest/Jest | Supertest | Playwright |
-| Static | Jest | - | Playwright |
+| Node.js       | Vitest/Jest | Supertest       | Playwright |
+| Static        | Jest        | -               | Playwright |
 
 ## Test Patterns
 
 ### Unit Tests (AAA Pattern)
+
 ```typescript
-describe('calculateTotal', () => {
-  test('sums amounts correctly', () => {
+describe("calculateTotal", () => {
+  test("sums amounts correctly", () => {
     // Arrange
     const items = [{ amount: 100 }, { amount: 50 }];
     // Act
@@ -43,13 +46,14 @@ describe('calculateTotal', () => {
     expect(total).toBe(150);
   });
 
-  test('handles empty list', () => {
+  test("handles empty list", () => {
     expect(calculateTotal([])).toBe(0);
   });
 });
 ```
 
 ### Component Tests (User Behavior)
+
 ```typescript
 // ✅ Test user behavior, not implementation
 it('creates item when user clicks Add', async () => {
@@ -65,11 +69,12 @@ it('creates item when user clicks Add', async () => {
 ```
 
 ### E2E Tests (Playwright)
-```typescript
-import { test, expect } from '@playwright/test';
 
-test('user can complete checkout', async ({ page }) => {
-  await page.goto('/products');
+```typescript
+import { test, expect } from "@playwright/test";
+
+test("user can complete checkout", async ({ page }) => {
+  await page.goto("/products");
 
   // Add to cart
   await page.click('button:has-text("Add to Cart")');
@@ -77,20 +82,21 @@ test('user can complete checkout', async ({ page }) => {
 
   // Checkout
   await page.click('button:has-text("Checkout")');
-  await page.fill('[name="email"]', 'test@example.com');
+  await page.fill('[name="email"]', "test@example.com");
   await page.click('button:has-text("Place Order")');
 
   // Verify
-  await expect(page.locator('h1')).toContainText('Order Confirmed');
+  await expect(page.locator("h1")).toContainText("Order Confirmed");
 });
 ```
 
 ### Integration Tests
+
 ```typescript
-test('POST /items creates item', async () => {
+test("POST /items creates item", async () => {
   const response = await request(app)
-    .post('/api/items')
-    .send({ name: 'Test' })
+    .post("/api/items")
+    .send({ name: "Test" })
     .expect(201);
 
   expect(response.body).toMatchObject({ id: expect.any(Number) });
@@ -108,6 +114,7 @@ test('POST /items creates item', async () => {
 ## Debugging Checklist
 
 When debugging an issue:
+
 - [ ] Can reproduce consistently
 - [ ] Minimal reproduction created
 - [ ] Console/network logs checked
@@ -118,8 +125,9 @@ When debugging an issue:
 ## Common Bug Patterns
 
 ### Race Conditions
+
 ```typescript
-test('handles concurrent updates', async () => {
+test("handles concurrent updates", async () => {
   const promises = Array.from({ length: 100 }, () => increment());
   await Promise.all(promises);
   expect(getCount()).toBe(100);
@@ -127,44 +135,45 @@ test('handles concurrent updates', async () => {
 ```
 
 ### Null Safety
+
 ```typescript
-test.each([null, undefined, '', 0])
-  ('handles invalid input: %p', (input) => {
-    expect(() => process(input)).toThrow('Invalid');
-  });
+test.each([null, undefined, "", 0])("handles invalid input: %p", (input) => {
+  expect(() => process(input)).toThrow("Invalid");
+});
 ```
 
 ### Boundary Values
+
 ```typescript
-test('handles edge cases', () => {
-  expect(paginate([], 1, 10)).toEqual([]);           // empty
-  expect(paginate([item], 1, 10)).toEqual([item]);   // single
-  expect(paginate(items25, 3, 10)).toHaveLength(5);  // partial last page
+test("handles edge cases", () => {
+  expect(paginate([], 1, 10)).toEqual([]); // empty
+  expect(paginate([item], 1, 10)).toEqual([item]); // single
+  expect(paginate(items25, 3, 10)).toHaveLength(5); // partial last page
 });
 ```
 
 ## Security Tests
 
 ```typescript
-test('prevents SQL injection', async () => {
+test("prevents SQL injection", async () => {
   const malicious = "'; DROP TABLE users; --";
   await expect(search(malicious)).resolves.not.toThrow();
 });
 
-test('sanitizes XSS', () => {
+test("sanitizes XSS", () => {
   const xss = '<script>alert("xss")</script>';
-  expect(sanitize(xss)).not.toContain('<script>');
+  expect(sanitize(xss)).not.toContain("<script>");
 });
 
-test('requires auth', async () => {
-  await request(app).post('/api/items').expect(401);
+test("requires auth", async () => {
+  await request(app).post("/api/items").expect(401);
 });
 ```
 
 ## Performance Tests
 
 ```typescript
-test('handles large datasets efficiently', () => {
+test("handles large datasets efficiently", () => {
   const largeList = Array.from({ length: 10000 }, (_, i) => ({ value: i }));
   const start = performance.now();
   process(largeList);
@@ -174,12 +183,12 @@ test('handles large datasets efficiently', () => {
 
 ## Coverage Targets
 
-| Code Type | Target |
-|-----------|--------|
-| Critical paths | 90%+ |
-| Business logic | 85%+ |
-| UI components | 75%+ |
-| Utilities | 70%+ |
+| Code Type      | Target |
+| -------------- | ------ |
+| Critical paths | 90%+   |
+| Business logic | 85%+   |
+| UI components  | 75%+   |
+| Utilities      | 70%+   |
 
 ## Test Quality Principles
 
@@ -192,12 +201,12 @@ test('handles large datasets efficiently', () => {
 
 ## Workflow Decision Tree
 
-| Situation | Action |
-|-----------|--------|
-| Adding feature | Write test first (TDD) |
-| Fixing bug | Write failing test, then fix |
+| Situation          | Action                               |
+| ------------------ | ------------------------------------ |
+| Adding feature     | Write test first (TDD)               |
+| Fixing bug         | Write failing test, then fix         |
 | Improving coverage | Find gaps, prioritize critical paths |
-| Code review | Check edge cases, error handling |
+| Code review        | Check edge cases, error handling     |
 
 ## See Also
 

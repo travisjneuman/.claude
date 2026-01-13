@@ -7,39 +7,47 @@ This reference provides comprehensive best practices and style guidelines for cr
 ### Voice and Tone
 
 **Use active voice:**
+
 - ✅ "The function returns a user object"
 - ❌ "A user object is returned by the function"
 
 **Be direct and concise:**
+
 - ✅ "Install dependencies with `npm install`"
 - ❌ "You can install the dependencies by running the npm install command"
 
 **Use present tense:**
+
 - ✅ "The API returns an error when..."
 - ❌ "The API will return an error when..."
 
 **Avoid unnecessary words:**
+
 - ✅ "To start the server, run..."
 - ❌ "In order to start the server, you will need to run..."
 
 ### Technical Writing Conventions
 
 **Code formatting:**
+
 - Use backticks for inline code: `variable`, `function()`, `npm install`
 - Use code blocks for multi-line code with language specification
 - Include command prompts (`$`, `>`) only when necessary for clarity
 
 **Capitalization:**
+
 - Use sentence case for headings: "Getting started" not "Getting Started"
 - Capitalize proper nouns: "Docker", "PostgreSQL", "JavaScript"
 - Lowercase for commands and file names: `npm`, `package.json`, `index.js`
 
 **Punctuation:**
+
 - Use periods for complete sentences
 - No periods for list items that aren't complete sentences
 - Use serial comma: "red, white, and blue"
 
 **Lists:**
+
 - Use numbered lists for sequential steps
 - Use bullet lists for non-sequential items
 - Indent sub-items consistently
@@ -76,12 +84,15 @@ Organize by what users want to accomplish:
 ## Common Tasks
 
 ### Adding a new feature
+
 [Step-by-step instructions]
 
 ### Debugging issues
+
 [Troubleshooting guide]
 
 ### Deploying to production
+
 [Deployment instructions]
 ```
 
@@ -100,24 +111,26 @@ Every project should have a path that gets users to success in under 5 minutes:
 ### Code Examples
 
 **Make examples realistic:**
+
 - ✅ Use real-world variable names and scenarios
 - ❌ Don't use `foo`, `bar`, `baz` unless explaining general concepts
 
 ```javascript
 // ✅ GOOD: Realistic example
-const user = await fetchUser('usr_123');
-if (user.role === 'admin') {
+const user = await fetchUser("usr_123");
+if (user.role === "admin") {
   showAdminPanel();
 }
 
 // ❌ BAD: Unclear example
-const foo = await bar('baz');
-if (foo.x === 'y') {
+const foo = await bar("baz");
+if (foo.x === "y") {
   doThing();
 }
 ```
 
 **Include context:**
+
 ```javascript
 // ✅ GOOD: Shows where this code lives
 // src/services/auth.js
@@ -133,6 +146,7 @@ async function login(email, password) {
 ```
 
 **Show complete examples:**
+
 ```javascript
 // ✅ GOOD: Complete, runnable example
 import { createUser } from './services/user';
@@ -156,15 +170,18 @@ const user = await createUser({...});
 ### Error Documentation
 
 **Document error messages:**
+
 ```markdown
 ### Common Errors
 
 **Error: `ECONNREFUSED`**
+
 - **Cause:** Database is not running
 - **Solution:** Start the database with `docker-compose up -d postgres`
 - **Prevention:** Run `docker-compose up -d` before starting the app
 
 **Error: `Port 3000 is already in use`**
+
 - **Cause:** Another process is using port 3000
 - **Solution:** Kill the process with `lsof -ti:3000 | xargs kill -9`
 - **Prevention:** Configure a different port in `.env` file
@@ -173,6 +190,7 @@ const user = await createUser({...});
 ### Prerequisites and Dependencies
 
 **Be explicit about requirements:**
+
 ```markdown
 ## Prerequisites
 
@@ -197,15 +215,16 @@ Before starting, ensure you have:
 
 **Document all configuration options:**
 
-| Variable | Type | Required | Default | Description |
-|----------|------|----------|---------|-------------|
-| `PORT` | number | No | `3000` | Port for the server to listen on |
-| `DATABASE_URL` | string | Yes | - | PostgreSQL connection string |
-| `NODE_ENV` | enum | No | `development` | Environment mode (`development`, `production`, `test`) |
-| `LOG_LEVEL` | enum | No | `info` | Logging verbosity (`error`, `warn`, `info`, `debug`) |
-| `API_KEY` | string | Yes | - | Third-party API authentication key |
+| Variable       | Type   | Required | Default       | Description                                            |
+| -------------- | ------ | -------- | ------------- | ------------------------------------------------------ |
+| `PORT`         | number | No       | `3000`        | Port for the server to listen on                       |
+| `DATABASE_URL` | string | Yes      | -             | PostgreSQL connection string                           |
+| `NODE_ENV`     | enum   | No       | `development` | Environment mode (`development`, `production`, `test`) |
+| `LOG_LEVEL`    | enum   | No       | `info`        | Logging verbosity (`error`, `warn`, `info`, `debug`)   |
+| `API_KEY`      | string | Yes      | -             | Third-party API authentication key                     |
 
 **Include examples:**
+
 ```bash
 # Development
 PORT=3000
@@ -271,12 +290,12 @@ User                     Frontend                 Backend                 Databa
 
 Use tables to compare options:
 
-| Feature | Option A | Option B | Option C |
-|---------|----------|----------|----------|
-| Performance | Fast | Medium | Slow |
-| Ease of use | Complex | Simple | Medium |
-| Flexibility | High | Low | Medium |
-| Best for | Large projects | Prototypes | Medium projects |
+| Feature     | Option A       | Option B   | Option C        |
+| ----------- | -------------- | ---------- | --------------- |
+| Performance | Fast           | Medium     | Slow            |
+| Ease of use | Complex        | Simple     | Medium          |
+| Flexibility | High           | Low        | Medium          |
+| Best for    | Large projects | Prototypes | Medium projects |
 
 ## Accessibility
 
@@ -299,6 +318,7 @@ Provide information in multiple formats:
 ### Keep Documentation Current
 
 **Add version information:**
+
 ```markdown
 > **Note:** This documentation is for version 2.x. For version 1.x documentation, see [v1 docs](./v1/README.md).
 
@@ -306,7 +326,8 @@ Last updated: 2024-01-15
 ```
 
 **Mark deprecated features:**
-```markdown
+
+````markdown
 ## ⚠️ Deprecated: `legacyAuth()`
 
 **Deprecated in:** v2.0.0
@@ -320,7 +341,9 @@ await legacyAuth(token);
 // ✅ New way
 await modernAuth(token);
 ```
-```
+````
+
+````
 
 **Document breaking changes:**
 ```markdown
@@ -331,16 +354,18 @@ await modernAuth(token);
 **Before (v1.x):**
 ```javascript
 auth.login(username, password);
-```
+````
 
 **After (v2.x):**
+
 ```javascript
 auth.login({ email, password });
 ```
 
 **Migration guide:**
 Replace `username` with `email` and wrap parameters in an object.
-```
+
+````
 
 ## Documentation Types
 
@@ -423,8 +448,9 @@ Replace `username` with `email` and wrap parameters in an object.
 npm install
 npm test
 # Expected output: All tests passed (10 tests)
-```
-```
+````
+
+````
 
 ## Documentation Review Checklist
 
@@ -501,11 +527,12 @@ Examples:
 - January 15, 2024 → `2024-01-15`
 - March 3, 2024 → `2024-03-03`
 - December 25, 2024 → `2024-12-25`
-```
+````
 
 ## Summary
 
 **Great documentation is:**
+
 1. **Accurate** - Information is correct and up-to-date
 2. **Complete** - No critical gaps in coverage
 3. **Clear** - Easy to understand for target audience
@@ -516,6 +543,7 @@ Examples:
 8. **Actionable** - Users can accomplish their goals
 
 **Documentation serves users when it:**
+
 - Gets them started quickly (< 5 minutes to success)
 - Answers their questions (comprehensive coverage)
 - Helps them when stuck (troubleshooting guides)

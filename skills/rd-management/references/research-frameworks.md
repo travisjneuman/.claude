@@ -104,13 +104,13 @@ LAUNCH:
 
 ## Development Methodologies
 
-| Method | Best For | Key Features |
-|--------|----------|--------------|
-| **Waterfall** | Hardware, regulated | Sequential, documented |
-| **Agile** | Software, uncertain | Iterative, flexible |
-| **Stage-Gate** | New products | Phase gates, portfolio |
-| **Lean** | Startup, validation | MVP, pivots |
-| **Hybrid** | Complex products | Combined approaches |
+| Method         | Best For            | Key Features           |
+| -------------- | ------------------- | ---------------------- |
+| **Waterfall**  | Hardware, regulated | Sequential, documented |
+| **Agile**      | Software, uncertain | Iterative, flexible    |
+| **Stage-Gate** | New products        | Phase gates, portfolio |
+| **Lean**       | Startup, validation | MVP, pivots            |
+| **Hybrid**     | Complex products    | Combined approaches    |
 
 ## Engineering Standards
 

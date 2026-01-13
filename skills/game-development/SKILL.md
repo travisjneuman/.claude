@@ -9,11 +9,11 @@ Comprehensive guide for building games across major engines and platforms.
 
 ## Engine Comparison
 
-| Engine | Language | Best For | Platforms |
-|--------|----------|----------|-----------|
-| **Unity** | C# | Mobile, indie, VR/AR | All |
-| **Unreal** | C++, Blueprints | AAA, realistic graphics | All |
-| **Godot** | GDScript, C# | 2D, indie, open source | All |
+| Engine     | Language        | Best For                | Platforms |
+| ---------- | --------------- | ----------------------- | --------- |
+| **Unity**  | C#              | Mobile, indie, VR/AR    | All       |
+| **Unreal** | C++, Blueprints | AAA, realistic graphics | All       |
+| **Godot**  | GDScript, C#    | 2D, indie, open source  | All       |
 
 ---
 
@@ -660,6 +660,7 @@ public class QuadTree<T> where T : class
 ## Checklist
 
 ### Pre-Production
+
 - [ ] Game Design Document (GDD)
 - [ ] Technical Design Document
 - [ ] Art style guide
@@ -667,6 +668,7 @@ public class QuadTree<T> where T : class
 - [ ] Performance budgets set
 
 ### Development
+
 - [ ] Version control setup
 - [ ] CI/CD for builds
 - [ ] Automated testing
@@ -674,6 +676,7 @@ public class QuadTree<T> where T : class
 - [ ] Memory leak checks
 
 ### Release
+
 - [ ] Platform certification requirements
 - [ ] Localization complete
 - [ ] Accessibility options

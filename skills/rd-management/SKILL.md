@@ -37,13 +37,13 @@ Disruption risk: More breakthrough investment
 
 ### R&D Investment Analysis
 
-| Metric | Formula | Benchmark |
-|--------|---------|-----------|
-| **R&D Intensity** | R&D Spend / Revenue | Industry specific |
-| **R&D Efficiency** | New Product Revenue / R&D Spend | >2x |
-| **Patent Yield** | Patents / R&D Spend | Varies |
-| **Time to Market** | Concept to launch | Decreasing |
-| **Project Success** | Successful / Total projects | 20-40% |
+| Metric              | Formula                         | Benchmark         |
+| ------------------- | ------------------------------- | ----------------- |
+| **R&D Intensity**   | R&D Spend / Revenue             | Industry specific |
+| **R&D Efficiency**  | New Product Revenue / R&D Spend | >2x               |
+| **Patent Yield**    | Patents / R&D Spend             | Varies            |
+| **Time to Market**  | Concept to launch               | Decreasing        |
+| **Project Success** | Successful / Total projects     | 20-40%            |
 
 ### R&D Operating Models
 
@@ -107,14 +107,14 @@ RESOURCE LAYER:
 
 ### Roadmapping Process
 
-| Phase | Activities | Output |
-|-------|------------|--------|
-| **Planning** | Scope, team, timeline | Charter |
-| **Analysis** | Market, technology, gap | Insights |
-| **Synthesis** | Prioritization, sequencing | Draft roadmap |
-| **Validation** | Stakeholder review | Refined roadmap |
-| **Communication** | Publication, training | Deployed roadmap |
-| **Maintenance** | Updates, governance | Living document |
+| Phase             | Activities                 | Output           |
+| ----------------- | -------------------------- | ---------------- |
+| **Planning**      | Scope, team, timeline      | Charter          |
+| **Analysis**      | Market, technology, gap    | Insights         |
+| **Synthesis**     | Prioritization, sequencing | Draft roadmap    |
+| **Validation**    | Stakeholder review         | Refined roadmap  |
+| **Communication** | Publication, training      | Deployed roadmap |
+| **Maintenance**   | Updates, governance        | Living document  |
 
 ### Technology Maturity
 
@@ -141,12 +141,12 @@ TRL 7-9: Engineering/Launch funding
 
 ### Research Project Types
 
-| Type | Goal | Duration | Risk |
-|------|------|----------|------|
-| **Basic** | New knowledge | 3-10+ years | Very High |
-| **Applied** | Specific applications | 2-5 years | High |
-| **Development** | Productization | 1-3 years | Medium |
-| **Engineering** | Commercialization | 6-18 months | Lower |
+| Type            | Goal                  | Duration    | Risk      |
+| --------------- | --------------------- | ----------- | --------- |
+| **Basic**       | New knowledge         | 3-10+ years | Very High |
+| **Applied**     | Specific applications | 2-5 years   | High      |
+| **Development** | Productization        | 1-3 years   | Medium    |
+| **Engineering** | Commercialization     | 6-18 months | Lower     |
 
 For detailed research methodology, lab management, product development frameworks, and engineering standards, see [Research Frameworks Reference](references/research-frameworks.md).
 
@@ -154,13 +154,13 @@ For detailed research methodology, lab management, product development framework
 
 ### Partnership Models
 
-| Model | Investment | IP Rights | Engagement |
-|-------|------------|-----------|------------|
-| **Sponsored Research** | Funding | Negotiated | Project-based |
-| **Consortium** | Shared | Pre-competitive | Multi-party |
-| **Licensing** | Royalties | Licensed | Transaction |
-| **Joint Venture** | Equity | Shared | Deep |
-| **Chair/Fellowship** | Endowment | None | Talent access |
+| Model                  | Investment | IP Rights       | Engagement    |
+| ---------------------- | ---------- | --------------- | ------------- |
+| **Sponsored Research** | Funding    | Negotiated      | Project-based |
+| **Consortium**         | Shared     | Pre-competitive | Multi-party   |
+| **Licensing**          | Royalties  | Licensed        | Transaction   |
+| **Joint Venture**      | Equity     | Shared          | Deep          |
+| **Chair/Fellowship**   | Endowment  | None            | Talent access |
 
 ### University Collaboration
 
@@ -198,14 +198,14 @@ For detailed regulatory pathways and clinical development phases, see [Regulator
 
 ### R&D KPIs
 
-| Category | Metric | Benchmark |
-|----------|--------|-----------|
-| **Input** | R&D spend | % of revenue |
-| **Process** | Project milestones | On-time % |
-| **Output** | Products launched | Per year |
-| **Efficiency** | Cost per project | Improving |
-| **Quality** | First-time success | >30% |
-| **Speed** | Cycle time | Decreasing |
+| Category       | Metric             | Benchmark    |
+| -------------- | ------------------ | ------------ |
+| **Input**      | R&D spend          | % of revenue |
+| **Process**    | Project milestones | On-time %    |
+| **Output**     | Products launched  | Per year     |
+| **Efficiency** | Cost per project   | Improving    |
+| **Quality**    | First-time success | >30%         |
+| **Speed**      | Cycle time         | Decreasing   |
 
 ### R&D Governance
 

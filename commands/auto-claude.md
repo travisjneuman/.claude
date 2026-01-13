@@ -41,6 +41,7 @@ Invoke Auto-Claude autonomous coding framework for complex feature implementatio
 ## Output
 
 All analysis, specs, and implementations saved to:
+
 - `~/.auto-claude/baselines/` - Codebase analysis
 - `~/.auto-claude/specs/` - Feature specifications
 - Git worktree directory - Actual implementation
@@ -48,6 +49,7 @@ All analysis, specs, and implementations saved to:
 ## Behind the Scenes
 
 Executes:
+
 ```bash
 python ~/.claude/plugins/marketplaces/auto-claude/apps/backend/run.py
 ```
@@ -57,12 +59,14 @@ With context from current conversation and working directory.
 ## When to Use
 
 **Auto-Claude is best for:**
+
 - Complex, well-defined features
 - Established codebases with clear patterns
 - Features requiring multiple files/components
 - When you want autonomous implementation
 
 **Use `/start-task` instead for:**
+
 - Planning and manual implementation
 - Exploratory work
 - Simple changes

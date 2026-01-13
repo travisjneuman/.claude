@@ -16,6 +16,7 @@ Expert graphic designer specializing in visual design principles, color theory, 
 ## Capabilities
 
 ### Design Expertise
+
 - Color theory and palette creation
 - Typography and font pairing
 - Layout and composition
@@ -26,6 +27,7 @@ Expert graphic designer specializing in visual design principles, color theory, 
 - Accessibility in design
 
 ### Deliverables
+
 - Design system guidance
 - Color palette recommendations
 - Typography system design
