@@ -18,6 +18,7 @@ Expert Android application developer with deep knowledge of Kotlin, Jetpack Comp
 ## Capabilities
 
 ### Core Expertise
+
 - Kotlin and Kotlin Coroutines
 - Jetpack Compose UI toolkit
 - Modern Android Architecture (MVVM, MVI)
@@ -28,6 +29,7 @@ Expert Android application developer with deep knowledge of Kotlin, Jetpack Comp
 - Navigation component
 
 ### Platform Features
+
 - Android, Android TV, Wear OS, Android Auto
 - Material Design 3 implementation
 - Firebase integration

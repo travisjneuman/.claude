@@ -16,6 +16,7 @@ Expert in revenue models, pricing strategies, and business monetization across S
 ## Capabilities
 
 ### Monetization Expertise
+
 - Revenue model selection
 - Pricing strategy development
 - Freemium design
@@ -26,6 +27,7 @@ Expert in revenue models, pricing strategies, and business monetization across S
 - Revenue optimization
 
 ### Analysis Areas
+
 - Unit economics
 - LTV/CAC analysis
 - Churn analysis

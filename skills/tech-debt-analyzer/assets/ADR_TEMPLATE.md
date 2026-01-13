@@ -15,9 +15,11 @@
 [Describe the context and problem statement, e.g., in free form using two to three sentences. You may want to articulate the problem in form of a question.]
 
 **Key Constraints:**
+
 - [List any constraints that limit the solution space]
 
 **Key Requirements:**
+
 - [List must-have requirements]
 
 ---
@@ -41,10 +43,12 @@
 [Brief description of this option]
 
 **Pros:**
+
 - [good, because...]
 - [good, because...]
 
 **Cons:**
+
 - [bad, because...]
 - [bad, because...]
 
@@ -58,10 +62,12 @@
 [Brief description of this option]
 
 **Pros:**
+
 - [good, because...]
 - [good, because...]
 
 **Cons:**
+
 - [bad, because...]
 - [bad, because...]
 
@@ -105,6 +111,7 @@
 ## Implementation
 
 **Action Items:**
+
 - [ ] [Implementation task 1]
 - [ ] [Implementation task 2]
 - [ ] [etc.]

@@ -155,7 +155,9 @@ query GetUser($id: ID!) {
 query Dashboard {
   me {
     name
-    notifications { count }
+    notifications {
+      count
+    }
   }
   recentPosts(limit: 5) {
     title
@@ -200,7 +202,10 @@ query {
   users(first: 10, after: "cursor123") {
     edges {
       cursor
-      node { name email }
+      node {
+        name
+        email
+      }
     }
     pageInfo {
       hasNextPage
@@ -414,7 +419,7 @@ const server = new ApolloServer({
 ### DataLoader (N+1 Solution)
 
 ```typescript
-import DataLoader from 'dataloader';
+import DataLoader from "dataloader";
 
 // Create loader
 const userLoader = new DataLoader<string, User>(async (ids) => {
@@ -440,7 +445,7 @@ const resolvers = {
 ### Query Complexity
 
 ```typescript
-import { createComplexityLimitRule } from 'graphql-validation-complexity';
+import { createComplexityLimitRule } from "graphql-validation-complexity";
 
 // Limit query complexity
 const complexityLimitRule = createComplexityLimitRule(1000, {
@@ -461,7 +466,7 @@ const typeDefs = gql`
 ### Query Depth Limiting
 
 ```typescript
-import depthLimit from 'graphql-depth-limit';
+import depthLimit from "graphql-depth-limit";
 
 const server = new ApolloServer({
   typeDefs,
@@ -477,7 +482,7 @@ const server = new ApolloServer({
 // Reduces bandwidth, enables whitelisting
 
 // Apollo Client setup
-import { createPersistedQueryLink } from '@apollo/client/link/persisted-queries';
+import { createPersistedQueryLink } from "@apollo/client/link/persisted-queries";
 
 const link = createPersistedQueryLink({ sha256 }).concat(httpLink);
 
@@ -500,7 +505,7 @@ const server = new ApolloServer({
 ```typescript
 // Add user to context
 const context = async ({ req }) => {
-  const token = req.headers.authorization?.replace('Bearer ', '');
+  const token = req.headers.authorization?.replace("Bearer ", "");
   const user = token ? await verifyToken(token) : null;
   return { user };
 };
@@ -510,7 +515,7 @@ const resolvers = {
   Query: {
     me: (_, __, context) => {
       if (!context.user) {
-        throw new AuthenticationError('Not authenticated');
+        throw new AuthenticationError("Not authenticated");
       }
       return context.user;
     },
@@ -541,11 +546,11 @@ class AuthDirective extends SchemaDirectiveVisitor {
       const context = args[2];
 
       if (!context.user) {
-        throw new AuthenticationError('Not authenticated');
+        throw new AuthenticationError("Not authenticated");
       }
 
       if (requiredRole && context.user.role !== requiredRole) {
-        throw new ForbiddenError('Not authorized');
+        throw new ForbiddenError("Not authorized");
       }
 
       return resolve.apply(this, args);
@@ -566,21 +571,21 @@ import {
   AuthenticationError,
   ForbiddenError,
   UserInputError,
-} from 'apollo-server';
+} from "apollo-server";
 
 // Validation errors
-throw new UserInputError('Invalid email format', {
-  field: 'email',
+throw new UserInputError("Invalid email format", {
+  field: "email",
 });
 
 // Auth errors
-throw new AuthenticationError('Must be logged in');
-throw new ForbiddenError('Not authorized to view this resource');
+throw new AuthenticationError("Must be logged in");
+throw new ForbiddenError("Not authorized to view this resource");
 
 // Custom errors
 class NotFoundError extends ApolloError {
   constructor(resource: string) {
-    super(`${resource} not found`, 'NOT_FOUND');
+    super(`${resource} not found`, "NOT_FOUND");
   }
 }
 ```
@@ -591,14 +596,14 @@ class NotFoundError extends ApolloError {
 const server = new ApolloServer({
   formatError: (error) => {
     // Log internal errors
-    if (error.extensions?.code === 'INTERNAL_SERVER_ERROR') {
+    if (error.extensions?.code === "INTERNAL_SERVER_ERROR") {
       console.error(error);
-      return new Error('Internal server error');
+      return new Error("Internal server error");
     }
 
     // Mask sensitive info
-    if (error.message.includes('password')) {
-      return new Error('An error occurred');
+    if (error.message.includes("password")) {
+      return new Error("An error occurred");
     }
 
     return error;
@@ -620,7 +625,7 @@ type Subscription {
 ```
 
 ```typescript
-import { PubSub } from 'graphql-subscriptions';
+import { PubSub } from "graphql-subscriptions";
 
 const pubsub = new PubSub();
 
@@ -650,20 +655,20 @@ const resolvers = {
 ### With Filtering
 
 ```typescript
-import { withFilter } from 'graphql-subscriptions';
+import { withFilter } from "graphql-subscriptions";
 
 const resolvers = {
   Subscription: {
     messageCreated: {
       subscribe: withFilter(
-        () => pubsub.asyncIterator('MESSAGE_CREATED'),
+        () => pubsub.asyncIterator("MESSAGE_CREATED"),
         (payload, variables, context) => {
           // Only send to users in the room
           return (
             payload.messageCreated.roomId === variables.roomId &&
             context.user.rooms.includes(variables.roomId)
           );
-        }
+        },
       ),
     },
   },
@@ -677,23 +682,19 @@ const resolvers = {
 ### Apollo Client Setup
 
 ```typescript
-import {
-  ApolloClient,
-  InMemoryCache,
-  createHttpLink,
-} from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
+import { ApolloClient, InMemoryCache, createHttpLink } from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
 
 const httpLink = createHttpLink({
-  uri: '/graphql',
+  uri: "/graphql",
 });
 
 const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : '',
+      authorization: token ? `Bearer ${token}` : "",
     },
   };
 });
@@ -761,6 +762,7 @@ function CreatePostForm() {
 ## Best Practices
 
 ### DO:
+
 - Design schema from client perspective
 - Use input types for mutations
 - Return payloads with errors from mutations
@@ -770,6 +772,7 @@ function CreatePostForm() {
 - Version schemas carefully
 
 ### DON'T:
+
 - Expose database schema directly
 - Create deeply nested types unnecessarily
 - Forget about authorization

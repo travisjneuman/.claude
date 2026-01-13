@@ -9,13 +9,13 @@ Comprehensive guide for building modern Svelte applications with runes and Svelt
 
 ## Stack Overview
 
-| Tool | Purpose | Version |
-|------|---------|---------|
-| Svelte 5 | Core framework | 5.0+ |
-| SvelteKit | Full-stack framework | 2.0+ |
-| TypeScript | Type safety | 5.0+ |
-| Vite | Build tool | 5.0+ |
-| Vitest | Testing | 1.0+ |
+| Tool       | Purpose              | Version |
+| ---------- | -------------------- | ------- |
+| Svelte 5   | Core framework       | 5.0+    |
+| SvelteKit  | Full-stack framework | 2.0+    |
+| TypeScript | Type safety          | 5.0+    |
+| Vite       | Build tool           | 5.0+    |
+| Vitest     | Testing              | 1.0+    |
 
 ---
 
@@ -25,13 +25,13 @@ Comprehensive guide for building modern Svelte applications with runes and Svelt
 
 Runes are compile-time macros prefixed with `$` that provide explicit, fine-grained reactivity.
 
-| Rune | Purpose | Replaces |
-|------|---------|----------|
-| `$state` | Reactive state | `let` declarations |
-| `$derived` | Computed values | `$:` reactive statements |
-| `$effect` | Side effects | `$:` side effect statements |
-| `$props` | Component props | `export let` |
-| `$bindable` | Two-way binding props | `export let` with bind: |
+| Rune        | Purpose               | Replaces                    |
+| ----------- | --------------------- | --------------------------- |
+| `$state`    | Reactive state        | `let` declarations          |
+| `$derived`  | Computed values       | `$:` reactive statements    |
+| `$effect`   | Side effects          | `$:` side effect statements |
+| `$props`    | Component props       | `export let`                |
+| `$bindable` | Two-way binding props | `export let` with bind:     |
 
 ### Basic Component Structure
 
@@ -83,43 +83,43 @@ Runes are compile-time macros prefixed with `$` that provide explicit, fine-grai
 
 ```typescript
 // Primitives
-let count = $state(0)
-let name = $state('')
+let count = $state(0);
+let name = $state("");
 
 // Objects (deeply reactive)
 let user = $state({
-  name: 'John',
-  email: 'john@example.com',
-  preferences: { theme: 'dark' }
-})
+  name: "John",
+  email: "john@example.com",
+  preferences: { theme: "dark" },
+});
 
 // Arrays
-let items = $state<Item[]>([])
+let items = $state<Item[]>([]);
 
 // Direct mutation works!
-user.name = 'Jane'                    // Reactive
-user.preferences.theme = 'light'      // Reactive (deep)
-items.push({ id: 1, name: 'New' })    // Reactive
+user.name = "Jane"; // Reactive
+user.preferences.theme = "light"; // Reactive (deep)
+items.push({ id: 1, name: "New" }); // Reactive
 
 // Frozen state (shallow reactivity)
-let frozenList = $state.frozen([1, 2, 3])
+let frozenList = $state.frozen([1, 2, 3]);
 ```
 
 ### Derived Values
 
 ```typescript
 // Simple derived
-let doubled = $derived(count * 2)
+let doubled = $derived(count * 2);
 
 // Complex derived (use $derived.by for multi-line)
 let stats = $derived.by(() => {
-  const total = items.reduce((sum, i) => sum + i.value, 0)
-  const average = items.length ? total / items.length : 0
-  return { total, average, count: items.length }
-})
+  const total = items.reduce((sum, i) => sum + i.value, 0);
+  const average = items.length ? total / items.length : 0;
+  return { total, average, count: items.length };
+});
 
 // Derived from multiple sources
-let summary = $derived(`${user.name} has ${items.length} items`)
+let summary = $derived(`${user.name} has ${items.length} items`);
 ```
 
 ### Effects
@@ -127,28 +127,28 @@ let summary = $derived(`${user.name} has ${items.length} items`)
 ```typescript
 // Basic effect (runs when dependencies change)
 $effect(() => {
-  console.log(`Count is now: ${count}`)
-})
+  console.log(`Count is now: ${count}`);
+});
 
 // Effect with cleanup
 $effect(() => {
   const interval = setInterval(() => {
-    count++
-  }, 1000)
+    count++;
+  }, 1000);
 
   // Cleanup function (returned)
-  return () => clearInterval(interval)
-})
+  return () => clearInterval(interval);
+});
 
 // Pre-effect (runs before DOM updates)
 $effect.pre(() => {
-  console.log('About to update DOM')
-})
+  console.log("About to update DOM");
+});
 
 // Root effect (doesn't track dependencies)
 $effect.root(() => {
   // Manual dependency management
-})
+});
 ```
 
 ---
@@ -292,18 +292,26 @@ $effect.root(() => {
 ```typescript
 // lib/stores/counter.svelte.ts
 export function createCounter(initial = 0) {
-  let count = $state(initial)
+  let count = $state(initial);
 
   return {
-    get count() { return count },
-    increment() { count++ },
-    decrement() { count-- },
-    reset() { count = initial }
-  }
+    get count() {
+      return count;
+    },
+    increment() {
+      count++;
+    },
+    decrement() {
+      count--;
+    },
+    reset() {
+      count = initial;
+    },
+  };
 }
 
 // Singleton instance
-export const counter = createCounter()
+export const counter = createCounter();
 ```
 
 ### Class-Based State
@@ -311,40 +319,40 @@ export const counter = createCounter()
 ```typescript
 // lib/stores/user.svelte.ts
 export class UserStore {
-  user = $state<User | null>(null)
-  loading = $state(false)
-  error = $state<string | null>(null)
+  user = $state<User | null>(null);
+  loading = $state(false);
+  error = $state<string | null>(null);
 
-  isLoggedIn = $derived(!!this.user)
+  isLoggedIn = $derived(!!this.user);
 
   async login(email: string, password: string) {
-    this.loading = true
-    this.error = null
+    this.loading = true;
+    this.error = null;
 
     try {
-      const response = await fetch('/api/auth/login', {
-        method: 'POST',
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
         body: JSON.stringify({ email, password }),
-        headers: { 'Content-Type': 'application/json' }
-      })
+        headers: { "Content-Type": "application/json" },
+      });
 
-      if (!response.ok) throw new Error('Login failed')
+      if (!response.ok) throw new Error("Login failed");
 
-      this.user = await response.json()
+      this.user = await response.json();
     } catch (e) {
-      this.error = e instanceof Error ? e.message : 'Unknown error'
-      throw e
+      this.error = e instanceof Error ? e.message : "Unknown error";
+      throw e;
     } finally {
-      this.loading = false
+      this.loading = false;
     }
   }
 
   logout() {
-    this.user = null
+    this.user = null;
   }
 }
 
-export const userStore = new UserStore()
+export const userStore = new UserStore();
 ```
 
 ### Using Shared State
@@ -435,33 +443,33 @@ export const load: PageServerLoad = async ({ fetch, params }) => {
 
 ```typescript
 // routes/login/+page.server.ts
-import type { Actions } from './$types'
-import { fail, redirect } from '@sveltejs/kit'
+import type { Actions } from "./$types";
+import { fail, redirect } from "@sveltejs/kit";
 
 export const actions: Actions = {
   default: async ({ request, cookies }) => {
-    const formData = await request.formData()
-    const email = formData.get('email') as string
-    const password = formData.get('password') as string
+    const formData = await request.formData();
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
 
     // Validation
     if (!email || !password) {
-      return fail(400, { email, missing: true })
+      return fail(400, { email, missing: true });
     }
 
     // Authentication
-    const user = await authenticate(email, password)
+    const user = await authenticate(email, password);
 
     if (!user) {
-      return fail(401, { email, incorrect: true })
+      return fail(401, { email, incorrect: true });
     }
 
     // Set session cookie
-    cookies.set('session', user.token, { path: '/' })
+    cookies.set("session", user.token, { path: "/" });
 
-    throw redirect(303, '/dashboard')
-  }
-}
+    throw redirect(303, "/dashboard");
+  },
+};
 ```
 
 ```svelte
@@ -493,68 +501,68 @@ export const actions: Actions = {
 
 ```typescript
 // routes/api/users/+server.ts
-import type { RequestHandler } from './$types'
-import { json, error } from '@sveltejs/kit'
+import type { RequestHandler } from "./$types";
+import { json, error } from "@sveltejs/kit";
 
 export const GET: RequestHandler = async ({ url }) => {
-  const limit = Number(url.searchParams.get('limit')) || 10
+  const limit = Number(url.searchParams.get("limit")) || 10;
 
-  const users = await prisma.user.findMany({ take: limit })
+  const users = await prisma.user.findMany({ take: limit });
 
-  return json(users)
-}
+  return json(users);
+};
 
 export const POST: RequestHandler = async ({ request }) => {
-  const body = await request.json()
+  const body = await request.json();
 
   if (!body.email || !body.name) {
-    throw error(400, 'Missing required fields')
+    throw error(400, "Missing required fields");
   }
 
-  const user = await prisma.user.create({ data: body })
+  const user = await prisma.user.create({ data: body });
 
-  return json(user, { status: 201 })
-}
+  return json(user, { status: 201 });
+};
 
 // routes/api/users/[id]/+server.ts
 export const GET: RequestHandler = async ({ params }) => {
   const user = await prisma.user.findUnique({
-    where: { id: params.id }
-  })
+    where: { id: params.id },
+  });
 
   if (!user) {
-    throw error(404, 'User not found')
+    throw error(404, "User not found");
   }
 
-  return json(user)
-}
+  return json(user);
+};
 ```
 
 ### Middleware (Hooks)
 
 ```typescript
 // src/hooks.server.ts
-import type { Handle } from '@sveltejs/kit'
+import type { Handle } from "@sveltejs/kit";
 
 export const handle: Handle = async ({ event, resolve }) => {
   // Get session from cookie
-  const session = event.cookies.get('session')
+  const session = event.cookies.get("session");
 
   if (session) {
-    const user = await validateSession(session)
-    event.locals.user = user
+    const user = await validateSession(session);
+    event.locals.user = user;
   }
 
   // Protected routes
-  if (event.url.pathname.startsWith('/dashboard') && !event.locals.user) {
-    return new Response('Redirect', {
+  if (event.url.pathname.startsWith("/dashboard") && !event.locals.user) {
+    return new Response("Redirect", {
       status: 303,
-      headers: { Location: '/login' }
-    })
+      headers: { Location: "/login" },
+    });
   }
 
-  return resolve(event)
-}
+  return resolve(event);
+};
 ```
 
 ---
@@ -634,85 +642,85 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 ```typescript
 // vitest.config.ts
-import { defineConfig } from 'vitest/config'
-import { svelte } from '@sveltejs/vite-plugin-svelte'
+import { defineConfig } from "vitest/config";
+import { svelte } from "@sveltejs/vite-plugin-svelte";
 
 export default defineConfig({
   plugins: [svelte({ hot: !process.env.VITEST })],
   test: {
     globals: true,
-    environment: 'jsdom',
-    include: ['src/**/*.{test,spec}.{js,ts}']
-  }
-})
+    environment: "jsdom",
+    include: ["src/**/*.{test,spec}.{js,ts}"],
+  },
+});
 ```
 
 ### Component Testing
 
 ```typescript
 // tests/Counter.test.ts
-import { describe, it, expect } from 'vitest'
-import { render, screen, fireEvent } from '@testing-library/svelte'
-import Counter from '$lib/components/Counter.svelte'
+import { describe, it, expect } from "vitest";
+import { render, screen, fireEvent } from "@testing-library/svelte";
+import Counter from "$lib/components/Counter.svelte";
 
-describe('Counter', () => {
-  it('renders initial count', () => {
-    render(Counter, { props: { initial: 5 } })
+describe("Counter", () => {
+  it("renders initial count", () => {
+    render(Counter, { props: { initial: 5 } });
 
-    expect(screen.getByText('Count: 5')).toBeInTheDocument()
-  })
+    expect(screen.getByText("Count: 5")).toBeInTheDocument();
+  });
 
-  it('increments on click', async () => {
-    render(Counter)
+  it("increments on click", async () => {
+    render(Counter);
 
-    const button = screen.getByRole('button', { name: /increment/i })
-    await fireEvent.click(button)
+    const button = screen.getByRole("button", { name: /increment/i });
+    await fireEvent.click(button);
 
-    expect(screen.getByText('Count: 1')).toBeInTheDocument()
-  })
-})
+    expect(screen.getByText("Count: 1")).toBeInTheDocument();
+  });
+});
 ```
 
 ### Testing Stores
 
 ```typescript
 // tests/stores/counter.test.ts
-import { describe, it, expect } from 'vitest'
-import { counter } from '$lib/stores/counter.svelte'
+import { describe, it, expect } from "vitest";
+import { counter } from "$lib/stores/counter.svelte";
 
-describe('counter store', () => {
-  it('increments count', () => {
-    counter.reset()
-    expect(counter.count).toBe(0)
+describe("counter store", () => {
+  it("increments count", () => {
+    counter.reset();
+    expect(counter.count).toBe(0);
 
-    counter.increment()
-    expect(counter.count).toBe(1)
+    counter.increment();
+    expect(counter.count).toBe(1);
 
-    counter.increment()
-    expect(counter.count).toBe(2)
-  })
+    counter.increment();
+    expect(counter.count).toBe(2);
+  });
 
-  it('decrements count', () => {
-    counter.reset()
-    counter.decrement()
-    expect(counter.count).toBe(-1)
-  })
-})
+  it("decrements count", () => {
+    counter.reset();
+    counter.decrement();
+    expect(counter.count).toBe(-1);
+  });
+});
 ```
 
 ---
 
 ## Migration from Svelte 4
 
-| Svelte 4 | Svelte 5 |
-|----------|----------|
-| `let count = 0` (reactive) | `let count = $state(0)` |
-| `$: doubled = count * 2` | `let doubled = $derived(count * 2)` |
-| `$: console.log(count)` | `$effect(() => console.log(count))` |
-| `export let value` | `let { value } = $props()` |
-| `on:click={handler}` | `onclick={handler}` |
-| `<slot />` | `{@render children()}` |
-| `createEventDispatcher()` | Callback props |
+| Svelte 4                   | Svelte 5                            |
+| -------------------------- | ----------------------------------- |
+| `let count = 0` (reactive) | `let count = $state(0)`             |
+| `$: doubled = count * 2`   | `let doubled = $derived(count * 2)` |
+| `$: console.log(count)`    | `$effect(() => console.log(count))` |
+| `export let value`         | `let { value } = $props()`          |
+| `on:click={handler}`       | `onclick={handler}`                 |
+| `<slot />`                 | `{@render children()}`              |
+| `createEventDispatcher()`  | Callback props                      |
 
 ### Migration Script
 
@@ -724,24 +732,24 @@ npx sv migrate svelte-5
 
 ## Anti-Patterns to Avoid
 
-| Anti-Pattern | Problem | Solution |
-|--------------|---------|----------|
-| Using `$effect` for derived values | Unnecessary complexity | Use `$derived` |
-| Exporting `$state` directly | Breaks reactivity | Export getter/setter object |
-| Not using TypeScript | Missing type safety | Enable `lang="ts"` |
-| Using old slot syntax | Deprecated in Svelte 5 | Use snippets |
-| Using `on:event` syntax | Deprecated in Svelte 5 | Use `onevent` props |
+| Anti-Pattern                       | Problem                | Solution                    |
+| ---------------------------------- | ---------------------- | --------------------------- |
+| Using `$effect` for derived values | Unnecessary complexity | Use `$derived`              |
+| Exporting `$state` directly        | Breaks reactivity      | Export getter/setter object |
+| Not using TypeScript               | Missing type safety    | Enable `lang="ts"`          |
+| Using old slot syntax              | Deprecated in Svelte 5 | Use snippets                |
+| Using `on:event` syntax            | Deprecated in Svelte 5 | Use `onevent` props         |
 
 ---
 
 ## Performance Benefits
 
-| Metric | Improvement |
-|--------|-------------|
-| Bundle size | 40-60% smaller than React/Vue |
-| Runtime performance | No virtual DOM overhead |
-| Time to interactive | Minimal JavaScript hydration |
-| Memory usage | Lower due to compiled output |
+| Metric              | Improvement                   |
+| ------------------- | ----------------------------- |
+| Bundle size         | 40-60% smaller than React/Vue |
+| Runtime performance | No virtual DOM overhead       |
+| Time to interactive | Minimal JavaScript hydration  |
+| Memory usage        | Lower due to compiled output  |
 
 ---
 

@@ -18,6 +18,7 @@ Expert mobile application architect specializing in cross-platform decisions, ar
 ## Capabilities
 
 ### Architecture Expertise
+
 - Platform selection (Native vs Cross-platform)
 - React Native architecture patterns
 - Flutter architecture patterns
@@ -28,6 +29,7 @@ Expert mobile application architect specializing in cross-platform decisions, ar
 - Offline-first architecture
 
 ### Technical Decisions
+
 - When to use React Native vs Flutter vs Native
 - Shared code between iOS and Android
 - Navigation architecture

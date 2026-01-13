@@ -22,17 +22,17 @@ MCP (Model Context Protocol) is a standard for connecting AI models to external 
 
 ## Currently Installed Servers
 
-| Server | Package | Purpose | Status |
-|--------|---------|---------|--------|
-| sequential-thinking | `@modelcontextprotocol/server-sequential-thinking` | Complex reasoning chains | Active |
-| playwright | `@playwright/mcp@latest` | Browser automation (cross-browser) | Active |
-| memory | `@modelcontextprotocol/server-memory` | Persistent memory | Active |
-| filesystem | `@modelcontextprotocol/server-filesystem` | File operations | Active |
-| sqlite | `uvx mcp-server-sqlite` | Database queries | Active |
-| context7 | `@upstash/context7-mcp` | Up-to-date library docs | Disabled |
-| chrome-devtools | `@anthropic-ai/chrome-devtools-mcp` | Chrome debugging/performance | Disabled |
-| puppeteer | `@modelcontextprotocol/server-puppeteer` | Simple browser automation | Disabled |
-| browserbase | `@browserbase/mcp-server-browserbase` | Cloud browser automation | Disabled |
+| Server              | Package                                            | Purpose                            | Status   |
+| ------------------- | -------------------------------------------------- | ---------------------------------- | -------- |
+| sequential-thinking | `@modelcontextprotocol/server-sequential-thinking` | Complex reasoning chains           | Active   |
+| playwright          | `@playwright/mcp@latest`                           | Browser automation (cross-browser) | Active   |
+| memory              | `@modelcontextprotocol/server-memory`              | Persistent memory                  | Active   |
+| filesystem          | `@modelcontextprotocol/server-filesystem`          | File operations                    | Active   |
+| sqlite              | `uvx mcp-server-sqlite`                            | Database queries                   | Active   |
+| context7            | `@upstash/context7-mcp`                            | Up-to-date library docs            | Disabled |
+| chrome-devtools     | `@anthropic-ai/chrome-devtools-mcp`                | Chrome debugging/performance       | Disabled |
+| puppeteer           | `@modelcontextprotocol/server-puppeteer`           | Simple browser automation          | Disabled |
+| browserbase         | `@browserbase/mcp-server-browserbase`              | Cloud browser automation           | Disabled |
 
 ---
 
@@ -43,6 +43,7 @@ MCP (Model Context Protocol) is a standard for connecting AI models to external 
 **Purpose:** Enables multi-step reasoning with explicit thought chains.
 
 **When to use:**
+
 - Complex problem solving
 - Multi-step analysis
 - Decision trees
@@ -56,6 +57,7 @@ MCP (Model Context Protocol) is a standard for connecting AI models to external 
 **Purpose:** Browser automation and testing.
 
 **Capabilities:**
+
 - Navigate web pages
 - Click elements
 - Fill forms
@@ -63,12 +65,14 @@ MCP (Model Context Protocol) is a standard for connecting AI models to external 
 - Extract content
 
 **When to use:**
+
 - Web scraping
 - UI testing
 - Form automation
 - Screenshot capture
 
 **Example:**
+
 ```
 Navigate to example.com and take a screenshot
 ```
@@ -80,11 +84,13 @@ Navigate to example.com and take a screenshot
 **Purpose:** Persistent memory across sessions.
 
 **Capabilities:**
+
 - Store key-value data
 - Retrieve stored information
 - Persist across conversations
 
 **When to use:**
+
 - Remembering project context
 - Storing preferences
 - Tracking state
@@ -96,6 +102,7 @@ Navigate to example.com and take a screenshot
 **Purpose:** File system operations.
 
 **Capabilities:**
+
 - List directories
 - Read files
 - Write files
@@ -112,11 +119,13 @@ Navigate to example.com and take a screenshot
 **Purpose:** SQLite database operations.
 
 **Capabilities:**
+
 - Create databases
 - Execute queries
 - Manage schemas
 
 **When to use:**
+
 - Local data storage
 - Query testing
 - Data analysis
@@ -130,12 +139,14 @@ Navigate to example.com and take a screenshot
 **Purpose:** Fetches up-to-date, version-specific documentation for libraries and frameworks.
 
 **Capabilities:**
+
 - Resolve library names to IDs
 - Retrieve current documentation
 - Get version-specific code examples
 - Pagination for large docs
 
 **When to use:**
+
 - Working with new frameworks you're learning
 - Libraries that update frequently (React, Next.js, etc.)
 - Avoiding deprecated API calls
@@ -146,6 +157,7 @@ Navigate to example.com and take a screenshot
 **Invocation:** Add "use context7" to prompts, or enable and ask about library docs.
 
 **Example:**
+
 ```
 use context7 - how do I set up a Next.js 15 app router?
 ```
@@ -159,6 +171,7 @@ use context7 - how do I set up a Next.js 15 app router?
 **Purpose:** Deep Chrome debugging and performance profiling using Chrome DevTools Protocol.
 
 **Capabilities:**
+
 - Core Web Vitals measurement (LCP, CLS, INP)
 - DevTools performance traces
 - Network inspection and debugging
@@ -166,6 +179,7 @@ use context7 - how do I set up a Next.js 15 app router?
 - DOM inspection and manipulation
 
 **When to use:**
+
 - Performance optimization and profiling
 - Debugging complex frontend issues
 - Measuring Core Web Vitals
@@ -177,6 +191,7 @@ use context7 - how do I set up a Next.js 15 app router?
 **Token usage:** ~18k tokens (26 tools)
 
 **Example:**
+
 ```
 Analyze the performance of example.com and suggest improvements
 ```
@@ -190,6 +205,7 @@ Analyze the performance of example.com and suggest improvements
 **Purpose:** Simple, lightweight browser automation via headless Chrome.
 
 **Capabilities:**
+
 - Navigate web pages
 - Click and interact with elements
 - Take screenshots and generate PDFs
@@ -197,6 +213,7 @@ Analyze the performance of example.com and suggest improvements
 - Execute JavaScript
 
 **When to use:**
+
 - Simple browser automation tasks
 - Quick screenshots or PDF generation
 - Basic web scraping
@@ -205,6 +222,7 @@ Analyze the performance of example.com and suggest improvements
 **Status:** Disabled by default.
 
 **Example:**
+
 ```
 Take a screenshot of example.com
 ```
@@ -218,6 +236,7 @@ Take a screenshot of example.com
 **Purpose:** Cloud-based browser automation with anti-detection and scaling.
 
 **Capabilities:**
+
 - Cloud browser sessions (no local browser needed)
 - 50-1000+ concurrent sessions
 - Built-in anti-bot detection bypass
@@ -226,6 +245,7 @@ Take a screenshot of example.com
 - Works across Playwright, Puppeteer, and Patchright
 
 **When to use:**
+
 - Large-scale scraping or testing
 - CI/CD pipeline browser testing
 - Sites with anti-bot protection
@@ -237,6 +257,7 @@ Take a screenshot of example.com
 **Requirements:** API key required. Set `BROWSERBASE_API_KEY` and `BROWSERBASE_PROJECT_ID` in environment.
 
 **Example:**
+
 ```
 Scrape product prices from 100 pages concurrently using Browserbase
 ```
@@ -249,29 +270,29 @@ We have four browser automation servers. Here's when to use each:
 
 ### Decision Matrix
 
-| Use Case | Best Choice | Why |
-|----------|-------------|-----|
-| **Cross-browser testing** | Playwright | Supports Chromium, Firefox, WebKit |
-| **Performance profiling** | Chrome DevTools | Core Web Vitals, DevTools traces |
-| **Simple automation** | Puppeteer | Lighter weight, simpler API |
-| **Scale/anti-bot** | Browserbase | Cloud-based, concurrent sessions |
-| **Debugging with existing session** | Chrome DevTools | Uses your logged-in Chrome |
-| **LLM-friendly (no vision)** | Playwright | Accessibility tree approach |
-| **Quick screenshots** | Puppeteer | Fast, minimal overhead |
-| **CI/CD pipelines** | Browserbase | Cloud-native, no local browser |
+| Use Case                            | Best Choice     | Why                                |
+| ----------------------------------- | --------------- | ---------------------------------- |
+| **Cross-browser testing**           | Playwright      | Supports Chromium, Firefox, WebKit |
+| **Performance profiling**           | Chrome DevTools | Core Web Vitals, DevTools traces   |
+| **Simple automation**               | Puppeteer       | Lighter weight, simpler API        |
+| **Scale/anti-bot**                  | Browserbase     | Cloud-based, concurrent sessions   |
+| **Debugging with existing session** | Chrome DevTools | Uses your logged-in Chrome         |
+| **LLM-friendly (no vision)**        | Playwright      | Accessibility tree approach        |
+| **Quick screenshots**               | Puppeteer       | Fast, minimal overhead             |
+| **CI/CD pipelines**                 | Browserbase     | Cloud-native, no local browser     |
 
 ### Comparison Table
 
-| Feature | Playwright | Chrome DevTools | Puppeteer | Browserbase |
-|---------|------------|-----------------|-----------|-------------|
-| **Browser Support** | Chrome, Firefox, Safari | Chrome only | Chrome only | Chrome (cloud) |
-| **Token Usage** | ~14k | ~18k | ~8k | ~12k |
-| **Local/Cloud** | Local | Local | Local | Cloud |
-| **Performance Tools** | Basic | Excellent | None | Basic |
-| **LLM Approach** | Accessibility tree | Pixel-based | Pixel-based | Stagehand AI |
-| **Anti-bot** | None | None | None | Built-in |
-| **Concurrent Sessions** | Limited | 1 | Limited | 50-1000+ |
-| **API Key Required** | No | No | No | Yes |
+| Feature                 | Playwright              | Chrome DevTools | Puppeteer   | Browserbase    |
+| ----------------------- | ----------------------- | --------------- | ----------- | -------------- |
+| **Browser Support**     | Chrome, Firefox, Safari | Chrome only     | Chrome only | Chrome (cloud) |
+| **Token Usage**         | ~14k                    | ~18k            | ~8k         | ~12k           |
+| **Local/Cloud**         | Local                   | Local           | Local       | Cloud          |
+| **Performance Tools**   | Basic                   | Excellent       | None        | Basic          |
+| **LLM Approach**        | Accessibility tree      | Pixel-based     | Pixel-based | Stagehand AI   |
+| **Anti-bot**            | None                    | None            | None        | Built-in       |
+| **Concurrent Sessions** | Limited                 | 1               | Limited     | 50-1000+       |
+| **API Key Required**    | No                      | No              | No          | Yes            |
 
 ### Recommended Workflow
 
@@ -320,7 +341,12 @@ The `command` field differs between Windows and Linux/Mac:
     "sequential-thinking": {
       "type": "stdio",
       "command": "cmd",
-      "args": ["/c", "npx", "-y", "@modelcontextprotocol/server-sequential-thinking"],
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ],
       "env": {}
     },
     "playwright": {
@@ -338,7 +364,13 @@ The `command` field differs between Windows and Linux/Mac:
     "filesystem": {
       "type": "stdio",
       "command": "cmd",
-      "args": ["/c", "npx", "-y", "@modelcontextprotocol/server-filesystem", "."],
+      "args": [
+        "/c",
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "."
+      ],
       "env": {}
     },
     "sqlite": {
@@ -392,10 +424,10 @@ The `command` field differs between Windows and Linux/Mac:
 
 ### Key Difference
 
-| Platform | Command | Args |
-|----------|---------|------|
-| Windows | `"cmd"` | `["/c", "npx", "-y", "@package"]` |
-| Linux/Mac | `"npx"` | `["-y", "@package"]` |
+| Platform  | Command | Args                              |
+| --------- | ------- | --------------------------------- |
+| Windows   | `"cmd"` | `["/c", "npx", "-y", "@package"]` |
+| Linux/Mac | `"npx"` | `["-y", "@package"]`              |
 
 ### Configuration Format
 
@@ -414,12 +446,12 @@ The `command` field differs between Windows and Linux/Mac:
 
 ### Fields
 
-| Field | Required | Description |
-|-------|----------|-------------|
-| `type` | Yes | Transport type (`stdio`, `sse`, `http`) |
-| `command` | Yes | Command to run (`npx`, `uvx`, `node`) |
-| `args` | Yes | Command arguments |
-| `env` | No | Environment variables |
+| Field     | Required | Description                             |
+| --------- | -------- | --------------------------------------- |
+| `type`    | Yes      | Transport type (`stdio`, `sse`, `http`) |
+| `command` | Yes      | Command to run (`npx`, `uvx`, `node`)   |
+| `args`    | Yes      | Command arguments                       |
+| `env`     | No       | Environment variables                   |
 
 ---
 
@@ -428,6 +460,7 @@ The `command` field differs between Windows and Linux/Mac:
 ### Step 1: Find the Package
 
 Search for MCP servers:
+
 - [Awesome MCP Servers](https://github.com/punkpeye/awesome-mcp-servers)
 - [MCP Hub](https://mcphub.io/)
 
@@ -451,6 +484,7 @@ Edit `~/.claude.json`:
 ### Step 3: Test
 
 Restart Claude Code and verify:
+
 ```
 /mcp
 ```
@@ -484,14 +518,17 @@ Remove the server entry from `~/.claude.json`.
 This means MCP servers only load when explicitly called, not at startup.
 
 **Benefits:**
+
 - Reduced startup time
 - Lower context usage
 - Only loads what you need
 
 **Trade-off:**
+
 - First use of a server has slight delay
 
 To change, edit `settings.json`:
+
 ```json
 {
   "enableAllProjectMcpServers": true
@@ -512,6 +549,7 @@ To change, edit `settings.json`:
 ### Server Times Out
 
 Increase timeout with environment variable:
+
 ```bash
 MCP_TIMEOUT=60000 claude
 ```
@@ -519,18 +557,19 @@ MCP_TIMEOUT=60000 claude
 ### Server Errors
 
 Check logs:
+
 ```bash
 claude --mcp-debug
 ```
 
 ### Common Issues
 
-| Problem | Solution |
-|---------|----------|
-| "Package not found" | Verify package name on npm/PyPI |
-| "Command not found" | Install npx/uvx |
-| "Connection refused" | Check if server requires auth |
-| "Timeout" | Increase MCP_TIMEOUT |
+| Problem              | Solution                        |
+| -------------------- | ------------------------------- |
+| "Package not found"  | Verify package name on npm/PyPI |
+| "Command not found"  | Install npx/uvx                 |
+| "Connection refused" | Check if server requires auth   |
+| "Timeout"            | Increase MCP_TIMEOUT            |
 
 ---
 
@@ -538,13 +577,13 @@ claude --mcp-debug
 
 These are commonly used but not currently installed:
 
-| Server | Package | Purpose |
-|--------|---------|---------|
-| github | `@modelcontextprotocol/server-github` | GitHub API (requires token) |
-| fetch | `@modelcontextprotocol/server-fetch` | Web fetching |
+| Server       | Package                                     | Purpose                       |
+| ------------ | ------------------------------------------- | ----------------------------- |
+| github       | `@modelcontextprotocol/server-github`       | GitHub API (requires token)   |
+| fetch        | `@modelcontextprotocol/server-fetch`        | Web fetching                  |
 | brave-search | `@modelcontextprotocol/server-brave-search` | Web search (requires API key) |
-| slack | `@modelcontextprotocol/server-slack` | Slack integration |
-| google-drive | `@modelcontextprotocol/server-google-drive` | Google Drive access |
+| slack        | `@modelcontextprotocol/server-slack`        | Slack integration             |
+| google-drive | `@modelcontextprotocol/server-google-drive` | Google Drive access           |
 
 ---
 
@@ -553,6 +592,7 @@ These are commonly used but not currently installed:
 ### API Keys
 
 Some servers require API keys:
+
 - Store in environment variables, not config files
 - Use `env` field in server config
 - Never commit API keys to repositories
@@ -562,6 +602,7 @@ Some servers require API keys:
 The `filesystem` server has access to files. Current scope is `.` (current directory).
 
 **For broader access:**
+
 ```json
 {
   "filesystem": {
@@ -572,6 +613,7 @@ The `filesystem` server has access to files. Current scope is `.` (current direc
 ```
 
 **Note:** Replace `~` with your actual home path if needed:
+
 - Windows: `C:/Users/username`
 - macOS: `/Users/username`
 - Linux: `/home/username`
@@ -581,6 +623,7 @@ The `filesystem` server has access to files. Current scope is `.` (current direc
 ### Network Access
 
 Servers like `playwright` and `fetch` have network access. Be cautious about:
+
 - Visiting untrusted URLs
 - Sending data to external services
 - Automated form submissions
@@ -590,6 +633,7 @@ Servers like `playwright` and `fetch` have network access. Be cautious about:
 ## Portable Backup
 
 A clean copy of MCP config is maintained at:
+
 ```
 ~/.claude/.claude.json
 ```
@@ -597,6 +641,7 @@ A clean copy of MCP config is maintained at:
 This contains ONLY `mcpServers` - no machine-specific data.
 
 When setting up a new machine:
+
 1. Copy `.claude/.claude.json` to `~/.claude.json`
 2. Claude Code will add its own tracking data as you use it
 

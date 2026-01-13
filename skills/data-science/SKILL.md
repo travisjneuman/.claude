@@ -11,13 +11,13 @@ Comprehensive data science frameworks for analytics, machine learning, and data-
 
 ### Data Maturity Model
 
-| Level | Name | Characteristics |
-|-------|------|-----------------|
-| 1 | **Ad Hoc** | Manual, inconsistent, siloed |
-| 2 | **Opportunistic** | Some automation, point solutions |
-| 3 | **Systematic** | Defined processes, governance emerging |
-| 4 | **Differentiating** | Data-driven decisions, advanced analytics |
-| 5 | **Transformative** | AI-first, competitive advantage |
+| Level | Name                | Characteristics                           |
+| ----- | ------------------- | ----------------------------------------- |
+| 1     | **Ad Hoc**          | Manual, inconsistent, siloed              |
+| 2     | **Opportunistic**   | Some automation, point solutions          |
+| 3     | **Systematic**      | Defined processes, governance emerging    |
+| 4     | **Differentiating** | Data-driven decisions, advanced analytics |
+| 5     | **Transformative**  | AI-first, competitive advantage           |
 
 ### Analytics Value Chain
 
@@ -59,16 +59,16 @@ For detailed inferential statistics and hypothesis testing, see [Statistical Met
 
 ### Algorithm Selection
 
-| Task | Algorithms | When to Use |
-|------|------------|-------------|
-| **Classification** | Logistic Regression, Random Forest, XGBoost, Neural Networks | Categorical outcomes |
-| **Regression** | Linear Regression, Ridge/Lasso, Random Forest, XGBoost | Continuous outcomes |
-| **Clustering** | K-Means, Hierarchical, DBSCAN | Group discovery |
-| **Dimensionality Reduction** | PCA, t-SNE, UMAP | Feature reduction, visualization |
-| **Anomaly Detection** | Isolation Forest, One-Class SVM, Autoencoders | Outlier detection |
-| **Time Series** | ARIMA, Prophet, LSTM | Sequential data |
-| **Recommendation** | Collaborative Filtering, Content-Based, Matrix Factorization | Personalization |
-| **NLP** | Transformers, BERT, GPT | Text understanding/generation |
+| Task                         | Algorithms                                                   | When to Use                      |
+| ---------------------------- | ------------------------------------------------------------ | -------------------------------- |
+| **Classification**           | Logistic Regression, Random Forest, XGBoost, Neural Networks | Categorical outcomes             |
+| **Regression**               | Linear Regression, Ridge/Lasso, Random Forest, XGBoost       | Continuous outcomes              |
+| **Clustering**               | K-Means, Hierarchical, DBSCAN                                | Group discovery                  |
+| **Dimensionality Reduction** | PCA, t-SNE, UMAP                                             | Feature reduction, visualization |
+| **Anomaly Detection**        | Isolation Forest, One-Class SVM, Autoencoders                | Outlier detection                |
+| **Time Series**              | ARIMA, Prophet, LSTM                                         | Sequential data                  |
+| **Recommendation**           | Collaborative Filtering, Content-Based, Matrix Factorization | Personalization                  |
+| **NLP**                      | Transformers, BERT, GPT                                      | Text understanding/generation    |
 
 For detailed ML pipelines, feature engineering, and model monitoring, see [ML Pipelines Reference](references/ml-pipelines.md).
 
@@ -108,14 +108,14 @@ METRICS:
 
 ### Data Quality Dimensions
 
-| Dimension | Definition | Measurement |
-|-----------|------------|-------------|
-| **Accuracy** | Correct representation of reality | % records matching source |
-| **Completeness** | All required data present | % non-null values |
-| **Consistency** | Same across systems | % matching across sources |
-| **Timeliness** | Available when needed | Latency, freshness |
-| **Validity** | Conforms to format/rules | % passing validation |
-| **Uniqueness** | No unwanted duplicates | Duplicate rate |
+| Dimension        | Definition                        | Measurement               |
+| ---------------- | --------------------------------- | ------------------------- |
+| **Accuracy**     | Correct representation of reality | % records matching source |
+| **Completeness** | All required data present         | % non-null values         |
+| **Consistency**  | Same across systems               | % matching across sources |
+| **Timeliness**   | Available when needed             | Latency, freshness        |
+| **Validity**     | Conforms to format/rules          | % passing validation      |
+| **Uniqueness**   | No unwanted duplicates            | Duplicate rate            |
 
 ## Business Intelligence
 
@@ -197,16 +197,16 @@ RELATED: [Related metrics]
 
 ### Use Case Framework
 
-| Use Case | Business Application | Approach |
-|----------|---------------------|----------|
-| **Churn Prediction** | Retention programs | Classification |
-| **Demand Forecasting** | Inventory planning | Time series |
-| **Lead Scoring** | Sales prioritization | Classification |
-| **Price Optimization** | Revenue management | Regression/RL |
-| **Fraud Detection** | Risk mitigation | Anomaly detection |
-| **Recommendation** | Personalization | Collaborative filtering |
-| **Customer Segmentation** | Marketing targeting | Clustering |
-| **Lifetime Value** | Customer investment | Regression |
+| Use Case                  | Business Application | Approach                |
+| ------------------------- | -------------------- | ----------------------- |
+| **Churn Prediction**      | Retention programs   | Classification          |
+| **Demand Forecasting**    | Inventory planning   | Time series             |
+| **Lead Scoring**          | Sales prioritization | Classification          |
+| **Price Optimization**    | Revenue management   | Regression/RL           |
+| **Fraud Detection**       | Risk mitigation      | Anomaly detection       |
+| **Recommendation**        | Personalization      | Collaborative filtering |
+| **Customer Segmentation** | Marketing targeting  | Clustering              |
+| **Lifetime Value**        | Customer investment  | Regression              |
 
 ## Data Ethics & Privacy
 
@@ -258,22 +258,22 @@ FAIRNESS METRICS:
 
 ### Team Roles
 
-| Role | Focus | Skills |
-|------|-------|--------|
-| **Data Engineer** | Pipelines, infrastructure | SQL, Python, Spark, Cloud |
-| **Data Analyst** | Reporting, ad-hoc analysis | SQL, BI tools, Statistics |
-| **Data Scientist** | Modeling, ML | Python/R, ML, Statistics |
-| **ML Engineer** | Model deployment | MLOps, Software Engineering |
-| **Analytics Engineer** | Data modeling | dbt, SQL, Data Modeling |
+| Role                   | Focus                      | Skills                      |
+| ---------------------- | -------------------------- | --------------------------- |
+| **Data Engineer**      | Pipelines, infrastructure  | SQL, Python, Spark, Cloud   |
+| **Data Analyst**       | Reporting, ad-hoc analysis | SQL, BI tools, Statistics   |
+| **Data Scientist**     | Modeling, ML               | Python/R, ML, Statistics    |
+| **ML Engineer**        | Model deployment           | MLOps, Software Engineering |
+| **Analytics Engineer** | Data modeling              | dbt, SQL, Data Modeling     |
 
 ### Operating Models
 
-| Model | Description | Best For |
-|-------|-------------|----------|
-| **Centralized** | Single analytics team | Consistency, efficiency |
-| **Decentralized** | Embedded in business units | Business alignment |
-| **Hub & Spoke** | Central CoE + embedded | Balance of both |
-| **Federated** | Shared platform, domain teams | Scale with autonomy |
+| Model             | Description                   | Best For                |
+| ----------------- | ----------------------------- | ----------------------- |
+| **Centralized**   | Single analytics team         | Consistency, efficiency |
+| **Decentralized** | Embedded in business units    | Business alignment      |
+| **Hub & Spoke**   | Central CoE + embedded        | Balance of both         |
+| **Federated**     | Shared platform, domain teams | Scale with autonomy     |
 
 ## References
 

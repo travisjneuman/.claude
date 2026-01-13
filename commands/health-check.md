@@ -18,11 +18,11 @@ Comprehensive diagnostics for Claude Code toolkit.
 
 ## Platform Compatibility
 
-| Platform | Status | Notes |
-|----------|--------|-------|
-| Windows | ✅ | Requires Git Bash (included with Git for Windows) |
-| macOS | ✅ | Works with bash/zsh |
-| Linux | ✅ | Works with bash |
+| Platform | Status | Notes                                             |
+| -------- | ------ | ------------------------------------------------- |
+| Windows  | ✅     | Requires Git Bash (included with Git for Windows) |
+| macOS    | ✅     | Works with bash/zsh                               |
+| Linux    | ✅     | Works with bash                                   |
 
 All commands use POSIX-compatible syntax that works across platforms.
 
@@ -31,12 +31,14 @@ All commands use POSIX-compatible syntax that works across platforms.
 ### Step 1: Configuration Check
 
 **Check settings.json:**
+
 ```bash
 # Cross-platform: works in Git Bash (Windows), bash (macOS/Linux)
 [ -f ~/.claude/settings.json ] && echo "OK" || echo "MISSING"
 ```
 
 Verify:
+
 - [ ] File exists
 - [ ] Valid JSON
 - [ ] Hooks configured
@@ -47,14 +49,14 @@ Verify:
 
 **Check directory structure:**
 
-| Directory | Expected | Check |
-|-----------|----------|-------|
-| `skills/` | 68+ items | `ls ~/.claude/skills/ \| wc -l` |
-| `agents/` | 37+ files | `ls ~/.claude/agents/*.md \| wc -l` |
-| `commands/` | 10+ files | `ls ~/.claude/commands/*.md \| wc -l` |
-| `rules/` | 13+ files | `find ~/.claude/rules -name "*.md" \| wc -l` |
-| `templates/` | 5+ files | `ls ~/.claude/templates/ \| wc -l` |
-| `plugins/marketplaces/` | 21 repos | `ls ~/.claude/plugins/marketplaces/ \| wc -l` |
+| Directory               | Expected  | Check                                         |
+| ----------------------- | --------- | --------------------------------------------- |
+| `skills/`               | 68+ items | `ls ~/.claude/skills/ \| wc -l`               |
+| `agents/`               | 37+ files | `ls ~/.claude/agents/*.md \| wc -l`           |
+| `commands/`             | 10+ files | `ls ~/.claude/commands/*.md \| wc -l`         |
+| `rules/`                | 13+ files | `find ~/.claude/rules -name "*.md" \| wc -l`  |
+| `templates/`            | 5+ files  | `ls ~/.claude/templates/ \| wc -l`            |
+| `plugins/marketplaces/` | 21 repos  | `ls ~/.claude/plugins/marketplaces/ \| wc -l` |
 
 ### Step 3: Hooks Status
 
@@ -69,11 +71,13 @@ Expected: 10 hooks configured
 ### Step 4: Git Status
 
 **Check submodules:**
+
 ```bash
 cd ~/.claude && git submodule status
 ```
 
 Verify:
+
 - [ ] All submodules initialized
 - [ ] No detached heads
 - [ ] No uncommitted changes
@@ -81,6 +85,7 @@ Verify:
 ### Step 5: MCP Servers
 
 **List configured servers:**
+
 ```bash
 grep -A1 '"disabledMcpjsonServers"' ~/.claude/settings.json
 ```
@@ -104,6 +109,7 @@ grep -A1 '"disabledMcpjsonServers"' ~/.claude/settings.json
 ```
 
 **If verbose:**
+
 - List all skills
 - List all agents
 - Show hook details
@@ -113,6 +119,7 @@ grep -A1 '"disabledMcpjsonServers"' ~/.claude/settings.json
 ### Step 7: Recommendations
 
 If issues found, provide:
+
 - Specific fix commands
 - Documentation references
 - Troubleshooting steps
@@ -120,11 +127,13 @@ If issues found, provide:
 ## Examples
 
 ### Basic check
+
 ```
 /health-check
 ```
 
 ### Detailed report
+
 ```
 /health-check verbose
 ```
@@ -137,4 +146,4 @@ If issues found, provide:
 
 ---
 
-*Run periodically to ensure toolkit integrity.*
+_Run periodically to ensure toolkit integrity._

@@ -9,12 +9,12 @@ Comprehensive guide for building AI/ML systems from prototyping to production.
 
 ## Frameworks Overview
 
-| Framework | Best For | Ecosystem |
-|-----------|----------|-----------|
-| **PyTorch** | Research, flexibility | Hugging Face, Lightning |
-| **TensorFlow** | Production, mobile | TFX, TF Lite, TF.js |
-| **JAX** | High-performance, TPUs | Flax, Optax |
-| **scikit-learn** | Classical ML | Simple, batteries-included |
+| Framework        | Best For               | Ecosystem                  |
+| ---------------- | ---------------------- | -------------------------- |
+| **PyTorch**      | Research, flexibility  | Hugging Face, Lightning    |
+| **TensorFlow**   | Production, mobile     | TFX, TF Lite, TF.js        |
+| **JAX**          | High-performance, TPUs | Flax, Optax                |
+| **scikit-learn** | Classical ML           | Simple, batteries-included |
 
 ---
 
@@ -339,6 +339,7 @@ async def predict(request: PredictionRequest):
 ## Best Practices
 
 ### Training
+
 - [ ] Experiment tracking (MLflow, W&B)
 - [ ] Mixed precision training
 - [ ] Gradient accumulation
@@ -346,6 +347,7 @@ async def predict(request: PredictionRequest):
 - [ ] Learning rate scheduling
 
 ### Deployment
+
 - [ ] Model versioning
 - [ ] A/B testing
 - [ ] Monitoring for drift
