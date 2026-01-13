@@ -17,9 +17,23 @@ Before starting, ensure you have:
 
 ---
 
-## Quick Setup (5 Minutes)
+## Quick Setup (1 Minute)
 
-### Step 1: Clone from GitHub (Recommended)
+### Option A: One-Line Install (Recommended)
+
+**macOS / Linux / Windows (Git Bash):**
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/travisjneuman/.claude/master/scripts/install.sh | bash
+```
+
+This handles everything: prerequisites check, clone, submodules, read-only config, and platform-specific MCP setup.
+
+After install, run `/bootstrap` in Claude Code to verify configuration.
+
+---
+
+### Option B: Manual Setup
 
 **Mac/Linux:**
 
