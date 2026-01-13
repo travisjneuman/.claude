@@ -22,6 +22,7 @@ Before starting, ensure you have:
 ### Step 1: Clone from GitHub (Recommended)
 
 **Mac/Linux:**
+
 ```bash
 # Clone with all submodules
 git clone --recurse-submodules https://github.com/travisjneuman/.claude.git ~/.claude
@@ -33,6 +34,7 @@ done
 ```
 
 **Windows (PowerShell):**
+
 ```powershell
 git clone --recurse-submodules https://github.com/travisjneuman/.claude.git $env:USERPROFILE\.claude
 
@@ -48,6 +50,7 @@ Get-ChildItem "$env:USERPROFILE\.claude\plugins\marketplaces" -Directory | ForEa
 MCP configuration is platform-specific and NOT synced via git. Create `~/.claude/.mcp.json`:
 
 **Mac/Linux template:**
+
 ```json
 {
   "mcpServers": {
@@ -60,6 +63,7 @@ MCP configuration is platform-specific and NOT synced via git. Create `~/.claude
 ```
 
 **Windows template:**
+
 ```json
 {
   "mcpServers": {
@@ -96,19 +100,20 @@ Done! Your configuration is now active.
 
 This configuration syncs across Windows, macOS, and Linux via GitHub.
 
-| Component | Sync Method | Notes |
-|-----------|-------------|-------|
-| CLAUDE.md, settings.json | Git | Shared across all machines |
-| Skills, agents, rules | Git | Shared across all machines |
-| Commands, templates | Git | Shared across all machines |
-| .vscode/ settings | Git | Shared VSCode workspace settings |
-| Marketplace plugins | Git submodules | Read-only, fetch updates only |
-| `.mcp.json` | **Manual** | Platform-specific (cmd vs npx) |
-| Session data | Not synced | Local to each machine |
+| Component                | Sync Method    | Notes                            |
+| ------------------------ | -------------- | -------------------------------- |
+| CLAUDE.md, settings.json | Git            | Shared across all machines       |
+| Skills, agents, rules    | Git            | Shared across all machines       |
+| Commands, templates      | Git            | Shared across all machines       |
+| .vscode/ settings        | Git            | Shared VSCode workspace settings |
+| Marketplace plugins      | Git submodules | Read-only, fetch updates only    |
+| `.mcp.json`              | **Manual**     | Platform-specific (cmd vs npx)   |
+| Session data             | Not synced     | Local to each machine            |
 
 ### Workflow
 
 **Push changes (from any machine):**
+
 ```bash
 cd ~/.claude
 git add -A
@@ -117,6 +122,7 @@ git push origin master
 ```
 
 **Pull changes (on other machines):**
+
 ```bash
 cd ~/.claude
 git pull origin master
@@ -124,6 +130,7 @@ git submodule update --remote --merge
 ```
 
 **Update marketplace plugins:**
+
 ```bash
 bash ~/.claude/scripts/update-marketplaces.sh
 ```
@@ -162,9 +169,11 @@ bash ~/.claude/scripts/update-marketplaces.sh
 
 ### Windows
 
+- **Git for Windows required** - Hooks execute via Git Bash
 - Path separators work either way (`/` or `\`)
 - Home directory: `C:\Users\username\`
 - MCP commands need `cmd /c` wrapper
+- SessionStart hooks use bash syntax (Git Bash handles this)
 
 ### Mac
 
@@ -179,6 +188,7 @@ bash ~/.claude/scripts/update-marketplaces.sh
 ### Remote SSH (VS Code)
 
 When using VS Code Remote SSH:
+
 1. Clone `.claude/` on the **remote** machine
 2. Create `.mcp.json` for the remote platform (usually Linux)
 3. Install Claude Code on remote: `npm install -g @anthropic-ai/claude-code`
