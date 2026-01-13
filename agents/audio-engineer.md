@@ -16,6 +16,7 @@ Expert audio engineer specializing in recording, mixing, mastering, and sound de
 ## Capabilities
 
 ### Audio Expertise
+
 - Recording techniques and setup
 - Microphone selection and placement
 - Signal chain optimization
@@ -26,6 +27,7 @@ Expert audio engineer specializing in recording, mixing, mastering, and sound de
 - Sound design and synthesis
 
 ### Technical Knowledge
+
 - Sample rates and bit depth
 - Audio codecs and formats
 - DAW workflows

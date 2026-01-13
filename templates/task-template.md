@@ -18,6 +18,7 @@
 [How will we solve it?]
 
 **Success Criteria:**
+
 - [ ] [Criterion 1]
 - [ ] [Criterion 2]
 - [ ] [Criterion 3]
@@ -45,11 +46,13 @@
 ### Files to Modify
 
 **1. `[filename.ext]`**
+
 - **Changes:** [What will change]
 - **Reason:** [Why needed]
 - **Impact:** [What else might be affected]
 
 **2. `[filename.ext]`**
+
 - **Changes:** [What will change]
 - **Reason:** [Why needed]
 - **Impact:** [What else might be affected]
@@ -57,12 +60,14 @@
 ### Files to Create (if any)
 
 **1. `[new-file.ext]`**
+
 - **Purpose:** [What this file does]
 - **Location:** [Why this location]
 
 ### Files to Delete (if any)
 
 **1. `[file-to-remove.ext]`**
+
 - **Reason:** [Why being removed]
 - **Replacement:** [What replaces it, if anything]
 
@@ -71,6 +76,7 @@
 ## Implementation Checklist
 
 ### Phase 1: Preparation
+
 - [ ] Read and understand relevant files
 - [ ] Document current behavior
 - [ ] Identify edge cases
@@ -78,12 +84,14 @@
 - [ ] Get approval for approach (if needed)
 
 ### Phase 2: Implementation
+
 - [ ] [Specific task 1]
 - [ ] [Specific task 2]
 - [ ] [Specific task 3]
 - [ ] [Specific task 4]
 
 ### Phase 3: Testing
+
 - [ ] Unit tests pass
 - [ ] Integration tests pass
 - [ ] Manual testing completed
@@ -91,6 +99,7 @@
 - [ ] Error handling tested
 
 ### Phase 4: Validation
+
 - [ ] Code review checklist passed
 - [ ] No regressions introduced
 - [ ] Performance acceptable
@@ -98,6 +107,7 @@
 - [ ] Security considerations addressed
 
 ### Phase 5: Documentation
+
 - [ ] Code comments added where needed
 - [ ] README updated (if applicable)
 - [ ] Changelog/notes updated
@@ -111,9 +121,9 @@
 
 [Document any architectural decisions made during planning]
 
-| Decision | Options Considered | Choice | Reasoning |
-|----------|-------------------|--------|-----------|
-| [Area] | [Option A, B, C] | [Chosen] | [Why] |
+| Decision | Options Considered | Choice   | Reasoning |
+| -------- | ------------------ | -------- | --------- |
+| [Area]   | [Option A, B, C]   | [Chosen] | [Why]     |
 
 ### Dependencies
 
@@ -122,8 +132,8 @@
 
 ### Risks & Mitigations
 
-| Risk | Likelihood | Impact | Mitigation |
-|------|------------|--------|------------|
+| Risk     | Likelihood   | Impact       | Mitigation       |
+| -------- | ------------ | ------------ | ---------------- |
 | [Risk 1] | Low/Med/High | Low/Med/High | [How to address] |
 
 ---
@@ -133,12 +143,15 @@
 [Fill this out as you work]
 
 ### Decisions Made
+
 - [Date] - [Decision and reasoning]
 
 ### Challenges Encountered
+
 - [Date] - [Challenge and solution]
 
 ### Deviations from Plan
+
 - [Date] - [What changed and why]
 
 ---
@@ -166,7 +179,9 @@
 ## Files Modified
 
 ### 1. `[filename.ext]`
+
 **Changes Made:**
+
 - [Change 1]
 - [Change 2]
 
@@ -177,11 +192,13 @@
 ## Testing Results
 
 ### Automated Tests
+
 - [ ] Unit tests - [Pass/Fail/N/A]
 - [ ] Integration tests - [Pass/Fail/N/A]
 - [ ] E2E tests - [Pass/Fail/N/A]
 
 ### Manual Testing
+
 - [ ] Happy path verified
 - [ ] Edge cases tested
 - [ ] Error states handled
@@ -192,8 +209,8 @@
 
 ## Performance Impact
 
-| Metric | Before | After | Status |
-|--------|--------|-------|--------|
+| Metric     | Before  | After   | Status  |
+| ---------- | ------- | ------- | ------- |
 | [Metric 1] | [Value] | [Value] | [✅/❌] |
 | [Metric 2] | [Value] | [Value] | [✅/❌] |
 
@@ -202,6 +219,7 @@
 ## Issues Encountered
 
 ### Issue 1: [Title]
+
 **Problem:** [Description]
 **Solution:** [How solved]
 **Prevention:** [How to avoid in future]

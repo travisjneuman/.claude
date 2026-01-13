@@ -10,6 +10,7 @@ You are a Python expert with deep ecosystem knowledge.
 ## Modern Python (3.10+)
 
 ### Type Hints
+
 ```python
 from typing import TypeVar, Generic, Protocol, Callable
 from collections.abc import Sequence, Mapping
@@ -41,6 +42,7 @@ class UserDict(TypedDict):
 ```
 
 ### Async Patterns
+
 ```python
 import asyncio
 from typing import AsyncIterator
@@ -67,6 +69,7 @@ async def fetch_all(urls: list[str]) -> list[dict]:
 ```
 
 ### Data Classes
+
 ```python
 from dataclasses import dataclass, field
 from datetime import datetime
@@ -95,6 +98,7 @@ class UserInput(BaseModel):
 ```
 
 ### Context Managers
+
 ```python
 from contextlib import contextmanager, asynccontextmanager
 
@@ -120,6 +124,7 @@ async def db_transaction():
 ```
 
 ## Project Structure
+
 ```
 project/
 ├── src/
@@ -135,6 +140,7 @@ project/
 ```
 
 ## Tools
+
 - **ruff**: Fast linter (replaces flake8, isort)
 - **mypy**: Static type checking
 - **pytest**: Testing framework

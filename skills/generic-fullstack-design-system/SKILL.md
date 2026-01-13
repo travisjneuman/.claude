@@ -17,15 +17,15 @@ Design system patterns for Next.js/NestJS full-stack applications.
 // lib/theme.ts - Single source of truth
 export const theme = {
   colors: {
-    primary: 'hsl(220, 100%, 55%)',
-    secondary: 'hsl(180, 100%, 50%)',
-    accent: 'hsl(270, 70%, 60%)',
+    primary: "hsl(220, 100%, 55%)",
+    secondary: "hsl(180, 100%, 50%)",
+    accent: "hsl(270, 70%, 60%)",
   },
   spacing: {
-    xs: '4px',
-    sm: '8px',
-    md: '16px',
-    lg: '24px',
+    xs: "4px",
+    sm: "8px",
+    md: "16px",
+    lg: "24px",
   },
 };
 ```
@@ -54,9 +54,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: 'var(--background)',
-        foreground: 'var(--foreground)',
-        primary: 'var(--primary)',
+        background: "var(--background)",
+        foreground: "var(--foreground)",
+        primary: "var(--primary)",
       },
     },
   },
@@ -81,13 +81,13 @@ import { Button } from '@/components/ui/button';
 ### Form Components
 
 ```tsx
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 <div className="space-y-2">
   <Label htmlFor="email">Email</Label>
   <Input id="email" type="email" placeholder="user@example.com" />
-</div>
+</div>;
 ```
 
 ### Dialog/Modal
@@ -98,7 +98,7 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from '@/components/ui/dialog';
+} from "@/components/ui/dialog";
 
 <Dialog open={open} onOpenChange={setOpen}>
   <DialogContent>
@@ -107,7 +107,7 @@ import {
     </DialogHeader>
     {/* Content */}
   </DialogContent>
-</Dialog>
+</Dialog>;
 ```
 
 ## Visual Effects
@@ -126,11 +126,7 @@ import {
 
 ```css
 .bg-gradient {
-  background: linear-gradient(
-    135deg,
-    var(--primary),
-    var(--accent)
-  );
+  background: linear-gradient(135deg, var(--primary), var(--accent));
 }
 ```
 
@@ -140,7 +136,7 @@ import {
 
 ```tsx
 // app/layout.tsx
-import { ThemeProvider } from 'next-themes';
+import { ThemeProvider } from "next-themes";
 
 export default function RootLayout({ children }) {
   return (
@@ -158,12 +154,12 @@ export default function RootLayout({ children }) {
 ### Theme Toggle
 
 ```tsx
-import { useTheme } from 'next-themes';
+import { useTheme } from "next-themes";
 
 function ThemeToggle() {
   const { theme, setTheme } = useTheme();
   return (
-    <button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
+    <button onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
       Toggle theme
     </button>
   );

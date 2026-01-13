@@ -18,16 +18,18 @@ A disciplined approach to development where tests drive design and implementatio
 **Goal**: Define the expected behavior BEFORE implementation.
 
 **Rules**:
+
 1. Write the smallest test that fails
 2. Test must fail for the RIGHT reason
 3. Test should clearly express intent
 4. Don't write implementation yet
 
 **Example**:
+
 ```typescript
 // RED: Test the behavior we want
-describe('Calculator', () => {
-  it('should add two numbers', () => {
+describe("Calculator", () => {
+  it("should add two numbers", () => {
     const calc = new Calculator();
     expect(calc.add(2, 3)).toBe(5);
   });
@@ -39,6 +41,7 @@ describe('Calculator', () => {
 ```
 
 **Checklist**:
+
 - [ ] Test is written
 - [ ] Test fails when run
 - [ ] Failure message is clear
@@ -51,17 +54,19 @@ describe('Calculator', () => {
 **Goal**: Write the MINIMUM code to pass the test.
 
 **Rules**:
+
 1. Do the simplest thing that works
 2. Don't add extra features
 3. Don't optimize
 4. Just make it green
 
 **Example**:
+
 ```typescript
 // GREEN: Minimum implementation to pass
 class Calculator {
   add(a: number, b: number): number {
-    return a + b;  // Simplest thing that works
+    return a + b; // Simplest thing that works
   }
 }
 
@@ -71,6 +76,7 @@ class Calculator {
 ```
 
 **Checklist**:
+
 - [ ] Test passes
 - [ ] No extra code added
 - [ ] Implementation is minimal
@@ -82,12 +88,14 @@ class Calculator {
 **Goal**: Clean up while keeping tests green.
 
 **Rules**:
+
 1. Only refactor with passing tests
 2. Run tests after each change
 3. Improve design, not behavior
 4. Small, incremental changes
 
 **Examples of refactoring**:
+
 - Extract methods
 - Rename for clarity
 - Remove duplication
@@ -95,6 +103,7 @@ class Calculator {
 - Add types/documentation
 
 **Checklist**:
+
 - [ ] Tests still pass
 - [ ] Code is cleaner
 - [ ] No behavior changed
@@ -118,17 +127,17 @@ class Calculator {
 ### Test Structure (AAA Pattern)
 
 ```typescript
-it('should [behavior] when [condition]', () => {
+it("should [behavior] when [condition]", () => {
   // Arrange - Set up test data and dependencies
-  const user = createTestUser({ role: 'admin' });
+  const user = createTestUser({ role: "admin" });
   const service = new UserService();
 
   // Act - Execute the code under test
   const result = service.getPermissions(user);
 
   // Assert - Verify expected outcomes
-  expect(result).toContain('delete');
-  expect(result).toContain('edit');
+  expect(result).toContain("delete");
+  expect(result).toContain("edit");
 });
 ```
 
@@ -139,6 +148,7 @@ it('should [behavior] when [condition]', () => {
 ```
 
 Examples:
+
 - `add_withPositiveNumbers_returnsSum`
 - `login_withInvalidPassword_throwsAuthError`
 - `getUser_whenNotFound_returnsNull`
@@ -148,18 +158,21 @@ Examples:
 ## Test Categories
 
 ### Unit Tests
+
 - Single function/class in isolation
 - Mock all dependencies
 - Fast (<10ms per test)
 - Run constantly during development
 
 ### Integration Tests
+
 - Multiple components together
 - Real database (test instance)
 - Slower but more realistic
 - Run before commits
 
 ### End-to-End Tests
+
 - Full system through UI
 - Slowest, most realistic
 - Run in CI/CD pipeline
@@ -170,6 +183,7 @@ Examples:
 ## TDD Best Practices
 
 ### DO:
+
 - Start with the simplest case
 - Write one test at a time
 - Keep tests independent
@@ -178,6 +192,7 @@ Examples:
 - Commit after each green
 
 ### DON'T:
+
 - Write code before tests
 - Test private methods directly
 - Test framework code
@@ -189,6 +204,7 @@ Examples:
 ## Edge Cases to Test
 
 Always test:
+
 - Empty inputs (null, undefined, [], {}, '')
 - Boundary values (0, -1, MAX_INT, min/max dates)
 - Error conditions (network fail, invalid input)
@@ -200,12 +216,12 @@ Always test:
 
 ## Test Coverage Guidelines
 
-| Metric | Minimum | Target |
-|--------|---------|--------|
-| Statements | 70% | 85% |
-| Branches | 70% | 80% |
-| Functions | 80% | 90% |
-| Lines | 70% | 85% |
+| Metric     | Minimum | Target |
+| ---------- | ------- | ------ |
+| Statements | 70%     | 85%    |
+| Branches   | 70%     | 80%    |
+| Functions  | 80%     | 90%    |
+| Lines      | 70%     | 85%    |
 
 Coverage is a metric, not a goal. 100% coverage doesn't mean bug-free.
 
@@ -224,10 +240,10 @@ COMMIT → Save progress (make it permanent)
 
 ## Common TDD Mistakes
 
-| Mistake | Problem | Solution |
-|---------|---------|----------|
+| Mistake                | Problem       | Solution               |
+| ---------------------- | ------------- | ---------------------- |
 | Testing implementation | Brittle tests | Test behavior/outcomes |
-| Tests too large | Hard to debug | Smaller, focused tests |
-| Shared state | Flaky tests | Isolate each test |
-| Slow tests | Skipped tests | Mock external deps |
-| Testing obvious code | Wasted time | Focus on logic |
+| Tests too large        | Hard to debug | Smaller, focused tests |
+| Shared state           | Flaky tests   | Isolate each test      |
+| Slow tests             | Skipped tests | Mock external deps     |
+| Testing obvious code   | Wasted time   | Focus on logic         |

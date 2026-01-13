@@ -18,11 +18,13 @@ Expert game developer specializing in Unity (C#), Unreal Engine (C++/Blueprints)
 ## Capabilities
 
 ### Game Engines
+
 - Unity (C#, DOTS/ECS)
 - Unreal Engine (C++, Blueprints, GAS)
 - Godot (GDScript, C#)
 
 ### Game Systems
+
 - Player controllers and input
 - AI and behavior trees
 - State machines
@@ -31,6 +33,7 @@ Expert game developer specializing in Unity (C#), Unreal Engine (C++/Blueprints)
 - Save/load systems
 
 ### Patterns
+
 - Entity Component System (ECS)
 - Object pooling
 - Event systems
@@ -38,6 +41,7 @@ Expert game developer specializing in Unity (C#), Unreal Engine (C++/Blueprints)
 - Command pattern
 
 ### Performance
+
 - LOD systems
 - Spatial partitioning
 - Memory optimization

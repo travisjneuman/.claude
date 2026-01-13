@@ -14,12 +14,12 @@ Execute one or more prompts from `./prompts/` directory, then automatically arch
 
 ## When to Use This Command
 
-| Use `/run` when... | Use `/start-task` when... |
-|-------------------|---------------------------|
-| You have pre-written prompts in `./prompts/` | Describing a task naturally |
-| Executing structured workflows | Need intelligent skill/agent routing |
-| Running batch prompt sequences | Need complexity scoring (GSD vs Plan vs Direct) |
-| Following established prompt files | Starting fresh work |
+| Use `/run` when...                           | Use `/start-task` when...                       |
+| -------------------------------------------- | ----------------------------------------------- |
+| You have pre-written prompts in `./prompts/` | Describing a task naturally                     |
+| Executing structured workflows               | Need intelligent skill/agent routing            |
+| Running batch prompt sequences               | Need complexity scoring (GSD vs Plan vs Direct) |
+| Following established prompt files           | Starting fresh work                             |
 
 **Note:** Both approaches leverage the full skill ecosystem. `/run` is for pre-defined prompts; `/start-task` is for natural language routing.
 
@@ -69,9 +69,9 @@ fi
 
 If working in a GSD project (has `.planning/STATE.md`), use GSD commands instead:
 
-| This Command | GSD Equivalent |
-|--------------|----------------|
-| `/run` | `/gsd:execute-plan` |
+| This Command | GSD Equivalent                   |
+| ------------ | -------------------------------- |
+| `/run`       | `/gsd:execute-plan`              |
 | `./prompts/` | `.planning/phases/XX-XX-PLAN.md` |
 
 Use `/gsd:progress` to see current project status and next plan to execute.
@@ -96,12 +96,12 @@ Each prompt file should contain clear instructions for Claude to execute.
 
 ## Related Commands
 
-| Command | Purpose |
-|---------|---------|
-| `/start-task` | Intelligent routing for any task |
-| `/gsd:execute-plan` | Execute GSD phase plans |
-| `/taches-cc-resources:run-prompt` | Underlying prompt executor |
+| Command                           | Purpose                          |
+| --------------------------------- | -------------------------------- |
+| `/start-task`                     | Intelligent routing for any task |
+| `/gsd:execute-plan`               | Execute GSD phase plans          |
+| `/taches-cc-resources:run-prompt` | Underlying prompt executor       |
 
 ---
 
-*Structured prompt execution with automatic archiving*
+_Structured prompt execution with automatic archiving_

@@ -11,15 +11,15 @@ Comprehensive guide for creating professional visual designs across digital and 
 
 ### The 7 Principles of Design
 
-| Principle | Definition | Application |
-|-----------|------------|-------------|
-| **Balance** | Visual equilibrium | Symmetrical, asymmetrical, radial |
-| **Contrast** | Difference between elements | Size, color, shape, texture |
-| **Emphasis** | Focal point creation | Hierarchy guides the eye |
-| **Movement** | Visual flow direction | Leading lines, repetition |
-| **Pattern** | Repetition of elements | Creates rhythm and unity |
-| **Rhythm** | Visual tempo | Regular, flowing, progressive |
-| **Unity** | Cohesive whole | Consistent style throughout |
+| Principle    | Definition                  | Application                       |
+| ------------ | --------------------------- | --------------------------------- |
+| **Balance**  | Visual equilibrium          | Symmetrical, asymmetrical, radial |
+| **Contrast** | Difference between elements | Size, color, shape, texture       |
+| **Emphasis** | Focal point creation        | Hierarchy guides the eye          |
+| **Movement** | Visual flow direction       | Leading lines, repetition         |
+| **Pattern**  | Repetition of elements      | Creates rhythm and unity          |
+| **Rhythm**   | Visual tempo                | Regular, flowing, progressive     |
+| **Unity**    | Cohesive whole              | Consistent style throughout       |
 
 ---
 
@@ -27,12 +27,12 @@ Comprehensive guide for creating professional visual designs across digital and 
 
 ### Color Models
 
-| Model | Use Case | Components |
-|-------|----------|------------|
-| **RGB** | Digital screens | Red, Green, Blue (0-255) |
-| **CMYK** | Print media | Cyan, Magenta, Yellow, Key/Black |
-| **HSL** | Design tools | Hue, Saturation, Lightness |
-| **Hex** | Web/CSS | #RRGGBB format |
+| Model    | Use Case        | Components                       |
+| -------- | --------------- | -------------------------------- |
+| **RGB**  | Digital screens | Red, Green, Blue (0-255)         |
+| **CMYK** | Print media     | Cyan, Magenta, Yellow, Key/Black |
+| **HSL**  | Design tools    | Hue, Saturation, Lightness       |
+| **Hex**  | Web/CSS         | #RRGGBB format                   |
 
 ### Color Harmonies
 
@@ -47,16 +47,16 @@ Monochromatic:    Single hue, varying saturation/lightness
 
 ### Color Psychology
 
-| Color | Associations | Use For |
-|-------|--------------|---------|
-| **Red** | Energy, urgency, passion | CTAs, sales, warnings |
-| **Blue** | Trust, calm, professional | Corporate, tech, finance |
-| **Green** | Growth, nature, health | Eco, wellness, money |
-| **Yellow** | Optimism, attention, warmth | Highlights, caution |
-| **Purple** | Luxury, creativity, wisdom | Premium, creative |
-| **Orange** | Enthusiasm, confidence | CTAs, youth brands |
-| **Black** | Sophistication, power | Luxury, editorial |
-| **White** | Clean, minimal, pure | Modern, healthcare |
+| Color      | Associations                | Use For                  |
+| ---------- | --------------------------- | ------------------------ |
+| **Red**    | Energy, urgency, passion    | CTAs, sales, warnings    |
+| **Blue**   | Trust, calm, professional   | Corporate, tech, finance |
+| **Green**  | Growth, nature, health      | Eco, wellness, money     |
+| **Yellow** | Optimism, attention, warmth | Highlights, caution      |
+| **Purple** | Luxury, creativity, wisdom  | Premium, creative        |
+| **Orange** | Enthusiasm, confidence      | CTAs, youth brands       |
+| **Black**  | Sophistication, power       | Luxury, editorial        |
+| **White**  | Clean, minimal, pure        | Modern, healthcare       |
 
 ### Accessible Color Contrast
 
@@ -79,14 +79,14 @@ Tools: WebAIM Contrast Checker, Stark, Color Safe
 
 ### Type Classification
 
-| Category | Characteristics | Use Cases |
-|----------|-----------------|-----------|
-| **Serif** | Decorative strokes | Print, editorial, formal |
-| **Sans-serif** | Clean, no strokes | Digital, modern, UI |
-| **Slab Serif** | Bold, blocky serifs | Headlines, branding |
-| **Script** | Handwritten feel | Invitations, logos |
-| **Display** | Decorative, unique | Headlines only |
-| **Monospace** | Fixed-width | Code, technical |
+| Category       | Characteristics     | Use Cases                |
+| -------------- | ------------------- | ------------------------ |
+| **Serif**      | Decorative strokes  | Print, editorial, formal |
+| **Sans-serif** | Clean, no strokes   | Digital, modern, UI      |
+| **Slab Serif** | Bold, blocky serifs | Headlines, branding      |
+| **Script**     | Handwritten feel    | Invitations, logos       |
+| **Display**    | Decorative, unique  | Headlines only           |
+| **Monospace**  | Fixed-width         | Code, technical          |
 
 ### Type Hierarchy
 
@@ -144,14 +144,14 @@ Common Column Spans:
 
 ```css
 /* Base unit: 8px */
---space-1: 4px;    /* 0.5x - tight */
---space-2: 8px;    /* 1x - base */
---space-3: 16px;   /* 2x - comfortable */
---space-4: 24px;   /* 3x - section gap */
---space-5: 32px;   /* 4x - group separation */
---space-6: 48px;   /* 6x - major sections */
---space-7: 64px;   /* 8x - page sections */
---space-8: 96px;   /* 12x - hero spacing */
+--space-1: 4px; /* 0.5x - tight */
+--space-2: 8px; /* 1x - base */
+--space-3: 16px; /* 2x - comfortable */
+--space-4: 24px; /* 3x - section gap */
+--space-5: 32px; /* 4x - group separation */
+--space-6: 48px; /* 6x - major sections */
+--space-7: 64px; /* 8x - page sections */
+--space-8: 96px; /* 12x - hero spacing */
 ```
 
 ### Rule of Thirds
@@ -183,22 +183,22 @@ Common Column Spans:
 
 ### Raster (Pixel-Based)
 
-| Format | Best For | Notes |
-|--------|----------|-------|
-| **JPG/JPEG** | Photos, gradients | Lossy, no transparency |
-| **PNG** | Graphics, transparency | Lossless, larger files |
-| **GIF** | Simple animations | 256 colors max |
-| **WebP** | Web images | Best compression, modern |
-| **AVIF** | Web images | Newest, best quality/size |
+| Format       | Best For               | Notes                     |
+| ------------ | ---------------------- | ------------------------- |
+| **JPG/JPEG** | Photos, gradients      | Lossy, no transparency    |
+| **PNG**      | Graphics, transparency | Lossless, larger files    |
+| **GIF**      | Simple animations      | 256 colors max            |
+| **WebP**     | Web images             | Best compression, modern  |
+| **AVIF**     | Web images             | Newest, best quality/size |
 
 ### Vector (Math-Based)
 
-| Format | Best For | Notes |
-|--------|----------|-------|
+| Format  | Best For            | Notes                |
+| ------- | ------------------- | -------------------- |
 | **SVG** | Web graphics, icons | Scalable, animatable |
-| **AI** | Adobe Illustrator | Native format |
-| **EPS** | Print, legacy | Universal vector |
-| **PDF** | Print, documents | Preserves vectors |
+| **AI**  | Adobe Illustrator   | Native format        |
+| **EPS** | Print, legacy       | Universal vector     |
+| **PDF** | Print, documents    | Preserves vectors    |
 
 ### Export Guidelines
 
@@ -222,23 +222,23 @@ Print Graphics:
 
 ### Industry Standard
 
-| Tool | Best For | Platform |
-|------|----------|----------|
-| **Figma** | UI/UX, collaboration | Web, Desktop |
-| **Adobe Photoshop** | Photo editing, raster | Desktop |
-| **Adobe Illustrator** | Vector graphics | Desktop |
-| **Sketch** | UI design | macOS only |
-| **Affinity Designer** | Vector (Illustrator alt) | Desktop |
-| **Canva** | Quick designs | Web |
+| Tool                  | Best For                 | Platform     |
+| --------------------- | ------------------------ | ------------ |
+| **Figma**             | UI/UX, collaboration     | Web, Desktop |
+| **Adobe Photoshop**   | Photo editing, raster    | Desktop      |
+| **Adobe Illustrator** | Vector graphics          | Desktop      |
+| **Sketch**            | UI design                | macOS only   |
+| **Affinity Designer** | Vector (Illustrator alt) | Desktop      |
+| **Canva**             | Quick designs            | Web          |
 
 ### Free Alternatives
 
-| Tool | Replaces | Platform |
-|------|----------|----------|
-| **GIMP** | Photoshop | Desktop |
-| **Inkscape** | Illustrator | Desktop |
-| **Photopea** | Photoshop | Web |
-| **Vectr** | Illustrator | Web |
+| Tool         | Replaces    | Platform |
+| ------------ | ----------- | -------- |
+| **GIMP**     | Photoshop   | Desktop  |
+| **Inkscape** | Illustrator | Desktop  |
+| **Photopea** | Photoshop   | Web      |
+| **Vectr**    | Illustrator | Web      |
 
 ---
 
@@ -320,6 +320,7 @@ Business Cards:
 ## Best Practices
 
 ### DO:
+
 - Start with sketches/wireframes
 - Use consistent spacing system
 - Test designs at actual size
@@ -329,6 +330,7 @@ Business Cards:
 - Create style guides/design systems
 
 ### DON'T:
+
 - Use more than 3 fonts
 - Rely on color alone for meaning
 - Ignore whitespace

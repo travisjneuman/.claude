@@ -17,19 +17,19 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: 'var(--primary)',
-        secondary: 'var(--secondary)',
-        accent: 'var(--accent)',
+        primary: "var(--primary)",
+        secondary: "var(--secondary)",
+        accent: "var(--accent)",
       },
       spacing: {
-        '18': '72px',
+        18: "72px",
       },
       borderRadius: {
-        'xl': '16px',
-      }
-    }
-  }
-}
+        xl: "16px",
+      },
+    },
+  },
+};
 ```
 
 ### CSS Variables Setup
@@ -178,18 +178,20 @@ const container = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
-    transition: { staggerChildren: 0.1 }
-  }
+    transition: { staggerChildren: 0.1 },
+  },
 };
 
 const item = {
   hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0 }
+  show: { opacity: 1, y: 0 },
 };
 
 <motion.ul variants={container} initial="hidden" animate="show">
-  {items.map(i => <motion.li key={i} variants={item} />)}
-</motion.ul>
+  {items.map((i) => (
+    <motion.li key={i} variants={item} />
+  ))}
+</motion.ul>;
 ```
 
 ## Dark Mode Implementation
@@ -199,22 +201,24 @@ const item = {
 ```tsx
 // ThemeProvider.tsx
 const ThemeContext = createContext<{
-  theme: 'light' | 'dark';
+  theme: "light" | "dark";
   toggle: () => void;
-}>({ theme: 'light', toggle: () => {} });
+}>({ theme: "light", toggle: () => {} });
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  const [theme, setTheme] = useState<"light" | "dark">("light");
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
   }, [theme]);
 
   return (
-    <ThemeContext.Provider value={{
-      theme,
-      toggle: () => setTheme(t => t === 'light' ? 'dark' : 'light')
-    }}>
+    <ThemeContext.Provider
+      value={{
+        theme,
+        toggle: () => setTheme((t) => (t === "light" ? "dark" : "light")),
+      }}
+    >
       {children}
     </ThemeContext.Provider>
   );
@@ -225,11 +229,11 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
 ```tsx
 useEffect(() => {
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-  setTheme(prefersDark.matches ? 'dark' : 'light');
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)");
+  setTheme(prefersDark.matches ? "dark" : "light");
 
-  prefersDark.addEventListener('change', e =>
-    setTheme(e.matches ? 'dark' : 'light')
+  prefersDark.addEventListener("change", (e) =>
+    setTheme(e.matches ? "dark" : "light"),
   );
 }, []);
 ```
@@ -247,9 +251,12 @@ useEffect(() => {
 ### Skip Link
 
 ```tsx
-<a href="#main" className="sr-only focus:not-sr-only focus:absolute
+<a
+  href="#main"
+  className="sr-only focus:not-sr-only focus:absolute
   focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2
-  focus:bg-primary focus:text-white focus:rounded">
+  focus:bg-primary focus:text-white focus:rounded"
+>
   Skip to content
 </a>
 ```

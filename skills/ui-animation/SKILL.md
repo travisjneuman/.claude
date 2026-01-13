@@ -11,20 +11,20 @@ Comprehensive guide for creating purposeful, performant animations in user inter
 
 ### The 12 Principles of Animation (Applied to UI)
 
-| Principle | UI Application |
-|-----------|----------------|
-| **Timing** | Duration reflects importance/distance |
-| **Easing** | Natural acceleration/deceleration |
-| **Anticipation** | Visual preparation for action |
-| **Follow-through** | Momentum continues after stop |
-| **Secondary Action** | Supporting elements respond |
-| **Staging** | Draw attention to key element |
-| **Squash & Stretch** | Bouncy, playful interactions |
-| **Exaggeration** | Emphasize important feedback |
-| **Arc** | Natural curved motion paths |
-| **Overlap** | Elements move at different rates |
-| **Solid Drawing** | Maintain consistent 3D space |
-| **Appeal** | Engaging, delightful motion |
+| Principle            | UI Application                        |
+| -------------------- | ------------------------------------- |
+| **Timing**           | Duration reflects importance/distance |
+| **Easing**           | Natural acceleration/deceleration     |
+| **Anticipation**     | Visual preparation for action         |
+| **Follow-through**   | Momentum continues after stop         |
+| **Secondary Action** | Supporting elements respond           |
+| **Staging**          | Draw attention to key element         |
+| **Squash & Stretch** | Bouncy, playful interactions          |
+| **Exaggeration**     | Emphasize important feedback          |
+| **Arc**              | Natural curved motion paths           |
+| **Overlap**          | Elements move at different rates      |
+| **Solid Drawing**    | Maintain consistent 3D space          |
+| **Appeal**           | Engaging, delightful motion           |
 
 ### Why Animate?
 
@@ -151,13 +151,13 @@ spring: { stiffness: 300, damping: 20 }
 
 ### When to Use Each
 
-| Scenario | Easing | Why |
-|----------|--------|-----|
-| Element entering | ease-out | Arrives energetically, settles |
-| Element leaving | ease-in | Gathers momentum to exit |
-| On-screen change | ease-in-out | Smooth state change |
-| Attention grabbing | bounce/spring | Playful, noticeable |
-| Background/subtle | ease-out | Unobtrusive |
+| Scenario           | Easing        | Why                            |
+| ------------------ | ------------- | ------------------------------ |
+| Element entering   | ease-out      | Arrives energetically, settles |
+| Element leaving    | ease-in       | Gathers momentum to exit       |
+| On-screen change   | ease-in-out   | Smooth state change            |
+| Attention grabbing | bounce/spring | Playful, noticeable            |
+| Background/subtle  | ease-out      | Unobtrusive                    |
 
 ---
 
@@ -315,7 +315,7 @@ will-change: transform, opacity;
 const first = element.getBoundingClientRect();
 
 // Last: Apply change, get final position
-element.classList.add('moved');
+element.classList.add("moved");
 const last = element.getBoundingClientRect();
 
 // Invert: Calculate delta, apply inverse transform
@@ -325,8 +325,8 @@ element.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
 
 // Play: Remove transform with transition
 requestAnimationFrame(() => {
-  element.style.transition = 'transform 300ms ease-out';
-  element.style.transform = '';
+  element.style.transition = "transform 300ms ease-out";
+  element.style.transform = "";
 });
 ```
 
@@ -354,8 +354,12 @@ requestAnimationFrame(() => {
 
 /* With steps */
 @keyframes typewriter {
-  from { width: 0; }
-  to { width: 100%; }
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
 }
 
 .typing-text {
@@ -405,30 +409,30 @@ animation: fadeIn 300ms ease-out forwards;
 
 ### Comparison
 
-| Library | Best For | Bundle Size |
-|---------|----------|-------------|
-| **CSS** | Simple transitions | 0kb |
-| **Web Animations API** | Native, performant | 0kb |
-| **GSAP** | Complex, precise | ~60kb |
-| **Framer Motion** | React ecosystem | ~50kb |
-| **anime.js** | Timeline, SVG | ~17kb |
-| **Motion One** | Modern, lightweight | ~18kb |
-| **Lottie** | After Effects export | ~50kb |
+| Library                | Best For             | Bundle Size |
+| ---------------------- | -------------------- | ----------- |
+| **CSS**                | Simple transitions   | 0kb         |
+| **Web Animations API** | Native, performant   | 0kb         |
+| **GSAP**               | Complex, precise     | ~60kb       |
+| **Framer Motion**      | React ecosystem      | ~50kb       |
+| **anime.js**           | Timeline, SVG        | ~17kb       |
+| **Motion One**         | Modern, lightweight  | ~18kb       |
+| **Lottie**             | After Effects export | ~50kb       |
 
 ### Framer Motion (React)
 
 ```jsx
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from "framer-motion";
 
 // Basic animation
 <motion.div
   initial={{ opacity: 0, y: 20 }}
   animate={{ opacity: 1, y: 0 }}
   exit={{ opacity: 0, y: -20 }}
-  transition={{ duration: 0.3, ease: 'easeOut' }}
+  transition={{ duration: 0.3, ease: "easeOut" }}
 >
   Content
-</motion.div>
+</motion.div>;
 
 // Variants for complex animations
 const containerVariants = {
@@ -436,54 +440,54 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1
-    }
-  }
+      staggerChildren: 0.1,
+    },
+  },
 };
 
 const itemVariants = {
   hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0 }
+  visible: { opacity: 1, y: 0 },
 };
 
 <motion.ul variants={containerVariants} initial="hidden" animate="visible">
-  {items.map(item => (
+  {items.map((item) => (
     <motion.li key={item.id} variants={itemVariants}>
       {item.name}
     </motion.li>
   ))}
-</motion.ul>
+</motion.ul>;
 ```
 
 ### GSAP
 
 ```javascript
-import { gsap } from 'gsap';
+import { gsap } from "gsap";
 
 // Basic tween
-gsap.to('.element', {
+gsap.to(".element", {
   x: 100,
   opacity: 1,
   duration: 0.3,
-  ease: 'power2.out'
+  ease: "power2.out",
 });
 
 // Timeline
 const tl = gsap.timeline();
-tl.from('.header', { y: -100, duration: 0.5 })
-  .from('.content', { opacity: 0, duration: 0.3 }, '-=0.2')
-  .from('.button', { scale: 0.8, duration: 0.2 });
+tl.from(".header", { y: -100, duration: 0.5 })
+  .from(".content", { opacity: 0, duration: 0.3 }, "-=0.2")
+  .from(".button", { scale: 0.8, duration: 0.2 });
 
 // ScrollTrigger
 gsap.registerPlugin(ScrollTrigger);
-gsap.to('.parallax', {
+gsap.to(".parallax", {
   y: -100,
   scrollTrigger: {
-    trigger: '.section',
-    start: 'top center',
-    end: 'bottom center',
-    scrub: true
-  }
+    trigger: ".section",
+    start: "top center",
+    end: "bottom center",
+    scrub: true,
+  },
 });
 ```
 
@@ -572,9 +576,9 @@ SAFE alternatives:
 }
 
 .ripple::after {
-  content: '';
+  content: "";
   position: absolute;
-  background: rgba(255,255,255,0.3);
+  background: rgba(255, 255, 255, 0.3);
   border-radius: 50%;
   transform: scale(0);
   animation: ripple 400ms ease-out;
@@ -583,11 +587,11 @@ SAFE alternatives:
 
 ### Platform Conventions
 
-| Platform | Animation Style |
-|----------|-----------------|
-| **iOS** | Spring physics, 300-500ms, subtle |
+| Platform    | Animation Style                        |
+| ----------- | -------------------------------------- |
+| **iOS**     | Spring physics, 300-500ms, subtle      |
 | **Android** | Material motion, 200-300ms, emphasized |
-| **Web** | Varies, typically 200-400ms |
+| **Web**     | Varies, typically 200-400ms            |
 
 ---
 
@@ -626,6 +630,7 @@ SAFE alternatives:
 ## Best Practices
 
 ### DO:
+
 - Animate with purpose (feedback, guidance)
 - Use GPU-accelerated properties
 - Keep durations under 500ms
@@ -635,6 +640,7 @@ SAFE alternatives:
 - Use consistent timing system
 
 ### DON'T:
+
 - Animate for decoration alone
 - Block user interaction
 - Use excessive bounce/overshoot
@@ -648,18 +654,21 @@ SAFE alternatives:
 ## Animation Checklist
 
 ### Pre-Implementation
+
 - [ ] Animation serves a purpose
 - [ ] Duration appropriate for action
 - [ ] Easing matches motion intent
 - [ ] Performance impact assessed
 
 ### Implementation
+
 - [ ] Uses GPU-accelerated properties
 - [ ] prefers-reduced-motion respected
 - [ ] Works on target devices
 - [ ] No layout thrashing
 
 ### Quality Check
+
 - [ ] Feels natural and responsive
 - [ ] Doesn't delay user
 - [ ] Consistent with design system

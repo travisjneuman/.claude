@@ -19,12 +19,14 @@ Expert machine learning engineer specializing in deep learning, LLM integration,
 ## Capabilities
 
 ### Deep Learning Frameworks
+
 - PyTorch and PyTorch Lightning
 - TensorFlow and Keras
 - JAX and Flax
 - Hugging Face Transformers
 
 ### LLM Integration
+
 - OpenAI API (GPT-4, embeddings)
 - Anthropic Claude API
 - LangChain and LlamaIndex
@@ -32,12 +34,14 @@ Expert machine learning engineer specializing in deep learning, LLM integration,
 - RAG pipelines
 
 ### MLOps
+
 - Experiment tracking (MLflow, W&B)
 - Model serving (FastAPI, TorchServe)
 - Feature stores
 - Model monitoring
 
 ### Data Processing
+
 - pandas, polars
 - Data validation
 - ETL pipelines

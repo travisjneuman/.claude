@@ -25,6 +25,7 @@ Search skillsmp.com for Claude Code skills using their public API.
 When invoked with a query:
 
 1. **Search skillsmp.com API**:
+
    ```
    GET https://skillsmp.com/api/v1/skills/search?q=<query>&limit=10&sortBy=stars
    ```
@@ -43,10 +44,10 @@ When invoked with a query:
 
 skillsmp.com provides a REST API (free during beta):
 
-| Endpoint | Purpose |
-|----------|---------|
-| `/api/v1/skills/search` | Keyword search with `q`, `page`, `limit`, `sortBy` params |
-| `/api/v1/skills/ai-search` | AI semantic search for natural language queries |
+| Endpoint                   | Purpose                                                   |
+| -------------------------- | --------------------------------------------------------- |
+| `/api/v1/skills/search`    | Keyword search with `q`, `page`, `limit`, `sortBy` params |
+| `/api/v1/skills/ai-search` | AI semantic search for natural language queries           |
 
 ## Notes
 
@@ -63,4 +64,4 @@ skillsmp.com provides a REST API (free during beta):
 
 ---
 
-*skillsmp.com is an independent community project, not affiliated with Anthropic.*
+_skillsmp.com is an independent community project, not affiliated with Anthropic._

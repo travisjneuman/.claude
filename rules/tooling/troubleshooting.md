@@ -8,13 +8,13 @@
 
 ### Windows
 
-| Issue | Fix |
-|-------|-----|
-| Bash scripts don't run | Install [Git for Windows](https://git-scm.com/download/win) - includes Git Bash |
-| `~/.claude/` path not found | Use `$HOME/.claude/` or `C:\Users\<username>\.claude\` |
-| Line ending errors | Convert with `dos2unix` or configure Git: `git config --global core.autocrlf false` |
-| Notifications not working | Ensure PowerShell execution policy allows scripts |
-| `python3` not found | Windows uses `python` not `python3` - use `node` for JSON validation |
+| Issue                       | Fix                                                                                 |
+| --------------------------- | ----------------------------------------------------------------------------------- |
+| Bash scripts don't run      | Install [Git for Windows](https://git-scm.com/download/win) - includes Git Bash     |
+| `~/.claude/` path not found | Use `$HOME/.claude/` or `C:\Users\<username>\.claude\`                              |
+| Line ending errors          | Convert with `dos2unix` or configure Git: `git config --global core.autocrlf false` |
+| Notifications not working   | Ensure PowerShell execution policy allows scripts                                   |
+| `python3` not found         | Windows uses `python` not `python3` - use `node` for JSON validation                |
 
 ```powershell
 # Verify Git Bash is available
@@ -26,12 +26,12 @@ echo $OSTYPE  # Should output "msys" or "cygwin"
 
 ### macOS
 
-| Issue | Fix |
-|-------|-----|
-| Command not found: git | Install Xcode CLI: `xcode-select --install` |
-| Notifications not showing | Check System Preferences → Notifications |
-| Permission denied on scripts | Run `chmod +x script.sh` |
-| zsh compatibility issues | Scripts use `#!/bin/bash` shebang for portability |
+| Issue                        | Fix                                               |
+| ---------------------------- | ------------------------------------------------- |
+| Command not found: git       | Install Xcode CLI: `xcode-select --install`       |
+| Notifications not showing    | Check System Preferences → Notifications          |
+| Permission denied on scripts | Run `chmod +x script.sh`                          |
+| zsh compatibility issues     | Scripts use `#!/bin/bash` shebang for portability |
 
 ```bash
 # Verify bash is available (even on zsh default)
@@ -43,12 +43,12 @@ osascript -e 'display notification "Test" with title "Claude Code"'
 
 ### Linux
 
-| Issue | Fix |
-|-------|-----|
-| Notifications not working | Install: `sudo apt install libnotify-bin` (Debian/Ubuntu) |
-| Permission denied | Run `chmod +x ~/.claude/scripts/*.sh` |
-| Command not found: bash | Usually pre-installed, verify with `which bash` |
-| File watcher limit | Increase: `echo fs.inotify.max_user_watches=524288 \| sudo tee -a /etc/sysctl.conf` |
+| Issue                     | Fix                                                                                 |
+| ------------------------- | ----------------------------------------------------------------------------------- |
+| Notifications not working | Install: `sudo apt install libnotify-bin` (Debian/Ubuntu)                           |
+| Permission denied         | Run `chmod +x ~/.claude/scripts/*.sh`                                               |
+| Command not found: bash   | Usually pre-installed, verify with `which bash`                                     |
+| File watcher limit        | Increase: `echo fs.inotify.max_user_watches=524288 \| sudo tee -a /etc/sysctl.conf` |
 
 ```bash
 # Test notification
@@ -65,16 +65,17 @@ systemctl --user status notification-daemon
 ### Issue: Pre-Commit Hook Not Running
 
 **Symptoms:**
+
 - Can commit code without task file
 - No error message appears
 
 **Causes & Fixes:**
 
-| Cause | Fix |
-|-------|-----|
-| Hook not executable | `chmod +x .git/hooks/pre-commit` |
-| Hook file missing | Check `.git/hooks/` directory |
-| Using `--no-verify` | Remove flag from command |
+| Cause                | Fix                                             |
+| -------------------- | ----------------------------------------------- |
+| Hook not executable  | `chmod +x .git/hooks/pre-commit`                |
+| Hook file missing    | Check `.git/hooks/` directory                   |
+| Using `--no-verify`  | Remove flag from command                        |
 | Windows line endings | Convert to LF: `dos2unix .git/hooks/pre-commit` |
 
 ```bash
@@ -93,17 +94,18 @@ bash -n .git/hooks/pre-commit
 ### Issue: Hook Blocking Valid Commits
 
 **Symptoms:**
+
 - Hook blocks commit even though task file is staged
 - False positive error
 
 **Causes & Fixes:**
 
-| Cause | Fix |
-|-------|-----|
+| Cause                    | Fix                           |
+| ------------------------ | ----------------------------- |
 | Task file wrong location | Must be in `tasks/` directory |
-| Task file not staged | `git add tasks/[name].md` |
-| Wrong file extension | Must be `.md` |
-| Pattern mismatch | Check hook's grep pattern |
+| Task file not staged     | `git add tasks/[name].md`     |
+| Wrong file extension     | Must be `.md`                 |
+| Pattern mismatch         | Check hook's grep pattern     |
 
 ```bash
 # Check what's staged
@@ -119,22 +121,24 @@ git add tasks/my-feature.md
 ### Issue: Hook Allows Code Without Task File
 
 **Symptoms:**
+
 - Code commits go through without task file
 - Hook seems to not detect code changes
 
 **Causes & Fixes:**
 
-| Cause | Fix |
-|-------|-----|
-| Code not in monitored directories | Update hook's grep pattern |
-| Only .md files changed | Intentional - docs don't need task file |
-| Hook has bugs | Test manually: `bash .git/hooks/pre-commit` |
+| Cause                             | Fix                                         |
+| --------------------------------- | ------------------------------------------- |
+| Code not in monitored directories | Update hook's grep pattern                  |
+| Only .md files changed            | Intentional - docs don't need task file     |
+| Hook has bugs                     | Test manually: `bash .git/hooks/pre-commit` |
 
 ---
 
 ### Issue: Hook Error Messages Not Displaying
 
 **Symptoms:**
+
 - Commit blocked but no error message shown
 - Silent failure
 
@@ -156,6 +160,7 @@ echo $?  # Should be 0 (success) or 1 (blocked)
 ### Issue: Type Errors Not Caught
 
 **Symptoms:**
+
 - Code compiles but has type issues
 - `any` types creeping in
 
@@ -183,6 +188,7 @@ npx tsc --noEmit
 ### Issue: Module Not Found
 
 **Symptoms:**
+
 - `Cannot find module` errors
 - Path imports failing
 
@@ -211,6 +217,7 @@ npm install
 ### Issue: Tests Not Running
 
 **Symptoms:**
+
 - `npm run test` does nothing
 - Tests not discovered
 
@@ -235,17 +242,18 @@ npx vitest --list
 ### Issue: Tests Passing Locally But Failing in CI
 
 **Symptoms:**
+
 - Green locally, red in CI
 - Intermittent failures
 
 **Common Causes:**
 
-| Cause | Fix |
-|-------|-----|
+| Cause                   | Fix                          |
+| ----------------------- | ---------------------------- |
 | Environment differences | Check Node version, env vars |
-| Race conditions | Add proper async/await |
-| Time-dependent tests | Mock dates |
-| Order-dependent tests | Reset state in beforeEach |
+| Race conditions         | Add proper async/await       |
+| Time-dependent tests    | Mock dates                   |
+| Order-dependent tests   | Reset state in beforeEach    |
 
 ---
 
@@ -254,17 +262,18 @@ npx vitest --list
 ### Issue: Build Fails But Dev Works
 
 **Symptoms:**
+
 - `npm run dev` works
 - `npm run build` fails
 
 **Common Causes:**
 
-| Cause | Fix |
-|-------|-----|
-| Type errors ignored in dev | Run `npm run type-check` |
-| Missing environment vars | Check `.env.production` |
-| Import issues | Check for circular imports |
-| SSR issues (Next.js) | Check window/document usage |
+| Cause                      | Fix                         |
+| -------------------------- | --------------------------- |
+| Type errors ignored in dev | Run `npm run type-check`    |
+| Missing environment vars   | Check `.env.production`     |
+| Import issues              | Check for circular imports  |
+| SSR issues (Next.js)       | Check window/document usage |
 
 ```bash
 # Debug build
@@ -282,6 +291,7 @@ grep -r "document\." src/
 ### Issue: Port Already in Use
 
 **Symptoms:**
+
 - `Error: listen EADDRINUSE: address already in use`
 
 **Fixes:**
@@ -303,6 +313,7 @@ PORT=3001 npm run dev
 ### Issue: Hot Reload Not Working
 
 **Symptoms:**
+
 - Changes not reflected in browser
 - Need to restart server
 
@@ -327,6 +338,7 @@ sudo sysctl -p
 ### Issue: Migration Conflicts
 
 **Symptoms:**
+
 - `Migration failed to apply`
 - Database schema out of sync
 
@@ -350,6 +362,7 @@ npx prisma db pull
 ### Issue: OAuth Token Not Set
 
 **Symptoms:**
+
 - `CLAUDE_CODE_OAUTH_TOKEN not found`
 - Auto-Claude fails to start
 
@@ -372,6 +385,7 @@ CLAUDE_CODE_OAUTH_TOKEN=your-token-here
 ### Issue: Python Dependencies Missing
 
 **Symptoms:**
+
 - `ModuleNotFoundError: No module named 'claude'`
 - Import errors when running Auto-Claude
 
@@ -390,6 +404,7 @@ python -c "import claude; print('✓ claude-agent-sdk installed')"
 ### Issue: Git Worktree Already Exists
 
 **Symptoms:**
+
 - `fatal: 'worktree-name' already exists`
 - Cannot create new worktree
 
@@ -411,6 +426,7 @@ git worktree list | grep auto-claude | awk '{print $1}' | xargs -I {} git worktr
 ### Issue: Spec Generation Stuck or Slow
 
 **Symptoms:**
+
 - Spec generation taking too long
 - Process appears hung
 
@@ -435,12 +451,14 @@ ps aux | grep python
 ### Issue: QA Validation Failing Repeatedly
 
 **Symptoms:**
+
 - QA agent rejects implementation multiple times
 - Fixer agent can't resolve issues
 
 **Fixes:**
 
 1. **Review the spec:**
+
    ```bash
    cat ~/.auto-claude/specs/XXX-feature/spec.md
    # Check if acceptance criteria are clear
@@ -451,6 +469,7 @@ ps aux | grep python
    - Try: "Add JWT-based user authentication with login, registration, and session expiry after 7 days"
 
 3. **Check QA report:**
+
    ```bash
    cat ~/.auto-claude/specs/XXX-feature/qa_report.md
    # See what's failing
@@ -464,6 +483,7 @@ ps aux | grep python
 ### Issue: Worktree Merge Conflicts
 
 **Symptoms:**
+
 - Conflicts when merging Auto-Claude branch
 - Git merge errors
 
@@ -490,12 +510,14 @@ git merge --abort
 ### Issue: Memory/Embedding Errors
 
 **Symptoms:**
+
 - Graphiti errors
 - Embedding provider failures
 
 **Fixes:**
 
 **For Gemini:**
+
 ```bash
 # Check API key is valid
 # Edit ~/.auto-claude/.env
@@ -503,6 +525,7 @@ GOOGLE_API_KEY=your-valid-key
 ```
 
 **For Ollama:**
+
 ```bash
 # Ensure Ollama is running
 ollama serve
@@ -516,6 +539,7 @@ GRAPHITI_EMBEDDER_MODEL=nomic-embed-text
 ```
 
 **Disable memory entirely:**
+
 ```bash
 # Edit ~/.auto-claude/.env
 GRAPHITI_ENABLED=false
@@ -547,13 +571,14 @@ du -sh node_modules/*/ | sort -hr | head -20
 
 ## Related Skills
 
-| Skill | When to Use |
-|-------|-------------|
+| Skill                | When to Use                     |
+| -------------------- | ------------------------------- |
 | `tech-debt-analyzer` | Systematic code health analysis |
-| `test-specialist` | Test debugging |
-| `security` | Security-related issues |
+| `test-specialist`    | Test debugging                  |
+| `security`           | Security-related issues         |
 
 ### Invoke with:
+
 ```
 Skill(tech-debt-analyzer)
 ```
@@ -581,4 +606,4 @@ If troubleshooting doesn't resolve the issue:
 
 ---
 
-*Most issues have simple fixes. Check the basics first.*
+_Most issues have simple fixes. Check the basics first._

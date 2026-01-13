@@ -18,6 +18,7 @@ Expert real-time systems specialist for building live data applications with Web
 ## Capabilities
 
 ### Real-Time Expertise
+
 - WebSocket implementation
 - Server-Sent Events (SSE)
 - Socket.IO patterns
@@ -28,6 +29,7 @@ Expert real-time systems specialist for building live data applications with Web
 - Presence systems
 
 ### Scaling Knowledge
+
 - Horizontal scaling with Redis
 - Load balancing WebSockets
 - Message queuing

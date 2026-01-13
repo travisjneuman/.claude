@@ -22,6 +22,7 @@ Research is mandatory to avoid generic AI-generated looks. See [UI Inspiration S
 ## When to Use
 
 **Use for:**
+
 - Improving styling and visual design
 - Creating responsive layouts
 - Adding animations and transitions
@@ -30,12 +31,14 @@ Research is mandatory to avoid generic AI-generated looks. See [UI Inspiration S
 - Enhancing aesthetics
 
 **Don't use when:**
+
 - Need inspiration first → use `ui-research` (MANDATORY)
 - UX flow design → use `generic-ux-designer`
 - Code architecture → use `generic-feature-developer`
 - Code review → use `generic-code-reviewer`
 
 **Foundational References:**
+
 - [UI Inspiration Sources](../_shared/UI_INSPIRATION_SOURCES.md) - Research sources
 - [Design Patterns](../_shared/DESIGN_PATTERNS.md) - Visual tokens
 
@@ -52,29 +55,32 @@ Research is mandatory to avoid generic AI-generated looks. See [UI Inspiration S
 
 ## Color Palette Selection
 
-| Palette | Use Case |
-|---------|----------|
-| Corporate Blue | Business apps, SaaS |
-| Vibrant Purple | Creative tools, portfolios |
-| Minimalist Gray | Clean, sophisticated |
-| Warm Sunset | Consumer apps, e-commerce |
-| Ocean Fresh | Health, finance apps |
-| Dark Mode | Developer tools, dashboards |
+| Palette         | Use Case                    |
+| --------------- | --------------------------- |
+| Corporate Blue  | Business apps, SaaS         |
+| Vibrant Purple  | Creative tools, portfolios  |
+| Minimalist Gray | Clean, sophisticated        |
+| Warm Sunset     | Consumer apps, e-commerce   |
+| Ocean Fresh     | Health, finance apps        |
+| Dark Mode       | Developer tools, dashboards |
 
 Each palette needs: Primary, Secondary, Accent, Background, Foreground, Muted, Success, Warning, Error
 
 ## Component Patterns
 
 ### Buttons
+
 - Variants: primary, secondary, outline, ghost, danger
 - Sizes: sm, md, lg
 - States: loading, disabled
 
 ### Cards
+
 - Variants: default, bordered, elevated, interactive
 - Subcomponents: Header, Title, Description, Content, Footer
 
 ### Forms
+
 - Clear focus states
 - Validation feedback
 - Helper text
@@ -83,6 +89,7 @@ Each palette needs: Primary, Secondary, Accent, Background, Foreground, Muted, S
 ## Animation Guidelines
 
 **GPU-Accelerated Only:**
+
 ```css
 /* ✅ DO animate */
 transform: translateY(-4px);
@@ -94,26 +101,31 @@ height: 100px;
 ```
 
 **Duration Guidelines:**
+
 - Micro-interactions: 100-200ms
 - Transitions: 200-300ms
 - Complex animations: 300-500ms
 
 **Accessibility:**
+
 ```css
 @media (prefers-reduced-motion: reduce) {
-  * { animation: none !important; transition: none !important; }
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
 }
 ```
 
 ## Responsive Strategy
 
-| Breakpoint | Min Width | Target |
-|------------|-----------|--------|
-| base | 0 | Mobile |
-| sm | 640px | Large phones |
-| md | 768px | Tablets |
-| lg | 1024px | Laptops |
-| xl | 1280px | Desktops |
+| Breakpoint | Min Width | Target       |
+| ---------- | --------- | ------------ |
+| base       | 0         | Mobile       |
+| sm         | 640px     | Large phones |
+| md         | 768px     | Tablets      |
+| lg         | 1024px    | Laptops      |
+| xl         | 1280px    | Desktops     |
 
 ## Accessibility Checklist
 
@@ -129,11 +141,13 @@ height: 100px;
 ## Layout Patterns
 
 ### Hero Section
+
 - Centered, split, or minimal variants
 - Primary + secondary CTAs
 - Optional background gradients
 
 ### Feature Grid
+
 - 2, 3, or 4 columns
 - Icon + title + description
 - Staggered animations
@@ -150,8 +164,8 @@ height: 100px;
 
 ```typescript
 // lib/utils.ts
-import { clsx, type ClassValue } from 'clsx';
-import { twMerge } from 'tailwind-merge';
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -161,6 +175,7 @@ export function cn(...inputs: ClassValue[]) {
 ## Before/After Pattern
 
 When enhancing, document changes:
+
 ```
 Before: Plain gray button, no hover state
 After: Gradient primary button with hover lift effect
@@ -196,14 +211,14 @@ Ensure you DO have:
 
 ### Quality Comparison
 
-| Aspect | Generic AI | Human-Polished |
-|--------|------------|----------------|
-| **Color** | Default blue | Custom brand palette |
-| **Layout** | Perfect grid | Intentional variation |
-| **Images** | Stock/generic | Curated/custom |
-| **Copy** | Lorem ipsum | Real, personality-rich |
-| **Motion** | Basic fades | Purposeful, branded |
-| **Details** | None | Hover states, feedback |
+| Aspect      | Generic AI    | Human-Polished         |
+| ----------- | ------------- | ---------------------- |
+| **Color**   | Default blue  | Custom brand palette   |
+| **Layout**  | Perfect grid  | Intentional variation  |
+| **Images**  | Stock/generic | Curated/custom         |
+| **Copy**    | Lorem ipsum   | Real, personality-rich |
+| **Motion**  | Basic fades   | Purposeful, branded    |
+| **Details** | None          | Hover states, feedback |
 
 ---
 

@@ -8,14 +8,14 @@ Ongoing maintenance procedures to keep your Claude Code configuration clean and 
 
 ## Regular Maintenance Schedule
 
-| Task | Frequency | Impact |
-|------|-----------|--------|
-| Clear debug logs | Weekly | Frees disk space |
-| Clear shell snapshots | Weekly | Frees disk space |
-| Clear old todos | Monthly | Frees disk space |
-| Update MCP backup | After changes | Keeps backup current |
-| Review permissions | Monthly | Security hygiene |
-| Update skills | As needed | Keep patterns current |
+| Task                  | Frequency     | Impact                |
+| --------------------- | ------------- | --------------------- |
+| Clear debug logs      | Weekly        | Frees disk space      |
+| Clear shell snapshots | Weekly        | Frees disk space      |
+| Clear old todos       | Monthly       | Frees disk space      |
+| Update MCP backup     | After changes | Keeps backup current  |
+| Review permissions    | Monthly       | Security hygiene      |
+| Update skills         | As needed     | Keep patterns current |
 
 ---
 
@@ -150,6 +150,7 @@ Monthly, review your allowed tools:
 ```
 
 Remove any you no longer need:
+
 ```bash
 claude deny "Bash(dangerous-command:*)"
 ```
@@ -171,6 +172,7 @@ claude update
 ```
 
 Or if using npm:
+
 ```bash
 npm update -g @anthropic-ai/claude-code
 ```
@@ -190,6 +192,7 @@ If a skill folder exists but isn't used:
 ### Update Outdated Skills
 
 Skills may need updates when:
+
 - Tech stack changes
 - Best practices evolve
 - Patterns become outdated
@@ -199,6 +202,7 @@ Review and update SKILL.md content periodically.
 ### Consolidate Similar Skills
 
 If you have multiple similar skills:
+
 1. Identify overlapping content
 2. Merge into one comprehensive skill
 3. Delete redundant skills
@@ -241,6 +245,7 @@ du -sh ~/.claude/*/
 ### What to Backup
 
 **Always backup:**
+
 - `settings.json`
 - `settings.local.json`
 - `commands/`
@@ -252,6 +257,7 @@ du -sh ~/.claude/*/
 - `*.md` reference files
 
 **Don't backup:**
+
 - `debug/`
 - `file-history/`
 - `shell-snapshots/`

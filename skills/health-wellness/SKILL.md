@@ -21,15 +21,15 @@ CAREER: Development, purpose, job satisfaction, growth, recognition
 
 ### Program Components
 
-| Component | Description | Participation Target |
-|-----------|-------------|---------------------|
-| **Health Risk Assessment** | Annual health screening | 70%+ |
-| **Biometric Screening** | Blood pressure, BMI, cholesterol | 60%+ |
-| **Fitness Programs** | Gym subsidies, challenges | 40%+ |
-| **Nutrition Programs** | Healthy eating, coaching | 30%+ |
-| **Mental Health** | EAP, counseling, apps | 25%+ |
-| **Financial Wellness** | Education, coaching | 35%+ |
-| **Tobacco Cessation** | Support programs | 50%+ of smokers |
+| Component                  | Description                      | Participation Target |
+| -------------------------- | -------------------------------- | -------------------- |
+| **Health Risk Assessment** | Annual health screening          | 70%+                 |
+| **Biometric Screening**    | Blood pressure, BMI, cholesterol | 60%+                 |
+| **Fitness Programs**       | Gym subsidies, challenges        | 40%+                 |
+| **Nutrition Programs**     | Healthy eating, coaching         | 30%+                 |
+| **Mental Health**          | EAP, counseling, apps            | 25%+                 |
+| **Financial Wellness**     | Education, coaching              | 35%+                 |
+| **Tobacco Cessation**      | Support programs                 | 50%+ of smokers      |
 
 ### Incentive Design
 
@@ -53,13 +53,13 @@ RECOVERY: Return-to-work programs, accommodations, relapse prevention
 
 ### Mental Health Resources
 
-| Resource | Access | Coverage |
-|----------|--------|----------|
-| **EAP** | 24/7 hotline, web | 6-8 free sessions |
-| **Teletherapy** | App, video | Varies by plan |
-| **Digital Tools** | Apps (Calm, Headspace) | Free to employees |
-| **Crisis Support** | Text/call lines | Unlimited |
-| **Support Groups** | ERG-led | Free |
+| Resource           | Access                 | Coverage          |
+| ------------------ | ---------------------- | ----------------- |
+| **EAP**            | 24/7 hotline, web      | 6-8 free sessions |
+| **Teletherapy**    | App, video             | Varies by plan    |
+| **Digital Tools**  | Apps (Calm, Headspace) | Free to employees |
+| **Crisis Support** | Text/call lines        | Unlimited         |
+| **Support Groups** | ERG-led                | Free              |
 
 ### Manager Training
 
@@ -103,13 +103,13 @@ MONITORING: Inspections, observations, metrics, audits
 
 ### Safety Metrics
 
-| Metric | Formula | Benchmark |
-|--------|---------|-----------|
-| **TRIR** | (Incidents × 200,000) / Hours worked | <1.0 |
-| **DART** | (Days away/restricted × 200,000) / Hours | <0.5 |
-| **Lost Time** | Lost time incidents / Total incidents | <20% |
-| **Near Miss** | Near misses reported | Increasing trend |
-| **Training** | Completion rate | >95% |
+| Metric        | Formula                                  | Benchmark        |
+| ------------- | ---------------------------------------- | ---------------- |
+| **TRIR**      | (Incidents × 200,000) / Hours worked     | <1.0             |
+| **DART**      | (Days away/restricted × 200,000) / Hours | <0.5             |
+| **Lost Time** | Lost time incidents / Total incidents    | <20%             |
+| **Near Miss** | Near misses reported                     | Increasing trend |
+| **Training**  | Completion rate                          | >95%             |
 
 ### Ergonomics Program
 
@@ -155,12 +155,12 @@ FLEXIBILITY: Multiple plan options, voluntary benefits, life event changes
 
 ### Plan Design Options
 
-| Plan Type | Premium | Deductible | Best For |
-|-----------|---------|------------|----------|
-| **PPO** | Higher | Lower | Frequent care needs |
-| **HDHP/HSA** | Lower | Higher | Healthy, want tax benefits |
-| **HMO** | Lower | Lower | Cost-conscious, PCP-centric |
-| **EPO** | Medium | Medium | Network-only OK |
+| Plan Type    | Premium | Deductible | Best For                    |
+| ------------ | ------- | ---------- | --------------------------- |
+| **PPO**      | Higher  | Lower      | Frequent care needs         |
+| **HDHP/HSA** | Lower   | Higher     | Healthy, want tax benefits  |
+| **HMO**      | Lower   | Lower      | Cost-conscious, PCP-centric |
+| **EPO**      | Medium  | Medium     | Network-only OK             |
 
 ### Cost Management
 
@@ -196,13 +196,13 @@ MEMBER ENGAGEMENT:
 
 ### Data Sources
 
-| Source | Data Type | Use Case |
-|--------|-----------|----------|
-| **Claims** | Utilization, costs | Population health |
-| **Biometrics** | Health measures | Risk identification |
-| **HRA** | Self-reported health | Program targeting |
-| **Engagement** | Program participation | ROI analysis |
-| **Absence** | Disability, leave | Productivity impact |
+| Source         | Data Type             | Use Case            |
+| -------------- | --------------------- | ------------------- |
+| **Claims**     | Utilization, costs    | Population health   |
+| **Biometrics** | Health measures       | Risk identification |
+| **HRA**        | Self-reported health  | Program targeting   |
+| **Engagement** | Program participation | ROI analysis        |
+| **Absence**    | Disability, leave     | Productivity impact |
 
 ### Key Metrics
 
@@ -269,14 +269,14 @@ $1.50 - $3.00 return per $1 invested (3-5 year horizon)
 
 ### Regulatory Requirements
 
-| Regulation | Requirement | Impact |
-|------------|-------------|--------|
-| **OSHA** | Workplace safety standards | Safety programs |
-| **ADA** | Disability accommodations | Wellness design |
-| **GINA** | Genetic non-discrimination | HRA limitations |
-| **HIPAA** | Health information privacy | Data handling |
-| **ERISA** | Benefit plan requirements | Plan documents |
-| **ACA** | Wellness incentive limits | Program design |
+| Regulation | Requirement                | Impact          |
+| ---------- | -------------------------- | --------------- |
+| **OSHA**   | Workplace safety standards | Safety programs |
+| **ADA**    | Disability accommodations  | Wellness design |
+| **GINA**   | Genetic non-discrimination | HRA limitations |
+| **HIPAA**  | Health information privacy | Data handling   |
+| **ERISA**  | Benefit plan requirements  | Plan documents  |
+| **ACA**    | Wellness incentive limits  | Program design  |
 
 ### Privacy Protections
 
@@ -308,13 +308,13 @@ SHARING:
 
 ### Implementation Roadmap
 
-| Phase | Timeline | Activities |
-|-------|----------|------------|
-| **Assessment** | Month 1-2 | Needs analysis, benchmarking |
-| **Design** | Month 3-4 | Program design, vendor selection |
-| **Build** | Month 5-6 | Systems, communications |
-| **Launch** | Month 7 | Rollout, training |
-| **Optimize** | Month 8+ | Measure, iterate |
+| Phase          | Timeline  | Activities                       |
+| -------------- | --------- | -------------------------------- |
+| **Assessment** | Month 1-2 | Needs analysis, benchmarking     |
+| **Design**     | Month 3-4 | Program design, vendor selection |
+| **Build**      | Month 5-6 | Systems, communications          |
+| **Launch**     | Month 7   | Rollout, training                |
+| **Optimize**   | Month 8+  | Measure, iterate                 |
 
 ### Success Factors
 

@@ -12,22 +12,23 @@ Complete map of the `.claude/` folder and related files.
 
 This toolkit has multiple settings files with different purposes:
 
-| File | Purpose | Tracked? | Why |
-|------|---------|----------|-----|
-| `settings.json` | Claude Code toolkit config (permissions, hooks, plugins) | **Yes** ✅ | Core toolkit functionality - shared |
-| `settings.local.json` | Personal overrides | **No** | Machine-specific customizations |
-| `vscode/settings.json` | VSCode IDE settings | **No** | Contains local paths, network IPs |
-| `.mcp.json` | MCP server config | **No** | Platform-specific commands |
-| `.claude.json` | MCP backup | **No** | Machine-specific |
+| File                   | Purpose                                                  | Tracked?   | Why                                 |
+| ---------------------- | -------------------------------------------------------- | ---------- | ----------------------------------- |
+| `settings.json`        | Claude Code toolkit config (permissions, hooks, plugins) | **Yes** ✅ | Core toolkit functionality - shared |
+| `settings.local.json`  | Personal overrides                                       | **No**     | Machine-specific customizations     |
+| `vscode/settings.json` | VSCode IDE settings                                      | **No**     | Contains local paths, network IPs   |
+| `.mcp.json`            | MCP server config                                        | **No**     | Platform-specific commands          |
+| `.claude.json`         | MCP backup                                               | **No**     | Machine-specific                    |
 
 ### Two VSCode Folders (CRITICAL DISTINCTION)
 
-| Folder | Description | Tracked? |
-|--------|-------------|----------|
-| `vscode/` (no dot) | Our custom folder with setup scripts | **Yes** ✅ |
-| `.vscode/` (with dot) | Standard VSCode workspace folder | **No** |
+| Folder                | Description                          | Tracked?   |
+| --------------------- | ------------------------------------ | ---------- |
+| `vscode/` (no dot)    | Our custom folder with setup scripts | **Yes** ✅ |
+| `.vscode/` (with dot) | Standard VSCode workspace folder     | **No**     |
 
 **Why this matters:**
+
 - `.vscode/` is auto-created by VSCode when opening any folder
 - It contains machine-specific workspace settings (paths, IPs, preferences)
 - If tracked, it would expose local network configuration
@@ -188,11 +189,11 @@ This repo underwent a security audit before being made public. The following wer
 
 Custom commands that appear as `/command-name` in Claude Code.
 
-| File | Command | Purpose |
-|------|---------|---------|
-| `run.md` | `/run` | Execute prompts with auto-archiving |
-| `start-task.md` | `/start-task` | Intelligent task router (v3.0 modular) |
-| `router/*.md` | (reference) | Domain detection tables (on-demand loading) |
+| File            | Command       | Purpose                                     |
+| --------------- | ------------- | ------------------------------------------- |
+| `run.md`        | `/run`        | Execute prompts with auto-archiving         |
+| `start-task.md` | `/start-task` | Intelligent task router (v3.0 modular)      |
+| `router/*.md`   | (reference)   | Domain detection tables (on-demand loading) |
 
 **Note:** GSD commands (`/gsd:*`) come from the `get-shit-done` marketplace plugin.
 
@@ -206,15 +207,15 @@ Custom commands that appear as `/command-name` in Claude Code.
 
 Complete workflow system for multi-phase projects:
 
-| Command | Purpose |
-|---------|---------|
-| `/gsd:new-project` | Initialize new project with deep context gathering |
-| `/gsd:progress` | Check project status, route to next action |
-| `/gsd:plan-phase` | Create detailed execution plan for a phase |
-| `/gsd:execute-plan` | Execute a PLAN.md file |
-| `/gsd:pause-work` | Create context handoff when pausing |
-| `/gsd:resume-work` | Resume work with full context restoration |
-| `/gsd:help` | Show available GSD commands |
+| Command             | Purpose                                            |
+| ------------------- | -------------------------------------------------- |
+| `/gsd:new-project`  | Initialize new project with deep context gathering |
+| `/gsd:progress`     | Check project status, route to next action         |
+| `/gsd:plan-phase`   | Create detailed execution plan for a phase         |
+| `/gsd:execute-plan` | Execute a PLAN.md file                             |
+| `/gsd:pause-work`   | Create context handoff when pausing                |
+| `/gsd:resume-work`  | Resume work with full context restoration          |
+| `/gsd:help`         | Show available GSD commands                        |
 
 ---
 
@@ -223,6 +224,7 @@ Complete workflow system for multi-phase projects:
 Skills provide specialized knowledge and guidelines. They auto-activate based on context.
 
 **Skill Structure:**
+
 ```
 skills/
 └── skill-name/
@@ -234,19 +236,19 @@ skills/
 
 **Skill Categories:**
 
-| Category | Examples |
-|----------|----------|
-| Generic | `generic-code-reviewer`, `generic-design-system` |
+| Category       | Examples                                                     |
+| -------------- | ------------------------------------------------------------ |
+| Generic        | `generic-code-reviewer`, `generic-design-system`             |
 | Stack-specific | `generic-react-*`, `generic-static-*`, `generic-fullstack-*` |
-| Domain Expert | `marketing`, `sales`, `finance`, `leadership` |
-| Utility | `tech-debt-analyzer`, `codebase-documenter` |
+| Domain Expert  | `marketing`, `sales`, `finance`, `leadership`                |
+| Utility        | `tech-debt-analyzer`, `codebase-documenter`                  |
 
 ---
 
 ### `/templates/` - Task Templates
 
-| Template | Purpose |
-|----------|---------|
+| Template           | Purpose                                 |
+| ------------------ | --------------------------------------- |
 | `task-template.md` | Comprehensive task planning with phases |
 
 ---
@@ -262,6 +264,7 @@ This folder contains all documentation for understanding and maintaining this co
 Stores planning documents organized by project. This folder is **gitignored** as contents are user-specific.
 
 **Example structure:**
+
 - `<project-name>/` - Project-specific plans
 - `meta/` - Cross-project documents
 
@@ -272,11 +275,13 @@ Stores planning documents organized by project. This folder is **gitignored** as
 **Purpose:** Single location for all archived content. This folder is **gitignored** and created at runtime by workflows. Files here are NOT loaded into Claude's context.
 
 **Created automatically when:**
+
 - Completed tasks are archived via `mv tasks/<task>.md .archive/completed-tasks/`
 - Plans are completed and moved to archive
 - Other workflow archiving operations
 
 **Contents (user-specific, not in repo):**
+
 - Completed plan files
 - Archived skills
 - Old todo history
@@ -292,13 +297,14 @@ Stores planning documents organized by project. This folder is **gitignored** as
 
 This folder contains portable VSCode setup resources:
 
-| File | Purpose | Tracked? |
-|------|---------|----------|
-| `README.md` | Setup instructions | Yes |
-| `setup-vscode-settings.ps1` | Windows symlink setup script | Yes |
-| `settings.json` | Template VSCode settings | **No** (gitignored) |
+| File                        | Purpose                      | Tracked?            |
+| --------------------------- | ---------------------------- | ------------------- |
+| `README.md`                 | Setup instructions           | Yes                 |
+| `setup-vscode-settings.ps1` | Windows symlink setup script | Yes                 |
+| `settings.json`             | Template VSCode settings     | **No** (gitignored) |
 
 **Why `vscode/settings.json` is gitignored:**
+
 - Contains machine-specific paths (e.g., `C:\Users\tjn\.claude`)
 - Contains local network IPs (e.g., `192.168.1.40`)
 - Users should create their own from the template or use the symlink script
@@ -312,6 +318,7 @@ This folder is **automatically created by VSCode** when you open `.claude/` as a
 - Tracked: **No** (entire folder gitignored)
 
 **Why it's gitignored:**
+
 - Auto-generated by IDE
 - Contains machine-specific configuration
 - Would conflict between users/machines
@@ -328,6 +335,7 @@ This folder is **automatically created by VSCode** when you open `.claude/` as a
 **Purpose:** MCP server configurations
 
 **Platform paths:**
+
 - Windows: `C:\Users\username\.claude.json`
 - macOS: `/Users/username/.claude.json`
 - Linux: `/home/username/.claude.json`
@@ -336,31 +344,31 @@ This folder is **automatically created by VSCode** when you open `.claude/` as a
 
 ## Files That Get Generated (Don't Copy)
 
-| Path | Purpose | Safe to Delete |
-|------|---------|----------------|
-| `debug/` | Debug logs | Yes |
-| `file-history/` | Edit history for /rewind | Yes |
-| `projects/` | Project trust hashes | Yes |
-| `shell-snapshots/` | Shell state backups | Yes |
-| `statsig/` | Feature flag cache | Yes |
-| `telemetry/` | Telemetry data | Yes |
-| `todos/` | Agent task history | Yes |
-| `security_warnings_*.json` | Session warnings | Yes |
-| `history.jsonl` | Conversation history | Yes |
-| `stats-cache.json` | Usage statistics | Yes |
-| `.credentials.json` | Auth tokens | Yes (re-login) |
-| `sqlite_mcp_server.db` | SQLite MCP data | Yes |
+| Path                       | Purpose                  | Safe to Delete |
+| -------------------------- | ------------------------ | -------------- |
+| `debug/`                   | Debug logs               | Yes            |
+| `file-history/`            | Edit history for /rewind | Yes            |
+| `projects/`                | Project trust hashes     | Yes            |
+| `shell-snapshots/`         | Shell state backups      | Yes            |
+| `statsig/`                 | Feature flag cache       | Yes            |
+| `telemetry/`               | Telemetry data           | Yes            |
+| `todos/`                   | Agent task history       | Yes            |
+| `security_warnings_*.json` | Session warnings         | Yes            |
+| `history.jsonl`            | Conversation history     | Yes            |
+| `stats-cache.json`         | Usage statistics         | Yes            |
+| `.credentials.json`        | Auth tokens              | Yes (re-login) |
+| `sqlite_mcp_server.db`     | SQLite MCP data          | Yes            |
 
 ---
 
 ## Size Reference
 
-| Path | Typical Size | Notes |
-|------|--------------|-------|
-| `skills/` | ~500KB | Core configuration |
-| `docs/` | ~50KB | Documentation |
-| `commands/` | ~100KB | Slash commands (including gsd/) |
-| `templates/` | ~10KB | Templates |
+| Path         | Typical Size | Notes                           |
+| ------------ | ------------ | ------------------------------- |
+| `skills/`    | ~500KB       | Core configuration              |
+| `docs/`      | ~50KB        | Documentation                   |
+| `commands/`  | ~100KB       | Slash commands (including gsd/) |
+| `templates/` | ~10KB        | Templates                       |
 
 **Total portable size:** ~1MB
 **With generated files:** Can grow to 100MB+

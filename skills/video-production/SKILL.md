@@ -11,11 +11,11 @@ Comprehensive guide for professional video production across all platforms.
 
 ### The 3 Phases
 
-| Phase | Activities | Deliverables |
-|-------|------------|--------------|
-| **Pre-Production** | Planning, scripting, storyboarding | Script, shot list, schedule |
-| **Production** | Filming, recording | Raw footage, audio |
-| **Post-Production** | Editing, VFX, color, sound | Final deliverable |
+| Phase               | Activities                         | Deliverables                |
+| ------------------- | ---------------------------------- | --------------------------- |
+| **Pre-Production**  | Planning, scripting, storyboarding | Script, shot list, schedule |
+| **Production**      | Filming, recording                 | Raw footage, audio          |
+| **Post-Production** | Editing, VFX, color, sound         | Final deliverable           |
 
 ---
 
@@ -40,11 +40,11 @@ In today's tutorial, we'll cover...
 
 ### Shot List Template
 
-| # | Scene | Shot Type | Description | Duration | Notes |
-|---|-------|-----------|-------------|----------|-------|
-| 1 | Intro | Wide | Office establishing | 3s | Natural lighting |
-| 2 | Intro | Close-up | Subject face | 5s | Eye contact |
-| 3 | Demo | Screen capture | Code editor | 30s | 1080p60 |
+| #   | Scene | Shot Type      | Description         | Duration | Notes            |
+| --- | ----- | -------------- | ------------------- | -------- | ---------------- |
+| 1   | Intro | Wide           | Office establishing | 3s       | Natural lighting |
+| 2   | Intro | Close-up       | Subject face        | 5s       | Eye contact      |
+| 3   | Demo  | Screen capture | Code editor         | 30s      | 1080p60          |
 
 ### Storyboard Elements
 
@@ -94,16 +94,16 @@ TWO-SHOT: Two subjects in frame
 
 ### Camera Movements
 
-| Movement | Description | Effect |
-|----------|-------------|--------|
-| **Pan** | Horizontal rotation | Reveal, follow action |
-| **Tilt** | Vertical rotation | Reveal height, power |
-| **Dolly** | Move toward/away | Intimacy, reveal |
-| **Truck** | Move left/right | Follow alongside |
-| **Crane** | Vertical elevation | Epic, establishing |
-| **Zoom** | Focal length change | Focus attention |
-| **Handheld** | Natural movement | Documentary feel |
-| **Steadicam** | Smooth handheld | Following shots |
+| Movement      | Description         | Effect                |
+| ------------- | ------------------- | --------------------- |
+| **Pan**       | Horizontal rotation | Reveal, follow action |
+| **Tilt**      | Vertical rotation   | Reveal height, power  |
+| **Dolly**     | Move toward/away    | Intimacy, reveal      |
+| **Truck**     | Move left/right     | Follow alongside      |
+| **Crane**     | Vertical elevation  | Epic, establishing    |
+| **Zoom**      | Focal length change | Focus attention       |
+| **Handheld**  | Natural movement    | Documentary feel      |
+| **Steadicam** | Smooth handheld     | Following shots       |
 
 ### The Exposure Triangle
 
@@ -125,14 +125,14 @@ TWO-SHOT: Two subjects in frame
 
 ### Video Settings
 
-| Setting | Standard | Notes |
-|---------|----------|-------|
-| **Resolution** | 1080p, 4K | Match delivery target |
-| **Frame Rate** | 24, 30, 60 fps | 24=film, 30=TV, 60=smooth |
-| **Shutter Speed** | 1/2x frame rate | 180° rule (1/48 for 24fps) |
-| **ISO** | As low as possible | Higher = more noise |
-| **Bit Rate** | 50-400 Mbps | Higher = better quality |
-| **Codec** | H.264, H.265, ProRes | ProRes for editing |
+| Setting           | Standard             | Notes                      |
+| ----------------- | -------------------- | -------------------------- |
+| **Resolution**    | 1080p, 4K            | Match delivery target      |
+| **Frame Rate**    | 24, 30, 60 fps       | 24=film, 30=TV, 60=smooth  |
+| **Shutter Speed** | 1/2x frame rate      | 180° rule (1/48 for 24fps) |
+| **ISO**           | As low as possible   | Higher = more noise        |
+| **Bit Rate**      | 50-400 Mbps          | Higher = better quality    |
+| **Codec**         | H.264, H.265, ProRes | ProRes for editing         |
 
 ---
 
@@ -157,19 +157,19 @@ LIGHT│       Subject         │ (rim/hair)
               CAMERA
 ```
 
-| Light | Purpose | Intensity |
-|-------|---------|-----------|
-| **Key** | Main illumination | 100% reference |
-| **Fill** | Soften shadows | 50-75% of key |
-| **Back** | Separation from BG | Variable |
+| Light    | Purpose            | Intensity      |
+| -------- | ------------------ | -------------- |
+| **Key**  | Main illumination  | 100% reference |
+| **Fill** | Soften shadows     | 50-75% of key  |
+| **Back** | Separation from BG | Variable       |
 
 ### Lighting Styles
 
-| Style | Key:Fill Ratio | Mood |
-|-------|----------------|------|
-| **High key** | 1:1 to 2:1 | Bright, optimistic |
-| **Medium** | 3:1 to 4:1 | Natural, neutral |
-| **Low key** | 8:1+ | Dramatic, moody |
+| Style        | Key:Fill Ratio | Mood               |
+| ------------ | -------------- | ------------------ |
+| **High key** | 1:1 to 2:1     | Bright, optimistic |
+| **Medium**   | 3:1 to 4:1     | Natural, neutral   |
+| **Low key**  | 8:1+           | Dramatic, moody    |
 
 ### Color Temperature
 
@@ -190,21 +190,21 @@ Kelvin Scale:
 
 ### Recording Guidelines
 
-| Element | Target Level | Notes |
-|---------|--------------|-------|
-| **Dialogue** | -12 to -6 dB | Peak at -6 dB max |
-| **Music** | -18 to -12 dB | Under dialogue |
-| **SFX** | Variable | Support the story |
-| **Noise floor** | Below -60 dB | Record room tone |
+| Element         | Target Level  | Notes             |
+| --------------- | ------------- | ----------------- |
+| **Dialogue**    | -12 to -6 dB  | Peak at -6 dB max |
+| **Music**       | -18 to -12 dB | Under dialogue    |
+| **SFX**         | Variable      | Support the story |
+| **Noise floor** | Below -60 dB  | Record room tone  |
 
 ### Microphone Types
 
-| Type | Best For | Pattern |
-|------|----------|---------|
-| **Lavalier** | Interviews, dialogue | Omnidirectional |
-| **Shotgun** | Film, documentary | Super-cardioid |
-| **Condenser** | Voiceover, studio | Cardioid |
-| **Dynamic** | Loud sources | Cardioid |
+| Type          | Best For             | Pattern         |
+| ------------- | -------------------- | --------------- |
+| **Lavalier**  | Interviews, dialogue | Omnidirectional |
+| **Shotgun**   | Film, documentary    | Super-cardioid  |
+| **Condenser** | Voiceover, studio    | Cardioid        |
+| **Dynamic**   | Loud sources         | Cardioid        |
 
 ### Audio Checklist
 
@@ -251,25 +251,25 @@ Kelvin Scale:
 
 ### Editing Software
 
-| Software | Best For | Platform |
-|----------|----------|----------|
-| **DaVinci Resolve** | Color grading, full edit | All (Free tier) |
-| **Adobe Premiere** | Industry standard | All |
-| **Final Cut Pro** | Mac ecosystem | macOS |
-| **Avid Media Composer** | Broadcast, film | All |
-| **iMovie** | Beginners | macOS/iOS |
-| **CapCut** | Social media | Mobile/Desktop |
+| Software                | Best For                 | Platform        |
+| ----------------------- | ------------------------ | --------------- |
+| **DaVinci Resolve**     | Color grading, full edit | All (Free tier) |
+| **Adobe Premiere**      | Industry standard        | All             |
+| **Final Cut Pro**       | Mac ecosystem            | macOS           |
+| **Avid Media Composer** | Broadcast, film          | All             |
+| **iMovie**              | Beginners                | macOS/iOS       |
+| **CapCut**              | Social media             | Mobile/Desktop  |
 
 ### Essential Cuts
 
-| Cut | Description | Use |
-|-----|-------------|-----|
-| **Hard cut** | Instant transition | Standard, dialogue |
-| **J-cut** | Audio leads video | Natural dialogue flow |
-| **L-cut** | Video leads audio | Reaction shots |
-| **Jump cut** | Same angle, time skip | Pacing, style |
-| **Match cut** | Visual similarity | Transitions, meaning |
-| **Cutaway** | Insert shot | Context, time compression |
+| Cut           | Description           | Use                       |
+| ------------- | --------------------- | ------------------------- |
+| **Hard cut**  | Instant transition    | Standard, dialogue        |
+| **J-cut**     | Audio leads video     | Natural dialogue flow     |
+| **L-cut**     | Video leads audio     | Reaction shots            |
+| **Jump cut**  | Same angle, time skip | Pacing, style             |
+| **Match cut** | Visual similarity     | Transitions, meaning      |
+| **Cutaway**   | Insert shot           | Context, time compression |
 
 ---
 
@@ -296,12 +296,12 @@ Kelvin Scale:
 
 ### Color Scopes
 
-| Scope | Shows | Use |
-|-------|-------|-----|
-| **Waveform** | Luminance levels | Exposure, contrast |
-| **Vectorscope** | Hue, saturation | Skin tones, color cast |
-| **Histogram** | Tonal distribution | Clipping, balance |
-| **Parade** | RGB channels separate | Color balance |
+| Scope           | Shows                 | Use                    |
+| --------------- | --------------------- | ---------------------- |
+| **Waveform**    | Luminance levels      | Exposure, contrast     |
+| **Vectorscope** | Hue, saturation       | Skin tones, color cast |
+| **Histogram**   | Tonal distribution    | Clipping, balance      |
+| **Parade**      | RGB channels separate | Color balance          |
 
 ### LUTs (Look-Up Tables)
 
@@ -325,14 +325,14 @@ Application Order:
 
 ### Animation Principles
 
-| Principle | Application |
-|-----------|-------------|
-| **Easing** | Smooth starts/stops (ease in/out) |
-| **Anticipation** | Setup before action |
-| **Follow-through** | Motion continues after stop |
-| **Secondary action** | Supporting movements |
-| **Timing** | Speed conveys weight/mood |
-| **Staging** | Clear presentation |
+| Principle            | Application                       |
+| -------------------- | --------------------------------- |
+| **Easing**           | Smooth starts/stops (ease in/out) |
+| **Anticipation**     | Setup before action               |
+| **Follow-through**   | Motion continues after stop       |
+| **Secondary action** | Supporting movements              |
+| **Timing**           | Speed conveys weight/mood         |
+| **Staging**          | Clear presentation                |
 
 ### Common Motion Patterns
 
@@ -373,15 +373,15 @@ Slow:    500-800ms (emphasis, reveals)
 
 ### Platform Specifications
 
-| Platform | Resolution | Frame Rate | Format |
-|----------|------------|------------|--------|
-| **YouTube** | 1080p/4K | 24-60 fps | H.264/H.265 |
-| **Instagram Feed** | 1080×1080 | 30 fps | H.264 |
-| **Instagram Reels** | 1080×1920 | 30 fps | H.264 |
-| **TikTok** | 1080×1920 | 30 fps | H.264 |
-| **Twitter** | 1280×720+ | 30-60 fps | H.264 |
-| **LinkedIn** | 1920×1080 | 30 fps | H.264 |
-| **Broadcast** | 1080i/p | 29.97/25 fps | ProRes/DNxHD |
+| Platform            | Resolution | Frame Rate   | Format       |
+| ------------------- | ---------- | ------------ | ------------ |
+| **YouTube**         | 1080p/4K   | 24-60 fps    | H.264/H.265  |
+| **Instagram Feed**  | 1080×1080  | 30 fps       | H.264        |
+| **Instagram Reels** | 1080×1920  | 30 fps       | H.264        |
+| **TikTok**          | 1080×1920  | 30 fps       | H.264        |
+| **Twitter**         | 1280×720+  | 30-60 fps    | H.264        |
+| **LinkedIn**        | 1920×1080  | 30 fps       | H.264        |
+| **Broadcast**       | 1080i/p    | 29.97/25 fps | ProRes/DNxHD |
 
 ### Export Settings (H.264)
 
@@ -404,6 +404,7 @@ Archive/Master:
 ## Best Practices
 
 ### DO:
+
 - Plan before you shoot
 - Record more footage than needed
 - Use manual focus when possible
@@ -414,6 +415,7 @@ Archive/Master:
 - Color correct before grading
 
 ### DON'T:
+
 - Overuse transitions
 - Rely on "fix it in post"
 - Forget b-roll coverage
@@ -428,6 +430,7 @@ Archive/Master:
 ## Quality Checklist
 
 ### Pre-Export
+
 - [ ] Timeline resolution matches delivery spec
 - [ ] No black frames or gaps
 - [ ] Audio levels normalized (-14 LUFS for streaming)
@@ -436,6 +439,7 @@ Archive/Master:
 - [ ] Exports without errors
 
 ### Final Review
+
 - [ ] Watch full export beginning to end
 - [ ] Check on multiple devices/screens
 - [ ] Verify audio sync throughout

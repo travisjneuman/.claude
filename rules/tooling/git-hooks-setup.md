@@ -214,11 +214,13 @@ dos2unix .git/hooks/pre-commit
 ## Emergency Bypass
 
 Use `--no-verify` ONLY for:
+
 - Hotfixes (site down)
 - Reverting broken commits
 - Critical security fixes
 
 **NOT for:**
+
 - "I'm lazy"
 - "I'll update task file later"
 - "It's just a small change"
@@ -271,4 +273,4 @@ git add scripts/
 
 ---
 
-*Git hooks: enforce workflow automatically, catch mistakes before they happen.*
+_Git hooks: enforce workflow automatically, catch mistakes before they happen._

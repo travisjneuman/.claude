@@ -18,6 +18,7 @@ Expert microservices architect specializing in distributed system design, servic
 ## Capabilities
 
 ### Architecture Expertise
+
 - Service decomposition strategies
 - Domain-Driven Design (DDD)
 - Event-driven architecture
@@ -28,6 +29,7 @@ Expert microservices architect specializing in distributed system design, servic
 - CQRS and Event Sourcing
 
 ### Operational Patterns
+
 - Circuit breakers
 - Retry and timeout policies
 - Bulkhead patterns

@@ -21,20 +21,20 @@ View and manage the session log created by lifecycle hooks.
 
 ## Platform Compatibility
 
-| Platform | Status | Notes |
-|----------|--------|-------|
-| Windows | ✅ | Requires Git Bash (included with Git for Windows) |
-| macOS | ✅ | Works with bash/zsh |
-| Linux | ✅ | Works with bash |
+| Platform | Status | Notes                                             |
+| -------- | ------ | ------------------------------------------------- |
+| Windows  | ✅     | Requires Git Bash (included with Git for Windows) |
+| macOS    | ✅     | Works with bash/zsh                               |
+| Linux    | ✅     | Works with bash                                   |
 
 All commands use standard POSIX utilities (`tail`, `head`, `wc`, `grep`).
 
 ## Arguments
 
-| Argument | Default | Options |
-|----------|---------|---------|
-| `action` | `tail` | `view`, `tail`, `clear`, `stats` |
-| `lines` | `50` | Any positive integer |
+| Argument | Default | Options                          |
+| -------- | ------- | -------------------------------- |
+| `action` | `tail`  | `view`, `tail`, `clear`, `stats` |
+| `lines`  | `50`    | Any positive integer             |
 
 ## Log Location
 
@@ -112,21 +112,25 @@ The session log captures events from all 10 lifecycle hooks:
 ## Examples
 
 ### View recent activity
+
 ```
 /session-log
 ```
 
 ### View last 100 lines
+
 ```
 /session-log tail 100
 ```
 
 ### Show statistics
+
 ```
 /session-log stats
 ```
 
 ### Clear log
+
 ```
 /session-log clear
 ```
@@ -146,4 +150,4 @@ The session log captures events from all 10 lifecycle hooks:
 
 ---
 
-*Session log provides complete audit trail of Claude Code interactions.*
+_Session log provides complete audit trail of Claude Code interactions._

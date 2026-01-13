@@ -9,16 +9,16 @@
 
 ## Quick Navigation
 
-| Section | Jump To |
-|---------|---------|
-| [Complete Skill Inventory](#complete-skill-inventory) | All 18 skills listed |
-| [How to Use Skills](#how-to-use-skills) | Usage methods |
-| [Product & Data Science](#product--data-science-skills) | PM & Analytics |
-| [Health & Wellness](#health--wellness-skills) | Employee wellbeing |
-| [ESG & Sustainability](#esg--sustainability-skills) | Climate & reporting |
-| [Innovation & R&D](#innovation--rd-skills) | Innovation management |
-| [Key Frameworks](#key-frameworks-reference) | All frameworks |
-| [Maintenance](#maintenance--updates) | Update guidance |
+| Section                                                 | Jump To               |
+| ------------------------------------------------------- | --------------------- |
+| [Complete Skill Inventory](#complete-skill-inventory)   | All 18 skills listed  |
+| [How to Use Skills](#how-to-use-skills)                 | Usage methods         |
+| [Product & Data Science](#product--data-science-skills) | PM & Analytics        |
+| [Health & Wellness](#health--wellness-skills)           | Employee wellbeing    |
+| [ESG & Sustainability](#esg--sustainability-skills)     | Climate & reporting   |
+| [Innovation & R&D](#innovation--rd-skills)              | Innovation management |
+| [Key Frameworks](#key-frameworks-reference)             | All frameworks        |
+| [Maintenance](#maintenance--updates)                    | Update guidance       |
 
 ---
 
@@ -35,61 +35,61 @@ This comprehensive guide covers all Expert-level expert skills available in Clau
 
 ### Business & Strategy
 
-| Skill | SKILL.md | Reference Files |
-|-------|----------|-----------------|
-| **business-strategy** | Strategic planning, competitive analysis, M&A strategy, portfolio management | `corporate-strategy-advisor.md` (66KB) |
-| **finance** | DCF, LBO, M&A modeling, valuation, capital allocation, treasury | `corporate-finance-expert.md` (79KB), `financial-modeling-master.md` (75KB), `ma-due-diligence-specialist.md` (49KB) |
+| Skill                 | SKILL.md                                                                     | Reference Files                                                                                                      |
+| --------------------- | ---------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| **business-strategy** | Strategic planning, competitive analysis, M&A strategy, portfolio management | `corporate-strategy-advisor.md` (66KB)                                                                               |
+| **finance**           | DCF, LBO, M&A modeling, valuation, capital allocation, treasury              | `corporate-finance-expert.md` (79KB), `financial-modeling-master.md` (75KB), `ma-due-diligence-specialist.md` (49KB) |
 
 ### Operations & Technology
 
-| Skill | SKILL.md | Reference Files |
-|-------|----------|-----------------|
-| **operations** | Supply chain, Lean Six Sigma, capacity planning, vendor management | `operations-excellence-skill.md` (43KB) |
-| **security** | NIST, ISO 27001, security architecture, incident response, cloud security | `fortune50-information-security.md` (72KB) |
-| **risk-management** | ERM frameworks, business continuity, insurance, third-party risk | `risk-management.md` (75KB) |
-| **legal-compliance** | Corporate governance, SOX, GDPR, HIPAA, contract analysis, IP | `legal-compliance-excellence-skill.md` (109KB) |
+| Skill                | SKILL.md                                                                  | Reference Files                                |
+| -------------------- | ------------------------------------------------------------------------- | ---------------------------------------------- |
+| **operations**       | Supply chain, Lean Six Sigma, capacity planning, vendor management        | `operations-excellence-skill.md` (43KB)        |
+| **security**         | NIST, ISO 27001, security architecture, incident response, cloud security | `fortune50-information-security.md` (72KB)     |
+| **risk-management**  | ERM frameworks, business continuity, insurance, third-party risk          | `risk-management.md` (75KB)                    |
+| **legal-compliance** | Corporate governance, SOX, GDPR, HIPAA, contract analysis, IP             | `legal-compliance-excellence-skill.md` (109KB) |
 
 ### People & Leadership
 
-| Skill | SKILL.md | Reference Files |
-|-------|----------|-----------------|
-| **leadership** | Executive decision-making, change management, crisis management, board relations | `fortune-50-executive-leadership.md` (60KB) |
-| **hr-talent** | Talent acquisition, performance management, compensation, org design, DEI | `fortune-50-hr-strategist.md` (52KB) |
-| **health-wellness** | Employee wellness, mental health, ergonomics, benefits strategy | `fortune50-workplace-health-wellness.md` (35KB), `health-wellness-templates.md` (25KB) |
+| Skill               | SKILL.md                                                                         | Reference Files                                                                        |
+| ------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| **leadership**      | Executive decision-making, change management, crisis management, board relations | `fortune-50-executive-leadership.md` (60KB)                                            |
+| **hr-talent**       | Talent acquisition, performance management, compensation, org design, DEI        | `fortune-50-hr-strategist.md` (52KB)                                                   |
+| **health-wellness** | Employee wellness, mental health, ergonomics, benefits strategy                  | `fortune50-workplace-health-wellness.md` (35KB), `health-wellness-templates.md` (25KB) |
 
 ### Revenue & Growth
 
-| Skill | SKILL.md | Reference Files |
-|-------|----------|-----------------|
-| **marketing** | Brand positioning, market research, digital marketing, content strategy | (uses enterprise-marketing-strategy) |
-| **sales** | MEDDIC, SPIN, Challenger, pipeline management, revenue ops | (uses enterprise-sales-excellence) |
-| **product-management** | Product strategy, roadmaps, RICE/ICE prioritization, customer research | `product-strategy-expert.md` (27KB) |
+| Skill                  | SKILL.md                                                                | Reference Files                      |
+| ---------------------- | ----------------------------------------------------------------------- | ------------------------------------ |
+| **marketing**          | Brand positioning, market research, digital marketing, content strategy | (uses enterprise-marketing-strategy) |
+| **sales**              | MEDDIC, SPIN, Challenger, pipeline management, revenue ops              | (uses enterprise-sales-excellence)   |
+| **product-management** | Product strategy, roadmaps, RICE/ICE prioritization, customer research  | `product-strategy-expert.md` (27KB)  |
 
 ### Innovation & R&D
 
-| Skill | SKILL.md | Reference Files |
-|-------|----------|-----------------|
-| **innovation** | Design thinking, Stage-Gate, innovation portfolio, corporate venture | `innovation-management-skill.md` (30KB), `corporate-venture-open-innovation-skill.md` (37KB) |
-| **rd-management** | R&D portfolio, technology roadmapping, patent strategy, academic partnerships | `rd-portfolio-management-skill.md` (39KB), `ip-strategy-tech-scouting-skill.md` (35KB) |
+| Skill             | SKILL.md                                                                      | Reference Files                                                                              |
+| ----------------- | ----------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| **innovation**    | Design thinking, Stage-Gate, innovation portfolio, corporate venture          | `innovation-management-skill.md` (30KB), `corporate-venture-open-innovation-skill.md` (37KB) |
+| **rd-management** | R&D portfolio, technology roadmapping, patent strategy, academic partnerships | `rd-portfolio-management-skill.md` (39KB), `ip-strategy-tech-scouting-skill.md` (35KB)       |
 
 ### Data & Analytics
 
-| Skill | SKILL.md | Reference Files |
-|-------|----------|-----------------|
+| Skill            | SKILL.md                                                                     | Reference Files                 |
+| ---------------- | ---------------------------------------------------------------------------- | ------------------------------- |
 | **data-science** | Statistical analysis, ML pipelines, data governance, BI, predictive modeling | `data-science-expert.md` (40KB) |
 
 ### Sustainability & ESG
 
-| Skill | SKILL.md | Reference Files |
-|-------|----------|-----------------|
+| Skill                  | SKILL.md                                                                  | Reference Files                                                                             |
+| ---------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
 | **sustainability-esg** | ESG strategy, carbon footprint, circular economy, climate risk, reporting | `fortune50-esg-sustainability-strategy.md` (58KB), `esg-sustainability-templates.md` (39KB) |
 
 ### Enterprise Skills (with full reference libraries)
 
-| Skill | SKILL.md | References |
-|-------|----------|------------|
-| **enterprise-marketing-strategy** | 29KB | `campaign-planning-guide.md` (15KB) |
-| **enterprise-sales-excellence** | 50KB | `deal-strategies.md` (23KB) |
+| Skill                             | SKILL.md | References                          |
+| --------------------------------- | -------- | ----------------------------------- |
+| **enterprise-marketing-strategy** | 29KB     | `campaign-planning-guide.md` (15KB) |
+| **enterprise-sales-excellence**   | 50KB     | `deal-strategies.md` (23KB)         |
 
 ---
 
@@ -147,6 +147,7 @@ For ESG strategy, reference: ~/.claude/skills/sustainability-esg/
 **File**: `~/.claude/skills/product-management/references/product-strategy-expert.md` (27KB)
 
 **Core Capabilities:**
+
 - Product vision and strategy development
 - Feature prioritization frameworks (RICE, ICE, MoSCoW, Kano, Value vs. Effort)
 - Roadmap planning and communication
@@ -156,6 +157,7 @@ For ESG strategy, reference: ~/.claude/skills/sustainability-esg/
 - Product-market fit assessment
 
 **Key Frameworks:**
+
 - RICE Scoring: (Reach × Impact × Confidence) ÷ Effort
 - ICE Scoring: (Impact + Confidence + Ease) ÷ 3
 - MoSCoW Method: Must/Should/Could/Won't Have
@@ -165,6 +167,7 @@ For ESG strategy, reference: ~/.claude/skills/sustainability-esg/
 - Sean Ellis PMF Survey: >40% "very disappointed" threshold
 
 **When to Use:**
+
 - Planning product roadmaps or strategies
 - Prioritizing features among competing options
 - Designing customer research studies
@@ -176,6 +179,7 @@ For ESG strategy, reference: ~/.claude/skills/sustainability-esg/
 **File**: `~/.claude/skills/data-science/references/data-science-expert.md` (40KB)
 
 **Core Capabilities:**
+
 - Statistical analysis and hypothesis testing
 - Machine learning pipeline design and deployment
 - Data governance frameworks
@@ -184,6 +188,7 @@ For ESG strategy, reference: ~/.claude/skills/sustainability-esg/
 - Data ethics, privacy, and compliance (GDPR, CCPA, HIPAA)
 
 **Key Frameworks:**
+
 - Analytics Maturity Model: Descriptive → Diagnostic → Predictive → Prescriptive
 - ML Lifecycle: Problem definition → Data prep → Model development → Deployment
 - Data Quality Framework: Accuracy, Completeness, Consistency, Timeliness
@@ -191,6 +196,7 @@ For ESG strategy, reference: ~/.claude/skills/sustainability-esg/
 - Fairness Definitions: Demographic parity, equal opportunity, equalized odds
 
 **When to Use:**
+
 - Conducting statistical analyses
 - Building machine learning models
 - Designing BI dashboards
@@ -206,6 +212,7 @@ For ESG strategy, reference: ~/.claude/skills/sustainability-esg/
 **File**: `~/.claude/skills/health-wellness/`
 
 **Core Capabilities:**
+
 - **Program Design**: Tier 1 (universal), Tier 2 (targeted), Tier 3 (premium) wellness architectures
 - **Mental Health**: EAP, therapy access, resilience training, stigma reduction, crisis support
 - **Physical Wellness**: Fitness programs, nutrition counseling, biometric screenings
@@ -213,6 +220,7 @@ For ESG strategy, reference: ~/.claude/skills/sustainability-esg/
 - **Analytics & ROI**: 2.5-6x ROI modeling, healthcare cost tracking
 
 **Key Metrics:**
+
 - Program participation rate: 60-80% target
 - Employee satisfaction (NPS): 50+ target
 - Healthcare cost trend: 3-5% below industry
@@ -220,12 +228,14 @@ For ESG strategy, reference: ~/.claude/skills/sustainability-esg/
 - ROI: 2.5-6x ($2.50-$6.00 per $1 invested)
 
 **Expert Examples:**
+
 - Amazon WorkingWell: 859,000 employees, $300M+ investment
 - J&J: 38-year program with significant healthcare savings
 - Google: Free healthy meals, on-site gyms/physicians
 - Microsoft: $1,500/employee wellness allowance
 
 **Templates Included:**
+
 1. Wellness Program Business Case
 2. Annual Wellness Report
 3. Health Risk Assessment (HRA) Survey
@@ -242,6 +252,7 @@ For ESG strategy, reference: ~/.claude/skills/sustainability-esg/
 **File**: `~/.claude/skills/sustainability-esg/`
 
 **Core Capabilities:**
+
 - **Carbon Management**: Scopes 1/2/3 GHG inventory, Science-Based Targets (SBTi), net zero roadmaps
 - **Climate Risk**: TCFD-aligned physical and transition risk assessment, scenario analysis
 - **Sustainable Supply Chain**: Supplier assessments, audits, human rights due diligence
@@ -249,6 +260,7 @@ For ESG strategy, reference: ~/.claude/skills/sustainability-esg/
 - **ESG Reporting**: GRI, SASB, TCFD, ISSB disclosure, ESG ratings optimization
 
 **Key Metrics:**
+
 - GHG emissions reduction: 42% by 2030 (Scopes 1+2), 25% (Scope 3)
 - Renewable energy: 100% electricity by 2030
 - Waste diversion: 90%+ from landfill
@@ -256,18 +268,21 @@ For ESG strategy, reference: ~/.claude/skills/sustainability-esg/
 - ESG in exec comp: 10-20% of incentive
 
 **Regulatory Landscape:**
+
 - SEC Climate Rule (U.S.): Material climate risks in 10-K
 - EU CSRD: Mandatory ESG reporting, ESRS standards
 - California SB 253/261: Scopes 1/2/3 disclosure
 - TCFD: Adopted in UK, EU, Japan, New Zealand
 
 **Expert Examples:**
+
 - Walmart Project Gigaton: 1 billion metric tons GHG reduction by 2030
 - Apple: Carbon neutral by 2030, 100% recycled materials goal
 - Microsoft: Carbon negative by 2030
 - AT&T: 41.2% Scope 1/2 reduction
 
 **Templates Included:**
+
 1. ESG Materiality Assessment
 2. GHG Emissions Inventory Workbook
 3. Science-Based Targets Commitment
@@ -284,6 +299,7 @@ For ESG strategy, reference: ~/.claude/skills/sustainability-esg/
 **File**: `~/.claude/skills/innovation/references/innovation-management-skill.md`
 
 **Core Domains:**
+
 - Innovation Strategy Frameworks (Design Thinking, Stage-Gate, Hybrid models)
 - Innovation Portfolio Management (Horizon framework, prioritization matrices)
 - Ideation Process Design (structured ideation, continuous systems)
@@ -291,6 +307,7 @@ For ESG strategy, reference: ~/.claude/skills/sustainability-esg/
 - Innovation Culture & Capability Building
 
 **Key Frameworks:**
+
 - Design Thinking 5-phase process
 - Stage-Gate with 6 gates (0-5)
 - 70/20/10 Horizon portfolio balance
@@ -302,6 +319,7 @@ For ESG strategy, reference: ~/.claude/skills/sustainability-esg/
 **File**: `~/.claude/skills/rd-management/references/rd-portfolio-management-skill.md`
 
 **Core Domains:**
+
 - R&D Portfolio Strategy & Architecture
 - Technology Roadmapping (multi-layer framework, TRL-based planning)
 - Portfolio Prioritization & Optimization
@@ -310,6 +328,7 @@ For ESG strategy, reference: ~/.claude/skills/sustainability-esg/
 - Regulatory Pathways (FDA, CE, industry-specific)
 
 **Key Frameworks:**
+
 - Research portfolio allocation (10% Basic, 20% Applied, 35% Advanced Dev, 35% Product Dev)
 - Technology Readiness Levels (TRL 1-9)
 - 5-layer technology roadmap architecture
@@ -320,6 +339,7 @@ For ESG strategy, reference: ~/.claude/skills/sustainability-esg/
 **File**: `~/.claude/skills/rd-management/references/ip-strategy-tech-scouting-skill.md`
 
 **Core Domains:**
+
 - Patent Portfolio Strategy (defensive, offensive, strategic positioning)
 - IP Monetization (licensing models, royalty determination)
 - Technology Scouting & Horizon Scanning
@@ -332,6 +352,7 @@ For ESG strategy, reference: ~/.claude/skills/sustainability-esg/
 **File**: `~/.claude/skills/innovation/references/corporate-venture-open-innovation-skill.md`
 
 **Core Domains:**
+
 - Corporate Venture Capital Strategy
 - Startup Partnership & Collaboration Models
 - Accelerator & Incubator Programs
@@ -344,6 +365,7 @@ For ESG strategy, reference: ~/.claude/skills/sustainability-esg/
 ## Key Frameworks Reference
 
 ### Strategic Planning
+
 - BCG Growth-Share Matrix
 - GE-McKinsey Nine-Box
 - Porter's Five Forces
@@ -352,6 +374,7 @@ For ESG strategy, reference: ~/.claude/skills/sustainability-esg/
 - Value Chain Analysis
 
 ### Financial Analysis
+
 - DCF Valuation
 - LBO Modeling
 - M&A Analysis
@@ -360,6 +383,7 @@ For ESG strategy, reference: ~/.claude/skills/sustainability-esg/
 - Capital Allocation
 
 ### Operations Excellence
+
 - Lean Six Sigma
 - Theory of Constraints
 - TPS/Toyota Production System
@@ -367,6 +391,7 @@ For ESG strategy, reference: ~/.claude/skills/sustainability-esg/
 - Supply Chain Optimization
 
 ### People Management
+
 - ADKAR Change Model
 - Kotter's 8-Step
 - 9-Box Succession Grid
@@ -374,6 +399,7 @@ For ESG strategy, reference: ~/.claude/skills/sustainability-esg/
 - DEI Maturity Model
 
 ### Sales & Marketing
+
 - MEDDIC/MEDDPICC
 - SPIN Selling
 - Challenger Sale
@@ -382,6 +408,7 @@ For ESG strategy, reference: ~/.claude/skills/sustainability-esg/
 - ABM Frameworks
 
 ### Technology & Security
+
 - NIST Cybersecurity Framework
 - ISO 27001
 - Zero Trust Architecture
@@ -389,6 +416,7 @@ For ESG strategy, reference: ~/.claude/skills/sustainability-esg/
 - Data Governance Framework
 
 ### Innovation & Product
+
 - Design Thinking
 - Stage-Gate Process
 - Jobs-to-be-Done
@@ -471,14 +499,14 @@ For ESG strategy, reference: ~/.claude/skills/sustainability-esg/
 
 ## Statistics
 
-| Metric | Count |
-|--------|-------|
-| Total Skill Folders | 18 |
-| SKILL.md Files | 18 |
-| Reference Documents | 22 |
-| Total Files | 40 |
-| Total Content | ~1.3MB |
-| Lines of Content | ~50,000+ |
+| Metric              | Count    |
+| ------------------- | -------- |
+| Total Skill Folders | 18       |
+| SKILL.md Files      | 18       |
+| Reference Documents | 22       |
+| Total Files         | 40       |
+| Total Content       | ~1.3MB   |
+| Lines of Content    | ~50,000+ |
 
 ---
 
@@ -518,11 +546,11 @@ All Expert functional areas covered:
 
 ### Update Schedule
 
-| Frequency | What to Review |
-|-----------|----------------|
-| Quarterly | Emerging technology trends, new regulations, market shifts |
-| Annually | Strategic alignment, framework effectiveness, capability gaps |
-| Continuous | Best practice evolution, tool changes, benchmarking data |
+| Frequency  | What to Review                                                |
+| ---------- | ------------------------------------------------------------- |
+| Quarterly  | Emerging technology trends, new regulations, market shifts    |
+| Annually   | Strategic alignment, framework effectiveness, capability gaps |
+| Continuous | Best practice evolution, tool changes, benchmarking data      |
 
 ### How to Update
 
@@ -549,25 +577,30 @@ last_updated: 2025-12-16
 ## Resources
 
 ### Product Management
+
 - Books: "Inspired" (Cagan), "The Lean Startup" (Ries), "Crossing the Chasm" (Moore)
 - Frameworks: Intercom (RICE), Amplitude (North Star), Teresa Torres (OST)
 
 ### Data Science
+
 - Books: "The Elements of Statistical Learning", "Designing Data-Intensive Applications"
 - Frameworks: Google (ML Best Practices), Microsoft (Responsible AI)
 
 ### Health & Wellness
+
 - National Business Group on Health (NBGH)
 - HERO (Health Enhancement Research Organization)
 - WELCOA (Wellness Council of America)
 
 ### ESG & Sustainability
+
 - GRI (Global Reporting Initiative): www.globalreporting.org
 - SASB/ISSB: www.ifrs.org/sustainability
 - SBTi (Science-Based Targets): www.sciencebasedtargets.org
 - CDP (Carbon Disclosure Project): www.cdp.net
 
 ### Innovation & R&D
+
 - PDMA (Product Development and Management Association)
 - IRI (Industrial Research Institute)
 - AUTM (Association of University Technology Managers)
@@ -587,7 +620,6 @@ description: Expert-level Product Management expertise. Use when developing
   product strategies, prioritizing features, planning roadmaps, conducting research,
   analyzing metrics, or managing product lifecycles.
 ---
-
 # Product Strategy Expert
 
 [Include core content from product-strategy-expert.md]
@@ -627,5 +659,5 @@ A: No. They codify best practices but require judgment to apply correctly. They 
 
 ---
 
-*Consolidated: December 16, 2025*
-*This guide merges: FORTUNE-50-SKILLS-SUMMARY.md, FORTUNE-50-SKILLS-README.md, fortune50-health-sustainability-skills-overview.md, innovation-rd-skills-summary.md*
+_Consolidated: December 16, 2025_
+_This guide merges: FORTUNE-50-SKILLS-SUMMARY.md, FORTUNE-50-SKILLS-README.md, fortune50-health-sustainability-skills-overview.md, innovation-rd-skills-summary.md_

@@ -32,13 +32,13 @@ POST-MARKET:
 
 ## Industry-Specific Pathways
 
-| Industry | Primary Regulator | Key Pathways |
-|----------|-------------------|--------------|
-| **Pharma** | FDA, EMA | NDA, BLA, 505(b)(2) |
-| **Medical Device** | FDA, Notified Bodies | 510(k), PMA, De Novo |
-| **Food** | FDA, USDA | GRAS, Food Additive |
-| **Chemical** | EPA, REACH | TSCA, REACH registration |
-| **Automotive** | NHTSA, EPA | FMVSS, Emissions |
+| Industry           | Primary Regulator    | Key Pathways             |
+| ------------------ | -------------------- | ------------------------ |
+| **Pharma**         | FDA, EMA             | NDA, BLA, 505(b)(2)      |
+| **Medical Device** | FDA, Notified Bodies | 510(k), PMA, De Novo     |
+| **Food**           | FDA, USDA            | GRAS, Food Additive      |
+| **Chemical**       | EPA, REACH           | TSCA, REACH registration |
+| **Automotive**     | NHTSA, EPA           | FMVSS, Emissions         |
 
 ## Clinical Development
 

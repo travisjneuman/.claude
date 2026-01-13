@@ -8,22 +8,23 @@ description: Enterprise risk management expertise for ERM frameworks, risk asses
 Comprehensive risk frameworks for enterprise risk assessment, business continuity, and risk mitigation.
 
 **Detailed References:**
+
 - [ERM Framework & Risk Appetite](references/erm-framework.md) - COSO framework, risk appetite, quantitative analysis
 - [Business Continuity Management](references/business-continuity.md) - BCM lifecycle, recovery objectives, crisis management
 - [Insurance & Risk Transfer](references/insurance-risk-transfer.md) - Insurance programs, risk financing strategies
 
 ## Risk Categories
 
-| Category | Description | Examples |
-|----------|-------------|----------|
-| **Strategic** | Risks to business model/strategy | Competitive disruption, M&A failure |
-| **Operational** | Risks in day-to-day operations | Process failures, supply chain |
-| **Financial** | Financial loss risks | Credit, market, liquidity |
-| **Compliance** | Regulatory/legal risks | Regulatory changes, lawsuits |
-| **Reputational** | Brand and stakeholder risks | Negative publicity, social media |
-| **Technology** | IT and cyber risks | Cyber attacks, system failures |
-| **Human Capital** | People-related risks | Key person, talent shortage |
-| **External** | Environmental/external risks | Natural disasters, geopolitical |
+| Category          | Description                      | Examples                            |
+| ----------------- | -------------------------------- | ----------------------------------- |
+| **Strategic**     | Risks to business model/strategy | Competitive disruption, M&A failure |
+| **Operational**   | Risks in day-to-day operations   | Process failures, supply chain      |
+| **Financial**     | Financial loss risks             | Credit, market, liquidity           |
+| **Compliance**    | Regulatory/legal risks           | Regulatory changes, lawsuits        |
+| **Reputational**  | Brand and stakeholder risks      | Negative publicity, social media    |
+| **Technology**    | IT and cyber risks               | Cyber attacks, system failures      |
+| **Human Capital** | People-related risks             | Key person, talent shortage         |
+| **External**      | Environmental/external risks     | Natural disasters, geopolitical     |
 
 ## Risk Assessment Process
 
@@ -119,12 +120,12 @@ TPRM LIFECYCLE:
 
 ### Vendor Risk Tiers
 
-| Tier | Criteria | Assessment |
-|------|----------|------------|
+| Tier         | Criteria                        | Assessment              |
+| ------------ | ------------------------------- | ----------------------- |
 | **Critical** | Core business, high data access | Full assessment, annual |
-| **High** | Significant operations impact | Comprehensive, annual |
-| **Medium** | Moderate business impact | Standard, biennial |
-| **Low** | Limited impact | Self-assessment |
+| **High**     | Significant operations impact   | Comprehensive, annual   |
+| **Medium**   | Moderate business impact        | Standard, biennial      |
+| **Low**      | Limited impact                  | Self-assessment         |
 
 ### Vendor Assessment Areas
 
@@ -192,13 +193,13 @@ EXTERNAL:
 
 ### Key Risk Indicators (KRIs)
 
-| Risk Area | KRI | Threshold |
-|-----------|-----|-----------|
-| **Operational** | Process exceptions | >5% |
-| **Technology** | System downtime | >99.9% uptime |
-| **People** | Staff turnover | <15% |
-| **Vendor** | SLA breaches | <5% |
-| **Compliance** | Policy violations | 0 critical |
+| Risk Area       | KRI                | Threshold     |
+| --------------- | ------------------ | ------------- |
+| **Operational** | Process exceptions | >5%           |
+| **Technology**  | System downtime    | >99.9% uptime |
+| **People**      | Staff turnover     | <15%          |
+| **Vendor**      | SLA breaches       | <5%           |
+| **Compliance**  | Policy violations  | 0 critical    |
 
 ### Control Assessment
 
@@ -314,13 +315,13 @@ FORWARD LOOK:
 
 ### Risk Metrics Dashboard
 
-| Category | Metric | Target | Status |
-|----------|--------|--------|--------|
-| **Risk Appetite** | Risks within tolerance | 100% | |
-| **Incidents** | Material losses | 0 | |
-| **Controls** | Effective controls | >90% | |
-| **Issues** | Overdue remediation | <5% | |
-| **Training** | Completion rate | >95% | |
+| Category          | Metric                 | Target | Status |
+| ----------------- | ---------------------- | ------ | ------ |
+| **Risk Appetite** | Risks within tolerance | 100%   |        |
+| **Incidents**     | Material losses        | 0      |        |
+| **Controls**      | Effective controls     | >90%   |        |
+| **Issues**        | Overdue remediation    | <5%    |        |
+| **Training**      | Completion rate        | >95%   |        |
 
 ## See Also
 

@@ -14,6 +14,7 @@ Professional UX expertise for minimalist static sites.
 ### Less is More
 
 Every element must earn its place:
+
 - Does this add value for the user?
 - Can I remove this and still communicate?
 - Is this decoration or function?
@@ -21,6 +22,7 @@ Every element must earn its place:
 ### Content-to-Chrome Ratio
 
 Maximize content, minimize interface:
+
 ```
 BAD:  10% content, 90% navigation/chrome
 GOOD: 80% content, 20% essential navigation
@@ -36,12 +38,12 @@ GOOD: 80% content, 20% essential navigation
 
 ### Every KB Matters
 
-| Element | Impact |
-|---------|--------|
-| Web font | +50-100KB |
-| Hero image | +200-500KB |
-| Animation library | +30-50KB |
-| JavaScript framework | +30-100KB |
+| Element              | Impact     |
+| -------------------- | ---------- |
+| Web font             | +50-100KB  |
+| Hero image           | +200-500KB |
+| Animation library    | +30-50KB   |
+| JavaScript framework | +30-100KB  |
 
 Ask: Does this UX improvement justify the weight?
 
@@ -99,6 +101,7 @@ No infinite scroll, no SPA patterns. Clear page boundaries.
 ### No-JavaScript Fallbacks
 
 Always work without JS:
+
 - Navigation works with `<a>` tags
 - Forms submit normally
 - Content accessible without scripting
@@ -107,12 +110,12 @@ Always work without JS:
 
 ### What Minimalism Allows
 
-| Requirement | Minimalist Solution |
-|-------------|---------------------|
-| Focus indicators | Simple outline |
-| Skip links | Clean text link |
-| Alt text | Concise descriptions |
-| Contrast | High contrast by default |
+| Requirement      | Minimalist Solution      |
+| ---------------- | ------------------------ |
+| Focus indicators | Simple outline           |
+| Skip links       | Clean text link          |
+| Alt text         | Concise descriptions     |
+| Contrast         | High contrast by default |
 
 ### Touch Targets
 

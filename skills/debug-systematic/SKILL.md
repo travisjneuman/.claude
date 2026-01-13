@@ -14,6 +14,7 @@ A disciplined, evidence-based approach to debugging that prevents guessing and e
 **Goal**: Create reliable reproduction steps before ANY investigation.
 
 **Actions**:
+
 1. Document exact steps to trigger the bug
 2. Record environment specifics (OS, versions, config, memory, network)
 3. Determine frequency: Always? Sometimes? Specific conditions?
@@ -21,6 +22,7 @@ A disciplined, evidence-based approach to debugging that prevents guessing and e
 5. Test on different environments to isolate variables
 
 **Key Questions**:
+
 - When did it last work correctly?
 - What changed since then? (code, deps, config, infrastructure)
 - Is it environment-specific?
@@ -38,12 +40,14 @@ A disciplined, evidence-based approach to debugging that prevents guessing and e
 **Techniques**:
 
 **Binary Search**:
+
 1. Identify two points: working state and broken state
 2. Test the midpoint
 3. Recurse into the broken half
 4. Continue until the change is identified
 
 **Git Bisect** (for regressions):
+
 ```bash
 git bisect start
 git bisect bad HEAD
@@ -55,11 +59,13 @@ git bisect good  # or git bisect bad
 ```
 
 **Code Elimination**:
+
 - Comment out sections to isolate the problem
 - Create minimal reproduction case
 - Strip away everything non-essential
 
 **Environment Isolation**:
+
 - Test in isolation (unit test the failing path)
 - Compare working vs broken environments
 - Use fresh installs to eliminate pollution
@@ -73,6 +79,7 @@ git bisect good  # or git bisect bad
 **Goal**: Know exactly WHY the bug occurs, not just WHERE.
 
 **Scientific Method**:
+
 1. **Observe**: What exactly is happening?
 2. **Hypothesize**: Why might this be happening?
 3. **Predict**: If hypothesis is correct, what else would be true?
@@ -80,22 +87,23 @@ git bisect good  # or git bisect bad
 5. **Iterate**: Refine hypothesis based on results
 
 **Logging Strategy**:
+
 ```javascript
 // Add strategic logging at boundaries
-console.log('[DEBUG] Function entry:', { input, state });
-console.log('[DEBUG] After processing:', { result, sideEffects });
-console.log('[DEBUG] Function exit:', { returnValue });
+console.log("[DEBUG] Function entry:", { input, state });
+console.log("[DEBUG] After processing:", { result, sideEffects });
+console.log("[DEBUG] Function exit:", { returnValue });
 ```
 
 **Common Root Causes**:
 
-| Symptom | Likely Causes |
-|---------|---------------|
-| Works locally, fails in CI | Environment differences, timing, resources |
-| Intermittent failure | Race condition, flaky network, resource contention |
-| Works then stops working | State mutation, memory leak, cache poisoning |
-| Wrong data | Type coercion, encoding, timezone, precision |
-| Silent failure | Swallowed exception, async error, missing await |
+| Symptom                    | Likely Causes                                      |
+| -------------------------- | -------------------------------------------------- |
+| Works locally, fails in CI | Environment differences, timing, resources         |
+| Intermittent failure       | Race condition, flaky network, resource contention |
+| Works then stops working   | State mutation, memory leak, cache poisoning       |
+| Wrong data                 | Type coercion, encoding, timezone, precision       |
+| Silent failure             | Swallowed exception, async error, missing await    |
 
 **Output**: Clear explanation of the root cause with evidence.
 
@@ -106,6 +114,7 @@ console.log('[DEBUG] Function exit:', { returnValue });
 **Goal**: Fix the issue and prevent regression.
 
 **Fix Process**:
+
 1. **Write a failing test** that captures the bug
 2. **Implement minimal fix** - change as little as possible
 3. **Verify test passes** - confirms fix works
@@ -114,6 +123,7 @@ console.log('[DEBUG] Function exit:', { returnValue });
 6. **Document the fix** - why it happened, how to prevent
 
 **Verification Checklist**:
+
 - [ ] Test passes that specifically catches this bug
 - [ ] Existing tests still pass
 - [ ] Manual verification confirms fix
@@ -121,6 +131,7 @@ console.log('[DEBUG] Function exit:', { returnValue });
 - [ ] No new warnings or errors introduced
 
 **Prevention**:
+
 - Add guards/validation at boundaries
 - Improve error messages for easier future debugging
 - Document gotchas for other developers
@@ -131,6 +142,7 @@ console.log('[DEBUG] Function exit:', { returnValue });
 ## Debugging Anti-Patterns
 
 **DO NOT**:
+
 - Guess and hope (change things randomly)
 - Assume you know the problem without evidence
 - Trust comments/docs over actual code behavior
@@ -139,6 +151,7 @@ console.log('[DEBUG] Function exit:', { returnValue });
 - Make multiple changes at once
 
 **DO**:
+
 - Verify assumptions with evidence
 - Change one thing at a time
 - Log actual values, not what you expect
@@ -164,24 +177,29 @@ console.log('[DEBUG] Function exit:', { returnValue });
 ## Bug Investigation: [Title]
 
 ### Reproduction
+
 - Steps to reproduce
 - Environment details
 - Frequency
 
 ### Isolation
+
 - Search method used
 - Scope narrowed to
 
 ### Root Cause
+
 - What's actually wrong
 - Why it happens
 - Evidence
 
 ### Fix
+
 - Code changes made
 - Test added
 
 ### Prevention
+
 - How to prevent similar bugs
 - Documentation updates
 ```

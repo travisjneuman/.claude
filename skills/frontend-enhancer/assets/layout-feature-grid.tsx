@@ -1,7 +1,7 @@
 // Modern Feature Grid Layout
 // Copy and customize this layout for your Next.js pages
 
-import React from 'react';
+import React from "react";
 
 interface Feature {
   icon: React.ReactNode;
@@ -23,9 +23,9 @@ export const FeatureGrid: React.FC<FeatureGridProps> = ({
   columns = 3,
 }) => {
   const gridCols = {
-    2: 'md:grid-cols-2',
-    3: 'md:grid-cols-2 lg:grid-cols-3',
-    4: 'md:grid-cols-2 lg:grid-cols-4',
+    2: "md:grid-cols-2",
+    3: "md:grid-cols-2 lg:grid-cols-3",
+    4: "md:grid-cols-2 lg:grid-cols-4",
   };
 
   return (

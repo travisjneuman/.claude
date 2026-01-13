@@ -41,6 +41,7 @@ cp .env.example .env
 ### Verify It's Working
 
 [Provide a quick way to verify the installation succeeded]
+
 - Example: "Open http://localhost:3000 in your browser"
 - Example: "Run `npm test` to verify all tests pass"
 - Example: "You should see [specific output/page]"
@@ -79,6 +80,7 @@ project-root/
 **Why this matters:** [Explain why understanding this concept is important]
 
 **Example:**
+
 ```javascript
 // Show a concrete code example demonstrating this concept
 ```
@@ -90,6 +92,7 @@ project-root/
 **Why this matters:** [Explain why understanding this concept is important]
 
 **Example:**
+
 ```javascript
 // Show a concrete code example demonstrating this concept
 ```
@@ -130,11 +133,11 @@ project-root/
 
 ### Environment Variables
 
-| Variable | Description | Example | Required |
-|----------|-------------|---------|----------|
-| `VAR_NAME` | [What this variable controls] | `example-value` | Yes |
-| `API_KEY` | [What this variable controls] | `sk_test_123abc` | Yes |
-| `DEBUG` | [What this variable controls] | `true` | No |
+| Variable   | Description                   | Example          | Required |
+| ---------- | ----------------------------- | ---------------- | -------- |
+| `VAR_NAME` | [What this variable controls] | `example-value`  | Yes      |
+| `API_KEY`  | [What this variable controls] | `sk_test_123abc` | Yes      |
+| `DEBUG`    | [What this variable controls] | `true`           | No       |
 
 ### Configuration Files
 
@@ -158,6 +161,7 @@ project-root/
 ### Code Style
 
 [Explain code style conventions]
+
 - [Convention 1]
 - [Convention 2]
 - Run linter: `[lint-command]`
@@ -168,6 +172,7 @@ project-root/
 [Provide tips for debugging]
 
 **Common debugging commands:**
+
 ```bash
 # Command to enable debug mode
 DEBUG=* [start-command]
@@ -183,6 +188,7 @@ DEBUG=* [start-command]
 **Problem:** [Describe the problem users might encounter]
 
 **Solution:** [Step-by-step solution]
+
 ```bash
 # Commands to fix the issue
 ```
@@ -192,6 +198,7 @@ DEBUG=* [start-command]
 **Problem:** [Describe the problem users might encounter]
 
 **Solution:** [Step-by-step solution]
+
 ```bash
 # Commands to fix the issue
 ```

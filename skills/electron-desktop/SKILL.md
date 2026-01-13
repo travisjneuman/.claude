@@ -9,11 +9,11 @@ Build cross-platform desktop applications using web technologies.
 
 ## Platforms Supported
 
-| Platform | Architecture | Notes |
-|----------|--------------|-------|
-| Windows | x64, arm64, ia32 | Windows 10+ |
-| macOS | x64, arm64 (Apple Silicon) | macOS 10.15+ |
-| Linux | x64, arm64, armv7l | Most distributions |
+| Platform | Architecture               | Notes              |
+| -------- | -------------------------- | ------------------ |
+| Windows  | x64, arm64, ia32           | Windows 10+        |
+| macOS    | x64, arm64 (Apple Silicon) | macOS 10.15+       |
+| Linux    | x64, arm64, armv7l         | Most distributions |
 
 ---
 
@@ -46,10 +46,11 @@ my-app/
 ## Main Process
 
 ### Entry Point
+
 ```typescript
 // src/main/main.ts
-import { app, BrowserWindow, ipcMain } from 'electron';
-import path from 'path';
+import { app, BrowserWindow, ipcMain } from "electron";
+import path from "path";
 
 let mainWindow: BrowserWindow | null = null;
 
@@ -60,43 +61,43 @@ function createWindow() {
     minWidth: 800,
     minHeight: 600,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js'),
+      preload: path.join(__dirname, "preload.js"),
       contextIsolation: true,
       nodeIntegration: false,
       sandbox: true,
     },
-    titleBarStyle: 'hiddenInset', // macOS
-    frame: process.platform === 'darwin', // Windows/Linux custom frame
+    titleBarStyle: "hiddenInset", // macOS
+    frame: process.platform === "darwin", // Windows/Linux custom frame
     show: false, // Show when ready
   });
 
   // Load the app
-  if (process.env.NODE_ENV === 'development') {
-    mainWindow.loadURL('http://localhost:5173');
+  if (process.env.NODE_ENV === "development") {
+    mainWindow.loadURL("http://localhost:5173");
     mainWindow.webContents.openDevTools();
   } else {
-    mainWindow.loadFile(path.join(__dirname, '../renderer/index.html'));
+    mainWindow.loadFile(path.join(__dirname, "../renderer/index.html"));
   }
 
   // Show when ready to prevent flash
-  mainWindow.once('ready-to-show', () => {
+  mainWindow.once("ready-to-show", () => {
     mainWindow?.show();
   });
 
-  mainWindow.on('closed', () => {
+  mainWindow.on("closed", () => {
     mainWindow = null;
   });
 }
 
 app.whenReady().then(createWindow);
 
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
+app.on("window-all-closed", () => {
+  if (process.platform !== "darwin") {
     app.quit();
   }
 });
 
-app.on('activate', () => {
+app.on("activate", () => {
   if (BrowserWindow.getAllWindows().length === 0) {
     createWindow();
   }
@@ -104,28 +105,29 @@ app.on('activate', () => {
 ```
 
 ### Preload Script (Security Bridge)
+
 ```typescript
 // src/main/preload.ts
-import { contextBridge, ipcRenderer } from 'electron';
+import { contextBridge, ipcRenderer } from "electron";
 
 // Expose safe APIs to renderer
-contextBridge.exposeInMainWorld('electronAPI', {
+contextBridge.exposeInMainWorld("electronAPI", {
   // File operations
-  openFile: () => ipcRenderer.invoke('dialog:openFile'),
-  saveFile: (content: string) => ipcRenderer.invoke('dialog:saveFile', content),
+  openFile: () => ipcRenderer.invoke("dialog:openFile"),
+  saveFile: (content: string) => ipcRenderer.invoke("dialog:saveFile", content),
 
   // App info
-  getVersion: () => ipcRenderer.invoke('app:getVersion'),
+  getVersion: () => ipcRenderer.invoke("app:getVersion"),
 
   // Window controls
-  minimize: () => ipcRenderer.send('window:minimize'),
-  maximize: () => ipcRenderer.send('window:maximize'),
-  close: () => ipcRenderer.send('window:close'),
+  minimize: () => ipcRenderer.send("window:minimize"),
+  maximize: () => ipcRenderer.send("window:maximize"),
+  close: () => ipcRenderer.send("window:close"),
 
   // Two-way communication
   onUpdateAvailable: (callback: () => void) => {
-    ipcRenderer.on('update:available', callback);
-    return () => ipcRenderer.removeListener('update:available', callback);
+    ipcRenderer.on("update:available", callback);
+    return () => ipcRenderer.removeListener("update:available", callback);
   },
 });
 
@@ -146,29 +148,30 @@ declare global {
 ```
 
 ### IPC Handlers
+
 ```typescript
 // src/main/ipc.ts
-import { ipcMain, dialog, BrowserWindow } from 'electron';
-import fs from 'fs/promises';
+import { ipcMain, dialog, BrowserWindow } from "electron";
+import fs from "fs/promises";
 
 export function setupIPC() {
   // File dialogs
-  ipcMain.handle('dialog:openFile', async () => {
+  ipcMain.handle("dialog:openFile", async () => {
     const { canceled, filePaths } = await dialog.showOpenDialog({
-      properties: ['openFile'],
+      properties: ["openFile"],
       filters: [
-        { name: 'Text Files', extensions: ['txt', 'md'] },
-        { name: 'All Files', extensions: ['*'] },
+        { name: "Text Files", extensions: ["txt", "md"] },
+        { name: "All Files", extensions: ["*"] },
       ],
     });
 
     if (canceled || filePaths.length === 0) return null;
-    return fs.readFile(filePaths[0], 'utf-8');
+    return fs.readFile(filePaths[0], "utf-8");
   });
 
-  ipcMain.handle('dialog:saveFile', async (_, content: string) => {
+  ipcMain.handle("dialog:saveFile", async (_, content: string) => {
     const { canceled, filePath } = await dialog.showSaveDialog({
-      filters: [{ name: 'Text Files', extensions: ['txt'] }],
+      filters: [{ name: "Text Files", extensions: ["txt"] }],
     });
 
     if (canceled || !filePath) return false;
@@ -177,11 +180,11 @@ export function setupIPC() {
   });
 
   // Window controls
-  ipcMain.on('window:minimize', (event) => {
+  ipcMain.on("window:minimize", (event) => {
     BrowserWindow.fromWebContents(event.sender)?.minimize();
   });
 
-  ipcMain.on('window:maximize', (event) => {
+  ipcMain.on("window:maximize", (event) => {
     const win = BrowserWindow.fromWebContents(event.sender);
     if (win?.isMaximized()) {
       win.unmaximize();
@@ -190,7 +193,7 @@ export function setupIPC() {
     }
   });
 
-  ipcMain.on('window:close', (event) => {
+  ipcMain.on("window:close", (event) => {
     BrowserWindow.fromWebContents(event.sender)?.close();
   });
 }
@@ -201,19 +204,20 @@ export function setupIPC() {
 ## Renderer Process (React)
 
 ### Using Exposed APIs
+
 ```tsx
 // src/renderer/App.tsx
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 function App() {
-  const [version, setVersion] = useState('');
-  const [content, setContent] = useState('');
+  const [version, setVersion] = useState("");
+  const [content, setContent] = useState("");
 
   useEffect(() => {
     window.electronAPI.getVersion().then(setVersion);
 
     const unsubscribe = window.electronAPI.onUpdateAvailable(() => {
-      alert('Update available!');
+      alert("Update available!");
     });
 
     return unsubscribe;
@@ -255,6 +259,7 @@ function App() {
 ```
 
 ### Custom Title Bar CSS
+
 ```css
 .titlebar {
   -webkit-app-region: drag; /* Make draggable */
@@ -292,61 +297,67 @@ function App() {
 ## Native Features
 
 ### System Tray
+
 ```typescript
-import { Tray, Menu, nativeImage } from 'electron';
+import { Tray, Menu, nativeImage } from "electron";
 
 let tray: Tray | null = null;
 
 function createTray() {
-  const icon = nativeImage.createFromPath('resources/tray-icon.png');
+  const icon = nativeImage.createFromPath("resources/tray-icon.png");
   tray = new Tray(icon.resize({ width: 16, height: 16 }));
 
   const contextMenu = Menu.buildFromTemplate([
-    { label: 'Show App', click: () => mainWindow?.show() },
-    { type: 'separator' },
-    { label: 'Quit', click: () => app.quit() },
+    { label: "Show App", click: () => mainWindow?.show() },
+    { type: "separator" },
+    { label: "Quit", click: () => app.quit() },
   ]);
 
-  tray.setToolTip('My App');
+  tray.setToolTip("My App");
   tray.setContextMenu(contextMenu);
 
-  tray.on('click', () => {
+  tray.on("click", () => {
     mainWindow?.show();
   });
 }
 ```
 
 ### Native Menus
+
 ```typescript
-import { Menu } from 'electron';
+import { Menu } from "electron";
 
 const template: Electron.MenuItemConstructorOptions[] = [
   {
-    label: 'File',
+    label: "File",
     submenu: [
       {
-        label: 'Open',
-        accelerator: 'CmdOrCtrl+O',
-        click: () => { /* handle */ },
+        label: "Open",
+        accelerator: "CmdOrCtrl+O",
+        click: () => {
+          /* handle */
+        },
       },
       {
-        label: 'Save',
-        accelerator: 'CmdOrCtrl+S',
-        click: () => { /* handle */ },
+        label: "Save",
+        accelerator: "CmdOrCtrl+S",
+        click: () => {
+          /* handle */
+        },
       },
-      { type: 'separator' },
-      { role: 'quit' },
+      { type: "separator" },
+      { role: "quit" },
     ],
   },
   {
-    label: 'Edit',
+    label: "Edit",
     submenu: [
-      { role: 'undo' },
-      { role: 'redo' },
-      { type: 'separator' },
-      { role: 'cut' },
-      { role: 'copy' },
-      { role: 'paste' },
+      { role: "undo" },
+      { role: "redo" },
+      { type: "separator" },
+      { role: "cut" },
+      { role: "copy" },
+      { role: "paste" },
     ],
   },
 ];
@@ -355,27 +366,29 @@ Menu.setApplicationMenu(Menu.buildFromTemplate(template));
 ```
 
 ### Notifications
+
 ```typescript
-import { Notification } from 'electron';
+import { Notification } from "electron";
 
 new Notification({
-  title: 'Update Available',
-  body: 'A new version is ready to install.',
-  icon: 'resources/icon.png',
+  title: "Update Available",
+  body: "A new version is ready to install.",
+  icon: "resources/icon.png",
 }).show();
 ```
 
 ### Auto Updates
+
 ```typescript
-import { autoUpdater } from 'electron-updater';
+import { autoUpdater } from "electron-updater";
 
 autoUpdater.checkForUpdatesAndNotify();
 
-autoUpdater.on('update-available', () => {
-  mainWindow?.webContents.send('update:available');
+autoUpdater.on("update-available", () => {
+  mainWindow?.webContents.send("update:available");
 });
 
-autoUpdater.on('update-downloaded', () => {
+autoUpdater.on("update-downloaded", () => {
   autoUpdater.quitAndInstall();
 });
 ```
@@ -385,6 +398,7 @@ autoUpdater.on('update-downloaded', () => {
 ## Building & Distribution
 
 ### electron-builder Configuration
+
 ```yaml
 # electron-builder.yml
 appId: com.mycompany.myapp
@@ -430,6 +444,7 @@ publish:
 ```
 
 ### Build Commands
+
 ```bash
 # Development
 npm run dev
@@ -451,6 +466,7 @@ npm run build:linux
 ## Security Best Practices
 
 ### DO:
+
 - Always use `contextIsolation: true`
 - Use preload scripts for IPC
 - Validate all IPC inputs
@@ -458,6 +474,7 @@ npm run build:linux
 - Sign and notarize for distribution
 
 ### DON'T:
+
 - Enable `nodeIntegration`
 - Use `remote` module
 - Load untrusted content
@@ -468,8 +485,8 @@ npm run build:linux
 
 ## Alternatives to Consider
 
-| Framework | Best For |
-|-----------|----------|
-| **Tauri** | Smaller bundle, Rust backend |
-| **Neutralino** | Lightweight, system webview |
-| **Electron** | Full Node.js, mature ecosystem |
+| Framework      | Best For                       |
+| -------------- | ------------------------------ |
+| **Tauri**      | Smaller bundle, Rust backend   |
+| **Neutralino** | Lightweight, system webview    |
+| **Electron**   | Full Node.js, mature ecosystem |

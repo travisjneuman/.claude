@@ -1,10 +1,13 @@
 # Fortune 50 Information Security Expert
 
 ## Description
+
 Enterprise-grade information security expertise for Fortune 50 organizations. Provides comprehensive guidance on cybersecurity frameworks (NIST CSF 2.0, ISO 27001, CIS Controls), security architecture patterns including Zero Trust, incident response procedures, vulnerability management, identity and access management, cloud security, and compliance. Enables Fortune 50-level security decision-making with frameworks, checklists, and response playbooks based on 2025 industry standards.
 
 ## Trigger Conditions
+
 Use this skill when the user needs help with:
+
 - Cybersecurity framework selection, implementation, or compliance (NIST, ISO 27001, CIS, COBIT)
 - Security architecture design including Zero Trust implementation
 - Incident response planning, execution, or post-mortem analysis
@@ -22,9 +25,11 @@ Use this skill when the user needs help with:
 ### 1. CYBERSECURITY FRAMEWORKS
 
 #### NIST Cybersecurity Framework (CSF) 2.0
+
 **Overview:** Universal framework with 6 core functions applicable to all organizations, not just critical infrastructure. Updated April 2025.
 
 **Six Core Functions:**
+
 1. **GOVERN** (New in 2.0): Cybersecurity as board-level enterprise risk
    - Establish cybersecurity risk management strategy
    - Define organizational context and expectations
@@ -65,18 +70,21 @@ Use this skill when the user needs help with:
    - Communications
 
 **Implementation Levels:**
+
 - **Tier 1 - Partial**: Ad hoc, reactive risk management
 - **Tier 2 - Risk Informed**: Risk management practices approved but not organization-wide
 - **Tier 3 - Repeatable**: Organization-wide approach with regular updates
 - **Tier 4 - Adaptive**: Continuous improvement based on lessons learned
 
 **Best Use Cases:**
+
 - Organizations starting cybersecurity risk management programs
 - U.S. government contractors and critical infrastructure
 - Organizations recovering from data breaches
 - Businesses needing board-level security communication
 
 **Resources:**
+
 - NIST SP 800-61r3 (Incident Response - April 2025 update)
 - NIST SP 800-53 (Security and Privacy Controls)
 - NIST SP 800-137 (Information Security Continuous Monitoring)
@@ -84,9 +92,11 @@ Use this skill when the user needs help with:
 ---
 
 #### ISO/IEC 27001:2022
+
 **Overview:** International standard for Information Security Management Systems (ISMS). Certifiable standard with 93 controls across 4 themes.
 
 **Core Components:**
+
 1. **Organizational Controls** (37 controls)
    - Information security policies
    - Organization of information security
@@ -121,6 +131,7 @@ Use this skill when the user needs help with:
    - Monitoring, logging, and detection
 
 **ISMS Implementation Process:**
+
 1. **Define Scope**: Determine boundaries and applicability
 2. **Conduct Risk Assessment**: Identify assets, threats, vulnerabilities
 3. **Establish Risk Treatment Plan**: Accept, mitigate, transfer, or avoid
@@ -130,6 +141,7 @@ Use this skill when the user needs help with:
 7. **External Certification**: Third-party audit (optional but recommended)
 
 **Best Use Cases:**
+
 - Organizations with international operations
 - Businesses requiring formal certification
 - Operationally mature enterprises
@@ -137,20 +149,24 @@ Use this skill when the user needs help with:
 - Organizations with contractual certification requirements
 
 **Framework Overlap:**
+
 - ISO 27001 certification = ~83% of NIST CSF requirements
 - NIST CSF compliance = ~61% of ISO 27001 requirements
 
 ---
 
 #### CIS Controls v8
+
 **Overview:** Prioritized set of 18 technical best practices organized into Implementation Groups (IGs).
 
 **Implementation Groups:**
+
 - **IG1** (Basic Cyber Hygiene): 56 safeguards for small organizations with limited resources
 - **IG2** (Enhanced Security): 74 additional safeguards for organizations managing sensitive data
 - **IG3** (Advanced Protection): 23 additional safeguards for high-security environments
 
 **Top 5 Critical Controls:**
+
 1. **Inventory and Control of Enterprise Assets**
    - Maintain accurate asset inventory
    - Address unauthorized assets
@@ -177,6 +193,7 @@ Use this skill when the user needs help with:
    - Disable dormant accounts
 
 **Best Use Cases:**
+
 - Organizations prioritizing technical implementation
 - Security teams needing actionable guidance
 - Companies with limited security resources
@@ -185,13 +202,16 @@ Use this skill when the user needs help with:
 ---
 
 #### COBIT 2019
+
 **Overview:** IT governance framework from ISACA focusing on enterprise governance of information and technology.
 
 **Core Components:**
+
 - **Governance Objectives** (5): Evaluate, Direct, Monitor (EDM)
 - **Management Objectives** (40): Plan, Build, Run, Monitor (PBRM)
 
 **Best Use Cases:**
+
 - IT risk management programs
 - Organizations needing governance and management separation
 - Enterprises with complex IT environments
@@ -202,6 +222,7 @@ Use this skill when the user needs help with:
 ### 2. ZERO TRUST ARCHITECTURE (ZTA)
 
 #### Core Principles
+
 **"Never Trust, Always Verify"**
 
 Zero Trust operates on the assumption that threats exist both inside and outside traditional network perimeters. No user, device, or network is implicitly trusted.
@@ -253,6 +274,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 **Implementation Roadmap:**
 
 **Phase 1: Foundation (Months 1-3)**
+
 - [ ] Identify protect surface (critical data, applications, assets, services)
 - [ ] Map transaction flows for protect surface
 - [ ] Deploy enhanced identity verification (MFA, passwordless)
@@ -260,6 +282,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 - [ ] Define initial access policies
 
 **Phase 2: Deployment (Months 4-9)**
+
 - [ ] Implement microsegmentation for protect surface
 - [ ] Deploy ZTNA solutions for remote access
 - [ ] Enable continuous monitoring and logging
@@ -267,6 +290,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 - [ ] Integrate threat intelligence feeds
 
 **Phase 3: Optimization (Months 10-18)**
+
 - [ ] Expand microsegmentation across entire network
 - [ ] Implement automated policy enforcement
 - [ ] Deploy AI/ML-based anomaly detection
@@ -274,12 +298,14 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 - [ ] Conduct regular zero trust maturity assessments
 
 **Fortune 50 ZTA Statistics (2025):**
+
 - 70% of new remote access deployments use ZTNA vs. VPNs (Gartner)
 - $1.5M average savings per breach with Zero Trust implementation (IBM)
 - 24 Fortune 50 companies collaborated on NIST ZTA implementation guide
 - Zero Trust market: $19.2B (2024) → $85B projected (2034), 17.4% CAGR
 
 **NIST SP 800-207 ZTA Deployment Models:**
+
 - **Enhanced Identity Governance** (EIG)
 - **Logical Microsegmentation**
 - **Network-based Segmentation**
@@ -293,6 +319,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 #### NIST SP 800-61r3 Framework (Updated April 2025)
 
 **Key Changes in Revision 3:**
+
 - Alignment with NIST CSF 2.0
 - Expanded team model beyond dedicated "incident handlers"
 - Shared responsibility model for outsourced security operations
@@ -301,30 +328,35 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 **Six-Function Incident Response Model:**
 
 **GOVERN:**
+
 - Establish incident response strategy and expectations
 - Define roles, responsibilities, and authority
 - Communicate incident response policy organization-wide
 - Monitor incident response program effectiveness
 
 **IDENTIFY:**
+
 - Asset inventory and criticality classification
 - Business impact analysis for key systems
 - Risk assessment for potential incident scenarios
 - Threat intelligence collection and analysis
 
 **PROTECT:**
+
 - Implement preventive controls
 - Security awareness training
 - Vulnerability remediation
 - Access control hardening
 
 **DETECT:**
+
 - Security monitoring and alerting
 - Anomaly detection
 - Threat hunting
 - User and entity behavior analytics (UEBA)
 
 **RESPOND:**
+
 - Incident triage and prioritization
 - Containment strategy execution
 - Evidence collection and preservation
@@ -332,6 +364,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 - Communication and coordination
 
 **RECOVER:**
+
 - System restoration and validation
 - Business operations resumption
 - Post-incident activity monitoring
@@ -344,6 +377,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 **Phase 1: PREPARATION**
 
 **Team Structure (Expanded Model - 2025):**
+
 - **Core Incident Response Team:**
   - Incident Response Manager
   - Security Analysts (Tier 1, 2, 3)
@@ -361,6 +395,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
   - Third-party Security Partners (SOC, MDR providers)
 
 **Preparation Checklist:**
+
 - [ ] Incident response plan documented and approved
 - [ ] Incident response playbooks for common scenarios
 - [ ] Contact lists current (internal and external)
@@ -375,6 +410,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 - [ ] Cyber insurance policy reviewed and current
 
 **Critical Tools:**
+
 - SIEM (Splunk, QRadar, Sentinel, Chronicle)
 - EDR/XDR (CrowdStrike, SentinelOne, Microsoft Defender)
 - Network traffic analysis (Zeek, Suricata, Darktrace)
@@ -389,6 +425,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 **Phase 2: DETECTION AND ANALYSIS**
 
 **Detection Sources:**
+
 - SIEM alerts and correlation rules
 - EDR/XDR detections
 - Intrusion detection/prevention systems (IDS/IPS)
@@ -400,6 +437,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 - External notifications (law enforcement, security researchers, customers)
 
 **Initial Triage (First 15 minutes):**
+
 1. **Collect Basic Information:**
    - Date/time of detection
    - Source of detection
@@ -422,6 +460,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 **Analysis Process:**
 
 **Evidence Collection:**
+
 - [ ] Preserve volatile data (memory, network connections, running processes)
 - [ ] Collect system logs (application, security, system)
 - [ ] Capture network traffic (full packet capture if possible)
@@ -430,12 +469,14 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 - [ ] Maintain chain of custody documentation
 
 **Indicator Analysis:**
+
 - **Network IOCs**: IP addresses, domains, URLs, SSL certificates
 - **Host IOCs**: File hashes, registry keys, file paths, mutexes
 - **Behavioral IOCs**: Command-line patterns, process injection, privilege escalation
 - **Contextual Analysis**: User behavior, access patterns, data flows
 
 **Threat Intelligence Integration:**
+
 - Check IOCs against threat intelligence platforms
 - Identify associated campaigns and threat actors
 - Understand tactics, techniques, and procedures (TTPs) - MITRE ATT&CK mapping
@@ -446,6 +487,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 **Phase 3: CONTAINMENT**
 
 **Short-term Containment (Immediate Actions):**
+
 - Isolate affected systems from network (not powered off)
 - Block malicious IPs/domains at firewall/proxy
 - Disable compromised user accounts
@@ -454,6 +496,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 - Deploy temporary compensating controls
 
 **Long-term Containment (Sustained Actions):**
+
 - Apply emergency patches to vulnerable systems
 - Implement network segmentation
 - Deploy additional monitoring
@@ -463,20 +506,21 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 
 **Containment Decision Matrix:**
 
-| Incident Type | Recommended Containment |
-|---------------|------------------------|
-| Ransomware | Immediate network isolation, disable backup access |
-| Data Exfiltration | Block C2 communications, monitor for additional exfil attempts |
-| Account Compromise | Disable account, reset all credentials, force MFA re-enrollment |
-| Web Application Attack | Block attacker IPs, deploy WAF rules, patch vulnerability |
-| Insider Threat | Preserve evidence, disable access, monitor for data movement |
-| DDoS Attack | Implement rate limiting, engage DDoS mitigation service |
+| Incident Type          | Recommended Containment                                         |
+| ---------------------- | --------------------------------------------------------------- |
+| Ransomware             | Immediate network isolation, disable backup access              |
+| Data Exfiltration      | Block C2 communications, monitor for additional exfil attempts  |
+| Account Compromise     | Disable account, reset all credentials, force MFA re-enrollment |
+| Web Application Attack | Block attacker IPs, deploy WAF rules, patch vulnerability       |
+| Insider Threat         | Preserve evidence, disable access, monitor for data movement    |
+| DDoS Attack            | Implement rate limiting, engage DDoS mitigation service         |
 
 ---
 
 **Phase 4: ERADICATION**
 
 **Eradication Actions:**
+
 - [ ] Remove malware from affected systems
 - [ ] Delete malicious accounts and backdoors
 - [ ] Patch vulnerabilities exploited in attack
@@ -486,6 +530,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 - [ ] Validate complete threat actor removal
 
 **Validation Methods:**
+
 - Re-scan systems with updated signatures
 - Monitor for reinfection attempts
 - Conduct threat hunting for residual activity
@@ -497,6 +542,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 **Phase 5: RECOVERY**
 
 **Recovery Process:**
+
 - [ ] Restore systems from clean backups or rebuild
 - [ ] Verify system integrity before production
 - [ ] Gradually restore services (phased approach)
@@ -506,6 +552,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 - [ ] Extended validation period (30-90 days)
 
 **Recovery Validation:**
+
 - System functionality testing
 - Security control verification
 - Performance baseline comparison
@@ -514,6 +561,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 - Documented sign-off from business owners
 
 **Monitoring Post-Recovery:**
+
 - Increased logging retention
 - Enhanced alerting thresholds
 - Focused threat hunting
@@ -527,6 +575,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 **Lessons Learned Meeting (Within 2 weeks):**
 
 **Required Attendees:**
+
 - Incident response team members
 - IT operations representatives
 - Business unit stakeholders
@@ -534,6 +583,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 - Legal counsel (if applicable)
 
 **Discussion Topics:**
+
 1. **Incident Summary:**
    - What happened?
    - When was it detected?
@@ -561,6 +611,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
    - Policy changes recommended
 
 **Deliverables:**
+
 - Executive summary (1-2 pages)
 - Detailed incident report
 - Timeline of events
@@ -570,6 +621,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 - Updated incident response playbooks
 
 **Metrics and Reporting:**
+
 - Mean time to detect (MTTD)
 - Mean time to respond (MTTR)
 - Mean time to contain (MTTC)
@@ -586,6 +638,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 **PLAYBOOK 1: Ransomware Incident**
 
 **Detection Indicators:**
+
 - Mass file encryption
 - Ransom notes on systems
 - Unusual file extension changes
@@ -595,6 +648,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 - Communication to known ransomware C2
 
 **Immediate Actions (First 30 minutes):**
+
 1. **DO NOT** power off affected systems (evidence preservation)
 2. Isolate affected systems from network immediately
 3. Disable network shares and backup connectivity
@@ -605,6 +659,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 8. Contact law enforcement (FBI IC3, Secret Service)
 
 **Investigation (Hours 1-4):**
+
 - Identify all affected systems
 - Determine encryption timeline
 - Analyze ransomware sample (sandbox)
@@ -614,6 +669,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 - Engage external forensics firm (if needed)
 
 **Containment (Hours 4-24):**
+
 - Network segmentation to prevent spread
 - Credential reset for all potentially compromised accounts
 - Patch identified vulnerabilities
@@ -622,6 +678,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 - Validate clean systems
 
 **Recovery (Days 2-30):**
+
 - Restore from backups (validate integrity first)
 - Rebuild compromised systems if backups unavailable
 - Phased return to production
@@ -630,6 +687,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 - Vendor notification if applicable
 
 **Do NOT Pay Ransom Unless:**
+
 - No viable backups exist
 - Business-critical data cannot be reconstructed
 - Legal counsel advises payment
@@ -637,6 +695,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 - Law enforcement consulted
 
 **Even if paying:**
+
 - No guarantee of decryption
 - Funds support criminal enterprise
 - May target organization again
@@ -647,6 +706,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 **PLAYBOOK 2: Data Exfiltration / Data Breach**
 
 **Detection Indicators:**
+
 - Large outbound data transfers
 - Database query anomalies
 - Access to sensitive data repositories
@@ -656,6 +716,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 - External notifications (data leak sites, researchers)
 
 **Immediate Actions (First 30 minutes):**
+
 1. Identify source of data exfiltration
 2. Block exfiltration channels (IPs, domains, protocols)
 3. Preserve logs and evidence
@@ -666,6 +727,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 8. Document timeline and scope
 
 **Investigation (Hours 1-12):**
+
 - Determine attack vector and timeline
 - Identify compromised accounts/systems
 - Assess volume and type of data exfiltrated
@@ -676,16 +738,17 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 
 **Regulatory Notification Requirements:**
 
-| Regulation | Trigger | Timeframe | Authority |
-|------------|---------|-----------|-----------|
-| GDPR | Personal data of EU residents | 72 hours | Data Protection Authority |
-| CCPA/CPRA | California resident data | Without unreasonable delay | Attorney General |
-| HIPAA | Protected health information (PHI) | 60 days | HHS, individuals, media if >500 |
-| PCI DSS | Cardholder data | Immediately | Card brands, acquiring bank |
-| SEC | Material impact to operations | 4 business days | SEC Form 8-K |
-| State Breach Laws | Varies by state | Varies (often 30-90 days) | State Attorney General |
+| Regulation        | Trigger                            | Timeframe                  | Authority                       |
+| ----------------- | ---------------------------------- | -------------------------- | ------------------------------- |
+| GDPR              | Personal data of EU residents      | 72 hours                   | Data Protection Authority       |
+| CCPA/CPRA         | California resident data           | Without unreasonable delay | Attorney General                |
+| HIPAA             | Protected health information (PHI) | 60 days                    | HHS, individuals, media if >500 |
+| PCI DSS           | Cardholder data                    | Immediately                | Card brands, acquiring bank     |
+| SEC               | Material impact to operations      | 4 business days            | SEC Form 8-K                    |
+| State Breach Laws | Varies by state                    | Varies (often 30-90 days)  | State Attorney General          |
 
 **Containment and Eradication (Hours 12-72):**
+
 - Remove threat actor access
 - Reset all compromised credentials
 - Patch vulnerabilities exploited
@@ -694,6 +757,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 - Validate complete eradication
 
 **Recovery and Notification (Days 3-30):**
+
 - Individual notification (per regulatory requirements)
 - Credit monitoring services (if PII exposed)
 - Public disclosure (if required)
@@ -702,6 +766,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 - Enhanced security measures
 
 **Post-Incident:**
+
 - Regulatory response management
 - Potential litigation preparation
 - Public relations management
@@ -713,6 +778,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 **PLAYBOOK 3: Business Email Compromise (BEC)**
 
 **Detection Indicators:**
+
 - Email forwarding rules to external addresses
 - Unusual wire transfer requests
 - Executive impersonation emails
@@ -722,6 +788,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 - Requests to change payment details
 
 **Immediate Actions (First 15 minutes):**
+
 1. Verify legitimacy of any pending financial transactions
 2. Halt wire transfers if initiated
 3. Disable compromised email accounts
@@ -731,6 +798,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 7. Notify finance department and executive leadership
 
 **Investigation (Hours 1-6):**
+
 - Review email account activity logs
 - Identify unauthorized access timeline
 - Examine email rules and filters
@@ -740,6 +808,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 - Assess financial loss (if any)
 
 **Containment (Hours 6-24):**
+
 - Force password reset for all potentially affected users
 - Enable/re-enroll MFA for all accounts
 - Block sender domains/IPs
@@ -748,6 +817,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 - User notification and awareness
 
 **Recovery (Days 2-7):**
+
 - Financial recovery efforts (contact banks, FBI)
 - Enhanced email security controls
 - User awareness training
@@ -756,6 +826,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 - Ongoing monitoring
 
 **Prevention Measures:**
+
 - Implement DMARC (p=reject)
 - Multi-factor authentication enforcement
 - Wire transfer verification procedures (out-of-band)
@@ -768,6 +839,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 **PLAYBOOK 4: Insider Threat**
 
 **Detection Indicators:**
+
 - Unusual data access patterns
 - Mass file downloads or transfers
 - Access outside normal working hours
@@ -778,6 +850,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 - HR performance/disciplinary issues
 
 **Immediate Actions (Coordinate with HR/Legal):**
+
 1. **DO NOT** alert suspect to investigation
 2. Engage legal counsel immediately
 3. Coordinate with HR for employment status
@@ -787,6 +860,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 7. Establish monitoring (if not already in place)
 
 **Investigation (Days 1-14):**
+
 - Review user activity logs (file access, email, web)
 - Examine data transfers and removable media usage
 - Analyze email communications
@@ -796,6 +870,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 - Document evidence chain of custody
 
 **Containment (Upon Decision to Act):**
+
 - Disable user accounts simultaneously (all systems)
 - Revoke physical access badges
 - Retrieve company devices (laptop, phone, tokens)
@@ -804,6 +879,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 - Coordinate with HR for employee meeting
 
 **Recovery and Legal Action:**
+
 - Assess data exposure and risk
 - Determine if law enforcement involvement needed
 - Consider civil action (non-compete, NDA violations)
@@ -812,6 +888,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 - Conduct lessons learned with HR and legal
 
 **Prevention Measures:**
+
 - User and Entity Behavior Analytics (UEBA)
 - Data loss prevention (DLP) policies
 - Privileged access management (PAM)
@@ -827,6 +904,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 #### 2025 Vulnerability Landscape
 
 **Key Statistics:**
+
 - **23,667 CVEs published in H1 2025** (16% increase over H1 2024)
 - **~130 new CVEs per day** requiring triage
 - **38% rated High or Critical** (CVSS ≥7.0)
@@ -835,12 +913,14 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 - **45+ days unpatched** = prime target for exploitation
 
 **CVSS v4.0 Scoring:**
+
 - **Critical (9.0-10.0)**: Immediate action required (24-48 hours)
 - **High (7.0-8.9)**: Urgent patching (within 7 days)
 - **Medium (4.0-6.9)**: Scheduled patching (within 30 days)
 - **Low (0.1-3.9)**: Routine patching (within 90 days)
 
 **IMPORTANT:** CVSS scores reflect technical severity only. Risk-based prioritization must include:
+
 - Active exploitation in the wild
 - Asset criticality and exposure
 - Availability of patches or mitigations
@@ -854,6 +934,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 **1. ASSET INVENTORY**
 
 **Requirements:**
+
 - Comprehensive inventory of all IT assets
 - Classification by criticality (Tier 1/2/3)
 - Owner assignment for each asset
@@ -863,6 +944,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 - Dependencies and interconnections
 
 **Tools:**
+
 - Asset discovery: Qualys, Rapid7, Tenable, ServiceNow CMDB
 - Cloud asset inventory: AWS Systems Manager, Azure Resource Graph, GCP Asset Inventory
 - Network mapping: Nmap, Rumble, Axonius
@@ -874,24 +956,28 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 **Scanning Strategy:**
 
 **Infrastructure Scanning:**
+
 - **Internal Networks**: Weekly authenticated scans
 - **DMZ/Internet-facing**: Daily/continuous scanning
 - **Cloud Environments**: Continuous/daily scanning
 - **Critical Systems**: Daily authenticated scans
 
 **Application Security:**
+
 - **Static Analysis (SAST)**: Every code commit (CI/CD integration)
 - **Dynamic Analysis (DAST)**: Weekly/monthly depending on criticality
 - **Interactive Testing (IAST)**: Continuous during development
 - **Software Composition Analysis (SCA)**: Every build (dependency vulnerabilities)
 
 **Scanning Tools:**
+
 - **Infrastructure**: Qualys VMDR, Tenable.io, Rapid7 InsightVM, Nessus
 - **Web Applications**: Burp Suite Enterprise, Acunetix, HCL AppScan
 - **Containers**: Aqua, Prisma Cloud, Snyk, Anchore
 - **Cloud**: Wiz, Orca Security, Prisma Cloud, Lacework
 
 **Configuration:**
+
 - Authenticated scans with read-only credentials
 - Coverage validation (scan rate >95%)
 - Regular scanner updates (daily plugin updates)
@@ -906,23 +992,27 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 **Severity Score = CVSS Base Score × Threat Modifier × Asset Criticality × Exposure Factor**
 
 **Threat Modifier:**
+
 - **Active exploitation (5.0)**: Listed in CISA KEV, public exploits available
 - **High exploitation likelihood (3.0)**: Exploit code published, proof-of-concept available
 - **Medium exploitation likelihood (1.5)**: Detailed vulnerability analysis published
 - **Low exploitation likelihood (1.0)**: No known exploitation activity
 
 **Asset Criticality:**
+
 - **Tier 1 - Critical (3.0)**: Revenue-generating, customer-facing, regulated data
 - **Tier 2 - Important (2.0)**: Internal business operations, employee data
 - **Tier 3 - Standard (1.0)**: General IT infrastructure, development systems
 
 **Exposure Factor:**
+
 - **Internet-facing (3.0)**: Directly accessible from internet
 - **DMZ (2.0)**: Protected by firewall but externally accessible
 - **Internal (1.5)**: Internal network, VPN access required
 - **Isolated (1.0)**: Air-gapped or highly restricted
 
 **CISA Known Exploited Vulnerabilities (KEV) Catalog:**
+
 - Federally mandated patching for government agencies
 - Best practice for all organizations
 - Updated regularly with actively exploited CVEs
@@ -936,6 +1026,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 **Patch Management Process:**
 
 **Emergency Patching (Critical vulnerabilities, active exploitation):**
+
 - **Timeline**: 24-48 hours
 - **Approval**: CISO or delegate
 - **Testing**: Limited testing in non-production
@@ -943,6 +1034,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 - **Validation**: Immediate verification scan
 
 **Urgent Patching (High severity, internet-facing):**
+
 - **Timeline**: 7 days
 - **Approval**: Security operations manager
 - **Testing**: Accelerated testing in non-production
@@ -950,6 +1042,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 - **Validation**: Rescan within 48 hours
 
 **Scheduled Patching (Medium severity, internal systems):**
+
 - **Timeline**: 30 days
 - **Approval**: Standard change management
 - **Testing**: Full regression testing
@@ -957,6 +1050,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 - **Validation**: Rescan within 7 days
 
 **Routine Patching (Low severity):**
+
 - **Timeline**: 90 days
 - **Approval**: Standard change management
 - **Testing**: Standard testing procedures
@@ -964,6 +1058,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 - **Validation**: Next scheduled scan
 
 **Alternative Mitigations (when patching not immediately feasible):**
+
 - Virtual patching (WAF rules, IPS signatures)
 - Network segmentation and access restrictions
 - Disable vulnerable features/services
@@ -975,6 +1070,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 **5. VERIFICATION AND MONITORING**
 
 **Verification Activities:**
+
 - Post-patch vulnerability rescanning
 - Configuration validation
 - Functionality testing
@@ -982,6 +1078,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 - Rollback capability confirmed
 
 **Continuous Monitoring:**
+
 - Real-time vulnerability detection
 - Configuration drift detection
 - New vulnerability alerts
@@ -993,6 +1090,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 **6. REPORTING AND METRICS**
 
 **Executive Dashboard Metrics:**
+
 - Total vulnerabilities by severity (trend over time)
 - Mean time to remediate (MTTR) by severity
 - Percentage of vulnerabilities exceeding SLA
@@ -1001,6 +1099,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 - Risk score trending
 
 **Operational Metrics:**
+
 - Scan coverage percentage
 - False positive rate
 - Remediation velocity (vulns closed per week)
@@ -1009,6 +1108,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 - Exception/waiver count
 
 **Compliance Metrics:**
+
 - PCI DSS compliance (quarterly scans, critical patching in 30 days)
 - HIPAA compliance (regular risk assessments, timely remediation)
 - ISO 27001 compliance (vulnerability management controls)
@@ -1021,6 +1121,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 **SEVERITY: CRITICAL (CVSS 9.0-10.0) + Active Exploitation**
 
 **Hour 0 (Detection):**
+
 - [ ] Alert received from vulnerability scanner, threat intelligence, or vendor advisory
 - [ ] Validate vulnerability applicability to organization
 - [ ] Identify affected systems from asset inventory
@@ -1029,6 +1130,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 - [ ] Notify CISO, CIO, affected business units
 
 **Hour 1-4 (Emergency Response):**
+
 - [ ] Convene emergency response team
 - [ ] Determine remediation strategy: patch, virtual patch, isolate, disable service
 - [ ] Obtain patch or develop mitigation plan
@@ -1037,6 +1139,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 - [ ] Prepare communications for stakeholders
 
 **Hour 4-24 (Deployment):**
+
 - [ ] Execute emergency change management approval
 - [ ] Deploy patches/mitigations to critical internet-facing systems first
 - [ ] Monitor for issues during deployment
@@ -1045,6 +1148,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 - [ ] Document all actions taken
 
 **Hour 24-48 (Validation and Expansion):**
+
 - [ ] Verify remediation effectiveness on initial systems
 - [ ] Expand deployment to remaining affected systems
 - [ ] Conduct threat hunting for indicators of exploitation
@@ -1057,6 +1161,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 ### 5. IDENTITY AND ACCESS MANAGEMENT (IAM)
 
 #### Market Overview and Trends (2025)
+
 - **Market Size**: $25.96B (2025) → $42.61B (2030), 10.4% CAGR
 - **Fortune 2000 Adoption**: 80% rely on comprehensive IAM solutions
 - **Breach Statistics**: Credential abuse remains #1 breach vector (Verizon DBIR 2025)
@@ -1071,6 +1176,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 **User Lifecycle Management:**
 
 **Joiner Process:**
+
 - [ ] Identity verification and background check
 - [ ] Account provisioning based on role/job function
 - [ ] Access assignment using role-based access control (RBAC)
@@ -1080,6 +1186,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 - [ ] Acknowledgment of acceptable use policy
 
 **Mover Process:**
+
 - [ ] Access review triggered by HR system integration
 - [ ] Removal of previous role access
 - [ ] Addition of new role access
@@ -1088,6 +1195,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 - [ ] Update to asset inventory
 
 **Leaver Process:**
+
 - [ ] Immediate account disablement (coordinated with exit)
 - [ ] Access badge revocation
 - [ ] Recovery of company assets (laptop, phone, tokens)
@@ -1097,6 +1205,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 - [ ] 30/60/90 day deletion cycle (based on policy)
 
 **Access Certification:**
+
 - **Quarterly**: High-privilege access (admin, exec, finance)
 - **Semi-annual**: Standard user access
 - [ ] Manager reviews and certifies subordinate access
@@ -1105,6 +1214,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 - [ ] Audit trail of all certification decisions
 
 **Role-Based Access Control (RBAC):**
+
 - Define roles based on job functions (not individuals)
 - Map entitlements to roles (applications, data, systems)
 - Assign users to appropriate roles
@@ -1119,12 +1229,14 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 **Authentication Methods (2025 Best Practices):**
 
 **Passwordless Authentication (Preferred):**
+
 - **FIDO2/WebAuthn hardware keys** (YubiKey, Titan, Smart Cards)
 - **Platform authenticators** (Windows Hello, Touch ID, Face ID)
 - **Mobile push notifications** (Microsoft Authenticator, Duo, Okta Verify)
 - **Biometrics** (fingerprint, facial recognition)
 
 **Multi-Factor Authentication (MFA):**
+
 - **Phishing-resistant MFA required for:**
   - All privileged accounts (100%)
   - All users accessing sensitive data (100%)
@@ -1139,6 +1251,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
   5. **SMS/Voice calls** - vulnerable to SIM swapping, NOT RECOMMENDED
 
 **Single Sign-On (SSO):**
+
 - Centralized authentication through identity provider
 - SAML 2.0, OAuth 2.0, OpenID Connect protocols
 - Reduces password sprawl and user friction
@@ -1146,6 +1259,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 - Conditional access policy enforcement
 
 **Conditional Access Policies:**
+
 - **Device compliance**: Require managed, compliant devices
 - **Location-based**: Block/challenge access from high-risk countries
 - **Risk-based**: Step-up authentication for anomalous behavior
@@ -1157,6 +1271,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 **3. PRIVILEGED ACCESS MANAGEMENT (PAM)**
 
 **Gartner Magic Quadrant Leaders (2025):**
+
 - CyberArk (Leader - highest security environments)
 - Delinea (Leader)
 - BeyondTrust (Leader)
@@ -1165,6 +1280,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 **Core PAM Capabilities:**
 
 **Privileged Account Management:**
+
 - Centralized vault for privileged credentials
 - Automatic password rotation
 - Password complexity enforcement
@@ -1173,6 +1289,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 - Just-in-time (JIT) privilege elevation
 
 **Privileged Session Management:**
+
 - RDP/SSH proxy for all privileged sessions
 - Full session recording (video and keystroke)
 - Real-time session monitoring
@@ -1181,6 +1298,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 - Audit trail and compliance reporting
 
 **Secrets Management:**
+
 - Application password vaulting
 - API key and certificate management
 - Automated credential injection
@@ -1189,6 +1307,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 - DevOps secrets management
 
 **Just-in-Time (JIT) Access:**
+
 - Zero standing privileges for administrative access
 - Temporary elevation based on approval workflow
 - Time-bound access grants (1-8 hours typical)
@@ -1197,6 +1316,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 - Integration with ticketing systems
 
 **Privileged Account Types:**
+
 - **Domain/Enterprise Admins**: Highest privilege in directory
 - **Local Administrators**: Server and workstation admin rights
 - **Service Accounts**: Application and system service accounts
@@ -1209,6 +1329,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 **PAM Implementation Roadmap:**
 
 **Phase 1 (Months 1-3):**
+
 - [ ] Inventory all privileged accounts
 - [ ] Deploy PAM solution
 - [ ] Onboard Domain/Enterprise Admin accounts
@@ -1217,6 +1338,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 - [ ] Enable session recording for Windows and Linux
 
 **Phase 2 (Months 4-6):**
+
 - [ ] Onboard service accounts
 - [ ] Implement application password management
 - [ ] Deploy privileged session monitoring
@@ -1225,6 +1347,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 - [ ] Enable JIT access for administrative tasks
 
 **Phase 3 (Months 7-12):**
+
 - [ ] Onboard cloud infrastructure accounts (AWS, Azure, GCP)
 - [ ] Implement secrets management for DevOps
 - [ ] Deploy behavior analytics for privileged users
@@ -1237,6 +1360,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 **4. NON-HUMAN IDENTITY MANAGEMENT (Emerging 2025)**
 
 **Types of Non-Human Identities:**
+
 - Service accounts
 - API keys and tokens
 - OAuth clients
@@ -1245,6 +1369,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 - IoT device identities
 
 **Challenges:**
+
 - Typically outnumber human identities 5-10x
 - Often over-privileged and long-lived
 - Lack of ownership and lifecycle management
@@ -1252,6 +1377,7 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 - Attractive target for attackers
 
 **Best Practices:**
+
 - Inventory all non-human identities
 - Apply principle of least privilege
 - Implement automated credential rotation
@@ -1267,23 +1393,27 @@ Zero Trust operates on the assumption that threats exist both inside and outside
 In Zero Trust architecture, identity becomes the primary security perimeter. Every access request must be:
 
 **Verified:**
+
 - Who is requesting access? (strong authentication)
 - What device are they using? (device compliance)
 - Where are they connecting from? (location and network)
 - When are they accessing? (time-based policies)
 
 **Authorized:**
+
 - What are they allowed to access? (least privilege)
 - What is their current risk level? (risk-based access)
 - Are they compliant with policies? (conditional access)
 
 **Monitored:**
+
 - Continuous authentication and authorization
 - Behavioral analytics for anomaly detection
 - Real-time risk assessment
 - Automated response to threats
 
 **Implementation Checklist:**
+
 - [ ] Implement phishing-resistant MFA for all users
 - [ ] Deploy conditional access policies
 - [ ] Enable risk-based authentication
@@ -1302,6 +1432,7 @@ In Zero Trust architecture, identity becomes the primary security perimeter. Eve
 #### Multi-Cloud Security Framework (AWS, Azure, GCP)
 
 **2025 Trends:**
+
 - **78% of enterprises** run multi-cloud deployments
 - **30% better disaster recovery** metrics with multi-cloud
 - **Zero Trust** as non-negotiable baseline architecture
@@ -1312,12 +1443,14 @@ In Zero Trust architecture, identity becomes the primary security perimeter. Eve
 #### Shared Responsibility Model
 
 **Cloud Provider Responsibility:**
+
 - Physical security of data centers
 - Hardware and network infrastructure
 - Hypervisor and virtualization layer
 - Managed service security (RDS, S3, etc.)
 
 **Customer Responsibility:**
+
 - Data encryption and classification
 - Identity and access management
 - Network configuration (VPC, security groups)
@@ -1334,6 +1467,7 @@ In Zero Trust architecture, identity becomes the primary security perimeter. Eve
 **1. IDENTITY-FIRST SECURITY**
 
 **AWS Identity and Access Management (IAM):**
+
 - Use IAM roles instead of access keys where possible
 - Implement least privilege with IAM policies
 - Enable MFA for all privileged accounts
@@ -1343,6 +1477,7 @@ In Zero Trust architecture, identity becomes the primary security perimeter. Eve
 - Avoid use of root account (enable MFA, no access keys)
 
 **Azure Active Directory (Entra ID):**
+
 - Conditional access policies for all applications
 - Privileged Identity Management (PIM) for just-in-time admin access
 - Identity Protection for risk-based authentication
@@ -1351,6 +1486,7 @@ In Zero Trust architecture, identity becomes the primary security perimeter. Eve
 - B2B/B2C for external identity management
 
 **GCP IAM:**
+
 - Use service accounts with minimal permissions
 - Implement organization policies for guardrails
 - Workload Identity Federation for external access
@@ -1363,6 +1499,7 @@ In Zero Trust architecture, identity becomes the primary security perimeter. Eve
 **2. NETWORK SECURITY**
 
 **Virtual Private Cloud (VPC) Design:**
+
 - **Network Segmentation:**
   - Public subnets: Internet-facing resources (load balancers, NAT gateways)
   - Private subnets: Application tier (web servers, app servers)
@@ -1380,11 +1517,13 @@ In Zero Trust architecture, identity becomes the primary security perimeter. Eve
   - Use for broad deny rules
 
 **Private Connectivity:**
+
 - **AWS**: VPC peering, Transit Gateway, PrivateLink
 - **Azure**: VNet peering, Virtual WAN, Private Link
 - **GCP**: VPC peering, Shared VPC, Private Service Connect
 
 **Avoid Public Exposure:**
+
 - Use private endpoints for cloud services
 - VPN or Direct Connect for on-premises connectivity
 - Bastion hosts / jump boxes for administrative access (or better: eliminate with SSM/Serial Console)
@@ -1395,28 +1534,33 @@ In Zero Trust architecture, identity becomes the primary security perimeter. Eve
 **3. DATA PROTECTION**
 
 **Encryption at Rest:**
+
 - **AWS**: S3 bucket encryption (SSE-S3, SSE-KMS, SSE-C), EBS volume encryption, RDS encryption
 - **Azure**: Storage Service Encryption (SSE), Disk Encryption, TDE for SQL
 - **GCP**: Default encryption, Customer-Managed Encryption Keys (CMEK)
 
 **Encryption in Transit:**
+
 - TLS 1.2 or higher for all communications
 - HTTPS/SSL certificates (AWS ACM, Azure Key Vault, GCP Certificate Manager)
 - VPN or Direct Connect for on-premises connectivity
 - Enforce encryption in transit policies
 
 **Key Management:**
+
 - **AWS KMS**: Customer Master Keys (CMKs), automatic rotation, policy-based access
 - **Azure Key Vault**: Keys, secrets, certificates; FIPS 140-2 Level 2 HSMs
 - **GCP Cloud KMS**: Encryption keys, automatic rotation, IAM integration
 
 **Data Classification and Labeling:**
+
 - Public, Internal, Confidential, Restricted
 - Apply labels/tags to resources
 - Automate data discovery and classification
 - Data loss prevention (DLP) policies
 
 **Data Loss Prevention (DLP):**
+
 - **AWS**: Macie for S3 data discovery and classification
 - **Azure**: Purview for data governance and DLP
 - **GCP**: Cloud DLP for data discovery and de-identification
@@ -1426,22 +1570,26 @@ In Zero Trust architecture, identity becomes the primary security perimeter. Eve
 **4. LOGGING AND MONITORING**
 
 **Centralized Logging:**
+
 - **AWS**: CloudTrail (API logging), VPC Flow Logs, CloudWatch Logs
 - **Azure**: Activity Log, NSG Flow Logs, Azure Monitor
 - **GCP**: Cloud Logging, VPC Flow Logs, Cloud Audit Logs
 
 **Security Monitoring:**
+
 - **AWS**: GuardDuty (threat detection), Security Hub (aggregation), Config (compliance)
 - **Azure**: Defender for Cloud, Sentinel (SIEM), Policy
 - **GCP**: Security Command Center, Chronicle (SIEM)
 
 **Log Retention and Compliance:**
+
 - Minimum 90 days (best practice: 1+ years)
 - Immutable logging (prevent deletion/modification)
 - Integration with SIEM for correlation
 - Automated alerting on suspicious activity
 
 **Critical Alerts:**
+
 - Root/Global Admin account usage
 - Changes to security groups / NSGs / firewall rules
 - IAM policy changes
@@ -1456,24 +1604,28 @@ In Zero Trust architecture, identity becomes the primary security perimeter. Eve
 **5. COMPLIANCE AND GOVERNANCE**
 
 **Cloud Security Posture Management (CSPM):**
+
 - Continuous configuration monitoring
 - Automated compliance scanning (CIS benchmarks, NIST, PCI DSS, HIPAA)
 - Misconfiguration detection and remediation
 - Drift detection from security baselines
 
 **Tools:**
+
 - AWS: Security Hub, Config, Trusted Advisor
 - Azure: Defender for Cloud, Policy, Blueprints
 - GCP: Security Command Center, Policy Intelligence
 - Third-party: Wiz, Orca Security, Prisma Cloud, Lacework, Datadog
 
 **Policy as Code:**
+
 - Infrastructure as Code (IaC) security scanning (Terraform, CloudFormation)
 - Open Policy Agent (OPA) for policy enforcement
 - Pre-deployment validation of security controls
 - Automated remediation of non-compliant resources
 
 **Compliance Frameworks:**
+
 - SOC 2 Type II
 - ISO 27001
 - PCI DSS (for cardholder data)
@@ -1486,6 +1638,7 @@ In Zero Trust architecture, identity becomes the primary security perimeter. Eve
 **6. CONTAINER AND SERVERLESS SECURITY**
 
 **Container Security:**
+
 - Image scanning for vulnerabilities (Aqua, Snyk, Prisma Cloud, Anchore)
 - Registry security (private registries, image signing)
 - Runtime security (detect anomalous behavior)
@@ -1494,6 +1647,7 @@ In Zero Trust architecture, identity becomes the primary security perimeter. Eve
 - Least privilege for container processes (non-root users)
 
 **Kubernetes Security:**
+
 - RBAC for cluster access control
 - Pod Security Policies / Pod Security Standards
 - Network Policies for microsegmentation
@@ -1502,6 +1656,7 @@ In Zero Trust architecture, identity becomes the primary security perimeter. Eve
 - Regular cluster patching and upgrades
 
 **Serverless Security (Lambda, Azure Functions, Cloud Functions):**
+
 - Least privilege IAM roles/permissions
 - VPC integration for private resource access
 - Environment variable encryption
@@ -1514,6 +1669,7 @@ In Zero Trust architecture, identity becomes the primary security perimeter. Eve
 #### Cloud Security Checklist
 
 **AWS Security Checklist:**
+
 - [ ] Root account MFA enabled, access keys deleted
 - [ ] CloudTrail enabled in all regions
 - [ ] GuardDuty enabled for threat detection
@@ -1532,6 +1688,7 @@ In Zero Trust architecture, identity becomes the primary security perimeter. Eve
 - [ ] Regular IAM access reviews
 
 **Azure Security Checklist:**
+
 - [ ] Conditional access policies enforced
 - [ ] Privileged Identity Management (PIM) enabled
 - [ ] Azure AD Identity Protection enabled
@@ -1548,6 +1705,7 @@ In Zero Trust architecture, identity becomes the primary security perimeter. Eve
 - [ ] Subscription security alerts configured
 
 **GCP Security Checklist:**
+
 - [ ] Organization policies configured
 - [ ] VPC Service Controls enabled for sensitive projects
 - [ ] Security Command Center premium enabled
@@ -1569,14 +1727,14 @@ In Zero Trust architecture, identity becomes the primary security perimeter. Eve
 
 #### Framework Comparison
 
-| Framework | Focus | Best For | Complexity |
-|-----------|-------|----------|------------|
-| **STRIDE** | Threat categorization | Entry-level, technical teams | Low |
-| **DREAD** | Risk quantification | Prioritizing threats | Low |
-| **PASTA** | Business risk alignment | Enterprise, mature programs | High |
-| **MITRE ATT&CK** | Adversary behavior | Threat hunting, detection engineering | Medium |
-| **OWASP** | Web application security | Development teams | Medium |
-| **OCTAVE** | Organizational risk | Risk management teams | High |
+| Framework        | Focus                    | Best For                              | Complexity |
+| ---------------- | ------------------------ | ------------------------------------- | ---------- |
+| **STRIDE**       | Threat categorization    | Entry-level, technical teams          | Low        |
+| **DREAD**        | Risk quantification      | Prioritizing threats                  | Low        |
+| **PASTA**        | Business risk alignment  | Enterprise, mature programs           | High       |
+| **MITRE ATT&CK** | Adversary behavior       | Threat hunting, detection engineering | Medium     |
+| **OWASP**        | Web application security | Development teams                     | Medium     |
+| **OCTAVE**       | Organizational risk      | Risk management teams                 | High       |
 
 ---
 
@@ -1587,36 +1745,43 @@ In Zero Trust architecture, identity becomes the primary security perimeter. Eve
 **STRIDE Threat Categories:**
 
 **S - Spoofing Identity:**
+
 - Attacker impersonates another user or system
 - **Examples**: Stolen credentials, session hijacking, IP spoofing
 - **Mitigations**: Strong authentication, MFA, mutual TLS, digital signatures
 
 **T - Tampering with Data:**
+
 - Unauthorized modification of data in transit or at rest
 - **Examples**: Man-in-the-middle attacks, database manipulation, file modification
 - **Mitigations**: Encryption, digital signatures, integrity checks, access controls
 
 **R - Repudiation:**
+
 - User denies performing an action without ability to prove otherwise
 - **Examples**: Deleting audit logs, unsigned transactions
 - **Mitigations**: Comprehensive logging, digital signatures, non-repudiation controls
 
 **I - Information Disclosure:**
+
 - Exposure of confidential information to unauthorized parties
 - **Examples**: Data leaks, improper access controls, verbose error messages
 - **Mitigations**: Encryption, access controls, data classification, least privilege
 
 **D - Denial of Service:**
+
 - Degrading or denying service to legitimate users
 - **Examples**: Resource exhaustion, DDoS attacks, algorithmic complexity attacks
 - **Mitigations**: Rate limiting, resource quotas, DDoS protection, input validation
 
 **E - Elevation of Privilege:**
+
 - Gaining higher privileges than authorized
 - **Examples**: Exploiting vulnerabilities, credential theft, privilege escalation
 - **Mitigations**: Least privilege, input validation, secure coding, defense in depth
 
 **STRIDE Process:**
+
 1. **Diagram the System**: Create data flow diagram (DFD)
 2. **Identify Threats**: Apply STRIDE to each component, data flow, and trust boundary
 3. **Mitigate Threats**: Define security controls for each identified threat
@@ -1631,48 +1796,56 @@ In Zero Trust architecture, identity becomes the primary security perimeter. Eve
 **7 Stages of PASTA:**
 
 **Stage 1: Define Objectives**
+
 - Business objectives and security requirements
 - Compliance requirements (PCI DSS, HIPAA, GDPR)
 - Risk tolerance and acceptance criteria
 - Success metrics for threat modeling
 
 **Stage 2: Define Technical Scope**
+
 - Application architecture and components
 - Technology stack and dependencies
 - Network boundaries and trust zones
 - Data flows and storage locations
 
 **Stage 3: Application Decomposition**
+
 - Use cases and user roles
 - Entry points and trust boundaries
 - Assets and data classification
 - Third-party integrations
 
 **Stage 4: Threat Analysis**
+
 - Threat intelligence sources
 - Threat actor profiling (motivation, capability, opportunity)
 - Attack surface analysis
 - Historical vulnerability data
 
 **Stage 5: Vulnerability and Weakness Analysis**
+
 - Known vulnerabilities (CVEs)
 - Configuration weaknesses
 - Design flaws
 - Code-level vulnerabilities
 
 **Stage 6: Attack Modeling**
+
 - Attack trees and kill chains
 - MITRE ATT&CK mapping
 - Exploitability analysis
 - Impact assessment
 
 **Stage 7: Risk and Impact Analysis**
+
 - Risk scoring (likelihood × impact)
 - Business impact quantification
 - Risk prioritization
 - Remediation recommendations
 
 **Best Use Cases:**
+
 - Large organizations with mature security programs
 - Compliance-driven industries (finance, healthcare)
 - Applications processing sensitive data
@@ -1685,11 +1858,13 @@ In Zero Trust architecture, identity becomes the primary security perimeter. Eve
 **Knowledge base of adversary tactics and techniques based on real-world observations.**
 
 **ATT&CK Matrices:**
+
 - **Enterprise**: Windows, Linux, macOS, Cloud (AWS, Azure, GCP, SaaS)
 - **Mobile**: Android, iOS
 - **ICS**: Industrial Control Systems
 
 **14 Tactics (Attack Lifecycle):**
+
 1. **Reconnaissance**: Gathering information for planning
 2. **Resource Development**: Establishing resources for operations
 3. **Initial Access**: Getting into the network
@@ -1706,6 +1881,7 @@ In Zero Trust architecture, identity becomes the primary security perimeter. Eve
 14. **Impact**: Disrupting availability or integrity
 
 **Use Cases:**
+
 - **Threat Intelligence**: Understand adversary behavior
 - **Detection Engineering**: Build detection rules for specific techniques
 - **Red Teaming**: Plan attack scenarios
@@ -1713,6 +1889,7 @@ In Zero Trust architecture, identity becomes the primary security perimeter. Eve
 - **Incident Response**: Map observed activity to known techniques
 
 **Implementation:**
+
 - Map existing security controls to ATT&CK techniques
 - Identify coverage gaps
 - Prioritize detection and prevention capabilities
@@ -1726,6 +1903,7 @@ In Zero Trust architecture, identity becomes the primary security perimeter. Eve
 ### Framework Selection Matrix
 
 **When to use NIST CSF 2.0:**
+
 - [ ] Starting new cybersecurity program
 - [ ] Need board-level communication framework
 - [ ] U.S. government contractor
@@ -1734,6 +1912,7 @@ In Zero Trust architecture, identity becomes the primary security perimeter. Eve
 - [ ] Integration with enterprise risk management
 
 **When to use ISO 27001:**
+
 - [ ] International operations
 - [ ] Formal certification required
 - [ ] Contractual requirement (customers, partners)
@@ -1742,6 +1921,7 @@ In Zero Trust architecture, identity becomes the primary security perimeter. Eve
 - [ ] Comprehensive ISMS desired
 
 **When to use CIS Controls:**
+
 - [ ] Technical implementation focus
 - [ ] Limited resources / small team
 - [ ] Prioritized actionable guidance needed
@@ -1750,6 +1930,7 @@ In Zero Trust architecture, identity becomes the primary security perimeter. Eve
 - [ ] Complement to strategic framework
 
 **When to use STRIDE:**
+
 - [ ] Team new to threat modeling
 - [ ] Application/system design phase
 - [ ] Technical security review
@@ -1758,6 +1939,7 @@ In Zero Trust architecture, identity becomes the primary security perimeter. Eve
 - [ ] Entry-level threat modeling
 
 **When to use PASTA:**
+
 - [ ] Mature security program
 - [ ] Business risk alignment critical
 - [ ] Compliance requirements heavy
@@ -1766,6 +1948,7 @@ In Zero Trust architecture, identity becomes the primary security perimeter. Eve
 - [ ] Comprehensive threat analysis needed
 
 **When to use MITRE ATT&CK:**
+
 - [ ] Building detection capabilities
 - [ ] Threat hunting program
 - [ ] Red/purple team exercises
@@ -1778,25 +1961,30 @@ In Zero Trust architecture, identity becomes the primary security perimeter. Eve
 ### Security Architecture Decision Framework
 
 **Question 1: What is the data classification?**
+
 - **Public**: Standard security controls
 - **Internal**: Enhanced access controls, encryption in transit
 - **Confidential**: Strong encryption, strict access controls, DLP
 - **Restricted**: Maximum security, regulatory compliance, audit logging
 
 **Question 2: What is the threat landscape?**
+
 - **Low**: Standard internet threats, opportunistic attacks
 - **Medium**: Targeted attacks, industry-specific threats
 - **High**: Advanced persistent threats (APTs), nation-state actors
 
 **Question 3: What are the compliance requirements?**
+
 - PCI DSS, HIPAA, GDPR, SOC 2, ISO 27001, FedRAMP, state breach laws
 
 **Question 4: What is the business impact of compromise?**
+
 - **Low**: Minimal revenue/reputation impact
 - **Medium**: Significant but recoverable impact
 - **High**: Existential threat to organization
 
 **Security Control Selection:**
+
 - **Defense in Depth**: Multiple layers of security controls
 - **Least Privilege**: Minimum necessary access
 - **Zero Trust**: Verify explicitly, use least privilege, assume breach
@@ -1810,6 +1998,7 @@ In Zero Trust architecture, identity becomes the primary security perimeter. Eve
 ### Major Regulations
 
 **PCI DSS 4.0 (Payment Card Industry Data Security Standard):**
+
 - Applies to organizations handling cardholder data
 - 12 requirements across 6 control objectives
 - Annual assessment required (SAQ or ROC depending on volume)
@@ -1817,6 +2006,7 @@ In Zero Trust architecture, identity becomes the primary security perimeter. Eve
 - Penalties: Fines ($5k-$100k per month), loss of payment processing
 
 **Key Requirements:**
+
 - Firewall protection for cardholder data
 - No default passwords
 - Encryption of stored cardholder data (if stored)
@@ -1833,11 +2023,13 @@ In Zero Trust architecture, identity becomes the primary security perimeter. Eve
 ---
 
 **HIPAA (Health Insurance Portability and Accountability Act):**
+
 - Applies to covered entities and business associates handling PHI
 - Security Rule, Privacy Rule, Breach Notification Rule
 - Administrative, Physical, and Technical Safeguards
 
 **Key Requirements:**
+
 - Risk analysis and risk management
 - Security awareness training
 - Audit controls and logging
@@ -1851,11 +2043,13 @@ In Zero Trust architecture, identity becomes the primary security perimeter. Eve
 ---
 
 **GDPR (General Data Protection Regulation):**
+
 - Applies to processing of EU personal data
 - Territorial scope: EU residents regardless of organization location
 - Individual rights (access, rectification, erasure, portability, objection)
 
 **Key Requirements:**
+
 - Lawful basis for processing
 - Data protection by design and default
 - Data breach notification (72 hours to DPA)
@@ -1869,10 +2063,12 @@ In Zero Trust architecture, identity becomes the primary security perimeter. Eve
 ---
 
 **CCPA/CPRA (California Consumer Privacy Act / Privacy Rights Act):**
+
 - Applies to businesses processing California resident data
 - Consumer rights: Know, delete, opt-out of sale/sharing, correct, limit use of sensitive data
 
 **Key Requirements:**
+
 - Privacy notice and policy
 - Consumer request handling (45 days)
 - Opt-out mechanisms ("Do Not Sell or Share")
@@ -1885,11 +2081,13 @@ In Zero Trust architecture, identity becomes the primary security perimeter. Eve
 ---
 
 **SOC 2 Type II:**
+
 - Voluntary audit of security controls
 - Trust Services Criteria: Security, Availability, Processing Integrity, Confidentiality, Privacy
 - Common for SaaS providers and service organizations
 
 **Key Requirements:**
+
 - Risk assessment process
 - Security policies and procedures
 - Access controls and authentication
@@ -1902,10 +2100,12 @@ In Zero Trust architecture, identity becomes the primary security perimeter. Eve
 ---
 
 **SOX (Sarbanes-Oxley Act):**
+
 - Applies to public companies
 - IT General Controls (ITGCs) for financial reporting systems
 
 **Key IT Controls:**
+
 - Access controls (user provisioning, privileged access)
 - Change management (development, testing, deployment)
 - Data backup and recovery
@@ -1917,24 +2117,28 @@ In Zero Trust architecture, identity becomes the primary security perimeter. Eve
 ### Compliance Program Framework
 
 **1. Establish Compliance Requirements**
+
 - [ ] Identify applicable regulations and standards
 - [ ] Document compliance obligations
 - [ ] Map requirements to security controls
 - [ ] Establish compliance team and ownership
 
 **2. Implement Controls**
+
 - [ ] Deploy technical controls
 - [ ] Document policies and procedures
 - [ ] Conduct employee training
 - [ ] Vendor management program
 
 **3. Monitor and Audit**
+
 - [ ] Continuous compliance monitoring
 - [ ] Internal audits
 - [ ] External assessments and certifications
 - [ ] Remediation of gaps
 
 **4. Report and Improve**
+
 - [ ] Executive reporting on compliance status
 - [ ] Regulatory reporting as required
 - [ ] Lessons learned and improvement
@@ -1947,6 +2151,7 @@ In Zero Trust architecture, identity becomes the primary security perimeter. Eve
 ### Security Operations Metrics
 
 **Incident Response:**
+
 - Mean Time to Detect (MTTD)
 - Mean Time to Respond (MTTR)
 - Mean Time to Contain (MTTC)
@@ -1956,6 +2161,7 @@ In Zero Trust architecture, identity becomes the primary security perimeter. Eve
 - False positive rate
 
 **Vulnerability Management:**
+
 - Total vulnerabilities by severity
 - Mean Time to Remediate (MTTR) by severity
 - Percentage exceeding SLA
@@ -1964,6 +2170,7 @@ In Zero Trust architecture, identity becomes the primary security perimeter. Eve
 - Critical assets with high/critical vulnerabilities
 
 **Identity and Access Management:**
+
 - Privileged account count
 - Accounts with MFA enabled (%)
 - Access certification completion rate
@@ -1972,6 +2179,7 @@ In Zero Trust architecture, identity becomes the primary security perimeter. Eve
 - Service account with password rotation (%)
 
 **Cloud Security:**
+
 - Misconfiguration count (by severity)
 - Public storage exposure count
 - Encryption coverage (%)
@@ -1980,6 +2188,7 @@ In Zero Trust architecture, identity becomes the primary security perimeter. Eve
 - Mean time to remediate misconfigurations
 
 **Security Awareness:**
+
 - Training completion rate
 - Phishing simulation click rate
 - Reported phishing emails
@@ -1988,24 +2197,28 @@ In Zero Trust architecture, identity becomes the primary security perimeter. Eve
 ### Executive Dashboard (Board-Level)
 
 **Risk Posture:**
+
 - Overall cyber risk score (trend)
 - Critical risks and treatment status
 - Cyber insurance coverage adequacy
 - Third-party risk exposure
 
 **Compliance:**
+
 - Compliance status by framework
 - Audit findings (open/closed)
 - Regulatory exam preparedness
 - Certification status
 
 **Program Maturity:**
+
 - Security control effectiveness
 - Capability maturity by domain
 - Benchmark against industry peers
 - Investment and resource allocation
 
 **Incidents and Threats:**
+
 - Security incidents (trend)
 - Data breaches (if any)
 - Business impact of incidents
@@ -2018,6 +2231,7 @@ In Zero Trust architecture, identity becomes the primary security perimeter. Eve
 ### Pre-Assessment Phase (30-60 days before)
 
 **1. Scope Definition**
+
 - [ ] Identify assessment type (SOC 2, ISO 27001, PCI DSS, etc.)
 - [ ] Define scope (systems, locations, timeframe)
 - [ ] Engage auditor/assessor
@@ -2025,6 +2239,7 @@ In Zero Trust architecture, identity becomes the primary security perimeter. Eve
 - [ ] Assign internal team and responsibilities
 
 **2. Gap Analysis**
+
 - [ ] Review assessment criteria and requirements
 - [ ] Conduct internal control testing
 - [ ] Identify gaps and deficiencies
@@ -2032,6 +2247,7 @@ In Zero Trust architecture, identity becomes the primary security perimeter. Eve
 - [ ] Develop remediation plan with owners and deadlines
 
 **3. Evidence Collection**
+
 - [ ] Identify required evidence and documentation
 - [ ] Collect policies, procedures, configurations
 - [ ] Gather logs, reports, and records
@@ -2039,6 +2255,7 @@ In Zero Trust architecture, identity becomes the primary security perimeter. Eve
 - [ ] Prepare evidence index
 
 **4. Remediation**
+
 - [ ] Execute remediation plan
 - [ ] Document remediation actions
 - [ ] Retest controls
@@ -2048,6 +2265,7 @@ In Zero Trust architecture, identity becomes the primary security perimeter. Eve
 ### Assessment Phase (1-4 weeks depending on scope)
 
 **1. Opening Meeting**
+
 - [ ] Introductions and roles
 - [ ] Review scope and timeline
 - [ ] Discuss assessment approach and methodology
@@ -2055,18 +2273,21 @@ In Zero Trust architecture, identity becomes the primary security perimeter. Eve
 - [ ] Establish communication protocols
 
 **2. Documentation Review**
+
 - [ ] Submit requested documentation
 - [ ] Respond to auditor questions
 - [ ] Provide supplemental evidence as requested
 - [ ] Track evidence submission status
 
 **3. Testing and Validation**
+
 - [ ] Facilitate control testing (interviews, observations, system testing)
 - [ ] Provide access to systems and personnel
 - [ ] Respond to findings in real-time if possible
 - [ ] Document testing activities
 
 **4. Findings Review**
+
 - [ ] Review preliminary findings
 - [ ] Provide management responses
 - [ ] Discuss remediation plans
@@ -2075,18 +2296,21 @@ In Zero Trust architecture, identity becomes the primary security perimeter. Eve
 ### Post-Assessment Phase
 
 **1. Report Review**
+
 - [ ] Review draft report
 - [ ] Validate accuracy of findings
 - [ ] Provide comments and corrections
 - [ ] Finalize report
 
 **2. Remediation Planning**
+
 - [ ] Develop corrective action plan
 - [ ] Assign owners and deadlines
 - [ ] Prioritize findings
 - [ ] Allocate resources
 
 **3. Continuous Improvement**
+
 - [ ] Implement corrective actions
 - [ ] Monitor effectiveness
 - [ ] Update controls and procedures
@@ -2098,6 +2322,7 @@ In Zero Trust architecture, identity becomes the primary security perimeter. Eve
 ## Additional Resources
 
 ### Standards and Frameworks
+
 - NIST Cybersecurity Framework 2.0: https://www.nist.gov/cyberframework
 - NIST SP 800-61r3 Incident Response: https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-61r3.pdf
 - ISO/IEC 27001:2022: https://www.iso.org/standard/27001
@@ -2106,12 +2331,14 @@ In Zero Trust architecture, identity becomes the primary security perimeter. Eve
 - CISA Known Exploited Vulnerabilities: https://www.cisa.gov/known-exploited-vulnerabilities-catalog
 
 ### Threat Intelligence
+
 - CISA Alerts: https://www.cisa.gov/news-events/cybersecurity-advisories
 - US-CERT: https://www.cisa.gov/resources-tools/resources/us-cert
 - SANS Internet Storm Center: https://isc.sans.edu
 - Microsoft Security Response Center: https://msrc.microsoft.com
 
 ### Industry Reports
+
 - Verizon Data Breach Investigations Report: https://www.verizon.com/business/resources/reports/dbir/
 - IBM Cost of a Data Breach Report
 - Mandiant M-Trends Report
@@ -2119,5 +2346,5 @@ In Zero Trust architecture, identity becomes the primary security perimeter. Eve
 
 ---
 
-*Last Updated: December 2025*
-*Based on Fortune 50 enterprise security practices and current industry standards.*
+_Last Updated: December 2025_
+_Based on Fortune 50 enterprise security practices and current industry standards._

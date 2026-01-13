@@ -22,101 +22,109 @@ When you use `/start-task` (or just type naturally), the Universal Router:
 The router recognizes 8 major domain categories:
 
 ### 1. Meta/Admin (Highest Priority)
+
 Creating Claude Code resources, status checks, exploration.
 
-| Keywords | Action |
-|----------|--------|
+| Keywords                      | Action                    |
+| ----------------------------- | ------------------------- |
 | "create skill", "create hook" | Load skill creation tools |
-| "commit", "push", "PR" | Git workflow |
-| "where was I", "status" | Resume/context check |
-| "explore codebase" | Launch Explore agent |
+| "commit", "push", "PR"        | Git workflow              |
+| "where was I", "status"       | Resume/context check      |
+| "explore codebase"            | Launch Explore agent      |
 
 ### 2. Decision
+
 Structured decision-making frameworks.
 
-| Keywords | Framework |
-|----------|-----------|
+| Keywords               | Framework                 |
+| ---------------------- | ------------------------- |
 | "should I", "vs", "or" | First-principles analysis |
-| "which is better" | Trade-off comparison |
-| "prioritize", "urgent" | Eisenhower matrix |
-| "why", "root cause" | 5-Whys analysis |
+| "which is better"      | Trade-off comparison      |
+| "prioritize", "urgent" | Eisenhower matrix         |
+| "why", "root cause"    | 5-Whys analysis           |
 
 ### 3. Research
+
 Current information, documentation, best practices.
 
-| Triggers | Action |
-|----------|--------|
-| "latest", "2025", "current" | WebSearch |
+| Triggers                     | Action             |
+| ---------------------------- | ------------------ |
+| "latest", "2025", "current"  | WebSearch          |
 | "best way to", "recommended" | WebSearch + skills |
-| Version queries ("React 19") | WebSearch |
-| "is there a library for" | WebSearch |
+| Version queries ("React 19") | WebSearch          |
+| "is there a library for"     | WebSearch          |
 
 ### 4. Development (23 domains)
+
 Software development across all platforms.
 
-| Sub-domain | Skills/Agents |
-|------------|---------------|
-| iOS/Android | ios-development, android-development |
-| React/Vue/Svelte | Framework-specific skills |
-| Backend/API | api-design, database-expert |
-| DevOps | devops-cloud, devops-specialist |
-| Testing | test-specialist, test-generator |
-| Security | security-auditor, security skill |
-| GraphQL | graphql-expert, graphql-architect |
-| Microservices | microservices-architect |
-| Desktop | electron-desktop, desktop-developer |
-| AI/ML | ai-ml-development, ml-engineer |
+| Sub-domain       | Skills/Agents                        |
+| ---------------- | ------------------------------------ |
+| iOS/Android      | ios-development, android-development |
+| React/Vue/Svelte | Framework-specific skills            |
+| Backend/API      | api-design, database-expert          |
+| DevOps           | devops-cloud, devops-specialist      |
+| Testing          | test-specialist, test-generator      |
+| Security         | security-auditor, security skill     |
+| GraphQL          | graphql-expert, graphql-architect    |
+| Microservices    | microservices-architect              |
+| Desktop          | electron-desktop, desktop-developer  |
+| AI/ML            | ai-ml-development, ml-engineer       |
 
 ### 5. Scientific (8 domains)
+
 Scientific computing and research.
 
-| Domain | Source |
-|--------|--------|
-| Bioinformatics | claude-scientific-skills |
-| Chemistry | claude-scientific-skills |
-| Proteomics | claude-scientific-skills |
-| Clinical | claude-scientific-skills |
-| Physics | claude-scientific-skills |
-| Astronomy | claude-scientific-skills |
+| Domain            | Source                   |
+| ----------------- | ------------------------ |
+| Bioinformatics    | claude-scientific-skills |
+| Chemistry         | claude-scientific-skills |
+| Proteomics        | claude-scientific-skills |
+| Clinical          | claude-scientific-skills |
+| Physics           | claude-scientific-skills |
+| Astronomy         | claude-scientific-skills |
 | Materials Science | claude-scientific-skills |
-| Lab Automation | claude-scientific-skills |
+| Lab Automation    | claude-scientific-skills |
 
 ### 6. Business (16 domains)
+
 Strategy, operations, and business functions.
 
-| Domain | Skills |
-|--------|--------|
-| Startup | startup-advisor |
-| Finance | finance skill |
-| Marketing | marketing skills |
-| Sales | sales skills |
-| Product | product skills |
-| HR/Talent | hr-talent |
-| Operations | operations skills |
+| Domain       | Skills                |
+| ------------ | --------------------- |
+| Startup      | startup-advisor       |
+| Finance      | finance skill         |
+| Marketing    | marketing skills      |
+| Sales        | sales skills          |
+| Product      | product skills        |
+| HR/Talent    | hr-talent             |
+| Operations   | operations skills     |
 | Monetization | monetization-strategy |
 
 ### 7. Creative (6 domains)
+
 Design, media, and creative work.
 
-| Domain | Skills/Agents |
-|--------|---------------|
+| Domain         | Skills/Agents                    |
+| -------------- | -------------------------------- |
 | Graphic Design | graphic-design, graphic-designer |
-| Video | video-producer |
-| Audio | audio-production, audio-engineer |
-| Branding | brand-identity, brand-strategist |
-| Motion | motion-designer |
-| UI/UX | generic-ux-designer, ui-research |
+| Video          | video-producer                   |
+| Audio          | audio-production, audio-engineer |
+| Branding       | brand-identity, brand-strategist |
+| Motion         | motion-designer                  |
+| UI/UX          | generic-ux-designer, ui-research |
 
 ### 8. Quality/Process
+
 Code quality and development process.
 
-| Domain | Skills/Agents |
-|--------|---------------|
-| Code Review | generic-code-reviewer, deep-code-reviewer |
-| Debugging | debug-like-expert, debugging-specialist |
-| Refactoring | refactoring-specialist |
-| Performance | performance-optimizer |
-| Architecture | architecture-analyst |
+| Domain       | Skills/Agents                             |
+| ------------ | ----------------------------------------- |
+| Code Review  | generic-code-reviewer, deep-code-reviewer |
+| Debugging    | debug-like-expert, debugging-specialist   |
+| Refactoring  | refactoring-specialist                    |
+| Performance  | performance-optimizer                     |
+| Architecture | architecture-analyst                      |
 
 ---
 
@@ -124,30 +132,31 @@ Code quality and development process.
 
 The router calculates complexity to determine workflow:
 
-| Factor | Points |
-|--------|--------|
-| Multiple components/systems | +3 |
-| Multiple steps implied | +2 |
-| New feature/system | +3 |
-| Architecture/design work | +2 |
-| Cross-cutting concerns | +2 |
-| Research required | +1 |
-| Scientific/specialized | +2 |
-| Bug/issue (singular) | -1 |
-| Single file mentioned | -2 |
-| Quick/small qualifier | -2 |
+| Factor                      | Points |
+| --------------------------- | ------ |
+| Multiple components/systems | +3     |
+| Multiple steps implied      | +2     |
+| New feature/system          | +3     |
+| Architecture/design work    | +2     |
+| Cross-cutting concerns      | +2     |
+| Research required           | +1     |
+| Scientific/specialized      | +2     |
+| Bug/issue (singular)        | -1     |
+| Single file mentioned       | -2     |
+| Quick/small qualifier       | -2     |
 
 ### Route Selection
 
-| Score | Workflow |
-|-------|----------|
-| >= 5 | **GSD** (multi-phase project) |
+| Score              | Workflow                                    |
+| ------------------ | ------------------------------------------- |
+| >= 5               | **GSD** (multi-phase project)               |
 | 3-4 (well-defined) | **Auto-Claude** (autonomous implementation) |
-| 3-4 (exploratory) | **EnterPlanMode** (planning first) |
-| 1-2 | **EnterPlanMode** (planning first) |
-| <= 0 | **Direct execution** |
+| 3-4 (exploratory)  | **EnterPlanMode** (planning first)          |
+| 1-2                | **EnterPlanMode** (planning first)          |
+| <= 0               | **Direct execution**                        |
 
 **Note on 3-4 complexity:**
+
 - Well-defined feature + established codebase → Suggest **Auto-Claude**
 - Exploratory/unclear requirements → Use **EnterPlanMode**
 - User choice always honored
@@ -159,28 +168,36 @@ The router calculates complexity to determine workflow:
 When a domain is detected, the router loads:
 
 ### 1. Skills
+
 Domain expertise that guides responses.
+
 ```
 Detected: iOS development
 Loads: Skill(ios-development)
 ```
 
 ### 2. Agents
+
 Specialized deep work via Task tool.
+
 ```
 Detected: Security concern
 Available: security-auditor agent
 ```
 
 ### 3. Rules
+
 Contextual checklists and guidelines.
+
 ```
 Detected: UI changes
 Loads: rules/checklists/ui-visual-changes.md
 ```
 
 ### 4. Research
+
 Current information via WebSearch.
+
 ```
 Detected: "React 19 features"
 Action: WebSearch automatically triggered
@@ -191,6 +208,7 @@ Action: WebSearch automatically triggered
 ## Examples
 
 ### Example 1: Simple Bug Fix
+
 ```
 User: Fix the null check in user.ts line 42
 
@@ -201,6 +219,7 @@ Resources: None needed (simple fix)
 ```
 
 ### Example 2: New Feature (Auto-Claude)
+
 ```
 User: Add user authentication with JWT tokens
 
@@ -212,6 +231,7 @@ Action: Suggest autonomous implementation with QA validation
 ```
 
 ### Example 2b: New Feature (GSD)
+
 ```
 User: Add complete notification system with email, push, and SMS
 
@@ -222,6 +242,7 @@ Resources: api-design skill, notification patterns
 ```
 
 ### Example 3: Decision
+
 ```
 User: Should I use PostgreSQL or MongoDB for this?
 
@@ -232,6 +253,7 @@ Resources: database-expert skill
 ```
 
 ### Example 4: Research + Development
+
 ```
 User: What's new in Next.js 15 and how do I upgrade?
 
@@ -242,6 +264,7 @@ Resources: WebSearch, react-expert skill
 ```
 
 ### Example 5: Scientific
+
 ```
 User: Analyze this protein sequence for mutations
 
@@ -311,4 +334,4 @@ Skill(ios-development)
 
 ---
 
-*The router optimizes resource loading. You control the execution.*
+_The router optimizes resource loading. You control the execution._

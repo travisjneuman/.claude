@@ -16,17 +16,17 @@ MCP (Model Context Protocol) servers extend Claude Code's capabilities but consu
 
 ## Current MCP Servers
 
-| Server | Purpose | When to Enable |
-|--------|---------|----------------|
-| `sequential-thinking` | Structured reasoning chains | Complex multi-step problems, architecture decisions |
-| `playwright` | Browser testing/automation | E2E testing, UI automation, web scraping |
-| `memory` | Persistent memory | Long-running projects needing context between sessions |
-| `filesystem` | Enhanced file operations | Bulk file operations (Claude's built-in tools usually suffice) |
-| `sqlite` | Database operations | Working with SQLite databases directly |
-| `context7` | Context management | Large codebases needing enhanced retrieval |
-| `chrome-devtools` | Browser debugging | Frontend debugging, performance profiling |
-| `puppeteer` | Browser automation | Similar to Playwright, alternative automation |
-| `browserbase` | Cloud browser | Remote browser sessions (requires API keys) |
+| Server                | Purpose                     | When to Enable                                                 |
+| --------------------- | --------------------------- | -------------------------------------------------------------- |
+| `sequential-thinking` | Structured reasoning chains | Complex multi-step problems, architecture decisions            |
+| `playwright`          | Browser testing/automation  | E2E testing, UI automation, web scraping                       |
+| `memory`              | Persistent memory           | Long-running projects needing context between sessions         |
+| `filesystem`          | Enhanced file operations    | Bulk file operations (Claude's built-in tools usually suffice) |
+| `sqlite`              | Database operations         | Working with SQLite databases directly                         |
+| `context7`            | Context management          | Large codebases needing enhanced retrieval                     |
+| `chrome-devtools`     | Browser debugging           | Frontend debugging, performance profiling                      |
+| `puppeteer`           | Browser automation          | Similar to Playwright, alternative automation                  |
+| `browserbase`         | Cloud browser               | Remote browser sessions (requires API keys)                    |
 
 ---
 
@@ -85,6 +85,7 @@ User runs the exact command(s) to free context.
 ### sequential-thinking
 
 **Enable for:**
+
 - Complex architectural decisions
 - Multi-step debugging
 - System design analysis
@@ -95,6 +96,7 @@ User runs the exact command(s) to free context.
 ### playwright / puppeteer
 
 **Enable for:**
+
 - Writing E2E tests
 - Browser automation scripts
 - Web scraping tasks
@@ -105,6 +107,7 @@ User runs the exact command(s) to free context.
 ### memory
 
 **Enable for:**
+
 - Multi-session projects
 - Need to remember decisions across `/clear`
 - Long-running feature development
@@ -114,6 +117,7 @@ User runs the exact command(s) to free context.
 ### sqlite
 
 **Enable for:**
+
 - Direct SQLite database work
 - Schema analysis
 - Data queries
@@ -123,6 +127,7 @@ User runs the exact command(s) to free context.
 ### chrome-devtools
 
 **Enable for:**
+
 - Frontend performance profiling
 - JavaScript debugging
 - Network analysis
@@ -132,6 +137,7 @@ User runs the exact command(s) to free context.
 ### context7
 
 **Enable for:**
+
 - Very large codebases (100k+ lines)
 - Complex cross-file relationships
 - When built-in search isn't sufficient
@@ -144,13 +150,13 @@ User runs the exact command(s) to free context.
 
 Each enabled MCP server adds tool definitions to the system prompt:
 
-| Server | Approx. Token Cost |
-|--------|-------------------|
-| sequential-thinking | ~500 tokens |
-| playwright | ~2000 tokens |
-| memory | ~800 tokens |
-| filesystem | ~1500 tokens |
-| sqlite | ~1000 tokens |
+| Server              | Approx. Token Cost |
+| ------------------- | ------------------ |
+| sequential-thinking | ~500 tokens        |
+| playwright          | ~2000 tokens       |
+| memory              | ~800 tokens        |
+| filesystem          | ~1500 tokens       |
+| sqlite              | ~1000 tokens       |
 
 **Keeping all servers disabled saves ~6000+ tokens per session.**
 
@@ -221,4 +227,4 @@ Track progress: GitHub #6638, #10447
 
 ---
 
-*Keep MCP servers disabled by default. Enable only when needed. Disable after use.*
+_Keep MCP servers disabled by default. Enable only when needed. Disable after use._

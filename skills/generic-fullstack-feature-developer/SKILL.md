@@ -38,13 +38,13 @@ async createUser(@Body() dto: CreateUserDto) {
 
 ### File Conventions
 
-| File | Purpose |
-|------|---------|
-| `page.tsx` | Route UI (server component by default) |
-| `layout.tsx` | Shared UI wrapper |
-| `loading.tsx` | Suspense loading UI |
-| `error.tsx` | Error boundary |
-| `route.ts` | API endpoint |
+| File          | Purpose                                |
+| ------------- | -------------------------------------- |
+| `page.tsx`    | Route UI (server component by default) |
+| `layout.tsx`  | Shared UI wrapper                      |
+| `loading.tsx` | Suspense loading UI                    |
+| `error.tsx`   | Error boundary                         |
+| `route.ts`    | API endpoint                           |
 
 ### Server vs Client Components
 
@@ -81,7 +81,7 @@ Module → Controller → Service → Prisma
 export class UsersModule {}
 
 // 2. Controller with guards
-@Controller('users')
+@Controller("users")
 @UseGuards(JwtAuthGuard)
 export class UsersController {
   @Post()
@@ -154,11 +154,13 @@ getProfile(@CurrentUser() user: User) {
 ## Feature Checklist (Fullstack)
 
 ### Before Starting
+
 - [ ] Plan data model (Prisma schema)
 - [ ] Define API contract (DTOs)
 - [ ] Identify auth requirements
 
 ### During Development
+
 - [ ] Create/update Prisma schema
 - [ ] Run migrations
 - [ ] Implement NestJS module (controller + service)
@@ -166,6 +168,7 @@ getProfile(@CurrentUser() user: User) {
 - [ ] Add loading/error states
 
 ### Before Completion
+
 - [ ] Add DTO validation decorators
 - [ ] Write backend unit tests
 - [ ] Write E2E tests for API

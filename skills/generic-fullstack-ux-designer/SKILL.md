@@ -13,25 +13,25 @@ Professional UX expertise for Next.js/NestJS full-stack applications.
 
 ### Server-Side Rendering UX
 
-| Scenario | UX Pattern |
-|----------|------------|
-| Initial page load | Hydration-safe skeleton screens |
-| Data fetching | Server components for static, client for dynamic |
-| Authentication | Protected routes with redirect UX |
-| Form submission | Progressive enhancement |
+| Scenario          | UX Pattern                                       |
+| ----------------- | ------------------------------------------------ |
+| Initial page load | Hydration-safe skeleton screens                  |
+| Data fetching     | Server components for static, client for dynamic |
+| Authentication    | Protected routes with redirect UX                |
+| Form submission   | Progressive enhancement                          |
 
 ### Hydration-Safe Patterns
 
 ```tsx
 // ✓ Avoid hydration mismatch
 function Timestamp({ date }: { date: Date }) {
-  const [formatted, setFormatted] = useState('');
+  const [formatted, setFormatted] = useState("");
 
   useEffect(() => {
     setFormatted(date.toLocaleString()); // Client-side only
   }, [date]);
 
-  return <span>{formatted || 'Loading...'}</span>;
+  return <span>{formatted || "Loading..."}</span>;
 }
 ```
 
@@ -39,12 +39,12 @@ function Timestamp({ date }: { date: Date }) {
 
 ### Loading State Hierarchy
 
-| Duration | Pattern | Example |
-|----------|---------|---------|
-| < 100ms | No indicator | Button click |
-| 100ms - 1s | Subtle spinner | Form submit |
-| 1s - 5s | Skeleton screen | Page fetch |
-| > 5s | Progress bar | File upload |
+| Duration   | Pattern         | Example      |
+| ---------- | --------------- | ------------ |
+| < 100ms    | No indicator    | Button click |
+| 100ms - 1s | Subtle spinner  | Form submit  |
+| 1s - 5s    | Skeleton screen | Page fetch   |
+| > 5s       | Progress bar    | File upload  |
 
 ### Error State Design
 
@@ -52,12 +52,12 @@ function Timestamp({ date }: { date: Date }) {
 API Error → Parse Error → User-Friendly Message → Recovery Action
 ```
 
-| Error Type | User Message | Recovery |
-|------------|--------------|----------|
-| 400 Validation | Show field errors | Fix and retry |
-| 401 Unauthorized | "Please log in" | Redirect to login |
-| 404 Not Found | "Item not found" | Navigate back |
-| 500 Server Error | "Something went wrong" | Retry button |
+| Error Type       | User Message           | Recovery          |
+| ---------------- | ---------------------- | ----------------- |
+| 400 Validation   | Show field errors      | Fix and retry     |
+| 401 Unauthorized | "Please log in"        | Redirect to login |
+| 404 Not Found    | "Item not found"       | Navigate back     |
+| 500 Server Error | "Something went wrong" | Retry button      |
 
 ## Optimistic UI Pattern
 
@@ -66,7 +66,7 @@ API Error → Parse Error → User-Friendly Message → Recovery Action
 async function toggleLike(postId: string) {
   // 1. Update UI immediately
   setLiked(true);
-  setLikeCount(c => c + 1);
+  setLikeCount((c) => c + 1);
 
   try {
     // 2. Call API
@@ -74,21 +74,21 @@ async function toggleLike(postId: string) {
   } catch {
     // 3. Rollback on failure
     setLiked(false);
-    setLikeCount(c => c - 1);
-    showToast('Failed to like');
+    setLikeCount((c) => c - 1);
+    showToast("Failed to like");
   }
 }
 ```
 
 ### When to Use Optimistic UI
 
-| Action | Optimistic? | Why |
-|--------|-------------|-----|
-| Like/favorite | Yes | Low risk, common action |
-| Add comment | Yes | Can show pending state |
-| Delete item | No | Destructive, needs confirm |
-| Payment | No | Critical, must verify |
-| Form submit | Maybe | Depends on complexity |
+| Action        | Optimistic? | Why                        |
+| ------------- | ----------- | -------------------------- |
+| Like/favorite | Yes         | Low risk, common action    |
+| Add comment   | Yes         | Can show pending state     |
+| Delete item   | No          | Destructive, needs confirm |
+| Payment       | No          | Critical, must verify      |
+| Form submit   | Maybe       | Depends on complexity      |
 
 ## Form Submission UX
 
@@ -105,9 +105,9 @@ User Input → Client Validation → Submit → Server Validation → Response
 ```tsx
 // Show progress and allow back navigation
 <FormStepper
-  steps={['Details', 'Payment', 'Confirm']}
+  steps={["Details", "Payment", "Confirm"]}
   currentStep={step}
-  onBack={() => setStep(s => s - 1)}
+  onBack={() => setStep((s) => s - 1)}
 />
 ```
 
@@ -115,13 +115,13 @@ User Input → Client Validation → Submit → Server Validation → Response
 
 ### Login Flow Patterns
 
-| State | UX |
-|-------|-----|
-| Loading auth | Full-page skeleton |
-| Not logged in | Show login form |
-| Logging in | Disable form, show spinner |
-| Success | Redirect with toast |
-| Error | Inline error, keep form data |
+| State         | UX                           |
+| ------------- | ---------------------------- |
+| Loading auth  | Full-page skeleton           |
+| Not logged in | Show login form              |
+| Logging in    | Disable form, show spinner   |
+| Success       | Redirect with toast          |
+| Error         | Inline error, keep form data |
 
 ### Protected Route Pattern
 
@@ -134,11 +134,11 @@ if (!user && !loading) {
 
 ## Real-Time Updates
 
-| Pattern | Use Case |
-|---------|----------|
-| Polling | Low-frequency updates (notifications) |
-| WebSocket | Chat, live collaboration |
-| SSE | One-way server updates |
+| Pattern   | Use Case                              |
+| --------- | ------------------------------------- |
+| Polling   | Low-frequency updates (notifications) |
+| WebSocket | Chat, live collaboration              |
+| SSE       | One-way server updates                |
 
 ### Presence Indicators
 
@@ -148,13 +148,13 @@ if (!user && !loading) {
 
 ## Full-Stack Design Critique
 
-| Aspect | Questions |
-|--------|-----------|
-| Loading states | What shows during API calls? |
-| Error recovery | Can users recover from errors? |
-| Offline behavior | What happens without network? |
-| Auth transitions | Smooth login/logout experience? |
-| Data freshness | Is stale data clearly indicated? |
+| Aspect           | Questions                        |
+| ---------------- | -------------------------------- |
+| Loading states   | What shows during API calls?     |
+| Error recovery   | Can users recover from errors?   |
+| Offline behavior | What happens without network?    |
+| Auth transitions | Smooth login/logout experience?  |
+| Data freshness   | Is stale data clearly indicated? |
 
 ## See Also
 

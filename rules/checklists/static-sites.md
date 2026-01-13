@@ -37,6 +37,7 @@ npx http-server .
 ## Code Standards
 
 ### HTML
+
 - [ ] Semantic elements used (`<header>`, `<main>`, `<article>`, `<nav>`)
 - [ ] Valid HTML (no unclosed tags)
 - [ ] `lang` attribute on `<html>`
@@ -44,6 +45,7 @@ npx http-server .
 - [ ] `<meta name="viewport" content="width=device-width, initial-scale=1">`
 
 ### CSS
+
 - [ ] CSS variables for colors/spacing (no hardcoded values)
 - [ ] Mobile-first responsive design
 - [ ] No `!important` unless absolutely necessary
@@ -69,6 +71,7 @@ npx http-server .
 ```
 
 ### JavaScript
+
 - [ ] ES6+ syntax (const, let, arrow functions)
 - [ ] No `var` usage
 - [ ] Event delegation for dynamic content
@@ -88,11 +91,13 @@ npx http-server .
 ## Testing Checklist
 
 ### Console Check
+
 - [ ] No JavaScript errors
 - [ ] No 404 resource errors
 - [ ] No CORS errors
 
 ### Visual Check
+
 - [ ] Renders correctly at 375px (mobile)
 - [ ] Renders correctly at 768px (tablet)
 - [ ] Renders correctly at 1024px+ (desktop)
@@ -100,6 +105,7 @@ npx http-server .
 - [ ] Images load and display correctly
 
 ### Interaction Check
+
 - [ ] All links work
 - [ ] Forms submit correctly
 - [ ] JavaScript features function
@@ -111,14 +117,15 @@ npx http-server .
 
 Run Lighthouse in DevTools (F12 → Lighthouse tab):
 
-| Metric | Target | Status |
-|--------|--------|--------|
-| Performance | 95+ | [ ] |
-| Accessibility | 95+ | [ ] |
-| Best Practices | 95+ | [ ] |
-| SEO | 95+ | [ ] |
+| Metric         | Target | Status |
+| -------------- | ------ | ------ |
+| Performance    | 95+    | [ ]    |
+| Accessibility  | 95+    | [ ]    |
+| Best Practices | 95+    | [ ]    |
+| SEO            | 95+    | [ ]    |
 
 ### Quick Performance Wins
+
 - [ ] Images optimized (WebP, proper sizing)
 - [ ] CSS minified (production)
 - [ ] JS minified (production)
@@ -141,26 +148,27 @@ Run Lighthouse in DevTools (F12 → Lighthouse tab):
 ## Browser Testing
 
 | Browser | Status |
-|---------|--------|
-| Chrome | [ ] |
-| Firefox | [ ] |
-| Safari | [ ] |
-| Edge | [ ] |
+| ------- | ------ |
+| Chrome  | [ ]    |
+| Firefox | [ ]    |
+| Safari  | [ ]    |
+| Edge    | [ ]    |
 
 ---
 
 ## Related Skills
 
-| Skill | When to Use |
-|-------|-------------|
-| `generic-static-code-reviewer` | Code review for static sites |
-| `generic-static-design-system` | Design patterns for static sites |
-| `generic-static-feature-developer` | Feature implementation |
-| `generic-static-ux-designer` | UX for static sites |
-| `seo-analytics-auditor` | SEO and analytics |
-| `frontend-enhancer` | UI enhancements |
+| Skill                              | When to Use                      |
+| ---------------------------------- | -------------------------------- |
+| `generic-static-code-reviewer`     | Code review for static sites     |
+| `generic-static-design-system`     | Design patterns for static sites |
+| `generic-static-feature-developer` | Feature implementation           |
+| `generic-static-ux-designer`       | UX for static sites              |
+| `seo-analytics-auditor`            | SEO and analytics                |
+| `frontend-enhancer`                | UI enhancements                  |
 
 ### Invoke with:
+
 ```
 Skill(generic-static-code-reviewer)
 Skill(seo-analytics-auditor)
@@ -205,4 +213,4 @@ project/
 
 ---
 
-*Static sites should be simple, fast, and accessible. No build tools = no excuses for complexity.*
+_Static sites should be simple, fast, and accessible. No build tools = no excuses for complexity._

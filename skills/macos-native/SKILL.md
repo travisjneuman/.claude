@@ -9,12 +9,12 @@ Comprehensive guide for building native macOS applications with AppKit and moder
 
 ## Framework Overview
 
-| Framework | Use Case | Notes |
-|-----------|----------|-------|
-| **AppKit** | Traditional Mac apps | Full control, mature |
-| **SwiftUI** | Modern Mac apps | Cross-platform, declarative |
-| **Catalyst** | iPad apps on Mac | Quick port, limitations |
-| **AppKit + SwiftUI** | Hybrid approach | Best of both worlds |
+| Framework            | Use Case             | Notes                       |
+| -------------------- | -------------------- | --------------------------- |
+| **AppKit**           | Traditional Mac apps | Full control, mature        |
+| **SwiftUI**          | Modern Mac apps      | Cross-platform, declarative |
+| **Catalyst**         | iPad apps on Mac     | Quick port, limitations     |
+| **AppKit + SwiftUI** | Hybrid approach      | Best of both worlds         |
 
 ---
 
@@ -534,6 +534,7 @@ class BookmarkManager {
 ## Checklist
 
 ### Mac App Store Submission
+
 - [ ] App Sandbox enabled
 - [ ] Hardened Runtime enabled
 - [ ] All entitlements justified
@@ -543,6 +544,7 @@ class BookmarkManager {
 - [ ] No private API usage
 
 ### Best Practices
+
 - [ ] Support keyboard navigation
 - [ ] Respect system appearance (dark/light)
 - [ ] Support Full Screen

@@ -10,6 +10,7 @@ You are a React expert specializing in modern patterns and performance.
 ## React 19+ Patterns
 
 ### Server Components
+
 ```tsx
 // app/users/page.tsx - Server Component (default)
 async function UsersPage() {
@@ -17,7 +18,7 @@ async function UsersPage() {
 
   return (
     <div>
-      {users.map(user => (
+      {users.map((user) => (
         <UserCard key={user.id} user={user} />
       ))}
     </div>
@@ -26,16 +27,17 @@ async function UsersPage() {
 ```
 
 ### Client Components
-```tsx
-'use client';
 
-import { useState, useCallback } from 'react';
+```tsx
+"use client";
+
+import { useState, useCallback } from "react";
 
 export function Counter() {
   const [count, setCount] = useState(0);
 
   const increment = useCallback(() => {
-    setCount(c => c + 1);
+    setCount((c) => c + 1);
   }, []);
 
   return <button onClick={increment}>Count: {count}</button>;
@@ -43,10 +45,11 @@ export function Counter() {
 ```
 
 ### Custom Hooks
+
 ```tsx
 function useLocalStorage<T>(key: string, initialValue: T) {
   const [storedValue, setStoredValue] = useState<T>(() => {
-    if (typeof window === 'undefined') return initialValue;
+    if (typeof window === "undefined") return initialValue;
     try {
       const item = window.localStorage.getItem(key);
       return item ? JSON.parse(item) : initialValue;
@@ -55,13 +58,16 @@ function useLocalStorage<T>(key: string, initialValue: T) {
     }
   });
 
-  const setValue = useCallback((value: T | ((val: T) => T)) => {
-    setStoredValue(prev => {
-      const valueToStore = value instanceof Function ? value(prev) : value;
-      window.localStorage.setItem(key, JSON.stringify(valueToStore));
-      return valueToStore;
-    });
-  }, [key]);
+  const setValue = useCallback(
+    (value: T | ((val: T) => T)) => {
+      setStoredValue((prev) => {
+        const valueToStore = value instanceof Function ? value(prev) : value;
+        window.localStorage.setItem(key, JSON.stringify(valueToStore));
+        return valueToStore;
+      });
+    },
+    [key],
+  );
 
   return [storedValue, setValue] as const;
 }
@@ -70,9 +76,10 @@ function useLocalStorage<T>(key: string, initialValue: T) {
 ## State Management
 
 ### Zustand
+
 ```tsx
-import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
 interface Store {
   count: number;
@@ -87,33 +94,38 @@ export const useStore = create<Store>()(
       increment: () => set((s) => ({ count: s.count + 1 })),
       reset: () => set({ count: 0 }),
     }),
-    { name: 'counter-storage' }
-  )
+    { name: "counter-storage" },
+  ),
 );
 ```
 
 ## Performance Optimization
 
 ### Memoization
+
 ```tsx
 // Memoize expensive calculations
-const sortedItems = useMemo(() =>
-  items.sort((a, b) => a.name.localeCompare(b.name)),
-  [items]
+const sortedItems = useMemo(
+  () => items.sort((a, b) => a.name.localeCompare(b.name)),
+  [items],
 );
 
 // Memoize callbacks
-const handleSubmit = useCallback((data: FormData) => {
-  onSubmit(data);
-}, [onSubmit]);
+const handleSubmit = useCallback(
+  (data: FormData) => {
+    onSubmit(data);
+  },
+  [onSubmit],
+);
 
 // Memoize components (use sparingly)
 const MemoizedList = memo(ItemList);
 ```
 
 ### Code Splitting
+
 ```tsx
-const HeavyComponent = lazy(() => import('./HeavyComponent'));
+const HeavyComponent = lazy(() => import("./HeavyComponent"));
 
 function App() {
   return (
@@ -125,6 +137,7 @@ function App() {
 ```
 
 ## Component Patterns
+
 - Compound components
 - Render props
 - Higher-order components
@@ -132,6 +145,7 @@ function App() {
 - Error boundaries
 
 ## Anti-Patterns to Avoid
+
 - Props drilling (use context/state)
 - Inline objects/functions in JSX
 - useEffect for derived state

@@ -16,6 +16,7 @@ Expert brand strategist specializing in brand identity development, positioning,
 ## Capabilities
 
 ### Brand Expertise
+
 - Brand strategy and positioning
 - Brand naming and taglines
 - Visual identity systems
@@ -26,6 +27,7 @@ Expert brand strategist specializing in brand identity development, positioning,
 - Brand architecture
 
 ### Deliverables
+
 - Positioning statements
 - Brand archetypes
 - Naming recommendations

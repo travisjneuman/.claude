@@ -41,15 +41,15 @@ WORKFORCE PLANNING PROCESS:
 
 ### Recruiting Metrics
 
-| Metric | Formula | Benchmark |
-|--------|---------|-----------|
-| **Time to Fill** | Days from req open to offer accept | 30-45 days |
-| **Time to Hire** | Days from first contact to start | 25-35 days |
-| **Cost per Hire** | Total recruiting costs / Hires | $3,000-$5,000 |
-| **Quality of Hire** | Performance + Retention + Time to Productivity | 80%+ |
-| **Offer Acceptance Rate** | Offers accepted / Offers made | 85%+ |
-| **Source Effectiveness** | Hires by source / Applications by source | Varies |
-| **Diversity Hiring** | Diverse hires / Total hires | Target-based |
+| Metric                    | Formula                                        | Benchmark     |
+| ------------------------- | ---------------------------------------------- | ------------- |
+| **Time to Fill**          | Days from req open to offer accept             | 30-45 days    |
+| **Time to Hire**          | Days from first contact to start               | 25-35 days    |
+| **Cost per Hire**         | Total recruiting costs / Hires                 | $3,000-$5,000 |
+| **Quality of Hire**       | Performance + Retention + Time to Productivity | 80%+          |
+| **Offer Acceptance Rate** | Offers accepted / Offers made                  | 85%+          |
+| **Source Effectiveness**  | Hires by source / Applications by source       | Varies        |
+| **Diversity Hiring**      | Diverse hires / Total hires                    | Target-based  |
 
 ### Interview Framework
 
@@ -133,13 +133,13 @@ KR4: Achieve 4.5/5.0 team engagement score
 
 ### Performance Calibration
 
-| Rating | Distribution | Definition |
-|--------|--------------|------------|
-| **Exceptional** | 5-10% | Consistently exceeds, role model |
-| **Exceeds** | 20-25% | Above expectations, strong performer |
-| **Meets** | 55-65% | Achieves expectations, solid contributor |
-| **Needs Improvement** | 10-15% | Below expectations, support needed |
-| **Unsatisfactory** | 0-5% | Significantly below, action required |
+| Rating                | Distribution | Definition                               |
+| --------------------- | ------------ | ---------------------------------------- |
+| **Exceptional**       | 5-10%        | Consistently exceeds, role model         |
+| **Exceeds**           | 20-25%       | Above expectations, strong performer     |
+| **Meets**             | 55-65%       | Achieves expectations, solid contributor |
+| **Needs Improvement** | 10-15%       | Below expectations, support needed       |
+| **Unsatisfactory**    | 0-5%         | Significantly below, action required     |
 
 ## Compensation Strategy
 
@@ -175,12 +175,12 @@ BENEFITS
 
 ### Market Positioning Strategy
 
-| Percentile | Philosophy | When to Use |
-|------------|------------|-------------|
-| **P75+** | Lead | Critical skills, war for talent |
-| **P50-P75** | Competitive | Key roles, retention focus |
-| **P50** | Market | Standard positions |
-| **P25-P50** | Lag | Offset by other rewards |
+| Percentile  | Philosophy  | When to Use                     |
+| ----------- | ----------- | ------------------------------- |
+| **P75+**    | Lead        | Critical skills, war for talent |
+| **P50-P75** | Competitive | Key roles, retention focus      |
+| **P50**     | Market      | Standard positions              |
+| **P25-P50** | Lag         | Offset by other rewards         |
 
 ### Pay Equity Analysis
 
@@ -217,22 +217,22 @@ ANALYSIS FRAMEWORK:
 
 ### Organization Structure Models
 
-| Structure | Best For | Advantages | Disadvantages |
-|-----------|----------|------------|---------------|
-| **Functional** | Stable, efficiency-focused | Expertise, efficiency | Silos, slow decisions |
-| **Divisional** | Diverse products/markets | Accountability, responsiveness | Duplication, competition |
-| **Matrix** | Complex, multiple priorities | Flexibility, resource sharing | Conflict, complexity |
-| **Flat** | Innovation, speed | Agility, empowerment | Scale limitations |
-| **Network** | Partnerships, outsourcing | Flexibility, cost | Control, coordination |
+| Structure      | Best For                     | Advantages                     | Disadvantages            |
+| -------------- | ---------------------------- | ------------------------------ | ------------------------ |
+| **Functional** | Stable, efficiency-focused   | Expertise, efficiency          | Silos, slow decisions    |
+| **Divisional** | Diverse products/markets     | Accountability, responsiveness | Duplication, competition |
+| **Matrix**     | Complex, multiple priorities | Flexibility, resource sharing  | Conflict, complexity     |
+| **Flat**       | Innovation, speed            | Agility, empowerment           | Scale limitations        |
+| **Network**    | Partnerships, outsourcing    | Flexibility, cost              | Control, coordination    |
 
 ### Span of Control Guidelines
 
-| Level | Typical Span | Factors |
-|-------|--------------|---------|
-| **Executive** | 5-8 direct reports | Complexity, strategy time |
-| **Director** | 6-10 direct reports | Team maturity, role complexity |
-| **Manager** | 8-15 direct reports | Task similarity, systems |
-| **Supervisor** | 15-25+ direct reports | Routine work, clear processes |
+| Level          | Typical Span          | Factors                        |
+| -------------- | --------------------- | ------------------------------ |
+| **Executive**  | 5-8 direct reports    | Complexity, strategy time      |
+| **Director**   | 6-10 direct reports   | Team maturity, role complexity |
+| **Manager**    | 8-15 direct reports   | Task similarity, systems       |
+| **Supervisor** | 15-25+ direct reports | Routine work, clear processes  |
 
 ### Role Design (RACI Matrix)
 
@@ -279,14 +279,14 @@ PRACTICES: How work gets done
 
 ### Employee Engagement Survey
 
-| Category | Sample Questions | Target |
-|----------|-----------------|--------|
-| **Engagement** | "I would recommend this company" | 80%+ |
-| **Purpose** | "My work makes a difference" | 85%+ |
-| **Development** | "I have growth opportunities" | 70%+ |
-| **Manager** | "My manager supports me" | 80%+ |
-| **Recognition** | "I feel valued for my contributions" | 75%+ |
-| **Wellbeing** | "I can maintain work-life balance" | 70%+ |
+| Category        | Sample Questions                     | Target |
+| --------------- | ------------------------------------ | ------ |
+| **Engagement**  | "I would recommend this company"     | 80%+   |
+| **Purpose**     | "My work makes a difference"         | 85%+   |
+| **Development** | "I have growth opportunities"        | 70%+   |
+| **Manager**     | "My manager supports me"             | 80%+   |
+| **Recognition** | "I feel valued for my contributions" | 75%+   |
+| **Wellbeing**   | "I can maintain work-life balance"   | 70%+   |
 
 ### eNPS (Employee Net Promoter Score)
 
@@ -354,12 +354,12 @@ POTENTIAL   High    Enigma  Rising    High
 
 ### Readiness Assessment
 
-| Timeline | Characteristics | Development Focus |
-|----------|-----------------|-------------------|
-| **Ready Now** | Can perform immediately | Retention, engagement |
-| **Ready 1-2 Years** | Needs minor development | Targeted experiences |
-| **Ready 3-5 Years** | High potential, gaps exist | Accelerated development |
-| **Long-term** | Early career potential | Foundational development |
+| Timeline            | Characteristics            | Development Focus        |
+| ------------------- | -------------------------- | ------------------------ |
+| **Ready Now**       | Can perform immediately    | Retention, engagement    |
+| **Ready 1-2 Years** | Needs minor development    | Targeted experiences     |
+| **Ready 3-5 Years** | High potential, gaps exist | Accelerated development  |
+| **Long-term**       | Early career potential     | Foundational development |
 
 ## Diversity, Equity & Inclusion
 
@@ -387,14 +387,14 @@ INCLUSION INDICATORS:
 
 ### DEI Metrics Dashboard
 
-| Metric | Measurement | Cadence |
-|--------|-------------|---------|
-| **Representation** | % by demographic across levels | Quarterly |
-| **Hiring** | Application, interview, offer by demographic | Monthly |
-| **Promotion** | Promotion rate by demographic | Annual |
-| **Retention** | Turnover by demographic | Quarterly |
-| **Pay Equity** | Adjusted pay gaps | Annual |
-| **Inclusion** | Survey scores by demographic | Semi-annual |
+| Metric             | Measurement                                  | Cadence     |
+| ------------------ | -------------------------------------------- | ----------- |
+| **Representation** | % by demographic across levels               | Quarterly   |
+| **Hiring**         | Application, interview, offer by demographic | Monthly     |
+| **Promotion**      | Promotion rate by demographic                | Annual      |
+| **Retention**      | Turnover by demographic                      | Quarterly   |
+| **Pay Equity**     | Adjusted pay gaps                            | Annual      |
+| **Inclusion**      | Survey scores by demographic                 | Semi-annual |
 
 ### Inclusive Hiring Practices
 
@@ -414,16 +414,16 @@ BIAS REDUCTION:
 
 ### Key HR Metrics
 
-| Category | Metric | Formula |
-|----------|--------|---------|
-| **Turnover** | Voluntary Turnover | Voluntary terms / Avg headcount |
-| | Regrettable Turnover | High performer terms / High performers |
-| | First Year Turnover | <1 yr terms / New hires |
-| **Retention** | Retention Rate | (Start HC - Terms) / Start HC |
-| **Engagement** | eNPS | Promoters% - Detractors% |
-| **Development** | Internal Fill Rate | Internal hires / Total hires |
-| **Productivity** | Revenue per Employee | Revenue / FTE |
-| **Cost** | HR Cost per Employee | Total HR cost / FTE |
+| Category         | Metric               | Formula                                |
+| ---------------- | -------------------- | -------------------------------------- |
+| **Turnover**     | Voluntary Turnover   | Voluntary terms / Avg headcount        |
+|                  | Regrettable Turnover | High performer terms / High performers |
+|                  | First Year Turnover  | <1 yr terms / New hires                |
+| **Retention**    | Retention Rate       | (Start HC - Terms) / Start HC          |
+| **Engagement**   | eNPS                 | Promoters% - Detractors%               |
+| **Development**  | Internal Fill Rate   | Internal hires / Total hires           |
+| **Productivity** | Revenue per Employee | Revenue / FTE                          |
+| **Cost**         | HR Cost per Employee | Total HR cost / FTE                    |
 
 ## See Also
 

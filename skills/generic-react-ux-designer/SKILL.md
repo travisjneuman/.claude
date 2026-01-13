@@ -66,15 +66,15 @@ Professional UX expertise for React/TypeScript applications.
 const handleLike = async () => {
   // Update UI immediately
   setLiked(true);
-  setCount(c => c + 1);
+  setCount((c) => c + 1);
 
   try {
     await api.like(id);
   } catch {
     // Rollback on error
     setLiked(false);
-    setCount(c => c - 1);
-    toast.error('Failed to save');
+    setCount((c) => c - 1);
+    toast.error("Failed to save");
   }
 };
 ```
@@ -91,7 +91,7 @@ function Modal({ isOpen, onClose, children }: ModalProps) {
   useEffect(() => {
     if (isOpen) {
       const firstFocusable = modalRef.current?.querySelector(
-        'button, [href], input, select, textarea'
+        "button, [href], input, select, textarea",
       ) as HTMLElement;
       firstFocusable?.focus();
     }
@@ -99,13 +99,13 @@ function Modal({ isOpen, onClose, children }: ModalProps) {
 
   // Trap focus within modal
   const handleKeyDown = (e: KeyboardEvent) => {
-    if (e.key === 'Tab') {
+    if (e.key === "Tab") {
       const focusables = modalRef.current?.querySelectorAll(
-        'button, [href], input, select, textarea'
+        "button, [href], input, select, textarea",
       );
       // Handle tab cycling...
     }
-    if (e.key === 'Escape') onClose();
+    if (e.key === "Escape") onClose();
   };
 
   return (
@@ -127,23 +127,23 @@ function Modal({ isOpen, onClose, children }: ModalProps) {
 // Custom keyboard shortcut
 useEffect(() => {
   const handleKeyDown = (e: KeyboardEvent) => {
-    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+    if ((e.metaKey || e.ctrlKey) && e.key === "k") {
       e.preventDefault();
       openCommandPalette();
     }
   };
-  window.addEventListener('keydown', handleKeyDown);
-  return () => window.removeEventListener('keydown', handleKeyDown);
+  window.addEventListener("keydown", handleKeyDown);
+  return () => window.removeEventListener("keydown", handleKeyDown);
 }, []);
 
 // Arrow key navigation in list
 const handleKeyDown = (e: KeyboardEvent, index: number) => {
   switch (e.key) {
-    case 'ArrowDown':
+    case "ArrowDown":
       e.preventDefault();
       focusItem(index + 1);
       break;
-    case 'ArrowUp':
+    case "ArrowUp":
       e.preventDefault();
       focusItem(index - 1);
       break;
@@ -156,14 +156,14 @@ const handleKeyDown = (e: KeyboardEvent, index: number) => {
 ```tsx
 // Respect prefers-reduced-motion
 const prefersReducedMotion = window.matchMedia(
-  '(prefers-reduced-motion: reduce)'
+  "(prefers-reduced-motion: reduce)",
 ).matches;
 
 <motion.div
   initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
   animate={{ opacity: 1, y: 0 }}
   transition={{ duration: prefersReducedMotion ? 0 : 0.3 }}
-/>
+/>;
 ```
 
 ## Form UX Patterns
@@ -172,7 +172,11 @@ const prefersReducedMotion = window.matchMedia(
 
 ```tsx
 function ContactForm() {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -182,13 +186,10 @@ function ContactForm() {
         </label>
         <input
           id="email"
-          {...register('email', { required: 'Email is required' })}
-          aria-invalid={errors.email ? 'true' : 'false'}
-          aria-describedby={errors.email ? 'email-error' : undefined}
-          className={cn(
-            'input',
-            errors.email && 'border-red-500'
-          )}
+          {...register("email", { required: "Email is required" })}
+          aria-invalid={errors.email ? "true" : "false"}
+          aria-describedby={errors.email ? "email-error" : undefined}
+          className={cn("input", errors.email && "border-red-500")}
         />
         {errors.email && (
           <p id="email-error" className="text-sm text-red-500">
@@ -206,16 +207,16 @@ function ContactForm() {
 ```tsx
 // Validate on blur, show on focus
 const [touched, setTouched] = useState(false);
-const [error, setError] = useState('');
+const [error, setError] = useState("");
 
 <input
   onBlur={() => {
     setTouched(true);
     setError(validate(value));
   }}
-  onFocus={() => setError('')}  // Clear while editing
-  className={touched && error ? 'border-red-500' : ''}
-/>
+  onFocus={() => setError("")} // Clear while editing
+  className={touched && error ? "border-red-500" : ""}
+/>;
 ```
 
 ## Modal/Dialog Patterns
@@ -263,18 +264,19 @@ function ConfirmDialog({ isOpen, onConfirm, onCancel, title, message }: Props) {
 
 ```tsx
 function CommandPalette({ isOpen, onClose }: Props) {
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (isOpen) inputRef.current?.focus();
   }, [isOpen]);
 
-  const filtered = useMemo(() =>
-    commands.filter(c =>
-      c.label.toLowerCase().includes(query.toLowerCase())
-    ),
-    [query]
+  const filtered = useMemo(
+    () =>
+      commands.filter((c) =>
+        c.label.toLowerCase().includes(query.toLowerCase()),
+      ),
+    [query],
   );
 
   return (
@@ -282,12 +284,12 @@ function CommandPalette({ isOpen, onClose }: Props) {
       <input
         ref={inputRef}
         value={query}
-        onChange={e => setQuery(e.target.value)}
+        onChange={(e) => setQuery(e.target.value)}
         placeholder="Type a command..."
         aria-autocomplete="list"
       />
       <ul role="listbox">
-        {filtered.map(cmd => (
+        {filtered.map((cmd) => (
           <li key={cmd.id} role="option">
             {cmd.label}
           </li>
@@ -333,18 +335,21 @@ function ErrorState({ error, onRetry }: Props) {
 ## React UX Checklist
 
 **Interaction Quality:**
+
 - [ ] Immediate feedback on user actions
 - [ ] Loading states for async operations
 - [ ] Optimistic updates where appropriate
 - [ ] Smooth animations (60fps)
 
 **Accessibility:**
+
 - [ ] Keyboard navigation complete
 - [ ] Focus management in modals
 - [ ] Motion respects prefers-reduced-motion
 - [ ] ARIA labels on interactive elements
 
 **Forms:**
+
 - [ ] Inline validation
 - [ ] Clear error messages
 - [ ] Smart defaults

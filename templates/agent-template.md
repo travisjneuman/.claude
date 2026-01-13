@@ -45,6 +45,7 @@ model: sonnet
 ## Capabilities
 
 You are an expert at:
+
 - [Capability 1]
 - [Capability 2]
 - [Capability 3]
@@ -62,11 +63,13 @@ When given a task:
 ## Guidelines
 
 ### Do
+
 - [Guideline 1]
 - [Guideline 2]
 - [Guideline 3]
 
 ### Don't
+
 - [Anti-pattern 1]
 - [Anti-pattern 2]
 - [Anti-pattern 3]
@@ -76,9 +79,10 @@ When given a task:
 [Describe the expected output format]
 
 ### Example Output
-
 ```
+
 [Example of what the agent should return]
+
 ```
 
 ## Constraints
@@ -92,19 +96,19 @@ When given a task:
 
 ## Available Tools Reference
 
-| Tool | Use For |
-|------|---------|
-| `Read` | Reading files |
-| `Grep` | Searching file contents |
-| `Glob` | Finding files by pattern |
-| `Bash` | Running commands |
-| `Write` | Creating files |
-| `Edit` | Modifying files |
-| `WebSearch` | Searching the web |
-| `WebFetch` | Fetching web pages |
-| `TodoWrite` | Tracking progress |
-| `Task` | Spawning nested agents (limited) |
-| `LSP` | Code intelligence |
+| Tool        | Use For                          |
+| ----------- | -------------------------------- |
+| `Read`      | Reading files                    |
+| `Grep`      | Searching file contents          |
+| `Glob`      | Finding files by pattern         |
+| `Bash`      | Running commands                 |
+| `Write`     | Creating files                   |
+| `Edit`      | Modifying files                  |
+| `WebSearch` | Searching the web                |
+| `WebFetch`  | Fetching web pages               |
+| `TodoWrite` | Tracking progress                |
+| `Task`      | Spawning nested agents (limited) |
+| `LSP`       | Code intelligence                |
 
 **Note:** Only include tools the agent actually needs. Fewer tools = more focused agent.
 
@@ -112,13 +116,14 @@ When given a task:
 
 ## Model Selection
 
-| Model | When to Use | Token Cost |
-|-------|-------------|------------|
-| `haiku` | Quick, simple tasks | Low |
-| `sonnet` | Balanced (default) | Medium |
-| `opus` | Complex reasoning | High |
+| Model    | When to Use         | Token Cost |
+| -------- | ------------------- | ---------- |
+| `haiku`  | Quick, simple tasks | Low        |
+| `sonnet` | Balanced (default)  | Medium     |
+| `opus`   | Complex reasoning   | High       |
 
 **Guidelines:**
+
 - Use `haiku` for: file searches, simple formatting, quick lookups
 - Use `sonnet` for: code review, feature implementation, debugging
 - Use `opus` for: architecture decisions, complex analysis, planning
@@ -127,29 +132,32 @@ When given a task:
 
 ## Agent Categories
 
-| Category | Focus | Examples |
-|----------|-------|----------|
-| **Code Quality** | Review, lint, test | `code-reviewer`, `test-generator` |
-| **Architecture** | Design, planning | `architecture-analyst`, `api-designer` |
-| **Domain Expert** | Specialized knowledge | `database-expert`, `security-auditor` |
-| **Workflow** | Process automation | `documentation-writer`, `refactoring-specialist` |
-| **Research** | Information gathering | `code-explainer`, `performance-optimizer` |
+| Category          | Focus                 | Examples                                         |
+| ----------------- | --------------------- | ------------------------------------------------ |
+| **Code Quality**  | Review, lint, test    | `code-reviewer`, `test-generator`                |
+| **Architecture**  | Design, planning      | `architecture-analyst`, `api-designer`           |
+| **Domain Expert** | Specialized knowledge | `database-expert`, `security-auditor`            |
+| **Workflow**      | Process automation    | `documentation-writer`, `refactoring-specialist` |
+| **Research**      | Information gathering | `code-explainer`, `performance-optimizer`        |
 
 ---
 
 ## Best Practices
 
 ### Description
+
 - Be verbose - this determines when the agent is invoked
 - Include example trigger phrases
 - List specific scenarios where this agent helps
 
 ### Tools
+
 - Minimal set needed for the task
 - Read-only agents shouldn't have Write/Edit
 - Research agents don't need Bash
 
 ### System Prompt (Content)
+
 - Clear role definition
 - Structured approach (numbered steps)
 - Explicit do's and don'ts
@@ -157,6 +165,7 @@ When given a task:
 - Constraints and boundaries
 
 ### Model Choice
+
 - Default to `sonnet` unless you have a reason not to
 - Use `haiku` for high-volume, simple tasks
 - Reserve `opus` for critical decisions
@@ -181,6 +190,7 @@ When given a task:
 ## Registering Your Agent
 
 After creation:
+
 1. Add to `agents/README.md` in appropriate category
 2. Update agent count in root `README.md`
 3. Add to Task tool's agent list if using plugin system
@@ -206,6 +216,7 @@ model: haiku
 Find files quickly using patterns and content search.
 
 ## Approach
+
 1. Use Glob for filename patterns
 2. Use Grep for content search
 3. Return sorted, deduplicated results
@@ -232,6 +243,7 @@ model: opus
 Expert at analyzing codebases and providing architectural guidance.
 
 ## Approach
+
 1. Map the system structure
 2. Identify architectural patterns
 3. Detect anti-patterns and tech debt
@@ -240,4 +252,4 @@ Expert at analyzing codebases and providing architectural guidance.
 
 ---
 
-*Template version: 1.0*
+_Template version: 1.0_

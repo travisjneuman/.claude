@@ -11,12 +11,12 @@ Comprehensive guide for building real-time applications.
 
 ### Comparison
 
-| Technology | Direction | Use Case |
-|------------|-----------|----------|
-| **WebSocket** | Bidirectional | Chat, gaming, collaboration |
-| **Server-Sent Events** | Server → Client | Live feeds, notifications |
-| **Long Polling** | Simulated bidirectional | Fallback, simple updates |
-| **WebRTC** | Peer-to-peer | Video calls, file sharing |
+| Technology             | Direction               | Use Case                    |
+| ---------------------- | ----------------------- | --------------------------- |
+| **WebSocket**          | Bidirectional           | Chat, gaming, collaboration |
+| **Server-Sent Events** | Server → Client         | Live feeds, notifications   |
+| **Long Polling**       | Simulated bidirectional | Fallback, simple updates    |
+| **WebRTC**             | Peer-to-peer            | Video calls, file sharing   |
 
 ### When to Use What
 
@@ -76,31 +76,31 @@ After handshake:
 
 ```typescript
 // Basic WebSocket client
-const ws = new WebSocket('wss://api.example.com/ws');
+const ws = new WebSocket("wss://api.example.com/ws");
 
 ws.onopen = () => {
-  console.log('Connected');
-  ws.send(JSON.stringify({ type: 'subscribe', channel: 'updates' }));
+  console.log("Connected");
+  ws.send(JSON.stringify({ type: "subscribe", channel: "updates" }));
 };
 
 ws.onmessage = (event) => {
   const data = JSON.parse(event.data);
-  console.log('Received:', data);
+  console.log("Received:", data);
 };
 
 ws.onerror = (error) => {
-  console.error('WebSocket error:', error);
+  console.error("WebSocket error:", error);
 };
 
 ws.onclose = (event) => {
-  console.log('Disconnected:', event.code, event.reason);
+  console.log("Disconnected:", event.code, event.reason);
 };
 
 // Send message
-ws.send(JSON.stringify({ type: 'message', content: 'Hello!' }));
+ws.send(JSON.stringify({ type: "message", content: "Hello!" }));
 
 // Close connection
-ws.close(1000, 'Normal closure');
+ws.close(1000, "Normal closure");
 ```
 
 ### Reconnection Logic
@@ -120,7 +120,7 @@ class ReconnectingWebSocket {
     this.ws = new WebSocket(this.url);
 
     this.ws.onopen = () => {
-      console.log('Connected');
+      console.log("Connected");
       this.reconnectAttempts = 0;
     };
 
@@ -137,14 +137,16 @@ class ReconnectingWebSocket {
 
   private reconnect() {
     if (this.reconnectAttempts >= this.maxReconnectAttempts) {
-      console.error('Max reconnection attempts reached');
+      console.error("Max reconnection attempts reached");
       return;
     }
 
     this.reconnectAttempts++;
     const delay = this.reconnectDelay * Math.pow(2, this.reconnectAttempts - 1);
 
-    console.log(`Reconnecting in ${delay}ms (attempt ${this.reconnectAttempts})`);
+    console.log(
+      `Reconnecting in ${delay}ms (attempt ${this.reconnectAttempts})`,
+    );
 
     setTimeout(() => this.connect(), delay);
   }
@@ -164,8 +166,8 @@ class ReconnectingWebSocket {
 ### ws Library
 
 ```typescript
-import { WebSocketServer, WebSocket } from 'ws';
-import { createServer } from 'http';
+import { WebSocketServer, WebSocket } from "ws";
+import { createServer } from "http";
 
 const server = createServer();
 const wss = new WebSocketServer({ server });
@@ -173,34 +175,34 @@ const wss = new WebSocketServer({ server });
 // Track connected clients
 const clients = new Set<WebSocket>();
 
-wss.on('connection', (ws, request) => {
-  console.log('Client connected');
+wss.on("connection", (ws, request) => {
+  console.log("Client connected");
   clients.add(ws);
 
   // Send welcome message
-  ws.send(JSON.stringify({ type: 'connected', clientCount: clients.size }));
+  ws.send(JSON.stringify({ type: "connected", clientCount: clients.size }));
 
-  ws.on('message', (data) => {
+  ws.on("message", (data) => {
     try {
       const message = JSON.parse(data.toString());
       handleMessage(ws, message);
     } catch (error) {
-      ws.send(JSON.stringify({ type: 'error', message: 'Invalid JSON' }));
+      ws.send(JSON.stringify({ type: "error", message: "Invalid JSON" }));
     }
   });
 
-  ws.on('close', () => {
+  ws.on("close", () => {
     clients.delete(ws);
-    console.log('Client disconnected');
+    console.log("Client disconnected");
   });
 
-  ws.on('error', (error) => {
-    console.error('WebSocket error:', error);
+  ws.on("error", (error) => {
+    console.error("WebSocket error:", error);
   });
 
   // Heartbeat to detect stale connections
   ws.isAlive = true;
-  ws.on('pong', () => {
+  ws.on("pong", () => {
     ws.isAlive = true;
   });
 });
@@ -216,25 +218,27 @@ const heartbeatInterval = setInterval(() => {
   });
 }, 30000);
 
-wss.on('close', () => {
+wss.on("close", () => {
   clearInterval(heartbeatInterval);
 });
 
 function handleMessage(ws: WebSocket, message: any) {
   switch (message.type) {
-    case 'broadcast':
+    case "broadcast":
       broadcast(message.content);
       break;
-    case 'private':
+    case "private":
       // Handle private messages
       break;
     default:
-      ws.send(JSON.stringify({ type: 'error', message: 'Unknown message type' }));
+      ws.send(
+        JSON.stringify({ type: "error", message: "Unknown message type" }),
+      );
   }
 }
 
 function broadcast(content: any) {
-  const message = JSON.stringify({ type: 'broadcast', content });
+  const message = JSON.stringify({ type: "broadcast", content });
   clients.forEach((client) => {
     if (client.readyState === WebSocket.OPEN) {
       client.send(message);
@@ -248,32 +252,32 @@ server.listen(3000);
 ### Socket.IO
 
 ```typescript
-import { Server } from 'socket.io';
-import { createServer } from 'http';
+import { Server } from "socket.io";
+import { createServer } from "http";
 
 const httpServer = createServer();
 const io = new Server(httpServer, {
   cors: {
-    origin: 'https://example.com',
-    methods: ['GET', 'POST'],
+    origin: "https://example.com",
+    methods: ["GET", "POST"],
   },
 });
 
 // Namespace for chat
-const chat = io.of('/chat');
+const chat = io.of("/chat");
 
-chat.on('connection', (socket) => {
-  console.log('User connected:', socket.id);
+chat.on("connection", (socket) => {
+  console.log("User connected:", socket.id);
 
   // Join room
-  socket.on('join', (room: string) => {
+  socket.on("join", (room: string) => {
     socket.join(room);
-    socket.to(room).emit('user_joined', { userId: socket.id });
+    socket.to(room).emit("user_joined", { userId: socket.id });
   });
 
   // Handle message
-  socket.on('message', (data: { room: string; content: string }) => {
-    chat.to(data.room).emit('message', {
+  socket.on("message", (data: { room: string; content: string }) => {
+    chat.to(data.room).emit("message", {
       from: socket.id,
       content: data.content,
       timestamp: Date.now(),
@@ -281,13 +285,13 @@ chat.on('connection', (socket) => {
   });
 
   // Leave room
-  socket.on('leave', (room: string) => {
+  socket.on("leave", (room: string) => {
     socket.leave(room);
-    socket.to(room).emit('user_left', { userId: socket.id });
+    socket.to(room).emit("user_left", { userId: socket.id });
   });
 
-  socket.on('disconnect', () => {
-    console.log('User disconnected:', socket.id);
+  socket.on("disconnect", () => {
+    console.log("User disconnected:", socket.id);
   });
 });
 
@@ -298,7 +302,7 @@ io.use((socket, next) => {
     socket.data.user = decodeToken(token);
     next();
   } else {
-    next(new Error('Authentication error'));
+    next(new Error("Authentication error"));
   }
 });
 
@@ -312,18 +316,18 @@ httpServer.listen(3000);
 ### Server Implementation
 
 ```typescript
-import express from 'express';
+import express from "express";
 
 const app = express();
 
-app.get('/events', (req, res) => {
+app.get("/events", (req, res) => {
   // Set SSE headers
-  res.setHeader('Content-Type', 'text/event-stream');
-  res.setHeader('Cache-Control', 'no-cache');
-  res.setHeader('Connection', 'keep-alive');
+  res.setHeader("Content-Type", "text/event-stream");
+  res.setHeader("Cache-Control", "no-cache");
+  res.setHeader("Connection", "keep-alive");
 
   // Send initial event
-  res.write('event: connected\n');
+  res.write("event: connected\n");
   res.write('data: {"status": "connected"}\n\n');
 
   // Send periodic updates
@@ -336,7 +340,7 @@ app.get('/events', (req, res) => {
   }, 1000);
 
   // Cleanup on disconnect
-  req.on('close', () => {
+  req.on("close", () => {
     clearInterval(interval);
     res.end();
   });
@@ -348,23 +352,23 @@ app.listen(3000);
 ### Client Implementation
 
 ```typescript
-const eventSource = new EventSource('/events');
+const eventSource = new EventSource("/events");
 
 eventSource.onopen = () => {
-  console.log('SSE connection opened');
+  console.log("SSE connection opened");
 };
 
 eventSource.onmessage = (event) => {
   const data = JSON.parse(event.data);
-  console.log('Received:', data);
+  console.log("Received:", data);
 };
 
-eventSource.addEventListener('connected', (event) => {
-  console.log('Connected event:', event.data);
+eventSource.addEventListener("connected", (event) => {
+  console.log("Connected event:", event.data);
 });
 
 eventSource.onerror = (error) => {
-  console.error('SSE error:', error);
+  console.error("SSE error:", error);
   if (eventSource.readyState === EventSource.CLOSED) {
     // Reconnect logic if needed
   }
@@ -389,20 +393,20 @@ interface BaseMessage {
 }
 
 interface ChatMessage extends BaseMessage {
-  type: 'chat';
+  type: "chat";
   room: string;
   content: string;
   sender: string;
 }
 
 interface PresenceMessage extends BaseMessage {
-  type: 'presence';
-  status: 'online' | 'offline' | 'away';
+  type: "presence";
+  status: "online" | "offline" | "away";
   userId: string;
 }
 
 interface ErrorMessage extends BaseMessage {
-  type: 'error';
+  type: "error";
   code: string;
   message: string;
 }
@@ -414,13 +418,13 @@ function handleMessage(data: string) {
   const message: Message = JSON.parse(data);
 
   switch (message.type) {
-    case 'chat':
+    case "chat":
       displayChatMessage(message);
       break;
-    case 'presence':
+    case "presence":
       updateUserPresence(message);
       break;
-    case 'error':
+    case "error":
       handleError(message);
       break;
   }
@@ -433,9 +437,9 @@ function handleMessage(data: string) {
 // For high-performance needs, use binary formats
 
 // MessagePack
-import { encode, decode } from '@msgpack/msgpack';
+import { encode, decode } from "@msgpack/msgpack";
 
-const encoded = encode({ type: 'position', x: 100, y: 200 });
+const encoded = encode({ type: "position", x: 100, y: 200 });
 ws.send(encoded);
 
 ws.onmessage = (event) => {
@@ -476,8 +480,8 @@ ws.onmessage = (event) => {
 ### Redis Pub/Sub for Cross-Server Messages
 
 ```typescript
-import Redis from 'ioredis';
-import { WebSocketServer } from 'ws';
+import Redis from "ioredis";
+import { WebSocketServer } from "ws";
 
 const pub = new Redis();
 const sub = new Redis();
@@ -485,10 +489,10 @@ const sub = new Redis();
 const wss = new WebSocketServer({ port: 3000 });
 
 // Subscribe to channel
-sub.subscribe('broadcast');
+sub.subscribe("broadcast");
 
 // Forward Redis messages to local clients
-sub.on('message', (channel, message) => {
+sub.on("message", (channel, message) => {
   wss.clients.forEach((client) => {
     if (client.readyState === WebSocket.OPEN) {
       client.send(message);
@@ -498,12 +502,12 @@ sub.on('message', (channel, message) => {
 
 // Publish messages to Redis
 function broadcast(message: object) {
-  pub.publish('broadcast', JSON.stringify(message));
+  pub.publish("broadcast", JSON.stringify(message));
 }
 
 // Receive from WebSocket, publish to Redis
-wss.on('connection', (ws) => {
-  ws.on('message', (data) => {
+wss.on("connection", (ws) => {
+  ws.on("message", (data) => {
     broadcast(JSON.parse(data.toString()));
   });
 });
@@ -512,11 +516,11 @@ wss.on('connection', (ws) => {
 ### Socket.IO with Redis Adapter
 
 ```typescript
-import { Server } from 'socket.io';
-import { createAdapter } from '@socket.io/redis-adapter';
-import { createClient } from 'redis';
+import { Server } from "socket.io";
+import { createAdapter } from "@socket.io/redis-adapter";
+import { createClient } from "redis";
 
-const pubClient = createClient({ url: 'redis://localhost:6379' });
+const pubClient = createClient({ url: "redis://localhost:6379" });
 const subClient = pubClient.duplicate();
 
 await Promise.all([pubClient.connect(), subClient.connect()]);
@@ -525,7 +529,7 @@ const io = new Server();
 io.adapter(createAdapter(pubClient, subClient));
 
 // Now messages are automatically synchronized across servers
-io.emit('notification', { message: 'Hello all servers!' });
+io.emit("notification", { message: "Hello all servers!" });
 ```
 
 ---
@@ -676,38 +680,40 @@ function ChatRoom({ roomId }: { roomId: string }) {
 
 ```typescript
 // Token-based authentication
-const ws = new WebSocket('wss://api.example.com/ws');
+const ws = new WebSocket("wss://api.example.com/ws");
 
 ws.onopen = () => {
   // Send auth message immediately
-  ws.send(JSON.stringify({
-    type: 'auth',
-    token: localStorage.getItem('token'),
-  }));
+  ws.send(
+    JSON.stringify({
+      type: "auth",
+      token: localStorage.getItem("token"),
+    }),
+  );
 };
 
 // Server-side validation
-wss.on('connection', (ws, request) => {
+wss.on("connection", (ws, request) => {
   let authenticated = false;
   const authTimeout = setTimeout(() => {
     if (!authenticated) {
-      ws.close(4001, 'Authentication timeout');
+      ws.close(4001, "Authentication timeout");
     }
   }, 5000);
 
-  ws.on('message', (data) => {
+  ws.on("message", (data) => {
     const message = JSON.parse(data.toString());
 
-    if (message.type === 'auth') {
+    if (message.type === "auth") {
       if (validateToken(message.token)) {
         authenticated = true;
         clearTimeout(authTimeout);
-        ws.send(JSON.stringify({ type: 'auth_success' }));
+        ws.send(JSON.stringify({ type: "auth_success" }));
       } else {
-        ws.close(4002, 'Invalid token');
+        ws.close(4002, "Invalid token");
       }
     } else if (!authenticated) {
-      ws.close(4003, 'Not authenticated');
+      ws.close(4003, "Not authenticated");
     }
   });
 });
@@ -736,9 +742,9 @@ function checkRateLimit(ws: WebSocket): boolean {
   return true;
 }
 
-ws.on('message', (data) => {
+ws.on("message", (data) => {
   if (!checkRateLimit(ws)) {
-    ws.send(JSON.stringify({ type: 'error', message: 'Rate limit exceeded' }));
+    ws.send(JSON.stringify({ type: "error", message: "Rate limit exceeded" }));
     return;
   }
   // Process message
@@ -750,6 +756,7 @@ ws.on('message', (data) => {
 ## Best Practices
 
 ### DO:
+
 - Use WSS (WebSocket Secure) in production
 - Implement heartbeat/ping-pong
 - Handle reconnection gracefully
@@ -760,6 +767,7 @@ ws.on('message', (data) => {
 - Monitor connection health
 
 ### DON'T:
+
 - Trust client data without validation
 - Send sensitive data without encryption
 - Keep connections open indefinitely
@@ -774,26 +782,26 @@ ws.on('message', (data) => {
 
 ### Common Issues
 
-| Problem | Cause | Solution |
-|---------|-------|----------|
-| Connection drops | Idle timeout | Implement heartbeat |
-| Messages lost | No acknowledgment | Add message IDs + acks |
-| High latency | Large messages | Use binary, compress |
-| Memory leak | Unclosed connections | Proper cleanup |
-| Cross-origin blocked | Missing CORS | Configure server CORS |
+| Problem              | Cause                | Solution               |
+| -------------------- | -------------------- | ---------------------- |
+| Connection drops     | Idle timeout         | Implement heartbeat    |
+| Messages lost        | No acknowledgment    | Add message IDs + acks |
+| High latency         | Large messages       | Use binary, compress   |
+| Memory leak          | Unclosed connections | Proper cleanup         |
+| Cross-origin blocked | Missing CORS         | Configure server CORS  |
 
 ### Debug Logging
 
 ```typescript
 // Development logging
-if (process.env.NODE_ENV === 'development') {
-  ws.on('message', (data) => {
-    console.log('← Received:', JSON.parse(data.toString()));
+if (process.env.NODE_ENV === "development") {
+  ws.on("message", (data) => {
+    console.log("← Received:", JSON.parse(data.toString()));
   });
 
   const originalSend = ws.send.bind(ws);
   ws.send = (data: string) => {
-    console.log('→ Sending:', JSON.parse(data));
+    console.log("→ Sending:", JSON.parse(data));
     originalSend(data);
   };
 }

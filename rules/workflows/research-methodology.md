@@ -24,6 +24,7 @@ Before starting research, establish clear success criteria:
 - Are there time or scope constraints?
 
 **Example:**
+
 ```
 Question: "What's the best state management solution for a React app?"
 Success criteria:
@@ -40,6 +41,7 @@ Success criteria:
 As you gather information, develop multiple competing hypotheses rather than converging on a single answer prematurely.
 
 **Example Hypothesis Tree:**
+
 ```
 Research Question: Best React state management?
 
@@ -70,15 +72,16 @@ Hypothesis D: "Context + useReducer is the sweet spot"
 
 Assign confidence levels to hypotheses and findings to improve calibration:
 
-| Confidence | Meaning | When to Use |
-|------------|---------|-------------|
-| 90-100% | Near certain | Multiple authoritative sources agree, personal verification |
-| 70-89% | Highly confident | Strong evidence, some corroboration |
-| 50-69% | Moderately confident | Mixed evidence, or single strong source |
-| 30-49% | Low confidence | Limited evidence, or conflicting sources |
-| 0-29% | Speculation | Weak evidence, or extrapolation |
+| Confidence | Meaning              | When to Use                                                 |
+| ---------- | -------------------- | ----------------------------------------------------------- |
+| 90-100%    | Near certain         | Multiple authoritative sources agree, personal verification |
+| 70-89%     | Highly confident     | Strong evidence, some corroboration                         |
+| 50-69%     | Moderately confident | Mixed evidence, or single strong source                     |
+| 30-49%     | Low confidence       | Limited evidence, or conflicting sources                    |
+| 0-29%      | Speculation          | Weak evidence, or extrapolation                             |
 
 **Calibration Tips:**
+
 - Start conservatively (50-60%) and adjust as evidence accumulates
 - Actively look for disconfirming evidence to avoid confirmation bias
 - Note when sources disagree - this should lower confidence
@@ -91,6 +94,7 @@ Assign confidence levels to hypotheses and findings to improve calibration:
 Never rely on a single source for important conclusions. Use multiple search strategies:
 
 **Search Strategy Checklist:**
+
 - [ ] Official documentation
 - [ ] Recent blog posts/articles (2024-2025)
 - [ ] Community discussions (Reddit, HN, forums)
@@ -99,6 +103,7 @@ Never rely on a single source for important conclusions. Use multiple search str
 - [ ] Performance benchmarks (if applicable)
 
 **Cross-Verification:**
+
 - Compare claims across sources
 - Note when sources conflict
 - Prefer primary sources over secondary
@@ -112,6 +117,7 @@ Never rely on a single source for important conclusions. Use multiple search str
 During research, periodically assess your approach:
 
 **Self-Critique Questions:**
+
 - Am I suffering from confirmation bias (only seeking evidence for one hypothesis)?
 - Have I explored alternative explanations adequately?
 - Are there obvious sources I haven't checked?
@@ -126,43 +132,53 @@ During research, periodically assess your approach:
 Create a `research-notes.md` file to track progress transparently:
 
 **Template Structure:**
+
 ```markdown
 # Research: [Topic]
 
 ## Question
+
 [Clear statement of what you're researching]
 
 ## Success Criteria
+
 - [ ] Criterion 1
 - [ ] Criterion 2
 
 ## Hypotheses
 
 ### Hypothesis A: [Statement]
+
 **Confidence:** 65%
 **Evidence For:**
+
 - Source 1: [finding]
 - Source 2: [finding]
-**Evidence Against:**
+  **Evidence Against:**
 - Source 3: [finding]
 
 ### Hypothesis B: [Statement]
+
 **Confidence:** 70%
 ...
 
 ## Search Log
+
 1. [Query] → [Results summary]
 2. [Query] → [Results summary]
 
 ## Key Findings
+
 - Finding 1
 - Finding 2
 
 ## Remaining Questions
+
 - Question 1
 - Question 2
 
 ## Conclusion
+
 [Synthesis of findings with confidence level]
 ```
 
@@ -179,6 +195,7 @@ After gathering evidence:
 5. **Provide actionable recommendation** if requested
 
 **Example Conclusion:**
+
 ```
 Based on research across 8 sources (official docs, 3 comparison articles,
 2 Reddit discussions, GitHub metrics, benchmark data), I have high confidence
@@ -215,9 +232,11 @@ Use this template for complex research tasks:
 ---
 
 ## Research Question
+
 [Clear, specific question]
 
 ## Success Criteria
+
 - [ ] Criterion 1
 - [ ] Criterion 2
 
@@ -226,12 +245,14 @@ Use this template for complex research tasks:
 ## Hypothesis Tree
 
 ### H1: [Hypothesis Statement]
+
 - **Confidence:** X%
 - **For:** [Evidence]
 - **Against:** [Evidence]
 - **Sources:** [Links/citations]
 
 ### H2: [Hypothesis Statement]
+
 - **Confidence:** X%
 - **For:** [Evidence]
 - **Against:** [Evidence]
@@ -240,6 +261,7 @@ Use this template for complex research tasks:
 ---
 
 ## Search Log
+
 1. **Query:** "react state management 2024"
    - **Results:** Found comparison article, official docs
    - **Key info:** [Summary]
@@ -251,16 +273,19 @@ Use this template for complex research tasks:
 ---
 
 ## Synthesis
+
 [Integration of findings across hypotheses]
 
 ---
 
 ## Conclusion
+
 [Final answer with confidence level and reasoning]
 
 ---
 
 ## Remaining Uncertainties
+
 - [What's still unclear]
 - [Where more research would help]
 ```
@@ -272,12 +297,14 @@ Use this template for complex research tasks:
 Research methodology automatically leverages:
 
 **Tools:**
+
 - `WebSearch` - Primary research tool
 - `WebFetch` - Deep dive into specific sources
 - `Task` tool with `Explore` agent - Codebase research
 - `Memory` tool - Save research findings for future reference
 
 **Skills:**
+
 - Domain expert skills provide specialized research patterns
 - `data-science` skill for data-driven research
 - Stack-specific skills for technology research
@@ -287,6 +314,7 @@ Research methodology automatically leverages:
 ## When to Use This Methodology
 
 **Always use for:**
+
 - Complex research questions with no clear answer
 - Technology/tool selection decisions
 - Investigating multiple competing solutions
@@ -294,6 +322,7 @@ Research methodology automatically leverages:
 - Questions where confidence calibration matters
 
 **Optional for:**
+
 - Simple factual lookups (single source sufficient)
 - Well-established best practices (documented clearly)
 - Quick reference questions
@@ -373,6 +402,7 @@ Task: "Why is our React app re-rendering excessively?"
 ## Quick Reference
 
 **Research Checklist:**
+
 - [ ] Define clear success criteria
 - [ ] Develop 2-4 competing hypotheses
 - [ ] Assign initial confidence levels
@@ -386,4 +416,4 @@ Task: "Why is our React app re-rendering excessively?"
 
 ---
 
-*Systematic research prevents premature conclusions and improves answer quality through structured hypothesis testing and confidence calibration.*
+_Systematic research prevents premature conclusions and improves answer quality through structured hypothesis testing and confidence calibration._

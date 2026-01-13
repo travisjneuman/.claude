@@ -46,22 +46,22 @@ Tier 4: Adaptive
 
 ## ISO 27001 Controls
 
-| Domain | Key Controls |
-|--------|--------------|
-| **A.5 Security Policies** | Information security policy |
-| **A.6 Organization** | Roles, mobile, telework |
-| **A.7 Human Resources** | Screening, awareness, termination |
-| **A.8 Asset Management** | Inventory, classification, handling |
-| **A.9 Access Control** | Policy, user management, system access |
-| **A.10 Cryptography** | Encryption, key management |
-| **A.11 Physical Security** | Perimeter, equipment, clear desk |
-| **A.12 Operations** | Procedures, change, capacity |
-| **A.13 Communications** | Network, transfer |
-| **A.14 Development** | SDLC, test data |
-| **A.15 Suppliers** | Third-party security |
-| **A.16 Incident Management** | Reporting, response |
-| **A.17 Business Continuity** | Redundancy, recovery |
-| **A.18 Compliance** | Legal, reviews |
+| Domain                       | Key Controls                           |
+| ---------------------------- | -------------------------------------- |
+| **A.5 Security Policies**    | Information security policy            |
+| **A.6 Organization**         | Roles, mobile, telework                |
+| **A.7 Human Resources**      | Screening, awareness, termination      |
+| **A.8 Asset Management**     | Inventory, classification, handling    |
+| **A.9 Access Control**       | Policy, user management, system access |
+| **A.10 Cryptography**        | Encryption, key management             |
+| **A.11 Physical Security**   | Perimeter, equipment, clear desk       |
+| **A.12 Operations**          | Procedures, change, capacity           |
+| **A.13 Communications**      | Network, transfer                      |
+| **A.14 Development**         | SDLC, test data                        |
+| **A.15 Suppliers**           | Third-party security                   |
+| **A.16 Incident Management** | Reporting, response                    |
+| **A.17 Business Continuity** | Redundancy, recovery                   |
+| **A.18 Compliance**          | Legal, reviews                         |
 
 ## CIS Critical Controls
 

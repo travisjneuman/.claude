@@ -1,10 +1,13 @@
 # Corporate Strategy Advisor Skill
 
 ## Description
+
 Expert-level strategic planning and competitive analysis for Fortune 50 companies. Provides frameworks, methodologies, and decision-making tools for corporate strategy development, competitive positioning, market entry strategies, and M&A evaluation. This skill delivers CEO-level strategic thinking with actionable frameworks and rigorous analysis.
 
 ## When to Use This Skill
+
 Use this skill when:
+
 - Developing corporate strategy or business unit strategies
 - Conducting competitive analysis or industry assessments
 - Evaluating market entry opportunities or expansion strategies
@@ -71,15 +74,19 @@ Analyze industry structure and competitive intensity through five forces that de
 ## Porter's Five Forces Analysis for [Industry/Company]
 
 ### Force 1: Threat of New Entrants - [HIGH/MEDIUM/LOW]
+
 **Assessment:**
+
 - Barrier 1: [Description and impact]
 - Barrier 2: [Description and impact]
 
 **Key Insights:**
+
 - [Insight about entry barriers]
 - [Implications for strategy]
 
 **Quantitative Indicators:**
+
 - Average time to market entry: [X years]
 - Capital requirements: [$X million]
 - Market share captured by new entrants (last 5 years): [X%]
@@ -87,15 +94,19 @@ Analyze industry structure and competitive intensity through five forces that de
 ---
 
 ### Force 2: Supplier Bargaining Power - [HIGH/MEDIUM/LOW]
+
 **Assessment:**
+
 - Factor 1: [Description and impact]
 - Factor 2: [Description and impact]
 
 **Key Insights:**
+
 - [Insight about supplier dynamics]
 - [Implications for profitability]
 
 **Quantitative Indicators:**
+
 - Supplier concentration (HHI): [X]
 - Cost of switching suppliers: [% of revenue]
 - Input cost as % of COGS: [X%]
@@ -103,15 +114,19 @@ Analyze industry structure and competitive intensity through five forces that de
 ---
 
 ### Force 3: Buyer Bargaining Power - [HIGH/MEDIUM/LOW]
+
 **Assessment:**
+
 - Factor 1: [Description and impact]
 - Factor 2: [Description and impact]
 
 **Key Insights:**
+
 - [Insight about buyer dynamics]
 - [Implications for pricing power]
 
 **Quantitative Indicators:**
+
 - Customer concentration: Top 10 customers = [X%] of revenue
 - Average switching costs: [$X or X%]
 - Price elasticity of demand: [X]
@@ -119,15 +134,19 @@ Analyze industry structure and competitive intensity through five forces that de
 ---
 
 ### Force 4: Threat of Substitutes - [HIGH/MEDIUM/LOW]
+
 **Assessment:**
+
 - Substitute 1: [Description and threat level]
 - Substitute 2: [Description and threat level]
 
 **Key Insights:**
+
 - [Insight about substitution trends]
 - [Implications for long-term positioning]
 
 **Quantitative Indicators:**
+
 - Substitute adoption rate: [X% CAGR]
 - Price-performance ratio vs. substitutes: [X]
 - Customer migration to substitutes: [X%/year]
@@ -135,15 +154,19 @@ Analyze industry structure and competitive intensity through five forces that de
 ---
 
 ### Force 5: Competitive Rivalry - [HIGH/MEDIUM/LOW]
+
 **Assessment:**
+
 - Factor 1: [Description and impact]
 - Factor 2: [Description and impact]
 
 **Key Insights:**
+
 - [Insight about competitive dynamics]
 - [Implications for market share and margins]
 
 **Quantitative Indicators:**
+
 - Industry HHI (Herfindahl-Hirschman Index): [X]
 - Industry ROIC vs. WACC spread: [X%]
 - Average industry operating margin: [X%]
@@ -153,17 +176,20 @@ Analyze industry structure and competitive intensity through five forces that de
 ## Overall Industry Attractiveness: [HIGH/MEDIUM/LOW]
 
 ### Strategic Implications:
+
 1. [Primary strategic recommendation]
 2. [Secondary strategic recommendation]
 3. [Risk mitigation strategy]
 
 ### Industry Profitability Forecast:
+
 - Expected industry ROIC: [X%]
 - Recommended strategic positioning: [Description]
 - Key value drivers to exploit: [List]
 ```
 
 **Application Guidelines:**
+
 - Update analysis annually or when major industry shifts occur
 - Use in conjunction with SWOT and PESTEL for comprehensive view
 - Quantify forces wherever possible using HHI, concentration ratios, switching cost estimates
@@ -208,6 +234,7 @@ Portfolio management tool that categorizes business units or products based on m
 ## BCG Portfolio Analysis - [Company Name] - [Year]
 
 ### Portfolio Overview
+
 Total portfolio value: [$X billion]
 Number of business units: [X]
 Analysis date: [Date]
@@ -216,16 +243,18 @@ Analysis date: [Date]
 
 ### Stars: [X business units, $X billion revenue, X% of portfolio]
 
-| Business Unit | Market Growth | Relative Market Share | Revenue | Investment Needs | Strategy |
-|--------------|---------------|----------------------|---------|------------------|----------|
-| [BU Name] | [X%] | [X.X] | [$X] | [$X] | [Strategic priority] |
+| Business Unit | Market Growth | Relative Market Share | Revenue | Investment Needs | Strategy             |
+| ------------- | ------------- | --------------------- | ------- | ---------------- | -------------------- |
+| [BU Name]     | [X%]          | [X.X]                 | [$X]    | [$X]             | [Strategic priority] |
 
 **Strategic Recommendations:**
+
 1. [BU Name]: Invest [$X] to defend market leadership in [specific area]
 2. [BU Name]: Expand capacity by [X%] to capture market growth
 3. Risk: Monitor competitive threats from [competitors]
 
 **Expected Transition:**
+
 - [BU Name] expected to become Cash Cow in [X] years as market matures
 
 ---
@@ -233,15 +262,17 @@ Analysis date: [Date]
 ### Cash Cows: [X business units, $X billion revenue, X% of portfolio]
 
 | Business Unit | Market Growth | Relative Market Share | Revenue | Operating Margin | Cash Generation |
-|--------------|---------------|----------------------|---------|------------------|-----------------|
-| [BU Name] | [X%] | [X.X] | [$X] | [X%] | [$X] |
+| ------------- | ------------- | --------------------- | ------- | ---------------- | --------------- |
+| [BU Name]     | [X%]          | [X.X]                 | [$X]    | [X%]             | [$X]            |
 
 **Strategic Recommendations:**
+
 1. [BU Name]: Harvest [$X] annually; maintain with minimal investment
 2. [BU Name]: Optimize operations to improve margins by [X]%
 3. Allocate cash to fund [X] Stars and [X] Question Marks
 
 **Cash Deployment Plan:**
+
 - Total cash generation: [$X] annually
 - Allocation: [X%] to dividends, [X%] to Stars, [X%] to Question Marks, [X%] to debt reduction
 
@@ -249,11 +280,12 @@ Analysis date: [Date]
 
 ### Question Marks: [X business units, $X billion revenue, X% of portfolio]
 
-| Business Unit | Market Growth | Relative Market Share | Revenue | Investment Required | Decision |
-|--------------|---------------|----------------------|---------|---------------------|----------|
-| [BU Name] | [X%] | [X.X] | [$X] | [$X] | [Invest/Hold/Divest] |
+| Business Unit | Market Growth | Relative Market Share | Revenue | Investment Required | Decision             |
+| ------------- | ------------- | --------------------- | ------- | ------------------- | -------------------- |
+| [BU Name]     | [X%]          | [X.X]                 | [$X]    | [$X]                | [Invest/Hold/Divest] |
 
 **Strategic Recommendations:**
+
 1. **INVEST:** [BU Name] - Allocate [$X] over [X] years to gain market leadership
    - Target market share: [X%] (currently [X%])
    - Expected path to profitability: [X] years
@@ -269,6 +301,7 @@ Analysis date: [Date]
    - Key metrics to track: [Specific KPIs]
 
 **Investment Decision Criteria:**
+
 - Market attractiveness score: [X/10]
 - Competitive strength score: [X/10]
 - Investment payback period: [X years]
@@ -278,11 +311,12 @@ Analysis date: [Date]
 
 ### Dogs: [X business units, $X billion revenue, X% of portfolio]
 
-| Business Unit | Market Growth | Relative Market Share | Revenue | Operating Margin | Recommendation |
-|--------------|---------------|----------------------|---------|------------------|----------------|
-| [BU Name] | [X%] | [X.X] | [$X] | [X%] | [Harvest/Divest/Turnaround] |
+| Business Unit | Market Growth | Relative Market Share | Revenue | Operating Margin | Recommendation              |
+| ------------- | ------------- | --------------------- | ------- | ---------------- | --------------------------- |
+| [BU Name]     | [X%]          | [X.X]                 | [$X]    | [X%]             | [Harvest/Divest/Turnaround] |
 
 **Strategic Recommendations:**
+
 1. **DIVEST:** [BU Name] - Execute sale or shutdown by [Date]
    - Expected proceeds: [$X]
    - Cost of exit: [$X]
@@ -303,18 +337,21 @@ Analysis date: [Date]
 ## Portfolio Balance Analysis
 
 ### Current Portfolio Mix:
+
 - Stars: [X%] of revenue, [X%] of profit, [X%] of investment
 - Cash Cows: [X%] of revenue, [X%] of profit, [X%] of investment
 - Question Marks: [X%] of revenue, [X%] of profit, [X%] of investment
 - Dogs: [X%] of revenue, [X%] of profit, [X%] of investment
 
 ### Portfolio Health Indicators:
+
 - **Cash Balance:** [Positive/Negative] - Cash Cows generate [$X], Stars and Question Marks consume [$X]
 - **Growth Balance:** [X%] of portfolio in high-growth markets
 - **Risk Balance:** [X%] in Question Marks (recommended: 10-20%)
 - **Future Pipeline:** [X] Stars to become Cash Cows in next 3-5 years
 
 ### Recommended Portfolio Rebalancing:
+
 1. Increase allocation to [segment] by [X%]
 2. Divest [X] Dogs, freeing up [$X] in capital
 3. Double investment in [X] Question Marks with highest potential
@@ -325,19 +362,22 @@ Analysis date: [Date]
 ## 3-Year Portfolio Evolution Plan
 
 ### Year 1:
+
 - Divest [X] Dogs
 - Invest [$X] in [X] Question Marks
 - Harvest [$X] from Cash Cows
 - Expected portfolio ROIC: [X%]
 
 ### Year 2:
-- [X] Question Marks transition to Stars
+
+- [x] Question Marks transition to Stars
 - Reduce Stars investment as market share stabilizes
 - Introduce [X] new Question Marks in emerging markets
 - Expected portfolio ROIC: [X%]
 
 ### Year 3:
-- [X] Stars transition to Cash Cows
+
+- [x] Stars transition to Cash Cows
 - Portfolio rebalanced to [X%] in high-growth segments
 - Target portfolio ROIC: [X%]
 - Readiness for next cycle of innovation
@@ -345,6 +385,7 @@ Analysis date: [Date]
 ---
 
 ## Risk Factors and Mitigation
+
 1. **Risk:** Stars fail to defend market position
    - **Mitigation:** Early warning dashboard, competitive intelligence, contingency investment fund
 
@@ -356,6 +397,7 @@ Analysis date: [Date]
 ```
 
 **BCG Matrix Best Practices:**
+
 - Conduct analysis at least annually, quarterly for dynamic industries
 - Define markets narrowly enough to identify true competitive positions
 - Use relative market share (company share / largest competitor share) not absolute share
@@ -380,6 +422,7 @@ Systematic evaluation of internal Strengths and Weaknesses against external Oppo
 #### Strengths (Internal capabilities that create competitive advantage)
 
 **1. Strategic Assets:**
+
 - Asset 1: [Description]
   - Competitive advantage: [How this creates value]
   - Quantification: [Financial impact or metric]
@@ -393,32 +436,38 @@ Systematic evaluation of internal Strengths and Weaknesses against external Oppo
   - Strategic leverage: [How to exploit this]
 
 **2. Core Competencies:**
+
 - Competency 1: [Capability]
   - Competitive benchmark: [vs. industry leaders]
   - Value creation: [Impact on financial performance]
   - Transferability: [Can this be leveraged across business units?]
 
 **3. Market Position:**
+
 - Market share: [X% in key segments]
 - Brand value: [$X billion, rank #X globally]
 - Customer loyalty: [NPS score, retention rate]
 
 **4. Financial Strength:**
+
 - Balance sheet: [Debt/equity ratio, credit rating]
 - Cash generation: [$X FCF, X% FCF margin]
 - Capital allocation efficiency: [ROIC X%, vs. WACC Y%]
 
 **5. Operational Excellence:**
+
 - Efficiency metrics: [Operating margin X%, best in class]
 - Scale advantages: [Cost position vs. competitors]
 - Quality metrics: [Specific performance indicators]
 
 **6. Innovation Capability:**
+
 - R&D investment: [$X, X% of revenue]
 - Patent portfolio: [X patents in key technologies]
 - Time to market: [X% faster than industry average]
 
 **7. Talent & Culture:**
+
 - Employee engagement: [Score, ranking]
 - Leadership bench: [Succession readiness]
 - Specialized expertise: [Key skills unique to firm]
@@ -428,6 +477,7 @@ Systematic evaluation of internal Strengths and Weaknesses against external Oppo
 #### Weaknesses (Internal limitations that create competitive disadvantage)
 
 **1. Strategic Gaps:**
+
 - Gap 1: [Description]
   - Competitive disadvantage: [Impact vs. competitors]
   - Quantification: [Cost or opportunity loss]
@@ -436,27 +486,32 @@ Systematic evaluation of internal Strengths and Weaknesses against external Oppo
   - Investment needed: [$X, timeframe]
 
 **2. Operational Limitations:**
+
 - Limitation 1: [Description]
   - Impact on performance: [Specific metrics]
   - Root cause: [Why this exists]
   - Fix complexity: [High/Medium/Low]
 
 **3. Financial Constraints:**
+
 - Leverage: [Debt level limiting flexibility]
 - Profitability: [Margin pressure in key segments]
 - Capital intensity: [CAPEX requirements vs. peers]
 
 **4. Market Position Vulnerabilities:**
+
 - Share loss in [segment]: [X% decline over Y years]
 - Geographic exposure: [Over-reliance on X market]
 - Customer concentration: [Top 10 = X% of revenue]
 
 **5. Innovation Gaps:**
+
 - Product pipeline: [Gap vs. competitors in X area]
 - Technology debt: [Legacy systems limiting agility]
 - Speed to market: [Slower than competitors by X%]
 
 **6. Organizational Challenges:**
+
 - Silos: [Limiting collaboration across BUs]
 - Culture issues: [Specific problems impacting performance]
 - Talent gaps: [Critical skills shortages]
@@ -468,6 +523,7 @@ Systematic evaluation of internal Strengths and Weaknesses against external Oppo
 #### Opportunities (External factors that could create value if exploited)
 
 **1. Market Growth:**
+
 - Opportunity 1: [Market/segment]
   - Market size: [$X, growing at Y% CAGR]
   - Addressable opportunity: [$X over Y years]
@@ -478,18 +534,21 @@ Systematic evaluation of internal Strengths and Weaknesses against external Oppo
   - Strategic fit: [High/Medium/Low]
 
 **2. Industry Evolution:**
+
 - Trend 1: [Structural change]
   - How it benefits us: [Specific advantage]
   - Time horizon: [When value materializes]
   - Barriers to capture: [What's required]
 
 **3. Technology Enablers:**
+
 - Technology 1: [AI/Cloud/etc.]
   - Application: [How we can use this]
   - Competitive advantage: [First-mover or fast-follower]
   - Investment timeline: [When to invest]
 
 **4. Geographic Expansion:**
+
 - Region 1: [Market]
   - Market attractiveness: [Size, growth, profitability]
   - Competitive intensity: [Low/Medium/High]
@@ -497,18 +556,21 @@ Systematic evaluation of internal Strengths and Weaknesses against external Oppo
   - Expected value creation: [$X NPV]
 
 **5. M&A Targets:**
+
 - Target profile: [Description]
   - Strategic rationale: [Why acquire]
   - Financial attractiveness: [Valuation range, returns]
   - Integration risk: [Low/Medium/High]
 
 **6. Regulatory/Policy Changes:**
+
 - Change 1: [Regulation]
   - Benefit to us: [How this helps]
   - Timing: [When effective]
   - Advocacy required: [Actions to influence]
 
 **7. Strategic Partnerships:**
+
 - Partner type: [Description]
   - Value creation: [Synergies, market access]
   - Risk sharing: [How partnership reduces risk]
@@ -518,6 +580,7 @@ Systematic evaluation of internal Strengths and Weaknesses against external Oppo
 #### Threats (External factors that could destroy value if not mitigated)
 
 **1. Competitive Threats:**
+
 - Threat 1: [New entrant/existing competitor]
   - Specific threat: [What they're doing]
   - Potential impact: [$X revenue at risk, Y% margin pressure]
@@ -527,6 +590,7 @@ Systematic evaluation of internal Strengths and Weaknesses against external Oppo
   - Investment required: [$X]
 
 **2. Disruption Risk:**
+
 - Disruptor 1: [Technology/business model]
   - Disruption mechanism: [How it attacks our model]
   - Vulnerability: [Which BUs most exposed]
@@ -534,30 +598,35 @@ Systematic evaluation of internal Strengths and Weaknesses against external Oppo
   - Response options: [Defend/Pivot/Partner/Acquire]
 
 **3. Market Dynamics:**
+
 - Trend 1: [Market shift]
   - Impact: [Revenue/margin risk]
   - Speed: [How fast this unfolds]
   - Adaptation required: [What we must change]
 
 **4. Regulatory/Legal:**
+
 - Risk 1: [Regulation/litigation]
   - Exposure: [Financial/operational impact]
   - Probability: [X%]
   - Mitigation: [Compliance/lobbying/restructuring]
 
 **5. Economic/Macro:**
+
 - Risk 1: [Recession/inflation/etc.]
   - Sensitivity: [Revenue elasticity, margin impact]
   - Hedging: [Natural hedges, financial hedges]
   - Contingency plan: [Actions if realized]
 
 **6. Supply Chain:**
+
 - Risk 1: [Supplier/logistics disruption]
   - Criticality: [Impact on operations]
   - Likelihood: [X%]
   - Diversification: [Alternative sources]
 
 **7. Geopolitical:**
+
 - Risk 1: [Conflict/sanctions/trade]
   - Exposure: [% revenue from affected regions]
   - Hedging: [Geographic diversification]
@@ -568,6 +637,7 @@ Systematic evaluation of internal Strengths and Weaknesses against external Oppo
 ## SWOT Strategy Matrix
 
 ### SO Strategies (Leverage Strengths to Capture Opportunities)
+
 1. [Strength A] × [Opportunity X] = [Strategic initiative]
    - Expected value: [$X NPV]
    - Priority: [High/Medium/Low]
@@ -579,6 +649,7 @@ Systematic evaluation of internal Strengths and Weaknesses against external Oppo
    - Resource allocation: [$X investment, Y FTEs]
 
 ### WO Strategies (Address Weaknesses to Enable Opportunities)
+
 1. [Weakness A] blocks [Opportunity X] → [Remediation initiative]
    - Investment: [$X]
    - Timeframe: [Y months]
@@ -590,6 +661,7 @@ Systematic evaluation of internal Strengths and Weaknesses against external Oppo
    - Unlocked value: [$X]
 
 ### ST Strategies (Use Strengths to Mitigate Threats)
+
 1. [Strength A] defends against [Threat X] → [Defensive strategy]
    - Protected value: [$X]
    - Investment: [$Y]
@@ -601,6 +673,7 @@ Systematic evaluation of internal Strengths and Weaknesses against external Oppo
    - Success probability: [Z%]
 
 ### WT Strategies (Address Weaknesses AND Threats - Highest Priority)
+
 1. [Weakness A] × [Threat X] = [Critical vulnerability]
    - Risk: [$X value at risk]
    - Mitigation: [Urgent action required]
@@ -618,6 +691,7 @@ Systematic evaluation of internal Strengths and Weaknesses against external Oppo
 ## Strategic Priorities (SWOT-Derived)
 
 ### Priority 1: [Initiative Name] - [SO/WO/ST/WT Strategy]
+
 - Objective: [What we're achieving]
 - Rationale: [SWOT factors driving this]
 - Investment: [$X over Y years]
@@ -627,9 +701,11 @@ Systematic evaluation of internal Strengths and Weaknesses against external Oppo
 - Timeline: [Start - End dates]
 
 ### Priority 2: [Initiative Name] - [SO/WO/ST/WT Strategy]
+
 [Same structure as Priority 1]
 
 ### Priority 3: [Initiative Name] - [SO/WO/ST/WT Strategy]
+
 [Same structure as Priority 1]
 
 ---
@@ -638,15 +714,16 @@ Systematic evaluation of internal Strengths and Weaknesses against external Oppo
 
 Track SWOT factors quarterly to identify changes requiring strategy adjustment:
 
-| Category | Factor | Current Status | Trend | Action Required |
-|----------|--------|----------------|-------|-----------------|
-| Strength | [Asset/capability] | [Metric] | ↑/↓/→ | [Y/N - what action] |
-| Weakness | [Gap/limitation] | [Metric] | ↑/↓/→ | [Y/N - what action] |
-| Opportunity | [Market/trend] | [Size/timing] | ↑/↓/→ | [Y/N - what action] |
-| Threat | [Risk/competitor] | [Probability/impact] | ↑/↓/→ | [Y/N - what action] |
+| Category    | Factor             | Current Status       | Trend | Action Required     |
+| ----------- | ------------------ | -------------------- | ----- | ------------------- |
+| Strength    | [Asset/capability] | [Metric]             | ↑/↓/→ | [Y/N - what action] |
+| Weakness    | [Gap/limitation]   | [Metric]             | ↑/↓/→ | [Y/N - what action] |
+| Opportunity | [Market/trend]     | [Size/timing]        | ↑/↓/→ | [Y/N - what action] |
+| Threat      | [Risk/competitor]  | [Probability/impact] | ↑/↓/→ | [Y/N - what action] |
 ```
 
 **SWOT Analysis Best Practices:**
+
 - Be brutally honest about weaknesses - this is internal analysis
 - Quantify impacts wherever possible (revenue, margin, ROIC)
 - Link each SWOT factor to specific strategic actions
@@ -670,12 +747,14 @@ Systematic approach to evaluating and executing international expansion and new 
 ### Phase 1: Market Attractiveness Assessment
 
 #### Market Size & Growth
+
 - Current market size: [$X]
 - Growth rate: [X% CAGR, next 5 years]
 - Addressable market for our products: [$X]
 - Market maturity: [Emerging/Growth/Mature/Declining]
 
 #### Economic Indicators
+
 - GDP: [$X, growing at Y%]
 - GDP per capita: [$X]
 - Inflation rate: [X%]
@@ -683,12 +762,14 @@ Systematic approach to evaluating and executing international expansion and new 
 - Foreign investment climate: [Score/rating]
 
 #### Industry Structure (Porter's Five Forces)
+
 - Overall industry attractiveness: [High/Medium/Low]
 - Profit pool size: [$X]
 - Expected ROIC: [X%]
 - Competitive intensity: [High/Medium/Low]
 
 #### Regulatory Environment
+
 - Ease of doing business rank: [#X of 190]
 - FDI restrictions: [Description]
 - Taxation: [Corporate tax rate, incentives]
@@ -697,6 +778,7 @@ Systematic approach to evaluating and executing international expansion and new 
 - Industry-specific regulations: [Key constraints]
 
 #### Cultural & Business Environment
+
 - Language barriers: [Assessment]
 - Business culture fit: [High/Medium/Low]
 - Consumer preferences: [Alignment with our offerings]
@@ -704,6 +786,7 @@ Systematic approach to evaluating and executing international expansion and new 
 - Distribution infrastructure: [Maturity level]
 
 #### Political & Geopolitical Risk
+
 - Political stability: [Score]
 - Corruption index: [Rank]
 - Geopolitical tensions: [Risk level]
@@ -717,13 +800,15 @@ Systematic approach to evaluating and executing international expansion and new 
 ### Phase 2: Competitive Landscape Assessment
 
 #### Current Players
-| Competitor | Market Share | Strengths | Weaknesses | Positioning |
-|-----------|--------------|-----------|------------|-------------|
-| [Incumbent 1] | [X%] | [List] | [List] | [Strategy] |
-| [Incumbent 2] | [X%] | [List] | [List] | [Strategy] |
-| [Multinational] | [X%] | [List] | [List] | [Strategy] |
+
+| Competitor      | Market Share | Strengths | Weaknesses | Positioning |
+| --------------- | ------------ | --------- | ---------- | ----------- |
+| [Incumbent 1]   | [X%]         | [List]    | [List]     | [Strategy]  |
+| [Incumbent 2]   | [X%]         | [List]    | [List]     | [Strategy]  |
+| [Multinational] | [X%]         | [List]    | [List]     | [Strategy]  |
 
 #### Competitive Intensity
+
 - Market concentration (HHI): [X]
 - Price competition level: [High/Medium/Low]
 - Innovation rate: [Fast/Moderate/Slow]
@@ -731,6 +816,7 @@ Systematic approach to evaluating and executing international expansion and new 
 - Barriers to customer switching: [High/Medium/Low]
 
 #### White Space Analysis
+
 - Underserved segments: [Description]
 - Unmet customer needs: [List]
 - Pricing gaps: [Opportunities]
@@ -738,6 +824,7 @@ Systematic approach to evaluating and executing international expansion and new 
 - Channel gaps: [Distribution opportunities]
 
 **Competitive Advantage Assessment:**
+
 - Can we differentiate?: [Yes/No - How?]
 - Can we achieve top 3 position?: [Probability X%]
 - Time to profitability: [X years]
@@ -750,6 +837,7 @@ Systematic approach to evaluating and executing international expansion and new 
 #### Entry Mode Options Analysis
 
 **Option 1: Export / Distributor**
+
 - Pros:
   - Low capital commitment: [$X upfront]
   - Fast market entry: [X months]
@@ -765,6 +853,7 @@ Systematic approach to evaluating and executing international expansion and new 
   - IRR: [X%]
 
 **Option 2: Joint Venture / Strategic Partnership**
+
 - Partner profile: [Description]
 - Partnership structure: [Equity split, governance]
 - Pros:
@@ -783,6 +872,7 @@ Systematic approach to evaluating and executing international expansion and new 
   - IRR: [X%]
 
 **Option 3: Wholly-Owned Subsidiary (Greenfield)**
+
 - Structure: [Local entity type]
 - Pros:
   - Full control
@@ -803,6 +893,7 @@ Systematic approach to evaluating and executing international expansion and new 
   - IRR: [X%]
 
 **Option 4: Acquisition**
+
 - Target profile: [Description]
 - Pros:
   - Immediate market share: [X%]
@@ -822,6 +913,7 @@ Systematic approach to evaluating and executing international expansion and new 
   - IRR: [X%]
 
 **Option 5: Employer of Record (EoR) - Fast Test**
+
 - Service provider: [Company name]
 - Pros:
   - Fastest entry: [X weeks]
@@ -838,6 +930,7 @@ Systematic approach to evaluating and executing international expansion and new 
   - Budget: [$X] for pilot
 
 **Recommended Entry Mode: [Option X]**
+
 - Rationale: [Why this mode is optimal given market conditions, strategic objectives, risk tolerance]
 - Fallback option: [If primary fails]
 - Stage-gate review: [Month X to reassess]
@@ -847,6 +940,7 @@ Systematic approach to evaluating and executing international expansion and new 
 ### Phase 4: Go-to-Market Strategy
 
 #### Target Customer Segments (Priority Order)
+
 1. Segment 1: [Description]
    - Size: [X customers, $Y revenue potential]
    - Needs: [What they're buying]
@@ -858,6 +952,7 @@ Systematic approach to evaluating and executing international expansion and new 
    [Same structure]
 
 #### Product/Service Adaptation
+
 - Required localizations:
   - Product features: [Changes needed]
   - Packaging/labeling: [Regulatory, language]
@@ -867,6 +962,7 @@ Systematic approach to evaluating and executing international expansion and new 
 - Time to market: [X months]
 
 #### Pricing Strategy
+
 - Positioning: [Premium/Parity/Value]
 - Price vs. incumbents: [+X% or -X%]
 - Pricing model: [Per unit/subscription/bundled]
@@ -875,7 +971,9 @@ Systematic approach to evaluating and executing international expansion and new 
 - Expected gross margin: [X%]
 
 #### Distribution Channels
+
 Primary channels:
+
 1. Channel 1: [Direct sales/Retail/Online/etc.]
    - Pros/cons: [Analysis]
    - Penetration strategy: [How to access]
@@ -889,6 +987,7 @@ Channel conflicts: [How to manage]
 Omnichannel strategy: [Integration approach]
 
 #### Marketing & Sales Strategy
+
 - Brand positioning: [How we want to be perceived]
 - Marketing budget Year 1: [$X, Y% of revenue]
 - Marketing mix:
@@ -902,6 +1001,7 @@ Omnichannel strategy: [Integration approach]
 - Payback period: [X months]
 
 #### Operations & Supply Chain
+
 - Manufacturing: [Local/Import - source]
 - Logistics: [Partner/Own]
 - Inventory strategy: [JIT/Safety stock level]
@@ -915,19 +1015,20 @@ Omnichannel strategy: [Integration approach]
 
 #### 5-Year P&L Forecast ($M)
 
-| Year | 0 (Setup) | 1 | 2 | 3 | 4 | 5 |
-|------|-----------|---|---|---|---|---|
-| Revenue | - | $X | $X | $X | $X | $X |
-| COGS | - | ($X) | ($X) | ($X) | ($X) | ($X) |
-| Gross Profit | - | $X | $X | $X | $X | $X |
-| Gross Margin % | - | X% | X% | X% | X% | X% |
-| Operating Expenses | ($X) | ($X) | ($X) | ($X) | ($X) | ($X) |
-| EBITDA | ($X) | ($X) | $X | $X | $X | $X |
-| EBITDA Margin % | - | -X% | X% | X% | X% | X% |
+| Year               | 0 (Setup) | 1    | 2    | 3    | 4    | 5    |
+| ------------------ | --------- | ---- | ---- | ---- | ---- | ---- |
+| Revenue            | -         | $X   | $X   | $X   | $X   | $X   |
+| COGS               | -         | ($X) | ($X) | ($X) | ($X) | ($X) |
+| Gross Profit       | -         | $X   | $X   | $X   | $X   | $X   |
+| Gross Margin %     | -         | X%   | X%   | X%   | X%   | X%   |
+| Operating Expenses | ($X)      | ($X) | ($X) | ($X) | ($X) | ($X) |
+| EBITDA             | ($X)      | ($X) | $X   | $X   | $X   | $X   |
+| EBITDA Margin %    | -         | -X%  | X%   | X%   | X%   | X%   |
 
 #### Investment Requirements
 
 **Upfront Investment (Year 0):**
+
 - Entity setup / M&A: [$X]
 - Facility/equipment: [$X]
 - Working capital: [$X]
@@ -935,6 +1036,7 @@ Omnichannel strategy: [Integration approach]
 - **Total:** [$X]
 
 **Ongoing Investment (Years 1-5):**
+
 - CAPEX: [$X total]
 - Working capital increases: [$X]
 - **Total:** [$X]
@@ -955,12 +1057,12 @@ Omnichannel strategy: [Integration approach]
 
 Base case IRR: [X%]
 
-| Scenario | Revenue Impact | EBITDA Impact | IRR | NPV |
-|----------|----------------|---------------|-----|-----|
-| Best case (+20% revenue) | +$X | +$X | X% | $X |
-| Base case | $X | $X | X% | $X |
-| Downside (-20% revenue) | -$X | -$X | X% | $X |
-| Worst case (regulatory delay) | -$X | -$X | X% | $X |
+| Scenario                      | Revenue Impact | EBITDA Impact | IRR | NPV |
+| ----------------------------- | -------------- | ------------- | --- | --- |
+| Best case (+20% revenue)      | +$X            | +$X           | X%  | $X  |
+| Base case                     | $X             | $X            | X%  | $X  |
+| Downside (-20% revenue)       | -$X            | -$X           | X%  | $X  |
+| Worst case (regulatory delay) | -$X            | -$X           | X%  | $X  |
 
 Probability-weighted IRR: [X%]
 Probability-weighted NPV: [$X]
@@ -974,6 +1076,7 @@ Probability-weighted NPV: [$X]
 #### Critical Risks
 
 **Risk 1: [e.g., Regulatory approval delay]**
+
 - Impact: [Revenue delay of $X, IRR reduced by Y%]
 - Probability: [X%]
 - Mitigation:
@@ -982,6 +1085,7 @@ Probability-weighted NPV: [$X]
   - Contingency: [Alternative market if >X month delay]
 
 **Risk 2: [e.g., Competition responds aggressively]**
+
 - Impact: [Pricing pressure, -X% margin]
 - Probability: [X%]
 - Mitigation:
@@ -990,6 +1094,7 @@ Probability-weighted NPV: [$X]
   - Contingency: [Niche segment focus]
 
 **Risk 3: [e.g., Currency depreciation]**
+
 - Impact: [Remittance value loss, -$X]
 - Probability: [X%]
 - Mitigation:
@@ -998,6 +1103,7 @@ Probability-weighted NPV: [$X]
   - Contingency: [Local pricing adjustments]
 
 **Risk 4: [e.g., Talent acquisition challenges]**
+
 - Impact: [Delayed launch, higher costs]
 - Probability: [X%]
 - Mitigation:
@@ -1007,9 +1113,9 @@ Probability-weighted NPV: [$X]
 
 #### Risk Matrix
 
-| Risk | Impact (1-5) | Probability (1-5) | Score | Mitigation Plan |
-|------|--------------|-------------------|-------|-----------------|
-| [Risk name] | [#] | [#] | [#] | [Summary] |
+| Risk        | Impact (1-5) | Probability (1-5) | Score | Mitigation Plan |
+| ----------- | ------------ | ----------------- | ----- | --------------- |
+| [Risk name] | [#]          | [#]               | [#]   | [Summary]       |
 
 Aggregate risk score: [X]
 Risk-adjusted hurdle rate: [X%] (vs. corporate WACC of Y%)
@@ -1021,6 +1127,7 @@ Risk-adjusted hurdle rate: [X%] (vs. corporate WACC of Y%)
 #### Pre-Launch (Months -6 to 0)
 
 **Months -6 to -4:**
+
 - [ ] Finalize entry mode decision
 - [ ] Engage legal counsel for entity setup
 - [ ] Identify office locations
@@ -1029,6 +1136,7 @@ Risk-adjusted hurdle rate: [X%] (vs. corporate WACC of Y%)
 - [ ] Develop localized product specifications
 
 **Months -4 to -2:**
+
 - [ ] Complete entity registration
 - [ ] Secure office space
 - [ ] Hire core team (sales, operations)
@@ -1038,6 +1146,7 @@ Risk-adjusted hurdle rate: [X%] (vs. corporate WACC of Y%)
 - [ ] Begin marketing campaign development
 
 **Months -2 to 0 (Launch):**
+
 - [ ] Complete product localization
 - [ ] Train sales team and channel partners
 - [ ] Launch marketing campaign
@@ -1049,20 +1158,24 @@ Risk-adjusted hurdle rate: [X%] (vs. corporate WACC of Y%)
 #### Post-Launch (Months 1-12)
 
 **Months 1-3:**
+
 - KPI: [X] customers, [$X] revenue
 - Focus: Customer acquisition, channel activation
 - Reviews: Weekly sales pipeline, monthly P&L
 
 **Months 4-6:**
+
 - KPI: [X] customers, [$X] revenue
 - Focus: Product-market fit validation, feedback loop
 - Stage-gate review: Go/pivot/exit decision
 
 **Months 7-9:**
+
 - KPI: [X] customers, [$X] revenue
 - Focus: Scale sales and marketing, operational efficiency
 
 **Months 10-12:**
+
 - KPI: [X] customers, [$X] revenue
 - Focus: Path to profitability, Year 2 planning
 - Annual review: Assess vs. business case, decide Year 2 investment
@@ -1070,14 +1183,17 @@ Risk-adjusted hurdle rate: [X%] (vs. corporate WACC of Y%)
 #### Decision Gates
 
 **Gate 1 (Month 6):** Product-Market Fit
+
 - Criteria: [X] customers, [Y%] retention, [Z] NPS
 - Decision: Continue / Pivot offering / Exit
 
 **Gate 2 (Month 12):** Path to Profitability
+
 - Criteria: [$X] revenue, [Y%] gross margin, unit economics positive
 - Decision: Increase investment / Maintain / Harvest / Exit
 
 **Gate 3 (Month 24):** Profitability & Scale
+
 - Criteria: EBITDA positive, [X%] market share
 - Decision: Accelerate / Maintain / Divest
 
@@ -1086,32 +1202,36 @@ Risk-adjusted hurdle rate: [X%] (vs. corporate WACC of Y%)
 ### Phase 8: Success Metrics & KPIs
 
 #### Financial KPIs
-| Metric | Target Year 1 | Target Year 3 | Target Year 5 |
-|--------|---------------|---------------|---------------|
-| Revenue | $X | $X | $X |
-| Gross Margin % | X% | X% | X% |
-| EBITDA Margin % | -X% | X% | X% |
-| Market Share | X% | X% | X% |
-| CAC Payback (months) | X | X | X |
+
+| Metric               | Target Year 1 | Target Year 3 | Target Year 5 |
+| -------------------- | ------------- | ------------- | ------------- |
+| Revenue              | $X            | $X            | $X            |
+| Gross Margin %       | X%            | X%            | X%            |
+| EBITDA Margin %      | -X%           | X%            | X%            |
+| Market Share         | X%            | X%            | X%            |
+| CAC Payback (months) | X             | X             | X             |
 
 #### Operational KPIs
-| Metric | Target Year 1 | Target Year 3 | Target Year 5 |
-|--------|---------------|---------------|---------------|
-| Customers | X | X | X |
-| Customer retention | X% | X% | X% |
-| Sales team size | X | X | X |
-| Revenue per employee | $X | $X | $X |
-| On-time delivery % | X% | X% | X% |
+
+| Metric               | Target Year 1 | Target Year 3 | Target Year 5 |
+| -------------------- | ------------- | ------------- | ------------- |
+| Customers            | X             | X             | X             |
+| Customer retention   | X%            | X%            | X%            |
+| Sales team size      | X             | X             | X             |
+| Revenue per employee | $X            | $X            | $X            |
+| On-time delivery %   | X%            | X%            | X%            |
 
 #### Strategic KPIs
-| Metric | Target Year 1 | Target Year 3 | Target Year 5 |
-|--------|---------------|---------------|---------------|
-| Brand awareness | X% | X% | X% |
-| NPS | X | X | X |
-| Employee engagement | X% | X% | X% |
-| Channel partner count | X | X | X |
+
+| Metric                | Target Year 1 | Target Year 3 | Target Year 5 |
+| --------------------- | ------------- | ------------- | ------------- |
+| Brand awareness       | X%            | X%            | X%            |
+| NPS                   | X             | X             | X             |
+| Employee engagement   | X%            | X%            | X%            |
+| Channel partner count | X             | X             | X             |
 
 #### Dashboard Reporting
+
 - Daily: Sales pipeline, cash position
 - Weekly: Revenue, customer acquisition, sales funnel
 - Monthly: Full P&L, KPI scorecard
@@ -1130,11 +1250,13 @@ Risk-adjusted hurdle rate: [X%] (vs. corporate WACC of Y%)
 **Recommendation:** [GO / NO-GO / PILOT]
 
 **Approval Required From:**
+
 - [ ] CEO
 - [ ] CFO
 - [ ] Board of Directors (if investment >$X)
 
 **Next Steps:**
+
 1. [Action 1] - Owner: [Name] - Date: [X]
 2. [Action 2] - Owner: [Name] - Date: [X]
 3. [Action 3] - Owner: [Name] - Date: [X]
@@ -1155,6 +1277,7 @@ Comprehensive framework for evaluating acquisition targets, conducting due dilig
 ### Strategic Rationale (Why This Acquisition?)
 
 #### Strategic Fit
+
 - [ ] **Horizontal Integration:** Consolidate market share, eliminate competitor
   - Combined market share: [X%]
   - HHI impact: [Current X → Post-merger Y]
@@ -1188,6 +1311,7 @@ Comprehensive framework for evaluating acquisition targets, conducting due dilig
 #### Value Creation Thesis
 
 **Revenue Synergies:** [$X annually by Year 3]
+
 1. Cross-selling: [$X]
    - Sell our products to their customers: [$X]
    - Sell their products to our customers: [$X]
@@ -1210,6 +1334,7 @@ Comprehensive framework for evaluating acquisition targets, conducting due dilig
 **Probability-Weighted Revenue Synergies:** [$Y]
 
 **Cost Synergies:** [$X annually by Year 3]
+
 1. Overhead reduction: [$X]
    - Duplicate functions eliminated: [Finance, HR, IT, Legal]
    - Probability: [90%+]
@@ -1229,6 +1354,7 @@ Comprehensive framework for evaluating acquisition targets, conducting due dilig
 **Probability-Weighted Cost Synergies:** [$Y]
 
 **Tax Synergies:** [$X]
+
 - NOL utilization: [$X]
 - Tax domicile optimization: [$X]
 - Transfer pricing optimization: [$X]
@@ -1241,6 +1367,7 @@ Comprehensive framework for evaluating acquisition targets, conducting due dilig
 ### Target Company Overview
 
 #### Business Profile
+
 - Company name: [Target]
 - Industry: [Sector/subsector]
 - Business model: [Description]
@@ -1251,20 +1378,21 @@ Comprehensive framework for evaluating acquisition targets, conducting due dilig
 
 #### Financial Summary (Last 3 Years)
 
-| Metric | Year -2 | Year -1 | Current YTD |
-|--------|---------|---------|-------------|
-| Revenue | $X | $X | $X |
-| Revenue Growth % | X% | X% | X% |
-| Gross Profit | $X | $X | $X |
-| Gross Margin % | X% | X% | X% |
-| EBITDA | $X | $X | $X |
-| EBITDA Margin % | X% | X% | X% |
-| Net Income | $X | $X | $X |
-| Net Margin % | X% | X% | X% |
-| Free Cash Flow | $X | $X | $X |
-| ROIC | X% | X% | X% |
+| Metric           | Year -2 | Year -1 | Current YTD |
+| ---------------- | ------- | ------- | ----------- |
+| Revenue          | $X      | $X      | $X          |
+| Revenue Growth % | X%      | X%      | X%          |
+| Gross Profit     | $X      | $X      | $X          |
+| Gross Margin %   | X%      | X%      | X%          |
+| EBITDA           | $X      | $X      | $X          |
+| EBITDA Margin %  | X%      | X%      | X%          |
+| Net Income       | $X      | $X      | $X          |
+| Net Margin %     | X%      | X%      | X%          |
+| Free Cash Flow   | $X      | $X      | $X          |
+| ROIC             | X%      | X%      | X%          |
 
 **Financial Health:**
+
 - Total Debt: [$X]
 - Net Debt: [$X]
 - Debt/EBITDA: [X.Xx]
@@ -1273,6 +1401,7 @@ Comprehensive framework for evaluating acquisition targets, conducting due dilig
 - CAPEX: [$X, X% of revenue]
 
 **Financial Quality:**
+
 - Revenue quality: [Recurring X%, contracted Y%]
 - Customer concentration: [Top 10 = X%]
 - Profit quality: [Cash conversion, accruals analysis]
@@ -1284,28 +1413,30 @@ Comprehensive framework for evaluating acquisition targets, conducting due dilig
 
 #### Comparable Company Analysis
 
-| Public Comparable | EV/Revenue | EV/EBITDA | P/E | Revenue Growth | EBITDA Margin |
-|-------------------|------------|-----------|-----|----------------|---------------|
-| Comp 1 | X.Xx | X.Xx | X.X | X% | X% |
-| Comp 2 | X.Xx | X.Xx | X.X | X% | X% |
-| Comp 3 | X.Xx | X.Xx | X.X | X% | X% |
-| **Median** | **X.Xx** | **X.Xx** | **X.X** | **X%** | **X%** |
-| Target | X.Xx | X.Xx | X.X | X% | X% |
+| Public Comparable | EV/Revenue | EV/EBITDA | P/E     | Revenue Growth | EBITDA Margin |
+| ----------------- | ---------- | --------- | ------- | -------------- | ------------- |
+| Comp 1            | X.Xx       | X.Xx      | X.X     | X%             | X%            |
+| Comp 2            | X.Xx       | X.Xx      | X.X     | X%             | X%            |
+| Comp 3            | X.Xx       | X.Xx      | X.X     | X%             | X%            |
+| **Median**        | **X.Xx**   | **X.Xx**  | **X.X** | **X%**         | **X%**        |
+| Target            | X.Xx       | X.Xx      | X.X     | X%             | X%            |
 
 **Implied Valuation Range (EV):**
+
 - Based on EV/Revenue (X.Xx): [$X - $Y]
 - Based on EV/EBITDA (X.Xx): [$X - $Y]
 - **Midpoint:** [$X]
 
 #### Precedent Transaction Analysis
 
-| Transaction | Year | EV/Revenue | EV/EBITDA | Premium to Market | Strategic Rationale |
-|-------------|------|------------|-----------|-------------------|---------------------|
-| Acquirer A / Target 1 | 20XX | X.Xx | X.Xx | X% | Similar to our deal |
-| Acquirer B / Target 2 | 20XX | X.Xx | X.Xx | X% | Similar to our deal |
-| **Median** | | **X.Xx** | **X.Xx** | **X%** | |
+| Transaction           | Year | EV/Revenue | EV/EBITDA | Premium to Market | Strategic Rationale |
+| --------------------- | ---- | ---------- | --------- | ----------------- | ------------------- |
+| Acquirer A / Target 1 | 20XX | X.Xx       | X.Xx      | X%                | Similar to our deal |
+| Acquirer B / Target 2 | 20XX | X.Xx       | X.Xx      | X%                | Similar to our deal |
+| **Median**            |      | **X.Xx**   | **X.Xx**  | **X%**            |                     |
 
 **Implied Valuation Range (EV):**
+
 - Based on transaction EV/Revenue: [$X - $Y]
 - Based on transaction EV/EBITDA: [$X - $Y]
 - **Midpoint:** [$X]
@@ -1313,6 +1444,7 @@ Comprehensive framework for evaluating acquisition targets, conducting due dilig
 #### Discounted Cash Flow Analysis
 
 **Assumptions:**
+
 - Revenue growth (Y1-5): [X%, X%, X%, X%, X%]
 - EBITDA margin (Y1-5): [X%, X%, X%, X%, X%]
 - CAPEX as % revenue: [X%]
@@ -1322,6 +1454,7 @@ Comprehensive framework for evaluating acquisition targets, conducting due dilig
 - WACC: [X%]
 
 **DCF Valuation:**
+
 - PV of projected cash flows (Y1-5): [$X]
 - PV of terminal value: [$X]
 - Enterprise Value: [$X]
@@ -1331,24 +1464,24 @@ Comprehensive framework for evaluating acquisition targets, conducting due dilig
 **Sensitivity Analysis:**
 
 | Terminal Growth → | 2.0% | 2.5% | 3.0% | 3.5% | 4.0% |
-|-------------------|------|------|------|------|------|
-| **WACC** ↓ | | | | | |
-| 8.0% | $X | $X | $X | $X | $X |
-| 8.5% | $X | $X | $X | $X | $X |
-| 9.0% | $X | $X | $X | $X | $X |
-| 9.5% | $X | $X | $X | $X | $X |
-| 10.0% | $X | $X | $X | $X | $X |
+| ----------------- | ---- | ---- | ---- | ---- | ---- |
+| **WACC** ↓        |      |      |      |      |      |
+| 8.0%              | $X   | $X   | $X   | $X   | $X   |
+| 8.5%              | $X   | $X   | $X   | $X   | $X   |
+| 9.0%              | $X   | $X   | $X   | $X   | $X   |
+| 9.5%              | $X   | $X   | $X   | $X   | $X   |
+| 10.0%             | $X   | $X   | $X   | $X   | $X   |
 
 **DCF Valuation Range:** [$X - $Y]
 
 #### Valuation Summary
 
-| Method | Implied EV | Weight | Weighted Value |
-|--------|------------|--------|----------------|
-| Comparable Companies | $X | 30% | $X |
-| Precedent Transactions | $X | 30% | $X |
-| DCF | $X | 40% | $X |
-| **Weighted Average Valuation** | | | **$X** |
+| Method                         | Implied EV | Weight | Weighted Value |
+| ------------------------------ | ---------- | ------ | -------------- |
+| Comparable Companies           | $X         | 30%    | $X             |
+| Precedent Transactions         | $X         | 30%    | $X             |
+| DCF                            | $X         | 40%    | $X             |
+| **Weighted Average Valuation** |            |        | **$X**         |
 
 **Valuation Range:** [$X - $Y]
 **Target Price:** [$X]
@@ -1359,6 +1492,7 @@ Comprehensive framework for evaluating acquisition targets, conducting due dilig
 ### Accretion/Dilution Analysis
 
 **Assumptions:**
+
 - Purchase price: [$X]
 - Financing: [X% cash, Y% stock, Z% debt]
 - Cost synergies: [$X by Year 3]
@@ -1367,19 +1501,21 @@ Comprehensive framework for evaluating acquisition targets, conducting due dilig
 
 **Pro Forma Impact (Year 3 - Full Synergies):**
 
-| Metric | Acquirer Stand-Alone | Target Stand-Alone | Combined (No Synergies) | Synergies | Pro Forma |
-|--------|----------------------|---------------------|-------------------------|-----------|-----------|
-| Revenue | $X | $X | $X | $X | $X |
-| EBITDA | $X | $X | $X | $X | $X |
-| EBITDA Margin | X% | X% | X% | | X% |
-| EPS | $X | $X | $X | $X | $X |
+| Metric        | Acquirer Stand-Alone | Target Stand-Alone | Combined (No Synergies) | Synergies | Pro Forma |
+| ------------- | -------------------- | ------------------ | ----------------------- | --------- | --------- |
+| Revenue       | $X                   | $X                 | $X                      | $X        | $X        |
+| EBITDA        | $X                   | $X                 | $X                      | $X        | $X        |
+| EBITDA Margin | X%                   | X%                 | X%                      |           | X%        |
+| EPS           | $X                   | $X                 | $X                      | $X        | $X        |
 
 **EPS Accretion/(Dilution):**
+
 - Year 1: [(X)%] - Dilutive due to integration costs
 - Year 2: [X%] - Approaching break-even
 - Year 3: [X%] - Accretive with full synergies
 
 **Return on Invested Capital:**
+
 - Purchase price: [$X]
 - Integration costs: [$X]
 - Total investment: [$X]
@@ -1389,6 +1525,7 @@ Comprehensive framework for evaluating acquisition targets, conducting due dilig
 - **Value creation:** [X% - Y% = Z% spread]
 
 **NPV of Acquisition:**
+
 - PV of target cash flows: [$X]
 - PV of synergies: [$X]
 - Purchase price: [($X)]
@@ -1406,6 +1543,7 @@ Comprehensive framework for evaluating acquisition targets, conducting due dilig
 #### Financial Due Diligence
 
 **Quality of Earnings:**
+
 - [ ] Verify revenue recognition policies
 - [ ] Analyze revenue composition (recurring, one-time, contracted)
 - [ ] Identify non-operating or non-recurring items
@@ -1415,6 +1553,7 @@ Comprehensive framework for evaluating acquisition targets, conducting due dilig
 - [ ] Assess backlog quality and conversion rates
 
 **Financial Health:**
+
 - [ ] Verify all debt and off-balance sheet obligations
 - [ ] Review debt covenants and change-of-control provisions
 - [ ] Analyze cash flow generation and conversion
@@ -1423,12 +1562,14 @@ Comprehensive framework for evaluating acquisition targets, conducting due dilig
 - [ ] Analyze foreign currency exposures
 
 **Financial Projections:**
+
 - [ ] Stress-test management projections
 - [ ] Benchmark vs. industry growth and margins
 - [ ] Identify risks to achieving plan
 - [ ] Sensitivity analysis on key assumptions
 
 **Red Flags:**
+
 - [ ] Declining margins or ROIC trend
 - [ ] Customer concentration >30% in top 5
 - [ ] Cash flow significantly lags earnings
@@ -1441,6 +1582,7 @@ Comprehensive framework for evaluating acquisition targets, conducting due dilig
 #### Legal Due Diligence
 
 **Corporate:**
+
 - [ ] Corporate structure and jurisdiction review
 - [ ] Capitalization table and ownership verification
 - [ ] Board and shareholder approvals required
@@ -1448,6 +1590,7 @@ Comprehensive framework for evaluating acquisition targets, conducting due dilig
 - [ ] Change of control provisions in key contracts
 
 **Contracts:**
+
 - [ ] Review top 20 customer contracts
 - [ ] Review top 10 supplier contracts
 - [ ] Employment agreements and change-of-control
@@ -1457,12 +1600,14 @@ Comprehensive framework for evaluating acquisition targets, conducting due dilig
 - [ ] Identify contracts requiring consent to assign
 
 **Litigation:**
+
 - [ ] Current and threatened litigation
 - [ ] Regulatory investigations or inquiries
 - [ ] Product liability exposure
 - [ ] Employment disputes
 
 **Compliance:**
+
 - [ ] Regulatory compliance (industry-specific)
 - [ ] Environmental compliance and liabilities
 - [ ] FCPA/anti-corruption compliance
@@ -1470,6 +1615,7 @@ Comprehensive framework for evaluating acquisition targets, conducting due dilig
 - [ ] Export controls and sanctions
 
 **Intellectual Property:**
+
 - [ ] Patent portfolio review and validity
 - [ ] Trademark registrations
 - [ ] Copyright ownership verification
@@ -1478,6 +1624,7 @@ Comprehensive framework for evaluating acquisition targets, conducting due dilig
 - [ ] Freedom to operate analysis
 
 **Red Flags:**
+
 - [ ] Material litigation with >$X exposure
 - [ ] Regulatory non-compliance issues
 - [ ] IP owned by founders/employees not company
@@ -1489,6 +1636,7 @@ Comprehensive framework for evaluating acquisition targets, conducting due dilig
 #### Operational Due Diligence
 
 **Commercial:**
+
 - [ ] Customer interviews (top 10)
 - [ ] Customer satisfaction and NPS data
 - [ ] Sales pipeline quality and conversion
@@ -1498,6 +1646,7 @@ Comprehensive framework for evaluating acquisition targets, conducting due dilig
 - [ ] Market share trends
 
 **Operations:**
+
 - [ ] Manufacturing footprint and capacity utilization
 - [ ] Supply chain resilience and single points of failure
 - [ ] Quality metrics and defect rates
@@ -1506,6 +1655,7 @@ Comprehensive framework for evaluating acquisition targets, conducting due dilig
 - [ ] Operational KPIs vs. industry benchmarks
 
 **Organization:**
+
 - [ ] Leadership team assessment
 - [ ] Organization structure and reporting lines
 - [ ] Key employee retention risks
@@ -1515,6 +1665,7 @@ Comprehensive framework for evaluating acquisition targets, conducting due dilig
 - [ ] Succession planning
 
 **Synergy Validation:**
+
 - [ ] Validate cost synergy assumptions with ops teams
 - [ ] Identify integration complexities
 - [ ] Assess system compatibility
@@ -1522,6 +1673,7 @@ Comprehensive framework for evaluating acquisition targets, conducting due dilig
 - [ ] Procurement savings validation
 
 **Red Flags:**
+
 - [ ] Customer concentration without long-term contracts
 - [ ] Significant customer churn
 - [ ] Heavy reliance on single supplier
@@ -1534,6 +1686,7 @@ Comprehensive framework for evaluating acquisition targets, conducting due dilig
 #### Strategic & Market Due Diligence
 
 **Market Validation:**
+
 - [ ] Independent market size validation
 - [ ] Market growth trends (external data)
 - [ ] Competitive landscape confirmation
@@ -1541,12 +1694,14 @@ Comprehensive framework for evaluating acquisition targets, conducting due dilig
 - [ ] Regulatory trends affecting market
 
 **Strategic Fit:**
+
 - [ ] Cultural compatibility assessment
 - [ ] Strategic alignment with our priorities
 - [ ] Resource requirements to integrate
 - [ ] Opportunity cost vs. other uses of capital
 
 **Red Flags:**
+
 - [ ] Market size significantly smaller than claimed
 - [ ] Market in structural decline
 - [ ] Disruptive technology threat
@@ -1559,6 +1714,7 @@ Comprehensive framework for evaluating acquisition targets, conducting due dilig
 #### Day 1 Readiness
 
 **Critical Day 1 Requirements:**
+
 - [ ] Legal close completed
 - [ ] Employee communications ready
 - [ ] Customer communications ready
@@ -1571,6 +1727,7 @@ Comprehensive framework for evaluating acquisition targets, conducting due dilig
 #### 100-Day Integration Plan
 
 **Days 1-30: Stabilize**
+
 - [ ] Leadership announcements
 - [ ] Employee town halls
 - [ ] Customer reassurance calls (top 20)
@@ -1579,6 +1736,7 @@ Comprehensive framework for evaluating acquisition targets, conducting due dilig
 - [ ] Quick win identification
 
 **Days 31-60: Assess & Plan**
+
 - [ ] Detailed integration planning
 - [ ] Synergy roadmap finalization
 - [ ] Organization design
@@ -1587,6 +1745,7 @@ Comprehensive framework for evaluating acquisition targets, conducting due dilig
 - [ ] Customer retention programs
 
 **Days 61-100: Execute**
+
 - [ ] Organization changes implemented
 - [ ] Quick wins executed
 - [ ] Synergy capture initiated
@@ -1597,29 +1756,30 @@ Comprehensive framework for evaluating acquisition targets, conducting due dilig
 
 **Cost Synergies Roadmap:**
 
-| Synergy | Annual Value | Timeline | Complexity | Owner | Dependencies |
-|---------|--------------|----------|------------|-------|--------------|
-| Headcount optimization | $X | Months 3-6 | Medium | CHRO | Org design |
-| Facility consolidation | $X | Months 6-12 | High | COO | Lease terms |
-| Procurement savings | $X | Months 3-9 | Low | CPO | Contract renegotiation |
-| IT rationalization | $X | Months 6-18 | High | CIO | System integration |
+| Synergy                | Annual Value | Timeline    | Complexity | Owner | Dependencies           |
+| ---------------------- | ------------ | ----------- | ---------- | ----- | ---------------------- |
+| Headcount optimization | $X           | Months 3-6  | Medium     | CHRO  | Org design             |
+| Facility consolidation | $X           | Months 6-12 | High       | COO   | Lease terms            |
+| Procurement savings    | $X           | Months 3-9  | Low        | CPO   | Contract renegotiation |
+| IT rationalization     | $X           | Months 6-18 | High       | CIO   | System integration     |
 
 **Total Cost Synergies:** [$X by Year 3]
 
 **Revenue Synergies Roadmap:**
 
-| Synergy | Annual Value | Timeline | Complexity | Owner | Dependencies |
-|---------|--------------|----------|------------|-------|--------------|
-| Cross-sell our products | $X | Months 6-18 | Medium | CSO | Sales training |
-| Cross-sell their products | $X | Months 6-18 | Medium | CSO | Sales training |
-| Geographic expansion | $X | Months 12-24 | High | GM Regions | Regulatory approvals |
-| Product bundling | $X | Months 9-15 | Medium | CPO | Product integration |
+| Synergy                   | Annual Value | Timeline     | Complexity | Owner      | Dependencies         |
+| ------------------------- | ------------ | ------------ | ---------- | ---------- | -------------------- |
+| Cross-sell our products   | $X           | Months 6-18  | Medium     | CSO        | Sales training       |
+| Cross-sell their products | $X           | Months 6-18  | Medium     | CSO        | Sales training       |
+| Geographic expansion      | $X           | Months 12-24 | High       | GM Regions | Regulatory approvals |
+| Product bundling          | $X           | Months 9-15  | Medium     | CPO        | Product integration  |
 
 **Total Revenue Synergies:** [$X by Year 3]
 
 #### Integration Costs
 
 **One-Time Costs:**
+
 - Severance: [$X]
 - Facility exit costs: [$X]
 - System integration: [$X]
@@ -1636,14 +1796,14 @@ Comprehensive framework for evaluating acquisition targets, conducting due dilig
 
 #### Integration Risks
 
-| Risk | Impact | Probability | Mitigation | Owner |
-|------|--------|-------------|------------|-------|
-| Key customer defection | $X revenue | X% | Early engagement, guarantees | CSO |
-| Key employee attrition | Integration delay | X% | Retention bonuses, quick decisions | CHRO |
-| System integration failure | $X cost overrun | X% | Phased approach, expert resources | CIO |
-| Culture clash | Productivity loss | X% | Culture integration program | CHRO |
-| Synergy shortfall | $X EBITDA miss | X% | Conservative assumptions, governance | CFO |
-| Regulatory block | Deal killed | X% | Antitrust counsel, divestitures | Legal |
+| Risk                       | Impact            | Probability | Mitigation                           | Owner |
+| -------------------------- | ----------------- | ----------- | ------------------------------------ | ----- |
+| Key customer defection     | $X revenue        | X%          | Early engagement, guarantees         | CSO   |
+| Key employee attrition     | Integration delay | X%          | Retention bonuses, quick decisions   | CHRO  |
+| System integration failure | $X cost overrun   | X%          | Phased approach, expert resources    | CIO   |
+| Culture clash              | Productivity loss | X%          | Culture integration program          | CHRO  |
+| Synergy shortfall          | $X EBITDA miss    | X%          | Conservative assumptions, governance | CFO   |
+| Regulatory block           | Deal killed       | X%          | Antitrust counsel, divestitures      | Legal |
 
 **Risk-Adjusted NPV:** [$X]
 **Risk-Adjusted IRR:** [X%]
@@ -1655,18 +1815,21 @@ Comprehensive framework for evaluating acquisition targets, conducting due dilig
 #### Purchase Price & Financing
 
 **Proposed Structure:**
+
 - Enterprise Value: [$X]
 - Less: Cash acquired: [($X)]
 - Plus: Debt assumed: [$X]
 - **Equity Value:** [$X]
 
 **Financing Mix:**
+
 - Cash on hand: [$X, Y%]
 - New debt: [$X, Y%]
 - Stock consideration: [$X, Y% - Z shares at $W/share]
 - **Total:** [$X]
 
 **Earn-Out Provisions:**
+
 - Base payment at close: [$X]
 - Earn-out based on [revenue/EBITDA/milestone]: Up to [$X]
 - Earn-out period: [X years]
@@ -1675,6 +1838,7 @@ Comprehensive framework for evaluating acquisition targets, conducting due dilig
 #### Tax Structure
 
 **Asset vs. Stock Purchase:**
+
 - Recommendation: [Asset / Stock]
 - Rationale: [Tax benefits, liability shield, etc.]
 - Tax step-up value: [$X in additional depreciation/amortization]
@@ -1683,6 +1847,7 @@ Comprehensive framework for evaluating acquisition targets, conducting due dilig
 #### Representations & Warranties
 
 **Key Protections:**
+
 - General survival period: [12-24 months]
 - Extended survival for tax, environment: [X years]
 - Indemnification cap: [X% of purchase price]
@@ -1704,12 +1869,14 @@ Comprehensive framework for evaluating acquisition targets, conducting due dilig
 **Recommendation:** [Proceed with Offer / Pass / Conduct More DD]
 
 **Approval Path:**
+
 - [ ] CEO approval (all deals)
 - [ ] CFO approval (all deals)
 - [ ] Board approval (if >$X or >Y% of market cap)
 - [ ] Shareholder approval (if >Z% of market cap)
 
 **Next Steps:**
+
 1. [Action] - Owner - Date
 2. [Action] - Owner - Date
 3. [Action] - Owner - Date
@@ -1727,9 +1894,11 @@ Fortune 50 companies must plan for multiple futures. Use this framework for stra
 ## Strategic Scenario Planning - [Topic] - [Date]
 
 ### Purpose
+
 [What strategic question are we trying to answer?]
 
 ### Time Horizon
+
 [3-year / 5-year / 10-year scenarios]
 
 ---
@@ -1739,11 +1908,13 @@ Fortune 50 companies must plan for multiple futures. Use this framework for stra
 Identify the 2 most critical and uncertain factors that will shape the future:
 
 **Uncertainty 1:** [e.g., "Pace of Regulatory Change"]
+
 - Current state: [Description]
 - Range: [Slow/Incremental ←→ Fast/Disruptive]
 - Drivers: [What would push it each direction]
 
 **Uncertainty 2:** [e.g., "Technology Adoption Rate"]
+
 - Current state: [Description]
 - Range: [Slow Adoption ←→ Rapid Adoption]
 - Drivers: [What would accelerate or slow adoption]
@@ -1753,9 +1924,11 @@ Identify the 2 most critical and uncertain factors that will shape the future:
 ### Four Scenarios (2x2 Matrix)
 
 #### Scenario A: [Name - e.g., "Status Quo Extended"]
+
 **Description:** [Slow regulatory change + Slow technology adoption]
 
 **Key Characteristics:**
+
 - Market structure: [How industry evolves]
 - Competitive dynamics: [Who wins/loses]
 - Our position: [Strong/Weak - Why]
@@ -1763,12 +1936,14 @@ Identify the 2 most critical and uncertain factors that will shape the future:
 - Regulatory environment: [Key policies]
 
 **Financial Implications:**
+
 - Market growth: [X% CAGR]
 - Our revenue growth: [Y% CAGR]
 - Margin trajectory: [Improving/Stable/Declining]
 - ROIC: [X%]
 
 **Strategic Implications:**
+
 - Winning strategies: [What works in this world]
 - Investments required: [$X in what areas]
 - Organizational capabilities: [What we need]
@@ -1778,9 +1953,11 @@ Identify the 2 most critical and uncertain factors that will shape the future:
 ---
 
 #### Scenario B: [Name - e.g., "Regulatory Revolution"]
+
 **Description:** [Fast regulatory change + Slow technology adoption]
 
 **Key Characteristics:**
+
 - Market structure: [How industry evolves]
 - Competitive dynamics: [Who wins/loses]
 - Our position: [Strong/Weak - Why]
@@ -1788,12 +1965,14 @@ Identify the 2 most critical and uncertain factors that will shape the future:
 - Regulatory environment: [Key policies]
 
 **Financial Implications:**
+
 - Market growth: [X% CAGR]
 - Our revenue growth: [Y% CAGR]
 - Margin trajectory: [Improving/Stable/Declining]
 - ROIC: [X%]
 
 **Strategic Implications:**
+
 - Winning strategies: [What works in this world]
 - Investments required: [$X in what areas]
 - Organizational capabilities: [What we need]
@@ -1803,9 +1982,11 @@ Identify the 2 most critical and uncertain factors that will shape the future:
 ---
 
 #### Scenario C: [Name - e.g., "Technology Disruption"]
+
 **Description:** [Slow regulatory change + Rapid technology adoption]
 
 **Key Characteristics:**
+
 - Market structure: [How industry evolves]
 - Competitive dynamics: [Who wins/loses]
 - Our position: [Strong/Weak - Why]
@@ -1813,12 +1994,14 @@ Identify the 2 most critical and uncertain factors that will shape the future:
 - Regulatory environment: [Key policies]
 
 **Financial Implications:**
+
 - Market growth: [X% CAGR]
 - Our revenue growth: [Y% CAGR]
 - Margin trajectory: [Improving/Stable/Declining]
 - ROIC: [X%]
 
 **Strategic Implications:**
+
 - Winning strategies: [What works in this world]
 - Investments required: [$X in what areas]
 - Organizational capabilities: [What we need]
@@ -1828,9 +2011,11 @@ Identify the 2 most critical and uncertain factors that will shape the future:
 ---
 
 #### Scenario D: [Name - e.g., "Radical Transformation"]
+
 **Description:** [Fast regulatory change + Rapid technology adoption]
 
 **Key Characteristics:**
+
 - Market structure: [How industry evolves]
 - Competitive dynamics: [Who wins/loses]
 - Our position: [Strong/Weak - Why]
@@ -1838,12 +2023,14 @@ Identify the 2 most critical and uncertain factors that will shape the future:
 - Regulatory environment: [Key policies]
 
 **Financial Implications:**
+
 - Market growth: [X% CAGR]
 - Our revenue growth: [Y% CAGR]
 - Margin trajectory: [Improving/Stable/Declining]
 - ROIC: [X%]
 
 **Strategic Implications:**
+
 - Winning strategies: [What works in this world]
 - Investments required: [$X in what areas]
 - Organizational capabilities: [What we need]
@@ -1855,6 +2042,7 @@ Identify the 2 most critical and uncertain factors that will shape the future:
 ### Cross-Scenario Analysis
 
 #### What Strategies Win Across All Scenarios? (No-Regrets Moves)
+
 1. [Strategy 1]: Works in scenarios [A, B, C, D] because [rationale]
    - Investment: [$X]
    - Priority: [Immediate execution]
@@ -1868,6 +2056,7 @@ Identify the 2 most critical and uncertain factors that will shape the future:
 ---
 
 #### What Strategies Are Scenario-Specific? (Options to Preserve)
+
 1. [Strategy 1]: Only works in scenario [X]
    - Investment to preserve option: [$Y (small)]
    - Trigger: [When do we commit full investment]
@@ -1886,11 +2075,11 @@ Identify the 2 most critical and uncertain factors that will shape the future:
 
 Track these metrics quarterly to identify which scenario is unfolding:
 
-| Indicator | Data Source | Scenario A | Scenario B | Scenario C | Scenario D |
-|-----------|-------------|------------|------------|------------|------------|
-| [Metric 1] | [Source] | [Range] | [Range] | [Range] | [Range] |
-| [Metric 2] | [Source] | [Range] | [Range] | [Range] | [Range] |
-| [Metric 3] | [Source] | [Range] | [Range] | [Range] | [Range] |
+| Indicator  | Data Source | Scenario A | Scenario B | Scenario C | Scenario D |
+| ---------- | ----------- | ---------- | ---------- | ---------- | ---------- |
+| [Metric 1] | [Source]    | [Range]    | [Range]    | [Range]    | [Range]    |
+| [Metric 2] | [Source]    | [Range]    | [Range]    | [Range]    | [Range]    |
+| [Metric 3] | [Source]    | [Range]    | [Range]    | [Range]    | [Range]    |
 
 **Review Cadence:** Quarterly scenario assessment, annual full scenario refresh
 
@@ -1902,24 +2091,28 @@ Track these metrics quarterly to identify which scenario is unfolding:
 **Current Strategy:** [What we're executing today]
 
 **If Scenario A Unfolds:**
+
 - Trigger: [Signposts indicating Scenario A]
 - Response: [Strategic adjustments needed]
 - Investment: [$X additional]
 - Timeline: [X months to pivot]
 
 **If Scenario B Unfolds:**
+
 - Trigger: [Signposts indicating Scenario B]
 - Response: [Strategic adjustments needed]
 - Investment: [$X additional]
 - Timeline: [X months to pivot]
 
 **If Scenario C Unfolds:**
+
 - Trigger: [Signposts indicating Scenario C]
 - Response: [Strategic adjustments needed]
 - Investment: [$X additional]
 - Timeline: [X months to pivot]
 
 **If Scenario D Unfolds:**
+
 - Trigger: [Signposts indicating Scenario D]
 - Response: [Strategic adjustments needed]
 - Investment: [$X additional]
@@ -1930,14 +2123,17 @@ Track these metrics quarterly to identify which scenario is unfolding:
 ### Decision Framework
 
 **Immediate Actions (No-Regrets Moves):**
+
 1. [Action 1] - $X investment - Start date
 2. [Action 2] - $X investment - Start date
 
 **Contingent Actions (Options):**
+
 1. [Action 1] - Small investment now ($X) - Full commitment if [trigger]
 2. [Action 2] - Small investment now ($X) - Full commitment if [trigger]
 
 **Decision Gates:**
+
 - Gate 1: [Date] - Assess scenario probability shifts
 - Gate 2: [Date] - Assess scenario probability shifts
 - Gate 3: [Date] - Full strategy refresh
@@ -1948,6 +2144,7 @@ Track these metrics quarterly to identify which scenario is unfolding:
 ## Best Practices for Using These Frameworks
 
 ### Integration Across Frameworks
+
 1. Start with **Porter's Five Forces** to understand industry structure
 2. Use **SWOT** to assess your position within that structure
 3. Apply **BCG Matrix** to manage portfolio of businesses
@@ -1956,6 +2153,7 @@ Track these metrics quarterly to identify which scenario is unfolding:
 6. Apply **Scenario Planning** to stress-test strategies
 
 ### Frequency of Use
+
 - **Porter's Five Forces:** Annually, or when major industry shifts occur
 - **SWOT:** Quarterly for strategic reviews
 - **BCG Matrix:** Annually for portfolio planning, quarterly monitoring
@@ -1964,6 +2162,7 @@ Track these metrics quarterly to identify which scenario is unfolding:
 - **Scenario Planning:** Every 2-3 years, or when facing major uncertainty
 
 ### Common Pitfalls to Avoid
+
 1. **Analysis paralysis:** Set time limits, make decisions with imperfect information
 2. **Confirmation bias:** Actively seek disconfirming evidence
 3. **Overconfidence in projections:** Use ranges, probabilities, sensitivity analysis
@@ -1973,7 +2172,9 @@ Track these metrics quarterly to identify which scenario is unfolding:
 7. **Ignoring opportunity cost:** Every strategy forecloses other options
 
 ### Executive Communication
+
 When presenting strategic analysis to CEO/Board:
+
 - **Lead with recommendation:** State your conclusion first
 - **One-page summary:** Executive summary with key points
 - **Data-driven:** Support every assertion with data
@@ -1992,6 +2193,7 @@ When presenting strategic analysis to CEO/Board:
 ## Strategic Review - [Business Unit / Topic] - [Date]
 
 ### Executive Summary (1 page)
+
 - **Situation:** [Current state in 2-3 sentences]
 - **Challenge:** [Key strategic question or problem]
 - **Recommendation:** [Specific action requested]
@@ -2001,17 +2203,20 @@ When presenting strategic analysis to CEO/Board:
 - **Risk:** [Key risks and mitigation]
 
 ### Situation Analysis
+
 - Market trends
 - Competitive dynamics
 - Our performance (financial, operational)
 - SWOT summary
 
 ### Strategic Options
+
 - Option 1: [Description, pros/cons, returns]
 - Option 2: [Description, pros/cons, returns]
 - Option 3: [Description, pros/cons, returns]
 
 ### Recommendation
+
 - Chosen strategy
 - Financial projections
 - Implementation roadmap
@@ -2019,11 +2224,13 @@ When presenting strategic analysis to CEO/Board:
 - Risk mitigation
 
 ### Decision Requested
+
 - [Specific approval being requested]
 - [Investment amount]
 - [Timeline]
 
 ### Appendix
+
 - Detailed financial models
 - Market research
 - Competitive intelligence
@@ -2033,6 +2240,7 @@ When presenting strategic analysis to CEO/Board:
 ### Annual Strategic Planning Checklist
 
 **Q3: External Analysis (July-August)**
+
 - [ ] Macro trends (PESTEL analysis)
 - [ ] Industry structure (Porter's Five Forces)
 - [ ] Competitive intelligence gathering
@@ -2041,6 +2249,7 @@ When presenting strategic analysis to CEO/Board:
 - [ ] Regulatory and policy outlook
 
 **Q3: Internal Analysis (August-September)**
+
 - [ ] Financial performance review (3-year trend)
 - [ ] Operational metrics vs. benchmarks
 - [ ] Product/portfolio performance (BCG Matrix)
@@ -2049,6 +2258,7 @@ When presenting strategic analysis to CEO/Board:
 - [ ] SWOT analysis
 
 **Q4: Strategy Development (September-October)**
+
 - [ ] Strategic options generation
 - [ ] Financial modeling and valuation
 - [ ] Portfolio optimization (invest/hold/divest)
@@ -2057,6 +2267,7 @@ When presenting strategic analysis to CEO/Board:
 - [ ] Risk assessment
 
 **Q4: Planning & Budgeting (October-November)**
+
 - [ ] Strategy selection and approval
 - [ ] 3-year financial plan
 - [ ] Annual budget (aligned to strategy)
@@ -2065,6 +2276,7 @@ When presenting strategic analysis to CEO/Board:
 - [ ] KPI target setting
 
 **Q1: Execution (January+)**
+
 - [ ] Strategy communication (all-hands)
 - [ ] Quarterly OKRs/goals set
 - [ ] Initiative launch
@@ -2076,18 +2288,21 @@ When presenting strategic analysis to CEO/Board:
 ## Resources and References
 
 **Books:**
+
 - "Competitive Strategy" by Michael E. Porter
 - "Good Strategy Bad Strategy" by Richard Rumelt
 - "Playing to Win" by A.G. Lafley and Roger L. Martin
 - "The Outsiders" by William Thorndike (Capital allocation)
 
 **Frameworks:**
+
 - McKinsey: 3 Horizons of Growth, 7S Framework
 - BCG: Growth-Share Matrix, Advantage Matrix
 - Bain: RAPID decision-making framework
 - Bridgewater: Principles for radical transparency
 
 **Data Sources:**
+
 - Industry reports: Gartner, Forrester, IDC
 - Financial data: Capital IQ, Bloomberg, FactSet
 - Market research: Nielsen, Ipsos, Kantar
@@ -2096,6 +2311,7 @@ When presenting strategic analysis to CEO/Board:
 ---
 
 **Skill Maintenance:**
+
 - Review quarterly with latest business examples
 - Update frameworks based on emerging best practices
 - Incorporate lessons learned from completed strategies

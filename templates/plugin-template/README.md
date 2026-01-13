@@ -7,6 +7,7 @@ Use this template to create distributable Claude Code plugins.
 ## Quick Start
 
 1. Copy this directory to create your plugin:
+
    ```bash
    cp -r ~/.claude/templates/plugin-template ~/my-plugin
    cd ~/my-plugin
@@ -17,6 +18,7 @@ Use this template to create distributable Claude Code plugins.
 3. Add your commands, agents, and skills
 
 4. Test locally:
+
    ```bash
    claude plugin install file://~/my-plugin
    ```
@@ -88,6 +90,7 @@ arguments:
 ```
 
 Register in `plugin.json`:
+
 ```json
 "commands": [
   {
@@ -118,6 +121,7 @@ model: sonnet
 ```
 
 Register in `plugin.json`:
+
 ```json
 "agents": [
   {
@@ -144,6 +148,7 @@ description: When to activate this skill
 ```
 
 Register in `plugin.json`:
+
 ```json
 "skills": [
   {
@@ -223,21 +228,25 @@ claude plugin uninstall plugin-name
 ## Best Practices
 
 ### Naming
+
 - Use unique, descriptive names
 - Avoid conflicts with existing plugins
 - Use kebab-case: `my-awesome-plugin`
 
 ### Versioning
+
 - Follow semantic versioning
 - Update version on changes
 - Document changes in README
 
 ### Documentation
+
 - Clear README with usage examples
 - Document all commands/agents/skills
 - Include prerequisites
 
 ### Quality
+
 - Test thoroughly before publishing
 - Keep dependencies minimal
 - Handle errors gracefully
@@ -252,4 +261,4 @@ claude plugin uninstall plugin-name
 
 ---
 
-*Template version: 1.0*
+_Template version: 1.0_

@@ -7,6 +7,7 @@ Detailed methodologies for Design Thinking, Stage-Gate, and Lean Startup in ente
 ### Phase 1: Empathize
 
 **Activities:**
+
 - User research and interviews
 - Observational studies
 - Immersion in user context
@@ -15,6 +16,7 @@ Detailed methodologies for Design Thinking, Stage-Gate, and Lean Startup in ente
 - Empathy mapping
 
 **Outputs:**
+
 - User insights
 - Pain points documented
 - Empathy maps
@@ -26,6 +28,7 @@ Detailed methodologies for Design Thinking, Stage-Gate, and Lean Startup in ente
 ### Phase 2: Define
 
 **Activities:**
+
 - Problem framing workshops
 - Point of view (POV) statement creation
 - "How Might We" (HMW) questions
@@ -36,11 +39,13 @@ Detailed methodologies for Design Thinking, Stage-Gate, and Lean Startup in ente
 "[User] needs [need] because [insight]"
 
 **HMW Questions:**
+
 - How might we help users overcome [obstacle]?
 - How might we make [process] more [adjective]?
 - How might we enable [outcome]?
 
 **Outputs:**
+
 - Problem statement
 - POV statements
 - HMW questions (20-50)
@@ -53,6 +58,7 @@ Detailed methodologies for Design Thinking, Stage-Gate, and Lean Startup in ente
 **Techniques:**
 
 **Brainstorming:**
+
 - Defer judgment
 - Encourage wild ideas
 - Build on ideas of others
@@ -61,26 +67,31 @@ Detailed methodologies for Design Thinking, Stage-Gate, and Lean Startup in ente
 - Stay focused on topic
 
 **Crazy 8s:**
+
 - 8 sketches in 8 minutes
 - Forces rapid ideation
 - No polish, just concepts
 
 **Mind Mapping:**
+
 - Start with central problem
 - Branch to related ideas
 - Connect concepts
 - Visual relationships
 
 **Analogies:**
+
 - "How does [other industry] solve this?"
 - "What would [company] do?"
 - Cross-industry inspiration
 
 **Reverse Brainstorming:**
+
 - How might we make this worse?
 - Flip to find solutions
 
 **Outputs:**
+
 - 100+ ideas
 - Grouped themes
 - Top 5-10 concepts
@@ -93,6 +104,7 @@ Detailed methodologies for Design Thinking, Stage-Gate, and Lean Startup in ente
 **Fidelity Levels:**
 
 **Low-Fidelity (Paper):**
+
 - Sketches
 - Paper mockups
 - Storyboards
@@ -101,6 +113,7 @@ Detailed methodologies for Design Thinking, Stage-Gate, and Lean Startup in ente
 - Time: Hours
 
 **Medium-Fidelity (Digital):**
+
 - Wireframes
 - Clickable prototypes
 - 3D printed models
@@ -109,6 +122,7 @@ Detailed methodologies for Design Thinking, Stage-Gate, and Lean Startup in ente
 - Time: Days
 
 **High-Fidelity (Functional):**
+
 - Working prototypes
 - Beta software
 - Functional hardware
@@ -116,12 +130,14 @@ Detailed methodologies for Design Thinking, Stage-Gate, and Lean Startup in ente
 - Time: Weeks
 
 **Principles:**
+
 - Build minimum to test hypothesis
 - Don't over-invest
 - Fail fast, learn fast
 - Multiple prototypes in parallel
 
 **Outputs:**
+
 - Testable prototypes
 - Test plan
 - Success criteria
@@ -133,18 +149,21 @@ Detailed methodologies for Design Thinking, Stage-Gate, and Lean Startup in ente
 **Testing Methods:**
 
 **User Testing:**
+
 - 5-8 users per iteration
 - Task-based scenarios
 - Think-aloud protocol
 - Observe without defending
 
 **Feedback Collection:**
+
 - What worked?
 - What confused?
 - What's missing?
 - Would you use this?
 
 **Iteration Loop:**
+
 1. Test prototype
 2. Gather feedback
 3. Identify issues
@@ -152,6 +171,7 @@ Detailed methodologies for Design Thinking, Stage-Gate, and Lean Startup in ente
 5. Test again
 
 **Outputs:**
+
 - User feedback
 - Iteration log
 - Validated learnings
@@ -164,6 +184,7 @@ Detailed methodologies for Design Thinking, Stage-Gate, and Lean Startup in ente
 ### Gate 1: Idea Screen
 
 **Criteria:**
+
 - Strategic alignment (must pass)
 - Market need evidence (must pass)
 - Technical feasibility (initial check)
@@ -178,6 +199,7 @@ Detailed methodologies for Design Thinking, Stage-Gate, and Lean Startup in ente
 ### Stage 1: Scoping
 
 **Activities:**
+
 - Preliminary market assessment
 - Initial technical assessment
 - Competitive landscape scan
@@ -185,6 +207,7 @@ Detailed methodologies for Design Thinking, Stage-Gate, and Lean Startup in ente
 - Risk identification
 
 **Deliverables:**
+
 - Scoping document (5 pages)
 - Rough financials
 - Resource estimate
@@ -197,6 +220,7 @@ Detailed methodologies for Design Thinking, Stage-Gate, and Lean Startup in ente
 ### Gate 2: Second Screen
 
 **Criteria:**
+
 - Market size validation
 - Technical feasibility confirmed
 - Business case viability
@@ -212,6 +236,7 @@ Detailed methodologies for Design Thinking, Stage-Gate, and Lean Startup in ente
 ### Stage 2: Build Business Case
 
 **Activities:**
+
 - Detailed market research
 - Customer validation (interviews, surveys)
 - Technical proof of concept
@@ -221,6 +246,7 @@ Detailed methodologies for Design Thinking, Stage-Gate, and Lean Startup in ente
 - Risk mitigation plans
 
 **Deliverables:**
+
 - Full business case (20-30 pages)
 - Financial model (5-year)
 - Project plan with milestones
@@ -235,6 +261,7 @@ Detailed methodologies for Design Thinking, Stage-Gate, and Lean Startup in ente
 ### Gate 3: Decision to Develop
 
 **Criteria:**
+
 - Strong business case (NPV, IRR, payback)
 - Confirmed customer need
 - Technical feasibility proven
@@ -251,6 +278,7 @@ Detailed methodologies for Design Thinking, Stage-Gate, and Lean Startup in ente
 ### Stage 3: Development
 
 **Activities:**
+
 - Product development
 - Alpha/beta testing
 - Process design
@@ -259,6 +287,7 @@ Detailed methodologies for Design Thinking, Stage-Gate, and Lean Startup in ente
 - Launch plan creation
 
 **Deliverables:**
+
 - Working product/prototype
 - Test results
 - Operations plan
@@ -273,6 +302,7 @@ Detailed methodologies for Design Thinking, Stage-Gate, and Lean Startup in ente
 ### Gate 4: Decision to Test
 
 **Criteria:**
+
 - Product meets specifications
 - Quality standards met
 - Cost targets achievable
@@ -289,6 +319,7 @@ Detailed methodologies for Design Thinking, Stage-Gate, and Lean Startup in ente
 ### Stage 4: Testing & Validation
 
 **Activities:**
+
 - Customer validation testing
 - Beta customer deployment
 - Process validation
@@ -297,6 +328,7 @@ Detailed methodologies for Design Thinking, Stage-Gate, and Lean Startup in ente
 - Pre-launch activities
 
 **Deliverables:**
+
 - Test results
 - Customer feedback
 - Validated cost model
@@ -310,6 +342,7 @@ Detailed methodologies for Design Thinking, Stage-Gate, and Lean Startup in ente
 ### Gate 5: Launch Decision
 
 **Criteria:**
+
 - Customer validation positive
 - Quality meets standards
 - Operations ready
@@ -325,6 +358,7 @@ Detailed methodologies for Design Thinking, Stage-Gate, and Lean Startup in ente
 ### Stage 5: Launch
 
 **Activities:**
+
 - Production ramp-up
 - Market launch
 - Sales enablement
@@ -333,6 +367,7 @@ Detailed methodologies for Design Thinking, Stage-Gate, and Lean Startup in ente
 - Post-launch review
 
 **Deliverables:**
+
 - Launched product
 - Sales materials
 - Support documentation
@@ -350,11 +385,13 @@ Detailed methodologies for Design Thinking, Stage-Gate, and Lean Startup in ente
 **Build Phase:**
 
 **Minimum Viable Product (MVP):**
+
 - Minimum features to test hypothesis
 - Not minimum quality
 - Focus on learning, not perfection
 
 **MVP Types:**
+
 - Landing page
 - Concierge (manual service)
 - Wizard of Oz (fake backend)
@@ -369,12 +406,14 @@ Detailed methodologies for Design Thinking, Stage-Gate, and Lean Startup in ente
 **Measure Phase:**
 
 **Validated Learning:**
+
 - Not vanity metrics
 - Actionable metrics
 - Cohort-based analysis
 - Segment differences
 
 **Metrics:**
+
 - Conversion rate
 - Retention rate
 - Engagement depth
@@ -388,6 +427,7 @@ Detailed methodologies for Design Thinking, Stage-Gate, and Lean Startup in ente
 **Pivot or Persevere:**
 
 **Pivot Types:**
+
 - Zoom-in: Single feature becomes whole product
 - Zoom-out: Product becomes single feature
 - Customer segment: Different target customer
@@ -400,12 +440,14 @@ Detailed methodologies for Design Thinking, Stage-Gate, and Lean Startup in ente
 - Technology: Different technology to deliver same solution
 
 **Persevere Indicators:**
+
 - Metrics improving
 - Customer feedback positive
 - Clear path to scale
 - Unit economics working
 
 **Pivot Indicators:**
+
 - Metrics flat or declining
 - Weak customer engagement
 - No clear growth path
@@ -416,23 +458,27 @@ Detailed methodologies for Design Thinking, Stage-Gate, and Lean Startup in ente
 ### Enterprise Adaptation
 
 **Innovation Accounting:**
+
 - Define baseline metrics
 - Tune the engine (small improvements)
 - Pivot or persevere decision
 
 **Corporate Sponsorship:**
+
 - Executive sponsor assigned
 - Dedicated budget
 - Protected from short-term pressures
 - Clear success criteria
 
 **Governance Integration:**
+
 - Regular check-ins (monthly)
 - Stage-gate compatibility
 - Portfolio management
 - Resource allocation process
 
 **Scale Path Definition:**
+
 - Clear transition criteria
 - Handoff to business unit
 - Integration plan
@@ -443,12 +489,14 @@ Detailed methodologies for Design Thinking, Stage-Gate, and Lean Startup in ente
 ### Hackathons
 
 **Format:**
+
 - Duration: 24-48 hours
 - Teams: 3-5 people
 - Scope: Working prototype
 - Judging: Executive panel
 
 **Best Practices:**
+
 - Clear problem statements
 - Diverse teams
 - Mentors available
@@ -458,12 +506,14 @@ Detailed methodologies for Design Thinking, Stage-Gate, and Lean Startup in ente
 ### Innovation Labs
 
 **Structure:**
+
 - Dedicated space
 - Cross-functional team
 - 3-6 month projects
 - Rapid experimentation
 
 **Governance:**
+
 - Portfolio review quarterly
 - Clear graduation criteria
 - Integration path to business
@@ -471,6 +521,7 @@ Detailed methodologies for Design Thinking, Stage-Gate, and Lean Startup in ente
 ### Intrapreneurship Programs
 
 **Model:**
+
 - Employee-led ventures
 - Dedicated time (20%)
 - Seed funding available
@@ -478,6 +529,7 @@ Detailed methodologies for Design Thinking, Stage-Gate, and Lean Startup in ente
 - Success = viable business
 
 **Support:**
+
 - Business case development
 - Customer access
 - Technical resources
@@ -486,6 +538,7 @@ Detailed methodologies for Design Thinking, Stage-Gate, and Lean Startup in ente
 ### Idea Challenges
 
 **Format:**
+
 - Open call for ideas
 - Specific problem or open-ended
 - Submission period: 2-4 weeks
@@ -493,6 +546,7 @@ Detailed methodologies for Design Thinking, Stage-Gate, and Lean Startup in ente
 - Prizes: Funding to develop
 
 **Phases:**
+
 1. Ideation (submit ideas)
 2. Evaluation (score and select)
 3. Development (top ideas funded)

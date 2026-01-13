@@ -12,21 +12,21 @@ Before making this repository public, a comprehensive security audit was perform
 
 ### What Was Removed
 
-| Item | Files | Reason |
-|------|-------|--------|
-| `.archive/` folder | 139 files | Contained personal project data, client info, emails |
-| `settings.json` (root) | Initially removed, then restored | Toolkit config - SHOULD be tracked |
-| `vscode/settings.json` | 1 file | Contained hardcoded paths and local network IPs |
-| `.vscode/` folder | Entire folder | Standard VSCode workspace folder with machine-specific config |
-| Git history | All traces | Used `git-filter-repo` to purge sensitive data from history |
+| Item                   | Files                            | Reason                                                        |
+| ---------------------- | -------------------------------- | ------------------------------------------------------------- |
+| `.archive/` folder     | 139 files                        | Contained personal project data, client info, emails          |
+| `settings.json` (root) | Initially removed, then restored | Toolkit config - SHOULD be tracked                            |
+| `vscode/settings.json` | 1 file                           | Contained hardcoded paths and local network IPs               |
+| `.vscode/` folder      | Entire folder                    | Standard VSCode workspace folder with machine-specific config |
+| Git history            | All traces                       | Used `git-filter-repo` to purge sensitive data from history   |
 
 ### What Was Preserved
 
-| Item | Reason |
-|------|--------|
-| `settings.json` | Claude Code toolkit configuration (permissions, hooks, plugins) - essential for the toolkit |
-| `vscode/setup-vscode-settings.ps1` | Portable setup script - doesn't contain personal data |
-| `vscode/README.md` | Documentation - no sensitive data |
+| Item                               | Reason                                                                                      |
+| ---------------------------------- | ------------------------------------------------------------------------------------------- |
+| `settings.json`                    | Claude Code toolkit configuration (permissions, hooks, plugins) - essential for the toolkit |
+| `vscode/setup-vscode-settings.ps1` | Portable setup script - doesn't contain personal data                                       |
+| `vscode/README.md`                 | Documentation - no sensitive data                                                           |
 
 ---
 
@@ -34,25 +34,27 @@ Before making this repository public, a comprehensive security audit was perform
 
 ### Critical: Do NOT Revert These
 
-| Pattern | Why It's Ignored |
-|---------|------------------|
-| `.archive/` | Personal project archives, client data, emails |
-| `.vscode/` | VSCode workspace folder - auto-generated, machine-specific |
-| `vscode/settings.json` | VSCode IDE settings with hardcoded paths and local IPs |
-| `settings.local.json` | Personal override file - machine-specific |
-| `.mcp.json` | MCP server config - platform-specific commands |
-| `.claude.json` | MCP backup - machine-specific |
+| Pattern                | Why It's Ignored                                           |
+| ---------------------- | ---------------------------------------------------------- |
+| `.archive/`            | Personal project archives, client data, emails             |
+| `.vscode/`             | VSCode workspace folder - auto-generated, machine-specific |
+| `vscode/settings.json` | VSCode IDE settings with hardcoded paths and local IPs     |
+| `settings.local.json`  | Personal override file - machine-specific                  |
+| `.mcp.json`            | MCP server config - platform-specific commands             |
+| `.claude.json`         | MCP backup - machine-specific                              |
 
 ### Why These Decisions Were Made
 
 #### 1. `.archive/` Folder
 
 **Problem:** Contained 139 files including:
+
 - Personal project CLAUDE.md files with client names
 - Email addresses (e.g., client emails in project docs)
 - Project-specific configurations with identifying information
 
 **Solution:**
+
 - Added to `.gitignore`
 - Removed from Git tracking
 - Rewrote Git history to purge all traces
@@ -62,15 +64,18 @@ Before making this repository public, a comprehensive security audit was perform
 #### 2. `.vscode/` vs `vscode/` Folders
 
 **Problem:** Two folders with similar names but different purposes:
+
 - `.vscode/` (with dot) - Standard VSCode workspace folder, auto-created
 - `vscode/` (without dot) - Our custom setup scripts folder
 
 The `.vscode/` folder contained `settings.json` with:
+
 - Hardcoded user paths (`C:\Users\tjn\.claude`)
 - Local network IPs (`192.168.1.40`)
 - Remote SSH host configurations
 
 **Solution:**
+
 - Entire `.vscode/` folder gitignored
 - Our `vscode/` folder tracked (but `settings.json` within it gitignored)
 - Clear documentation distinguishing the two
@@ -80,6 +85,7 @@ The `.vscode/` folder contained `settings.json` with:
 #### 3. `vscode/settings.json`
 
 **Problem:** VSCode settings file contained:
+
 ```json
 "git.scanRepositories": ["C:\\Users\\tjn\\.claude", "."],
 "security.allowedUNCHosts": ["192.168.1.40"],
@@ -90,6 +96,7 @@ The `.vscode/` folder contained `settings.json` with:
 ```
 
 **Solution:**
+
 - Gitignored the file
 - Users create their own after cloning
 - Setup script helps configure it
@@ -101,6 +108,7 @@ The `.vscode/` folder contained `settings.json` with:
 **Important:** This file IS tracked and SHOULD remain tracked.
 
 **Why it's different:** Unlike `vscode/settings.json`, the root `settings.json` contains Claude Code toolkit configuration:
+
 - Permission allow/deny lists
 - Enabled plugins
 - Hook configurations
@@ -127,6 +135,7 @@ python -m git_filter_repo --invert-paths --path settings.json --path vscode/sett
 ### Why This Matters
 
 Even if files are deleted in the latest commit, they remain in Git history. Anyone can:
+
 1. Clone the repo
 2. Run `git log --all --oneline -- .archive/`
 3. Checkout historical commits
@@ -150,6 +159,7 @@ git push --force origin master
 ### Before Making Changes to .gitignore
 
 Ask yourself:
+
 1. Does this file contain hardcoded paths?
 2. Does this file contain IP addresses?
 3. Does this file contain email addresses or client names?
@@ -214,18 +224,18 @@ grep -r "C:\\\\Users\\\\tjn" --include="*.json" --include="*.md"
 
 ## Summary
 
-| File/Folder | Status | Reason |
-|-------------|--------|--------|
-| `settings.json` | ✅ Tracked | Toolkit config (permissions, hooks) |
-| `settings.local.json` | ❌ Gitignored | Personal overrides |
-| `vscode/README.md` | ✅ Tracked | Documentation |
-| `vscode/setup-vscode-settings.ps1` | ✅ Tracked | Portable setup script |
-| `vscode/settings.json` | ❌ Gitignored | Contains local paths/IPs |
-| `.vscode/` | ❌ Gitignored | VSCode workspace folder |
-| `.archive/` | ❌ Gitignored | Personal project archives |
-| `.mcp.json` | ❌ Gitignored | Platform-specific MCP config |
-| `plans/` | ❌ Gitignored | User-specific planning docs |
-| `tasks/` | ❌ Gitignored | User-specific task files |
+| File/Folder                        | Status        | Reason                              |
+| ---------------------------------- | ------------- | ----------------------------------- |
+| `settings.json`                    | ✅ Tracked    | Toolkit config (permissions, hooks) |
+| `settings.local.json`              | ❌ Gitignored | Personal overrides                  |
+| `vscode/README.md`                 | ✅ Tracked    | Documentation                       |
+| `vscode/setup-vscode-settings.ps1` | ✅ Tracked    | Portable setup script               |
+| `vscode/settings.json`             | ❌ Gitignored | Contains local paths/IPs            |
+| `.vscode/`                         | ❌ Gitignored | VSCode workspace folder             |
+| `.archive/`                        | ❌ Gitignored | Personal project archives           |
+| `.mcp.json`                        | ❌ Gitignored | Platform-specific MCP config        |
+| `plans/`                           | ❌ Gitignored | User-specific planning docs         |
+| `tasks/`                           | ❌ Gitignored | User-specific task files            |
 
 ---
 

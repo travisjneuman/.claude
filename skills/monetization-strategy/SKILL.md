@@ -11,16 +11,16 @@ Comprehensive guide for monetizing products and services effectively.
 
 ### Overview
 
-| Model | How It Works | Best For |
-|-------|--------------|----------|
-| **Subscription** | Recurring payment | SaaS, content, services |
-| **Transactional** | Pay per use/purchase | E-commerce, marketplaces |
-| **Freemium** | Free tier + paid upgrades | Consumer apps, tools |
-| **Advertising** | Sponsors pay for attention | Media, social, free tools |
-| **Marketplace** | Take % of transactions | Two-sided platforms |
-| **Licensing** | Pay for usage rights | Software, IP, content |
-| **Affiliate** | Commission on referrals | Content, reviews |
-| **Data** | Sell insights/data | Analytics, research |
+| Model             | How It Works               | Best For                  |
+| ----------------- | -------------------------- | ------------------------- |
+| **Subscription**  | Recurring payment          | SaaS, content, services   |
+| **Transactional** | Pay per use/purchase       | E-commerce, marketplaces  |
+| **Freemium**      | Free tier + paid upgrades  | Consumer apps, tools      |
+| **Advertising**   | Sponsors pay for attention | Media, social, free tools |
+| **Marketplace**   | Take % of transactions     | Two-sided platforms       |
+| **Licensing**     | Pay for usage rights       | Software, IP, content     |
+| **Affiliate**     | Commission on referrals    | Content, reviews          |
+| **Data**          | Sell insights/data         | Analytics, research       |
 
 ---
 
@@ -49,15 +49,15 @@ Typical ratio: 1x : 2.5x : 6x+ pricing
 
 ### SaaS Metrics
 
-| Metric | Formula | Target |
-|--------|---------|--------|
-| **MRR** | Monthly Recurring Revenue | Growing |
-| **ARR** | MRR × 12 | Growing |
-| **ARPU** | Revenue / Users | Increasing |
-| **Churn** | Lost Revenue / Total | <5% monthly |
-| **LTV** | ARPU × Average Lifespan | > 3× CAC |
-| **CAC** | Sales+Marketing / New Customers | < ⅓ LTV |
-| **NRR** | (Start MRR + Expansion - Churn) / Start | >100% |
+| Metric    | Formula                                 | Target      |
+| --------- | --------------------------------------- | ----------- |
+| **MRR**   | Monthly Recurring Revenue               | Growing     |
+| **ARR**   | MRR × 12                                | Growing     |
+| **ARPU**  | Revenue / Users                         | Increasing  |
+| **Churn** | Lost Revenue / Total                    | <5% monthly |
+| **LTV**   | ARPU × Average Lifespan                 | > 3× CAC    |
+| **CAC**   | Sales+Marketing / New Customers         | < ⅓ LTV     |
+| **NRR**   | (Start MRR + Expansion - Churn) / Start | >100%       |
 
 ### Subscription Best Practices
 
@@ -83,13 +83,13 @@ DON'T:
 
 ### Freemium Types
 
-| Type | Free Tier Limit | Examples |
-|------|-----------------|----------|
-| **Feature-limited** | Core only | Slack, Notion |
-| **Usage-limited** | Quantity caps | Mailchimp, Dropbox |
-| **Time-limited** | Trial period | Netflix, Spotify |
-| **Seat-limited** | User count | Figma, Zoom |
-| **Support-limited** | Community only | Open source tools |
+| Type                | Free Tier Limit | Examples           |
+| ------------------- | --------------- | ------------------ |
+| **Feature-limited** | Core only       | Slack, Notion      |
+| **Usage-limited**   | Quantity caps   | Mailchimp, Dropbox |
+| **Time-limited**    | Trial period    | Netflix, Spotify   |
+| **Seat-limited**    | User count      | Figma, Zoom        |
+| **Support-limited** | Community only  | Open source tools  |
 
 ### Conversion Funnel
 
@@ -138,14 +138,14 @@ Upgrade triggers:
 
 ### Key Principles
 
-| Principle | Application |
-|-----------|-------------|
-| **Anchoring** | Show expensive option first |
-| **Decoy** | Add inferior option to guide choice |
-| **Charm pricing** | $99 vs $100 |
-| **Round pricing** | $100 for premium feel |
-| **Price bundling** | Combined value perception |
-| **Left-digit effect** | $3.99 seems much less than $4 |
+| Principle             | Application                         |
+| --------------------- | ----------------------------------- |
+| **Anchoring**         | Show expensive option first         |
+| **Decoy**             | Add inferior option to guide choice |
+| **Charm pricing**     | $99 vs $100                         |
+| **Round pricing**     | $100 for premium feel               |
+| **Price bundling**    | Combined value perception           |
+| **Left-digit effect** | $3.99 seems much less than $4       |
 
 ### Price Presentation
 
@@ -221,13 +221,13 @@ Example:
 
 ### Pricing Research Methods
 
-| Method | How It Works | Accuracy |
-|--------|--------------|----------|
-| **Van Westendorp** | Ask 4 price questions | Medium |
-| **Conjoint Analysis** | Trade-off choices | High |
-| **A/B Testing** | Test live prices | Highest |
-| **Competitor Analysis** | Market benchmarks | Low |
-| **Customer Interviews** | Qualitative insight | Low |
+| Method                  | How It Works          | Accuracy |
+| ----------------------- | --------------------- | -------- |
+| **Van Westendorp**      | Ask 4 price questions | Medium   |
+| **Conjoint Analysis**   | Trade-off choices     | High     |
+| **A/B Testing**         | Test live prices      | Highest  |
+| **Competitor Analysis** | Market benchmarks     | Low      |
+| **Customer Interviews** | Qualitative insight   | Low      |
 
 ### Van Westendorp Questions
 
@@ -298,13 +298,13 @@ Recovers 30-50% of failed payments
 
 ### Take Rate Models
 
-| Model | Typical Rate | Examples |
-|-------|--------------|----------|
-| **Transaction fee** | 5-20% | Uber, Airbnb |
-| **Listing fee** | Fixed per listing | eBay, Etsy |
-| **Subscription** | Monthly for sellers | Amazon FBA |
-| **Featured/Promoted** | Pay for visibility | Indeed, Zillow |
-| **Hybrid** | Multiple streams | Most marketplaces |
+| Model                 | Typical Rate        | Examples          |
+| --------------------- | ------------------- | ----------------- |
+| **Transaction fee**   | 5-20%               | Uber, Airbnb      |
+| **Listing fee**       | Fixed per listing   | eBay, Etsy        |
+| **Subscription**      | Monthly for sellers | Amazon FBA        |
+| **Featured/Promoted** | Pay for visibility  | Indeed, Zillow    |
+| **Hybrid**            | Multiple streams    | Most marketplaces |
 
 ### Two-Sided Pricing
 
@@ -381,13 +381,13 @@ Multi-year:    25-30% off
 
 ### Mobile App Monetization
 
-| Model | Description | Typical Revenue |
-|-------|-------------|-----------------|
-| **Paid download** | One-time purchase | $0.99-$9.99 |
-| **In-app purchases** | Virtual goods, features | $0.99-$99.99 |
-| **Subscription** | Recurring access | $2.99-$19.99/mo |
-| **Advertising** | Display, video, native | $1-10 CPM |
-| **Hybrid** | Multiple streams | Varies |
+| Model                | Description             | Typical Revenue |
+| -------------------- | ----------------------- | --------------- |
+| **Paid download**    | One-time purchase       | $0.99-$9.99     |
+| **In-app purchases** | Virtual goods, features | $0.99-$99.99    |
+| **Subscription**     | Recurring access        | $2.99-$19.99/mo |
+| **Advertising**      | Display, video, native  | $1-10 CPM       |
+| **Hybrid**           | Multiple streams        | Varies          |
 
 ### Gaming Monetization
 
@@ -461,12 +461,12 @@ NICE TO HAVE:
 
 ### Localization Strategies
 
-| Strategy | Approach | Complexity |
-|----------|----------|------------|
-| **Single global price** | Same USD everywhere | Low |
-| **Currency conversion** | Local currency, same value | Medium |
-| **Purchasing power parity** | Adjusted by market | High |
-| **Market-specific** | Different prices per country | Highest |
+| Strategy                    | Approach                     | Complexity |
+| --------------------------- | ---------------------------- | ---------- |
+| **Single global price**     | Same USD everywhere          | Low        |
+| **Currency conversion**     | Local currency, same value   | Medium     |
+| **Purchasing power parity** | Adjusted by market           | High       |
+| **Market-specific**         | Different prices per country | Highest    |
 
 ### PPP Considerations
 
@@ -531,6 +531,7 @@ When raising prices:
 ## Best Practices
 
 ### DO:
+
 - Research willingness to pay before setting prices
 - Start higher than you think (easier to discount than raise)
 - Segment customers by value they receive
@@ -540,6 +541,7 @@ When raising prices:
 - Build in expansion revenue paths
 
 ### DON'T:
+
 - Race to the bottom on price
 - Copy competitor pricing blindly
 - Offer too many tiers/options
@@ -553,6 +555,7 @@ When raising prices:
 ## Pricing Checklist
 
 ### Strategy
+
 - [ ] Value proposition clearly quantified
 - [ ] Target customer segments defined
 - [ ] Willingness to pay researched
@@ -560,6 +563,7 @@ When raising prices:
 - [ ] Unit economics validated
 
 ### Execution
+
 - [ ] Tier structure makes sense
 - [ ] Pricing page optimized
 - [ ] Payment flow tested
@@ -567,6 +571,7 @@ When raising prices:
 - [ ] Revenue recognition correct
 
 ### Optimization
+
 - [ ] Metrics tracking in place
 - [ ] Churn analysis ongoing
 - [ ] Expansion paths identified

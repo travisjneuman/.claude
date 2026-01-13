@@ -1,10 +1,13 @@
 # Financial Modeling Master Skill
 
 ## Description
+
 Expert-level financial modeling for Fortune 50 companies and investment banking. Provides best practices, templates, and methodologies for building robust, flexible, and error-free financial models including 3-statement models, DCF, LBO, M&A, scenario analysis, and sensitivity testing. This skill delivers institutional-quality modeling standards with proper structure, documentation, and audit trails.
 
 ## When to Use This Skill
+
 Use this skill when:
+
 - Building or auditing financial models
 - Creating 3-statement operating models
 - Developing DCF valuation models
@@ -54,7 +57,7 @@ Use this skill when:
    - Reconcile to source data
 
 7. **Version Control**
-   - File naming: [CompanyName]_[ModelType]_[Date]_[Version].xlsx
+   - File naming: [CompanyName]_[ModelType]_[Date]\_[Version].xlsx
    - Example: Acme_DCF_20231115_v3.xlsx
    - Track changes in a dedicated "Version History" worksheet
 
@@ -100,6 +103,7 @@ Date: [MM/DD/YYYY]
 Version: [X.X]
 
 Model Summary:
+
 - Valuation Date: [Date]
 - Forecast Period: [Years]
 - [Key Output Metric]: [Value]
@@ -114,32 +118,34 @@ This model contains forward-looking estimates and assumptions. Actual results ma
 
 **Key Outputs (Dashboard Style):**
 
-| Metric | Value | Notes |
-|--------|-------|-------|
-| **Valuation** | | |
-| Enterprise Value | $X.X billion | Mid-point of DCF range |
-| Equity Value | $X.X billion | EV - Net Debt |
-| Value per Share | $XX.XX | Based on X million shares |
-| | | |
-| **Returns (LBO models)** | | |
-| Entry Multiple | X.Xx | EV/LTM EBITDA |
-| Exit Multiple | X.Xx | EV/Year 5 EBITDA |
-| IRR | XX.X% | 5-year hold |
-| MoIC (Money-on-Money) | X.Xx | Total return / Initial equity |
-| | | |
-| **Financials (Year 5)** | | |
-| Revenue | $X.X billion | X% CAGR |
-| EBITDA | $X.X million | X% margin |
-| Free Cash Flow | $X.X million | X% FCF margin |
-| Leverage (Net Debt/EBITDA) | X.Xx | Down from Y.Yy at entry |
+| Metric                     | Value        | Notes                         |
+| -------------------------- | ------------ | ----------------------------- |
+| **Valuation**              |              |                               |
+| Enterprise Value           | $X.X billion | Mid-point of DCF range        |
+| Equity Value               | $X.X billion | EV - Net Debt                 |
+| Value per Share            | $XX.XX       | Based on X million shares     |
+|                            |              |                               |
+| **Returns (LBO models)**   |              |                               |
+| Entry Multiple             | X.Xx         | EV/LTM EBITDA                 |
+| Exit Multiple              | X.Xx         | EV/Year 5 EBITDA              |
+| IRR                        | XX.X%        | 5-year hold                   |
+| MoIC (Money-on-Money)      | X.Xx         | Total return / Initial equity |
+|                            |              |                               |
+| **Financials (Year 5)**    |              |                               |
+| Revenue                    | $X.X billion | X% CAGR                       |
+| EBITDA                     | $X.X million | X% margin                     |
+| Free Cash Flow             | $X.X million | X% FCF margin                 |
+| Leverage (Net Debt/EBITDA) | X.Xx         | Down from Y.Yy at entry       |
 
 **Key Assumptions:**
+
 - Revenue growth: [X% CAGR]
 - EBITDA margin: [Expanding from X% to Y%]
 - WACC: [X.X%]
 - Terminal growth rate: [X%]
 
 **Sensitivity Summary:**
+
 - Valuation range: [$X - $Y per share]
 - Most sensitive to: [Revenue growth, EBITDA margin, WACC]
 
@@ -148,6 +154,7 @@ This model contains forward-looking estimates and assumptions. Actual results ma
 ### 3. Assumptions & Inputs Worksheet
 
 **Layout Principles:**
+
 - Clearly labeled sections
 - Blue font for all inputs
 - Source/rationale column for every assumption
@@ -303,6 +310,7 @@ END OF ASSUMPTIONS
 ```
 
 **Best Practices for Assumptions:**
+
 - Every input must have a source (management, industry reports, historical data, etc.)
 - Use data validation for dropdowns (e.g., scenario selection)
 - Group related assumptions together
@@ -314,6 +322,7 @@ END OF ASSUMPTIONS
 ### 4. Historical Financials Worksheet
 
 **Purpose:**
+
 - Consolidate historical financial data
 - Calculate historical trends and ratios
 - Provide foundation for forecasts
@@ -521,6 +530,7 @@ Capital Structure:
 **Integrated 3-Statement Model Structure:**
 
 The forecast period integrates all three financial statements with proper linkages:
+
 - Income Statement drives Revenue → EBITDA → Net Income
 - Net Income flows to Cash Flow Statement and Balance Sheet (Retained Earnings)
 - Balance Sheet drives Working Capital changes in Cash Flow
@@ -1274,6 +1284,7 @@ Hurdle IRR: 20%
 **Excel Formulas for Sensitivity Tables:**
 
 For a two-way sensitivity table:
+
 1. Set up table with row input (e.g., WACC) in left column
 2. Set up column input (e.g., Terminal Growth) in top row
 3. Reference to output cell (e.g., Value per Share) in top-left corner
@@ -1341,6 +1352,7 @@ Probability-Weighted Value                              $XX.XX
 ```
 
 **Implementation Tips:**
+
 - Use named ranges for scenario inputs (e.g., "Revenue_Growth_Scenario")
 - Use CHOOSE or INDEX/MATCH formulas to pull scenario-specific assumptions
 - Example: `=INDEX(Revenue_Growth_Range, MATCH(Scenario_Selection, Scenario_List, 0))`
@@ -1563,16 +1575,19 @@ APPROVAL DATE: [MM/DD/YYYY]
 **Common Circularity: Cash Sweep and Revolver**
 
 Problem:
+
 - Cash balance depends on interest expense
 - Interest expense depends on average debt balance
 - Debt balance (revolver) depends on cash balance (used to pay down revolver)
 
 **Solution 1: Enable Iterative Calculations**
+
 - File → Options → Formulas → Enable iterative calculation
 - Set Maximum Iterations: 100
 - Set Maximum Change: 0.001
 
 **Solution 2: Use Beginning-of-Period Balances**
+
 - Calculate interest based on beginning debt balance (not average)
 - Avoids circularity but slightly less accurate
 
@@ -1631,26 +1646,30 @@ Year 3        10%     15%     5%      [Input]
 ### Named Ranges for Clarity
 
 **Benefits:**
+
 - Formulas are readable: `=Revenue * Gross_Margin` instead of `=B15 * $C$5`
 - Easier to audit and maintain
 - Reduces errors from referencing wrong cells
 
 **How to Create:**
+
 1. Select cell or range
 2. Formulas → Define Name
 3. Name: [Descriptive name, no spaces, use underscores]
 4. Scope: Workbook (accessible from all sheets)
 
 **Best Practices:**
+
 - Name all key inputs (Revenue_Growth, WACC, Terminal_Growth, etc.)
 - Name all key outputs (Enterprise_Value, Equity_Value, IRR, etc.)
-- Use consistent naming convention (e.g., all inputs end with "_Input", all outputs end with "_Output")
+- Use consistent naming convention (e.g., all inputs end with "\_Input", all outputs end with "\_Output")
 
 ---
 
 ### Dynamic Arrays and Spill Ranges (Excel 365)
 
 **Modern Excel Formulas:**
+
 - `=UNIQUE()` - Extract unique values
 - `=FILTER()` - Filter data based on criteria
 - `=SORT()` - Sort data
@@ -1676,6 +1695,7 @@ Now if you change SEQUENCE to 10 years, all formulas referencing those year head
 ### Protecting and Locking Models
 
 **When to Lock:**
+
 - Final version before distribution
 - Prevent accidental changes to structure or formulas
 - Allow inputs to remain editable
@@ -1691,6 +1711,7 @@ Now if you change SEQUENCE to 10 years, all formulas referencing those year head
    - Disallow: Select locked cells (prevents viewing/changing formulas)
 
 **Result:**
+
 - Users can change inputs (blue font cells)
 - Users cannot change formulas or structure
 - Formulas remain hidden for IP protection
@@ -1702,15 +1723,19 @@ Now if you change SEQUENCE to 10 years, all formulas referencing those year head
 ### 1. Hard-Coding Numbers in Formulas
 
 **Bad:**
+
 ```
 = B15 * 0.35
 ```
+
 What is 0.35? Tax rate? Margin? Unknown.
 
 **Good:**
+
 ```
 = Revenue * Assumptions!Tax_Rate
 ```
+
 Clear what the number represents, easy to change.
 
 ---
@@ -1718,12 +1743,14 @@ Clear what the number represents, easy to change.
 ### 2. Inconsistent Time Periods
 
 **Bad:**
+
 - Revenue is annual
 - CAPEX is quarterly
 - Working Capital is monthly
-→ Mixing time periods causes errors
+  → Mixing time periods causes errors
 
 **Good:**
+
 - All projections in same units (annual or quarterly)
 - Clearly label time period
 - Convert as needed with proper formulas
@@ -1733,10 +1760,12 @@ Clear what the number represents, easy to change.
 ### 3. Not Documenting Assumptions
 
 **Bad:**
+
 - Terminal growth: 2.5%
 - No source, no rationale
 
 **Good:**
+
 - Terminal growth: 2.5%
 - Source: Long-term GDP growth (World Bank forecast)
 - Rationale: Conservative estimate, below historical 3% U.S. GDP growth
@@ -1746,11 +1775,13 @@ Clear what the number represents, easy to change.
 ### 4. Forgetting to Update Linked Cells
 
 **Bad:**
+
 - Update assumption in one place
 - Forget to update hard-coded reference elsewhere
 - Model now inconsistent
 
 **Good:**
+
 - Use cell references or named ranges
 - All references to an assumption link to ONE source cell
 - Update in one place, propagates everywhere
@@ -1760,13 +1791,16 @@ Clear what the number represents, easy to change.
 ### 5. Overly Complex Formulas
 
 **Bad:**
+
 ```
 =IF(AND(B15>0,B16<100),B15*0.25+B16*0.35-IF(B17>50,B17*0.1,0),IF(B18>0,B18*0.5,0))
 ```
+
 Impossible to audit, high error risk.
 
 **Good:**
 Break into multiple steps:
+
 ```
 Row 20: Condition 1 = IF(AND(B15>0, B16<100), TRUE, FALSE)
 Row 21: Calculation A = B15 * 0.25 + B16 * 0.35
@@ -1782,10 +1816,12 @@ Each step is auditable. Can hide intermediate rows if needed.
 ### 6. Not Using Error Checks
 
 **Bad:**
+
 - Balance sheet doesn't balance
 - Discover error weeks later during presentation
 
 **Good:**
+
 - Build error checks into model (Checks & Balances worksheet)
 - Review error checks every time model is updated
 - Never distribute a model with failing checks
@@ -1795,10 +1831,12 @@ Each step is auditable. Can hide intermediate rows if needed.
 ### 7. Not Testing Extreme Scenarios
 
 **Bad:**
+
 - Model looks good with base case inputs
 - Input 0% growth → model breaks (divide by zero, negative cash)
 
 **Good:**
+
 - Test extreme inputs:
   - 0% revenue growth
   - 100% revenue growth
@@ -1813,6 +1851,7 @@ Each step is auditable. Can hide intermediate rows if needed.
 Before finalizing any model, run through this checklist:
 
 **Structure:**
+
 - [ ] Consistent worksheet organization (Inputs → Calculations → Outputs)
 - [ ] Clear formatting (blue inputs, black formulas, color-coded sections)
 - [ ] Proper use of named ranges for key inputs/outputs
@@ -1820,6 +1859,7 @@ Before finalizing any model, run through this checklist:
 - [ ] Consistent time periods throughout model
 
 **Accuracy:**
+
 - [ ] Balance sheet balances (Assets = Liab + Equity) all periods
 - [ ] Cash flow ending cash ties to balance sheet cash
 - [ ] Retained earnings tie (Prior RE + NI - Div = Current RE)
@@ -1827,12 +1867,14 @@ Before finalizing any model, run through this checklist:
 - [ ] All error checks pass (Checks & Balances worksheet)
 
 **Assumptions:**
+
 - [ ] Every assumption documented with source/rationale
 - [ ] Assumptions are reasonable (benchmarked vs. history, industry, peers)
 - [ ] Scenario switches work properly
 - [ ] Sensitivity tables update correctly
 
 **Auditability:**
+
 - [ ] Formulas are simple and transparent
 - [ ] Complex calculations broken into steps
 - [ ] Comments added for non-obvious logic
@@ -1840,12 +1882,14 @@ Before finalizing any model, run through this checklist:
 - [ ] File naming convention followed
 
 **Outputs:**
+
 - [ ] Executive summary is clear and presentation-ready
 - [ ] Charts and graphs are formatted and labeled
 - [ ] Outputs answer the key question (valuation, returns, etc.)
 - [ ] Sensitivity analysis shows range of outcomes
 
 **Final Steps:**
+
 - [ ] Spell check
 - [ ] Print preview (if model will be printed)
 - [ ] Lock/protect formulas
@@ -1857,21 +1901,25 @@ Before finalizing any model, run through this checklist:
 ## Resources & References
 
 **Books:**
+
 - "Financial Modeling" by Simon Benninga
 - "Investment Banking: Valuation, Leveraged Buyouts, and Mergers & Acquisitions" by Rosenbaum & Pearl (Includes model examples)
 - "Corporate Finance" by Berk & DeMarzo (Theory behind models)
 
 **Online Courses:**
+
 - Wall Street Prep: Financial Modeling courses
 - Breaking Into Wall Street (BIWS): Excel & Modeling
 - Corporate Finance Institute (CFI): Financial Modeling & Valuation Analyst (FMVA)
 
 **Excel Resources:**
+
 - Exceljet.net (formula reference and tips)
 - Chandoo.org (Excel dashboards and modeling)
 - Mr. Excel forums (troubleshooting)
 
 **Data Sources:**
+
 - Damodaran Online (NYU Stern): Beta, ERP, WACC data by industry
 - FRED (Federal Reserve Economic Data): Risk-free rates, economic data
 - Capital IQ / Bloomberg / FactSet: Company financials, market data
@@ -1879,6 +1927,7 @@ Before finalizing any model, run through this checklist:
 ---
 
 **Skill Maintenance:**
+
 - Practice building models regularly (use case studies, practice companies)
 - Stay updated on Excel new features (dynamic arrays, Power Query)
 - Review models from investment banks and PE firms (when available)

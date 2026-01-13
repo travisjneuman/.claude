@@ -9,18 +9,19 @@ Comprehensive guide for building native Apple platform applications.
 
 ## Platforms Covered
 
-| Platform | Minimum Target | Current |
-|----------|----------------|---------|
-| iOS | iOS 15.0+ | iOS 17+ |
-| iPadOS | iPadOS 15.0+ | iPadOS 17+ |
-| tvOS | tvOS 15.0+ | tvOS 17+ |
-| watchOS | watchOS 8.0+ | watchOS 10+ |
+| Platform | Minimum Target | Current     |
+| -------- | -------------- | ----------- |
+| iOS      | iOS 15.0+      | iOS 17+     |
+| iPadOS   | iPadOS 15.0+   | iPadOS 17+  |
+| tvOS     | tvOS 15.0+     | tvOS 17+    |
+| watchOS  | watchOS 8.0+   | watchOS 10+ |
 
 ---
 
 ## SwiftUI (Preferred for New Projects)
 
 ### Basic Structure
+
 ```swift
 import SwiftUI
 
@@ -74,6 +75,7 @@ struct ContentView: View {
 ```
 
 ### Modern Concurrency
+
 ```swift
 // Async/await
 func fetchData() async throws -> [Item] {
@@ -103,6 +105,7 @@ class ViewModel: ObservableObject {
 ```
 
 ### Navigation (iOS 16+)
+
 ```swift
 // NavigationStack with typed destinations
 struct ContentView: View {
@@ -124,6 +127,7 @@ struct ContentView: View {
 ```
 
 ### Lists and Grids
+
 ```swift
 // Modern List
 List {
@@ -154,6 +158,7 @@ LazyVGrid(columns: [
 ## UIKit (Legacy/Complex UI)
 
 ### View Controller Lifecycle
+
 ```swift
 class MyViewController: UIViewController {
     override func viewDidLoad() {
@@ -174,6 +179,7 @@ class MyViewController: UIViewController {
 ```
 
 ### Auto Layout
+
 ```swift
 // Programmatic constraints
 NSLayoutConstraint.activate([
@@ -188,6 +194,7 @@ NSLayoutConstraint.activate([
 ## Data Persistence
 
 ### Core Data
+
 ```swift
 // Model
 @objc(Item)
@@ -206,6 +213,7 @@ private var items: FetchedResults<Item>
 ```
 
 ### SwiftData (iOS 17+)
+
 ```swift
 @Model
 class Item {
@@ -233,6 +241,7 @@ func addItem() {
 ```
 
 ### Keychain
+
 ```swift
 // Store sensitive data
 import Security
@@ -256,6 +265,7 @@ func saveToKeychain(key: String, data: Data) throws {
 ## Networking
 
 ### URLSession
+
 ```swift
 actor NetworkService {
     func fetch<T: Decodable>(_ type: T.Type, from url: URL) async throws -> T {
@@ -276,19 +286,22 @@ actor NetworkService {
 ## Apple Human Interface Guidelines
 
 ### iOS Design Principles
+
 - **Clarity**: Text is legible, icons precise, adornments subtle
 - **Deference**: Content is paramount, UI doesn't compete
 - **Depth**: Visual layers and realistic motion convey hierarchy
 
 ### Key Metrics
-| Element | Size |
-|---------|------|
-| Touch target | 44x44 pt minimum |
-| Navigation bar | 44 pt |
-| Tab bar | 49 pt |
-| Status bar | 47 pt (notch) / 20 pt (legacy) |
+
+| Element        | Size                           |
+| -------------- | ------------------------------ |
+| Touch target   | 44x44 pt minimum               |
+| Navigation bar | 44 pt                          |
+| Tab bar        | 49 pt                          |
+| Status bar     | 47 pt (notch) / 20 pt (legacy) |
 
 ### Safe Areas
+
 ```swift
 .safeAreaInset(edge: .bottom) {
     BottomBar()
@@ -304,6 +317,7 @@ actor NetworkService {
 ## Platform-Specific
 
 ### iPadOS Specifics
+
 ```swift
 // Split view
 NavigationSplitView {
@@ -322,6 +336,7 @@ NavigationSplitView {
 ```
 
 ### tvOS Specifics
+
 ```swift
 // Focus management
 @FocusState private var isFocused: Bool
@@ -339,12 +354,14 @@ Button("Action") { }
 ## App Store Requirements
 
 ### Required Assets
+
 - App icon (1024x1024)
 - Screenshots for each device size
 - Privacy policy URL
 - App description (4000 char max)
 
 ### Privacy
+
 ```xml
 <!-- Info.plist -->
 <key>NSCameraUsageDescription</key>
@@ -354,6 +371,7 @@ Button("Action") { }
 ```
 
 ### App Transport Security
+
 ```xml
 <key>NSAppTransportSecurity</key>
 <dict>
@@ -367,6 +385,7 @@ Button("Action") { }
 ## Testing
 
 ### Unit Tests
+
 ```swift
 import XCTest
 @testable import MyApp
@@ -381,6 +400,7 @@ final class MyTests: XCTestCase {
 ```
 
 ### UI Tests
+
 ```swift
 import XCTest
 
@@ -428,6 +448,7 @@ MyApp/
 ## Best Practices
 
 ### DO:
+
 - Use SwiftUI for new projects
 - Support Dynamic Type for accessibility
 - Handle all device orientations
@@ -435,6 +456,7 @@ MyApp/
 - Use Swift's type system fully
 
 ### DON'T:
+
 - Force unwrap optionals without validation
 - Block main thread with network calls
 - Hardcode strings (use localization)

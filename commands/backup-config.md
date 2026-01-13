@@ -21,20 +21,20 @@ Backup and restore Claude Code configuration files.
 
 ## Platform Compatibility
 
-| Platform | Status | Notes |
-|----------|--------|-------|
-| Windows | ✅ | Requires Git Bash (included with Git for Windows) |
-| macOS | ✅ | Works with bash/zsh |
-| Linux | ✅ | Works with bash |
+| Platform | Status | Notes                                             |
+| -------- | ------ | ------------------------------------------------- |
+| Windows  | ✅     | Requires Git Bash (included with Git for Windows) |
+| macOS    | ✅     | Works with bash/zsh                               |
+| Linux    | ✅     | Works with bash                                   |
 
 All commands use POSIX utilities (`mkdir`, `cp`, `ls`, `date`).
 
 ## Arguments
 
-| Argument | Default | Options |
-|----------|---------|---------|
-| `action` | `create` | `create`, `list`, `restore` |
-| `name` | `auto-[timestamp]` | Custom backup name |
+| Argument | Default            | Options                     |
+| -------- | ------------------ | --------------------------- |
+| `action` | `create`           | `create`, `list`, `restore` |
+| `name`   | `auto-[timestamp]` | Custom backup name          |
 
 ## Backup Location
 
@@ -112,11 +112,11 @@ echo "Note: Restart Claude Code for changes to take effect"
 
 ## What Gets Backed Up
 
-| File | Description |
-|------|-------------|
+| File            | Description                             |
+| --------------- | --------------------------------------- |
 | `settings.json` | Permissions, hooks, MCP config, plugins |
-| `CLAUDE.md` | Global instructions |
-| `.mcp.json` | MCP server definitions |
+| `CLAUDE.md`     | Global instructions                     |
+| `.mcp.json`     | MCP server definitions                  |
 
 ## What Does NOT Get Backed Up
 
@@ -127,23 +127,29 @@ echo "Note: Restart Claude Code for changes to take effect"
 ## Examples
 
 ### Create backup with auto-name
+
 ```
 /backup-config
 ```
+
 Creates: `backup-20251227-143052`
 
 ### Create named backup
+
 ```
 /backup-config create before-experiment
 ```
+
 Creates: `before-experiment`
 
 ### List backups
+
 ```
 /backup-config list
 ```
 
 ### Restore specific backup
+
 ```
 /backup-config restore before-experiment
 ```
@@ -172,4 +178,4 @@ Add to cron for weekly backups:
 
 ---
 
-*Always backup before making significant configuration changes.*
+_Always backup before making significant configuration changes._

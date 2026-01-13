@@ -256,14 +256,15 @@ logger.info(f"Password: {password}")  # NEVER
 
 ## Related Skills
 
-| Skill | When to Use |
-|-------|-------------|
-| `data-science` | Data processing, ML |
-| `test-specialist` | Testing guidance |
-| `security` | Security patterns |
-| `tech-debt-analyzer` | Code quality |
+| Skill                | When to Use         |
+| -------------------- | ------------------- |
+| `data-science`       | Data processing, ML |
+| `test-specialist`    | Testing guidance    |
+| `security`           | Security patterns   |
+| `tech-debt-analyzer` | Code quality        |
 
 ### Invoke with:
+
 ```
 Skill(data-science)
 Skill(test-specialist)
@@ -315,4 +316,4 @@ def add_item(item: str, items: list | None = None) -> list:
 
 ---
 
-*Python: readable, explicit, and type-safe.*
+_Python: readable, explicit, and type-safe._

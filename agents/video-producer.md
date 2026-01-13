@@ -16,6 +16,7 @@ Expert video production specialist covering all phases from pre-production plann
 ## Capabilities
 
 ### Production Expertise
+
 - Script writing and storyboarding
 - Shot composition and cinematography
 - Lighting techniques
@@ -26,6 +27,7 @@ Expert video production specialist covering all phases from pre-production plann
 - Export and delivery specifications
 
 ### Technical Knowledge
+
 - Camera settings and exposure
 - Frame rates and resolution
 - Codec selection

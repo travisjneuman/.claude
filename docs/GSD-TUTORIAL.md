@@ -2,32 +2,35 @@
 
 A practical guide to using the GSD system for multi-phase projects.
 
-**Last Updated:** January 2026 (v2.0)
+**Last Updated:** January 2026 (v2.1)
 
-**New in v2.0:** GSD now integrates with research methodology, multi-window state management, and PROACTIVE mode. See [CHANGELOG.md](../CHANGELOG.md#200---january-3-2026).
+**New in v2.1:** SessionStart hook ensures GSD context loads automatically. See [CHANGELOG.md](../CHANGELOG.md#210---january-13-2026).
+
+**v2.0 features:** GSD integrates with research methodology, multi-window state management, and PROACTIVE mode. See [CHANGELOG.md](../CHANGELOG.md#200---january-3-2026).
 
 ---
 
 ## What is GSD?
 
 GSD is a project management framework that provides structure for complex, multi-phase work. It tracks:
+
 - Project phases and milestones
 - Current progress and next actions
 - Session continuity (resume where you left off)
 
-**Key Principle:** GSD provides *structure*, not *gates*. Use any tools, skills, agents, or research that helps - anytime.
+**Key Principle:** GSD provides _structure_, not _gates_. Use any tools, skills, agents, or research that helps - anytime.
 
 ---
 
 ## When to Use GSD
 
-| Use GSD When... | Don't Use GSD When... |
-|-----------------|----------------------|
-| Task has multiple phases | Single, focused task |
-| Work spans multiple sessions | Quick fix or bug |
+| Use GSD When...                  | Don't Use GSD When...       |
+| -------------------------------- | --------------------------- |
+| Task has multiple phases         | Single, focused task        |
+| Work spans multiple sessions     | Quick fix or bug            |
 | Need to track progress over time | Simple question or research |
-| Complex feature with many parts | Documentation update |
-| Architectural overhaul | Code review |
+| Complex feature with many parts  | Documentation update        |
+| Architectural overhaul           | Code review                 |
 
 **Rule of thumb:** If `/start-task` scores complexity >= 3, GSD is appropriate.
 
@@ -42,6 +45,7 @@ GSD is a project management framework that provides structure for complex, multi
 ```
 
 Or let `/start-task` auto-route:
+
 ```
 /start-task Build a comprehensive user authentication system
 ```
@@ -53,6 +57,7 @@ Or let `/start-task` auto-route:
 ```
 
 This shows:
+
 - Current phase and status
 - Completed vs remaining tasks
 - Suggested next action
@@ -103,21 +108,24 @@ GSD creates files in `.planning/`:
 # Project State
 
 ## Project Summary
+
 **Building:** User Authentication System
 **Status: ACTIVE**
 
 ## Current Position
+
 Phase: 2 of 4 (API Implementation)
 Status: **IN PROGRESS**
 Progress: ████████░░░░░ 60%
 
 ## Phases Overview
-| Phase | Description | Status |
-|-------|-------------|--------|
-| 1 | Database Schema | ✓ COMPLETE |
-| 2 | API Implementation | IN PROGRESS |
-| 3 | Frontend Integration | PENDING |
-| 4 | Testing & Docs | PENDING |
+
+| Phase | Description          | Status      |
+| ----- | -------------------- | ----------- |
+| 1     | Database Schema      | ✓ COMPLETE  |
+| 2     | API Implementation   | IN PROGRESS |
+| 3     | Frontend Integration | PENDING     |
+| 4     | Testing & Docs       | PENDING     |
 ```
 
 ---
@@ -127,6 +135,7 @@ Progress: ████████░░░░░ 60%
 **Remember:** GSD doesn't block any capabilities. Use these anytime:
 
 ### Research
+
 ```
 # Within any GSD phase, research freely:
 "What's the best approach for JWT refresh tokens?"
@@ -134,6 +143,7 @@ Progress: ████████░░░░░ 60%
 ```
 
 ### Skills
+
 ```
 # Load domain expertise:
 Skill(security)
@@ -141,12 +151,14 @@ Skill(api-design)
 ```
 
 ### Agents
+
 ```
 # Spawn specialized agents:
 "Use the security-auditor agent to review the auth implementation"
 ```
 
 ### Decision Frameworks
+
 ```
 # Make structured decisions:
 /consider:first-principles Should we use sessions or JWTs?
@@ -156,39 +168,43 @@ Skill(api-design)
 
 ## Command Reference
 
-| Command | Purpose |
-|---------|---------|
-| `/gsd:new-project` | Start new multi-phase project |
-| `/gsd:progress` | Check status, get next action |
-| `/gsd:plan-phase [n]` | Create detailed plan for phase |
-| `/gsd:execute-plan` | Work through current plan |
-| `/gsd:resume-work` | Restore session context |
-| `/gsd:pause-work` | Save state, prepare to pause |
-| `/gsd:add-phase` | Add a new phase to project |
-| `/gsd:complete-milestone` | Mark milestone done |
-| `/gsd:help` | Full command reference |
+| Command                   | Purpose                        |
+| ------------------------- | ------------------------------ |
+| `/gsd:new-project`        | Start new multi-phase project  |
+| `/gsd:progress`           | Check status, get next action  |
+| `/gsd:plan-phase [n]`     | Create detailed plan for phase |
+| `/gsd:execute-plan`       | Work through current plan      |
+| `/gsd:resume-work`        | Restore session context        |
+| `/gsd:pause-work`         | Save state, prepare to pause   |
+| `/gsd:add-phase`          | Add a new phase to project     |
+| `/gsd:complete-milestone` | Mark milestone done            |
+| `/gsd:help`               | Full command reference         |
 
 ---
 
 ## Best Practices
 
 ### 1. Keep Phases Focused
+
 - Each phase should have a clear deliverable
 - 3-5 phases is typical for most projects
 - If a phase has >10 tasks, split it
 
 ### 2. Update Progress Regularly
+
 - Mark tasks complete as you go
 - Don't batch status updates
 - Use `/gsd:progress` frequently
 
 ### 3. Use Tools Proactively
+
 - Research before implementing
 - Use agents for specialized work
 - Load skills for domain expertise
 - Don't wait for permission
 
 ### 4. Session Continuity
+
 - `/gsd:pause-work` before ending session
 - `/gsd:resume-work` to restore context
 - STATE.md preserves your progress
@@ -198,27 +214,35 @@ Skill(api-design)
 ## Troubleshooting
 
 ### "I'm stuck in GSD"
+
 You're never "stuck" - GSD is just tracking. Execute directly:
+
 ```
 "Just implement the login endpoint now"
 ```
 
 ### "GSD is blocking me"
+
 GSD can't block you. If you feel blocked:
+
 1. Check `/gsd:progress` for next action
 2. Or just do what needs doing
 3. Update STATE.md manually if needed
 
 ### "Phase is too big"
+
 Use `/gsd:add-phase` to split:
+
 ```
 /gsd:add-phase Split current phase into smaller chunks
 ```
 
 ### "Lost my context"
+
 ```
 /gsd:resume-work
 ```
+
 Or read `.planning/STATE.md` directly.
 
 ---
@@ -274,4 +298,4 @@ Claude: Schema designed ✓. Next: Create migrations...
 
 ---
 
-*GSD helps you get shit done. It tracks progress, not permissions.*
+_GSD helps you get shit done. It tracks progress, not permissions._

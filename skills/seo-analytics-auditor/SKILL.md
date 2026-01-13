@@ -10,6 +10,7 @@ Audit SEO, verify analytics, and optimize Core Web Vitals.
 ## When to Use
 
 **Use for:**
+
 - Auditing SEO meta tags and structured data
 - Verifying analytics implementations (GA4, Cloudflare)
 - Checking Core Web Vitals (LCP, INP, CLS)
@@ -33,6 +34,7 @@ npx lighthouse https://yoursite.com --only-categories=performance
 ## SEO Checklist
 
 ### Meta Tags (Required)
+
 ```html
 <title>Page Title - Brand (50-60 chars)</title>
 <meta name="description" content="Description (150-160 chars)" />
@@ -41,6 +43,7 @@ npx lighthouse https://yoursite.com --only-categories=performance
 ```
 
 ### Open Graph (Social Sharing)
+
 ```html
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://domain.com/" />
@@ -52,6 +55,7 @@ npx lighthouse https://yoursite.com --only-categories=performance
 ```
 
 ### Twitter Card
+
 ```html
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Title" />
@@ -60,55 +64,66 @@ npx lighthouse https://yoursite.com --only-categories=performance
 ```
 
 ### Schema.org (Structured Data)
+
 ```html
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Name",
-  "jobTitle": "Title",
-  "url": "https://domain.com"
-}
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Name",
+    "jobTitle": "Title",
+    "url": "https://domain.com"
+  }
 </script>
 ```
 
 ## Analytics Implementation
 
 ### Google Analytics 4
+
 ```html
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"
+></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag() { dataLayer.push(arguments); }
-  gtag('js', new Date());
-  gtag('config', 'G-XXXXXXXXXX', {
-    'anonymize_ip': true,
-    'cookie_flags': 'SameSite=None;Secure'
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag("js", new Date());
+  gtag("config", "G-XXXXXXXXXX", {
+    anonymize_ip: true,
+    cookie_flags: "SameSite=None;Secure",
   });
 </script>
 ```
 
 ### Cloudflare Web Analytics
+
 ```html
-<script defer src='https://static.cloudflareinsights.com/beacon.min.js'
-  data-cf-beacon='{"token": "YOUR_TOKEN"}'></script>
+<script
+  defer
+  src="https://static.cloudflareinsights.com/beacon.min.js"
+  data-cf-beacon='{"token": "YOUR_TOKEN"}'
+></script>
 ```
 
 ## Core Web Vitals Targets (2025)
 
-| Metric | Good | Needs Improvement | Poor |
-|--------|------|-------------------|------|
-| LCP (Largest Contentful Paint) | < 2.5s | 2.5s - 4s | > 4s |
-| INP (Interaction to Next Paint) | < 200ms | 200ms - 500ms | > 500ms |
-| CLS (Cumulative Layout Shift) | < 0.1 | 0.1 - 0.25 | > 0.25 |
+| Metric                          | Good    | Needs Improvement | Poor    |
+| ------------------------------- | ------- | ----------------- | ------- |
+| LCP (Largest Contentful Paint)  | < 2.5s  | 2.5s - 4s         | > 4s    |
+| INP (Interaction to Next Paint) | < 200ms | 200ms - 500ms     | > 500ms |
+| CLS (Cumulative Layout Shift)   | < 0.1   | 0.1 - 0.25        | > 0.25  |
 
 ## Testing Tools
 
-| Tool | URL | Purpose |
-|------|-----|---------|
-| PageSpeed Insights | https://pagespeed.web.dev | Core Web Vitals |
-| Rich Results Test | https://search.google.com/test/rich-results | Schema.org |
-| OpenGraph.xyz | https://www.opengraph.xyz | Social preview |
+| Tool               | URL                                         | Purpose         |
+| ------------------ | ------------------------------------------- | --------------- |
+| PageSpeed Insights | https://pagespeed.web.dev                   | Core Web Vitals |
+| Rich Results Test  | https://search.google.com/test/rich-results | Schema.org      |
+| OpenGraph.xyz      | https://www.opengraph.xyz                   | Social preview  |
 
 ## Files to Check
 
@@ -119,13 +134,13 @@ npx lighthouse https://yoursite.com --only-categories=performance
 
 ## Common Issues
 
-| Issue | Fix |
-|-------|-----|
-| Meta description too short | Use 150-160 characters |
-| Missing canonical URL | Add `<link rel="canonical">` |
-| OG image wrong size | Use 1200x630 for best display |
-| Schema.org errors | Test with Rich Results Test |
-| Analytics not firing | Check browser console for errors |
+| Issue                      | Fix                              |
+| -------------------------- | -------------------------------- |
+| Meta description too short | Use 150-160 characters           |
+| Missing canonical URL      | Add `<link rel="canonical">`     |
+| OG image wrong size        | Use 1200x630 for best display    |
+| Schema.org errors          | Test with Rich Results Test      |
+| Analytics not firing       | Check browser console for errors |
 
 ## Integration Checklist
 

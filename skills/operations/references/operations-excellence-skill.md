@@ -1,6 +1,7 @@
 # Operations Excellence - Fortune 50 Expert Skill
 
 ## Skill Metadata
+
 - **Name**: operations-excellence
 - **Domain**: Enterprise Operations Management
 - **Level**: Fortune 50 Executive / C-Suite
@@ -14,6 +15,7 @@ This skill provides expert-level guidance on enterprise operations management at
 ## When to Use This Skill
 
 Invoke this skill when the user needs:
+
 - Supply chain optimization strategies for global enterprises
 - Process improvement initiatives (Lean, Six Sigma, TQM)
 - Capacity planning and demand forecasting at scale
@@ -119,6 +121,7 @@ Phase 5: CONTROL
 ```
 
 **Eight Types of Waste (DOWNTIME)**
+
 1. **D**efects - Rework, scrap, corrections
 2. **O**verproduction - Making more than needed
 3. **W**aiting - Idle time, delays, bottlenecks
@@ -866,6 +869,7 @@ START: Is there a problem or opportunity?
 ### Vendor Management Checklist
 
 **Pre-Contract Phase**
+
 - [ ] Spend analysis completed for category
 - [ ] Market research conducted (minimum 3 vendors)
 - [ ] RFx document prepared with clear requirements
@@ -878,6 +882,7 @@ START: Is there a problem or opportunity?
 - [ ] Risk assessment performed
 
 **Contract Phase**
+
 - [ ] Contract terms negotiated (price, SLAs, terms)
 - [ ] Legal review completed
 - [ ] Insurance and liability coverage verified
@@ -890,6 +895,7 @@ START: Is there a problem or opportunity?
 - [ ] Contract stored in central repository
 
 **Ongoing Management Phase**
+
 - [ ] Onboarding completed (systems, training)
 - [ ] Performance scorecard implemented
 - [ ] Regular review meetings scheduled
@@ -1038,32 +1044,18 @@ Week 11-12: Institutionalize
 When advising on operations, gather context with these questions:
 
 **General Context**
+
 1. What industry and type of operations? (manufacturing, services, distribution, etc.)
 2. What is the scale? (revenue, employees, locations, volumes)
 3. What are the top 3 operational challenges currently?
 4. What operational metrics are tracked today?
 5. What is the current operational maturity level (1-5)?
 
-**Process Improvement**
-6. What processes are causing the most pain/waste?
-7. Have you attempted process improvements before? Results?
-8. What tools/methodologies are already in use? (Lean, Six Sigma, etc.)
-9. What is the organizational culture regarding change?
-10. What is the appetite for investment in improvement?
+**Process Improvement** 6. What processes are causing the most pain/waste? 7. Have you attempted process improvements before? Results? 8. What tools/methodologies are already in use? (Lean, Six Sigma, etc.) 9. What is the organizational culture regarding change? 10. What is the appetite for investment in improvement?
 
-**Supply Chain**
-11. What is the supply chain structure? (direct/indirect materials, services)
-12. What are the critical supply chain risks?
-13. How is demand forecasted today? Accuracy?
-14. What is the inventory strategy? (turns, service levels)
-15. Are there capacity constraints in the network?
+**Supply Chain** 11. What is the supply chain structure? (direct/indirect materials, services) 12. What are the critical supply chain risks? 13. How is demand forecasted today? Accuracy? 14. What is the inventory strategy? (turns, service levels) 15. Are there capacity constraints in the network?
 
-**Quality and Compliance**
-16. What quality management system is in place? (ISO 9001, etc.)
-17. What are current quality metrics? (defect rates, customer complaints)
-18. What regulatory requirements apply?
-19. How is cost of quality tracked?
-20. What quality tools are regularly used?
+**Quality and Compliance** 16. What quality management system is in place? (ISO 9001, etc.) 17. What are current quality metrics? (defect rates, customer complaints) 18. What regulatory requirements apply? 19. How is cost of quality tracked? 20. What quality tools are regularly used?
 
 ## Output Format Guidance
 
@@ -1082,6 +1074,7 @@ Use visual elements like tables, decision trees, and checklists to enhance clari
 ## References and Further Reading
 
 This skill synthesizes best practices from:
+
 - American Society for Quality (ASQ) - Six Sigma and quality standards
 - APQC (American Productivity & Quality Center) - Process benchmarking
 - COSO - Enterprise risk management
@@ -1095,4 +1088,5 @@ This skill synthesizes best practices from:
 ---
 
 **Version History**
+
 - v1.0.0 (2025-12-16): Initial skill creation with comprehensive operations frameworks

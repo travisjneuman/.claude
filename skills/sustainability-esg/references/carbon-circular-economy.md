@@ -93,13 +93,13 @@ ELIMINATE:
 
 ## Circular Metrics
 
-| Metric | Formula | Target |
-|--------|---------|--------|
-| **Circularity Rate** | Circular inputs / Total inputs | 50%+ |
-| **Recycled Content** | Recycled / Total material | 30%+ |
-| **Recyclability** | Recyclable / Total products | 100% |
-| **Waste Diversion** | Diverted / Total waste | 90%+ |
-| **Product Life** | Extended use cycles | 2x+ |
+| Metric               | Formula                        | Target |
+| -------------------- | ------------------------------ | ------ |
+| **Circularity Rate** | Circular inputs / Total inputs | 50%+   |
+| **Recycled Content** | Recycled / Total material      | 30%+   |
+| **Recyclability**    | Recyclable / Total products    | 100%   |
+| **Waste Diversion**  | Diverted / Total waste         | 90%+   |
+| **Product Life**     | Extended use cycles            | 2x+    |
 
 ## Renewable Energy Strategy
 

@@ -123,12 +123,12 @@ git clean -fd
 
 ## Quick Reference
 
-| Task | Command |
-|------|---------|
-| Update marketplace | `cd plugins/marketplaces/X && git pull` |
+| Task                   | Command                                              |
+| ---------------------- | ---------------------------------------------------- |
+| Update marketplace     | `cd plugins/marketplaces/X && git pull`              |
 | Diff local vs upstream | `diff -r plugins/local/X plugins/marketplaces/.../X` |
-| Reset marketplace | `git checkout . && git clean -fd` |
-| Commit customizations | `git add plugins/local/ && git commit` |
+| Reset marketplace      | `git checkout . && git clean -fd`                    |
+| Commit customizations  | `git add plugins/local/ && git commit`               |
 
 ---
 

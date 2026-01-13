@@ -1,11 +1,11 @@
 // Modern Hero Section Layout
 // Copy and customize this layout for your Next.js landing pages
 
-import React from 'react';
-import { cn } from '@/lib/utils';
+import React from "react";
+import { cn } from "@/lib/utils";
 
 interface HeroSectionProps {
-  variant?: 'centered' | 'split' | 'minimal';
+  variant?: "centered" | "split" | "minimal";
   title: string;
   subtitle: string;
   ctaPrimary?: {
@@ -21,7 +21,7 @@ interface HeroSectionProps {
 }
 
 export const HeroSection: React.FC<HeroSectionProps> = ({
-  variant = 'centered',
+  variant = "centered",
   title,
   subtitle,
   ctaPrimary,
@@ -29,12 +29,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   image,
   backgroundGradient = true,
 }) => {
-  if (variant === 'centered') {
+  if (variant === "centered") {
     return (
       <section
         className={cn(
-          'relative py-20 px-4 sm:px-6 lg:px-8',
-          backgroundGradient && 'bg-gradient-to-br from-blue-50 via-white to-purple-50'
+          "relative py-20 px-4 sm:px-6 lg:px-8",
+          backgroundGradient &&
+            "bg-gradient-to-br from-blue-50 via-white to-purple-50",
         )}
       >
         <div className="max-w-7xl mx-auto">
@@ -78,12 +79,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
     );
   }
 
-  if (variant === 'split') {
+  if (variant === "split") {
     return (
       <section
         className={cn(
-          'relative py-20 px-4 sm:px-6 lg:px-8',
-          backgroundGradient && 'bg-gradient-to-br from-blue-50 via-white to-purple-50'
+          "relative py-20 px-4 sm:px-6 lg:px-8",
+          backgroundGradient &&
+            "bg-gradient-to-br from-blue-50 via-white to-purple-50",
         )}
       >
         <div className="max-w-7xl mx-auto">
@@ -92,9 +94,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 mb-6">
                 {title}
               </h1>
-              <p className="text-xl text-slate-600 mb-8">
-                {subtitle}
-              </p>
+              <p className="text-xl text-slate-600 mb-8">{subtitle}</p>
               <div className="flex flex-col sm:flex-row gap-4">
                 {ctaPrimary && (
                   <button
@@ -116,11 +116,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             </div>
             {image && (
               <div className="animate-fade-in-up stagger-item-2">
-                <img
-                  src={image}
-                  alt="Hero"
-                  className="rounded-xl shadow-2xl"
-                />
+                <img src={image} alt="Hero" className="rounded-xl shadow-2xl" />
               </div>
             )}
           </div>

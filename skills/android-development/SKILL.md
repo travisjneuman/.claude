@@ -9,19 +9,20 @@ Comprehensive guide for building modern Android applications.
 
 ## Platforms Covered
 
-| Platform | Min SDK | Target SDK |
-|----------|---------|------------|
-| Android Phone | API 24 (7.0) | API 34 (14) |
-| Android Tablet | API 24 | API 34 |
-| Android TV | API 24 | API 34 |
-| Wear OS | API 30 | API 34 |
-| Android Auto | API 29 | API 34 |
+| Platform       | Min SDK      | Target SDK  |
+| -------------- | ------------ | ----------- |
+| Android Phone  | API 24 (7.0) | API 34 (14) |
+| Android Tablet | API 24       | API 34      |
+| Android TV     | API 24       | API 34      |
+| Wear OS        | API 30       | API 34      |
+| Android Auto   | API 29       | API 34      |
 
 ---
 
 ## Jetpack Compose (Modern UI)
 
 ### Basic Structure
+
 ```kotlin
 @Composable
 fun MyApp() {
@@ -61,6 +62,7 @@ fun MainScreen() {
 ```
 
 ### State Management
+
 ```kotlin
 // Local state
 var text by remember { mutableStateOf("") }
@@ -115,6 +117,7 @@ fun MainScreen(viewModel: MainViewModel = hiltViewModel()) {
 ```
 
 ### Navigation
+
 ```kotlin
 // Navigation setup
 @Composable
@@ -147,6 +150,7 @@ navController.navigate(DetailRoute(itemId = "123"))
 ```
 
 ### Lists
+
 ```kotlin
 @Composable
 fun ItemList(items: List<Item>) {
@@ -189,6 +193,7 @@ fun RefreshableList(
 ## Modern Android Architecture
 
 ### Clean Architecture Layers
+
 ```
 app/
 ├── data/
@@ -218,6 +223,7 @@ app/
 ```
 
 ### Dependency Injection (Hilt)
+
 ```kotlin
 @HiltAndroidApp
 class MyApplication : Application()
@@ -262,6 +268,7 @@ object AppModule {
 ## Data Layer
 
 ### Room Database
+
 ```kotlin
 @Entity(tableName = "items")
 data class ItemEntity(
@@ -289,6 +296,7 @@ abstract class AppDatabase : RoomDatabase() {
 ```
 
 ### Retrofit API
+
 ```kotlin
 interface ApiService {
     @GET("items")
@@ -309,6 +317,7 @@ data class ItemDto(
 ```
 
 ### Repository Pattern
+
 ```kotlin
 interface ItemRepository {
     fun getItems(): Flow<List<Item>>
@@ -339,6 +348,7 @@ class ItemRepositoryImpl @Inject constructor(
 ## Material Design 3
 
 ### Theme Setup
+
 ```kotlin
 @Composable
 fun MyAppTheme(
@@ -365,6 +375,7 @@ fun MyAppTheme(
 ```
 
 ### Common Components
+
 ```kotlin
 // Top App Bar
 @OptIn(ExperimentalMaterial3Api::class)
@@ -416,6 +427,7 @@ fun MyBottomBar(
 ## Platform-Specific
 
 ### Android TV
+
 ```kotlin
 // Focus management
 @Composable
@@ -441,6 +453,7 @@ fun TvButton(
 ```
 
 ### Wear OS
+
 ```kotlin
 @Composable
 fun WearApp() {
@@ -466,6 +479,7 @@ fun WearApp() {
 ## Testing
 
 ### Unit Tests
+
 ```kotlin
 @Test
 fun `getItems returns mapped domain objects`() = runTest {
@@ -482,6 +496,7 @@ fun `getItems returns mapped domain objects`() = runTest {
 ```
 
 ### Compose UI Tests
+
 ```kotlin
 @HiltAndroidTest
 class MainScreenTest {
@@ -507,6 +522,7 @@ class MainScreenTest {
 ## Play Store Requirements
 
 ### Required
+
 - Privacy policy
 - App icon (512x512)
 - Feature graphic (1024x500)
@@ -514,6 +530,7 @@ class MainScreenTest {
 - Target API 34+
 
 ### App Bundle
+
 ```groovy
 android {
     bundle {
@@ -535,6 +552,7 @@ android {
 ## Best Practices
 
 ### DO:
+
 - Use Kotlin Coroutines and Flow
 - Follow unidirectional data flow
 - Use Jetpack Compose for new UI
@@ -542,6 +560,7 @@ android {
 - Support multiple screen sizes
 
 ### DON'T:
+
 - Block main thread
 - Leak contexts
 - Hardcode dimensions

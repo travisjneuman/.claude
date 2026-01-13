@@ -20,16 +20,20 @@
 **Focus:** [What was the main focus this session]
 
 **Completed:**
+
 - [Task completed]
 - [Task completed]
 
 **In Progress:**
+
 - [Task started but not finished]
 
 **Blockers:**
+
 - [Any blockers encountered]
 
 **Next Session:**
+
 - [What to tackle next]
 
 **Notes:**
@@ -42,6 +46,7 @@
 **Focus:** [Previous session focus]
 
 **Completed:**
+
 - [Task completed]
 
 **Notes:**
@@ -51,8 +56,8 @@
 
 ## Key Decisions
 
-| Date | Decision | Reasoning |
-|------|----------|-----------|
+| Date   | Decision           | Reasoning                  |
+| ------ | ------------------ | -------------------------- |
 | [Date] | [What was decided] | [Why this choice was made] |
 
 ---
@@ -77,10 +82,12 @@
 [Brief description of how project is organized]
 
 **Key Dependencies:**
+
 - [Dependency 1]
 - [Dependency 2]
 
 **Environment:**
+
 - Node version: [version]
 - Python version: [version]
 - Other: [info]
@@ -90,6 +97,7 @@
 ## Quick Reference
 
 **Commands:**
+
 ```bash
 # Development
 npm run dev
@@ -102,6 +110,7 @@ npm run build
 ```
 
 **Important Files:**
+
 - `src/[file]` - [What it does]
 - `tests/[file]` - [What it tests]
 
@@ -114,6 +123,7 @@ npm run build
 ---
 
 **Update Instructions:**
+
 - Update this file at the end of each session
 - Keep session logs chronological (newest at top)
 - Document all important decisions

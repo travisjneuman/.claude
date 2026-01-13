@@ -96,13 +96,13 @@ DATA:
 
 ### Cloud Security
 
-| Domain | Controls |
-|--------|----------|
-| **Identity** | SSO, MFA, PAM, IAM policies |
-| **Compute** | Hardened images, container security |
-| **Network** | VPC, security groups, WAF |
-| **Storage** | Encryption, access policies, backup |
-| **Logging** | CloudTrail, SIEM integration |
+| Domain         | Controls                            |
+| -------------- | ----------------------------------- |
+| **Identity**   | SSO, MFA, PAM, IAM policies         |
+| **Compute**    | Hardened images, container security |
+| **Network**    | VPC, security groups, WAF           |
+| **Storage**    | Encryption, access policies, backup |
+| **Logging**    | CloudTrail, SIEM integration        |
 | **Compliance** | Config rules, automated remediation |
 
 For detailed security frameworks (NIST, ISO 27001, CIS Controls, MITRE ATT&CK), see [Security Frameworks Reference](references/security-frameworks.md).
@@ -147,12 +147,12 @@ LIFECYCLE:
 
 ### CVSS Scoring
 
-| Score | Severity | SLA Target |
-|-------|----------|------------|
-| 9.0-10.0 | Critical | 7 days |
-| 7.0-8.9 | High | 30 days |
-| 4.0-6.9 | Medium | 90 days |
-| 0.1-3.9 | Low | Best effort |
+| Score    | Severity | SLA Target  |
+| -------- | -------- | ----------- |
+| 9.0-10.0 | Critical | 7 days      |
+| 7.0-8.9  | High     | 30 days     |
+| 4.0-6.9  | Medium   | 90 days     |
+| 0.1-3.9  | Low      | Best effort |
 
 ### Patch Management
 
@@ -247,14 +247,14 @@ GOVERNANCE:
 
 ### Security Training Program
 
-| Topic | Frequency | Audience |
-|-------|-----------|----------|
-| **New Hire Security** | Onboarding | All employees |
-| **Annual Refresh** | Annually | All employees |
-| **Phishing Awareness** | Quarterly | All employees |
-| **Developer Security** | Annually | Development team |
-| **Executive Briefings** | Quarterly | Leadership |
-| **Role-Based** | As needed | Specific roles |
+| Topic                   | Frequency  | Audience         |
+| ----------------------- | ---------- | ---------------- |
+| **New Hire Security**   | Onboarding | All employees    |
+| **Annual Refresh**      | Annually   | All employees    |
+| **Phishing Awareness**  | Quarterly  | All employees    |
+| **Developer Security**  | Annually   | Development team |
+| **Executive Briefings** | Quarterly  | Leadership       |
+| **Role-Based**          | As needed  | Specific roles   |
 
 ### Phishing Simulation
 
@@ -284,14 +284,14 @@ RESPONSE:
 
 ### Key Security Metrics
 
-| Category | Metric | Target |
-|----------|--------|--------|
-| **Vulnerability** | Critical vulns open >30 days | 0 |
-| **Patching** | Systems patched within SLA | 95%+ |
-| **Incidents** | Mean time to detect | <24 hours |
-| **Access** | Orphan accounts | 0 |
-| **Training** | Completion rate | 95%+ |
-| **Phishing** | Click rate | <5% |
+| Category          | Metric                       | Target    |
+| ----------------- | ---------------------------- | --------- |
+| **Vulnerability** | Critical vulns open >30 days | 0         |
+| **Patching**      | Systems patched within SLA   | 95%+      |
+| **Incidents**     | Mean time to detect          | <24 hours |
+| **Access**        | Orphan accounts              | 0         |
+| **Training**      | Completion rate              | 95%+      |
+| **Phishing**      | Click rate                   | <5%       |
 
 ### Security Dashboard
 
@@ -323,12 +323,12 @@ INVESTMENT:
 
 ### Threat Intelligence Sources
 
-| Type | Sources | Use |
-|------|---------|-----|
-| **Strategic** | Industry reports, geopolitical | Executive briefings |
-| **Tactical** | TTPs, malware analysis | Detection rules |
-| **Operational** | IOCs, campaigns | Active response |
-| **Technical** | Signatures, hashes | Automated blocking |
+| Type            | Sources                        | Use                 |
+| --------------- | ------------------------------ | ------------------- |
+| **Strategic**   | Industry reports, geopolitical | Executive briefings |
+| **Tactical**    | TTPs, malware analysis         | Detection rules     |
+| **Operational** | IOCs, campaigns                | Active response     |
+| **Technical**   | Signatures, hashes             | Automated blocking  |
 
 For detailed incident response processes and SOC operations, see [Incident Response Reference](references/incident-response.md).
 

@@ -33,6 +33,7 @@ Based on the KERNEL "Easy to verify" principle - explicit success criteria reduc
 - [ ] Algorithm/logic is sound and generalizable
 
 **Anti-Patterns to Avoid:**
+
 - ❌ Hard-coding expected output values
 - ❌ Creating solutions that only work for specific test inputs
 - ❌ Using helper scripts to work around proper implementation
@@ -40,6 +41,7 @@ Based on the KERNEL "Easy to verify" principle - explicit success criteria reduc
 - ❌ Pattern matching test inputs instead of implementing real logic
 
 **Correct Approach:**
+
 - ✅ Understand problem requirements independent of tests
 - ✅ Implement proper algorithm/logic
 - ✅ Tests verify correctness, they don't define the solution
@@ -82,6 +84,7 @@ Add task-specific verification items here:
 
 ```markdown
 ## Verification Criteria
+
 - [ ] User can log in with valid credentials
 - [ ] Invalid credentials show error message
 - [ ] Session persists across page refresh
@@ -101,6 +104,7 @@ Reviewers should verify all applicable items before approval.
 ## Why Verification Matters
 
 From research:
+
 - "If you can't verify success, AI can't deliver"
 - Explicit success criteria reduce unwanted outputs by 91%
 - Verification catches issues before they compound
@@ -115,4 +119,4 @@ From research:
 
 ---
 
-*Verify before marking complete. Every time.*
+_Verify before marking complete. Every time._

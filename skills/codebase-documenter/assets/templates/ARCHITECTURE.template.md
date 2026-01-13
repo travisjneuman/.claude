@@ -33,12 +33,12 @@ This document explains the high-level architecture of [Project Name], including 
 
 ### Technology Stack
 
-| Layer | Technology | Why We Chose It |
-|-------|-----------|-----------------|
+| Layer    | Technology   | Why We Chose It        |
+| -------- | ------------ | ---------------------- |
 | Frontend | [Technology] | [Reasoning for choice] |
-| Backend | [Technology] | [Reasoning for choice] |
+| Backend  | [Technology] | [Reasoning for choice] |
 | Database | [Technology] | [Reasoning for choice] |
-| Hosting | [Technology] | [Reasoning for choice] |
+| Hosting  | [Technology] | [Reasoning for choice] |
 
 ## Directory Structure
 
@@ -87,14 +87,17 @@ project-root/
 ### Directory Purpose and Rules
 
 #### components/
+
 **Purpose:** Reusable UI components that don't contain business logic.
 
 **What goes here:**
+
 - Presentational components (buttons, cards, modals)
 - Layout components (headers, sidebars, containers)
 - Feature-specific components used in multiple places
 
 **What doesn't go here:**
+
 - Business logic (put in `services/`)
 - Page-level components (put in `pages/`)
 - One-off components used in a single place (colocate with parent)
@@ -102,15 +105,18 @@ project-root/
 **When to add a file:** When you need a reusable component used in 2+ places.
 
 #### services/
+
 **Purpose:** Business logic, API calls, and external service integrations.
 
 **What goes here:**
+
 - API client functions
 - Authentication and authorization logic
 - Data transformation and validation
 - Third-party service integrations
 
 **What doesn't go here:**
+
 - UI components (put in `components/`)
 - State management (put in `store/`)
 - Pure utility functions (put in `utils/`)
@@ -118,15 +124,18 @@ project-root/
 **When to add a file:** When you need to interact with external services or implement complex business logic.
 
 #### utils/
+
 **Purpose:** Pure utility functions with no side effects.
 
 **What goes here:**
+
 - Data formatting and parsing
 - Validation helpers
 - Constants and enumerations
 - Date/time utilities
 
 **What doesn't go here:**
+
 - Functions that make API calls (put in `services/`)
 - Functions that depend on React (make a custom hook in `hooks/`)
 - Functions specific to one component (colocate with component)
@@ -178,6 +187,7 @@ User Action → Component → Service → API → Database
 **Architecture:** [Describe state management approach - Redux, Context API, Zustand, etc.]
 
 **State organization:**
+
 ```
 Global State
 ├── auth          # User authentication state
@@ -188,6 +198,7 @@ Global State
 ```
 
 **Data flow rules:**
+
 - Components read state via [hooks/selectors]
 - Components update state via [dispatch/setState functions]
 - Async operations handled in [middleware/thunks/services]
@@ -199,20 +210,24 @@ Global State
 **What we decided:** [Describe the decision made]
 
 **Context:** [Explain the situation that required this decision]
+
 - [Constraint or requirement 1]
 - [Constraint or requirement 2]
 
 **Why we decided this:**
+
 - **Reason 1:** [Explain benefit]
 - **Reason 2:** [Explain benefit]
 - **Reason 3:** [Explain benefit]
 
 **Trade-offs:**
+
 - ✅ **Pros:** [What we gained]
 - ❌ **Cons:** [What we sacrificed]
 - 🤔 **When to reconsider:** [Conditions that might make this decision obsolete]
 
 **Alternatives considered:**
+
 - [Alternative 1]: Rejected because [reason]
 - [Alternative 2]: Rejected because [reason]
 
@@ -223,14 +238,17 @@ Global State
 **Context:** [Explain the situation that required this decision]
 
 **Why we decided this:**
+
 - [Reason 1]
 - [Reason 2]
 
 **Trade-offs:**
+
 - ✅ **Pros:** [What we gained]
 - ❌ **Cons:** [What we sacrificed]
 
 **Alternatives considered:**
+
 - [Alternative 1]: Rejected because [reason]
 - [Alternative 2]: Rejected because [reason]
 
@@ -251,6 +269,7 @@ store/
 ```
 
 **Dependency rules:**
+
 1. **Lower layers can't depend on higher layers**
    - ❌ `services/` can't import from `components/`
    - ✅ `components/` can import from `services/`
@@ -264,8 +283,8 @@ store/
 
 ### External Dependencies
 
-| Package | Version | Used For | Notes |
-|---------|---------|----------|-------|
+| Package        | Version   | Used For  | Notes                             |
+| -------------- | --------- | --------- | --------------------------------- |
 | [package-name] | [version] | [purpose] | [Important notes or alternatives] |
 | [package-name] | [version] | [purpose] | [Important notes or alternatives] |
 
@@ -276,6 +295,7 @@ store/
 To add a new feature to the codebase:
 
 1. **Create feature structure:**
+
    ```
    src/
    ├── components/features/[FeatureName]/
@@ -309,16 +329,19 @@ To add a new feature to the codebase:
 ### Common Modification Points
 
 **Adding a new API endpoint:**
+
 - Backend: Create route in `api/[feature]/route.js`
 - Frontend: Add service function in `services/[feature].js`
 - Update types in `types/api.ts`
 
 **Adding a new database table:**
+
 - Create migration in `migrations/`
 - Add model in `models/[tableName].js`
 - Update seed data if applicable
 
 **Adding a new component library:**
+
 - Install package: `npm install [package]`
 - Create wrapper in `components/common/[ComponentName]/`
 - Configure theme/styling in `config/theme.js`
@@ -340,10 +363,12 @@ To add a new feature to the codebase:
 ### Caching Strategy
 
 **What we cache:**
+
 - [Data type 1]: Cached in [location] for [duration]
 - [Data type 2]: Cached in [location] for [duration]
 
 **Cache invalidation:**
+
 - [Trigger 1]: Clears [cache type]
 - [Trigger 2]: Clears [cache type]
 
@@ -361,11 +386,13 @@ To add a new feature to the codebase:
 ### Authorization
 
 **Permission levels:**
+
 - [Role 1]: Can [actions]
 - [Role 2]: Can [actions]
 - [Role 3]: Can [actions]
 
 **Implementation:**
+
 - Frontend: Check permissions in [location]
 - Backend: Enforce permissions in [location]
 
@@ -381,11 +408,11 @@ To add a new feature to the codebase:
 
 ### Environments
 
-| Environment | URL | Purpose | Auto-deploys |
-|------------|-----|---------|--------------|
-| Development | [url] | Local development | No |
-| Staging | [url] | Testing before production | Yes (main branch) |
-| Production | [url] | Live application | Yes (release tags) |
+| Environment | URL   | Purpose                   | Auto-deploys       |
+| ----------- | ----- | ------------------------- | ------------------ |
+| Development | [url] | Local development         | No                 |
+| Staging     | [url] | Testing before production | Yes (main branch)  |
+| Production  | [url] | Live application          | Yes (release tags) |
 
 ### Build Process
 
@@ -398,6 +425,7 @@ To add a new feature to the codebase:
 ```
 
 **Build artifacts:**
+
 - Output location: [path]
 - Artifacts: [list of generated files]
 
@@ -412,21 +440,25 @@ To add a new feature to the codebase:
 ### Logging
 
 **Log levels:**
+
 - ERROR: [What gets logged]
 - WARN: [What gets logged]
 - INFO: [What gets logged]
 
 **Log destinations:**
+
 - Development: [Console/file]
 - Production: [Service name/location]
 
 ### Metrics
 
 **Key metrics tracked:**
+
 - [Metric 1]: [What it measures]
 - [Metric 2]: [What it measures]
 
 **Monitoring tools:**
+
 - [Tool name]: [What we monitor with it]
 
 ## Troubleshooting
@@ -434,6 +466,7 @@ To add a new feature to the codebase:
 ### Common Architecture Issues
 
 **Issue: [Common problem]**
+
 - **Symptoms:** [How to recognize it]
 - **Cause:** [Why it happens]
 - **Solution:** [How to fix it]
@@ -448,5 +481,6 @@ To add a new feature to the codebase:
 ## Questions and Feedback
 
 If you have questions about the architecture or suggestions for improvements:
+
 - [Contact method]
 - [Issue tracker link]
