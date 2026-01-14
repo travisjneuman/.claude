@@ -1,5 +1,23 @@
 # Changelog
 
+## 2.1.7
+
+- Added `showTurnDuration` setting to hide turn duration messages (e.g., "Cooked for 1m 6s")
+- Added ability to provide feedback when accepting permission prompts
+- Added inline display of agent's final response in task notifications, making it easier to see results without reading the full transcript file
+- Fixed security vulnerability where wildcard permission rules could match compound commands containing shell operators
+- Fixed false "file modified" errors on Windows when cloud sync tools, antivirus scanners, or Git touch file timestamps without changing content
+- Fixed orphaned tool_result errors when sibling tools fail during streaming execution
+- Fixed context window blocking limit being calculated using the full context window instead of the effective context window (which reserves space for max output tokens)
+- Fixed spinner briefly flashing when running local slash commands like `/model` or `/theme`
+- Fixed terminal title animation jitter by using fixed-width braille characters
+- Fixed plugins with git submodules not being fully initialized when installed
+- Fixed bash commands failing on Windows when temp directory paths contained characters like `t` or `n` that were misinterpreted as escape sequences
+- Improved typing responsiveness by reducing memory allocation overhead in terminal rendering
+- Enabled MCP tool search auto mode by default for all users. When MCP tool descriptions exceed 10% of the context window, they are automatically deferred and discovered via the MCPSearch tool instead of being loaded upfront. This reduces context usage for users with many MCP tools configured. Users can disable this by adding `MCPSearch` to `disallowedTools` in their settings.
+- Changed OAuth and API Console URLs from console.anthropic.com to platform.claude.com
+- [VSCode] Fixed `claudeProcessWrapper` setting passing the wrapper path instead of the Claude binary path
+
 ## 2.1.6
 
 - Added search functionality to `/config` command for quickly filtering settings
@@ -306,7 +324,7 @@
 - Agents and bash commands can run asynchronously and send messages to wake up the main agent
 - /stats now provides users with interesting CC stats, such as favorite model, usage graph, usage streak
 - Added named session support: use `/rename` to name sessions, `/resume <name>` in REPL or `claude --resume <name>` from the terminal to resume them
-- Added support for .claude/rules/`. See https://code.claude.com/docs/en/memory for details.
+- Added support for .claude/rules/`.  See https://code.claude.com/docs/en/memory for details.
 - Added image dimension metadata when images are resized, enabling accurate coordinate mappings for large images
 - Fixed auto-loading .env when using native installer
 - Fixed `--system-prompt` being ignored when using `--continue` or `--resume` flags
