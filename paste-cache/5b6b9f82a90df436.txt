@@ -1,0 +1,30 @@
+2026-01-13T16:55:22.11571Z    Cloning repository...
+2026-01-13T16:55:25.188666Z    From https://github.com/travisjneuman/travisjneuman.com
+2026-01-13T16:55:25.189132Z     * branch            4717b8ae2a712149d58f990c153216ec19cb274d -> FETCH_HEAD
+2026-01-13T16:55:25.189239Z    
+2026-01-13T16:55:25.619443Z    HEAD is now at 4717b8a fix: add body scroll lock and improve mobile scrolling in ProjectModal
+2026-01-13T16:55:25.620183Z    
+2026-01-13T16:55:25.687634Z    
+2026-01-13T16:55:25.688095Z    Using v2 root directory strategy
+2026-01-13T16:55:25.709019Z    Success: Finished cloning repository files
+2026-01-13T16:55:27.410819Z    Checking for configuration in a Wrangler configuration file (BETA)
+2026-01-13T16:55:27.411377Z    
+2026-01-13T16:55:28.517173Z    No wrangler.toml file found. Continuing.
+2026-01-13T16:55:28.581811Z    Detected the following tools from environment: npm@10.9.2, nodejs@22.16.0
+2026-01-13T16:55:28.582351Z    Installing project dependencies: npm clean-install --progress=false
+2026-01-13T16:55:39.336886Z    
+2026-01-13T16:55:39.337094Z    added 393 packages, and audited 394 packages in 10s
+2026-01-13T16:55:39.337172Z    
+2026-01-13T16:55:39.337327Z    92 packages are looking for funding
+2026-01-13T16:55:39.337576Z      run `npm fund` for details
+2026-01-13T16:55:39.338172Z    
+2026-01-13T16:55:39.338301Z    found 0 vulnerabilities
+2026-01-13T16:55:39.362973Z    Executing user command: npm run build
+2026-01-13T16:55:39.73416Z    
+2026-01-13T16:55:39.734738Z    > tjn-portfolio@1.0.0 build
+2026-01-13T16:55:39.734881Z    > tsc -b && vite build
+2026-01-13T16:55:39.735314Z    
+2026-01-13T16:55:43.441247Z    hooks/useBodyScrollLock.ts(1,10): error TS6133: 'useEffect' is declared but its value is never read.
+2026-01-13T16:55:43.52672Z    Failed: Error while executing user command. Exited with error code: 2
+2026-01-13T16:55:43.536644Z    Failed: build command exited with code: 1
+2026-01-13T16:55:45.12751Z    Failed: error occurred while running build command
