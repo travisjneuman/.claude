@@ -2,7 +2,9 @@
 
 How to deploy this Claude Code configuration to a new machine.
 
-**Last Updated:** January 2026 (v2.1)
+**Last Updated:** January 2026 (v2.2)
+
+**See also:** [NEW-DEVICE-SETUP.md](./NEW-DEVICE-SETUP.md) for detailed cross-platform instructions.
 
 ---
 
@@ -14,12 +16,34 @@ Before starting, ensure you have:
 - [ ] Node.js 18+ installed
 - [ ] Python 3.8+ with `pipx` or `uvx` (for sqlite MCP server)
 - [ ] Git installed (for cloning from GitHub)
+- [ ] **Windows only:** Git for Windows (includes Git Bash)
 
 ---
 
-## Quick Setup (1 Minute)
+## Quick Setup (All Platforms)
 
-### Option A: One-Line Install (Recommended)
+Works on: **Arch Linux** | **macOS** | **Windows (Git Bash)**
+
+```bash
+# 1. Clone the repo
+git clone https://github.com/travisjneuman/.claude.git ~/.claude
+
+# 2. Initialize marketplace repos with correct upstream remotes
+bash ~/.claude/scripts/init-marketplaces.sh
+
+# 3. Complete setup (plugins, hooks, verification)
+bash ~/.claude/scripts/setup-new-machine.sh
+```
+
+**IMPORTANT:** Always run `init-marketplaces.sh` on new devices. This ensures:
+
+- Marketplace repos fetch from original upstreams (not your personal repo)
+- Push is blocked on marketplace repos (read-only)
+- Main repo can push to your personal GitHub
+
+---
+
+## Alternative: One-Line Install
 
 **macOS / Linux / Windows (Git Bash):**
 
@@ -27,37 +51,41 @@ Before starting, ensure you have:
 curl -fsSL https://raw.githubusercontent.com/travisjneuman/.claude/master/scripts/install.sh | bash
 ```
 
-This handles everything: prerequisites check, clone, submodules, read-only config, and platform-specific MCP setup.
-
 After install, run `/bootstrap` in Claude Code to verify configuration.
 
 ---
 
-### Option B: Manual Setup
+## Manual Setup (Detailed)
+
+### Step 1: Clone
 
 **Mac/Linux:**
 
 ```bash
-# Clone with all submodules
-git clone --recurse-submodules https://github.com/travisjneuman/.claude.git ~/.claude
-
-# Set read-only on marketplace repos (prevents accidental pushes)
-for repo in ~/.claude/plugins/marketplaces/*/; do
-    (cd "$repo" && git remote set-url --push origin no_push)
-done
+git clone https://github.com/travisjneuman/.claude.git ~/.claude
 ```
 
 **Windows (PowerShell):**
 
 ```powershell
-git clone --recurse-submodules https://github.com/travisjneuman/.claude.git $env:USERPROFILE\.claude
-
-Get-ChildItem "$env:USERPROFILE\.claude\plugins\marketplaces" -Directory | ForEach-Object {
-    Push-Location $_.FullName
-    git remote set-url --push origin no_push
-    Pop-Location
-}
+git clone https://github.com/travisjneuman/.claude.git $env:USERPROFILE\.claude
 ```
+
+### Step 2: Initialize Marketplace Repos
+
+**CRITICAL:** This step configures correct remote URLs.
+
+**All platforms (use Git Bash on Windows):**
+
+```bash
+bash ~/.claude/scripts/init-marketplaces.sh
+```
+
+This script:
+
+- Clones all 22 marketplace repos from their original upstreams
+- Sets `no_push` on each to prevent accidental modifications
+- Ensures main repo can push to your GitHub
 
 ### Step 2: Setup MCP Config (Platform-Specific)
 
