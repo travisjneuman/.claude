@@ -24,6 +24,7 @@ All external repos are located in `~/.claude/plugins/marketplaces/`:
 | alirezarezvani-claude-skills     | https://github.com/alirezarezvani/claude-skills.git                    |
 | alvinunreal-awesome-claude       | https://github.com/alvinunreal/awesome-claude.git                      |
 | anthropic-agent-skills           | https://github.com/anthropics/skills.git                               |
+| auto-claude                      | https://github.com/AndyMik90/Auto-Claude.git                           |
 | awesome-claude-skills            | https://github.com/ComposioHQ/awesome-claude-skills.git                |
 | behisecc-awesome-claude-skills   | https://github.com/BehiSecc/awesome-claude-skills.git                  |
 | claude-code-plugins              | https://github.com/anthropics/claude-code.git                          |

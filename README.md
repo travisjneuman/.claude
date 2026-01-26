@@ -409,6 +409,8 @@ All toolkit commands use cross-platform syntax:
 
 ### 🏃 5-Minute Setup
 
+**Works on: Arch Linux | macOS | Windows (Git Bash)**
+
 ```bash
 # 1️⃣ Backup existing config
 mv ~/.claude ~/.claude-backup 2>/dev/null
@@ -416,15 +418,17 @@ mv ~/.claude ~/.claude-backup 2>/dev/null
 # 2️⃣ Clone the toolkit
 git clone https://github.com/travisjneuman/.claude.git ~/.claude
 
-# 3️⃣ Initialize marketplaces (21 repos, ~200MB)
-cd ~/.claude && git submodule update --init --recursive
+# 3️⃣ Initialize marketplace repos with correct upstream remotes (CRITICAL!)
+bash ~/.claude/scripts/init-marketplaces.sh
 
-# 4️⃣ Install git hooks
-bash scripts/setup-hooks.sh
+# 4️⃣ Complete setup (plugins, hooks, verification)
+bash ~/.claude/scripts/setup-new-machine.sh
 
 # 5️⃣ Start Claude Code
 claude
 ```
+
+> **⚠️ IMPORTANT:** Always run `init-marketplaces.sh` on new devices. This ensures marketplace repos fetch from their original upstreams (not your personal repo) and have push disabled.
 
 ### 🎬 Your First Task
 
@@ -577,6 +581,10 @@ The plugin system has **two distinct layers** that work together:
 
 ### 🆕 Setting Up on a New Machine
 
+**Works on: Arch Linux | macOS | Windows (Git Bash)**
+
+> **See also:** [docs/NEW-DEVICE-SETUP.md](./docs/NEW-DEVICE-SETUP.md) for detailed cross-platform instructions.
+
 When you clone this repo to a new development machine, follow these steps:
 
 ```bash
@@ -587,15 +595,20 @@ git clone https://github.com/travisjneuman/.claude.git ~/.claude
 cd ~/.claude
 
 # ═══════════════════════════════════════════════════════════════════════════
-# STEP 2: Initialize all submodules (22 external repos, ~200MB)
+# STEP 2: Initialize marketplace repos with correct upstream remotes (CRITICAL!)
 # ═══════════════════════════════════════════════════════════════════════════
-git submodule update --init --recursive
+# This script clones all 22 marketplace repos from their ORIGINAL upstreams
+# and configures no_push to prevent accidental modifications.
+#
+# ⚠️ This is the most important step! Without it, marketplace repos may have
+# wrong remote URLs (pointing to your personal repo instead of upstreams).
+bash scripts/init-marketplaces.sh
 
 # ═══════════════════════════════════════════════════════════════════════════
-# STEP 3: Configure no_push protection on all external repos
+# STEP 3: Complete setup (optional but recommended)
 # ═══════════════════════════════════════════════════════════════════════════
-# This prevents accidental pushes to repositories you don't own
-bash scripts/update-external-repos.sh
+# Registers marketplaces, installs plugins, sets up hooks
+bash scripts/setup-new-machine.sh
 
 # ═══════════════════════════════════════════════════════════════════════════
 # STEP 4: Register marketplaces with Claude Code's plugin system
@@ -780,6 +793,30 @@ All external repos in `~/.claude/plugins/marketplaces/`:
 
 ### 🔧 Troubleshooting Multi-Machine Setup
 
+#### ❌ Marketplace repos have wrong remote URLs
+
+This is the most common issue when cloning to a new device. Marketplace repos may point to your personal repo instead of the original upstreams.
+
+```bash
+# Fix all remotes at once (recommended)
+bash ~/.claude/scripts/fix-remotes.sh
+
+# Or reinitialize all marketplace repos from scratch
+bash ~/.claude/scripts/init-marketplaces.sh
+```
+
+#### ❌ Main repo cannot push to GitHub
+
+```bash
+# Check current remotes
+cd ~/.claude
+git remote -v
+
+# Fix if pointing to wrong URL or has no_push
+git remote set-url origin https://github.com/travisjneuman/.claude.git
+git remote set-url --push origin https://github.com/travisjneuman/.claude.git
+```
+
 #### ❌ "Plugin not found in marketplace"
 
 ```bash
@@ -796,15 +833,19 @@ claude plugin install [plugin]@[marketplace]
 #### ❌ Submodule directory is empty
 
 ```bash
-cd ~/.claude
-git submodule update --init plugins/marketplaces/[name]
+# Reinitialize marketplace repos
+bash ~/.claude/scripts/init-marketplaces.sh
 ```
 
-#### ❌ "no_push" is missing
+#### ❌ "no_push" is missing on marketplace repo
 
 ```bash
+# Fix single repo
 cd ~/.claude/plugins/marketplaces/[name]
 git remote set-url --push origin no_push
+
+# Or fix all repos at once
+bash ~/.claude/scripts/fix-remotes.sh
 ```
 
 #### ❌ Claude doctor shows plugin errors
@@ -812,8 +853,8 @@ git remote set-url --push origin no_push
 Run the full setup sequence:
 
 ```bash
-bash scripts/update-external-repos.sh
-# Then re-register marketplaces and install plugins (see Step 4-5 above)
+bash ~/.claude/scripts/init-marketplaces.sh
+bash ~/.claude/scripts/setup-new-machine.sh
 ```
 
 ### 📋 Files That Sync vs Don't Sync
