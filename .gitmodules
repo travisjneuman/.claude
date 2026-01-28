@@ -36,10 +36,6 @@
 	path = plugins/marketplaces/claude-scientific-skills
 	url = https://github.com/K-Dense-AI/claude-scientific-skills.git
 	ignore = all
-[submodule "plugins/marketplaces/claude-code-plugins-plus-skills"]
-	path = plugins/marketplaces/claude-code-plugins-plus-skills
-	url = https://github.com/jeremylongshore/claude-code-plugins-plus-skills.git
-	ignore = all
 [submodule "plugins/marketplaces/mhattingpete-skills"]
 	path = plugins/marketplaces/mhattingpete-skills
 	url = https://github.com/mhattingpete/claude-skills-marketplace.git
