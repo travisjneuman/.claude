@@ -48,7 +48,40 @@ All external repos are located in `~/.claude/plugins/marketplaces/`:
 
 ## Updating All External Repos
 
-### Using the Update Script
+### Recommended: _pull-all-repos.sh
+
+```bash
+# Pull parent + all submodules + custom directories
+~/.claude/_pull-all-repos.sh
+
+# Check status without pulling
+~/.claude/_pull-all-repos.sh --status
+
+# Or use slash command in Claude Code
+/pull-repos
+```
+
+**What gets pulled:**
+1. `~/.claude` - Parent repo (travisjneuman/.claude)
+2. `~/.claude/plugins/marketplaces/*` - Marketplace submodules
+3. Custom project directories (if configured) - your own repos
+
+**Important:** The script enforces `no_push` on marketplace submodules only. Custom project directories retain full push access.
+
+### Adding Your Own Project Directories
+
+Edit `~/.claude/_pull-all-repos.sh` and find the `CUSTOM_PROJECT_DIRS` section:
+
+```bash
+CUSTOM_PROJECT_DIRS=(
+    # "/e/Web Development"           # Uncomment and edit
+    # "$HOME/projects"               # Works on any platform
+)
+```
+
+Windows paths in Git Bash: `E:\Web Development` → `/e/Web Development`
+
+### Alternative: update-external-repos.sh
 
 ```bash
 bash ~/.claude/scripts/update-external-repos.sh
