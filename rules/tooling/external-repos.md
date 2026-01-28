@@ -66,7 +66,15 @@ All external repos are located in `~/.claude/plugins/marketplaces/`:
 2. `~/.claude/plugins/marketplaces/*` - Marketplace submodules
 3. Custom project directories (if configured) - your own repos
 
-**Important:** The script enforces `no_push` on marketplace submodules only. Custom project directories retain full push access.
+**Important:** The script uses a **location-based approach** to determine push access:
+
+| Location | no_push? | Why |
+|----------|----------|-----|
+| `~/.claude` (parent) | ❌ No | Root level = your repo |
+| `plugins/marketplaces/*` | ✅ Yes | Marketplace folder = external repos |
+| Custom directories | ❌ No | You added them = your repos |
+
+Custom project directories retain full push access because you configured them.
 
 ### Adding Your Own Project Directories
 

@@ -91,6 +91,34 @@ CUSTOM_PROJECT_DIRS=(
 
 Your custom directories are pulled but NOT set to no_push (full push access retained).
 
+## How no_push Works (Location-Based)
+
+The script uses **location** to determine which repos get `no_push` protection:
+
+| Location | no_push? | Why |
+|----------|----------|-----|
+| `~/.claude` (parent) | ❌ No | Root level = your repo |
+| `plugins/marketplaces/*` | ✅ Yes | Marketplace folder = external repos |
+| Custom directories | ❌ No | You added them = your repos |
+
+**Key points:**
+- `no_push` is ONLY applied to repos inside `plugins/marketplaces/`
+- The parent repo and custom directories retain full push capability
+- This is location-based, not ownership-based
+- If you want to push to a marketplace repo, fork it to your own custom directory
+
+**Verification:**
+```bash
+# Check any repo's push URL
+cd ~/.claude/plugins/marketplaces/get-shit-done
+git remote -v
+# Should show: origin no_push (push)
+
+cd "/e/Web Development/your-project"
+git remote -v
+# Should show: origin https://github.com/you/your-project.git (push)
+```
+
 ## Examples
 
 ### Pull everything
