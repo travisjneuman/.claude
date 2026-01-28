@@ -40,7 +40,16 @@ Before starting work, always sync all repositories:
 2. Pulls all marketplace submodules in `plugins/marketplaces/`
 3. Pulls custom project directories (if configured)
 4. Fixes detached HEAD state automatically
-5. Enforces `no_push` on marketplace submodules only (your repos retain full push access)
+5. Enforces `no_push` on marketplace submodules only
+
+**Location-based push access:**
+| Location | Push Access |
+|----------|-------------|
+| `~/.claude` (parent) | ✅ Enabled |
+| `plugins/marketplaces/*` | ❌ Blocked (no_push) |
+| Custom directories | ✅ Enabled |
+
+The script determines push access by **location**, not ownership. Your repos and custom directories retain full push capability.
 
 **Adding custom directories:** Edit `~/.claude/_pull-all-repos.sh` and uncomment/edit the `CUSTOM_PROJECT_DIRS` array at the top.
 
