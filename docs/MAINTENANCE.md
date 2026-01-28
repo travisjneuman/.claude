@@ -8,14 +8,41 @@ Ongoing maintenance procedures to keep your Claude Code configuration clean and 
 
 ## Regular Maintenance Schedule
 
-| Task                  | Frequency     | Impact                |
-| --------------------- | ------------- | --------------------- |
-| Clear debug logs      | Weekly        | Frees disk space      |
-| Clear shell snapshots | Weekly        | Frees disk space      |
-| Clear old todos       | Monthly       | Frees disk space      |
-| Update MCP backup     | After changes | Keeps backup current  |
-| Review permissions    | Monthly       | Security hygiene      |
-| Update skills         | As needed     | Keep patterns current |
+| Task                  | Frequency             | Impact                     |
+| --------------------- | --------------------- | -------------------------- |
+| **Pull all repos**    | **Before each session** | **Keeps all repos current** |
+| Clear debug logs      | Weekly                | Frees disk space           |
+| Clear shell snapshots | Weekly                | Frees disk space           |
+| Clear old todos       | Monthly               | Frees disk space           |
+| Update MCP backup     | After changes         | Keeps backup current       |
+| Review permissions    | Monthly               | Security hygiene           |
+| Update skills         | As needed             | Keep patterns current      |
+
+---
+
+## Pull All Repos (Do This First)
+
+Before starting work, always sync all repositories:
+
+```bash
+# Using slash command (in Claude Code)
+/pull-repos
+
+# Or run script directly
+~/.claude/_pull-all-repos.sh
+
+# Check status without pulling
+~/.claude/_pull-all-repos.sh --status
+```
+
+**What it does:**
+1. Pulls parent repo (`~/.claude` - travisjneuman/.claude)
+2. Pulls all marketplace submodules in `plugins/marketplaces/`
+3. Pulls custom project directories (if configured)
+4. Fixes detached HEAD state automatically
+5. Enforces `no_push` on marketplace submodules only (your repos retain full push access)
+
+**Adding custom directories:** Edit `~/.claude/_pull-all-repos.sh` and uncomment/edit the `CUSTOM_PROJECT_DIRS` array at the top.
 
 ---
 
