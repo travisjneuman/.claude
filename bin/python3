@@ -1,0 +1,3 @@
+#!/bin/bash
+# python3 shim for Windows - redirects to python
+python "$@"

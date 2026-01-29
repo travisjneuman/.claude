@@ -242,3 +242,4 @@ temp/
 
 # Database files
 *.db
+paste-cache/
