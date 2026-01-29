@@ -13,6 +13,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://claude.travisjneuman.com"),
   title: "Claude Code Supercharged | Skills, Agents & Marketplace",
   description:
     "A comprehensive Claude Code configuration with 72 local skills, 36 specialized agents, and 1,700+ marketplace skills across 50 repos. Supercharge your AI-assisted development.",
