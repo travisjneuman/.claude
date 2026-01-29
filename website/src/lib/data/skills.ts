@@ -115,7 +115,7 @@ export function getSkills(): Skill[] {
           name: data.name || entry.name.replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase()),
           description,
           category: categorize(entry.name),
-          content: content.slice(0, 500),
+          content: content.slice(0, 2000),
         });
       }
 

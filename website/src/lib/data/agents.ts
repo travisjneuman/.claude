@@ -9,6 +9,7 @@ export interface Agent {
   model: string;
   tools: string[];
   category: string;
+  content: string;
 }
 
 const AGENT_CATEGORIES: Record<string, string> = {
@@ -81,6 +82,7 @@ export function getAgents(): Agent[] {
       model: data.model || 'sonnet',
       tools: data.tools || [],
       category: categorizeAgent(slug),
+      content: content.slice(0, 2000),
     });
   }
 
@@ -107,5 +109,6 @@ export function getAgentBySlug(slug: string): Agent | null {
     model: data.model || 'sonnet',
     tools: data.tools || [],
     category: categorizeAgent(slug),
+    content,
   };
 }

@@ -7,6 +7,7 @@ interface GlowCardProps {
   badge?: string;
   badgeColor?: string;
   href?: string;
+  onClick?: () => void;
 }
 
 const categoryColors: Record<string, string> = {
@@ -29,11 +30,12 @@ export default function GlowCard({
   category,
   badge,
   badgeColor,
+  onClick,
 }: GlowCardProps) {
   const color = category ? categoryColors[category] || 'var(--accent-purple)' : 'var(--accent-purple)';
 
   return (
-    <div className="glow-card p-5 cursor-pointer group">
+    <div className="glow-card p-5 cursor-pointer group" onClick={onClick}>
       <div className="flex items-start justify-between mb-2">
         <h3
           className="font-semibold text-[var(--text-primary)] group-hover:text-white transition-colors"
