@@ -73,7 +73,7 @@ export default function AgentsGrid({ agents, categories }: AgentsGridProps) {
             <p className="text-sm text-[var(--text-secondary)] mb-4 leading-relaxed">
               {selected.description}
             </p>
-            {selected.tools.length > 0 && (
+            {Array.isArray(selected.tools) && selected.tools.length > 0 && (
               <div className="mb-6">
                 <h3 className="text-xs font-mono text-[var(--text-muted)] uppercase tracking-wider mb-2">Tools</h3>
                 <div className="flex flex-wrap gap-1.5">
