@@ -71,7 +71,7 @@ export default function Home() {
             className="gradient-text font-bold leading-tight mb-6 hero-fade-in hero-delay-1"
             style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)' }}
           >
-            Claude Code Supercharged
+            tjn.claude/
           </h1>
           <p className="text-lg text-[var(--text-primary)] max-w-2xl mx-auto mb-10 leading-relaxed hero-fade-in hero-delay-2" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.5)' }}>
             A comprehensive configuration framework with skills, agents, commands, and marketplace
