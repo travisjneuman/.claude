@@ -201,20 +201,30 @@ Use these **anytime** — never blocked by GSD or workflow stage:
 
 **69 local skills, 36 local agents** + **1,700+ marketplace skills across 49 repos**
 
+### Discovery Protocol (mandatory before specialized work)
+
+1. Check local skills first: `skills/MASTER_INDEX.md`
+2. Search marketplace: `find ~/.claude/plugins/marketplaces -name "SKILL.md" | xargs grep -li "<keyword>"`
+3. External discovery: `/discover-skills <query>` — skillsmp.com (35,530+ skills)
+
+### Top Marketplace Repos
+
+| Repo | Skills | Domain |
+|------|--------|--------|
+| davila7-templates | 651 | General templates |
+| claude-scientific-skills | 144 | Science (bio, chem, physics) |
+| wshobson-agents | 129 | Architecture patterns |
+| athola-night-market | 125 | General marketplace |
+| madappgang-claude-code | 110 | Full-stack dev |
+| worldbuilding-skills | 52 | Creative/narrative |
+| trailofbits-skills | 50 | Security auditing |
+| buildwithclaude | 43 | Full-stack + subagents |
+| secondsky-sap-skills | 33 | SAP/Enterprise |
+
 ### Local Skills
 
 - Full catalog: `skills/MASTER_INDEX.md`
 - Domain experts: `skills/EXPERT-SKILLS-GUIDE.md`
-
-### Marketplace Skills
-
-- Location: `plugins/marketplaces/`
-- Guide: `docs/MARKETPLACE-GUIDE.md`
-- Search: `find ~/.claude/plugins/marketplaces -name "SKILL.md" | xargs grep -l "<keyword>"`
-
-### External Discovery
-
-- `/discover-skills <query>` — Search skillsmp.com (35,530+ skills)
 
 ---
 
