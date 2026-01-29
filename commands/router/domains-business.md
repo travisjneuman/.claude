@@ -46,13 +46,14 @@ Load this file when business/strategy keywords detected.
 
 ## Marketplace Resources for Business
 
-| Domain | Marketplace Repos | Notes |
-|---|---|---|
-| Finance/Equity | `quant-equity-research` | Quantitative equity research |
-| Enterprise/SAP | `secondsky-sap-skills` (33) | SAP enterprise tools |
-| General business | `davila7-templates`, `madappgang-claude-code` | Templates and patterns |
+| Domain           | Marketplace Repos                             | Notes                        |
+| ---------------- | --------------------------------------------- | ---------------------------- |
+| Finance/Equity   | `quant-equity-research`                       | Quantitative equity research |
+| Enterprise/SAP   | `secondsky-sap-skills` (33)                   | SAP enterprise tools         |
+| General business | `davila7-templates`, `madappgang-claude-code` | Templates and patterns       |
 
 Search for business-specific marketplace skills:
+
 ```bash
 find ~/.claude/plugins/marketplaces -name "SKILL.md" | xargs grep -li "<business keyword>"
 ```

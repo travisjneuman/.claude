@@ -19,19 +19,20 @@ Load this file when scientific/research keywords detected.
 
 ## Resource Mapping
 
-| Domain         | Marketplace Repos                                          | Notes                                  |
-| -------------- | ---------------------------------------------------------- | -------------------------------------- |
-| All scientific | `claude-scientific-skills` (144)                           | Broad scientific coverage              |
-| life sciences  | `anthropic-life-sciences` (6)                              | Anthropic official life sciences       |
-| biology        | `gqy20-biology-plugins`, `claude-scientific-skills`        | Evolutionary biology, genomics         |
-| bioinformatics | `claude-scientific-skills`                                 | Sequence analysis, BLAST, genomics     |
-| chemistry      | `claude-scientific-skills`                                 | Molecular modeling, drug discovery     |
-| proteomics     | `claude-scientific-skills`                                 | Protein analysis, structure prediction |
-| clinical       | `claude-scientific-skills`                                 | Clinical trials, medical data          |
-| physics        | `claude-scientific-skills`                                 | Simulations, quantum computing         |
-| astronomy      | `claude-scientific-skills`                                 | Celestial data, telescope analysis     |
+| Domain         | Marketplace Repos                                   | Notes                                  |
+| -------------- | --------------------------------------------------- | -------------------------------------- |
+| All scientific | `claude-scientific-skills` (144)                    | Broad scientific coverage              |
+| life sciences  | `anthropic-life-sciences` (6)                       | Anthropic official life sciences       |
+| biology        | `gqy20-biology-plugins`, `claude-scientific-skills` | Evolutionary biology, genomics         |
+| bioinformatics | `claude-scientific-skills`                          | Sequence analysis, BLAST, genomics     |
+| chemistry      | `claude-scientific-skills`                          | Molecular modeling, drug discovery     |
+| proteomics     | `claude-scientific-skills`                          | Protein analysis, structure prediction |
+| clinical       | `claude-scientific-skills`                          | Clinical trials, medical data          |
+| physics        | `claude-scientific-skills`                          | Simulations, quantum computing         |
+| astronomy      | `claude-scientific-skills`                          | Celestial data, telescope analysis     |
 
 Search for specific scientific skills:
+
 ```bash
 find ~/.claude/plugins/marketplaces -name "SKILL.md" | xargs grep -li "<scientific keyword>"
 ```

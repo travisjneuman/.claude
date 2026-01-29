@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useEffect, useRef, useState } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useEffect, useRef, useState } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -15,9 +15,9 @@ interface StaggerRevealProps {
 
 export default function StaggerReveal({
   children,
-  className = '',
+  className = "",
   stagger = 0.08,
-  selector = ':scope > *',
+  selector = ":scope > *",
 }: StaggerRevealProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [ready, setReady] = useState(false);
@@ -41,11 +41,11 @@ export default function StaggerReveal({
       y: 0,
       duration: 0.6,
       stagger,
-      ease: 'power3.out',
+      ease: "power3.out",
       scrollTrigger: {
         trigger: el,
-        start: 'top 85%',
-        toggleActions: 'play none none none',
+        start: "top 85%",
+        toggleActions: "play none none none",
       },
     });
 
@@ -58,7 +58,11 @@ export default function StaggerReveal({
   }, [stagger, selector]);
 
   return (
-    <div ref={ref} className={className} style={ready ? undefined : { opacity: 1 }}>
+    <div
+      ref={ref}
+      className={className}
+      style={ready ? undefined : { opacity: 1 }}
+    >
       {children}
     </div>
   );

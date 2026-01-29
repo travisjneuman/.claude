@@ -73,7 +73,7 @@ body {
 }
 
 .glow-card::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: -1px;
   border-radius: 13px;
@@ -114,10 +114,18 @@ body {
   animation: heroFadeUp 0.8s ease-out both;
 }
 
-.hero-delay-1 { animation-delay: 0.15s; }
-.hero-delay-2 { animation-delay: 0.3s; }
-.hero-delay-3 { animation-delay: 0.45s; }
-.hero-delay-4 { animation-delay: 0.6s; }
+.hero-delay-1 {
+  animation-delay: 0.15s;
+}
+.hero-delay-2 {
+  animation-delay: 0.3s;
+}
+.hero-delay-3 {
+  animation-delay: 0.45s;
+}
+.hero-delay-4 {
+  animation-delay: 0.6s;
+}
 
 @keyframes heroFadeUp {
   from {
@@ -132,8 +140,12 @@ body {
 
 /* Modal animations */
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes modalIn {

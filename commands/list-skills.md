@@ -131,20 +131,20 @@ Display comprehensive categorized skill overview:
 
 ### Top Repos by Skill Count
 
-| Repo | Skills | Focus |
-|------|--------|-------|
-| davila7-templates | 651 | Templates and code patterns |
-| claude-scientific-skills | 144 | Scientific computing (bio, chem, physics) |
-| wshobson-agents | 129 | Progressive disclosure architecture |
-| athola-night-market | 125 | General-purpose skill marketplace |
-| madappgang-claude-code | 110 | Full-stack development |
-| worldbuilding-skills | 52 | Creative worldbuilding |
-| trailofbits-skills | 50 | Professional security auditing |
-| buildwithclaude | 43 | Full-stack + subagents + commands |
-| alirezarezvani-claude-skills | 42 | General development |
-| skillsforge | 34 | Curated quality skills |
-| secondsky-sap-skills | 33 | SAP and enterprise |
-| awesome-claude-skills | 32 | Documents, canvas, forensics |
+| Repo                         | Skills | Focus                                     |
+| ---------------------------- | ------ | ----------------------------------------- |
+| davila7-templates            | 651    | Templates and code patterns               |
+| claude-scientific-skills     | 144    | Scientific computing (bio, chem, physics) |
+| wshobson-agents              | 129    | Progressive disclosure architecture       |
+| athola-night-market          | 125    | General-purpose skill marketplace         |
+| madappgang-claude-code       | 110    | Full-stack development                    |
+| worldbuilding-skills         | 52     | Creative worldbuilding                    |
+| trailofbits-skills           | 50     | Professional security auditing            |
+| buildwithclaude              | 43     | Full-stack + subagents + commands         |
+| alirezarezvani-claude-skills | 42     | General development                       |
+| skillsforge                  | 34     | Curated quality skills                    |
+| secondsky-sap-skills         | 33     | SAP and enterprise                        |
+| awesome-claude-skills        | 32     | Documents, canvas, forensics              |
 
 ### Specialized Repos
 

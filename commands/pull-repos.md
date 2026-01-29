@@ -26,9 +26,9 @@ Pull the parent repo, marketplace submodules, and custom project directories wit
 
 ## Arguments
 
-| Argument | Default | Options |
-|----------|---------|---------|
-| `action` | `pull` | `pull`, `status` |
+| Argument | Default | Options          |
+| -------- | ------- | ---------------- |
+| `action` | `pull`  | `pull`, `status` |
 
 ## Actions
 
@@ -50,19 +50,19 @@ Check status without pulling:
 
 ## Platform Compatibility
 
-| Platform | Status | Notes |
-|----------|--------|-------|
-| Windows | ✅ | Requires Git Bash (included with Git for Windows) |
-| macOS | ✅ | Works with bash/zsh |
-| Linux | ✅ | Works with bash (including Arch) |
+| Platform | Status | Notes                                             |
+| -------- | ------ | ------------------------------------------------- |
+| Windows  | ✅     | Requires Git Bash (included with Git for Windows) |
+| macOS    | ✅     | Works with bash/zsh                               |
+| Linux    | ✅     | Works with bash (including Arch)                  |
 
 ## What Gets Pulled
 
-| # | Repository | Type | Push Access |
-|:-:|:-----------|:-----|:------------|
-| 1 | `.claude` (travisjneuman/.claude) | Parent | ✅ Push enabled |
-| 2-50 | `plugins/marketplaces/*` | Submodules | ❌ no_push enforced |
-| 51+ | Custom project directories | Your repos | ✅ Push enabled |
+|  #   | Repository                        | Type       | Push Access         |
+| :--: | :-------------------------------- | :--------- | :------------------ |
+|  1   | `.claude` (travisjneuman/.claude) | Parent     | ✅ Push enabled     |
+| 2-50 | `plugins/marketplaces/*`          | Submodules | ❌ no_push enforced |
+| 51+  | Custom project directories        | Your repos | ✅ Push enabled     |
 
 ## Features
 
@@ -86,6 +86,7 @@ CUSTOM_PROJECT_DIRS=(
 ```
 
 **Windows paths in Git Bash:**
+
 - `E:\Web Development` → `/e/Web Development`
 - `C:\Users\you\projects` → `/c/Users/you/projects`
 
@@ -95,19 +96,21 @@ Your custom directories are pulled but NOT set to no_push (full push access reta
 
 The script uses **location** to determine which repos get `no_push` protection:
 
-| Location | no_push? | Why |
-|----------|----------|-----|
-| `~/.claude` (parent) | ❌ No | Root level = your repo |
-| `plugins/marketplaces/*` | ✅ Yes | Marketplace folder = external repos |
-| Custom directories | ❌ No | You added them = your repos |
+| Location                 | no_push? | Why                                 |
+| ------------------------ | -------- | ----------------------------------- |
+| `~/.claude` (parent)     | ❌ No    | Root level = your repo              |
+| `plugins/marketplaces/*` | ✅ Yes   | Marketplace folder = external repos |
+| Custom directories       | ❌ No    | You added them = your repos         |
 
 **Key points:**
+
 - `no_push` is ONLY applied to repos inside `plugins/marketplaces/`
 - The parent repo and custom directories retain full push capability
 - This is location-based, not ownership-based
 - If you want to push to a marketplace repo, fork it to your own custom directory
 
 **Verification:**
+
 ```bash
 # Check any repo's push URL
 cd ~/.claude/plugins/marketplaces/get-shit-done
@@ -122,11 +125,13 @@ git remote -v
 ## Examples
 
 ### Pull everything
+
 ```
 /pull-repos
 ```
 
 ### Check status first
+
 ```
 /pull-repos status
 ```
@@ -168,4 +173,4 @@ Enforcing no_push on submodules:
 
 ---
 
-*One command to sync everything.*
+_One command to sync everything._

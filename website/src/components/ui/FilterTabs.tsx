@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 
 interface FilterTabsProps {
   categories: string[];
@@ -19,8 +19,8 @@ export default function FilterTabs({ categories, onFilter }: FilterTabsProps) {
         }}
         className={`px-4 py-1.5 rounded-full text-sm font-mono transition-all ${
           active === null
-            ? 'bg-[var(--accent-purple)] text-white'
-            : 'text-[var(--text-muted)] hover:text-[var(--text-primary)] border border-[var(--border)]'
+            ? "bg-[var(--accent-purple)] text-white"
+            : "text-[var(--text-muted)] hover:text-[var(--text-primary)] border border-[var(--border)]"
         }`}
       >
         All
@@ -34,8 +34,8 @@ export default function FilterTabs({ categories, onFilter }: FilterTabsProps) {
           }}
           className={`px-4 py-1.5 rounded-full text-sm font-mono transition-all ${
             active === cat
-              ? 'bg-[var(--accent-purple)] text-white'
-              : 'text-[var(--text-muted)] hover:text-[var(--text-primary)] border border-[var(--border)]'
+              ? "bg-[var(--accent-purple)] text-white"
+              : "text-[var(--text-muted)] hover:text-[var(--text-primary)] border border-[var(--border)]"
           }`}
         >
           {cat}

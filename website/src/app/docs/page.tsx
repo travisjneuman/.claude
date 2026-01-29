@@ -1,11 +1,12 @@
-import Navigation from '@/components/layout/Navigation';
-import Footer from '@/components/layout/Footer';
-import DocsList from './DocsList';
-import { getDocs } from '@/lib/data/docs';
+import Navigation from "@/components/layout/Navigation";
+import Footer from "@/components/layout/Footer";
+import DocsList from "./DocsList";
+import { getDocs } from "@/lib/data/docs";
 
 export const metadata = {
-  title: 'Documentation | Claude Code Supercharged',
-  description: 'Browse all documentation for the Claude Code configuration framework.',
+  title: "Documentation | Claude Code Supercharged",
+  description:
+    "Browse all documentation for the Claude Code configuration framework.",
 };
 
 export default function DocsPage() {
@@ -24,7 +25,8 @@ export default function DocsPage() {
               {docs.length} Guides &amp; References
             </h1>
             <p className="text-[var(--text-secondary)] max-w-xl mx-auto">
-              Setup guides, workflow documentation, architecture references, and operational playbooks.
+              Setup guides, workflow documentation, architecture references, and
+              operational playbooks.
             </p>
           </div>
 
@@ -32,7 +34,8 @@ export default function DocsPage() {
 
           {docs.length === 0 && (
             <p className="text-center text-[var(--text-muted)] mt-12">
-              Documentation data is generated at build time from the docs/ directory.
+              Documentation data is generated at build time from the docs/
+              directory.
             </p>
           )}
         </div>

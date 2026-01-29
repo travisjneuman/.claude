@@ -1,20 +1,28 @@
-import Link from 'next/link';
+import Link from "next/link";
 
 const footerLinks = {
   Explore: [
-    { href: '/skills', label: 'Skills Library' },
-    { href: '/agents', label: 'Agent Directory' },
-    { href: '/commands', label: 'Commands' },
-    { href: '/marketplaces', label: 'Marketplace' },
+    { href: "/skills", label: "Skills Library" },
+    { href: "/agents", label: "Agent Directory" },
+    { href: "/commands", label: "Commands" },
+    { href: "/marketplaces", label: "Marketplace" },
   ],
   Documentation: [
-    { href: '/docs', label: 'Setup Guide' },
-    { href: '/docs', label: 'Workflow' },
-    { href: '/docs', label: 'Maintenance' },
+    { href: "/docs", label: "Setup Guide" },
+    { href: "/docs", label: "Workflow" },
+    { href: "/docs", label: "Maintenance" },
   ],
   Community: [
-    { href: 'https://github.com/travisjneuman/.claude', label: 'GitHub', external: true },
-    { href: 'https://github.com/travisjneuman/.claude/issues', label: 'Issues', external: true },
+    {
+      href: "https://github.com/travisjneuman/.claude",
+      label: "GitHub",
+      external: true,
+    },
+    {
+      href: "https://github.com/travisjneuman/.claude/issues",
+      label: "Issues",
+      external: true,
+    },
   ],
 };
 
@@ -26,7 +34,8 @@ export default function Footer() {
           <div className="col-span-2 md:col-span-1">
             <span className="text-lg font-bold gradient-text">Claude Code</span>
             <p className="mt-2 text-sm text-[var(--text-muted)]">
-              Supercharge your Claude Code with 72 skills, 36 agents, and 1,700+ marketplace skills across 50 repos.
+              Supercharge your Claude Code with 72 skills, 36 agents, and 1,700+
+              marketplace skills across 50 repos.
             </p>
           </div>
           {Object.entries(footerLinks).map(([category, links]) => (
@@ -37,7 +46,7 @@ export default function Footer() {
               <ul className="space-y-2">
                 {links.map((link) => (
                   <li key={link.href}>
-                    {'external' in link ? (
+                    {"external" in link ? (
                       <a
                         href={link.href}
                         target="_blank"
@@ -61,7 +70,7 @@ export default function Footer() {
           ))}
         </div>
         <div className="mt-12 pt-6 border-t border-[var(--border)] text-center text-sm text-[var(--text-muted)]">
-          Built by{' '}
+          Built by{" "}
           <a
             href="https://travisjneuman.com"
             target="_blank"

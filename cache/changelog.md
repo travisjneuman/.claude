@@ -1,5 +1,158 @@
 # Changelog
 
+## 2.1.23
+
+- Added customizable spinner verbs setting (`spinnerVerbs`)
+- Fixed mTLS and proxy connectivity for users behind corporate proxies or using client certificates
+- Fixed per-user temp directory isolation to prevent permission conflicts on shared systems
+- Fixed a race condition that could cause 400 errors when prompt caching scope was enabled
+- Fixed pending async hooks not being cancelled when headless streaming sessions ended
+- Fixed tab completion not updating the input field when accepting a suggestion
+- Fixed ripgrep search timeouts silently returning empty results instead of reporting errors
+- Improved terminal rendering performance with optimized screen data layout
+- Changed Bash commands to show timeout duration alongside elapsed time
+- Changed merged pull requests to show a purple status indicator in the prompt footer
+- [IDE] Fixed model options displaying incorrect region strings for Bedrock users in headless mode
+
+## 2.1.22
+
+- Fixed structured outputs for non-interactive (-p) mode
+
+## 2.1.21
+
+- Added support for full-width (zenkaku) number input from Japanese IME in option selection prompts
+- Fixed shell completion cache files being truncated on exit
+- Fixed API errors when resuming sessions that were interrupted during tool execution
+- Fixed auto-compact triggering too early on models with large output token limits
+- Fixed task IDs potentially being reused after deletion
+- Fixed file search not working in VS Code extension on Windows
+- Improved read/search progress indicators to show "Reading…" while in progress and "Read" when complete
+- Improved Claude to prefer file operation tools (Read, Edit, Write) over bash equivalents (cat, sed, awk)
+- [VSCode] Added automatic Python virtual environment activation, ensuring `python` and `pip` commands use the correct interpreter (configurable via `claudeCode.usePythonEnvironment` setting)
+- [VSCode] Fixed message action buttons having incorrect background colors
+
+## 2.1.20
+
+- Added arrow key history navigation in vim normal mode when cursor cannot move further
+- Added external editor shortcut (Ctrl+G) to the help menu for better discoverability
+- Added PR review status indicator to the prompt footer, showing the current branch's PR state (approved, changes requested, pending, or draft) as a colored dot with a clickable link
+- Added support for loading `CLAUDE.md` files from additional directories specified via `--add-dir` flag (requires setting `CLAUDE_CODE_ADDITIONAL_DIRECTORIES_CLAUDE_MD=1`)
+- Added ability to delete tasks via the `TaskUpdate` tool
+- Fixed session compaction issues that could cause resume to load full history instead of the compact summary
+- Fixed agents sometimes ignoring user messages sent while actively working on a task
+- Fixed wide character (emoji, CJK) rendering artifacts where trailing columns were not cleared when replaced by narrower characters
+- Fixed JSON parsing errors when MCP tool responses contain special Unicode characters
+- Fixed up/down arrow keys in multi-line and wrapped text input to prioritize cursor movement over history navigation
+- Fixed draft prompt being lost when pressing UP arrow to navigate command history
+- Fixed ghost text flickering when typing slash commands mid-input
+- Fixed marketplace source removal not properly deleting settings
+- Fixed duplicate output in some commands like `/context`
+- Fixed task list sometimes showing outside the main conversation view
+- Fixed syntax highlighting for diffs occurring within multiline constructs like Python docstrings
+- Fixed crashes when cancelling tool use
+- Improved `/sandbox` command UI to show dependency status with installation instructions when dependencies are missing
+- Improved thinking status text with a subtle shimmer animation
+- Improved task list to dynamically adjust visible items based on terminal height
+- Improved fork conversation hint to show how to resume the original session
+- Changed collapsed read/search groups to show present tense ("Reading", "Searching for") while in progress, and past tense ("Read", "Searched for") when complete
+- Changed `ToolSearch` results to appear as a brief notification instead of inline in the conversation
+- Changed the `/commit-push-pr` skill to automatically post PR URLs to Slack channels when configured via MCP tools
+- Changed the `/copy` command to be available to all users
+- Changed background agents to prompt for tool permissions before launching
+- Changed permission rules like `Bash(*)` to be accepted and treated as equivalent to `Bash`
+- Changed config backups to be timestamped and rotated (keeping 5 most recent) to prevent data loss
+
+## 2.1.19
+
+- Added env var `CLAUDE_CODE_ENABLE_TASKS`, set to `false` to keep the old system temporarily
+- Added shorthand `$0`, `$1`, etc. for accessing individual arguments in custom commands
+- Fixed crashes on processors without AVX instruction support
+- Fixed dangling Claude Code processes when terminal is closed by catching EIO errors from `process.exit()` and using SIGKILL as fallback
+- Fixed `/rename` and `/tag` not updating the correct session when resuming from a different directory (e.g., git worktrees)
+- Fixed resuming sessions by custom title not working when run from a different directory
+- Fixed pasted text content being lost when using prompt stash (Ctrl+S) and restore
+- Fixed agent list displaying "Sonnet (default)" instead of "Inherit (default)" for agents without an explicit model setting
+- Fixed backgrounded hook commands not returning early, potentially causing the session to wait on a process that was intentionally backgrounded
+- Fixed file write preview omitting empty lines
+- Changed skills without additional permissions or hooks to be allowed without requiring approval
+- Changed indexed argument syntax from `$ARGUMENTS.0` to `$ARGUMENTS[0]` (bracket syntax)
+- [SDK] Added replay of `queued_command` attachment messages as `SDKUserMessageReplay` events when `replayUserMessages` is enabled
+- [VSCode] Enabled session forking and rewind functionality for all users
+
+## 2.1.18
+
+- Added customizable keyboard shortcuts. Configure keybindings per context, create chord sequences, and personalize your workflow. Run `/keybindings` to get started. Learn more at https://code.claude.com/docs/en/keybindings
+
+## 2.1.17
+
+- Fixed crashes on processors without AVX instruction support
+
+## 2.1.16
+
+- Added new task management system, including new capabilities like dependency tracking
+- [VSCode] Added native plugin management support
+- [VSCode] Added ability for OAuth users to browse and resume remote Claude sessions from the Sessions dialog
+- Fixed out-of-memory crashes when resuming sessions with heavy subagent usage
+- Fixed an issue where the "context remaining" warning was not hidden after running `/compact`
+- Fixed session titles on the resume screen not respecting the user's language setting
+- [IDE] Fixed a race condition on Windows where the Claude Code sidebar view container would not appear on start
+
+## 2.1.15
+
+- Added deprecation notification for npm installations - run `claude install` or see https://docs.anthropic.com/en/docs/claude-code/getting-started for more options
+- Improved UI rendering performance with React Compiler
+- Fixed the "Context left until auto-compact" warning not disappearing after running `/compact`
+- Fixed MCP stdio server timeout not killing child process, which could cause UI freezes
+
+## 2.1.14
+
+- Added history-based autocomplete in bash mode (`!`) - type a partial command and press Tab to complete from your bash command history
+- Added search to installed plugins list - type to filter by name or description
+- Added support for pinning plugins to specific git commit SHAs, allowing marketplace entries to install exact versions
+- Fixed a regression where the context window blocking limit was calculated too aggressively, blocking users at ~65% context usage instead of the intended ~98%
+- Fixed memory issues that could cause crashes when running parallel subagents
+- Fixed memory leak in long-running sessions where stream resources were not cleaned up after shell commands completed
+- Fixed `@` symbol incorrectly triggering file autocomplete suggestions in bash mode
+- Fixed `@`-mention menu folder click behavior to navigate into directories instead of selecting them
+- Fixed `/feedback` command generating invalid GitHub issue URLs when description is very long
+- Fixed `/context` command to show the same token count and percentage as the status line in verbose mode
+- Fixed an issue where `/config`, `/context`, `/model`, and `/todos` command overlays could close unexpectedly
+- Fixed slash command autocomplete selecting wrong command when typing similar commands (e.g., `/context` vs `/compact`)
+- Fixed inconsistent back navigation in plugin marketplace when only one marketplace is configured
+- Fixed iTerm2 progress bar not clearing properly on exit, preventing lingering indicators and bell sounds
+- Improved backspace to delete pasted text as a single token instead of one character at a time
+- [VSCode] Added `/usage` command to display current plan usage
+
+## 2.1.12
+
+- Fixed message rendering bug
+
+## 2.1.11
+
+- Fixed excessive MCP connection requests for HTTP/SSE transports
+
+## 2.1.10
+
+- Added new `Setup` hook event that can be triggered via `--init`, `--init-only`, or `--maintenance` CLI flags for repository setup and maintenance operations
+- Added keyboard shortcut 'c' to copy OAuth URL when browser doesn't open automatically during login
+- Fixed a crash when running bash commands containing heredocs with JavaScript template literals like `${index + 1}`
+- Improved startup to capture keystrokes typed before the REPL is fully ready
+- Improved file suggestions to show as removable attachments instead of inserting text when accepted
+- [VSCode] Added install count display to plugin listings
+- [VSCode] Added trust warning when installing plugins
+
+## 2.1.9
+
+- Added `auto:N` syntax for configuring the MCP tool search auto-enable threshold, where N is the context window percentage (0-100)
+- Added `plansDirectory` setting to customize where plan files are stored
+- Added external editor support (Ctrl+G) in AskUserQuestion "Other" input field
+- Added session URL attribution to commits and PRs created from web sessions
+- Added support for `PreToolUse` hooks to return `additionalContext` to the model
+- Added `${CLAUDE_SESSION_ID}` string substitution for skills to access the current session ID
+- Fixed long sessions with parallel tool calls failing with an API error about orphan tool_result blocks
+- Fixed MCP server reconnection hanging when cached connection promise never resolves
+- Fixed Ctrl+Z suspend not working in terminals using Kitty keyboard protocol (Ghostty, iTerm2, kitty, WezTerm)
+
 ## 2.1.7
 
 - Added `showTurnDuration` setting to hide turn duration messages (e.g., "Cooked for 1m 6s")
@@ -252,7 +405,7 @@
 - Added loading indicator when resuming conversations for better feedback
 - Fixed `/context` command not respecting custom system prompts in non-interactive mode
 - Fixed order of consecutive Ctrl+K lines when pasting with Ctrl+Y
-- Improved @ mention file suggestion speed (~3x faster in git repositories)
+- Improved @ mention file suggestion speed (~3× faster in git repositories)
 - Improved file suggestion performance in repos with `.ignore` or `.rgignore` files
 - Improved settings validation errors to be more prominent
 - Changed thinking toggle from Tab to Alt+T to avoid accidental triggers
@@ -324,7 +477,7 @@
 - Agents and bash commands can run asynchronously and send messages to wake up the main agent
 - /stats now provides users with interesting CC stats, such as favorite model, usage graph, usage streak
 - Added named session support: use `/rename` to name sessions, `/resume <name>` in REPL or `claude --resume <name>` from the terminal to resume them
-- Added support for .claude/rules/`.  See https://code.claude.com/docs/en/memory for details.
+- Added support for .claude/rules/`. See https://code.claude.com/docs/en/memory for details.
 - Added image dimension metadata when images are resized, enabling accurate coordinate mappings for large images
 - Fixed auto-loading .env when using native installer
 - Fixed `--system-prompt` being ignored when using `--continue` or `--resume` flags

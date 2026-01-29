@@ -1,46 +1,46 @@
-'use client';
+"use client";
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from "react";
 
 const DEMO_SEQUENCES = [
   {
-    command: '/list-skills development',
+    command: "/list-skills development",
     output: [
-      '⚡ Found 25 development skills:',
-      '',
-      '  debug-systematic          4-phase debugging methodology',
-      '  tdd-workflow              Test-Driven Development',
-      '  generic-code-reviewer     Multi-stack code review',
-      '  generic-react-*           React/TypeScript patterns',
-      '  api-design                REST/GraphQL best practices',
-      '  tech-debt-analyzer        Code health analysis',
-      '  codebase-documenter       Documentation generation',
-      '  ...',
+      "⚡ Found 25 development skills:",
+      "",
+      "  debug-systematic          4-phase debugging methodology",
+      "  tdd-workflow              Test-Driven Development",
+      "  generic-code-reviewer     Multi-stack code review",
+      "  generic-react-*           React/TypeScript patterns",
+      "  api-design                REST/GraphQL best practices",
+      "  tech-debt-analyzer        Code health analysis",
+      "  codebase-documenter       Documentation generation",
+      "  ...",
     ],
   },
   {
-    command: 'Skill(debug-systematic)',
+    command: "Skill(debug-systematic)",
     output: [
-      '🔧 Loading debug-systematic skill...',
-      '',
-      '  Phase 1: REPRODUCE the issue',
-      '  Phase 2: ISOLATE the root cause',
-      '  Phase 3: DIAGNOSE the failure',
-      '  Phase 4: FIX and verify',
-      '',
-      '✅ Skill loaded. Ready to debug.',
+      "🔧 Loading debug-systematic skill...",
+      "",
+      "  Phase 1: REPRODUCE the issue",
+      "  Phase 2: ISOLATE the root cause",
+      "  Phase 3: DIAGNOSE the failure",
+      "  Phase 4: FIX and verify",
+      "",
+      "✅ Skill loaded. Ready to debug.",
     ],
   },
   {
     command: '/start-task "Build real-time dashboard"',
     output: [
-      '📋 Routing to appropriate workflow...',
-      '',
-      '  Domain:    Development',
-      '  Skills:    websockets-realtime, generic-react-*',
-      '  Agents:    react-expert, realtime-specialist',
-      '',
-      '🚀 Task initialized. Ready to build.',
+      "📋 Routing to appropriate workflow...",
+      "",
+      "  Domain:    Development",
+      "  Skills:    websockets-realtime, generic-react-*",
+      "  Agents:    react-expert, realtime-specialist",
+      "",
+      "🚀 Task initialized. Ready to build.",
     ],
   },
 ];
@@ -49,42 +49,46 @@ export default function TerminalDemo() {
   const [seqIndex, setSeqIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
   const [outputLines, setOutputLines] = useState<string[]>([]);
-  const [phase, setPhase] = useState<'typing' | 'output' | 'pause'>('typing');
+  const [phase, setPhase] = useState<"typing" | "output" | "pause">("typing");
   const termRef = useRef<HTMLDivElement>(null);
 
   const seq = DEMO_SEQUENCES[seqIndex];
 
   useEffect(() => {
-    if (phase === 'typing') {
+    if (phase === "typing") {
       if (charIndex < seq.command.length) {
-        const timer = setTimeout(() => setCharIndex(charIndex + 1), 40 + Math.random() * 30);
-        return () => clearTimeout(timer);
-      } else {
-        const timer = setTimeout(() => setPhase('output'), 400);
-        return () => clearTimeout(timer);
-      }
-    }
-
-    if (phase === 'output') {
-      if (outputLines.length < seq.output.length) {
         const timer = setTimeout(
-          () => setOutputLines([...outputLines, seq.output[outputLines.length]]),
-          80
+          () => setCharIndex(charIndex + 1),
+          40 + Math.random() * 30,
         );
         return () => clearTimeout(timer);
       } else {
-        const timer = setTimeout(() => setPhase('pause'), 2500);
+        const timer = setTimeout(() => setPhase("output"), 400);
         return () => clearTimeout(timer);
       }
     }
 
-    if (phase === 'pause') {
+    if (phase === "output") {
+      if (outputLines.length < seq.output.length) {
+        const timer = setTimeout(
+          () =>
+            setOutputLines([...outputLines, seq.output[outputLines.length]]),
+          80,
+        );
+        return () => clearTimeout(timer);
+      } else {
+        const timer = setTimeout(() => setPhase("pause"), 2500);
+        return () => clearTimeout(timer);
+      }
+    }
+
+    if (phase === "pause") {
       const next = (seqIndex + 1) % DEMO_SEQUENCES.length;
       const timer = setTimeout(() => {
         setSeqIndex(next);
         setCharIndex(0);
         setOutputLines([]);
-        setPhase('typing');
+        setPhase("typing");
       }, 500);
       return () => clearTimeout(timer);
     }
@@ -114,7 +118,7 @@ export default function TerminalDemo() {
             <span className="text-[var(--accent-green)]">❯</span>
             <span className="text-[var(--text-primary)]">
               claude {seq.command.slice(0, charIndex)}
-              {phase === 'typing' && (
+              {phase === "typing" && (
                 <span className="inline-block w-2 h-4 bg-[var(--accent-purple)] animate-pulse ml-0.5 align-middle" />
               )}
             </span>
@@ -140,12 +144,12 @@ export default function TerminalDemo() {
               setSeqIndex(i);
               setCharIndex(0);
               setOutputLines([]);
-              setPhase('typing');
+              setPhase("typing");
             }}
             className={`w-2 h-2 rounded-full transition-all ${
               i === seqIndex
-                ? 'bg-[var(--accent-purple)] w-6'
-                : 'bg-[var(--border)] hover:bg-[var(--text-muted)]'
+                ? "bg-[var(--accent-purple)] w-6"
+                : "bg-[var(--border)] hover:bg-[var(--text-muted)]"
             }`}
           />
         ))}
