@@ -8,9 +8,9 @@ const footerLinks = {
     { href: '/marketplaces', label: 'Marketplace' },
   ],
   Documentation: [
-    { href: '/docs/setup-guide', label: 'Setup Guide' },
-    { href: '/docs/workflow-guide', label: 'Workflow' },
-    { href: '/docs/maintenance', label: 'Maintenance' },
+    { href: '/docs', label: 'Setup Guide' },
+    { href: '/docs', label: 'Workflow' },
+    { href: '/docs', label: 'Maintenance' },
   ],
   Community: [
     { href: 'https://github.com/travisjneuman/.claude', label: 'GitHub', external: true },
@@ -63,7 +63,7 @@ export default function Footer() {
         <div className="mt-12 pt-6 border-t border-[var(--border)] text-center text-sm text-[var(--text-muted)]">
           Built by{' '}
           <a
-            href="https://github.com/travisjneuman"
+            href="https://travisjneuman.com"
             target="_blank"
             rel="noopener noreferrer"
             className="text-[var(--accent-purple)] hover:underline"

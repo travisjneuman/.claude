@@ -49,7 +49,7 @@ export default function Navigation() {
             </Link>
           ))}
           <a
-            href="https://github.com/travisjneuman/.claude"
+            href="https://github.com/travisjneuman"
             target="_blank"
             rel="noopener noreferrer"
             className="ml-2 px-4 py-2 text-sm font-medium rounded-lg border border-[var(--border)] hover:border-[var(--accent-purple)] hover:text-[var(--accent-purple)] transition-all"
