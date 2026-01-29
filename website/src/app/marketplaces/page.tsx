@@ -1,11 +1,11 @@
-import Navigation from '@/components/layout/Navigation';
-import Footer from '@/components/layout/Footer';
-import MarketplaceGrid from './MarketplaceGrid';
-import { getMarketplaceStats } from '@/lib/data/marketplace';
+import Navigation from "@/components/layout/Navigation";
+import Footer from "@/components/layout/Footer";
+import MarketplaceGrid from "./MarketplaceGrid";
+import { getMarketplaceStats } from "@/lib/data/marketplace";
 
 export const metadata = {
-  title: 'Marketplace | Claude Code Supercharged',
-  description: 'Browse marketplace repositories and community skills.',
+  title: "Marketplace | Claude Code Supercharged",
+  description: "Browse marketplace repositories and community skills.",
 };
 
 export default function MarketplacesPage() {
@@ -24,7 +24,8 @@ export default function MarketplacesPage() {
               {totalSkills.toLocaleString()}+ Skills
             </h1>
             <p className="text-[var(--text-secondary)] max-w-xl mx-auto">
-              Curated from {repos.length} open-source repositories maintained by the community.
+              Curated from {repos.length} open-source repositories maintained by
+              the community.
             </p>
           </div>
 
@@ -33,7 +34,8 @@ export default function MarketplacesPage() {
           {repos.length === 0 && (
             <div className="text-center py-16">
               <p className="text-[var(--text-muted)]">
-                Marketplace data is generated at build time from the plugins/marketplaces/ directory.
+                Marketplace data is generated at build time from the
+                plugins/marketplaces/ directory.
               </p>
             </div>
           )}
