@@ -83,7 +83,7 @@ bash ~/.claude/scripts/init-marketplaces.sh
 
 This script:
 
-- Clones all 49 marketplace repos from their original upstreams
+- Clones all 50 marketplace repos from their original upstreams
 - Sets `no_push` on each to prevent accidental modifications
 - Ensures main repo can push to your GitHub
 

@@ -134,7 +134,7 @@ Navigate all 72 local skills + 1,700+ marketplace skills from this central hub.
 
 ## Marketplace Skills (1,700+)
 
-49 marketplace repos provide additional specialized skills:
+50 marketplace repos provide additional specialized skills:
 
 | Marketplace                       | Skills  | Specialty                                      |
 | --------------------------------- | ------- | ---------------------------------------------- |
