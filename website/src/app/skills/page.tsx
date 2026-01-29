@@ -1,11 +1,12 @@
-import Navigation from '@/components/layout/Navigation';
-import Footer from '@/components/layout/Footer';
-import SkillsGrid from './SkillsGrid';
-import { getSkills } from '@/lib/data/skills';
+import Navigation from "@/components/layout/Navigation";
+import Footer from "@/components/layout/Footer";
+import SkillsGrid from "./SkillsGrid";
+import { getSkills } from "@/lib/data/skills";
 
 export const metadata = {
-  title: 'Skills | Claude Code Supercharged',
-  description: 'Browse all expert skills available in the Claude Code configuration framework.',
+  title: "Skills | Claude Code Supercharged",
+  description:
+    "Browse all expert skills available in the Claude Code configuration framework.",
 };
 
 export default function SkillsPage() {
@@ -25,8 +26,8 @@ export default function SkillsPage() {
               {skills.length} Expert Skills
             </h1>
             <p className="text-[var(--text-secondary)] max-w-xl mx-auto">
-              Domain-specific knowledge modules that load on demand to guide Claude through
-              specialized workflows.
+              Domain-specific knowledge modules that load on demand to guide
+              Claude through specialized workflows.
             </p>
           </div>
 

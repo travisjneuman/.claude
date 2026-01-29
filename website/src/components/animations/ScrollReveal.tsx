@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -10,14 +10,14 @@ interface ScrollRevealProps {
   children: React.ReactNode;
   className?: string;
   delay?: number;
-  direction?: 'up' | 'down' | 'left' | 'right';
+  direction?: "up" | "down" | "left" | "right";
 }
 
 export default function ScrollReveal({
   children,
-  className = '',
+  className = "",
   delay = 0,
-  direction = 'up',
+  direction = "up",
 }: ScrollRevealProps) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -27,16 +27,16 @@ export default function ScrollReveal({
 
     const fromVars: Record<string, number> = {};
     switch (direction) {
-      case 'up':
+      case "up":
         fromVars.y = 40;
         break;
-      case 'down':
+      case "down":
         fromVars.y = -40;
         break;
-      case 'left':
+      case "left":
         fromVars.x = 40;
         break;
-      case 'right':
+      case "right":
         fromVars.x = -40;
         break;
     }
@@ -49,11 +49,11 @@ export default function ScrollReveal({
       y: 0,
       duration: 0.8,
       delay,
-      ease: 'power3.out',
+      ease: "power3.out",
       scrollTrigger: {
         trigger: el,
-        start: 'top 85%',
-        toggleActions: 'play none none none',
+        start: "top 85%",
+        toggleActions: "play none none none",
       },
     });
 

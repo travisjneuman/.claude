@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import FilterTabs from '@/components/ui/FilterTabs';
-import GlowCard from '@/components/ui/GlowCard';
-import Modal from '@/components/ui/Modal';
+import { useState } from "react";
+import FilterTabs from "@/components/ui/FilterTabs";
+import GlowCard from "@/components/ui/GlowCard";
+import Modal from "@/components/ui/Modal";
 
 interface AgentItem {
   slug: string;
@@ -24,14 +24,16 @@ export default function AgentsGrid({ agents, categories }: AgentsGridProps) {
   const [filter, setFilter] = useState<string | null>(null);
   const [selected, setSelected] = useState<AgentItem | null>(null);
 
-  const filtered = filter ? agents.filter((a) => a.category === filter) : agents;
+  const filtered = filter
+    ? agents.filter((a) => a.category === filter)
+    : agents;
 
   const modelColor = (model: string) =>
-    model === 'opus'
-      ? 'var(--accent-yellow)'
-      : model === 'sonnet'
-        ? 'var(--accent-purple)'
-        : 'var(--accent-blue)';
+    model === "opus"
+      ? "var(--accent-yellow)"
+      : model === "sonnet"
+        ? "var(--accent-purple)"
+        : "var(--accent-blue)";
 
   return (
     <>
@@ -52,14 +54,18 @@ export default function AgentsGrid({ agents, categories }: AgentsGridProps) {
         ))}
       </div>
       {filtered.length === 0 && (
-        <p className="text-center text-[var(--text-muted)] mt-12">No agents found.</p>
+        <p className="text-center text-[var(--text-muted)] mt-12">
+          No agents found.
+        </p>
       )}
 
       <Modal open={!!selected} onClose={() => setSelected(null)}>
         {selected && (
           <>
             <div className="flex items-center gap-3 mb-4">
-              <h2 className="text-xl font-bold text-[var(--text-primary)]">{selected.name}</h2>
+              <h2 className="text-xl font-bold text-[var(--text-primary)]">
+                {selected.name}
+              </h2>
               <span
                 className="text-[10px] font-mono px-2 py-0.5 rounded-full border"
                 style={{
@@ -75,7 +81,9 @@ export default function AgentsGrid({ agents, categories }: AgentsGridProps) {
             </p>
             {Array.isArray(selected.tools) && selected.tools.length > 0 && (
               <div className="mb-6">
-                <h3 className="text-xs font-mono text-[var(--text-muted)] uppercase tracking-wider mb-2">Tools</h3>
+                <h3 className="text-xs font-mono text-[var(--text-muted)] uppercase tracking-wider mb-2">
+                  Tools
+                </h3>
                 <div className="flex flex-wrap gap-1.5">
                   {selected.tools.map((tool) => (
                     <span

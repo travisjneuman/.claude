@@ -156,13 +156,13 @@ The **Ultimate Claude Code Toolkit** transforms [Claude Code](https://docs.anthr
 
 **Showcase Website & Polish:** Live website at [claude.travisjneuman.com](https://claude.travisjneuman.com) plus documentation and tooling improvements.
 
-| Feature                        | Description                                                                     | Details                                                          |
-| :----------------------------- | :------------------------------------------------------------------------------ | :--------------------------------------------------------------- |
-| 🌐 **Showcase Website**        | Next.js site with 3D hero, interactive modals, and curated featured content     | Deployed on Cloudflare Pages at `claude.travisjneuman.com`       |
-| 📦 **Pull All Repos Script**   | Cross-platform script to sync parent, marketplace, and custom project repos     | `~/.claude/_pull-all-repos.sh` with no_push enforcement          |
-| 📝 **Documentation Overhaul**  | Updated all docs for accuracy — agent counts, setup instructions, branding      | Fixed 37→36 agent count, updated setup flow, added skip-worktree |
-| 🎨 **Branding: tjn.claude/**   | Consistent "tjn.claude/" branding across nav, hero, metadata, and social cards  | OG image, Twitter cards, Discord embeds all working              |
-| 🔧 **Setup Improvements**      | Get Started flow uses `setup-new-machine.sh` for complete automated setup       | Handles submodules, no_push, plugin registration, and hooks      |
+| Feature                       | Description                                                                    | Details                                                          |
+| :---------------------------- | :----------------------------------------------------------------------------- | :--------------------------------------------------------------- |
+| 🌐 **Showcase Website**       | Next.js site with 3D hero, interactive modals, and curated featured content    | Deployed on Cloudflare Pages at `claude.travisjneuman.com`       |
+| 📦 **Pull All Repos Script**  | Cross-platform script to sync parent, marketplace, and custom project repos    | `~/.claude/_pull-all-repos.sh` with no_push enforcement          |
+| 📝 **Documentation Overhaul** | Updated all docs for accuracy — agent counts, setup instructions, branding     | Fixed 37→36 agent count, updated setup flow, added skip-worktree |
+| 🎨 **Branding: tjn.claude/**  | Consistent "tjn.claude/" branding across nav, hero, metadata, and social cards | OG image, Twitter cards, Discord embeds all working              |
+| 🔧 **Setup Improvements**     | Get Started flow uses `setup-new-machine.sh` for complete automated setup      | Handles submodules, no_push, plugin registration, and hooks      |
 
 **Result:** Professional web presence, accurate documentation, streamlined setup for new users. See [CHANGELOG.md](CHANGELOG.md) for complete details.
 
@@ -2462,9 +2462,9 @@ Core rules loaded every session (~1,100 tokens):
 
 ### 🧠 Specialized (2 Marketplaces)
 
-| Marketplace                    | GitHub                                                                     | Key Features                                           |
-| :----------------------------- | :------------------------------------------------------------------------- | :----------------------------------------------------- |
-| 💾 `claude-mem`                | [thedotmack/claude-mem](https://github.com/thedotmack/claude-mem)          | Persistent memory, semantic search, session continuity |
+| Marketplace                    | GitHub                                                                    | Key Features                                           |
+| :----------------------------- | :------------------------------------------------------------------------ | :----------------------------------------------------- |
+| 💾 `claude-mem`                | [thedotmack/claude-mem](https://github.com/thedotmack/claude-mem)         | Persistent memory, semantic search, session continuity |
 | 🔬 `mvanhorn-last30days-skill` | [mvanhorn/last30days-skill](https://github.com/mvanhorn/last30days-skill) | Research any topic from the last 30 days               |
 
 ### 🔍 Searching Marketplaces
@@ -6433,7 +6433,7 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) for detailed guidelines on:
 
 |  Version  |   Date   | Changes                                                                                                                                                                           |
 | :-------: | :------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **2.2.0** | Jan 2026 | 🌐 Showcase website (claude.travisjneuman.com), 📦 pull-all-repos script, 📝 documentation overhaul, 🎨 tjn.claude/ branding                                                       |
+| **2.2.0** | Jan 2026 | 🌐 Showcase website (claude.travisjneuman.com), 📦 pull-all-repos script, 📝 documentation overhaul, 🎨 tjn.claude/ branding                                                      |
 | **1.4.3** | Dec 2025 | 🪝 Hooks simplified for Windows compatibility (removed 9 Unix-specific hooks, kept PostToolUse for Prettier), 🔒 Security audit documentation                                     |
 | **1.4.1** | Dec 2025 | 🆕 Project initialization workflow: `/init-project` (adaptive stack detection), `/standardize-claude-md` (retrofit existing projects), 📄 Updated project-CLAUDE.md template v2.0 |
 | **1.4.0** | Dec 2025 | 📋 5 new templates, ⌨️ 5 new commands (/review-code, /health-check, /context-stats, /session-log, /backup-config), 🔌 MCP wildcard permissions                                    |
@@ -6474,8 +6474,8 @@ See [CHANGELOG.md](./CHANGELOG.md) for complete history.
 
 ### 🌐 Showcase Website
 
-| Resource | Description |
-| :------- | :---------- |
+| Resource                                                        | Description                                                                       |
+| :-------------------------------------------------------------- | :-------------------------------------------------------------------------------- |
 | 🌐 [claude.travisjneuman.com](https://claude.travisjneuman.com) | Interactive showcase with skills browser, agent catalog, and marketplace explorer |
 
 ### 🌐 Community Resources

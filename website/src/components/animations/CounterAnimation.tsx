@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from "react";
 
 interface CounterAnimationProps {
   end: number;
@@ -11,9 +11,9 @@ interface CounterAnimationProps {
 
 export default function CounterAnimation({
   end,
-  suffix = '',
+  suffix = "",
   duration = 2000,
-  className = '',
+  className = "",
 }: CounterAnimationProps) {
   const [count, setCount] = useState(0);
   const [started, setStarted] = useState(false);
@@ -29,7 +29,7 @@ export default function CounterAnimation({
           setStarted(true);
         }
       },
-      { threshold: 0.3 }
+      { threshold: 0.3 },
     );
 
     observer.observe(el);
