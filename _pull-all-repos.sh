@@ -38,7 +38,7 @@
 #       Example: "E:\Web Development" becomes "/e/Web Development"
 #
 CUSTOM_PROJECT_DIRS=(
-    "/e/Web Development"             # Your projects directory
+    # "/e/Web Development"           # Uncomment and edit for your directories
     # "/c/Users/you/projects"        # Add as many as needed
     # "$HOME/projects"               # Works on any platform
 )
