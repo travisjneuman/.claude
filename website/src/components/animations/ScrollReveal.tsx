@@ -25,13 +25,7 @@ export default function ScrollReveal({
     const el = ref.current;
     if (!el) return;
 
-    const fromVars: gsap.TweenVars = {
-      opacity: 0,
-      duration: 0.8,
-      delay,
-      ease: 'power3.out',
-    };
-
+    const fromVars: Record<string, number> = {};
     switch (direction) {
       case 'up':
         fromVars.y = 40;
@@ -47,8 +41,15 @@ export default function ScrollReveal({
         break;
     }
 
-    gsap.from(el, {
-      ...fromVars,
+    gsap.set(el, { opacity: 0, ...fromVars });
+
+    const tween = gsap.to(el, {
+      opacity: 1,
+      x: 0,
+      y: 0,
+      duration: 0.8,
+      delay,
+      ease: 'power3.out',
       scrollTrigger: {
         trigger: el,
         start: 'top 85%',
@@ -57,6 +58,7 @@ export default function ScrollReveal({
     });
 
     return () => {
+      tween.kill();
       ScrollTrigger.getAll().forEach((t) => {
         if (t.trigger === el) t.kill();
       });
