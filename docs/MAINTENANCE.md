@@ -2,7 +2,7 @@
 
 Ongoing maintenance procedures to keep your Claude Code configuration clean and efficient.
 
-**Last Updated:** January 2026 (v2.0)
+**Last Updated:** January 2026 (v2.2)
 
 ---
 
@@ -52,6 +52,8 @@ Before starting work, always sync all repositories:
 The script determines push access by **location**, not ownership. Your repos and custom directories retain full push capability.
 
 **Adding custom directories:** Edit `~/.claude/_pull-all-repos.sh` and uncomment/edit the `CUSTOM_PROJECT_DIRS` array at the top.
+
+**Tip:** If you add personal directories that shouldn't be committed to the repo, use `git update-index --skip-worktree _pull-all-repos.sh` after committing the clean version. This lets you keep local customizations without git tracking them. To undo: `git update-index --no-skip-worktree _pull-all-repos.sh`.
 
 ---
 
