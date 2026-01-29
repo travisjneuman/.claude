@@ -69,7 +69,7 @@ export default function Home() {
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold text-[var(--text-primary)]">
-                <CounterAnimation end={marketplaceSkills || 1496} suffix="+" />
+                <CounterAnimation end={marketplaceSkills} suffix="+" />
               </div>
               <div className="text-xs font-mono text-[var(--text-muted)] uppercase tracking-wider mt-1">
                 Marketplace
@@ -77,7 +77,7 @@ export default function Home() {
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold text-[var(--text-primary)]">
-                <CounterAnimation end={repos.length || 23} />
+                <CounterAnimation end={repos.length} />
               </div>
               <div className="text-xs font-mono text-[var(--text-muted)] uppercase tracking-wider mt-1">
                 Repos
@@ -224,10 +224,10 @@ export default function Home() {
               Marketplace
             </p>
             <h2 className="text-3xl font-bold text-[var(--text-primary)] mb-4">
-              <CounterAnimation end={marketplaceSkills || 1496} suffix="+" /> Community Skills
+              <CounterAnimation end={marketplaceSkills} suffix="+" /> Community Skills
             </h2>
             <p className="text-[var(--text-secondary)] max-w-xl mx-auto mb-10">
-              Curated from {repos.length || 23} open-source repositories. Discover, install, and
+              Curated from {repos.length} open-source repositories. Discover, install, and
               extend your capabilities.
             </p>
           </ScrollReveal>
