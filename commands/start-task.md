@@ -1,5 +1,5 @@
 ---
-description: Universal intelligent router - routes ANY prompt to optimal resources from 49 marketplaces, 69 skills, 36 agents
+description: Universal intelligent router - routes ANY prompt to optimal resources from 49 marketplaces, 72 skills, 37 agents
 arguments:
   - name: task_description
     description: "What you want to accomplish. Natural language - just describe it."
@@ -121,7 +121,8 @@ Read `commands/router/routing-logic.md` for complexity scoring.
 
 **Quick reference:**
 
-- Score >= 3 → `/gsd:new-project`
+- Score >= 5 → `/gsd:new-project`
+- Score 3-4 → `/auto-claude` (well-defined) or `EnterPlanMode` (exploratory)
 - Score 1-2 → `EnterPlanMode`
 - Score <= 0 → Execute directly
 
@@ -255,10 +256,10 @@ If `{{task_description}}` is empty:
 
 | File                                     | Contains                            |
 | ---------------------------------------- | ----------------------------------- |
-| `commands/router/domains-development.md` | 23 development domains              |
+| `commands/router/domains-development.md` | 28 development domains              |
 | `commands/router/domains-scientific.md`  | 8 scientific domains                |
 | `commands/router/domains-business.md`    | 16 business domains                 |
-| `commands/router/domains-creative.md`    | 6 creative domains                  |
+| `commands/router/domains-creative.md`    | 8 creative domains                  |
 | `commands/router/domains-meta.md`        | Admin tasks, quality, exploration   |
 | `commands/router/decision-frameworks.md` | 6 decision frameworks               |
 | `commands/router/routing-logic.md`       | Complexity scoring, route selection |

@@ -1,6 +1,6 @@
 # Skills Documentation - Master Index
 
-Navigate all 71 local skills + 1,496 marketplace skills from this central hub.
+Navigate all 72 local skills + 1,700+ marketplace skills from this central hub.
 
 ---
 
@@ -132,9 +132,9 @@ Navigate all 71 local skills + 1,496 marketplace skills from this central hub.
 
 ---
 
-## Marketplace Skills (1,496+)
+## Marketplace Skills (1,700+)
 
-21 marketplace plugins provide additional specialized skills:
+49 marketplace repos provide additional specialized skills:
 
 | Marketplace                       | Skills  | Specialty                                      |
 | --------------------------------- | ------- | ---------------------------------------------- |
@@ -291,4 +291,4 @@ Located in `~/.claude/agents/`. See [agents/README.md](../agents/README.md).
 
 ---
 
-_Last updated: December 2025_
+_Last updated: January 2026_

@@ -1,8 +1,8 @@
 # Marketplace Guide
 
-Complete reference for the 22 plugin marketplaces and how to use them.
+Complete reference for the 49 plugin marketplaces and how to use them.
 
-**Last Updated:** January 2026 (v2.0)
+**Last Updated:** January 2026 (v3.0)
 
 **Location:** `~/.claude/plugins/marketplaces/`
 
@@ -17,63 +17,107 @@ Complete reference for the 22 plugin marketplaces and how to use them.
 
 ---
 
-## Installed Marketplaces (22)
+## Installed Marketplaces (49)
 
 ### Official (Anthropic)
 
-| Marketplace               | Contents                                | Key Features                |
-| ------------------------- | --------------------------------------- | --------------------------- |
-| `anthropic-agent-skills`  | Document skills, example skills         | Official Anthropic patterns |
-| `claude-code-plugins`     | PR review, commit commands, feature dev | Core development plugins    |
-| `claude-plugins-official` | External plugins collection             | Curated official plugins    |
+| Marketplace | Contents | Key Features |
+|---|---|---|
+| `anthropic-agent-skills` | Document skills, example skills | Official Anthropic patterns |
+| `anthropic-life-sciences` | Life sciences tools | Official scientific tools |
+| `claude-code-plugins` | PR review, commit commands, feature dev | Core development plugins |
+| `claude-plugins-official` | External plugins collection | Curated official plugins |
+| `vercel-agent-skills` | Vercel deployment skills | Vercel Labs official |
 
 ### Taches/GlitterCowboy
 
-| Marketplace           | Contents                                 | Key Features                       |
-| --------------------- | ---------------------------------------- | ---------------------------------- |
+| Marketplace | Contents | Key Features |
+|---|---|---|
 | `taches-cc-resources` | Meta-prompting, debugging, hooks, agents | Prompt engineering, skill creation |
-| `get-shit-done`       | Multi-phase project management           | GSD system for complex projects    |
+| `get-shit-done` | Multi-phase project management | GSD system for complex projects |
 
-### Community - Large Collections
+### Large Collections
 
-| Marketplace                       | Contents                                | Key Features                                   |
-| --------------------------------- | --------------------------------------- | ---------------------------------------------- |
-| `claude-code-plugins-plus-skills` | 258 plugins, 185 skills                 | Production-ready, 18 domains                   |
-| `wshobson-agents`                 | 99 agents, 107 skills, 15 orchestrators | Progressive disclosure architecture            |
-| `voltagent-subagents`             | 100+ specialized agents                 | Full-stack, DevOps focus                       |
-| `voltagent-awesome-claude-skills` | Awesome Claude skills collection        | VoltAgent curation                             |
-| `claude-scientific-skills`        | 125+ scientific skills                  | Bioinformatics, chemistry, physics, proteomics |
+| Marketplace | Contents | Key Features |
+|---|---|---|
+| `wshobson-agents` | 99 agents, 107 skills, 15 orchestrators | Progressive disclosure architecture |
+| `voltagent-subagents` | 100+ specialized agents | Full-stack, DevOps focus |
+| `claude-scientific-skills` | 144 scientific skills | Bioinformatics, chemistry, physics, proteomics |
+| `davila7-templates` | 651 templates | Broad template coverage |
+| `madappgang-claude-code` | 110 resources | Full-stack development |
+| `athola-night-market` | 125 skills | Curated night market |
 
-### Community - Curated
+### Curated Collections
 
-| Marketplace             | Contents                             | Key Features                            |
-| ----------------------- | ------------------------------------ | --------------------------------------- |
-| `awesome-claude-skills` | 27 skills                            | Documents, canvas, forensics, invoices  |
-| `skillsforge`           | 29 curated skills                    | Quality-focused curation                |
-| `mhattingpete-skills`   | Git automation, testing, code review | Development workflow                    |
-| `obra-superpowers`      | Battle-tested skills                 | /brainstorm, /write-plan, /execute-plan |
+| Marketplace | Contents | Key Features |
+|---|---|---|
+| `awesome-claude-skills` | Documents, canvas, forensics, invoices | ComposioHQ curation |
+| `skillsforge` | 29 curated skills | Quality-focused curation |
+| `mhattingpete-skills` | Git automation, testing, code review | Development workflow |
+| `obra-superpowers` | Battle-tested skills | /brainstorm, /write-plan, /execute-plan |
+| `alirezarezvani-claude-skills` | Skills + subagents | Mixed collection |
+| `affaan-everything-claude` | Everything Claude resources | Comprehensive collection |
+| `chat2anyllm-awesome-plugins` | Awesome plugins | Chat2AnyLLM curation |
 
-### Community - Collections
+### Development-Focused
 
-| Marketplace                        | Contents                                   | Key Features         |
-| ---------------------------------- | ------------------------------------------ | -------------------- |
-| `travisvn-awesome-claude-skills`   | Curated skills, resources, tools           | Broad coverage       |
-| `hesreallyhim-awesome-claude-code` | Slash-commands, CLAUDE.md files, CLI tools | CLI tooling focus    |
-| `alirezarezvani-claude-skills`     | Skills + subagents                         | Mixed collection     |
-| `behisecc-awesome-claude-skills`   | Categorized skills                         | Domain organization  |
-| `alvinunreal-awesome-claude`       | Broader Claude resources                   | Resource compilation |
+| Marketplace | Contents | Key Features |
+|---|---|---|
+| `buildwithclaude` | 43 resources | Full-stack development |
+| `sivalabs-marketplace` | Java/Spring skills | JVM ecosystem |
+| `gmickel-marketplace` | General development | Mixed development tools |
+| `devgom-marketplace` | Development tools | Dev marketplace |
+| `henkisdabro-marketplace` | Development tools | Claude Code marketplace |
+| `p47phoenix-plugins` | Plugins collection | Claude plugins |
+| `sawyerhood-mart` | Development tools | Sawyer's mart |
+| `numman-ali-openskills` | Open skills | Open source skills |
+| `numman-ali-skills` | N-skills | Additional skills |
+| `zai-coding-plugins` | Coding plugins | Zai organization |
+| `piebald-lsps` | LSP integrations | Language Server Protocol |
+
+### Language/Framework Specific
+
+| Marketplace | Contents | Key Features |
+|---|---|---|
+| `bradleygolden-elixir` | 4 skills | Elixir/Phoenix |
+| `georgeguimaraes-elixir` | 6 skills | Elixir ecosystem |
+| `kfly8-cpan-plugins` | 3 skills | Perl/CPAN |
+| `hashi-terraform-skills` | 4 skills | HashiCorp/Terraform |
+
+### Scientific/Research
+
+| Marketplace | Contents | Key Features |
+|---|---|---|
+| `claude-scientific-skills` | 144 skills | Broad scientific coverage |
+| `anthropic-life-sciences` | 6 skills | Official life sciences |
+| `gqy20-biology-plugins` | Biology plugins | Evolutionary biology, genomics |
+| `quant-equity-research` | Equity research | Financial quantitative analysis |
 
 ### Specialized
 
-| Marketplace     | Contents                                  | Key Features         |
-| --------------- | ----------------------------------------- | -------------------- |
-| `claude-mem`    | Persistent memory, semantic search        | Session continuity   |
+| Marketplace | Contents | Key Features |
+|---|---|---|
+| `claude-mem` | Persistent memory, semantic search | Session continuity |
 | `skill-seekers` | Auto-generate skills from docs/repos/PDFs | Skill creation tools |
+| `secondsky-sap-skills` | 33 SAP skills | Enterprise SAP |
+| `trailofbits-skills` | 50 security skills | Professional security auditing |
+| `diet103-infrastructure` | 5 infrastructure skills | Infrastructure patterns |
+| `worldbuilding-skills` | 52 worldbuilding skills | Creative worldbuilding, narrative |
+| `mojito-freeship-skills` | 4 film/AIGC skills | AI-generated film production |
+| `ananddtyagi-marketplace` | CC marketplace | Community marketplace |
+
+### Context Engineering & Planning
+
+| Marketplace | Contents | Key Features |
+|---|---|---|
+| `neolab-context-kit` | 11 context skills | Context engineering patterns |
+| `muratcankoylan-agent-skills` | 19 agent skills | Agent/context patterns |
+| `othmanadi-planning` | 12 planning skills | File-based planning |
 
 ### Autonomous Development
 
-| Marketplace   | Contents                    | Key Features                                                           |
-| ------------- | --------------------------- | ---------------------------------------------------------------------- |
+| Marketplace | Contents | Key Features |
+|---|---|---|
 | `auto-claude` | Autonomous coding framework | Multi-agent development, QA validation, git worktrees, semantic memory |
 
 ---
@@ -82,76 +126,66 @@ Complete reference for the 22 plugin marketplaces and how to use them.
 
 ### taches-cc-resources
 
-| Command                                   | Purpose                             |
-| ----------------------------------------- | ----------------------------------- |
-| `/taches-cc-resources:create-prompt`      | Create optimized prompts            |
-| `/taches-cc-resources:create-meta-prompt` | Multi-stage prompt chains           |
-| `/taches-cc-resources:whats-next`         | Intelligent next-step routing       |
-| `/taches-cc-resources:check-todos`        | Review outstanding work             |
-| `/consider:first-principles`              | First-principles decision framework |
-| `/consider:eisenhower-matrix`             | Priority matrix                     |
-| `/consider:5-whys`                        | Root cause analysis                 |
-| `/consider:pros-cons`                     | Trade-off evaluation                |
+| Command | Purpose |
+|---|---|
+| `/taches-cc-resources:create-prompt` | Create optimized prompts |
+| `/taches-cc-resources:create-meta-prompt` | Multi-stage prompt chains |
+| `/taches-cc-resources:whats-next` | Intelligent next-step routing |
+| `/taches-cc-resources:check-todos` | Review outstanding work |
+| `/taches-cc-resources:debug` | Expert debugging methodology |
+| `/consider:first-principles` | First-principles decision framework |
+| `/consider:eisenhower-matrix` | Priority matrix |
+| `/consider:5-whys` | Root cause analysis |
+| `/consider:swot` | Trade-off evaluation (SWOT) |
 
 ### get-shit-done (GSD)
 
-| Command               | Purpose                        |
-| --------------------- | ------------------------------ |
-| `/gsd:new-project`    | Initialize multi-phase project |
-| `/gsd:progress`       | Check status, get next action  |
-| `/gsd:plan-phase [n]` | Create phase execution plan    |
-| `/gsd:execute-plan`   | Work through current plan      |
-| `/gsd:resume-work`    | Restore session context        |
-| `/gsd:pause-work`     | Save state before break        |
-| `/gsd:help`           | Full command reference         |
+| Command | Purpose |
+|---|---|
+| `/gsd:new-project` | Initialize multi-phase project |
+| `/gsd:progress` | Check status, get next action |
+| `/gsd:plan-phase [n]` | Create phase execution plan |
+| `/gsd:execute-plan` | Work through current plan |
+| `/gsd:resume-work` | Restore session context |
+| `/gsd:pause-work` | Save state before break |
+| `/gsd:help` | Full command reference |
 
 ### obra-superpowers
 
-| Command              | Purpose                     |
-| -------------------- | --------------------------- |
-| `/obra:brainstorm`   | Structured brainstorming    |
-| `/obra:write-plan`   | Create detailed plans       |
+| Command | Purpose |
+|---|---|
+| `/obra:brainstorm` | Structured brainstorming |
+| `/obra:write-plan` | Create detailed plans |
 | `/obra:execute-plan` | Execute a plan step-by-step |
 
 ### auto-claude
 
-| Command                      | Purpose                                              |
-| ---------------------------- | ---------------------------------------------------- |
+| Command | Purpose |
+|---|---|
 | `/auto-claude [description]` | Autonomous feature implementation with QA validation |
-
-**Backend CLI:**
-
-```bash
-python ~/.claude/plugins/marketplaces/auto-claude/apps/backend/run.py
-```
-
----
-
-## Taches Skills (Load on Demand)
-
-| Skill                   | Purpose                      | Invoke                         |
-| ----------------------- | ---------------------------- | ------------------------------ |
-| `debug-like-expert`     | Systematic 4-phase debugging | `Skill(debug-like-expert)`     |
-| `create-meta-prompts`   | Build prompt chains          | `Skill(create-meta-prompts)`   |
-| `create-slash-commands` | Create custom commands       | `Skill(create-slash-commands)` |
-| `create-subagents`      | Design specialized agents    | `Skill(create-subagents)`      |
-| `create-hooks`          | Build automation hooks       | `Skill(create-hooks)`          |
 
 ---
 
 ## Domain Quick Reference
 
-| If working on...           | Check these marketplaces                                 |
-| -------------------------- | -------------------------------------------------------- |
-| **Scientific/Research**    | `claude-scientific-skills` (125+ skills)                 |
-| **Full-stack development** | `wshobson-agents`, `voltagent-subagents`                 |
-| **DevOps/Infrastructure**  | `voltagent-subagents`, `claude-code-plugins-plus-skills` |
-| **Documents/Office**       | `awesome-claude-skills`                                  |
-| **Prompt engineering**     | `taches-cc-resources`                                    |
-| **Git/Testing/Review**     | `mhattingpete-skills`                                    |
-| **Project management**     | `get-shit-done`                                          |
-| **Brainstorming/Planning** | `obra-superpowers`                                       |
-| **Autonomous coding**      | `auto-claude`                                            |
+| If working on... | Check these marketplaces |
+|---|---|
+| **Scientific/Research** | `claude-scientific-skills` (144), `anthropic-life-sciences`, `gqy20-biology-plugins` |
+| **Full-stack development** | `wshobson-agents`, `voltagent-subagents`, `buildwithclaude`, `madappgang-claude-code` |
+| **DevOps/Infrastructure** | `voltagent-subagents`, `diet103-infrastructure`, `hashi-terraform-skills` |
+| **Security** | `trailofbits-skills` (50 skills) |
+| **Documents/Office** | `awesome-claude-skills` |
+| **Prompt engineering** | `taches-cc-resources` |
+| **Git/Testing/Review** | `mhattingpete-skills` |
+| **Project management** | `get-shit-done` |
+| **Brainstorming/Planning** | `obra-superpowers`, `othmanadi-planning` |
+| **Autonomous coding** | `auto-claude` |
+| **Templates** | `davila7-templates` (651), `athola-night-market` (125) |
+| **SAP/Enterprise** | `secondsky-sap-skills` (33) |
+| **Elixir** | `bradleygolden-elixir`, `georgeguimaraes-elixir` |
+| **Finance/Equity** | `quant-equity-research` |
+| **Worldbuilding/Creative** | `worldbuilding-skills` (52), `mojito-freeship-skills` |
+| **Context Engineering** | `neolab-context-kit`, `muratcankoylan-agent-skills` |
 
 ---
 
@@ -189,25 +223,19 @@ Search 35,530+ community skills:
 /discover-skills <query>
 ```
 
-Example:
-
-```
-/discover-skills git automation
-/discover-skills react hooks
-/discover-skills database optimization
-```
-
 ---
 
 ## Updating Marketplaces
 
 ```bash
-# Update all marketplace submodules
-cd ~/.claude
-git submodule update --remote --merge
+# Use the pull-repos command
+/pull-repos
 
 # Or use the update script
 bash ~/.claude/scripts/update-external-repos.sh
+
+# Or manually
+cd ~/.claude && git submodule update --remote --merge
 ```
 
 All marketplaces are configured with `no_push` - read-only access.

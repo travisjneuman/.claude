@@ -31,6 +31,9 @@ Load this file when development-related keywords detected.
 | `macos`         | macos, appkit, catalyst, mac app                                                        |
 | `python`        | python, pip, poetry, django, flask, fastapi                                             |
 | `typescript`    | typescript, types, generics, strict, inference                                          |
+| `go`            | go, golang, goroutine, channel, gin, fiber, cobra                                       |
+| `rust`          | rust, cargo, crate, tokio, async, wasm, lifetime, borrow                                |
+| `data-science`  | data science, pandas, numpy, statistics, visualization, jupyter, notebook                |
 
 ## Resource Mapping
 
@@ -59,14 +62,17 @@ Load this file when development-related keywords detected.
 | `flutter`       | `Skill(flutter-development)`             | `mobile-architect`        | -                                     |
 | `react-native`  | `Skill(react-native)`                    | `mobile-architect`        | -                                     |
 | `macos`         | `Skill(macos-native)`                    | `macos-developer`         | -                                     |
-| `python`        | `Skill(python-expert)`                   | `python-expert`           | Read rules/stacks/python.md           |
-| `typescript`    | `Skill(typescript-expert)`               | `typescript-expert`       | Read rules/stacks/react-typescript.md |
+| `python`        | -                                        | `python-expert`           | Read rules/stacks/python.md           |
+| `typescript`    | -                                        | `typescript-expert`       | Read rules/stacks/react-typescript.md |
+| `go`            | -                                        | -                         | Read rules/stacks/go.md              |
+| `rust`          | -                                        | -                         | Read rules/stacks/rust.md            |
+| `data-science`  | `Skill(data-science)`                    | -                         | -                                     |
 
 ## Feature Implementation Routing
 
 ### Complex Feature Implementation
 
-**When:** Building well-defined features in established codebases with complexity >= 3
+**When:** Building well-defined features in established codebases
 
 **Skills:**
 
@@ -76,8 +82,9 @@ Load this file when development-related keywords detected.
 **Routing Logic:**
 
 - Complexity < 3: Manual implementation (generic-feature-developer)
-- Complexity >= 3 + clear spec: **Suggest Auto-Claude**
-- Complexity >= 3 + unclear spec: EnterPlanMode first
+- Complexity 3-4 + clear spec: **Suggest Auto-Claude**
+- Complexity 3-4 + unclear spec: EnterPlanMode first
+- Complexity >= 5: Route to GSD (`/gsd:new-project`)
 
 **Keywords:** "implement", "add feature", "build", "create [complex feature]", "autonomous"
 
@@ -117,4 +124,6 @@ find ~/.claude/plugins/marketplaces -name "SKILL.md" | xargs grep -li "<keyword>
 | --------------------- | --------------------------------------------------- |
 | `python`              | `~/.claude/rules/stacks/python.md`                  |
 | `react`, `typescript` | `~/.claude/rules/stacks/react-typescript.md`        |
+| `go`                  | `~/.claude/rules/stacks/go.md`                      |
+| `rust`                | `~/.claude/rules/stacks/rust.md`                    |
 | Full-stack            | `~/.claude/rules/stacks/fullstack-nextjs-nestjs.md` |
