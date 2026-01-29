@@ -30,11 +30,8 @@ export default function Navigation() {
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2.5 group">
           {/* Logo hidden for now - image at /images/logo.webp */}
-          <span className="text-xl font-bold gradient-text">
-            Claude Code
-          </span>
-          <span className="text-xs font-mono px-2 py-0.5 rounded-full bg-[var(--surface-elevated)] text-[var(--text-muted)] border border-[var(--border)]">
-            supercharged
+          <span className="text-xl font-bold gradient-text font-mono">
+            tjn.claude/
           </span>
         </Link>
 

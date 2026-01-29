@@ -17,7 +17,7 @@ function CentralOrb() {
 
   return (
     <Float speed={1.5} rotationIntensity={0.3} floatIntensity={0.5}>
-      <Sphere ref={meshRef} args={[1.8, 64, 64]}>
+      <Sphere ref={meshRef} args={[1.5, 64, 64]}>
         <MeshDistortMaterial
           color="#a855f7"
           emissive="#7c3aed"

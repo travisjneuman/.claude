@@ -14,7 +14,7 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://claude.travisjneuman.com"),
-  title: "Claude Code Supercharged | Skills, Agents & Marketplace",
+  title: "tjn.claude/ | Skills, Agents & Marketplace",
   description:
     "A comprehensive Claude Code configuration with 72 local skills, 36 specialized agents, and 1,700+ marketplace skills across 50 repos. Supercharge your AI-assisted development.",
   icons: {
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   },
   manifest: "/site.webmanifest",
   openGraph: {
-    title: "Claude Code Supercharged",
+    title: "tjn.claude/",
     description:
       "72 Skills, 36 Agents & 1,700+ Marketplace Skills for Claude Code",
     type: "website",
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Claude Code Supercharged",
+    title: "tjn.claude/",
     description:
       "72 Skills, 36 Agents & 1,700+ Marketplace Skills for Claude Code",
     images: ["/og-image.png"],
