@@ -129,6 +129,20 @@ if [[ ! -d "$MARKETPLACES_DIR" ]]; then
     exit 1
 fi
 
+# =============================================================================
+# PHASE 0: Initialize any new/unregistered submodules
+# =============================================================================
+if [[ "$STATUS_ONLY" == false ]]; then
+    echo ""
+    echo -e "${BOLD}Initializing submodules:${NC}"
+    cd "$SCRIPT_DIR"
+    if git submodule update --init 2>&1 | tail -5; then
+        echo -e "${GREEN}  Submodule initialization complete${NC}"
+    else
+        echo -e "${YELLOW}  Some submodules failed to initialize (may be unavailable upstream)${NC}"
+    fi
+fi
+
 # Detect the default branch for a repo
 get_default_branch() {
     # Try common branch names in order of preference
