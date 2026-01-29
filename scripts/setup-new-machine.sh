@@ -8,7 +8,7 @@
 #   bash scripts/setup-new-machine.sh
 #
 # What this does:
-#   1. Initializes all git submodules (22 external repos)
+#   1. Initializes all git submodules (50 external repos)
 #   2. Configures no_push protection on all external repos
 #   3. Registers required marketplaces with Claude Code
 #   4. Installs all enabled plugins
