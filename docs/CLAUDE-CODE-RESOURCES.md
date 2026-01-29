@@ -2,7 +2,7 @@
 
 Quick reference for Claude Code optimization.
 
-**Last Updated:** January 2026 (v2.0)
+**Last Updated:** January 2026 (v2.2)
 
 ---
 

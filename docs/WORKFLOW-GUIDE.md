@@ -2,7 +2,7 @@
 
 Detailed patterns for getting work done with Claude Code.
 
-**Last Updated:** January 2026 (v2.1)
+**Last Updated:** January 2026 (v2.2)
 
 **Quick Start:** Just describe what you want. Skills auto-activate via SessionStart hook. Use `/start-task` for complex work.
 
