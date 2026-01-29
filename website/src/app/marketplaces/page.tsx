@@ -20,10 +20,10 @@ export default function MarketplacesPage() {
               Community Marketplace
             </p>
             <h1 className="text-4xl font-bold text-[var(--text-primary)] mb-4">
-              {(totalSkills || 1496).toLocaleString()}+ Skills
+              {totalSkills.toLocaleString()}+ Skills
             </h1>
             <p className="text-[var(--text-secondary)] max-w-xl mx-auto">
-              Curated from {repos.length || 23} open-source repositories maintained by the community.
+              Curated from {repos.length} open-source repositories maintained by the community.
             </p>
           </div>
 
