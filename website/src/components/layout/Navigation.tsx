@@ -33,6 +33,16 @@ export default function Navigation() {
           <span className="text-xl font-bold gradient-text font-mono">
             tjn.claude/
           </span>
+          <span
+            className="inline-flex items-center justify-center px-2 rounded-md text-[10px] font-bold uppercase tracking-wider text-white"
+            style={{
+              height: '1.5rem',
+              lineHeight: '1.5rem',
+              background: 'linear-gradient(135deg, var(--accent-purple), var(--accent-pink))',
+            }}
+          >
+            supercharged
+          </span>
         </Link>
 
         <div className="hidden md:flex items-center gap-1">
