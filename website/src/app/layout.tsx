@@ -13,12 +13,12 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Claude Code Supercharged | 69 Skills, 37 Agents, 1,496+ Marketplace",
+  title: "Claude Code Supercharged | Skills, Agents & Marketplace",
   description:
-    "A comprehensive Claude Code configuration with 69 local skills, 37 specialized agents, and 1,496+ marketplace skills. Supercharge your AI-assisted development.",
+    "A comprehensive Claude Code configuration with local skills, specialized agents, and 450+ marketplace skills. Supercharge your AI-assisted development.",
   openGraph: {
     title: "Claude Code Supercharged",
-    description: "69 Skills | 37 Agents | 1,496+ Marketplace Skills",
+    description: "Skills, Agents & 450+ Marketplace Skills for Claude Code",
     type: "website",
   },
 };
