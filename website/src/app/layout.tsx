@@ -15,11 +15,36 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "Claude Code Supercharged | Skills, Agents & Marketplace",
   description:
-    "A comprehensive Claude Code configuration with local skills, specialized agents, and 450+ marketplace skills. Supercharge your AI-assisted development.",
+    "A comprehensive Claude Code configuration with 72 local skills, 36 specialized agents, and 1,700+ marketplace skills across 50 repos. Supercharge your AI-assisted development.",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: "/apple-touch-icon.png",
+  },
+  manifest: "/site.webmanifest",
   openGraph: {
     title: "Claude Code Supercharged",
-    description: "Skills, Agents & 450+ Marketplace Skills for Claude Code",
+    description:
+      "72 Skills, 36 Agents & 1,700+ Marketplace Skills for Claude Code",
     type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "tjn.claude/ — Global Claude Code Development Toolkit",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Claude Code Supercharged",
+    description:
+      "72 Skills, 36 Agents & 1,700+ Marketplace Skills for Claude Code",
+    images: ["/og-image.png"],
   },
 };
 
