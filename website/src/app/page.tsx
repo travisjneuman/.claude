@@ -50,37 +50,53 @@ export default function Home() {
           </p>
 
           {/* Stats */}
-          <div className="flex flex-wrap justify-center gap-8 mb-10 hero-fade-in hero-delay-3">
-            <div className="text-center">
-              <div className="text-3xl font-bold text-[var(--text-primary)]">
-                <CounterAnimation end={skills.length} />
+          <div className="hero-fade-in hero-delay-3 space-y-6 mb-10">
+            {/* Tier 1: Personal Toolkit */}
+            <div className="flex justify-center gap-10">
+              <div className="text-center">
+                <div className="text-3xl font-bold text-[var(--text-primary)]">
+                  <CounterAnimation end={skills.length} />
+                </div>
+                <div className="text-xs font-mono text-[var(--accent-purple)] uppercase tracking-wider mt-1">
+                  Custom Skills
+                </div>
               </div>
-              <div className="text-xs font-mono text-[var(--text-muted)] uppercase tracking-wider mt-1">
-                Skills
-              </div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-[var(--text-primary)]">
-                <CounterAnimation end={agents.length} />
-              </div>
-              <div className="text-xs font-mono text-[var(--text-muted)] uppercase tracking-wider mt-1">
-                Agents
-              </div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-[var(--text-primary)]">
-                <CounterAnimation end={marketplaceSkills} suffix="+" />
-              </div>
-              <div className="text-xs font-mono text-[var(--text-muted)] uppercase tracking-wider mt-1">
-                Marketplace
+              <div className="text-center">
+                <div className="text-3xl font-bold text-[var(--text-primary)]">
+                  <CounterAnimation end={agents.length} />
+                </div>
+                <div className="text-xs font-mono text-[var(--accent-blue)] uppercase tracking-wider mt-1">
+                  Specialized Agents
+                </div>
               </div>
             </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-[var(--text-primary)]">
-                <CounterAnimation end={repos.length} />
+
+            {/* Divider */}
+            <div className="flex items-center gap-3 justify-center">
+              <div className="h-px w-12 bg-[var(--border)]" />
+              <span className="text-[10px] font-mono text-[var(--text-muted)] uppercase tracking-widest">
+                plus
+              </span>
+              <div className="h-px w-12 bg-[var(--border)]" />
+            </div>
+
+            {/* Tier 2: Community Marketplace */}
+            <div className="flex justify-center gap-10">
+              <div className="text-center">
+                <div className="text-3xl font-bold text-[var(--text-primary)]">
+                  <CounterAnimation end={marketplaceSkills} suffix="+" />
+                </div>
+                <div className="text-xs font-mono text-[var(--accent-green)] uppercase tracking-wider mt-1">
+                  Marketplace Skills
+                </div>
               </div>
-              <div className="text-xs font-mono text-[var(--text-muted)] uppercase tracking-wider mt-1">
-                Repos
+              <div className="text-center">
+                <div className="text-3xl font-bold text-[var(--text-primary)]">
+                  <CounterAnimation end={repos.length} />
+                </div>
+                <div className="text-xs font-mono text-[var(--accent-green)] uppercase tracking-wider mt-1">
+                  Open-Source Repos
+                </div>
               </div>
             </div>
           </div>
