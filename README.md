@@ -61,7 +61,7 @@
 ### 📚 Complete References
 
 - [🎓 Complete Skills Reference (72 Skills)](#-complete-skills-reference-72-skills)
-- [🤖 Complete Agents Reference (37 Agents)](#-complete-agents-reference-37-agents)
+- [🤖 Complete Agents Reference (36 Agents)](#-complete-agents-reference-36-agents)
 - [🏪 Complete Marketplaces Reference (50 Marketplaces)](#-complete-marketplaces-reference-50-marketplaces)
 
 ### 🔒 Automation & Safety
@@ -152,6 +152,20 @@ The **Ultimate Claude Code Toolkit** transforms [Claude Code](https://docs.anthr
 
 **Result:** New users get a fully working setup in under 1 minute. Existing users get automatic routing without needing `/start-task`. See [CHANGELOG.md](CHANGELOG.md#210---january-13-2026) for complete details.
 
+### 🆕 What's New in v2.2 (January 2026)
+
+**Showcase Website & Polish:** Live website at [claude.travisjneuman.com](https://claude.travisjneuman.com) plus documentation and tooling improvements.
+
+| Feature                        | Description                                                                     | Details                                                          |
+| :----------------------------- | :------------------------------------------------------------------------------ | :--------------------------------------------------------------- |
+| 🌐 **Showcase Website**        | Next.js site with 3D hero, interactive modals, and curated featured content     | Deployed on Cloudflare Pages at `claude.travisjneuman.com`       |
+| 📦 **Pull All Repos Script**   | Cross-platform script to sync parent, marketplace, and custom project repos     | `~/.claude/_pull-all-repos.sh` with no_push enforcement          |
+| 📝 **Documentation Overhaul**  | Updated all docs for accuracy — agent counts, setup instructions, branding      | Fixed 37→36 agent count, updated setup flow, added skip-worktree |
+| 🎨 **Branding: tjn.claude/**   | Consistent "tjn.claude/" branding across nav, hero, metadata, and social cards  | OG image, Twitter cards, Discord embeds all working              |
+| 🔧 **Setup Improvements**      | Get Started flow uses `setup-new-machine.sh` for complete automated setup       | Handles submodules, no_push, plugin registration, and hooks      |
+
+**Result:** Professional web presence, accurate documentation, streamlined setup for new users. See [CHANGELOG.md](CHANGELOG.md) for complete details.
+
 ---
 
 ## ❓ What Problem Does This Solve?
@@ -174,7 +188,7 @@ The **Ultimate Claude Code Toolkit** transforms [Claude Code](https://docs.anthr
 | 🔁 "I repeat the same instructions every time" | 🎓 Skills auto-load domain expertise when context matches                       |
 | 📂 "Complex projects get disorganized"         | 📈 GSD system tracks multi-phase projects across sessions                       |
 | 🔓 "I forget to check for security issues"     | 🔒 Git hooks auto-block secrets, security-auditor agent catches vulnerabilities |
-| 🤔 "Each task requires different expertise"    | 🤖 37 specialized agents spawn for deep work automatically                      |
+| 🤔 "Each task requires different expertise"    | 🤖 36 specialized agents spawn for deep work automatically                      |
 | ❓ "I don't know what tools are available"     | 🎯 Universal router detects domains and loads relevant resources                |
 | 📝 "Claude gives generic advice"               | 🏪 1,700+ marketplace skills provide production-tested patterns                 |
 
@@ -1930,7 +1944,7 @@ PostToolUse("Write") → Run Prettier → Format file
 │   ├── 📈 seo-analytics-auditor/SKILL.md
 │   └── 📄 document-skills/SKILL.md       # Office formats
 │
-├── 🤖 agents/                            # 37 specialized AI subagents
+├── 🤖 agents/                            # 36 specialized AI subagents
 │   ├── 📖 README.md                      # Agent usage guide
 │   │
 │   │ ─── ✅ CODE QUALITY ───
@@ -2294,7 +2308,7 @@ Core rules loaded every session (~1,100 tokens):
 
 ---
 
-## 🤖 Complete Agents Reference (37 Agents)
+## 🤖 Complete Agents Reference (36 Agents)
 
 ### ✅ Code Quality Agents
 
@@ -6419,6 +6433,7 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) for detailed guidelines on:
 
 |  Version  |   Date   | Changes                                                                                                                                                                           |
 | :-------: | :------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **2.2.0** | Jan 2026 | 🌐 Showcase website (claude.travisjneuman.com), 📦 pull-all-repos script, 📝 documentation overhaul, 🎨 tjn.claude/ branding                                                       |
 | **1.4.3** | Dec 2025 | 🪝 Hooks simplified for Windows compatibility (removed 9 Unix-specific hooks, kept PostToolUse for Prettier), 🔒 Security audit documentation                                     |
 | **1.4.1** | Dec 2025 | 🆕 Project initialization workflow: `/init-project` (adaptive stack detection), `/standardize-claude-md` (retrofit existing projects), 📄 Updated project-CLAUDE.md template v2.0 |
 | **1.4.0** | Dec 2025 | 📋 5 new templates, ⌨️ 5 new commands (/review-code, /health-check, /context-stats, /session-log, /backup-config), 🔌 MCP wildcard permissions                                    |
@@ -6456,6 +6471,12 @@ See [CHANGELOG.md](./CHANGELOG.md) for complete history.
 | 🏪 [Marketplace Guide](./docs/MARKETPLACE-GUIDE.md) | All 50 marketplaces     |
 | 🤖 [Auto-Claude Guide](./docs/AUTO-CLAUDE-GUIDE.md) | Autonomous coding setup |
 | 📈 [GSD Tutorial](./docs/GSD-TUTORIAL.md)           | Project management      |
+
+### 🌐 Showcase Website
+
+| Resource | Description |
+| :------- | :---------- |
+| 🌐 [claude.travisjneuman.com](https://claude.travisjneuman.com) | Interactive showcase with skills browser, agent catalog, and marketplace explorer |
 
 ### 🌐 Community Resources
 
@@ -8508,7 +8529,7 @@ The toolkit logs security-relevant events:
 │           TOOLKIT v2.2.0 STATISTICS                          │
 ├─────────────────────────────────────────────────────────────┤
 │  Skills:        72 local + 1,700+ marketplace                 │
-│  Agents:        37                                           │
+│  Agents:        36                                           │
 │  Commands:      15                                           │
 │  Hooks:         2 (PostToolUse for Prettier)                 │
 │  Marketplaces:  50                                           │
