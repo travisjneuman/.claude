@@ -2,7 +2,7 @@
 
 Load this file when scientific/research keywords detected.
 
-**Primary Resource:** claude-scientific-skills marketplace (125+ specialized skills)
+**Primary Resources:** claude-scientific-skills (144 skills), anthropic-life-sciences (6), gqy20-biology-plugins
 
 ## Domain Detection Keywords
 
@@ -19,18 +19,26 @@ Load this file when scientific/research keywords detected.
 
 ## Resource Mapping
 
-| Domain         | Marketplace                         | Notes                                  |
-| -------------- | ----------------------------------- | -------------------------------------- |
-| All scientific | `claude-scientific-skills`          | 125+ specialized skills                |
-| bioinformatics | Load bioinformatics-specific skills | genomics, sequence analysis            |
-| chemistry      | Load chemistry-specific skills      | molecular modeling, drug discovery     |
-| proteomics     | Load proteomics-specific skills     | protein analysis, structure prediction |
-| clinical       | Load clinical-specific skills       | clinical trials, medical data          |
-| physics        | Load physics-specific skills        | simulations, quantum computing         |
-| astronomy      | Load astronomy-specific skills      | celestial data, telescope analysis     |
+| Domain         | Marketplace Repos                                          | Notes                                  |
+| -------------- | ---------------------------------------------------------- | -------------------------------------- |
+| All scientific | `claude-scientific-skills` (144)                           | Broad scientific coverage              |
+| life sciences  | `anthropic-life-sciences` (6)                              | Anthropic official life sciences       |
+| biology        | `gqy20-biology-plugins`, `claude-scientific-skills`        | Evolutionary biology, genomics         |
+| bioinformatics | `claude-scientific-skills`                                 | Sequence analysis, BLAST, genomics     |
+| chemistry      | `claude-scientific-skills`                                 | Molecular modeling, drug discovery     |
+| proteomics     | `claude-scientific-skills`                                 | Protein analysis, structure prediction |
+| clinical       | `claude-scientific-skills`                                 | Clinical trials, medical data          |
+| physics        | `claude-scientific-skills`                                 | Simulations, quantum computing         |
+| astronomy      | `claude-scientific-skills`                                 | Celestial data, telescope analysis     |
+
+Search for specific scientific skills:
+```bash
+find ~/.claude/plugins/marketplaces -name "SKILL.md" | xargs grep -li "<scientific keyword>"
+```
 
 ## Integration Notes
 
 - Scientific tasks often require WebSearch for current papers/data
 - May need specialized MCP servers for data access
 - Consider memory (claude-mem) for ongoing research context
+- Check `anthropic-life-sciences` for Anthropic's official scientific tools
