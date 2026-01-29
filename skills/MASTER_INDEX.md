@@ -9,7 +9,7 @@ Navigate all 72 local skills + 1,700+ marketplace skills from this central hub.
 | File                                               | Purpose                 | When to Read                |
 | -------------------------------------------------- | ----------------------- | --------------------------- |
 | [README.md](./README.md)                           | Skills library overview | Starting with skills system |
-| [EXPERT-SKILLS-GUIDE.md](./EXPERT-SKILLS-GUIDE.md) | 16 domain expert skills | Domain expertise            |
+| [EXPERT-SKILLS-GUIDE.md](./EXPERT-SKILLS-GUIDE.md) | 18 domain expert skills | Domain expertise            |
 
 ---
 
