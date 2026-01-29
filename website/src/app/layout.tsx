@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
+import ConsoleGreeting from "@/components/ConsoleGreeting";
 import "./globals.css";
 
 const inter = Inter({
@@ -33,7 +34,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/og-image.png",
+        url: "/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "tjn.claude/ — Global Claude Code Development Toolkit",
@@ -45,7 +46,7 @@ export const metadata: Metadata = {
     title: "tjn.claude/",
     description:
       "72 Skills, 36 Agents & 1,700+ Marketplace Skills for Claude Code",
-    images: ["/og-image.png"],
+    images: ["/og-image.jpg"],
   },
 };
 
@@ -59,6 +60,7 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} antialiased`}
       >
+        <ConsoleGreeting />
         {children}
       </body>
     </html>
