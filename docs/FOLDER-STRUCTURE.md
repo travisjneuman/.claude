@@ -2,7 +2,7 @@
 
 Complete map of the `.claude/` folder and related files.
 
-**Last Updated:** January 3, 2026 (v2.0)
+**Last Updated:** January 28, 2026 (v2.1)
 
 ---
 
@@ -115,7 +115,13 @@ This repo underwent a security audit before being made public. The following wer
     │       ├── claude-code-plugins/
     │       ├── claude-plugins-official/
     │       ├── taches-cc-resources/
-    │       └── get-shit-done/      ← GSD workflow system
+    │       ├── get-shit-done/      ← GSD workflow system
+    │       ├── obra-superpowers/
+    │       ├── wshobson-agents/
+    │       ├── voltagent-subagents/
+    │       ├── trailofbits-skills/
+    │       ├── claude-scientific-skills/
+    │       └── ... (49 total repos)
     │
     ├── skills/                     ← Custom skills
     │   ├── README.md               ← Skills documentation

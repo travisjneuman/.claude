@@ -1,5 +1,5 @@
 ---
-description: AI-powered skill recommendation based on your problem description - finds optimal resources from 69 local skills + 49 marketplaces (1,700+ skills)
+description: AI-powered skill recommendation based on your problem description - finds optimal resources from 72 local skills + 49 marketplaces (1,700+ skills)
 arguments:
   - name: problem
     description: "Describe what you're trying to accomplish or the problem you're facing"
@@ -97,7 +97,7 @@ find ~/.claude/plugins/marketplaces -name "SKILL.md" | xargs grep -li "<keyword>
 - `/consider:first-principles` - Technical choices
 - `/consider:eisenhower-matrix` - Prioritization
 - `/consider:5-whys` - Root cause analysis
-- `/consider:pros-cons` - Trade-off evaluation
+- `/consider:swot` - Trade-off evaluation (SWOT analysis)
 
 ---
 
@@ -116,7 +116,7 @@ find ~/.claude/plugins/marketplaces -name "SKILL.md" | xargs grep -li "<keyword>
 | **React Native**        | `react-native`               | `mobile-architect`        | -                                                   |
 | **Flutter**             | `flutter-development`        | `mobile-architect`        | -                                                   |
 | **Desktop**             | `electron-desktop`           | `desktop-developer`       | -                                                   |
-| **DevOps/Infra**        | `devops-cloud`               | `devops-specialist`       | diet103-infrastructure, hashi-terraform-skills      |
+| **DevOps/Infra**        | `devops-cloud`               | `devops-engineer`         | diet103-infrastructure, hashi-terraform-skills      |
 | **Terraform/IaC**       | `devops-cloud`               | `devops-engineer`         | hashi-terraform-skills                              |
 | **Testing**             | `test-specialist`            | `test-generator`          | mhattingpete-skills                                 |
 | **Performance**         | -                            | `performance-optimizer`   | -                                                   |
@@ -190,7 +190,7 @@ find ~/.claude/plugins/marketplaces -name "SKILL.md" | xargs grep -li "<keyword>
 ### Problem: "Set up CI/CD for my project"
 
 **Primary:** `Skill(devops-cloud)`
-**Agent:** `Task(devops-specialist)`
+**Agent:** `Task(devops-engineer)`
 **Marketplace:** voltagent-subagents has CI/CD specialists
 **Route:** Consider `/gsd:new-project` for multi-step setup
 
@@ -227,4 +227,4 @@ Once skills are identified:
 
 ---
 
-_Intelligent skill discovery across 69 local skills + 49 marketplaces (1,700+ skills)_
+_Intelligent skill discovery across 72 local skills + 49 marketplaces (1,700+ skills)_

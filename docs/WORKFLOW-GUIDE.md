@@ -299,8 +299,7 @@ When facing choices, use structured frameworks:
 | First-Principles  | Technical decisions, architecture | `/consider:first-principles`  |
 | Eisenhower Matrix | Prioritization, urgency           | `/consider:eisenhower-matrix` |
 | 5-Whys            | Root cause analysis               | `/consider:5-whys`            |
-| Pros/Cons         | Trade-off evaluation              | `/consider:pros-cons`         |
-| SWOT              | Strategic analysis                | `/consider:swot`              |
+| SWOT              | Trade-off and strategic analysis  | `/consider:swot`              |
 | Decision Matrix   | Multi-criteria decisions          | `/consider:decision-matrix`   |
 
 ---

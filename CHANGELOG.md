@@ -2,6 +2,44 @@
 
 All notable changes to the Ultimate Claude Code Toolkit.
 
+## [2.2.0] - January 28, 2026
+
+### Major Enhancement: Marketplace Expansion & Documentation Audit
+
+Comprehensive audit and expansion of the marketplace ecosystem, documentation consistency, and routing accuracy across all files.
+
+### Added
+
+- **28 new marketplace repositories** - Expanded from 21 to 49 total marketplace repos
+- **New domain routes** - Added Go, Rust, Data Science, Writing, and Documents domains to router
+- **Marketplace resource sections** - Added to business and creative domain routers
+
+### Changed
+
+- **Skill count updated** - 69 → 72 local skills across all documentation
+- **Agent count updated** - 36 → 37 local agents across all documentation
+- **Marketplace skill count** - 1,496 → 1,700+ across all documentation
+- **GSD threshold consistency** - Standardized to Score ≥5 for GSD, 3-4 for Planning
+- **MARKETPLACE-GUIDE.md** - Complete rewrite listing all 49 repos with accurate skill counts
+- **FOLDER-STRUCTURE.md** - Updated marketplace listing to show 49 repos
+- **pull-repos.md** - Updated from 23 to 49 submodule references
+
+### Fixed
+
+- **Phantom skill references** - Removed non-existent `Skill()` wrapper references from router files
+- **Stale counts** - Fixed 20+ files with outdated skill/agent/marketplace counts
+- **Decision framework references** - Consolidated Pros/Cons into SWOT, removed phantom `/consider:decision-matrix`
+- **Router accuracy** - Fixed `devops-specialist` → `devops-engineer` routing in skill-finder
+
+### Documentation
+
+- Updated README.md badges, TOC, architecture diagram, statistics, and footer
+- Updated bootstrap.md, health-check.md, list-skills.md health report outputs
+- Updated agents/README.md, skills/README.md, skills/MASTER_INDEX.md counts
+- Updated AUTO-CLAUDE-GUIDE.md, NEW-DEVICE-SETUP.md, SETUP-GUIDE.md marketplace refs
+
+---
+
 ## [2.1.0] - January 13, 2026
 
 ### Major Enhancement: One-Line Installation & Automatic Routing

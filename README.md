@@ -23,13 +23,13 @@
 <div align="center">
 
 [![Claude Code](https://img.shields.io/badge/Claude_Code-6366f1?style=for-the-badge&logo=anthropic&logoColor=white)](https://claude.com/claude-code)
-[![Skills](https://img.shields.io/badge/Skills-69+-10b981?style=for-the-badge&logo=sparkles&logoColor=white)](./skills/MASTER_INDEX.md)
-[![Agents](https://img.shields.io/badge/Agents-36+-f59e0b?style=for-the-badge&logo=robot&logoColor=white)](./agents/README.md)
+[![Skills](https://img.shields.io/badge/Skills-72+-10b981?style=for-the-badge&logo=sparkles&logoColor=white)](./skills/MASTER_INDEX.md)
+[![Agents](https://img.shields.io/badge/Agents-37+-f59e0b?style=for-the-badge&logo=robot&logoColor=white)](./agents/README.md)
 [![Marketplaces](https://img.shields.io/badge/Marketplaces-49-3b82f6?style=for-the-badge&logo=store&logoColor=white)](./docs/MARKETPLACE-GUIDE.md)
 [![Marketplace Skills](https://img.shields.io/badge/Marketplace_Skills-1700+-ec4899?style=for-the-badge&logo=package&logoColor=white)](./plugins/marketplaces/)
 [![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge&logo=opensourceinitiative&logoColor=white)](./LICENSE)
 
-**Version 2.1.0** • **Last Updated: January 13, 2026** • **Author: [Travis Neuman](https://travisjneuman.com)**
+**Version 2.2.0** • **Last Updated: January 28, 2026** • **Author: [Travis Neuman](https://travisjneuman.com)**
 
 </div>
 
@@ -60,9 +60,9 @@
 
 ### 📚 Complete References
 
-- [🎓 Complete Skills Reference (69 Skills)](#-complete-skills-reference-71-skills)
+- [🎓 Complete Skills Reference (72 Skills)](#-complete-skills-reference-72-skills)
 - [🤖 Complete Agents Reference (37 Agents)](#-complete-agents-reference-37-agents)
-- [🏪 Complete Marketplaces Reference (21 Marketplaces)](#-complete-marketplaces-reference-22-marketplaces)
+- [🏪 Complete Marketplaces Reference (49 Marketplaces)](#-complete-marketplaces-reference-49-marketplaces)
 
 ### 🔒 Automation & Safety
 
@@ -556,7 +556,7 @@ The plugin system has **two distinct layers** that work together:
 │  ├── claude-code-plugins/        ← submodule (ignore=all, no_push)          │
 │  ├── taches-cc-resources/        ← submodule (ignore=all, no_push)          │
 │  ├── obra-superpowers/           ← submodule (ignore=all, no_push)          │
-│  └── ... (22 total external repos)                                          │
+│  └── ... (49 total external repos)                                          │
 │                                                                              │
 │  • Updated via: git submodule update --remote --merge                       │
 │  • Changes NOT tracked in parent repo (ignore=all)                          │
@@ -915,7 +915,7 @@ bash ~/.claude/scripts/setup-new-machine.sh
                     ▼             ▼             ▼
            ┌───────────┐  ┌───────────┐  ┌───────────┐
            │ 📈 GSD    │  │ 📝 PLANNING│  │ ⚡ DIRECT │
-           │ Score ≥3  │  │ Score 1-2 │  │ Score ≤0  │
+           │ Score ≥5  │  │ Score 3-4 │  │ Score ≤0  │
            └─────┬─────┘  └─────┬─────┘  └─────┬─────┘
                  │              │              │
                  ▼              ▼              ▼
@@ -924,7 +924,7 @@ bash ~/.claude/scripts/setup-new-machine.sh
 │                                                                              │
 │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐         │
 │  │ 🎓 SKILLS   │  │ 🤖 AGENTS   │  │ 📋 RULES    │  │ 🏪 MARKET-  │         │
-│  │  69 local   │  │ 37 experts  │  │  Checklists │  │   PLACES    │         │
+│  │  72 local   │  │ 37 experts  │  │  Checklists │  │   PLACES    │         │
 │  │             │  │  (Task tool)│  │  & stacks   │  │ 1,700+ more │         │
 │  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘         │
 └─────────────────────────────────┬───────────────────────────────────────────┘
@@ -958,10 +958,10 @@ bash ~/.claude/scripts/setup-new-machine.sh
 ├── 📜 CLAUDE.md (Constitution)
 │   └── Always loaded, references other files contextually
 │
-├── 🎓 skills/ (69 skills)
+├── 🎓 skills/ (72 skills)
 │   └── Loaded when domain context matches
 │
-├── 🤖 agents/ (36 agents)
+├── 🤖 agents/ (37 agents)
 │   └── Spawned via Task tool for deep expertise
 │
 ├── ⌨️ commands/ (30+ commands)
@@ -1121,8 +1121,8 @@ Available for work:         190,800 tokens
 ```
 CLAUDE.md:                    1,100 tokens
 settings.json:                  500 tokens
-All 69 skills loaded:        56,800 tokens  ❌ Never do this!
-All 36 agents defined:       12,950 tokens
+All 72 skills loaded:        56,800 tokens  ❌ Never do this!
+All 37 agents defined:       12,950 tokens
 All MCP servers:              8,400 tokens
 ────────────────────────────────────────────
 TOTAL CONTEXT COST:          79,750 tokens  🚫 UNACCEPTABLE
@@ -1842,7 +1842,7 @@ PostToolUse("Write") → Run Prettier → Format file
 ├── ⚙️ settings.json                      # Claude Code settings & hooks
 ├── 🔌 .mcp.json                          # MCP server definitions
 │
-├── 🎓 skills/                            # 69 domain expertise modules
+├── 🎓 skills/                            # 72 domain expertise modules
 │   ├── 📑 MASTER_INDEX.md                # Complete skill navigation
 │   ├── 📖 README.md                      # Skills usage guide
 │   ├── 👔 EXPERT-SKILLS-GUIDE.md         # 16 domain expert skills
@@ -2151,7 +2151,7 @@ Core rules loaded every session (~1,100 tokens):
 
 ---
 
-## 🎓 Complete Skills Reference (69 Skills)
+## 🎓 Complete Skills Reference (72 Skills)
 
 ### 🏛️ Foundation Skills
 
@@ -2387,7 +2387,7 @@ Core rules loaded every session (~1,100 tokens):
 
 ---
 
-## 🏪 Complete Marketplaces Reference (21 Marketplaces)
+## 🏪 Complete Marketplaces Reference (49 Marketplaces)
 
 > **📊 Total: 1,700+ additional skills** from 49 external repositories
 
@@ -3456,7 +3456,7 @@ The toolkit uses git submodules for external repositories. Understanding this is
 │       ├── auto-claude/                ← Submodule (read-only)
 │       ├── claude-code-plugins/        ← Submodule (read-only)
 │       ├── get-shit-done/              ← Submodule (read-only)
-│       └── ... (22 total)              ← All read-only
+│       └── ... (49 total)              ← All read-only
 ```
 
 #### 📋 Submodule Commands Reference
@@ -3600,8 +3600,8 @@ claude
 
 ```
 ✓ CLAUDE.md loaded (194 lines, ~1,100 tokens)
-✓ 69 skills available
-✓ 36 agents available
+✓ 72 skills available
+✓ 37 agents available
 ✓ 49 marketplace repos synced
 ✓ 2 hooks configured (PostToolUse for Prettier)
 ✓ MCP servers: all disabled (optimal)
@@ -5895,8 +5895,7 @@ Implement JWT refresh token endpoint
 | 🔍 **First-Principles**  | Break problems to fundamentals    | `/consider:first-principles`  |
 | 🔎 **5-Whys**            | Root cause analysis               | `/consider:5-whys`            |
 | 📊 **Eisenhower Matrix** | Urgency/importance prioritization | `/consider:eisenhower-matrix` |
-| ⚖️ **Pros/Cons**         | Trade-off evaluation              | `/consider:pros-cons`         |
-| 📈 **SWOT**              | Strategic analysis                | `/consider:swot`              |
+| ⚖️ **SWOT**              | Trade-off and strategic analysis  | `/consider:swot`              |
 | 🎯 **Decision Matrix**   | Multi-criteria decisions          | `/consider:decision-matrix`   |
 
 ### 🎯 When to Use Each
@@ -5906,8 +5905,7 @@ Implement JWT refresh token endpoint
 | "Should I use X or Y?"         | 🔍 First-Principles  |
 | "Why does this keep failing?"  | 🔎 5-Whys            |
 | "What should I work on first?" | 📊 Eisenhower Matrix |
-| "What are the trade-offs?"     | ⚖️ Pros/Cons         |
-| "Evaluate this strategy"       | 📈 SWOT              |
+| "What are the trade-offs?"     | ⚖️ SWOT              |
 | "Compare multiple options"     | 🎯 Decision Matrix   |
 
 ---
@@ -5990,8 +5988,7 @@ Implement JWT refresh token endpoint
 | 🔍 `/consider:first-principles`  | Fundamental analysis |
 | 🔎 `/consider:5-whys`            | Root cause           |
 | 📊 `/consider:eisenhower-matrix` | Priority matrix      |
-| ⚖️ `/consider:pros-cons`         | Trade-offs           |
-| 📈 `/consider:swot`              | SWOT analysis        |
+| ⚖️ `/consider:swot`              | SWOT / Trade-offs    |
 | 🎯 `/consider:decision-matrix`   | Multi-criteria       |
 
 ### 💪 Obra Superpowers
@@ -6452,8 +6449,8 @@ See [CHANGELOG.md](./CHANGELOG.md) for complete history.
 
 | Resource                                            | Description             |
 | :-------------------------------------------------- | :---------------------- |
-| 🎓 [Skills Catalog](./skills/MASTER_INDEX.md)       | All 69 skills           |
-| 🤖 [Agents Catalog](./agents/README.md)             | All 36 agents           |
+| 🎓 [Skills Catalog](./skills/MASTER_INDEX.md)       | All 72 skills           |
+| 🤖 [Agents Catalog](./agents/README.md)             | All 37 agents           |
 | 🔄 [Workflow Guide](./docs/WORKFLOW-GUIDE.md)       | Workflow patterns       |
 | 🏪 [Marketplace Guide](./docs/MARKETPLACE-GUIDE.md) | All 49 marketplaces     |
 | 🤖 [Auto-Claude Guide](./docs/AUTO-CLAUDE-GUIDE.md) | Autonomous coding setup |
@@ -7550,7 +7547,7 @@ Browser-based toolkit management interface.
 │  │ SKILLS OVERVIEW                                                   ⟳ 🔍  ││
 │  ├─────────────────────────────────────────────────────────────────────────┤│
 │  │                                                                          ││
-│  │  Local Skills: 69        Marketplace: 1,700+      Total: 1,769+         ││
+│  │  Local Skills: 72        Marketplace: 1,700+      Total: 1,772+         ││
 │  │  ═══════════════════════════════════════════════════════════════════    ││
 │  │                                                                          ││
 │  │  ┌──────────────────────┐  ┌──────────────────────┐                     ││
@@ -8476,8 +8473,8 @@ The toolkit logs security-relevant events:
 ~/.claude/
 ├── CLAUDE.md          # Constitution
 ├── README.md          # Documentation
-├── agents/            # 36 agents
-├── skills/            # 69 skills
+├── agents/            # 37 agents
+├── skills/            # 72 skills
 ├── commands/          # Slash commands
 ├── rules/             # Contextual rules
 ├── docs/              # Extended docs
@@ -8507,13 +8504,13 @@ The toolkit logs security-relevant events:
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│           TOOLKIT v1.4.3 STATISTICS                          │
+│           TOOLKIT v2.2.0 STATISTICS                          │
 ├─────────────────────────────────────────────────────────────┤
-│  Skills:        69 local + 1,496 marketplace                 │
+│  Skills:        72 local + 1,700+ marketplace                 │
 │  Agents:        37                                           │
 │  Commands:      15                                           │
 │  Hooks:         2 (PostToolUse for Prettier)                 │
-│  Marketplaces:  21                                           │
+│  Marketplaces:  49                                           │
 │  Platforms:     Windows, macOS, Linux                        │
 └─────────────────────────────────────────────────────────────┘
 ```
@@ -8562,7 +8559,7 @@ $$$$$$\   $$\ $$$$$$$\      $$$$$$$\ $$ | $$$$$$\  $$\   $$\  $$$$$$$ | $$$$$$\ 
      \______/
 ```
 
-### 🚀 **71 Skills** • 🤖 **37 Agents** • 🏪 **22 Marketplaces** • ⚡ **Complete Automation**
+### 🚀 **72 Skills** • 🤖 **37 Agents** • 🏪 **49 Marketplaces** • ⚡ **Complete Automation**
 
 **Transform Claude Code from a capable assistant into an enterprise-grade development environment.**
 

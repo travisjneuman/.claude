@@ -578,7 +578,7 @@ Each gets its own worktree - completely isolated.
 
 ## Related Documentation
 
-- [MARKETPLACE-GUIDE.md](./MARKETPLACE-GUIDE.md) - All 22 marketplaces
+- [MARKETPLACE-GUIDE.md](./MARKETPLACE-GUIDE.md) - All 49 marketplaces
 - [WORKFLOW-GUIDE.md](./WORKFLOW-GUIDE.md) - Workflow patterns
 - [CLAUDE.md](../CLAUDE.md) - Core rules
 
