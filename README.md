@@ -106,9 +106,9 @@ The **Ultimate Claude Code Toolkit** transforms [Claude Code](https://docs.anthr
 
 |      Component      |  Count  | Description                                                                                                                                                                                 |
 | :-----------------: | :-----: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-|    🎓 **Skills**    | **69**  | Domain expertise modules covering iOS, Android, React, Vue, Svelte, DevOps, AI/ML, scientific computing, business strategy, and more                                                        |
+|    🎓 **Skills**    | **72**  | Domain expertise modules covering iOS, Android, React, Vue, Svelte, DevOps, AI/ML, scientific computing, business strategy, and more                                                        |
 |    🤖 **Agents**    | **37**  | Specialized AI subagents for deep expertise in code review, security auditing, architecture analysis, platform development, and creative work                                               |
-| 🏪 **Marketplaces** | **21**  | External repositories containing **1,700+** additional skills from the community                                                                                                            |
+| 🏪 **Marketplaces** | **49**  | External repositories containing **1,700+** additional skills from the community                                                                                                            |
 |   ⌨️ **Commands**   | **30+** | Custom slash commands for task routing, skill discovery, decision frameworks, and workflow automation                                                                                       |
 |    📋 **Rules**     | **17+** | Contextual guidelines for different tech stacks ([React](https://react.dev), [Python](https://python.org), [Go](https://go.dev), [Rust](https://rust-lang.org)), checklists, and automation |
 |    🪝 **Hooks**     |  **5**  | Git hooks (pre-commit, commit-msg, pre-push) and Claude Code lifecycle hooks (PostToolUse for Prettier formatting)                                                                          |
@@ -8480,7 +8480,7 @@ The toolkit logs security-relevant events:
 ├── docs/              # Extended docs
 ├── templates/         # Creation templates
 ├── plugins/           # External integrations
-│   └── marketplaces/  # 21 submodules
+│   └── marketplaces/  # 49 submodules
 └── scripts/           # Automation
 ```
 
