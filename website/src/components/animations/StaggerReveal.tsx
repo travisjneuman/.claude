@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -20,17 +20,25 @@ export default function StaggerReveal({
   selector = ':scope > *',
 }: StaggerRevealProps) {
   const ref = useRef<HTMLDivElement>(null);
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
 
     const items = el.querySelectorAll(selector);
-    if (items.length === 0) return;
+    if (items.length === 0) {
+      setReady(true);
+      return;
+    }
 
-    gsap.from(items, {
-      opacity: 0,
-      y: 30,
+    // Set initial hidden state via GSAP (not CSS) so fallback is visible
+    gsap.set(items, { opacity: 0, y: 30 });
+    setReady(true);
+
+    const tween = gsap.to(items, {
+      opacity: 1,
+      y: 0,
       duration: 0.6,
       stagger,
       ease: 'power3.out',
@@ -42,6 +50,7 @@ export default function StaggerReveal({
     });
 
     return () => {
+      tween.kill();
       ScrollTrigger.getAll().forEach((t) => {
         if (t.trigger === el) t.kill();
       });
@@ -49,7 +58,7 @@ export default function StaggerReveal({
   }, [stagger, selector]);
 
   return (
-    <div ref={ref} className={className}>
+    <div ref={ref} className={className} style={ready ? undefined : { opacity: 1 }}>
       {children}
     </div>
   );
