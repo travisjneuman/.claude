@@ -197,9 +197,9 @@ export default function Home() {
               </div>
             </div>
             <div>
-              <span className="text-[var(--text-muted)]"># Initialize submodules (marketplace plugins)</span>
+              <span className="text-[var(--text-muted)]"># Run setup (submodules, no_push protection, plugin registration)</span>
               <div className="text-[var(--accent-green)] mt-1">
-                $ cd ~/.claude && git submodule update --init --recursive
+                $ cd ~/.claude && bash scripts/setup-new-machine.sh
               </div>
             </div>
             <div>
@@ -207,6 +207,10 @@ export default function Home() {
               <div className="text-[var(--accent-green)] mt-1">$ claude</div>
             </div>
           </div>
+
+          <p className="text-xs text-[var(--text-muted)] mt-4">
+            The setup script initializes submodules, enforces no_push on all marketplace repos, registers marketplaces, and installs plugins.
+          </p>
         </ScrollReveal>
       </section>
 
