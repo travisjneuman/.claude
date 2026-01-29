@@ -284,7 +284,8 @@ The `/start-task` command scores complexity to determine workflow:
 
 | Score | Workflow                       |
 | ----- | ------------------------------ |
-| >= 3  | GSD (multi-phase project)      |
+| >= 5  | GSD (multi-phase project)      |
+| 3-4   | Auto-Claude or EnterPlanMode   |
 | 1-2   | EnterPlanMode (planning first) |
 | <= 0  | Direct execution               |
 
