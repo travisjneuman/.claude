@@ -2,7 +2,7 @@
 
 This document explains the security decisions made when this repository was made public, and why certain files are gitignored.
 
-**Last Updated:** January 3, 2026 (v2.0)
+**Last Updated:** January 2026 (v2.2)
 
 ---
 
