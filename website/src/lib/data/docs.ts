@@ -6,6 +6,7 @@ export interface DocPage {
   slug: string;
   name: string;
   description: string;
+  content: string;
 }
 
 export function getDocs(): DocPage[] {
@@ -37,6 +38,7 @@ export function getDocs(): DocPage[] {
           .replace(/-/g, ' ')
           .replace(/\b\w/g, (c: string) => c.toUpperCase()),
       description,
+      content: content.slice(0, 3000),
     });
   }
 
