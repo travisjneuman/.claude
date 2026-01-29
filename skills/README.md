@@ -2,9 +2,9 @@
 
 Comprehensive skills for Claude Code - 72 skills covering all development domains.
 
-**Plus:** 49 marketplace repos with 1,700+ additional skills.
+**Plus:** 50 marketplace repos with 1,700+ additional skills.
 
-**Version:** 4.3 (49 Marketplace Repos + Updated Counts)
+**Version:** 4.4 (50 Marketplace Repos)
 **Last Updated:** January 2026
 
 ---

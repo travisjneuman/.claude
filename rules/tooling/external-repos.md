@@ -49,6 +49,7 @@ All external repos are located in `~/.claude/plugins/marketplaces/`:
 | madappgang-claude-code | https://github.com/MadAppGang/claude-code.git |
 | mhattingpete-skills | https://github.com/mhattingpete/claude-skills-marketplace.git |
 | mojito-freeship-skills | https://github.com/mojito-llm/freeship-skills.git |
+| mvanhorn-last30days-skill | https://github.com/mvanhorn/last30days-skill.git |
 | muratcankoylan-agent-skills | https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering.git |
 | neolab-context-kit | https://github.com/NeoLabHQ/context-engineering-kit.git |
 | numman-ali-openskills | https://github.com/numman-ali/openskills.git |
