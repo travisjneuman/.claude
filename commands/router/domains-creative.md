@@ -28,8 +28,17 @@ Load this file when creative/design keywords detected.
 
 **IMPORTANT**: For any UI work, ALWAYS invoke `Skill(ui-research)` FIRST before `frontend-enhancer`.
 
+## Marketplace Resources for Creative Work
+
+| Domain | Marketplace Repos | Notes |
+|--------|------------------|-------|
+| Worldbuilding | worldbuilding-skills (52) | Creative worldbuilding, narrative design |
+| Film/AIGC | mojito-freeship-skills (4) | AI-generated film production |
+| General creative | davila7-templates, athola-night-market | Templates and patterns |
+
 ## Creative Process Notes
 
 - Research inspiration before designing
 - Reference existing brand guidelines if available
 - Consider accessibility in all visual work
+- Check worldbuilding-skills for narrative/creative writing tasks
