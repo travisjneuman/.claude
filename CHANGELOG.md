@@ -2,6 +2,15 @@
 
 All notable changes to the Ultimate Claude Code Toolkit.
 
+## [2.2.1] - January 28, 2026
+
+### Added
+
+- **mvanhorn-last30days-skill** - New marketplace repo (#50) for researching any topic from the last 30 days
+- Updated all documentation from 49 → 50 marketplace repos
+
+---
+
 ## [2.2.0] - January 28, 2026
 
 ### Major Enhancement: Marketplace Expansion & Documentation Audit

@@ -199,7 +199,7 @@ Use these **anytime** — never blocked by GSD or workflow stage:
 
 ## Skill Discovery
 
-**72 local skills, 36 local agents** + **1,700+ marketplace skills across 49 repos**
+**72 local skills, 36 local agents** + **1,700+ marketplace skills across 50 repos**
 
 ### Discovery Protocol (mandatory before specialized work)
 
@@ -239,7 +239,7 @@ Use these **anytime** — never blocked by GSD or workflow stage:
 | Contextual rules  | `rules/`                           |
 | Skills            | `skills/`                          |
 | Commands          | `commands/`                        |
-| External repos    | `plugins/marketplaces/` (49 repos) |
+| External repos    | `plugins/marketplaces/` (50 repos) |
 
 ---
 

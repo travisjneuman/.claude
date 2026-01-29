@@ -162,3 +162,6 @@
 [submodule "plugins/marketplaces/obra-superpowers"]
 	path = plugins/marketplaces/obra-superpowers
 	url = https://github.com/obra/superpowers.git
+[submodule "plugins/marketplaces/mvanhorn-last30days-skill"]
+	path = plugins/marketplaces/mvanhorn-last30days-skill
+	url = https://github.com/mvanhorn/last30days-skill.git

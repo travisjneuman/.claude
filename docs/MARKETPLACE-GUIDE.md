@@ -1,6 +1,6 @@
 # Marketplace Guide
 
-Complete reference for the 49 plugin marketplaces and how to use them.
+Complete reference for the 50 plugin marketplaces and how to use them.
 
 **Last Updated:** January 2026 (v3.0)
 
@@ -104,6 +104,7 @@ Complete reference for the 49 plugin marketplaces and how to use them.
 | `diet103-infrastructure` | 5 infrastructure skills | Infrastructure patterns |
 | `worldbuilding-skills` | 52 worldbuilding skills | Creative worldbuilding, narrative |
 | `mojito-freeship-skills` | 4 film/AIGC skills | AI-generated film production |
+| `mvanhorn-last30days-skill` | 1 research skill | Research any topic from last 30 days (Reddit, X, web) |
 | `ananddtyagi-marketplace` | CC marketplace | Community marketplace |
 
 ### Context Engineering & Planning
@@ -251,4 +252,4 @@ All marketplaces are configured with `no_push` - read-only access.
 
 ---
 
-_49 marketplaces, 1,700+ skills, discovered proactively when domain expertise is needed._
+_50 marketplaces, 1,700+ skills, discovered proactively when domain expertise is needed._
