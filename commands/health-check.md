@@ -56,7 +56,7 @@ Verify:
 | `commands/`             | 10+ files | `ls ~/.claude/commands/*.md \| wc -l`         |
 | `rules/`                | 13+ files | `find ~/.claude/rules -name "*.md" \| wc -l`  |
 | `templates/`            | 5+ files  | `ls ~/.claude/templates/ \| wc -l`            |
-| `plugins/marketplaces/` | 21 repos  | `ls ~/.claude/plugins/marketplaces/ \| wc -l` |
+| `plugins/marketplaces/` | 49 repos  | `ls ~/.claude/plugins/marketplaces/ \| wc -l` |
 
 ### Step 3: Hooks Status
 
@@ -99,7 +99,7 @@ grep -A1 '"disabledMcpjsonServers"' ~/.claude/settings.json
 ║  Claude Code Toolkit Health Check                          ║
 ╠════════════════════════════════════════════════════════════╣
 ║  Configuration:  ✅ OK                                      ║
-║  Structure:      ✅ OK (71 skills, 36 agents, 21 markets)  ║
+║  Structure:      ✅ OK (69 skills, 36 agents, 49 markets)  ║
 ║  Hooks:          ✅ 10/10 configured                        ║
 ║  Git:            ✅ Clean, submodules synced               ║
 ║  MCP Servers:    ✅ 9 available (all disabled by default)  ║

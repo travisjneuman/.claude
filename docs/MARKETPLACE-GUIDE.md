@@ -223,4 +223,4 @@ All marketplaces are configured with `no_push` - read-only access.
 
 ---
 
-_22 marketplaces, 1,496+ skills, discovered proactively when domain expertise is needed._
+_49 marketplaces, 1,700+ skills, discovered proactively when domain expertise is needed._

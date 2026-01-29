@@ -33,7 +33,7 @@ Display comprehensive categorized skill overview:
 
 ---
 
-## Local Skills (71 total)
+## Local Skills (69 total)
 
 ### Foundation
 
@@ -127,53 +127,46 @@ Display comprehensive categorized skill overview:
 
 ---
 
-## Marketplace Skills (1,496+ total)
+## Marketplace Skills (1,700+ total across 49 repos)
 
-### Scientific & Research (claude-scientific-skills)
+### Top Repos by Skill Count
 
-125+ skills for scientific computing:
+| Repo | Skills | Focus |
+|------|--------|-------|
+| davila7-templates | 651 | Templates and code patterns |
+| claude-scientific-skills | 144 | Scientific computing (bio, chem, physics) |
+| wshobson-agents | 129 | Progressive disclosure architecture |
+| athola-night-market | 125 | General-purpose skill marketplace |
+| madappgang-claude-code | 110 | Full-stack development |
+| worldbuilding-skills | 52 | Creative worldbuilding |
+| trailofbits-skills | 50 | Professional security auditing |
+| buildwithclaude | 43 | Full-stack + subagents + commands |
+| alirezarezvani-claude-skills | 42 | General development |
+| skillsforge | 34 | Curated quality skills |
+| secondsky-sap-skills | 33 | SAP and enterprise |
+| awesome-claude-skills | 32 | Documents, canvas, forensics |
 
-- **Bioinformatics:** Sequence analysis, BLAST, genomics, transcriptomics
-- **Chemistry:** Molecular modeling, reaction prediction, spectroscopy
-- **Physics:** Quantum mechanics, particle physics, astrophysics
-- **Proteomics:** Protein structure, mass spectrometry, interactomics
-- **Clinical:** Drug discovery, clinical trials, medical imaging
+### Specialized Repos
 
-### Development (claude-code-plugins-plus-skills)
+- **Security:** trailofbits-skills (50 professional security skills)
+- **Scientific:** claude-scientific-skills (144), anthropic-life-sciences (6), gqy20-biology-plugins
+- **Enterprise/SAP:** secondsky-sap-skills (33)
+- **Elixir:** bradleygolden-elixir (4), georgeguimaraes-elixir (6)
+- **Terraform/IaC:** hashi-terraform-skills (4)
+- **Perl/CPAN:** kfly8-cpan-plugins (3)
+- **Film/AIGC:** mojito-freeship-skills (4)
+- **Finance:** quant-equity-research
+- **Context Engineering:** neolab-context-kit (11), muratcankoylan-agent-skills (19)
+- **Planning:** othmanadi-planning (12)
+- **Infrastructure:** diet103-infrastructure (5)
+- **Meta-Skills:** taches-cc-resources (11), claude-plugins-official (13)
+- **Workflow:** get-shit-done, auto-claude
 
-185 production-ready skills across 18 domains.
+### Search Marketplace Skills
 
-### Architecture (wshobson-agents)
-
-107 skills with progressive disclosure architecture.
-
-### Workflow (obra-superpowers)
-
-20+ battle-tested skills: /brainstorm, /write-plan, /execute-plan
-
-### DevOps (voltagent-subagents)
-
-100+ specialized agents for full-stack and DevOps.
-
-### Automation (mhattingpete-skills)
-
-10+ skills for git automation, testing, code review.
-
-### Curated (skillsforge)
-
-29 curated quality skills.
-
-### Meta-Skills (taches-cc-resources)
-
-Prompt engineering, hook creation, skill development.
-
-### Discovery (skill-seekers)
-
-Skill discovery and recommendation tools.
-
-### Document Processing (awesome-claude-skills)
-
-27 skills for documents, canvas, forensics, invoices.
+```bash
+find ~/.claude/plugins/marketplaces -name "SKILL.md" | xargs grep -li "<keyword>"
+```
 
 ---
 
@@ -226,4 +219,4 @@ Just describe your task - skills auto-activate based on description matching.
 
 ---
 
-_71 local skills + 21 marketplaces (1,496+ skills) = comprehensive coverage for any domain_
+_69 local skills + 49 marketplaces (1,700+ skills) = comprehensive coverage for any domain_
