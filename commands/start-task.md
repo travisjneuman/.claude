@@ -1,5 +1,5 @@
 ---
-description: Universal intelligent router - routes ANY prompt to optimal resources from 21 marketplaces, 71 skills, 36 agents
+description: Universal intelligent router - routes ANY prompt to optimal resources from 49 marketplaces, 69 skills, 36 agents
 arguments:
   - name: task_description
     description: "What you want to accomplish. Natural language - just describe it."
@@ -137,12 +137,24 @@ Read `commands/router/routing-logic.md` for complexity scoring.
 - Spawn agents via `Task` tool as needed
 
 **2. Intelligent marketplace skill discovery:**
-When domain detection identifies a specialized area, check for marketplace skills:
+When domain detection identifies a specialized area, search marketplace skills:
 
-- Search pattern: Look for relevant skills across 21 marketplace repos
-- Priority: Local skills first, then marketplace skills
+- Search: `find ~/.claude/plugins/marketplaces -name "SKILL.md" | xargs grep -li "<keyword>"`
+- Priority: Local skills first, then marketplace skills from 49 repos (1,700+ skills)
 - Auto-suggest highly relevant marketplace skills when found
-- Example: "React animation" → check for animation-specific skills in marketplaces
+- Key marketplace repos by domain:
+  - **Security:** trailofbits-skills (50), claude-scientific-skills (144)
+  - **Full-stack:** buildwithclaude (43), madappgang-claude-code (110), wshobson-agents (129)
+  - **Templates:** davila7-templates (651), athola-night-market (125)
+  - **SAP/Enterprise:** secondsky-sap-skills (33)
+  - **Elixir:** bradleygolden-elixir (4), georgeguimaraes-elixir (6)
+  - **Terraform/IaC:** hashi-terraform-skills (4)
+  - **Biology:** gqy20-biology-plugins, claude-scientific-skills
+  - **Finance:** quant-equity-research
+  - **Worldbuilding/Creative:** worldbuilding-skills (52)
+  - **Context Engineering:** neolab-context-kit (11), muratcankoylan-agent-skills (19)
+  - **Infrastructure:** diet103-infrastructure (5)
+  - **Film/AIGC:** mojito-freeship-skills (4)
 
 **3. Multi-window workflow awareness:**
 
