@@ -125,7 +125,7 @@ export default function Home() {
       </section>
 
       {/* Terminal Demo */}
-      <section className="py-24 px-6">
+      <section className="py-16 px-6">
         <ScrollReveal className="max-w-4xl mx-auto text-center mb-12">
           <p className="text-sm font-mono text-[var(--accent-cyan)] tracking-widest uppercase mb-3">
             Interactive Demo
@@ -145,7 +145,7 @@ export default function Home() {
       </section>
 
       {/* Skills Overview */}
-      <section className="py-24 px-6">
+      <section className="py-16 px-6">
         <div className="max-w-6xl mx-auto">
           <ScrollReveal className="text-center mb-12">
             <p className="text-sm font-mono text-[var(--accent-purple)] tracking-widest uppercase mb-3">
@@ -185,7 +185,7 @@ export default function Home() {
       </section>
 
       {/* Agents Showcase */}
-      <section className="py-24 px-6" style={{ background: 'var(--surface)' }}>
+      <section className="py-16 px-6" style={{ background: 'var(--surface)' }}>
         <div className="max-w-6xl mx-auto">
           <ScrollReveal className="text-center mb-12">
             <p className="text-sm font-mono text-[var(--accent-blue)] tracking-widest uppercase mb-3">
@@ -233,7 +233,7 @@ export default function Home() {
       </section>
 
       {/* Marketplace Stats */}
-      <section className="py-24 px-6">
+      <section className="py-16 px-6">
         <div className="max-w-4xl mx-auto text-center">
           <ScrollReveal>
             <p className="text-sm font-mono text-[var(--accent-green)] tracking-widest uppercase mb-3">
@@ -275,7 +275,7 @@ export default function Home() {
       </section>
 
       {/* Getting Started */}
-      <section className="py-24 px-6" style={{ background: 'var(--surface)' }}>
+      <section className="py-16 px-6" style={{ background: 'var(--surface)' }}>
         <ScrollReveal className="max-w-3xl mx-auto text-center">
           <h2 className="text-3xl font-bold text-[var(--text-primary)] mb-4">Get Started</h2>
           <p className="text-[var(--text-secondary)] mb-10">
