@@ -156,7 +156,7 @@ Submodules:
 
 Resources:
   • 72 local skills
-  • 37 local agents
+  • 36 local agents
   • 1,700+ marketplace skills (49 repos)
 
 Hooks:

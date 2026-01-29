@@ -24,7 +24,7 @@
 
 [![Claude Code](https://img.shields.io/badge/Claude_Code-6366f1?style=for-the-badge&logo=anthropic&logoColor=white)](https://claude.com/claude-code)
 [![Skills](https://img.shields.io/badge/Skills-72+-10b981?style=for-the-badge&logo=sparkles&logoColor=white)](./skills/MASTER_INDEX.md)
-[![Agents](https://img.shields.io/badge/Agents-37+-f59e0b?style=for-the-badge&logo=robot&logoColor=white)](./agents/README.md)
+[![Agents](https://img.shields.io/badge/Agents-36+-f59e0b?style=for-the-badge&logo=robot&logoColor=white)](./agents/README.md)
 [![Marketplaces](https://img.shields.io/badge/Marketplaces-49-3b82f6?style=for-the-badge&logo=store&logoColor=white)](./docs/MARKETPLACE-GUIDE.md)
 [![Marketplace Skills](https://img.shields.io/badge/Marketplace_Skills-1700+-ec4899?style=for-the-badge&logo=package&logoColor=white)](./plugins/marketplaces/)
 [![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge&logo=opensourceinitiative&logoColor=white)](./LICENSE)
@@ -107,7 +107,7 @@ The **Ultimate Claude Code Toolkit** transforms [Claude Code](https://docs.anthr
 |      Component      |  Count  | Description                                                                                                                                                                                 |
 | :-----------------: | :-----: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 |    🎓 **Skills**    | **72**  | Domain expertise modules covering iOS, Android, React, Vue, Svelte, DevOps, AI/ML, scientific computing, business strategy, and more                                                        |
-|    🤖 **Agents**    | **37**  | Specialized AI subagents for deep expertise in code review, security auditing, architecture analysis, platform development, and creative work                                               |
+|    🤖 **Agents**    | **36**  | Specialized AI subagents for deep expertise in code review, security auditing, architecture analysis, platform development, and creative work                                               |
 | 🏪 **Marketplaces** | **49**  | External repositories containing **1,700+** additional skills from the community                                                                                                            |
 |   ⌨️ **Commands**   | **30+** | Custom slash commands for task routing, skill discovery, decision frameworks, and workflow automation                                                                                       |
 |    📋 **Rules**     | **17+** | Contextual guidelines for different tech stacks ([React](https://react.dev), [Python](https://python.org), [Go](https://go.dev), [Rust](https://rust-lang.org)), checklists, and automation |
@@ -961,7 +961,7 @@ bash ~/.claude/scripts/setup-new-machine.sh
 ├── 🎓 skills/ (72 skills)
 │   └── Loaded when domain context matches
 │
-├── 🤖 agents/ (37 agents)
+├── 🤖 agents/ (36 agents)
 │   └── Spawned via Task tool for deep expertise
 │
 ├── ⌨️ commands/ (30+ commands)
@@ -1122,7 +1122,7 @@ Available for work:         190,800 tokens
 CLAUDE.md:                    1,100 tokens
 settings.json:                  500 tokens
 All 72 skills loaded:        56,800 tokens  ❌ Never do this!
-All 37 agents defined:       12,950 tokens
+All 36 agents defined:       12,950 tokens
 All MCP servers:              8,400 tokens
 ────────────────────────────────────────────
 TOTAL CONTEXT COST:          79,750 tokens  🚫 UNACCEPTABLE
@@ -3601,7 +3601,7 @@ claude
 ```
 ✓ CLAUDE.md loaded (194 lines, ~1,100 tokens)
 ✓ 72 skills available
-✓ 37 agents available
+✓ 36 agents available
 ✓ 49 marketplace repos synced
 ✓ 2 hooks configured (PostToolUse for Prettier)
 ✓ MCP servers: all disabled (optimal)
@@ -6450,7 +6450,7 @@ See [CHANGELOG.md](./CHANGELOG.md) for complete history.
 | Resource                                            | Description             |
 | :-------------------------------------------------- | :---------------------- |
 | 🎓 [Skills Catalog](./skills/MASTER_INDEX.md)       | All 72 skills           |
-| 🤖 [Agents Catalog](./agents/README.md)             | All 37 agents           |
+| 🤖 [Agents Catalog](./agents/README.md)             | All 36 agents           |
 | 🔄 [Workflow Guide](./docs/WORKFLOW-GUIDE.md)       | Workflow patterns       |
 | 🏪 [Marketplace Guide](./docs/MARKETPLACE-GUIDE.md) | All 49 marketplaces     |
 | 🤖 [Auto-Claude Guide](./docs/AUTO-CLAUDE-GUIDE.md) | Autonomous coding setup |
@@ -8473,7 +8473,7 @@ The toolkit logs security-relevant events:
 ~/.claude/
 ├── CLAUDE.md          # Constitution
 ├── README.md          # Documentation
-├── agents/            # 37 agents
+├── agents/            # 36 agents
 ├── skills/            # 72 skills
 ├── commands/          # Slash commands
 ├── rules/             # Contextual rules
