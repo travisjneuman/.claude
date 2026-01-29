@@ -5896,7 +5896,7 @@ Implement JWT refresh token endpoint
 | 🔎 **5-Whys**            | Root cause analysis               | `/consider:5-whys`            |
 | 📊 **Eisenhower Matrix** | Urgency/importance prioritization | `/consider:eisenhower-matrix` |
 | ⚖️ **SWOT**              | Trade-off and strategic analysis  | `/consider:swot`              |
-| 🎯 **Decision Matrix**   | Multi-criteria decisions          | `/consider:decision-matrix`   |
+| 🎯 **Opportunity Cost**  | Analyze what you give up          | `/consider:opportunity-cost`  |
 
 ### 🎯 When to Use Each
 
@@ -5906,7 +5906,7 @@ Implement JWT refresh token endpoint
 | "Why does this keep failing?"  | 🔎 5-Whys            |
 | "What should I work on first?" | 📊 Eisenhower Matrix |
 | "What are the trade-offs?"     | ⚖️ SWOT              |
-| "Compare multiple options"     | 🎯 Decision Matrix   |
+| "Compare multiple options"     | 🎯 Opportunity Cost  |
 
 ---
 
