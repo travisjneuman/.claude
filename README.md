@@ -8530,7 +8530,7 @@ The toolkit logs security-relevant events:
 ├─────────────────────────────────────────────────────────────┤
 │  Skills:        72 local + 1,700+ marketplace                 │
 │  Agents:        36                                           │
-│  Commands:      15                                           │
+│  Commands:      22 local + plugin commands                    │
 │  Hooks:         2 (PostToolUse for Prettier)                 │
 │  Marketplaces:  50                                           │
 │  Platforms:     Windows, macOS, Linux                        │
