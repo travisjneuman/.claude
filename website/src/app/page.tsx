@@ -35,7 +35,7 @@ export default function Home() {
         />
         <HeroCanvas />
         <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
-          <p className="text-sm font-mono text-[var(--accent-purple)] tracking-widest uppercase mb-6 hero-fade-in">
+          <p className="text-sm font-mono text-[var(--accent-pink)] tracking-widest uppercase mb-6 hero-fade-in">
             .claude configuration
           </p>
           <h1
@@ -44,28 +44,28 @@ export default function Home() {
           >
             Claude Code Supercharged
           </h1>
-          <p className="text-lg text-[var(--text-secondary)] max-w-2xl mx-auto mb-10 leading-relaxed hero-fade-in hero-delay-2">
+          <p className="text-lg text-[var(--text-primary)] max-w-2xl mx-auto mb-10 leading-relaxed hero-fade-in hero-delay-2" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.5)' }}>
             A comprehensive configuration framework with skills, agents, commands, and marketplace
             integrations that transform Claude Code into an autonomous engineering platform.
           </p>
 
           {/* Stats */}
-          <div className="hero-fade-in hero-delay-3 space-y-6 mb-10">
+          <div className="hero-fade-in hero-delay-3 space-y-5 mb-10" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.5)' }}>
             {/* Tier 1: Personal Toolkit */}
             <div className="flex justify-center gap-10">
               <div className="text-center">
-                <div className="text-3xl font-bold text-[var(--text-primary)]">
+                <div className="text-3xl font-bold text-white">
                   <CounterAnimation end={skills.length} />
                 </div>
-                <div className="text-xs font-mono text-[var(--accent-purple)] uppercase tracking-wider mt-1">
+                <div className="text-xs font-mono text-[var(--accent-pink)] uppercase tracking-wider mt-1">
                   Custom Skills
                 </div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-[var(--text-primary)]">
+                <div className="text-3xl font-bold text-white">
                   <CounterAnimation end={agents.length} />
                 </div>
-                <div className="text-xs font-mono text-[var(--accent-blue)] uppercase tracking-wider mt-1">
+                <div className="text-xs font-mono text-[var(--accent-cyan)] uppercase tracking-wider mt-1">
                   Specialized Agents
                 </div>
               </div>
@@ -73,28 +73,28 @@ export default function Home() {
 
             {/* Divider */}
             <div className="flex items-center gap-3 justify-center">
-              <div className="h-px w-12 bg-[var(--border)]" />
-              <span className="text-[10px] font-mono text-[var(--text-muted)] uppercase tracking-widest">
+              <div className="h-px w-12 bg-white/20" />
+              <span className="text-[10px] font-mono text-white/50 uppercase tracking-widest">
                 plus
               </span>
-              <div className="h-px w-12 bg-[var(--border)]" />
+              <div className="h-px w-12 bg-white/20" />
             </div>
 
             {/* Tier 2: Community Marketplace */}
             <div className="flex justify-center gap-10">
               <div className="text-center">
-                <div className="text-3xl font-bold text-[var(--text-primary)]">
+                <div className="text-3xl font-bold text-white">
                   <CounterAnimation end={marketplaceSkills} suffix="+" />
                 </div>
-                <div className="text-xs font-mono text-[var(--accent-green)] uppercase tracking-wider mt-1">
+                <div className="text-xs font-mono text-[var(--accent-yellow)] uppercase tracking-wider mt-1">
                   Marketplace Skills
                 </div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-[var(--text-primary)]">
+                <div className="text-3xl font-bold text-white">
                   <CounterAnimation end={repos.length} />
                 </div>
-                <div className="text-xs font-mono text-[var(--accent-green)] uppercase tracking-wider mt-1">
+                <div className="text-xs font-mono text-[var(--accent-yellow)] uppercase tracking-wider mt-1">
                   Open-Source Repos
                 </div>
               </div>
