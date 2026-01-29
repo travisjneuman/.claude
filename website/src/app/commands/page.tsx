@@ -1,5 +1,6 @@
 import Navigation from '@/components/layout/Navigation';
 import Footer from '@/components/layout/Footer';
+import CommandsList from './CommandsList';
 import { getCommands } from '@/lib/data/commands';
 
 export const metadata = {
@@ -27,20 +28,7 @@ export default function CommandsPage() {
             </p>
           </div>
 
-          <div className="space-y-3">
-            {commands.map((cmd) => (
-              <div key={cmd.slug} className="glow-card p-5 group cursor-default">
-                <div className="flex items-start gap-4">
-                  <span className="text-sm font-mono text-[var(--accent-cyan)] shrink-0 mt-0.5">
-                    /{cmd.slug}
-                  </span>
-                  <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
-                    {cmd.description}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
+          <CommandsList commands={commands} />
 
           {commands.length === 0 && (
             <p className="text-center text-[var(--text-muted)] mt-12">

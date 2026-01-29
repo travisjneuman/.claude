@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const navLinks = [
   { href: '/skills', label: 'Skills' },
@@ -27,7 +28,18 @@ export default function Navigation() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2 group">
+        <Link href="/" className="flex items-center gap-2.5 group">
+          <div className="relative w-8 h-8 rounded-lg overflow-hidden transition-transform duration-300 group-hover:scale-110">
+            <Image
+              src="/images/logo.webp"
+              alt="tjn.claude"
+              width={32}
+              height={32}
+              className="object-cover w-full h-full transition-all duration-300 group-hover:brightness-125"
+              priority
+            />
+            <div className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-[0_0_12px_var(--glow-purple)]" />
+          </div>
           <span className="text-xl font-bold gradient-text">
             Claude Code
           </span>

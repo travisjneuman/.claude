@@ -5,7 +5,32 @@ export interface MarketplaceRepo {
   name: string;
   displayName: string;
   skillCount: number;
+  githubUrl: string;
 }
+
+const GITHUB_URLS: Record<string, string> = {
+  'alirezarezvani-claude-skills': 'https://github.com/alirezarezvani/claude-skills',
+  'alvinunreal-awesome-claude': 'https://github.com/alvinunreal/awesome-claude',
+  'anthropic-agent-skills': 'https://github.com/anthropics/skills',
+  'awesome-claude-skills': 'https://github.com/ComposioHQ/awesome-claude-skills',
+  'behisecc-awesome-claude-skills': 'https://github.com/BehiSecc/awesome-claude-skills',
+  'claude-code-plugins': 'https://github.com/anthropics/claude-code',
+  'claude-code-plugins-plus-skills': 'https://github.com/jeremylongshore/claude-code-plugins-plus-skills',
+  'claude-mem': 'https://github.com/thedotmack/claude-mem',
+  'claude-plugins-official': 'https://github.com/anthropics/claude-plugins-official',
+  'claude-scientific-skills': 'https://github.com/K-Dense-AI/claude-scientific-skills',
+  'get-shit-done': 'https://github.com/glittercowboy/get-shit-done',
+  'hesreallyhim-awesome-claude-code': 'https://github.com/hesreallyhim/awesome-claude-code',
+  'mhattingpete-skills': 'https://github.com/mhattingpete/claude-skills-marketplace',
+  'obra-superpowers': 'https://github.com/obra/superpowers-marketplace',
+  'skill-seekers': 'https://github.com/yusufkaraaslan/Skill_Seekers',
+  'skillsforge': 'https://github.com/rawveg/skillsforge-marketplace',
+  'taches-cc-resources': 'https://github.com/glittercowboy/taches-cc-resources',
+  'travisvn-awesome-claude-skills': 'https://github.com/travisvn/awesome-claude-skills',
+  'voltagent-awesome-claude-skills': 'https://github.com/VoltAgent/awesome-claude-skills',
+  'voltagent-subagents': 'https://github.com/VoltAgent/awesome-claude-code-subagents',
+  'wshobson-agents': 'https://github.com/wshobson/agents',
+};
 
 export function getMarketplaceStats(): { repos: MarketplaceRepo[]; totalSkills: number } {
   const marketDir = path.resolve(process.cwd(), '..', 'plugins', 'marketplaces');
@@ -38,6 +63,7 @@ export function getMarketplaceStats(): { repos: MarketplaceRepo[]; totalSkills: 
       name: entry.name,
       displayName,
       skillCount: count,
+      githubUrl: GITHUB_URLS[entry.name] || `https://github.com/search?q=${encodeURIComponent(entry.name)}`,
     });
 
     totalSkills += count;

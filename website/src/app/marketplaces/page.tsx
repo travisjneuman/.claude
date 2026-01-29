@@ -1,5 +1,6 @@
 import Navigation from '@/components/layout/Navigation';
 import Footer from '@/components/layout/Footer';
+import MarketplaceGrid from './MarketplaceGrid';
 import { getMarketplaceStats } from '@/lib/data/marketplace';
 
 export const metadata = {
@@ -27,27 +28,7 @@ export default function MarketplacesPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {repos.map((repo) => (
-              <div key={repo.name} className="glow-card p-6 group cursor-pointer">
-                <div className="flex items-start justify-between mb-3">
-                  <h3 className="font-semibold text-[var(--text-primary)] group-hover:text-white transition-colors">
-                    {repo.displayName}
-                  </h3>
-                  <span
-                    className="text-[10px] font-mono px-2 py-0.5 rounded-full border"
-                    style={{
-                      borderColor: 'var(--accent-green)',
-                      color: 'var(--accent-green)',
-                    }}
-                  >
-                    {repo.skillCount} skills
-                  </span>
-                </div>
-                <p className="text-sm text-[var(--text-muted)] font-mono">{repo.name}</p>
-              </div>
-            ))}
-          </div>
+          <MarketplaceGrid repos={repos} />
 
           {repos.length === 0 && (
             <div className="text-center py-16">

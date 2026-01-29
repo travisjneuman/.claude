@@ -37,6 +37,8 @@ export default function AgentsPage() {
               description: a.description,
               category: a.category,
               model: a.model,
+              tools: a.tools,
+              content: a.content,
             }))}
             categories={categories}
           />

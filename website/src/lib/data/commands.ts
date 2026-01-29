@@ -6,6 +6,7 @@ export interface Command {
   slug: string;
   name: string;
   description: string;
+  content: string;
 }
 
 export function getCommands(): Command[] {
@@ -33,6 +34,7 @@ export function getCommands(): Command[] {
       slug,
       name: data.name || slug.replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase()),
       description,
+      content: content.slice(0, 2000),
     });
   }
 
