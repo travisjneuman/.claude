@@ -209,17 +209,17 @@ Use these **anytime** — never blocked by GSD or workflow stage:
 
 ### Top Marketplace Repos
 
-| Repo | Skills | Domain |
-|------|--------|--------|
-| davila7-templates | 651 | General templates |
-| claude-scientific-skills | 144 | Science (bio, chem, physics) |
-| wshobson-agents | 129 | Architecture patterns |
-| athola-night-market | 125 | General marketplace |
-| madappgang-claude-code | 110 | Full-stack dev |
-| worldbuilding-skills | 52 | Creative/narrative |
-| trailofbits-skills | 50 | Security auditing |
-| buildwithclaude | 43 | Full-stack + subagents |
-| secondsky-sap-skills | 33 | SAP/Enterprise |
+| Repo                     | Skills | Domain                       |
+| ------------------------ | ------ | ---------------------------- |
+| davila7-templates        | 651    | General templates            |
+| claude-scientific-skills | 144    | Science (bio, chem, physics) |
+| wshobson-agents          | 129    | Architecture patterns        |
+| athola-night-market      | 125    | General marketplace          |
+| madappgang-claude-code   | 110    | Full-stack dev               |
+| worldbuilding-skills     | 52     | Creative/narrative           |
+| trailofbits-skills       | 50     | Security auditing            |
+| buildwithclaude          | 43     | Full-stack + subagents       |
+| secondsky-sap-skills     | 33     | SAP/Enterprise               |
 
 ### Local Skills
 

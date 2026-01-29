@@ -26,7 +26,7 @@ Load this file when creative/design keywords detected.
 | `motion`         | `Skill(ui-animation)`                             | `motion-designer`  |
 | `ui`             | `Skill(ui-research)` + `Skill(frontend-enhancer)` | -                  |
 | `writing`        | `Skill(doc-coauthoring)`                          | -                  |
-| `documents`      | `Skill(pdf)` / `Skill(docx)` / `Skill(xlsx)`     | -                  |
+| `documents`      | `Skill(pdf)` / `Skill(docx)` / `Skill(xlsx)`      | -                  |
 
 ## UI Work Prerequisites
 
@@ -34,11 +34,11 @@ Load this file when creative/design keywords detected.
 
 ## Marketplace Resources for Creative Work
 
-| Domain | Marketplace Repos | Notes |
-|--------|------------------|-------|
-| Worldbuilding | worldbuilding-skills (52) | Creative worldbuilding, narrative design |
-| Film/AIGC | mojito-freeship-skills (4) | AI-generated film production |
-| General creative | davila7-templates, athola-night-market | Templates and patterns |
+| Domain           | Marketplace Repos                      | Notes                                    |
+| ---------------- | -------------------------------------- | ---------------------------------------- |
+| Worldbuilding    | worldbuilding-skills (52)              | Creative worldbuilding, narrative design |
+| Film/AIGC        | mojito-freeship-skills (4)             | AI-generated film production             |
+| General creative | davila7-templates, athola-night-market | Templates and patterns                   |
 
 ## Creative Process Notes
 

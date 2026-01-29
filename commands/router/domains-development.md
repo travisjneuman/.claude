@@ -33,7 +33,7 @@ Load this file when development-related keywords detected.
 | `typescript`    | typescript, types, generics, strict, inference                                          |
 | `go`            | go, golang, goroutine, channel, gin, fiber, cobra                                       |
 | `rust`          | rust, cargo, crate, tokio, async, wasm, lifetime, borrow                                |
-| `data-science`  | data science, pandas, numpy, statistics, visualization, jupyter, notebook                |
+| `data-science`  | data science, pandas, numpy, statistics, visualization, jupyter, notebook               |
 
 ## Resource Mapping
 
@@ -64,8 +64,8 @@ Load this file when development-related keywords detected.
 | `macos`         | `Skill(macos-native)`                    | `macos-developer`         | -                                     |
 | `python`        | -                                        | `python-expert`           | Read rules/stacks/python.md           |
 | `typescript`    | -                                        | `typescript-expert`       | Read rules/stacks/react-typescript.md |
-| `go`            | -                                        | -                         | Read rules/stacks/go.md              |
-| `rust`          | -                                        | -                         | Read rules/stacks/rust.md            |
+| `go`            | -                                        | -                         | Read rules/stacks/go.md               |
+| `rust`          | -                                        | -                         | Read rules/stacks/rust.md             |
 | `data-science`  | `Skill(data-science)`                    | -                         | -                                     |
 
 ## Feature Implementation Routing
@@ -101,19 +101,20 @@ Load this file when development-related keywords detected.
 
 ## Marketplace Repos by Development Domain
 
-| Domain | Marketplace Repos | Notes |
-|--------|------------------|-------|
-| General dev | davila7-templates (651), athola-night-market (125), madappgang-claude-code (110) | Broad coverage |
-| Full-stack | buildwithclaude (43), wshobson-agents (129) | Includes subagents + commands |
-| Security | trailofbits-skills (50) | Professional security auditing |
-| Terraform/IaC | hashi-terraform-skills (4) | HashiCorp Cloud Platform |
-| Infrastructure | diet103-infrastructure (5) | Infrastructure patterns |
-| Elixir | bradleygolden-elixir (4), georgeguimaraes-elixir (6) | Elixir/Phoenix |
-| Perl/CPAN | kfly8-cpan-plugins (3) | Perl ecosystem |
-| Context eng. | neolab-context-kit (11), muratcankoylan-agent-skills (19) | Agent/context patterns |
-| Planning | othmanadi-planning (12) | File-based planning |
+| Domain         | Marketplace Repos                                                                | Notes                          |
+| -------------- | -------------------------------------------------------------------------------- | ------------------------------ |
+| General dev    | davila7-templates (651), athola-night-market (125), madappgang-claude-code (110) | Broad coverage                 |
+| Full-stack     | buildwithclaude (43), wshobson-agents (129)                                      | Includes subagents + commands  |
+| Security       | trailofbits-skills (50)                                                          | Professional security auditing |
+| Terraform/IaC  | hashi-terraform-skills (4)                                                       | HashiCorp Cloud Platform       |
+| Infrastructure | diet103-infrastructure (5)                                                       | Infrastructure patterns        |
+| Elixir         | bradleygolden-elixir (4), georgeguimaraes-elixir (6)                             | Elixir/Phoenix                 |
+| Perl/CPAN      | kfly8-cpan-plugins (3)                                                           | Perl ecosystem                 |
+| Context eng.   | neolab-context-kit (11), muratcankoylan-agent-skills (19)                        | Agent/context patterns         |
+| Planning       | othmanadi-planning (12)                                                          | File-based planning            |
 
 Search for domain-specific marketplace skills:
+
 ```bash
 find ~/.claude/plugins/marketplaces -name "SKILL.md" | xargs grep -li "<keyword>"
 ```

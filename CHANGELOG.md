@@ -14,7 +14,7 @@ Live website, branding consistency, and comprehensive documentation updates.
 - **Pull All Repos script** — `_pull-all-repos.sh` cross-platform script to sync parent repo, 50 marketplace submodules, and custom project directories with no_push enforcement and detached HEAD auto-fix.
 - **HomeCards component** — Client component with modal detail views for skills, agents, and marketplace repos on homepage.
 - **Curated featured content** — Homepage shows hand-picked highest-ROI skills and agents instead of alphabetical order.
-- **skip-worktree documentation** — Added tip to MAINTENANCE.md for keeping local customizations to _pull-all-repos.sh without committing them.
+- **skip-worktree documentation** — Added tip to MAINTENANCE.md for keeping local customizations to \_pull-all-repos.sh without committing them.
 
 ### Changed
 

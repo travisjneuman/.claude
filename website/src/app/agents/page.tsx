@@ -1,11 +1,12 @@
-import Navigation from '@/components/layout/Navigation';
-import Footer from '@/components/layout/Footer';
-import AgentsGrid from './AgentsGrid';
-import { getAgents } from '@/lib/data/agents';
+import Navigation from "@/components/layout/Navigation";
+import Footer from "@/components/layout/Footer";
+import AgentsGrid from "./AgentsGrid";
+import { getAgents } from "@/lib/data/agents";
 
 export const metadata = {
-  title: 'Agents | Claude Code Supercharged',
-  description: 'Browse all specialized agents in the Claude Code configuration framework.',
+  title: "Agents | Claude Code Supercharged",
+  description:
+    "Browse all specialized agents in the Claude Code configuration framework.",
 };
 
 export default function AgentsPage() {
@@ -25,8 +26,8 @@ export default function AgentsPage() {
               {agents.length} Specialized Agents
             </h1>
             <p className="text-[var(--text-secondary)] max-w-xl mx-auto">
-              Autonomous sub-agents tuned for specific domains with curated tool access and model
-              selection.
+              Autonomous sub-agents tuned for specific domains with curated tool
+              access and model selection.
             </p>
           </div>
 

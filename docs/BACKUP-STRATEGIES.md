@@ -9,6 +9,7 @@
 ## Problem Statement
 
 How to backup ~600 MB of gitignored session data (`history.jsonl`, `projects/`, `file-history/`) across multiple development machines (Windows/macOS/Linux) while:
+
 - Enabling real-time sync for same-session continuity
 - Avoiding git repository corruption
 - Maintaining security (keeping credentials local)
@@ -62,6 +63,7 @@ Proton Drive Location:
 ### Setup Scripts (Pseudocode)
 
 **Bash (Linux/macOS):**
+
 ```bash
 #!/bin/bash
 # setup-proton-backup.sh
@@ -94,6 +96,7 @@ done
 ```
 
 **PowerShell (Windows):**
+
 ```powershell
 # setup-proton-backup.ps1
 
@@ -127,16 +130,19 @@ foreach ($Item in $Items) {
 ### Security Considerations
 
 **What's Synced (Safe):**
+
 - ✅ `history.jsonl` - Conversation data (personal but not credentials)
 - ✅ `projects/` - Session state (no secrets)
 - ✅ `file-history/` - Code edits (already in repos)
 
 **What's NOT Synced (Secure):**
+
 - ❌ `.credentials.json` - OAuth tokens (stays local per machine)
 - ❌ `.mcp.json` - Platform config (different per OS)
 - ❌ `settings.local.json` - Personal overrides (machine-specific)
 
 **Proton Drive Security:**
+
 - End-to-end encrypted
 - Zero-knowledge architecture
 - Safer than most cloud providers for personal data
@@ -144,10 +150,12 @@ foreach ($Item in $Items) {
 ### Troubleshooting
 
 **Symlinks Don't Work on Windows:**
+
 - Enable Developer Mode: Settings → Update & Security → For Developers → Developer Mode: ON
 - Or run PowerShell as Administrator
 
 **Proton Drive Conflicts:**
+
 - Avoid using both machines simultaneously for same project
 - Keep newest version if conflicts occur
 
@@ -162,6 +170,7 @@ Script copies files to Proton Drive on demand. Manual trigger before switching m
 ### Setup
 
 **Linux/macOS:**
+
 ```bash
 #!/bin/bash
 rsync -avz --delete ~/.claude/history.jsonl ~/ProtonDrive/.claude-backup/
@@ -170,6 +179,7 @@ rsync -avz --delete ~/.claude/file-history/ ~/ProtonDrive/.claude-backup/file-hi
 ```
 
 **Windows:**
+
 ```powershell
 robocopy "$HOME\.claude" "$HOME\ProtonDrive\.claude-backup" history.jsonl /MIR
 robocopy "$HOME\.claude\projects" "$HOME\ProtonDrive\.claude-backup\projects" /MIR
@@ -268,30 +278,33 @@ git commit -m "Add LFS tracking"
 
 ## Comparison Matrix
 
-| Feature | Proton Symlinks | Manual Rsync | Git Repo | Git LFS |
-|---------|----------------|--------------|----------|---------|
-| Real-time sync | ✅ Yes | ❌ No | ❌ No | ❌ No |
-| Cross-platform | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
-| Setup complexity | 🟡 Medium | 🟢 Low | 🔴 High | 🟡 Medium |
-| Manual operations | 🟢 None | 🔴 Every switch | 🔴 Every switch | 🔴 Every switch |
-| Cost | 🟢 Free | 🟢 Free | 🟢 Free | 🔴 Paid |
-| Security | 🟢 E2E encrypted | 🟢 E2E encrypted | 🟡 Depends on host | 🟡 Depends on host |
+| Feature           | Proton Symlinks  | Manual Rsync     | Git Repo           | Git LFS            |
+| ----------------- | ---------------- | ---------------- | ------------------ | ------------------ |
+| Real-time sync    | ✅ Yes           | ❌ No            | ❌ No              | ❌ No              |
+| Cross-platform    | ✅ Yes           | ✅ Yes           | ✅ Yes             | ✅ Yes             |
+| Setup complexity  | 🟡 Medium        | 🟢 Low           | 🔴 High            | 🟡 Medium          |
+| Manual operations | 🟢 None          | 🔴 Every switch  | 🔴 Every switch    | 🔴 Every switch    |
+| Cost              | 🟢 Free          | 🟢 Free          | 🟢 Free            | 🔴 Paid            |
+| Security          | 🟢 E2E encrypted | 🟢 E2E encrypted | 🟡 Depends on host | 🟡 Depends on host |
 
 ---
 
 ## Recommended Approach
 
 **For daily machine switches:** Option 1 (Proton Drive Symlinks)
+
 - Real-time sync enables same-session continuity
 - One-time setup, zero maintenance
 - Best for frequent switching
 
 **For occasional switches:** Option 2 (Manual Rsync)
+
 - Simpler setup
 - More control
 - Best for infrequent switching
 
 **Not recommended:** Options 3 & 4
+
 - Too complex or costly for session data backup
 - Manual operations defeat the purpose
 
@@ -321,4 +334,4 @@ If implementing Option 1 (Proton Symlinks):
 
 ---
 
-*This is a reference document for potential future implementation. Not currently active.*
+_This is a reference document for potential future implementation. Not currently active._

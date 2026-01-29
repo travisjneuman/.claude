@@ -1,15 +1,14 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
-
+import { useState, useEffect } from "react";
+import Link from "next/link";
 
 const navLinks = [
-  { href: '/skills', label: 'Skills' },
-  { href: '/agents', label: 'Agents' },
-  { href: '/commands', label: 'Commands' },
-  { href: '/marketplaces', label: 'Marketplace' },
-  { href: '/docs', label: 'Docs' },
+  { href: "/skills", label: "Skills" },
+  { href: "/agents", label: "Agents" },
+  { href: "/commands", label: "Commands" },
+  { href: "/marketplaces", label: "Marketplace" },
+  { href: "/docs", label: "Docs" },
 ];
 
 export default function Navigation() {
@@ -17,14 +16,14 @@ export default function Navigation() {
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'glass' : 'bg-transparent'
+        scrolled ? "glass" : "bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
@@ -36,9 +35,10 @@ export default function Navigation() {
           <span
             className="inline-flex items-center justify-center px-2 rounded-md text-[10px] font-bold uppercase tracking-wider text-white"
             style={{
-              height: '1.5rem',
-              lineHeight: '1.5rem',
-              background: 'linear-gradient(135deg, var(--accent-purple), var(--accent-pink))',
+              height: "1.5rem",
+              lineHeight: "1.5rem",
+              background:
+                "linear-gradient(135deg, var(--accent-purple), var(--accent-pink))",
             }}
           >
             supercharged

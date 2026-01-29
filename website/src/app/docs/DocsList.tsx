@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import Modal from '@/components/ui/Modal';
+import { useState } from "react";
+import Modal from "@/components/ui/Modal";
 
 interface DocItem {
   slug: string;
@@ -24,7 +24,7 @@ export default function DocsList({ docs }: { docs: DocItem[] }) {
           >
             <h3
               className="font-semibold text-[var(--text-primary)] group-hover:text-white transition-colors mb-2"
-              style={{ fontSize: '15px' }}
+              style={{ fontSize: "15px" }}
             >
               {doc.name}
             </h3>
@@ -35,8 +35,9 @@ export default function DocsList({ docs }: { docs: DocItem[] }) {
               <span
                 className="text-[10px] font-mono px-2 py-0.5 rounded-md"
                 style={{
-                  backgroundColor: 'color-mix(in srgb, var(--accent-yellow) 15%, transparent)',
-                  color: 'var(--accent-yellow)',
+                  backgroundColor:
+                    "color-mix(in srgb, var(--accent-yellow) 15%, transparent)",
+                  color: "var(--accent-yellow)",
                 }}
               >
                 {doc.slug}.md
@@ -50,12 +51,15 @@ export default function DocsList({ docs }: { docs: DocItem[] }) {
         {selected && (
           <>
             <div className="flex items-center gap-3 mb-4">
-              <h2 className="text-xl font-bold text-[var(--text-primary)]">{selected.name}</h2>
+              <h2 className="text-xl font-bold text-[var(--text-primary)]">
+                {selected.name}
+              </h2>
               <span
                 className="text-[11px] font-mono px-2 py-0.5 rounded-md"
                 style={{
-                  backgroundColor: 'color-mix(in srgb, var(--accent-yellow) 15%, transparent)',
-                  color: 'var(--accent-yellow)',
+                  backgroundColor:
+                    "color-mix(in srgb, var(--accent-yellow) 15%, transparent)",
+                  color: "var(--accent-yellow)",
                 }}
               >
                 {selected.slug}.md
