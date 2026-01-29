@@ -2,6 +2,41 @@
 
 All notable changes to the Ultimate Claude Code Toolkit.
 
+## [2.2.2] - January 28, 2026
+
+### Major Enhancement: Showcase Website & Documentation Polish
+
+Live website, branding consistency, and comprehensive documentation updates.
+
+### Added
+
+- **Showcase website** — Next.js site at [claude.travisjneuman.com](https://claude.travisjneuman.com) with 3D hero, interactive card modals, curated featured skills/agents, terminal demo, and marketplace browser. Deployed on Cloudflare Pages.
+- **Pull All Repos script** — `_pull-all-repos.sh` cross-platform script to sync parent repo, 50 marketplace submodules, and custom project directories with no_push enforcement and detached HEAD auto-fix.
+- **HomeCards component** — Client component with modal detail views for skills, agents, and marketplace repos on homepage.
+- **Curated featured content** — Homepage shows hand-picked highest-ROI skills and agents instead of alphabetical order.
+- **skip-worktree documentation** — Added tip to MAINTENANCE.md for keeping local customizations to _pull-all-repos.sh without committing them.
+
+### Changed
+
+- **Branding** — "Claude Code Supercharged" → "tjn.claude/" across nav, hero, metadata, OpenGraph, and Twitter cards.
+- **Agent count** — Fixed 37 → 36 across README.md (TOC, problem table, directory structure, agents section header, statistics appendix).
+- **OG image** — Added `metadataBase` to layout.tsx so social media crawlers resolve `/og-image.png` correctly.
+- **Hero orb** — Resized from 1.2 → 1.5 (was temporarily 1.8, too large).
+- **Section padding** — Reduced homepage sections from py-24 to py-16.
+- **Get Started section** — Updated to use `setup-new-machine.sh` instead of manual `git submodule update`.
+- **GSAP animations** — Rewrote ScrollReveal/StaggerReveal from `gsap.from` to `gsap.set`+`gsap.to` pattern for static export compatibility.
+- **Favicon** — Replaced Next.js default `src/app/favicon.ico` with real favicon.
+- **setup-new-machine.sh** — Fixed stale comment (22 → 50 repos).
+
+### Documentation
+
+- Updated README.md with v2.2 "What's New" section, showcase website link, version history entry.
+- Updated docs/README.md to v2.2 with new features listed.
+- Updated docs/MAINTENANCE.md to v2.2 with skip-worktree tip for custom directories.
+- Updated docs/SETUP-GUIDE.md version to v2.2.
+
+---
+
 ## [2.2.1] - January 28, 2026
 
 ### Added

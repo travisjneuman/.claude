@@ -1,10 +1,12 @@
 # Claude Code Configuration Documentation
 
-**Last Updated:** January 2026 (v2.1)
+**Last Updated:** January 2026 (v2.2)
 **Maintainer:** Travis J. Neuman
 **Purpose:** Portable, optimized Claude Code configuration for any project
 
-**New in v2.1:** One-line installation, bootstrap command, SessionStart hook for automatic routing, cross-platform support. See [CHANGELOG.md](../CHANGELOG.md#210---january-13-2026).
+**New in v2.2:** Showcase website at [claude.travisjneuman.com](https://claude.travisjneuman.com), pull-all-repos script, documentation overhaul, tjn.claude/ branding. See [CHANGELOG.md](../CHANGELOG.md).
+
+**v2.1 features:** One-line installation, bootstrap command, SessionStart hook for automatic routing, cross-platform support. See [CHANGELOG.md](../CHANGELOG.md#210---january-13-2026).
 
 **v2.0 features:** Research methodology, frontend aesthetics, PROACTIVE mode, multi-window state management. See [CHANGELOG.md](../CHANGELOG.md#200---january-3-2026).
 
@@ -147,6 +149,7 @@ This `.claude/` folder contains a fully configured, portable Claude Code environ
 
 | Date     | Version | Changes                                          |
 | -------- | ------- | ------------------------------------------------ |
+| Jan 2026 | v2.2    | Showcase website, docs overhaul, pull-all-repos  |
 | Jan 2026 | v2.1    | One-line install, bootstrap, SessionStart hook   |
 | Jan 2026 | v2.0    | Research methodology, PROACTIVE mode, aesthetics |
 | Dec 2025 | v1.x    | Initial setup, merged duplicates, created docs   |
