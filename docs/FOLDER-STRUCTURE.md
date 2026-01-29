@@ -2,7 +2,7 @@
 
 Complete map of the `.claude/` folder and related files.
 
-**Last Updated:** January 28, 2026 (v2.1)
+**Last Updated:** January 2026 (v2.2)
 
 ---
 
