@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import Modal from '@/components/ui/Modal';
+import { useState } from "react";
+import Modal from "@/components/ui/Modal";
 
 interface CommandItem {
   slug: string;
@@ -10,7 +10,11 @@ interface CommandItem {
   content: string;
 }
 
-export default function CommandsList({ commands }: { commands: CommandItem[] }) {
+export default function CommandsList({
+  commands,
+}: {
+  commands: CommandItem[];
+}) {
   const [selected, setSelected] = useState<CommandItem | null>(null);
 
   return (
@@ -38,12 +42,15 @@ export default function CommandsList({ commands }: { commands: CommandItem[] }) 
         {selected && (
           <>
             <div className="flex items-center gap-3 mb-4">
-              <h2 className="text-xl font-bold text-[var(--text-primary)]">/{selected.slug}</h2>
+              <h2 className="text-xl font-bold text-[var(--text-primary)]">
+                /{selected.slug}
+              </h2>
               <span
                 className="text-[11px] font-mono px-2 py-0.5 rounded-md"
                 style={{
-                  backgroundColor: 'color-mix(in srgb, var(--accent-cyan) 15%, transparent)',
-                  color: 'var(--accent-cyan)',
+                  backgroundColor:
+                    "color-mix(in srgb, var(--accent-cyan) 15%, transparent)",
+                  color: "var(--accent-cyan)",
                 }}
               >
                 command

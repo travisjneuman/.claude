@@ -5,16 +5,16 @@
  * Works on Windows, macOS, and Linux
  */
 
-const { spawn } = require('child_process');
+const { spawn } = require("child_process");
 
-let input = '';
+let input = "";
 
-process.stdin.setEncoding('utf8');
-process.stdin.on('data', (chunk) => {
+process.stdin.setEncoding("utf8");
+process.stdin.on("data", (chunk) => {
   input += chunk;
 });
 
-process.stdin.on('end', () => {
+process.stdin.on("end", () => {
   try {
     const hookData = JSON.parse(input);
 
@@ -29,33 +29,47 @@ process.stdin.on('end', () => {
 
     // Skip non-formattable files
     const formattableExtensions = [
-      '.js', '.jsx', '.ts', '.tsx', '.mjs', '.cjs',
-      '.json', '.md', '.mdx', '.yml', '.yaml',
-      '.css', '.scss', '.less', '.html', '.vue', '.svelte',
-      '.graphql', '.gql'
+      ".js",
+      ".jsx",
+      ".ts",
+      ".tsx",
+      ".mjs",
+      ".cjs",
+      ".json",
+      ".md",
+      ".mdx",
+      ".yml",
+      ".yaml",
+      ".css",
+      ".scss",
+      ".less",
+      ".html",
+      ".vue",
+      ".svelte",
+      ".graphql",
+      ".gql",
     ];
 
-    const ext = filePath.toLowerCase().slice(filePath.lastIndexOf('.'));
+    const ext = filePath.toLowerCase().slice(filePath.lastIndexOf("."));
     if (!formattableExtensions.includes(ext)) {
       process.exit(0);
     }
 
     // Run prettier
-    const prettier = spawn('npx', ['prettier', '--write', filePath], {
-      stdio: 'inherit',
-      shell: true
+    const prettier = spawn("npx", ["prettier", "--write", filePath], {
+      stdio: "inherit",
+      shell: true,
     });
 
-    prettier.on('close', (code) => {
+    prettier.on("close", (code) => {
       process.exit(code || 0);
     });
 
-    prettier.on('error', (err) => {
+    prettier.on("error", (err) => {
       // Prettier not available or other error - fail silently
-      console.error('Prettier hook error:', err.message);
+      console.error("Prettier hook error:", err.message);
       process.exit(0);
     });
-
   } catch (err) {
     // JSON parse error or other issue - fail silently
     process.exit(0);

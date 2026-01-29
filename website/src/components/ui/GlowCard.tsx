@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 interface GlowCardProps {
   title: string;
@@ -11,17 +11,17 @@ interface GlowCardProps {
 }
 
 const categoryColors: Record<string, string> = {
-  development: 'var(--accent-purple)',
-  design: 'var(--accent-pink)',
-  creative: 'var(--accent-yellow)',
-  business: 'var(--accent-green)',
-  architecture: 'var(--accent-cyan)',
-  infrastructure: 'var(--accent-blue)',
-  platform: 'var(--accent-purple)',
-  frontend: 'var(--accent-purple)',
-  backend: 'var(--accent-blue)',
-  quality: 'var(--accent-cyan)',
-  mobile: 'var(--accent-green)',
+  development: "var(--accent-purple)",
+  design: "var(--accent-pink)",
+  creative: "var(--accent-yellow)",
+  business: "var(--accent-green)",
+  architecture: "var(--accent-cyan)",
+  infrastructure: "var(--accent-blue)",
+  platform: "var(--accent-purple)",
+  frontend: "var(--accent-purple)",
+  backend: "var(--accent-blue)",
+  quality: "var(--accent-cyan)",
+  mobile: "var(--accent-green)",
 };
 
 export default function GlowCard({
@@ -32,14 +32,16 @@ export default function GlowCard({
   badgeColor,
   onClick,
 }: GlowCardProps) {
-  const color = category ? categoryColors[category] || 'var(--accent-purple)' : 'var(--accent-purple)';
+  const color = category
+    ? categoryColors[category] || "var(--accent-purple)"
+    : "var(--accent-purple)";
 
   return (
     <div className="glow-card p-5 cursor-pointer group" onClick={onClick}>
       <div className="flex items-start justify-between mb-2">
         <h3
           className="font-semibold text-[var(--text-primary)] group-hover:text-white transition-colors"
-          style={{ fontSize: '15px' }}
+          style={{ fontSize: "15px" }}
         >
           {title}
         </h3>

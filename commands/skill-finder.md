@@ -88,6 +88,7 @@ Specialized agents via Task tool.
 Skills from 50 marketplace repositories (1,700+ skills) in `~/.claude/plugins/marketplaces/`.
 
 Search for relevant marketplace skills:
+
 ```bash
 find ~/.claude/plugins/marketplaces -name "SKILL.md" | xargs grep -li "<keyword>"
 ```
@@ -105,51 +106,51 @@ find ~/.claude/plugins/marketplaces -name "SKILL.md" | xargs grep -li "<keyword>
 
 | If problem involves...  | Primary Skill                | Agent                     | Marketplace Repos                                  |
 | ----------------------- | ---------------------------- | ------------------------- | -------------------------------------------------- |
-| **Frontend/React**      | `generic-react-*`            | `react-expert`            | wshobson-agents, madappgang, buildwithclaude        |
-| **Vue.js**              | `vue-development`            | -                         | davila7-templates, athola-night-market              |
-| **Svelte**              | `svelte-development`         | -                         | davila7-templates                                   |
-| **API/backend**         | `api-design`                 | `api-designer`            | buildwithclaude, madappgang                         |
-| **Database**            | `database-expert`            | `database-architect`      | buildwithclaude                                     |
-| **GraphQL**             | `graphql-expert`             | `graphql-architect`       | -                                                   |
-| **iOS**                 | `ios-development`            | `ios-developer`           | -                                                   |
-| **Android**             | `android-development`        | `android-developer`       | -                                                   |
-| **React Native**        | `react-native`               | `mobile-architect`        | -                                                   |
-| **Flutter**             | `flutter-development`        | `mobile-architect`        | -                                                   |
-| **Desktop**             | `electron-desktop`           | `desktop-developer`       | -                                                   |
-| **DevOps/Infra**        | `devops-cloud`               | `devops-engineer`         | diet103-infrastructure, hashi-terraform-skills      |
-| **Terraform/IaC**       | `devops-cloud`               | `devops-engineer`         | hashi-terraform-skills                              |
-| **Testing**             | `test-specialist`            | `test-generator`          | mhattingpete-skills                                 |
-| **Performance**         | -                            | `performance-optimizer`   | -                                                   |
-| **Security**            | `security`                   | `security-auditor`        | trailofbits-skills (50 skills)                      |
-| **Debugging**           | `debug-systematic`           | `debugging-specialist`    | -                                                   |
-| **Documentation**       | `codebase-documenter`        | `documentation-writer`    | -                                                   |
-| **Bioinformatics**      | -                            | -                         | claude-scientific-skills, gqy20-biology-plugins     |
-| **Chemistry**           | -                            | -                         | claude-scientific-skills                             |
-| **Physics**             | -                            | -                         | claude-scientific-skills                             |
-| **Proteomics**          | -                            | -                         | claude-scientific-skills                             |
-| **Life Sciences**       | -                            | -                         | anthropic-life-sciences                              |
-| **AI/ML**               | `ai-ml-development`          | `ml-engineer`             | affaan-everything-claude                             |
-| **Data Science**        | `data-science`               | -                         | -                                                   |
-| **Elixir**              | -                            | -                         | bradleygolden-elixir, georgeguimaraes-elixir        |
-| **Perl/CPAN**           | -                            | -                         | kfly8-cpan-plugins                                   |
-| **SAP/Enterprise**      | -                            | -                         | secondsky-sap-skills (33 skills)                     |
-| **Finance/Equity**      | `finance`                    | -                         | quant-equity-research                                |
-| **Startup**             | `startup-launch`             | `startup-advisor`         | -                                                   |
-| **Pricing**             | `monetization-strategy`      | `monetization-expert`     | -                                                   |
-| **Marketing**           | `marketing`                  | -                         | -                                                   |
-| **Branding**            | `brand-identity`             | `brand-strategist`        | -                                                   |
-| **Visual Design**       | `graphic-design`             | `graphic-designer`        | -                                                   |
-| **Video/Film**          | `video-production`           | `video-producer`          | mojito-freeship-skills                               |
-| **Audio**               | `audio-production`           | `audio-engineer`          | -                                                   |
-| **Animation**           | `ui-animation`               | `motion-designer`         | -                                                   |
-| **Worldbuilding**       | -                            | -                         | worldbuilding-skills (52 skills)                     |
-| **Context Engineering** | -                            | -                         | neolab-context-kit, muratcankoylan-agent-skills      |
-| **Planning/Files**      | -                            | -                         | othmanadi-planning (12 skills)                       |
-| **Microservices**       | `microservices-architecture` | `microservices-architect` | -                                                   |
-| **Real-time**           | `websockets-realtime`        | `realtime-specialist`     | -                                                   |
-| **i18n**                | `i18n-localization`          | `i18n-specialist`         | -                                                   |
-| **Game Dev**            | `game-development`           | `game-developer`          | -                                                   |
-| **General/Templates**   | -                            | -                         | davila7-templates (651), athola-night-market (125)   |
+| **Frontend/React**      | `generic-react-*`            | `react-expert`            | wshobson-agents, madappgang, buildwithclaude       |
+| **Vue.js**              | `vue-development`            | -                         | davila7-templates, athola-night-market             |
+| **Svelte**              | `svelte-development`         | -                         | davila7-templates                                  |
+| **API/backend**         | `api-design`                 | `api-designer`            | buildwithclaude, madappgang                        |
+| **Database**            | `database-expert`            | `database-architect`      | buildwithclaude                                    |
+| **GraphQL**             | `graphql-expert`             | `graphql-architect`       | -                                                  |
+| **iOS**                 | `ios-development`            | `ios-developer`           | -                                                  |
+| **Android**             | `android-development`        | `android-developer`       | -                                                  |
+| **React Native**        | `react-native`               | `mobile-architect`        | -                                                  |
+| **Flutter**             | `flutter-development`        | `mobile-architect`        | -                                                  |
+| **Desktop**             | `electron-desktop`           | `desktop-developer`       | -                                                  |
+| **DevOps/Infra**        | `devops-cloud`               | `devops-engineer`         | diet103-infrastructure, hashi-terraform-skills     |
+| **Terraform/IaC**       | `devops-cloud`               | `devops-engineer`         | hashi-terraform-skills                             |
+| **Testing**             | `test-specialist`            | `test-generator`          | mhattingpete-skills                                |
+| **Performance**         | -                            | `performance-optimizer`   | -                                                  |
+| **Security**            | `security`                   | `security-auditor`        | trailofbits-skills (50 skills)                     |
+| **Debugging**           | `debug-systematic`           | `debugging-specialist`    | -                                                  |
+| **Documentation**       | `codebase-documenter`        | `documentation-writer`    | -                                                  |
+| **Bioinformatics**      | -                            | -                         | claude-scientific-skills, gqy20-biology-plugins    |
+| **Chemistry**           | -                            | -                         | claude-scientific-skills                           |
+| **Physics**             | -                            | -                         | claude-scientific-skills                           |
+| **Proteomics**          | -                            | -                         | claude-scientific-skills                           |
+| **Life Sciences**       | -                            | -                         | anthropic-life-sciences                            |
+| **AI/ML**               | `ai-ml-development`          | `ml-engineer`             | affaan-everything-claude                           |
+| **Data Science**        | `data-science`               | -                         | -                                                  |
+| **Elixir**              | -                            | -                         | bradleygolden-elixir, georgeguimaraes-elixir       |
+| **Perl/CPAN**           | -                            | -                         | kfly8-cpan-plugins                                 |
+| **SAP/Enterprise**      | -                            | -                         | secondsky-sap-skills (33 skills)                   |
+| **Finance/Equity**      | `finance`                    | -                         | quant-equity-research                              |
+| **Startup**             | `startup-launch`             | `startup-advisor`         | -                                                  |
+| **Pricing**             | `monetization-strategy`      | `monetization-expert`     | -                                                  |
+| **Marketing**           | `marketing`                  | -                         | -                                                  |
+| **Branding**            | `brand-identity`             | `brand-strategist`        | -                                                  |
+| **Visual Design**       | `graphic-design`             | `graphic-designer`        | -                                                  |
+| **Video/Film**          | `video-production`           | `video-producer`          | mojito-freeship-skills                             |
+| **Audio**               | `audio-production`           | `audio-engineer`          | -                                                  |
+| **Animation**           | `ui-animation`               | `motion-designer`         | -                                                  |
+| **Worldbuilding**       | -                            | -                         | worldbuilding-skills (52 skills)                   |
+| **Context Engineering** | -                            | -                         | neolab-context-kit, muratcankoylan-agent-skills    |
+| **Planning/Files**      | -                            | -                         | othmanadi-planning (12 skills)                     |
+| **Microservices**       | `microservices-architecture` | `microservices-architect` | -                                                  |
+| **Real-time**           | `websockets-realtime`        | `realtime-specialist`     | -                                                  |
+| **i18n**                | `i18n-localization`          | `i18n-specialist`         | -                                                  |
+| **Game Dev**            | `game-development`           | `game-developer`          | -                                                  |
+| **General/Templates**   | -                            | -                         | davila7-templates (651), athola-night-market (125) |
 
 ---
 

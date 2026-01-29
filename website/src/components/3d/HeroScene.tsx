@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { Suspense, useRef, useMemo } from 'react';
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { Float, Sphere, MeshDistortMaterial } from '@react-three/drei';
-import * as THREE from 'three';
+import { Suspense, useRef, useMemo } from "react";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { Float, Sphere, MeshDistortMaterial } from "@react-three/drei";
+import * as THREE from "three";
 
 function CentralOrb() {
   const meshRef = useRef<THREE.Mesh>(null);
@@ -11,7 +11,8 @@ function CentralOrb() {
   useFrame((state) => {
     if (meshRef.current) {
       meshRef.current.rotation.y = state.clock.elapsedTime * 0.15;
-      meshRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.1) * 0.1;
+      meshRef.current.rotation.x =
+        Math.sin(state.clock.elapsedTime * 0.1) * 0.1;
     }
   });
 
@@ -84,7 +85,9 @@ function ConnectionLines({ nodes }: { nodes: [number, number, number][] }) {
 
     for (let i = 0; i < nodes.length; i++) {
       const j = (i + 1) % nodes.length;
-      const dist = new THREE.Vector3(...nodes[i]).distanceTo(new THREE.Vector3(...nodes[j]));
+      const dist = new THREE.Vector3(...nodes[i]).distanceTo(
+        new THREE.Vector3(...nodes[j]),
+      );
       if (dist < 3.5) {
         result.push({
           start: new THREE.Vector3(...nodes[i]),
@@ -100,7 +103,11 @@ function ConnectionLines({ nodes }: { nodes: [number, number, number][] }) {
     return connections.map((conn) => {
       const points = [conn.start, conn.end];
       const geometry = new THREE.BufferGeometry().setFromPoints(points);
-      const material = new THREE.LineBasicMaterial({ color: '#a855f7', transparent: true, opacity: 0.15 });
+      const material = new THREE.LineBasicMaterial({
+        color: "#a855f7",
+        transparent: true,
+        opacity: 0.15,
+      });
       return new THREE.Line(geometry, material);
     });
   }, [connections]);
@@ -136,10 +143,7 @@ function ParticleField() {
   return (
     <points ref={pointsRef}>
       <bufferGeometry>
-        <bufferAttribute
-          attach="attributes-position"
-          args={[positions, 3]}
-        />
+        <bufferAttribute attach="attributes-position" args={[positions, 3]} />
       </bufferGeometry>
       <pointsMaterial
         color="#7aa2f7"
@@ -181,9 +185,18 @@ const NODE_POSITIONS: [number, number, number][] = [
 ];
 
 const NODE_COLORS = [
-  '#a855f7', '#7aa2f7', '#7dcfff', '#22c55e',
-  '#ec4899', '#a855f7', '#7aa2f7', '#7dcfff',
-  '#22c55e', '#ec4899', '#f59e0b', '#a855f7',
+  "#a855f7",
+  "#7aa2f7",
+  "#7dcfff",
+  "#22c55e",
+  "#ec4899",
+  "#a855f7",
+  "#7aa2f7",
+  "#7dcfff",
+  "#22c55e",
+  "#ec4899",
+  "#f59e0b",
+  "#a855f7",
 ];
 
 export default function HeroScene() {
@@ -193,7 +206,7 @@ export default function HeroScene() {
         camera={{ position: [0, 0, 6], fov: 50 }}
         dpr={[1, 1.5]}
         gl={{ antialias: true, alpha: true }}
-        style={{ background: 'transparent' }}
+        style={{ background: "transparent" }}
       >
         <Suspense fallback={null}>
           <ambientLight intensity={0.3} />
