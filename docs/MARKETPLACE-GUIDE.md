@@ -40,8 +40,8 @@ Complete reference for the 49 plugin marketplaces and how to use them.
 
 | Marketplace | Contents | Key Features |
 |---|---|---|
-| `wshobson-agents` | 99 agents, 107 skills, 15 orchestrators | Progressive disclosure architecture |
-| `voltagent-subagents` | 100+ specialized agents | Full-stack, DevOps focus |
+| `wshobson-agents` | 108 agents, 129 skills, 15 orchestrators | Progressive disclosure architecture |
+| `voltagent-subagents` | 126+ specialized agents | Full-stack, DevOps focus |
 | `claude-scientific-skills` | 144 scientific skills | Bioinformatics, chemistry, physics, proteomics |
 | `davila7-templates` | 651 templates | Broad template coverage |
 | `madappgang-claude-code` | 110 resources | Full-stack development |
