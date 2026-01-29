@@ -300,7 +300,7 @@ When facing choices, use structured frameworks:
 | Eisenhower Matrix | Prioritization, urgency           | `/consider:eisenhower-matrix` |
 | 5-Whys            | Root cause analysis               | `/consider:5-whys`            |
 | SWOT              | Trade-off and strategic analysis  | `/consider:swot`              |
-| Decision Matrix   | Multi-criteria decisions          | `/consider:decision-matrix`   |
+| Opportunity Cost  | Analyze what you give up          | `/consider:opportunity-cost`  |
 
 ---
 
