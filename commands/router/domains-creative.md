@@ -12,6 +12,8 @@ Load this file when creative/design keywords detected.
 | `brand`          | brand, identity, positioning, guidelines, brand voice, visual identity     |
 | `motion`         | animation, motion, micro-interaction, easing, transition, lottie, keyframe |
 | `ui`             | ui, user interface, component, layout, design system, wireframe            |
+| `writing`        | writing, copywriting, content, blog, article, copy, technical writing      |
+| `documents`      | document, pdf, spreadsheet, presentation, pptx, xlsx, docx                 |
 
 ## Resource Mapping
 
@@ -23,6 +25,8 @@ Load this file when creative/design keywords detected.
 | `brand`          | `Skill(brand-identity)`                           | `brand-strategist` |
 | `motion`         | `Skill(ui-animation)`                             | `motion-designer`  |
 | `ui`             | `Skill(ui-research)` + `Skill(frontend-enhancer)` | -                  |
+| `writing`        | `Skill(doc-coauthoring)`                          | -                  |
+| `documents`      | `Skill(pdf)` / `Skill(docx)` / `Skill(xlsx)`     | -                  |
 
 ## UI Work Prerequisites
 

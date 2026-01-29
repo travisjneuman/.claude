@@ -17,6 +17,15 @@ These bypass normal routing - execute immediately.
 | Create PR                | "pull request", "create pr", "push pr"                     | `/commit-commands:commit-push-pr`           |
 | Check status             | "status", "where was I", "what's left"                     | `/gsd:progress`                             |
 | Check todos              | "remaining", "outstanding", "pending"                      | `/taches-cc-resources:check-todos`          |
+| Create prompt            | "create prompt", "write prompt", "prompt for"              | `/taches-cc-resources:create-prompt`        |
+| Create meta-prompt       | "meta prompt", "prompt chain", "multi-stage"               | `/taches-cc-resources:create-meta-prompt`   |
+| Debug issue              | "debug this", "troubleshoot", "diagnose"                   | `/taches-cc-resources:debug`                |
+| What's next              | "what next", "suggest", "what should I"                    | `/taches-cc-resources:whats-next`           |
+| Run plan                 | "run plan", "execute plan"                                 | `/taches-cc-resources:run-plan`             |
+| Run prompt               | "run prompt", "execute prompt"                             | `/taches-cc-resources:run-prompt`           |
+| Add todo                 | "add todo", "new todo", "remember to"                      | `/taches-cc-resources:add-to-todos`         |
+| Review code              | "review my code", "code review"                            | `/review-code`                              |
+| Health check             | "health check", "diagnostics"                              | `/health-check`                             |
 
 ## Skill Generation (skill-seekers)
 
