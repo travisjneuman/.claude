@@ -1,23 +1,52 @@
 import Navigation from '@/components/layout/Navigation';
 import Footer from '@/components/layout/Footer';
 import TerminalDemo from '@/components/terminal/TerminalDemo';
-import GlowCard from '@/components/ui/GlowCard';
 import HeroCanvas from '@/components/3d/HeroCanvas';
 import ScrollReveal from '@/components/animations/ScrollReveal';
-import StaggerReveal from '@/components/animations/StaggerReveal';
 import CounterAnimation from '@/components/animations/CounterAnimation';
-import TextReveal from '@/components/animations/TextReveal';
+import HomeCards from './HomeCards';
 import { getSkills } from '@/lib/data/skills';
 import { getAgents } from '@/lib/data/agents';
 import { getMarketplaceStats } from '@/lib/data/marketplace';
+
+// Hand-picked for highest end-user ROI on homepage
+const FEATURED_SKILL_SLUGS = [
+  'debug-systematic',
+  'tdd-workflow',
+  'auto-claude',
+  'security',
+  'generic-react-feature-developer',
+  'api-design',
+  'ai-ml-development',
+  'devops-cloud',
+];
+
+const FEATURED_AGENT_SLUGS = [
+  'deep-code-reviewer',
+  'debugging-specialist',
+  'security-auditor',
+  'architecture-analyst',
+  'performance-optimizer',
+  'typescript-expert',
+];
+
+function pickFeatured<T extends { slug: string }>(items: T[], slugs: string[]): T[] {
+  const map = new Map(items.map((i) => [i.slug, i]));
+  const result: T[] = [];
+  for (const slug of slugs) {
+    const item = map.get(slug);
+    if (item) result.push(item);
+  }
+  return result;
+}
 
 export default function Home() {
   const skills = getSkills();
   const agents = getAgents();
   const { repos, totalSkills: marketplaceSkills } = getMarketplaceStats();
 
-  const featuredSkills = skills.slice(0, 8);
-  const featuredAgents = agents.slice(0, 6);
+  const featuredSkills = pickFeatured(skills, FEATURED_SKILL_SLUGS);
+  const featuredAgents = pickFeatured(agents, FEATURED_AGENT_SLUGS);
 
   return (
     <>
@@ -130,11 +159,9 @@ export default function Home() {
           <p className="text-sm font-mono text-[var(--accent-cyan)] tracking-widest uppercase mb-3">
             Interactive Demo
           </p>
-          <TextReveal
-            text="See It In Action"
-            tag="h2"
-            className="text-3xl font-bold text-[var(--text-primary)] mb-4"
-          />
+          <h1 className="text-3xl font-bold text-[var(--text-primary)] mb-4">
+            See It In Action
+          </h1>
           <p className="text-[var(--text-secondary)] max-w-xl mx-auto">
             Watch how skills, agents, and commands work together in the terminal.
           </p>
@@ -144,135 +171,15 @@ export default function Home() {
         </ScrollReveal>
       </section>
 
-      {/* Skills Overview */}
-      <section className="py-16 px-6">
-        <div className="max-w-6xl mx-auto">
-          <ScrollReveal className="text-center mb-12">
-            <p className="text-sm font-mono text-[var(--accent-purple)] tracking-widest uppercase mb-3">
-              Skills Library
-            </p>
-            <TextReveal
-              text={`${skills.length} Expert Skills`}
-              tag="h2"
-              className="text-3xl font-bold text-[var(--text-primary)] mb-4"
-            />
-            <p className="text-[var(--text-secondary)] max-w-xl mx-auto">
-              Domain-specific knowledge loaded on demand. From debugging methodologies to full-stack
-              design systems.
-            </p>
-          </ScrollReveal>
-
-          <StaggerReveal className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {featuredSkills.map((skill) => (
-              <GlowCard
-                key={skill.slug}
-                title={skill.name}
-                description={skill.description}
-                category={skill.category}
-              />
-            ))}
-          </StaggerReveal>
-
-          <ScrollReveal className="text-center mt-10" delay={0.4}>
-            <a
-              href="/skills"
-              className="text-sm font-mono text-[var(--accent-purple)] hover:text-[var(--accent-pink)] transition-colors"
-            >
-              Explore All {skills.length} Skills &rarr;
-            </a>
-          </ScrollReveal>
-        </div>
-      </section>
-
-      {/* Agents Showcase */}
-      <section className="py-16 px-6" style={{ background: 'var(--surface)' }}>
-        <div className="max-w-6xl mx-auto">
-          <ScrollReveal className="text-center mb-12">
-            <p className="text-sm font-mono text-[var(--accent-blue)] tracking-widest uppercase mb-3">
-              Specialized Agents
-            </p>
-            <TextReveal
-              text={`${agents.length} Expert Agents`}
-              tag="h2"
-              className="text-3xl font-bold text-[var(--text-primary)] mb-4"
-            />
-            <p className="text-[var(--text-secondary)] max-w-xl mx-auto">
-              Autonomous sub-agents that handle complex tasks. Each tuned for specific domains with
-              curated tool access.
-            </p>
-          </ScrollReveal>
-
-          <StaggerReveal className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {featuredAgents.map((agent) => (
-              <GlowCard
-                key={agent.slug}
-                title={agent.name}
-                description={agent.description}
-                category={agent.category}
-                badge={agent.model}
-                badgeColor={
-                  agent.model === 'opus'
-                    ? 'var(--accent-yellow)'
-                    : agent.model === 'sonnet'
-                      ? 'var(--accent-purple)'
-                      : 'var(--accent-blue)'
-                }
-              />
-            ))}
-          </StaggerReveal>
-
-          <ScrollReveal className="text-center mt-10" delay={0.4}>
-            <a
-              href="/agents"
-              className="text-sm font-mono text-[var(--accent-blue)] hover:text-[var(--accent-cyan)] transition-colors"
-            >
-              View All {agents.length} Agents &rarr;
-            </a>
-          </ScrollReveal>
-        </div>
-      </section>
-
-      {/* Marketplace Stats */}
-      <section className="py-16 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <ScrollReveal>
-            <p className="text-sm font-mono text-[var(--accent-green)] tracking-widest uppercase mb-3">
-              Marketplace
-            </p>
-            <h2 className="text-3xl font-bold text-[var(--text-primary)] mb-4">
-              <CounterAnimation end={marketplaceSkills} suffix="+" /> Community Skills
-            </h2>
-            <p className="text-[var(--text-secondary)] max-w-xl mx-auto mb-10">
-              Curated from {repos.length} open-source repositories. Discover, install, and
-              extend your capabilities.
-            </p>
-          </ScrollReveal>
-
-          {repos.length > 0 && (
-            <StaggerReveal className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-              {repos.slice(0, 8).map((repo) => (
-                <div key={repo.name} className="glass p-3 rounded-lg text-left">
-                  <div className="text-sm font-mono text-[var(--text-primary)] truncate">
-                    {repo.displayName}
-                  </div>
-                  <div className="text-xs text-[var(--text-muted)] mt-1">
-                    {repo.skillCount} skills
-                  </div>
-                </div>
-              ))}
-            </StaggerReveal>
-          )}
-
-          <ScrollReveal className="mt-10" delay={0.3}>
-            <a
-              href="/marketplaces"
-              className="text-sm font-mono text-[var(--accent-green)] hover:text-[var(--accent-cyan)] transition-colors"
-            >
-              Browse Marketplace &rarr;
-            </a>
-          </ScrollReveal>
-        </div>
-      </section>
+      {/* Interactive card sections with modals */}
+      <HomeCards
+        skills={featuredSkills}
+        agents={featuredAgents}
+        repos={repos}
+        marketplaceSkills={marketplaceSkills}
+        totalSkills={skills.length}
+        totalAgents={agents.length}
+      />
 
       {/* Getting Started */}
       <section className="py-16 px-6" style={{ background: 'var(--surface)' }}>
