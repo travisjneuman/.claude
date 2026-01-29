@@ -40,10 +40,6 @@
 	path = plugins/marketplaces/mhattingpete-skills
 	url = https://github.com/mhattingpete/claude-skills-marketplace.git
 	ignore = all
-[submodule "plugins/marketplaces/obra-superpowers"]
-	path = plugins/marketplaces/obra-superpowers
-	url = https://github.com/obra/superpowers-marketplace.git
-	ignore = all
 [submodule "plugins/marketplaces/skillsforge"]
 	path = plugins/marketplaces/skillsforge
 	url = https://github.com/rawveg/skillsforge-marketplace.git
@@ -56,31 +52,113 @@
 	path = plugins/marketplaces/wshobson-agents
 	url = https://github.com/wshobson/agents.git
 	ignore = all
-[submodule "plugins/marketplaces/travisvn-awesome-claude-skills"]
-	path = plugins/marketplaces/travisvn-awesome-claude-skills
-	url = https://github.com/travisvn/awesome-claude-skills.git
-	ignore = all
-[submodule "plugins/marketplaces/hesreallyhim-awesome-claude-code"]
-	path = plugins/marketplaces/hesreallyhim-awesome-claude-code
-	url = https://github.com/hesreallyhim/awesome-claude-code.git
-	ignore = all
 [submodule "plugins/marketplaces/alirezarezvani-claude-skills"]
 	path = plugins/marketplaces/alirezarezvani-claude-skills
 	url = https://github.com/alirezarezvani/claude-skills.git
-	ignore = all
-[submodule "plugins/marketplaces/behisecc-awesome-claude-skills"]
-	path = plugins/marketplaces/behisecc-awesome-claude-skills
-	url = https://github.com/BehiSecc/awesome-claude-skills.git
-	ignore = all
-[submodule "plugins/marketplaces/alvinunreal-awesome-claude"]
-	path = plugins/marketplaces/alvinunreal-awesome-claude
-	url = https://github.com/alvinunreal/awesome-claude.git
-	ignore = all
-[submodule "plugins/marketplaces/voltagent-awesome-claude-skills"]
-	path = plugins/marketplaces/voltagent-awesome-claude-skills
-	url = https://github.com/VoltAgent/awesome-claude-skills.git
 	ignore = all
 [submodule "plugins/marketplaces/auto-claude"]
 	path = plugins/marketplaces/auto-claude
 	url = https://github.com/AndyMik90/Auto-Claude.git
 	ignore = all
+[submodule "plugins/marketplaces/buildwithclaude"]
+	path = plugins/marketplaces/buildwithclaude
+	url = https://github.com/davepoon/buildwithclaude.git
+[submodule "plugins/marketplaces/trailofbits-skills"]
+	path = plugins/marketplaces/trailofbits-skills
+	url = https://github.com/trailofbits/skills.git
+[submodule "plugins/marketplaces/henkisdabro-marketplace"]
+	path = plugins/marketplaces/henkisdabro-marketplace
+	url = https://github.com/henkisdabro/claudecode-marketplace.git
+[submodule "plugins/marketplaces/anthropic-life-sciences"]
+	path = plugins/marketplaces/anthropic-life-sciences
+	url = https://github.com/anthropics/life-sciences.git
+[submodule "plugins/marketplaces/davila7-templates"]
+	path = plugins/marketplaces/davila7-templates
+	url = https://github.com/davila7/claude-code-templates.git
+[submodule "plugins/marketplaces/worldbuilding-skills"]
+	path = plugins/marketplaces/worldbuilding-skills
+	url = https://github.com/hopeoverture/worldbuilding-app-skills.git
+[submodule "plugins/marketplaces/hashi-terraform-skills"]
+	path = plugins/marketplaces/hashi-terraform-skills
+	url = https://github.com/hashi-demo-lab/claude-skill-hcp-terraform.git
+[submodule "plugins/marketplaces/secondsky-sap-skills"]
+	path = plugins/marketplaces/secondsky-sap-skills
+	url = https://github.com/secondsky/sap-skills.git
+[submodule "plugins/marketplaces/bradleygolden-elixir"]
+	path = plugins/marketplaces/bradleygolden-elixir
+	url = https://github.com/bradleygolden/claude-marketplace-elixir.git
+[submodule "plugins/marketplaces/mojito-freeship-skills"]
+	path = plugins/marketplaces/mojito-freeship-skills
+	url = https://github.com/mojito-llm/freeship-skills.git
+[submodule "plugins/marketplaces/gqy20-biology-plugins"]
+	path = plugins/marketplaces/gqy20-biology-plugins
+	url = https://github.com/gqy20/cc_plugins.git
+[submodule "plugins/marketplaces/kfly8-cpan-plugins"]
+	path = plugins/marketplaces/kfly8-cpan-plugins
+	url = https://github.com/kfly8/claude-cpan-plugins.git
+[submodule "plugins/marketplaces/p47phoenix-plugins"]
+	path = plugins/marketplaces/p47phoenix-plugins
+	url = https://github.com/P47Phoenix/Claude-Plugins.git
+[submodule "plugins/marketplaces/chat2anyllm-awesome-plugins"]
+	path = plugins/marketplaces/chat2anyllm-awesome-plugins
+	url = https://github.com/Chat2AnyLLM/awesome-claude-plugins.git
+[submodule "plugins/marketplaces/numman-ali-skills"]
+	path = plugins/marketplaces/numman-ali-skills
+	url = https://github.com/numman-ali/n-skills.git
+[submodule "plugins/marketplaces/ananddtyagi-marketplace"]
+	path = plugins/marketplaces/ananddtyagi-marketplace
+	url = https://github.com/ananddtyagi/cc-marketplace.git
+[submodule "plugins/marketplaces/gmickel-marketplace"]
+	path = plugins/marketplaces/gmickel-marketplace
+	url = https://github.com/gmickel/gmickel-claude-marketplace.git
+[submodule "plugins/marketplaces/neolab-context-kit"]
+	path = plugins/marketplaces/neolab-context-kit
+	url = https://github.com/NeoLabHQ/context-engineering-kit.git
+[submodule "plugins/marketplaces/affaan-everything-claude"]
+	path = plugins/marketplaces/affaan-everything-claude
+	url = https://github.com/affaan-m/everything-claude-code.git
+[submodule "plugins/marketplaces/vercel-agent-skills"]
+	path = plugins/marketplaces/vercel-agent-skills
+	url = https://github.com/vercel-labs/agent-skills.git
+[submodule "plugins/marketplaces/muratcankoylan-agent-skills"]
+	path = plugins/marketplaces/muratcankoylan-agent-skills
+	url = https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering.git
+[submodule "plugins/marketplaces/numman-ali-openskills"]
+	path = plugins/marketplaces/numman-ali-openskills
+	url = https://github.com/numman-ali/openskills.git
+[submodule "plugins/marketplaces/piebald-lsps"]
+	path = plugins/marketplaces/piebald-lsps
+	url = https://github.com/Piebald-AI/claude-code-lsps.git
+[submodule "plugins/marketplaces/quant-equity-research"]
+	path = plugins/marketplaces/quant-equity-research
+	url = https://github.com/quant-sentiment-ai/claude-equity-research.git
+[submodule "plugins/marketplaces/athola-night-market"]
+	path = plugins/marketplaces/athola-night-market
+	url = https://github.com/athola/claude-night-market.git
+[submodule "plugins/marketplaces/georgeguimaraes-elixir"]
+	path = plugins/marketplaces/georgeguimaraes-elixir
+	url = https://github.com/georgeguimaraes/claude-code-elixir.git
+[submodule "plugins/marketplaces/sawyerhood-mart"]
+	path = plugins/marketplaces/sawyerhood-mart
+	url = https://github.com/SawyerHood/sawyer-mart.git
+[submodule "plugins/marketplaces/devgom-marketplace"]
+	path = plugins/marketplaces/devgom-marketplace
+	url = https://github.com/Dev-GOM/claude-code-marketplace.git
+[submodule "plugins/marketplaces/sivalabs-marketplace"]
+	path = plugins/marketplaces/sivalabs-marketplace
+	url = https://github.com/sivaprasadreddy/sivalabs-marketplace.git
+[submodule "plugins/marketplaces/zai-coding-plugins"]
+	path = plugins/marketplaces/zai-coding-plugins
+	url = https://github.com/zai-org/zai-coding-plugins.git
+[submodule "plugins/marketplaces/madappgang-claude-code"]
+	path = plugins/marketplaces/madappgang-claude-code
+	url = https://github.com/MadAppGang/claude-code.git
+[submodule "plugins/marketplaces/othmanadi-planning"]
+	path = plugins/marketplaces/othmanadi-planning
+	url = https://github.com/OthmanAdi/planning-with-files.git
+[submodule "plugins/marketplaces/diet103-infrastructure"]
+	path = plugins/marketplaces/diet103-infrastructure
+	url = https://github.com/diet103/claude-code-infrastructure-showcase.git
+[submodule "plugins/marketplaces/obra-superpowers"]
+	path = plugins/marketplaces/obra-superpowers
+	url = https://github.com/obra/superpowers.git
