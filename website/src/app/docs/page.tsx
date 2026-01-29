@@ -1,5 +1,6 @@
 import Navigation from '@/components/layout/Navigation';
 import Footer from '@/components/layout/Footer';
+import DocsList from './DocsList';
 import { getDocs } from '@/lib/data/docs';
 
 export const metadata = {
@@ -27,23 +28,7 @@ export default function DocsPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {docs.map((doc) => (
-              <div key={doc.slug} className="glow-card p-5 group cursor-default">
-                <h3 className="font-semibold text-[var(--text-primary)] group-hover:text-white transition-colors mb-2" style={{ fontSize: '15px' }}>
-                  {doc.name}
-                </h3>
-                <p className="text-sm text-[var(--text-muted)] line-clamp-2 leading-relaxed">
-                  {doc.description}
-                </p>
-                <div className="mt-3">
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-md" style={{ backgroundColor: 'color-mix(in srgb, var(--accent-yellow) 15%, transparent)', color: 'var(--accent-yellow)' }}>
-                    {doc.slug}.md
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
+          <DocsList docs={docs} />
 
           {docs.length === 0 && (
             <p className="text-center text-[var(--text-muted)] mt-12">
