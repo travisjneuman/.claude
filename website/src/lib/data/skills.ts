@@ -92,32 +92,40 @@ export function getSkills(): Skill[] {
     return [];
   }
 
-  const entries = fs.readdirSync(skillsDir, { withFileTypes: true });
   const skills: Skill[] = [];
 
-  for (const entry of entries) {
-    if (!entry.isDirectory() || entry.name.startsWith('_')) continue;
-    const skillMd = path.join(skillsDir, entry.name, 'SKILL.md');
+  function scanDir(dir: string, parentSlug?: string) {
+    const entries = fs.readdirSync(dir, { withFileTypes: true });
+    for (const entry of entries) {
+      if (!entry.isDirectory() || entry.name.startsWith('_')) continue;
+      const skillMd = path.join(dir, entry.name, 'SKILL.md');
+      const slug = parentSlug ? `${parentSlug}/${entry.name}` : entry.name;
 
-    if (!fs.existsSync(skillMd)) continue;
+      if (fs.existsSync(skillMd)) {
+        const raw = fs.readFileSync(skillMd, 'utf-8');
+        const { data, content } = matter(raw);
+        const firstLine = content.trim().split('\n')[0] || '';
+        const description =
+          data.description ||
+          firstLine.replace(/^#+\s*/, '').replace(/\*+/g, '').trim() ||
+          entry.name;
 
-    const raw = fs.readFileSync(skillMd, 'utf-8');
-    const { data, content } = matter(raw);
-    const firstLine = content.trim().split('\n')[0] || '';
-    const description =
-      data.description ||
-      firstLine.replace(/^#+\s*/, '').replace(/\*+/g, '').trim() ||
-      entry.name;
+        skills.push({
+          slug,
+          name: data.name || entry.name.replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase()),
+          description,
+          category: categorize(entry.name),
+          content: content.slice(0, 500),
+        });
+      }
 
-    skills.push({
-      slug: entry.name,
-      name: data.name || entry.name.replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase()),
-      description,
-      category: categorize(entry.name),
-      content: content.slice(0, 500),
-    });
+      // Scan subdirectories for nested skills
+      const subDir = path.join(dir, entry.name);
+      scanDir(subDir, slug);
+    }
   }
 
+  scanDir(skillsDir);
   return skills.sort((a, b) => a.name.localeCompare(b.name));
 }
 

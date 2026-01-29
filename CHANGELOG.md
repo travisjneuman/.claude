@@ -17,7 +17,7 @@ Comprehensive audit and expansion of the marketplace ecosystem, documentation co
 ### Changed
 
 - **Skill count updated** - 69 → 72 local skills across all documentation
-- **Agent count updated** - 36 → 37 local agents across all documentation
+- **Agent count verified** - 36 local agents confirmed across all documentation
 - **Marketplace skill count** - 1,496 → 1,700+ across all documentation
 - **GSD threshold consistency** - Standardized to Score ≥5 for GSD, 3-4 for Planning
 - **MARKETPLACE-GUIDE.md** - Complete rewrite listing all 49 repos with accurate skill counts

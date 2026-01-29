@@ -187,7 +187,7 @@ bash ~/.claude/scripts/update-marketplaces.sh
 +-- settings.json          <- Shared settings
 +-- commands/              <- Slash commands
 +-- skills/                <- 72 skills
-+-- agents/                <- 37 agents
++-- agents/                <- 36 agents
 +-- rules/                 <- Contextual rules
 +-- templates/             <- Templates
 +-- docs/                  <- Documentation
