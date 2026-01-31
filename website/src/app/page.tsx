@@ -153,7 +153,7 @@ export default function Home() {
               Explore Skills
             </a>
             <a
-              href="https://github.com/tjndavis/dotclaude"
+              href="https://github.com/travisjneuman/.claude"
               target="_blank"
               rel="noopener noreferrer"
               className="px-6 py-3 rounded-lg font-medium text-[var(--text-primary)] border border-[var(--border)] hover:border-[var(--text-muted)] transition-colors"
@@ -210,7 +210,7 @@ export default function Home() {
                 # Clone the configuration
               </span>
               <div className="text-[var(--accent-green)] mt-1">
-                $ git clone https://github.com/tjndavis/dotclaude.git ~/.claude
+                $ git clone https://github.com/travisjneuman/.claude.git ~/.claude
               </div>
             </div>
             <div>
