@@ -242,4 +242,7 @@ temp/
 
 # Database files
 *.db
-paste-cache/
+
+# ----- LOCAL REFERENCE DOCUMENTATION -----
+# Personal backup strategy documentation (local-only reference)
+docs/BACKUP-STRATEGIES.md
