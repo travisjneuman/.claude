@@ -90,7 +90,10 @@
       "mcp__sqlite__read_query",
       "mcp__sequential-thinking__*"
     ],
-    "deny": ["mcp__filesystem__write_file", "mcp__filesystem__delete_file"],
+    "deny": [
+      "mcp__filesystem__write_file",
+      "mcp__filesystem__delete_file"
+    ],
     "ask": [],
     "defaultMode": "bypassPermissions"
   },
@@ -107,18 +110,6 @@
     "browserbase"
   ],
   "hooks": {
-    "SessionStart": [
-      {
-        "matcher": "*",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "$HOME/.claude/scripts/hooks/session-start.sh",
-            "timeout": 5
-          }
-        ]
-      }
-    ],
     "PostToolUse": [
       {
         "matcher": "Write",
@@ -159,9 +150,10 @@
     "hookify@claude-code-plugins": false,
     "plugin-dev@claude-code-plugins": true,
     "ralph-wiggum@claude-code-plugins": true,
-    "superpowers@superpowers-marketplace": true
+    "superpowers@obra-superpowers": true
   },
   "outputStyle": "default",
   "spinnerTipsEnabled": false,
-  "alwaysThinkingEnabled": true
+  "alwaysThinkingEnabled": true,
+  "model": "opus"
 }
