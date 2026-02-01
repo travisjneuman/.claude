@@ -110,24 +110,64 @@
     "browserbase"
   ],
   "hooks": {
-    "PostToolUse": [
+    "SessionStart": [
       {
-        "matcher": "Write",
         "hooks": [
           {
             "type": "command",
-            "command": "npx prettier --write \"$CLAUDE_FILE_PATH\"",
-            "statusMessage": "Formatting with Prettier"
+            "command": "bash ~/.claude/hooks/session-start-pull.sh",
+            "statusMessage": "Pulling repos in background"
+          },
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/session-start-context.sh",
+            "statusMessage": "Loading previous session context"
           }
         ]
-      },
+      }
+    ],
+    "Stop": [
       {
-        "matcher": "Edit",
         "hooks": [
           {
             "type": "command",
-            "command": "npx prettier --write \"$CLAUDE_FILE_PATH\"",
-            "statusMessage": "Formatting with Prettier"
+            "command": "bash ~/.claude/hooks/session-stop-summary.sh",
+            "statusMessage": "Saving session summary"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/prompt-context.sh",
+            "statusMessage": "Injecting git context"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/guard-dangerous.sh",
+            "statusMessage": "Checking command safety"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/format-code.sh",
+            "statusMessage": "Auto-formatting"
           }
         ]
       }
@@ -144,12 +184,12 @@
     "learning-output-style@claude-code-plugins": false,
     "frontend-design@claude-code-plugins": true,
     "document-skills@anthropic-agent-skills": true,
-    "example-skills@anthropic-agent-skills": true,
+    "example-skills@anthropic-agent-skills": false,
     "taches-cc-resources@taches-cc-resources": true,
-    "claude-opus-4-5-migration@claude-code-plugins": true,
+    "claude-opus-4-5-migration@claude-code-plugins": false,
     "hookify@claude-code-plugins": false,
     "plugin-dev@claude-code-plugins": true,
-    "ralph-wiggum@claude-code-plugins": true,
+    "ralph-wiggum@claude-code-plugins": false,
     "superpowers@obra-superpowers": true
   },
   "outputStyle": "default",
