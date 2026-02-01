@@ -35,7 +35,7 @@ export default function Footer() {
             <span className="text-lg font-bold gradient-text">Claude Code</span>
             <p className="mt-2 text-sm text-[var(--text-muted)]">
               Supercharge your Claude Code with 72 skills, 36 agents, and 1,700+
-              marketplace skills across 50 repos.
+              marketplace skills across 51 repos.
             </p>
           </div>
           {Object.entries(footerLinks).map(([category, links]) => (
