@@ -14,9 +14,10 @@ rules/
 │   ├── ui-visual-changes.md  # Visual/UI work (enhanced with frontend aesthetics)
 │   ├── automation-scripts.md # Scripts/automation
 │   └── static-sites.md       # HTML/CSS/JS sites
-├── workflows/                # NEW: Workflow methodologies (v2.0)
+├── workflows/                # Workflow methodologies
 │   ├── research-methodology.md  # Structured research with hypothesis tracking
-│   └── action-policy.md      # PROACTIVE vs CONSERVATIVE mode configuration
+│   ├── action-policy.md      # PROACTIVE vs CONSERVATIVE mode configuration
+│   └── context-management.md # Context window, multi-window, state persistence
 ├── stacks/                   # Tech stack patterns
 │   ├── react-typescript.md   # React + TypeScript
 │   ├── python.md             # Python projects
@@ -48,6 +49,7 @@ rules/
 | File                                | Read When...                                     |
 | ----------------------------------- | ------------------------------------------------ |
 | `workflows/research-methodology.md` | Researching, investigating, comparing approaches |
+| `workflows/context-management.md`   | Managing context, multi-window, state persistence |
 | `workflows/action-policy.md`        | Configuring behavior (PROACTIVE vs CONSERVATIVE) |
 
 ### Stacks
