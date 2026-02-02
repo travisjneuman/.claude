@@ -19,7 +19,7 @@ Pull the parent repo, marketplace submodules, and custom project directories wit
 ## What It Does
 
 1. **Pulls parent repo** (`~/.claude` - travisjneuman/.claude)
-2. **Pulls all submodules** (50 repos in `plugins/marketplaces/`)
+2. **Pulls all submodules** (51 repos in `plugins/marketplaces/`)
 3. **Pulls custom project directories** (if configured - your own repos)
 4. **Fixes detached HEAD** automatically on any repo
 5. **Enforces no_push** on marketplace submodules only (not your repos)

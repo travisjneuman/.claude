@@ -17,6 +17,8 @@ mkdir -p "$LOGDIR"
   echo "=== Pull started: $(date) ==="
   timeout 60 bash "$SCRIPT" 2>&1 || echo "Pull finished with exit code $?"
   echo "=== Pull ended: $(date) ==="
+  # Update documentation counts after pull
+  [ -f "$HOME/.claude/scripts/update-counts.sh" ] && bash "$HOME/.claude/scripts/update-counts.sh" 2>&1 || true
 } >> "$LOGFILE" 2>&1 &
 
 # Exit immediately so session isn't blocked
