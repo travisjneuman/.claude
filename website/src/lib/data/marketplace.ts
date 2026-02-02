@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import fallbackCounts from "./marketplace-counts.json";
 
 export interface MarketplaceRepo {
   name: string;
@@ -54,8 +55,17 @@ export function getMarketplaceStats(): {
     "marketplaces",
   );
 
-  if (!fs.existsSync(marketDir)) {
-    return { repos: [], totalSkills: 0 };
+  if (!fs.existsSync(marketDir) || fs.readdirSync(marketDir).length === 0) {
+    // Fallback for deployment (Cloudflare Pages) where submodules aren't available
+    const fallbackRepos: MarketplaceRepo[] = fallbackCounts.repos.map(
+      (r: { name: string; displayName: string; skillCount: number }) => ({
+        ...r,
+        githubUrl:
+          GITHUB_URLS[r.name] ||
+          `https://github.com/search?q=${encodeURIComponent(r.name)}`,
+      }),
+    );
+    return { repos: fallbackRepos, totalSkills: fallbackCounts.totalSkills };
   }
 
   const entries = fs.readdirSync(marketDir, { withFileTypes: true });
