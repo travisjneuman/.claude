@@ -2,7 +2,7 @@
 
 Ongoing maintenance procedures to keep your Claude Code configuration clean and efficient.
 
-**Last Updated:** January 2026 (v2.2)
+**Last Updated:** February 2026 (v2.3)
 
 ---
 
@@ -37,11 +37,13 @@ Before starting work, always sync all repositories:
 
 **What it does:**
 
-1. Pulls parent repo (`~/.claude` - travisjneuman/.claude)
-2. Pulls all marketplace submodules in `plugins/marketplaces/`
-3. Pulls custom project directories (if configured)
-4. Fixes detached HEAD state automatically
-5. Enforces `no_push` on marketplace submodules only
+1. Initializes any new/unregistered submodules
+2. Pulls parent repo (`~/.claude` - travisjneuman/.claude)
+3. Pulls all 67 marketplace submodules in `plugins/marketplaces/`
+4. Enforces `no_push` on marketplace submodules (read-only protection)
+5. Pulls custom project directories (if configured)
+6. Fixes detached HEAD state automatically
+7. Updates documentation counts if any repos changed (skills, agents, marketplace skills)
 
 **Location-based push access:**
 | Location | Push Access |

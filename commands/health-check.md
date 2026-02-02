@@ -52,7 +52,7 @@ Verify:
 | Directory               | Expected  | Check                                         |
 | ----------------------- | --------- | --------------------------------------------- |
 | `skills/`               | 68+ items | `ls ~/.claude/skills/ \| wc -l`               |
-| `agents/`               | 37+ files | `ls ~/.claude/agents/*.md \| wc -l`           |
+| `agents/`               | 36+ files | `ls ~/.claude/agents/*.md \| wc -l`           |
 | `commands/`             | 10+ files | `ls ~/.claude/commands/*.md \| wc -l`         |
 | `rules/`                | 13+ files | `find ~/.claude/rules -name "*.md" \| wc -l`  |
 | `templates/`            | 5+ files  | `ls ~/.claude/templates/ \| wc -l`            |
