@@ -157,7 +157,7 @@ Submodules:
 Resources:
   • 72 local skills
   • 36 local agents
-  • 1,700+ marketplace skills (50 repos)
+  • 1,700+ marketplace skills (51 repos)
 
 Hooks:
   ✓ SessionStart: Auto-routing enabled
