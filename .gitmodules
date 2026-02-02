@@ -165,3 +165,54 @@
 [submodule "plugins/marketplaces/mvanhorn-last30days-skill"]
 	path = plugins/marketplaces/mvanhorn-last30days-skill
 	url = https://github.com/mvanhorn/last30days-skill.git
+[submodule "plugins/marketplaces/expo-skills"]
+	path = plugins/marketplaces/expo-skills
+	url = https://github.com/expo/skills.git
+[submodule "plugins/marketplaces/voltagent-agent-skills"]
+	path = plugins/marketplaces/voltagent-agent-skills
+	url = https://github.com/VoltAgent/awesome-agent-skills.git
+[submodule "plugins/marketplaces/jeremylongshore-plugins"]
+	path = plugins/marketplaces/jeremylongshore-plugins
+	url = https://github.com/jeremylongshore/claude-code-plugins-plus-skills.git
+[submodule "plugins/marketplaces/scopecraft-command"]
+	path = plugins/marketplaces/scopecraft-command
+	url = https://github.com/scopecraft/command.git
+[submodule "plugins/marketplaces/danielscholl-sdlc"]
+	path = plugins/marketplaces/danielscholl-sdlc
+	url = https://github.com/danielscholl/claude-sdlc.git
+[submodule "plugins/marketplaces/akin-ozer-devops"]
+	path = plugins/marketplaces/akin-ozer-devops
+	url = https://github.com/akin-ozer/cc-devops-skills.git
+[submodule "plugins/marketplaces/EveryInc-compound"]
+	path = plugins/marketplaces/EveryInc-compound
+	url = https://github.com/EveryInc/compound-engineering-plugin.git
+[submodule "plugins/marketplaces/claude-market"]
+	path = plugins/marketplaces/claude-market
+	url = https://github.com/claude-market/marketplace.git
+[submodule "plugins/marketplaces/netresearch-marketplace"]
+	path = plugins/marketplaces/netresearch-marketplace
+	url = https://github.com/netresearch/claude-code-marketplace.git
+[submodule "plugins/marketplaces/DustyWalker-marketplace"]
+	path = plugins/marketplaces/DustyWalker-marketplace
+	url = https://github.com/DustyWalker/claude-code-marketplace.git
+[submodule "plugins/marketplaces/daymade-skills"]
+	path = plugins/marketplaces/daymade-skills
+	url = https://github.com/daymade/claude-code-skills.git
+[submodule "plugins/marketplaces/automazeio-ccpm"]
+	path = plugins/marketplaces/automazeio-ccpm
+	url = https://github.com/automazeio/ccpm.git
+[submodule "plugins/marketplaces/ykdojo-tips"]
+	path = plugins/marketplaces/ykdojo-tips
+	url = https://github.com/ykdojo/claude-code-tips.git
+[submodule "plugins/marketplaces/kivilaid-marketplace"]
+	path = plugins/marketplaces/kivilaid-marketplace
+	url = https://github.com/kivilaid/plugin-marketplace.git
+[submodule "plugins/marketplaces/hesreallyhim-awesome"]
+	path = plugins/marketplaces/hesreallyhim-awesome
+	url = https://github.com/hesreallyhim/awesome-claude-code.git
+[submodule "plugins/marketplaces/travisvn-awesome"]
+	path = plugins/marketplaces/travisvn-awesome
+	url = https://github.com/travisvn/awesome-claude-skills.git
+[submodule "plugins/marketplaces/quemsah-awesome"]
+	path = plugins/marketplaces/quemsah-awesome
+	url = https://github.com/quemsah/awesome-claude-plugins.git
