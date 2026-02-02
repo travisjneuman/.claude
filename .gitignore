@@ -246,3 +246,8 @@ temp/
 # ----- LOCAL REFERENCE DOCUMENTATION -----
 # Personal backup strategy documentation (local-only reference)
 docs/BACKUP-STRATEGIES.md
+
+# Machine-specific caches
+paste-cache/
+session-summaries/
+last-session.md
