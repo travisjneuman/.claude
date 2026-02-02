@@ -2,7 +2,7 @@
 
 How to deploy this Claude Code configuration to a new machine.
 
-**Last Updated:** January 2026 (v2.2)
+**Last Updated:** February 2026 (v2.3)
 
 **See also:** [NEW-DEVICE-SETUP.md](./NEW-DEVICE-SETUP.md) for detailed cross-platform instructions.
 
@@ -87,7 +87,7 @@ This script:
 - Sets `no_push` on each to prevent accidental modifications
 - Ensures main repo can push to your GitHub
 
-### Step 2: Setup MCP Config (Platform-Specific)
+### Step 3: Setup MCP Config (Platform-Specific)
 
 MCP configuration is platform-specific and NOT synced via git. Create `~/.claude/.mcp.json`:
 
@@ -119,7 +119,7 @@ MCP configuration is platform-specific and NOT synced via git. Create `~/.claude
 
 See `docs/MCP-SERVERS.md` for full templates.
 
-### Step 3: Login to Claude Code
+### Step 4: Login to Claude Code
 
 ```bash
 claude
@@ -127,7 +127,7 @@ claude
 
 Follow the authentication prompts.
 
-### Step 4: Verify Setup
+### Step 5: Verify Setup
 
 ```
 /doctor
@@ -171,11 +171,13 @@ git pull origin master
 git submodule update --remote --merge
 ```
 
-**Update marketplace plugins:**
+**Update all repos (marketplace plugins + parent):**
 
 ```bash
-bash ~/.claude/scripts/update-marketplaces.sh
+~/.claude/_pull-all-repos.sh
 ```
+
+This pulls all 67 marketplace repos, fixes detached HEADs, enforces `no_push`, and updates documentation counts automatically.
 
 ---
 
