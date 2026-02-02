@@ -2,6 +2,35 @@
 
 All notable changes to the Ultimate Claude Code Toolkit.
 
+## [2.3.0] - February 1, 2026
+
+### Documentation Enhancement & Configuration Improvements
+
+Comprehensive documentation overhaul for v2.3 — every doc updated, new READMEs created, and dynamic count management extended to plugin.json.
+
+### Added
+
+- **LICENSE** — MIT license (was missing, referenced by README badges)
+- **hooks/README.md** — Lifecycle diagram, reference table for all 7 hooks, exit codes, troubleshooting
+- **scripts/README.md** — Categorized reference for all scripts (setup, maintenance, repo management, utilities)
+- **.env.example** — Template for machine-specific configuration (custom project directories)
+- **.env.local support** — `_pull-all-repos.sh` now reads CUSTOM_PROJECT_DIRS from gitignored `.env.local` instead of requiring edits to tracked files
+- **Dynamic plugin.json counts** — `update-counts.sh` now updates skills/agents/repo counts in plugin.json automatically
+- **Parent repo safety check** — `_pull-all-repos.sh` detects and restores push URL if accidentally set to `no_push`
+
+### Changed
+
+- **Version bump** — All 13 docs updated from v2.2/January 2026 to v2.3/February 2026
+- **docs/CONFIGURATION.md** — Added `.env.local`, hooks configuration table, and model setting sections
+- **README.md** — Added `.env.local` setup step (Step 4) in new-machine guide, renumbered subsequent steps
+- **docs/NEW-DEVICE-SETUP.md** — Added "Configure Custom Project Directories" section
+- **docs/SETUP-GUIDE.md** — Added `.env.local` to sync table
+- **rules/tooling/external-repos.md** — Updated to reference `.env.local` instead of editing `_pull-all-repos.sh`
+- **plugin.json** — Fixed stale counts (100→72 skills, 30→36 agents), bumped version to 2.3.0
+- **Marketplace skills** — Count updated from 1,700+ to 1,900+ across all docs
+
+---
+
 ## [2.2.2] - January 28, 2026
 
 ### Major Enhancement: Showcase Website & Documentation Polish
