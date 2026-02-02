@@ -2,7 +2,7 @@
 
 Detailed documentation of all configuration files and their settings.
 
-**Last Updated:** January 2026 (v2.2)
+**Last Updated:** February 2026 (v2.3)
 
 ---
 
@@ -281,8 +281,69 @@ Common problems:
 
 ---
 
+## File: `.env.local`
+
+**Location:** `~/.claude/.env.local`
+
+**Purpose:** Machine-specific configuration (gitignored).
+
+Each machine can have its own `.env.local` with settings that don't sync across devices.
+
+**Setup:**
+
+```bash
+cp ~/.claude/.env.example ~/.claude/.env.local
+```
+
+**Currently supported:**
+
+| Variable              | Used By              | Description                              |
+| --------------------- | -------------------- | ---------------------------------------- |
+| `CUSTOM_PROJECT_DIRS` | `_pull-all-repos.sh` | Comma-separated directories to pull from |
+
+See `.env.example` for the full template.
+
+---
+
+## Hooks Configuration
+
+The `hooks` section in `settings.json` defines Claude Code lifecycle hooks.
+
+### Currently Configured Hooks
+
+| Event               | Hook                    | Purpose                                    |
+| ------------------- | ----------------------- | ------------------------------------------ |
+| `SessionStart`      | `session-start-pull.sh` | Pull all repos in background               |
+| `SessionStart`      | `session-start-context.sh` | Load previous session context           |
+| `Stop`              | `session-stop-summary.sh` | Save session summary for continuity      |
+| `UserPromptSubmit`  | `prompt-context.sh`     | Inject git context into prompts            |
+| `PreToolUse` (Bash) | `guard-dangerous.sh`    | Block dangerous commands (rm -rf /, etc.)  |
+| `PreToolUse` (Bash) | `pre-commit-counts.sh`  | Auto-update counts before git commit       |
+| `PostToolUse` (Write/Edit) | `format-code.sh`  | Auto-format files after write/edit         |
+
+All hooks are bash scripts in `~/.claude/hooks/`. See `hooks/README.md` for details.
+
+---
+
+## Model Setting
+
+```json
+{
+  "model": "opus"
+}
+```
+
+| Value      | Model               | Best For                            |
+| ---------- | -------------------- | ----------------------------------- |
+| `"opus"`   | Claude Opus 4.5      | Complex tasks, architecture, review |
+| `"sonnet"` | Claude Sonnet        | General coding, faster responses    |
+| `"haiku"`  | Claude Haiku         | Quick tasks, minimal latency        |
+
+---
+
 ## See Also
 
 - [MCP-SERVERS.md](./MCP-SERVERS.md) - MCP server details
 - [SETUP-GUIDE.md](./SETUP-GUIDE.md) - Initial setup
 - [MAINTENANCE.md](./MAINTENANCE.md) - Ongoing maintenance
+- [../hooks/README.md](../hooks/README.md) - Hook lifecycle and details

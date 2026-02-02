@@ -26,23 +26,26 @@
 # =============================================================================
 
 # =============================================================================
-# USER CONFIGURATION - Add your project directories here
+# USER CONFIGURATION — reads from .env.local (gitignored, machine-specific)
 # =============================================================================
-# Uncomment and modify the lines below to include your own project directories.
-# The script will scan these directories for git repos and pull them.
+# To configure custom project directories for this machine:
+#   1. Copy .env.example to .env.local
+#   2. Set CUSTOM_PROJECT_DIRS to your directories (comma-separated)
 #
-# Examples:
-#   - Windows: "/e/Web Development" or "/c/Users/you/projects"
-#   - Mac/Linux: "/home/you/projects" or "~/projects"
+# Example .env.local:
+#   CUSTOM_PROJECT_DIRS="/e/Web Development,/c/Users/you/projects"
 #
-# NOTE: In Git Bash on Windows, use forward slashes and /c/ instead of C:\
-#       Example: "E:\Web Development" becomes "/e/Web Development"
+# Windows (Git Bash): use /e/ instead of E:\
+# Mac/Linux: use normal paths like /home/you/projects
 #
-CUSTOM_PROJECT_DIRS=(
-    # "/e/Web Development"           # Uncomment and edit for your directories
-    # "/c/Users/you/projects"        # Add as many as needed
-    # "$HOME/projects"               # Works on any platform
-)
+CUSTOM_PROJECT_DIRS=()
+ENV_FILE="$SCRIPT_DIR/.env.local"
+if [[ -f "$ENV_FILE" ]]; then
+    RAW_DIRS=$(grep '^CUSTOM_PROJECT_DIRS=' "$ENV_FILE" | head -1 | cut -d'=' -f2- | tr -d '"' | tr -d "'")
+    if [[ -n "$RAW_DIRS" ]]; then
+        IFS=',' read -ra CUSTOM_PROJECT_DIRS <<< "$RAW_DIRS"
+    fi
+fi
 # =============================================================================
 
 # Determine script location (works even when called via symlink)

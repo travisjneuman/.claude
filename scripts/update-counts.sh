@@ -236,6 +236,27 @@ update_skill_finder() {
   check_changed "$file" "$before"
 }
 
+# ─── Update plugin.json counts ────────────────────────────────────────
+
+update_plugin_json() {
+  local file="plugin.json"
+  [ -f "$file" ] || return 0
+  local before
+  before=$(md5sum "$file" 2>/dev/null || md5 "$file" 2>/dev/null)
+
+  # Update skills count
+  sedi -E "/\"skills\"/,/\"count\"/{s/\"count\": [0-9]+/\"count\": ${SKILL_COUNT}/}" "$file"
+  # Update agents count
+  sedi -E "/\"agents\"/,/\"count\"/{s/\"count\": [0-9]+/\"count\": ${AGENT_COUNT}/}" "$file"
+  # Update description line
+  sedi -E "s/[0-9]+ local skills, [0-9]+ specialized agents/${SKILL_COUNT} local skills, ${AGENT_COUNT} specialized agents/" "$file"
+  sedi -E "s/[0-9]+ local skills covering/${SKILL_COUNT} local skills covering/" "$file"
+  sedi -E "s/[0-9]+ specialized AI agents/${AGENT_COUNT} specialized AI agents/" "$file"
+  sedi -E "s/[0-9]+ marketplace repos/${REPO_COUNT} marketplace repos/" "$file"
+
+  check_changed "$file" "$before"
+}
+
 # ─── Execute updates ─────────────────────────────────────────────────
 
 echo "Updating documentation counts..."
@@ -274,6 +295,9 @@ update_file "commands/pull-repos.md"
 
 # CLAUDE.md
 update_file "CLAUDE.md"
+
+# plugin.json
+update_plugin_json
 
 # Regenerate MASTER_INDEX.md
 if [ -f "scripts/regenerate-index.sh" ]; then
