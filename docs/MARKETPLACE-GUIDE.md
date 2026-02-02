@@ -1,6 +1,6 @@
 # Marketplace Guide
 
-Complete reference for the 68 plugin marketplaces and how to use them.
+Complete reference for the 67 plugin marketplaces and how to use them.
 
 **Last Updated:** February 2026 (v2.3)
 
@@ -17,7 +17,7 @@ Complete reference for the 68 plugin marketplaces and how to use them.
 
 ---
 
-## Installed Marketplaces (68)
+## Installed Marketplaces (67)
 
 ### Official (Anthropic)
 
@@ -47,7 +47,6 @@ Complete reference for the 68 plugin marketplaces and how to use them.
 | `davila7-templates`        | 651 templates                            | Broad template coverage                        |
 | `madappgang-claude-code`   | 110 resources                            | Full-stack development                         |
 | `athola-night-market`      | 125 skills                              | Curated night market                           |
-| `jeremylongshore-plugins`  | 270+ plugins, 739 skills                | CCPI package manager, SaaS skill packs         |
 | `voltagent-agent-skills`   | 200+ official dev team skills           | Stripe, Cloudflare, Sentry, HuggingFace, Expo  |
 | `kivilaid-marketplace`     | 87 plugins from 10+ sources             | Aggregated plugin marketplace                  |
 
@@ -277,4 +276,4 @@ All marketplaces are configured with `no_push` - read-only access.
 
 ---
 
-_68 marketplaces, 5,000+ skills, discovered proactively when domain expertise is needed._
+_67 marketplaces, 1,900+ skills, discovered proactively when domain expertise is needed._

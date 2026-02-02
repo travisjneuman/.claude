@@ -54,7 +54,6 @@ All external repos are located in `~/.claude/plugins/marketplaces/`:
 | hashi-terraform-skills       | https://github.com/hashi-demo-lab/claude-skill-hcp-terraform.git           |
 | henkisdabro-marketplace      | https://github.com/henkisdabro/claudecode-marketplace.git                  |
 | hesreallyhim-awesome         | https://github.com/hesreallyhim/awesome-claude-code.git                    |
-| jeremylongshore-plugins      | https://github.com/jeremylongshore/claude-code-plugins-plus-skills.git     |
 | kivilaid-marketplace         | https://github.com/kivilaid/plugin-marketplace.git                         |
 | kfly8-cpan-plugins           | https://github.com/kfly8/claude-cpan-plugins.git                           |
 | madappgang-claude-code       | https://github.com/MadAppGang/claude-code.git                              |
