@@ -171,9 +171,6 @@
 [submodule "plugins/marketplaces/voltagent-agent-skills"]
 	path = plugins/marketplaces/voltagent-agent-skills
 	url = https://github.com/VoltAgent/awesome-agent-skills.git
-[submodule "plugins/marketplaces/jeremylongshore-plugins"]
-	path = plugins/marketplaces/jeremylongshore-plugins
-	url = https://github.com/jeremylongshore/claude-code-plugins-plus-skills.git
 [submodule "plugins/marketplaces/scopecraft-command"]
 	path = plugins/marketplaces/scopecraft-command
 	url = https://github.com/scopecraft/command.git
