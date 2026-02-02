@@ -25,7 +25,7 @@ That's it. The scripts handle everything cross-platform.
 
 ## Why This Matters
 
-The `~/.claude` repo contains 68 marketplace repositories as nested git repos. When you clone `~/.claude` to a new device:
+The `~/.claude` repo contains 67 marketplace repositories as nested git repos. When you clone `~/.claude` to a new device:
 
 1. **Problem**: Nested repos may have incorrect remote URLs (pointing to your personal repo instead of the original upstreams)
 2. **Solution**: `init-marketplaces.sh` re-clones each marketplace from its original upstream with push disabled
@@ -155,7 +155,7 @@ Ensure you're using Git Bash, not PowerShell or CMD:
 
 | Script                     | Purpose                                                    |
 | -------------------------- | ---------------------------------------------------------- |
-| `init-marketplaces.sh`     | Clone/reinitialize all 68 marketplace repos from upstreams |
+| `init-marketplaces.sh`     | Clone/reinitialize all 67 marketplace repos from upstreams |
 | `fix-remotes.sh`           | Fix remote URLs without re-cloning                         |
 | `setup-new-machine.sh`     | Complete setup (plugins, hooks, etc.)                      |
 | `update-external-repos.sh` | Pull latest from all upstreams                             |

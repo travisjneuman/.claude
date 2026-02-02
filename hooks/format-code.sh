@@ -1,8 +1,21 @@
 #!/bin/bash
 # PostToolUse hook: Auto-format files after Write/Edit
-# Only runs on supported file types, handles Windows paths
+# Reads file path from stdin JSON (tool_input.file_path)
+# Cross-platform: Linux, macOS, Windows (Git Bash)
 
-FILE_PATH="$CLAUDE_FILE_PATH"
+# Read stdin JSON and extract file path using Node.js (always available)
+INPUT=$(cat)
+FILE_PATH=$(echo "$INPUT" | node -e "
+  let d='';
+  process.stdin.on('data',c=>d+=c);
+  process.stdin.on('end',()=>{
+    try{
+      const j=JSON.parse(d);
+      const p=j.tool_input?.file_path||'';
+      process.stdout.write(p);
+    }catch(e){process.exit(0)}
+  });
+" 2>/dev/null)
 
 # Exit silently if no file path
 [ -z "$FILE_PATH" ] && exit 0
@@ -10,7 +23,7 @@ FILE_PATH="$CLAUDE_FILE_PATH"
 # Exit silently if file doesn't exist
 [ -f "$FILE_PATH" ] || exit 0
 
-# Get file extension
+# Get file extension (lowercase)
 EXT="${FILE_PATH##*.}"
 EXT=$(echo "$EXT" | tr '[:upper:]' '[:lower:]')
 

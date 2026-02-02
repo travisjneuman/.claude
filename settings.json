@@ -199,8 +199,7 @@
     "claude-opus-4-5-migration@claude-code-plugins": false,
     "hookify@claude-code-plugins": false,
     "plugin-dev@claude-code-plugins": true,
-    "ralph-wiggum@claude-code-plugins": false,
-    "superpowers@obra-superpowers": true
+    "ralph-wiggum@claude-code-plugins": false
   },
   "outputStyle": "default",
   "spinnerTipsEnabled": false,
