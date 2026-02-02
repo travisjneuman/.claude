@@ -2,7 +2,7 @@
 
 Detailed documentation of all configuration files and their settings.
 
-**Last Updated:** February 2026 (v2.3)
+**Last Updated:** February 2026 (v2.3.1)
 
 ---
 
@@ -311,15 +311,15 @@ The `hooks` section in `settings.json` defines Claude Code lifecycle hooks.
 
 ### Currently Configured Hooks
 
-| Event               | Hook                    | Purpose                                    |
-| ------------------- | ----------------------- | ------------------------------------------ |
-| `SessionStart`      | `session-start-pull.sh` | Pull all repos in background               |
-| `SessionStart`      | `session-start-context.sh` | Load previous session context           |
-| `Stop`              | `session-stop-summary.sh` | Save session summary for continuity      |
-| `UserPromptSubmit`  | `prompt-context.sh`     | Inject git context into prompts            |
-| `PreToolUse` (Bash) | `guard-dangerous.sh`    | Block dangerous commands (rm -rf /, etc.)  |
-| `PreToolUse` (Bash) | `pre-commit-counts.sh`  | Auto-update counts before git commit       |
-| `PostToolUse` (Write/Edit) | `format-code.sh`  | Auto-format files after write/edit         |
+| Event                      | Hook                       | Purpose                                   |
+| -------------------------- | -------------------------- | ----------------------------------------- |
+| `SessionStart`             | `session-start-pull.sh`    | Pull all repos in background              |
+| `SessionStart`             | `session-start-context.sh` | Load previous session context             |
+| `Stop`                     | `session-stop-summary.sh`  | Save session summary for continuity       |
+| `UserPromptSubmit`         | `prompt-context.sh`        | Inject git context into prompts           |
+| `PreToolUse` (Bash)        | `guard-dangerous.sh`       | Block dangerous commands (rm -rf /, etc.) |
+| `PreToolUse` (Bash)        | `pre-commit-counts.sh`     | Auto-update counts before git commit      |
+| `PostToolUse` (Write/Edit) | `format-code.sh`           | Auto-format files after write/edit        |
 
 All hooks are bash scripts in `~/.claude/hooks/`. See `hooks/README.md` for details.
 
@@ -333,11 +333,11 @@ All hooks are bash scripts in `~/.claude/hooks/`. See `hooks/README.md` for deta
 }
 ```
 
-| Value      | Model               | Best For                            |
-| ---------- | -------------------- | ----------------------------------- |
-| `"opus"`   | Claude Opus 4.5      | Complex tasks, architecture, review |
-| `"sonnet"` | Claude Sonnet        | General coding, faster responses    |
-| `"haiku"`  | Claude Haiku         | Quick tasks, minimal latency        |
+| Value      | Model           | Best For                            |
+| ---------- | --------------- | ----------------------------------- |
+| `"opus"`   | Claude Opus 4.5 | Complex tasks, architecture, review |
+| `"sonnet"` | Claude Sonnet   | General coding, faster responses    |
+| `"haiku"`  | Claude Haiku    | Quick tasks, minimal latency        |
 
 ---
 

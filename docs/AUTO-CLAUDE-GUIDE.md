@@ -2,7 +2,7 @@
 
 Complete setup and usage guide for Auto-Claude autonomous coding framework.
 
-**Last Updated:** February 2026 (v2.3)
+**Last Updated:** February 2026 (v2.3.1)
 
 ---
 
@@ -578,7 +578,7 @@ Each gets its own worktree - completely isolated.
 
 ## Related Documentation
 
-- [MARKETPLACE-GUIDE.md](./MARKETPLACE-GUIDE.md) - All 67 marketplaces
+- [MARKETPLACE-GUIDE.md](./MARKETPLACE-GUIDE.md) - All 72 marketplaces
 - [WORKFLOW-GUIDE.md](./WORKFLOW-GUIDE.md) - Workflow patterns
 - [CLAUDE.md](../CLAUDE.md) - Core rules
 

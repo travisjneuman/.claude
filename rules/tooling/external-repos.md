@@ -77,7 +77,7 @@ All external repos are located in `~/.claude/plugins/marketplaces/`:
 | sivalabs-marketplace         | https://github.com/sivaprasadreddy/sivalabs-marketplace.git                |
 | skill-seekers                | https://github.com/yusufkaraaslan/Skill_Seekers.git                        |
 | skillsforge                  | https://github.com/rawveg/skillsforge-marketplace.git                      |
-| superpowers-marketplace       | https://github.com/obra/superpowers-marketplace.git                        |
+| superpowers-marketplace      | https://github.com/obra/superpowers-marketplace.git                        |
 | taches-cc-resources          | https://github.com/glittercowboy/taches-cc-resources.git                   |
 | trailofbits-skills           | https://github.com/trailofbits/skills.git                                  |
 | travisvn-awesome             | https://github.com/travisvn/awesome-claude-skills.git                      |
@@ -109,7 +109,7 @@ All external repos are located in `~/.claude/plugins/marketplaces/`:
 **What gets pulled:**
 
 1. `~/.claude` - Parent repo (travisjneuman/.claude)
-2. `~/.claude/plugins/marketplaces/*` - All 67 marketplace repos
+2. `~/.claude/plugins/marketplaces/*` - All 72 marketplace repos
 3. Custom project directories (if configured) - your own repos
 4. Documentation counts updated automatically if any repos changed
 

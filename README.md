@@ -1,35 +1,46 @@
 <div align="center">
 
-```
-              ##                                   mmmm                                mm                  mm
-   ##         ""                                   ""##                                ##                 ##
- #######    ####     ##m####m             m#####m    ##       m#####m  ##    ##   m###m##   m####m       ##
-   ##         ##     ##"   ##            ##"    "    ##       " mmm##  ##    ##  ##"  "##  ##mmmm##     ##
-   ##         ##     ##    ##            ##          ##      m##"""##  ##    ##  ##    ##  ##""""""    m#"
-   ##mmm      ##     ##    ##     ##     "##mmmm#    ##mmm   ##mmm###  ##mmm###  "##mm###  "##mmmm#   m#"
-    """"      ##     ""    ""     ""       """""      """"    """" ""   """" ""    """ ""    """""   m#"
-           ####"
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://capsule-render.vercel.app/api?type=waving&color=0:1a1a2e,50:6366f1,100:d946ef&height=220&section=header&text=tjn.claude/&fontSize=72&fontColor=ffffff&fontAlignY=35&desc=The%20Ultimate%20Claude%20Code%20Toolkit&descSize=20&descColor=c4b5fd&descAlignY=55&animation=fadeIn" />
+  <source media="(prefers-color-scheme: light)" srcset="https://capsule-render.vercel.app/api?type=waving&color=0:e0e7ff,50:6366f1,100:9333ea&height=220&section=header&text=tjn.claude/&fontSize=72&fontColor=1e1b4b&fontAlignY=35&desc=The%20Ultimate%20Claude%20Code%20Toolkit&descSize=20&descColor=4338ca&descAlignY=55&animation=fadeIn" />
+  <img alt="tjn.claude/ — The Ultimate Claude Code Toolkit" src="https://capsule-render.vercel.app/api?type=waving&color=0:1a1a2e,50:6366f1,100:d946ef&height=220&section=header&text=tjn.claude/&fontSize=72&fontColor=ffffff&fontAlignY=35&desc=The%20Ultimate%20Claude%20Code%20Toolkit&descSize=20&descColor=c4b5fd&descAlignY=55&animation=fadeIn" width="100%" />
+</picture>
 
-```
+<br/>
 
-### 🚀 The Most Comprehensive Claude Code Enhancement System Available
+**Transform Claude Code from a capable AI assistant into an enterprise-grade development powerhouse**
 
-**Transform Claude Code from a capable AI assistant into an enterprise-grade development environment**
+<br/>
 
-</div>
+<!-- Primary Resource Badges -->
 
----
+[![Claude Code](https://img.shields.io/badge/Claude_Code-6366f1?style=for-the-badge&logo=anthropic&logoColor=white)](https://docs.anthropic.com/en/docs/claude-code)
+[![Skills](https://img.shields.io/badge/Skills-72-10b981?style=for-the-badge&logo=sparkles&logoColor=white)](./skills/MASTER_INDEX.md)
+[![Agents](https://img.shields.io/badge/Agents-36-f59e0b?style=for-the-badge&logo=dependabot&logoColor=white)](./agents/README.md)
+[![Marketplaces](https://img.shields.io/badge/Marketplaces-72-3b82f6?style=for-the-badge&logo=homeassistantcommunitystore&logoColor=white)](./docs/MARKETPLACE-GUIDE.md)
+[![Marketplace Skills](https://img.shields.io/badge/Marketplace_Skills-5,000+-ec4899?style=for-the-badge&logo=stackblitz&logoColor=white)](./plugins/marketplaces/)
 
-<div align="center">
+<!-- Secondary Resource Badges -->
 
-[![Claude Code](https://img.shields.io/badge/Claude_Code-6366f1?style=for-the-badge&logo=anthropic&logoColor=white)](https://claude.com/claude-code)
-[![Skills](https://img.shields.io/badge/Skills-72+-10b981?style=for-the-badge&logo=sparkles&logoColor=white)](./skills/MASTER_INDEX.md)
-[![Agents](https://img.shields.io/badge/Agents-36+-f59e0b?style=for-the-badge&logo=robot&logoColor=white)](./agents/README.md)
-[![Marketplaces](https://img.shields.io/badge/Marketplaces-67-3b82f6?style=for-the-badge&logo=store&logoColor=white)](./docs/MARKETPLACE-GUIDE.md)
-[![Marketplace Skills](https://img.shields.io/badge/Marketplace_Skills-1900+-ec4899?style=for-the-badge&logo=package&logoColor=white)](./plugins/marketplaces/)
+[![Commands](https://img.shields.io/badge/Commands-19-a855f7?style=for-the-badge&logo=windowsterminal&logoColor=white)](./commands/README.md)
+[![Hooks](https://img.shields.io/badge/Hooks-7-06b6d4?style=for-the-badge&logo=webhook&logoColor=white)](./hooks/README.md)
+[![MCP Servers](https://img.shields.io/badge/MCP_Servers-9-f97316?style=for-the-badge&logo=server&logoColor=white)](./docs/MCP-SERVERS.md)
+[![Platform](https://img.shields.io/badge/macOS_|_Linux_|_Windows-333333?style=for-the-badge&logo=apple&logoColor=white)](./docs/SETUP-GUIDE.md)
+
+<!-- Social & Meta Badges -->
+
+[![GitHub stars](https://img.shields.io/github/stars/travisjneuman/.claude?style=for-the-badge&logo=github&color=e3b341)](https://github.com/travisjneuman/.claude/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/travisjneuman/.claude?style=for-the-badge&logo=git&color=6e7681)](https://github.com/travisjneuman/.claude/fork)
+[![Last Commit](https://img.shields.io/github/last-commit/travisjneuman/.claude?style=for-the-badge&logo=git&color=10b981)](https://github.com/travisjneuman/.claude/commits)
 [![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge&logo=opensourceinitiative&logoColor=white)](./LICENSE)
 
-**Version 2.3.0** • **Last Updated: February 1, 2026** • **Author: [Travis Neuman](https://travisjneuman.com)**
+<br/>
+
+**Version 2.3.1** · **Last Updated: February 2, 2026** · **Author: [Travis Neuman](https://travisjneuman.com)** · **Live: [claude.travisjneuman.com](https://claude.travisjneuman.com)**
+
+<br/>
+
+> _One `git clone` gives you 72 skills, 36 specialist agents, 72 community marketplaces with 5,000+ additional skills, 19 slash commands, 7 lifecycle hooks, and 9 MCP server configs — all auto-activating based on what you're working on. No manual setup required._
 
 </div>
 
@@ -62,7 +73,7 @@
 
 - [🎓 Complete Skills Reference (72 Skills)](#-complete-skills-reference-72-skills)
 - [🤖 Complete Agents Reference (36 Agents)](#-complete-agents-reference-36-agents)
-- [🏪 Complete Marketplaces Reference (67 Marketplaces)](#-complete-marketplaces-reference-67-marketplaces)
+- [🏪 Complete Marketplaces Reference (72 Marketplaces)](#-complete-marketplaces-reference-72-marketplaces)
 
 ### 🔒 Automation & Safety
 
@@ -104,14 +115,14 @@ The **Ultimate Claude Code Toolkit** transforms [Claude Code](https://docs.anthr
 
 ### 📊 What You Get
 
-|      Component      |  Count  | Description                                                                                                                                                                                 |
-| :-----------------: | :-----: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-|    🎓 **Skills**    | **72**  | Domain expertise modules covering iOS, Android, React, Vue, Svelte, DevOps, AI/ML, scientific computing, business strategy, and more                                                        |
-|    🤖 **Agents**    | **36**  | Specialized AI subagents for deep expertise in code review, security auditing, architecture analysis, platform development, and creative work                                               |
-| 🏪 **Marketplaces** | **67**  | External repositories containing **1,900+** additional skills from the community                                                                                                            |
-|   ⌨️ **Commands**   | **30+** | Custom slash commands for task routing, skill discovery, decision frameworks, and workflow automation                                                                                       |
-|    📋 **Rules**     | **17+** | Contextual guidelines for different tech stacks ([React](https://react.dev), [Python](https://python.org), [Go](https://go.dev), [Rust](https://rust-lang.org)), checklists, and automation |
-|    🪝 **Hooks**     |  **5**  | Git hooks (pre-commit, commit-msg, pre-push) and Claude Code lifecycle hooks (PostToolUse for Prettier formatting)                                                                          |
+|      Component      | Count  | Description                                                                                                                                                                                 |
+| :-----------------: | :----: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+|    🎓 **Skills**    | **72** | Domain expertise modules covering iOS, Android, React, Vue, Svelte, DevOps, AI/ML, scientific computing, business strategy, and more                                                        |
+|    🤖 **Agents**    | **36** | Specialized AI subagents for deep expertise in code review, security auditing, architecture analysis, platform development, and creative work                                               |
+| 🏪 **Marketplaces** | **72** | External repositories containing **5,000+** additional skills from the community                                                                                                            |
+|   ⌨️ **Commands**   | **19** | Custom slash commands for task routing, skill discovery, decision frameworks, and workflow automation                                                                                       |
+|    📋 **Rules**     | **17** | Contextual guidelines for different tech stacks ([React](https://react.dev), [Python](https://python.org), [Go](https://go.dev), [Rust](https://rust-lang.org)), checklists, and automation |
+|    🪝 **Hooks**     | **7**  | Git hooks and Claude Code lifecycle hooks (session-start, prompt-context, pre-commit, formatting, and more)                                                                                 |
 
 ### 💎 The Core Philosophy
 
@@ -170,12 +181,12 @@ The **Ultimate Claude Code Toolkit** transforms [Claude Code](https://docs.anthr
 
 **Reliability & Automation:** Fixed broken Anthropic submodules, automated count updates, and comprehensive documentation pass.
 
-| Feature                          | Description                                                                       | Details                                                               |
-| :------------------------------- | :-------------------------------------------------------------------------------- | :-------------------------------------------------------------------- |
-| 🔧 **Submodule Fixes**          | Fixed broken `claude-code-plugins` and `claude-plugins-official` submodules       | Both Anthropic repos now initialize and pull correctly                 |
-| 📊 **Auto Count Updates**       | `_pull-all-repos.sh` now automatically updates documentation counts after pulling | Skills, agents, and marketplace counts stay in sync with filesystem   |
-| 📝 **Documentation Accuracy**   | Updated all docs with correct repo counts, step numbering, and script references  | Fixed stale references across SETUP-GUIDE, MAINTENANCE, FOLDER-STRUCTURE |
-| 🔄 **68 Total Repos**           | All 68 repos (1 parent + 67 marketplace) pulling cleanly with zero failures       | Includes 4 official Anthropic repos and `superpowers-marketplace`     |
+| Feature                       | Description                                                                       | Details                                                                  |
+| :---------------------------- | :-------------------------------------------------------------------------------- | :----------------------------------------------------------------------- |
+| 🔧 **Submodule Fixes**        | Fixed broken `claude-code-plugins` and `claude-plugins-official` submodules       | Both Anthropic repos now initialize and pull correctly                   |
+| 📊 **Auto Count Updates**     | `_pull-all-repos.sh` now automatically updates documentation counts after pulling | Skills, agents, and marketplace counts stay in sync with filesystem      |
+| 📝 **Documentation Accuracy** | Updated all docs with correct repo counts, step numbering, and script references  | Fixed stale references across SETUP-GUIDE, MAINTENANCE, FOLDER-STRUCTURE |
+| 🔄 **73 Total Repos**         | All 73 repos (1 parent + 72 marketplace) pulling cleanly with zero failures       | Includes 4 official Anthropic repos and `superpowers-marketplace`        |
 
 **Result:** Zero-failure repo syncing, self-maintaining documentation counts, accurate setup guides. See [CHANGELOG.md](CHANGELOG.md) for complete details.
 
@@ -203,7 +214,7 @@ The **Ultimate Claude Code Toolkit** transforms [Claude Code](https://docs.anthr
 | 🔓 "I forget to check for security issues"     | 🔒 Git hooks auto-block secrets, security-auditor agent catches vulnerabilities |
 | 🤔 "Each task requires different expertise"    | 🤖 36 specialized agents spawn for deep work automatically                      |
 | ❓ "I don't know what tools are available"     | 🎯 Universal router detects domains and loads relevant resources                |
-| 📝 "Claude gives generic advice"               | 🏪 1,900+ marketplace skills provide production-tested patterns                 |
+| 📝 "Claude gives generic advice"               | 🏪 5,000+ marketplace skills provide production-tested patterns                 |
 
 ---
 
@@ -230,6 +241,48 @@ The **Ultimate Claude Code Toolkit** transforms [Claude Code](https://docs.anthr
 | 🔀 **Git**             | For submodule management                                             |
 | 📦 **Node.js**         | For Prettier formatting hooks                                        |
 | 💻 **Command Line**    | Basic familiarity                                                    |
+
+---
+
+## 🏛️ How It All Connects
+
+```
+┌──────────────────────────────────────────────────────────────────────────┐
+│                          YOUR PROMPT                                      │
+│                  "Build a login form with validation"                      │
+└─────────────────────────────┬────────────────────────────────────────────┘
+                              │
+                              ▼
+┌──────────────────────────────────────────────────────────────────────────┐
+│  📜 CLAUDE.md (Constitution)         Always loaded · ~1,100 tokens       │
+│  ├── Code standards, security rules, workflow patterns                    │
+│  └── Auto-routing table → detects domain keywords                        │
+└─────────────────────────────┬────────────────────────────────────────────┘
+                              │ Detects: "login form" → React/Web
+                              ▼
+┌─────────────┬───────────────┬──────────────┬─────────────────────────────┐
+│  🎓 SKILLS  │  🤖 AGENTS    │  📋 RULES    │  ⌨️ COMMANDS                 │
+│  72 modules │  36 specialists│  17 guides  │  19 slash commands           │
+│             │               │              │                              │
+│  Loaded on  │  Spawned for  │  Stack &     │  /start-task                 │
+│  demand by  │  deep work    │  checklist   │  /auto-claude                │
+│  context    │  (reviews,    │  guidance    │  /commit                     │
+│  matching   │  security,    │  (React,     │  /review-code                │
+│             │  debugging)   │  Python...)  │  ...and more                 │
+├─────────────┴───────────────┴──────────────┴─────────────────────────────┤
+│                                                                           │
+│  🏪 72 MARKETPLACE REPOS · 5,000+ community skills                       │
+│  Auto-discovered · Read-only · Updated via _pull-all-repos.sh            │
+│                                                                           │
+├───────────────────────────────────────────────────────────────────────────┤
+│  🪝 7 HOOKS          │  🔌 9 MCP SERVERS      │  📁 12 TEMPLATES         │
+│  Lifecycle automation │  Extended capabilities  │  Creation scaffolds     │
+│  (session, commit,    │  (thinking, browser,    │  (skills, agents,       │
+│   formatting)         │   memory, database)     │   commands, tasks)      │
+└───────────────────────┴────────────────────────┴─────────────────────────┘
+```
+
+> **The key insight:** You just describe what you want in plain English. The system reads your prompt, matches keywords to the right skills/agents/rules, and loads only what's relevant. No manual configuration needed.
 
 ---
 
@@ -434,28 +487,84 @@ All toolkit commands use cross-platform syntax:
 
 ## ⚡ Quick Start Guide
 
-### 🏃 5-Minute Setup
+### 🏃 Get Running in 3 Steps
 
-**Works on: Arch Linux | macOS | Windows (Git Bash)**
+<table>
+<tr>
+<td width="60">
+
+**Step**
+
+</td>
+<td>
+
+**What to do**
+
+</td>
+</tr>
+<tr>
+<td align="center">
+
+**1**
+
+</td>
+<td>
+
+**Backup & Clone** — Save your existing config and clone the toolkit
 
 ```bash
-# 1️⃣ Backup existing config
 mv ~/.claude ~/.claude-backup 2>/dev/null
-
-# 2️⃣ Clone the toolkit
 git clone https://github.com/travisjneuman/.claude.git ~/.claude
+```
 
-# 3️⃣ Initialize marketplace repos with correct upstream remotes (CRITICAL!)
+</td>
+</tr>
+<tr>
+<td align="center">
+
+**2**
+
+</td>
+<td>
+
+**Setup** — Initialize marketplace repos and configure everything
+
+```bash
 bash ~/.claude/scripts/init-marketplaces.sh
-
-# 4️⃣ Complete setup (plugins, hooks, verification)
 bash ~/.claude/scripts/setup-new-machine.sh
+```
 
-# 5️⃣ Start Claude Code
+> This configures 72 marketplace repos as read-only, registers plugins, installs hooks, and verifies your installation.
+
+</td>
+</tr>
+<tr>
+<td align="center">
+
+**3**
+
+</td>
+<td>
+
+**Launch** — Start Claude Code and everything activates automatically
+
+```bash
 claude
 ```
 
-> **⚠️ IMPORTANT:** Always run `init-marketplaces.sh` on new devices. This ensures marketplace repos fetch from their original upstreams (not your personal repo) and have push disabled.
+> Try typing: `"Build a REST API with user authentication"` — watch the system auto-detect the domain, load relevant skills, and route your task.
+
+</td>
+</tr>
+</table>
+
+**Alternative: One-Line Install** (does all of the above automatically):
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/travisjneuman/.claude/master/scripts/install.sh | bash
+```
+
+> **💡 Already have Claude Code configured?** See the [detailed installation guide](#-installation) below for migration options, or run `/bootstrap` after setup to verify everything works.
 
 ### 🎬 Your First Task
 
@@ -624,7 +733,7 @@ cd ~/.claude
 # ═══════════════════════════════════════════════════════════════════════════
 # STEP 2: Initialize marketplace repos with correct upstream remotes (CRITICAL!)
 # ═══════════════════════════════════════════════════════════════════════════
-# This script clones all 67 marketplace repos from their ORIGINAL upstreams
+# This script clones all 72 marketplace repos from their ORIGINAL upstreams
 # and configures no_push to prevent accidental modifications.
 #
 # ⚠️ This is the most important step! Without it, marketplace repos may have
@@ -750,7 +859,7 @@ echo "=== Setup complete! Run 'claude doctor' to verify ==="
 
 ### 🔒 Security: The no_push Protection
 
-**Critical:** All 67 external repositories are configured with `no_push` to prevent accidental pushes to upstream repos you don't own.
+**Critical:** All 72 external repositories are configured with `no_push` to prevent accidental pushes to upstream repos you don't own.
 
 ```bash
 # Check no_push configuration on any repo
@@ -811,20 +920,20 @@ This restores the submodule state and re-applies `no_push` protection.
 
 All external repos in `~/.claude/plugins/marketplaces/`:
 
-| Repository                        | Source                             | Description                                       |
-| :-------------------------------- | :--------------------------------- | :------------------------------------------------ |
-| `anthropic-agent-skills`          | anthropics/skills                  | Official Anthropic skills (PDF, DOCX, XLSX, PPTX) |
-| `claude-code-plugins`             | anthropics/claude-code             | Official plugins (PR review, commit, feature-dev) |
-| `claude-plugins-official`         | anthropics/claude-plugins-official | Official plugin marketplace                       |
-| `taches-cc-resources`             | glittercowboy/taches-cc-resources  | Skills & commands for productivity                |
-| `get-shit-done`                   | glittercowboy/get-shit-done        | GSD project management system                     |
-| `obra-superpowers`                | obra/superpowers-marketplace       | Superpowers skills collection                     |
-| `auto-claude`                     | AndyMik90/Auto-Claude              | Autonomous coding framework                       |
-| `claude-mem`                      | thedotmack/claude-mem              | Persistent memory system                          |
-| `awesome-claude-skills`           | ComposioHQ/awesome-claude-skills   | Community skills collection                       |
-| `skill-seekers`                   | yusufkaraaslan/Skill_Seekers       | Skill discovery                                   |
-| `claude-scientific-skills`        | K-Dense-AI/...                     | Scientific computing skills                       |
-| + 10 more                         | Various                            | Community marketplaces                            |
+| Repository                 | Source                             | Description                                       |
+| :------------------------- | :--------------------------------- | :------------------------------------------------ |
+| `anthropic-agent-skills`   | anthropics/skills                  | Official Anthropic skills (PDF, DOCX, XLSX, PPTX) |
+| `claude-code-plugins`      | anthropics/claude-code             | Official plugins (PR review, commit, feature-dev) |
+| `claude-plugins-official`  | anthropics/claude-plugins-official | Official plugin marketplace                       |
+| `taches-cc-resources`      | glittercowboy/taches-cc-resources  | Skills & commands for productivity                |
+| `get-shit-done`            | glittercowboy/get-shit-done        | GSD project management system                     |
+| `obra-superpowers`         | obra/superpowers-marketplace       | Superpowers skills collection                     |
+| `auto-claude`              | AndyMik90/Auto-Claude              | Autonomous coding framework                       |
+| `claude-mem`               | thedotmack/claude-mem              | Persistent memory system                          |
+| `awesome-claude-skills`    | ComposioHQ/awesome-claude-skills   | Community skills collection                       |
+| `skill-seekers`            | yusufkaraaslan/Skill_Seekers       | Skill discovery                                   |
+| `claude-scientific-skills` | K-Dense-AI/...                     | Scientific computing skills                       |
+| + 10 more                  | Various                            | Community marketplaces                            |
 
 ### 🔧 Troubleshooting Multi-Machine Setup
 
@@ -960,7 +1069,7 @@ bash ~/.claude/scripts/setup-new-machine.sh
 │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐         │
 │  │ 🎓 SKILLS   │  │ 🤖 AGENTS   │  │ 📋 RULES    │  │ 🏪 MARKET-  │         │
 │  │  72 local   │  │ 36 experts  │  │  Checklists │  │   PLACES    │         │
-│  │             │  │  (Task tool)│  │  & stacks   │  │ 1,900+ more │         │
+│  │             │  │  (Task tool)│  │  & stacks   │  │ 5,000+ more │         │
 │  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘         │
 └─────────────────────────────────┬───────────────────────────────────────────┘
                                   │
@@ -1007,7 +1116,7 @@ bash ~/.claude/scripts/setup-new-machine.sh
 │   ├── 🛠️ stacks/ (technology-specific)
 │   └── 🔧 tooling/ (setup guides)
 │
-├── 🏪 plugins/marketplaces/ (67 repos, 1,900+ skills)
+├── 🏪 plugins/marketplaces/ (72 repos, 5,000+ skills)
 │   └── Searched when local skills insufficient
 │
 └── 📚 docs/ (extended documentation)
@@ -2064,7 +2173,7 @@ PostToolUse("Write") → Run Prettier → Format file
 │
 ├── 🏪 plugins/                           # Plugin system
 │   ├── 📁 local/                         # Custom local plugins
-│   └── 📦 marketplaces/                  # 67 external repositories
+│   └── 📦 marketplaces/                  # 72 external repositories
 │       └── (see Marketplaces section)
 │
 ├── 📜 scripts/                           # Utility scripts
@@ -2422,11 +2531,11 @@ Core rules loaded every session (~1,100 tokens):
 
 ---
 
-## 🏪 Complete Marketplaces Reference (67 Marketplaces)
+## 🏪 Complete Marketplaces Reference (72 Marketplaces)
 
-> **📊 Total: 1,900+ additional skills** from 67 external repositories
+> **📊 Total: 5,000+ additional skills** from 72 external repositories
 
-### 🏛️ Official Anthropic (67 Marketplaces)
+### 🏛️ Official Anthropic (72 Marketplaces)
 
 | Marketplace                  | GitHub                                                                                      | Contents                                          | Key Features                                 |
 | :--------------------------- | :------------------------------------------------------------------------------------------ | :------------------------------------------------ | :------------------------------------------- |
@@ -2434,23 +2543,23 @@ Core rules loaded every session (~1,100 tokens):
 | 🔧 `claude-code-plugins`     | [anthropics/claude-code](https://github.com/anthropics/claude-code)                         | PR review, commit commands, feature dev, security | Production-tested, regularly updated         |
 | 📦 `claude-plugins-official` | [anthropics/claude-plugins-official](https://github.com/anthropics/claude-plugins-official) | Curated plugins                                   | Vetted by Anthropic team                     |
 
-### ⚡ Taches/GlitterCowboy (67 Marketplaces)
+### ⚡ Taches/GlitterCowboy (72 Marketplaces)
 
 | Marketplace              | GitHub                                                                                    | Contents                                                 | Key Features                                          |
 | :----------------------- | :---------------------------------------------------------------------------------------- | :------------------------------------------------------- | :---------------------------------------------------- |
 | 🧠 `taches-cc-resources` | [glittercowboy/taches-cc-resources](https://github.com/glittercowboy/taches-cc-resources) | Meta-prompting, debugging, hooks, agents, skill creation | `/consider:*` decision frameworks, prompt engineering |
 | 📈 `get-shit-done`       | [glittercowboy/get-shit-done](https://github.com/glittercowboy/get-shit-done)             | GSD multi-phase project management                       | `/gsd:*` commands, session continuity                 |
 
-### 📚 Large Collections (67 Marketplaces)
+### 📚 Large Collections (72 Marketplaces)
 
-| Marketplace                          | GitHub                                                                                                                |                  Count                  | Key Features                                   |
-| :----------------------------------- | :-------------------------------------------------------------------------------------------------------------------- | :-------------------------------------: | :--------------------------------------------- |
-| 🤖 `wshobson-agents`                 | [wshobson/agents](https://github.com/wshobson/agents)                                                                 | 36 agents, 72 skills, 15 orchestrators | Progressive disclosure architecture            |
-| ⚡ `voltagent-subagents`             | [VoltAgent/awesome-claude-code-subagents](https://github.com/VoltAgent/awesome-claude-code-subagents)                 |         100+ specialized agents         | Full-stack, DevOps focus                       |
-| 🎯 `voltagent-awesome-claude-skills` | [VoltAgent/awesome-claude-skills](https://github.com/VoltAgent/awesome-claude-skills)                                 |           Curated collection            | VoltAgent curation                             |
-| 🔬 `claude-scientific-skills`        | [K-Dense-AI/claude-scientific-skills](https://github.com/K-Dense-AI/claude-scientific-skills)                         |               125+ skills               | Bioinformatics, chemistry, physics, proteomics |
+| Marketplace                          | GitHub                                                                                                |                 Count                  | Key Features                                   |
+| :----------------------------------- | :---------------------------------------------------------------------------------------------------- | :------------------------------------: | :--------------------------------------------- |
+| 🤖 `wshobson-agents`                 | [wshobson/agents](https://github.com/wshobson/agents)                                                 | 36 agents, 72 skills, 15 orchestrators | Progressive disclosure architecture            |
+| ⚡ `voltagent-subagents`             | [VoltAgent/awesome-claude-code-subagents](https://github.com/VoltAgent/awesome-claude-code-subagents) |        100+ specialized agents         | Full-stack, DevOps focus                       |
+| 🎯 `voltagent-awesome-claude-skills` | [VoltAgent/awesome-claude-skills](https://github.com/VoltAgent/awesome-claude-skills)                 |           Curated collection           | VoltAgent curation                             |
+| 🔬 `claude-scientific-skills`        | [K-Dense-AI/claude-scientific-skills](https://github.com/K-Dense-AI/claude-scientific-skills)         |              125+ skills               | Bioinformatics, chemistry, physics, proteomics |
 
-### ⭐ Curated Collections (67 Marketplaces)
+### ⭐ Curated Collections (72 Marketplaces)
 
 | Marketplace                | GitHub                                                                                              |   Count    | Key Features                            |
 | :------------------------- | :-------------------------------------------------------------------------------------------------- | :--------: | :-------------------------------------- |
@@ -2459,7 +2568,7 @@ Core rules loaded every session (~1,100 tokens):
 | 🔀 `mhattingpete-skills`   | [mhattingpete/claude-skills-marketplace](https://github.com/mhattingpete/claude-skills-marketplace) | 10+ skills | Git automation, testing, code review    |
 | 💪 `obra-superpowers`      | [obra/superpowers-marketplace](https://github.com/obra/superpowers-marketplace)                     | ~72 skills | /brainstorm, /write-plan, /execute-plan |
 
-### 🌐 Community Collections (67 Marketplaces)
+### 🌐 Community Collections (72 Marketplaces)
 
 | Marketplace                           | GitHub                                                                                  | Key Features                              |
 | :------------------------------------ | :-------------------------------------------------------------------------------------- | :---------------------------------------- |
@@ -2480,7 +2589,7 @@ Core rules loaded every session (~1,100 tokens):
 **Usage:** `/auto-claude [description]` or direct CLI
 **Documentation:** [docs/AUTO-CLAUDE-GUIDE.md](./docs/AUTO-CLAUDE-GUIDE.md)
 
-### 🧠 Specialized (67 Marketplaces)
+### 🧠 Specialized (72 Marketplaces)
 
 | Marketplace                    | GitHub                                                                    | Key Features                                           |
 | :----------------------------- | :------------------------------------------------------------------------ | :----------------------------------------------------- |
@@ -2952,7 +3061,7 @@ The CLAUDE.md file is the **constitution** of the toolkit - loaded every session
 │  │  - Full catalog: skills/MASTER_INDEX.md                                 │ │
 │  │  - Domain experts: skills/EXPERT-SKILLS-GUIDE.md                        │ │
 │  │                                                                         │ │
-│  │  MARKETPLACE SKILLS (1,900+)                                            │ │
+│  │  MARKETPLACE SKILLS (5,000+)                                            │ │
 │  │  - Location: plugins/marketplaces/                                      │ │
 │  │  - Guide: docs/MARKETPLACE-GUIDE.md                                     │ │
 │  │  - Search command provided                                              │ │
@@ -3637,7 +3746,7 @@ claude
 ✓ CLAUDE.md loaded (194 lines, ~1,100 tokens)
 ✓ 72 skills available
 ✓ 36 agents available
-✓ 67 marketplace repos synced
+✓ 72 marketplace repos synced
 ✓ 2 hooks configured (PostToolUse for Prettier)
 ✓ MCP servers: all disabled (optimal)
 ```
@@ -3672,7 +3781,7 @@ echo "Marketplace: $(find ~/.claude/plugins/marketplaces -name 'SKILL.md' | wc -
 **Pro Tips:**
 
 - Skills auto-activate based on context, so you rarely need to invoke manually
-- Use `/discover-skills <query>` to search skillsmp.com (1,900+ skills)
+- Use `/discover-skills <query>` to search skillsmp.com (5,000+ skills)
 - Check `skills/MASTER_INDEX.md` for categorized local skill list
 
 ---
@@ -6463,7 +6572,7 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) for detailed guidelines on:
 | **1.3.0** | Dec 2025 | 📜 CLAUDE.md refactor (45% reduction, ~1,100 tokens), 📚 satellite guides, 💰 token optimization                                                                                  |
 | **1.2.0** | Dec 2025 | 🏪 6 new marketplaces (21 total), 📈 GSD tutorial, 🔍 `/discover-skills` command, 🌐 skillsmp.com integration                                                                     |
 | **1.1.0** | Dec 2025 | 🎓 5 new skills (devops-cloud, ai-ml-development, game-development, macos-native, database-expert), 🤖 5 new agents, 📈 GSD integration                                           |
-| **1.0.0** | Dec 2025 | 🎉 Initial release: 60+ skills, 30+ agents, 67 marketplaces, rules system                                                                                                         |
+| **1.0.0** | Dec 2025 | 🎉 Initial release: 60+ skills, 30+ agents, 72 marketplaces, rules system                                                                                                         |
 
 See [CHANGELOG.md](./CHANGELOG.md) for complete history.
 
@@ -6488,7 +6597,7 @@ See [CHANGELOG.md](./CHANGELOG.md) for complete history.
 | 🎓 [Skills Catalog](./skills/MASTER_INDEX.md)       | All 72 skills           |
 | 🤖 [Agents Catalog](./agents/README.md)             | All 36 agents           |
 | 🔄 [Workflow Guide](./docs/WORKFLOW-GUIDE.md)       | Workflow patterns       |
-| 🏪 [Marketplace Guide](./docs/MARKETPLACE-GUIDE.md) | All 67 marketplaces     |
+| 🏪 [Marketplace Guide](./docs/MARKETPLACE-GUIDE.md) | All 72 marketplaces     |
 | 🤖 [Auto-Claude Guide](./docs/AUTO-CLAUDE-GUIDE.md) | Autonomous coding setup |
 | 📈 [GSD Tutorial](./docs/GSD-TUTORIAL.md)           | Project management      |
 
@@ -7419,8 +7528,8 @@ Centralized skill management with installation, updates, and discovery.
 │                                                                              │
 │  Registry Sources:                                                           │
 │  • Local (~/.claude/skills/)                                                 │
-│  • Marketplace (67 repos)                                                    │
-│  • skillsmp.com API (1,900+ skills)                                        │
+│  • Marketplace (72 repos)                                                    │
+│  • skillsmp.com API (5,000+ skills)                                        │
 │  • Custom registries (enterprise)                                            │
 │                                                                              │
 └─────────────────────────────────────────────────────────────────────────────┘
@@ -7589,7 +7698,7 @@ Browser-based toolkit management interface.
 │  │ SKILLS OVERVIEW                                                   ⟳ 🔍  ││
 │  ├─────────────────────────────────────────────────────────────────────────┤│
 │  │                                                                          ││
-│  │  Local Skills: 72        Marketplace: 1,900+      Total: 2,000+         ││
+│  │  Local Skills: 72        Marketplace: 5,000+      Total: 5,100+         ││
 │  │  ═══════════════════════════════════════════════════════════════════    ││
 │  │                                                                          ││
 │  │  ┌──────────────────────┐  ┌──────────────────────┐                     ││
@@ -8522,7 +8631,7 @@ The toolkit logs security-relevant events:
 ├── docs/              # Extended docs
 ├── templates/         # Creation templates
 ├── plugins/           # External integrations
-│   └── marketplaces/  # 50 submodules
+│   └── marketplaces/  # 72 submodules
 └── scripts/           # Automation
 ```
 
@@ -8530,15 +8639,18 @@ The toolkit logs security-relevant events:
 
 ### Appendix E: Version History
 
-| Version   | Highlights                         |
-| --------- | ---------------------------------- |
-| **1.4.3** | Hooks simplified for Windows       |
-| **1.4.1** | Cross-platform compatibility       |
-| **1.4.0** | Templates, utility commands        |
-| **1.3.3** | Original hook implementation       |
-| **1.3.0** | Token optimization (45% reduction) |
-| **1.2.0** | 6 new marketplaces, GSD            |
-| **1.0.0** | Initial release                    |
+| Version   | Highlights                                             |
+| --------- | ------------------------------------------------------ |
+| **2.3.1** | Documentation overhaul, visual README, count accuracy  |
+| **2.3.0** | Submodule fixes, auto count updates, 73 total repos    |
+| **2.2.0** | Showcase website, pull-all-repos, branding             |
+| **2.1.0** | One-line install, bootstrap command, SessionStart hook |
+| **2.0.0** | Auto-Claude, research methodology, PROACTIVE mode      |
+| **1.4.3** | Hooks simplified for Windows                           |
+| **1.4.0** | Templates, utility commands                            |
+| **1.3.0** | Token optimization (45% reduction)                     |
+| **1.2.0** | 6 new marketplaces, GSD                                |
+| **1.0.0** | Initial release                                        |
 
 ---
 
@@ -8546,14 +8658,17 @@ The toolkit logs security-relevant events:
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│           TOOLKIT v2.2.0 STATISTICS                          │
+│            TOOLKIT v2.3.1 STATISTICS                         │
 ├─────────────────────────────────────────────────────────────┤
-│  Skills:        72 local + 1,900+ marketplace                 │
-│  Agents:        36                                           │
-│  Commands:      72 local + plugin commands                    │
-│  Hooks:         2 (PostToolUse for Prettier)                 │
-│  Marketplaces:  50                                           │
-│  Platforms:     Windows, macOS, Linux                        │
+│  Skills:        72 local + 5,000+ marketplace                │
+│  Agents:        36 specialized subagents                     │
+│  Commands:      19 slash commands + plugin commands           │
+│  Hooks:         7 lifecycle hooks                            │
+│  Marketplaces:  72 community repos                           │
+│  MCP Servers:   9 configurable                               │
+│  Rules:         17 contextual guidelines                     │
+│  Templates:     12 creation templates                        │
+│  Platforms:     macOS, Linux, Windows (Git Bash)             │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -8587,27 +8702,15 @@ See [LICENSE](./LICENSE) for full text.
 
 <div align="center">
 
-```
-  $$\                                $$\                           $$\                 $$\
-  $$ |                               $$ |                          $$ |               $$  |
-$$$$$$\   $$\ $$$$$$$\      $$$$$$$\ $$ | $$$$$$\  $$\   $$\  $$$$$$$ | $$$$$$\      $$  /
-\_$$  _|  \__|$$  __$$\    $$  _____|$$ | \____$$\ $$ |  $$ |$$  __$$ |$$  __$$\    $$  /
-  $$ |    $$\ $$ |  $$ |   $$ /      $$ | $$$$$$$ |$$ |  $$ |$$ /  $$ |$$$$$$$$ |  $$  /
-  $$ |$$\ $$ |$$ |  $$ |   $$ |      $$ |$$  __$$ |$$ |  $$ |$$ |  $$ |$$   ____| $$  /
-  \$$$$  |$$ |$$ |  $$ |$$\\$$$$$$$\ $$ |\$$$$$$$ |\$$$$$$  |\$$$$$$$ |\$$$$$$$\ $$  /
-   \____/ $$ |\__|  \__|\__|\_______|\__| \_______| \______/  \_______| \_______|\__/
-    $$\   $$ |
-    \$$$$$$  |
-     \______/
-```
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://capsule-render.vercel.app/api?type=waving&color=0:d946ef,50:6366f1,100:1a1a2e&height=120&section=footer&animation=fadeIn" />
+  <source media="(prefers-color-scheme: light)" srcset="https://capsule-render.vercel.app/api?type=waving&color=0:9333ea,50:6366f1,100:e0e7ff&height=120&section=footer&animation=fadeIn" />
+  <img alt="" src="https://capsule-render.vercel.app/api?type=waving&color=0:d946ef,50:6366f1,100:1a1a2e&height=120&section=footer&animation=fadeIn" width="100%" />
+</picture>
 
-### 🚀 **72 Skills** • 🤖 **36 Agents** • 🏪 **67 Marketplaces** • ⚡ **Complete Automation**
+🎓 **72 Skills** · 🤖 **36 Agents** · 🏪 **72 Marketplaces** · ⌨️ **19 Commands** · 🪝 **7 Hooks** · ⚡ **5,000+ Community Skills**
 
-**Transform Claude Code from a capable assistant into an enterprise-grade development environment.**
-
----
-
-**Built with ❤️ by [Travis Neuman](https://travisjneuman.com)**
+**Built with ❤️ by [Travis Neuman](https://travisjneuman.com)** · **[claude.travisjneuman.com](https://claude.travisjneuman.com)**
 
 ---
 
