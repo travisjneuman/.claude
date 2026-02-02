@@ -2,6 +2,40 @@
 
 All notable changes to the Ultimate Claude Code Toolkit.
 
+## [2.3.1] - February 2, 2026
+
+### Documentation Overhaul & Visual Enhancement
+
+Complete visual redesign of README and comprehensive accuracy pass across all documentation.
+
+### Added
+
+- **SVG hero banner** — Dynamic wave banner with light/dark mode support via capsule-render, replacing ASCII art
+- **Enhanced badge system** — 14 badges total: resources (Skills, Agents, Marketplaces, Commands, Hooks, MCP Servers), platform support, GitHub stars/forks/last-commit, license
+- **Architecture diagram** — Visual "How It All Connects" diagram showing prompt → routing → resources flow
+- **commands/README.md** — New index file for all 19 slash commands, categorized by function
+- **Visual Quick Start** — Step-by-step table format with expected output for each step
+- **Footer wave banner** — Matching capsule-render footer with resource summary
+
+### Changed
+
+- **Count accuracy pass** — Fixed stale numbers across 25+ files: marketplace skills 1,900+ → 5,000+, marketplace repos 50/67 → 72, hooks 2/5 → 7, commands 30+ → 19, total repos 68 → 73
+- **Appendix F statistics** — Updated from v2.2.0 to v2.3.1 with all current counts including MCP servers, rules, and templates
+- **Appendix E version history** — Added v2.0-2.3.1 entries
+- **docs/\*.md** — All 13 documentation files updated with correct counts and enhanced content
+- **Subdirectory READMEs** — agents/, skills/, hooks/, scripts/, templates/, rules/ READMEs updated
+- **docs/NEW-DEVICE-SETUP.md** — Updated for new submodule approach (gitlinks no longer tracked)
+- **Version** — 2.3.0 → 2.3.1 across all files
+
+### Fixed
+
+- **Submodule gitlink tracking** — Removed 66 gitlinks from index to prevent cross-machine SHA conflicts (separate commit)
+- **\_pull-all-repos.sh SCRIPT_DIR bug** — ENV_FILE referenced SCRIPT_DIR before it was defined (separate commit)
+- **no_push enforcement** — Fixed 16 marketplace repos missing no_push configuration
+- **Gitignore gaps** — Added paste-cache/, session-summaries/, last-session.md
+
+---
+
 ## [2.3.0] - February 1, 2026
 
 ### Documentation Enhancement & Configuration Improvements
@@ -27,7 +61,7 @@ Comprehensive documentation overhaul for v2.3 — every doc updated, new READMEs
 - **docs/SETUP-GUIDE.md** — Added `.env.local` to sync table
 - **rules/tooling/external-repos.md** — Updated to reference `.env.local` instead of editing `_pull-all-repos.sh`
 - **plugin.json** — Fixed stale counts (100→72 skills, 30→36 agents), bumped version to 2.3.0
-- **Marketplace skills** — Count updated from 1,700+ to 1,900+ across all docs
+- **Marketplace skills** — Count updated from 1,700+ to 1,900+ across all docs (later updated to 5,000+ in v2.3.1)
 
 ---
 
