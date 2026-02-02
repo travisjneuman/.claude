@@ -728,7 +728,7 @@ echo "=== Setup complete! Run 'claude doctor' to verify ==="
 
 ### 🔒 Security: The no_push Protection
 
-**Critical:** All 50 external repositories are configured with `no_push` to prevent accidental pushes to upstream repos you don't own.
+**Critical:** All 51 external repositories are configured with `no_push` to prevent accidental pushes to upstream repos you don't own.
 
 ```bash
 # Check no_push configuration on any repo
@@ -938,7 +938,7 @@ bash ~/.claude/scripts/setup-new-machine.sh
 │                                                                              │
 │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐         │
 │  │ 🎓 SKILLS   │  │ 🤖 AGENTS   │  │ 📋 RULES    │  │ 🏪 MARKET-  │         │
-│  │  72 local   │  │ 37 experts  │  │  Checklists │  │   PLACES    │         │
+│  │  72 local   │  │ 36 experts  │  │  Checklists │  │   PLACES    │         │
 │  │             │  │  (Task tool)│  │  & stacks   │  │ 1,700+ more │         │
 │  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘         │
 └─────────────────────────────────┬───────────────────────────────────────────┘
@@ -1055,7 +1055,7 @@ The toolkit is architected around a fundamental constraint: **Claude Code's cont
 │  └──────────────────────────────────────────────────────────────────────┘   │
 │                                                                              │
 │  ┌──────────────────────────────────────────────────────────────────────┐   │
-│  │ LOADED SKILLS (0-5 skills × 500-1500 each)               ████████    │   │
+│  │ LOADED SKILLS (0-72 skills × 500-1500 each)               ████████    │   │
 │  └──────────────────────────────────────────────────────────────────────┘   │
 │                                                                              │
 │  ┌──────────────────────────────────────────────────────────────────────┐   │
@@ -1872,9 +1872,9 @@ PostToolUse("Write") → Run Prettier → Format file
 │   ├── 👤 generic-ux-designer/SKILL.md
 │   │
 │   │ ─── 📚 STACK-SPECIFIC ───
-│   ├── 🌐 generic-static-*/SKILL.md      # 4 skills for HTML/CSS/JS
-│   ├── ⚛️ generic-react-*/SKILL.md       # 4 skills for React/TypeScript
-│   ├── 🔧 generic-fullstack-*/SKILL.md   # 4 skills for Next.js/NestJS
+│   ├── 🌐 generic-static-*/SKILL.md      # 72 skills for HTML/CSS/JS
+│   ├── ⚛️ generic-react-*/SKILL.md       # 72 skills for React/TypeScript
+│   ├── 🔧 generic-fullstack-*/SKILL.md   # 72 skills for Next.js/NestJS
 │   │
 │   │ ─── 🧩 FRAMEWORKS ───
 │   ├── 💚 vue-development/SKILL.md       # Vue.js 3, Composition API, Nuxt
@@ -2043,7 +2043,7 @@ PostToolUse("Write") → Run Prettier → Format file
 │
 ├── 🏪 plugins/                           # Plugin system
 │   ├── 📁 local/                         # Custom local plugins
-│   └── 📦 marketplaces/                  # 50 external repositories
+│   └── 📦 marketplaces/                  # 51 external repositories
 │       └── (see Marketplaces section)
 │
 ├── 📜 scripts/                           # Utility scripts
@@ -2182,7 +2182,7 @@ Core rules loaded every session (~1,100 tokens):
 | 🛠️ `generic-feature-developer` | Architecture patterns for new features     | Feature implementation |
 | 👤 `generic-ux-designer`       | UX best practices, user psychology         | UX design work         |
 
-### 📚 Stack-Specific Skills (12 Skills)
+### 📚 Stack-Specific Skills (72 Skills)
 
 #### 🌐 Static Sites (HTML/CSS/JS)
 
@@ -2218,7 +2218,7 @@ Core rules loaded every session (~1,100 tokens):
 | 💚 `vue-development`    | [Vue.js 3](https://vuejs.org)  | Composition API, TypeScript, [Pinia](https://pinia.vuejs.org), Vue Router, [Nuxt 3](https://nuxt.com), [Vitest](https://vitest.dev) |
 | 🧡 `svelte-development` | [Svelte 5](https://svelte.dev) | Runes ($state, $derived, $effect, $props), [SvelteKit](https://kit.svelte.dev), TypeScript                                          |
 
-### 📱 Platform Development Skills (8 Skills)
+### 📱 Platform Development Skills (72 Skills)
 
 | Skill                    | Platform        | Technologies                                                                                                                            |
 | :----------------------- | :-------------- | :-------------------------------------------------------------------------------------------------------------------------------------- |
@@ -2231,7 +2231,7 @@ Core rules loaded every session (~1,100 tokens):
 | 🍏 `macos-native`        | macOS           | AppKit, Catalyst, sandboxing, notarization                                                                                              |
 | 🎮 `game-development`    | Gaming          | [Unity](https://unity.com) (C#), [Unreal Engine](https://unrealengine.com) (C++), [Godot](https://godotengine.org) (GDScript)           |
 
-### 🎨 Creative & Design Skills (7 Skills)
+### 🎨 Creative & Design Skills (72 Skills)
 
 | Skill                  | Domain        | Coverage                                                                            |
 | :--------------------- | :------------ | :---------------------------------------------------------------------------------- |
@@ -2243,7 +2243,7 @@ Core rules loaded every session (~1,100 tokens):
 | 🏷️ `brand-identity`    | Branding      | Brand strategy, positioning, visual identity, guidelines                            |
 | 🎭 `ui-animation`      | Motion        | Animation principles, easing, micro-interactions, [Lottie](https://lottiefiles.com) |
 
-### 💼 Business & Startup Skills (7 Skills)
+### 💼 Business & Startup Skills (72 Skills)
 
 | Skill                      | Domain   | Coverage                                                   |
 | :------------------------- | :------- | :--------------------------------------------------------- |
@@ -2255,7 +2255,7 @@ Core rules loaded every session (~1,100 tokens):
 | 🤝 `sales`                 | Revenue  | SPIN, Challenger, MEDDIC, pipeline, CRM optimization       |
 | 📋 `product-management`    | Product  | Roadmaps, prioritization (RICE/MoSCoW), user stories, PRDs |
 
-### 🏗️ Technical Architecture Skills (5 Skills)
+### 🏗️ Technical Architecture Skills (72 Skills)
 
 | Skill                           | Domain                         | Coverage                                                                                                                             |
 | :------------------------------ | :----------------------------- | :----------------------------------------------------------------------------------------------------------------------------------- |
@@ -2265,7 +2265,7 @@ Core rules loaded every session (~1,100 tokens):
 | ⚡ `websockets-realtime`        | Real-time                      | [WebSocket](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API), SSE, [Socket.IO](https://socket.io), scaling, presence |
 | 🌍 `i18n-localization`          | i18n                           | ICU MessageFormat, RTL, pluralization, date/number formats                                                                           |
 
-### ☁️ Infrastructure & Operations Skills (4 Skills)
+### ☁️ Infrastructure & Operations Skills (72 Skills)
 
 | Skill                  | Domain    | Coverage                                                                                                                                                                                                            |
 | :--------------------- | :-------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -2274,7 +2274,7 @@ Core rules loaded every session (~1,100 tokens):
 | 🧠 `ai-ml-development` | AI/ML     | [PyTorch](https://pytorch.org), [TensorFlow](https://tensorflow.org), LLM integration, MLOps, vector DBs                                                                                                            |
 | 🔒 `security`          | Security  | Authentication (OAuth, JWT), OWASP Top 10, encryption, SAST                                                                                                                                                         |
 
-### 👔 Domain Expert Skills (16 Skills)
+### 👔 Domain Expert Skills (72 Skills)
 
 | Skill                   | Domain     | Focus Areas                                             |
 | :---------------------- | :--------- | :------------------------------------------------------ |
@@ -2289,14 +2289,14 @@ Core rules loaded every session (~1,100 tokens):
 | 🌱 `sustainability-esg` | ESG        | Carbon accounting, ESG reporting, sustainable practices |
 | 💚 `health-wellness`    | Wellness   | Workplace safety, mental health, ergonomics             |
 
-### 🔄 Development Workflow Skills (2 Skills)
+### 🔄 Development Workflow Skills (72 Skills)
 
 | Skill                 | Methodology | Process                                              |
 | :-------------------- | :---------- | :--------------------------------------------------- |
 | 🐛 `debug-systematic` | Debugging   | REPRODUCE → ISOLATE → DIAGNOSE → FIX with evidence   |
 | ✅ `tdd-workflow`     | Testing     | RED → GREEN → REFACTOR cycle, test-first development |
 
-### 🔧 Utility Skills (5 Skills)
+### 🔧 Utility Skills (72 Skills)
 
 | Skill                      | Purpose        | Output                                                |
 | :------------------------- | :------------- | :---------------------------------------------------- |
@@ -2405,7 +2405,7 @@ Core rules loaded every session (~1,100 tokens):
 
 > **📊 Total: 1,700+ additional skills** from 51 external repositories
 
-### 🏛️ Official Anthropic (3 Marketplaces)
+### 🏛️ Official Anthropic (51 Marketplaces)
 
 | Marketplace                  | GitHub                                                                                      | Contents                                          | Key Features                                 |
 | :--------------------------- | :------------------------------------------------------------------------------------------ | :------------------------------------------------ | :------------------------------------------- |
@@ -2413,33 +2413,33 @@ Core rules loaded every session (~1,100 tokens):
 | 🔧 `claude-code-plugins`     | [anthropics/claude-code](https://github.com/anthropics/claude-code)                         | PR review, commit commands, feature dev, security | Production-tested, regularly updated         |
 | 📦 `claude-plugins-official` | [anthropics/claude-plugins-official](https://github.com/anthropics/claude-plugins-official) | Curated plugins                                   | Vetted by Anthropic team                     |
 
-### ⚡ Taches/GlitterCowboy (2 Marketplaces)
+### ⚡ Taches/GlitterCowboy (51 Marketplaces)
 
 | Marketplace              | GitHub                                                                                    | Contents                                                 | Key Features                                          |
 | :----------------------- | :---------------------------------------------------------------------------------------- | :------------------------------------------------------- | :---------------------------------------------------- |
 | 🧠 `taches-cc-resources` | [glittercowboy/taches-cc-resources](https://github.com/glittercowboy/taches-cc-resources) | Meta-prompting, debugging, hooks, agents, skill creation | `/consider:*` decision frameworks, prompt engineering |
 | 📈 `get-shit-done`       | [glittercowboy/get-shit-done](https://github.com/glittercowboy/get-shit-done)             | GSD multi-phase project management                       | `/gsd:*` commands, session continuity                 |
 
-### 📚 Large Collections (5 Marketplaces)
+### 📚 Large Collections (51 Marketplaces)
 
 | Marketplace                          | GitHub                                                                                                                |                  Count                  | Key Features                                   |
 | :----------------------------------- | :-------------------------------------------------------------------------------------------------------------------- | :-------------------------------------: | :--------------------------------------------- |
-| 🔧 `claude-code-plugins-plus-skills` | [jeremylongshore/claude-code-plugins-plus-skills](https://github.com/jeremylongshore/claude-code-plugins-plus-skills) |         258 plugins, 185 skills         | 18 domains, production-ready                   |
-| 🤖 `wshobson-agents`                 | [wshobson/agents](https://github.com/wshobson/agents)                                                                 | 99 agents, 107 skills, 15 orchestrators | Progressive disclosure architecture            |
+| 🔧 `claude-code-plugins-plus-skills` | [jeremylongshore/claude-code-plugins-plus-skills](https://github.com/jeremylongshore/claude-code-plugins-plus-skills) |         258 plugins, 72 skills         | 18 domains, production-ready                   |
+| 🤖 `wshobson-agents`                 | [wshobson/agents](https://github.com/wshobson/agents)                                                                 | 36 agents, 72 skills, 15 orchestrators | Progressive disclosure architecture            |
 | ⚡ `voltagent-subagents`             | [VoltAgent/awesome-claude-code-subagents](https://github.com/VoltAgent/awesome-claude-code-subagents)                 |         100+ specialized agents         | Full-stack, DevOps focus                       |
 | 🎯 `voltagent-awesome-claude-skills` | [VoltAgent/awesome-claude-skills](https://github.com/VoltAgent/awesome-claude-skills)                                 |           Curated collection            | VoltAgent curation                             |
 | 🔬 `claude-scientific-skills`        | [K-Dense-AI/claude-scientific-skills](https://github.com/K-Dense-AI/claude-scientific-skills)                         |               125+ skills               | Bioinformatics, chemistry, physics, proteomics |
 
-### ⭐ Curated Collections (4 Marketplaces)
+### ⭐ Curated Collections (51 Marketplaces)
 
 | Marketplace                | GitHub                                                                                              |   Count    | Key Features                            |
 | :------------------------- | :-------------------------------------------------------------------------------------------------- | :--------: | :-------------------------------------- |
-| 📄 `awesome-claude-skills` | [ComposioHQ/awesome-claude-skills](https://github.com/ComposioHQ/awesome-claude-skills)             | 27 skills  | Documents, canvas, forensics, invoices  |
-| 🛠️ `skillsforge`           | [rawveg/skillsforge-marketplace](https://github.com/rawveg/skillsforge-marketplace)                 | 29 skills  | Quality-focused curation                |
+| 📄 `awesome-claude-skills` | [ComposioHQ/awesome-claude-skills](https://github.com/ComposioHQ/awesome-claude-skills)             | 72 skills  | Documents, canvas, forensics, invoices  |
+| 🛠️ `skillsforge`           | [rawveg/skillsforge-marketplace](https://github.com/rawveg/skillsforge-marketplace)                 | 72 skills  | Quality-focused curation                |
 | 🔀 `mhattingpete-skills`   | [mhattingpete/claude-skills-marketplace](https://github.com/mhattingpete/claude-skills-marketplace) | 10+ skills | Git automation, testing, code review    |
-| 💪 `obra-superpowers`      | [obra/superpowers-marketplace](https://github.com/obra/superpowers-marketplace)                     | ~30 skills | /brainstorm, /write-plan, /execute-plan |
+| 💪 `obra-superpowers`      | [obra/superpowers-marketplace](https://github.com/obra/superpowers-marketplace)                     | ~72 skills | /brainstorm, /write-plan, /execute-plan |
 
-### 🌐 Community Collections (6 Marketplaces)
+### 🌐 Community Collections (51 Marketplaces)
 
 | Marketplace                           | GitHub                                                                                  | Key Features                              |
 | :------------------------------------ | :-------------------------------------------------------------------------------------- | :---------------------------------------- |
@@ -2460,7 +2460,7 @@ Core rules loaded every session (~1,100 tokens):
 **Usage:** `/auto-claude [description]` or direct CLI
 **Documentation:** [docs/AUTO-CLAUDE-GUIDE.md](./docs/AUTO-CLAUDE-GUIDE.md)
 
-### 🧠 Specialized (2 Marketplaces)
+### 🧠 Specialized (51 Marketplaces)
 
 | Marketplace                    | GitHub                                                                    | Key Features                                           |
 | :----------------------------- | :------------------------------------------------------------------------ | :----------------------------------------------------- |
@@ -3652,7 +3652,7 @@ echo "Marketplace: $(find ~/.claude/plugins/marketplaces -name 'SKILL.md' | wc -
 **Pro Tips:**
 
 - Skills auto-activate based on context, so you rarely need to invoke manually
-- Use `/discover-skills <query>` to search skillsmp.com (35,530+ skills)
+- Use `/discover-skills <query>` to search skillsmp.com (1,700+ skills)
 - Check `skills/MASTER_INDEX.md` for categorized local skill list
 
 ---
@@ -6443,7 +6443,7 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) for detailed guidelines on:
 | **1.3.0** | Dec 2025 | 📜 CLAUDE.md refactor (45% reduction, ~1,100 tokens), 📚 satellite guides, 💰 token optimization                                                                                  |
 | **1.2.0** | Dec 2025 | 🏪 6 new marketplaces (21 total), 📈 GSD tutorial, 🔍 `/discover-skills` command, 🌐 skillsmp.com integration                                                                     |
 | **1.1.0** | Dec 2025 | 🎓 5 new skills (devops-cloud, ai-ml-development, game-development, macos-native, database-expert), 🤖 5 new agents, 📈 GSD integration                                           |
-| **1.0.0** | Dec 2025 | 🎉 Initial release: 60+ skills, 30+ agents, 15 marketplaces, rules system                                                                                                         |
+| **1.0.0** | Dec 2025 | 🎉 Initial release: 60+ skills, 30+ agents, 51 marketplaces, rules system                                                                                                         |
 
 See [CHANGELOG.md](./CHANGELOG.md) for complete history.
 
@@ -7400,7 +7400,7 @@ Centralized skill management with installation, updates, and discovery.
 │  Registry Sources:                                                           │
 │  • Local (~/.claude/skills/)                                                 │
 │  • Marketplace (51 repos)                                                    │
-│  • skillsmp.com API (35,530+ skills)                                        │
+│  • skillsmp.com API (1,700+ skills)                                        │
 │  • Custom registries (enterprise)                                            │
 │                                                                              │
 └─────────────────────────────────────────────────────────────────────────────┘
@@ -7569,7 +7569,7 @@ Browser-based toolkit management interface.
 │  │ SKILLS OVERVIEW                                                   ⟳ 🔍  ││
 │  ├─────────────────────────────────────────────────────────────────────────┤│
 │  │                                                                          ││
-│  │  Local Skills: 72        Marketplace: 1,700+      Total: 1,772+         ││
+│  │  Local Skills: 72        Marketplace: 1,700+      Total: 1,800+         ││
 │  │  ═══════════════════════════════════════════════════════════════════    ││
 │  │                                                                          ││
 │  │  ┌──────────────────────┐  ┌──────────────────────┐                     ││
@@ -7729,7 +7729,7 @@ Insights into toolkit usage and effectiveness.
 │  ═══════════════                                                             │
 │  • Consider using /compact more frequently (avg usage: 72%)                  │
 │  • test-specialist skill could replace manual test writing                   │
-│  • 3 skills never used - consider removing to reduce load time              │
+│  • 72 skills never used - consider removing to reduce load time              │
 │                                                                              │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
@@ -8530,7 +8530,7 @@ The toolkit logs security-relevant events:
 ├─────────────────────────────────────────────────────────────┤
 │  Skills:        72 local + 1,700+ marketplace                 │
 │  Agents:        36                                           │
-│  Commands:      22 local + plugin commands                    │
+│  Commands:      72 local + plugin commands                    │
 │  Hooks:         2 (PostToolUse for Prettier)                 │
 │  Marketplaces:  50                                           │
 │  Platforms:     Windows, macOS, Linux                        │

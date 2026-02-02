@@ -1,6 +1,6 @@
 # Marketplace Guide
 
-Complete reference for the 50 plugin marketplaces and how to use them.
+Complete reference for the 51 plugin marketplaces and how to use them.
 
 **Last Updated:** January 2026 (v2.2)
 
@@ -17,7 +17,7 @@ Complete reference for the 50 plugin marketplaces and how to use them.
 
 ---
 
-## Installed Marketplaces (50)
+## Installed Marketplaces (51)
 
 ### Official (Anthropic)
 
@@ -40,12 +40,12 @@ Complete reference for the 50 plugin marketplaces and how to use them.
 
 | Marketplace                | Contents                                 | Key Features                                   |
 | -------------------------- | ---------------------------------------- | ---------------------------------------------- |
-| `wshobson-agents`          | 108 agents, 129 skills, 15 orchestrators | Progressive disclosure architecture            |
+| `wshobson-agents`          | 36 agents, 129 skills, 15 orchestrators | Progressive disclosure architecture            |
 | `voltagent-subagents`      | 126+ specialized agents                  | Full-stack, DevOps focus                       |
 | `claude-scientific-skills` | 144 scientific skills                    | Bioinformatics, chemistry, physics, proteomics |
 | `davila7-templates`        | 651 templates                            | Broad template coverage                        |
 | `madappgang-claude-code`   | 110 resources                            | Full-stack development                         |
-| `athola-night-market`      | 125 skills                               | Curated night market                           |
+| `athola-night-market`      | 125 skills                              | Curated night market                           |
 
 ### Curated Collections
 
@@ -79,17 +79,17 @@ Complete reference for the 50 plugin marketplaces and how to use them.
 
 | Marketplace              | Contents | Key Features        |
 | ------------------------ | -------- | ------------------- |
-| `bradleygolden-elixir`   | 4 skills | Elixir/Phoenix      |
-| `georgeguimaraes-elixir` | 6 skills | Elixir ecosystem    |
-| `kfly8-cpan-plugins`     | 3 skills | Perl/CPAN           |
-| `hashi-terraform-skills` | 4 skills | HashiCorp/Terraform |
+| `bradleygolden-elixir`   | 4 skills  | Elixir/Phoenix      |
+| `georgeguimaraes-elixir` | 6 skills  | Elixir ecosystem    |
+| `kfly8-cpan-plugins`     | 3 skills  | Perl/CPAN           |
+| `hashi-terraform-skills` | 4 skills  | HashiCorp/Terraform |
 
 ### Scientific/Research
 
 | Marketplace                | Contents        | Key Features                    |
 | -------------------------- | --------------- | ------------------------------- |
-| `claude-scientific-skills` | 144 skills      | Broad scientific coverage       |
-| `anthropic-life-sciences`  | 6 skills        | Official life sciences          |
+| `claude-scientific-skills` | 144 skills     | Broad scientific coverage       |
+| `anthropic-life-sciences`  | 6 skills         | Official life sciences          |
 | `gqy20-biology-plugins`    | Biology plugins | Evolutionary biology, genomics  |
 | `quant-equity-research`    | Equity research | Financial quantitative analysis |
 

@@ -83,7 +83,7 @@ Display comprehensive categorized skill overview:
 - `ai-ml-development` - PyTorch, TensorFlow, LLMs, MLOps
 - `security` - Authentication, OWASP, encryption, vulnerability analysis
 
-### Creative & Design (6 skills)
+### Creative & Design (7 skills)
 
 - `ui-research` - **PREREQUISITE for UI work** - Research inspiration sources
 - `frontend-enhancer` - Modern UI enhancement patterns (requires ui-research)
@@ -103,7 +103,7 @@ Display comprehensive categorized skill overview:
 - `sales` - Sales methodologies, pipeline management
 - `product-management` - Roadmaps, prioritization, product-market fit
 
-### Domain Expertise (16 skills)
+### Domain Expertise (10 skills)
 
 - `leadership`, `hr-talent`, `health-wellness` - People & Leadership
 - `operations`, `risk-management`, `legal-compliance` - Operations & Technology
@@ -127,7 +127,7 @@ Display comprehensive categorized skill overview:
 
 ---
 
-## Marketplace Skills (1,700+ total across 50 repos)
+## Marketplace Skills (1,700+ total across 51 repos)
 
 ### Top Repos by Skill Count
 
