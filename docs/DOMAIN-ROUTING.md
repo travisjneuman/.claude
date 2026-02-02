@@ -2,7 +2,7 @@
 
 Understanding how your prompts get routed to the right resources.
 
-**Last Updated:** February 2026 (v2.3)
+**Last Updated:** February 2026 (v2.3.1)
 
 ---
 

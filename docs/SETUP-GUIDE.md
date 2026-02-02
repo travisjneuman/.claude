@@ -2,7 +2,7 @@
 
 How to deploy this Claude Code configuration to a new machine.
 
-**Last Updated:** February 2026 (v2.3)
+**Last Updated:** February 2026 (v2.3.1)
 
 **See also:** [NEW-DEVICE-SETUP.md](./NEW-DEVICE-SETUP.md) for detailed cross-platform instructions.
 
@@ -29,13 +29,13 @@ Works on: **Arch Linux** | **macOS** | **Windows (Git Bash)**
 git clone https://github.com/travisjneuman/.claude.git ~/.claude
 
 # 2. Initialize marketplace repos with correct upstream remotes
-bash ~/.claude/scripts/init-marketplaces.sh
+bash ~/.claude/_pull-all-repos.sh
 
 # 3. Complete setup (plugins, hooks, verification)
 bash ~/.claude/scripts/setup-new-machine.sh
 ```
 
-**IMPORTANT:** Always run `init-marketplaces.sh` on new devices. This ensures:
+**IMPORTANT:** Always run `_pull-all-repos.sh` on new devices. This ensures:
 
 - Marketplace repos fetch from original upstreams (not your personal repo)
 - Push is blocked on marketplace repos (read-only)
@@ -78,13 +78,14 @@ git clone https://github.com/travisjneuman/.claude.git $env:USERPROFILE\.claude
 **All platforms (use Git Bash on Windows):**
 
 ```bash
-bash ~/.claude/scripts/init-marketplaces.sh
+bash ~/.claude/_pull-all-repos.sh
 ```
 
 This script:
 
-- Clones all 67 marketplace repos from their original upstreams
+- Clones or pulls all 72 marketplace repos from their original upstreams
 - Sets `no_push` on each to prevent accidental modifications
+- Fixes detached HEAD states and updates documentation counts
 - Ensures main repo can push to your GitHub
 
 ### Step 3: Setup MCP Config (Platform-Specific)
@@ -169,7 +170,7 @@ git push origin master
 ```bash
 cd ~/.claude
 git pull origin master
-git submodule update --remote --merge
+bash ~/.claude/_pull-all-repos.sh
 ```
 
 **Update all repos (marketplace plugins + parent):**
@@ -178,7 +179,7 @@ git submodule update --remote --merge
 ~/.claude/_pull-all-repos.sh
 ```
 
-This pulls all 67 marketplace repos, fixes detached HEADs, enforces `no_push`, and updates documentation counts automatically.
+This pulls all 72 marketplace repos, fixes detached HEADs, enforces `no_push`, and updates documentation counts automatically. Each machine fetches independently -- gitlinks are not tracked in the parent repo.
 
 ---
 
@@ -252,8 +253,7 @@ When using VS Code Remote SSH:
 
 ```bash
 cd ~/.claude
-git submodule init
-git submodule update --remote
+bash ~/.claude/_pull-all-repos.sh
 for repo in plugins/marketplaces/*/; do
     (cd "$repo" && git remote set-url --push origin no_push)
 done
