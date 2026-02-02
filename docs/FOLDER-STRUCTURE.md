@@ -2,7 +2,7 @@
 
 Complete map of the `.claude/` folder and related files.
 
-**Last Updated:** January 2026 (v2.2)
+**Last Updated:** February 2026 (v2.3)
 
 ---
 
@@ -121,7 +121,7 @@ This repo underwent a security audit before being made public. The following wer
     │       ├── voltagent-subagents/
     │       ├── trailofbits-skills/
     │       ├── claude-scientific-skills/
-    │       └── ... (49 total repos)
+    │       └── ... (67 total repos)
     │
     ├── skills/                     ← Custom skills
     │   ├── README.md               ← Skills documentation

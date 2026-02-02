@@ -158,7 +158,8 @@ Ensure you're using Git Bash, not PowerShell or CMD:
 | `init-marketplaces.sh`     | Clone/reinitialize all 67 marketplace repos from upstreams |
 | `fix-remotes.sh`           | Fix remote URLs without re-cloning                         |
 | `setup-new-machine.sh`     | Complete setup (plugins, hooks, etc.)                      |
-| `update-external-repos.sh` | Pull latest from all upstreams                             |
+| `update-external-repos.sh` | Pull latest from all upstreams (legacy)                    |
+| `_pull-all-repos.sh`       | **Recommended:** Pull all repos + fix HEADs + update counts |
 
 ---
 
@@ -191,4 +192,4 @@ bash ~/.claude/scripts/fix-remotes.sh  # Ensure remotes are correct after pull
 
 ---
 
-_Last updated: January 2026_
+_Last updated: February 2026_
