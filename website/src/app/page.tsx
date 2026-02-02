@@ -47,6 +47,7 @@ export default function Home() {
   const skills = getSkills();
   const agents = getAgents();
   const { repos, totalSkills: marketplaceSkills } = getMarketplaceStats();
+  const marketplaceSkillsRounded = Math.floor(marketplaceSkills / 100) * 100;
 
   const featuredSkills = pickFeatured(skills, FEATURED_SKILL_SLUGS);
   const featuredAgents = pickFeatured(agents, FEATURED_AGENT_SLUGS);
@@ -123,7 +124,7 @@ export default function Home() {
             <div className="flex justify-center gap-10">
               <div className="text-center">
                 <div className="text-3xl font-bold text-white">
-                  <CounterAnimation end={marketplaceSkills} suffix="+" />
+                  <CounterAnimation end={marketplaceSkillsRounded} suffix="+" />
                 </div>
                 <div className="text-xs font-mono text-[var(--accent-yellow)] uppercase tracking-wider mt-1">
                   Marketplace Skills
@@ -188,7 +189,7 @@ export default function Home() {
         skills={featuredSkills}
         agents={featuredAgents}
         repos={repos}
-        marketplaceSkills={marketplaceSkills}
+        marketplaceSkills={marketplaceSkillsRounded}
         totalSkills={skills.length}
         totalAgents={agents.length}
       />
