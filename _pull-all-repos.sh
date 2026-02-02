@@ -38,6 +38,9 @@
 # Windows (Git Bash): use /e/ instead of E:\
 # Mac/Linux: use normal paths like /home/you/projects
 #
+# Determine script location (works even when called via symlink)
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 CUSTOM_PROJECT_DIRS=()
 ENV_FILE="$SCRIPT_DIR/.env.local"
 if [[ -f "$ENV_FILE" ]]; then
@@ -47,9 +50,6 @@ if [[ -f "$ENV_FILE" ]]; then
     fi
 fi
 # =============================================================================
-
-# Determine script location (works even when called via symlink)
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 MARKETPLACES_DIR="$SCRIPT_DIR/plugins/marketplaces"
 
 # Colors (with fallback for terminals without color support)
