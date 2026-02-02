@@ -2,6 +2,21 @@
 
 All notable changes to the Ultimate Claude Code Toolkit.
 
+## [2.3.2] - February 2, 2026
+
+### Website & Count Accuracy Fix
+
+### Fixed
+
+- **Website marketplace counts** — Added `marketplace-counts.json` fallback for Cloudflare Pages deployment where submodules are unavailable; marketplace data no longer shows zeros on live site
+- **Stale repo count** — Corrected 72→67 across all documentation (5 repos were removed but hardcoded counts weren't updated)
+- **Hero rounding** — Marketplace skills now rounds to nearest 100 with `+` suffix (1,900+) instead of showing exact count with misleading `+`
+- **Pre-commit hook** — Now stages `marketplace-counts.json` and `plugin.json` alongside other count-updated files
+- **Website README** — Replaced default create-next-app boilerplate with deployment documentation (Cloudflare Pages pipeline, fallback mechanism)
+- **Deleted `nul` file** — Removed Windows reserved device name file from repo root
+
+---
+
 ## [2.3.1] - February 2, 2026
 
 ### Documentation Overhaul & Visual Enhancement
