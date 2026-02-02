@@ -2,7 +2,7 @@
 
 How to use, create, and customize Claude Code skills.
 
-**Last Updated:** January 2026 (v2.2)
+**Last Updated:** February 2026 (v2.3)
 
 ---
 

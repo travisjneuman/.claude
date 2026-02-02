@@ -125,13 +125,17 @@ Custom project directories retain full push access because you configured them.
 
 ### Adding Your Own Project Directories
 
-Edit `~/.claude/_pull-all-repos.sh` and find the `CUSTOM_PROJECT_DIRS` section:
+Create `~/.claude/.env.local` (gitignored, machine-specific):
 
 ```bash
-CUSTOM_PROJECT_DIRS=(
-    # "/e/Projects"           # Uncomment and edit
-    # "$HOME/projects"               # Works on any platform
-)
+cp ~/.claude/.env.example ~/.claude/.env.local
+```
+
+Then set your directories (comma-separated):
+
+```bash
+CUSTOM_PROJECT_DIRS="/e/Projects"
+# Or multiple: CUSTOM_PROJECT_DIRS="/e/Projects,/c/Users/you/projects"
 ```
 
 Windows paths in Git Bash: `E:\Projects` → `/e/Projects`

@@ -1,6 +1,6 @@
 # Claude Code Configuration Documentation
 
-**Last Updated:** January 2026 (v2.2)
+**Last Updated:** February 2026 (v2.3)
 **Maintainer:** Travis J. Neuman
 **Purpose:** Portable, optimized Claude Code configuration for any project
 

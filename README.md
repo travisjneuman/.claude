@@ -638,7 +638,16 @@ bash scripts/init-marketplaces.sh
 bash scripts/setup-new-machine.sh
 
 # ═══════════════════════════════════════════════════════════════════════════
-# STEP 4: Register marketplaces with Claude Code's plugin system
+# STEP 4: Configure machine-specific settings (optional)
+# ═══════════════════════════════════════════════════════════════════════════
+# Create a .env.local file for directories and settings unique to this machine.
+# This file is gitignored — it won't affect other users.
+cp .env.example .env.local
+# Edit .env.local and set your custom project directories:
+#   CUSTOM_PROJECT_DIRS="/path/to/your/projects"
+
+# ═══════════════════════════════════════════════════════════════════════════
+# STEP 5: Register marketplaces with Claude Code's plugin system
 # ═══════════════════════════════════════════════════════════════════════════
 # These commands tell Claude Code where to find the plugins
 
@@ -649,7 +658,7 @@ claude plugin marketplace add ~/.claude/plugins/marketplaces/taches-cc-resources
 claude plugin marketplace add ~/.claude/plugins/marketplaces/obra-superpowers
 
 # ═══════════════════════════════════════════════════════════════════════════
-# STEP 5: Install enabled plugins
+# STEP 6: Install enabled plugins
 # ═══════════════════════════════════════════════════════════════════════════
 # Install plugins that are enabled in settings.json
 
@@ -676,12 +685,12 @@ claude plugin install taches-cc-resources@taches-cc-resources
 claude plugin install superpowers@superpowers-marketplace
 
 # ═══════════════════════════════════════════════════════════════════════════
-# STEP 6: Restore no_push (Claude may have overwritten during marketplace add)
+# STEP 7: Restore no_push (Claude may have overwritten during marketplace add)
 # ═══════════════════════════════════════════════════════════════════════════
 bash scripts/update-external-repos.sh
 
 # ═══════════════════════════════════════════════════════════════════════════
-# STEP 7: Verify setup
+# STEP 8: Verify setup
 # ═══════════════════════════════════════════════════════════════════════════
 claude doctor
 ```

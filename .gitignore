@@ -98,9 +98,9 @@ credentials.json
 # Additional secrets (if you ever add them)
 # *.pem
 # *.key
-# .env
-# .env.local
-# .env.*.local
+.env
+.env.local
+.env.*.local
 
 # ----- SESSION-SPECIFIC FILES -----
 # These contain session IDs and are regenerated

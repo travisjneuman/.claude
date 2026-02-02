@@ -150,6 +150,7 @@ This configuration syncs across Windows, macOS, and Linux via GitHub.
 | .vscode/ settings        | Git            | Shared VSCode workspace settings |
 | Marketplace plugins      | Git submodules | Read-only, fetch updates only    |
 | `.mcp.json`              | **Manual**     | Platform-specific (cmd vs npx)   |
+| `.env.local`             | **Manual**     | Machine-specific directories     |
 | Session data             | Not synced     | Local to each machine            |
 
 ### Workflow
