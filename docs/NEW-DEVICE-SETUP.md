@@ -2,6 +2,8 @@
 
 **CRITICAL: Run this process on EVERY new device to ensure correct configuration.**
 
+**Last Updated:** February 2026 (v2.3.1)
+
 Works identically on: **Arch Linux** | **macOS** | **Windows (Git Bash)**
 
 ---
@@ -12,8 +14,8 @@ Works identically on: **Arch Linux** | **macOS** | **Windows (Git Bash)**
 # 1. Clone the repo
 git clone https://github.com/travisjneuman/.claude.git ~/.claude
 
-# 2. Initialize marketplace repos with correct upstreams
-bash ~/.claude/scripts/init-marketplaces.sh
+# 2. Fetch all 72 marketplace repos from their upstreams
+bash ~/.claude/_pull-all-repos.sh
 
 # 3. Complete setup
 bash ~/.claude/scripts/setup-new-machine.sh
@@ -23,19 +25,32 @@ That's it. The scripts handle everything cross-platform.
 
 ---
 
-## Why This Matters
+## How Marketplace Repos Work
 
-The `~/.claude` repo contains 67 marketplace repositories as nested git repos. When you clone `~/.claude` to a new device:
+The `~/.claude` repo references 72 marketplace repositories. These are **not** tracked as git submodule content in the parent repo. Instead, each machine independently fetches the marketplace repos from their original upstreams using `_pull-all-repos.sh`.
 
-1. **Problem**: Nested repos may have incorrect remote URLs (pointing to your personal repo instead of the original upstreams)
-2. **Solution**: `init-marketplaces.sh` re-clones each marketplace from its original upstream with push disabled
+This means:
+
+- **Gitlinks are not tracked** -- the parent repo does not commit submodule SHAs
+- **Each machine fetches independently** -- `_pull-all-repos.sh` clones or pulls each marketplace from its upstream URL
+- **Push is blocked** -- all marketplace repos get `no_push` set automatically
+- **No merge conflicts** -- since submodule state is not committed, different machines never conflict on marketplace versions
 
 ### Expected Configuration After Setup
 
 | Repository               | Fetch From              | Push To                           |
 | ------------------------ | ----------------------- | --------------------------------- |
-| `~/.claude` (main)       | `travisjneuman/.claude` | `travisjneuman/.claude` (enabled) |
+| `~/.claude` (parent)     | `travisjneuman/.claude` | `travisjneuman/.claude` (enabled) |
 | `plugins/marketplaces/*` | Original upstreams      | `no_push` (blocked)               |
+
+### What `_pull-all-repos.sh` Does
+
+1. Pulls the parent repo (`~/.claude`)
+2. Clones or pulls all 72 marketplace repos from their original upstreams
+3. Enforces `no_push` on every marketplace repo
+4. Fixes detached HEAD states automatically
+5. Pulls custom project directories (if configured via `.env.local`)
+6. Updates documentation counts if repos changed
 
 ---
 
@@ -44,22 +59,16 @@ The `~/.claude` repo contains 67 marketplace repositories as nested git repos. W
 ### Arch Linux / Linux
 
 ```bash
-# Clone
 git clone https://github.com/travisjneuman/.claude.git ~/.claude
-
-# Initialize (uses bash)
-bash ~/.claude/scripts/init-marketplaces.sh
+bash ~/.claude/_pull-all-repos.sh
 bash ~/.claude/scripts/setup-new-machine.sh
 ```
 
 ### macOS
 
 ```bash
-# Clone
 git clone https://github.com/travisjneuman/.claude.git ~/.claude
-
-# Initialize (uses bash)
-bash ~/.claude/scripts/init-marketplaces.sh
+bash ~/.claude/_pull-all-repos.sh
 bash ~/.claude/scripts/setup-new-machine.sh
 ```
 
@@ -74,7 +83,7 @@ git clone https://github.com/travisjneuman/.claude.git $env:USERPROFILE\.claude
 
 ```bash
 # In Git Bash: Initialize
-bash ~/.claude/scripts/init-marketplaces.sh
+bash ~/.claude/_pull-all-repos.sh
 bash ~/.claude/scripts/setup-new-machine.sh
 ```
 
@@ -102,25 +111,31 @@ cd ~/.claude/plugins/marketplaces/get-shit-done
 git remote -v
 # Should show: origin https://github.com/glittercowboy/get-shit-done.git (fetch)
 #              origin no_push (push)
+
+# Check marketplace count
+ls -d ~/.claude/plugins/marketplaces/*/ | wc -l
+# Should show: 72
 ```
 
-Or run the verification script:
+Or run the health check in Claude Code:
 
-```bash
-bash ~/.claude/scripts/fix-remotes.sh
+```
+/health-check
 ```
 
 ---
 
 ## Troubleshooting
 
-### "Marketplace repos have wrong remote URLs"
+### "Marketplace repos missing or empty"
 
-Run the initializer to re-clone from upstreams:
+Run the pull script to fetch them:
 
 ```bash
-bash ~/.claude/scripts/init-marketplaces.sh
+bash ~/.claude/_pull-all-repos.sh
 ```
+
+This will clone any missing repos and pull updates for existing ones.
 
 ### "Main repo cannot push"
 
@@ -140,7 +155,7 @@ This is **expected behavior**. Marketplace repos are read-only. If you see:
 fatal: 'no_push' does not appear to be a git repository
 ```
 
-The configuration is correct - you cannot push to upstream repos.
+The configuration is correct -- you cannot push to upstream repos.
 
 ### "Bash scripts not working on Windows"
 
@@ -149,17 +164,20 @@ Ensure you're using Git Bash, not PowerShell or CMD:
 1. Install [Git for Windows](https://git-scm.com/download/win)
 2. Run scripts from Git Bash terminal
 
+### "Old device had init-marketplaces.sh -- is that still needed?"
+
+No. The `_pull-all-repos.sh` script replaces the old `init-marketplaces.sh` approach. It handles both initial cloning and subsequent updates in a single script. Just run `_pull-all-repos.sh` on any new or existing device.
+
 ---
 
 ## Scripts Reference
 
-| Script                     | Purpose                                                    |
-| -------------------------- | ---------------------------------------------------------- |
-| `init-marketplaces.sh`     | Clone/reinitialize all 67 marketplace repos from upstreams |
-| `fix-remotes.sh`           | Fix remote URLs without re-cloning                         |
-| `setup-new-machine.sh`     | Complete setup (plugins, hooks, etc.)                      |
-| `update-external-repos.sh` | Pull latest from all upstreams (legacy)                    |
-| `_pull-all-repos.sh`       | **Recommended:** Pull all repos + fix HEADs + update counts |
+| Script                 | Purpose                                                                   |
+| ---------------------- | ------------------------------------------------------------------------- |
+| `_pull-all-repos.sh`   | **Primary:** Pull/clone all 72 marketplace repos + parent repo            |
+| `setup-new-machine.sh` | Complete setup (plugins, hooks, etc.)                                     |
+| `fix-remotes.sh`       | Fix remote URLs without re-cloning                                        |
+| `init-marketplaces.sh` | Legacy: clone/reinitialize marketplaces (use \_pull-all-repos.sh instead) |
 
 ---
 
@@ -178,7 +196,7 @@ Example `.env.local`:
 CUSTOM_PROJECT_DIRS="/e/Web Development"
 ```
 
-`.env.local` is gitignored — each machine has its own.
+`.env.local` is gitignored -- each machine has its own.
 
 ---
 
@@ -206,9 +224,11 @@ git push origin master
 ```bash
 cd ~/.claude
 git pull origin master
-bash ~/.claude/scripts/fix-remotes.sh  # Ensure remotes are correct after pull
+bash ~/.claude/_pull-all-repos.sh  # Also update marketplace repos
 ```
+
+Note: since marketplace repos are fetched independently per machine, `git pull` only syncs your custom configuration. Run `_pull-all-repos.sh` to also update marketplace content.
 
 ---
 
-_Last updated: February 2026_
+_Last updated: February 2026 (v2.3.1)_

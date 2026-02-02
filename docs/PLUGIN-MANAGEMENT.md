@@ -1,6 +1,6 @@
 # Plugin Management Guide
 
-**Last Updated:** February 2026 (v2.3)
+**Last Updated:** February 2026 (v2.3.1)
 
 ---
 
