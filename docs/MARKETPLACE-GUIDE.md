@@ -1,8 +1,8 @@
 # Marketplace Guide
 
-Complete reference for the 67 plugin marketplaces and how to use them.
+Complete reference for the 72 plugin marketplaces and how to use them.
 
-**Last Updated:** February 2026 (v2.3)
+**Last Updated:** February 2026 (v2.3.1)
 
 **Location:** `~/.claude/plugins/marketplaces/`
 
@@ -17,17 +17,17 @@ Complete reference for the 67 plugin marketplaces and how to use them.
 
 ---
 
-## Installed Marketplaces (67)
+## Installed Marketplaces (72)
 
 ### Official (Anthropic)
 
-| Marketplace               | Contents                                | Key Features                |
-| ------------------------- | --------------------------------------- | --------------------------- |
-| `anthropic-agent-skills`  | Document skills, example skills         | Official Anthropic patterns |
-| `anthropic-life-sciences` | Life sciences tools                     | Official scientific tools   |
-| `claude-code-plugins`     | PR review, commit commands, feature dev | Core development plugins    |
-| `claude-plugins-official` | External plugins collection             | Curated official plugins    |
-| `vercel-agent-skills`     | Vercel deployment skills                | Vercel Labs official        |
+| Marketplace               | Contents                                | Key Features                   |
+| ------------------------- | --------------------------------------- | ------------------------------ |
+| `anthropic-agent-skills`  | Document skills, example skills         | Official Anthropic patterns    |
+| `anthropic-life-sciences` | Life sciences tools                     | Official scientific tools      |
+| `claude-code-plugins`     | PR review, commit commands, feature dev | Core development plugins       |
+| `claude-plugins-official` | External plugins collection             | Curated official plugins       |
+| `vercel-agent-skills`     | Vercel deployment skills                | Vercel Labs official           |
 | `expo-skills`             | Expo app design, deployment, upgrading  | Official Expo team (815 stars) |
 
 ### Taches/GlitterCowboy
@@ -39,13 +39,13 @@ Complete reference for the 67 plugin marketplaces and how to use them.
 
 ### Large Collections
 
-| Marketplace                | Contents                                 | Key Features                                   |
-| -------------------------- | ---------------------------------------- | ---------------------------------------------- |
+| Marketplace                | Contents                                | Key Features                                   |
+| -------------------------- | --------------------------------------- | ---------------------------------------------- |
 | `wshobson-agents`          | 36 agents, 129 skills, 15 orchestrators | Progressive disclosure architecture            |
-| `voltagent-subagents`      | 126+ specialized agents                  | Full-stack, DevOps focus                       |
-| `claude-scientific-skills` | 144 scientific skills                    | Bioinformatics, chemistry, physics, proteomics |
-| `davila7-templates`        | 651 templates                            | Broad template coverage                        |
-| `madappgang-claude-code`   | 110 resources                            | Full-stack development                         |
+| `voltagent-subagents`      | 126+ specialized agents                 | Full-stack, DevOps focus                       |
+| `claude-scientific-skills` | 144 scientific skills                   | Bioinformatics, chemistry, physics, proteomics |
+| `davila7-templates`        | 651 templates                           | Broad template coverage                        |
+| `madappgang-claude-code`   | 110 resources                           | Full-stack development                         |
 | `athola-night-market`      | 125 skills                              | Curated night market                           |
 | `voltagent-agent-skills`   | 200+ official dev team skills           | Stripe, Cloudflare, Sentry, HuggingFace, Expo  |
 | `kivilaid-marketplace`     | 87 plugins from 10+ sources             | Aggregated plugin marketplace                  |
@@ -68,50 +68,50 @@ Complete reference for the 67 plugin marketplaces and how to use them.
 
 ### Development-Focused
 
-| Marketplace               | Contents            | Key Features             |
-| ------------------------- | ------------------- | ------------------------ |
-| `buildwithclaude`         | 43 resources        | Full-stack development   |
-| `sivalabs-marketplace`    | Java/Spring skills  | JVM ecosystem            |
-| `gmickel-marketplace`     | General development | Mixed development tools  |
-| `devgom-marketplace`      | Development tools   | Dev marketplace          |
-| `henkisdabro-marketplace` | Development tools   | Claude Code marketplace  |
-| `p47phoenix-plugins`      | Plugins collection  | Claude plugins           |
-| `sawyerhood-mart`         | Development tools   | Sawyer's mart            |
-| `numman-ali-openskills`   | Open skills         | Open source skills       |
-| `numman-ali-skills`       | N-skills            | Additional skills        |
-| `zai-coding-plugins`      | Coding plugins      | Zai organization         |
-| `piebald-lsps`            | LSP integrations    | Language Server Protocol |
-| `daymade-skills`          | Production skills   | Dev workflow marketplace |
-| `DustyWalker-marketplace` | 16 production agents| Code review, security, testing agents |
-| `netresearch-marketplace` | Agentic skills catalog | Catalog-style marketplace (source refs) |
-| `ykdojo-tips`             | dx plugin, 45 tips  | GHA analysis, handoff, DX workflow |
-| `EveryInc-compound`       | Compound engineering| 100+ framework support, pragmatic agents |
+| Marketplace               | Contents               | Key Features                             |
+| ------------------------- | ---------------------- | ---------------------------------------- |
+| `buildwithclaude`         | 43 resources           | Full-stack development                   |
+| `sivalabs-marketplace`    | Java/Spring skills     | JVM ecosystem                            |
+| `gmickel-marketplace`     | General development    | Mixed development tools                  |
+| `devgom-marketplace`      | Development tools      | Dev marketplace                          |
+| `henkisdabro-marketplace` | Development tools      | Claude Code marketplace                  |
+| `p47phoenix-plugins`      | Plugins collection     | Claude plugins                           |
+| `sawyerhood-mart`         | Development tools      | Sawyer's mart                            |
+| `numman-ali-openskills`   | Open skills            | Open source skills                       |
+| `numman-ali-skills`       | N-skills               | Additional skills                        |
+| `zai-coding-plugins`      | Coding plugins         | Zai organization                         |
+| `piebald-lsps`            | LSP integrations       | Language Server Protocol                 |
+| `daymade-skills`          | Production skills      | Dev workflow marketplace                 |
+| `DustyWalker-marketplace` | 16 production agents   | Code review, security, testing agents    |
+| `netresearch-marketplace` | Agentic skills catalog | Catalog-style marketplace (source refs)  |
+| `ykdojo-tips`             | dx plugin, 45 tips     | GHA analysis, handoff, DX workflow       |
+| `EveryInc-compound`       | Compound engineering   | 100+ framework support, pragmatic agents |
 
 ### Language/Framework Specific
 
-| Marketplace              | Contents | Key Features        |
-| ------------------------ | -------- | ------------------- |
-| `bradleygolden-elixir`   | 4 skills  | Elixir/Phoenix      |
-| `georgeguimaraes-elixir` | 6 skills  | Elixir ecosystem    |
-| `kfly8-cpan-plugins`     | 3 skills  | Perl/CPAN           |
-| `hashi-terraform-skills` | 4 skills  | HashiCorp/Terraform |
-| `expo-skills`            | 3 plugins | Expo/React Native (official) |
+| Marketplace              | Contents  | Key Features                               |
+| ------------------------ | --------- | ------------------------------------------ |
+| `bradleygolden-elixir`   | 4 skills  | Elixir/Phoenix                             |
+| `georgeguimaraes-elixir` | 6 skills  | Elixir ecosystem                           |
+| `kfly8-cpan-plugins`     | 3 skills  | Perl/CPAN                                  |
+| `hashi-terraform-skills` | 4 skills  | HashiCorp/Terraform                        |
+| `expo-skills`            | 3 plugins | Expo/React Native (official)               |
 | `akin-ozer-devops`       | 31 skills | DevOps (K8s, Terraform, CI/CD, monitoring) |
 
 ### SDLC & Project Management
 
-| Marketplace              | Contents                                 | Key Features                                |
-| ------------------------ | ---------------------------------------- | ------------------------------------------- |
-| `scopecraft-command`     | Comprehensive SDLC commands              | Feature, bug, planning, release workflows   |
-| `danielscholl-sdlc`     | SDLC automation + GitHub webhooks        | Feature/bug/chore specs, webhook automation |
-| `automazeio-ccpm`       | Project management via GitHub Issues     | PRD → Epic → Task pipeline, parallel agents |
+| Marketplace          | Contents                             | Key Features                                |
+| -------------------- | ------------------------------------ | ------------------------------------------- |
+| `scopecraft-command` | Comprehensive SDLC commands          | Feature, bug, planning, release workflows   |
+| `danielscholl-sdlc`  | SDLC automation + GitHub webhooks    | Feature/bug/chore specs, webhook automation |
+| `automazeio-ccpm`    | Project management via GitHub Issues | PRD → Epic → Task pipeline, parallel agents |
 
 ### Scientific/Research
 
 | Marketplace                | Contents        | Key Features                    |
 | -------------------------- | --------------- | ------------------------------- |
-| `claude-scientific-skills` | 144 skills     | Broad scientific coverage       |
-| `anthropic-life-sciences`  | 6 skills         | Official life sciences          |
+| `claude-scientific-skills` | 144 skills      | Broad scientific coverage       |
+| `anthropic-life-sciences`  | 6 skills        | Official life sciences          |
 | `gqy20-biology-plugins`    | Biology plugins | Evolutionary biology, genomics  |
 | `quant-equity-research`    | Equity research | Financial quantitative analysis |
 
@@ -191,26 +191,26 @@ Complete reference for the 67 plugin marketplaces and how to use them.
 
 ## Domain Quick Reference
 
-| If working on...           | Check these marketplaces                                                              |
-| -------------------------- | ------------------------------------------------------------------------------------- |
-| **Scientific/Research**    | `claude-scientific-skills` (144), `anthropic-life-sciences`, `gqy20-biology-plugins`  |
-| **Full-stack development** | `wshobson-agents`, `voltagent-subagents`, `buildwithclaude`, `madappgang-claude-code` |
+| If working on...           | Check these marketplaces                                                                           |
+| -------------------------- | -------------------------------------------------------------------------------------------------- |
+| **Scientific/Research**    | `claude-scientific-skills` (144), `anthropic-life-sciences`, `gqy20-biology-plugins`               |
+| **Full-stack development** | `wshobson-agents`, `voltagent-subagents`, `buildwithclaude`, `madappgang-claude-code`              |
 | **DevOps/Infrastructure**  | `voltagent-subagents`, `diet103-infrastructure`, `hashi-terraform-skills`, `akin-ozer-devops` (31) |
-| **Security**               | `trailofbits-skills` (50 skills)                                                      |
-| **Documents/Office**       | `awesome-claude-skills`                                                               |
-| **Prompt engineering**     | `taches-cc-resources`                                                                 |
-| **Git/Testing/Review**     | `mhattingpete-skills`                                                                 |
-| **Project management**     | `get-shit-done`, `automazeio-ccpm`, `scopecraft-command`                              |
-| **SDLC/Automation**        | `danielscholl-sdlc`, `scopecraft-command`, `EveryInc-compound`                        |
-| **Brainstorming/Planning** | `obra-superpowers`, `othmanadi-planning`                                              |
-| **Autonomous coding**      | `auto-claude`                                                                         |
-| **Expo/React Native**      | `expo-skills` (official)                                                              |
-| **Templates**              | `davila7-templates` (651), `athola-night-market` (125)                                |
-| **SAP/Enterprise**         | `secondsky-sap-skills` (33)                                                           |
-| **Elixir**                 | `bradleygolden-elixir`, `georgeguimaraes-elixir`                                      |
-| **Finance/Equity**         | `quant-equity-research`                                                               |
-| **Worldbuilding/Creative** | `worldbuilding-skills` (52), `mojito-freeship-skills`                                 |
-| **Context Engineering**    | `neolab-context-kit`, `muratcankoylan-agent-skills`                                   |
+| **Security**               | `trailofbits-skills` (50 skills)                                                                   |
+| **Documents/Office**       | `awesome-claude-skills`                                                                            |
+| **Prompt engineering**     | `taches-cc-resources`                                                                              |
+| **Git/Testing/Review**     | `mhattingpete-skills`                                                                              |
+| **Project management**     | `get-shit-done`, `automazeio-ccpm`, `scopecraft-command`                                           |
+| **SDLC/Automation**        | `danielscholl-sdlc`, `scopecraft-command`, `EveryInc-compound`                                     |
+| **Brainstorming/Planning** | `obra-superpowers`, `othmanadi-planning`                                                           |
+| **Autonomous coding**      | `auto-claude`                                                                                      |
+| **Expo/React Native**      | `expo-skills` (official)                                                                           |
+| **Templates**              | `davila7-templates` (651), `athola-night-market` (125)                                             |
+| **SAP/Enterprise**         | `secondsky-sap-skills` (33)                                                                        |
+| **Elixir**                 | `bradleygolden-elixir`, `georgeguimaraes-elixir`                                                   |
+| **Finance/Equity**         | `quant-equity-research`                                                                            |
+| **Worldbuilding/Creative** | `worldbuilding-skills` (52), `mojito-freeship-skills`                                              |
+| **Context Engineering**    | `neolab-context-kit`, `muratcankoylan-agent-skills`                                                |
 
 ---
 
@@ -276,4 +276,4 @@ All marketplaces are configured with `no_push` - read-only access.
 
 ---
 
-_67 marketplaces, 1,900+ skills, discovered proactively when domain expertise is needed._
+_72 marketplaces, 5,000+ skills, discovered proactively when domain expertise is needed._
