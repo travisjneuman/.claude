@@ -62,7 +62,10 @@ if [ "$CHANGELOG" -eq 0 ]; then
     # Check if there were significant changes in this push
     SIGNIFICANT=$(git diff HEAD~1..HEAD --name-only 2>/dev/null | grep -E "^(skills|agents|commands|rules|docs)/" | wc -l)
     if [ "$SIGNIFICANT" -gt 3 ]; then
-        echo -e "${YELLOW}⚠ Reminder: Many files changed but CHANGELOG not updated${NC}"
+        echo -e "${RED}✗ BLOCKED: $SIGNIFICANT significant files changed but CHANGELOG.md not updated${NC}"
+        echo -e "${YELLOW}  Update CHANGELOG.md, commit, then push again.${NC}"
+        echo -e "${YELLOW}  Bypass with: git push --no-verify${NC}"
+        exit 1
     fi
 fi
 
