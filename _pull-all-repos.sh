@@ -319,6 +319,15 @@ if [[ "$STATUS_ONLY" == false ]]; then
     if [[ $NO_PUSH_FIXED -eq 0 ]]; then
         echo -e "${GREEN}  All submodules already have no_push configured${NC}"
     fi
+
+    # Safety: ensure parent repo is NOT set to no_push
+    cd "$SCRIPT_DIR"
+    PARENT_PUSH=$(git remote get-url --push origin 2>/dev/null)
+    if [[ "$PARENT_PUSH" == "no_push" ]]; then
+        PARENT_FETCH=$(git remote get-url origin 2>/dev/null)
+        git remote set-url --push origin "$PARENT_FETCH"
+        echo -e "${YELLOW}  WARNING: Parent repo had no_push — restored push URL${NC}"
+    fi
 fi
 
 # =============================================================================
