@@ -163,6 +163,25 @@ Ensure you're using Git Bash, not PowerShell or CMD:
 
 ---
 
+## Configure Custom Project Directories (Optional)
+
+If you have project directories you want the pull script to include:
+
+```bash
+cp ~/.claude/.env.example ~/.claude/.env.local
+# Edit .env.local with your directories
+```
+
+Example `.env.local`:
+
+```bash
+CUSTOM_PROJECT_DIRS="/e/Web Development"
+```
+
+`.env.local` is gitignored — each machine has its own.
+
+---
+
 ## After Setup
 
 1. **Start Claude Code**: `claude`
