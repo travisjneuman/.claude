@@ -1,5 +1,5 @@
 import Navigation from "@/components/layout/Navigation";
-import Footer from "@/components/layout/Footer";
+import FooterWithDocs from "@/components/layout/FooterWithDocs";
 import CommandsList from "./CommandsList";
 import { getCommands } from "@/lib/data/commands";
 
@@ -40,7 +40,7 @@ export default function CommandsPage() {
           )}
         </div>
       </main>
-      <Footer />
+      <FooterWithDocs />
     </>
   );
 }

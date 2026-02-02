@@ -1,5 +1,5 @@
 import Navigation from "@/components/layout/Navigation";
-import Footer from "@/components/layout/Footer";
+import FooterWithDocs from "@/components/layout/FooterWithDocs";
 import AgentsGrid from "./AgentsGrid";
 import { getAgents } from "@/lib/data/agents";
 
@@ -45,7 +45,7 @@ export default function AgentsPage() {
           />
         </div>
       </main>
-      <Footer />
+      <FooterWithDocs />
     </>
   );
 }

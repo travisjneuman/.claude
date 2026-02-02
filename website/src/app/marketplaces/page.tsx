@@ -1,5 +1,5 @@
 import Navigation from "@/components/layout/Navigation";
-import Footer from "@/components/layout/Footer";
+import FooterWithDocs from "@/components/layout/FooterWithDocs";
 import MarketplaceGrid from "./MarketplaceGrid";
 import { getMarketplaceStats } from "@/lib/data/marketplace";
 
@@ -41,7 +41,7 @@ export default function MarketplacesPage() {
           )}
         </div>
       </main>
-      <Footer />
+      <FooterWithDocs />
     </>
   );
 }
