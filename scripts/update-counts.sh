@@ -156,6 +156,47 @@ update_readme_badges() {
   sedi -E "s/Total: [0-9,]+\+/Total: ${TOTAL_DISPLAY}+/" "$file"
 }
 
+# ─── Generate website marketplace fallback JSON ──────────────────────
+
+generate_marketplace_json() {
+  local json_file="website/src/lib/data/marketplace-counts.json"
+  [ -d "website/src/lib/data" ] || return 0
+
+  node -e "
+const fs = require('fs');
+const path = require('path');
+const marketDir = path.resolve(__dirname, 'plugins', 'marketplaces');
+
+function countSkillFiles(dir) {
+  let count = 0;
+  try {
+    const items = fs.readdirSync(dir, { withFileTypes: true });
+    for (const item of items) {
+      if (item.isDirectory() && !item.name.startsWith('.') && item.name !== 'node_modules') {
+        count += countSkillFiles(path.join(dir, item.name));
+      } else if (item.name === 'SKILL.md') count++;
+    }
+  } catch {}
+  return count;
+}
+
+if (!fs.existsSync(marketDir)) { process.exit(0); }
+const entries = fs.readdirSync(marketDir, { withFileTypes: true });
+const repos = [];
+let totalSkills = 0;
+for (const entry of entries) {
+  if (!entry.isDirectory()) continue;
+  const count = countSkillFiles(path.join(marketDir, entry.name));
+  const displayName = entry.name.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+  repos.push({ name: entry.name, displayName, skillCount: count });
+  totalSkills += count;
+}
+repos.sort((a, b) => b.skillCount - a.skillCount);
+fs.writeFileSync('$json_file', JSON.stringify({ repoCount: repos.length, totalSkills, repos }, null, 2) + '\n');
+console.log('  ✓ Generated $json_file (' + repos.length + ' repos, ' + totalSkills + ' skills)');
+" 2>/dev/null || echo "  ⚠ Node.js not available, skipping marketplace JSON generation"
+}
+
 # ─── Update website files ────────────────────────────────────────────
 
 update_website() {
@@ -267,6 +308,7 @@ update_readme_badges
 update_file "README.md"
 
 # Website
+generate_marketplace_json
 update_website
 
 # Skills docs
