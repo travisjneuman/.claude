@@ -34,8 +34,8 @@ export default function Footer() {
           <div className="col-span-2 md:col-span-1">
             <span className="text-lg font-bold gradient-text">Claude Code</span>
             <p className="mt-2 text-sm text-[var(--text-muted)]">
-              Supercharge your Claude Code with 72 skills, 36 agents, and 1,700+
-              marketplace skills across 51 repos.
+              Supercharge your Claude Code with 72 skills, 36 agents, and 5,000+
+              marketplace skills across 68 repos.
             </p>
           </div>
           {Object.entries(footerLinks).map(([category, links]) => (
