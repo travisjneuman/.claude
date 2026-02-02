@@ -1,5 +1,5 @@
 import Navigation from "@/components/layout/Navigation";
-import Footer from "@/components/layout/Footer";
+import FooterWithDocs from "@/components/layout/FooterWithDocs";
 import SkillsGrid from "./SkillsGrid";
 import { getSkills } from "@/lib/data/skills";
 
@@ -43,7 +43,7 @@ export default function SkillsPage() {
           />
         </div>
       </main>
-      <Footer />
+      <FooterWithDocs />
     </>
   );
 }

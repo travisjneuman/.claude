@@ -1,5 +1,5 @@
 import Navigation from "@/components/layout/Navigation";
-import Footer from "@/components/layout/Footer";
+import FooterWithDocs from "@/components/layout/FooterWithDocs";
 import DocsList from "./DocsList";
 import { getDocs } from "@/lib/data/docs";
 
@@ -40,7 +40,7 @@ export default function DocsPage() {
           )}
         </div>
       </main>
-      <Footer />
+      <FooterWithDocs />
     </>
   );
 }

@@ -1,5 +1,5 @@
 import Navigation from "@/components/layout/Navigation";
-import Footer from "@/components/layout/Footer";
+import FooterWithDocs from "@/components/layout/FooterWithDocs";
 import TerminalDemo from "@/components/terminal/TerminalDemo";
 import HeroCanvas from "@/components/3d/HeroCanvas";
 import ScrollReveal from "@/components/animations/ScrollReveal";
@@ -237,7 +237,7 @@ export default function Home() {
         </ScrollReveal>
       </section>
 
-      <Footer />
+      <FooterWithDocs />
     </>
   );
 }
