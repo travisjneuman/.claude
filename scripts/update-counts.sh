@@ -258,6 +258,13 @@ update_file "docs/SETUP-GUIDE.md"
 update_file "docs/AUTO-CLAUDE-GUIDE.md"
 
 # Commands — list-skills and skill-finder get special handling
+# Health-check has a special "N+ files" pattern on the agents row
+file="commands/health-check.md"
+if [ -f "$file" ]; then
+  before=$(md5sum "$file" 2>/dev/null || md5 "$file" 2>/dev/null)
+  sedi -E "/agents\//s/[0-9]+\+ files/${AGENT_COUNT}+ files/" "$file"
+  check_changed "$file" "$before"
+fi
 update_file "commands/health-check.md"
 update_list_skills
 update_skill_finder

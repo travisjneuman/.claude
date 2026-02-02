@@ -6,8 +6,9 @@
 # Cross-platform script (Linux, macOS, Windows via Git Bash) that:
 #   1. Pulls the parent ~/.claude repo (travisjneuman/.claude)
 #   2. Pulls all marketplace submodules in plugins/marketplaces/
-#   3. Pulls all git repos in your custom project directories (optional)
-#   4. Enforces no_push on all submodules (prevents accidental pushes)
+#   3. Enforces no_push on all submodules (prevents accidental pushes)
+#   4. Pulls all git repos in your custom project directories (optional)
+#   5. Updates documentation counts if any repos changed (skills, agents, etc.)
 #
 # Features:
 #   - Pulls parent repo first, then all submodules, then custom directories
@@ -374,6 +375,18 @@ if [[ "$STATUS_ONLY" == false ]]; then
     [[ $FAILED -gt 0 ]] && echo -e "  ${RED}Failed:          $FAILED${NC}"
 fi
 echo ""
+
+# =============================================================================
+# PHASE 5: Update documentation counts (if repos were updated)
+# =============================================================================
+if [[ "$STATUS_ONLY" == false ]] && [[ -f "$SCRIPT_DIR/scripts/update-counts.sh" ]]; then
+    if [[ $UPDATED -gt 0 ]] || [[ $FIXED_DETACHED -gt 0 ]]; then
+        echo -e "${BOLD}Updating documentation counts...${NC}"
+        bash "$SCRIPT_DIR/scripts/update-counts.sh"
+    else
+        echo -e "${DIM}No repo changes — skipping count update${NC}"
+    fi
+fi
 
 # Exit with error if any failed
 if [[ $FAILED -gt 0 ]]; then

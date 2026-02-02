@@ -29,7 +29,7 @@
 [![Marketplace Skills](https://img.shields.io/badge/Marketplace_Skills-1900+-ec4899?style=for-the-badge&logo=package&logoColor=white)](./plugins/marketplaces/)
 [![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge&logo=opensourceinitiative&logoColor=white)](./LICENSE)
 
-**Version 2.2.0** • **Last Updated: January 28, 2026** • **Author: [Travis Neuman](https://travisjneuman.com)**
+**Version 2.3.0** • **Last Updated: February 1, 2026** • **Author: [Travis Neuman](https://travisjneuman.com)**
 
 </div>
 
@@ -165,6 +165,19 @@ The **Ultimate Claude Code Toolkit** transforms [Claude Code](https://docs.anthr
 | 🔧 **Setup Improvements**     | Get Started flow uses `setup-new-machine.sh` for complete automated setup      | Handles submodules, no_push, plugin registration, and hooks      |
 
 **Result:** Professional web presence, accurate documentation, streamlined setup for new users. See [CHANGELOG.md](CHANGELOG.md) for complete details.
+
+### 🆕 What's New in v2.3 (February 2026)
+
+**Reliability & Automation:** Fixed broken Anthropic submodules, automated count updates, and comprehensive documentation pass.
+
+| Feature                          | Description                                                                       | Details                                                               |
+| :------------------------------- | :-------------------------------------------------------------------------------- | :-------------------------------------------------------------------- |
+| 🔧 **Submodule Fixes**          | Fixed broken `claude-code-plugins` and `claude-plugins-official` submodules       | Both Anthropic repos now initialize and pull correctly                 |
+| 📊 **Auto Count Updates**       | `_pull-all-repos.sh` now automatically updates documentation counts after pulling | Skills, agents, and marketplace counts stay in sync with filesystem   |
+| 📝 **Documentation Accuracy**   | Updated all docs with correct repo counts, step numbering, and script references  | Fixed stale references across SETUP-GUIDE, MAINTENANCE, FOLDER-STRUCTURE |
+| 🔄 **68 Total Repos**           | All 68 repos (1 parent + 67 marketplace) pulling cleanly with zero failures       | Includes 4 official Anthropic repos and `superpowers-marketplace`     |
+
+**Result:** Zero-failure repo syncing, self-maintaining documentation counts, accurate setup guides. See [CHANGELOG.md](CHANGELOG.md) for complete details.
 
 ---
 
