@@ -1,0 +1,341 @@
+{
+  "repoCount": 67,
+  "totalSkills": 1944,
+  "repos": [
+    {
+      "name": "davila7-templates",
+      "displayName": "Davila7 Templates",
+      "skillCount": 664
+    },
+    {
+      "name": "claude-scientific-skills",
+      "displayName": "Claude Scientific Skills",
+      "skillCount": 144
+    },
+    {
+      "name": "wshobson-agents",
+      "displayName": "Wshobson Agents",
+      "skillCount": 140
+    },
+    {
+      "name": "athola-night-market",
+      "displayName": "Athola Night Market",
+      "skillCount": 127
+    },
+    {
+      "name": "madappgang-claude-code",
+      "displayName": "Madappgang Claude Code",
+      "skillCount": 126
+    },
+    {
+      "name": "kivilaid-marketplace",
+      "displayName": "Kivilaid Marketplace",
+      "skillCount": 104
+    },
+    {
+      "name": "worldbuilding-skills",
+      "displayName": "Worldbuilding Skills",
+      "skillCount": 52
+    },
+    {
+      "name": "trailofbits-skills",
+      "displayName": "Trailofbits Skills",
+      "skillCount": 51
+    },
+    {
+      "name": "affaan-everything-claude",
+      "displayName": "Affaan Everything Claude",
+      "skillCount": 44
+    },
+    {
+      "name": "buildwithclaude",
+      "displayName": "Buildwithclaude",
+      "skillCount": 43
+    },
+    {
+      "name": "alirezarezvani-claude-skills",
+      "displayName": "Alirezarezvani Claude Skills",
+      "skillCount": 42
+    },
+    {
+      "name": "daymade-skills",
+      "displayName": "Daymade Skills",
+      "skillCount": 35
+    },
+    {
+      "name": "skillsforge",
+      "displayName": "Skillsforge",
+      "skillCount": 34
+    },
+    {
+      "name": "secondsky-sap-skills",
+      "displayName": "Secondsky Sap Skills",
+      "skillCount": 33
+    },
+    {
+      "name": "awesome-claude-skills",
+      "displayName": "Awesome Claude Skills",
+      "skillCount": 32
+    },
+    {
+      "name": "gmickel-marketplace",
+      "displayName": "Gmickel Marketplace",
+      "skillCount": 23
+    },
+    {
+      "name": "henkisdabro-marketplace",
+      "displayName": "Henkisdabro Marketplace",
+      "skillCount": 22
+    },
+    {
+      "name": "EveryInc-compound",
+      "displayName": "EveryInc Compound",
+      "skillCount": 19
+    },
+    {
+      "name": "muratcankoylan-agent-skills",
+      "displayName": "Muratcankoylan Agent Skills",
+      "skillCount": 19
+    },
+    {
+      "name": "mhattingpete-skills",
+      "displayName": "Mhattingpete Skills",
+      "skillCount": 18
+    },
+    {
+      "name": "anthropic-agent-skills",
+      "displayName": "Anthropic Agent Skills",
+      "skillCount": 17
+    },
+    {
+      "name": "ananddtyagi-marketplace",
+      "displayName": "Ananddtyagi Marketplace",
+      "skillCount": 14
+    },
+    {
+      "name": "claude-plugins-official",
+      "displayName": "Claude Plugins Official",
+      "skillCount": 14
+    },
+    {
+      "name": "obra-superpowers",
+      "displayName": "Obra Superpowers",
+      "skillCount": 14
+    },
+    {
+      "name": "devgom-marketplace",
+      "displayName": "Devgom Marketplace",
+      "skillCount": 11
+    },
+    {
+      "name": "neolab-context-kit",
+      "displayName": "Neolab Context Kit",
+      "skillCount": 11
+    },
+    {
+      "name": "taches-cc-resources",
+      "displayName": "Taches Cc Resources",
+      "skillCount": 11
+    },
+    {
+      "name": "claude-code-plugins",
+      "displayName": "Claude Code Plugins",
+      "skillCount": 10
+    },
+    {
+      "name": "expo-skills",
+      "displayName": "Expo Skills",
+      "skillCount": 9
+    },
+    {
+      "name": "anthropic-life-sciences",
+      "displayName": "Anthropic Life Sciences",
+      "skillCount": 6
+    },
+    {
+      "name": "georgeguimaraes-elixir",
+      "displayName": "Georgeguimaraes Elixir",
+      "skillCount": 6
+    },
+    {
+      "name": "ykdojo-tips",
+      "displayName": "Ykdojo Tips",
+      "skillCount": 6
+    },
+    {
+      "name": "numman-ali-skills",
+      "displayName": "Numman Ali Skills",
+      "skillCount": 5
+    },
+    {
+      "name": "sivalabs-marketplace",
+      "displayName": "Sivalabs Marketplace",
+      "skillCount": 5
+    },
+    {
+      "name": "vercel-agent-skills",
+      "displayName": "Vercel Agent Skills",
+      "skillCount": 5
+    },
+    {
+      "name": "bradleygolden-elixir",
+      "displayName": "Bradleygolden Elixir",
+      "skillCount": 4
+    },
+    {
+      "name": "hashi-terraform-skills",
+      "displayName": "Hashi Terraform Skills",
+      "skillCount": 4
+    },
+    {
+      "name": "mojito-freeship-skills",
+      "displayName": "Mojito Freeship Skills",
+      "skillCount": 4
+    },
+    {
+      "name": "p47phoenix-plugins",
+      "displayName": "P47phoenix Plugins",
+      "skillCount": 4
+    },
+    {
+      "name": "kfly8-cpan-plugins",
+      "displayName": "Kfly8 Cpan Plugins",
+      "skillCount": 3
+    },
+    {
+      "name": "akin-ozer-devops",
+      "displayName": "Akin Ozer Devops",
+      "skillCount": 2
+    },
+    {
+      "name": "sawyerhood-mart",
+      "displayName": "Sawyerhood Mart",
+      "skillCount": 2
+    },
+    {
+      "name": "zai-coding-plugins",
+      "displayName": "Zai Coding Plugins",
+      "skillCount": 2
+    },
+    {
+      "name": "mvanhorn-last30days-skill",
+      "displayName": "Mvanhorn Last30days Skill",
+      "skillCount": 1
+    },
+    {
+      "name": "numman-ali-openskills",
+      "displayName": "Numman Ali Openskills",
+      "skillCount": 1
+    },
+    {
+      "name": "othmanadi-planning",
+      "displayName": "Othmanadi Planning",
+      "skillCount": 1
+    },
+    {
+      "name": "auto-claude",
+      "displayName": "Auto Claude",
+      "skillCount": 0
+    },
+    {
+      "name": "automazeio-ccpm",
+      "displayName": "Automazeio Ccpm",
+      "skillCount": 0
+    },
+    {
+      "name": "chat2anyllm-awesome-plugins",
+      "displayName": "Chat2anyllm Awesome Plugins",
+      "skillCount": 0
+    },
+    {
+      "name": "claude-market",
+      "displayName": "Claude Market",
+      "skillCount": 0
+    },
+    {
+      "name": "claude-mem",
+      "displayName": "Claude Mem",
+      "skillCount": 0
+    },
+    {
+      "name": "danielscholl-sdlc",
+      "displayName": "Danielscholl Sdlc",
+      "skillCount": 0
+    },
+    {
+      "name": "diet103-infrastructure",
+      "displayName": "Diet103 Infrastructure",
+      "skillCount": 0
+    },
+    {
+      "name": "DustyWalker-marketplace",
+      "displayName": "DustyWalker Marketplace",
+      "skillCount": 0
+    },
+    {
+      "name": "get-shit-done",
+      "displayName": "Get Shit Done",
+      "skillCount": 0
+    },
+    {
+      "name": "gqy20-biology-plugins",
+      "displayName": "Gqy20 Biology Plugins",
+      "skillCount": 0
+    },
+    {
+      "name": "hesreallyhim-awesome",
+      "displayName": "Hesreallyhim Awesome",
+      "skillCount": 0
+    },
+    {
+      "name": "netresearch-marketplace",
+      "displayName": "Netresearch Marketplace",
+      "skillCount": 0
+    },
+    {
+      "name": "piebald-lsps",
+      "displayName": "Piebald Lsps",
+      "skillCount": 0
+    },
+    {
+      "name": "quant-equity-research",
+      "displayName": "Quant Equity Research",
+      "skillCount": 0
+    },
+    {
+      "name": "quemsah-awesome",
+      "displayName": "Quemsah Awesome",
+      "skillCount": 0
+    },
+    {
+      "name": "scopecraft-command",
+      "displayName": "Scopecraft Command",
+      "skillCount": 0
+    },
+    {
+      "name": "skill-seekers",
+      "displayName": "Skill Seekers",
+      "skillCount": 0
+    },
+    {
+      "name": "superpowers-marketplace",
+      "displayName": "Superpowers Marketplace",
+      "skillCount": 0
+    },
+    {
+      "name": "travisvn-awesome",
+      "displayName": "Travisvn Awesome",
+      "skillCount": 0
+    },
+    {
+      "name": "voltagent-agent-skills",
+      "displayName": "Voltagent Agent Skills",
+      "skillCount": 0
+    },
+    {
+      "name": "voltagent-subagents",
+      "displayName": "Voltagent Subagents",
+      "skillCount": 0
+    }
+  ]
+}
