@@ -2,7 +2,7 @@
 
 A practical guide to using the GSD system for multi-phase projects.
 
-**Last Updated:** February 2026 (v2.3.1)
+**Last Updated:** February 2026 (v2.3.3)
 
 **New in v2.1:** SessionStart hook ensures GSD context loads automatically. See [CHANGELOG.md](../CHANGELOG.md#210---january-13-2026).
 

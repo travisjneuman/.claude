@@ -2,7 +2,7 @@
 
 Complete setup and usage guide for Auto-Claude autonomous coding framework.
 
-**Last Updated:** February 2026 (v2.3.1)
+**Last Updated:** February 2026 (v2.3.3)
 
 ---
 

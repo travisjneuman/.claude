@@ -2,7 +2,7 @@
 
 How to deploy this Claude Code configuration to a new machine.
 
-**Last Updated:** February 2026 (v2.3.1)
+**Last Updated:** February 2026 (v2.3.3)
 
 **See also:** [NEW-DEVICE-SETUP.md](./NEW-DEVICE-SETUP.md) for detailed cross-platform instructions.
 
@@ -190,7 +190,7 @@ This pulls all 67 marketplace repos, fixes detached HEADs, enforces `no_push`, a
 +-- CLAUDE.md              <- Core rules
 +-- settings.json          <- Shared settings
 +-- commands/              <- Slash commands
-+-- skills/                <- 72 skills
++-- skills/                <- 68 skills
 +-- agents/                <- 36 agents
 +-- rules/                 <- Contextual rules
 +-- templates/             <- Templates
