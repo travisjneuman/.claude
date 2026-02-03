@@ -90,4 +90,4 @@ Slash commands are shortcuts you invoke in Claude Code with `/<command-name>`. T
 
 ---
 
-_20 commands across 6 categories. Type `/<name>` to invoke._
+_19 commands across 6 categories. Type `/<name>` to invoke._
