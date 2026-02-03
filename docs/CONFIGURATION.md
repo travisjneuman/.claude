@@ -2,7 +2,7 @@
 
 Detailed documentation of all configuration files and their settings.
 
-**Last Updated:** February 2026 (v2.3.1)
+**Last Updated:** February 2026 (v2.3.3)
 
 ---
 

@@ -2,6 +2,20 @@
 
 All notable changes to the Ultimate Claude Code Toolkit.
 
+## [2.3.3] - February 3, 2026
+
+### Count Accuracy Fix
+
+### Fixed
+
+- **Skills count** — Corrected 72→68 across all documentation (4 skills were removed but counts weren't updated)
+- **Marketplace skills** — Corrected 5,000+→1,900+ (v2.3.1 incorrectly inflated from 1,900+ to 5,000+; actual disk count is 1,961)
+- **Templates count** — Corrected 12→9 across documentation
+- **Version references** — Updated v2.3.1→v2.3.3 across all 17 docs files
+- **Historical changelog entries** — Fixed stale counts in older changelog entries that referenced 22/71/1,328/1,496 marketplace counts
+
+---
+
 ## [2.3.2] - February 2, 2026
 
 ### Website & Count Accuracy Fix
@@ -76,7 +90,7 @@ Comprehensive documentation overhaul for v2.3 — every doc updated, new READMEs
 - **docs/SETUP-GUIDE.md** — Added `.env.local` to sync table
 - **rules/tooling/external-repos.md** — Updated to reference `.env.local` instead of editing `_pull-all-repos.sh`
 - **plugin.json** — Fixed stale counts (100→72 skills, 30→36 agents), bumped version to 2.3.0
-- **Marketplace skills** — Count updated from 1,700+ to 1,900+ across all docs (later updated to 5,000+ in v2.3.1)
+- **Marketplace skills** — Count updated from 1,700+ to 1,900+ across all docs (incorrectly inflated to 5,000+ in v2.3.1, corrected in v2.3.3)
 
 ---
 
@@ -175,7 +189,7 @@ Complete overhaul of the installation experience and automatic skill/agent routi
 - **`scripts/install.sh`** - Comprehensive bootstrap installer
   - Single command installation: `curl -fsSL https://raw.githubusercontent.com/travisjneuman/.claude/master/scripts/install.sh | bash`
   - Prerequisites checking (git, node, claude-code)
-  - Automatic submodule initialization (22 marketplace repos)
+  - Automatic submodule initialization (67 marketplace repos)
   - Read-only configuration (`no_push`) for all external repos
   - Platform-specific MCP configuration generation
   - Installation verification with detailed reporting
@@ -231,7 +245,7 @@ Complete overhaul of the installation experience and automatic skill/agent routi
 
 #### External Repository Management
 
-- All 22 marketplace repos verified with `no_push` configuration
+- All 67 marketplace repos verified with `no_push` configuration
 - Fixed sync issues with 4 repos that had diverged histories
 - Updated `scripts/update-external-repos.sh` for reliable syncing
 - Added `scripts/force-sync-repos.sh` for multi-machine workflow
@@ -246,7 +260,7 @@ Complete overhaul of the installation experience and automatic skill/agent routi
 ├── scripts/hooks/              ← Your hooks (tracked)
 ├── skills/, agents/, commands/ ← Your resources (tracked)
 └── plugins/marketplaces/       ← GITLINKS ONLY (just SHA pointers)
-    └── [22 repos]              → Fetched from upstream, never embedded
+    └── [67 repos]              → Fetched from upstream, never embedded
 ```
 
 **Protection Mechanisms:**
@@ -473,7 +487,7 @@ The system now automatically detects context and activates appropriate resources
 
 - **100% backward compatible** - All existing workflows unchanged
 - **Token efficient** - On-demand resource loading saves 40-60% tokens
-- **Full environment integration** - Works with 1,496+ marketplace skills, 71 local skills, 36 agents
+- **Full environment integration** - Works with 1,900+ marketplace skills, 68 local skills, 36 agents
 - **Seamless with existing tools** - GSD, skills, agents, MCP servers, hooks all work as before
 
 ### Performance Characteristics
@@ -750,7 +764,7 @@ All 10 available Claude Code lifecycle hooks are now implemented:
 
 #### New Claude Code Lifecycle Hooks
 
-- **SessionStart hook** - Displays toolkit status on session start (71 skills, 37 agents, 21 marketplaces)
+- **SessionStart hook** - Displays toolkit status on session start (68 skills, 36 agents, 67 marketplaces)
 - **Notification hook** - Logs system notifications to ~/.claude/.session-log for debugging
 
 #### New Stack Guides
@@ -765,7 +779,7 @@ All 10 available Claude Code lifecycle hooks are now implemented:
 - **Corrected marketplace skill count** - Updated from "550+" to "1,328+" across all documentation
 - **Updated CLAUDE.md** - Added Go and Rust to "Load When Relevant" triggers
 - **Updated agents/README.md** - Added parallel execution documentation (max 10 concurrent, 200k context each)
-- **Updated skills/MASTER_INDEX.md** - Corrected skill counts (71 local + 1,328 marketplace)
+- **Updated skills/MASTER_INDEX.md** - Corrected skill counts (68 local + 1,900+ marketplace)
 - **Updated docs/MARKETPLACE-GUIDE.md** - Corrected skill counts
 - **Updated docs/WORKFLOW-GUIDE.md** - Added automation hooks section
 - **Updated README.md** - Version bump, hook documentation, stack guide additions
