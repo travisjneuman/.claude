@@ -19,6 +19,7 @@ SKILL_COUNT=$(find skills -name "SKILL.md" -not -path "skills/_shared/*" 2>/dev/
 AGENT_COUNT=$(ls agents/*.md 2>/dev/null | grep -cv 'README\.md' || echo 0)
 REPO_COUNT=$(ls -d plugins/marketplaces/*/ 2>/dev/null | wc -l | tr -d ' ')
 MARKET_SKILL_COUNT=$(find plugins/marketplaces -name "SKILL.md" 2>/dev/null | wc -l | tr -d ' ')
+COMMAND_COUNT=$(ls commands/*.md 2>/dev/null | grep -cv 'README\.md' || echo 0)
 
 # Round marketplace skills down to nearest 100 with "+" suffix
 MARKET_ROUNDED="$(( (MARKET_SKILL_COUNT / 100) * 100 ))"
@@ -347,6 +348,20 @@ if [ -f "scripts/regenerate-index.sh" ]; then
   echo "Regenerating MASTER_INDEX.md..."
   bash scripts/regenerate-index.sh
 fi
+
+# ─── Generate counts.json (public API for external projects) ─────────
+
+cat > counts.json << COUNTSJSON
+{
+  "skills": $SKILL_COUNT,
+  "agents": $AGENT_COUNT,
+  "repos": $REPO_COUNT,
+  "commands": $COMMAND_COUNT,
+  "marketplaceSkills": $MARKET_SKILL_COUNT,
+  "marketplaceSkillsDisplay": "${MARKET_DISPLAY_PLUS}"
+}
+COUNTSJSON
+echo "  ✓ Generated counts.json"
 
 echo ""
 echo "─────────────────────────────────────────"
