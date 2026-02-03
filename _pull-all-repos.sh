@@ -8,7 +8,8 @@
 #   2. Pulls all marketplace submodules in plugins/marketplaces/
 #   3. Enforces no_push on all submodules (prevents accidental pushes)
 #   4. Pulls all git repos in your custom project directories (optional)
-#   5. Updates documentation counts if any repos changed (skills, agents, etc.)
+#   5. Fixes marketplace paths for current OS (cross-platform compatibility)
+#   6. Updates documentation counts if any repos changed (skills, agents, etc.)
 #
 # Features:
 #   - Pulls parent repo first, then all submodules, then custom directories
@@ -389,7 +390,16 @@ fi
 echo ""
 
 # =============================================================================
-# PHASE 5: Update documentation counts (if repos were updated)
+# PHASE 5: Fix marketplace paths (cross-platform compatibility)
+# =============================================================================
+if [[ "$STATUS_ONLY" == false ]] && [[ -f "$SCRIPT_DIR/scripts/fix-marketplace-paths.sh" ]]; then
+    echo ""
+    echo -e "${BOLD}Fixing marketplace paths:${NC}"
+    bash "$SCRIPT_DIR/scripts/fix-marketplace-paths.sh"
+fi
+
+# =============================================================================
+# PHASE 6: Update documentation counts (if repos were updated)
 # =============================================================================
 if [[ "$STATUS_ONLY" == false ]] && [[ -f "$SCRIPT_DIR/scripts/update-counts.sh" ]]; then
     if [[ $UPDATED -gt 0 ]] || [[ $FIXED_DETACHED -gt 0 ]]; then

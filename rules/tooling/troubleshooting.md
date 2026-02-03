@@ -15,6 +15,7 @@
 | Line ending errors          | Convert with `dos2unix` or configure Git: `git config --global core.autocrlf false` |
 | Notifications not working   | Ensure PowerShell execution policy allows scripts                                   |
 | `python3` not found         | Windows uses `python` not `python3` - use `node` for JSON validation                |
+| Plugin errors in `claude doctor` | Run `bash ~/.claude/scripts/fix-marketplace-paths.sh` (path format bug)          |
 
 ```powershell
 # Verify Git Bash is available
@@ -56,6 +57,50 @@ notify-send "Claude Code" "Test notification"
 
 # Check notification daemon
 systemctl --user status notification-daemon
+```
+
+---
+
+## Plugin Path Issues (Cross-Platform)
+
+### Issue: `claude doctor` Shows Plugin Errors
+
+**Symptoms:**
+
+```
+Plugin Errors
+└ 16 plugin error(s) detected:
+  └ agent-sdk-dev@claude-code-plugins: Plugin agent-sdk-dev not found in marketplace claude-code-plugins
+```
+
+**Cause:**
+
+Claude Code writes OS-specific paths to `~/.claude/plugins/known_marketplaces.json`. When using this repo across macOS/Linux/Windows, the paths can get corrupted:
+
+- macOS writes: `/Users/username/.claude/...`
+- Linux writes: `/home/username/.claude/...`
+- Windows writes: `C:\Users\username\.claude\...`
+
+If Claude Code writes wrong paths (e.g., macOS paths on Windows), plugins can't be found.
+
+**Fix:**
+
+```bash
+# Run the path fixer script
+bash ~/.claude/scripts/fix-marketplace-paths.sh
+
+# Then verify
+claude doctor
+```
+
+**Prevention:**
+
+The `known_marketplaces.json` file is gitignored (machine-specific), so it shouldn't sync between machines. The issue occurs when Claude Code itself writes incorrect paths.
+
+After running `claude plugins install` on a new machine, always run:
+
+```bash
+bash ~/.claude/scripts/fix-marketplace-paths.sh
 ```
 
 ---
