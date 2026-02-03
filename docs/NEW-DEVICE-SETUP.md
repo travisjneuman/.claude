@@ -2,7 +2,7 @@
 
 **CRITICAL: Run this process on EVERY new device to ensure correct configuration.**
 
-**Last Updated:** February 2026 (v2.3.1)
+**Last Updated:** February 2026 (v2.3.3)
 
 Works identically on: **Arch Linux** | **macOS** | **Windows (Git Bash)**
 
@@ -114,7 +114,7 @@ git remote -v
 
 # Check marketplace count
 ls -d ~/.claude/plugins/marketplaces/*/ | wc -l
-# Should show: 72
+# Should show: 67
 ```
 
 Or run the health check in Claude Code:
@@ -231,4 +231,4 @@ Note: since marketplace repos are fetched independently per machine, `git pull` 
 
 ---
 
-_Last updated: February 2026 (v2.3.1)_
+_Last updated: February 2026 (v2.3.3)_
