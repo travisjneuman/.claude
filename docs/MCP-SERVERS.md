@@ -2,7 +2,7 @@
 
 Model Context Protocol servers extend Claude's capabilities with external tools.
 
-**Last Updated:** February 2026 (v2.3.1)
+**Last Updated:** February 2026 (v2.3.3)
 
 **See also:** [MCP Server Management Guide](../rules/tooling/mcp-servers.md) for lifecycle management.
 

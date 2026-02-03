@@ -1,6 +1,6 @@
 # Claude Code Toolkit Documentation
 
-**Last Updated:** February 2026 (v2.3.1)
+**Last Updated:** February 2026 (v2.3.3)
 **Maintainer:** Travis J. Neuman
 **Purpose:** Portable, optimized Claude Code configuration for any project
 
@@ -52,7 +52,7 @@ Already set up? Jump to the section you need below.
 
 | Document                                               | What it covers                             |
 | ------------------------------------------------------ | ------------------------------------------ |
-| [MARKETPLACE-GUIDE.md](./MARKETPLACE-GUIDE.md)         | 72 marketplace repos, 5,000+ skills        |
+| [MARKETPLACE-GUIDE.md](./MARKETPLACE-GUIDE.md)         | 67 marketplace repos, 1,900+ skills        |
 | [PLUGIN-MANAGEMENT.md](./PLUGIN-MANAGEMENT.md)         | Plugin lifecycle, customization            |
 | [AUTO-CLAUDE-GUIDE.md](./AUTO-CLAUDE-GUIDE.md)         | Autonomous multi-agent coding              |
 | [CLAUDE-CODE-RESOURCES.md](./CLAUDE-CODE-RESOURCES.md) | Community resources and tips               |
@@ -65,16 +65,16 @@ Already set up? Jump to the section you need below.
 
 | Component           | Count  | Location                       |
 | ------------------- | ------ | ------------------------------ |
-| Local skills        | 72     | `skills/`                      |
+| Local skills        | 68     | `skills/`                      |
 | Agents              | 36     | `agents/`                      |
 | Commands            | 19     | `commands/`                    |
 | Rules files         | 17     | `rules/`                       |
-| Templates           | 12     | `templates/`                   |
+| Templates           | 9      | `templates/`                   |
 | Hooks               | 7      | `hooks/`                       |
 | MCP servers         | 9      | `.mcp.json`                    |
-| Marketplace repos   | 72     | `plugins/marketplaces/`        |
-| Marketplace skills  | 5,000+ | (across all marketplace repos) |
-| **Total git repos** | **73** | 1 parent + 72 submodules       |
+| Marketplace repos   | 67     | `plugins/marketplaces/`        |
+| Marketplace skills  | 1,900+ | (across all marketplace repos) |
+| **Total git repos** | **68** | 1 parent + 67 submodules       |
 
 ---
 
@@ -96,22 +96,25 @@ Already set up? Jump to the section you need below.
 
 This `~/.claude/` folder is a fully configured, portable Claude Code environment containing:
 
-- **72 local skills** for code review, design systems, feature development, domain expertise, and more
+- **68 local skills** for code review, design systems, feature development, domain expertise, and more
 - **36 agents** for specialized autonomous workflows
 - **19 slash commands** for workflow automation
 - **9 MCP server configurations** for extended capabilities (disabled by default to save context)
-- **72 marketplace repos** providing 5,000+ additional skills from the community
+- **67 marketplace repos** providing 1,900+ additional skills from the community
 - **7 hooks** for session lifecycle, safety guards, and auto-formatting
 - **17 rules files** for contextual guidance (checklists, stack patterns, tooling)
-- **12 templates** for task planning
+- **9 templates** for task planning
 
 ---
 
 ## History
 
+### v2.3.3 (February 2026)
+- Count accuracy fix: skills 72→68, marketplace skills 5,000+→1,900+, templates 12→9, version 2.3.1→2.3.3
+
 ### v2.3.1 (February 2026)
 
-- Updated counts across documentation (72 marketplace repos, 5,000+ skills, 7 hooks)
+- Updated counts across documentation (67 marketplace repos, 1,900+ skills, 7 hooks)
 - Documentation navigation overhaul
 
 ### v2.2 (January 2026)
