@@ -286,10 +286,14 @@ update_plugin_json() {
   local before
   before=$(md5sum "$file" 2>/dev/null || md5 "$file" 2>/dev/null)
 
-  # Update skills count
-  sedi -E "/\"skills\"/,/\"count\"/{s/\"count\": [0-9]+/\"count\": ${SKILL_COUNT}/}" "$file"
-  # Update agents count
-  sedi -E "/\"agents\"/,/\"count\"/{s/\"count\": [0-9]+/\"count\": ${AGENT_COUNT}/}" "$file"
+  # Update skills and agents counts using node for JSON safety
+  node -e "
+const fs = require('fs');
+const data = JSON.parse(fs.readFileSync('$file', 'utf-8'));
+if (data.components?.skills) data.components.skills.count = ${SKILL_COUNT};
+if (data.components?.agents) data.components.agents.count = ${AGENT_COUNT};
+fs.writeFileSync('$file', JSON.stringify(data, null, 2) + '\n');
+" 2>/dev/null || true
   # Update description line
   sedi -E "s/[0-9]+ local skills, [0-9]+ specialized agents/${SKILL_COUNT} local skills, ${AGENT_COUNT} specialized agents/" "$file"
   sedi -E "s/[0-9]+ local skills covering/${SKILL_COUNT} local skills covering/" "$file"
