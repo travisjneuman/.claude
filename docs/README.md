@@ -38,6 +38,7 @@ Already set up? Jump to the section you need below.
 | [workflow-automation.md](./workflow-automation.md) | Git hooks, templates, task enforcement      |
 | [GSD-TUTORIAL.md](./GSD-TUTORIAL.md)               | Get Shit Done multi-phase project system    |
 | [DOMAIN-ROUTING.md](./DOMAIN-ROUTING.md)           | How prompts route to skills/agents          |
+| [AGENT-TEAMS.md](./AGENT-TEAMS.md)                 | Agent teams: parallel sessions, composition |
 
 ### Setup and Operations
 
@@ -110,6 +111,7 @@ This `~/.claude/` folder is a fully configured, portable Claude Code environment
 ## History
 
 ### v2.3.3 (February 2026)
+
 - Count accuracy fix: skills 72→68, marketplace skills 5,000+→1,900+, templates 12→9, version 2.3.1→2.3.3
 
 ### v2.3.1 (February 2026)

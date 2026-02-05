@@ -17,7 +17,8 @@ rules/
 ├── workflows/                # Workflow methodologies
 │   ├── research-methodology.md  # Structured research with hypothesis tracking
 │   ├── action-policy.md      # PROACTIVE vs CONSERVATIVE mode configuration
-│   └── context-management.md # Context window, multi-window, state persistence
+│   ├── context-management.md # Context window, multi-window, state persistence
+│   └── agent-teams.md        # Agent Teams decision framework
 ├── stacks/                   # Tech stack patterns
 │   ├── react-typescript.md   # React + TypeScript
 │   ├── python.md             # Python projects
@@ -46,11 +47,12 @@ rules/
 
 ### Workflows (NEW in v2.0)
 
-| File                                | Read When...                                     |
-| ----------------------------------- | ------------------------------------------------ |
-| `workflows/research-methodology.md` | Researching, investigating, comparing approaches |
-| `workflows/context-management.md`   | Managing context, multi-window, state persistence |
-| `workflows/action-policy.md`        | Configuring behavior (PROACTIVE vs CONSERVATIVE) |
+| File                                | Read When...                                            |
+| ----------------------------------- | ------------------------------------------------------- |
+| `workflows/research-methodology.md` | Researching, investigating, comparing approaches        |
+| `workflows/context-management.md`   | Managing context, multi-window, state persistence       |
+| `workflows/action-policy.md`        | Configuring behavior (PROACTIVE vs CONSERVATIVE)        |
+| `workflows/agent-teams.md`          | Deciding between single session, subagents, agent teams |
 
 ### Stacks
 

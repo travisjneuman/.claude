@@ -1,4 +1,7 @@
 {
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  },
   "permissions": {
     "allow": [
       "SlashCommand(/run-prompt:*)",
@@ -90,10 +93,7 @@
       "mcp__sqlite__read_query",
       "mcp__sequential-thinking__*"
     ],
-    "deny": [
-      "mcp__filesystem__write_file",
-      "mcp__filesystem__delete_file"
-    ],
+    "deny": ["mcp__filesystem__write_file", "mcp__filesystem__delete_file"],
     "ask": [],
     "defaultMode": "bypassPermissions"
   },
