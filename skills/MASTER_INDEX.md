@@ -1,6 +1,6 @@
 # Skills Master Index
 
-> Auto-generated on 2026-02-03 18:23. Run `bash ~/.claude/scripts/regenerate-index.sh` to refresh.
+> Auto-generated on 2026-02-05 15:48. Run `bash ~/.claude/scripts/regenerate-index.sh` to refresh.
 
 ## Discovery Protocol
 
@@ -15,6 +15,7 @@
 | Skill | Description |
 | ----- | ----------- |
 | `_shared` | (no SKILL.md) |
+| `agent-teams` | name: agent-teams |
 | `ai-ml-development` | name: ai-ml-development |
 | `android-development` | name: android-development |
 | `api-design` | name: api-design |
@@ -24,8 +25,8 @@
 | `business-strategy` | name: business-strategy |
 | `codebase-documenter` | name: codebase-documenter |
 | `core-workflow` | name: core-workflow |
-| `database-expert` | name: database-expert |
 | `data-science` | name: data-science |
+| `database-expert` | name: database-expert |
 | `debug-systematic` | name: debug-systematic |
 | `devops-cloud` | name: devops-cloud |
 | `document-skills` | name: document-skills |
@@ -86,6 +87,6 @@
 
 ---
 
-## Marketplace: 1961 skills across 67 repos
+## Marketplace: 5128 skills across 72 repos
 
 Search: `find ~/.claude/plugins/marketplaces -name "SKILL.md" | xargs grep -li "<keyword>"`
