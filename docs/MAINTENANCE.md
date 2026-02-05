@@ -1,3 +1,9 @@
+---
+name: Maintenance
+description: Ongoing maintenance procedures for keeping skills, agents, marketplace repos, and configs up to date.
+category: operations
+---
+
 # Maintenance Guide
 
 Ongoing maintenance procedures to keep your Claude Code configuration clean and efficient.

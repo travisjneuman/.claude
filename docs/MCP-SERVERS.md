@@ -1,3 +1,9 @@
+---
+name: MCP Servers
+description: Configure and manage 9 MCP servers for browser testing, memory, databases, and structured reasoning.
+category: reference
+---
+
 # MCP Servers
 
 Model Context Protocol servers extend Claude's capabilities with external tools.
