@@ -1,3 +1,9 @@
+---
+name: Auto-Claude
+description: Autonomous multi-agent coding framework with git worktree isolation, spec generation, and QA validation.
+category: workflow
+---
+
 # Auto-Claude Integration Guide
 
 Complete setup and usage guide for Auto-Claude autonomous coding framework.

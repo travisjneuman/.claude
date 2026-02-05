@@ -1,3 +1,9 @@
+---
+name: Backup Strategies
+description: Backup and recovery procedures for gitignored session data, MCP memory, and local configuration.
+category: operations
+---
+
 # Backup Strategies for Gitignored Session Data
 
 > **Status:** Reference documentation for potential future implementation

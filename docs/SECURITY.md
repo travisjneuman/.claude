@@ -1,3 +1,9 @@
+---
+name: Security & Privacy
+description: Security decisions for public repository exposure, gitignored files, and sensitive data handling.
+category: operations
+---
+
 # Security & Privacy Documentation
 
 This document explains the security decisions made when this repository was made public, and why certain files are gitignored.
