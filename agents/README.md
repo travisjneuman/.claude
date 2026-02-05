@@ -34,6 +34,21 @@ Main Claude (Orchestrator)
 
 ---
 
+## Agent Teams (Experimental)
+
+Agent Teams coordinate multiple full Claude Code sessions working in parallel, each with its own 200k context window and inter-agent messaging. Unlike subagents (Task tool), teammates communicate directly with each other and persist independently.
+
+| Approach        | Context    | Communication               | Token Cost | Best For                           |
+| --------------- | ---------- | --------------------------- | ---------- | ---------------------------------- |
+| **Subagents**   | Own window | One-way (to caller)         | Low-Medium | Focused tasks, parallel search     |
+| **Agent Teams** | Own window | Two-way (between teammates) | High       | Research, review, cross-layer work |
+
+Use `/assemble-team` to quickly spawn a pre-built team, or describe the composition in natural language.
+
+See `~/.claude/docs/AGENT-TEAMS.md` for the full guide and `~/.claude/rules/workflows/agent-teams.md` for the decision framework.
+
+---
+
 ## Available Agents
 
 ### Code Quality
