@@ -1,3 +1,9 @@
+---
+name: Workflow Guide
+description: Development patterns, task management, context hygiene, and multi-session coordination strategies.
+category: workflow
+---
+
 # Workflow Guide
 
 Detailed patterns for getting work done with Claude Code.

@@ -1,3 +1,9 @@
+---
+name: GSD Tutorial
+description: Practical guide to the Get Shit Done system for multi-phase project management and task tracking.
+category: workflow
+---
+
 # GSD (Get Shit Done) Tutorial
 
 A practical guide to using the GSD system for multi-phase projects.

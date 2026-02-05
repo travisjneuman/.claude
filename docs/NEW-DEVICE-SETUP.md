@@ -1,3 +1,9 @@
+---
+name: New Device Setup
+description: One-command deployment to any new machine with cross-platform sync and marketplace initialization.
+category: setup
+---
+
 # New Device Setup Guide
 
 **CRITICAL: Run this process on EVERY new device to ensure correct configuration.**

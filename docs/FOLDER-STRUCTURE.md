@@ -1,3 +1,9 @@
+---
+name: Folder Structure
+description: Complete directory map of the .claude/ toolkit with file purposes, security notes, and organization rationale.
+category: reference
+---
+
 # Folder Structure
 
 Complete map of the `.claude/` folder and related files.

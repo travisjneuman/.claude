@@ -1,3 +1,9 @@
+---
+name: Domain Routing
+description: How prompts are automatically routed to the right skills, agents, and resources via /start-task.
+category: reference
+---
+
 # Domain Routing: How /start-task Works
 
 Understanding how your prompts get routed to the right resources.

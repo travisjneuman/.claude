@@ -1,3 +1,9 @@
+---
+name: Setup Guide
+description: Deploy the full toolkit to any machine with one-line git clone, cross-platform for macOS, Linux, and Windows.
+category: setup
+---
+
 # Setup Guide
 
 How to deploy this Claude Code configuration to a new machine.
