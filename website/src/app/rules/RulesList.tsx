@@ -5,7 +5,7 @@ import Modal from "@/components/ui/Modal";
 import FilterTabs from "@/components/ui/FilterTabs";
 import MarkdownContent from "@/components/ui/MarkdownContent";
 
-interface DocItem {
+interface RuleItem {
   slug: string;
   name: string;
   description: string;
@@ -14,25 +14,23 @@ interface DocItem {
   htmlContent: string;
 }
 
-interface DocsListProps {
-  docs: DocItem[];
+interface RulesListProps {
+  rules: RuleItem[];
   categories: string[];
 }
 
 const categoryColors: Record<string, string> = {
-  setup: "var(--accent-green)",
-  workflow: "var(--accent-purple)",
-  reference: "var(--accent-cyan)",
-  ecosystem: "var(--accent-yellow)",
-  operations: "var(--accent-pink)",
-  general: "var(--accent-blue)",
+  checklist: "var(--accent-green)",
+  stack: "var(--accent-purple)",
+  tooling: "var(--accent-cyan)",
+  workflow: "var(--accent-yellow)",
 };
 
-export default function DocsList({ docs, categories }: DocsListProps) {
-  const [selected, setSelected] = useState<DocItem | null>(null);
+export default function RulesList({ rules, categories }: RulesListProps) {
+  const [selected, setSelected] = useState<RuleItem | null>(null);
   const [filter, setFilter] = useState<string | null>(null);
 
-  const filtered = filter ? docs.filter((d) => d.category === filter) : docs;
+  const filtered = filter ? rules.filter((r) => r.category === filter) : rules;
 
   return (
     <>
@@ -40,22 +38,22 @@ export default function DocsList({ docs, categories }: DocsListProps) {
         <FilterTabs categories={categories} onFilter={setFilter} />
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        {filtered.map((doc) => {
-          const color = categoryColors[doc.category] || "var(--accent-purple)";
+        {filtered.map((rule) => {
+          const color = categoryColors[rule.category] || "var(--accent-purple)";
           return (
             <div
-              key={doc.slug}
+              key={rule.slug}
               className="glow-card p-5 group cursor-pointer"
-              onClick={() => setSelected(doc)}
+              onClick={() => setSelected(rule)}
             >
               <h3
                 className="font-semibold text-[var(--text-primary)] group-hover:text-white transition-colors mb-2"
                 style={{ fontSize: "15px" }}
               >
-                {doc.name}
+                {rule.name}
               </h3>
               <p className="text-sm text-[var(--text-muted)] line-clamp-2 leading-relaxed">
-                {doc.description}
+                {rule.description}
               </p>
               <div className="mt-3 flex items-center gap-2">
                 <span
@@ -65,7 +63,7 @@ export default function DocsList({ docs, categories }: DocsListProps) {
                     color,
                   }}
                 >
-                  {doc.category}
+                  {rule.category}
                 </span>
                 <span
                   className="text-[10px] font-mono px-2 py-0.5 rounded-md"
@@ -75,7 +73,7 @@ export default function DocsList({ docs, categories }: DocsListProps) {
                     color: "var(--accent-yellow)",
                   }}
                 >
-                  {doc.slug}.md
+                  {rule.slug.split("/").pop()}.md
                 </span>
               </div>
             </div>
@@ -84,14 +82,14 @@ export default function DocsList({ docs, categories }: DocsListProps) {
       </div>
       {filtered.length === 0 && (
         <p className="text-center text-[var(--text-muted)] mt-12">
-          No docs match this filter.
+          No rules match this filter.
         </p>
       )}
 
       <Modal open={!!selected} onClose={() => setSelected(null)}>
         {selected && (
           <>
-            <div className="flex items-center gap-3 mb-4">
+            <div className="flex items-center gap-3 mb-4 flex-wrap">
               <h2 className="text-xl font-bold text-[var(--text-primary)]">
                 {selected.name}
               </h2>
@@ -113,7 +111,7 @@ export default function DocsList({ docs, categories }: DocsListProps) {
                   color: "var(--accent-yellow)",
                 }}
               >
-                {selected.slug}.md
+                {selected.slug.split("/").pop()}.md
               </span>
             </div>
             <p className="text-sm text-[var(--text-secondary)] mb-6 leading-relaxed">

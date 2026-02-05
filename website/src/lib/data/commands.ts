@@ -1,12 +1,15 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import { remark } from "remark";
+import remarkHtml from "remark-html";
 
 export interface Command {
   slug: string;
   name: string;
   description: string;
   content: string;
+  htmlContent: string;
 }
 
 export function getCommands(): Command[] {
@@ -33,6 +36,10 @@ export function getCommands(): Command[] {
         .trim() ||
       slug;
 
+    const htmlResult = remark()
+      .use(remarkHtml)
+      .processSync(content.slice(0, 5000));
+
     commands.push({
       slug,
       name:
@@ -41,7 +48,8 @@ export function getCommands(): Command[] {
           .replace(/-/g, " ")
           .replace(/\b\w/g, (c: string) => c.toUpperCase()),
       description,
-      content: content.slice(0, 2000),
+      content: content.slice(0, 5000),
+      htmlContent: String(htmlResult),
     });
   }
 

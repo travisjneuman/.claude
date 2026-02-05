@@ -11,6 +11,7 @@ export const metadata = {
 
 export default function DocsPage() {
   const docs = getDocs();
+  const categories = [...new Set(docs.map((d) => d.category))].sort();
 
   return (
     <>
@@ -30,7 +31,7 @@ export default function DocsPage() {
             </p>
           </div>
 
-          <DocsList docs={docs} />
+          <DocsList docs={docs} categories={categories} />
 
           {docs.length === 0 && (
             <p className="text-center text-[var(--text-muted)] mt-12">
