@@ -1,3 +1,9 @@
+---
+name: Skills System
+description: Create, customize, and manage 73 local skills plus 5,100+ marketplace skills for any domain.
+category: reference
+---
+
 # Skills System
 
 How to use, create, and customize Claude Code skills.

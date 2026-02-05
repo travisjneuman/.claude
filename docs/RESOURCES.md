@@ -1,3 +1,9 @@
+---
+name: Resources
+description: Curated collection of external resources, community tools, and learning materials for Claude Code.
+category: ecosystem
+---
+
 # Claude Code Resources & Continuous Learning
 
 A curated collection of resources for expanding and optimizing Claude Code capabilities.

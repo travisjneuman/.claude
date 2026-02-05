@@ -1,3 +1,9 @@
+---
+name: Workflow Automation
+description: Git hooks, task enforcement, commit message validation, and pre-push testing automation.
+category: workflow
+---
+
 # Workflow Automation Guide
 
 **Version:** 4.0 (Consolidated)

@@ -1,3 +1,9 @@
+---
+name: Marketplace Guide
+description: Browse, install, and manage 72 community plugin marketplaces with 5,100+ additional skills.
+category: ecosystem
+---
+
 # Marketplace Guide
 
 Complete reference for the 72 plugin marketplaces and how to use them.

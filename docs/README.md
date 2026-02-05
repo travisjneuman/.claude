@@ -1,3 +1,9 @@
+---
+name: Documentation Index
+description: Navigation hub for all 23 guides covering setup, workflows, architecture, and operations.
+category: reference
+---
+
 # Claude Code Toolkit Documentation
 
 **Last Updated:** February 2026 (v2.3.3)
@@ -29,6 +35,9 @@ Already set up? Jump to the section you need below.
 | [CONFIGURATION.md](./CONFIGURATION.md)       | Settings, permissions, hooks, env files     |
 | [SKILLS.md](./SKILLS.md)                     | Skills system: creation, activation, format |
 | [MCP-SERVERS.md](./MCP-SERVERS.md)           | 9 MCP servers: when to enable, token cost   |
+| [ARCHITECTURE.md](./ARCHITECTURE.md)         | How all components interact as a system     |
+| [GLOSSARY.md](./GLOSSARY.md)                 | Definitions of all toolkit terms            |
+| [FAQ.md](./FAQ.md)                           | Common questions answered                   |
 
 ### Workflows and Guides
 
@@ -48,17 +57,17 @@ Already set up? Jump to the section you need below.
 | [NEW-DEVICE-SETUP.md](./NEW-DEVICE-SETUP.md)   | Cloning to a new machine, marketplace init |
 | [MAINTENANCE.md](./MAINTENANCE.md)             | Cleanup, repo pulls, space audits          |
 | [BACKUP-STRATEGIES.md](./BACKUP-STRATEGIES.md) | Backup procedures and recovery             |
+| [SECURITY.md](./SECURITY.md)                   | Security audit decisions, gitignore policy |
 
 ### Ecosystem
 
-| Document                                               | What it covers                             |
-| ------------------------------------------------------ | ------------------------------------------ |
-| [MARKETPLACE-GUIDE.md](./MARKETPLACE-GUIDE.md)         | 67 marketplace repos, 1,900+ skills        |
-| [PLUGIN-MANAGEMENT.md](./PLUGIN-MANAGEMENT.md)         | Plugin lifecycle, customization            |
-| [AUTO-CLAUDE-GUIDE.md](./AUTO-CLAUDE-GUIDE.md)         | Autonomous multi-agent coding              |
-| [CLAUDE-CODE-RESOURCES.md](./CLAUDE-CODE-RESOURCES.md) | Community resources and tips               |
-| [RESOURCES.md](./RESOURCES.md)                         | External links and references              |
-| [SECURITY.md](./SECURITY.md)                           | Security audit decisions, gitignore policy |
+| Document                                               | What it covers                      |
+| ------------------------------------------------------ | ----------------------------------- |
+| [MARKETPLACE-GUIDE.md](./MARKETPLACE-GUIDE.md)         | 72 marketplace repos, 5,100+ skills |
+| [PLUGIN-MANAGEMENT.md](./PLUGIN-MANAGEMENT.md)         | Plugin lifecycle, customization     |
+| [AUTO-CLAUDE-GUIDE.md](./AUTO-CLAUDE-GUIDE.md)         | Autonomous multi-agent coding       |
+| [CLAUDE-CODE-RESOURCES.md](./CLAUDE-CODE-RESOURCES.md) | Community resources and tips        |
+| [RESOURCES.md](./RESOURCES.md)                         | External links and references       |
 
 ---
 
@@ -66,16 +75,16 @@ Already set up? Jump to the section you need below.
 
 | Component           | Count  | Location                       |
 | ------------------- | ------ | ------------------------------ |
-| Local skills        | 68     | `skills/`                      |
+| Local skills        | 73     | `skills/`                      |
 | Agents              | 36     | `agents/`                      |
-| Commands            | 19     | `commands/`                    |
-| Rules files         | 17     | `rules/`                       |
-| Templates           | 9      | `templates/`                   |
+| Commands            | 20     | `commands/`                    |
+| Rules files         | 18     | `rules/`                       |
+| Templates           | 10     | `templates/`                   |
 | Hooks               | 7      | `hooks/`                       |
 | MCP servers         | 9      | `.mcp.json`                    |
-| Marketplace repos   | 67     | `plugins/marketplaces/`        |
-| Marketplace skills  | 1,900+ | (across all marketplace repos) |
-| **Total git repos** | **68** | 1 parent + 67 submodules       |
+| Marketplace repos   | 72     | `plugins/marketplaces/`        |
+| Marketplace skills  | 5,100+ | (across all marketplace repos) |
+| **Total git repos** | **73** | 1 parent + 72 submodules       |
 
 ---
 
@@ -97,14 +106,14 @@ Already set up? Jump to the section you need below.
 
 This `~/.claude/` folder is a fully configured, portable Claude Code environment containing:
 
-- **68 local skills** for code review, design systems, feature development, domain expertise, and more
+- **73 local skills** for code review, design systems, feature development, domain expertise, and more
 - **36 agents** for specialized autonomous workflows
-- **19 slash commands** for workflow automation
+- **20 slash commands** for workflow automation
 - **9 MCP server configurations** for extended capabilities (disabled by default to save context)
-- **67 marketplace repos** providing 1,900+ additional skills from the community
+- **72 marketplace repos** providing 5,100+ additional skills from the community
 - **7 hooks** for session lifecycle, safety guards, and auto-formatting
-- **17 rules files** for contextual guidance (checklists, stack patterns, tooling)
-- **9 templates** for task planning
+- **18 rules files** for contextual guidance (checklists, stack patterns, tooling)
+- **10 templates** for task planning and component creation
 
 ---
 
@@ -112,7 +121,11 @@ This `~/.claude/` folder is a fully configured, portable Claude Code environment
 
 ### v2.3.3 (February 2026)
 
-- Count accuracy fix: skills 72→68, marketplace skills 5,000+→1,900+, templates 12→9, version 2.3.1→2.3.3
+- Documentation overhaul: added FAQ, Architecture Overview, Glossary
+- Expanded hooks README with detailed per-hook documentation
+- Added frontmatter metadata to all docs for website display
+- Count reconciliation: skills 68→73, marketplace repos 67→72, marketplace skills 1,900+→5,100+
+- Agent Teams integration with docs, skill, command, and auto-routing
 
 ### v2.3.1 (February 2026)
 
@@ -153,4 +166,5 @@ See [CHANGELOG.md](../CHANGELOG.md) for full details.
 
 - **Claude Code docs:** https://code.claude.com/docs
 - **Community resources:** See [CLAUDE-CODE-RESOURCES.md](./CLAUDE-CODE-RESOURCES.md)
+- **FAQ:** See [FAQ.md](./FAQ.md)
 - **Diagnostics:** Run `/health-check` in Claude Code

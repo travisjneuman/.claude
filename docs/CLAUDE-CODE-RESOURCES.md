@@ -1,3 +1,9 @@
+---
+name: Quick Reference
+description: Essential Claude Code optimization tips, keyboard shortcuts, and productivity patterns.
+category: reference
+---
+
 # Claude Code Resources
 
 Quick reference for Claude Code optimization.

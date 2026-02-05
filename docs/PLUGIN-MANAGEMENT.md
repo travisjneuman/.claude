@@ -1,3 +1,9 @@
+---
+name: Plugin Management
+description: Create custom plugins, manage marketplace installations, and troubleshoot plugin discovery issues.
+category: ecosystem
+---
+
 # Plugin Management Guide
 
 **Last Updated:** February 2026 (v2.3.3)
