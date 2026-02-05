@@ -38,11 +38,11 @@ Multi-phase: `/gsd:progress` or `/gsd:new-project`. Details: `docs/WORKFLOW-GUID
 
 ## Tool Policy
 
-| Instead of...        | Use...        |
-| -------------------- | ------------- |
-| `cat`, `head`, `tail`| **Read** tool |
-| `grep`, `rg`         | **Grep** tool |
-| `find`, `ls`         | **Glob** tool |
+| Instead of...         | Use...        |
+| --------------------- | ------------- |
+| `cat`, `head`, `tail` | **Read** tool |
+| `grep`, `rg`          | **Grep** tool |
+| `find`, `ls`          | **Glob** tool |
 
 Context: `/clear` between tasks, `/compact` at 50%, `/context` to monitor.
 Parallel calls: make ALL independent tool calls in a single message.
@@ -90,24 +90,27 @@ YOU MUST automatically load the right resources based on the user's prompt — e
 
 **Always load matching satellite files using Read tool:**
 
-| Prompt contains | YOU MUST Read |
-| --------------- | ------------- |
-| Completing/verifying work | `rules/checklists/verification-template.md` |
-| UI, visual, CSS, styling, frontend | `rules/checklists/ui-visual-changes.md` |
-| Script, automation, batch | `rules/checklists/automation-scripts.md` |
-| HTML, static site | `rules/checklists/static-sites.md` |
-| Research, investigate, compare | `rules/workflows/research-methodology.md` |
-| React, TypeScript, Python, Go, Rust | Matching file in `rules/stacks/` |
-| MCP, server protocol | `rules/tooling/mcp-servers.md` |
-| Error, bug, broken, fix | `rules/tooling/troubleshooting.md` |
-| Specialized domain work | `skills/MASTER_INDEX.md` → find and invoke matching skill |
+| Prompt contains                     | YOU MUST Read                                             |
+| ----------------------------------- | --------------------------------------------------------- |
+| Completing/verifying work           | `rules/checklists/verification-template.md`               |
+| UI, visual, CSS, styling, frontend  | `rules/checklists/ui-visual-changes.md`                   |
+| Script, automation, batch           | `rules/checklists/automation-scripts.md`                  |
+| HTML, static site                   | `rules/checklists/static-sites.md`                        |
+| Research, investigate, compare      | `rules/workflows/research-methodology.md`                 |
+| React, TypeScript, Python, Go, Rust | Matching file in `rules/stacks/`                          |
+| MCP, server protocol                | `rules/tooling/mcp-servers.md`                            |
+| Error, bug, broken, fix             | `rules/tooling/troubleshooting.md`                        |
+| Team, parallel, coordinate agents   | `rules/workflows/agent-teams.md`                          |
+| Specialized domain work             | `skills/MASTER_INDEX.md` → find and invoke matching skill |
 
 **Auto-use tools based on prompt intent — no slash command needed:**
+
 - Coding task → use Task tool with appropriate agent (explore, plan, or specialist)
 - Bug report → use debugging-specialist or debug-systematic skill
 - Code review → use pr-review-toolkit agents
 - Research question → use WebSearch immediately
 - Complex feature → suggest EnterPlanMode or /auto-claude
+- Team/parallel work request → suggest Agent Teams with /assemble-team
 
 **Skill/agent discovery:** When a prompt touches a specialized domain, search local skills first (`skills/MASTER_INDEX.md`), then marketplace (`find ~/.claude/plugins/marketplaces -name "SKILL.md" | xargs grep -li "<keyword>"`).
 
