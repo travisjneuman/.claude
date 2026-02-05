@@ -40,6 +40,7 @@ export default function AgentsPage() {
               model: a.model,
               tools: a.tools,
               content: a.content,
+              htmlContent: a.htmlContent,
             }))}
             categories={categories}
           />

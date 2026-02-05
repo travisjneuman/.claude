@@ -4,6 +4,7 @@ import { useState } from "react";
 import FilterTabs from "@/components/ui/FilterTabs";
 import GlowCard from "@/components/ui/GlowCard";
 import Modal from "@/components/ui/Modal";
+import MarkdownContent from "@/components/ui/MarkdownContent";
 
 interface SkillItem {
   slug: string;
@@ -11,6 +12,7 @@ interface SkillItem {
   description: string;
   category: string;
   content: string;
+  htmlContent: string;
 }
 
 interface SkillsGridProps {
@@ -69,9 +71,7 @@ export default function SkillsGrid({ skills, categories }: SkillsGridProps) {
             <p className="text-sm text-[var(--text-secondary)] mb-6 leading-relaxed">
               {selected.description}
             </p>
-            <pre className="text-sm text-[var(--text-muted)] whitespace-pre-wrap font-mono leading-relaxed bg-[var(--surface-elevated)] rounded-lg p-4 border border-[var(--border)]">
-              {selected.content}
-            </pre>
+            <MarkdownContent content={selected.htmlContent} />
           </>
         )}
       </Modal>

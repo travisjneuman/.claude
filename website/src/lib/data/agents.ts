@@ -1,6 +1,8 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import { remark } from "remark";
+import remarkHtml from "remark-html";
 
 export interface Agent {
   slug: string;
@@ -10,6 +12,7 @@ export interface Agent {
   tools: string[];
   category: string;
   content: string;
+  htmlContent: string;
 }
 
 const AGENT_CATEGORIES: Record<string, string> = {
@@ -80,6 +83,10 @@ export function getAgents(): Agent[] {
         .trim() ||
       slug;
 
+    const htmlResult = remark()
+      .use(remarkHtml)
+      .processSync(content.slice(0, 5000));
+
     agents.push({
       slug,
       name:
@@ -91,7 +98,8 @@ export function getAgents(): Agent[] {
       model: data.model || "sonnet",
       tools: data.tools || [],
       category: categorizeAgent(slug),
-      content: content.slice(0, 2000),
+      content: content.slice(0, 5000),
+      htmlContent: String(htmlResult),
     });
   }
 
@@ -107,6 +115,7 @@ export function getAgentBySlug(slug: string): Agent | null {
   const raw = fs.readFileSync(file, "utf-8");
   const { data, content } = matter(raw);
   const firstLine = content.trim().split("\n")[0] || "";
+  const htmlResult = remark().use(remarkHtml).processSync(content);
 
   return {
     slug,
@@ -124,5 +133,6 @@ export function getAgentBySlug(slug: string): Agent | null {
     tools: data.tools || [],
     category: categorizeAgent(slug),
     content,
+    htmlContent: String(htmlResult),
   };
 }

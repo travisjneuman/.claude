@@ -1,6 +1,8 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import { remark } from "remark";
+import remarkHtml from "remark-html";
 
 export interface Skill {
   slug: string;
@@ -8,6 +10,7 @@ export interface Skill {
   description: string;
   category: string;
   content: string;
+  htmlContent: string;
 }
 
 const SKILL_CATEGORIES: Record<string, string> = {
@@ -113,6 +116,10 @@ export function getSkills(): Skill[] {
             .trim() ||
           entry.name;
 
+        const htmlResult = remark()
+          .use(remarkHtml)
+          .processSync(content.slice(0, 5000));
+
         skills.push({
           slug,
           name:
@@ -122,7 +129,8 @@ export function getSkills(): Skill[] {
               .replace(/\b\w/g, (c: string) => c.toUpperCase()),
           description,
           category: categorize(entry.name),
-          content: content.slice(0, 2000),
+          content: content.slice(0, 5000),
+          htmlContent: String(htmlResult),
         });
       }
 
@@ -146,6 +154,8 @@ export function getSkillBySlug(slug: string): Skill | null {
   const { data, content } = matter(raw);
   const firstLine = content.trim().split("\n")[0] || "";
 
+  const htmlResult = remark().use(remarkHtml).processSync(content);
+
   return {
     slug,
     name:
@@ -160,5 +170,6 @@ export function getSkillBySlug(slug: string): Skill | null {
       slug,
     category: categorize(slug),
     content,
+    htmlContent: String(htmlResult),
   };
 }

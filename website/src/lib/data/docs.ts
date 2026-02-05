@@ -1,12 +1,16 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import { remark } from "remark";
+import remarkHtml from "remark-html";
 
 export interface DocPage {
   slug: string;
   name: string;
   description: string;
+  category: string;
   content: string;
+  htmlContent: string;
 }
 
 export function getDocs(): DocPage[] {
@@ -33,6 +37,8 @@ export function getDocs(): DocPage[] {
         .trim() ||
       slug;
 
+    const htmlResult = remark().use(remarkHtml).processSync(content);
+
     docs.push({
       slug,
       name:
@@ -41,7 +47,9 @@ export function getDocs(): DocPage[] {
           .replace(/-/g, " ")
           .replace(/\b\w/g, (c: string) => c.toUpperCase()),
       description,
-      content: content.slice(0, 3000),
+      category: data.category || "general",
+      content: content.slice(0, 5000),
+      htmlContent: String(htmlResult),
     });
   }
 
