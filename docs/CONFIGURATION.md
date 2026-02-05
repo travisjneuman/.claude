@@ -1,3 +1,9 @@
+---
+name: Configuration
+description: Complete reference for settings.json, CLAUDE.md, hooks, MCP servers, and permission configuration.
+category: reference
+---
+
 # Configuration Files
 
 Detailed documentation of all configuration files and their settings.

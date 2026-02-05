@@ -1,3 +1,9 @@
+---
+name: Agent Teams
+description: Coordinate multiple Claude Code sessions working together as a team with shared task lists and messaging.
+category: workflow
+---
+
 # Agent Teams Guide
 
 Coordinate multiple Claude Code sessions working together as a team.
