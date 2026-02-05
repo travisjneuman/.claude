@@ -33,7 +33,7 @@ Display comprehensive categorized skill overview:
 
 ---
 
-## Local Skills (72 total)
+## Local Skills (73 total)
 
 ### Foundation
 
@@ -219,4 +219,4 @@ Just describe your task - skills auto-activate based on description matching.
 
 ---
 
-_72 local skills + 72 marketplaces (5,100+ skills) = comprehensive coverage for any domain_
+_73 local skills + 72 marketplaces (5,100+ skills) = comprehensive coverage for any domain_
