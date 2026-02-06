@@ -8,7 +8,6 @@ category: workflow
 
 Coordinate multiple Claude Code sessions working together as a team.
 
-**Status:** Experimental (enabled via `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS` env var)
 **Last Updated:** February 2026
 
 ---
@@ -100,6 +99,50 @@ sudo apt install tmux
 
 ---
 
+## Core Tools
+
+Agent Teams rely on three tool groups. The team lead orchestrates everything.
+
+### Teammate Tool
+
+Creates and manages the team lifecycle.
+
+| Operation   | What It Does                                             |
+| ----------- | -------------------------------------------------------- |
+| `spawnTeam` | Creates a team with a name and description               |
+| `cleanup`   | Removes team and task directories after all members stop |
+
+The lead calls `spawnTeam` first, then spawns individual teammates via the Task tool with `team_name` and `name` parameters. Each teammate joins the team and gains access to the shared task list.
+
+### SendMessage Tool
+
+Handles all inter-agent communication.
+
+| Message Type             | Use Case                                      |
+| ------------------------ | --------------------------------------------- |
+| `message`                | Direct message to a specific teammate by name |
+| `broadcast`              | Send to all teammates at once (use sparingly) |
+| `shutdown_request`       | Ask a teammate to gracefully shut down        |
+| `shutdown_response`      | Teammate approves or rejects shutdown         |
+| `plan_approval_response` | Lead approves or rejects a teammate's plan    |
+
+Messages are delivered automatically. The lead does not need to poll for responses.
+
+### Task Tools (TaskCreate, TaskUpdate, TaskList, TaskGet)
+
+Shared task list for coordination. All teammates can read the list and claim tasks.
+
+| Tool         | Purpose                                                   |
+| ------------ | --------------------------------------------------------- |
+| `TaskCreate` | Add a new task with subject, description, and activeForm  |
+| `TaskUpdate` | Set status (pending/in_progress/completed), owner, blocks |
+| `TaskList`   | View all tasks with status, owner, and dependency info    |
+| `TaskGet`    | Read full details of a specific task by ID                |
+
+Tasks support dependencies: `addBlocks` and `addBlockedBy` prevent work from starting before prerequisites complete.
+
+---
+
 ## Starting a Team
 
 Tell Claude to create a team in natural language. Describe the task and the team structure you want:
@@ -113,6 +156,16 @@ Have them each review and report findings.
 ```
 
 Claude creates the team, spawns teammates, assigns tasks, and coordinates work.
+
+### What Happens Under the Hood
+
+1. Lead calls `Teammate(spawnTeam)` to create the team
+2. Lead uses `TaskCreate` to define the work items
+3. Lead spawns teammates via the Task tool with `team_name` and `name`
+4. Each teammate reads the task list, claims work via `TaskUpdate`
+5. Teammates communicate findings via `SendMessage`
+6. Lead synthesizes results and sends `shutdown_request` to each teammate
+7. After all teammates confirm shutdown, lead calls `Teammate(cleanup)`
 
 ---
 
@@ -208,24 +261,49 @@ Each teammate is a full Claude Code session. Select a teammate with Shift+Up/Dow
 
 ### Task Management
 
-The shared task list coordinates work. Tasks have three states: pending, in progress, and completed. Tasks can depend on other tasks.
+The shared task list coordinates work via TaskCreate, TaskUpdate, and TaskList. Tasks have three states: pending, in_progress, and completed. Tasks support dependency chains via `addBlocks`/`addBlockedBy`.
 
-- **Lead assigns**: tell the lead which task to give to which teammate
-- **Self-claim**: after finishing, a teammate picks up the next unassigned, unblocked task
+**Two assignment models:**
 
-### Shut Down
+- **Lead assigns**: Lead uses `TaskUpdate` to set `owner` on each task
+- **Self-claim**: Teammates call `TaskList`, find unassigned/unblocked tasks, and claim them with `TaskUpdate`
+
+**Practical example -- lead creates tasks:**
+
+```
+Create these tasks for the team:
+1. "Design API schema" - assign to architect
+2. "Implement endpoints" - blocked by task 1, assign to backend-dev
+3. "Write integration tests" - blocked by task 2, assign to tester
+```
+
+The lead calls TaskCreate for each, then TaskUpdate to set dependencies and owners.
+
+### Shutdown Protocol
+
+Teammates must be shut down gracefully before the team can be cleaned up. The lead sends a shutdown request; the teammate responds.
+
+**Step 1 -- Lead requests shutdown:**
 
 ```
 Ask the researcher teammate to shut down
 ```
 
-When done with all work:
+The lead calls `SendMessage` with `type: "shutdown_request"` and `recipient: "researcher"`.
+
+**Step 2 -- Teammate responds:**
+
+The teammate receives a JSON message with `type: "shutdown_request"` and a `requestId`. It calls `SendMessage` with `type: "shutdown_response"`, `request_id`, and `approve: true` to confirm. The teammate's process then terminates.
+
+**Step 3 -- Lead cleans up:**
+
+After all teammates have confirmed shutdown, the lead calls `Teammate(cleanup)` to remove team and task directories.
 
 ```
 Clean up the team
 ```
 
-Always use the lead to clean up. Shut down all teammates first.
+Calling cleanup while teammates are still active will fail. Always shut down all teammates first.
 
 ---
 
@@ -235,11 +313,25 @@ Always use the lead to clean up. Shut down all teammates first.
 | ------------- | ---------------------------------------------------------------- |
 | Team config   | `~/.claude/teams/{team-name}/config.json`                        |
 | Task list     | `~/.claude/tasks/{team-name}/`                                   |
-| Communication | Automatic message delivery between agents                        |
+| Communication | SendMessage tool with automatic delivery                         |
 | Permissions   | Teammates inherit lead's permission settings                     |
 | Context       | Each teammate loads CLAUDE.md, MCP servers, skills independently |
 
 Teammates do NOT inherit the lead's conversation history. Include task-specific details in the spawn prompt.
+
+### Team Config File
+
+The config file at `~/.claude/teams/{team-name}/config.json` contains a `members` array. Each entry has:
+
+- `name` -- human-readable name (use this for messaging and task assignment)
+- `agentId` -- unique identifier (for reference only)
+- `agentType` -- role/type of the agent
+
+Teammates can read this file to discover other team members and send direct messages by name.
+
+### Idle State
+
+Teammates go idle after every turn. This is normal and expected -- it means they finished processing and are waiting for input. An idle notification does not mean the teammate is done or stuck. Sending a message to an idle teammate wakes them up immediately.
 
 ---
 
@@ -271,15 +363,16 @@ The `auto` teammate mode handles all platforms automatically. No per-machine con
 
 ## Limitations
 
-Agent Teams are experimental. Current limitations:
+Current limitations:
 
 - **No session resumption**: `/resume` and `/rewind` don't restore in-process teammates
-- **Task status can lag**: teammates sometimes fail to mark tasks as completed
+- **Task status can lag**: teammates sometimes fail to mark tasks as completed; lead should verify via TaskList
 - **One team per session**: clean up before starting a new team
 - **No nested teams**: teammates cannot spawn their own teams
-- **Lead is fixed**: can't promote a teammate to lead
+- **Lead is fixed**: cannot promote a teammate to lead mid-session
 - **Permissions set at spawn**: teammates start with lead's permission mode
-- **High token cost**: each teammate is a separate Claude instance
+- **High token cost**: each teammate is a separate Claude instance (N teammates = ~Nx token cost)
+- **Context compaction can lose task state**: if a teammate's context compacts, it may lose awareness of assigned tasks; re-send task details via SendMessage if needed
 
 ---
 

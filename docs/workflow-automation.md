@@ -6,9 +6,8 @@ category: workflow
 
 # Workflow Automation Guide
 
-**Version:** 4.0 (Consolidated)
 **Last Updated:** February 2026 (v2.3.3)
-**Purpose:** Complete workflow compliance guide - checklists + automation tools
+**Purpose:** Complete workflow compliance guide -- checklists + automation tools
 
 ---
 
@@ -660,17 +659,83 @@ If GSD project turns out simpler than expected:
 
 ---
 
-## Related Documentation
+## End-to-End Example
 
-- `CLAUDE.md` - Complete workflow rules
-- `.claude/templates/task-template.md` - Task file template
-- `.claude/skills/README.md` - Available skills
-- `.claude/commands/` - Custom commands
-- `.claude/commands/gsd/help.md` - GSD command reference
+Here is a complete walkthrough of the workflow for adding a search feature to a project.
+
+**1. Create task file:**
+
+```bash
+cp .claude/templates/task-template.md tasks/add-search-functionality.md
+```
+
+**2. Fill out the plan in the task file:**
+
+```markdown
+## Overview
+
+Add full-text search to the notes app using Fuse.js for client-side fuzzy matching.
+
+## Files to Read
+
+- src/stores/noteStore.ts (current data model)
+- src/components/NoteList.tsx (where search input goes)
+
+## Proposed Changes
+
+- Create: src/hooks/useSearch.ts
+- Modify: src/components/NoteList.tsx (add search input)
+- Modify: package.json (add fuse.js dependency)
+
+## Todo
+
+- [ ] Install fuse.js
+- [ ] Create useSearch hook
+- [ ] Add search input to NoteList
+- [ ] Test with empty query, partial match, no results
+```
+
+**3. Get approval, then implement. Update todos as you go:**
+
+```markdown
+- [x] Install fuse.js
+- [x] Create useSearch hook
+- [ ] Add search input to NoteList ← IN PROGRESS
+- [ ] Test with empty query, partial match, no results
+```
+
+**4. Fill review section when done:**
+
+```markdown
+## Review
+
+- Created useSearch hook with debounced input (150ms)
+- Search covers title and body fields
+- Empty query returns all notes
+- Tested: empty, partial, no results, special characters
+- Bundle size impact: +4.2kb gzipped (fuse.js)
+```
+
+**5. Stage and commit:**
+
+```bash
+git add src/hooks/useSearch.ts src/components/NoteList.tsx package.json package-lock.json
+git add tasks/add-search-functionality.md
+git commit -m "feat: Add fuzzy search to notes list"
+```
 
 ---
 
-**Version:** 5.0 (Added Workflow Selection Guide with GSD integration)
-**Last Updated:** December 2025
+## Related Documentation
+
+- [WORKFLOW-GUIDE.md](./WORKFLOW-GUIDE.md) - Workflow patterns and routing
+- [GSD-TUTORIAL.md](./GSD-TUTORIAL.md) - Multi-phase project management
+- `~/.claude/CLAUDE.md` - Core workflow rules
+- `~/.claude/templates/task-template.md` - Task file template
+- `~/.claude/skills/README.md` - Available skills (73 skills)
+- `~/.claude/commands/` - Custom commands (20 commands)
+- `~/.claude/commands/gsd/help.md` - GSD command reference
+
+---
 
 **Remember:** These tools exist to help, not hinder. Follow the workflow for smoother, more consistent development.

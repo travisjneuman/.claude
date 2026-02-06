@@ -291,16 +291,89 @@ Claude: [Spawns database-architect agent]
 
 User: /gsd:progress
 
-Claude: Schema designed ✓. Next: Create migrations...
+Claude: Schema designed. Next: Create migrations...
+```
+
+---
+
+## Example: Multi-Session Continuity
+
+GSD's main strength is persistence across sessions. Here is how that works in practice.
+
+**Session 1 (evening):**
+
+```
+User: /gsd:new-project Build authentication system with OAuth, email/password, and MFA
+
+Claude: Created .planning/STATE.md with 5 phases:
+  Phase 1: Database schema and user model
+  Phase 2: Email/password auth flow
+  Phase 3: OAuth provider integration
+  Phase 4: MFA (TOTP) implementation
+  Phase 5: Testing and hardening
+
+[Works through Phase 1 and part of Phase 2]
+
+User: /gsd:pause-work
+
+Claude: State saved. You're midway through Phase 2:
+  - Login endpoint: complete
+  - Registration endpoint: complete
+  - Password reset flow: not started
+  - Session management: not started
+```
+
+**Session 2 (next day):**
+
+```
+User: /gsd:resume-work
+
+Claude: Restored context from .planning/STATE.md.
+  Phase 2: Email/password auth (60% complete)
+  Next action: Implement password reset flow
+
+[Continues exactly where you left off]
+```
+
+---
+
+## Example: Combining GSD with Agent Teams
+
+For large phases, spawn an agent team to parallelize within a single GSD phase.
+
+```
+User: /gsd:progress
+
+Claude: Phase 3 (Frontend Components) is next. This phase has 4 independent deliverables:
+  - Login page
+  - Registration page
+  - Profile settings page
+  - Password reset page
+
+User: Use an agent team for this phase. One teammate per page.
+
+Claude: [Creates agent team with 4 teammates]
+  - login-dev: builds src/pages/login/
+  - register-dev: builds src/pages/register/
+  - profile-dev: builds src/pages/profile/
+  - reset-dev: builds src/pages/reset/
+
+[Each teammate works in parallel on separate files]
+[Lead synthesizes results and marks Phase 3 complete]
+
+User: /gsd:progress
+
+Claude: Phase 3 complete. Phase 4 (Testing) is next.
 ```
 
 ---
 
 ## Related Documentation
 
-- `CLAUDE.md` - Core workflow rules
-- `README.md` - Full toolkit overview
-- `rules/tooling/external-repos.md` - GSD plugin location
+- [WORKFLOW-GUIDE.md](./WORKFLOW-GUIDE.md) - Workflow patterns and routing
+- [AGENT-TEAMS.md](./AGENT-TEAMS.md) - Parallel team coordination
+- `~/.claude/CLAUDE.md` - Core workflow rules
+- `~/.claude/rules/tooling/external-repos.md` - GSD plugin location
 
 ---
 
