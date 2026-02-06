@@ -14,7 +14,7 @@ Helper scripts for setup, maintenance, and automation of the Claude Code toolkit
 | ---------------------- | --------------------------------------------- | ---------------------------------------------- |
 | `install.sh`           | One-line installer (curl-pipe)                | First-time setup on any machine                |
 | `setup-new-machine.sh` | Complete setup (plugins, hooks, verification) | After cloning the repo                         |
-| `init-marketplaces.sh` | Clone all 67 marketplace repos from upstreams | After cloning, or to fix broken submodules     |
+| `init-marketplaces.sh` | Clone all 72 marketplace repos from upstreams | After cloning, or to fix broken submodules     |
 | `setup-hooks.sh`       | Install git hooks into `.git/hooks/`          | After cloning (called by setup-new-machine.sh) |
 
 ### Maintenance (run periodically)
@@ -64,7 +64,7 @@ These are different from the Claude Code lifecycle hooks in `~/.claude/hooks/`. 
 
 1. Initializes any unregistered submodules
 2. Pulls the parent repo
-3. Pulls all 67 marketplace repos
+3. Pulls all 72 marketplace repos
 4. Enforces `no_push` on marketplace repos
 5. Protects parent repo push URL
 6. Pulls custom project directories (from `.env.local`)
