@@ -15,14 +15,14 @@
 <!-- Primary Resource Badges -->
 
 [![Claude Code](https://img.shields.io/badge/Claude_Code-6366f1?style=for-the-badge&logo=anthropic&logoColor=white)](https://docs.anthropic.com/en/docs/claude-code)
-[![Skills](https://img.shields.io/badge/Skills-72-10b981?style=for-the-badge&logo=sparkles&logoColor=white)](./skills/MASTER_INDEX.md)
+[![Skills](https://img.shields.io/badge/Skills-73-10b981?style=for-the-badge&logo=sparkles&logoColor=white)](./skills/MASTER_INDEX.md)
 [![Agents](https://img.shields.io/badge/Agents-36-f59e0b?style=for-the-badge&logo=dependabot&logoColor=white)](./agents/README.md)
 [![Marketplaces](https://img.shields.io/badge/Marketplaces-72-3b82f6?style=for-the-badge&logo=homeassistantcommunitystore&logoColor=white)](./docs/MARKETPLACE-GUIDE.md)
-[![Marketplace Skills](https://img.shields.io/badge/Marketplace_Skills-5,000+-ec4899?style=for-the-badge&logo=stackblitz&logoColor=white)](./plugins/marketplaces/)
+[![Marketplace Skills](https://img.shields.io/badge/Marketplace_Skills-5,100+-ec4899?style=for-the-badge&logo=stackblitz&logoColor=white)](./plugins/marketplaces/)
 
 <!-- Secondary Resource Badges -->
 
-[![Commands](https://img.shields.io/badge/Commands-19-a855f7?style=for-the-badge&logo=windowsterminal&logoColor=white)](./commands/README.md)
+[![Commands](https://img.shields.io/badge/Commands-20-a855f7?style=for-the-badge&logo=windowsterminal&logoColor=white)](./commands/README.md)
 [![Hooks](https://img.shields.io/badge/Hooks-7-06b6d4?style=for-the-badge&logo=webhook&logoColor=white)](./hooks/README.md)
 [![MCP Servers](https://img.shields.io/badge/MCP_Servers-9-f97316?style=for-the-badge&logo=server&logoColor=white)](./docs/MCP-SERVERS.md)
 [![Platform](https://img.shields.io/badge/macOS_|_Linux_|_Windows-333333?style=for-the-badge&logo=apple&logoColor=white)](./docs/SETUP-GUIDE.md)
@@ -40,7 +40,7 @@
 
 <br/>
 
-> _One `git clone` gives you 72 skills, 36 specialist agents, 72 community marketplaces with 5,100+ additional skills, 19 slash commands, 7 lifecycle hooks, and 9 MCP server configs — all auto-activating based on what you're working on. No manual setup required._
+> _One `git clone` gives you 73 skills, 36 specialist agents, 72 community marketplaces with 5,100+ additional skills, 20 slash commands, 7 lifecycle hooks, and 9 MCP server configs — all auto-activating based on what you're working on. No manual setup required._
 
 </div>
 
@@ -119,8 +119,8 @@ The **Ultimate Claude Code Toolkit** transforms [Claude Code](https://docs.anthr
 | :-----------------: | :----: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 |    🎓 **Skills**    | **73** | Domain expertise modules covering iOS, Android, React, Vue, Svelte, DevOps, AI/ML, scientific computing, business strategy, and more                                                        |
 |    🤖 **Agents**    | **36** | Specialized AI subagents for deep expertise in code review, security auditing, architecture analysis, platform development, and creative work                                               |
-| 🏪 **Marketplaces** | **72** | External repositories containing **5,000+** additional skills from the community                                                                                                            |
-|   ⌨️ **Commands**   | **19** | Custom slash commands for task routing, skill discovery, decision frameworks, and workflow automation                                                                                       |
+| 🏪 **Marketplaces** | **72** | External repositories containing **5,100+** additional skills from the community                                                                                                            |
+|   ⌨️ **Commands**   | **20** | Custom slash commands for task routing, skill discovery, decision frameworks, and workflow automation                                                                                       |
 |    📋 **Rules**     | **17** | Contextual guidelines for different tech stacks ([React](https://react.dev), [Python](https://python.org), [Go](https://go.dev), [Rust](https://rust-lang.org)), checklists, and automation |
 |    🪝 **Hooks**     | **7**  | Git hooks and Claude Code lifecycle hooks (session-start, prompt-context, pre-commit, formatting, and more)                                                                                 |
 
@@ -262,7 +262,7 @@ The **Ultimate Claude Code Toolkit** transforms [Claude Code](https://docs.anthr
                               ▼
 ┌─────────────┬───────────────┬──────────────┬─────────────────────────────┐
 │  🎓 SKILLS  │  🤖 AGENTS    │  📋 RULES    │  ⌨️ COMMANDS                 │
-│  72 modules │  36 specialists│  17 guides  │  19 slash commands           │
+│  73 modules │  36 specialists│  17 guides  │  20 slash commands           │
 │             │               │              │                              │
 │  Loaded on  │  Spawned for  │  Stack &     │  /start-task                 │
 │  demand by  │  deep work    │  checklist   │  /auto-claude                │
@@ -271,7 +271,7 @@ The **Ultimate Claude Code Toolkit** transforms [Claude Code](https://docs.anthr
 │             │  debugging)   │  Python...)  │  ...and more                 │
 ├─────────────┴───────────────┴──────────────┴─────────────────────────────┤
 │                                                                           │
-│  🏪 72 MARKETPLACE REPOS · 5,000+ community skills                       │
+│  🏪 72 MARKETPLACE REPOS · 5,100+ community skills                       │
 │  Auto-discovered · Read-only · Updated via _pull-all-repos.sh            │
 │                                                                           │
 ├───────────────────────────────────────────────────────────────────────────┤
@@ -692,7 +692,7 @@ The plugin system has **two distinct layers** that work together:
 │  ├── claude-code-plugins/        ← submodule (ignore=all, no_push)          │
 │  ├── taches-cc-resources/        ← submodule (ignore=all, no_push)          │
 │  ├── obra-superpowers/           ← submodule (ignore=all, no_push)          │
-│  └── ... (50 total external repos)                                          │
+│  └── ... (72 total external repos)                                          │
 │                                                                              │
 │  • Updated via: git submodule update --remote --merge                       │
 │  • Changes NOT tracked in parent repo (ignore=all)                          │
@@ -1102,7 +1102,7 @@ bash ~/.claude/scripts/setup-new-machine.sh
 ├── 📜 CLAUDE.md (Constitution)
 │   └── Always loaded, references other files contextually
 │
-├── 🎓 skills/ (72 skills)
+├── 🎓 skills/ (73 skills)
 │   └── Loaded when domain context matches
 │
 ├── 🤖 agents/ (36 agents)
@@ -1185,7 +1185,7 @@ The toolkit is architected around a fundamental constraint: **Claude Code's cont
 │  └──────────────────────────────────────────────────────────────────────┘   │
 │                                                                              │
 │  ┌──────────────────────────────────────────────────────────────────────┐   │
-│  │ LOADED SKILLS (0-72 skills × 500-1500 each)               ████████    │   │
+│  │ LOADED SKILLS (0-73 skills × 500-1500 each)               ████████    │   │
 │  └──────────────────────────────────────────────────────────────────────┘   │
 │                                                                              │
 │  ┌──────────────────────────────────────────────────────────────────────┐   │
@@ -2002,9 +2002,9 @@ PostToolUse("Write") → Run Prettier → Format file
 │   ├── 👤 generic-ux-designer/SKILL.md
 │   │
 │   │ ─── 📚 STACK-SPECIFIC ───
-│   ├── 🌐 generic-static-*/SKILL.md      # 72 skills for HTML/CSS/JS
-│   ├── ⚛️ generic-react-*/SKILL.md       # 72 skills for React/TypeScript
-│   ├── 🔧 generic-fullstack-*/SKILL.md   # 72 skills for Next.js/NestJS
+│   ├── 🌐 generic-static-*/SKILL.md      # 4 skills for HTML/CSS/JS
+│   ├── ⚛️ generic-react-*/SKILL.md       # 4 skills for React/TypeScript
+│   ├── 🔧 generic-fullstack-*/SKILL.md   # 4 skills for Next.js/NestJS
 │   │
 │   │ ─── 🧩 FRAMEWORKS ───
 │   ├── 💚 vue-development/SKILL.md       # Vue.js 3, Composition API, Nuxt
@@ -2312,7 +2312,7 @@ Core rules loaded every session (~1,100 tokens):
 | 🛠️ `generic-feature-developer` | Architecture patterns for new features     | Feature implementation |
 | 👤 `generic-ux-designer`       | UX best practices, user psychology         | UX design work         |
 
-### 📚 Stack-Specific Skills (73 Skills)
+### 📚 Stack-Specific Skills
 
 #### 🌐 Static Sites (HTML/CSS/JS)
 
@@ -2348,7 +2348,7 @@ Core rules loaded every session (~1,100 tokens):
 | 💚 `vue-development`    | [Vue.js 3](https://vuejs.org)  | Composition API, TypeScript, [Pinia](https://pinia.vuejs.org), Vue Router, [Nuxt 3](https://nuxt.com), [Vitest](https://vitest.dev) |
 | 🧡 `svelte-development` | [Svelte 5](https://svelte.dev) | Runes ($state, $derived, $effect, $props), [SvelteKit](https://kit.svelte.dev), TypeScript                                          |
 
-### 📱 Platform Development Skills (73 Skills)
+### 📱 Platform Development Skills
 
 | Skill                    | Platform        | Technologies                                                                                                                            |
 | :----------------------- | :-------------- | :-------------------------------------------------------------------------------------------------------------------------------------- |
@@ -2361,7 +2361,7 @@ Core rules loaded every session (~1,100 tokens):
 | 🍏 `macos-native`        | macOS           | AppKit, Catalyst, sandboxing, notarization                                                                                              |
 | 🎮 `game-development`    | Gaming          | [Unity](https://unity.com) (C#), [Unreal Engine](https://unrealengine.com) (C++), [Godot](https://godotengine.org) (GDScript)           |
 
-### 🎨 Creative & Design Skills (73 Skills)
+### 🎨 Creative & Design Skills
 
 | Skill                  | Domain        | Coverage                                                                            |
 | :--------------------- | :------------ | :---------------------------------------------------------------------------------- |
@@ -2373,7 +2373,7 @@ Core rules loaded every session (~1,100 tokens):
 | 🏷️ `brand-identity`    | Branding      | Brand strategy, positioning, visual identity, guidelines                            |
 | 🎭 `ui-animation`      | Motion        | Animation principles, easing, micro-interactions, [Lottie](https://lottiefiles.com) |
 
-### 💼 Business & Startup Skills (73 Skills)
+### 💼 Business & Startup Skills
 
 | Skill                      | Domain   | Coverage                                                   |
 | :------------------------- | :------- | :--------------------------------------------------------- |
@@ -2385,7 +2385,7 @@ Core rules loaded every session (~1,100 tokens):
 | 🤝 `sales`                 | Revenue  | SPIN, Challenger, MEDDIC, pipeline, CRM optimization       |
 | 📋 `product-management`    | Product  | Roadmaps, prioritization (RICE/MoSCoW), user stories, PRDs |
 
-### 🏗️ Technical Architecture Skills (73 Skills)
+### 🏗️ Technical Architecture Skills
 
 | Skill                           | Domain                         | Coverage                                                                                                                             |
 | :------------------------------ | :----------------------------- | :----------------------------------------------------------------------------------------------------------------------------------- |
@@ -2395,7 +2395,7 @@ Core rules loaded every session (~1,100 tokens):
 | ⚡ `websockets-realtime`        | Real-time                      | [WebSocket](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API), SSE, [Socket.IO](https://socket.io), scaling, presence |
 | 🌍 `i18n-localization`          | i18n                           | ICU MessageFormat, RTL, pluralization, date/number formats                                                                           |
 
-### ☁️ Infrastructure & Operations Skills (73 Skills)
+### ☁️ Infrastructure & Operations Skills
 
 | Skill                  | Domain    | Coverage                                                                                                                                                                                                            |
 | :--------------------- | :-------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -2404,7 +2404,7 @@ Core rules loaded every session (~1,100 tokens):
 | 🧠 `ai-ml-development` | AI/ML     | [PyTorch](https://pytorch.org), [TensorFlow](https://tensorflow.org), LLM integration, MLOps, vector DBs                                                                                                            |
 | 🔒 `security`          | Security  | Authentication (OAuth, JWT), OWASP Top 10, encryption, SAST                                                                                                                                                         |
 
-### 👔 Domain Expert Skills (73 Skills)
+### 👔 Domain Expert Skills
 
 | Skill                   | Domain     | Focus Areas                                             |
 | :---------------------- | :--------- | :------------------------------------------------------ |
@@ -2419,14 +2419,14 @@ Core rules loaded every session (~1,100 tokens):
 | 🌱 `sustainability-esg` | ESG        | Carbon accounting, ESG reporting, sustainable practices |
 | 💚 `health-wellness`    | Wellness   | Workplace safety, mental health, ergonomics             |
 
-### 🔄 Development Workflow Skills (73 Skills)
+### 🔄 Development Workflow Skills
 
 | Skill                 | Methodology | Process                                              |
 | :-------------------- | :---------- | :--------------------------------------------------- |
 | 🐛 `debug-systematic` | Debugging   | REPRODUCE → ISOLATE → DIAGNOSE → FIX with evidence   |
 | ✅ `tdd-workflow`     | Testing     | RED → GREEN → REFACTOR cycle, test-first development |
 
-### 🔧 Utility Skills (73 Skills)
+### 🔧 Utility Skills
 
 | Skill                      | Purpose        | Output                                                |
 | :------------------------- | :------------- | :---------------------------------------------------- |
@@ -2535,7 +2535,7 @@ Core rules loaded every session (~1,100 tokens):
 
 > **📊 Total: 5,100+ additional skills** from 72 external repositories
 
-### 🏛️ Official Anthropic (72 Marketplaces)
+### 🏛️ Official Anthropic
 
 | Marketplace                  | GitHub                                                                                      | Contents                                          | Key Features                                 |
 | :--------------------------- | :------------------------------------------------------------------------------------------ | :------------------------------------------------ | :------------------------------------------- |
@@ -2559,7 +2559,7 @@ Core rules loaded every session (~1,100 tokens):
 | 🎯 `voltagent-awesome-claude-skills` | [VoltAgent/awesome-claude-skills](https://github.com/VoltAgent/awesome-claude-skills)                 |           Curated collection           | VoltAgent curation                             |
 | 🔬 `claude-scientific-skills`        | [K-Dense-AI/claude-scientific-skills](https://github.com/K-Dense-AI/claude-scientific-skills)         |              125+ skills               | Bioinformatics, chemistry, physics, proteomics |
 
-### ⭐ Curated Collections (72 Marketplaces)
+### ⭐ Curated Collections
 
 | Marketplace                | GitHub                                                                                              |   Count    | Key Features                            |
 | :------------------------- | :-------------------------------------------------------------------------------------------------- | :--------: | :-------------------------------------- |
@@ -2568,7 +2568,7 @@ Core rules loaded every session (~1,100 tokens):
 | 🔀 `mhattingpete-skills`   | [mhattingpete/claude-skills-marketplace](https://github.com/mhattingpete/claude-skills-marketplace) | 10+ skills | Git automation, testing, code review    |
 | 💪 `obra-superpowers`      | [obra/superpowers-marketplace](https://github.com/obra/superpowers-marketplace)                     | ~72 skills | /brainstorm, /write-plan, /execute-plan |
 
-### 🌐 Community Collections (72 Marketplaces)
+### 🌐 Community Collections
 
 | Marketplace                           | GitHub                                                                                  | Key Features                              |
 | :------------------------------------ | :-------------------------------------------------------------------------------------- | :---------------------------------------- |
@@ -3057,11 +3057,11 @@ The CLAUDE.md file is the **constitution** of the toolkit - loaded every session
 │  │  SECTION 10: Skill Discovery (~130 tokens)                              │ │
 │  ├────────────────────────────────────────────────────────────────────────┤ │
 │  │                                                                         │ │
-│  │  LOCAL SKILLS (71 total)                                                │ │
+│  │  LOCAL SKILLS (73 total)                                                │ │
 │  │  - Full catalog: skills/MASTER_INDEX.md                                 │ │
 │  │  - Domain experts: skills/EXPERT-SKILLS-GUIDE.md                        │ │
 │  │                                                                         │ │
-│  │  MARKETPLACE SKILLS (5,000+)                                            │ │
+│  │  MARKETPLACE SKILLS (5,100+)                                            │ │
 │  │  - Location: plugins/marketplaces/                                      │ │
 │  │  - Guide: docs/MARKETPLACE-GUIDE.md                                     │ │
 │  │  - Search command provided                                              │ │
@@ -3600,7 +3600,7 @@ The toolkit uses git submodules for external repositories. Understanding this is
 │       ├── auto-claude/                ← Submodule (read-only)
 │       ├── claude-code-plugins/        ← Submodule (read-only)
 │       ├── get-shit-done/              ← Submodule (read-only)
-│       └── ... (50 total)              ← All read-only
+│       └── ... (72 total)              ← All read-only
 ```
 
 #### 📋 Submodule Commands Reference
@@ -3744,7 +3744,7 @@ claude
 
 ```
 ✓ CLAUDE.md loaded (194 lines, ~1,100 tokens)
-✓ 72 skills available
+✓ 73 skills available
 ✓ 36 agents available
 ✓ 72 marketplace repos synced
 ✓ 2 hooks configured (PostToolUse for Prettier)
@@ -3781,7 +3781,7 @@ echo "Marketplace: $(find ~/.claude/plugins/marketplaces -name 'SKILL.md' | wc -
 **Pro Tips:**
 
 - Skills auto-activate based on context, so you rarely need to invoke manually
-- Use `/discover-skills <query>` to search skillsmp.com (5,100+ skills)
+- Use `/discover-skills <query>` to search marketplace (5,100+ skills)
 - Check `skills/MASTER_INDEX.md` for categorized local skill list
 
 ---
@@ -6594,7 +6594,7 @@ See [CHANGELOG.md](./CHANGELOG.md) for complete history.
 
 | Resource                                            | Description             |
 | :-------------------------------------------------- | :---------------------- |
-| 🎓 [Skills Catalog](./skills/MASTER_INDEX.md)       | All 72 skills           |
+| 🎓 [Skills Catalog](./skills/MASTER_INDEX.md)       | All 73 skills           |
 | 🤖 [Agents Catalog](./agents/README.md)             | All 36 agents           |
 | 🔄 [Workflow Guide](./docs/WORKFLOW-GUIDE.md)       | Workflow patterns       |
 | 🏪 [Marketplace Guide](./docs/MARKETPLACE-GUIDE.md) | All 72 marketplaces     |
@@ -7529,7 +7529,7 @@ Centralized skill management with installation, updates, and discovery.
 │  Registry Sources:                                                           │
 │  • Local (~/.claude/skills/)                                                 │
 │  • Marketplace (72 repos)                                                    │
-│  • skillsmp.com API (5,100+ skills)                                        │
+│  • Marketplace repos (5,100+ skills)                                       │
 │  • Custom registries (enterprise)                                            │
 │                                                                              │
 └─────────────────────────────────────────────────────────────────────────────┘
@@ -7698,7 +7698,7 @@ Browser-based toolkit management interface.
 │  │ SKILLS OVERVIEW                                                   ⟳ 🔍  ││
 │  ├─────────────────────────────────────────────────────────────────────────┤│
 │  │                                                                          ││
-│  │  Local Skills: 72        Marketplace: 5,000+      Total: 5,200+         ││
+│  │  Local Skills: 73        Marketplace: 5,100+      Total: 5,200+         ││
 │  │  ═══════════════════════════════════════════════════════════════════    ││
 │  │                                                                          ││
 │  │  ┌──────────────────────┐  ┌──────────────────────┐                     ││
@@ -7858,7 +7858,7 @@ Insights into toolkit usage and effectiveness.
 │  ═══════════════                                                             │
 │  • Consider using /compact more frequently (avg usage: 72%)                  │
 │  • test-specialist skill could replace manual test writing                   │
-│  • 72 skills never used - consider removing to reduce load time              │
+│  • 73 skills never used - consider removing to reduce load time              │
 │                                                                              │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
@@ -8625,7 +8625,7 @@ The toolkit logs security-relevant events:
 ├── CLAUDE.md          # Constitution
 ├── README.md          # Documentation
 ├── agents/            # 36 agents
-├── skills/            # 72 skills
+├── skills/            # 73 skills
 ├── commands/          # Slash commands
 ├── rules/             # Contextual rules
 ├── docs/              # Extended docs
@@ -8660,9 +8660,9 @@ The toolkit logs security-relevant events:
 ┌─────────────────────────────────────────────────────────────┐
 │            TOOLKIT v2.3.1 STATISTICS                         │
 ├─────────────────────────────────────────────────────────────┤
-│  Skills:        73 local + 5,000+ marketplace                │
+│  Skills:        73 local + 5,100+ marketplace                │
 │  Agents:        36 specialized subagents                     │
-│  Commands:      19 slash commands + plugin commands           │
+│  Commands:      20 slash commands + plugin commands           │
 │  Hooks:         7 lifecycle hooks                            │
 │  Marketplaces:  72 community repos                           │
 │  MCP Servers:   9 configurable                               │
@@ -8708,7 +8708,7 @@ See [LICENSE](./LICENSE) for full text.
   <img alt="" src="https://capsule-render.vercel.app/api?type=waving&color=0:d946ef,50:6366f1,100:1a1a2e&height=120&section=footer&animation=fadeIn" width="100%" />
 </picture>
 
-🎓 **72 Skills** · 🤖 **36 Agents** · 🏪 **72 Marketplaces** · ⌨️ **19 Commands** · 🪝 **7 Hooks** · ⚡ **5,000+ Community Skills**
+🎓 **73 Skills** · 🤖 **36 Agents** · 🏪 **72 Marketplaces** · ⌨️ **20 Commands** · 🪝 **7 Hooks** · ⚡ **5,100+ Community Skills**
 
 **Built with ❤️ by [Travis Neuman](https://travisjneuman.com)** · **[claude.travisjneuman.com](https://claude.travisjneuman.com)**
 
