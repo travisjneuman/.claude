@@ -84,15 +84,16 @@ Detailed patterns for getting work done with Claude Code.
 
 These can be used **anytime**, regardless of workflow stage or GSD phase:
 
-| Capability              | When to Use                                  | How to Invoke                   |
-| ----------------------- | -------------------------------------------- | ------------------------------- |
-| **WebSearch**           | Current info, docs, best practices, versions | Use tool directly               |
-| **Skills**              | Domain expertise needed                      | `Skill(name)` or auto-activates |
-| **Agents**              | Deep specialized work                        | `Task` tool with subagent       |
-| **Research**            | Explore codebase, find patterns              | `Task` with Explore agent       |
-| **Decision Frameworks** | Complex choices, trade-offs                  | `/consider:first-principles`    |
-| **TodoWrite**           | Track multi-step progress                    | Use tool directly               |
-| **Auto-Claude**         | Autonomous feature implementation            | `/auto-claude [description]`    |
+| Capability              | When to Use                                  | How to Invoke                        |
+| ----------------------- | -------------------------------------------- | ------------------------------------ |
+| **WebSearch**           | Current info, docs, best practices, versions | Use tool directly                    |
+| **Skills**              | Domain expertise needed                      | `Skill(name)` or auto-activates      |
+| **Agents**              | Deep specialized work                        | `Task` tool with subagent            |
+| **Research**            | Explore codebase, find patterns              | `Task` with Explore agent            |
+| **Decision Frameworks** | Complex choices, trade-offs                  | `/consider:first-principles`         |
+| **TodoWrite**           | Track multi-step progress                    | Use tool directly                    |
+| **Agent Teams**         | Parallel work with inter-agent coordination  | `/assemble-team` or natural language |
+| **Auto-Claude**         | Autonomous feature implementation            | `/auto-claude [description]`         |
 
 **Philosophy:** GSD provides _structure_, not _gates_. Use every tool that helps.
 
@@ -223,7 +224,40 @@ When `/start-task` detects a development task, you have three workflow options:
 
 ---
 
-### 3. Multi-Phase Projects (GSD)
+### 3. Agent Teams (Parallel Coordination)
+
+**Process:**
+
+```
+Create an agent team to build the user settings module:
+- Frontend teammate: React components at src/components/settings/
+- Backend teammate: API endpoints at src/api/settings/
+- Test writer: tests for both layers
+→ Spawns team via Teammate tool
+→ Creates shared task list via TaskCreate
+→ Teammates coordinate via SendMessage
+→ Lead synthesizes results
+```
+
+**Best For:**
+
+- Cross-layer features (frontend + backend + database)
+- Code review from multiple angles (security, performance, tests)
+- Debugging with competing hypotheses tested in parallel
+- Research and evaluation tasks
+
+**Characteristics:**
+
+- Each teammate is a full Claude Code session with 200k context
+- Two-way messaging between teammates via SendMessage
+- Shared task list (TaskCreate, TaskUpdate, TaskList)
+- Graceful shutdown protocol (SendMessage with type: "shutdown_request")
+
+**See:** [AGENT-TEAMS.md](./AGENT-TEAMS.md) for complete documentation
+
+---
+
+### 4. Multi-Phase Projects (GSD)
 
 **Process:**
 
@@ -256,18 +290,19 @@ When `/start-task` detects a development task, you have three workflow options:
 
 ### Workflow Comparison
 
-| Aspect         | Manual                | Auto-Claude      | GSD            |
-| -------------- | --------------------- | ---------------- | -------------- |
-| **Complexity** | 1-2                   | 3-4              | 5+             |
-| **Control**    | Maximum               | Medium           | Structured     |
-| **Speed**      | Slower                | Faster           | Phased         |
-| **Review**     | Each step             | End              | Per phase      |
-| **Isolation**  | Main branch           | Git worktree     | .planning/     |
-| **Best for**   | Learning, exploration | Defined features | Large projects |
+| Aspect         | Manual                | Agent Teams           | Auto-Claude      | GSD            |
+| -------------- | --------------------- | --------------------- | ---------------- | -------------- |
+| **Complexity** | 1-2                   | 3-4                   | 3-4              | 5+             |
+| **Control**    | Maximum               | Lead coordinates      | Medium           | Structured     |
+| **Speed**      | Slower                | Fast (parallel)       | Fast             | Phased         |
+| **Review**     | Each step             | Lead synthesizes      | End              | Per phase      |
+| **Isolation**  | Main branch           | Shared workspace      | Git worktree     | .planning/     |
+| **Best for**   | Learning, exploration | Cross-layer, parallel | Defined features | Large projects |
 
 **Combining workflows:**
 
 - Use Manual for research → Auto-Claude for implementation
+- Use Agent Teams for cross-layer features within a GSD phase
 - Use GSD phases → Auto-Claude for individual features within phases
 - Switch between approaches as needs change
 
@@ -345,6 +380,7 @@ This ensures every project has proper integration with `~/.claude/` including Re
 ## Related Documentation
 
 - [GSD-TUTORIAL.md](./GSD-TUTORIAL.md) - Multi-phase project management
+- [AGENT-TEAMS.md](./AGENT-TEAMS.md) - Parallel team coordination
 - [DOMAIN-ROUTING.md](./DOMAIN-ROUTING.md) - How /start-task routes work
 - [MARKETPLACE-GUIDE.md](./MARKETPLACE-GUIDE.md) - Marketplace resources
 - [../CLAUDE.md](../CLAUDE.md) - Core rules and guardrails
