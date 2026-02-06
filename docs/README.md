@@ -78,7 +78,7 @@ Already set up? Jump to the section you need below.
 | Local skills        | 73     | `skills/`                      |
 | Agents              | 36     | `agents/`                      |
 | Commands            | 20     | `commands/`                    |
-| Rules files         | 18     | `rules/`                       |
+| Rules files         | 17     | `rules/`                       |
 | Templates           | 10     | `templates/`                   |
 | Hooks               | 7      | `hooks/`                       |
 | MCP servers         | 9      | `.mcp.json`                    |
@@ -112,7 +112,7 @@ This `~/.claude/` folder is a fully configured, portable Claude Code environment
 - **9 MCP server configurations** for extended capabilities (disabled by default to save context)
 - **72 marketplace repos** providing 5,100+ additional skills from the community
 - **7 hooks** for session lifecycle, safety guards, and auto-formatting
-- **18 rules files** for contextual guidance (checklists, stack patterns, tooling)
+- **17 rules files** for contextual guidance (checklists, stack patterns, tooling)
 - **10 templates** for task planning and component creation
 
 ---

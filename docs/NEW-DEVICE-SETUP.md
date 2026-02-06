@@ -120,7 +120,7 @@ git remote -v
 
 # Check marketplace count
 ls -d ~/.claude/plugins/marketplaces/*/ | wc -l
-# Should show: 67
+# Should show: 72
 ```
 
 Or run the health check in Claude Code:
