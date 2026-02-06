@@ -51,22 +51,22 @@ Verify:
 
 | Directory               | Expected  | Check                                         |
 | ----------------------- | --------- | --------------------------------------------- |
-| `skills/`               | 68+ items | `ls ~/.claude/skills/ \| wc -l`               |
+| `skills/`               | 73+ items | `ls ~/.claude/skills/ \| wc -l`               |
 | `agents/`               | 36+ files | `ls ~/.claude/agents/*.md \| wc -l`           |
 | `commands/`             | 10+ files | `ls ~/.claude/commands/*.md \| wc -l`         |
 | `rules/`                | 13+ files | `find ~/.claude/rules -name "*.md" \| wc -l`  |
 | `templates/`            | 5+ files  | `ls ~/.claude/templates/ \| wc -l`            |
-| `plugins/marketplaces/` | 67 repos  | `ls ~/.claude/plugins/marketplaces/ \| wc -l` |
+| `plugins/marketplaces/` | 72 repos  | `ls ~/.claude/plugins/marketplaces/ \| wc -l` |
 
 ### Step 3: Hooks Status
 
-**Verify all 10 hooks:**
+**Verify all 7 hooks:**
 
 ```bash
-grep -c '"SessionStart"\|"SessionEnd"\|"Stop"\|"PreToolUse"\|"PostToolUse"\|"Notification"\|"PreCompact"\|"UserPromptSubmit"\|"PermissionRequest"\|"SubagentStop"' ~/.claude/settings.json
+grep -c '"PreToolUse"\|"PostToolUse"\|"Notification"\|"UserPromptSubmit"\|"Stop"\|"PreCompact"\|"SubagentStop"' ~/.claude/settings.json
 ```
 
-Expected: 10 hooks configured
+Expected: 7 hooks configured
 
 ### Step 4: Git Status
 
@@ -99,8 +99,8 @@ grep -A1 '"disabledMcpjsonServers"' ~/.claude/settings.json
 ║  Claude Code Toolkit Health Check                          ║
 ╠════════════════════════════════════════════════════════════╣
 ║  Configuration:  ✅ OK                                      ║
-║  Structure:      ✅ OK (68 skills, 36 agents, 67 markets)  ║
-║  Hooks:          ✅ 10/10 configured                        ║
+║  Structure:      ✅ OK (73 skills, 36 agents, 72 markets)  ║
+║  Hooks:          ✅ 7/7 configured                           ║
 ║  Git:            ✅ Clean, submodules synced               ║
 ║  MCP Servers:    ✅ 9 available (all disabled by default)  ║
 ╠════════════════════════════════════════════════════════════╣

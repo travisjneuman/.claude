@@ -1,11 +1,11 @@
 # Claude Code Skills Library
 
-Comprehensive skills for Claude Code - 72 skills covering all development domains.
+Comprehensive skills for Claude Code - 73 skills covering all development domains.
 
 **Plus:** 72 marketplace repos with 5,100+ additional skills.
 
-**Version:** 4.5 (72 Marketplace Repos)
-**Last Updated:** January 2026
+**Version:** 4.6 (73 Skills, 72 Marketplace Repos)
+**Last Updated:** February 2026
 
 ---
 
@@ -20,9 +20,10 @@ Comprehensive skills for Claude Code - 72 skills covering all development domain
 | Creative & Design      | 7      | Visual, Video, Audio, Brand, Motion, UI Research |
 | Business & Startup     | 7      | Strategy, Finance, Marketing, Sales              |
 | Technical Architecture | 5      | GraphQL, Microservices, i18n, Real-time          |
-| Domain Expertise       | 16     | Business, Leadership, Operations, etc.           |
-| Development Workflow   | 2      | Debug, TDD                                       |
-| Utilities              | 6      | Docs, Testing, SEO, Tech Debt                    |
+| Domain Expertise       | 11     | Operations, Security, Leadership, etc.           |
+| Development Workflow   | 4      | Debug, TDD, Core Workflow, Auto-Claude           |
+| Utilities              | 8      | Docs, Testing, SEO, AI/ML, DB, DevOps            |
+| Document Skills        | 5      | PDF, DOCX, XLSX, PPTX generation                 |
 | Marketplace            | 5,000+ | From 72 plugin repositories                      |
 
 **Local: 73 unique skills | Marketplace: 5,100+ additional skills**
@@ -47,8 +48,11 @@ Comprehensive skills for Claude Code - 72 skills covering all development domain
 | **codebase-documenter**   | Generate documentation | README, API docs, comments   |
 | **tech-debt-analyzer**    | Code health analysis   | Audits, refactoring planning |
 | **test-specialist**       | Testing guidance       | Writing tests, debugging     |
-| **frontend-enhancer**     | Frontend patterns      | UI improvements              |
 | **seo-analytics-auditor** | SEO analysis           | Performance audits           |
+| **agent-teams**           | Team coordination      | Multi-agent parallel work    |
+| **ai-ml-development**     | AI/ML patterns         | ML pipelines, model training |
+| **database-expert**       | Database design        | Schema, queries, migrations  |
+| **devops-cloud**          | DevOps & cloud         | CI/CD, infrastructure, IaC   |
 
 ---
 
@@ -189,17 +193,17 @@ Comprehensive skills for Claude Code - 72 skills covering all development domain
 
 ## Domain Expert Skills
 
+11 skills covering specialized business and enterprise domains (skills also listed under Business & Startup are not repeated here):
+
 | Domain                  | Skills                                                          |
 | ----------------------- | --------------------------------------------------------------- |
-| Business & Strategy     | `business-strategy`, `finance`                                  |
 | Operations & Technology | `operations`, `security`, `risk-management`, `legal-compliance` |
 | People & Leadership     | `leadership`, `hr-talent`, `health-wellness`                    |
-| Revenue & Growth        | `marketing`, `sales`, `product-management`                      |
 | Innovation & R&D        | `innovation`, `rd-management`                                   |
 | Data & Analytics        | `data-science`                                                  |
 | Sustainability          | `sustainability-esg`                                            |
 
-See [EXPERT-SKILLS-GUIDE.md](./EXPERT-SKILLS-GUIDE.md) for detailed coverage.
+See [EXPERT-SKILLS-GUIDE.md](./EXPERT-SKILLS-GUIDE.md) for detailed coverage of all domain expert skills.
 
 ---
 
@@ -209,6 +213,20 @@ See [EXPERT-SKILLS-GUIDE.md](./EXPERT-SKILLS-GUIDE.md) for detailed coverage.
 | -------------------- | ------------------------------------------------------- |
 | **debug-systematic** | 4-phase debugging: REPRODUCE → ISOLATE → DIAGNOSE → FIX |
 | **tdd-workflow**     | Test-Driven Development with RED-GREEN-REFACTOR cycle   |
+| **core-workflow**    | Core development workflow patterns and conventions      |
+| **auto-claude**      | Autonomous coding framework for complex implementations |
+
+---
+
+## Document Skills
+
+| Skill                    | Format | Coverage                                           |
+| ------------------------ | ------ | -------------------------------------------------- |
+| **document-skills**      | All    | Parent skill for document generation orchestration |
+| **document-skills/docx** | DOCX   | Word document generation with docx-js and OOXML    |
+| **document-skills/pdf**  | PDF    | PDF generation, forms, and reference materials     |
+| **document-skills/pptx** | PPTX   | PowerPoint generation with html2pptx and OOXML     |
+| **document-skills/xlsx** | XLSX   | Excel spreadsheet generation and recalculation     |
 
 ---
 
@@ -354,6 +372,11 @@ Verify skill activates when expected context appears.
 | Code review           | `generic-code-reviewer`               |
 | Debugging             | `debug-systematic`                    |
 | Testing               | `test-specialist`, `tdd-workflow`     |
+| AI/ML development     | `ai-ml-development`                   |
+| Database design       | `database-expert`                     |
+| DevOps & cloud        | `devops-cloud`                        |
+| Document generation   | `document-skills`                     |
+| Agent coordination    | `agent-teams`                         |
 
 ---
 

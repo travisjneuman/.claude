@@ -51,6 +51,12 @@ Slash commands are shortcuts you invoke in Claude Code with `/<command-name>`. T
 | `init-project`          | Initialize project with CLAUDE.md template — adaptive detection for new or existing projects | `/init-project react`                             |
 | `standardize-claude-md` | Add missing toolkit sections to existing CLAUDE.md                                           | `/standardize-claude-md`                          |
 
+### Collaboration
+
+| Command         | Description                                                                   | Usage            |
+| --------------- | ----------------------------------------------------------------------------- | ---------------- |
+| `assemble-team` | Spawn an Agent Team with role-based teammates for parallel collaborative work | `/assemble-team` |
+
 ### Decision
 
 | Command        | Description                                                     | Usage           |
@@ -90,4 +96,4 @@ Slash commands are shortcuts you invoke in Claude Code with `/<command-name>`. T
 
 ---
 
-_19 commands across 6 categories. Type `/<name>` to invoke._
+_20 commands across 7 categories. Type `/<name>` to invoke._
