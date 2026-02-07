@@ -120,6 +120,7 @@ security_warnings_state_*.json
 
 settings.local.json
 .claude.json
+AGENTS.md
 
 # ----- PLATFORM-SPECIFIC CONFIG -----
 # MCP server config requires platform-specific commands:
