@@ -50,6 +50,18 @@ Slash commands are shortcuts you invoke in Claude Code with `/<command-name>`. T
 | `review-code`           | Comprehensive code review on recent changes or specified files                               | `/review-code staged` or `/review-code src/auth/` |
 | `init-project`          | Initialize project with CLAUDE.md template — adaptive detection for new or existing projects | `/init-project react`                             |
 | `standardize-claude-md` | Add missing toolkit sections to existing CLAUDE.md                                           | `/standardize-claude-md`                          |
+| `scaffold`              | Scaffold project components from templates (API endpoint, component, service, middleware)     | `/scaffold api-endpoint users`                    |
+| `test-suite`            | Run tests, analyze failures, report coverage, suggest missing tests                          | `/test-suite`                                     |
+
+### DevOps & Security
+
+| Command         | Description                                                                       | Usage                |
+| --------------- | --------------------------------------------------------------------------------- | -------------------- |
+| `deploy`        | Deploy application with pre/post-deploy checks to Vercel/AWS/Netlify/Docker       | `/deploy production` |
+| `security-scan` | Run OWASP checks, npm audit, secret scanning, dependency vulnerability analysis   | `/security-scan`     |
+| `deps-update`   | Audit dependencies for security advisories, breaking changes, and safe updates    | `/deps-update`       |
+| `perf-audit`    | Performance audit — bundle size, render perf, API times, database queries         | `/perf-audit`        |
+| `migrate`       | Generate and manage database migrations with validation and rollback strategies   | `/migrate`           |
 
 ### Collaboration
 
@@ -96,4 +108,4 @@ Slash commands are shortcuts you invoke in Claude Code with `/<command-name>`. T
 
 ---
 
-_20 commands across 7 categories. Type `/<name>` to invoke._
+_27 commands across 8 categories. Type `/<name>` to invoke._

@@ -1,7 +1,12 @@
 ---
 name: test-generator
 description: Generates comprehensive test suites using TDD patterns. Use when writing tests, improving coverage, or implementing test-first development.
-tools: Read, Write, Grep, Glob
+tools:
+  - Read
+  - Write
+  - Grep
+  - Glob
+  - Bash
 model: sonnet
 ---
 

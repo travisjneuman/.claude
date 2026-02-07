@@ -1,7 +1,11 @@
 ---
 name: security-auditor
 description: Deep security analysis for OWASP Top 10, auth vulnerabilities, secrets exposure, and dependency risks. Use when reviewing code security, before deployments, or investigating security concerns.
-tools: Read, Grep, Glob
+tools:
+  - Read
+  - Grep
+  - Glob
+  - Bash
 model: sonnet
 ---
 
