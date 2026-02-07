@@ -350,8 +350,10 @@ if [[ ${#CUSTOM_PROJECT_DIRS[@]} -gt 0 ]]; then
             echo ""
             echo -e "${BOLD}Custom Projects ($(basename "$project_dir")):${NC}"
 
-            # Find all git repos in this directory (1 level deep)
-            for repo in "$project_dir"/*/; do
+            # Find all git repos in this directory (1 level deep, including dotdirs)
+            for repo in "$project_dir"/*/ "$project_dir"/.*/; do
+                # Skip . and .. entries from .* glob
+                [[ "$(basename "$repo")" == "." || "$(basename "$repo")" == ".." ]] && continue
                 if [[ -d "$repo/.git" ]] || [[ -f "$repo/.git" ]]; then
                     repo_name=$(basename "$repo")
                     process_repo "$repo" "$repo_name"
