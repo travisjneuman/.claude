@@ -1,5 +1,5 @@
 ---
-description: Pull all repos (parent + 72 marketplace submodules)
+description: Pull all repos (parent + 70 marketplace submodules)
 arguments:
   - name: action
     description: "Action: pull, status (default: pull)"
