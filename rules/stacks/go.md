@@ -213,9 +213,14 @@ func NewUserService(repo UserRepository) *UserService {
 ### HTTP Handlers
 
 ```go
-// Chi or Gorilla Mux pattern
+// Go 1.22+ enhanced ServeMux (stdlib is now sufficient for most routing)
+mux := http.NewServeMux()
+mux.HandleFunc("GET /users/{id}", h.GetUser)
+mux.HandleFunc("POST /users", h.CreateUser)
+mux.HandleFunc("DELETE /users/{id}", h.DeleteUser)
+
 func (h *Handler) GetUser(w http.ResponseWriter, r *http.Request) {
-    id := chi.URLParam(r, "id")
+    id := r.PathValue("id") // Go 1.22+ path parameter extraction
 
     user, err := h.service.GetUser(id)
     if err != nil {
@@ -229,6 +234,9 @@ func (h *Handler) GetUser(w http.ResponseWriter, r *http.Request) {
 
     json.NewEncoder(w).Encode(user)
 }
+
+// Chi is still useful for middleware chains and subrouters
+// but stdlib ServeMux is now sufficient for basic routing
 ```
 
 ### Context Usage
@@ -352,6 +360,173 @@ go tool pprof -alloc_objects mem.prof
 
 # Escape analysis
 go build -gcflags="-m" .
+```
+
+---
+
+## Go 1.22+ Features
+
+### Range Over Functions (Iterators)
+
+```go
+// Go 1.22+ supports range over func types for custom iterators
+func Filter[T any](items []T, predicate func(T) bool) iter.Seq[T] {
+    return func(yield func(T) bool) {
+        for _, item := range items {
+            if predicate(item) {
+                if !yield(item) {
+                    return
+                }
+            }
+        }
+    }
+}
+
+// Usage
+for item := range Filter(users, func(u User) bool { return u.Active }) {
+    fmt.Println(item.Name)
+}
+```
+
+### Enhanced ServeMux Routing
+
+```go
+// Method-based routing with path parameters (no third-party router needed)
+mux := http.NewServeMux()
+mux.HandleFunc("GET /api/v1/users", listUsers)
+mux.HandleFunc("GET /api/v1/users/{id}", getUser)
+mux.HandleFunc("POST /api/v1/users", createUser)
+mux.HandleFunc("PUT /api/v1/users/{id}", updateUser)
+mux.HandleFunc("DELETE /api/v1/users/{id}", deleteUser)
+
+// Wildcard matching
+mux.HandleFunc("GET /static/{path...}", serveStatic)
+```
+
+### Structured Logging (slog)
+
+```go
+import "log/slog"
+
+// Replace log package with slog for structured logging
+logger := slog.New(slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{
+    Level: slog.LevelInfo,
+}))
+
+logger.Info("processing request",
+    slog.String("method", r.Method),
+    slog.String("path", r.URL.Path),
+    slog.Int("status", statusCode),
+    slog.Duration("duration", elapsed),
+)
+
+logger.Error("failed to process",
+    slog.String("user_id", userID),
+    slog.Any("error", err),
+)
+
+// Set as default logger
+slog.SetDefault(logger)
+```
+
+---
+
+## Generics Patterns
+
+```go
+// Common generic utilities
+func Map[T, U any](items []T, fn func(T) U) []U {
+    result := make([]U, len(items))
+    for i, item := range items {
+        result[i] = fn(item)
+    }
+    return result
+}
+
+func Filter[T any](items []T, predicate func(T) bool) []T {
+    var result []T
+    for _, item := range items {
+        if predicate(item) {
+            result = append(result, item)
+        }
+    }
+    return result
+}
+
+func Contains[T comparable](items []T, target T) bool {
+    for _, item := range items {
+        if item == target {
+            return true
+        }
+    }
+    return false
+}
+
+// Generic repository pattern
+type Repository[T any] interface {
+    FindByID(ctx context.Context, id string) (T, error)
+    FindAll(ctx context.Context) ([]T, error)
+    Create(ctx context.Context, entity T) error
+    Update(ctx context.Context, entity T) error
+    Delete(ctx context.Context, id string) error
+}
+```
+
+---
+
+## Type-Safe SQL with sqlc
+
+```yaml
+# sqlc.yaml
+version: "2"
+sql:
+  - engine: "postgresql"
+    queries: "queries/"
+    schema: "schema/"
+    gen:
+      go:
+        package: "db"
+        out: "internal/db"
+```
+
+```sql
+-- queries/users.sql
+-- name: GetUser :one
+SELECT * FROM users WHERE id = $1;
+
+-- name: ListUsers :many
+SELECT * FROM users ORDER BY created_at DESC LIMIT $1;
+
+-- name: CreateUser :one
+INSERT INTO users (name, email) VALUES ($1, $2) RETURNING *;
+```
+
+```go
+// Generated code is type-safe and ready to use
+user, err := queries.GetUser(ctx, userID)
+users, err := queries.ListUsers(ctx, 20)
+newUser, err := queries.CreateUser(ctx, db.CreateUserParams{
+    Name:  "John",
+    Email: "john@example.com",
+})
+```
+
+---
+
+## connect-go for gRPC-Compatible APIs
+
+```go
+// connect-go provides gRPC, gRPC-Web, and Connect protocols
+// Works with standard net/http, no special gRPC server needed
+import "connectrpc.com/connect"
+
+func main() {
+    mux := http.NewServeMux()
+    path, handler := userv1connect.NewUserServiceHandler(&userServer{})
+    mux.Handle(path, handler)
+
+    http.ListenAndServe(":8080", h2c.NewHandler(mux, &http2.Server{}))
+}
 ```
 
 ---

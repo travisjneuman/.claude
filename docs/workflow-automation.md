@@ -732,8 +732,8 @@ git commit -m "feat: Add fuzzy search to notes list"
 - [GSD-TUTORIAL.md](./GSD-TUTORIAL.md) - Multi-phase project management
 - `~/.claude/CLAUDE.md` - Core workflow rules
 - `~/.claude/templates/task-template.md` - Task file template
-- `~/.claude/skills/README.md` - Available skills (73 skills)
-- `~/.claude/commands/` - Custom commands (20 commands)
+- `~/.claude/skills/README.md` - Available skills (85 skills)
+- `~/.claude/commands/` - Custom commands (27 commands)
 - `~/.claude/commands/gsd/help.md` - GSD command reference
 
 ---

@@ -1,5 +1,5 @@
 ---
-description: AI-powered skill recommendation based on your problem description - finds optimal resources from 73 local skills + 70 marketplaces (5,200+ skills)
+description: AI-powered skill recommendation based on your problem description - finds optimal resources from 89 local skills + 70 marketplaces (5,200+ skills)
 arguments:
   - name: problem
     description: "Describe what you're trying to accomplish or the problem you're facing"
@@ -228,4 +228,4 @@ Once skills are identified:
 
 ---
 
-_Intelligent skill discovery across 73 local skills + 70 marketplaces (5,200+ skills)_
+_Intelligent skill discovery across 89 local skills + 70 marketplaces (5,200+ skills)_

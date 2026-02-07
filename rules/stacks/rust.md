@@ -434,11 +434,116 @@ codegen-units = 1
 | Async         | `tokio`               | Async runtime         |
 | HTTP          | `reqwest`             | HTTP client           |
 | Web           | `axum`, `actix-web`   | Web frameworks        |
+| Full-stack    | `leptos`, `dioxus`    | Full-stack Rust web   |
 | Serialization | `serde`               | Serialize/deserialize |
 | CLI           | `clap`                | Argument parsing      |
 | Error         | `thiserror`, `anyhow` | Error handling        |
 | Logging       | `tracing`             | Structured logging    |
 | Testing       | `proptest`            | Property testing      |
+| Test runner   | `cargo-nextest`       | Faster test execution |
+| Database      | `sqlx`                | Async SQL (compile-time checked) |
+| ORM           | `sea-orm`, `diesel`   | Full ORMs             |
+
+---
+
+## Rust 2024 Edition Features
+
+### Async Functions in Traits (Stabilized)
+
+```rust
+// No more async-trait crate needed for most cases
+trait Repository {
+    async fn find(&self, id: &str) -> Result<User, Error>;
+    async fn save(&self, user: &User) -> Result<(), Error>;
+}
+
+struct PostgresRepo { pool: PgPool }
+
+impl Repository for PostgresRepo {
+    async fn find(&self, id: &str) -> Result<User, Error> {
+        sqlx::query_as!(User, "SELECT * FROM users WHERE id = $1", id)
+            .fetch_one(&self.pool)
+            .await
+            .map_err(Into::into)
+    }
+
+    async fn save(&self, user: &User) -> Result<(), Error> {
+        sqlx::query!("INSERT INTO users (id, name) VALUES ($1, $2)", user.id, user.name)
+            .execute(&self.pool)
+            .await?;
+        Ok(())
+    }
+}
+```
+
+### cargo-nextest (Faster Test Runner)
+
+```bash
+# Install
+cargo install cargo-nextest
+
+# Run tests (up to 3x faster than cargo test)
+cargo nextest run
+cargo nextest run --no-capture    # Show output
+cargo nextest run -E 'test(user)' # Filter by name
+
+# JUnit XML output for CI
+cargo nextest run --profile ci
+```
+
+---
+
+## Full-Stack Rust Web
+
+### Leptos (SSR + Client Hydration)
+
+```rust
+use leptos::*;
+
+#[component]
+fn App() -> impl IntoView {
+    let (count, set_count) = create_signal(0);
+
+    view! {
+        <h1>"Count: " {count}</h1>
+        <button on:click=move |_| set_count.update(|n| *n += 1)>
+            "Increment"
+        </button>
+    }
+}
+
+#[component]
+fn UserList() -> impl IntoView {
+    let users = create_resource(|| (), |_| async { fetch_users().await });
+
+    view! {
+        <Suspense fallback=move || view! { <p>"Loading..."</p> }>
+            {move || users.get().map(|data| view! {
+                <ul>
+                    {data.into_iter().map(|user| view! {
+                        <li>{user.name}</li>
+                    }).collect_view()}
+                </ul>
+            })}
+        </Suspense>
+    }
+}
+```
+
+### Dioxus (React-like, Multi-platform)
+
+```rust
+use dioxus::prelude::*;
+
+fn App() -> Element {
+    let mut count = use_signal(|| 0);
+
+    rsx! {
+        h1 { "Count: {count}" }
+        button { onclick: move |_| count += 1, "Increment" }
+    }
+}
+```
 
 ---
 

@@ -38,6 +38,21 @@ case "$EXT" in
       black --quiet "$FILE_PATH" 2>/dev/null
     fi
     ;;
+  go)
+    if command -v gofmt &>/dev/null; then
+      gofmt -w "$FILE_PATH" 2>/dev/null
+    fi
+    ;;
+  rs)
+    if command -v rustfmt &>/dev/null; then
+      rustfmt "$FILE_PATH" 2>/dev/null
+    fi
+    ;;
+  sh|bash)
+    if command -v shfmt &>/dev/null; then
+      shfmt -w "$FILE_PATH" 2>/dev/null
+    fi
+    ;;
 esac
 
 exit 0

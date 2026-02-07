@@ -22,6 +22,9 @@ Load this file when business/strategy keywords detected.
 | `monetization`   | pricing, monetization, revenue model, saas, subscription, freemium, premium        |
 | `health`         | wellness, health, employee, ergonomic, mental health, benefits                     |
 | `rd`             | r&d, research, development, experiment, prototype                                  |
+| `customer-success` | support, ticketing, knowledge base, chatbot, helpdesk, zendesk, intercom         |
+| `growth`         | growth, plg, product-led, experimentation, feature flags, a/b testing, funnel      |
+| `project-mgmt`   | project management, agile, scrum, kanban, jira, sprint planning, velocity          |
 
 ## Resource Mapping
 
@@ -43,6 +46,9 @@ Load this file when business/strategy keywords detected.
 | `monetization`   | `Skill(monetization-strategy)` | `monetization-expert` |
 | `health`         | `Skill(health-wellness)`       | -                     |
 | `rd`             | `Skill(rd-management)`         | -                     |
+| `customer-success` | `Skill(customer-success)`    | -                     |
+| `growth`         | `Skill(growth-engineering)`    | -                     |
+| `project-mgmt`   | `Skill(product-management)`   | -                     |
 
 ## Marketplace Resources for Business
 

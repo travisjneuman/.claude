@@ -11,23 +11,25 @@ import { getMarketplaceStats } from "@/lib/data/marketplace";
 
 // Hand-picked for highest end-user ROI on homepage
 const FEATURED_SKILL_SLUGS = [
+  "llm-app-development",
   "debug-systematic",
-  "tdd-workflow",
+  "authentication-patterns",
+  "payment-integration",
   "auto-claude",
   "security",
-  "generic-react-feature-developer",
   "api-design",
-  "ai-ml-development",
-  "devops-cloud",
+  "monitoring-observability",
 ];
 
 const FEATURED_AGENT_SLUGS = [
   "deep-code-reviewer",
+  "auth-specialist",
   "debugging-specialist",
   "security-auditor",
+  "next-js-expert",
   "architecture-analyst",
   "performance-optimizer",
-  "typescript-expert",
+  "e2e-test-specialist",
 ];
 
 function pickFeatured<T extends { slug: string }>(

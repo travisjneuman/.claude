@@ -1,8 +1,11 @@
 {
-  "skills": 73,
-  "agents": 36,
+  "skills": 89,
+  "agents": 47,
   "repos": 70,
-  "commands": 20,
+  "commands": 27,
+  "hooks": 8,
+  "rules": 27,
+  "templates": 14,
   "marketplaceSkills": 5229,
   "marketplaceSkillsDisplay": "5,200+"
 }

@@ -337,6 +337,220 @@ For detailed incident response processes and SOC operations, see [Incident Respo
 - [Security Frameworks Reference](references/security-frameworks.md) - NIST, ISO 27001, CIS Controls, MITRE ATT&CK
 - [Incident Response Reference](references/incident-response.md) - IR process, severity levels, SOC operations
 
+---
+
+## OWASP Top 10 (with Code Examples)
+
+### 1. Broken Access Control
+
+```python
+# WRONG - No authorization check
+@app.get("/api/users/{user_id}/data")
+async def get_user_data(user_id: str):
+    return db.get_user_data(user_id)  # Any user can access any data
+
+# RIGHT - Verify ownership
+@app.get("/api/users/{user_id}/data")
+async def get_user_data(user_id: str, current_user: User = Depends(get_current_user)):
+    if current_user.id != user_id and not current_user.is_admin:
+        raise HTTPException(status_code=403, detail="Forbidden")
+    return db.get_user_data(user_id)
+```
+
+### 2. Cryptographic Failures
+
+```python
+# WRONG - Weak hashing
+import hashlib
+password_hash = hashlib.md5(password.encode()).hexdigest()
+
+# RIGHT - Use bcrypt or argon2
+from passlib.context import CryptContext
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+password_hash = pwd_context.hash(password)
+verified = pwd_context.verify(password, password_hash)
+```
+
+### 3. Injection
+
+```python
+# WRONG - SQL injection via string formatting
+query = f"SELECT * FROM users WHERE email = '{email}'"
+cursor.execute(query)
+
+# RIGHT - Parameterized queries
+cursor.execute("SELECT * FROM users WHERE email = %s", (email,))
+
+# WRONG - Command injection via unsanitized input
+# Never pass user input to shell commands directly
+# Always use subprocess with list arguments:
+
+# RIGHT - Safe subprocess usage
+import subprocess
+subprocess.run(["convert", user_filename, "output.png"], check=True)
+```
+
+### 4. Insecure Design
+
+```python
+# WRONG - No rate limiting on password reset
+@app.post("/api/reset-password")
+async def reset_password(email: str):
+    send_reset_email(email)
+
+# RIGHT - Rate limit + CAPTCHA
+@app.post("/api/reset-password")
+@limiter.limit("3/hour")
+async def reset_password(email: str, captcha: str):
+    if not verify_captcha(captcha):
+        raise HTTPException(400, "Invalid CAPTCHA")
+    send_reset_email(email)
+```
+
+### 5. Security Misconfiguration
+
+```python
+# WRONG - Debug mode in production, exposing stack traces
+# RIGHT - Environment-aware configuration
+app = FastAPI(debug=os.getenv("ENV") == "development")
+
+@app.exception_handler(Exception)
+async def handle_error(request, exc):
+    logger.error(f"Unhandled error: {exc}", exc_info=True)
+    return JSONResponse(status_code=500, content={"error": "Internal server error"})
+```
+
+### 6. Vulnerable Components
+
+```bash
+# Audit dependencies regularly
+npm audit
+pip audit
+cargo audit
+# Pin versions, use lockfiles (package-lock.json, Pipfile.lock, Cargo.lock)
+```
+
+### 7. Authentication Failures
+
+```typescript
+// WRONG - JWT with no expiration, weak secret
+const token = jwt.sign(payload, "secret123");
+
+// RIGHT - Short expiry, strong secret, refresh tokens
+const token = jwt.sign(payload, process.env.JWT_SECRET, {
+  expiresIn: "15m",
+  algorithm: "RS256",
+  issuer: "my-app",
+});
+```
+
+### 8. Software and Data Integrity Failures
+
+```yaml
+# Pin action versions in GitHub Actions (not @main)
+- uses: actions/checkout@v4.1.1
+```
+
+### 9. Security Logging and Monitoring Failures
+
+```python
+# Log security-relevant events with structured data
+logger.info("auth.login.success", extra={"user_id": user.id, "ip": request.client.host})
+logger.warning("auth.login.failed", extra={"email": email, "ip": request.client.host})
+logger.critical("auth.bruteforce.detected", extra={"ip": request.client.host, "attempts": count})
+```
+
+### 10. Server-Side Request Forgery (SSRF)
+
+```python
+# WRONG - User controls URL without validation
+# RIGHT - Allowlist domains, block internal IPs
+from urllib.parse import urlparse
+import ipaddress
+
+ALLOWED_HOSTS = {"api.example.com", "cdn.example.com"}
+
+def safe_fetch(url: str) -> Response:
+    parsed = urlparse(url)
+    if parsed.hostname not in ALLOWED_HOSTS:
+        raise ValueError("Host not allowed")
+    ip = ipaddress.ip_address(socket.gethostbyname(parsed.hostname))
+    if ip.is_private:
+        raise ValueError("Internal addresses not allowed")
+    return requests.get(url, timeout=10)
+```
+
+---
+
+## Static Application Security Testing (SAST)
+
+| Tool           | Languages            | Integration          |
+| -------------- | -------------------- | -------------------- |
+| **Semgrep**    | 30+ languages        | CI/CD, IDE, CLI      |
+| **CodeQL**     | C/C++, Java, JS, Python, Go | GitHub Actions  |
+| **SonarQube**  | 30+ languages        | Self-hosted, CI/CD   |
+| **Bandit**     | Python only          | CLI, CI/CD           |
+
+```bash
+# Semgrep (recommended - fast, customizable)
+semgrep scan --config auto .
+semgrep scan --config p/owasp-top-ten .
+semgrep scan --config p/secrets .
+```
+
+---
+
+## Dynamic Application Security Testing (DAST)
+
+```bash
+# OWASP ZAP baseline scan (passive, fast)
+docker run -t ghcr.io/zaproxy/zaproxy:stable zap-baseline.py \
+  -t https://your-app.com
+
+# Full scan (active, thorough)
+docker run -t ghcr.io/zaproxy/zaproxy:stable zap-full-scan.py \
+  -t https://your-app.com
+
+# API scan
+docker run -t ghcr.io/zaproxy/zaproxy:stable zap-api-scan.py \
+  -t https://your-app.com/openapi.json -f openapi
+```
+
+---
+
+## Supply Chain Security
+
+### Sigstore (Code Signing)
+
+```bash
+# Sign container images with cosign
+cosign sign --key cosign.key docker.io/myapp:latest
+
+# Verify signatures
+cosign verify --key cosign.pub docker.io/myapp:latest
+```
+
+### SLSA (Supply-chain Levels for Software Artifacts)
+
+| Level   | Requirements                                              |
+| ------- | --------------------------------------------------------- |
+| SLSA 1  | Build process documented                                  |
+| SLSA 2  | Hosted build service, signed provenance                   |
+| SLSA 3  | Hardened build platform, non-falsifiable provenance       |
+
+### Dependency Management
+
+```bash
+# Lock dependencies and audit regularly
+npm ci                    # Install from lockfile only
+npm audit --audit-level=high
+pip-audit
+cargo audit
+# Use Dependabot or Renovate for automated updates
+```
+
+---
+
 ## See Also
 
 - [Fortune 50 Risk Management](../fortune50-risk-management/SKILL.md)

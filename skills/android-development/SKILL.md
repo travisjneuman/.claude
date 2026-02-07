@@ -566,3 +566,221 @@ android {
 - Hardcode dimensions
 - Ignore process death
 - Skip ProGuard rules
+
+---
+
+## Kotlin Multiplatform (KMP) / Compose Multiplatform (CMP)
+
+### Shared Business Logic with KMP
+
+```kotlin
+// shared/src/commonMain/kotlin/UserRepository.kt
+expect class PlatformContext
+
+class UserRepository(private val api: ApiService, private val db: Database) {
+    suspend fun getUsers(): List<User> {
+        return try {
+            val remote = api.fetchUsers()
+            db.saveUsers(remote)
+            remote
+        } catch (e: Exception) {
+            db.getCachedUsers()
+        }
+    }
+}
+
+// shared/src/androidMain/kotlin/PlatformContext.kt
+actual class PlatformContext(val context: Context)
+
+// shared/src/iosMain/kotlin/PlatformContext.kt
+actual class PlatformContext
+```
+
+### Compose Multiplatform (Shared UI)
+
+```kotlin
+// shared/src/commonMain/kotlin/App.kt
+@Composable
+fun App() {
+    MaterialTheme {
+        var users by remember { mutableStateOf<List<User>>(emptyList()) }
+        val repository = remember { UserRepository() }
+
+        LaunchedEffect(Unit) {
+            users = repository.getUsers()
+        }
+
+        LazyColumn {
+            items(users) { user ->
+                UserCard(user)
+            }
+        }
+    }
+}
+
+// Runs natively on Android, iOS, Desktop, and Web
+```
+
+### KMP Project Structure
+
+```
+project/
+├── shared/
+│   └── src/
+│       ├── commonMain/     # Shared Kotlin code
+│       ├── androidMain/    # Android-specific
+│       ├── iosMain/        # iOS-specific
+│       └── desktopMain/    # Desktop-specific
+├── androidApp/             # Android entry point
+├── iosApp/                 # iOS entry point (Swift/SwiftUI)
+└── desktopApp/             # Desktop entry point
+```
+
+---
+
+## Navigation 3 (Type-Safe Navigation)
+
+```kotlin
+// Define routes as serializable data classes
+@Serializable
+data object Home
+
+@Serializable
+data class Detail(val itemId: String)
+
+@Serializable
+data class Settings(val section: String? = null)
+
+// Navigation setup
+@Composable
+fun AppNavHost(navController: NavHostController = rememberNavController()) {
+    NavHost(navController = navController, startDestination = Home) {
+        composable<Home> {
+            HomeScreen(onItemClick = { id ->
+                navController.navigate(Detail(itemId = id))
+            })
+        }
+        composable<Detail> { backStackEntry ->
+            val detail: Detail = backStackEntry.toRoute()
+            DetailScreen(itemId = detail.itemId)
+        }
+        composable<Settings> { backStackEntry ->
+            val settings: Settings = backStackEntry.toRoute()
+            SettingsScreen(section = settings.section)
+        }
+    }
+}
+```
+
+---
+
+## API 35 (Android 15) Features
+
+| Feature                    | Description                                           |
+| -------------------------- | ----------------------------------------------------- |
+| **Edge-to-edge enforced**  | Apps must handle insets properly                       |
+| **Predictive back**        | System back gesture with preview animations           |
+| **Private Space**          | User-controlled hidden app profile                    |
+| **Satellite connectivity** | SMS/MMS over satellite                                |
+| **App archival**           | Auto-archive unused apps, preserve data               |
+| **Health Connect**         | Updated health data APIs                              |
+
+```kotlin
+// Edge-to-edge (required on API 35+)
+override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    enableEdgeToEdge()
+
+    setContent {
+        Scaffold(
+            modifier = Modifier.fillMaxSize(),
+            contentWindowInsets = ScaffoldDefaults.contentWindowInsets,
+        ) { innerPadding ->
+            MainContent(modifier = Modifier.padding(innerPadding))
+        }
+    }
+}
+
+// Predictive back with Compose
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun DetailScreen(onBack: () -> Unit) {
+    BackHandler(onBack = onBack)
+    // Content renders with predictive back animation automatically
+}
+```
+
+---
+
+## Baseline Profiles for Startup Performance
+
+```kotlin
+// baselineprofile/build.gradle.kts
+dependencies {
+    implementation("androidx.benchmark:benchmark-macro-junit4:1.3.0")
+}
+
+// BaselineProfileGenerator.kt
+@RunWith(AndroidJUnit4::class)
+class BaselineProfileGenerator {
+    @get:Rule
+    val rule = BaselineProfileRule()
+
+    @Test
+    fun generateBaselineProfile() {
+        rule.collect(packageName = "com.example.app") {
+            // Critical user journey
+            pressHome()
+            startActivityAndWait()
+            device.findObject(By.text("Login")).click()
+            device.wait(Until.hasObject(By.text("Dashboard")), 5000)
+        }
+    }
+}
+```
+
+```groovy
+// app/build.gradle.kts
+android {
+    buildTypes {
+        release {
+            // Baseline profiles improve startup by 15-30%
+            baselineProfile.automaticGenerationDuringBuild = true
+        }
+    }
+}
+```
+
+---
+
+## Credential Manager API
+
+```kotlin
+// Modern sign-in replacing legacy APIs
+val credentialManager = CredentialManager.create(context)
+
+// Sign in with passkeys, passwords, or federated identity
+suspend fun signIn() {
+    val request = GetCredentialRequest(listOf(
+        GetPasswordOption(),
+        GetPublicKeyCredentialOption(requestJson = passkeyRequestJson),
+        GetGoogleIdOption(serverClientId = WEB_CLIENT_ID),
+    ))
+
+    try {
+        val result = credentialManager.getCredential(context, request)
+        handleSignIn(result)
+    } catch (e: GetCredentialException) {
+        handleSignInError(e)
+    }
+}
+
+// Create a passkey
+suspend fun createPasskey() {
+    val request = CreatePublicKeyCredentialRequest(
+        requestJson = createPasskeyRequestJson
+    )
+    val result = credentialManager.createCredential(context, request)
+    handlePasskeyCreation(result)
+}
+```

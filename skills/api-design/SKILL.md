@@ -316,3 +316,177 @@ Return `429 Too Many Requests` when exceeded.
 - [ ] CORS configuration
 - [ ] No sensitive data in URLs
 - [ ] Audit logging
+
+---
+
+## gRPC and Protocol Buffers
+
+### Proto Definition
+
+```protobuf
+syntax = "proto3";
+package user.v1;
+
+service UserService {
+  rpc GetUser(GetUserRequest) returns (User);
+  rpc ListUsers(ListUsersRequest) returns (ListUsersResponse);
+  rpc CreateUser(CreateUserRequest) returns (User);
+  rpc StreamUpdates(StreamRequest) returns (stream UserUpdate);
+}
+
+message User {
+  string id = 1;
+  string name = 2;
+  string email = 3;
+  google.protobuf.Timestamp created_at = 4;
+}
+
+message GetUserRequest {
+  string id = 1;
+}
+
+message ListUsersRequest {
+  int32 page_size = 1;
+  string page_token = 2;
+}
+
+message ListUsersResponse {
+  repeated User users = 1;
+  string next_page_token = 2;
+}
+```
+
+### When to Use gRPC vs REST
+
+| Factor            | gRPC                        | REST                        |
+| ----------------- | --------------------------- | --------------------------- |
+| **Performance**   | Binary, fast                | JSON, human-readable        |
+| **Streaming**     | Bidirectional               | SSE/WebSocket workaround    |
+| **Type safety**   | Proto generates types       | OpenAPI + codegen           |
+| **Browser**       | Needs gRPC-Web proxy        | Native                      |
+| **Tooling**       | Protoc, Buf                 | Swagger, Postman            |
+| **Best for**      | Service-to-service, streaming | Public APIs, web clients  |
+
+---
+
+## tRPC for TypeScript
+
+```typescript
+// server/router.ts
+import { router, publicProcedure, protectedProcedure } from './trpc';
+import { z } from 'zod';
+
+export const appRouter = router({
+  user: router({
+    get: publicProcedure
+      .input(z.object({ id: z.string() }))
+      .query(async ({ input }) => {
+        return db.user.findUnique({ where: { id: input.id } });
+      }),
+    create: protectedProcedure
+      .input(z.object({
+        name: z.string().min(1),
+        email: z.string().email(),
+      }))
+      .mutation(async ({ input, ctx }) => {
+        return db.user.create({ data: { ...input, createdBy: ctx.userId } });
+      }),
+  }),
+});
+
+export type AppRouter = typeof appRouter;
+
+// client.ts - Full type inference, no codegen
+const user = trpc.user.get.useQuery({ id: '123' });
+const createUser = trpc.user.create.useMutation();
+```
+
+tRPC is ideal for monorepo full-stack TypeScript apps where client and server share the same codebase.
+
+---
+
+## Webhook Design Patterns
+
+### Webhook Payload
+
+```json
+{
+  "id": "evt_abc123",
+  "type": "order.completed",
+  "created_at": "2025-01-15T10:30:00Z",
+  "data": {
+    "order_id": "ord_456",
+    "total": 99.99,
+    "currency": "USD"
+  }
+}
+```
+
+### Signature Verification
+
+```typescript
+// Sign webhooks with HMAC-SHA256
+import crypto from 'crypto';
+
+function signWebhook(payload: string, secret: string): string {
+  return crypto
+    .createHmac('sha256', secret)
+    .update(payload)
+    .digest('hex');
+}
+
+// Verify on receiving end
+function verifyWebhook(payload: string, signature: string, secret: string): boolean {
+  const expected = signWebhook(payload, secret);
+  return crypto.timingSafeEqual(
+    Buffer.from(signature),
+    Buffer.from(expected),
+  );
+}
+```
+
+### Retry Strategy
+
+```
+Attempt 1: Immediately
+Attempt 2: After 1 minute
+Attempt 3: After 5 minutes
+Attempt 4: After 30 minutes
+Attempt 5: After 2 hours
+Attempt 6: After 24 hours (final)
+
+Failed webhooks: log, alert, manual retry UI
+```
+
+### Idempotency
+
+```typescript
+// Include idempotency key in webhook
+// Receivers should deduplicate based on event ID
+async function handleWebhook(event: WebhookEvent) {
+  // Check if already processed
+  const existing = await db.processedEvents.findUnique({
+    where: { eventId: event.id },
+  });
+  if (existing) return { status: 'already_processed' };
+
+  // Process and record
+  await db.$transaction([
+    processEvent(event),
+    db.processedEvents.create({ data: { eventId: event.id } }),
+  ]);
+}
+```
+
+---
+
+## API Versioning Strategies
+
+| Strategy            | Example                          | Pros                     | Cons                      |
+| ------------------- | -------------------------------- | ------------------------ | ------------------------- |
+| **URL path**        | `/api/v1/users`                  | Explicit, easy to route  | URL pollution             |
+| **Query parameter** | `/api/users?version=1`           | Optional parameter       | Easy to miss              |
+| **Header**          | `Accept: application/vnd.api.v1` | Clean URLs               | Hidden, harder to test    |
+| **Content negotiation** | `Accept: application/json;v=2` | Standards-based        | Complex to implement      |
+
+**Recommendation:** URL path versioning for simplicity. Only bump major versions for breaking changes. Use additive, non-breaking changes within a version.

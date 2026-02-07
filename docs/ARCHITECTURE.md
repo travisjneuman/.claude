@@ -67,9 +67,9 @@ Rules live in `~/.claude/rules/` organized by purpose:
 
 ```
 rules/
-├── checklists/        # Task-type verification (UI changes, scripts, static sites)
-├── workflows/         # Methodology (research, context management, agent teams)
-├── stacks/            # Technology patterns (React, Python, Go, Rust, full-stack)
+├── checklists/        # Task-type verification (UI, scripts, static sites, API, DB, security, perf)
+├── workflows/         # Methodology (research, context, agent teams, deployment CI/CD)
+├── stacks/            # Technology patterns (React, Python, Go, Rust, full-stack, Vue, Svelte, Flutter, React Native, Django/FastAPI)
 └── tooling/           # Tool setup (git hooks, MCP servers, troubleshooting)
 ```
 
@@ -95,6 +95,10 @@ Skills auto-activate when Claude's context matches their description. They provi
 - Stack-specific (12) — React, static, full-stack variants of the above
 - Framework (5) — Vue, Svelte, iOS, Android, Flutter
 - Domain expert (16) — business, finance, marketing, legal, data science, etc.
+- SaaS lifecycle (6) — authentication, payments, email, analytics, monitoring, serverless
+- AI/ML (2) — AI/ML development, LLM app development (RAG, embeddings, agents)
+- Infrastructure (4) — event-driven architecture, performance engineering, accessibility, application security
+- Platform (3) — Tauri desktop, mobile CI/CD, Kotlin Multiplatform
 - Utility (6) — tech debt, testing, documentation, SEO, frontend enhancement
 - Agent Teams (1) — team composition and coordination knowledge
 
