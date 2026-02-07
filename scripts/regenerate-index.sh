@@ -27,8 +27,16 @@ for dir in "$SKILLS_DIR"/*/; do
   name=$(basename "$dir")
   skill_file="$dir/SKILL.md"
   if [ -f "$skill_file" ]; then
-    # Extract first non-empty, non-heading line as description
-    desc=$(grep -m1 -v '^#\|^$\|^---\|^>' "$skill_file" 2>/dev/null | head -1 | sed 's/|/\\|/g' | cut -c1-80)
+    # Extract description from YAML frontmatter if available
+    desc=$(sed -n '/^---$/,/^---$/p' "$skill_file" 2>/dev/null | grep -m1 '^description:' | sed 's/^description:\s*//' | sed 's/^>-\s*//' | sed 's/|/\\|/g' | cut -c1-80)
+    # If multiline description (>-), grab the next line instead
+    if [ -z "$desc" ] || [ "$desc" = ">-" ]; then
+      desc=$(sed -n '/^---$/,/^---$/p' "$skill_file" 2>/dev/null | grep -A1 '^description:' | tail -1 | sed 's/^\s*//' | sed 's/|/\\|/g' | cut -c1-80)
+    fi
+    # Fallback: first line after frontmatter that's not a heading
+    if [ -z "$desc" ]; then
+      desc=$(awk '/^---$/{c++;next} c==2{if(/^[^#]/ && !/^$/ && !/^---/){print;exit}}' "$skill_file" 2>/dev/null | sed 's/|/\\|/g' | cut -c1-80)
+    fi
     [ -z "$desc" ] && desc="(no description)"
   else
     desc="(no SKILL.md)"

@@ -7,12 +7,17 @@
 ## Project Commands
 
 ```bash
-# Development
-npm run dev          # Start dev server
+# Development (Vite 6 as default bundler)
+npm run dev          # Start dev server (Vite)
 npm run build        # Production build
-npm run test         # Run tests
+npm run test         # Run tests (Vitest)
 npm run type-check   # TypeScript validation
-npm run lint         # Lint code
+npm run lint         # Lint code (ESLint or Biome)
+
+# Biome alternative (faster linting + formatting)
+npx @biomejs/biome check .        # Lint
+npx @biomejs/biome format .       # Format
+npx @biomejs/biome check --fix .  # Lint + fix
 
 # Verify before committing
 npm run test && npm run type-check
@@ -29,13 +34,19 @@ npm run test && npm run type-check
 interface Props {
   title: string;
   onAction: () => void;
+  ref?: React.Ref<HTMLDivElement>; // React 19: ref as prop (no forwardRef needed)
   children?: React.ReactNode;
 }
 
 // Functional components only (no class components)
-export function MyComponent({ title, onAction, children }: Props) {
+// React 19: ref is a regular prop, forwardRef is no longer needed
+export function MyComponent({ title, onAction, ref, children }: Props) {
   // Hooks at top
   const [state, setState] = useState<string>('');
+
+  // React 19: use() hook for promises and context
+  // const data = use(fetchPromise);
+  // const theme = use(ThemeContext);
 
   // Event handlers
   const handleClick = () => {
@@ -44,7 +55,7 @@ export function MyComponent({ title, onAction, children }: Props) {
 
   // Render
   return (
-    <div>
+    <div ref={ref}>
       <h1>{title}</h1>
       <button onClick={handleClick}>Action</button>
       {children}
@@ -201,23 +212,29 @@ function App() {
 
 ## Common Patterns
 
-### Error Boundaries
+### Error Boundaries (react-error-boundary)
 
 ```typescript
-class ErrorBoundary extends React.Component<Props, State> {
-  state = { hasError: false };
+// Prefer react-error-boundary library over class components
+import { ErrorBoundary } from 'react-error-boundary';
 
-  static getDerivedStateFromError() {
-    return { hasError: true };
-  }
-
-  render() {
-    if (this.state.hasError) {
-      return <ErrorFallback />;
-    }
-    return this.props.children;
-  }
+function ErrorFallback({ error, resetErrorBoundary }: FallbackProps) {
+  return (
+    <div role="alert">
+      <p>Something went wrong:</p>
+      <pre>{error.message}</pre>
+      <button onClick={resetErrorBoundary}>Try again</button>
+    </div>
+  );
 }
+
+// Usage
+<ErrorBoundary
+  FallbackComponent={ErrorFallback}
+  onReset={() => queryClient.clear()}
+>
+  <App />
+</ErrorBoundary>
 ```
 
 ### Custom Hooks
@@ -276,6 +293,98 @@ Skill(generic-react-feature-developer)
 - [ ] Inline functions in JSX (performance)
 - [ ] Direct DOM manipulation
 - [ ] Not memoizing expensive operations
+
+---
+
+## Modern React Patterns (React 19+)
+
+### React 19 Features
+
+| Feature                  | Description                                                    |
+| ------------------------ | -------------------------------------------------------------- |
+| `use()` hook             | Read promises and context directly in render                   |
+| `ref` as prop            | Pass refs as regular props, no `forwardRef` needed             |
+| React Compiler           | Auto-memoization, no manual `useMemo`/`useCallback` needed    |
+| Server Components        | Default in frameworks like Next.js, zero client JS             |
+| Actions                  | `useActionState`, `useFormStatus` for form handling            |
+| `useOptimistic`          | Optimistic UI updates                                          |
+
+### use() Hook
+
+```typescript
+// Read a promise (suspends until resolved)
+function UserProfile({ userPromise }: { userPromise: Promise<User> }) {
+  const user = use(userPromise);
+  return <h1>{user.name}</h1>;
+}
+
+// Read context (replaces useContext)
+function ThemedButton() {
+  const theme = use(ThemeContext);
+  return <button style={{ color: theme.primary }}>Click</button>;
+}
+```
+
+### React Compiler
+
+When using React Compiler (babel plugin), manual memoization is handled automatically. Remove unnecessary `useMemo`, `useCallback`, and `memo` wrappers -- the compiler optimizes them for you.
+
+### Server State with TanStack Query
+
+```typescript
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+
+function UserList() {
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['users'],
+    queryFn: fetchUsers,
+    staleTime: 5 * 60 * 1000, // 5 minutes
+  });
+
+  const queryClient = useQueryClient();
+  const mutation = useMutation({
+    mutationFn: createUser,
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['users'] }),
+  });
+
+  if (isLoading) return <Spinner />;
+  if (error) return <ErrorDisplay error={error} />;
+  return <ul>{data?.map(user => <li key={user.id}>{user.name}</li>)}</ul>;
+}
+```
+
+### Tailwind CSS (Default Styling)
+
+```typescript
+// Tailwind CSS is the default styling approach
+// Use cn() utility for conditional classes
+import { cn } from '@/lib/utils';
+
+function Button({ variant, className, ...props }: ButtonProps) {
+  return (
+    <button
+      className={cn(
+        'px-4 py-2 rounded-md font-medium transition-colors',
+        variant === 'primary' && 'bg-blue-600 text-white hover:bg-blue-700',
+        variant === 'secondary' && 'bg-gray-200 text-gray-900 hover:bg-gray-300',
+        className,
+      )}
+      {...props}
+    />
+  );
+}
+```
+
+### Modern Tooling
+
+| Tool               | Purpose                      | Replaces            |
+| ------------------- | ---------------------------- | ------------------- |
+| **Vite 6**          | Bundler + dev server         | Webpack, CRA        |
+| **Vitest**          | Test runner                  | Jest                 |
+| **Biome**           | Linter + formatter           | ESLint + Prettier    |
+| **TanStack Query**  | Server state management      | SWR, manual fetch    |
+| **TanStack Router** | Type-safe routing            | React Router         |
+| **Tailwind CSS**    | Utility-first styling        | CSS Modules, styled  |
 
 ---
 

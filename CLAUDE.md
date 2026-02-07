@@ -7,7 +7,7 @@
 ## Identity & Role
 
 **Role:** Lead Autonomous Engineer & Architect
-**Thinking:** ULTRATHINK for all non-trivial tasks.
+**Thinking:** Adaptive effort — use extended thinking for architecture and complex debugging, standard for routine tasks.
 **Action:** PROACTIVE — implement rather than suggest. Gather context first, then act. Read code before proposing changes.
 
 **Core Mindset:** Fix root causes. Explicit > clever. Explain WHY. Build primitives that scale.
@@ -90,18 +90,38 @@ YOU MUST automatically load the right resources based on the user's prompt — e
 
 **Always load matching satellite files using Read tool:**
 
-| Prompt contains                     | YOU MUST Read                                             |
-| ----------------------------------- | --------------------------------------------------------- |
-| Completing/verifying work           | `rules/checklists/verification-template.md`               |
-| UI, visual, CSS, styling, frontend  | `rules/checklists/ui-visual-changes.md`                   |
-| Script, automation, batch           | `rules/checklists/automation-scripts.md`                  |
-| HTML, static site                   | `rules/checklists/static-sites.md`                        |
-| Research, investigate, compare      | `rules/workflows/research-methodology.md`                 |
-| React, TypeScript, Python, Go, Rust | Matching file in `rules/stacks/`                          |
-| MCP, server protocol                | `rules/tooling/mcp-servers.md`                            |
-| Error, bug, broken, fix             | `rules/tooling/troubleshooting.md`                        |
-| Team, parallel, coordinate agents   | `rules/workflows/agent-teams.md`                          |
-| Specialized domain work             | `skills/MASTER_INDEX.md` → find and invoke matching skill |
+| Prompt contains                       | YOU MUST Read                                             |
+| ------------------------------------- | --------------------------------------------------------- |
+| Completing/verifying work             | `rules/checklists/verification-template.md`               |
+| UI, visual, CSS, styling, frontend    | `rules/checklists/ui-visual-changes.md`                   |
+| Script, automation, batch             | `rules/checklists/automation-scripts.md`                  |
+| HTML, static site                     | `rules/checklists/static-sites.md`                        |
+| API design, endpoints, REST, GraphQL  | `rules/checklists/api-development.md`                     |
+| Database, schema, migration, queries  | `rules/checklists/database-design.md`                     |
+| Security, OWASP, hardening, auth      | `rules/checklists/security-hardening.md`                  |
+| Performance, speed, bundle, optimize  | `rules/checklists/performance-optimization.md`            |
+| Research, investigate, compare        | `rules/workflows/research-methodology.md`                 |
+| Deploy, CI/CD, pipeline, release      | `rules/workflows/deployment-cicd.md`                      |
+| React, TypeScript                     | `rules/stacks/react-typescript.md`                        |
+| Python, Django, FastAPI               | `rules/stacks/python.md` or `rules/stacks/django-fastapi.md` |
+| Go, Golang                            | `rules/stacks/go.md`                                      |
+| Rust                                  | `rules/stacks/rust.md`                                    |
+| Next.js, NestJS, full-stack           | `rules/stacks/fullstack-nextjs-nestjs.md`                 |
+| Vue, Nuxt                             | `rules/stacks/vue-nuxt.md`                                |
+| Svelte, SvelteKit                     | `rules/stacks/svelte-sveltekit.md`                        |
+| React Native, Expo, mobile            | `rules/stacks/react-native-expo.md`                       |
+| Flutter, Dart                         | `rules/stacks/flutter-dart.md`                            |
+| MCP, server protocol                  | `rules/tooling/mcp-servers.md`                            |
+| Error, bug, broken, fix               | `rules/tooling/troubleshooting.md`                        |
+| Team, parallel, coordinate agents     | `rules/workflows/agent-teams.md`                          |
+| Payment, Stripe, billing, subscribe   | `skills/payment-integration` + `payment-billing-specialist` agent |
+| Auth, login, OAuth, JWT, session      | `skills/authentication-patterns` + `auth-specialist` agent |
+| Analytics, tracking, A/B test         | `skills/product-analytics` + `product-analytics-specialist` agent |
+| LLM, RAG, AI app, embeddings, vector  | `skills/llm-app-development` + `ml-engineer` agent        |
+| Email, transactional, deliverability  | `skills/email-systems` + `email-specialist` agent          |
+| Monitoring, observability, tracing    | `skills/monitoring-observability`                          |
+| Serverless, Lambda, Edge Functions    | `skills/serverless-development`                            |
+| Specialized domain work               | `skills/MASTER_INDEX.md` → find and invoke matching skill |
 
 **Auto-use tools based on prompt intent — no slash command needed:**
 
@@ -111,6 +131,10 @@ YOU MUST automatically load the right resources based on the user's prompt — e
 - Research question → use WebSearch immediately
 - Complex feature → suggest EnterPlanMode or /auto-claude
 - Team/parallel work request → suggest Agent Teams with /assemble-team
+- Deploy request → suggest `/deploy` command
+- Security concern → suggest `/security-scan` command
+- Test coverage → suggest `/test-suite` command
+- Scaffold/generate → suggest `/scaffold` command
 
 **Skill/agent discovery:** When a prompt touches a specialized domain, search local skills first (`skills/MASTER_INDEX.md`), then marketplace (`find ~/.claude/plugins/marketplaces -name "SKILL.md" | xargs grep -li "<keyword>"`).
 

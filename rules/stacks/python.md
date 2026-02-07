@@ -6,7 +6,25 @@
 
 ## Project Setup
 
-### Virtual Environment
+### uv Package Manager (Recommended)
+
+```bash
+# Install uv (fast Python package manager, replaces pip/venv)
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Create project with uv
+uv init my-project
+cd my-project
+
+# Create virtual environment and install dependencies
+uv sync                      # Install from pyproject.toml
+uv add requests pydantic     # Add dependencies
+uv add --dev pytest ruff mypy # Add dev dependencies
+uv run python script.py      # Run within venv
+uv run pytest                # Run tests within venv
+```
+
+### Traditional Virtual Environment (Fallback)
 
 ```bash
 # Create virtual environment
@@ -27,6 +45,7 @@ pip install -r requirements.txt
 ```bash
 # Run script
 python script.py
+uv run python script.py     # With uv
 
 # Run tests
 pytest
@@ -36,13 +55,10 @@ pytest tests/test_module.py  # specific file
 # Type checking
 mypy src/
 
-# Linting
-ruff check .
-black --check .
-
-# Format
-black .
-ruff --fix .
+# Linting and formatting (ruff replaces black + isort + flake8)
+ruff check .                 # Lint
+ruff format .                # Format (replaces black)
+ruff check --fix .           # Lint + auto-fix
 ```
 
 ---
@@ -98,22 +114,26 @@ def calculate_total(
     ...
 ```
 
-### Input Validation
+### Input Validation (Pydantic v2)
 
 ```python
-# Use Pydantic for data validation
-from pydantic import BaseModel, Field, validator
+# Pydantic v2 API: use @field_validator instead of @validator
+from pydantic import BaseModel, Field, field_validator
 
 class UserInput(BaseModel):
     name: str = Field(..., min_length=1, max_length=100)
     email: str
     age: int = Field(..., ge=0, le=150)
 
-    @validator('email')
+    @field_validator('email')
+    @classmethod
     def validate_email(cls, v: str) -> str:
         if '@' not in v:
             raise ValueError('Invalid email')
         return v.lower()
+
+    # Pydantic v2: model_config replaces class Config
+    model_config = {'strict': True}
 
 # Usage
 try:
@@ -144,10 +164,37 @@ project/
 │   ├── __init__.py
 │   ├── conftest.py
 │   └── test_user_service.py
-├── requirements.txt
-├── requirements-dev.txt
-├── pyproject.toml
+├── pyproject.toml          # Primary config (replaces setup.py/setup.cfg)
 └── README.md
+```
+
+### pyproject.toml (Primary Config)
+
+```toml
+[project]
+name = "my-project"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "pydantic>=2.0",
+    "httpx>=0.27",
+]
+
+[project.optional-dependencies]
+dev = ["pytest", "ruff", "mypy"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 99
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "UP", "B"]
+
+[tool.mypy]
+strict = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
 ```
 
 ---
@@ -313,6 +360,83 @@ def add_item(item: str, items: list | None = None) -> list:
 - PascalCase for classes
 - UPPER_CASE for constants
 - Two blank lines between top-level definitions
+
+---
+
+## Python 3.12+ Features
+
+### Type Parameter Syntax (PEP 695)
+
+```python
+# Old syntax
+from typing import TypeVar
+T = TypeVar('T')
+def first(items: list[T]) -> T: ...
+
+# New syntax (3.12+)
+type Vector = list[float]
+
+def first[T](items: list[T]) -> T: ...
+
+class Stack[T]:
+    def push(self, item: T) -> None: ...
+    def pop(self) -> T: ...
+```
+
+### Better Error Messages
+
+Python 3.12+ provides more helpful error messages with suggestions for typos, missing imports, and common mistakes. Leverage these during development.
+
+### override Decorator
+
+```python
+from typing import override
+
+class Base:
+    def process(self) -> None: ...
+
+class Child(Base):
+    @override
+    def process(self) -> None:  # Type checker verifies Base has this method
+        ...
+```
+
+---
+
+## Web Frameworks
+
+### FastAPI
+
+```python
+from fastapi import FastAPI, HTTPException, Depends
+from pydantic import BaseModel
+
+app = FastAPI()
+
+class CreateUser(BaseModel):
+    name: str
+    email: str
+
+@app.post("/users", status_code=201)
+async def create_user(user: CreateUser) -> User:
+    return await user_service.create(user)
+
+@app.get("/users/{user_id}")
+async def get_user(user_id: int) -> User:
+    user = await user_service.get(user_id)
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    return user
+```
+
+### Django
+
+```python
+# Django with Django REST Framework for APIs
+# Django with Django Ninja for type-safe APIs (FastAPI-like)
+# Use Django for admin-heavy or ORM-heavy applications
+# Use FastAPI for lightweight, async-first API services
+```
 
 ---
 

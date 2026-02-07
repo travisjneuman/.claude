@@ -53,19 +53,22 @@ npx prisma studio        # Database GUI
 
 ## Next.js Patterns
 
-### App Router Structure
+### App Router Structure (Next.js 15)
 
 ```
 app/
 ├── layout.tsx           # Root layout
 ├── page.tsx             # Home page
+├── loading.tsx          # Loading UI (Suspense boundary)
+├── error.tsx            # Error boundary
 ├── (auth)/              # Route group
 │   ├── login/page.tsx
 │   └── register/page.tsx
 ├── dashboard/
 │   ├── layout.tsx       # Dashboard layout
 │   ├── page.tsx         # Dashboard home
-│   └── [id]/page.tsx    # Dynamic route
+│   ├── [id]/page.tsx    # Dynamic route
+│   └── actions.ts       # Server Actions
 └── api/                 # API routes (BFF)
     └── [...]/route.ts
 ```
@@ -303,6 +306,36 @@ export async function fetchUsers(): Promise<User[]> {
 6. NestJS AuthGuard validates JWT
 ```
 
+### Auth.js v5 (Recommended)
+
+```typescript
+// auth.ts (formerly NextAuth)
+import NextAuth from "next-auth";
+import Credentials from "next-auth/providers/credentials";
+import GitHub from "next-auth/providers/github";
+
+export const { handlers, signIn, signOut, auth } = NextAuth({
+  providers: [
+    GitHub,
+    Credentials({
+      credentials: { email: {}, password: {} },
+      authorize: async (credentials) => {
+        const user = await verifyUser(credentials);
+        return user ?? null;
+      },
+    }),
+  ],
+});
+
+// app/api/auth/[...nextauth]/route.ts
+export { handlers as GET, handlers as POST } from "@/auth";
+
+// Middleware for protected routes
+// middleware.ts
+export { auth as middleware } from "@/auth";
+export const config = { matcher: ["/dashboard/:path*"] };
+```
+
 ---
 
 ## Related Skills
@@ -355,6 +388,166 @@ Skill(generic-fullstack-feature-developer)
 - [ ] No migrations (manual schema changes)
 - [ ] Missing indexes on query fields
 - [ ] N+1 queries (use includes)
+
+---
+
+## Next.js 15 Features
+
+### Server Actions
+
+```typescript
+// app/dashboard/actions.ts
+'use server';
+
+import { revalidatePath } from 'next/cache';
+
+export async function createItem(formData: FormData) {
+  const name = formData.get('name') as string;
+  await db.items.create({ data: { name } });
+  revalidatePath('/dashboard');
+}
+
+// Usage in component (no API route needed)
+export default function CreateForm() {
+  return (
+    <form action={createItem}>
+      <input name="name" required />
+      <button type="submit">Create</button>
+    </form>
+  );
+}
+```
+
+### Turbopack (Dev Server)
+
+```bash
+# Use Turbopack for faster dev server (default in Next.js 15)
+next dev --turbopack
+```
+
+### Partial Prerendering
+
+```typescript
+// Combine static and dynamic content in one route
+// Static shell renders instantly, dynamic parts stream in
+import { Suspense } from 'react';
+
+export default function Page() {
+  return (
+    <div>
+      <StaticHeader />           {/* Pre-rendered at build */}
+      <Suspense fallback={<Skeleton />}>
+        <DynamicContent />       {/* Streams in at request time */}
+      </Suspense>
+    </div>
+  );
+}
+```
+
+---
+
+## tRPC for Type-Safe APIs
+
+```typescript
+// packages/api/src/router.ts
+import { router, publicProcedure, protectedProcedure } from './trpc';
+import { z } from 'zod';
+
+export const appRouter = router({
+  getUser: publicProcedure
+    .input(z.object({ id: z.string() }))
+    .query(async ({ input }) => {
+      return db.user.findUnique({ where: { id: input.id } });
+    }),
+  createUser: protectedProcedure
+    .input(z.object({ name: z.string(), email: z.string().email() }))
+    .mutation(async ({ input }) => {
+      return db.user.create({ data: input });
+    }),
+});
+
+export type AppRouter = typeof appRouter;
+
+// apps/web/lib/trpc.ts - Client usage (fully typed)
+const user = trpc.getUser.useQuery({ id: '123' });
+const mutation = trpc.createUser.useMutation();
+```
+
+---
+
+## Drizzle ORM (Prisma Alternative)
+
+```typescript
+// drizzle/schema.ts
+import { pgTable, uuid, varchar, timestamp } from 'drizzle-orm/pg-core';
+
+export const users = pgTable('users', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  name: varchar('name', { length: 100 }).notNull(),
+  email: varchar('email', { length: 255 }).notNull().unique(),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+});
+
+// Usage - SQL-like but type-safe
+const allUsers = await db.select().from(users).where(eq(users.email, email));
+await db.insert(users).values({ name, email });
+```
+
+---
+
+## Turborepo for Monorepo
+
+```bash
+# Initialize with Turborepo
+npx create-turbo@latest
+
+# Run tasks in parallel with caching
+turbo run build
+turbo run test --filter=./apps/web
+turbo run lint --filter=./packages/*
+```
+
+```json
+// turbo.json
+{
+  "tasks": {
+    "build": { "dependsOn": ["^build"], "outputs": [".next/**", "dist/**"] },
+    "test": { "dependsOn": ["build"] },
+    "dev": { "cache": false, "persistent": true }
+  }
+}
+```
+
+---
+
+## Docker Patterns
+
+```dockerfile
+# Dockerfile (multi-stage for full-stack)
+FROM node:20-alpine AS base
+RUN npm install -g turbo
+
+FROM base AS builder
+WORKDIR /app
+COPY . .
+RUN turbo prune --scope=web --docker
+
+FROM base AS installer
+WORKDIR /app
+COPY --from=builder /app/out/json/ .
+RUN npm ci
+COPY --from=builder /app/out/full/ .
+RUN turbo run build --filter=web
+
+FROM base AS runner
+WORKDIR /app
+RUN addgroup --system nodejs && adduser --system nextjs
+COPY --from=installer /app/apps/web/.next/standalone ./
+COPY --from=installer /app/apps/web/.next/static ./apps/web/.next/static
+COPY --from=installer /app/apps/web/public ./apps/web/public
+USER nextjs
+CMD ["node", "apps/web/server.js"]
+```
 
 ---
 

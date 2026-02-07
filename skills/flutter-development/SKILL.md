@@ -526,3 +526,204 @@ CachedNetworkImage(
 - Use setState for complex state
 - Ignore null safety
 - Skip code generation setup
+
+---
+
+## Dart 3 Features
+
+### Sealed Classes and Pattern Matching
+
+```dart
+// Sealed classes for exhaustive pattern matching
+sealed class Result<T> {}
+class Success<T> extends Result<T> { final T value; Success(this.value); }
+class Failure<T> extends Result<T> { final String error; Failure(this.error); }
+
+// Exhaustive switch
+String display(Result<User> result) => switch (result) {
+  Success(value: final user) => 'Hello, ${user.name}',
+  Failure(error: final msg) => 'Error: $msg',
+};
+```
+
+### Records
+
+```dart
+// Lightweight data tuples
+(String, int) getUserInfo() => ('John', 30);
+
+// Named fields
+({String name, int age}) getUserDetails() => (name: 'John', age: 30);
+
+// Destructuring
+final (name, age) = getUserInfo();
+final (:name, :age) = getUserDetails();
+```
+
+### Extension Types
+
+```dart
+// Zero-cost type wrappers (compile-time only)
+extension type UserId(String value) {
+  bool get isValid => value.isNotEmpty;
+}
+
+extension type Email(String value) {
+  factory Email.validated(String raw) {
+    if (!raw.contains('@')) throw FormatException('Invalid email');
+    return Email(raw);
+  }
+}
+
+// Usage - type-safe, zero runtime cost
+void sendEmail(Email to, UserId from) { ... }
+sendEmail(Email.validated('a@b.com'), UserId('user123'));
+```
+
+### If-Case and Switch Expressions
+
+```dart
+// If-case for pattern matching
+if (json case {'name': String name, 'age': int age}) {
+  print('$name is $age years old');
+}
+
+// Switch expressions (concise)
+final icon = switch (status) {
+  'active' => Icons.check_circle,
+  'pending' => Icons.hourglass_empty,
+  'error' => Icons.error,
+  _ => Icons.help,
+};
+```
+
+---
+
+## Riverpod 3.0 Patterns
+
+```dart
+// Modern Riverpod with code generation
+@riverpod
+class Counter extends _$Counter {
+  @override
+  int build() => 0;
+
+  void increment() => state++;
+  void decrement() => state--;
+}
+
+// Async provider with Riverpod 3.0
+@riverpod
+Future<List<Item>> items(Ref ref) async {
+  final repository = ref.watch(repositoryProvider);
+  return repository.fetchItems();
+}
+
+// Family provider (parameterized)
+@riverpod
+Future<User> user(Ref ref, String userId) async {
+  return ref.watch(apiClientProvider).getUser(userId);
+}
+
+// Usage in widget
+class ItemScreen extends ConsumerWidget {
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final items = ref.watch(itemsProvider);
+
+    return items.when(
+      data: (data) => ListView.builder(
+        itemCount: data.length,
+        itemBuilder: (context, i) => ItemTile(data[i]),
+      ),
+      loading: () => const CircularProgressIndicator(),
+      error: (err, stack) => Text('Error: $err'),
+    );
+  }
+}
+```
+
+---
+
+## Material 3 / Material You
+
+```dart
+MaterialApp(
+  theme: ThemeData(
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: Colors.deepPurple,
+      brightness: Brightness.light,
+    ),
+    useMaterial3: true,
+  ),
+  darkTheme: ThemeData(
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: Colors.deepPurple,
+      brightness: Brightness.dark,
+    ),
+    useMaterial3: true,
+  ),
+  themeMode: ThemeMode.system,
+);
+
+// Dynamic color (Android 12+)
+import 'package:dynamic_color/dynamic_color.dart';
+
+DynamicColorBuilder(
+  builder: (lightDynamic, darkDynamic) {
+    return MaterialApp(
+      theme: ThemeData(
+        colorScheme: lightDynamic ?? defaultLightScheme,
+        useMaterial3: true,
+      ),
+    );
+  },
+);
+```
+
+---
+
+## Build and Deployment
+
+### Fastlane
+
+```ruby
+# fastlane/Fastfile
+platform :ios do
+  lane :beta do
+    build_flutter_app
+    upload_to_testflight
+  end
+end
+
+platform :android do
+  lane :beta do
+    build_flutter_app
+    upload_to_play_store(track: 'internal')
+  end
+end
+```
+
+### Codemagic CI/CD
+
+```yaml
+# codemagic.yaml
+workflows:
+  flutter-release:
+    name: Flutter Release
+    environment:
+      flutter: stable
+    scripts:
+      - name: Build
+        script: flutter build appbundle --release
+    artifacts:
+      - build/**/outputs/**/*.aab
+    publishing:
+      google_play:
+        credentials: $GCLOUD_SERVICE_ACCOUNT
+        track: internal
+```
+
+### EAS Build (for Expo/RN comparison reference)
+
+Flutter apps typically use Fastlane, Codemagic, or GitHub Actions for CI/CD rather than EAS.

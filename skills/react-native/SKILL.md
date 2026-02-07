@@ -552,3 +552,176 @@ eas submit --platform android
 - Ignore platform differences
 - Block JS thread with heavy computation
 - Forget to handle deep linking
+
+---
+
+## New Architecture (React Native 0.76+)
+
+React Native's New Architecture replaces the legacy bridge with a more performant, synchronous layer.
+
+### Core Components
+
+| Component          | Replaces     | Benefit                                        |
+| ------------------ | ------------ | ---------------------------------------------- |
+| **Fabric**         | Paper        | Synchronous rendering, concurrent features     |
+| **TurboModules**   | Native Modules | Lazy loading, synchronous access, type safety |
+| **JSI**            | Bridge       | Direct JS-to-native communication, no JSON     |
+| **Bridgeless Mode** | Bridge      | Removes bridge entirely, lower memory usage    |
+
+### Enabling New Architecture
+
+```json
+// app.json (Expo)
+{
+  "expo": {
+    "newArchEnabled": true
+  }
+}
+```
+
+```ruby
+# ios/Podfile (bare React Native)
+ENV['RCT_NEW_ARCH_ENABLED'] = '1'
+```
+
+### TurboModules (Type-Safe Native Modules)
+
+```typescript
+// NativeCalculator.ts
+import type { TurboModule } from "react-native";
+import { TurboModuleRegistry } from "react-native";
+
+export interface Spec extends TurboModule {
+  add(a: number, b: number): number; // Synchronous!
+  fetchData(url: string): Promise<string>; // Async
+}
+
+export default TurboModuleRegistry.getEnforcing<Spec>("NativeCalculator");
+```
+
+### Fabric Components (New Renderer)
+
+Fabric enables concurrent rendering features from React 18/19, including Suspense for data fetching, transitions, and automatic batching.
+
+---
+
+## Expo Router (File-Based Routing)
+
+```bash
+npx create-expo-app@latest --template tabs
+```
+
+### File Structure
+
+```
+app/
+├── _layout.tsx          # Root layout
+├── index.tsx            # Home screen (/)
+├── (tabs)/              # Tab group
+│   ├── _layout.tsx      # Tab navigator
+│   ├── index.tsx        # First tab
+│   └── settings.tsx     # Settings tab
+├── [id].tsx             # Dynamic route (/123)
+├── modal.tsx            # Modal screen
+└── +not-found.tsx       # 404 screen
+```
+
+### Layout and Navigation
+
+```tsx
+// app/_layout.tsx
+import { Stack } from "expo-router";
+
+export default function RootLayout() {
+  return (
+    <Stack>
+      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      <Stack.Screen name="modal" options={{ presentation: "modal" }} />
+    </Stack>
+  );
+}
+
+// Navigate with type-safe links
+import { Link, router } from "expo-router";
+
+<Link href="/settings">Settings</Link>
+<Link href={{ pathname: "/[id]", params: { id: "123" } }}>Details</Link>
+
+// Programmatic navigation
+router.push("/settings");
+router.replace("/login");
+router.back();
+```
+
+---
+
+## React 19 Compatibility
+
+React Native supports React 19 features when using New Architecture:
+
+- **use() hook** for reading promises and context
+- **ref as prop** (no forwardRef needed)
+- **React Compiler** support for auto-memoization
+- **useActionState** and **useOptimistic** for form handling
+
+---
+
+## EAS Update (OTA Updates)
+
+```bash
+# Install EAS CLI
+npm install -g eas-cli
+
+# Configure updates
+eas update:configure
+
+# Push an OTA update (no app store review)
+eas update --branch production --message "Bug fix for login"
+eas update --branch preview --message "New feature preview"
+```
+
+```typescript
+// Check for updates in app
+import * as Updates from "expo-updates";
+
+async function checkForUpdates() {
+  const update = await Updates.checkForUpdateAsync();
+  if (update.isAvailable) {
+    await Updates.fetchUpdateAsync();
+    await Updates.reloadAsync(); // Apply update
+  }
+}
+```
+
+---
+
+## Hermes Engine
+
+Hermes is the default JS engine for React Native, optimized for mobile:
+
+- **Faster startup** via bytecode precompilation
+- **Lower memory** usage than JavaScriptCore
+- **Better debugging** with Chrome DevTools Protocol
+
+```json
+// app.json - Hermes is enabled by default in Expo SDK 52+
+{
+  "expo": {
+    "jsEngine": "hermes"
+  }
+}
+```
+
+---
+
+## Expo SDK 52+ Features
+
+| Feature                   | Description                                    |
+| ------------------------- | ---------------------------------------------- |
+| **Expo Router v4**        | File-based routing with API routes              |
+| **expo-camera (next)**    | Camera API with barcode scanning               |
+| **expo-video**            | Modern video player replacing expo-av           |
+| **expo-sqlite**           | SQLite with synchronous API via JSI             |
+| **DOM Components**        | Render web components inside React Native       |
+| **React 19 support**      | Full React 19 features with New Architecture   |
+| **Universal links**       | Deep linking configured via app.json            |

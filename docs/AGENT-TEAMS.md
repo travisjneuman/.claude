@@ -14,7 +14,7 @@ Coordinate multiple Claude Code sessions working together as a team.
 
 ## What Are Agent Teams?
 
-Agent Teams let you run multiple Claude Code instances in parallel, coordinated by a team lead. Unlike subagents (Task tool), each teammate is a full independent Claude Code session with its own 200k context window, able to message other teammates directly.
+Agent Teams let you run multiple Claude Code instances in parallel, coordinated by a team lead. Unlike subagents (Task tool), each teammate is a full independent Claude Code session with its own context window (up to 1M tokens with Opus 4.6), able to message other teammates directly.
 
 One session acts as the **team lead** -- it creates the team, spawns teammates, assigns tasks, and synthesizes results. Teammates work independently and communicate via a shared messaging system.
 

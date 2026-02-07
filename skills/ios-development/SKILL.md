@@ -462,3 +462,261 @@ MyApp/
 - Hardcode strings (use localization)
 - Ignore memory management (retain cycles)
 - Skip accessibility labels
+
+---
+
+## @Observable Macro (iOS 17+, Replacing ObservableObject)
+
+```swift
+import Observation
+
+// New pattern: @Observable macro (replaces ObservableObject + @Published)
+@Observable
+class UserViewModel {
+    var user: User?
+    var isLoading = false
+    var errorMessage: String?
+
+    func load() async {
+        isLoading = true
+        defer { isLoading = false }
+        do {
+            user = try await fetchUser()
+        } catch {
+            errorMessage = error.localizedDescription
+        }
+    }
+}
+
+// In View: no @StateObject/@ObservedObject wrappers needed
+struct UserView: View {
+    @State private var viewModel = UserViewModel()
+
+    var body: some View {
+        Group {
+            if viewModel.isLoading {
+                ProgressView()
+            } else if let user = viewModel.user {
+                Text(user.name)
+            }
+        }
+        .task { await viewModel.load() }
+    }
+}
+
+// @Bindable for two-way bindings
+struct EditView: View {
+    @Bindable var viewModel: EditViewModel
+
+    var body: some View {
+        TextField("Name", text: $viewModel.name)
+    }
+}
+```
+
+### Migration from ObservableObject
+
+| Old (ObservableObject)     | New (@Observable)         |
+| -------------------------- | ------------------------- |
+| `class: ObservableObject`  | `@Observable class`       |
+| `@Published var`           | `var` (automatic)         |
+| `@StateObject`             | `@State`                  |
+| `@ObservedObject`          | Direct reference          |
+| `@EnvironmentObject`       | `@Environment(TypeName.self)` |
+
+---
+
+## SwiftUI 6 New Views and Modifiers
+
+```swift
+// Mesh gradient (iOS 18+)
+MeshGradient(
+    width: 3, height: 3,
+    points: [
+        .init(0, 0), .init(0.5, 0), .init(1, 0),
+        .init(0, 0.5), .init(0.5, 0.5), .init(1, 0.5),
+        .init(0, 1), .init(0.5, 1), .init(1, 1)
+    ],
+    colors: [
+        .red, .purple, .indigo,
+        .orange, .cyan, .blue,
+        .yellow, .green, .mint
+    ]
+)
+
+// Zoom navigation transition
+NavigationLink {
+    DetailView(item: item)
+} label: {
+    ItemCard(item: item)
+}
+.matchedTransitionSource(id: item.id, in: namespace)
+
+// ScrollView enhancements
+ScrollView {
+    LazyVStack {
+        ForEach(items) { item in
+            ItemRow(item: item)
+        }
+    }
+}
+.scrollPosition(id: $scrolledID)
+.defaultScrollAnchor(.bottom)
+
+// Custom containers
+@Entry macro for EnvironmentValues
+@Environment(\.myCustomValue) var value
+```
+
+---
+
+## Swift 6 Concurrency
+
+```swift
+// Complete data race safety (strict concurrency checking)
+// Enable in Xcode: SWIFT_STRICT_CONCURRENCY = complete
+
+// Sendable conformance required for data crossing isolation boundaries
+struct UserData: Sendable {
+    let id: UUID
+    let name: String
+}
+
+// Actor isolation
+actor DatabaseManager {
+    private var cache: [String: Data] = [:]
+
+    func get(_ key: String) -> Data? { cache[key] }
+    func set(_ key: String, value: Data) { cache[key] = value }
+}
+
+// Global actors
+@MainActor
+class ViewModel {
+    var items: [Item] = []
+
+    func load() async {
+        let data = await fetchFromNetwork() // Runs off main actor
+        items = data // Back on main actor automatically
+    }
+}
+
+// Typed throws (Swift 6)
+enum DataError: Error {
+    case notFound, corrupted
+}
+
+func loadData() throws(DataError) -> Data {
+    guard let data = cache.get("key") else {
+        throw .notFound
+    }
+    return data
+}
+```
+
+---
+
+## Minimum Target: iOS 17+
+
+For new projects, target iOS 17+ to access:
+
+| Feature         | Minimum iOS | Benefit                          |
+| --------------- | ----------- | -------------------------------- |
+| @Observable     | 17          | Simpler state management         |
+| SwiftData       | 17          | Modern persistence (replaces Core Data) |
+| NavigationStack | 16          | Type-safe navigation             |
+| Swift Charts    | 16          | Native charting                  |
+| MeshGradient    | 18          | Beautiful gradients              |
+| ControlWidget   | 18          | Control Center widgets           |
+
+---
+
+## visionOS and Spatial Computing
+
+```swift
+// visionOS app structure
+@main
+struct MyVisionApp: App {
+    var body: some Scene {
+        // 2D window
+        WindowGroup {
+            ContentView()
+        }
+
+        // Immersive space
+        ImmersiveSpace(id: "immersiveScene") {
+            ImmersiveView()
+        }
+
+        // 3D volume
+        WindowGroup(id: "3dContent") {
+            Model3D(named: "Globe") { model in
+                model.resizable()
+                    .aspectRatio(contentMode: .fit)
+            } placeholder: {
+                ProgressView()
+            }
+        }
+        .windowStyle(.volumetric)
+    }
+}
+
+// RealityKit integration
+import RealityKit
+
+struct ImmersiveView: View {
+    var body: some View {
+        RealityView { content in
+            let sphere = MeshResource.generateSphere(radius: 0.5)
+            let material = SimpleMaterial(color: .blue, isMetallic: true)
+            let entity = ModelEntity(mesh: sphere, materials: [material])
+            content.add(entity)
+        }
+        .gesture(TapGesture().targetedToAnyEntity().onEnded { value in
+            // Handle spatial tap
+        })
+    }
+}
+```
+
+---
+
+## watchOS Development
+
+```swift
+// watchOS app with SwiftUI
+@main
+struct MyWatchApp: App {
+    var body: some Scene {
+        WindowGroup {
+            NavigationStack {
+                ContentView()
+            }
+        }
+    }
+}
+
+// Complications / Widgets
+struct MyWidget: Widget {
+    var body: some WidgetConfiguration {
+        StaticConfiguration(kind: "myWidget", provider: Provider()) { entry in
+            MyWidgetView(entry: entry)
+        }
+        .configurationDisplayName("My Widget")
+        .supportedFamilies([
+            .accessoryCircular,
+            .accessoryRectangular,
+            .accessoryInline,
+        ])
+    }
+}
+
+// Watch Connectivity for iPhone <-> Watch communication
+import WatchConnectivity
+
+class ConnectivityManager: NSObject, WCSessionDelegate {
+    func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
+        // Handle message from paired device
+    }
+}
+```
