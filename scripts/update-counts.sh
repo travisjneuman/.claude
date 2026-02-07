@@ -20,6 +20,9 @@ AGENT_COUNT=$(ls agents/*.md 2>/dev/null | grep -cv 'README\.md' || echo 0)
 REPO_COUNT=$(ls -d plugins/marketplaces/*/ 2>/dev/null | wc -l | tr -d ' ')
 MARKET_SKILL_COUNT=$(find plugins/marketplaces -name "SKILL.md" 2>/dev/null | wc -l | tr -d ' ')
 COMMAND_COUNT=$(ls commands/*.md 2>/dev/null | grep -cv 'README\.md' || echo 0)
+HOOK_COUNT=$(ls hooks/*.sh 2>/dev/null | wc -l | tr -d ' ')
+RULE_COUNT=$(find rules -name '*.md' -not -name 'README.md' 2>/dev/null | wc -l | tr -d ' ')
+TEMPLATE_COUNT=$(ls templates/ 2>/dev/null | grep -cv 'README\.md' || echo 0)
 
 # Round marketplace skills down to nearest 100 with "+" suffix
 MARKET_ROUNDED="$(( (MARKET_SKILL_COUNT / 100) * 100 ))"
@@ -39,6 +42,10 @@ echo "│  Filesystem Counts (source of truth)    │"
 echo "├─────────────────────────────────────────┤"
 echo "│  Local skills:      $SKILL_COUNT"
 echo "│  Agents:             $AGENT_COUNT"
+echo "│  Commands:           $COMMAND_COUNT"
+echo "│  Hooks:              $HOOK_COUNT"
+echo "│  Rules:              $RULE_COUNT"
+echo "│  Templates:          $TEMPLATE_COUNT"
 echo "│  Marketplace repos:  $REPO_COUNT"
 echo "│  Marketplace skills: $MARKET_SKILL_COUNT (display: ${MARKET_DISPLAY_PLUS})"
 echo "└─────────────────────────────────────────┘"
@@ -83,6 +90,18 @@ update_file() {
   # Global agent count — only with qualifying adjectives
   sedi -E "s/[0-9]+ specialized agents/${AGENT_COUNT} specialized agents/g" "$file"
   sedi -E "s/[0-9]+ local agents/${AGENT_COUNT} local agents/g" "$file"
+  sedi -E "s/[0-9]+ custom agents/${AGENT_COUNT} custom agents/g" "$file"
+
+  # Command count
+  sedi -E "s/[0-9]+ slash commands/${COMMAND_COUNT} slash commands/g" "$file"
+  sedi -E "s/[0-9]+ custom commands/${COMMAND_COUNT} custom commands/g" "$file"
+
+  # Hook count
+  sedi -E "s/[0-9]+ lifecycle hooks/${HOOK_COUNT} lifecycle hooks/g" "$file"
+
+  # Rule count
+  sedi -E "s/[0-9]+ rules files/${RULE_COUNT} rules files/g" "$file"
+  sedi -E "s/[0-9]+ contextual rules/${RULE_COUNT} contextual rules/g" "$file"
 
   # Marketplace repo count — only with qualifying words
   sedi -E "s/[0-9]+ marketplace repos/${REPO_COUNT} marketplace repos/g" "$file"
@@ -108,11 +127,15 @@ update_readme_badges() {
   local file="README.md"
   [ -f "$file" ] || return 0
 
-  # Shield.io badge patterns
-  sedi -E "s/Skills-[0-9]+\+-/Skills-${SKILL_COUNT}+-/" "$file"
-  sedi -E "s/Agents-[0-9]+\+-/Agents-${AGENT_COUNT}+-/" "$file"
-  sedi -E "s/Marketplaces-[0-9]+-/Marketplaces-${REPO_COUNT}-/" "$file"
-  sedi -E "s/Marketplace_Skills-[0-9]+\+-/Marketplace_Skills-${MARKET_BADGE}-/" "$file"
+  # Shield.io badge patterns (no plus on Skills/Agents, comma format on Marketplace_Skills)
+  sedi -E "s/Skills-[0-9]+-/Skills-${SKILL_COUNT}-/g" "$file"
+  sedi -E "s/Agents-[0-9]+-/Agents-${AGENT_COUNT}-/g" "$file"
+  sedi -E "s/Marketplaces-[0-9]+-/Marketplaces-${REPO_COUNT}-/g" "$file"
+  sedi -E "s/Marketplace_Skills-[0-9,]+\+-/Marketplace_Skills-${MARKET_BADGE}-/g" "$file"
+  sedi -E "s/Commands-[0-9]+-/Commands-${COMMAND_COUNT}-/g" "$file"
+  sedi -E "s/Hooks-[0-9]+-/Hooks-${HOOK_COUNT}-/g" "$file"
+  sedi -E "s/Rules-[0-9]+-/Rules-${RULE_COUNT}-/g" "$file"
+  sedi -E "s/Templates-[0-9]+-/Templates-${TEMPLATE_COUNT}-/g" "$file"
 
   # Table bold counts on rows containing "Skills"/"Agents"/"Marketplaces"
   sedi -E "/Skills/s/\*\*[0-9]+\*\*/**${SKILL_COUNT}**/" "$file"
@@ -145,6 +168,14 @@ update_readme_badges() {
   # Token cost lines
   sedi -E "s/All [0-9]+ skills loaded/All ${SKILL_COUNT} skills loaded/" "$file"
   sedi -E "s/All [0-9]+ agents defined/All ${AGENT_COUNT} agents defined/" "$file"
+
+  # ASCII art diagram counts
+  sedi -E "s/[0-9]+ modules/${SKILL_COUNT} modules/" "$file"
+  sedi -E "s/[0-9]+ specialists/${AGENT_COUNT} specialists/" "$file"
+  sedi -E "s/[0-9]+ guides/${RULE_COUNT} guides/" "$file"
+  sedi -E "s/[0-9]+ slash commands/${COMMAND_COUNT} slash commands/" "$file"
+  sedi -E "s/🪝 [0-9]+ HOOKS/🪝 ${HOOK_COUNT} HOOKS/" "$file"
+  sedi -E "s/📁 [0-9]+ TEMPLATES/📁 ${TEMPLATE_COUNT} TEMPLATES/" "$file"
 
   # Total line: "Total: 1,772+"
   local TOTAL=$((SKILL_COUNT + MARKET_SKILL_COUNT))
@@ -203,23 +234,33 @@ console.log('  ✓ Generated $json_file (' + repos.length + ' repos, ' + totalSk
 update_website() {
   local file
 
-  # layout.tsx: "72 local skills, 36 specialized agents"
+  # layout.tsx: metadata description and OG/Twitter
   file="website/src/app/layout.tsx"
-  [ -f "$file" ] || return 0
-  sedi -E "s/[0-9]+ local skills, [0-9]+ specialized agents/${SKILL_COUNT} local skills, ${AGENT_COUNT} specialized agents/" "$file"
-  sedi -E "s/[0-9]+ Skills, [0-9]+ Agents/${SKILL_COUNT} Skills, ${AGENT_COUNT} Agents/" "$file"
+  if [ -f "$file" ]; then
+    sedi -E "s/[0-9]+ local skills, [0-9]+ specialized agents/${SKILL_COUNT} local skills, ${AGENT_COUNT} specialized agents/" "$file"
+    sedi -E "s/[0-9]+ Skills, [0-9]+ Agents/${SKILL_COUNT} Skills, ${AGENT_COUNT} Agents/" "$file"
+    # Marketplace skills pattern: "1,900+" or "5,100+"
+    sedi -E "s/[0-9]+,[0-9]+\+ marketplace skills/${MARKET_DISPLAY_PLUS} marketplace skills/" "$file"
+    sedi -E "s/[0-9]+,[0-9]+\+ Marketplace Skills/${MARKET_DISPLAY_PLUS} Marketplace Skills/" "$file"
+    sedi -E "s/across [0-9]+ repos/across ${REPO_COUNT} repos/" "$file"
+  fi
 
-  # Footer.tsx: "72 skills, 36 agents"
+  # Footer.tsx: "85 skills, 47 agents, and 5,200+ marketplace skills across 72 repos"
   file="website/src/components/layout/Footer.tsx"
-  [ -f "$file" ] || return 0
-  sedi -E "s/[0-9]+ skills, [0-9]+ agents/${SKILL_COUNT} skills, ${AGENT_COUNT} agents/" "$file"
-  sedi -E "s/[0-9]+ repos/${REPO_COUNT} repos/" "$file"
+  if [ -f "$file" ]; then
+    sedi -E "s/[0-9]+ skills, [0-9]+ agents/${SKILL_COUNT} skills, ${AGENT_COUNT} agents/" "$file"
+    sedi -E "s/[0-9]+,[0-9]+\+[[:space:]]*marketplace skills/${MARKET_DISPLAY_PLUS} marketplace skills/" "$file"
+    sedi -E "s/across [0-9]+ repos/across ${REPO_COUNT} repos/" "$file"
+    sedi -E "s/[0-9]+ repos/${REPO_COUNT} repos/" "$file"
+  fi
 
-  # ConsoleGreeting.tsx: "72 Skills  •  36 Agents"
+  # ConsoleGreeting.tsx: "85 Skills  •  47 Agents  •  5,200+ Marketplace Skills  •  72 Repos"
   file="website/src/components/ConsoleGreeting.tsx"
-  [ -f "$file" ] || return 0
-  sedi -E "s/[0-9]+ Skills  •  [0-9]+ Agents/${SKILL_COUNT} Skills  •  ${AGENT_COUNT} Agents/" "$file"
-  sedi -E "s/[0-9]+ Repos/${REPO_COUNT} Repos/" "$file"
+  if [ -f "$file" ]; then
+    sedi -E "s/[0-9]+ Skills  •  [0-9]+ Agents/${SKILL_COUNT} Skills  •  ${AGENT_COUNT} Agents/" "$file"
+    sedi -E "s/[0-9]+,[0-9]+\+ Marketplace Skills/${MARKET_DISPLAY_PLUS} Marketplace Skills/" "$file"
+    sedi -E "s/[0-9]+ Repos/${REPO_COUNT} Repos/" "$file"
+  fi
 }
 
 # ─── Update list-skills.md header line only ──────────────────────────
@@ -324,6 +365,25 @@ update_marketplace_guide
 update_file "docs/NEW-DEVICE-SETUP.md"
 update_file "docs/SETUP-GUIDE.md"
 update_file "docs/AUTO-CLAUDE-GUIDE.md"
+update_file "docs/README.md"
+update_file "docs/CLAUDE-CODE-RESOURCES.md"
+update_file "docs/FOLDER-STRUCTURE.md"
+update_file "docs/ARCHITECTURE.md"
+update_file "docs/workflow-automation.md"
+update_file "docs/AGENT-TEAMS.md"
+update_file "docs/OPUS-4-6-GUIDE.md"
+
+# Agents README
+update_file "agents/README.md"
+
+# Hooks README
+update_file "hooks/README.md"
+
+# Templates README
+update_file "templates/README.md"
+
+# Rules README
+update_file "rules/README.md"
 
 # Commands — list-skills and skill-finder get special handling
 # Health-check has a special "N+ files" pattern on the agents row
@@ -361,6 +421,9 @@ cat > counts.json << COUNTSJSON
   "agents": $AGENT_COUNT,
   "repos": $REPO_COUNT,
   "commands": $COMMAND_COUNT,
+  "hooks": $HOOK_COUNT,
+  "rules": $RULE_COUNT,
+  "templates": $TEMPLATE_COUNT,
   "marketplaceSkills": $MARKET_SKILL_COUNT,
   "marketplaceSkillsDisplay": "${MARKET_DISPLAY_PLUS}"
 }
@@ -374,5 +437,9 @@ echo ""
 echo "Definitive counts:"
 echo "  Skills:      $SKILL_COUNT"
 echo "  Agents:      $AGENT_COUNT"
+echo "  Commands:    $COMMAND_COUNT"
+echo "  Hooks:       $HOOK_COUNT"
+echo "  Rules:       $RULE_COUNT"
+echo "  Templates:   $TEMPLATE_COUNT"
 echo "  Repos:       $REPO_COUNT"
 echo "  Mkt Skills:  $MARKET_SKILL_COUNT (${MARKET_DISPLAY_PLUS})"

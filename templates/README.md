@@ -19,6 +19,11 @@ Standardized templates for creating Claude Code toolkit components.
 | `tests.json`          | Structured test status tracking        | Copy to project root for test-heavy work |
 | `init.sh`             | Project initialization script          | Copy to project root, make executable    |
 | `progress.md`         | Session notes and state tracking       | Copy to project for multi-session work   |
+| **NEW in v2.3:**      | **Project Starters**                   | **Full-stack scaffolding guides**        |
+| `saas-project.md`     | SaaS starter (Next.js + auth + Stripe + DB + email + analytics) | Comprehensive SaaS scaffold |
+| `mobile-app-project.md` | Mobile app starter (React Native/Expo or Flutter) | Mobile app scaffold |
+| `api-project.md`      | API-only starter (NestJS/FastAPI + auth + DB + docs) | Backend API scaffold |
+| `landing-page-project.md` | Landing page (Next.js/Astro + Tailwind + SEO + analytics) | Marketing page scaffold |
 
 ---
 

@@ -2,7 +2,7 @@
 
 Specialized AI agents for focused, expert-level assistance across all domains.
 
-**36 agents available** - Covering code quality, development, architecture, languages, platforms, creative, business, and support.
+**47 agents available** - Covering code quality, development, architecture, languages, platforms, creative, business, SaaS, and infrastructure.
 
 ---
 
@@ -11,7 +11,7 @@ Specialized AI agents for focused, expert-level assistance across all domains.
 | Capability            | Limit                                              |
 | --------------------- | -------------------------------------------------- |
 | **Concurrent agents** | Up to 10 simultaneous                              |
-| **Context per agent** | Independent 200k tokens                            |
+| **Context per agent** | Independent (up to 1M tokens with Opus 4.6)        |
 | **Nesting**           | Single-level only (agents cannot spawn sub-agents) |
 | **Overhead**          | ~20k tokens per Task tool invocation               |
 
@@ -34,9 +34,9 @@ Main Claude (Orchestrator)
 
 ---
 
-## Agent Teams (Experimental)
+## Agent Teams
 
-Agent Teams coordinate multiple full Claude Code sessions working in parallel, each with its own 200k context window and inter-agent messaging. Unlike subagents (Task tool), teammates communicate directly with each other and persist independently.
+Agent Teams coordinate multiple full Claude Code sessions working in parallel, each with its own context window and inter-agent messaging. Unlike subagents (Task tool), teammates communicate directly with each other and persist independently.
 
 | Approach        | Context    | Communication               | Token Cost | Best For                           |
 | --------------- | ---------- | --------------------------- | ---------- | ---------------------------------- |
@@ -62,40 +62,65 @@ See `~/.claude/docs/AGENT-TEAMS.md` for the full guide and `~/.claude/rules/work
 
 ### Development
 
-| Agent               | Purpose                              | Model  |
-| ------------------- | ------------------------------------ | ------ |
-| `test-generator`    | TDD-focused test suite generation    | sonnet |
-| `api-designer`      | REST/GraphQL API design              | sonnet |
-| `database-expert`   | Schema design and query optimization | sonnet |
-| `devops-specialist` | CI/CD, containers, infrastructure    | sonnet |
+| Agent                    | Purpose                                | Model  |
+| ------------------------ | -------------------------------------- | ------ |
+| `test-generator`         | TDD-focused test suite generation      | sonnet |
+| `e2e-test-specialist`    | Playwright/Cypress E2E and visual testing | sonnet |
+| `api-designer`           | REST/GraphQL API design                | sonnet |
+| `database-expert`        | Schema design, query optimization, ops | sonnet |
+| `devops-engineer`        | CI/CD, containers, cloud, IaC          | sonnet |
 
 ### Architecture
 
 | Agent                     | Purpose                                | Model  |
 | ------------------------- | -------------------------------------- | ------ |
 | `architecture-analyst`    | System design and pattern analysis     | opus   |
+| `cloud-architect`         | Multi-cloud, serverless, DR planning   | opus   |
 | `debugging-specialist`    | Systematic 4-phase debugging           | sonnet |
 | `graphql-architect`       | GraphQL schema and resolver design     | sonnet |
 | `microservices-architect` | Distributed systems and service design | sonnet |
 | `realtime-specialist`     | WebSockets and live data systems       | sonnet |
 
-### Language Experts
+### Language & Framework Experts
 
-| Agent               | Purpose                  | Model  |
-| ------------------- | ------------------------ | ------ |
-| `typescript-expert` | Type system mastery      | sonnet |
-| `python-expert`     | Python best practices    | sonnet |
-| `react-expert`      | React patterns and hooks | sonnet |
+| Agent                    | Purpose                          | Model  |
+| ------------------------ | -------------------------------- | ------ |
+| `typescript-expert`      | Type system mastery              | sonnet |
+| `python-expert`          | Python best practices            | sonnet |
+| `react-expert`           | React patterns and hooks         | sonnet |
+| `next-js-expert`         | Next.js App Router, Server Actions | sonnet |
+| `rust-expert`            | Ownership, async Rust, Axum/WASM | sonnet |
+| `go-expert`              | Concurrency, stdlib, Chi/Echo    | sonnet |
 
 ### Platform Development
 
-| Agent               | Purpose                                      | Model  |
-| ------------------- | -------------------------------------------- | ------ |
-| `ios-developer`     | iOS/iPadOS/tvOS with Swift and SwiftUI       | sonnet |
-| `android-developer` | Android with Kotlin and Jetpack Compose      | sonnet |
-| `mobile-architect`  | Cross-platform mobile architecture decisions | sonnet |
-| `desktop-developer` | Electron and desktop app development         | sonnet |
-| `i18n-specialist`   | Internationalization and localization        | sonnet |
+| Agent                    | Purpose                                      | Model  |
+| ------------------------ | -------------------------------------------- | ------ |
+| `ios-developer`          | iOS/iPadOS/tvOS with Swift and SwiftUI       | sonnet |
+| `android-developer`      | Android with Kotlin and Jetpack Compose      | sonnet |
+| `mobile-architect`       | Cross-platform mobile architecture decisions | sonnet |
+| `flutter-developer`      | Flutter/Dart, Riverpod, platform channels    | sonnet |
+| `mobile-release-manager` | App store submissions, mobile CI/CD, ASO     | sonnet |
+| `desktop-developer`      | Electron and desktop app development         | sonnet |
+| `macos-developer`        | Native macOS AppKit, Catalyst development    | sonnet |
+| `i18n-specialist`        | Internationalization and localization        | sonnet |
+
+### SaaS & Product
+
+| Agent                          | Purpose                                    | Model  |
+| ------------------------------ | ------------------------------------------ | ------ |
+| `auth-specialist`              | OAuth, JWT, SSO, MFA, NextAuth/Clerk       | sonnet |
+| `payment-billing-specialist`   | Stripe, subscriptions, webhooks, PCI       | sonnet |
+| `email-specialist`             | Transactional email, templates, delivery   | sonnet |
+| `seo-specialist`               | Technical SEO, structured data, Web Vitals | sonnet |
+| `product-analytics-specialist` | PostHog, Mixpanel, A/B testing, funnels    | sonnet |
+
+### Data & AI
+
+| Agent           | Purpose                                       | Model  |
+| --------------- | --------------------------------------------- | ------ |
+| `ml-engineer`   | PyTorch, TensorFlow, LLM integration, MLOps   | sonnet |
+| `data-engineer` | ETL pipelines, data warehousing, stream processing | sonnet |
 
 ### Creative & Design
 
@@ -114,16 +139,6 @@ See `~/.claude/docs/AGENT-TEAMS.md` for the full guide and `~/.claude/rules/work
 | `startup-advisor`     | Startup launch and validation       | sonnet |
 | `monetization-expert` | Revenue models and pricing strategy | sonnet |
 
-### Infrastructure & Specialized
-
-| Agent                | Purpose                                            | Model  |
-| -------------------- | -------------------------------------------------- | ------ |
-| `devops-engineer`    | AWS, GCP, Azure, Kubernetes, Terraform, CI/CD      | sonnet |
-| `ml-engineer`        | PyTorch, TensorFlow, LLM integration, MLOps        | sonnet |
-| `game-developer`     | Unity, Unreal Engine, Godot game development       | sonnet |
-| `macos-developer`    | Native macOS AppKit, Catalyst development          | sonnet |
-| `database-architect` | PostgreSQL, MongoDB, Redis schema and optimization | sonnet |
-
 ### Support
 
 | Agent                  | Purpose                  | Model  |
@@ -140,11 +155,10 @@ Agents are automatically invoked by Claude when their description matches the ta
 
 ```
 Use the security-auditor agent to review this authentication code
-Use the ios-developer agent to help me build the Swift UI
-Use the startup-advisor agent to help me validate my idea
-Use the devops-engineer agent to set up my Kubernetes deployment
-Use the ml-engineer agent to help integrate the OpenAI API
-Use the database-architect agent to optimize my PostgreSQL queries
+Use the auth-specialist agent to implement OAuth login
+Use the payment-billing-specialist agent to set up Stripe subscriptions
+Use the next-js-expert agent to optimize my App Router setup
+Use the e2e-test-specialist agent to write Playwright tests
 ```
 
 ### Via Task Tool

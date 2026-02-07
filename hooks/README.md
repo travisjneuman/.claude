@@ -138,12 +138,17 @@ abc1234 feat: last thing I did
 **Blocked patterns:**
 | Pattern | Risk |
 | ------- | ---- |
-| `rm -rf /` or `rm -rf ~` | Filesystem destruction |
-| `git push --force` | Overwrite remote history |
+| `rm -rf /` or `rm -rf ~` or `rm -rf $HOME` | Filesystem destruction |
+| `git push --force` / `git push -f` | Overwrite remote history |
 | `DROP TABLE` | Database destruction |
 | `TRUNCATE TABLE` | Database data loss |
 | `git clean -fd` | Delete untracked files |
 | `git reset --hard origin` | Discard all local changes |
+| `chmod -R 777` | Overly permissive file permissions |
+| `curl ... \| sh` / `wget ... \| sh` | Pipe-to-shell (remote code execution) |
+| `npm publish` / `yarn publish` | Accidental package publication |
+| `docker system prune -a` | Destroy all Docker resources |
+| `git checkout -- .` / `git restore .` | Discard all unstaged changes |
 
 **Exit codes:**
 
@@ -187,6 +192,9 @@ abc1234 feat: last thing I did
 | --------- | --------- |
 | `.js`, `.jsx`, `.ts`, `.tsx`, `.json`, `.css`, `.scss`, `.html`, `.md`, `.yaml`, `.yml` | Prettier (`npx prettier --write`) |
 | `.py` | Ruff (`ruff format`) or Black (`black --quiet`) |
+| `.go` | gofmt (`gofmt -w`) |
+| `.rs` | rustfmt (`rustfmt`) |
+| `.sh`, `.bash` | shfmt (`shfmt -w`) |
 
 **Cross-platform:** Uses Node.js for JSON parsing (always available where Claude Code runs). Falls back gracefully if formatters aren't installed.
 
@@ -200,23 +208,38 @@ abc1234 feat: last thing I did
 **What it does:**
 
 1. Creates `~/.claude/session-summaries/` directory if needed
-2. Captures: timestamp, current branch, working directory, last 5 git commits
-3. Writes summary to `~/.claude/last-session.md` (read by `session-start-context.sh`)
-4. Archives a timestamped copy to `session-summaries/session-YYYYMMDD-HHMMSS.md`
+2. Detects the actual working directory from `CLAUDE_WORKING_DIR` env var (falls back to `pwd`)
+3. Gets the git branch from the actual working directory (not `~/.claude`)
+4. Captures: timestamp, branch, working directory, last 5 git commits
+5. Captures active task context (lists recent task files from `tasks/` directory)
+6. Captures pending TodoWrite todos (from `.claude/todos.json`)
+7. Writes summary to `~/.claude/last-session.md` (read by `session-start-context.sh`)
+8. Archives a timestamped copy to `session-summaries/session-YYYYMMDD-HHMMSS.md`
+9. Cleans up session summaries older than 90 days
 
 **Output file (`last-session.md`):**
 
 ```markdown
-# Last Session — 2026-02-05 15:00
+# Last Session -- 2026-02-05 15:00
 
-**Working directory:** /Users/tjn/.claude
-**Branch:** master
+**Working directory:** /home/tjn/projects/myapp
+**Branch:** feature/auth
 
 ## Recent commits
 
 abc1234 feat: latest change
 def5678 fix: previous fix
 ...
+
+## Active tasks
+
+auth-implementation
+database-schema
+
+## Pending todos
+
+- Add error handling to login flow
+- Write tests for auth service
 
 ## Session context
 
