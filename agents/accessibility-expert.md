@@ -1,7 +1,12 @@
 ---
 name: accessibility-expert
 description: WCAG compliance, screen reader compatibility, and inclusive design patterns. Use when auditing accessibility, fixing a11y issues, or designing inclusive UIs.
-tools: Read, Grep, Glob
+tools:
+  - Read
+  - Grep
+  - Glob
+  - Write
+  - Edit
 model: sonnet
 ---
 

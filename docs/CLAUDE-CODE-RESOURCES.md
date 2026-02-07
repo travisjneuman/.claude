@@ -202,7 +202,7 @@ System prompt here...
 
 ### Plugin Marketplace Ecosystem
 
-This setup includes 72 marketplace repositories providing access to 5,100+ community skills. Key marketplaces for plugin development reference:
+This setup includes 70 marketplace repositories providing access to 5,100+ community skills. Key marketplaces for plugin development reference:
 
 | Repository                        | URL                                                  | Specialization                |
 | --------------------------------- | ---------------------------------------------------- | ----------------------------- |
@@ -225,11 +225,11 @@ tags: [category, domain]
 ---
 ```
 
-This installation has 73 local skills and 36 custom agents. Run `bash ~/.claude/scripts/regenerate-index.sh` to refresh the master index.
+This installation has 89 local skills and 47 custom agents. Run `bash ~/.claude/scripts/regenerate-index.sh` to refresh the master index.
 
 ### Agent Development
 
-Agents are defined in `~/.claude/agents/` as markdown files with YAML frontmatter specifying name, description, allowed tools, and model. Agents can be scoped by tool access (read-only for research, full access for implementation). See `~/.claude/agents/README.md` for the full catalog of 36 agents.
+Agents are defined in `~/.claude/agents/` as markdown files with YAML frontmatter specifying name, description, allowed tools, and model. Agents can be scoped by tool access (read-only for research, full access for implementation). See `~/.claude/agents/README.md` for the full catalog of 47 agents.
 
 ---
 
@@ -297,7 +297,7 @@ This installation's `~/.claude/docs/` directory contains:
 5. **Less is more** -- Each MCP server tool loads into context
 6. **CLAUDE.md is king** -- Project-level overrides global settings
 7. **Hooks for automation** -- PreToolUse/PostToolUse for formatting, linting
-8. **Slash commands** -- 20 custom commands available via `~/.claude/commands/`
+8. **Slash commands** -- 27 custom commands available via `~/.claude/commands/`
 9. **Skill discovery** -- Check `skills/MASTER_INDEX.md` before writing from scratch
 10. **Agent Teams for parallel work** -- When subagents are not enough
 

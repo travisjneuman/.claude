@@ -45,12 +45,12 @@ Load this file when development-related keywords detected.
 | `vue`           | `Skill(vue-development)`                 | -                         | frontend-enhancer                     |
 | `svelte`        | `Skill(svelte-development)`              | -                         | frontend-enhancer                     |
 | `backend`       | `Skill(api-design)`                      | `api-designer`            | database-expert                       |
-| `database`      | `Skill(database-expert)`                 | `database-architect`      | -                                     |
+| `database`      | `Skill(database-expert)`                 | `database-expert`         | -                                     |
 | `devops`        | `Skill(devops-cloud)`                    | `devops-engineer`         | -                                     |
-| `testing`       | `Skill(test-specialist)`                 | `test-generator`          | -                                     |
-| `security`      | `Skill(security)`                        | `security-auditor`        | -                                     |
+| `testing`       | `Skill(test-specialist)`                 | `test-generator`          | e2e-test-specialist                   |
+| `security`      | `Skill(security)`                        | `security-auditor`        | application-security skill            |
 | `debugging`     | `Skill(debug-systematic)`                | `debugging-specialist`    | -                                     |
-| `performance`   | -                                        | `performance-optimizer`   | -                                     |
+| `performance`   | `Skill(performance-engineering)`         | `performance-optimizer`   | -                                     |
 | `graphql`       | `Skill(graphql-expert)`                  | `graphql-architect`       | -                                     |
 | `microservices` | `Skill(microservices-architecture)`      | `microservices-architect` | -                                     |
 | `i18n`          | `Skill(i18n-localization)`               | `i18n-specialist`         | -                                     |
@@ -58,15 +58,30 @@ Load this file when development-related keywords detected.
 | `game`          | `Skill(game-development)`                | `game-developer`          | -                                     |
 | `desktop`       | `Skill(electron-desktop)`                | `desktop-developer`       | -                                     |
 | `pwa`           | `Skill(pwa-development)`                 | -                         | -                                     |
-| `ai-ml`         | `Skill(ai-ml-development)`               | `ml-engineer`             | -                                     |
-| `flutter`       | `Skill(flutter-development)`             | `mobile-architect`        | -                                     |
-| `react-native`  | `Skill(react-native)`                    | `mobile-architect`        | -                                     |
+| `ai-ml`         | `Skill(ai-ml-development)`               | `ml-engineer`             | llm-app-development skill             |
+| `llm-app`       | `Skill(llm-app-development)`             | `ml-engineer`             | RAG, embeddings, AI agents            |
+| `flutter`       | `Skill(flutter-development)`             | `flutter-developer`       | mobile-architect                      |
+| `react-native`  | `Skill(react-native)`                    | `mobile-architect`        | mobile-release-manager                |
 | `macos`         | `Skill(macos-native)`                    | `macos-developer`         | -                                     |
 | `python`        | -                                        | `python-expert`           | Read rules/stacks/python.md           |
+| `django-fastapi`| -                                        | `python-expert`           | Read rules/stacks/django-fastapi.md   |
+| `nextjs`        | -                                        | `next-js-expert`          | Read rules/stacks/fullstack-nextjs-nestjs.md |
 | `typescript`    | -                                        | `typescript-expert`       | Read rules/stacks/react-typescript.md |
-| `go`            | -                                        | -                         | Read rules/stacks/go.md               |
-| `rust`          | -                                        | -                         | Read rules/stacks/rust.md             |
-| `data-science`  | `Skill(data-science)`                    | -                         | -                                     |
+| `go`            | -                                        | `go-expert`               | Read rules/stacks/go.md               |
+| `rust`          | -                                        | `rust-expert`             | Read rules/stacks/rust.md             |
+| `data-science`  | `Skill(data-science)`                    | `data-engineer`           | -                                     |
+| `auth`          | `Skill(authentication-patterns)`         | `auth-specialist`         | -                                     |
+| `payments`      | `Skill(payment-integration)`             | `payment-billing-specialist` | -                                  |
+| `email`         | `Skill(email-systems)`                   | `email-specialist`        | -                                     |
+| `analytics`     | `Skill(product-analytics)`               | `product-analytics-specialist` | -                               |
+| `monitoring`    | `Skill(monitoring-observability)`        | -                         | -                                     |
+| `serverless`    | `Skill(serverless-development)`          | `cloud-architect`         | -                                     |
+| `seo`           | `Skill(seo-analytics-auditor)`           | `seo-specialist`          | -                                     |
+| `a11y`          | `Skill(accessibility-a11y)`              | `accessibility-expert`    | -                                     |
+| `events`        | `Skill(event-driven-architecture)`       | `microservices-architect` | -                                     |
+| `tauri`         | `Skill(tauri-desktop)`                   | `desktop-developer`       | -                                     |
+| `mobile-cicd`   | `Skill(mobile-cicd)`                     | `mobile-release-manager`  | -                                     |
+| `kmp`           | `Skill(kotlin-multiplatform)`            | `android-developer`       | -                                     |
 
 ## Feature Implementation Routing
 
@@ -124,7 +139,17 @@ find ~/.claude/plugins/marketplaces -name "SKILL.md" | xargs grep -li "<keyword>
 | Domain                | Rule File                                           |
 | --------------------- | --------------------------------------------------- |
 | `python`              | `~/.claude/rules/stacks/python.md`                  |
+| `django`, `fastapi`   | `~/.claude/rules/stacks/django-fastapi.md`          |
 | `react`, `typescript` | `~/.claude/rules/stacks/react-typescript.md`        |
 | `go`                  | `~/.claude/rules/stacks/go.md`                      |
 | `rust`                | `~/.claude/rules/stacks/rust.md`                    |
 | Full-stack            | `~/.claude/rules/stacks/fullstack-nextjs-nestjs.md` |
+| React Native / Expo   | `~/.claude/rules/stacks/react-native-expo.md`       |
+| Flutter / Dart        | `~/.claude/rules/stacks/flutter-dart.md`            |
+| Vue / Nuxt            | `~/.claude/rules/stacks/vue-nuxt.md`                |
+| Svelte / SvelteKit    | `~/.claude/rules/stacks/svelte-sveltekit.md`        |
+| API design            | `~/.claude/rules/checklists/api-development.md`     |
+| Database              | `~/.claude/rules/checklists/database-design.md`     |
+| Security              | `~/.claude/rules/checklists/security-hardening.md`  |
+| Performance           | `~/.claude/rules/checklists/performance-optimization.md` |
+| Deployment            | `~/.claude/rules/workflows/deployment-cicd.md`      |

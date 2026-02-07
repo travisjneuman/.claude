@@ -252,7 +252,7 @@ This repo underwent a security audit before being made public. The following wer
     │       ├── commands/example-command.md
     │       └── skills/example-skill/SKILL.md
     │
-    ├── agents/                     ← Subagent definitions (36 agents)
+    ├── agents/                     ← Subagent definitions (47 agents)
     │   ├── README.md               ← Agents index
     │   ├── accessibility-expert.md
     │   ├── android-developer.md
@@ -361,7 +361,7 @@ This repo underwent a security audit before being made public. The following wer
 
 ## Folder Details
 
-### `/commands/` - Custom Slash Commands (21 commands + 7 router files)
+### `/commands/` - Custom Slash Commands (27 commands + 7 router files)
 
 Custom commands that appear as `/command-name` in Claude Code.
 
@@ -413,7 +413,7 @@ Complete workflow system for multi-phase projects:
 
 ---
 
-### `/agents/` - Subagent Definitions (36 agents)
+### `/agents/` - Subagent Definitions (47 agents)
 
 Agent definitions for the Task tool's `subagent_type` parameter. Each agent is a markdown file that defines a specialized role with constrained tools.
 
@@ -668,14 +668,14 @@ This folder is **automatically created by VSCode** when you open `.claude/` as a
 
 | Path         | Typical Size | Notes                            |
 | ------------ | ------------ | -------------------------------- |
-| `skills/`    | ~500KB       | 73 SKILL.md files across 70 dirs |
-| `docs/`      | ~150KB       | 23 documentation files           |
-| `commands/`  | ~100KB       | 21 commands + 7 router files     |
-| `agents/`    | ~100KB       | 36 agent definitions             |
-| `rules/`     | ~80KB        | 17 rule files across 4 subdirs   |
+| `skills/`    | ~800KB       | 89 SKILL.md files across 90 dirs |
+| `docs/`      | ~200KB       | 24 documentation files           |
+| `commands/`  | ~150KB       | 27 commands + 7 router files     |
+| `agents/`    | ~150KB       | 47 agent definitions             |
+| `rules/`     | ~150KB       | 27 rule files across 4 subdirs   |
 | `scripts/`   | ~50KB        | 16 scripts + 4 hook scripts      |
-| `hooks/`     | ~20KB        | 7 event hook scripts             |
-| `templates/` | ~20KB        | 10 templates + plugin-template/  |
+| `hooks/`     | ~25KB        | 8 event hook scripts             |
+| `templates/` | ~40KB        | 15 templates + plugin-template/  |
 
 **Total portable size:** ~1MB
 **With generated files:** Can grow to 100MB+
