@@ -77,11 +77,11 @@ This updates hardcoded counts across all documentation AND regenerates `marketpl
 
 ### Prebuild Script
 
-`scripts/fix-submodules.mjs` runs automatically before `next build` via npm lifecycle hooks (`prebuild` in `package.json`). It removes a broken nested submodule directory inside `claude-code-plugins-plus-skills` that causes Cloudflare Pages' recursive clone to fail. The script is a safe no-op when the directory doesn't exist, so local builds are unaffected.
+`scripts/fix-submodules.mjs` runs automatically before `next build` via npm lifecycle hooks (`prebuild` in `package.json`). It removes the specific broken `axiom` gitlink inside `claude-code-plugins-plus-skills/plugins/skill-enhancers/` that causes Cloudflare Pages' recursive clone to fail. The script targets only this single dangling gitlink (not the entire `plugins/` directory), so legitimate skill files are preserved. It is a safe no-op when the gitlink doesn't exist.
 
 ### Dynamic Counts
 
-`src/lib/data/counts.ts` is the single source of truth for all formatted count strings displayed on the website. The `getCounts()` function calls `getSkills()`, `getAgents()`, and `getMarketplaceStats()` at build time and returns pre-formatted strings (e.g., "89+", "47", "2,500+"). These strings are consumed by metadata in `layout.tsx`, the footer, and the console greeting. This eliminates count drift between different website sections — there is no hardcoded count anywhere in the UI layer.
+`src/lib/data/counts.ts` is the single source of truth for all formatted count strings displayed on the website. The `getCounts()` function calls `getSkills()`, `getAgents()`, and `getMarketplaceStats()` at build time and returns pre-formatted strings (e.g., "89+", "47", "3,900+"). These strings are consumed by metadata in `layout.tsx`, the footer, and the console greeting. This eliminates count drift between different website sections — there is no hardcoded count anywhere in the UI layer.
 
 ### Component Props
 

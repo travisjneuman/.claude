@@ -6,7 +6,7 @@ category: reference
 
 # Claude Code Toolkit Documentation
 
-**Last Updated:** February 2026 (v2.3.6)
+**Last Updated:** February 2026 (v2.3.7)
 **Maintainer:** Travis J. Neuman
 **Purpose:** Portable, optimized Claude Code configuration for any project
 
@@ -63,7 +63,7 @@ Already set up? Jump to the section you need below.
 
 | Document                                               | What it covers                      |
 | ------------------------------------------------------ | ----------------------------------- |
-| [MARKETPLACE-GUIDE.md](./MARKETPLACE-GUIDE.md)         | 68 marketplace repos, 2,500+ skills |
+| [MARKETPLACE-GUIDE.md](./MARKETPLACE-GUIDE.md)         | 68 marketplace repos, 3,900+ skills |
 | [PLUGIN-MANAGEMENT.md](./PLUGIN-MANAGEMENT.md)         | Plugin lifecycle, customization     |
 | [AUTO-CLAUDE-GUIDE.md](./AUTO-CLAUDE-GUIDE.md)         | Autonomous multi-agent coding       |
 | [CLAUDE-CODE-RESOURCES.md](./CLAUDE-CODE-RESOURCES.md) | Community resources and tips        |
@@ -83,7 +83,7 @@ Already set up? Jump to the section you need below.
 | Hooks               | 8      | `hooks/`                       |
 | MCP servers         | 9      | `.mcp.json`                    |
 | Marketplace repos   | 68     | `plugins/marketplaces/`        |
-| Marketplace skills  | 2,500+ | (across all marketplace repos) |
+| Marketplace skills  | 3,900+ | (across all marketplace repos) |
 | **Total git repos** | **69** | 1 parent + 68 submodules       |
 
 ---
@@ -110,7 +110,7 @@ This `~/.claude/` folder is a fully configured, portable Claude Code environment
 - **47 agents** for specialized autonomous workflows
 - **27 slash commands** for workflow automation
 - **9 MCP server configurations** for extended capabilities (disabled by default to save context)
-- **68 marketplace repos** providing 2,500+ additional skills from the community
+- **68 marketplace repos** providing 3,900+ additional skills from the community
 - **8 hooks** for session lifecycle, safety guards, and auto-formatting
 - **28 rules files** for contextual guidance (checklists, stack patterns, workflows, tooling)
 - **14 templates** for task planning, component creation, and project scaffolding
@@ -119,12 +119,18 @@ This `~/.claude/` folder is a fully configured, portable Claude Code environment
 
 ## History
 
+### v2.3.7 (February 2026)
+
+- Fixed prebuild script deleting 1,366 legitimate skill files (narrowed to broken axiom gitlink only)
+- Re-cloned cpps from upstream, restoring marketplace skills from 2,500+ back to 3,900+
+- Root cause: prebuild `rmSync` targeted entire `plugins/` instead of `plugins/skill-enhancers/axiom`
+
 ### v2.3.6 (February 2026)
 
 - Complete submodule cleanup: removed ghost registration from `.gitmodules`, `.git/config`, `.git/modules/`
-- Cross-repo count sync: rules 27→28, marketplace skills 3,900+→2,500+ (improved exclusion after upstream pulls), hooks health-check 7→8
+- Cross-repo count sync: rules 27→28, hooks health-check 7→8
 - Synced counts to GitHub Profile README and Portfolio repo
-- Pulled 8 marketplace repos with upstream updates (196 total commits)
+- Pulled 68 marketplace repos with upstream updates (196 total commits)
 
 ### v2.3.5 (February 2026)
 
@@ -142,7 +148,7 @@ This `~/.claude/` folder is a fully configured, portable Claude Code environment
 
 ### v2.3.1 (February 2026)
 
-- Updated counts across documentation (68 marketplace repos, 2,500+ skills, 7 hooks)
+- Updated counts across documentation (68 marketplace repos, 3,900+ skills, 7 hooks)
 - Documentation navigation overhaul
 
 ### v2.2 (January 2026)
