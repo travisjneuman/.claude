@@ -2,6 +2,24 @@
 
 All notable changes to the Ultimate Claude Code Toolkit.
 
+## [2.3.6] - February 8, 2026
+
+### Complete Submodule Cleanup + Cross-Repo Count Sync
+
+### Fixed
+
+- **Complete submodule cleanup** — Previous Cloudflare fix only removed the gitlink (`git rm --cached`). Three ghost registrations remained in `.gitmodules`, `.git/config`, and `.git/modules/` cache. Running `_pull-all-repos.sh` would re-create the gitlink via `git submodule update --init`, reverting the deploy fix. All three are now removed; the directory still exists on disk (gitignored).
+- **Rules count drift** — `counts.json` had 27 rules but filesystem had 28 (post-change-documentation.md was added in v2.3.5 but count wasn't bumped). Now synced.
+- **Health-check hooks count** — `commands/health-check.md` referenced 7 hooks; actual count is 8.
+- **Marketplace skills recount** — After pulling 8 repos with 196 upstream commits, improved exclusion filtering reduced marketplace skill count from 3,900+ to 2,500+ (2,596 actual). The previous count included files in newly-added backup/test/planned directories that were caught by the generic exclusion patterns.
+
+### Changed
+
+- **Cross-repo count sync** — GitHub Profile README and Portfolio repo updated with current counts (marketplace 3,900+→2,500+, repos 70→68).
+- **Marketplace repo updates** — Pulled latest from 8 repos: davila7-templates, get-shit-done (37 commits), hesreallyhim-awesome, neolab-context-kit (47), othmanadi-planning, quemsah-awesome (14), skill-seekers (76), voltagent-agent-skills (12).
+
+---
+
 ## [2.3.5] - February 8, 2026
 
 ### Cloudflare Deploy Fix + Dynamic Website Counts

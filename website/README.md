@@ -81,7 +81,7 @@ This updates hardcoded counts across all documentation AND regenerates `marketpl
 
 ### Dynamic Counts
 
-`src/lib/data/counts.ts` is the single source of truth for all formatted count strings displayed on the website. The `getCounts()` function calls `getSkills()`, `getAgents()`, and `getMarketplaceStats()` at build time and returns pre-formatted strings (e.g., "89+", "47", "3,900+"). These strings are consumed by metadata in `layout.tsx`, the footer, and the console greeting. This eliminates count drift between different website sections — there is no hardcoded count anywhere in the UI layer.
+`src/lib/data/counts.ts` is the single source of truth for all formatted count strings displayed on the website. The `getCounts()` function calls `getSkills()`, `getAgents()`, and `getMarketplaceStats()` at build time and returns pre-formatted strings (e.g., "89+", "47", "2,500+"). These strings are consumed by metadata in `layout.tsx`, the footer, and the console greeting. This eliminates count drift between different website sections — there is no hardcoded count anywhere in the UI layer.
 
 ### Component Props
 
