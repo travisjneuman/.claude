@@ -35,6 +35,7 @@ All external repos are located in `~/.claude/plugins/marketplaces/`:
 | buildwithclaude                  | https://github.com/davepoon/buildwithclaude.git                            |
 | chat2anyllm-awesome-plugins      | https://github.com/Chat2AnyLLM/awesome-claude-plugins.git                  |
 | claude-code-plugins              | https://github.com/anthropics/claude-code.git                              |
+| claude-code-plugins-plus-skills  | https://github.com/jeremylongshore/claude-code-plugins-plus-skills.git     |
 | claude-market                    | https://github.com/claude-market/marketplace.git                           |
 | claude-mem                       | https://github.com/thedotmack/claude-mem.git                               |
 | claude-plugins-official          | https://github.com/anthropics/claude-plugins-official.git                  |
@@ -109,7 +110,7 @@ All external repos are located in `~/.claude/plugins/marketplaces/`:
 **What gets pulled:**
 
 1. `~/.claude` - Parent repo (travisjneuman/.claude)
-2. `~/.claude/plugins/marketplaces/*` - All 67 marketplace repos
+2. `~/.claude/plugins/marketplaces/*` - All 68 marketplace repos
 3. Custom project directories (if configured) - your own repos
 4. Documentation counts updated automatically if any repos changed
 

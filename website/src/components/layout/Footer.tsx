@@ -64,7 +64,7 @@ export default function Footer({ docs }: FooterProps) {
             <span className="text-lg font-bold gradient-text">Claude Code</span>
             <p className="mt-2 text-sm text-[var(--text-muted)]">
               Supercharge your Claude Code with 89 skills, 47 agents, and 5,200+
-              marketplace skills across 67 repos.
+              marketplace skills across 68 repos.
             </p>
           </div>
 
