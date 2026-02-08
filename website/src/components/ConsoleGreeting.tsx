@@ -21,7 +21,7 @@ export default function ConsoleGreeting() {
     );
 
     console.log(
-      "%c  89 Skills  •  47 Agents  •  5,200+ Marketplace Skills  •  68 Repos",
+      "%c  89 Skills  •  47 Agents  •  3,900+ Marketplace Skills  •  68 Repos",
       "color: #a855f7; font-family: monospace; font-size: 11px; font-weight: bold;",
     );
 

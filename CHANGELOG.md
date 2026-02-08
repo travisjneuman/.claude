@@ -2,15 +2,19 @@
 
 All notable changes to the Ultimate Claude Code Toolkit.
 
-## [2.3.4] - February 7, 2026
+## [2.3.4] - February 7-8, 2026
 
-### Re-added claude-code-plugins-plus-skills Marketplace
+### Re-added claude-code-plugins-plus-skills Marketplace + Count Accuracy Fix
 
 ### Added
 
 - **claude-code-plugins-plus-skills** — Re-added jeremylongshore/claude-code-plugins-plus-skills as submodule (1.3k stars, 1,537 skills, v4.14.0). Previously removed Jan 28 due to broken nested submodule concern, but `.gitmodules` global `recurse = false` already prevents recursive init.
 - **Marketplace repos** — 67→68 repos
-- **Marketplace skills** — ~2,100→~5,200+ (largest single marketplace repo)
+
+### Fixed
+
+- **Marketplace skill count accuracy** — Excluded ~1,346 non-skill SKILL.md files from count (backups: 780, planned-skills: 500, docs/translations: 45, examples: 34, tests: 4, templates: 2, workspace: 1). Raw count 5,252 → filtered count ~3,906 (display: 3,900+).
+- **Exclusion logic in `update-counts.sh`** — Added `EXCLUDE_SKILL_DIRS` array with 20 directory patterns (backups, tests, examples, docs, planned-skills, templates, etc.) used by both the shell `find` command and the Node.js `countSkillFiles` function. Patterns are generic and require no maintenance when new repos are added.
 
 ---
 
