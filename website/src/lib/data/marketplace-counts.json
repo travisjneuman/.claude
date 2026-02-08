@@ -1,7 +1,12 @@
 {
-  "repoCount": 67,
-  "totalSkills": 2086,
+  "repoCount": 68,
+  "totalSkills": 5234,
   "repos": [
+    {
+      "name": "claude-code-plugins-plus-skills",
+      "displayName": "Claude Code Plugins Plus Skills",
+      "skillCount": 3148
+    },
     {
       "name": "davila7-templates",
       "displayName": "Davila7 Templates",

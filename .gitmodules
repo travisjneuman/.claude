@@ -213,3 +213,7 @@
 [submodule "plugins/marketplaces/quemsah-awesome"]
 	path = plugins/marketplaces/quemsah-awesome
 	url = https://github.com/quemsah/awesome-claude-plugins.git
+[submodule "plugins/marketplaces/claude-code-plugins-plus-skills"]
+	path = plugins/marketplaces/claude-code-plugins-plus-skills
+	url = https://github.com/jeremylongshore/claude-code-plugins-plus-skills.git
+	ignore = all

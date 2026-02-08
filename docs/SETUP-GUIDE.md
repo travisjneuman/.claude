@@ -89,7 +89,7 @@ bash ~/.claude/_pull-all-repos.sh
 
 This script:
 
-- Clones or pulls all 67 marketplace repos from their original upstreams
+- Clones or pulls all 68 marketplace repos from their original upstreams
 - Sets `no_push` on each to prevent accidental modifications
 - Fixes detached HEAD states and updates documentation counts
 - Ensures main repo can push to your GitHub
@@ -185,7 +185,7 @@ bash ~/.claude/_pull-all-repos.sh
 ~/.claude/_pull-all-repos.sh
 ```
 
-This pulls all 67 marketplace repos, fixes detached HEADs, enforces `no_push`, and updates documentation counts automatically. Each machine fetches independently -- gitlinks are not tracked in the parent repo.
+This pulls all 68 marketplace repos, fixes detached HEADs, enforces `no_push`, and updates documentation counts automatically. Each machine fetches independently -- gitlinks are not tracked in the parent repo.
 
 ---
 

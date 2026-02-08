@@ -45,7 +45,7 @@ Before starting work, always sync all repositories:
 
 1. Initializes any new/unregistered submodules
 2. Pulls parent repo (`~/.claude` - travisjneuman/.claude)
-3. Pulls all 67 marketplace submodules in `plugins/marketplaces/`
+3. Pulls all 68 marketplace submodules in `plugins/marketplaces/`
 4. Enforces `no_push` on marketplace submodules (read-only protection)
 5. Pulls custom project directories (if configured)
 6. Fixes detached HEAD state automatically

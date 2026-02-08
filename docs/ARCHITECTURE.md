@@ -234,7 +234,7 @@ plugins/
     ├── anthropic-agent-skills/
     ├── claude-code-plugins/
     ├── taches-cc-resources/
-    └── ... (67 repos total)
+    └── ... (68 repos total)
 ```
 
 Plugins can contribute commands, agents, skills, and hooks. They're registered in `settings.json` under `enabledPlugins`.
