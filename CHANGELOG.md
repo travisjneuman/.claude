@@ -2,6 +2,18 @@
 
 All notable changes to the Ultimate Claude Code Toolkit.
 
+## [2.3.4] - February 7, 2026
+
+### Re-added claude-code-plugins-plus-skills Marketplace
+
+### Added
+
+- **claude-code-plugins-plus-skills** — Re-added jeremylongshore/claude-code-plugins-plus-skills as submodule (1.3k stars, 1,537 skills, v4.14.0). Previously removed Jan 28 due to broken nested submodule concern, but `.gitmodules` global `recurse = false` already prevents recursive init.
+- **Marketplace repos** — 67→68 repos
+- **Marketplace skills** — ~2,100→~5,200+ (largest single marketplace repo)
+
+---
+
 ## [2.3.3] - February 3, 2026
 
 ### Count Accuracy Fix
