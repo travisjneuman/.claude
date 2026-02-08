@@ -6,7 +6,7 @@ category: ecosystem
 
 # Marketplace Guide
 
-Complete reference for the 70 plugin marketplaces and how to use them.
+Complete reference for the 67 plugin marketplaces and how to use them.
 
 **Last Updated:** February 2026 (v2.3.3)
 
@@ -23,7 +23,7 @@ Complete reference for the 70 plugin marketplaces and how to use them.
 
 ---
 
-## Installed Marketplaces (70)
+## Installed Marketplaces (67)
 
 ### Official (Anthropic)
 
@@ -282,4 +282,4 @@ All marketplaces are configured with `no_push` - read-only access.
 
 ---
 
-_70 marketplaces, 5,200+ skills, discovered proactively when domain expertise is needed._
+_67 marketplaces, 2,100+ skills, discovered proactively when domain expertise is needed._
