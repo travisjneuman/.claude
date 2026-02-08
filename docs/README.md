@@ -82,9 +82,9 @@ Already set up? Jump to the section you need below.
 | Templates           | 10     | `templates/`                   |
 | Hooks               | 7      | `hooks/`                       |
 | MCP servers         | 9      | `.mcp.json`                    |
-| Marketplace repos   | 72     | `plugins/marketplaces/`        |
-| Marketplace skills  | 5,100+ | (across all marketplace repos) |
-| **Total git repos** | **73** | 1 parent + 72 submodules       |
+| Marketplace repos   | 67     | `plugins/marketplaces/`        |
+| Marketplace skills  | 2,100+ | (across all marketplace repos) |
+| **Total git repos** | **68** | 1 parent + 67 submodules       |
 
 ---
 
