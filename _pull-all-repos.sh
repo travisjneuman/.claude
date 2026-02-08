@@ -10,6 +10,7 @@
 #   4. Pulls all git repos in your custom project directories (optional)
 #   5. Fixes marketplace paths for current OS (cross-platform compatibility)
 #   6. Updates documentation counts if any repos changed (skills, agents, etc.)
+#   7. Commits and pushes all changes (submodule pointers, counts, path fixes)
 #
 # Features:
 #   - Pulls parent repo first, then all submodules, then custom directories
@@ -409,6 +410,48 @@ if [[ "$STATUS_ONLY" == false ]] && [[ -f "$SCRIPT_DIR/scripts/update-counts.sh"
         bash "$SCRIPT_DIR/scripts/update-counts.sh"
     else
         echo -e "${DIM}No repo changes — skipping count update${NC}"
+    fi
+fi
+
+# =============================================================================
+# PHASE 7: Commit and push any changes (submodule pointers, count updates, etc.)
+# =============================================================================
+if [[ "$STATUS_ONLY" == false ]]; then
+    cd "$SCRIPT_DIR"
+
+    # Check if there are any changes to commit
+    if [[ -n $(git status --porcelain 2>/dev/null) ]]; then
+        echo ""
+        echo -e "${BOLD}Committing and pushing updates:${NC}"
+
+        # Stage all tracked changes (submodule pointers, count updates, path fixes)
+        git add -A
+
+        # Build a descriptive commit message
+        COMMIT_PARTS=()
+        [[ $UPDATED -gt 0 ]] && COMMIT_PARTS+=("pull $UPDATED repo(s)")
+        [[ -n $(git diff --cached --name-only | grep -E '(counts\.json|README\.md|MASTER_INDEX\.md|marketplace-counts\.json)') ]] && COMMIT_PARTS+=("update counts")
+
+        if [[ ${#COMMIT_PARTS[@]} -gt 0 ]]; then
+            COMMIT_MSG="chore: $(IFS=', '; echo "${COMMIT_PARTS[*]}")"
+        else
+            COMMIT_MSG="chore: update after pull-all-repos"
+        fi
+
+        if git commit -m "$COMMIT_MSG" >/dev/null 2>&1; then
+            echo -e "${GREEN}  Committed: $COMMIT_MSG${NC}"
+
+            if git push >/dev/null 2>&1; then
+                echo -e "${GREEN}  Pushed to origin${NC}"
+            else
+                echo -e "${RED}  Push failed — commit is local only${NC}"
+            fi
+        else
+            echo -e "${DIM}  Nothing to commit${NC}"
+        fi
+    else
+        echo ""
+        echo -e "${DIM}No local changes to commit${NC}"
     fi
 fi
 

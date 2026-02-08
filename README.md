@@ -23,8 +23,8 @@
 [![Skills](https://img.shields.io/badge/Skills-89-10b981?style=for-the-badge&logo=sparkles&logoColor=white)](./skills/MASTER_INDEX.md)
 [![Agents](https://img.shields.io/badge/Agents-47-f59e0b?style=for-the-badge&logo=dependabot&logoColor=white)](./agents/README.md)
 [![Commands](https://img.shields.io/badge/Commands-27-a855f7?style=for-the-badge&logo=windowsterminal&logoColor=white)](./commands/README.md)
-[![Marketplaces](https://img.shields.io/badge/Marketplaces-70-3b82f6?style=for-the-badge&logo=homeassistantcommunitystore&logoColor=white)](./docs/MARKETPLACE-GUIDE.md)
-[![Marketplace Skills](https://img.shields.io/badge/Marketplace_Skills-5200+-ec4899?style=for-the-badge&logo=stackblitz&logoColor=white)](./plugins/marketplaces/)
+[![Marketplaces](https://img.shields.io/badge/Marketplaces-67-3b82f6?style=for-the-badge&logo=homeassistantcommunitystore&logoColor=white)](./docs/MARKETPLACE-GUIDE.md)
+[![Marketplace Skills](https://img.shields.io/badge/Marketplace_Skills-2100+-ec4899?style=for-the-badge&logo=stackblitz&logoColor=white)](./plugins/marketplaces/)
 
 <!-- Secondary Resource Badges -->
 
@@ -47,7 +47,7 @@
 
 <br/>
 
-> _One `git clone` gives you 89 skills, 47 specialist agents, 70 community marketplaces with 5,200+ additional skills, 27 slash commands, 8 lifecycle hooks, and 9 MCP server configs — all auto-activating based on what you're working on. No manual setup required._
+> _One `git clone` gives you 89 skills, 47 specialist agents, 70 community marketplaces with 2,100+ additional skills, 27 slash commands, 8 lifecycle hooks, and 9 MCP server configs — all auto-activating based on what you're working on. No manual setup required._
 
 </div>
 
@@ -80,7 +80,7 @@
 
 - [🎓 Complete Skills Reference (89 Skills)](#-complete-skills-reference-89-skills)
 - [🤖 Complete Agents Reference (47 Agents)](#-complete-agents-reference-47-agents)
-- [🏪 Complete Marketplaces Reference (70 Marketplaces)](#-complete-marketplaces-reference-70-marketplaces)
+- [🏪 Complete Marketplaces Reference (67 Marketplaces)](#-complete-marketplaces-reference-67-marketplaces)
 
 ### 🔒 Automation & Safety
 
@@ -126,7 +126,7 @@ The **Ultimate Claude Code Toolkit** transforms [Claude Code](https://docs.anthr
 | :-----------------: | :----: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 |    🎓 **Skills**    | **89** | Domain expertise modules covering iOS, Android, React, Vue, Svelte, DevOps, AI/ML, scientific computing, business strategy, and more                                                        |
 |    🤖 **Agents**    | **47** | Specialized AI subagents for deep expertise in code review, security auditing, architecture analysis, platform development, and creative work                                               |
-| 🏪 **Marketplaces** | **70** | External repositories containing **5,100+** additional skills from the community                                                                                                            |
+| 🏪 **Marketplaces** | **67** | External repositories containing **5,100+** additional skills from the community                                                                                                            |
 |   ⌨️ **Commands**   | **27** | Custom slash commands for task routing, skill discovery, deployment, testing, scaffolding, and workflow automation                                                                           |
 |    📋 **Rules**     | **27** | Contextual guidelines for 10 tech stacks, 8 checklists, 5 workflows, and tooling references                                                                                               |
 |    🪝 **Hooks**     | **8**  | Claude Code lifecycle hooks (session-start, prompt-context, formatting, secret scanning, guard-dangerous, and more)                                                                         |
@@ -258,7 +258,7 @@ The **Ultimate Claude Code Toolkit** transforms [Claude Code](https://docs.anthr
 | 🔓 "I forget to check for security issues"     | 🔒 Git hooks auto-block secrets, security-auditor agent catches vulnerabilities |
 | 🤔 "Each task requires different expertise"    | 🤖 47 specialized agents spawn for deep work automatically                      |
 | ❓ "I don't know what tools are available"     | 🎯 Universal router detects domains and loads relevant resources                |
-| 📝 "Claude gives generic advice"               | 🏪 5,200+ marketplace skills provide production-tested patterns                 |
+| 📝 "Claude gives generic advice"               | 🏪 2,100+ marketplace skills provide production-tested patterns                 |
 
 ---
 
@@ -578,7 +578,7 @@ bash ~/.claude/scripts/init-marketplaces.sh
 bash ~/.claude/scripts/setup-new-machine.sh
 ```
 
-> This configures 70 marketplace repos as read-only, registers plugins, installs hooks, and verifies your installation.
+> This configures 67 marketplace repos as read-only, registers plugins, installs hooks, and verifies your installation.
 
 </td>
 </tr>
@@ -777,7 +777,7 @@ cd ~/.claude
 # ═══════════════════════════════════════════════════════════════════════════
 # STEP 2: Initialize marketplace repos with correct upstream remotes (CRITICAL!)
 # ═══════════════════════════════════════════════════════════════════════════
-# This script clones all 70 marketplace repos from their ORIGINAL upstreams
+# This script clones all 67 marketplace repos from their ORIGINAL upstreams
 # and configures no_push to prevent accidental modifications.
 #
 # ⚠️ This is the most important step! Without it, marketplace repos may have
@@ -903,7 +903,7 @@ echo "=== Setup complete! Run 'claude doctor' to verify ==="
 
 ### 🔒 Security: The no_push Protection
 
-**Critical:** All 70 external repositories are configured with `no_push` to prevent accidental pushes to upstream repos you don't own.
+**Critical:** All 67 external repositories are configured with `no_push` to prevent accidental pushes to upstream repos you don't own.
 
 ```bash
 # Check no_push configuration on any repo
@@ -1113,7 +1113,7 @@ bash ~/.claude/scripts/setup-new-machine.sh
 │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐         │
 │  │ 🎓 SKILLS   │  │ 🤖 AGENTS   │  │ 📋 RULES    │  │ 🏪 MARKET-  │         │
 │  │  89 local   │  │ 47 experts  │  │  Checklists │  │   PLACES    │         │
-│  │             │  │  (Task tool)│  │  & stacks   │  │ 5,200+ more │         │
+│  │             │  │  (Task tool)│  │  & stacks   │  │ 2,100+ more │         │
 │  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘         │
 └─────────────────────────────────┬───────────────────────────────────────────┘
                                   │
@@ -1160,7 +1160,7 @@ bash ~/.claude/scripts/setup-new-machine.sh
 │   ├── 🛠️ stacks/ (technology-specific)
 │   └── 🔧 tooling/ (setup guides)
 │
-├── 🏪 plugins/marketplaces/ (72 repos, 5,200+ skills)
+├── 🏪 plugins/marketplaces/ (72 repos, 2,100+ skills)
 │   └── Searched when local skills insufficient
 │
 └── 📚 docs/ (extended documentation)
@@ -2217,7 +2217,7 @@ PostToolUse("Write") → Run Prettier → Format file
 │
 ├── 🏪 plugins/                           # Plugin system
 │   ├── 📁 local/                         # Custom local plugins
-│   └── 📦 marketplaces/                  # 70 external repositories
+│   └── 📦 marketplaces/                  # 67 external repositories
 │       └── (see Marketplaces section)
 │
 ├── 📜 scripts/                           # Utility scripts
@@ -2575,9 +2575,9 @@ Core rules loaded every session (~1,100 tokens):
 
 ---
 
-## 🏪 Complete Marketplaces Reference (70 Marketplaces)
+## 🏪 Complete Marketplaces Reference (67 Marketplaces)
 
-> **📊 Total: 5,200+ additional skills** from 70 external repositories
+> **📊 Total: 2,100+ additional skills** from 67 external repositories
 
 ### 🏛️ Official Anthropic
 
@@ -2587,14 +2587,14 @@ Core rules loaded every session (~1,100 tokens):
 | 🔧 `claude-code-plugins`     | [anthropics/claude-code](https://github.com/anthropics/claude-code)                         | PR review, commit commands, feature dev, security | Production-tested, regularly updated         |
 | 📦 `claude-plugins-official` | [anthropics/claude-plugins-official](https://github.com/anthropics/claude-plugins-official) | Curated plugins                                   | Vetted by Anthropic team                     |
 
-### ⚡ Taches/GlitterCowboy (70 Marketplaces)
+### ⚡ Taches/GlitterCowboy (67 Marketplaces)
 
 | Marketplace              | GitHub                                                                                    | Contents                                                 | Key Features                                          |
 | :----------------------- | :---------------------------------------------------------------------------------------- | :------------------------------------------------------- | :---------------------------------------------------- |
 | 🧠 `taches-cc-resources` | [glittercowboy/taches-cc-resources](https://github.com/glittercowboy/taches-cc-resources) | Meta-prompting, debugging, hooks, agents, skill creation | `/consider:*` decision frameworks, prompt engineering |
 | 📈 `get-shit-done`       | [glittercowboy/get-shit-done](https://github.com/glittercowboy/get-shit-done)             | GSD multi-phase project management                       | `/gsd:*` commands, session continuity                 |
 
-### 📚 Large Collections (70 Marketplaces)
+### 📚 Large Collections (67 Marketplaces)
 
 | Marketplace                          | GitHub                                                                                                |                 Count                  | Key Features                                   |
 | :----------------------------------- | :---------------------------------------------------------------------------------------------------- | :------------------------------------: | :--------------------------------------------- |
@@ -2633,7 +2633,7 @@ Core rules loaded every session (~1,100 tokens):
 **Usage:** `/auto-claude [description]` or direct CLI
 **Documentation:** [docs/AUTO-CLAUDE-GUIDE.md](./docs/AUTO-CLAUDE-GUIDE.md)
 
-### 🧠 Specialized (70 Marketplaces)
+### 🧠 Specialized (67 Marketplaces)
 
 | Marketplace                    | GitHub                                                                    | Key Features                                           |
 | :----------------------------- | :------------------------------------------------------------------------ | :----------------------------------------------------- |
@@ -3790,7 +3790,7 @@ claude
 ✓ CLAUDE.md loaded (194 lines, ~1,100 tokens)
 ✓ 89 skills available
 ✓ 47 agents available
-✓ 70 marketplace repos synced
+✓ 67 marketplace repos synced
 ✓ 2 hooks configured (PostToolUse for Prettier)
 ✓ MCP servers: all disabled (optimal)
 ```
@@ -3825,7 +3825,7 @@ echo "Marketplace: $(find ~/.claude/plugins/marketplaces -name 'SKILL.md' | wc -
 **Pro Tips:**
 
 - Skills auto-activate based on context, so you rarely need to invoke manually
-- Use `/discover-skills <query>` to search marketplace (5,200+ skills)
+- Use `/discover-skills <query>` to search marketplace (2,100+ skills)
 - Check `skills/MASTER_INDEX.md` for categorized local skill list
 
 ---
@@ -6616,7 +6616,7 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) for detailed guidelines on:
 | **1.3.0** | Dec 2025 | 📜 CLAUDE.md refactor (45% reduction, ~1,100 tokens), 📚 satellite guides, 💰 token optimization                                                                                  |
 | **1.2.0** | Dec 2025 | 🏪 6 new marketplaces (21 total), 📈 GSD tutorial, 🔍 `/discover-skills` command, 🌐 skillsmp.com integration                                                                     |
 | **1.1.0** | Dec 2025 | 🎓 5 new skills (devops-cloud, ai-ml-development, game-development, macos-native, database-expert), 🤖 5 new agents, 📈 GSD integration                                           |
-| **1.0.0** | Dec 2025 | 🎉 Initial release: 60+ skills, 30+ agents, 70 marketplaces, rules system                                                                                                         |
+| **1.0.0** | Dec 2025 | 🎉 Initial release: 60+ skills, 30+ agents, 67 marketplaces, rules system                                                                                                         |
 
 See [CHANGELOG.md](./CHANGELOG.md) for complete history.
 
@@ -6641,7 +6641,7 @@ See [CHANGELOG.md](./CHANGELOG.md) for complete history.
 | 🎓 [Skills Catalog](./skills/MASTER_INDEX.md)       | All 89 skills           |
 | 🤖 [Agents Catalog](./agents/README.md)             | All 47 agents           |
 | 🔄 [Workflow Guide](./docs/WORKFLOW-GUIDE.md)       | Workflow patterns       |
-| 🏪 [Marketplace Guide](./docs/MARKETPLACE-GUIDE.md) | All 70 marketplaces     |
+| 🏪 [Marketplace Guide](./docs/MARKETPLACE-GUIDE.md) | All 67 marketplaces     |
 | 🤖 [Auto-Claude Guide](./docs/AUTO-CLAUDE-GUIDE.md) | Autonomous coding setup |
 | 📈 [GSD Tutorial](./docs/GSD-TUTORIAL.md)           | Project management      |
 
@@ -7573,7 +7573,7 @@ Centralized skill management with installation, updates, and discovery.
 │  Registry Sources:                                                           │
 │  • Local (~/.claude/skills/)                                                 │
 │  • Marketplace (72 repos)                                                    │
-│  • Marketplace repos (5,200+ skills)                                       │
+│  • Marketplace repos (2,100+ skills)                                       │
 │  • Custom registries (enterprise)                                            │
 │                                                                              │
 └─────────────────────────────────────────────────────────────────────────────┘
@@ -7742,7 +7742,7 @@ Browser-based toolkit management interface.
 │  │ SKILLS OVERVIEW                                                   ⟳ 🔍  ││
 │  ├─────────────────────────────────────────────────────────────────────────┤│
 │  │                                                                          ││
-│  │  Local Skills: 89        Marketplace: 5,200+      Total: 5,300+         ││
+│  │  Local Skills: 89        Marketplace: 5,200+      Total: 2,100+         ││
 │  │  ═══════════════════════════════════════════════════════════════════    ││
 │  │                                                                          ││
 │  │  ┌──────────────────────┐  ┌──────────────────────┐                     ││
