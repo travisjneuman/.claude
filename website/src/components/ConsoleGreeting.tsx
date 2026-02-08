@@ -2,7 +2,11 @@
 
 import { useEffect } from "react";
 
-export default function ConsoleGreeting() {
+interface Props {
+  stats: string;
+}
+
+export default function ConsoleGreeting({ stats }: Props) {
   useEffect(() => {
     const art = [
       "",
@@ -21,7 +25,7 @@ export default function ConsoleGreeting() {
     );
 
     console.log(
-      "%c  89 Skills  •  47 Agents  •  3,900+ Marketplace Skills  •  68 Repos",
+      `%c  ${stats}`,
       "color: #a855f7; font-family: monospace; font-size: 11px; font-weight: bold;",
     );
 
@@ -31,7 +35,7 @@ export default function ConsoleGreeting() {
     );
 
     console.log("");
-  }, []);
+  }, [stats]);
 
   return null;
 }
