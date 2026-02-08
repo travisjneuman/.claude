@@ -8,7 +8,7 @@ category: reference
 
 Complete map of the `.claude/` folder and related files.
 
-**Last Updated:** February 2026 (v2.3.3)
+**Last Updated:** February 2026 (v2.3.5)
 
 ---
 
@@ -150,7 +150,7 @@ This repo underwent a security audit before being made public. The following wer
     │       ├── voltagent-subagents/
     │       ├── trailofbits-skills/
     │       ├── claude-scientific-skills/
-    │       └── ... (67 total repos)
+    │       └── ... (69 total repos, 1 parent + 68 submodules)
     │
     ├── skills/                     ← Custom skills (85 directories, 89 SKILL.md files)
     │   ├── README.md               ← Skills documentation
@@ -352,6 +352,14 @@ This repo underwent a security audit before being made public. The following wer
     │   ├── README.md               ← Setup instructions
     │   ├── setup-vscode-settings.ps1  ← Windows setup script
     │   └── settings.json           ← VSCode settings (GITIGNORED - has local paths)
+    │
+    ├── website/                    ← Showcase website (SvelteKit, Cloudflare Pages)
+    │   ├── scripts/
+    │   │   └── fix-submodules.mjs  ← Prebuild: removes broken nested submodule
+    │   └── src/
+    │       └── lib/
+    │           └── data/
+    │               └── counts.ts   ← Dynamic counts utility (getCounts())
     │
     └── .vscode/                    ← VSCode workspace folder (GITIGNORED - auto-created)
         └── settings.json           ← Machine-specific workspace settings

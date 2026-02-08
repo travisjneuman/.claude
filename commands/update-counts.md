@@ -14,3 +14,5 @@ This script:
 3. Regenerates skills/MASTER_INDEX.md
 
 Run this after pulling repos, adding/removing skills or agents, or before committing.
+
+**Note:** Website counts are now dynamic via `website/src/lib/data/counts.ts`. The `getCounts()` function pulls live data at build time from the filesystem, so the website no longer needs manual count updates. This script still updates counts in documentation files (READMEs, commands, docs) and regenerates `marketplace-counts.json` for the Cloudflare fallback.

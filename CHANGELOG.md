@@ -2,6 +2,30 @@
 
 All notable changes to the Ultimate Claude Code Toolkit.
 
+## [2.3.5] - February 8, 2026
+
+### Cloudflare Deploy Fix + Dynamic Website Counts
+
+### Added
+
+- **Dynamic website counts** — Created `website/src/lib/data/counts.ts` as single source of truth for all formatted count strings. Footer, console greeting, and metadata now pull live counts at build time instead of hardcoded strings.
+- **Prebuild script** — Added `website/scripts/fix-submodules.mjs` to remove broken nested submodule directory (`claude-code-plugins-plus-skills/plugins/skill-enhancers/axiom`) before Cloudflare Pages builds. Safe no-op when directory doesn't exist.
+- **Post-change documentation rule** — Added `rules/workflows/post-change-documentation.md` requiring documentation updates with every code change.
+
+### Fixed
+
+- **Cloudflare Pages deploy** — Builds were failing because Cloudflare recursively clones all submodules, choking on the broken nested submodule in `claude-code-plugins-plus-skills`. The prebuild script removes the broken directory before `next build`.
+- **Count drift between website sections** — Hero section had dynamic counts while footer, console, and metadata had hardcoded strings. All now use `getCounts()` utility with consistent `Math.floor` rounding.
+
+### Changed
+
+- **ConsoleGreeting component** — Now accepts `stats` prop from server component instead of hardcoded string
+- **Footer component** — Now accepts `counts` prop with dynamic footer text
+- **FooterWithDocs component** — Calls `getCounts()` and passes to Footer
+- **layout.tsx** — Uses `getCounts()` for metadata description, OpenGraph, and Twitter tags
+
+---
+
 ## [2.3.4] - February 7-8, 2026
 
 ### Re-added claude-code-plugins-plus-skills Marketplace + Count Accuracy Fix
