@@ -1,6 +1,6 @@
 # Skills Master Index
 
-> Auto-generated on 2026-02-06 23:37. Run `bash ~/.claude/scripts/regenerate-index.sh` to refresh.
+> Auto-generated on 2026-02-07 22:51. Run `bash ~/.claude/scripts/regenerate-index.sh` to refresh.
 
 ## Discovery Protocol
 
@@ -14,6 +14,7 @@
 
 | Skill | Description |
 | ----- | ----------- |
+| `_shared` | (no SKILL.md) |
 | `accessibility-a11y` | WCAG 2.2 compliance, ARIA patterns, keyboard navigation, screen readers, automat |
 | `agent-teams` | Team composition knowledge for Claude Code Agent Teams - when to suggest teams,  |
 | `ai-ml-development` | AI and machine learning development with PyTorch, TensorFlow, and LLM integratio |
@@ -87,7 +88,6 @@
 | `security` | Information security expertise for cybersecurity frameworks (NIST, ISO 27001), s |
 | `seo-analytics-auditor` | Use this skill when auditing SEO, analyzing Core Web Vitals, verifying meta tags |
 | `serverless-development` | AWS Lambda, Vercel Edge Functions, Cloudflare Workers, cold starts, deployment p |
-| `_shared` | (no SKILL.md) |
 | `startup-launch` | Complete startup launch guidance from idea validation to market entry. Use when  |
 | `sustainability-esg` | Sustainability and ESG expertise for ESG strategy, carbon footprint management,  |
 | `svelte-development` | Svelte 5 development with runes ($state, $derived, $effect), SvelteKit full-stac |
@@ -103,6 +103,6 @@
 
 ---
 
-## Marketplace: 5229 skills across 70 repos
+## Marketplace: 2104 skills across 67 repos
 
 Search: `find ~/.claude/plugins/marketplaces -name "SKILL.md" | xargs grep -li "<keyword>"`
