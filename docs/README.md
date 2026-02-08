@@ -6,7 +6,7 @@ category: reference
 
 # Claude Code Toolkit Documentation
 
-**Last Updated:** February 2026 (v2.3.3)
+**Last Updated:** February 2026 (v2.3.5)
 **Maintainer:** Travis J. Neuman
 **Purpose:** Portable, optimized Claude Code configuration for any project
 
@@ -75,16 +75,16 @@ Already set up? Jump to the section you need below.
 
 | Component           | Count  | Location                       |
 | ------------------- | ------ | ------------------------------ |
-| Local skills        | 73     | `skills/`                      |
-| Agents              | 36     | `agents/`                      |
-| Commands            | 20     | `commands/`                    |
-| Rules files         | 17     | `rules/`                       |
-| Templates           | 10     | `templates/`                   |
-| Hooks               | 7      | `hooks/`                       |
+| Local skills        | 89     | `skills/`                      |
+| Agents              | 47     | `agents/`                      |
+| Commands            | 27     | `commands/`                    |
+| Rules files         | 27     | `rules/`                       |
+| Templates           | 14     | `templates/`                   |
+| Hooks               | 8      | `hooks/`                       |
 | MCP servers         | 9      | `.mcp.json`                    |
-| Marketplace repos   | 67     | `plugins/marketplaces/`        |
-| Marketplace skills  | 2,100+ | (across all marketplace repos) |
-| **Total git repos** | **68** | 1 parent + 67 submodules       |
+| Marketplace repos   | 68     | `plugins/marketplaces/`        |
+| Marketplace skills  | 3,900+ | (across all marketplace repos) |
+| **Total git repos** | **69** | 1 parent + 68 submodules       |
 
 ---
 
@@ -113,18 +113,24 @@ This `~/.claude/` folder is a fully configured, portable Claude Code environment
 - **68 marketplace repos** providing 3,900+ additional skills from the community
 - **8 hooks** for session lifecycle, safety guards, and auto-formatting
 - **27 rules files** for contextual guidance (checklists, stack patterns, workflows, tooling)
-- **15 templates** for task planning, component creation, and project scaffolding
+- **14 templates** for task planning, component creation, and project scaffolding
 
 ---
 
 ## History
+
+### v2.3.5 (February 2026)
+
+- Cloudflare Pages deploy fix: prebuild script removes broken nested submodule
+- Dynamic website counts: footer, console, metadata now use `getCounts()` utility
+- Added post-change documentation workflow rule
 
 ### v2.3.3 (February 2026)
 
 - Documentation overhaul: added FAQ, Architecture Overview, Glossary
 - Expanded hooks README with detailed per-hook documentation
 - Added frontmatter metadata to all docs for website display
-- Count reconciliation: skills 68→73, marketplace repos 67→72, marketplace skills 1,900+→5,100+
+- Count reconciliation: skills 68→73, marketplace repos 67→72, marketplace skills 1,900+→3,900+
 - Agent Teams integration with docs, skill, command, and auto-routing
 
 ### v2.3.1 (February 2026)

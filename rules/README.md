@@ -23,7 +23,8 @@ rules/
 │   ├── action-policy.md      # PROACTIVE vs CONSERVATIVE mode configuration
 │   ├── context-management.md # Context window, multi-window, state persistence
 │   ├── agent-teams.md        # Agent Teams decision framework
-│   └── deployment-cicd.md    # CI/CD pipelines, deployment strategies
+│   ├── deployment-cicd.md    # CI/CD pipelines, deployment strategies
+│   └── post-change-documentation.md  # Post-change docs update workflow
 ├── stacks/                   # Tech stack patterns
 │   ├── react-typescript.md   # React + TypeScript
 │   ├── python.md             # Python projects
@@ -68,6 +69,7 @@ rules/
 | `workflows/action-policy.md`        | Configuring behavior (PROACTIVE vs CONSERVATIVE)        |
 | `workflows/agent-teams.md`          | Deciding between single session, subagents, agent teams |
 | `workflows/deployment-cicd.md`      | Setting up CI/CD, deployment, release processes         |
+| `workflows/post-change-documentation.md` | After making ANY code/config/feature changes |
 
 ### Stacks
 
