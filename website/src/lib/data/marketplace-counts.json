@@ -1,16 +1,16 @@
 {
   "repoCount": 68,
-  "totalSkills": 3888,
+  "totalSkills": 2578,
   "repos": [
-    {
-      "name": "claude-code-plugins-plus-skills",
-      "displayName": "Claude Code Plugins Plus Skills",
-      "skillCount": 1859
-    },
     {
       "name": "davila7-templates",
       "displayName": "Davila7 Templates",
       "skillCount": 683
+    },
+    {
+      "name": "claude-code-plugins-plus-skills",
+      "displayName": "Claude Code Plugins Plus Skills",
+      "skillCount": 500
     },
     {
       "name": "wshobson-agents",
@@ -41,6 +41,11 @@
       "name": "kivilaid-marketplace",
       "displayName": "Kivilaid Marketplace",
       "skillCount": 104
+    },
+    {
+      "name": "neolab-context-kit",
+      "displayName": "Neolab Context Kit",
+      "skillCount": 60
     },
     {
       "name": "worldbuilding-skills",
@@ -130,11 +135,6 @@
     {
       "name": "devgom-marketplace",
       "displayName": "Devgom Marketplace",
-      "skillCount": 11
-    },
-    {
-      "name": "neolab-context-kit",
-      "displayName": "Neolab Context Kit",
       "skillCount": 11
     },
     {
