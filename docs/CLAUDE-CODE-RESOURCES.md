@@ -202,7 +202,7 @@ System prompt here...
 
 ### Plugin Marketplace Ecosystem
 
-This setup includes 67 marketplace repositories providing access to 5,100+ community skills. Key marketplaces for plugin development reference:
+This setup includes 67 marketplace repositories providing access to 2,100+ community skills. Key marketplaces for plugin development reference:
 
 | Repository                        | URL                                                  | Specialization                |
 | --------------------------------- | ---------------------------------------------------- | ----------------------------- |
@@ -307,11 +307,11 @@ This installation's `~/.claude/docs/` directory contains:
 
 | Component                | Count  |
 | ------------------------ | ------ |
-| Local skills             | 73     |
-| Custom agents            | 36     |
-| Marketplace repos        | 72     |
-| Marketplace skills       | 5,100+ |
-| Custom commands          | 20     |
+| Local skills             | 89     |
+| Custom agents            | 47     |
+| Marketplace repos        | 67     |
+| Marketplace skills       | 2,100+ |
+| Custom commands          | 27     |
 | MCP servers (configured) | 9      |
 
 ---
