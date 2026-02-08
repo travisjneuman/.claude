@@ -1,16 +1,16 @@
 {
   "repoCount": 68,
-  "totalSkills": 2578,
+  "totalSkills": 3937,
   "repos": [
+    {
+      "name": "claude-code-plugins-plus-skills",
+      "displayName": "Claude Code Plugins Plus Skills",
+      "skillCount": 1859
+    },
     {
       "name": "davila7-templates",
       "displayName": "Davila7 Templates",
       "skillCount": 683
-    },
-    {
-      "name": "claude-code-plugins-plus-skills",
-      "displayName": "Claude Code Plugins Plus Skills",
-      "skillCount": 500
     },
     {
       "name": "wshobson-agents",

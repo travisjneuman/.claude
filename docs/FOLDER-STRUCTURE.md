@@ -8,7 +8,7 @@ category: reference
 
 Complete map of the `.claude/` folder and related files.
 
-**Last Updated:** February 2026 (v2.3.6)
+**Last Updated:** February 2026 (v2.3.7)
 
 ---
 
