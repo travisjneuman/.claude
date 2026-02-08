@@ -9,12 +9,11 @@ All notable changes to the Ultimate Claude Code Toolkit.
 ### Added
 
 - **Dynamic website counts** — Created `website/src/lib/data/counts.ts` as single source of truth for all formatted count strings. Footer, console greeting, and metadata now pull live counts at build time instead of hardcoded strings.
-- **Prebuild script** — Added `website/scripts/fix-submodules.mjs` to remove broken nested submodule directory (`claude-code-plugins-plus-skills/plugins/skill-enhancers/axiom`) before Cloudflare Pages builds. Safe no-op when directory doesn't exist.
 - **Post-change documentation rule** — Added `rules/workflows/post-change-documentation.md` requiring documentation updates with every code change.
 
 ### Fixed
 
-- **Cloudflare Pages deploy** — Builds were failing because Cloudflare recursively clones all submodules, choking on the broken nested submodule in `claude-code-plugins-plus-skills`. The prebuild script removes the broken directory before `next build`.
+- **Cloudflare Pages deploy** — Builds were failing because `claude-code-plugins-plus-skills` was the only marketplace repo tracked as a gitlink (mode 160000) in the git tree. All other 67 marketplace repos are gitignored and exist only on disk. Cloudflare's submodule init step tried to recursively clone this one tracked repo, hitting a broken nested submodule (`plugins/skill-enhancers/axiom`). Fix: removed the accidental gitlink with `git rm --cached`. The directory remains on disk for local skill counting. `.gitignore` line 77 (`plugins/marketplaces/`) prevents re-tracking.
 - **Count drift between website sections** — Hero section had dynamic counts while footer, console, and metadata had hardcoded strings. All now use `getCounts()` utility with consistent `Math.floor` rounding.
 
 ### Changed
