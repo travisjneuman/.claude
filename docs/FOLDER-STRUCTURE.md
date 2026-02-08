@@ -152,7 +152,7 @@ This repo underwent a security audit before being made public. The following wer
     │       ├── claude-scientific-skills/
     │       └── ... (67 total repos)
     │
-    ├── skills/                     ← Custom skills (70 directories, 73 SKILL.md files)
+    ├── skills/                     ← Custom skills (85 directories, 89 SKILL.md files)
     │   ├── README.md               ← Skills documentation
     │   ├── MASTER_INDEX.md         ← Navigation hub for all skills docs
     │   ├── EXPERT-SKILLS-GUIDE.md  ← All 16 domain expert skills guide
@@ -484,7 +484,7 @@ Shell scripts for setup, maintenance, and automation.
 
 ---
 
-### `/skills/` - Domain Knowledge (73 SKILL.md files across 70 directories)
+### `/skills/` - Domain Knowledge (89 SKILL.md files across 85 directories)
 
 Skills provide specialized knowledge and guidelines. They auto-activate based on context.
 

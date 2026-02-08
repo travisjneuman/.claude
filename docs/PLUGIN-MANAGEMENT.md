@@ -12,7 +12,7 @@ category: ecosystem
 
 ## Overview
 
-Plugins extend Claude Code with reusable skills, agents, commands, and hooks. This setup manages 72 marketplace repos containing 5,100+ community skills alongside 73 local skills. Marketplace repos are read-only references pulled from upstream, while local plugins are your own customizations tracked in your personal repo.
+Plugins extend Claude Code with reusable skills, agents, commands, and hooks. This setup manages 67 marketplace repos containing 2,100+ community skills alongside 89 local skills. Marketplace repos are read-only references pulled from upstream, while local plugins are your own customizations tracked in your personal repo.
 
 ---
 
@@ -42,7 +42,7 @@ plugins/
     │   └── plugins/           # Each subdirectory is one plugin
     ├── get-shit-done/
     ├── obra-superpowers/
-    └── ... (72 marketplace repos total)
+    └── ... (67 marketplace repos total)
 ```
 
 | Directory       | Purpose                                  | Git Tracked? |
@@ -134,7 +134,7 @@ claude doctor
 
 ## The Marketplace Ecosystem
 
-This setup aggregates 72 marketplace repos containing 5,100+ community-contributed skills across many domains.
+This setup aggregates 67 marketplace repos containing 2,100+ community-contributed skills across many domains.
 
 ### Notable Marketplaces
 
@@ -154,7 +154,7 @@ This setup aggregates 72 marketplace repos containing 5,100+ community-contribut
 
 Repos follow one of two layouts. Single-plugin repos place `.claude-plugin/plugin.json` at the root. Multi-plugin repos (like `claude-code-plugins`) host multiple plugins in a `plugins/` subdirectory, each with its own `.claude-plugin/plugin.json`.
 
-All marketplace repos are configured as read-only with `no_push` set on the push URL. See `rules/tooling/external-repos.md` for the full list of 72 repos.
+All marketplace repos are configured as read-only with `no_push` set on the push URL. See `rules/tooling/external-repos.md` for the full list of 67 repos.
 
 ---
 
@@ -318,6 +318,6 @@ This keeps upstream updates accessible while preserving your customizations.
 
 - `~/.claude/CLAUDE.md` -- Core rules and plugin philosophy
 - `~/.claude/docs/MARKETPLACE-GUIDE.md` -- Marketplace browsing and discovery
-- `~/.claude/rules/tooling/external-repos.md` -- Full list of 72 marketplace repos
+- `~/.claude/rules/tooling/external-repos.md` -- Full list of 67 marketplace repos
 - `~/.claude/rules/tooling/troubleshooting.md` -- General troubleshooting
-- `~/.claude/skills/README.md` -- Skills overview (73 local skills)
+- `~/.claude/skills/README.md` -- Skills overview (89 local skills)
