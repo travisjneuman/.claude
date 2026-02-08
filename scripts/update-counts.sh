@@ -13,12 +13,38 @@ set -euo pipefail
 BASE="$HOME/.claude"
 cd "$BASE"
 
+# ─── Non-skill directory exclusions ────────────────────────────────
+# Marketplace repos may contain SKILL.md files in directories that are
+# NOT real skills (backups, planned content, test fixtures, docs, etc.).
+# These patterns are excluded from the marketplace skill count.
+# Add new patterns here if a newly-added repo has non-skill directories.
+EXCLUDE_SKILL_DIRS=(
+  backups backup              # Timestamped backup snapshots
+  tests test                  # Test fixtures and E2E test data
+  examples example            # Documentation examples
+  docs                        # Translated docs, API docs
+  workspace lab               # Development workspaces
+  archive archived            # Archived/retired skills
+  deprecated                  # Explicitly deprecated content
+  draft drafts                # Work-in-progress drafts
+  planned-skills planned      # Planned but not yet real skills
+  templates template          # Skill templates/scaffolds
+  node_modules                # Package dependencies
+  .git                        # Git internals
+)
+
 # ─── Count from filesystem ───────────────────────────────────────────
 
 SKILL_COUNT=$(find skills -name "SKILL.md" -not -path "skills/_shared/*" 2>/dev/null | wc -l | tr -d ' ')
 AGENT_COUNT=$(ls agents/*.md 2>/dev/null | grep -cv 'README\.md' || echo 0)
 REPO_COUNT=$(ls -d plugins/marketplaces/*/ 2>/dev/null | wc -l | tr -d ' ')
-MARKET_SKILL_COUNT=$(find plugins/marketplaces -name "SKILL.md" 2>/dev/null | wc -l | tr -d ' ')
+
+# Build find exclusion arguments from EXCLUDE_SKILL_DIRS
+FIND_EXCLUDES=()
+for dir in "${EXCLUDE_SKILL_DIRS[@]}"; do
+  FIND_EXCLUDES+=(-not -path "*/$dir/*")
+done
+MARKET_SKILL_COUNT=$(find plugins/marketplaces -name "SKILL.md" "${FIND_EXCLUDES[@]}" 2>/dev/null | wc -l | tr -d ' ')
 COMMAND_COUNT=$(ls commands/*.md 2>/dev/null | grep -cv 'README\.md' || echo 0)
 HOOK_COUNT=$(ls hooks/*.sh 2>/dev/null | wc -l | tr -d ' ')
 RULE_COUNT=$(find rules -name '*.md' -not -name 'README.md' 2>/dev/null | wc -l | tr -d ' ')
@@ -219,6 +245,12 @@ update_readme_badges() {
   sedi -E "s/[0-9]+ local/${SKILL_COUNT} local/" "$file"
   sedi -E "s/[0-9]+ experts/${AGENT_COUNT} experts/" "$file"
 
+  # ASCII art overview: "Marketplace: N,NNN+"
+  sedi -E "s/Marketplace: [0-9]+,[0-9]+\+/Marketplace: ${MARKET_DISPLAY_PLUS}/" "$file"
+
+  # Stat box: "N local + N,NNN+ marketplace"
+  sedi -E "s/[0-9]+ local \+ [0-9]+,[0-9]+\+ marketplace/${SKILL_COUNT} local + ${MARKET_DISPLAY_PLUS} marketplace/" "$file"
+
   # Directory tree comments
   sedi -E "s/# [0-9]+ domain expertise/# ${SKILL_COUNT} domain expertise/" "$file"
   sedi -E "s/# [0-9]+ specialized AI/# ${AGENT_COUNT} specialized AI/" "$file"
@@ -289,12 +321,19 @@ const fs = require('fs');
 const path = require('path');
 const marketDir = path.resolve(__dirname, 'plugins', 'marketplaces');
 
+const EXCLUDE_DIRS = new Set([
+  'backups','backup','tests','test','examples','example',
+  'docs','workspace','lab','archive','archived','deprecated',
+  'draft','drafts','planned-skills','planned','templates',
+  'template','node_modules','.git'
+]);
+
 function countSkillFiles(dir) {
   let count = 0;
   try {
     const items = fs.readdirSync(dir, { withFileTypes: true });
     for (const item of items) {
-      if (item.isDirectory() && !item.name.startsWith('.') && item.name !== 'node_modules') {
+      if (item.isDirectory() && !item.name.startsWith('.') && !EXCLUDE_DIRS.has(item.name)) {
         count += countSkillFiles(path.join(dir, item.name));
       } else if (item.name === 'SKILL.md') count++;
     }
@@ -432,6 +471,7 @@ fs.writeFileSync('$file', JSON.stringify(data, null, 2) + '\n');
   sedi -E "s/[0-9]+ local skills covering/${SKILL_COUNT} local skills covering/" "$file"
   sedi -E "s/[0-9]+ specialized AI agents/${AGENT_COUNT} specialized AI agents/" "$file"
   sedi -E "s/[0-9]+ marketplace repos/${REPO_COUNT} marketplace repos/" "$file"
+  sedi -E "s/marketplace repos with [0-9]+,[0-9]+\+ additional skills/marketplace repos with ${MARKET_DISPLAY_PLUS} additional skills/" "$file"
 
   check_changed "$file" "$before"
 }

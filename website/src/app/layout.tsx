@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://claude.travisjneuman.com"),
   title: "tjn.claude/ | Skills, Agents & Marketplace",
   description:
-    "A comprehensive Claude Code configuration with 89 local skills, 47 specialized agents, and 5,200+ marketplace skills across 68 repos. Supercharge your AI-assisted development.",
+    "A comprehensive Claude Code configuration with 89 local skills, 47 specialized agents, and 3,900+ marketplace skills across 68 repos. Supercharge your AI-assisted development.",
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "tjn.claude/",
     description:
-      "89 Skills, 47 Agents & 5,200+ Marketplace Skills for Claude Code",
+      "89 Skills, 47 Agents & 3,900+ Marketplace Skills for Claude Code",
     type: "website",
     images: [
       {
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "tjn.claude/",
     description:
-      "89 Skills, 47 Agents & 5,200+ Marketplace Skills for Claude Code",
+      "89 Skills, 47 Agents & 3,900+ Marketplace Skills for Claude Code",
     images: ["/og-image.jpg"],
   },
 };

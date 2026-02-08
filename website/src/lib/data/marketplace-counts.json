@@ -1,16 +1,16 @@
 {
   "repoCount": 68,
-  "totalSkills": 5234,
+  "totalSkills": 3888,
   "repos": [
     {
       "name": "claude-code-plugins-plus-skills",
       "displayName": "Claude Code Plugins Plus Skills",
-      "skillCount": 3148
+      "skillCount": 1859
     },
     {
       "name": "davila7-templates",
       "displayName": "Davila7 Templates",
-      "skillCount": 685
+      "skillCount": 683
     },
     {
       "name": "wshobson-agents",
@@ -23,14 +23,14 @@
       "skillCount": 145
     },
     {
-      "name": "athola-night-market",
-      "displayName": "Athola Night Market",
-      "skillCount": 127
-    },
-    {
       "name": "madappgang-claude-code",
       "displayName": "Madappgang Claude Code",
       "skillCount": 127
+    },
+    {
+      "name": "athola-night-market",
+      "displayName": "Athola Night Market",
+      "skillCount": 126
     },
     {
       "name": "awesome-claude-skills",
@@ -41,11 +41,6 @@
       "name": "kivilaid-marketplace",
       "displayName": "Kivilaid Marketplace",
       "skillCount": 104
-    },
-    {
-      "name": "affaan-everything-claude",
-      "displayName": "Affaan Everything Claude",
-      "skillCount": 73
     },
     {
       "name": "worldbuilding-skills",
@@ -83,6 +78,11 @@
       "skillCount": 32
     },
     {
+      "name": "affaan-everything-claude",
+      "displayName": "Affaan Everything Claude",
+      "skillCount": 29
+    },
+    {
       "name": "gmickel-marketplace",
       "displayName": "Gmickel Marketplace",
       "skillCount": 23
@@ -93,24 +93,19 @@
       "skillCount": 22
     },
     {
-      "name": "EveryInc-compound",
-      "displayName": "EveryInc Compound",
-      "skillCount": 20
-    },
-    {
-      "name": "muratcankoylan-agent-skills",
-      "displayName": "Muratcankoylan Agent Skills",
-      "skillCount": 19
-    },
-    {
       "name": "mhattingpete-skills",
       "displayName": "Mhattingpete Skills",
       "skillCount": 18
     },
     {
+      "name": "EveryInc-compound",
+      "displayName": "EveryInc Compound",
+      "skillCount": 17
+    },
+    {
       "name": "anthropic-agent-skills",
       "displayName": "Anthropic Agent Skills",
-      "skillCount": 17
+      "skillCount": 16
     },
     {
       "name": "ananddtyagi-marketplace",
@@ -120,6 +115,11 @@
     {
       "name": "claude-plugins-official",
       "displayName": "Claude Plugins Official",
+      "skillCount": 14
+    },
+    {
+      "name": "muratcankoylan-agent-skills",
+      "displayName": "Muratcankoylan Agent Skills",
       "skillCount": 14
     },
     {
@@ -233,11 +233,6 @@
       "skillCount": 1
     },
     {
-      "name": "numman-ali-openskills",
-      "displayName": "Numman Ali Openskills",
-      "skillCount": 1
-    },
-    {
       "name": "othmanadi-planning",
       "displayName": "Othmanadi Planning",
       "skillCount": 1
@@ -295,6 +290,11 @@
     {
       "name": "netresearch-marketplace",
       "displayName": "Netresearch Marketplace",
+      "skillCount": 0
+    },
+    {
+      "name": "numman-ali-openskills",
+      "displayName": "Numman Ali Openskills",
       "skillCount": 0
     },
     {
