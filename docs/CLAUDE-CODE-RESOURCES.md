@@ -202,7 +202,7 @@ System prompt here...
 
 ### Plugin Marketplace Ecosystem
 
-This setup includes 67 marketplace repositories providing access to 2,100+ community skills. Key marketplaces for plugin development reference:
+This setup includes 68 marketplace repositories providing access to 5,200+ community skills. Key marketplaces for plugin development reference:
 
 | Repository                        | URL                                                  | Specialization                |
 | --------------------------------- | ---------------------------------------------------- | ----------------------------- |
