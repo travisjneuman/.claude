@@ -51,12 +51,12 @@ Verify:
 
 | Directory               | Expected  | Check                                         |
 | ----------------------- | --------- | --------------------------------------------- |
-| `skills/`               | 73+ items | `ls ~/.claude/skills/ \| wc -l`               |
+| `skills/`               | 89+ items | `ls ~/.claude/skills/ \| wc -l`               |
 | `agents/`               | 47+ files | `ls ~/.claude/agents/*.md \| wc -l`           |
 | `commands/`             | 10+ files | `ls ~/.claude/commands/*.md \| wc -l`         |
 | `rules/`                | 13+ files | `find ~/.claude/rules -name "*.md" \| wc -l`  |
 | `templates/`            | 5+ files  | `ls ~/.claude/templates/ \| wc -l`            |
-| `plugins/marketplaces/` | 67 repos  | `ls ~/.claude/plugins/marketplaces/ \| wc -l` |
+| `plugins/marketplaces/` | 68 repos  | `ls ~/.claude/plugins/marketplaces/ \| wc -l` |
 
 ### Step 3: Hooks Status
 

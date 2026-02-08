@@ -36,10 +36,11 @@ Helper scripts for setup, maintenance, and automation of the Claude Code toolkit
 
 ### Utilities
 
-| Script                        | Purpose                                        |
-| ----------------------------- | ---------------------------------------------- |
-| `fix-plugin-line-endings.sh`  | Convert CRLF to LF in plugin files (Linux/Mac) |
-| `fix-plugin-line-endings.ps1` | Same, for Windows PowerShell                   |
+| Script                              | Purpose                                                       |
+| ----------------------------------- | ------------------------------------------------------------- |
+| `fix-plugin-line-endings.sh`        | Convert CRLF to LF in plugin files (Linux/Mac)                |
+| `fix-plugin-line-endings.ps1`       | Same, for Windows PowerShell                                  |
+| `website/scripts/fix-submodules.mjs`| Prebuild: remove broken nested submodule refs for Cloudflare  |
 
 ---
 

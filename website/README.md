@@ -72,3 +72,20 @@ bash ~/.claude/scripts/update-counts.sh
 ```
 
 This updates hardcoded counts across all documentation AND regenerates `marketplace-counts.json`.
+
+## Architecture Notes
+
+### Prebuild Script
+
+`scripts/fix-submodules.mjs` runs automatically before `next build` via npm lifecycle hooks (`prebuild` in `package.json`). It removes a broken nested submodule directory inside `claude-code-plugins-plus-skills` that causes Cloudflare Pages' recursive clone to fail. The script is a safe no-op when the directory doesn't exist, so local builds are unaffected.
+
+### Dynamic Counts
+
+`src/lib/data/counts.ts` is the single source of truth for all formatted count strings displayed on the website. The `getCounts()` function calls `getSkills()`, `getAgents()`, and `getMarketplaceStats()` at build time and returns pre-formatted strings (e.g., "89+", "47", "3,900+"). These strings are consumed by metadata in `layout.tsx`, the footer, and the console greeting. This eliminates count drift between different website sections — there is no hardcoded count anywhere in the UI layer.
+
+### Component Props
+
+- **ConsoleGreeting** accepts a `stats` prop with formatted count strings for the ASCII art greeting.
+- **Footer** accepts a `counts` prop for displaying skill/agent/marketplace totals.
+- **FooterWithDocs** passes counts from `getCounts()` into Footer.
+- **layout.tsx** uses `getCounts()` to populate metadata descriptions.

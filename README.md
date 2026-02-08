@@ -16,7 +16,7 @@
 
 [![Opus 4.6](https://img.shields.io/badge/Optimized_for_Opus_4.6-d946ef?style=for-the-badge&logo=anthropic&logoColor=white)](https://www.anthropic.com/news/claude-opus-4-6)
 [![Claude Code](https://img.shields.io/badge/Claude_Code-6366f1?style=for-the-badge&logo=anthropic&logoColor=white)](https://docs.anthropic.com/en/docs/claude-code)
-[![v2.3.3](https://img.shields.io/badge/v2.3.3-feb_2026-1a1a2e?style=for-the-badge&logo=semver&logoColor=white)](./CHANGELOG.md)
+[![v2.3.5](https://img.shields.io/badge/v2.3.5-feb_2026-1a1a2e?style=for-the-badge&logo=semver&logoColor=white)](./CHANGELOG.md)
 
 <!-- Primary Resource Badges -->
 
@@ -43,11 +43,11 @@
 
 <br/>
 
-**Version 2.3.3** · **Last Updated: February 6, 2026** · **Author: [Travis Neuman](https://travisjneuman.com)** · **Live: [claude.travisjneuman.com](https://claude.travisjneuman.com)**
+**Version 2.3.5** · **Last Updated: February 8, 2026** · **Author: [Travis Neuman](https://travisjneuman.com)** · **Live: [claude.travisjneuman.com](https://claude.travisjneuman.com)**
 
 <br/>
 
-> _One `git clone` gives you 89 skills, 47 specialist agents, 70 community marketplaces with 3,900+ additional skills, 27 slash commands, 8 lifecycle hooks, and 9 MCP server configs — all auto-activating based on what you're working on. No manual setup required._
+> _One `git clone` gives you 89 skills, 47 specialist agents, 68 community marketplaces with 3,900+ additional skills, 27 slash commands, 8 lifecycle hooks, and 9 MCP server configs — all auto-activating based on what you're working on. No manual setup required._
 
 </div>
 
