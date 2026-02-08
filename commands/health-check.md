@@ -60,13 +60,13 @@ Verify:
 
 ### Step 3: Hooks Status
 
-**Verify all 7 hooks:**
+**Verify all 8 hooks:**
 
 ```bash
 grep -c '"PreToolUse"\|"PostToolUse"\|"Notification"\|"UserPromptSubmit"\|"Stop"\|"PreCompact"\|"SubagentStop"' ~/.claude/settings.json
 ```
 
-Expected: 7 hooks configured
+Expected: 8 hooks configured
 
 ### Step 4: Git Status
 

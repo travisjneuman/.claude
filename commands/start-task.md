@@ -141,7 +141,7 @@ Read `commands/router/routing-logic.md` for complexity scoring.
 When domain detection identifies a specialized area, search marketplace skills:
 
 - Search: `find ~/.claude/plugins/marketplaces -name "SKILL.md" | xargs grep -li "<keyword>"`
-- Priority: Local skills first, then marketplace skills from 68 repos (3,900+ skills)
+- Priority: Local skills first, then marketplace skills from 68 repos (2,500+ skills)
 - Auto-suggest highly relevant marketplace skills when found
 - Key marketplace repos by domain:
   - **Security:** trailofbits-skills (50), claude-scientific-skills (144)
