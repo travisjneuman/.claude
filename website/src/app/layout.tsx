@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
+import { getCounts } from "@/lib/data/counts";
 import ConsoleGreeting from "@/components/ConsoleGreeting";
 import "./globals.css";
 
@@ -13,11 +14,12 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
 });
 
+const counts = getCounts();
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://claude.travisjneuman.com"),
   title: "tjn.claude/ | Skills, Agents & Marketplace",
-  description:
-    "A comprehensive Claude Code configuration with 89 local skills, 47 specialized agents, and 3,900+ marketplace skills across 68 repos. Supercharge your AI-assisted development.",
+  description: counts.description,
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
@@ -29,8 +31,7 @@ export const metadata: Metadata = {
   manifest: "/site.webmanifest",
   openGraph: {
     title: "tjn.claude/",
-    description:
-      "89 Skills, 47 Agents & 3,900+ Marketplace Skills for Claude Code",
+    description: counts.tagline,
     type: "website",
     images: [
       {
@@ -44,8 +45,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "tjn.claude/",
-    description:
-      "89 Skills, 47 Agents & 3,900+ Marketplace Skills for Claude Code",
+    description: counts.tagline,
     images: ["/og-image.jpg"],
   },
 };
@@ -60,7 +60,7 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} antialiased`}
       >
-        <ConsoleGreeting />
+        <ConsoleGreeting stats={counts.consoleText} />
         {children}
       </body>
     </html>

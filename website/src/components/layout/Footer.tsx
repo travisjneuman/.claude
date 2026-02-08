@@ -38,11 +38,16 @@ const footerLinks = {
   ],
 };
 
-interface FooterProps {
-  docs?: DocItem[];
+interface Counts {
+  footerText: string;
 }
 
-export default function Footer({ docs }: FooterProps) {
+interface FooterProps {
+  docs?: DocItem[];
+  counts?: Counts;
+}
+
+export default function Footer({ docs, counts }: FooterProps) {
   const [selected, setSelected] = useState<DocItem | null>(null);
 
   const docLinks = docs?.length
@@ -63,8 +68,8 @@ export default function Footer({ docs }: FooterProps) {
           <div className="col-span-2 md:col-span-1">
             <span className="text-lg font-bold gradient-text">Claude Code</span>
             <p className="mt-2 text-sm text-[var(--text-muted)]">
-              Supercharge your Claude Code with 89 skills, 47 agents, and 3,900+
-              marketplace skills across 68 repos.
+              {counts?.footerText ??
+                "Supercharge your Claude Code with skills, agents, and marketplace skills."}
             </p>
           </div>
 
