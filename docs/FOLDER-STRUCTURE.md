@@ -8,7 +8,7 @@ category: reference
 
 Complete map of the `.claude/` folder and related files.
 
-**Last Updated:** February 2026 (v2.3.8)
+**Last Updated:** February 2026 (v2.4.0)
 
 ---
 
@@ -152,7 +152,7 @@ This repo underwent a security audit before being made public. The following wer
     │       ├── claude-scientific-skills/
     │       └── ... (69 total repos, 1 parent + 68 submodules)
     │
-    ├── skills/                     ← Custom skills (85 directories, 89 SKILL.md files)
+    ├── skills/                     ← Custom skills (98 directories, 102 SKILL.md files)
     │   ├── README.md               ← Skills documentation
     │   ├── MASTER_INDEX.md         ← Navigation hub for all skills docs
     │   ├── EXPERT-SKILLS-GUIDE.md  ← All 16 domain expert skills guide
@@ -492,7 +492,7 @@ Shell scripts for setup, maintenance, and automation.
 
 ---
 
-### `/skills/` - Domain Knowledge (89 SKILL.md files across 85 directories)
+### `/skills/` - Domain Knowledge (102 SKILL.md files across 98 directories)
 
 Skills provide specialized knowledge and guidelines. They auto-activate based on context.
 
@@ -676,7 +676,7 @@ This folder is **automatically created by VSCode** when you open `.claude/` as a
 
 | Path         | Typical Size | Notes                            |
 | ------------ | ------------ | -------------------------------- |
-| `skills/`    | ~800KB       | 89 SKILL.md files across 90 dirs |
+| `skills/`    | ~900KB       | 102 SKILL.md files across 103 dirs |
 | `docs/`      | ~200KB       | 24 documentation files           |
 | `commands/`  | ~150KB       | 27 commands + 7 router files     |
 | `agents/`    | ~150KB       | 47 agent definitions             |
