@@ -99,7 +99,7 @@ grep -A1 '"disabledMcpjsonServers"' ~/.claude/settings.json
 ║  Claude Code Toolkit Health Check                          ║
 ╠════════════════════════════════════════════════════════════╣
 ║  Configuration:  ✅ OK                                      ║
-║  Structure:      ✅ OK (89 skills, 47 agents, 68 markets)  ║
+║  Structure:      ✅ OK (89 skills, 47 agents, 72 markets)  ║
 ║  Hooks:          ✅ 7/7 configured                           ║
 ║  Git:            ✅ Clean, submodules synced               ║
 ║  MCP Servers:    ✅ 9 available (all disabled by default)  ║
