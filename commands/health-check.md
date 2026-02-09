@@ -51,7 +51,7 @@ Verify:
 
 | Directory               | Expected  | Check                                         |
 | ----------------------- | --------- | --------------------------------------------- |
-| `skills/`               | 89+ items | `ls ~/.claude/skills/ \| wc -l`               |
+| `skills/`               | 102+ items | `ls ~/.claude/skills/ \| wc -l`              |
 | `agents/`               | 47+ files | `ls ~/.claude/agents/*.md \| wc -l`           |
 | `commands/`             | 10+ files | `ls ~/.claude/commands/*.md \| wc -l`         |
 | `rules/`                | 13+ files | `find ~/.claude/rules -name "*.md" \| wc -l`  |
@@ -99,7 +99,7 @@ grep -A1 '"disabledMcpjsonServers"' ~/.claude/settings.json
 ║  Claude Code Toolkit Health Check                          ║
 ╠════════════════════════════════════════════════════════════╣
 ║  Configuration:  ✅ OK                                      ║
-║  Structure:      ✅ OK (89 skills, 47 agents, 72 markets)  ║
+║  Structure:      ✅ OK (102 skills, 47 agents, 68 markets)  ║
 ║  Hooks:          ✅ 7/7 configured                           ║
 ║  Git:            ✅ Clean, submodules synced               ║
 ║  MCP Servers:    ✅ 9 available (all disabled by default)  ║
