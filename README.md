@@ -16,7 +16,7 @@
 
 [![Opus 4.6](https://img.shields.io/badge/Optimized_for_Opus_4.6-d946ef?style=for-the-badge&logo=anthropic&logoColor=white)](https://www.anthropic.com/news/claude-opus-4-6)
 [![Claude Code](https://img.shields.io/badge/Claude_Code-6366f1?style=for-the-badge&logo=anthropic&logoColor=white)](https://docs.anthropic.com/en/docs/claude-code)
-[![v2.3.7](https://img.shields.io/badge/v2.3.7-feb_2026-1a1a2e?style=for-the-badge&logo=semver&logoColor=white)](./CHANGELOG.md)
+[![v2.3.8](https://img.shields.io/badge/v2.3.8-feb_2026-1a1a2e?style=for-the-badge&logo=semver&logoColor=white)](./CHANGELOG.md)
 
 <!-- Primary Resource Badges -->
 

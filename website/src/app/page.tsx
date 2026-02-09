@@ -8,6 +8,7 @@ import HomeCards from "./HomeCards";
 import { getSkills } from "@/lib/data/skills";
 import { getAgents } from "@/lib/data/agents";
 import { getMarketplaceStats } from "@/lib/data/marketplace";
+import { getScripts } from "@/lib/data/scripts";
 
 // Hand-picked for highest end-user ROI on homepage
 const FEATURED_SKILL_SLUGS = [
@@ -53,6 +54,64 @@ export default function Home() {
 
   const featuredSkills = pickFeatured(skills, FEATURED_SKILL_SLUGS);
   const featuredAgents = pickFeatured(agents, FEATURED_AGENT_SLUGS);
+
+  const allScripts = getScripts();
+  const scriptCategoryMap = new Map<
+    string,
+    { count: number; label: string; color: string; description: string }
+  >();
+  const catMeta: Record<
+    string,
+    { label: string; color: string; description: string }
+  > = {
+    setup: {
+      label: "Setup",
+      color: "var(--accent-green)",
+      description: "First-time machine config",
+    },
+    maintenance: {
+      label: "Maintenance",
+      color: "var(--accent-yellow)",
+      description: "Keep docs and counts in sync",
+    },
+    "repo-management": {
+      label: "Repo Mgmt",
+      color: "var(--accent-blue)",
+      description: "Pull and sync marketplace repos",
+    },
+    utilities: {
+      label: "Utilities",
+      color: "var(--accent-cyan)",
+      description: "Cross-platform helpers",
+    },
+    "git-hooks": {
+      label: "Git Hooks",
+      color: "var(--accent-pink)",
+      description: "Commit and push guards",
+    },
+  };
+  for (const s of allScripts) {
+    const existing = scriptCategoryMap.get(s.category);
+    if (existing) {
+      existing.count++;
+    } else {
+      const meta = catMeta[s.category] || {
+        label: s.category,
+        color: "var(--accent-purple)",
+        description: "",
+      };
+      scriptCategoryMap.set(s.category, { count: 1, ...meta });
+    }
+  }
+  const scriptCategories = [
+    "setup",
+    "maintenance",
+    "repo-management",
+    "utilities",
+    "git-hooks",
+  ]
+    .filter((c) => scriptCategoryMap.has(c))
+    .map((c) => ({ category: c, ...scriptCategoryMap.get(c)! }));
 
   return (
     <>
@@ -194,6 +253,8 @@ export default function Home() {
         marketplaceSkills={marketplaceSkillsRounded}
         totalSkills={skills.length}
         totalAgents={agents.length}
+        scriptCategories={scriptCategories}
+        totalScripts={allScripts.length}
       />
 
       {/* Getting Started */}
