@@ -6,7 +6,7 @@ category: reference
 
 # Claude Code Toolkit Documentation
 
-**Last Updated:** February 2026 (v2.3.7)
+**Last Updated:** February 2026 (v2.3.8)
 **Maintainer:** Travis J. Neuman
 **Purpose:** Portable, optimized Claude Code configuration for any project
 
@@ -119,7 +119,12 @@ This `~/.claude/` folder is a fully configured, portable Claude Code environment
 
 ## History
 
-### v2.3.7 (February 2026)
+### v2.3.8 (February 2026)
+
+- Scripts showcase: new `/scripts` page, homepage category grid, navigation link
+- Data layer: `scripts.ts` reads 19 scripts from `scripts/`, `scripts/hooks/`, and root level
+
+### v2.3.8 (February 2026)
 
 - Fixed prebuild script deleting 1,366 legitimate skill files (narrowed to broken axiom gitlink only)
 - Re-cloned cpps from upstream, restoring marketplace skills from 2,500+ back to 3,900+
