@@ -2,6 +2,29 @@
 
 All notable changes to the Ultimate Claude Code Toolkit.
 
+## [2.4.0] - February 8, 2026
+
+### Anthropic Use-Cases Audit & 13 New Skills
+
+Audited all 74 Anthropic use-cases at `claude.com/resources/use-cases`, identified gaps, and built 13 new skills inspired by the highest-value workflows.
+
+### Added
+
+- **13 new skills** bringing local skill count from 89 to 102:
+  - **Tier 1 Composite (6):** `investment-memo-generator`, `battle-card-builder`, `customer-persona-builder`, `onboarding-guide-creator`, `newsletter-creator`, `status-report-generator`
+  - **Tier 2 Domain (4):** `literature-review-planner`, `case-interview-practice`, `contract-redliner`, `grant-proposal-builder`
+  - **Tier 3 Personal (3):** `travel-planner`, `career-path-planner`, `recipe-card-creator`
+- **`docs/REFERENCE-URLS.md`** — Master URL reference with 80+ audited URLs across Anthropic official, GitHub repos, third-party marketplaces, community forums, and articles (all dated 2026-02-08)
+- **New skill categories:** Personal & Lifestyle (3 skills), expanded Business & Startup (7→13), expanded Domain Expertise (11→15)
+
+### Changed
+
+- Updated all documentation counts: skills 89→102, marketplace repos 72→68 (4 repos removed), total git repos 73→69
+- Fixed stale version references (v2.3.7 in root README)
+- Fixed duplicate v2.3.8 history entry in docs/README.md
+
+---
+
 ## [2.3.8] - February 8, 2026
 
 ### Scripts Showcase on Website
