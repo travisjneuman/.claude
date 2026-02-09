@@ -33,6 +33,14 @@ interface RepoItem {
   githubUrl: string;
 }
 
+interface ScriptCategorySummary {
+  category: string;
+  label: string;
+  count: number;
+  color: string;
+  description: string;
+}
+
 interface HomeCardsProps {
   skills: SkillItem[];
   agents: AgentItem[];
@@ -40,6 +48,8 @@ interface HomeCardsProps {
   marketplaceSkills: number;
   totalSkills: number;
   totalAgents: number;
+  scriptCategories: ScriptCategorySummary[];
+  totalScripts: number;
 }
 
 const modelColor = (model: string) =>
@@ -56,6 +66,8 @@ export default function HomeCards({
   marketplaceSkills,
   totalSkills,
   totalAgents,
+  scriptCategories,
+  totalScripts,
 }: HomeCardsProps) {
   const [selectedSkill, setSelectedSkill] = useState<SkillItem | null>(null);
   const [selectedAgent, setSelectedAgent] = useState<AgentItem | null>(null);
@@ -192,6 +204,55 @@ export default function HomeCards({
               className="text-sm font-mono text-[var(--accent-green)] hover:text-[var(--accent-cyan)] transition-colors"
             >
               Browse Marketplace &rarr;
+            </a>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* Automation Scripts */}
+      <section className="py-16 px-6" style={{ background: "var(--surface)" }}>
+        <div className="max-w-4xl mx-auto text-center">
+          <ScrollReveal>
+            <p className="text-sm font-mono text-[var(--accent-orange)] tracking-widest uppercase mb-3">
+              Automation Scripts
+            </p>
+            <h2 className="text-3xl font-bold text-[var(--text-primary)] mb-4">
+              {totalScripts} Scripts
+            </h2>
+            <p className="text-[var(--text-secondary)] max-w-xl mx-auto mb-10">
+              Setup, maintenance, and repo management automation that keeps the
+              toolkit running smoothly.
+            </p>
+          </ScrollReveal>
+
+          <StaggerReveal className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+            {scriptCategories.map((cat) => (
+              <div
+                key={cat.category}
+                className="glass p-4 rounded-lg text-center"
+              >
+                <div
+                  className="text-2xl font-bold mb-1"
+                  style={{ color: cat.color }}
+                >
+                  {cat.count}
+                </div>
+                <div className="text-sm font-mono text-[var(--text-primary)] mb-1">
+                  {cat.label}
+                </div>
+                <div className="text-xs text-[var(--text-muted)] leading-snug">
+                  {cat.description}
+                </div>
+              </div>
+            ))}
+          </StaggerReveal>
+
+          <ScrollReveal className="mt-10" delay={0.3}>
+            <a
+              href="/scripts"
+              className="text-sm font-mono text-[var(--accent-orange)] hover:text-[var(--accent-yellow)] transition-colors"
+            >
+              View All {totalScripts} Scripts &rarr;
             </a>
           </ScrollReveal>
         </div>
