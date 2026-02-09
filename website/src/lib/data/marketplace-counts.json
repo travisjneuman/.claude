@@ -1,6 +1,6 @@
 {
-  "repoCount": 68,
-  "totalSkills": 3937,
+  "repoCount": 72,
+  "totalSkills": 3925,
   "repos": [
     {
       "name": "claude-code-plugins-plus-skills",
@@ -85,7 +85,7 @@
     {
       "name": "affaan-everything-claude",
       "displayName": "Affaan Everything Claude",
-      "skillCount": 29
+      "skillCount": 30
     },
     {
       "name": "gmickel-marketplace",
@@ -98,14 +98,14 @@
       "skillCount": 22
     },
     {
-      "name": "mhattingpete-skills",
-      "displayName": "Mhattingpete Skills",
+      "name": "EveryInc-compound",
+      "displayName": "EveryInc Compound",
       "skillCount": 18
     },
     {
-      "name": "EveryInc-compound",
-      "displayName": "EveryInc Compound",
-      "skillCount": 17
+      "name": "mhattingpete-skills",
+      "displayName": "Mhattingpete Skills",
+      "skillCount": 18
     },
     {
       "name": "anthropic-agent-skills",
@@ -125,11 +125,6 @@
     {
       "name": "muratcankoylan-agent-skills",
       "displayName": "Muratcankoylan Agent Skills",
-      "skillCount": 14
-    },
-    {
-      "name": "obra-superpowers",
-      "displayName": "Obra Superpowers",
       "skillCount": 14
     },
     {
@@ -238,6 +233,16 @@
       "skillCount": 1
     },
     {
+      "name": "DustyWalker-marketplace",
+      "displayName": "DustyWalker Marketplace",
+      "skillCount": 0
+    },
+    {
+      "name": "alvinunreal-awesome-claude",
+      "displayName": "Alvinunreal Awesome Claude",
+      "skillCount": 0
+    },
+    {
       "name": "auto-claude",
       "displayName": "Auto Claude",
       "skillCount": 0
@@ -245,6 +250,11 @@
     {
       "name": "automazeio-ccpm",
       "displayName": "Automazeio Ccpm",
+      "skillCount": 0
+    },
+    {
+      "name": "behisecc-awesome-claude-skills",
+      "displayName": "Behisecc Awesome Claude Skills",
       "skillCount": 0
     },
     {
@@ -268,11 +278,6 @@
       "skillCount": 0
     },
     {
-      "name": "DustyWalker-marketplace",
-      "displayName": "DustyWalker Marketplace",
-      "skillCount": 0
-    },
-    {
       "name": "get-shit-done",
       "displayName": "Get Shit Done",
       "skillCount": 0
@@ -288,6 +293,11 @@
       "skillCount": 0
     },
     {
+      "name": "hesreallyhim-awesome-claude-code",
+      "displayName": "Hesreallyhim Awesome Claude Code",
+      "skillCount": 0
+    },
+    {
       "name": "netresearch-marketplace",
       "displayName": "Netresearch Marketplace",
       "skillCount": 0
@@ -295,6 +305,11 @@
     {
       "name": "numman-ali-openskills",
       "displayName": "Numman Ali Openskills",
+      "skillCount": 0
+    },
+    {
+      "name": "obra-superpowers",
+      "displayName": "Obra Superpowers",
       "skillCount": 0
     },
     {
@@ -323,18 +338,23 @@
       "skillCount": 0
     },
     {
-      "name": "superpowers-marketplace",
-      "displayName": "Superpowers Marketplace",
-      "skillCount": 0
-    },
-    {
       "name": "travisvn-awesome",
       "displayName": "Travisvn Awesome",
       "skillCount": 0
     },
     {
+      "name": "travisvn-awesome-claude-skills",
+      "displayName": "Travisvn Awesome Claude Skills",
+      "skillCount": 0
+    },
+    {
       "name": "voltagent-agent-skills",
       "displayName": "Voltagent Agent Skills",
+      "skillCount": 0
+    },
+    {
+      "name": "voltagent-awesome-claude-skills",
+      "displayName": "Voltagent Awesome Claude Skills",
       "skillCount": 0
     },
     {
