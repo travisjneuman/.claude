@@ -1,10 +1,10 @@
 # Claude Code Skills Library
 
-Comprehensive skills for Claude Code - 89 skills covering all development domains.
+Comprehensive skills for Claude Code - 102 skills covering all development domains.
 
-**Plus:** 72 marketplace repos with 3,900+ additional skills.
+**Plus:** 68 marketplace repos with 3,900+ additional skills.
 
-**Version:** 4.6 (89 Skills, 72 Marketplace Repos)
+**Version:** 4.7 (102 Skills, 68 Marketplace Repos)
 **Last Updated:** February 2026
 
 ---
@@ -18,15 +18,16 @@ Comprehensive skills for Claude Code - 89 skills covering all development domain
 | Framework Skills       | 2      | Vue.js 3, Svelte 5                               |
 | Platform Development   | 8      | iOS, Android, Desktop, PWA, macOS, Gaming        |
 | Creative & Design      | 7      | Visual, Video, Audio, Brand, Motion, UI Research |
-| Business & Startup     | 7      | Strategy, Finance, Marketing, Sales              |
+| Business & Startup     | 13     | Strategy, Finance, Marketing, Sales, Personas    |
 | Technical Architecture | 5      | GraphQL, Microservices, i18n, Real-time          |
-| Domain Expertise       | 11     | Operations, Security, Leadership, etc.           |
+| Domain Expertise       | 15     | Operations, Security, Leadership, Legal, etc.    |
 | Development Workflow   | 4      | Debug, TDD, Core Workflow, Auto-Claude           |
 | Utilities              | 8      | Docs, Testing, SEO, AI/ML, DB, DevOps            |
 | Document Skills        | 5      | PDF, DOCX, XLSX, PPTX generation                 |
-| Marketplace            | 2,100+ | From 72 plugin repositories                      |
+| Personal & Lifestyle   | 3      | Travel, Career, Recipe                           |
+| Marketplace            | 3,900+ | From 68 plugin repositories                      |
 
-**Local: 89 unique skills | Marketplace: 3,900+ additional skills**
+**Local: 102 unique skills | Marketplace: 3,900+ additional skills**
 
 ---
 
@@ -151,13 +152,19 @@ Comprehensive skills for Claude Code - 89 skills covering all development domain
 
 | Skill                     | Domain   | Coverage                                     |
 | ------------------------- | -------- | -------------------------------------------- |
-| **startup-launch**        | Startups | Idea validation, MVP, launch phases          |
-| **monetization-strategy** | Revenue  | Pricing psychology, SaaS metrics, models     |
-| **business-strategy**     | Strategy | Strategic planning, competitive analysis     |
-| **finance**               | Finance  | Financial modeling, valuation, analysis      |
-| **marketing**             | Growth   | Brand strategy, digital marketing, analytics |
-| **sales**                 | Revenue  | Sales methodologies, pipeline management     |
-| **product-management**    | Product  | Roadmaps, prioritization, product-market fit |
+| **startup-launch**            | Startups  | Idea validation, MVP, launch phases              |
+| **monetization-strategy**     | Revenue   | Pricing psychology, SaaS metrics, models         |
+| **business-strategy**         | Strategy  | Strategic planning, competitive analysis         |
+| **finance**                   | Finance   | Financial modeling, valuation, analysis          |
+| **marketing**                 | Growth    | Brand strategy, digital marketing, analytics     |
+| **sales**                     | Revenue   | Sales methodologies, pipeline management         |
+| **product-management**        | Product   | Roadmaps, prioritization, product-market fit     |
+| **investment-memo-generator** | Finance   | Investment memos from financial data             |
+| **battle-card-builder**       | Sales     | Competitive battle cards for sales teams         |
+| **customer-persona-builder**  | Marketing | Data-driven customer personas from research      |
+| **onboarding-guide-creator**  | HR        | New hire onboarding guides by role               |
+| **newsletter-creator**        | Marketing | Company newsletters with consistent formatting   |
+| **status-report-generator**   | Project   | Status reports from git history and task context  |
 
 ### Usage Examples
 
@@ -166,6 +173,10 @@ Comprehensive skills for Claude Code - 89 skills covering all development domain
 "Design pricing tiers" → uses monetization-strategy
 "Build a financial model" → uses finance
 "Plan a go-to-market strategy" → uses marketing
+"Draft an investment memo" → uses investment-memo-generator
+"Create competitive battle cards" → uses battle-card-builder
+"Build customer personas" → uses customer-persona-builder
+"Generate a project status report" → uses status-report-generator
 ```
 
 ---
@@ -193,7 +204,7 @@ Comprehensive skills for Claude Code - 89 skills covering all development domain
 
 ## Domain Expert Skills
 
-11 skills covering specialized business and enterprise domains (skills also listed under Business & Startup are not repeated here):
+15 skills covering specialized business and enterprise domains (skills also listed under Business & Startup are not repeated here):
 
 | Domain                  | Skills                                                          |
 | ----------------------- | --------------------------------------------------------------- |
@@ -202,8 +213,29 @@ Comprehensive skills for Claude Code - 89 skills covering all development domain
 | Innovation & R&D        | `innovation`, `rd-management`                                   |
 | Data & Analytics        | `data-science`                                                  |
 | Sustainability          | `sustainability-esg`                                            |
+| Research & Education    | `literature-review-planner`, `case-interview-practice`          |
+| Legal                   | `contract-redliner`                                             |
+| Nonprofits              | `grant-proposal-builder`                                        |
 
 See [EXPERT-SKILLS-GUIDE.md](./EXPERT-SKILLS-GUIDE.md) for detailed coverage of all domain expert skills.
+
+---
+
+## Personal & Lifestyle Skills
+
+| Skill                    | Domain   | Coverage                                          |
+| ------------------------ | -------- | ------------------------------------------------- |
+| **travel-planner**       | Travel   | Destination research, daily itinerary creation    |
+| **career-path-planner**  | Career   | Career goals, skill gap analysis, action plans    |
+| **recipe-card-creator**  | Personal | Formatted digital recipe cards with nutrition     |
+
+### Usage Examples
+
+```
+"Plan a 7-day trip to Japan" → uses travel-planner
+"Map out my career path to CTO" → uses career-path-planner
+"Create a recipe card for pasta carbonara" → uses recipe-card-creator
+```
 
 ---
 
@@ -377,6 +409,19 @@ Verify skill activates when expected context appears.
 | DevOps & cloud        | `devops-cloud`                        |
 | Document generation   | `document-skills`                     |
 | Agent coordination    | `agent-teams`                         |
+| Investment memos      | `investment-memo-generator`           |
+| Battle cards          | `battle-card-builder`                 |
+| Customer personas     | `customer-persona-builder`            |
+| Onboarding guides     | `onboarding-guide-creator`            |
+| Newsletters           | `newsletter-creator`                  |
+| Status reports        | `status-report-generator`             |
+| Literature reviews    | `literature-review-planner`           |
+| Case interviews       | `case-interview-practice`             |
+| Contract review       | `contract-redliner`                   |
+| Grant proposals       | `grant-proposal-builder`              |
+| Travel planning       | `travel-planner`                      |
+| Career planning       | `career-path-planner`                 |
+| Recipe cards          | `recipe-card-creator`                 |
 
 ---
 
