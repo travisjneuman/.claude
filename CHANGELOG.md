@@ -2,6 +2,19 @@
 
 All notable changes to the Ultimate Claude Code Toolkit.
 
+## [2.3.8] - February 8, 2026
+
+### Scripts Showcase on Website
+
+### Added
+
+- **Scripts page** — New `/scripts` page on the website showcasing all 19 automation scripts, grouped by category (Setup, Maintenance, Repo Management, Utilities, Git Hooks) with modal source code viewer.
+- **Homepage scripts section** — Category overview grid between Marketplace and Getting Started sections, with counts per category and link to the full scripts page.
+- **Navigation link** — "Scripts" added to the main nav bar between Hooks and Rules.
+- **Scripts data layer** — `website/src/lib/data/scripts.ts` following the hooks.ts metadata-mapping pattern for shell scripts without frontmatter.
+
+---
+
 ## [2.3.7] - February 8, 2026
 
 ### Prebuild Script Fix + Marketplace Skill Count Restoration
