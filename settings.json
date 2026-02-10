@@ -121,12 +121,12 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash ~/.claude/hooks/session-start-pull.sh",
+            "command": "node -e \"process.env.HOOK_NAME='session-start-pull.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
             "statusMessage": "Pulling repos in background"
           },
           {
             "type": "command",
-            "command": "bash ~/.claude/hooks/session-start-context.sh",
+            "command": "node -e \"process.env.HOOK_NAME='session-start-context.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
             "statusMessage": "Loading previous session context"
           }
         ]
@@ -137,7 +137,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash ~/.claude/hooks/session-stop-summary.sh",
+            "command": "node -e \"process.env.HOOK_NAME='session-stop-summary.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
             "statusMessage": "Saving session summary"
           }
         ]
@@ -148,7 +148,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash ~/.claude/hooks/prompt-context.sh",
+            "command": "node -e \"process.env.HOOK_NAME='prompt-context.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
             "statusMessage": "Injecting git context"
           }
         ]
@@ -160,7 +160,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash ~/.claude/hooks/guard-dangerous.sh",
+            "command": "node -e \"process.env.HOOK_NAME='guard-dangerous.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
             "statusMessage": "Checking command safety"
           }
         ]
@@ -170,7 +170,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash ~/.claude/hooks/pre-commit-counts.sh",
+            "command": "node -e \"process.env.HOOK_NAME='pre-commit-counts.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
             "statusMessage": "Updating counts"
           }
         ]
@@ -180,7 +180,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash ~/.claude/hooks/pre-write-validate.sh",
+            "command": "node -e \"process.env.HOOK_NAME='pre-write-validate.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
             "statusMessage": "Validating file path"
           }
         ]
@@ -192,7 +192,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash ~/.claude/hooks/format-code.sh",
+            "command": "node -e \"process.env.HOOK_NAME='format-code.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
             "statusMessage": "Auto-formatting"
           }
         ]
@@ -202,7 +202,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash ~/.claude/hooks/secret-scan.sh",
+            "command": "node -e \"process.env.HOOK_NAME='secret-scan.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
             "statusMessage": "Scanning for secrets"
           }
         ]
@@ -212,7 +212,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash ~/.claude/hooks/post-edit-lint.sh",
+            "command": "node -e \"process.env.HOOK_NAME='post-edit-lint.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
             "statusMessage": "Running lint check"
           }
         ]
@@ -239,5 +239,6 @@
   },
   "outputStyle": "default",
   "spinnerTipsEnabled": false,
-  "alwaysThinkingEnabled": true
+  "alwaysThinkingEnabled": true,
+  "effortLevel": "medium"
 }

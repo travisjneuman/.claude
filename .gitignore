@@ -46,6 +46,9 @@ file-history/
 # Session todos (auto-generated per conversation)
 todos/
 
+# Agent Teams session data (ephemeral, per-session)
+teams/
+
 # Shell state snapshots
 shell-snapshots/
 

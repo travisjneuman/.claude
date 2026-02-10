@@ -258,6 +258,31 @@ This file was auto-generated at session end.
 
 ---
 
+## Cross-Platform Hook Runner
+
+All hooks use `hooks/run-hook.js` — a Node.js-based runner that resolves hook paths using `os.homedir()`. This ensures hooks work correctly on:
+
+- **Windows** — Git Bash, CMD, PowerShell (avoids WSL `~` → `/root/` bug)
+- **macOS** — `/Users/username`
+- **Linux** — `/home/username`
+
+**Why Node.js?** On Windows, Claude Code may invoke WSL's bash, which resolves `~` to `/root/` instead of the actual Windows user home. Node.js `os.homedir()` is the only reliable cross-platform method, and Node.js is guaranteed to be installed (Claude Code requires it).
+
+Each hook command in `settings.json` follows this pattern:
+
+```json
+"command": "node -e \"process.env.HOOK_NAME='script-name.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\""
+```
+
+The runner:
+1. Resolves the home directory via `os.homedir()`
+2. Constructs the hook path: `~/.claude/hooks/<HOOK_NAME>`
+3. Exits silently if the hook script doesn't exist (non-blocking)
+4. Converts Windows backslashes to forward slashes for bash compatibility
+5. Executes the hook via `bash` with `HOME` env var set correctly
+
+---
+
 ## How Hooks Work
 
 Hooks are defined in `settings.json` under the `hooks` key:
@@ -271,7 +296,7 @@ Hooks are defined in `settings.json` under the `hooks` key:
         "hooks": [
           {
             "type": "command",
-            "command": "bash ~/.claude/hooks/script.sh",
+            "command": "node -e \"process.env.HOOK_NAME='script.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
             "statusMessage": "Doing something"
           }
         ]
@@ -282,7 +307,7 @@ Hooks are defined in `settings.json` under the `hooks` key:
 ```
 
 - **`type`**: Always `"command"` (runs a shell command)
-- **`command`**: The bash command to execute
+- **`command`**: Node.js one-liner that invokes `run-hook.js` with the hook name
 - **`statusMessage`**: Text shown in the Claude Code spinner while the hook runs
 - **`matcher`**: (Optional) Only run for specific tools (e.g., `"Bash"`, `"Write|Edit"`)
 
@@ -314,7 +339,7 @@ Edit `settings.json` and remove or comment out the hook entry. Hooks cannot be t
 ## Adding a New Hook
 
 1. Create a bash script in `~/.claude/hooks/`
-2. Add the hook entry to `settings.json` under the appropriate event
+2. Add the hook entry to `settings.json` using the `run-hook.js` pattern (see above)
 3. The script receives context via environment variables (e.g., `$CLAUDE_TOOL_INPUT` for PreToolUse)
 
 ### Example: Custom PreToolUse Hook
@@ -338,7 +363,7 @@ Add to `settings.json`:
   "hooks": [
     {
       "type": "command",
-      "command": "bash ~/.claude/hooks/block-publish.sh",
+      "command": "node -e \"process.env.HOOK_NAME='block-publish.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
       "statusMessage": "Checking publish safety"
     }
   ]
@@ -366,7 +391,8 @@ Add to `settings.json`:
 
 **Hook error: "No such file or directory":**
 
-- The path uses `~/.claude/hooks/` which resolves to `$HOME/.claude/hooks/`
+- All hooks use `run-hook.js` which resolves paths via Node.js `os.homedir()` — this works on all platforms
+- If you see `/root/.claude/hooks/...` on Windows, your hooks are using the old `bash ~/.claude/hooks/` pattern — update to the Node.js runner pattern
 - On a different machine, ensure the repo is cloned to `~/.claude/`
 
 **Hook blocking unexpectedly:**
