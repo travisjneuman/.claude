@@ -6,7 +6,7 @@ category: reference
 
 # Claude Code Toolkit Documentation
 
-**Last Updated:** February 2026 (v2.4.0)
+**Last Updated:** February 2026 (v2.7.0)
 **Maintainer:** Travis J. Neuman
 **Purpose:** Portable, optimized Claude Code configuration for any project
 
@@ -34,7 +34,7 @@ Already set up? Jump to the section you need below.
 | [FOLDER-STRUCTURE.md](./FOLDER-STRUCTURE.md) | Complete file/folder map                    |
 | [CONFIGURATION.md](./CONFIGURATION.md)       | Settings, permissions, hooks, env files     |
 | [SKILLS.md](./SKILLS.md)                     | Skills system: creation, activation, format |
-| [MCP-SERVERS.md](./MCP-SERVERS.md)           | 9 MCP servers: when to enable, token cost   |
+| [MCP-SERVERS.md](./MCP-SERVERS.md)           | 12 MCP servers: when to enable, token cost  |
 | [ARCHITECTURE.md](./ARCHITECTURE.md)         | How all components interact as a system     |
 | [GLOSSARY.md](./GLOSSARY.md)                 | Definitions of all toolkit terms            |
 | [FAQ.md](./FAQ.md)                           | Common questions answered                   |
@@ -63,7 +63,7 @@ Already set up? Jump to the section you need below.
 
 | Document                                               | What it covers                      |
 | ------------------------------------------------------ | ----------------------------------- |
-| [MARKETPLACE-GUIDE.md](./MARKETPLACE-GUIDE.md)         | 68 marketplace repos, 3,900+ skills |
+| [MARKETPLACE-GUIDE.md](./MARKETPLACE-GUIDE.md)         | 84 marketplace repos, 4,500+ skills |
 | [PLUGIN-MANAGEMENT.md](./PLUGIN-MANAGEMENT.md)         | Plugin lifecycle, customization     |
 | [AUTO-CLAUDE-GUIDE.md](./AUTO-CLAUDE-GUIDE.md)         | Autonomous multi-agent coding       |
 | [CLAUDE-CODE-RESOURCES.md](./CLAUDE-CODE-RESOURCES.md) | Community resources and tips        |
@@ -75,16 +75,16 @@ Already set up? Jump to the section you need below.
 
 | Component           | Count  | Location                       |
 | ------------------- | ------ | ------------------------------ |
-| Local skills        | 102    | `skills/`                      |
-| Agents              | 47     | `agents/`                      |
-| Commands            | 27     | `commands/`                    |
-| Rules files         | 28     | `rules/`                       |
-| Templates           | 14     | `templates/`                   |
-| Hooks               | 8      | `hooks/`                       |
-| MCP servers         | 9      | `.mcp.json`                    |
-| Marketplace repos   | 68     | `plugins/marketplaces/`        |
-| Marketplace skills  | 3,900+ | (across all marketplace repos) |
-| **Total git repos** | **69** | 1 parent + 68 submodules       |
+| Local skills        | 119    | `skills/`                      |
+| Agents              | 60     | `agents/`                      |
+| Commands            | 30     | `commands/`                    |
+| Rules files         | 30     | `rules/`                       |
+| Templates           | 17     | `templates/`                   |
+| Hooks               | 10     | `hooks/`                       |
+| MCP servers         | 12     | `.mcp.json`                    |
+| Marketplace repos   | 84     | `plugins/marketplaces/`        |
+| Marketplace skills  | 5,800+ | (across all marketplace repos) |
+| **Total git repos** | **85** | 1 parent + 84 submodules       |
 
 ---
 
@@ -106,18 +106,40 @@ Already set up? Jump to the section you need below.
 
 This `~/.claude/` folder is a fully configured, portable Claude Code environment containing:
 
-- **102 local skills** for code review, design systems, feature development, domain expertise, and more
-- **47 agents** for specialized autonomous workflows
-- **27 slash commands** for workflow automation
-- **9 MCP server configurations** for extended capabilities (disabled by default to save context)
-- **68 marketplace repos** providing 3,900+ additional skills from the community
-- **8 hooks** for session lifecycle, safety guards, and auto-formatting
-- **28 rules files** for contextual guidance (checklists, stack patterns, workflows, tooling)
-- **14 templates** for task planning, component creation, and project scaffolding
+- **119 local skills** for code review, design systems, feature development, domain expertise, and more
+- **60 agents** for specialized autonomous workflows
+- **30 slash commands** for workflow automation
+- **12 MCP server configurations** for extended capabilities (disabled by default to save context)
+- **84 marketplace repos** providing 4,500+ additional skills from the community
+- **10 hooks** for session lifecycle, safety guards, path validation, and auto-lint
+- **30 rules files** for contextual guidance (checklists, stack patterns, workflows, tooling)
+- **17 templates** for task planning, component creation, and project scaffolding
 
 ---
 
 ## History
+
+### v2.7.0 (February 2026)
+
+- Agent Expansion: 12 new custom agents (47 → 60), covering Vue/Nuxt, Svelte, Django/FastAPI, Kotlin, technical writing, product management, DevSecOps, observability, migrations, API integration, CLI development, PWA
+- Added game-developer to agents/README.md (file existed but was unlisted)
+- Renamed "Business & Strategy" agent category to "Product & Strategy"
+
+### v2.6.0 (February 2026)
+
+- Comprehensive Platform Enhancement: 18 new marketplace repos (+16 net), 12 MCP servers, 3 hooks, 3 commands, 10 checklists, 3 templates
+- Marketplace: 68 → 84 repos, 5,800+ → 4,500+ skills
+- Removed 2 dead repos (claude-market, netresearch-marketplace)
+
+### v2.5.0 (February 2026)
+
+- Feature Enhancement from URL & Ecosystem Audit: mined REFERENCE-URLS.md and 5 research vectors
+- 17 new skills across 3 tiers: domain gaps, Anthropic use-cases, ecosystem-wide needs
+- Tier 1 (8 skills): ai-policy-generator, content-repurposer, financial-scenario-planner, course-material-creator, learning-gap-analyzer, impact-report-writer, process-flowchart-designer, debate-practice-coach
+- Tier 2 (5 skills): fundraising-analyzer, statistics-verifier, volunteer-coordinator, research-presenter, options-comparator
+- Tier 3 (4 skills): real-estate-analyzer, supply-chain-optimizer, event-planner, podcast-producer
+- New skill categories: Education & Learning, Nonprofit & Impact, Analysis & Decisions, Industry & Domain
+- Skills count: 102 → 119
 
 ### v2.4.0 (February 2026)
 
@@ -134,7 +156,7 @@ This `~/.claude/` folder is a fully configured, portable Claude Code environment
 ### v2.3.7 (February 2026)
 
 - Fixed prebuild script deleting 1,366 legitimate skill files (narrowed to broken axiom gitlink only)
-- Re-cloned cpps from upstream, restoring marketplace skills from 2,500+ back to 3,900+
+- Re-cloned cpps from upstream, restoring marketplace skills from 2,500+ back to 5,800+
 - Root cause: prebuild `rmSync` targeted entire `plugins/` instead of `plugins/skill-enhancers/axiom`
 
 ### v2.3.6 (February 2026)
@@ -142,7 +164,7 @@ This `~/.claude/` folder is a fully configured, portable Claude Code environment
 - Complete submodule cleanup: removed ghost registration from `.gitmodules`, `.git/config`, `.git/modules/`
 - Cross-repo count sync: rules 27→28, hooks health-check 7→8
 - Synced counts to GitHub Profile README and Portfolio repo
-- Pulled 68 marketplace repos with upstream updates (196 total commits)
+- Pulled 84 marketplace repos with upstream updates (196 total commits)
 
 ### v2.3.5 (February 2026)
 
@@ -155,12 +177,12 @@ This `~/.claude/` folder is a fully configured, portable Claude Code environment
 - Documentation overhaul: added FAQ, Architecture Overview, Glossary
 - Expanded hooks README with detailed per-hook documentation
 - Added frontmatter metadata to all docs for website display
-- Count reconciliation: skills 68→73, marketplace repos 67→72, marketplace skills 1,900+→3,900+
+- Count reconciliation: skills 68→73, marketplace repos 67→72, marketplace skills 1,900+→5,800+
 - Agent Teams integration with docs, skill, command, and auto-routing
 
 ### v2.3.1 (February 2026)
 
-- Updated counts across documentation (68 marketplace repos, 3,900+ skills, 7 hooks)
+- Updated counts across documentation (84 marketplace repos, 4,500+ skills, 7 hooks)
 - Documentation navigation overhaul
 
 ### v2.2 (January 2026)

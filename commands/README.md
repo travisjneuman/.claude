@@ -32,6 +32,8 @@ Slash commands are shortcuts you invoke in Claude Code with `/<command-name>`. T
 | `backup-config` | Backup Claude Code configuration files                                  | `/backup-config create` |
 | `update-counts` | Sync all hardcoded counts across documentation with filesystem          | `/update-counts`        |
 | `update-docs`   | Scan for recently modified files and update corresponding documentation | `/update-docs`          |
+| `changelog`     | Generate formatted changelog entry from git commits since last tag     | `/changelog v2.6.0`    |
+| `audit-docs`    | Scan documentation for staleness — broken links, outdated counts       | `/audit-docs all`       |
 | `pull-repos`    | Pull all repos (parent + marketplace submodules)                        | `/pull-repos`           |
 | `bootstrap`     | Verify and repair Claude Code Toolkit installation                      | `/bootstrap`            |
 
@@ -52,6 +54,7 @@ Slash commands are shortcuts you invoke in Claude Code with `/<command-name>`. T
 | `standardize-claude-md` | Add missing toolkit sections to existing CLAUDE.md                                           | `/standardize-claude-md`                          |
 | `scaffold`              | Scaffold project components from templates (API endpoint, component, service, middleware)     | `/scaffold api-endpoint users`                    |
 | `test-suite`            | Run tests, analyze failures, report coverage, suggest missing tests                          | `/test-suite`                                     |
+| `test-plan`             | Generate test strategy document — test matrix, coverage goals, test pyramid allocation       | `/test-plan auth-module`                          |
 
 ### DevOps & Security
 
@@ -108,4 +111,4 @@ Slash commands are shortcuts you invoke in Claude Code with `/<command-name>`. T
 
 ---
 
-_27 commands across 8 categories. Type `/<name>` to invoke._
+_30 commands across 8 categories. Type `/<name>` to invoke._

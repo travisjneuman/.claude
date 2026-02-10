@@ -8,7 +8,7 @@ category: reference
 
 Complete map of the `.claude/` folder and related files.
 
-**Last Updated:** February 2026 (v2.4.0)
+**Last Updated:** February 2026 (v2.7.0)
 
 ---
 
@@ -152,7 +152,7 @@ This repo underwent a security audit before being made public. The following wer
     │       ├── claude-scientific-skills/
     │       └── ... (69 total repos, 1 parent + 68 submodules)
     │
-    ├── skills/                     ← Custom skills (98 directories, 102 SKILL.md files)
+    ├── skills/                     ← Custom skills (115 directories, 119 SKILL.md files)
     │   ├── README.md               ← Skills documentation
     │   ├── MASTER_INDEX.md         ← Navigation hub for all skills docs
     │   ├── EXPERT-SKILLS-GUIDE.md  ← All 16 domain expert skills guide
@@ -252,7 +252,7 @@ This repo underwent a security audit before being made public. The following wer
     │       ├── commands/example-command.md
     │       └── skills/example-skill/SKILL.md
     │
-    ├── agents/                     ← Subagent definitions (47 agents)
+    ├── agents/                     ← Subagent definitions (60 agents)
     │   ├── README.md               ← Agents index
     │   ├── accessibility-expert.md
     │   ├── android-developer.md
@@ -289,7 +289,19 @@ This repo underwent a security audit before being made public. The following wer
     │   ├── startup-advisor.md
     │   ├── test-generator.md
     │   ├── typescript-expert.md
-    │   └── video-producer.md
+    │   ├── video-producer.md
+    │   ├── vue-nuxt-expert.md
+    │   ├── svelte-expert.md
+    │   ├── django-fastapi-expert.md
+    │   ├── kotlin-expert.md
+    │   ├── technical-writer.md
+    │   ├── product-manager.md
+    │   ├── devsecops-engineer.md
+    │   ├── observability-engineer.md
+    │   ├── migration-specialist.md
+    │   ├── api-integration-specialist.md
+    │   ├── cli-developer.md
+    │   └── pwa-specialist.md
     │
     ├── hooks/                      ← Event hooks (7 scripts)
     │   ├── README.md               ← Hooks index
@@ -369,7 +381,7 @@ This repo underwent a security audit before being made public. The following wer
 
 ## Folder Details
 
-### `/commands/` - Custom Slash Commands (27 commands + 7 router files)
+### `/commands/` - Custom Slash Commands (30 commands + 7 router files)
 
 Custom commands that appear as `/command-name` in Claude Code.
 
@@ -421,7 +433,7 @@ Complete workflow system for multi-phase projects:
 
 ---
 
-### `/agents/` - Subagent Definitions (47 agents)
+### `/agents/` - Subagent Definitions (60 agents)
 
 Agent definitions for the Task tool's `subagent_type` parameter. Each agent is a markdown file that defines a specialized role with constrained tools.
 
@@ -492,7 +504,7 @@ Shell scripts for setup, maintenance, and automation.
 
 ---
 
-### `/skills/` - Domain Knowledge (102 SKILL.md files across 98 directories)
+### `/skills/` - Domain Knowledge (119 SKILL.md files across 115 directories)
 
 Skills provide specialized knowledge and guidelines. They auto-activate based on context.
 
@@ -676,10 +688,10 @@ This folder is **automatically created by VSCode** when you open `.claude/` as a
 
 | Path         | Typical Size | Notes                            |
 | ------------ | ------------ | -------------------------------- |
-| `skills/`    | ~900KB       | 102 SKILL.md files across 103 dirs |
+| `skills/`    | ~1.1MB       | 119 SKILL.md files across 120 dirs |
 | `docs/`      | ~200KB       | 24 documentation files           |
-| `commands/`  | ~150KB       | 27 commands + 7 router files     |
-| `agents/`    | ~150KB       | 47 agent definitions             |
+| `commands/`  | ~150KB       | 30 commands + 7 router files     |
+| `agents/`    | ~250KB       | 60 agent definitions             |
 | `rules/`     | ~150KB       | 27 rule files across 4 subdirs   |
 | `scripts/`   | ~50KB        | 16 scripts + 4 hook scripts      |
 | `hooks/`     | ~25KB        | 8 event hook scripts             |

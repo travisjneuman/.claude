@@ -8,7 +8,7 @@ category: reference
 
 Quick reference for Claude Code optimization.
 
-**Last Updated:** February 2026 (v2.3.3)
+**Last Updated:** February 2026 (v2.7.0)
 
 ---
 
@@ -56,13 +56,20 @@ System prompt here...
 
 ## MCP Servers
 
-| Server              | Purpose            |
-| ------------------- | ------------------ |
-| sequential-thinking | Complex reasoning  |
-| playwright          | Browser automation |
-| memory              | Persistent memory  |
-| filesystem          | File operations    |
-| sqlite              | Database queries   |
+| Server              | Purpose              |
+| ------------------- | -------------------- |
+| sequential-thinking | Complex reasoning    |
+| playwright          | Browser automation   |
+| memory              | Persistent memory    |
+| filesystem          | File operations      |
+| sqlite              | Database queries     |
+| context7            | Context management   |
+| chrome-devtools     | Browser debugging    |
+| puppeteer           | Browser automation   |
+| browserbase         | Cloud browser        |
+| github              | GitHub API via MCP   |
+| postgres            | PostgreSQL access    |
+| git                 | Git operations       |
 
 ## Context Management
 
@@ -202,7 +209,7 @@ System prompt here...
 
 ### Plugin Marketplace Ecosystem
 
-This setup includes 68 marketplace repositories providing access to 3,900+ community skills. Key marketplaces for plugin development reference:
+This setup includes 84 marketplace repositories providing access to 4,500+ community skills. Key marketplaces for plugin development reference:
 
 | Repository                        | URL                                                  | Specialization                |
 | --------------------------------- | ---------------------------------------------------- | ----------------------------- |
@@ -225,11 +232,11 @@ tags: [category, domain]
 ---
 ```
 
-This installation has 102 local skills and 47 custom agents. Run `bash ~/.claude/scripts/regenerate-index.sh` to refresh the master index.
+This installation has 119 local skills and 60 custom agents. Run `bash ~/.claude/scripts/regenerate-index.sh` to refresh the master index.
 
 ### Agent Development
 
-Agents are defined in `~/.claude/agents/` as markdown files with YAML frontmatter specifying name, description, allowed tools, and model. Agents can be scoped by tool access (read-only for research, full access for implementation). See `~/.claude/agents/README.md` for the full catalog of 47 agents.
+Agents are defined in `~/.claude/agents/` as markdown files with YAML frontmatter specifying name, description, allowed tools, and model. Agents can be scoped by tool access (read-only for research, full access for implementation). See `~/.claude/agents/README.md` for the full catalog of 60 agents.
 
 ---
 
@@ -297,7 +304,7 @@ This installation's `~/.claude/docs/` directory contains:
 5. **Less is more** -- Each MCP server tool loads into context
 6. **CLAUDE.md is king** -- Project-level overrides global settings
 7. **Hooks for automation** -- PreToolUse/PostToolUse for formatting, linting
-8. **Slash commands** -- 27 custom commands available via `~/.claude/commands/`
+8. **Slash commands** -- 30 custom commands available via `~/.claude/commands/`
 9. **Skill discovery** -- Check `skills/MASTER_INDEX.md` before writing from scratch
 10. **Agent Teams for parallel work** -- When subagents are not enough
 
@@ -307,12 +314,12 @@ This installation's `~/.claude/docs/` directory contains:
 
 | Component                | Count  |
 | ------------------------ | ------ |
-| Local skills             | 102    |
-| Custom agents            | 47     |
-| Marketplace repos        | 68     |
-| Marketplace skills       | 3,900+ |
-| Custom commands          | 27     |
-| MCP servers (configured) | 9      |
+| Local skills             | 119    |
+| Custom agents            | 60     |
+| Marketplace repos        | 84     |
+| Marketplace skills       | 4,500+ |
+| Custom commands          | 30     |
+| MCP servers (configured) | 12     |
 
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: Skills System
-description: Create, customize, and manage 102 local skills plus 3,900+ marketplace skills for any domain.
+description: Create, customize, and manage 119 local skills plus 4,500+ marketplace skills for any domain.
 category: reference
 ---
 
@@ -8,7 +8,7 @@ category: reference
 
 How to use, create, and customize Claude Code skills.
 
-**Last Updated:** February 2026 (v2.3.3)
+**Last Updated:** February 2026 (v2.6.0)
 
 ---
 

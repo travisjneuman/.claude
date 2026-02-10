@@ -8,7 +8,7 @@ category: reference
 
 How the Claude Code Toolkit's components interact, from prompt to execution.
 
-**Last Updated:** February 2026 (v2.3.3)
+**Last Updated:** February 2026 (v2.6.0)
 
 ---
 
@@ -234,7 +234,7 @@ plugins/
     ├── anthropic-agent-skills/
     ├── claude-code-plugins/
     ├── taches-cc-resources/
-    └── ... (68 repos total)
+    └── ... (84 repos total)
 ```
 
 Plugins can contribute commands, agents, skills, and hooks. They're registered in `settings.json` under `enabledPlugins`.
