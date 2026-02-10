@@ -51,22 +51,22 @@ Verify:
 
 | Directory               | Expected  | Check                                         |
 | ----------------------- | --------- | --------------------------------------------- |
-| `skills/`               | 102+ items | `ls ~/.claude/skills/ \| wc -l`              |
-| `agents/`               | 47+ files | `ls ~/.claude/agents/*.md \| wc -l`           |
+| `skills/`               | 119+ items | `ls ~/.claude/skills/ \| wc -l`              |
+| `agents/`               | 60+ files | `ls ~/.claude/agents/*.md \| wc -l`           |
 | `commands/`             | 10+ files | `ls ~/.claude/commands/*.md \| wc -l`         |
 | `rules/`                | 13+ files | `find ~/.claude/rules -name "*.md" \| wc -l`  |
 | `templates/`            | 5+ files  | `ls ~/.claude/templates/ \| wc -l`            |
-| `plugins/marketplaces/` | 68 repos  | `ls ~/.claude/plugins/marketplaces/ \| wc -l` |
+| `plugins/marketplaces/` | 84 repos  | `ls ~/.claude/plugins/marketplaces/ \| wc -l` |
 
 ### Step 3: Hooks Status
 
-**Verify all 8 hooks:**
+**Verify all 10 hooks:**
 
 ```bash
 grep -c '"PreToolUse"\|"PostToolUse"\|"Notification"\|"UserPromptSubmit"\|"Stop"\|"PreCompact"\|"SubagentStop"' ~/.claude/settings.json
 ```
 
-Expected: 8 hooks configured
+Expected: 10 hooks configured
 
 ### Step 4: Git Status
 
@@ -99,10 +99,10 @@ grep -A1 '"disabledMcpjsonServers"' ~/.claude/settings.json
 ║  Claude Code Toolkit Health Check                          ║
 ╠════════════════════════════════════════════════════════════╣
 ║  Configuration:  ✅ OK                                      ║
-║  Structure:      ✅ OK (102 skills, 47 agents, 68 markets)  ║
-║  Hooks:          ✅ 7/7 configured                           ║
+║  Structure:      ✅ OK (119 skills, 60 agents, 84 markets)  ║
+║  Hooks:          ✅ 10/10 configured                          ║
 ║  Git:            ✅ Clean, submodules synced               ║
-║  MCP Servers:    ✅ 9 available (all disabled by default)  ║
+║  MCP Servers:    ✅ 12 available (all disabled by default) ║
 ╠════════════════════════════════════════════════════════════╣
 ║  Status: HEALTHY                                            ║
 ╚════════════════════════════════════════════════════════════╝

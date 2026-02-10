@@ -2,7 +2,7 @@
 
 Specialized AI agents for focused, expert-level assistance across all domains.
 
-**47 agents available** - Covering code quality, development, architecture, languages, platforms, creative, business, SaaS, and infrastructure.
+**60 agents available** - Covering code quality, development, architecture, languages, platforms, creative, product & strategy, SaaS, and infrastructure.
 
 ---
 
@@ -62,35 +62,43 @@ See `~/.claude/docs/AGENT-TEAMS.md` for the full guide and `~/.claude/rules/work
 
 ### Development
 
-| Agent                    | Purpose                                | Model  |
-| ------------------------ | -------------------------------------- | ------ |
-| `test-generator`         | TDD-focused test suite generation      | sonnet |
-| `e2e-test-specialist`    | Playwright/Cypress E2E and visual testing | sonnet |
-| `api-designer`           | REST/GraphQL API design                | sonnet |
-| `database-expert`        | Schema design, query optimization, ops | sonnet |
-| `devops-engineer`        | CI/CD, containers, cloud, IaC          | sonnet |
+| Agent                        | Purpose                                   | Model  |
+| ---------------------------- | ----------------------------------------- | ------ |
+| `test-generator`             | TDD-focused test suite generation         | sonnet |
+| `e2e-test-specialist`        | Playwright/Cypress E2E and visual testing | sonnet |
+| `api-designer`               | REST/GraphQL API design                   | sonnet |
+| `api-integration-specialist` | Third-party APIs, OAuth flows, webhooks   | sonnet |
+| `database-expert`            | Schema design, query optimization, ops    | sonnet |
+| `devops-engineer`            | CI/CD, containers, cloud, IaC             | sonnet |
 
 ### Architecture
 
-| Agent                     | Purpose                                | Model  |
-| ------------------------- | -------------------------------------- | ------ |
-| `architecture-analyst`    | System design and pattern analysis     | opus   |
-| `cloud-architect`         | Multi-cloud, serverless, DR planning   | opus   |
-| `debugging-specialist`    | Systematic 4-phase debugging           | sonnet |
-| `graphql-architect`       | GraphQL schema and resolver design     | sonnet |
-| `microservices-architect` | Distributed systems and service design | sonnet |
-| `realtime-specialist`     | WebSockets and live data systems       | sonnet |
+| Agent                      | Purpose                                     | Model  |
+| -------------------------- | ------------------------------------------- | ------ |
+| `architecture-analyst`     | System design and pattern analysis          | opus   |
+| `cloud-architect`          | Multi-cloud, serverless, DR planning        | opus   |
+| `debugging-specialist`     | Systematic 4-phase debugging                | sonnet |
+| `devsecops-engineer`       | CI/CD security, SAST/DAST, supply chain     | sonnet |
+| `graphql-architect`        | GraphQL schema and resolver design          | sonnet |
+| `microservices-architect`  | Distributed systems and service design      | sonnet |
+| `migration-specialist`     | Framework upgrades, codebase migrations     | opus   |
+| `observability-engineer`   | OpenTelemetry, SLOs, distributed tracing    | sonnet |
+| `realtime-specialist`      | WebSockets and live data systems            | sonnet |
 
 ### Language & Framework Experts
 
-| Agent                    | Purpose                          | Model  |
-| ------------------------ | -------------------------------- | ------ |
-| `typescript-expert`      | Type system mastery              | sonnet |
-| `python-expert`          | Python best practices            | sonnet |
-| `react-expert`           | React patterns and hooks         | sonnet |
-| `next-js-expert`         | Next.js App Router, Server Actions | sonnet |
-| `rust-expert`            | Ownership, async Rust, Axum/WASM | sonnet |
-| `go-expert`              | Concurrency, stdlib, Chi/Echo    | sonnet |
+| Agent                     | Purpose                            | Model  |
+| ------------------------- | ---------------------------------- | ------ |
+| `typescript-expert`       | Type system mastery                | sonnet |
+| `python-expert`           | Python best practices              | sonnet |
+| `react-expert`            | React patterns and hooks           | sonnet |
+| `next-js-expert`          | Next.js App Router, Server Actions | sonnet |
+| `vue-nuxt-expert`         | Vue 3, Nuxt 3, Pinia, VueUse      | sonnet |
+| `svelte-expert`           | Svelte 5 runes, SvelteKit routing  | sonnet |
+| `django-fastapi-expert`   | Django ORM/DRF, FastAPI, Pydantic  | sonnet |
+| `kotlin-expert`           | KMP, Compose, coroutines, Ktor    | sonnet |
+| `rust-expert`             | Ownership, async Rust, Axum/WASM  | sonnet |
+| `go-expert`               | Concurrency, stdlib, Chi/Echo     | sonnet |
 
 ### Platform Development
 
@@ -103,6 +111,9 @@ See `~/.claude/docs/AGENT-TEAMS.md` for the full guide and `~/.claude/rules/work
 | `mobile-release-manager` | App store submissions, mobile CI/CD, ASO     | sonnet |
 | `desktop-developer`      | Electron and desktop app development         | sonnet |
 | `macos-developer`        | Native macOS AppKit, Catalyst development    | sonnet |
+| `game-developer`         | Unity, Unreal Engine, Godot development      | sonnet |
+| `cli-developer`          | CLI tools, argument parsing, terminal UI     | sonnet |
+| `pwa-specialist`         | Service workers, offline-first, installable  | sonnet |
 | `i18n-specialist`        | Internationalization and localization        | sonnet |
 
 ### SaaS & Product
@@ -132,20 +143,22 @@ See `~/.claude/docs/AGENT-TEAMS.md` for the full guide and `~/.claude/rules/work
 | `brand-strategist` | Brand identity and positioning      | sonnet |
 | `motion-designer`  | UI animation and micro-interactions | sonnet |
 
-### Business & Strategy
+### Product & Strategy
 
 | Agent                 | Purpose                             | Model  |
 | --------------------- | ----------------------------------- | ------ |
+| `product-manager`     | PRDs, user stories, roadmaps        | sonnet |
 | `startup-advisor`     | Startup launch and validation       | sonnet |
 | `monetization-expert` | Revenue models and pricing strategy | sonnet |
 
 ### Support
 
-| Agent                  | Purpose                  | Model  |
-| ---------------------- | ------------------------ | ------ |
-| `documentation-writer` | Docs, READMEs, API specs | haiku  |
-| `code-explainer`       | Clear code explanations  | haiku  |
-| `accessibility-expert` | WCAG compliance          | sonnet |
+| Agent                  | Purpose                        | Model  |
+| ---------------------- | ------------------------------ | ------ |
+| `documentation-writer` | Docs, READMEs, API specs       | haiku  |
+| `technical-writer`     | ADRs, migration guides, runbooks | sonnet |
+| `code-explainer`       | Clear code explanations        | haiku  |
+| `accessibility-expert` | WCAG compliance                | sonnet |
 
 ## Usage
 

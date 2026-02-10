@@ -8,7 +8,7 @@ category: setup
 
 How to deploy this Claude Code configuration to a new machine.
 
-**Last Updated:** February 2026 (v2.3.3)
+**Last Updated:** February 2026 (v2.6.0)
 
 **See also:** [NEW-DEVICE-SETUP.md](./NEW-DEVICE-SETUP.md) for detailed cross-platform instructions.
 
@@ -89,7 +89,7 @@ bash ~/.claude/_pull-all-repos.sh
 
 This script:
 
-- Clones or pulls all 68 marketplace repos from their original upstreams
+- Clones or pulls all 84 marketplace repos from their original upstreams
 - Sets `no_push` on each to prevent accidental modifications
 - Fixes detached HEAD states and updates documentation counts
 - Ensures main repo can push to your GitHub
@@ -185,7 +185,7 @@ bash ~/.claude/_pull-all-repos.sh
 ~/.claude/_pull-all-repos.sh
 ```
 
-This pulls all 68 marketplace repos, fixes detached HEADs, enforces `no_push`, and updates documentation counts automatically. Each machine fetches independently -- gitlinks are not tracked in the parent repo.
+This pulls all 84 marketplace repos, fixes detached HEADs, enforces `no_push`, and updates documentation counts automatically. Each machine fetches independently -- gitlinks are not tracked in the parent repo.
 
 ---
 
@@ -196,8 +196,8 @@ This pulls all 68 marketplace repos, fixes detached HEADs, enforces `no_push`, a
 +-- CLAUDE.md              <- Core rules
 +-- settings.json          <- Shared settings
 +-- commands/              <- Slash commands
-+-- skills/                <- 102 skills
-+-- agents/                <- 47 agents
++-- skills/                <- 119 skills
++-- agents/                <- 60 agents
 +-- rules/                 <- Contextual rules
 +-- templates/             <- Templates
 +-- docs/                  <- Documentation
