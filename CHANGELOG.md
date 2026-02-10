@@ -9,6 +9,8 @@ All notable changes to the Ultimate Claude Code Toolkit.
 - **Fixed marketplace fallback logic** — Cloudflare Pages clones only 18 of 84 submodules; old check (`directory exists && not empty`) never triggered fallback. Now uses 50%-threshold comparison against expected repo count so deployed site shows correct 4,400+ marketplace skills and 84 repos.
 - **Fixed agent count 60 → 59** — v2.7.0 double-counted `game-developer` (already existed in the 47 baseline). Corrected across all docs.
 - **Added 26 missing agents to website AGENT_CATEGORIES** — 12 new v2.7.0 agents + 14 pre-existing agents now properly categorized on the website instead of falling back to "quality".
+- **Fixed cross-platform hook execution** — On Windows, Claude Code could invoke WSL's bash which resolves `~` to `/root/` instead of the Windows user home, causing all hooks to fail with "No such file or directory". Replaced all 10 hook commands with a Node.js-based runner (`hooks/run-hook.js`) that uses `os.homedir()` for reliable path resolution on Windows, macOS, and Linux.
+- **Added `teams/` to `.gitignore`** — Agent Teams session data is ephemeral and machine-specific.
 
 ---
 
