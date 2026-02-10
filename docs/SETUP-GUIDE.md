@@ -197,7 +197,7 @@ This pulls all 84 marketplace repos, fixes detached HEADs, enforces `no_push`, a
 +-- settings.json          <- Shared settings
 +-- commands/              <- Slash commands
 +-- skills/                <- 119 skills
-+-- agents/                <- 60 agents
++-- agents/                <- 59 agents
 +-- rules/                 <- Contextual rules
 +-- templates/             <- Templates
 +-- docs/                  <- Documentation

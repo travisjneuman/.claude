@@ -16,12 +16,12 @@
 
 [![Opus 4.6](https://img.shields.io/badge/Optimized_for_Opus_4.6-d946ef?style=for-the-badge&logo=anthropic&logoColor=white)](https://www.anthropic.com/news/claude-opus-4-6)
 [![Claude Code](https://img.shields.io/badge/Claude_Code-6366f1?style=for-the-badge&logo=anthropic&logoColor=white)](https://docs.anthropic.com/en/docs/claude-code)
-[![v2.7.0](https://img.shields.io/badge/v2.7.0-feb_2026-1a1a2e?style=for-the-badge&logo=semver&logoColor=white)](./CHANGELOG.md)
+[![v2.7.1](https://img.shields.io/badge/v2.7.1-feb_2026-1a1a2e?style=for-the-badge&logo=semver&logoColor=white)](./CHANGELOG.md)
 
 <!-- Primary Resource Badges -->
 
 [![Skills](https://img.shields.io/badge/Skills-119-10b981?style=for-the-badge&logo=sparkles&logoColor=white)](./skills/MASTER_INDEX.md)
-[![Agents](https://img.shields.io/badge/Agents-60-f59e0b?style=for-the-badge&logo=dependabot&logoColor=white)](./agents/README.md)
+[![Agents](https://img.shields.io/badge/Agents-59-f59e0b?style=for-the-badge&logo=dependabot&logoColor=white)](./agents/README.md)
 [![Commands](https://img.shields.io/badge/Commands-30-a855f7?style=for-the-badge&logo=windowsterminal&logoColor=white)](./commands/README.md)
 [![Marketplaces](https://img.shields.io/badge/Marketplaces-84-3b82f6?style=for-the-badge&logo=homeassistantcommunitystore&logoColor=white)](./docs/MARKETPLACE-GUIDE.md)
 [![Marketplace Skills](https://img.shields.io/badge/Marketplace_Skills-4500+-ec4899?style=for-the-badge&logo=stackblitz&logoColor=white)](./plugins/marketplaces/)
@@ -43,11 +43,11 @@
 
 <br/>
 
-**Version 2.7.0** · **Last Updated: February 9, 2026** · **Author: [Travis Neuman](https://travisjneuman.com)** · **Live: [claude.travisjneuman.com](https://claude.travisjneuman.com)**
+**Version 2.7.1** · **Last Updated: February 9, 2026** · **Author: [Travis Neuman](https://travisjneuman.com)** · **Live: [claude.travisjneuman.com](https://claude.travisjneuman.com)**
 
 <br/>
 
-> _One `git clone` gives you 119 skills, 60 specialist agents, 84 community marketplaces with 4,500+ additional skills, 30 slash commands, 10 lifecycle hooks, and 12 MCP server configs — all auto-activating based on what you're working on. No manual setup required._
+> _One `git clone` gives you 119 skills, 59 specialist agents, 84 community marketplaces with 4,500+ additional skills, 30 slash commands, 10 lifecycle hooks, and 12 MCP server configs — all auto-activating based on what you're working on. No manual setup required._
 
 </div>
 
@@ -224,7 +224,7 @@ The **Ultimate Claude Code Toolkit** transforms [Claude Code](https://docs.anthr
 | :--- | :--- | :--- |
 | 🧠 **Opus 4.6 Integration** | Updated toolkit for adaptive thinking, agent teams, and 1M context | New [OPUS-4-6-GUIDE.md](docs/OPUS-4-6-GUIDE.md) with feature guide |
 | 🎓 **16 New Skills** | LLM app dev, auth patterns, payment integration, monitoring, serverless, and more | Covers the full SaaS lifecycle from auth to analytics |
-| 🤖 **13 New Agents** | Auth, payments, Next.js, SEO, email, cloud, analytics, Rust, Go, Flutter specialists | Total: 60 agents covering every major domain |
+| 🤖 **13 New Agents** | Auth, payments, Next.js, SEO, email, cloud, analytics, Rust, Go, Flutter specialists | Total: 59 agents covering every major domain |
 | 📚 **5 New Stack Guides** | Django/FastAPI, React Native/Expo, Flutter/Dart, Vue/Nuxt, Svelte/SvelteKit | Plus updates to all 5 existing stack guides |
 | ⌨️ **7 New Commands** | `/deploy`, `/test-suite`, `/scaffold`, `/security-scan`, `/deps-update`, `/perf-audit`, `/migrate` | Full lifecycle automation from scaffolding to deployment |
 | 📋 **4 New Checklists** | API development, database design, security hardening, performance optimization | Plus deployment CI/CD workflow guide |
@@ -232,7 +232,7 @@ The **Ultimate Claude Code Toolkit** transforms [Claude Code](https://docs.anthr
 | 🔒 **Enhanced Hooks** | Secret scanning hook, expanded guard-dangerous patterns, Go/Rust/Shell formatting | 11 dangerous patterns blocked, multi-language formatting |
 | 🔄 **Self-Updating Counts** | Enhanced `update-counts.sh` tracks all component types with badge/diagram sync | Skills, agents, commands, hooks, rules, and templates |
 
-**Result:** The toolkit now covers the complete SaaS development lifecycle — from authentication and payments to monitoring and deployment — with 119 skills, 60 agents, 30 commands, 10 hooks, and 30 rules files. See [CHANGELOG.md](CHANGELOG.md) for complete details.
+**Result:** The toolkit now covers the complete SaaS development lifecycle — from authentication and payments to monitoring and deployment — with 119 skills, 59 agents, 30 commands, 10 hooks, and 30 rules files. See [CHANGELOG.md](CHANGELOG.md) for complete details.
 
 ---
 
@@ -1149,7 +1149,7 @@ bash ~/.claude/scripts/setup-new-machine.sh
 ├── 🎓 skills/ (119 skills)
 │   └── Loaded when domain context matches
 │
-├── 🤖 agents/ (60 agents)
+├── 🤖 agents/ (59 agents)
 │   └── Spawned via Task tool for deep expertise
 │
 ├── ⌨️ commands/ (30+ commands)
@@ -1310,7 +1310,7 @@ Available for work:         190,800 tokens
 CLAUDE.md:                    1,100 tokens
 settings.json:                  500 tokens
 All 119 skills loaded:        66,200 tokens  ❌ Never do this!
-All 60 agents defined:       16,500 tokens
+All 59 agents defined:       16,500 tokens
 All MCP servers:              8,400 tokens
 ────────────────────────────────────────────
 TOTAL CONTEXT COST:          79,750 tokens  🚫 UNACCEPTABLE
@@ -3789,7 +3789,7 @@ claude
 ```
 ✓ CLAUDE.md loaded (194 lines, ~1,100 tokens)
 ✓ 119 skills available
-✓ 60 agents available
+✓ 59 agents available
 ✓ 84 marketplace repos synced
 ✓ 2 hooks configured (PostToolUse for Prettier)
 ✓ MCP servers: all disabled (optimal)
@@ -6639,7 +6639,7 @@ See [CHANGELOG.md](./CHANGELOG.md) for complete history.
 | Resource                                            | Description             |
 | :-------------------------------------------------- | :---------------------- |
 | 🎓 [Skills Catalog](./skills/MASTER_INDEX.md)       | All 119 skills           |
-| 🤖 [Agents Catalog](./agents/README.md)             | All 60 agents           |
+| 🤖 [Agents Catalog](./agents/README.md)             | All 59 agents           |
 | 🔄 [Workflow Guide](./docs/WORKFLOW-GUIDE.md)       | Workflow patterns       |
 | 🏪 [Marketplace Guide](./docs/MARKETPLACE-GUIDE.md) | All 84 marketplaces     |
 | 🤖 [Auto-Claude Guide](./docs/AUTO-CLAUDE-GUIDE.md) | Autonomous coding setup |
@@ -8668,7 +8668,7 @@ The toolkit logs security-relevant events:
 ~/.claude/
 ├── CLAUDE.md          # Constitution
 ├── README.md          # Documentation
-├── agents/            # 60 agents
+├── agents/            # 59 agents
 ├── skills/            # 119 skills
 ├── commands/          # Slash commands
 ├── rules/             # Contextual rules
