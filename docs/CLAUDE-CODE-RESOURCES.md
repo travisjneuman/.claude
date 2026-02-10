@@ -232,11 +232,11 @@ tags: [category, domain]
 ---
 ```
 
-This installation has 119 local skills and 60 custom agents. Run `bash ~/.claude/scripts/regenerate-index.sh` to refresh the master index.
+This installation has 119 local skills and 59 custom agents. Run `bash ~/.claude/scripts/regenerate-index.sh` to refresh the master index.
 
 ### Agent Development
 
-Agents are defined in `~/.claude/agents/` as markdown files with YAML frontmatter specifying name, description, allowed tools, and model. Agents can be scoped by tool access (read-only for research, full access for implementation). See `~/.claude/agents/README.md` for the full catalog of 60 agents.
+Agents are defined in `~/.claude/agents/` as markdown files with YAML frontmatter specifying name, description, allowed tools, and model. Agents can be scoped by tool access (read-only for research, full access for implementation). See `~/.claude/agents/README.md` for the full catalog of 59 agents.
 
 ---
 

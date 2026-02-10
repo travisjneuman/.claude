@@ -2,7 +2,7 @@
 
 Specialized AI agents for focused, expert-level assistance across all domains.
 
-**60 agents available** - Covering code quality, development, architecture, languages, platforms, creative, product & strategy, SaaS, and infrastructure.
+**59 agents available** - Covering code quality, development, architecture, languages, platforms, creative, product & strategy, SaaS, and infrastructure.
 
 ---
 

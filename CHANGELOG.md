@@ -2,15 +2,25 @@
 
 All notable changes to the Ultimate Claude Code Toolkit.
 
+## [2.7.1] - February 9, 2026
+
+### Bug Fixes
+
+- **Fixed marketplace fallback logic** — Cloudflare Pages clones only 18 of 84 submodules; old check (`directory exists && not empty`) never triggered fallback. Now uses 50%-threshold comparison against expected repo count so deployed site shows correct 4,400+ marketplace skills and 84 repos.
+- **Fixed agent count 60 → 59** — v2.7.0 double-counted `game-developer` (already existed in the 47 baseline). Corrected across all docs.
+- **Added 26 missing agents to website AGENT_CATEGORIES** — 12 new v2.7.0 agents + 14 pre-existing agents now properly categorized on the website instead of falling back to "quality".
+
+---
+
 ## [2.7.0] - February 9, 2026
 
-### Agent Expansion (47 → 60)
+### Agent Expansion (47 → 59)
 
 Filled coverage gaps identified across 84 marketplace repos, stack guides, and common development workflows. Added framework experts for Vue/Nuxt, Svelte/SvelteKit, and Django/FastAPI (matching existing stack guides), expanded architecture and platform categories, and introduced product management capabilities.
 
 ### Added
 
-- **12 new custom agents** (47 → 60):
+- **12 new custom agents** (47 → 59):
   - **Language & Framework (4):** `vue-nuxt-expert`, `svelte-expert`, `django-fastapi-expert`, `kotlin-expert`
   - **Architecture (3):** `devsecops-engineer`, `observability-engineer`, `migration-specialist` (opus)
   - **Development (1):** `api-integration-specialist`
@@ -22,7 +32,7 @@ Filled coverage gaps identified across 84 marketplace repos, stack guides, and c
 
 - Listed existing `game-developer` agent in README (file existed, was not documented)
 - Renamed "Business & Strategy" category to "Product & Strategy"
-- Updated all documentation counts: agents 47→60
+- Updated all documentation counts: agents 47→59
 
 ---
 
