@@ -2,6 +2,78 @@
 
 All notable changes to the Ultimate Claude Code Toolkit.
 
+## [2.7.0] - February 9, 2026
+
+### Agent Expansion (47 → 60)
+
+Filled coverage gaps identified across 84 marketplace repos, stack guides, and common development workflows. Added framework experts for Vue/Nuxt, Svelte/SvelteKit, and Django/FastAPI (matching existing stack guides), expanded architecture and platform categories, and introduced product management capabilities.
+
+### Added
+
+- **12 new custom agents** (47 → 60):
+  - **Language & Framework (4):** `vue-nuxt-expert`, `svelte-expert`, `django-fastapi-expert`, `kotlin-expert`
+  - **Architecture (3):** `devsecops-engineer`, `observability-engineer`, `migration-specialist` (opus)
+  - **Development (1):** `api-integration-specialist`
+  - **Platform Development (2):** `cli-developer`, `pwa-specialist`
+  - **Product & Strategy (1):** `product-manager`
+  - **Support (1):** `technical-writer`
+
+### Changed
+
+- Listed existing `game-developer` agent in README (file existed, was not documented)
+- Renamed "Business & Strategy" category to "Product & Strategy"
+- Updated all documentation counts: agents 47→60
+
+---
+
+## [2.6.0] - February 9, 2026
+
+### Comprehensive Platform Enhancement
+
+Expanded marketplace coverage from 68 to 84 repos, added MCP servers, lifecycle hooks, commands, checklists, and templates.
+
+### Added
+
+- **18 new marketplace repos** (net +16 after removing 2 dead repos): aaronontheweb-dotnet-skills, behisecc-awesome-claude-skills, karanb192-awesome-claude-skills, levnikolaevich-claude-code-skills, giuseppe-developer-kit, rohitg00-claude-code-toolkit, disler-hooks-mastery, rshah515-claude-code-subagents, manutej-luxor-marketplace, jeffallan-claude-skills, lodetomasi-agents-claude-code, ahmedasmar-devops-skills, mrgoonie-claudekit-skills, chriswiles-claude-code-showcase, onmax-nuxt-skills, interstellar-code-claud-skills, actionbook-rust-skills, zircote-dot-claude
+- **3 new MCP servers** (9 → 12): `github`, `postgres`, `git` — all disabled by default
+- **3 new lifecycle hooks** (7 → 10): `secret-scan.sh` (registered), `pre-write-validate.sh` (path guard), `post-edit-lint.sh` (auto-lint)
+- **3 new slash commands** (27 → 30): `/changelog`, `/audit-docs`, `/test-plan`
+- **2 new rule checklists** (8 → 10): `mobile-app-deployment.md`, `monitoring-alerting-design.md`
+- **3 new templates** (14 → 17): `incident-response-template.md`, `architecture-decision-template.md`, `release-checklist-template.md`
+
+### Removed
+
+- **2 dead marketplace repos**: `claude-market` (404), `netresearch-marketplace` (404)
+
+### Changed
+
+- Marketplace skills count: 3,900+ → 5,800+ (5,873 SKILL.md files across 84 repos)
+- All documentation counts updated across 16+ files
+- Fixed 3 older repos missing `ignore = all` in `.gitmodules`
+
+---
+
+## [2.5.0] - February 8, 2026
+
+### Ecosystem Audit & 17 New Skills
+
+Mined `docs/REFERENCE-URLS.md`, Anthropic use-case pages, marketplace repos, external skill directories, and community forums (Reddit, Hacker News). Identified genuine domain gaps after filtering false positives against existing 102-skill inventory.
+
+### Added
+
+- **17 new skills** bringing local skill count from 102 to 119:
+  - **Tier 1 — High-Impact New Domains (8):** `ai-policy-generator`, `content-repurposer`, `financial-scenario-planner`, `course-material-creator`, `learning-gap-analyzer`, `impact-report-writer`, `process-flowchart-designer`, `debate-practice-coach`
+  - **Tier 2 — Remaining Anthropic Use-Cases (5):** `fundraising-analyzer`, `statistics-verifier`, `volunteer-coordinator`, `research-presenter`, `options-comparator`
+  - **Tier 3 — Underserved Domain Skills (4):** `real-estate-analyzer`, `supply-chain-optimizer`, `event-planner`, `podcast-producer`
+- **New skill categories:** Education & Learning (3 skills), Nonprofit (3 skills), Analysis & Decision-Making (3 skills), expanded Domain Expertise
+
+### Changed
+
+- Updated all documentation counts: skills 102→119
+- New categories in skills README: Education & Learning, Nonprofit & Social Impact, Analysis & Decision-Making
+
+---
+
 ## [2.4.0] - February 8, 2026
 
 ### Anthropic Use-Cases Audit & 13 New Skills

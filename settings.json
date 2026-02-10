@@ -110,7 +110,10 @@
     "context7",
     "chrome-devtools",
     "puppeteer",
-    "browserbase"
+    "browserbase",
+    "github",
+    "postgres",
+    "git"
   ],
   "hooks": {
     "SessionStart": [
@@ -171,6 +174,16 @@
             "statusMessage": "Updating counts"
           }
         ]
+      },
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/pre-write-validate.sh",
+            "statusMessage": "Validating file path"
+          }
+        ]
       }
     ],
     "PostToolUse": [
@@ -181,6 +194,26 @@
             "type": "command",
             "command": "bash ~/.claude/hooks/format-code.sh",
             "statusMessage": "Auto-formatting"
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/secret-scan.sh",
+            "statusMessage": "Scanning for secrets"
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/post-edit-lint.sh",
+            "statusMessage": "Running lint check"
           }
         ]
       }

@@ -1,5 +1,5 @@
 ---
-description: Pull all repos (parent + 68 marketplace submodules)
+description: Pull all repos (parent + 84 marketplace submodules)
 arguments:
   - name: action
     description: "Action: pull, status (default: pull)"
@@ -19,7 +19,7 @@ Pull the parent repo, marketplace submodules, and custom project directories wit
 ## What It Does
 
 1. **Pulls parent repo** (`~/.claude` - travisjneuman/.claude)
-2. **Pulls all submodules** (68 repos in `plugins/marketplaces/`)
+2. **Pulls all submodules** (84 repos in `plugins/marketplaces/`)
 3. **Pulls custom project directories** (if configured - your own repos)
 4. **Fixes detached HEAD** automatically on any repo
 5. **Enforces no_push** on marketplace submodules only (not your repos)
@@ -153,7 +153,7 @@ Enforcing no_push on submodules:
   All submodules already have no_push configured
 
 === Summary ===
-  Total repos:       69 (1 parent + 68 submodules)
+  Total repos:       85 (1 parent + 84 submodules)
   Updated:         1
   Already current: 23
 ```

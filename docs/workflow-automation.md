@@ -6,7 +6,7 @@ category: workflow
 
 # Workflow Automation Guide
 
-**Last Updated:** February 2026 (v2.3.3)
+**Last Updated:** February 2026 (v2.6.0)
 **Purpose:** Complete workflow compliance guide -- checklists + automation tools
 
 ---
@@ -733,7 +733,7 @@ git commit -m "feat: Add fuzzy search to notes list"
 - `~/.claude/CLAUDE.md` - Core workflow rules
 - `~/.claude/templates/task-template.md` - Task file template
 - `~/.claude/skills/README.md` - Available skills (85 skills)
-- `~/.claude/commands/` - Custom commands (27 commands)
+- `~/.claude/commands/` - Custom commands (30 commands)
 - `~/.claude/commands/gsd/help.md` - GSD command reference
 
 ---
