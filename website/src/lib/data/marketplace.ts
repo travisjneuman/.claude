@@ -55,8 +55,15 @@ export function getMarketplaceStats(): {
     "marketplaces",
   );
 
-  if (!fs.existsSync(marketDir) || fs.readdirSync(marketDir).length === 0) {
-    // Fallback for deployment (Cloudflare Pages) where submodules aren't available
+  const dirEntries = fs.existsSync(marketDir)
+    ? fs.readdirSync(marketDir).filter((e) =>
+        fs.statSync(path.join(marketDir, e)).isDirectory(),
+      )
+    : [];
+
+  // Use fallback if directory missing, empty, or has <50% of expected repos
+  // (handles Cloudflare Pages where only some submodules are cloned)
+  if (dirEntries.length < fallbackCounts.repoCount * 0.5) {
     const fallbackRepos: MarketplaceRepo[] = fallbackCounts.repos.map(
       (r: { name: string; displayName: string; skillCount: number }) => ({
         ...r,
@@ -68,13 +75,11 @@ export function getMarketplaceStats(): {
     return { repos: fallbackRepos, totalSkills: fallbackCounts.totalSkills };
   }
 
-  const entries = fs.readdirSync(marketDir, { withFileTypes: true });
   const repos: MarketplaceRepo[] = [];
   let totalSkills = 0;
 
-  for (const entry of entries) {
-    if (!entry.isDirectory()) continue;
-    const repoPath = path.join(marketDir, entry.name);
+  for (const entryName of dirEntries) {
+    const repoPath = path.join(marketDir, entryName);
 
     // Count SKILL.md files recursively
     let count = 0;
@@ -84,17 +89,17 @@ export function getMarketplaceStats(): {
       count = 0;
     }
 
-    const displayName = entry.name
+    const displayName = entryName
       .replace(/-/g, " ")
       .replace(/\b\w/g, (c: string) => c.toUpperCase());
 
     repos.push({
-      name: entry.name,
+      name: entryName,
       displayName,
       skillCount: count,
       githubUrl:
-        GITHUB_URLS[entry.name] ||
-        `https://github.com/search?q=${encodeURIComponent(entry.name)}`,
+        GITHUB_URLS[entryName] ||
+        `https://github.com/search?q=${encodeURIComponent(entryName)}`,
     });
 
     totalSkills += count;

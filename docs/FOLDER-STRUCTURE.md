@@ -8,7 +8,7 @@ category: reference
 
 Complete map of the `.claude/` folder and related files.
 
-**Last Updated:** February 2026 (v2.7.0)
+**Last Updated:** February 2026 (v2.7.1)
 
 ---
 
@@ -252,7 +252,7 @@ This repo underwent a security audit before being made public. The following wer
     │       ├── commands/example-command.md
     │       └── skills/example-skill/SKILL.md
     │
-    ├── agents/                     ← Subagent definitions (60 agents)
+    ├── agents/                     ← Subagent definitions (59 agents)
     │   ├── README.md               ← Agents index
     │   ├── accessibility-expert.md
     │   ├── android-developer.md
@@ -433,7 +433,7 @@ Complete workflow system for multi-phase projects:
 
 ---
 
-### `/agents/` - Subagent Definitions (60 agents)
+### `/agents/` - Subagent Definitions (59 agents)
 
 Agent definitions for the Task tool's `subagent_type` parameter. Each agent is a markdown file that defines a specialized role with constrained tools.
 
@@ -691,7 +691,7 @@ This folder is **automatically created by VSCode** when you open `.claude/` as a
 | `skills/`    | ~1.1MB       | 119 SKILL.md files across 120 dirs |
 | `docs/`      | ~200KB       | 24 documentation files           |
 | `commands/`  | ~150KB       | 30 commands + 7 router files     |
-| `agents/`    | ~250KB       | 60 agent definitions             |
+| `agents/`    | ~250KB       | 59 agent definitions             |
 | `rules/`     | ~150KB       | 27 rule files across 4 subdirs   |
 | `scripts/`   | ~50KB        | 16 scripts + 4 hook scripts      |
 | `hooks/`     | ~25KB        | 8 event hook scripts             |
