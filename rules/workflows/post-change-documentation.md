@@ -83,7 +83,7 @@ grep -r "73 skills\|73 local" docs/ commands/ --include="*.md"
 grep -r "36 agents" docs/ commands/ --include="*.md"
 
 # Check for old marketplace count
-grep -r "68 marketplace\|68 repos" docs/ commands/ --include="*.md"
+grep -r "84 marketplace\|68 repos" docs/ commands/ --include="*.md"
 ```
 
 ---

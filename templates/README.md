@@ -24,6 +24,10 @@ Standardized templates for creating Claude Code toolkit components.
 | `mobile-app-project.md` | Mobile app starter (React Native/Expo or Flutter) | Mobile app scaffold |
 | `api-project.md`      | API-only starter (NestJS/FastAPI + auth + DB + docs) | Backend API scaffold |
 | `landing-page-project.md` | Landing page (Next.js/Astro + Tailwind + SEO + analytics) | Marketing page scaffold |
+| **NEW in v2.6:**      | **Operational Templates**                                  | **Production readiness**                |
+| `incident-response-template.md` | Incident playbook with severity levels, timeline, RCA     | Incident response scaffold     |
+| `architecture-decision-template.md` | ADR template with context, options, consequences        | Architecture decision record   |
+| `release-checklist-template.md` | Release verification with pre/post checks, rollback plan  | Release process scaffold       |
 
 ---
 

@@ -8,7 +8,7 @@ category: reference
 
 Common questions about the Claude Code Toolkit, organized by topic.
 
-**Last Updated:** February 2026 (v2.3.3)
+**Last Updated:** February 2026 (v2.6.0)
 
 ---
 
@@ -52,14 +52,14 @@ Yes. Create a `.claude/skills/` directory in your project root with project-spec
 
 ### What is the marketplace?
 
-The marketplace is a collection of 68 community-maintained GitHub repositories containing over 3,900+ additional skills, agents, and commands. They're cloned into `~/.claude/plugins/marketplaces/` and configured as read-only (you can fetch updates but can't accidentally push changes).
+The marketplace is a collection of 84 community-maintained GitHub repositories containing over 4,500+ additional skills, agents, and commands. They're cloned into `~/.claude/plugins/marketplaces/` and configured as read-only (you can fetch updates but can't accidentally push changes).
 
 ### How do I find marketplace skills?
 
 Several approaches:
 
 1. **Search locally:** The skills are already cloned. Use `/discover-skills <query>` or `/skill-finder <query>`.
-2. **Browse online:** Visit [skillsmp.com](https://skillsmp.com) for 3,900+ community skills.
+2. **Browse online:** Visit [skillsmp.com](https://skillsmp.com) for 4,500+ community skills.
 3. **Manual search:** `find ~/.claude/plugins/marketplaces -name "SKILL.md" | xargs grep -li "keyword"`
 
 ### Are marketplace repos safe?
@@ -68,7 +68,7 @@ Marketplace repos are community-contributed and not audited by this toolkit. The
 
 ### How do I update marketplace repos?
 
-Run `~/.claude/_pull-all-repos.sh` or use `/pull-repos` in Claude Code. This fetches the latest from all 68 upstream repositories, fixes detached HEAD states, and updates documentation counts.
+Run `~/.claude/_pull-all-repos.sh` or use `/pull-repos` in Claude Code. This fetches the latest from all 84 upstream repositories, fixes detached HEAD states, and updates documentation counts.
 
 ---
 

@@ -50,6 +50,9 @@ HOOK_COUNT=$(ls hooks/*.sh 2>/dev/null | wc -l | tr -d ' ')
 RULE_COUNT=$(find rules -name '*.md' -not -name 'README.md' 2>/dev/null | wc -l | tr -d ' ')
 TEMPLATE_COUNT=$(ls templates/ 2>/dev/null | grep -cv 'README\.md' || echo 0)
 SKILL_DIR_COUNT=$(find skills -mindepth 1 -maxdepth 1 -type d -not -name '_shared' 2>/dev/null | wc -l | tr -d ' ')
+CHECKLIST_COUNT=$(ls rules/checklists/*.md 2>/dev/null | grep -cv 'README\.md' || echo 0)
+# MCP servers: count entries with "type": "stdio" in .mcp.json
+MCP_COUNT=$(grep -c '"type": "stdio"' .mcp.json 2>/dev/null || echo 0)
 
 # Round marketplace skills down to nearest 100 with "+" suffix
 MARKET_ROUNDED="$(( (MARKET_SKILL_COUNT / 100) * 100 ))"
@@ -73,6 +76,8 @@ echo "│  Commands:           $COMMAND_COUNT"
 echo "│  Hooks:              $HOOK_COUNT"
 echo "│  Rules:              $RULE_COUNT"
 echo "│  Templates:          $TEMPLATE_COUNT"
+echo "│  Checklists:         $CHECKLIST_COUNT"
+echo "│  MCP servers:        $MCP_COUNT"
 echo "│  Marketplace repos:  $REPO_COUNT"
 echo "│  Marketplace skills: $MARKET_SKILL_COUNT (display: ${MARKET_DISPLAY_PLUS})"
 echo "└─────────────────────────────────────────┘"
@@ -125,6 +130,13 @@ update_file() {
 
   # Hook count
   sedi -E "s/[0-9]+ lifecycle hooks/${HOOK_COUNT} lifecycle hooks/g" "$file"
+
+  # MCP server count
+  sedi -E "s/[0-9]+ MCP servers/${MCP_COUNT} MCP servers/g" "$file"
+  sedi -E "s/[0-9]+ MCP Servers/${MCP_COUNT} MCP Servers/g" "$file"
+
+  # Checklist count
+  sedi -E "s/[0-9]+ checklists/${CHECKLIST_COUNT} checklists/g" "$file"
 
   # Rule count
   sedi -E "s/[0-9]+ rules files/${RULE_COUNT} rules files/g" "$file"
@@ -570,6 +582,8 @@ cat > counts.json << COUNTSJSON
   "hooks": $HOOK_COUNT,
   "rules": $RULE_COUNT,
   "templates": $TEMPLATE_COUNT,
+  "checklists": $CHECKLIST_COUNT,
+  "mcpServers": $MCP_COUNT,
   "marketplaceSkills": $MARKET_SKILL_COUNT,
   "marketplaceSkillsDisplay": "${MARKET_DISPLAY_PLUS}"
 }
@@ -587,5 +601,7 @@ echo "  Commands:    $COMMAND_COUNT"
 echo "  Hooks:       $HOOK_COUNT"
 echo "  Rules:       $RULE_COUNT"
 echo "  Templates:   $TEMPLATE_COUNT"
+echo "  Checklists:  $CHECKLIST_COUNT"
+echo "  MCP Servers: $MCP_COUNT"
 echo "  Repos:       $REPO_COUNT"
 echo "  Mkt Skills:  $MARKET_SKILL_COUNT (${MARKET_DISPLAY_PLUS})"

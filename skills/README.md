@@ -1,10 +1,10 @@
 # Claude Code Skills Library
 
-Comprehensive skills for Claude Code - 102 skills covering all development domains.
+Comprehensive skills for Claude Code - 119 skills covering all development domains.
 
-**Plus:** 68 marketplace repos with 3,900+ additional skills.
+**Plus:** 84 marketplace repos with 4,500+ additional skills.
 
-**Version:** 4.7 (102 Skills, 68 Marketplace Repos)
+**Version:** 5.0 (119 Skills, 84 Marketplace Repos)
 **Last Updated:** February 2026
 
 ---
@@ -18,16 +18,20 @@ Comprehensive skills for Claude Code - 102 skills covering all development domai
 | Framework Skills       | 2      | Vue.js 3, Svelte 5                               |
 | Platform Development   | 8      | iOS, Android, Desktop, PWA, macOS, Gaming        |
 | Creative & Design      | 7      | Visual, Video, Audio, Brand, Motion, UI Research |
-| Business & Startup     | 13     | Strategy, Finance, Marketing, Sales, Personas    |
+| Business & Startup     | 15     | Strategy, Finance, Marketing, Sales, Governance  |
 | Technical Architecture | 5      | GraphQL, Microservices, i18n, Real-time          |
 | Domain Expertise       | 15     | Operations, Security, Leadership, Legal, etc.    |
+| Education & Learning   | 3      | Course materials, learning gaps, debate coaching |
+| Nonprofit & Impact     | 3      | Impact reports, fundraising, volunteer mgmt      |
+| Analysis & Decisions   | 5      | Scenarios, statistics, comparisons, flowcharts   |
+| Industry & Domain      | 3      | Real estate, supply chain, event planning        |
 | Development Workflow   | 4      | Debug, TDD, Core Workflow, Auto-Claude           |
 | Utilities              | 8      | Docs, Testing, SEO, AI/ML, DB, DevOps            |
 | Document Skills        | 5      | PDF, DOCX, XLSX, PPTX generation                 |
-| Personal & Lifestyle   | 3      | Travel, Career, Recipe                           |
-| Marketplace            | 3,900+ | From 68 plugin repositories                      |
+| Personal & Lifestyle   | 4      | Travel, Career, Recipe, Podcast                  |
+| Marketplace            | 5,800+ | From 84 plugin repositories                      |
 
-**Local: 102 unique skills | Marketplace: 3,900+ additional skills**
+**Local: 119 unique skills | Marketplace: 4,500+ additional skills**
 
 ---
 
@@ -165,6 +169,8 @@ Comprehensive skills for Claude Code - 102 skills covering all development domai
 | **onboarding-guide-creator**  | HR        | New hire onboarding guides by role               |
 | **newsletter-creator**        | Marketing | Company newsletters with consistent formatting   |
 | **status-report-generator**   | Project   | Status reports from git history and task context  |
+| **ai-policy-generator**       | Governance| AI governance policies, risk assessment, ethics   |
+| **content-repurposer**        | Content   | Adapt content across platforms, tone/format shift  |
 
 ### Usage Examples
 
@@ -177,6 +183,8 @@ Comprehensive skills for Claude Code - 102 skills covering all development domai
 "Create competitive battle cards" → uses battle-card-builder
 "Build customer personas" → uses customer-persona-builder
 "Generate a project status report" → uses status-report-generator
+"Generate an AI governance policy" → uses ai-policy-generator
+"Turn this blog post into social media threads" → uses content-repurposer
 ```
 
 ---
@@ -204,7 +212,7 @@ Comprehensive skills for Claude Code - 102 skills covering all development domai
 
 ## Domain Expert Skills
 
-15 skills covering specialized business and enterprise domains (skills also listed under Business & Startup are not repeated here):
+15 skills covering specialized business and enterprise domains (additional domain skills listed in dedicated sections below):
 
 | Domain                  | Skills                                                          |
 | ----------------------- | --------------------------------------------------------------- |
@@ -215,9 +223,85 @@ Comprehensive skills for Claude Code - 102 skills covering all development domai
 | Sustainability          | `sustainability-esg`                                            |
 | Research & Education    | `literature-review-planner`, `case-interview-practice`          |
 | Legal                   | `contract-redliner`                                             |
-| Nonprofits              | `grant-proposal-builder`                                        |
+| Nonprofits              | `grant-proposal-builder`, `fundraising-analyzer`, `impact-report-writer`, `volunteer-coordinator` |
 
 See [EXPERT-SKILLS-GUIDE.md](./EXPERT-SKILLS-GUIDE.md) for detailed coverage of all domain expert skills.
+
+---
+
+## Education & Learning Skills
+
+| Skill                      | Domain    | Coverage                                                |
+| -------------------------- | --------- | ------------------------------------------------------- |
+| **course-material-creator**| Education | Custom syllabi, lesson plans, assessments, reading lists |
+| **learning-gap-analyzer**  | Learning  | Knowledge gap mapping, targeted learning plans           |
+| **debate-practice-coach**  | Practice  | Interactive debate practice with structured feedback     |
+
+### Usage Examples
+
+```
+"Create a course on machine learning" → uses course-material-creator
+"Map my knowledge gaps in cloud architecture" → uses learning-gap-analyzer
+"Practice arguing for renewable energy policy" → uses debate-practice-coach
+```
+
+---
+
+## Nonprofit & Social Impact Skills
+
+| Skill                     | Domain      | Coverage                                               |
+| ------------------------- | ----------- | ------------------------------------------------------ |
+| **impact-report-writer**  | Nonprofits  | Impact reports with data viz, outcome metrics, narrative|
+| **fundraising-analyzer**  | Nonprofits  | Donor segmentation, campaign ROI, trend analysis        |
+| **volunteer-coordinator** | Nonprofits  | Volunteer scheduling, skill matching, communications    |
+
+### Usage Examples
+
+```
+"Write an annual impact report for our nonprofit" → uses impact-report-writer
+"Analyze our fundraising campaign performance" → uses fundraising-analyzer
+"Design a volunteer management system" → uses volunteer-coordinator
+```
+
+---
+
+## Analysis & Decision-Making Skills
+
+| Skill                          | Domain   | Coverage                                                  |
+| ------------------------------ | -------- | --------------------------------------------------------- |
+| **financial-scenario-planner** | Finance  | Stress-test scenarios (bull/bear/base), sensitivity tables |
+| **statistics-verifier**        | Analysis | Methodology checking, significance testing, claim validation |
+| **options-comparator**         | Decisions| Weighted scoring matrices, trade-off analysis              |
+| **process-flowchart-designer** | Process  | Process diagrams from descriptions, optimization suggestions|
+| **research-presenter**         | Research | Research to presentation outlines with narrative arc        |
+
+### Usage Examples
+
+```
+"Stress-test my financial plan across scenarios" → uses financial-scenario-planner
+"Verify these statistics from the raw data" → uses statistics-verifier
+"Compare AWS vs GCP vs Azure for our needs" → uses options-comparator
+"Create a flowchart for our onboarding process" → uses process-flowchart-designer
+"Turn my research into a presentation" → uses research-presenter
+```
+
+---
+
+## Industry & Domain Skills
+
+| Skill                      | Domain       | Coverage                                             |
+| -------------------------- | ------------ | ---------------------------------------------------- |
+| **real-estate-analyzer**   | Real Estate  | Property valuation, market analysis, investment ROI   |
+| **supply-chain-optimizer** | Supply Chain | Inventory optimization, logistics planning, vendors   |
+| **event-planner**          | Events       | Timelines, budgets, vendor coordination, logistics    |
+
+### Usage Examples
+
+```
+"Analyze this property investment opportunity" → uses real-estate-analyzer
+"Optimize our supply chain logistics" → uses supply-chain-optimizer
+"Plan a 500-person conference" → uses event-planner
+```
 
 ---
 
@@ -228,6 +312,7 @@ See [EXPERT-SKILLS-GUIDE.md](./EXPERT-SKILLS-GUIDE.md) for detailed coverage of 
 | **travel-planner**       | Travel   | Destination research, daily itinerary creation    |
 | **career-path-planner**  | Career   | Career goals, skill gap analysis, action plans    |
 | **recipe-card-creator**  | Personal | Formatted digital recipe cards with nutrition     |
+| **podcast-producer**     | Media    | Episode planning, show notes, transcript editing  |
 
 ### Usage Examples
 
@@ -235,6 +320,7 @@ See [EXPERT-SKILLS-GUIDE.md](./EXPERT-SKILLS-GUIDE.md) for detailed coverage of 
 "Plan a 7-day trip to Japan" → uses travel-planner
 "Map out my career path to CTO" → uses career-path-planner
 "Create a recipe card for pasta carbonara" → uses recipe-card-creator
+"Plan my podcast episode on AI ethics" → uses podcast-producer
 ```
 
 ---
@@ -422,6 +508,23 @@ Verify skill activates when expected context appears.
 | Travel planning       | `travel-planner`                      |
 | Career planning       | `career-path-planner`                 |
 | Recipe cards          | `recipe-card-creator`                 |
+| AI governance policy  | `ai-policy-generator`                 |
+| Content adaptation    | `content-repurposer`                  |
+| Financial scenarios   | `financial-scenario-planner`          |
+| Course materials      | `course-material-creator`             |
+| Learning gaps         | `learning-gap-analyzer`               |
+| Impact reports        | `impact-report-writer`                |
+| Process flowcharts    | `process-flowchart-designer`          |
+| Debate practice       | `debate-practice-coach`               |
+| Fundraising analysis  | `fundraising-analyzer`                |
+| Statistics checking   | `statistics-verifier`                 |
+| Volunteer management  | `volunteer-coordinator`               |
+| Research presentations| `research-presenter`                  |
+| Options comparison    | `options-comparator`                  |
+| Real estate analysis  | `real-estate-analyzer`                |
+| Supply chain          | `supply-chain-optimizer`              |
+| Event planning        | `event-planner`                       |
+| Podcast production    | `podcast-producer`                    |
 
 ---
 

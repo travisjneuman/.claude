@@ -144,6 +144,33 @@ User runs the exact command(s) to free context.
 
 **Disable after:** Exploration complete
 
+### github
+
+**Enable for:**
+- Full GitHub API beyond \ CLI
+- PR reviews, Actions management, releases
+- Issue management, repository operations
+
+**Disable after:** GitHub operations complete
+
+### postgres
+
+**Enable for:**
+- PostgreSQL schema introspection
+- Query analysis and performance tuning
+- Read-only database exploration
+
+**Disable after:** Database work complete
+
+### git
+
+**Enable for:**
+- Advanced git operations via MCP
+- Repository cloning, branching, diffing
+- When built-in git tools aren't sufficient
+
+**Disable after:** Git operations complete
+
 ---
 
 ## Token Impact
@@ -157,8 +184,11 @@ Each enabled MCP server adds tool definitions to the system prompt:
 | memory              | ~800 tokens        |
 | filesystem          | ~1500 tokens       |
 | sqlite              | ~1000 tokens       |
+| github              | ~1000 tokens       |
+| postgres            | ~800 tokens        |
+| git                 | ~600 tokens        |
 
-**Keeping all servers disabled saves ~6000+ tokens per session.**
+**Keeping all servers disabled saves ~8400+ tokens per session.**
 
 ---
 
@@ -183,7 +213,10 @@ Each enabled MCP server adds tool definitions to the system prompt:
     "context7",
     "chrome-devtools",
     "puppeteer",
-    "browserbase"
+    "browserbase",
+    "github",
+    "postgres",
+    "git"
   ]
 }
 ```

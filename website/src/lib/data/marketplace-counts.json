@@ -1,6 +1,6 @@
 {
-  "repoCount": 68,
-  "totalSkills": 3939,
+  "repoCount": 84,
+  "totalSkills": 4449,
   "repos": [
     {
       "name": "claude-code-plugins-plus-skills",
@@ -43,6 +43,31 @@
       "skillCount": 104
     },
     {
+      "name": "levnikolaevich-claude-code-skills",
+      "displayName": "Levnikolaevich Claude Code Skills",
+      "skillCount": 98
+    },
+    {
+      "name": "giuseppe-developer-kit",
+      "displayName": "Giuseppe Developer Kit",
+      "skillCount": 71
+    },
+    {
+      "name": "zircote-dot-claude",
+      "displayName": "Zircote Dot Claude",
+      "skillCount": 70
+    },
+    {
+      "name": "manutej-luxor-marketplace",
+      "displayName": "Manutej Luxor Marketplace",
+      "skillCount": 67
+    },
+    {
+      "name": "jeffallan-claude-skills",
+      "displayName": "Jeffallan Claude Skills",
+      "skillCount": 66
+    },
+    {
       "name": "neolab-context-kit",
       "displayName": "Neolab Context Kit",
       "skillCount": 60
@@ -68,9 +93,19 @@
       "skillCount": 43
     },
     {
+      "name": "actionbook-rust-skills",
+      "displayName": "Actionbook Rust Skills",
+      "skillCount": 38
+    },
+    {
       "name": "daymade-skills",
       "displayName": "Daymade Skills",
       "skillCount": 36
+    },
+    {
+      "name": "rohitg00-claude-code-toolkit",
+      "displayName": "Rohitg00 Claude Code Toolkit",
+      "skillCount": 35
     },
     {
       "name": "skillsforge",
@@ -81,6 +116,11 @@
       "name": "secondsky-sap-skills",
       "displayName": "Secondsky Sap Skills",
       "skillCount": 32
+    },
+    {
+      "name": "aaronontheweb-dotnet-skills",
+      "displayName": "Aaronontheweb Dotnet Skills",
+      "skillCount": 31
     },
     {
       "name": "affaan-everything-claude",
@@ -105,6 +145,11 @@
     {
       "name": "mhattingpete-skills",
       "displayName": "Mhattingpete Skills",
+      "skillCount": 18
+    },
+    {
+      "name": "onmax-nuxt-skills",
+      "displayName": "Onmax Nuxt Skills",
       "skillCount": 18
     },
     {
@@ -148,9 +193,19 @@
       "skillCount": 10
     },
     {
+      "name": "interstellar-code-claud-skills",
+      "displayName": "Interstellar Code Claud Skills",
+      "skillCount": 10
+    },
+    {
       "name": "expo-skills",
       "displayName": "Expo Skills",
       "skillCount": 9
+    },
+    {
+      "name": "ahmedasmar-devops-skills",
+      "displayName": "Ahmedasmar Devops Skills",
+      "skillCount": 6
     },
     {
       "name": "anthropic-life-sciences",
@@ -248,13 +303,18 @@
       "skillCount": 0
     },
     {
+      "name": "behisecc-awesome-claude-skills",
+      "displayName": "Behisecc Awesome Claude Skills",
+      "skillCount": 0
+    },
+    {
       "name": "chat2anyllm-awesome-plugins",
       "displayName": "Chat2anyllm Awesome Plugins",
       "skillCount": 0
     },
     {
-      "name": "claude-market",
-      "displayName": "Claude Market",
+      "name": "chriswiles-claude-code-showcase",
+      "displayName": "Chriswiles Claude Code Showcase",
       "skillCount": 0
     },
     {
@@ -265,6 +325,11 @@
     {
       "name": "diet103-infrastructure",
       "displayName": "Diet103 Infrastructure",
+      "skillCount": 0
+    },
+    {
+      "name": "disler-hooks-mastery",
+      "displayName": "Disler Hooks Mastery",
       "skillCount": 0
     },
     {
@@ -288,8 +353,18 @@
       "skillCount": 0
     },
     {
-      "name": "netresearch-marketplace",
-      "displayName": "Netresearch Marketplace",
+      "name": "karanb192-awesome-claude-skills",
+      "displayName": "Karanb192 Awesome Claude Skills",
+      "skillCount": 0
+    },
+    {
+      "name": "lodetomasi-agents-claude-code",
+      "displayName": "Lodetomasi Agents Claude Code",
+      "skillCount": 0
+    },
+    {
+      "name": "mrgoonie-claudekit-skills",
+      "displayName": "Mrgoonie Claudekit Skills",
       "skillCount": 0
     },
     {
@@ -310,6 +385,11 @@
     {
       "name": "quemsah-awesome",
       "displayName": "Quemsah Awesome",
+      "skillCount": 0
+    },
+    {
+      "name": "rshah515-claude-code-subagents",
+      "displayName": "Rshah515 Claude Code Subagents",
       "skillCount": 0
     },
     {

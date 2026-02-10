@@ -1,6 +1,6 @@
 ---
 name: MCP Servers
-description: Configure and manage 9 MCP servers for browser testing, memory, databases, and structured reasoning.
+description: Configure and manage 12 MCP servers for browser testing, memory, databases, and structured reasoning.
 category: reference
 ---
 
@@ -8,7 +8,7 @@ category: reference
 
 Model Context Protocol servers extend Claude's capabilities with external tools.
 
-**Last Updated:** February 2026 (v2.3.3)
+**Last Updated:** February 2026 (v2.6.0)
 
 **See also:** [MCP Server Management Guide](../rules/tooling/mcp-servers.md) for lifecycle management.
 
@@ -39,6 +39,9 @@ MCP (Model Context Protocol) is a standard for connecting AI models to external 
 | chrome-devtools     | `@anthropic-ai/chrome-devtools-mcp`                | Chrome debugging/performance       | Disabled |
 | puppeteer           | `@modelcontextprotocol/server-puppeteer`           | Simple browser automation          | Disabled |
 | browserbase         | `@browserbase/mcp-server-browserbase`              | Cloud browser automation           | Disabled |
+| github              | `@modelcontextprotocol/server-github`              | GitHub API operations              | Disabled |
+| postgres            | `@crystaldba/postgres-mcp`                         | PostgreSQL read-only access        | Disabled |
+| git                 | `@modelcontextprotocol/server-git`                 | Git operations via MCP             | Disabled |
 
 ---
 
@@ -267,6 +270,67 @@ Take a screenshot of example.com
 ```
 Scrape product prices from 100 pages concurrently using Browserbase
 ```
+
+---
+
+### github
+
+**Purpose:** Full GitHub API access beyond the gh CLI.
+
+**When to use:**
+- PR reviews, commenting, and management
+- GitHub Actions workflow management
+- Repository operations (create, fork, manage)
+- Issue tracking and project management
+- Release management and tagging
+
+**Status:** Disabled by default.
+
+**Requirements:** GitHub personal access token. Set GITHUB_PERSONAL_ACCESS_TOKEN in environment.
+
+**Example:**
+
+
+
+---
+
+### postgres
+
+**Purpose:** Read-only PostgreSQL database access for schema introspection and query analysis.
+
+**When to use:**
+- Database schema exploration and documentation
+- Query performance analysis and tuning
+- Data exploration and ad-hoc queries
+- Migration planning and impact analysis
+
+**Status:** Disabled by default.
+
+**Requirements:** PostgreSQL connection string. Set POSTGRES_CONNECTION_STRING in environment.
+
+**Example:**
+
+
+
+---
+
+### git
+
+**Purpose:** Git operations via MCP protocol.
+
+**When to use:**
+- Repository cloning and initialization
+- Branch management and diffing
+- Commit history analysis
+- When built-in git tools are insufficient for complex operations
+
+**Status:** Disabled by default.
+
+**Requirements:** Git installed on system. No additional API keys needed.
+
+**Example:**
+
+
 
 ---
 
@@ -585,7 +649,6 @@ These are commonly used but not currently installed:
 
 | Server       | Package                                     | Purpose                       |
 | ------------ | ------------------------------------------- | ----------------------------- |
-| github       | `@modelcontextprotocol/server-github`       | GitHub API (requires token)   |
 | fetch        | `@modelcontextprotocol/server-fetch`        | Web fetching                  |
 | brave-search | `@modelcontextprotocol/server-brave-search` | Web search (requires API key) |
 | slack        | `@modelcontextprotocol/server-slack`        | Slack integration             |

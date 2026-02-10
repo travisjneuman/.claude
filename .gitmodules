@@ -183,12 +183,6 @@
 [submodule "plugins/marketplaces/EveryInc-compound"]
 	path = plugins/marketplaces/EveryInc-compound
 	url = https://github.com/EveryInc/compound-engineering-plugin.git
-[submodule "plugins/marketplaces/claude-market"]
-	path = plugins/marketplaces/claude-market
-	url = https://github.com/claude-market/marketplace.git
-[submodule "plugins/marketplaces/netresearch-marketplace"]
-	path = plugins/marketplaces/netresearch-marketplace
-	url = https://github.com/netresearch/claude-code-marketplace.git
 [submodule "plugins/marketplaces/DustyWalker-marketplace"]
 	path = plugins/marketplaces/DustyWalker-marketplace
 	url = https://github.com/DustyWalker/claude-code-marketplace.git
@@ -207,9 +201,84 @@
 [submodule "plugins/marketplaces/hesreallyhim-awesome"]
 	path = plugins/marketplaces/hesreallyhim-awesome
 	url = https://github.com/hesreallyhim/awesome-claude-code.git
+	ignore = all
 [submodule "plugins/marketplaces/travisvn-awesome"]
 	path = plugins/marketplaces/travisvn-awesome
 	url = https://github.com/travisvn/awesome-claude-skills.git
+	ignore = all
 [submodule "plugins/marketplaces/quemsah-awesome"]
 	path = plugins/marketplaces/quemsah-awesome
 	url = https://github.com/quemsah/awesome-claude-plugins.git
+	ignore = all
+[submodule "plugins/marketplaces/aaronontheweb-dotnet-skills"]
+	path = plugins/marketplaces/aaronontheweb-dotnet-skills
+	url = https://github.com/Aaronontheweb/dotnet-skills.git
+	ignore = all
+[submodule "plugins/marketplaces/behisecc-awesome-claude-skills"]
+	path = plugins/marketplaces/behisecc-awesome-claude-skills
+	url = https://github.com/BehiSecc/awesome-claude-skills.git
+	ignore = all
+[submodule "plugins/marketplaces/karanb192-awesome-claude-skills"]
+	path = plugins/marketplaces/karanb192-awesome-claude-skills
+	url = https://github.com/karanb192/awesome-claude-skills.git
+	ignore = all
+[submodule "plugins/marketplaces/levnikolaevich-claude-code-skills"]
+	path = plugins/marketplaces/levnikolaevich-claude-code-skills
+	url = https://github.com/levnikolaevich/claude-code-skills.git
+	ignore = all
+[submodule "plugins/marketplaces/giuseppe-developer-kit"]
+	path = plugins/marketplaces/giuseppe-developer-kit
+	url = https://github.com/giuseppe-trisciuoglio/developer-kit.git
+	ignore = all
+[submodule "plugins/marketplaces/rohitg00-claude-code-toolkit"]
+	path = plugins/marketplaces/rohitg00-claude-code-toolkit
+	url = https://github.com/rohitg00/awesome-claude-code-toolkit.git
+	ignore = all
+[submodule "plugins/marketplaces/disler-hooks-mastery"]
+	path = plugins/marketplaces/disler-hooks-mastery
+	url = https://github.com/disler/claude-code-hooks-mastery.git
+	ignore = all
+[submodule "plugins/marketplaces/rshah515-claude-code-subagents"]
+	path = plugins/marketplaces/rshah515-claude-code-subagents
+	url = https://github.com/rshah515/claude-code-subagents.git
+	ignore = all
+[submodule "plugins/marketplaces/manutej-luxor-marketplace"]
+	path = plugins/marketplaces/manutej-luxor-marketplace
+	url = https://github.com/manutej/luxor-claude-marketplace.git
+	ignore = all
+[submodule "plugins/marketplaces/jeffallan-claude-skills"]
+	path = plugins/marketplaces/jeffallan-claude-skills
+	url = https://github.com/Jeffallan/claude-skills.git
+	ignore = all
+[submodule "plugins/marketplaces/lodetomasi-agents-claude-code"]
+	path = plugins/marketplaces/lodetomasi-agents-claude-code
+	url = https://github.com/lodetomasi/agents-claude-code.git
+	ignore = all
+[submodule "plugins/marketplaces/ahmedasmar-devops-skills"]
+	path = plugins/marketplaces/ahmedasmar-devops-skills
+	url = https://github.com/ahmedasmar/devops-claude-skills.git
+	ignore = all
+[submodule "plugins/marketplaces/mrgoonie-claudekit-skills"]
+	path = plugins/marketplaces/mrgoonie-claudekit-skills
+	url = https://github.com/mrgoonie/claudekit-skills.git
+	ignore = all
+[submodule "plugins/marketplaces/chriswiles-claude-code-showcase"]
+	path = plugins/marketplaces/chriswiles-claude-code-showcase
+	url = https://github.com/ChrisWiles/claude-code-showcase.git
+	ignore = all
+[submodule "plugins/marketplaces/onmax-nuxt-skills"]
+	path = plugins/marketplaces/onmax-nuxt-skills
+	url = https://github.com/onmax/nuxt-skills.git
+	ignore = all
+[submodule "plugins/marketplaces/interstellar-code-claud-skills"]
+	path = plugins/marketplaces/interstellar-code-claud-skills
+	url = https://github.com/Interstellar-code/claud-skills.git
+	ignore = all
+[submodule "plugins/marketplaces/actionbook-rust-skills"]
+	path = plugins/marketplaces/actionbook-rust-skills
+	url = https://github.com/actionbook/rust-skills.git
+	ignore = all
+[submodule "plugins/marketplaces/zircote-dot-claude"]
+	path = plugins/marketplaces/zircote-dot-claude
+	url = https://github.com/zircote/.claude.git
+	ignore = all
