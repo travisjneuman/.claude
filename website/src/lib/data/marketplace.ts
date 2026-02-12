@@ -111,6 +111,30 @@ export function getMarketplaceStats(): {
   };
 }
 
+// Directories to exclude when counting SKILL.md files.
+// Must match the EXCLUDE_SKILL_DIRS array in scripts/update-counts.sh.
+const EXCLUDE_SKILL_DIRS = new Set([
+  "backups",
+  "backup",
+  "tests",
+  "test",
+  "examples",
+  "example",
+  "docs",
+  "workspace",
+  "lab",
+  "archive",
+  "archived",
+  "deprecated",
+  "draft",
+  "drafts",
+  "planned-skills",
+  "planned",
+  "templates",
+  "template",
+  "node_modules",
+]);
+
 function countSkillFiles(dir: string): number {
   let count = 0;
   const entries = fs.readdirSync(dir, { withFileTypes: true });
@@ -119,7 +143,7 @@ function countSkillFiles(dir: string): number {
     if (
       entry.isDirectory() &&
       !entry.name.startsWith(".") &&
-      entry.name !== "node_modules"
+      !EXCLUDE_SKILL_DIRS.has(entry.name.toLowerCase())
     ) {
       count += countSkillFiles(path.join(dir, entry.name));
     } else if (entry.name === "SKILL.md") {

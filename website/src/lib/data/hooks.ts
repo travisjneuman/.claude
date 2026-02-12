@@ -41,17 +41,23 @@ const HOOK_METADATA: Record<
     description:
       "Blocks dangerous commands like rm -rf /, git push --force, DROP TABLE.",
   },
-  "pre-commit-counts": {
+  "pre-write-validate": {
+    event: "PreToolUse",
+    matcher: "Write|Edit",
+    description:
+      "Validates file paths before Claude writes or edits them, blocking writes to sensitive files like .env and credentials.",
+  },
+  "secret-scan": {
     event: "PreToolUse",
     matcher: "Bash",
     description:
-      "Runs update-counts.sh before git commit to keep documentation accurate.",
+      "Scans for potential secrets or credentials before allowing shell commands.",
   },
-  "format-code": {
+  "post-edit-lint": {
     event: "PostToolUse",
     matcher: "Write|Edit",
     description:
-      "Auto-formats files after Claude writes or edits them using Prettier or Ruff.",
+      "Runs lint checks after Claude writes or edits files to catch formatting issues.",
   },
   "session-stop-summary": {
     event: "Stop",
@@ -76,8 +82,12 @@ export function getHooks(): Hook[] {
 
   for (const file of files) {
     const slug = file.replace(".sh", "");
-    const raw = fs.readFileSync(path.join(hooksDir, file), "utf-8");
     const meta = HOOK_METADATA[slug];
+
+    // Skip hooks without metadata (deregistered or inactive)
+    if (!meta) continue;
+
+    const raw = fs.readFileSync(path.join(hooksDir, file), "utf-8");
 
     // Build markdown content from the script with syntax highlighting
     const markdownContent = [
