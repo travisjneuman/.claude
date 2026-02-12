@@ -16,21 +16,21 @@
 
 [![Opus 4.6](https://img.shields.io/badge/Optimized_for_Opus_4.6-d946ef?style=for-the-badge&logo=anthropic&logoColor=white)](https://www.anthropic.com/news/claude-opus-4-6)
 [![Claude Code](https://img.shields.io/badge/Claude_Code-6366f1?style=for-the-badge&logo=anthropic&logoColor=white)](https://docs.anthropic.com/en/docs/claude-code)
-[![v2.7.1](https://img.shields.io/badge/v2.7.1-feb_2026-1a1a2e?style=for-the-badge&logo=semver&logoColor=white)](./CHANGELOG.md)
+[![v2.7.2](https://img.shields.io/badge/v2.7.2-feb_2026-1a1a2e?style=for-the-badge&logo=semver&logoColor=white)](./CHANGELOG.md)
 
 <!-- Primary Resource Badges -->
 
-[![Skills](https://img.shields.io/badge/Skills-119-10b981?style=for-the-badge&logo=sparkles&logoColor=white)](./skills/MASTER_INDEX.md)
-[![Agents](https://img.shields.io/badge/Agents-59-f59e0b?style=for-the-badge&logo=dependabot&logoColor=white)](./agents/README.md)
-[![Commands](https://img.shields.io/badge/Commands-30-a855f7?style=for-the-badge&logo=windowsterminal&logoColor=white)](./commands/README.md)
+[![Skills](https://img.shields.io/badge/Skills-116-10b981?style=for-the-badge&logo=sparkles&logoColor=white)](./skills/MASTER_INDEX.md)
+[![Agents](https://img.shields.io/badge/Agents-60-f59e0b?style=for-the-badge&logo=dependabot&logoColor=white)](./agents/README.md)
+[![Commands](https://img.shields.io/badge/Commands-31-a855f7?style=for-the-badge&logo=windowsterminal&logoColor=white)](./commands/README.md)
 [![Marketplaces](https://img.shields.io/badge/Marketplaces-84-3b82f6?style=for-the-badge&logo=homeassistantcommunitystore&logoColor=white)](./docs/MARKETPLACE-GUIDE.md)
 [![Marketplace Skills](https://img.shields.io/badge/Marketplace_Skills-5400+-ec4899?style=for-the-badge&logo=stackblitz&logoColor=white)](./plugins/marketplaces/)
 
 <!-- Secondary Resource Badges -->
 
 [![Hooks](https://img.shields.io/badge/Hooks-10-06b6d4?style=for-the-badge&logo=webhook&logoColor=white)](./hooks/README.md)
-[![Rules](https://img.shields.io/badge/Rules-30-22d3ee?style=for-the-badge&logo=shield&logoColor=white)](./rules/README.md)
-[![Templates](https://img.shields.io/badge/Templates-17-84cc16?style=for-the-badge&logo=files&logoColor=white)](./templates/README.md)
+[![Rules](https://img.shields.io/badge/Rules-4_(+27_ref)-22d3ee?style=for-the-badge&logo=shield&logoColor=white)](./rules/README.md)
+[![Templates](https://img.shields.io/badge/Templates-15-84cc16?style=for-the-badge&logo=files&logoColor=white)](./templates/README.md)
 [![MCP Servers](https://img.shields.io/badge/MCP_Servers-12-f97316?style=for-the-badge&logo=server&logoColor=white)](./docs/MCP-SERVERS.md)
 [![Platform](https://img.shields.io/badge/macOS_|_Linux_|_Windows-333333?style=for-the-badge&logo=apple&logoColor=white)](./docs/SETUP-GUIDE.md)
 
@@ -43,11 +43,11 @@
 
 <br/>
 
-**Version 2.7.1** · **Last Updated: February 9, 2026** · **Author: [Travis Neuman](https://travisjneuman.com)** · **Live: [claude.travisjneuman.com](https://claude.travisjneuman.com)**
+**Version 2.7.2** · **Last Updated: February 11, 2026** · **Author: [Travis Neuman](https://travisjneuman.com)** · **Live: [claude.travisjneuman.com](https://claude.travisjneuman.com)**
 
 <br/>
 
-> _One `git clone` gives you 119 skills, 59 specialist agents, 84 community marketplaces with 5,400+ additional skills, 30 slash commands, 10 lifecycle hooks, and 12 MCP server configs — all auto-activating based on what you're working on. No manual setup required._
+> _One `git clone` gives you 116 skills, 60 specialist agents, 84 community marketplaces with 5,400+ additional skills, 31 slash commands, 10 lifecycle hooks, and 12 MCP server configs — all auto-activating based on what you're working on. No manual setup required._
 
 </div>
 
@@ -78,7 +78,7 @@
 
 ### 📚 Complete References
 
-- [🎓 Complete Skills Reference (119 Skills)](#-complete-skills-reference-119-skills)
+- [🎓 Complete Skills Reference (116 Skills)](#-complete-skills-reference-116-skills)
 - [🤖 Complete Agents Reference (59 Agents)](#-complete-agents-reference-59-agents)
 - [🏪 Complete Marketplaces Reference (84 Marketplaces)](#-complete-marketplaces-reference-84-marketplaces)
 
@@ -124,12 +124,12 @@ The **Ultimate Claude Code Toolkit** transforms [Claude Code](https://docs.anthr
 
 |      Component      | Count  | Description                                                                                                                                                                                 |
 | :-----------------: | :----: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-|    🎓 **Skills**    | **119** | Domain expertise modules covering iOS, Android, React, Vue, Svelte, DevOps, AI/ML, scientific computing, business strategy, and more                                                        |
-|    🤖 **Agents**    | **59** | Specialized AI subagents for deep expertise in code review, security auditing, architecture analysis, platform development, and creative work                                               |
-| 🏪 **Marketplaces** | **84** | External repositories containing **5,800+** additional skills from the community                                                                                                            |
-|   ⌨️ **Commands**   | **30** | Custom slash commands for task routing, skill discovery, deployment, testing, scaffolding, and workflow automation                                                                           |
-|    📋 **Rules**     | **30** | Contextual guidelines for 10 tech stacks, 10 checklists, 5 workflows, and tooling references                                                                                               |
-|    🪝 **Hooks**     | **10** | Claude Code lifecycle hooks (session-start, prompt-context, formatting, secret scanning, path validation, auto-lint, guard-dangerous, and more)                                             |
+|    🎓 **Skills**    | **116** | Domain expertise modules covering iOS, Android, React, Vue, Svelte, DevOps, AI/ML, scientific computing, business strategy, and more                                                        |
+|    🤖 **Agents**    | **60** | Specialized AI subagents for deep expertise in code review, security auditing, architecture analysis, platform development, and creative work                                               |
+| 🏪 **Marketplaces** | **84** | External repositories containing **5,400+** additional skills from the community                                                                                                            |
+|   ⌨️ **Commands**   | **31** | Custom slash commands for task routing, skill discovery, deployment, testing, scaffolding, and workflow automation                                                                           |
+|    📋 **Rules**     | **4** | Always-loaded compact rules, plus **27** on-demand reference guides in `docs/reference/`                                                                                                     |
+|    🪝 **Hooks**     | **6** | Claude Code lifecycle hooks (session-start, session-stop, prompt-context, guard-dangerous, pre-write-validate, and session summary)                                                          |
 
 ### 🚀 Full SaaS Lifecycle Coverage (NEW in v2.3.3)
 
@@ -224,15 +224,27 @@ The **Ultimate Claude Code Toolkit** transforms [Claude Code](https://docs.anthr
 | :--- | :--- | :--- |
 | 🧠 **Opus 4.6 Integration** | Updated toolkit for adaptive thinking, agent teams, and 1M context | New [OPUS-4-6-GUIDE.md](docs/OPUS-4-6-GUIDE.md) with feature guide |
 | 🎓 **16 New Skills** | LLM app dev, auth patterns, payment integration, monitoring, serverless, and more | Covers the full SaaS lifecycle from auth to analytics |
-| 🤖 **13 New Agents** | Auth, payments, Next.js, SEO, email, cloud, analytics, Rust, Go, Flutter specialists | Total: 59 agents covering every major domain |
+| 🤖 **13 New Agents** | Auth, payments, Next.js, SEO, email, cloud, analytics, Rust, Go, Flutter specialists | Domain-specific agents for every major technology stack |
 | 📚 **5 New Stack Guides** | Django/FastAPI, React Native/Expo, Flutter/Dart, Vue/Nuxt, Svelte/SvelteKit | Plus updates to all 5 existing stack guides |
 | ⌨️ **7 New Commands** | `/deploy`, `/test-suite`, `/scaffold`, `/security-scan`, `/deps-update`, `/perf-audit`, `/migrate` | Full lifecycle automation from scaffolding to deployment |
 | 📋 **4 New Checklists** | API development, database design, security hardening, performance optimization | Plus deployment CI/CD workflow guide |
 | 📄 **4 Project Templates** | SaaS, mobile app, API-only, and landing page project starters | Production-ready scaffolds with auth, payments, and analytics |
-| 🔒 **Enhanced Hooks** | Secret scanning hook, expanded guard-dangerous patterns, Go/Rust/Shell formatting | 11 dangerous patterns blocked, multi-language formatting |
 | 🔄 **Self-Updating Counts** | Enhanced `update-counts.sh` tracks all component types with badge/diagram sync | Skills, agents, commands, hooks, rules, and templates |
 
-**Result:** The toolkit now covers the complete SaaS development lifecycle — from authentication and payments to monitoring and deployment — with 119 skills, 59 agents, 30 commands, 10 hooks, and 30 rules files. See [CHANGELOG.md](CHANGELOG.md) for complete details.
+### 🆕 What's New in v2.7.2 (February 2026)
+
+**Context Optimization & Hook Cleanup:** Dramatically reduced system prompt bloat and eliminated hook overhead for faster, more reliable sessions.
+
+| Feature | Description | Details |
+| :--- | :--- | :--- |
+| 📉 **Context Reduction** | Moved 27 domain-specific files from `rules/` (always-loaded) to `docs/reference/` (on-demand) | System prompt reduced from 31 auto-loaded files to just 4 compact rules |
+| 🔄 **On-Demand Loading** | Reference guides load automatically via CLAUDE.md Auto-Routing table when relevant | Stack guides, checklists, and workflow docs load only when the prompt matches |
+| ⚡ **Hook Optimization** | Removed 4 high-overhead hooks (format-code, secret-scan, post-edit-lint, pre-commit-counts) | Per-edit process spawns reduced from ~18 to ~6; only safety hooks remain |
+| 🔧 **Settings Consolidation** | Merged `settings.local.json` into `settings.json`, eliminated conflicts | Single source of truth for all Claude Code settings |
+| 🛡️ **Safety Preserved** | Guard-dangerous and pre-write-validate hooks remain active | Blocks `rm -rf`, force push, credential file writes, and other dangerous operations |
+| 📊 **Updated Counts** | 116 skills, 59 agents, 31 commands, 6 hooks, 4 rules + 27 reference guides | All counts verified against filesystem and synced across documentation |
+
+**Result:** Sessions start faster, auto-compact errors eliminated, and context window stays focused on the actual task. All capabilities preserved via on-demand loading. See [CHANGELOG.md](CHANGELOG.md) for complete details.
 
 ---
 
@@ -256,7 +268,7 @@ The **Ultimate Claude Code Toolkit** transforms [Claude Code](https://docs.anthr
 | 🔁 "I repeat the same instructions every time" | 🎓 Skills auto-load domain expertise when context matches                       |
 | 📂 "Complex projects get disorganized"         | 📈 GSD system tracks multi-phase projects across sessions                       |
 | 🔓 "I forget to check for security issues"     | 🔒 Git hooks auto-block secrets, security-auditor agent catches vulnerabilities |
-| 🤔 "Each task requires different expertise"    | 🤖 59 specialized agents spawn for deep work automatically                      |
+| 🤔 "Each task requires different expertise"    | 🤖 60 specialized agents spawn for deep work automatically                      |
 | ❓ "I don't know what tools are available"     | 🎯 Universal router detects domains and loads relevant resources                |
 | 📝 "Claude gives generic advice"               | 🏪 5,400+ marketplace skills provide production-tested patterns                 |
 
@@ -283,7 +295,7 @@ The **Ultimate Claude Code Toolkit** transforms [Claude Code](https://docs.anthr
 | :--------------------- | :------------------------------------------------------------------- |
 | 🤖 **Claude Code CLI** | [Installation guide](https://docs.anthropic.com/en/docs/claude-code) |
 | 🔀 **Git**             | For submodule management                                             |
-| 📦 **Node.js**         | For Prettier formatting hooks                                        |
+| 📦 **Node.js**         | For hook runner and Claude Code CLI                                  |
 | 💻 **Command Line**    | Basic familiarity                                                    |
 
 ---
@@ -306,7 +318,7 @@ The **Ultimate Claude Code Toolkit** transforms [Claude Code](https://docs.anthr
                               ▼
 ┌─────────────┬───────────────┬──────────────┬─────────────────────────────┐
 │  🎓 SKILLS  │  🤖 AGENTS    │  📋 RULES    │  ⌨️ COMMANDS                 │
-│ 119 modules │  59 specialists│  30 guides  │  30 slash commands           │
+│ 116 modules │  60 specialists│  4+27 ref   │  31 slash commands           │
 │             │               │              │                              │
 │  Loaded on  │  Spawned for  │  Stack &     │  /start-task                 │
 │  demand by  │  deep work    │  checklist   │  /auto-claude                │
@@ -319,10 +331,10 @@ The **Ultimate Claude Code Toolkit** transforms [Claude Code](https://docs.anthr
 │  Auto-discovered · Read-only · Updated via _pull-all-repos.sh            │
 │                                                                           │
 ├───────────────────────────────────────────────────────────────────────────┤
-│  🪝 10 HOOKS         │  🔌 12 MCP SERVERS     │  📁 17 TEMPLATES         │
+│  🪝 6 HOOKS          │  🔌 12 MCP SERVERS     │  📁 15 TEMPLATES         │
 │  Lifecycle automation │  Extended capabilities  │  Creation scaffolds     │
-│  (session, commit,    │  (thinking, browser,    │  (skills, agents,       │
-│   formatting)         │   memory, database)     │   commands, tasks)      │
+│  (session, safety,    │  (thinking, browser,    │  (skills, agents,       │
+│   context injection)  │   memory, database)     │   commands, tasks)      │
 └───────────────────────┴────────────────────────┴─────────────────────────┘
 ```
 
@@ -414,9 +426,10 @@ See: docs/AUTO-CLAUDE-GUIDE.md
 
 ⚡ Claude Code hooks enforce:
 ├── 🛡️ PreToolUse: Block dangerous commands (rm -rf /, format c:)
-├── ✨ PostToolUse: Auto-run Prettier on Write/Edit
-├── 📣 Stop: Send notification when awaiting input
-└── 📊 SessionStart: Display toolkit status
+├── 🛡️ PreToolUse: Validate file paths on Write/Edit (block .env, credentials)
+├── 📊 SessionStart: Pull repos + load previous session context
+├── 📣 Stop: Save session summary for continuity
+└── 📝 UserPromptSubmit: Inject git context into prompts
 ```
 
 ---
@@ -977,7 +990,7 @@ All external repos in `~/.claude/plugins/marketplaces/`:
 | `awesome-claude-skills`    | ComposioHQ/awesome-claude-skills   | Community skills collection                       |
 | `skill-seekers`            | yusufkaraaslan/Skill_Seekers       | Skill discovery                                   |
 | `claude-scientific-skills` | K-Dense-AI/...                     | Scientific computing skills                       |
-| + 10 more                  | Various                            | Community marketplaces                            |
+| + 73 more                  | Various                            | Community marketplaces & skills collections       |
 
 ### 🔧 Troubleshooting Multi-Machine Setup
 
@@ -1051,11 +1064,12 @@ bash ~/.claude/scripts/setup-new-machine.sh
 | :------------------------------- | :-------------------------------- |
 | `CLAUDE.md`                      | `plugins/known_marketplaces.json` |
 | `settings.json`                  | `plugins/installed_plugins.json`  |
-| `rules/`, `skills/`, `commands/` | `plugins/cache/`                  |
-| `.gitmodules`                    | Submodule working directories     |
-| `scripts/`                       | Claude Code's internal state      |
+| `rules/`, `docs/reference/`     | `plugins/cache/`                  |
+| `skills/`, `commands/`, `agents/`| `.env.local` (machine-specific)   |
+| `.gitmodules`, `scripts/`        | Submodule working directories     |
+| `hooks/`, `templates/`           | Claude Code's internal state      |
 
-**Key insight:** Your repo tracks the **configuration** (settings.json, .gitmodules), but each machine must **initialize** the submodules and **register** marketplaces with Claude Code locally.
+**Key insight:** Your repo tracks **configuration and content** (settings.json, .gitmodules, rules/, docs/reference/, skills/), but each machine must **initialize** the submodules and **register** marketplaces with Claude Code locally. Machine-specific files like `.env.local` and `plugins/known_marketplaces.json` are gitignored.
 
 ---
 
@@ -1112,8 +1126,8 @@ bash ~/.claude/scripts/setup-new-machine.sh
 │                                                                              │
 │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐         │
 │  │ 🎓 SKILLS   │  │ 🤖 AGENTS   │  │ 📋 RULES    │  │ 🏪 MARKET-  │         │
-│  │ 119 local   │  │ 59 experts  │  │  Checklists │  │   PLACES    │         │
-│  │             │  │  (Task tool)│  │  & stacks   │  │ 5,400+ more │         │
+│  │ 116 local   │  │ 60 experts  │  │  Checklists │  │   PLACES    │         │
+│  │             │  │  (Task tool)│  │  & guides   │  │ 5,400+ more │         │
 │  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘         │
 └─────────────────────────────────┬───────────────────────────────────────────┘
                                   │
@@ -1146,19 +1160,22 @@ bash ~/.claude/scripts/setup-new-machine.sh
 ├── 📜 CLAUDE.md (Constitution)
 │   └── Always loaded, references other files contextually
 │
-├── 🎓 skills/ (119 skills)
+├── 🎓 skills/ (116 skills)
 │   └── Loaded when domain context matches
 │
 ├── 🤖 agents/ (59 agents)
 │   └── Spawned via Task tool for deep expertise
 │
-├── ⌨️ commands/ (30+ commands)
+├── ⌨️ commands/ (31 commands)
 │   └── Invoked explicitly via /command-name
 │
-├── 📋 rules/ (contextual guidelines)
-│   ├── 📝 checklists/ (task-type specific)
-│   ├── 🛠️ stacks/ (technology-specific)
-│   └── 🔧 tooling/ (setup guides)
+├── 📋 rules/ (4 always-loaded files)
+│   ├── ✅ verification-template.md
+│   ├── 🎨 ui-visual-changes.md
+│   └── 🔄 context-management.md
+│
+├── 📚 docs/reference/ (27 on-demand guides)
+│   └── Loaded via Auto-Routing when prompt matches
 │
 ├── 🏪 plugins/marketplaces/ (84 repos, 5,400+ skills)
 │   └── Searched when local skills insufficient
@@ -1179,7 +1196,7 @@ bash ~/.claude/scripts/setup-new-machine.sh
 
 2. **🎯 Loaded on Domain Match**
    - Relevant skill(s) from `skills/`
-   - Relevant rule(s) from `rules/`
+   - Relevant rule(s) from `rules/` or `docs/reference/`
 
 3. **📝 Loaded on Request**
    - Specific agent via Task tool
@@ -1229,7 +1246,7 @@ The toolkit is architected around a fundamental constraint: **Claude Code's cont
 │  └──────────────────────────────────────────────────────────────────────┘   │
 │                                                                              │
 │  ┌──────────────────────────────────────────────────────────────────────┐   │
-│  │ LOADED SKILLS (0-119 skills × 500-1500 each)               ████████    │   │
+│  │ LOADED SKILLS (0-116 skills × 500-1500 each)               ████████    │   │
 │  └──────────────────────────────────────────────────────────────────────┘   │
 │                                                                              │
 │  ┌──────────────────────────────────────────────────────────────────────┐   │
@@ -1309,12 +1326,12 @@ Available for work:         190,800 tokens
 ```
 CLAUDE.md:                    1,100 tokens
 settings.json:                  500 tokens
-All 119 skills loaded:        66,200 tokens  ❌ Never do this!
-All 59 agents defined:       16,500 tokens
+All 116 skills loaded:        64,500 tokens  ❌ Never do this!
+All 59 agents defined:       16,520 tokens
 All MCP servers:              8,400 tokens
 ────────────────────────────────────────────
-TOTAL CONTEXT COST:          79,750 tokens  🚫 UNACCEPTABLE
-Available for work:         120,250 tokens
+TOTAL CONTEXT COST:          79,400 tokens  🚫 UNACCEPTABLE
+Available for work:         120,600 tokens
 ```
 
 ### 🔄 Component Interaction Flow
@@ -1417,7 +1434,7 @@ Available for work:         120,250 tokens
 │  │    → Load: rules/checklists/ui-visual-changes.md                         │ │
 │  │                                                                          │ │
 │  │  - React + TypeScript stack                                              │ │
-│  │    → Load: rules/stacks/react-typescript.md                              │ │
+│  │    → Load: docs/reference/stacks/react-typescript.md                              │ │
 │  │                                                                          │ │
 │  │  TOTAL RULE COST:                  1,100 tokens                          │ │
 │  └─────────────────────────────────────────────────────────────────────────┘ │
@@ -1452,11 +1469,6 @@ Available for work:         120,250 tokens
                                  ▼
 ┌──────────────────────────────────────────────────────────────────────────────┐
 │                     6️⃣ POST-WORK AUTOMATION                                   │
-│                                                                               │
-│  ┌─────────────────────────────────────────────────────────────────────────┐ │
-│  │  ✨ POSTTOOLUSE HOOK (after each Write/Edit)                             │ │
-│  │  → Run Prettier formatting                                               │ │
-│  └─────────────────────────────────────────────────────────────────────────┘ │
 │                                                                               │
 │  ┌─────────────────────────────────────────────────────────────────────────┐ │
 │  │  🔍 AUTO CODE REVIEW (after significant work)                            │ │
@@ -1888,11 +1900,11 @@ PreToolUse("Bash") → Check command safety → If dangerous, BLOCK
                                           Claude informed
                                           User sees error
 
-PostToolUse("Write") → Run Prettier → Format file
-                                           │
-                                           ▼
-                                    File formatted
-                                    Claude continues
+PreToolUse("Write") → Validate file path → If sensitive, BLOCK
+                                                    │
+                                                    ▼
+                                          Path validated
+                                          Write proceeds
 ```
 
 ### 🏗️ Permission System Architecture
@@ -2030,7 +2042,7 @@ PostToolUse("Write") → Run Prettier → Format file
 ├── ⚙️ settings.json                      # Claude Code settings & hooks
 ├── 🔌 .mcp.json                          # MCP server definitions
 │
-├── 🎓 skills/                            # 119 domain expertise modules
+├── 🎓 skills/                            # 116 domain expertise modules
 │   ├── 📑 MASTER_INDEX.md                # Complete skill navigation
 │   ├── 📖 README.md                      # Skills usage guide
 │   ├── 👔 EXPERT-SKILLS-GUIDE.md         # 16 domain expert skills
@@ -2118,7 +2130,7 @@ PostToolUse("Write") → Run Prettier → Format file
 │   ├── 📈 seo-analytics-auditor/SKILL.md
 │   └── 📄 document-skills/SKILL.md       # Office formats
 │
-├── 🤖 agents/                            # 59 specialized AI subagents
+├── 🤖 agents/                            # 60 specialized AI subagents
 │   ├── 📖 README.md                      # Agent usage guide
 │   │
 │   │ ─── ✅ CODE QUALITY ───
@@ -2190,30 +2202,36 @@ PostToolUse("Write") → Run Prettier → Format file
 │       ├── 🧠 decision-frameworks.md     # 6 decision frameworks
 │       └── 📊 routing-logic.md           # Complexity scoring
 │
-├── 📋 rules/                             # Contextual guidelines
+├── 📋 rules/                             # Always-loaded context (4 files)
 │   ├── 📖 README.md                      # Rules index
-│   ├── ✅ checklists/                    # Task-type specific
-│   │   ├── 🎨 ui-visual-changes.md       # Visual/UI work
-│   │   ├── 🤖 automation-scripts.md      # Scripts, automation
-│   │   └── 🌐 static-sites.md            # HTML/CSS/JS sites
-│   ├── 🛠️ stacks/                        # Technology-specific
-│   │   ├── ⚛️ react-typescript.md        # React + TypeScript
-│   │   ├── 🔧 fullstack-nextjs-nestjs.md # Full-stack patterns
-│   │   ├── 🐍 python.md                  # Python projects
-│   │   ├── 🐹 go.md                      # Go projects
-│   │   └── 🦀 rust.md                    # Rust projects
-│   └── 🔧 tooling/                       # Tool setup guides
-│       ├── 🪝 git-hooks-setup.md         # Git hook configuration
-│       ├── 🔌 mcp-servers.md             # MCP lifecycle management
-│       ├── 📦 external-repos.md          # Marketplace updates
-│       └── 🔧 troubleshooting.md         # Common issue fixes
+│   ├── ✅ checklists/verification-template.md  # Task completion verification
+│   ├── 🎨 checklists/ui-visual-changes.md     # Visual/UI work + aesthetics guide
+│   └── 🔄 workflows/context-management.md     # Context window management
 │
 ├── 📚 docs/                              # Extended documentation
 │   ├── 🔄 WORKFLOW-GUIDE.md              # Workflow patterns
 │   ├── 🏪 MARKETPLACE-GUIDE.md           # Marketplace reference
 │   ├── 📈 GSD-TUTORIAL.md                # GSD system guide
 │   ├── 🎯 DOMAIN-ROUTING.md              # Routing internals
-│   └── 🔌 MCP-SERVERS.md                 # MCP server details
+│   ├── 🔌 MCP-SERVERS.md                 # MCP server details
+│   └── 📋 reference/                     # 27 on-demand guides (loaded via Auto-Routing)
+│       ├── ✅ checklists/                # 8 domain-specific checklists
+│       │   ├── api-development.md, database-design.md
+│       │   ├── security-hardening.md, performance-optimization.md
+│       │   ├── automation-scripts.md, static-sites.md
+│       │   ├── mobile-app-deployment.md, monitoring-alerting-design.md
+│       ├── 🛠️ stacks/                    # 10 technology stack guides
+│       │   ├── react-typescript.md, python.md, go.md, rust.md
+│       │   ├── django-fastapi.md, flutter-dart.md, vue-nuxt.md
+│       │   ├── svelte-sveltekit.md, fullstack-nextjs-nestjs.md
+│       │   └── react-native-expo.md
+│       ├── 🔄 workflows/                 # 5 workflow guides
+│       │   ├── research-methodology.md, deployment-cicd.md
+│       │   ├── agent-teams.md, action-policy.md
+│       │   └── post-change-documentation.md
+│       └── 🔧 tooling/                   # 4 tool setup guides
+│           ├── mcp-servers.md, troubleshooting.md
+│           ├── git-hooks-setup.md, external-repos.md
 │
 ├── 🏪 plugins/                           # Plugin system
 │   ├── 📁 local/                         # Custom local plugins
@@ -2294,17 +2312,17 @@ The main Claude Code configuration file:
   },
 
   "hooks": {
-    "SessionStart": [...],   // 📊 Display toolkit status
-    "Stop": [...],           // 📣 Notification when awaiting input
-    "PreToolUse": [...],     // 🛡️ Block dangerous commands
-    "PostToolUse": [...],    // ✨ Auto-format with Prettier
-    "Notification": [...]    // 📝 Session logging
+    "SessionStart": [...],     // 🔄 Pull repos + load previous context
+    "Stop": [...],             // 💾 Save session summary
+    "UserPromptSubmit": [...], // 📋 Inject git context
+    "PreToolUse": [...]        // 🛡️ Guard dangerous commands + validate file paths
   },
 
   "enableAllProjectMcpServers": false,
   "disabledMcpjsonServers": [
     "sequential-thinking", "playwright", "memory",
-    "filesystem", "sqlite", "chrome-devtools", "puppeteer"
+    "filesystem", "sqlite", "context7", "chrome-devtools",
+    "puppeteer", "browserbase", "github", "postgres", "git"
   ],
 
   "enabledPlugins": {
@@ -2315,7 +2333,8 @@ The main Claude Code configuration file:
     "taches-cc-resources@taches-cc-resources": true
   },
 
-  "alwaysThinkingEnabled": true,
+  "alwaysThinkingEnabled": false,
+  "effortLevel": "medium",
   "spinnerTipsEnabled": false
 }
 ```
@@ -2334,12 +2353,12 @@ Core rules loaded every session (~1,100 tokens):
 | 📏 **Code Standards**     | Strict types, function limits, DRY after 3 repetitions   |
 | 🔀 **Git Safety**         | Never force-push, never commit secrets                   |
 | ⛔ **Anti-Patterns**      | Using `any`, `innerHTML`, proposing unread code changes  |
-| 📂 **Load When Relevant** | 14 contextual file triggers                              |
+| 📂 **Load When Relevant** | 30 contextual Auto-Routing triggers                      |
 | 🔍 **Skill Discovery**    | Local skills + marketplace search instructions           |
 
 ---
 
-## 🎓 Complete Skills Reference (119 Skills)
+## 🎓 Complete Skills Reference (116 Skills)
 
 ### 🏛️ Foundation Skills
 
@@ -2500,7 +2519,7 @@ Core rules loaded every session (~1,100 tokens):
 | 🧪 `test-generator`       | 🔵 sonnet | TDD-focused test suite generation with edge cases        | "Use the test-generator agent to create tests for this service" |
 | 🔌 `api-designer`         | 🔵 sonnet | REST/GraphQL API design, OpenAPI specs, versioning       | "Use the api-designer agent to design endpoints for users"      |
 | 🗄️ `database-expert`      | 🔵 sonnet | Schema design, query optimization, indexing strategies   | "Use the database-expert agent to optimize these queries"       |
-| 🚀 `devops-specialist`    | 🔵 sonnet | CI/CD pipelines, containerization, deployment automation | "Use the devops-specialist agent to set up GitHub Actions"      |
+| 🚀 `devops-engineer`      | 🔵 sonnet | CI/CD pipelines, containerization, deployment automation | "Use the devops-engineer agent to set up GitHub Actions"        |
 | 🐛 `debugging-specialist` | 🔵 sonnet | Systematic 4-phase debugging for complex issues          | "Use the debugging-specialist agent to find this memory leak"   |
 
 ### 🏗️ Architecture Agents
@@ -2511,7 +2530,6 @@ Core rules loaded every session (~1,100 tokens):
 | 📊 `graphql-architect`       | 🔵 sonnet | Schema design, resolver patterns, federation strategies    | "Use the graphql-architect agent to design the schema"           |
 | 🏢 `microservices-architect` | 🔵 sonnet | Service boundaries, resilience patterns, observability     | "Use the microservices-architect agent to plan the migration"    |
 | ⚡ `realtime-specialist`     | 🔵 sonnet | WebSockets, SSE, live data, presence, scaling              | "Use the realtime-specialist agent to implement live updates"    |
-| 🗄️ `database-architect`      | 🔵 sonnet | Advanced schema design, sharding, replication              | "Use the database-architect agent to design the data model"      |
 
 ### 📱 Platform Development Agents
 
@@ -2524,13 +2542,21 @@ Core rules loaded every session (~1,100 tokens):
 | 🍏 `macos-developer`   | 🔵 sonnet | AppKit, Catalyst, macOS-specific features          | "Use the macos-developer agent to add menu bar app"        |
 | 🎮 `game-developer`    | 🔵 sonnet | Unity, Unreal, Godot game development              | "Use the game-developer agent to implement physics"        |
 
-### 📝 Language Expert Agents
+### 📝 Language & Framework Expert Agents
 
-| Agent                  |   Model   | Purpose                                           | Invocation Example                                         |
-| :--------------------- | :-------: | :------------------------------------------------ | :--------------------------------------------------------- |
-| 📘 `typescript-expert` | 🔵 sonnet | Type system mastery, generics, conditional types  | "Use the typescript-expert agent to fix these type errors" |
-| 🐍 `python-expert`     | 🔵 sonnet | Best practices, type hints, async patterns        | "Use the python-expert agent to review this module"        |
-| ⚛️ `react-expert`      | 🔵 sonnet | Hooks, state management, performance optimization | "Use the react-expert agent to optimize renders"           |
+| Agent                  |   Model   | Purpose                                                | Invocation Example                                            |
+| :--------------------- | :-------: | :----------------------------------------------------- | :------------------------------------------------------------ |
+| 📘 `typescript-expert` | 🔵 sonnet | Type system mastery, generics, conditional types       | "Use the typescript-expert agent to fix these type errors"    |
+| 🐍 `python-expert`     | 🔵 sonnet | Best practices, type hints, async patterns             | "Use the python-expert agent to review this module"           |
+| ⚛️ `react-expert`      | 🔵 sonnet | Hooks, state management, performance optimization      | "Use the react-expert agent to optimize renders"              |
+| 🦀 `rust-expert`       | 🔵 sonnet | Ownership/borrowing, async Rust, Axum/Actix, WASM      | "Use the rust-expert agent to fix borrow checker issues"      |
+| 🐹 `go-expert`         | 🔵 sonnet | Go concurrency, error handling, Chi/Echo, stdlib       | "Use the go-expert agent to review goroutine patterns"        |
+| 🟣 `kotlin-expert`     | 🔵 sonnet | KMP, Compose Multiplatform, coroutines, Ktor           | "Use the kotlin-expert agent to build KMP shared module"      |
+| 🟢 `next-js-expert`    | 🔵 sonnet | App Router, Server Actions, ISR/SSR/SSG, Vercel        | "Use the next-js-expert agent to optimize our Next.js app"    |
+| 🟠 `svelte-expert`     | 🔵 sonnet | Svelte 5 runes, SvelteKit routing, form actions        | "Use the svelte-expert agent to migrate to Svelte 5"          |
+| 💚 `vue-nuxt-expert`   | 🔵 sonnet | Vue 3 Composition API, Nuxt 3, Pinia, VueUse          | "Use the vue-nuxt-expert agent to build the Nuxt app"         |
+| 🐍 `django-fastapi-expert` | 🔵 sonnet | Django ORM, DRF, FastAPI async, Pydantic v2        | "Use the django-fastapi-expert agent to build the API"        |
+| 💙 `flutter-developer` | 🔵 sonnet | Flutter/Dart, Riverpod, platform channels, pub.dev     | "Use the flutter-developer agent to build the mobile app"     |
 
 ### 🎨 Creative Agents
 
@@ -2549,13 +2575,39 @@ Core rules loaded every session (~1,100 tokens):
 | 🚀 `startup-advisor`     | 🔵 sonnet | Launch strategy, validation, MVP, growth  | "Use the startup-advisor agent to validate my idea"         |
 | 💰 `monetization-expert` | 🔵 sonnet | Revenue models, pricing strategy, metrics | "Use the monetization-expert agent to design pricing tiers" |
 
-### ☁️ Infrastructure Agents
+### ☁️ Infrastructure & Operations Agents
 
-| Agent                |   Model   | Purpose                                     | Invocation Example                                    |
-| :------------------- | :-------: | :------------------------------------------ | :---------------------------------------------------- |
-| 🛠️ `devops-engineer` | 🔵 sonnet | AWS, GCP, Azure, Kubernetes, Terraform      | "Use the devops-engineer agent to set up Kubernetes"  |
-| 🧠 `ml-engineer`     | 🔵 sonnet | PyTorch, TensorFlow, LLM integration, MLOps | "Use the ml-engineer agent to fine-tune the model"    |
-| 🌍 `i18n-specialist` | 🔵 sonnet | Internationalization, localization, RTL     | "Use the i18n-specialist agent to add French support" |
+| Agent                       |   Model   | Purpose                                                     | Invocation Example                                                |
+| :-------------------------- | :-------: | :---------------------------------------------------------- | :---------------------------------------------------------------- |
+| ☁️ `cloud-architect`         | 🔵 sonnet | Multi-cloud architecture, cost optimization, disaster recovery | "Use the cloud-architect agent to plan cloud migration"           |
+| 🧠 `ml-engineer`             | 🔵 sonnet | PyTorch, TensorFlow, LLM integration, MLOps                | "Use the ml-engineer agent to fine-tune the model"                |
+| 🌍 `i18n-specialist`         | 🔵 sonnet | Internationalization, localization, RTL                     | "Use the i18n-specialist agent to add French support"             |
+| 📊 `observability-engineer`  | 🔵 sonnet | OpenTelemetry, Prometheus, Grafana, distributed tracing     | "Use the observability-engineer agent to set up monitoring"       |
+| 🔐 `devsecops-engineer`      | 🔵 sonnet | CI/CD security, SAST/DAST, supply chain security, SBOM     | "Use the devsecops-engineer agent to secure the pipeline"        |
+| 📡 `data-engineer`           | 🔵 sonnet | ETL pipelines, data warehousing, Kafka, Airflow, dbt       | "Use the data-engineer agent to build the data pipeline"         |
+
+### 🔌 Integration & Specialist Agents
+
+| Agent                             |   Model   | Purpose                                                       | Invocation Example                                                    |
+| :-------------------------------- | :-------: | :------------------------------------------------------------ | :-------------------------------------------------------------------- |
+| 🔗 `api-integration-specialist`   | 🔵 sonnet | Third-party API integration, webhooks, OAuth, rate limiting   | "Use the api-integration-specialist agent to integrate Stripe"        |
+| 🔑 `auth-specialist`              | 🔵 sonnet | OAuth 2.0/OIDC, JWT, session management, MFA, NextAuth/Clerk | "Use the auth-specialist agent to implement SSO"                      |
+| 💳 `payment-billing-specialist`   | 🔵 sonnet | Stripe integration, subscription billing, PCI compliance      | "Use the payment-billing-specialist agent to add subscriptions"       |
+| 📧 `email-specialist`             | 🔵 sonnet | Transactional email (Resend, SES), templates, deliverability | "Use the email-specialist agent to set up transactional emails"       |
+| 📈 `product-analytics-specialist` | 🔵 sonnet | PostHog, Mixpanel, event tracking, funnels, A/B testing      | "Use the product-analytics-specialist agent to design event tracking" |
+| 🔍 `seo-specialist`               | 🔵 sonnet | Technical SEO, structured data, Core Web Vitals, Schema.org  | "Use the seo-specialist agent to optimize search visibility"          |
+| 📱 `pwa-specialist`               | 🔵 sonnet | Service workers, offline-first, push notifications, Web App Manifest | "Use the pwa-specialist agent to make the app installable"     |
+| 🧪 `e2e-test-specialist`          | 🔵 sonnet | Playwright, Cypress, visual regression testing               | "Use the e2e-test-specialist agent to write E2E tests"                |
+
+### 🛠️ Workflow & Planning Agents
+
+| Agent                    |   Model   | Purpose                                                        | Invocation Example                                              |
+| :----------------------- | :-------: | :------------------------------------------------------------- | :-------------------------------------------------------------- |
+| ⌨️ `cli-developer`       | 🔵 sonnet | CLI tool development, argument parsing, terminal UI            | "Use the cli-developer agent to build the CLI interface"        |
+| 🔄 `migration-specialist` | 🔵 sonnet | Framework upgrades, codemods, version migration, legacy modernization | "Use the migration-specialist agent to upgrade React"    |
+| 📋 `product-manager`     | 🔵 sonnet | PRDs, user stories, roadmaps, sprint planning, prioritization  | "Use the product-manager agent to write the PRD"                |
+| ✍️ `technical-writer`    | 🔵 sonnet | ADRs, API docs, migration guides, runbooks, knowledge bases    | "Use the technical-writer agent to document the architecture"   |
+| 📱 `mobile-release-manager` | 🔵 sonnet | App store submissions, mobile CI/CD, ASO, code signing      | "Use the mobile-release-manager agent to prepare the release"   |
 
 ### 📚 Support Agents
 
@@ -2766,71 +2818,42 @@ git push --force --no-verify  # Skip pre-push only
 
 ### 📋 Overview
 
-Claude Code hooks run at specific lifecycle events. This toolkit uses **PostToolUse** hooks for auto-formatting.
+Claude Code hooks run at specific lifecycle events. This toolkit uses 6 active hooks across 4 lifecycle events, all using a cross-platform Node.js wrapper (`run-hook.js`) that spawns Git Bash for shell script execution.
 
-```json
-{
-  "hooks": {
-    "PostToolUse": [...]   // ✨ Auto-format after Write/Edit
-  }
-}
+```
+Hook Execution Chain:
+  Claude Code → Node.js (run-hook.js) → Git Bash → Shell Script
 ```
 
-### 📊 Active Hooks (v1.4.3+)
+### 📊 Active Hooks (6 total)
 
-| Hook                       | Trigger             | Action                            |
-| :------------------------- | :------------------ | :-------------------------------- |
-| ✨ **PostToolUse (Write)** | After file creation | Auto-runs Prettier for formatting |
-| ✨ **PostToolUse (Edit)**  | After file edit     | Auto-runs Prettier for formatting |
+| Event               | Hook Script                | Status Message                  | Purpose                                        |
+| :------------------ | :------------------------- | :------------------------------ | :--------------------------------------------- |
+| **SessionStart**    | `session-start-pull.sh`    | Pulling repos in background     | Pull all git repos (parent + 84 marketplaces)  |
+| **SessionStart**    | `session-start-context.sh` | Loading previous session context| Load context from prior session                |
+| **Stop**            | `session-stop-summary.sh`  | Saving session summary          | Save session summary for continuity            |
+| **UserPromptSubmit**| `prompt-context.sh`        | Injecting git context           | Inject git branch/status into prompt context   |
+| **PreToolUse**      | `guard-dangerous.sh`       | Checking command safety         | Block dangerous commands (rm -rf, force push)  |
+| **PreToolUse**      | `pre-write-validate.sh`    | Validating file path            | Block writes to .env, credentials, secrets     |
 
-### ✨ PostToolUse Hook (Formatting)
+### 🔒 Safety Hooks (PreToolUse)
 
-**Purpose:** Auto-format files after Write/Edit using [Prettier](https://prettier.io)
+**guard-dangerous.sh** (matcher: `Bash`) — Intercepts every Bash tool call and blocks dangerous commands like `rm -rf`, `git push --force`, `git reset --hard`, etc.
 
-```json
-{
-  "PostToolUse": [
-    {
-      "matcher": "Write",
-      "hooks": [
-        {
-          "type": "command",
-          "command": "npx prettier --write \"$CLAUDE_FILE_PATH\"",
-          "statusMessage": "Formatting with Prettier"
-        }
-      ]
-    },
-    {
-      "matcher": "Edit",
-      "hooks": [
-        {
-          "type": "command",
-          "command": "npx prettier --write \"$CLAUDE_FILE_PATH\"",
-          "statusMessage": "Formatting with Prettier"
-        }
-      ]
-    }
-  ]
-}
-```
+**pre-write-validate.sh** (matcher: `Write|Edit`) — Intercepts every Write/Edit tool call and blocks writes to sensitive files like `.env`, `credentials.json`, API key files, etc.
 
-### ⚠️ Removed Hooks (v1.4.3)
+### ⚠️ Removed Hooks
 
-The following hooks were removed for Windows compatibility:
+The following hooks were removed during the context optimization (reducing per-edit subprocess spawns from ~18 to ~6):
 
-| Hook              | Previous Purpose         | Why Removed                |
-| :---------------- | :----------------------- | :------------------------- | --- | ------ |
-| SessionStart      | Display toolkit banner   | Unix syntax (`             |     | true`) |
-| Stop              | Desktop notification     | Platform-specific commands |
-| SessionEnd        | Log session end          | Unix `$(date)` syntax      |
-| PreCompact        | Log context compaction   | Unix syntax                |
-| Notification      | Log notifications        | Unix `~/.claude/` paths    |
-| UserPromptSubmit  | Log prompts              | Unix syntax                |
-| PermissionRequest | Log permissions          | Unix syntax                |
-| SubagentStop      | Log agent completion     | Unix syntax                |
-| PreToolUse        | Block dangerous commands | Unix `grep` syntax         |
+| Hook                          | Previous Purpose                | Why Removed                              |
+| :---------------------------- | :------------------------------ | :--------------------------------------- |
+| PostToolUse `format-code.sh`  | Auto-format with Prettier       | Excessive subprocess spawning per edit   |
+| PostToolUse `secret-scan.sh`  | Scan for leaked secrets         | Excessive subprocess spawning per edit   |
+| PostToolUse `post-edit-lint.sh`| Auto-lint after edits          | Excessive subprocess spawning per edit   |
+| PreToolUse `pre-commit-counts.sh` | Update counts before commit | Fired on ALL Bash commands, not just git |
 
-**Reason:** These hooks used Unix-specific syntax (`|| true`, `$(date)`, `~/.claude/`, `2>/dev/null`) that fails on Windows PowerShell/CMD. The logging hooks provided minimal value anyway.
+**Reason:** Each PostToolUse hook fired on every Write/Edit operation, spawning a 3-layer subprocess chain (Node.js → Git Bash → script). Three hooks firing per edit meant ~18 process spawns per file change. The `pre-commit-counts.sh` hook had matcher `Bash` so it fired on ALL Bash commands despite only needing `git commit`. The hook script files remain on disk and can be run manually if needed.
 
 See [CHANGELOG.md](CHANGELOG.md) for full details
 
@@ -2844,15 +2867,20 @@ See [CHANGELOG.md](CHANGELOG.md) for full details
 
 ### 📊 Available Servers
 
-| Server                   | Purpose                     | Token Cost | Enable When                     |
-| :----------------------- | :-------------------------- | :--------: | :------------------------------ |
-| 🧠 `sequential-thinking` | Structured reasoning chains |    ~500    | Complex decisions, architecture |
-| 🎭 `playwright`          | Browser testing/automation  |   ~2,000   | E2E tests, web scraping         |
-| 💾 `memory`              | Persistent knowledge base   |    ~800    | Multi-session projects          |
-| 📁 `filesystem`          | Enhanced file operations    |   ~1,500   | Bulk file work                  |
-| 🗄️ `sqlite`              | Database operations         |   ~1,000   | SQLite work                     |
-| 🔍 `chrome-devtools`     | Browser debugging           |    ~500    | Frontend debugging              |
-| 🤖 `puppeteer`           | Browser automation          |   ~1,500   | Alternative to Playwright       |
+| Server                   | Purpose                     | Token Cost | Enable When                       |
+| :----------------------- | :-------------------------- | :--------: | :-------------------------------- |
+| 🧠 `sequential-thinking` | Structured reasoning chains |    ~500    | Complex decisions, architecture   |
+| 🎭 `playwright`          | Browser testing/automation  |   ~2,000   | E2E tests, web scraping           |
+| 💾 `memory`              | Persistent knowledge base   |    ~800    | Multi-session projects            |
+| 📁 `filesystem`          | Enhanced file operations    |   ~1,500   | Bulk file work                    |
+| 🗄️ `sqlite`              | Database operations         |   ~1,000   | SQLite work                       |
+| 📚 `context7`            | Context management          |    ~500    | Large codebases, enhanced search  |
+| 🔍 `chrome-devtools`     | Browser debugging           |    ~500    | Frontend debugging                |
+| 🤖 `puppeteer`           | Browser automation          |   ~1,500   | Alternative to Playwright         |
+| 🌐 `browserbase`         | Cloud browser sessions      |    ~500    | Remote browser (requires API key) |
+| 🐙 `github`              | GitHub API operations       |   ~1,000   | PRs, issues, releases, Actions    |
+| 🐘 `postgres`            | PostgreSQL operations       |    ~800    | Schema introspection, queries     |
+| 🔀 `git`                 | Advanced git operations     |    ~600    | Cloning, branching, diffing       |
 
 ### 🔧 Management
 
@@ -3272,37 +3300,50 @@ The settings.json file controls Claude Code behavior, permissions, and hooks.
 
   // ═══════════════════════════════════════════════════════════════════════════
   // HOOKS SECTION
-  // Lifecycle event handlers (v1.4.3+ - simplified for Windows compatibility)
+  // 6 active hooks across 4 lifecycle events
+  // All use Node.js run-hook.js wrapper for cross-platform compatibility
   // ═══════════════════════════════════════════════════════════════════════════
   "hooks": {
-    // POST-TOOL USE - Auto-format after Write/Edit
-    // Only high-value, Windows-compatible hooks are kept
-    "PostToolUse": [
+    "SessionStart": [
       {
-        "matcher": "Write",
         "hooks": [
-          {
-            "type": "command",
-            "command": "npx prettier --write \"$CLAUDE_FILE_PATH\"",
-            "statusMessage": "Formatting with Prettier"
-          }
+          { "command": "node -e \"...session-start-pull.sh...\"",
+            "statusMessage": "Pulling repos in background" },
+          { "command": "node -e \"...session-start-context.sh...\"",
+            "statusMessage": "Loading previous session context" }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          { "command": "node -e \"...session-stop-summary.sh...\"",
+            "statusMessage": "Saving session summary" }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          { "command": "node -e \"...prompt-context.sh...\"",
+            "statusMessage": "Injecting git context" }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      { "matcher": "Bash",
+        "hooks": [
+          { "command": "node -e \"...guard-dangerous.sh...\"",
+            "statusMessage": "Checking command safety" }
         ]
       },
-      {
-        "matcher": "Edit",
+      { "matcher": "Write|Edit",
         "hooks": [
-          {
-            "type": "command",
-            "command": "npx prettier --write \"$CLAUDE_FILE_PATH\"",
-            "statusMessage": "Formatting with Prettier"
-          }
+          { "command": "node -e \"...pre-write-validate.sh...\"",
+            "statusMessage": "Validating file path" }
         ]
       }
     ]
-
-    // NOTE: Other hooks (SessionStart, Stop, PreToolUse, etc.) were removed
-    // in v1.4.3 because they used Unix-specific syntax incompatible with
-    // Windows PowerShell/CMD. See CHANGELOG.md for details.
   },
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -3323,19 +3364,33 @@ The settings.json file controls Claude Code behavior, permissions, and hooks.
     "context7",
     "chrome-devtools",
     "puppeteer",
-    "browserbase"
+    "browserbase",
+    "github",
+    "postgres",
+    "git"
   ],
 
   // ═══════════════════════════════════════════════════════════════════════════
   // PLUGINS
-  // Enabled marketplace plugins
+  // Enabled marketplace plugins (16 total, 9 enabled / 7 disabled)
   // ═══════════════════════════════════════════════════════════════════════════
   "enabledPlugins": {
     "agent-sdk-dev@claude-code-plugins": true,
     "pr-review-toolkit@claude-code-plugins": true,
     "commit-commands@claude-code-plugins": true,
     "feature-dev@claude-code-plugins": true,
-    "taches-cc-resources@taches-cc-resources": true
+    "security-guidance@claude-code-plugins": true,
+    "code-review@claude-code-plugins": true,
+    "explanatory-output-style@claude-code-plugins": false,
+    "learning-output-style@claude-code-plugins": false,
+    "frontend-design@claude-code-plugins": true,
+    "document-skills@anthropic-agent-skills": true,
+    "example-skills@anthropic-agent-skills": false,
+    "taches-cc-resources@taches-cc-resources": true,
+    "claude-opus-4-5-migration@claude-code-plugins": false,
+    "hookify@claude-code-plugins": false,
+    "plugin-dev@claude-code-plugins": true,
+    "ralph-wiggum@claude-code-plugins": false
   },
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -3343,11 +3398,17 @@ The settings.json file controls Claude Code behavior, permissions, and hooks.
   // Claude Code behavior settings
   // ═══════════════════════════════════════════════════════════════════════════
 
-  // Always show thinking (extended reasoning)
-  "alwaysThinkingEnabled": true,
+  // Always show thinking (extended reasoning) — disabled for token efficiency
+  "alwaysThinkingEnabled": false,
+
+  // Effort level — medium balances thinking engagement with token cost
+  "effortLevel": "medium",
 
   // Spinner tips while processing
-  "spinnerTipsEnabled": false
+  "spinnerTipsEnabled": false,
+
+  // Output style
+  "outputStyle": "default"
 }
 ```
 
@@ -3500,12 +3561,19 @@ MCP (Model Context Protocol) servers extend Claude's capabilities. Here's how th
 │  │  │  🧠 Reason  │  │  Automation │  │  Database   │  │  Operations │ │   │
 │  │  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘ │   │
 │  │                                                                      │   │
-│  │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐                  │   │
-│  │  │   sqlite    │  │   chrome-   │  │  puppeteer  │                  │   │
-│  │  │             │  │   devtools  │  │             │                  │   │
-│  │  │  🗄️ Database│  │  🔍 Debug   │  │  🤖 Browser │                  │   │
-│  │  │  Queries    │  │  Frontend   │  │  Control    │                  │   │
-│  │  └─────────────┘  └─────────────┘  └─────────────┘                  │   │
+│  │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐ │   │
+│  │  │   sqlite    │  │   chrome-   │  │  puppeteer  │  │ browserbase │ │   │
+│  │  │             │  │   devtools  │  │             │  │             │ │   │
+│  │  │  🗄️ Database│  │  🔍 Debug   │  │  🤖 Browser │  │  ☁️ Cloud   │ │   │
+│  │  │  Queries    │  │  Frontend   │  │  Control    │  │  Browser    │ │   │
+│  │  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘ │   │
+│  │                                                                      │   │
+│  │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐ │   │
+│  │  │  context7   │  │   github    │  │  postgres   │  │    git      │ │   │
+│  │  │             │  │             │  │             │  │             │ │   │
+│  │  │  📚 Context │  │  🐙 GitHub  │  │  🐘 Postgres│  │  📦 Git     │ │   │
+│  │  │  Retrieval  │  │  API        │  │  Database   │  │  Operations │ │   │
+│  │  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘ │   │
 │  │                                                                      │   │
 │  └─────────────────────────────────────────────────────────────────────┘   │
 │                                                                              │
@@ -3644,7 +3712,7 @@ The toolkit uses git submodules for external repositories. Understanding this is
 │       ├── auto-claude/                ← Submodule (read-only)
 │       ├── claude-code-plugins/        ← Submodule (read-only)
 │       ├── get-shit-done/              ← Submodule (read-only)
-│       └── ... (68 total)              ← All read-only
+│       └── ... (84 total)              ← All read-only
 ```
 
 #### 📋 Submodule Commands Reference
@@ -3787,12 +3855,13 @@ claude
 **Expected Output:**
 
 ```
-✓ CLAUDE.md loaded (194 lines, ~1,100 tokens)
-✓ 119 skills available
+✓ CLAUDE.md loaded (~200 lines, ~1,200 tokens)
+✓ 116 skills available
 ✓ 59 agents available
 ✓ 84 marketplace repos synced
-✓ 2 hooks configured (PostToolUse for Prettier)
-✓ MCP servers: all disabled (optimal)
+✓ 6 hooks configured (4 lifecycle events)
+✓ 12 MCP servers: all disabled (optimal)
+✓ 4 rules files loaded (down from 31)
 ```
 
 **Troubleshooting:**
@@ -6173,13 +6242,22 @@ Implement JWT refresh token endpoint
 
 | Command                          | Purpose              |
 | :------------------------------- | :------------------- |
-| 🔍 `/consider:first-principles`  | Fundamental analysis |
-| 🔎 `/consider:5-whys`            | Root cause           |
-| 📊 `/consider:eisenhower-matrix` | Priority matrix      |
-| ⚖️ `/consider:swot`              | SWOT / Trade-offs    |
-| 🎯 `/consider:decision-matrix`   | Multi-criteria       |
+| 🔍 `/consider:first-principles`  | Fundamental analysis       |
+| 🔎 `/consider:5-whys`            | Root cause                 |
+| 📊 `/consider:eisenhower-matrix` | Priority matrix            |
+| ⚖️ `/consider:swot`              | SWOT / Trade-offs          |
+| 🎯 `/consider:pareto`            | 80/20 analysis             |
+| 🔄 `/consider:second-order`      | Consequences of consequences |
+| 🪒 `/consider:occams-razor`      | Simplest explanation       |
+| ➖ `/consider:via-negativa`       | Improve by removing        |
+| ⏱️ `/consider:10-10-10`          | Time horizon evaluation    |
+| 💡 `/consider:one-thing`          | Highest-leverage action    |
+| 🔁 `/consider:inversion`          | Solve problems backwards   |
+| 💰 `/consider:opportunity-cost`   | Analyze trade-offs         |
 
-### 💪 Obra Superpowers
+### 💪 Obra Superpowers (Marketplace)
+
+> These commands are available from the `superpowers-marketplace` plugin. Enable via `claude plugins install`.
 
 | Command                 | Purpose                  |
 | :---------------------- | :----------------------- |
@@ -6300,13 +6378,17 @@ arguments:
 [Usage examples]
 ```
 
-### 📋 Adding a New Rule
+### 📋 Adding a New Reference Guide
 
-1. Determine category: `checklists/`, `stacks/`, or `tooling/`
-2. Create `rules/[category]/my-rule.md`:
+New domain-specific guides go in `docs/reference/` (loaded on-demand), not `rules/` (always loaded).
+
+> **Note:** Only compact, universally-applicable rules belong in `rules/` (currently 4 files). Domain-specific checklists, stack guides, workflow guides, and tooling docs go in `docs/reference/`.
+
+1. Determine category: `checklists/`, `stacks/`, `workflows/`, or `tooling/`
+2. Create `docs/reference/[category]/my-guide.md`:
 
 ```markdown
-# 📋 My Rule
+# 📋 My Guide
 
 **When to use:** [Trigger condition]
 
@@ -6314,7 +6396,7 @@ arguments:
 
 ## 📋 Overview
 
-[What this rule covers]
+[What this guide covers]
 
 ## ✅ Checklist
 
@@ -6327,12 +6409,12 @@ arguments:
 
 ## 🔗 Related
 
-- [Other rules]
+- [Other reference guides]
 - [Skills]
 - [Agents]
 ```
 
-3. Add trigger to CLAUDE.md "Load When Relevant" section
+3. Add trigger to CLAUDE.md Auto-Routing table so it loads on-demand when relevant prompts are detected
 
 ---
 
@@ -6479,7 +6561,7 @@ A: `no_push` prevents accidental changes to upstream. Fork if you need to modify
 ### ⚡ Performance
 
 **Q: Why are MCP servers disabled by default?**
-A: Each enabled server adds 500-2000 tokens. Keeping them disabled saves ~6000+ tokens.
+A: Each enabled server adds 500-2000 tokens. Keeping all 12 servers disabled saves ~8,400+ tokens per session.
 
 **Q: How much context does CLAUDE.md use?**
 A: ~1,100 tokens. Detailed content loads on-demand.
@@ -6544,7 +6626,7 @@ When starting a new project, use the toolkit's project initialization system:
 **What gets generated:**
 
 - Global delegation statement: `**Global rules from ~/.claude/ apply automatically.**`
-- Related Global Rules section pointing to appropriate `rules/stacks/` and `rules/checklists/`
+- Related Reference Guides section pointing to appropriate `docs/reference/stacks/` and `docs/reference/checklists/`
 - Quick Start table with common commands
 - Standardized footer
 
@@ -6607,7 +6689,7 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) for detailed guidelines on:
 |  Version  |   Date   | Changes                                                                                                                                                                           |
 | :-------: | :------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **2.2.0** | Jan 2026 | 🌐 Showcase website (claude.travisjneuman.com), 📦 pull-all-repos script, 📝 documentation overhaul, 🎨 tjn.claude/ branding                                                      |
-| **1.4.3** | Dec 2025 | 🪝 Hooks simplified for Windows compatibility (removed 9 Unix-specific hooks, kept PostToolUse for Prettier), 🔒 Security audit documentation                                     |
+| **1.4.3** | Dec 2025 | 🪝 Hooks simplified for Windows compatibility (removed 9 Unix-specific hooks, consolidated to 6 cross-platform hooks), 🔒 Security audit documentation                             |
 | **1.4.1** | Dec 2025 | 🆕 Project initialization workflow: `/init-project` (adaptive stack detection), `/standardize-claude-md` (retrofit existing projects), 📄 Updated project-CLAUDE.md template v2.0 |
 | **1.4.0** | Dec 2025 | 📋 5 new templates, ⌨️ 5 new commands (/review-code, /health-check, /context-stats, /session-log, /backup-config), 🔌 MCP wildcard permissions                                    |
 | **1.3.3** | Dec 2025 | 🪝 Original hook implementation (superseded by 1.4.3), 📝 session logging                                                                                                         |
@@ -6638,7 +6720,7 @@ See [CHANGELOG.md](./CHANGELOG.md) for complete history.
 
 | Resource                                            | Description             |
 | :-------------------------------------------------- | :---------------------- |
-| 🎓 [Skills Catalog](./skills/MASTER_INDEX.md)       | All 119 skills           |
+| 🎓 [Skills Catalog](./skills/MASTER_INDEX.md)       | All 116 skills           |
 | 🤖 [Agents Catalog](./agents/README.md)             | All 59 agents           |
 | 🔄 [Workflow Guide](./docs/WORKFLOW-GUIDE.md)       | Workflow patterns       |
 | 🏪 [Marketplace Guide](./docs/MARKETPLACE-GUIDE.md) | All 84 marketplaces     |
@@ -7902,7 +7984,7 @@ Insights into toolkit usage and effectiveness.
 │  ═══════════════                                                             │
 │  • Consider using /compact more frequently (avg usage: 72%)                  │
 │  • test-specialist skill could replace manual test writing                   │
-│  • 119 skills never used - consider removing to reduce load time              │
+│  • 116 skills never used - consider removing to reduce load time              │
 │                                                                              │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
@@ -8669,7 +8751,7 @@ The toolkit logs security-relevant events:
 ├── CLAUDE.md          # Constitution
 ├── README.md          # Documentation
 ├── agents/            # 59 agents
-├── skills/            # 119 skills
+├── skills/            # 116 skills
 ├── commands/          # Slash commands
 ├── rules/             # Contextual rules
 ├── docs/              # Extended docs
@@ -8685,9 +8767,9 @@ The toolkit logs security-relevant events:
 
 | Version   | Highlights                                             |
 | --------- | ------------------------------------------------------ |
-| **2.3.3** | Opus 4.6 enhancement: skills, 47 agents, 7 commands, 5 stack guides |
+| **2.3.3** | Opus 4.6 enhancement: 116 skills, 59 agents, 31 commands, 10 stack guides |
 | **2.3.1** | Documentation overhaul, visual README, count accuracy  |
-| **2.3.0** | Submodule fixes, auto count updates, 73 total repos    |
+| **2.3.0** | Submodule fixes, auto count updates, 84 total repos    |
 | **2.2.0** | Showcase website, pull-all-repos, branding             |
 | **2.1.0** | One-line install, bootstrap command, SessionStart hook |
 | **2.0.0** | Auto-Claude, research methodology, PROACTIVE mode      |
@@ -8703,16 +8785,16 @@ The toolkit logs security-relevant events:
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│            TOOLKIT v2.6.0 STATISTICS                         │
+│            TOOLKIT STATISTICS                                │
 ├─────────────────────────────────────────────────────────────┤
-│  Skills:        119 local + 5,400+ marketplace               │
-│  Agents:        60 specialized subagents                     │
-│  Commands:      30 slash commands + plugin commands           │
-│  Hooks:         10 lifecycle hooks                            │
+│  Skills:        116 local + 5,400+ marketplace               │
+│  Agents:        59 specialized subagents                     │
+│  Commands:      31 slash commands + plugin commands           │
+│  Hooks:         6 lifecycle hooks (4 events)                  │
 │  Marketplaces:  84 community repos                           │
-│  MCP Servers:   9 configurable                               │
-│  Rules:         27 contextual guidelines                     │
-│  Templates:     14 creation templates                        │
+│  MCP Servers:   12 configurable                              │
+│  Rules:         4 always-loaded + 27 on-demand references    │
+│  Templates:     15 creation templates                        │
 │  Platforms:     macOS, Linux, Windows (Git Bash)             │
 └─────────────────────────────────────────────────────────────┘
 ```
@@ -8753,7 +8835,7 @@ See [LICENSE](./LICENSE) for full text.
   <img alt="" src="https://capsule-render.vercel.app/api?type=waving&color=0:d946ef,50:6366f1,100:1a1a2e&height=120&section=footer&animation=fadeIn" width="100%" />
 </picture>
 
-🎓 **119 Skills** · 🤖 **60 Agents** · 🏪 **84 Marketplaces** · ⌨️ **30 Commands** · 🪝 **10 Hooks** · ⚡ **5,400+ Community Skills**
+🎓 **116 Skills** · 🤖 **59 Agents** · 🏪 **84 Marketplaces** · ⌨️ **31 Commands** · 🪝 **6 Hooks** · ⚡ **5,400+ Community Skills**
 
 **Built with ❤️ by [Travis Neuman](https://travisjneuman.com)** · **[claude.travisjneuman.com](https://claude.travisjneuman.com)**
 
