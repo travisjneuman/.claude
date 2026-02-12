@@ -6,7 +6,7 @@ category: reference
 
 # Claude Code Toolkit Documentation
 
-**Last Updated:** February 2026 (v2.7.2)
+**Last Updated:** February 2026 (v2.8.0)
 **Maintainer:** Travis J. Neuman
 **Purpose:** Portable, optimized Claude Code configuration for any project
 
@@ -118,6 +118,13 @@ This `~/.claude/` folder is a fully configured, portable Claude Code environment
 ---
 
 ## History
+
+### v2.8.0 (February 2026)
+
+- P0 Bug Fix: Fixed invalid JSON in settings.json (trailing comma) causing auto-compact errors and hook failures since Opus 4.6
+- Registered 2 hooks: pre-commit-counts.sh (PreToolUse), secret-scan.sh (PostToolUse); fixed secret-scan .md false positives
+- Token optimization: removed "Auto-use tools" section from CLAUDE.md, consolidated 20 bash permissions into 2, streamlined start-task.md from 296 to 156 lines
+- Dynamic operation: all resources now activate from prompt context alone, no slash commands required
 
 ### v2.7.2 (February 2026)
 

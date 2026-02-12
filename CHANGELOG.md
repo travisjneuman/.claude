@@ -2,6 +2,30 @@
 
 All notable changes to the Ultimate Claude Code Toolkit.
 
+## [2.8.0] - February 11, 2026
+
+### Bug Fix (P0)
+
+- **Fixed invalid JSON in settings.json** — Trailing comma on line 178 caused Claude Code to fail parsing all settings, producing both "auto-compact errors" and "constant hook errors" since Opus 4.6.
+
+### Hook Registration
+
+- **Registered `pre-commit-counts.sh`** in PreToolUse Bash matcher (existed on disk since v2.6.0, was never wired up)
+- **Added PostToolUse section** to settings.json with `secret-scan.sh` (Write|Edit matcher)
+- **Fixed `secret-scan.sh`** — Added `.md` file exclusion to prevent false positives on shields.io badge URLs
+
+### Token Optimization
+
+- **Removed "Auto-use tools" section from CLAUDE.md** — Eliminated 12 lines referencing slash commands (`/deploy`, `/security-scan`, `/test-suite`, `/scaffold`, `/auto-claude`, `/assemble-team`) that contradicted dynamic operation philosophy. Auto-routing table already handles resource activation.
+- **Consolidated bash permissions** — Replaced 14 individual `Bash(git <subcmd>:*)` entries with `Bash(git:*)` and 6 `Bash(npm <subcmd>:*)` entries with `Bash(npm:*)`. Net reduction: 18 permission lines.
+- **Streamlined start-task.md** — Rewrote universal router from 296 to 156 lines (v3.0 → v3.1). Removed content duplicated with CLAUDE.md auto-routing table: domain detection hints, marketplace repo listing, execution principles, autonomous implementation detection, multi-window workflow awareness.
+
+### Philosophy
+
+- **Dynamic operation principle enforced** — All resources now activate from prompt context alone. No slash commands required for optimal routing.
+
+---
+
 ## [2.7.2] - February 11, 2026
 
 ### Website Audit Fixes
