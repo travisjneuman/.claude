@@ -10,6 +10,7 @@ All notable changes to the Ultimate Claude Code Toolkit.
 - **Fixed stale hooks in website** — Added metadata gating in `hooks.ts` so deregistered hooks (format-code, pre-commit-counts) no longer appear even if `.sh` files remain on disk.
 - **Fixed stale repo count in scripts** — Updated "68" → "84" in `init-marketplaces` and `_pull-all-repos` descriptions in `scripts.ts`.
 - **Added on-demand rules scanning** — `rules.ts` now scans both `rules/` (always-loaded) and `docs/reference/` (on-demand), with loadType badges in the UI.
+- **Fixed bash/Node.js marketplace count discrepancy** — Bash `find` in `update-counts.sh` over-counted by 106 files in `.cursor/` directories. Added blanket dot-directory exclusion (`-not -path "*/\.*/*"`) to match Node.js counter behavior. Both counters now agree at 5,321 (5,300+).
 
 ### Workflow
 
