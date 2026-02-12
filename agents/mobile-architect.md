@@ -1,7 +1,7 @@
 ---
 name: mobile-architect
 description: Cross-platform mobile architecture expert for React Native, Flutter, and native development decisions
-model: sonnet
+model: opus
 tools:
   - Glob
   - Grep

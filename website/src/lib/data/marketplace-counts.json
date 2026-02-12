@@ -1,6 +1,6 @@
 {
   "repoCount": 84,
-  "totalSkills": 4449,
+  "totalSkills": 5321,
   "repos": [
     {
       "name": "claude-code-plugins-plus-skills",
@@ -8,9 +8,14 @@
       "skillCount": 1859
     },
     {
+      "name": "awesome-claude-skills",
+      "displayName": "Awesome Claude Skills",
+      "skillCount": 943
+    },
+    {
       "name": "davila7-templates",
       "displayName": "Davila7 Templates",
-      "skillCount": 683
+      "skillCount": 684
     },
     {
       "name": "wshobson-agents",
@@ -30,12 +35,7 @@
     {
       "name": "athola-night-market",
       "displayName": "Athola Night Market",
-      "skillCount": 126
-    },
-    {
-      "name": "awesome-claude-skills",
-      "displayName": "Awesome Claude Skills",
-      "skillCount": 111
+      "skillCount": 123
     },
     {
       "name": "kivilaid-marketplace",
@@ -45,7 +45,7 @@
     {
       "name": "levnikolaevich-claude-code-skills",
       "displayName": "Levnikolaevich Claude Code Skills",
-      "skillCount": 98
+      "skillCount": 99
     },
     {
       "name": "giuseppe-developer-kit",
@@ -73,6 +73,11 @@
       "skillCount": 60
     },
     {
+      "name": "alirezarezvani-claude-skills",
+      "displayName": "Alirezarezvani Claude Skills",
+      "skillCount": 53
+    },
+    {
       "name": "worldbuilding-skills",
       "displayName": "Worldbuilding Skills",
       "skillCount": 52
@@ -81,11 +86,6 @@
       "name": "trailofbits-skills",
       "displayName": "Trailofbits Skills",
       "skillCount": 49
-    },
-    {
-      "name": "alirezarezvani-claude-skills",
-      "displayName": "Alirezarezvani Claude Skills",
-      "skillCount": 47
     },
     {
       "name": "buildwithclaude",
@@ -113,6 +113,11 @@
       "skillCount": 34
     },
     {
+      "name": "affaan-everything-claude",
+      "displayName": "Affaan Everything Claude",
+      "skillCount": 32
+    },
+    {
       "name": "secondsky-sap-skills",
       "displayName": "Secondsky Sap Skills",
       "skillCount": 32
@@ -123,9 +128,14 @@
       "skillCount": 31
     },
     {
-      "name": "affaan-everything-claude",
-      "displayName": "Affaan Everything Claude",
-      "skillCount": 30
+      "name": "akin-ozer-devops",
+      "displayName": "Akin Ozer Devops",
+      "skillCount": 31
+    },
+    {
+      "name": "henkisdabro-marketplace",
+      "displayName": "Henkisdabro Marketplace",
+      "skillCount": 24
     },
     {
       "name": "gmickel-marketplace",
@@ -133,14 +143,9 @@
       "skillCount": 23
     },
     {
-      "name": "henkisdabro-marketplace",
-      "displayName": "Henkisdabro Marketplace",
-      "skillCount": 22
-    },
-    {
       "name": "EveryInc-compound",
       "displayName": "EveryInc Compound",
-      "skillCount": 18
+      "skillCount": 19
     },
     {
       "name": "mhattingpete-skills",
@@ -263,8 +268,8 @@
       "skillCount": 3
     },
     {
-      "name": "akin-ozer-devops",
-      "displayName": "Akin Ozer Devops",
+      "name": "claude-mem",
+      "displayName": "Claude Mem",
       "skillCount": 2
     },
     {
@@ -276,11 +281,6 @@
       "name": "zai-coding-plugins",
       "displayName": "Zai Coding Plugins",
       "skillCount": 2
-    },
-    {
-      "name": "claude-mem",
-      "displayName": "Claude Mem",
-      "skillCount": 1
     },
     {
       "name": "mvanhorn-last30days-skill",

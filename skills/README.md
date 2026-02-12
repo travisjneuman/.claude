@@ -2,7 +2,7 @@
 
 Comprehensive skills for Claude Code - 119 skills covering all development domains.
 
-**Plus:** 84 marketplace repos with 4,500+ additional skills.
+**Plus:** 84 marketplace repos with 5,400+ additional skills.
 
 **Version:** 5.0 (119 Skills, 84 Marketplace Repos)
 **Last Updated:** February 2026
@@ -31,7 +31,7 @@ Comprehensive skills for Claude Code - 119 skills covering all development domai
 | Personal & Lifestyle   | 4      | Travel, Career, Recipe, Podcast                  |
 | Marketplace            | 5,800+ | From 84 plugin repositories                      |
 
-**Local: 119 unique skills | Marketplace: 4,500+ additional skills**
+**Local: 119 unique skills | Marketplace: 5,400+ additional skills**
 
 ---
 

@@ -1,11 +1,7 @@
 ---
 name: architecture-analyst
-description: Analyzes system architecture, identifies patterns/anti-patterns, and provides strategic recommendations. Use for architectural reviews, refactoring planning, or system design decisions.
-tools:
-  - Read
-  - Grep
-  - Glob
-  - Write
+description: "Analyzes system architecture, identifies patterns/anti-patterns, and provides strategic recommendations. Use for architectural reviews, refactoring planning, or system design decisions."
+tools: Read, Grep, Glob, Write
 model: opus
 ---
 

@@ -1,135 +1,78 @@
-# Rules & Guidelines Index
+# Rules — Always-Loaded Context
 
-Modular workflow rules, loaded contextually based on task type.
+Compact rules that apply to every session. Loaded automatically into the system prompt.
 
 ---
 
-## Directory Structure
+## Files in `rules/`
+
+Only 4 files remain here (always loaded):
+
+| File | Purpose |
+| ---- | ------- |
+| `README.md` | This index |
+| `checklists/verification-template.md` | Task completion verification (applies to every task) |
+| `checklists/ui-visual-changes.md` | Visual/UI work checklist + frontend aesthetics guide |
+| `workflows/context-management.md` | Context window, multi-window, state persistence |
+
+---
+
+## Reference Files (On-Demand)
+
+Domain-specific guides moved to `docs/reference/` to reduce system prompt size. These are loaded on-demand via the Auto-Routing table in `CLAUDE.md`.
 
 ```
-rules/
-├── README.md                 # This file
-├── checklists/               # Task-type specific checklists
-│   ├── verification-template.md  # Task completion verification
-│   ├── ui-visual-changes.md  # Visual/UI work (enhanced with frontend aesthetics)
-│   ├── automation-scripts.md # Scripts/automation
-│   ├── static-sites.md       # HTML/CSS/JS sites
-│   ├── api-development.md    # REST/GraphQL API design & implementation
-│   ├── database-design.md    # Schema, migrations, query optimization
-│   ├── security-hardening.md # OWASP, CSP, CORS, auth patterns
-│   └── performance-optimization.md  # Web Vitals, bundling, caching
-├── workflows/                # Workflow methodologies
-│   ├── research-methodology.md  # Structured research with hypothesis tracking
-│   ├── action-policy.md      # PROACTIVE vs CONSERVATIVE mode configuration
-│   ├── context-management.md # Context window, multi-window, state persistence
-│   ├── agent-teams.md        # Agent Teams decision framework
-│   ├── deployment-cicd.md    # CI/CD pipelines, deployment strategies
-│   └── post-change-documentation.md  # Post-change docs update workflow
-├── stacks/                   # Tech stack patterns
-│   ├── react-typescript.md   # React + TypeScript
-│   ├── python.md             # Python projects
-│   ├── go.md                 # Go projects
-│   ├── rust.md               # Rust projects
-│   ├── fullstack-nextjs-nestjs.md  # Full-stack Next.js/NestJS
-│   ├── django-fastapi.md     # Python web frameworks
-│   ├── react-native-expo.md  # React Native + Expo mobile
-│   ├── flutter-dart.md       # Flutter + Dart cross-platform
-│   ├── vue-nuxt.md           # Vue 3 + Nuxt 3
-│   └── svelte-sveltekit.md   # Svelte 5 + SvelteKit
-└── tooling/                  # Tools & setup
-    ├── git-hooks-setup.md    # Git hook configuration
-    ├── troubleshooting.md    # Common issue fixes
-    ├── external-repos.md     # GSD, marketplaces, external deps
-    └── mcp-servers.md        # MCP server lifecycle management
+docs/reference/
+├── checklists/
+│   ├── api-development.md
+│   ├── automation-scripts.md
+│   ├── database-design.md
+│   ├── mobile-app-deployment.md
+│   ├── monitoring-alerting-design.md
+│   ├── performance-optimization.md
+│   ├── security-hardening.md
+│   └── static-sites.md
+├── stacks/
+│   ├── django-fastapi.md
+│   ├── flutter-dart.md
+│   ├── fullstack-nextjs-nestjs.md
+│   ├── go.md
+│   ├── python.md
+│   ├── react-native-expo.md
+│   ├── react-typescript.md
+│   ├── rust.md
+│   ├── svelte-sveltekit.md
+│   └── vue-nuxt.md
+├── workflows/
+│   ├── action-policy.md
+│   ├── agent-teams.md
+│   ├── deployment-cicd.md
+│   ├── post-change-documentation.md
+│   └── research-methodology.md
+└── tooling/
+    ├── external-repos.md
+    ├── git-hooks-setup.md
+    ├── mcp-servers.md
+    └── troubleshooting.md
 ```
 
 ---
 
-## When to Read Each File
+## Hierarchy
 
-### Checklists
-
-| File                                       | Read When...                             |
-| ------------------------------------------ | ---------------------------------------- |
-| `checklists/verification-template.md`      | Completing ANY task (verify before done)  |
-| `checklists/ui-visual-changes.md`          | Making ANY visual changes                |
-| `checklists/automation-scripts.md`         | Writing scripts, automation              |
-| `checklists/static-sites.md`              | Working on HTML/CSS/JS sites             |
-| `checklists/api-development.md`           | Designing or building APIs               |
-| `checklists/database-design.md`           | Schema design, migrations, queries       |
-| `checklists/security-hardening.md`        | Security implementation or review        |
-| `checklists/performance-optimization.md`  | Performance optimization work            |
-
-### Workflows
-
-| File                                | Read When...                                            |
-| ----------------------------------- | ------------------------------------------------------- |
-| `workflows/research-methodology.md` | Researching, investigating, comparing approaches        |
-| `workflows/context-management.md`   | Managing context, multi-window, state persistence       |
-| `workflows/action-policy.md`        | Configuring behavior (PROACTIVE vs CONSERVATIVE)        |
-| `workflows/agent-teams.md`          | Deciding between single session, subagents, agent teams |
-| `workflows/deployment-cicd.md`      | Setting up CI/CD, deployment, release processes         |
-| `workflows/post-change-documentation.md` | After making ANY code/config/feature changes |
-
-### Stacks
-
-| File                                | Read When...                   |
-| ----------------------------------- | ------------------------------ |
-| `stacks/react-typescript.md`        | React + TypeScript project     |
-| `stacks/python.md`                  | Python project                 |
-| `stacks/go.md`                      | Go project                     |
-| `stacks/rust.md`                    | Rust project                   |
-| `stacks/fullstack-nextjs-nestjs.md` | Full-stack Next.js/NestJS      |
-| `stacks/django-fastapi.md`          | Django or FastAPI project       |
-| `stacks/react-native-expo.md`       | React Native / Expo mobile app |
-| `stacks/flutter-dart.md`            | Flutter / Dart project          |
-| `stacks/vue-nuxt.md`               | Vue / Nuxt project              |
-| `stacks/svelte-sveltekit.md`       | Svelte / SvelteKit project      |
-
-### Tooling
-
-| File                         | Read When...                              |
-| ---------------------------- | ----------------------------------------- |
-| `tooling/git-hooks-setup.md` | Setting up project automation             |
-| `tooling/troubleshooting.md` | Diagnosing issues                         |
-| `tooling/external-repos.md`  | Updating GSD, marketplaces, external deps |
-| `tooling/mcp-servers.md`     | Managing MCP server lifecycle             |
-
----
-
-## Relationship to CLAUDE.md
-
-`~/.claude/CLAUDE.md` contains **core rules** that apply to ALL work.
-
-These satellite files contain **contextual guidance** for specific situations.
-
-**Hierarchy:**
-
-1. `CLAUDE.md` - Always applies (constitution)
-2. `rules/*` - Apply when relevant (context-specific)
-3. Project `CLAUDE.md` - Project-specific overrides
+1. `CLAUDE.md` — Always applies (constitution)
+2. `rules/*` — Always loaded (compact, universal)
+3. `docs/reference/*` — Loaded on-demand when prompt matches Auto-Routing table
+4. Project `CLAUDE.md` — Project-specific overrides
 
 ---
 
 ## Related Documentation
 
-- `~/.claude/CLAUDE.md` - Core rules (always read)
-- `~/.claude/skills/MASTER_INDEX.md` - Skills navigation
-- `~/.claude/skills/README.md` - Skills overview
-- `~/.claude/agents/README.md` - Agents directory
-- `~/.claude/templates/task-template.md` - Task planning
+- `~/.claude/CLAUDE.md` — Core rules + Auto-Routing table
+- `~/.claude/skills/MASTER_INDEX.md` — Skills navigation
+- `~/.claude/agents/README.md` — Agents directory
 
 ---
 
-## Adding New Rules
-
-1. Determine category: checklist, stack, workflow, or tooling
-2. Create file in appropriate directory
-3. Follow existing file format
-4. Include "Related Skills" section
-5. Include "Related Documentation" section
-6. Update this README
-
----
-
-_Rules are contextual. Load what you need, when you need it._
+_Keep `rules/` minimal. Domain-specific content belongs in `docs/reference/`._

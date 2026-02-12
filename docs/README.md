@@ -63,7 +63,7 @@ Already set up? Jump to the section you need below.
 
 | Document                                               | What it covers                      |
 | ------------------------------------------------------ | ----------------------------------- |
-| [MARKETPLACE-GUIDE.md](./MARKETPLACE-GUIDE.md)         | 84 marketplace repos, 4,500+ skills |
+| [MARKETPLACE-GUIDE.md](./MARKETPLACE-GUIDE.md)         | 84 marketplace repos, 5,400+ skills |
 | [PLUGIN-MANAGEMENT.md](./PLUGIN-MANAGEMENT.md)         | Plugin lifecycle, customization     |
 | [AUTO-CLAUDE-GUIDE.md](./AUTO-CLAUDE-GUIDE.md)         | Autonomous multi-agent coding       |
 | [CLAUDE-CODE-RESOURCES.md](./CLAUDE-CODE-RESOURCES.md) | Community resources and tips        |
@@ -110,7 +110,7 @@ This `~/.claude/` folder is a fully configured, portable Claude Code environment
 - **59 agents** for specialized autonomous workflows
 - **30 slash commands** for workflow automation
 - **12 MCP server configurations** for extended capabilities (disabled by default to save context)
-- **84 marketplace repos** providing 4,500+ additional skills from the community
+- **84 marketplace repos** providing 5,400+ additional skills from the community
 - **10 hooks** for session lifecycle, safety guards, path validation, and auto-lint
 - **30 rules files** for contextual guidance (checklists, stack patterns, workflows, tooling)
 - **17 templates** for task planning, component creation, and project scaffolding
@@ -128,7 +128,7 @@ This `~/.claude/` folder is a fully configured, portable Claude Code environment
 ### v2.6.0 (February 2026)
 
 - Comprehensive Platform Enhancement: 18 new marketplace repos (+16 net), 12 MCP servers, 3 hooks, 3 commands, 10 checklists, 3 templates
-- Marketplace: 68 → 84 repos, 5,800+ → 4,500+ skills
+- Marketplace: 68 → 84 repos, 5,800+ → 5,400+ skills
 - Removed 2 dead repos (claude-market, netresearch-marketplace)
 
 ### v2.5.0 (February 2026)
@@ -182,7 +182,7 @@ This `~/.claude/` folder is a fully configured, portable Claude Code environment
 
 ### v2.3.1 (February 2026)
 
-- Updated counts across documentation (84 marketplace repos, 4,500+ skills, 7 hooks)
+- Updated counts across documentation (84 marketplace repos, 5,400+ skills, 7 hooks)
 - Documentation navigation overhaul
 
 ### v2.2 (January 2026)

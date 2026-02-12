@@ -1,7 +1,7 @@
 ---
 name: video-producer
 description: Expert video production specialist for planning, shooting, editing, and delivering video content
-model: sonnet
+model: haiku
 tools:
   - Read
   - Write
