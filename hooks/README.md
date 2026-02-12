@@ -37,18 +37,18 @@ Session Stop
 
 ## Hook Reference
 
-| Hook                       | Event            | Matcher     | What It Does                                                                                                                                                       |
-| -------------------------- | ---------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `session-start-pull.sh`    | SessionStart     | —           | Runs `_pull-all-repos.sh` in background with 60s timeout. Logs to `logs/pull-repos.log`.                                                                           |
-| `session-start-context.sh` | SessionStart     | —           | Checks for recent session context and injects it if the last session was within a configured window.                                                               |
-| `prompt-context.sh`        | UserPromptSubmit | —           | Injects current git branch, status, and recent commits into each prompt for context.                                                                               |
-| `guard-dangerous.sh`       | PreToolUse       | Bash        | Blocks commands matching dangerous patterns: `rm -rf /`, `git push --force`, `DROP TABLE`, `git reset --hard origin`, `git clean -fd`. Exits with code 2 to block. |
-| `pre-commit-counts.sh`     | PreToolUse       | Bash        | Detects `git commit` commands and runs `update-counts.sh` first. Auto-stages updated doc files.                                                                    |
-| `pre-write-validate.sh`    | PreToolUse       | Write\|Edit | Blocks writes to protected paths (.env, credentials, node_modules, .git, .ssh, .gnupg, *.pem, *.key). Exits with code 2 to block.                                 |
-| `format-code.sh`           | PostToolUse      | Write\|Edit | Auto-formats files after Claude writes or edits them (Prettier, etc.).                                                                                             |
-| `secret-scan.sh`           | PostToolUse      | Write\|Edit | Scans written/edited files for leaked secrets (API keys, tokens, passwords). Warns but does not block.                                                             |
-| `post-edit-lint.sh`        | PostToolUse      | Write\|Edit | Runs appropriate linter after edits (ESLint for JS/TS, ruff for Python, clippy for Rust, go vet for Go). Warns but does not block.                                |
-| `session-stop-summary.sh`  | Stop             | —           | Writes a session summary for continuity between sessions.                                                                                                          |
+| Hook                       | Event            | Matcher     | Registered | What It Does                                                                                                                                                       |
+| -------------------------- | ---------------- | ----------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `session-start-pull.sh`    | SessionStart     | —           | Yes        | Runs `_pull-all-repos.sh` in background with 60s timeout. Logs to `logs/pull-repos.log`.                                                                           |
+| `session-start-context.sh` | SessionStart     | —           | Yes        | Checks for recent session context and injects it if the last session was within a configured window.                                                               |
+| `prompt-context.sh`        | UserPromptSubmit | —           | Yes        | Injects current git branch, status, and recent commits into each prompt for context.                                                                               |
+| `guard-dangerous.sh`       | PreToolUse       | Bash        | Yes        | Blocks commands matching dangerous patterns: `rm -rf /`, `git push --force`, `DROP TABLE`, `git reset --hard origin`, `git clean -fd`. Exits with code 2 to block. |
+| `pre-commit-counts.sh`     | PreToolUse       | Bash        | Yes        | Detects `git commit` commands and runs `update-counts.sh` first. Auto-stages updated doc files.                                                                    |
+| `pre-write-validate.sh`    | PreToolUse       | Write\|Edit | Yes        | Blocks writes to protected paths (.env, credentials, node_modules, .git, .ssh, .gnupg, *.pem, *.key). Exits with code 2 to block.                                 |
+| `format-code.sh`           | PostToolUse      | Write\|Edit | **No**     | Auto-formats files after Claude writes or edits them (Prettier, etc.). Deregistered: adds latency, overlaps with editor formatters.                                |
+| `secret-scan.sh`           | PostToolUse      | Write\|Edit | Yes        | Scans written/edited files for leaked secrets (API keys, tokens, passwords). Warns but does not block. Skips .md files.                                            |
+| `post-edit-lint.sh`        | PostToolUse      | Write\|Edit | **No**     | Runs appropriate linter after edits (ESLint for JS/TS, ruff for Python, clippy for Rust, go vet for Go). Deregistered: adds latency, overlaps with CI linting.     |
+| `session-stop-summary.sh`  | Stop             | —           | Yes        | Writes a session summary for continuity between sessions.                                                                                                          |
 
 ---
 
