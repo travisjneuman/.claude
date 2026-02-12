@@ -10,6 +10,7 @@ interface RuleItem {
   name: string;
   description: string;
   category: string;
+  loadType: "always-loaded" | "on-demand";
   content: string;
   htmlContent: string;
 }
@@ -75,6 +76,15 @@ export default function RulesList({ rules, categories }: RulesListProps) {
                 >
                   {rule.slug.split("/").pop()}.md
                 </span>
+                <span
+                  className="text-[10px] font-mono px-2 py-0.5 rounded-md"
+                  style={{
+                    backgroundColor: `color-mix(in srgb, ${rule.loadType === "always-loaded" ? "var(--accent-green)" : "var(--accent-blue)"} 15%, transparent)`,
+                    color: rule.loadType === "always-loaded" ? "var(--accent-green)" : "var(--accent-blue)",
+                  }}
+                >
+                  {rule.loadType === "always-loaded" ? "always loaded" : "on-demand"}
+                </span>
               </div>
             </div>
           );
@@ -112,6 +122,15 @@ export default function RulesList({ rules, categories }: RulesListProps) {
                 }}
               >
                 {selected.slug.split("/").pop()}.md
+              </span>
+              <span
+                className="text-[11px] font-mono px-2 py-0.5 rounded-md"
+                style={{
+                  backgroundColor: `color-mix(in srgb, ${selected.loadType === "always-loaded" ? "var(--accent-green)" : "var(--accent-blue)"} 15%, transparent)`,
+                  color: selected.loadType === "always-loaded" ? "var(--accent-green)" : "var(--accent-blue)",
+                }}
+              >
+                {selected.loadType === "always-loaded" ? "always loaded" : "on-demand"}
               </span>
             </div>
             <p className="text-sm text-[var(--text-secondary)] mb-6 leading-relaxed">

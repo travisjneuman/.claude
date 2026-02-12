@@ -6,7 +6,7 @@ category: reference
 
 # Claude Code Toolkit Documentation
 
-**Last Updated:** February 2026 (v2.7.0)
+**Last Updated:** February 2026 (v2.7.2)
 **Maintainer:** Travis J. Neuman
 **Purpose:** Portable, optimized Claude Code configuration for any project
 
@@ -112,12 +112,17 @@ This `~/.claude/` folder is a fully configured, portable Claude Code environment
 - **12 MCP server configurations** for extended capabilities (disabled by default to save context)
 - **84 marketplace repos** providing 5,400+ additional skills from the community
 - **10 hooks** for session lifecycle, safety guards, path validation, and auto-lint
-- **30 rules files** for contextual guidance (checklists, stack patterns, workflows, tooling)
+- **3 rules files** for contextual guidance (checklists, stack patterns, workflows, tooling)
 - **17 templates** for task planning, component creation, and project scaffolding
 
 ---
 
 ## History
+
+### v2.7.2 (February 2026)
+
+- Website Audit: Fixed inflated marketplace count (EXCLUDE_SKILL_DIRS), stale hooks, stale repo counts, added on-demand rules scanning
+- Added "always commit and push" rule to CLAUDE.md Workflow section
 
 ### v2.7.0 (February 2026)
 
@@ -127,7 +132,7 @@ This `~/.claude/` folder is a fully configured, portable Claude Code environment
 
 ### v2.6.0 (February 2026)
 
-- Comprehensive Platform Enhancement: 18 new marketplace repos (+16 net), 12 MCP servers, 3 hooks, 3 commands, 10 checklists, 3 templates
+- Comprehensive Platform Enhancement: 18 new marketplace repos (+16 net), 12 MCP servers, 3 hooks, 3 commands, 2 checklists, 3 templates
 - Marketplace: 68 → 84 repos, 5,800+ → 5,400+ skills
 - Removed 2 dead repos (claude-market, netresearch-marketplace)
 

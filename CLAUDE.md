@@ -28,6 +28,7 @@
 ## Workflow
 
 Plan → Approve → Execute → Verify → Commit → Push (user repos only).
+**After completing work:** always commit and push. Do not default to local-only testing/verification unless the user explicitly requests it.
 Track progress with `TodoWrite`. Non-trivial work needs `tasks/<name>.md`.
 Multi-phase: `/gsd:progress` or `/gsd:new-project`. Details: `docs/WORKFLOW-GUIDE.md`
 

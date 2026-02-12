@@ -2,6 +2,21 @@
 
 All notable changes to the Ultimate Claude Code Toolkit.
 
+## [2.7.2] - February 11, 2026
+
+### Website Audit Fixes
+
+- **Fixed inflated marketplace skill count** — Added `EXCLUDE_SKILL_DIRS` to `marketplace.ts` matching bash script exclusions (backups, tests, drafts, etc.). Top repo went from 3,148 raw to 1,859 filtered.
+- **Fixed stale hooks in website** — Added metadata gating in `hooks.ts` so deregistered hooks (format-code, pre-commit-counts) no longer appear even if `.sh` files remain on disk.
+- **Fixed stale repo count in scripts** — Updated "68" → "84" in `init-marketplaces` and `_pull-all-repos` descriptions in `scripts.ts`.
+- **Added on-demand rules scanning** — `rules.ts` now scans both `rules/` (always-loaded) and `docs/reference/` (on-demand), with loadType badges in the UI.
+
+### Workflow
+
+- **Added "always commit and push" rule to CLAUDE.md** — After completing work, always commit and push instead of defaulting to local-only testing.
+
+---
+
 ## [2.7.1] - February 9, 2026
 
 ### Bug Fixes
