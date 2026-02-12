@@ -124,19 +124,6 @@ YOU MUST automatically load the right resources based on the user's prompt — e
 | Serverless, Lambda, Edge Functions    | `skills/serverless-development`                            |
 | Specialized domain work               | `skills/MASTER_INDEX.md` → find and invoke matching skill |
 
-**Auto-use tools based on prompt intent — no slash command needed:**
-
-- Coding task → use Task tool with appropriate agent (explore, plan, or specialist)
-- Bug report → use debugging-specialist or debug-systematic skill
-- Code review → use pr-review-toolkit agents
-- Research question → use WebSearch immediately
-- Complex feature → suggest EnterPlanMode or /auto-claude
-- Team/parallel work request → suggest Agent Teams with /assemble-team
-- Deploy request → suggest `/deploy` command
-- Security concern → suggest `/security-scan` command
-- Test coverage → suggest `/test-suite` command
-- Scaffold/generate → suggest `/scaffold` command
-
 **Skill/agent discovery:** When a prompt touches a specialized domain, search local skills first (`skills/MASTER_INDEX.md`), then marketplace (`find ~/.claude/plugins/marketplaces -name "SKILL.md" | xargs grep -li "<keyword>"`).
 
 ---
