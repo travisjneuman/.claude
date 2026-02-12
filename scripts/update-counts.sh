@@ -44,6 +44,8 @@ FIND_EXCLUDES=()
 for dir in "${EXCLUDE_SKILL_DIRS[@]}"; do
   FIND_EXCLUDES+=(-not -path "*/$dir/*")
 done
+# Also exclude all dot-directories (e.g., .cursor/, .vscode/) — matches Node.js counter behavior
+FIND_EXCLUDES+=(-not -path "*/\.*/*")
 MARKET_SKILL_COUNT=$(find plugins/marketplaces -name "SKILL.md" "${FIND_EXCLUDES[@]}" 2>/dev/null | wc -l | tr -d ' ')
 COMMAND_COUNT=$(ls commands/*.md 2>/dev/null | grep -cv 'README\.md' || echo 0)
 HOOK_COUNT=$(ls hooks/*.sh 2>/dev/null | wc -l | tr -d ' ')

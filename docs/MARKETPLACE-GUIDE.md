@@ -1,6 +1,6 @@
 ---
 name: Marketplace Guide
-description: Browse, install, and manage 84 community plugin marketplaces with 5,400+ additional skills.
+description: Browse, install, and manage 84 community plugin marketplaces with 5,300+ additional skills.
 category: ecosystem
 ---
 
@@ -302,4 +302,4 @@ All marketplaces are configured with `no_push` - read-only access.
 
 ---
 
-_84 marketplaces, 5,400+ skills, discovered proactively when domain expertise is needed._
+_84 marketplaces, 5,300+ skills, discovered proactively when domain expertise is needed._
