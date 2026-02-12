@@ -10,27 +10,9 @@
       "SlashCommand(/commit-commands:*)",
       "SlashCommand(/feature-dev:*)",
       "SlashCommand(/pr-review-toolkit:*)",
-      "Bash(git add:*)",
-      "Bash(git rm:*)",
-      "Bash(git commit:*)",
-      "Bash(git worktree:*)",
-      "Bash(git fetch:*)",
-      "Bash(git merge:*)",
-      "Bash(git reset:*)",
-      "Bash(git status:*)",
-      "Bash(git log:*)",
-      "Bash(git diff:*)",
-      "Bash(git branch:*)",
-      "Bash(git checkout:*)",
-      "Bash(git stash:*)",
-      "Bash(git show:*)",
+      "Bash(git:*)",
       "Bash(test:*)",
-      "Bash(npm run:*)",
-      "Bash(npm test:*)",
-      "Bash(npm install:*)",
-      "Bash(npm uninstall:*)",
-      "Bash(npm audit:*)",
-      "Bash(npm ci:*)",
+      "Bash(npm:*)",
       "Bash(npx:*)",
       "Bash(pnpm:*)",
       "Bash(yarn:*)",
@@ -162,6 +144,11 @@
             "type": "command",
             "command": "node -e \"process.env.HOOK_NAME='guard-dangerous.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
             "statusMessage": "Checking command safety"
+          },
+          {
+            "type": "command",
+            "command": "node -e \"process.env.HOOK_NAME='pre-commit-counts.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
+            "statusMessage": "Updating counts before commit"
           }
         ]
       },
@@ -176,6 +163,18 @@
         ]
       }
     ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node -e \"process.env.HOOK_NAME='secret-scan.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
+            "statusMessage": "Scanning for secrets"
+          }
+        ]
+      }
+    ]
   },
   "enabledPlugins": {
     "agent-sdk-dev@claude-code-plugins": true,

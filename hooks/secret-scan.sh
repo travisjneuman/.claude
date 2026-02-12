@@ -25,7 +25,7 @@ FILE_PATH=$(echo "$INPUT" | node -e "
 
 # Skip binary files, lock files, and node_modules
 case "$FILE_PATH" in
-  *.lock|*.min.js|*.min.css|*.map|*.woff*|*.ttf|*.png|*.jpg|*.gif|*.ico|*.svg)
+  *.lock|*.min.js|*.min.css|*.map|*.woff*|*.ttf|*.png|*.jpg|*.gif|*.ico|*.svg|*.md)
     exit 0
     ;;
 esac
