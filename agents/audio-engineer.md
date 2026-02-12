@@ -1,7 +1,7 @@
 ---
 name: audio-engineer
 description: Expert audio engineer for recording, mixing, mastering, and sound design
-model: sonnet
+model: haiku
 tools:
   - Read
   - Write

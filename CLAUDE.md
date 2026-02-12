@@ -53,7 +53,7 @@ Parallel calls: make ALL independent tool calls in a single message.
 
 Types: strict, no `any`. Functions: <50 lines, <5 params. Files: <300 lines. DRY after 3rd repetition.
 Tests: work for ALL inputs, never hard-code to pass. Clean up temp files before completion.
-Stack-specific: `rules/stacks/`
+Stack-specific: `docs/reference/stacks/`
 
 ---
 
@@ -90,30 +90,30 @@ YOU MUST automatically load the right resources based on the user's prompt — e
 
 **Always load matching satellite files using Read tool:**
 
-| Prompt contains                       | YOU MUST Read                                             |
-| ------------------------------------- | --------------------------------------------------------- |
-| Completing/verifying work             | `rules/checklists/verification-template.md`               |
-| UI, visual, CSS, styling, frontend    | `rules/checklists/ui-visual-changes.md`                   |
-| Script, automation, batch             | `rules/checklists/automation-scripts.md`                  |
-| HTML, static site                     | `rules/checklists/static-sites.md`                        |
-| API design, endpoints, REST, GraphQL  | `rules/checklists/api-development.md`                     |
-| Database, schema, migration, queries  | `rules/checklists/database-design.md`                     |
-| Security, OWASP, hardening, auth      | `rules/checklists/security-hardening.md`                  |
-| Performance, speed, bundle, optimize  | `rules/checklists/performance-optimization.md`            |
-| Research, investigate, compare        | `rules/workflows/research-methodology.md`                 |
-| Deploy, CI/CD, pipeline, release      | `rules/workflows/deployment-cicd.md`                      |
-| React, TypeScript                     | `rules/stacks/react-typescript.md`                        |
-| Python, Django, FastAPI               | `rules/stacks/python.md` or `rules/stacks/django-fastapi.md` |
-| Go, Golang                            | `rules/stacks/go.md`                                      |
-| Rust                                  | `rules/stacks/rust.md`                                    |
-| Next.js, NestJS, full-stack           | `rules/stacks/fullstack-nextjs-nestjs.md`                 |
-| Vue, Nuxt                             | `rules/stacks/vue-nuxt.md`                                |
-| Svelte, SvelteKit                     | `rules/stacks/svelte-sveltekit.md`                        |
-| React Native, Expo, mobile            | `rules/stacks/react-native-expo.md`                       |
-| Flutter, Dart                         | `rules/stacks/flutter-dart.md`                            |
-| MCP, server protocol                  | `rules/tooling/mcp-servers.md`                            |
-| Error, bug, broken, fix               | `rules/tooling/troubleshooting.md`                        |
-| Team, parallel, coordinate agents     | `rules/workflows/agent-teams.md`                          |
+| Prompt contains                       | Read on-demand                                                    |
+| ------------------------------------- | ----------------------------------------------------------------- |
+| Completing/verifying work             | `rules/checklists/verification-template.md`                       |
+| UI, visual, CSS, styling, frontend    | `rules/checklists/ui-visual-changes.md`                           |
+| Script, automation, batch             | `docs/reference/checklists/automation-scripts.md`                 |
+| HTML, static site                     | `docs/reference/checklists/static-sites.md`                       |
+| API design, endpoints, REST, GraphQL  | `docs/reference/checklists/api-development.md`                    |
+| Database, schema, migration, queries  | `docs/reference/checklists/database-design.md`                    |
+| Security, OWASP, hardening, auth      | `docs/reference/checklists/security-hardening.md`                 |
+| Performance, speed, bundle, optimize  | `docs/reference/checklists/performance-optimization.md`           |
+| Research, investigate, compare        | `docs/reference/workflows/research-methodology.md`                |
+| Deploy, CI/CD, pipeline, release      | `docs/reference/workflows/deployment-cicd.md`                     |
+| React, TypeScript                     | `docs/reference/stacks/react-typescript.md`                       |
+| Python, Django, FastAPI               | `docs/reference/stacks/python.md` or `docs/reference/stacks/django-fastapi.md` |
+| Go, Golang                            | `docs/reference/stacks/go.md`                                     |
+| Rust                                  | `docs/reference/stacks/rust.md`                                   |
+| Next.js, NestJS, full-stack           | `docs/reference/stacks/fullstack-nextjs-nestjs.md`                |
+| Vue, Nuxt                             | `docs/reference/stacks/vue-nuxt.md`                               |
+| Svelte, SvelteKit                     | `docs/reference/stacks/svelte-sveltekit.md`                       |
+| React Native, Expo, mobile            | `docs/reference/stacks/react-native-expo.md`                      |
+| Flutter, Dart                         | `docs/reference/stacks/flutter-dart.md`                           |
+| MCP, server protocol                  | `docs/reference/tooling/mcp-servers.md`                           |
+| Error, bug, broken, fix               | `docs/reference/tooling/troubleshooting.md`                       |
+| Team, parallel, coordinate agents     | `docs/reference/workflows/agent-teams.md`                         |
 | Payment, Stripe, billing, subscribe   | `skills/payment-integration` + `payment-billing-specialist` agent |
 | Auth, login, OAuth, JWT, session      | `skills/authentication-patterns` + `auth-specialist` agent |
 | Analytics, tracking, A/B test         | `skills/product-analytics` + `product-analytics-specialist` agent |
