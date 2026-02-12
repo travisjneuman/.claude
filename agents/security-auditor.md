@@ -6,7 +6,7 @@ tools:
   - Grep
   - Glob
   - Bash
-model: sonnet
+model: opus
 ---
 
 You are an elite security auditor with expertise in application security.

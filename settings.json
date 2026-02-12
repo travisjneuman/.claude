@@ -166,16 +166,6 @@
         ]
       },
       {
-        "matcher": "Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node -e \"process.env.HOOK_NAME='pre-commit-counts.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
-            "statusMessage": "Updating counts"
-          }
-        ]
-      },
-      {
         "matcher": "Write|Edit",
         "hooks": [
           {
@@ -186,38 +176,6 @@
         ]
       }
     ],
-    "PostToolUse": [
-      {
-        "matcher": "Write|Edit",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node -e \"process.env.HOOK_NAME='format-code.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
-            "statusMessage": "Auto-formatting"
-          }
-        ]
-      },
-      {
-        "matcher": "Write|Edit",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node -e \"process.env.HOOK_NAME='secret-scan.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
-            "statusMessage": "Scanning for secrets"
-          }
-        ]
-      },
-      {
-        "matcher": "Write|Edit",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node -e \"process.env.HOOK_NAME='post-edit-lint.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
-            "statusMessage": "Running lint check"
-          }
-        ]
-      }
-    ]
   },
   "enabledPlugins": {
     "agent-sdk-dev@claude-code-plugins": true,
@@ -239,6 +197,6 @@
   },
   "outputStyle": "default",
   "spinnerTipsEnabled": false,
-  "alwaysThinkingEnabled": true,
+  "alwaysThinkingEnabled": false,
   "effortLevel": "medium"
 }

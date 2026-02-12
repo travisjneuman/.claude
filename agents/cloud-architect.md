@@ -1,17 +1,7 @@
 ---
 name: cloud-architect
-description: >-
-  Multi-cloud architecture, cost optimization, serverless vs containers,
-  disaster recovery, and infrastructure design specialist. Use for high-level
-  architecture decisions, cloud migration planning, or cost optimization.
-  Trigger phrases: cloud, AWS, GCP, Azure, serverless, containers, Kubernetes,
-  infrastructure, cost, disaster recovery, scalability, architecture.
-tools:
-  - Read
-  - Write
-  - Grep
-  - Glob
-  - Bash
+description: "Multi-cloud architecture, cost optimization, serverless vs containers, disaster recovery, and infrastructure design specialist. Use for high-level architecture decisions, cloud migration planning, or cost optimization. Trigger phrases: cloud, AWS, GCP, Azure, serverless, containers, Kubernetes, infrastructure, cost, disaster recovery, scalability, architecture."
+tools: Read, Write, Grep, Glob, Bash
 model: opus
 ---
 

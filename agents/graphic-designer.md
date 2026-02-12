@@ -1,7 +1,7 @@
 ---
 name: graphic-designer
 description: Expert graphic designer for digital and print design, color theory, typography, and visual identity
-model: sonnet
+model: haiku
 tools:
   - Read
   - Write

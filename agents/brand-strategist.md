@@ -1,7 +1,7 @@
 ---
 name: brand-strategist
 description: Expert brand strategist for brand identity, positioning, naming, and brand guidelines
-model: sonnet
+model: haiku
 tools:
   - Read
   - Write

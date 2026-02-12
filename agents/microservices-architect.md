@@ -1,7 +1,7 @@
 ---
 name: microservices-architect
 description: Expert microservices architect for distributed system design, service decomposition, and resilience patterns
-model: sonnet
+model: opus
 tools:
   - Glob
   - Grep
