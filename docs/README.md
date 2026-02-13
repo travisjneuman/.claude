@@ -125,6 +125,7 @@ This `~/.claude/` folder is a fully configured, portable Claude Code environment
 - Registered 2 hooks: pre-commit-counts.sh (PreToolUse), secret-scan.sh (PostToolUse); fixed secret-scan .md false positives
 - Token optimization: removed "Auto-use tools" section from CLAUDE.md, consolidated 20 bash permissions into 2, streamlined start-task.md from 296 to 156 lines
 - Dynamic operation: all resources now activate from prompt context alone, no slash commands required
+- Replaced 8,849-line README with streamlined ~400-line version; archived original to `archive/README-original.md`
 
 ### v2.7.2 (February 2026)
 
