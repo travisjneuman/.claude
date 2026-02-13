@@ -21,6 +21,10 @@ All notable changes to the Ultimate Claude Code Toolkit.
 - **Consolidated bash permissions** — Replaced 14 individual `Bash(git <subcmd>:*)` entries with `Bash(git:*)` and 6 `Bash(npm <subcmd>:*)` entries with `Bash(npm:*)`. Net reduction: 18 permission lines.
 - **Streamlined start-task.md** — Rewrote universal router from 296 to 156 lines (v3.0 → v3.1). Removed content duplicated with CLAUDE.md auto-routing table: domain detection hints, marketplace repo listing, execution principles, autonomous implementation detection, multi-window workflow awareness.
 
+### Documentation
+
+- **Replaced root README.md** — Archived the original 8,849-line README to `archive/README-original.md` and replaced with a streamlined ~400-line version featuring capsule-render header, shields.io badges, collapsible sections, and links to docs/ for deep dives.
+
 ### Philosophy
 
 - **Dynamic operation principle enforced** — All resources now activate from prompt context alone. No slash commands required for optimal routing.
