@@ -268,6 +268,8 @@ All hooks use `hooks/run-hook.js` — a Node.js-based runner that resolves hook 
 
 **Why Node.js?** On Windows, Claude Code may invoke WSL's bash, which resolves `~` to `/root/` instead of the actual Windows user home. Node.js `os.homedir()` is the only reliable cross-platform method, and Node.js is guaranteed to be installed (Claude Code requires it).
 
+**Why Git Bash on Windows?** Bare `bash` may resolve to WSL's bash (`C:\Windows\System32\bash.exe`), which tries to mount all Windows drives on startup and fails on network drives (e.g. `Z:\`). The runner explicitly prefers Git Bash (`C:\Program Files\Git\usr\bin\bash.exe`) to avoid this.
+
 Each hook command in `settings.json` follows this pattern:
 
 ```json
@@ -279,7 +281,8 @@ The runner:
 2. Constructs the hook path: `~/.claude/hooks/<HOOK_NAME>`
 3. Exits silently if the hook script doesn't exist (non-blocking)
 4. Converts Windows backslashes to forward slashes for bash compatibility
-5. Executes the hook via `bash` with `HOME` env var set correctly
+5. On Windows, prefers Git Bash (`C:\Program Files\Git\usr\bin\bash.exe`) over WSL bash to avoid drive mount errors
+6. Executes the hook via bash with `HOME` env var set correctly
 
 ---
 
@@ -400,6 +403,13 @@ Add to `settings.json`:
 - `guard-dangerous.sh` blocks commands matching broad patterns
 - Check if your command matches: `rm -rf`, `git push --force`, `DROP TABLE`, etc.
 - Bypass with caution if it's a false positive
+
+**Hook error: "wsl: Failed to mount Z:\" (Windows):**
+
+- Bare `bash` on Windows may resolve to WSL's bash (`C:\Windows\System32\bash.exe`), which tries to mount all drives on startup and fails on network drives (e.g. `Z:\`)
+- `run-hook.js` handles this automatically by preferring Git Bash (`C:\Program Files\Git\usr\bin\bash.exe`) on Windows
+- If you still see this error, verify Git for Windows is installed and `C:\Program Files\Git\usr\bin\bash.exe` exists
+- Run `where bash` to see which bash executables are on your PATH
 
 **Hook running slowly:**
 

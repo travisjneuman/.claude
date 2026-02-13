@@ -4,9 +4,10 @@ All notable changes to the Ultimate Claude Code Toolkit.
 
 ## [2.8.0] - February 11, 2026
 
-### Bug Fix (P0)
+### Bug Fixes (P0)
 
 - **Fixed invalid JSON in settings.json** — Trailing comma on line 178 caused Claude Code to fail parsing all settings, producing both "auto-compact errors" and "constant hook errors" since Opus 4.6.
+- **Fixed WSL bash drive mount errors on Windows** — `run-hook.js` now prefers Git Bash over WSL bash on Windows, preventing "Failed to mount Z:\" errors on every hook invocation when network drives are mapped.
 
 ### Hook Registration
 
