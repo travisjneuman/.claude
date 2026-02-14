@@ -109,7 +109,7 @@ See **[MASTER_INDEX.md](./skills/MASTER_INDEX.md)** for the full listing with de
 
 ### Dynamic Routing
 
-Every prompt flows through a routing system that loads resources on-demand:
+Every prompt flows through a routing system that loads the best-fit resources on-demand — drawing from 119 built-in skills, 59 agents, 30 rules/checklists, and 5,300+ community marketplace skills across 84 repos:
 
 ```
  Your prompt
@@ -120,13 +120,13 @@ Every prompt flows through a routing system that loads resources on-demand:
  │  (always loaded)             │
  └──────────┬───────────────────┘
             │
-   ┌────────┼────────────────┐
-   ▼        ▼                ▼
-┌──────┐ ┌──────────┐ ┌──────────┐
-│Skills│ │  Rules   │ │ Agents   │
-│(119) │ │Checklists│ │  (59)    │
-│      │ │& Stacks  │ │          │
-└──────┘ └──────────┘ └──────────┘
+   ┌────────┼────────┬───────────────┐
+   ▼        ▼        ▼               ▼
+┌──────┐ ┌──────┐ ┌──────┐ ┌──────────────┐
+│Skills│ │Rules │ │Agents│ │ Marketplace  │
+│(119) │ │& Chk │ │ (59) │ │  84 repos    │
+│      │ │      │ │      │ │  5,300+ more │
+└──────┘ └──────┘ └──────┘ └──────────────┘
 ```
 
 **Example:** Type "review this React component for security issues" and the router automatically loads the React/TypeScript stack guide, the security hardening checklist, and spawns the code reviewer agent — without any slash commands.
@@ -143,7 +143,8 @@ Every prompt flows through a routing system that loads resources on-demand:
 | UI, visual, CSS | UI/visual changes checklist |
 | Test, testing | Verification template + test specialist |
 | Research, investigate | Research methodology workflow |
-| Any specialized domain | Matching skill from MASTER_INDEX |
+| Any specialized domain | Best-fit skill from MASTER_INDEX + marketplace (5,300+ skills) |
+| Installed plugins | Active agents, commands, and skills from community repos |
 
 ### Hook Lifecycle
 
@@ -177,7 +178,7 @@ See **[hooks/README.md](./hooks/README.md)** for the full hook reference.
 <details>
 <summary><strong>🏪 Marketplace — 84 repos, 5,300+ skills</strong></summary>
 
-The toolkit aggregates 84 community skill repositories as git submodules in `plugins/marketplaces/`. All are read-only (fetch but never push). Skills span security (Trail of Bits), full-stack development, scientific computing, SAP/enterprise, Elixir, Terraform, creative writing, and more.
+The toolkit aggregates 84 community skill repositories as git submodules in `plugins/marketplaces/`. All are read-only (fetch but never push). Skills span security (Trail of Bits), full-stack development, scientific computing, SAP/enterprise, Elixir, Terraform, creative writing, and more. Some marketplace repos are **installed as plugins**, making their agents, commands, and skills fully active in the routing system alongside built-in resources. Non-installed repos contribute discoverable skills via keyword search.
 
 ```bash
 # Search marketplace skills
