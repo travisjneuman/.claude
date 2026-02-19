@@ -1,6 +1,6 @@
 {
   "repoCount": 84,
-  "totalSkills": 5321,
+  "totalSkills": 5384,
   "repos": [
     {
       "name": "claude-code-plugins-plus-skills",
@@ -10,12 +10,12 @@
     {
       "name": "awesome-claude-skills",
       "displayName": "Awesome Claude Skills",
-      "skillCount": 943
+      "skillCount": 864
     },
     {
       "name": "davila7-templates",
       "displayName": "Davila7 Templates",
-      "skillCount": 684
+      "skillCount": 690
     },
     {
       "name": "wshobson-agents",
@@ -30,11 +30,16 @@
     {
       "name": "madappgang-claude-code",
       "displayName": "Madappgang Claude Code",
-      "skillCount": 127
+      "skillCount": 131
     },
     {
       "name": "athola-night-market",
       "displayName": "Athola Night Market",
+      "skillCount": 126
+    },
+    {
+      "name": "buildwithclaude",
+      "displayName": "Buildwithclaude",
       "skillCount": 123
     },
     {
@@ -50,7 +55,7 @@
     {
       "name": "giuseppe-developer-kit",
       "displayName": "Giuseppe Developer Kit",
-      "skillCount": 71
+      "skillCount": 77
     },
     {
       "name": "zircote-dot-claude",
@@ -63,6 +68,11 @@
       "skillCount": 67
     },
     {
+      "name": "alirezarezvani-claude-skills",
+      "displayName": "Alirezarezvani Claude Skills",
+      "skillCount": 66
+    },
+    {
       "name": "jeffallan-claude-skills",
       "displayName": "Jeffallan Claude Skills",
       "skillCount": 66
@@ -70,12 +80,12 @@
     {
       "name": "neolab-context-kit",
       "displayName": "Neolab Context Kit",
-      "skillCount": 60
+      "skillCount": 66
     },
     {
-      "name": "alirezarezvani-claude-skills",
-      "displayName": "Alirezarezvani Claude Skills",
-      "skillCount": 53
+      "name": "trailofbits-skills",
+      "displayName": "Trailofbits Skills",
+      "skillCount": 54
     },
     {
       "name": "worldbuilding-skills",
@@ -83,13 +93,8 @@
       "skillCount": 52
     },
     {
-      "name": "trailofbits-skills",
-      "displayName": "Trailofbits Skills",
-      "skillCount": 49
-    },
-    {
-      "name": "buildwithclaude",
-      "displayName": "Buildwithclaude",
+      "name": "affaan-everything-claude",
+      "displayName": "Affaan Everything Claude",
       "skillCount": 43
     },
     {
@@ -100,7 +105,12 @@
     {
       "name": "daymade-skills",
       "displayName": "Daymade Skills",
-      "skillCount": 36
+      "skillCount": 37
+    },
+    {
+      "name": "skillsforge",
+      "displayName": "Skillsforge",
+      "skillCount": 37
     },
     {
       "name": "rohitg00-claude-code-toolkit",
@@ -108,14 +118,9 @@
       "skillCount": 35
     },
     {
-      "name": "skillsforge",
-      "displayName": "Skillsforge",
-      "skillCount": 34
-    },
-    {
-      "name": "affaan-everything-claude",
-      "displayName": "Affaan Everything Claude",
-      "skillCount": 32
+      "name": "aaronontheweb-dotnet-skills",
+      "displayName": "Aaronontheweb Dotnet Skills",
+      "skillCount": 33
     },
     {
       "name": "secondsky-sap-skills",
@@ -123,19 +128,9 @@
       "skillCount": 32
     },
     {
-      "name": "aaronontheweb-dotnet-skills",
-      "displayName": "Aaronontheweb Dotnet Skills",
-      "skillCount": 31
-    },
-    {
       "name": "akin-ozer-devops",
       "displayName": "Akin Ozer Devops",
       "skillCount": 31
-    },
-    {
-      "name": "henkisdabro-marketplace",
-      "displayName": "Henkisdabro Marketplace",
-      "skillCount": 24
     },
     {
       "name": "gmickel-marketplace",
@@ -143,9 +138,14 @@
       "skillCount": 23
     },
     {
+      "name": "henkisdabro-marketplace",
+      "displayName": "Henkisdabro Marketplace",
+      "skillCount": 21
+    },
+    {
       "name": "EveryInc-compound",
       "displayName": "EveryInc Compound",
-      "skillCount": 19
+      "skillCount": 20
     },
     {
       "name": "mhattingpete-skills",
@@ -163,13 +163,13 @@
       "skillCount": 16
     },
     {
-      "name": "ananddtyagi-marketplace",
-      "displayName": "Ananddtyagi Marketplace",
-      "skillCount": 14
-    },
-    {
       "name": "claude-plugins-official",
       "displayName": "Claude Plugins Official",
+      "skillCount": 15
+    },
+    {
+      "name": "ananddtyagi-marketplace",
+      "displayName": "Ananddtyagi Marketplace",
       "skillCount": 14
     },
     {
@@ -248,6 +248,11 @@
       "skillCount": 4
     },
     {
+      "name": "claude-mem",
+      "displayName": "Claude Mem",
+      "skillCount": 4
+    },
+    {
       "name": "hashi-terraform-skills",
       "displayName": "Hashi Terraform Skills",
       "skillCount": 4
@@ -268,8 +273,8 @@
       "skillCount": 3
     },
     {
-      "name": "claude-mem",
-      "displayName": "Claude Mem",
+      "name": "mvanhorn-last30days-skill",
+      "displayName": "Mvanhorn Last30days Skill",
       "skillCount": 2
     },
     {
@@ -281,11 +286,6 @@
       "name": "zai-coding-plugins",
       "displayName": "Zai Coding Plugins",
       "skillCount": 2
-    },
-    {
-      "name": "mvanhorn-last30days-skill",
-      "displayName": "Mvanhorn Last30days Skill",
-      "skillCount": 1
     },
     {
       "name": "othmanadi-planning",

@@ -197,5 +197,6 @@
   "outputStyle": "default",
   "spinnerTipsEnabled": false,
   "alwaysThinkingEnabled": false,
-  "effortLevel": "medium"
+  "effortLevel": "medium",
+  "skipDangerousModePermissionPrompt": true
 }
