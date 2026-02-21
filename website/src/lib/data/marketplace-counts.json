@@ -1,11 +1,11 @@
 {
   "repoCount": 84,
-  "totalSkills": 5384,
+  "totalSkills": 5406,
   "repos": [
     {
       "name": "claude-code-plugins-plus-skills",
       "displayName": "Claude Code Plugins Plus Skills",
-      "skillCount": 1859
+      "skillCount": 1864
     },
     {
       "name": "awesome-claude-skills",
@@ -15,7 +15,7 @@
     {
       "name": "davila7-templates",
       "displayName": "Davila7 Templates",
-      "skillCount": 690
+      "skillCount": 691
     },
     {
       "name": "wshobson-agents",
@@ -55,7 +55,7 @@
     {
       "name": "giuseppe-developer-kit",
       "displayName": "Giuseppe Developer Kit",
-      "skillCount": 77
+      "skillCount": 92
     },
     {
       "name": "zircote-dot-claude",
@@ -95,7 +95,7 @@
     {
       "name": "affaan-everything-claude",
       "displayName": "Affaan Everything Claude",
-      "skillCount": 43
+      "skillCount": 44
     },
     {
       "name": "actionbook-rust-skills",
