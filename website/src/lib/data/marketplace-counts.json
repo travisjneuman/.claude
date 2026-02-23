@@ -1,11 +1,11 @@
 {
   "repoCount": 84,
-  "totalSkills": 5406,
+  "totalSkills": 5416,
   "repos": [
     {
       "name": "claude-code-plugins-plus-skills",
       "displayName": "Claude Code Plugins Plus Skills",
-      "skillCount": 1864
+      "skillCount": 1865
     },
     {
       "name": "awesome-claude-skills",
@@ -15,17 +15,17 @@
     {
       "name": "davila7-templates",
       "displayName": "Davila7 Templates",
-      "skillCount": 691
+      "skillCount": 698
+    },
+    {
+      "name": "claude-scientific-skills",
+      "displayName": "Claude Scientific Skills",
+      "skillCount": 146
     },
     {
       "name": "wshobson-agents",
       "displayName": "Wshobson Agents",
       "skillCount": 146
-    },
-    {
-      "name": "claude-scientific-skills",
-      "displayName": "Claude Scientific Skills",
-      "skillCount": 145
     },
     {
       "name": "madappgang-claude-code",
@@ -40,7 +40,7 @@
     {
       "name": "buildwithclaude",
       "displayName": "Buildwithclaude",
-      "skillCount": 123
+      "skillCount": 124
     },
     {
       "name": "kivilaid-marketplace",
