@@ -1,6 +1,6 @@
 # Skills Master Index
 
-> Auto-generated on 2026-02-23 00:26. Run `bash ~/.claude/scripts/regenerate-index.sh` to refresh.
+> Auto-generated on 2026-02-23 00:41. Run `bash ~/.claude/scripts/regenerate-index.sh` to refresh.
 
 ## Discovery Protocol
 
@@ -32,13 +32,16 @@
 | `case-interview-practice` | Interactive consulting case interview practice with structured frameworks, feedb |
 | `codebase-documenter` | This skill should be used when writing documentation for codebases, including RE |
 | `content-repurposer` | Adapt content across platforms with tone/format shifting — blog to social, lon |
+## Marketplace: 6916 skills across 84 repos
+
+Search: `find ~/.claude/plugins/marketplaces -name "SKILL.md" | xargs grep -li "<keyword>"`
 | `contract-redliner` | Contract review, redlining, and negotiation support with clause analysis, risk i |
 | `core-workflow` | Detailed development workflow patterns, checklists, and standards. Auto-loads fo |
 | `course-material-creator` | Create custom educational materials including syllabi, lesson plans, assessments |
 | `customer-persona-builder` | Data-driven customer persona development combining market research, user behavio |
 | `customer-success` | Support workflows, ticketing systems (Zendesk, Intercom), knowledge base design, |
-| `data-science` | Data science and analytics expertise for statistical analysis, machine learning  |
 | `database-expert` | Advanced database design and administration for PostgreSQL, MongoDB, and Redis.  |
+| `data-science` | Data science and analytics expertise for statistical analysis, machine learning  |
 | `debate-practice-coach` | Interactive debate and argument practice with structured feedback, counterargume |
 | `debug-systematic` | Systematic 4-phase debugging methodology for complex, intermittent, or mysteriou |
 | `devops-cloud` | DevOps, cloud infrastructure, and platform engineering. Use when working with AW |
@@ -133,6 +136,6 @@
 
 ---
 
-## Marketplace: 6915 skills across 84 repos
+## Marketplace: 6916 skills across 84 repos
 
 Search: `find ~/.claude/plugins/marketplaces -name "SKILL.md" | xargs grep -li "<keyword>"`
