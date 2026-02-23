@@ -1,12 +1,12 @@
 {
-  "numStartups": 171,
+  "numStartups": 172,
   "installMethod": "global",
   "autoUpdates": false,
   "hasSeenTasksHint": true,
   "tipsHistory": {
     "terminal-setup": 151,
-    "memory-command": 138,
-    "theme-command": 138,
+    "memory-command": 172,
+    "theme-command": 172,
     "status-line": 138,
     "enter-to-steer-in-relatime": 140,
     "todo-list": 140,
@@ -30,8 +30,7 @@
     "default-permission-mode-config": 151,
     "git-worktrees": 151
   },
-  "promptQueueUseCount": 1115,
-  "showExpandedTodos": true,
+  "promptQueueUseCount": 1369,
   "fileCheckpointingEnabled": false,
   "cachedStatsigGates": {
     "tengu_log_1p_events": true,
@@ -162,7 +161,9 @@
     "tengu_oak_drum": false,
     "tengu_pebble_leaf_prune": false,
     "tengu_swann_brevity": "control",
-    "tengu_tool_input_aliasing": false
+    "tengu_tool_input_aliasing": false,
+    "tengu_destructive_command_warning": false,
+    "tengu_streaming_text": false
   },
   "hasSeenStashHint": true,
   "mcpServers": {},
@@ -1611,7 +1612,7 @@
         "currency": "USD"
       },
       "remaining_passes": 3,
-      "timestamp": 1771541426028
+      "timestamp": 1771822809481
     }
   },
   "s1mAccessCache": {
@@ -1623,21 +1624,21 @@
   },
   "officialMarketplaceAutoInstallAttempted": true,
   "officialMarketplaceAutoInstalled": true,
-  "changelogLastFetched": 1771629562669,
+  "changelogLastFetched": 1771822808558,
   "claudeCodeFirstTokenDate": "2025-09-29T23:55:59.300422Z",
   "hasCompletedOnboarding": true,
   "lastOnboardingVersion": "2.1.7",
-  "lastReleaseNotesSeen": "2.1.49",
+  "lastReleaseNotesSeen": "2.1.50",
   "passesUpsellSeenCount": 4,
   "hasShownOpus45Notice": {
     "e5d20f5d-79a8-473c-8089-85516545d8a7": true
   },
   "hasVisitedPasses": false,
-  "lastPlanModeUse": 1771648084535,
+  "lastPlanModeUse": 1771822828379,
   "thinkingMigrationComplete": true,
   "hasUsedBackslashReturn": true,
   "feedbackSurveyState": {
-    "lastShownTime": 1771104023273
+    "lastShownTime": 1771715408621
   },
   "githubRepoPaths": {
     "travisjneuman/.webdev": [
@@ -1678,8 +1679,8 @@
   },
   "skillUsage": {
     "start-task": {
-      "usageCount": 217,
-      "lastUsedAt": 1771629613299
+      "usageCount": 218,
+      "lastUsedAt": 1771702017870
     },
     "generic-fullstack-feature-developer": {
       "usageCount": 1,
@@ -1718,14 +1719,14 @@
   "groveConfigCache": {
     "409c248f-97d8-430a-b9b1-d26a7ebda2ec": {
       "grove_enabled": true,
-      "timestamp": 1771459483238
+      "timestamp": 1771822807662
     }
   },
   "autoUpdatesProtectedForNative": true,
   "passesLastSeenRemaining": 3,
   "clientDataCache": {
     "data": {},
-    "timestamp": 1771659631173
+    "timestamp": 1771823012282
   },
   "hasShownOpus46Notice": {
     "e5d20f5d-79a8-473c-8089-85516545d8a7": true
