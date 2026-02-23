@@ -7,20 +7,20 @@
     "terminal-setup": 151,
     "memory-command": 172,
     "theme-command": 172,
-    "status-line": 138,
-    "enter-to-steer-in-relatime": 140,
-    "todo-list": 140,
+    "status-line": 172,
+    "enter-to-steer-in-relatime": 172,
+    "todo-list": 172,
     "install-github-app": 151,
     "install-slack-app": 151,
     "permissions": 151,
     "drag-and-drop-images": 151,
     "double-esc": 151,
     "continue": 151,
-    "rename-conversation": 140,
-    "custom-commands": 140,
-    "shift-tab": 140,
-    "image-paste": 140,
-    "custom-agents": 140,
+    "rename-conversation": 172,
+    "custom-commands": 172,
+    "shift-tab": 172,
+    "image-paste": 172,
+    "custom-agents": 172,
     "agent-flag": 140,
     "desktop-app": 140,
     "web-app": 140,
@@ -30,7 +30,7 @@
     "default-permission-mode-config": 151,
     "git-worktrees": 151
   },
-  "promptQueueUseCount": 1375,
+  "promptQueueUseCount": 1378,
   "fileCheckpointingEnabled": false,
   "cachedStatsigGates": {
     "tengu_log_1p_events": true,
@@ -1646,11 +1646,11 @@
   },
   "officialMarketplaceAutoInstallAttempted": true,
   "officialMarketplaceAutoInstalled": true,
-  "changelogLastFetched": 1771823023599,
+  "changelogLastFetched": 1771823757602,
   "claudeCodeFirstTokenDate": "2025-09-29T23:55:59.300422Z",
   "hasCompletedOnboarding": true,
   "lastOnboardingVersion": "2.1.7",
-  "lastReleaseNotesSeen": "2.1.49",
+  "lastReleaseNotesSeen": "2.1.50",
   "passesUpsellSeenCount": 4,
   "hasShownOpus45Notice": {
     "e5d20f5d-79a8-473c-8089-85516545d8a7": true
@@ -1717,8 +1717,8 @@
       "lastUsedAt": 1770692786433
     },
     "pull-repos": {
-      "usageCount": 1,
-      "lastUsedAt": 1771541460550
+      "usageCount": 2,
+      "lastUsedAt": 1771823746920
     }
   },
   "opusProMigrationComplete": true,
@@ -1748,7 +1748,7 @@
   "passesLastSeenRemaining": 3,
   "clientDataCache": {
     "data": {},
-    "timestamp": 1771823109548
+    "timestamp": 1771823875835
   },
   "hasShownOpus46Notice": {
     "e5d20f5d-79a8-473c-8089-85516545d8a7": true

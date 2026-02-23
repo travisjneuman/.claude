@@ -1,6 +1,6 @@
 {
   "repoCount": 84,
-  "totalSkills": 5416,
+  "totalSkills": 5421,
   "repos": [
     {
       "name": "claude-code-plugins-plus-skills",
@@ -15,7 +15,7 @@
     {
       "name": "davila7-templates",
       "displayName": "Davila7 Templates",
-      "skillCount": 698
+      "skillCount": 699
     },
     {
       "name": "claude-scientific-skills",
@@ -50,7 +50,7 @@
     {
       "name": "levnikolaevich-claude-code-skills",
       "displayName": "Levnikolaevich Claude Code Skills",
-      "skillCount": 99
+      "skillCount": 103
     },
     {
       "name": "giuseppe-developer-kit",
