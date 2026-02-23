@@ -31,6 +31,9 @@
 # ----- SESSION/EPHEMERAL DATA -----
 # These are regenerated per session and machine-specific
 
+# Session config backups (rotating .claude.json snapshots)
+backups/
+
 # Debug logs
 debug/
 
