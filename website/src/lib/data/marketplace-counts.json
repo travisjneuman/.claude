@@ -1,6 +1,6 @@
 {
   "repoCount": 84,
-  "totalSkills": 5422,
+  "totalSkills": 5435,
   "repos": [
     {
       "name": "claude-code-plugins-plus-skills",
@@ -15,12 +15,12 @@
     {
       "name": "davila7-templates",
       "displayName": "Davila7 Templates",
-      "skillCount": 700
+      "skillCount": 703
     },
     {
       "name": "claude-scientific-skills",
       "displayName": "Claude Scientific Skills",
-      "skillCount": 146
+      "skillCount": 152
     },
     {
       "name": "wshobson-agents",
@@ -95,7 +95,7 @@
     {
       "name": "affaan-everything-claude",
       "displayName": "Affaan Everything Claude",
-      "skillCount": 44
+      "skillCount": 45
     },
     {
       "name": "actionbook-rust-skills",
@@ -105,7 +105,7 @@
     {
       "name": "daymade-skills",
       "displayName": "Daymade Skills",
-      "skillCount": 37
+      "skillCount": 38
     },
     {
       "name": "skillsforge",
@@ -218,6 +218,11 @@
       "skillCount": 6
     },
     {
+      "name": "claude-mem",
+      "displayName": "Claude Mem",
+      "skillCount": 6
+    },
+    {
       "name": "georgeguimaraes-elixir",
       "displayName": "Georgeguimaraes Elixir",
       "skillCount": 6
@@ -245,11 +250,6 @@
     {
       "name": "bradleygolden-elixir",
       "displayName": "Bradleygolden Elixir",
-      "skillCount": 4
-    },
-    {
-      "name": "claude-mem",
-      "displayName": "Claude Mem",
       "skillCount": 4
     },
     {
