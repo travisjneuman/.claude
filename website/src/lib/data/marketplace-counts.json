@@ -1,6 +1,6 @@
 {
   "repoCount": 84,
-  "totalSkills": 5435,
+  "totalSkills": 5440,
   "repos": [
     {
       "name": "claude-code-plugins-plus-skills",
@@ -95,7 +95,7 @@
     {
       "name": "affaan-everything-claude",
       "displayName": "Affaan Everything Claude",
-      "skillCount": 45
+      "skillCount": 50
     },
     {
       "name": "actionbook-rust-skills",
