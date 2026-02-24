@@ -1,6 +1,6 @@
 {
   "repoCount": 84,
-  "totalSkills": 5441,
+  "totalSkills": 5442,
   "repos": [
     {
       "name": "claude-code-plugins-plus-skills",
@@ -20,7 +20,7 @@
     {
       "name": "claude-scientific-skills",
       "displayName": "Claude Scientific Skills",
-      "skillCount": 153
+      "skillCount": 154
     },
     {
       "name": "wshobson-agents",
