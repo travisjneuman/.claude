@@ -1,5 +1,20 @@
 # Changelog
 
+## 2.1.53
+
+- Fixed a UI flicker where user input would briefly disappear after submission before the message rendered
+- Fixed bulk agent kill (ctrl+f) to send a single aggregate notification instead of one per agent, and to properly clear the command queue
+- Fixed graceful shutdown sometimes leaving stale sessions when using Remote Control by parallelizing teardown network calls
+- Fixed `--worktree` sometimes being ignored on first launch
+- Fixed a panic ("switch on corrupted value") on Windows
+- Fixed a crash that could occur when spawning many processes on Windows
+- Fixed a crash in the WebAssembly interpreter on Linux x64 & Windows x64
+- Fixed a crash that sometimes occurred after 2 minutes on Windows ARM64
+
+## 2.1.52
+
+- VS Code: Fixed extension crash on Windows ("command 'claude-vscode.editor.openLast' not found")
+
 ## 2.1.51
 
 - Added `claude remote-control` subcommand for external builds, enabling local environment serving for all users.
@@ -12,6 +27,7 @@
 - Added `CLAUDE_CODE_ACCOUNT_UUID`, `CLAUDE_CODE_USER_EMAIL`, and `CLAUDE_CODE_ORGANIZATION_UUID` environment variables for SDK callers to provide account info synchronously, eliminating a race condition where early telemetry events lacked account metadata.
 - Fixed slash command autocomplete crashing when a plugin's SKILL.md description is a YAML array or other non-string type
 - The `/model` picker now shows human-readable labels (e.g., "Sonnet 4.5") instead of raw model IDs for pinned model versions, with an upgrade hint when a newer version is available.
+- Managed settings can now be set via macOS plist or Windows Registry. Learn more at https://code.claude.com/docs/en/settings#settings-files
 
 ## 2.1.50
 
