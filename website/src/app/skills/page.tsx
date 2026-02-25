@@ -1,12 +1,16 @@
+import type { Metadata } from "next";
 import Navigation from "@/components/layout/Navigation";
 import FooterWithDocs from "@/components/layout/FooterWithDocs";
 import SkillsGrid from "./SkillsGrid";
 import { getSkills } from "@/lib/data/skills";
+import { getCounts } from "@/lib/data/counts";
 
-export const metadata = {
-  title: "Skills | Claude Code Supercharged",
-  description:
-    "Browse all expert skills available in the Claude Code configuration framework.",
+const counts = getCounts();
+
+export const metadata: Metadata = {
+  title: counts.seo.skills.title,
+  description: counts.seo.skills.description,
+  alternates: { canonical: "/skills" },
 };
 
 export default function SkillsPage() {

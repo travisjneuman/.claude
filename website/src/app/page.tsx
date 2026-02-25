@@ -232,9 +232,9 @@ export default function Home() {
           <p className="text-sm font-mono text-[var(--accent-cyan)] tracking-widest uppercase mb-3">
             Interactive Demo
           </p>
-          <h1 className="text-3xl font-bold text-[var(--text-primary)] mb-4">
+          <h2 className="text-3xl font-bold text-[var(--text-primary)] mb-4">
             See It In Action
-          </h1>
+          </h2>
           <p className="text-[var(--text-secondary)] max-w-xl mx-auto">
             Watch how skills, agents, and commands work together in the
             terminal.

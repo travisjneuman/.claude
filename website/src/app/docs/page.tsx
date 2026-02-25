@@ -1,12 +1,16 @@
+import type { Metadata } from "next";
 import Navigation from "@/components/layout/Navigation";
 import FooterWithDocs from "@/components/layout/FooterWithDocs";
 import DocsList from "./DocsList";
 import { getDocs } from "@/lib/data/docs";
+import { getCounts } from "@/lib/data/counts";
 
-export const metadata = {
-  title: "Documentation | Claude Code Supercharged",
-  description:
-    "Browse all documentation for the Claude Code configuration framework.",
+const counts = getCounts();
+
+export const metadata: Metadata = {
+  title: counts.seo.docs.title,
+  description: counts.seo.docs.description,
+  alternates: { canonical: "/docs" },
 };
 
 export default function DocsPage() {

@@ -18,8 +18,12 @@ const counts = getCounts();
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://claude.travisjneuman.com"),
-  title: "tjn.claude/ | Skills, Agents & Marketplace",
-  description: counts.description,
+  title: {
+    default: counts.seo.home.title,
+    template: "%s | tjn.claude/",
+  },
+  description: counts.seo.home.description,
+  alternates: { canonical: "/" },
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
@@ -60,6 +64,29 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} antialiased`}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@graph": [
+                {
+                  "@type": "WebSite",
+                  name: "tjn.claude/",
+                  url: "https://claude.travisjneuman.com",
+                  description: counts.seo.home.description,
+                },
+                {
+                  "@type": "Organization",
+                  name: "tjn.claude/",
+                  url: "https://claude.travisjneuman.com",
+                  logo: "https://claude.travisjneuman.com/icon-512.png",
+                  sameAs: ["https://github.com/travisjneuman/.claude"],
+                },
+              ],
+            }),
+          }}
+        />
         <ConsoleGreeting stats={counts.consoleText} />
         {children}
       </body>
