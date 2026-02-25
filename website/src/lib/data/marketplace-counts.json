@@ -1,6 +1,6 @@
 {
   "repoCount": 84,
-  "totalSkills": 5442,
+  "totalSkills": 5443,
   "repos": [
     {
       "name": "claude-code-plugins-plus-skills",
@@ -35,7 +35,7 @@
     {
       "name": "athola-night-market",
       "displayName": "Athola Night Market",
-      "skillCount": 126
+      "skillCount": 127
     },
     {
       "name": "buildwithclaude",
