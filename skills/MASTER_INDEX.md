@@ -1,6 +1,6 @@
 # Skills Master Index
 
-> Auto-generated on 2026-02-25 00:38. Run `bash ~/.claude/scripts/regenerate-index.sh` to refresh.
+> Auto-generated on 2026-02-25 17:46. Run `bash ~/.claude/scripts/regenerate-index.sh` to refresh.
 
 ## Discovery Protocol
 
@@ -133,6 +133,6 @@
 
 ---
 
-## Marketplace: 6905 skills across 84 repos
+## Marketplace: 6920 skills across 84 repos
 
 Search: `find ~/.claude/plugins/marketplaces -name "SKILL.md" | xargs grep -li "<keyword>"`

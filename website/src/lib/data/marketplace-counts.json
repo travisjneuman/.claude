@@ -1,6 +1,6 @@
 {
   "repoCount": 84,
-  "totalSkills": 5444,
+  "totalSkills": 5448,
   "repos": [
     {
       "name": "claude-code-plugins-plus-skills",
@@ -50,12 +50,12 @@
     {
       "name": "levnikolaevich-claude-code-skills",
       "displayName": "Levnikolaevich Claude Code Skills",
-      "skillCount": 103
+      "skillCount": 104
     },
     {
       "name": "giuseppe-developer-kit",
       "displayName": "Giuseppe Developer Kit",
-      "skillCount": 92
+      "skillCount": 95
     },
     {
       "name": "zircote-dot-claude",
