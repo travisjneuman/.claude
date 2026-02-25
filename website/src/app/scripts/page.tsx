@@ -1,12 +1,16 @@
+import type { Metadata } from "next";
 import Navigation from "@/components/layout/Navigation";
 import FooterWithDocs from "@/components/layout/FooterWithDocs";
 import ScriptsList from "./ScriptsList";
 import { getScripts } from "@/lib/data/scripts";
+import { getCounts } from "@/lib/data/counts";
 
-export const metadata = {
-  title: "Scripts | Claude Code Supercharged",
-  description:
-    "Browse all automation scripts for setup, maintenance, and repo management.",
+const counts = getCounts();
+
+export const metadata: Metadata = {
+  title: counts.seo.scripts.title,
+  description: counts.seo.scripts.description,
+  alternates: { canonical: "/scripts" },
 };
 
 export default function ScriptsPage() {

@@ -1,11 +1,16 @@
+import type { Metadata } from "next";
 import Navigation from "@/components/layout/Navigation";
 import FooterWithDocs from "@/components/layout/FooterWithDocs";
 import MarketplaceGrid from "./MarketplaceGrid";
 import { getMarketplaceStats } from "@/lib/data/marketplace";
+import { getCounts } from "@/lib/data/counts";
 
-export const metadata = {
-  title: "Marketplace | Claude Code Supercharged",
-  description: "Browse marketplace repositories and community skills.",
+const counts = getCounts();
+
+export const metadata: Metadata = {
+  title: counts.seo.marketplaces.title,
+  description: counts.seo.marketplaces.description,
+  alternates: { canonical: "/marketplaces" },
 };
 
 export default function MarketplacesPage() {

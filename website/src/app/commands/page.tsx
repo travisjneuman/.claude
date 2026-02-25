@@ -1,12 +1,16 @@
+import type { Metadata } from "next";
 import Navigation from "@/components/layout/Navigation";
 import FooterWithDocs from "@/components/layout/FooterWithDocs";
 import CommandsList from "./CommandsList";
 import { getCommands } from "@/lib/data/commands";
+import { getCounts } from "@/lib/data/counts";
 
-export const metadata = {
-  title: "Commands | Claude Code Supercharged",
-  description:
-    "Browse all slash commands available in the Claude Code configuration.",
+const counts = getCounts();
+
+export const metadata: Metadata = {
+  title: counts.seo.commands.title,
+  description: counts.seo.commands.description,
+  alternates: { canonical: "/commands" },
 };
 
 export default function CommandsPage() {

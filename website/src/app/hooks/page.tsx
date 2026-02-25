@@ -1,12 +1,16 @@
+import type { Metadata } from "next";
 import Navigation from "@/components/layout/Navigation";
 import FooterWithDocs from "@/components/layout/FooterWithDocs";
 import HooksList from "./HooksList";
 import { getHooks } from "@/lib/data/hooks";
+import { getCounts } from "@/lib/data/counts";
 
-export const metadata = {
-  title: "Hooks | Claude Code Supercharged",
-  description:
-    "Browse all lifecycle hooks that automate Claude Code session management.",
+const counts = getCounts();
+
+export const metadata: Metadata = {
+  title: counts.seo.hooks.title,
+  description: counts.seo.hooks.description,
+  alternates: { canonical: "/hooks" },
 };
 
 export default function HooksPage() {

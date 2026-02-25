@@ -1,12 +1,16 @@
+import type { Metadata } from "next";
 import Navigation from "@/components/layout/Navigation";
 import FooterWithDocs from "@/components/layout/FooterWithDocs";
 import AgentsGrid from "./AgentsGrid";
 import { getAgents } from "@/lib/data/agents";
+import { getCounts } from "@/lib/data/counts";
 
-export const metadata = {
-  title: "Agents | Claude Code Supercharged",
-  description:
-    "Browse all specialized agents in the Claude Code configuration framework.",
+const counts = getCounts();
+
+export const metadata: Metadata = {
+  title: counts.seo.agents.title,
+  description: counts.seo.agents.description,
+  alternates: { canonical: "/agents" },
 };
 
 export default function AgentsPage() {
