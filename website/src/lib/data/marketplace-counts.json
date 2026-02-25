@@ -1,6 +1,6 @@
 {
   "repoCount": 84,
-  "totalSkills": 5443,
+  "totalSkills": 5444,
   "repos": [
     {
       "name": "claude-code-plugins-plus-skills",
@@ -198,14 +198,14 @@
       "skillCount": 10
     },
     {
-      "name": "interstellar-code-claud-skills",
-      "displayName": "Interstellar Code Claud Skills",
+      "name": "expo-skills",
+      "displayName": "Expo Skills",
       "skillCount": 10
     },
     {
-      "name": "expo-skills",
-      "displayName": "Expo Skills",
-      "skillCount": 9
+      "name": "interstellar-code-claud-skills",
+      "displayName": "Interstellar Code Claud Skills",
+      "skillCount": 10
     },
     {
       "name": "ahmedasmar-devops-skills",
