@@ -1,12 +1,16 @@
+import type { Metadata } from "next";
 import Navigation from "@/components/layout/Navigation";
 import FooterWithDocs from "@/components/layout/FooterWithDocs";
 import RulesList from "./RulesList";
 import { getRules } from "@/lib/data/rules";
+import { getCounts } from "@/lib/data/counts";
 
-export const metadata = {
-  title: "Rules | Claude Code Supercharged",
-  description:
-    "Browse all modular rules — checklists, stack guides, workflow patterns, and tooling references.",
+const counts = getCounts();
+
+export const metadata: Metadata = {
+  title: counts.seo.rules.title,
+  description: counts.seo.rules.description,
+  alternates: { canonical: "/rules" },
 };
 
 export default function RulesPage() {
