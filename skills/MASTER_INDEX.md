@@ -1,6 +1,6 @@
 # Skills Master Index
 
-> Auto-generated on 2026-02-24 18:38. Run `bash ~/.claude/scripts/regenerate-index.sh` to refresh.
+> Auto-generated on 2026-02-24 21:26. Run `bash ~/.claude/scripts/regenerate-index.sh` to refresh.
 
 ## Discovery Protocol
 
