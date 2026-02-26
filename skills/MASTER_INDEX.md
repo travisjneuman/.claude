@@ -1,6 +1,6 @@
 # Skills Master Index
 
-> Auto-generated on 2026-02-25 18:21. Run `bash ~/.claude/scripts/regenerate-index.sh` to refresh.
+> Auto-generated on 2026-02-25 18:22. Run `bash ~/.claude/scripts/regenerate-index.sh` to refresh.
 
 ## Discovery Protocol
 
@@ -15,40 +15,21 @@
 | Skill | Description |
 | ----- | ----------- |
 | `_shared` | (no SKILL.md) |
-| `statistics-verifier` | Verify statistics from raw data with methodology checking, significance testing, |
 | `accessibility-a11y` | WCAG 2.2 compliance, ARIA patterns, keyboard navigation, screen readers, automat |
-| `status-report-generator` | Project status report generation from git history, task context, and milestone t |
 | `agent-teams` | Team composition knowledge for Claude Code Agent Teams - when to suggest teams,  |
-| `supply-chain-optimizer` | Supply chain analysis, inventory optimization, logistics planning, vendor evalua |
 | `ai-ml-development` | AI and machine learning development with PyTorch, TensorFlow, and LLM integratio |
-| `sustainability-esg` | Sustainability and ESG expertise for ESG strategy, carbon footprint management,  |
 | `ai-policy-generator` | AI governance policy creation for nonprofits and enterprises with frameworks, ri |
-| `svelte-development` | Svelte 5 development with runes ($state, $derived, $effect), SvelteKit full-stac |
 | `android-development` | Android development with Kotlin, Jetpack Compose, and modern Android architectur |
-| `tauri-desktop` | Tauri 2.0 project setup, Rust backend + web frontend, plugin system, IPC command |
 | `api-design` | REST and GraphQL API design best practices including OpenAPI specs. Use when des |
-| `tdd-workflow` | Test-Driven Development workflow enforcement with RED-GREEN-REFACTOR cycle. Use  |
 | `application-security` | OWASP Top 10 with code examples, SAST/DAST tools, dependency scanning, CSP heade |
-| `tech-debt-analyzer` | This skill should be used when analyzing technical debt in a codebase, documenti |
-| `test-specialist` | This skill should be used when writing test cases, fixing bugs, analyzing code f |
 | `audio-production` | Professional audio production for music, podcasts, and sound design. Use when wo |
-| `travel-planner` | Travel destination research and daily itinerary creation with logistics planning |
 | `authentication-patterns` | OAuth 2.0, JWT, SSO, MFA, NextAuth/Clerk/Supabase Auth implementation patterns |
-| `ui-animation` | Motion design and animation for user interfaces. Use when creating micro-interac |
 | `auto-claude` | Autonomous multi-agent coding with git worktree isolation, QA validation, and me |
 | `battle-card-builder` | Competitive battle card creation for sales teams combining competitive intellige |
-| `ui-research` | Research-first UI/UX design workflow. Use BEFORE any frontend visual work to res |
-| `video-production` | Professional video production from planning to delivery. Use when creating video |
 | `brand-identity` | Brand strategy and identity design for businesses and products. Use when creatin |
-| `volunteer-coordinator` | Volunteer management system design with scheduling, skill matching, communicatio |
 | `business-strategy` | Business strategy expertise for strategic planning, competitive analysis, market |
-| `vue-development` | Vue.js 3 development with Composition API, TypeScript, Pinia state management, a |
 | `career-path-planner` | Career goal mapping with skill gap analysis, actionable development plans, and m |
 | `case-interview-practice` | Interactive consulting case interview practice with structured frameworks, feedb |
-| `websockets-realtime` | Real-time communication with WebSockets, Server-Sent Events, and related technol |
-
----
-
 | `codebase-documenter` | This skill should be used when writing documentation for codebases, including RE |
 | `content-repurposer` | Adapt content across platforms with tone/format shifting — blog to social, lon |
 | `contract-redliner` | Contract review, redlining, and negotiation support with clause analysis, risk i |
@@ -84,9 +65,6 @@
 | `generic-react-feature-developer` | Guide feature development for React applications with architecture focus. Covers |
 | `generic-react-ux-designer` | Professional UI/UX design expertise for React applications. Covers design thinki |
 | `generic-static-code-reviewer` | Review static site code for bugs, security issues, performance problems, accessi |
-## Marketplace: 6920 skills across 84 repos
-
-Search: `find ~/.claude/plugins/marketplaces -name "SKILL.md" | xargs grep -li "<keyword>"`
 | `generic-static-design-system` | Complete design system reference for static HTML/CSS/JS sites. Covers colors, ty |
 | `generic-static-feature-developer` | Guide feature development for static HTML/CSS/JS sites. Covers patterns, automat |
 | `generic-static-ux-designer` | Professional UI/UX design expertise for static HTML/CSS/JS sites. Covers design  |
