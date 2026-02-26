@@ -1,6 +1,6 @@
 {
   "repoCount": 84,
-  "totalSkills": 5448,
+  "totalSkills": 5449,
   "repos": [
     {
       "name": "claude-code-plugins-plus-skills",
@@ -208,6 +208,11 @@
       "skillCount": 10
     },
     {
+      "name": "claude-mem",
+      "displayName": "Claude Mem",
+      "skillCount": 7
+    },
+    {
       "name": "ahmedasmar-devops-skills",
       "displayName": "Ahmedasmar Devops Skills",
       "skillCount": 6
@@ -215,11 +220,6 @@
     {
       "name": "anthropic-life-sciences",
       "displayName": "Anthropic Life Sciences",
-      "skillCount": 6
-    },
-    {
-      "name": "claude-mem",
-      "displayName": "Claude Mem",
       "skillCount": 6
     },
     {
