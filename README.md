@@ -12,6 +12,7 @@
 [![Platform](https://img.shields.io/badge/macOS_·_Linux_·_Windows-334155?style=flat-square&logo=apple&logoColor=white)](./docs/SETUP-GUIDE.md)
 [![Website](https://img.shields.io/badge/claude.travisjneuman.com-818cf8?style=flat-square&logo=cloudflare&logoColor=white)](https://claude.travisjneuman.com)
 [![License](https://img.shields.io/badge/MIT-blue?style=flat-square&logo=opensourceinitiative&logoColor=white)](./LICENSE)
+[![Use Template](https://img.shields.io/badge/Use_This_Template-2ea44f?style=flat-square&logo=github&logoColor=white)](https://github.com/travisjneuman/.claude/generate)
 
 [![Skills](https://img.shields.io/badge/Skills-119-10b981?style=flat-square)](./skills/MASTER_INDEX.md)
 [![Agents](https://img.shields.io/badge/Agents-59-f59e0b?style=flat-square)](./agents/README.md)
@@ -40,7 +41,13 @@ A drop-in configuration layer for [Claude Code](https://docs.anthropic.com/en/do
 
 ## ⚡ Quick Start
 
+### Use as GitHub Template (Recommended)
+
+Click the green **"Use this template"** button at the top of this repo to create your own copy with a clean commit history. Then clone your new repo to `~/.claude/`.
+
 ### One-Line Install
+
+Or clone directly if you prefer:
 
 ```bash
 git clone --recurse-submodules https://github.com/travisjneuman/.claude.git ~/.claude
