@@ -19,8 +19,7 @@ mkdir -p "$LOGDIR"
   echo "=== Pull ended: $(date) ==="
   # Fix marketplace paths (cross-platform compatibility)
   [ -f "$HOME/.claude/scripts/fix-marketplace-paths.sh" ] && bash "$HOME/.claude/scripts/fix-marketplace-paths.sh" 2>&1 || true
-  # Update documentation counts after pull
-  [ -f "$HOME/.claude/scripts/update-counts.sh" ] && bash "$HOME/.claude/scripts/update-counts.sh" 2>&1 || true
+  # Counts are updated on-demand via /update-counts or pre-commit hook (not on session start)
 } >> "$LOGFILE" 2>&1 &
 
 # Exit immediately so session isn't blocked
