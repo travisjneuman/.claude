@@ -318,11 +318,6 @@
 	path = plugins/marketplaces/actionbook-rust-skills
 	url = https://github.com/actionbook/rust-skills.git
 	ignore = all
-[submodule "claude-code-plugins-plus-skills"]
-	path = plugins/marketplaces/claude-code-plugins-plus-skills
-	url = https://github.com/jeremylongshore/claude-code-plugins-plus-skills.git
-	ignore = all
-	fetchRecurseSubmodules = false
 [submodule "hashicorp-agent-skills"]
 	path = plugins/marketplaces/hashicorp-agent-skills
 	url = https://github.com/hashicorp/agent-skills.git

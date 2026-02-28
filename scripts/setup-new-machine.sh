@@ -42,6 +42,15 @@ fi
 echo -e "${YELLOW}Step 1/5: Initializing git submodules...${NC}"
 git submodule update --init --recursive
 echo -e "${GREEN}  ✓ Submodules initialized${NC}"
+
+# Clone repos with broken nested submodules (can't be git submodules)
+if [ ! -d "plugins/marketplaces/claude-code-plugins-plus-skills" ]; then
+    echo "  Cloning claude-code-plugins-plus-skills (standalone)..."
+    git clone --depth 1 https://github.com/jeremylongshore/claude-code-plugins-plus-skills.git \
+        plugins/marketplaces/claude-code-plugins-plus-skills 2>/dev/null && \
+        echo -e "${GREEN}  ✓ claude-code-plugins-plus-skills cloned${NC}" || \
+        echo -e "${YELLOW}  ⚠ claude-code-plugins-plus-skills (clone failed, non-critical)${NC}"
+fi
 echo ""
 
 # ═══════════════════════════════════════════════════════════════════════════════
