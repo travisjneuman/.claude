@@ -1,5 +1,5 @@
 ---
-description: AI-powered skill recommendation based on your problem description - finds optimal resources from 119 local skills + 91 marketplaces (5,400+ skills)
+description: AI-powered skill recommendation based on your problem description - finds optimal resources from 119 local skills + 101 marketplaces (7,400+ skills)
 arguments:
   - name: problem
     description: "Describe what you're trying to accomplish or the problem you're facing"
@@ -85,7 +85,7 @@ Specialized agents via Task tool.
 
 #### Marketplace Resources
 
-Skills from 91 marketplace repositories (5,400+ skills) in `~/.claude/plugins/marketplaces/`.
+Skills from 101 marketplace repositories (7,400+ skills) in `~/.claude/plugins/marketplaces/`.
 
 Search for relevant marketplace skills:
 
@@ -140,7 +140,7 @@ find ~/.claude/plugins/marketplaces -name "SKILL.md" | xargs grep -li "<keyword>
 | **Marketing**           | `marketing`                  | -                         | -                                                  |
 | **Branding**            | `brand-identity`             | `brand-strategist`        | -                                                  |
 | **Visual Design**       | `graphic-design`             | `graphic-designer`        | -                                                  |
-| **Video/Film**          | `video-production`           | `video-producer`          | mojito-freeship-skills                             |
+| **Video/Film**          | `video-production`           | `video-producer`          | -                                                  |
 | **Audio**               | `audio-production`           | `audio-engineer`          | -                                                  |
 | **Animation**           | `ui-animation`               | `motion-designer`         | -                                                  |
 | **Worldbuilding**       | -                            | -                         | worldbuilding-skills (52 skills)                   |
@@ -228,4 +228,4 @@ Once skills are identified:
 
 ---
 
-_Intelligent skill discovery across 119 local skills + 91 marketplaces (5,400+ skills)_
+_Intelligent skill discovery across 119 local skills + 101 marketplaces (7,400+ skills)_

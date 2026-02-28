@@ -2,6 +2,32 @@
 
 All notable changes to the Ultimate Claude Code Toolkit.
 
+## [2.9.1] - February 28, 2026
+
+### Post-Audit Fixes
+
+- **Fixed malformed `.gitmodules` entry** — Removed bare `[submodule]` with no path/url (just `recurse = false`) that inflated count to 92.
+- **Added `ignore = all` to 45 submodules** — Previously only 46 of 91 entries had it. Now all 101 do. Prevents git status noise from submodule internal changes.
+- **Removed stale `mojito-freeship-skills` references** — Cleaned 3 command files (`list-skills.md`, `skill-finder.md`, `domains-creative.md`) still referencing the deleted repo.
+- **Updated MARKETPLACE-GUIDE.md version** — Changed "Last Updated" from v2.6.0 to v2.9.1.
+
+### New Marketplace Repos (+10)
+
+- `sickn33/antigravity-awesome-skills` (17,170 stars, 932 SKILL.md) — Massive agentic skills collection
+- `agentskills/agentskills` (11,435 stars) — Official Agent Skills specification
+- `heilcheng/awesome-agent-skills` (2,542 stars) — Multilingual curated list
+- `libukai/awesome-agent-skills` (2,299 stars) — Multilingual curated list with case studies
+- `skillcreatorai/Ai-Agent-Skills` (860 stars, 47 SKILL.md) — Universal skills installer
+- `abubakarsiddik31/claude-skills-collection` (487 stars) — Curated skills collection
+- `FrancyJGLisboa/agent-skill-creator` (303 stars) — Meta-skill for auto-creating skills
+- `skillmatic-ai/awesome-agent-skills` (237 stars) — Curated guide with comparisons
+- `JayZeeDesign/awesome-claude-skills` (163 stars, 16 SKILL.md) — Curated awesome list
+- `skillcreatorai/Awesome-Agent-Skills` (128 stars) — Curated skills directory
+
+**Total:** 101 repos, 7,400+ marketplace skills.
+
+---
+
 ## [2.9.0] - February 28, 2026
 
 ### Marketplace Audit & Optimization

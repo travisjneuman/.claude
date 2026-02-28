@@ -1,5 +1,5 @@
 ---
-description: Pull all repos (parent + 91 marketplace submodules)
+description: Pull all repos (parent + 101 marketplace submodules)
 arguments:
   - name: action
     description: "Action: pull, status (default: pull)"
@@ -153,7 +153,7 @@ Enforcing no_push on submodules:
   All submodules already have no_push configured
 
 === Summary ===
-  Total repos:       92 (1 parent + 91 submodules)
+  Total repos:       102 (1 parent + 101 submodules)
   Updated:         1
   Already current: 23
 ```

@@ -151,13 +151,13 @@ Core Files:
   ✓ .mcp.json
 
 Submodules:
-  ✓ 91 marketplace repos configured
+  ✓ 101 marketplace repos configured
   ✓ All repos have no_push protection
 
 Resources:
   • 119 local skills
   • 59 local agents
-  • 5,400+ marketplace skills (84 repos)
+  • 7,400+ marketplace skills (84 repos)
 
 Hooks:
   ✓ SessionStart: Auto-routing enabled
