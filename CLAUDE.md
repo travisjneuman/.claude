@@ -94,7 +94,7 @@ YOU MUST automatically load the right resources based on the user's prompt — e
 | Prompt contains                       | Read on-demand                                                    |
 | ------------------------------------- | ----------------------------------------------------------------- |
 | Completing/verifying work             | `rules/checklists/verification-template.md`                       |
-| UI, visual, CSS, styling, frontend    | `rules/checklists/ui-visual-changes.md`                           |
+| UI, visual, CSS, styling, frontend    | `docs/reference/checklists/ui-visual-changes.md`                  |
 | Script, automation, batch             | `docs/reference/checklists/automation-scripts.md`                 |
 | HTML, static site                     | `docs/reference/checklists/static-sites.md`                       |
 | API design, endpoints, REST, GraphQL  | `docs/reference/checklists/api-development.md`                    |
