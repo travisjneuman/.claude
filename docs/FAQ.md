@@ -8,7 +8,7 @@ category: reference
 
 Common questions about the Claude Code Toolkit, organized by topic.
 
-**Last Updated:** February 2026 (v2.6.0)
+**Last Updated:** February 2026 (v2.9.2)
 
 ---
 
@@ -144,7 +144,7 @@ Use subagents when you just need results back. Use Agent Teams when teammates ne
 
 ### How does the auto-routing system work?
 
-When you type a prompt, Claude automatically matches keywords against a routing table defined in `CLAUDE.md`. For example, mentioning "React" loads `rules/stacks/react-typescript.md`, mentioning "bug" loads `rules/tooling/troubleshooting.md`. This happens without any slash commands — it's keyword-driven context loading.
+When you type a prompt, Claude automatically matches keywords against a routing table defined in `CLAUDE.md`. For example, mentioning "React" loads `docs/reference/stacks/react-typescript.md`, mentioning "bug" loads `docs/reference/tooling/troubleshooting.md`. This happens without any slash commands — it's keyword-driven context loading.
 
 ### What's the difference between `settings.json` and `settings.local.json`?
 

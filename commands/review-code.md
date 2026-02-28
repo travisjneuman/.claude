@@ -59,9 +59,9 @@ Invoke the appropriate code reviewer skill based on detected stack:
 | React/TypeScript   | `Skill(generic-react-code-reviewer)`     |
 | Full-stack         | `Skill(generic-fullstack-code-reviewer)` |
 | Static HTML/CSS/JS | `Skill(generic-static-code-reviewer)`    |
-| Python             | Load `rules/stacks/python.md`            |
-| Go                 | Load `rules/stacks/go.md`                |
-| Rust               | Load `rules/stacks/rust.md`              |
+| Python             | Load `docs/reference/stacks/python.md`            |
+| Go                 | Load `docs/reference/stacks/go.md`                |
+| Rust               | Load `docs/reference/stacks/rust.md`              |
 | Other              | `Skill(generic-code-reviewer)`           |
 
 ### Step 3: Perform Review

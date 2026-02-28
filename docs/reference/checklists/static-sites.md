@@ -180,7 +180,7 @@ Skill(seo-analytics-auditor)
 
 - `~/.claude/skills/README.md` - Skills overview
 - `~/.claude/CLAUDE.md` - Core rules
-- `~/.claude/rules/checklists/ui-visual-changes.md` - Visual changes checklist
+- `~/.claude/docs/reference/checklists/ui-visual-changes.md` - Visual changes checklist
 
 ---
 

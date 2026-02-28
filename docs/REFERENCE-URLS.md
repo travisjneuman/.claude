@@ -176,7 +176,7 @@ category: reference
 - `~/.claude/CLAUDE.md` — Core rules
 - `~/.claude/skills/MASTER_INDEX.md` — Skills navigation
 - `~/.claude/docs/MARKETPLACE-GUIDE.md` — Marketplace repos
-- `~/.claude/rules/tooling/external-repos.md` — External repo management
+- `~/.claude/docs/reference/tooling/external-repos.md` — External repo management
 
 ---
 

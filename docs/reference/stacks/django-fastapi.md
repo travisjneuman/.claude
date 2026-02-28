@@ -487,8 +487,8 @@ Skill(api-designer)
 
 - `~/.claude/skills/README.md` - Skills overview
 - `~/.claude/CLAUDE.md` - Core rules
-- `~/.claude/rules/stacks/python.md` - Python fundamentals
-- `~/.claude/rules/checklists/api-development.md` - API design checklist
+- `~/.claude/docs/reference/stacks/python.md` - Python fundamentals
+- `~/.claude/docs/reference/checklists/api-development.md` - API design checklist
 
 ---
 

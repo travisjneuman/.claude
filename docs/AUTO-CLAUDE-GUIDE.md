@@ -8,7 +8,7 @@ category: workflow
 
 Complete setup and usage guide for Auto-Claude autonomous coding framework.
 
-**Last Updated:** February 2026 (v2.6.0)
+**Last Updated:** February 2026 (v2.9.2)
 
 ---
 

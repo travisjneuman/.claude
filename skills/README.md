@@ -29,7 +29,7 @@ Comprehensive skills for Claude Code - 119 skills covering all development domai
 | Utilities              | 8      | Docs, Testing, SEO, AI/ML, DB, DevOps            |
 | Document Skills        | 5      | PDF, DOCX, XLSX, PPTX generation                 |
 | Personal & Lifestyle   | 4      | Travel, Career, Recipe, Podcast                  |
-| Marketplace            | 5,300+ | From 101 plugin repositories                      |
+| Marketplace            | 7,400+ | From 101 plugin repositories                      |
 
 **Local: 119 unique skills | Marketplace: 7,400+ additional skills**
 

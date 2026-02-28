@@ -145,7 +145,7 @@ The session log captures events from all 10 lifecycle hooks:
 ## Related
 
 - `/health-check` - System diagnostics
-- `rules/tooling/troubleshooting.md` - Debug guide
+- `docs/reference/tooling/troubleshooting.md` - Debug guide
 - Settings: `settings.json` hooks section
 
 ---

@@ -8,7 +8,7 @@ category: reference
 
 How to use, create, and customize Claude Code skills.
 
-**Last Updated:** February 2026 (v2.6.0)
+**Last Updated:** February 2026 (v2.9.2)
 
 ---
 

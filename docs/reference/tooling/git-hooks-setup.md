@@ -236,7 +236,7 @@ git commit --no-verify -m "hotfix: critical security patch"
 
 - `~/.claude/CLAUDE.md` - Core workflow rules
 - `~/.claude/templates/task-template.md` - Task file template
-- `~/.claude/rules/tooling/troubleshooting.md` - Hook troubleshooting
+- `~/.claude/docs/reference/tooling/troubleshooting.md` - Hook troubleshooting
 
 ---
 
