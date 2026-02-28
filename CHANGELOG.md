@@ -2,6 +2,31 @@
 
 All notable changes to the Ultimate Claude Code Toolkit.
 
+## [2.9.0] - February 28, 2026
+
+### Marketplace Audit & Optimization
+
+- **Added 11 marketplace repos** — `claude-code-plugins-plus-skills` (1,865 skills, largest single repo), `hashicorp-agent-skills`, `sangrokjung-claude-forge`, `team-attention-plugins`, `shanraisshan-best-practice`, `brennercruvinel-CCPlugins`, `ccplugins-awesome`, `kenryu42-safety-net`, `trailofbits-skills-curated`, `alvinunreal-awesome-claude`, `superpowers-marketplace`. Total: 91 repos, 5,464 skills (+60%).
+- **Removed 2 dead repos** — `mojito-freeship-skills` (GitHub 404), `zircote-dot-claude` (archived).
+- **Fixed `superpowers-marketplace` orphan** — Was standalone clone, now proper submodule with `ignore=all` and `no_push`.
+- **All repos verified with `no_push`** — Prevents accidental modifications to upstream.
+
+### Token Optimization
+
+- **Moved `ui-visual-changes.md` to on-demand loading** — Relocated from `rules/checklists/` (always loaded, 390 lines) to `docs/reference/checklists/` (on-demand via auto-routing). Saves ~250 tokens/session for non-UI work.
+- **Updated CLAUDE.md auto-routing** — Path now points to `docs/reference/checklists/ui-visual-changes.md`.
+- **`rules/` directory reduced** — From 4 to 3 always-loaded files.
+
+### Infrastructure
+
+- **Fixed `init-marketplaces.sh` sync** — Replaced stale hardcoded 32-repo array with dynamic parser that reads from `.gitmodules`. Stays in sync automatically as repos are added/removed.
+
+### Documentation
+
+- Updated `MARKETPLACE-GUIDE.md`, `external-repos.md`, `rules/README.md`, and all auto-generated count files (21+ files via `update-counts.sh`).
+
+---
+
 ## [2.8.0] - February 11, 2026
 
 ### Bug Fixes (P0)
