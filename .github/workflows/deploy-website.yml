@@ -1,0 +1,51 @@
+name: Deploy Website
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - "website/**"
+      - "skills/**"
+      - "agents/**"
+      - "commands/**"
+      - "hooks/**"
+      - "rules/**"
+      - "docs/**"
+      - "scripts/**"
+      - "templates/**"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    name: Build & Deploy to Cloudflare Pages
+    steps:
+      - name: Checkout (no submodules)
+        uses: actions/checkout@v4
+        with:
+          submodules: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: website/package-lock.json
+
+      - name: Install dependencies
+        working-directory: website
+        run: npm ci
+
+      - name: Build
+        working-directory: website
+        run: npm run build
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy out --project-name=${{ vars.CF_PAGES_PROJECT_NAME || 'claude-travisjneuman' }} --commit-dirty=true
+          workingDirectory: website
