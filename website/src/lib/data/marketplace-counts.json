@@ -1,6 +1,6 @@
 {
-  "repoCount": 84,
-  "totalSkills": 5450,
+  "repoCount": 91,
+  "totalSkills": 5464,
   "repos": [
     {
       "name": "claude-code-plugins-plus-skills",
@@ -15,12 +15,12 @@
     {
       "name": "davila7-templates",
       "displayName": "Davila7 Templates",
-      "skillCount": 704
+      "skillCount": 705
     },
     {
       "name": "claude-scientific-skills",
       "displayName": "Claude Scientific Skills",
-      "skillCount": 154
+      "skillCount": 155
     },
     {
       "name": "wshobson-agents",
@@ -33,14 +33,19 @@
       "skillCount": 131
     },
     {
-      "name": "athola-night-market",
-      "displayName": "Athola Night Market",
-      "skillCount": 127
-    },
-    {
       "name": "buildwithclaude",
       "displayName": "Buildwithclaude",
       "skillCount": 124
+    },
+    {
+      "name": "athola-night-market",
+      "displayName": "Athola Night Market",
+      "skillCount": 120
+    },
+    {
+      "name": "levnikolaevich-claude-code-skills",
+      "displayName": "Levnikolaevich Claude Code Skills",
+      "skillCount": 106
     },
     {
       "name": "kivilaid-marketplace",
@@ -48,19 +53,9 @@
       "skillCount": 104
     },
     {
-      "name": "levnikolaevich-claude-code-skills",
-      "displayName": "Levnikolaevich Claude Code Skills",
-      "skillCount": 104
-    },
-    {
       "name": "giuseppe-developer-kit",
       "displayName": "Giuseppe Developer Kit",
       "skillCount": 95
-    },
-    {
-      "name": "zircote-dot-claude",
-      "displayName": "Zircote Dot Claude",
-      "skillCount": 70
     },
     {
       "name": "manutej-luxor-marketplace",
@@ -85,17 +80,17 @@
     {
       "name": "trailofbits-skills",
       "displayName": "Trailofbits Skills",
-      "skillCount": 54
+      "skillCount": 60
+    },
+    {
+      "name": "affaan-everything-claude",
+      "displayName": "Affaan Everything Claude",
+      "skillCount": 56
     },
     {
       "name": "worldbuilding-skills",
       "displayName": "Worldbuilding Skills",
       "skillCount": 52
-    },
-    {
-      "name": "affaan-everything-claude",
-      "displayName": "Affaan Everything Claude",
-      "skillCount": 50
     },
     {
       "name": "actionbook-rust-skills",
@@ -133,8 +128,18 @@
       "skillCount": 31
     },
     {
+      "name": "trailofbits-skills-curated",
+      "displayName": "Trailofbits Skills Curated",
+      "skillCount": 27
+    },
+    {
       "name": "gmickel-marketplace",
       "displayName": "Gmickel Marketplace",
+      "skillCount": 23
+    },
+    {
+      "name": "sangrokjung-claude-forge",
+      "displayName": "Sangrokjung Claude Forge",
       "skillCount": 23
     },
     {
@@ -168,6 +173,11 @@
       "skillCount": 15
     },
     {
+      "name": "team-attention-plugins",
+      "displayName": "Team Attention Plugins",
+      "skillCount": 15
+    },
+    {
       "name": "ananddtyagi-marketplace",
       "displayName": "Ananddtyagi Marketplace",
       "skillCount": 14
@@ -183,8 +193,18 @@
       "skillCount": 14
     },
     {
+      "name": "hashicorp-agent-skills",
+      "displayName": "Hashicorp Agent Skills",
+      "skillCount": 13
+    },
+    {
       "name": "devgom-marketplace",
       "displayName": "Devgom Marketplace",
+      "skillCount": 11
+    },
+    {
+      "name": "expo-skills",
+      "displayName": "Expo Skills",
       "skillCount": 11
     },
     {
@@ -195,11 +215,6 @@
     {
       "name": "claude-code-plugins",
       "displayName": "Claude Code Plugins",
-      "skillCount": 10
-    },
-    {
-      "name": "expo-skills",
-      "displayName": "Expo Skills",
       "skillCount": 10
     },
     {
@@ -258,11 +273,6 @@
       "skillCount": 4
     },
     {
-      "name": "mojito-freeship-skills",
-      "displayName": "Mojito Freeship Skills",
-      "skillCount": 4
-    },
-    {
       "name": "p47phoenix-plugins",
       "displayName": "P47phoenix Plugins",
       "skillCount": 4
@@ -293,6 +303,11 @@
       "skillCount": 1
     },
     {
+      "name": "alvinunreal-awesome-claude",
+      "displayName": "Alvinunreal Awesome Claude",
+      "skillCount": 0
+    },
+    {
       "name": "auto-claude",
       "displayName": "Auto Claude",
       "skillCount": 0
@@ -305,6 +320,16 @@
     {
       "name": "behisecc-awesome-claude-skills",
       "displayName": "Behisecc Awesome Claude Skills",
+      "skillCount": 0
+    },
+    {
+      "name": "brennercruvinel-CCPlugins",
+      "displayName": "Brennercruvinel CCPlugins",
+      "skillCount": 0
+    },
+    {
+      "name": "ccplugins-awesome",
+      "displayName": "Ccplugins Awesome",
       "skillCount": 0
     },
     {
@@ -358,6 +383,11 @@
       "skillCount": 0
     },
     {
+      "name": "kenryu42-safety-net",
+      "displayName": "Kenryu42 Safety Net",
+      "skillCount": 0
+    },
+    {
       "name": "lodetomasi-agents-claude-code",
       "displayName": "Lodetomasi Agents Claude Code",
       "skillCount": 0
@@ -395,6 +425,11 @@
     {
       "name": "scopecraft-command",
       "displayName": "Scopecraft Command",
+      "skillCount": 0
+    },
+    {
+      "name": "shanraisshan-best-practice",
+      "displayName": "Shanraisshan Best Practice",
       "skillCount": 0
     },
     {

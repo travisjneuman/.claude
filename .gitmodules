@@ -87,9 +87,6 @@
 [submodule "plugins/marketplaces/bradleygolden-elixir"]
 	path = plugins/marketplaces/bradleygolden-elixir
 	url = https://github.com/bradleygolden/claude-marketplace-elixir.git
-[submodule "plugins/marketplaces/mojito-freeship-skills"]
-	path = plugins/marketplaces/mojito-freeship-skills
-	url = https://github.com/mojito-llm/freeship-skills.git
 [submodule "plugins/marketplaces/gqy20-biology-plugins"]
 	path = plugins/marketplaces/gqy20-biology-plugins
 	url = https://github.com/gqy20/cc_plugins.git
@@ -278,7 +275,47 @@
 	path = plugins/marketplaces/actionbook-rust-skills
 	url = https://github.com/actionbook/rust-skills.git
 	ignore = all
-[submodule "plugins/marketplaces/zircote-dot-claude"]
-	path = plugins/marketplaces/zircote-dot-claude
-	url = https://github.com/zircote/.claude.git
+[submodule "claude-code-plugins-plus-skills"]
+	path = plugins/marketplaces/claude-code-plugins-plus-skills
+	url = https://github.com/jeremylongshore/claude-code-plugins-plus-skills.git
+	ignore = all
+[submodule "hashicorp-agent-skills"]
+	path = plugins/marketplaces/hashicorp-agent-skills
+	url = https://github.com/hashicorp/agent-skills.git
+	ignore = all
+[submodule "sangrokjung-claude-forge"]
+	path = plugins/marketplaces/sangrokjung-claude-forge
+	url = https://github.com/sangrokjung/claude-forge.git
+	ignore = all
+[submodule "team-attention-plugins"]
+	path = plugins/marketplaces/team-attention-plugins
+	url = https://github.com/team-attention/plugins-for-claude-natives.git
+	ignore = all
+[submodule "shanraisshan-best-practice"]
+	path = plugins/marketplaces/shanraisshan-best-practice
+	url = https://github.com/shanraisshan/claude-code-best-practice.git
+	ignore = all
+[submodule "brennercruvinel-CCPlugins"]
+	path = plugins/marketplaces/brennercruvinel-CCPlugins
+	url = https://github.com/brennercruvinel/CCPlugins.git
+	ignore = all
+[submodule "ccplugins-awesome"]
+	path = plugins/marketplaces/ccplugins-awesome
+	url = https://github.com/ccplugins/awesome-claude-code-plugins.git
+	ignore = all
+[submodule "kenryu42-safety-net"]
+	path = plugins/marketplaces/kenryu42-safety-net
+	url = https://github.com/kenryu42/claude-code-safety-net.git
+	ignore = all
+[submodule "trailofbits-skills-curated"]
+	path = plugins/marketplaces/trailofbits-skills-curated
+	url = https://github.com/trailofbits/skills-curated.git
+	ignore = all
+[submodule "alvinunreal-awesome-claude"]
+	path = plugins/marketplaces/alvinunreal-awesome-claude
+	url = https://github.com/alvinunreal/awesome-claude.git
+	ignore = all
+[submodule "superpowers-marketplace"]
+	path = plugins/marketplaces/superpowers-marketplace
+	url = https://github.com/obra/superpowers-marketplace.git
 	ignore = all
