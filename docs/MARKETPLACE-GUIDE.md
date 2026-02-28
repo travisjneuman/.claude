@@ -1,12 +1,12 @@
 ---
 name: Marketplace Guide
-description: Browse, install, and manage 84 community plugin marketplaces with 5,400+ additional skills.
+description: Browse, install, and manage 91 community plugin marketplaces with 5,400+ additional skills.
 category: ecosystem
 ---
 
 # Marketplace Guide
 
-Complete reference for the 84 plugin marketplaces and how to use them.
+Complete reference for the 91 plugin marketplaces and how to use them.
 
 **Last Updated:** February 2026 (v2.6.0)
 
@@ -23,7 +23,7 @@ Complete reference for the 84 plugin marketplaces and how to use them.
 
 ---
 
-## Installed Marketplaces (84)
+## Installed Marketplaces (91)
 
 ### Official (Anthropic)
 
@@ -61,7 +61,7 @@ Complete reference for the 84 plugin marketplaces and how to use them.
 | `jeffallan-claude-skills`            | 66 skills + 9 commands                  | 12 categories: languages, frameworks, security  |
 | `lodetomasi-agents-claude-code`      | 100 agents                              | Frontend, backend, cloud, data, testing, security |
 | `manutej-luxor-marketplace`          | 67 skills + 28 commands + 30 agents     | DevOps, Testing, Full-stack, 10 plugins         |
-| `zircote-dot-claude`                 | 100+ agents + 60+ skills + commands     | Multi-domain agents, Opus 4.5 optimized         |
+| `claude-code-plugins-plus-skills`    | 1,865 skills, 270+ plugins              | Largest single repo, CCPI package manager, Jupyter tutorials |
 
 ### Curated Collections
 
@@ -74,6 +74,9 @@ Complete reference for the 84 plugin marketplaces and how to use them.
 | `alirezarezvani-claude-skills` | Skills + subagents                     | Mixed collection                        |
 | `affaan-everything-claude`     | Everything Claude resources            | Comprehensive collection                |
 | `chat2anyllm-awesome-plugins`  | Awesome plugins                        | Chat2AnyLLM curation                    |
+| `ccplugins-awesome`            | Curated plugin directory               | Organized slash commands, subagents, MCP |
+| `alvinunreal-awesome-claude`   | Curated awesome list                   | Comprehensive Claude resource directory  |
+| `superpowers-marketplace`      | Curated plugin marketplace             | obra's curated marketplace (558 stars)   |
 | `hesreallyhim-awesome`         | Curated awesome list (18.2k stars)     | Comprehensive Claude Code directory     |
 | `travisvn-awesome`             | Curated skills list                    | Awesome Claude Skills reference         |
 | `quemsah-awesome`              | 3,979 repos indexed                    | Plugin adoption metrics                 |
@@ -102,6 +105,10 @@ Complete reference for the 84 plugin marketplaces and how to use them.
 | `levnikolaevich-claude-code-skills` | SDLC workflow skills | Research, planning, implementation, quality gates |
 | `mrgoonie-claudekit-skills` | 40+ skills           | Cloud/DevOps, Cloudflare, Docker, Stripe, Three.js |
 | `chriswiles-claude-code-showcase` | Skills + agents + hooks | Code-reviewer agent, JIRA integration, GitHub Actions |
+| `sangrokjung-claude-forge`  | 23 skills              | Active development forge                     |
+| `team-attention-plugins`    | 15 skills              | Plugin collection (553 stars)                |
+| `brennercruvinel-CCPlugins` | 24 commands            | Enterprise-grade CLI commands (2.7K stars)   |
+| `kenryu42-safety-net`       | Safety guardrails      | Code safety and guardrail tooling (1K stars) |
 
 ### Language/Framework Specific
 
@@ -111,6 +118,7 @@ Complete reference for the 84 plugin marketplaces and how to use them.
 | `georgeguimaraes-elixir` | 6 skills  | Elixir ecosystem                           |
 | `kfly8-cpan-plugins`     | 3 skills  | Perl/CPAN                                  |
 | `hashi-terraform-skills` | 4 skills  | HashiCorp/Terraform                        |
+| `hashicorp-agent-skills` | 13 skills | Official HashiCorp (Terraform, Vault, etc.) |
 | `expo-skills`            | 3 plugins | Expo/React Native (official)               |
 | `akin-ozer-devops`                   | 31 skills | DevOps (K8s, Terraform, CI/CD, monitoring)                       |
 | `aaronontheweb-dotnet-skills`        | ~30 skills | .NET/C#: Akka.NET, EF Core, ASP.NET, testing                   |
@@ -144,9 +152,10 @@ Complete reference for the 84 plugin marketplaces and how to use them.
 | `skill-seekers`             | Auto-generate skills from docs/repos/PDFs | Skill creation tools                                  |
 | `secondsky-sap-skills`      | 33 SAP skills                             | Enterprise SAP                                        |
 | `trailofbits-skills`        | 50 security skills                        | Professional security auditing                        |
+| `trailofbits-skills-curated` | 27 curated security skills               | Curated subset of Trail of Bits security skills       |
 | `diet103-infrastructure`    | 5 infrastructure skills                   | Infrastructure patterns                               |
 | `worldbuilding-skills`      | 52 worldbuilding skills                   | Creative worldbuilding, narrative                     |
-| `mojito-freeship-skills`    | 4 film/AIGC skills                        | AI-generated film production                          |
+| `shanraisshan-best-practice` | 6 skills, config patterns                | Most-starred CC repo (6K stars), reference implementation |
 | `mvanhorn-last30days-skill` | 1 research skill                          | Research any topic from last 30 days (Reddit, X, web) |
 | `ananddtyagi-marketplace`   | CC marketplace                            | Community marketplace                                 |
 | `disler-hooks-mastery`      | All 13 hook types + agents + commands     | Hook reference implementation, TTS, Python hooks      |
@@ -235,7 +244,7 @@ Complete reference for the 84 plugin marketplaces and how to use them.
 | **Vue/Nuxt**               | `onmax-nuxt-skills` (18 skills)                                                                                   |
 | **Hooks/Reference**        | `disler-hooks-mastery` (all 13 hook types)                                                                        |
 | **Finance/Equity**         | `quant-equity-research`                                                                                           |
-| **Worldbuilding/Creative** | `worldbuilding-skills` (52), `mojito-freeship-skills`                                                             |
+| **Worldbuilding/Creative** | `worldbuilding-skills` (52)                                                                                       |
 | **Context Engineering**    | `neolab-context-kit`, `muratcankoylan-agent-skills`                                                               |
 
 ---
@@ -302,4 +311,4 @@ All marketplaces are configured with `no_push` - read-only access.
 
 ---
 
-_84 marketplaces, 5,400+ skills, discovered proactively when domain expertise is needed._
+_91 marketplaces, 5,400+ skills, discovered proactively when domain expertise is needed._

@@ -6,13 +6,12 @@ Compact rules that apply to every session. Loaded automatically into the system 
 
 ## Files in `rules/`
 
-Only 4 files remain here (always loaded):
+Only 3 files remain here (always loaded):
 
 | File | Purpose |
 | ---- | ------- |
 | `README.md` | This index |
 | `checklists/verification-template.md` | Task completion verification (applies to every task) |
-| `checklists/ui-visual-changes.md` | Visual/UI work checklist + frontend aesthetics guide |
 | `workflows/context-management.md` | Context window, multi-window, state persistence |
 
 ---
@@ -31,7 +30,8 @@ docs/reference/
 │   ├── monitoring-alerting-design.md
 │   ├── performance-optimization.md
 │   ├── security-hardening.md
-│   └── static-sites.md
+│   ├── static-sites.md
+│   └── ui-visual-changes.md
 ├── stacks/
 │   ├── django-fastapi.md
 │   ├── flutter-dart.md
