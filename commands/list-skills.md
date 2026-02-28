@@ -127,7 +127,7 @@ Display comprehensive categorized skill overview:
 
 ---
 
-## Marketplace Skills (5,400+ total across 91 repos)
+## Marketplace Skills (7,400+ total across 101 repos)
 
 ### Top Repos by Skill Count
 
@@ -154,7 +154,6 @@ Display comprehensive categorized skill overview:
 - **Elixir:** bradleygolden-elixir (4), georgeguimaraes-elixir (6)
 - **Terraform/IaC:** hashi-terraform-skills (4)
 - **Perl/CPAN:** kfly8-cpan-plugins (3)
-- **Film/AIGC:** mojito-freeship-skills (4)
 - **Finance:** quant-equity-research
 - **Context Engineering:** neolab-context-kit (11), muratcankoylan-agent-skills (19)
 - **Planning:** othmanadi-planning (12)
@@ -219,4 +218,4 @@ Just describe your task - skills auto-activate based on description matching.
 
 ---
 
-_119 local skills + 91 marketplaces (5,400+ skills) = comprehensive coverage for any domain_
+_119 local skills + 101 marketplaces (7,400+ skills) = comprehensive coverage for any domain_

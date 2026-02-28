@@ -1,11 +1,16 @@
 {
-  "repoCount": 91,
-  "totalSkills": 5464,
+  "repoCount": 101,
+  "totalSkills": 7412,
   "repos": [
     {
       "name": "claude-code-plugins-plus-skills",
       "displayName": "Claude Code Plugins Plus Skills",
       "skillCount": 1865
+    },
+    {
+      "name": "sickn33-antigravity-awesome-skills",
+      "displayName": "Sickn33 Antigravity Awesome Skills",
+      "skillCount": 1857
     },
     {
       "name": "awesome-claude-skills",
@@ -93,6 +98,11 @@
       "skillCount": 52
     },
     {
+      "name": "skillcreatorai-agent-skills",
+      "displayName": "Skillcreatorai Agent Skills",
+      "skillCount": 47
+    },
+    {
       "name": "actionbook-rust-skills",
       "displayName": "Actionbook Rust Skills",
       "skillCount": 38
@@ -126,6 +136,11 @@
       "name": "akin-ozer-devops",
       "displayName": "Akin Ozer Devops",
       "skillCount": 31
+    },
+    {
+      "name": "skillcreatorai-awesome-agent-skills",
+      "displayName": "Skillcreatorai Awesome Agent Skills",
+      "skillCount": 27
     },
     {
       "name": "trailofbits-skills-curated",
@@ -165,6 +180,11 @@
     {
       "name": "anthropic-agent-skills",
       "displayName": "Anthropic Agent Skills",
+      "skillCount": 16
+    },
+    {
+      "name": "jayzeedesign-awesome-claude",
+      "displayName": "Jayzeedesign Awesome Claude",
       "skillCount": 16
     },
     {
@@ -298,9 +318,24 @@
       "skillCount": 2
     },
     {
+      "name": "francyjg-agent-skill-creator",
+      "displayName": "Francyjg Agent Skill Creator",
+      "skillCount": 1
+    },
+    {
       "name": "othmanadi-planning",
       "displayName": "Othmanadi Planning",
       "skillCount": 1
+    },
+    {
+      "name": "abubakarsiddik31-claude-skills",
+      "displayName": "Abubakarsiddik31 Claude Skills",
+      "skillCount": 0
+    },
+    {
+      "name": "agentskills-agentskills",
+      "displayName": "Agentskills Agentskills",
+      "skillCount": 0
     },
     {
       "name": "alvinunreal-awesome-claude",
@@ -373,6 +408,11 @@
       "skillCount": 0
     },
     {
+      "name": "heilcheng-awesome-agent-skills",
+      "displayName": "Heilcheng Awesome Agent Skills",
+      "skillCount": 0
+    },
+    {
       "name": "hesreallyhim-awesome",
       "displayName": "Hesreallyhim Awesome",
       "skillCount": 0
@@ -385,6 +425,11 @@
     {
       "name": "kenryu42-safety-net",
       "displayName": "Kenryu42 Safety Net",
+      "skillCount": 0
+    },
+    {
+      "name": "libukai-awesome-agent-skills",
+      "displayName": "Libukai Awesome Agent Skills",
       "skillCount": 0
     },
     {
@@ -435,6 +480,11 @@
     {
       "name": "skill-seekers",
       "displayName": "Skill Seekers",
+      "skillCount": 0
+    },
+    {
+      "name": "skillmatic-awesome-agent-skills",
+      "displayName": "Skillmatic Awesome Agent Skills",
       "skillCount": 0
     },
     {

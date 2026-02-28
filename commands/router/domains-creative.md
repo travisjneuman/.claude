@@ -37,7 +37,6 @@ Load this file when creative/design keywords detected.
 | Domain           | Marketplace Repos                      | Notes                                    |
 | ---------------- | -------------------------------------- | ---------------------------------------- |
 | Worldbuilding    | worldbuilding-skills (52)              | Creative worldbuilding, narrative design |
-| Film/AIGC        | mojito-freeship-skills (4)             | AI-generated film production             |
 | General creative | davila7-templates, athola-night-market | Templates and patterns                   |
 
 ## Creative Process Notes

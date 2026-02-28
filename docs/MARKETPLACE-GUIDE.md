@@ -1,14 +1,14 @@
 ---
 name: Marketplace Guide
-description: Browse, install, and manage 91 community plugin marketplaces with 5,400+ additional skills.
+description: Browse, install, and manage 101 community plugin marketplaces with 7,400+ additional skills.
 category: ecosystem
 ---
 
 # Marketplace Guide
 
-Complete reference for the 91 plugin marketplaces and how to use them.
+Complete reference for the 101 plugin marketplaces and how to use them.
 
-**Last Updated:** February 2026 (v2.6.0)
+**Last Updated:** February 2026 (v2.9.1)
 
 **Location:** `~/.claude/plugins/marketplaces/`
 
@@ -23,7 +23,7 @@ Complete reference for the 91 plugin marketplaces and how to use them.
 
 ---
 
-## Installed Marketplaces (91)
+## Installed Marketplaces (101)
 
 ### Official (Anthropic)
 
@@ -61,6 +61,7 @@ Complete reference for the 91 plugin marketplaces and how to use them.
 | `jeffallan-claude-skills`            | 66 skills + 9 commands                  | 12 categories: languages, frameworks, security  |
 | `lodetomasi-agents-claude-code`      | 100 agents                              | Frontend, backend, cloud, data, testing, security |
 | `manutej-luxor-marketplace`          | 67 skills + 28 commands + 30 agents     | DevOps, Testing, Full-stack, 10 plugins         |
+| `sickn33-antigravity-awesome-skills` | 932 skills                              | Massive skills collection (17.2K stars)                      |
 | `claude-code-plugins-plus-skills`    | 1,865 skills, 270+ plugins              | Largest single repo, CCPI package manager, Jupyter tutorials |
 
 ### Curated Collections
@@ -81,6 +82,12 @@ Complete reference for the 91 plugin marketplaces and how to use them.
 | `travisvn-awesome`             | Curated skills list                    | Awesome Claude Skills reference         |
 | `quemsah-awesome`              | 3,979 repos indexed                    | Plugin adoption metrics                 |
 | `karanb192-awesome-claude-skills` | 50+ skills                          | TDD, debugging, git workflows, doc processing |
+| `heilcheng-awesome-agent-skills`  | Multilingual curated list           | CN/EN/ES/KR/JP skills directory (2.5K stars)  |
+| `libukai-awesome-agent-skills`    | Multilingual curated list           | CN/EN/JP practical case studies (2.3K stars)   |
+| `skillmatic-awesome-agent-skills` | Curated skills guide                | Conceptual comparisons, skill patterns         |
+| `jayzeedesign-awesome-claude`     | 16 skills                           | Curated awesome skills list                    |
+| `skillcreatorai-awesome-agent-skills` | Curated directory                | Companion directory to Ai-Agent-Skills         |
+| `abubakarsiddik31-claude-skills`  | Curated collection                  | Official + community skills curation           |
 
 ### Development-Focused
 
@@ -159,6 +166,9 @@ Complete reference for the 91 plugin marketplaces and how to use them.
 | `mvanhorn-last30days-skill` | 1 research skill                          | Research any topic from last 30 days (Reddit, X, web) |
 | `ananddtyagi-marketplace`   | CC marketplace                            | Community marketplace                                 |
 | `disler-hooks-mastery`      | All 13 hook types + agents + commands     | Hook reference implementation, TTS, Python hooks      |
+| `agentskills-agentskills`   | Agent Skills specification                | Official Agent Skills standard (11.4K stars)          |
+| `skillcreatorai-agent-skills` | 47 skills + universal installer         | "Homebrew for AI Agent Skills" (860 stars)            |
+| `francyjg-agent-skill-creator` | 2 meta-skills                          | Auto-create skills from docs/PDFs (303 stars)         |
 
 ### Context Engineering & Planning
 
@@ -246,6 +256,8 @@ Complete reference for the 91 plugin marketplaces and how to use them.
 | **Finance/Equity**         | `quant-equity-research`                                                                                           |
 | **Worldbuilding/Creative** | `worldbuilding-skills` (52)                                                                                       |
 | **Context Engineering**    | `neolab-context-kit`, `muratcankoylan-agent-skills`                                                               |
+| **Skill Creation/Meta**    | `francyjg-agent-skill-creator`, `skillcreatorai-agent-skills`, `skill-seekers`                                    |
+| **Agent Skills Standard**  | `agentskills-agentskills` (official spec), `sickn33-antigravity-awesome-skills` (932 skills)                      |
 
 ---
 
@@ -311,4 +323,4 @@ All marketplaces are configured with `no_push` - read-only access.
 
 ---
 
-_91 marketplaces, 5,400+ skills, discovered proactively when domain expertise is needed._
+_101 marketplaces, 7,400+ skills, discovered proactively when domain expertise is needed._
