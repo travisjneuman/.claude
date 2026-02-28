@@ -392,8 +392,8 @@ Skill(test-specialist)
 
 - `~/.claude/skills/README.md` - Skills overview
 - `~/.claude/CLAUDE.md` - Core rules (Security, No innerHTML)
-- `~/.claude/rules/checklists/api-development.md` - API security
-- `~/.claude/rules/checklists/database-design.md` - Data security
+- `~/.claude/docs/reference/checklists/api-development.md` - API security
+- `~/.claude/docs/reference/checklists/database-design.md` - Data security
 
 ---
 

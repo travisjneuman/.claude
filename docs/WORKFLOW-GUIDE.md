@@ -8,7 +8,7 @@ category: workflow
 
 Detailed patterns for getting work done with Claude Code.
 
-**Last Updated:** February 2026 (v2.6.0)
+**Last Updated:** February 2026 (v2.9.2)
 
 **Quick Start:** Just describe what you want. Skills auto-activate via SessionStart hook. Use `/start-task` for complex work.
 
@@ -384,7 +384,7 @@ This ensures every project has proper integration with `~/.claude/` including Re
 - [DOMAIN-ROUTING.md](./DOMAIN-ROUTING.md) - How /start-task routes work
 - [MARKETPLACE-GUIDE.md](./MARKETPLACE-GUIDE.md) - Marketplace resources
 - [../CLAUDE.md](../CLAUDE.md) - Core rules and guardrails
-- [../rules/tooling/git-hooks-setup.md](../rules/tooling/git-hooks-setup.md) - Git hooks setup
+- [../docs/reference/tooling/git-hooks-setup.md](../docs/reference/tooling/git-hooks-setup.md) - Git hooks setup
 - [../templates/project-CLAUDE.md](../templates/project-CLAUDE.md) - Project CLAUDE.md template
 
 ---

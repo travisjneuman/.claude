@@ -8,7 +8,7 @@ category: reference
 
 How this toolkit leverages Claude Opus 4.6 capabilities released February 2026.
 
-**Last Updated:** February 2026 (v2.6.0)
+**Last Updated:** February 2026 (v2.9.2)
 
 ---
 

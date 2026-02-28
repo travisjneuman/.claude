@@ -8,7 +8,7 @@ category: workflow
 
 A practical guide to using the GSD system for multi-phase projects.
 
-**Last Updated:** February 2026 (v2.6.0)
+**Last Updated:** February 2026 (v2.9.2)
 
 **New in v2.1:** SessionStart hook ensures GSD context loads automatically. See [CHANGELOG.md](../CHANGELOG.md#210---january-13-2026).
 
@@ -373,7 +373,7 @@ Claude: Phase 3 complete. Phase 4 (Testing) is next.
 - [WORKFLOW-GUIDE.md](./WORKFLOW-GUIDE.md) - Workflow patterns and routing
 - [AGENT-TEAMS.md](./AGENT-TEAMS.md) - Parallel team coordination
 - `~/.claude/CLAUDE.md` - Core workflow rules
-- `~/.claude/rules/tooling/external-repos.md` - GSD plugin location
+- `~/.claude/docs/reference/tooling/external-repos.md` - GSD plugin location
 
 ---
 

@@ -8,7 +8,7 @@ category: reference
 
 Understanding how your prompts get routed to the right resources.
 
-**Last Updated:** February 2026 (v2.6.0)
+**Last Updated:** February 2026 (v2.9.2)
 
 ---
 
@@ -197,7 +197,7 @@ Contextual checklists and guidelines.
 
 ```
 Detected: UI changes
-Loads: rules/checklists/ui-visual-changes.md
+Loads: docs/reference/checklists/ui-visual-changes.md
 ```
 
 ### 4. Research

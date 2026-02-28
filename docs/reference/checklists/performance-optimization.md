@@ -567,9 +567,9 @@ Skill(tech-debt-analyzer)
 
 - `~/.claude/skills/README.md` - Skills overview
 - `~/.claude/CLAUDE.md` - Core rules
-- `~/.claude/rules/checklists/ui-visual-changes.md` - Visual changes
-- `~/.claude/rules/checklists/database-design.md` - Database performance
-- `~/.claude/rules/stacks/react-typescript.md` - React patterns
+- `~/.claude/docs/reference/checklists/ui-visual-changes.md` - Visual changes
+- `~/.claude/docs/reference/checklists/database-design.md` - Database performance
+- `~/.claude/docs/reference/stacks/react-typescript.md` - React patterns
 
 ---
 

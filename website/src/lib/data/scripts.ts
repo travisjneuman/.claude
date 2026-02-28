@@ -45,7 +45,7 @@ const SCRIPT_METADATA: Record<
   "init-marketplaces": {
     name: "Init Marketplaces",
     category: "setup",
-    description: "Clone all 84 marketplace repos from upstreams.",
+    description: "Clone all 101 marketplace repos from upstreams.",
     whenToRun: "After cloning, or to fix broken submodules",
   },
   "setup-hooks": {
@@ -127,7 +127,7 @@ const SCRIPT_METADATA: Record<
     name: "Pull All Repos",
     category: "repo-management",
     description:
-      "Primary user-facing script: pulls parent repo, all 84 marketplace repos, enforces no_push, and updates counts.",
+      "Primary user-facing script: pulls parent repo, all 101 marketplace repos, enforces no_push, and updates counts.",
     whenToRun: "Regularly, to keep all repos up to date",
   },
 

@@ -173,7 +173,7 @@ Add to cron for weekly backups:
 ## Related
 
 - `/health-check` - Verify configuration
-- `rules/tooling/troubleshooting.md` - Fix issues
+- `docs/reference/tooling/troubleshooting.md` - Fix issues
 - `git stash` - For git-tracked changes
 
 ---

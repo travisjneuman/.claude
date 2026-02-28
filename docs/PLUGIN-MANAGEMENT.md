@@ -6,7 +6,7 @@ category: ecosystem
 
 # Plugin Management Guide
 
-**Last Updated:** February 2026 (v2.6.0)
+**Last Updated:** February 2026 (v2.9.2)
 
 ---
 
@@ -154,7 +154,7 @@ This setup aggregates 101 marketplace repos containing 7,400+ community-contribu
 
 Repos follow one of two layouts. Single-plugin repos place `.claude-plugin/plugin.json` at the root. Multi-plugin repos (like `claude-code-plugins`) host multiple plugins in a `plugins/` subdirectory, each with its own `.claude-plugin/plugin.json`.
 
-All marketplace repos are configured as read-only with `no_push` set on the push URL. See `rules/tooling/external-repos.md` for the full list of 84 repos.
+All marketplace repos are configured as read-only with `no_push` set on the push URL. See `docs/reference/tooling/external-repos.md` for the full list of 101 repos.
 
 ---
 
@@ -318,6 +318,6 @@ This keeps upstream updates accessible while preserving your customizations.
 
 - `~/.claude/CLAUDE.md` -- Core rules and plugin philosophy
 - `~/.claude/docs/MARKETPLACE-GUIDE.md` -- Marketplace browsing and discovery
-- `~/.claude/rules/tooling/external-repos.md` -- Full list of 101 marketplace repos
-- `~/.claude/rules/tooling/troubleshooting.md` -- General troubleshooting
+- `~/.claude/docs/reference/tooling/external-repos.md` -- Full list of 101 marketplace repos
+- `~/.claude/docs/reference/tooling/troubleshooting.md` -- General troubleshooting
 - `~/.claude/skills/README.md` -- Skills overview (119 local skills)

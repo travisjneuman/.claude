@@ -8,7 +8,7 @@ category: reference
 
 Quick reference for Claude Code optimization.
 
-**Last Updated:** February 2026 (v2.7.0)
+**Last Updated:** February 2026 (v2.9.2)
 
 ---
 
@@ -288,10 +288,10 @@ This installation's `~/.claude/docs/` directory contains:
 
 | Directory           | Contents                                  |
 | ------------------- | ----------------------------------------- |
-| `rules/checklists/` | Verification, UI, automation, static site |
+| `docs/reference/checklists/` | Verification, UI, automation, static site |
 | `rules/workflows/`  | Research, action policy, context, teams   |
-| `rules/stacks/`     | React/TS, Python, Go, Rust, fullstack     |
-| `rules/tooling/`    | Git hooks, troubleshooting, MCP, repos    |
+| `docs/reference/stacks/`     | React/TS, Python, Go, Rust, fullstack     |
+| `docs/reference/tooling/`    | Git hooks, troubleshooting, MCP, repos    |
 
 ---
 

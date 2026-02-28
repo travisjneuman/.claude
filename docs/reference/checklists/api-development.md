@@ -382,9 +382,9 @@ Skill(security)
 
 - `~/.claude/skills/README.md` - Skills overview
 - `~/.claude/CLAUDE.md` - Core rules
-- `~/.claude/rules/checklists/security-hardening.md` - Security checklist
-- `~/.claude/rules/checklists/database-design.md` - Database patterns
-- `~/.claude/rules/stacks/django-fastapi.md` - Python API frameworks
+- `~/.claude/docs/reference/checklists/security-hardening.md` - Security checklist
+- `~/.claude/docs/reference/checklists/database-design.md` - Database patterns
+- `~/.claude/docs/reference/stacks/django-fastapi.md` - Python API frameworks
 
 ---
 

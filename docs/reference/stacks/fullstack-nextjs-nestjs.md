@@ -363,7 +363,7 @@ Skill(generic-fullstack-feature-developer)
 
 - `~/.claude/skills/README.md` - Skills overview
 - `~/.claude/CLAUDE.md` - Core rules
-- `~/.claude/rules/stacks/react-typescript.md` - React patterns
+- `~/.claude/docs/reference/stacks/react-typescript.md` - React patterns
 
 ---
 
