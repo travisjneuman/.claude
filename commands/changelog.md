@@ -159,7 +159,7 @@ If the user approves, prepend the entry to `CHANGELOG.md` after any existing fil
 
 ## Related
 
-- `rules/workflows/post-change-documentation.md` - Documentation update workflow
+- `docs/reference/workflows/post-change-documentation.md` - Documentation update workflow
 - `/health-check` - Verify toolkit status
 - `/audit-docs` - Check documentation freshness
 

@@ -423,5 +423,5 @@ Add to `settings.json`:
 
 - [Configuration](../docs/CONFIGURATION.md) — Full settings.json reference
 - [Scripts README](../scripts/README.md) — Helper scripts
-- [Git Hooks Setup](../rules/tooling/git-hooks-setup.md) — Project-level git hooks
+- [Git Hooks Setup](../docs/reference/tooling/git-hooks-setup.md) — Project-level git hooks
 - [Architecture Overview](../docs/ARCHITECTURE.md) — How hooks fit in the system

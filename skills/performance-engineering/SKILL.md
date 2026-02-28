@@ -517,5 +517,5 @@ k6 run --out json=results.json load-test.js
 ## Related Resources
 
 - **Skills:** `monitoring-observability` (performance monitoring), `serverless-development` (cold start optimization)
-- **Rules:** `rules/checklists/ui-visual-changes.md` (visual performance)
-- **Rules:** `rules/stacks/react-typescript.md` (React performance patterns)
+- **Rules:** `docs/reference/checklists/ui-visual-changes.md` (visual performance)
+- **Rules:** `docs/reference/stacks/react-typescript.md` (React performance patterns)

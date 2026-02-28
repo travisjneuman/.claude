@@ -653,7 +653,7 @@ Skill(devops-cloud)
 
 - `~/.claude/skills/README.md` - Skills overview
 - `~/.claude/CLAUDE.md` - Core rules
-- `~/.claude/rules/workflows/deployment-cicd.md` - CI/CD and deployment
+- `~/.claude/docs/reference/workflows/deployment-cicd.md` - CI/CD and deployment
 - `~/.claude/docs/reference/checklists/api-development.md` - API design
 - `~/.claude/docs/reference/checklists/performance-optimization.md` - Performance targets
 - `~/.claude/docs/reference/checklists/security-hardening.md` - Security monitoring

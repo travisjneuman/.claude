@@ -79,8 +79,8 @@ src/
 ## Related Global Rules
 
 Load these `~/.claude/` files when relevant:
-- `rules/stacks/[stack].md` for [stack] patterns
-- `rules/checklists/[checklist].md` for [checklist] work
+- `docs/reference/stacks/[stack].md` for [stack] patterns
+- `docs/reference/checklists/[checklist].md` for [checklist] work
 
 ---
 
@@ -112,8 +112,8 @@ Copy the appropriate section based on your project type:
 
 Load these `~/.claude/` files when relevant:
 
-- `rules/stacks/react-typescript.md` for React/TypeScript patterns
-- `rules/checklists/ui-visual-changes.md` for UI changes
+- `docs/reference/stacks/react-typescript.md` for React/TypeScript patterns
+- `docs/reference/checklists/ui-visual-changes.md` for UI changes
 ```
 
 ### Next.js + NestJS (Full-Stack)
@@ -123,9 +123,9 @@ Load these `~/.claude/` files when relevant:
 
 Load these `~/.claude/` files when relevant:
 
-- `rules/stacks/fullstack-nextjs-nestjs.md` for full-stack patterns
-- `rules/stacks/react-typescript.md` for React/TypeScript patterns
-- `rules/checklists/ui-visual-changes.md` for frontend changes
+- `docs/reference/stacks/fullstack-nextjs-nestjs.md` for full-stack patterns
+- `docs/reference/stacks/react-typescript.md` for React/TypeScript patterns
+- `docs/reference/checklists/ui-visual-changes.md` for frontend changes
 ```
 
 ### Static HTML/CSS/JS
@@ -135,8 +135,8 @@ Load these `~/.claude/` files when relevant:
 
 Load these `~/.claude/` files when relevant:
 
-- `rules/checklists/static-sites.md` for HTML/CSS/JS patterns
-- `rules/checklists/ui-visual-changes.md` for UI changes
+- `docs/reference/checklists/static-sites.md` for HTML/CSS/JS patterns
+- `docs/reference/checklists/ui-visual-changes.md` for UI changes
 ```
 
 ### Python
@@ -146,8 +146,8 @@ Load these `~/.claude/` files when relevant:
 
 Load these `~/.claude/` files when relevant:
 
-- `rules/stacks/python.md` for Python patterns
-- `rules/checklists/automation-scripts.md` for scripts/automation
+- `docs/reference/stacks/python.md` for Python patterns
+- `docs/reference/checklists/automation-scripts.md` for scripts/automation
 ```
 
 ### Automation/Scripts
@@ -157,7 +157,7 @@ Load these `~/.claude/` files when relevant:
 
 Load these `~/.claude/` files when relevant:
 
-- `rules/checklists/automation-scripts.md` for automation patterns
+- `docs/reference/checklists/automation-scripts.md` for automation patterns
 ```
 
 ---

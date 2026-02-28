@@ -406,7 +406,7 @@ update_website() {
     sedi -E "s/across [0-9]+ repos/across ${REPO_COUNT} repos/" "$file"
   fi
 
-  # Footer.tsx: "85 skills, 47 agents, and 5,200+ marketplace skills across 72 repos"
+  # Footer.tsx: "119 skills, 59 agents, and 7,400+ marketplace skills across 101 repos"
   file="website/src/components/layout/Footer.tsx"
   if [ -f "$file" ]; then
     sedi -E "s/[0-9]+ skills, [0-9]+ agents/${SKILL_COUNT} skills, ${AGENT_COUNT} agents/" "$file"
@@ -546,10 +546,10 @@ update_file "docs/SKILLS.md"
 update_file "scripts/README.md"
 
 # Rules tooling
-update_file "rules/tooling/external-repos.md"
+update_file "docs/reference/tooling/external-repos.md"
 
 # Rules workflows
-update_file "rules/workflows/agent-teams.md"
+update_file "docs/reference/workflows/agent-teams.md"
 
 # Agents README
 update_file "agents/README.md"

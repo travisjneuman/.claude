@@ -53,7 +53,7 @@ Verify:
 | ----------------------- | --------- | --------------------------------------------- |
 | `skills/`               | 119+ items | `ls ~/.claude/skills/ \| wc -l`              |
 | `agents/`               | 59+ files | `ls ~/.claude/agents/*.md \| wc -l`           |
-| `commands/`             | 10+ files | `ls ~/.claude/commands/*.md \| wc -l`         |
+| `commands/`             | 30+ files | `ls ~/.claude/commands/*.md \| wc -l`         |
 | `rules/`                | 13+ files | `find ~/.claude/rules -name "*.md" \| wc -l`  |
 | `templates/`            | 5+ files  | `ls ~/.claude/templates/ \| wc -l`            |
 | `plugins/marketplaces/` | 101 repos  | `ls ~/.claude/plugins/marketplaces/ \| wc -l` |

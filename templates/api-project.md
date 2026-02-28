@@ -670,10 +670,10 @@ SENTRY_DSN=""
 
 Load these `~/.claude/` files when relevant:
 
-- `rules/stacks/fullstack-nextjs-nestjs.md` for NestJS patterns
-- `rules/stacks/python.md` for FastAPI/Python patterns
-- `rules/checklists/api-development.md` for API design checklists
-- `rules/checklists/security-hardening.md` for security patterns
+- `docs/reference/stacks/fullstack-nextjs-nestjs.md` for NestJS patterns
+- `docs/reference/stacks/python.md` for FastAPI/Python patterns
+- `docs/reference/checklists/api-development.md` for API design checklists
+- `docs/reference/checklists/security-hardening.md` for security patterns
 - `rules/checklists/verification-template.md` for completion verification
 
 ---

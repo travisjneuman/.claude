@@ -455,4 +455,4 @@ export function getClient(): PrismaClient {
 
 - **Skills:** `event-driven-architecture` (SQS/SNS patterns), `monitoring-observability` (Lambda tracing)
 - **Skills:** `performance-engineering` (cold start impact on latency)
-- **Rules:** `rules/stacks/python.md` (Python Lambda patterns)
+- **Rules:** `docs/reference/stacks/python.md` (Python Lambda patterns)

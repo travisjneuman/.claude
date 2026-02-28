@@ -458,4 +458,4 @@ Use any future expiry date and any 3-digit CVC.
 
 - **Skills:** `authentication-patterns` (user identity for billing), `email-systems` (dunning emails)
 - **Skills:** `monitoring-observability` (payment failure alerting)
-- **Rules:** `rules/stacks/fullstack-nextjs-nestjs.md` (API route patterns)
+- **Rules:** `docs/reference/stacks/fullstack-nextjs-nestjs.md` (API route patterns)

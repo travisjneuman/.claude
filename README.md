@@ -301,7 +301,7 @@ cp ~/.claude/.env.example ~/.claude/.env.local
 # Edit CUSTOM_PROJECT_DIRS="/path/to/your/projects"
 ```
 
-**Switch action mode** between proactive (default) and conservative — see `rules/workflows/action-policy.md`.
+**Switch action mode** between proactive (default) and conservative — see `docs/reference/workflows/action-policy.md`.
 
 **Disable a hook** — edit `settings.json` and remove the hook entry.
 

@@ -73,17 +73,17 @@ Before committing any change:
 After changing counts, verify no stale references remain:
 
 ```bash
-# Check for old version numbers
-grep -r "v2.3.4" docs/ commands/ scripts/ README.md --include="*.md"
+# Check for old version numbers (update pattern when version changes)
+grep -r "v2.9.2" docs/ commands/ scripts/ README.md --include="*.md"
 
-# Check for old skill count
-grep -r "73 skills\|73 local" docs/ commands/ --include="*.md"
+# Check for old skill count (update when skills are added/removed)
+grep -r "119 skills\|119 local" docs/ commands/ --include="*.md"
 
-# Check for old agent count
-grep -r "36 agents" docs/ commands/ --include="*.md"
+# Check for old agent count (update when agents are added/removed)
+grep -r "59 agents" docs/ commands/ --include="*.md"
 
-# Check for old marketplace count
-grep -r "84 marketplace\|84 repos" docs/ commands/ --include="*.md"
+# Check for old marketplace count (update when repos are added)
+grep -r "101 marketplace\|101 repos" docs/ commands/ --include="*.md"
 ```
 
 ---

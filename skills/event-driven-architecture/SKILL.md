@@ -484,4 +484,4 @@ async function replayDLQMessages(
 
 - **Skills:** `monitoring-observability` (consumer lag monitoring), `serverless-development` (SQS/Lambda)
 - **Skills:** `payment-integration` (payment event flows), `email-systems` (email as async event)
-- **Rules:** `rules/stacks/fullstack-nextjs-nestjs.md` (NestJS CQRS modules)
+- **Rules:** `docs/reference/stacks/fullstack-nextjs-nestjs.md` (NestJS CQRS modules)

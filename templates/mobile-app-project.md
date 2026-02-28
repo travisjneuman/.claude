@@ -699,10 +699,10 @@ SENTRY_DSN=
 
 Load these `~/.claude/` files when relevant:
 
-- `rules/stacks/react-typescript.md` for React Native/TypeScript patterns
-- `rules/stacks/react-native-expo.md` for React Native specifics (if available)
-- `rules/stacks/flutter-dart.md` for Flutter specifics (if available)
-- `rules/checklists/ui-visual-changes.md` for UI work
+- `docs/reference/stacks/react-typescript.md` for React Native/TypeScript patterns
+- `docs/reference/stacks/react-native-expo.md` for React Native specifics (if available)
+- `docs/reference/stacks/flutter-dart.md` for Flutter specifics (if available)
+- `docs/reference/checklists/ui-visual-changes.md` for UI work
 - `rules/checklists/verification-template.md` for completion verification
 
 ---

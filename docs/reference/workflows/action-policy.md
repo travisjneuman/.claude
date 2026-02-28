@@ -308,7 +308,7 @@ Use project-level CLAUDE.md files:
 ## Related Documentation
 
 - `~/.claude/CLAUDE.md` - Core configuration (line 24-29)
-- `~/.claude/rules/workflows/research-methodology.md` - Research approach
+- `~/.claude/docs/reference/workflows/research-methodology.md` - Research approach
 - `~/.claude/docs/WORKFLOW-GUIDE.md` - Workflow patterns
 
 ---

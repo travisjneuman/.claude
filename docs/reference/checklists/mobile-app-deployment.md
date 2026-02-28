@@ -451,7 +451,7 @@ Skill(test-specialist)
 - `~/.claude/CLAUDE.md` - Core rules
 - `~/.claude/docs/reference/stacks/react-native-expo.md` - React Native patterns
 - `~/.claude/docs/reference/stacks/flutter-dart.md` - Flutter patterns
-- `~/.claude/rules/workflows/deployment-cicd.md` - General CI/CD patterns
+- `~/.claude/docs/reference/workflows/deployment-cicd.md` - General CI/CD patterns
 - `~/.claude/docs/reference/checklists/security-hardening.md` - Security checklist
 
 ---

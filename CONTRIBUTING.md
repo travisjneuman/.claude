@@ -135,9 +135,9 @@ Rules provide contextual guidance for specific situations.
 
 | Category   | Purpose                   | Location            |
 | ---------- | ------------------------- | ------------------- |
-| Checklists | Task-type specific        | `rules/checklists/` |
-| Stacks     | Technology patterns       | `rules/stacks/`     |
-| Tooling    | Setup and troubleshooting | `rules/tooling/`    |
+| Checklists | Task-type specific        | `docs/reference/checklists/` |
+| Stacks     | Technology patterns       | `docs/reference/stacks/`     |
+| Tooling    | Setup and troubleshooting | `docs/reference/tooling/`    |
 
 ### Rule Format
 

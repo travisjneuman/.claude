@@ -116,4 +116,4 @@ bash ~/.claude/scripts/init-marketplaces.sh
 - [New Device Setup](../docs/NEW-DEVICE-SETUP.md) — Cross-platform guide
 - [Maintenance](../docs/MAINTENANCE.md) — Ongoing maintenance
 - [Hooks README](../hooks/README.md) — Claude Code lifecycle hooks
-- [External Repos](../rules/tooling/external-repos.md) — Marketplace repo management
+- [External Repos](../docs/reference/tooling/external-repos.md) — Marketplace repo management
