@@ -22,8 +22,10 @@ All external repos are located in `~/.claude/plugins/marketplaces/`:
 | Repo                              | URL                                                                        |
 | --------------------------------- | -------------------------------------------------------------------------- |
 | aaronontheweb-dotnet-skills       | https://github.com/Aaronontheweb/dotnet-skills.git                         |
+| abubakarsiddik31-claude-skills    | https://github.com/abubakarsiddik31/claude-skills-collection.git           |
 | actionbook-rust-skills            | https://github.com/actionbook/rust-skills.git                              |
 | affaan-everything-claude          | https://github.com/affaan-m/everything-claude-code.git                     |
+| agentskills-agentskills           | https://github.com/agentskills/agentskills.git                             |
 | ahmedasmar-devops-skills          | https://github.com/ahmedasmar/devops-claude-skills.git                     |
 | akin-ozer-devops                  | https://github.com/akin-ozer/cc-devops-skills.git                          |
 | alirezarezvani-claude-skills      | https://github.com/alirezarezvani/claude-skills.git                        |
@@ -56,6 +58,7 @@ All external repos are located in `~/.claude/plugins/marketplaces/`:
 | DustyWalker-marketplace           | https://github.com/DustyWalker/claude-code-marketplace.git                 |
 | EveryInc-compound                 | https://github.com/EveryInc/compound-engineering-plugin.git                |
 | expo-skills                       | https://github.com/expo/skills.git                                         |
+| francyjg-agent-skill-creator      | https://github.com/FrancyJGLisboa/agent-skill-creator.git                  |
 | georgeguimaraes-elixir            | https://github.com/georgeguimaraes/claude-code-elixir.git                  |
 | get-shit-done                     | https://github.com/glittercowboy/get-shit-done.git                         |
 | giuseppe-developer-kit            | https://github.com/giuseppe-trisciuoglio/developer-kit.git                 |
@@ -63,15 +66,18 @@ All external repos are located in `~/.claude/plugins/marketplaces/`:
 | gqy20-biology-plugins             | https://github.com/gqy20/cc_plugins.git                                    |
 | hashi-terraform-skills            | https://github.com/hashi-demo-lab/claude-skill-hcp-terraform.git           |
 | hashicorp-agent-skills            | https://github.com/hashicorp/agent-skills.git                              |
+| heilcheng-awesome-agent-skills    | https://github.com/heilcheng/awesome-agent-skills.git                      |
 | henkisdabro-marketplace           | https://github.com/henkisdabro/claudecode-marketplace.git                  |
 | hesreallyhim-awesome              | https://github.com/hesreallyhim/awesome-claude-code.git                    |
 | interstellar-code-claud-skills    | https://github.com/Interstellar-code/claud-skills.git                      |
+| jayzeedesign-awesome-claude       | https://github.com/JayZeeDesign/awesome-claude-skills.git                  |
 | jeffallan-claude-skills           | https://github.com/Jeffallan/claude-skills.git                             |
 | karanb192-awesome-claude-skills   | https://github.com/karanb192/awesome-claude-skills.git                     |
 | kenryu42-safety-net               | https://github.com/kenryu42/claude-code-safety-net.git                     |
 | kfly8-cpan-plugins                | https://github.com/kfly8/claude-cpan-plugins.git                           |
 | kivilaid-marketplace              | https://github.com/kivilaid/plugin-marketplace.git                         |
 | levnikolaevich-claude-code-skills | https://github.com/levnikolaevich/claude-code-skills.git                   |
+| libukai-awesome-agent-skills      | https://github.com/libukai/awesome-agent-skills.git                        |
 | lodetomasi-agents-claude-code     | https://github.com/lodetomasi/agents-claude-code.git                       |
 | madappgang-claude-code            | https://github.com/MadAppGang/claude-code.git                              |
 | manutej-luxor-marketplace         | https://github.com/manutej/luxor-claude-marketplace.git                    |
@@ -93,11 +99,15 @@ All external repos are located in `~/.claude/plugins/marketplaces/`:
 | rshah515-claude-code-subagents    | https://github.com/rshah515/claude-code-subagents.git                      |
 | sangrokjung-claude-forge          | https://github.com/sangrokjung/claude-forge.git                            |
 | sawyerhood-mart                   | https://github.com/SawyerHood/sawyer-mart.git                              |
+| sickn33-antigravity-awesome-skills | https://github.com/sickn33/antigravity-awesome-skills.git                 |
 | scopecraft-command                | https://github.com/scopecraft/command.git                                  |
 | secondsky-sap-skills              | https://github.com/secondsky/sap-skills.git                                |
 | shanraisshan-best-practice        | https://github.com/shanraisshan/claude-code-best-practice.git              |
 | sivalabs-marketplace              | https://github.com/sivaprasadreddy/sivalabs-marketplace.git                |
 | skill-seekers                     | https://github.com/yusufkaraaslan/Skill_Seekers.git                        |
+| skillcreatorai-agent-skills       | https://github.com/skillcreatorai/Ai-Agent-Skills.git                      |
+| skillcreatorai-awesome-agent-skills | https://github.com/skillcreatorai/Awesome-Agent-Skills.git               |
+| skillmatic-awesome-agent-skills   | https://github.com/skillmatic-ai/awesome-agent-skills.git                  |
 | skillsforge                       | https://github.com/rawveg/skillsforge-marketplace.git                      |
 | superpowers-marketplace           | https://github.com/obra/superpowers-marketplace.git                        |
 | taches-cc-resources               | https://github.com/glittercowboy/taches-cc-resources.git                   |
@@ -133,7 +143,7 @@ All external repos are located in `~/.claude/plugins/marketplaces/`:
 **What gets pulled:**
 
 1. `~/.claude` - Parent repo (travisjneuman/.claude)
-2. `~/.claude/plugins/marketplaces/*` - All 91 marketplace repos
+2. `~/.claude/plugins/marketplaces/*` - All 101 marketplace repos
 3. Custom project directories (if configured) - your own repos
 4. Documentation counts updated automatically if any repos changed
 
