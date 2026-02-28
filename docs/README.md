@@ -6,7 +6,7 @@ category: reference
 
 # Claude Code Toolkit Documentation
 
-**Last Updated:** February 2026 (v2.8.0)
+**Last Updated:** February 2026 (v2.9.2)
 **Maintainer:** Travis J. Neuman
 **Purpose:** Portable, optimized Claude Code configuration for any project
 
@@ -82,9 +82,9 @@ Already set up? Jump to the section you need below.
 | Templates           | 17     | `templates/`                   |
 | Hooks               | 10     | `hooks/`                       |
 | MCP servers         | 12     | `.mcp.json`                    |
-| Marketplace repos   | 84     | `plugins/marketplaces/`        |
-| Marketplace skills  | 5,300+ | (across all marketplace repos) |
-| **Total git repos** | **85** | 1 parent + 84 submodules       |
+| Marketplace repos   | 101    | `plugins/marketplaces/`        |
+| Marketplace skills  | 7,400+ | (across all marketplace repos) |
+| **Total git repos** | **102** | 1 parent + 101 submodules     |
 
 ---
 
@@ -118,6 +118,27 @@ This `~/.claude/` folder is a fully configured, portable Claude Code environment
 ---
 
 ## History
+
+### v2.9.2 (February 2026)
+
+- Comprehensive audit: fixed all stale counts, broken path references, and version drift
+- Fixed `update-counts.sh`: added 10+ missing sed patterns (badge URLs, ASCII art, table counts, community marketplace text)
+- Fixed `regenerate-index.sh`: added EXCLUDE_SKILL_DIRS array to exclude backups, tests, examples, planned-skills (1,388 non-skill files) — fixes inflated MASTER_INDEX.md count
+- Fixed 62 broken path references: `rules/stacks/` → `docs/reference/stacks/`, `rules/tooling/` → `docs/reference/tooling/`, `rules/checklists/` → `docs/reference/checklists/` for moved files
+- Updated `plugin.json` version from 2.3.0 to 2.9.2
+- Updated version strings in 22 docs files from v2.6.0–v2.8.0 to v2.9.2
+- Added `website/src/lib/data/scripts.ts` to update-counts.sh file list
+
+### v2.9.1 (February 2026)
+
+- Post-audit fixes: fixed malformed `.gitmodules`, added `ignore = all` to 45 submodules
+- Removed stale `mojito-freeship` references from `.gitmodules` and submodule config
+- Added 10 new marketplace repos: sickn33-antigravity, heilcheng, libukai, skillmatic, jayzeedesign, skillcreatorai-awesome, abubakarsiddik31, agentskills, skillcreatorai-agent-skills, francyjg
+
+### v2.9.0 (February 2026)
+
+- Marketplace audit: added 11 repos, removed 2 dead repos, optimized token loading
+- All 101 marketplace submodules verified with `ignore = all` and `no_push`
 
 ### v2.8.0 (February 2026)
 

@@ -6,7 +6,7 @@ category: workflow
 
 # Workflow Automation Guide
 
-**Last Updated:** February 2026 (v2.6.0)
+**Last Updated:** February 2026 (v2.9.2)
 **Purpose:** Complete workflow compliance guide -- checklists + automation tools
 
 ---

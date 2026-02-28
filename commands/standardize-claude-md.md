@@ -73,8 +73,8 @@ If `{{stack}}` not provided, detect from:
 
 Load these `~/.claude/` files when relevant:
 
-- `rules/stacks/[stack].md` for [stack] patterns
-- `rules/checklists/[checklist].md` for [checklist] work
+- `docs/reference/stacks/[stack].md` for [stack] patterns
+- `docs/reference/checklists/[checklist].md` for [checklist] work
 ```
 
 **If missing Quick Start:** Add at end (before footer):

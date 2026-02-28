@@ -71,8 +71,8 @@ Fill in the **Related Global Rules** section based on detected stack:
 
 Load these `~/.claude/` files when relevant:
 
-- `rules/stacks/react-typescript.md` for React/TypeScript patterns
-- `rules/checklists/ui-visual-changes.md` for UI changes
+- `docs/reference/stacks/react-typescript.md` for React/TypeScript patterns
+- `docs/reference/checklists/ui-visual-changes.md` for UI changes
 ```
 
 **For Next.js:**
@@ -82,9 +82,9 @@ Load these `~/.claude/` files when relevant:
 
 Load these `~/.claude/` files when relevant:
 
-- `rules/stacks/fullstack-nextjs-nestjs.md` for full-stack patterns
-- `rules/stacks/react-typescript.md` for React/TypeScript patterns
-- `rules/checklists/ui-visual-changes.md` for frontend changes
+- `docs/reference/stacks/fullstack-nextjs-nestjs.md` for full-stack patterns
+- `docs/reference/stacks/react-typescript.md` for React/TypeScript patterns
+- `docs/reference/checklists/ui-visual-changes.md` for frontend changes
 ```
 
 **For Static:**
@@ -94,8 +94,8 @@ Load these `~/.claude/` files when relevant:
 
 Load these `~/.claude/` files when relevant:
 
-- `rules/checklists/static-sites.md` for HTML/CSS/JS patterns
-- `rules/checklists/ui-visual-changes.md` for UI changes
+- `docs/reference/checklists/static-sites.md` for HTML/CSS/JS patterns
+- `docs/reference/checklists/ui-visual-changes.md` for UI changes
 ```
 
 **For Python:**
@@ -105,8 +105,8 @@ Load these `~/.claude/` files when relevant:
 
 Load these `~/.claude/` files when relevant:
 
-- `rules/stacks/python.md` for Python patterns
-- `rules/checklists/automation-scripts.md` for scripts/automation
+- `docs/reference/stacks/python.md` for Python patterns
+- `docs/reference/checklists/automation-scripts.md` for scripts/automation
 ```
 
 **For Automation:**
@@ -116,7 +116,7 @@ Load these `~/.claude/` files when relevant:
 
 Load these `~/.claude/` files when relevant:
 
-- `rules/checklists/automation-scripts.md` for automation patterns
+- `docs/reference/checklists/automation-scripts.md` for automation patterns
 ```
 
 ---

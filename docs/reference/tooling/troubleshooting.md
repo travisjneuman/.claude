@@ -633,7 +633,7 @@ Skill(tech-debt-analyzer)
 ## Related Documentation
 
 - `~/.claude/docs/AUTO-CLAUDE-GUIDE.md` - Auto-Claude setup and troubleshooting
-- `~/.claude/rules/tooling/git-hooks-setup.md` - Hook setup
+- `~/.claude/docs/reference/tooling/git-hooks-setup.md` - Hook setup
 - `~/.claude/CLAUDE.md` - Core workflow
 - `~/.claude/skills/README.md` - Skills overview
 

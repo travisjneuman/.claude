@@ -147,6 +147,9 @@ update_file() {
   # Marketplace repo count — only with qualifying words
   sedi -E "s/[0-9]+ marketplace repos/${REPO_COUNT} marketplace repos/g" "$file"
   sedi -E "s/[0-9]+ marketplaces/${REPO_COUNT} marketplaces/g" "$file"
+  # "N repos in `plugins/marketplaces/`" and "| N repos  |" (health-check table)
+  sedi -E "s/[0-9]+ repos in \`plugins\/marketplaces\/\`/${REPO_COUNT} repos in \`plugins\/marketplaces\/\`/g" "$file"
+  sedi -E "s/\| [0-9]+ repos  \|/| ${REPO_COUNT} repos  |/g" "$file"
   sedi -E "s/[0-9]+ external repositories/${REPO_COUNT} external repositories/g" "$file"
   sedi -E "s/[0-9]+ marketplace submodules/${REPO_COUNT} marketplace submodules/g" "$file"
   sedi -E "s/[0-9]+ marketplace repositories/${REPO_COUNT} marketplace repositories/g" "$file"
@@ -176,6 +179,8 @@ update_file() {
 
   # "N,NNN+ community-contributed skills"
   sedi -E "s/[0-9]+,[0-9]+\+ community-contributed skills/${MARKET_DISPLAY_PLUS} community-contributed skills/g" "$file"
+  # "N,NNN+ community marketplace skills"
+  sedi -E "s/[0-9]+,[0-9]+\+ community marketplace skills/${MARKET_DISPLAY_PLUS} community marketplace skills/g" "$file"
 
   # YAML frontmatter: "N community plugin marketplaces with N,NNN+"
   sedi -E "s/[0-9]+ community plugin marketplaces with [0-9]+,[0-9]+\+/${REPO_COUNT} community plugin marketplaces with ${MARKET_DISPLAY_PLUS}/g" "$file"
@@ -229,16 +234,19 @@ update_readme_badges() {
   sedi -E "s/Skills-[0-9]+-/Skills-${SKILL_COUNT}-/g" "$file"
   sedi -E "s/Agents-[0-9]+-/Agents-${AGENT_COUNT}-/g" "$file"
   sedi -E "s/Marketplaces-[0-9]+-/Marketplaces-${REPO_COUNT}-/g" "$file"
+  sedi -E "s/Marketplace_Repos-[0-9]+-/Marketplace_Repos-${REPO_COUNT}-/g" "$file"
   sedi -E "s/Marketplace_Skills-[0-9,]+\+-/Marketplace_Skills-${MARKET_BADGE}-/g" "$file"
   sedi -E "s/Commands-[0-9]+-/Commands-${COMMAND_COUNT}-/g" "$file"
   sedi -E "s/Hooks-[0-9]+-/Hooks-${HOOK_COUNT}-/g" "$file"
   sedi -E "s/Rules-[0-9]+-/Rules-${RULE_COUNT}-/g" "$file"
   sedi -E "s/Templates-[0-9]+-/Templates-${TEMPLATE_COUNT}-/g" "$file"
 
-  # Table bold counts on rows containing "Skills"/"Agents"/"Marketplaces"
+  # Table bold counts on rows containing "Skills"/"Agents"/"Marketplaces"/"Marketplace Repos"
   sedi -E "/Skills/s/\*\*[0-9]+\*\*/**${SKILL_COUNT}**/" "$file"
   sedi -E "/Agents.*\| \*\*[0-9]+\*\*/s/\*\*[0-9]+\*\*/**${AGENT_COUNT}**/" "$file"
   sedi -E "/Marketplaces.*\| \*\*[0-9]+\*\*/s/\*\*[0-9]+\*\*/**${REPO_COUNT}**/" "$file"
+  # Table plain count: "| N |" on Marketplace Repos row
+  sedi -E "/Marketplace Repos/s/\| [0-9]+ \|/| ${REPO_COUNT} |/" "$file"
 
   # TOC anchors: (72 Skills) → (${SKILL_COUNT} Skills)
   sedi -E "s/\([0-9]+ Skills\)/(${SKILL_COUNT} Skills)/g" "$file"
@@ -301,6 +309,16 @@ update_readme_badges() {
 
   # Directory tree: "# N submodules"
   sedi -E "s/# [0-9]+ submodules/# ${REPO_COUNT} submodules/" "$file"
+
+  # "N community marketplaces with" (paragraph text)
+  sedi -E "s/[0-9]+ community marketplaces with/${REPO_COUNT} community marketplaces with/" "$file"
+
+  # ASCII art: "  N repos    │" (padded, inside box)
+  sedi -E "s/  [0-9]+ repos    /  ${REPO_COUNT} repos   /" "$file"
+
+  # Summary/details: "N repos, N,NNN+ skills" and "N community skill repositories"
+  sedi -E "s/[0-9]+ repos, [0-9]+,[0-9]+\+ skills/${REPO_COUNT} repos, ${MARKET_DISPLAY_PLUS} skills/g" "$file"
+  sedi -E "s/aggregates [0-9]+ community skill repositories/aggregates ${REPO_COUNT} community skill repositories/" "$file"
 
   # Emoji stat lines: "🎓 **N Skills** · 🤖 **N Agents** · ..."
   sedi -E "s/🎓 \*\*[0-9]+ Skills\*\*/🎓 **${SKILL_COUNT} Skills**/" "$file"
@@ -562,6 +580,9 @@ update_file "commands/pull-repos.md"
 
 # CLAUDE.md
 update_file "CLAUDE.md"
+
+# Website data files
+update_file "website/src/lib/data/scripts.ts"
 
 # plugin.json
 update_plugin_json

@@ -718,9 +718,9 @@ Skill(test-specialist)
 
 - `~/.claude/skills/README.md` - Skills overview
 - `~/.claude/CLAUDE.md` - Core rules
-- `~/.claude/rules/checklists/security-hardening.md` - Security checklist
-- `~/.claude/rules/checklists/performance-optimization.md` - Performance
-- `~/.claude/rules/tooling/troubleshooting.md` - Common issues
+- `~/.claude/docs/reference/checklists/security-hardening.md` - Security checklist
+- `~/.claude/docs/reference/checklists/performance-optimization.md` - Performance
+- `~/.claude/docs/reference/tooling/troubleshooting.md` - Common issues
 
 ---
 

@@ -8,7 +8,7 @@ category: operations
 
 Ongoing maintenance procedures to keep your Claude Code configuration clean and efficient.
 
-**Last Updated:** February 2026 (v2.6.0)
+**Last Updated:** February 2026 (v2.9.2)
 
 ---
 

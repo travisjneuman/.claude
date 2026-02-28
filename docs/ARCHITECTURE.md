@@ -8,7 +8,7 @@ category: reference
 
 How the Claude Code Toolkit's components interact, from prompt to execution.
 
-**Last Updated:** February 2026 (v2.6.0)
+**Last Updated:** February 2026 (v2.9.2)
 
 ---
 
@@ -73,7 +73,7 @@ rules/
 └── tooling/           # Tool setup (git hooks, MCP servers, troubleshooting)
 ```
 
-Rules load on demand based on the auto-routing table in CLAUDE.md. When a prompt mentions "React," the `rules/stacks/react-typescript.md` file loads. When completing work, `rules/checklists/verification-template.md` loads.
+Rules load on demand based on the auto-routing table in CLAUDE.md. When a prompt mentions "React," the `docs/reference/stacks/react-typescript.md` file loads. When completing work, `rules/checklists/verification-template.md` loads.
 
 ### Skills — Domain Knowledge
 
@@ -147,8 +147,8 @@ MCP (Model Context Protocol) servers add tools beyond Claude's built-in capabili
 3. CLAUDE.md loads (always in context)
    │
 4. Auto-routing matches keywords in prompt
-   │  ├── "React" → loads rules/stacks/react-typescript.md
-   │  ├── "bug"   → loads rules/tooling/troubleshooting.md
+   │  ├── "React" → loads docs/reference/stacks/react-typescript.md
+   │  ├── "bug"   → loads docs/reference/tooling/troubleshooting.md
    │  └── "review"→ activates generic-code-reviewer skill
    │
 5. Claude processes prompt with loaded context

@@ -323,7 +323,7 @@ Skill(test-specialist)
 
 - `~/.claude/skills/README.md` - Skills overview
 - `~/.claude/CLAUDE.md` - Core rules
-- `~/.claude/rules/checklists/automation-scripts.md` - Scripts checklist
+- `~/.claude/docs/reference/checklists/automation-scripts.md` - Scripts checklist
 
 ---
 

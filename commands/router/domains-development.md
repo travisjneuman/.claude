@@ -63,12 +63,12 @@ Load this file when development-related keywords detected.
 | `flutter`       | `Skill(flutter-development)`             | `flutter-developer`       | mobile-architect                      |
 | `react-native`  | `Skill(react-native)`                    | `mobile-architect`        | mobile-release-manager                |
 | `macos`         | `Skill(macos-native)`                    | `macos-developer`         | -                                     |
-| `python`        | -                                        | `python-expert`           | Read rules/stacks/python.md           |
-| `django-fastapi`| -                                        | `python-expert`           | Read rules/stacks/django-fastapi.md   |
-| `nextjs`        | -                                        | `next-js-expert`          | Read rules/stacks/fullstack-nextjs-nestjs.md |
-| `typescript`    | -                                        | `typescript-expert`       | Read rules/stacks/react-typescript.md |
-| `go`            | -                                        | `go-expert`               | Read rules/stacks/go.md               |
-| `rust`          | -                                        | `rust-expert`             | Read rules/stacks/rust.md             |
+| `python`        | -                                        | `python-expert`           | Read docs/reference/stacks/python.md           |
+| `django-fastapi`| -                                        | `python-expert`           | Read docs/reference/stacks/django-fastapi.md   |
+| `nextjs`        | -                                        | `next-js-expert`          | Read docs/reference/stacks/fullstack-nextjs-nestjs.md |
+| `typescript`    | -                                        | `typescript-expert`       | Read docs/reference/stacks/react-typescript.md |
+| `go`            | -                                        | `go-expert`               | Read docs/reference/stacks/go.md               |
+| `rust`          | -                                        | `rust-expert`             | Read docs/reference/stacks/rust.md             |
 | `data-science`  | `Skill(data-science)`                    | `data-engineer`           | -                                     |
 | `auth`          | `Skill(authentication-patterns)`         | `auth-specialist`         | -                                     |
 | `payments`      | `Skill(payment-integration)`             | `payment-billing-specialist` | -                                  |
@@ -138,18 +138,18 @@ find ~/.claude/plugins/marketplaces -name "SKILL.md" | xargs grep -li "<keyword>
 
 | Domain                | Rule File                                           |
 | --------------------- | --------------------------------------------------- |
-| `python`              | `~/.claude/rules/stacks/python.md`                  |
-| `django`, `fastapi`   | `~/.claude/rules/stacks/django-fastapi.md`          |
-| `react`, `typescript` | `~/.claude/rules/stacks/react-typescript.md`        |
-| `go`                  | `~/.claude/rules/stacks/go.md`                      |
-| `rust`                | `~/.claude/rules/stacks/rust.md`                    |
-| Full-stack            | `~/.claude/rules/stacks/fullstack-nextjs-nestjs.md` |
-| React Native / Expo   | `~/.claude/rules/stacks/react-native-expo.md`       |
-| Flutter / Dart        | `~/.claude/rules/stacks/flutter-dart.md`            |
-| Vue / Nuxt            | `~/.claude/rules/stacks/vue-nuxt.md`                |
-| Svelte / SvelteKit    | `~/.claude/rules/stacks/svelte-sveltekit.md`        |
-| API design            | `~/.claude/rules/checklists/api-development.md`     |
-| Database              | `~/.claude/rules/checklists/database-design.md`     |
-| Security              | `~/.claude/rules/checklists/security-hardening.md`  |
-| Performance           | `~/.claude/rules/checklists/performance-optimization.md` |
+| `python`              | `~/.claude/docs/reference/stacks/python.md`                  |
+| `django`, `fastapi`   | `~/.claude/docs/reference/stacks/django-fastapi.md`          |
+| `react`, `typescript` | `~/.claude/docs/reference/stacks/react-typescript.md`        |
+| `go`                  | `~/.claude/docs/reference/stacks/go.md`                      |
+| `rust`                | `~/.claude/docs/reference/stacks/rust.md`                    |
+| Full-stack            | `~/.claude/docs/reference/stacks/fullstack-nextjs-nestjs.md` |
+| React Native / Expo   | `~/.claude/docs/reference/stacks/react-native-expo.md`       |
+| Flutter / Dart        | `~/.claude/docs/reference/stacks/flutter-dart.md`            |
+| Vue / Nuxt            | `~/.claude/docs/reference/stacks/vue-nuxt.md`                |
+| Svelte / SvelteKit    | `~/.claude/docs/reference/stacks/svelte-sveltekit.md`        |
+| API design            | `~/.claude/docs/reference/checklists/api-development.md`     |
+| Database              | `~/.claude/docs/reference/checklists/database-design.md`     |
+| Security              | `~/.claude/docs/reference/checklists/security-hardening.md`  |
+| Performance           | `~/.claude/docs/reference/checklists/performance-optimization.md` |
 | Deployment            | `~/.claude/rules/workflows/deployment-cicd.md`      |

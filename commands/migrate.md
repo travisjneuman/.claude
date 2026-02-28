@@ -316,8 +316,8 @@ For all migration operations, check:
 
 ## Related Documentation
 
-- `~/.claude/rules/stacks/fullstack-nextjs-nestjs.md` - Prisma patterns
-- `~/.claude/rules/stacks/python.md` - Python ORM patterns
+- `~/.claude/docs/reference/stacks/fullstack-nextjs-nestjs.md` - Prisma patterns
+- `~/.claude/docs/reference/stacks/python.md` - Python ORM patterns
 
 ---
 

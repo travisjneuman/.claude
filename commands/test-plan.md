@@ -347,9 +347,9 @@ Next steps:
 ## Related
 
 - `rules/checklists/verification-template.md` - Verification checklist
-- `rules/stacks/react-typescript.md` - React testing patterns
-- `rules/stacks/python.md` - Python testing patterns
-- `rules/stacks/go.md` - Go testing patterns
+- `docs/reference/stacks/react-typescript.md` - React testing patterns
+- `docs/reference/stacks/python.md` - Python testing patterns
+- `docs/reference/stacks/go.md` - Go testing patterns
 - `/start-task` - Begin implementing the test plan
 
 ---

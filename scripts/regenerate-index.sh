@@ -48,9 +48,21 @@ echo "" >> "$INDEX"
 echo "---" >> "$INDEX"
 echo "" >> "$INDEX"
 
-# Count marketplace skills
-MARKETPLACE_COUNT=$(find "$HOME/.claude/plugins/marketplaces" -name "SKILL.md" 2>/dev/null | wc -l | tr -d ' ')
-REPO_COUNT=$(ls -d "$HOME/.claude/plugins/marketplaces"/*/ 2>/dev/null | wc -l | tr -d ' ')
+# Count marketplace skills (exclude backups, tests, examples, docs, etc.)
+# Must match exclusions in update-counts.sh for consistency
+EXCLUDE_SKILL_DIRS=(
+  backups backup tests test examples example docs workspace lab
+  archive archived deprecated draft drafts planned-skills planned
+  templates template node_modules .git
+)
+FIND_EXCLUDES=()
+for dir in "${EXCLUDE_SKILL_DIRS[@]}"; do
+  FIND_EXCLUDES+=(-not -path "*/$dir/*")
+done
+FIND_EXCLUDES+=(-not -path "*/\.*/*")
+cd "$HOME/.claude"
+MARKETPLACE_COUNT=$(find plugins/marketplaces -name "SKILL.md" "${FIND_EXCLUDES[@]}" 2>/dev/null | wc -l | tr -d ' ')
+REPO_COUNT=$(ls -d plugins/marketplaces/*/ 2>/dev/null | wc -l | tr -d ' ')
 
 echo "## Marketplace: ${MARKETPLACE_COUNT} skills across ${REPO_COUNT} repos" >> "$INDEX"
 echo "" >> "$INDEX"

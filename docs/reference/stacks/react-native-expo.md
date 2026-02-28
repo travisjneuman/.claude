@@ -457,8 +457,8 @@ Skill(generic-react-feature-developer)
 
 - `~/.claude/skills/README.md` - Skills overview
 - `~/.claude/CLAUDE.md` - Core rules
-- `~/.claude/rules/stacks/react-typescript.md` - React patterns (shared)
-- `~/.claude/rules/checklists/ui-visual-changes.md` - Visual changes
+- `~/.claude/docs/reference/stacks/react-typescript.md` - React patterns (shared)
+- `~/.claude/docs/reference/checklists/ui-visual-changes.md` - Visual changes
 
 ---
 

@@ -366,8 +366,8 @@ Skill(tech-debt-analyzer)
 
 - `~/.claude/skills/README.md` - Skills overview
 - `~/.claude/CLAUDE.md` - Core rules (Data Integrity)
-- `~/.claude/rules/checklists/api-development.md` - API patterns
-- `~/.claude/rules/checklists/performance-optimization.md` - Performance
+- `~/.claude/docs/reference/checklists/api-development.md` - API patterns
+- `~/.claude/docs/reference/checklists/performance-optimization.md` - Performance
 
 ---
 

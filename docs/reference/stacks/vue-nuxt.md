@@ -448,8 +448,8 @@ Skill(api-designer)
 
 - `~/.claude/skills/README.md` - Skills overview
 - `~/.claude/CLAUDE.md` - Core rules
-- `~/.claude/rules/checklists/ui-visual-changes.md` - Visual changes
-- `~/.claude/rules/checklists/api-development.md` - API checklist
+- `~/.claude/docs/reference/checklists/ui-visual-changes.md` - Visual changes
+- `~/.claude/docs/reference/checklists/api-development.md` - API checklist
 
 ---
 

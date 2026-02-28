@@ -1,6 +1,6 @@
 {
   "repoCount": 101,
-  "totalSkills": 7412,
+  "totalSkills": 7421,
   "repos": [
     {
       "name": "claude-code-plugins-plus-skills",
@@ -53,14 +53,14 @@
       "skillCount": 106
     },
     {
-      "name": "kivilaid-marketplace",
-      "displayName": "Kivilaid Marketplace",
+      "name": "giuseppe-developer-kit",
+      "displayName": "Giuseppe Developer Kit",
       "skillCount": 104
     },
     {
-      "name": "giuseppe-developer-kit",
-      "displayName": "Giuseppe Developer Kit",
-      "skillCount": 95
+      "name": "kivilaid-marketplace",
+      "displayName": "Kivilaid Marketplace",
+      "skillCount": 104
     },
     {
       "name": "manutej-luxor-marketplace",
