@@ -98,7 +98,7 @@ Any free-form description works. Claude will compose the optimal team.
 
 When this command is invoked:
 
-1. Read `~/.claude/rules/workflows/agent-teams.md` for the decision framework
+1. Read `~/.claude/docs/reference/workflows/agent-teams.md` for the decision framework
 2. Read `~/.claude/docs/AGENT-TEAMS.md` for detailed team templates
 3. If a known template name is provided, use the matching pre-built prompt from the docs
 4. If a custom description is provided, compose an appropriate team
@@ -117,5 +117,5 @@ When this command is invoked:
 ## Related
 
 - `~/.claude/docs/AGENT-TEAMS.md` - Full documentation
-- `~/.claude/rules/workflows/agent-teams.md` - Decision framework
+- `~/.claude/docs/reference/workflows/agent-teams.md` - Decision framework
 - `~/.claude/agents/README.md` - Available subagents

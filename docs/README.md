@@ -119,6 +119,19 @@ This `~/.claude/` folder is a fully configured, portable Claude Code environment
 
 ## History
 
+### v2.9.3 (February 2026)
+
+- Fixed 73 additional broken path references across templates/, skills/, hooks/, scripts/, agents/, CONTRIBUTING.md
+  - `rules/stacks/` → `docs/reference/stacks/`, `rules/tooling/` → `docs/reference/tooling/`
+  - `rules/checklists/` → `docs/reference/checklists/` (preserving `verification-template.md` which correctly stays in `rules/`)
+  - `rules/workflows/` → `docs/reference/workflows/` (preserving `context-management.md` which correctly stays in `rules/`)
+- Fixed stale paths in `scripts/update-counts.sh` (`rules/tooling/` and `rules/workflows/` → `docs/reference/`)
+- Fixed stale paths in `scripts/hooks/session-start.sh` auto-routing references
+- Fixed stale counts: `CLAUDE-CODE-RESOURCES.md` (84→101 repos, 4,500→7,400+ skills, 60→59 agents)
+- Fixed stale counts: `FOLDER-STRUCTURE.md` (21→30 commands, 69→102 repos, 7→10 hooks)
+- Fixed stale counts: `health-check.md` (10→30 commands), `audit-docs.md` (47→59 agents, 10→30 commands)
+- Updated `post-change-documentation.md` grep examples to reflect current counts
+
 ### v2.9.2 (February 2026)
 
 - Comprehensive audit: fixed all stale counts, broken path references, and version drift

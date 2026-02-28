@@ -343,8 +343,8 @@ npm run type-check   # TypeScript check
 
 ## See Also
 
-- `~/.claude/rules/checklists/` - Task-type specific checklists
-- `~/.claude/rules/stacks/` - Stack-specific patterns
-- `~/.claude/rules/tooling/` - Tool configuration guides
+- `~/.claude/docs/reference/checklists/` - Task-type specific checklists
+- `~/.claude/docs/reference/stacks/` - Stack-specific patterns
+- `~/.claude/docs/reference/tooling/` - Tool configuration guides
 - `~/.claude/skills/MASTER_INDEX.md` - Full skills catalog
 - `~/.claude/agents/README.md` - Agents directory

@@ -203,7 +203,7 @@ app.use('/api/auth/login', authLimiter);
 
 ## Related Resources
 
-- `~/.claude/rules/checklists/security-hardening.md` - Security hardening checklist
+- `~/.claude/docs/reference/checklists/security-hardening.md` - Security hardening checklist
 - `~/.claude/agents/security-auditor.md` - Security audit agent
 - `~/.claude/skills/authentication-patterns/SKILL.md` - Auth patterns
 

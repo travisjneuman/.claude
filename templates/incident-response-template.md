@@ -331,9 +331,9 @@ Track follow-up work to prevent recurrence. Every action item must have an owner
 
 ## Related Documentation
 
-- `~/.claude/rules/checklists/monitoring-alerting-design.md` - Monitoring and alerting setup
-- `~/.claude/rules/workflows/deployment-cicd.md` - Rollback procedures
-- `~/.claude/rules/checklists/security-hardening.md` - Security incident handling
+- `~/.claude/docs/reference/checklists/monitoring-alerting-design.md` - Monitoring and alerting setup
+- `~/.claude/docs/reference/workflows/deployment-cicd.md` - Rollback procedures
+- `~/.claude/docs/reference/checklists/security-hardening.md` - Security incident handling
 - `~/.claude/CLAUDE.md` - Core rules
 
 ---

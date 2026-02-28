@@ -76,5 +76,5 @@ Every spawn prompt should include:
 ## Related Documentation
 
 - `~/.claude/docs/AGENT-TEAMS.md` - Full guide with examples
-- `~/.claude/rules/workflows/agent-teams.md` - Decision framework
+- `~/.claude/docs/reference/workflows/agent-teams.md` - Decision framework
 - `~/.claude/commands/assemble-team.md` - Quick team assembly command

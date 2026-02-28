@@ -47,7 +47,7 @@ Full peer-to-peer agent coordination with shared task lists and messaging:
 | TaskCreate/Update/List | Shared task management with dependencies |
 | Shutdown protocol | Graceful teammate lifecycle management |
 
-**Toolkit integration:** See `docs/AGENT-TEAMS.md` for templates, `rules/workflows/agent-teams.md` for decision framework, `skills/agent-teams/SKILL.md` for composition knowledge.
+**Toolkit integration:** See `docs/AGENT-TEAMS.md` for templates, `docs/reference/workflows/agent-teams.md` for decision framework, `skills/agent-teams/SKILL.md` for composition knowledge.
 
 ### Context Compaction
 

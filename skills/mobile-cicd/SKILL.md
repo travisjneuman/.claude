@@ -269,7 +269,7 @@ eas update --branch production --message "Bug fix"
 - `~/.claude/skills/react-native/SKILL.md` - React Native development
 - `~/.claude/skills/flutter-development/SKILL.md` - Flutter development
 - `~/.claude/agents/mobile-release-manager.md` - Release management agent
-- `~/.claude/rules/workflows/deployment-cicd.md` - General CI/CD patterns
+- `~/.claude/docs/reference/workflows/deployment-cicd.md` - General CI/CD patterns
 
 ---
 

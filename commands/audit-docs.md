@@ -85,15 +85,15 @@ Search documentation files for count references and compare against ground truth
 | Pattern to Search | Example Match | Compare Against |
 | --- | --- | --- |
 | `\d+ skills` | "119 skills" | Actual skill count |
-| `\d+ agents` | "47 agents" | Actual agent count |
-| `\d+ commands` | "10 commands" | Actual command count |
+| `\d+ agents` | "59 agents" | Actual agent count |
+| `\d+ commands` | "30 commands" | Actual command count |
 | `\d+ market` | "101 marketplace" | Actual marketplace count |
 | `\d+ repos` | "101 repos" | Actual marketplace count |
 | `\d+ hooks` | "10 hooks" | Actual hook count |
 | `\d+ rules` | "13 rules" | Actual rule count |
 | `\d+ templates` | "5 templates" | Actual template count |
 | `\d+ local skills` | "119 local skills" | Actual skill count |
-| `\d+ local agents` | "47 local agents" | Actual agent count |
+| `\d+ local agents` | "59 local agents" | Actual agent count |
 
 For each mismatch, report:
 - File path
@@ -227,7 +227,7 @@ Always show the proposed changes before applying. Never fix silently.
 
 ## Related
 
-- `rules/workflows/post-change-documentation.md` - Documentation update workflow
+- `docs/reference/workflows/post-change-documentation.md` - Documentation update workflow
 - `/changelog` - Generate changelog entries
 - `/health-check` - Toolkit integrity check
 

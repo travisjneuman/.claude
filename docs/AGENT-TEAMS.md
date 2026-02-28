@@ -42,7 +42,7 @@ One session acts as the **team lead** -- it creates the team, spawns teammates, 
 - Same-file edits (causes overwrites)
 - Simple tasks where coordination overhead exceeds benefit
 
-See `rules/workflows/agent-teams.md` for the full decision framework.
+See `docs/reference/workflows/agent-teams.md` for the full decision framework.
 
 ---
 
@@ -390,7 +390,7 @@ Current limitations:
 
 ## Related Documentation
 
-- `~/.claude/rules/workflows/agent-teams.md` - Decision framework
+- `~/.claude/docs/reference/workflows/agent-teams.md` - Decision framework
 - `~/.claude/agents/README.md` - Subagent catalog
 - `~/.claude/docs/AUTO-CLAUDE-GUIDE.md` - Autonomous multi-agent alternative
 - `~/.claude/skills/agent-teams/SKILL.md` - Team composition knowledge

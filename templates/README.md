@@ -148,7 +148,7 @@ cp ~/.claude/templates/project-CLAUDE.md /path/to/project/CLAUDE.md
 - Per-project instructions template optimized for global toolkit
 - Project Identity table (type, stack, status, priority, URL)
 - Commands, Architecture, Project-Specific Rules sections
-- **Related Global Rules** - points to appropriate `rules/stacks/` and `rules/checklists/`
+- **Related Global Rules** - points to appropriate `docs/reference/stacks/` and `docs/reference/checklists/`
 - **Quick Start** table with common commands
 - Stack-specific examples (React, Next.js, Static, Python, Automation)
 - Global delegation statement pattern

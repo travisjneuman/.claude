@@ -345,10 +345,10 @@ For critical issues discovered post-release that cannot wait for the next releas
 
 ## Related Documentation
 
-- `~/.claude/rules/workflows/deployment-cicd.md` - CI/CD pipeline setup
-- `~/.claude/rules/checklists/monitoring-alerting-design.md` - Monitoring setup
-- `~/.claude/rules/checklists/security-hardening.md` - Security review
-- `~/.claude/rules/checklists/mobile-app-deployment.md` - Mobile-specific release steps
+- `~/.claude/docs/reference/workflows/deployment-cicd.md` - CI/CD pipeline setup
+- `~/.claude/docs/reference/checklists/monitoring-alerting-design.md` - Monitoring setup
+- `~/.claude/docs/reference/checklists/security-hardening.md` - Security review
+- `~/.claude/docs/reference/checklists/mobile-app-deployment.md` - Mobile-specific release steps
 - `~/.claude/templates/incident-response-template.md` - If something goes wrong
 - `~/.claude/CLAUDE.md` - Core rules
 
