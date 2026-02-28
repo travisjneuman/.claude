@@ -303,7 +303,7 @@ Proposed → Accepted → [Deprecated | Superseded]
 
 - `~/.claude/templates/task-template.md` - Task planning
 - `~/.claude/templates/research-notes.md` - Research methodology
-- `~/.claude/rules/workflows/research-methodology.md` - Structured research
+- `~/.claude/docs/reference/workflows/research-methodology.md` - Structured research
 - `~/.claude/CLAUDE.md` - Core rules
 
 ---

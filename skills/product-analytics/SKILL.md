@@ -400,4 +400,4 @@ function PricingPage() {
 
 - **Skills:** `growth-engineering` (A/B testing infrastructure), `authentication-patterns` (identify/alias flow)
 - **Skills:** `accessibility-a11y` (accessible consent banners)
-- **Rules:** `rules/stacks/react-typescript.md` (React hooks for analytics)
+- **Rules:** `docs/reference/stacks/react-typescript.md` (React hooks for analytics)

@@ -445,4 +445,4 @@ async function updateHealthScores(): Promise<void> {
 
 - **Skills:** `llm-app-development` (chatbot RAG), `product-analytics` (support funnel analysis)
 - **Skills:** `email-systems` (support notification emails), `accessibility-a11y` (accessible help widgets)
-- **Rules:** `rules/stacks/react-typescript.md` (help widget components)
+- **Rules:** `docs/reference/stacks/react-typescript.md` (help widget components)

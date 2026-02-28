@@ -71,7 +71,7 @@ This repo underwent a security audit before being made public. The following wer
     ├── CLAUDE.md                   ← Global memory/instructions
     ├── README.md                   ← Folder overview
     │
-    ├── commands/                   ← Custom slash commands (21 + 7 router)
+    ├── commands/                   ← Custom slash commands (30 + 7 router)
     │   ├── README.md               ← Commands index
     │   ├── assemble-team.md        ← /assemble-team - Agent Teams setup
     │   ├── auto-claude.md          ← /auto-claude - Autonomous mode
@@ -150,7 +150,7 @@ This repo underwent a security audit before being made public. The following wer
     │       ├── voltagent-subagents/
     │       ├── trailofbits-skills/
     │       ├── claude-scientific-skills/
-    │       └── ... (69 total repos, 1 parent + 68 submodules)
+    │       └── ... (102 total repos, 1 parent + 100 submodules + 1 standalone)
     │
     ├── skills/                     ← Custom skills (115 directories, 119 SKILL.md files)
     │   ├── README.md               ← Skills documentation
@@ -303,7 +303,7 @@ This repo underwent a security audit before being made public. The following wer
     │   ├── cli-developer.md
     │   └── pwa-specialist.md
     │
-    ├── hooks/                      ← Event hooks (7 scripts)
+    ├── hooks/                      ← Event hooks (10 scripts)
     │   ├── README.md               ← Hooks index
     │   ├── format-code.sh          ← PostToolUse: auto-format on file write
     │   ├── guard-dangerous.sh      ← PreToolUse: block dangerous operations
@@ -337,7 +337,7 @@ This repo underwent a security audit before being made public. The following wer
     │       ├── context-management.md
     │       └── research-methodology.md
     │
-    ├── scripts/                    ← Automation scripts (16 + 4 hook scripts)
+    ├── scripts/                    ← Automation scripts (14 + 4 hook scripts)
     │   ├── README.md               ← Scripts index
     │   ├── README-sync-scripts.md  ← Sync scripts documentation
     │   ├── fix-marketplace-paths.sh ← Fix plugin path issues
@@ -452,7 +452,7 @@ Agent definitions for the Task tool's `subagent_type` parameter. Each agent is a
 
 ---
 
-### `/hooks/` - Event Hooks (7 scripts)
+### `/hooks/` - Event Hooks (10 scripts)
 
 Shell scripts triggered by Claude Code events (configured in `settings.json`).
 

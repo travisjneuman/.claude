@@ -45,7 +45,7 @@ Agent Teams coordinate multiple full Claude Code sessions working in parallel, e
 
 Use `/assemble-team` to quickly spawn a pre-built team, or describe the composition in natural language.
 
-See `~/.claude/docs/AGENT-TEAMS.md` for the full guide and `~/.claude/rules/workflows/agent-teams.md` for the decision framework.
+See `~/.claude/docs/AGENT-TEAMS.md` for the full guide and `~/.claude/docs/reference/workflows/agent-teams.md` for the decision framework.
 
 ---
 

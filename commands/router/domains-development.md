@@ -152,4 +152,4 @@ find ~/.claude/plugins/marketplaces -name "SKILL.md" | xargs grep -li "<keyword>
 | Database              | `~/.claude/docs/reference/checklists/database-design.md`     |
 | Security              | `~/.claude/docs/reference/checklists/security-hardening.md`  |
 | Performance           | `~/.claude/docs/reference/checklists/performance-optimization.md` |
-| Deployment            | `~/.claude/rules/workflows/deployment-cicd.md`      |
+| Deployment            | `~/.claude/docs/reference/workflows/deployment-cicd.md`      |

@@ -35,7 +35,7 @@ Apply maximum reasoning depth for non-trivial tasks. Skip only for: typos, singl
 - "best way to", "recommended", "is there a library"
 - "investigate", "research", "find information about", "compare approaches"
 
-If research needed: Use `WebSearch` immediately. For complex research: Load `rules/workflows/research-methodology.md`.
+If research needed: Use `WebSearch` immediately. For complex research: Load `docs/reference/workflows/research-methodology.md`.
 
 **Parallel tool usage:** When multiple independent searches/reads needed, make ALL calls in single message.
 

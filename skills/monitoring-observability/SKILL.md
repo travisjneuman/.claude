@@ -439,5 +439,5 @@ healthRouter.get("/readyz", async (req, res) => {
 ## Related Resources
 
 - **Skills:** `performance-engineering` (latency optimization), `application-security` (security logging)
-- **Rules:** `rules/stacks/fullstack-nextjs-nestjs.md` (NestJS instrumentation patterns)
-- **Rules:** `rules/tooling/troubleshooting.md` (debugging with logs)
+- **Rules:** `docs/reference/stacks/fullstack-nextjs-nestjs.md` (NestJS instrumentation patterns)
+- **Rules:** `docs/reference/tooling/troubleshooting.md` (debugging with logs)

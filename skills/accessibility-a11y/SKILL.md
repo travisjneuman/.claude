@@ -540,5 +540,5 @@ jobs:
 ## Related Resources
 
 - **Skills:** `performance-engineering` (intersection of performance and a11y), `growth-engineering` (accessible onboarding)
-- **Rules:** `rules/checklists/ui-visual-changes.md` (visual change accessibility checks)
-- **Rules:** `rules/stacks/react-typescript.md` (React component patterns)
+- **Rules:** `docs/reference/checklists/ui-visual-changes.md` (visual change accessibility checks)
+- **Rules:** `docs/reference/stacks/react-typescript.md` (React component patterns)

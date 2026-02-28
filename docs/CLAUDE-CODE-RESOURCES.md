@@ -249,7 +249,7 @@ Agent Teams coordinate multiple Claude Code sessions working in parallel. This i
 | File                                       | Purpose                               |
 | ------------------------------------------ | ------------------------------------- |
 | `~/.claude/docs/AGENT-TEAMS.md`            | Comprehensive guide with templates    |
-| `~/.claude/rules/workflows/agent-teams.md` | Decision framework: when to use teams |
+| `~/.claude/docs/reference/workflows/agent-teams.md` | Decision framework: when to use teams |
 | `~/.claude/skills/agent-teams/SKILL.md`    | Team composition skill                |
 
 ### Key Concepts
@@ -289,7 +289,7 @@ This installation's `~/.claude/docs/` directory contains:
 | Directory           | Contents                                  |
 | ------------------- | ----------------------------------------- |
 | `docs/reference/checklists/` | Verification, UI, automation, static site |
-| `rules/workflows/`  | Research, action policy, context, teams   |
+| `docs/reference/workflows/`  | Research, action policy, context, teams   |
 | `docs/reference/stacks/`     | React/TS, Python, Go, Rust, fullstack     |
 | `docs/reference/tooling/`    | Git hooks, troubleshooting, MCP, repos    |
 
@@ -315,9 +315,9 @@ This installation's `~/.claude/docs/` directory contains:
 | Component                | Count  |
 | ------------------------ | ------ |
 | Local skills             | 119    |
-| Custom agents            | 60     |
-| Marketplace repos        | 84     |
-| Marketplace skills       | 4,500+ |
+| Custom agents            | 59     |
+| Marketplace repos        | 101    |
+| Marketplace skills       | 7,400+ |
 | Custom commands          | 30     |
 | MCP servers (configured) | 12     |
 

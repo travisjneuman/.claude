@@ -496,4 +496,4 @@ async function canSendTo(email: string): Promise<boolean> {
 
 - **Skills:** `authentication-patterns` (password reset emails), `payment-integration` (invoice/receipt emails)
 - **Skills:** `event-driven-architecture` (email as async event)
-- **Rules:** `rules/stacks/react-typescript.md` (React Email component patterns)
+- **Rules:** `docs/reference/stacks/react-typescript.md` (React Email component patterns)

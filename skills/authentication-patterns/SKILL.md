@@ -518,4 +518,4 @@ function ProjectSettings({ project }: { project: Project }) {
 
 - **Skills:** `application-security` (OWASP auth vulnerabilities), `payment-integration` (billing auth)
 - **Skills:** `email-systems` (password reset emails), `product-analytics` (identify/alias on auth)
-- **Rules:** `rules/stacks/fullstack-nextjs-nestjs.md` (NestJS auth guards)
+- **Rules:** `docs/reference/stacks/fullstack-nextjs-nestjs.md` (NestJS auth guards)

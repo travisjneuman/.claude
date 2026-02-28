@@ -140,4 +140,4 @@
 ---
 
 **Research Methodology:**
-This research followed structured hypothesis testing with multi-source verification as outlined in `~/.claude/rules/workflows/research-methodology.md`.
+This research followed structured hypothesis testing with multi-source verification as outlined in `~/.claude/docs/reference/workflows/research-methodology.md`.

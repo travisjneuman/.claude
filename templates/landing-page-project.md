@@ -819,10 +819,10 @@ CONTENTFUL_ACCESS_TOKEN=""
 
 Load these `~/.claude/` files when relevant:
 
-- `rules/stacks/react-typescript.md` for React/TypeScript patterns
-- `rules/checklists/ui-visual-changes.md` for visual design quality
-- `rules/checklists/static-sites.md` for static site standards
-- `rules/checklists/performance-optimization.md` for performance tuning
+- `docs/reference/stacks/react-typescript.md` for React/TypeScript patterns
+- `docs/reference/checklists/ui-visual-changes.md` for visual design quality
+- `docs/reference/checklists/static-sites.md` for static site standards
+- `docs/reference/checklists/performance-optimization.md` for performance tuning
 - `rules/checklists/verification-template.md` for completion verification
 
 ---
