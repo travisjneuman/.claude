@@ -1,7 +1,7 @@
 ---
 name: agent-teams
 description: Team composition knowledge for Claude Code Agent Teams - when to suggest teams, optimal sizing, spawn prompt patterns
-tools: []
+allowed-tools: []
 ---
 
 # Agent Teams Composition Skill

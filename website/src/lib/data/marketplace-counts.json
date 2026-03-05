@@ -1,6 +1,6 @@
 {
   "repoCount": 101,
-  "totalSkills": 7421,
+  "totalSkills": 7475,
   "repos": [
     {
       "name": "claude-code-plugins-plus-skills",
@@ -25,7 +25,7 @@
     {
       "name": "claude-scientific-skills",
       "displayName": "Claude Scientific Skills",
-      "skillCount": 155
+      "skillCount": 173
     },
     {
       "name": "wshobson-agents",
@@ -48,14 +48,14 @@
       "skillCount": 120
     },
     {
-      "name": "levnikolaevich-claude-code-skills",
-      "displayName": "Levnikolaevich Claude Code Skills",
-      "skillCount": 106
-    },
-    {
       "name": "giuseppe-developer-kit",
       "displayName": "Giuseppe Developer Kit",
-      "skillCount": 104
+      "skillCount": 110
+    },
+    {
+      "name": "levnikolaevich-claude-code-skills",
+      "displayName": "Levnikolaevich Claude Code Skills",
+      "skillCount": 108
     },
     {
       "name": "kivilaid-marketplace",
@@ -63,14 +63,14 @@
       "skillCount": 104
     },
     {
+      "name": "alirezarezvani-claude-skills",
+      "displayName": "Alirezarezvani Claude Skills",
+      "skillCount": 87
+    },
+    {
       "name": "manutej-luxor-marketplace",
       "displayName": "Manutej Luxor Marketplace",
       "skillCount": 67
-    },
-    {
-      "name": "alirezarezvani-claude-skills",
-      "displayName": "Alirezarezvani Claude Skills",
-      "skillCount": 66
     },
     {
       "name": "jeffallan-claude-skills",
@@ -90,7 +90,7 @@
     {
       "name": "affaan-everything-claude",
       "displayName": "Affaan Everything Claude",
-      "skillCount": 56
+      "skillCount": 58
     },
     {
       "name": "worldbuilding-skills",
@@ -103,13 +103,13 @@
       "skillCount": 47
     },
     {
-      "name": "actionbook-rust-skills",
-      "displayName": "Actionbook Rust Skills",
-      "skillCount": 38
-    },
-    {
       "name": "daymade-skills",
       "displayName": "Daymade Skills",
+      "skillCount": 41
+    },
+    {
+      "name": "actionbook-rust-skills",
+      "displayName": "Actionbook Rust Skills",
       "skillCount": 38
     },
     {
@@ -158,14 +158,14 @@
       "skillCount": 23
     },
     {
-      "name": "henkisdabro-marketplace",
-      "displayName": "Henkisdabro Marketplace",
+      "name": "EveryInc-compound",
+      "displayName": "EveryInc Compound",
       "skillCount": 21
     },
     {
-      "name": "EveryInc-compound",
-      "displayName": "EveryInc Compound",
-      "skillCount": 20
+      "name": "henkisdabro-marketplace",
+      "displayName": "Henkisdabro Marketplace",
+      "skillCount": 21
     },
     {
       "name": "mhattingpete-skills",
@@ -180,7 +180,7 @@
     {
       "name": "anthropic-agent-skills",
       "displayName": "Anthropic Agent Skills",
-      "skillCount": 16
+      "skillCount": 17
     },
     {
       "name": "jayzeedesign-awesome-claude",

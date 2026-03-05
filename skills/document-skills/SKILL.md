@@ -1,7 +1,6 @@
 ---
 name: document-skills
 description: "Professional document creation, editing, and analysis for Office formats (docx, pdf, pptx, xlsx). Use when working with Word documents, PDFs, PowerPoint presentations, or Excel spreadsheets."
-tags: [documents, office, docx, pdf, pptx, xlsx, word, excel, powerpoint]
 ---
 
 # Document Skills Suite

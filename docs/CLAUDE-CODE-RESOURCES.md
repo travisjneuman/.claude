@@ -232,7 +232,7 @@ tags: [category, domain]
 ---
 ```
 
-This installation has 119 local skills and 59 custom agents. Run `bash ~/.claude/scripts/regenerate-index.sh` to refresh the master index.
+This installation has 115 local skills and 59 custom agents. Run `bash ~/.claude/scripts/regenerate-index.sh` to refresh the master index.
 
 ### Agent Development
 
