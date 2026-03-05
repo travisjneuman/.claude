@@ -97,14 +97,14 @@ YOU MUST auto-load matching resources from the user's prompt — no slash comman
 | HTML, static site | `docs/reference/checklists/static-sites.md` |
 | API design, endpoints, REST, OpenAPI | `docs/reference/checklists/api-development.md` + `api-designer` agent |
 | database, schema, migration, queries, SQL, Prisma, Drizzle, TypeORM | `docs/reference/checklists/database-design.md` + `skills/database-expert` + `database-expert` agent |
-| security, OWASP, hardening, pentest, CSP | `docs/reference/checklists/security-hardening.md` + `skills/application-security` + `security-auditor` agent |
+| security, OWASP, hardening, pentest, CSP, DevSecOps | `docs/reference/checklists/security-hardening.md` + `skills/application-security` + `security-auditor` agent + `devsecops-engineer` agent |
 | performance, speed, bundle, optimize, Lighthouse | `docs/reference/checklists/performance-optimization.md` + `skills/performance-engineering` + `performance-optimizer` agent |
 | research, investigate, compare | `docs/reference/workflows/research-methodology.md` |
-| deploy, CI/CD, pipeline, Docker, k8s, AWS, cloud, Terraform, Helm | `docs/reference/workflows/deployment-cicd.md` + `skills/devops-cloud` + `devops-engineer` agent |
+| deploy, CI/CD, pipeline, Docker, k8s, AWS, cloud, Terraform, Helm | `docs/reference/workflows/deployment-cicd.md` + `skills/devops-cloud` + `devops-engineer` agent + `cloud-architect` agent |
 | team, parallel, coordinate, agents, swarm | `docs/reference/workflows/agent-teams.md` + `skills/agent-teams` |
 | error, bug, broken, fix, crash, stack trace | `docs/reference/tooling/troubleshooting.md` + `skills/debug-systematic` + `debugging-specialist` agent |
 | MCP, server protocol, tool server | `docs/reference/tooling/mcp-servers.md` |
-| test, TDD, coverage, jest, vitest, pytest, Playwright, Cypress, Mocha | `skills/test-specialist` + `test-generator` agent |
+| test, TDD, coverage, jest, vitest, pytest, Playwright, Cypress, Mocha | `skills/test-specialist` + `test-generator` agent + `e2e-test-specialist` agent |
 | accessibility, a11y, WCAG, ARIA, screen reader | `skills/accessibility-a11y` + `accessibility-expert` agent |
 | i18n, localization, translation, locale, RTL | `skills/i18n-localization` + `i18n-specialist` agent |
 | GraphQL, resolver, federation, Apollo | `skills/graphql-expert` + `graphql-architect` agent |
@@ -119,7 +119,7 @@ YOU MUST auto-load matching resources from the user's prompt — no slash comman
 | serverless, Lambda, Edge Functions, Workers | `skills/serverless-development` |
 | SEO, meta tags, sitemap, Core Web Vitals | `skills/seo-analytics-auditor` + `seo-specialist` agent |
 | animation, motion, transitions, Framer Motion | `skills/ui-animation` + `motion-designer` agent |
-| refactor, tech debt, code smell | `skills/tech-debt-analyzer` + `refactoring-specialist` agent |
+| refactor, tech debt, code smell, architecture review | `skills/tech-debt-analyzer` + `refactoring-specialist` agent + `architecture-analyst` agent |
 | migration, upgrade, version bump, breaking change | `migration-specialist` agent |
 | data science, pandas, Jupyter, ML, statistics | `skills/data-science` + `data-engineer` agent |
 | iOS, Swift, SwiftUI, Xcode | `skills/ios-development` + `ios-developer` agent |
@@ -128,8 +128,8 @@ YOU MUST auto-load matching resources from the user's prompt — no slash comman
 | PWA, service worker, offline, installable | `skills/pwa-development` + `pwa-specialist` agent |
 | game, Unity, Unreal, Godot | `skills/game-development` + `game-developer` agent |
 | mobile CI/CD, Fastlane, code signing, TestFlight | `skills/mobile-cicd` + `mobile-release-manager` agent |
-| document, PDF, Word, docx, xlsx, pptx | `Skill(doc-coauthoring)` or `Skill(pdf)` / `Skill(docx)` / `Skill(xlsx)` / `Skill(pptx)` |
-| React, TypeScript, JSX | `docs/reference/stacks/react-typescript.md` + `react-expert` agent |
+| document, PDF, Word, docx, xlsx, pptx | `Skill(doc-coauthoring)` or `Skill(pdf)` / `Skill(docx)` / `Skill(xlsx)` / `Skill(pptx)` + `documentation-writer` agent + `technical-writer` agent |
+| React, TypeScript, JSX | `docs/reference/stacks/react-typescript.md` + `react-expert` agent + `typescript-expert` agent |
 | Python, Django, FastAPI | `docs/reference/stacks/python.md` + `python-expert` agent (Django/FastAPI: `django-fastapi-expert` agent) |
 | Go, Golang | `docs/reference/stacks/go.md` + `go-expert` agent |
 | Rust, cargo | `docs/reference/stacks/rust.md` + `rust-expert` agent |
@@ -151,6 +151,10 @@ YOU MUST auto-load matching resources from the user's prompt — no slash comman
 | video, editing, production, footage | `skills/video-production` + `video-producer` agent |
 | audio, podcast, recording, mixing | `skills/audio-production` + `audio-engineer` agent |
 | graphic design, illustration, layout | `skills/graphic-design` + `graphic-designer` agent |
+| code review, PR review | `deep-code-reviewer` agent |
+| explain code, walkthrough, onboarding | `code-explainer` agent |
+| API integration, webhook, SDK wrapper, third-party | `api-integration-specialist` agent |
+| CLI, command-line, terminal tool | `cli-developer` agent |
 
 **Fallback:** When no row matches, search `skills/MASTER_INDEX.md`, then marketplace: `find ~/.claude/plugins/marketplaces -name "SKILL.md" | xargs grep -li "<keyword>"`.
 

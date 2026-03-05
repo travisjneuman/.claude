@@ -7,6 +7,8 @@ tools:
   - Glob
   - Bash
 model: opus
+memory: user
+background: true
 ---
 
 You are an elite security auditor with expertise in application security.

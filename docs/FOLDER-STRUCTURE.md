@@ -8,7 +8,7 @@ category: reference
 
 Complete map of the `.claude/` folder and related files.
 
-**Last Updated:** February 2026 (v2.9.2)
+**Last Updated:** February 2026 (v2.9.8)
 
 ---
 
@@ -468,16 +468,15 @@ Shell scripts triggered by Claude Code events (configured in `settings.json`).
 
 ---
 
-### `/rules/` - Contextual Rules (17 files across 4 subdirectories)
+### `/rules/` - Always-Load Rules (3 files)
 
-Modular workflow rules loaded based on task type. See `rules/README.md` for when to load each file.
+Compact guardrails that load automatically for every session. Detailed reference content has been migrated to `docs/reference/`.
 
-| Subdirectory  | Files | Purpose                                                                |
-| ------------- | ----- | ---------------------------------------------------------------------- |
-| `checklists/` | 4     | Task-type checklists (automation, static sites, UI, verification)      |
-| `stacks/`     | 5     | Tech stack patterns (Go, Python, React, Rust, Fullstack)               |
-| `tooling/`    | 4     | Tool configuration (external repos, git hooks, MCP, troubleshooting)   |
-| `workflows/`  | 4     | Workflow methodologies (action policy, agent teams, context, research) |
+| File                   | Purpose                                           |
+| ---------------------- | ------------------------------------------------- |
+| `typescript-react.md`  | TypeScript/React coding standards (strict types)  |
+| `python.md`            | Python coding standards (type hints, async-first) |
+| `api-routes.md`        | API endpoint conventions (REST, auth, validation) |
 
 ---
 

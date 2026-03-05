@@ -38,7 +38,7 @@ Every change that modifies behavior, adds features, or changes counts MUST inclu
 | `agents/README.md` | Agents added or removed |
 | `commands/README.md` | Commands added or removed |
 | `hooks/README.md` | Hooks added or removed |
-| `rules/README.md` | Rule files added or removed |
+| `rules/*.md` | Rule files added or removed |
 | `templates/README.md` | Templates added or removed |
 
 ---
@@ -74,7 +74,7 @@ After changing counts, verify no stale references remain:
 
 ```bash
 # Check for old version numbers (update pattern when version changes)
-grep -r "v2.9.2" docs/ commands/ scripts/ README.md --include="*.md"
+grep -r "v2.9.8" docs/ commands/ scripts/ README.md --include="*.md"
 
 # Check for old skill count (update when skills are added/removed)
 grep -r "119 skills\|119 local" docs/ commands/ --include="*.md"
@@ -97,7 +97,7 @@ Documentation drift is the #1 source of confusion for users. When counts, versio
 ## Related Documentation
 
 - `~/.claude/CLAUDE.md` — Core rules (includes "update corresponding README/index files")
-- `~/.claude/rules/README.md` — Rules index
+- `~/.claude/rules/` — Always-load rule files
 - `~/.claude/docs/README.md` — Documentation hub
 
 ---
