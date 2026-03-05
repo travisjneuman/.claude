@@ -703,7 +703,7 @@ Load these `~/.claude/` files when relevant:
 - `docs/reference/stacks/react-native-expo.md` for React Native specifics (if available)
 - `docs/reference/stacks/flutter-dart.md` for Flutter specifics (if available)
 - `docs/reference/checklists/ui-visual-changes.md` for UI work
-- `rules/checklists/verification-template.md` for completion verification
+- `docs/reference/checklists/verification-template.md` for completion verification
 
 ---
 
