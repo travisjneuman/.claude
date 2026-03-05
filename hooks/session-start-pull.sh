@@ -9,6 +9,11 @@ SCRIPT="$HOME/.claude/_pull-all-repos.sh"
 # Create log directory if needed
 mkdir -p "$LOGDIR"
 
+# Rotate log if over 500KB
+if [ -f "$LOGFILE" ] && [ "$(wc -c < "$LOGFILE" 2>/dev/null || echo 0)" -gt 512000 ]; then
+  tail -100 "$LOGFILE" > "$LOGFILE.tmp" && mv "$LOGFILE.tmp" "$LOGFILE"
+fi
+
 # Only run if script exists
 [ -f "$SCRIPT" ] || exit 0
 

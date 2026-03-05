@@ -146,13 +146,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node -e \"process.env.HOOK_NAME='guard-dangerous.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
-            "statusMessage": "Checking command safety"
-          },
-          {
-            "type": "command",
-            "command": "node -e \"process.env.HOOK_NAME='pre-commit-counts.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
-            "statusMessage": "Updating counts before commit"
+            "command": "node -e \"process.env.HOOK_NAME='pre-bash-check.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
+            "statusMessage": "Checking command"
           }
         ]
       },
