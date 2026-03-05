@@ -57,7 +57,7 @@ Automatic context compression when approaching limits:
 - Prior messages compressed while preserving key information
 - Task state may need re-sending after compaction (documented in `docs/AGENT-TEAMS.md` limitations)
 
-**Toolkit integration:** `rules/workflows/context-management.md` covers context hygiene and state persistence strategies.
+**Toolkit integration:** `docs/reference/workflows/context-management.md` covers context hygiene and state persistence strategies.
 
 ### Enhanced Agentic Coding
 

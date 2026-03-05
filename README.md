@@ -8,13 +8,13 @@
 
 <br/>
 
-[![v2.8.0](https://img.shields.io/badge/v2.8.0-6366f1?style=flat-square&logo=semver&logoColor=white)](./CHANGELOG.md)
+[![v2.9.4](https://img.shields.io/badge/v2.9.4-6366f1?style=flat-square&logo=semver&logoColor=white)](./CHANGELOG.md)
 [![Platform](https://img.shields.io/badge/macOS_·_Linux_·_Windows-334155?style=flat-square&logo=apple&logoColor=white)](./docs/SETUP-GUIDE.md)
 [![Website](https://img.shields.io/badge/claude.travisjneuman.com-818cf8?style=flat-square&logo=cloudflare&logoColor=white)](https://claude.travisjneuman.com)
 [![License](https://img.shields.io/badge/MIT-blue?style=flat-square&logo=opensourceinitiative&logoColor=white)](./LICENSE)
 [![Use Template](https://img.shields.io/badge/Use_This_Template-2ea44f?style=flat-square&logo=github&logoColor=white)](https://github.com/travisjneuman/.claude/generate)
 
-[![Skills](https://img.shields.io/badge/Skills-119-10b981?style=flat-square)](./skills/MASTER_INDEX.md)
+[![Skills](https://img.shields.io/badge/Skills-115-10b981?style=flat-square)](./skills/MASTER_INDEX.md)
 [![Agents](https://img.shields.io/badge/Agents-59-f59e0b?style=flat-square)](./agents/README.md)
 [![Commands](https://img.shields.io/badge/Commands-30-a855f7?style=flat-square)](./commands/README.md)
 [![Repos](https://img.shields.io/badge/Marketplace_Repos-101-3b82f6?style=flat-square)](./plugins/marketplaces/)
@@ -31,7 +31,7 @@
 
 A drop-in configuration layer for [Claude Code](https://docs.anthropic.com/en/docs/claude-code) that transforms it from a capable AI assistant into an enterprise-grade development powerhouse.
 
-**One `git clone` gives you** 119 domain skills, 59 specialist agents, 101 community marketplaces with 7,400+ additional skills, 30 slash commands, 10 lifecycle hooks, and 12 MCP server configs — all auto-activating based on what you're working on. No manual configuration required.
+**One `git clone` gives you** 115 domain skills, 59 specialist agents, 101 community marketplaces with 7,400+ additional skills, 30 slash commands, 10 lifecycle hooks, and 12 MCP server configs — all auto-activating based on what you're working on. No manual configuration required.
 
 **How it works:** Describe what you want in plain language. The toolkit's dynamic router detects context from your prompt and loads the right skills, agents, rules, and checklists automatically. No slash commands needed (though they're available if you prefer).
 

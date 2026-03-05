@@ -346,7 +346,7 @@ Next steps:
 
 ## Related
 
-- `rules/checklists/verification-template.md` - Verification checklist
+- `docs/reference/checklists/verification-template.md` - Verification checklist
 - `docs/reference/stacks/react-typescript.md` - React testing patterns
 - `docs/reference/stacks/python.md` - Python testing patterns
 - `docs/reference/stacks/go.md` - Go testing patterns

@@ -185,7 +185,7 @@ The `auto` teammate mode handles detection automatically across all platforms.
 - `~/.claude/docs/AGENT-TEAMS.md` - Comprehensive guide with templates
 - `~/.claude/agents/README.md` - Subagent catalog (59 agents)
 - `~/.claude/docs/AUTO-CLAUDE-GUIDE.md` - Autonomous alternative
-- `~/.claude/rules/workflows/context-management.md` - Context window management
+- `~/.claude/docs/reference/workflows/context-management.md` - Context window management
 
 ---
 

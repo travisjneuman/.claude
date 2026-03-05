@@ -1,7 +1,6 @@
 ---
 name: auto-claude
 description: Autonomous multi-agent coding with git worktree isolation, QA validation, and memory. Use for complex features requiring autonomous implementation.
-tags: [autonomous, development, qa, worktree, memory]
 ---
 
 # Auto-Claude: Autonomous Coding Framework

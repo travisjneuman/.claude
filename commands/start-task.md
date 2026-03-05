@@ -1,5 +1,5 @@
 ---
-description: Universal intelligent router - routes ANY prompt to optimal resources from 101 marketplaces, 119 skills, 59 agents
+description: Universal intelligent router - routes ANY prompt to optimal resources from 101 marketplaces, 115 skills, 59 agents
 arguments:
   - name: task_description
     description: "What you want to accomplish. Natural language - just describe it."
@@ -97,7 +97,7 @@ Read `commands/router/routing-logic.md` for complexity scoring.
 
 ### Step 7: Verify
 
-**Always load before marking complete:** `rules/checklists/verification-template.md`
+**Always load before marking complete:** `docs/reference/checklists/verification-template.md`
 
 - [ ] Primary goal achieved
 - [ ] No errors in console/logs

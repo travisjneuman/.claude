@@ -2,6 +2,18 @@
 # Stop hook: Write session summary for continuity
 # Captures last session context so next session can pick up where we left off
 
+# Prevent infinite Stop loop — check stop_hook_active from stdin JSON
+if command -v node &>/dev/null; then
+  STOP_ACTIVE=$(cat /dev/stdin 2>/dev/null | node -e "
+    let d='';process.stdin.on('data',c=>d+=c);process.stdin.on('end',()=>{
+      try{const j=JSON.parse(d);console.log(j.stop_hook_active?'true':'false')}catch(e){console.log('false')}
+    });
+  " 2>/dev/null)
+  if [ "$STOP_ACTIVE" = "true" ]; then
+    exit 0
+  fi
+fi
+
 OUTFILE="$HOME/.claude/last-session.md"
 LOGDIR="$HOME/.claude/session-summaries"
 mkdir -p "$LOGDIR"

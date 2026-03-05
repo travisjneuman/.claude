@@ -73,7 +73,7 @@ rules/
 └── tooling/           # Tool setup (git hooks, MCP servers, troubleshooting)
 ```
 
-Rules load on demand based on the auto-routing table in CLAUDE.md. When a prompt mentions "React," the `docs/reference/stacks/react-typescript.md` file loads. When completing work, `rules/checklists/verification-template.md` loads.
+Rules load on demand based on the auto-routing table in CLAUDE.md. When a prompt mentions "React," the `docs/reference/stacks/react-typescript.md` file loads. When completing work, `docs/reference/checklists/verification-template.md` loads.
 
 ### Skills — Domain Knowledge
 
