@@ -184,6 +184,17 @@
           }
         ]
       }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node -e \"process.env.HOOK_NAME='session-stop-summary.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
+            "statusMessage": "Saving session summary on exit"
+          }
+        ]
+      }
     ]
   },
   "enabledPlugins": {
@@ -203,6 +214,10 @@
     "hookify@claude-code-plugins": false,
     "plugin-dev@claude-code-plugins": true,
     "ralph-wiggum@claude-code-plugins": false
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "node -e \"process.env.HOOK_NAME='statusline.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\""
   },
   "outputStyle": "default",
   "spinnerTipsEnabled": false,

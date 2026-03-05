@@ -6,7 +6,7 @@ category: reference
 
 # Claude Code Toolkit Documentation
 
-**Last Updated:** February 2026 (v2.9.8)
+**Last Updated:** February 2026 (v2.10.1)
 **Maintainer:** Travis J. Neuman
 **Purpose:** Portable, optimized Claude Code configuration for any project
 
@@ -75,12 +75,12 @@ Already set up? Jump to the section you need below.
 
 | Component           | Count  | Location                       |
 | ------------------- | ------ | ------------------------------ |
-| Local skills        | 119    | `skills/`                      |
-| Agents              | 59     | `agents/`                      |
+| Local skills        | 115    | `skills/`                      |
+| Agents              | 67     | `agents/`                      |
 | Commands            | 30     | `commands/`                    |
 | Rules files         | 30     | `rules/`                       |
 | Templates           | 17     | `templates/`                   |
-| Hooks               | 10     | `hooks/`                       |
+| Hooks               | 8      | `hooks/`                       |
 | MCP servers         | 12     | `.mcp.json`                    |
 | Marketplace repos   | 101    | `plugins/marketplaces/`        |
 | Marketplace skills  | 7,400+ | (across all marketplace repos) |
@@ -106,8 +106,8 @@ Already set up? Jump to the section you need below.
 
 This `~/.claude/` folder is a fully configured, portable Claude Code environment containing:
 
-- **115 local skills** for code review, design systems, feature development, domain expertise, and more
-- **59 agents** for specialized autonomous workflows
+- **115 local skills** for code review, design systems, feature development, domain expertise
+- **67 agents** for specialized autonomous workflows
 - **30 slash commands** for workflow automation
 - **12 MCP server configurations** for extended capabilities (disabled by default to save context)
 - **101 marketplace repos** providing 6,600+ additional skills from the community
@@ -132,14 +132,14 @@ This `~/.claude/` folder is a fully configured, portable Claude Code environment
 - Fixed stale counts: `health-check.md` (10→30 commands), `audit-docs.md` (47→59 agents, 10→30 commands)
 - Updated `post-change-documentation.md` grep examples to reflect current counts
 
-### v2.9.8 (February 2026)
+### v2.10.1 (February 2026)
 
 - Comprehensive audit: fixed all stale counts, broken path references, and version drift
 - Fixed `update-counts.sh`: added 10+ missing sed patterns (badge URLs, ASCII art, table counts, community marketplace text)
 - Fixed `regenerate-index.sh`: added EXCLUDE_SKILL_DIRS array to exclude backups, tests, examples, planned-skills (1,388 non-skill files) — fixes inflated MASTER_INDEX.md count
 - Fixed 62 broken path references: `rules/stacks/` → `docs/reference/stacks/`, `rules/tooling/` → `docs/reference/tooling/`, `rules/checklists/` → `docs/reference/checklists/` for moved files
 - Updated `plugin.json` version from 2.3.0 to 2.9.2
-- Updated version strings in 22 docs files from v2.6.0–v2.8.0 to v2.9.8
+- Updated version strings in 22 docs files from v2.6.0–v2.8.0 to v2.10.1
 - Added `website/src/lib/data/scripts.ts` to update-counts.sh file list
 
 ### v2.9.1 (February 2026)

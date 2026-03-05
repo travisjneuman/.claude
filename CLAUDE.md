@@ -96,7 +96,7 @@ YOU MUST auto-load matching resources from the user's prompt — no slash comman
 | script, automation, batch | `docs/reference/checklists/automation-scripts.md` |
 | HTML, static site | `docs/reference/checklists/static-sites.md` |
 | API design, endpoints, REST, OpenAPI | `docs/reference/checklists/api-development.md` + `api-designer` agent |
-| database, schema, migration, queries, SQL, Prisma, Drizzle, TypeORM | `docs/reference/checklists/database-design.md` + `skills/database-expert` + `database-expert` agent |
+| database, schema, db migration, queries, SQL, Prisma, Drizzle, TypeORM | `docs/reference/checklists/database-design.md` + `skills/database-expert` + `database-expert` agent |
 | security, OWASP, hardening, pentest, CSP, DevSecOps | `docs/reference/checklists/security-hardening.md` + `skills/application-security` + `security-auditor` agent + `devsecops-engineer` agent |
 | performance, speed, bundle, optimize, Lighthouse | `docs/reference/checklists/performance-optimization.md` + `skills/performance-engineering` + `performance-optimizer` agent |
 | research, investigate, compare | `docs/reference/workflows/research-methodology.md` |
@@ -143,7 +143,7 @@ YOU MUST auto-load matching resources from the user's prompt — no slash comman
 | startup, launch, MVP, leadership, strategy, OKR | `skills/startup-launch` + `skills/leadership` + `startup-advisor` agent |
 | finance, budget, investment, revenue | `skills/finance` + `monetization-expert` agent |
 | marketing, campaign, content, brand, logo, identity | `skills/marketing` + `skills/brand-identity` + `brand-strategist` agent |
-| sales, pipeline, CRM, leads | `skills/sales` + `product-manager` agent |
+| sales, sales pipeline, CRM, leads | `skills/sales` + `product-manager` agent |
 | C, C++, CMake, systems programming | `cpp-expert` agent |
 | embedded, firmware, RTOS, Arduino, ESP32, IoT | `embedded-developer` agent |
 | browser extension, Chrome extension, Manifest V3 | `browser-extension-developer` agent |
@@ -157,7 +157,7 @@ YOU MUST auto-load matching resources from the user's prompt — no slash comman
 | audio, podcast, recording, mixing | `skills/audio-production` + `audio-engineer` agent |
 | graphic design, illustration, layout | `skills/graphic-design` + `graphic-designer` agent |
 | code review, PR review | `deep-code-reviewer` agent |
-| explain code, walkthrough, onboarding | `code-explainer` agent |
+| explain code, walkthrough, codebase tour | `code-explainer` agent |
 | API integration, webhook, SDK wrapper, third-party | `api-integration-specialist` agent |
 | CLI, command-line, terminal tool | `cli-developer` agent |
 

@@ -8,7 +8,7 @@ category: ecosystem
 
 A curated collection of resources for expanding and optimizing Claude Code capabilities.
 
-**Last Updated**: February 2026 (v2.9.8)
+**Last Updated**: February 2026 (v2.10.1)
 
 ---
 

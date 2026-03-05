@@ -258,3 +258,6 @@ docs/BACKUP-STRATEGIES.md
 paste-cache/
 session-summaries/
 last-session.md
+
+# MCP auth cache (machine-specific)
+mcp-needs-auth-cache.json

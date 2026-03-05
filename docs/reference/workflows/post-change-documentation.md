@@ -74,13 +74,13 @@ After changing counts, verify no stale references remain:
 
 ```bash
 # Check for old version numbers (update pattern when version changes)
-grep -r "v2.9.8" docs/ commands/ scripts/ README.md --include="*.md"
+grep -r "v2.10.1" docs/ commands/ scripts/ README.md --include="*.md"
 
 # Check for old skill count (update when skills are added/removed)
-grep -r "119 skills\|119 local" docs/ commands/ --include="*.md"
+grep -r "115 skills\|115 local" docs/ commands/ --include="*.md"
 
 # Check for old agent count (update when agents are added/removed)
-grep -r "59 agents" docs/ commands/ --include="*.md"
+grep -r "67 agents" docs/ commands/ --include="*.md"
 
 # Check for old marketplace count (update when repos are added)
 grep -r "101 marketplace\|101 repos" docs/ commands/ --include="*.md"
