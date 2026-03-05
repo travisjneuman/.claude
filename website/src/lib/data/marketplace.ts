@@ -133,6 +133,8 @@ const EXCLUDE_SKILL_DIRS = new Set([
   "templates",
   "template",
   "node_modules",
+  "web-app",
+  "public",
 ]);
 
 function countSkillFiles(dir: string): number {
