@@ -8,7 +8,7 @@ category: reference
 
 Common questions about the Claude Code Toolkit, organized by topic.
 
-**Last Updated:** February 2026 (v2.9.8)
+**Last Updated:** February 2026 (v2.10.1)
 
 ---
 

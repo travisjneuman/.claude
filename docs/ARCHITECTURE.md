@@ -8,7 +8,7 @@ category: reference
 
 How the Claude Code Toolkit's components interact, from prompt to execution.
 
-**Last Updated:** February 2026 (v2.9.8)
+**Last Updated:** February 2026 (v2.10.1)
 
 ---
 

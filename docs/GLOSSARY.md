@@ -8,7 +8,7 @@ category: reference
 
 Definitions of terms used throughout the Claude Code Toolkit.
 
-**Last Updated:** February 2026 (v2.9.8)
+**Last Updated:** February 2026 (v2.10.1)
 
 ---
 

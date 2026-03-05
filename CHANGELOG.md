@@ -2,6 +2,39 @@
 
 All notable changes to the Ultimate Claude Code Toolkit.
 
+## [2.10.1] - March 5, 2026
+
+### Count & Version Fixes
+
+- **Fixed skill count drift** — README badge, body text, ASCII diagram, docs table all said 119; actual count is 115. Fixed across ~20 files.
+- **Fixed agent count drift** — 15+ files said 59 agents; actual count is 67 (after v2.10.0 added 8 new agents). Fixed across all docs, commands, plugin.json.
+- **Fixed version drift** — 22 docs files had `Last Updated: v2.9.8`; updated to v2.10.1. README version badge updated from v2.10.0 to v2.10.1.
+- **Fixed hook comment bug** — `session-start-context.sh` comments said "24h" but threshold is 72h (259200 seconds).
+
+### Routing Collision Fixes
+
+- **`pipeline` disambiguation** — Changed sales row from `sales, pipeline` to `sales, sales pipeline` to avoid collision with deploy row's `CI/CD, pipeline`.
+- **`migration` disambiguation** — Changed database row from `migration` to `db migration` to avoid collision with migration-specialist row.
+- **`onboarding` disambiguation** — Changed code-explainer row from `onboarding` to `codebase tour` to avoid collision with HR row.
+
+### New Features
+
+- **StatusLine** — Added `statusline.sh` hook and `statusLine` config in settings.json. Displays persistent status bar (model, branch, context %, cost) in terminal. Zero token cost.
+- **SessionEnd hook** — Added `SessionEnd` event in settings.json, reusing `session-stop-summary.sh`. Session context is now saved on Stop (every response), PreCompact (before compaction), AND SessionEnd (on exit/clear/logout).
+
+### Git Hygiene
+
+- Removed tracked `mcp-needs-auth-cache.json` (was deleted but still in git index)
+- Added `mcp-needs-auth-cache.json` to `.gitignore`
+
+### Documentation
+
+- Updated `hooks/README.md` lifecycle diagram and reference table with SessionEnd and statusLine
+- Updated `post-change-documentation.md` grep examples to current counts and version
+- Updated `update-counts.sh` comment to reflect current counts
+
+---
+
 ## [2.10.0] - March 5, 2026
 
 ### New Agents (8)

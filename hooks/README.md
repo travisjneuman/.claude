@@ -31,6 +31,12 @@ After Tool Execution (Write/Edit only)
 
 Session Stop
   └── session-stop-summary.sh    (save session summary)
+
+Session End (on exit/clear/logout)
+  └── session-stop-summary.sh    (final session summary on exit)
+
+Status Line (persistent display)
+  └── statusline.sh              (format status bar — zero token cost)
 ```
 
 ---
@@ -47,6 +53,8 @@ Session Stop
 | `session-stop-summary.sh`  | PreCompact       | —           | Yes        | Saves session context before context compaction (reuses Stop script).                                                                                              |
 | `secret-scan.sh`           | PostToolUse      | Write\|Edit | Yes        | Scans written/edited files for leaked secrets (API keys, tokens, passwords). Warns but does not block. Skips .md files.                                            |
 | `session-stop-summary.sh`  | Stop             | —           | Yes        | Writes a session summary for continuity between sessions.                                                                                                          |
+| `session-stop-summary.sh`  | SessionEnd       | —           | Yes        | Final session summary on exit/clear/logout (belt + suspenders + safety net).                                                                                       |
+| `statusline.sh`            | statusLine       | —           | Yes        | Formats persistent status bar (model, branch, context %, cost). Zero token cost.                                                                                   |
 
 ---
 

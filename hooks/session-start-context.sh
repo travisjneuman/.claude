@@ -1,5 +1,5 @@
 #!/bin/bash
-# SessionStart hook: Inject last session context if recent (<24h)
+# SessionStart hook: Inject last session context if recent (<72h)
 # Outputs to stdout which gets injected into Claude's context
 
 SESSIONFILE="$HOME/.claude/last-session.md"
@@ -7,7 +7,7 @@ SESSIONFILE="$HOME/.claude/last-session.md"
 # Exit if no session file
 [ -f "$SESSIONFILE" ] || exit 0
 
-# Check if file is less than 24 hours old
+# Check if file is less than 72 hours old
 if [ "$(uname)" = "Darwin" ]; then
   FILE_AGE=$(( $(date +%s) - $(stat -f%m "$SESSIONFILE") ))
 else
