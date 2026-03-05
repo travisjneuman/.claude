@@ -8,13 +8,13 @@
 
 <br/>
 
-[![v2.10.0](https://img.shields.io/badge/v2.10.0-6366f1?style=flat-square&logo=semver&logoColor=white)](./CHANGELOG.md)
+[![v2.10.1](https://img.shields.io/badge/v2.10.1-6366f1?style=flat-square&logo=semver&logoColor=white)](./CHANGELOG.md)
 [![Platform](https://img.shields.io/badge/macOS_·_Linux_·_Windows-334155?style=flat-square&logo=apple&logoColor=white)](./docs/SETUP-GUIDE.md)
 [![Website](https://img.shields.io/badge/claude.travisjneuman.com-818cf8?style=flat-square&logo=cloudflare&logoColor=white)](https://claude.travisjneuman.com)
 [![License](https://img.shields.io/badge/MIT-blue?style=flat-square&logo=opensourceinitiative&logoColor=white)](./LICENSE)
 [![Use Template](https://img.shields.io/badge/Use_This_Template-2ea44f?style=flat-square&logo=github&logoColor=white)](https://github.com/travisjneuman/.claude/generate)
 
-[![Skills](https://img.shields.io/badge/Skills-119-10b981?style=flat-square)](./skills/MASTER_INDEX.md)
+[![Skills](https://img.shields.io/badge/Skills-115-10b981?style=flat-square)](./skills/MASTER_INDEX.md)
 [![Agents](https://img.shields.io/badge/Agents-67-f59e0b?style=flat-square)](./agents/README.md)
 [![Commands](https://img.shields.io/badge/Commands-30-a855f7?style=flat-square)](./commands/README.md)
 [![Repos](https://img.shields.io/badge/Marketplace_Repos-101-3b82f6?style=flat-square)](./plugins/marketplaces/)
@@ -31,7 +31,7 @@
 
 A drop-in configuration layer for [Claude Code](https://docs.anthropic.com/en/docs/claude-code) that transforms it from a capable AI assistant into an enterprise-grade development powerhouse.
 
-**One `git clone` gives you** 119 domain skills, 67 specialist agents, 101 community marketplaces with 6,600+ additional skills, 30 slash commands, 8 lifecycle hooks, and 12 MCP server configs — all auto-activating based on what you're working on. No manual configuration required.
+**One `git clone` gives you** 115 domain skills, 67 specialist agents, 101 community marketplaces with 6,600+ additional skills, 30 slash commands, 8 lifecycle hooks, and 12 MCP server configs — all auto-activating based on what you're working on. No manual configuration required.
 
 **How it works:** Describe what you want in plain language. The toolkit's dynamic router detects context from your prompt and loads the right skills, agents, rules, and checklists automatically. No slash commands needed (though they're available if you prefer).
 
@@ -79,7 +79,7 @@ That's it. The toolkit auto-activates from `~/.claude/` on every Claude Code ses
 
 | Component | Count | Description |
 |-----------|-------|-------------|
-| **[Skills](./skills/MASTER_INDEX.md)** | 119 | Domain expertise modules (React, security, DevOps, finance, etc.) |
+| **[Skills](./skills/MASTER_INDEX.md)** | 115 | Domain expertise modules (React, security, DevOps, finance, etc.) |
 | **[Agents](./agents/README.md)** | 67 | Specialist subagents for focused tasks (code review, debugging, etc.) |
 | **[Commands](./commands/README.md)** | 30 | Slash commands for common workflows (`/commit`, `/review-code`, etc.) |
 | **[Marketplace Repos](./plugins/marketplaces/)** | 101 | Community skill repositories (6,600+ additional skills) |
@@ -116,7 +116,7 @@ See **[MASTER_INDEX.md](./skills/MASTER_INDEX.md)** for the full listing with de
 
 ### Dynamic Routing
 
-Every prompt flows through a routing system that loads the best-fit resources on-demand — drawing from 119 built-in skills, 67 agents, 3 rules + 30 checklists, and 6,600+ community marketplace skills across 101 repos:
+Every prompt flows through a routing system that loads the best-fit resources on-demand — drawing from 115 built-in skills, 67 agents, 3 rules + 30 checklists, and 6,600+ community marketplace skills across 101 repos:
 
 ```
  Your prompt
@@ -131,7 +131,7 @@ Every prompt flows through a routing system that loads the best-fit resources on
    ▼        ▼        ▼               ▼
 ┌──────┐ ┌──────┐ ┌──────┐ ┌──────────────┐
 │Skills│ │Rules │ │Agents│ │ Marketplace  │
-│(119) │ │& Chk │ │ (67)│ │  101 repos   │
+│(115) │ │& Chk │ │ (67)│ │  101 repos   │
 │      │ │      │ │      │ │  6,600+ more │
 └──────┘ └──────┘ └──────┘ └──────────────┘
 ```
@@ -174,6 +174,9 @@ After File Edits
 
 Session Stop
   └── Save session summary for next time
+
+Session End (exit/clear/logout)
+  └── Final session summary on exit
 ```
 
 See **[hooks/README.md](./hooks/README.md)** for the full hook reference.
@@ -273,7 +276,7 @@ Enable on-demand via `/mcp`. See **[docs/MCP-SERVERS.md](./docs/MCP-SERVERS.md)*
 The toolkit maintains context between sessions automatically:
 
 1. **Session stop** — `session-stop-summary.sh` saves working directory, branch, recent commits, active tasks, and pending todos to `~/.claude/last-session.md`
-2. **Session start** — `session-start-context.sh` injects the previous session context (if < 24 hours old)
+2. **Session start** — `session-start-context.sh` injects the previous session context (if < 72 hours old)
 3. **Repo sync** — `session-start-pull.sh` pulls all repos in the background on startup
 
 </details>
@@ -370,7 +373,7 @@ See **[CHANGELOG.md](./CHANGELOG.md)** for the full history.
 | [MCP Servers](./docs/MCP-SERVERS.md) | MCP server reference |
 | [Configuration](./docs/CONFIGURATION.md) | Full settings.json reference |
 | [Folder Structure](./docs/FOLDER-STRUCTURE.md) | Directory layout and purpose |
-| [Skills Index](./skills/MASTER_INDEX.md) | All 119 skills with descriptions |
+| [Skills Index](./skills/MASTER_INDEX.md) | All 115 skills with descriptions |
 | [Agents Index](./agents/README.md) | All 67 agents with descriptions |
 
 ---

@@ -8,7 +8,7 @@ category: reference
 
 Understanding how your prompts get routed to the right resources.
 
-**Last Updated:** February 2026 (v2.9.8)
+**Last Updated:** February 2026 (v2.10.1)
 
 ---
 
