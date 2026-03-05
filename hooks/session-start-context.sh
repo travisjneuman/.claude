@@ -14,8 +14,8 @@ else
   FILE_AGE=$(( $(date +%s) - $(stat -c%Y "$SESSIONFILE" 2>/dev/null || echo 0) ))
 fi
 
-# 86400 seconds = 24 hours
-if [ "$FILE_AGE" -lt 86400 ] 2>/dev/null; then
+# 259200 seconds = 72 hours (covers weekends)
+if [ "$FILE_AGE" -lt 259200 ] 2>/dev/null; then
   echo "=== Previous Session Context ==="
   cat "$SESSIONFILE"
   echo "=== End Previous Session ==="

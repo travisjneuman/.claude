@@ -2,6 +2,24 @@
 
 All notable changes to the Ultimate Claude Code Toolkit.
 
+## [2.9.6] - March 5, 2026
+
+### Platform Optimization — Auto-Activation & Efficiency
+
+#### Auto-Routing Table Rewrite (CLAUDE.md)
+- **Expanded coverage from 29 → 80+ domain triggers** — Every existing checklist/doc entry now also loads its companion skill + agent. Added 20 new keyword clusters for previously unreachable domains (testing, accessibility, i18n, GraphQL, microservices, WebSockets, iOS, Android, desktop, PWA, SEO, animation, migration, refactoring, data science, mobile CI/CD).
+- **Business/creative catch-all** — Single-line fallback routes startup, finance, marketing, sales, HR, legal, product, brand, operations, leadership, video, audio, design to `MASTER_INDEX.md` instead of requiring 26 individual rows.
+- **Token cost**: +200 tokens always-loaded, but covers 3x the domains automatically.
+
+#### Hook Optimizations
+- **Cached `prompt-context.sh`** — Caches git context output by `.git/index` mtime. Skips 4 git commands on consecutive prompts when nothing changed. Cache stored in `.git/.claude-prompt-cache` (never committed).
+- **Merged PreToolUse Bash hooks** — Combined `guard-dangerous.sh` + `pre-commit-counts.sh` into single `pre-bash-check.sh`. Eliminates one Node.js + Bash process spawn per Bash tool call (-50% overhead).
+- **Extended session context window** — `session-start-context.sh` now uses 72-hour window (was 24h). Preserves session continuity over weekends.
+- **Added pull log rotation** — `session-start-pull.sh` rotates `logs/pull-repos.log` at 500KB. Prevents unbounded growth.
+- **Fixed stale `rules/` reference** — CLAUDE.md line 3 now references `docs/`, `skills/`, `commands/` (rules/ was emptied in v2.9.4).
+
+---
+
 ## [2.9.5] - March 4, 2026
 
 ### Marketplace Skill Count Fix

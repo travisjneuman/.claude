@@ -15,11 +15,10 @@ Session Start
   └── session-start-context.sh   (load previous session context)
 
 Every Prompt
-  └── prompt-context.sh          (inject git status into prompt)
+  └── prompt-context.sh          (inject git status — cached by index mtime)
 
 Before Tool Execution (Bash only)
-  ├── guard-dangerous.sh         (block dangerous commands)
-  └── pre-commit-counts.sh       (update counts before git commit)
+  └── pre-bash-check.sh          (guard dangerous commands + pre-commit counts)
 
 Before Tool Execution (Write/Edit only)
   └── pre-write-validate.sh      (block writes to protected paths)
@@ -39,11 +38,12 @@ Session Stop
 
 | Hook                       | Event            | Matcher     | Registered | What It Does                                                                                                                                                       |
 | -------------------------- | ---------------- | ----------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `session-start-pull.sh`    | SessionStart     | —           | Yes        | Runs `_pull-all-repos.sh` in background with 60s timeout. Logs to `logs/pull-repos.log`.                                                                           |
-| `session-start-context.sh` | SessionStart     | —           | Yes        | Checks for recent session context and injects it if the last session was within a configured window.                                                               |
-| `prompt-context.sh`        | UserPromptSubmit | —           | Yes        | Injects current git branch, status, and recent commits into each prompt for context.                                                                               |
-| `guard-dangerous.sh`       | PreToolUse       | Bash        | Yes        | Blocks commands matching dangerous patterns: `rm -rf /`, `git push --force`, `DROP TABLE`, `git reset --hard origin`, `git clean -fd`. Exits with code 2 to block. |
-| `pre-commit-counts.sh`     | PreToolUse       | Bash        | Yes        | Detects `git commit` commands and runs `update-counts.sh` first. Auto-stages updated doc files.                                                                    |
+| `session-start-pull.sh`    | SessionStart     | —           | Yes        | Runs `_pull-all-repos.sh` in background with 60s timeout. Logs to `logs/pull-repos.log`. Rotates log at 500KB.                                                     |
+| `session-start-context.sh` | SessionStart     | —           | Yes        | Injects previous session context if within 72 hours (covers weekends).                                                                                             |
+| `prompt-context.sh`        | UserPromptSubmit | —           | Yes        | Injects git branch/status/commits. Caches output by `.git/index` mtime — skips git calls when nothing changed.                                                    |
+| `pre-bash-check.sh`        | PreToolUse       | Bash        | Yes        | Combined guard + pre-commit. Blocks dangerous patterns (exit 2). On `git commit` in ~/.claude, runs update-counts.sh and stages docs.                              |
+| `guard-dangerous.sh`       | PreToolUse       | Bash        | **No**     | Superseded by `pre-bash-check.sh`. Kept for reference.                                                                                                             |
+| `pre-commit-counts.sh`     | PreToolUse       | Bash        | **No**     | Superseded by `pre-bash-check.sh`. Kept for reference.                                                                                                             |
 | `pre-write-validate.sh`    | PreToolUse       | Write\|Edit | Yes        | Blocks writes to protected paths (.env, credentials, node_modules, .git, .ssh, .gnupg, *.pem, *.key). Exits with code 2 to block.                                 |
 | `format-code.sh`           | PostToolUse      | Write\|Edit | **No**     | Auto-formats files after Claude writes or edits them (Prettier, etc.). Deregistered: adds latency, overlaps with editor formatters.                                |
 | `secret-scan.sh`           | PostToolUse      | Write\|Edit | Yes        | Scans written/edited files for leaked secrets (API keys, tokens, passwords). Warns but does not block. Skips .md files.                                            |
@@ -62,9 +62,9 @@ Session Stop
 **What it does:**
 
 1. Creates `~/.claude/logs/` directory if it doesn't exist
-2. Runs `_pull-all-repos.sh` in the background with a 60-second timeout
-3. After pulling, runs `fix-marketplace-paths.sh` for cross-platform path compatibility
-4. Runs `update-counts.sh` to reconcile any count changes from updated repos
+2. Rotates `logs/pull-repos.log` if over 500KB (keeps last 100 lines)
+3. Runs `_pull-all-repos.sh` in the background with a 60-second timeout
+4. After pulling, runs `fix-marketplace-paths.sh` for cross-platform path compatibility
 5. All output is logged to `logs/pull-repos.log`
 
 **Key design decisions:**
@@ -89,7 +89,7 @@ Session Stop
 **What it does:**
 
 1. Checks if `~/.claude/last-session.md` exists
-2. Checks if the file is less than 24 hours old (platform-aware: uses `stat -f%m` on macOS, `stat -c%Y` on Linux)
+2. Checks if the file is less than 72 hours old (covers weekends; platform-aware: uses `stat -f%m` on macOS, `stat -c%Y` on Linux)
 3. If recent, outputs the file contents to stdout (which Claude Code injects into context)
 
 **Output format:**
@@ -117,8 +117,9 @@ abc1234 feat: last thing I did
 **What it does:**
 
 1. Checks if the current directory is a git repository (exits silently if not)
-2. Reads current branch name, last commit, staged changes, and unstaged changes
-3. Outputs a compact summary that gets appended to the prompt context
+2. Checks `.git/index` mtime against cached value — returns cached output if unchanged
+3. On cache miss: reads current branch, last commit, staged/unstaged changes
+4. Writes cache to `.git/.claude-prompt-cache` (never committed, per-repo)
 
 **Output format:**
 
@@ -128,7 +129,7 @@ abc1234 feat: last thing I did
 [Unstaged: 1 file changed, 3 insertions(+)]
 ```
 
-**Performance:** Extremely lightweight — only runs `git branch`, `git log -1`, and `git diff --stat` commands.
+**Performance:** Caches output by `.git/index` modification time. On cache hit (most consecutive prompts), returns instantly without running any git commands. Cache invalidates automatically on `git add`, `git commit`, `git checkout`, `git reset`, or any index-modifying operation.
 
 ---
 
