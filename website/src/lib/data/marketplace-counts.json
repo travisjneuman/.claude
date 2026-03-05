@@ -1,6 +1,6 @@
 {
   "repoCount": 101,
-  "totalSkills": 7475,
+  "totalSkills": 6602,
   "repos": [
     {
       "name": "claude-code-plugins-plus-skills",
@@ -10,7 +10,7 @@
     {
       "name": "sickn33-antigravity-awesome-skills",
       "displayName": "Sickn33 Antigravity Awesome Skills",
-      "skillCount": 1857
+      "skillCount": 977
     },
     {
       "name": "awesome-claude-skills",
@@ -188,18 +188,23 @@
       "skillCount": 16
     },
     {
+      "name": "team-attention-plugins",
+      "displayName": "Team Attention Plugins",
+      "skillCount": 16
+    },
+    {
       "name": "claude-plugins-official",
       "displayName": "Claude Plugins Official",
       "skillCount": 15
     },
     {
-      "name": "team-attention-plugins",
-      "displayName": "Team Attention Plugins",
-      "skillCount": 15
-    },
-    {
       "name": "ananddtyagi-marketplace",
       "displayName": "Ananddtyagi Marketplace",
+      "skillCount": 14
+    },
+    {
+      "name": "hashicorp-agent-skills",
+      "displayName": "Hashicorp Agent Skills",
       "skillCount": 14
     },
     {
@@ -211,11 +216,6 @@
       "name": "obra-superpowers",
       "displayName": "Obra Superpowers",
       "skillCount": 14
-    },
-    {
-      "name": "hashicorp-agent-skills",
-      "displayName": "Hashicorp Agent Skills",
-      "skillCount": 13
     },
     {
       "name": "devgom-marketplace",
@@ -266,6 +266,11 @@
       "name": "ykdojo-tips",
       "displayName": "Ykdojo Tips",
       "skillCount": 6
+    },
+    {
+      "name": "libukai-awesome-agent-skills",
+      "displayName": "Libukai Awesome Agent Skills",
+      "skillCount": 5
     },
     {
       "name": "numman-ali-skills",
@@ -425,11 +430,6 @@
     {
       "name": "kenryu42-safety-net",
       "displayName": "Kenryu42 Safety Net",
-      "skillCount": 0
-    },
-    {
-      "name": "libukai-awesome-agent-skills",
-      "displayName": "Libukai Awesome Agent Skills",
       "skillCount": 0
     },
     {

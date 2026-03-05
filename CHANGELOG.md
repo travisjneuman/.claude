@@ -2,6 +2,15 @@
 
 All notable changes to the Ultimate Claude Code Toolkit.
 
+## [2.9.5] - March 4, 2026
+
+### Marketplace Skill Count Fix
+
+- **Fixed inflated marketplace skill count** — Was counting 7,400+ due to `sickn33-antigravity-awesome-skills/web-app/public/skills/` mirror (967 duplicate SKILL.md files). Added `web-app` and `public` to exclusion list in `update-counts.sh`, the Node.js marketplace JSON generator, and `website/src/lib/data/marketplace.ts`. Corrected count: **6,600+** real unique skills across 101 repos.
+- **Synced all 3 exclusion lists** — bash `EXCLUDE_SKILL_DIRS`, Node.js `EXCLUDE_DIRS` in `generate_marketplace_json()`, and TypeScript `EXCLUDE_SKILL_DIRS` in `marketplace.ts` now all include `web-app` and `public`.
+
+---
+
 ## [2.9.4] - March 4, 2026
 
 ### Deep Audit — Official Best Practices Alignment

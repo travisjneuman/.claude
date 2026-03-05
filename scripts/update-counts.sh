@@ -31,6 +31,8 @@ EXCLUDE_SKILL_DIRS=(
   templates template          # Skill templates/scaffolds
   node_modules                # Package dependencies
   .git                        # Git internals
+  web-app                     # Build artifacts / static mirrors (e.g., sickn33)
+  public                      # Public asset mirrors of skills
 )
 
 # ─── Count from filesystem ───────────────────────────────────────────
@@ -357,7 +359,7 @@ const EXCLUDE_DIRS = new Set([
   'backups','backup','tests','test','examples','example',
   'docs','workspace','lab','archive','archived','deprecated',
   'draft','drafts','planned-skills','planned','templates',
-  'template','node_modules','.git'
+  'template','node_modules','.git','web-app','public'
 ]);
 
 function countSkillFiles(dir) {
