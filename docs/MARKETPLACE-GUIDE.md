@@ -8,7 +8,7 @@ category: ecosystem
 
 Complete reference for the 101 plugin marketplaces and how to use them.
 
-**Last Updated:** February 2026 (v2.9.2)
+**Last Updated:** February 2026 (v2.9.8)
 
 **Location:** `~/.claude/plugins/marketplaces/`
 

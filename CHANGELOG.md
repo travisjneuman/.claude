@@ -2,6 +2,33 @@
 
 All notable changes to the Ultimate Claude Code Toolkit.
 
+## [2.9.9] - March 5, 2026
+
+### Consistency & Correctness
+
+- **Fixed version drift** — updated 22 docs files from `v2.9.2` to `v2.9.8`
+- **Fixed stale `rules/` references** — removed `rules/README.md` references from 4 remaining docs files (`FOLDER-STRUCTURE.md`, `post-change-documentation.md`, `mcp-servers.md`)
+- **Fixed README count inconsistencies** — badge: 115→119 skills, 59→57 agents, 10→8 hooks; version badge: v2.9.5→v2.9.9
+- **Fixed rules table** — updated from "30 checklists" to "3 always-load rules" (checklists migrated to `docs/reference/`)
+
+### Auto-Routing Completeness
+
+- **Added 11 missing agents to routing table** — `typescript-expert`, `e2e-test-specialist`, `devsecops-engineer`, `cloud-architect`, `architecture-analyst`, `deep-code-reviewer`, `documentation-writer`, `technical-writer`, `code-explainer`, `api-integration-specialist`, `cli-developer`
+- **Added 4 new routing rows** — code review, explain code, API integration, CLI development
+
+### Agent Improvements
+
+- **`memory: user`** added to `cloud-architect`, `security-auditor`, `performance-optimizer`
+- **`background: true`** added to `debugging-specialist`, `security-auditor`, `performance-optimizer`
+
+### Cleanup
+
+- **Deleted orphaned hook scripts** — `format-code.sh` and `post-edit-lint.sh` (deregistered since v2.9.6, still on disk)
+- **Fixed path-scoped rules** — stripped `paths:` frontmatter (broken at user level per GitHub #21858), now always-load
+- **Updated hooks/README.md** — removed deleted scripts, current hook count
+
+---
+
 ## [2.9.8] - March 5, 2026
 
 ### Auto-Routing Fixes

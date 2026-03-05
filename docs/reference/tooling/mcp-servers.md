@@ -254,7 +254,7 @@ Track progress: GitHub #6638, #10447
 ## Related Documentation
 
 - `~/.claude/CLAUDE.md` - Core rules
-- `~/.claude/rules/README.md` - Rules index
+- `~/.claude/rules/` - Always-load rule files
 - [MCP Documentation](https://modelcontextprotocol.io/introduction)
 - [Claude Code MCP Docs](https://docs.anthropic.com/en/docs/claude-code/mcp)
 

@@ -27,9 +27,7 @@ Before Compaction
   └── session-stop-summary.sh    (save session context before compaction)
 
 After Tool Execution (Write/Edit only)
-  ├── format-code.sh             (auto-format modified files)
-  ├── secret-scan.sh             (scan for secrets in written files)
-  └── post-edit-lint.sh          (run linter on modified files)
+  └── secret-scan.sh             (scan for secrets in written files)
 
 Session Stop
   └── session-stop-summary.sh    (save session summary)
@@ -47,9 +45,7 @@ Session Stop
 | `pre-bash-check.sh`        | PreToolUse       | Bash        | Yes        | Combined guard + pre-commit. Blocks dangerous patterns (exit 2). On `git commit` in ~/.claude, runs update-counts.sh and stages docs.                              |
 | `pre-write-validate.sh`    | PreToolUse       | Write\|Edit | Yes        | Blocks writes to protected paths (.env*, credentials, node_modules, .git, .ssh, .gnupg, *.pem, *.key, *.p12, *.pfx, *.jks). Exits with code 2 to block.           |
 | `session-stop-summary.sh`  | PreCompact       | —           | Yes        | Saves session context before context compaction (reuses Stop script).                                                                                              |
-| `format-code.sh`           | PostToolUse      | Write\|Edit | **No**     | Auto-formats files after Claude writes or edits them (Prettier, etc.). Deregistered: adds latency, overlaps with editor formatters.                                |
 | `secret-scan.sh`           | PostToolUse      | Write\|Edit | Yes        | Scans written/edited files for leaked secrets (API keys, tokens, passwords). Warns but does not block. Skips .md files.                                            |
-| `post-edit-lint.sh`        | PostToolUse      | Write\|Edit | **No**     | Runs appropriate linter after edits (ESLint for JS/TS, ruff for Python, clippy for Rust, go vet for Go). Deregistered: adds latency, overlaps with CI linting.     |
 | `session-stop-summary.sh`  | Stop             | —           | Yes        | Writes a session summary for continuity between sessions.                                                                                                          |
 
 ---
@@ -132,30 +128,6 @@ abc1234 feat: last thing I did
 ```
 
 **Performance:** Caches output by `.git/index` modification time. On cache hit (most consecutive prompts), returns instantly without running any git commands. Cache invalidates automatically on `git add`, `git commit`, `git checkout`, `git reset`, or any index-modifying operation.
-
----
-
-### format-code.sh
-
-**Event:** PostToolUse (matcher: Write|Edit)
-**Purpose:** Auto-format files after Claude writes or edits them.
-
-**What it does:**
-
-1. Reads the tool input JSON from stdin using Node.js
-2. Extracts `tool_input.file_path` to identify which file was modified
-3. Determines file extension and applies the appropriate formatter
-
-**Formatters by extension:**
-| Extension | Formatter |
-| --------- | --------- |
-| `.js`, `.jsx`, `.ts`, `.tsx`, `.json`, `.css`, `.scss`, `.html`, `.md`, `.yaml`, `.yml` | Prettier (`npx prettier --write`) |
-| `.py` | Ruff (`ruff format`) or Black (`black --quiet`) |
-| `.go` | gofmt (`gofmt -w`) |
-| `.rs` | rustfmt (`rustfmt`) |
-| `.sh`, `.bash` | shfmt (`shfmt -w`) |
-
-**Cross-platform:** Uses Node.js for JSON parsing (always available where Claude Code runs). Falls back gracefully if formatters aren't installed.
 
 ---
 

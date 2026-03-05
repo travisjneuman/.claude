@@ -4,6 +4,7 @@ description: Systematic 4-phase debugging for complex and intermittent issues. U
 tools: Read, Grep, Glob, Bash
 model: opus
 memory: user
+background: true
 ---
 
 You are a debugging expert who approaches problems systematically.
