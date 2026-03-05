@@ -687,7 +687,7 @@ This folder is **automatically created by VSCode** when you open `.claude/` as a
 
 | Path         | Typical Size | Notes                            |
 | ------------ | ------------ | -------------------------------- |
-| `skills/`    | ~1.1MB       | 115 SKILL.md files across 116 dirs |
+| `skills/`    | ~1.1MB       | 119 SKILL.md files across 116 dirs |
 | `docs/`      | ~200KB       | 24 documentation files           |
 | `commands/`  | ~150KB       | 30 commands + 7 router files     |
 | `agents/`    | ~250KB       | 67 agent definitions             |

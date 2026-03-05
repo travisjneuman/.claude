@@ -6,8 +6,8 @@ All notable changes to the Ultimate Claude Code Toolkit.
 
 ### Count & Version Fixes
 
-- **Fixed skill count drift** — README badge, body text, ASCII diagram, docs table all said 119; actual count is 115. Fixed across ~20 files.
-- **Fixed agent count drift** — 15+ files said 59 agents; actual count is 67 (after v2.10.0 added 8 new agents). Fixed across all docs, commands, plugin.json.
+- **Fixed agent count drift** — README badge, body text, ASCII diagram, docs table all said 59 agents; actual count is 67 (after v2.10.0 added 8). Fixed across ~20 files.
+- **Verified skill count** — 119 skills confirmed correct (115 top-level + 4 nested document sub-skills). No inflation from backups/WIP.
 - **Fixed version drift** — 22 docs files had `Last Updated: v2.9.8`; updated to v2.10.1. README version badge updated from v2.10.0 to v2.10.1.
 - **Fixed hook comment bug** — `session-start-context.sh` comments said "24h" but threshold is 72h (259200 seconds).
 
