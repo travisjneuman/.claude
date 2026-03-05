@@ -823,7 +823,7 @@ Load these `~/.claude/` files when relevant:
 - `docs/reference/checklists/ui-visual-changes.md` for visual design quality
 - `docs/reference/checklists/static-sites.md` for static site standards
 - `docs/reference/checklists/performance-optimization.md` for performance tuning
-- `rules/checklists/verification-template.md` for completion verification
+- `docs/reference/checklists/verification-template.md` for completion verification
 
 ---
 

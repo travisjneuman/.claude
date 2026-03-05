@@ -674,7 +674,7 @@ Load these `~/.claude/` files when relevant:
 - `docs/reference/stacks/python.md` for FastAPI/Python patterns
 - `docs/reference/checklists/api-development.md` for API design checklists
 - `docs/reference/checklists/security-hardening.md` for security patterns
-- `rules/checklists/verification-template.md` for completion verification
+- `docs/reference/checklists/verification-template.md` for completion verification
 
 ---
 

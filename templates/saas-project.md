@@ -450,7 +450,7 @@ Load these `~/.claude/` files when relevant:
 - `docs/reference/stacks/fullstack-nextjs-nestjs.md` for full-stack patterns
 - `docs/reference/stacks/react-typescript.md` for React/TypeScript patterns
 - `docs/reference/checklists/ui-visual-changes.md` for frontend changes
-- `rules/checklists/verification-template.md` for completion verification
+- `docs/reference/checklists/verification-template.md` for completion verification
 
 ---
 
