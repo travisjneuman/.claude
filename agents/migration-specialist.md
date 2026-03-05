@@ -14,6 +14,7 @@ tools:
   - Edit
   - Bash
 model: opus
+isolation: worktree
 ---
 
 # Migration Specialist

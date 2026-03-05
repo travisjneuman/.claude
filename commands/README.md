@@ -106,7 +106,6 @@ Slash commands are shortcuts you invoke in Claude Code with `/<command-name>`. T
 - `~/.claude/CLAUDE.md` - Core rules (always loaded)
 - `~/.claude/skills/README.md` - Skills overview
 - `~/.claude/agents/README.md` - Agents directory
-- `~/.claude/rules/README.md` - Rules and guidelines index
 - `~/.claude/docs/WORKFLOW-GUIDE.md` - Workflow patterns
 
 ---

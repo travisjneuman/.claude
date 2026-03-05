@@ -162,6 +162,17 @@
         ]
       }
     ],
+    "PreCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node -e \"process.env.HOOK_NAME='session-stop-summary.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
+            "statusMessage": "Saving session context before compaction"
+          }
+        ]
+      }
+    ],
     "PostToolUse": [
       {
         "matcher": "Write|Edit",

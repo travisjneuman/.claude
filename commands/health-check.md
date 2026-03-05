@@ -51,22 +51,21 @@ Verify:
 
 | Directory               | Expected  | Check                                         |
 | ----------------------- | --------- | --------------------------------------------- |
-| `skills/`               | 119+ items | `ls ~/.claude/skills/ \| wc -l`              |
+| `skills/`               | 115+ items | `ls ~/.claude/skills/ \| wc -l`              |
 | `agents/`               | 59+ files | `ls ~/.claude/agents/*.md \| wc -l`           |
 | `commands/`             | 30+ files | `ls ~/.claude/commands/*.md \| wc -l`         |
-| `rules/`                | 13+ files | `find ~/.claude/rules -name "*.md" \| wc -l`  |
 | `templates/`            | 5+ files  | `ls ~/.claude/templates/ \| wc -l`            |
 | `plugins/marketplaces/` | 101 repos  | `ls ~/.claude/plugins/marketplaces/ \| wc -l` |
 
 ### Step 3: Hooks Status
 
-**Verify all 10 hooks:**
+**Verify registered hooks:**
 
 ```bash
-grep -c '"PreToolUse"\|"PostToolUse"\|"Notification"\|"UserPromptSubmit"\|"Stop"\|"PreCompact"\|"SubagentStop"' ~/.claude/settings.json
+grep -c '"type": "command"' ~/.claude/settings.json
 ```
 
-Expected: 10 hooks configured
+Expected: 7+ hook commands across 5+ events (SessionStart, Stop, UserPromptSubmit, PreToolUse, PostToolUse, PreCompact)
 
 ### Step 4: Git Status
 
@@ -100,7 +99,7 @@ grep -A1 '"disabledMcpjsonServers"' ~/.claude/settings.json
 ╠════════════════════════════════════════════════════════════╣
 ║  Configuration:  ✅ OK                                      ║
 ║  Structure:      ✅ OK (115 skills, 59 agents, 101 markets)  ║
-║  Hooks:          ✅ 10/10 configured                          ║
+║  Hooks:          ✅ 7 hooks across 6 events                   ║
 ║  Git:            ✅ Clean, submodules synced               ║
 ║  MCP Servers:    ✅ 12 available (all disabled by default) ║
 ╠════════════════════════════════════════════════════════════╣
