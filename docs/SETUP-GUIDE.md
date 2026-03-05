@@ -196,7 +196,7 @@ This pulls all 101 marketplace repos, fixes detached HEADs, enforces `no_push`, 
 +-- CLAUDE.md              <- Core rules
 +-- settings.json          <- Shared settings
 +-- commands/              <- Slash commands
-+-- skills/                <- 115 skills
++-- skills/                <- 119 skills
 +-- agents/                <- 67 agents
 +-- rules/                 <- Contextual rules
 +-- templates/             <- Templates

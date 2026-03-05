@@ -75,7 +75,7 @@ Already set up? Jump to the section you need below.
 
 | Component           | Count  | Location                       |
 | ------------------- | ------ | ------------------------------ |
-| Local skills        | 115    | `skills/`                      |
+| Local skills        | 119    | `skills/`                      |
 | Agents              | 67     | `agents/`                      |
 | Commands            | 30     | `commands/`                    |
 | Rules files         | 30     | `rules/`                       |
@@ -106,7 +106,7 @@ Already set up? Jump to the section you need below.
 
 This `~/.claude/` folder is a fully configured, portable Claude Code environment containing:
 
-- **115 local skills** for code review, design systems, feature development, domain expertise
+- **119 local skills** for code review, design systems, feature development, domain expertise
 - **67 agents** for specialized autonomous workflows
 - **30 slash commands** for workflow automation
 - **12 MCP server configurations** for extended capabilities (disabled by default to save context)
