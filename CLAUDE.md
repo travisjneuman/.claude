@@ -128,22 +128,34 @@ YOU MUST auto-load matching resources from the user's prompt — no slash comman
 | PWA, service worker, offline, installable | `skills/pwa-development` + `pwa-specialist` agent |
 | game, Unity, Unreal, Godot | `skills/game-development` + `game-developer` agent |
 | mobile CI/CD, Fastlane, code signing, TestFlight | `skills/mobile-cicd` + `mobile-release-manager` agent |
-| React, TypeScript, JSX | `docs/reference/stacks/react-typescript.md` |
-| Python, Django, FastAPI | `docs/reference/stacks/python.md` or `django-fastapi.md` |
-| Go, Golang | `docs/reference/stacks/go.md` |
-| Rust, cargo | `docs/reference/stacks/rust.md` |
-| Next.js, NestJS, full-stack | `docs/reference/stacks/fullstack-nextjs-nestjs.md` |
-| Vue, Nuxt | `docs/reference/stacks/vue-nuxt.md` + `skills/vue-development` |
-| Svelte, SvelteKit | `docs/reference/stacks/svelte-sveltekit.md` + `skills/svelte-development` |
-| React Native, Expo | `docs/reference/stacks/react-native-expo.md` + `skills/react-native` |
-| Flutter, Dart | `docs/reference/stacks/flutter-dart.md` + `skills/flutter-development` |
-| Kotlin Multiplatform, KMP | `skills/kotlin-multiplatform` + `android-developer` agent |
+| document, PDF, Word, docx, xlsx, pptx | `Skill(doc-coauthoring)` or `Skill(pdf)` / `Skill(docx)` / `Skill(xlsx)` / `Skill(pptx)` |
+| React, TypeScript, JSX | `docs/reference/stacks/react-typescript.md` + `react-expert` agent |
+| Python, Django, FastAPI | `docs/reference/stacks/python.md` + `python-expert` agent (Django/FastAPI: `django-fastapi-expert` agent) |
+| Go, Golang | `docs/reference/stacks/go.md` + `go-expert` agent |
+| Rust, cargo | `docs/reference/stacks/rust.md` + `rust-expert` agent |
+| Next.js, NestJS, full-stack | `docs/reference/stacks/fullstack-nextjs-nestjs.md` + `next-js-expert` agent |
+| Vue, Nuxt | `docs/reference/stacks/vue-nuxt.md` + `skills/vue-development` + `vue-nuxt-expert` agent |
+| Svelte, SvelteKit | `docs/reference/stacks/svelte-sveltekit.md` + `skills/svelte-development` + `svelte-expert` agent |
+| React Native, Expo | `docs/reference/stacks/react-native-expo.md` + `skills/react-native` + `mobile-architect` agent |
+| Flutter, Dart | `docs/reference/stacks/flutter-dart.md` + `skills/flutter-development` + `flutter-developer` agent |
+| Kotlin Multiplatform, KMP | `skills/kotlin-multiplatform` + `kotlin-expert` agent |
 | macOS, AppKit, Mac native | `skills/macos-native` + `macos-developer` agent |
+| startup, launch, MVP, validate | `skills/startup-launch` + `startup-advisor` agent |
+| finance, budget, investment, revenue | `skills/finance` + `monetization-expert` agent |
+| marketing, campaign, SEO, content | `skills/marketing` + `brand-strategist` agent |
+| sales, pipeline, CRM, leads | `skills/sales` + `product-manager` agent |
+| product, PRD, roadmap, user story | `skills/product-management` + `product-manager` agent |
+| HR, hiring, onboarding, talent | `skills/hr-talent` + `product-manager` agent |
+| legal, compliance, contract, GDPR | `skills/legal-compliance` |
+| operations, supply chain, logistics | `skills/operations` |
+| leadership, strategy, OKR, planning | `skills/leadership` + `startup-advisor` agent |
+| video, editing, production, footage | `skills/video-production` + `video-producer` agent |
+| audio, podcast, recording, mixing | `skills/audio-production` + `audio-engineer` agent |
+| brand, logo, identity, guidelines | `skills/brand-identity` + `brand-strategist` agent |
+| graphic design, illustration, layout | `skills/graphic-design` + `graphic-designer` agent |
 
-**Business/creative domains** (startup, finance, marketing, sales, HR, legal, product, brand, operations, leadership, video, audio, design, growth) → search `skills/MASTER_INDEX.md` for matching skill + agent.
-
-**Marketplace discovery:** When no local skill matches, search marketplace: `find ~/.claude/plugins/marketplaces -name "SKILL.md" | xargs grep -li "<keyword>"`.
+**Fallback:** When no row matches, search `skills/MASTER_INDEX.md`, then marketplace: `find ~/.claude/plugins/marketplaces -name "SKILL.md" | xargs grep -li "<keyword>"`.
 
 ---
 
-_Satellite files: `rules/`, `docs/`, `skills/`, `commands/`_
+_Satellite files: `docs/`, `skills/`, `commands/`_
