@@ -2,6 +2,17 @@
 
 All notable changes to the Ultimate Claude Code Toolkit.
 
+## [2.9.7] - March 5, 2026
+
+### Auto-Routing Refinement
+
+- **Added specialist agents to all stack rows** — React, Python, Go, Rust, Next.js, Vue, Svelte, React Native, Flutter, Kotlin now invoke their specialist agents (e.g., `react-expert`, `python-expert`, `go-expert`) alongside loading stack docs. Django/FastAPI prompts route to `django-fastapi-expert` agent.
+- **Inlined 13 business/creative domains** — Replaced MASTER_INDEX.md catch-all (~2,300 tokens per load) with direct rows for startup, finance, marketing, sales, product, HR, legal, operations, leadership, video, audio, brand, and graphic design. Each routes to its specific skill + agent. MASTER_INDEX.md is now fallback-only.
+- **Added documents/writing row** — Keywords: document, PDF, Word, docx, xlsx, pptx. Routes to plugin skills (doc-coauthoring, pdf, docx, xlsx, pptx).
+- **Fixed stale footer** — Removed `rules/` from satellite files reference.
+
+---
+
 ## [2.9.6] - March 5, 2026
 
 ### Platform Optimization — Auto-Activation & Efficiency
