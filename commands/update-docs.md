@@ -13,7 +13,6 @@ Scan for recently modified files and update corresponding documentation.
 | `commands/` | Verify command appears in skill listings |
 | `agents/` | Update `agents/README.md` |
 | `hooks/` or `settings.json` | Update `docs/reference/tooling/` docs as needed |
-| `rules/` | Update `rules/README.md` index |
 | `CLAUDE.md` | Verify satellite files are consistent |
 | `plugins/` | Update `docs/MARKETPLACE-GUIDE.md` if plugin list changed |
 

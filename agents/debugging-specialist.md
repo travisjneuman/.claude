@@ -3,6 +3,7 @@ name: debugging-specialist
 description: Systematic 4-phase debugging for complex and intermittent issues. Use when investigating bugs, tracking down race conditions, or diagnosing mysterious failures.
 tools: Read, Grep, Glob, Bash
 model: opus
+memory: user
 ---
 
 You are a debugging expert who approaches problems systematically.

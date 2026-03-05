@@ -3,6 +3,8 @@ name: deep-code-reviewer
 description: Thorough 6-aspect code review covering correctness, security, performance, maintainability, testing, and documentation. Use for comprehensive PR reviews or code quality audits.
 tools: Read, Grep, Glob
 model: opus
+memory: user
+background: true
 ---
 
 You are a senior staff engineer conducting thorough code reviews.

@@ -92,19 +92,19 @@ YOU MUST auto-load matching resources from the user's prompt — no slash comman
 | Keywords | Load (docs + skills + agents) |
 |----------|-------------------------------|
 | verify, complete, done, ship | `docs/reference/checklists/verification-template.md` |
-| UI, visual, CSS, styling, frontend, Tailwind | `docs/reference/checklists/ui-visual-changes.md` + `skills/ui-research` + `skills/frontend-enhancer` |
+| UI, visual, CSS, styling, frontend, Tailwind, shadcn, Radix | `docs/reference/checklists/ui-visual-changes.md` + `skills/ui-research` + `skills/frontend-enhancer` |
 | script, automation, batch | `docs/reference/checklists/automation-scripts.md` |
 | HTML, static site | `docs/reference/checklists/static-sites.md` |
 | API design, endpoints, REST, OpenAPI | `docs/reference/checklists/api-development.md` + `api-designer` agent |
-| database, schema, migration, queries, SQL | `docs/reference/checklists/database-design.md` + `skills/database-expert` + `database-expert` agent |
+| database, schema, migration, queries, SQL, Prisma, Drizzle, TypeORM | `docs/reference/checklists/database-design.md` + `skills/database-expert` + `database-expert` agent |
 | security, OWASP, hardening, pentest, CSP | `docs/reference/checklists/security-hardening.md` + `skills/application-security` + `security-auditor` agent |
 | performance, speed, bundle, optimize, Lighthouse | `docs/reference/checklists/performance-optimization.md` + `skills/performance-engineering` + `performance-optimizer` agent |
 | research, investigate, compare | `docs/reference/workflows/research-methodology.md` |
-| deploy, CI/CD, pipeline, Docker, k8s, AWS, cloud | `docs/reference/workflows/deployment-cicd.md` + `skills/devops-cloud` + `devops-engineer` agent |
+| deploy, CI/CD, pipeline, Docker, k8s, AWS, cloud, Terraform, Helm | `docs/reference/workflows/deployment-cicd.md` + `skills/devops-cloud` + `devops-engineer` agent |
 | team, parallel, coordinate, agents, swarm | `docs/reference/workflows/agent-teams.md` + `skills/agent-teams` |
 | error, bug, broken, fix, crash, stack trace | `docs/reference/tooling/troubleshooting.md` + `skills/debug-systematic` + `debugging-specialist` agent |
 | MCP, server protocol, tool server | `docs/reference/tooling/mcp-servers.md` |
-| test, TDD, coverage, jest, vitest, pytest, Playwright | `skills/test-specialist` + `test-generator` agent |
+| test, TDD, coverage, jest, vitest, pytest, Playwright, Cypress, Mocha | `skills/test-specialist` + `test-generator` agent |
 | accessibility, a11y, WCAG, ARIA, screen reader | `skills/accessibility-a11y` + `accessibility-expert` agent |
 | i18n, localization, translation, locale, RTL | `skills/i18n-localization` + `i18n-specialist` agent |
 | GraphQL, resolver, federation, Apollo | `skills/graphql-expert` + `graphql-architect` agent |
@@ -115,7 +115,7 @@ YOU MUST auto-load matching resources from the user's prompt — no slash comman
 | analytics, tracking, A/B test, funnel, PostHog | `skills/product-analytics` + `product-analytics-specialist` agent |
 | LLM, RAG, AI app, embeddings, vector, prompt eng | `skills/llm-app-development` + `ml-engineer` agent |
 | email, transactional, deliverability, SMTP | `skills/email-systems` + `email-specialist` agent |
-| monitoring, observability, tracing, OpenTelemetry | `skills/monitoring-observability` + `observability-engineer` agent |
+| monitoring, observability, tracing, OpenTelemetry, Datadog, Grafana, Prometheus | `skills/monitoring-observability` + `observability-engineer` agent |
 | serverless, Lambda, Edge Functions, Workers | `skills/serverless-development` |
 | SEO, meta tags, sitemap, Core Web Vitals | `skills/seo-analytics-auditor` + `seo-specialist` agent |
 | animation, motion, transitions, Framer Motion | `skills/ui-animation` + `motion-designer` agent |
@@ -124,7 +124,7 @@ YOU MUST auto-load matching resources from the user's prompt — no slash comman
 | data science, pandas, Jupyter, ML, statistics | `skills/data-science` + `data-engineer` agent |
 | iOS, Swift, SwiftUI, Xcode | `skills/ios-development` + `ios-developer` agent |
 | Android, Kotlin, Jetpack Compose | `skills/android-development` + `android-developer` agent |
-| desktop, Electron, Tauri | `skills/electron-desktop` or `skills/tauri-desktop` + `desktop-developer` agent |
+| desktop, Electron, Tauri | `skills/electron-desktop` + `skills/tauri-desktop` + `desktop-developer` agent |
 | PWA, service worker, offline, installable | `skills/pwa-development` + `pwa-specialist` agent |
 | game, Unity, Unreal, Godot | `skills/game-development` + `game-developer` agent |
 | mobile CI/CD, Fastlane, code signing, TestFlight | `skills/mobile-cicd` + `mobile-release-manager` agent |
@@ -136,22 +136,20 @@ YOU MUST auto-load matching resources from the user's prompt — no slash comman
 | Next.js, NestJS, full-stack | `docs/reference/stacks/fullstack-nextjs-nestjs.md` + `next-js-expert` agent |
 | Vue, Nuxt | `docs/reference/stacks/vue-nuxt.md` + `skills/vue-development` + `vue-nuxt-expert` agent |
 | Svelte, SvelteKit | `docs/reference/stacks/svelte-sveltekit.md` + `skills/svelte-development` + `svelte-expert` agent |
-| React Native, Expo | `docs/reference/stacks/react-native-expo.md` + `skills/react-native` + `mobile-architect` agent |
+| React Native, Expo, mobile app, cross-platform | `docs/reference/stacks/react-native-expo.md` + `skills/react-native` + `mobile-architect` agent |
 | Flutter, Dart | `docs/reference/stacks/flutter-dart.md` + `skills/flutter-development` + `flutter-developer` agent |
 | Kotlin Multiplatform, KMP | `skills/kotlin-multiplatform` + `kotlin-expert` agent |
 | macOS, AppKit, Mac native | `skills/macos-native` + `macos-developer` agent |
-| startup, launch, MVP, validate | `skills/startup-launch` + `startup-advisor` agent |
+| startup, launch, MVP, leadership, strategy, OKR | `skills/startup-launch` + `skills/leadership` + `startup-advisor` agent |
 | finance, budget, investment, revenue | `skills/finance` + `monetization-expert` agent |
-| marketing, campaign, SEO, content | `skills/marketing` + `brand-strategist` agent |
+| marketing, campaign, content, brand, logo, identity | `skills/marketing` + `skills/brand-identity` + `brand-strategist` agent |
 | sales, pipeline, CRM, leads | `skills/sales` + `product-manager` agent |
 | product, PRD, roadmap, user story | `skills/product-management` + `product-manager` agent |
-| HR, hiring, onboarding, talent | `skills/hr-talent` + `product-manager` agent |
+| HR, hiring, onboarding, talent | `skills/hr-talent` |
 | legal, compliance, contract, GDPR | `skills/legal-compliance` |
 | operations, supply chain, logistics | `skills/operations` |
-| leadership, strategy, OKR, planning | `skills/leadership` + `startup-advisor` agent |
 | video, editing, production, footage | `skills/video-production` + `video-producer` agent |
 | audio, podcast, recording, mixing | `skills/audio-production` + `audio-engineer` agent |
-| brand, logo, identity, guidelines | `skills/brand-identity` + `brand-strategist` agent |
 | graphic design, illustration, layout | `skills/graphic-design` + `graphic-designer` agent |
 
 **Fallback:** When no row matches, search `skills/MASTER_INDEX.md`, then marketplace: `find ~/.claude/plugins/marketplaces -name "SKILL.md" | xargs grep -li "<keyword>"`.
