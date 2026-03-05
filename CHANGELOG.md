@@ -2,6 +2,28 @@
 
 All notable changes to the Ultimate Claude Code Toolkit.
 
+## [2.10.0] - March 5, 2026
+
+### New Agents (8)
+
+- **`serverless-specialist`** — AWS Lambda, Cloudflare Workers, Vercel Edge Functions, cold start optimization
+- **`event-driven-architect`** — Kafka, RabbitMQ, event sourcing, CQRS, streaming pipelines
+- **`ux-researcher`** — User research, usability testing, wireframing, heuristic evaluation
+- **`embedded-developer`** — Firmware, RTOS (FreeRTOS, Zephyr), MCUs (STM32, ESP32, Arduino), IoT
+- **`browser-extension-developer`** — Chrome/Firefox Manifest V3, content scripts, service workers
+- **`wasm-specialist`** — WebAssembly, WASI, wasm-bindgen, Emscripten, cross-language compilation
+- **`cpp-expert`** — C/C++ (C++17/20/23), CMake, systems programming, memory management
+- **`blockchain-developer`** — Solidity, smart contracts, Web3, DeFi, Foundry/Hardhat
+
+### Auto-Routing Expansion
+
+- All 8 new agents added to CLAUDE.md auto-routing table
+- Added keywords: RabbitMQ, CQRS, UX, wireframe, DevSecOps to existing rows
+- 5 new routing rows: C/C++, embedded/IoT, browser extensions, WebAssembly, blockchain
+- Agent count: 57 → 67
+
+---
+
 ## [2.9.9] - March 5, 2026
 
 ### Consistency & Correctness

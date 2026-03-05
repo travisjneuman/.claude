@@ -92,7 +92,7 @@ YOU MUST auto-load matching resources from the user's prompt — no slash comman
 | Keywords | Load (docs + skills + agents) |
 |----------|-------------------------------|
 | verify, complete, done, ship | `docs/reference/checklists/verification-template.md` |
-| UI, visual, CSS, styling, frontend, Tailwind, shadcn, Radix | `docs/reference/checklists/ui-visual-changes.md` + `skills/ui-research` + `skills/frontend-enhancer` |
+| UI, visual, CSS, styling, frontend, Tailwind, shadcn, Radix, UX, wireframe | `docs/reference/checklists/ui-visual-changes.md` + `skills/ui-research` + `skills/frontend-enhancer` + `ux-researcher` agent |
 | script, automation, batch | `docs/reference/checklists/automation-scripts.md` |
 | HTML, static site | `docs/reference/checklists/static-sites.md` |
 | API design, endpoints, REST, OpenAPI | `docs/reference/checklists/api-development.md` + `api-designer` agent |
@@ -108,7 +108,7 @@ YOU MUST auto-load matching resources from the user's prompt — no slash comman
 | accessibility, a11y, WCAG, ARIA, screen reader | `skills/accessibility-a11y` + `accessibility-expert` agent |
 | i18n, localization, translation, locale, RTL | `skills/i18n-localization` + `i18n-specialist` agent |
 | GraphQL, resolver, federation, Apollo | `skills/graphql-expert` + `graphql-architect` agent |
-| microservices, service mesh, gRPC, event-driven, Kafka | `skills/microservices-architecture` + `microservices-architect` agent |
+| microservices, service mesh, gRPC, event-driven, Kafka, RabbitMQ, CQRS | `skills/microservices-architecture` + `skills/event-driven-architecture` + `microservices-architect` agent + `event-driven-architect` agent |
 | WebSocket, real-time, SSE, live update, streaming | `skills/websockets-realtime` + `realtime-specialist` agent |
 | payment, Stripe, billing, subscribe, RevenueCat | `skills/payment-integration` + `payment-billing-specialist` agent |
 | auth, login, OAuth, JWT, session, SSO, MFA | `skills/authentication-patterns` + `auth-specialist` agent |
@@ -116,7 +116,7 @@ YOU MUST auto-load matching resources from the user's prompt — no slash comman
 | LLM, RAG, AI app, embeddings, vector, prompt eng | `skills/llm-app-development` + `ml-engineer` agent |
 | email, transactional, deliverability, SMTP | `skills/email-systems` + `email-specialist` agent |
 | monitoring, observability, tracing, OpenTelemetry, Datadog, Grafana, Prometheus | `skills/monitoring-observability` + `observability-engineer` agent |
-| serverless, Lambda, Edge Functions, Workers | `skills/serverless-development` |
+| serverless, Lambda, Edge Functions, Workers | `skills/serverless-development` + `serverless-specialist` agent |
 | SEO, meta tags, sitemap, Core Web Vitals | `skills/seo-analytics-auditor` + `seo-specialist` agent |
 | animation, motion, transitions, Framer Motion | `skills/ui-animation` + `motion-designer` agent |
 | refactor, tech debt, code smell, architecture review | `skills/tech-debt-analyzer` + `refactoring-specialist` agent + `architecture-analyst` agent |
@@ -144,6 +144,11 @@ YOU MUST auto-load matching resources from the user's prompt — no slash comman
 | finance, budget, investment, revenue | `skills/finance` + `monetization-expert` agent |
 | marketing, campaign, content, brand, logo, identity | `skills/marketing` + `skills/brand-identity` + `brand-strategist` agent |
 | sales, pipeline, CRM, leads | `skills/sales` + `product-manager` agent |
+| C, C++, CMake, systems programming | `cpp-expert` agent |
+| embedded, firmware, RTOS, Arduino, ESP32, IoT | `embedded-developer` agent |
+| browser extension, Chrome extension, Manifest V3 | `browser-extension-developer` agent |
+| WebAssembly, WASM, WASI | `wasm-specialist` agent |
+| Solidity, smart contract, Web3, blockchain, DeFi | `blockchain-developer` agent |
 | product, PRD, roadmap, user story | `skills/product-management` + `product-manager` agent |
 | HR, hiring, onboarding, talent | `skills/hr-talent` |
 | legal, compliance, contract, GDPR | `skills/legal-compliance` |

@@ -2,7 +2,7 @@
 
 Specialized AI agents for focused, expert-level assistance across all domains.
 
-**59 agents available** - Covering code quality, development, architecture, languages, platforms, creative, product & strategy, SaaS, and infrastructure.
+**67 agents available** - Covering code quality, development, architecture, languages, platforms, creative, product & strategy, SaaS, and infrastructure.
 
 ---
 
@@ -84,6 +84,8 @@ See `~/.claude/docs/AGENT-TEAMS.md` for the full guide and `~/.claude/docs/refer
 | `migration-specialist`     | Framework upgrades, codebase migrations     | opus   |
 | `observability-engineer`   | OpenTelemetry, SLOs, distributed tracing    | sonnet |
 | `realtime-specialist`      | WebSockets and live data systems            | sonnet |
+| `serverless-specialist`    | Lambda, Workers, Edge Functions, WASI       | opus   |
+| `event-driven-architect`   | Kafka, RabbitMQ, event sourcing, CQRS       | opus   |
 
 ### Language & Framework Experts
 
@@ -99,6 +101,7 @@ See `~/.claude/docs/AGENT-TEAMS.md` for the full guide and `~/.claude/docs/refer
 | `kotlin-expert`           | KMP, Compose, coroutines, Ktor    | sonnet |
 | `rust-expert`             | Ownership, async Rust, Axum/WASM  | sonnet |
 | `go-expert`               | Concurrency, stdlib, Chi/Echo     | sonnet |
+| `cpp-expert`              | C/C++, CMake, systems programming | opus   |
 
 ### Platform Development
 
@@ -114,6 +117,10 @@ See `~/.claude/docs/AGENT-TEAMS.md` for the full guide and `~/.claude/docs/refer
 | `game-developer`         | Unity, Unreal Engine, Godot development      | sonnet |
 | `cli-developer`          | CLI tools, argument parsing, terminal UI     | sonnet |
 | `pwa-specialist`         | Service workers, offline-first, installable  | sonnet |
+| `embedded-developer`     | Firmware, RTOS, MCUs, IoT, bare-metal        | opus   |
+| `browser-extension-developer` | Chrome MV3, Firefox, WebExtensions      | opus   |
+| `wasm-specialist`        | WebAssembly, WASI, cross-language compilation | opus  |
+| `blockchain-developer`   | Solidity, smart contracts, Web3, DeFi        | opus   |
 | `i18n-specialist`        | Internationalization and localization        | sonnet |
 
 ### SaaS & Product
@@ -142,6 +149,7 @@ See `~/.claude/docs/AGENT-TEAMS.md` for the full guide and `~/.claude/docs/refer
 | `audio-engineer`   | Audio production and sound design   | sonnet |
 | `brand-strategist` | Brand identity and positioning      | sonnet |
 | `motion-designer`  | UI animation and micro-interactions | sonnet |
+| `ux-researcher`    | UX research, usability, wireframes  | opus   |
 
 ### Product & Strategy
 
