@@ -23,6 +23,9 @@ Before Tool Execution (Bash only)
 Before Tool Execution (Write/Edit only)
   └── pre-write-validate.sh      (block writes to protected paths)
 
+Before Compaction
+  └── session-stop-summary.sh    (save session context before compaction)
+
 After Tool Execution (Write/Edit only)
   ├── format-code.sh             (auto-format modified files)
   ├── secret-scan.sh             (scan for secrets in written files)
@@ -42,9 +45,8 @@ Session Stop
 | `session-start-context.sh` | SessionStart     | —           | Yes        | Injects previous session context if within 72 hours (covers weekends).                                                                                             |
 | `prompt-context.sh`        | UserPromptSubmit | —           | Yes        | Injects git branch/status/commits. Caches output by `.git/index` mtime — skips git calls when nothing changed.                                                    |
 | `pre-bash-check.sh`        | PreToolUse       | Bash        | Yes        | Combined guard + pre-commit. Blocks dangerous patterns (exit 2). On `git commit` in ~/.claude, runs update-counts.sh and stages docs.                              |
-| `guard-dangerous.sh`       | PreToolUse       | Bash        | **No**     | Superseded by `pre-bash-check.sh`. Kept for reference.                                                                                                             |
-| `pre-commit-counts.sh`     | PreToolUse       | Bash        | **No**     | Superseded by `pre-bash-check.sh`. Kept for reference.                                                                                                             |
-| `pre-write-validate.sh`    | PreToolUse       | Write\|Edit | Yes        | Blocks writes to protected paths (.env, credentials, node_modules, .git, .ssh, .gnupg, *.pem, *.key). Exits with code 2 to block.                                 |
+| `pre-write-validate.sh`    | PreToolUse       | Write\|Edit | Yes        | Blocks writes to protected paths (.env*, credentials, node_modules, .git, .ssh, .gnupg, *.pem, *.key, *.p12, *.pfx, *.jks). Exits with code 2 to block.           |
+| `session-stop-summary.sh`  | PreCompact       | —           | Yes        | Saves session context before context compaction (reuses Stop script).                                                                                              |
 | `format-code.sh`           | PostToolUse      | Write\|Edit | **No**     | Auto-formats files after Claude writes or edits them (Prettier, etc.). Deregistered: adds latency, overlaps with editor formatters.                                |
 | `secret-scan.sh`           | PostToolUse      | Write\|Edit | Yes        | Scans written/edited files for leaked secrets (API keys, tokens, passwords). Warns but does not block. Skips .md files.                                            |
 | `post-edit-lint.sh`        | PostToolUse      | Write\|Edit | **No**     | Runs appropriate linter after edits (ESLint for JS/TS, ruff for Python, clippy for Rust, go vet for Go). Deregistered: adds latency, overlaps with CI linting.     |
@@ -130,58 +132,6 @@ abc1234 feat: last thing I did
 ```
 
 **Performance:** Caches output by `.git/index` modification time. On cache hit (most consecutive prompts), returns instantly without running any git commands. Cache invalidates automatically on `git add`, `git commit`, `git checkout`, `git reset`, or any index-modifying operation.
-
----
-
-### guard-dangerous.sh
-
-**Event:** PreToolUse (matcher: Bash)
-**Purpose:** Prevent Claude from executing commands that could cause irreversible damage.
-
-**What it does:**
-
-1. Reads the command from `$CLAUDE_TOOL_INPUT` environment variable
-2. Checks against dangerous patterns using case-insensitive regex
-3. Exits with code 2 to block, code 0 to allow
-
-**Blocked patterns:**
-| Pattern | Risk |
-| ------- | ---- |
-| `rm -rf /` or `rm -rf ~` or `rm -rf $HOME` | Filesystem destruction |
-| `git push --force` / `git push -f` | Overwrite remote history |
-| `DROP TABLE` | Database destruction |
-| `TRUNCATE TABLE` | Database data loss |
-| `git clean -fd` | Delete untracked files |
-| `git reset --hard origin` | Discard all local changes |
-| `chmod -R 777` | Overly permissive file permissions |
-| `curl ... \| sh` / `wget ... \| sh` | Pipe-to-shell (remote code execution) |
-| `npm publish` / `yarn publish` | Accidental package publication |
-| `docker system prune -a` | Destroy all Docker resources |
-| `git checkout -- .` / `git restore .` | Discard all unstaged changes |
-
-**Exit codes:**
-
-- `0` — Command is safe, proceed
-- `2` — Command blocked, Claude sees the error message
-
-**Override:** Claude can still suggest the command to the user, who can run it manually. The hook only prevents automatic execution.
-
----
-
-### pre-commit-counts.sh
-
-**Event:** PreToolUse (matcher: Bash)
-**Purpose:** Ensure documentation counts are accurate before every git commit.
-
-**What it does:**
-
-1. Checks if the Bash command starts with `git commit`
-2. If so, runs `update-counts.sh` silently to reconcile all counts
-3. Auto-stages files that may have been updated: README.md, CLAUDE.md, counts.json, plugin.json, MASTER_INDEX.md, website layout files, and marketplace-counts.json
-
-**Why this matters:** Counts are hardcoded in many files. Without this hook, committing after adding a skill would leave stale counts in documentation. The hook ensures counts are always accurate at commit time.
-
-**Staged files:** README.md, CLAUDE.md, skills/README.md, skills/MASTER_INDEX.md, docs/_.md, commands/_.md, plugin.json, counts.json, website layout/footer/console files, marketplace-counts.json.
 
 ---
 

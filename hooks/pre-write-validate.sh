@@ -28,7 +28,7 @@ NORMALIZED=$(echo "$FILE_PATH" | tr '\\' '/')
 
 # Block writes to sensitive files
 case "$NORMALIZED" in
-  */.env|*/.env.local|*/.env.production|*/.env.staging)
+  */.env|*/.env.local|*/.env.production|*/.env.staging|*/.env.development|*/.env.test)
     echo "BLOCKED: Cannot write to environment file: $FILE_PATH" >&2
     echo "Environment files contain secrets and should be edited manually." >&2
     exit 2
@@ -48,7 +48,7 @@ case "$NORMALIZED" in
     echo "SSH and GPG directories should be managed manually." >&2
     exit 2
     ;;
-  */id_rsa*|*/id_ed25519*|*/*.pem|*/*.key)
+  */id_rsa*|*/id_ed25519*|*/*.pem|*/*.key|*/*.p12|*/*.pfx|*/*.jks)
     echo "BLOCKED: Cannot write to key file: $FILE_PATH" >&2
     echo "Private key files should never be modified by automation." >&2
     exit 2

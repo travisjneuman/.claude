@@ -1,6 +1,7 @@
 ---
 name: debug-systematic
 description: Systematic 4-phase debugging methodology for complex, intermittent, or mysterious issues. Use when investigating bugs, race conditions, or unexplained failures.
+context: fork
 ---
 
 # Systematic Debugging Protocol

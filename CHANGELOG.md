@@ -2,6 +2,42 @@
 
 All notable changes to the Ultimate Claude Code Toolkit.
 
+## [2.9.8] - March 5, 2026
+
+### Auto-Routing Fixes
+
+- **Removed duplicate SEO keyword** from marketing row — SEO now only routes via the dedicated SEO row
+- **Fixed HR agent mapping** — HR row no longer incorrectly routes to `product-manager` agent
+- **Added missing keywords** — Cypress/Mocha (test), Terraform/Helm (deploy), Prisma/Drizzle/TypeORM (database), Datadog/Grafana/Prometheus (monitoring), shadcn/Radix (UI)
+- **Added mobile bare keyword** — "mobile app" and "cross-platform" now route to `mobile-architect` agent
+- **Fixed desktop row inconsistency** — changed `or` to `+` for consistent pattern
+- **Merged startup + leadership rows** — both load `startup-advisor` agent, saves a routing row
+- **Merged marketing + brand rows** — both load `brand-strategist` agent, saves a routing row
+
+### New Features
+
+- **PreCompact hook** — session context is now saved before context compaction, ensuring continuity survives `/compact`
+- **Path-scoped rules** — 3 new rules (`typescript-react.md`, `python.md`, `api-routes.md`) that load only when touching matching file patterns, reducing token waste
+
+### Skill & Agent Improvements
+
+- **`context: fork`** added to `debug-systematic`, `codebase-documenter`, `tech-debt-analyzer` — verbose output stays out of main context
+- **`disable-model-invocation: true`** added to `auto-claude` — prevents accidental autonomous triggering
+- **`memory: user`** added to `debugging-specialist`, `architecture-analyst`, `deep-code-reviewer` — agents accumulate project knowledge
+- **`isolation: worktree`** added to `refactoring-specialist`, `migration-specialist` — broad edits happen in isolation
+- **`background: true`** added to `architecture-analyst`, `deep-code-reviewer` — read-only analysis runs in background
+
+### Security
+
+- **Extended env file protection** — `pre-write-validate.sh` now blocks `.env.development` and `.env.test`
+- **Extended cert/key protection** — now also blocks `.p12`, `.pfx`, `.jks` files
+
+### Cleanup
+
+- **Removed dead hook scripts** — `guard-dangerous.sh` and `pre-commit-counts.sh` (superseded by `pre-bash-check.sh`)
+- **Fixed stale `rules/` references** — removed from `health-check.md`, `audit-docs.md`, `update-docs.md`, `commands/README.md`
+- **Updated hook counts** in health-check from "10/10" to "7+ hooks across 6 events"
+
 ## [2.9.7] - March 5, 2026
 
 ### Auto-Routing Refinement

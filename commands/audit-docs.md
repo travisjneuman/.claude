@@ -38,9 +38,6 @@ ls ~/.claude/commands/*.md 2>/dev/null | wc -l
 # Actual marketplace repo count
 ls -d ~/.claude/plugins/marketplaces/*/ 2>/dev/null | wc -l
 
-# Actual rule file count
-find ~/.claude/rules -name "*.md" -not -name "README.md" | wc -l
-
 # Actual template count
 ls ~/.claude/templates/ 2>/dev/null | wc -l
 
@@ -58,7 +55,7 @@ If scope is `versions` or `all`:
 
 Search all documentation files for version strings and compare against the current version:
 
-**Directories to scan:** `docs/`, `commands/`, `skills/`, `rules/`, `templates/`, `README.md`, `CHANGELOG.md`
+**Directories to scan:** `docs/`, `commands/`, `skills/`, `templates/`, `README.md`, `CHANGELOG.md`
 
 **Patterns to check:**
 
@@ -90,7 +87,6 @@ Search documentation files for count references and compare against ground truth
 | `\d+ market` | "101 marketplace" | Actual marketplace count |
 | `\d+ repos` | "101 repos" | Actual marketplace count |
 | `\d+ hooks` | "10 hooks" | Actual hook count |
-| `\d+ rules` | "13 rules" | Actual rule count |
 | `\d+ templates` | "5 templates" | Actual template count |
 | `\d+ local skills` | "119 local skills" | Actual skill count |
 | `\d+ local agents` | "59 local agents" | Actual agent count |
@@ -106,7 +102,7 @@ For each mismatch, report:
 
 If scope is `links` or `all`:
 
-Scan all `.md` files in `docs/`, `commands/`, `skills/`, `rules/`, `templates/` for relative markdown links.
+Scan all `.md` files in `docs/`, `commands/`, `skills/`, `templates/` for relative markdown links.
 
 **Link patterns to check:**
 
