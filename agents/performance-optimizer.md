@@ -3,6 +3,8 @@ name: performance-optimizer
 description: Identifies performance bottlenecks and optimization opportunities. Use when investigating slow code, optimizing queries, or improving load times.
 tools: Read, Grep, Glob, Bash
 model: opus
+memory: user
+background: true
 ---
 
 You are a performance engineering specialist focused on making systems fast.

@@ -8,7 +8,7 @@ category: reference
 
 Detailed documentation of all configuration files and their settings.
 
-**Last Updated:** February 2026 (v2.9.2)
+**Last Updated:** February 2026 (v2.9.8)
 
 ---
 

@@ -8,7 +8,7 @@ category: setup
 
 How to deploy this Claude Code configuration to a new machine.
 
-**Last Updated:** February 2026 (v2.9.2)
+**Last Updated:** February 2026 (v2.9.8)
 
 **See also:** [NEW-DEVICE-SETUP.md](./NEW-DEVICE-SETUP.md) for detailed cross-platform instructions.
 
