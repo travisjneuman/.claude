@@ -35,7 +35,7 @@ EXCLUDE_SKILL_DIRS=(
 
 # ─── Count from filesystem ───────────────────────────────────────────
 
-SKILL_COUNT=$(find skills -name "SKILL.md" -not -path "skills/_shared/*" 2>/dev/null | wc -l | tr -d ' ')
+SKILL_COUNT=$(find skills -mindepth 2 -maxdepth 2 -name "SKILL.md" -not -path "skills/_shared/*" 2>/dev/null | wc -l | tr -d ' ')
 AGENT_COUNT=$(ls agents/*.md 2>/dev/null | grep -cv 'README\.md' || echo 0)
 REPO_COUNT=$(ls -d plugins/marketplaces/*/ 2>/dev/null | wc -l | tr -d ' ')
 
@@ -52,7 +52,7 @@ HOOK_COUNT=$(ls hooks/*.sh 2>/dev/null | wc -l | tr -d ' ')
 RULE_COUNT=$(find rules -name '*.md' -not -name 'README.md' 2>/dev/null | wc -l | tr -d ' ')
 TEMPLATE_COUNT=$(ls templates/ 2>/dev/null | grep -cv 'README\.md' || echo 0)
 SKILL_DIR_COUNT=$(find skills -mindepth 1 -maxdepth 1 -type d -not -name '_shared' 2>/dev/null | wc -l | tr -d ' ')
-CHECKLIST_COUNT=$(ls rules/checklists/*.md 2>/dev/null | grep -cv 'README\.md' || echo 0)
+CHECKLIST_COUNT=$(ls docs/reference/checklists/*.md 2>/dev/null | grep -cv 'README\.md' || echo 0)
 # MCP servers: count entries with "type": "stdio" in .mcp.json
 MCP_COUNT=$(grep -c '"type": "stdio"' .mcp.json 2>/dev/null || echo 0)
 
@@ -560,8 +560,7 @@ update_file "hooks/README.md"
 # Templates README
 update_file "templates/README.md"
 
-# Rules README
-update_file "rules/README.md"
+# Rules (directory now empty after audit moved files to docs/reference/)
 
 # Commands — list-skills and skill-finder get special handling
 # Health-check has a special "N+ files" pattern on the agents row

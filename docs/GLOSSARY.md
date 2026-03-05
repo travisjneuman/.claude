@@ -142,7 +142,7 @@ The process of preserving context between Claude Code sessions. The `session-sto
 
 ### Verification Template
 
-A checklist (`rules/checklists/verification-template.md`) used after completing any task to verify success. Covers code quality, constraint compliance, integration, and solution robustness.
+A checklist (`docs/reference/checklists/verification-template.md`) used after completing any task to verify success. Covers code quality, constraint compliance, integration, and solution robustness.
 
 ---
 

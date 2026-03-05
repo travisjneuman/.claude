@@ -2,6 +2,53 @@
 
 All notable changes to the Ultimate Claude Code Toolkit.
 
+## [2.9.4] - March 4, 2026
+
+### Deep Audit — Official Best Practices Alignment
+
+Comprehensive audit against official Claude Code documentation (code.claude.com/docs) across all 7 component types.
+
+#### Token Efficiency (66% reduction in always-loaded context)
+
+- **Emptied `rules/` directory** — Moved `verification-template.md` and `context-management.md` to `docs/reference/` for on-demand loading via auto-routing. Deleted informational-only `rules/README.md`. Always-loaded context reduced from 392 lines / 14.5KB to 131 lines / 7.1KB.
+- **Updated CLAUDE.md auto-routing paths** — All references now point to new on-demand locations.
+- **Bulk-updated 12+ files** with stale path references to moved files.
+
+#### Settings.json Compliance
+
+- **Fixed 32 deprecated Bash permission rules** — `Bash(git:*)` → `Bash(git *)` (colon syntax deprecated per official docs).
+- **Fixed 6 invalid SlashCommand rules** — `SlashCommand(/run-prompt:*)` → `Skill(run-prompt *)` format.
+- **Added JSON schema validation** — `$schema` field for IDE autocompletion and validation.
+
+#### Skills Audit (115 skills)
+
+- **100% frontmatter compliance** — All skills have required `name` and `description`.
+- **Fixed 3 non-standard fields** — `agent-teams` (`tools` → `allowed-tools`), `auto-claude` and `document-skills` (removed invalid `tags` field).
+- **Identified 32 skills over 500-line recommendation** — Documented for future optimization.
+
+#### Agents Audit (60 agents)
+
+- **100% compliance** — All agents have required `name` and `description` with valid `model` values.
+
+#### Hooks Audit
+
+- **Critical fix: `stop_hook_active` guard** — Added infinite loop prevention to `session-stop-summary.sh` Stop hook.
+- **Added `once: true`** to SessionStart hooks — Prevents redundant re-execution.
+- **Added `async: true`** to repo pull hook — Non-blocking background execution.
+
+#### Plugin/Marketplace Audit (101 repos, 2,209 plugins)
+
+- **High compliance overall** — 76 marketplaces with valid structure.
+- **Documented 21/106 hook files** missing `${CLAUDE_PLUGIN_ROOT}` (read-only external repos).
+
+#### Documentation
+
+- **Updated README** — Accurate counts (115 skills, 59 agents, 30 commands), version badge v2.9.4.
+- **Fixed `update-counts.sh`** — Skill count now uses top-level directories only (was counting nested sub-skills). Checklist path updated from deleted `rules/checklists/` to `docs/reference/checklists/`. Removed stale `rules/README.md` reference.
+- **Audit reports** archived in `cache/audit-*-report.md`.
+
+---
+
 ## [2.9.1] - February 28, 2026
 
 ### Post-Audit Fixes
@@ -745,7 +792,7 @@ Enhanced with **+230 lines** of anti-"AI slop" design guidance:
 - **Design Evaluation Rubric** - Score on 6 dimensions (target: 7+/10 on 3+)
 - **Context-Specific Aesthetics** - Tailor to project type (dev tools, editorial, SaaS, etc.)
 
-#### Solution Quality Verification (rules/checklists/verification-template.md)
+#### Solution Quality Verification (docs/reference/checklists/verification-template.md)
 
 Added **Solution Quality Verification** section:
 
@@ -793,7 +840,7 @@ The system now automatically detects context and activates appropriate resources
 - `CLAUDE.md` (+54 lines)
 - `commands/start-task.md` (+100 lines)
 - `rules/checklists/ui-visual-changes.md` (+230 lines)
-- `rules/checklists/verification-template.md` (+26 lines)
+- `docs/reference/checklists/verification-template.md` (+26 lines)
 
 **Created (8):**
 
@@ -892,7 +939,7 @@ Removed all Unix-specific hooks that were causing errors on Windows:
 
 Based on research into prompt engineering best practices:
 
-- **`rules/checklists/verification-template.md`** - Reusable verification checklist based on KERNEL "Easy to verify" principle
+- **`docs/reference/checklists/verification-template.md`** - Reusable verification checklist based on KERNEL "Easy to verify" principle
 - **Step 7 (Verify)** added to `/start-task` router between Execute and Memory Save
 - **"Task completion"** trigger added to CLAUDE.md "Load When Relevant" table
 

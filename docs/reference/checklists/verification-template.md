@@ -114,7 +114,7 @@ From research:
 ## Related Documentation
 
 - `~/.claude/CLAUDE.md` - Core rules and Anti-Patterns
-- `~/.claude/rules/checklists/` - Other checklists
+- `~/.claude/docs/reference/checklists/` - Other checklists
 - `~/.claude/templates/task-template.md` - Task planning template
 
 ---

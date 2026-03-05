@@ -607,4 +607,4 @@ console.log(`Average relevance: ${results.scores.answer_relevance}`);
 
 - **Skills:** `application-security` (prompt injection), `monitoring-observability` (LLM call tracing)
 - **Rules:** `docs/reference/stacks/react-typescript.md` (frontend patterns for chat UI)
-- **Rules:** `rules/checklists/verification-template.md` (eval checklist)
+- **Rules:** `docs/reference/checklists/verification-template.md` (eval checklist)
