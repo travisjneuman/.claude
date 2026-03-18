@@ -209,7 +209,7 @@ System prompt here...
 
 ### Plugin Marketplace Ecosystem
 
-This setup includes 101 marketplace repositories providing access to 6,600+ community skills. Key marketplaces for plugin development reference:
+This setup includes 101 marketplace repositories providing access to 6,900+ community skills. Key marketplaces for plugin development reference:
 
 | Repository                        | URL                                                  | Specialization                |
 | --------------------------------- | ---------------------------------------------------- | ----------------------------- |
@@ -232,7 +232,7 @@ tags: [category, domain]
 ---
 ```
 
-This installation has 119 local skills and 67 custom agents. Run `bash ~/.claude/scripts/regenerate-index.sh` to refresh the master index.
+This installation has 115 local skills and 67 custom agents. Run `bash ~/.claude/scripts/regenerate-index.sh` to refresh the master index.
 
 ### Agent Development
 
