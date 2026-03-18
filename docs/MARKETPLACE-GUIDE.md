@@ -1,12 +1,12 @@
 ---
 name: Marketplace Guide
-description: Browse, install, and manage 102 community plugin marketplaces with 6,900+ additional skills.
+description: Browse, install, and manage 103 community plugin marketplaces with 6,900+ additional skills.
 category: ecosystem
 ---
 
 # Marketplace Guide
 
-Complete reference for the 102 plugin marketplaces and how to use them.
+Complete reference for the 103 plugin marketplaces and how to use them.
 
 **Last Updated:** February 2026 (v2.10.1)
 
@@ -23,7 +23,7 @@ Complete reference for the 102 plugin marketplaces and how to use them.
 
 ---
 
-## Installed Marketplaces (102)
+## Installed Marketplaces (103)
 
 ### Official (Anthropic)
 
@@ -169,6 +169,8 @@ Complete reference for the 102 plugin marketplaces and how to use them.
 | `agentskills-agentskills`   | Agent Skills specification                | Official Agent Skills standard (11.4K stars)          |
 | `skillcreatorai-agent-skills` | 47 skills + universal installer         | "Homebrew for AI Agent Skills" (860 stars)            |
 | `francyjg-agent-skill-creator` | 2 meta-skills                          | Auto-create skills from docs/PDFs (303 stars)         |
+| `hardikpandya-stop-slop`      | AI writing quality skill               | Banned phrases, structure fixes, prose cleanup (1.4K stars) |
+| `pbakaus-impeccable`           | AI design language                     | Design patterns and language (10K+ stars)             |
 
 ### Context Engineering & Planning
 
@@ -323,4 +325,4 @@ All marketplaces are configured with `no_push` - read-only access.
 
 ---
 
-_102 marketplaces, 6,900+ skills, discovered proactively when domain expertise is needed._
+_103 marketplaces, 6,900+ skills, discovered proactively when domain expertise is needed._

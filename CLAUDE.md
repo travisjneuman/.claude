@@ -156,6 +156,7 @@ YOU MUST auto-load matching resources from the user's prompt — no slash comman
 | video, editing, production, footage | `skills/video-production` + `video-producer` agent |
 | audio, podcast, recording, mixing | `skills/audio-production` + `audio-engineer` agent |
 | graphic design, illustration, layout | `skills/graphic-design` + `graphic-designer` agent |
+| writing, copywriting, blog, article, prose, slop, natural writing | `Skill(content-repurposer)` + marketplace: `hardikpandya-stop-slop` |
 | code review, PR review | `deep-code-reviewer` agent |
 | explain code, walkthrough, codebase tour | `code-explainer` agent |
 | API integration, webhook, SDK wrapper, third-party | `api-integration-specialist` agent |

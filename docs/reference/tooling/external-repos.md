@@ -65,6 +65,7 @@ All external repos are located in `~/.claude/plugins/marketplaces/`:
 | gmickel-marketplace               | https://github.com/gmickel/gmickel-claude-marketplace.git                  |
 | gqy20-biology-plugins             | https://github.com/gqy20/cc_plugins.git                                    |
 | hashi-terraform-skills            | https://github.com/hashi-demo-lab/claude-skill-hcp-terraform.git           |
+| hardikpandya-stop-slop            | https://github.com/hardikpandya/stop-slop.git                              |
 | hashicorp-agent-skills            | https://github.com/hashicorp/agent-skills.git                              |
 | heilcheng-awesome-agent-skills    | https://github.com/heilcheng/awesome-agent-skills.git                      |
 | henkisdabro-marketplace           | https://github.com/henkisdabro/claudecode-marketplace.git                  |
@@ -143,7 +144,7 @@ All external repos are located in `~/.claude/plugins/marketplaces/`:
 **What gets pulled:**
 
 1. `~/.claude` - Parent repo (travisjneuman/.claude)
-2. `~/.claude/plugins/marketplaces/*` - All 102 marketplace repos
+2. `~/.claude/plugins/marketplaces/*` - All 103 marketplace repos
 3. Custom project directories (if configured) - your own repos
 4. Documentation counts updated automatically if any repos changed
 

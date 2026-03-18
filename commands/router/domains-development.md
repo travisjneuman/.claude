@@ -116,17 +116,25 @@ Load this file when development-related keywords detected.
 
 ## Marketplace Repos by Development Domain
 
-| Domain         | Marketplace Repos                                                                | Notes                          |
-| -------------- | -------------------------------------------------------------------------------- | ------------------------------ |
-| General dev    | davila7-templates (651), athola-night-market (125), madappgang-claude-code (110) | Broad coverage                 |
-| Full-stack     | buildwithclaude (43), wshobson-agents (129)                                      | Includes subagents + commands  |
-| Security       | trailofbits-skills (50)                                                          | Professional security auditing |
-| Terraform/IaC  | hashi-terraform-skills (4)                                                       | HashiCorp Cloud Platform       |
-| Infrastructure | diet103-infrastructure (5)                                                       | Infrastructure patterns        |
-| Elixir         | bradleygolden-elixir (4), georgeguimaraes-elixir (6)                             | Elixir/Phoenix                 |
-| Perl/CPAN      | kfly8-cpan-plugins (3)                                                           | Perl ecosystem                 |
-| Context eng.   | neolab-context-kit (11), muratcankoylan-agent-skills (19)                        | Agent/context patterns         |
-| Planning       | othmanadi-planning (12)                                                          | File-based planning            |
+| Domain          | Marketplace Repos                                                                | Notes                          |
+| --------------- | -------------------------------------------------------------------------------- | ------------------------------ |
+| General dev     | davila7-templates (651), athola-night-market (125), madappgang-claude-code (110), claude-code-plugins-plus-skills (1865) | Broad coverage |
+| Full-stack      | buildwithclaude (43), wshobson-agents (129), voltagent-subagents (126), voltagent-agent-skills (200), rohitg00-claude-code-toolkit (135 agents), EveryInc-compound (100+), giuseppe-developer-kit, interstellar-code-claud-skills (14 agents + 11 skills) | Agents + commands |
+| SDLC/Workflow   | scopecraft-command, danielscholl-sdlc, automazeio-ccpm, levnikolaevich-claude-code-skills, mhattingpete-skills, ykdojo-tips (45 tips), chriswiles-claude-code-showcase | Feature/bug/release workflows |
+| Security        | trailofbits-skills (50), trailofbits-skills-curated (27), kenryu42-safety-net, DustyWalker-marketplace (16 agents) | Professional security auditing |
+| DevOps/Infra    | hashi-terraform-skills (4), hashicorp-agent-skills (13), diet103-infrastructure (5), akin-ozer-devops (31), ahmedasmar-devops-skills (6), mrgoonie-claudekit-skills (40+) | K8s, Terraform, CI/CD, cloud |
+| Testing/Quality | karanb192-awesome-claude-skills (50+), lodetomasi-agents-claude-code (100 agents) | TDD, debugging, code review |
+| .NET/C#         | aaronontheweb-dotnet-skills (~30)                                                | Akka.NET, EF Core, ASP.NET |
+| Java/Spring     | sivalabs-marketplace                                                              | JVM ecosystem |
+| Rust            | actionbook-rust-skills (31+)                                                      | Meta-cognition, hook patterns |
+| Vue/Nuxt        | onmax-nuxt-skills (18)                                                            | Vue 3, Nuxt 4+, auto-maintained |
+| Elixir          | bradleygolden-elixir (4), georgeguimaraes-elixir (6)                              | Elixir/Phoenix |
+| Perl/CPAN       | kfly8-cpan-plugins (3)                                                            | Perl ecosystem |
+| Context eng.    | neolab-context-kit (11), muratcankoylan-agent-skills (19)                         | Agent/context patterns |
+| Planning        | othmanadi-planning (12)                                                           | File-based planning |
+| CLI/Enterprise  | brennercruvinel-CCPlugins (24 commands)                                            | Enterprise-grade CLI (2.7K stars) |
+| LSP/Tooling     | piebald-lsps                                                                      | Language Server Protocol |
+| General mkts    | gmickel-marketplace, devgom-marketplace, henkisdabro-marketplace, p47phoenix-plugins, sawyerhood-mart, numman-ali-openskills, numman-ali-skills, zai-coding-plugins, daymade-skills, sangrokjung-claude-forge, team-attention-plugins, ananddtyagi-marketplace, alirezarezvani-claude-skills | Mixed dev tools |
 
 Search for domain-specific marketplace skills:
 
