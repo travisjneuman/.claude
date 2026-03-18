@@ -151,7 +151,7 @@ Core Files:
   ✓ .mcp.json
 
 Submodules:
-  ✓ 101 marketplace repos configured
+  ✓ 102 marketplace repos configured
   ✓ All repos have no_push protection
 
 Resources:

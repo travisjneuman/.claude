@@ -399,3 +399,7 @@
 	path = plugins/marketplaces/skillcreatorai-awesome-agent-skills
 	url = https://github.com/skillcreatorai/Awesome-Agent-Skills.git
 	ignore = all
+[submodule "plugins/marketplaces/pbakaus-impeccable"]
+	path = plugins/marketplaces/pbakaus-impeccable
+	url = https://github.com/pbakaus/impeccable.git
+	ignore = all
