@@ -12,7 +12,7 @@ category: ecosystem
 
 ## Overview
 
-Plugins extend Claude Code with reusable skills, agents, commands, and hooks. This setup manages 102 marketplace repos containing 6,900+ community skills alongside 115 local skills. Marketplace repos are read-only references pulled from upstream, while local plugins are your own customizations tracked in your personal repo.
+Plugins extend Claude Code with reusable skills, agents, commands, and hooks. This setup manages 103 marketplace repos containing 6,900+ community skills alongside 115 local skills. Marketplace repos are read-only references pulled from upstream, while local plugins are your own customizations tracked in your personal repo.
 
 ---
 
@@ -42,7 +42,7 @@ plugins/
     │   └── plugins/           # Each subdirectory is one plugin
     ├── get-shit-done/
     ├── obra-superpowers/
-    └── ... (102 marketplace repos total)
+    └── ... (103 marketplace repos total)
 ```
 
 | Directory       | Purpose                                  | Git Tracked? |
@@ -134,7 +134,7 @@ claude doctor
 
 ## The Marketplace Ecosystem
 
-This setup aggregates 102 marketplace repos containing 6,900+ community-contributed skills across many domains.
+This setup aggregates 103 marketplace repos containing 6,900+ community-contributed skills across many domains.
 
 ### Notable Marketplaces
 
@@ -318,6 +318,6 @@ This keeps upstream updates accessible while preserving your customizations.
 
 - `~/.claude/CLAUDE.md` -- Core rules and plugin philosophy
 - `~/.claude/docs/MARKETPLACE-GUIDE.md` -- Marketplace browsing and discovery
-- `~/.claude/docs/reference/tooling/external-repos.md` -- Full list of 102 marketplace repos
+- `~/.claude/docs/reference/tooling/external-repos.md` -- Full list of 103 marketplace repos
 - `~/.claude/docs/reference/tooling/troubleshooting.md` -- General troubleshooting
 - `~/.claude/skills/README.md` -- Skills overview (115 local skills)

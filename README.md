@@ -17,7 +17,7 @@
 [![Skills](https://img.shields.io/badge/Skills-115-10b981?style=flat-square)](./skills/MASTER_INDEX.md)
 [![Agents](https://img.shields.io/badge/Agents-67-f59e0b?style=flat-square)](./agents/README.md)
 [![Commands](https://img.shields.io/badge/Commands-30-a855f7?style=flat-square)](./commands/README.md)
-[![Repos](https://img.shields.io/badge/Marketplace_Repos-102-3b82f6?style=flat-square)](./plugins/marketplaces/)
+[![Repos](https://img.shields.io/badge/Marketplace_Repos-103-3b82f6?style=flat-square)](./plugins/marketplaces/)
 [![Marketplace Skills](https://img.shields.io/badge/Marketplace_Skills-6900+-ec4899?style=flat-square)](./docs/MARKETPLACE-GUIDE.md)
 [![Hooks](https://img.shields.io/badge/Hooks-8-06b6d4?style=flat-square)](./hooks/README.md)
 [![Templates](https://img.shields.io/badge/Templates-17-84cc16?style=flat-square)](./templates/README.md)
@@ -31,7 +31,7 @@
 
 A drop-in configuration layer for [Claude Code](https://docs.anthropic.com/en/docs/claude-code) that transforms it from a capable AI assistant into an enterprise-grade development powerhouse.
 
-**One `git clone` gives you** 119 domain skills, 67 specialist agents, 102 community marketplaces with 6,900+ additional skills, 30 slash commands, 8 lifecycle hooks, and 12 MCP server configs — all auto-activating based on what you're working on. No manual configuration required.
+**One `git clone` gives you** 119 domain skills, 67 specialist agents, 103 community marketplaces with 6,900+ additional skills, 30 slash commands, 8 lifecycle hooks, and 12 MCP server configs — all auto-activating based on what you're working on. No manual configuration required.
 
 **How it works:** Describe what you want in plain language. The toolkit's dynamic router detects context from your prompt and loads the right skills, agents, rules, and checklists automatically. No slash commands needed (though they're available if you prefer).
 
@@ -82,7 +82,7 @@ That's it. The toolkit auto-activates from `~/.claude/` on every Claude Code ses
 | **[Skills](./skills/MASTER_INDEX.md)** | 119 | Domain expertise modules (React, security, DevOps, finance, etc.) |
 | **[Agents](./agents/README.md)** | 67 | Specialist subagents for focused tasks (code review, debugging, etc.) |
 | **[Commands](./commands/README.md)** | 30 | Slash commands for common workflows (`/commit`, `/review-code`, etc.) |
-| **[Marketplace Repos](./plugins/marketplaces/)** | 102 | Community skill repositories (6,900+ additional skills) |
+| **[Marketplace Repos](./plugins/marketplaces/)** | 103 | Community skill repositories (6,900+ additional skills) |
 | **[Hooks](./hooks/README.md)** | 8 | Lifecycle hooks (session start/stop, pre-commit, safety guards) |
 | **[Templates](./templates/README.md)** | 17 | Project scaffolding and task templates |
 | **[MCP Servers](./docs/MCP-SERVERS.md)** | 12 | Model Context Protocol server configurations |
@@ -116,7 +116,7 @@ See **[MASTER_INDEX.md](./skills/MASTER_INDEX.md)** for the full listing with de
 
 ### Dynamic Routing
 
-Every prompt flows through a routing system that loads the best-fit resources on-demand — drawing from 119 built-in skills, 67 agents, 3 rules + 10 checklists, and 6,900+ community marketplace skills across 102 repos:
+Every prompt flows through a routing system that loads the best-fit resources on-demand — drawing from 119 built-in skills, 67 agents, 3 rules + 10 checklists, and 6,900+ community marketplace skills across 103 repos:
 
 ```
  Your prompt
@@ -186,9 +186,9 @@ See **[hooks/README.md](./hooks/README.md)** for the full hook reference.
 ## 🔑 Key Features
 
 <details>
-<summary><strong>🏪 Marketplace — 102 repos, 6,900+ skills</strong></summary>
+<summary><strong>🏪 Marketplace — 103 repos, 6,900+ skills</strong></summary>
 
-The toolkit aggregates 102 community skill repositories as git submodules in `plugins/marketplaces/`. All are read-only (fetch but never push). Skills span security (Trail of Bits), full-stack development, scientific computing, SAP/enterprise, Elixir, Terraform, creative writing, and more. Some marketplace repos are **installed as plugins**, making their agents, commands, and skills fully active in the routing system alongside built-in resources. Non-installed repos contribute discoverable skills via keyword search.
+The toolkit aggregates 103 community skill repositories as git submodules in `plugins/marketplaces/`. All are read-only (fetch but never push). Skills span security (Trail of Bits), full-stack development, scientific computing, SAP/enterprise, Elixir, Terraform, creative writing, and more. Some marketplace repos are **installed as plugins**, making their agents, commands, and skills fully active in the routing system alongside built-in resources. Non-installed repos contribute discoverable skills via keyword search.
 
 ```bash
 # Search marketplace skills
