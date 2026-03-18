@@ -12,7 +12,7 @@ Load this file when creative/design keywords detected.
 | `brand`          | brand, identity, positioning, guidelines, brand voice, visual identity     |
 | `motion`         | animation, motion, micro-interaction, easing, transition, lottie, keyframe |
 | `ui`             | ui, user interface, component, layout, design system, wireframe            |
-| `writing`        | writing, copywriting, content, blog, article, copy, technical writing      |
+| `writing`        | writing, copywriting, content, blog, article, copy, technical writing, prose, slop, natural writing, human-like |
 | `documents`      | document, pdf, spreadsheet, presentation, pptx, xlsx, docx                 |
 
 ## Resource Mapping
@@ -37,6 +37,8 @@ Load this file when creative/design keywords detected.
 | Domain           | Marketplace Repos                      | Notes                                    |
 | ---------------- | -------------------------------------- | ---------------------------------------- |
 | Worldbuilding    | worldbuilding-skills (52)              | Creative worldbuilding, narrative design |
+| Writing quality  | hardikpandya-stop-slop (1)             | AI prose cleanup, banned phrases (1.4K stars) |
+| Design language  | pbakaus-impeccable                     | AI design language (10K+ stars)          |
 | General creative | davila7-templates, athola-night-market | Templates and patterns                   |
 
 ## Creative Process Notes

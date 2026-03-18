@@ -1,6 +1,6 @@
 {
-  "repoCount": 102,
-  "totalSkills": 6941,
+  "repoCount": 103,
+  "totalSkills": 6962,
   "repos": [
     {
       "name": "claude-code-plugins-plus-skills",
@@ -25,12 +25,17 @@
     {
       "name": "alirezarezvani-claude-skills",
       "displayName": "Alirezarezvani Claude Skills",
-      "skillCount": 205
+      "skillCount": 206
     },
     {
       "name": "claude-scientific-skills",
       "displayName": "Claude Scientific Skills",
-      "skillCount": 175
+      "skillCount": 176
+    },
+    {
+      "name": "buildwithclaude",
+      "displayName": "Buildwithclaude",
+      "skillCount": 159
     },
     {
       "name": "wshobson-agents",
@@ -38,19 +43,14 @@
       "skillCount": 146
     },
     {
-      "name": "buildwithclaude",
-      "displayName": "Buildwithclaude",
-      "skillCount": 145
+      "name": "athola-night-market",
+      "displayName": "Athola Night Market",
+      "skillCount": 131
     },
     {
       "name": "madappgang-claude-code",
       "displayName": "Madappgang Claude Code",
       "skillCount": 131
-    },
-    {
-      "name": "athola-night-market",
-      "displayName": "Athola Night Market",
-      "skillCount": 130
     },
     {
       "name": "levnikolaevich-claude-code-skills",
@@ -105,7 +105,7 @@
     {
       "name": "EveryInc-compound",
       "displayName": "EveryInc Compound",
-      "skillCount": 45
+      "skillCount": 46
     },
     {
       "name": "daymade-skills",
@@ -250,7 +250,7 @@
     {
       "name": "claude-mem",
       "displayName": "Claude Mem",
-      "skillCount": 7
+      "skillCount": 8
     },
     {
       "name": "ahmedasmar-devops-skills",
@@ -328,6 +328,11 @@
       "skillCount": 2
     },
     {
+      "name": "automazeio-ccpm",
+      "displayName": "Automazeio Ccpm",
+      "skillCount": 1
+    },
+    {
       "name": "danielscholl-sdlc",
       "displayName": "Danielscholl Sdlc",
       "skillCount": 1
@@ -335,6 +340,11 @@
     {
       "name": "francyjg-agent-skill-creator",
       "displayName": "Francyjg Agent Skill Creator",
+      "skillCount": 1
+    },
+    {
+      "name": "hardikpandya-stop-slop",
+      "displayName": "Hardikpandya Stop Slop",
       "skillCount": 1
     },
     {
@@ -360,11 +370,6 @@
     {
       "name": "auto-claude",
       "displayName": "Auto Claude",
-      "skillCount": 0
-    },
-    {
-      "name": "automazeio-ccpm",
-      "displayName": "Automazeio Ccpm",
       "skillCount": 0
     },
     {

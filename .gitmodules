@@ -403,3 +403,7 @@
 	path = plugins/marketplaces/pbakaus-impeccable
 	url = https://github.com/pbakaus/impeccable.git
 	ignore = all
+[submodule "plugins/marketplaces/hardikpandya-stop-slop"]
+	path = plugins/marketplaces/hardikpandya-stop-slop
+	url = https://github.com/hardikpandya/stop-slop.git
+	ignore = all

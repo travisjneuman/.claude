@@ -46,6 +46,21 @@ For creating skills from external documentation:
 | `tech-debt`     | tech debt, legacy, cleanup, deprecate     | `Skill(tech-debt-analyzer)`    | -                                   |
 | `accessibility` | accessibility, a11y, wcag, screen reader  | -                              | `accessibility-expert`              |
 
+## Marketplace Resources for Meta/Admin
+
+| Domain              | Marketplace Repos                                                    | Notes                          |
+| ------------------- | -------------------------------------------------------------------- | ------------------------------ |
+| Official Anthropic  | anthropic-agent-skills, claude-code-plugins, claude-plugins-official  | Core patterns and plugins      |
+| Skill creation      | skill-seekers, francyjg-agent-skill-creator, skillcreatorai-agent-skills (47) | Auto-generate skills from docs |
+| Autonomous coding   | auto-claude                                                           | Multi-agent dev with QA        |
+| Project management  | get-shit-done, taches-cc-resources                                    | GSD system, meta-prompting     |
+| Hooks/Reference     | disler-hooks-mastery, agentskills-agentskills (11.4K stars), shanraisshan-best-practice (6K stars) | Hook types, standards, reference |
+| Curated collections | awesome-claude-skills, skillsforge (29), obra-superpowers, superpowers-marketplace (558 stars), hesreallyhim-awesome (18.2K stars), travisvn-awesome, quemsah-awesome (3,979 repos), ccplugins-awesome, chat2anyllm-awesome-plugins, alvinunreal-awesome-claude, affaan-everything-claude, heilcheng-awesome-agent-skills (2.5K stars), libukai-awesome-agent-skills (2.3K stars), skillmatic-awesome-agent-skills, jayzeedesign-awesome-claude (16), skillcreatorai-awesome-agent-skills, abubakarsiddik31-claude-skills, kivilaid-marketplace (87), behisecc-awesome-claude-skills (100+), sickn33-antigravity-awesome-skills (932, 17.2K stars) | Browse for inspiration |
+| Memory/Context      | claude-mem                                                            | Persistent memory, semantic search |
+| Research            | mvanhorn-last30days-skill                                             | Last 30 days topic research    |
+| Expo (official)     | expo-skills (3 plugins)                                               | Official Expo team (815 stars) |
+| Vercel (official)   | vercel-agent-skills                                                   | Official Vercel Labs           |
+
 ## Exploration Tasks
 
 | Intent              | Keywords                             | Action                                  |

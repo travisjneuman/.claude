@@ -22,14 +22,15 @@ Load this file when scientific/research keywords detected.
 | Domain         | Marketplace Repos                                   | Notes                                  |
 | -------------- | --------------------------------------------------- | -------------------------------------- |
 | All scientific | `claude-scientific-skills` (144)                    | Broad scientific coverage              |
-| life sciences  | `anthropic-life-sciences` (6)                       | Anthropic official life sciences       |
-| biology        | `gqy20-biology-plugins`, `claude-scientific-skills` | Evolutionary biology, genomics         |
-| bioinformatics | `claude-scientific-skills`                          | Sequence analysis, BLAST, genomics     |
-| chemistry      | `claude-scientific-skills`                          | Molecular modeling, drug discovery     |
-| proteomics     | `claude-scientific-skills`                          | Protein analysis, structure prediction |
-| clinical       | `claude-scientific-skills`                          | Clinical trials, medical data          |
-| physics        | `claude-scientific-skills`                          | Simulations, quantum computing         |
-| astronomy      | `claude-scientific-skills`                          | Celestial data, telescope analysis     |
+| Life sciences  | `anthropic-life-sciences` (6)                       | Anthropic official life sciences       |
+| Biology        | `gqy20-biology-plugins`, `claude-scientific-skills` | Evolutionary biology, genomics         |
+| Bioinformatics | `claude-scientific-skills`                          | Sequence analysis, BLAST, genomics     |
+| Chemistry      | `claude-scientific-skills`                          | Molecular modeling, drug discovery     |
+| Proteomics     | `claude-scientific-skills`                          | Protein analysis, structure prediction |
+| Clinical       | `claude-scientific-skills`                          | Clinical trials, medical data          |
+| Physics        | `claude-scientific-skills`                          | Simulations, quantum computing         |
+| Astronomy      | `claude-scientific-skills`                          | Celestial data, telescope analysis     |
+| Quant finance  | `quant-equity-research`                             | Equity analysis, financial modeling    |
 
 Search for specific scientific skills:
 

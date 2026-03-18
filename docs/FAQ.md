@@ -52,7 +52,7 @@ Yes. Create a `.claude/skills/` directory in your project root with project-spec
 
 ### What is the marketplace?
 
-The marketplace is a collection of 102 community-maintained GitHub repositories containing over 6,900+ additional skills, agents, and commands. They're cloned into `~/.claude/plugins/marketplaces/` and configured as read-only (you can fetch updates but can't accidentally push changes).
+The marketplace is a collection of 103 community-maintained GitHub repositories containing over 6,900+ additional skills, agents, and commands. They're cloned into `~/.claude/plugins/marketplaces/` and configured as read-only (you can fetch updates but can't accidentally push changes).
 
 ### How do I find marketplace skills?
 
@@ -68,7 +68,7 @@ Marketplace repos are community-contributed and not audited by this toolkit. The
 
 ### How do I update marketplace repos?
 
-Run `~/.claude/_pull-all-repos.sh` or use `/pull-repos` in Claude Code. This fetches the latest from all 102 upstream repositories, fixes detached HEAD states, and updates documentation counts.
+Run `~/.claude/_pull-all-repos.sh` or use `/pull-repos` in Claude Code. This fetches the latest from all 103 upstream repositories, fixes detached HEAD states, and updates documentation counts.
 
 ---
 
