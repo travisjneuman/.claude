@@ -1,16 +1,16 @@
 {
   "repoCount": 101,
-  "totalSkills": 6602,
+  "totalSkills": 6920,
   "repos": [
     {
       "name": "claude-code-plugins-plus-skills",
       "displayName": "Claude Code Plugins Plus Skills",
-      "skillCount": 1865
+      "skillCount": 1917
     },
     {
       "name": "sickn33-antigravity-awesome-skills",
       "displayName": "Sickn33 Antigravity Awesome Skills",
-      "skillCount": 977
+      "skillCount": 972
     },
     {
       "name": "awesome-claude-skills",
@@ -20,12 +20,17 @@
     {
       "name": "davila7-templates",
       "displayName": "Davila7 Templates",
-      "skillCount": 705
+      "skillCount": 722
+    },
+    {
+      "name": "alirezarezvani-claude-skills",
+      "displayName": "Alirezarezvani Claude Skills",
+      "skillCount": 205
     },
     {
       "name": "claude-scientific-skills",
       "displayName": "Claude Scientific Skills",
-      "skillCount": 173
+      "skillCount": 175
     },
     {
       "name": "wshobson-agents",
@@ -33,39 +38,39 @@
       "skillCount": 146
     },
     {
+      "name": "buildwithclaude",
+      "displayName": "Buildwithclaude",
+      "skillCount": 145
+    },
+    {
       "name": "madappgang-claude-code",
       "displayName": "Madappgang Claude Code",
       "skillCount": 131
     },
     {
-      "name": "buildwithclaude",
-      "displayName": "Buildwithclaude",
-      "skillCount": 124
-    },
-    {
       "name": "athola-night-market",
       "displayName": "Athola Night Market",
-      "skillCount": 120
-    },
-    {
-      "name": "giuseppe-developer-kit",
-      "displayName": "Giuseppe Developer Kit",
-      "skillCount": 110
+      "skillCount": 130
     },
     {
       "name": "levnikolaevich-claude-code-skills",
       "displayName": "Levnikolaevich Claude Code Skills",
+      "skillCount": 125
+    },
+    {
+      "name": "giuseppe-developer-kit",
+      "displayName": "Giuseppe Developer Kit",
+      "skillCount": 112
+    },
+    {
+      "name": "affaan-everything-claude",
+      "displayName": "Affaan Everything Claude",
       "skillCount": 108
     },
     {
       "name": "kivilaid-marketplace",
       "displayName": "Kivilaid Marketplace",
       "skillCount": 104
-    },
-    {
-      "name": "alirezarezvani-claude-skills",
-      "displayName": "Alirezarezvani Claude Skills",
-      "skillCount": 87
     },
     {
       "name": "manutej-luxor-marketplace",
@@ -88,11 +93,6 @@
       "skillCount": 60
     },
     {
-      "name": "affaan-everything-claude",
-      "displayName": "Affaan Everything Claude",
-      "skillCount": 58
-    },
-    {
       "name": "worldbuilding-skills",
       "displayName": "Worldbuilding Skills",
       "skillCount": 52
@@ -100,12 +100,17 @@
     {
       "name": "skillcreatorai-agent-skills",
       "displayName": "Skillcreatorai Agent Skills",
-      "skillCount": 47
+      "skillCount": 48
+    },
+    {
+      "name": "EveryInc-compound",
+      "displayName": "EveryInc Compound",
+      "skillCount": 45
     },
     {
       "name": "daymade-skills",
       "displayName": "Daymade Skills",
-      "skillCount": 41
+      "skillCount": 43
     },
     {
       "name": "actionbook-rust-skills",
@@ -148,19 +153,14 @@
       "skillCount": 27
     },
     {
+      "name": "sangrokjung-claude-forge",
+      "displayName": "Sangrokjung Claude Forge",
+      "skillCount": 24
+    },
+    {
       "name": "gmickel-marketplace",
       "displayName": "Gmickel Marketplace",
       "skillCount": 23
-    },
-    {
-      "name": "sangrokjung-claude-forge",
-      "displayName": "Sangrokjung Claude Forge",
-      "skillCount": 23
-    },
-    {
-      "name": "EveryInc-compound",
-      "displayName": "EveryInc Compound",
-      "skillCount": 21
     },
     {
       "name": "henkisdabro-marketplace",
@@ -168,13 +168,13 @@
       "skillCount": 21
     },
     {
-      "name": "mhattingpete-skills",
-      "displayName": "Mhattingpete Skills",
-      "skillCount": 18
-    },
-    {
       "name": "onmax-nuxt-skills",
       "displayName": "Onmax Nuxt Skills",
+      "skillCount": 19
+    },
+    {
+      "name": "mhattingpete-skills",
+      "displayName": "Mhattingpete Skills",
       "skillCount": 18
     },
     {
@@ -183,19 +183,19 @@
       "skillCount": 17
     },
     {
-      "name": "jayzeedesign-awesome-claude",
-      "displayName": "Jayzeedesign Awesome Claude",
-      "skillCount": 16
-    },
-    {
       "name": "team-attention-plugins",
       "displayName": "Team Attention Plugins",
-      "skillCount": 16
+      "skillCount": 17
     },
     {
       "name": "claude-plugins-official",
       "displayName": "Claude Plugins Official",
-      "skillCount": 15
+      "skillCount": 16
+    },
+    {
+      "name": "jayzeedesign-awesome-claude",
+      "displayName": "Jayzeedesign Awesome Claude",
+      "skillCount": 16
     },
     {
       "name": "ananddtyagi-marketplace",
@@ -263,14 +263,14 @@
       "skillCount": 6
     },
     {
-      "name": "ykdojo-tips",
-      "displayName": "Ykdojo Tips",
+      "name": "libukai-awesome-agent-skills",
+      "displayName": "Libukai Awesome Agent Skills",
       "skillCount": 6
     },
     {
-      "name": "libukai-awesome-agent-skills",
-      "displayName": "Libukai Awesome Agent Skills",
-      "skillCount": 5
+      "name": "ykdojo-tips",
+      "displayName": "Ykdojo Tips",
+      "skillCount": 6
     },
     {
       "name": "numman-ali-skills",
@@ -310,7 +310,7 @@
     {
       "name": "mvanhorn-last30days-skill",
       "displayName": "Mvanhorn Last30days Skill",
-      "skillCount": 2
+      "skillCount": 3
     },
     {
       "name": "sawyerhood-mart",
@@ -321,6 +321,11 @@
       "name": "zai-coding-plugins",
       "displayName": "Zai Coding Plugins",
       "skillCount": 2
+    },
+    {
+      "name": "danielscholl-sdlc",
+      "displayName": "Danielscholl Sdlc",
+      "skillCount": 1
     },
     {
       "name": "francyjg-agent-skill-creator",
@@ -380,11 +385,6 @@
     {
       "name": "chriswiles-claude-code-showcase",
       "displayName": "Chriswiles Claude Code Showcase",
-      "skillCount": 0
-    },
-    {
-      "name": "danielscholl-sdlc",
-      "displayName": "Danielscholl Sdlc",
       "skillCount": 0
     },
     {

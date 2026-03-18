@@ -197,12 +197,16 @@
       }
     ]
   },
+  "statusLine": {
+    "type": "command",
+    "command": "node -e \"process.env.HOOK_NAME='statusline.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\""
+  },
   "enabledPlugins": {
     "agent-sdk-dev@claude-code-plugins": true,
     "pr-review-toolkit@claude-code-plugins": true,
     "commit-commands@claude-code-plugins": true,
     "feature-dev@claude-code-plugins": true,
-    "security-guidance@claude-code-plugins": true,
+    "security-guidance@claude-code-plugins": false,
     "code-review@claude-code-plugins": true,
     "explanatory-output-style@claude-code-plugins": false,
     "learning-output-style@claude-code-plugins": false,
@@ -215,12 +219,9 @@
     "plugin-dev@claude-code-plugins": true,
     "ralph-wiggum@claude-code-plugins": false
   },
-  "statusLine": {
-    "type": "command",
-    "command": "node -e \"process.env.HOOK_NAME='statusline.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\""
-  },
   "outputStyle": "default",
   "spinnerTipsEnabled": false,
   "alwaysThinkingEnabled": false,
+  "effortLevel": "high",
   "skipDangerousModePermissionPrompt": true
 }
