@@ -1,6 +1,6 @@
 {
-  "repoCount": 101,
-  "totalSkills": 6920,
+  "repoCount": 102,
+  "totalSkills": 6941,
   "repos": [
     {
       "name": "claude-code-plugins-plus-skills",
@@ -165,6 +165,11 @@
     {
       "name": "henkisdabro-marketplace",
       "displayName": "Henkisdabro Marketplace",
+      "skillCount": 21
+    },
+    {
+      "name": "pbakaus-impeccable",
+      "displayName": "Pbakaus Impeccable",
       "skillCount": 21
     },
     {
