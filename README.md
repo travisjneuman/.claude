@@ -14,7 +14,7 @@
 [![License](https://img.shields.io/badge/MIT-blue?style=flat-square&logo=opensourceinitiative&logoColor=white)](./LICENSE)
 [![Use Template](https://img.shields.io/badge/Use_This_Template-2ea44f?style=flat-square&logo=github&logoColor=white)](https://github.com/travisjneuman/.claude/generate)
 
-[![Skills](https://img.shields.io/badge/Skills-115-10b981?style=flat-square)](./skills/MASTER_INDEX.md)
+[![Skills](https://img.shields.io/badge/Skills-119-10b981?style=flat-square)](./skills/MASTER_INDEX.md)
 [![Agents](https://img.shields.io/badge/Agents-67-f59e0b?style=flat-square)](./agents/README.md)
 [![Commands](https://img.shields.io/badge/Commands-30-a855f7?style=flat-square)](./commands/README.md)
 [![Repos](https://img.shields.io/badge/Marketplace_Repos-103-3b82f6?style=flat-square)](./plugins/marketplaces/)

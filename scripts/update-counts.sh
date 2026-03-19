@@ -37,17 +37,17 @@ EXCLUDE_SKILL_DIRS=(
 
 # ─── Count from filesystem ───────────────────────────────────────────
 
-SKILL_COUNT=$(find skills -mindepth 2 -maxdepth 2 -name "SKILL.md" -not -path "skills/_shared/*" 2>/dev/null | wc -l | tr -d ' ')
-AGENT_COUNT=$(ls agents/*.md 2>/dev/null | grep -cv 'README\.md' || echo 0)
-REPO_COUNT=$(ls -d plugins/marketplaces/*/ 2>/dev/null | wc -l | tr -d ' ')
-
-# Build find exclusion arguments from EXCLUDE_SKILL_DIRS
+# Build find exclusion arguments from EXCLUDE_SKILL_DIRS (used for both local and marketplace counts)
 FIND_EXCLUDES=()
 for dir in "${EXCLUDE_SKILL_DIRS[@]}"; do
   FIND_EXCLUDES+=(-not -path "*/$dir/*")
 done
 # Also exclude all dot-directories (e.g., .cursor/, .vscode/) — matches Node.js counter behavior
 FIND_EXCLUDES+=(-not -path "*/\.*/*")
+
+SKILL_COUNT=$(find skills -mindepth 2 -name "SKILL.md" -not -path "skills/_shared/*" "${FIND_EXCLUDES[@]}" 2>/dev/null | wc -l | tr -d ' ')
+AGENT_COUNT=$(ls agents/*.md 2>/dev/null | grep -cv 'README\.md' || echo 0)
+REPO_COUNT=$(ls -d plugins/marketplaces/*/ 2>/dev/null | wc -l | tr -d ' ')
 MARKET_SKILL_COUNT=$(find plugins/marketplaces -name "SKILL.md" "${FIND_EXCLUDES[@]}" 2>/dev/null | wc -l | tr -d ' ')
 COMMAND_COUNT=$(ls commands/*.md 2>/dev/null | grep -cv 'README\.md' || echo 0)
 HOOK_COUNT=$(ls hooks/*.sh 2>/dev/null | wc -l | tr -d ' ')
