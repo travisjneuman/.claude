@@ -31,7 +31,7 @@
 
 A drop-in configuration layer for [Claude Code](https://docs.anthropic.com/en/docs/claude-code) that transforms it from a capable AI assistant into an enterprise-grade development powerhouse.
 
-**One `git clone` gives you** 119 domain skills, 67 specialist agents, 103 community marketplaces with 6,900+ additional skills, 30 slash commands, 8 lifecycle hooks, and 12 MCP server configs — all auto-activating based on what you're working on. No manual configuration required.
+**One `git clone` gives you** 115 domain skills, 67 specialist agents, 103 community marketplaces with 6,900+ additional skills, 30 slash commands, 8 lifecycle hooks, and 12 MCP server configs — all auto-activating based on what you're working on. No manual configuration required.
 
 **How it works:** Describe what you want in plain language. The toolkit's dynamic router detects context from your prompt and loads the right skills, agents, rules, and checklists automatically. No slash commands needed (though they're available if you prefer).
 
@@ -79,7 +79,7 @@ That's it. The toolkit auto-activates from `~/.claude/` on every Claude Code ses
 
 | Component | Count | Description |
 |-----------|-------|-------------|
-| **[Skills](./skills/MASTER_INDEX.md)** | 119 | Domain expertise modules (React, security, DevOps, finance, etc.) |
+| **[Skills](./skills/MASTER_INDEX.md)** | 115 | Domain expertise modules (React, security, DevOps, finance, etc.) |
 | **[Agents](./agents/README.md)** | 67 | Specialist subagents for focused tasks (code review, debugging, etc.) |
 | **[Commands](./commands/README.md)** | 30 | Slash commands for common workflows (`/commit`, `/review-code`, etc.) |
 | **[Marketplace Repos](./plugins/marketplaces/)** | 103 | Community skill repositories (6,900+ additional skills) |
@@ -116,7 +116,7 @@ See **[MASTER_INDEX.md](./skills/MASTER_INDEX.md)** for the full listing with de
 
 ### Dynamic Routing
 
-Every prompt flows through a routing system that loads the best-fit resources on-demand — drawing from 119 built-in skills, 67 agents, 3 rules + 10 checklists, and 6,900+ community marketplace skills across 103 repos:
+Every prompt flows through a routing system that loads the best-fit resources on-demand — drawing from 115 built-in skills, 67 agents, 3 rules + 10 checklists, and 6,900+ community marketplace skills across 103 repos:
 
 ```
  Your prompt
@@ -131,7 +131,7 @@ Every prompt flows through a routing system that loads the best-fit resources on
    ▼        ▼        ▼               ▼
 ┌──────┐ ┌──────┐ ┌──────┐ ┌──────────────┐
 │Skills│ │Rules │ │Agents│ │ Marketplace  │
-│(119) │ │& Chk │ │ (67)│ │  101 repos   │
+│(115) │ │& Chk │ │ (67)│ │  103 repos   │
 │      │ │      │ │      │ │  6,900+ more │
 └──────┘ └──────┘ └──────┘ └──────────────┘
 ```
@@ -140,18 +140,19 @@ Every prompt flows through a routing system that loads the best-fit resources on
 
 ### Auto-Routing Table (from CLAUDE.md)
 
+CLAUDE.md routes to **docs and checklists** on keyword match. Skills and agents auto-match from their descriptions — no explicit routing needed.
+
 | Your prompt mentions... | Toolkit loads... |
 |------------------------|------------------|
-| React, TypeScript | React/TS stack guide + React skills |
-| Security, OWASP, auth | Security checklist + auth patterns |
-| Deploy, CI/CD | Deployment workflow + DevOps skill |
-| Database, schema | Database design checklist |
-| Performance, optimize | Performance checklist |
+| React, TypeScript | React/TS stack guide |
+| Security, OWASP | Security hardening checklist |
+| Deploy, CI/CD, Docker | Deployment workflow |
+| Database, schema, SQL | Database design checklist |
+| Performance, speed | Performance optimization checklist |
 | UI, visual, CSS | UI/visual changes checklist |
-| Test, testing | Verification template + test specialist |
 | Research, investigate | Research methodology workflow |
-| Any specialized domain | Best-fit skill from MASTER_INDEX + marketplace (6,900+ skills) |
-| Installed plugins | Active agents, commands, and skills from community repos |
+| Monitoring, alerting | Monitoring & alerting design checklist |
+| Any specialized domain | Best-fit skill + agent auto-matched, marketplace (6,900+) |
 
 ### Hook Lifecycle
 
@@ -343,15 +344,15 @@ See **[docs/NEW-DEVICE-SETUP.md](./docs/NEW-DEVICE-SETUP.md)** for the full walk
 
 ---
 
-## 🆕 What's New in v2.8.0
+## 🆕 What's New
 
-Released February 11, 2026.
+**March 2026 — Token optimization + marketplace routing overhaul**
 
-- **P0 fix:** Resolved invalid JSON in `settings.json` that caused auto-compact and hook failures on Opus 4.6
-- **Hook registration:** Registered missing hooks (`pre-commit-counts.sh`, `secret-scan.sh`)
-- **Token optimization:** Removed redundant CLAUDE.md sections, consolidated bash permissions (20 entries → 2 wildcards)
-- **Cross-platform fix:** Hook runner now prefers Git Bash on Windows to avoid WSL drive mount errors
-- **Streamlined commands:** `start-task.md` reduced from 296 → 156 lines
+- **Marketplace routing:** All 103 marketplace repos now surface naturally by domain — routing coverage went from 23% to 100%
+- **CLAUDE.md condensed:** Auto-routing table reduced from 72 to 29 rows (docs-only — skills and agents auto-match from descriptions), saving ~600 tokens per conversation
+- **start-task trimmed:** 156 → 82 lines, removed duplication with CLAUDE.md
+- **New marketplace:** Added `hardikpandya/stop-slop` for AI prose quality (1.4K stars)
+- **8 orphaned docs routed:** monitoring, mobile deploy, django-fastapi, context management, and more now auto-load on keyword match
 
 See **[CHANGELOG.md](./CHANGELOG.md)** for the full history.
 
@@ -373,7 +374,7 @@ See **[CHANGELOG.md](./CHANGELOG.md)** for the full history.
 | [MCP Servers](./docs/MCP-SERVERS.md) | MCP server reference |
 | [Configuration](./docs/CONFIGURATION.md) | Full settings.json reference |
 | [Folder Structure](./docs/FOLDER-STRUCTURE.md) | Directory layout and purpose |
-| [Skills Index](./skills/MASTER_INDEX.md) | All 119 skills with descriptions |
+| [Skills Index](./skills/MASTER_INDEX.md) | All 115 skills with descriptions |
 | [Agents Index](./agents/README.md) | All 67 agents with descriptions |
 
 ---
