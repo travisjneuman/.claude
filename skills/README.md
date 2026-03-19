@@ -31,7 +31,7 @@ Comprehensive skills for Claude Code - 119 skills covering all development domai
 | Personal & Lifestyle   | 4      | Travel, Career, Recipe, Podcast                  |
 | Marketplace            | 7,400+ | From 103 plugin repositories                      |
 
-**Local: 115 unique skills | Marketplace: 6,900+ additional skills**
+**Local: 119 unique skills | Marketplace: 6,900+ additional skills**
 
 ---
 
