@@ -134,7 +134,6 @@ Load this file when development-related keywords detected.
 | Planning        | othmanadi-planning (12)                                                           | File-based planning |
 | CLI/Enterprise  | brennercruvinel-CCPlugins (24 commands)                                            | Enterprise-grade CLI (2.7K stars) |
 | LSP/Tooling     | piebald-lsps                                                                      | Language Server Protocol |
-| General mkts    | gmickel-marketplace, devgom-marketplace, henkisdabro-marketplace, p47phoenix-plugins, sawyerhood-mart, numman-ali-openskills, numman-ali-skills, zai-coding-plugins, daymade-skills, sangrokjung-claude-forge, team-attention-plugins, ananddtyagi-marketplace, alirezarezvani-claude-skills | Mixed dev tools |
 
 Search for domain-specific marketplace skills:
 
