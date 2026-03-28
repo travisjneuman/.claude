@@ -8,18 +8,19 @@
 
 <br/>
 
-[![v2.10.1](https://img.shields.io/badge/v2.10.1-6366f1?style=flat-square&logo=semver&logoColor=white)](./CHANGELOG.md)
+[![v2.11.0](https://img.shields.io/badge/v2.11.0-6366f1?style=flat-square&logo=semver&logoColor=white)](./CHANGELOG.md)
 [![Platform](https://img.shields.io/badge/macOS_·_Linux_·_Windows-334155?style=flat-square&logo=apple&logoColor=white)](./docs/SETUP-GUIDE.md)
 [![Website](https://img.shields.io/badge/claude.travisjneuman.com-818cf8?style=flat-square&logo=cloudflare&logoColor=white)](https://claude.travisjneuman.com)
 [![License](https://img.shields.io/badge/MIT-blue?style=flat-square&logo=opensourceinitiative&logoColor=white)](./LICENSE)
 [![Use Template](https://img.shields.io/badge/Use_This_Template-2ea44f?style=flat-square&logo=github&logoColor=white)](https://github.com/travisjneuman/.claude/generate)
 
-[![Skills](https://img.shields.io/badge/Skills-119-10b981?style=flat-square)](./skills/MASTER_INDEX.md)
-[![Agents](https://img.shields.io/badge/Agents-67-f59e0b?style=flat-square)](./agents/README.md)
-[![Commands](https://img.shields.io/badge/Commands-30-a855f7?style=flat-square)](./commands/README.md)
-[![Repos](https://img.shields.io/badge/Marketplace_Repos-103-3b82f6?style=flat-square)](./plugins/marketplaces/)
+[![Skills](https://img.shields.io/badge/Skills-123-10b981?style=flat-square)](./skills/MASTER_INDEX.md)
+[![Agents](https://img.shields.io/badge/Agents-86-f59e0b?style=flat-square)](./agents/README.md)
+[![Commands](https://img.shields.io/badge/Commands-94-a855f7?style=flat-square)](./commands/README.md)
+[![GSD](https://img.shields.io/badge/GSD-v1.29-ef4444?style=flat-square)](./docs/GSD-TUTORIAL.md)
+[![Repos](https://img.shields.io/badge/Marketplace_Repos-108-3b82f6?style=flat-square)](./plugins/marketplaces/)
 [![Marketplace Skills](https://img.shields.io/badge/Marketplace_Skills-6900+-ec4899?style=flat-square)](./docs/MARKETPLACE-GUIDE.md)
-[![Hooks](https://img.shields.io/badge/Hooks-8-06b6d4?style=flat-square)](./hooks/README.md)
+[![Hooks](https://img.shields.io/badge/Hooks-9-06b6d4?style=flat-square)](./hooks/README.md)
 [![Templates](https://img.shields.io/badge/Templates-17-84cc16?style=flat-square)](./templates/README.md)
 [![MCP](https://img.shields.io/badge/MCP_Servers-12-f97316?style=flat-square)](./docs/MCP-SERVERS.md)
 
@@ -31,7 +32,7 @@
 
 A drop-in configuration layer for [Claude Code](https://docs.anthropic.com/en/docs/claude-code) that transforms it from a capable AI assistant into an enterprise-grade development powerhouse.
 
-**One `git clone` gives you** 115 domain skills, 67 specialist agents, 103 community marketplaces with 6,900+ additional skills, 30 slash commands, 8 lifecycle hooks, and 12 MCP server configs — all auto-activating based on what you're working on. No manual configuration required.
+**One `git clone` gives you** 123 domain skills, 86 specialist agents, 108 community marketplaces with 6,900+ additional skills, 94 slash commands, 9 lifecycle hooks, 12 MCP server configs, and the **[GSD (Get Shit Done)](./docs/GSD-TUTORIAL.md)** project management framework — all auto-activating based on what you're working on. No manual configuration required.
 
 **How it works:** Describe what you want in plain language. The toolkit's dynamic router detects context from your prompt and loads the right skills, agents, rules, and checklists automatically. No slash commands needed (though they're available if you prefer).
 
@@ -69,6 +70,9 @@ claude
 
 # Run diagnostics
 /health-check
+
+# Start a structured project with GSD (flagship workflow tool)
+/gsd:new-project
 ```
 
 That's it. The toolkit auto-activates from `~/.claude/` on every Claude Code session.
@@ -79,14 +83,15 @@ That's it. The toolkit auto-activates from `~/.claude/` on every Claude Code ses
 
 | Component | Count | Description |
 |-----------|-------|-------------|
-| **[Skills](./skills/MASTER_INDEX.md)** | 115 | Domain expertise modules (React, security, DevOps, finance, etc.) |
-| **[Agents](./agents/README.md)** | 67 | Specialist subagents for focused tasks (code review, debugging, etc.) |
-| **[Commands](./commands/README.md)** | 30 | Slash commands for common workflows (`/commit`, `/review-code`, etc.) |
-| **[Marketplace Repos](./plugins/marketplaces/)** | 103 | Community skill repositories (6,900+ additional skills) |
-| **[Hooks](./hooks/README.md)** | 8 | Lifecycle hooks (session start/stop, pre-commit, safety guards) |
+| **[GSD Framework](./docs/GSD-TUTORIAL.md)** | v1.29 | Multi-phase project management with 57 commands — the flagship workflow tool |
+| **[Skills](./skills/MASTER_INDEX.md)** | 123 | Domain expertise modules (React, security, DevOps, finance, etc.) |
+| **[Agents](./agents/README.md)** | 86 | Specialist subagents for focused tasks (code review, debugging, etc.) |
+| **[Commands](./commands/README.md)** | 94 | Slash commands: 30 base + 57 GSD + 7 router |
+| **[Marketplace Repos](./plugins/marketplaces/)** | 108 | Community skill repositories (6,900+ additional skills) |
+| **[Hooks](./hooks/README.md)** | 9 | Lifecycle hooks (session start/stop, pre-commit, safety guards) |
 | **[Templates](./templates/README.md)** | 17 | Project scaffolding and task templates |
 | **[MCP Servers](./docs/MCP-SERVERS.md)** | 12 | Model Context Protocol server configurations |
-| **[Rules](./rules/)** | 3 | Always-load coding guardrails (TypeScript, Python, API) |
+| **[Rules](./rules/)** | 9 | Stack-specific coding guardrails (TypeScript, Python, Go, Rust, etc.) |
 
 <details>
 <summary><strong>📋 Skills by Category</strong></summary>
@@ -104,6 +109,12 @@ That's it. The toolkit auto-activates from `~/.claude/` on every Claude Code ses
 | **Creative** | `brand-identity`, `graphic-design`, `video-production`, `audio-production`, `ui-animation`, `ui-research` |
 | **Productivity** | `codebase-documenter`, `document-skills`, `content-repurposer`, `status-report-generator`, `core-workflow` |
 | **Specialized** | `game-development`, `i18n-localization`, `seo-analytics-auditor`, `email-systems`, `payment-integration`, `product-analytics`, `growth-engineering`, `monetization-strategy` |
+| **Blockchain & Web3** | `blockchain-web3` (Solidity, DeFi, NFTs, Hardhat/Foundry) |
+| **Data Engineering** | `data-engineering` (ETL, Airflow, dbt, Kafka, BigQuery/Snowflake) |
+| **Edge & IoT** | `edge-computing`, `embedded-iot` (Cloudflare Workers, ESP32, FreeRTOS) |
+| **XR & Spatial** | `ar-vr-xr` (Unity XR, WebXR, ARKit, Vision Pro) |
+| **Compliance** | `compliance-engineering` (SOC2, HIPAA, GDPR, PCI-DSS) |
+| **Developer Tools** | `devex-sdk-design`, `low-code-platforms` (SDK design, Retool, Supabase, n8n) |
 | **Non-Tech** | `travel-planner`, `event-planner`, `recipe-card-creator`, `health-wellness`, `career-path-planner`, `real-estate-analyzer` |
 
 See **[MASTER_INDEX.md](./skills/MASTER_INDEX.md)** for the full listing with descriptions.
@@ -116,7 +127,7 @@ See **[MASTER_INDEX.md](./skills/MASTER_INDEX.md)** for the full listing with de
 
 ### Dynamic Routing
 
-Every prompt flows through a routing system that loads the best-fit resources on-demand — drawing from 115 built-in skills, 67 agents, 3 rules + 10 checklists, and 6,900+ community marketplace skills across 103 repos:
+Every prompt flows through a routing system that loads the best-fit resources on-demand — drawing from 123 built-in skills, 86 agents, 9 rules + 10 checklists, the GSD framework (57 commands), and 6,900+ community marketplace skills across 108 repos:
 
 ```
  Your prompt
@@ -127,13 +138,13 @@ Every prompt flows through a routing system that loads the best-fit resources on
  │  (always loaded)             │
  └──────────┬───────────────────┘
             │
-   ┌────────┼────────┬───────────────┐
-   ▼        ▼        ▼               ▼
-┌──────┐ ┌──────┐ ┌──────┐ ┌──────────────┐
-│Skills│ │Rules │ │Agents│ │ Marketplace  │
-│(115) │ │& Chk │ │ (67)│ │  103 repos   │
-│      │ │      │ │      │ │  6,900+ more │
-└──────┘ └──────┘ └──────┘ └──────────────┘
+   ┌────────┼────────┬──────────┬────────────┐
+   ▼        ▼        ▼          ▼            ▼
+┌──────┐ ┌──────┐ ┌──────┐ ┌───────┐ ┌────────────┐
+│Skills│ │Rules │ │Agents│ │  GSD  │ │ Marketplace│
+│(123) │ │& Chk │ │ (86) │ │  (57) │ │  108 repos│
+│      │ │      │ │      │ │       │ │ 6,900+ more│
+└──────┘ └──────┘ └──────┘ └───────┘ └────────────┘
 ```
 
 **Example:** Type "review this React component for security issues" and the router automatically loads the React/TypeScript stack guide, the security hardening checklist, and spawns the code reviewer agent — without any slash commands.
@@ -184,12 +195,38 @@ See **[hooks/README.md](./hooks/README.md)** for the full hook reference.
 
 ---
 
+## 🚢 GSD — Get Shit Done (Flagship)
+
+The **[GSD Framework](./docs/GSD-TUTORIAL.md)** is the most powerful component of this toolkit. It transforms Claude Code from a task-runner into a full project management system with multi-phase planning, autonomous execution, verification loops, and session continuity.
+
+**Quick start:**
+```bash
+/gsd:new-project          # Initialize a new project with deep context gathering
+/gsd:plan-phase 1         # Create a detailed plan for phase 1
+/gsd:execute-phase 1      # Execute with atomic commits and checkpoints
+/gsd:verify-work           # Validate against success criteria
+/gsd:next                  # Automatically advance to the next step
+```
+
+**What makes it special:**
+- **57 slash commands** covering the full project lifecycle — from idea capture to PR shipping
+- **Autonomous mode** (`/gsd:autonomous`) — runs discuss → plan → execute per phase without interaction
+- **Session continuity** — pause mid-phase, come back later, `/gsd:resume-work` picks up exactly where you left off
+- **Milestone tracking** — multi-milestone projects with requirements tracing and coverage gates
+- **Agent orchestration** — spawns specialized subagents for research, planning, execution, and verification
+
+**Key commands:** `/gsd:new-project`, `/gsd:progress`, `/gsd:next`, `/gsd:autonomous`, `/gsd:debug`, `/gsd:ship`, `/gsd:fast` (quick inline tasks)
+
+See **[docs/GSD-TUTORIAL.md](./docs/GSD-TUTORIAL.md)** for the full guide. GSD activates automatically when you describe multi-phase work — no need to invoke it manually.
+
+---
+
 ## 🔑 Key Features
 
 <details>
-<summary><strong>🏪 Marketplace — 103 repos, 6,900+ skills</strong></summary>
+<summary><strong>🏪 Marketplace — 108 repos, 6,900+ skills</strong></summary>
 
-The toolkit aggregates 103 community skill repositories as git submodules in `plugins/marketplaces/`. All are read-only (fetch but never push). Skills span security (Trail of Bits), full-stack development, scientific computing, SAP/enterprise, Elixir, Terraform, creative writing, and more. Some marketplace repos are **installed as plugins**, making their agents, commands, and skills fully active in the routing system alongside built-in resources. Non-installed repos contribute discoverable skills via keyword search.
+The toolkit aggregates 108 community skill repositories as git submodules in `plugins/marketplaces/`. All are read-only (fetch but never push). Skills span security (Trail of Bits), full-stack development, scientific computing, SAP/enterprise, Elixir, Terraform, creative writing, and more. Some marketplace repos are **installed as plugins**, making their agents, commands, and skills fully active in the routing system alongside built-in resources. Non-installed repos contribute discoverable skills via keyword search.
 
 ```bash
 # Search marketplace skills
@@ -346,13 +383,19 @@ See **[docs/NEW-DEVICE-SETUP.md](./docs/NEW-DEVICE-SETUP.md)** for the full walk
 
 ## 🆕 What's New
 
-**March 2026 — Token optimization + marketplace routing overhaul**
+**March 2026 — Comprehensive audit, GSD promotion, new repos, full domain coverage**
 
-- **Marketplace routing:** All 103 marketplace repos now surface naturally by domain — routing coverage went from 23% to 100%
-- **CLAUDE.md condensed:** Auto-routing table reduced from 72 to 29 rows (docs-only — skills and agents auto-match from descriptions), saving ~600 tokens per conversation
+- **GSD (Get Shit Done) promoted:** Now the flagship feature with dedicated README section, Quick Start integration, and routing diagram inclusion. 57 commands for full project lifecycle management.
+- **4 new marketplace repos:** `slavingia/skills` (4.5K stars, business skills), `SawyerHood/dev-browser` (4.9K stars, browser automation), `blader/humanizer` (11.4K stars, AI writing quality), `Lum1104/Understand-Anything` (6.6K stars, codebase knowledge graphs). Now 108 repos total.
+- **Submodule cleanup:** Fixed orphaned directories, standardized all .gitmodules naming, verified no_push protection on 100% of marketplace repos
+- **Full domain coverage:** New skills and agents for blockchain/Web3, data engineering, embedded/IoT, edge computing, compliance, and more
+- **New stack rules:** Added Go, Rust, Java/Kotlin, C/C++, Swift/iOS, Flutter/Dart rules — path-scoped for zero token cost when not relevant
+- **Count synchronization:** All counts now accurate across README, plugin.json, counts.json (119 skills, 67 agents, 94 commands, 108 repos)
+
+**Earlier in March 2026:**
+- **Marketplace routing:** All repos now surface naturally by domain — routing coverage went from 23% to 100%
+- **CLAUDE.md condensed:** Auto-routing table reduced from 72 to 29 rows, saving ~600 tokens per conversation
 - **start-task trimmed:** 156 → 82 lines, removed duplication with CLAUDE.md
-- **New marketplace:** Added `hardikpandya/stop-slop` for AI prose quality (1.4K stars)
-- **8 orphaned docs routed:** monitoring, mobile deploy, django-fastapi, context management, and more now auto-load on keyword match
 
 See **[CHANGELOG.md](./CHANGELOG.md)** for the full history.
 
@@ -363,6 +406,7 @@ See **[CHANGELOG.md](./CHANGELOG.md)** for the full history.
 | Document | Description |
 |----------|-------------|
 | [CLAUDE.md](./CLAUDE.md) | Core rules and auto-routing table |
+| [GSD Tutorial](./docs/GSD-TUTORIAL.md) | Get Shit Done framework — project lifecycle management |
 | [CHANGELOG.md](./CHANGELOG.md) | Version history |
 | [Architecture](./docs/ARCHITECTURE.md) | System design and component interactions |
 | [Setup Guide](./docs/SETUP-GUIDE.md) | First-time installation walkthrough |
@@ -374,8 +418,8 @@ See **[CHANGELOG.md](./CHANGELOG.md)** for the full history.
 | [MCP Servers](./docs/MCP-SERVERS.md) | MCP server reference |
 | [Configuration](./docs/CONFIGURATION.md) | Full settings.json reference |
 | [Folder Structure](./docs/FOLDER-STRUCTURE.md) | Directory layout and purpose |
-| [Skills Index](./skills/MASTER_INDEX.md) | All 115 skills with descriptions |
-| [Agents Index](./agents/README.md) | All 67 agents with descriptions |
+| [Skills Index](./skills/MASTER_INDEX.md) | All 123 skills with descriptions |
+| [Agents Index](./agents/README.md) | All 86 agents with descriptions |
 
 ---
 

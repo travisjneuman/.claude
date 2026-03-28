@@ -2,6 +2,37 @@
 
 All notable changes to the Ultimate Claude Code Toolkit.
 
+## [2.11.0] - March 27, 2026
+
+### Comprehensive Audit & Optimization
+
+- **GSD promoted to flagship** — Dedicated README section, Quick Start integration, routing diagram inclusion, GSD Tutorial linked in Documentation table. GSD badge added to README header.
+- **8 new skills** — `blockchain-web3`, `data-engineering`, `embedded-iot`, `edge-computing`, `ar-vr-xr`, `compliance-engineering`, `devex-sdk-design`, `low-code-platforms`. Total skills: 123 (was 115).
+- **6 new stack rules** — `go.md`, `rust.md`, `java-kotlin.md`, `cpp.md`, `swift-ios.md`, `flutter-dart.md`. Path-scoped for zero token cost when not relevant. Total rules: 9 (was 3).
+- **New agent** — `compliance-engineer` for SOC2/HIPAA/GDPR/PCI-DSS implementation.
+
+### Submodule Cleanup
+
+- **Orphan fixed** — `claude-code-plugins-plus-skills` directory had no `.gitmodules` entry. Added with proper `ignore = all` config.
+- **Naming standardized** — 20 submodule entries used short names (e.g., `[submodule "hashicorp-agent-skills"]`). All now use full path prefix `[submodule "plugins/marketplaces/X"]`.
+- **4 new marketplace repos added:** `slavingia/skills` (4.5K stars, business skills from Gumroad founder), `SawyerHood/dev-browser` (4.9K stars, browser automation skill), `blader/humanizer` (11.4K stars, AI writing quality skill), `Lum1104/Understand-Anything` (6.6K stars, codebase knowledge graphs).
+- **Total submodules:** 108 (was 103), all with `ignore = all` and no_push protection.
+
+### Count Synchronization
+
+- **Corrected skill count** — Previous "119" was inflated. Actual pre-audit count was 115. With 8 new skills: 123.
+- **Corrected agent count** — Now reporting total (86 = 68 non-GSD + 18 GSD), not just non-GSD (was 67).
+- **All counts updated** across README.md (badges, body, table, diagram), plugin.json (version synced to 2.11.0), counts.json.
+- **Commands count clarified** — 94 total (30 base + 57 GSD + 7 router), not just "30" base.
+
+### Documentation
+
+- Updated README "What's New" section with March 2026 audit summary
+- Added new skill categories (Blockchain, Data Eng, Edge/IoT, XR, Compliance, DevTools) to README Skills table
+- Updated all documentation tables with corrected counts
+
+---
+
 ## [2.10.1] - March 5, 2026
 
 ### Count & Version Fixes
