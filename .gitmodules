@@ -411,6 +411,7 @@
 	path = plugins/marketplaces/gsd-2
 	url = https://github.com/gsd-build/gsd-2.git
 	ignore = all
+	fetchRecurseSubmodules = false
 [submodule "plugins/marketplaces/claude-code-plugins-plus-skills"]
 	path = plugins/marketplaces/claude-code-plugins-plus-skills
 	url = https://github.com/jeremylongshore/claude-code-plugins-plus-skills.git
@@ -439,3 +440,4 @@
 	path = plugins/marketplaces/millionco-expect
 	url = https://github.com/millionco/expect.git
 	ignore = all
+	fetchRecurseSubmodules = false
