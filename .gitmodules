@@ -407,11 +407,6 @@
 	path = plugins/marketplaces/hardikpandya-stop-slop
 	url = https://github.com/hardikpandya/stop-slop.git
 	ignore = all
-[submodule "plugins/marketplaces/gsd-2"]
-	path = plugins/marketplaces/gsd-2
-	url = https://github.com/gsd-build/gsd-2.git
-	ignore = all
-	fetchRecurseSubmodules = false
 [submodule "plugins/marketplaces/claude-code-plugins-plus-skills"]
 	path = plugins/marketplaces/claude-code-plugins-plus-skills
 	url = https://github.com/jeremylongshore/claude-code-plugins-plus-skills.git
