@@ -431,3 +431,11 @@
 	path = plugins/marketplaces/understand-anything
 	url = https://github.com/Lum1104/Understand-Anything.git
 	ignore = all
+[submodule "plugins/marketplaces/phuryn-pm-skills"]
+	path = plugins/marketplaces/phuryn-pm-skills
+	url = https://github.com/phuryn/pm-skills.git
+	ignore = all
+[submodule "plugins/marketplaces/millionco-expect"]
+	path = plugins/marketplaces/millionco-expect
+	url = https://github.com/millionco/expect.git
+	ignore = all
