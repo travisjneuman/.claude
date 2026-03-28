@@ -15,8 +15,8 @@ All notable changes to the Ultimate Claude Code Toolkit.
 
 - **Orphan fixed** — `claude-code-plugins-plus-skills` directory had no `.gitmodules` entry. Added with proper `ignore = all` config.
 - **Naming standardized** — 20 submodule entries used short names (e.g., `[submodule "hashicorp-agent-skills"]`). All now use full path prefix `[submodule "plugins/marketplaces/X"]`.
-- **4 new marketplace repos added:** `slavingia/skills` (4.5K stars, business skills from Gumroad founder), `SawyerHood/dev-browser` (4.9K stars, browser automation skill), `blader/humanizer` (11.4K stars, AI writing quality skill), `Lum1104/Understand-Anything` (6.6K stars, codebase knowledge graphs).
-- **Total submodules:** 108 (was 103), all with `ignore = all` and no_push protection.
+- **6 new marketplace repos added:** `blader/humanizer` (11.4K stars, AI writing quality), `phuryn/pm-skills` (8.3K stars, 100+ product management skills), `Lum1104/Understand-Anything` (6.6K stars, codebase knowledge graphs), `SawyerHood/dev-browser` (4.9K stars, browser automation), `slavingia/skills` (4.5K stars, entrepreneurship skills from Gumroad founder), `millionco/expect` (2.3K stars, browser testing with 9 embedded skills).
+- **Total submodules:** 110 (was 103), all with `ignore = all` and no_push protection.
 
 ### Count Synchronization
 
@@ -24,6 +24,7 @@ All notable changes to the Ultimate Claude Code Toolkit.
 - **Corrected agent count** — Now reporting total (86 = 68 non-GSD + 18 GSD), not just non-GSD (was 67).
 - **All counts updated** across README.md (badges, body, table, diagram), plugin.json (version synced to 2.11.0), counts.json.
 - **Commands count clarified** — 94 total (30 base + 57 GSD + 7 router), not just "30" base.
+- **Repos:** 110 total (was 103). Skills: 123 (was 115). Agents: 86 (was 67). Rules: 9 (was 3).
 
 ### Documentation
 
