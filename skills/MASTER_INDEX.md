@@ -1,6 +1,6 @@
 # Skills Master Index
 
-> Auto-generated on 2026-03-18 22:03. Run `bash ~/.claude/scripts/regenerate-index.sh` to refresh.
+> Auto-generated on 2026-03-27 22:45. Run `bash ~/.claude/scripts/regenerate-index.sh` to refresh.
 
 ## Discovery Protocol
 
@@ -22,29 +22,36 @@
 | `android-development` | Android development with Kotlin, Jetpack Compose, and modern Android architectur |
 | `api-design` | REST and GraphQL API design best practices including OpenAPI specs. Use when des |
 | `application-security` | OWASP Top 10 with code examples, SAST/DAST tools, dependency scanning, CSP heade |
+| `ar-vr-xr` | AR/VR/XR development with Unity XR, WebXR, ARKit, ARCore, Meta Quest SDK, and sp |
 | `audio-production` | Professional audio production for music, podcasts, and sound design. Use when wo |
 | `authentication-patterns` | OAuth 2.0, JWT, SSO, MFA, NextAuth/Clerk/Supabase Auth implementation patterns |
 | `auto-claude` | Autonomous multi-agent coding with git worktree isolation, QA validation, and me |
 | `battle-card-builder` | Competitive battle card creation for sales teams combining competitive intellige |
+| `blockchain-web3` | Solidity smart contracts, Web3 development, DeFi protocols, NFTs, EVM chains, Ha |
 | `brand-identity` | Brand strategy and identity design for businesses and products. Use when creatin |
 | `business-strategy` | Business strategy expertise for strategic planning, competitive analysis, market |
 | `career-path-planner` | Career goal mapping with skill gap analysis, actionable development plans, and m |
 | `case-interview-practice` | Interactive consulting case interview practice with structured frameworks, feedb |
 | `codebase-documenter` | This skill should be used when writing documentation for codebases, including RE |
+| `compliance-engineering` | SOC2, HIPAA, GDPR, PCI-DSS, FedRAMP compliance implementation in code. Audit log |
 | `content-repurposer` | Adapt content across platforms with tone/format shifting — blog to social, lon |
 | `contract-redliner` | Contract review, redlining, and negotiation support with clause analysis, risk i |
 | `core-workflow` | Detailed development workflow patterns, checklists, and standards. Auto-loads fo |
 | `course-material-creator` | Create custom educational materials including syllabi, lesson plans, assessments |
 | `customer-persona-builder` | Data-driven customer persona development combining market research, user behavio |
 | `customer-success` | Support workflows, ticketing systems (Zendesk, Intercom), knowledge base design, |
+| `data-engineering` | ETL/ELT pipelines, data warehousing (BigQuery, Snowflake, Redshift), stream proc |
 | `data-science` | Data science and analytics expertise for statistical analysis, machine learning  |
 | `database-expert` | Advanced database design and administration for PostgreSQL, MongoDB, and Redis.  |
 | `debate-practice-coach` | Interactive debate and argument practice with structured feedback, counterargume |
 | `debug-systematic` | Systematic 4-phase debugging methodology for complex, intermittent, or mysteriou |
+| `devex-sdk-design` | Developer experience (DX) engineering, SDK design patterns, API ergonomics, CLI  |
 | `devops-cloud` | DevOps, cloud infrastructure, and platform engineering. Use when working with AW |
 | `document-skills` | "Professional document creation, editing, and analysis for Office formats (docx, |
+| `edge-computing` | Edge computing with Cloudflare Workers, Deno Deploy, Bun, Vercel Edge Functions, |
 | `electron-desktop` | Desktop application development with Electron for Windows, macOS, and Linux. Use |
 | `email-systems` | Transactional email (Resend, SendGrid, SES), templates (React Email, MJML), deli |
+| `embedded-iot` | Embedded systems firmware, microcontrollers (ESP32, STM32, Arduino, Raspberry Pi |
 | `event-driven-architecture` | Kafka, RabbitMQ, SQS/SNS, event sourcing, CQRS, saga patterns, dead letter queue |
 | `event-planner` | Event planning with timelines, budgets, vendor coordination, logistics checklist |
 | `finance` | Financial analysis expertise for financial modeling (DCF, LBO, M&A), valuation,  |
@@ -86,6 +93,7 @@
 | `legal-compliance` | Legal and compliance expertise for corporate governance, contract analysis, regu |
 | `literature-review-planner` | Structured literature review planning with systematic methodology, source evalua |
 | `llm-app-development` | LLM app development with RAG, prompt engineering, vector databases, and AI agent |
+| `low-code-platforms` | Low-code and internal tool platforms including Retool, Supabase, Appsmith, Toolj |
 | `macos-native` | Native macOS development with AppKit, Catalyst, and macOS-specific APIs. Use whe |
 | `marketing` | Marketing strategy expertise for brand strategy, market research, customer segme |
 | `microservices-architecture` | Microservices architecture patterns and best practices. Use when designing distr |
@@ -133,6 +141,6 @@
 
 ---
 
-## Marketplace: 6962 skills across 103 repos
+## Marketplace: 8509 skills across 110 repos
 
 Search: `find ~/.claude/plugins/marketplaces -name "SKILL.md" | xargs grep -li "<keyword>"`
