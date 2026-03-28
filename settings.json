@@ -116,6 +116,14 @@
             "once": true
           }
         ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"C:/Users/tjn/.claude/hooks/gsd-check-update.js\""
+          }
+        ]
       }
     ],
     "Stop": [
@@ -160,6 +168,16 @@
             "statusMessage": "Validating file path"
           }
         ]
+      },
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"C:/Users/tjn/.claude/hooks/gsd-prompt-guard.js\"",
+            "timeout": 5
+          }
+        ]
       }
     ],
     "PreCompact": [
@@ -181,6 +199,16 @@
             "type": "command",
             "command": "node -e \"process.env.HOOK_NAME='secret-scan.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
             "statusMessage": "Scanning for secrets"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash|Edit|Write|MultiEdit|Agent|Task",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"C:/Users/tjn/.claude/hooks/gsd-context-monitor.js\"",
+            "timeout": 10
           }
         ]
       }
@@ -222,6 +250,6 @@
   "outputStyle": "default",
   "spinnerTipsEnabled": false,
   "alwaysThinkingEnabled": false,
-  "effortLevel": "high",
+  "effortLevel": "medium",
   "skipDangerousModePermissionPrompt": true
 }
