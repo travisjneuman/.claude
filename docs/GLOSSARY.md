@@ -48,7 +48,7 @@ A bash script that runs automatically during Claude Code lifecycle events (Sessi
 
 ### Marketplace
 
-A collection of 109 community-maintained GitHub repositories providing over 8,500+ additional skills, agents, and commands. Located in `~/.claude/plugins/marketplaces/`. Configured as read-only (fetch-only, push blocked).
+A collection of 109 community-maintained GitHub repositories providing over 11,700+ additional skills, agents, and commands. Located in `~/.claude/plugins/marketplaces/`. Configured as read-only (fetch-only, push blocked).
 
 ### MCP Server (Model Context Protocol)
 
