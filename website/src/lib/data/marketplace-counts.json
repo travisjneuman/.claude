@@ -1,16 +1,16 @@
 {
   "repoCount": 109,
-  "totalSkills": 8523,
+  "totalSkills": 11746,
   "repos": [
+    {
+      "name": "sickn33-antigravity-awesome-skills",
+      "displayName": "Sickn33 Antigravity Awesome Skills",
+      "skillCount": 4195
+    },
     {
       "name": "claude-code-plugins-plus-skills",
       "displayName": "Claude Code Plugins Plus Skills",
       "skillCount": 3313
-    },
-    {
-      "name": "sickn33-antigravity-awesome-skills",
-      "displayName": "Sickn33 Antigravity Awesome Skills",
-      "skillCount": 972
     },
     {
       "name": "awesome-claude-skills",

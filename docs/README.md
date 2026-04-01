@@ -63,7 +63,7 @@ Already set up? Jump to the section you need below.
 
 | Document                                               | What it covers                      |
 | ------------------------------------------------------ | ----------------------------------- |
-| [MARKETPLACE-GUIDE.md](./MARKETPLACE-GUIDE.md)         | 109 marketplace repos, 8,500+ skills |
+| [MARKETPLACE-GUIDE.md](./MARKETPLACE-GUIDE.md)         | 109 marketplace repos, 11,700+ skills |
 | [PLUGIN-MANAGEMENT.md](./PLUGIN-MANAGEMENT.md)         | Plugin lifecycle, customization     |
 | [AUTO-CLAUDE-GUIDE.md](./AUTO-CLAUDE-GUIDE.md)         | Autonomous multi-agent coding       |
 | [CLAUDE-CODE-RESOURCES.md](./CLAUDE-CODE-RESOURCES.md) | Community resources and tips        |
@@ -110,7 +110,7 @@ This `~/.claude/` folder is a fully configured, portable Claude Code environment
 - **67 agents** for specialized autonomous workflows
 - **30 slash commands** for workflow automation
 - **12 MCP server configurations** for extended capabilities (disabled by default to save context)
-- **109 marketplace repos** providing 8,500+ additional skills from the community
+- **109 marketplace repos** providing 11,700+ additional skills from the community
 - **10 hooks** for session lifecycle, safety guards, path validation, and auto-lint
 - **9 rules files** for contextual guidance (checklists, stack patterns, workflows, tooling)
 - **17 templates** for task planning, component creation, and project scaffolding
@@ -127,7 +127,7 @@ This `~/.claude/` folder is a fully configured, portable Claude Code environment
   - `rules/workflows/` → `docs/reference/workflows/` (preserving `context-management.md` which correctly stays in `rules/`)
 - Fixed stale paths in `scripts/update-counts.sh` (`rules/tooling/` and `rules/workflows/` → `docs/reference/`)
 - Fixed stale paths in `scripts/hooks/session-start.sh` auto-routing references
-- Fixed stale counts: `CLAUDE-CODE-RESOURCES.md` (84→101 repos, 4,500→8,500+ skills, 60→59 agents)
+- Fixed stale counts: `CLAUDE-CODE-RESOURCES.md` (84→101 repos, 4,500→11,700+ skills, 60→59 agents)
 - Fixed stale counts: `FOLDER-STRUCTURE.md` (21→30 commands, 69→102 repos, 7→10 hooks)
 - Fixed stale counts: `health-check.md` (10→30 commands), `audit-docs.md` (47→59 agents, 10→30 commands)
 - Updated `post-change-documentation.md` grep examples to reflect current counts
@@ -176,7 +176,7 @@ This `~/.claude/` folder is a fully configured, portable Claude Code environment
 ### v2.6.0 (February 2026)
 
 - Comprehensive Platform Enhancement: 18 new marketplace repos (+16 net), 12 MCP servers, 3 hooks, 3 commands, 10 checklists, 3 templates
-- Marketplace: 68 → 84 repos, 5,800+ → 8,500+ skills
+- Marketplace: 68 → 84 repos, 5,800+ → 11,700+ skills
 - Removed 2 dead repos (claude-market, netresearch-marketplace)
 
 ### v2.5.0 (February 2026)
@@ -230,7 +230,7 @@ This `~/.claude/` folder is a fully configured, portable Claude Code environment
 
 ### v2.3.1 (February 2026)
 
-- Updated counts across documentation (109 marketplace repos, 8,500+ skills, 7 hooks)
+- Updated counts across documentation (109 marketplace repos, 11,700+ skills, 7 hooks)
 - Documentation navigation overhaul
 
 ### v2.2 (January 2026)

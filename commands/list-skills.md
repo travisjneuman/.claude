@@ -127,7 +127,7 @@ Display comprehensive categorized skill overview:
 
 ---
 
-## Marketplace Skills (8,500+ total across 109 repos)
+## Marketplace Skills (11,700+ total across 109 repos)
 
 ### Top Repos by Skill Count
 
@@ -218,4 +218,4 @@ Just describe your task - skills auto-activate based on description matching.
 
 ---
 
-_127 local skills + 109 marketplaces (8,500+ skills) = comprehensive coverage for any domain_
+_127 local skills + 109 marketplaces (11,700+ skills) = comprehensive coverage for any domain_
