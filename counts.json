@@ -1,13 +1,13 @@
 {
   "skills": 127,
   "agents": 86,
-  "repos": 110,
+  "repos": 109,
   "commands": 30,
   "hooks": 8,
   "rules": 9,
   "templates": 17,
   "checklists": 10,
   "mcpServers": 12,
-  "marketplaceSkills": 8509,
+  "marketplaceSkills": 8523,
   "marketplaceSkillsDisplay": "8,500+"
 }

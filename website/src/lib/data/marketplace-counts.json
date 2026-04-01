@@ -1,6 +1,6 @@
 {
-  "repoCount": 110,
-  "totalSkills": 8509,
+  "repoCount": 109,
+  "totalSkills": 8523,
   "repos": [
     {
       "name": "claude-code-plugins-plus-skills",
@@ -20,32 +20,37 @@
     {
       "name": "davila7-templates",
       "displayName": "Davila7 Templates",
-      "skillCount": 723
+      "skillCount": 726
     },
     {
       "name": "alirezarezvani-claude-skills",
       "displayName": "Alirezarezvani Claude Skills",
-      "skillCount": 216
-    },
-    {
-      "name": "claude-scientific-skills",
-      "displayName": "Claude Scientific Skills",
-      "skillCount": 177
+      "skillCount": 229
     },
     {
       "name": "buildwithclaude",
       "displayName": "Buildwithclaude",
-      "skillCount": 163
+      "skillCount": 168
     },
     {
       "name": "athola-night-market",
       "displayName": "Athola Night Market",
-      "skillCount": 149
+      "skillCount": 151
+    },
+    {
+      "name": "affaan-everything-claude",
+      "displayName": "Affaan Everything Claude",
+      "skillCount": 147
     },
     {
       "name": "wshobson-agents",
       "displayName": "Wshobson Agents",
       "skillCount": 147
+    },
+    {
+      "name": "claude-scientific-skills",
+      "displayName": "Claude Scientific Skills",
+      "skillCount": 136
     },
     {
       "name": "madappgang-claude-code",
@@ -55,12 +60,7 @@
     {
       "name": "levnikolaevich-claude-code-skills",
       "displayName": "Levnikolaevich Claude Code Skills",
-      "skillCount": 128
-    },
-    {
-      "name": "affaan-everything-claude",
-      "displayName": "Affaan Everything Claude",
-      "skillCount": 125
+      "skillCount": 129
     },
     {
       "name": "giuseppe-developer-kit",
@@ -71,6 +71,11 @@
       "name": "kivilaid-marketplace",
       "displayName": "Kivilaid Marketplace",
       "skillCount": 104
+    },
+    {
+      "name": "trailofbits-skills",
+      "displayName": "Trailofbits Skills",
+      "skillCount": 72
     },
     {
       "name": "manutej-luxor-marketplace",
@@ -91,11 +96,6 @@
       "name": "phuryn-pm-skills",
       "displayName": "Phuryn Pm Skills",
       "skillCount": 65
-    },
-    {
-      "name": "trailofbits-skills",
-      "displayName": "Trailofbits Skills",
-      "skillCount": 61
     },
     {
       "name": "worldbuilding-skills",
@@ -168,24 +168,19 @@
       "skillCount": 23
     },
     {
-      "name": "gsd-2",
-      "displayName": "Gsd 2",
+      "name": "henkisdabro-marketplace",
+      "displayName": "Henkisdabro Marketplace",
       "skillCount": 21
     },
     {
-      "name": "henkisdabro-marketplace",
-      "displayName": "Henkisdabro Marketplace",
+      "name": "onmax-nuxt-skills",
+      "displayName": "Onmax Nuxt Skills",
       "skillCount": 21
     },
     {
       "name": "pbakaus-impeccable",
       "displayName": "Pbakaus Impeccable",
       "skillCount": 21
-    },
-    {
-      "name": "onmax-nuxt-skills",
-      "displayName": "Onmax Nuxt Skills",
-      "skillCount": 19
     },
     {
       "name": "mhattingpete-skills",
@@ -198,19 +193,24 @@
       "skillCount": 17
     },
     {
+      "name": "skillcreatorai-agent-skills",
+      "displayName": "Skillcreatorai Agent Skills",
+      "skillCount": 17
+    },
+    {
       "name": "team-attention-plugins",
       "displayName": "Team Attention Plugins",
       "skillCount": 17
     },
     {
-      "name": "jayzeedesign-awesome-claude",
-      "displayName": "Jayzeedesign Awesome Claude",
+      "name": "hashicorp-agent-skills",
+      "displayName": "Hashicorp Agent Skills",
       "skillCount": 16
     },
     {
-      "name": "hashicorp-agent-skills",
-      "displayName": "Hashicorp Agent Skills",
-      "skillCount": 15
+      "name": "jayzeedesign-awesome-claude",
+      "displayName": "Jayzeedesign Awesome Claude",
+      "skillCount": 16
     },
     {
       "name": "ananddtyagi-marketplace",
@@ -233,6 +233,11 @@
       "skillCount": 14
     },
     {
+      "name": "taches-cc-resources",
+      "displayName": "Taches Cc Resources",
+      "skillCount": 12
+    },
+    {
       "name": "devgom-marketplace",
       "displayName": "Devgom Marketplace",
       "skillCount": 11
@@ -240,11 +245,6 @@
     {
       "name": "expo-skills",
       "displayName": "Expo Skills",
-      "skillCount": 11
-    },
-    {
-      "name": "taches-cc-resources",
-      "displayName": "Taches Cc Resources",
       "skillCount": 11
     },
     {
@@ -268,14 +268,19 @@
       "skillCount": 8
     },
     {
+      "name": "danielscholl-sdlc",
+      "displayName": "Danielscholl Sdlc",
+      "skillCount": 8
+    },
+    {
       "name": "libukai-awesome-agent-skills",
       "displayName": "Libukai Awesome Agent Skills",
       "skillCount": 8
     },
     {
-      "name": "skillcreatorai-agent-skills",
-      "displayName": "Skillcreatorai Agent Skills",
-      "skillCount": 8
+      "name": "vercel-agent-skills",
+      "displayName": "Vercel Agent Skills",
+      "skillCount": 7
     },
     {
       "name": "ahmedasmar-devops-skills",
@@ -295,11 +300,6 @@
     {
       "name": "understand-anything",
       "displayName": "Understand Anything",
-      "skillCount": 6
-    },
-    {
-      "name": "vercel-agent-skills",
-      "displayName": "Vercel Agent Skills",
       "skillCount": 6
     },
     {
@@ -326,11 +326,6 @@
       "name": "hashi-terraform-skills",
       "displayName": "Hashi Terraform Skills",
       "skillCount": 4
-    },
-    {
-      "name": "danielscholl-sdlc",
-      "displayName": "Danielscholl Sdlc",
-      "skillCount": 3
     },
     {
       "name": "kfly8-cpan-plugins",
