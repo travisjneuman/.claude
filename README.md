@@ -17,7 +17,7 @@
 [![Skills](https://img.shields.io/badge/Skills-127-10b981?style=flat-square)](./skills/MASTER_INDEX.md)
 [![Agents](https://img.shields.io/badge/Agents-86-f59e0b?style=flat-square)](./agents/README.md)
 [![Commands](https://img.shields.io/badge/Commands-30-a855f7?style=flat-square)](./commands/README.md)
-[![GSD](https://img.shields.io/badge/GSD-v1.29-ef4444?style=flat-square)](./docs/GSD-TUTORIAL.md)
+[![GSD](https://img.shields.io/badge/GSD-v1.29-ef4444?style=flat-square)](https://github.com/gsd-build/get-shit-done)
 [![Repos](https://img.shields.io/badge/Marketplace_Repos-109-3b82f6?style=flat-square)](./plugins/marketplaces/)
 [![Marketplace Skills](https://img.shields.io/badge/Marketplace_Skills-11700+-ec4899?style=flat-square)](./docs/MARKETPLACE-GUIDE.md)
 [![Hooks](https://img.shields.io/badge/Hooks-8-06b6d4?style=flat-square)](./hooks/README.md)
@@ -32,7 +32,7 @@
 
 A drop-in configuration layer for [Claude Code](https://docs.anthropic.com/en/docs/claude-code) that transforms it from a capable AI assistant into an enterprise-grade development powerhouse.
 
-**One `git clone` gives you** 123 domain skills, 86 specialist agents, 109 community marketplaces with 11,700+ additional skills, 30 slash commands, 8 lifecycle hooks, 12 MCP server configs, and the **[GSD (Get Shit Done)](./docs/GSD-TUTORIAL.md)** project management framework — all auto-activating based on what you're working on. No manual configuration required.
+**One `git clone` gives you** 123 domain skills, 86 specialist agents, 109 community marketplaces with 11,700+ additional skills, 30 slash commands, 8 lifecycle hooks, 12 MCP server configs, and the **[GSD (Get Shit Done)](https://github.com/gsd-build/get-shit-done)** project management framework — all auto-activating based on what you're working on. No manual configuration required.
 
 **How it works:** Describe what you want in plain language. The toolkit's dynamic router detects context from your prompt and loads the right skills, agents, rules, and checklists automatically. No slash commands needed (though they're available if you prefer).
 
@@ -83,7 +83,7 @@ That's it. The toolkit auto-activates from `~/.claude/` on every Claude Code ses
 
 | Component | Count | Description |
 |-----------|-------|-------------|
-| **[GSD Framework](./docs/GSD-TUTORIAL.md)** | v1.29 | Multi-phase project management with 57 commands — the flagship workflow tool |
+| **[GSD Framework](https://github.com/gsd-build/get-shit-done)** | v1.29 | Multi-phase project management with 57 commands — the flagship workflow tool |
 | **[Skills](./skills/MASTER_INDEX.md)** | 123 | Domain expertise modules (React, security, DevOps, finance, etc.) |
 | **[Agents](./agents/README.md)** | 86 | Specialist subagents for focused tasks (code review, debugging, etc.) |
 | **[Commands](./commands/README.md)** | 94 | Slash commands: 30 base + 57 GSD + 7 router |
@@ -197,7 +197,7 @@ See **[hooks/README.md](./hooks/README.md)** for the full hook reference.
 
 ## 🚢 GSD — Get Shit Done (Flagship)
 
-The **[GSD Framework](./docs/GSD-TUTORIAL.md)** is the most powerful component of this toolkit. It transforms Claude Code from a task-runner into a full project management system with multi-phase planning, autonomous execution, verification loops, and session continuity.
+The **[GSD Framework](https://github.com/gsd-build/get-shit-done)** by [gsd-build](https://github.com/gsd-build) is the most powerful component of this toolkit. It transforms Claude Code from a task-runner into a full project management system with multi-phase planning, autonomous execution, verification loops, and session continuity. Check out the [GSD repo](https://github.com/gsd-build/get-shit-done) for full documentation, updates, and to support the creators.
 
 **Quick start:**
 ```bash
@@ -217,7 +217,7 @@ The **[GSD Framework](./docs/GSD-TUTORIAL.md)** is the most powerful component o
 
 **Key commands:** `/gsd:new-project`, `/gsd:progress`, `/gsd:next`, `/gsd:autonomous`, `/gsd:debug`, `/gsd:ship`, `/gsd:fast` (quick inline tasks)
 
-See **[docs/GSD-TUTORIAL.md](./docs/GSD-TUTORIAL.md)** for the full guide. GSD activates automatically when you describe multi-phase work — no need to invoke it manually.
+See the **[GSD repository](https://github.com/gsd-build/get-shit-done)** for the full guide. GSD activates automatically when you describe multi-phase work — no need to invoke it manually.
 
 ---
 
@@ -406,7 +406,7 @@ See **[CHANGELOG.md](./CHANGELOG.md)** for the full history.
 | Document | Description |
 |----------|-------------|
 | [CLAUDE.md](./CLAUDE.md) | Core rules and auto-routing table |
-| [GSD Tutorial](./docs/GSD-TUTORIAL.md) | Get Shit Done framework — project lifecycle management |
+| [GSD Framework](https://github.com/gsd-build/get-shit-done) | Get Shit Done framework — project lifecycle management (by gsd-build) |
 | [CHANGELOG.md](./CHANGELOG.md) | Version history |
 | [Architecture](./docs/ARCHITECTURE.md) | System design and component interactions |
 | [Setup Guide](./docs/SETUP-GUIDE.md) | First-time installation walkthrough |

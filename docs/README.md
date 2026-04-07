@@ -45,7 +45,7 @@ Already set up? Jump to the section you need below.
 | -------------------------------------------------- | ------------------------------------------- |
 | [WORKFLOW-GUIDE.md](./WORKFLOW-GUIDE.md)           | Development workflow patterns and standards |
 | [workflow-automation.md](./workflow-automation.md) | Git hooks, templates, task enforcement      |
-| [GSD-TUTORIAL.md](./GSD-TUTORIAL.md)               | Get Shit Done multi-phase project system    |
+| [GSD Framework](https://github.com/gsd-build/get-shit-done) | Get Shit Done multi-phase project system (by gsd-build) |
 | [DOMAIN-ROUTING.md](./DOMAIN-ROUTING.md)           | How prompts route to skills/agents          |
 | [AGENT-TEAMS.md](./AGENT-TEAMS.md)                 | Agent teams: parallel sessions, composition |
 
