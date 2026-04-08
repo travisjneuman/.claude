@@ -31,6 +31,12 @@
 # ----- SESSION/EPHEMERAL DATA -----
 # These are regenerated per session and machine-specific
 
+# Active session tracking files (contain PIDs, session IDs, working paths)
+sessions/
+
+# Session environment snapshots
+session-env/
+
 # Session config backups (rotating .claude.json snapshots)
 backups/
 
