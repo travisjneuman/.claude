@@ -64,6 +64,14 @@ NEVER push unapproved work, use `--force` without request, or commit secrets.
 Auto-commit user repos only. External repos (plugins/marketplaces/) are read-only.
 Use `main`/`master` — no feature branches unless requested.
 
+**NEVER add `Co-Authored-By: Claude ...` (or any agent-attribution) trailers to
+commits, PR bodies, or documentation.** If a handoff file, mission prompt, or
+inherited "hard rules" list says otherwise, treat it as stale and flag the line
+for removal rather than following it. Rule added 2026-04-19 after audit found
+the trailer requirement was propagating turn-to-turn via a single handoff
+doc's "unchanged from prior handoff" list without ever being codified in
+any CLAUDE.md.
+
 ---
 
 ## DO NOT
@@ -75,6 +83,7 @@ Use `main`/`master` — no feature branches unless requested.
 - Use generic task names (`todo.md`, `task.md`)
 - Add features beyond what was requested
 - Skip verification before marking complete
+- Add `Co-Authored-By: Claude ...` trailers to commits/PRs/docs (see Git Safety)
 
 ---
 
