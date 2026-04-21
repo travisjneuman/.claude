@@ -1,11 +1,11 @@
 {
   "repoCount": 109,
-  "totalSkills": 12201,
+  "totalSkills": 12386,
   "repos": [
     {
       "name": "sickn33-antigravity-awesome-skills",
       "displayName": "Sickn33 Antigravity Awesome Skills",
-      "skillCount": 4393
+      "skillCount": 4464
     },
     {
       "name": "claude-code-plugins-plus-skills",
@@ -20,7 +20,12 @@
     {
       "name": "davila7-templates",
       "displayName": "Davila7 Templates",
-      "skillCount": 827
+      "skillCount": 829
+    },
+    {
+      "name": "buildwithclaude",
+      "displayName": "Buildwithclaude",
+      "skillCount": 277
     },
     {
       "name": "alirezarezvani-claude-skills",
@@ -33,19 +38,14 @@
       "skillCount": 183
     },
     {
-      "name": "buildwithclaude",
-      "displayName": "Buildwithclaude",
-      "skillCount": 181
-    },
-    {
       "name": "athola-night-market",
       "displayName": "Athola Night Market",
-      "skillCount": 174
+      "skillCount": 177
     },
     {
       "name": "wshobson-agents",
       "displayName": "Wshobson Agents",
-      "skillCount": 150
+      "skillCount": 151
     },
     {
       "name": "levnikolaevich-claude-code-skills",
@@ -105,12 +105,12 @@
     {
       "name": "daymade-skills",
       "displayName": "Daymade Skills",
-      "skillCount": 47
+      "skillCount": 50
     },
     {
       "name": "EveryInc-compound",
       "displayName": "EveryInc Compound",
-      "skillCount": 44
+      "skillCount": 46
     },
     {
       "name": "gmickel-marketplace",
@@ -123,14 +123,14 @@
       "skillCount": 38
     },
     {
+      "name": "rohitg00-claude-code-toolkit",
+      "displayName": "Rohitg00 Claude Code Toolkit",
+      "skillCount": 38
+    },
+    {
       "name": "skillsforge",
       "displayName": "Skillsforge",
       "skillCount": 37
-    },
-    {
-      "name": "rohitg00-claude-code-toolkit",
-      "displayName": "Rohitg00 Claude Code Toolkit",
-      "skillCount": 36
     },
     {
       "name": "aaronontheweb-dotnet-skills",
@@ -163,19 +163,24 @@
       "skillCount": 26
     },
     {
+      "name": "p47phoenix-plugins",
+      "displayName": "P47phoenix Plugins",
+      "skillCount": 25
+    },
+    {
       "name": "sangrokjung-claude-forge",
       "displayName": "Sangrokjung Claude Forge",
       "skillCount": 24
     },
     {
-      "name": "henkisdabro-marketplace",
-      "displayName": "Henkisdabro Marketplace",
-      "skillCount": 21
-    },
-    {
       "name": "onmax-nuxt-skills",
       "displayName": "Onmax Nuxt Skills",
       "skillCount": 21
+    },
+    {
+      "name": "henkisdabro-marketplace",
+      "displayName": "Henkisdabro Marketplace",
+      "skillCount": 18
     },
     {
       "name": "mhattingpete-skills",
@@ -188,23 +193,18 @@
       "skillCount": 18
     },
     {
+      "name": "team-attention-plugins",
+      "displayName": "Team Attention Plugins",
+      "skillCount": 18
+    },
+    {
       "name": "anthropic-agent-skills",
       "displayName": "Anthropic Agent Skills",
       "skillCount": 17
     },
     {
-      "name": "p47phoenix-plugins",
-      "displayName": "P47phoenix Plugins",
-      "skillCount": 17
-    },
-    {
       "name": "skillcreatorai-agent-skills",
       "displayName": "Skillcreatorai Agent Skills",
-      "skillCount": 17
-    },
-    {
-      "name": "team-attention-plugins",
-      "displayName": "Team Attention Plugins",
       "skillCount": 17
     },
     {
@@ -338,11 +338,6 @@
       "skillCount": 3
     },
     {
-      "name": "mvanhorn-last30days-skill",
-      "displayName": "Mvanhorn Last30days Skill",
-      "skillCount": 2
-    },
-    {
       "name": "sawyerhood-mart",
       "displayName": "Sawyerhood Mart",
       "skillCount": 2
@@ -375,6 +370,11 @@
     {
       "name": "hardikpandya-stop-slop",
       "displayName": "Hardikpandya Stop Slop",
+      "skillCount": 1
+    },
+    {
+      "name": "mvanhorn-last30days-skill",
+      "displayName": "Mvanhorn Last30days Skill",
       "skillCount": 1
     },
     {
