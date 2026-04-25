@@ -34,6 +34,7 @@ Already set up? Jump to the section you need below.
 | [FOLDER-STRUCTURE.md](./FOLDER-STRUCTURE.md) | Complete file/folder map                    |
 | [CONFIGURATION.md](./CONFIGURATION.md)       | Settings, permissions, hooks, env files     |
 | [SKILLS.md](./SKILLS.md)                     | Skills system: creation, activation, format |
+| [SKILL-CREATION-GUIDE.md](./SKILL-CREATION-GUIDE.md) | Step-by-step guide for adding a new local skill |
 | [MCP-SERVERS.md](./MCP-SERVERS.md)           | 12 MCP servers: when to enable, token cost  |
 | [ARCHITECTURE.md](./ARCHITECTURE.md)         | How all components interact as a system     |
 | [GLOSSARY.md](./GLOSSARY.md)                 | Definitions of all toolkit terms            |
@@ -63,7 +64,7 @@ Already set up? Jump to the section you need below.
 
 | Document                                               | What it covers                      |
 | ------------------------------------------------------ | ----------------------------------- |
-| [MARKETPLACE-GUIDE.md](./MARKETPLACE-GUIDE.md)         | 109 marketplace repos, 12,300+ skills |
+| [MARKETPLACE-GUIDE.md](./MARKETPLACE-GUIDE.md)         | 110 marketplace repos, 12,500+ skills |
 | [PLUGIN-MANAGEMENT.md](./PLUGIN-MANAGEMENT.md)         | Plugin lifecycle, customization     |
 | [AUTO-CLAUDE-GUIDE.md](./AUTO-CLAUDE-GUIDE.md)         | Autonomous multi-agent coding       |
 | [CLAUDE-CODE-RESOURCES.md](./CLAUDE-CODE-RESOURCES.md) | Community resources and tips        |
@@ -110,7 +111,7 @@ This `~/.claude/` folder is a fully configured, portable Claude Code environment
 - **67 agents** for specialized autonomous workflows
 - **30 slash commands** for workflow automation
 - **12 MCP server configurations** for extended capabilities (disabled by default to save context)
-- **109 marketplace repos** providing 12,300+ additional skills from the community
+- **110 marketplace repos** providing 12,500+ additional skills from the community
 - **10 hooks** for session lifecycle, safety guards, path validation, and auto-lint
 - **9 rules files** for contextual guidance (checklists, stack patterns, workflows, tooling)
 - **17 templates** for task planning, component creation, and project scaffolding
@@ -127,7 +128,7 @@ This `~/.claude/` folder is a fully configured, portable Claude Code environment
   - `rules/workflows/` → `docs/reference/workflows/` (preserving `context-management.md` which correctly stays in `rules/`)
 - Fixed stale paths in `scripts/update-counts.sh` (`rules/tooling/` and `rules/workflows/` → `docs/reference/`)
 - Fixed stale paths in `scripts/hooks/session-start.sh` auto-routing references
-- Fixed stale counts: `CLAUDE-CODE-RESOURCES.md` (84→101 repos, 4,500→12,300+ skills, 60→59 agents)
+- Fixed stale counts: `CLAUDE-CODE-RESOURCES.md` (84→101 repos, 4,500→12,500+ skills, 60→59 agents)
 - Fixed stale counts: `FOLDER-STRUCTURE.md` (21→30 commands, 69→102 repos, 7→10 hooks)
 - Fixed stale counts: `health-check.md` (10→30 commands), `audit-docs.md` (47→59 agents, 10→30 commands)
 - Updated `post-change-documentation.md` grep examples to reflect current counts
@@ -151,7 +152,7 @@ This `~/.claude/` folder is a fully configured, portable Claude Code environment
 ### v2.9.0 (February 2026)
 
 - Marketplace audit: added 11 repos, removed 2 dead repos, optimized token loading
-- All 109 marketplace submodules verified with `ignore = all` and `no_push`
+- All 110 marketplace submodules verified with `ignore = all` and `no_push`
 
 ### v2.8.0 (February 2026)
 
@@ -176,7 +177,7 @@ This `~/.claude/` folder is a fully configured, portable Claude Code environment
 ### v2.6.0 (February 2026)
 
 - Comprehensive Platform Enhancement: 18 new marketplace repos (+16 net), 12 MCP servers, 3 hooks, 3 commands, 10 checklists, 3 templates
-- Marketplace: 68 → 84 repos, 5,800+ → 12,300+ skills
+- Marketplace: 68 → 84 repos, 5,800+ → 12,500+ skills
 - Removed 2 dead repos (claude-market, netresearch-marketplace)
 
 ### v2.5.0 (February 2026)
@@ -212,7 +213,7 @@ This `~/.claude/` folder is a fully configured, portable Claude Code environment
 - Complete submodule cleanup: removed ghost registration from `.gitmodules`, `.git/config`, `.git/modules/`
 - Cross-repo count sync: rules 27→28, hooks health-check 7→8
 - Synced counts to GitHub Profile README and Portfolio repo
-- Pulled 109 marketplace repos with upstream updates (196 total commits)
+- Pulled 110 marketplace repos with upstream updates (196 total commits)
 
 ### v2.3.5 (February 2026)
 
@@ -230,7 +231,7 @@ This `~/.claude/` folder is a fully configured, portable Claude Code environment
 
 ### v2.3.1 (February 2026)
 
-- Updated counts across documentation (109 marketplace repos, 12,300+ skills, 7 hooks)
+- Updated counts across documentation (110 marketplace repos, 12,500+ skills, 7 hooks)
 - Documentation navigation overhaul
 
 ### v2.2 (January 2026)

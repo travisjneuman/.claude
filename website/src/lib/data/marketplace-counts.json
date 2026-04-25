@@ -1,16 +1,16 @@
 {
-  "repoCount": 109,
-  "totalSkills": 12386,
+  "repoCount": 110,
+  "totalSkills": 12545,
   "repos": [
     {
       "name": "sickn33-antigravity-awesome-skills",
       "displayName": "Sickn33 Antigravity Awesome Skills",
-      "skillCount": 4464
+      "skillCount": 4476
     },
     {
       "name": "claude-code-plugins-plus-skills",
       "displayName": "Claude Code Plugins Plus Skills",
-      "skillCount": 3344
+      "skillCount": 3377
     },
     {
       "name": "awesome-claude-skills",
@@ -28,6 +28,11 @@
       "skillCount": 277
     },
     {
+      "name": "levnikolaevich-claude-code-skills",
+      "displayName": "Levnikolaevich Claude Code Skills",
+      "skillCount": 270
+    },
+    {
       "name": "alirezarezvani-claude-skills",
       "displayName": "Alirezarezvani Claude Skills",
       "skillCount": 239
@@ -40,17 +45,12 @@
     {
       "name": "athola-night-market",
       "displayName": "Athola Night Market",
-      "skillCount": 177
+      "skillCount": 182
     },
     {
       "name": "wshobson-agents",
       "displayName": "Wshobson Agents",
       "skillCount": 151
-    },
-    {
-      "name": "levnikolaevich-claude-code-skills",
-      "displayName": "Levnikolaevich Claude Code Skills",
-      "skillCount": 135
     },
     {
       "name": "claude-scientific-skills",
@@ -88,14 +88,14 @@
       "skillCount": 66
     },
     {
-      "name": "neolab-context-kit",
-      "displayName": "Neolab Context Kit",
-      "skillCount": 66
-    },
-    {
       "name": "phuryn-pm-skills",
       "displayName": "Phuryn Pm Skills",
       "skillCount": 65
+    },
+    {
+      "name": "neolab-context-kit",
+      "displayName": "Neolab Context Kit",
+      "skillCount": 61
     },
     {
       "name": "worldbuilding-skills",
@@ -108,14 +108,9 @@
       "skillCount": 50
     },
     {
-      "name": "EveryInc-compound",
-      "displayName": "EveryInc Compound",
-      "skillCount": 46
-    },
-    {
       "name": "gmickel-marketplace",
       "displayName": "Gmickel Marketplace",
-      "skillCount": 39
+      "skillCount": 43
     },
     {
       "name": "actionbook-rust-skills",
@@ -126,6 +121,11 @@
       "name": "rohitg00-claude-code-toolkit",
       "displayName": "Rohitg00 Claude Code Toolkit",
       "skillCount": 38
+    },
+    {
+      "name": "EveryInc-compound",
+      "displayName": "EveryInc Compound",
+      "skillCount": 37
     },
     {
       "name": "skillsforge",
@@ -188,11 +188,6 @@
       "skillCount": 18
     },
     {
-      "name": "pbakaus-impeccable",
-      "displayName": "Pbakaus Impeccable",
-      "skillCount": 18
-    },
-    {
       "name": "team-attention-plugins",
       "displayName": "Team Attention Plugins",
       "skillCount": 18
@@ -235,7 +230,7 @@
     {
       "name": "expo-skills",
       "displayName": "Expo Skills",
-      "skillCount": 12
+      "skillCount": 13
     },
     {
       "name": "taches-cc-resources",
@@ -378,6 +373,11 @@
       "skillCount": 1
     },
     {
+      "name": "pbakaus-impeccable",
+      "displayName": "Pbakaus Impeccable",
+      "skillCount": 1
+    },
+    {
       "name": "sawyerhood-dev-browser",
       "displayName": "Sawyerhood Dev Browser",
       "skillCount": 1
@@ -445,6 +445,11 @@
     {
       "name": "get-shit-done",
       "displayName": "Get Shit Done",
+      "skillCount": 0
+    },
+    {
+      "name": "glittercowboy-get-shit-done",
+      "displayName": "Glittercowboy Get Shit Done",
       "skillCount": 0
     },
     {
