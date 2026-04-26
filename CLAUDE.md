@@ -37,6 +37,40 @@ Multi-phase: `/gsd:progress` or `/gsd:new-project`. Details: `docs/WORKFLOW-GUID
 
 ---
 
+## Run Commands Yourself (added 2026-04-26)
+
+**You have full local system access.** When work requires terminal commands —
+`npm install`, `npm test`, `npm run deploy`, `wrangler deploy`, `git`,
+`curl` against deployed endpoints, file moves, anything — **execute
+them yourself via the Bash tool. Do not stop and ask the user to run
+commands on their behalf.**
+
+This includes:
+- Running tests (`npm test`, `vitest`, `pytest`, etc.)
+- Building / deploying (`wrangler deploy`, `npm run deploy`, `vercel`, `gh workflow run`, etc.)
+- Verification curls against deployed endpoints (e.g., `curl /admin/health` after a deploy)
+- Installing dependencies after `package.json` edits
+- Running migrations, regenerating lockfiles, etc.
+- Pulling latest, checking out branches, listing remote state
+
+**Exceptions where you should pause and ask first:**
+- Destructive ops on production data (DROP TABLE, force-push to main, deleting
+  production resources, wiping a KV namespace, `rm -rf` on anything outside
+  the current repo, etc.)
+- Anything requiring a credential the user hasn't already exposed (a new API
+  key, OAuth flow, payment method)
+- Operations that cost money (paid API tier upgrades, cloud spend)
+- Operations that change the user's environment globally (npm install -g,
+  modifying ~/.bashrc / PATH, changing global git config)
+
+**Default:** if it's reversible AND in-scope for the current task, run it.
+If it's irreversible OR out-of-scope, surface the exact command and pause.
+
+**Never** end a turn with "now you should run X" when you could have just
+run X yourself and reported the result.
+
+---
+
 ## Tool Policy
 
 | Instead of...         | Use...        |
