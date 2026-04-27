@@ -252,5 +252,9 @@
   "effortLevel": "xhigh",
   "autoUpdatesChannel": "latest",
   "skipDangerousModePermissionPrompt": true,
+  "verbose": true,
+  "fileCheckpointingEnabled": false,
+  "teammateMode": "auto",
+  "remoteControlAtStartup": true,
   "skipAutoPermissionPrompt": true
 }
