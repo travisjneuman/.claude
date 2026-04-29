@@ -27,8 +27,34 @@
 
 ## Workflow
 
-Plan → Approve → Execute → Verify → Commit → Push (user repos only).
-**After completing work:** always commit and push. Do not default to local-only testing/verification unless the user explicitly requests it.
+Plan → Approve → Execute → Verify → Commit → Push (user-owned repos).
+
+**After completing work in any user-owned repo: always commit and push.**
+A repo is **user-owned** if `travisjneuman` is the GitHub owner — including the
+workspace meta-repo (`.webdev`), the global toolkit (`~/.claude`), all project
+repos under `github.com/travisjneuman/*`, and forks `travisjneuman` owns. Do not
+default to local-only testing/verification unless the user explicitly requests
+it. Never end a turn with uncommitted work in a user-owned repo when the work
+is complete and in-scope.
+
+**Stage only your own work.** Never sweep up unrelated user-pending changes
+(`.obsidian/*`, editor state, half-finished local edits) into your commit. Add
+specific files by name; avoid `git add -A` / `git add .` at repo roots that
+have ambient pending state.
+
+**Per-repo `no_push` exception (user-owned).** If a user-owned remote's push URL
+is set to `no_push` (or equivalent disable), respect the per-repo override —
+commit locally, do not push, and surface a clear note to the user explaining
+the block.
+
+**Repos NOT owned by `travisjneuman` are read-only — no commits, no pushes.**
+This includes external upstream OSS, anyone else's repo we cloned, plugin
+marketplaces, and any fork that lives under a different GitHub owner. Treat
+as if `no_push` is permanently set AND no commits are allowed. If a task
+appears to require modifying one, stop and ask the user — the work likely
+belongs in a fork that travisjneuman owns, or doesn't belong in that repo at
+all.
+
 Track progress with `TodoWrite`. Non-trivial work needs `tasks/<name>.md`.
 Multi-phase: `/gsd:progress` or `/gsd:new-project`. Details: `docs/WORKFLOW-GUIDE.md`
 
@@ -95,7 +121,12 @@ Stack-specific: `docs/reference/stacks/`
 ## Git Safety
 
 NEVER push unapproved work, use `--force` without request, or commit secrets.
-Auto-commit user repos only. External repos (plugins/marketplaces/) are read-only.
+**Auto-commit AND auto-push user-owned repos** (any repo `travisjneuman` owns on
+GitHub) after work completes — see Workflow section for the full rule, including
+the `no_push` per-repo exception.
+**Non-user-owned repos are read-only.** Plugins, marketplaces, upstream OSS,
+anyone else's repo or fork — no commits, no pushes. Treat as if `no_push` is
+permanently set. If you must modify one, stop and ask the user.
 Use `main`/`master` — no feature branches unless requested.
 
 **NEVER add `Co-Authored-By: Claude ...` (or any agent-attribution) trailers to
