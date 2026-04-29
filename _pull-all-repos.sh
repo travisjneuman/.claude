@@ -351,6 +351,14 @@ if [[ ${#CUSTOM_PROJECT_DIRS[@]} -gt 0 ]]; then
             echo ""
             echo -e "${BOLD}Custom Projects ($(basename "$project_dir")):${NC}"
 
+            # The custom project dir itself, if it's a git repo
+            # (e.g. /Users/tjn/web-dev IS the .webdev repo). Without this we'd
+            # iterate its children but never pull the parent. Bug from 2026-04-29.
+            if [[ -d "$project_dir/.git" ]] || [[ -f "$project_dir/.git" ]]; then
+                process_repo "$project_dir" "$(basename "$project_dir") (parent)"
+                CUSTOM_REPO_COUNT=$((CUSTOM_REPO_COUNT + 1))
+            fi
+
             # Find all git repos in this directory (1 level deep, including dotdirs)
             for repo in "$project_dir"/*/ "$project_dir"/.*/; do
                 # Skip . and .. entries from .* glob

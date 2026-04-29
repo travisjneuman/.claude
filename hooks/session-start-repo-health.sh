@@ -101,6 +101,13 @@ for project_dir in "${CUSTOM_PROJECT_DIRS[@]}"; do
     project_dir="${project_dir/#\~/$HOME}"
     [[ -d "$project_dir" ]] || continue
 
+    # Depth 0: the custom project dir itself, if it's a git repo
+    # (e.g. /Users/tjn/web-dev IS the .webdev repo). Without this we'd miss
+    # divergence on the parent and only see its children. Bug from 2026-04-29.
+    if out=$(check_repo "$project_dir"); then
+        [[ -n "$out" ]] && PROBLEMS+="$out"$'\n'
+    fi
+
     # Depth 1: top-level repos
     for repo in "$project_dir"/*/ "$project_dir"/.*/; do
         [[ -d "$repo" ]] || continue
