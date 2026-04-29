@@ -11,8 +11,9 @@ Hooks are bash scripts that run automatically at specific points during a Claude
 
 ```
 Session Start
-  ├── session-start-pull.sh      (pull repos in background)
-  └── session-start-context.sh   (load previous session context)
+  ├── session-start-pull.sh           (pull repos in background)
+  ├── session-start-context.sh        (load previous session context)
+  └── session-start-repo-health.sh    (surface diverged/dirty/unpushed repos as banner)
 
 Every Prompt
   └── prompt-context.sh          (inject git status — cached by index mtime)
@@ -47,6 +48,7 @@ Status Line (persistent display)
 | -------------------------- | ---------------- | ----------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `session-start-pull.sh`    | SessionStart     | —           | Yes        | Runs `_pull-all-repos.sh` in background with 60s timeout. Logs to `logs/pull-repos.log`. Rotates log at 500KB.                                                     |
 | `session-start-context.sh` | SessionStart     | —           | Yes        | Injects previous session context if within 72 hours (covers weekends).                                                                                             |
+| `session-start-repo-health.sh` | SessionStart | —           | Yes        | Synchronous diagnostic. Emits a banner naming any repo (parent + CUSTOM_PROJECT_DIRS, depth ≤3) that is DIVERGED, UNPUSHED, BEHIND, DIRTY, DETACHED, or NO_UPSTREAM. Silent when all clean. No network. |
 | `prompt-context.sh`        | UserPromptSubmit | —           | Yes        | Injects git branch/status/commits. Caches output by `.git/index` mtime — skips git calls when nothing changed.                                                    |
 | `pre-bash-check.sh`        | PreToolUse       | Bash        | Yes        | Combined guard + pre-commit. Blocks dangerous patterns (exit 2). On `git commit` in ~/.claude, runs update-counts.sh and stages docs.                              |
 | `pre-write-validate.sh`    | PreToolUse       | Write\|Edit | Yes        | Blocks writes to protected paths (.env*, credentials, node_modules, .git, .ssh, .gnupg, *.pem, *.key, *.p12, *.pfx, *.jks). Exits with code 2 to block.           |
@@ -112,6 +114,50 @@ abc1234 feat: last thing I did
 ```
 
 **Cross-platform:** Uses `uname` detection for macOS vs Linux `stat` syntax differences.
+
+---
+
+### session-start-repo-health.sh
+
+**Event:** SessionStart
+**Purpose:** Make invisible repo problems visible. Existed because the async `session-start-pull.sh` logs failures to a file Claude never reads, so diverged/dirty/unpushed repos can sit invisible for months (cf. the 88-day `.lzg_platform` drift incident).
+
+**What it does:**
+
+1. Reads `CUSTOM_PROJECT_DIRS` from `.env.local` (same source as `_pull-all-repos.sh`)
+2. Walks each directory to depth 3 to catch nested submodule layouts (e.g. `web-dev/.lzg_platform/Lazy Golfing/lzg.home`)
+3. For each git repo, classifies state without making any network calls:
+   - **DIVERGED** — local and `@{u}` both ahead → manual reconciliation needed
+   - **UNPUSHED** — local ahead only → push needed
+   - **BEHIND** — remote ahead only → fast-forward pull available
+   - **DIRTY** — uncommitted changes
+   - **DETACHED** — detached HEAD
+   - **NO_UPSTREAM** — branch tracks no remote
+4. If any problems found, emits a banner to stdout (which Claude Code injects into context)
+5. If all repos are clean and synced, exits silently (zero output, zero token cost)
+
+**Key design decisions:**
+
+- **Synchronous, not async** — runs inline so its banner reaches Claude's context. The other pull hook stays async for actual fetching.
+- **No `git fetch`** — uses last-fetched refs only. Network blocking would defeat the purpose; the async pull handles freshness.
+- **Skips `plugins/marketplaces/*`** — those are `no_push`-enforced external repos; their divergence is meaningless and noisy.
+- **Silent on success** — the banner only appears when there's something to show.
+
+**Output example:**
+
+```
+=== Repo Health Check ===
+Out-of-sync repos detected. Reconcile before editing them.
+(Status reflects last fetched state — does not include this session's pull.)
+
+  DIVERGED   web-dev/.lzg_platform (local +154, remote +673 — pull blocked, needs reconciliation)
+  DIRTY      web-dev/tjn.portfolio (3 uncommitted change(s) on main)
+
+Legend: ...
+=== End Repo Health Check ===
+```
+
+**Companion CLAUDE.md rule:** When this banner appears for a repo, do not edit that repo without first reconciling. The banner is a hard precondition, not advisory.
 
 ---
 
