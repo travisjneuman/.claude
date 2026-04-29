@@ -34,7 +34,8 @@ Session Stop
   └── session-stop-summary.sh    (save session summary)
 
 Session End (on exit/clear/logout)
-  └── session-stop-summary.sh    (final session summary on exit)
+  ├── session-stop-summary.sh         (final session summary on exit)
+  └── session-end-repo-health.sh      (push unpushed work, warn on dirty trees)
 
 Status Line (persistent display)
   └── statusline.sh              (format status bar — zero token cost)
@@ -52,11 +53,17 @@ Status Line (persistent display)
 | `prompt-context.sh`        | UserPromptSubmit | —           | Yes        | Injects git branch/status/commits. Caches output by `.git/index` mtime — skips git calls when nothing changed.                                                    |
 | `pre-bash-check.sh`        | PreToolUse       | Bash        | Yes        | Combined guard + pre-commit. Blocks dangerous patterns (exit 2). On `git commit` in ~/.claude, runs update-counts.sh and stages docs.                              |
 | `pre-write-validate.sh`    | PreToolUse       | Write\|Edit | Yes        | Blocks writes to protected paths (.env*, credentials, node_modules, .git, .ssh, .gnupg, *.pem, *.key, *.p12, *.pfx, *.jks). Exits with code 2 to block.           |
-| `session-stop-summary.sh`  | PreCompact       | —           | Yes        | Saves session context before context compaction (reuses Stop script).                                                                                              |
+| `session-stop-summary.sh`  | PreCompact       | —           | Yes        | Saves session context before context compaction (same script, fires also on PreCompact event).                                                                                              |
 | `secret-scan.sh`           | PostToolUse      | Write\|Edit | Yes        | Scans written/edited files for leaked secrets (API keys, tokens, passwords). Warns but does not block. Skips .md files.                                            |
 | `session-stop-summary.sh`  | Stop             | —           | Yes        | Writes a session summary for continuity between sessions.                                                                                                          |
 | `session-stop-summary.sh`  | SessionEnd       | —           | Yes        | Final session summary on exit/clear/logout (belt + suspenders + safety net).                                                                                       |
+| `session-end-repo-health.sh` | SessionEnd     | —           | Yes        | Departure ceremony. For user-owned repos (push URL contains `travisjneuman`): pushes unpushed commits when tree is clean, warns on dirty/diverged. Never auto-commits. Output appended to `last-session.md` so next session sees it. |
 | `statusline.sh`            | statusLine       | —           | Yes        | Formats persistent status bar (model, branch, context %, cost). Zero token cost.                                                                                   |
+| `gsd-check-update.js`      | SessionStart     | —           | Yes        | Background check for GSD plugin updates.                                                                                                                            |
+| `gsd-prompt-guard.js`      | PreToolUse       | Write\|Edit | Yes        | Soft guard: scans for prompt-injection patterns in `.planning/` writes.                                                                                            |
+| `gsd-context-monitor.js`   | PostToolUse      | Bash\|Edit\|Write\|MultiEdit\|Agent\|Task | Yes | Injects context-usage warnings when nearing limits.                                                                                                  |
+| `gsd-statusline.js`        | —                | —           | No (alt)   | Alternative GSD-flavored statusline. Not registered by default; swap with `statusline.sh` if preferred.                                                            |
+| `gsd-workflow-guard.js`    | —                | —           | No (opt-in)| Soft guard: warns when editing outside an active GSD workflow context. Opt-in via `hooks.workflow_guard: true` in GSD config.                                     |
 
 ---
 
@@ -232,6 +239,40 @@ This file was auto-generated at session end.
 ```
 
 **Paired with:** `session-start-context.sh` reads this file at the next session start.
+
+---
+
+### session-end-repo-health.sh
+
+**Event:** SessionEnd
+**Purpose:** Departure-side counterpart to `session-start-repo-health.sh`. Tries to leave the machine clean so the next machine's arrival banner has nothing to flag. Together they form: *depart-clean / arrive-aware*.
+
+**What it does:**
+
+1. Reads `CUSTOM_PROJECT_DIRS` from `.env.local` (same scope as arrival hook)
+2. Walks parent + each custom dir to depth 3
+3. For each git repo whose push URL contains `travisjneuman` (user-owned):
+   - **Clean tree + unpushed commits** → fetches, re-checks divergence, attempts FF push, reports outcome
+   - **Dirty tree** → emits `DIRTY` warning. **Does NOT auto-commit** (auto-committing dirty trees is what produced the bad-base `d4b9e8e` mess on 2026-04-29)
+   - **Diverged** → emits `DIVERGED` warning. Does NOT attempt resolution.
+   - **Race condition** (remote advanced during the fetch-and-push window) → emits `RACE-DIVERGED`, leaves work unpushed, surfaces it for next session
+4. Writes findings to:
+   - `~/.claude/last-session.md` (so next session's context-loader injects them)
+   - stderr (so they appear in the closing terminal)
+
+**Why SessionEnd, not Stop:** Stop fires after every Claude turn. Pushing every turn would interrupt mid-work intermediate commits the user might want to revise. SessionEnd fires on actual exit/clear/logout — the right moment for departure logic.
+
+**What it does NOT do:**
+
+- Never auto-commits dirty trees
+- Never force-pushes
+- Never touches non-user-owned repos (marketplaces with `no_push`, others' forks)
+- Never blocks session exit on push failure — best-effort, advisory
+- Never fires on `Stop` mid-session (only on `SessionEnd`)
+
+**Best-effort, not bulletproof:** If the user kills the terminal hard (kill -9, lid close), SessionEnd may not fire. The arrival hook on the *next* machine is the catch-all safety net.
+
+**Companion CLAUDE.md rule:** "Reconcile before editing — repo health banner is mandatory" (Git Safety section). Strengthened with a paired departure-side expectation: any unpushed work that survives a session is a rule violation in this turn or the previous one.
 
 ---
 
