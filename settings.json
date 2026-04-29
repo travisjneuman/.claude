@@ -114,6 +114,12 @@
             "command": "node -e \"process.env.HOOK_NAME='session-start-context.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
             "statusMessage": "Loading previous session context",
             "once": true
+          },
+          {
+            "type": "command",
+            "command": "node -e \"process.env.HOOK_NAME='session-start-repo-health.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
+            "statusMessage": "Checking repo health",
+            "once": true
           }
         ]
       },
