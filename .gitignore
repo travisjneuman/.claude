@@ -267,3 +267,6 @@ last-session.md
 
 # MCP auth cache (machine-specific)
 mcp-needs-auth-cache.json
+
+# GSD update check (Unix timestamp, per-machine)
+cache/gsd-update-check.json
