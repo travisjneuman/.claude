@@ -137,20 +137,31 @@ the trailer requirement was propagating turn-to-turn via a single handoff
 doc's "unchanged from prior handoff" list without ever being codified in
 any CLAUDE.md.
 
-**Reconcile before editing — repo health banner is mandatory.** At session start,
-the `session-start-repo-health.sh` hook surfaces any repo flagged DIVERGED,
-UNPUSHED, BEHIND, DIRTY, DETACHED, or NO_UPSTREAM. **If a repo appears in that
-banner, do not edit, commit, or run scripts that modify it until reconciled.**
-Order of operations for each state:
+**Reconcile before editing — repo health banners are mandatory.** Two paired
+hooks form the cross-machine safety loop:
+- **Arrival** (`session-start-repo-health.sh`, runs at SessionStart): surfaces
+  any repo flagged DIVERGED, UNPUSHED, BEHIND, DIRTY, DETACHED, or NO_UPSTREAM.
+- **Departure** (`session-end-repo-health.sh`, runs at SessionEnd): pushes
+  unpushed commits in user-owned repos with clean trees, warns on dirty/diverged.
+
+**If a repo appears in the arrival banner, do not edit, commit, or run scripts
+that modify it until reconciled.** Order of operations for each state:
 - BEHIND → `git pull --ff-only` first, then resume work
 - UNPUSHED → push first (or surface why pushing is blocked), then resume work
 - DIRTY → ask the user about the uncommitted changes; never silently sweep them into a new commit
 - DIVERGED → stop and ask the user to choose merge / rebase / reset; this is what caused the 2026-04-29 `.lzg_platform` 88-day drift, do not paper over it
 - DETACHED / NO_UPSTREAM → stop and ask before any modification
 
+**Departure side:** before responding to a request that ends a session (or
+appears to be the last action of one), ensure all user-owned repos you touched
+have been committed AND pushed. The departure hook is a safety net, not a
+substitute for following the always-commit-and-push workflow rule. If the
+departure hook reports DIRTY or DIVERGED for a repo you worked in, you missed
+a commit-and-push during the session — note this for next time.
+
 This rule exists because user works one-machine-at-a-time across multiple
 machines, so divergence is *always* a stale-machine bug, never legitimate
-parallel work. The banner makes that visible; this rule says act on it.
+parallel work. The banners make that visible; this rule says act on them.
 Added 2026-04-29 after the `.lzg_platform` incident.
 
 ---

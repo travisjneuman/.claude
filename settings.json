@@ -127,7 +127,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node \"C:/Users/tjn/.claude/hooks/gsd-check-update.js\""
+            "command": "node -e \"require(require('path').join(require('os').homedir(),'.claude','hooks','gsd-check-update.js'))\""
           }
         ]
       }
@@ -180,7 +180,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node \"C:/Users/tjn/.claude/hooks/gsd-prompt-guard.js\"",
+            "command": "node -e \"require(require('path').join(require('os').homedir(),'.claude','hooks','gsd-prompt-guard.js'))\"",
             "timeout": 5
           }
         ]
@@ -213,7 +213,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node \"C:/Users/tjn/.claude/hooks/gsd-context-monitor.js\"",
+            "command": "node -e \"require(require('path').join(require('os').homedir(),'.claude','hooks','gsd-context-monitor.js'))\"",
             "timeout": 10
           }
         ]
@@ -226,6 +226,11 @@
             "type": "command",
             "command": "node -e \"process.env.HOOK_NAME='session-stop-summary.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
             "statusMessage": "Saving session summary on exit"
+          },
+          {
+            "type": "command",
+            "command": "node -e \"process.env.HOOK_NAME='session-end-repo-health.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
+            "statusMessage": "Pushing unpushed work and warning on dirty trees"
           }
         ]
       }
