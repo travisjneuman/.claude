@@ -81,6 +81,7 @@
 | `graphql-expert` |  GraphQL API design and implementation. Use when building GraphQL APIs, designin |
 | `growth-engineering` |  >- |
 | `health-wellness` |  Workplace health and wellness expertise for employee wellness programs, mental  |
+| `hermes-tweet` |  Hermes Agent X/Twitter automation through Xquik. Use when monitoring X, resear |
 | `hr-talent` |  HR and talent management expertise for talent acquisition, performance manageme |
 | `i18n-localization` |  Internationalization and localization for global applications. Use when adding  |
 | `impact-report-writer` |  Nonprofit/NGO impact report generation with data visualization suggestions, out |

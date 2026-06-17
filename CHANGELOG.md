@@ -2,6 +2,12 @@
 
 All notable changes to the Ultimate Claude Code Toolkit.
 
+## [Unreleased]
+
+### Added
+
+- **`hermes-tweet` skill** - Hermes Agent X/Twitter automation guidance with read-first workflows, setup checks, and approval-gated action rules.
+
 ## [2.11.0] - March 27, 2026
 
 ### Comprehensive Audit & Optimization
