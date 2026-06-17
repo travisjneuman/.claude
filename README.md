@@ -14,7 +14,7 @@
 [![License](https://img.shields.io/badge/MIT-blue?style=flat-square&logo=opensourceinitiative&logoColor=white)](./LICENSE)
 [![Use Template](https://img.shields.io/badge/Use_This_Template-2ea44f?style=flat-square&logo=github&logoColor=white)](https://github.com/travisjneuman/.claude/generate)
 
-[![Skills](https://img.shields.io/badge/Skills-127-10b981?style=flat-square)](./skills/MASTER_INDEX.md)
+[![Skills](https://img.shields.io/badge/Skills-128-10b981?style=flat-square)](./skills/MASTER_INDEX.md)
 [![Agents](https://img.shields.io/badge/Agents-86-f59e0b?style=flat-square)](./agents/README.md)
 [![Commands](https://img.shields.io/badge/Commands-30-a855f7?style=flat-square)](./commands/README.md)
 [![GSD](https://img.shields.io/badge/GSD-v1.29-ef4444?style=flat-square)](https://github.com/gsd-build/get-shit-done)
@@ -32,7 +32,7 @@
 
 A drop-in configuration layer for [Claude Code](https://docs.anthropic.com/en/docs/claude-code) that transforms it from a capable AI assistant into an enterprise-grade development powerhouse.
 
-**One `git clone` gives you** 127 domain skills, 86 specialist agents, 108 community marketplaces with 14,700+ additional skills, 30 slash commands, 15 lifecycle hooks, 12 MCP server configs, and the **[GSD (Get Shit Done)](https://github.com/gsd-build/get-shit-done)** project management framework — all auto-activating based on what you're working on. No manual configuration required.
+**One `git clone` gives you** 128 domain skills, 86 specialist agents, 108 community marketplaces with 14,700+ additional skills, 30 slash commands, 15 lifecycle hooks, 12 MCP server configs, and the **[GSD (Get Shit Done)](https://github.com/gsd-build/get-shit-done)** project management framework — all auto-activating based on what you're working on. No manual configuration required.
 
 **How it works:** Describe what you want in plain language. The toolkit's dynamic router detects context from your prompt and loads the right skills, agents, rules, and checklists automatically. No slash commands needed (though they're available if you prefer).
 
@@ -86,7 +86,7 @@ That's it. The toolkit auto-activates from `~/.claude/` on every Claude Code ses
 | Component | Count | Description |
 |-----------|-------|-------------|
 | **[GSD Framework](https://github.com/gsd-build/get-shit-done)** | v1.29 | Multi-phase project management with 57 commands — the flagship workflow tool |
-| **[Skills](./skills/MASTER_INDEX.md)** | 127 | Domain expertise modules (React, security, DevOps, finance, etc.) |
+| **[Skills](./skills/MASTER_INDEX.md)** | 128 | Domain expertise modules (React, security, DevOps, finance, etc.) |
 | **[Agents](./agents/README.md)** | 86 | Specialist subagents for focused tasks (code review, debugging, etc.) |
 | **[Commands](./commands/README.md)** | 94 | Slash commands: 30 base + 57 GSD + 7 router |
 | **[Marketplace Repos](./plugins/marketplaces/)** | 108 | Community skill repositories (14,700+ additional skills) |
@@ -107,7 +107,7 @@ That's it. The toolkit auto-activates from `~/.claude/` on every Claude Code ses
 | **Security** | `application-security`, `authentication-patterns` |
 | **Mobile** | `android-development`, `ios-development`, `macos-native`, `kotlin-multiplatform`, `react-native`, `flutter-development` |
 | **Quality** | `generic-code-reviewer`, `generic-feature-developer`, `generic-design-system`, `generic-ux-designer`, `test-specialist`, `tdd-workflow`, `debug-systematic`, `tech-debt-analyzer` |
-| **Business** | `business-strategy`, `finance`, `marketing`, `sales`, `product-management`, `hr-talent`, `legal-compliance`, `risk-management`, `operations`, `innovation` |
+| **Business** | `business-strategy`, `finance`, `marketing`, `hermes-tweet`, `sales`, `product-management`, `hr-talent`, `legal-compliance`, `risk-management`, `operations`, `innovation` |
 | **Creative** | `brand-identity`, `graphic-design`, `video-production`, `audio-production`, `ui-animation`, `ui-research` |
 | **Productivity** | `codebase-documenter`, `document-skills`, `content-repurposer`, `status-report-generator`, `core-workflow` |
 | **Specialized** | `game-development`, `i18n-localization`, `seo-analytics-auditor`, `email-systems`, `payment-integration`, `product-analytics`, `growth-engineering`, `monetization-strategy` |
@@ -129,7 +129,7 @@ See **[MASTER_INDEX.md](./skills/MASTER_INDEX.md)** for the full listing with de
 
 ### Dynamic Routing
 
-Every prompt flows through a routing system that loads the best-fit resources on-demand — drawing from 127 built-in skills, 86 agents, 9 rules + 10 checklists, the GSD framework (57 commands), and 13,000+ community marketplace skills across 109 repos:
+Every prompt flows through a routing system that loads the best-fit resources on-demand — drawing from 128 built-in skills, 86 agents, 9 rules + 10 checklists, the GSD framework (57 commands), and 14,700+ community marketplace skills across 108 repos:
 
 ```
  Your prompt
@@ -144,7 +144,7 @@ Every prompt flows through a routing system that loads the best-fit resources on
    ▼        ▼        ▼          ▼            ▼
 ┌──────┐ ┌──────┐ ┌──────┐ ┌───────┐ ┌────────────┐
 │Skills│ │Rules │ │Agents│ │  GSD  │ │ Marketplace│
-│(127) │ │& Chk │ │ (86) │ │  (57) │ │ 109 repos│
+│(128) │ │& Chk │ │ (86) │ │  (57) │ │ 108 repos│
 │      │ │      │ │      │ │       │ │ 14,700+ more│
 └──────┘ └──────┘ └──────┘ └───────┘ └────────────┘
 ```
@@ -420,7 +420,7 @@ See **[CHANGELOG.md](./CHANGELOG.md)** for the full history.
 | [MCP Servers](./docs/MCP-SERVERS.md) | MCP server reference |
 | [Configuration](./docs/CONFIGURATION.md) | Full settings.json reference |
 | [Folder Structure](./docs/FOLDER-STRUCTURE.md) | Directory layout and purpose |
-| [Skills Index](./skills/MASTER_INDEX.md) | All 127 skills with descriptions |
+| [Skills Index](./skills/MASTER_INDEX.md) | All 128 skills with descriptions |
 | [Agents Index](./agents/README.md) | All 86 agents with descriptions |
 
 ---
@@ -446,4 +446,3 @@ This toolkit follows three core principles:
 </picture>
 
 </div>
-

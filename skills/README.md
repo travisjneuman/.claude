@@ -1,10 +1,10 @@
 # Claude Code Skills Library
 
-Comprehensive skills for Claude Code - 119 skills covering all development domains.
+Comprehensive skills for Claude Code - 128 skills covering all development domains.
 
 **Plus:** 90 marketplace repos with 11,700+ additional skills.
 
-**Version:** 5.0 (119 Skills, 90 Marketplace Repos)
+**Version:** 5.0 (128 Skills, 90 Marketplace Repos)
 **Last Updated:** February 2026
 
 ---
@@ -18,7 +18,7 @@ Comprehensive skills for Claude Code - 119 skills covering all development domai
 | Framework Skills       | 2      | Vue.js 3, Svelte 5                               |
 | Platform Development   | 8      | iOS, Android, Desktop, PWA, macOS, Gaming        |
 | Creative & Design      | 7      | Visual, Video, Audio, Brand, Motion, UI Research |
-| Business & Startup     | 15     | Strategy, Finance, Marketing, Sales, Governance  |
+| Business & Startup     | 16     | Strategy, Finance, Marketing, Sales, Governance  |
 | Technical Architecture | 5      | GraphQL, Microservices, i18n, Real-time          |
 | Domain Expertise       | 15     | Operations, Security, Leadership, Legal, etc.    |
 | Education & Learning   | 3      | Course materials, learning gaps, debate coaching |
@@ -31,7 +31,7 @@ Comprehensive skills for Claude Code - 119 skills covering all development domai
 | Personal & Lifestyle   | 4      | Travel, Career, Recipe, Podcast                  |
 | Marketplace            | 7,400+ | From 90 plugin repositories                      |
 
-**Local: 127 unique skills | Marketplace: 11,700+ additional skills**
+**Local: 128 unique skills | Marketplace: 11,700+ additional skills**
 
 ---
 
@@ -161,6 +161,7 @@ Comprehensive skills for Claude Code - 119 skills covering all development domai
 | **business-strategy**         | Strategy  | Strategic planning, competitive analysis         |
 | **finance**                   | Finance   | Financial modeling, valuation, analysis          |
 | **marketing**                 | Growth    | Brand strategy, digital marketing, analytics     |
+| **hermes-tweet**              | Social    | X/Twitter research, monitoring, read-first actions |
 | **sales**                     | Revenue   | Sales methodologies, pipeline management         |
 | **product-management**        | Product   | Roadmaps, prioritization, product-market fit     |
 | **investment-memo-generator** | Finance   | Investment memos from financial data             |
@@ -179,6 +180,7 @@ Comprehensive skills for Claude Code - 119 skills covering all development domai
 "Design pricing tiers" → uses monetization-strategy
 "Build a financial model" → uses finance
 "Plan a go-to-market strategy" → uses marketing
+"Monitor X/Twitter for this launch" → uses hermes-tweet
 "Draft an investment memo" → uses investment-memo-generator
 "Create competitive battle cards" → uses battle-card-builder
 "Build customer personas" → uses customer-persona-builder
