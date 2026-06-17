@@ -8,7 +8,7 @@ description: Hermes Agent X/Twitter automation through Xquik. Use when monitorin
 Use Hermes Tweet when Claude Code work needs X/Twitter context through a native
 Hermes Agent plugin. It is best for social listening, launch monitoring,
 support triage, account research, trend checks, and safe draft planning before
-any public action.
+any public or private action.
 
 ## Source
 
@@ -40,8 +40,11 @@ hermes tools list
 
 1. Start with `tweet_explore` for no-network planning and tool discovery.
 2. Use read tools only after `XQUIK_API_KEY` is configured.
-3. Treat write actions as sensitive. Require `HERMES_TWEET_ENABLE_ACTIONS=true`
-   and explicit user approval before posting, replying, following, or liking.
+3. Treat every `tweet_action` call and private endpoint as sensitive. Require
+   `HERMES_TWEET_ENABLE_ACTIONS=true` and explicit user approval before posting,
+   replying, following, liking, retweeting, reading private data, sending DMs,
+   changing media or profile state, creating monitors, sending webhooks, or
+   starting extraction jobs.
 4. Keep X/Twitter findings source-linked and separate observations from
    recommendations.
 5. Summarize rate limits, missing credentials, disabled tools, or failed reads
@@ -52,7 +55,7 @@ hermes tools list
 - Prefer read-first workflows.
 - Never invent tweet content, account state, metrics, or trend data.
 - Never use action tools for diagnostics.
-- Ask before any public or account-mutating action.
+- Ask before any `tweet_action`, private read, public action, or account change.
 - Do not paste API keys, cookies, tokens, or private account data into prompts,
   issues, PRs, or logs.
 
