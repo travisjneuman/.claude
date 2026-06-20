@@ -61,6 +61,10 @@ cd "$CLAUDE_DIR"
 REPOS=()
 current_name=""
 while IFS= read -r line; do
+    # Git Bash preserves CR characters when .gitmodules has CRLF endings.
+    # Strip them so Windows clones don't receive URLs ending in "\r".
+    line="${line%$'\r'}"
+
     # Match: path = plugins/marketplaces/<name>
     if [[ "$line" =~ ^[[:space:]]*path[[:space:]]*=[[:space:]]*plugins/marketplaces/(.*) ]]; then
         current_name="${BASH_REMATCH[1]}"
