@@ -55,7 +55,7 @@ Verify:
 | `agents/`               | 86+ files | `ls ~/.claude/agents/*.md \| wc -l`           |
 | `commands/`             | 30+ files | `ls ~/.claude/commands/*.md \| wc -l`         |
 | `templates/`            | 5+ files  | `ls ~/.claude/templates/ \| wc -l`            |
-| `plugins/marketplaces/` | 90 repos  | `ls ~/.claude/plugins/marketplaces/ \| wc -l` |
+| `plugins/marketplaces/` | 108 repos  | `ls ~/.claude/plugins/marketplaces/ \| wc -l` |
 
 ### Step 3: Hooks Status
 

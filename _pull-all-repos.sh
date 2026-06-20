@@ -5,19 +5,19 @@
 #
 # Cross-platform script (Linux, macOS, Windows via Git Bash) that:
 #   1. Pulls the parent ~/.claude repo (travisjneuman/.claude)
-#   2. Pulls all marketplace clones in plugins/marketplaces/
+#   2. Pulls all marketplace clones listed in .gitmodules
 #   3. Enforces no_push on all marketplace clones (prevents accidental pushes)
-#   4. Pulls all git repos in your custom project directories (optional)
+#   4. Pulls all git repos recursively in your custom project directories (optional)
 #   5. Fixes marketplace paths for current OS (cross-platform compatibility)
 #   6. Updates documentation counts if any repos changed (skills, agents, etc.)
-#   7. Commits and pushes all changes (count updates, path fixes)
+#   7. Commits and pushes generated count/doc changes only
 #
 # Features:
 #   - Pulls parent repo first, then marketplace clones, then custom directories
 #   - Automatically fixes detached HEAD state
 #   - Detects main/master/development branches
-#   - Enforces no_push on external repos (read-only protection)
-#   - Safe: only pulls, never pushes or discards changes
+#   - Enforces no_push on marketplace and non-Travis-owned custom repos
+#   - Safe: only fast-forward pulls, never merges, rebases, pushes external repos, or discards changes
 #   - Works on: Linux (including Arch), macOS, Windows (Git Bash)
 #
 # Usage:
@@ -101,11 +101,11 @@ while [[ $# -gt 0 ]]; do
             echo ""
             echo "Repos pulled:"
             echo "  1. ~/.claude (travisjneuman/.claude) - parent repo (push enabled)"
-            echo "  2. ~/.claude/plugins/marketplaces/* - ignored marketplace clones (no_push enforced)"
-            echo "  3. Custom project directories (if configured) - your own repos"
+            echo "  2. ~/.claude/plugins/marketplaces/* - ignored marketplace clones from .gitmodules (no_push enforced)"
+            echo "  3. Custom project directories (if configured) - recursively discovered repos"
             echo ""
-            echo "To add your own project directories, edit CUSTOM_PROJECT_DIRS at the top of this script."
-            echo "Example: CUSTOM_PROJECT_DIRS=(\"/e/Web Development\" \"/c/Users/you/projects\")"
+            echo "To add your own project directories, set CUSTOM_PROJECT_DIRS in .env.local."
+            echo "Example: CUSTOM_PROJECT_DIRS=\"/e/Web Development,/c/Users/you/.codex\""
             echo ""
             echo "Options:"
             echo "  --status, -s   Show repo status without pulling"
@@ -142,9 +142,17 @@ if [[ "$STATUS_ONLY" == false ]]; then
     echo ""
     echo -e "${BOLD}Checking marketplace clones:${NC}"
     cd "$SCRIPT_DIR"
-    if find "$MARKETPLACES_DIR" -mindepth 1 -maxdepth 1 -type d -print -quit | grep -q .; then
-        echo -e "${GREEN}  Marketplace clones present${NC}"
+    mapfile -t REQUIRED_MARKETPLACES < <(manifest_marketplace_paths)
+    MISSING_MARKETPLACES=()
+    for rel_path in "${REQUIRED_MARKETPLACES[@]}"; do
+        if ! repo_has_git "$SCRIPT_DIR/$rel_path"; then
+            MISSING_MARKETPLACES+=("$rel_path")
+        fi
+    done
+    if [[ ${#MISSING_MARKETPLACES[@]} -eq 0 ]]; then
+        echo -e "${GREEN}  All manifest marketplace clones present${NC}"
     elif [[ -f "$SCRIPT_DIR/scripts/init-marketplaces.sh" ]]; then
+        echo -e "${YELLOW}  Missing ${#MISSING_MARKETPLACES[@]} manifest marketplace clone(s); initializing${NC}"
         bash "$SCRIPT_DIR/scripts/init-marketplaces.sh"
     else
         echo -e "${YELLOW}  Marketplace clones missing and init-marketplaces.sh not found${NC}"
@@ -172,6 +180,70 @@ get_default_branch() {
     return 1
 }
 
+repo_has_git() {
+    local repo_path="$1"
+    [[ -d "$repo_path/.git" ]] || [[ -f "$repo_path/.git" ]]
+}
+
+manifest_marketplace_paths() {
+    git config --file "$SCRIPT_DIR/.gitmodules" --get-regexp path 2>/dev/null | awk '{print $2}'
+}
+
+repo_is_dirty() {
+    local repo_path="$1"
+    [[ -n "$(git -C "$repo_path" status --porcelain 2>/dev/null)" ]]
+}
+
+remote_is_travis_owned() {
+    local repo_path="$1"
+    local fetch_url
+    fetch_url=$(git -C "$repo_path" remote get-url origin 2>/dev/null) || return 1
+    [[ "$fetch_url" == *"github.com/travisjneuman/"* ]] || [[ "$fetch_url" == git@github.com:travisjneuman/* ]]
+}
+
+enforce_custom_push_policy() {
+    local repo_path="$1"
+    local repo_name="$2"
+    local push_url
+    push_url=$(git -C "$repo_path" remote get-url --push origin 2>/dev/null) || push_url=""
+
+    case "$(echo "$repo_path" | tr '[:upper:]' '[:lower:]')" in
+        *"/.openclaw"|*"/.openclaw/"*)
+            if [[ "$push_url" != "no_push" ]]; then
+                git -C "$repo_path" remote set-url --push origin no_push 2>/dev/null || true
+                echo -e "${CYAN}  $repo_name: push disabled (local-only .openclaw)${NC}"
+                NO_PUSH_FIXED=$((NO_PUSH_FIXED + 1))
+            fi
+            return 0
+            ;;
+    esac
+
+    if remote_is_travis_owned "$repo_path"; then
+        if [[ "$push_url" == "no_push" ]]; then
+            local fetch_url
+            fetch_url=$(git -C "$repo_path" remote get-url origin 2>/dev/null) || return 0
+            git -C "$repo_path" remote set-url --push origin "$fetch_url" 2>/dev/null || true
+            echo -e "${CYAN}  $repo_name: push restored for Travis-owned repo${NC}"
+            NO_PUSH_FIXED=$((NO_PUSH_FIXED + 1))
+        fi
+    else
+        if [[ -n "$push_url" && "$push_url" != "no_push" ]]; then
+            git -C "$repo_path" remote set-url --push origin no_push 2>/dev/null || true
+            echo -e "${CYAN}  $repo_name: push disabled (non-Travis repo)${NC}"
+            NO_PUSH_FIXED=$((NO_PUSH_FIXED + 1))
+        fi
+    fi
+}
+
+collect_git_roots() {
+    local project_dir="$1"
+    find "$project_dir" \
+        \( -path "*/node_modules" -o -path "*/.git/*" -o -path "*/plugins/cache" -o -path "*/plugins/marketplaces" -o -path "*/.worktrees" \) -prune \
+        -o -name .git -print 2>/dev/null | while IFS= read -r git_marker; do
+            dirname "$git_marker"
+        done
+}
+
 # Process a single repo
 process_repo() {
     local repo_path="$1"
@@ -181,7 +253,7 @@ process_repo() {
     TOTAL=$((TOTAL + 1))
 
     # Verify it's a git repo
-    if [[ ! -d "$repo_path/.git" ]] && [[ ! -f "$repo_path/.git" ]]; then
+    if ! repo_has_git "$repo_path"; then
         echo -e "${DIM}  Skipping $repo_name (not a git repo)${NC}"
         return 0
     fi
@@ -191,6 +263,12 @@ process_repo() {
         FAILED=$((FAILED + 1))
         return 1
     }
+
+    if repo_is_dirty "$repo_path"; then
+        echo -e "${RED}  $repo_name: dirty working tree; skipping pull${NC}"
+        FAILED=$((FAILED + 1))
+        return 1
+    fi
 
     # Get current state
     local current_branch
@@ -214,7 +292,7 @@ process_repo() {
     fi
 
     # Fetch first
-    if ! git fetch origin 2>/dev/null; then
+    if ! git fetch --prune origin 2>/dev/null; then
         echo -e "${RED}  $repo_name: failed to fetch${NC}"
         FAILED=$((FAILED + 1))
         return 1
@@ -257,15 +335,9 @@ process_repo() {
         echo -e "${GREEN}  $repo_name: pulled $behind commits${NC}"
         UPDATED=$((UPDATED + 1))
     else
-        # Try regular pull if ff-only fails
-        if git pull origin "$current_branch" >/dev/null 2>&1; then
-            echo -e "${GREEN}  $repo_name: pulled (merged) $behind commits${NC}"
-            UPDATED=$((UPDATED + 1))
-        else
-            echo -e "${RED}  $repo_name: pull failed (conflicts?)${NC}"
-            FAILED=$((FAILED + 1))
-            return 1
-        fi
+        echo -e "${RED}  $repo_name: fast-forward pull failed; skipping to avoid merge/conflict${NC}"
+        FAILED=$((FAILED + 1))
+        return 1
     fi
 
     return 0
@@ -303,11 +375,17 @@ process_repo "$SCRIPT_DIR" ".claude (travisjneuman/.claude)" true
 echo ""
 echo -e "${BOLD}Marketplace Clones:${NC}"
 MARKETPLACE_COUNT=0
-for repo in "$MARKETPLACES_DIR"/*/; do
-    if [[ -d "$repo" ]]; then
-        repo_name=$(basename "$repo")
+mapfile -t MARKETPLACE_PATHS < <(manifest_marketplace_paths)
+for rel_path in "${MARKETPLACE_PATHS[@]}"; do
+    repo="$SCRIPT_DIR/$rel_path"
+    repo_name=$(basename "$repo")
+    MARKETPLACE_COUNT=$((MARKETPLACE_COUNT + 1))
+    if repo_has_git "$repo"; then
         process_repo "$repo" "$repo_name"
-        MARKETPLACE_COUNT=$((MARKETPLACE_COUNT + 1))
+    else
+        echo -e "${RED}  $repo_name: missing marketplace clone from manifest${NC}"
+        TOTAL=$((TOTAL + 1))
+        FAILED=$((FAILED + 1))
     fi
 done
 
@@ -317,10 +395,10 @@ done
 if [[ "$STATUS_ONLY" == false ]]; then
     echo ""
     echo -e "${BOLD}Enforcing no_push on marketplace clones:${NC}"
-    for repo in "$MARKETPLACES_DIR"/*/; do
-        if [[ -d "$repo" ]]; then
-            repo_name=$(basename "$repo")
-            enforce_no_push "$repo" "$repo_name"
+    for rel_path in "${MARKETPLACE_PATHS[@]}"; do
+        repo="$SCRIPT_DIR/$rel_path"
+        if repo_has_git "$repo"; then
+            enforce_no_push "$repo" "$(basename "$repo")"
         fi
     done
     if [[ $NO_PUSH_FIXED -eq 0 ]]; then
@@ -341,6 +419,7 @@ fi
 # PHASE 4: Pull custom project directories (if configured)
 # =============================================================================
 CUSTOM_REPO_COUNT=0
+declare -A SEEN_CUSTOM_REPOS=()
 if [[ ${#CUSTOM_PROJECT_DIRS[@]} -gt 0 ]]; then
     for project_dir in "${CUSTOM_PROJECT_DIRS[@]}"; do
         # Skip empty entries (from commented lines)
@@ -353,26 +432,23 @@ if [[ ${#CUSTOM_PROJECT_DIRS[@]} -gt 0 ]]; then
             echo ""
             echo -e "${BOLD}Custom Projects ($(basename "$project_dir")):${NC}"
 
-            # The custom project dir itself, if it's a git repo
-            # (e.g. /Users/tjn/web-dev IS the .webdev repo). Without this we'd
-            # iterate its children but never pull the parent. Bug from 2026-04-29.
-            if [[ -d "$project_dir/.git" ]] || [[ -f "$project_dir/.git" ]]; then
-                process_repo "$project_dir" "$(basename "$project_dir") (parent)"
-                CUSTOM_REPO_COUNT=$((CUSTOM_REPO_COUNT + 1))
-            fi
-
-            # Find all git repos in this directory (1 level deep, including dotdirs)
-            for repo in "$project_dir"/*/ "$project_dir"/.*/; do
-                # Skip . and .. entries from .* glob
-                [[ "$(basename "$repo")" == "." || "$(basename "$repo")" == ".." ]] && continue
-                if [[ -d "$repo/.git" ]] || [[ -f "$repo/.git" ]]; then
-                    repo_name=$(basename "$repo")
-                    process_repo "$repo" "$repo_name"
-                    CUSTOM_REPO_COUNT=$((CUSTOM_REPO_COUNT + 1))
+            FOUND_IN_THIS_DIR=0
+            while IFS= read -r repo; do
+                [[ -z "$repo" ]] && continue
+                if [[ -n "${SEEN_CUSTOM_REPOS[$repo]:-}" ]]; then
+                    continue
                 fi
-            done
+                SEEN_CUSTOM_REPOS[$repo]=1
+                repo_name=$(basename "$repo")
+                process_repo "$repo" "$repo_name"
+                if [[ "$STATUS_ONLY" == false ]]; then
+                    enforce_custom_push_policy "$repo" "$repo_name"
+                fi
+                CUSTOM_REPO_COUNT=$((CUSTOM_REPO_COUNT + 1))
+                FOUND_IN_THIS_DIR=$((FOUND_IN_THIS_DIR + 1))
+            done < <(collect_git_roots "$project_dir")
 
-            if [[ $CUSTOM_REPO_COUNT -eq 0 ]]; then
+            if [[ $FOUND_IN_THIS_DIR -eq 0 ]]; then
                 echo -e "${DIM}  No git repos found in $project_dir${NC}"
             fi
         else
@@ -434,8 +510,23 @@ if [[ "$STATUS_ONLY" == false ]]; then
         echo ""
         echo -e "${BOLD}Committing and pushing updates:${NC}"
 
-        # Stage all tracked changes (count updates, path fixes)
-        git add -A
+        # Stage only tracked/generated toolkit files. Never sweep ignored runtime,
+        # marketplace, cache, auth, or ad-hoc local files into the public repo.
+        git add -u
+        for generated_file in \
+            counts.json plugin.json README.md CLAUDE.md CHANGELOG.md \
+            .gitmodules .env.example _pull-all-repos.sh \
+            docs/SETUP-GUIDE.md docs/NEW-DEVICE-SETUP.md docs/MARKETPLACE-GUIDE.md \
+            docs/MAINTENANCE.md docs/FOLDER-STRUCTURE.md docs/ARCHITECTURE.md \
+            docs/README.md docs/FAQ.md docs/GLOSSARY.md docs/PLUGIN-MANAGEMENT.md \
+            docs/CLAUDE-CODE-RESOURCES.md docs/SKILLS.md docs/reference/tooling/external-repos.md \
+            scripts/README.md scripts/generate-counts.mjs \
+            commands/README.md commands/bootstrap.md commands/health-check.md \
+            commands/list-skills.md commands/pull-repos.md commands/skill-finder.md \
+            website/src/lib/data/marketplace-counts.json
+        do
+            [[ -e "$generated_file" ]] && git add "$generated_file"
+        done
 
         # Build a descriptive commit message
         COMMIT_PARTS=()

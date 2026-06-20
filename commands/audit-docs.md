@@ -84,7 +84,7 @@ Search documentation files for count references and compare against ground truth
 | `\d+ skills` | "119 skills" | Actual skill count |
 | `\d+ agents` | "67 agents" | Actual agent count |
 | `\d+ commands` | "30 commands" | Actual command count |
-| `\d+ market` | "101 marketplace" | Actual marketplace count |
+| `\d+ market` | "108 marketplace" | Actual marketplace count |
 | `\d+ repos` | "101 repos" | Actual marketplace count |
 | `\d+ hooks` | "10 hooks" | Actual hook count |
 | `\d+ templates` | "5 templates" | Actual template count |

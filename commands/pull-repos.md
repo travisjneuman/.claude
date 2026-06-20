@@ -1,5 +1,5 @@
 ---
-description: Pull all repos (parent + 90 marketplace submodules)
+description: Pull all repos (parent + marketplace clones + configured project repos)
 arguments:
   - name: action
     description: "Action: pull, status (default: pull)"
@@ -8,7 +8,7 @@ arguments:
 
 # Pull Repos
 
-Pull the parent repo, marketplace submodules, and custom project directories with a single command.
+Pull the parent repo, ignored marketplace clones, and configured project directories with a single command.
 
 ## Usage
 
@@ -19,10 +19,10 @@ Pull the parent repo, marketplace submodules, and custom project directories wit
 ## What It Does
 
 1. **Pulls parent repo** (`~/.claude` - travisjneuman/.claude)
-2. **Pulls all submodules** (90 repos in `plugins/marketplaces/`)
-3. **Pulls custom project directories** (if configured - your own repos)
+2. **Pulls all manifest marketplace clones** (read-only repos in `plugins/marketplaces/`)
+3. **Pulls custom project directories recursively** (if configured)
 4. **Fixes detached HEAD** automatically on any repo
-5. **Enforces no_push** on marketplace submodules only (not your repos)
+5. **Enforces no_push** on marketplace clones and non-Travis-owned custom repos
 
 ## Arguments
 
@@ -61,28 +61,25 @@ Check status without pulling:
 |  #   | Repository                        | Type       | Push Access         |
 | :--: | :-------------------------------- | :--------- | :------------------ |
 |  1   | `.claude` (travisjneuman/.claude) | Parent     | ✅ Push enabled     |
-| 2-50 | `plugins/marketplaces/*`          | Submodules | ❌ no_push enforced |
-| 51+  | Custom project directories        | Your repos | ✅ Push enabled     |
+| 2+   | `.gitmodules` marketplace entries | Clones     | ❌ no_push enforced |
+| ...  | Custom project directories        | Mixed      | ✅ Travis-owned only |
 
 ## Features
 
-- ✅ **Auto-discovers repos** - Add new submodules and they're automatically included
+- ✅ **Auto-discovers marketplace entries** - Add new manifest entries and they're automatically included
 - ✅ **Custom project directories** - Add your own project folders (see below)
-- ✅ **Fixes detached HEAD** - Common issue with submodules, fixed automatically
+- ✅ **Recursive project discovery** - Finds nested repos such as Lazy Golfing frontend/backend checkouts
+- ✅ **Fixes detached HEAD** - Common issue with external clones, fixed automatically
 - ✅ **Detects correct branch** - main/master/development per repo
-- ✅ **Enforces no_push** - Only on marketplace submodules (not your repos)
-- ✅ **Safe** - Only pulls, never pushes or discards changes
+- ✅ **Enforces no_push** - Marketplace clones and non-Travis-owned custom repos cannot push
+- ✅ **Safe** - Dirty repos are skipped; pulls are fast-forward only; no merge/rebase/reset
 
 ## Adding Your Own Project Directories
 
-Edit `~/.claude/_pull-all-repos.sh` and find the `CUSTOM_PROJECT_DIRS` section near the top:
+Create or edit `~/.claude/.env.local`:
 
 ```bash
-CUSTOM_PROJECT_DIRS=(
-    # "/e/Web Development"           # Uncomment and edit for your directories
-    # "/c/Users/you/projects"        # Add as many as needed
-    # "$HOME/projects"               # Works on any platform
-)
+CUSTOM_PROJECT_DIRS="/e/Web Development,/c/Users/you/.codex,/c/Users/you/.hermes"
 ```
 
 **Windows paths in Git Bash:**
@@ -90,23 +87,25 @@ CUSTOM_PROJECT_DIRS=(
 - `E:\Web Development` → `/e/Web Development`
 - `C:\Users\you\projects` → `/c/Users/you/projects`
 
-Your custom directories are pulled but NOT set to no_push (full push access retained).
+Custom directories are recursively scanned. Travis-owned GitHub repos retain push access; non-Travis repos are set to `no_push`; dirty repos are skipped for safety.
 
-## How no_push Works (Location-Based)
+## How no_push Works
 
-The script uses **location** to determine which repos get `no_push` protection:
+The script uses both location and remote ownership:
 
-| Location                 | no_push? | Why                                 |
-| ------------------------ | -------- | ----------------------------------- |
-| `~/.claude` (parent)     | ❌ No    | Root level = your repo              |
-| `plugins/marketplaces/*` | ✅ Yes   | Marketplace folder = external repos |
-| Custom directories       | ❌ No    | You added them = your repos         |
+| Repo class | no_push? | Why |
+| --- | --- | --- |
+| `~/.claude` parent | ❌ No | Travis-owned public toolkit repo |
+| `plugins/marketplaces/*` | ✅ Yes | External upstream references |
+| Custom Travis-owned repos | ❌ No | Commit/push policy applies |
+| Custom non-Travis repos | ✅ Yes | External/no-push policy applies |
+| `.openclaw` | ✅ Yes | Deprecated local-only exception |
 
 **Key points:**
 
-- `no_push` is ONLY applied to repos inside `plugins/marketplaces/`
-- The parent repo and custom directories retain full push capability
-- This is location-based, not ownership-based
+- `no_push` is always applied to repos inside `plugins/marketplaces/`
+- Custom repos are checked by remote owner before push access is allowed
+- Dirty or divergent repos are skipped instead of merged
 - If you want to push to a marketplace repo, fork it to your own custom directory
 
 **Verification:**
@@ -144,16 +143,16 @@ git remote -v
 Parent Repo (~/.claude):
   .claude (travisjneuman/.claude): already up to date
 
-Marketplace Submodules:
+Marketplace Clones:
   alirezarezvani-claude-skills: pulled 5 commits
   anthropic-agent-skills: already up to date
   ...
 
-Enforcing no_push on submodules:
-  All submodules already have no_push configured
+Enforcing no_push on marketplace clones:
+  All marketplace clones already have no_push configured
 
 === Summary ===
-  Total repos:       91 (1 parent + 90 submodules)
+  Total repos:       110 (1 parent + 108 marketplace clones + 1 custom)
   Updated:         1
   Already current: 23
 ```
@@ -163,7 +162,7 @@ Enforcing no_push on submodules:
 - **Starting work** - Pull latest before beginning
 - **After someone pushes** - Sync changes from another machine
 - **Regularly** - Keep all repos up to date
-- **After adding submodules** - Script auto-discovers new repos
+- **After adding marketplace entries** - Script auto-discovers new repos from `.gitmodules`
 
 ## Related
 

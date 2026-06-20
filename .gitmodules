@@ -234,10 +234,6 @@
 	path = plugins/marketplaces/ykdojo-tips
 	url = https://github.com/ykdojo/claude-code-tips.git
 	ignore = all
-[submodule "plugins/marketplaces/kivilaid-marketplace"]
-	path = plugins/marketplaces/kivilaid-marketplace
-	url = https://github.com/kivilaid/plugin-marketplace.git
-	ignore = all
 [submodule "plugins/marketplaces/hesreallyhim-awesome"]
 	path = plugins/marketplaces/hesreallyhim-awesome
 	url = https://github.com/hesreallyhim/awesome-claude-code.git
