@@ -14,7 +14,7 @@ Helper scripts for setup, maintenance, and automation of the Claude Code toolkit
 | ---------------------- | --------------------------------------------- | ---------------------------------------------- |
 | `install.sh`           | One-line installer (curl-pipe)                | First-time setup on any machine                |
 | `setup-new-machine.sh` | Complete setup (plugins, hooks, verification) | After cloning the repo                         |
-| `init-marketplaces.sh` | Clone all 109 marketplace repos from upstreams | After cloning, or to fix broken marketplace clones     |
+| `init-marketplaces.sh` | Clone all 108 marketplace repos from upstreams | After cloning, or to fix broken marketplace clones     |
 | `setup-hooks.sh`       | Install git hooks into `.git/hooks/`          | After cloning (called by setup-new-machine.sh) |
 
 ### Maintenance (run periodically)
@@ -22,6 +22,7 @@ Helper scripts for setup, maintenance, and automation of the Claude Code toolkit
 | Script                | Purpose                                 | When to Run                                                |
 | --------------------- | --------------------------------------- | ---------------------------------------------------------- |
 | `update-counts.sh`    | Update all hardcoded counts across docs | After adding/removing skills, agents, or marketplace repos |
+| `generate-showcase-images.mjs` | Regenerate `.claude` OG images and optional `tjn.portfolio` screenshots from `counts.json` | After public showcase counts change |
 | `regenerate-index.sh` | Regenerate `skills/MASTER_INDEX.md`     | After adding/removing skills                               |
 | `update-plugins.sh`   | Update plugin registrations             | After enabling/disabling plugins                           |
 | `fix-remotes.sh`      | Fix remote URLs on marketplace repos    | If remotes are misconfigured after a pull                  |
@@ -65,7 +66,7 @@ These are different from the Claude Code lifecycle hooks in `~/.claude/hooks/`. 
 
 1. Initializes missing marketplace clones from the manifest
 2. Pulls the parent repo
-3. Pulls all 109 marketplace repos
+3. Pulls all 108 marketplace repos
 4. Enforces `no_push` on marketplace repos
 5. Protects parent repo push URL
 6. Pulls custom project directories (from `.env.local`)
@@ -96,6 +97,11 @@ bash ~/.claude/scripts/setup-new-machine.sh
 ```bash
 bash ~/.claude/scripts/update-counts.sh
 # Counts in README, plugin.json, and all docs updated automatically
+
+# Full public showcase sync, including travisjneuman + tjn.portfolio text and images:
+node ~/.claude/scripts/generate-counts.mjs --write --sync-consumers --sync-images \
+  --travis-repo="/e/Web Development/travisjneuman" \
+  --portfolio-repo="/e/Web Development/tjn.portfolio"
 ```
 
 ### Fixing broken marketplace repos

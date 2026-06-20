@@ -34,7 +34,7 @@ Slash commands are shortcuts you invoke in Claude Code with `/<command-name>`. T
 | `update-docs`   | Scan for recently modified files and update corresponding documentation | `/update-docs`          |
 | `changelog`     | Generate formatted changelog entry from git commits since last tag     | `/changelog v2.6.0`    |
 | `audit-docs`    | Scan documentation for staleness — broken links, outdated counts       | `/audit-docs all`       |
-| `pull-repos`    | Pull all repos (parent + marketplace submodules)                        | `/pull-repos`           |
+| `pull-repos`    | Pull all repos (parent + marketplace clones)                        | `/pull-repos`           |
 | `bootstrap`     | Verify and repair Claude Code Toolkit installation                      | `/bootstrap`            |
 
 ### Session

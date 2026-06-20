@@ -50,7 +50,7 @@ done
 # Submodules are read-only (external repos)
 SUBMODULE_CHANGES=$(git diff --cached --name-only | grep "^plugins/marketplaces/")
 if [ -n "$SUBMODULE_CHANGES" ]; then
-    echo -e "${YELLOW}⚠ Note: Changes include marketplace submodules${NC}"
+    echo -e "${YELLOW}⚠ Note: Changes include marketplace clones${NC}"
     echo "  These are tracked as gitlinks (commit pointers), not content."
 fi
 

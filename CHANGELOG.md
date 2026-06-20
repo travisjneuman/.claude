@@ -9,6 +9,9 @@ All notable changes to the Ultimate Claude Code Toolkit.
 - Replaced brittle count sync scripts with one canonical generator that updates toolkit counts, website count data, and downstream Travis profile/portfolio references.
 - Updated marketplace wording from misleading "submodules" language to ignored marketplace clones managed from the manifest with `no_push` protection.
 - Fixed marketplace initialization on Windows/Git Bash by stripping CRLF carriage returns from `.gitmodules` URLs before cloning.
+- Removed inaccessible `kivilaid/plugin-marketplace` from the active public marketplace manifest after direct GitHub API/raw/Git checks returned unavailable; the local ignored clone remains preserved as reference material.
+- Hardened `_pull-all-repos.sh` to skip dirty repos, use fetch/prune plus fast-forward-only pulls, recurse through configured project roots, and enforce `no_push` on non-Travis-owned custom repos.
+- Scoped downstream portfolio count updates to the `tjn.claude/` project card so other showcase entries cannot be accidentally rewritten.
 - Upgraded the website dependency set to current stable versions, replaced `gray-matter` with `yaml`, and added targeted overrides for audited transitive advisories.
 - Adjusted the 3D hero scene for current React/ESLint purity rules without changing the public website purpose.
 

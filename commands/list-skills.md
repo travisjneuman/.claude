@@ -218,5 +218,5 @@ Just describe your task - skills auto-activate based on description matching.
 
 ---
 
-_127 local skills + 109 marketplaces (13,000+ skills) = comprehensive coverage for any domain_
+_127 local skills + 108 marketplaces (13,700+ skills) = comprehensive coverage for any domain_
 
