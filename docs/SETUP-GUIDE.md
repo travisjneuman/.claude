@@ -89,7 +89,7 @@ bash ~/.claude/_pull-all-repos.sh
 
 This script:
 
-- Clones or pulls all 90 marketplace repos from their original upstreams
+- Clones or pulls all 109 marketplace repos from their original upstreams
 - Sets `no_push` on each to prevent accidental modifications
 - Fixes detached HEAD states and updates documentation counts
 - Ensures main repo can push to your GitHub
@@ -155,7 +155,7 @@ This configuration syncs across Windows, macOS, and Linux via GitHub.
 | Skills, agents, rules    | Git            | Shared across all machines       |
 | Commands, templates      | Git            | Shared across all machines       |
 | .vscode/ settings        | Git            | Shared VSCode workspace settings |
-| Marketplace plugins      | Git submodules | Read-only, fetch updates only    |
+| Marketplace plugins      | Ignored local clones | Read-only, fetch updates only    |
 | `.mcp.json`              | **Manual**     | Platform-specific (cmd vs npx)   |
 | `.env.local`             | **Manual**     | Machine-specific directories     |
 | Session data             | Not synced     | Local to each machine            |
@@ -185,7 +185,7 @@ bash ~/.claude/_pull-all-repos.sh
 ~/.claude/_pull-all-repos.sh
 ```
 
-This pulls all 90 marketplace repos, fixes detached HEADs, enforces `no_push`, and updates documentation counts automatically. Each machine fetches independently -- gitlinks are not tracked in the parent repo.
+This pulls all 109 marketplace repos, fixes detached HEADs, enforces `no_push`, and updates documentation counts automatically. Each machine fetches independently -- gitlinks are not tracked in the parent repo.
 
 ---
 
@@ -204,7 +204,7 @@ This pulls all 90 marketplace repos, fixes detached HEADs, enforces `no_push`, a
 +-- scripts/               <- Helper scripts
 +-- plugins/
 |   +-- local/             <- Your custom plugins
-|   +-- marketplaces/      <- External plugins (submodules)
+|   +-- marketplaces/      <- External plugins (ignored local clones)
 +-- .vscode/               <- Shared VSCode settings
 ```
 
@@ -255,7 +255,7 @@ When using VS Code Remote SSH:
 2. **Windows:** Ensure `cmd /c` wrapper is used
 3. **Mac/Linux:** Ensure NO `cmd /c` wrapper
 
-### Submodule Issues
+### Marketplace Clone Issues
 
 ```bash
 cd ~/.claude
@@ -292,3 +292,4 @@ Then run `/doctor` in Claude.
 - [CONFIGURATION.md](./CONFIGURATION.md) - Settings details
 - [MCP-SERVERS.md](./MCP-SERVERS.md) - MCP setup
 - [MAINTENANCE.md](./MAINTENANCE.md) - Keeping things clean
+

@@ -18,8 +18,8 @@
 [![Agents](https://img.shields.io/badge/Agents-86-f59e0b?style=flat-square)](./agents/README.md)
 [![Commands](https://img.shields.io/badge/Commands-30-a855f7?style=flat-square)](./commands/README.md)
 [![GSD](https://img.shields.io/badge/GSD-v1.29-ef4444?style=flat-square)](https://github.com/gsd-build/get-shit-done)
-[![Repos](https://img.shields.io/badge/Marketplace_Repos-90-3b82f6?style=flat-square)](./plugins/marketplaces/)
-[![Marketplace Skills](https://img.shields.io/badge/Marketplace_Skills-11700+-ec4899?style=flat-square)](./docs/MARKETPLACE-GUIDE.md)
+[![Repos](https://img.shields.io/badge/Marketplace_Repos-109-3b82f6?style=flat-square)](./plugins/marketplaces/)
+[![Marketplace Skills](https://img.shields.io/badge/Marketplace_Skills-13000+-ec4899?style=flat-square)](./docs/MARKETPLACE-GUIDE.md)
 [![Hooks](https://img.shields.io/badge/Hooks-15-06b6d4?style=flat-square)](./hooks/README.md)
 [![Templates](https://img.shields.io/badge/Templates-17-84cc16?style=flat-square)](./templates/README.md)
 [![MCP](https://img.shields.io/badge/MCP_Servers-12-f97316?style=flat-square)](./docs/MCP-SERVERS.md)
@@ -32,7 +32,7 @@
 
 A drop-in configuration layer for [Claude Code](https://docs.anthropic.com/en/docs/claude-code) that transforms it from a capable AI assistant into an enterprise-grade development powerhouse.
 
-**One `git clone` gives you** 124 domain skills, 86 specialist agents, 90 community marketplaces with 11,700+ additional skills, 30 slash commands, 15 lifecycle hooks, 12 MCP server configs, and the **[GSD (Get Shit Done)](https://github.com/gsd-build/get-shit-done)** project management framework — all auto-activating based on what you're working on. No manual configuration required.
+**One `git clone` gives you** 128 domain skills, 86 specialist agents, 109 community marketplaces with 13,000+ additional skills, 30 slash commands, 15 lifecycle hooks, 12 MCP server configs, and the **[GSD (Get Shit Done)](https://github.com/gsd-build/get-shit-done)** project management framework — all auto-activating based on what you're working on. No manual configuration required.
 
 **How it works:** Describe what you want in plain language. The toolkit's dynamic router detects context from your prompt and loads the right skills, agents, rules, and checklists automatically. No slash commands needed (though they're available if you prefer).
 
@@ -51,15 +51,15 @@ Click the green **"Use this template"** button at the top of this repo to create
 Or clone directly if you prefer:
 
 ```bash
-git clone --recurse-submodules https://github.com/travisjneuman/.claude.git ~/.claude
+git clone https://github.com/travisjneuman/.claude.git ~/.claude
 ```
 
-### Manual Clone (if submodules fail)
+### Initialize Marketplace Clones
 
 ```bash
 git clone https://github.com/travisjneuman/.claude.git ~/.claude
 cd ~/.claude
-git submodule update --init --recursive
+bash ~/.claude/scripts/init-marketplaces.sh
 ```
 
 ### Verify Installation
@@ -84,11 +84,11 @@ That's it. The toolkit auto-activates from `~/.claude/` on every Claude Code ses
 | Component | Count | Description |
 |-----------|-------|-------------|
 | **[GSD Framework](https://github.com/gsd-build/get-shit-done)** | v1.29 | Multi-phase project management with 57 commands — the flagship workflow tool |
-| **[Skills](./skills/MASTER_INDEX.md)** | 124 | Domain expertise modules (React, security, DevOps, finance, etc.) |
+| **[Skills](./skills/MASTER_INDEX.md)** | 128 | Domain expertise modules (React, security, DevOps, finance, etc.) |
 | **[Agents](./agents/README.md)** | 86 | Specialist subagents for focused tasks (code review, debugging, etc.) |
 | **[Commands](./commands/README.md)** | 94 | Slash commands: 30 base + 57 GSD + 7 router |
-| **[Marketplace Repos](./plugins/marketplaces/)** | 90 | Community skill repositories (11,700+ additional skills) |
-| **[Hooks](./hooks/README.md)** | 9 | Lifecycle hooks (session start/stop, pre-commit, safety guards) |
+| **[Marketplace Repos](./plugins/marketplaces/)** | 109 | Community skill repositories (13,000+ additional skills) |
+| **[Hooks](./hooks/README.md)** | 15 | Lifecycle hooks (session start/stop, pre-commit, safety guards) |
 | **[Templates](./templates/README.md)** | 17 | Project scaffolding and task templates |
 | **[MCP Servers](./docs/MCP-SERVERS.md)** | 12 | Model Context Protocol server configurations |
 | **[Rules](./rules/)** | 9 | Stack-specific coding guardrails (TypeScript, Python, Go, Rust, etc.) |
@@ -127,7 +127,7 @@ See **[MASTER_INDEX.md](./skills/MASTER_INDEX.md)** for the full listing with de
 
 ### Dynamic Routing
 
-Every prompt flows through a routing system that loads the best-fit resources on-demand — drawing from 124 built-in skills, 86 agents, 9 rules + 10 checklists, the GSD framework (57 commands), and 11,700+ community marketplace skills across 90 repos:
+Every prompt flows through a routing system that loads the best-fit resources on-demand — drawing from 128 built-in skills, 86 agents, 9 rules + 10 checklists, the GSD framework (57 commands), and 13,000+ community marketplace skills across 109 repos:
 
 ```
  Your prompt
@@ -142,8 +142,8 @@ Every prompt flows through a routing system that loads the best-fit resources on
    ▼        ▼        ▼          ▼            ▼
 ┌──────┐ ┌──────┐ ┌──────┐ ┌───────┐ ┌────────────┐
 │Skills│ │Rules │ │Agents│ │  GSD  │ │ Marketplace│
-│(124) │ │& Chk │ │ (86) │ │  (57) │ │  110 repos│
-│      │ │      │ │      │ │       │ │ 11,700+ more│
+│(128) │ │& Chk │ │ (86) │ │  (57) │ │ 109 repos│
+│      │ │      │ │      │ │       │ │ 13,000+ more│
 └──────┘ └──────┘ └──────┘ └───────┘ └────────────┘
 ```
 
@@ -224,9 +224,9 @@ See the **[GSD repository](https://github.com/gsd-build/get-shit-done)** for the
 ## 🔑 Key Features
 
 <details>
-<summary><strong>🏪 Marketplace — 90 repos, 11,700+ skills</strong></summary>
+<summary><strong>🏪 Marketplace — 109 repos, 13,000+ skills</strong></summary>
 
-The toolkit aggregates 90 community skill repositories as git submodules in `plugins/marketplaces/`. All are read-only (fetch but never push). Skills span security (Trail of Bits), full-stack development, scientific computing, SAP/enterprise, Elixir, Terraform, creative writing, and more. Some marketplace repos are **installed as plugins**, making their agents, commands, and skills fully active in the routing system alongside built-in resources. Non-installed repos contribute discoverable skills via keyword search.
+The toolkit aggregates 109 community skill repositories as ignored local clones in `plugins/marketplaces/`. All are read-only (fetch but never push). Skills span security (Trail of Bits), full-stack development, scientific computing, SAP/enterprise, Elixir, Terraform, creative writing, and more. Some marketplace repos are **installed as plugins**, making their agents, commands, and skills fully active in the routing system alongside built-in resources. Non-installed repos contribute discoverable skills via keyword search.
 
 ```bash
 # Search marketplace skills
@@ -358,7 +358,7 @@ The toolkit uses a two-layer architecture:
 ### New Device Setup
 
 ```bash
-git clone --recurse-submodules https://github.com/travisjneuman/.claude.git ~/.claude
+git clone https://github.com/travisjneuman/.claude.git ~/.claude
 cp ~/.claude/.env.example ~/.claude/.env.local
 # Edit .env.local with machine-specific paths
 bash ~/.claude/scripts/fix-marketplace-paths.sh
@@ -386,11 +386,11 @@ See **[docs/NEW-DEVICE-SETUP.md](./docs/NEW-DEVICE-SETUP.md)** for the full walk
 **March 2026 — Comprehensive audit, GSD promotion, new repos, full domain coverage**
 
 - **GSD (Get Shit Done) promoted:** Now the flagship feature with dedicated README section, Quick Start integration, and routing diagram inclusion. 57 commands for full project lifecycle management.
-- **6 new marketplace repos:** `blader/humanizer` (11.4K stars), `phuryn/pm-skills` (8.3K stars, 100+ PM skills), `Lum1104/Understand-Anything` (6.6K stars), `SawyerHood/dev-browser` (4.9K stars), `slavingia/skills` (4.5K stars), `millionco/expect` (2.3K stars). Now 90 repos total.
-- **Submodule cleanup:** Fixed orphaned directories, standardized all .gitmodules naming, verified no_push protection on 100% of marketplace repos
+- **6 new marketplace repos:** `blader/humanizer` (11.4K stars), `phuryn/pm-skills` (8.3K stars, 100+ PM skills), `Lum1104/Understand-Anything` (6.6K stars), `SawyerHood/dev-browser` (4.9K stars), `slavingia/skills` (4.5K stars), `millionco/expect` (2.3K stars). Current manifest: 109 repos total.
+- **Marketplace clone cleanup:** Fixed orphaned directories, standardized the `.gitmodules` manifest, verified `no_push` protection on marketplace clones
 - **Full domain coverage:** New skills and agents for blockchain/Web3, data engineering, embedded/IoT, edge computing, compliance, and more
 - **New stack rules:** Added Go, Rust, Java/Kotlin, C/C++, Swift/iOS, Flutter/Dart rules — path-scoped for zero token cost when not relevant
-- **Count synchronization:** All counts now accurate across README, plugin.json, counts.json (127 skills, 86 agents, 94 commands, 110 repos)
+- **Count synchronization:** All counts now accurate across README, plugin.json, counts.json (128 skills, 86 agents, 94 commands, 109 repos)
 
 **Earlier in March 2026:**
 - **Marketplace routing:** All repos now surface naturally by domain — routing coverage went from 23% to 100%
@@ -418,7 +418,7 @@ See **[CHANGELOG.md](./CHANGELOG.md)** for the full history.
 | [MCP Servers](./docs/MCP-SERVERS.md) | MCP server reference |
 | [Configuration](./docs/CONFIGURATION.md) | Full settings.json reference |
 | [Folder Structure](./docs/FOLDER-STRUCTURE.md) | Directory layout and purpose |
-| [Skills Index](./skills/MASTER_INDEX.md) | All 124 skills with descriptions |
+| [Skills Index](./skills/MASTER_INDEX.md) | All 128 skills with descriptions |
 | [Agents Index](./agents/README.md) | All 86 agents with descriptions |
 
 ---

@@ -234,7 +234,7 @@ plugins/
     ├── anthropic-agent-skills/
     ├── claude-code-plugins/
     ├── taches-cc-resources/
-    └── ... (90 repos total)
+    └── ... (109 manifest-managed marketplace clones)
 ```
 
 Plugins can contribute commands, agents, skills, and hooks. They're registered in `settings.json` under `enabledPlugins`.
@@ -267,3 +267,4 @@ Platform detection is handled by individual scripts using `uname` checks.
 ---
 
 _The toolkit is a layered system: CLAUDE.md provides the constitution, rules provide contextual guidance, skills provide domain knowledge, agents provide autonomous execution, and hooks provide lifecycle automation._
+

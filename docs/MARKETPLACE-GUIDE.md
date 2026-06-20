@@ -1,12 +1,12 @@
 ---
 name: Marketplace Guide
-description: Browse, install, and manage 90 community plugin marketplaces with 11,700+ additional skills.
+description: Browse, install, and manage 109 community plugin marketplaces with 13,000+ additional skills.
 category: ecosystem
 ---
 
 # Marketplace Guide
 
-Complete reference for the 90 plugin marketplaces and how to use them.
+Complete reference for the 109 plugin marketplaces and how to use them.
 
 **Last Updated:** February 2026 (v2.10.1)
 
@@ -50,7 +50,7 @@ Complete reference for the 90 plugin marketplaces and how to use them.
 | `wshobson-agents`                    | 36 agents, 129 skills, 15 orchestrators | Progressive disclosure architecture             |
 | `voltagent-subagents`                | 126+ specialized agents                 | Full-stack, DevOps focus                        |
 | `claude-scientific-skills`           | 144 scientific skills                   | Bioinformatics, chemistry, physics, proteomics  |
-| `davila7-templates`                  | 651 templates                           | Broad template coverage                         |
+| `davila7-templates`                  | 17 templates                           | Broad template coverage                         |
 | `madappgang-claude-code`             | 110 resources                           | Full-stack development                          |
 | `athola-night-market`                | 125 skills                              | Curated night market                            |
 | `voltagent-agent-skills`             | 200+ official dev team skills           | Stripe, Cloudflare, Sentry, HuggingFace, Expo  |
@@ -291,7 +291,7 @@ find ~/.claude/plugins/marketplaces -name "*.md" -path "*/agents/*" | head -20
 
 ### skillsmp.com
 
-Search 35,530+ community skills:
+Search 13,000+ community skills:
 
 ```
 /discover-skills <query>
@@ -309,7 +309,7 @@ Search 35,530+ community skills:
 bash ~/.claude/scripts/update-external-repos.sh
 
 # Or manually
-cd ~/.claude && git submodule update --remote --merge
+cd ~/.claude && bash scripts/init-marketplaces.sh
 ```
 
 All marketplaces are configured with `no_push` - read-only access.
@@ -325,4 +325,4 @@ All marketplaces are configured with `no_push` - read-only access.
 
 ---
 
-_90 marketplaces, 11,700+ skills, discovered proactively when domain expertise is needed._
+_109 marketplaces, 13,000+ skills, discovered proactively when domain expertise is needed._

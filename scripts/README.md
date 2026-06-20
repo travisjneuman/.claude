@@ -14,7 +14,7 @@ Helper scripts for setup, maintenance, and automation of the Claude Code toolkit
 | ---------------------- | --------------------------------------------- | ---------------------------------------------- |
 | `install.sh`           | One-line installer (curl-pipe)                | First-time setup on any machine                |
 | `setup-new-machine.sh` | Complete setup (plugins, hooks, verification) | After cloning the repo                         |
-| `init-marketplaces.sh` | Clone all 90 marketplace repos from upstreams | After cloning, or to fix broken submodules     |
+| `init-marketplaces.sh` | Clone all 109 marketplace repos from upstreams | After cloning, or to fix broken marketplace clones     |
 | `setup-hooks.sh`       | Install git hooks into `.git/hooks/`          | After cloning (called by setup-new-machine.sh) |
 
 ### Maintenance (run periodically)
@@ -31,7 +31,7 @@ Helper scripts for setup, maintenance, and automation of the Claude Code toolkit
 | Script                     | Purpose                               | When to Run                                    |
 | -------------------------- | ------------------------------------- | ---------------------------------------------- |
 | `update-external-repos.sh` | Pull all marketplace repos            | Use `_pull-all-repos.sh` instead (recommended) |
-| `update-marketplaces.sh`   | Update marketplace submodule pointers | After upstream changes                         |
+| `update-marketplaces.sh`   | Update marketplace clones | After upstream changes                         |
 | `force-sync-repos.sh`      | Force-sync all repos (nuclear option) | When repos are severely broken                 |
 
 ### Utilities
@@ -40,7 +40,7 @@ Helper scripts for setup, maintenance, and automation of the Claude Code toolkit
 | ----------------------------------- | ------------------------------------------------------------- |
 | `fix-plugin-line-endings.sh`        | Convert CRLF to LF in plugin files (Linux/Mac)                |
 | `fix-plugin-line-endings.ps1`       | Same, for Windows PowerShell                                  |
-| `website/scripts/fix-submodules.mjs`| Prebuild: remove broken nested submodule refs for Cloudflare  |
+| `website/scripts/fix-submodules.mjs`| Prebuild: remove broken nested gitlink refs for Cloudflare  |
 
 ---
 
@@ -52,7 +52,7 @@ These are git hooks installed into `.git/hooks/` by `setup-hooks.sh`:
 | ------------------ | ----------------------------------------------------------------------------- |
 | `pre-commit.sh`    | Block secrets, validate SKILL.md files, check .gitignore                      |
 | `commit-msg.sh`    | Enforce conventional commit message format                                    |
-| `pre-push.sh`      | Block force-push to master/main, warn about submodule changes                 |
+| `pre-push.sh`      | Block force-push to master/main, warn about unsafe nested repo changes                 |
 | `session-start.sh` | SessionStart hook template (legacy — current hooks are in `~/.claude/hooks/`) |
 
 These are different from the Claude Code lifecycle hooks in `~/.claude/hooks/`. See [hooks/README.md](../hooks/README.md) for that system.
@@ -63,9 +63,9 @@ These are different from the Claude Code lifecycle hooks in `~/.claude/hooks/`. 
 
 `~/.claude/_pull-all-repos.sh` lives at root level (not in scripts/) because it's the primary user-facing script. It:
 
-1. Initializes any unregistered submodules
+1. Initializes missing marketplace clones from the manifest
 2. Pulls the parent repo
-3. Pulls all 90 marketplace repos
+3. Pulls all 109 marketplace repos
 4. Enforces `no_push` on marketplace repos
 5. Protects parent repo push URL
 6. Pulls custom project directories (from `.env.local`)
@@ -117,3 +117,4 @@ bash ~/.claude/scripts/init-marketplaces.sh
 - [Maintenance](../docs/MAINTENANCE.md) — Ongoing maintenance
 - [Hooks README](../hooks/README.md) — Claude Code lifecycle hooks
 - [External Repos](../docs/reference/tooling/external-repos.md) — Marketplace repo management
+

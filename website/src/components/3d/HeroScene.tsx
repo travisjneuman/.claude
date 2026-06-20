@@ -1,9 +1,29 @@
 "use client";
 
 import { Suspense, useRef, useMemo } from "react";
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { Canvas, useFrame } from "@react-three/fiber";
 import { Float, Sphere, MeshDistortMaterial } from "@react-three/drei";
 import * as THREE from "three";
+
+function seededRandom(seed: number) {
+  const value = Math.sin(seed) * 10000;
+  return value - Math.floor(value);
+}
+
+function nodeSeed(position: [number, number, number]) {
+  return position[0] * 13 + position[1] * 17 + position[2] * 19;
+}
+
+function createParticlePositions() {
+  const pos = new Float32Array(1500 * 3);
+  for (let i = 0; i < 1500; i++) {
+    const seed = i + 1;
+    pos[i * 3] = (seededRandom(seed * 3) - 0.5) * 16;
+    pos[i * 3 + 1] = (seededRandom(seed * 3 + 1) - 0.5) * 12;
+    pos[i * 3 + 2] = (seededRandom(seed * 3 + 2) - 0.5) * 10;
+  }
+  return pos;
+}
 
 function CentralOrb() {
   const meshRef = useRef<THREE.Mesh>(null);
@@ -45,7 +65,7 @@ function FloatingNode({
   size?: number;
 }) {
   const meshRef = useRef<THREE.Mesh>(null);
-  const offset = useMemo(() => Math.random() * Math.PI * 2, []);
+  const offset = seededRandom(nodeSeed(position)) * Math.PI * 2;
 
   useFrame((state) => {
     if (meshRef.current) {
@@ -123,16 +143,7 @@ function ConnectionLines({ nodes }: { nodes: [number, number, number][] }) {
 
 function ParticleField() {
   const pointsRef = useRef<THREE.Points>(null);
-
-  const positions = useMemo(() => {
-    const pos = new Float32Array(1500 * 3);
-    for (let i = 0; i < 1500; i++) {
-      pos[i * 3] = (Math.random() - 0.5) * 16;
-      pos[i * 3 + 1] = (Math.random() - 0.5) * 12;
-      pos[i * 3 + 2] = (Math.random() - 0.5) * 10;
-    }
-    return pos;
-  }, []);
+  const positions = useMemo(() => createParticlePositions(), []);
 
   useFrame((state) => {
     if (pointsRef.current) {
@@ -157,13 +168,11 @@ function ParticleField() {
 }
 
 function MouseCamera() {
-  const { camera } = useThree();
-
   useFrame((state) => {
     const t = state.clock.elapsedTime;
-    camera.position.x = Math.sin(t * 0.1) * 0.3;
-    camera.position.y = Math.cos(t * 0.08) * 0.2;
-    camera.lookAt(0, 0, 0);
+    state.camera.position.x = Math.sin(t * 0.1) * 0.3;
+    state.camera.position.y = Math.cos(t * 0.08) * 0.2;
+    state.camera.lookAt(0, 0, 0);
   });
 
   return null;
@@ -199,6 +208,10 @@ const NODE_COLORS = [
   "#a855f7",
 ];
 
+const NODE_SIZES = NODE_POSITIONS.map(
+  (position) => 0.08 + seededRandom(nodeSeed(position) + 101) * 0.08,
+);
+
 export default function HeroScene() {
   return (
     <div className="absolute inset-0 z-0">
@@ -220,7 +233,7 @@ export default function HeroScene() {
               key={i}
               position={pos}
               color={NODE_COLORS[i]}
-              size={0.08 + Math.random() * 0.08}
+              size={NODE_SIZES[i]}
             />
           ))}
 

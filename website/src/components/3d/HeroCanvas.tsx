@@ -21,7 +21,10 @@ export default function HeroCanvas() {
     try {
       const canvas = document.createElement("canvas");
       const gl = canvas.getContext("webgl2") || canvas.getContext("webgl");
-      if (gl) setShow(true);
+      if (!gl) return;
+
+      const frame = window.requestAnimationFrame(() => setShow(true));
+      return () => window.cancelAnimationFrame(frame);
     } catch {
       // No WebGL support — skip 3D
     }

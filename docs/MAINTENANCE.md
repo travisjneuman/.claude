@@ -43,10 +43,10 @@ Before starting work, always sync all repositories:
 
 **What it does:**
 
-1. Initializes any new/unregistered submodules
+1. Initializes missing marketplace clones from the manifest
 2. Pulls parent repo (`~/.claude` - travisjneuman/.claude)
-3. Pulls all 90 marketplace submodules in `plugins/marketplaces/`
-4. Enforces `no_push` on marketplace submodules (read-only protection)
+3. Pulls all 109 marketplace clones in `plugins/marketplaces/`
+4. Enforces `no_push` on marketplace clones (read-only protection)
 5. Pulls custom project directories (if configured)
 6. Fixes detached HEAD state automatically
 7. Updates documentation counts if any repos changed (skills, agents, marketplace skills)
@@ -389,3 +389,4 @@ Once a year, do a comprehensive review:
 - [FOLDER-STRUCTURE.md](./FOLDER-STRUCTURE.md) - What files exist
 - [CONFIGURATION.md](./CONFIGURATION.md) - Settings details
 - [SETUP-GUIDE.md](./SETUP-GUIDE.md) - Fresh setup
+
