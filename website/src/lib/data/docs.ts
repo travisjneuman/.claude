@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import matter from "gray-matter";
+import { getFrontmatterString, parseMarkdown } from "./frontmatter";
 import { remark } from "remark";
 import remarkHtml from "remark-html";
 
@@ -26,11 +26,11 @@ export function getDocs(): DocPage[] {
   for (const file of files) {
     const slug = file.replace(".md", "");
     const raw = fs.readFileSync(path.join(docsDir, file), "utf-8");
-    const { data, content } = matter(raw);
+    const { data, content } = parseMarkdown(raw);
 
     const firstLine = content.trim().split("\n")[0] || "";
     const description =
-      data.description ||
+      getFrontmatterString(data, "description") ||
       firstLine
         .replace(/^#+\s*/, "")
         .replace(/\*+/g, "")
@@ -42,12 +42,12 @@ export function getDocs(): DocPage[] {
     docs.push({
       slug,
       name:
-        data.name ||
+        getFrontmatterString(data, "name") ||
         slug
           .replace(/-/g, " ")
           .replace(/\b\w/g, (c: string) => c.toUpperCase()),
       description,
-      category: data.category || "general",
+      category: getFrontmatterString(data, "category") || "general",
       content: content.slice(0, 5000),
       htmlContent: String(htmlResult),
     });

@@ -1,6 +1,10 @@
 import fs from "fs";
 import path from "path";
-import matter from "gray-matter";
+import {
+  getFrontmatterString,
+  getFrontmatterStringArray,
+  parseMarkdown,
+} from "./frontmatter";
 import { remark } from "remark";
 import remarkHtml from "remark-html";
 
@@ -98,11 +102,11 @@ export function getAgents(): Agent[] {
   for (const file of files) {
     const slug = file.replace(".md", "");
     const raw = fs.readFileSync(path.join(agentsDir, file), "utf-8");
-    const { data, content } = matter(raw);
+    const { data, content } = parseMarkdown(raw);
 
     const firstLine = content.trim().split("\n")[0] || "";
     const description =
-      data.description ||
+      getFrontmatterString(data, "description") ||
       firstLine
         .replace(/^#+\s*/, "")
         .replace(/\*+/g, "")
@@ -116,13 +120,13 @@ export function getAgents(): Agent[] {
     agents.push({
       slug,
       name:
-        data.name ||
+        getFrontmatterString(data, "name") ||
         slug
           .replace(/-/g, " ")
           .replace(/\b\w/g, (c: string) => c.toUpperCase()),
       description,
-      model: data.model || "sonnet",
-      tools: data.tools || [],
+      model: getFrontmatterString(data, "model") || "sonnet",
+      tools: getFrontmatterStringArray(data, "tools"),
       category: categorizeAgent(slug),
       content: content.slice(0, 5000),
       htmlContent: String(htmlResult),
@@ -139,24 +143,24 @@ export function getAgentBySlug(slug: string): Agent | null {
   if (!fs.existsSync(file)) return null;
 
   const raw = fs.readFileSync(file, "utf-8");
-  const { data, content } = matter(raw);
+  const { data, content } = parseMarkdown(raw);
   const firstLine = content.trim().split("\n")[0] || "";
   const htmlResult = remark().use(remarkHtml).processSync(content);
 
   return {
     slug,
     name:
-      data.name ||
+      getFrontmatterString(data, "name") ||
       slug.replace(/-/g, " ").replace(/\b\w/g, (c: string) => c.toUpperCase()),
     description:
-      data.description ||
+      getFrontmatterString(data, "description") ||
       firstLine
         .replace(/^#+\s*/, "")
         .replace(/\*+/g, "")
         .trim() ||
       slug,
-    model: data.model || "sonnet",
-    tools: data.tools || [],
+    model: getFrontmatterString(data, "model") || "sonnet",
+    tools: getFrontmatterStringArray(data, "tools"),
     category: categorizeAgent(slug),
     content,
     htmlContent: String(htmlResult),

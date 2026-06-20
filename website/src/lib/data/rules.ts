@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import matter from "gray-matter";
+import { getFrontmatterString, parseMarkdown } from "./frontmatter";
 import { remark } from "remark";
 import remarkHtml from "remark-html";
 
@@ -48,11 +48,11 @@ export function getRules(): Rule[] {
       for (const file of files) {
         const slug = `${slugPrefix}${subdir.name}/${file.replace(".md", "")}`;
         const raw = fs.readFileSync(path.join(dirPath, file), "utf-8");
-        const { data, content } = matter(raw);
+        const { data, content } = parseMarkdown(raw);
 
         const firstLine = content.trim().split("\n")[0] || "";
         const description =
-          data.description ||
+          getFrontmatterString(data, "description") ||
           firstLine
             .replace(/^#+\s*/, "")
             .replace(/\*+/g, "")
@@ -64,7 +64,7 @@ export function getRules(): Rule[] {
         rules.push({
           slug,
           name:
-            data.name ||
+            getFrontmatterString(data, "name") ||
             file
               .replace(".md", "")
               .replace(/-/g, " ")
