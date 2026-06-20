@@ -4,7 +4,7 @@
 
 cd ~/.claude
 
-echo "=== Updating all marketplace submodules ==="
+echo "=== Updating all marketplace clones ==="
 git submodule update --remote --merge plugins/marketplaces/
 
 echo ""
@@ -15,7 +15,7 @@ PARENT_URL=$(git remote get-url origin)
 git remote set-url --push origin "$PARENT_URL"
 echo "  ✓ Parent repo - push enabled"
 
-# Set no_push on marketplace submodules only
+# Set no_push on marketplace clones only
 for repo in plugins/marketplaces/*/; do
     if [ -d "$repo/.git" ] || [ -f "$repo/.git" ]; then
         (cd "$repo" && git remote set-url --push origin no_push 2>/dev/null)

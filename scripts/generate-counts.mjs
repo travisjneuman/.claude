@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import fs from "node:fs";
 import path from "node:path";
+import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 
 const scriptDir = path.dirname(fileURLToPath(import.meta.url));
@@ -9,6 +10,7 @@ const args = new Set(process.argv.slice(2));
 const writeMode = args.has("--write");
 const checkMode = args.has("--check") || !writeMode;
 const syncConsumers = args.has("--sync-consumers") || process.argv.some((a) => a.startsWith("--travis-repo=") || a.startsWith("--portfolio-repo="));
+const syncImages = args.has("--sync-images");
 const changed = [];
 const stale = [];
 
@@ -150,12 +152,15 @@ function replaceCoreCounts(text, counts) {
     .replace(/\| \*\*\[Marketplace Repos\]\(\.\/plugins\/marketplaces\/\)\*\* \| [0-9]+ \|/g, `| **[Marketplace Repos](./plugins/marketplaces/)** | ${counts.repos} |`)
     .replace(/\| \*\*\[Hooks\]\(\.\/hooks\/README\.md\)\*\* \| [0-9]+ \|/g, `| **[Hooks](./hooks/README.md)** | ${counts.hooks} |`)
     .replace(/[0-9]+ marketplace repos/g, `${counts.repos} marketplace repos`)
+    .replace(/All [0-9]+ marketplace repos/g, `All ${counts.repos} marketplace repos`)
+    .replace(/All [0-9]+ marketplaces/g, `All ${counts.repos} marketplaces`)
+    .replace(/[0-9]+ community-maintained GitHub repositories/g, `${counts.repos} community-maintained GitHub repositories`)
     .replace(/[0-9]+ marketplace repositories/g, `${counts.repos} marketplace repositories`)
     .replace(/[0-9]+ marketplaces/g, `${counts.repos} marketplaces`)
     .replace(/[0-9]+ community marketplaces/g, `${counts.repos} community marketplaces`)
     .replace(/[0-9]+ community skill repositories/g, `${counts.repos} community skill repositories`)
     .replace(/[0-9]+ plugin marketplaces/g, `${counts.repos} plugin marketplaces`)
-    .replace(/[0-9]+,[0-9]+\+ (additional |community |marketplace )?skills/g, `${counts.marketplaceSkillsDisplay} $1skills`)
+    .replace(/[0-9]+,[0-9]+\+ (additional |community |community-contributed |marketplace )?skills/g, `${counts.marketplaceSkillsDisplay} $1skills`)
     .replace(/[0-9]+,[0-9]+\+ more/g, `${counts.marketplaceSkillsDisplay} more`);
 }
 
@@ -181,8 +186,12 @@ function updateClaudeDocs(counts) {
   const files = [
     "README.md", "docs/SETUP-GUIDE.md", "docs/NEW-DEVICE-SETUP.md",
     "docs/MARKETPLACE-GUIDE.md", "docs/MAINTENANCE.md", "docs/FOLDER-STRUCTURE.md",
-    "docs/ARCHITECTURE.md", "scripts/README.md", "commands/list-skills.md",
-    "commands/skill-finder.md", "CLAUDE.md",
+    "docs/ARCHITECTURE.md", "docs/README.md", "docs/FAQ.md", "docs/GLOSSARY.md",
+    "docs/PLUGIN-MANAGEMENT.md", "docs/CLAUDE-CODE-RESOURCES.md", "docs/SKILLS.md",
+    "docs/reference/tooling/external-repos.md", "scripts/README.md",
+    "commands/README.md", "commands/bootstrap.md", "commands/health-check.md",
+    "commands/list-skills.md", "commands/pull-repos.md", "commands/skill-finder.md",
+    "CLAUDE.md",
   ];
   for (const rel of files) {
     const file = path.join(repoRoot, rel);
@@ -210,12 +219,29 @@ function updatePortfolioProject(counts, repo) {
   const file = path.join(repo, "src", "lib", "data", "projects.ts");
   if (!fs.existsSync(file)) return;
   let text = readText(file);
-  text = text.replace(/It includes [0-9]+ custom skills, [0-9]+ specialized agents, command workflows, hooks, routing guidance, and a large imported marketplace ecosystem currently documented as [0-9,]+\+ community skills\./, `It includes ${counts.skills} custom skills, ${counts.agents} specialized agents, command workflows, hooks, routing guidance, and a large imported marketplace ecosystem currently documented as ${counts.marketplaceSkillsDisplay} community skills.`);
-  text = text.replace(/\{ label: "Skills", value: "[^"]*" \}/, `{ label: "Skills", value: "${counts.skills}" }`);
-  text = text.replace(/\{ label: "Agents", value: "[^"]*" \}/, `{ label: "Agents", value: "${counts.agents}" }`);
-  text = text.replace(/\{ label: "Community", value: "[^"]*" \}/, `{ label: "Community", value: "${counts.marketplaceSkillsDisplay}" }`);
-  text = text.replace(/\{ label: "Marketplace", value: "[^"]*" \}/, `{ label: "Marketplace", value: "${counts.marketplaceSkillsDisplay}" }`);
-  text = text.replace(/\{ label: "Repos", value: "[^"]*" \}/, `{ label: "Repos", value: "${counts.repos}" }`);
+  const start = text.indexOf('    id: "tjn-claude"');
+  if (start === -1) return;
+  const nextProject = text.indexOf("\n  {\n", start + 1);
+  const end = nextProject === -1 ? text.length : nextProject;
+  let block = text.slice(start, end);
+  block = block.replace(
+    /It includes [0-9]+ custom skills, [0-9]+ specialized agents, command workflows, hooks, routing guidance, and a large imported marketplace ecosystem currently documented as [0-9,]+\+ community skills(?: across [0-9]+ marketplace repo entries)?\./,
+    `It includes ${counts.skills} custom skills, ${counts.agents} specialized agents, command workflows, hooks, routing guidance, and a large imported marketplace ecosystem currently documented as ${counts.marketplaceSkillsDisplay} community skills across ${counts.repos} marketplace repo entries.`,
+  );
+  block = block.replace(
+    /\/\/ Source of truth: .*/,
+    "// Source of truth: ~/.claude/scripts/generate-counts.mjs -> counts.json and marketplace-counts.json",
+  );
+  block = block.replace(
+    /metrics: \[[\s\S]*?\n    \],/,
+    `metrics: [
+      { label: "Skills", value: "${counts.skills}" },
+      { label: "Agents", value: "${counts.agents}" },
+      { label: "Community", value: "${counts.marketplaceSkillsDisplay}" },
+      { label: "Repos", value: "${counts.repos}" },
+    ],`,
+  );
+  text = `${text.slice(0, start)}${block}${text.slice(end)}`;
   writeText(file, text);
 }
 
@@ -226,6 +252,14 @@ updateClaudeDocs(counts);
 if (syncConsumers) {
   updateTravisReadme(counts, argValue("--travis-repo") || process.env.CLAUDE_COUNT_TRAVIS_REPO || "");
   updatePortfolioProject(counts, argValue("--portfolio-repo") || process.env.CLAUDE_COUNT_PORTFOLIO_REPO || "");
+}
+
+if (syncImages) {
+  const imageArgs = [path.join(scriptDir, "generate-showcase-images.mjs"), writeMode ? "--write" : "--check"];
+  const portfolioRepo = argValue("--portfolio-repo") || process.env.CLAUDE_COUNT_PORTFOLIO_REPO || "";
+  if (portfolioRepo) imageArgs.push(`--portfolio-repo=${portfolioRepo}`);
+  const result = spawnSync(process.execPath, imageArgs, { stdio: "inherit" });
+  if (result.status !== 0) process.exit(result.status || 1);
 }
 
 console.log(`Counts: ${counts.skills} skills, ${counts.agents} agents, ${counts.repos} marketplace repos, ${counts.marketplaceSkillsDisplay} marketplace skills`);

@@ -83,7 +83,7 @@ grep -r "119 skills\|119 local" docs/ commands/ --include="*.md"
 grep -r "67 agents" docs/ commands/ --include="*.md"
 
 # Check for old marketplace count (update when repos are added)
-grep -r "101 marketplace\|101 repos" docs/ commands/ --include="*.md"
+grep -r "108 marketplace\\|108 repos" docs/ commands/ --include="*.md"
 ```
 
 ---

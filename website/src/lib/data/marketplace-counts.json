@@ -1,11 +1,11 @@
 {
-  "repoCount": 109,
-  "totalSkills": 13010,
+  "repoCount": 108,
+  "totalSkills": 13759,
   "repos": [
     {
       "name": "sickn33-antigravity-awesome-skills",
       "displayName": "Sickn33 Antigravity Awesome Skills",
-      "skillCount": 4597
+      "skillCount": 5366
     },
     {
       "name": "claude-code-plugins-plus-skills",
@@ -25,22 +25,22 @@
     {
       "name": "alirezarezvani-claude-skills",
       "displayName": "Alirezarezvani Claude Skills",
-      "skillCount": 339
+      "skillCount": 345
     },
     {
       "name": "buildwithclaude",
       "displayName": "Buildwithclaude",
-      "skillCount": 318
+      "skillCount": 336
     },
     {
       "name": "affaan-everything-claude",
       "displayName": "Affaan Everything Claude",
-      "skillCount": 249
+      "skillCount": 271
     },
     {
       "name": "athola-night-market",
       "displayName": "Athola Night Market",
-      "skillCount": 191
+      "skillCount": 197
     },
     {
       "name": "wshobson-agents",
@@ -50,7 +50,7 @@
     {
       "name": "claude-scientific-skills",
       "displayName": "Claude Scientific Skills",
-      "skillCount": 143
+      "skillCount": 147
     },
     {
       "name": "levnikolaevich-claude-code-skills",
@@ -68,14 +68,9 @@
       "skillCount": 123
     },
     {
-      "name": "kivilaid-marketplace",
-      "displayName": "Kivilaid Marketplace",
-      "skillCount": 104
-    },
-    {
       "name": "trailofbits-skills",
       "displayName": "Trailofbits Skills",
-      "skillCount": 73
+      "skillCount": 74
     },
     {
       "name": "manutej-luxor-marketplace",
@@ -93,24 +88,24 @@
       "skillCount": 65
     },
     {
-      "name": "neolab-context-kit",
-      "displayName": "Neolab Context Kit",
-      "skillCount": 61
-    },
-    {
       "name": "daymade-skills",
       "displayName": "Daymade Skills",
-      "skillCount": 57
+      "skillCount": 64
+    },
+    {
+      "name": "neolab-context-kit",
+      "displayName": "Neolab Context Kit",
+      "skillCount": 63
+    },
+    {
+      "name": "gmickel-marketplace",
+      "displayName": "Gmickel Marketplace",
+      "skillCount": 59
     },
     {
       "name": "worldbuilding-skills",
       "displayName": "Worldbuilding Skills",
       "skillCount": 52
-    },
-    {
-      "name": "gmickel-marketplace",
-      "displayName": "Gmickel Marketplace",
-      "skillCount": 49
     },
     {
       "name": "rohitg00-claude-code-toolkit",
@@ -128,6 +123,11 @@
       "skillCount": 38
     },
     {
+      "name": "secondsky-sap-skills",
+      "displayName": "Secondsky Sap Skills",
+      "skillCount": 37
+    },
+    {
       "name": "skillsforge",
       "displayName": "Skillsforge",
       "skillCount": 37
@@ -135,17 +135,12 @@
     {
       "name": "aaronontheweb-dotnet-skills",
       "displayName": "Aaronontheweb Dotnet Skills",
-      "skillCount": 34
+      "skillCount": 35
     },
     {
       "name": "p47phoenix-plugins",
       "displayName": "P47phoenix Plugins",
       "skillCount": 33
-    },
-    {
-      "name": "secondsky-sap-skills",
-      "displayName": "Secondsky Sap Skills",
-      "skillCount": 32
     },
     {
       "name": "akin-ozer-devops",
@@ -155,7 +150,7 @@
     {
       "name": "claude-plugins-official",
       "displayName": "Claude Plugins Official",
-      "skillCount": 28
+      "skillCount": 29
     },
     {
       "name": "skillcreatorai-awesome-agent-skills",
@@ -178,14 +173,14 @@
       "skillCount": 21
     },
     {
-      "name": "henkisdabro-marketplace",
-      "displayName": "Henkisdabro Marketplace",
+      "name": "claude-mem",
+      "displayName": "Claude Mem",
       "skillCount": 19
     },
     {
-      "name": "claude-mem",
-      "displayName": "Claude Mem",
-      "skillCount": 18
+      "name": "henkisdabro-marketplace",
+      "displayName": "Henkisdabro Marketplace",
+      "skillCount": 19
     },
     {
       "name": "mhattingpete-skills",
@@ -263,6 +258,11 @@
       "skillCount": 10
     },
     {
+      "name": "vercel-agent-skills",
+      "displayName": "Vercel Agent Skills",
+      "skillCount": 9
+    },
+    {
       "name": "danielscholl-sdlc",
       "displayName": "Danielscholl Sdlc",
       "skillCount": 8
@@ -275,11 +275,6 @@
     {
       "name": "understand-anything",
       "displayName": "Understand Anything",
-      "skillCount": 8
-    },
-    {
-      "name": "vercel-agent-skills",
-      "displayName": "Vercel Agent Skills",
       "skillCount": 8
     },
     {
@@ -333,11 +328,6 @@
       "skillCount": 3
     },
     {
-      "name": "kenryu42-safety-net",
-      "displayName": "Kenryu42 Safety Net",
-      "skillCount": 2
-    },
-    {
       "name": "sawyerhood-mart",
       "displayName": "Sawyerhood Mart",
       "skillCount": 2
@@ -370,6 +360,11 @@
     {
       "name": "hardikpandya-stop-slop",
       "displayName": "Hardikpandya Stop Slop",
+      "skillCount": 1
+    },
+    {
+      "name": "kenryu42-safety-net",
+      "displayName": "Kenryu42 Safety Net",
       "skillCount": 1
     },
     {
