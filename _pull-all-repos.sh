@@ -5,15 +5,15 @@
 #
 # Cross-platform script (Linux, macOS, Windows via Git Bash) that:
 #   1. Pulls the parent ~/.claude repo (travisjneuman/.claude)
-#   2. Pulls all marketplace submodules in plugins/marketplaces/
-#   3. Enforces no_push on all submodules (prevents accidental pushes)
+#   2. Pulls all marketplace clones in plugins/marketplaces/
+#   3. Enforces no_push on all marketplace clones (prevents accidental pushes)
 #   4. Pulls all git repos in your custom project directories (optional)
 #   5. Fixes marketplace paths for current OS (cross-platform compatibility)
 #   6. Updates documentation counts if any repos changed (skills, agents, etc.)
-#   7. Commits and pushes all changes (submodule pointers, counts, path fixes)
+#   7. Commits and pushes all changes (count updates, path fixes)
 #
 # Features:
-#   - Pulls parent repo first, then all submodules, then custom directories
+#   - Pulls parent repo first, then marketplace clones, then custom directories
 #   - Automatically fixes detached HEAD state
 #   - Detects main/master/development branches
 #   - Enforces no_push on external repos (read-only protection)
@@ -96,12 +96,12 @@ while [[ $# -gt 0 ]]; do
         --help|-h)
             echo "Usage: $0 [OPTIONS]"
             echo ""
-            echo "Pull latest changes for the parent repo, marketplace submodules, and custom directories."
-            echo "Also enforces no_push on all submodules to prevent accidental pushes."
+            echo "Pull latest changes for the parent repo, marketplace clones, and custom directories."
+            echo "Also enforces no_push on all marketplace clones to prevent accidental pushes."
             echo ""
             echo "Repos pulled:"
             echo "  1. ~/.claude (travisjneuman/.claude) - parent repo (push enabled)"
-            echo "  2. ~/.claude/plugins/marketplaces/* - submodules (no_push enforced)"
+            echo "  2. ~/.claude/plugins/marketplaces/* - ignored marketplace clones (no_push enforced)"
             echo "  3. Custom project directories (if configured) - your own repos"
             echo ""
             echo "To add your own project directories, edit CUSTOM_PROJECT_DIRS at the top of this script."
@@ -136,16 +136,18 @@ if [[ ! -d "$MARKETPLACES_DIR" ]]; then
 fi
 
 # =============================================================================
-# PHASE 0: Initialize any new/unregistered submodules
+# PHASE 0: Initialize missing marketplace clones from the manifest
 # =============================================================================
 if [[ "$STATUS_ONLY" == false ]]; then
     echo ""
-    echo -e "${BOLD}Initializing submodules:${NC}"
+    echo -e "${BOLD}Checking marketplace clones:${NC}"
     cd "$SCRIPT_DIR"
-    if git submodule update --init 2>&1 | tail -5; then
-        echo -e "${GREEN}  Submodule initialization complete${NC}"
+    if find "$MARKETPLACES_DIR" -mindepth 1 -maxdepth 1 -type d -print -quit | grep -q .; then
+        echo -e "${GREEN}  Marketplace clones present${NC}"
+    elif [[ -f "$SCRIPT_DIR/scripts/init-marketplaces.sh" ]]; then
+        bash "$SCRIPT_DIR/scripts/init-marketplaces.sh"
     else
-        echo -e "${YELLOW}  Some submodules failed to initialize (may be unavailable upstream)${NC}"
+        echo -e "${YELLOW}  Marketplace clones missing and init-marketplaces.sh not found${NC}"
     fi
 fi
 
@@ -269,7 +271,7 @@ process_repo() {
     return 0
 }
 
-# Enforce no_push on a submodule
+# Enforce no_push on a marketplace clone
 enforce_no_push() {
     local repo_path="$1"
     local repo_name="$2"
@@ -296,25 +298,25 @@ echo -e "${BOLD}Parent Repo (~/.claude):${NC}"
 process_repo "$SCRIPT_DIR" ".claude (travisjneuman/.claude)" true
 
 # =============================================================================
-# PHASE 2: Pull all marketplace submodules
+# PHASE 2: Pull all marketplace clones
 # =============================================================================
 echo ""
-echo -e "${BOLD}Marketplace Submodules:${NC}"
-SUBMODULE_COUNT=0
+echo -e "${BOLD}Marketplace Clones:${NC}"
+MARKETPLACE_COUNT=0
 for repo in "$MARKETPLACES_DIR"/*/; do
     if [[ -d "$repo" ]]; then
         repo_name=$(basename "$repo")
         process_repo "$repo" "$repo_name"
-        SUBMODULE_COUNT=$((SUBMODULE_COUNT + 1))
+        MARKETPLACE_COUNT=$((MARKETPLACE_COUNT + 1))
     fi
 done
 
 # =============================================================================
-# PHASE 3: Enforce no_push on all submodules (skip in status mode)
+# PHASE 3: Enforce no_push on all marketplace clones (skip in status mode)
 # =============================================================================
 if [[ "$STATUS_ONLY" == false ]]; then
     echo ""
-    echo -e "${BOLD}Enforcing no_push on submodules:${NC}"
+    echo -e "${BOLD}Enforcing no_push on marketplace clones:${NC}"
     for repo in "$MARKETPLACES_DIR"/*/; do
         if [[ -d "$repo" ]]; then
             repo_name=$(basename "$repo")
@@ -322,7 +324,7 @@ if [[ "$STATUS_ONLY" == false ]]; then
         fi
     done
     if [[ $NO_PUSH_FIXED -eq 0 ]]; then
-        echo -e "${GREEN}  All submodules already have no_push configured${NC}"
+        echo -e "${GREEN}  All marketplace clones already have no_push configured${NC}"
     fi
 
     # Safety: ensure parent repo is NOT set to no_push
@@ -387,9 +389,9 @@ fi
 echo ""
 echo -e "${BOLD}${BLUE}=== Summary ===${NC}"
 if [[ $CUSTOM_REPO_COUNT -gt 0 ]]; then
-    echo "  Total repos:       $TOTAL (1 parent + $SUBMODULE_COUNT submodules + $CUSTOM_REPO_COUNT custom)"
+    echo "  Total repos:       $TOTAL (1 parent + $MARKETPLACE_COUNT marketplace clones + $CUSTOM_REPO_COUNT custom)"
 else
-    echo "  Total repos:       $TOTAL (1 parent + $SUBMODULE_COUNT submodules)"
+    echo "  Total repos:       $TOTAL (1 parent + $MARKETPLACE_COUNT marketplace clones)"
 fi
 if [[ "$STATUS_ONLY" == false ]]; then
     [[ $UPDATED -gt 0 ]] && echo -e "  ${GREEN}Updated:         $UPDATED${NC}"
@@ -422,7 +424,7 @@ if [[ "$STATUS_ONLY" == false ]] && [[ -f "$SCRIPT_DIR/scripts/update-counts.sh"
 fi
 
 # =============================================================================
-# PHASE 7: Commit and push any changes (submodule pointers, count updates, etc.)
+# PHASE 7: Commit and push any changes (count updates, path fixes, etc.)
 # =============================================================================
 if [[ "$STATUS_ONLY" == false ]]; then
     cd "$SCRIPT_DIR"
@@ -432,7 +434,7 @@ if [[ "$STATUS_ONLY" == false ]]; then
         echo ""
         echo -e "${BOLD}Committing and pushing updates:${NC}"
 
-        # Stage all tracked changes (submodule pointers, count updates, path fixes)
+        # Stage all tracked changes (count updates, path fixes)
         git add -A
 
         # Build a descriptive commit message

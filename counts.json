@@ -1,13 +1,17 @@
 {
   "skills": 127,
+  "skillDirectories": 123,
   "agents": 86,
-  "repos": 90,
+  "repos": 109,
   "commands": 30,
+  "gsdCommands": 57,
+  "routerCommands": 7,
+  "totalCommands": 94,
   "hooks": 15,
   "rules": 9,
   "templates": 17,
   "checklists": 10,
-  "mcpServers": 0,
-  "marketplaceSkills": 11789,
-  "marketplaceSkillsDisplay": "11,700+"
+  "mcpServers": 12,
+  "marketplaceSkills": 13010,
+  "marketplaceSkillsDisplay": "13,000+"
 }

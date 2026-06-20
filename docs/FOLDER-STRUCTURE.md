@@ -139,7 +139,7 @@ This repo underwent a security audit before being made public. The following wer
     ├── plugins/                    ← Plugins and external repos
     │   ├── cache/                  ← Plugin cache (regenerated, gitignored)
     │   ├── local/                  ← Your custom plugins
-    │   └── marketplaces/           ← External repos (submodules, read-only)
+    │   └── marketplaces/           ← External repos (ignored local clones, read-only)
     │       ├── anthropic-agent-skills/
     │       ├── claude-code-plugins/
     │       ├── claude-plugins-official/
@@ -150,7 +150,7 @@ This repo underwent a security audit before being made public. The following wer
     │       ├── voltagent-subagents/
     │       ├── trailofbits-skills/
     │       ├── claude-scientific-skills/
-    │       └── ... (102 total repos, 1 parent + 100 submodules + 1 standalone)
+    │       └── ... (109 marketplace clone manifest entries; parent repo tracks no gitlinks)
     │
     ├── skills/                     ← Custom skills (123 directories, 127 SKILL.md files)
     │   ├── README.md               ← Skills documentation
@@ -365,9 +365,9 @@ This repo underwent a security audit before being made public. The following wer
     │   ├── setup-vscode-settings.ps1  ← Windows setup script
     │   └── settings.json           ← VSCode settings (GITIGNORED - has local paths)
     │
-    ├── website/                    ← Showcase website (SvelteKit, Cloudflare Pages)
+    ├── website/                    ← Showcase website (Next.js static export, Cloudflare Pages)
     │   ├── scripts/
-    │   │   └── fix-submodules.mjs  ← Prebuild: removes broken nested submodule
+    │   │   └── fix-submodules.mjs  ← Prebuild: removes broken nested gitlink
     │   └── src/
     │       └── lib/
     │           └── data/
@@ -694,7 +694,7 @@ This folder is **automatically created by VSCode** when you open `.claude/` as a
 | `rules/`     | ~150KB       | 27 rule files across 4 subdirs   |
 | `scripts/`   | ~50KB        | 16 scripts + 4 hook scripts      |
 | `hooks/`     | ~25KB        | 8 event hook scripts             |
-| `templates/` | ~40KB        | 15 templates + plugin-template/  |
+| `templates/` | ~40KB        | 17 templates + plugin-template/  |
 
 **Total portable size:** ~1MB
 **With generated files:** Can grow to 100MB+
@@ -709,3 +709,4 @@ This folder is **automatically created by VSCode** when you open `.claude/` as a
 - [NEW-DEVICE-SETUP.md](./NEW-DEVICE-SETUP.md) - New device setup
 - [SECURITY.md](./SECURITY.md) - Security audit decisions and what's gitignored
 - [SETUP-GUIDE.md](./SETUP-GUIDE.md) - Initial setup guide
+

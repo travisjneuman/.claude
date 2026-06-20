@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import matter from "gray-matter";
+import { getFrontmatterString, parseMarkdown } from "./frontmatter";
 import { remark } from "remark";
 import remarkHtml from "remark-html";
 
@@ -106,10 +106,10 @@ export function getSkills(): Skill[] {
 
       if (fs.existsSync(skillMd)) {
         const raw = fs.readFileSync(skillMd, "utf-8");
-        const { data, content } = matter(raw);
+        const { data, content } = parseMarkdown(raw);
         const firstLine = content.trim().split("\n")[0] || "";
         const description =
-          data.description ||
+          getFrontmatterString(data, "description") ||
           firstLine
             .replace(/^#+\s*/, "")
             .replace(/\*+/g, "")
@@ -123,7 +123,7 @@ export function getSkills(): Skill[] {
         skills.push({
           slug,
           name:
-            data.name ||
+            getFrontmatterString(data, "name") ||
             entry.name
               .replace(/-/g, " ")
               .replace(/\b\w/g, (c: string) => c.toUpperCase()),
@@ -151,7 +151,7 @@ export function getSkillBySlug(slug: string): Skill | null {
   if (!fs.existsSync(skillMd)) return null;
 
   const raw = fs.readFileSync(skillMd, "utf-8");
-  const { data, content } = matter(raw);
+  const { data, content } = parseMarkdown(raw);
   const firstLine = content.trim().split("\n")[0] || "";
 
   const htmlResult = remark().use(remarkHtml).processSync(content);
@@ -159,10 +159,10 @@ export function getSkillBySlug(slug: string): Skill | null {
   return {
     slug,
     name:
-      data.name ||
+      getFrontmatterString(data, "name") ||
       slug.replace(/-/g, " ").replace(/\b\w/g, (c: string) => c.toUpperCase()),
     description:
-      data.description ||
+      getFrontmatterString(data, "description") ||
       firstLine
         .replace(/^#+\s*/, "")
         .replace(/\*+/g, "")

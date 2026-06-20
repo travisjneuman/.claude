@@ -20,7 +20,7 @@ Works identically on: **Arch Linux** | **macOS** | **Windows (Git Bash)**
 # 1. Clone the repo
 git clone https://github.com/travisjneuman/.claude.git ~/.claude
 
-# 2. Fetch all 90 marketplace repos from their upstreams
+# 2. Fetch all 109 marketplace repos from their upstreams
 bash ~/.claude/_pull-all-repos.sh
 
 # 3. Complete setup
@@ -33,14 +33,14 @@ That's it. The scripts handle everything cross-platform.
 
 ## How Marketplace Repos Work
 
-The `~/.claude` repo references 90 marketplace repositories. These are **not** tracked as git submodule content in the parent repo. Instead, each machine independently fetches the marketplace repos from their original upstreams using `_pull-all-repos.sh`.
+The `~/.claude` repo references 109 marketplace repositories. These are **not** tracked as git submodule content in the parent repo. Instead, each machine independently fetches the marketplace repos from their original upstreams using `_pull-all-repos.sh`.
 
 This means:
 
-- **Gitlinks are not tracked** -- the parent repo does not commit submodule SHAs
+- **Gitlinks are not tracked** -- the parent repo does not commit gitlink SHAs
 - **Each machine fetches independently** -- `_pull-all-repos.sh` clones or pulls each marketplace from its upstream URL
 - **Push is blocked** -- all marketplace repos get `no_push` set automatically
-- **No merge conflicts** -- since submodule state is not committed, different machines never conflict on marketplace versions
+- **No merge conflicts** -- since marketplace clone state is not committed, different machines never conflict on marketplace versions
 
 ### Expected Configuration After Setup
 
@@ -52,7 +52,7 @@ This means:
 ### What `_pull-all-repos.sh` Does
 
 1. Pulls the parent repo (`~/.claude`)
-2. Clones or pulls all 90 marketplace repos from their original upstreams
+2. Clones or pulls all 109 marketplace repos from their original upstreams
 3. Enforces `no_push` on every marketplace repo
 4. Fixes detached HEAD states automatically
 5. Pulls custom project directories (if configured via `.env.local`)
@@ -180,7 +180,7 @@ No. The `_pull-all-repos.sh` script replaces the old `init-marketplaces.sh` appr
 
 | Script                 | Purpose                                                                   |
 | ---------------------- | ------------------------------------------------------------------------- |
-| `_pull-all-repos.sh`   | **Primary:** Pull/clone all 90 marketplace repos + parent repo            |
+| `_pull-all-repos.sh`   | **Primary:** Pull/clone all 109 marketplace repos + parent repo            |
 | `setup-new-machine.sh` | Complete setup (plugins, hooks, etc.)                                     |
 | `fix-remotes.sh`       | Fix remote URLs without re-cloning                                        |
 | `init-marketplaces.sh` | Legacy: clone/reinitialize marketplaces (use \_pull-all-repos.sh instead) |
@@ -238,3 +238,4 @@ Note: since marketplace repos are fetched independently per machine, `git pull` 
 ---
 
 _Last updated: February 2026 (v2.10.1)_
+

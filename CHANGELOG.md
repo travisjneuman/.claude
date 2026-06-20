@@ -2,6 +2,15 @@
 
 All notable changes to the Ultimate Claude Code Toolkit.
 
+## [Unreleased] - June 20, 2026
+
+### Maintenance
+
+- Replaced brittle count sync scripts with one canonical generator that updates toolkit counts, website count data, and downstream Travis profile/portfolio references.
+- Updated marketplace wording from misleading "submodules" language to ignored marketplace clones managed from the manifest with `no_push` protection.
+- Upgraded the website dependency set to current stable versions, replaced `gray-matter` with `yaml`, and added targeted overrides for audited transitive advisories.
+- Adjusted the 3D hero scene for current React/ESLint purity rules without changing the public website purpose.
+
 ## [2.11.0] - March 27, 2026
 
 ### Comprehensive Audit & Optimization
