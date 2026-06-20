@@ -314,9 +314,9 @@ Each BFF:
 
 ```
 ┌──────┐     ┌──────────────┐
-│Client│────>│Service       │────> Service A (10.0.0.10)
-│      │     │Registry      │────> Service A (10.0.0.11)
-│      │<────│(Consul, etcd)│────> Service A (10.0.0.12)
+│Client│────>│Service       │────> Service A (10.0.1.10)
+│      │     │Registry      │────> Service A (10.0.1.11)
+│      │<────│(Consul, etcd)│────> Service A (10.0.1.12)
 └──────┘     └──────────────┘
 
 Client queries registry, then calls service directly.

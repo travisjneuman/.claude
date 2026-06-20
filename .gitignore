@@ -34,6 +34,9 @@
 # Active session tracking files (contain PIDs, session IDs, working paths)
 sessions/
 
+# Auto-generated local context packs (contain machine paths/status)
+.mc-context.md
+
 # Session environment snapshots
 session-env/
 
