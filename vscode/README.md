@@ -17,8 +17,8 @@ There are TWO different VSCode-related folders in this repo:
 
 The `settings.json` file in this folder is **intentionally gitignored** because it contains:
 
-1. **Hardcoded paths** - e.g., `C:\Users\tjn\.claude` (machine-specific)
-2. **Local network IPs** - e.g., `192.168.1.40` (security concern for public repos)
+1. **Hardcoded paths** - e.g., `C:\Users\<username>\.claude` (machine-specific)
+2. **Local network IPs** - e.g., `192.168.x.x` (security concern for public repos)
 3. **Remote SSH hosts** - Machine-specific remote connections
 
 **You need to create your own `settings.json`** after cloning. The setup script will help, or copy from your existing VSCode settings.

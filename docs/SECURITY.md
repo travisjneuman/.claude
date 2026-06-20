@@ -76,8 +76,8 @@ Before making this repository public, a comprehensive security audit was perform
 
 The `.vscode/` folder contained `settings.json` with:
 
-- Hardcoded user paths (`C:\Users\tjn\.claude`)
-- Local network IPs (`192.168.1.40`)
+- Hardcoded user paths (`C:\Users\<username>\.claude`)
+- Local network IPs (`192.168.x.x`)
 - Remote SSH host configurations
 
 **Solution:**
@@ -93,11 +93,11 @@ The `.vscode/` folder contained `settings.json` with:
 **Problem:** VSCode settings file contained:
 
 ```json
-"git.scanRepositories": ["C:\\Users\\tjn\\.claude", "."],
-"security.allowedUNCHosts": ["192.168.1.40"],
+"git.scanRepositories": ["C:\\Users\\<username>\\.claude", "."],
+"security.allowedUNCHosts": ["192.168.x.x"],
 "remote.SSH.remotePlatform": {
-    "192.168.1.10": "windows",
-    "192.168.1.40": "linux"
+    "192.168.x.x": "windows",
+    "192.168.y.y": "linux"
 }
 ```
 

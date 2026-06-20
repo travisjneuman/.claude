@@ -45,7 +45,7 @@ This toolkit has multiple settings files with different purposes:
 This repo underwent a security audit before being made public. The following were removed:
 
 1. **`.archive/` folder** - Contained 139 files with personal project data, client emails
-2. **`vscode/settings.json`** - Contained hardcoded paths (`C:\Users\tjn\.claude`) and local network IPs
+2. **`vscode/settings.json`** - Contained hardcoded paths (`C:\Users\<username>\.claude`) and local network IPs
 3. **`.vscode/settings.json`** - Same issue (VSCode workspace folder)
 4. **Git history** - Rewrote history using `git-filter-repo` to purge all traces
 
@@ -627,8 +627,8 @@ This folder contains portable VSCode setup resources:
 
 **Why `vscode/settings.json` is gitignored:**
 
-- Contains machine-specific paths (e.g., `C:\Users\tjn\.claude`)
-- Contains local network IPs (e.g., `192.168.1.40`)
+- Contains machine-specific paths (e.g., `C:\Users\<username>\.claude`)
+- Contains local network IPs (e.g., `192.168.x.x`)
 - Users should create their own from the template or use the symlink script
 
 #### `/.vscode/` (VSCode Workspace Folder - GITIGNORED)
