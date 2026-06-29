@@ -4,6 +4,10 @@ All notable changes to the Ultimate Claude Code Toolkit.
 
 ## [Unreleased] - June 20, 2026
 
+### Added
+
+- **`hermes-tweet` skill** - Hermes Agent X/Twitter automation guidance with read-first workflows, setup checks, and approval-gated action rules.
+
 ### Maintenance
 
 - Replaced brittle count sync scripts with one canonical generator that updates toolkit counts, website count data, and downstream Travis profile/portfolio references.
