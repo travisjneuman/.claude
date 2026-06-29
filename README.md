@@ -36,6 +36,8 @@ A drop-in configuration layer for [Claude Code](https://docs.anthropic.com/en/do
 
 **How it works:** Describe what you want in plain language. The toolkit's dynamic router detects context from your prompt and loads the right skills, agents, rules, and checklists automatically. No slash commands needed (though they're available if you prefer).
 
+**Cross-host Git safety:** Completed Travis-owned work must be committed and pushed with the shared repo-sync control plane (`repo-sync push-safe`) from `.webdev/_meta.notes/Projects/Agent Operating Layer/Repo Sync/`, not raw `git push`, so TJNMPM, TJN-DESK, and TJN-SERVE can rebase, serialize, and fan out cleanly without losing overlapping work.
+
 **Who it's for:** Developers who use Claude Code and want deeper domain expertise, structured workflows, and quality guardrails without manual setup.
 
 ---

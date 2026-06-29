@@ -37,6 +37,14 @@ default to local-only testing/verification unless the user explicitly requests
 it. Never end a turn with uncommitted work in a user-owned repo when the work
 is complete and in-scope.
 
+Completed user-owned pushes must go through the shared `_meta.notes` repo-sync
+runner, not raw `git push`, so overlapping agents serialize, safety-bundle,
+rebase onto current `main`/`master`, validate, push, and fan out to peer hosts.
+Use `repo-sync push-safe` from `E:/Web Development/_meta.notes/Projects/Agent
+Operating Layer/Repo Sync/` on TJN-DESK, `F:/Development/.webdev/_meta.notes/
+Projects/Agent Operating Layer/Repo Sync/` on TJN-SERVE, or `/Users/tjn/web-dev/
+_meta.notes/Projects/Agent Operating Layer/Repo Sync/` on TJNMPM.
+
 **Stage only your own work.** Never sweep up unrelated user-pending changes
 (`.obsidian/*`, editor state, half-finished local edits) into your commit. Add
 specific files by name; avoid `git add -A` / `git add .` at repo roots that
@@ -123,7 +131,8 @@ Stack-specific: `docs/reference/stacks/`
 NEVER push unapproved work, use `--force` without request, or commit secrets.
 **Auto-commit AND auto-push user-owned repos** (any repo `travisjneuman` owns on
 GitHub) after work completes — see Workflow section for the full rule, including
-the `no_push` per-repo exception.
+the `no_push` per-repo exception. Use `repo-sync push-safe` for those pushes
+instead of raw `git push`.
 **Non-user-owned repos are read-only.** Plugins, marketplaces, upstream OSS,
 anyone else's repo or fork — no commits, no pushes. Treat as if `no_push` is
 permanently set. If you must modify one, stop and ask the user.
