@@ -39,11 +39,14 @@ is complete and in-scope.
 
 Completed user-owned pushes must go through the shared `my.notes` repo-sync
 runner, not raw `git push`, so overlapping agents serialize, safety-bundle,
-rebase onto current `main`/`master`, validate, push, and fan out to peer hosts.
-Use `repo-sync push-safe` from `E:/Projects/my.notes/Projects/Agent
+rebase onto current `main`/`master`, validate, push once, fan out to same-host
+sibling checkouts plus peer hosts, and verify the expected pushed SHA where
+possible. Use `repo-sync push-safe` from `E:/Projects/my.notes/Projects/Agent
 Operating Layer/Repo Sync/` on my-desktop, `F:/Projects/.workspace/my.notes/
 Projects/Agent Operating Layer/Repo Sync/` on my-server, or `~/web-dev/
-my.notes/Projects/Agent Operating Layer/Repo Sync/` on my-mac.
+my.notes/Projects/Agent Operating Layer/Repo Sync/` on my-mac. Managed
+pre-push hooks intentionally block raw Travis-owned pushes unless
+`REPO_SYNC_BYPASS=1` is set by the runner.
 
 **Stage only your own work.** Never sweep up unrelated user-pending changes
 (`.obsidian/*`, editor state, half-finished local edits) into your commit. Add
