@@ -1,21 +1,21 @@
 {
   "repoCount": 108,
-  "totalSkills": 13759,
+  "totalSkills": 14713,
   "repos": [
     {
       "name": "sickn33-antigravity-awesome-skills",
       "displayName": "Sickn33 Antigravity Awesome Skills",
-      "skillCount": 5366
+      "skillCount": 6204
     },
     {
       "name": "claude-code-plugins-plus-skills",
       "displayName": "Claude Code Plugins Plus Skills",
-      "skillCount": 3540
+      "skillCount": 3652
     },
     {
       "name": "davila7-templates",
       "displayName": "Davila7 Templates",
-      "skillCount": 868
+      "skillCount": 882
     },
     {
       "name": "awesome-claude-skills",
@@ -25,37 +25,32 @@
     {
       "name": "alirezarezvani-claude-skills",
       "displayName": "Alirezarezvani Claude Skills",
-      "skillCount": 345
+      "skillCount": 357
     },
     {
       "name": "buildwithclaude",
       "displayName": "Buildwithclaude",
-      "skillCount": 336
+      "skillCount": 351
     },
     {
       "name": "affaan-everything-claude",
       "displayName": "Affaan Everything Claude",
-      "skillCount": 271
+      "skillCount": 278
     },
     {
       "name": "athola-night-market",
       "displayName": "Athola Night Market",
-      "skillCount": 197
+      "skillCount": 200
     },
     {
       "name": "wshobson-agents",
       "displayName": "Wshobson Agents",
-      "skillCount": 155
+      "skillCount": 175
     },
     {
       "name": "claude-scientific-skills",
       "displayName": "Claude Scientific Skills",
-      "skillCount": 147
-    },
-    {
-      "name": "levnikolaevich-claude-code-skills",
-      "displayName": "Levnikolaevich Claude Code Skills",
-      "skillCount": 137
+      "skillCount": 149
     },
     {
       "name": "madappgang-claude-code",
@@ -65,12 +60,22 @@
     {
       "name": "giuseppe-developer-kit",
       "displayName": "Giuseppe Developer Kit",
-      "skillCount": 123
+      "skillCount": 128
+    },
+    {
+      "name": "daymade-skills",
+      "displayName": "Daymade Skills",
+      "skillCount": 88
     },
     {
       "name": "trailofbits-skills",
       "displayName": "Trailofbits Skills",
-      "skillCount": 74
+      "skillCount": 75
+    },
+    {
+      "name": "phuryn-pm-skills",
+      "displayName": "Phuryn Pm Skills",
+      "skillCount": 68
     },
     {
       "name": "manutej-luxor-marketplace",
@@ -83,24 +88,14 @@
       "skillCount": 66
     },
     {
-      "name": "phuryn-pm-skills",
-      "displayName": "Phuryn Pm Skills",
-      "skillCount": 65
-    },
-    {
-      "name": "daymade-skills",
-      "displayName": "Daymade Skills",
-      "skillCount": 64
-    },
-    {
       "name": "neolab-context-kit",
       "displayName": "Neolab Context Kit",
-      "skillCount": 63
+      "skillCount": 66
     },
     {
       "name": "gmickel-marketplace",
       "displayName": "Gmickel Marketplace",
-      "skillCount": 59
+      "skillCount": 63
     },
     {
       "name": "worldbuilding-skills",
@@ -111,11 +106,6 @@
       "name": "rohitg00-claude-code-toolkit",
       "displayName": "Rohitg00 Claude Code Toolkit",
       "skillCount": 40
-    },
-    {
-      "name": "EveryInc-compound",
-      "displayName": "EveryInc Compound",
-      "skillCount": 39
     },
     {
       "name": "actionbook-rust-skills",
@@ -148,6 +138,16 @@
       "skillCount": 31
     },
     {
+      "name": "trailofbits-skills-curated",
+      "displayName": "Trailofbits Skills Curated",
+      "skillCount": 31
+    },
+    {
+      "name": "EveryInc-compound",
+      "displayName": "EveryInc Compound",
+      "skillCount": 30
+    },
+    {
       "name": "claude-plugins-official",
       "displayName": "Claude Plugins Official",
       "skillCount": 29
@@ -158,14 +158,19 @@
       "skillCount": 27
     },
     {
-      "name": "trailofbits-skills-curated",
-      "displayName": "Trailofbits Skills Curated",
-      "skillCount": 27
-    },
-    {
       "name": "sangrokjung-claude-forge",
       "displayName": "Sangrokjung Claude Forge",
-      "skillCount": 24
+      "skillCount": 26
+    },
+    {
+      "name": "claude-mem",
+      "displayName": "Claude Mem",
+      "skillCount": 21
+    },
+    {
+      "name": "expo-skills",
+      "displayName": "Expo Skills",
+      "skillCount": 21
     },
     {
       "name": "onmax-nuxt-skills",
@@ -173,18 +178,23 @@
       "skillCount": 21
     },
     {
-      "name": "claude-mem",
-      "displayName": "Claude Mem",
-      "skillCount": 19
-    },
-    {
       "name": "henkisdabro-marketplace",
       "displayName": "Henkisdabro Marketplace",
       "skillCount": 19
     },
     {
+      "name": "levnikolaevich-claude-code-skills",
+      "displayName": "Levnikolaevich Claude Code Skills",
+      "skillCount": 18
+    },
+    {
       "name": "mhattingpete-skills",
       "displayName": "Mhattingpete Skills",
+      "skillCount": 18
+    },
+    {
+      "name": "muratcankoylan-agent-skills",
+      "displayName": "Muratcankoylan Agent Skills",
       "skillCount": 18
     },
     {
@@ -198,28 +208,18 @@
       "skillCount": 17
     },
     {
+      "name": "hashicorp-agent-skills",
+      "displayName": "Hashicorp Agent Skills",
+      "skillCount": 17
+    },
+    {
       "name": "skillcreatorai-agent-skills",
       "displayName": "Skillcreatorai Agent Skills",
       "skillCount": 17
     },
     {
-      "name": "expo-skills",
-      "displayName": "Expo Skills",
-      "skillCount": 16
-    },
-    {
-      "name": "hashicorp-agent-skills",
-      "displayName": "Hashicorp Agent Skills",
-      "skillCount": 16
-    },
-    {
       "name": "jayzeedesign-awesome-claude",
       "displayName": "Jayzeedesign Awesome Claude",
-      "skillCount": 16
-    },
-    {
-      "name": "muratcankoylan-agent-skills",
-      "displayName": "Muratcankoylan Agent Skills",
       "skillCount": 16
     },
     {
@@ -258,6 +258,11 @@
       "skillCount": 10
     },
     {
+      "name": "understand-anything",
+      "displayName": "Understand Anything",
+      "skillCount": 9
+    },
+    {
       "name": "vercel-agent-skills",
       "displayName": "Vercel Agent Skills",
       "skillCount": 9
@@ -273,8 +278,8 @@
       "skillCount": 8
     },
     {
-      "name": "understand-anything",
-      "displayName": "Understand Anything",
+      "name": "ykdojo-tips",
+      "displayName": "Ykdojo Tips",
       "skillCount": 8
     },
     {
@@ -295,11 +300,6 @@
     {
       "name": "othmanadi-planning",
       "displayName": "Othmanadi Planning",
-      "skillCount": 6
-    },
-    {
-      "name": "ykdojo-tips",
-      "displayName": "Ykdojo Tips",
       "skillCount": 6
     },
     {

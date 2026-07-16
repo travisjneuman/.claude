@@ -43,6 +43,14 @@
 # Determine script location (works even when called via symlink)
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# Require Bash 4+ (mapfile, associative arrays). macOS /bin/bash is 3.2.
+if ((BASH_VERSINFO[0] < 4)); then
+    echo "Error: Bash 4+ required (found ${BASH_VERSION:-unknown})." >&2
+    echo "On macOS: brew install bash, then run: /opt/homebrew/bin/bash $0" >&2
+    exit 1
+fi
+
+
 CUSTOM_PROJECT_DIRS=()
 ENV_FILE="$SCRIPT_DIR/.env.local"
 if [[ -f "$ENV_FILE" ]]; then
@@ -133,30 +141,6 @@ if [[ ! -d "$MARKETPLACES_DIR" ]]; then
     echo -e "${RED}Error: Marketplaces directory not found${NC}"
     echo "Expected: $MARKETPLACES_DIR"
     exit 1
-fi
-
-# =============================================================================
-# PHASE 0: Initialize missing marketplace clones from the manifest
-# =============================================================================
-if [[ "$STATUS_ONLY" == false ]]; then
-    echo ""
-    echo -e "${BOLD}Checking marketplace clones:${NC}"
-    cd "$SCRIPT_DIR"
-    mapfile -t REQUIRED_MARKETPLACES < <(manifest_marketplace_paths)
-    MISSING_MARKETPLACES=()
-    for rel_path in "${REQUIRED_MARKETPLACES[@]}"; do
-        if ! repo_has_git "$SCRIPT_DIR/$rel_path"; then
-            MISSING_MARKETPLACES+=("$rel_path")
-        fi
-    done
-    if [[ ${#MISSING_MARKETPLACES[@]} -eq 0 ]]; then
-        echo -e "${GREEN}  All manifest marketplace clones present${NC}"
-    elif [[ -f "$SCRIPT_DIR/scripts/init-marketplaces.sh" ]]; then
-        echo -e "${YELLOW}  Missing ${#MISSING_MARKETPLACES[@]} manifest marketplace clone(s); initializing${NC}"
-        bash "$SCRIPT_DIR/scripts/init-marketplaces.sh"
-    else
-        echo -e "${YELLOW}  Marketplace clones missing and init-marketplaces.sh not found${NC}"
-    fi
 fi
 
 # Detect the default branch for a repo
@@ -359,6 +343,30 @@ enforce_no_push() {
         NO_PUSH_FIXED=$((NO_PUSH_FIXED + 1))
     fi
 }
+
+# =============================================================================
+# PHASE 0: Initialize missing marketplace clones from the manifest
+# =============================================================================
+if [[ "$STATUS_ONLY" == false ]]; then
+    echo ""
+    echo -e "${BOLD}Checking marketplace clones:${NC}"
+    cd "$SCRIPT_DIR"
+    mapfile -t REQUIRED_MARKETPLACES < <(manifest_marketplace_paths)
+    MISSING_MARKETPLACES=()
+    for rel_path in "${REQUIRED_MARKETPLACES[@]}"; do
+        if ! repo_has_git "$SCRIPT_DIR/$rel_path"; then
+            MISSING_MARKETPLACES+=("$rel_path")
+        fi
+    done
+    if [[ ${#MISSING_MARKETPLACES[@]} -eq 0 ]]; then
+        echo -e "${GREEN}  All manifest marketplace clones present${NC}"
+    elif [[ -f "$SCRIPT_DIR/scripts/init-marketplaces.sh" ]]; then
+        echo -e "${YELLOW}  Missing ${#MISSING_MARKETPLACES[@]} manifest marketplace clone(s); initializing${NC}"
+        bash "$SCRIPT_DIR/scripts/init-marketplaces.sh"
+    else
+        echo -e "${YELLOW}  Marketplace clones missing and init-marketplaces.sh not found${NC}"
+    fi
+fi
 
 # =============================================================================
 # PHASE 1: Pull parent repo

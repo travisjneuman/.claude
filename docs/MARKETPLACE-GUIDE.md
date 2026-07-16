@@ -1,6 +1,6 @@
 ---
 name: Marketplace Guide
-description: Browse, install, and manage 109 community plugin marketplaces with 13,700+ additional skills.
+description: Browse, install, and manage 109 community plugin marketplaces with 14,700+ additional skills.
 category: ecosystem
 ---
 
@@ -291,7 +291,7 @@ find ~/.claude/plugins/marketplaces -name "*.md" -path "*/agents/*" | head -20
 
 ### skillsmp.com
 
-Search 13,700+ community skills:
+Search 14,700+ community skills:
 
 ```
 /discover-skills <query>
@@ -325,5 +325,5 @@ All marketplaces are configured with `no_push` - read-only access.
 
 ---
 
-_108 marketplaces, 13,700+ skills, discovered proactively when domain expertise is needed._
+_108 marketplaces, 14,700+ skills, discovered proactively when domain expertise is needed._
 
