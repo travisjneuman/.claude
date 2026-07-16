@@ -1,5 +1,5 @@
 ---
-description: AI-powered skill recommendation based on your problem description - finds optimal resources from 127 local skills + 108 marketplaces (13,700+ skills)
+description: AI-powered skill recommendation based on your problem description - finds optimal resources from 127 local skills + 108 marketplaces (14,700+ skills)
 arguments:
   - name: problem
     description: "Describe what you're trying to accomplish or the problem you're facing"
@@ -85,7 +85,7 @@ Specialized agents via Task tool.
 
 #### Marketplace Resources
 
-Skills from 108 marketplace repositories (13,700+ skills) in `~/.claude/plugins/marketplaces/`.
+Skills from 108 marketplace repositories (14,700+ skills) in `~/.claude/plugins/marketplaces/`.
 
 Search for relevant marketplace skills:
 
@@ -228,5 +228,5 @@ Once skills are identified:
 
 ---
 
-_Intelligent skill discovery across 127 local skills + 108 marketplaces (13,700+ skills)_
+_Intelligent skill discovery across 127 local skills + 108 marketplaces (14,700+ skills)_
 
