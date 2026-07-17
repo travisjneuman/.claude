@@ -1,11 +1,11 @@
 {
   "repoCount": 108,
-  "totalSkills": 14713,
+  "totalSkills": 14736,
   "repos": [
     {
       "name": "sickn33-antigravity-awesome-skills",
       "displayName": "Sickn33 Antigravity Awesome Skills",
-      "skillCount": 6204
+      "skillCount": 6220
     },
     {
       "name": "claude-code-plugins-plus-skills",
@@ -25,7 +25,7 @@
     {
       "name": "alirezarezvani-claude-skills",
       "displayName": "Alirezarezvani Claude Skills",
-      "skillCount": 357
+      "skillCount": 362
     },
     {
       "name": "buildwithclaude",
@@ -138,19 +138,19 @@
       "skillCount": 31
     },
     {
+      "name": "EveryInc-compound",
+      "displayName": "EveryInc Compound",
+      "skillCount": 31
+    },
+    {
       "name": "trailofbits-skills-curated",
       "displayName": "Trailofbits Skills Curated",
       "skillCount": 31
     },
     {
-      "name": "EveryInc-compound",
-      "displayName": "EveryInc Compound",
-      "skillCount": 30
-    },
-    {
       "name": "claude-plugins-official",
       "displayName": "Claude Plugins Official",
-      "skillCount": 29
+      "skillCount": 30
     },
     {
       "name": "skillcreatorai-awesome-agent-skills",
