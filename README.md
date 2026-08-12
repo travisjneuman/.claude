@@ -226,7 +226,7 @@ See the **[GSD repository](https://github.com/gsd-build/get-shit-done)** for the
 ## 🔑 Key Features
 
 <details>
-<summary><strong>🏪 Marketplace — 109 repos, 14,700+ skills</strong></summary>
+<summary><strong>🏪 Marketplace — 108 repos, 14,700+ skills</strong></summary>
 
 The toolkit aggregates 108 community skill repositories as ignored local clones in `plugins/marketplaces/`. All are read-only (fetch but never push). Skills span security (Trail of Bits), full-stack development, scientific computing, SAP/enterprise, Elixir, Terraform, creative writing, and more. Some marketplace repos are **installed as plugins**, making their agents, commands, and skills fully active in the routing system alongside built-in resources. Non-installed repos contribute discoverable skills via keyword search.
 
@@ -388,11 +388,11 @@ See **[docs/NEW-DEVICE-SETUP.md](./docs/NEW-DEVICE-SETUP.md)** for the full walk
 **March 2026 — Comprehensive audit, GSD promotion, new repos, full domain coverage**
 
 - **GSD (Get Shit Done) promoted:** Now the flagship feature with dedicated README section, Quick Start integration, and routing diagram inclusion. 57 commands for full project lifecycle management.
-- **6 new marketplace repos:** `blader/humanizer` (11.4K stars), `phuryn/pm-skills` (8.3K stars, 100+ PM skills), `Lum1104/Understand-Anything` (6.6K stars), `SawyerHood/dev-browser` (4.9K stars), `slavingia/skills` (4.5K stars), `millionco/expect` (2.3K stars). Current manifest: 109 repos total.
+- **6 new marketplace repos:** `blader/humanizer` (11.4K stars), `phuryn/pm-skills` (8.3K stars, 100+ PM skills), `Lum1104/Understand-Anything` (6.6K stars), `SawyerHood/dev-browser` (4.9K stars), `slavingia/skills` (4.5K stars), `millionco/expect` (2.3K stars). Current manifest: 108 repos total.
 - **Marketplace clone cleanup:** Fixed orphaned directories, standardized the `.gitmodules` manifest, verified `no_push` protection on marketplace clones
 - **Full domain coverage:** New skills and agents for blockchain/Web3, data engineering, embedded/IoT, edge computing, compliance, and more
 - **New stack rules:** Added Go, Rust, Java/Kotlin, C/C++, Swift/iOS, Flutter/Dart rules — path-scoped for zero token cost when not relevant
-- **Count synchronization:** All counts now accurate across README, plugin.json, counts.json (127 skills, 86 agents, 94 commands, 109 repos)
+- **Count synchronization:** All counts now accurate across README, plugin.json, counts.json (128 skills, 86 agents, 94 commands, 108 repos)
 
 **Earlier in March 2026:**
 - **Marketplace routing:** All repos now surface naturally by domain — routing coverage went from 23% to 100%
