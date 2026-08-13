@@ -25,6 +25,12 @@
 
 ---
 
+## Optional shared Agent Operating Layer
+
+For cross-agent source intake, research/link/browser/social or authenticated-source work, durable `_meta.notes` routing, repository sync, risk/credential review, or shared agent protocols, consult the active environment's provider-neutral Agent Operating Layer registry when available. Load only trigger-matched entries; never inject the full library into every prompt. `_meta.notes` is the canonical durable source, while this public toolkit contains no private vault paths, secrets, auth/session stores, caches, or raw prompts. If the registry is unavailable, continue with local project instructions and report the missing shared policy rather than guessing.
+
+---
+
 ## Workflow
 
 Plan → Approve → Execute → Verify → Commit → Push (user-owned repos).
@@ -41,12 +47,10 @@ Completed user-owned pushes must go through the shared `_meta.notes` repo-sync
 runner, not raw `git push`, so overlapping agents serialize, safety-bundle,
 rebase onto current `main`/`master`, validate, push once, fan out to same-host
 sibling checkouts plus peer hosts, and verify the expected pushed SHA where
-possible. Use `repo-sync push-safe` from `E:/Web Development/_meta.notes/Projects/Agent
-Operating Layer/Repo Sync/` on TJN-DESK, `F:/Development/.webdev/_meta.notes/
-Projects/Agent Operating Layer/Repo Sync/` on TJN-SERVE, or `/Users/tjn/web-dev/
-_meta.notes/Projects/Agent Operating Layer/Repo Sync/` on TJNMPM. Managed
-pre-push hooks intentionally block raw Travis-owned pushes unless
-`REPO_SYNC_BYPASS=1` is set by the runner.
+possible. Resolve the runner from the active host/workspace instructions or
+`TJN_REPO_SYNC_RUNNER` when defined; do not hard-code a private machine path in
+this public toolkit. Managed pre-push hooks intentionally block raw
+Travis-owned pushes unless `REPO_SYNC_BYPASS=1` is set by the runner.
 
 **Stage only your own work.** Never sweep up unrelated user-pending changes
 (`.obsidian/*`, editor state, half-finished local edits) into your commit. Add
