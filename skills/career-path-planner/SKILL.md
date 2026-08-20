@@ -1,437 +1,234 @@
 ---
 name: career-path-planner
-description: Career goal mapping with skill gap analysis, actionable development plans, and milestone tracking. Use when planning career transitions, identifying skill gaps, setting professional development goals, or evaluating career options.
+description: Map career goals to skills, gaps, and milestones.
+version: 0.1.0
+author: Hermes
+metadata:
+  hermes:
+    tags: [Career, Skills, Planning, Development]
 ---
 
 # Career Path Planner
 
-Structured frameworks for career assessment, skill gap analysis, development planning, and professional growth milestone tracking.
+Structured frameworks for turning a vague career ambition into a concrete, tracked plan: assess where the user is, find the gaps to a target role, and build a development plan with milestones. It does NOT make career decisions for the user, negotiate offers, or apply for jobs — it structures the planning conversation. Pure markdown; no dependencies, APIs, or credentials.
 
-## Career Assessment Frameworks
+## When to Use
 
-### Skills Audit Matrix
+- "Help me plan my career path" / "figure out my next career move"
+- Skill gap analysis: "what skills do I need for <role>?"
+- Setting professional development goals or drafting a development plan
+- Evaluating a career transition (new industry, new role, returnship, self-employment)
+- Promotion preparation: mapping ladder levels and milestone tracking
+- Salary benchmarking or total-compensation evaluation
+
+## Prerequisites
+
+- None. The skill works from the user's own answers in conversation.
+- Recommended for gap analysis: 3-5 real job postings for the target role (gather via `web_search` / `web_extract` if the user doesn't paste them).
+
+## How to Run
+
+Conversation-driven: ask the user the assessment questions from the Frameworks section, fill the templates as you go, and if the user wants the plan kept, save it with `write_file` as a markdown file (e.g. `career-plan.md`). No commands to run.
+
+## Quick Reference
+
+| Framework | Purpose |
+|-----------|---------|
+| Skills Audit Matrix | Inventory proficiency (1-5) × market demand (1-5) with evidence |
+| Values Identification | 6 value categories with probing questions |
+| RIASEC | 6 career-interest types (R I A S E C); top-3 anchors direction |
+| Gap Analysis | 4 steps: target role → current state → classify → prioritize |
+| Gap Prioritization Matrix | Importance × gap size (4 quadrants) |
+| Development Timelines | Cert 1-3 mo … advanced degree 1-3 yr |
+| Career Ladders | 7 industry ladder templates (IC, mgmt, product, design, marketing, finance, consulting) |
+| Level Progression Signals | scope, recognition, autonomy, impact, mentoring, stagnation |
+| PDP Template | Vision + SMART goals + key results + monthly check-in |
+| Goal Categories | skills / experience / network / visibility / education |
+| Networking Framework | 5-3-2-2 targets, 6-step outreach, maintenance cadence |
+| Informational Interview Qs | 5 stages of questions |
+| Resume Impact Formula | Action verb + what + quantified result + context |
+| Action Verb Banks | leadership / technical / growth / efficiency / innovation |
+| Portfolio Structure | 6 sections mapped to audience |
+| Transition Types | 5 transitions with difficulty, strategy, timeline |
+| Bridge Role Strategy | intermediate role that builds target skills |
+| Salary Research | 7 sources; total-comp breakdown; benchmarking factors |
+| Planning Horizons | 1/3/5-year with confidence rule (80/50/30) |
+| Milestone Tracking | 6 milestone types with tracking methods |
+| Mentorship | 4 mentor types; meeting structure |
+| Learning Resources | 7 categories with time investment |
+
+## Procedure
+
+1. Anchor direction: if the goal is vague, run RIASEC (top-3 types) and the Values Identification questions.
+2. Audit: complete the Skills Audit Matrix with the user — proficiency, market demand, and evidence per skill.
+3. Define the target role: title and level, plus 3-5 real job postings as reference.
+4. Classify each requirement: HAVE / PARTIAL / MISSING / ADJACENT; score priority = importance × gap size (record the reasoning).
+5. Select the 2-3 highest-priority gaps and assign a timeline from the Development Timelines table.
+6. Draft the PDP: vision statement, 2-3 SMART goals with key results and resources, review cadence (monthly).
+7. Layer on networking (5-3-2-2 targets) and the 1/3/5-year horizons; log milestones with tracking methods.
+8. Save the plan with `write_file`; offer a review reminder via `cronjob` if the user wants one.
+
+## Frameworks and Templates
+
+### Career Assessment
+
+Skills Audit Matrix (proficiency: 1 = awareness, 2 = guided, 3 = independent, 4 = can teach, 5 = recognized):
 
 ```
-SKILL AUDIT TEMPLATE:
-
 TECHNICAL SKILLS:
   Skill               | Proficiency (1-5) | Market Demand (1-5) | Evidence
   [Skill 1]           | [X]               | [X]                 | [Projects, certs]
-  [Skill 2]           | [X]               | [X]                 | [Projects, certs]
 
 TRANSFERABLE SKILLS:
-  Skill               | Proficiency (1-5) | Relevance (1-5)     | Evidence
-  Communication       | [X]               | [X]                 | [Examples]
-  Leadership          | [X]               | [X]                 | [Examples]
-  Problem-solving     | [X]               | [X]                 | [Examples]
-  Project management  | [X]               | [X]                 | [Examples]
-
-SCORING:
-  1 = Beginner (awareness only)
-  2 = Basic (can do with guidance)
-  3 = Intermediate (independent work)
-  4 = Advanced (can teach others)
-  5 = Expert (industry recognition)
+  Skill               | Proficiency (1-5) | Relevance (1-5) | Evidence
+  Communication, Leadership, Problem-solving, Project management | ... | ...
 ```
 
-### Values Identification Framework
+Values Identification — ask: work style (remote/autonomous/collaborative), impact (who, what scale), growth (learning/mastery/leadership), compensation (salary floor/equity/benefits), lifestyle (hours/travel/balance), culture (startup/corporate/mission).
 
-| Value Category | Questions to Ask | Example Values |
-|---------------|-----------------|----------------|
-| **Work Style** | Remote? Autonomous? Collaborative? | Flexibility, independence, teamwork |
-| **Impact** | Who do I want to help? What scale? | Social impact, innovation, mentoring |
-| **Growth** | Learning? Mastery? Leadership? | Continuous learning, expertise depth |
-| **Compensation** | Salary floor? Equity? Benefits? | Financial security, wealth building |
-| **Lifestyle** | Hours? Travel? Work-life balance? | Balance, adventure, stability |
-| **Culture** | Startup? Corporate? Mission-driven? | Autonomy, structure, purpose |
+RIASEC types: R realistic (engineering, trades, IT infra) · I investigative (data science, research) · A artistic (design, writing, product) · S social (HR, teaching, healthcare) · E enterprising (sales, management, consulting) · C conventional (finance, accounting, ops, compliance). Intersect top-3 with skills and values for matches.
 
-### Interest Mapping (RIASEC Model)
+### Skill Gap Analysis
 
 ```
-RIASEC CAREER INTEREST TYPES:
-
-R - REALISTIC: Hands-on, practical, physical tasks
-    Careers: Engineering, trades, agriculture, IT infrastructure
-
-I - INVESTIGATIVE: Research, analysis, problem-solving
-    Careers: Data science, research, medicine, academia
-
-A - ARTISTIC: Creative expression, design, innovation
-    Careers: Design, writing, marketing, product development
-
-S - SOCIAL: Helping, teaching, counseling
-    Careers: HR, teaching, healthcare, nonprofit management
-
-E - ENTERPRISING: Leading, persuading, managing
-    Careers: Sales, management, entrepreneurship, consulting
-
-C - CONVENTIONAL: Organizing, data management, processes
-    Careers: Finance, accounting, operations, compliance
-
-YOUR TOP 3 TYPES: [___] [___] [___]
-CAREER MATCHES: Intersection of top types with skills and values
+STEP 1: Define target role — title/level + 3-5 real job postings; extract required skills/qualifications/experience
+STEP 2: Map current state — skills audit + current credentials + years of experience
+STEP 3: Classify each requirement — HAVE / PARTIAL / MISSING / ADJACENT
+STEP 4: Prioritize — Priority = (importance to role) × (size of gap); HIGH + LARGE first
 ```
-
-## Skill Gap Analysis
-
-### Gap Analysis Methodology
-
-```
-STEP 1: Define target role
-  - Job title and level
-  - 3-5 real job postings as reference
-  - Extract required skills, qualifications, experience
-
-STEP 2: Map current state
-  - Complete skills audit (above)
-  - List current qualifications and credentials
-  - Quantify years of relevant experience
-
-STEP 3: Identify gaps
-  For each target role requirement:
-    HAVE IT: Skill present and at required level
-    PARTIAL: Skill present but below required level
-    MISSING: Skill not present, needs development
-    ADJACENT: Have related skill, needs pivot
-
-STEP 4: Prioritize gaps
-  Priority = (Importance to target role) x (Size of gap)
-  Focus on HIGH importance + LARGE gap first
-```
-
-### Gap Prioritization Matrix
 
 | | Small Gap | Large Gap |
 |--|-----------|-----------|
 | **High Importance** | Quick win — close fast | Critical path — invest heavily |
 | **Low Importance** | Defer — nice to have | Ignore — not worth the effort |
 
-### Common Skill Development Paths
-
 | Gap Type | Timeline | Methods |
 |----------|----------|---------|
-| **Technical certification** | 1-3 months | Online course + exam |
-| **New programming language** | 2-4 months | Project-based learning |
-| **Domain knowledge** | 3-6 months | Reading, mentorship, side projects |
-| **Leadership experience** | 6-12 months | Volunteer to lead, manage projects |
-| **Industry transition** | 12-24 months | Networking, bridge roles, education |
-| **Advanced degree** | 1-3 years | Part-time programs, employer sponsorship |
+| Technical certification | 1-3 mo | Online course + exam |
+| New programming language | 2-4 mo | Project-based learning |
+| Domain knowledge | 3-6 mo | Reading, mentorship, side projects |
+| Leadership experience | 6-12 mo | Volunteer to lead, manage projects |
+| Industry transition | 12-24 mo | Networking, bridge roles, education |
+| Advanced degree | 1-3 yr | Part-time programs, employer sponsorship |
 
-## Career Ladder Mapping
-
-### Industry Career Ladder Templates
+### Career Ladder Mapping
 
 ```
-TECHNOLOGY (Individual Contributor):
-  Junior Engineer → Engineer → Senior Engineer → Staff Engineer
-  → Principal Engineer → Distinguished Engineer → Fellow
-
-TECHNOLOGY (Management):
-  Team Lead → Engineering Manager → Senior EM → Director
-  → VP Engineering → SVP → CTO
-
-PRODUCT:
-  Associate PM → Product Manager → Senior PM → Group PM
-  → Director of Product → VP Product → CPO
-
-DESIGN:
-  Junior Designer → Designer → Senior Designer → Lead Designer
-  → Design Manager → Director of Design → VP Design → CDO
-
-MARKETING:
-  Coordinator → Specialist → Manager → Senior Manager
-  → Director → VP Marketing → CMO
-
-FINANCE:
-  Analyst → Senior Analyst → Manager → Senior Manager
-  → Director → VP Finance → CFO
-
-CONSULTING:
-  Analyst → Associate → Consultant → Senior Consultant
-  → Manager → Senior Manager → Principal → Partner
+TECH IC:  Junior → Engineer → Senior → Staff → Principal → Distinguished → Fellow
+TECH MGMT: Team Lead → EM → Senior EM → Director → VP Eng → SVP → CTO
+PRODUCT:  APM → PM → Senior PM → Group PM → Director → VP → CPO
+DESIGN:   Junior → Designer → Senior → Lead → Design Manager → Director → VP → CDO
+MARKETING: Coordinator → Specialist → Manager → Senior Manager → Director → VP → CMO
+FINANCE:  Analyst → Senior Analyst → Manager → Senior Manager → Director → VP → CFO
+CONSULTING: Analyst → Associate → Consultant → Senior Consultant → Manager → Senior Manager → Principal → Partner
 ```
 
-### Level Progression Indicators
+Progression signals: scope increase (handle bigger projects/teams → raise level discussion), peer recognition (document for promotion case), autonomy growth (take stretch assignments), impact widening (build cross-functional presence), mentoring others (formalize mentorship), stagnation (time for a growth conversation).
 
-| Signal | What It Means | Action |
-|--------|--------------|--------|
-| **Scope increase** | Handling bigger projects/teams | Ready for next level discussion |
-| **Peer recognition** | Others seek your expertise | Document for promotion case |
-| **Autonomy growth** | Less supervision needed | Take on stretch assignments |
-| **Impact widening** | Influence beyond immediate team | Build cross-functional presence |
-| **Mentoring others** | Junior colleagues come to you | Formalize mentorship |
-| **Stagnation** | Same work, no new challenges | Time to have a growth conversation |
-
-## Professional Development Plan
-
-### Development Plan Template
+### Professional Development Plan
 
 ```
 PROFESSIONAL DEVELOPMENT PLAN
+NAME: [ ]  CURRENT ROLE: [ ]  TARGET ROLE: [ ] — Timeline: [ ]
+DATE CREATED: [ ]  REVIEW CADENCE: Monthly
 
-NAME: [Your name]
-CURRENT ROLE: [Title] at [Company]
-TARGET ROLE: [Title] — Timeline: [Date]
-DATE CREATED: [Date]
-REVIEW CADENCE: Monthly
+VISION STATEMENT: [one sentence: where you want to be and why]
 
-VISION STATEMENT:
-[One sentence describing where you want to be and why]
+GOALS (SMART): Goal 1: [Specific, Measurable, Achievable, Relevant, Time-bound]
+  Key Results: KR1: [measurable] — Due: [date]; KR2: [measurable] — Due: [date]
+  Resources: [courses, mentors, books, budget]   Status: [ ] Not started / In progress / Complete
 
-GOALS (SMART Format):
-  Goal 1: [Specific, Measurable, Achievable, Relevant, Time-bound]
-    Key Results:
-      - KR1: [Measurable outcome] — Due: [Date]
-      - KR2: [Measurable outcome] — Due: [Date]
-    Resources: [Courses, mentors, books, budget]
-    Status: [ ] Not started  [ ] In progress  [ ] Complete
-
-  Goal 2: [SMART goal]
-    Key Results:
-      - KR1: [Measurable outcome] — Due: [Date]
-      - KR2: [Measurable outcome] — Due: [Date]
-    Resources: [Courses, mentors, books, budget]
-    Status: [ ] Not started  [ ] In progress  [ ] Complete
-
-MONTHLY CHECK-IN:
-  - What did I accomplish this month?
-  - What blocked progress?
-  - What do I focus on next month?
-  - Do goals need adjusting?
+MONTHLY CHECK-IN: What did I accomplish? What blocked progress? Next month's focus? Adjust goals?
 ```
-
-### Goal Categories
 
 | Category | Examples | Measurement |
 |----------|---------|-------------|
-| **Skills** | Learn Python, get AWS cert | Certification, project completion |
-| **Experience** | Lead a project, present at conference | Deliverables, speaking slots |
-| **Network** | 10 informational interviews, join community | Connections made, events attended |
-| **Visibility** | Publish article, open-source contribution | Publications, contributions |
-| **Education** | Complete course, read 12 books | Completion certificates, book list |
+| Skills | Learn Python, AWS cert | Certification, project completion |
+| Experience | Lead a project, speak at conference | Deliverables, speaking slots |
+| Network | 10 informational interviews | Connections, events attended |
+| Visibility | Publish article, OSS contribution | Publications, contributions |
+| Education | Complete course, read 12 books | Certificates, book list |
 
-## Networking Strategy
-
-### Networking Framework
+### Networking Strategy
 
 ```
-NETWORKING STRATEGY:
-
-IDENTIFY TARGETS:
-  - 5 people in your target role (learn the job)
-  - 3 people who recently transitioned (learn the path)
-  - 2 hiring managers in target companies (learn requirements)
-  - 2 industry thought leaders (learn trends)
-
-OUTREACH APPROACH:
-  1. Research the person (LinkedIn, articles, talks)
-  2. Find a genuine connection point (shared interest, mutual contact)
-  3. Send personalized message (not generic template)
-  4. Ask for 20 minutes, not a favor
-  5. Prepare 3-5 specific questions
-  6. Follow up with a thank-you and value-add (article, introduction)
-
-MAINTENANCE:
-  - Engage with contacts' content monthly (comments, shares)
-  - Share useful resources quarterly
-  - Reconnect with updates every 3-6 months
-  - Offer help before asking for help
+IDENTIFY: 5 people in target role · 3 who recently transitioned · 2 hiring managers · 2 thought leaders
+OUTREACH: research person → find genuine connection point → personalized message
+          → ask for 20 minutes, not a favor → prepare 3-5 questions → thank-you + value-add
+MAINTENANCE: engage with contacts' content monthly · share resources quarterly
+             · reconnect every 3-6 months · offer help before asking
 ```
 
-### Informational Interview Questions
+Informational interview stages: role understanding (typical day, surprises) · path discovery (how they got in, what they'd change) · gap identification (critical skills, what new hires should know) · opportunity (field trends, growth) · connection (who else to speak with).
 
-| Stage | Questions |
-|-------|-----------|
-| **Role understanding** | What does a typical day/week look like? What surprised you about this role? |
-| **Path discovery** | How did you get into this field? What would you do differently? |
-| **Gap identification** | What skills are most critical? What do you wish new hires knew? |
-| **Opportunity** | What trends are shaping this field? Where do you see growth? |
-| **Connection** | Who else would you recommend I speak with? |
+### Resume and Portfolio
 
-## Resume and Portfolio Optimization
+Achievement formula: `[Action verb] + [what you did] + [quantified result] + [context]`. Example: "Reduced page load time by 60% (3.2s → 1.3s), increasing conversion by 15%".
 
-### Resume Impact Formula
+Action verbs: leadership (Led, Directed, Orchestrated, Mentored) · technical (Architected, Engineered, Automated, Optimized) · growth (Scaled, Grew, Launched, Increased) · efficiency (Streamlined, Reduced, Consolidated, Eliminated) · innovation (Pioneered, Designed, Invented, Transformed).
 
-```
-ACHIEVEMENT FORMAT:
-[Action verb] + [What you did] + [Quantified result] + [Context]
+Portfolio: Hero (name, title, value prop) · Featured Work (3-5 outcomes for hiring managers) · Case Studies (process for interviewers) · Skills (keywords for recruiters) · Writing/Talks (thought leadership) · Contact.
 
-EXAMPLES:
-  WEAK: "Responsible for managing the engineering team"
-  STRONG: "Led 8-person engineering team that shipped 3 products generating $2M ARR"
-
-  WEAK: "Helped improve website performance"
-  STRONG: "Reduced page load time by 60% (3.2s to 1.3s), increasing conversion rate by 15%"
-
-  WEAK: "Worked on data analysis projects"
-  STRONG: "Built predictive churn model (92% accuracy) that identified $500K in at-risk revenue"
-
-ACTION VERBS BY SKILL:
-  Leadership: Led, Directed, Orchestrated, Championed, Mentored
-  Technical: Architected, Engineered, Automated, Optimized, Migrated
-  Growth: Scaled, Grew, Expanded, Launched, Increased
-  Efficiency: Streamlined, Reduced, Consolidated, Eliminated, Simplified
-  Innovation: Pioneered, Designed, Prototyped, Invented, Transformed
-```
-
-### Portfolio Structure
-
-| Section | Contents | For Whom |
-|---------|---------|----------|
-| **Hero** | Name, title, value proposition | Everyone |
-| **Featured Work** | 3-5 best projects with outcomes | Hiring managers |
-| **Case Studies** | Deep-dive process stories | Interviewers |
-| **Skills** | Tech stack, certifications | Recruiters (keyword matching) |
-| **Writing/Talks** | Blog posts, presentations | Thought leadership evidence |
-| **Contact** | Professional email, LinkedIn | Networking |
-
-## Career Transition Planning
-
-### Transition Types and Strategies
+### Career Transition Planning
 
 | Transition | Difficulty | Strategy | Timeline |
 |-----------|-----------|----------|----------|
-| **Same industry, new role** | Low | Internal transfer, upskilling | 3-6 months |
-| **New industry, same role** | Medium | Networking, domain learning | 6-12 months |
-| **New industry, new role** | High | Bridge role, education, portfolio | 12-24 months |
-| **Employee to entrepreneur** | High | Side project, savings runway, validation | 6-18 months |
-| **Return after gap** | Medium | Returnship programs, freelance ramp | 3-9 months |
+| Same industry, new role | Low | Internal transfer, upskilling | 3-6 mo |
+| New industry, same role | Medium | Networking, domain learning | 6-12 mo |
+| New industry, new role | High | Bridge role, education, portfolio | 12-24 mo |
+| Employee → entrepreneur | High | Side project, savings runway, validation | 6-18 mo |
+| Return after gap | Medium | Returnship programs, freelance ramp | 3-9 mo |
 
-### Bridge Role Strategy
+Bridge role: an intermediate role building missing experience while leveraging current strengths. Find one by listing current-role skills, then target-role skills, then roles that need the first and expose the second — at companies in the target industry.
 
-```
-BRIDGE ROLE: An intermediate role that builds missing experience
-while leveraging existing strengths.
+### Salary Benchmarking
 
-EXAMPLE:
-  Current: Marketing Manager (B2C)
-  Target: Product Manager (Tech)
-  Bridge: Product Marketing Manager (Tech company)
-  — Leverages marketing skills, builds product and tech exposure
+Sources: Levels.fyi (tech) · Glassdoor (self-reported) · LinkedIn Salary Insights · Payscale · BLS (government) · Blind (anonymous tech) · industry surveys (Robert Half, Hays).
 
-FINDING BRIDGE ROLES:
-1. List skills in current role
-2. List skills needed for target role
-3. Find roles that require your current skills + expose you to target skills
-4. Apply to bridge roles at companies in your target industry
-```
+Total comp: base + annual bonus (target %) + equity/RSU annual vest + sign-on + benefits value + perks. Benchmarking factors: geography, company stage, years of experience, specialized-skill premium, management vs IC track. Adjust sources to the user's market — US-centric data misleads outside the US.
 
-## Salary Benchmarking
-
-### Salary Research Approach
+### Planning Horizons
 
 ```
-SALARY RESEARCH SOURCES:
-  1. Levels.fyi (tech, most accurate for tech roles)
-  2. Glassdoor (broad coverage, self-reported)
-  3. LinkedIn Salary Insights
-  4. Payscale (detailed by factors)
-  5. Bureau of Labor Statistics (government data)
-  6. Blind (anonymous, tech-focused)
-  7. Industry salary surveys (Robert Half, Hays, etc.)
-
-TOTAL COMPENSATION COMPONENTS:
-  Base salary: $_____
-  Annual bonus: $_____ (target %)
-  Equity/RSUs: $_____ (annual vest value)
-  Sign-on bonus: $_____
-  Benefits value: $_____ (health, 401k match, etc.)
-  Perks: $_____ (education budget, wellness, etc.)
-  TOTAL: $_____
-
-BENCHMARKING FACTORS:
-  - Geography (cost of living adjustment)
-  - Company stage (startup vs FAANG vs enterprise)
-  - Years of experience
-  - Specialized skills premium
-  - Management vs IC track
+1-YEAR (tactical): close immediate gaps, build network; 2-3 measurable goals; monthly review
+3-YEAR (strategic): role transition, level advancement, reputation; quarterly review
+5-YEAR (visionary): direction and positioning, not specific roles; annual reflection
+Confidence rule: 1yr ~80%, 3yr ~50% (expect revision), 5yr ~30% (directional only)
 ```
-
-## Planning Horizons
-
-### 1-Year, 3-Year, 5-Year Framework
-
-```
-1-YEAR PLAN (Tactical):
-  Focus: Close immediate skill gaps, build network foundation
-  Goals: 2-3 specific, measurable goals
-  Review: Monthly check-ins
-  Questions:
-    - What skill will have the biggest impact in 12 months?
-    - What relationships do I need to build?
-    - What can I ship/accomplish to demonstrate growth?
-
-3-YEAR PLAN (Strategic):
-  Focus: Role transition, career level advancement
-  Goals: Target role/level, compensation target, reputation goals
-  Review: Quarterly check-ins
-  Questions:
-    - Where do I want to be in my career ladder?
-    - What domain expertise do I want to be known for?
-    - What does my professional network look like?
-
-5-YEAR PLAN (Visionary):
-  Focus: Career direction, industry positioning, life integration
-  Goals: Broad direction, not specific roles
-  Review: Annual reflection
-  Questions:
-    - What impact do I want to have?
-    - What does success look like holistically (career + life)?
-    - What opportunities am I positioning myself for?
-
-PLANNING RULE:
-  1-year plan: 80% confidence in specifics
-  3-year plan: 50% confidence, expect to revise
-  5-year plan: 30% confidence, directional only
-```
-
-### Milestone Tracking
 
 | Milestone Type | Example | Tracking Method |
 |---------------|---------|----------------|
-| **Skill acquisition** | Complete AWS Solutions Architect cert | Credential earned date |
-| **Experience** | Lead a cross-functional project | Project completion + retrospective |
-| **Network** | 20 informational interviews conducted | Spreadsheet tracker |
-| **Visibility** | Publish 4 industry articles | Publication links |
-| **Compensation** | Reach $X total compensation | Annual review benchmark |
-| **Role change** | Transition to target role | Offer letter date |
+| Skill acquisition | AWS Solutions Architect cert | Credential earned date |
+| Experience | Lead cross-functional project | Completion + retrospective |
+| Network | 20 informational interviews | Spreadsheet tracker |
+| Visibility | 4 industry articles published | Publication links |
+| Compensation | Reach target total comp | Annual review benchmark |
+| Role change | Transition to target role | Offer letter date |
 
-## Mentorship and Learning Resources
+### Mentorship and Learning
 
-### Mentorship Framework
+Mentor sources: internal (skip-level manager, senior IC in target role, ERG leaders) · external (meetups, LinkedIn, alumni) · paid (executive/career coaching). Mentor types: career (direction), skill (teaches specific capability), sponsor (advocates in rooms you're not in), peer (mutual growth). Meetings: monthly, 30-60 min, 2-3 prepared questions, follow-up action items.
 
-```
-FINDING MENTORS:
-  - Internal: Skip-level manager, senior IC in target role, ERG leaders
-  - External: Industry meetups, LinkedIn outreach, alumni networks
-  - Paid: Executive coaching, career coaching platforms
+| Resource | Best For | Time |
+|----------|---------|------|
+| Online courses | Structured skill building | 2-8 wk/course |
+| Books | Deep knowledge, frameworks | 1-2 wk/book |
+| Podcasts | Trends, passive learning | 30-60 min/ep |
+| Conferences | Networking, trends | 1-3 days |
+| Side projects | Portfolio, applied learning | 2-5 hr/wk |
+| Communities | Peer learning, accountability | 1-2 hr/wk |
+| Newsletters | Staying current | 15 min/day |
 
-MENTOR MEETING STRUCTURE:
-  Frequency: Monthly (30-60 minutes)
-  Preparation: 2-3 specific questions or situations to discuss
-  Follow-up: Action items, thank you, progress update next session
+## Pitfalls
 
-MENTOR TYPES:
-  Career Mentor: Guides long-term career direction
-  Skill Mentor: Teaches specific technical/domain skills
-  Sponsor: Advocates for you in rooms you're not in
-  Peer Mentor: Mutual growth partnership at similar level
-```
+- Self-rated proficiency drifts: anchor each rating to behavioral evidence, not opinion.
+- Gap analysis without real postings becomes generic advice — require 3-5 postings.
+- Over-specifying the 3- and 5-year horizons: 80/50/30 confidence rule exists for a reason.
+- Priority scoring is subjective — write down the reasoning for each HIGH/LARGE call.
+- Never fabricate credentials or experience for the user; plans list development actions, not claims.
+- Salary benchmarks are geography- and stage-dependent; pick sources for the user's market.
+- This skill plans careers; it does not negotiate, apply, or decide for the user.
 
-### Learning Resource Categories
+## Verification
 
-| Resource Type | Best For | Time Investment |
-|--------------|---------|----------------|
-| **Online courses** (Coursera, Udemy) | Structured skill building | 2-8 weeks per course |
-| **Books** | Deep knowledge, frameworks | 1-2 weeks per book |
-| **Podcasts** | Industry trends, passive learning | 30-60 min/episode |
-| **Conferences** | Networking, trend awareness | 1-3 days/event |
-| **Side projects** | Portfolio building, applied learning | Ongoing (2-5 hrs/week) |
-| **Communities** | Peer learning, accountability | 1-2 hrs/week |
-| **Newsletters** | Staying current | 15 min/day |
-
-## See Also
-
-- [Health & Wellness](../health-wellness/SKILL.md)
-- [Fortune 50 HR/Talent](../fortune50-hr-talent/SKILL.md)
-- [Fortune 50 Leadership](../fortune50-leadership/SKILL.md)
+A session is complete when the user has: a target role, a completed skills audit, a prioritized gap list, a dated PDP with 2-3 SMART goals, and at least one milestone with a tracking method. If a plan file was written, confirm it exists (`read_file`) and renders as valid markdown.
