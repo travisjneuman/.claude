@@ -329,5 +329,19 @@
   "theme": "dark",
   "verbose": true,
   "teammateMode": "auto",
-  "remoteControlAtStartup": true
+  "remoteControlAtStartup": true,
+  "claudeMdExcludes": [
+    "**/my.notes/*/**/AGENTS.md",
+    "**/my.notes/*/**/CLAUDE.md",
+    "**/Backups/**/AGENTS.md",
+    "**/Backups/**/CLAUDE.md",
+    "**/backups/**/AGENTS.md",
+    "**/backups/**/CLAUDE.md",
+    "**/Archive/**/AGENTS.md",
+    "**/Archive/**/CLAUDE.md",
+    "**/archive/**/AGENTS.md",
+    "**/archive/**/CLAUDE.md",
+    "**/exact-originals/**/AGENTS.md",
+    "**/Exact Originals/**/AGENTS.md"
+  ]
 }
