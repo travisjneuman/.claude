@@ -4,6 +4,9 @@ All notable changes to the Ultimate Claude Code Toolkit.
 
 ## [3.1.0] - September 29, 2026
 
+### Settings
+- Tracked `settings.json` matches the form Claude Code writes for the official marketplace entry (it auto-updates by default), and `.gitattributes` pins both settings files to LF so Windows checkouts don't show phantom diffs.
+
 ### Marketplaces (plan C)
 - Manifest trimmed from 108 to 82: dropped 24 dead/fork/duplicate/README-only repos, the `claude-code-plugins` demo repo (fully contained in `claude-plugins-official`), and `auto-claude` (now the Aperant desktop app; the `/auto-claude` command, skill, and guide were removed; built-in workflows cover it). Archived `get-shit-done` replaced by `open-gsd/gsd-core`. 11 renamed upstreams updated.
 - `_pull-all-repos.sh` keeps every clone's origin in step with the manifest and reports clones that are no longer listed.

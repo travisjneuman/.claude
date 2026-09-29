@@ -155,7 +155,7 @@ Submodules:
   ✓ All repos have no_push protection
 
 Resources:
-  • 128 local skills
+  • 127 local skills
   • 86 local agents
   • 10,900+ marketplace skills (101 repos)
 

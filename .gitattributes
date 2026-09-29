@@ -1,0 +1,4 @@
+
+# Claude Code rewrites these with LF on every OS; keep checkouts LF so Windows shows no phantom diffs.
+settings.json text eol=lf
+.claude/settings.json text eol=lf

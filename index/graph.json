@@ -2529,7 +2529,7 @@
    "path": "commands/skill-finder.md",
    "domain": "workflow",
    "tier": "core",
-   "description": "AI-powered skill recommendation based on your problem description - finds optimal resources from 128 local skills + 82 marketplaces (10,900+ skills)"
+   "description": "AI-powered skill recommendation based on your problem description - finds optimal resources from 127 local skills + 82 marketplaces (10,900+ skills)"
   },
   {
    "id": "command:standardize-claude-md",

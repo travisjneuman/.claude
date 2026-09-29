@@ -310,8 +310,7 @@
       "source": {
         "source": "github",
         "repo": "anthropics/claude-plugins-official"
-      },
-      "autoUpdate": true
+      }
     }
   },
   "outputStyle": "default",
