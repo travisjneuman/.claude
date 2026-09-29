@@ -73,7 +73,7 @@ Extract from the domain file: **skill** to invoke, **agent** to spawn, **context
 
 ### Step 7: Verify
 
-Review the task-owned diff against the request. Run a check only for a specific issue (issue-driven testing, see CLAUDE.md); load `docs/reference/checklists/verification-template.md` for release-style work.
+Validate by review: re-read the request and review the whole diff and the code it touches. No tests (see CLAUDE.md); tests only if the user explicitly asks.
 
 **If `{{task_description}}` is empty:** Check GSD project → query memory → check todos → ask user.
 

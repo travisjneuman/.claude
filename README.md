@@ -387,7 +387,7 @@ See **[docs/NEW-DEVICE-SETUP.md](./docs/NEW-DEVICE-SETUP.md)** for the full walk
 **September 2026 — Modernization for current Claude Code**
 
 - **Lean always-on context:** 23 core skills keep full descriptions; every other skill and command is `name-only` (still installed and invocable) and discoverable through the generated `INDEX.md` / `index/graph.json` and the new `toolkit-router` skill. Language rules are path-scoped.
-- **Full Access+++ in `CLAUDE.md`:** rewritten, shorter constitution (autonomous execution, explicit prohibitions, issue-driven testing, pull-first git, no AI attribution). `attribution` settings disable commit/PR trailers at the source.
+- **Full Access+++ in `CLAUDE.md`:** rewritten, shorter constitution (autonomous execution, explicit prohibitions, zero testing (validate by review), pull-first git, no AI attribution). `attribution` settings disable commit/PR trailers at the source.
 - **Hooks fixed and trimmed:** the Bash and write guards now actually work (they read an env var Claude Code never set); per-prompt git injection, per-turn session summaries, and GSD update checks are gone; the pull runs at most daily and never auto-commits or pushes; new status line.
 - **AGENTS.md support:** `claude-md-and-agents-md` so projects shared with Codex and other agents load their `AGENTS.md`.
 - **Private `local/` layer:** gitignored rules, hooks, and host settings, plus a pre-commit public-safety gate. Template in `local.example/`.
