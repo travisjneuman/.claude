@@ -389,8 +389,20 @@ if [[ "$STATUS_ONLY" == false ]]; then
     for rel_path in "${MARKETPLACE_PATHS[@]}"; do
         repo="$SCRIPT_DIR/$rel_path"
         if repo_has_git "$repo"; then
+            # Keep the clone's origin in step with the manifest (handles upstream renames).
+            want_url=$(git config --file "$SCRIPT_DIR/.gitmodules" --get "submodule.$rel_path.url" 2>/dev/null | tr -d '\r')
+            have_url=$(git -C "$repo" remote get-url origin 2>/dev/null)
+            if [[ -n "$want_url" && "$have_url" != "$want_url" ]]; then
+                git -C "$repo" remote set-url origin "$want_url" && echo -e "${CYAN}  $(basename "$repo"): origin -> $want_url${NC}"
+            fi
             enforce_no_push "$repo" "$(basename "$repo")"
         fi
+    done
+    # Clones no longer in the manifest are reported, never deleted automatically.
+    for dir in "$SCRIPT_DIR"/plugins/marketplaces/*/; do
+        rel="plugins/marketplaces/$(basename "$dir")"
+        git config --file "$SCRIPT_DIR/.gitmodules" --get "submodule.$rel.path" >/dev/null 2>&1 || \
+            echo -e "${YELLOW}  $(basename "$dir"): not in the manifest (remove with: rm -rf \"$dir\")${NC}"
     done
     if [[ $NO_PUSH_FIXED -eq 0 ]]; then
         echo -e "${GREEN}  All marketplace clones already have no_push configured${NC}"

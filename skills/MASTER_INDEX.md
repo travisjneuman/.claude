@@ -16,7 +16,6 @@ Full cross-reference (skills, agents, commands, rules, docs, marketplaces): [`IN
 | `ar-vr-xr` | Desktop, systems & languages | name-only | AR/VR/XR development with Unity XR, WebXR, ARKit, ARCore, Meta Quest SDK, and spatial computing. Use when building augmented reality, virtu… |
 | `audio-production` | Creative & content | name-only | Professional audio production for music, podcasts, and sound design. Use when working with audio recording, mixing, mastering, or sound des… |
 | `authentication-patterns` | Backend, APIs & data stores | core | OAuth 2.0, JWT, SSO, MFA, NextAuth/Clerk/Supabase Auth implementation patterns |
-| `auto-claude` | Workflow & toolkit | name-only | Autonomous multi-agent coding with git worktree isolation, QA validation, and memory. Use for complex features requiring autonomous impleme… |
 | `battle-card-builder` | Business & product | name-only | Competitive battle card creation for sales teams combining competitive intelligence, sales enablement, and document formatting. Use when bu… |
 | `blockchain-web3` | Desktop, systems & languages | name-only | Solidity smart contracts, Web3 development, DeFi protocols, NFTs, EVM chains, Hardhat/Foundry tooling, and blockchain security. Use when wr… |
 | `brand-identity` | Creative & content | name-only | Brand strategy and identity design for businesses and products. Use when creating brand guidelines, developing visual identity systems, or… |

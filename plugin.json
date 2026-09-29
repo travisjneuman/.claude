@@ -1,7 +1,7 @@
 {
   "name": "ultimate-claude-toolkit",
   "version": "3.1.0",
-  "description": "Comprehensive Claude Code toolkit with 128 local skills, 86 specialized agents, and 108 marketplace repos for full-stack development across all platforms",
+  "description": "Comprehensive Claude Code toolkit with 127 local skills, 86 specialized agents, and 82 marketplace repos for full-stack development across all platforms",
   "author": "travisjneuman",
   "repository": "https://github.com/travisjneuman/.claude",
   "license": "MIT",
@@ -27,7 +27,7 @@
   "components": {
     "skills": {
       "path": "skills/",
-      "count": 128,
+      "count": 127,
       "categories": [
         "Platform Development",
         "Creative Design",
@@ -69,9 +69,9 @@
     "claude-code": ">=1.0.0"
   },
   "features": [
-    "128 local skills covering all development domains",
+    "127 local skills covering all development domains",
     "86 specialized AI agents for focused assistance",
-    "108 marketplace repos with 16,500+ additional skills",
+    "82 marketplace repos with 10,900+ additional skills",
     "Platform coverage: iOS, Android, Web, Desktop, PWA",
     "Creative tools: Design, Video, Audio, Branding",
     "Business guidance: Startup, Monetization, Strategy",

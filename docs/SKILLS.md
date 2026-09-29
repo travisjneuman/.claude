@@ -1,6 +1,6 @@
 ---
 name: Skills System
-description: Create, customize, and manage 128 local skills plus 16,500+ marketplace skills for any domain.
+description: Create, customize, and manage 128 local skills plus 10,900+ marketplace skills for any domain.
 category: reference
 ---
 

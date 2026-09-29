@@ -14,7 +14,7 @@ Helper scripts for setup, maintenance, and automation of the Claude Code toolkit
 | ---------------------- | --------------------------------------------- | ---------------------------------------------- |
 | `install.sh`           | One-line installer (curl-pipe)                | First-time setup on any machine                |
 | `setup-new-machine.sh` | Complete setup (plugins, hooks, verification) | After cloning the repo                         |
-| `init-marketplaces.sh` | Clone all 108 marketplace repos from upstreams | After cloning, or to fix broken marketplace clones     |
+| `init-marketplaces.sh` | Clone all 82 marketplace repos from upstreams | After cloning, or to fix broken marketplace clones     |
 | `setup-hooks.sh`       | Install git hooks into `.git/hooks/`          | After cloning (called by setup-new-machine.sh) |
 
 ### Maintenance (run periodically)
@@ -24,16 +24,15 @@ Helper scripts for setup, maintenance, and automation of the Claude Code toolkit
 | `update-counts.sh`    | Update all hardcoded counts across docs | After adding/removing skills, agents, or marketplace repos |
 | `generate-showcase-images.mjs` | Regenerate `.claude` OG images and optional `tjn.portfolio` screenshots from `counts.json` | After public showcase counts change |
 | `regenerate-index.sh` | Regenerate `skills/MASTER_INDEX.md`     | After adding/removing skills                               |
-| `update-plugins.sh`   | Update plugin registrations             | After enabling/disabling plugins                           |
-| `fix-remotes.sh`      | Fix remote URLs on marketplace repos    | If remotes are misconfigured after a pull                  |
+| `install-plugins.sh`  | Install enabled plugins + LSP binaries  | Runs daily automatically; run after changing plugins       |
+| `_pull-all-repos.sh`      | Fix remote URLs on marketplace repos    | If remotes are misconfigured after a pull                  |
 
 ### Repo Management
 
 | Script                     | Purpose                               | When to Run                                    |
 | -------------------------- | ------------------------------------- | ---------------------------------------------- |
-| `update-external-repos.sh` | Pull all marketplace repos            | Use `_pull-all-repos.sh` instead (recommended) |
-| `update-marketplaces.sh`   | Update marketplace clones | After upstream changes                         |
-| `force-sync-repos.sh`      | Force-sync all repos (nuclear option) | When repos are severely broken                 |
+| `_pull-all-repos.sh` | Pull all marketplace repos            | Use `_pull-all-repos.sh` instead (recommended) |
+| `_pull-all-repos.sh`   | Update marketplace clones | After upstream changes                         |
 
 ### Utilities
 
@@ -66,7 +65,7 @@ These are different from the Claude Code lifecycle hooks in `~/.claude/hooks/`. 
 
 1. Initializes missing marketplace clones from the manifest
 2. Pulls the parent repo
-3. Pulls all 108 marketplace repos
+3. Pulls all 82 marketplace repos
 4. Enforces `no_push` on marketplace repos
 5. Protects parent repo push URL
 6. Pulls custom project directories (from `.env.local`)
@@ -107,8 +106,8 @@ node ~/.claude/scripts/generate-counts.mjs --write --sync-consumers --sync-image
 ### Fixing broken marketplace repos
 
 ```bash
-# Try fix-remotes first (lightweight)
-bash ~/.claude/scripts/fix-remotes.sh
+# Re-sync clone URLs and push protection from the manifest
+bash ~/.claude/_pull-all-repos.sh
 
 # If that doesn't work, re-initialize from upstreams
 bash ~/.claude/scripts/init-marketplaces.sh

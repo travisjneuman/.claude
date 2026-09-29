@@ -2,10 +2,6 @@
 	path = plugins/marketplaces/anthropic-agent-skills
 	url = https://github.com/anthropics/skills.git
 	ignore = all
-[submodule "plugins/marketplaces/claude-code-plugins"]
-	path = plugins/marketplaces/claude-code-plugins
-	url = https://github.com/anthropics/claude-code.git
-	ignore = all
 [submodule "plugins/marketplaces/claude-plugins-official"]
 	path = plugins/marketplaces/claude-plugins-official
 	url = https://github.com/anthropics/claude-plugins-official.git
@@ -13,10 +9,6 @@
 [submodule "plugins/marketplaces/taches-cc-resources"]
 	path = plugins/marketplaces/taches-cc-resources
 	url = https://github.com/glittercowboy/taches-cc-resources.git
-	ignore = all
-[submodule "plugins/marketplaces/get-shit-done"]
-	path = plugins/marketplaces/get-shit-done
-	url = https://github.com/gsd-build/get-shit-done.git
 	ignore = all
 [submodule "plugins/marketplaces/awesome-claude-skills"]
 	path = plugins/marketplaces/awesome-claude-skills
@@ -32,7 +24,7 @@
 	ignore = all
 [submodule "plugins/marketplaces/claude-scientific-skills"]
 	path = plugins/marketplaces/claude-scientific-skills
-	url = https://github.com/K-Dense-AI/claude-scientific-skills.git
+	url = https://github.com/K-Dense-AI/scientific-agent-skills.git
 	ignore = all
 [submodule "plugins/marketplaces/mhattingpete-skills"]
 	path = plugins/marketplaces/mhattingpete-skills
@@ -54,10 +46,6 @@
 	path = plugins/marketplaces/alirezarezvani-claude-skills
 	url = https://github.com/alirezarezvani/claude-skills.git
 	ignore = all
-[submodule "plugins/marketplaces/auto-claude"]
-	path = plugins/marketplaces/auto-claude
-	url = https://github.com/AndyMik90/Auto-Claude.git
-	ignore = all
 [submodule "plugins/marketplaces/buildwithclaude"]
 	path = plugins/marketplaces/buildwithclaude
 	url = https://github.com/davepoon/buildwithclaude.git
@@ -68,7 +56,7 @@
 	ignore = all
 [submodule "plugins/marketplaces/henkisdabro-marketplace"]
 	path = plugins/marketplaces/henkisdabro-marketplace
-	url = https://github.com/henkisdabro/claudecode-marketplace.git
+	url = https://github.com/henkisdabro/wookstar-claude-plugins.git
 	ignore = all
 [submodule "plugins/marketplaces/anthropic-life-sciences"]
 	path = plugins/marketplaces/anthropic-life-sciences
@@ -78,14 +66,6 @@
 	path = plugins/marketplaces/davila7-templates
 	url = https://github.com/davila7/claude-code-templates.git
 	ignore = all
-[submodule "plugins/marketplaces/worldbuilding-skills"]
-	path = plugins/marketplaces/worldbuilding-skills
-	url = https://github.com/hopeoverture/worldbuilding-app-skills.git
-	ignore = all
-[submodule "plugins/marketplaces/hashi-terraform-skills"]
-	path = plugins/marketplaces/hashi-terraform-skills
-	url = https://github.com/hashi-demo-lab/claude-skill-hcp-terraform.git
-	ignore = all
 [submodule "plugins/marketplaces/secondsky-sap-skills"]
 	path = plugins/marketplaces/secondsky-sap-skills
 	url = https://github.com/secondsky/sap-skills.git
@@ -94,33 +74,17 @@
 	path = plugins/marketplaces/bradleygolden-elixir
 	url = https://github.com/bradleygolden/claude-marketplace-elixir.git
 	ignore = all
-[submodule "plugins/marketplaces/gqy20-biology-plugins"]
-	path = plugins/marketplaces/gqy20-biology-plugins
-	url = https://github.com/gqy20/cc_plugins.git
-	ignore = all
-[submodule "plugins/marketplaces/kfly8-cpan-plugins"]
-	path = plugins/marketplaces/kfly8-cpan-plugins
-	url = https://github.com/kfly8/claude-cpan-plugins.git
-	ignore = all
 [submodule "plugins/marketplaces/p47phoenix-plugins"]
 	path = plugins/marketplaces/p47phoenix-plugins
 	url = https://github.com/P47Phoenix/Claude-Plugins.git
-	ignore = all
-[submodule "plugins/marketplaces/chat2anyllm-awesome-plugins"]
-	path = plugins/marketplaces/chat2anyllm-awesome-plugins
-	url = https://github.com/Chat2AnyLLM/awesome-claude-plugins.git
 	ignore = all
 [submodule "plugins/marketplaces/numman-ali-skills"]
 	path = plugins/marketplaces/numman-ali-skills
 	url = https://github.com/numman-ali/n-skills.git
 	ignore = all
-[submodule "plugins/marketplaces/ananddtyagi-marketplace"]
-	path = plugins/marketplaces/ananddtyagi-marketplace
-	url = https://github.com/ananddtyagi/cc-marketplace.git
-	ignore = all
 [submodule "plugins/marketplaces/gmickel-marketplace"]
 	path = plugins/marketplaces/gmickel-marketplace
-	url = https://github.com/gmickel/gmickel-claude-marketplace.git
+	url = https://github.com/gmickel/flow-next.git
 	ignore = all
 [submodule "plugins/marketplaces/neolab-context-kit"]
 	path = plugins/marketplaces/neolab-context-kit
@@ -128,7 +92,7 @@
 	ignore = all
 [submodule "plugins/marketplaces/affaan-everything-claude"]
 	path = plugins/marketplaces/affaan-everything-claude
-	url = https://github.com/affaan-m/everything-claude-code.git
+	url = https://github.com/affaan-m/ECC.git
 	ignore = all
 [submodule "plugins/marketplaces/vercel-agent-skills"]
 	path = plugins/marketplaces/vercel-agent-skills
@@ -137,10 +101,6 @@
 [submodule "plugins/marketplaces/muratcankoylan-agent-skills"]
 	path = plugins/marketplaces/muratcankoylan-agent-skills
 	url = https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering.git
-	ignore = all
-[submodule "plugins/marketplaces/numman-ali-openskills"]
-	path = plugins/marketplaces/numman-ali-openskills
-	url = https://github.com/numman-ali/openskills.git
 	ignore = all
 [submodule "plugins/marketplaces/piebald-lsps"]
 	path = plugins/marketplaces/piebald-lsps
@@ -156,7 +116,7 @@
 	ignore = all
 [submodule "plugins/marketplaces/georgeguimaraes-elixir"]
 	path = plugins/marketplaces/georgeguimaraes-elixir
-	url = https://github.com/georgeguimaraes/claude-code-elixir.git
+	url = https://github.com/georgeguimaraes/elixir-agent-tools.git
 	ignore = all
 [submodule "plugins/marketplaces/sawyerhood-mart"]
 	path = plugins/marketplaces/sawyerhood-mart
@@ -169,10 +129,6 @@
 [submodule "plugins/marketplaces/sivalabs-marketplace"]
 	path = plugins/marketplaces/sivalabs-marketplace
 	url = https://github.com/sivaprasadreddy/sivalabs-marketplace.git
-	ignore = all
-[submodule "plugins/marketplaces/zai-coding-plugins"]
-	path = plugins/marketplaces/zai-coding-plugins
-	url = https://github.com/zai-org/zai-coding-plugins.git
 	ignore = all
 [submodule "plugins/marketplaces/madappgang-claude-code"]
 	path = plugins/marketplaces/madappgang-claude-code
@@ -202,10 +158,6 @@
 	path = plugins/marketplaces/voltagent-agent-skills
 	url = https://github.com/VoltAgent/awesome-agent-skills.git
 	ignore = all
-[submodule "plugins/marketplaces/scopecraft-command"]
-	path = plugins/marketplaces/scopecraft-command
-	url = https://github.com/scopecraft/command.git
-	ignore = all
 [submodule "plugins/marketplaces/danielscholl-sdlc"]
 	path = plugins/marketplaces/danielscholl-sdlc
 	url = https://github.com/danielscholl/claude-sdlc.git
@@ -217,10 +169,6 @@
 [submodule "plugins/marketplaces/EveryInc-compound"]
 	path = plugins/marketplaces/EveryInc-compound
 	url = https://github.com/EveryInc/compound-engineering-plugin.git
-	ignore = all
-[submodule "plugins/marketplaces/DustyWalker-marketplace"]
-	path = plugins/marketplaces/DustyWalker-marketplace
-	url = https://github.com/DustyWalker/claude-code-marketplace.git
 	ignore = all
 [submodule "plugins/marketplaces/daymade-skills"]
 	path = plugins/marketplaces/daymade-skills
@@ -238,10 +186,6 @@
 	path = plugins/marketplaces/hesreallyhim-awesome
 	url = https://github.com/hesreallyhim/awesome-claude-code.git
 	ignore = all
-[submodule "plugins/marketplaces/travisvn-awesome"]
-	path = plugins/marketplaces/travisvn-awesome
-	url = https://github.com/travisvn/awesome-claude-skills.git
-	ignore = all
 [submodule "plugins/marketplaces/quemsah-awesome"]
 	path = plugins/marketplaces/quemsah-awesome
 	url = https://github.com/quemsah/awesome-claude-plugins.git
@@ -249,14 +193,6 @@
 [submodule "plugins/marketplaces/aaronontheweb-dotnet-skills"]
 	path = plugins/marketplaces/aaronontheweb-dotnet-skills
 	url = https://github.com/Aaronontheweb/dotnet-skills.git
-	ignore = all
-[submodule "plugins/marketplaces/behisecc-awesome-claude-skills"]
-	path = plugins/marketplaces/behisecc-awesome-claude-skills
-	url = https://github.com/BehiSecc/awesome-claude-skills.git
-	ignore = all
-[submodule "plugins/marketplaces/karanb192-awesome-claude-skills"]
-	path = plugins/marketplaces/karanb192-awesome-claude-skills
-	url = https://github.com/karanb192/awesome-claude-skills.git
 	ignore = all
 [submodule "plugins/marketplaces/levnikolaevich-claude-code-skills"]
 	path = plugins/marketplaces/levnikolaevich-claude-code-skills
@@ -274,10 +210,6 @@
 	path = plugins/marketplaces/disler-hooks-mastery
 	url = https://github.com/disler/claude-code-hooks-mastery.git
 	ignore = all
-[submodule "plugins/marketplaces/rshah515-claude-code-subagents"]
-	path = plugins/marketplaces/rshah515-claude-code-subagents
-	url = https://github.com/rshah515/claude-code-subagents.git
-	ignore = all
 [submodule "plugins/marketplaces/manutej-luxor-marketplace"]
 	path = plugins/marketplaces/manutej-luxor-marketplace
 	url = https://github.com/manutej/luxor-claude-marketplace.git
@@ -285,10 +217,6 @@
 [submodule "plugins/marketplaces/jeffallan-claude-skills"]
 	path = plugins/marketplaces/jeffallan-claude-skills
 	url = https://github.com/Jeffallan/claude-skills.git
-	ignore = all
-[submodule "plugins/marketplaces/lodetomasi-agents-claude-code"]
-	path = plugins/marketplaces/lodetomasi-agents-claude-code
-	url = https://github.com/lodetomasi/agents-claude-code.git
 	ignore = all
 [submodule "plugins/marketplaces/ahmedasmar-devops-skills"]
 	path = plugins/marketplaces/ahmedasmar-devops-skills
@@ -298,17 +226,9 @@
 	path = plugins/marketplaces/mrgoonie-claudekit-skills
 	url = https://github.com/mrgoonie/claudekit-skills.git
 	ignore = all
-[submodule "plugins/marketplaces/chriswiles-claude-code-showcase"]
-	path = plugins/marketplaces/chriswiles-claude-code-showcase
-	url = https://github.com/ChrisWiles/claude-code-showcase.git
-	ignore = all
 [submodule "plugins/marketplaces/onmax-nuxt-skills"]
 	path = plugins/marketplaces/onmax-nuxt-skills
 	url = https://github.com/onmax/nuxt-skills.git
-	ignore = all
-[submodule "plugins/marketplaces/interstellar-code-claud-skills"]
-	path = plugins/marketplaces/interstellar-code-claud-skills
-	url = https://github.com/Interstellar-code/claud-skills.git
 	ignore = all
 [submodule "plugins/marketplaces/actionbook-rust-skills"]
 	path = plugins/marketplaces/actionbook-rust-skills
@@ -341,15 +261,11 @@
 	ignore = all
 [submodule "plugins/marketplaces/kenryu42-safety-net"]
 	path = plugins/marketplaces/kenryu42-safety-net
-	url = https://github.com/kenryu42/claude-code-safety-net.git
+	url = https://github.com/kenryu42/cc-safety-net.git
 	ignore = all
 [submodule "plugins/marketplaces/trailofbits-skills-curated"]
 	path = plugins/marketplaces/trailofbits-skills-curated
 	url = https://github.com/trailofbits/skills-curated.git
-	ignore = all
-[submodule "plugins/marketplaces/alvinunreal-awesome-claude"]
-	path = plugins/marketplaces/alvinunreal-awesome-claude
-	url = https://github.com/alvinunreal/awesome-claude.git
 	ignore = all
 [submodule "plugins/marketplaces/superpowers-marketplace"]
 	path = plugins/marketplaces/superpowers-marketplace
@@ -357,43 +273,19 @@
 	ignore = all
 [submodule "plugins/marketplaces/sickn33-antigravity-awesome-skills"]
 	path = plugins/marketplaces/sickn33-antigravity-awesome-skills
-	url = https://github.com/sickn33/antigravity-awesome-skills.git
+	url = https://github.com/sickn33/agentic-awesome-skills.git
 	ignore = all
 [submodule "plugins/marketplaces/agentskills-agentskills"]
 	path = plugins/marketplaces/agentskills-agentskills
 	url = https://github.com/agentskills/agentskills.git
 	ignore = all
-[submodule "plugins/marketplaces/heilcheng-awesome-agent-skills"]
-	path = plugins/marketplaces/heilcheng-awesome-agent-skills
-	url = https://github.com/heilcheng/awesome-agent-skills.git
-	ignore = all
-[submodule "plugins/marketplaces/libukai-awesome-agent-skills"]
-	path = plugins/marketplaces/libukai-awesome-agent-skills
-	url = https://github.com/libukai/awesome-agent-skills.git
-	ignore = all
 [submodule "plugins/marketplaces/skillcreatorai-agent-skills"]
 	path = plugins/marketplaces/skillcreatorai-agent-skills
-	url = https://github.com/skillcreatorai/Ai-Agent-Skills.git
-	ignore = all
-[submodule "plugins/marketplaces/abubakarsiddik31-claude-skills"]
-	path = plugins/marketplaces/abubakarsiddik31-claude-skills
-	url = https://github.com/abubakarsiddik31/claude-skills-collection.git
+	url = https://github.com/MoizIbnYousaf/ai-agent-skills.git
 	ignore = all
 [submodule "plugins/marketplaces/francyjg-agent-skill-creator"]
 	path = plugins/marketplaces/francyjg-agent-skill-creator
-	url = https://github.com/FrancyJGLisboa/agent-skill-creator.git
-	ignore = all
-[submodule "plugins/marketplaces/skillmatic-awesome-agent-skills"]
-	path = plugins/marketplaces/skillmatic-awesome-agent-skills
-	url = https://github.com/skillmatic-ai/awesome-agent-skills.git
-	ignore = all
-[submodule "plugins/marketplaces/jayzeedesign-awesome-claude"]
-	path = plugins/marketplaces/jayzeedesign-awesome-claude
-	url = https://github.com/JayZeeDesign/awesome-claude-skills.git
-	ignore = all
-[submodule "plugins/marketplaces/skillcreatorai-awesome-agent-skills"]
-	path = plugins/marketplaces/skillcreatorai-awesome-agent-skills
-	url = https://github.com/skillcreatorai/Awesome-Agent-Skills.git
+	url = https://github.com/FrancyJGLisboa/agent-skills-platform.git
 	ignore = all
 [submodule "plugins/marketplaces/pbakaus-impeccable"]
 	path = plugins/marketplaces/pbakaus-impeccable
@@ -405,7 +297,7 @@
 	ignore = all
 [submodule "plugins/marketplaces/claude-code-plugins-plus-skills"]
 	path = plugins/marketplaces/claude-code-plugins-plus-skills
-	url = https://github.com/jeremylongshore/claude-code-plugins-plus-skills.git
+	url = https://github.com/jeremylongshore/tons-of-skills-marketplace.git
 	ignore = all
 [submodule "plugins/marketplaces/slavingia-skills"]
 	path = plugins/marketplaces/slavingia-skills
@@ -421,7 +313,7 @@
 	ignore = all
 [submodule "plugins/marketplaces/understand-anything"]
 	path = plugins/marketplaces/understand-anything
-	url = https://github.com/Lum1104/Understand-Anything.git
+	url = https://github.com/Egonex-AI/Understand-Anything.git
 	ignore = all
 [submodule "plugins/marketplaces/phuryn-pm-skills"]
 	path = plugins/marketplaces/phuryn-pm-skills
@@ -432,3 +324,7 @@
 	url = https://github.com/millionco/expect.git
 	ignore = all
 	fetchRecurseSubmodules = false
+[submodule "plugins/marketplaces/gsd-core"]
+	path = plugins/marketplaces/gsd-core
+	url = https://github.com/open-gsd/gsd-core.git
+	ignore = all

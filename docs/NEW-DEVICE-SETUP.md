@@ -39,7 +39,7 @@ That's it. The scripts handle everything cross-platform.
 
 ## How Marketplace Repos Work
 
-The `~/.claude` repo references 108 marketplace repositories. These are **not** tracked as git submodule content in the parent repo. Instead, each machine independently fetches the marketplace repos from their original upstreams using `_pull-all-repos.sh`.
+The `~/.claude` repo references 82 marketplace repositories. These are **not** tracked as git submodule content in the parent repo. Instead, each machine independently fetches the marketplace repos from their original upstreams using `_pull-all-repos.sh`.
 
 This means:
 
@@ -58,7 +58,7 @@ This means:
 ### What `_pull-all-repos.sh` Does
 
 1. Pulls the parent repo (`~/.claude`)
-2. Clones or pulls all 108 marketplace repos from their original upstreams
+2. Clones or pulls all 82 marketplace repos from their original upstreams
 3. Enforces `no_push` on every marketplace repo
 4. Fixes detached HEAD states automatically
 5. Pulls custom project directories (if configured via `.env.local`)
@@ -186,9 +186,9 @@ No. The `_pull-all-repos.sh` script replaces the old `init-marketplaces.sh` appr
 
 | Script                 | Purpose                                                                   |
 | ---------------------- | ------------------------------------------------------------------------- |
-| `_pull-all-repos.sh`   | **Primary:** Pull/clone all 108 marketplace repos + parent repo            |
+| `_pull-all-repos.sh`   | **Primary:** Pull/clone all 82 marketplace repos + parent repo            |
 | `setup-new-machine.sh` | Complete setup (plugins, hooks, etc.)                                     |
-| `fix-remotes.sh`       | Fix remote URLs without re-cloning                                        |
+| `_pull-all-repos.sh`       | Fix remote URLs without re-cloning                                        |
 | `init-marketplaces.sh` | Legacy: clone/reinitialize marketplaces (use \_pull-all-repos.sh instead) |
 
 ---

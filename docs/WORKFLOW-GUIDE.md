@@ -93,7 +93,7 @@ These can be used **anytime**, regardless of workflow stage or GSD phase:
 | **Decision Frameworks** | Complex choices, trade-offs                  | `/consider:first-principles`         |
 | **TodoWrite**           | Track multi-step progress                    | Use tool directly                    |
 | **Agent Teams**         | Parallel work with inter-agent coordination  | `/assemble-team` or natural language |
-| **Auto-Claude**         | Autonomous feature implementation            | `/auto-claude [description]`         |
+| **Workflows**         | Autonomous feature implementation            | `ultracode: [description]` (built-in workflows)         |
 
 **Philosophy:** GSD provides _structure_, not _gates_. Use every tool that helps.
 
@@ -187,12 +187,12 @@ When `/start-task` detects a development task, you have three workflow options:
 
 ---
 
-### 2. Autonomous Implementation (Auto-Claude)
+### 2. Autonomous Implementation (built-in workflows)
 
 **Process:**
 
 ```
-/auto-claude Add user authentication
+ultracode: Add user authentication
 → Analyzes codebase automatically
 → Generates implementation spec
 → Creates isolated git worktree
@@ -217,10 +217,9 @@ When `/start-task` detects a development task, you have three workflow options:
 
 **How to Invoke:**
 
-- Direct: `/auto-claude [description]`
+- Direct: `ultracode: [description]` (built-in workflows)
 - Via router: `/start-task` auto-suggests when complexity >= 3
 
-**See:** [AUTO-CLAUDE-GUIDE.md](./AUTO-CLAUDE-GUIDE.md) for complete documentation
 
 ---
 
@@ -282,7 +281,7 @@ Create an agent team to build the user settings module:
 - Phased approach with milestones
 - Persistent state (.planning/)
 - Multi-session support
-- Manual or Auto-Claude per phase
+- Manual or Workflows per phase
 
 **See:** [GSD-TUTORIAL.md](./GSD-TUTORIAL.md) for complete documentation
 
@@ -290,7 +289,7 @@ Create an agent team to build the user settings module:
 
 ### Workflow Comparison
 
-| Aspect         | Manual                | Agent Teams           | Auto-Claude      | GSD            |
+| Aspect         | Manual                | Agent Teams           | Workflows      | GSD            |
 | -------------- | --------------------- | --------------------- | ---------------- | -------------- |
 | **Complexity** | 1-2                   | 3-4                   | 3-4              | 5+             |
 | **Control**    | Maximum               | Lead coordinates      | Medium           | Structured     |
@@ -301,9 +300,9 @@ Create an agent team to build the user settings module:
 
 **Combining workflows:**
 
-- Use Manual for research → Auto-Claude for implementation
+- Use Manual for research → Workflows for implementation
 - Use Agent Teams for cross-layer features within a GSD phase
-- Use GSD phases → Auto-Claude for individual features within phases
+- Use GSD phases → Workflows for individual features within phases
 - Switch between approaches as needs change
 
 ---
@@ -326,7 +325,7 @@ The `/start-task` command scores complexity to determine workflow:
 | Score | Workflow                       |
 | ----- | ------------------------------ |
 | >= 5  | GSD (multi-phase project)      |
-| 3-4   | Auto-Claude or EnterPlanMode   |
+| 3-4   | Workflows or EnterPlanMode   |
 | 1-2   | EnterPlanMode (planning first) |
 | <= 0  | Direct execution               |
 

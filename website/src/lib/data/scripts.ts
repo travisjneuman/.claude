@@ -99,19 +99,6 @@ const SCRIPT_METADATA: Record<
     description: "Regenerate skills/MASTER_INDEX.md from skill files.",
     whenToRun: "After adding/removing skills",
   },
-  "update-plugins": {
-    name: "Update Plugins",
-    category: "maintenance",
-    description: "Update all marketplace plugins and apply the known fixes.",
-    whenToRun: "After enabling/disabling plugins",
-  },
-  "fix-remotes": {
-    name: "Fix Remotes",
-    category: "maintenance",
-    description:
-      "Keep the toolkit repo pushable while marketplace clones stay fetch-only from their original upstreams.",
-    whenToRun: "If remotes are misconfigured after a pull",
-  },
 
   // Repo Management
   "add-marketplace": {
@@ -121,19 +108,6 @@ const SCRIPT_METADATA: Record<
       "Add a marketplace: writes a manifest-only .gitmodules entry (no gitlink, no content), clones it locally into the gitignored plugins/marketplaces/ with no_push, and regenerates the index.",
     whenToRun: "When adding a new marketplace repo",
   },
-  "update-external-repos": {
-    name: "Update External Repos",
-    category: "repo-management",
-    description: "Fetch updates for all marketplace clones (read-only, never pushes).",
-    whenToRun: "Use _pull-all-repos.sh instead (recommended)",
-  },
-  "update-marketplaces": {
-    name: "Update Marketplaces",
-    category: "repo-management",
-    description: "Update all marketplace clones and reset their push URLs to no_push.",
-    whenToRun: "After upstream changes",
-  },
-  "force-sync-repos": {
     name: "Force Sync Repos",
     category: "repo-management",
     description:

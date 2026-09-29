@@ -151,13 +151,13 @@ Core Files:
   ✓ .mcp.json
 
 Submodules:
-  ✓ 108 marketplace repos configured
+  ✓ 82 marketplace repos configured
   ✓ All repos have no_push protection
 
 Resources:
   • 128 local skills
   • 86 local agents
-  • 16,500+ marketplace skills (101 repos)
+  • 10,900+ marketplace skills (101 repos)
 
 Hooks:
   ✓ SessionStart: Auto-routing enabled
@@ -184,7 +184,7 @@ If any issues were detected, offer to fix them:
 **Update all marketplace repos:**
 
 ```bash
-bash ~/.claude/scripts/update-external-repos.sh
+bash ~/.claude/_pull-all-repos.sh
 ```
 
 **Reset a broken submodule:**
@@ -205,7 +205,6 @@ bash ~/.claude/scripts/install.sh  # Will skip clone, just reconfigure
 **Force sync everything:**
 
 ```bash
-bash ~/.claude/scripts/force-sync-repos.sh
 ```
 
 ---

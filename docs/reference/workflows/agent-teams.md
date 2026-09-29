@@ -1,6 +1,6 @@
 # Agent Teams Workflow Guide
 
-**When to use:** Deciding between single session, subagents, agent teams, or Auto-Claude for a task.
+**When to use:** Deciding between single session, subagents, agent teams, or Workflows for a task.
 
 ---
 
@@ -19,7 +19,7 @@ Do the workers need to communicate with each other?
   YES ↓
 
 Is it fully autonomous feature implementation needing QA validation?
-  YES → Auto-Claude (/auto-claude)
+  YES → a workflow (`ultracode`)
   NO  → Agent Teams
 ```
 
@@ -32,7 +32,7 @@ Is it fully autonomous feature implementation needing QA validation?
 | **Single session** | Shared                     | N/A                         | Lowest     | Sequential work, same-file edits   |
 | **Subagents**      | Own window, results return | One-way (to caller)         | Low-Medium | Focused tasks, parallel search     |
 | **Agent Teams**    | Own window, independent    | Two-way (between teammates) | High       | Research, review, cross-layer work |
-| **Auto-Claude**    | Isolated worktree          | Multi-agent coordination    | Highest    | Autonomous feature implementation  |
+| **Workflows**    | Parallel subagents (canonical checkout)          | Multi-agent coordination    | Highest    | Autonomous feature implementation  |
 
 ---
 
@@ -184,9 +184,8 @@ The `auto` teammate mode handles detection automatically across all platforms.
 
 - `~/.claude/docs/AGENT-TEAMS.md` - Comprehensive guide with templates
 - `~/.claude/agents/README.md` - Subagent catalog (86 agents)
-- `~/.claude/docs/AUTO-CLAUDE-GUIDE.md` - Autonomous alternative
 - `~/.claude/docs/reference/workflows/context-management.md` - Context window management
 
 ---
 
-_Choose the right parallelism level: single session < subagents < agent teams < Auto-Claude._
+_Choose the right parallelism level: single session < subagents < agent teams < Workflows._

@@ -74,7 +74,6 @@ This repo underwent a security audit before being made public. The following wer
     ├── commands/                   ← Custom slash commands (30 + 7 router)
     │   ├── README.md               ← Commands index
     │   ├── assemble-team.md        ← /assemble-team - Agent Teams setup
-    │   ├── auto-claude.md          ← /auto-claude - Autonomous mode
     │   ├── backup-config.md        ← /backup-config - Configuration backup
     │   ├── bootstrap.md            ← /bootstrap - Project bootstrapping
     │   ├── context-stats.md        ← /context-stats - Context usage
@@ -106,7 +105,6 @@ This repo underwent a security audit before being made public. The following wer
     │   ├── README.md               ← Docs index
     │   ├── AGENT-TEAMS.md          ← Agent Teams comprehensive guide
     │   ├── ARCHITECTURE.md         ← System architecture overview
-    │   ├── AUTO-CLAUDE-GUIDE.md    ← Autonomous Claude setup guide
     │   ├── BACKUP-STRATEGIES.md    ← Backup and recovery strategies
     │   ├── CLAUDE-CODE-RESOURCES.md ← Claude Code ecosystem resources
     │   ├── CONFIGURATION.md        ← Settings and configuration details
@@ -218,7 +216,6 @@ This repo underwent a security audit before being made public. The following wer
     │   │
     │   ├── Utility ────────────────────────────────────────
     │   │   ├── agent-teams/            ← Agent Teams coordination
-    │   │   ├── auto-claude/            ← Autonomous Claude
     │   │   ├── codebase-documenter/    ← Code documentation
     │   │   ├── core-workflow/          ← Core workflow patterns
     │   │   ├── debug-systematic/       ← Systematic debugging
@@ -340,21 +337,18 @@ This repo underwent a security audit before being made public. The following wer
     │
     ├── scripts/                    ← Automation scripts (14 + 4 hook scripts)
     │   ├── README.md               ← Scripts index
-    │   ├── README-sync-scripts.md  ← Sync scripts documentation
     │   ├── fix-marketplace-paths.sh ← Fix plugin path issues
     │   ├── fix-plugin-line-endings.ps1 ← Fix line endings (Windows)
     │   ├── fix-plugin-line-endings.sh  ← Fix line endings (Unix)
-    │   ├── fix-remotes.sh          ← Fix git remote URLs
-    │   ├── force-sync-repos.sh     ← Force sync all repos
+    │   ├── _pull-all-repos.sh          ← Fix git remote URLs
     │   ├── init-marketplaces.sh    ← Initialize marketplace repos
     │   ├── install.sh              ← Installation script
     │   ├── regenerate-index.sh     ← Regenerate skill indexes
     │   ├── setup-hooks.sh          ← Install git hooks
     │   ├── setup-new-machine.sh    ← New machine setup
     │   ├── update-counts.sh        ← Update documentation counts
-    │   ├── update-external-repos.sh ← Update external repos
-    │   ├── update-marketplaces.sh  ← Update marketplace repos
-    │   ├── update-plugins.sh       ← Update plugins
+    │   ├── _pull-all-repos.sh ← Update external repos
+    │   ├── _pull-all-repos.sh  ← Update marketplace repos
     │   └── hooks/                  ← Git hook scripts
     │       ├── commit-msg.sh
     │       ├── pre-commit.sh
@@ -388,7 +382,6 @@ Custom commands that appear as `/command-name` in Claude Code.
 | File                       | Command                  | Purpose                             |
 | -------------------------- | ------------------------ | ----------------------------------- |
 | `assemble-team.md`         | `/assemble-team`         | Set up Agent Teams                  |
-| `auto-claude.md`           | `/auto-claude`           | Launch autonomous mode              |
 | `backup-config.md`         | `/backup-config`         | Back up configuration               |
 | `bootstrap.md`             | `/bootstrap`             | Bootstrap a new project             |
 | `context-stats.md`         | `/context-stats`         | Show context window usage           |
@@ -482,12 +475,10 @@ Shell scripts for setup, maintenance, and automation.
 | `setup-new-machine.sh`      | New machine/device setup                                           |
 | `setup-hooks.sh`            | Install git hooks                                                  |
 | `init-marketplaces.sh`      | Initialize marketplace repos                                       |
-| `update-external-repos.sh`  | Update external repos                                              |
-| `update-marketplaces.sh`    | Update marketplace repos                                           |
-| `update-plugins.sh`         | Update plugins                                                     |
+| `_pull-all-repos.sh`  | Update external repos                                              |
+| `_pull-all-repos.sh`    | Update marketplace repos                                           |
 | `update-counts.sh`          | Update documentation counts                                        |
-| `force-sync-repos.sh`       | Force sync all repos                                               |
-| `fix-remotes.sh`            | Fix git remote URLs                                                |
+| `_pull-all-repos.sh`            | Fix git remote URLs                                                |
 | `fix-marketplace-paths.sh`  | Fix plugin path issues (cross-platform)                            |
 | `fix-plugin-line-endings.*` | Fix line endings (sh + ps1)                                        |
 | `regenerate-index.sh`       | Regenerate skill indexes                                           |
@@ -550,7 +541,6 @@ All documentation for understanding and maintaining this configuration.
 | `README.md`                | Docs index                             |
 | `AGENT-TEAMS.md`           | Agent Teams comprehensive guide        |
 | `ARCHITECTURE.md`          | System architecture overview           |
-| `AUTO-CLAUDE-GUIDE.md`     | Autonomous Claude setup guide          |
 | `BACKUP-STRATEGIES.md`     | Backup and recovery strategies         |
 | `CLAUDE-CODE-RESOURCES.md` | Claude Code ecosystem resources        |
 | `CONFIGURATION.md`         | Settings and configuration details     |

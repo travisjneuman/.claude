@@ -4,6 +4,12 @@ All notable changes to the Ultimate Claude Code Toolkit.
 
 ## [3.1.0] - September 29, 2026
 
+### Marketplaces (plan C)
+- Manifest trimmed from 108 to 82: dropped 24 dead/fork/duplicate/README-only repos, the `claude-code-plugins` demo repo (fully contained in `claude-plugins-official`), and `auto-claude` (now the Aperant desktop app; the `/auto-claude` command, skill, and guide were removed; built-in workflows cover it). Archived `get-shit-done` replaced by `open-gsd/gsd-core`. 11 renamed upstreams updated.
+- `_pull-all-repos.sh` keeps every clone's origin in step with the manifest and reports clones that are no longer listed.
+- Marketplace skill count and catalog are de-duplicated by normalized skill body (the old 16,500+ counted copies; unique is ~10,900). The catalog keeps the copy from the most canonical source and records how many copies exist.
+- Removed overlapping legacy scripts (`fix-remotes.sh`, `update-external-repos.sh`, `update-marketplaces.sh`, `update-plugins.sh`, and `force-sync-repos.sh`, which hard-reset and deleted untracked files). `regenerate-index.sh` now wraps `generate-index.mjs`.
+
 ### Plugins (plan A)
 - Plugin set now actually loads: all entries point at `claude-plugins-official` (the old `@claude-code-plugins`/`@anthropic-agent-skills`/`@taches-cc-resources` names were never registered, so nothing loaded). Kept `commit-commands`, `frontend-design`; added `claude-security`, `cloudflare`, `typescript-lsp`, `pyright-lsp`, `swift-lsp`; `plugin-dev` is project-scoped to the toolkit repo (`.claude/settings.json`, now tracked). Dropped duplicates of built-ins/toolkit skills. See docs/PLUGIN-MANAGEMENT.md.
 - `scripts/install-plugins.sh` installs enabled plugins and LSP binaries idempotently; the daily pull runs it on every machine.

@@ -107,15 +107,6 @@
    "description": "OAuth 2.0, JWT, SSO, MFA, NextAuth/Clerk/Supabase Auth implementation patterns"
   },
   {
-   "id": "skill:auto-claude",
-   "type": "skill",
-   "name": "auto-claude",
-   "path": "skills/auto-claude/SKILL.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "Autonomous multi-agent coding with git worktree isolation, QA validation, and memory. Use for complex features requiring autonomous implementation."
-  },
-  {
    "id": "skill:battle-card-builder",
    "type": "skill",
    "name": "battle-card-builder",
@@ -1839,15 +1830,6 @@
    "description": "Scan documentation for staleness — broken links, outdated counts, stale version references, and inconsistencies"
   },
   {
-   "id": "command:auto-claude",
-   "type": "command",
-   "name": "auto-claude",
-   "path": "commands/auto-claude.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "Invoke Auto-Claude autonomous coding framework for complex feature implementation"
-  },
-  {
    "id": "command:backup-config",
    "type": "command",
    "name": "backup-config",
@@ -2547,7 +2529,7 @@
    "path": "commands/skill-finder.md",
    "domain": "workflow",
    "tier": "core",
-   "description": "AI-powered skill recommendation based on your problem description - finds optimal resources from 128 local skills + 108 marketplaces (16,500+ skills)"
+   "description": "AI-powered skill recommendation based on your problem description - finds optimal resources from 128 local skills + 82 marketplaces (10,900+ skills)"
   },
   {
    "id": "command:standardize-claude-md",
@@ -2941,11 +2923,6 @@
    "path": "plugins/marketplaces/anthropic-agent-skills"
   },
   {
-   "name": "claude-code-plugins",
-   "url": "https://github.com/anthropics/claude-code.git",
-   "path": "plugins/marketplaces/claude-code-plugins"
-  },
-  {
    "name": "claude-plugins-official",
    "url": "https://github.com/anthropics/claude-plugins-official.git",
    "path": "plugins/marketplaces/claude-plugins-official"
@@ -2954,11 +2931,6 @@
    "name": "taches-cc-resources",
    "url": "https://github.com/glittercowboy/taches-cc-resources.git",
    "path": "plugins/marketplaces/taches-cc-resources"
-  },
-  {
-   "name": "get-shit-done",
-   "url": "https://github.com/gsd-build/get-shit-done.git",
-   "path": "plugins/marketplaces/get-shit-done"
   },
   {
    "name": "awesome-claude-skills",
@@ -2977,7 +2949,7 @@
   },
   {
    "name": "claude-scientific-skills",
-   "url": "https://github.com/K-Dense-AI/claude-scientific-skills.git",
+   "url": "https://github.com/K-Dense-AI/scientific-agent-skills.git",
    "path": "plugins/marketplaces/claude-scientific-skills"
   },
   {
@@ -3006,11 +2978,6 @@
    "path": "plugins/marketplaces/alirezarezvani-claude-skills"
   },
   {
-   "name": "auto-claude",
-   "url": "https://github.com/AndyMik90/Auto-Claude.git",
-   "path": "plugins/marketplaces/auto-claude"
-  },
-  {
    "name": "buildwithclaude",
    "url": "https://github.com/davepoon/buildwithclaude.git",
    "path": "plugins/marketplaces/buildwithclaude"
@@ -3022,7 +2989,7 @@
   },
   {
    "name": "henkisdabro-marketplace",
-   "url": "https://github.com/henkisdabro/claudecode-marketplace.git",
+   "url": "https://github.com/henkisdabro/wookstar-claude-plugins.git",
    "path": "plugins/marketplaces/henkisdabro-marketplace"
   },
   {
@@ -3036,16 +3003,6 @@
    "path": "plugins/marketplaces/davila7-templates"
   },
   {
-   "name": "worldbuilding-skills",
-   "url": "https://github.com/hopeoverture/worldbuilding-app-skills.git",
-   "path": "plugins/marketplaces/worldbuilding-skills"
-  },
-  {
-   "name": "hashi-terraform-skills",
-   "url": "https://github.com/hashi-demo-lab/claude-skill-hcp-terraform.git",
-   "path": "plugins/marketplaces/hashi-terraform-skills"
-  },
-  {
    "name": "secondsky-sap-skills",
    "url": "https://github.com/secondsky/sap-skills.git",
    "path": "plugins/marketplaces/secondsky-sap-skills"
@@ -3056,24 +3013,9 @@
    "path": "plugins/marketplaces/bradleygolden-elixir"
   },
   {
-   "name": "gqy20-biology-plugins",
-   "url": "https://github.com/gqy20/cc_plugins.git",
-   "path": "plugins/marketplaces/gqy20-biology-plugins"
-  },
-  {
-   "name": "kfly8-cpan-plugins",
-   "url": "https://github.com/kfly8/claude-cpan-plugins.git",
-   "path": "plugins/marketplaces/kfly8-cpan-plugins"
-  },
-  {
    "name": "p47phoenix-plugins",
    "url": "https://github.com/P47Phoenix/Claude-Plugins.git",
    "path": "plugins/marketplaces/p47phoenix-plugins"
-  },
-  {
-   "name": "chat2anyllm-awesome-plugins",
-   "url": "https://github.com/Chat2AnyLLM/awesome-claude-plugins.git",
-   "path": "plugins/marketplaces/chat2anyllm-awesome-plugins"
   },
   {
    "name": "numman-ali-skills",
@@ -3081,13 +3023,8 @@
    "path": "plugins/marketplaces/numman-ali-skills"
   },
   {
-   "name": "ananddtyagi-marketplace",
-   "url": "https://github.com/ananddtyagi/cc-marketplace.git",
-   "path": "plugins/marketplaces/ananddtyagi-marketplace"
-  },
-  {
    "name": "gmickel-marketplace",
-   "url": "https://github.com/gmickel/gmickel-claude-marketplace.git",
+   "url": "https://github.com/gmickel/flow-next.git",
    "path": "plugins/marketplaces/gmickel-marketplace"
   },
   {
@@ -3097,7 +3034,7 @@
   },
   {
    "name": "affaan-everything-claude",
-   "url": "https://github.com/affaan-m/everything-claude-code.git",
+   "url": "https://github.com/affaan-m/ECC.git",
    "path": "plugins/marketplaces/affaan-everything-claude"
   },
   {
@@ -3109,11 +3046,6 @@
    "name": "muratcankoylan-agent-skills",
    "url": "https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering.git",
    "path": "plugins/marketplaces/muratcankoylan-agent-skills"
-  },
-  {
-   "name": "numman-ali-openskills",
-   "url": "https://github.com/numman-ali/openskills.git",
-   "path": "plugins/marketplaces/numman-ali-openskills"
   },
   {
    "name": "piebald-lsps",
@@ -3132,7 +3064,7 @@
   },
   {
    "name": "georgeguimaraes-elixir",
-   "url": "https://github.com/georgeguimaraes/claude-code-elixir.git",
+   "url": "https://github.com/georgeguimaraes/elixir-agent-tools.git",
    "path": "plugins/marketplaces/georgeguimaraes-elixir"
   },
   {
@@ -3149,11 +3081,6 @@
    "name": "sivalabs-marketplace",
    "url": "https://github.com/sivaprasadreddy/sivalabs-marketplace.git",
    "path": "plugins/marketplaces/sivalabs-marketplace"
-  },
-  {
-   "name": "zai-coding-plugins",
-   "url": "https://github.com/zai-org/zai-coding-plugins.git",
-   "path": "plugins/marketplaces/zai-coding-plugins"
   },
   {
    "name": "madappgang-claude-code",
@@ -3191,11 +3118,6 @@
    "path": "plugins/marketplaces/voltagent-agent-skills"
   },
   {
-   "name": "scopecraft-command",
-   "url": "https://github.com/scopecraft/command.git",
-   "path": "plugins/marketplaces/scopecraft-command"
-  },
-  {
    "name": "danielscholl-sdlc",
    "url": "https://github.com/danielscholl/claude-sdlc.git",
    "path": "plugins/marketplaces/danielscholl-sdlc"
@@ -3209,11 +3131,6 @@
    "name": "EveryInc-compound",
    "url": "https://github.com/EveryInc/compound-engineering-plugin.git",
    "path": "plugins/marketplaces/EveryInc-compound"
-  },
-  {
-   "name": "DustyWalker-marketplace",
-   "url": "https://github.com/DustyWalker/claude-code-marketplace.git",
-   "path": "plugins/marketplaces/DustyWalker-marketplace"
   },
   {
    "name": "daymade-skills",
@@ -3236,11 +3153,6 @@
    "path": "plugins/marketplaces/hesreallyhim-awesome"
   },
   {
-   "name": "travisvn-awesome",
-   "url": "https://github.com/travisvn/awesome-claude-skills.git",
-   "path": "plugins/marketplaces/travisvn-awesome"
-  },
-  {
    "name": "quemsah-awesome",
    "url": "https://github.com/quemsah/awesome-claude-plugins.git",
    "path": "plugins/marketplaces/quemsah-awesome"
@@ -3249,16 +3161,6 @@
    "name": "aaronontheweb-dotnet-skills",
    "url": "https://github.com/Aaronontheweb/dotnet-skills.git",
    "path": "plugins/marketplaces/aaronontheweb-dotnet-skills"
-  },
-  {
-   "name": "behisecc-awesome-claude-skills",
-   "url": "https://github.com/BehiSecc/awesome-claude-skills.git",
-   "path": "plugins/marketplaces/behisecc-awesome-claude-skills"
-  },
-  {
-   "name": "karanb192-awesome-claude-skills",
-   "url": "https://github.com/karanb192/awesome-claude-skills.git",
-   "path": "plugins/marketplaces/karanb192-awesome-claude-skills"
   },
   {
    "name": "levnikolaevich-claude-code-skills",
@@ -3281,11 +3183,6 @@
    "path": "plugins/marketplaces/disler-hooks-mastery"
   },
   {
-   "name": "rshah515-claude-code-subagents",
-   "url": "https://github.com/rshah515/claude-code-subagents.git",
-   "path": "plugins/marketplaces/rshah515-claude-code-subagents"
-  },
-  {
    "name": "manutej-luxor-marketplace",
    "url": "https://github.com/manutej/luxor-claude-marketplace.git",
    "path": "plugins/marketplaces/manutej-luxor-marketplace"
@@ -3294,11 +3191,6 @@
    "name": "jeffallan-claude-skills",
    "url": "https://github.com/Jeffallan/claude-skills.git",
    "path": "plugins/marketplaces/jeffallan-claude-skills"
-  },
-  {
-   "name": "lodetomasi-agents-claude-code",
-   "url": "https://github.com/lodetomasi/agents-claude-code.git",
-   "path": "plugins/marketplaces/lodetomasi-agents-claude-code"
   },
   {
    "name": "ahmedasmar-devops-skills",
@@ -3311,19 +3203,9 @@
    "path": "plugins/marketplaces/mrgoonie-claudekit-skills"
   },
   {
-   "name": "chriswiles-claude-code-showcase",
-   "url": "https://github.com/ChrisWiles/claude-code-showcase.git",
-   "path": "plugins/marketplaces/chriswiles-claude-code-showcase"
-  },
-  {
    "name": "onmax-nuxt-skills",
    "url": "https://github.com/onmax/nuxt-skills.git",
    "path": "plugins/marketplaces/onmax-nuxt-skills"
-  },
-  {
-   "name": "interstellar-code-claud-skills",
-   "url": "https://github.com/Interstellar-code/claud-skills.git",
-   "path": "plugins/marketplaces/interstellar-code-claud-skills"
   },
   {
    "name": "actionbook-rust-skills",
@@ -3362,7 +3244,7 @@
   },
   {
    "name": "kenryu42-safety-net",
-   "url": "https://github.com/kenryu42/claude-code-safety-net.git",
+   "url": "https://github.com/kenryu42/cc-safety-net.git",
    "path": "plugins/marketplaces/kenryu42-safety-net"
   },
   {
@@ -3371,18 +3253,13 @@
    "path": "plugins/marketplaces/trailofbits-skills-curated"
   },
   {
-   "name": "alvinunreal-awesome-claude",
-   "url": "https://github.com/alvinunreal/awesome-claude.git",
-   "path": "plugins/marketplaces/alvinunreal-awesome-claude"
-  },
-  {
    "name": "superpowers-marketplace",
    "url": "https://github.com/obra/superpowers-marketplace.git",
    "path": "plugins/marketplaces/superpowers-marketplace"
   },
   {
    "name": "sickn33-antigravity-awesome-skills",
-   "url": "https://github.com/sickn33/antigravity-awesome-skills.git",
+   "url": "https://github.com/sickn33/agentic-awesome-skills.git",
    "path": "plugins/marketplaces/sickn33-antigravity-awesome-skills"
   },
   {
@@ -3391,44 +3268,14 @@
    "path": "plugins/marketplaces/agentskills-agentskills"
   },
   {
-   "name": "heilcheng-awesome-agent-skills",
-   "url": "https://github.com/heilcheng/awesome-agent-skills.git",
-   "path": "plugins/marketplaces/heilcheng-awesome-agent-skills"
-  },
-  {
-   "name": "libukai-awesome-agent-skills",
-   "url": "https://github.com/libukai/awesome-agent-skills.git",
-   "path": "plugins/marketplaces/libukai-awesome-agent-skills"
-  },
-  {
    "name": "skillcreatorai-agent-skills",
-   "url": "https://github.com/skillcreatorai/Ai-Agent-Skills.git",
+   "url": "https://github.com/MoizIbnYousaf/ai-agent-skills.git",
    "path": "plugins/marketplaces/skillcreatorai-agent-skills"
   },
   {
-   "name": "abubakarsiddik31-claude-skills",
-   "url": "https://github.com/abubakarsiddik31/claude-skills-collection.git",
-   "path": "plugins/marketplaces/abubakarsiddik31-claude-skills"
-  },
-  {
    "name": "francyjg-agent-skill-creator",
-   "url": "https://github.com/FrancyJGLisboa/agent-skill-creator.git",
+   "url": "https://github.com/FrancyJGLisboa/agent-skills-platform.git",
    "path": "plugins/marketplaces/francyjg-agent-skill-creator"
-  },
-  {
-   "name": "skillmatic-awesome-agent-skills",
-   "url": "https://github.com/skillmatic-ai/awesome-agent-skills.git",
-   "path": "plugins/marketplaces/skillmatic-awesome-agent-skills"
-  },
-  {
-   "name": "jayzeedesign-awesome-claude",
-   "url": "https://github.com/JayZeeDesign/awesome-claude-skills.git",
-   "path": "plugins/marketplaces/jayzeedesign-awesome-claude"
-  },
-  {
-   "name": "skillcreatorai-awesome-agent-skills",
-   "url": "https://github.com/skillcreatorai/Awesome-Agent-Skills.git",
-   "path": "plugins/marketplaces/skillcreatorai-awesome-agent-skills"
   },
   {
    "name": "pbakaus-impeccable",
@@ -3442,7 +3289,7 @@
   },
   {
    "name": "claude-code-plugins-plus-skills",
-   "url": "https://github.com/jeremylongshore/claude-code-plugins-plus-skills.git",
+   "url": "https://github.com/jeremylongshore/tons-of-skills-marketplace.git",
    "path": "plugins/marketplaces/claude-code-plugins-plus-skills"
   },
   {
@@ -3462,7 +3309,7 @@
   },
   {
    "name": "understand-anything",
-   "url": "https://github.com/Lum1104/Understand-Anything.git",
+   "url": "https://github.com/Egonex-AI/Understand-Anything.git",
    "path": "plugins/marketplaces/understand-anything"
   },
   {
@@ -3474,6 +3321,11 @@
    "name": "millionco-expect",
    "url": "https://github.com/millionco/expect.git",
    "path": "plugins/marketplaces/millionco-expect"
+  },
+  {
+   "name": "gsd-core",
+   "url": "https://github.com/open-gsd/gsd-core.git",
+   "path": "plugins/marketplaces/gsd-core"
   }
  ],
  "edges": [

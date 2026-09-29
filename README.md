@@ -14,12 +14,12 @@
 [![License](https://img.shields.io/badge/MIT-blue?style=flat-square&logo=opensourceinitiative&logoColor=white)](./LICENSE)
 [![Use Template](https://img.shields.io/badge/Use_This_Template-2ea44f?style=flat-square&logo=github&logoColor=white)](https://github.com/travisjneuman/.claude/generate)
 
-[![Skills](https://img.shields.io/badge/Skills-128-10b981?style=flat-square)](./skills/MASTER_INDEX.md)
+[![Skills](https://img.shields.io/badge/Skills-127-10b981?style=flat-square)](./skills/MASTER_INDEX.md)
 [![Agents](https://img.shields.io/badge/Agents-86-f59e0b?style=flat-square)](./agents/README.md)
-[![Commands](https://img.shields.io/badge/Commands-30-a855f7?style=flat-square)](./docs/COMMANDS.md)
+[![Commands](https://img.shields.io/badge/Commands-29-a855f7?style=flat-square)](./docs/COMMANDS.md)
 [![GSD](https://img.shields.io/badge/GSD-v1.29-ef4444?style=flat-square)](https://github.com/gsd-build/get-shit-done)
-[![Repos](https://img.shields.io/badge/Marketplace_Repos-108-3b82f6?style=flat-square)](./plugins/marketplaces/)
-[![Marketplace Skills](https://img.shields.io/badge/Marketplace_Skills-16500+-ec4899?style=flat-square)](./docs/MARKETPLACE-GUIDE.md)
+[![Repos](https://img.shields.io/badge/Marketplace_Repos-82-3b82f6?style=flat-square)](./plugins/marketplaces/)
+[![Marketplace Skills](https://img.shields.io/badge/Marketplace_Skills-10900+-ec4899?style=flat-square)](./docs/MARKETPLACE-GUIDE.md)
 [![Hooks](https://img.shields.io/badge/Hooks-6-06b6d4?style=flat-square)](./hooks/README.md)
 [![Templates](https://img.shields.io/badge/Templates-17-84cc16?style=flat-square)](./templates/README.md)
 [![MCP](https://img.shields.io/badge/MCP_Servers-12-f97316?style=flat-square)](./docs/MCP-SERVERS.md)
@@ -32,7 +32,7 @@
 
 A drop-in configuration layer for [Claude Code](https://docs.anthropic.com/en/docs/claude-code) that transforms it from a capable AI assistant into an enterprise-grade development powerhouse.
 
-**One `git clone` gives you** 128 domain skills, 86 specialist agents, 108 community marketplaces with 16,500+ additional skills, 30 slash commands, 6 lifecycle hooks, 12 MCP server configs, and the **[GSD (Get Shit Done)](https://github.com/gsd-build/get-shit-done)** project management framework — all auto-activating based on what you're working on. No manual configuration required.
+**One `git clone` gives you** 127 domain skills, 86 specialist agents, 82 community marketplaces with 10,900+ additional skills, 29 slash commands, 6 lifecycle hooks, 12 MCP server configs, and the **[GSD (Get Shit Done)](https://github.com/gsd-build/get-shit-done)** project management framework — all auto-activating based on what you're working on. No manual configuration required.
 
 **How it works:** Describe what you want in plain language. Everything is installed and available, but only a small core of skills keeps its full description in Claude's context. The rest is listed by name and found through a generated index ([`INDEX.md`](./INDEX.md), [`index/graph.json`](./index/graph.json)) and the `toolkit-router` skill, so a large toolkit costs almost nothing until something is needed. Language rules load only for matching files.
 
@@ -88,10 +88,10 @@ That's it. Claude Code loads the toolkit from `~/.claude/` in every session.
 | Component | Count | Description |
 |-----------|-------|-------------|
 | **[GSD Framework](https://github.com/gsd-build/get-shit-done)** | v1.29 | Opt-in multi-phase project management (57 commands, listed by name only until used) |
-| **[Skills](./skills/MASTER_INDEX.md)** | 128 | Domain expertise modules (React, security, DevOps, finance, etc.) |
+| **[Skills](./skills/MASTER_INDEX.md)** | 127 | Domain expertise modules (React, security, DevOps, finance, etc.) |
 | **[Agents](./agents/README.md)** | 86 | Specialist subagents for focused tasks (code review, debugging, etc.) |
 | **[Commands](./docs/COMMANDS.md)** | 87 | Slash commands: 30 base + 57 GSD |
-| **[Marketplace Repos](./plugins/marketplaces/)** | 108 | Community skill repositories (16,500+ additional skills) |
+| **[Marketplace Repos](./plugins/marketplaces/)** | 82 | Community skill repositories (10,900+ additional skills) |
 | **[Hooks](./hooks/README.md)** | 6 | Lifecycle hooks (session start/stop, pre-commit, safety guards) |
 | **[Templates](./templates/README.md)** | 17 | Project scaffolding and task templates |
 | **[MCP Servers](./docs/MCP-SERVERS.md)** | 12 | Model Context Protocol server configurations |
@@ -210,7 +210,7 @@ The **[GSD Framework](https://github.com/gsd-build/get-shit-done)** by [gsd-buil
 ```
 
 **What makes it special:**
-- **30 slash commands** covering the full project lifecycle — from idea capture to PR shipping
+- **29 slash commands** covering the full project lifecycle — from idea capture to PR shipping
 - **Autonomous mode** (`/gsd:autonomous`) — runs discuss → plan → execute per phase without interaction
 - **Session continuity** — pause mid-phase, come back later, `/gsd:resume-work` picks up exactly where you left off
 - **Milestone tracking** — multi-milestone projects with requirements tracing and coverage gates
@@ -225,9 +225,9 @@ See the **[GSD repository](https://github.com/gsd-build/get-shit-done)** for the
 ## 🔑 Key Features
 
 <details>
-<summary><strong>🏪 Marketplace — 108 repos, 16,500+ skills</strong></summary>
+<summary><strong>🏪 Marketplace — 108 repos, 10,900+ skills</strong></summary>
 
-The toolkit aggregates 108 community skill repositories as ignored local clones in `plugins/marketplaces/`. All are read-only (fetch but never push). Skills span security (Trail of Bits), full-stack development, scientific computing, SAP/enterprise, Elixir, Terraform, creative writing, and more. Some marketplace repos are **installed as plugins**, making their agents, commands, and skills fully active in the routing system alongside built-in resources. Non-installed repos contribute discoverable skills via keyword search.
+The toolkit aggregates 82 community skill repositories as ignored local clones in `plugins/marketplaces/`. All are read-only (fetch but never push). Skills span security (Trail of Bits), full-stack development, scientific computing, SAP/enterprise, Elixir, Terraform, creative writing, and more. Some marketplace repos are **installed as plugins**, making their agents, commands, and skills fully active in the routing system alongside built-in resources. Non-installed repos contribute discoverable skills via keyword search.
 
 ```bash
 # Search marketplace skills
@@ -424,7 +424,6 @@ See **[CHANGELOG.md](./CHANGELOG.md)** for the full history.
 | [Workflow Guide](./docs/WORKFLOW-GUIDE.md) | Development workflow patterns |
 | [Marketplace Guide](./docs/MARKETPLACE-GUIDE.md) | Community skill catalog |
 | [Agent Teams](./docs/AGENT-TEAMS.md) | Multi-agent coordination |
-| [Auto-Claude Guide](./docs/AUTO-CLAUDE-GUIDE.md) | Autonomous coding framework |
 | [MCP Servers](./docs/MCP-SERVERS.md) | MCP server reference |
 | [Configuration](./docs/CONFIGURATION.md) | Full settings.json reference |
 | [Folder Structure](./docs/FOLDER-STRUCTURE.md) | Directory layout and purpose |

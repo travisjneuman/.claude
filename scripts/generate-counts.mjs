@@ -2,6 +2,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
+import { createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
 
 const scriptDir = path.dirname(fileURLToPath(import.meta.url));
@@ -78,17 +79,34 @@ function roundedDisplay(value) {
   return `${rounded.toLocaleString("en-US") }+`;
 }
 
+// Skill bodies, normalized (frontmatter stripped, whitespace collapsed, lower-cased),
+// so the same skill copied into several marketplaces (or into per-harness mirror
+// folders inside one repo) is counted once.
+function skillHashes(dir, out = []) {
+  if (!fs.existsSync(dir)) return out;
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const full = path.join(dir, entry.name);
+    if (entry.isDirectory() && !entry.name.startsWith(".") && !excludeSkillDirs.has(entry.name.toLowerCase())) {
+      skillHashes(full, out);
+    } else if (entry.name === "SKILL.md") {
+      const body = readText(full).replace(/^---[\s\S]*?---/, "").replace(/\s+/g, " ").trim().toLowerCase();
+      if (body) out.push(createHash("sha1").update(body).digest("hex"));
+    }
+  }
+  return out;
+}
+
 function collectMarketplace(paths) {
   const repos = [];
-  let totalSkills = 0;
+  const all = new Set();
   for (const relPath of paths) {
     const name = path.basename(relPath);
-    const skillCount = countSkillFiles(path.join(repoRoot, relPath));
-    repos.push({ name, displayName: displayName(name), skillCount });
-    totalSkills += skillCount;
+    const hashes = new Set(skillHashes(path.join(repoRoot, relPath)));
+    hashes.forEach((h) => all.add(h));
+    repos.push({ name, displayName: displayName(name), skillCount: hashes.size });
   }
   repos.sort((a, b) => b.skillCount - a.skillCount || a.name.localeCompare(b.name));
-  return { repos, totalSkills };
+  return { repos, totalSkills: all.size };
 }
 
 function countMcpServersFromDocs() {

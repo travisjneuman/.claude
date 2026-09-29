@@ -18,6 +18,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { createHash } from "node:crypto";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const args = new Set(process.argv.slice(2));
@@ -281,7 +282,21 @@ if (write) {
       }
     }
   }
-  if (cat.length) fs.writeFileSync(path.join(root, "index/marketplace-catalog.json"), JSON.stringify(cat) + "\n");
+  // One entry per distinct skill body; the copy from the most canonical source wins.
+  const CANONICAL = ["anthropic-agent-skills", "claude-plugins-official", "anthropic-life-sciences", "vercel-agent-skills",
+    "expo-skills", "trailofbits-skills", "trailofbits-skills-curated", "hashicorp-agent-skills", "obra-superpowers", "gsd-core"];
+  const rank = (m) => { const i = CANONICAL.indexOf(m); return i === -1 ? CANONICAL.length : i; };
+  cat.sort((a, b) => rank(a.marketplace) - rank(b.marketplace) || a.marketplace.localeCompare(b.marketplace));
+  const seen = new Map();
+  for (const c of cat) {
+    const body = read(path.join(root, c.path)).replace(/^---[\s\S]*?---/, "").replace(/\s+/g, " ").trim().toLowerCase();
+    const key = createHash("sha1").update(body).digest("hex");
+    if (seen.has(key)) seen.get(key).copies++;
+    else seen.set(key, { ...c, copies: 1 });
+  }
+  const unique = [...seen.values()];
+  if (unique.length) fs.writeFileSync(path.join(root, "index/marketplace-catalog.json"), JSON.stringify(unique) + "\n");
+  cat.length = unique.length;
   console.log(`index: ${stale.length ? "updated " + stale.join(", ") : "up to date"}${cat.length ? `; catalog ${cat.length} marketplace skills` : ""}`);
 } else {
   if (stale.length) { console.error(`index stale: ${stale.join(", ")} (run node scripts/generate-index.mjs --write)`); process.exit(1); }
