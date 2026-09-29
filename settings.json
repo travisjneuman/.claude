@@ -3,8 +3,11 @@
   "env": {
     "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
   },
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  },
   "permissions": {
-    "defaultMode": "bypassPermissions",
     "allow": [
       "WebSearch",
       "WebFetch(domain:code.claude.com)",
@@ -25,20 +28,8 @@
       "Bash(rg *)"
     ],
     "deny": [],
-    "ask": []
-  },
-  "skipDangerousModePermissionPrompt": true,
-  "skipAutoPermissionPrompt": true,
-  "attribution": {
-    "commit": "",
-    "pr": ""
-  },
-  "pluginConfigs": {
-    "agents-md@builtin": {
-      "options": {
-        "instructionFiles": "claude-md-and-agents-md"
-      }
-    }
+    "ask": [],
+    "defaultMode": "bypassPermissions"
   },
   "enableAllProjectMcpServers": false,
   "disabledMcpjsonServers": [
@@ -55,103 +46,6 @@
     "postgres",
     "git"
   ],
-  "hooks": {
-    "SessionStart": [
-      {
-        "matcher": "startup|resume",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node -e \"process.env.HOOK_NAME='session-start-pull.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
-            "async": true
-          },
-          {
-            "type": "command",
-            "command": "node -e \"process.env.HOOK_NAME='session-start-repo-health.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
-            "statusMessage": "Checking repo health"
-          },
-          {
-            "type": "command",
-            "command": "node -e \"process.env.HOOK_NAME='local-session-start.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\""
-          }
-        ]
-      }
-    ],
-    "PreToolUse": [
-      {
-        "matcher": "Bash|Write|Edit|MultiEdit|NotebookEdit",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node -e \"process.env.HOOK_NAME='guard.js';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
-            "timeout": 10
-          }
-        ]
-      },
-      {
-        "matcher": "Bash|EnterWorktree|Agent|Task",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node -e \"process.env.HOOK_NAME='local-pre-tool-use.py';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
-            "timeout": 10
-          }
-        ]
-      }
-    ],
-    "PostToolUse": [
-      {
-        "matcher": "Write|Edit|MultiEdit|NotebookEdit",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node -e \"process.env.HOOK_NAME='secret-scan.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
-            "timeout": 10
-          }
-        ]
-      }
-    ],
-    "SessionEnd": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node -e \"process.env.HOOK_NAME='session-end-repo-health.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\""
-          }
-        ]
-      }
-    ]
-  },
-  "statusLine": {
-    "type": "command",
-    "command": "node -e \"process.env.HOOK_NAME='statusline.js';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
-    "padding": 0
-  },
-  "enabledPlugins": {
-    "agent-sdk-dev@claude-code-plugins": true,
-    "pr-review-toolkit@claude-code-plugins": true,
-    "commit-commands@claude-code-plugins": true,
-    "feature-dev@claude-code-plugins": true,
-    "security-guidance@claude-code-plugins": false,
-    "code-review@claude-code-plugins": true,
-    "explanatory-output-style@claude-code-plugins": false,
-    "learning-output-style@claude-code-plugins": false,
-    "frontend-design@claude-code-plugins": true,
-    "document-skills@anthropic-agent-skills": true,
-    "example-skills@anthropic-agent-skills": false,
-    "taches-cc-resources@taches-cc-resources": true,
-    "claude-opus-4-5-migration@claude-code-plugins": false,
-    "hookify@claude-code-plugins": false,
-    "plugin-dev@claude-code-plugins": true,
-    "ralph-wiggum@claude-code-plugins": false
-  },
-  "outputStyle": "default",
-  "spinnerTipsEnabled": false,
-  "autoUpdatesChannel": "latest",
-  "verbose": true,
-  "teammateMode": "auto",
-  "remoteControlAtStartup": true,
-  "theme": "dark",
   "skillOverrides": {
     "accessibility-a11y": "name-only",
     "agent-teams": "name-only",
@@ -330,5 +224,110 @@
     "volunteer-coordinator": "name-only",
     "vue-development": "name-only",
     "websockets-realtime": "name-only"
-  }
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node -e \"process.env.HOOK_NAME='session-start-pull.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
+            "async": true
+          },
+          {
+            "type": "command",
+            "command": "node -e \"process.env.HOOK_NAME='session-start-repo-health.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
+            "statusMessage": "Checking repo health"
+          },
+          {
+            "type": "command",
+            "command": "node -e \"process.env.HOOK_NAME='local-session-start.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\""
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash|Write|Edit|MultiEdit|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node -e \"process.env.HOOK_NAME='guard.js';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "matcher": "Bash|EnterWorktree|Agent|Task",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node -e \"process.env.HOOK_NAME='local-pre-tool-use.py';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node -e \"process.env.HOOK_NAME='secret-scan.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node -e \"process.env.HOOK_NAME='session-end-repo-health.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\""
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "node -e \"process.env.HOOK_NAME='statusline.js';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
+    "padding": 0
+  },
+  "enabledPlugins": {
+    "agent-sdk-dev@claude-code-plugins": true,
+    "pr-review-toolkit@claude-code-plugins": true,
+    "commit-commands@claude-code-plugins": true,
+    "feature-dev@claude-code-plugins": true,
+    "security-guidance@claude-code-plugins": false,
+    "code-review@claude-code-plugins": true,
+    "explanatory-output-style@claude-code-plugins": false,
+    "learning-output-style@claude-code-plugins": false,
+    "frontend-design@claude-code-plugins": true,
+    "document-skills@anthropic-agent-skills": true,
+    "example-skills@anthropic-agent-skills": false,
+    "taches-cc-resources@taches-cc-resources": true,
+    "claude-opus-4-5-migration@claude-code-plugins": false,
+    "hookify@claude-code-plugins": false,
+    "plugin-dev@claude-code-plugins": true,
+    "ralph-wiggum@claude-code-plugins": false
+  },
+  "outputStyle": "default",
+  "spinnerTipsEnabled": false,
+  "pluginConfigs": {
+    "agents-md@builtin": {
+      "options": {
+        "instructionFiles": "claude-md-and-agents-md"
+      }
+    }
+  },
+  "autoUpdatesChannel": "latest",
+  "skipDangerousModePermissionPrompt": true,
+  "theme": "dark",
+  "verbose": true,
+  "teammateMode": "auto",
+  "remoteControlAtStartup": true
 }

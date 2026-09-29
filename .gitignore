@@ -300,3 +300,8 @@ statsig/
 /plugins/marketplaces/
 /plugins/cache/
 /index/marketplace-catalog.json
+
+# Claude Code runtime (skill/plugin sync, plugin sweep markers)
+/plugins/synced/
+/skills/synced/
+/plugins/.last_inuse_sweep

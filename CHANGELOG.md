@@ -2,6 +2,13 @@
 
 All notable changes to the Ultimate Claude Code Toolkit.
 
+## [3.0.1] - September 29, 2026
+
+- `settings.json` now uses the key layout Claude Code itself writes (its install/migration step rewrote the file and dropped the obsolete `skipAutoPermissionPrompt`), so fresh installs no longer leave the tracked file dirty.
+- Corrected marketplace counts in docs (the v3.0.0 commit counted before marketplaces were cloned and published "0+").
+- `_pull-all-repos.sh` creates `plugins/marketplaces/` on fresh installs instead of aborting.
+- Ignore Claude Code runtime paths `plugins/synced/`, `skills/synced/`, `plugins/.last_inuse_sweep`.
+
 ## [3.0.0] - September 29, 2026
 
 ### Modernization for current Claude Code (2.1.28x)

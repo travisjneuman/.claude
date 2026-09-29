@@ -1,6 +1,6 @@
 {
   "name": "ultimate-claude-toolkit",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Comprehensive Claude Code toolkit with 143 local skills, 86 specialized agents, and 108 marketplace repos for full-stack development across all platforms",
   "author": "travisjneuman",
   "repository": "https://github.com/travisjneuman/.claude",
