@@ -31,9 +31,9 @@ Discover → Scope → Plan (only when useful) → Execute → Verify → Docume
 - After two materially identical failures with no new evidence, stop repeating and re-scope.
 - Before finishing: re-read the request, review the diff, stop processes you started, and remove temp files you created.
 
-## Testing: issue-driven, not default
+## Testing: none; validate by review
 
-Inspect the source and diff first. Run a test, build, or lint only when it diagnoses or verifies a specific observed issue, or when the user asks. Use the narrowest existing check, run it once, stop when proven. No routine suites, test-only installs, or harness expansion. Report checks you didn't run. Builds needed to produce the deliverable are fine.
+Don't write, add, or run tests of any kind: no test suites or files, fixtures, harnesses, lint/typecheck/build ladders, smoke runs, or installs done for testing. Validate like a senior reviewer instead: re-read the request, read the whole diff and the code it touches, reason through inputs, edge cases, error paths, and callers, and use the output the work itself already produces (the command that did the task, a deploy status the push reports). Say what you reviewed and what review couldn't confirm. Tests only when the user explicitly asks for a specific scope.
 
 ## Git and repositories
 

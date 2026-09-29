@@ -2,6 +2,12 @@
 
 All notable changes to the Ultimate Claude Code Toolkit.
 
+## [3.3.0] - September 29, 2026
+
+### Rules (plan E)
+- **Zero testing:** `CLAUDE.md` replaces "issue-driven testing" with no testing of any kind; work is validated by reviewing the diff and the code it touches plus the output the work itself produces. Tests only on explicit request.
+- Owner-specific core rules now also arrive through the private layer (`rules/local/05-owner-core.md`, generated from the Agent Operating Layer's canonical file).
+
 ## [3.2.0] - September 29, 2026
 
 ### Context (plan B)
