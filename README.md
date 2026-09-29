@@ -14,7 +14,7 @@
 [![License](https://img.shields.io/badge/MIT-blue?style=flat-square&logo=opensourceinitiative&logoColor=white)](./LICENSE)
 [![Use Template](https://img.shields.io/badge/Use_This_Template-2ea44f?style=flat-square&logo=github&logoColor=white)](https://github.com/travisjneuman/.claude/generate)
 
-[![Skills](https://img.shields.io/badge/Skills-128-10b981?style=flat-square)](./skills/MASTER_INDEX.md)
+[![Skills](https://img.shields.io/badge/Skills-143-10b981?style=flat-square)](./skills/MASTER_INDEX.md)
 [![Agents](https://img.shields.io/badge/Agents-86-f59e0b?style=flat-square)](./agents/README.md)
 [![Commands](https://img.shields.io/badge/Commands-30-a855f7?style=flat-square)](./docs/COMMANDS.md)
 [![GSD](https://img.shields.io/badge/GSD-v1.29-ef4444?style=flat-square)](https://github.com/gsd-build/get-shit-done)
@@ -32,7 +32,7 @@
 
 A drop-in configuration layer for [Claude Code](https://docs.anthropic.com/en/docs/claude-code) that transforms it from a capable AI assistant into an enterprise-grade development powerhouse.
 
-**One `git clone` gives you** 128 domain skills, 86 specialist agents, 108 community marketplaces with 0+ additional skills, 30 slash commands, 11 lifecycle hooks, 12 MCP server configs, and the **[GSD (Get Shit Done)](https://github.com/gsd-build/get-shit-done)** project management framework — all auto-activating based on what you're working on. No manual configuration required.
+**One `git clone` gives you** 143 domain skills, 86 specialist agents, 108 community marketplaces with 0+ additional skills, 30 slash commands, 11 lifecycle hooks, 12 MCP server configs, and the **[GSD (Get Shit Done)](https://github.com/gsd-build/get-shit-done)** project management framework — all auto-activating based on what you're working on. No manual configuration required.
 
 **How it works:** Describe what you want in plain language. Everything is installed and available, but only a small core of skills keeps its full description in Claude's context. The rest is listed by name and found through a generated index ([`INDEX.md`](./INDEX.md), [`index/graph.json`](./index/graph.json)) and the `toolkit-router` skill, so a large toolkit costs almost nothing until something is needed. Language rules load only for matching files.
 
@@ -88,7 +88,7 @@ That's it. The toolkit auto-activates from `~/.claude/` on every Claude Code ses
 | Component | Count | Description |
 |-----------|-------|-------------|
 | **[GSD Framework](https://github.com/gsd-build/get-shit-done)** | v1.29 | Multi-phase project management with 57 commands — the flagship workflow tool |
-| **[Skills](./skills/MASTER_INDEX.md)** | 128 | Domain expertise modules (React, security, DevOps, finance, etc.) |
+| **[Skills](./skills/MASTER_INDEX.md)** | 143 | Domain expertise modules (React, security, DevOps, finance, etc.) |
 | **[Agents](./agents/README.md)** | 86 | Specialist subagents for focused tasks (code review, debugging, etc.) |
 | **[Commands](./docs/COMMANDS.md)** | 94 | Slash commands: 30 base + 57 GSD + 7 router |
 | **[Marketplace Repos](./plugins/marketplaces/)** | 108 | Community skill repositories (0+ additional skills) |

@@ -136,12 +136,8 @@ if [[ ! -d "$SCRIPT_DIR/.git" ]]; then
     exit 1
 fi
 
-# Check marketplaces directory exists
-if [[ ! -d "$MARKETPLACES_DIR" ]]; then
-    echo -e "${RED}Error: Marketplaces directory not found${NC}"
-    echo "Expected: $MARKETPLACES_DIR"
-    exit 1
-fi
+# Fresh installs have no marketplaces directory yet; Phase 0 clones into it.
+mkdir -p "$MARKETPLACES_DIR"
 
 # Detect the default branch for a repo
 get_default_branch() {
