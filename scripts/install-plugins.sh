@@ -17,6 +17,12 @@ command -v claude >/dev/null 2>&1 || exit 0
 command -v node >/dev/null 2>&1 || exit 0
 export CLAUDE_TOOLKIT_SKIP_SESSION_END=1   # claude subcommands fire SessionEnd; skip the repo walk
 
+# Make sure the official marketplace is registered and its catalog is current.
+if ! claude plugin marketplace list 2>/dev/null | grep -q "claude-plugins-official"; then
+  claude plugin marketplace add anthropics/claude-plugins-official </dev/null >/dev/null 2>&1
+fi
+claude plugin marketplace update claude-plugins-official </dev/null >/dev/null 2>&1
+
 installed=$(cd "$CLAUDE_DIR" && claude plugin list --json 2>/dev/null || echo '[]')
 
 wanted=$(node -e '
