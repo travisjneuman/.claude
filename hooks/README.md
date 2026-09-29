@@ -38,7 +38,7 @@ Installed by `bash scripts/setup-hooks.sh` as thin wrappers, so updates arrive w
 
 - **pre-commit:** blocks staged marketplace clones or gitlinks; runs the public-safety gate (`local/public-safety-patterns.txt`, private); regenerates `INDEX.md`, `index/graph.json`, `skills/MASTER_INDEX.md`, and counts; blocks obvious secrets.
 - **commit-msg:** conventional commit format.
-- **pre-push:** blocks non-fast-forward pushes to `main`/`master`, gitlinks or marketplace content in `HEAD`, and large skill/agent changes without a CHANGELOG entry.
+- **pre-push:** blocks non-fast-forward pushes to `main`/`master` and gitlinks or marketplace content in `HEAD`.
 
 ## Writing a hook
 
