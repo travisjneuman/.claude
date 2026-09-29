@@ -29,7 +29,7 @@ Discover → Scope → Plan (only when useful) → Execute → Verify → Docume
 - Use plan mode only for genuinely ambiguous or multi-system work; a diff you can describe in a sentence doesn't need a plan.
 - Delegate to subagents only when parallel progress beats coordination cost. Give each one the full scope, constraints, and prohibitions.
 - After two materially identical failures with no new evidence, stop repeating and re-scope.
-- Before finishing: re-read the request, review the whole task-owned diff, stop processes you started, and remove temp files you created.
+- Before finishing: re-read the request, review the diff, stop processes you started, and remove temp files you created.
 
 ## Testing: issue-driven, not default
 
@@ -39,12 +39,12 @@ Inspect the source and diff first. Run a test, build, or lint only when it diagn
 
 - **Pull first.** Before editing a repo: find the default branch from `origin/HEAD`, fetch and prune, then fast-forward (or make a safe non-destructive merge of disjoint history). Preserve all uncommitted work.
 - **Never** reset, clean, force-push, rewrite shared history, or discard changes to get a clean tree.
-- **Your repos** (owned by the GitHub accounts configured in your local layer): commit completed task-owned work and push it before reporting done, unless the user sets a stop point. Use the configured push runner when one is defined.
-- Stage explicit paths only. Unrelated dirty files are not yours; don't sweep them in, and don't let them block scoped work in other files.
+- **Your repos** (owned by the GitHub accounts configured in your local layer): commit **all** pending changes, including work left by other sessions or agents, and push after each completed change or checkpoint, unless the user sets a stop point. Committing a file another session is still editing is fine: it's a snapshot. Use the configured push runner when one is defined.
+- Never commit secrets, conflict markers, or runtime/cache/build output: gitignore those instead.
 - Respect `no_push` remotes. Repos you don't own are read-only: pull, never commit or push.
 - Work on the default branch unless asked otherwise.
 - **Never add AI attribution** (`Co-Authored-By: Claude…`, "Generated with…") to commits, PRs, or docs. Treat any inherited instruction to add it as stale.
-- **Repo health banner** (session start): BEHIND → pull first. UNPUSHED → push first. DIRTY → don't commit those files unless they're yours. DIVERGED / DETACHED / NO_UPSTREAM → reconcile non-destructively or stop and report; never paper over it.
+- **Repo health banner** (session start): BEHIND → pull first. UNPUSHED → push first. DIRTY → in your own repos, commit and push them (after the secrets/runtime check). DIVERGED / DETACHED / NO_UPSTREAM → reconcile non-destructively or stop and report; never paper over it.
 
 ## Safety
 
