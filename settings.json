@@ -281,6 +281,17 @@
           }
         ]
       }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node -e \"process.env.HOOK_NAME='daily-maintenance.js';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
+            "timeout": 10
+          }
+        ]
+      }
     ]
   },
   "statusLine": {

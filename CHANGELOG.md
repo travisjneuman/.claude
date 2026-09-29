@@ -2,6 +2,12 @@
 
 All notable changes to the Ultimate Claude Code Toolkit.
 
+## [3.5.0] - September 29, 2026
+
+### Automatic tier tuning (plan D)
+- `hooks/daily-maintenance.js` (Stop hook, throttled to once a day per machine): counts skill/agent/command usage from transcripts into `USAGE_DIR/<HOST>.json` (names and counts only, 90-day retention) and runs the commit-everything sweep, so long-running desktop sessions are covered even though they never reach SessionEnd.
+- `scripts/tune-tiers.mjs`: promotes skills/commands/agents used 3+ times in 30 days to the core tier and demotes unused ones (after 30 days of data), capped and budget-checked, reverted automatically if a budget fails; writes a report.
+
 ## [3.4.0] - September 29, 2026
 
 ### Hooks
