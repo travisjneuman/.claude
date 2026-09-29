@@ -30,8 +30,9 @@ export default function RulesPage() {
               {rules.length} Contextual Rules
             </h1>
             <p className="text-[var(--text-secondary)] max-w-xl mx-auto">
-              Modular checklists, stack guides, workflow methodologies, and
-              tooling references — loaded on demand based on task context.
+              Path-scoped rules that load only when you touch matching files,
+              plus reference checklists, stack guides, workflow methodologies,
+              and tooling references loaded on demand.
             </p>
           </div>
 

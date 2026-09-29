@@ -17,7 +17,7 @@ const stale = [];
 const excludeSkillDirs = new Set([
   "backups", "backup", "tests", "test", "examples", "example",
   "docs", "workspace", "lab", "archive", "archived", "deprecated",
-  "draft", "drafts", "planned-skills", "planned", "templates",
+  "draft", "drafts", "planned-skills", "planned", "templates", "synced",
   "template", "node_modules", "web-app", "public",
 ]);
 
@@ -100,11 +100,26 @@ function countMcpServersFromDocs() {
 
 function buildCounts() {
   const manifest = marketplaceManifestPaths();
-  const marketplace = collectMarketplace(manifest);
+  let marketplace = collectMarketplace(manifest);
+  // Marketplace clones are local-only. On a machine where most of them haven't
+  // been pulled yet, counting would publish a near-zero figure everywhere, so
+  // keep the last published marketplace numbers instead.
+  const cloned = manifest.filter((rel) => fs.existsSync(path.join(repoRoot, rel, ".git"))).length;
+  if (cloned < manifest.length * 0.9) {
+    const previous = JSON.parse(readText(path.join(repoRoot, "counts.json")) || "{}");
+    const previousRepos = JSON.parse(readText(path.join(repoRoot, "website", "src", "lib", "data", "marketplace-counts.json")) || "{}").repos;
+    if (previous.marketplaceSkills) {
+      console.warn(`Only ${cloned}/${manifest.length} marketplace clones present; keeping previous marketplace counts (${previous.marketplaceSkillsDisplay}).`);
+      marketplace = { totalSkills: previous.marketplaceSkills, repos: previousRepos || marketplace.repos };
+    }
+  }
   const gsdCommands = countFiles(path.join(repoRoot, "commands", "gsd"), (name) => name.endsWith(".md") && name !== "README.md");
   const routerCommands = countFiles(path.join(repoRoot, "commands", "router"), (name) => name.endsWith(".md") && name !== "README.md");
   const commands = countFiles(path.join(repoRoot, "commands"), (name) => name.endsWith(".md") && name !== "README.md");
-  const hooks = countFiles(path.join(repoRoot, "hooks"), (name) => (name.endsWith(".sh") || name.endsWith(".js")) && name !== "run-hook.js");
+  // Count hooks that are actually wired in settings.json (the gsd-*.js files ship
+  // for GSD users but are not wired globally; run-hook.js is the dispatcher).
+  const wired = readText(path.join(repoRoot, "settings.json"));
+  const hooks = countFiles(path.join(repoRoot, "hooks"), (name) => (name.endsWith(".sh") || name.endsWith(".js")) && name !== "run-hook.js" && wired.includes(`'${name}'`));
   return {
     skills: countSkillFiles(path.join(repoRoot, "skills")),
     skillDirectories: countEntries(path.join(repoRoot, "skills"), (entry) => entry.isDirectory() && entry.name !== "_shared"),

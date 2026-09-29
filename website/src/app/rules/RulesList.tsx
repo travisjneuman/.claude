@@ -21,6 +21,7 @@ interface RulesListProps {
 }
 
 const categoryColors: Record<string, string> = {
+  rule: "var(--accent-pink)",
   checklist: "var(--accent-green)",
   stack: "var(--accent-purple)",
   tooling: "var(--accent-cyan)",

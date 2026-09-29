@@ -29,8 +29,10 @@ export default function HooksPage() {
               {hooks.length} Automation Hooks
             </h1>
             <p className="text-[var(--text-secondary)] max-w-xl mx-auto">
-              Bash scripts that run automatically at key points during a Claude
-              Code session — from startup to shutdown.
+              Node and Bash scripts, all dispatched through run-hook.js, that
+              run automatically at key points during a Claude Code session —
+              from startup to shutdown. Optional private hooks live in a
+              gitignored local/ layer.
             </p>
           </div>
 

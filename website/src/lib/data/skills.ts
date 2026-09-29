@@ -101,6 +101,9 @@ export function getSkills(): Skill[] {
     const entries = fs.readdirSync(dir, { withFileTypes: true });
     for (const entry of entries) {
       if (!entry.isDirectory() || entry.name.startsWith("_")) continue;
+      // skills/synced/ is a Claude Code runtime directory (gitignored), not
+      // part of the toolkit; skip it so local builds match deployed ones.
+      if (!parentSlug && entry.name === "synced") continue;
       const skillMd = path.join(dir, entry.name, "SKILL.md");
       const slug = parentSlug ? `${parentSlug}/${entry.name}` : entry.name;
 

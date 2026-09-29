@@ -32,34 +32,65 @@ const SCRIPT_METADATA: Record<
   install: {
     name: "Install",
     category: "setup",
-    description: "One-line installer (curl-pipe) for first-time setup.",
-    whenToRun: "First-time setup on any machine",
+    description:
+      "One-line installer (curl-pipe) for a fresh machine with no ~/.claude yet.",
+    whenToRun: "First-time setup on a clean machine",
+  },
+  "install-in-place": {
+    name: "Install In Place",
+    category: "setup",
+    description:
+      "Turns an existing ~/.claude (created by Claude Code itself) into a checkout of the toolkit without deleting anything. Tracked files it would overwrite are backed up first, extra settings.json keys are merged back, and it only fast-forwards.",
+    whenToRun: "Installing on a machine where Claude Code has already run",
   },
   "setup-new-machine": {
     name: "Setup New Machine",
     category: "setup",
     description:
-      "Complete setup including plugins, hooks, and verification.",
+      "Full setup pass: no_push protection on marketplace clones, marketplace registration, plugin installs, and verification.",
     whenToRun: "After cloning the repo",
   },
   "init-marketplaces": {
     name: "Init Marketplaces",
     category: "setup",
-    description: "Clone all 90 marketplace repos from upstreams.",
-    whenToRun: "After cloning, or to fix broken submodules",
+    description:
+      "Clone every marketplace listed in the .gitmodules manifest fresh from its upstream, with push disabled (no_push).",
+    whenToRun: "To re-clone marketplaces or fix wrong remotes",
   },
   "setup-hooks": {
     name: "Setup Hooks",
     category: "setup",
-    description: "Install git hooks into .git/hooks/ directory.",
-    whenToRun: "After cloning (called by setup-new-machine.sh)",
+    description:
+      "Install the repo's git hooks as thin wrappers that exec the tracked scripts in scripts/hooks/, so hook updates arrive with a normal pull.",
+    whenToRun: "After cloning",
   },
 
   // Maintenance
+  "generate-index": {
+    name: "Generate Index",
+    category: "maintenance",
+    description:
+      "Build the discovery layer from what is on disk: INDEX.md, index/graph.json, skills/MASTER_INDEX.md, and the name-only skillOverrides in settings.json (core tiers come from index/tiers.json).",
+    whenToRun: "Automatically in pre-commit; manually after editing index/tiers.json",
+  },
+  "generate-counts": {
+    name: "Generate Counts",
+    category: "maintenance",
+    description:
+      "Canonical count generator: writes counts.json and the website's marketplace-counts.json and updates counts in the docs. --check reports drift without writing.",
+    whenToRun: "Automatically in pre-commit; manually after adding or removing resources",
+  },
+  "generate-showcase-images": {
+    name: "Generate Showcase Images",
+    category: "maintenance",
+    description:
+      "Render the website's Open Graph images from counts.json. Called by the count generator.",
+    whenToRun: "When counts change (run through the count generator)",
+  },
   "update-counts": {
     name: "Update Counts",
     category: "maintenance",
-    description: "Update all hardcoded counts across documentation.",
+    description: "Wrapper around the canonical count generator (generate-counts.mjs).",
     whenToRun: "After adding/removing skills, agents, or marketplace repos",
   },
   "regenerate-index": {
@@ -71,33 +102,42 @@ const SCRIPT_METADATA: Record<
   "update-plugins": {
     name: "Update Plugins",
     category: "maintenance",
-    description: "Update plugin registrations in settings.",
+    description: "Update all marketplace plugins and apply the known fixes.",
     whenToRun: "After enabling/disabling plugins",
   },
   "fix-remotes": {
     name: "Fix Remotes",
     category: "maintenance",
-    description: "Fix remote URLs on marketplace repos.",
+    description:
+      "Keep the toolkit repo pushable while marketplace clones stay fetch-only from their original upstreams.",
     whenToRun: "If remotes are misconfigured after a pull",
   },
 
   // Repo Management
+  "add-marketplace": {
+    name: "Add Marketplace",
+    category: "repo-management",
+    description:
+      "Add a marketplace: writes a manifest-only .gitmodules entry (no gitlink, no content), clones it locally into the gitignored plugins/marketplaces/ with no_push, and regenerates the index.",
+    whenToRun: "When adding a new marketplace repo",
+  },
   "update-external-repos": {
     name: "Update External Repos",
     category: "repo-management",
-    description: "Pull all marketplace repos from upstream.",
+    description: "Fetch updates for all marketplace clones (read-only, never pushes).",
     whenToRun: "Use _pull-all-repos.sh instead (recommended)",
   },
   "update-marketplaces": {
     name: "Update Marketplaces",
     category: "repo-management",
-    description: "Update marketplace submodule pointers.",
+    description: "Update all marketplace clones and reset their push URLs to no_push.",
     whenToRun: "After upstream changes",
   },
   "force-sync-repos": {
     name: "Force Sync Repos",
     category: "repo-management",
-    description: "Force-sync all repos (nuclear option).",
+    description:
+      "Pull-only sync of every discovered repo to its remote state (nuclear option, never pushes).",
     whenToRun: "When repos are severely broken",
   },
 
@@ -127,8 +167,8 @@ const SCRIPT_METADATA: Record<
     name: "Pull All Repos",
     category: "repo-management",
     description:
-      "Primary user-facing script: pulls parent repo, all 90 marketplace repos, enforces no_push, and updates counts.",
-    whenToRun: "Regularly, to keep all repos up to date",
+      "Fast-forward pulls the toolkit, every marketplace clone in the .gitmodules manifest (cloning missing ones), and optionally your project repos, enforcing no_push. Skips dirty or detached repos and never commits or pushes.",
+    whenToRun: "Runs daily in the background at session start; /pull-repos forces it",
   },
 
   // Git Hooks
@@ -136,7 +176,7 @@ const SCRIPT_METADATA: Record<
     name: "Pre-Commit Hook",
     category: "git-hooks",
     description:
-      "Block secrets, validate SKILL.md files, check .gitignore.",
+      "Block staged marketplace clones or gitlinks, run the public-safety gate, regenerate INDEX.md, index/graph.json, skills/MASTER_INDEX.md, and counts, and block obvious secrets.",
     whenToRun: "Automatically before every commit",
   },
   "commit-msg": {
@@ -149,15 +189,8 @@ const SCRIPT_METADATA: Record<
     name: "Pre-Push Hook",
     category: "git-hooks",
     description:
-      "Block force-push to master/main, warn about submodule changes.",
+      "Block non-fast-forward pushes to main/master, gitlinks or marketplace content in HEAD, and large skill/agent changes without a CHANGELOG entry.",
     whenToRun: "Automatically before every push",
-  },
-  "session-start": {
-    name: "Session Start Hook",
-    category: "git-hooks",
-    description:
-      "SessionStart hook template (legacy — current hooks are in ~/.claude/hooks/).",
-    whenToRun: "Legacy template, not actively used",
   },
 };
 
@@ -180,7 +213,11 @@ export function getScripts(): Script[] {
     const meta = SCRIPT_METADATA[slug];
     if (!meta) return;
 
-    const lang = filename.endsWith(".ps1") ? "powershell" : "bash";
+    const lang = filename.endsWith(".ps1")
+      ? "powershell"
+      : filename.endsWith(".mjs")
+        ? "javascript"
+        : "bash";
     const markdownContent = [
       `## ${meta.description}`,
       "",
@@ -203,11 +240,13 @@ export function getScripts(): Script[] {
     });
   };
 
-  // scripts/*.sh
+  // scripts/*.sh, *.ps1, *.mjs
   if (fs.existsSync(scriptsDir)) {
     const files = fs
       .readdirSync(scriptsDir)
-      .filter((f) => f.endsWith(".sh") || f.endsWith(".ps1"))
+      .filter(
+        (f) => f.endsWith(".sh") || f.endsWith(".ps1") || f.endsWith(".mjs"),
+      )
       .sort();
     for (const file of files) {
       const slug = buildSlug(file, file);

@@ -138,7 +138,7 @@ Everything listed here is installed and available. Only the **core** tier keeps 
 | `/pull-repos` | core | Pull all repos (parent + marketplace clones + configured project repos) |
 | `/scaffold` | name-only | Scaffold project components from templates |
 | `/session-log` | name-only | View and analyze the Claude Code session log |
-| `/skill-finder` | core | AI-powered skill recommendation based on your problem description - finds optimal resources from 143 local sk… |
+| `/skill-finder` | core | AI-powered skill recommendation based on your problem description - finds optimal resources from 128 local sk… |
 | `/standardize-claude-md` | name-only | Add missing toolkit sections (Related Global Rules, Quick Start) to existing CLAUDE.md |
 | `/start-task` | core | Route any task to the right skills, agents, rules, and marketplace resources via INDEX.md, then execute it |
 | `/update-counts` | name-only | Update all hardcoded counts (skills, agents, marketplace repos/skills) across documentation from filesystem |

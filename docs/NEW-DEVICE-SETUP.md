@@ -8,7 +8,7 @@ category: setup
 
 **CRITICAL: Run this process on EVERY new device to ensure correct configuration.**
 
-**Last Updated:** February 2026 (v2.10.1)
+**Last Updated:** September 2026 (v3.0.2)
 
 Works identically on: **Arch Linux** | **macOS** | **Windows (Git Bash)**
 
@@ -243,5 +243,5 @@ Note: since marketplace repos are fetched independently per machine, `git pull` 
 
 ---
 
-_Last updated: February 2026 (v2.10.1)_
+_Last updated: September 2026 (v3.0.2)_
 

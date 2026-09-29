@@ -1,5 +1,5 @@
 {
-  "skills": 143,
+  "skills": 128,
   "skillDirectories": 125,
   "agents": 86,
   "repos": 108,
@@ -7,7 +7,7 @@
   "gsdCommands": 57,
   "routerCommands": 0,
   "totalCommands": 87,
-  "hooks": 11,
+  "hooks": 6,
   "rules": 10,
   "templates": 17,
   "checklists": 10,

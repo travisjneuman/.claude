@@ -8,19 +8,19 @@
 
 <br/>
 
-[![v2.11.0](https://img.shields.io/badge/v2.11.0-6366f1?style=flat-square&logo=semver&logoColor=white)](./CHANGELOG.md)
+[![v3.0.1](https://img.shields.io/badge/v3.0.1-6366f1?style=flat-square&logo=semver&logoColor=white)](./CHANGELOG.md)
 [![Platform](https://img.shields.io/badge/macOS_·_Linux_·_Windows-334155?style=flat-square&logo=apple&logoColor=white)](./docs/SETUP-GUIDE.md)
 [![Website](https://img.shields.io/badge/claude.travisjneuman.com-818cf8?style=flat-square&logo=cloudflare&logoColor=white)](https://claude.travisjneuman.com)
 [![License](https://img.shields.io/badge/MIT-blue?style=flat-square&logo=opensourceinitiative&logoColor=white)](./LICENSE)
 [![Use Template](https://img.shields.io/badge/Use_This_Template-2ea44f?style=flat-square&logo=github&logoColor=white)](https://github.com/travisjneuman/.claude/generate)
 
-[![Skills](https://img.shields.io/badge/Skills-143-10b981?style=flat-square)](./skills/MASTER_INDEX.md)
+[![Skills](https://img.shields.io/badge/Skills-128-10b981?style=flat-square)](./skills/MASTER_INDEX.md)
 [![Agents](https://img.shields.io/badge/Agents-86-f59e0b?style=flat-square)](./agents/README.md)
 [![Commands](https://img.shields.io/badge/Commands-30-a855f7?style=flat-square)](./docs/COMMANDS.md)
 [![GSD](https://img.shields.io/badge/GSD-v1.29-ef4444?style=flat-square)](https://github.com/gsd-build/get-shit-done)
 [![Repos](https://img.shields.io/badge/Marketplace_Repos-108-3b82f6?style=flat-square)](./plugins/marketplaces/)
 [![Marketplace Skills](https://img.shields.io/badge/Marketplace_Skills-16500+-ec4899?style=flat-square)](./docs/MARKETPLACE-GUIDE.md)
-[![Hooks](https://img.shields.io/badge/Hooks-11-06b6d4?style=flat-square)](./hooks/README.md)
+[![Hooks](https://img.shields.io/badge/Hooks-6-06b6d4?style=flat-square)](./hooks/README.md)
 [![Templates](https://img.shields.io/badge/Templates-17-84cc16?style=flat-square)](./templates/README.md)
 [![MCP](https://img.shields.io/badge/MCP_Servers-12-f97316?style=flat-square)](./docs/MCP-SERVERS.md)
 
@@ -32,7 +32,7 @@
 
 A drop-in configuration layer for [Claude Code](https://docs.anthropic.com/en/docs/claude-code) that transforms it from a capable AI assistant into an enterprise-grade development powerhouse.
 
-**One `git clone` gives you** 143 domain skills, 86 specialist agents, 108 community marketplaces with 0+ additional skills, 30 slash commands, 11 lifecycle hooks, 12 MCP server configs, and the **[GSD (Get Shit Done)](https://github.com/gsd-build/get-shit-done)** project management framework — all auto-activating based on what you're working on. No manual configuration required.
+**One `git clone` gives you** 128 domain skills, 86 specialist agents, 108 community marketplaces with 16,500+ additional skills, 30 slash commands, 6 lifecycle hooks, 12 MCP server configs, and the **[GSD (Get Shit Done)](https://github.com/gsd-build/get-shit-done)** project management framework — all auto-activating based on what you're working on. No manual configuration required.
 
 **How it works:** Describe what you want in plain language. Everything is installed and available, but only a small core of skills keeps its full description in Claude's context. The rest is listed by name and found through a generated index ([`INDEX.md`](./INDEX.md), [`index/graph.json`](./index/graph.json)) and the `toolkit-router` skill, so a large toolkit costs almost nothing until something is needed. Language rules load only for matching files.
 
@@ -75,11 +75,11 @@ claude
 # Run diagnostics
 /health-check
 
-# Start a structured project with GSD (flagship workflow tool)
+# Optional: start a structured multi-phase project with GSD
 /gsd:new-project
 ```
 
-That's it. The toolkit auto-activates from `~/.claude/` on every Claude Code session.
+That's it. Claude Code loads the toolkit from `~/.claude/` in every session.
 
 ---
 
@@ -87,12 +87,12 @@ That's it. The toolkit auto-activates from `~/.claude/` on every Claude Code ses
 
 | Component | Count | Description |
 |-----------|-------|-------------|
-| **[GSD Framework](https://github.com/gsd-build/get-shit-done)** | v1.29 | Multi-phase project management with 57 commands — the flagship workflow tool |
-| **[Skills](./skills/MASTER_INDEX.md)** | 143 | Domain expertise modules (React, security, DevOps, finance, etc.) |
+| **[GSD Framework](https://github.com/gsd-build/get-shit-done)** | v1.29 | Opt-in multi-phase project management (57 commands, listed by name only until used) |
+| **[Skills](./skills/MASTER_INDEX.md)** | 128 | Domain expertise modules (React, security, DevOps, finance, etc.) |
 | **[Agents](./agents/README.md)** | 86 | Specialist subagents for focused tasks (code review, debugging, etc.) |
-| **[Commands](./docs/COMMANDS.md)** | 94 | Slash commands: 30 base + 57 GSD + 7 router |
-| **[Marketplace Repos](./plugins/marketplaces/)** | 108 | Community skill repositories (0+ additional skills) |
-| **[Hooks](./hooks/README.md)** | 11 | Lifecycle hooks (session start/stop, pre-commit, safety guards) |
+| **[Commands](./docs/COMMANDS.md)** | 87 | Slash commands: 30 base + 57 GSD |
+| **[Marketplace Repos](./plugins/marketplaces/)** | 108 | Community skill repositories (16,500+ additional skills) |
+| **[Hooks](./hooks/README.md)** | 6 | Lifecycle hooks (session start/stop, pre-commit, safety guards) |
 | **[Templates](./templates/README.md)** | 17 | Project scaffolding and task templates |
 | **[MCP Servers](./docs/MCP-SERVERS.md)** | 12 | Model Context Protocol server configurations |
 | **[Rules](./rules/)** | 9 | Stack-specific coding guardrails (TypeScript, Python, Go, Rust, etc.) |
@@ -131,7 +131,7 @@ See **[MASTER_INDEX.md](./skills/MASTER_INDEX.md)** for the full listing with de
 
 ### Dynamic Routing
 
-Every prompt flows through a routing system that loads the best-fit resources on-demand — drawing from 127 built-in skills, 86 agents, 10 rules + 10 checklists, the GSD framework (57 commands), and 13,000+ community marketplace skills across 109 repos:
+Every prompt flows through a routing system that loads the best-fit resources on-demand — drawing from 128 built-in skills, 86 agents, 10 rules + 10 checklists, the GSD framework (57 commands), and 16,500+ community marketplace skills across 108 repos:
 
 ```
  Your prompt
@@ -146,8 +146,8 @@ Every prompt flows through a routing system that loads the best-fit resources on
    ▼        ▼        ▼          ▼            ▼
 ┌──────┐ ┌──────┐ ┌──────┐ ┌───────┐ ┌────────────┐
 │Skills│ │Rules │ │Agents│ │  GSD  │ │ Marketplace│
-│(127) │ │& Chk │ │ (86) │ │  (57) │ │ 109 repos│
-│      │ │      │ │      │ │       │ │ 0+ more│
+│(128) │ │& Chk │ │ (86) │ │  (57) │ │ 108 repos│
+│      │ │      │ │      │ │       │ │16,500+ │
 └──────┘ └──────┘ └──────┘ └───────┘ └────────────┘
 ```
 
@@ -196,7 +196,7 @@ See **[hooks/README.md](./hooks/README.md)** for the full hook reference.
 
 ---
 
-## 🚢 GSD — Get Shit Done (Flagship)
+## 🚢 GSD — Get Shit Done (optional)
 
 The **[GSD Framework](https://github.com/gsd-build/get-shit-done)** by [gsd-build](https://github.com/gsd-build) is the most powerful component of this toolkit. It transforms Claude Code from a task-runner into a full project management system with multi-phase planning, autonomous execution, verification loops, and session continuity. Check out the [GSD repo](https://github.com/gsd-build/get-shit-done) for full documentation, updates, and to support the creators.
 
@@ -225,7 +225,7 @@ See the **[GSD repository](https://github.com/gsd-build/get-shit-done)** for the
 ## 🔑 Key Features
 
 <details>
-<summary><strong>🏪 Marketplace — 109 repos, 0+ skills</strong></summary>
+<summary><strong>🏪 Marketplace — 108 repos, 16,500+ skills</strong></summary>
 
 The toolkit aggregates 108 community skill repositories as ignored local clones in `plugins/marketplaces/`. All are read-only (fetch but never push). Skills span security (Trail of Bits), full-stack development, scientific computing, SAP/enterprise, Elixir, Terraform, creative writing, and more. Some marketplace repos are **installed as plugins**, making their agents, commands, and skills fully active in the routing system alongside built-in resources. Non-installed repos contribute discoverable skills via keyword search.
 
@@ -428,7 +428,7 @@ See **[CHANGELOG.md](./CHANGELOG.md)** for the full history.
 | [MCP Servers](./docs/MCP-SERVERS.md) | MCP server reference |
 | [Configuration](./docs/CONFIGURATION.md) | Full settings.json reference |
 | [Folder Structure](./docs/FOLDER-STRUCTURE.md) | Directory layout and purpose |
-| [Skills Index](./skills/MASTER_INDEX.md) | All 127 skills with descriptions |
+| [Skills Index](./skills/MASTER_INDEX.md) | All 128 skills with descriptions |
 | [Agents Index](./agents/README.md) | All 86 agents with descriptions |
 
 ---

@@ -15,11 +15,12 @@ interface HookItem {
 }
 
 const eventColors: Record<string, string> = {
+  Dispatcher: "var(--accent-purple)",
   SessionStart: "var(--accent-green)",
-  UserPromptSubmit: "var(--accent-blue)",
   PreToolUse: "var(--accent-yellow)",
   PostToolUse: "var(--accent-cyan)",
-  Stop: "var(--accent-pink)",
+  SessionEnd: "var(--accent-pink)",
+  StatusLine: "var(--accent-blue)",
 };
 
 export default function HooksList({ hooks }: { hooks: HookItem[] }) {
@@ -65,7 +66,7 @@ export default function HooksList({ hooks }: { hooks: HookItem[] }) {
                     className="font-semibold text-[var(--text-primary)] group-hover:text-white transition-colors mb-1"
                     style={{ fontSize: "15px" }}
                   >
-                    {hook.slug}.sh
+                    {hook.name}
                   </h3>
                   <p className="text-sm text-[var(--text-muted)] leading-relaxed">
                     {hook.description}
@@ -82,7 +83,7 @@ export default function HooksList({ hooks }: { hooks: HookItem[] }) {
           <>
             <div className="flex items-center gap-3 mb-4 flex-wrap">
               <h2 className="text-xl font-bold text-[var(--text-primary)]">
-                {selected.slug}.sh
+                {selected.name}
               </h2>
               <span
                 className="text-[11px] font-mono px-2 py-0.5 rounded-md"

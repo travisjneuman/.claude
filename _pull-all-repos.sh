@@ -10,7 +10,7 @@
 #   4. Pulls all git repos recursively in your custom project directories (optional)
 #   5. Fixes marketplace paths for current OS (cross-platform compatibility)
 #   6. Updates documentation counts if any repos changed (skills, agents, etc.)
-#   7. Commits and pushes generated count/doc changes only
+#   7. Never commits or pushes (counts/indexes regenerate in the pre-commit hook)
 #
 # Features:
 #   - Pulls parent repo first, then marketplace clones, then custom directories

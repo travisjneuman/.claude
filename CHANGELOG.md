@@ -2,6 +2,12 @@
 
 All notable changes to the Ultimate Claude Code Toolkit.
 
+## [3.0.2] - September 29, 2026
+
+- Website data matches the current toolkit: hook list and events come from what `settings.json` actually wires (including `.js` hooks), new/removed scripts, path-scoped rules shown with their `paths`, repo links from the `.gitmodules` manifest, SEO counts computed instead of hard-coded, and "Get Started" uses `setup-hooks.sh` / `install-in-place.sh`.
+- Counts: skill count ignores Claude Code's runtime `skills/synced/`, hook count is wired hooks only, and the generator keeps the last published marketplace figures when most clones are absent (the v3.0.0 docs had been rewritten to "0+" on a machine without clones; restored).
+- `setup-new-machine.sh` no longer runs `git submodule update`; it installs git hooks and clones the manifest marketplaces.
+
 ## [3.0.1] - September 29, 2026
 
 - `settings.json` now uses the key layout Claude Code itself writes (its install/migration step rewrote the file and dropped the obsolete `skipAutoPermissionPrompt`), so fresh installs no longer leave the tracked file dirty.

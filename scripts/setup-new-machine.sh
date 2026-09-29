@@ -8,7 +8,7 @@
 #   bash scripts/setup-new-machine.sh
 #
 # What this does:
-#   1. Initializes all git submodules (50 external repos)
+#   1. Installs git hooks and clones the manifest marketplace repos (local-only)
 #   2. Configures no_push protection on all external repos
 #   3. Registers required marketplaces with Claude Code
 #   4. Installs all enabled plugins
@@ -37,11 +37,12 @@ if [ ! -f "CLAUDE.md" ]; then
 fi
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# Step 1: Initialize submodules
+# Step 1: Git hooks + marketplace clones
 # ═══════════════════════════════════════════════════════════════════════════════
-echo -e "${YELLOW}Step 1/5: Initializing git submodules...${NC}"
-git submodule update --init --recursive
-echo -e "${GREEN}  ✓ Submodules initialized${NC}"
+echo -e "${YELLOW}Step 1/5: Cloning marketplace repos from the manifest (local-only, no_push)...${NC}"
+bash scripts/setup-hooks.sh >/dev/null
+bash scripts/init-marketplaces.sh || echo -e "${YELLOW}  ⚠ Some marketplace clones failed (non-critical)${NC}"
+echo -e "${GREEN}  ✓ Marketplaces initialized${NC}"
 
 # Clone repos with broken nested submodules (can't be git submodules)
 if [ ! -d "plugins/marketplaces/claude-code-plugins-plus-skills" ]; then

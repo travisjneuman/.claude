@@ -1,11 +1,15 @@
 import { getSkills } from "./skills";
 import { getAgents } from "./agents";
 import { getMarketplaceStats } from "./marketplace";
+import { getCommands } from "./commands";
+import { getHooks } from "./hooks";
 
 export function getCounts() {
   const skills = getSkills();
   const agents = getAgents();
   const { repos, totalSkills } = getMarketplaceStats();
+  const commandCount = getCommands().length;
+  const hookCount = getHooks().length;
   const marketplaceRounded = Math.floor(totalSkills / 100) * 100;
   const mktDisplay = marketplaceRounded.toLocaleString();
 
@@ -21,35 +25,35 @@ export function getCounts() {
     seo: {
       home: {
         title: "tjn.claude/ \u2014 The Ultimate Claude Code Toolkit",
-        description: `Drop-in ~/.claude config with ${skills.length} skills, ${agents.length} agents, ${repos.length} marketplace repos (${mktDisplay}+ community skills), 30 commands, and 10 hooks. Auto-activates the right resources from your prompt.`,
+        description: `Drop-in ~/.claude config with ${skills.length} skills, ${agents.length} agents, ${repos.length} marketplace repos (${mktDisplay}+ community skills), ${commandCount} commands, and ${hookCount} hooks. A small core stays in context; a generated index and the toolkit-router skill find everything else on demand.`,
       },
       skills: {
         title: `${skills.length} Claude Code Skills \u2014 Domain Expertise for AI Development`,
-        description: `Browse ${skills.length} expert skills spanning security, DevOps, databases, React, Python, Go, payments, auth, and more. Each skill auto-activates based on your prompt.`,
+        description: `Browse ${skills.length} expert skills spanning security, DevOps, databases, React, Python, Go, payments, auth, and more. Core skills keep their full description in context; the rest are listed by name and found through the toolkit-router skill.`,
       },
       agents: {
         title: `${agents.length} Specialist Agents for Claude Code \u2014 Code Review, Security, DevOps`,
         description: `Browse ${agents.length} specialized agents for code review, debugging, security auditing, architecture analysis, and framework-specific expertise. Spawn parallel workers for complex tasks.`,
       },
       commands: {
-        title: "30 Slash Commands for Claude Code \u2014 Workflow Automation",
-        description: "Browse 30 slash commands for committing, reviewing, deploying, testing, and managing Claude Code workflows. One-keystroke access to common operations.",
+        title: `${commandCount} Slash Commands for Claude Code \u2014 Workflow Automation`,
+        description: `Browse ${commandCount} slash commands for reviewing, deploying, testing, pulling repos, and managing Claude Code workflows. One-keystroke access to common operations.`,
       },
       hooks: {
-        title: "10 Lifecycle Hooks for Claude Code \u2014 Safety & Automation",
-        description: "Browse 10 lifecycle hooks that guard against dangerous commands, scan for secrets, inject context, and automate session management.",
+        title: `${hookCount} Lifecycle Hooks for Claude Code \u2014 Safety & Automation`,
+        description: `Browse ${hookCount} lifecycle hooks that block footguns before Bash and file writes, flag secrets after writes, keep repos pulled and healthy across sessions, and draw the status line.`,
       },
       rules: {
         title: "Claude Code Rules \u2014 Quality Guardrails & Best Practices",
-        description: "Browse modular rules including checklists, stack guides, workflow patterns, and tooling references that enforce quality across every session.",
+        description: "Browse path-scoped language rules that load only for matching files, plus reference checklists, stack guides, workflow patterns, and tooling guides.",
       },
       scripts: {
         title: "Claude Code Scripts \u2014 Setup, Maintenance & Automation",
-        description: "Browse automation scripts for first-time setup, count synchronization, repo management, and cross-platform utilities.",
+        description: "Browse automation scripts for first-time and in-place setup, index and count generation, marketplace and repo management, git hooks, and cross-platform utilities.",
       },
       marketplaces: {
         title: `${repos.length} Marketplace Repos (${mktDisplay}+ Skills) for Claude Code`,
-        description: `Browse ${repos.length} open-source marketplace repositories contributing ${mktDisplay}+ community skills. Auto-updated on every session start.`,
+        description: `Browse ${repos.length} open-source marketplace repositories contributing ${mktDisplay}+ community skills. Listed in a manifest, cloned locally with push disabled, and refreshed at most daily.`,
       },
       docs: {
         title: "Documentation \u2014 Setup, Architecture & Guides",

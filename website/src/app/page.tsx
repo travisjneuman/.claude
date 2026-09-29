@@ -279,24 +279,25 @@ export default function Home() {
             </div>
             <div>
               <span className="text-[var(--text-muted)]">
-                # Run setup (submodules, no_push protection, plugin
-                registration)
+                # Install the repo&apos;s git hooks (safety and index checks)
               </span>
               <div className="text-[var(--accent-green)] mt-1">
-                $ cd ~/.claude && bash scripts/setup-new-machine.sh
+                $ bash ~/.claude/scripts/setup-hooks.sh
               </div>
             </div>
             <div>
               <span className="text-[var(--text-muted)]">
-                # Start Claude Code — skills auto-activate
+                # Start Claude Code — the toolkit loads automatically
               </span>
               <div className="text-[var(--accent-green)] mt-1">$ claude</div>
             </div>
           </div>
 
           <p className="text-xs text-[var(--text-muted)] mt-4">
-            The setup script initializes submodules, enforces no_push on all
-            marketplace repos, registers marketplaces, and installs plugins.
+            Already have a ~/.claude from Claude Code? Use
+            scripts/install-in-place.sh instead; it keeps your existing files.
+            Marketplace repos are cloned locally with push disabled by the
+            first daily background pull (or run _pull-all-repos.sh now).
           </p>
         </ScrollReveal>
       </section>
