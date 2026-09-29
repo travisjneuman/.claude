@@ -40,7 +40,7 @@ The total amount of text Claude can process in a single session. The toolkit man
 
 ### GSD (Get Shit Done)
 
-A multi-phase project management workflow system from the `get-shit-done` marketplace plugin. Provides commands like `/gsd:new-project`, `/gsd:progress`, `/gsd:plan-phase` for structured project execution. See `docs/GSD-TUTORIAL.md`.
+A multi-phase project management workflow system from the `gsd-core` marketplace plugin. Provides commands like `/gsd-core:new-project`, `/gsd-core:progress`, `/gsd-core:plan-phase` for structured project execution. See `docs/GSD-TUTORIAL.md`.
 
 ### Hook
 

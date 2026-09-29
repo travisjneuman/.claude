@@ -163,9 +163,6 @@ System prompt here...
 | Repository                              | URL                                                        | Focus                        |
 | --------------------------------------- | ---------------------------------------------------------- | ---------------------------- |
 | hesreallyhim/awesome-claude-code        | https://github.com/hesreallyhim/awesome-claude-code        | Commands, workflows, configs |
-| alvinunreal/awesome-claude              | https://github.com/alvinunreal/awesome-claude              | General Claude resources     |
-| travisvn/awesome-claude-skills          | https://github.com/travisvn/awesome-claude-skills          | Skills library               |
-| BehiSecc/awesome-claude-skills          | https://github.com/BehiSecc/awesome-claude-skills          | Categorized skills           |
 | VoltAgent/awesome-claude-code-subagents | https://github.com/VoltAgent/awesome-claude-code-subagents | 100+ subagents               |
 | ccplugins/awesome-claude-code-plugins   | https://github.com/ccplugins/awesome-claude-code-plugins   | Plugin directory             |
 | jqueryscript/awesome-claude-code        | https://github.com/jqueryscript/awesome-claude-code        | Tools, extensions, resources |
@@ -216,8 +213,7 @@ This setup includes 82 marketplace repositories providing access to 10,900+ comm
 | anthropics/claude-code            | https://github.com/anthropics/claude-code            | Official plugin format        |
 | obra/superpowers                  | https://github.com/obra/superpowers                  | TDD, debugging workflows      |
 | glittercowboy/taches-cc-resources | https://github.com/glittercowboy/taches-cc-resources | Prompts, meta-prompting       |
-| glittercowboy/get-shit-done       | https://github.com/glittercowboy/get-shit-done       | Workflow automation framework |
-| AndyMik90/Auto-Claude             | https://github.com/AndyMik90/Auto-Claude             | Autonomous multi-agent system |
+| open-gsd/gsd-core       | https://github.com/open-gsd/gsd-core       | Workflow automation framework |
 
 ### Skill File Structure
 
@@ -232,7 +228,7 @@ tags: [category, domain]
 ---
 ```
 
-This installation has 127 local skills and 86 custom agents. Run `bash ~/.claude/scripts/regenerate-index.sh` to refresh the master index.
+This installation has 180 local skills and 86 custom agents. Run `bash ~/.claude/scripts/regenerate-index.sh` to refresh the master index.
 
 ### Agent Development
 

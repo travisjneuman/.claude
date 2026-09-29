@@ -1,6 +1,6 @@
 ---
 name: codebase-documenter
-description: This skill should be used when writing documentation for codebases, including README files, architecture documentation, code comments, and API documentation. Use this skill when users request help documenting their code, creating getting-started guides, explaining project structure, or making codebases more accessible to new developers. The skill provides templates, best practices, and structured approaches for creating clear, beginner-friendly documentation.
+description: Write codebase documentation: READMEs, architecture docs, getting-started guides, API docs, and code comments. Use when documenting code or making a project easier for new developers.
 context: fork
 ---
 

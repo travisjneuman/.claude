@@ -1,5 +1,5 @@
 ---
-description: AI-powered skill recommendation based on your problem description - finds optimal resources from 127 local skills + 82 marketplaces (10,900+ skills)
+description: AI-powered skill recommendation based on your problem description - finds optimal resources from 180 local skills + 82 marketplaces (10,900+ skills)
 arguments:
   - name: problem
     description: "Describe what you're trying to accomplish or the problem you're facing"
@@ -117,14 +117,11 @@ find ~/.claude/plugins/marketplaces -name "SKILL.md" | xargs grep -li "<keyword>
 | **React Native**        | `react-native`               | `mobile-architect`        | -                                                  |
 | **Flutter**             | `flutter-development`        | `mobile-architect`        | -                                                  |
 | **Desktop**             | `electron-desktop`           | `desktop-developer`       | -                                                  |
-| **DevOps/Infra**        | `devops-cloud`               | `devops-engineer`         | diet103-infrastructure, hashi-terraform-skills     |
-| **Terraform/IaC**       | `devops-cloud`               | `devops-engineer`         | hashi-terraform-skills                             |
 | **Testing**             | `test-specialist`            | `test-generator`          | mhattingpete-skills                                |
 | **Performance**         | -                            | `performance-optimizer`   | -                                                  |
 | **Security**            | `security`                   | `security-auditor`        | trailofbits-skills (50 skills)                     |
 | **Debugging**           | `debug-systematic`           | `debugging-specialist`    | -                                                  |
 | **Documentation**       | `codebase-documenter`        | `documentation-writer`    | -                                                  |
-| **Bioinformatics**      | -                            | -                         | claude-scientific-skills, gqy20-biology-plugins    |
 | **Chemistry**           | -                            | -                         | claude-scientific-skills                           |
 | **Physics**             | -                            | -                         | claude-scientific-skills                           |
 | **Proteomics**          | -                            | -                         | claude-scientific-skills                           |
@@ -132,7 +129,6 @@ find ~/.claude/plugins/marketplaces -name "SKILL.md" | xargs grep -li "<keyword>
 | **AI/ML**               | `ai-ml-development`          | `ml-engineer`             | affaan-everything-claude                           |
 | **Data Science**        | `data-science`               | -                         | -                                                  |
 | **Elixir**              | -                            | -                         | bradleygolden-elixir, georgeguimaraes-elixir       |
-| **Perl/CPAN**           | -                            | -                         | kfly8-cpan-plugins                                 |
 | **SAP/Enterprise**      | -                            | -                         | secondsky-sap-skills (33 skills)                   |
 | **Finance/Equity**      | `finance`                    | -                         | quant-equity-research                              |
 | **Startup**             | `startup-launch`             | `startup-advisor`         | -                                                  |
@@ -143,7 +139,6 @@ find ~/.claude/plugins/marketplaces -name "SKILL.md" | xargs grep -li "<keyword>
 | **Video/Film**          | `video-production`           | `video-producer`          | -                                                  |
 | **Audio**               | `audio-production`           | `audio-engineer`          | -                                                  |
 | **Animation**           | `ui-animation`               | `motion-designer`         | -                                                  |
-| **Worldbuilding**       | -                            | -                         | worldbuilding-skills (52 skills)                   |
 | **Context Engineering** | -                            | -                         | neolab-context-kit, muratcankoylan-agent-skills    |
 | **Planning/Files**      | -                            | -                         | othmanadi-planning (12 skills)                     |
 | **Microservices**       | `microservices-architecture` | `microservices-architect` | -                                                  |
@@ -193,7 +188,7 @@ find ~/.claude/plugins/marketplaces -name "SKILL.md" | xargs grep -li "<keyword>
 **Primary:** `Skill(devops-cloud)`
 **Agent:** `Task(devops-engineer)`
 **Marketplace:** voltagent-subagents has CI/CD specialists
-**Route:** Consider `/gsd:new-project` for multi-step setup
+**Route:** Consider `/gsd-core:new-project` for multi-step setup
 
 ---
 
@@ -203,7 +198,7 @@ After identifying skills, determine execution route:
 
 | Complexity   | Route              | Criteria                                           |
 | ------------ | ------------------ | -------------------------------------------------- |
-| High (3+)    | `/gsd:new-project` | Multi-phase, architecture decisions, 3+ file types |
+| High (3+)    | `/gsd-core:new-project` | Multi-phase, architecture decisions, 3+ file types |
 | Medium (1-2) | `EnterPlanMode`    | Single feature, some planning needed               |
 | Low (0)      | Direct execution   | Single file, clear task, immediate                 |
 
@@ -228,5 +223,5 @@ Once skills are identified:
 
 ---
 
-_Intelligent skill discovery across 127 local skills + 82 marketplaces (10,900+ skills)_
+_Intelligent skill discovery across 180 local skills + 82 marketplaces (10,900+ skills)_
 

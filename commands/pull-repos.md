@@ -112,7 +112,7 @@ The script uses both location and remote ownership:
 
 ```bash
 # Check any repo's push URL
-cd ~/.claude/plugins/marketplaces/get-shit-done
+cd ~/.claude/plugins/marketplaces/gsd-core
 git remote -v
 # Should show: origin no_push (push)
 

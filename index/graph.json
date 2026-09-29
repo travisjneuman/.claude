@@ -26,6 +26,474 @@
    "description": "WCAG 2.2 compliance, ARIA patterns, keyboard navigation, screen readers, automated testing"
   },
   {
+   "id": "skill:agent-accessibility-expert",
+   "type": "skill",
+   "name": "agent-accessibility-expert",
+   "path": "skills/agent-accessibility-expert/SKILL.md",
+   "domain": "frontend",
+   "tier": "name-only",
+   "description": "Specialist subagent: WCAG compliance, screen reader compatibility, and inclusive design patterns. Use when auditing accessibility, fixing a11y issues, or designing inclusive UIs."
+  },
+  {
+   "id": "skill:agent-android-developer",
+   "type": "skill",
+   "name": "agent-android-developer",
+   "path": "skills/agent-android-developer/SKILL.md",
+   "domain": "mobile",
+   "tier": "name-only",
+   "description": "Specialist subagent: Expert Android developer specializing in Kotlin, Jetpack Compose, and modern Android architecture"
+  },
+  {
+   "id": "skill:agent-api-designer",
+   "type": "skill",
+   "name": "agent-api-designer",
+   "path": "skills/agent-api-designer/SKILL.md",
+   "domain": "backend",
+   "tier": "name-only",
+   "description": "Specialist subagent: Designs REST and GraphQL APIs following best practices. Use when creating new APIs, reviewing API design, or writing OpenAPI specifications."
+  },
+  {
+   "id": "skill:agent-api-integration-specialist",
+   "type": "skill",
+   "name": "agent-api-integration-specialist",
+   "path": "skills/agent-api-integration-specialist/SKILL.md",
+   "domain": "backend",
+   "tier": "name-only",
+   "description": "Specialist subagent: Third-party API integration, webhook handling, OAuth flows, rate limiting, and SDK wrapping specialist. Use when integrating external APIs, building webhook handlers, or creating…"
+  },
+  {
+   "id": "skill:agent-audio-engineer",
+   "type": "skill",
+   "name": "agent-audio-engineer",
+   "path": "skills/agent-audio-engineer/SKILL.md",
+   "domain": "creative",
+   "tier": "name-only",
+   "description": "Specialist subagent: Expert audio engineer for recording, mixing, mastering, and sound design"
+  },
+  {
+   "id": "skill:agent-auth-specialist",
+   "type": "skill",
+   "name": "agent-auth-specialist",
+   "path": "skills/agent-auth-specialist/SKILL.md",
+   "domain": "backend",
+   "tier": "name-only",
+   "description": "Specialist subagent: OAuth 2.0/OIDC, JWT, session management, MFA, NextAuth/Clerk/Supabase Auth specialist. Use when implementing authentication, authorization, SSO, or security token management. Tri…"
+  },
+  {
+   "id": "skill:agent-blockchain-developer",
+   "type": "skill",
+   "name": "agent-blockchain-developer",
+   "path": "skills/agent-blockchain-developer/SKILL.md",
+   "domain": "systems",
+   "tier": "name-only",
+   "description": "Specialist subagent: Solidity, smart contracts, Web3, EVM, DeFi protocols, and blockchain development specialist. Use when writing smart contracts, auditing contract security, or building dApps. Trig…"
+  },
+  {
+   "id": "skill:agent-brand-strategist",
+   "type": "skill",
+   "name": "agent-brand-strategist",
+   "path": "skills/agent-brand-strategist/SKILL.md",
+   "domain": "creative",
+   "tier": "name-only",
+   "description": "Specialist subagent: Expert brand strategist for brand identity, positioning, naming, and brand guidelines"
+  },
+  {
+   "id": "skill:agent-browser-extension-developer",
+   "type": "skill",
+   "name": "agent-browser-extension-developer",
+   "path": "skills/agent-browser-extension-developer/SKILL.md",
+   "domain": "frontend",
+   "tier": "name-only",
+   "description": "Specialist subagent: Chrome, Firefox, and cross-browser extension development specialist. Manifest V3, service workers, content scripts, and WebExtension APIs. Use when building browser extensions or…"
+  },
+  {
+   "id": "skill:agent-cli-developer",
+   "type": "skill",
+   "name": "agent-cli-developer",
+   "path": "skills/agent-cli-developer/SKILL.md",
+   "domain": "systems",
+   "tier": "name-only",
+   "description": "Specialist subagent: Command-line tool development, argument parsing, interactive prompts, and terminal UI specialist. Use when building CLI tools, implementing interactive terminal interfaces, or de…"
+  },
+  {
+   "id": "skill:agent-cloud-architect",
+   "type": "skill",
+   "name": "agent-cloud-architect",
+   "path": "skills/agent-cloud-architect/SKILL.md",
+   "domain": "infra",
+   "tier": "name-only",
+   "description": "Specialist subagent: Multi-cloud architecture, cost optimization, serverless vs containers, disaster recovery, and infrastructure design specialist. Use for high-level architecture decisions, cloud m…"
+  },
+  {
+   "id": "skill:agent-code-explainer",
+   "type": "skill",
+   "name": "agent-code-explainer",
+   "path": "skills/agent-code-explainer/SKILL.md",
+   "domain": "quality",
+   "tier": "name-only",
+   "description": "Specialist subagent: Explains complex code in clear, understandable terms. Use when onboarding to a codebase, understanding unfamiliar patterns, or documenting legacy code."
+  },
+  {
+   "id": "skill:agent-compliance-engineer",
+   "type": "skill",
+   "name": "agent-compliance-engineer",
+   "path": "skills/agent-compliance-engineer/SKILL.md",
+   "domain": "security",
+   "tier": "name-only",
+   "description": "Specialist subagent: SOC2, HIPAA, GDPR, PCI-DSS compliance implementation specialist. Use when implementing audit logging, data encryption, access controls, privacy by design, or preparing for compli…"
+  },
+  {
+   "id": "skill:agent-cpp-expert",
+   "type": "skill",
+   "name": "agent-cpp-expert",
+   "path": "skills/agent-cpp-expert/SKILL.md",
+   "domain": "systems",
+   "tier": "name-only",
+   "description": "Specialist subagent: C and C++ development, modern C++ (C++17/20/23), CMake, systems programming, and memory management specialist. Use when writing C/C++ code, debugging memory issues, or building s…"
+  },
+  {
+   "id": "skill:agent-data-engineer",
+   "type": "skill",
+   "name": "agent-data-engineer",
+   "path": "skills/agent-data-engineer/SKILL.md",
+   "domain": "data-ai",
+   "tier": "name-only",
+   "description": "Specialist subagent: ETL pipelines, data warehousing, stream processing, and data infrastructure specialist. Use when building data pipelines, setting up warehouses, or implementing real-time data pr…"
+  },
+  {
+   "id": "skill:agent-database-expert",
+   "type": "skill",
+   "name": "agent-database-expert",
+   "path": "skills/agent-database-expert/SKILL.md",
+   "domain": "backend",
+   "tier": "name-only",
+   "description": "Specialist subagent: Expert database architect and engineer for PostgreSQL, MongoDB, Redis, and all major databases. Use when designing schemas, optimizing queries, planning migrations, implementing…"
+  },
+  {
+   "id": "skill:agent-desktop-developer",
+   "type": "skill",
+   "name": "agent-desktop-developer",
+   "path": "skills/agent-desktop-developer/SKILL.md",
+   "domain": "systems",
+   "tier": "name-only",
+   "description": "Specialist subagent: Expert desktop application developer for Electron, Tauri, and native desktop development"
+  },
+  {
+   "id": "skill:agent-devsecops-engineer",
+   "type": "skill",
+   "name": "agent-devsecops-engineer",
+   "path": "skills/agent-devsecops-engineer/SKILL.md",
+   "domain": "security",
+   "tier": "name-only",
+   "description": "Specialist subagent: CI/CD security, SAST/DAST pipelines, supply chain security, container scanning, and security automation specialist. Use when securing CI/CD pipelines, implementing security scann…"
+  },
+  {
+   "id": "skill:agent-django-fastapi-expert",
+   "type": "skill",
+   "name": "agent-django-fastapi-expert",
+   "path": "skills/agent-django-fastapi-expert/SKILL.md",
+   "domain": "backend",
+   "tier": "name-only",
+   "description": "Specialist subagent: Django ORM, Django REST Framework, FastAPI async patterns, and Pydantic v2 specialist. Use when building Python web applications, designing APIs with Django or FastAPI, or workin…"
+  },
+  {
+   "id": "skill:agent-documentation-writer",
+   "type": "skill",
+   "name": "agent-documentation-writer",
+   "path": "skills/agent-documentation-writer/SKILL.md",
+   "domain": "quality",
+   "tier": "name-only",
+   "description": "Specialist subagent: Generates comprehensive documentation including READMEs, API docs, architecture docs, and inline comments. Use when documenting code, creating guides, or explaining systems."
+  },
+  {
+   "id": "skill:agent-e2e-test-specialist",
+   "type": "skill",
+   "name": "agent-e2e-test-specialist",
+   "path": "skills/agent-e2e-test-specialist/SKILL.md",
+   "domain": "quality",
+   "tier": "name-only",
+   "description": "Specialist subagent: Playwright, Cypress, and visual regression testing specialist. Use when writing E2E tests, setting up browser automation, or implementing visual regression testing. Trigger phras…"
+  },
+  {
+   "id": "skill:agent-email-specialist",
+   "type": "skill",
+   "name": "agent-email-specialist",
+   "path": "skills/agent-email-specialist/SKILL.md",
+   "domain": "backend",
+   "tier": "name-only",
+   "description": "Specialist subagent: Transactional email (Resend, SES, SendGrid), email templates (React Email, MJML), and deliverability specialist. Use when implementing email systems, designing templates, or trou…"
+  },
+  {
+   "id": "skill:agent-embedded-developer",
+   "type": "skill",
+   "name": "agent-embedded-developer",
+   "path": "skills/agent-embedded-developer/SKILL.md",
+   "domain": "systems",
+   "tier": "name-only",
+   "description": "Specialist subagent: Embedded systems, firmware, RTOS, microcontrollers (STM32, ESP32, Arduino), IoT, and bare-metal C/C++ specialist. Use when developing firmware, working with hardware peripherals,…"
+  },
+  {
+   "id": "skill:agent-event-driven-architect",
+   "type": "skill",
+   "name": "agent-event-driven-architect",
+   "path": "skills/agent-event-driven-architect/SKILL.md",
+   "domain": "backend",
+   "tier": "name-only",
+   "description": "Specialist subagent: Kafka, RabbitMQ, SQS/SNS, event sourcing, CQRS, and message-driven architecture specialist. Use when designing event-driven systems, implementing pub/sub, or building streaming p…"
+  },
+  {
+   "id": "skill:agent-flutter-developer",
+   "type": "skill",
+   "name": "agent-flutter-developer",
+   "path": "skills/agent-flutter-developer/SKILL.md",
+   "domain": "mobile",
+   "tier": "name-only",
+   "description": "Specialist subagent: Flutter/Dart cross-platform development, Riverpod state management, and platform channels specialist. Use when building Flutter apps, implementing state management, or working wi…"
+  },
+  {
+   "id": "skill:agent-game-developer",
+   "type": "skill",
+   "name": "agent-game-developer",
+   "path": "skills/agent-game-developer/SKILL.md",
+   "domain": "systems",
+   "tier": "name-only",
+   "description": "Specialist subagent: Expert game developer for Unity, Unreal Engine, and Godot game development"
+  },
+  {
+   "id": "skill:agent-go-expert",
+   "type": "skill",
+   "name": "agent-go-expert",
+   "path": "skills/agent-go-expert/SKILL.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Specialist subagent: Go concurrency, error handling, stdlib patterns, Chi/Echo web frameworks specialist. Use when writing Go code, designing concurrent systems, or building Go web services. Trigger…"
+  },
+  {
+   "id": "skill:agent-graphic-designer",
+   "type": "skill",
+   "name": "agent-graphic-designer",
+   "path": "skills/agent-graphic-designer/SKILL.md",
+   "domain": "creative",
+   "tier": "name-only",
+   "description": "Specialist subagent: Expert graphic designer for digital and print design, color theory, typography, and visual identity"
+  },
+  {
+   "id": "skill:agent-graphql-architect",
+   "type": "skill",
+   "name": "agent-graphql-architect",
+   "path": "skills/agent-graphql-architect/SKILL.md",
+   "domain": "backend",
+   "tier": "name-only",
+   "description": "Specialist subagent: Expert GraphQL architect for API design, schema development, and performance optimization"
+  },
+  {
+   "id": "skill:agent-i18n-specialist",
+   "type": "skill",
+   "name": "agent-i18n-specialist",
+   "path": "skills/agent-i18n-specialist/SKILL.md",
+   "domain": "frontend",
+   "tier": "name-only",
+   "description": "Specialist subagent: Expert internationalization specialist for multi-language support and localization"
+  },
+  {
+   "id": "skill:agent-kotlin-expert",
+   "type": "skill",
+   "name": "agent-kotlin-expert",
+   "path": "skills/agent-kotlin-expert/SKILL.md",
+   "domain": "mobile",
+   "tier": "name-only",
+   "description": "Specialist subagent: Kotlin Multiplatform, Compose Multiplatform, coroutines, Ktor, and JVM ecosystem specialist. Use when writing Kotlin code, building KMP shared modules, or developing with Jetpack…"
+  },
+  {
+   "id": "skill:agent-macos-developer",
+   "type": "skill",
+   "name": "agent-macos-developer",
+   "path": "skills/agent-macos-developer/SKILL.md",
+   "domain": "systems",
+   "tier": "name-only",
+   "description": "Specialist subagent: Expert macOS native developer for AppKit, Catalyst, and macOS-specific features"
+  },
+  {
+   "id": "skill:agent-microservices-architect",
+   "type": "skill",
+   "name": "agent-microservices-architect",
+   "path": "skills/agent-microservices-architect/SKILL.md",
+   "domain": "backend",
+   "tier": "name-only",
+   "description": "Specialist subagent: Expert microservices architect for distributed system design, service decomposition, and resilience patterns"
+  },
+  {
+   "id": "skill:agent-migration-specialist",
+   "type": "skill",
+   "name": "agent-migration-specialist",
+   "path": "skills/agent-migration-specialist/SKILL.md",
+   "domain": "quality",
+   "tier": "name-only",
+   "description": "Specialist subagent: Framework upgrades, codemod strategies, version migration planning, and legacy modernization specialist. Use when upgrading frameworks, migrating between technologies, or moderni…"
+  },
+  {
+   "id": "skill:agent-ml-engineer",
+   "type": "skill",
+   "name": "agent-ml-engineer",
+   "path": "skills/agent-ml-engineer/SKILL.md",
+   "domain": "data-ai",
+   "tier": "name-only",
+   "description": "Specialist subagent: Expert machine learning engineer for PyTorch, TensorFlow, LLM integration, and ML pipelines"
+  },
+  {
+   "id": "skill:agent-mobile-architect",
+   "type": "skill",
+   "name": "agent-mobile-architect",
+   "path": "skills/agent-mobile-architect/SKILL.md",
+   "domain": "mobile",
+   "tier": "name-only",
+   "description": "Specialist subagent: Cross-platform mobile architecture expert for React Native, Flutter, and native development decisions"
+  },
+  {
+   "id": "skill:agent-mobile-release-manager",
+   "type": "skill",
+   "name": "agent-mobile-release-manager",
+   "path": "skills/agent-mobile-release-manager/SKILL.md",
+   "domain": "mobile",
+   "tier": "name-only",
+   "description": "Specialist subagent: App store submissions, mobile CI/CD, ASO, code signing, and beta distribution specialist. Use when preparing app releases, setting up mobile CI/CD, or managing app store presence…"
+  },
+  {
+   "id": "skill:agent-monetization-expert",
+   "type": "skill",
+   "name": "agent-monetization-expert",
+   "path": "skills/agent-monetization-expert/SKILL.md",
+   "domain": "business",
+   "tier": "name-only",
+   "description": "Specialist subagent: Expert in revenue models, pricing strategy, and business monetization"
+  },
+  {
+   "id": "skill:agent-motion-designer",
+   "type": "skill",
+   "name": "agent-motion-designer",
+   "path": "skills/agent-motion-designer/SKILL.md",
+   "domain": "creative",
+   "tier": "name-only",
+   "description": "Specialist subagent: Expert motion designer for UI animations, micro-interactions, and motion systems"
+  },
+  {
+   "id": "skill:agent-next-js-expert",
+   "type": "skill",
+   "name": "agent-next-js-expert",
+   "path": "skills/agent-next-js-expert/SKILL.md",
+   "domain": "frontend",
+   "tier": "name-only",
+   "description": "Specialist subagent: Next.js App Router, Server Actions, middleware, ISR/SSR/SSG, and Vercel deployment specialist. Use when building Next.js applications, optimizing rendering strategies, or deployi…"
+  },
+  {
+   "id": "skill:agent-observability-engineer",
+   "type": "skill",
+   "name": "agent-observability-engineer",
+   "path": "skills/agent-observability-engineer/SKILL.md",
+   "domain": "infra",
+   "tier": "name-only",
+   "description": "Specialist subagent: OpenTelemetry, Prometheus, Grafana, distributed tracing, SLO design, and alerting specialist. Use when implementing observability, designing monitoring systems, or troubleshootin…"
+  },
+  {
+   "id": "skill:agent-payment-billing-specialist",
+   "type": "skill",
+   "name": "agent-payment-billing-specialist",
+   "path": "skills/agent-payment-billing-specialist/SKILL.md",
+   "domain": "backend",
+   "tier": "name-only",
+   "description": "Specialist subagent: Stripe integration, subscription billing, webhooks, PCI compliance, and tax handling specialist. Use when implementing payments, subscriptions, metered billing, or checkout flows…"
+  },
+  {
+   "id": "skill:agent-product-analytics-specialist",
+   "type": "skill",
+   "name": "agent-product-analytics-specialist",
+   "path": "skills/agent-product-analytics-specialist/SKILL.md",
+   "domain": "data-ai",
+   "tier": "name-only",
+   "description": "Specialist subagent: PostHog, Mixpanel, Amplitude event tracking, funnels, cohorts, and A/B testing specialist. Use when implementing analytics, designing event schemas, or setting up experimentation…"
+  },
+  {
+   "id": "skill:agent-product-manager",
+   "type": "skill",
+   "name": "agent-product-manager",
+   "path": "skills/agent-product-manager/SKILL.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Specialist subagent: Product requirements, user stories, roadmaps, prioritization frameworks, and sprint planning specialist. Use when writing PRDs, defining user stories, planning sprints, or making…"
+  },
+  {
+   "id": "skill:agent-pwa-specialist",
+   "type": "skill",
+   "name": "agent-pwa-specialist",
+   "path": "skills/agent-pwa-specialist/SKILL.md",
+   "domain": "backend",
+   "tier": "name-only",
+   "description": "Specialist subagent: Progressive Web App development, service workers, offline-first architecture, and push notification specialist. Use when building installable web apps, implementing offline funct…"
+  },
+  {
+   "id": "skill:agent-python-expert",
+   "type": "skill",
+   "name": "agent-python-expert",
+   "path": "skills/agent-python-expert/SKILL.md",
+   "domain": "systems",
+   "tier": "name-only",
+   "description": "Specialist subagent: Python best practices, type hints, async patterns, and ecosystem expertise. Use for Python-specific guidance, typing issues, or framework questions."
+  },
+  {
+   "id": "skill:agent-realtime-specialist",
+   "type": "skill",
+   "name": "agent-realtime-specialist",
+   "path": "skills/agent-realtime-specialist/SKILL.md",
+   "domain": "backend",
+   "tier": "name-only",
+   "description": "Specialist subagent: Expert real-time systems specialist for WebSockets, SSE, and live data applications"
+  },
+  {
+   "id": "skill:agent-rust-expert",
+   "type": "skill",
+   "name": "agent-rust-expert",
+   "path": "skills/agent-rust-expert/SKILL.md",
+   "domain": "systems",
+   "tier": "name-only",
+   "description": "Specialist subagent: Rust ownership/borrowing, async Rust, Axum/Actix web frameworks, and WASM specialist. Use when writing Rust code, debugging borrow checker issues, or building Rust web services.…"
+  },
+  {
+   "id": "skill:agent-seo-specialist",
+   "type": "skill",
+   "name": "agent-seo-specialist",
+   "path": "skills/agent-seo-specialist/SKILL.md",
+   "domain": "frontend",
+   "tier": "name-only",
+   "description": "Specialist subagent: Technical SEO, structured data, Core Web Vitals, meta tags, and Schema.org specialist. Use when optimizing search engine visibility, implementing structured data, or improving we…"
+  },
+  {
+   "id": "skill:agent-serverless-specialist",
+   "type": "skill",
+   "name": "agent-serverless-specialist",
+   "path": "skills/agent-serverless-specialist/SKILL.md",
+   "domain": "backend",
+   "tier": "name-only",
+   "description": "Specialist subagent: AWS Lambda, Cloudflare Workers, Vercel Edge Functions, and serverless architecture specialist. Use when building serverless functions, optimizing cold starts, or designing event-…"
+  },
+  {
+   "id": "skill:agent-startup-advisor",
+   "type": "skill",
+   "name": "agent-startup-advisor",
+   "path": "skills/agent-startup-advisor/SKILL.md",
+   "domain": "business",
+   "tier": "name-only",
+   "description": "Specialist subagent: Expert startup advisor for launch strategy, validation, MVP development, and growth"
+  },
+  {
+   "id": "skill:agent-svelte-expert",
+   "type": "skill",
+   "name": "agent-svelte-expert",
+   "path": "skills/agent-svelte-expert/SKILL.md",
+   "domain": "frontend",
+   "tier": "name-only",
+   "description": "Specialist subagent: Svelte 5 runes, SvelteKit routing, form actions, and compile-time reactivity specialist. Use when building Svelte or SvelteKit applications, implementing rune-based state managem…"
+  },
+  {
    "id": "skill:agent-teams",
    "type": "skill",
    "name": "agent-teams",
@@ -33,6 +501,60 @@
    "domain": "workflow",
    "tier": "name-only",
    "description": "Team composition knowledge for Claude Code Agent Teams - when to suggest teams, optimal sizing, spawn prompt patterns"
+  },
+  {
+   "id": "skill:agent-technical-writer",
+   "type": "skill",
+   "name": "agent-technical-writer",
+   "path": "skills/agent-technical-writer/SKILL.md",
+   "domain": "quality",
+   "tier": "name-only",
+   "description": "Specialist subagent: Architecture Decision Records, API documentation, migration guides, runbooks, and technical documentation specialist. Use when creating comprehensive documentation, writing ADRs,…"
+  },
+  {
+   "id": "skill:agent-test-generator",
+   "type": "skill",
+   "name": "agent-test-generator",
+   "path": "skills/agent-test-generator/SKILL.md",
+   "domain": "quality",
+   "tier": "name-only",
+   "description": "Specialist subagent: Generates comprehensive test suites using TDD patterns. Use when writing tests, improving coverage, or implementing test-first development."
+  },
+  {
+   "id": "skill:agent-ux-researcher",
+   "type": "skill",
+   "name": "agent-ux-researcher",
+   "path": "skills/agent-ux-researcher/SKILL.md",
+   "domain": "research",
+   "tier": "name-only",
+   "description": "Specialist subagent: UX research, usability testing, user interviews, wireframing, and information architecture specialist. Use when planning user research, designing interfaces, conducting heuristic…"
+  },
+  {
+   "id": "skill:agent-video-producer",
+   "type": "skill",
+   "name": "agent-video-producer",
+   "path": "skills/agent-video-producer/SKILL.md",
+   "domain": "creative",
+   "tier": "name-only",
+   "description": "Specialist subagent: Expert video production specialist for planning, shooting, editing, and delivering video content"
+  },
+  {
+   "id": "skill:agent-vue-nuxt-expert",
+   "type": "skill",
+   "name": "agent-vue-nuxt-expert",
+   "path": "skills/agent-vue-nuxt-expert/SKILL.md",
+   "domain": "frontend",
+   "tier": "name-only",
+   "description": "Specialist subagent: Vue 3 Composition API, Nuxt 3 server routes, Pinia state management, and VueUse composables specialist. Use when building Vue or Nuxt applications, implementing Composition API p…"
+  },
+  {
+   "id": "skill:agent-wasm-specialist",
+   "type": "skill",
+   "name": "agent-wasm-specialist",
+   "path": "skills/agent-wasm-specialist/SKILL.md",
+   "domain": "systems",
+   "tier": "name-only",
+   "description": "Specialist subagent: WebAssembly, WASI, wasm-bindgen, Emscripten, and cross-language compilation specialist. Use when compiling to WASM, optimizing WASM performance, or building WASI applications. Tr…"
   },
   {
    "id": "skill:ai-ml-development",
@@ -167,7 +689,7 @@
    "path": "skills/codebase-documenter/SKILL.md",
    "domain": "quality",
    "tier": "core",
-   "description": "This skill should be used when writing documentation for codebases, including README files, architecture documentation, code comments, and API documentation. Use this skill when users request help do…"
+   "description": "Write codebase documentation: READMEs, architecture docs, getting-started guides, API docs, and code comments. Use when documenting code or making a project easier for new developers."
   },
   {
    "id": "skill:compliance-engineering",
@@ -296,15 +818,6 @@
    "description": "DevOps, cloud infrastructure, and platform engineering. Use when working with AWS, GCP, Azure, Kubernetes, Terraform, CI/CD pipelines, or infrastructure as code."
   },
   {
-   "id": "skill:document-skills",
-   "type": "skill",
-   "name": "document-skills",
-   "path": "skills/document-skills/SKILL.md",
-   "domain": "creative",
-   "tier": "core",
-   "description": "Professional document creation, editing, and analysis for Office formats (docx, pdf, pptx, xlsx). Use when working with Word documents, PDFs, PowerPoint presentations, or Excel spreadsheets."
-  },
-  {
    "id": "skill:edge-computing",
    "type": "skill",
    "name": "edge-computing",
@@ -392,7 +905,7 @@
    "path": "skills/frontend-enhancer/SKILL.md",
    "domain": "frontend",
    "tier": "core",
-   "description": "This skill should be used when enhancing the visual design and aesthetics of web applications. It provides modern UI components, design patterns, color palettes, animations, and layout templates. REQ…"
+   "description": "Enhance the visual design of web apps: modern UI components, layout, responsive design, color palettes, animations. Use for styling and UI polish; pair with ui-research first for new design direction…"
   },
   {
    "id": "skill:fundraising-analyzer",
@@ -1048,7 +1561,7 @@
    "name": "test-specialist",
    "path": "skills/test-specialist/SKILL.md",
    "domain": "quality",
-   "tier": "core",
+   "tier": "name-only",
    "description": "This skill should be used when writing test cases, fixing bugs, analyzing code for potential issues, or improving test coverage for JavaScript/TypeScript applications. Use this for unit tests, integr…"
   },
   {
@@ -1124,140 +1637,12 @@
    "description": "Real-time communication with WebSockets, Server-Sent Events, and related technologies. Use when building chat, live updates, collaborative features, or any real-time functionality."
   },
   {
-   "id": "agent:accessibility-expert",
-   "type": "agent",
-   "name": "accessibility-expert",
-   "path": "agents/accessibility-expert.md",
-   "domain": "frontend",
-   "description": "WCAG compliance, screen reader compatibility, and inclusive design patterns. Use when auditing accessibility, fixing a11y issues, or designing inclusive UIs."
-  },
-  {
-   "id": "agent:android-developer",
-   "type": "agent",
-   "name": "android-developer",
-   "path": "agents/android-developer.md",
-   "domain": "mobile",
-   "description": "Expert Android developer specializing in Kotlin, Jetpack Compose, and modern Android architecture"
-  },
-  {
-   "id": "agent:api-designer",
-   "type": "agent",
-   "name": "api-designer",
-   "path": "agents/api-designer.md",
-   "domain": "backend",
-   "description": "Designs REST and GraphQL APIs following best practices. Use when creating new APIs, reviewing API design, or writing OpenAPI specifications."
-  },
-  {
-   "id": "agent:api-integration-specialist",
-   "type": "agent",
-   "name": "api-integration-specialist",
-   "path": "agents/api-integration-specialist.md",
-   "domain": "backend",
-   "description": "Third-party API integration, webhook handling, OAuth flows, rate limiting, and SDK wrapping specialist. Use when integrating external APIs, building webhook handlers, or creating API client libraries…"
-  },
-  {
    "id": "agent:architecture-analyst",
    "type": "agent",
    "name": "architecture-analyst",
    "path": "agents/architecture-analyst.md",
    "domain": "quality",
    "description": "Analyzes system architecture, identifies patterns/anti-patterns, and provides strategic recommendations. Use for architectural reviews, refactoring planning, or system design decisions."
-  },
-  {
-   "id": "agent:audio-engineer",
-   "type": "agent",
-   "name": "audio-engineer",
-   "path": "agents/audio-engineer.md",
-   "domain": "creative",
-   "description": "Expert audio engineer for recording, mixing, mastering, and sound design"
-  },
-  {
-   "id": "agent:auth-specialist",
-   "type": "agent",
-   "name": "auth-specialist",
-   "path": "agents/auth-specialist.md",
-   "domain": "backend",
-   "description": "OAuth 2.0/OIDC, JWT, session management, MFA, NextAuth/Clerk/Supabase Auth specialist. Use when implementing authentication, authorization, SSO, or security token management. Trigger phrases: login,…"
-  },
-  {
-   "id": "agent:blockchain-developer",
-   "type": "agent",
-   "name": "blockchain-developer",
-   "path": "agents/blockchain-developer.md",
-   "domain": "systems",
-   "description": "Solidity, smart contracts, Web3, EVM, DeFi protocols, and blockchain development specialist. Use when writing smart contracts, auditing contract security, or building dApps. Trigger phrases: Solidity…"
-  },
-  {
-   "id": "agent:brand-strategist",
-   "type": "agent",
-   "name": "brand-strategist",
-   "path": "agents/brand-strategist.md",
-   "domain": "creative",
-   "description": "Expert brand strategist for brand identity, positioning, naming, and brand guidelines"
-  },
-  {
-   "id": "agent:browser-extension-developer",
-   "type": "agent",
-   "name": "browser-extension-developer",
-   "path": "agents/browser-extension-developer.md",
-   "domain": "frontend",
-   "description": "Chrome, Firefox, and cross-browser extension development specialist. Manifest V3, service workers, content scripts, and WebExtension APIs. Use when building browser extensions or migrating from MV2 t…"
-  },
-  {
-   "id": "agent:cli-developer",
-   "type": "agent",
-   "name": "cli-developer",
-   "path": "agents/cli-developer.md",
-   "domain": "systems",
-   "description": "Command-line tool development, argument parsing, interactive prompts, and terminal UI specialist. Use when building CLI tools, implementing interactive terminal interfaces, or designing command-line…"
-  },
-  {
-   "id": "agent:cloud-architect",
-   "type": "agent",
-   "name": "cloud-architect",
-   "path": "agents/cloud-architect.md",
-   "domain": "infra",
-   "description": "Multi-cloud architecture, cost optimization, serverless vs containers, disaster recovery, and infrastructure design specialist. Use for high-level architecture decisions, cloud migration planning, or…"
-  },
-  {
-   "id": "agent:code-explainer",
-   "type": "agent",
-   "name": "code-explainer",
-   "path": "agents/code-explainer.md",
-   "domain": "quality",
-   "description": "Explains complex code in clear, understandable terms. Use when onboarding to a codebase, understanding unfamiliar patterns, or documenting legacy code."
-  },
-  {
-   "id": "agent:compliance-engineer",
-   "type": "agent",
-   "name": "compliance-engineer",
-   "path": "agents/compliance-engineer.md",
-   "domain": "security",
-   "description": "SOC2, HIPAA, GDPR, PCI-DSS compliance implementation specialist. Use when implementing audit logging, data encryption, access controls, privacy by design, or preparing for compliance audits. Trigger…"
-  },
-  {
-   "id": "agent:cpp-expert",
-   "type": "agent",
-   "name": "cpp-expert",
-   "path": "agents/cpp-expert.md",
-   "domain": "systems",
-   "description": "C and C++ development, modern C++ (C++17/20/23), CMake, systems programming, and memory management specialist. Use when writing C/C++ code, debugging memory issues, or building systems-level software…"
-  },
-  {
-   "id": "agent:data-engineer",
-   "type": "agent",
-   "name": "data-engineer",
-   "path": "agents/data-engineer.md",
-   "domain": "data-ai",
-   "description": "ETL pipelines, data warehousing, stream processing, and data infrastructure specialist. Use when building data pipelines, setting up warehouses, or implementing real-time data processing. Trigger phr…"
-  },
-  {
-   "id": "agent:database-expert",
-   "type": "agent",
-   "name": "database-expert",
-   "path": "agents/database-expert.md",
-   "domain": "backend",
-   "description": "Expert database architect and engineer for PostgreSQL, MongoDB, Redis, and all major databases. Use when designing schemas, optimizing queries, planning migrations, implementing caching, or troublesh…"
   },
   {
    "id": "agent:debugging-specialist",
@@ -1276,268 +1661,12 @@
    "description": "Thorough 6-aspect code review covering correctness, security, performance, maintainability, testing, and documentation. Use for comprehensive PR reviews or code quality audits."
   },
   {
-   "id": "agent:desktop-developer",
-   "type": "agent",
-   "name": "desktop-developer",
-   "path": "agents/desktop-developer.md",
-   "domain": "systems",
-   "description": "Expert desktop application developer for Electron, Tauri, and native desktop development"
-  },
-  {
    "id": "agent:devops-engineer",
    "type": "agent",
    "name": "devops-engineer",
    "path": "agents/devops-engineer.md",
    "domain": "infra",
    "description": "Expert DevOps and cloud infrastructure engineer for AWS, GCP, Azure, Kubernetes, Terraform, and CI/CD pipelines. Use when setting up pipelines, containerizing apps, writing infrastructure as code, or…"
-  },
-  {
-   "id": "agent:devsecops-engineer",
-   "type": "agent",
-   "name": "devsecops-engineer",
-   "path": "agents/devsecops-engineer.md",
-   "domain": "security",
-   "description": "CI/CD security, SAST/DAST pipelines, supply chain security, container scanning, and security automation specialist. Use when securing CI/CD pipelines, implementing security scanning, or hardening bui…"
-  },
-  {
-   "id": "agent:django-fastapi-expert",
-   "type": "agent",
-   "name": "django-fastapi-expert",
-   "path": "agents/django-fastapi-expert.md",
-   "domain": "backend",
-   "description": "Django ORM, Django REST Framework, FastAPI async patterns, and Pydantic v2 specialist. Use when building Python web applications, designing APIs with Django or FastAPI, or working with Python web fra…"
-  },
-  {
-   "id": "agent:documentation-writer",
-   "type": "agent",
-   "name": "documentation-writer",
-   "path": "agents/documentation-writer.md",
-   "domain": "quality",
-   "description": "Generates comprehensive documentation including READMEs, API docs, architecture docs, and inline comments. Use when documenting code, creating guides, or explaining systems."
-  },
-  {
-   "id": "agent:e2e-test-specialist",
-   "type": "agent",
-   "name": "e2e-test-specialist",
-   "path": "agents/e2e-test-specialist.md",
-   "domain": "quality",
-   "description": "Playwright, Cypress, and visual regression testing specialist. Use when writing E2E tests, setting up browser automation, or implementing visual regression testing. Trigger phrases: E2E, end-to-end,…"
-  },
-  {
-   "id": "agent:email-specialist",
-   "type": "agent",
-   "name": "email-specialist",
-   "path": "agents/email-specialist.md",
-   "domain": "backend",
-   "description": "Transactional email (Resend, SES, SendGrid), email templates (React Email, MJML), and deliverability specialist. Use when implementing email systems, designing templates, or troubleshooting deliverab…"
-  },
-  {
-   "id": "agent:embedded-developer",
-   "type": "agent",
-   "name": "embedded-developer",
-   "path": "agents/embedded-developer.md",
-   "domain": "systems",
-   "description": "Embedded systems, firmware, RTOS, microcontrollers (STM32, ESP32, Arduino), IoT, and bare-metal C/C++ specialist. Use when developing firmware, working with hardware peripherals, or building IoT devi…"
-  },
-  {
-   "id": "agent:event-driven-architect",
-   "type": "agent",
-   "name": "event-driven-architect",
-   "path": "agents/event-driven-architect.md",
-   "domain": "backend",
-   "description": "Kafka, RabbitMQ, SQS/SNS, event sourcing, CQRS, and message-driven architecture specialist. Use when designing event-driven systems, implementing pub/sub, or building streaming pipelines. Trigger phr…"
-  },
-  {
-   "id": "agent:flutter-developer",
-   "type": "agent",
-   "name": "flutter-developer",
-   "path": "agents/flutter-developer.md",
-   "domain": "mobile",
-   "description": "Flutter/Dart cross-platform development, Riverpod state management, and platform channels specialist. Use when building Flutter apps, implementing state management, or working with native platform fe…"
-  },
-  {
-   "id": "agent:game-developer",
-   "type": "agent",
-   "name": "game-developer",
-   "path": "agents/game-developer.md",
-   "domain": "systems",
-   "description": "Expert game developer for Unity, Unreal Engine, and Godot game development"
-  },
-  {
-   "id": "agent:go-expert",
-   "type": "agent",
-   "name": "go-expert",
-   "path": "agents/go-expert.md",
-   "domain": "workflow",
-   "description": "Go concurrency, error handling, stdlib patterns, Chi/Echo web frameworks specialist. Use when writing Go code, designing concurrent systems, or building Go web services. Trigger phrases: Go, Golang,…"
-  },
-  {
-   "id": "agent:graphic-designer",
-   "type": "agent",
-   "name": "graphic-designer",
-   "path": "agents/graphic-designer.md",
-   "domain": "creative",
-   "description": "Expert graphic designer for digital and print design, color theory, typography, and visual identity"
-  },
-  {
-   "id": "agent:graphql-architect",
-   "type": "agent",
-   "name": "graphql-architect",
-   "path": "agents/graphql-architect.md",
-   "domain": "backend",
-   "description": "Expert GraphQL architect for API design, schema development, and performance optimization"
-  },
-  {
-   "id": "agent:gsd-advisor-researcher",
-   "type": "agent",
-   "name": "gsd-advisor-researcher",
-   "path": "agents/gsd-advisor-researcher.md",
-   "domain": "workflow",
-   "description": "Researches a single gray area decision and returns a structured comparison table with rationale. Spawned by discuss-phase advisor mode."
-  },
-  {
-   "id": "agent:gsd-assumptions-analyzer",
-   "type": "agent",
-   "name": "gsd-assumptions-analyzer",
-   "path": "agents/gsd-assumptions-analyzer.md",
-   "domain": "workflow",
-   "description": "Deeply analyzes codebase for a phase and returns structured assumptions with evidence. Spawned by discuss-phase assumptions mode."
-  },
-  {
-   "id": "agent:gsd-codebase-mapper",
-   "type": "agent",
-   "name": "gsd-codebase-mapper",
-   "path": "agents/gsd-codebase-mapper.md",
-   "domain": "workflow",
-   "description": "Explores codebase and writes structured analysis documents. Spawned by map-codebase with a focus area (tech, arch, quality, concerns). Writes documents directly to reduce orchestrator context load."
-  },
-  {
-   "id": "agent:gsd-debugger",
-   "type": "agent",
-   "name": "gsd-debugger",
-   "path": "agents/gsd-debugger.md",
-   "domain": "workflow",
-   "description": "Investigates bugs using scientific method, manages debug sessions, handles checkpoints. Spawned by /gsd:debug orchestrator."
-  },
-  {
-   "id": "agent:gsd-executor",
-   "type": "agent",
-   "name": "gsd-executor",
-   "path": "agents/gsd-executor.md",
-   "domain": "workflow",
-   "description": "Executes GSD plans with atomic commits, deviation handling, checkpoint protocols, and state management. Spawned by execute-phase orchestrator or execute-plan command."
-  },
-  {
-   "id": "agent:gsd-integration-checker",
-   "type": "agent",
-   "name": "gsd-integration-checker",
-   "path": "agents/gsd-integration-checker.md",
-   "domain": "workflow",
-   "description": "Verifies cross-phase integration and E2E flows. Checks that phases connect properly and user workflows complete end-to-end."
-  },
-  {
-   "id": "agent:gsd-nyquist-auditor",
-   "type": "agent",
-   "name": "gsd-nyquist-auditor",
-   "path": "agents/gsd-nyquist-auditor.md",
-   "domain": "workflow",
-   "description": "Fills Nyquist validation gaps by generating tests and verifying coverage for phase requirements"
-  },
-  {
-   "id": "agent:gsd-phase-researcher",
-   "type": "agent",
-   "name": "gsd-phase-researcher",
-   "path": "agents/gsd-phase-researcher.md",
-   "domain": "workflow",
-   "description": "Researches how to implement a phase before planning. Produces RESEARCH.md consumed by gsd-planner. Spawned by /gsd:plan-phase orchestrator."
-  },
-  {
-   "id": "agent:gsd-plan-checker",
-   "type": "agent",
-   "name": "gsd-plan-checker",
-   "path": "agents/gsd-plan-checker.md",
-   "domain": "workflow",
-   "description": "Verifies plans will achieve phase goal before execution. Goal-backward analysis of plan quality. Spawned by /gsd:plan-phase orchestrator."
-  },
-  {
-   "id": "agent:gsd-planner",
-   "type": "agent",
-   "name": "gsd-planner",
-   "path": "agents/gsd-planner.md",
-   "domain": "workflow",
-   "description": "Creates executable phase plans with task breakdown, dependency analysis, and goal-backward verification. Spawned by /gsd:plan-phase orchestrator."
-  },
-  {
-   "id": "agent:gsd-project-researcher",
-   "type": "agent",
-   "name": "gsd-project-researcher",
-   "path": "agents/gsd-project-researcher.md",
-   "domain": "workflow",
-   "description": "Researches domain ecosystem before roadmap creation. Produces files in .planning/research/ consumed during roadmap creation. Spawned by /gsd:new-project or /gsd:new-milestone orchestrators."
-  },
-  {
-   "id": "agent:gsd-research-synthesizer",
-   "type": "agent",
-   "name": "gsd-research-synthesizer",
-   "path": "agents/gsd-research-synthesizer.md",
-   "domain": "workflow",
-   "description": "Synthesizes research outputs from parallel researcher agents into SUMMARY.md. Spawned by /gsd:new-project after 4 researcher agents complete."
-  },
-  {
-   "id": "agent:gsd-roadmapper",
-   "type": "agent",
-   "name": "gsd-roadmapper",
-   "path": "agents/gsd-roadmapper.md",
-   "domain": "workflow",
-   "description": "Creates project roadmaps with phase breakdown, requirement mapping, success criteria derivation, and coverage validation. Spawned by /gsd:new-project orchestrator."
-  },
-  {
-   "id": "agent:gsd-ui-auditor",
-   "type": "agent",
-   "name": "gsd-ui-auditor",
-   "path": "agents/gsd-ui-auditor.md",
-   "domain": "workflow",
-   "description": "Retroactive 6-pillar visual audit of implemented frontend code. Produces scored UI-REVIEW.md. Spawned by /gsd:ui-review orchestrator."
-  },
-  {
-   "id": "agent:gsd-ui-checker",
-   "type": "agent",
-   "name": "gsd-ui-checker",
-   "path": "agents/gsd-ui-checker.md",
-   "domain": "workflow",
-   "description": "Validates UI-SPEC.md design contracts against 6 quality dimensions. Produces BLOCK/FLAG/PASS verdicts. Spawned by /gsd:ui-phase orchestrator."
-  },
-  {
-   "id": "agent:gsd-ui-researcher",
-   "type": "agent",
-   "name": "gsd-ui-researcher",
-   "path": "agents/gsd-ui-researcher.md",
-   "domain": "workflow",
-   "description": "Produces UI-SPEC.md design contract for frontend phases. Reads upstream artifacts, detects design system state, asks only unanswered questions. Spawned by /gsd:ui-phase orchestrator."
-  },
-  {
-   "id": "agent:gsd-user-profiler",
-   "type": "agent",
-   "name": "gsd-user-profiler",
-   "path": "agents/gsd-user-profiler.md",
-   "domain": "workflow",
-   "description": "Analyzes extracted session messages across 8 behavioral dimensions to produce a scored developer profile with confidence levels and evidence. Spawned by profile orchestration workflows."
-  },
-  {
-   "id": "agent:gsd-verifier",
-   "type": "agent",
-   "name": "gsd-verifier",
-   "path": "agents/gsd-verifier.md",
-   "domain": "workflow",
-   "description": "Verifies phase goal achievement through goal-backward analysis. Checks codebase delivers what phase promised, not just that tasks completed. Creates VERIFICATION.md report."
-  },
-  {
-   "id": "agent:i18n-specialist",
-   "type": "agent",
-   "name": "i18n-specialist",
-   "path": "agents/i18n-specialist.md",
-   "domain": "frontend",
-   "description": "Expert internationalization specialist for multi-language support and localization"
   },
   {
    "id": "agent:ios-developer",
@@ -1548,140 +1677,12 @@
    "description": "Expert iOS/iPadOS/tvOS developer specializing in Swift, SwiftUI, and Apple platform development"
   },
   {
-   "id": "agent:kotlin-expert",
-   "type": "agent",
-   "name": "kotlin-expert",
-   "path": "agents/kotlin-expert.md",
-   "domain": "mobile",
-   "description": "Kotlin Multiplatform, Compose Multiplatform, coroutines, Ktor, and JVM ecosystem specialist. Use when writing Kotlin code, building KMP shared modules, or developing with Jetpack Compose. Trigger phr…"
-  },
-  {
-   "id": "agent:macos-developer",
-   "type": "agent",
-   "name": "macos-developer",
-   "path": "agents/macos-developer.md",
-   "domain": "systems",
-   "description": "Expert macOS native developer for AppKit, Catalyst, and macOS-specific features"
-  },
-  {
-   "id": "agent:microservices-architect",
-   "type": "agent",
-   "name": "microservices-architect",
-   "path": "agents/microservices-architect.md",
-   "domain": "backend",
-   "description": "Expert microservices architect for distributed system design, service decomposition, and resilience patterns"
-  },
-  {
-   "id": "agent:migration-specialist",
-   "type": "agent",
-   "name": "migration-specialist",
-   "path": "agents/migration-specialist.md",
-   "domain": "quality",
-   "description": "Framework upgrades, codemod strategies, version migration planning, and legacy modernization specialist. Use when upgrading frameworks, migrating between technologies, or modernizing legacy codebases…"
-  },
-  {
-   "id": "agent:ml-engineer",
-   "type": "agent",
-   "name": "ml-engineer",
-   "path": "agents/ml-engineer.md",
-   "domain": "data-ai",
-   "description": "Expert machine learning engineer for PyTorch, TensorFlow, LLM integration, and ML pipelines"
-  },
-  {
-   "id": "agent:mobile-architect",
-   "type": "agent",
-   "name": "mobile-architect",
-   "path": "agents/mobile-architect.md",
-   "domain": "mobile",
-   "description": "Cross-platform mobile architecture expert for React Native, Flutter, and native development decisions"
-  },
-  {
-   "id": "agent:mobile-release-manager",
-   "type": "agent",
-   "name": "mobile-release-manager",
-   "path": "agents/mobile-release-manager.md",
-   "domain": "mobile",
-   "description": "App store submissions, mobile CI/CD, ASO, code signing, and beta distribution specialist. Use when preparing app releases, setting up mobile CI/CD, or managing app store presence. Trigger phrases: ap…"
-  },
-  {
-   "id": "agent:monetization-expert",
-   "type": "agent",
-   "name": "monetization-expert",
-   "path": "agents/monetization-expert.md",
-   "domain": "business",
-   "description": "Expert in revenue models, pricing strategy, and business monetization"
-  },
-  {
-   "id": "agent:motion-designer",
-   "type": "agent",
-   "name": "motion-designer",
-   "path": "agents/motion-designer.md",
-   "domain": "creative",
-   "description": "Expert motion designer for UI animations, micro-interactions, and motion systems"
-  },
-  {
-   "id": "agent:next-js-expert",
-   "type": "agent",
-   "name": "next-js-expert",
-   "path": "agents/next-js-expert.md",
-   "domain": "frontend",
-   "description": "Next.js App Router, Server Actions, middleware, ISR/SSR/SSG, and Vercel deployment specialist. Use when building Next.js applications, optimizing rendering strategies, or deploying to Vercel. Trigger…"
-  },
-  {
-   "id": "agent:observability-engineer",
-   "type": "agent",
-   "name": "observability-engineer",
-   "path": "agents/observability-engineer.md",
-   "domain": "infra",
-   "description": "OpenTelemetry, Prometheus, Grafana, distributed tracing, SLO design, and alerting specialist. Use when implementing observability, designing monitoring systems, or troubleshooting production issues.…"
-  },
-  {
-   "id": "agent:payment-billing-specialist",
-   "type": "agent",
-   "name": "payment-billing-specialist",
-   "path": "agents/payment-billing-specialist.md",
-   "domain": "backend",
-   "description": "Stripe integration, subscription billing, webhooks, PCI compliance, and tax handling specialist. Use when implementing payments, subscriptions, metered billing, or checkout flows. Trigger phrases: pa…"
-  },
-  {
    "id": "agent:performance-optimizer",
    "type": "agent",
    "name": "performance-optimizer",
    "path": "agents/performance-optimizer.md",
    "domain": "quality",
    "description": "Identifies performance bottlenecks and optimization opportunities. Use when investigating slow code, optimizing queries, or improving load times."
-  },
-  {
-   "id": "agent:product-analytics-specialist",
-   "type": "agent",
-   "name": "product-analytics-specialist",
-   "path": "agents/product-analytics-specialist.md",
-   "domain": "data-ai",
-   "description": "PostHog, Mixpanel, Amplitude event tracking, funnels, cohorts, and A/B testing specialist. Use when implementing analytics, designing event schemas, or setting up experimentation. Trigger phrases: an…"
-  },
-  {
-   "id": "agent:product-manager",
-   "type": "agent",
-   "name": "product-manager",
-   "path": "agents/product-manager.md",
-   "domain": "workflow",
-   "description": "Product requirements, user stories, roadmaps, prioritization frameworks, and sprint planning specialist. Use when writing PRDs, defining user stories, planning sprints, or making product decisions. T…"
-  },
-  {
-   "id": "agent:pwa-specialist",
-   "type": "agent",
-   "name": "pwa-specialist",
-   "path": "agents/pwa-specialist.md",
-   "domain": "backend",
-   "description": "Progressive Web App development, service workers, offline-first architecture, and push notification specialist. Use when building installable web apps, implementing offline functionality, or working…"
-  },
-  {
-   "id": "agent:python-expert",
-   "type": "agent",
-   "name": "python-expert",
-   "path": "agents/python-expert.md",
-   "domain": "systems",
-   "description": "Python best practices, type hints, async patterns, and ecosystem expertise. Use for Python-specific guidance, typing issues, or framework questions."
   },
   {
    "id": "agent:react-expert",
@@ -1692,28 +1693,12 @@
    "description": "React patterns, hooks, state management, and performance optimization. Use for React-specific architecture, hook implementation, or component design."
   },
   {
-   "id": "agent:realtime-specialist",
-   "type": "agent",
-   "name": "realtime-specialist",
-   "path": "agents/realtime-specialist.md",
-   "domain": "backend",
-   "description": "Expert real-time systems specialist for WebSockets, SSE, and live data applications"
-  },
-  {
    "id": "agent:refactoring-specialist",
    "type": "agent",
    "name": "refactoring-specialist",
    "path": "agents/refactoring-specialist.md",
    "domain": "quality",
    "description": "Safe, incremental refactoring with comprehensive test coverage. Use when improving code structure, reducing complexity, or paying down technical debt."
-  },
-  {
-   "id": "agent:rust-expert",
-   "type": "agent",
-   "name": "rust-expert",
-   "path": "agents/rust-expert.md",
-   "domain": "systems",
-   "description": "Rust ownership/borrowing, async Rust, Axum/Actix web frameworks, and WASM specialist. Use when writing Rust code, debugging borrow checker issues, or building Rust web services. Trigger phrases: Rust…"
   },
   {
    "id": "agent:security-auditor",
@@ -1724,92 +1709,12 @@
    "description": "Deep security analysis for OWASP Top 10, auth vulnerabilities, secrets exposure, and dependency risks. Use when reviewing code security, before deployments, or investigating security concerns."
   },
   {
-   "id": "agent:seo-specialist",
-   "type": "agent",
-   "name": "seo-specialist",
-   "path": "agents/seo-specialist.md",
-   "domain": "frontend",
-   "description": "Technical SEO, structured data, Core Web Vitals, meta tags, and Schema.org specialist. Use when optimizing search engine visibility, implementing structured data, or improving web performance for SEO…"
-  },
-  {
-   "id": "agent:serverless-specialist",
-   "type": "agent",
-   "name": "serverless-specialist",
-   "path": "agents/serverless-specialist.md",
-   "domain": "backend",
-   "description": "AWS Lambda, Cloudflare Workers, Vercel Edge Functions, and serverless architecture specialist. Use when building serverless functions, optimizing cold starts, or designing event-driven serverless sys…"
-  },
-  {
-   "id": "agent:startup-advisor",
-   "type": "agent",
-   "name": "startup-advisor",
-   "path": "agents/startup-advisor.md",
-   "domain": "business",
-   "description": "Expert startup advisor for launch strategy, validation, MVP development, and growth"
-  },
-  {
-   "id": "agent:svelte-expert",
-   "type": "agent",
-   "name": "svelte-expert",
-   "path": "agents/svelte-expert.md",
-   "domain": "frontend",
-   "description": "Svelte 5 runes, SvelteKit routing, form actions, and compile-time reactivity specialist. Use when building Svelte or SvelteKit applications, implementing rune-based state management, or working with…"
-  },
-  {
-   "id": "agent:technical-writer",
-   "type": "agent",
-   "name": "technical-writer",
-   "path": "agents/technical-writer.md",
-   "domain": "quality",
-   "description": "Architecture Decision Records, API documentation, migration guides, runbooks, and technical documentation specialist. Use when creating comprehensive documentation, writing ADRs, or building knowledg…"
-  },
-  {
-   "id": "agent:test-generator",
-   "type": "agent",
-   "name": "test-generator",
-   "path": "agents/test-generator.md",
-   "domain": "quality",
-   "description": "Generates comprehensive test suites using TDD patterns. Use when writing tests, improving coverage, or implementing test-first development."
-  },
-  {
    "id": "agent:typescript-expert",
    "type": "agent",
    "name": "typescript-expert",
    "path": "agents/typescript-expert.md",
    "domain": "systems",
    "description": "TypeScript type system mastery including generics, conditional types, and advanced patterns. Use when solving complex type problems or improving type safety."
-  },
-  {
-   "id": "agent:ux-researcher",
-   "type": "agent",
-   "name": "ux-researcher",
-   "path": "agents/ux-researcher.md",
-   "domain": "research",
-   "description": "UX research, usability testing, user interviews, wireframing, and information architecture specialist. Use when planning user research, designing interfaces, conducting heuristic evaluations, or crea…"
-  },
-  {
-   "id": "agent:video-producer",
-   "type": "agent",
-   "name": "video-producer",
-   "path": "agents/video-producer.md",
-   "domain": "creative",
-   "description": "Expert video production specialist for planning, shooting, editing, and delivering video content"
-  },
-  {
-   "id": "agent:vue-nuxt-expert",
-   "type": "agent",
-   "name": "vue-nuxt-expert",
-   "path": "agents/vue-nuxt-expert.md",
-   "domain": "frontend",
-   "description": "Vue 3 Composition API, Nuxt 3 server routes, Pinia state management, and VueUse composables specialist. Use when building Vue or Nuxt applications, implementing Composition API patterns, or working w…"
-  },
-  {
-   "id": "agent:wasm-specialist",
-   "type": "agent",
-   "name": "wasm-specialist",
-   "path": "agents/wasm-specialist.md",
-   "domain": "systems",
-   "description": "WebAssembly, WASI, wasm-bindgen, Emscripten, and cross-language compilation specialist. Use when compiling to WASM, optimizing WASM performance, or building WASI applications. Trigger phrases: WebAss…"
   },
   {
    "id": "command:assemble-team",
@@ -1891,519 +1796,6 @@
    "domain": "workflow",
    "tier": "name-only",
    "description": "Search skillsmp.com for Claude Code skills using their public API."
-  },
-  {
-   "id": "command:gsd:add-backlog",
-   "type": "command",
-   "name": "gsd:add-backlog",
-   "path": "commands/gsd/add-backlog.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "Add an idea to the backlog parking lot (999.x numbering)"
-  },
-  {
-   "id": "command:gsd:add-phase",
-   "type": "command",
-   "name": "gsd:add-phase",
-   "path": "commands/gsd/add-phase.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "Add phase to end of current milestone in roadmap"
-  },
-  {
-   "id": "command:gsd:add-tests",
-   "type": "command",
-   "name": "gsd:add-tests",
-   "path": "commands/gsd/add-tests.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "Generate tests for a completed phase based on UAT criteria and implementation"
-  },
-  {
-   "id": "command:gsd:add-todo",
-   "type": "command",
-   "name": "gsd:add-todo",
-   "path": "commands/gsd/add-todo.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "Capture idea or task as todo from current conversation context"
-  },
-  {
-   "id": "command:gsd:audit-milestone",
-   "type": "command",
-   "name": "gsd:audit-milestone",
-   "path": "commands/gsd/audit-milestone.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "Audit milestone completion against original intent before archiving"
-  },
-  {
-   "id": "command:gsd:audit-uat",
-   "type": "command",
-   "name": "gsd:audit-uat",
-   "path": "commands/gsd/audit-uat.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "Cross-phase audit of all outstanding UAT and verification items"
-  },
-  {
-   "id": "command:gsd:autonomous",
-   "type": "command",
-   "name": "gsd:autonomous",
-   "path": "commands/gsd/autonomous.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "Run all remaining phases autonomously — discuss→plan→execute per phase"
-  },
-  {
-   "id": "command:gsd:check-todos",
-   "type": "command",
-   "name": "gsd:check-todos",
-   "path": "commands/gsd/check-todos.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "List pending todos and select one to work on"
-  },
-  {
-   "id": "command:gsd:cleanup",
-   "type": "command",
-   "name": "gsd:cleanup",
-   "path": "commands/gsd/cleanup.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "Archive accumulated phase directories from completed milestones"
-  },
-  {
-   "id": "command:gsd:complete-milestone",
-   "type": "command",
-   "name": "gsd:complete-milestone",
-   "path": "commands/gsd/complete-milestone.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "Archive completed milestone and prepare for next version"
-  },
-  {
-   "id": "command:gsd:debug",
-   "type": "command",
-   "name": "gsd:debug",
-   "path": "commands/gsd/debug.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "Systematic debugging with persistent state across context resets"
-  },
-  {
-   "id": "command:gsd:discuss-phase",
-   "type": "command",
-   "name": "gsd:discuss-phase",
-   "path": "commands/gsd/discuss-phase.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "Gather phase context through adaptive questioning before planning. Use --auto to skip interactive questions (Claude picks recommended defaults)."
-  },
-  {
-   "id": "command:gsd:do",
-   "type": "command",
-   "name": "gsd:do",
-   "path": "commands/gsd/do.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "Route freeform text to the right GSD command automatically"
-  },
-  {
-   "id": "command:gsd:execute-phase",
-   "type": "command",
-   "name": "gsd:execute-phase",
-   "path": "commands/gsd/execute-phase.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "Execute all plans in a phase with wave-based parallelization"
-  },
-  {
-   "id": "command:gsd:fast",
-   "type": "command",
-   "name": "gsd:fast",
-   "path": "commands/gsd/fast.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "Execute a trivial task inline — no subagents, no planning overhead"
-  },
-  {
-   "id": "command:gsd:forensics",
-   "type": "command",
-   "name": "gsd:forensics",
-   "path": "commands/gsd/forensics.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "Post-mortem investigation for failed GSD workflows — analyzes git history, artifacts, and state to diagnose what went wrong"
-  },
-  {
-   "id": "command:gsd:health",
-   "type": "command",
-   "name": "gsd:health",
-   "path": "commands/gsd/health.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "Diagnose planning directory health and optionally repair issues"
-  },
-  {
-   "id": "command:gsd:help",
-   "type": "command",
-   "name": "gsd:help",
-   "path": "commands/gsd/help.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "Show available GSD commands and usage guide"
-  },
-  {
-   "id": "command:gsd:insert-phase",
-   "type": "command",
-   "name": "gsd:insert-phase",
-   "path": "commands/gsd/insert-phase.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "Insert urgent work as decimal phase (e.g., 72.1) between existing phases"
-  },
-  {
-   "id": "command:gsd:join-discord",
-   "type": "command",
-   "name": "gsd:join-discord",
-   "path": "commands/gsd/join-discord.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "Join the GSD Discord community"
-  },
-  {
-   "id": "command:gsd:list-phase-assumptions",
-   "type": "command",
-   "name": "gsd:list-phase-assumptions",
-   "path": "commands/gsd/list-phase-assumptions.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "Surface Claude's assumptions about a phase approach before planning"
-  },
-  {
-   "id": "command:gsd:list-workspaces",
-   "type": "command",
-   "name": "gsd:list-workspaces",
-   "path": "commands/gsd/list-workspaces.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "List active GSD workspaces and their status"
-  },
-  {
-   "id": "command:gsd:manager",
-   "type": "command",
-   "name": "gsd:manager",
-   "path": "commands/gsd/manager.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "Interactive command center for managing multiple phases from one terminal"
-  },
-  {
-   "id": "command:gsd:map-codebase",
-   "type": "command",
-   "name": "gsd:map-codebase",
-   "path": "commands/gsd/map-codebase.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "Analyze codebase with parallel mapper agents to produce .planning/codebase/ documents"
-  },
-  {
-   "id": "command:gsd:milestone-summary",
-   "type": "command",
-   "name": "gsd:milestone-summary",
-   "path": "commands/gsd/milestone-summary.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "Generate a comprehensive project summary from milestone artifacts for team onboarding and review"
-  },
-  {
-   "id": "command:gsd:new-milestone",
-   "type": "command",
-   "name": "gsd:new-milestone",
-   "path": "commands/gsd/new-milestone.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "Start a new milestone cycle — update PROJECT.md and route to requirements"
-  },
-  {
-   "id": "command:gsd:new-project",
-   "type": "command",
-   "name": "gsd:new-project",
-   "path": "commands/gsd/new-project.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "Initialize a new project with deep context gathering and PROJECT.md"
-  },
-  {
-   "id": "command:gsd:new-workspace",
-   "type": "command",
-   "name": "gsd:new-workspace",
-   "path": "commands/gsd/new-workspace.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "Create an isolated workspace with repo copies and independent .planning/"
-  },
-  {
-   "id": "command:gsd:next",
-   "type": "command",
-   "name": "gsd:next",
-   "path": "commands/gsd/next.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "Automatically advance to the next logical step in the GSD workflow"
-  },
-  {
-   "id": "command:gsd:note",
-   "type": "command",
-   "name": "gsd:note",
-   "path": "commands/gsd/note.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "Zero-friction idea capture. Append, list, or promote notes to todos."
-  },
-  {
-   "id": "command:gsd:pause-work",
-   "type": "command",
-   "name": "gsd:pause-work",
-   "path": "commands/gsd/pause-work.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "Create context handoff when pausing work mid-phase"
-  },
-  {
-   "id": "command:gsd:plan-milestone-gaps",
-   "type": "command",
-   "name": "gsd:plan-milestone-gaps",
-   "path": "commands/gsd/plan-milestone-gaps.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "Create phases to close all gaps identified by milestone audit"
-  },
-  {
-   "id": "command:gsd:plan-phase",
-   "type": "command",
-   "name": "gsd:plan-phase",
-   "path": "commands/gsd/plan-phase.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "Create detailed phase plan (PLAN.md) with verification loop"
-  },
-  {
-   "id": "command:gsd:plant-seed",
-   "type": "command",
-   "name": "gsd:plant-seed",
-   "path": "commands/gsd/plant-seed.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "Capture a forward-looking idea with trigger conditions — surfaces automatically at the right milestone"
-  },
-  {
-   "id": "command:gsd:pr-branch",
-   "type": "command",
-   "name": "gsd:pr-branch",
-   "path": "commands/gsd/pr-branch.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "Create a clean PR branch by filtering out .planning/ commits — ready for code review"
-  },
-  {
-   "id": "command:gsd:profile-user",
-   "type": "command",
-   "name": "gsd:profile-user",
-   "path": "commands/gsd/profile-user.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "Generate developer behavioral profile and create Claude-discoverable artifacts"
-  },
-  {
-   "id": "command:gsd:progress",
-   "type": "command",
-   "name": "gsd:progress",
-   "path": "commands/gsd/progress.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "Check project progress, show context, and route to next action (execute or plan)"
-  },
-  {
-   "id": "command:gsd:quick",
-   "type": "command",
-   "name": "gsd:quick",
-   "path": "commands/gsd/quick.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "Execute a quick task with GSD guarantees (atomic commits, state tracking) but skip optional agents"
-  },
-  {
-   "id": "command:gsd:reapply-patches",
-   "type": "command",
-   "name": "gsd:reapply-patches",
-   "path": "commands/gsd/reapply-patches.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "Reapply local modifications after a GSD update"
-  },
-  {
-   "id": "command:gsd:remove-phase",
-   "type": "command",
-   "name": "gsd:remove-phase",
-   "path": "commands/gsd/remove-phase.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "Remove a future phase from roadmap and renumber subsequent phases"
-  },
-  {
-   "id": "command:gsd:remove-workspace",
-   "type": "command",
-   "name": "gsd:remove-workspace",
-   "path": "commands/gsd/remove-workspace.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "Remove a GSD workspace and clean up worktrees"
-  },
-  {
-   "id": "command:gsd:research-phase",
-   "type": "command",
-   "name": "gsd:research-phase",
-   "path": "commands/gsd/research-phase.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "Research how to implement a phase (standalone - usually use /gsd:plan-phase instead)"
-  },
-  {
-   "id": "command:gsd:resume-work",
-   "type": "command",
-   "name": "gsd:resume-work",
-   "path": "commands/gsd/resume-work.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "Resume work from previous session with full context restoration"
-  },
-  {
-   "id": "command:gsd:review-backlog",
-   "type": "command",
-   "name": "gsd:review-backlog",
-   "path": "commands/gsd/review-backlog.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "Review and promote backlog items to active milestone"
-  },
-  {
-   "id": "command:gsd:review",
-   "type": "command",
-   "name": "gsd:review",
-   "path": "commands/gsd/review.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "Request cross-AI peer review of phase plans from external AI CLIs"
-  },
-  {
-   "id": "command:gsd:session-report",
-   "type": "command",
-   "name": "gsd:session-report",
-   "path": "commands/gsd/session-report.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "Generate a session report with token usage estimates, work summary, and outcomes"
-  },
-  {
-   "id": "command:gsd:set-profile",
-   "type": "command",
-   "name": "gsd:set-profile",
-   "path": "commands/gsd/set-profile.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "Switch model profile for GSD agents (quality/balanced/budget/inherit)"
-  },
-  {
-   "id": "command:gsd:settings",
-   "type": "command",
-   "name": "gsd:settings",
-   "path": "commands/gsd/settings.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "Configure GSD workflow toggles and model profile"
-  },
-  {
-   "id": "command:gsd:ship",
-   "type": "command",
-   "name": "gsd:ship",
-   "path": "commands/gsd/ship.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "Create PR, run review, and prepare for merge after verification passes"
-  },
-  {
-   "id": "command:gsd:stats",
-   "type": "command",
-   "name": "gsd:stats",
-   "path": "commands/gsd/stats.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "Display project statistics — phases, plans, requirements, git metrics, and timeline"
-  },
-  {
-   "id": "command:gsd:thread",
-   "type": "command",
-   "name": "gsd:thread",
-   "path": "commands/gsd/thread.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "Manage persistent context threads for cross-session work"
-  },
-  {
-   "id": "command:gsd:ui-phase",
-   "type": "command",
-   "name": "gsd:ui-phase",
-   "path": "commands/gsd/ui-phase.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "Generate UI design contract (UI-SPEC.md) for frontend phases"
-  },
-  {
-   "id": "command:gsd:ui-review",
-   "type": "command",
-   "name": "gsd:ui-review",
-   "path": "commands/gsd/ui-review.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "Retroactive 6-pillar visual audit of implemented frontend code"
-  },
-  {
-   "id": "command:gsd:update",
-   "type": "command",
-   "name": "gsd:update",
-   "path": "commands/gsd/update.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "Update GSD to latest version with changelog display"
-  },
-  {
-   "id": "command:gsd:validate-phase",
-   "type": "command",
-   "name": "gsd:validate-phase",
-   "path": "commands/gsd/validate-phase.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "Retroactively audit and fill Nyquist validation gaps for a completed phase"
-  },
-  {
-   "id": "command:gsd:verify-work",
-   "type": "command",
-   "name": "gsd:verify-work",
-   "path": "commands/gsd/verify-work.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "Validate built features through conversational UAT"
-  },
-  {
-   "id": "command:gsd:workstreams",
-   "type": "command",
-   "name": "gsd:workstreams",
-   "path": "commands/gsd/workstreams.md",
-   "domain": "workflow",
-   "tier": "name-only",
-   "description": "Manage parallel workstreams — list, create, switch, status, progress, complete, and resume"
   },
   {
    "id": "command:handoff",
@@ -2529,7 +1921,7 @@
    "path": "commands/skill-finder.md",
    "domain": "workflow",
    "tier": "core",
-   "description": "AI-powered skill recommendation based on your problem description - finds optimal resources from 127 local skills + 82 marketplaces (10,900+ skills)"
+   "description": "AI-powered skill recommendation based on your problem description - finds optimal resources from 180 local skills + 82 marketplaces (10,900+ skills)"
   },
   {
    "id": "command:standardize-claude-md",
@@ -3330,9 +2722,104 @@
  ],
  "edges": [
   {
-   "from": "skill:accessibility-a11y",
-   "to": "agent:accessibility-expert",
+   "from": "skill:agent-android-developer",
+   "to": "agent:ios-developer",
    "rel": "pairs-with"
+  },
+  {
+   "from": "skill:agent-cloud-architect",
+   "to": "agent:devops-engineer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:agent-cloud-architect",
+   "to": "agent:architecture-analyst",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:agent-cpp-expert",
+   "to": "rule:cpp",
+   "rel": "rules"
+  },
+  {
+   "from": "skill:agent-data-engineer",
+   "to": "agent:devops-engineer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:agent-devsecops-engineer",
+   "to": "agent:security-auditor",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:agent-devsecops-engineer",
+   "to": "doc:checklists/security-hardening",
+   "rel": "reference"
+  },
+  {
+   "from": "skill:agent-django-fastapi-expert",
+   "to": "doc:stacks/django-fastapi",
+   "rel": "reference"
+  },
+  {
+   "from": "skill:agent-documentation-writer",
+   "to": "agent:deep-code-reviewer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:agent-documentation-writer",
+   "to": "agent:refactoring-specialist",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:agent-flutter-developer",
+   "to": "agent:ios-developer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:agent-flutter-developer",
+   "to": "rule:flutter-dart",
+   "rel": "rules"
+  },
+  {
+   "from": "skill:agent-flutter-developer",
+   "to": "doc:stacks/flutter-dart",
+   "rel": "reference"
+  },
+  {
+   "from": "skill:agent-mobile-architect",
+   "to": "doc:stacks/react-native-expo",
+   "rel": "reference"
+  },
+  {
+   "from": "skill:agent-mobile-release-manager",
+   "to": "doc:checklists/mobile-app-deployment",
+   "rel": "reference"
+  },
+  {
+   "from": "skill:agent-observability-engineer",
+   "to": "agent:devops-engineer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:agent-observability-engineer",
+   "to": "doc:checklists/monitoring-alerting-design",
+   "rel": "reference"
+  },
+  {
+   "from": "skill:agent-seo-specialist",
+   "to": "agent:performance-optimizer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:agent-svelte-expert",
+   "to": "agent:react-expert",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:agent-svelte-expert",
+   "to": "doc:stacks/svelte-sveltekit",
+   "rel": "reference"
   },
   {
    "from": "skill:agent-teams",
@@ -3340,54 +2827,24 @@
    "rel": "reference"
   },
   {
-   "from": "skill:ai-ml-development",
-   "to": "agent:ml-engineer",
+   "from": "skill:agent-technical-writer",
+   "to": "agent:refactoring-specialist",
    "rel": "pairs-with"
   },
   {
-   "from": "skill:ai-ml-development",
-   "to": "agent:data-engineer",
+   "from": "skill:agent-test-generator",
+   "to": "agent:refactoring-specialist",
    "rel": "pairs-with"
   },
   {
-   "from": "skill:ai-ml-development",
-   "to": "agent:flutter-developer",
+   "from": "skill:agent-vue-nuxt-expert",
+   "to": "agent:react-expert",
    "rel": "pairs-with"
   },
   {
-   "from": "skill:android-development",
-   "to": "agent:android-developer",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:android-development",
-   "to": "agent:kotlin-expert",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:android-development",
-   "to": "agent:flutter-developer",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:api-design",
-   "to": "agent:api-designer",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:api-design",
-   "to": "agent:api-integration-specialist",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:api-design",
-   "to": "agent:django-fastapi-expert",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:application-security",
-   "to": "agent:devsecops-engineer",
-   "rel": "pairs-with"
+   "from": "skill:agent-vue-nuxt-expert",
+   "to": "doc:stacks/vue-nuxt",
+   "rel": "reference"
   },
   {
    "from": "skill:application-security",
@@ -3400,103 +2857,8 @@
    "rel": "reference"
   },
   {
-   "from": "skill:ar-vr-xr",
-   "to": "agent:cli-developer",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:audio-production",
-   "to": "agent:audio-engineer",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:authentication-patterns",
-   "to": "agent:auth-specialist",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:blockchain-web3",
-   "to": "agent:blockchain-developer",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:blockchain-web3",
-   "to": "agent:cpp-expert",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:blockchain-web3",
-   "to": "agent:rust-expert",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:brand-identity",
-   "to": "agent:brand-strategist",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:brand-identity",
-   "to": "agent:graphic-designer",
-   "rel": "pairs-with"
-  },
-  {
    "from": "skill:business-strategy",
    "to": "agent:architecture-analyst",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:business-strategy",
-   "to": "agent:monetization-expert",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:business-strategy",
-   "to": "agent:product-manager",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:career-path-planner",
-   "to": "agent:gsd-planner",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:career-path-planner",
-   "to": "agent:gsd-plan-checker",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:case-interview-practice",
-   "to": "agent:ux-researcher",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:codebase-documenter",
-   "to": "agent:documentation-writer",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:codebase-documenter",
-   "to": "agent:technical-writer",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:codebase-documenter",
-   "to": "agent:code-explainer",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:compliance-engineering",
-   "to": "agent:compliance-engineer",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:compliance-engineering",
-   "to": "agent:data-engineer",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:compliance-engineering",
-   "to": "agent:devsecops-engineer",
    "rel": "pairs-with"
   },
   {
@@ -3510,68 +2872,8 @@
    "rel": "pairs-with"
   },
   {
-   "from": "skill:customer-persona-builder",
-   "to": "agent:ux-researcher",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:customer-success",
-   "to": "agent:observability-engineer",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:customer-success",
-   "to": "agent:event-driven-architect",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:customer-success",
-   "to": "agent:go-expert",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:data-engineering",
-   "to": "agent:data-engineer",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:data-engineering",
-   "to": "agent:event-driven-architect",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:data-engineering",
-   "to": "agent:product-analytics-specialist",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:data-science",
-   "to": "agent:data-engineer",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:data-science",
-   "to": "agent:ml-engineer",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:data-science",
-   "to": "agent:product-analytics-specialist",
-   "rel": "pairs-with"
-  },
-  {
    "from": "skill:database-expert",
-   "to": "agent:database-expert",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:database-expert",
-   "to": "agent:seo-specialist",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:database-expert",
-   "to": "agent:accessibility-expert",
+   "to": "agent:performance-optimizer",
    "rel": "pairs-with"
   },
   {
@@ -3585,118 +2887,13 @@
    "rel": "pairs-with"
   },
   {
-   "from": "skill:devex-sdk-design",
-   "to": "agent:api-integration-specialist",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:devex-sdk-design",
-   "to": "agent:cli-developer",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:devex-sdk-design",
-   "to": "agent:api-designer",
-   "rel": "pairs-with"
-  },
-  {
    "from": "skill:devops-cloud",
    "to": "agent:devops-engineer",
    "rel": "pairs-with"
   },
   {
-   "from": "skill:devops-cloud",
-   "to": "agent:cloud-architect",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:edge-computing",
-   "to": "agent:serverless-specialist",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:edge-computing",
-   "to": "agent:next-js-expert",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:edge-computing",
-   "to": "agent:django-fastapi-expert",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:electron-desktop",
-   "to": "agent:flutter-developer",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:electron-desktop",
-   "to": "agent:desktop-developer",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:electron-desktop",
-   "to": "agent:macos-developer",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:email-systems",
-   "to": "agent:email-specialist",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:email-systems",
-   "to": "agent:event-driven-architect",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:email-systems",
-   "to": "agent:database-expert",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:embedded-iot",
-   "to": "agent:embedded-developer",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:embedded-iot",
-   "to": "agent:cpp-expert",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:embedded-iot",
-   "to": "agent:blockchain-developer",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:event-driven-architecture",
-   "to": "agent:event-driven-architect",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:event-driven-architecture",
-   "to": "agent:serverless-specialist",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:event-driven-architecture",
-   "to": "agent:data-engineer",
-   "rel": "pairs-with"
-  },
-  {
    "from": "skill:flutter-development",
-   "to": "agent:flutter-developer",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:flutter-development",
-   "to": "agent:mobile-architect",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:flutter-development",
-   "to": "agent:pwa-specialist",
+   "to": "agent:ios-developer",
    "rel": "pairs-with"
   },
   {
@@ -3708,36 +2905,6 @@
    "from": "skill:flutter-development",
    "to": "doc:stacks/flutter-dart",
    "rel": "reference"
-  },
-  {
-   "from": "skill:frontend-enhancer",
-   "to": "agent:next-js-expert",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:frontend-enhancer",
-   "to": "agent:seo-specialist",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:frontend-enhancer",
-   "to": "agent:svelte-expert",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:game-development",
-   "to": "agent:game-developer",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:game-development",
-   "to": "agent:cli-developer",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:game-development",
-   "to": "agent:embedded-developer",
-   "rel": "pairs-with"
   },
   {
    "from": "skill:generic-code-reviewer",
@@ -3765,31 +2932,6 @@
    "rel": "reference"
   },
   {
-   "from": "skill:generic-design-system",
-   "to": "agent:api-designer",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:generic-design-system",
-   "to": "agent:gsd-project-researcher",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:generic-design-system",
-   "to": "agent:gsd-research-synthesizer",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:generic-feature-developer",
-   "to": "agent:gsd-project-researcher",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:generic-feature-developer",
-   "to": "agent:product-manager",
-   "rel": "pairs-with"
-  },
-  {
    "from": "skill:generic-feature-developer",
    "to": "doc:stacks/fullstack-nextjs-nestjs",
    "rel": "reference"
@@ -3806,7 +2948,7 @@
   },
   {
    "from": "skill:generic-fullstack-code-reviewer",
-   "to": "agent:accessibility-expert",
+   "to": "agent:architecture-analyst",
    "rel": "pairs-with"
   },
   {
@@ -3816,23 +2958,8 @@
   },
   {
    "from": "skill:generic-fullstack-design-system",
-   "to": "agent:accessibility-expert",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:generic-fullstack-design-system",
    "to": "doc:stacks/fullstack-nextjs-nestjs",
    "rel": "reference"
-  },
-  {
-   "from": "skill:generic-fullstack-feature-developer",
-   "to": "agent:database-expert",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:generic-fullstack-feature-developer",
-   "to": "agent:next-js-expert",
-   "rel": "pairs-with"
   },
   {
    "from": "skill:generic-fullstack-feature-developer",
@@ -3851,17 +2978,7 @@
   },
   {
    "from": "skill:generic-fullstack-ux-designer",
-   "to": "agent:accessibility-expert",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:generic-fullstack-ux-designer",
-   "to": "agent:graphic-designer",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:generic-fullstack-ux-designer",
-   "to": "agent:seo-specialist",
+   "to": "agent:typescript-expert",
    "rel": "pairs-with"
   },
   {
@@ -3881,22 +2998,12 @@
   },
   {
    "from": "skill:generic-react-code-reviewer",
-   "to": "agent:accessibility-expert",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:generic-react-design-system",
-   "to": "agent:accessibility-expert",
+   "to": "agent:performance-optimizer",
    "rel": "pairs-with"
   },
   {
    "from": "skill:generic-react-design-system",
    "to": "agent:react-expert",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:generic-react-feature-developer",
-   "to": "agent:next-js-expert",
    "rel": "pairs-with"
   },
   {
@@ -3916,17 +3023,12 @@
   },
   {
    "from": "skill:generic-react-ux-designer",
-   "to": "agent:accessibility-expert",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:generic-react-ux-designer",
-   "to": "agent:graphic-designer",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:generic-react-ux-designer",
    "to": "agent:react-expert",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:generic-react-ux-designer",
+   "to": "agent:typescript-expert",
    "rel": "pairs-with"
   },
   {
@@ -3956,11 +3058,6 @@
   },
   {
    "from": "skill:generic-static-feature-developer",
-   "to": "agent:product-manager",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:generic-static-feature-developer",
    "to": "doc:checklists/static-sites",
    "rel": "reference"
   },
@@ -3968,16 +3065,6 @@
    "from": "skill:generic-static-feature-developer",
    "to": "doc:workflows/agent-teams",
    "rel": "reference"
-  },
-  {
-   "from": "skill:generic-static-ux-designer",
-   "to": "agent:accessibility-expert",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:generic-static-ux-designer",
-   "to": "agent:graphic-designer",
-   "rel": "pairs-with"
   },
   {
    "from": "skill:generic-static-ux-designer",
@@ -3990,78 +3077,8 @@
    "rel": "reference"
   },
   {
-   "from": "skill:generic-ux-designer",
-   "to": "agent:accessibility-expert",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:generic-ux-designer",
-   "to": "agent:ux-researcher",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:generic-ux-designer",
-   "to": "agent:api-designer",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:graphic-design",
-   "to": "agent:graphic-designer",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:graphic-design",
-   "to": "agent:api-designer",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:graphql-expert",
-   "to": "agent:database-expert",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:graphql-expert",
-   "to": "agent:api-designer",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:graphql-expert",
-   "to": "agent:api-integration-specialist",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:growth-engineering",
-   "to": "agent:product-analytics-specialist",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:growth-engineering",
-   "to": "agent:cloud-architect",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:growth-engineering",
-   "to": "agent:data-engineer",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:i18n-localization",
-   "to": "agent:i18n-specialist",
-   "rel": "pairs-with"
-  },
-  {
    "from": "skill:ios-development",
    "to": "agent:ios-developer",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:ios-development",
-   "to": "agent:flutter-developer",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:ios-development",
-   "to": "agent:pwa-specialist",
    "rel": "pairs-with"
   },
   {
@@ -4071,27 +3088,7 @@
   },
   {
    "from": "skill:kotlin-multiplatform",
-   "to": "agent:kotlin-expert",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:kotlin-multiplatform",
-   "to": "agent:android-developer",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:kotlin-multiplatform",
-   "to": "agent:flutter-developer",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:learning-gap-analyzer",
-   "to": "agent:ux-researcher",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:legal-compliance",
-   "to": "agent:compliance-engineer",
+   "to": "agent:ios-developer",
    "rel": "pairs-with"
   },
   {
@@ -4105,56 +3102,6 @@
    "rel": "pairs-with"
   },
   {
-   "from": "skill:low-code-platforms",
-   "to": "agent:api-integration-specialist",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:low-code-platforms",
-   "to": "agent:cli-developer",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:macos-native",
-   "to": "agent:macos-developer",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:macos-native",
-   "to": "agent:flutter-developer",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:macos-native",
-   "to": "agent:browser-extension-developer",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:marketing",
-   "to": "agent:database-expert",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:microservices-architecture",
-   "to": "agent:event-driven-architect",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:microservices-architecture",
-   "to": "agent:email-specialist",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:microservices-architecture",
-   "to": "agent:microservices-architect",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:mobile-cicd",
-   "to": "agent:mobile-release-manager",
-   "rel": "pairs-with"
-  },
-  {
    "from": "skill:mobile-cicd",
    "to": "agent:devops-engineer",
    "rel": "pairs-with"
@@ -4165,48 +3112,13 @@
    "rel": "reference"
   },
   {
-   "from": "skill:monetization-strategy",
-   "to": "agent:monetization-expert",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:monitoring-observability",
-   "to": "agent:observability-engineer",
-   "rel": "pairs-with"
-  },
-  {
    "from": "skill:monitoring-observability",
    "to": "doc:checklists/monitoring-alerting-design",
    "rel": "reference"
   },
   {
-   "from": "skill:onboarding-guide-creator",
-   "to": "agent:technical-writer",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:operations",
-   "to": "agent:database-expert",
-   "rel": "pairs-with"
-  },
-  {
    "from": "skill:operations",
    "to": "agent:performance-optimizer",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:options-comparator",
-   "to": "agent:gsd-advisor-researcher",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:payment-integration",
-   "to": "agent:payment-billing-specialist",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:payment-integration",
-   "to": "agent:compliance-engineer",
    "rel": "pairs-with"
   },
   {
@@ -4221,58 +3133,8 @@
   },
   {
    "from": "skill:performance-engineering",
-   "to": "agent:seo-specialist",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:performance-engineering",
    "to": "doc:checklists/performance-optimization",
    "rel": "reference"
-  },
-  {
-   "from": "skill:podcast-producer",
-   "to": "agent:video-producer",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:product-analytics",
-   "to": "agent:product-analytics-specialist",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:product-management",
-   "to": "agent:product-manager",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:product-management",
-   "to": "agent:product-analytics-specialist",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:product-management",
-   "to": "agent:gsd-project-researcher",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:pwa-development",
-   "to": "agent:pwa-specialist",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:pwa-development",
-   "to": "agent:browser-extension-developer",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:pwa-development",
-   "to": "agent:cli-developer",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:rd-management",
-   "to": "agent:ux-researcher",
-   "rel": "pairs-with"
   },
   {
    "from": "skill:rd-management",
@@ -4281,17 +3143,7 @@
   },
   {
    "from": "skill:react-native",
-   "to": "agent:flutter-developer",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:react-native",
-   "to": "agent:mobile-architect",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:react-native",
-   "to": "agent:database-expert",
+   "to": "agent:ios-developer",
    "rel": "pairs-with"
   },
   {
@@ -4300,93 +3152,13 @@
    "rel": "reference"
   },
   {
-   "from": "skill:recipe-card-creator",
-   "to": "agent:ux-researcher",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:research-presenter",
-   "to": "agent:ux-researcher",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:risk-management",
-   "to": "agent:api-integration-specialist",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:risk-management",
-   "to": "agent:monetization-expert",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:sales",
-   "to": "agent:data-engineer",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:sales",
-   "to": "agent:monetization-expert",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:security",
-   "to": "agent:ux-researcher",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:seo-analytics-auditor",
-   "to": "agent:seo-specialist",
-   "rel": "pairs-with"
-  },
-  {
    "from": "skill:serverless-development",
-   "to": "agent:serverless-specialist",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:serverless-development",
-   "to": "agent:next-js-expert",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:serverless-development",
-   "to": "agent:django-fastapi-expert",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:startup-launch",
-   "to": "agent:startup-advisor",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:status-report-generator",
-   "to": "agent:gsd-project-researcher",
+   "to": "agent:devops-engineer",
    "rel": "pairs-with"
   },
   {
    "from": "skill:supply-chain-optimizer",
    "to": "agent:performance-optimizer",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:sustainability-esg",
-   "to": "agent:api-integration-specialist",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:svelte-development",
-   "to": "agent:svelte-expert",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:svelte-development",
-   "to": "agent:vue-nuxt-expert",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:svelte-development",
-   "to": "agent:django-fastapi-expert",
    "rel": "pairs-with"
   },
   {
@@ -4400,33 +3172,8 @@
    "rel": "reference"
   },
   {
-   "from": "skill:tauri-desktop",
-   "to": "agent:flutter-developer",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:tauri-desktop",
-   "to": "agent:rust-expert",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:tauri-desktop",
-   "to": "agent:blockchain-developer",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:tdd-workflow",
-   "to": "agent:test-generator",
-   "rel": "pairs-with"
-  },
-  {
    "from": "skill:tdd-workflow",
    "to": "agent:refactoring-specialist",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:tdd-workflow",
-   "to": "agent:e2e-test-specialist",
    "rel": "pairs-with"
   },
   {
@@ -4436,83 +3183,38 @@
   },
   {
    "from": "skill:tech-debt-analyzer",
-   "to": "agent:documentation-writer",
+   "to": "agent:refactoring-specialist",
    "rel": "pairs-with"
   },
   {
    "from": "skill:tech-debt-analyzer",
-   "to": "agent:technical-writer",
+   "to": "agent:security-auditor",
    "rel": "pairs-with"
   },
   {
    "from": "skill:test-specialist",
-   "to": "agent:test-generator",
+   "to": "agent:debugging-specialist",
    "rel": "pairs-with"
   },
   {
    "from": "skill:test-specialist",
-   "to": "agent:e2e-test-specialist",
+   "to": "agent:deep-code-reviewer",
    "rel": "pairs-with"
   },
   {
    "from": "skill:test-specialist",
-   "to": "agent:cpp-expert",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:toolkit-router",
-   "to": "agent:gsd-project-researcher",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:travel-planner",
-   "to": "agent:ux-researcher",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:ui-animation",
-   "to": "agent:motion-designer",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:video-production",
-   "to": "agent:video-producer",
+   "to": "agent:performance-optimizer",
    "rel": "pairs-with"
   },
   {
    "from": "skill:vue-development",
-   "to": "agent:vue-nuxt-expert",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:vue-development",
-   "to": "agent:svelte-expert",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:vue-development",
-   "to": "agent:flutter-developer",
+   "to": "agent:react-expert",
    "rel": "pairs-with"
   },
   {
    "from": "skill:vue-development",
    "to": "doc:stacks/vue-nuxt",
    "rel": "reference"
-  },
-  {
-   "from": "skill:websockets-realtime",
-   "to": "agent:realtime-specialist",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:websockets-realtime",
-   "to": "agent:data-engineer",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:websockets-realtime",
-   "to": "agent:svelte-expert",
-   "rel": "pairs-with"
   }
  ]
 }

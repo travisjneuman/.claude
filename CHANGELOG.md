@@ -2,6 +2,15 @@
 
 All notable changes to the Ultimate Claude Code Toolkit.
 
+## [3.2.0] - September 29, 2026
+
+### Context (plan B)
+- **Agents:** 10 core agents stay always-listed (reviewer, debugger, security, architecture, performance, refactoring, React, TypeScript, iOS, DevOps); the other 58 are now `skills/agent-<name>` skills that run in their own subagent (`context: fork`) and are listed by name only. Nothing removed. Core agents inherit the session model (per-agent model pins dropped).
+- **GSD:** the vendored copy of the archived `get-shit-done` (133 files, 57 commands, 18 agents, 5 hooks) is removed. GSD now comes from the maintained `gsd-core` plugin, registered but off by default because it adds ~10.7k tokens and 7 hooks to every session; enable it per project with `/plugin install gsd-core@gsd-core --scope project`.
+- **Document skills:** removed Anthropic's docx/pdf/pptx/xlsx copies (their license is "All rights reserved", so they shouldn't be redistributed in a public repo). The same skills are available as `anthropic-skills:*` (claude.ai-synced) and references point there.
+- **Budgets:** `scripts/check-budgets.mjs` runs in pre-commit and fails when always-on context (agent descriptions, core descriptions, name-only list, CLAUDE.md, always-on rules) exceeds its limits.
+- Always-on toolkit context dropped from ~52k to ~11k characters.
+
 ## [3.1.0] - September 29, 2026
 
 ### Settings

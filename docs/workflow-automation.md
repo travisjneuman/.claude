@@ -554,7 +554,7 @@ tasks/task1.md
 
 ```
 Simple              Moderate            Multi-Stage         Multi-Phase (GSD)
-(Direct)            (/create-prompt)    (/create-meta)      (/gsd:*)
+(Direct)            (/create-prompt)    (/create-meta)      (/gsd-core:*)
    │                     │                   │                   │
 <30 min              30min-2hr            2-8 hours          Days/Weeks
 1-2 files            3-10 files           10+ files          Phases
@@ -613,14 +613,14 @@ No state             Stateless            Stateless          STATE.md (persisten
 - Complex system with dependencies
 - Anything needing persistent context
 
-**How:** `/start-task new project for my app` or `/gsd:new-project`
+**How:** `/start-task new project for my app` or `/gsd-core:new-project`
 
 ## Automatic Detection
 
 The `/start-task` command automatically detects:
 
 1. **GSD Project:** Checks for `.planning/STATE.md`
-   - If found + no task → routes to `/gsd:progress`
+   - If found + no task → routes to `/gsd-core:progress`
    - If found + project-related task → routes to GSD commands
 
 2. **Complexity Signals:**
@@ -635,7 +635,7 @@ The `/start-task` command automatically detects:
 If during `/create-prompt` you realize scope is larger:
 
 1. Complete current prompt if it provides value
-2. Run `/gsd:new-project` to initialize
+2. Run `/gsd-core:new-project` to initialize
 3. Import insights from prompt work into PROJECT.md
 
 ### De-escalating from GSD to Simple
@@ -644,7 +644,7 @@ If GSD project turns out simpler than expected:
 
 1. Keep `.planning/` for documentation
 2. Execute remaining work directly
-3. Run `/gsd:complete-milestone` when done
+3. Run `/gsd-core:complete-milestone` when done
 
 ## Quick Reference Table
 
@@ -653,8 +653,8 @@ If GSD project turns out simpler than expected:
 | "Fix typo"            | Direct   | Just do it                     |
 | "Refactor X"          | Prompt   | `/start-task refactor X`       |
 | "Research then build" | Meta     | `/start-task research then...` |
-| "New project"         | GSD      | `/gsd:new-project`             |
-| "Where was I"         | GSD      | `/gsd:progress`                |
+| "New project"         | GSD      | `/gsd-core:new-project`             |
+| "Where was I"         | GSD      | `/gsd-core:progress`                |
 | Multi-component task  | GSD      | Auto-detected                  |
 
 ---

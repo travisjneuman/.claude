@@ -11,7 +11,6 @@ tools:
   - Write
   - Edit
   - Bash
-model: sonnet
 ---
 
 # DevOps Engineer Agent

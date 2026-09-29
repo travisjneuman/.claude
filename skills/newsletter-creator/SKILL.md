@@ -384,6 +384,6 @@ RECURRING SECTIONS:
 ## See Also
 
 - [Marketing](../marketing/SKILL.md)
-- [Document Skills: DOCX](../document-skills/docx/SKILL.md)
+- `anthropic-skills:docx` (Anthropic document skill)
 - [Email Systems](../email-systems/SKILL.md)
 - [Product Management](../product-management/SKILL.md)

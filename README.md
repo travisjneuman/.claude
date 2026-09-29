@@ -14,10 +14,10 @@
 [![License](https://img.shields.io/badge/MIT-blue?style=flat-square&logo=opensourceinitiative&logoColor=white)](./LICENSE)
 [![Use Template](https://img.shields.io/badge/Use_This_Template-2ea44f?style=flat-square&logo=github&logoColor=white)](https://github.com/travisjneuman/.claude/generate)
 
-[![Skills](https://img.shields.io/badge/Skills-127-10b981?style=flat-square)](./skills/MASTER_INDEX.md)
-[![Agents](https://img.shields.io/badge/Agents-86-f59e0b?style=flat-square)](./agents/README.md)
+[![Skills](https://img.shields.io/badge/Skills-180-10b981?style=flat-square)](./skills/MASTER_INDEX.md)
+[![Agents](https://img.shields.io/badge/Agents-10-f59e0b?style=flat-square)](./agents/README.md)
 [![Commands](https://img.shields.io/badge/Commands-29-a855f7?style=flat-square)](./docs/COMMANDS.md)
-[![GSD](https://img.shields.io/badge/GSD-v1.29-ef4444?style=flat-square)](https://github.com/gsd-build/get-shit-done)
+[![GSD](https://img.shields.io/badge/GSD-v1.29-ef4444?style=flat-square)](https://github.com/open-gsd/gsd-core)
 [![Repos](https://img.shields.io/badge/Marketplace_Repos-82-3b82f6?style=flat-square)](./plugins/marketplaces/)
 [![Marketplace Skills](https://img.shields.io/badge/Marketplace_Skills-10900+-ec4899?style=flat-square)](./docs/MARKETPLACE-GUIDE.md)
 [![Hooks](https://img.shields.io/badge/Hooks-6-06b6d4?style=flat-square)](./hooks/README.md)
@@ -32,7 +32,7 @@
 
 A drop-in configuration layer for [Claude Code](https://docs.anthropic.com/en/docs/claude-code) that transforms it from a capable AI assistant into an enterprise-grade development powerhouse.
 
-**One `git clone` gives you** 127 domain skills, 86 specialist agents, 82 community marketplaces with 10,900+ additional skills, 29 slash commands, 6 lifecycle hooks, 12 MCP server configs, and the **[GSD (Get Shit Done)](https://github.com/gsd-build/get-shit-done)** project management framework — all auto-activating based on what you're working on. No manual configuration required.
+**One `git clone` gives you** 180 domain skills, 10 specialist agents, 82 community marketplaces with 10,900+ additional skills, 29 slash commands, 6 lifecycle hooks, 12 MCP server configs, and the **[GSD (Get Shit Done)](https://github.com/open-gsd/gsd-core)** project management framework — all auto-activating based on what you're working on. No manual configuration required.
 
 **How it works:** Describe what you want in plain language. Everything is installed and available, but only a small core of skills keeps its full description in Claude's context. The rest is listed by name and found through a generated index ([`INDEX.md`](./INDEX.md), [`index/graph.json`](./index/graph.json)) and the `toolkit-router` skill, so a large toolkit costs almost nothing until something is needed. Language rules load only for matching files.
 
@@ -76,7 +76,7 @@ claude
 /health-check
 
 # Optional: start a structured multi-phase project with GSD
-/gsd:new-project
+/gsd-core:new-project
 ```
 
 That's it. Claude Code loads the toolkit from `~/.claude/` in every session.
@@ -87,8 +87,8 @@ That's it. Claude Code loads the toolkit from `~/.claude/` in every session.
 
 | Component | Count | Description |
 |-----------|-------|-------------|
-| **[GSD Framework](https://github.com/gsd-build/get-shit-done)** | v1.29 | Opt-in multi-phase project management (57 commands, listed by name only until used) |
-| **[Skills](./skills/MASTER_INDEX.md)** | 127 | Domain expertise modules (React, security, DevOps, finance, etc.) |
+| **[GSD Framework](https://github.com/open-gsd/gsd-core)** | v1.29 | Opt-in multi-phase project management (57 commands, listed by name only until used) |
+| **[Skills](./skills/MASTER_INDEX.md)** | 180 | Domain expertise modules (React, security, DevOps, finance, etc.) |
 | **[Agents](./agents/README.md)** | 86 | Specialist subagents for focused tasks (code review, debugging, etc.) |
 | **[Commands](./docs/COMMANDS.md)** | 87 | Slash commands: 30 base + 57 GSD |
 | **[Marketplace Repos](./plugins/marketplaces/)** | 82 | Community skill repositories (10,900+ additional skills) |
@@ -198,27 +198,27 @@ See **[hooks/README.md](./hooks/README.md)** for the full hook reference.
 
 ## 🚢 GSD — Get Shit Done (optional)
 
-The **[GSD Framework](https://github.com/gsd-build/get-shit-done)** by [gsd-build](https://github.com/gsd-build) is the most powerful component of this toolkit. It transforms Claude Code from a task-runner into a full project management system with multi-phase planning, autonomous execution, verification loops, and session continuity. Check out the [GSD repo](https://github.com/gsd-build/get-shit-done) for full documentation, updates, and to support the creators.
+The **[GSD Framework](https://github.com/open-gsd/gsd-core)** by [gsd-build](https://github.com/gsd-build) is the most powerful component of this toolkit. It transforms Claude Code from a task-runner into a full project management system with multi-phase planning, autonomous execution, verification loops, and session continuity. Check out the [GSD repo](https://github.com/open-gsd/gsd-core) for full documentation, updates, and to support the creators.
 
 **Quick start:**
 ```bash
-/gsd:new-project          # Initialize a new project with deep context gathering
-/gsd:plan-phase 1         # Create a detailed plan for phase 1
-/gsd:execute-phase 1      # Execute with atomic commits and checkpoints
-/gsd:verify-work           # Validate against success criteria
-/gsd:next                  # Automatically advance to the next step
+/gsd-core:new-project          # Initialize a new project with deep context gathering
+/gsd-core:plan-phase 1         # Create a detailed plan for phase 1
+/gsd-core:execute-phase 1      # Execute with atomic commits and checkpoints
+/gsd-core:verify-work           # Validate against success criteria
+/gsd-core:next                  # Automatically advance to the next step
 ```
 
 **What makes it special:**
 - **29 slash commands** covering the full project lifecycle — from idea capture to PR shipping
-- **Autonomous mode** (`/gsd:autonomous`) — runs discuss → plan → execute per phase without interaction
-- **Session continuity** — pause mid-phase, come back later, `/gsd:resume-work` picks up exactly where you left off
+- **Autonomous mode** (`/gsd-core:autonomous`) — runs discuss → plan → execute per phase without interaction
+- **Session continuity** — pause mid-phase, come back later, `/gsd-core:resume-work` picks up exactly where you left off
 - **Milestone tracking** — multi-milestone projects with requirements tracing and coverage gates
 - **Agent orchestration** — spawns specialized subagents for research, planning, execution, and verification
 
-**Key commands:** `/gsd:new-project`, `/gsd:progress`, `/gsd:next`, `/gsd:autonomous`, `/gsd:debug`, `/gsd:ship`, `/gsd:fast` (quick inline tasks)
+**Key commands:** `/gsd-core:new-project`, `/gsd-core:progress`, `/gsd-core:next`, `/gsd-core:autonomous`, `/gsd-core:debug`, `/gsd-core:ship`, `/gsd-core:fast` (quick inline tasks)
 
-See the **[GSD repository](https://github.com/gsd-build/get-shit-done)** for the full guide. GSD is opt-in: invoke `/gsd:new-project` (or `/gsd:progress` in a repo that already has `.planning/`). All GSD commands stay available by name.
+See the **[GSD repository](https://github.com/open-gsd/gsd-core)** for the full guide. GSD is opt-in: invoke `/gsd-core:new-project` (or `/gsd-core:progress` in a repo that already has `.planning/`). All GSD commands stay available by name.
 
 ---
 
@@ -416,7 +416,7 @@ See **[CHANGELOG.md](./CHANGELOG.md)** for the full history.
 | Document | Description |
 |----------|-------------|
 | [CLAUDE.md](./CLAUDE.md) | Core rules and auto-routing table |
-| [GSD Framework](https://github.com/gsd-build/get-shit-done) | Get Shit Done framework — project lifecycle management (by gsd-build) |
+| [GSD Framework](https://github.com/open-gsd/gsd-core) | Get Shit Done framework — project lifecycle management (by gsd-build) |
 | [CHANGELOG.md](./CHANGELOG.md) | Version history |
 | [Architecture](./docs/ARCHITECTURE.md) | System design and component interactions |
 | [Setup Guide](./docs/SETUP-GUIDE.md) | First-time installation walkthrough |

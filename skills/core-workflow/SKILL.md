@@ -64,25 +64,25 @@ For complex features spanning days/weeks, use **GSD**.
 ### GSD Quick Start
 
 ```bash
-/gsd:new-project       # Initialize with brief + config
-/gsd:create-roadmap    # Create phases and state tracking
-/gsd:plan-phase 1      # Create detailed plan for phase
-/gsd:execute-plan <path>  # Execute the plan
+/gsd-core:new-project       # Initialize with brief + config
+/gsd-core:create-roadmap    # Create phases and state tracking
+/gsd-core:plan-phase 1      # Create detailed plan for phase
+/gsd-core:execute-plan <path>  # Execute the plan
 ```
 
 ### GSD Commands Reference
 
 | Command                            | Purpose                            |
 | ---------------------------------- | ---------------------------------- |
-| `/gsd:progress`                    | Check status, route to next action |
-| `/gsd:resume-work`                 | Resume from previous session       |
-| `/gsd:pause-work`                  | Create handoff when pausing        |
-| `/gsd:plan-phase <n>`              | Create detailed phase plan         |
-| `/gsd:execute-plan <path>`         | Execute a PLAN.md                  |
-| `/gsd:add-phase <desc>`            | Add phase to roadmap               |
-| `/gsd:insert-phase <after> <desc>` | Insert urgent work                 |
-| `/gsd:complete-milestone <ver>`    | Archive and tag release            |
-| `/gsd:help`                        | Full command reference             |
+| `/gsd-core:progress`                    | Check status, route to next action |
+| `/gsd-core:resume-work`                 | Resume from previous session       |
+| `/gsd-core:pause-work`                  | Create handoff when pausing        |
+| `/gsd-core:plan-phase <n>`              | Create detailed phase plan         |
+| `/gsd-core:execute-plan <path>`         | Execute a PLAN.md                  |
+| `/gsd-core:add-phase <desc>`            | Add phase to roadmap               |
+| `/gsd-core:insert-phase <after> <desc>` | Insert urgent work                 |
+| `/gsd-core:complete-milestone <ver>`    | Archive and tag release            |
+| `/gsd-core:help`                        | Full command reference             |
 
 ### GSD File Structure
 

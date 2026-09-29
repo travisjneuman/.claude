@@ -99,7 +99,7 @@ Load this file when development-related keywords detected.
 - Complexity < 3: Manual implementation (generic-feature-developer)
 - Complexity 3-4 + clear spec: **Suggest Auto-Claude**
 - Complexity 3-4 + unclear spec: EnterPlanMode first
-- Complexity >= 5: Route to GSD (`/gsd:new-project`)
+- Complexity >= 5: Route to GSD (`/gsd-core:new-project`)
 
 **Keywords:** "implement", "add feature", "build", "create [complex feature]", "autonomous"
 
@@ -119,17 +119,11 @@ Load this file when development-related keywords detected.
 | Domain          | Marketplace Repos                                                                | Notes                          |
 | --------------- | -------------------------------------------------------------------------------- | ------------------------------ |
 | General dev     | davila7-templates (651), athola-night-market (125), madappgang-claude-code (110), claude-code-plugins-plus-skills (1865) | Broad coverage |
-| Full-stack      | buildwithclaude (43), wshobson-agents (129), voltagent-subagents (126), voltagent-agent-skills (200), rohitg00-claude-code-toolkit (135 agents), EveryInc-compound (100+), giuseppe-developer-kit, interstellar-code-claud-skills (14 agents + 11 skills) | Agents + commands |
-| SDLC/Workflow   | scopecraft-command, danielscholl-sdlc, automazeio-ccpm, levnikolaevich-claude-code-skills, mhattingpete-skills, ykdojo-tips (45 tips), chriswiles-claude-code-showcase | Feature/bug/release workflows |
-| Security        | trailofbits-skills (50), trailofbits-skills-curated (27), kenryu42-safety-net, DustyWalker-marketplace (16 agents) | Professional security auditing |
-| DevOps/Infra    | hashi-terraform-skills (4), hashicorp-agent-skills (13), diet103-infrastructure (5), akin-ozer-devops (31), ahmedasmar-devops-skills (6), mrgoonie-claudekit-skills (40+) | K8s, Terraform, CI/CD, cloud |
-| Testing/Quality | karanb192-awesome-claude-skills (50+), lodetomasi-agents-claude-code (100 agents) | TDD, debugging, code review |
 | .NET/C#         | aaronontheweb-dotnet-skills (~30)                                                | Akka.NET, EF Core, ASP.NET |
 | Java/Spring     | sivalabs-marketplace                                                              | JVM ecosystem |
 | Rust            | actionbook-rust-skills (31+)                                                      | Meta-cognition, hook patterns |
 | Vue/Nuxt        | onmax-nuxt-skills (18)                                                            | Vue 3, Nuxt 4+, auto-maintained |
 | Elixir          | bradleygolden-elixir (4), georgeguimaraes-elixir (6)                              | Elixir/Phoenix |
-| Perl/CPAN       | kfly8-cpan-plugins (3)                                                            | Perl ecosystem |
 | Context eng.    | neolab-context-kit (11), muratcankoylan-agent-skills (19)                         | Agent/context patterns |
 | Planning        | othmanadi-planning (12)                                                           | File-based planning |
 | CLI/Enterprise  | brennercruvinel-CCPlugins (24 commands)                                            | Enterprise-grade CLI (2.7K stars) |

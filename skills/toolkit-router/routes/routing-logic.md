@@ -21,7 +21,7 @@ Load this file for complexity scoring and route selection.
 
 | Score | Route                                   | Action                    |
 | ----- | --------------------------------------- | ------------------------- |
-| >= 5  | **GSD Route**                           | Invoke `/gsd:new-project` |
+| >= 5  | **GSD Route**                           | Invoke `/gsd-core:new-project` |
 | 3-4   | **Auto-Claude Route** (if well-defined) | Suggest `/auto-claude`    |
 | 3-4   | **Planning Route** (if exploratory)     | Use `EnterPlanMode`       |
 | 1-2   | **Planning Route**                      | Use `EnterPlanMode`       |
@@ -66,7 +66,7 @@ See `docs/AUTO-CLAUDE-GUIDE.md` for full documentation.
 
 Multi-phase project management:
 
-1. Invoke `/gsd:new-project` with task description
+1. Invoke `/gsd-core:new-project` with task description
 2. GSD gathers context through discussion
 3. Creates PROJECT.md and roadmap
 4. Breaks into phases with PLAN.md files

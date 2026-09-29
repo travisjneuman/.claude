@@ -142,7 +142,7 @@ This repo underwent a security audit before being made public. The following wer
     │       ├── claude-code-plugins/
     │       ├── claude-plugins-official/
     │       ├── taches-cc-resources/
-    │       ├── get-shit-done/      ← GSD workflow system
+    │       ├── gsd-core/      ← GSD workflow system
     │       ├── obra-superpowers/
     │       ├── wshobson-agents/
     │       ├── voltagent-subagents/
@@ -402,7 +402,7 @@ Custom commands that appear as `/command-name` in Claude Code.
 | `update-docs.md`           | `/update-docs`           | Update documentation files          |
 | `router/*.md`              | (reference)              | Domain detection tables (7 files)   |
 
-**Note:** GSD commands (`/gsd:*`) come from the `get-shit-done` marketplace plugin.
+**Note:** GSD commands (`/gsd-core:*`) come from the `gsd-core` marketplace plugin.
 
 **To add a command:** Create a `.md` file with YAML frontmatter. See `templates/command-template.md`.
 
@@ -410,19 +410,19 @@ Custom commands that appear as `/command-name` in Claude Code.
 
 ### GSD Workflow Commands (from marketplace)
 
-**Source:** `plugins/marketplaces/get-shit-done/commands/gsd/`
+**Source:** `plugins/marketplaces/gsd-core/commands/gsd/`
 
 Complete workflow system for multi-phase projects:
 
 | Command             | Purpose                                            |
 | ------------------- | -------------------------------------------------- |
-| `/gsd:new-project`  | Initialize new project with deep context gathering |
-| `/gsd:progress`     | Check project status, route to next action         |
-| `/gsd:plan-phase`   | Create detailed execution plan for a phase         |
-| `/gsd:execute-plan` | Execute a PLAN.md file                             |
-| `/gsd:pause-work`   | Create context handoff when pausing                |
-| `/gsd:resume-work`  | Resume work with full context restoration          |
-| `/gsd:help`         | Show available GSD commands                        |
+| `/gsd-core:new-project`  | Initialize new project with deep context gathering |
+| `/gsd-core:progress`     | Check project status, route to next action         |
+| `/gsd-core:plan-phase`   | Create detailed execution plan for a phase         |
+| `/gsd-core:execute-plan` | Execute a PLAN.md file                             |
+| `/gsd-core:pause-work`   | Create context handoff when pausing                |
+| `/gsd-core:resume-work`  | Resume work with full context restoration          |
+| `/gsd-core:help`         | Show available GSD commands                        |
 
 ---
 

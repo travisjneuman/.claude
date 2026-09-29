@@ -6,7 +6,6 @@ tools:
   - Grep
   - Glob
   - Bash
-model: opus
 memory: user
 background: true
 ---

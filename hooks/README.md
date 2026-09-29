@@ -25,7 +25,7 @@ Hooks are small scripts Claude Code runs automatically at fixed moments: when a 
 | `prompt-context.sh` (every prompt) | Injected branch and last commit into every prompt. Claude Code already gives the model git status at session start, so this was pure repeated token cost. |
 | `session-stop-summary.sh` + `session-start-context.sh` | Wrote a "last session" file after every turn and injected it into the next session, even in an unrelated project. `claude --continue` / `--resume` and auto memory do this properly. |
 | `statusline.sh` | Read fields that don't exist in the status line JSON, so it showed "unknown". Replaced by `statusline.js`. |
-| `gsd-check-update.js`, `gsd-context-monitor.js`, `gsd-prompt-guard.js` (wiring only) | GSD-specific: an update check on every session start, a context monitor that depended on a status line that wasn't installed, and a `.planning/` scanner. The files stay for anyone running the GSD framework; they're just not wired globally. |
+| `gsd-*.js` (5 files) | GSD-specific hooks from the vendored GSD copy. Removed in v3.2.0 together with that copy; GSD now comes from the `gsd-core` plugin (off by default), which brings its own hooks when you enable it in a project. |
 | Auto-commit/push inside `_pull-all-repos.sh` | The background pull used to `git add -u`, commit, and push `~/.claude` on its own. That could sweep in-progress edits into a public push. Counts and indexes now regenerate in the git pre-commit hook instead. |
 
 ## Git hooks for this repo (`scripts/hooks/`)

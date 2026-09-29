@@ -12,7 +12,7 @@ category: ecosystem
 
 ## Overview
 
-Plugins extend Claude Code with reusable skills, agents, commands, and hooks. This setup manages 82 marketplace repos containing 10,900+ community skills alongside 127 local skills. Marketplace repos are read-only references pulled from upstream, while local plugins are your own customizations tracked in your personal repo.
+Plugins extend Claude Code with reusable skills, agents, commands, and hooks. This setup manages 82 marketplace repos containing 10,900+ community skills alongside 180 local skills. Marketplace repos are read-only references pulled from upstream, while local plugins are your own customizations tracked in your personal repo.
 
 ---
 
@@ -59,7 +59,7 @@ plugins/
     ├── anthropic-agent-skills/
     ├── claude-code-plugins/
     │   └── plugins/           # Each subdirectory is one plugin
-    ├── get-shit-done/
+    ├── gsd-core/
     ├── obra-superpowers/
     └── ... (82 marketplace repos total)
 ```
@@ -162,11 +162,10 @@ This setup aggregates 82 marketplace repos containing 10,900+ community-contribu
 | `claude-code-plugins`      | Official Anthropic plugins (13 plugins) |
 | `anthropic-agent-skills`   | Official agent skill definitions        |
 | `obra-superpowers`         | TDD, debugging, collaboration patterns  |
-| `get-shit-done`            | GSD productivity workflow               |
+| `gsd-core`            | GSD productivity workflow               |
 | `trailofbits-skills`       | Security analysis and auditing          |
 | `expo-skills`              | React Native / Expo development         |
 | `vercel-agent-skills`      | Vercel deployment and Next.js           |
-| `hashi-terraform-skills`   | HashiCorp Terraform infrastructure      |
 | `claude-scientific-skills` | Scientific computing and analysis       |
 
 ### Marketplace Repo Conventions
@@ -285,7 +284,7 @@ git submodule init && git submodule update --remote
 ### Detached HEAD in Submodule
 
 ```bash
-cd ~/.claude/plugins/marketplaces/get-shit-done
+cd ~/.claude/plugins/marketplaces/gsd-core
 git checkout main && git pull origin main
 ```
 
@@ -339,4 +338,4 @@ This keeps upstream updates accessible while preserving your customizations.
 - `~/.claude/docs/MARKETPLACE-GUIDE.md` -- Marketplace browsing and discovery
 - `~/.claude/docs/reference/tooling/external-repos.md` -- Full list of 82 marketplace repos
 - `~/.claude/docs/reference/tooling/troubleshooting.md` -- General troubleshooting
-- `~/.claude/skills/README.md` -- Skills overview (127 local skills)
+- `~/.claude/skills/README.md` -- Skills overview (180 local skills)

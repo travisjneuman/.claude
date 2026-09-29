@@ -340,11 +340,6 @@ See [EXPERT-SKILLS-GUIDE.md](./EXPERT-SKILLS-GUIDE.md) for detailed coverage of 
 
 | Skill                    | Format | Coverage                                           |
 | ------------------------ | ------ | -------------------------------------------------- |
-| **document-skills**      | All    | Parent skill for document generation orchestration |
-| **document-skills/docx** | DOCX   | Word document generation with docx-js and OOXML    |
-| **document-skills/pdf**  | PDF    | PDF generation, forms, and reference materials     |
-| **document-skills/pptx** | PPTX   | PowerPoint generation with html2pptx and OOXML     |
-| **document-skills/xlsx** | XLSX   | Excel spreadsheet generation and recalculation     |
 
 ---
 
@@ -493,7 +488,6 @@ Verify skill activates when expected context appears.
 | AI/ML development     | `ai-ml-development`                   |
 | Database design       | `database-expert`                     |
 | DevOps & cloud        | `devops-cloud`                        |
-| Document generation   | `document-skills`                     |
 | Agent coordination    | `agent-teams`                         |
 | Investment memos      | `investment-memo-generator`           |
 | Battle cards          | `battle-card-builder`                 |

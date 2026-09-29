@@ -57,6 +57,7 @@ if command -v node >/dev/null 2>&1; then
     if ! git diff --quiet -- settings.json; then
         echo -e "${YELLOW}⚠ settings.json has unstaged changes (skillOverrides regenerated or local edits). Review and stage it if intended.${NC}"
     fi
+    node "$ROOT/scripts/check-budgets.mjs" || exit 1
     node "$ROOT/scripts/generate-counts.mjs" --write >/dev/null 2>&1 && git add -u counts.json plugin.json README.md skills/README.md website/src/lib/data/marketplace-counts.json 2>/dev/null || true
 fi
 

@@ -23,7 +23,6 @@ Load this file when scientific/research keywords detected.
 | -------------- | --------------------------------------------------- | -------------------------------------- |
 | All scientific | `claude-scientific-skills` (144)                    | Broad scientific coverage              |
 | Life sciences  | `anthropic-life-sciences` (6)                       | Anthropic official life sciences       |
-| Biology        | `gqy20-biology-plugins`, `claude-scientific-skills` | Evolutionary biology, genomics         |
 | Bioinformatics | `claude-scientific-skills`                          | Sequence analysis, BLAST, genomics     |
 | Chemistry      | `claude-scientific-skills`                          | Molecular modeling, drug discovery     |
 | Proteomics     | `claude-scientific-skills`                          | Protein analysis, structure prediction |

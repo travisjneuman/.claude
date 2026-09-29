@@ -1,6 +1,6 @@
 ---
 name: frontend-enhancer
-description: This skill should be used when enhancing the visual design and aesthetics of web applications. It provides modern UI components, design patterns, color palettes, animations, and layout templates. REQUIRES ui-research skill first. Use this skill for tasks like improving styling, creating responsive designs, implementing modern UI patterns, adding animations, selecting color schemes, or building aesthetically pleasing frontend interfaces.
+description: Enhance the visual design of web apps: modern UI components, layout, responsive design, color palettes, animations. Use for styling and UI polish; pair with ui-research first for new design directions.
 ---
 
 # Frontend Enhancer

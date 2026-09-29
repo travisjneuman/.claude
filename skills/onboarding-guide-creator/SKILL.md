@@ -451,5 +451,5 @@ COMMON ONBOARDING FAILURES:
 ## See Also
 
 - [HR & Talent](../hr-talent/SKILL.md)
-- [Document Skills: DOCX](../document-skills/docx/SKILL.md)
+- `anthropic-skills:docx` (Anthropic document skill)
 - [Product Management](../product-management/SKILL.md)

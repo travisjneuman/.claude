@@ -71,10 +71,10 @@ If working in a GSD project (has `.planning/STATE.md`), use GSD commands instead
 
 | This Command | GSD Equivalent                   |
 | ------------ | -------------------------------- |
-| `/run`       | `/gsd:execute-plan`              |
+| `/run`       | `/gsd-core:execute-plan`              |
 | `./prompts/` | `.planning/phases/XX-XX-PLAN.md` |
 
-Use `/gsd:progress` to see current project status and next plan to execute.
+Use `/gsd-core:progress` to see current project status and next plan to execute.
 
 ---
 
@@ -99,7 +99,7 @@ Each prompt file should contain clear instructions for Claude to execute.
 | Command                           | Purpose                          |
 | --------------------------------- | -------------------------------- |
 | `/start-task`                     | Intelligent routing for any task |
-| `/gsd:execute-plan`               | Execute GSD phase plans          |
+| `/gsd-core:execute-plan`               | Execute GSD phase plans          |
 | `/taches-cc-resources:run-prompt` | Underlying prompt executor       |
 
 ---

@@ -7,7 +7,65 @@ Full cross-reference (skills, agents, commands, rules, docs, marketplaces): [`IN
 | Skill | Domain | Tier | Description |
 | --- | --- | --- | --- |
 | `accessibility-a11y` | Frontend, UI & UX | name-only | WCAG 2.2 compliance, ARIA patterns, keyboard navigation, screen readers, automated testing |
+| `agent-accessibility-expert` | Frontend, UI & UX | name-only | Specialist subagent: WCAG compliance, screen reader compatibility, and inclusive design patterns. Use when auditing accessibility, fixing a… |
+| `agent-android-developer` | Mobile | name-only | Specialist subagent: Expert Android developer specializing in Kotlin, Jetpack Compose, and modern Android architecture |
+| `agent-api-designer` | Backend, APIs & data stores | name-only | Specialist subagent: Designs REST and GraphQL APIs following best practices. Use when creating new APIs, reviewing API design, or writing O… |
+| `agent-api-integration-specialist` | Backend, APIs & data stores | name-only | Specialist subagent: Third-party API integration, webhook handling, OAuth flows, rate limiting, and SDK wrapping specialist. Use when integ… |
+| `agent-audio-engineer` | Creative & content | name-only | Specialist subagent: Expert audio engineer for recording, mixing, mastering, and sound design |
+| `agent-auth-specialist` | Backend, APIs & data stores | name-only | Specialist subagent: OAuth 2.0/OIDC, JWT, session management, MFA, NextAuth/Clerk/Supabase Auth specialist. Use when implementing authentic… |
+| `agent-blockchain-developer` | Desktop, systems & languages | name-only | Specialist subagent: Solidity, smart contracts, Web3, EVM, DeFi protocols, and blockchain development specialist. Use when writing smart co… |
+| `agent-brand-strategist` | Creative & content | name-only | Specialist subagent: Expert brand strategist for brand identity, positioning, naming, and brand guidelines |
+| `agent-browser-extension-developer` | Frontend, UI & UX | name-only | Specialist subagent: Chrome, Firefox, and cross-browser extension development specialist. Manifest V3, service workers, content scripts, an… |
+| `agent-cli-developer` | Desktop, systems & languages | name-only | Specialist subagent: Command-line tool development, argument parsing, interactive prompts, and terminal UI specialist. Use when building CL… |
+| `agent-cloud-architect` | DevOps, cloud & observability | name-only | Specialist subagent: Multi-cloud architecture, cost optimization, serverless vs containers, disaster recovery, and infrastructure design sp… |
+| `agent-code-explainer` | Quality, testing & maintenance | name-only | Specialist subagent: Explains complex code in clear, understandable terms. Use when onboarding to a codebase, understanding unfamiliar patt… |
+| `agent-compliance-engineer` | Security & compliance | name-only | Specialist subagent: SOC2, HIPAA, GDPR, PCI-DSS compliance implementation specialist. Use when implementing audit logging, data encryption,… |
+| `agent-cpp-expert` | Desktop, systems & languages | name-only | Specialist subagent: C and C++ development, modern C++ (C++17/20/23), CMake, systems programming, and memory management specialist. Use whe… |
+| `agent-data-engineer` | Data, ML & AI | name-only | Specialist subagent: ETL pipelines, data warehousing, stream processing, and data infrastructure specialist. Use when building data pipelin… |
+| `agent-database-expert` | Backend, APIs & data stores | name-only | Specialist subagent: Expert database architect and engineer for PostgreSQL, MongoDB, Redis, and all major databases. Use when designing sch… |
+| `agent-desktop-developer` | Desktop, systems & languages | name-only | Specialist subagent: Expert desktop application developer for Electron, Tauri, and native desktop development |
+| `agent-devsecops-engineer` | Security & compliance | name-only | Specialist subagent: CI/CD security, SAST/DAST pipelines, supply chain security, container scanning, and security automation specialist. Us… |
+| `agent-django-fastapi-expert` | Backend, APIs & data stores | name-only | Specialist subagent: Django ORM, Django REST Framework, FastAPI async patterns, and Pydantic v2 specialist. Use when building Python web ap… |
+| `agent-documentation-writer` | Quality, testing & maintenance | name-only | Specialist subagent: Generates comprehensive documentation including READMEs, API docs, architecture docs, and inline comments. Use when do… |
+| `agent-e2e-test-specialist` | Quality, testing & maintenance | name-only | Specialist subagent: Playwright, Cypress, and visual regression testing specialist. Use when writing E2E tests, setting up browser automati… |
+| `agent-email-specialist` | Backend, APIs & data stores | name-only | Specialist subagent: Transactional email (Resend, SES, SendGrid), email templates (React Email, MJML), and deliverability specialist. Use w… |
+| `agent-embedded-developer` | Desktop, systems & languages | name-only | Specialist subagent: Embedded systems, firmware, RTOS, microcontrollers (STM32, ESP32, Arduino), IoT, and bare-metal C/C++ specialist. Use… |
+| `agent-event-driven-architect` | Backend, APIs & data stores | name-only | Specialist subagent: Kafka, RabbitMQ, SQS/SNS, event sourcing, CQRS, and message-driven architecture specialist. Use when designing event-d… |
+| `agent-flutter-developer` | Mobile | name-only | Specialist subagent: Flutter/Dart cross-platform development, Riverpod state management, and platform channels specialist. Use when buildin… |
+| `agent-game-developer` | Desktop, systems & languages | name-only | Specialist subagent: Expert game developer for Unity, Unreal Engine, and Godot game development |
+| `agent-go-expert` | Workflow & toolkit | name-only | Specialist subagent: Go concurrency, error handling, stdlib patterns, Chi/Echo web frameworks specialist. Use when writing Go code, designi… |
+| `agent-graphic-designer` | Creative & content | name-only | Specialist subagent: Expert graphic designer for digital and print design, color theory, typography, and visual identity |
+| `agent-graphql-architect` | Backend, APIs & data stores | name-only | Specialist subagent: Expert GraphQL architect for API design, schema development, and performance optimization |
+| `agent-i18n-specialist` | Frontend, UI & UX | name-only | Specialist subagent: Expert internationalization specialist for multi-language support and localization |
+| `agent-kotlin-expert` | Mobile | name-only | Specialist subagent: Kotlin Multiplatform, Compose Multiplatform, coroutines, Ktor, and JVM ecosystem specialist. Use when writing Kotlin c… |
+| `agent-macos-developer` | Desktop, systems & languages | name-only | Specialist subagent: Expert macOS native developer for AppKit, Catalyst, and macOS-specific features |
+| `agent-microservices-architect` | Backend, APIs & data stores | name-only | Specialist subagent: Expert microservices architect for distributed system design, service decomposition, and resilience patterns |
+| `agent-migration-specialist` | Quality, testing & maintenance | name-only | Specialist subagent: Framework upgrades, codemod strategies, version migration planning, and legacy modernization specialist. Use when upgr… |
+| `agent-ml-engineer` | Data, ML & AI | name-only | Specialist subagent: Expert machine learning engineer for PyTorch, TensorFlow, LLM integration, and ML pipelines |
+| `agent-mobile-architect` | Mobile | name-only | Specialist subagent: Cross-platform mobile architecture expert for React Native, Flutter, and native development decisions |
+| `agent-mobile-release-manager` | Mobile | name-only | Specialist subagent: App store submissions, mobile CI/CD, ASO, code signing, and beta distribution specialist. Use when preparing app relea… |
+| `agent-monetization-expert` | Business & product | name-only | Specialist subagent: Expert in revenue models, pricing strategy, and business monetization |
+| `agent-motion-designer` | Creative & content | name-only | Specialist subagent: Expert motion designer for UI animations, micro-interactions, and motion systems |
+| `agent-next-js-expert` | Frontend, UI & UX | name-only | Specialist subagent: Next.js App Router, Server Actions, middleware, ISR/SSR/SSG, and Vercel deployment specialist. Use when building Next.… |
+| `agent-observability-engineer` | DevOps, cloud & observability | name-only | Specialist subagent: OpenTelemetry, Prometheus, Grafana, distributed tracing, SLO design, and alerting specialist. Use when implementing ob… |
+| `agent-payment-billing-specialist` | Backend, APIs & data stores | name-only | Specialist subagent: Stripe integration, subscription billing, webhooks, PCI compliance, and tax handling specialist. Use when implementing… |
+| `agent-product-analytics-specialist` | Data, ML & AI | name-only | Specialist subagent: PostHog, Mixpanel, Amplitude event tracking, funnels, cohorts, and A/B testing specialist. Use when implementing analy… |
+| `agent-product-manager` | Workflow & toolkit | name-only | Specialist subagent: Product requirements, user stories, roadmaps, prioritization frameworks, and sprint planning specialist. Use when writ… |
+| `agent-pwa-specialist` | Backend, APIs & data stores | name-only | Specialist subagent: Progressive Web App development, service workers, offline-first architecture, and push notification specialist. Use wh… |
+| `agent-python-expert` | Desktop, systems & languages | name-only | Specialist subagent: Python best practices, type hints, async patterns, and ecosystem expertise. Use for Python-specific guidance, typing i… |
+| `agent-realtime-specialist` | Backend, APIs & data stores | name-only | Specialist subagent: Expert real-time systems specialist for WebSockets, SSE, and live data applications |
+| `agent-rust-expert` | Desktop, systems & languages | name-only | Specialist subagent: Rust ownership/borrowing, async Rust, Axum/Actix web frameworks, and WASM specialist. Use when writing Rust code, debu… |
+| `agent-seo-specialist` | Frontend, UI & UX | name-only | Specialist subagent: Technical SEO, structured data, Core Web Vitals, meta tags, and Schema.org specialist. Use when optimizing search engi… |
+| `agent-serverless-specialist` | Backend, APIs & data stores | name-only | Specialist subagent: AWS Lambda, Cloudflare Workers, Vercel Edge Functions, and serverless architecture specialist. Use when building serve… |
+| `agent-startup-advisor` | Business & product | name-only | Specialist subagent: Expert startup advisor for launch strategy, validation, MVP development, and growth |
+| `agent-svelte-expert` | Frontend, UI & UX | name-only | Specialist subagent: Svelte 5 runes, SvelteKit routing, form actions, and compile-time reactivity specialist. Use when building Svelte or S… |
 | `agent-teams` | Workflow & toolkit | name-only | Team composition knowledge for Claude Code Agent Teams - when to suggest teams, optimal sizing, spawn prompt patterns |
+| `agent-technical-writer` | Quality, testing & maintenance | name-only | Specialist subagent: Architecture Decision Records, API documentation, migration guides, runbooks, and technical documentation specialist.… |
+| `agent-test-generator` | Quality, testing & maintenance | name-only | Specialist subagent: Generates comprehensive test suites using TDD patterns. Use when writing tests, improving coverage, or implementing te… |
+| `agent-ux-researcher` | Research, learning & life | name-only | Specialist subagent: UX research, usability testing, user interviews, wireframing, and information architecture specialist. Use when planni… |
+| `agent-video-producer` | Creative & content | name-only | Specialist subagent: Expert video production specialist for planning, shooting, editing, and delivering video content |
+| `agent-vue-nuxt-expert` | Frontend, UI & UX | name-only | Specialist subagent: Vue 3 Composition API, Nuxt 3 server routes, Pinia state management, and VueUse composables specialist. Use when build… |
+| `agent-wasm-specialist` | Desktop, systems & languages | name-only | Specialist subagent: WebAssembly, WASI, wasm-bindgen, Emscripten, and cross-language compilation specialist. Use when compiling to WASM, op… |
 | `ai-ml-development` | Data, ML & AI | name-only | AI and machine learning development with PyTorch, TensorFlow, and LLM integration. Use when building ML models, training pipelines, fine-tu… |
 | `ai-policy-generator` | Business & product | name-only | AI governance policy creation for nonprofits and enterprises with frameworks, risk assessment, ethical guidelines, and compliance templates… |
 | `android-development` | Mobile | name-only | Android development with Kotlin, Jetpack Compose, and modern Android architecture. Use when building Android apps, implementing Material De… |
@@ -22,7 +80,7 @@ Full cross-reference (skills, agents, commands, rules, docs, marketplaces): [`IN
 | `business-strategy` | Business & product | name-only | Business strategy expertise for strategic planning, competitive analysis, market entry, M&A strategy, portfolio management, and strategic d… |
 | `career-path-planner` | Research, learning & life | name-only | Career goal mapping with skill gap analysis, actionable development plans, and milestone tracking. Use when planning career transitions, id… |
 | `case-interview-practice` | Research, learning & life | name-only | Interactive consulting case interview practice with structured frameworks, feedback mechanisms, and progressive difficulty. Use when prepar… |
-| `codebase-documenter` | Quality, testing & maintenance | core | This skill should be used when writing documentation for codebases, including README files, architecture documentation, code comments, and… |
+| `codebase-documenter` | Quality, testing & maintenance | core | Write codebase documentation: READMEs, architecture docs, getting-started guides, API docs, and code comments. Use when documenting code or… |
 | `compliance-engineering` | Security & compliance | name-only | SOC2, HIPAA, GDPR, PCI-DSS, FedRAMP compliance implementation in code. Audit logging, data encryption, access controls, privacy by design,… |
 | `content-repurposer` | Creative & content | name-only | Adapt content across platforms with tone/format shifting — blog to social, long to short, text to visual outline. Use when repurposing cont… |
 | `contract-redliner` | Business & product | name-only | Contract review, redlining, and negotiation support with clause analysis, risk identification, and markup templates. Use when reviewing con… |
@@ -37,7 +95,6 @@ Full cross-reference (skills, agents, commands, rules, docs, marketplaces): [`IN
 | `debug-systematic` | Quality, testing & maintenance | core | Systematic 4-phase debugging methodology for complex, intermittent, or mysterious issues. Use when investigating bugs, race conditions, or… |
 | `devex-sdk-design` | Backend, APIs & data stores | name-only | Developer experience (DX) engineering, SDK design patterns, API ergonomics, CLI tooling design, documentation-driven development, and devel… |
 | `devops-cloud` | DevOps, cloud & observability | core | DevOps, cloud infrastructure, and platform engineering. Use when working with AWS, GCP, Azure, Kubernetes, Terraform, CI/CD pipelines, or i… |
-| `document-skills` | Creative & content | core | Professional document creation, editing, and analysis for Office formats (docx, pdf, pptx, xlsx). Use when working with Word documents, PDF… |
 | `edge-computing` | Backend, APIs & data stores | core | Edge computing with Cloudflare Workers, Deno Deploy, Bun, Vercel Edge Functions, AWS Lambda@Edge, and edge databases (Turso, D1, DynamoDB G… |
 | `electron-desktop` | Desktop, systems & languages | name-only | Desktop application development with Electron for Windows, macOS, and Linux. Use when building cross-platform desktop apps, implementing na… |
 | `email-systems` | Backend, APIs & data stores | name-only | Transactional email (Resend, SendGrid, SES), templates (React Email, MJML), deliverability (SPF/DKIM/DMARC), and inboxing best practices. U… |
@@ -47,7 +104,7 @@ Full cross-reference (skills, agents, commands, rules, docs, marketplaces): [`IN
 | `finance` | Business & product | name-only | Financial analysis expertise for financial modeling (DCF, LBO, M&A), valuation, financial statement analysis, capital allocation, treasury… |
 | `financial-scenario-planner` | Business & product | name-only | Stress-test financial plans across scenarios (bull/bear/base), sensitivity tables, and Monte Carlo-style analysis. Use when evaluating fina… |
 | `flutter-development` | Mobile | name-only | Cross-platform development with Flutter and Dart for iOS, Android, Web, Desktop, and embedded. Use when building Flutter apps, implementing… |
-| `frontend-enhancer` | Frontend, UI & UX | core | This skill should be used when enhancing the visual design and aesthetics of web applications. It provides modern UI components, design pat… |
+| `frontend-enhancer` | Frontend, UI & UX | core | Enhance the visual design of web apps: modern UI components, layout, responsive design, color palettes, animations. Use for styling and UI… |
 | `fundraising-analyzer` | Business & product | name-only | Nonprofit fundraising performance analysis with donor segmentation, campaign ROI, retention metrics, and trend analysis. Use when evaluatin… |
 | `game-development` | Desktop, systems & languages | name-only | Game development with Unity, Unreal Engine, and Godot. Use when building games, implementing game mechanics, physics, AI, or working with g… |
 | `generic-code-reviewer` | Quality, testing & maintenance | core | Review code for bugs, security vulnerabilities, performance issues, accessibility gaps, and CLAUDE.md workflow compliance. Supports any tec… |
@@ -120,7 +177,7 @@ Full cross-reference (skills, agents, commands, rules, docs, marketplaces): [`IN
 | `tauri-desktop` | Desktop, systems & languages | name-only | Tauri 2.0 project setup, Rust backend + web frontend, plugin system, IPC commands, security model, auto-update, and mobile support. Use whe… |
 | `tdd-workflow` | Quality, testing & maintenance | name-only | Test-Driven Development workflow enforcement with RED-GREEN-REFACTOR cycle. Use when implementing features test-first or improving test cov… |
 | `tech-debt-analyzer` | Quality, testing & maintenance | core | This skill should be used when analyzing technical debt in a codebase, documenting code quality issues, creating technical debt registers,… |
-| `test-specialist` | Quality, testing & maintenance | core | This skill should be used when writing test cases, fixing bugs, analyzing code for potential issues, or improving test coverage for JavaScr… |
+| `test-specialist` | Quality, testing & maintenance | name-only | This skill should be used when writing test cases, fixing bugs, analyzing code for potential issues, or improving test coverage for JavaScr… |
 | `toolkit-router` | Workflow & toolkit | core | Find the right skill, agent, command, rule, checklist, or marketplace skill in this ~/.claude toolkit for the current task. Use when a task… |
 | `travel-planner` | Research, learning & life | name-only | Travel destination research and daily itinerary creation with logistics planning, budget tracking, and experience optimization. Use when pl… |
 | `ui-animation` | Frontend, UI & UX | name-only | Motion design and animation for user interfaces. Use when creating micro-interactions, page transitions, loading states, or any UI animatio… |

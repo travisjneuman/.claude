@@ -42,7 +42,7 @@ Query persistent memory for context relevant to: `{{task_description}}`
 [ -f .planning/STATE.md ] && echo "ACTIVE_GSD_PROJECT"
 ```
 
-If active: Invoke `/gsd:progress` and EXIT.
+If active: Invoke `/gsd-core:progress` and EXIT.
 
 ### Step 4: Domain Detection
 
@@ -61,7 +61,7 @@ Extract from the domain file: **skill** to invoke, **agent** to spawn, **context
 
 - Diff describable in one sentence → execute directly.
 - Ambiguous scope or multiple systems → short plan (plan mode only when a real choice needs the user), then execute.
-- Long multi-phase project with an existing `.planning/` directory → `/gsd:progress`; otherwise do not start GSD unprompted.
+- Long multi-phase project with an existing `.planning/` directory → make sure the `gsd-core` plugin is enabled for that project (`/plugin install gsd-core@gsd-core --scope project`), then `/gsd-core:progress`. Otherwise do not start GSD unprompted.
 - Full Access+++ applies: do not ask for approval of in-scope steps. See CLAUDE.md.
 
 ### Step 6: Execute

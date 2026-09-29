@@ -119,9 +119,9 @@ git remote -v
 #              origin https://github.com/travisjneuman/.claude.git (push)
 
 # Check marketplace repos cannot push
-cd ~/.claude/plugins/marketplaces/get-shit-done
+cd ~/.claude/plugins/marketplaces/gsd-core
 git remote -v
-# Should show: origin https://github.com/glittercowboy/get-shit-done.git (fetch)
+# Should show: origin https://github.com/open-gsd/gsd-core.git (fetch)
 #              origin no_push (push)
 
 # Check marketplace count

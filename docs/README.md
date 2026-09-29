@@ -46,7 +46,7 @@ Already set up? Jump to the section you need below.
 | -------------------------------------------------- | ------------------------------------------- |
 | [WORKFLOW-GUIDE.md](./WORKFLOW-GUIDE.md)           | Development workflow patterns and standards |
 | [workflow-automation.md](./workflow-automation.md) | Git hooks, templates, task enforcement      |
-| [GSD Framework](https://github.com/gsd-build/get-shit-done) | Get Shit Done multi-phase project system (by gsd-build) |
+| [GSD Framework](https://github.com/open-gsd/gsd-core) | Get Shit Done multi-phase project system (by gsd-build) |
 | [DOMAIN-ROUTING.md](./DOMAIN-ROUTING.md)           | How prompts route to skills/agents          |
 | [AGENT-TEAMS.md](./AGENT-TEAMS.md)                 | Agent teams: parallel sessions, composition |
 
@@ -107,7 +107,7 @@ Already set up? Jump to the section you need below.
 
 This `~/.claude/` folder is a fully configured, portable Claude Code environment containing:
 
-- **127 local skills** for code review, design systems, feature development, domain expertise
+- **180 local skills** for code review, design systems, feature development, domain expertise
 - **67 agents** for specialized autonomous workflows
 - **29 slash commands** for workflow automation
 - **12 MCP server configurations** for extended capabilities (disabled by default to save context)

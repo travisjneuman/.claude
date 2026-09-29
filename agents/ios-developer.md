@@ -1,7 +1,6 @@
 ---
 name: ios-developer
 description: Expert iOS/iPadOS/tvOS developer specializing in Swift, SwiftUI, and Apple platform development
-model: sonnet
 tools:
   - Glob
   - Grep

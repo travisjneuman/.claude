@@ -15,7 +15,7 @@ These bypass normal routing - execute immediately.
 | Generate skill from docs | "generate skill from", "skill from docs", "skill from URL" | Use skill-seekers marketplace               |
 | Commit work              | "commit", "save work", "save changes"                      | `/commit-commands:commit`                   |
 | Create PR                | "pull request", "create pr", "push pr"                     | `/commit-commands:commit-push-pr`           |
-| Check status             | "status", "where was I", "what's left"                     | `/gsd:progress`                             |
+| Check status             | "status", "where was I", "what's left"                     | `/gsd-core:progress`                             |
 | Check todos              | "remaining", "outstanding", "pending"                      | `/taches-cc-resources:check-todos`          |
 | Create prompt            | "create prompt", "write prompt", "prompt for"              | `/taches-cc-resources:create-prompt`        |
 | Create meta-prompt       | "meta prompt", "prompt chain", "multi-stage"               | `/taches-cc-resources:create-meta-prompt`   |
@@ -53,9 +53,8 @@ For creating skills from external documentation:
 | Official Anthropic  | anthropic-agent-skills, claude-code-plugins, claude-plugins-official  | Core patterns and plugins      |
 | Skill creation      | skill-seekers, francyjg-agent-skill-creator, skillcreatorai-agent-skills (47) | Auto-generate skills from docs |
 | Autonomous coding   | auto-claude                                                           | Multi-agent dev with QA        |
-| Project management  | get-shit-done, taches-cc-resources                                    | GSD system, meta-prompting     |
+| Project management  | gsd-core, taches-cc-resources                                    | GSD system, meta-prompting     |
 | Hooks/Reference     | disler-hooks-mastery, agentskills-agentskills (11.4K stars), shanraisshan-best-practice (6K stars) | Hook types, standards, reference |
-| Curated collections | hesreallyhim-awesome (18.2K stars), sickn33-antigravity-awesome-skills (17.2K stars), heilcheng-awesome-agent-skills (2.5K stars), obra-superpowers, quemsah-awesome (3,979 repos indexed) | Top 5 by stars; 15 more in MARKETPLACE-GUIDE.md |
 | Memory/Context      | claude-mem                                                            | Persistent memory, semantic search |
 | Research            | mvanhorn-last30days-skill                                             | Last 30 days topic research    |
 | Expo (official)     | expo-skills (3 plugins)                                               | Official Expo team (815 stars) |

@@ -357,5 +357,5 @@ QUARTERLY ANALYSIS:
 
 - [Sales](../sales/SKILL.md)
 - [Marketing](../marketing/SKILL.md)
-- [Document Skills: DOCX](../document-skills/docx/SKILL.md)
+- `anthropic-skills:docx` (Anthropic document skill)
 - [Product Management](../product-management/SKILL.md)

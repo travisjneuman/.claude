@@ -47,7 +47,7 @@ GSD is a project management framework that provides structure for complex, multi
 ### 1. Start a New Project
 
 ```
-/gsd:new-project [project description]
+/gsd-core:new-project [project description]
 ```
 
 Or let `/start-task` auto-route:
@@ -59,7 +59,7 @@ Or let `/start-task` auto-route:
 ### 2. Check Progress
 
 ```
-/gsd:progress
+/gsd-core:progress
 ```
 
 This shows:
@@ -71,7 +71,7 @@ This shows:
 ### 3. Plan a Phase
 
 ```
-/gsd:plan-phase 1
+/gsd-core:plan-phase 1
 ```
 
 Creates detailed execution plan for the current phase.
@@ -79,7 +79,7 @@ Creates detailed execution plan for the current phase.
 ### 4. Execute the Plan
 
 ```
-/gsd:execute-plan
+/gsd-core:execute-plan
 ```
 
 Works through the plan step by step.
@@ -87,7 +87,7 @@ Works through the plan step by step.
 ### 5. Resume After a Break
 
 ```
-/gsd:resume-work
+/gsd-core:resume-work
 ```
 
 Restores context from your last session.
@@ -176,15 +176,15 @@ Skill(api-design)
 
 | Command                   | Purpose                        |
 | ------------------------- | ------------------------------ |
-| `/gsd:new-project`        | Start new multi-phase project  |
-| `/gsd:progress`           | Check status, get next action  |
-| `/gsd:plan-phase [n]`     | Create detailed plan for phase |
-| `/gsd:execute-plan`       | Work through current plan      |
-| `/gsd:resume-work`        | Restore session context        |
-| `/gsd:pause-work`         | Save state, prepare to pause   |
-| `/gsd:add-phase`          | Add a new phase to project     |
-| `/gsd:complete-milestone` | Mark milestone done            |
-| `/gsd:help`               | Full command reference         |
+| `/gsd-core:new-project`        | Start new multi-phase project  |
+| `/gsd-core:progress`           | Check status, get next action  |
+| `/gsd-core:plan-phase [n]`     | Create detailed plan for phase |
+| `/gsd-core:execute-plan`       | Work through current plan      |
+| `/gsd-core:resume-work`        | Restore session context        |
+| `/gsd-core:pause-work`         | Save state, prepare to pause   |
+| `/gsd-core:add-phase`          | Add a new phase to project     |
+| `/gsd-core:complete-milestone` | Mark milestone done            |
+| `/gsd-core:help`               | Full command reference         |
 
 ---
 
@@ -200,7 +200,7 @@ Skill(api-design)
 
 - Mark tasks complete as you go
 - Don't batch status updates
-- Use `/gsd:progress` frequently
+- Use `/gsd-core:progress` frequently
 
 ### 3. Use Tools Proactively
 
@@ -211,8 +211,8 @@ Skill(api-design)
 
 ### 4. Session Continuity
 
-- `/gsd:pause-work` before ending session
-- `/gsd:resume-work` to restore context
+- `/gsd-core:pause-work` before ending session
+- `/gsd-core:resume-work` to restore context
 - STATE.md preserves your progress
 
 ---
@@ -231,22 +231,22 @@ You're never "stuck" - GSD is just tracking. Execute directly:
 
 GSD can't block you. If you feel blocked:
 
-1. Check `/gsd:progress` for next action
+1. Check `/gsd-core:progress` for next action
 2. Or just do what needs doing
 3. Update STATE.md manually if needed
 
 ### "Phase is too big"
 
-Use `/gsd:add-phase` to split:
+Use `/gsd-core:add-phase` to split:
 
 ```
-/gsd:add-phase Split current phase into smaller chunks
+/gsd-core:add-phase Split current phase into smaller chunks
 ```
 
 ### "Lost my context"
 
 ```
-/gsd:resume-work
+/gsd-core:resume-work
 ```
 
 Or read `.planning/STATE.md` directly.
@@ -270,7 +270,7 @@ Phase 4: Testing & Polish
 Current: Phase 1
 Next action: Design database schema
 
-User: /gsd:progress
+User: /gsd-core:progress
 
 Claude: Phase 1 in progress. Tasks:
 - [ ] Design schema
@@ -289,7 +289,7 @@ User: Use the database-architect agent to review my schema
 Claude: [Spawns database-architect agent]
 [Agent provides detailed schema review]
 
-User: /gsd:progress
+User: /gsd-core:progress
 
 Claude: Schema designed. Next: Create migrations...
 ```
@@ -303,7 +303,7 @@ GSD's main strength is persistence across sessions. Here is how that works in pr
 **Session 1 (evening):**
 
 ```
-User: /gsd:new-project Build authentication system with OAuth, email/password, and MFA
+User: /gsd-core:new-project Build authentication system with OAuth, email/password, and MFA
 
 Claude: Created .planning/STATE.md with 5 phases:
   Phase 1: Database schema and user model
@@ -314,7 +314,7 @@ Claude: Created .planning/STATE.md with 5 phases:
 
 [Works through Phase 1 and part of Phase 2]
 
-User: /gsd:pause-work
+User: /gsd-core:pause-work
 
 Claude: State saved. You're midway through Phase 2:
   - Login endpoint: complete
@@ -326,7 +326,7 @@ Claude: State saved. You're midway through Phase 2:
 **Session 2 (next day):**
 
 ```
-User: /gsd:resume-work
+User: /gsd-core:resume-work
 
 Claude: Restored context from .planning/STATE.md.
   Phase 2: Email/password auth (60% complete)
@@ -342,7 +342,7 @@ Claude: Restored context from .planning/STATE.md.
 For large phases, spawn an agent team to parallelize within a single GSD phase.
 
 ```
-User: /gsd:progress
+User: /gsd-core:progress
 
 Claude: Phase 3 (Frontend Components) is next. This phase has 4 independent deliverables:
   - Login page
@@ -361,7 +361,7 @@ Claude: [Creates agent team with 4 teammates]
 [Each teammate works in parallel on separate files]
 [Lead synthesizes results and marks Phase 3 complete]
 
-User: /gsd:progress
+User: /gsd-core:progress
 
 Claude: Phase 3 complete. Phase 4 (Testing) is next.
 ```

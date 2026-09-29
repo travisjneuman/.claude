@@ -138,7 +138,6 @@ Display comprehensive categorized skill overview:
 | wshobson-agents              | 129    | Progressive disclosure architecture       |
 | athola-night-market          | 125    | General-purpose skill marketplace         |
 | madappgang-claude-code       | 110    | Full-stack development                    |
-| worldbuilding-skills         | 52     | Creative worldbuilding                    |
 | trailofbits-skills           | 50     | Professional security auditing            |
 | buildwithclaude              | 43     | Full-stack + subagents + commands         |
 | alirezarezvani-claude-skills | 42     | General development                       |
@@ -159,7 +158,7 @@ Display comprehensive categorized skill overview:
 - **Planning:** othmanadi-planning (12)
 - **Infrastructure:** diet103-infrastructure (5)
 - **Meta-Skills:** taches-cc-resources (11), claude-plugins-official (13)
-- **Workflow:** get-shit-done, auto-claude
+- **Workflow:** gsd-core, auto-claude
 
 ### Search Marketplace Skills
 
@@ -218,5 +217,5 @@ Just describe your task - skills auto-activate based on description matching.
 
 ---
 
-_127 local skills + 82 marketplaces (10,900+ skills) = comprehensive coverage for any domain_
+_180 local skills + 82 marketplaces (10,900+ skills) = comprehensive coverage for any domain_
 

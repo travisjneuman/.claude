@@ -36,7 +36,6 @@ Load this file when creative/design keywords detected.
 
 | Domain           | Marketplace Repos                      | Notes                                    |
 | ---------------- | -------------------------------------- | ---------------------------------------- |
-| Worldbuilding    | worldbuilding-skills (52)              | Creative worldbuilding, narrative design |
 | Writing quality  | hardikpandya-stop-slop (1)             | AI prose cleanup, banned phrases (1.4K stars) |
 | Design language  | pbakaus-impeccable                     | AI design language (10K+ stars)          |
 | General creative | davila7-templates, athola-night-market | Templates and patterns                   |

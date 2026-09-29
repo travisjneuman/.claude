@@ -502,6 +502,6 @@ COMMON STATUS REPORT FAILURES:
 ## See Also
 
 - [Codebase Documenter](../codebase-documenter/SKILL.md)
-- [Document Skills: DOCX](../document-skills/docx/SKILL.md)
+- `anthropic-skills:docx` (Anthropic document skill)
 - [Product Management](../product-management/SKILL.md)
 - [Finance](../finance/SKILL.md)

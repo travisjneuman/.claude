@@ -96,7 +96,6 @@ category: reference
 | https://github.com/GLINCKER/claude-code-marketplace | GLINCKER marketplace (100+ integrations) | 2026-02-08 |
 | https://github.com/andisab/swe-marketplace | SWE marketplace | 2026-02-08 |
 | https://github.com/davepoon/buildwithclaude | BuildWithClaude | 2026-02-08 |
-| https://github.com/travisvn/awesome-claude-skills | Curated Claude skills list | 2026-02-08 |
 | https://github.com/ComposioHQ/awesome-claude-skills | Composio awesome skills | 2026-02-08 |
 
 ---

@@ -128,7 +128,7 @@ Hooks are configured in `settings.json` and execute cross-platform (macOS, Linux
 
 ### Commands — User-Invoked Workflows
 
-Commands in `~/.claude/commands/` define slash-invoked workflows like `/start-task`, `/auto-claude`, `/gsd:new-project`. They're markdown files with YAML frontmatter that instruct Claude on multi-step processes.
+Commands in `~/.claude/commands/` define slash-invoked workflows like `/start-task`, `/auto-claude`, `/gsd-core:new-project`. They're markdown files with YAML frontmatter that instruct Claude on multi-step processes.
 
 ### MCP Servers — Extended Capabilities
 

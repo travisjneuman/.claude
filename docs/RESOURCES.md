@@ -52,9 +52,6 @@ A curated collection of resources for expanding and optimizing Claude Code capab
 | Repository                       | URL                                                        | Focus                        |
 | -------------------------------- | ---------------------------------------------------------- | ---------------------------- |
 | awesome-claude-code              | https://github.com/hesreallyhim/awesome-claude-code        | Commands, workflows, configs |
-| awesome-claude                   | https://github.com/alvinunreal/awesome-claude              | General Claude resources     |
-| awesome-claude-skills            | https://github.com/travisvn/awesome-claude-skills          | Skills library               |
-| awesome-claude-skills (BehiSecc) | https://github.com/BehiSecc/awesome-claude-skills          | Categorized skills           |
 | awesome-claude-code-subagents    | https://github.com/VoltAgent/awesome-claude-code-subagents | 100+ subagents               |
 | awesome-mcp-servers              | https://github.com/punkpeye/awesome-mcp-servers            | MCP server collection        |
 

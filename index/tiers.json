@@ -6,7 +6,6 @@
     "debug-systematic",
     "generic-code-reviewer",
     "generic-feature-developer",
-    "test-specialist",
     "api-design",
     "database-expert",
     "application-security",
@@ -22,8 +21,7 @@
     "ios-development",
     "react-native",
     "codebase-documenter",
-    "tech-debt-analyzer",
-    "document-skills"
+    "tech-debt-analyzer"
   ],
   "core_commands": [
     "start-task",
