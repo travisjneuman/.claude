@@ -148,7 +148,7 @@ bash ~/.claude/scripts/update-counts.sh
 
 Both scripts are idempotent. Run them whenever you add or rename a skill.
 
-If your skill belongs to a routable domain, add a row to the relevant `~/.claude/commands/router/domains-*.md` file so the router surfaces it. Most skills don't need this — they get found via the description match alone.
+If your skill belongs to a routable domain, add a row to the relevant `~/.claude/skills/toolkit-router/routes/domains-*.md` file so the router surfaces it. Most skills don't need this — they get found via the description match alone.
 
 ### 7. Test
 

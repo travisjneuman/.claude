@@ -1,49 +1,33 @@
 #!/bin/bash
-# PostToolUse hook: Scan written/edited files for accidental secrets
-# Triggers on Write and Edit tool use
-# Warns but does not block (exit 0 always)
+# PostToolUse hook (Write|Edit): scan the file Claude just wrote for things that
+# look like real credentials. Never blocks. When something matches, it tells
+# Claude (via additionalContext) so Claude can remove it before committing.
+# Silent and zero-token when nothing matches.
 
-# Read stdin JSON and extract file path using Node.js
 INPUT=$(cat)
-FILE_PATH=$(echo "$INPUT" | node -e "
-  let d='';
-  process.stdin.on('data',c=>d+=c);
-  process.stdin.on('end',()=>{
-    try{
-      const j=JSON.parse(d);
-      const p=j.tool_input?.file_path||'';
-      process.stdout.write(p);
-    }catch(e){process.exit(0)}
-  });
-" 2>/dev/null)
+FILE_PATH=$(printf '%s' "$INPUT" | node -e '
+  let d="";process.stdin.on("data",c=>d+=c);process.stdin.on("end",()=>{
+    try{const j=JSON.parse(d);process.stdout.write(j.tool_input?.file_path||j.tool_input?.notebook_path||"")}catch(e){}
+  });' 2>/dev/null)
 
-# Exit silently if no file path
 [ -z "$FILE_PATH" ] && exit 0
-
-# Exit silently if file doesn't exist
 [ -f "$FILE_PATH" ] || exit 0
 
-# Skip binary files, lock files, and node_modules
 case "$FILE_PATH" in
-  *.lock|*.min.js|*.min.css|*.map|*.woff*|*.ttf|*.png|*.jpg|*.gif|*.ico|*.svg|*.md)
-    exit 0
-    ;;
+  *.lock|*.min.js|*.min.css|*.map|*.woff*|*.ttf|*.png|*.jpg|*.jpeg|*.gif|*.ico|*.pdf|*.zip) exit 0 ;;
 esac
-echo "$FILE_PATH" | grep -qE '(node_modules|\.git/|vendor/|dist/)' && exit 0
+printf '%s' "$FILE_PATH" | grep -qE '(node_modules|\.git/|vendor/|dist/)' && exit 0
 
-# Scan for secret patterns
-FINDINGS=$(grep -nE '(AKIA[0-9A-Z]{16}|sk-[a-zA-Z0-9]{20,}|ghp_[a-zA-Z0-9]{36}|gho_[a-zA-Z0-9]{36}|glpat-[a-zA-Z0-9\-]{20}|xox[bpors]-[a-zA-Z0-9\-]+|-----BEGIN[A-Z ]*PRIVATE KEY|password\s*=\s*['"'"'""][^'"'"'""]{8,})' "$FILE_PATH" 2>/dev/null)
+FINDINGS=$(grep -nE '(AKIA[0-9A-Z]{16}|sk-(ant-|proj-)?[a-zA-Z0-9_-]{20,}|gh[pousr]_[a-zA-Z0-9]{36}|github_pat_[a-zA-Z0-9_]{40,}|glpat-[a-zA-Z0-9_-]{20}|xox[bpors]-[a-zA-Z0-9-]{10,}|-----BEGIN[A-Z ]*PRIVATE KEY)' "$FILE_PATH" 2>/dev/null | head -5 | cut -c1-120)
 
-if [ -n "$FINDINGS" ]; then
-  echo "" >&2
-  echo "WARNING: Potential secrets detected in $FILE_PATH" >&2
-  echo "---------------------------------------------------" >&2
-  echo "$FINDINGS" | head -5 >&2
-  echo "" >&2
-  echo "Please verify these are not real credentials before committing." >&2
-  echo "If they are real secrets, remove them and use environment variables instead." >&2
-  echo "" >&2
-fi
+[ -z "$FINDINGS" ] && exit 0
 
-# Always allow the write to proceed
+MSG="Possible secret written to $FILE_PATH (first matches, truncated):
+$FINDINGS
+If any of these are real credentials, remove them and use an environment variable or an ignored local file instead."
+
+printf '%s' "$MSG" | node -e '
+  let d="";process.stdin.on("data",c=>d+=c);process.stdin.on("end",()=>{
+    process.stdout.write(JSON.stringify({hookSpecificOutput:{hookEventName:"PostToolUse",additionalContext:d}})+"\n");
+  });'
 exit 0

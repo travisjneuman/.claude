@@ -45,13 +45,11 @@ while read local_ref local_sha remote_ref remote_sha; do
 done
 
 # ============================================
-# CHECK 3: Validate no submodule changes pushed
+# CHECK 3: No gitlinks / marketplace content in the pushed tree
 # ============================================
-# Submodules are read-only (external repos)
-SUBMODULE_CHANGES=$(git diff --cached --name-only | grep "^plugins/marketplaces/")
-if [ -n "$SUBMODULE_CHANGES" ]; then
-    echo -e "${YELLOW}⚠ Note: Changes include marketplace clones${NC}"
-    echo "  These are tracked as gitlinks (commit pointers), not content."
+if git ls-tree -r HEAD | awk '$2=="commit"{f=1} END{exit !f}' || git ls-tree -r --name-only HEAD | grep -q "^plugins/marketplaces/"; then
+    echo -e "${RED}✗ BLOCKED: marketplace clone content or a gitlink is in HEAD. Marketplaces must stay local-only.${NC}"
+    exit 1
 fi
 
 # ============================================

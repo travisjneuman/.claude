@@ -16,16 +16,22 @@ Works identically on: **Arch Linux** | **macOS** | **Windows (Git Bash)**
 
 ## Quick Start (TL;DR)
 
+If Claude Code has already run on the machine, `~/.claude` exists and a plain clone fails. Install in place instead (safe either way; nothing is deleted):
+
 ```bash
-# 1. Clone the repo
-git clone https://github.com/travisjneuman/.claude.git ~/.claude
-
-# 2. Fetch all 108 marketplace repos from their upstreams
-bash ~/.claude/_pull-all-repos.sh
-
-# 3. Complete setup
-bash ~/.claude/scripts/setup-new-machine.sh
+curl -fsSL https://raw.githubusercontent.com/travisjneuman/.claude/master/scripts/install-in-place.sh -o /tmp/install-in-place.sh
+bash /tmp/install-in-place.sh && rm /tmp/install-in-place.sh
 ```
+
+Then, optionally:
+
+```bash
+# Private layer (your own rules, hooks, host settings) — see local.example/README.md
+# Marketplaces: cloned by the first daily background pull, or now:
+bash ~/.claude/_pull-all-repos.sh        # needs Bash 4+ (macOS: brew install bash)
+```
+
+Fresh machine with no `~/.claude` yet: the same script works, or clone directly into `~/.claude` and run `bash ~/.claude/scripts/setup-hooks.sh`.
 
 That's it. The scripts handle everything cross-platform.
 

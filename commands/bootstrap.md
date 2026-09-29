@@ -35,7 +35,7 @@ Check that essential files exist:
 | -------------------------------- | ---------------------------- | --------------------- |
 | `CLAUDE.md`                      | Core rules and configuration | ✓                     |
 | `settings.json`                  | Permissions, hooks, plugins  | ✓                     |
-| `scripts/hooks/session-start.sh` | Auto-routing injection       | ✓                     |
+| `hooks/run-hook.js`              | Hook dispatcher              | ✓                     |
 | `.mcp.json`                      | MCP server configuration     | ✓ (platform-specific) |
 
 **Action:** Read and verify each file exists. If missing, report which files need attention.
@@ -79,7 +79,7 @@ Check that hooks are properly configured:
 1. **SessionStart hook exists and is executable:**
 
    ```bash
-   ls -la ~/.claude/scripts/hooks/session-start.sh
+   ls -la ~/.claude/hooks/run-hook.js ~/.claude/hooks/guard.js
    ```
 
 2. **settings.json has hook configured:**
@@ -87,7 +87,7 @@ Check that hooks are properly configured:
 
 3. **Test hook output is valid JSON:**
    ```bash
-   bash ~/.claude/scripts/hooks/session-start.sh | python3 -m json.tool > /dev/null
+   echo '{"tool_name":"Bash","tool_input":{"command":"git status"}}' | node ~/.claude/hooks/guard.js   # prints nothing = allowed
    ```
 
 ---
@@ -155,9 +155,9 @@ Submodules:
   ✓ All repos have no_push protection
 
 Resources:
-  • 127 local skills
+  • 128 local skills
   • 86 local agents
-  • 16,200+ marketplace skills (101 repos)
+  • 0+ marketplace skills (101 repos)
 
 Hooks:
   ✓ SessionStart: Auto-routing enabled

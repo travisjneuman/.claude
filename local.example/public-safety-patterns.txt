@@ -1,0 +1,3 @@
+# One extended regex per line. Commits to ~/.claude that ADD a matching line are blocked.
+/Users/your-name/
+your-private-hostname

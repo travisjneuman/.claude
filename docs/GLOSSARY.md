@@ -48,7 +48,7 @@ A bash script that runs automatically during Claude Code lifecycle events (Sessi
 
 ### Marketplace
 
-A collection of 108 community-maintained GitHub repositories providing over 16,200+ additional skills, agents, and commands. Located in `~/.claude/plugins/marketplaces/`. Configured as read-only (fetch-only, push blocked).
+A collection of 108 community-maintained GitHub repositories providing over 0+ additional skills, agents, and commands. Located in `~/.claude/plugins/marketplaces/`. Configured as read-only (fetch-only, push blocked).
 
 ### MCP Server (Model Context Protocol)
 
@@ -138,7 +138,7 @@ A workflow state (entered via EnterPlanMode) where Claude explores the codebase 
 
 ### Session Handoff
 
-The process of preserving context between Claude Code sessions. The `session-stop-summary.sh` hook writes `last-session.md`, and `session-start-context.sh` loads it if the previous session was within 24 hours.
+The process of preserving context between Claude Code sessions: `claude --continue` / `--resume`, auto memory, and the explicit `/handoff` command (which writes `~/.claude/last-session.md` on request).
 
 ### Verification Template
 

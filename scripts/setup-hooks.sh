@@ -1,28 +1,14 @@
 #!/bin/bash
-# Setup script to install git hooks for ~/.claude/
-# Run this after cloning on a new machine
-
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-HOOKS_DIR="$SCRIPT_DIR/hooks"
-GIT_HOOKS_DIR="$SCRIPT_DIR/../.git/hooks"
-
-echo "Installing git hooks..."
-
-# Copy each hook
+# Install this repo's git hooks as thin wrappers that exec the tracked scripts
+# in scripts/hooks/, so hook updates arrive with a normal pull.
+# Run after cloning: bash ~/.claude/scripts/setup-hooks.sh
+set -e
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+HOOKS_DIR="$(git -C "$ROOT" rev-parse --git-path hooks)"
+case "$HOOKS_DIR" in /*) ;; *) HOOKS_DIR="$ROOT/$HOOKS_DIR" ;; esac
+mkdir -p "$HOOKS_DIR"
 for hook in pre-commit commit-msg pre-push; do
-    if [ -f "$HOOKS_DIR/$hook.sh" ]; then
-        cp "$HOOKS_DIR/$hook.sh" "$GIT_HOOKS_DIR/$hook"
-        chmod +x "$GIT_HOOKS_DIR/$hook"
-        echo "  ✓ Installed $hook"
-    else
-        echo "  ⚠ $hook.sh not found in $HOOKS_DIR"
-    fi
+  printf '#!/bin/bash\nexec bash "$(git rev-parse --show-toplevel)/scripts/hooks/%s.sh" "$@"\n' "$hook" > "$HOOKS_DIR/$hook"
+  chmod +x "$HOOKS_DIR/$hook"
+  echo "  installed $hook -> scripts/hooks/$hook.sh"
 done
-
-echo ""
-echo "Git hooks installed successfully!"
-echo ""
-echo "Hooks enabled:"
-echo "  - pre-commit: Secret detection, CHANGELOG reminder, validation"
-echo "  - commit-msg: Conventional commit format enforcement"
-echo "  - pre-push: Force-push protection, remote validation"

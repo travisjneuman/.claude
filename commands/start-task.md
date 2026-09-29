@@ -1,5 +1,5 @@
 ---
-description: Universal intelligent router - routes ANY prompt to optimal resources from 108 marketplaces, 127 skills, 86 agents
+description: Route any task to the right skills, agents, rules, and marketplace resources via INDEX.md, then execute it
 arguments:
   - name: task_description
     description: "What you want to accomplish. Natural language - just describe it."
@@ -13,9 +13,9 @@ Skills and agents auto-match from descriptions. CLAUDE.md routes docs/checklists
 
 ## Execution Protocol
 
-### Step 0: ULTRATHINK (Default)
+### Step 0: Effort
 
-Apply maximum reasoning depth for non-trivial tasks. Skip only for: typos, single-line fixes.
+Use the effort level selected for the session. Think harder on architecture and hard debugging, not on routine edits.
 
 ### Step 1: Environment Context & Research
 
@@ -46,25 +46,23 @@ If active: Invoke `/gsd:progress` and EXIT.
 
 ### Step 4: Domain Detection
 
-Scan `{{task_description}}` and load the matching domain router file:
+Grep `~/.claude/INDEX.md` for the task's keywords (see the `toolkit-router` skill). For multi-domain requests, load the matching route file:
 
-1. **Meta/Admin** → Read `commands/router/domains-meta.md` → May EXIT immediately
-2. **Decision** → Read `commands/router/decision-frameworks.md` → EXIT after framework
-3. **Scientific** → Read `commands/router/domains-scientific.md`
-4. **Development** → Read `commands/router/domains-development.md`
-5. **Business** → Read `commands/router/domains-business.md`
-6. **Creative** → Read `commands/router/domains-creative.md`
+1. **Meta/Admin** → Read `skills/toolkit-router/routes/domains-meta.md` → May EXIT immediately
+2. **Decision** → Read `skills/toolkit-router/routes/decision-frameworks.md` → EXIT after framework
+3. **Scientific** → Read `skills/toolkit-router/routes/domains-scientific.md`
+4. **Development** → Read `skills/toolkit-router/routes/domains-development.md`
+5. **Business** → Read `skills/toolkit-router/routes/domains-business.md`
+6. **Creative** → Read `skills/toolkit-router/routes/domains-creative.md`
 
 Extract from the domain file: **skill** to invoke, **agent** to spawn, **contextual rules** to read.
 
 ### Step 5: Route Selection
 
-Read `commands/router/routing-logic.md` for complexity scoring.
-
-- Score >= 5 → `/gsd:new-project`
-- Score 3-4 → `EnterPlanMode` (or suggest Auto-Claude for well-defined features)
-- Score 1-2 → `EnterPlanMode`
-- Score <= 0 → Execute directly
+- Diff describable in one sentence → execute directly.
+- Ambiguous scope or multiple systems → short plan (plan mode only when a real choice needs the user), then execute.
+- Long multi-phase project with an existing `.planning/` directory → `/gsd:progress`; otherwise do not start GSD unprompted.
+- Full Access+++ applies: do not ask for approval of in-scope steps. See CLAUDE.md.
 
 ### Step 6: Execute
 
@@ -75,7 +73,7 @@ Read `commands/router/routing-logic.md` for complexity scoring.
 
 ### Step 7: Verify
 
-Load `docs/reference/checklists/verification-template.md` before marking complete.
+Review the task-owned diff against the request. Run a check only for a specific issue (issue-driven testing, see CLAUDE.md); load `docs/reference/checklists/verification-template.md` for release-style work.
 
 **If `{{task_description}}` is empty:** Check GSD project → query memory → check todos → ask user.
 

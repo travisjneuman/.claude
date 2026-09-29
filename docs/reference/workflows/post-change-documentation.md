@@ -36,7 +36,7 @@ Every change that modifies behavior, adds features, or changes counts MUST inclu
 | `website/README.md` | Website architecture or build process changes |
 | `skills/README.md` | Skills added or removed |
 | `agents/README.md` | Agents added or removed |
-| `commands/README.md` | Commands added or removed |
+| `docs/COMMANDS.md` | Commands added or removed |
 | `hooks/README.md` | Hooks added or removed |
 | `rules/*.md` | Rule files added or removed |
 | `templates/README.md` | Templates added or removed |

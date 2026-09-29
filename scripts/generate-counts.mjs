@@ -189,7 +189,7 @@ function updateClaudeDocs(counts) {
     "docs/ARCHITECTURE.md", "docs/README.md", "docs/FAQ.md", "docs/GLOSSARY.md",
     "docs/PLUGIN-MANAGEMENT.md", "docs/CLAUDE-CODE-RESOURCES.md", "docs/SKILLS.md",
     "docs/reference/tooling/external-repos.md", "scripts/README.md",
-    "commands/README.md", "commands/bootstrap.md", "commands/health-check.md",
+    "docs/COMMANDS.md", "commands/bootstrap.md", "commands/health-check.md",
     "commands/list-skills.md", "commands/pull-repos.md", "commands/skill-finder.md",
     "CLAUDE.md",
   ];

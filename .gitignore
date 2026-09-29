@@ -273,3 +273,30 @@ mcp-needs-auth-cache.json
 
 # GSD update check (Unix timestamp, per-machine)
 cache/gsd-update-check.json
+
+# ============================================
+# 2026-09 MODERNIZATION: RUNTIME + PRIVATE LAYER
+# ============================================
+# Claude Code runtime state (regenerated per machine)
+cache/
+downloads/
+logs/
+.last-cleanup
+.credentials.lock
+file-history/
+paste-cache/
+statsig/
+
+# Private per-user layer. Everything personal or host-specific lives here:
+# private rules, private hooks, host paths, identity, pattern lists for the
+# public-safety gate. See local.example/ for the layout. Back it up yourself
+# (the maintainer keeps the canonical copy in a private notes vault).
+/local
+/rules/local
+/.env.local
+
+# Marketplace clones are pulled on demand, never committed (see .gitmodules
+# manifest + scripts/update-marketplaces.sh). Belt and braces:
+/plugins/marketplaces/
+/plugins/cache/
+/index/marketplace-catalog.json

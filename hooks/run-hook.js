@@ -1,54 +1,61 @@
 #!/usr/bin/env node
-// Cross-platform hook runner for Claude Code
-// Resolves hook paths using os.homedir() which works correctly on:
-//   - Windows (Git Bash, CMD, PowerShell) → C:\Users\username
-//   - macOS → /Users/username
-//   - Linux → /home/username
+// Cross-platform hook runner for Claude Code.
 //
-// Why this exists:
-//   On Windows, Claude Code may invoke WSL's bash which resolves ~ to /root/
-//   instead of the actual Windows user home. Node.js os.homedir() is the only
-//   reliable cross-platform method since Node.js is guaranteed to be installed.
+// Usage (from settings.json):
+//   node -e "process.env.HOOK_NAME='guard.js';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))"
 //
-// Windows bash resolution:
-//   Bare `bash` may resolve to WSL's bash (C:\Windows\System32\bash.exe)
-//   which tries to mount all drives and fails on network drives (e.g. Z:\).
-//   We prefer Git Bash (C:\Program Files\Git\usr\bin\bash.exe) on Windows.
+// Resolution order for HOOK_NAME:
+//   1. ~/.claude/hooks/<name>          (public toolkit hook)
+//   2. ~/.claude/local/hooks/<name>    (private per-user hook, gitignored)
+// A missing hook exits 0 silently, so public users without a local/ layer
+// are unaffected by entries that only exist to dispatch private hooks.
+//
+// Interpreter is chosen by extension: .js -> node, .py -> python3/python,
+// anything else -> bash (Git Bash preferred on Windows over WSL bash, which
+// resolves ~ incorrectly and fails on network drives).
+//
+// stdin/stdout/stderr are inherited, so the hook receives Claude Code's JSON
+// payload on stdin and its JSON/exit code flows straight back to Claude Code.
 
-const { execSync } = require("child_process");
+const { spawnSync } = require("child_process");
 const { join } = require("path");
 const { homedir, platform } = require("os");
 const { existsSync } = require("fs");
 
-const hookName = process.env.HOOK_NAME;
+const hookName = process.env.HOOK_NAME || process.argv[2];
 if (!hookName) process.exit(0);
 
 const home = homedir();
-const hookPath = join(home, ".claude", "hooks", hookName);
+const candidates = [
+  join(home, ".claude", "hooks", hookName),
+  join(home, ".claude", "local", "hooks", hookName),
+];
+const hookPath = candidates.find((p) => existsSync(p));
+if (!hookPath) process.exit(0);
 
-if (!existsSync(hookPath)) {
-  // Hook script not found — exit silently (non-blocking)
-  process.exit(0);
-}
+const isWin = platform() === "win32";
 
-// Convert Windows backslashes to forward slashes for bash compatibility
-const bashPath = hookPath.replace(/\\/g, "/");
-
-// On Windows, prefer Git Bash over WSL bash to avoid drive mount errors
-let bashCmd = "bash";
-if (platform() === "win32") {
-  const gitBash = "C:\\Program Files\\Git\\usr\\bin\\bash.exe";
-  if (existsSync(gitBash)) {
-    bashCmd = `"${gitBash}"`;
+function interpreter(path) {
+  if (path.endsWith(".js") || path.endsWith(".cjs") || path.endsWith(".mjs")) {
+    return [process.execPath, [path]];
   }
+  if (path.endsWith(".py")) {
+    return [isWin ? "python" : "python3", [path]];
+  }
+  let bash = "bash";
+  if (isWin) {
+    const gitBash = "C:\\Program Files\\Git\\usr\\bin\\bash.exe";
+    if (existsSync(gitBash)) bash = gitBash;
+  }
+  return [bash, [path.replace(/\\/g, "/")]];
 }
 
-try {
-  execSync(`${bashCmd} "${bashPath}"`, {
-    stdio: "inherit",
-    env: { ...process.env, HOME: home },
-    timeout: 30000,
-  });
-} catch (e) {
-  process.exit(e.status || 0);
-}
+const [cmd, args] = interpreter(hookPath);
+const result = spawnSync(cmd, args, {
+  stdio: "inherit",
+  env: { ...process.env, HOME: home },
+  timeout: Number(process.env.HOOK_TIMEOUT_MS || 30000),
+});
+
+if (result.error) process.exit(0); // interpreter missing or timed out: never block
+process.exit(result.status ?? 0);

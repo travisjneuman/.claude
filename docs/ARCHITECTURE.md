@@ -139,30 +139,25 @@ MCP (Model Context Protocol) servers add tools beyond Claude's built-in capabili
 ## Data Flow: Prompt to Action
 
 ```
-1. User types prompt
+1. Session starts
+   │  ├── session-start-pull.sh (async, at most daily)
+   │  └── session-start-repo-health.sh (banner only if a repo needs attention)
    │
-2. UserPromptSubmit hook fires
-   │  └── prompt-context.sh injects git branch, status, recent commits
+2. CLAUDE.md, rules without paths, AGENTS.md chain, and the skill listing load
+   │  (core skills with descriptions, everything else name-only)
    │
-3. CLAUDE.md loads (always in context)
+3. User types prompt; Claude matches a core skill or uses toolkit-router → INDEX.md
    │
-4. Auto-routing matches keywords in prompt
-   │  ├── "React" → loads docs/reference/stacks/react-typescript.md
-   │  ├── "bug"   → loads docs/reference/tooling/troubleshooting.md
-   │  └── "review"→ activates generic-code-reviewer skill
+4. Tool calls execute
+   │  ├── PreToolUse: guard.js (+ optional local-pre-tool-use.py)
+   │  ├── Tool executes; path-scoped rules load when matching files are read
+   │  └── PostToolUse: secret-scan.sh on Write/Edit
    │
-5. Claude processes prompt with loaded context
+5. git commit in ~/.claude
+   │  └── pre-commit: public-safety gate, index + counts regenerated
    │
-6. Tool calls execute
-   │  ├── PreToolUse hook: guard-dangerous.sh checks safety
-   │  ├── Tool executes (Read, Write, Bash, etc.)
-   │  └── PostToolUse hook: format-code.sh auto-formats
-   │
-7. If git commit detected:
-   │  └── pre-commit-counts.sh runs update-counts.sh, stages docs
-   │
-8. Session ends
-   └── session-stop-summary.sh writes last-session.md
+6. Session ends
+   └── session-end-repo-health.sh pushes clean finished work in owned repos
 ```
 
 ---

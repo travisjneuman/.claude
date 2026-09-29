@@ -14,13 +14,13 @@
 [![License](https://img.shields.io/badge/MIT-blue?style=flat-square&logo=opensourceinitiative&logoColor=white)](./LICENSE)
 [![Use Template](https://img.shields.io/badge/Use_This_Template-2ea44f?style=flat-square&logo=github&logoColor=white)](https://github.com/travisjneuman/.claude/generate)
 
-[![Skills](https://img.shields.io/badge/Skills-127-10b981?style=flat-square)](./skills/MASTER_INDEX.md)
+[![Skills](https://img.shields.io/badge/Skills-128-10b981?style=flat-square)](./skills/MASTER_INDEX.md)
 [![Agents](https://img.shields.io/badge/Agents-86-f59e0b?style=flat-square)](./agents/README.md)
-[![Commands](https://img.shields.io/badge/Commands-30-a855f7?style=flat-square)](./commands/README.md)
+[![Commands](https://img.shields.io/badge/Commands-30-a855f7?style=flat-square)](./docs/COMMANDS.md)
 [![GSD](https://img.shields.io/badge/GSD-v1.29-ef4444?style=flat-square)](https://github.com/gsd-build/get-shit-done)
 [![Repos](https://img.shields.io/badge/Marketplace_Repos-108-3b82f6?style=flat-square)](./plugins/marketplaces/)
-[![Marketplace Skills](https://img.shields.io/badge/Marketplace_Skills-16200+-ec4899?style=flat-square)](./docs/MARKETPLACE-GUIDE.md)
-[![Hooks](https://img.shields.io/badge/Hooks-15-06b6d4?style=flat-square)](./hooks/README.md)
+[![Marketplace Skills](https://img.shields.io/badge/Marketplace_Skills-16500+-ec4899?style=flat-square)](./docs/MARKETPLACE-GUIDE.md)
+[![Hooks](https://img.shields.io/badge/Hooks-11-06b6d4?style=flat-square)](./hooks/README.md)
 [![Templates](https://img.shields.io/badge/Templates-17-84cc16?style=flat-square)](./templates/README.md)
 [![MCP](https://img.shields.io/badge/MCP_Servers-12-f97316?style=flat-square)](./docs/MCP-SERVERS.md)
 
@@ -32,11 +32,13 @@
 
 A drop-in configuration layer for [Claude Code](https://docs.anthropic.com/en/docs/claude-code) that transforms it from a capable AI assistant into an enterprise-grade development powerhouse.
 
-**One `git clone` gives you** 127 domain skills, 86 specialist agents, 108 community marketplaces with 16,200+ additional skills, 30 slash commands, 15 lifecycle hooks, 12 MCP server configs, and the **[GSD (Get Shit Done)](https://github.com/gsd-build/get-shit-done)** project management framework — all auto-activating based on what you're working on. No manual configuration required.
+**One `git clone` gives you** 128 domain skills, 86 specialist agents, 108 community marketplaces with 0+ additional skills, 30 slash commands, 11 lifecycle hooks, 12 MCP server configs, and the **[GSD (Get Shit Done)](https://github.com/gsd-build/get-shit-done)** project management framework — all auto-activating based on what you're working on. No manual configuration required.
 
-**How it works:** Describe what you want in plain language. The toolkit's dynamic router detects context from your prompt and loads the right skills, agents, rules, and checklists automatically. No slash commands needed (though they're available if you prefer).
+**How it works:** Describe what you want in plain language. Everything is installed and available, but only a small core of skills keeps its full description in Claude's context. The rest is listed by name and found through a generated index ([`INDEX.md`](./INDEX.md), [`index/graph.json`](./index/graph.json)) and the `toolkit-router` skill, so a large toolkit costs almost nothing until something is needed. Language rules load only for matching files.
 
-**Cross-host Git safety:** Completed Travis-owned work must be committed and pushed with the shared repo-sync control plane (`repo-sync push-safe`) from `.workspace/my.notes/Projects/Agent Operating Layer/Repo Sync/`, not raw `git push`, so my-mac, my-desktop, and my-server can rebase, serialize, fan out, and expected-HEAD verify cleanly without losing overlapping work. Managed pre-push hooks intentionally block raw Travis-owned pushes.
+**Runs in YOLO mode on purpose:** `bypassPermissions` plus a Full Access+++ contract in `CLAUDE.md` (your request authorizes in-scope work; explicit "do not"s are absolute), backed by a guard hook that blocks a short list of footguns. Personal and machine-specific rules live in a gitignored [`local/`](./local.example/README.md) layer.
+
+**Cross-machine Git safety:** a session-start banner flags repos that are behind, unpushed, dirty, or diverged; a session-end hook pushes clean, finished work in repos you own (optionally through your own push runner, set in `local/`). Marketplace clones are pulled at most daily and are never committed.
 
 **Who it's for:** Developers who use Claude Code and want deeper domain expertise, structured workflows, and quality guardrails without manual setup.
 
@@ -86,11 +88,11 @@ That's it. The toolkit auto-activates from `~/.claude/` on every Claude Code ses
 | Component | Count | Description |
 |-----------|-------|-------------|
 | **[GSD Framework](https://github.com/gsd-build/get-shit-done)** | v1.29 | Multi-phase project management with 57 commands — the flagship workflow tool |
-| **[Skills](./skills/MASTER_INDEX.md)** | 127 | Domain expertise modules (React, security, DevOps, finance, etc.) |
+| **[Skills](./skills/MASTER_INDEX.md)** | 128 | Domain expertise modules (React, security, DevOps, finance, etc.) |
 | **[Agents](./agents/README.md)** | 86 | Specialist subagents for focused tasks (code review, debugging, etc.) |
-| **[Commands](./commands/README.md)** | 94 | Slash commands: 30 base + 57 GSD + 7 router |
-| **[Marketplace Repos](./plugins/marketplaces/)** | 108 | Community skill repositories (16,200+ additional skills) |
-| **[Hooks](./hooks/README.md)** | 15 | Lifecycle hooks (session start/stop, pre-commit, safety guards) |
+| **[Commands](./docs/COMMANDS.md)** | 94 | Slash commands: 30 base + 57 GSD + 7 router |
+| **[Marketplace Repos](./plugins/marketplaces/)** | 108 | Community skill repositories (0+ additional skills) |
+| **[Hooks](./hooks/README.md)** | 11 | Lifecycle hooks (session start/stop, pre-commit, safety guards) |
 | **[Templates](./templates/README.md)** | 17 | Project scaffolding and task templates |
 | **[MCP Servers](./docs/MCP-SERVERS.md)** | 12 | Model Context Protocol server configurations |
 | **[Rules](./rules/)** | 9 | Stack-specific coding guardrails (TypeScript, Python, Go, Rust, etc.) |
@@ -145,7 +147,7 @@ Every prompt flows through a routing system that loads the best-fit resources on
 ┌──────┐ ┌──────┐ ┌──────┐ ┌───────┐ ┌────────────┐
 │Skills│ │Rules │ │Agents│ │  GSD  │ │ Marketplace│
 │(127) │ │& Chk │ │ (86) │ │  (57) │ │ 109 repos│
-│      │ │      │ │      │ │       │ │ 16,200+ more│
+│      │ │      │ │      │ │       │ │ 0+ more│
 └──────┘ └──────┘ └──────┘ └───────┘ └────────────┘
 ```
 
@@ -169,28 +171,25 @@ CLAUDE.md routes to **docs and checklists** on keyword match. Skills and agents 
 
 ### Hook Lifecycle
 
-Hooks run automatically at key points in every session:
+Hooks run automatically; most cost zero tokens:
 
 ```
 Session Start
-  ├── Pull all repos (background, 60s timeout)
-  └── Load previous session context
+  ├── Daily background pull (~/.claude, marketplaces, optional project repos)
+  ├── Repo health banner (only when something needs attention)
+  └── Private local hook (optional, from local/)
 
-Every Prompt
-  └── Inject git branch + status into context
-
-Before Bash Commands
-  ├── Block dangerous commands (rm -rf /, force push, etc.)
-  └── Update doc counts before git commit
+Before Bash / Write / Edit
+  └── Guard: blocks root rm -rf, force push, reset --hard, secret-file writes, AI trailers
 
 After File Edits
-  └── Scan for leaked secrets
+  └── Secret scan (tells Claude if a credential-looking string was written)
 
-Session Stop
-  └── Save session summary for next time
+Session End
+  └── Push clean finished work in repos you own; log anything dirty or diverged
 
-Session End (exit/clear/logout)
-  └── Final session summary on exit
+Status bar
+  └── model · effort · folder (branch) · context % · 5h/7d usage · cost
 ```
 
 See **[hooks/README.md](./hooks/README.md)** for the full hook reference.
@@ -219,14 +218,14 @@ The **[GSD Framework](https://github.com/gsd-build/get-shit-done)** by [gsd-buil
 
 **Key commands:** `/gsd:new-project`, `/gsd:progress`, `/gsd:next`, `/gsd:autonomous`, `/gsd:debug`, `/gsd:ship`, `/gsd:fast` (quick inline tasks)
 
-See the **[GSD repository](https://github.com/gsd-build/get-shit-done)** for the full guide. GSD activates automatically when you describe multi-phase work — no need to invoke it manually.
+See the **[GSD repository](https://github.com/gsd-build/get-shit-done)** for the full guide. GSD is opt-in: invoke `/gsd:new-project` (or `/gsd:progress` in a repo that already has `.planning/`). All GSD commands stay available by name.
 
 ---
 
 ## 🔑 Key Features
 
 <details>
-<summary><strong>🏪 Marketplace — 109 repos, 16,200+ skills</strong></summary>
+<summary><strong>🏪 Marketplace — 109 repos, 0+ skills</strong></summary>
 
 The toolkit aggregates 108 community skill repositories as ignored local clones in `plugins/marketplaces/`. All are read-only (fetch but never push). Skills span security (Trail of Bits), full-stack development, scientific computing, SAP/enterprise, Elixir, Terraform, creative writing, and more. Some marketplace repos are **installed as plugins**, making their agents, commands, and skills fully active in the routing system alongside built-in resources. Non-installed repos contribute discoverable skills via keyword search.
 
@@ -259,7 +258,7 @@ The `guard-dangerous.sh` hook blocks dangerous commands before execution:
 | `chmod -R 777` | Overly permissive permissions |
 | `docker system prune -a` | Destroy all Docker resources |
 
-Additional safety: `pre-write-validate.sh` blocks writes to `.env`, `.ssh`, `.gnupg`, `*.pem`, and `*.key` files. `secret-scan.sh` scans every file edit for leaked API keys and tokens.
+Additional safety: `guard.js` also blocks writes to `.env`, credential, key, `.ssh`, `.gnupg`, `.git/`, and `node_modules` files, and commits carrying AI attribution trailers. `secret-scan.sh` checks every file Claude writes for credential-looking strings and tells Claude if it finds one.
 
 </details>
 
@@ -315,9 +314,9 @@ Enable on-demand via `/mcp`. See **[docs/MCP-SERVERS.md](./docs/MCP-SERVERS.md)*
 
 The toolkit maintains context between sessions automatically:
 
-1. **Session stop** — `session-stop-summary.sh` saves working directory, branch, recent commits, active tasks, and pending todos to `~/.claude/last-session.md`
-2. **Session start** — `session-start-context.sh` injects the previous session context (if < 72 hours old)
-3. **Repo sync** — `session-start-pull.sh` pulls all repos in the background on startup
+1. **Resume** — `claude --continue` / `--resume` reopen a previous conversation; auto memory carries preferences and project facts across sessions; `/handoff` writes an explicit handoff note when you want one
+2. **Repo health** — `session-start-repo-health.sh` flags repos that need a pull, push, or reconciliation before you edit them
+3. **Repo sync** — `session-start-pull.sh` fast-forward pulls in the background, at most once a day
 
 </details>
 
@@ -384,6 +383,15 @@ See **[docs/NEW-DEVICE-SETUP.md](./docs/NEW-DEVICE-SETUP.md)** for the full walk
 ---
 
 ## 🆕 What's New
+
+**September 2026 — Modernization for current Claude Code**
+
+- **Lean always-on context:** 23 core skills keep full descriptions; every other skill and command is `name-only` (still installed and invocable) and discoverable through the generated `INDEX.md` / `index/graph.json` and the new `toolkit-router` skill. Language rules are path-scoped.
+- **Full Access+++ in `CLAUDE.md`:** rewritten, shorter constitution (autonomous execution, explicit prohibitions, issue-driven testing, pull-first git, no AI attribution). `attribution` settings disable commit/PR trailers at the source.
+- **Hooks fixed and trimmed:** the Bash and write guards now actually work (they read an env var Claude Code never set); per-prompt git injection, per-turn session summaries, and GSD update checks are gone; the pull runs at most daily and never auto-commits or pushes; new status line.
+- **AGENTS.md support:** `claude-md-and-agents-md` so projects shared with Codex and other agents load their `AGENTS.md`.
+- **Private `local/` layer:** gitignored rules, hooks, and host settings, plus a pre-commit public-safety gate. Template in `local.example/`.
+- **Marketplaces:** manifest-only in `.gitmodules`; clones are local, `no_push`, blocked from commits by pre-commit and pre-push checks. `scripts/add-marketplace.sh <url>` adds one.
 
 **March 2026 — Comprehensive audit, GSD promotion, new repos, full domain coverage**
 

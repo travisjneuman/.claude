@@ -1,3 +1,10 @@
+---
+paths:
+  - "**/*.swift"
+  - "**/*.xcodeproj/**"
+  - "**/Package.swift"
+---
+
 # Swift/iOS Rules
 SwiftUI: prefer `@State` for local, `@Binding` for child, `@Observable` (iOS 17+) over `ObservableObject`.
 Architecture: use Swift concurrency (`async`/`await`, `actor`) over Combine for new code. Structured concurrency with `TaskGroup`.

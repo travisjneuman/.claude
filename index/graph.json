@@ -1,0 +1,4666 @@
+{
+ "generatedBy": "scripts/generate-index.mjs",
+ "domains": {
+  "workflow": "Workflow & toolkit",
+  "security": "Security & compliance",
+  "mobile": "Mobile",
+  "frontend": "Frontend, UI & UX",
+  "backend": "Backend, APIs & data stores",
+  "infra": "DevOps, cloud & observability",
+  "data-ai": "Data, ML & AI",
+  "quality": "Quality, testing & maintenance",
+  "systems": "Desktop, systems & languages",
+  "creative": "Creative & content",
+  "business": "Business & product",
+  "research": "Research, learning & life",
+  "other": "Other"
+ },
+ "nodes": [
+  {
+   "id": "skill:accessibility-a11y",
+   "type": "skill",
+   "name": "accessibility-a11y",
+   "path": "skills/accessibility-a11y/SKILL.md",
+   "domain": "frontend",
+   "tier": "name-only",
+   "description": "WCAG 2.2 compliance, ARIA patterns, keyboard navigation, screen readers, automated testing"
+  },
+  {
+   "id": "skill:agent-teams",
+   "type": "skill",
+   "name": "agent-teams",
+   "path": "skills/agent-teams/SKILL.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Team composition knowledge for Claude Code Agent Teams - when to suggest teams, optimal sizing, spawn prompt patterns"
+  },
+  {
+   "id": "skill:ai-ml-development",
+   "type": "skill",
+   "name": "ai-ml-development",
+   "path": "skills/ai-ml-development/SKILL.md",
+   "domain": "data-ai",
+   "tier": "name-only",
+   "description": "AI and machine learning development with PyTorch, TensorFlow, and LLM integration. Use when building ML models, training pipelines, fine-tuning LLMs, or implementing AI features."
+  },
+  {
+   "id": "skill:ai-policy-generator",
+   "type": "skill",
+   "name": "ai-policy-generator",
+   "path": "skills/ai-policy-generator/SKILL.md",
+   "domain": "business",
+   "tier": "name-only",
+   "description": "AI governance policy creation for nonprofits and enterprises with frameworks, risk assessment, ethical guidelines, and compliance templates. Use when drafting AI usage policies, responsible AI framew…"
+  },
+  {
+   "id": "skill:android-development",
+   "type": "skill",
+   "name": "android-development",
+   "path": "skills/android-development/SKILL.md",
+   "domain": "mobile",
+   "tier": "name-only",
+   "description": "Android development with Kotlin, Jetpack Compose, and modern Android architecture. Use when building Android apps, implementing Material Design, or following Android best practices."
+  },
+  {
+   "id": "skill:api-design",
+   "type": "skill",
+   "name": "api-design",
+   "path": "skills/api-design/SKILL.md",
+   "domain": "backend",
+   "tier": "core",
+   "description": "REST and GraphQL API design best practices including OpenAPI specs. Use when designing APIs, documenting endpoints, or reviewing API architecture."
+  },
+  {
+   "id": "skill:application-security",
+   "type": "skill",
+   "name": "application-security",
+   "path": "skills/application-security/SKILL.md",
+   "domain": "security",
+   "tier": "core",
+   "description": "OWASP Top 10 with code examples, SAST/DAST tools, dependency scanning, CSP headers, and input validation patterns. Use when hardening applications, reviewing security posture, or implementing defensi…"
+  },
+  {
+   "id": "skill:ar-vr-xr",
+   "type": "skill",
+   "name": "ar-vr-xr",
+   "path": "skills/ar-vr-xr/SKILL.md",
+   "domain": "systems",
+   "tier": "name-only",
+   "description": "AR/VR/XR development with Unity XR, WebXR, ARKit, ARCore, Meta Quest SDK, and spatial computing. Use when building augmented reality, virtual reality, mixed reality applications, or spatial experienc…"
+  },
+  {
+   "id": "skill:audio-production",
+   "type": "skill",
+   "name": "audio-production",
+   "path": "skills/audio-production/SKILL.md",
+   "domain": "creative",
+   "tier": "name-only",
+   "description": "Professional audio production for music, podcasts, and sound design. Use when working with audio recording, mixing, mastering, or sound design for any medium."
+  },
+  {
+   "id": "skill:authentication-patterns",
+   "type": "skill",
+   "name": "authentication-patterns",
+   "path": "skills/authentication-patterns/SKILL.md",
+   "domain": "backend",
+   "tier": "core",
+   "description": "OAuth 2.0, JWT, SSO, MFA, NextAuth/Clerk/Supabase Auth implementation patterns"
+  },
+  {
+   "id": "skill:auto-claude",
+   "type": "skill",
+   "name": "auto-claude",
+   "path": "skills/auto-claude/SKILL.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Autonomous multi-agent coding with git worktree isolation, QA validation, and memory. Use for complex features requiring autonomous implementation."
+  },
+  {
+   "id": "skill:battle-card-builder",
+   "type": "skill",
+   "name": "battle-card-builder",
+   "path": "skills/battle-card-builder/SKILL.md",
+   "domain": "business",
+   "tier": "name-only",
+   "description": "Competitive battle card creation for sales teams combining competitive intelligence, sales enablement, and document formatting. Use when building battle cards, competitive analysis decks, or win/loss…"
+  },
+  {
+   "id": "skill:blockchain-web3",
+   "type": "skill",
+   "name": "blockchain-web3",
+   "path": "skills/blockchain-web3/SKILL.md",
+   "domain": "systems",
+   "tier": "name-only",
+   "description": "Solidity smart contracts, Web3 development, DeFi protocols, NFTs, EVM chains, Hardhat/Foundry tooling, and blockchain security. Use when writing smart contracts, building dApps, auditing contract sec…"
+  },
+  {
+   "id": "skill:brand-identity",
+   "type": "skill",
+   "name": "brand-identity",
+   "path": "skills/brand-identity/SKILL.md",
+   "domain": "creative",
+   "tier": "name-only",
+   "description": "Brand strategy and identity design for businesses and products. Use when creating brand guidelines, developing visual identity systems, or defining brand positioning."
+  },
+  {
+   "id": "skill:business-strategy",
+   "type": "skill",
+   "name": "business-strategy",
+   "path": "skills/business-strategy/SKILL.md",
+   "domain": "business",
+   "tier": "name-only",
+   "description": "Business strategy expertise for strategic planning, competitive analysis, market entry, M&A strategy, portfolio management, and strategic decision-making. Use when analyzing competitive positioning,…"
+  },
+  {
+   "id": "skill:career-path-planner",
+   "type": "skill",
+   "name": "career-path-planner",
+   "path": "skills/career-path-planner/SKILL.md",
+   "domain": "research",
+   "tier": "name-only",
+   "description": "Career goal mapping with skill gap analysis, actionable development plans, and milestone tracking. Use when planning career transitions, identifying skill gaps, setting professional development goals…"
+  },
+  {
+   "id": "skill:case-interview-practice",
+   "type": "skill",
+   "name": "case-interview-practice",
+   "path": "skills/case-interview-practice/SKILL.md",
+   "domain": "research",
+   "tier": "name-only",
+   "description": "Interactive consulting case interview practice with structured frameworks, feedback mechanisms, and progressive difficulty. Use when preparing for management consulting interviews, case competitions,…"
+  },
+  {
+   "id": "skill:codebase-documenter",
+   "type": "skill",
+   "name": "codebase-documenter",
+   "path": "skills/codebase-documenter/SKILL.md",
+   "domain": "quality",
+   "tier": "core",
+   "description": "This skill should be used when writing documentation for codebases, including README files, architecture documentation, code comments, and API documentation. Use this skill when users request help do…"
+  },
+  {
+   "id": "skill:compliance-engineering",
+   "type": "skill",
+   "name": "compliance-engineering",
+   "path": "skills/compliance-engineering/SKILL.md",
+   "domain": "security",
+   "tier": "name-only",
+   "description": "SOC2, HIPAA, GDPR, PCI-DSS, FedRAMP compliance implementation in code. Audit logging, data encryption, access controls, privacy by design, and regulatory requirement mapping. Use when implementing co…"
+  },
+  {
+   "id": "skill:content-repurposer",
+   "type": "skill",
+   "name": "content-repurposer",
+   "path": "skills/content-repurposer/SKILL.md",
+   "domain": "creative",
+   "tier": "name-only",
+   "description": "Adapt content across platforms with tone/format shifting — blog to social, long to short, text to visual outline. Use when repurposing content for different channels, audiences, or formats."
+  },
+  {
+   "id": "skill:contract-redliner",
+   "type": "skill",
+   "name": "contract-redliner",
+   "path": "skills/contract-redliner/SKILL.md",
+   "domain": "business",
+   "tier": "name-only",
+   "description": "Contract review, redlining, and negotiation support with clause analysis, risk identification, and markup templates. Use when reviewing contracts, identifying unfavorable terms, suggesting amendments…"
+  },
+  {
+   "id": "skill:core-workflow",
+   "type": "skill",
+   "name": "core-workflow",
+   "path": "skills/core-workflow/SKILL.md",
+   "domain": "quality",
+   "tier": "core",
+   "description": "Detailed development workflow patterns, checklists, and standards. Auto-loads for complex tasks, planning, debugging, testing, or when explicit patterns are needed. Contains session protocols, git co…"
+  },
+  {
+   "id": "skill:course-material-creator",
+   "type": "skill",
+   "name": "course-material-creator",
+   "path": "skills/course-material-creator/SKILL.md",
+   "domain": "research",
+   "tier": "name-only",
+   "description": "Create custom educational materials including syllabi, lesson plans, assessments, reading lists, and learning objectives. Use when building course curricula, training programs, workshops, or educatio…"
+  },
+  {
+   "id": "skill:customer-persona-builder",
+   "type": "skill",
+   "name": "customer-persona-builder",
+   "path": "skills/customer-persona-builder/SKILL.md",
+   "domain": "business",
+   "tier": "name-only",
+   "description": "Data-driven customer persona development combining market research, user behavior analysis, and segmentation frameworks. Use when creating buyer personas, ideal customer profiles (ICPs), or user arch…"
+  },
+  {
+   "id": "skill:customer-success",
+   "type": "skill",
+   "name": "customer-success",
+   "path": "skills/customer-success/SKILL.md",
+   "domain": "business",
+   "tier": "name-only",
+   "description": "Support workflows, ticketing systems (Zendesk, Intercom), knowledge base design, chatbot design, and metrics (CSAT, NPS). Use when building support infrastructure, designing help centers, or optimizi…"
+  },
+  {
+   "id": "skill:data-engineering",
+   "type": "skill",
+   "name": "data-engineering",
+   "path": "skills/data-engineering/SKILL.md",
+   "domain": "data-ai",
+   "tier": "name-only",
+   "description": "ETL/ELT pipelines, data warehousing (BigQuery, Snowflake, Redshift), stream processing (Kafka, Spark Streaming), orchestration (Airflow, Dagster, Prefect), dbt transformations, and data lake architec…"
+  },
+  {
+   "id": "skill:data-science",
+   "type": "skill",
+   "name": "data-science",
+   "path": "skills/data-science/SKILL.md",
+   "domain": "data-ai",
+   "tier": "name-only",
+   "description": "Data science and analytics expertise for statistical analysis, machine learning pipelines, data governance, business intelligence, predictive modeling, and analytics strategy. Use when building ML mo…"
+  },
+  {
+   "id": "skill:database-expert",
+   "type": "skill",
+   "name": "database-expert",
+   "path": "skills/database-expert/SKILL.md",
+   "domain": "backend",
+   "tier": "core",
+   "description": "Advanced database design and administration for PostgreSQL, MongoDB, and Redis. Use when designing schemas, optimizing queries, managing database performance, or implementing data patterns."
+  },
+  {
+   "id": "skill:debate-practice-coach",
+   "type": "skill",
+   "name": "debate-practice-coach",
+   "path": "skills/debate-practice-coach/SKILL.md",
+   "domain": "research",
+   "tier": "name-only",
+   "description": "Interactive debate and argument practice with structured feedback, counterargument generation, logical fallacy identification, and scoring rubrics. Use when preparing for debates, improving persuasio…"
+  },
+  {
+   "id": "skill:debug-systematic",
+   "type": "skill",
+   "name": "debug-systematic",
+   "path": "skills/debug-systematic/SKILL.md",
+   "domain": "quality",
+   "tier": "core",
+   "description": "Systematic 4-phase debugging methodology for complex, intermittent, or mysterious issues. Use when investigating bugs, race conditions, or unexplained failures."
+  },
+  {
+   "id": "skill:devex-sdk-design",
+   "type": "skill",
+   "name": "devex-sdk-design",
+   "path": "skills/devex-sdk-design/SKILL.md",
+   "domain": "backend",
+   "tier": "name-only",
+   "description": "Developer experience (DX) engineering, SDK design patterns, API ergonomics, CLI tooling design, documentation-driven development, and developer onboarding. Use when designing SDKs, improving API ergo…"
+  },
+  {
+   "id": "skill:devops-cloud",
+   "type": "skill",
+   "name": "devops-cloud",
+   "path": "skills/devops-cloud/SKILL.md",
+   "domain": "infra",
+   "tier": "core",
+   "description": "DevOps, cloud infrastructure, and platform engineering. Use when working with AWS, GCP, Azure, Kubernetes, Terraform, CI/CD pipelines, or infrastructure as code."
+  },
+  {
+   "id": "skill:document-skills",
+   "type": "skill",
+   "name": "document-skills",
+   "path": "skills/document-skills/SKILL.md",
+   "domain": "creative",
+   "tier": "core",
+   "description": "Professional document creation, editing, and analysis for Office formats (docx, pdf, pptx, xlsx). Use when working with Word documents, PDFs, PowerPoint presentations, or Excel spreadsheets."
+  },
+  {
+   "id": "skill:edge-computing",
+   "type": "skill",
+   "name": "edge-computing",
+   "path": "skills/edge-computing/SKILL.md",
+   "domain": "backend",
+   "tier": "core",
+   "description": "Edge computing with Cloudflare Workers, Deno Deploy, Bun, Vercel Edge Functions, AWS Lambda@Edge, and edge databases (Turso, D1, DynamoDB Global Tables). Use when building low-latency edge applicatio…"
+  },
+  {
+   "id": "skill:electron-desktop",
+   "type": "skill",
+   "name": "electron-desktop",
+   "path": "skills/electron-desktop/SKILL.md",
+   "domain": "systems",
+   "tier": "name-only",
+   "description": "Desktop application development with Electron for Windows, macOS, and Linux. Use when building cross-platform desktop apps, implementing native OS features, or packaging web apps for desktop."
+  },
+  {
+   "id": "skill:email-systems",
+   "type": "skill",
+   "name": "email-systems",
+   "path": "skills/email-systems/SKILL.md",
+   "domain": "backend",
+   "tier": "name-only",
+   "description": "Transactional email (Resend, SendGrid, SES), templates (React Email, MJML), deliverability (SPF/DKIM/DMARC), and inboxing best practices. Use when building email infrastructure, designing templates,…"
+  },
+  {
+   "id": "skill:embedded-iot",
+   "type": "skill",
+   "name": "embedded-iot",
+   "path": "skills/embedded-iot/SKILL.md",
+   "domain": "systems",
+   "tier": "name-only",
+   "description": "Embedded systems firmware, microcontrollers (ESP32, STM32, Arduino, Raspberry Pi), RTOS (FreeRTOS, Zephyr), IoT protocols (MQTT, CoAP, BLE), bare-metal C/C++, and hardware peripheral interfaces (I2C,…"
+  },
+  {
+   "id": "skill:event-driven-architecture",
+   "type": "skill",
+   "name": "event-driven-architecture",
+   "path": "skills/event-driven-architecture/SKILL.md",
+   "domain": "backend",
+   "tier": "name-only",
+   "description": "Kafka, RabbitMQ, SQS/SNS, event sourcing, CQRS, saga patterns, dead letter queues, and idempotency. Use when designing asynchronous systems, implementing message-driven workflows, or building event s…"
+  },
+  {
+   "id": "skill:event-planner",
+   "type": "skill",
+   "name": "event-planner",
+   "path": "skills/event-planner/SKILL.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Event planning with timelines, budgets, vendor coordination, logistics checklists, and post-event evaluation. Use when organizing conferences, workshops, galas, or corporate events."
+  },
+  {
+   "id": "skill:finance",
+   "type": "skill",
+   "name": "finance",
+   "path": "skills/finance/SKILL.md",
+   "domain": "business",
+   "tier": "name-only",
+   "description": "Financial analysis expertise for financial modeling (DCF, LBO, M&A), valuation, financial statement analysis, capital allocation, treasury management, and corporate finance decisions. Use when buildi…"
+  },
+  {
+   "id": "skill:financial-scenario-planner",
+   "type": "skill",
+   "name": "financial-scenario-planner",
+   "path": "skills/financial-scenario-planner/SKILL.md",
+   "domain": "business",
+   "tier": "name-only",
+   "description": "Stress-test financial plans across scenarios (bull/bear/base), sensitivity tables, and Monte Carlo-style analysis. Use when evaluating financial assumptions, modeling risk scenarios, or building scen…"
+  },
+  {
+   "id": "skill:flutter-development",
+   "type": "skill",
+   "name": "flutter-development",
+   "path": "skills/flutter-development/SKILL.md",
+   "domain": "mobile",
+   "tier": "name-only",
+   "description": "Cross-platform development with Flutter and Dart for iOS, Android, Web, Desktop, and embedded. Use when building Flutter apps, implementing Material/Cupertino design, or optimizing Dart code."
+  },
+  {
+   "id": "skill:frontend-enhancer",
+   "type": "skill",
+   "name": "frontend-enhancer",
+   "path": "skills/frontend-enhancer/SKILL.md",
+   "domain": "frontend",
+   "tier": "core",
+   "description": "This skill should be used when enhancing the visual design and aesthetics of web applications. It provides modern UI components, design patterns, color palettes, animations, and layout templates. REQ…"
+  },
+  {
+   "id": "skill:fundraising-analyzer",
+   "type": "skill",
+   "name": "fundraising-analyzer",
+   "path": "skills/fundraising-analyzer/SKILL.md",
+   "domain": "business",
+   "tier": "name-only",
+   "description": "Nonprofit fundraising performance analysis with donor segmentation, campaign ROI, retention metrics, and trend analysis. Use when evaluating fundraising effectiveness, analyzing donor data, or planni…"
+  },
+  {
+   "id": "skill:game-development",
+   "type": "skill",
+   "name": "game-development",
+   "path": "skills/game-development/SKILL.md",
+   "domain": "systems",
+   "tier": "name-only",
+   "description": "Game development with Unity, Unreal Engine, and Godot. Use when building games, implementing game mechanics, physics, AI, or working with game engines."
+  },
+  {
+   "id": "skill:generic-code-reviewer",
+   "type": "skill",
+   "name": "generic-code-reviewer",
+   "path": "skills/generic-code-reviewer/SKILL.md",
+   "domain": "quality",
+   "tier": "core",
+   "description": "Review code for bugs, security vulnerabilities, performance issues, accessibility gaps, and CLAUDE.md workflow compliance. Supports any tech stack - HTML/CSS/JS, React, TypeScript, Node.js, Python, N…"
+  },
+  {
+   "id": "skill:generic-design-system",
+   "type": "skill",
+   "name": "generic-design-system",
+   "path": "skills/generic-design-system/SKILL.md",
+   "domain": "frontend",
+   "tier": "name-only",
+   "description": "Complete design system reference for any project - colors, typography, spacing, components, animations. Adapts to project theme and tech stack. Use when implementing UI, choosing colors, creating ani…"
+  },
+  {
+   "id": "skill:generic-feature-developer",
+   "type": "skill",
+   "name": "generic-feature-developer",
+   "path": "skills/generic-feature-developer/SKILL.md",
+   "domain": "workflow",
+   "tier": "core",
+   "description": "Guide feature development with architecture patterns for any tech stack. Covers frontend, backend, full-stack, and automation projects. Use when adding new features, modifying systems, or planning ch…"
+  },
+  {
+   "id": "skill:generic-fullstack-code-reviewer",
+   "type": "skill",
+   "name": "generic-fullstack-code-reviewer",
+   "path": "skills/generic-fullstack-code-reviewer/SKILL.md",
+   "domain": "quality",
+   "tier": "name-only",
+   "description": "Review full-stack code for bugs, security vulnerabilities, performance issues, accessibility gaps, and CLAUDE.md compliance. Enforces TypeScript strict mode, input validation, GPU-accelerated animati…"
+  },
+  {
+   "id": "skill:generic-fullstack-design-system",
+   "type": "skill",
+   "name": "generic-fullstack-design-system",
+   "path": "skills/generic-fullstack-design-system/SKILL.md",
+   "domain": "frontend",
+   "tier": "name-only",
+   "description": "Complete design system reference for full-stack applications. Covers colors, typography, spacing, component patterns (shadcn/ui), effects, GPU-accelerated animations, and WCAG AA accessibility. Use w…"
+  },
+  {
+   "id": "skill:generic-fullstack-feature-developer",
+   "type": "skill",
+   "name": "generic-fullstack-feature-developer",
+   "path": "skills/generic-fullstack-feature-developer/SKILL.md",
+   "domain": "backend",
+   "tier": "name-only",
+   "description": "Guide feature development for full-stack applications with architecture focus. Covers Next.js App Router patterns, NestJS backend services, database models, data workflows, and seamless integration.…"
+  },
+  {
+   "id": "skill:generic-fullstack-ux-designer",
+   "type": "skill",
+   "name": "generic-fullstack-ux-designer",
+   "path": "skills/generic-fullstack-ux-designer/SKILL.md",
+   "domain": "frontend",
+   "tier": "name-only",
+   "description": "Professional UI/UX design expertise for full-stack applications. Covers design thinking, user psychology (Hick's/Fitts's/Jakob's Law), visual hierarchy, interaction patterns, accessibility, performan…"
+  },
+  {
+   "id": "skill:generic-react-code-reviewer",
+   "type": "skill",
+   "name": "generic-react-code-reviewer",
+   "path": "skills/generic-react-code-reviewer/SKILL.md",
+   "domain": "quality",
+   "tier": "name-only",
+   "description": "Review React/TypeScript code for bugs, security vulnerabilities, performance issues, accessibility gaps, and CLAUDE.md workflow compliance. Enforces TypeScript strict mode, GPU-accelerated animations…"
+  },
+  {
+   "id": "skill:generic-react-design-system",
+   "type": "skill",
+   "name": "generic-react-design-system",
+   "path": "skills/generic-react-design-system/SKILL.md",
+   "domain": "frontend",
+   "tier": "name-only",
+   "description": "Complete design system reference for React applications. Covers colors, typography, spacing, component patterns, glassmorphism effects, GPU-accelerated animations, and WCAG AA accessibility. Use when…"
+  },
+  {
+   "id": "skill:generic-react-feature-developer",
+   "type": "skill",
+   "name": "generic-react-feature-developer",
+   "path": "skills/generic-react-feature-developer/SKILL.md",
+   "domain": "frontend",
+   "tier": "name-only",
+   "description": "Guide feature development for React applications with architecture focus. Covers Zustand/Redux patterns, IndexedDB usage, component systems, lazy loading strategies, and seamless integration. Use whe…"
+  },
+  {
+   "id": "skill:generic-react-ux-designer",
+   "type": "skill",
+   "name": "generic-react-ux-designer",
+   "path": "skills/generic-react-ux-designer/SKILL.md",
+   "domain": "frontend",
+   "tier": "name-only",
+   "description": "Professional UI/UX design expertise for React applications. Covers design thinking, user psychology (Hick's/Fitts's/Jakob's Law), visual hierarchy, interaction patterns, accessibility, performance-dr…"
+  },
+  {
+   "id": "skill:generic-static-code-reviewer",
+   "type": "skill",
+   "name": "generic-static-code-reviewer",
+   "path": "skills/generic-static-code-reviewer/SKILL.md",
+   "domain": "quality",
+   "tier": "name-only",
+   "description": "Review static site code for bugs, security issues, performance problems, accessibility gaps, and CLAUDE.md compliance. Enforces pure HTML/CSS/JS standards, minimal page weight, mobile-first design. U…"
+  },
+  {
+   "id": "skill:generic-static-design-system",
+   "type": "skill",
+   "name": "generic-static-design-system",
+   "path": "skills/generic-static-design-system/SKILL.md",
+   "domain": "frontend",
+   "tier": "name-only",
+   "description": "Complete design system reference for static HTML/CSS/JS sites. Covers colors, typography, component patterns, animations, and accessibility. Use when implementing UI, choosing colors, or ensuring bra…"
+  },
+  {
+   "id": "skill:generic-static-feature-developer",
+   "type": "skill",
+   "name": "generic-static-feature-developer",
+   "path": "skills/generic-static-feature-developer/SKILL.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Guide feature development for static HTML/CSS/JS sites. Covers patterns, automation workflows, and content validation. Use when adding features, modifying automation, or planning changes."
+  },
+  {
+   "id": "skill:generic-static-ux-designer",
+   "type": "skill",
+   "name": "generic-static-ux-designer",
+   "path": "skills/generic-static-ux-designer/SKILL.md",
+   "domain": "frontend",
+   "tier": "name-only",
+   "description": "Professional UI/UX design expertise for static HTML/CSS/JS sites. Covers design thinking, user psychology, visual hierarchy, minimalist interaction patterns, accessibility, and performance-driven des…"
+  },
+  {
+   "id": "skill:generic-ux-designer",
+   "type": "skill",
+   "name": "generic-ux-designer",
+   "path": "skills/generic-ux-designer/SKILL.md",
+   "domain": "frontend",
+   "tier": "name-only",
+   "description": "Professional UX expertise for any project type. Covers user research, design thinking, interaction patterns, accessibility, and design critique. Use when designing new features, improving UX, conduct…"
+  },
+  {
+   "id": "skill:grant-proposal-builder",
+   "type": "skill",
+   "name": "grant-proposal-builder",
+   "path": "skills/grant-proposal-builder/SKILL.md",
+   "domain": "business",
+   "tier": "name-only",
+   "description": "Nonprofit and research grant proposal assembly with structured sections, budget templates, and evaluation alignment. Use when writing grant proposals, funding applications, or research funding reques…"
+  },
+  {
+   "id": "skill:graphic-design",
+   "type": "skill",
+   "name": "graphic-design",
+   "path": "skills/graphic-design/SKILL.md",
+   "domain": "creative",
+   "tier": "name-only",
+   "description": "Professional graphic design principles for digital and print media. Use when creating visual designs, choosing color palettes, typography, layouts, or providing design feedback."
+  },
+  {
+   "id": "skill:graphql-expert",
+   "type": "skill",
+   "name": "graphql-expert",
+   "path": "skills/graphql-expert/SKILL.md",
+   "domain": "backend",
+   "tier": "name-only",
+   "description": "GraphQL API design and implementation. Use when building GraphQL APIs, designing schemas, implementing resolvers, or optimizing GraphQL performance."
+  },
+  {
+   "id": "skill:growth-engineering",
+   "type": "skill",
+   "name": "growth-engineering",
+   "path": "skills/growth-engineering/SKILL.md",
+   "domain": "infra",
+   "tier": "name-only",
+   "description": "A/B testing infrastructure, feature flags (LaunchDarkly, Unleash), experimentation platforms, PLG patterns, and funnel optimization. Use when building experimentation systems, implementing feature to…"
+  },
+  {
+   "id": "skill:health-wellness",
+   "type": "skill",
+   "name": "health-wellness",
+   "path": "skills/health-wellness/SKILL.md",
+   "domain": "research",
+   "tier": "name-only",
+   "description": "Workplace health and wellness expertise for employee wellness programs, mental health initiatives, ergonomics and safety, healthcare benefits strategy, and health analytics. Use when designing wellne…"
+  },
+  {
+   "id": "skill:hr-talent",
+   "type": "skill",
+   "name": "hr-talent",
+   "path": "skills/hr-talent/SKILL.md",
+   "domain": "business",
+   "tier": "name-only",
+   "description": "HR and talent management expertise for talent acquisition, performance management, compensation strategy, organizational design, culture building, succession planning, and D&I programs. Use when hiri…"
+  },
+  {
+   "id": "skill:i18n-localization",
+   "type": "skill",
+   "name": "i18n-localization",
+   "path": "skills/i18n-localization/SKILL.md",
+   "domain": "frontend",
+   "tier": "name-only",
+   "description": "Internationalization and localization for global applications. Use when adding multi-language support, handling regional formats, or preparing apps for global markets."
+  },
+  {
+   "id": "skill:impact-report-writer",
+   "type": "skill",
+   "name": "impact-report-writer",
+   "path": "skills/impact-report-writer/SKILL.md",
+   "domain": "creative",
+   "tier": "name-only",
+   "description": "Nonprofit/NGO impact report generation with data visualization suggestions, outcome metrics, narrative structure, and program data presentation. Use when writing impact reports, annual reports, or pr…"
+  },
+  {
+   "id": "skill:innovation",
+   "type": "skill",
+   "name": "innovation",
+   "path": "skills/innovation/SKILL.md",
+   "domain": "business",
+   "tier": "name-only",
+   "description": "Innovation management expertise for innovation frameworks (Design Thinking, Stage-Gate), ideation processes, innovation portfolio management, venture capital, open innovation, and IP strategy. Use wh…"
+  },
+  {
+   "id": "skill:investment-memo-generator",
+   "type": "skill",
+   "name": "investment-memo-generator",
+   "path": "skills/investment-memo-generator/SKILL.md",
+   "domain": "business",
+   "tier": "name-only",
+   "description": "Investment memo creation combining financial analysis, document generation, and structured templates. Use when creating investment memos, pitch decks, deal summaries, or investment committee material…"
+  },
+  {
+   "id": "skill:ios-development",
+   "type": "skill",
+   "name": "ios-development",
+   "path": "skills/ios-development/SKILL.md",
+   "domain": "mobile",
+   "tier": "core",
+   "description": "iOS, iPadOS, and tvOS development with Swift, SwiftUI, and UIKit. Use when building Apple platform apps, implementing iOS-specific features, or following Apple Human Interface Guidelines."
+  },
+  {
+   "id": "skill:kotlin-multiplatform",
+   "type": "skill",
+   "name": "kotlin-multiplatform",
+   "path": "skills/kotlin-multiplatform/SKILL.md",
+   "domain": "mobile",
+   "tier": "name-only",
+   "description": "KMP/CMP shared business logic, Compose Multiplatform, expect/actual, Ktor, SQLDelight, and platform-specific implementations. Use when building cross-platform Kotlin applications for Android, iOS, de…"
+  },
+  {
+   "id": "skill:leadership",
+   "type": "skill",
+   "name": "leadership",
+   "path": "skills/leadership/SKILL.md",
+   "domain": "business",
+   "tier": "name-only",
+   "description": "Executive leadership expertise for decision-making, change management, crisis management, stakeholder management, team building, and organizational leadership. Use when leading teams, managing change…"
+  },
+  {
+   "id": "skill:learning-gap-analyzer",
+   "type": "skill",
+   "name": "learning-gap-analyzer",
+   "path": "skills/learning-gap-analyzer/SKILL.md",
+   "domain": "research",
+   "tier": "name-only",
+   "description": "Map understanding, identify knowledge gaps, and build targeted learning plans with spaced repetition. Use when assessing knowledge levels, designing study plans, or optimizing learning paths."
+  },
+  {
+   "id": "skill:legal-compliance",
+   "type": "skill",
+   "name": "legal-compliance",
+   "path": "skills/legal-compliance/SKILL.md",
+   "domain": "business",
+   "tier": "name-only",
+   "description": "Legal and compliance expertise for corporate governance, contract analysis, regulatory compliance (SOX, GDPR, HIPAA), risk assessment, intellectual property, and litigation management. Use when revie…"
+  },
+  {
+   "id": "skill:literature-review-planner",
+   "type": "skill",
+   "name": "literature-review-planner",
+   "path": "skills/literature-review-planner/SKILL.md",
+   "domain": "quality",
+   "tier": "name-only",
+   "description": "Structured literature review planning with systematic methodology, source evaluation, and synthesis frameworks. Use when planning academic literature reviews, research surveys, systematic reviews, or…"
+  },
+  {
+   "id": "skill:llm-app-development",
+   "type": "skill",
+   "name": "llm-app-development",
+   "path": "skills/llm-app-development/SKILL.md",
+   "domain": "data-ai",
+   "tier": "core",
+   "description": "LLM app development with RAG, prompt engineering, vector databases, and AI agents"
+  },
+  {
+   "id": "skill:low-code-platforms",
+   "type": "skill",
+   "name": "low-code-platforms",
+   "path": "skills/low-code-platforms/SKILL.md",
+   "domain": "backend",
+   "tier": "name-only",
+   "description": "Low-code and internal tool platforms including Retool, Supabase, Appsmith, Tooljet, n8n, and Zapier. Use when building admin panels, internal tools, workflow automations, or integrating low-code plat…"
+  },
+  {
+   "id": "skill:macos-native",
+   "type": "skill",
+   "name": "macos-native",
+   "path": "skills/macos-native/SKILL.md",
+   "domain": "systems",
+   "tier": "name-only",
+   "description": "Native macOS development with AppKit, Catalyst, and macOS-specific APIs. Use when building Mac-native apps, menu bar apps, system extensions, or macOS-specific features."
+  },
+  {
+   "id": "skill:marketing",
+   "type": "skill",
+   "name": "marketing",
+   "path": "skills/marketing/SKILL.md",
+   "domain": "business",
+   "tier": "name-only",
+   "description": "Marketing strategy expertise for brand strategy, market research, customer segmentation, digital marketing, content strategy, marketing analytics, campaign management, and PR/communications. Use when…"
+  },
+  {
+   "id": "skill:microservices-architecture",
+   "type": "skill",
+   "name": "microservices-architecture",
+   "path": "skills/microservices-architecture/SKILL.md",
+   "domain": "backend",
+   "tier": "name-only",
+   "description": "Microservices architecture patterns and best practices. Use when designing distributed systems, breaking down monoliths, or implementing service communication."
+  },
+  {
+   "id": "skill:mobile-cicd",
+   "type": "skill",
+   "name": "mobile-cicd",
+   "path": "skills/mobile-cicd/SKILL.md",
+   "domain": "mobile",
+   "tier": "name-only",
+   "description": "Fastlane, GitHub Actions for mobile, code signing (iOS provisioning, Android keystores), beta distribution (TestFlight, Firebase App Distribution), and app store submissions. Use when setting up mobi…"
+  },
+  {
+   "id": "skill:monetization-strategy",
+   "type": "skill",
+   "name": "monetization-strategy",
+   "path": "skills/monetization-strategy/SKILL.md",
+   "domain": "business",
+   "tier": "name-only",
+   "description": "Revenue models, pricing strategies, and business monetization. Use when designing pricing, choosing business models, or optimizing revenue for products and services."
+  },
+  {
+   "id": "skill:monitoring-observability",
+   "type": "skill",
+   "name": "monitoring-observability",
+   "path": "skills/monitoring-observability/SKILL.md",
+   "domain": "infra",
+   "tier": "core",
+   "description": "OpenTelemetry, structured logging, distributed tracing, alerting, and dashboards"
+  },
+  {
+   "id": "skill:newsletter-creator",
+   "type": "skill",
+   "name": "newsletter-creator",
+   "path": "skills/newsletter-creator/SKILL.md",
+   "domain": "creative",
+   "tier": "name-only",
+   "description": "Company newsletter and content roundup creation with consistent formatting, content curation, and audience segmentation. Use when creating internal newsletters, external digests, or content summaries."
+  },
+  {
+   "id": "skill:onboarding-guide-creator",
+   "type": "skill",
+   "name": "onboarding-guide-creator",
+   "path": "skills/onboarding-guide-creator/SKILL.md",
+   "domain": "research",
+   "tier": "name-only",
+   "description": "New hire onboarding guide generation with role-specific content, structured timelines, and resource organization. Use when creating employee onboarding materials, welcome guides, or training document…"
+  },
+  {
+   "id": "skill:operations",
+   "type": "skill",
+   "name": "operations",
+   "path": "skills/operations/SKILL.md",
+   "domain": "business",
+   "tier": "name-only",
+   "description": "Operations excellence expertise for supply chain optimization, process improvement (Lean, Six Sigma), capacity planning, vendor management, quality assurance, and operational efficiency. Use when opt…"
+  },
+  {
+   "id": "skill:options-comparator",
+   "type": "skill",
+   "name": "options-comparator",
+   "path": "skills/options-comparator/SKILL.md",
+   "domain": "business",
+   "tier": "name-only",
+   "description": "Structured comparison of competing options with weighted scoring matrices, trade-off analysis, decision frameworks, and recommendation templates. Use when evaluating alternatives, making purchase dec…"
+  },
+  {
+   "id": "skill:payment-integration",
+   "type": "skill",
+   "name": "payment-integration",
+   "path": "skills/payment-integration/SKILL.md",
+   "domain": "security",
+   "tier": "name-only",
+   "description": "Stripe, RevenueCat, subscription billing, webhooks, PCI compliance, and tax"
+  },
+  {
+   "id": "skill:performance-engineering",
+   "type": "skill",
+   "name": "performance-engineering",
+   "path": "skills/performance-engineering/SKILL.md",
+   "domain": "quality",
+   "tier": "core",
+   "description": "Web Vitals, Lighthouse CI, bundle optimization, CDN, caching, and load testing"
+  },
+  {
+   "id": "skill:podcast-producer",
+   "type": "skill",
+   "name": "podcast-producer",
+   "path": "skills/podcast-producer/SKILL.md",
+   "domain": "creative",
+   "tier": "name-only",
+   "description": "Podcast production workflow including episode planning, show notes creation, transcript editing, guest management, and distribution strategy. Use when launching podcasts, planning episodes, or optimi…"
+  },
+  {
+   "id": "skill:process-flowchart-designer",
+   "type": "skill",
+   "name": "process-flowchart-designer",
+   "path": "skills/process-flowchart-designer/SKILL.md",
+   "domain": "business",
+   "tier": "name-only",
+   "description": "Create process flowcharts and workflow diagrams from descriptions, with optimization suggestions and bottleneck identification. Use when mapping processes, designing workflows, or improving operation…"
+  },
+  {
+   "id": "skill:product-analytics",
+   "type": "skill",
+   "name": "product-analytics",
+   "path": "skills/product-analytics/SKILL.md",
+   "domain": "data-ai",
+   "tier": "name-only",
+   "description": "Event tracking architecture, funnels, cohorts, A/B testing, PostHog/Amplitude"
+  },
+  {
+   "id": "skill:product-management",
+   "type": "skill",
+   "name": "product-management",
+   "path": "skills/product-management/SKILL.md",
+   "domain": "business",
+   "tier": "name-only",
+   "description": "Product management expertise for product strategy, roadmap planning, feature prioritization (RICE, ICE, MoSCoW), customer research, A/B testing, product analytics, and product-market fit. Use when bu…"
+  },
+  {
+   "id": "skill:pwa-development",
+   "type": "skill",
+   "name": "pwa-development",
+   "path": "skills/pwa-development/SKILL.md",
+   "domain": "frontend",
+   "tier": "name-only",
+   "description": "Progressive Web App development for installable, offline-capable web applications. Use when building PWAs, implementing service workers, or creating offline-first experiences."
+  },
+  {
+   "id": "skill:rd-management",
+   "type": "skill",
+   "name": "rd-management",
+   "path": "skills/rd-management/SKILL.md",
+   "domain": "research",
+   "tier": "name-only",
+   "description": "R&D management expertise for R&D portfolio management, technology roadmapping, research methodology, patent strategy, lab management, academic partnerships, and regulatory pathways. Use when managing…"
+  },
+  {
+   "id": "skill:react-native",
+   "type": "skill",
+   "name": "react-native",
+   "path": "skills/react-native/SKILL.md",
+   "domain": "mobile",
+   "tier": "core",
+   "description": "Cross-platform mobile development with React Native and Expo. Use when building iOS/Android apps with JavaScript/TypeScript, implementing native features, or optimizing mobile performance."
+  },
+  {
+   "id": "skill:real-estate-analyzer",
+   "type": "skill",
+   "name": "real-estate-analyzer",
+   "path": "skills/real-estate-analyzer/SKILL.md",
+   "domain": "business",
+   "tier": "name-only",
+   "description": "Property valuation, market analysis, investment ROI calculations, comparable analysis, and rental yield assessment. Use when evaluating real estate investments, analyzing property markets, or calcula…"
+  },
+  {
+   "id": "skill:recipe-card-creator",
+   "type": "skill",
+   "name": "recipe-card-creator",
+   "path": "skills/recipe-card-creator/SKILL.md",
+   "domain": "research",
+   "tier": "name-only",
+   "description": "Formatted digital recipe card generation with ingredient scaling, nutritional information, and organized collections. Use when creating recipe cards, meal plans, grocery lists, or recipe collections."
+  },
+  {
+   "id": "skill:research-presenter",
+   "type": "skill",
+   "name": "research-presenter",
+   "path": "skills/research-presenter/SKILL.md",
+   "domain": "research",
+   "tier": "name-only",
+   "description": "Turn research findings into presentation outlines with narrative arc, data visualization suggestions, audience adaptation, and slide design guidance. Use when creating research presentations, confere…"
+  },
+  {
+   "id": "skill:risk-management",
+   "type": "skill",
+   "name": "risk-management",
+   "path": "skills/risk-management/SKILL.md",
+   "domain": "business",
+   "tier": "name-only",
+   "description": "Enterprise risk management expertise for ERM frameworks, risk assessment, business continuity, insurance strategy, third-party risk, and reputational risk. Use when assessing risks, building continui…"
+  },
+  {
+   "id": "skill:sales",
+   "type": "skill",
+   "name": "sales",
+   "path": "skills/sales/SKILL.md",
+   "domain": "business",
+   "tier": "name-only",
+   "description": "Sales strategy expertise for sales methodologies (MEDDIC, SPIN, Challenger), sales forecasting, account management, pipeline management, sales enablement, and revenue operations. Use when building sa…"
+  },
+  {
+   "id": "skill:security",
+   "type": "skill",
+   "name": "security",
+   "path": "skills/security/SKILL.md",
+   "domain": "security",
+   "tier": "name-only",
+   "description": "Information security expertise for cybersecurity frameworks (NIST, ISO 27001), security architecture, incident response, vulnerability management, identity management, and cloud security. Use when de…"
+  },
+  {
+   "id": "skill:seo-analytics-auditor",
+   "type": "skill",
+   "name": "seo-analytics-auditor",
+   "path": "skills/seo-analytics-auditor/SKILL.md",
+   "domain": "data-ai",
+   "tier": "name-only",
+   "description": "Use this skill when auditing SEO, analyzing Core Web Vitals, verifying meta tags, checking structured data, or troubleshooting analytics implementations. Covers Google Search Console, Google Analytic…"
+  },
+  {
+   "id": "skill:serverless-development",
+   "type": "skill",
+   "name": "serverless-development",
+   "path": "skills/serverless-development/SKILL.md",
+   "domain": "backend",
+   "tier": "core",
+   "description": "AWS Lambda, Vercel Edge Functions, Cloudflare Workers, cold starts, deployment patterns, and infrastructure as code (SST, Serverless Framework). Use when building serverless applications or optimizin…"
+  },
+  {
+   "id": "skill:startup-launch",
+   "type": "skill",
+   "name": "startup-launch",
+   "path": "skills/startup-launch/SKILL.md",
+   "domain": "business",
+   "tier": "name-only",
+   "description": "Complete startup launch guidance from idea validation to market entry. Use when planning a new business, validating product ideas, or preparing for launch."
+  },
+  {
+   "id": "skill:statistics-verifier",
+   "type": "skill",
+   "name": "statistics-verifier",
+   "path": "skills/statistics-verifier/SKILL.md",
+   "domain": "quality",
+   "tier": "name-only",
+   "description": "Verify statistics from raw data with methodology checking, significance testing, claim validation, and bias detection. Use when fact-checking statistical claims, validating research findings, or audi…"
+  },
+  {
+   "id": "skill:status-report-generator",
+   "type": "skill",
+   "name": "status-report-generator",
+   "path": "skills/status-report-generator/SKILL.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Project status report generation from git history, task context, and milestone tracking. Use when creating weekly updates, sprint reviews, stakeholder reports, or project dashboards."
+  },
+  {
+   "id": "skill:supply-chain-optimizer",
+   "type": "skill",
+   "name": "supply-chain-optimizer",
+   "path": "skills/supply-chain-optimizer/SKILL.md",
+   "domain": "business",
+   "tier": "name-only",
+   "description": "Supply chain analysis, inventory optimization, logistics planning, vendor evaluation, and demand forecasting frameworks. Use when analyzing supply chains, optimizing inventory, or evaluating supplier…"
+  },
+  {
+   "id": "skill:sustainability-esg",
+   "type": "skill",
+   "name": "sustainability-esg",
+   "path": "skills/sustainability-esg/SKILL.md",
+   "domain": "business",
+   "tier": "name-only",
+   "description": "Sustainability and ESG expertise for ESG strategy, carbon footprint management, sustainable supply chains, circular economy, renewable energy, climate risk, and ESG reporting (GRI, SASB, TCFD). Use w…"
+  },
+  {
+   "id": "skill:svelte-development",
+   "type": "skill",
+   "name": "svelte-development",
+   "path": "skills/svelte-development/SKILL.md",
+   "domain": "frontend",
+   "tier": "name-only",
+   "description": "Svelte 5 development with runes ($state, $derived, $effect), SvelteKit full-stack framework, and modern reactive patterns. Use when building Svelte applications, implementing fine-grained reactivity,…"
+  },
+  {
+   "id": "skill:tauri-desktop",
+   "type": "skill",
+   "name": "tauri-desktop",
+   "path": "skills/tauri-desktop/SKILL.md",
+   "domain": "systems",
+   "tier": "name-only",
+   "description": "Tauri 2.0 project setup, Rust backend + web frontend, plugin system, IPC commands, security model, auto-update, and mobile support. Use when building lightweight cross-platform desktop or mobile apps…"
+  },
+  {
+   "id": "skill:tdd-workflow",
+   "type": "skill",
+   "name": "tdd-workflow",
+   "path": "skills/tdd-workflow/SKILL.md",
+   "domain": "quality",
+   "tier": "name-only",
+   "description": "Test-Driven Development workflow enforcement with RED-GREEN-REFACTOR cycle. Use when implementing features test-first or improving test coverage."
+  },
+  {
+   "id": "skill:tech-debt-analyzer",
+   "type": "skill",
+   "name": "tech-debt-analyzer",
+   "path": "skills/tech-debt-analyzer/SKILL.md",
+   "domain": "quality",
+   "tier": "core",
+   "description": "This skill should be used when analyzing technical debt in a codebase, documenting code quality issues, creating technical debt registers, or assessing code maintainability. Use this for identifying…"
+  },
+  {
+   "id": "skill:test-specialist",
+   "type": "skill",
+   "name": "test-specialist",
+   "path": "skills/test-specialist/SKILL.md",
+   "domain": "quality",
+   "tier": "core",
+   "description": "This skill should be used when writing test cases, fixing bugs, analyzing code for potential issues, or improving test coverage for JavaScript/TypeScript applications. Use this for unit tests, integr…"
+  },
+  {
+   "id": "skill:toolkit-router",
+   "type": "skill",
+   "name": "toolkit-router",
+   "path": "skills/toolkit-router/SKILL.md",
+   "domain": "workflow",
+   "tier": "core",
+   "description": "Find the right skill, agent, command, rule, checklist, or marketplace skill in this ~/.claude toolkit for the current task. Use when a task falls in a specialized domain (mobile, security, data/ML, i…"
+  },
+  {
+   "id": "skill:travel-planner",
+   "type": "skill",
+   "name": "travel-planner",
+   "path": "skills/travel-planner/SKILL.md",
+   "domain": "research",
+   "tier": "name-only",
+   "description": "Travel destination research and daily itinerary creation with logistics planning, budget tracking, and experience optimization. Use when planning trips, creating travel itineraries, comparing destina…"
+  },
+  {
+   "id": "skill:ui-animation",
+   "type": "skill",
+   "name": "ui-animation",
+   "path": "skills/ui-animation/SKILL.md",
+   "domain": "frontend",
+   "tier": "name-only",
+   "description": "Motion design and animation for user interfaces. Use when creating micro-interactions, page transitions, loading states, or any UI animation across web and mobile platforms."
+  },
+  {
+   "id": "skill:ui-research",
+   "type": "skill",
+   "name": "ui-research",
+   "path": "skills/ui-research/SKILL.md",
+   "domain": "frontend",
+   "tier": "core",
+   "description": "Research-first UI/UX design workflow. Use BEFORE any frontend visual work to research modern patterns, gather inspiration from real products, and avoid generic AI-generated looks. Mandatory prerequis…"
+  },
+  {
+   "id": "skill:video-production",
+   "type": "skill",
+   "name": "video-production",
+   "path": "skills/video-production/SKILL.md",
+   "domain": "creative",
+   "tier": "name-only",
+   "description": "Professional video production from planning to delivery. Use when creating video content, editing workflows, motion graphics, or optimizing video for different platforms."
+  },
+  {
+   "id": "skill:volunteer-coordinator",
+   "type": "skill",
+   "name": "volunteer-coordinator",
+   "path": "skills/volunteer-coordinator/SKILL.md",
+   "domain": "research",
+   "tier": "name-only",
+   "description": "Volunteer management system design with scheduling, skill matching, communication templates, recognition programs, and retention strategies. Use when building volunteer programs, coordinating volunte…"
+  },
+  {
+   "id": "skill:vue-development",
+   "type": "skill",
+   "name": "vue-development",
+   "path": "skills/vue-development/SKILL.md",
+   "domain": "frontend",
+   "tier": "name-only",
+   "description": "Vue.js 3 development with Composition API, TypeScript, Pinia state management, and Nuxt 3 full-stack. Use when building Vue applications, implementing reactive patterns, creating composables, or work…"
+  },
+  {
+   "id": "skill:websockets-realtime",
+   "type": "skill",
+   "name": "websockets-realtime",
+   "path": "skills/websockets-realtime/SKILL.md",
+   "domain": "backend",
+   "tier": "name-only",
+   "description": "Real-time communication with WebSockets, Server-Sent Events, and related technologies. Use when building chat, live updates, collaborative features, or any real-time functionality."
+  },
+  {
+   "id": "agent:accessibility-expert",
+   "type": "agent",
+   "name": "accessibility-expert",
+   "path": "agents/accessibility-expert.md",
+   "domain": "frontend",
+   "description": "WCAG compliance, screen reader compatibility, and inclusive design patterns. Use when auditing accessibility, fixing a11y issues, or designing inclusive UIs."
+  },
+  {
+   "id": "agent:android-developer",
+   "type": "agent",
+   "name": "android-developer",
+   "path": "agents/android-developer.md",
+   "domain": "mobile",
+   "description": "Expert Android developer specializing in Kotlin, Jetpack Compose, and modern Android architecture"
+  },
+  {
+   "id": "agent:api-designer",
+   "type": "agent",
+   "name": "api-designer",
+   "path": "agents/api-designer.md",
+   "domain": "backend",
+   "description": "Designs REST and GraphQL APIs following best practices. Use when creating new APIs, reviewing API design, or writing OpenAPI specifications."
+  },
+  {
+   "id": "agent:api-integration-specialist",
+   "type": "agent",
+   "name": "api-integration-specialist",
+   "path": "agents/api-integration-specialist.md",
+   "domain": "backend",
+   "description": "Third-party API integration, webhook handling, OAuth flows, rate limiting, and SDK wrapping specialist. Use when integrating external APIs, building webhook handlers, or creating API client libraries…"
+  },
+  {
+   "id": "agent:architecture-analyst",
+   "type": "agent",
+   "name": "architecture-analyst",
+   "path": "agents/architecture-analyst.md",
+   "domain": "quality",
+   "description": "Analyzes system architecture, identifies patterns/anti-patterns, and provides strategic recommendations. Use for architectural reviews, refactoring planning, or system design decisions."
+  },
+  {
+   "id": "agent:audio-engineer",
+   "type": "agent",
+   "name": "audio-engineer",
+   "path": "agents/audio-engineer.md",
+   "domain": "creative",
+   "description": "Expert audio engineer for recording, mixing, mastering, and sound design"
+  },
+  {
+   "id": "agent:auth-specialist",
+   "type": "agent",
+   "name": "auth-specialist",
+   "path": "agents/auth-specialist.md",
+   "domain": "backend",
+   "description": "OAuth 2.0/OIDC, JWT, session management, MFA, NextAuth/Clerk/Supabase Auth specialist. Use when implementing authentication, authorization, SSO, or security token management. Trigger phrases: login,…"
+  },
+  {
+   "id": "agent:blockchain-developer",
+   "type": "agent",
+   "name": "blockchain-developer",
+   "path": "agents/blockchain-developer.md",
+   "domain": "systems",
+   "description": "Solidity, smart contracts, Web3, EVM, DeFi protocols, and blockchain development specialist. Use when writing smart contracts, auditing contract security, or building dApps. Trigger phrases: Solidity…"
+  },
+  {
+   "id": "agent:brand-strategist",
+   "type": "agent",
+   "name": "brand-strategist",
+   "path": "agents/brand-strategist.md",
+   "domain": "creative",
+   "description": "Expert brand strategist for brand identity, positioning, naming, and brand guidelines"
+  },
+  {
+   "id": "agent:browser-extension-developer",
+   "type": "agent",
+   "name": "browser-extension-developer",
+   "path": "agents/browser-extension-developer.md",
+   "domain": "frontend",
+   "description": "Chrome, Firefox, and cross-browser extension development specialist. Manifest V3, service workers, content scripts, and WebExtension APIs. Use when building browser extensions or migrating from MV2 t…"
+  },
+  {
+   "id": "agent:cli-developer",
+   "type": "agent",
+   "name": "cli-developer",
+   "path": "agents/cli-developer.md",
+   "domain": "systems",
+   "description": "Command-line tool development, argument parsing, interactive prompts, and terminal UI specialist. Use when building CLI tools, implementing interactive terminal interfaces, or designing command-line…"
+  },
+  {
+   "id": "agent:cloud-architect",
+   "type": "agent",
+   "name": "cloud-architect",
+   "path": "agents/cloud-architect.md",
+   "domain": "infra",
+   "description": "Multi-cloud architecture, cost optimization, serverless vs containers, disaster recovery, and infrastructure design specialist. Use for high-level architecture decisions, cloud migration planning, or…"
+  },
+  {
+   "id": "agent:code-explainer",
+   "type": "agent",
+   "name": "code-explainer",
+   "path": "agents/code-explainer.md",
+   "domain": "quality",
+   "description": "Explains complex code in clear, understandable terms. Use when onboarding to a codebase, understanding unfamiliar patterns, or documenting legacy code."
+  },
+  {
+   "id": "agent:compliance-engineer",
+   "type": "agent",
+   "name": "compliance-engineer",
+   "path": "agents/compliance-engineer.md",
+   "domain": "security",
+   "description": "SOC2, HIPAA, GDPR, PCI-DSS compliance implementation specialist. Use when implementing audit logging, data encryption, access controls, privacy by design, or preparing for compliance audits. Trigger…"
+  },
+  {
+   "id": "agent:cpp-expert",
+   "type": "agent",
+   "name": "cpp-expert",
+   "path": "agents/cpp-expert.md",
+   "domain": "systems",
+   "description": "C and C++ development, modern C++ (C++17/20/23), CMake, systems programming, and memory management specialist. Use when writing C/C++ code, debugging memory issues, or building systems-level software…"
+  },
+  {
+   "id": "agent:data-engineer",
+   "type": "agent",
+   "name": "data-engineer",
+   "path": "agents/data-engineer.md",
+   "domain": "data-ai",
+   "description": "ETL pipelines, data warehousing, stream processing, and data infrastructure specialist. Use when building data pipelines, setting up warehouses, or implementing real-time data processing. Trigger phr…"
+  },
+  {
+   "id": "agent:database-expert",
+   "type": "agent",
+   "name": "database-expert",
+   "path": "agents/database-expert.md",
+   "domain": "backend",
+   "description": "Expert database architect and engineer for PostgreSQL, MongoDB, Redis, and all major databases. Use when designing schemas, optimizing queries, planning migrations, implementing caching, or troublesh…"
+  },
+  {
+   "id": "agent:debugging-specialist",
+   "type": "agent",
+   "name": "debugging-specialist",
+   "path": "agents/debugging-specialist.md",
+   "domain": "quality",
+   "description": "Systematic 4-phase debugging for complex and intermittent issues. Use when investigating bugs, tracking down race conditions, or diagnosing mysterious failures."
+  },
+  {
+   "id": "agent:deep-code-reviewer",
+   "type": "agent",
+   "name": "deep-code-reviewer",
+   "path": "agents/deep-code-reviewer.md",
+   "domain": "quality",
+   "description": "Thorough 6-aspect code review covering correctness, security, performance, maintainability, testing, and documentation. Use for comprehensive PR reviews or code quality audits."
+  },
+  {
+   "id": "agent:desktop-developer",
+   "type": "agent",
+   "name": "desktop-developer",
+   "path": "agents/desktop-developer.md",
+   "domain": "systems",
+   "description": "Expert desktop application developer for Electron, Tauri, and native desktop development"
+  },
+  {
+   "id": "agent:devops-engineer",
+   "type": "agent",
+   "name": "devops-engineer",
+   "path": "agents/devops-engineer.md",
+   "domain": "infra",
+   "description": "Expert DevOps and cloud infrastructure engineer for AWS, GCP, Azure, Kubernetes, Terraform, and CI/CD pipelines. Use when setting up pipelines, containerizing apps, writing infrastructure as code, or…"
+  },
+  {
+   "id": "agent:devsecops-engineer",
+   "type": "agent",
+   "name": "devsecops-engineer",
+   "path": "agents/devsecops-engineer.md",
+   "domain": "security",
+   "description": "CI/CD security, SAST/DAST pipelines, supply chain security, container scanning, and security automation specialist. Use when securing CI/CD pipelines, implementing security scanning, or hardening bui…"
+  },
+  {
+   "id": "agent:django-fastapi-expert",
+   "type": "agent",
+   "name": "django-fastapi-expert",
+   "path": "agents/django-fastapi-expert.md",
+   "domain": "backend",
+   "description": "Django ORM, Django REST Framework, FastAPI async patterns, and Pydantic v2 specialist. Use when building Python web applications, designing APIs with Django or FastAPI, or working with Python web fra…"
+  },
+  {
+   "id": "agent:documentation-writer",
+   "type": "agent",
+   "name": "documentation-writer",
+   "path": "agents/documentation-writer.md",
+   "domain": "quality",
+   "description": "Generates comprehensive documentation including READMEs, API docs, architecture docs, and inline comments. Use when documenting code, creating guides, or explaining systems."
+  },
+  {
+   "id": "agent:e2e-test-specialist",
+   "type": "agent",
+   "name": "e2e-test-specialist",
+   "path": "agents/e2e-test-specialist.md",
+   "domain": "quality",
+   "description": "Playwright, Cypress, and visual regression testing specialist. Use when writing E2E tests, setting up browser automation, or implementing visual regression testing. Trigger phrases: E2E, end-to-end,…"
+  },
+  {
+   "id": "agent:email-specialist",
+   "type": "agent",
+   "name": "email-specialist",
+   "path": "agents/email-specialist.md",
+   "domain": "backend",
+   "description": "Transactional email (Resend, SES, SendGrid), email templates (React Email, MJML), and deliverability specialist. Use when implementing email systems, designing templates, or troubleshooting deliverab…"
+  },
+  {
+   "id": "agent:embedded-developer",
+   "type": "agent",
+   "name": "embedded-developer",
+   "path": "agents/embedded-developer.md",
+   "domain": "systems",
+   "description": "Embedded systems, firmware, RTOS, microcontrollers (STM32, ESP32, Arduino), IoT, and bare-metal C/C++ specialist. Use when developing firmware, working with hardware peripherals, or building IoT devi…"
+  },
+  {
+   "id": "agent:event-driven-architect",
+   "type": "agent",
+   "name": "event-driven-architect",
+   "path": "agents/event-driven-architect.md",
+   "domain": "backend",
+   "description": "Kafka, RabbitMQ, SQS/SNS, event sourcing, CQRS, and message-driven architecture specialist. Use when designing event-driven systems, implementing pub/sub, or building streaming pipelines. Trigger phr…"
+  },
+  {
+   "id": "agent:flutter-developer",
+   "type": "agent",
+   "name": "flutter-developer",
+   "path": "agents/flutter-developer.md",
+   "domain": "mobile",
+   "description": "Flutter/Dart cross-platform development, Riverpod state management, and platform channels specialist. Use when building Flutter apps, implementing state management, or working with native platform fe…"
+  },
+  {
+   "id": "agent:game-developer",
+   "type": "agent",
+   "name": "game-developer",
+   "path": "agents/game-developer.md",
+   "domain": "systems",
+   "description": "Expert game developer for Unity, Unreal Engine, and Godot game development"
+  },
+  {
+   "id": "agent:go-expert",
+   "type": "agent",
+   "name": "go-expert",
+   "path": "agents/go-expert.md",
+   "domain": "workflow",
+   "description": "Go concurrency, error handling, stdlib patterns, Chi/Echo web frameworks specialist. Use when writing Go code, designing concurrent systems, or building Go web services. Trigger phrases: Go, Golang,…"
+  },
+  {
+   "id": "agent:graphic-designer",
+   "type": "agent",
+   "name": "graphic-designer",
+   "path": "agents/graphic-designer.md",
+   "domain": "creative",
+   "description": "Expert graphic designer for digital and print design, color theory, typography, and visual identity"
+  },
+  {
+   "id": "agent:graphql-architect",
+   "type": "agent",
+   "name": "graphql-architect",
+   "path": "agents/graphql-architect.md",
+   "domain": "backend",
+   "description": "Expert GraphQL architect for API design, schema development, and performance optimization"
+  },
+  {
+   "id": "agent:gsd-advisor-researcher",
+   "type": "agent",
+   "name": "gsd-advisor-researcher",
+   "path": "agents/gsd-advisor-researcher.md",
+   "domain": "workflow",
+   "description": "Researches a single gray area decision and returns a structured comparison table with rationale. Spawned by discuss-phase advisor mode."
+  },
+  {
+   "id": "agent:gsd-assumptions-analyzer",
+   "type": "agent",
+   "name": "gsd-assumptions-analyzer",
+   "path": "agents/gsd-assumptions-analyzer.md",
+   "domain": "workflow",
+   "description": "Deeply analyzes codebase for a phase and returns structured assumptions with evidence. Spawned by discuss-phase assumptions mode."
+  },
+  {
+   "id": "agent:gsd-codebase-mapper",
+   "type": "agent",
+   "name": "gsd-codebase-mapper",
+   "path": "agents/gsd-codebase-mapper.md",
+   "domain": "workflow",
+   "description": "Explores codebase and writes structured analysis documents. Spawned by map-codebase with a focus area (tech, arch, quality, concerns). Writes documents directly to reduce orchestrator context load."
+  },
+  {
+   "id": "agent:gsd-debugger",
+   "type": "agent",
+   "name": "gsd-debugger",
+   "path": "agents/gsd-debugger.md",
+   "domain": "workflow",
+   "description": "Investigates bugs using scientific method, manages debug sessions, handles checkpoints. Spawned by /gsd:debug orchestrator."
+  },
+  {
+   "id": "agent:gsd-executor",
+   "type": "agent",
+   "name": "gsd-executor",
+   "path": "agents/gsd-executor.md",
+   "domain": "workflow",
+   "description": "Executes GSD plans with atomic commits, deviation handling, checkpoint protocols, and state management. Spawned by execute-phase orchestrator or execute-plan command."
+  },
+  {
+   "id": "agent:gsd-integration-checker",
+   "type": "agent",
+   "name": "gsd-integration-checker",
+   "path": "agents/gsd-integration-checker.md",
+   "domain": "workflow",
+   "description": "Verifies cross-phase integration and E2E flows. Checks that phases connect properly and user workflows complete end-to-end."
+  },
+  {
+   "id": "agent:gsd-nyquist-auditor",
+   "type": "agent",
+   "name": "gsd-nyquist-auditor",
+   "path": "agents/gsd-nyquist-auditor.md",
+   "domain": "workflow",
+   "description": "Fills Nyquist validation gaps by generating tests and verifying coverage for phase requirements"
+  },
+  {
+   "id": "agent:gsd-phase-researcher",
+   "type": "agent",
+   "name": "gsd-phase-researcher",
+   "path": "agents/gsd-phase-researcher.md",
+   "domain": "workflow",
+   "description": "Researches how to implement a phase before planning. Produces RESEARCH.md consumed by gsd-planner. Spawned by /gsd:plan-phase orchestrator."
+  },
+  {
+   "id": "agent:gsd-plan-checker",
+   "type": "agent",
+   "name": "gsd-plan-checker",
+   "path": "agents/gsd-plan-checker.md",
+   "domain": "workflow",
+   "description": "Verifies plans will achieve phase goal before execution. Goal-backward analysis of plan quality. Spawned by /gsd:plan-phase orchestrator."
+  },
+  {
+   "id": "agent:gsd-planner",
+   "type": "agent",
+   "name": "gsd-planner",
+   "path": "agents/gsd-planner.md",
+   "domain": "workflow",
+   "description": "Creates executable phase plans with task breakdown, dependency analysis, and goal-backward verification. Spawned by /gsd:plan-phase orchestrator."
+  },
+  {
+   "id": "agent:gsd-project-researcher",
+   "type": "agent",
+   "name": "gsd-project-researcher",
+   "path": "agents/gsd-project-researcher.md",
+   "domain": "workflow",
+   "description": "Researches domain ecosystem before roadmap creation. Produces files in .planning/research/ consumed during roadmap creation. Spawned by /gsd:new-project or /gsd:new-milestone orchestrators."
+  },
+  {
+   "id": "agent:gsd-research-synthesizer",
+   "type": "agent",
+   "name": "gsd-research-synthesizer",
+   "path": "agents/gsd-research-synthesizer.md",
+   "domain": "workflow",
+   "description": "Synthesizes research outputs from parallel researcher agents into SUMMARY.md. Spawned by /gsd:new-project after 4 researcher agents complete."
+  },
+  {
+   "id": "agent:gsd-roadmapper",
+   "type": "agent",
+   "name": "gsd-roadmapper",
+   "path": "agents/gsd-roadmapper.md",
+   "domain": "workflow",
+   "description": "Creates project roadmaps with phase breakdown, requirement mapping, success criteria derivation, and coverage validation. Spawned by /gsd:new-project orchestrator."
+  },
+  {
+   "id": "agent:gsd-ui-auditor",
+   "type": "agent",
+   "name": "gsd-ui-auditor",
+   "path": "agents/gsd-ui-auditor.md",
+   "domain": "workflow",
+   "description": "Retroactive 6-pillar visual audit of implemented frontend code. Produces scored UI-REVIEW.md. Spawned by /gsd:ui-review orchestrator."
+  },
+  {
+   "id": "agent:gsd-ui-checker",
+   "type": "agent",
+   "name": "gsd-ui-checker",
+   "path": "agents/gsd-ui-checker.md",
+   "domain": "workflow",
+   "description": "Validates UI-SPEC.md design contracts against 6 quality dimensions. Produces BLOCK/FLAG/PASS verdicts. Spawned by /gsd:ui-phase orchestrator."
+  },
+  {
+   "id": "agent:gsd-ui-researcher",
+   "type": "agent",
+   "name": "gsd-ui-researcher",
+   "path": "agents/gsd-ui-researcher.md",
+   "domain": "workflow",
+   "description": "Produces UI-SPEC.md design contract for frontend phases. Reads upstream artifacts, detects design system state, asks only unanswered questions. Spawned by /gsd:ui-phase orchestrator."
+  },
+  {
+   "id": "agent:gsd-user-profiler",
+   "type": "agent",
+   "name": "gsd-user-profiler",
+   "path": "agents/gsd-user-profiler.md",
+   "domain": "workflow",
+   "description": "Analyzes extracted session messages across 8 behavioral dimensions to produce a scored developer profile with confidence levels and evidence. Spawned by profile orchestration workflows."
+  },
+  {
+   "id": "agent:gsd-verifier",
+   "type": "agent",
+   "name": "gsd-verifier",
+   "path": "agents/gsd-verifier.md",
+   "domain": "workflow",
+   "description": "Verifies phase goal achievement through goal-backward analysis. Checks codebase delivers what phase promised, not just that tasks completed. Creates VERIFICATION.md report."
+  },
+  {
+   "id": "agent:i18n-specialist",
+   "type": "agent",
+   "name": "i18n-specialist",
+   "path": "agents/i18n-specialist.md",
+   "domain": "frontend",
+   "description": "Expert internationalization specialist for multi-language support and localization"
+  },
+  {
+   "id": "agent:ios-developer",
+   "type": "agent",
+   "name": "ios-developer",
+   "path": "agents/ios-developer.md",
+   "domain": "mobile",
+   "description": "Expert iOS/iPadOS/tvOS developer specializing in Swift, SwiftUI, and Apple platform development"
+  },
+  {
+   "id": "agent:kotlin-expert",
+   "type": "agent",
+   "name": "kotlin-expert",
+   "path": "agents/kotlin-expert.md",
+   "domain": "mobile",
+   "description": "Kotlin Multiplatform, Compose Multiplatform, coroutines, Ktor, and JVM ecosystem specialist. Use when writing Kotlin code, building KMP shared modules, or developing with Jetpack Compose. Trigger phr…"
+  },
+  {
+   "id": "agent:macos-developer",
+   "type": "agent",
+   "name": "macos-developer",
+   "path": "agents/macos-developer.md",
+   "domain": "systems",
+   "description": "Expert macOS native developer for AppKit, Catalyst, and macOS-specific features"
+  },
+  {
+   "id": "agent:microservices-architect",
+   "type": "agent",
+   "name": "microservices-architect",
+   "path": "agents/microservices-architect.md",
+   "domain": "backend",
+   "description": "Expert microservices architect for distributed system design, service decomposition, and resilience patterns"
+  },
+  {
+   "id": "agent:migration-specialist",
+   "type": "agent",
+   "name": "migration-specialist",
+   "path": "agents/migration-specialist.md",
+   "domain": "quality",
+   "description": "Framework upgrades, codemod strategies, version migration planning, and legacy modernization specialist. Use when upgrading frameworks, migrating between technologies, or modernizing legacy codebases…"
+  },
+  {
+   "id": "agent:ml-engineer",
+   "type": "agent",
+   "name": "ml-engineer",
+   "path": "agents/ml-engineer.md",
+   "domain": "data-ai",
+   "description": "Expert machine learning engineer for PyTorch, TensorFlow, LLM integration, and ML pipelines"
+  },
+  {
+   "id": "agent:mobile-architect",
+   "type": "agent",
+   "name": "mobile-architect",
+   "path": "agents/mobile-architect.md",
+   "domain": "mobile",
+   "description": "Cross-platform mobile architecture expert for React Native, Flutter, and native development decisions"
+  },
+  {
+   "id": "agent:mobile-release-manager",
+   "type": "agent",
+   "name": "mobile-release-manager",
+   "path": "agents/mobile-release-manager.md",
+   "domain": "mobile",
+   "description": "App store submissions, mobile CI/CD, ASO, code signing, and beta distribution specialist. Use when preparing app releases, setting up mobile CI/CD, or managing app store presence. Trigger phrases: ap…"
+  },
+  {
+   "id": "agent:monetization-expert",
+   "type": "agent",
+   "name": "monetization-expert",
+   "path": "agents/monetization-expert.md",
+   "domain": "business",
+   "description": "Expert in revenue models, pricing strategy, and business monetization"
+  },
+  {
+   "id": "agent:motion-designer",
+   "type": "agent",
+   "name": "motion-designer",
+   "path": "agents/motion-designer.md",
+   "domain": "creative",
+   "description": "Expert motion designer for UI animations, micro-interactions, and motion systems"
+  },
+  {
+   "id": "agent:next-js-expert",
+   "type": "agent",
+   "name": "next-js-expert",
+   "path": "agents/next-js-expert.md",
+   "domain": "frontend",
+   "description": "Next.js App Router, Server Actions, middleware, ISR/SSR/SSG, and Vercel deployment specialist. Use when building Next.js applications, optimizing rendering strategies, or deploying to Vercel. Trigger…"
+  },
+  {
+   "id": "agent:observability-engineer",
+   "type": "agent",
+   "name": "observability-engineer",
+   "path": "agents/observability-engineer.md",
+   "domain": "infra",
+   "description": "OpenTelemetry, Prometheus, Grafana, distributed tracing, SLO design, and alerting specialist. Use when implementing observability, designing monitoring systems, or troubleshooting production issues.…"
+  },
+  {
+   "id": "agent:payment-billing-specialist",
+   "type": "agent",
+   "name": "payment-billing-specialist",
+   "path": "agents/payment-billing-specialist.md",
+   "domain": "backend",
+   "description": "Stripe integration, subscription billing, webhooks, PCI compliance, and tax handling specialist. Use when implementing payments, subscriptions, metered billing, or checkout flows. Trigger phrases: pa…"
+  },
+  {
+   "id": "agent:performance-optimizer",
+   "type": "agent",
+   "name": "performance-optimizer",
+   "path": "agents/performance-optimizer.md",
+   "domain": "quality",
+   "description": "Identifies performance bottlenecks and optimization opportunities. Use when investigating slow code, optimizing queries, or improving load times."
+  },
+  {
+   "id": "agent:product-analytics-specialist",
+   "type": "agent",
+   "name": "product-analytics-specialist",
+   "path": "agents/product-analytics-specialist.md",
+   "domain": "data-ai",
+   "description": "PostHog, Mixpanel, Amplitude event tracking, funnels, cohorts, and A/B testing specialist. Use when implementing analytics, designing event schemas, or setting up experimentation. Trigger phrases: an…"
+  },
+  {
+   "id": "agent:product-manager",
+   "type": "agent",
+   "name": "product-manager",
+   "path": "agents/product-manager.md",
+   "domain": "workflow",
+   "description": "Product requirements, user stories, roadmaps, prioritization frameworks, and sprint planning specialist. Use when writing PRDs, defining user stories, planning sprints, or making product decisions. T…"
+  },
+  {
+   "id": "agent:pwa-specialist",
+   "type": "agent",
+   "name": "pwa-specialist",
+   "path": "agents/pwa-specialist.md",
+   "domain": "backend",
+   "description": "Progressive Web App development, service workers, offline-first architecture, and push notification specialist. Use when building installable web apps, implementing offline functionality, or working…"
+  },
+  {
+   "id": "agent:python-expert",
+   "type": "agent",
+   "name": "python-expert",
+   "path": "agents/python-expert.md",
+   "domain": "systems",
+   "description": "Python best practices, type hints, async patterns, and ecosystem expertise. Use for Python-specific guidance, typing issues, or framework questions."
+  },
+  {
+   "id": "agent:react-expert",
+   "type": "agent",
+   "name": "react-expert",
+   "path": "agents/react-expert.md",
+   "domain": "frontend",
+   "description": "React patterns, hooks, state management, and performance optimization. Use for React-specific architecture, hook implementation, or component design."
+  },
+  {
+   "id": "agent:realtime-specialist",
+   "type": "agent",
+   "name": "realtime-specialist",
+   "path": "agents/realtime-specialist.md",
+   "domain": "backend",
+   "description": "Expert real-time systems specialist for WebSockets, SSE, and live data applications"
+  },
+  {
+   "id": "agent:refactoring-specialist",
+   "type": "agent",
+   "name": "refactoring-specialist",
+   "path": "agents/refactoring-specialist.md",
+   "domain": "quality",
+   "description": "Safe, incremental refactoring with comprehensive test coverage. Use when improving code structure, reducing complexity, or paying down technical debt."
+  },
+  {
+   "id": "agent:rust-expert",
+   "type": "agent",
+   "name": "rust-expert",
+   "path": "agents/rust-expert.md",
+   "domain": "systems",
+   "description": "Rust ownership/borrowing, async Rust, Axum/Actix web frameworks, and WASM specialist. Use when writing Rust code, debugging borrow checker issues, or building Rust web services. Trigger phrases: Rust…"
+  },
+  {
+   "id": "agent:security-auditor",
+   "type": "agent",
+   "name": "security-auditor",
+   "path": "agents/security-auditor.md",
+   "domain": "security",
+   "description": "Deep security analysis for OWASP Top 10, auth vulnerabilities, secrets exposure, and dependency risks. Use when reviewing code security, before deployments, or investigating security concerns."
+  },
+  {
+   "id": "agent:seo-specialist",
+   "type": "agent",
+   "name": "seo-specialist",
+   "path": "agents/seo-specialist.md",
+   "domain": "frontend",
+   "description": "Technical SEO, structured data, Core Web Vitals, meta tags, and Schema.org specialist. Use when optimizing search engine visibility, implementing structured data, or improving web performance for SEO…"
+  },
+  {
+   "id": "agent:serverless-specialist",
+   "type": "agent",
+   "name": "serverless-specialist",
+   "path": "agents/serverless-specialist.md",
+   "domain": "backend",
+   "description": "AWS Lambda, Cloudflare Workers, Vercel Edge Functions, and serverless architecture specialist. Use when building serverless functions, optimizing cold starts, or designing event-driven serverless sys…"
+  },
+  {
+   "id": "agent:startup-advisor",
+   "type": "agent",
+   "name": "startup-advisor",
+   "path": "agents/startup-advisor.md",
+   "domain": "business",
+   "description": "Expert startup advisor for launch strategy, validation, MVP development, and growth"
+  },
+  {
+   "id": "agent:svelte-expert",
+   "type": "agent",
+   "name": "svelte-expert",
+   "path": "agents/svelte-expert.md",
+   "domain": "frontend",
+   "description": "Svelte 5 runes, SvelteKit routing, form actions, and compile-time reactivity specialist. Use when building Svelte or SvelteKit applications, implementing rune-based state management, or working with…"
+  },
+  {
+   "id": "agent:technical-writer",
+   "type": "agent",
+   "name": "technical-writer",
+   "path": "agents/technical-writer.md",
+   "domain": "quality",
+   "description": "Architecture Decision Records, API documentation, migration guides, runbooks, and technical documentation specialist. Use when creating comprehensive documentation, writing ADRs, or building knowledg…"
+  },
+  {
+   "id": "agent:test-generator",
+   "type": "agent",
+   "name": "test-generator",
+   "path": "agents/test-generator.md",
+   "domain": "quality",
+   "description": "Generates comprehensive test suites using TDD patterns. Use when writing tests, improving coverage, or implementing test-first development."
+  },
+  {
+   "id": "agent:typescript-expert",
+   "type": "agent",
+   "name": "typescript-expert",
+   "path": "agents/typescript-expert.md",
+   "domain": "systems",
+   "description": "TypeScript type system mastery including generics, conditional types, and advanced patterns. Use when solving complex type problems or improving type safety."
+  },
+  {
+   "id": "agent:ux-researcher",
+   "type": "agent",
+   "name": "ux-researcher",
+   "path": "agents/ux-researcher.md",
+   "domain": "research",
+   "description": "UX research, usability testing, user interviews, wireframing, and information architecture specialist. Use when planning user research, designing interfaces, conducting heuristic evaluations, or crea…"
+  },
+  {
+   "id": "agent:video-producer",
+   "type": "agent",
+   "name": "video-producer",
+   "path": "agents/video-producer.md",
+   "domain": "creative",
+   "description": "Expert video production specialist for planning, shooting, editing, and delivering video content"
+  },
+  {
+   "id": "agent:vue-nuxt-expert",
+   "type": "agent",
+   "name": "vue-nuxt-expert",
+   "path": "agents/vue-nuxt-expert.md",
+   "domain": "frontend",
+   "description": "Vue 3 Composition API, Nuxt 3 server routes, Pinia state management, and VueUse composables specialist. Use when building Vue or Nuxt applications, implementing Composition API patterns, or working w…"
+  },
+  {
+   "id": "agent:wasm-specialist",
+   "type": "agent",
+   "name": "wasm-specialist",
+   "path": "agents/wasm-specialist.md",
+   "domain": "systems",
+   "description": "WebAssembly, WASI, wasm-bindgen, Emscripten, and cross-language compilation specialist. Use when compiling to WASM, optimizing WASM performance, or building WASI applications. Trigger phrases: WebAss…"
+  },
+  {
+   "id": "command:assemble-team",
+   "type": "command",
+   "name": "assemble-team",
+   "path": "commands/assemble-team.md",
+   "domain": "quality",
+   "tier": "name-only",
+   "description": "Assemble a pre-built agent team for parallel work - review, feature, debug, cross-platform, full-stack, or research"
+  },
+  {
+   "id": "command:audit-docs",
+   "type": "command",
+   "name": "audit-docs",
+   "path": "commands/audit-docs.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Scan documentation for staleness — broken links, outdated counts, stale version references, and inconsistencies"
+  },
+  {
+   "id": "command:auto-claude",
+   "type": "command",
+   "name": "auto-claude",
+   "path": "commands/auto-claude.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Invoke Auto-Claude autonomous coding framework for complex feature implementation"
+  },
+  {
+   "id": "command:backup-config",
+   "type": "command",
+   "name": "backup-config",
+   "path": "commands/backup-config.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Backup Claude Code configuration files"
+  },
+  {
+   "id": "command:bootstrap",
+   "type": "command",
+   "name": "bootstrap",
+   "path": "commands/bootstrap.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Verifies and repairs the Claude Code Toolkit installation."
+  },
+  {
+   "id": "command:changelog",
+   "type": "command",
+   "name": "changelog",
+   "path": "commands/changelog.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Generate a changelog entry from git commits since the last tag using conventional commit format"
+  },
+  {
+   "id": "command:context-stats",
+   "type": "command",
+   "name": "context-stats",
+   "path": "commands/context-stats.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Display context window usage and token statistics"
+  },
+  {
+   "id": "command:deploy",
+   "type": "command",
+   "name": "deploy",
+   "path": "commands/deploy.md",
+   "domain": "infra",
+   "tier": "core",
+   "description": "Deploy application with pre/post-deploy checks"
+  },
+  {
+   "id": "command:deps-update",
+   "type": "command",
+   "name": "deps-update",
+   "path": "commands/deps-update.md",
+   "domain": "quality",
+   "tier": "name-only",
+   "description": "Audit and update dependencies safely"
+  },
+  {
+   "id": "command:discover-skills",
+   "type": "command",
+   "name": "discover-skills",
+   "path": "commands/discover-skills.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Search skillsmp.com for Claude Code skills using their public API."
+  },
+  {
+   "id": "command:gsd:add-backlog",
+   "type": "command",
+   "name": "gsd:add-backlog",
+   "path": "commands/gsd/add-backlog.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Add an idea to the backlog parking lot (999.x numbering)"
+  },
+  {
+   "id": "command:gsd:add-phase",
+   "type": "command",
+   "name": "gsd:add-phase",
+   "path": "commands/gsd/add-phase.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Add phase to end of current milestone in roadmap"
+  },
+  {
+   "id": "command:gsd:add-tests",
+   "type": "command",
+   "name": "gsd:add-tests",
+   "path": "commands/gsd/add-tests.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Generate tests for a completed phase based on UAT criteria and implementation"
+  },
+  {
+   "id": "command:gsd:add-todo",
+   "type": "command",
+   "name": "gsd:add-todo",
+   "path": "commands/gsd/add-todo.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Capture idea or task as todo from current conversation context"
+  },
+  {
+   "id": "command:gsd:audit-milestone",
+   "type": "command",
+   "name": "gsd:audit-milestone",
+   "path": "commands/gsd/audit-milestone.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Audit milestone completion against original intent before archiving"
+  },
+  {
+   "id": "command:gsd:audit-uat",
+   "type": "command",
+   "name": "gsd:audit-uat",
+   "path": "commands/gsd/audit-uat.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Cross-phase audit of all outstanding UAT and verification items"
+  },
+  {
+   "id": "command:gsd:autonomous",
+   "type": "command",
+   "name": "gsd:autonomous",
+   "path": "commands/gsd/autonomous.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Run all remaining phases autonomously — discuss→plan→execute per phase"
+  },
+  {
+   "id": "command:gsd:check-todos",
+   "type": "command",
+   "name": "gsd:check-todos",
+   "path": "commands/gsd/check-todos.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "List pending todos and select one to work on"
+  },
+  {
+   "id": "command:gsd:cleanup",
+   "type": "command",
+   "name": "gsd:cleanup",
+   "path": "commands/gsd/cleanup.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Archive accumulated phase directories from completed milestones"
+  },
+  {
+   "id": "command:gsd:complete-milestone",
+   "type": "command",
+   "name": "gsd:complete-milestone",
+   "path": "commands/gsd/complete-milestone.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Archive completed milestone and prepare for next version"
+  },
+  {
+   "id": "command:gsd:debug",
+   "type": "command",
+   "name": "gsd:debug",
+   "path": "commands/gsd/debug.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Systematic debugging with persistent state across context resets"
+  },
+  {
+   "id": "command:gsd:discuss-phase",
+   "type": "command",
+   "name": "gsd:discuss-phase",
+   "path": "commands/gsd/discuss-phase.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Gather phase context through adaptive questioning before planning. Use --auto to skip interactive questions (Claude picks recommended defaults)."
+  },
+  {
+   "id": "command:gsd:do",
+   "type": "command",
+   "name": "gsd:do",
+   "path": "commands/gsd/do.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Route freeform text to the right GSD command automatically"
+  },
+  {
+   "id": "command:gsd:execute-phase",
+   "type": "command",
+   "name": "gsd:execute-phase",
+   "path": "commands/gsd/execute-phase.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Execute all plans in a phase with wave-based parallelization"
+  },
+  {
+   "id": "command:gsd:fast",
+   "type": "command",
+   "name": "gsd:fast",
+   "path": "commands/gsd/fast.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Execute a trivial task inline — no subagents, no planning overhead"
+  },
+  {
+   "id": "command:gsd:forensics",
+   "type": "command",
+   "name": "gsd:forensics",
+   "path": "commands/gsd/forensics.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Post-mortem investigation for failed GSD workflows — analyzes git history, artifacts, and state to diagnose what went wrong"
+  },
+  {
+   "id": "command:gsd:health",
+   "type": "command",
+   "name": "gsd:health",
+   "path": "commands/gsd/health.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Diagnose planning directory health and optionally repair issues"
+  },
+  {
+   "id": "command:gsd:help",
+   "type": "command",
+   "name": "gsd:help",
+   "path": "commands/gsd/help.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Show available GSD commands and usage guide"
+  },
+  {
+   "id": "command:gsd:insert-phase",
+   "type": "command",
+   "name": "gsd:insert-phase",
+   "path": "commands/gsd/insert-phase.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Insert urgent work as decimal phase (e.g., 72.1) between existing phases"
+  },
+  {
+   "id": "command:gsd:join-discord",
+   "type": "command",
+   "name": "gsd:join-discord",
+   "path": "commands/gsd/join-discord.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Join the GSD Discord community"
+  },
+  {
+   "id": "command:gsd:list-phase-assumptions",
+   "type": "command",
+   "name": "gsd:list-phase-assumptions",
+   "path": "commands/gsd/list-phase-assumptions.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Surface Claude's assumptions about a phase approach before planning"
+  },
+  {
+   "id": "command:gsd:list-workspaces",
+   "type": "command",
+   "name": "gsd:list-workspaces",
+   "path": "commands/gsd/list-workspaces.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "List active GSD workspaces and their status"
+  },
+  {
+   "id": "command:gsd:manager",
+   "type": "command",
+   "name": "gsd:manager",
+   "path": "commands/gsd/manager.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Interactive command center for managing multiple phases from one terminal"
+  },
+  {
+   "id": "command:gsd:map-codebase",
+   "type": "command",
+   "name": "gsd:map-codebase",
+   "path": "commands/gsd/map-codebase.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Analyze codebase with parallel mapper agents to produce .planning/codebase/ documents"
+  },
+  {
+   "id": "command:gsd:milestone-summary",
+   "type": "command",
+   "name": "gsd:milestone-summary",
+   "path": "commands/gsd/milestone-summary.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Generate a comprehensive project summary from milestone artifacts for team onboarding and review"
+  },
+  {
+   "id": "command:gsd:new-milestone",
+   "type": "command",
+   "name": "gsd:new-milestone",
+   "path": "commands/gsd/new-milestone.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Start a new milestone cycle — update PROJECT.md and route to requirements"
+  },
+  {
+   "id": "command:gsd:new-project",
+   "type": "command",
+   "name": "gsd:new-project",
+   "path": "commands/gsd/new-project.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Initialize a new project with deep context gathering and PROJECT.md"
+  },
+  {
+   "id": "command:gsd:new-workspace",
+   "type": "command",
+   "name": "gsd:new-workspace",
+   "path": "commands/gsd/new-workspace.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Create an isolated workspace with repo copies and independent .planning/"
+  },
+  {
+   "id": "command:gsd:next",
+   "type": "command",
+   "name": "gsd:next",
+   "path": "commands/gsd/next.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Automatically advance to the next logical step in the GSD workflow"
+  },
+  {
+   "id": "command:gsd:note",
+   "type": "command",
+   "name": "gsd:note",
+   "path": "commands/gsd/note.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Zero-friction idea capture. Append, list, or promote notes to todos."
+  },
+  {
+   "id": "command:gsd:pause-work",
+   "type": "command",
+   "name": "gsd:pause-work",
+   "path": "commands/gsd/pause-work.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Create context handoff when pausing work mid-phase"
+  },
+  {
+   "id": "command:gsd:plan-milestone-gaps",
+   "type": "command",
+   "name": "gsd:plan-milestone-gaps",
+   "path": "commands/gsd/plan-milestone-gaps.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Create phases to close all gaps identified by milestone audit"
+  },
+  {
+   "id": "command:gsd:plan-phase",
+   "type": "command",
+   "name": "gsd:plan-phase",
+   "path": "commands/gsd/plan-phase.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Create detailed phase plan (PLAN.md) with verification loop"
+  },
+  {
+   "id": "command:gsd:plant-seed",
+   "type": "command",
+   "name": "gsd:plant-seed",
+   "path": "commands/gsd/plant-seed.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Capture a forward-looking idea with trigger conditions — surfaces automatically at the right milestone"
+  },
+  {
+   "id": "command:gsd:pr-branch",
+   "type": "command",
+   "name": "gsd:pr-branch",
+   "path": "commands/gsd/pr-branch.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Create a clean PR branch by filtering out .planning/ commits — ready for code review"
+  },
+  {
+   "id": "command:gsd:profile-user",
+   "type": "command",
+   "name": "gsd:profile-user",
+   "path": "commands/gsd/profile-user.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Generate developer behavioral profile and create Claude-discoverable artifacts"
+  },
+  {
+   "id": "command:gsd:progress",
+   "type": "command",
+   "name": "gsd:progress",
+   "path": "commands/gsd/progress.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Check project progress, show context, and route to next action (execute or plan)"
+  },
+  {
+   "id": "command:gsd:quick",
+   "type": "command",
+   "name": "gsd:quick",
+   "path": "commands/gsd/quick.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Execute a quick task with GSD guarantees (atomic commits, state tracking) but skip optional agents"
+  },
+  {
+   "id": "command:gsd:reapply-patches",
+   "type": "command",
+   "name": "gsd:reapply-patches",
+   "path": "commands/gsd/reapply-patches.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Reapply local modifications after a GSD update"
+  },
+  {
+   "id": "command:gsd:remove-phase",
+   "type": "command",
+   "name": "gsd:remove-phase",
+   "path": "commands/gsd/remove-phase.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Remove a future phase from roadmap and renumber subsequent phases"
+  },
+  {
+   "id": "command:gsd:remove-workspace",
+   "type": "command",
+   "name": "gsd:remove-workspace",
+   "path": "commands/gsd/remove-workspace.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Remove a GSD workspace and clean up worktrees"
+  },
+  {
+   "id": "command:gsd:research-phase",
+   "type": "command",
+   "name": "gsd:research-phase",
+   "path": "commands/gsd/research-phase.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Research how to implement a phase (standalone - usually use /gsd:plan-phase instead)"
+  },
+  {
+   "id": "command:gsd:resume-work",
+   "type": "command",
+   "name": "gsd:resume-work",
+   "path": "commands/gsd/resume-work.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Resume work from previous session with full context restoration"
+  },
+  {
+   "id": "command:gsd:review-backlog",
+   "type": "command",
+   "name": "gsd:review-backlog",
+   "path": "commands/gsd/review-backlog.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Review and promote backlog items to active milestone"
+  },
+  {
+   "id": "command:gsd:review",
+   "type": "command",
+   "name": "gsd:review",
+   "path": "commands/gsd/review.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Request cross-AI peer review of phase plans from external AI CLIs"
+  },
+  {
+   "id": "command:gsd:session-report",
+   "type": "command",
+   "name": "gsd:session-report",
+   "path": "commands/gsd/session-report.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Generate a session report with token usage estimates, work summary, and outcomes"
+  },
+  {
+   "id": "command:gsd:set-profile",
+   "type": "command",
+   "name": "gsd:set-profile",
+   "path": "commands/gsd/set-profile.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Switch model profile for GSD agents (quality/balanced/budget/inherit)"
+  },
+  {
+   "id": "command:gsd:settings",
+   "type": "command",
+   "name": "gsd:settings",
+   "path": "commands/gsd/settings.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Configure GSD workflow toggles and model profile"
+  },
+  {
+   "id": "command:gsd:ship",
+   "type": "command",
+   "name": "gsd:ship",
+   "path": "commands/gsd/ship.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Create PR, run review, and prepare for merge after verification passes"
+  },
+  {
+   "id": "command:gsd:stats",
+   "type": "command",
+   "name": "gsd:stats",
+   "path": "commands/gsd/stats.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Display project statistics — phases, plans, requirements, git metrics, and timeline"
+  },
+  {
+   "id": "command:gsd:thread",
+   "type": "command",
+   "name": "gsd:thread",
+   "path": "commands/gsd/thread.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Manage persistent context threads for cross-session work"
+  },
+  {
+   "id": "command:gsd:ui-phase",
+   "type": "command",
+   "name": "gsd:ui-phase",
+   "path": "commands/gsd/ui-phase.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Generate UI design contract (UI-SPEC.md) for frontend phases"
+  },
+  {
+   "id": "command:gsd:ui-review",
+   "type": "command",
+   "name": "gsd:ui-review",
+   "path": "commands/gsd/ui-review.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Retroactive 6-pillar visual audit of implemented frontend code"
+  },
+  {
+   "id": "command:gsd:update",
+   "type": "command",
+   "name": "gsd:update",
+   "path": "commands/gsd/update.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Update GSD to latest version with changelog display"
+  },
+  {
+   "id": "command:gsd:validate-phase",
+   "type": "command",
+   "name": "gsd:validate-phase",
+   "path": "commands/gsd/validate-phase.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Retroactively audit and fill Nyquist validation gaps for a completed phase"
+  },
+  {
+   "id": "command:gsd:verify-work",
+   "type": "command",
+   "name": "gsd:verify-work",
+   "path": "commands/gsd/verify-work.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Validate built features through conversational UAT"
+  },
+  {
+   "id": "command:gsd:workstreams",
+   "type": "command",
+   "name": "gsd:workstreams",
+   "path": "commands/gsd/workstreams.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Manage parallel workstreams — list, create, switch, status, progress, complete, and resume"
+  },
+  {
+   "id": "command:handoff",
+   "type": "command",
+   "name": "handoff",
+   "path": "commands/handoff.md",
+   "domain": "workflow",
+   "tier": "core",
+   "description": "Create a handoff document for seamless session continuity."
+  },
+  {
+   "id": "command:health-check",
+   "type": "command",
+   "name": "health-check",
+   "path": "commands/health-check.md",
+   "domain": "workflow",
+   "tier": "core",
+   "description": "Run diagnostics on Claude Code toolkit configuration and status"
+  },
+  {
+   "id": "command:init-project",
+   "type": "command",
+   "name": "init-project",
+   "path": "commands/init-project.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Initialize project with CLAUDE.md template - adaptive detection for new or existing projects"
+  },
+  {
+   "id": "command:list-skills",
+   "type": "command",
+   "name": "list-skills",
+   "path": "commands/list-skills.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Browse available skills by domain or list all skills with comprehensive categorization"
+  },
+  {
+   "id": "command:log-decision",
+   "type": "command",
+   "name": "log-decision",
+   "path": "commands/log-decision.md",
+   "domain": "business",
+   "tier": "name-only",
+   "description": "Append an architectural decision to the persistent decision log."
+  },
+  {
+   "id": "command:migrate",
+   "type": "command",
+   "name": "migrate",
+   "path": "commands/migrate.md",
+   "domain": "quality",
+   "tier": "name-only",
+   "description": "Generate and manage database migrations"
+  },
+  {
+   "id": "command:perf-audit",
+   "type": "command",
+   "name": "perf-audit",
+   "path": "commands/perf-audit.md",
+   "domain": "quality",
+   "tier": "name-only",
+   "description": "Performance audit for web applications"
+  },
+  {
+   "id": "command:pull-repos",
+   "type": "command",
+   "name": "pull-repos",
+   "path": "commands/pull-repos.md",
+   "domain": "workflow",
+   "tier": "core",
+   "description": "Pull all repos (parent + marketplace clones + configured project repos)"
+  },
+  {
+   "id": "command:review-code",
+   "type": "command",
+   "name": "review-code",
+   "path": "commands/review-code.md",
+   "domain": "quality",
+   "tier": "core",
+   "description": "Trigger a comprehensive code review on recent changes or specified files"
+  },
+  {
+   "id": "command:run",
+   "type": "command",
+   "name": "run",
+   "path": "commands/run.md",
+   "domain": "data-ai",
+   "tier": "core",
+   "description": "Execute prompt(s) from ./prompts/ with automatic archiving - for structured prompt-based work"
+  },
+  {
+   "id": "command:scaffold",
+   "type": "command",
+   "name": "scaffold",
+   "path": "commands/scaffold.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Scaffold project components from templates"
+  },
+  {
+   "id": "command:security-scan",
+   "type": "command",
+   "name": "security-scan",
+   "path": "commands/security-scan.md",
+   "domain": "security",
+   "tier": "core",
+   "description": "Run security audit on codebase"
+  },
+  {
+   "id": "command:session-log",
+   "type": "command",
+   "name": "session-log",
+   "path": "commands/session-log.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "View and analyze the Claude Code session log"
+  },
+  {
+   "id": "command:skill-finder",
+   "type": "command",
+   "name": "skill-finder",
+   "path": "commands/skill-finder.md",
+   "domain": "workflow",
+   "tier": "core",
+   "description": "AI-powered skill recommendation based on your problem description - finds optimal resources from 128 local skills + 108 marketplaces (0+ skills)"
+  },
+  {
+   "id": "command:standardize-claude-md",
+   "type": "command",
+   "name": "standardize-claude-md",
+   "path": "commands/standardize-claude-md.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Add missing toolkit sections (Related Global Rules, Quick Start) to existing CLAUDE.md"
+  },
+  {
+   "id": "command:start-task",
+   "type": "command",
+   "name": "start-task",
+   "path": "commands/start-task.md",
+   "domain": "workflow",
+   "tier": "core",
+   "description": "Route any task to the right skills, agents, rules, and marketplace resources via INDEX.md, then execute it"
+  },
+  {
+   "id": "command:test-plan",
+   "type": "command",
+   "name": "test-plan",
+   "path": "commands/test-plan.md",
+   "domain": "quality",
+   "tier": "name-only",
+   "description": "Generate a test strategy document — test matrix, coverage goals, and test pyramid allocation for the current project"
+  },
+  {
+   "id": "command:test-suite",
+   "type": "command",
+   "name": "test-suite",
+   "path": "commands/test-suite.md",
+   "domain": "quality",
+   "tier": "name-only",
+   "description": "Run comprehensive test suite with coverage analysis"
+  },
+  {
+   "id": "command:update-counts",
+   "type": "command",
+   "name": "update-counts",
+   "path": "commands/update-counts.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Update all hardcoded counts (skills, agents, marketplace repos/skills) across documentation from filesystem"
+  },
+  {
+   "id": "command:update-docs",
+   "type": "command",
+   "name": "update-docs",
+   "path": "commands/update-docs.md",
+   "domain": "quality",
+   "tier": "core",
+   "description": "Scan for recently modified files and update corresponding documentation."
+  },
+  {
+   "id": "rule:api-routes",
+   "type": "rule",
+   "name": "api-routes",
+   "path": "rules/api-routes.md",
+   "domain": "backend",
+   "loads": "when reading **/api/**, **/routes/**, **/routers/**, **/controllers/**, **/handlers/**, **/*.controller.ts, **/*route*.{ts,js,py}",
+   "description": "API Rules"
+  },
+  {
+   "id": "rule:cpp",
+   "type": "rule",
+   "name": "cpp",
+   "path": "rules/cpp.md",
+   "domain": "systems",
+   "loads": "when reading **/*.{c,cc,cpp,cxx,h,hh,hpp}, **/CMakeLists.txt",
+   "description": "C/C++ Rules"
+  },
+  {
+   "id": "rule:flutter-dart",
+   "type": "rule",
+   "name": "flutter-dart",
+   "path": "rules/flutter-dart.md",
+   "domain": "mobile",
+   "loads": "when reading **/*.dart, **/pubspec.yaml",
+   "description": "Flutter/Dart Rules"
+  },
+  {
+   "id": "rule:go",
+   "type": "rule",
+   "name": "go",
+   "path": "rules/go.md",
+   "domain": "other",
+   "loads": "when reading **/*.go, **/go.mod",
+   "description": "Go Rules"
+  },
+  {
+   "id": "rule:java-kotlin",
+   "type": "rule",
+   "name": "java-kotlin",
+   "path": "rules/java-kotlin.md",
+   "domain": "mobile",
+   "loads": "when reading **/*.{java,kt,kts}, **/build.gradle*, **/pom.xml",
+   "description": "Java/Kotlin Rules"
+  },
+  {
+   "id": "rule:python",
+   "type": "rule",
+   "name": "python",
+   "path": "rules/python.md",
+   "domain": "systems",
+   "loads": "when reading **/*.py, **/pyproject.toml, **/requirements*.txt",
+   "description": "Python Rules"
+  },
+  {
+   "id": "rule:rust",
+   "type": "rule",
+   "name": "rust",
+   "path": "rules/rust.md",
+   "domain": "systems",
+   "loads": "when reading **/*.rs, **/Cargo.toml",
+   "description": "Rust Rules"
+  },
+  {
+   "id": "rule:shared-browser",
+   "type": "rule",
+   "name": "shared-browser",
+   "path": "rules/shared-browser.md",
+   "domain": "other",
+   "loads": "every session",
+   "description": "Shared browser protocol"
+  },
+  {
+   "id": "rule:swift-ios",
+   "type": "rule",
+   "name": "swift-ios",
+   "path": "rules/swift-ios.md",
+   "domain": "mobile",
+   "loads": "when reading **/*.swift, **/*.xcodeproj/**, **/Package.swift",
+   "description": "Swift/iOS Rules"
+  },
+  {
+   "id": "rule:typescript-react",
+   "type": "rule",
+   "name": "typescript-react",
+   "path": "rules/typescript-react.md",
+   "domain": "frontend",
+   "loads": "when reading **/*.{ts,tsx,js,jsx,mjs,cjs}, **/tsconfig*.json",
+   "description": "TypeScript/React Rules"
+  },
+  {
+   "id": "doc:checklists/api-development",
+   "type": "doc",
+   "name": "checklists/api-development",
+   "path": "docs/reference/checklists/api-development.md",
+   "domain": "backend",
+   "description": "API Development Checklist"
+  },
+  {
+   "id": "doc:checklists/automation-scripts",
+   "type": "doc",
+   "name": "checklists/automation-scripts",
+   "path": "docs/reference/checklists/automation-scripts.md",
+   "domain": "other",
+   "description": "Automation & Scripts Checklist"
+  },
+  {
+   "id": "doc:checklists/database-design",
+   "type": "doc",
+   "name": "checklists/database-design",
+   "path": "docs/reference/checklists/database-design.md",
+   "domain": "backend",
+   "description": "Database Design Checklist"
+  },
+  {
+   "id": "doc:checklists/mobile-app-deployment",
+   "type": "doc",
+   "name": "checklists/mobile-app-deployment",
+   "path": "docs/reference/checklists/mobile-app-deployment.md",
+   "domain": "mobile",
+   "description": "Mobile App Deployment Checklist"
+  },
+  {
+   "id": "doc:checklists/monitoring-alerting-design",
+   "type": "doc",
+   "name": "checklists/monitoring-alerting-design",
+   "path": "docs/reference/checklists/monitoring-alerting-design.md",
+   "domain": "infra",
+   "description": "Monitoring & Alerting Design Checklist"
+  },
+  {
+   "id": "doc:checklists/performance-optimization",
+   "type": "doc",
+   "name": "checklists/performance-optimization",
+   "path": "docs/reference/checklists/performance-optimization.md",
+   "domain": "quality",
+   "description": "Performance Optimization Checklist"
+  },
+  {
+   "id": "doc:checklists/security-hardening",
+   "type": "doc",
+   "name": "checklists/security-hardening",
+   "path": "docs/reference/checklists/security-hardening.md",
+   "domain": "security",
+   "description": "Security Hardening Checklist"
+  },
+  {
+   "id": "doc:checklists/static-sites",
+   "type": "doc",
+   "name": "checklists/static-sites",
+   "path": "docs/reference/checklists/static-sites.md",
+   "domain": "frontend",
+   "description": "Static Sites Checklist (HTML/CSS/JS)"
+  },
+  {
+   "id": "doc:checklists/ui-visual-changes",
+   "type": "doc",
+   "name": "checklists/ui-visual-changes",
+   "path": "docs/reference/checklists/ui-visual-changes.md",
+   "domain": "frontend",
+   "description": "UI/Visual Changes Checklist"
+  },
+  {
+   "id": "doc:checklists/verification-template",
+   "type": "doc",
+   "name": "checklists/verification-template",
+   "path": "docs/reference/checklists/verification-template.md",
+   "domain": "other",
+   "description": "Verification Checklist Template"
+  },
+  {
+   "id": "doc:stacks/django-fastapi",
+   "type": "doc",
+   "name": "stacks/django-fastapi",
+   "path": "docs/reference/stacks/django-fastapi.md",
+   "domain": "backend",
+   "description": "Django & FastAPI Stack Guide"
+  },
+  {
+   "id": "doc:stacks/flutter-dart",
+   "type": "doc",
+   "name": "stacks/flutter-dart",
+   "path": "docs/reference/stacks/flutter-dart.md",
+   "domain": "mobile",
+   "description": "Flutter + Dart Stack Guide"
+  },
+  {
+   "id": "doc:stacks/fullstack-nextjs-nestjs",
+   "type": "doc",
+   "name": "stacks/fullstack-nextjs-nestjs",
+   "path": "docs/reference/stacks/fullstack-nextjs-nestjs.md",
+   "domain": "frontend",
+   "description": "Full-Stack Guide (Next.js + NestJS)"
+  },
+  {
+   "id": "doc:stacks/go",
+   "type": "doc",
+   "name": "stacks/go",
+   "path": "docs/reference/stacks/go.md",
+   "domain": "other",
+   "description": "Go Stack Guide"
+  },
+  {
+   "id": "doc:stacks/python",
+   "type": "doc",
+   "name": "stacks/python",
+   "path": "docs/reference/stacks/python.md",
+   "domain": "systems",
+   "description": "Python Stack Guide"
+  },
+  {
+   "id": "doc:stacks/react-native-expo",
+   "type": "doc",
+   "name": "stacks/react-native-expo",
+   "path": "docs/reference/stacks/react-native-expo.md",
+   "domain": "mobile",
+   "description": "React Native + Expo Stack Guide"
+  },
+  {
+   "id": "doc:stacks/react-typescript",
+   "type": "doc",
+   "name": "stacks/react-typescript",
+   "path": "docs/reference/stacks/react-typescript.md",
+   "domain": "frontend",
+   "description": "React + TypeScript Stack Guide"
+  },
+  {
+   "id": "doc:stacks/rust",
+   "type": "doc",
+   "name": "stacks/rust",
+   "path": "docs/reference/stacks/rust.md",
+   "domain": "systems",
+   "description": "Rust Stack Guide"
+  },
+  {
+   "id": "doc:stacks/svelte-sveltekit",
+   "type": "doc",
+   "name": "stacks/svelte-sveltekit",
+   "path": "docs/reference/stacks/svelte-sveltekit.md",
+   "domain": "frontend",
+   "description": "Svelte 5 + SvelteKit Stack Guide"
+  },
+  {
+   "id": "doc:stacks/vue-nuxt",
+   "type": "doc",
+   "name": "stacks/vue-nuxt",
+   "path": "docs/reference/stacks/vue-nuxt.md",
+   "domain": "frontend",
+   "description": "Vue 3 + Nuxt 3 Stack Guide"
+  },
+  {
+   "id": "doc:tooling/external-repos",
+   "type": "doc",
+   "name": "tooling/external-repos",
+   "path": "docs/reference/tooling/external-repos.md",
+   "domain": "workflow",
+   "description": "External Repository Management"
+  },
+  {
+   "id": "doc:tooling/git-hooks-setup",
+   "type": "doc",
+   "name": "tooling/git-hooks-setup",
+   "path": "docs/reference/tooling/git-hooks-setup.md",
+   "domain": "other",
+   "description": "Git Hooks Setup Guide"
+  },
+  {
+   "id": "doc:tooling/mcp-servers",
+   "type": "doc",
+   "name": "tooling/mcp-servers",
+   "path": "docs/reference/tooling/mcp-servers.md",
+   "domain": "other",
+   "description": "MCP Server Management Guide"
+  },
+  {
+   "id": "doc:tooling/troubleshooting",
+   "type": "doc",
+   "name": "tooling/troubleshooting",
+   "path": "docs/reference/tooling/troubleshooting.md",
+   "domain": "other",
+   "description": "Troubleshooting Guide"
+  },
+  {
+   "id": "doc:workflows/action-policy",
+   "type": "doc",
+   "name": "workflows/action-policy",
+   "path": "docs/reference/workflows/action-policy.md",
+   "domain": "other",
+   "description": "Action Policy Configuration Guide"
+  },
+  {
+   "id": "doc:workflows/agent-teams",
+   "type": "doc",
+   "name": "workflows/agent-teams",
+   "path": "docs/reference/workflows/agent-teams.md",
+   "domain": "workflow",
+   "description": "Agent Teams Workflow Guide"
+  },
+  {
+   "id": "doc:workflows/context-management",
+   "type": "doc",
+   "name": "workflows/context-management",
+   "path": "docs/reference/workflows/context-management.md",
+   "domain": "workflow",
+   "description": "Context Management Guide"
+  },
+  {
+   "id": "doc:workflows/deployment-cicd",
+   "type": "doc",
+   "name": "workflows/deployment-cicd",
+   "path": "docs/reference/workflows/deployment-cicd.md",
+   "domain": "infra",
+   "description": "Deployment & CI/CD Workflow Guide"
+  },
+  {
+   "id": "doc:workflows/post-change-documentation",
+   "type": "doc",
+   "name": "workflows/post-change-documentation",
+   "path": "docs/reference/workflows/post-change-documentation.md",
+   "domain": "quality",
+   "description": "Post-Change Documentation Workflow"
+  },
+  {
+   "id": "doc:workflows/research-methodology",
+   "type": "doc",
+   "name": "workflows/research-methodology",
+   "path": "docs/reference/workflows/research-methodology.md",
+   "domain": "research",
+   "description": "Research Methodology Guide"
+  }
+ ],
+ "marketplaces": [
+  {
+   "name": "anthropic-agent-skills",
+   "url": "https://github.com/anthropics/skills.git",
+   "path": "plugins/marketplaces/anthropic-agent-skills"
+  },
+  {
+   "name": "claude-code-plugins",
+   "url": "https://github.com/anthropics/claude-code.git",
+   "path": "plugins/marketplaces/claude-code-plugins"
+  },
+  {
+   "name": "claude-plugins-official",
+   "url": "https://github.com/anthropics/claude-plugins-official.git",
+   "path": "plugins/marketplaces/claude-plugins-official"
+  },
+  {
+   "name": "taches-cc-resources",
+   "url": "https://github.com/glittercowboy/taches-cc-resources.git",
+   "path": "plugins/marketplaces/taches-cc-resources"
+  },
+  {
+   "name": "get-shit-done",
+   "url": "https://github.com/gsd-build/get-shit-done.git",
+   "path": "plugins/marketplaces/get-shit-done"
+  },
+  {
+   "name": "awesome-claude-skills",
+   "url": "https://github.com/ComposioHQ/awesome-claude-skills.git",
+   "path": "plugins/marketplaces/awesome-claude-skills"
+  },
+  {
+   "name": "claude-mem",
+   "url": "https://github.com/thedotmack/claude-mem.git",
+   "path": "plugins/marketplaces/claude-mem"
+  },
+  {
+   "name": "skill-seekers",
+   "url": "https://github.com/yusufkaraaslan/Skill_Seekers.git",
+   "path": "plugins/marketplaces/skill-seekers"
+  },
+  {
+   "name": "claude-scientific-skills",
+   "url": "https://github.com/K-Dense-AI/claude-scientific-skills.git",
+   "path": "plugins/marketplaces/claude-scientific-skills"
+  },
+  {
+   "name": "mhattingpete-skills",
+   "url": "https://github.com/mhattingpete/claude-skills-marketplace.git",
+   "path": "plugins/marketplaces/mhattingpete-skills"
+  },
+  {
+   "name": "skillsforge",
+   "url": "https://github.com/rawveg/skillsforge-marketplace.git",
+   "path": "plugins/marketplaces/skillsforge"
+  },
+  {
+   "name": "voltagent-subagents",
+   "url": "https://github.com/VoltAgent/awesome-claude-code-subagents.git",
+   "path": "plugins/marketplaces/voltagent-subagents"
+  },
+  {
+   "name": "wshobson-agents",
+   "url": "https://github.com/wshobson/agents.git",
+   "path": "plugins/marketplaces/wshobson-agents"
+  },
+  {
+   "name": "alirezarezvani-claude-skills",
+   "url": "https://github.com/alirezarezvani/claude-skills.git",
+   "path": "plugins/marketplaces/alirezarezvani-claude-skills"
+  },
+  {
+   "name": "auto-claude",
+   "url": "https://github.com/AndyMik90/Auto-Claude.git",
+   "path": "plugins/marketplaces/auto-claude"
+  },
+  {
+   "name": "buildwithclaude",
+   "url": "https://github.com/davepoon/buildwithclaude.git",
+   "path": "plugins/marketplaces/buildwithclaude"
+  },
+  {
+   "name": "trailofbits-skills",
+   "url": "https://github.com/trailofbits/skills.git",
+   "path": "plugins/marketplaces/trailofbits-skills"
+  },
+  {
+   "name": "henkisdabro-marketplace",
+   "url": "https://github.com/henkisdabro/claudecode-marketplace.git",
+   "path": "plugins/marketplaces/henkisdabro-marketplace"
+  },
+  {
+   "name": "anthropic-life-sciences",
+   "url": "https://github.com/anthropics/life-sciences.git",
+   "path": "plugins/marketplaces/anthropic-life-sciences"
+  },
+  {
+   "name": "davila7-templates",
+   "url": "https://github.com/davila7/claude-code-templates.git",
+   "path": "plugins/marketplaces/davila7-templates"
+  },
+  {
+   "name": "worldbuilding-skills",
+   "url": "https://github.com/hopeoverture/worldbuilding-app-skills.git",
+   "path": "plugins/marketplaces/worldbuilding-skills"
+  },
+  {
+   "name": "hashi-terraform-skills",
+   "url": "https://github.com/hashi-demo-lab/claude-skill-hcp-terraform.git",
+   "path": "plugins/marketplaces/hashi-terraform-skills"
+  },
+  {
+   "name": "secondsky-sap-skills",
+   "url": "https://github.com/secondsky/sap-skills.git",
+   "path": "plugins/marketplaces/secondsky-sap-skills"
+  },
+  {
+   "name": "bradleygolden-elixir",
+   "url": "https://github.com/bradleygolden/claude-marketplace-elixir.git",
+   "path": "plugins/marketplaces/bradleygolden-elixir"
+  },
+  {
+   "name": "gqy20-biology-plugins",
+   "url": "https://github.com/gqy20/cc_plugins.git",
+   "path": "plugins/marketplaces/gqy20-biology-plugins"
+  },
+  {
+   "name": "kfly8-cpan-plugins",
+   "url": "https://github.com/kfly8/claude-cpan-plugins.git",
+   "path": "plugins/marketplaces/kfly8-cpan-plugins"
+  },
+  {
+   "name": "p47phoenix-plugins",
+   "url": "https://github.com/P47Phoenix/Claude-Plugins.git",
+   "path": "plugins/marketplaces/p47phoenix-plugins"
+  },
+  {
+   "name": "chat2anyllm-awesome-plugins",
+   "url": "https://github.com/Chat2AnyLLM/awesome-claude-plugins.git",
+   "path": "plugins/marketplaces/chat2anyllm-awesome-plugins"
+  },
+  {
+   "name": "numman-ali-skills",
+   "url": "https://github.com/numman-ali/n-skills.git",
+   "path": "plugins/marketplaces/numman-ali-skills"
+  },
+  {
+   "name": "ananddtyagi-marketplace",
+   "url": "https://github.com/ananddtyagi/cc-marketplace.git",
+   "path": "plugins/marketplaces/ananddtyagi-marketplace"
+  },
+  {
+   "name": "gmickel-marketplace",
+   "url": "https://github.com/gmickel/gmickel-claude-marketplace.git",
+   "path": "plugins/marketplaces/gmickel-marketplace"
+  },
+  {
+   "name": "neolab-context-kit",
+   "url": "https://github.com/NeoLabHQ/context-engineering-kit.git",
+   "path": "plugins/marketplaces/neolab-context-kit"
+  },
+  {
+   "name": "affaan-everything-claude",
+   "url": "https://github.com/affaan-m/everything-claude-code.git",
+   "path": "plugins/marketplaces/affaan-everything-claude"
+  },
+  {
+   "name": "vercel-agent-skills",
+   "url": "https://github.com/vercel-labs/agent-skills.git",
+   "path": "plugins/marketplaces/vercel-agent-skills"
+  },
+  {
+   "name": "muratcankoylan-agent-skills",
+   "url": "https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering.git",
+   "path": "plugins/marketplaces/muratcankoylan-agent-skills"
+  },
+  {
+   "name": "numman-ali-openskills",
+   "url": "https://github.com/numman-ali/openskills.git",
+   "path": "plugins/marketplaces/numman-ali-openskills"
+  },
+  {
+   "name": "piebald-lsps",
+   "url": "https://github.com/Piebald-AI/claude-code-lsps.git",
+   "path": "plugins/marketplaces/piebald-lsps"
+  },
+  {
+   "name": "quant-equity-research",
+   "url": "https://github.com/quant-sentiment-ai/claude-equity-research.git",
+   "path": "plugins/marketplaces/quant-equity-research"
+  },
+  {
+   "name": "athola-night-market",
+   "url": "https://github.com/athola/claude-night-market.git",
+   "path": "plugins/marketplaces/athola-night-market"
+  },
+  {
+   "name": "georgeguimaraes-elixir",
+   "url": "https://github.com/georgeguimaraes/claude-code-elixir.git",
+   "path": "plugins/marketplaces/georgeguimaraes-elixir"
+  },
+  {
+   "name": "sawyerhood-mart",
+   "url": "https://github.com/SawyerHood/sawyer-mart.git",
+   "path": "plugins/marketplaces/sawyerhood-mart"
+  },
+  {
+   "name": "devgom-marketplace",
+   "url": "https://github.com/Dev-GOM/claude-code-marketplace.git",
+   "path": "plugins/marketplaces/devgom-marketplace"
+  },
+  {
+   "name": "sivalabs-marketplace",
+   "url": "https://github.com/sivaprasadreddy/sivalabs-marketplace.git",
+   "path": "plugins/marketplaces/sivalabs-marketplace"
+  },
+  {
+   "name": "zai-coding-plugins",
+   "url": "https://github.com/zai-org/zai-coding-plugins.git",
+   "path": "plugins/marketplaces/zai-coding-plugins"
+  },
+  {
+   "name": "madappgang-claude-code",
+   "url": "https://github.com/MadAppGang/claude-code.git",
+   "path": "plugins/marketplaces/madappgang-claude-code"
+  },
+  {
+   "name": "othmanadi-planning",
+   "url": "https://github.com/OthmanAdi/planning-with-files.git",
+   "path": "plugins/marketplaces/othmanadi-planning"
+  },
+  {
+   "name": "diet103-infrastructure",
+   "url": "https://github.com/diet103/claude-code-infrastructure-showcase.git",
+   "path": "plugins/marketplaces/diet103-infrastructure"
+  },
+  {
+   "name": "obra-superpowers",
+   "url": "https://github.com/obra/superpowers.git",
+   "path": "plugins/marketplaces/obra-superpowers"
+  },
+  {
+   "name": "mvanhorn-last30days-skill",
+   "url": "https://github.com/mvanhorn/last30days-skill.git",
+   "path": "plugins/marketplaces/mvanhorn-last30days-skill"
+  },
+  {
+   "name": "expo-skills",
+   "url": "https://github.com/expo/skills.git",
+   "path": "plugins/marketplaces/expo-skills"
+  },
+  {
+   "name": "voltagent-agent-skills",
+   "url": "https://github.com/VoltAgent/awesome-agent-skills.git",
+   "path": "plugins/marketplaces/voltagent-agent-skills"
+  },
+  {
+   "name": "scopecraft-command",
+   "url": "https://github.com/scopecraft/command.git",
+   "path": "plugins/marketplaces/scopecraft-command"
+  },
+  {
+   "name": "danielscholl-sdlc",
+   "url": "https://github.com/danielscholl/claude-sdlc.git",
+   "path": "plugins/marketplaces/danielscholl-sdlc"
+  },
+  {
+   "name": "akin-ozer-devops",
+   "url": "https://github.com/akin-ozer/cc-devops-skills.git",
+   "path": "plugins/marketplaces/akin-ozer-devops"
+  },
+  {
+   "name": "EveryInc-compound",
+   "url": "https://github.com/EveryInc/compound-engineering-plugin.git",
+   "path": "plugins/marketplaces/EveryInc-compound"
+  },
+  {
+   "name": "DustyWalker-marketplace",
+   "url": "https://github.com/DustyWalker/claude-code-marketplace.git",
+   "path": "plugins/marketplaces/DustyWalker-marketplace"
+  },
+  {
+   "name": "daymade-skills",
+   "url": "https://github.com/daymade/claude-code-skills.git",
+   "path": "plugins/marketplaces/daymade-skills"
+  },
+  {
+   "name": "automazeio-ccpm",
+   "url": "https://github.com/automazeio/ccpm.git",
+   "path": "plugins/marketplaces/automazeio-ccpm"
+  },
+  {
+   "name": "ykdojo-tips",
+   "url": "https://github.com/ykdojo/claude-code-tips.git",
+   "path": "plugins/marketplaces/ykdojo-tips"
+  },
+  {
+   "name": "hesreallyhim-awesome",
+   "url": "https://github.com/hesreallyhim/awesome-claude-code.git",
+   "path": "plugins/marketplaces/hesreallyhim-awesome"
+  },
+  {
+   "name": "travisvn-awesome",
+   "url": "https://github.com/travisvn/awesome-claude-skills.git",
+   "path": "plugins/marketplaces/travisvn-awesome"
+  },
+  {
+   "name": "quemsah-awesome",
+   "url": "https://github.com/quemsah/awesome-claude-plugins.git",
+   "path": "plugins/marketplaces/quemsah-awesome"
+  },
+  {
+   "name": "aaronontheweb-dotnet-skills",
+   "url": "https://github.com/Aaronontheweb/dotnet-skills.git",
+   "path": "plugins/marketplaces/aaronontheweb-dotnet-skills"
+  },
+  {
+   "name": "behisecc-awesome-claude-skills",
+   "url": "https://github.com/BehiSecc/awesome-claude-skills.git",
+   "path": "plugins/marketplaces/behisecc-awesome-claude-skills"
+  },
+  {
+   "name": "karanb192-awesome-claude-skills",
+   "url": "https://github.com/karanb192/awesome-claude-skills.git",
+   "path": "plugins/marketplaces/karanb192-awesome-claude-skills"
+  },
+  {
+   "name": "levnikolaevich-claude-code-skills",
+   "url": "https://github.com/levnikolaevich/claude-code-skills.git",
+   "path": "plugins/marketplaces/levnikolaevich-claude-code-skills"
+  },
+  {
+   "name": "giuseppe-developer-kit",
+   "url": "https://github.com/giuseppe-trisciuoglio/developer-kit.git",
+   "path": "plugins/marketplaces/giuseppe-developer-kit"
+  },
+  {
+   "name": "rohitg00-claude-code-toolkit",
+   "url": "https://github.com/rohitg00/awesome-claude-code-toolkit.git",
+   "path": "plugins/marketplaces/rohitg00-claude-code-toolkit"
+  },
+  {
+   "name": "disler-hooks-mastery",
+   "url": "https://github.com/disler/claude-code-hooks-mastery.git",
+   "path": "plugins/marketplaces/disler-hooks-mastery"
+  },
+  {
+   "name": "rshah515-claude-code-subagents",
+   "url": "https://github.com/rshah515/claude-code-subagents.git",
+   "path": "plugins/marketplaces/rshah515-claude-code-subagents"
+  },
+  {
+   "name": "manutej-luxor-marketplace",
+   "url": "https://github.com/manutej/luxor-claude-marketplace.git",
+   "path": "plugins/marketplaces/manutej-luxor-marketplace"
+  },
+  {
+   "name": "jeffallan-claude-skills",
+   "url": "https://github.com/Jeffallan/claude-skills.git",
+   "path": "plugins/marketplaces/jeffallan-claude-skills"
+  },
+  {
+   "name": "lodetomasi-agents-claude-code",
+   "url": "https://github.com/lodetomasi/agents-claude-code.git",
+   "path": "plugins/marketplaces/lodetomasi-agents-claude-code"
+  },
+  {
+   "name": "ahmedasmar-devops-skills",
+   "url": "https://github.com/ahmedasmar/devops-claude-skills.git",
+   "path": "plugins/marketplaces/ahmedasmar-devops-skills"
+  },
+  {
+   "name": "mrgoonie-claudekit-skills",
+   "url": "https://github.com/mrgoonie/claudekit-skills.git",
+   "path": "plugins/marketplaces/mrgoonie-claudekit-skills"
+  },
+  {
+   "name": "chriswiles-claude-code-showcase",
+   "url": "https://github.com/ChrisWiles/claude-code-showcase.git",
+   "path": "plugins/marketplaces/chriswiles-claude-code-showcase"
+  },
+  {
+   "name": "onmax-nuxt-skills",
+   "url": "https://github.com/onmax/nuxt-skills.git",
+   "path": "plugins/marketplaces/onmax-nuxt-skills"
+  },
+  {
+   "name": "interstellar-code-claud-skills",
+   "url": "https://github.com/Interstellar-code/claud-skills.git",
+   "path": "plugins/marketplaces/interstellar-code-claud-skills"
+  },
+  {
+   "name": "actionbook-rust-skills",
+   "url": "https://github.com/actionbook/rust-skills.git",
+   "path": "plugins/marketplaces/actionbook-rust-skills"
+  },
+  {
+   "name": "hashicorp-agent-skills",
+   "url": "https://github.com/hashicorp/agent-skills.git",
+   "path": "plugins/marketplaces/hashicorp-agent-skills"
+  },
+  {
+   "name": "sangrokjung-claude-forge",
+   "url": "https://github.com/sangrokjung/claude-forge.git",
+   "path": "plugins/marketplaces/sangrokjung-claude-forge"
+  },
+  {
+   "name": "team-attention-plugins",
+   "url": "https://github.com/team-attention/plugins-for-claude-natives.git",
+   "path": "plugins/marketplaces/team-attention-plugins"
+  },
+  {
+   "name": "shanraisshan-best-practice",
+   "url": "https://github.com/shanraisshan/claude-code-best-practice.git",
+   "path": "plugins/marketplaces/shanraisshan-best-practice"
+  },
+  {
+   "name": "brennercruvinel-CCPlugins",
+   "url": "https://github.com/brennercruvinel/CCPlugins.git",
+   "path": "plugins/marketplaces/brennercruvinel-CCPlugins"
+  },
+  {
+   "name": "ccplugins-awesome",
+   "url": "https://github.com/ccplugins/awesome-claude-code-plugins.git",
+   "path": "plugins/marketplaces/ccplugins-awesome"
+  },
+  {
+   "name": "kenryu42-safety-net",
+   "url": "https://github.com/kenryu42/claude-code-safety-net.git",
+   "path": "plugins/marketplaces/kenryu42-safety-net"
+  },
+  {
+   "name": "trailofbits-skills-curated",
+   "url": "https://github.com/trailofbits/skills-curated.git",
+   "path": "plugins/marketplaces/trailofbits-skills-curated"
+  },
+  {
+   "name": "alvinunreal-awesome-claude",
+   "url": "https://github.com/alvinunreal/awesome-claude.git",
+   "path": "plugins/marketplaces/alvinunreal-awesome-claude"
+  },
+  {
+   "name": "superpowers-marketplace",
+   "url": "https://github.com/obra/superpowers-marketplace.git",
+   "path": "plugins/marketplaces/superpowers-marketplace"
+  },
+  {
+   "name": "sickn33-antigravity-awesome-skills",
+   "url": "https://github.com/sickn33/antigravity-awesome-skills.git",
+   "path": "plugins/marketplaces/sickn33-antigravity-awesome-skills"
+  },
+  {
+   "name": "agentskills-agentskills",
+   "url": "https://github.com/agentskills/agentskills.git",
+   "path": "plugins/marketplaces/agentskills-agentskills"
+  },
+  {
+   "name": "heilcheng-awesome-agent-skills",
+   "url": "https://github.com/heilcheng/awesome-agent-skills.git",
+   "path": "plugins/marketplaces/heilcheng-awesome-agent-skills"
+  },
+  {
+   "name": "libukai-awesome-agent-skills",
+   "url": "https://github.com/libukai/awesome-agent-skills.git",
+   "path": "plugins/marketplaces/libukai-awesome-agent-skills"
+  },
+  {
+   "name": "skillcreatorai-agent-skills",
+   "url": "https://github.com/skillcreatorai/Ai-Agent-Skills.git",
+   "path": "plugins/marketplaces/skillcreatorai-agent-skills"
+  },
+  {
+   "name": "abubakarsiddik31-claude-skills",
+   "url": "https://github.com/abubakarsiddik31/claude-skills-collection.git",
+   "path": "plugins/marketplaces/abubakarsiddik31-claude-skills"
+  },
+  {
+   "name": "francyjg-agent-skill-creator",
+   "url": "https://github.com/FrancyJGLisboa/agent-skill-creator.git",
+   "path": "plugins/marketplaces/francyjg-agent-skill-creator"
+  },
+  {
+   "name": "skillmatic-awesome-agent-skills",
+   "url": "https://github.com/skillmatic-ai/awesome-agent-skills.git",
+   "path": "plugins/marketplaces/skillmatic-awesome-agent-skills"
+  },
+  {
+   "name": "jayzeedesign-awesome-claude",
+   "url": "https://github.com/JayZeeDesign/awesome-claude-skills.git",
+   "path": "plugins/marketplaces/jayzeedesign-awesome-claude"
+  },
+  {
+   "name": "skillcreatorai-awesome-agent-skills",
+   "url": "https://github.com/skillcreatorai/Awesome-Agent-Skills.git",
+   "path": "plugins/marketplaces/skillcreatorai-awesome-agent-skills"
+  },
+  {
+   "name": "pbakaus-impeccable",
+   "url": "https://github.com/pbakaus/impeccable.git",
+   "path": "plugins/marketplaces/pbakaus-impeccable"
+  },
+  {
+   "name": "hardikpandya-stop-slop",
+   "url": "https://github.com/hardikpandya/stop-slop.git",
+   "path": "plugins/marketplaces/hardikpandya-stop-slop"
+  },
+  {
+   "name": "claude-code-plugins-plus-skills",
+   "url": "https://github.com/jeremylongshore/claude-code-plugins-plus-skills.git",
+   "path": "plugins/marketplaces/claude-code-plugins-plus-skills"
+  },
+  {
+   "name": "slavingia-skills",
+   "url": "https://github.com/slavingia/skills.git",
+   "path": "plugins/marketplaces/slavingia-skills"
+  },
+  {
+   "name": "sawyerhood-dev-browser",
+   "url": "https://github.com/SawyerHood/dev-browser.git",
+   "path": "plugins/marketplaces/sawyerhood-dev-browser"
+  },
+  {
+   "name": "blader-humanizer",
+   "url": "https://github.com/blader/humanizer.git",
+   "path": "plugins/marketplaces/blader-humanizer"
+  },
+  {
+   "name": "understand-anything",
+   "url": "https://github.com/Lum1104/Understand-Anything.git",
+   "path": "plugins/marketplaces/understand-anything"
+  },
+  {
+   "name": "phuryn-pm-skills",
+   "url": "https://github.com/phuryn/pm-skills.git",
+   "path": "plugins/marketplaces/phuryn-pm-skills"
+  },
+  {
+   "name": "millionco-expect",
+   "url": "https://github.com/millionco/expect.git",
+   "path": "plugins/marketplaces/millionco-expect"
+  }
+ ],
+ "edges": [
+  {
+   "from": "skill:accessibility-a11y",
+   "to": "agent:accessibility-expert",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:agent-teams",
+   "to": "doc:workflows/agent-teams",
+   "rel": "reference"
+  },
+  {
+   "from": "skill:ai-ml-development",
+   "to": "agent:ml-engineer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:ai-ml-development",
+   "to": "agent:data-engineer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:ai-ml-development",
+   "to": "agent:flutter-developer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:android-development",
+   "to": "agent:android-developer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:android-development",
+   "to": "agent:kotlin-expert",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:android-development",
+   "to": "agent:flutter-developer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:api-design",
+   "to": "agent:api-designer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:api-design",
+   "to": "agent:api-integration-specialist",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:api-design",
+   "to": "agent:django-fastapi-expert",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:application-security",
+   "to": "agent:devsecops-engineer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:application-security",
+   "to": "agent:security-auditor",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:application-security",
+   "to": "doc:checklists/security-hardening",
+   "rel": "reference"
+  },
+  {
+   "from": "skill:ar-vr-xr",
+   "to": "agent:cli-developer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:audio-production",
+   "to": "agent:audio-engineer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:authentication-patterns",
+   "to": "agent:auth-specialist",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:blockchain-web3",
+   "to": "agent:blockchain-developer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:blockchain-web3",
+   "to": "agent:cpp-expert",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:blockchain-web3",
+   "to": "agent:rust-expert",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:brand-identity",
+   "to": "agent:brand-strategist",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:brand-identity",
+   "to": "agent:graphic-designer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:business-strategy",
+   "to": "agent:architecture-analyst",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:business-strategy",
+   "to": "agent:monetization-expert",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:business-strategy",
+   "to": "agent:product-manager",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:career-path-planner",
+   "to": "agent:gsd-planner",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:career-path-planner",
+   "to": "agent:gsd-plan-checker",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:case-interview-practice",
+   "to": "agent:ux-researcher",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:codebase-documenter",
+   "to": "agent:documentation-writer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:codebase-documenter",
+   "to": "agent:technical-writer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:codebase-documenter",
+   "to": "agent:code-explainer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:compliance-engineering",
+   "to": "agent:compliance-engineer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:compliance-engineering",
+   "to": "agent:data-engineer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:compliance-engineering",
+   "to": "agent:devsecops-engineer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:core-workflow",
+   "to": "agent:debugging-specialist",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:core-workflow",
+   "to": "agent:deep-code-reviewer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:customer-persona-builder",
+   "to": "agent:ux-researcher",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:customer-success",
+   "to": "agent:observability-engineer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:customer-success",
+   "to": "agent:event-driven-architect",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:customer-success",
+   "to": "agent:go-expert",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:data-engineering",
+   "to": "agent:data-engineer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:data-engineering",
+   "to": "agent:event-driven-architect",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:data-engineering",
+   "to": "agent:product-analytics-specialist",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:data-science",
+   "to": "agent:data-engineer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:data-science",
+   "to": "agent:ml-engineer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:data-science",
+   "to": "agent:product-analytics-specialist",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:database-expert",
+   "to": "agent:database-expert",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:database-expert",
+   "to": "agent:seo-specialist",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:database-expert",
+   "to": "agent:accessibility-expert",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:database-expert",
+   "to": "doc:checklists/database-design",
+   "rel": "reference"
+  },
+  {
+   "from": "skill:debug-systematic",
+   "to": "agent:debugging-specialist",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:devex-sdk-design",
+   "to": "agent:api-integration-specialist",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:devex-sdk-design",
+   "to": "agent:cli-developer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:devex-sdk-design",
+   "to": "agent:api-designer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:devops-cloud",
+   "to": "agent:devops-engineer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:devops-cloud",
+   "to": "agent:cloud-architect",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:edge-computing",
+   "to": "agent:serverless-specialist",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:edge-computing",
+   "to": "agent:next-js-expert",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:edge-computing",
+   "to": "agent:django-fastapi-expert",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:electron-desktop",
+   "to": "agent:flutter-developer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:electron-desktop",
+   "to": "agent:desktop-developer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:electron-desktop",
+   "to": "agent:macos-developer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:email-systems",
+   "to": "agent:email-specialist",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:email-systems",
+   "to": "agent:event-driven-architect",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:email-systems",
+   "to": "agent:database-expert",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:embedded-iot",
+   "to": "agent:embedded-developer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:embedded-iot",
+   "to": "agent:cpp-expert",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:embedded-iot",
+   "to": "agent:blockchain-developer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:event-driven-architecture",
+   "to": "agent:event-driven-architect",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:event-driven-architecture",
+   "to": "agent:serverless-specialist",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:event-driven-architecture",
+   "to": "agent:data-engineer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:flutter-development",
+   "to": "agent:flutter-developer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:flutter-development",
+   "to": "agent:mobile-architect",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:flutter-development",
+   "to": "agent:pwa-specialist",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:flutter-development",
+   "to": "rule:flutter-dart",
+   "rel": "rules"
+  },
+  {
+   "from": "skill:flutter-development",
+   "to": "doc:stacks/flutter-dart",
+   "rel": "reference"
+  },
+  {
+   "from": "skill:frontend-enhancer",
+   "to": "agent:next-js-expert",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:frontend-enhancer",
+   "to": "agent:seo-specialist",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:frontend-enhancer",
+   "to": "agent:svelte-expert",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:game-development",
+   "to": "agent:game-developer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:game-development",
+   "to": "agent:cli-developer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:game-development",
+   "to": "agent:embedded-developer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:generic-code-reviewer",
+   "to": "agent:deep-code-reviewer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:generic-code-reviewer",
+   "to": "agent:security-auditor",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:generic-code-reviewer",
+   "to": "agent:performance-optimizer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:generic-code-reviewer",
+   "to": "doc:stacks/fullstack-nextjs-nestjs",
+   "rel": "reference"
+  },
+  {
+   "from": "skill:generic-code-reviewer",
+   "to": "doc:stacks/react-typescript",
+   "rel": "reference"
+  },
+  {
+   "from": "skill:generic-design-system",
+   "to": "agent:api-designer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:generic-design-system",
+   "to": "agent:gsd-project-researcher",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:generic-design-system",
+   "to": "agent:gsd-research-synthesizer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:generic-feature-developer",
+   "to": "agent:gsd-project-researcher",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:generic-feature-developer",
+   "to": "agent:product-manager",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:generic-feature-developer",
+   "to": "doc:stacks/fullstack-nextjs-nestjs",
+   "rel": "reference"
+  },
+  {
+   "from": "skill:generic-fullstack-code-reviewer",
+   "to": "agent:deep-code-reviewer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:generic-fullstack-code-reviewer",
+   "to": "agent:security-auditor",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:generic-fullstack-code-reviewer",
+   "to": "agent:accessibility-expert",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:generic-fullstack-code-reviewer",
+   "to": "doc:stacks/fullstack-nextjs-nestjs",
+   "rel": "reference"
+  },
+  {
+   "from": "skill:generic-fullstack-design-system",
+   "to": "agent:accessibility-expert",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:generic-fullstack-design-system",
+   "to": "doc:stacks/fullstack-nextjs-nestjs",
+   "rel": "reference"
+  },
+  {
+   "from": "skill:generic-fullstack-feature-developer",
+   "to": "agent:database-expert",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:generic-fullstack-feature-developer",
+   "to": "agent:next-js-expert",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:generic-fullstack-feature-developer",
+   "to": "agent:architecture-analyst",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:generic-fullstack-feature-developer",
+   "to": "doc:stacks/fullstack-nextjs-nestjs",
+   "rel": "reference"
+  },
+  {
+   "from": "skill:generic-fullstack-feature-developer",
+   "to": "doc:stacks/django-fastapi",
+   "rel": "reference"
+  },
+  {
+   "from": "skill:generic-fullstack-ux-designer",
+   "to": "agent:accessibility-expert",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:generic-fullstack-ux-designer",
+   "to": "agent:graphic-designer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:generic-fullstack-ux-designer",
+   "to": "agent:seo-specialist",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:generic-fullstack-ux-designer",
+   "to": "doc:stacks/fullstack-nextjs-nestjs",
+   "rel": "reference"
+  },
+  {
+   "from": "skill:generic-react-code-reviewer",
+   "to": "agent:deep-code-reviewer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:generic-react-code-reviewer",
+   "to": "agent:security-auditor",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:generic-react-code-reviewer",
+   "to": "agent:accessibility-expert",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:generic-react-design-system",
+   "to": "agent:accessibility-expert",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:generic-react-design-system",
+   "to": "agent:react-expert",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:generic-react-feature-developer",
+   "to": "agent:next-js-expert",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:generic-react-feature-developer",
+   "to": "agent:react-expert",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:generic-react-feature-developer",
+   "to": "agent:architecture-analyst",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:generic-react-feature-developer",
+   "to": "doc:stacks/react-typescript",
+   "rel": "reference"
+  },
+  {
+   "from": "skill:generic-react-ux-designer",
+   "to": "agent:accessibility-expert",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:generic-react-ux-designer",
+   "to": "agent:graphic-designer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:generic-react-ux-designer",
+   "to": "agent:react-expert",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:generic-static-code-reviewer",
+   "to": "agent:deep-code-reviewer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:generic-static-code-reviewer",
+   "to": "agent:security-auditor",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:generic-static-code-reviewer",
+   "to": "agent:performance-optimizer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:generic-static-code-reviewer",
+   "to": "doc:checklists/static-sites",
+   "rel": "reference"
+  },
+  {
+   "from": "skill:generic-static-design-system",
+   "to": "doc:checklists/static-sites",
+   "rel": "reference"
+  },
+  {
+   "from": "skill:generic-static-feature-developer",
+   "to": "agent:product-manager",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:generic-static-feature-developer",
+   "to": "doc:checklists/static-sites",
+   "rel": "reference"
+  },
+  {
+   "from": "skill:generic-static-feature-developer",
+   "to": "doc:workflows/agent-teams",
+   "rel": "reference"
+  },
+  {
+   "from": "skill:generic-static-ux-designer",
+   "to": "agent:accessibility-expert",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:generic-static-ux-designer",
+   "to": "agent:graphic-designer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:generic-static-ux-designer",
+   "to": "agent:react-expert",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:generic-static-ux-designer",
+   "to": "doc:checklists/static-sites",
+   "rel": "reference"
+  },
+  {
+   "from": "skill:generic-ux-designer",
+   "to": "agent:accessibility-expert",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:generic-ux-designer",
+   "to": "agent:ux-researcher",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:generic-ux-designer",
+   "to": "agent:api-designer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:graphic-design",
+   "to": "agent:graphic-designer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:graphic-design",
+   "to": "agent:api-designer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:graphql-expert",
+   "to": "agent:database-expert",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:graphql-expert",
+   "to": "agent:api-designer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:graphql-expert",
+   "to": "agent:api-integration-specialist",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:growth-engineering",
+   "to": "agent:product-analytics-specialist",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:growth-engineering",
+   "to": "agent:cloud-architect",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:growth-engineering",
+   "to": "agent:data-engineer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:i18n-localization",
+   "to": "agent:i18n-specialist",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:ios-development",
+   "to": "agent:ios-developer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:ios-development",
+   "to": "agent:flutter-developer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:ios-development",
+   "to": "agent:pwa-specialist",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:ios-development",
+   "to": "rule:swift-ios",
+   "rel": "rules"
+  },
+  {
+   "from": "skill:kotlin-multiplatform",
+   "to": "agent:kotlin-expert",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:kotlin-multiplatform",
+   "to": "agent:android-developer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:kotlin-multiplatform",
+   "to": "agent:flutter-developer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:learning-gap-analyzer",
+   "to": "agent:ux-researcher",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:legal-compliance",
+   "to": "agent:compliance-engineer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:literature-review-planner",
+   "to": "agent:architecture-analyst",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:literature-review-planner",
+   "to": "agent:deep-code-reviewer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:low-code-platforms",
+   "to": "agent:api-integration-specialist",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:low-code-platforms",
+   "to": "agent:cli-developer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:macos-native",
+   "to": "agent:macos-developer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:macos-native",
+   "to": "agent:flutter-developer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:macos-native",
+   "to": "agent:browser-extension-developer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:marketing",
+   "to": "agent:database-expert",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:microservices-architecture",
+   "to": "agent:event-driven-architect",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:microservices-architecture",
+   "to": "agent:email-specialist",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:microservices-architecture",
+   "to": "agent:microservices-architect",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:mobile-cicd",
+   "to": "agent:mobile-release-manager",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:mobile-cicd",
+   "to": "agent:devops-engineer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:mobile-cicd",
+   "to": "doc:checklists/mobile-app-deployment",
+   "rel": "reference"
+  },
+  {
+   "from": "skill:monetization-strategy",
+   "to": "agent:monetization-expert",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:monitoring-observability",
+   "to": "agent:observability-engineer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:monitoring-observability",
+   "to": "doc:checklists/monitoring-alerting-design",
+   "rel": "reference"
+  },
+  {
+   "from": "skill:onboarding-guide-creator",
+   "to": "agent:technical-writer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:operations",
+   "to": "agent:database-expert",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:operations",
+   "to": "agent:performance-optimizer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:options-comparator",
+   "to": "agent:gsd-advisor-researcher",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:payment-integration",
+   "to": "agent:payment-billing-specialist",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:payment-integration",
+   "to": "agent:compliance-engineer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:performance-engineering",
+   "to": "agent:performance-optimizer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:performance-engineering",
+   "to": "agent:deep-code-reviewer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:performance-engineering",
+   "to": "agent:seo-specialist",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:performance-engineering",
+   "to": "doc:checklists/performance-optimization",
+   "rel": "reference"
+  },
+  {
+   "from": "skill:podcast-producer",
+   "to": "agent:video-producer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:product-analytics",
+   "to": "agent:product-analytics-specialist",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:product-management",
+   "to": "agent:product-manager",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:product-management",
+   "to": "agent:product-analytics-specialist",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:product-management",
+   "to": "agent:gsd-project-researcher",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:pwa-development",
+   "to": "agent:pwa-specialist",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:pwa-development",
+   "to": "agent:browser-extension-developer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:pwa-development",
+   "to": "agent:cli-developer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:rd-management",
+   "to": "agent:ux-researcher",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:rd-management",
+   "to": "doc:workflows/research-methodology",
+   "rel": "reference"
+  },
+  {
+   "from": "skill:react-native",
+   "to": "agent:flutter-developer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:react-native",
+   "to": "agent:mobile-architect",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:react-native",
+   "to": "agent:database-expert",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:react-native",
+   "to": "doc:stacks/react-native-expo",
+   "rel": "reference"
+  },
+  {
+   "from": "skill:recipe-card-creator",
+   "to": "agent:ux-researcher",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:research-presenter",
+   "to": "agent:ux-researcher",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:risk-management",
+   "to": "agent:api-integration-specialist",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:risk-management",
+   "to": "agent:monetization-expert",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:sales",
+   "to": "agent:data-engineer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:sales",
+   "to": "agent:monetization-expert",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:security",
+   "to": "agent:ux-researcher",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:seo-analytics-auditor",
+   "to": "agent:seo-specialist",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:serverless-development",
+   "to": "agent:serverless-specialist",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:serverless-development",
+   "to": "agent:next-js-expert",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:serverless-development",
+   "to": "agent:django-fastapi-expert",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:startup-launch",
+   "to": "agent:startup-advisor",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:status-report-generator",
+   "to": "agent:gsd-project-researcher",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:supply-chain-optimizer",
+   "to": "agent:performance-optimizer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:sustainability-esg",
+   "to": "agent:api-integration-specialist",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:svelte-development",
+   "to": "agent:svelte-expert",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:svelte-development",
+   "to": "agent:vue-nuxt-expert",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:svelte-development",
+   "to": "agent:django-fastapi-expert",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:svelte-development",
+   "to": "doc:stacks/svelte-sveltekit",
+   "rel": "reference"
+  },
+  {
+   "from": "skill:svelte-development",
+   "to": "doc:stacks/fullstack-nextjs-nestjs",
+   "rel": "reference"
+  },
+  {
+   "from": "skill:tauri-desktop",
+   "to": "agent:flutter-developer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:tauri-desktop",
+   "to": "agent:rust-expert",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:tauri-desktop",
+   "to": "agent:blockchain-developer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:tdd-workflow",
+   "to": "agent:test-generator",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:tdd-workflow",
+   "to": "agent:refactoring-specialist",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:tdd-workflow",
+   "to": "agent:e2e-test-specialist",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:tech-debt-analyzer",
+   "to": "agent:deep-code-reviewer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:tech-debt-analyzer",
+   "to": "agent:documentation-writer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:tech-debt-analyzer",
+   "to": "agent:technical-writer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:test-specialist",
+   "to": "agent:test-generator",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:test-specialist",
+   "to": "agent:e2e-test-specialist",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:test-specialist",
+   "to": "agent:cpp-expert",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:toolkit-router",
+   "to": "agent:gsd-project-researcher",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:travel-planner",
+   "to": "agent:ux-researcher",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:ui-animation",
+   "to": "agent:motion-designer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:video-production",
+   "to": "agent:video-producer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:vue-development",
+   "to": "agent:vue-nuxt-expert",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:vue-development",
+   "to": "agent:svelte-expert",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:vue-development",
+   "to": "agent:flutter-developer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:vue-development",
+   "to": "doc:stacks/vue-nuxt",
+   "rel": "reference"
+  },
+  {
+   "from": "skill:websockets-realtime",
+   "to": "agent:realtime-specialist",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:websockets-realtime",
+   "to": "agent:data-engineer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:websockets-realtime",
+   "to": "agent:svelte-expert",
+   "rel": "pairs-with"
+  }
+ ]
+}

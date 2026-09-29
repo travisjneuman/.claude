@@ -13,8 +13,16 @@
 #      - If clean tree + unpushed commits → fetches, attempts FF push, reports.
 #      - If dirty tree → emits a warning. Does NOT auto-commit.
 #      - If diverged → emits a warning. Does NOT attempt resolution.
-#   3. Output is appended to ~/.claude/last-session.md so it appears in the next
-#      session's context-loader injection. Also echoed to stderr.
+#   3. Findings are appended to ~/.claude/logs/departure.log (never injected
+#      into Claude's context; the next session's arrival banner re-detects any
+#      repo that still needs attention).
+#
+# Configuration (local/shared.env, all optional):
+#   GITHUB_OWNERS=you,your-org      Owners whose repos may be auto-pushed.
+#                                   Unset = report only, never push.
+#   REPO_PUSH_COMMAND="..."         Push command run inside the repo instead of
+#                                   `git push` (e.g. a repo-sync runner).
+#   SESSION_END_AUTOPUSH=0          Disable pushing entirely (report only).
 #
 # What it does NOT do:
 #   - Never auto-commits dirty trees (that's how the d4b9e8e bad-base mess started).
@@ -28,24 +36,30 @@
 set -u
 
 SCRIPT_DIR="$HOME/.claude"
-ENV_FILE="$SCRIPT_DIR/.env.local"
-SUMMARY_FILE="$HOME/.claude/last-session.md"
+# Settings: host file (~/.claude/.env.local) wins over the shared private layer
+# (~/.claude/local/shared.env). Both are gitignored.
+env_get() { grep -h "^$1=" "$HOME/.claude/.env.local" "$HOME/.claude/local/shared.env" 2>/dev/null | head -1 | cut -d'=' -f2- | sed -e 's/^["'"'"']//' -e 's/["'"'"']$//'; }
+mkdir -p "$SCRIPT_DIR/logs"
+SUMMARY_FILE="$SCRIPT_DIR/logs/departure.log"
+GITHUB_OWNERS=$(env_get GITHUB_OWNERS)
+REPO_PUSH_COMMAND=$(env_get REPO_PUSH_COMMAND)
+SESSION_END_AUTOPUSH=$(env_get SESSION_END_AUTOPUSH)
+[[ -z "$GITHUB_OWNERS" ]] && SESSION_END_AUTOPUSH=0
 
-# Read CUSTOM_PROJECT_DIRS (same source as _pull-all-repos.sh and arrival hook)
 CUSTOM_PROJECT_DIRS=()
-if [[ -f "$ENV_FILE" ]]; then
-    RAW_DIRS=$(grep '^CUSTOM_PROJECT_DIRS=' "$ENV_FILE" | head -1 | cut -d'=' -f2- | tr -d '"' | tr -d "'")
-    if [[ -n "$RAW_DIRS" ]]; then
-        IFS=',' read -ra CUSTOM_PROJECT_DIRS <<< "$RAW_DIRS"
-    fi
-fi
+RAW_DIRS=$(env_get CUSTOM_PROJECT_DIRS)
+[[ -n "$RAW_DIRS" ]] && IFS=',' read -ra CUSTOM_PROJECT_DIRS <<< "$RAW_DIRS"
 
-# Determine if a repo is user-owned (push URL contains travisjneuman)
+# Determine if a repo is user-owned (push URL owner is listed in GITHUB_OWNERS)
 is_user_owned() {
-    local repo="$1"
-    local push_url
+    local repo="$1" push_url owner
     push_url=$(git -C "$repo" remote get-url --push origin 2>/dev/null) || return 1
-    [[ "$push_url" == *"travisjneuman"* ]]
+    [[ "$push_url" == "no_push" ]] && return 1
+    IFS=',' read -ra owners <<< "$GITHUB_OWNERS"
+    for owner in "${owners[@]}"; do
+        [[ -n "$owner" && "$push_url" =~ github\.com[:/]${owner}/ ]] && return 0
+    done
+    return 1
 }
 
 # Process one repo. Echoes status lines (one per finding) to stdout.
@@ -88,6 +102,11 @@ process_repo() {
         return 0
     fi
 
+    if [[ "$local_ahead" -gt 0 && "${SESSION_END_AUTOPUSH:-1}" == "0" ]]; then
+        echo "  UNPUSHED       $short_name (local +$local_ahead on $branch — auto-push disabled)"
+        return 0
+    fi
+
     if [[ "$local_ahead" -gt 0 && "$remote_ahead" -eq 0 && -z "$dirty" ]]; then
         # Clean tree, only-local-ahead. Try to push.
         # Fetch first to confirm no remote racing (cheap with `--no-tags` and shallow ref-list)
@@ -105,7 +124,12 @@ process_repo() {
             return 0
         fi
 
-        if git -C "$repo" push origin "$branch" --quiet 2>/dev/null; then
+        if [[ -n "$REPO_PUSH_COMMAND" ]]; then
+            push_ok() { (cd "$repo" && eval "$REPO_PUSH_COMMAND") >/dev/null 2>&1; }
+        else
+            push_ok() { git -C "$repo" push origin "$branch" --quiet 2>/dev/null; }
+        fi
+        if push_ok; then
             echo "  PUSHED         $short_name (+$local_ahead commit(s) pushed to origin/$branch)"
         else
             echo "  PUSH-FAILED    $short_name (push to origin/$branch was rejected — manual intervention needed)"
@@ -128,7 +152,7 @@ for project_dir in "${CUSTOM_PROJECT_DIRS[@]}"; do
     [[ -d "$project_dir" ]] || continue
 
     # Depth 0: the custom project dir itself, if it's a git repo
-    # (e.g. ~/web-dev IS the .workspace repo). Without this we'd miss
+    # (e.g. ~/projects IS the .workspace repo). Without this we'd miss
     # divergence on the parent and only push from its children. Bug from 2026-04-29.
     if out=$(process_repo "$project_dir"); then
         [[ -n "$out" ]] && FINDINGS+="$out"$'\n'

@@ -1,3 +1,9 @@
+---
+paths:
+  - "**/*.go"
+  - "**/go.mod"
+---
+
 # Go Rules
 Error handling: always check returned errors, never use `_` to discard. Use `fmt.Errorf` with `%w` for wrapping.
 Concurrency: prefer channels over shared memory. Use `context.Context` for cancellation. Never start goroutines without cleanup.

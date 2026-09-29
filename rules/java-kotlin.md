@@ -1,3 +1,10 @@
+---
+paths:
+  - "**/*.{java,kt,kts}"
+  - "**/build.gradle*"
+  - "**/pom.xml"
+---
+
 # Java/Kotlin Rules
 Kotlin: prefer data classes, sealed classes, extension functions. Use `?.` and `?:` for null safety. Avoid `!!`.
 Java: use records for DTOs (Java 16+), sealed interfaces (Java 17+), pattern matching (Java 21+).

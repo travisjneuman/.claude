@@ -1,11 +1,11 @@
 {
   "repoCount": 108,
-  "totalSkills": 16242,
+  "totalSkills": 16518,
   "repos": [
     {
       "name": "sickn33-antigravity-awesome-skills",
       "displayName": "Sickn33 Antigravity Awesome Skills",
-      "skillCount": 7517
+      "skillCount": 7729
     },
     {
       "name": "claude-code-plugins-plus-skills",
@@ -15,7 +15,7 @@
     {
       "name": "davila7-templates",
       "displayName": "Davila7 Templates",
-      "skillCount": 910
+      "skillCount": 911
     },
     {
       "name": "awesome-claude-skills",
@@ -23,14 +23,14 @@
       "skillCount": 864
     },
     {
+      "name": "buildwithclaude",
+      "displayName": "Buildwithclaude",
+      "skillCount": 389
+    },
+    {
       "name": "alirezarezvani-claude-skills",
       "displayName": "Alirezarezvani Claude Skills",
       "skillCount": 388
-    },
-    {
-      "name": "buildwithclaude",
-      "displayName": "Buildwithclaude",
-      "skillCount": 384
     },
     {
       "name": "affaan-everything-claude",
@@ -50,7 +50,7 @@
     {
       "name": "wshobson-agents",
       "displayName": "Wshobson Agents",
-      "skillCount": 183
+      "skillCount": 184
     },
     {
       "name": "claude-scientific-skills",
@@ -66,6 +66,11 @@
       "name": "giuseppe-developer-kit",
       "displayName": "Giuseppe Developer Kit",
       "skillCount": 119
+    },
+    {
+      "name": "daymade-skills",
+      "displayName": "Daymade Skills",
+      "skillCount": 114
     },
     {
       "name": "ccplugins-awesome",
@@ -96,11 +101,6 @@
       "name": "manutej-luxor-marketplace",
       "displayName": "Manutej Luxor Marketplace",
       "skillCount": 67
-    },
-    {
-      "name": "daymade-skills",
-      "displayName": "Daymade Skills",
-      "skillCount": 64
     },
     {
       "name": "worldbuilding-skills",
@@ -138,6 +138,11 @@
       "skillCount": 36
     },
     {
+      "name": "claude-mem",
+      "displayName": "Claude Mem",
+      "skillCount": 35
+    },
+    {
       "name": "p47phoenix-plugins",
       "displayName": "P47phoenix Plugins",
       "skillCount": 33
@@ -168,23 +173,18 @@
       "skillCount": 31
     },
     {
-      "name": "claude-mem",
-      "displayName": "Claude Mem",
-      "skillCount": 30
-    },
-    {
       "name": "skillcreatorai-awesome-agent-skills",
       "displayName": "Skillcreatorai Awesome Agent Skills",
       "skillCount": 27
     },
     {
-      "name": "expo-skills",
-      "displayName": "Expo Skills",
-      "skillCount": 25
-    },
-    {
       "name": "onmax-nuxt-skills",
       "displayName": "Onmax Nuxt Skills",
+      "skillCount": 26
+    },
+    {
+      "name": "expo-skills",
+      "displayName": "Expo Skills",
       "skillCount": 25
     },
     {
@@ -213,14 +213,14 @@
       "skillCount": 18
     },
     {
-      "name": "team-attention-plugins",
-      "displayName": "Team Attention Plugins",
+      "name": "skillcreatorai-agent-skills",
+      "displayName": "Skillcreatorai Agent Skills",
       "skillCount": 18
     },
     {
-      "name": "skillcreatorai-agent-skills",
-      "displayName": "Skillcreatorai Agent Skills",
-      "skillCount": 17
+      "name": "team-attention-plugins",
+      "displayName": "Team Attention Plugins",
+      "skillCount": 18
     },
     {
       "name": "jayzeedesign-awesome-claude",

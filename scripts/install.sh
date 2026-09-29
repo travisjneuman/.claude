@@ -259,7 +259,7 @@ check_dir() {
 
 check_file "$CLAUDE_DIR/CLAUDE.md" "CLAUDE.md (core rules)"
 check_file "$CLAUDE_DIR/settings.json" "settings.json (configuration)"
-check_file "$CLAUDE_DIR/scripts/hooks/session-start.sh" "SessionStart hook (auto-routing)"
+check_file "$CLAUDE_DIR/hooks/run-hook.js" "Hook dispatcher"
 check_dir "$CLAUDE_DIR/skills" "Skills directory"
 check_dir "$CLAUDE_DIR/agents" "Agents directory"
 check_dir "$CLAUDE_DIR/commands" "Commands directory"

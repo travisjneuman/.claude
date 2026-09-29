@@ -287,7 +287,7 @@ Resources: claude-scientific-skills
 The router configuration lives in:
 
 ```
-commands/router/
+skills/toolkit-router/routes/
 ├── domains-development.md   # 23 development domains
 ├── domains-scientific.md    # 8 scientific domains
 ├── domains-business.md      # 16 business domains

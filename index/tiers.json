@@ -1,0 +1,40 @@
+{
+  "$comment": "Context tiers. Every skill and command stays installed and invocable. 'core' entries keep their full description in Claude's skill listing (auto-matched every turn). Everything else is listed by name only (skillOverrides: name-only), so it costs a few tokens instead of a paragraph and is found through the toolkit-router skill + INDEX.md. Edit this list, then run: node scripts/generate-index.mjs --write",
+  "core_skills": [
+    "toolkit-router",
+    "core-workflow",
+    "debug-systematic",
+    "generic-code-reviewer",
+    "generic-feature-developer",
+    "test-specialist",
+    "api-design",
+    "database-expert",
+    "application-security",
+    "authentication-patterns",
+    "frontend-enhancer",
+    "ui-research",
+    "performance-engineering",
+    "devops-cloud",
+    "serverless-development",
+    "edge-computing",
+    "monitoring-observability",
+    "llm-app-development",
+    "ios-development",
+    "react-native",
+    "codebase-documenter",
+    "tech-debt-analyzer",
+    "document-skills"
+  ],
+  "core_commands": [
+    "start-task",
+    "pull-repos",
+    "review-code",
+    "health-check",
+    "handoff",
+    "security-scan",
+    "deploy",
+    "run",
+    "update-docs",
+    "skill-finder"
+  ]
+}

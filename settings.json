@@ -4,84 +4,41 @@
     "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
   },
   "permissions": {
+    "defaultMode": "bypassPermissions",
     "allow": [
-      "Skill(run-prompt *)",
-      "Skill(taches-cc-resources:*)",
-      "Skill(gsd:*)",
-      "Skill(commit-commands:*)",
-      "Skill(feature-dev:*)",
-      "Skill(pr-review-toolkit:*)",
+      "WebSearch",
+      "WebFetch(domain:code.claude.com)",
+      "WebFetch(domain:docs.claude.com)",
+      "WebFetch(domain:docs.anthropic.com)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:developer.mozilla.org)",
       "Bash(git *)",
-      "Bash(test *)",
-      "Bash(npm *)",
-      "Bash(npx *)",
-      "Bash(pnpm *)",
-      "Bash(yarn *)",
-      "Bash(node *)",
-      "Bash(python *)",
-      "Bash(python3 *)",
-      "Bash(pip *)",
-      "Bash(uv *)",
-      "Bash(ruff *)",
-      "Bash(mypy *)",
-      "Bash(pytest *)",
-      "Bash(docker *)",
-      "Bash(docker-compose *)",
       "Bash(gh *)",
-      "Bash(curl *)",
-      "Bash(wget *)",
-      "Bash(cat *)",
       "Bash(ls *)",
-      "Bash(dir *)",
-      "Bash(find *)",
-      "Bash(findstr *)",
-      "Bash(tree *)",
+      "Bash(cat *)",
       "Bash(head *)",
       "Bash(tail *)",
       "Bash(wc *)",
-      "Bash(mkdir *)",
-      "Bash(cp *)",
-      "Bash(mv *)",
-      "Bash(powershell -Command *)",
-      "Bash(Get-ChildItem *)",
-      "Bash(Get-NetTCPConnection *)",
-      "Bash(Select-Object *)",
-      "Bash(ForEach-Object *)",
-      "Bash(Format-Table *)",
-      "Skill(tech-debt-analyzer)",
-      "Skill(debug-like-expert)",
-      "Skill(generic-code-reviewer)",
-      "Skill(generic-feature-developer)",
-      "Skill(test-specialist)",
-      "Skill(codebase-documenter)",
-      "WebSearch",
-      "WebFetch(domain:docs.anthropic.com)",
-      "WebFetch(domain:awesomeclaude.ai)",
-      "WebFetch(domain:docs.claude.com)",
-      "WebFetch(domain:claudemarketplaces.com)",
-      "WebFetch(domain:code.claude.com)",
-      "WebFetch(domain:registry.modelcontextprotocol.io)",
-      "WebFetch(domain:mcpservers.org)",
-      "WebFetch(domain:mcpcat.io)",
-      "WebFetch(domain:modelcontextprotocol.io)",
-      "WebFetch(domain:react.dev)",
-      "WebFetch(domain:nextjs.org)",
-      "WebFetch(domain:typescriptlang.org)",
-      "WebFetch(domain:nodejs.org)",
-      "WebFetch(domain:developer.mozilla.org)",
-      "WebFetch(domain:github.com)",
-      "mcp__memory__*",
-      "mcp__filesystem__read_file",
-      "mcp__filesystem__list_directory",
-      "mcp__sqlite__read_query",
-      "mcp__sequential-thinking__*"
+      "Bash(find *)",
+      "Bash(grep *)",
+      "Bash(rg *)"
     ],
-    "deny": [
-      "mcp__filesystem__write_file",
-      "mcp__filesystem__delete_file"
-    ],
-    "ask": [],
-    "defaultMode": "bypassPermissions"
+    "deny": [],
+    "ask": []
+  },
+  "skipDangerousModePermissionPrompt": true,
+  "skipAutoPermissionPrompt": true,
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  },
+  "pluginConfigs": {
+    "agents-md@builtin": {
+      "options": {
+        "instructionFiles": "claude-md-and-agents-md"
+      }
+    }
   },
   "enableAllProjectMcpServers": false,
   "disabledMcpjsonServers": [
@@ -101,119 +58,54 @@
   "hooks": {
     "SessionStart": [
       {
+        "matcher": "startup|resume",
         "hooks": [
           {
             "type": "command",
             "command": "node -e \"process.env.HOOK_NAME='session-start-pull.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
-            "statusMessage": "Pulling repos in background",
-            "once": true,
             "async": true
           },
           {
             "type": "command",
-            "command": "node -e \"process.env.HOOK_NAME='session-start-context.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
-            "statusMessage": "Loading previous session context",
-            "once": true
+            "command": "node -e \"process.env.HOOK_NAME='session-start-repo-health.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
+            "statusMessage": "Checking repo health"
           },
           {
             "type": "command",
-            "command": "node -e \"process.env.HOOK_NAME='session-start-repo-health.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
-            "statusMessage": "Checking repo health",
-            "once": true
-          }
-        ]
-      },
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node -e \"require(require('path').join(require('os').homedir(),'.claude','hooks','gsd-check-update.js'))\""
-          }
-        ]
-      }
-    ],
-    "Stop": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node -e \"process.env.HOOK_NAME='session-stop-summary.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
-            "statusMessage": "Saving session summary"
-          }
-        ]
-      }
-    ],
-    "UserPromptSubmit": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node -e \"process.env.HOOK_NAME='prompt-context.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
-            "statusMessage": "Injecting git context"
+            "command": "node -e \"process.env.HOOK_NAME='local-session-start.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\""
           }
         ]
       }
     ],
     "PreToolUse": [
       {
-        "matcher": "Bash",
+        "matcher": "Bash|Write|Edit|MultiEdit|NotebookEdit",
         "hooks": [
           {
             "type": "command",
-            "command": "node -e \"process.env.HOOK_NAME='pre-bash-check.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
-            "statusMessage": "Checking command"
+            "command": "node -e \"process.env.HOOK_NAME='guard.js';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
+            "timeout": 10
           }
         ]
       },
       {
-        "matcher": "Write|Edit",
+        "matcher": "Bash|EnterWorktree|Agent|Task",
         "hooks": [
           {
             "type": "command",
-            "command": "node -e \"process.env.HOOK_NAME='pre-write-validate.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
-            "statusMessage": "Validating file path"
-          }
-        ]
-      },
-      {
-        "matcher": "Write|Edit",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node -e \"require(require('path').join(require('os').homedir(),'.claude','hooks','gsd-prompt-guard.js'))\"",
-            "timeout": 5
-          }
-        ]
-      }
-    ],
-    "PreCompact": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node -e \"process.env.HOOK_NAME='session-stop-summary.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
-            "statusMessage": "Saving session context before compaction"
+            "command": "node -e \"process.env.HOOK_NAME='local-pre-tool-use.py';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
+            "timeout": 10
           }
         ]
       }
     ],
     "PostToolUse": [
       {
-        "matcher": "Write|Edit",
+        "matcher": "Write|Edit|MultiEdit|NotebookEdit",
         "hooks": [
           {
             "type": "command",
             "command": "node -e \"process.env.HOOK_NAME='secret-scan.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
-            "statusMessage": "Scanning for secrets"
-          }
-        ]
-      },
-      {
-        "matcher": "Bash|Edit|Write|MultiEdit|Agent|Task",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node -e \"require(require('path').join(require('os').homedir(),'.claude','hooks','gsd-context-monitor.js'))\"",
             "timeout": 10
           }
         ]
@@ -224,13 +116,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node -e \"process.env.HOOK_NAME='session-stop-summary.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
-            "statusMessage": "Saving session summary on exit"
-          },
-          {
-            "type": "command",
-            "command": "node -e \"process.env.HOOK_NAME='session-end-repo-health.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
-            "statusMessage": "Pushing unpushed work and warning on dirty trees"
+            "command": "node -e \"process.env.HOOK_NAME='session-end-repo-health.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\""
           }
         ]
       }
@@ -238,7 +124,8 @@
   },
   "statusLine": {
     "type": "command",
-    "command": "node -e \"process.env.HOOK_NAME='statusline.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\""
+    "command": "node -e \"process.env.HOOK_NAME='statusline.js';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
+    "padding": 0
   },
   "enabledPlugins": {
     "agent-sdk-dev@claude-code-plugins": true,
@@ -260,12 +147,188 @@
   },
   "outputStyle": "default",
   "spinnerTipsEnabled": false,
-  "effortLevel": "xhigh",
   "autoUpdatesChannel": "latest",
-  "skipDangerousModePermissionPrompt": true,
   "verbose": true,
-  "fileCheckpointingEnabled": false,
   "teammateMode": "auto",
   "remoteControlAtStartup": true,
-  "skipAutoPermissionPrompt": true
+  "theme": "dark",
+  "skillOverrides": {
+    "accessibility-a11y": "name-only",
+    "agent-teams": "name-only",
+    "ai-ml-development": "name-only",
+    "ai-policy-generator": "name-only",
+    "android-development": "name-only",
+    "ar-vr-xr": "name-only",
+    "assemble-team": "name-only",
+    "audio-production": "name-only",
+    "audit-docs": "name-only",
+    "auto-claude": "name-only",
+    "backup-config": "name-only",
+    "battle-card-builder": "name-only",
+    "blockchain-web3": "name-only",
+    "bootstrap": "name-only",
+    "brand-identity": "name-only",
+    "business-strategy": "name-only",
+    "career-path-planner": "name-only",
+    "case-interview-practice": "name-only",
+    "changelog": "name-only",
+    "compliance-engineering": "name-only",
+    "content-repurposer": "name-only",
+    "context-stats": "name-only",
+    "contract-redliner": "name-only",
+    "course-material-creator": "name-only",
+    "customer-persona-builder": "name-only",
+    "customer-success": "name-only",
+    "data-engineering": "name-only",
+    "data-science": "name-only",
+    "debate-practice-coach": "name-only",
+    "deps-update": "name-only",
+    "devex-sdk-design": "name-only",
+    "discover-skills": "name-only",
+    "electron-desktop": "name-only",
+    "email-systems": "name-only",
+    "embedded-iot": "name-only",
+    "event-driven-architecture": "name-only",
+    "event-planner": "name-only",
+    "finance": "name-only",
+    "financial-scenario-planner": "name-only",
+    "flutter-development": "name-only",
+    "fundraising-analyzer": "name-only",
+    "game-development": "name-only",
+    "generic-design-system": "name-only",
+    "generic-fullstack-code-reviewer": "name-only",
+    "generic-fullstack-design-system": "name-only",
+    "generic-fullstack-feature-developer": "name-only",
+    "generic-fullstack-ux-designer": "name-only",
+    "generic-react-code-reviewer": "name-only",
+    "generic-react-design-system": "name-only",
+    "generic-react-feature-developer": "name-only",
+    "generic-react-ux-designer": "name-only",
+    "generic-static-code-reviewer": "name-only",
+    "generic-static-design-system": "name-only",
+    "generic-static-feature-developer": "name-only",
+    "generic-static-ux-designer": "name-only",
+    "generic-ux-designer": "name-only",
+    "grant-proposal-builder": "name-only",
+    "graphic-design": "name-only",
+    "graphql-expert": "name-only",
+    "growth-engineering": "name-only",
+    "gsd:add-backlog": "name-only",
+    "gsd:add-phase": "name-only",
+    "gsd:add-tests": "name-only",
+    "gsd:add-todo": "name-only",
+    "gsd:audit-milestone": "name-only",
+    "gsd:audit-uat": "name-only",
+    "gsd:autonomous": "name-only",
+    "gsd:check-todos": "name-only",
+    "gsd:cleanup": "name-only",
+    "gsd:complete-milestone": "name-only",
+    "gsd:debug": "name-only",
+    "gsd:discuss-phase": "name-only",
+    "gsd:do": "name-only",
+    "gsd:execute-phase": "name-only",
+    "gsd:fast": "name-only",
+    "gsd:forensics": "name-only",
+    "gsd:health": "name-only",
+    "gsd:help": "name-only",
+    "gsd:insert-phase": "name-only",
+    "gsd:join-discord": "name-only",
+    "gsd:list-phase-assumptions": "name-only",
+    "gsd:list-workspaces": "name-only",
+    "gsd:manager": "name-only",
+    "gsd:map-codebase": "name-only",
+    "gsd:milestone-summary": "name-only",
+    "gsd:new-milestone": "name-only",
+    "gsd:new-project": "name-only",
+    "gsd:new-workspace": "name-only",
+    "gsd:next": "name-only",
+    "gsd:note": "name-only",
+    "gsd:pause-work": "name-only",
+    "gsd:plan-milestone-gaps": "name-only",
+    "gsd:plan-phase": "name-only",
+    "gsd:plant-seed": "name-only",
+    "gsd:pr-branch": "name-only",
+    "gsd:profile-user": "name-only",
+    "gsd:progress": "name-only",
+    "gsd:quick": "name-only",
+    "gsd:reapply-patches": "name-only",
+    "gsd:remove-phase": "name-only",
+    "gsd:remove-workspace": "name-only",
+    "gsd:research-phase": "name-only",
+    "gsd:resume-work": "name-only",
+    "gsd:review": "name-only",
+    "gsd:review-backlog": "name-only",
+    "gsd:session-report": "name-only",
+    "gsd:set-profile": "name-only",
+    "gsd:settings": "name-only",
+    "gsd:ship": "name-only",
+    "gsd:stats": "name-only",
+    "gsd:thread": "name-only",
+    "gsd:ui-phase": "name-only",
+    "gsd:ui-review": "name-only",
+    "gsd:update": "name-only",
+    "gsd:validate-phase": "name-only",
+    "gsd:verify-work": "name-only",
+    "gsd:workstreams": "name-only",
+    "health-wellness": "name-only",
+    "hr-talent": "name-only",
+    "i18n-localization": "name-only",
+    "impact-report-writer": "name-only",
+    "init-project": "name-only",
+    "innovation": "name-only",
+    "investment-memo-generator": "name-only",
+    "kotlin-multiplatform": "name-only",
+    "leadership": "name-only",
+    "learning-gap-analyzer": "name-only",
+    "legal-compliance": "name-only",
+    "list-skills": "name-only",
+    "literature-review-planner": "name-only",
+    "log-decision": "name-only",
+    "low-code-platforms": "name-only",
+    "macos-native": "name-only",
+    "marketing": "name-only",
+    "microservices-architecture": "name-only",
+    "migrate": "name-only",
+    "mobile-cicd": "name-only",
+    "monetization-strategy": "name-only",
+    "newsletter-creator": "name-only",
+    "onboarding-guide-creator": "name-only",
+    "operations": "name-only",
+    "options-comparator": "name-only",
+    "payment-integration": "name-only",
+    "perf-audit": "name-only",
+    "podcast-producer": "name-only",
+    "process-flowchart-designer": "name-only",
+    "product-analytics": "name-only",
+    "product-management": "name-only",
+    "pwa-development": "name-only",
+    "rd-management": "name-only",
+    "real-estate-analyzer": "name-only",
+    "recipe-card-creator": "name-only",
+    "research-presenter": "name-only",
+    "risk-management": "name-only",
+    "sales": "name-only",
+    "scaffold": "name-only",
+    "security": "name-only",
+    "seo-analytics-auditor": "name-only",
+    "session-log": "name-only",
+    "standardize-claude-md": "name-only",
+    "startup-launch": "name-only",
+    "statistics-verifier": "name-only",
+    "status-report-generator": "name-only",
+    "supply-chain-optimizer": "name-only",
+    "sustainability-esg": "name-only",
+    "svelte-development": "name-only",
+    "tauri-desktop": "name-only",
+    "tdd-workflow": "name-only",
+    "test-plan": "name-only",
+    "test-suite": "name-only",
+    "travel-planner": "name-only",
+    "ui-animation": "name-only",
+    "update-counts": "name-only",
+    "video-production": "name-only",
+    "volunteer-coordinator": "name-only",
+    "vue-development": "name-only",
+    "websockets-realtime": "name-only"
+  }
 }

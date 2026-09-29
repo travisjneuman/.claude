@@ -28,16 +28,13 @@
 set -u
 
 SCRIPT_DIR="$HOME/.claude"
-ENV_FILE="$SCRIPT_DIR/.env.local"
+# Settings: host file (~/.claude/.env.local) wins over the shared private layer
+# (~/.claude/local/shared.env). Both are gitignored.
+env_get() { grep -h "^$1=" "$HOME/.claude/.env.local" "$HOME/.claude/local/shared.env" 2>/dev/null | head -1 | cut -d'=' -f2- | sed -e 's/^["'"'"']//' -e 's/["'"'"']$//'; }
 
-# Read CUSTOM_PROJECT_DIRS from .env.local (same source as _pull-all-repos.sh)
 CUSTOM_PROJECT_DIRS=()
-if [[ -f "$ENV_FILE" ]]; then
-    RAW_DIRS=$(grep '^CUSTOM_PROJECT_DIRS=' "$ENV_FILE" | head -1 | cut -d'=' -f2- | tr -d '"' | tr -d "'")
-    if [[ -n "$RAW_DIRS" ]]; then
-        IFS=',' read -ra CUSTOM_PROJECT_DIRS <<< "$RAW_DIRS"
-    fi
-fi
+RAW_DIRS=$(env_get CUSTOM_PROJECT_DIRS)
+[[ -n "$RAW_DIRS" ]] && IFS=',' read -ra CUSTOM_PROJECT_DIRS <<< "$RAW_DIRS"
 
 # Inspect a single repo. Echoes one line iff there's a problem; otherwise silent.
 check_repo() {
@@ -102,7 +99,7 @@ for project_dir in "${CUSTOM_PROJECT_DIRS[@]}"; do
     [[ -d "$project_dir" ]] || continue
 
     # Depth 0: the custom project dir itself, if it's a git repo
-    # (e.g. ~/web-dev IS the .workspace repo). Without this we'd miss
+    # (e.g. ~/projects IS the .workspace repo). Without this we'd miss
     # divergence on the parent and only see its children. Bug from 2026-04-29.
     if out=$(check_repo "$project_dir"); then
         [[ -n "$out" ]] && PROBLEMS+="$out"$'\n'
@@ -138,6 +135,13 @@ for project_dir in "${CUSTOM_PROJECT_DIRS[@]}"; do
         done
     done
 done
+
+# Cap the banner so a machine with many dirty repos cannot flood the context.
+MAX_LINES=15
+TOTAL=$(printf '%s' "$PROBLEMS" | grep -c . || true)
+if [[ "$TOTAL" -gt "$MAX_LINES" ]]; then
+    PROBLEMS="$(printf '%s' "$PROBLEMS" | head -n "$MAX_LINES")"$'\n'"  ... and $((TOTAL - MAX_LINES)) more (run: bash ~/.claude/hooks/session-start-repo-health.sh)"$'\n'
+fi
 
 if [[ -n "$PROBLEMS" ]]; then
     echo "=== Repo Health Check ==="

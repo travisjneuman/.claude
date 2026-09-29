@@ -1,3 +1,9 @@
+---
+paths:
+  - "**/*.rs"
+  - "**/Cargo.toml"
+---
+
 # Rust Rules
 Ownership: prefer borrowing over cloning. Use `&str` for function params, `String` for owned data.
 Error handling: use `thiserror` for library errors, `anyhow` for application errors. Never `unwrap()` in production code.

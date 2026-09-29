@@ -112,7 +112,7 @@ Create `~/Library/LaunchAgents/com.user.sync-repos.plist`:
     <key>ProgramArguments</key>
     <array>
         <string>/bin/bash</string>
-        <string>~/.claude/scripts/force-sync-repos.sh</string>
+        <string>/Users/you/.claude/scripts/force-sync-repos.sh</string>
         <string>--force</string>
     </array>
     <key>RunAtLoad</key>

@@ -303,15 +303,16 @@ This repo underwent a security audit before being made public. The following wer
     │   ├── cli-developer.md
     │   └── pwa-specialist.md
     │
-    ├── hooks/                      ← Event hooks (10 scripts)
-    │   ├── README.md               ← Hooks index
-    │   ├── format-code.sh          ← PostToolUse: auto-format on file write
-    │   ├── guard-dangerous.sh      ← PreToolUse: block dangerous operations
-    │   ├── pre-commit-counts.sh    ← Pre-commit: update doc counts
-    │   ├── prompt-context.sh       ← PreToolUse: prompt context injection
-    │   ├── session-start-context.sh ← SessionStart: load context
-    │   ├── session-start-pull.sh   ← SessionStart: pull repos
-    │   └── session-stop-summary.sh ← SessionStop: save session summary
+    ├── hooks/                      ← Claude Code hooks (see hooks/README.md)
+    │   ├── README.md               ← What each hook does, token/time cost
+    │   ├── run-hook.js             ← Cross-platform dispatcher (public + local/hooks)
+    │   ├── guard.js                ← PreToolUse: footgun guard
+    │   ├── secret-scan.sh          ← PostToolUse: credential scan
+    │   ├── session-start-pull.sh   ← SessionStart (async): daily pull
+    │   ├── session-start-repo-health.sh ← SessionStart: repo banner
+    │   ├── session-end-repo-health.sh   ← SessionEnd: push finished work
+    │   ├── statusline.js           ← Status bar
+    │   └── gsd-*.js                ← GSD framework hooks (not wired globally)
     │
     ├── rules/                      ← Contextual rules (17 files across 4 dirs)
     │   ├── README.md               ← Rules index
@@ -456,15 +457,7 @@ Agent definitions for the Task tool's `subagent_type` parameter. Each agent is a
 
 Shell scripts triggered by Claude Code events (configured in `settings.json`).
 
-| Hook                       | Event        | Purpose                         |
-| -------------------------- | ------------ | ------------------------------- |
-| `format-code.sh`           | PostToolUse  | Auto-format files after writing |
-| `guard-dangerous.sh`       | PreToolUse   | Block dangerous operations      |
-| `pre-commit-counts.sh`     | Pre-commit   | Update doc counts before commit |
-| `prompt-context.sh`        | PreToolUse   | Inject context into prompts     |
-| `session-start-context.sh` | SessionStart | Load context at session start   |
-| `session-start-pull.sh`    | SessionStart | Pull repos at session start     |
-| `session-stop-summary.sh`  | SessionStop  | Save summary at session end     |
+See [`hooks/README.md`](../hooks/README.md) for the current hooks.
 
 ---
 

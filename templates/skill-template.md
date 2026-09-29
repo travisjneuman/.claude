@@ -175,7 +175,7 @@ Use for:
 After creation:
 1. Add to `skills/MASTER_INDEX.md`
 2. Update category count in `README.md`
-3. Add to relevant `commands/router/domains-*.md` if applicable
+3. Add to relevant `skills/toolkit-router/routes/domains-*.md` if applicable
 
 ---
 

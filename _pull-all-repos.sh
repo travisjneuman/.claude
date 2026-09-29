@@ -51,13 +51,13 @@ if ((BASH_VERSINFO[0] < 4)); then
 fi
 
 
+# Settings: host file (~/.claude/.env.local) wins over the shared private layer
+# (~/.claude/local/shared.env). Both are gitignored.
+env_get() { grep -h "^$1=" "$HOME/.claude/.env.local" "$HOME/.claude/local/shared.env" 2>/dev/null | head -1 | cut -d'=' -f2- | sed -e 's/^["'"'"']//' -e 's/["'"'"']$//'; }
 CUSTOM_PROJECT_DIRS=()
-ENV_FILE="$SCRIPT_DIR/.env.local"
-if [[ -f "$ENV_FILE" ]]; then
-    RAW_DIRS=$(grep '^CUSTOM_PROJECT_DIRS=' "$ENV_FILE" | head -1 | cut -d'=' -f2- | tr -d '"' | tr -d "'")
-    if [[ -n "$RAW_DIRS" ]]; then
-        IFS=',' read -ra CUSTOM_PROJECT_DIRS <<< "$RAW_DIRS"
-    fi
+RAW_DIRS=$(env_get CUSTOM_PROJECT_DIRS)
+if [[ -n "$RAW_DIRS" ]]; then
+    IFS=',' read -ra CUSTOM_PROJECT_DIRS <<< "$RAW_DIRS"
 fi
 # =============================================================================
 MARKETPLACES_DIR="$SCRIPT_DIR/plugins/marketplaces"
@@ -222,7 +222,9 @@ enforce_custom_push_policy() {
 collect_git_roots() {
     local project_dir="$1"
     find "$project_dir" \
-        \( -path "*/node_modules" -o -path "*/.git/*" -o -path "*/plugins/cache" -o -path "*/plugins/marketplaces" -o -path "*/.worktrees" \) -prune \
+        \( -path "*/node_modules" -o -path "*/.git/*" -o -path "*/plugins/cache" -o -path "*/plugins/marketplaces" -o -path "*/.worktrees" \
+           -o -path "*/.build" -o -path "*/DerivedData" -o -path "*/Pods" -o -path "*/Carthage" -o -path "*/vendor" \
+           -o -path "*/.venv" -o -path "*/venv" -o -path "*/target" -o -path "*/.next" -o -path "*/dist" \) -prune \
         -o -name .git -print 2>/dev/null | while IFS= read -r git_marker; do
             dirname "$git_marker"
         done
@@ -282,26 +284,11 @@ process_repo() {
         return 1
     fi
 
-    # Fix detached HEAD if needed
+    # Detached HEAD: report only. A detached checkout is often intentional
+    # (dependency pins, bisects, release tags); never switch branches for it.
     if [[ "$is_detached_head" == true ]]; then
-        local default_branch
-        default_branch=$(get_default_branch) || default_branch=""
-
-        if [[ -z "$default_branch" ]]; then
-            echo -e "${YELLOW}  $repo_name: detached HEAD, no default branch found${NC}"
-            FAILED=$((FAILED + 1))
-            return 1
-        fi
-
-        if git checkout "$default_branch" 2>/dev/null; then
-            echo -e "${CYAN}  $repo_name: fixed detached HEAD -> $default_branch${NC}"
-            FIXED_DETACHED=$((FIXED_DETACHED + 1))
-            current_branch="$default_branch"
-        else
-            echo -e "${RED}  $repo_name: failed to checkout $default_branch${NC}"
-            FAILED=$((FAILED + 1))
-            return 1
-        fi
+        echo -e "${YELLOW}  $repo_name: detached HEAD; skipped (not changing branches)${NC}"
+        return 0
     fi
 
     # Check if we're behind
@@ -428,7 +415,10 @@ fi
 # =============================================================================
 CUSTOM_REPO_COUNT=0
 declare -A SEEN_CUSTOM_REPOS=()
-if [[ ${#CUSTOM_PROJECT_DIRS[@]} -gt 0 ]]; then
+# Set PULL_CUSTOM_PROJECT_DIRS=0 in local/shared.env when another tool (for
+# example a repo-sync service) already keeps those repos current.
+PULL_CUSTOM_PROJECT_DIRS=$(env_get PULL_CUSTOM_PROJECT_DIRS)
+if [[ ${#CUSTOM_PROJECT_DIRS[@]} -gt 0 && "${PULL_CUSTOM_PROJECT_DIRS:-1}" != "0" ]]; then
     for project_dir in "${CUSTOM_PROJECT_DIRS[@]}"; do
         # Skip empty entries (from commented lines)
         [[ -z "$project_dir" ]] && continue
@@ -495,74 +485,9 @@ if [[ "$STATUS_ONLY" == false ]] && [[ -f "$SCRIPT_DIR/scripts/fix-marketplace-p
     bash "$SCRIPT_DIR/scripts/fix-marketplace-paths.sh"
 fi
 
-# =============================================================================
-# PHASE 6: Update documentation counts (if repos were updated)
-# =============================================================================
-if [[ "$STATUS_ONLY" == false ]] && [[ -f "$SCRIPT_DIR/scripts/update-counts.sh" ]]; then
-    if [[ $UPDATED -gt 0 ]] || [[ $FIXED_DETACHED -gt 0 ]]; then
-        echo -e "${BOLD}Updating documentation counts...${NC}"
-        bash "$SCRIPT_DIR/scripts/update-counts.sh"
-    else
-        echo -e "${DIM}No repo changes — skipping count update${NC}"
-    fi
-fi
-
-# =============================================================================
-# PHASE 7: Commit and push any changes (count updates, path fixes, etc.)
-# =============================================================================
-if [[ "$STATUS_ONLY" == false ]]; then
-    cd "$SCRIPT_DIR"
-
-    # Check if there are any changes to commit
-    if [[ -n $(git status --porcelain 2>/dev/null) ]]; then
-        echo ""
-        echo -e "${BOLD}Committing and pushing updates:${NC}"
-
-        # Stage only tracked/generated toolkit files. Never sweep ignored runtime,
-        # marketplace, cache, auth, or ad-hoc local files into the public repo.
-        git add -u
-        for generated_file in \
-            counts.json plugin.json README.md CLAUDE.md CHANGELOG.md \
-            .gitmodules .env.example _pull-all-repos.sh \
-            docs/SETUP-GUIDE.md docs/NEW-DEVICE-SETUP.md docs/MARKETPLACE-GUIDE.md \
-            docs/MAINTENANCE.md docs/FOLDER-STRUCTURE.md docs/ARCHITECTURE.md \
-            docs/README.md docs/FAQ.md docs/GLOSSARY.md docs/PLUGIN-MANAGEMENT.md \
-            docs/CLAUDE-CODE-RESOURCES.md docs/SKILLS.md docs/reference/tooling/external-repos.md \
-            scripts/README.md scripts/generate-counts.mjs \
-            commands/README.md commands/bootstrap.md commands/health-check.md \
-            commands/list-skills.md commands/pull-repos.md commands/skill-finder.md \
-            website/src/lib/data/marketplace-counts.json
-        do
-            [[ -e "$generated_file" ]] && git add "$generated_file"
-        done
-
-        # Build a descriptive commit message
-        COMMIT_PARTS=()
-        [[ $UPDATED -gt 0 ]] && COMMIT_PARTS+=("pull $UPDATED repo(s)")
-        [[ -n $(git diff --cached --name-only | grep -E '(counts\.json|README\.md|MASTER_INDEX\.md|marketplace-counts\.json)') ]] && COMMIT_PARTS+=("update counts")
-
-        if [[ ${#COMMIT_PARTS[@]} -gt 0 ]]; then
-            COMMIT_MSG="chore: $(IFS=', '; echo "${COMMIT_PARTS[*]}")"
-        else
-            COMMIT_MSG="chore: update after pull-all-repos"
-        fi
-
-        if git commit -m "$COMMIT_MSG" >/dev/null 2>&1; then
-            echo -e "${GREEN}  Committed: $COMMIT_MSG${NC}"
-
-            if git push >/dev/null 2>&1; then
-                echo -e "${GREEN}  Pushed to origin${NC}"
-            else
-                echo -e "${RED}  Push failed — commit is local only${NC}"
-            fi
-        else
-            echo -e "${DIM}  Nothing to commit${NC}"
-        fi
-    else
-        echo ""
-        echo -e "${DIM}No local changes to commit${NC}"
-    fi
-fi
+# Counts and indexes are regenerated by the pre-commit hook when you commit
+# toolkit changes. This script never commits or pushes: a background pull must
+# not sweep in-progress edits into a public push.
 
 # Exit with error if any failed
 if [[ $FAILED -gt 0 ]]; then

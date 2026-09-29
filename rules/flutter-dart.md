@@ -1,3 +1,9 @@
+---
+paths:
+  - "**/*.dart"
+  - "**/pubspec.yaml"
+---
+
 # Flutter/Dart Rules
 State management: Riverpod preferred. Use `ref.watch` in build, `ref.read` in callbacks. Avoid `setState` beyond simple local state.
 Widgets: const constructors everywhere possible. Extract widgets into separate classes at 50+ lines. Keys for list items.

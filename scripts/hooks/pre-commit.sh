@@ -12,7 +12,53 @@ NC='\033[0m' # No Color
 echo -e "${CYAN}Running pre-commit checks...${NC}"
 
 # Get staged files
-STAGED_FILES=$(git diff --cached --name-only)
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACMR)
+
+ROOT="$(git rev-parse --show-toplevel)"
+
+# ============================================
+# CHECK 0a: Marketplace clones are never committed
+# ============================================
+if echo "$STAGED_FILES" | grep -q "^plugins/marketplaces/" || git ls-files -s | awk '$1==160000{f=1} END{exit !f}'; then
+    echo -e "${RED}COMMIT BLOCKED - marketplace clone content or a gitlink is staged.${NC}"
+    echo "Marketplaces are listed in .gitmodules only; clones stay local (plugins/marketplaces/ is gitignored)."
+    echo "Fix: git rm -r --cached plugins/marketplaces/<name>"
+    exit 1
+fi
+
+# ============================================
+# CHECK 0b: Public-safety gate (private data must not reach the public repo)
+# ============================================
+# Patterns come from local/public-safety-patterns.txt (one extended regex per
+# line, gitignored, so the list of private strings is itself private).
+PATTERN_FILE="$ROOT/local/public-safety-patterns.txt"
+if [ -f "$PATTERN_FILE" ]; then
+    ADDED=$(git diff --cached -U0 --no-color -- . ':(exclude)*.png' ':(exclude)*.jpg' | grep '^+' | grep -v '^+++' || true)
+    while IFS= read -r pat; do
+        [ -z "$pat" ] && continue
+        case "$pat" in \#*) continue ;; esac
+        HIT=$(printf '%s\n' "$ADDED" | grep -E -m1 -- "$pat" || true)
+        if [ -n "$HIT" ]; then
+            echo -e "${RED}COMMIT BLOCKED - staged change matches a private pattern from local/public-safety-patterns.txt${NC}"
+            echo "  pattern: $pat"
+            echo "  line:    $(printf '%s' "$HIT" | cut -c1-160)"
+            echo "Move that content into ~/.claude/local/ (gitignored) or generalize it."
+            exit 1
+        fi
+    done < "$PATTERN_FILE"
+    echo -e "${GREEN}✓ Public-safety gate passed${NC}"
+fi
+
+# ============================================
+# CHECK 0c: Regenerate index + counts so they never go stale
+# ============================================
+if command -v node >/dev/null 2>&1; then
+    node "$ROOT/scripts/generate-index.mjs" --write >/dev/null && git add INDEX.md index/graph.json skills/MASTER_INDEX.md 2>/dev/null
+    if ! git diff --quiet -- settings.json; then
+        echo -e "${YELLOW}⚠ settings.json has unstaged changes (skillOverrides regenerated or local edits). Review and stage it if intended.${NC}"
+    fi
+    node "$ROOT/scripts/generate-counts.mjs" --write >/dev/null 2>&1 && git add -u counts.json plugin.json README.md skills/README.md website/src/lib/data/marketplace-counts.json 2>/dev/null || true
+fi
 
 # ============================================
 # CHECK 1: No secrets or credentials

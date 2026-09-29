@@ -2,7 +2,21 @@
 
 All notable changes to the Ultimate Claude Code Toolkit.
 
-## [Unreleased] - June 20, 2026
+## [3.0.0] - September 29, 2026
+
+### Modernization for current Claude Code (2.1.28x)
+
+- **Context diet without removing anything.** New `index/tiers.json` marks 23 core skills and 10 core commands; `scripts/generate-index.mjs` writes `skillOverrides: "name-only"` for everything else, plus a generated `INDEX.md` (table of contents by domain), `index/graph.json` (skill ↔ agent ↔ rule ↔ doc edges), `skills/MASTER_INDEX.md`, and a local marketplace catalog. New `toolkit-router` skill is the entry point. Router files moved from `commands/router/` (where they registered as junk slash commands) to `skills/toolkit-router/routes/`; `commands/README.md` moved to `docs/COMMANDS.md` for the same reason.
+- **Rules are path-scoped** (`paths:` frontmatter), so language rules load only for matching files. They previously loaded every session despite the docs claiming otherwise.
+- **`CLAUDE.md` rewritten** around Full Access+++ (autonomous in-scope execution, absolute explicit prohibitions, stop conditions), issue-driven testing, pull-first git, and no AI attribution. The keyword → checklist table moved into the index.
+- **Settings:** `attribution` blanks commit/PR trailers; `pluginConfigs.agents-md@builtin` loads `AGENTS.md` alongside `CLAUDE.md`; removed ignored/obsolete keys (`effortLevel` on Opus 5.5+, `fileCheckpointingEnabled: false`, Windows PowerShell allow rules); SessionStart hooks scoped to `startup|resume`.
+- **Hooks:** new `guard.js` replaces `pre-bash-check.sh` / `pre-write-validate.sh`, which read `$CLAUDE_TOOL_INPUT` (never set by Claude Code) and so never blocked anything. `secret-scan.sh` now reports to Claude via `additionalContext` instead of stderr nobody saw. New `statusline.js` reads the documented status line schema. `run-hook.js` dispatches optional private hooks from `local/hooks/` and picks the interpreter by extension. Removed per-prompt git injection, per-turn session summaries and their re-injection, and global GSD hook wiring. `session-start-pull.sh` runs at most every `PULL_INTERVAL_HOURS` (default 24) with a portable watchdog (macOS has no `timeout`, so the old hook never ran there). `session-end-repo-health.sh` pushes only for configured `GITHUB_OWNERS`, optionally through `REPO_PUSH_COMMAND`.
+- **`_pull-all-repos.sh` no longer commits or pushes.** It used to `git add -u`, commit, and push `~/.claude` after every background pull. It also no longer checks out a branch on detached-HEAD repos (reported and skipped instead), and it skips build/dependency trees (`.build`, `DerivedData`, `Pods`, `vendor`, `.venv`, `target`, `.next`, `dist`) when discovering project repos.
+- **Private `local/` layer** (gitignored) for personal rules, hooks, and host settings, with a public `local.example/` template and a pre-commit public-safety gate driven by `local/public-safety-patterns.txt`.
+- **Marketplaces:** `scripts/add-marketplace.sh`; pre-commit and pre-push block gitlinks or clone content; `scripts/setup-hooks.sh` installs wrapper hooks that track the repo.
+- **Housekeeping:** runtime files (`cache/`, `.last-cleanup`, logs, downloads) untracked and ignored; old audit reports moved to `archive/audits/`; host-specific example paths generalized.
+
+## [2.12.0] - June 20, 2026
 
 ### Maintenance
 

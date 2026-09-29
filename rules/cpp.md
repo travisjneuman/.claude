@@ -1,3 +1,9 @@
+---
+paths:
+  - "**/*.{c,cc,cpp,cxx,h,hh,hpp}"
+  - "**/CMakeLists.txt"
+---
+
 # C/C++ Rules
 Modern C++: target C++17 minimum. Use `auto`, structured bindings, `std::optional`, `std::variant`.
 Memory: RAII everywhere. `std::unique_ptr` for ownership, `std::shared_ptr` only when shared. Never raw `new`/`delete`.
