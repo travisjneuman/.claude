@@ -81,7 +81,7 @@ This runs `scripts/generate-counts.mjs`, which updates counts across the documen
 
 ### Prebuild Script
 
-`scripts/fix-submodules.mjs` runs automatically before `next build` via npm lifecycle hooks (`prebuild` in `package.json`). It removes only the nested `.git` marker of the `axiom` entry inside a local `claude-code-plugins-plus-skills` clone, if one exists; the directory and its files are kept. Since marketplaces became manifest-only, Cloudflare builds never contain that clone, so there the script is a safe no-op.
+There is no prebuild step: marketplaces are manifest-only, so builds never contain marketplace clones to clean up.
 
 ### Scripts Data Layer
 

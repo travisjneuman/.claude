@@ -368,7 +368,6 @@ This repo underwent a security audit before being made public. The following wer
     │
     ├── website/                    ← Showcase website (Next.js static export, Cloudflare Pages)
     │   ├── scripts/
-    │   │   └── fix-submodules.mjs  ← Prebuild: removes broken nested gitlink
     │   └── src/
     │       └── lib/
     │           └── data/
