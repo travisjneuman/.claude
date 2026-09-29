@@ -2,6 +2,14 @@
 
 All notable changes to the Ultimate Claude Code Toolkit.
 
+## [3.1.0] - September 29, 2026
+
+### Plugins (plan A)
+- Plugin set now actually loads: all entries point at `claude-plugins-official` (the old `@claude-code-plugins`/`@anthropic-agent-skills`/`@taches-cc-resources` names were never registered, so nothing loaded). Kept `commit-commands`, `frontend-design`; added `claude-security`, `cloudflare`, `typescript-lsp`, `pyright-lsp`, `swift-lsp`; `plugin-dev` is project-scoped to the toolkit repo (`.claude/settings.json`, now tracked). Dropped duplicates of built-ins/toolkit skills. See docs/PLUGIN-MANAGEMENT.md.
+- `scripts/install-plugins.sh` installs enabled plugins and LSP binaries idempotently; the daily pull runs it on every machine.
+- `session-end-repo-health.sh` skips when `CLAUDE_TOOLKIT_SKIP_SESSION_END=1` (toolkit scripts calling `claude` subcommands no longer trigger a repo walk).
+- Removed `plugins/local/ralph-wiggum`; gitignored plugin runtime data (`/security/`, `/plugins/data/`).
+
 ## [3.0.2] - September 29, 2026
 
 - Website data matches the current toolkit: hook list and events come from what `settings.json` actually wires (including `.js` hooks), new/removed scripts, path-scoped rules shown with their `paths`, repo links from the `.gitmodules` manifest, SEO counts computed instead of hard-coded, and "Get Started" uses `setup-hooks.sh` / `install-in-place.sh`.

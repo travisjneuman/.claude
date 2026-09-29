@@ -47,6 +47,8 @@ for b in /opt/homebrew/bin/bash /usr/local/bin/bash; do [ -x "$b" ] && BASH4="$b
   wait "$PID"; RC=$?
   kill "$WATCHDOG" 2>/dev/null
   echo "=== Pull ended (exit $RC): $(date) ==="
+  # Converge plugins + language servers with the toolkit settings.
+  [ -f "$CLAUDE_DIR/scripts/install-plugins.sh" ] && bash "$CLAUDE_DIR/scripts/install-plugins.sh"
 ) >> "$LOGFILE" 2>&1 &
 
 exit 0

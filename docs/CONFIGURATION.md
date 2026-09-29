@@ -49,13 +49,15 @@ Later files override earlier ones.
     "ask": [],
     "defaultMode": "bypassPermissions"
   },
+  "extraKnownMarketplaces": {
+    "claude-plugins-official": { "source": { "source": "github", "repo": "anthropics/claude-plugins-official" }, "autoUpdate": true }
+  },
   "enabledPlugins": {
-    "agent-sdk-dev@claude-code-plugins": true,
-    "pr-review-toolkit@claude-code-plugins": true,
+    "commit-commands@claude-plugins-official": true,
+    "typescript-lsp@claude-plugins-official": true,
     ...
   },
   "enableAllProjectMcpServers": false,
-  "alwaysThinkingEnabled": true,
   "outputStyle": "default",
   "spinnerTipsEnabled": false
 }

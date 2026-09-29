@@ -35,6 +35,9 @@
 
 set -u
 
+# Toolkit scripts that call `claude` subcommands set this to skip the repo walk.
+[ "${CLAUDE_TOOLKIT_SKIP_SESSION_END:-}" = "1" ] && exit 0
+
 SCRIPT_DIR="$HOME/.claude"
 # Settings: host file (~/.claude/.env.local) wins over the shared private layer
 # (~/.claude/local/shared.env). Both are gitignored.

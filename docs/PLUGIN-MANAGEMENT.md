@@ -6,13 +6,32 @@ category: ecosystem
 
 # Plugin Management Guide
 
-**Last Updated:** February 2026 (v2.10.1)
+**Last Updated:** September 2026 (v3.1.0)
 
 ---
 
 ## Overview
 
 Plugins extend Claude Code with reusable skills, agents, commands, and hooks. This setup manages 108 marketplace repos containing 16,500+ community skills alongside 128 local skills. Marketplace repos are read-only references pulled from upstream, while local plugins are your own customizations tracked in your personal repo.
+
+---
+
+## Current plugin set (authoritative)
+
+All from the official marketplace (`claude-plugins-official`), declared in `settings.json` and installed on each machine by `scripts/install-plugins.sh` (the daily background pull runs it, so every machine converges automatically).
+
+| Plugin | Why it's in | Cost |
+| --- | --- | --- |
+| `commit-commands` | `/commit`, `/commit-push-pr`, `/clean_gone`; no built-in equivalent | ~105 tokens/turn |
+| `frontend-design` | Anthropic's frontend design skill | ~80 |
+| `claude-security` | On-demand deep security scan with verified findings (beyond `/security-review`) | ~780 |
+| `cloudflare` | Cloudflare's own Workers/DO/Wrangler/Agents skills + Cloudflare MCP | see `claude plugin details cloudflare` |
+| `typescript-lsp`, `pyright-lsp`, `swift-lsp` | Type errors surface right after edits; the installer adds `typescript-language-server`/`pyright` binaries (Swift uses Xcode's `sourcekit-lsp`) | ~0 |
+| `plugin-dev` (project scope) | Plugin-authoring reference; enabled only inside the toolkit repo via `.claude/settings.json` | ~2.3k, only there |
+
+Dropped as duplicates or obsolete: `code-review` (built-in `/code-review`; also added an attribution footer), `pr-review-toolkit` and `feature-dev` (built-in `/code-review`, `/simplify`, Explore/Plan agents, toolkit agents), `agent-sdk-dev` (built-in `/claude-api`), `document-skills` (toolkit/claude.ai skills), `taches-cc-resources` (duplicates toolkit + plugin-dev), `hookify`, output-style plugins, `ralph-wiggum` (built-in `/loop`), `claude-opus-4-5-migration`. Skipped: `security-guidance` (runs an Opus review on every commit, too heavy with commit-everything).
+
+The older `plugins/local/ralph-wiggum` copy was removed in v3.1.0.
 
 ---
 

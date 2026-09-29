@@ -238,8 +238,10 @@ temp/
 .archive/
 
 # ----- NESTED CLAUDE FOLDER -----
-# This shouldn't exist but ignore if it does
-.claude/
+# Only the toolkit-repo project settings are tracked (enables plugin-dev when
+# working inside ~/.claude); everything else in a nested .claude/ is ignored.
+/.claude/*
+!/.claude/settings.json
 
 # ============================================
 # SETUP INSTRUCTIONS FOR NEW MACHINES:
@@ -305,3 +307,8 @@ statsig/
 /plugins/synced/
 /skills/synced/
 /plugins/.last_inuse_sweep
+
+# Plugin runtime state (venvs, plugin data)
+/security/
+/plugins/data/
+/plugins/installed_plugins.json

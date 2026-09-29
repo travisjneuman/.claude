@@ -104,44 +104,9 @@ echo ""
 # ═══════════════════════════════════════════════════════════════════════════════
 echo -e "${YELLOW}Step 4/5: Installing enabled plugins...${NC}"
 
-# From claude-code-plugins
-CLAUDE_CODE_PLUGINS=(
-    "agent-sdk-dev"
-    "pr-review-toolkit"
-    "commit-commands"
-    "feature-dev"
-    "security-guidance"
-    "code-review"
-    "frontend-design"
-    "claude-opus-4-5-migration"
-    "plugin-dev"
-    "ralph-wiggum"
-)
+# Installs whatever settings.json enables (plus LSP binaries); idempotent.
+bash scripts/install-plugins.sh
 
-for plugin in "${CLAUDE_CODE_PLUGINS[@]}"; do
-    claude plugin install "${plugin}@claude-code-plugins" 2>/dev/null && \
-        echo -e "  ${GREEN}✓ ${plugin}${NC}" || \
-        echo -e "  ${YELLOW}⚠ ${plugin} (may already be installed)${NC}"
-done
-
-# From anthropic-agent-skills
-claude plugin install "document-skills@anthropic-agent-skills" 2>/dev/null && \
-    echo -e "  ${GREEN}✓ document-skills${NC}" || \
-    echo -e "  ${YELLOW}⚠ document-skills (may already be installed)${NC}"
-
-claude plugin install "example-skills@anthropic-agent-skills" 2>/dev/null && \
-    echo -e "  ${GREEN}✓ example-skills${NC}" || \
-    echo -e "  ${YELLOW}⚠ example-skills (may already be installed)${NC}"
-
-# From taches-cc-resources
-claude plugin install "taches-cc-resources@taches-cc-resources" 2>/dev/null && \
-    echo -e "  ${GREEN}✓ taches-cc-resources${NC}" || \
-    echo -e "  ${YELLOW}⚠ taches-cc-resources (may already be installed)${NC}"
-
-# From superpowers-marketplace
-claude plugin install "superpowers@superpowers-marketplace" 2>/dev/null && \
-    echo -e "  ${GREEN}✓ superpowers${NC}" || \
-    echo -e "  ${YELLOW}⚠ superpowers (may already be installed)${NC}"
 
 echo ""
 
