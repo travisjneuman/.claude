@@ -88,28 +88,6 @@ done
 echo -e "${GREEN}✓ No secrets detected${NC}"
 
 # ============================================
-# CHECK 2: Remind about CHANGELOG for significant changes
-# ============================================
-SIGNIFICANT_DIRS="skills agents commands rules docs plugins"
-SIGNIFICANT_CHANGE=false
-
-for dir in $SIGNIFICANT_DIRS; do
-    if echo "$STAGED_FILES" | grep -q "^$dir/"; then
-        SIGNIFICANT_CHANGE=true
-        break
-    fi
-done
-
-# Check if CHANGELOG is being updated
-CHANGELOG_UPDATED=$(echo "$STAGED_FILES" | grep -c "CHANGELOG.md")
-
-if [ "$SIGNIFICANT_CHANGE" = true ] && [ "$CHANGELOG_UPDATED" -eq 0 ]; then
-    echo -e "${YELLOW}⚠ Reminder: Consider updating CHANGELOG.md for significant changes${NC}"
-    echo -e "${YELLOW}  Changed directories: $(echo "$STAGED_FILES" | grep -E "^($SIGNIFICANT_DIRS)/" | cut -d'/' -f1 | sort -u | tr '\n' ' ')${NC}"
-    # Note: This is a reminder, not a blocker
-fi
-
-# ============================================
 # CHECK 3: Validate SKILL.md files have required sections
 # ============================================
 SKILL_FILES=$(echo "$STAGED_FILES" | grep "SKILL.md$")

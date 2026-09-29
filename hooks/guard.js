@@ -13,11 +13,30 @@
 
 const fs = require("fs");
 
+let RAW = "";
 function readInput() {
   try {
-    return JSON.parse(fs.readFileSync(0, "utf8") || "{}");
+    RAW = fs.readFileSync(0, "utf8") || "";
+    return JSON.parse(RAW || "{}");
   } catch {
     return {};
+  }
+}
+
+// Optional private guard (~/.claude/local/hooks/local-pre-tool-use.py). Runs only
+// for the tools it cares about and only after the public checks pass; its deny
+// (Claude Code JSON on stdout) is relayed unchanged.
+function runLocalGuard(tool) {
+  if (!["Bash", "EnterWorktree", "Agent", "Task"].includes(tool)) return;
+  const path = require("path");
+  const local = path.join(require("os").homedir(), ".claude", "local", "hooks", "local-pre-tool-use.py");
+  if (!fs.existsSync(local)) return;
+  const py = process.platform === "win32" ? "python" : "python3";
+  const r = require("child_process").spawnSync(py, [local], { input: RAW, encoding: "utf8", timeout: 9000 });
+  const out = (r.stdout || "").trim();
+  if (out.includes('"permissionDecision"')) {
+    process.stdout.write(out + "\n");
+    process.exit(0);
   }
 }
 
@@ -90,4 +109,5 @@ const input = readInput();
 const tool = input.tool_name || "";
 if (tool === "Bash") checkBash(input);
 else if (tool === "Write" || tool === "Edit" || tool === "MultiEdit" || tool === "NotebookEdit") checkWrite(input);
+runLocalGuard(tool);
 process.exit(0);

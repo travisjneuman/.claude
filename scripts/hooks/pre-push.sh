@@ -52,20 +52,5 @@ if git ls-tree -r HEAD | awk '$2=="commit"{f=1} END{exit !f}' || git ls-tree -r 
     exit 1
 fi
 
-# ============================================
-# CHECK 4: Remind about version bump
-# ============================================
-CHANGELOG=$(git diff HEAD~1..HEAD --name-only 2>/dev/null | grep -c "CHANGELOG.md")
-if [ "$CHANGELOG" -eq 0 ]; then
-    # Check if there were significant changes in this push
-    SIGNIFICANT=$(git diff HEAD~1..HEAD --name-only 2>/dev/null | grep -E "^(skills|agents|commands|rules|docs)/" | wc -l)
-    if [ "$SIGNIFICANT" -gt 3 ]; then
-        echo -e "${RED}✗ BLOCKED: $SIGNIFICANT significant files changed but CHANGELOG.md not updated${NC}"
-        echo -e "${YELLOW}  Update CHANGELOG.md, commit, then push again.${NC}"
-        echo -e "${YELLOW}  Bypass with: git push --no-verify${NC}"
-        exit 1
-    fi
-fi
-
 echo -e "${GREEN}✓ Pre-push checks passed${NC}"
 exit 0

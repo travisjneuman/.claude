@@ -50,6 +50,16 @@ function interpreter(path) {
   return [bash, [path.replace(/\\/g, "/")]];
 }
 
+// JavaScript hooks run in this process: no second Node startup (~100 ms saved per call).
+if (/\.(c?js)$/.test(hookPath)) {
+  try {
+    require(hookPath);
+  } catch {
+    process.exit(0); // a broken hook must never block Claude Code
+  }
+  return;
+}
+
 const [cmd, args] = interpreter(hookPath);
 const result = spawnSync(cmd, args, {
   stdio: "inherit",

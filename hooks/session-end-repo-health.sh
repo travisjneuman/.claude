@@ -1,210 +1,112 @@
 #!/bin/bash
-# SessionEnd hook: Push unpushed commits in user-owned repos; warn on dirty trees.
+# SessionEnd hook: make sure nothing is left uncommitted or unpushed in repos you own.
 #
-# Why this exists:
-#   The arrival-side session-start-repo-health.sh catches diverged/unpushed/dirty
-#   state when entering a machine. This is its symmetric departure-side
-#   counterpart: try to leave the machine clean so the NEXT machine's arrival
-#   has nothing to flag. Together they form the loop: depart-clean / arrive-aware.
+# Returns immediately and does the work in a detached background process, so a
+# fast exit never cancels it and Claude never waits for it.
 #
-# What it does:
-#   1. Walks parent ~/.claude + CUSTOM_PROJECT_DIRS (depth ≤3, same set as arrival).
-#   2. For each user-owned git repo (push URL contains 'travisjneuman'):
-#      - If clean tree + unpushed commits → fetches, attempts FF push, reports.
-#      - If dirty tree → emits a warning. Does NOT auto-commit.
-#      - If diverged → emits a warning. Does NOT attempt resolution.
-#   3. Findings are appended to ~/.claude/logs/departure.log (never injected
-#      into Claude's context; the next session's arrival banner re-detects any
-#      repo that still needs attention).
+# For ~/.claude and every git repo under CUSTOM_PROJECT_DIRS (depth <= 3), when the
+# origin owner is listed in GITHUB_OWNERS (otherwise the repo is left alone):
+#   1. Skip if detached, without upstream, mid-merge/rebase, or with conflicts.
+#   2. Pending changes (anyone's): skip if a credential-looking string is in the
+#      diff or new files; otherwise `git add -A` and commit a checkpoint.
+#   3. Push when ahead and not diverged, through REPO_PUSH_COMMAND (e.g. repo-sync
+#      push-safe) or `git push`.
+# Nested repos are handled before their parents so submodule pointers are current.
+# Results go to ~/.claude/logs/departure.log. Never resets, cleans, or force-pushes.
 #
-# Configuration (local/shared.env, all optional):
-#   GITHUB_OWNERS=you,your-org      Owners whose repos may be auto-pushed.
-#                                   Unset = report only, never push.
-#   REPO_PUSH_COMMAND="..."         Push command run inside the repo instead of
-#                                   `git push` (e.g. a repo-sync runner).
-#   SESSION_END_AUTOPUSH=0          Disable pushing entirely (report only).
-#
-# What it does NOT do:
-#   - Never auto-commits dirty trees (that's how the d4b9e8e bad-base mess started).
-#   - Never force-pushes.
-#   - Never touches non-user-owned repos (marketplace no_push, others' forks).
-#   - Does NOT block session exit on push failure — best-effort, never blocking.
-#
-# Safety guard: only runs on SessionEnd, never on Stop, to avoid pushing every
-# turn during active work.
+# Settings (local layer, optional): GITHUB_OWNERS, REPO_PUSH_COMMAND,
+# SESSION_END_AUTOPUSH=0 (report only), CUSTOM_PROJECT_DIRS.
 
 set -u
-
-# Toolkit scripts that call `claude` subcommands set this to skip the repo walk.
 [ "${CLAUDE_TOOLKIT_SKIP_SESSION_END:-}" = "1" ] && exit 0
 
 SCRIPT_DIR="$HOME/.claude"
-# Settings: host file (~/.claude/.env.local) wins over the shared private layer
-# (~/.claude/local/shared.env). Both are gitignored.
-env_get() { grep -h "^$1=" "$HOME/.claude/.env.local" "$HOME/.claude/local/shared.env" 2>/dev/null | head -1 | cut -d'=' -f2- | sed -e 's/^["'"'"']//' -e 's/["'"'"']$//'; }
 mkdir -p "$SCRIPT_DIR/logs"
-SUMMARY_FILE="$SCRIPT_DIR/logs/departure.log"
+LOG="$SCRIPT_DIR/logs/departure.log"
+
+if [ "${SESSION_END_DETACHED:-}" != "1" ]; then
+  SESSION_END_DETACHED=1 nohup bash "$0" >/dev/null 2>&1 </dev/null &
+  exit 0
+fi
+
+env_get() { grep -h "^$1=" "$HOME/.claude/.env.local" "$HOME/.claude/local/shared.env" 2>/dev/null | head -1 | cut -d'=' -f2- | sed -e 's/^["'"'"']//' -e 's/["'"'"']$//'; }
 GITHUB_OWNERS=$(env_get GITHUB_OWNERS)
 REPO_PUSH_COMMAND=$(env_get REPO_PUSH_COMMAND)
-SESSION_END_AUTOPUSH=$(env_get SESSION_END_AUTOPUSH)
-[[ -z "$GITHUB_OWNERS" ]] && SESSION_END_AUTOPUSH=0
+AUTOPUSH=$(env_get SESSION_END_AUTOPUSH); AUTOPUSH=${AUTOPUSH:-1}
+[ -z "$GITHUB_OWNERS" ] && exit 0
+HOST=$(env_get TJN_HOST_NAME); HOST=${HOST:-$(hostname)}
+
+# Only one departure run at a time per machine.
+LOCK="$SCRIPT_DIR/logs/.departure.lock"
+if ! mkdir "$LOCK" 2>/dev/null; then exit 0; fi
+trap 'rmdir "$LOCK" 2>/dev/null' EXIT
+
+SECRET_RE='AKIA[0-9A-Z]{16}|sk-(ant-|proj-)?[A-Za-z0-9_-]{20,}|gh[pousr]_[A-Za-z0-9]{36}|github_pat_[A-Za-z0-9_]{40,}|glpat-[A-Za-z0-9_-]{20}|xox[bpors]-[A-Za-z0-9-]{10,}|-----BEGIN[A-Z ]*PRIVATE KEY'
+
+log() { echo "$(date '+%Y-%m-%d %H:%M') $*" >> "$LOG"; }
+
+owned() {
+  local url owner
+  url=$(git -C "$1" remote get-url --push origin 2>/dev/null) || return 1
+  [ "$url" = "no_push" ] && return 1
+  IFS=',' read -ra owners <<< "$GITHUB_OWNERS"
+  for owner in "${owners[@]}"; do
+    [[ -n "$owner" && "$url" =~ github\.com[:/]${owner}/ ]] && return 0
+  done
+  return 1
+}
+
+process() {
+  local repo="$1" name gitdir branch
+  name="${repo#$HOME/}"
+  owned "$repo" || return 0
+  branch=$(git -C "$repo" symbolic-ref --short -q HEAD) || { log "SKIP detached   $name"; return 0; }
+  git -C "$repo" rev-parse -q --verify '@{u}' >/dev/null || { log "SKIP no-upstream $name"; return 0; }
+  gitdir=$(git -C "$repo" rev-parse --absolute-git-dir)
+  if [ -e "$gitdir/MERGE_HEAD" ] || [ -d "$gitdir/rebase-merge" ] || [ -d "$gitdir/rebase-apply" ] || [ -n "$(git -C "$repo" diff --name-only --diff-filter=U)" ]; then
+    log "SKIP in-progress merge/rebase or conflicts $name"; return 0
+  fi
+
+  if [ -n "$(git -C "$repo" status --porcelain)" ]; then
+    local newfiles hit=""
+    git -C "$repo" diff HEAD 2>/dev/null | grep '^+' | grep -Eq "$SECRET_RE" && hit=1
+    newfiles=$(git -C "$repo" ls-files -o --exclude-standard -z | xargs -0 -I{} sh -c 'test -f "$1" && test $(wc -c < "$1") -lt 2000000 && echo "$1"' _ "$repo/{}" 2>/dev/null)
+    [ -n "$newfiles" ] && printf '%s\n' "$newfiles" | tr '\n' '\0' | xargs -0 grep -Elq "$SECRET_RE" 2>/dev/null && hit=1
+    if [ -n "$hit" ]; then log "SKIP possible secret in pending changes $name (commit manually after checking)"; return 0; fi
+    git -C "$repo" add -A
+    if git -C "$repo" commit -q -m "chore: checkpoint pending changes at session end ($HOST)" >/dev/null 2>&1; then
+      log "COMMITTED  $name"
+    else
+      log "COMMIT-FAILED $name (a commit hook refused; see the repo)"; return 0
+    fi
+  fi
+
+  [ "$AUTOPUSH" = "0" ] && return 0
+  git -C "$repo" fetch -q origin 2>/dev/null || { log "FETCH-FAILED $name"; return 0; }
+  local ahead behind
+  read -r ahead behind < <(git -C "$repo" rev-list --left-right --count 'HEAD...@{u}' 2>/dev/null)
+  [ "${ahead:-0}" -eq 0 ] && return 0
+  if [ "${behind:-0}" -gt 0 ] && [ -z "$REPO_PUSH_COMMAND" ]; then log "DIVERGED   $name (+$ahead/-$behind)"; return 0; fi
+  if [ -n "$REPO_PUSH_COMMAND" ]; then
+    (cd "$repo" && eval "$REPO_PUSH_COMMAND") >/dev/null 2>&1 && log "PUSHED     $name" || log "PUSH-FAILED $name"
+  else
+    git -C "$repo" push -q origin "$branch" 2>/dev/null && log "PUSHED     $name" || log "PUSH-FAILED $name"
+  fi
+}
 
 CUSTOM_PROJECT_DIRS=()
 RAW_DIRS=$(env_get CUSTOM_PROJECT_DIRS)
-[[ -n "$RAW_DIRS" ]] && IFS=',' read -ra CUSTOM_PROJECT_DIRS <<< "$RAW_DIRS"
+[ -n "$RAW_DIRS" ] && IFS=',' read -ra CUSTOM_PROJECT_DIRS <<< "$RAW_DIRS"
 
-# Determine if a repo is user-owned (push URL owner is listed in GITHUB_OWNERS)
-is_user_owned() {
-    local repo="$1" push_url owner
-    push_url=$(git -C "$repo" remote get-url --push origin 2>/dev/null) || return 1
-    [[ "$push_url" == "no_push" ]] && return 1
-    IFS=',' read -ra owners <<< "$GITHUB_OWNERS"
-    for owner in "${owners[@]}"; do
-        [[ -n "$owner" && "$push_url" =~ github\.com[:/]${owner}/ ]] && return 0
-    done
-    return 1
-}
-
-# Process one repo. Echoes status lines (one per finding) to stdout.
-process_repo() {
-    local repo="$1"
-    [[ -d "$repo/.git" || -f "$repo/.git" ]] || return 0
-    is_user_owned "$repo" || return 0
-
-    local short_name="${repo#$HOME/}"
-
-    local branch
-    branch=$(git -C "$repo" rev-parse --abbrev-ref HEAD 2>/dev/null) || return 0
-    [[ "$branch" == "HEAD" ]] && { echo "  SKIP-DETACHED  $short_name"; return 0; }
-
-    # Dirty tree → warn only
-    local dirty
-    dirty=$(git -C "$repo" status --porcelain 2>/dev/null)
-    if [[ -n "$dirty" ]]; then
-        local n
-        n=$(echo "$dirty" | wc -l | tr -d ' ')
-        echo "  DIRTY          $short_name ($n uncommitted change(s) on $branch — needs human review)"
-        # Continue to also report unpushed-commit state below
-    fi
-
-    # Upstream comparison (no fetch — we'll do that only when we'd push)
-    local upstream
-    upstream=$(git -C "$repo" rev-parse --abbrev-ref --symbolic-full-name '@{u}' 2>/dev/null)
-    if [[ -z "$upstream" ]]; then
-        echo "  NO-UPSTREAM    $short_name ($branch tracks no remote)"
-        return 0
-    fi
-
-    local counts local_ahead remote_ahead
-    counts=$(git -C "$repo" rev-list --left-right --count "HEAD...@{u}" 2>/dev/null) || return 0
-    local_ahead=$(echo "$counts" | awk '{print $1}')
-    remote_ahead=$(echo "$counts" | awk '{print $2}')
-
-    if [[ "$local_ahead" -gt 0 && "$remote_ahead" -gt 0 ]]; then
-        echo "  DIVERGED       $short_name (local +$local_ahead, remote +$remote_ahead — manual reconcile needed)"
-        return 0
-    fi
-
-    if [[ "$local_ahead" -gt 0 && "${SESSION_END_AUTOPUSH:-1}" == "0" ]]; then
-        echo "  UNPUSHED       $short_name (local +$local_ahead on $branch — auto-push disabled)"
-        return 0
-    fi
-
-    if [[ "$local_ahead" -gt 0 && "$remote_ahead" -eq 0 && -z "$dirty" ]]; then
-        # Clean tree, only-local-ahead. Try to push.
-        # Fetch first to confirm no remote racing (cheap with `--no-tags` and shallow ref-list)
-        if ! git -C "$repo" fetch origin --quiet 2>/dev/null; then
-            echo "  PUSH-FETCH-FAIL $short_name (could not fetch origin — push skipped)"
-            return 0
-        fi
-        # Re-compute after fetch — remote may have advanced
-        counts=$(git -C "$repo" rev-list --left-right --count "HEAD...@{u}" 2>/dev/null)
-        local_ahead=$(echo "$counts" | awk '{print $1}')
-        remote_ahead=$(echo "$counts" | awk '{print $2}')
-
-        if [[ "$remote_ahead" -gt 0 ]]; then
-            echo "  RACE-DIVERGED  $short_name (remote advanced during exit — local +$local_ahead, remote +$remote_ahead, push skipped)"
-            return 0
-        fi
-
-        if [[ -n "$REPO_PUSH_COMMAND" ]]; then
-            push_ok() { (cd "$repo" && eval "$REPO_PUSH_COMMAND") >/dev/null 2>&1; }
-        else
-            push_ok() { git -C "$repo" push origin "$branch" --quiet 2>/dev/null; }
-        fi
-        if push_ok; then
-            echo "  PUSHED         $short_name (+$local_ahead commit(s) pushed to origin/$branch)"
-        else
-            echo "  PUSH-FAILED    $short_name (push to origin/$branch was rejected — manual intervention needed)"
-        fi
-    fi
-}
-
-# Collect findings
-FINDINGS=""
-
-# Parent
-if out=$(process_repo "$SCRIPT_DIR"); then
-    [[ -n "$out" ]] && FINDINGS+="$out"$'\n'
-fi
-
-# Custom project dirs to depth 3
-for project_dir in "${CUSTOM_PROJECT_DIRS[@]}"; do
-    [[ -z "$project_dir" ]] && continue
-    project_dir="${project_dir/#\~/$HOME}"
-    [[ -d "$project_dir" ]] || continue
-
-    # Depth 0: the custom project dir itself, if it's a git repo
-    # (e.g. ~/projects IS the .workspace repo). Without this we'd miss
-    # divergence on the parent and only push from its children. Bug from 2026-04-29.
-    if out=$(process_repo "$project_dir"); then
-        [[ -n "$out" ]] && FINDINGS+="$out"$'\n'
-    fi
-
-    for repo in "$project_dir"/*/ "$project_dir"/.*/; do
-        [[ -d "$repo" ]] || continue
-        rb=$(basename "$repo")
-        [[ "$rb" == "." || "$rb" == ".." ]] && continue
-        if out=$(process_repo "${repo%/}"); then
-            [[ -n "$out" ]] && FINDINGS+="$out"$'\n'
-        fi
-
-        for nested in "$repo"*/ "$repo".*/; do
-            [[ -d "$nested" ]] || continue
-            nb=$(basename "$nested")
-            [[ "$nb" == "." || "$nb" == ".." ]] && continue
-            if out=$(process_repo "${nested%/}"); then
-                [[ -n "$out" ]] && FINDINGS+="$out"$'\n'
-            fi
-
-            for nested2 in "$nested"*/ "$nested".*/; do
-                [[ -d "$nested2" ]] || continue
-                n2b=$(basename "$nested2")
-                [[ "$n2b" == "." || "$n2b" == ".." ]] && continue
-                if out=$(process_repo "${nested2%/}"); then
-                    [[ -n "$out" ]] && FINDINGS+="$out"$'\n'
-                fi
-            done
-        done
-    done
+# Collect repos, deepest first (children before parents).
+repos=("$SCRIPT_DIR")
+for d in "${CUSTOM_PROJECT_DIRS[@]}"; do
+  d="${d/#\~/$HOME}"; [ -d "$d" ] || continue
+  while IFS= read -r g; do repos+=("$(dirname "$g")"); done < <(
+    find "$d" -maxdepth 4 \( -name node_modules -o -name .build -o -name DerivedData -o -name Pods -o -name vendor -o -name .venv -o -name dist -o -name .next \) -prune -o -name .git -print 2>/dev/null)
 done
+while IFS= read -r r; do process "$r"; done < <(printf '%s\n' "${repos[@]}" | awk '{print gsub("/","/") "\t" $0}' | sort -rn | cut -f2- | awk '!seen[$0]++')
 
-# If anything happened, append to summary file (next session sees this) AND stderr
-if [[ -n "$FINDINGS" ]]; then
-    {
-        echo ""
-        echo "## Departure-time repo health ($(date '+%Y-%m-%d %H:%M'))"
-        echo ""
-        echo "\`\`\`"
-        echo -n "$FINDINGS"
-        echo "\`\`\`"
-    } >> "$SUMMARY_FILE" 2>/dev/null
-
-    {
-        echo "=== Departure repo health ==="
-        echo -n "$FINDINGS"
-        echo "============================="
-    } >&2
-fi
-
+# Keep the log small.
+[ -f "$LOG" ] && [ "$(wc -l < "$LOG")" -gt 2000 ] && tail -500 "$LOG" > "$LOG.tmp" && mv "$LOG.tmp" "$LOG"
 exit 0

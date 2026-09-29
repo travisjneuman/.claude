@@ -2,6 +2,16 @@
 
 All notable changes to the Ultimate Claude Code Toolkit.
 
+## [3.4.0] - September 29, 2026
+
+### Hooks
+- `run-hook.js` runs JavaScript hooks in-process (no second Node start per call).
+- One PreToolUse entry: `guard.js` covers Bash/Write/Edit/EnterWorktree/Agent and chains the optional private guard itself, instead of two parallel hooks.
+- `secret-scan.sh` → `secret-scan.js` (in-process Node, same patterns, reports via `additionalContext`).
+- `session-end-repo-health.sh` now detaches immediately (never cancelled by a fast exit) and enforces commit-everything for repos owned by `GITHUB_OWNERS`: checkpoint-commits pending changes (skipping mid-merge/rebase, conflicts, or anything that looks like a secret), then pushes through `REPO_PUSH_COMMAND`. Nested repos go first. One run at a time.
+- `claude-security` stays installed but is off by default (its hooks ran three scripts after every tool call); enable it when running a security scan.
+- Pre-commit and pre-push no longer require or nag about CHANGELOG updates.
+
 ## [3.3.0] - September 29, 2026
 
 ### Rules (plan E)

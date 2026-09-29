@@ -250,22 +250,12 @@
     ],
     "PreToolUse": [
       {
-        "matcher": "Bash|Write|Edit|MultiEdit|NotebookEdit",
+        "matcher": "Bash|Write|Edit|MultiEdit|NotebookEdit|EnterWorktree|Agent|Task",
         "hooks": [
           {
             "type": "command",
             "command": "node -e \"process.env.HOOK_NAME='guard.js';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
-            "timeout": 10
-          }
-        ]
-      },
-      {
-        "matcher": "Bash|EnterWorktree|Agent|Task",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node -e \"process.env.HOOK_NAME='local-pre-tool-use.py';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
-            "timeout": 10
+            "timeout": 15
           }
         ]
       }
@@ -276,7 +266,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node -e \"process.env.HOOK_NAME='secret-scan.sh';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
+            "command": "node -e \"process.env.HOOK_NAME='secret-scan.js';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
             "timeout": 10
           }
         ]
@@ -301,7 +291,7 @@
   "enabledPlugins": {
     "commit-commands@claude-plugins-official": true,
     "frontend-design@claude-plugins-official": true,
-    "claude-security@claude-plugins-official": true,
+    "claude-security@claude-plugins-official": false,
     "cloudflare@claude-plugins-official": true,
     "typescript-lsp@claude-plugins-official": true,
     "pyright-lsp@claude-plugins-official": true,
