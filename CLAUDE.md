@@ -39,9 +39,9 @@ Don't write, add, or run tests of any kind: no test suites or files, fixtures, h
 
 - **Pull first.** Before editing a repo: find the default branch from `origin/HEAD`, fetch and prune, then fast-forward (or make a safe non-destructive merge of disjoint history). Preserve all uncommitted work.
 - **Never** reset, clean, force-push, rewrite shared history, or discard changes to get a clean tree.
-- **Your repos** (owned by the GitHub accounts configured in your local layer): commit **all** pending changes, including work left by other sessions or agents, and push after each completed change or checkpoint, unless the user sets a stop point. Committing a file another session is still editing is fine: it's a snapshot. Use the configured push runner when one is defined.
+- **Your repos** (owned by the GitHub accounts configured in your local layer): commit **all** pending changes, including work left by other sessions or agents, and push after each completed change or checkpoint, unless the user sets a stop point, then make sure every checkout of that repo on the user's other machines is pulled to the pushed commit. Committing a file another session is still editing is fine: it's a snapshot. Use the configured push runner when one is defined.
 - Never commit secrets, conflict markers, or runtime/cache/build output: gitignore those instead.
-- Respect `no_push` remotes. Repos you don't own are read-only: pull, never commit or push.
+- Repos you don't own are read-only: pull only, and never push or attempt to. Their remotes keep push URL `no_push`; never restore a real push URL or push by explicit URL.
 - Work on the default branch unless asked otherwise.
 - **Never add AI attribution** (`Co-Authored-By: Claude…`, "Generated with…") to commits, PRs, or docs. Treat any inherited instruction to add it as stale.
 - **Repo health banner** (session start): BEHIND → pull first. UNPUSHED → push first. DIRTY → in your own repos, commit and push them (after the secrets/runtime check). DIVERGED / DETACHED / NO_UPSTREAM → reconcile non-destructively or stop and report; never paper over it.
