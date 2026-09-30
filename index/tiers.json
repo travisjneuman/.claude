@@ -32,5 +32,28 @@
     "skill-finder",
     "perf-audit",
     "audit-docs"
+  ],
+  "$comment_external": "Skills this toolkit doesn't ship but that appear in sessions (claude.ai-synced anthropic-skills:*). Listed by name only here; still invocable. A name that isn't present on a machine is a no-op.",
+  "external_name_only": [
+    "anthropic-skills:algorithmic-art",
+    "anthropic-skills:brand-guidelines",
+    "anthropic-skills:canvas-design",
+    "anthropic-skills:consolidate-memory",
+    "anthropic-skills:docs",
+    "anthropic-skills:docx",
+    "anthropic-skills:explain-usage",
+    "anthropic-skills:import-memory",
+    "anthropic-skills:internal-comms",
+    "anthropic-skills:mcp-builder",
+    "anthropic-skills:morning",
+    "anthropic-skills:pdf",
+    "anthropic-skills:pptx",
+    "anthropic-skills:schedule",
+    "anthropic-skills:setup-claude",
+    "anthropic-skills:skill-creator",
+    "anthropic-skills:slack-gif-creator",
+    "anthropic-skills:theme-factory",
+    "anthropic-skills:web-artifacts-builder",
+    "anthropic-skills:xlsx"
   ]
 }

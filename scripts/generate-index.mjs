@@ -247,6 +247,8 @@ const settings = JSON.parse(read(settingsPath));
 const prev = settings.skillOverrides || {};
 const overrides = {};
 for (const [k, v] of Object.entries(prev)) if (v === "off" || v === "user-invocable-only") overrides[k] = v; // keep explicit user choices
+// Skills the toolkit doesn't ship (claude.ai-synced, bundled) listed in tiers.json.
+for (const k of tiers.external_name_only || []) if (!overrides[k]) overrides[k] = "name-only";
 for (const n of nodes.filter((n) => (n.type === "skill" || n.type === "command") && n.tier === "name-only" && !n.manual)) {
   if (!overrides[n.name]) overrides[n.name] = "name-only";
 }

@@ -11,6 +11,9 @@ All notable changes to the Ultimate Claude Code Toolkit.
 - Read-only core agents (architecture-analyst, performance-optimizer, security-auditor, deep-code-reviewer) set `omitClaudeMd: true` and carry a short rules block instead of every CLAUDE.md/AGENTS.md in the tree.
 - Status line shows absolute context tokens and the prompt-cache hit ratio (or `cold`).
 
+- Agent Teams off by default (`CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS` removed; with it on, a named subagent could launch as a full teammate session unasked). Start one session with the variable set to use teams.
+- claude.ai-synced `anthropic-skills:*` skills (~2.6k tokens every turn) listed by name only via `index/tiers.json` `external_name_only`; still invocable.
+
 ### Plugins
 - `brag` (latent-spaces/brag, MIT) added as a plugin marketplace; `install-plugins.sh` now registers and refreshes every GitHub marketplace an enabled plugin comes from.
 
