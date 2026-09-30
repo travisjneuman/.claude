@@ -12,7 +12,7 @@ category: ecosystem
 
 ## Overview
 
-Plugins extend Claude Code with reusable skills, agents, commands, and hooks. This setup manages 82 marketplace repos containing 10,900+ community skills alongside 180 local skills. Marketplace repos are read-only references pulled from upstream, while local plugins are your own customizations tracked in your personal repo.
+Plugins extend Claude Code with reusable skills, agents, commands, and hooks. This setup manages 82 marketplace repos containing 11,000+ community skills alongside 180 local skills. Marketplace repos are read-only references pulled from upstream, while local plugins are your own customizations tracked in your personal repo.
 
 ---
 
@@ -153,7 +153,7 @@ claude doctor
 
 ## The Marketplace Ecosystem
 
-This setup aggregates 82 marketplace repos containing 10,900+ community-contributed skills across many domains.
+This setup aggregates 82 marketplace repos containing 11,000+ community-contributed skills across many domains.
 
 ### Notable Marketplaces
 
