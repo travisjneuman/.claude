@@ -49,7 +49,7 @@ Don't write, add, or run tests of any kind: no test suites or files, fixtures, h
 ## Safety
 
 - Never lose user data. Migrations must be reversible.
-- Never commit secrets. Keep credentials in env vars or ignored local files; never print them.
+- Never commit secrets. Keep credentials in env vars or ignored local files; never print or copy them.
 - Sanitize inputs; no `innerHTML` with user content.
 - Anything that costs money, deletes production resources or data, or changes credentials needs that exact action in the request.
 
@@ -59,7 +59,7 @@ Strict types (`unknown`, not `any`). Small focused functions and files. DRY afte
 
 ## Finding the right tool
 
-Only core skills and 10 core agents show a full description in your context; the rest of the toolkit (170+ skills including 58 specialist `agent-*` skills that run as their own subagent, commands, checklists, stack guides, ~11k marketplace skills) is listed by name only. When a task is specialized, use the `toolkit-router` skill: grep `~/.claude/INDEX.md` for the domain, then invoke what fits. Don't read the whole index.
+Only core skills and the core agents show a full description in your context; the rest of the toolkit (170+ skills including the specialist `agent-*` skills that run as their own subagent, commands, checklists, stack guides, ~11k marketplace skills) is listed by name only. When a task is specialized, use the `toolkit-router` skill: grep `~/.claude/INDEX.md` for the domain, then invoke what fits. Don't read the whole index.
 
 ## Memory and documentation
 

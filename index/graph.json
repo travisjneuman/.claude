@@ -2041,15 +2041,6 @@
    "description": "Rust Rules"
   },
   {
-   "id": "rule:shared-browser",
-   "type": "rule",
-   "name": "shared-browser",
-   "path": "rules/shared-browser.md",
-   "domain": "other",
-   "loads": "every session",
-   "description": "Shared browser protocol"
-  },
-  {
    "id": "rule:swift-ios",
    "type": "rule",
    "name": "swift-ios",

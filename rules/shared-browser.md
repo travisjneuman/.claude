@@ -1,3 +1,0 @@
-# Shared browser protocol
-
-For shared-source and authenticated browser work, load the active environment's Agent Operating Layer source-intake policy and managed-service runbook. Reuse the approved shared browser service and its single persistent multi-site identity for all reads. Check health and content readiness, close only task-owned tabs, and preserve the shared service and account state. Do not create disposable identities or stop the service per task. Keep cookie imports domain-scoped and explicitly authorized; never print, commit or replicate account storage. Preserve host-specific browser restrictions and read-only boundaries. Report unavailable access or partial captures honestly.

@@ -131,7 +131,7 @@ See **[MASTER_INDEX.md](./skills/MASTER_INDEX.md)** for the full listing with de
 
 ### Dynamic Routing
 
-Every prompt flows through a routing system that loads the best-fit resources on-demand — drawing from 128 built-in skills, 86 agents, 10 rules + 10 checklists, the GSD framework (57 commands), and 16,500+ community marketplace skills across 108 repos:
+Every prompt flows through a routing system that loads the best-fit resources on-demand — drawing from 128 built-in skills, 86 agents, 9 rules + 10 checklists, the GSD framework (57 commands), and 16,500+ community marketplace skills across 108 repos:
 
 ```
  Your prompt
