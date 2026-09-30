@@ -33,7 +33,7 @@ Discover → Scope → Plan (only when useful) → Execute → Verify → Docume
 
 ## Testing: none; validate by review
 
-Don't write, add, or run tests of any kind: no test suites or files, fixtures, harnesses, lint/typecheck/build ladders, smoke runs, or installs done for testing. Validate like a senior reviewer instead: re-read the request, read the whole diff and the code it touches, reason through inputs, edge cases, error paths, and callers, and use the output the work itself already produces (the command that did the task, a deploy status the push reports). Say what you reviewed and what review couldn't confirm. Tests only when the user explicitly asks for a specific scope.
+Don't write, add, or run tests of any kind: no test suites or files, fixtures, harnesses, lint/typecheck/build ladders, smoke runs, or installs done for testing. This includes repo check, drift, count, or link scripts, syntax checks, sample-input runs of scripts or hooks, and one-off verification loops. Validate like a senior reviewer instead: re-read the request, read the whole diff and the code it touches, reason through inputs, edge cases, error paths, and callers, and use the output the work itself already produces (the command that did the task, a deploy status the push reports). Say what you reviewed and what review couldn't confirm. Tests only when the user explicitly asks for a specific scope.
 
 ## Git and repositories
 
