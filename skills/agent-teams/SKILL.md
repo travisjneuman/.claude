@@ -1,6 +1,6 @@
 ---
 name: agent-teams
-description: Team composition knowledge for Claude Code Agent Teams - when to suggest teams, optimal sizing, spawn prompt patterns
+description: Team composition knowledge for Claude Code Agent Teams - when teams fit, optimal sizing, spawn prompt patterns. Use only when the user has explicitly enabled agent teams for the session.
 allowed-tools: []
 ---
 
@@ -8,9 +8,11 @@ allowed-tools: []
 
 You have expertise in composing and orchestrating Claude Code Agent Teams. Use this knowledge when the user's task would benefit from parallel multi-session work.
 
-## When to Suggest Agent Teams
+Agent teams are off by default. Use them only when the user explicitly started the session with `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`; otherwise use ordinary subagents, and don't propose teams unprompted.
 
-Proactively suggest agent teams when:
+## When Agent Teams Fit
+
+With teams enabled, they fit when:
 
 - The user asks for comprehensive code review (suggest 3-reviewer team)
 - The task involves work across multiple layers (frontend + backend + database)
@@ -29,13 +31,13 @@ Do NOT suggest agent teams when:
 
 ### Full Review (3 teammates)
 
-Security reviewer + Performance reviewer + Test coverage reviewer.
+Security reviewer + Performance reviewer + Correctness reviewer (edge cases, error paths, callers).
 Each reviews independently, then lead synthesizes findings.
 
 ### Feature Dev (3 teammates)
 
-Architect (plan approval required) + Implementer + Test writer.
-Architect plans first, implementer follows, test writer validates.
+Architect (plan approval required) + Implementer + Reviewer.
+Architect plans first, implementer follows, reviewer validates the diff by review.
 
 ### Debug Squad (3-5 teammates)
 

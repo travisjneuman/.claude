@@ -28,21 +28,23 @@ Execute one or more prompts from `./prompts/` directory, then automatically arch
 
 ## Workflow
 
-1. Delegate to `/taches-cc-resources:run-prompt` to execute the prompt(s)
-2. After successful completion, move prompt(s) from `./prompts/completed/` to `.archive/completed-prompts/`
+1. Resolve and execute the prompt(s) directly (the `taches-cc-resources` plugin that used to provide `/run-prompt` is not enabled)
+2. After successful completion, move executed prompt(s) to `.archive/completed-prompts/`
 3. Clean up any temporary directories
 
 ---
 
 ## Implementation
 
-**Step 1:** Execute the tache run-prompt command with all arguments passed through
+**Step 1:** Resolve `{{prompt_ids}}` against `./prompts/*.md`:
 
-```
-/taches-cc-resources:run-prompt {{prompt_ids}}
-```
+- Empty: the most recently modified prompt
+- A number: the file with that zero-padded prefix (`5` matches `005-*.md`)
+- Text: files whose name contains it; if several match, list them and ask which one
 
-**Step 2:** After completion, check if `./prompts/completed/` exists and move contents to archive
+**Step 2:** Execute. One prompt: read it and carry it out. Several prompts: run them in order by default (`--sequential`); with `--parallel`, give each independent prompt to its own subagent via the Agent tool, in one message. As each prompt finishes, move it to `./prompts/completed/`.
+
+**Step 3:** After completion, check if `./prompts/completed/` exists and move contents to archive
 
 ```bash
 # If prompts/completed/ exists, move all files to archive and cleanup
@@ -53,15 +55,14 @@ if [ -d "./prompts/completed" ]; then
 fi
 ```
 
-**Step 3:** Report final location of archived prompts
+**Step 4:** Report final location of archived prompts
 
 ---
 
 ## Notes
 
 - This wrapper ensures CLAUDE.md compliance (prompts archived to `.archive/completed-prompts/`)
-- Transparent to user - just use `/run [prompt-id]` instead of `/run-prompt`
-- Supports all `/run-prompt` features: single, parallel, sequential execution
+- Supports single, parallel, and sequential execution
 - Skills auto-activate based on prompt content (same as standard prompts)
 
 ---
@@ -72,7 +73,7 @@ If working in a GSD project (has `.planning/STATE.md`), use GSD commands instead
 
 | This Command | GSD Equivalent                   |
 | ------------ | -------------------------------- |
-| `/run`       | `/gsd-core:execute-plan`              |
+| `/run`       | `/gsd-core:execute-phase`        |
 | `./prompts/` | `.planning/phases/XX-XX-PLAN.md` |
 
 Use `/gsd-core:progress` to see current project status and next plan to execute.
@@ -100,8 +101,7 @@ Each prompt file should contain clear instructions for Claude to execute.
 | Command                           | Purpose                          |
 | --------------------------------- | -------------------------------- |
 | `/start-task`                     | Intelligent routing for any task |
-| `/gsd-core:execute-plan`               | Execute GSD phase plans          |
-| `/taches-cc-resources:run-prompt` | Underlying prompt executor       |
+| `/gsd-core:execute-phase`         | Execute GSD phase plans          |
 
 ---
 

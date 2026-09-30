@@ -51,6 +51,8 @@ Convert `{{name}}` to needed formats:
 
 ### Step 3: Generate Files by Type
 
+Omit the test files listed below (`*.test.*`, `*.spec.*`, `tests/...`, `*_test.go`) unless the user asks for tests; the lists only show where tests go when requested.
+
 #### component (React/Next.js)
 
 **Creates:**
@@ -58,7 +60,7 @@ Convert `{{name}}` to needed formats:
 ```
 src/components/{{PascalCase}}/
   {{PascalCase}}.tsx       # Component implementation
-  {{PascalCase}}.test.tsx  # Test file
+  {{PascalCase}}.test.tsx  # Test file (only when the user asks)
   index.ts                 # Barrel export
 ```
 
@@ -76,20 +78,6 @@ export function {{PascalCase}}({}: Props) {
     </div>
   );
 }
-```
-
-**Test template:**
-
-```typescript
-import { render, screen } from '@testing-library/react';
-import { {{PascalCase}} } from './{{PascalCase}}';
-
-describe('{{PascalCase}}', () => {
-  it('renders successfully', () => {
-    render(<{{PascalCase}} />);
-    expect(screen.getByText('{{PascalCase}}')).toBeInTheDocument();
-  });
-});
 ```
 
 **Barrel export:**
@@ -228,7 +216,6 @@ Scaffolded: {{type}} "{{name}}"
 
 Created files:
   - src/components/UserProfile/UserProfile.tsx
-  - src/components/UserProfile/UserProfile.test.tsx
   - src/components/UserProfile/index.ts
 
 Updated:
@@ -237,7 +224,6 @@ Updated:
 Next steps:
   - [ ] Implement component logic
   - [ ] Update Props interface
-  - [ ] Write meaningful tests
   - [ ] Add to parent component/route
 ```
 
@@ -248,7 +234,7 @@ Next steps:
 Before generating, scan existing files to match project conventions:
 
 - **Import style:** named vs default exports
-- **Test location:** co-located vs separate `tests/` directory
+- **Test location** (when tests are requested): co-located vs separate `tests/` directory
 - **Naming:** check if project uses `.tsx` vs `.jsx`, `.test.` vs `.spec.`
 - **CSS approach:** CSS modules, Tailwind, styled-components
 - **State management:** hooks, Zustand, Redux

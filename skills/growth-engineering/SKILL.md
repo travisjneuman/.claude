@@ -164,7 +164,7 @@ function trackReferralStep(referralId: string, step: Referral['status']) {
 ## Related Resources
 
 - `~/.claude/skills/product-analytics/SKILL.md` - Analytics and tracking
-- `~/.claude/agents/product-analytics-specialist.md` - Analytics agent
+- `agent-product-analytics-specialist` skill - Analytics specialist
 - `~/.claude/skills/authentication-patterns/SKILL.md` - Auth for PLG
 
 ---

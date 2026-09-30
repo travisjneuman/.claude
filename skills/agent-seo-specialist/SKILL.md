@@ -375,7 +375,7 @@ function HeroImage() {
 ## Reference Skills
 
 - `seo-analytics-auditor` - Full SEO and analytics audit
-- `next-js-expert` - Next.js-specific SEO implementation
+- `agent-next-js-expert` - Next.js-specific SEO implementation
 - `frontend-enhancer` - Performance optimization
 - `generic-static-feature-developer` - Static site SEO
 

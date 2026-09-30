@@ -46,10 +46,9 @@ npx serve .                  # Node.js (recommended - all platforms)
 
 ### Before Committing
 
-1. Test in Chrome, Firefox, Safari
-2. Test at 375px, 768px, 1024px
-3. Run Lighthouse audit
-4. Screenshot current state (for comparison)
+1. Review markup and CSS for Chrome, Firefox, and Safari support
+2. Review layout at 375px, 768px, and 1024px breakpoints
+3. Run browser, Lighthouse, or screenshot checks only when the user asks
 
 ## Progressive Enhancement
 

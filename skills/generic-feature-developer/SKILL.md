@@ -27,8 +27,8 @@ Guide feature development across any tech stack.
 
 1. **Understand** - Read CLAUDE.md, identify affected files, list constraints
 2. **Plan** - Choose patterns, design data flow, identify edge cases
-3. **Implement** - Small testable changes, commit frequently
-4. **Test & Document** - Write tests, update docs, performance check
+3. **Implement** - Small reviewable changes, commit frequently
+4. **Review & Document** - Review the diff against edge cases and callers, update docs, performance check
 
 ## Architecture by Project Type
 
@@ -113,11 +113,11 @@ src/
 
 ### Adding UI Component
 
-1. Create component → 2. Export → 3. Add tests → 4. Document
+1. Create component → 2. Export → 3. Review usage and edge cases → 4. Document
 
 ### Adding API Endpoint
 
-1. Define route → 2. Add validation → 3. Implement service → 4. Test
+1. Define route → 2. Add validation → 3. Implement service → 4. Review error paths
 
 ### Adding State Management
 
@@ -187,7 +187,7 @@ if (err instanceof AuthError)
   return res.status(401).json({ message: "Unauthorized" });
 ```
 
-## Testing Strategy
+## Testing Strategy (when the user asks for tests)
 
 | Layer | Type        | Tools           |
 | ----- | ----------- | --------------- |
@@ -208,9 +208,9 @@ Before marking feature complete:
 - [ ] Works for happy path
 - [ ] Error states handled
 - [ ] Loading states implemented
-- [ ] Edge cases tested
+- [ ] Edge cases reviewed
 - [ ] TypeScript types complete
-- [ ] Tests written
+- [ ] Tests written (only if the user asked for them)
 - [ ] Documentation updated
 
 ## See Also

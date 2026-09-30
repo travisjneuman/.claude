@@ -325,6 +325,6 @@ FORWARD LOOK:
 
 ## See Also
 
-- [Fortune 50 Security](../fortune50-security/SKILL.md)
-- [Fortune 50 Legal/Compliance](../fortune50-legal-compliance/SKILL.md)
-- [Fortune 50 Finance](../fortune50-finance/SKILL.md)
+- [Security](../security/SKILL.md)
+- [Legal/Compliance](../legal-compliance/SKILL.md)
+- [Finance](../finance/SKILL.md)

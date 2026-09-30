@@ -89,7 +89,7 @@ Scan source code for common vulnerability patterns using the Grep tool:
 - Missing security headers: no Content-Security-Policy, no X-Frame-Options
 
 **Report each finding with:**
-- File path and line number
+- File path and line number (for hardcoded credentials, the credential type only; never the value)
 - Severity (Critical / High / Medium / Low)
 - Description of the vulnerability
 - Suggested fix
@@ -108,6 +108,8 @@ Scan for accidentally committed secrets using Grep tool:
 - JWTs embedded in source code
 
 Exclude common false positive locations: node_modules, .git, lock files, minified JS, test fixtures with placeholder keys.
+
+**Redact every match.** Report a secret as `file:line` plus its type (for example `src/config.ts:15 - AWS access key`), never the value itself, not even partially, in findings, summaries, or fix examples. Search in a way that doesn't echo matched lines (for example Grep with file/line output only) where possible.
 
 **Check .gitignore coverage:**
 

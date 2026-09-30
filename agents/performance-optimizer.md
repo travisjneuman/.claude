@@ -23,7 +23,7 @@ This agent starts without CLAUDE.md, so these are the rules it carries:
 
 ### Frontend Performance
 
-- Core Web Vitals (LCP, FID, CLS)
+- Core Web Vitals (LCP, INP, CLS)
 - Bundle size analysis
 - Render blocking resources
 - Image optimization

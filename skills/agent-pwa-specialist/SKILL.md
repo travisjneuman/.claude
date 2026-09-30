@@ -99,7 +99,7 @@ Expert in Progressive Web App development, service worker lifecycle management, 
 
 ### Testing
 
-- Lighthouse PWA audit automation in CI
+- Installability audits (Lighthouse 12+ has no PWA category; add CI automation only when the user asks)
 - Service worker lifecycle testing
 - Offline simulation testing with network throttling
 - Cache verification tests

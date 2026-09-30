@@ -27,7 +27,7 @@ Full cross-reference (skills, agents, commands, rules, docs, marketplaces): [`IN
 | `agent-devsecops-engineer` | Security & compliance | name-only | Specialist subagent: CI/CD security, SAST/DAST pipelines, supply chain security, container scanning, and security automation specialist. Us… |
 | `agent-django-fastapi-expert` | Backend, APIs & data stores | name-only | Specialist subagent: Django ORM, Django REST Framework, FastAPI async patterns, and Pydantic v2 specialist. Use when building Python web ap… |
 | `agent-documentation-writer` | Quality, testing & maintenance | name-only | Specialist subagent: Generates comprehensive documentation including READMEs, API docs, architecture docs, and inline comments. Use when do… |
-| `agent-e2e-test-specialist` | Quality, testing & maintenance | name-only | Specialist subagent: Playwright, Cypress, and visual regression testing specialist. Use when writing E2E tests, setting up browser automati… |
+| `agent-e2e-test-specialist` | Quality, testing & maintenance | name-only | Specialist subagent: Playwright, Cypress, and visual regression testing specialist. Use only when the user explicitly asks for E2E tests, b… |
 | `agent-email-specialist` | Backend, APIs & data stores | name-only | Specialist subagent: Transactional email (Resend, SES, SendGrid), email templates (React Email, MJML), and deliverability specialist. Use w… |
 | `agent-embedded-developer` | Desktop, systems & languages | name-only | Specialist subagent: Embedded systems, firmware, RTOS, microcontrollers (STM32, ESP32, Arduino), IoT, and bare-metal C/C++ specialist. Use… |
 | `agent-event-driven-architect` | Backend, APIs & data stores | name-only | Specialist subagent: Kafka, RabbitMQ, SQS/SNS, event sourcing, CQRS, and message-driven architecture specialist. Use when designing event-d… |
@@ -59,9 +59,9 @@ Full cross-reference (skills, agents, commands, rules, docs, marketplaces): [`IN
 | `agent-serverless-specialist` | Backend, APIs & data stores | name-only | Specialist subagent: AWS Lambda, Cloudflare Workers, Vercel Edge Functions, and serverless architecture specialist. Use when building serve… |
 | `agent-startup-advisor` | Business & product | name-only | Specialist subagent: Expert startup advisor for launch strategy, validation, MVP development, and growth |
 | `agent-svelte-expert` | Frontend, UI & UX | name-only | Specialist subagent: Svelte 5 runes, SvelteKit routing, form actions, and compile-time reactivity specialist. Use when building Svelte or S… |
-| `agent-teams` | Workflow & toolkit | name-only | Team composition knowledge for Claude Code Agent Teams - when to suggest teams, optimal sizing, spawn prompt patterns |
+| `agent-teams` | Workflow & toolkit | name-only | Team composition knowledge for Claude Code Agent Teams - when teams fit, optimal sizing, spawn prompt patterns. Use only when the user has… |
 | `agent-technical-writer` | Quality, testing & maintenance | name-only | Specialist subagent: Architecture Decision Records, API documentation, migration guides, runbooks, and technical documentation specialist.… |
-| `agent-test-generator` | Quality, testing & maintenance | name-only | Specialist subagent: Generates comprehensive test suites using TDD patterns. Use when writing tests, improving coverage, or implementing te… |
+| `agent-test-generator` | Quality, testing & maintenance | name-only | Specialist subagent: Generates comprehensive test suites using TDD patterns. Use only when the user explicitly asks for tests, improved cov… |
 | `agent-ux-researcher` | Research, learning & life | name-only | Specialist subagent: UX research, usability testing, user interviews, wireframing, and information architecture specialist. Use when planni… |
 | `agent-video-producer` | Creative & content | name-only | Specialist subagent: Expert video production specialist for planning, shooting, editing, and delivering video content |
 | `agent-vue-nuxt-expert` | Frontend, UI & UX | name-only | Specialist subagent: Vue 3 Composition API, Nuxt 3 server routes, Pinia state management, and VueUse composables specialist. Use when build… |
@@ -84,7 +84,7 @@ Full cross-reference (skills, agents, commands, rules, docs, marketplaces): [`IN
 | `compliance-engineering` | Security & compliance | name-only | SOC2, HIPAA, GDPR, PCI-DSS, FedRAMP compliance implementation in code. Audit logging, data encryption, access controls, privacy by design,… |
 | `content-repurposer` | Creative & content | name-only | Adapt content across platforms with tone/format shifting — blog to social, long to short, text to visual outline. Use when repurposing cont… |
 | `contract-redliner` | Business & product | name-only | Contract review, redlining, and negotiation support with clause analysis, risk identification, and markup templates. Use when reviewing con… |
-| `core-workflow` | Quality, testing & maintenance | core | Detailed development workflow patterns, checklists, and standards. Auto-loads for complex tasks, planning, debugging, testing, or when expl… |
+| `core-workflow` | Workflow & toolkit | core | Detailed development workflow patterns, checklists, and standards. Auto-loads for complex tasks, planning, debugging, or when explicit patt… |
 | `course-material-creator` | Research, learning & life | name-only | Create custom educational materials including syllabi, lesson plans, assessments, reading lists, and learning objectives. Use when building… |
 | `customer-persona-builder` | Business & product | name-only | Data-driven customer persona development combining market research, user behavior analysis, and segmentation frameworks. Use when creating… |
 | `customer-success` | Business & product | name-only | Support workflows, ticketing systems (Zendesk, Intercom), knowledge base design, chatbot design, and metrics (CSAT, NPS). Use when building… |
@@ -146,16 +146,16 @@ Full cross-reference (skills, agents, commands, rules, docs, marketplaces): [`IN
 | `microservices-architecture` | Backend, APIs & data stores | name-only | Microservices architecture patterns and best practices. Use when designing distributed systems, breaking down monoliths, or implementing se… |
 | `mobile-cicd` | Mobile | name-only | Fastlane, GitHub Actions for mobile, code signing (iOS provisioning, Android keystores), beta distribution (TestFlight, Firebase App Distri… |
 | `monetization-strategy` | Business & product | name-only | Revenue models, pricing strategies, and business monetization. Use when designing pricing, choosing business models, or optimizing revenue… |
-| `monitoring-observability` | DevOps, cloud & observability | core | OpenTelemetry, structured logging, distributed tracing, alerting, and dashboards |
+| `monitoring-observability` | DevOps, cloud & observability | core | OpenTelemetry, structured logging, distributed tracing, alerting, and dashboards. Use when instrumenting services, designing logs/traces/me… |
 | `newsletter-creator` | Creative & content | name-only | Company newsletter and content roundup creation with consistent formatting, content curation, and audience segmentation. Use when creating… |
 | `onboarding-guide-creator` | Research, learning & life | name-only | New hire onboarding guide generation with role-specific content, structured timelines, and resource organization. Use when creating employe… |
 | `operations` | Business & product | name-only | Operations excellence expertise for supply chain optimization, process improvement (Lean, Six Sigma), capacity planning, vendor management,… |
 | `options-comparator` | Business & product | name-only | Structured comparison of competing options with weighted scoring matrices, trade-off analysis, decision frameworks, and recommendation temp… |
-| `payment-integration` | Security & compliance | name-only | Stripe, RevenueCat, subscription billing, webhooks, PCI compliance, and tax |
-| `performance-engineering` | Quality, testing & maintenance | core | Web Vitals, Lighthouse CI, bundle optimization, CDN, caching, and load testing |
+| `payment-integration` | Security & compliance | name-only | Stripe, RevenueCat, subscription billing, webhooks, PCI compliance, and tax. Use when integrating payments or subscriptions, handling payme… |
+| `performance-engineering` | Quality, testing & maintenance | core | Web Vitals, bundle optimization, CDN, caching, and load analysis. Use when diagnosing slow pages or APIs, reducing bundle size, or designin… |
 | `podcast-producer` | Creative & content | name-only | Podcast production workflow including episode planning, show notes creation, transcript editing, guest management, and distribution strateg… |
 | `process-flowchart-designer` | Business & product | name-only | Create process flowcharts and workflow diagrams from descriptions, with optimization suggestions and bottleneck identification. Use when ma… |
-| `product-analytics` | Data, ML & AI | name-only | Event tracking architecture, funnels, cohorts, A/B testing, PostHog/Amplitude |
+| `product-analytics` | Data, ML & AI | name-only | Event tracking architecture, funnels, cohorts, A/B testing, PostHog/Amplitude. Use when designing event tracking, building funnels or cohor… |
 | `product-management` | Business & product | name-only | Product management expertise for product strategy, roadmap planning, feature prioritization (RICE, ICE, MoSCoW), customer research, A/B tes… |
 | `pwa-development` | Frontend, UI & UX | name-only | Progressive Web App development for installable, offline-capable web applications. Use when building PWAs, implementing service workers, or… |
 | `rd-management` | Research, learning & life | name-only | R&D management expertise for R&D portfolio management, technology roadmapping, research methodology, patent strategy, lab management, acade… |
@@ -175,9 +175,9 @@ Full cross-reference (skills, agents, commands, rules, docs, marketplaces): [`IN
 | `sustainability-esg` | Business & product | name-only | Sustainability and ESG expertise for ESG strategy, carbon footprint management, sustainable supply chains, circular economy, renewable ener… |
 | `svelte-development` | Frontend, UI & UX | name-only | Svelte 5 development with runes ($state, $derived, $effect), SvelteKit full-stack framework, and modern reactive patterns. Use when buildin… |
 | `tauri-desktop` | Desktop, systems & languages | name-only | Tauri 2.0 project setup, Rust backend + web frontend, plugin system, IPC commands, security model, auto-update, and mobile support. Use whe… |
-| `tdd-workflow` | Quality, testing & maintenance | name-only | Test-Driven Development workflow enforcement with RED-GREEN-REFACTOR cycle. Use when implementing features test-first or improving test cov… |
+| `tdd-workflow` | Quality, testing & maintenance | name-only | Test-Driven Development workflow enforcement with RED-GREEN-REFACTOR cycle. Use only when the user explicitly asks for test-first work or i… |
 | `tech-debt-analyzer` | Quality, testing & maintenance | core | This skill should be used when analyzing technical debt in a codebase, documenting code quality issues, creating technical debt registers,… |
-| `test-specialist` | Quality, testing & maintenance | name-only | This skill should be used when writing test cases, fixing bugs, analyzing code for potential issues, or improving test coverage for JavaScr… |
+| `test-specialist` | Quality, testing & maintenance | name-only | Test-writing patterns for JS/TS, Python, Go, and Rust (unit, integration, E2E, visual regression). Use only when the user explicitly asks f… |
 | `toolkit-router` | Workflow & toolkit | core | Find the right skill, agent, command, rule, checklist, or marketplace skill in this ~/.claude toolkit for the current task. Use when a task… |
 | `travel-planner` | Research, learning & life | name-only | Travel destination research and daily itinerary creation with logistics planning, budget tracking, and experience optimization. Use when pl… |
 | `ui-animation` | Frontend, UI & UX | name-only | Motion design and animation for user interfaces. Use when creating micro-interactions, page transitions, loading states, or any UI animatio… |

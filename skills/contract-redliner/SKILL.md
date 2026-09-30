@@ -447,4 +447,4 @@ INTERNAL APPROVALS:
 ## See Also
 
 - [Legal Compliance](../legal-compliance/SKILL.md)
-- [Fortune 50 Risk Management](../fortune50-risk-management/SKILL.md)
+- [Risk Management](../risk-management/SKILL.md)

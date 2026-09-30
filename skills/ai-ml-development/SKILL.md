@@ -235,7 +235,7 @@ import anthropic
 
 client = anthropic.Anthropic()
 
-def claude_completion(prompt: str, model: str = "claude-3-sonnet-20240229") -> str:
+def claude_completion(prompt: str, model: str = "claude-sonnet-5-5") -> str:
     message = client.messages.create(
         model=model,
         max_tokens=1024,
@@ -265,9 +265,10 @@ result = chain.invoke({"text": "Long document here..."})
 ### Pinecone
 
 ```python
+import os
 from pinecone import Pinecone
 
-pc = Pinecone(api_key="xxx")
+pc = Pinecone(api_key=os.environ["PINECONE_API_KEY"])
 index = pc.Index("my-index")
 
 # Upsert vectors
@@ -457,13 +458,11 @@ Sentiment: negative
 Text: "{user_input}"
 Sentiment:"""
 
-# Chain-of-thought prompting
-COT_PROMPT = """
-Solve step by step:
-1. Identify the key information
-2. Break down the problem
-3. Work through each step
-4. Provide the final answer
+# Reasoning tasks: on current Claude models, enable thinking/effort
+# (e.g. output_config={"effort": "high"}) instead of a "step by step" prefix.
+# The prompt states the task and the answer format.
+REASONING_PROMPT = """
+Solve the problem below. Give the final answer on its own line, prefixed "Answer:".
 
 Problem: {problem}
 """
@@ -486,18 +485,14 @@ class ExtractionResult(BaseModel):
     summary: str
 
 client = anthropic.Anthropic()
-message = client.messages.create(
-    model="claude-sonnet-4-20250514",
-    max_tokens=1024,
+# Structured outputs (not forced tool_choice, which current models reject)
+response = client.messages.parse(
+    model="claude-sonnet-5-5",
+    max_tokens=16000,
     messages=[{"role": "user", "content": f"Extract entities from: {text}"}],
-    # Claude supports tool_use for structured output
-    tools=[{
-        "name": "extract_entities",
-        "description": "Extract named entities from text",
-        "input_schema": ExtractionResult.model_json_schema(),
-    }],
-    tool_choice={"type": "tool", "name": "extract_entities"},
+    output_format=ExtractionResult,
 )
+result = response.parsed_output  # validated ExtractionResult
 
 # OpenAI structured output
 from openai import OpenAI
@@ -544,23 +539,23 @@ tools = [
 # Agentic loop: call LLM, execute tools, feed results back
 while True:
     response = client.messages.create(
-        model="claude-sonnet-4-20250514",
+        model="claude-sonnet-5-5",
+        max_tokens=16000,
         messages=messages,
         tools=tools,
     )
 
-    if response.stop_reason == "end_turn":
+    if response.stop_reason != "tool_use":
         break
 
-    # Execute tool calls
+    # Execute tool calls; return all results in one user message
+    messages.append({"role": "assistant", "content": response.content})
+    tool_results = []
     for block in response.content:
         if block.type == "tool_use":
             result = execute_tool(block.name, block.input)
-            messages.append({"role": "assistant", "content": response.content})
-            messages.append({
-                "role": "user",
-                "content": [{"type": "tool_result", "tool_use_id": block.id, "content": str(result)}],
-            })
+            tool_results.append({"type": "tool_result", "tool_use_id": block.id, "content": str(result)})
+    messages.append({"role": "user", "content": tool_results})
 ```
 
 ### Claude API / Anthropic SDK Patterns
@@ -572,7 +567,7 @@ client = anthropic.Anthropic()
 
 # Basic message
 response = client.messages.create(
-    model="claude-sonnet-4-20250514",
+    model="claude-sonnet-5-5",
     max_tokens=4096,
     system="You are a helpful coding assistant.",
     messages=[
@@ -582,7 +577,7 @@ response = client.messages.create(
 
 # Streaming
 with client.messages.stream(
-    model="claude-sonnet-4-20250514",
+    model="claude-sonnet-5-5",
     max_tokens=4096,
     messages=[{"role": "user", "content": prompt}],
 ) as stream:
@@ -596,7 +591,7 @@ with open("screenshot.png", "rb") as f:
     image_data = base64.standard_b64encode(f.read()).decode()
 
 response = client.messages.create(
-    model="claude-sonnet-4-20250514",
+    model="claude-sonnet-5-5",
     max_tokens=1024,
     messages=[{
         "role": "user",
@@ -616,7 +611,7 @@ from langchain_anthropic import ChatAnthropic
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 
-llm = ChatAnthropic(model="claude-sonnet-4-20250514")
+llm = ChatAnthropic(model="claude-sonnet-5-5")
 
 chain = (
     ChatPromptTemplate.from_messages([

@@ -237,8 +237,8 @@ npm run tauri ios dev
 
 ## Related Resources
 
-- `~/.claude/skills/rust/SKILL.md` - Rust language patterns
-- `~/.claude/agents/desktop-developer.md` - Desktop development agent
+- `agent-rust-expert` skill - Rust language patterns
+- `agent-desktop-developer` skill - Desktop development specialist
 - `~/.claude/docs/reference/stacks/rust.md` - Rust stack guide
 
 ---

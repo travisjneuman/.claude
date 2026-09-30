@@ -360,7 +360,7 @@ function getEmailSender() {
 
 ## Reference Skills
 
-- `auth-specialist` - Password reset and verification emails
+- `agent-auth-specialist` - Password reset and verification emails
 - `generic-fullstack-feature-developer` - Full-stack email integration
 - `test-specialist` - Testing email sending
 

@@ -105,7 +105,7 @@ export const useStore = create<Store>()(
 ```tsx
 // Memoize expensive calculations
 const sortedItems = useMemo(
-  () => items.sort((a, b) => a.name.localeCompare(b.name)),
+  () => items.toSorted((a, b) => a.name.localeCompare(b.name)), // copy; never mutate props
   [items],
 );
 

@@ -127,7 +127,7 @@ Output structured report:
 
 - `Skill(generic-code-reviewer)` - Generic review patterns
 - `/start-task` - For implementing fixes
-- `Task(code-reviewer)` - Agent-based review
+- `deep-code-reviewer` agent (via the Agent tool) - Agent-based review
 
 ---
 

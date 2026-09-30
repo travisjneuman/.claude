@@ -188,12 +188,11 @@ Duration: 0.3s
 **Prisma:** Does not support direct rollback. Alternatives:
 
 ```bash
-# Option 1: Reset to clean state (development only)
-npx prisma migrate reset
-
-# Option 2: Create a reverse migration
+# Preferred: create a reverse migration (keeps data)
 npx prisma migrate dev --name undo_{{name}}
 ```
+
+`npx prisma migrate reset` drops the database and deletes all its data. Never run or suggest it by default; use it only when the user explicitly asks for a reset of a disposable development database, after warning them that all data in it will be lost.
 
 **TypeORM:**
 

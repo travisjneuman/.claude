@@ -22,7 +22,7 @@ Pull the parent repo, ignored marketplace clones, and configured project directo
 1. **Pulls parent repo** (`~/.claude` - travisjneuman/.claude)
 2. **Pulls all manifest marketplace clones** (read-only repos in `plugins/marketplaces/`)
 3. **Pulls custom project directories recursively** (if configured)
-4. **Fixes detached HEAD** automatically on any repo
+4. **Reports detached HEAD** repos and skips them (never switches branches)
 5. **Enforces no_push** on marketplace clones and non-Travis-owned custom repos
 
 ## Arguments
@@ -70,7 +70,7 @@ Check status without pulling:
 - ✅ **Auto-discovers marketplace entries** - Add new manifest entries and they're automatically included
 - ✅ **Custom project directories** - Add your own project folders (see below)
 - ✅ **Recursive project discovery** - Finds nested repos such as Example App frontend/backend checkouts
-- ✅ **Fixes detached HEAD** - Common issue with external clones, fixed automatically
+- ✅ **Reports detached HEAD** - Detached repos are skipped and reported, never switched
 - ✅ **Detects correct branch** - main/master/development per repo
 - ✅ **Enforces no_push** - Marketplace clones and non-Travis-owned custom repos cannot push
 - ✅ **Safe** - Dirty repos are skipped; pulls are fast-forward only; no merge/rebase/reset
@@ -107,7 +107,7 @@ The script uses both location and remote ownership:
 - `no_push` is always applied to repos inside `plugins/marketplaces/`
 - Custom repos are checked by remote owner before push access is allowed
 - Dirty or divergent repos are skipped instead of merged
-- If you want to push to a marketplace repo, fork it to your own custom directory
+- Marketplace repos are read-only: never push to them or fork/clone them to get around no_push; report any needed upstream change instead
 
 **Verification:**
 
@@ -153,7 +153,7 @@ Enforcing no_push on marketplace clones:
   All marketplace clones already have no_push configured
 
 === Summary ===
-  Total repos:       110 (1 parent + 108 marketplace clones + 1 custom)
+  Total repos:       <N> (1 parent + <M> marketplace clones + <K> custom)
   Updated:         1
   Already current: 23
 ```

@@ -158,7 +158,7 @@ When working on Vue/Nuxt tasks:
 2. **Type all props and emits**: Use `defineProps<T>()` and `defineEmits<T>()` with TypeScript interfaces. Never use runtime prop declarations.
 3. **Prefer composables for logic reuse**: Extract shared logic into composables (`use*.ts`), not mixins or utility functions that access `this`.
 4. **Use auto-imports**: Nuxt auto-imports Vue APIs, composables, and components. Do not manually import `ref`, `computed`, `useFetch`, etc.
-5. **Run `npm run check` before committing**: `svelte-check` equivalent for Vue is `vue-tsc` via `npm run type-check` and Nuxt's `nuxi typecheck`.
+5. **Keep code type-clean under `vue-tsc` / `nuxi typecheck`**: confirm by review rather than running the type-check ladder, and run `npm run type-check` only when the user asks.
 
 ## Key Patterns
 
@@ -428,9 +428,7 @@ project/
 
 ## Vue/Nuxt Checklist
 
-- [ ] `npm run type-check` passes (vue-tsc)
-- [ ] `npm run lint` passes
-- [ ] `npm run test` passes
+- [ ] Code is clean under `vue-tsc` and `npm run lint` (confirm by review; run these only when the user asks)
 - [ ] All components use `<script setup lang="ts">`
 - [ ] Props typed with `defineProps<T>()`
 - [ ] Emits typed with `defineEmits<T>()`
@@ -457,7 +455,7 @@ project/
 ## Reference Skills
 
 - `test-specialist` - Testing patterns for Vue/Nuxt
-- `api-designer` - API design for Nuxt server routes
+- `agent-api-designer` - API design for Nuxt server routes
 - `security` - Authentication and authorization patterns
 - `tech-debt-analyzer` - Vue/Nuxt code quality review
 

@@ -170,8 +170,8 @@ getProfile(@CurrentUser() user: User) {
 ### Before Completion
 
 - [ ] Add DTO validation decorators
-- [ ] Write backend unit tests
-- [ ] Write E2E tests for API
+- [ ] Review services and API error paths against the DTOs and callers
+- [ ] Backend unit and API E2E tests only if the user asked for them
 - [ ] Verify TypeScript types match
 
 ## See Also

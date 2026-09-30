@@ -40,7 +40,7 @@ Create comprehensive, beginner-friendly documentation for any codebase.
 1. **Analyze** - Entry points, dependencies, core concepts, configuration
 2. **Choose Type** - README → Architecture → API → Comments
 3. **Generate** - Use templates, customize for project
-4. **Verify** - Read as beginner, test examples
+4. **Verify** - Read as beginner, check examples against the code by reading
 
 ## Documentation Types
 
@@ -188,7 +188,7 @@ User Request Flow:
 After writing documentation:
 
 1. **Fresh Eyes Test** - Read as if you've never seen the codebase
-2. **Run Examples** - Copy-paste and verify they work
+2. **Check Examples** - Read each example against the current code, APIs, and paths it uses
 3. **Check Links** - All internal/external links resolve
 4. **Beginner Review** - Would a new developer understand?
 5. **Update Check** - Does it reflect current code?

@@ -192,6 +192,6 @@ For detailed GRI standards, TCFD recommendations, ESG data management, and ESG r
 
 ## See Also
 
-- [Fortune 50 Risk Management](../fortune50-risk-management/SKILL.md)
-- [Fortune 50 Operations](../fortune50-operations/SKILL.md)
-- [Fortune 50 Business Strategy](../fortune50-business-strategy/SKILL.md)
+- [Risk Management](../risk-management/SKILL.md)
+- [Operations](../operations/SKILL.md)
+- [Business Strategy](../business-strategy/SKILL.md)

@@ -212,7 +212,7 @@
    "path": "skills/agent-e2e-test-specialist/SKILL.md",
    "domain": "quality",
    "tier": "name-only",
-   "description": "Specialist subagent: Playwright, Cypress, and visual regression testing specialist. Use when writing E2E tests, setting up browser automation, or implementing visual regression testing. Trigger phras…"
+   "description": "Specialist subagent: Playwright, Cypress, and visual regression testing specialist. Use only when the user explicitly asks for E2E tests, browser test automation, or visual regression testing. Trigge…"
   },
   {
    "id": "skill:agent-email-specialist",
@@ -500,7 +500,7 @@
    "path": "skills/agent-teams/SKILL.md",
    "domain": "workflow",
    "tier": "name-only",
-   "description": "Team composition knowledge for Claude Code Agent Teams - when to suggest teams, optimal sizing, spawn prompt patterns"
+   "description": "Team composition knowledge for Claude Code Agent Teams - when teams fit, optimal sizing, spawn prompt patterns. Use only when the user has explicitly enabled agent teams for the session."
   },
   {
    "id": "skill:agent-technical-writer",
@@ -518,7 +518,7 @@
    "path": "skills/agent-test-generator/SKILL.md",
    "domain": "quality",
    "tier": "name-only",
-   "description": "Specialist subagent: Generates comprehensive test suites using TDD patterns. Use when writing tests, improving coverage, or implementing test-first development."
+   "description": "Specialist subagent: Generates comprehensive test suites using TDD patterns. Use only when the user explicitly asks for tests, improved coverage, or test-first development."
   },
   {
    "id": "skill:agent-ux-researcher",
@@ -723,9 +723,9 @@
    "type": "skill",
    "name": "core-workflow",
    "path": "skills/core-workflow/SKILL.md",
-   "domain": "quality",
+   "domain": "workflow",
    "tier": "core",
-   "description": "Detailed development workflow patterns, checklists, and standards. Auto-loads for complex tasks, planning, debugging, testing, or when explicit patterns are needed. Contains session protocols, git co…"
+   "description": "Detailed development workflow patterns, checklists, and standards. Auto-loads for complex tasks, planning, debugging, or when explicit patterns are needed. Contains session protocols, git conventions…"
   },
   {
    "id": "skill:course-material-creator",
@@ -1283,7 +1283,7 @@
    "path": "skills/monitoring-observability/SKILL.md",
    "domain": "infra",
    "tier": "core",
-   "description": "OpenTelemetry, structured logging, distributed tracing, alerting, and dashboards"
+   "description": "OpenTelemetry, structured logging, distributed tracing, alerting, and dashboards. Use when instrumenting services, designing logs/traces/metrics, defining SLOs and alerts, or debugging production beh…"
   },
   {
    "id": "skill:newsletter-creator",
@@ -1328,7 +1328,7 @@
    "path": "skills/payment-integration/SKILL.md",
    "domain": "security",
    "tier": "name-only",
-   "description": "Stripe, RevenueCat, subscription billing, webhooks, PCI compliance, and tax"
+   "description": "Stripe, RevenueCat, subscription billing, webhooks, PCI compliance, and tax. Use when integrating payments or subscriptions, handling payment webhooks, or reviewing billing and PCI scope."
   },
   {
    "id": "skill:performance-engineering",
@@ -1337,7 +1337,7 @@
    "path": "skills/performance-engineering/SKILL.md",
    "domain": "quality",
    "tier": "core",
-   "description": "Web Vitals, Lighthouse CI, bundle optimization, CDN, caching, and load testing"
+   "description": "Web Vitals, bundle optimization, CDN, caching, and load analysis. Use when diagnosing slow pages or APIs, reducing bundle size, or designing caching and performance budgets."
   },
   {
    "id": "skill:podcast-producer",
@@ -1364,7 +1364,7 @@
    "path": "skills/product-analytics/SKILL.md",
    "domain": "data-ai",
    "tier": "name-only",
-   "description": "Event tracking architecture, funnels, cohorts, A/B testing, PostHog/Amplitude"
+   "description": "Event tracking architecture, funnels, cohorts, A/B testing, PostHog/Amplitude. Use when designing event tracking, building funnels or cohorts, or instrumenting experiments."
   },
   {
    "id": "skill:product-management",
@@ -1544,7 +1544,7 @@
    "path": "skills/tdd-workflow/SKILL.md",
    "domain": "quality",
    "tier": "name-only",
-   "description": "Test-Driven Development workflow enforcement with RED-GREEN-REFACTOR cycle. Use when implementing features test-first or improving test coverage."
+   "description": "Test-Driven Development workflow enforcement with RED-GREEN-REFACTOR cycle. Use only when the user explicitly asks for test-first work or improved test coverage."
   },
   {
    "id": "skill:tech-debt-analyzer",
@@ -1562,7 +1562,7 @@
    "path": "skills/test-specialist/SKILL.md",
    "domain": "quality",
    "tier": "name-only",
-   "description": "This skill should be used when writing test cases, fixing bugs, analyzing code for potential issues, or improving test coverage for JavaScript/TypeScript applications. Use this for unit tests, integr…"
+   "description": "Test-writing patterns for JS/TS, Python, Go, and Rust (unit, integration, E2E, visual regression). Use only when the user explicitly asks for tests or test coverage; for debugging without a test requ…"
   },
   {
    "id": "skill:toolkit-router",
@@ -1912,7 +1912,7 @@
    "path": "commands/session-log.md",
    "domain": "workflow",
    "tier": "name-only",
-   "description": "View and analyze the Claude Code session log"
+   "description": "Explain where session history lives now that the toolkit keeps no session log"
   },
   {
    "id": "command:skill-finder",
@@ -1921,7 +1921,7 @@
    "path": "commands/skill-finder.md",
    "domain": "workflow",
    "tier": "core",
-   "description": "AI-powered skill recommendation based on your problem description - finds optimal resources from 180 local skills + 82 marketplaces (10,900+ skills)"
+   "description": "AI-powered skill recommendation based on your problem description - finds the best local skills, agents, and marketplace resources"
   },
   {
    "id": "command:standardize-claude-md",
@@ -2838,11 +2838,6 @@
    "rel": "pairs-with"
   },
   {
-   "from": "skill:core-workflow",
-   "to": "agent:debugging-specialist",
-   "rel": "pairs-with"
-  },
-  {
    "from": "skill:database-expert",
    "to": "agent:performance-optimizer",
    "rel": "pairs-with"
@@ -3150,21 +3145,6 @@
   {
    "from": "skill:tech-debt-analyzer",
    "to": "agent:refactoring-specialist",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:test-specialist",
-   "to": "agent:debugging-specialist",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:test-specialist",
-   "to": "agent:deep-code-reviewer",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:test-specialist",
-   "to": "agent:performance-optimizer",
    "rel": "pairs-with"
   },
   {

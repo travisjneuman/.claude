@@ -468,7 +468,7 @@ When working on observability tasks:
 - `monitoring-observability` - Deep observability patterns and practices
 - `devops-cloud` - Cloud-specific monitoring setup
 - `security` - Security monitoring and alerting
-- `api-designer` - API metrics instrumentation
+- `agent-api-designer` - API metrics instrumentation
 - `tech-debt-analyzer` - Monitoring infrastructure quality
 
 ## Your task

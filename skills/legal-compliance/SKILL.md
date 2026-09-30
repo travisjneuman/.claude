@@ -409,6 +409,6 @@ INTERNAL REPORTING:
 
 ## See Also
 
-- [Fortune 50 Risk Management](../fortune50-risk-management/SKILL.md)
-- [Fortune 50 Security](../fortune50-security/SKILL.md)
-- [Fortune 50 Business Strategy](../fortune50-business-strategy/SKILL.md)
+- [Risk Management](../risk-management/SKILL.md)
+- [Security](../security/SKILL.md)
+- [Business Strategy](../business-strategy/SKILL.md)

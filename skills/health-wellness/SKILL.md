@@ -350,6 +350,6 @@ MEASUREMENT:
 
 ## See Also
 
-- [Fortune 50 HR/Talent](../fortune50-hr-talent/SKILL.md)
-- [Fortune 50 Leadership](../fortune50-leadership/SKILL.md)
-- [Fortune 50 Operations](../fortune50-operations/SKILL.md)
+- [HR/Talent](../hr-talent/SKILL.md)
+- [Leadership](../leadership/SKILL.md)
+- [Operations](../operations/SKILL.md)

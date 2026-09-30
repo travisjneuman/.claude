@@ -1,9 +1,11 @@
 ---
 name: tdd-workflow
-description: Test-Driven Development workflow enforcement with RED-GREEN-REFACTOR cycle. Use when implementing features test-first or improving test coverage.
+description: Test-Driven Development workflow enforcement with RED-GREEN-REFACTOR cycle. Use only when the user explicitly asks for test-first work or improved test coverage.
 ---
 
 # Test-Driven Development (TDD) Workflow
+
+Use this skill only when the user explicitly asks for tests; otherwise validate by reviewing the diff and the code it touches.
 
 A disciplined approach to development where tests drive design and implementation.
 

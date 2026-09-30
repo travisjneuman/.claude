@@ -553,6 +553,6 @@ cargo audit
 
 ## See Also
 
-- [Fortune 50 Risk Management](../fortune50-risk-management/SKILL.md)
-- [Fortune 50 Legal/Compliance](../fortune50-legal-compliance/SKILL.md)
-- [Fortune 50 Operations](../fortune50-operations/SKILL.md)
+- [Risk Management](../risk-management/SKILL.md)
+- [Legal/Compliance](../legal-compliance/SKILL.md)
+- [Operations](../operations/SKILL.md)

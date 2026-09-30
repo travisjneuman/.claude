@@ -394,6 +394,6 @@ WORLD-CLASS OEE: 85%+
 
 ## See Also
 
-- [Fortune 50 Business Strategy](../fortune50-business-strategy/SKILL.md)
-- [Fortune 50 Finance](../fortune50-finance/SKILL.md)
-- [Fortune 50 Risk Management](../fortune50-risk-management/SKILL.md)
+- [Business Strategy](../business-strategy/SKILL.md)
+- [Finance](../finance/SKILL.md)
+- [Risk Management](../risk-management/SKILL.md)

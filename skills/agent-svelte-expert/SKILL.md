@@ -177,7 +177,7 @@ When working on Svelte/SvelteKit tasks:
 2. **Use `<script lang="ts">`**: TypeScript is mandatory. Define prop interfaces and use typed load functions.
 3. **Prefer `use:enhance` on forms**: Progressive enhancement ensures forms work without JavaScript. Always add `use:enhance` to forms that use form actions.
 4. **Use `+page.server.ts` for sensitive operations**: Any data that requires secrets, database access, or authentication should use server-only load functions.
-5. **Run `npm run check` before committing**: svelte-check validates types, accessibility, and Svelte-specific warnings.
+5. **Write svelte-check-clean code**: code should satisfy svelte-check (types, accessibility, Svelte-specific warnings); confirm by review rather than running the check ladder, and run `npm run check` only when the user asks.
 
 ## Key Patterns
 
@@ -540,9 +540,7 @@ src/
 
 ## SvelteKit Checklist
 
-- [ ] `npm run check` passes (types + a11y + Svelte warnings)
-- [ ] `npm run lint` passes
-- [ ] `npm run test` passes
+- [ ] Code is clean under `npm run check` (types + a11y + Svelte warnings) and `npm run lint` (confirm by review; run these only when the user asks)
 - [ ] All components use Svelte 5 runes (no `$:` or `export let`)
 - [ ] Props typed with interface and `$props()`
 - [ ] No `any` types
@@ -570,7 +568,7 @@ src/
 ## Reference Skills
 
 - `test-specialist` - Testing patterns for Svelte/SvelteKit
-- `api-designer` - API design for SvelteKit server routes
+- `agent-api-designer` - API design for SvelteKit server routes
 - `security` - Authentication and authorization patterns
 - `tech-debt-analyzer` - Svelte/SvelteKit code quality review
 

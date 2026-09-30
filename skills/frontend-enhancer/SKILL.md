@@ -7,15 +7,9 @@ description: Enhance the visual design of web apps: modern UI components, layout
 
 Transform web applications into visually polished, human-designed experiences.
 
-## PREREQUISITE: Research First
+## Prerequisite: Research First
 
-**Before using this skill, ALWAYS complete:**
-
-```
-Skill(ui-research)
-```
-
-Research is mandatory to avoid generic AI-generated looks. See [UI Inspiration Sources](../_shared/UI_INSPIRATION_SOURCES.md) for source list.
+For a new design direction, run `ui-research` first so choices come from real reference products rather than default styles; the specific defaults to avoid are under "Avoiding the AI Look". See [UI Inspiration Sources](../_shared/UI_INSPIRATION_SOURCES.md).
 
 ---
 
@@ -32,7 +26,7 @@ Research is mandatory to avoid generic AI-generated looks. See [UI Inspiration S
 
 **Don't use when:**
 
-- Need inspiration first → use `ui-research` (MANDATORY)
+- Need inspiration first → use `ui-research` first
 - UX flow design → use `generic-ux-designer`
 - Code architecture → use `generic-feature-developer`
 - Code review → use `generic-code-reviewer`
@@ -227,5 +221,5 @@ Ensure you DO have:
 - [UI Inspiration Sources](../_shared/UI_INSPIRATION_SOURCES.md) - Research sources (USE FIRST)
 - [Design Patterns](../_shared/DESIGN_PATTERNS.md) - Visual design reference
 - [UX Principles](../_shared/UX_PRINCIPLES.md) - User experience
-- `ui-research` - Mandatory prerequisite skill
+- `ui-research` - Research step to run first for new design directions
 - Project `CLAUDE.md` - Design constraints

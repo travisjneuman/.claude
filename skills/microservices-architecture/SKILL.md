@@ -646,11 +646,11 @@ describe("User Service Contract", () => {
 
 - [ ] Map domain boundaries clearly
 - [ ] Identify candidate services (start small)
-- [ ] Establish CI/CD for new services
+- [ ] Establish CI/CD for new services (new pipelines only with the user's approval)
 - [ ] Implement API gateway
 - [ ] Set up service discovery
 - [ ] Add distributed tracing
 - [ ] Implement circuit breakers
 - [ ] Extract first service (strangler fig pattern)
-- [ ] Test extensively
+- [ ] Verify parity with the monolith path before shifting traffic
 - [ ] Monitor and iterate

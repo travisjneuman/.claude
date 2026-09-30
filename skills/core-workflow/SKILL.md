@@ -1,6 +1,6 @@
 ---
 name: core-workflow
-description: Detailed development workflow patterns, checklists, and standards. Auto-loads for complex tasks, planning, debugging, testing, or when explicit patterns are needed. Contains session protocols, git conventions, security checklists, testing strategy, and communication standards.
+description: Detailed development workflow patterns, checklists, and standards. Auto-loads for complex tasks, planning, debugging, or when explicit patterns are needed. Contains session protocols, git conventions, security checklists, review-based validation, and communication standards.
 ---
 
 # Core Workflow Patterns
@@ -16,9 +16,8 @@ Comprehensive development workflow reference. This loads on-demand for detailed 
 ### Start Checklist
 
 ```bash
-# 1. Sync with remote (ALWAYS FIRST)
-git fetch origin main && git merge origin/main --no-edit
-# or: git fetch origin master && git merge origin/master --no-edit
+# 1. Sync first: default branch from origin/HEAD, fetch + prune, fast-forward
+git fetch --prune origin && git merge --ff-only "$(git symbolic-ref --short refs/remotes/origin/HEAD)"
 
 # 2. Get context
 git log -3
@@ -27,24 +26,23 @@ git log -3
 ls tasks/*.md 2>/dev/null || echo "No active tasks"
 ```
 
-**CRITICAL:** Check `<env>` section for today's date. NEVER guess dates.
+Take today's date from the environment context rather than inferring it.
 
 ### End Checklist
 
 ```bash
-# 1. Verify
-npm run test && npm run type-check  # or project equivalent
+# 1. Verify by review: re-read the request and the whole diff (no test/type-check ladder)
 
 # 2. Archive completed work
 mv tasks/<completed-task>.md .archive/completed-tasks/
 
 # 3. Commit with comprehensive message
-git add .
+git add -A  # all pending changes, any session's
 git commit  # See Git Conventions below
-git push origin main
+git push    # or the configured push runner, when one is defined; never force
 ```
 
-**Stop dev server after testing:** `lsof -ti:PORT | xargs kill` (or Windows equivalent)
+**Stop any dev server you started:** `lsof -ti:PORT | xargs kill` (or Windows equivalent)
 
 ---
 
@@ -119,9 +117,8 @@ type: Short summary (50 chars max)
 - User requested feature Y
 - Config A needed update
 
-## Testing
-- All tests passing
-- Manual verification done
+## Verification
+- Diff reviewed against the request, callers, and edge cases
 ```
 
 ### Auto-Commit on Task Completion
@@ -192,19 +189,6 @@ git remote get-url --push origin | grep -q "no_push" && echo "SKIP: External rep
 
 ---
 
-## Testing Strategy
-
-| Type        | Location             | When            |
-| ----------- | -------------------- | --------------- |
-| Unit        | `src/**/__tests__/`  | Every function  |
-| Component   | Same                 | Every component |
-| Integration | `tests/integration/` | Critical paths  |
-| E2E         | `tests/e2e/`         | Before release  |
-
-**Before committing:** `npm run test && npm run type-check`
-
----
-
 ## Thinking Frameworks
 
 Use structured decision-making for complex choices:
@@ -231,12 +215,12 @@ Use structured decision-making for complex choices:
 1. Reproduce the issue
 2. Read relevant code
 3. Identify root cause
-4. Fix + add test
-5. Verify fix
+4. Fix the root cause
+5. Verify by review of the diff and the output the fix already produces
 
 ### Intermittent/Complex Issues
 
-Use `debug-like-expert` skill for systematic approach.
+Use the `debug-systematic` skill for a systematic approach.
 
 ---
 
@@ -261,20 +245,19 @@ Use `debug-like-expert` skill for systematic approach.
 
 Give high-level updates, not spam:
 
-```
-✅ Added authentication middleware (3 files)
-✅ Updated user store with new fields
-⏳ Testing login flow...
-```
+"Added authentication middleware (3 files) and updated the user store with the new
+fields; now reviewing the login flow."
 
 ### When to Ask
 
-Use `AskUserQuestion` when:
+Use `AskUserQuestion` only when:
 
-- Requirements are ambiguous
-- Multiple valid architectures exist
-- Scope might expand
-- Design decisions need validation
+- An essential choice is missing and changes the outcome
+- Instructions conflict and precedence doesn't settle it
+- A destructive or external target can't be identified exactly
+- The step needs authority the request didn't give
+
+Otherwise pick the reasonable option, proceed, and state the assumption.
 
 ### Directness Protocol
 
@@ -312,8 +295,8 @@ Use `AskUserQuestion` when:
 ```bash
 npm run dev          # Start dev server
 npm run build        # Production build
-npm run test         # Run tests
-npm run type-check   # TypeScript check
+npm run test         # Run tests (only when the user asks)
+npm run type-check   # TypeScript check (only when the user asks)
 ```
 
 ### File Naming

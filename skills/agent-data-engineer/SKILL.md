@@ -403,7 +403,7 @@ CREATE TABLE dim_dates (
 
 - `data-science` - Statistical analysis and ML pipelines
 - `database-expert` - Database optimization and schema design
-- `cloud-architect` - Infrastructure for data platforms
+- `agent-cloud-architect` - Infrastructure for data platforms
 - `devops-engineer` - CI/CD for data pipelines
 
 ## Your task

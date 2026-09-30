@@ -278,9 +278,9 @@ Tabs.Panel = function TabsPanel({ value, children }: TabsPanelProps) {
 
 **Before Completion:**
 
-- [ ] Write unit tests
+- [ ] Unit tests only if the user asked for them
 - [ ] Lazy load heavy components
-- [ ] Check bundle size: `npm run build`
+- [ ] Review bundle impact of new imports and dependencies
 - [ ] Review with code-reviewer skill
 
 ## See Also

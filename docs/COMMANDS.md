@@ -42,7 +42,7 @@ Slash commands are shortcuts you invoke in Claude Code with `/<command-name>`. T
 | Command         | Description                                               | Usage               |
 | --------------- | --------------------------------------------------------- | ------------------- |
 | `handoff`       | Create a handoff document for seamless session continuity | `/handoff`          |
-| `session-log`   | View and analyze the Claude Code session log              | `/session-log tail` |
+| `session-log`   | Retired: explains where session history lives now (`--resume`, `/usage`) | `/session-log` |
 | `context-stats` | Display context window usage and token statistics         | `/context-stats`    |
 
 ### Code

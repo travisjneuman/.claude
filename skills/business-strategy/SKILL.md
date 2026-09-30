@@ -328,6 +328,6 @@ Factor A   High     Scenario 1  Scenario 2
 
 ## See Also
 
-- [Fortune 50 Finance](../fortune50-finance/SKILL.md) - Financial modeling
-- [Fortune 50 M&A Due Diligence](../fortune50-finance/SKILL.md) - Deal analysis
-- [Fortune 50 Operations](../fortune50-operations/SKILL.md) - Execution frameworks
+- [Finance](../finance/SKILL.md) - Financial modeling
+- [M&A Due Diligence](../finance/SKILL.md) - Deal analysis
+- [Operations](../operations/SKILL.md) - Execution frameworks

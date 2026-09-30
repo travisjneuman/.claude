@@ -502,8 +502,7 @@ lib/
 
 ## Flutter Checklist
 
-- [ ] `flutter analyze` passes with no issues
-- [ ] `flutter test` passes
+- [ ] Code is `flutter analyze` clean (confirm by review; run these only when the user asks)
 - [ ] Widgets use `const` constructors where possible
 - [ ] Business logic separated from UI
 - [ ] Navigation handles deep links
@@ -514,7 +513,7 @@ lib/
 ## Reference Skills
 
 - `flutter-development` - Flutter development patterns
-- `mobile-release-manager` - App store deployment
+- `agent-mobile-release-manager` - App store deployment
 - `test-specialist` - Testing patterns
 - `generic-ux-designer` - UI/UX design for mobile
 

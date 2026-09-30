@@ -433,5 +433,5 @@ MENTOR TYPES:
 ## See Also
 
 - [Health & Wellness](../health-wellness/SKILL.md)
-- [Fortune 50 HR/Talent](../fortune50-hr-talent/SKILL.md)
-- [Fortune 50 Leadership](../fortune50-leadership/SKILL.md)
+- [HR/Talent](../hr-talent/SKILL.md)
+- [Leadership](../leadership/SKILL.md)

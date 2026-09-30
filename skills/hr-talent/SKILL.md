@@ -427,6 +427,6 @@ BIAS REDUCTION:
 
 ## See Also
 
-- [Fortune 50 Leadership](../fortune50-leadership/SKILL.md)
-- [Fortune 50 Operations](../fortune50-operations/SKILL.md)
-- [Fortune 50 Business Strategy](../fortune50-business-strategy/SKILL.md)
+- [Leadership](../leadership/SKILL.md)
+- [Operations](../operations/SKILL.md)
+- [Business Strategy](../business-strategy/SKILL.md)

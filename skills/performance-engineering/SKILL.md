@@ -1,6 +1,6 @@
 ---
 name: performance-engineering
-description: Web Vitals, Lighthouse CI, bundle optimization, CDN, caching, and load testing
+description: Web Vitals, bundle optimization, CDN, caching, and load analysis. Use when diagnosing slow pages or APIs, reducing bundle size, or designing caching and performance budgets.
 ---
 
 # Performance Engineering
@@ -16,10 +16,10 @@ Use this skill when Core Web Vitals scores are below targets, bundle sizes are g
 ## Core Principles
 
 1. **Measure before optimizing** - Profile with real data (RUM, Lighthouse, DevTools) before writing any optimization code. Intuition about performance bottlenecks is usually wrong.
-2. **Budget everything** - Set performance budgets for bundle size (< 200kb JS), LCP (< 2.5s), INP (< 200ms), CLS (< 0.1). Enforce in CI so regressions are caught before merge.
+2. **Budget everything** - Set performance budgets for bundle size (< 200kb JS), LCP (< 2.5s), INP (< 200ms), CLS (< 0.1). Check changes against them in review.
 3. **Optimize the critical path** - Focus on what blocks the user from seeing and interacting with content. Everything else can load later.
 4. **Cache aggressively, invalidate precisely** - Use immutable hashes for static assets, short TTLs for dynamic content, and stale-while-revalidate for the best of both worlds.
-5. **Test at realistic scale** - Load test with production-like data volumes and traffic patterns, not toy datasets with 10 concurrent users.
+5. **Reason at realistic scale** - Judge designs against production-like data volumes and traffic, not toy datasets with 10 concurrent users; run load tests only when the user asks for them.
 
 ---
 
@@ -90,6 +90,8 @@ onTTFB((metric) => sendToAnalytics({
   navigationType: metric.navigationType,
 }));
 ```
+
+Lighthouse CI and other new CI jobs are added only when the user asks for them.
 
 ```typescript
 // Lighthouse CI configuration
@@ -399,7 +401,7 @@ const products = await cached(
 
 ### Pattern 5: Load Testing with k6
 
-**When to use:** Before any major launch, migration, or when establishing performance baselines.
+**When to use:** When the user asks for a load test, for example before a major launch or migration or to establish a performance baseline.
 
 **Implementation:**
 
@@ -501,7 +503,7 @@ k6 run --out json=results.json load-test.js
 ## Checklist
 
 - [ ] Core Web Vitals measured in field (RUM) and lab (Lighthouse)
-- [ ] Performance budgets enforced in CI (Lighthouse CI or bundlesize)
+- [ ] Performance budgets defined and checked in review
 - [ ] Bundle analyzed and code-split by route
 - [ ] Images optimized (WebP/AVIF, responsive sizes, lazy loading)
 - [ ] LCP image uses `priority` / `fetchpriority="high"`
@@ -509,7 +511,7 @@ k6 run --out json=results.json load-test.js
 - [ ] Server-side caching for expensive queries (Redis or in-memory)
 - [ ] Third-party scripts audited and loaded asynchronously
 - [ ] Database queries analyzed (no N+1, proper indexes)
-- [ ] Load testing done with realistic traffic patterns
+- [ ] Load behavior reasoned through for realistic traffic (load tests only on request)
 - [ ] `font-display: swap` set for custom web fonts
 
 ---

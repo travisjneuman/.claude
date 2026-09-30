@@ -190,10 +190,7 @@ Example:
 
 ### Pre-Commit
 
-- [ ] Tests pass
-- [ ] Type check passes
-- [ ] Lint passes
-- [ ] Build succeeds
+- [ ] Diff reviewed against the request, callers, edge cases, and error paths (no test/lint/build ladder unless the user asks)
 - [ ] No console errors
 
 ### Security

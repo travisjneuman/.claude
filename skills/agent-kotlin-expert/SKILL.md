@@ -108,7 +108,7 @@ When working on Kotlin tasks:
 2. **Use structured concurrency**: Never use `GlobalScope`. Launch coroutines in a proper CoroutineScope tied to a lifecycle.
 3. **Leverage the type system**: Use sealed classes for state, value classes for domain types, and nullable types instead of sentinel values.
 4. **Follow Kotlin conventions**: Use scope functions idiomatically, prefer expression bodies for short functions, use trailing lambdas.
-5. **Run checks before committing**: `./gradlew check` should pass (includes detekt/ktlint, tests, and compilation).
+5. **Write check-clean code**: code should satisfy `./gradlew check` (detekt/ktlint, tests, compilation); confirm by review rather than running it, and run it only when the user asks.
 
 ## Best Practices
 
@@ -134,7 +134,7 @@ When working on Kotlin tasks:
 ## Reference Skills
 
 - `test-specialist` - Testing patterns for Kotlin
-- `api-designer` - API design for Ktor services
+- `agent-api-designer` - API design for Ktor services
 - `performance-optimizer` - JVM and Kotlin performance tuning
 - `security` - Secure coding in Kotlin
 

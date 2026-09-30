@@ -20,6 +20,8 @@ Audit SEO, verify analytics, and optimize Core Web Vitals.
 
 ## Quick Audit Workflow
 
+Local browser automation installs (`npx lighthouse`, Playwright, headless Chrome) are not allowed on the owner's Mac. Start from reading the source, meta tags, and deployed HTML; run Lighthouse or other browser audits only when the user asks, through an approved lane (such as PageSpeed Insights or the Search Console reports).
+
 ```bash
 # 1. Run Lighthouse audit
 npx lighthouse https://yoursite.com --output=html --output-path=./audit.html

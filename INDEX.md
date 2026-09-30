@@ -36,7 +36,8 @@ Everything listed here is installed and available. Only the **core** tier keeps 
 | --- | --- | --- | --- |
 | `agent-go-expert` | name-only | Specialist subagent: Go concurrency, error handling, stdlib patterns, Chi/Echo web frameworks specialist. Use… |  |
 | `agent-product-manager` | name-only | Specialist subagent: Product requirements, user stories, roadmaps, prioritization frameworks, and sprint plan… |  |
-| `agent-teams` | name-only | Team composition knowledge for Claude Code Agent Teams - when to suggest teams, optimal sizing, spawn prompt… | `workflows/agent-teams` |
+| `agent-teams` | name-only | Team composition knowledge for Claude Code Agent Teams - when teams fit, optimal sizing, spawn prompt pattern… | `workflows/agent-teams` |
+| `core-workflow` | core | Detailed development workflow patterns, checklists, and standards. Auto-loads for complex tasks, planning, de… |  |
 | `event-planner` | name-only | Event planning with timelines, budgets, vendor coordination, logistics checklists, and post-event evaluation.… |  |
 | `generic-feature-developer` | core | Guide feature development with architecture patterns for any tech stack. Covers frontend, backend, full-stack… | `stacks/fullstack-nextjs-nestjs` |
 | `generic-static-feature-developer` | name-only | Guide feature development for static HTML/CSS/JS sites. Covers patterns, automation workflows, and content va… | `checklists/static-sites` `workflows/agent-teams` |
@@ -57,8 +58,8 @@ Everything listed here is installed and available. Only the **core** tier keeps 
 | `/list-skills` | name-only | Browse available skills by domain or list all skills with comprehensive categorization |
 | `/pull-repos` | name-only | Pull all repos (parent + marketplace clones + configured project repos) |
 | `/scaffold` | name-only | Scaffold project components from templates |
-| `/session-log` | name-only | View and analyze the Claude Code session log |
-| `/skill-finder` | core | AI-powered skill recommendation based on your problem description - finds optimal resources from 180 local sk… |
+| `/session-log` | name-only | Explain where session history lives now that the toolkit keeps no session log |
+| `/skill-finder` | core | AI-powered skill recommendation based on your problem description - finds the best local skills, agents, and… |
 | `/standardize-claude-md` | name-only | Add missing toolkit sections (Related Global Rules, Quick Start) to existing CLAUDE.md |
 | `/start-task` | core | Route any task to the right skills, agents, rules, and marketplace resources via INDEX.md, then execute it |
 | `/update-counts` | name-only | Update all hardcoded counts (skills, agents, marketplace repos/skills) across documentation from filesystem |
@@ -71,7 +72,7 @@ Everything listed here is installed and available. Only the **core** tier keeps 
 | `agent-devsecops-engineer` | name-only | Specialist subagent: CI/CD security, SAST/DAST pipelines, supply chain security, container scanning, and secu… | `security-auditor` `checklists/security-hardening` |
 | `application-security` | core | OWASP Top 10 with code examples, SAST/DAST tools, dependency scanning, CSP headers, and input validation patt… | `security-auditor` `checklists/security-hardening` |
 | `compliance-engineering` | name-only | SOC2, HIPAA, GDPR, PCI-DSS, FedRAMP compliance implementation in code. Audit logging, data encryption, access… |  |
-| `payment-integration` | name-only | Stripe, RevenueCat, subscription billing, webhooks, PCI compliance, and tax |  |
+| `payment-integration` | name-only | Stripe, RevenueCat, subscription billing, webhooks, PCI compliance, and tax. Use when integrating payments or… |  |
 | `security` | name-only | Information security expertise for cybersecurity frameworks (NIST, ISO 27001), security architecture, inciden… |  |
 
 | Agent | Purpose |
@@ -174,7 +175,7 @@ Everything listed here is installed and available. Only the **core** tier keeps 
 | `agent-observability-engineer` | name-only | Specialist subagent: OpenTelemetry, Prometheus, Grafana, distributed tracing, SLO design, and alerting specia… | `devops-engineer` `checklists/monitoring-alerting-design` |
 | `devops-cloud` | core | DevOps, cloud infrastructure, and platform engineering. Use when working with AWS, GCP, Azure, Kubernetes, Te… | `devops-engineer` |
 | `growth-engineering` | name-only | A/B testing infrastructure, feature flags (LaunchDarkly, Unleash), experimentation platforms, PLG patterns, a… |  |
-| `monitoring-observability` | core | OpenTelemetry, structured logging, distributed tracing, alerting, and dashboards | `checklists/monitoring-alerting-design` |
+| `monitoring-observability` | core | OpenTelemetry, structured logging, distributed tracing, alerting, and dashboards. Use when instrumenting serv… | `checklists/monitoring-alerting-design` |
 
 | Agent | Purpose |
 | --- | --- |
@@ -195,7 +196,7 @@ Everything listed here is installed and available. Only the **core** tier keeps 
 | `data-engineering` | name-only | ETL/ELT pipelines, data warehousing (BigQuery, Snowflake, Redshift), stream processing (Kafka, Spark Streamin… |  |
 | `data-science` | name-only | Data science and analytics expertise for statistical analysis, machine learning pipelines, data governance, b… |  |
 | `llm-app-development` | core | LLM app development with RAG, prompt engineering, vector databases, and AI agents |  |
-| `product-analytics` | name-only | Event tracking architecture, funnels, cohorts, A/B testing, PostHog/Amplitude |  |
+| `product-analytics` | name-only | Event tracking architecture, funnels, cohorts, A/B testing, PostHog/Amplitude. Use when designing event track… |  |
 | `seo-analytics-auditor` | name-only | Use this skill when auditing SEO, analyzing Core Web Vitals, verifying meta tags, checking structured data, o… |  |
 
 | Command | Tier | Purpose |
@@ -208,23 +209,22 @@ Everything listed here is installed and available. Only the **core** tier keeps 
 | --- | --- | --- | --- |
 | `agent-code-explainer` | name-only | Specialist subagent: Explains complex code in clear, understandable terms. Use when onboarding to a codebase,… |  |
 | `agent-documentation-writer` | name-only | Specialist subagent: Generates comprehensive documentation including READMEs, API docs, architecture docs, an… | `deep-code-reviewer` |
-| `agent-e2e-test-specialist` | name-only | Specialist subagent: Playwright, Cypress, and visual regression testing specialist. Use when writing E2E test… |  |
+| `agent-e2e-test-specialist` | name-only | Specialist subagent: Playwright, Cypress, and visual regression testing specialist. Use only when the user ex… |  |
 | `agent-migration-specialist` | name-only | Specialist subagent: Framework upgrades, codemod strategies, version migration planning, and legacy moderniza… |  |
 | `agent-technical-writer` | name-only | Specialist subagent: Architecture Decision Records, API documentation, migration guides, runbooks, and techni… |  |
-| `agent-test-generator` | name-only | Specialist subagent: Generates comprehensive test suites using TDD patterns. Use when writing tests, improvin… |  |
+| `agent-test-generator` | name-only | Specialist subagent: Generates comprehensive test suites using TDD patterns. Use only when the user explicitl… |  |
 | `codebase-documenter` | core | Write codebase documentation: READMEs, architecture docs, getting-started guides, API docs, and code comments… |  |
-| `core-workflow` | core | Detailed development workflow patterns, checklists, and standards. Auto-loads for complex tasks, planning, de… | `debugging-specialist` |
 | `debug-systematic` | core | Systematic 4-phase debugging methodology for complex, intermittent, or mysterious issues. Use when investigat… | `debugging-specialist` |
 | `generic-code-reviewer` | core | Review code for bugs, security vulnerabilities, performance issues, accessibility gaps, and CLAUDE.md workflo… | `deep-code-reviewer` `security-auditor` `performance-optimizer` `stacks/fullstack-nextjs-nestjs` |
 | `generic-fullstack-code-reviewer` | name-only | Review full-stack code for bugs, security vulnerabilities, performance issues, accessibility gaps, and CLAUDE… | `deep-code-reviewer` `security-auditor` `architecture-analyst` `stacks/fullstack-nextjs-nestjs` |
 | `generic-react-code-reviewer` | name-only | Review React/TypeScript code for bugs, security vulnerabilities, performance issues, accessibility gaps, and… | `deep-code-reviewer` `security-auditor` `performance-optimizer` |
 | `generic-static-code-reviewer` | name-only | Review static site code for bugs, security issues, performance problems, accessibility gaps, and CLAUDE.md co… | `deep-code-reviewer` `security-auditor` `performance-optimizer` `checklists/static-sites` |
 | `literature-review-planner` | name-only | Structured literature review planning with systematic methodology, source evaluation, and synthesis framework… | `architecture-analyst` `deep-code-reviewer` |
-| `performance-engineering` | core | Web Vitals, Lighthouse CI, bundle optimization, CDN, caching, and load testing | `performance-optimizer` `checklists/performance-optimization` |
+| `performance-engineering` | core | Web Vitals, bundle optimization, CDN, caching, and load analysis. Use when diagnosing slow pages or APIs, red… | `performance-optimizer` `checklists/performance-optimization` |
 | `statistics-verifier` | name-only | Verify statistics from raw data with methodology checking, significance testing, claim validation, and bias d… |  |
-| `tdd-workflow` | name-only | Test-Driven Development workflow enforcement with RED-GREEN-REFACTOR cycle. Use when implementing features te… |  |
+| `tdd-workflow` | name-only | Test-Driven Development workflow enforcement with RED-GREEN-REFACTOR cycle. Use only when the user explicitly… |  |
 | `tech-debt-analyzer` | core | This skill should be used when analyzing technical debt in a codebase, documenting code quality issues, creat… | `deep-code-reviewer` `security-auditor` `refactoring-specialist` |
-| `test-specialist` | name-only | This skill should be used when writing test cases, fixing bugs, analyzing code for potential issues, or impro… | `debugging-specialist` `deep-code-reviewer` `performance-optimizer` |
+| `test-specialist` | name-only | Test-writing patterns for JS/TS, Python, Go, and Rust (unit, integration, E2E, visual regression). Use only w… |  |
 
 | Agent | Purpose |
 | --- | --- |

@@ -443,7 +443,7 @@ Fix: Use `flutter build appbundle` instead of `flutter build apk`
 
 - `flutter-development` - Flutter development patterns
 - `ios-developer` - iOS-specific development
-- `android-developer` - Android-specific development
+- `agent-android-developer` - Android-specific development
 - `devops-engineer` - CI/CD pipeline setup
 
 ## Your task

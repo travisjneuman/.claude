@@ -25,18 +25,9 @@ Before deploying, verify the codebase is ready:
 ```bash
 # Ensure clean working tree
 git status --porcelain
-
-# Run tests
-npm run test 2>/dev/null || pytest 2>/dev/null || go test ./... 2>/dev/null || echo "NO_TEST_RUNNER"
-
-# Run type checks (if applicable)
-npm run type-check 2>/dev/null || npx tsc --noEmit 2>/dev/null || mypy src/ 2>/dev/null || echo "NO_TYPE_CHECK"
-
-# Run linter
-npm run lint 2>/dev/null || ruff check . 2>/dev/null || golangci-lint run 2>/dev/null || echo "NO_LINTER"
 ```
 
-**If any check fails:** Stop deployment, report the failure, and suggest fixes.
+**If the tree is dirty:** Stop and report. Don't run test, type-check, or lint ladders unless the user asks; the Step 3 build is the pre-deploy check.
 
 ---
 
@@ -49,7 +40,7 @@ If environment is `production`, add an extra confirmation step:
 
 ```
 WARNING: You are deploying to PRODUCTION.
-Confirm: Have tests passed? Is this change reviewed?
+Confirm: Is this change reviewed?
 ```
 
 ---
@@ -181,14 +172,14 @@ If deployment fails or issues are found post-deploy:
 | ------- | --------------------------------------------------- |
 | Vercel  | `vercel rollback`                                   |
 | Docker  | `docker compose -f docker-compose.yml rollback`     |
-| AWS     | `npx sls rollback` / `cdk destroy` / `sam rollback` |
+| AWS     | `npx sls rollback` / redeploy the previous commit with `cdk deploy` / `sam rollback` |
 | Netlify | `netlify deploy --prod --alias previous`            |
 
 ---
 
 ## Safety Rules
 
-- Never deploy with failing tests
+- Never deploy a failing build
 - Never deploy to production without explicit confirmation
 - Always verify health after deployment
 - Keep rollback commands ready

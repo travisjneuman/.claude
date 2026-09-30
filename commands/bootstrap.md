@@ -89,10 +89,7 @@ Check that hooks are properly configured:
 2. **settings.json has hook configured:**
    Check that `hooks.SessionStart` is defined in settings.json
 
-3. **Test hook output is valid JSON:**
-   ```bash
-   echo '{"tool_name":"Bash","tool_input":{"command":"git status"}}' | node ~/.claude/hooks/guard.js   # prints nothing = allowed
-   ```
+3. **Hook wiring:** confirm `hooks.PreToolUse` in settings.json points at `guard.js` through `run-hook.js` (read the config; don't run the hooks).
 
 ---
 
@@ -155,13 +152,13 @@ Core Files:
   ✓ .mcp.json
 
 Submodules:
-  ✓ 82 marketplace repos configured
+  ✓ <N> marketplace repos configured
   ✓ All repos have no_push protection
 
-Resources:
-  • 180 local skills
-  • 86 local agents
-  • 10,900+ marketplace skills (101 repos)
+Resources (from the Step 7 counts; generated totals live at the top of ~/.claude/INDEX.md):
+  • <N> local skills
+  • <N> local agents
+  • <N> marketplace skills (<M> repos)
 
 Hooks:
   ✓ SessionStart: Auto-routing enabled
@@ -191,14 +188,15 @@ If any issues were detected, offer to fix them:
 bash ~/.claude/_pull-all-repos.sh
 ```
 
-**Reset a broken submodule:**
+**Repair a broken marketplace clone (non-destructive):**
 
 ```bash
 cd ~/.claude/plugins/marketplaces/[repo-name]
-git fetch origin
-git reset --hard origin/main  # or origin/master
-git clean -fd
+git fetch --prune origin
+git merge --ff-only origin/main  # or origin/master
 ```
+
+If it cannot fast-forward, or the clone has local changes, stop and report the repo and its `git status`; never reset, clean, or discard changes.
 
 **Recreate .mcp.json:**
 
@@ -206,26 +204,18 @@ git clean -fd
 bash ~/.claude/scripts/install.sh  # Will skip clone, just reconfigure
 ```
 
-**Force sync everything:**
-
-```bash
-```
-
 ---
 
 ## For Fresh Installs
 
-If you don't have ~/.claude yet, run:
+If you don't have ~/.claude yet, clone it, read the installer, then run it (never pipe a download straight into a shell):
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/travisjneuman/.claude/master/scripts/install.sh | bash
+git clone https://github.com/travisjneuman/.claude.git ~/.claude
+bash ~/.claude/scripts/install.sh
 ```
 
-Or for Windows (in Git Bash):
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/travisjneuman/.claude/master/scripts/install.sh | bash
-```
+The same commands work on Windows in Git Bash.
 
 ---
 

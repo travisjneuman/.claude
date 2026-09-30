@@ -102,7 +102,7 @@ Expert product management specialist for requirements definition, roadmap planni
 
 ## Reference Skills
 
-- `api-designer` - API requirements and design
+- `agent-api-designer` - API requirements and design
 - `test-specialist` - Testing requirements and acceptance criteria
 - `security` - Security requirements
 

@@ -9,14 +9,9 @@ Review React/TypeScript code against production quality standards.
 
 **Extends:** [Generic Code Reviewer](../generic-code-reviewer/SKILL.md) - Read base skill for full code review methodology, P0/P1/P2 priority system, and judgment calls.
 
-## Pre-Commit Commands
+## Pre-Commit Validation
 
-```bash
-npm run test        # Unit tests
-npm run type-check  # TypeScript strict mode
-npm run lint        # ESLint/Prettier
-npm run build       # Production build
-```
+Validate by reading the diff, not by running a test/lint/build ladder; the checks below are what to look for.
 
 ## React-Specific Checks
 

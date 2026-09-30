@@ -59,7 +59,7 @@ Strict types (`unknown`, not `any`). Small focused functions and files. DRY afte
 
 ## Finding the right tool
 
-Only core skills and the core agents show a full description in your context; the rest of the toolkit (170+ skills including the specialist `agent-*` skills that run as their own subagent, commands, checklists, stack guides, ~11k marketplace skills) is listed by name only. When a task is specialized, use the `toolkit-router` skill: grep `~/.claude/INDEX.md` for the domain, then invoke what fits. Don't read the whole index.
+Only core skills and the core agents show a full description in your context; the rest of the toolkit (170+ skills including the specialist `agent-*` skills that run as their own subagent, commands, checklists, stack guides, and the indexed marketplace skills) is listed by name only. When a task is specialized, use the `toolkit-router` skill: grep `~/.claude/INDEX.md` for the domain, then invoke what fits. Don't read the whole index.
 
 ## Memory and documentation
 

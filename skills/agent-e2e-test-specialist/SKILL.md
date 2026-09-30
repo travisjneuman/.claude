@@ -1,10 +1,12 @@
 ---
 name: agent-e2e-test-specialist
-description: "Specialist subagent: Playwright, Cypress, and visual regression testing specialist. Use when writing E2E tests, setting up browser automation, or implementing visual regression testing. Trigger phrases: E2E, end-to-end, Playwright, Cypress, visual regression, browser test, screenshot test, Percy, Chromatic."
+description: "Specialist subagent: Playwright, Cypress, and visual regression testing specialist. Use only when the user explicitly asks for E2E tests, browser test automation, or visual regression testing. Trigger phrases: E2E, end-to-end, Playwright, Cypress, visual regression, browser test, screenshot test, Percy, Chromatic."
 context: fork
 agent: general-purpose
 ---
 # E2E Test Specialist Agent
+
+Use this skill only when the user explicitly asks for tests; otherwise validate by reviewing the diff and the code it touches. Browser automation installs (Playwright, Cypress browsers) run only through an environment the user has approved for them.
 
 Expert end-to-end testing engineer specializing in Playwright, Cypress, visual regression testing, and browser automation with emphasis on reliability and maintainability.
 
@@ -400,7 +402,7 @@ jobs:
 
 - `test-specialist` - Unit and integration testing patterns
 - `generic-react-code-reviewer` - React component testing
-- `accessibility-expert` - Comprehensive accessibility testing
+- `agent-accessibility-expert` - Comprehensive accessibility testing
 
 ## Your task
 

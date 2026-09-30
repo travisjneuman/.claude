@@ -7,6 +7,8 @@ disable-model-invocation: true
 
 Assemble an agent team from pre-built templates or a custom description.
 
+Agent teams are experimental and off by default. They only work in a session started with `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`; if the current session wasn't, say so and offer ordinary subagents instead.
+
 ## Syntax
 
 ```
@@ -25,7 +27,7 @@ Spawns 3 teammates for comprehensive PR/code review:
 
 - **Security reviewer**: OWASP vulnerabilities, auth issues, input validation, secrets exposure
 - **Performance reviewer**: N+1 queries, memory leaks, unnecessary re-renders, bundle impact
-- **Test coverage reviewer**: missing edge cases, inadequate assertions, untested paths
+- **Correctness reviewer**: logic errors, edge cases, error paths, and callers affected by the diff
 
 ### feature - Feature Development
 
@@ -37,7 +39,7 @@ Spawns 3 teammates for end-to-end feature development:
 
 - **Architect**: designs approach, identifies files, plans dependencies (plan approval required)
 - **Implementer**: writes code following the architect's approved plan
-- **Test writer**: writes tests covering the implementation
+- **Reviewer**: reviews the implementation diff against the request and the code it touches (tests only if the user asks)
 
 ### debug - Debug Squad
 

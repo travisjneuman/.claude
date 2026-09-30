@@ -252,7 +252,7 @@ eas update --branch production --message "Bug fix"
 
 ## Release Checklist
 
-- [ ] All tests passing on CI
+- [ ] Existing CI checks green (new test runs only when the user asks)
 - [ ] Version number bumped
 - [ ] Build number incremented
 - [ ] Release notes written
@@ -268,7 +268,7 @@ eas update --branch production --message "Bug fix"
 
 - `~/.claude/skills/react-native/SKILL.md` - React Native development
 - `~/.claude/skills/flutter-development/SKILL.md` - Flutter development
-- `~/.claude/agents/mobile-release-manager.md` - Release management agent
+- `agent-mobile-release-manager` skill - Release management specialist
 - `~/.claude/docs/reference/workflows/deployment-cicd.md` - General CI/CD patterns
 
 ---

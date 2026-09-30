@@ -80,7 +80,7 @@ REFERENCES: [CVE/CWE if applicable]
 
 ## Rules
 
-- Never dismiss potential issues - document everything
+- Report every issue you can support with evidence; label uncertain ones as uncertain rather than dropping or inflating them
 - Provide actionable remediation steps
 - Consider both immediate and systemic fixes
 - Flag patterns, not just instances

@@ -21,4 +21,4 @@ Use `git diff --name-only` and `git log --oneline -5` to gather context.
 
 If arguments provided, include this context: $ARGUMENTS
 
-After writing the handoff, confirm it was saved and remind the user they can start a new session — the SessionStart hook will inject this context automatically.
+After writing the handoff, confirm it was saved. No hook loads it automatically: tell the user to have the next session read `~/.claude/last-session.md`, or to pick this session back up with `claude --continue` / `claude --resume`.

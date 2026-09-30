@@ -120,7 +120,7 @@ Expert technical documentation specialist for architecture decisions, API refere
 
 ## Reference Skills
 
-- `api-designer` - API documentation patterns
+- `agent-api-designer` - API documentation patterns
 - `tech-debt-analyzer` - Documentation debt identification
 - `test-specialist` - Test documentation and coverage reporting
 

@@ -202,7 +202,7 @@ When working on Django/FastAPI tasks:
 2. **Validate all inputs**: Django uses serializers, FastAPI uses Pydantic models. Never trust client data without validation.
 3. **Prevent N+1 queries**: Use `select_related` (FK/OneToOne) and `prefetch_related` (ManyToMany/reverse FK) in Django. Use `joinedload`/`selectinload` in SQLAlchemy.
 4. **Keep views/routes thin**: Business logic belongs in service functions, not in views or route handlers. Views orchestrate; services implement.
-5. **Run `pytest` and `mypy` before committing**: `pytest && mypy src/` (or `mypy apps/` for Django) should always pass.
+5. **Write type-clean code**: code should satisfy `mypy src/` (or `mypy apps/` for Django); confirm by review rather than running a test/type-check ladder, and run `pytest` / `mypy` only when the user asks.
 
 ## Key Patterns
 
@@ -691,9 +691,8 @@ project/
 
 ## Django/FastAPI Checklist
 
-- [ ] `pytest` passes with full coverage
-- [ ] `mypy` passes with strict mode
-- [ ] `ruff check .` passes
+- [ ] Code is `mypy --strict` and `ruff check` clean (confirm by review; run these only when the user asks)
+- [ ] Tests (`pytest`) only when the user asks for them
 - [ ] All functions have type hints
 - [ ] All inputs validated (serializers or Pydantic)
 - [ ] No N+1 queries (select_related/prefetch_related used)
@@ -722,7 +721,7 @@ project/
 ## Reference Skills
 
 - `test-specialist` - Testing patterns for Django/FastAPI
-- `api-designer` - API design principles and patterns
+- `agent-api-designer` - API design principles and patterns
 - `security` - Authentication, authorization, OWASP compliance
 - `tech-debt-analyzer` - Python web code quality review
 - `data-science` - Data processing integration with web apps

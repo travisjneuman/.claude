@@ -304,6 +304,6 @@ RECOGNITION:
 
 ## See Also
 
-- [Fortune 50 Innovation](../fortune50-innovation/SKILL.md)
-- [Fortune 50 Product Management](../fortune50-product-management/SKILL.md)
-- [Fortune 50 Operations](../fortune50-operations/SKILL.md)
+- [Innovation](../innovation/SKILL.md)
+- [Product Management](../product-management/SKILL.md)
+- [Operations](../operations/SKILL.md)

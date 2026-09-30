@@ -1,6 +1,6 @@
 ---
 name: product-analytics
-description: Event tracking architecture, funnels, cohorts, A/B testing, PostHog/Amplitude
+description: Event tracking architecture, funnels, cohorts, A/B testing, PostHog/Amplitude. Use when designing event tracking, building funnels or cohorts, or instrumenting experiments.
 ---
 
 # Product Analytics

@@ -1,5 +1,5 @@
 ---
-description: AI-powered skill recommendation based on your problem description - finds optimal resources from 180 local skills + 82 marketplaces (10,900+ skills)
+description: AI-powered skill recommendation based on your problem description - finds the best local skills, agents, and marketplace resources
 arguments:
   - name: problem
     description: "Describe what you're trying to accomplish or the problem you're facing"
@@ -81,11 +81,11 @@ Additional skills that may help.
 
 #### Relevant Agents
 
-Specialized agents via Task tool.
+Core agents (listed in `~/.claude/agents/README.md`) via the Agent tool; every other specialist is an `agent-<name>` skill invoked via the Skill tool.
 
 #### Marketplace Resources
 
-Skills from 82 marketplace repositories (10,900+ skills) in `~/.claude/plugins/marketplaces/`.
+Skills from the marketplace repositories in `~/.claude/plugins/marketplaces/` (current counts: top of `~/.claude/INDEX.md`).
 
 Search for relevant marketplace skills:
 
@@ -95,57 +95,56 @@ find ~/.claude/plugins/marketplaces -name "SKILL.md" | xargs grep -li "<keyword>
 
 #### Decision Frameworks (if applicable)
 
-- `/consider:first-principles` - Technical choices
-- `/consider:eisenhower-matrix` - Prioritization
-- `/consider:5-whys` - Root cause analysis
-- `/consider:swot` - Trade-off evaluation (SWOT analysis)
+See `~/.claude/skills/toolkit-router/routes/decision-frameworks.md` (first principles, prioritization, 5 whys, SWOT, and others).
 
 ---
 
 ## Quick Match Reference
 
+Agent column: plain names are core agents (Agent tool); `agent-*` names are skills (Skill tool).
+
 | If problem involves...  | Primary Skill                | Agent                     | Marketplace Repos                                  |
 | ----------------------- | ---------------------------- | ------------------------- | -------------------------------------------------- |
-| **Frontend/React**      | `generic-react-*`            | `react-expert`            | wshobson-agents, madappgang, buildwithclaude       |
+| **Frontend/React**      | `generic-react-*`            | `react-expert`            | wshobson-agents, madappgang-claude-code, buildwithclaude       |
 | **Vue.js**              | `vue-development`            | -                         | davila7-templates, athola-night-market             |
 | **Svelte**              | `svelte-development`         | -                         | davila7-templates                                  |
-| **API/backend**         | `api-design`                 | `api-designer`            | buildwithclaude, madappgang                        |
-| **Database**            | `database-expert`            | `database-architect`      | buildwithclaude                                    |
-| **GraphQL**             | `graphql-expert`             | `graphql-architect`       | -                                                  |
+| **API/backend**         | `api-design`                 | `agent-api-designer`            | buildwithclaude, madappgang-claude-code                        |
+| **Database**            | `database-expert`            | `agent-database-expert`      | buildwithclaude                                    |
+| **GraphQL**             | `graphql-expert`             | `agent-graphql-architect`       | -                                                  |
 | **iOS**                 | `ios-development`            | `ios-developer`           | -                                                  |
-| **Android**             | `android-development`        | `android-developer`       | -                                                  |
-| **React Native**        | `react-native`               | `mobile-architect`        | -                                                  |
-| **Flutter**             | `flutter-development`        | `mobile-architect`        | -                                                  |
-| **Desktop**             | `electron-desktop`           | `desktop-developer`       | -                                                  |
-| **Testing**             | `test-specialist`            | `test-generator`          | mhattingpete-skills                                |
+| **Android**             | `android-development`        | `agent-android-developer`       | -                                                  |
+| **React Native**        | `react-native`               | `agent-mobile-architect`        | -                                                  |
+| **Flutter**             | `flutter-development`        | `agent-mobile-architect`        | -                                                  |
+| **Desktop**             | `electron-desktop`           | `agent-desktop-developer`       | -                                                  |
+| **Testing**             | `test-specialist`            | `agent-test-generator`          | mhattingpete-skills                                |
 | **Performance**         | -                            | `performance-optimizer`   | -                                                  |
-| **Security**            | `security`                   | `security-auditor`        | trailofbits-skills (50 skills)                     |
+| **Security**            | `security`                   | `security-auditor`        | trailofbits-skills                     |
 | **Debugging**           | `debug-systematic`           | `debugging-specialist`    | -                                                  |
-| **Documentation**       | `codebase-documenter`        | `documentation-writer`    | -                                                  |
+| **Documentation**       | `codebase-documenter`        | `agent-documentation-writer`    | -                                                  |
 | **Chemistry**           | -                            | -                         | claude-scientific-skills                           |
 | **Physics**             | -                            | -                         | claude-scientific-skills                           |
 | **Proteomics**          | -                            | -                         | claude-scientific-skills                           |
 | **Life Sciences**       | -                            | -                         | anthropic-life-sciences                            |
-| **AI/ML**               | `ai-ml-development`          | `ml-engineer`             | affaan-everything-claude                           |
+| **AI/ML**               | `ai-ml-development`          | `agent-ml-engineer`             | affaan-everything-claude                           |
 | **Data Science**        | `data-science`               | -                         | -                                                  |
 | **Elixir**              | -                            | -                         | bradleygolden-elixir, georgeguimaraes-elixir       |
-| **SAP/Enterprise**      | -                            | -                         | secondsky-sap-skills (33 skills)                   |
+| **SAP/Enterprise**      | -                            | -                         | secondsky-sap-skills                   |
 | **Finance/Equity**      | `finance`                    | -                         | quant-equity-research                              |
-| **Startup**             | `startup-launch`             | `startup-advisor`         | -                                                  |
-| **Pricing**             | `monetization-strategy`      | `monetization-expert`     | -                                                  |
+| **Startup**             | `startup-launch`             | `agent-startup-advisor`         | -                                                  |
+| **Pricing**             | `monetization-strategy`      | `agent-monetization-expert`     | -                                                  |
 | **Marketing**           | `marketing`                  | -                         | -                                                  |
-| **Branding**            | `brand-identity`             | `brand-strategist`        | -                                                  |
-| **Visual Design**       | `graphic-design`             | `graphic-designer`        | -                                                  |
-| **Video/Film**          | `video-production`           | `video-producer`          | -                                                  |
-| **Audio**               | `audio-production`           | `audio-engineer`          | -                                                  |
-| **Animation**           | `ui-animation`               | `motion-designer`         | -                                                  |
+| **Branding**            | `brand-identity`             | `agent-brand-strategist`        | -                                                  |
+| **Visual Design**       | `graphic-design`             | `agent-graphic-designer`        | -                                                  |
+| **Video/Film**          | `video-production`           | `agent-video-producer`          | -                                                  |
+| **Audio**               | `audio-production`           | `agent-audio-engineer`          | -                                                  |
+| **Animation**           | `ui-animation`               | `agent-motion-designer`         | -                                                  |
 | **Context Engineering** | -                            | -                         | neolab-context-kit, muratcankoylan-agent-skills    |
-| **Planning/Files**      | -                            | -                         | othmanadi-planning (12 skills)                     |
-| **Microservices**       | `microservices-architecture` | `microservices-architect` | -                                                  |
-| **Real-time**           | `websockets-realtime`        | `realtime-specialist`     | -                                                  |
-| **i18n**                | `i18n-localization`          | `i18n-specialist`         | -                                                  |
-| **Game Dev**            | `game-development`           | `game-developer`          | -                                                  |
-| **General/Templates**   | -                            | -                         | davila7-templates (651), athola-night-market (125) |
+| **Planning/Files**      | -                            | -                         | othmanadi-planning                     |
+| **Microservices**       | `microservices-architecture` | `agent-microservices-architect` | -                                                  |
+| **Real-time**           | `websockets-realtime`        | `agent-realtime-specialist`     | -                                                  |
+| **i18n**                | `i18n-localization`          | `agent-i18n-specialist`         | -                                                  |
+| **Game Dev**            | `game-development`           | `agent-game-developer`          | -                                                  |
+| **General/Templates**   | -                            | -                         | davila7-templates, athola-night-market |
 
 ---
 
@@ -154,7 +153,7 @@ find ~/.claude/plugins/marketplaces -name "SKILL.md" | xargs grep -li "<keyword>
 ### Problem: "My React app is slow"
 
 **Primary:** `generic-react-code-reviewer`
-**Agent:** `Task(performance-optimizer)`
+**Agent:** `performance-optimizer` (Agent tool)
 **Supporting:** Check for unnecessary re-renders, bundle size
 **Marketplace:** Check wshobson-agents for react-performance
 
@@ -180,13 +179,13 @@ find ~/.claude/plugins/marketplaces -name "SKILL.md" | xargs grep -li "<keyword>
 
 **Primary:** `Skill(api-design)`
 **Supporting:** `Skill(database-expert)`, `Skill(security)`
-**Agent:** `Task(api-designer)`
-**Decision:** `/consider:first-principles` for API style
+**Agent:** `Skill(agent-api-designer)`
+**Decision:** first-principles framework from `decision-frameworks.md` for API style
 
 ### Problem: "Set up CI/CD for my project"
 
 **Primary:** `Skill(devops-cloud)`
-**Agent:** `Task(devops-engineer)`
+**Agent:** `devops-engineer` (Agent tool)
 **Marketplace:** voltagent-subagents has CI/CD specialists
 **Route:** Consider `/gsd-core:new-project` for multi-step setup
 
@@ -210,7 +209,7 @@ Once skills are identified:
 
 1. Load primary skill: `Skill(name)`
 2. Use `/start-task` for intelligent routing (recommended)
-3. Or invoke agent directly via Task tool
+3. Or invoke a core agent directly via the Agent tool, or an `agent-<name>` skill via the Skill tool
 4. For scientific work, check marketplace skills first
 
 ---
@@ -223,5 +222,5 @@ Once skills are identified:
 
 ---
 
-_Intelligent skill discovery across 180 local skills + 82 marketplaces (10,900+ skills)_
+_Intelligent skill discovery across local skills and marketplaces (current counts: `~/.claude/INDEX.md`)_
 

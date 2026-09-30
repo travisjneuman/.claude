@@ -5,7 +5,7 @@ description: Research-first UI/UX design workflow. Use BEFORE any frontend visua
 
 # UI Research
 
-**Research before you design. Every time.**
+Research real products before designing new UI, so the result is grounded in how shipped products solve the problem.
 
 This skill ensures UI work is informed by real-world inspiration, modern patterns, and human-centered design - not generic AI output.
 
@@ -15,7 +15,7 @@ This skill ensures UI work is informed by real-world inspiration, modern pattern
 
 ## When to Use This Skill
 
-**ALWAYS use before:**
+Use before:
 
 - Creating new UI components
 - Designing landing pages
@@ -23,13 +23,11 @@ This skill ensures UI work is informed by real-world inspiration, modern pattern
 - Developing mobile app screens
 - Any visual/frontend work
 
-**This skill is MANDATORY for quality UI work.**
-
 ---
 
 ## Research Workflow
 
-### Phase 1: Define (5 min)
+### Phase 1: Define
 
 Before searching, answer:
 
@@ -41,7 +39,7 @@ Before searching, answer:
 5. What constraints? (existing brand, tech stack, timeline)
 ```
 
-### Phase 2: Research (15-30 min)
+### Phase 2: Research
 
 **Search Strategy:**
 
@@ -72,7 +70,7 @@ Why: Specific UI element inspiration
 | Auth flows   | "login screen", "onboarding", "signup form"               |
 | Settings     | "settings page", "profile settings", "preferences"        |
 
-### Phase 3: Collect (10 min)
+### Phase 3: Collect
 
 Save 5-10 examples that resonate. For each, note:
 
@@ -84,7 +82,7 @@ Unique: [what makes this stand out]
 Adapt: [how to apply to our project]
 ```
 
-### Phase 4: Analyze (10 min)
+### Phase 4: Analyze
 
 **Pattern Recognition:**
 
@@ -105,7 +103,7 @@ Common patterns across examples:
 - [ ] Considered accessibility
 - [ ] Checked mobile responsiveness
 
-### Phase 5: Design Brief (5 min)
+### Phase 5: Design Brief
 
 Before implementing, document:
 
@@ -178,6 +176,11 @@ GENERIC AI PATTERNS (Don't do these):
 - Default color schemes unchanged
 - Cookie-cutter card grids
 - Overused glassmorphism
+- Cream/off-white page background by default
+- Italic accent words inside headlines
+- Numbered "01 / 02 / 03" section labels
+- Monospace eyebrow labels
+- Pill-shaped buttons everywhere
 ```
 
 ### Human Touch Elements
@@ -332,6 +335,3 @@ Before ANY UI work:
 - `generic-design-system` - For design system work
 - `graphic-design` - For visual design principles
 
----
-
-_Research is not optional. It's the difference between generic and exceptional._

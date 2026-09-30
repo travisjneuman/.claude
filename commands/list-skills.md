@@ -34,7 +34,7 @@ Display comprehensive categorized skill overview:
 
 ---
 
-## Local Skills (127 total)
+## Local Skills (current count: top of `~/.claude/INDEX.md`)
 
 ### Foundation
 
@@ -47,7 +47,7 @@ Display comprehensive categorized skill overview:
 - `generic-feature-developer` - Architecture patterns
 - `generic-ux-designer` - UX best practices
 
-### Stack-Specific (12 skills)
+### Stack-Specific
 
 - `generic-static-*` - Static site patterns (4 variants: code-reviewer, design-system, feature-developer, ux-designer)
 - `generic-react-*` - React/TypeScript patterns (4 variants)
@@ -58,7 +58,7 @@ Display comprehensive categorized skill overview:
 - `vue-development` - Vue 3, Composition API, Pinia, Nuxt 3, Vitest
 - `svelte-development` - Svelte 5 runes, SvelteKit, $state/$derived/$effect
 
-### Platform Development (8 skills)
+### Platform Development
 
 - `ios-development` - Swift, SwiftUI, UIKit, Apple platforms
 - `android-development` - Kotlin, Jetpack Compose, Material Design
@@ -69,7 +69,7 @@ Display comprehensive categorized skill overview:
 - `macos-native` - AppKit, Catalyst, macOS system integration
 - `game-development` - Unity, Unreal Engine, Godot
 
-### Technical Architecture (5 skills)
+### Technical Architecture
 
 - `api-design` - REST/GraphQL API patterns
 - `graphql-expert` - Schema design, resolvers, subscriptions
@@ -77,14 +77,14 @@ Display comprehensive categorized skill overview:
 - `websockets-realtime` - Real-time communication (WebSocket, SSE)
 - `i18n-localization` - Internationalization, locale handling
 
-### Infrastructure & Operations (4 skills)
+### Infrastructure & Operations
 
 - `devops-cloud` - CI/CD, Docker, Kubernetes, AWS/GCP/Azure, Terraform
 - `database-expert` - PostgreSQL, MongoDB, Redis, schema design
 - `ai-ml-development` - PyTorch, TensorFlow, LLMs, MLOps
 - `security` - Authentication, OWASP, encryption, vulnerability analysis
 
-### Creative & Design (7 skills)
+### Creative & Design
 
 - `ui-research` - **PREREQUISITE for UI work** - Research inspiration sources
 - `frontend-enhancer` - Modern UI enhancement patterns (requires ui-research)
@@ -94,7 +94,7 @@ Display comprehensive categorized skill overview:
 - `brand-identity` - Brand strategy, positioning, visual identity
 - `ui-animation` - Animation principles, micro-interactions, easing
 
-### Business & Strategy (7 skills)
+### Business & Strategy
 
 - `startup-launch` - Idea validation, MVP, launch phases
 - `monetization-strategy` - Pricing psychology, SaaS metrics, revenue models
@@ -104,7 +104,7 @@ Display comprehensive categorized skill overview:
 - `sales` - Sales methodologies, pipeline management
 - `product-management` - Roadmaps, prioritization, product-market fit
 
-### Domain Expertise (10 skills)
+### Domain Expertise
 
 - `leadership`, `hr-talent`, `health-wellness` - People & Leadership
 - `operations`, `risk-management`, `legal-compliance` - Operations & Technology
@@ -113,52 +113,51 @@ Display comprehensive categorized skill overview:
 - `sustainability-esg` - Environmental, Social, Governance
 - See `EXPERT-SKILLS-GUIDE.md` for complete coverage
 
-### Development Workflow (2 skills)
+### Development Workflow
 
 - `debug-systematic` - 4-phase debugging (REPRODUCE → ISOLATE → DIAGNOSE → FIX)
 - `tdd-workflow` - Test-Driven Development with RED-GREEN-REFACTOR
 
-### Utilities (5 skills)
+### Utilities
 
 - `codebase-documenter` - README, API docs, code comments
 - `tech-debt-analyzer` - Code health analysis
 - `test-specialist` - Testing guidance
 - `seo-analytics-auditor` - SEO and analytics analysis
-- `document-skills` - Office formats (docx, pdf, pptx, xlsx)
 
 ---
 
-## Marketplace Skills (13,000+ total across 109 repos)
+## Marketplace Skills (current repo count: top of `~/.claude/INDEX.md`)
 
-### Top Repos by Skill Count
+### Notable Repos
 
-| Repo                         | Skills | Focus                                     |
-| ---------------------------- | ------ | ----------------------------------------- |
-| davila7-templates            | 651    | Templates and code patterns               |
-| claude-scientific-skills     | 144    | Scientific computing (bio, chem, physics) |
-| wshobson-agents              | 129    | Progressive disclosure architecture       |
-| athola-night-market          | 125    | General-purpose skill marketplace         |
-| madappgang-claude-code       | 110    | Full-stack development                    |
-| trailofbits-skills           | 50     | Professional security auditing            |
-| buildwithclaude              | 43     | Full-stack + subagents + commands         |
-| alirezarezvani-claude-skills | 42     | General development                       |
-| skillsforge                  | 34     | Curated quality skills                    |
-| secondsky-sap-skills         | 33     | SAP and enterprise                        |
-| awesome-claude-skills        | 32     | Documents, canvas, forensics              |
+| Repo                         | Focus                                     |
+| ---------------------------- | ----------------------------------------- |
+| davila7-templates            | Templates and code patterns               |
+| claude-scientific-skills     | Scientific computing (bio, chem, physics) |
+| wshobson-agents              | Progressive disclosure architecture       |
+| athola-night-market          | General-purpose skill marketplace         |
+| madappgang-claude-code       | Full-stack development                    |
+| trailofbits-skills           | Professional security auditing            |
+| buildwithclaude              | Full-stack + subagents + commands         |
+| alirezarezvani-claude-skills | General development                       |
+| skillsforge                  | Curated quality skills                    |
+| secondsky-sap-skills         | SAP and enterprise                        |
+| awesome-claude-skills        | Documents, canvas, forensics              |
 
 ### Specialized Repos
 
-- **Security:** trailofbits-skills (50 professional security skills)
-- **Scientific:** claude-scientific-skills (144), anthropic-life-sciences (6), gqy20-biology-plugins
-- **Enterprise/SAP:** secondsky-sap-skills (33)
-- **Elixir:** bradleygolden-elixir (4), georgeguimaraes-elixir (6)
-- **Terraform/IaC:** hashi-terraform-skills (4)
-- **Perl/CPAN:** kfly8-cpan-plugins (3)
+- **Security:** trailofbits-skills (professional security auditing)
+- **Scientific:** claude-scientific-skills, anthropic-life-sciences, gqy20-biology-plugins
+- **Enterprise/SAP:** secondsky-sap-skills
+- **Elixir:** bradleygolden-elixir, georgeguimaraes-elixir
+- **Terraform/IaC:** hashi-terraform-skills
+- **Perl/CPAN:** kfly8-cpan-plugins
 - **Finance:** quant-equity-research
-- **Context Engineering:** neolab-context-kit (11), muratcankoylan-agent-skills (19)
-- **Planning:** othmanadi-planning (12)
-- **Infrastructure:** diet103-infrastructure (5)
-- **Meta-Skills:** taches-cc-resources (11), claude-plugins-official (13)
+- **Context Engineering:** neolab-context-kit, muratcankoylan-agent-skills
+- **Planning:** othmanadi-planning
+- **Infrastructure:** diet103-infrastructure
+- **Meta-Skills:** taches-cc-resources, claude-plugins-official
 - **Workflow:** gsd-core, auto-claude
 
 ### Search Marketplace Skills
@@ -218,5 +217,5 @@ Just describe your task - skills auto-activate based on description matching.
 
 ---
 
-_180 local skills + 82 marketplaces (10,900+ skills) = comprehensive coverage for any domain_
+_Local skills + marketplaces = coverage for any domain (current counts: `~/.claude/INDEX.md`)_
 

@@ -9,17 +9,9 @@ Review Next.js/NestJS code against production quality standards.
 
 **Extends:** [Generic Code Reviewer](../generic-code-reviewer/SKILL.md) - Read base skill for full code review methodology, P0/P1/P2 priority system, and judgment calls.
 
-## Pre-Commit Commands
+## Pre-Commit Validation
 
-```bash
-# Frontend
-npm run build        # Next.js build
-npm run lint         # ESLint
-
-# Backend
-npm run test         # NestJS tests
-npm run type-check   # TypeScript
-```
+Validate by reading the diff, not by running a test/lint/build ladder; the checks below are what to look for.
 
 ## Fullstack-Specific Checks
 
@@ -133,7 +125,7 @@ npx prisma generate
 - Types regenerated after schema changes
 - Relations properly defined
 
-## Testing Requirements
+## Testing Patterns (when the user asks for tests)
 
 **Backend:**
 

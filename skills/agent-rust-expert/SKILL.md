@@ -98,7 +98,7 @@ When working on Rust tasks:
 1. **Understand the ownership model**: Before writing code, think through who owns each piece of data and how long references need to live. This prevents fighting the borrow checker.
 2. **Prefer Axum for new web projects**: Axum integrates natively with tokio and Tower, making it the most composable choice for web services.
 3. **Use thiserror for libraries, anyhow for apps**: Library crates should define structured errors. Applications can use anyhow for convenience.
-4. **Run clippy and tests before committing**: `cargo clippy -- -D warnings && cargo test` should always pass.
+4. **Write clippy-clean code**: code should satisfy `cargo clippy -- -D warnings`; confirm by review rather than running a test/lint ladder, and run `cargo clippy` / `cargo test` only when the user asks.
 5. **Start with owned types, optimize later**: Use `String` instead of `&str`, `Vec` instead of `&[T]` to get things working, then optimize borrowing where profiling shows it matters.
 
 ## Key Patterns
@@ -458,9 +458,7 @@ mod tests {
 
 ## Rust Checklist
 
-- [ ] `cargo clippy -- -D warnings` passes
-- [ ] `cargo test` passes
-- [ ] `cargo fmt` applied
+- [ ] Code is clippy-clean (`cargo clippy -- -D warnings`) and `cargo fmt`-formatted (confirm by review; run these only when the user asks)
 - [ ] No `unwrap()` in production code (use `?` or `expect` with context)
 - [ ] No `unsafe` without documented justification
 - [ ] Error types implement `std::error::Error`
@@ -471,7 +469,7 @@ mod tests {
 
 - `test-specialist` - Testing patterns for Rust
 - `performance-optimizer` - Performance tuning and profiling
-- `api-designer` - API design for web services
+- `agent-api-designer` - API design for web services
 - `security` - Secure coding in Rust
 
 ## Your task

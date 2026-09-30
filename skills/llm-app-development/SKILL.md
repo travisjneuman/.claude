@@ -565,7 +565,7 @@ console.log(`Average relevance: ${results.scores.answer_relevance}`);
 |---|---|---|
 | **Zero-shot** | Simple, well-defined tasks | "Classify this email as spam or not:" |
 | **Few-shot** | Pattern demonstration needed | "Here are examples:\n..." |
-| **Chain-of-thought** | Reasoning tasks | "Think step by step:" |
+| **Model thinking** | Reasoning tasks | Enable the provider's thinking/effort setting instead of a "think step by step" prefix |
 | **System prompt** | Persistent behavior rules | `role: "system"` message |
 | **Delimiters** | Separating context from instructions | `"""context"""` or `<context>` tags |
 

@@ -1,6 +1,6 @@
 ---
 name: monitoring-observability
-description: OpenTelemetry, structured logging, distributed tracing, alerting, and dashboards
+description: OpenTelemetry, structured logging, distributed tracing, alerting, and dashboards. Use when instrumenting services, designing logs/traces/metrics, defining SLOs and alerts, or debugging production behavior from telemetry.
 ---
 
 # Monitoring & Observability

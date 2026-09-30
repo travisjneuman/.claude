@@ -20,9 +20,9 @@ Comprehensive diagnostics for Claude Code toolkit.
 
 | Platform | Status | Notes                                             |
 | -------- | ------ | ------------------------------------------------- |
-| Windows  | ✅     | Requires Git Bash (included with Git for Windows) |
-| macOS    | ✅     | Works with bash/zsh                               |
-| Linux    | ✅     | Works with bash                                   |
+| Windows  | OK     | Requires Git Bash (included with Git for Windows) |
+| macOS    | OK     | Works with bash/zsh                               |
+| Linux    | OK     | Works with bash                                   |
 
 All commands use POSIX-compatible syntax that works across platforms.
 
@@ -49,13 +49,15 @@ Verify:
 
 **Check directory structure:**
 
-| Directory               | Expected  | Check                                         |
-| ----------------------- | --------- | --------------------------------------------- |
-| `skills/`               | 115+ items | `ls ~/.claude/skills/ \| wc -l`              |
-| `agents/`               | 86+ files | `ls ~/.claude/agents/*.md \| wc -l`           |
-| `commands/`             | 30+ files | `ls ~/.claude/commands/*.md \| wc -l`         |
-| `templates/`            | 5+ files  | `ls ~/.claude/templates/ \| wc -l`            |
-| `plugins/marketplaces/` | 108 repos  | `ls ~/.claude/plugins/marketplaces/ \| wc -l` |
+Compare each count with the generated counts line at the top of `~/.claude/INDEX.md` (don't hard-code expected numbers here; they go stale).
+
+| Directory               | Expected         | Check                                         |
+| ----------------------- | ---------------- | --------------------------------------------- |
+| `skills/`               | per INDEX.md     | `ls ~/.claude/skills/ \| wc -l`               |
+| `agents/`               | per INDEX.md (+ README.md) | `ls ~/.claude/agents/*.md \| wc -l` |
+| `commands/`             | per INDEX.md     | `ls ~/.claude/commands/*.md \| wc -l`         |
+| `templates/`            | non-empty        | `ls ~/.claude/templates/ \| wc -l`            |
+| `plugins/marketplaces/` | per INDEX.md     | `ls ~/.claude/plugins/marketplaces/ \| wc -l` |
 
 ### Step 3: Hooks Status
 
@@ -97,11 +99,11 @@ grep -A1 '"disabledMcpjsonServers"' ~/.claude/settings.json
 ╔════════════════════════════════════════════════════════════╗
 ║  Claude Code Toolkit Health Check                          ║
 ╠════════════════════════════════════════════════════════════╣
-║  Configuration:  ✅ OK                                      ║
-║  Structure:      ✅ OK (127 skills, 86 agents, 90 markets)  ║
-║  Hooks:          ✅ 8 hooks across 8 events                   ║
-║  Git:            ✅ Clean, submodules synced               ║
-║  MCP Servers:    ✅ 12 available (all disabled by default) ║
+║  Configuration:  OK OK                                      ║
+║  Structure:      OK OK (N skills, N agents, N markets)      ║
+║  Hooks:          OK 8 hooks across 8 events                   ║
+║  Git:            OK Clean, submodules synced               ║
+║  MCP Servers:    OK 12 available (all disabled by default) ║
 ╠════════════════════════════════════════════════════════════╣
 ║  Status: HEALTHY                                            ║
 ╚════════════════════════════════════════════════════════════╝
@@ -140,7 +142,6 @@ If issues found, provide:
 ## Related
 
 - `docs/reference/tooling/troubleshooting.md` - Common fixes
-- `/session-log` - View session activity
 - `/backup-config` - Backup before changes
 
 ---

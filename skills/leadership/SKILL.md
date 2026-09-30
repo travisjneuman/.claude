@@ -367,6 +367,6 @@ Will - Action steps, accountability, commitment
 
 ## See Also
 
-- [Fortune 50 HR/Talent](../fortune50-hr-talent/SKILL.md)
-- [Fortune 50 Business Strategy](../fortune50-business-strategy/SKILL.md)
-- [Fortune 50 Risk Management](../fortune50-risk-management/SKILL.md)
+- [HR/Talent](../hr-talent/SKILL.md)
+- [Business Strategy](../business-strategy/SKILL.md)
+- [Risk Management](../risk-management/SKILL.md)

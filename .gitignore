@@ -43,6 +43,9 @@ session-env/
 # Session config backups (rotating .claude.json snapshots)
 backups/
 
+# /backup-config snapshots (local-only)
+.backups/
+
 # Debug logs
 debug/
 

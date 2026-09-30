@@ -13,10 +13,6 @@ Skills and agents auto-match from descriptions. CLAUDE.md routes docs/checklists
 
 ## Execution Protocol
 
-### Step 0: Effort
-
-Use the effort level selected for the session. Think harder on architecture and hard debugging, not on routine edits.
-
 ### Step 1: Environment Context & Research
 
 **Current date from environment:** Use `Today's date` value for temporal reasoning.
@@ -68,7 +64,7 @@ Extract from the domain file: **skill** to invoke, **agent** to spawn, **context
 
 - Invoke identified skill(s) from domain files
 - Use `TodoWrite` for multi-step tracking (always for 3+ steps)
-- Spawn agents via `Task` tool as needed
+- Spawn core agents via the Agent tool, or invoke `agent-<name>` skills via the Skill tool, as needed
 - For specialized domains: `find ~/.claude/plugins/marketplaces -name "SKILL.md" | xargs grep -li "<keyword>"`
 
 ### Step 7: Verify

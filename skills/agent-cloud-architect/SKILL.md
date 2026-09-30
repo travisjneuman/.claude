@@ -263,7 +263,7 @@ module "ecs_service" {
 ## Reference Skills
 
 - `devops-engineer` - CI/CD and infrastructure automation
-- `microservices-architect` - Service decomposition
+- `agent-microservices-architect` - Service decomposition
 - `security` - Security architecture review
 - `database-expert` - Database architecture decisions
 

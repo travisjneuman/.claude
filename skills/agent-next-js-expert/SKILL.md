@@ -412,9 +412,9 @@ Invalidation:
 ## Reference Skills
 
 - `generic-react-feature-developer` - React component patterns
-- `seo-specialist` - SEO optimization for Next.js
-- `auth-specialist` - Authentication patterns in Next.js
-- `e2e-test-specialist` - Testing Next.js applications
+- `agent-seo-specialist` - SEO optimization for Next.js
+- `agent-auth-specialist` - Authentication patterns in Next.js
+- `agent-e2e-test-specialist` - Testing Next.js applications
 
 ## Your task
 

@@ -545,4 +545,4 @@ WRITING PRINCIPLES:
 
 - [Literature Review Planner](../literature-review-planner/SKILL.md)
 - [Data Science](../data-science/SKILL.md)
-- [Fortune 50 Finance](../fortune50-finance/SKILL.md)
+- [Finance](../finance/SKILL.md)

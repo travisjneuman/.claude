@@ -533,17 +533,15 @@ export default defineConfig({
 
 ## Testing PWA
 
+Run these checks only when the user asks for them.
+
 ### Lighthouse Audit
 
-1. Open Chrome DevTools
-2. Go to Lighthouse tab
-3. Select "Progressive Web App"
-4. Run audit
+Lighthouse 12+ has no PWA category; check installability in DevTools > Application > Manifest.
 
-### Required Scores
+### Target Scores
 
 - Performance: 90+
-- PWA: 100
 - Accessibility: 90+
 - Best Practices: 90+
 

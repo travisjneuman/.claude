@@ -86,7 +86,7 @@ This repo underwent a security audit before being made public. The following wer
     │   ├── pull-repos.md           ← /pull-repos - Update external repos
     │   ├── review-code.md          ← /review-code - Code review
     │   ├── run.md                  ← /run - Execute prompts
-    │   ├── session-log.md          ← /session-log - Session logging
+    │   ├── session-log.md          ← /session-log - Retired (points to --resume, /usage)
     │   ├── skill-finder.md         ← /skill-finder - Find skills
     │   ├── standardize-claude-md.md ← /standardize-claude-md - CLAUDE.md format
     │   ├── start-task.md           ← /start-task - Intelligent task router
@@ -394,7 +394,7 @@ Custom commands that appear as `/command-name` in Claude Code.
 | `pull-repos.md`            | `/pull-repos`            | Pull updates for external repos     |
 | `review-code.md`           | `/review-code`           | Code review workflow                |
 | `run.md`                   | `/run`                   | Execute prompts with auto-archiving |
-| `session-log.md`           | `/session-log`           | Create session log                  |
+| `session-log.md`           | `/session-log`           | Retired; points to session history  |
 | `skill-finder.md`          | `/skill-finder`          | Find skills by keyword              |
 | `standardize-claude-md.md` | `/standardize-claude-md` | Standardize CLAUDE.md format        |
 | `start-task.md`            | `/start-task`            | Intelligent task router (modular)   |

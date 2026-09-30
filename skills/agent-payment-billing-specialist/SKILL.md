@@ -360,7 +360,7 @@ async function reportUsage(
 
 ## Reference Skills
 
-- `auth-specialist` - User authentication for billing pages
+- `agent-auth-specialist` - User authentication for billing pages
 - `generic-fullstack-feature-developer` - Full-stack integration
 - `test-specialist` - Testing payment flows (Stripe test mode)
 - `security` - PCI compliance and secure handling

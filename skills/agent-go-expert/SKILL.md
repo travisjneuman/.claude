@@ -108,7 +108,7 @@ When working on Go tasks:
 2. **Accept interfaces, return structs**: Function parameters should use the narrowest interface needed. Return concrete types.
 3. **Handle every error**: Never use `_` to discard errors in production code. Wrap errors with context using `fmt.Errorf("operation: %w", err)`.
 4. **Use context.Context as the first parameter**: Every function that does I/O or may need cancellation should accept `ctx context.Context`.
-5. **Run `go vet` and `golangci-lint` before committing**: `go vet ./... && golangci-lint run` should always pass.
+5. **Write vet- and lint-clean code**: code should satisfy `go vet ./...` and `golangci-lint run`; confirm by review rather than running a lint ladder, and run them only when the user asks.
 
 ## Key Patterns
 
@@ -490,9 +490,7 @@ project/
 
 ## Go Checklist
 
-- [ ] `go vet ./...` passes
-- [ ] `golangci-lint run` passes
-- [ ] `go test -race ./...` passes
+- [ ] Code is `go vet` / `golangci-lint` clean and race-free under `go test -race` (confirm by review; run these only when the user asks)
 - [ ] All errors handled (no `_` for error values)
 - [ ] Context propagated through all I/O functions
 - [ ] Goroutines have proper lifecycle management
@@ -502,8 +500,8 @@ project/
 ## Reference Skills
 
 - `test-specialist` - Testing patterns for Go
-- `api-designer` - API design for Go services
-- `microservices-architect` - Distributed system patterns
+- `agent-api-designer` - API design for Go services
+- `agent-microservices-architect` - Distributed system patterns
 - `database-expert` - Database integration with Go
 
 ## Your task

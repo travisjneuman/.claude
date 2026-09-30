@@ -1,24 +1,25 @@
 ---
 name: test-specialist
-description: This skill should be used when writing test cases, fixing bugs, analyzing code for potential issues, or improving test coverage for JavaScript/TypeScript applications. Use this for unit tests, integration tests, end-to-end tests, debugging runtime errors, logic bugs, performance issues, security vulnerabilities, and systematic code analysis.
+description: Test-writing patterns for JS/TS, Python, Go, and Rust (unit, integration, E2E, visual regression). Use only when the user explicitly asks for tests or test coverage; for debugging without a test request, use debug-systematic.
 ---
 
 # Test Specialist
 
-Systematic testing methodologies and debugging techniques for JS/TS applications.
+Test-writing patterns for JS/TS, Python, Go, and Rust, plus bug-analysis habits that apply when tests are requested.
 
 ## When to Use
 
-**Use for:**
+Use this skill only when the user explicitly asks for tests. Without that request, validate by reviewing the diff and the code it touches.
+
+**Use for (when tests are requested):**
 
 - Writing unit, integration, or E2E tests
-- Fixing bugs and debugging
 - Improving test coverage
-- Analyzing code for potential issues
-- Security and performance testing
+- Security and performance tests
 
 **Don't use when:**
 
+- Debugging without a test request → use `debug-systematic`
 - Code review → use `generic-code-reviewer`
 - Technical debt → use `tech-debt-analyzer`
 - Feature development → use `generic-feature-developer`
@@ -30,6 +31,8 @@ Systematic testing methodologies and debugging techniques for JS/TS applications
 | React/Next.js | Vitest/Jest | Testing Library | Playwright |
 | Node.js       | Vitest/Jest | Supertest       | Playwright |
 | Static        | Jest        | -               | Playwright |
+
+Browser automation (Playwright, Percy, Chromatic, `npx` browser installs) is not installed or run on the owner's Mac. Run it only when the user asks, through an environment they have approved for it.
 
 ## Test Patterns
 
@@ -108,8 +111,8 @@ test("POST /items creates item", async () => {
 1. **Reproduce** - Document exact steps, expected vs actual
 2. **Isolate** - Binary search, minimal reproduction
 3. **Root Cause** - Trace execution, check assumptions, git blame
-4. **Fix** - Write failing test first, implement fix
-5. **Validate** - Run full suite, test edge cases
+4. **Fix** - Fix the root cause (write a failing test first only when the user asked for tests)
+5. **Validate** - Review the diff and the code paths it touches against the reproduction and edge cases
 
 ## Debugging Checklist
 
@@ -120,7 +123,7 @@ When debugging an issue:
 - [ ] Console/network logs checked
 - [ ] State at failure point inspected
 - [ ] Git blame checked for recent changes
-- [ ] Failing test written before fix
+- [ ] Fix reviewed against the reproduction (failing test only if tests were requested)
 
 ## Common Bug Patterns
 
@@ -201,12 +204,12 @@ test("handles large datasets efficiently", () => {
 
 ## Workflow Decision Tree
 
-| Situation          | Action                               |
-| ------------------ | ------------------------------------ |
-| Adding feature     | Write test first (TDD)               |
-| Fixing bug         | Write failing test, then fix         |
-| Improving coverage | Find gaps, prioritize critical paths |
-| Code review        | Check edge cases, error handling     |
+| Situation                        | Action                               |
+| -------------------------------- | ------------------------------------ |
+| Adding feature (tests requested) | Write test first (TDD)               |
+| Fixing bug (tests requested)     | Write failing test, then fix         |
+| Improving coverage               | Find gaps, prioritize critical paths |
+| Code review                      | Check edge cases, error handling     |
 
 ---
 

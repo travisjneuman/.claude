@@ -532,7 +532,7 @@ jobs:
 - [ ] `prefers-reduced-motion` media query respected for animations
 - [ ] Page has correct heading hierarchy (h1 > h2 > h3, no skips)
 - [ ] Language is declared (`<html lang="en">`)
-- [ ] axe-core tests passing in CI
+- [ ] axe-core checks in CI (only when the user asks for automated a11y tests)
 - [ ] Manual testing done with VoiceOver (macOS) or NVDA (Windows)
 
 ---

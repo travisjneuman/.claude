@@ -16,8 +16,7 @@ Review code against production quality standards. Adapts to any project's tech s
 **Before ANY Commit:**
 
 - Task file exists in `tasks/[feature-name].md`
-- All tests passing
-- Type checking passing (if TypeScript)
+- Diff reviewed against the request, callers, and edge cases
 - No console errors/warnings
 - Bundle size within limits
 
@@ -123,9 +122,7 @@ Adjust severity accordingly. P0 security issues are never lenient.
 
 **Pre-Commit:**
 
-- [ ] Tests pass
-- [ ] Type/lint pass
-- [ ] Build succeeds
+- [ ] Diff reviewed (inputs, edge cases, error paths, callers)
 - [ ] No console errors
 
 **Before Merge:**

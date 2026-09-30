@@ -238,7 +238,7 @@ class UserRepositoryTest {
 
 - `~/.claude/skills/android-development/SKILL.md` - Android patterns
 - `~/.claude/skills/ios-development/SKILL.md` - iOS patterns
-- `~/.claude/agents/flutter-developer.md` - Alternative cross-platform
+- `agent-flutter-developer` skill - Alternative cross-platform
 
 ---
 

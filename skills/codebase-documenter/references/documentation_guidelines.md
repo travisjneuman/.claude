@@ -435,11 +435,11 @@ Replace `username` with `email` and wrap parameters in an object.
 
 ## Testing Documentation
 
-**Test all code examples:**
-- Verify commands actually work
-- Test setup instructions on clean environment
-- Check that links aren't broken
-- Validate code snippets compile/run
+**Check all code examples by reading (run them only when the user asks):**
+- Commands match the project's scripts, package manager, and paths
+- Setup instructions cover every step from a clean environment
+- Links point at files and pages that exist
+- Snippets match the current APIs, signatures, and imports
 
 **Make documentation testable:**
 ```markdown
@@ -537,7 +537,7 @@ Examples:
 2. **Complete** - No critical gaps in coverage
 3. **Clear** - Easy to understand for target audience
 4. **Organized** - Information is easy to find
-5. **Tested** - Examples and instructions actually work
+5. **Checked** - Examples and instructions match the current code
 6. **Maintained** - Kept current as code changes
 7. **Accessible** - Works for different learning styles
 8. **Actionable** - Users can accomplish their goals

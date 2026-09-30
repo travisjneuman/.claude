@@ -14,7 +14,7 @@
 #
 # Features:
 #   - Pulls parent repo first, then marketplace clones, then custom directories
-#   - Automatically fixes detached HEAD state
+#   - Reports and skips repos in detached HEAD state (never checks out)
 #   - Detects main/master/development branches
 #   - Enforces no_push on marketplace and non-Travis-owned custom repos
 #   - Safe: only fast-forward pulls, never merges, rebases, pushes external repos, or discards changes

@@ -1,6 +1,6 @@
 ---
 name: payment-integration
-description: Stripe, RevenueCat, subscription billing, webhooks, PCI compliance, and tax
+description: Stripe, RevenueCat, subscription billing, webhooks, PCI compliance, and tax. Use when integrating payments or subscriptions, handling payment webhooks, or reviewing billing and PCI scope.
 ---
 
 # Payment Integration

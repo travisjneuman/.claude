@@ -67,7 +67,7 @@ git bisect good  # or git bisect bad
 
 **Environment Isolation**:
 
-- Test in isolation (unit test the failing path)
+- Exercise the failing path in isolation (minimal reproduction; a unit test only when the user asked for tests)
 - Compare working vs broken environments
 - Use fresh installs to eliminate pollution
 
@@ -116,18 +116,17 @@ console.log("[DEBUG] Function exit:", { returnValue });
 
 **Fix Process**:
 
-1. **Write a failing test** that captures the bug
-2. **Implement minimal fix** - change as little as possible
-3. **Verify test passes** - confirms fix works
-4. **Check for similar patterns** - same bug elsewhere?
-5. **Review fix for side effects** - does it break anything?
-6. **Document the fix** - why it happened, how to prevent
+1. **Implement minimal fix** - change as little as possible
+2. **Check for similar patterns** - same bug elsewhere?
+3. **Review fix for side effects** - read the callers, inputs, and error paths it touches
+4. **Document the fix** - why it happened, how to prevent
+
+Write a failing test that captures the bug only when the user asked for tests.
 
 **Verification Checklist**:
 
-- [ ] Test passes that specifically catches this bug
-- [ ] Existing tests still pass
-- [ ] Manual verification confirms fix
+- [ ] Review shows the Phase 3 root cause is addressed, not just the symptom
+- [ ] The output the fix already produces (the reproduction, the command that did the work) confirms it
 - [ ] Fix works in all affected environments
 - [ ] No new warnings or errors introduced
 
@@ -197,7 +196,7 @@ console.log("[DEBUG] Function exit:", { returnValue });
 ### Fix
 
 - Code changes made
-- Test added
+- What review confirmed, and what it couldn't
 
 ### Prevention
 

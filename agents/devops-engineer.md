@@ -79,6 +79,8 @@ When working on infrastructure:
 
 ### GitHub Actions
 
+Reference example for a project that already has CI. Adding new hosted CI, workflows, or schedules to a repo needs the owner's explicit approval first.
+
 ```yaml
 name: CI
 on: [push, pull_request]
@@ -89,7 +91,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "24"
           cache: "npm"
       - run: npm ci
       - run: npm test

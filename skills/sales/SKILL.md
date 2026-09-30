@@ -319,6 +319,6 @@ If low deal size → Targeting, value selling
 
 ## See Also
 
-- [Fortune 50 Marketing](../fortune50-marketing/SKILL.md)
-- [Fortune 50 Product Management](../fortune50-product-management/SKILL.md)
-- [Fortune 50 Finance](../fortune50-finance/SKILL.md)
+- [Marketing](../marketing/SKILL.md)
+- [Product Management](../product-management/SKILL.md)
+- [Finance](../finance/SKILL.md)

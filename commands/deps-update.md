@@ -9,7 +9,7 @@ disable-model-invocation: true
 
 # Dependency Update Manager
 
-Checks for outdated dependencies, identifies security advisories, tests compatibility, and creates an update plan.
+Checks for outdated dependencies, identifies security advisories, checks compatibility, and creates an update plan.
 
 ---
 
@@ -119,7 +119,7 @@ go get <module>@latest
 cargo update <crate>
 ```
 
-After each update, run tests to verify nothing breaks.
+After each update, check the release notes for APIs the project uses, then build.
 
 #### minor
 
@@ -139,11 +139,9 @@ go get -u ./...
 cargo update
 ```
 
-**After updating, run full verification:**
+**After updating, build the project:**
 
 ```bash
-npm run test 2>/dev/null || pytest 2>/dev/null || go test ./... 2>/dev/null
-npm run type-check 2>/dev/null || mypy src/ 2>/dev/null
 npm run build 2>/dev/null || go build ./... 2>/dev/null
 ```
 
@@ -172,7 +170,7 @@ Priority 2 (Maintenance):
       Effort: Large (4-8 hours)
 ```
 
-**Update major versions one at a time**, running tests after each.
+**Update major versions one at a time**, building and reviewing affected call sites after each.
 
 ---
 
@@ -184,16 +182,7 @@ After any updates:
 # 1. Clean install
 rm -rf node_modules && npm install
 
-# 2. Type check
-npm run type-check 2>/dev/null
-
-# 3. Lint
-npm run lint 2>/dev/null
-
-# 4. Test
-npm run test 2>/dev/null
-
-# 5. Build
+# 2. Build
 npm run build 2>/dev/null
 ```
 
@@ -220,17 +209,14 @@ After:
   Vulnerabilities: X remaining
 
 Verification:
-  Tests:     PASS
-  Types:     PASS
   Build:     PASS
-  Lint:      PASS
 ```
 
 ---
 
 ## Safety Rules
 
-- Always run tests after updates
+- Build after updates; run tests only when the user asks
 - Never update all major versions at once
 - Security updates take priority
 - Keep lock files committed

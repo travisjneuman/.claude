@@ -208,7 +208,8 @@ Estimated Impact: 40% faster page load, 60% fewer database queries
 | Bundle size (gzip)  | < 200 KB  | webpack-bundle-analyzer   |
 | First Contentful    | < 1.8s    | Lighthouse                |
 | Largest Contentful  | < 2.5s    | Lighthouse                |
-| Time to Interactive | < 3.8s    | Lighthouse                |
+| Interaction to Next Paint | < 200ms | CrUX / web-vitals     |
+| Cumulative Layout Shift | < 0.1   | CrUX / web-vitals         |
 | API p95 latency     | < 200ms   | Application monitoring    |
 | Database query time | < 50ms    | Query logging             |
 

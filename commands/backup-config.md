@@ -43,6 +43,8 @@ All commands use POSIX utilities (`mkdir`, `cp`, `ls`, `date`).
 ~/.claude/.backups/
 ```
 
+`.backups/` is gitignored in `~/.claude`, so snapshots stay local and are never committed.
+
 ## Actions
 
 ### create (default)
@@ -99,8 +101,11 @@ if [ ! -d "$BACKUP_DIR" ]; then
 fi
 
 # Create safety backup first
-mkdir -p ~/.claude/.backups/pre-restore-$(date +%Y%m%d-%H%M%S)
-cp ~/.claude/settings.json ~/.claude/.backups/pre-restore-*/
+SAFETY_DIR=~/.claude/.backups/pre-restore-$(date +%Y%m%d-%H%M%S)
+mkdir -p "$SAFETY_DIR"
+cp ~/.claude/settings.json "$SAFETY_DIR/"
+cp ~/.claude/CLAUDE.md "$SAFETY_DIR/" 2>/dev/null || true
+cp ~/.claude/.mcp.json "$SAFETY_DIR/" 2>/dev/null || true
 
 # Restore files
 cp "$BACKUP_DIR/settings.json" ~/.claude/
@@ -159,17 +164,11 @@ Creates: `before-experiment`
 
 1. **Before experiments** - Backup before testing new hooks/settings
 2. **Before updates** - Backup before updating toolkit
-3. **Regular backups** - Weekly automated backups
-4. **Named backups** - Use descriptive names for important states
+3. **Named backups** - Use descriptive names for important states
 
 ## Automation
 
-Add to cron for weekly backups:
-
-```bash
-# Add to crontab
-0 0 * * 0 mkdir -p ~/.claude/.backups && cp ~/.claude/settings.json ~/.claude/.backups/weekly-$(date +\%Y\%m\%d).json
-```
+Backups are manual. Don't add cron jobs or other schedules for this; new schedules need the owner's explicit approval.
 
 ## Related
 

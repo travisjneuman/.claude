@@ -282,6 +282,6 @@ FAIRNESS METRICS:
 
 ## See Also
 
-- [Fortune 50 Product Management](../fortune50-product-management/SKILL.md)
-- [Fortune 50 Business Strategy](../fortune50-business-strategy/SKILL.md)
-- [Fortune 50 Finance](../fortune50-finance/SKILL.md)
+- [Product Management](../product-management/SKILL.md)
+- [Business Strategy](../business-strategy/SKILL.md)
+- [Finance](../finance/SKILL.md)
