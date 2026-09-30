@@ -4,6 +4,7 @@ arguments:
   - name: focus
     description: "Optional focus area: a specific module, feature, or directory to scope the plan (e.g., 'src/auth', 'payment flow')"
     required: false
+disable-model-invocation: true
 ---
 
 # Test Plan Generator

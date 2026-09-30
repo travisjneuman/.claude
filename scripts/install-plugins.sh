@@ -6,7 +6,9 @@
 # 1. Installs every plugin set to true in ~/.claude/settings.json (user scope)
 #    or ~/.claude/.claude/settings.json (project scope: loads only inside the
 #    toolkit repo) that isn't installed yet.
-# 2. Installs the language-server binaries the enabled LSP plugins need.
+# 2. Registers and refreshes each GitHub marketplace those plugins come from
+#    (extraKnownMarketplaces).
+# 3. Installs the language-server binaries the enabled LSP plugins need.
 #
 # The daily background pull runs this, so every machine converges on the same
 # plugins without manual steps. Nothing is uninstalled.
@@ -17,14 +19,6 @@ command -v claude >/dev/null 2>&1 || exit 0
 command -v node >/dev/null 2>&1 || exit 0
 export CLAUDE_TOOLKIT_SKIP_SESSION_END=1   # claude subcommands fire SessionEnd; skip the repo walk
 
-# Make sure the official marketplace is registered and its catalog is current.
-if ! claude plugin marketplace list 2>/dev/null | grep -q "claude-plugins-official"; then
-  claude plugin marketplace add anthropics/claude-plugins-official </dev/null >/dev/null 2>&1
-fi
-claude plugin marketplace update claude-plugins-official </dev/null >/dev/null 2>&1
-
-installed=$(cd "$CLAUDE_DIR" && claude plugin list --json 2>/dev/null || echo '[]')
-
 wanted=$(node -e '
   const fs=require("fs"),p=require("path"),h=require("os").homedir();
   const read=f=>{try{return JSON.parse(fs.readFileSync(f,"utf8")).enabledPlugins||{}}catch{return {}}};
@@ -33,6 +27,24 @@ wanted=$(node -e '
   for (const [id,on] of Object.entries(read(p.join(h,".claude",".claude","settings.json")))) if(on===true) out.push(id+" project");
   console.log(out.join("\n"));
 ')
+
+# Register every GitHub marketplace an enabled plugin comes from (listed in
+# extraKnownMarketplaces) and refresh its catalog.
+markets=$(node -e '
+  const fs=require("fs"),p=require("path"),h=require("os").homedir();
+  let s={};try{s=JSON.parse(fs.readFileSync(p.join(h,".claude","settings.json"),"utf8"))}catch{}
+  const known=s.extraKnownMarketplaces||{};
+  const used=new Set(process.argv[1].split("\n").map(l=>l.split(" ")[0].split("@")[1]).filter(Boolean));
+  for (const m of used) { const src=known[m]?.source; if (src?.source==="github" && src.repo) console.log(m+" "+src.repo); }
+' "$wanted")
+registered=$(claude plugin marketplace list 2>/dev/null)
+while read -r name repo; do
+  [ -z "${name:-}" ] && continue
+  printf '%s' "$registered" | grep -q "$name" || claude plugin marketplace add "$repo" </dev/null >/dev/null 2>&1
+  claude plugin marketplace update "$name" </dev/null >/dev/null 2>&1
+done <<< "$markets"
+
+installed=$(cd "$CLAUDE_DIR" && claude plugin list --json 2>/dev/null || echo '[]')
 
 while read -r id scope; do
   [ -z "${id:-}" ] && continue

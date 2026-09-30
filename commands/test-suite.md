@@ -4,6 +4,7 @@ arguments:
   - name: scope
     description: "Test scope: unit | integration | e2e | all (default: all)"
     required: false
+disable-model-invocation: true
 ---
 
 # Test Suite Runner

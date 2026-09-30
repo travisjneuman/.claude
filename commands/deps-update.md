@@ -4,6 +4,7 @@ arguments:
   - name: mode
     description: "Update mode: check | minor | major | security (default: check)"
     required: false
+disable-model-invocation: true
 ---
 
 # Dependency Update Manager

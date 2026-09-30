@@ -15,7 +15,7 @@ Hooks are small scripts Claude Code runs automatically at fixed moments: when a 
 | After Write / Edit | `secret-scan.js` | Greps the file just written for things that look like real credentials (AWS, OpenAI/Anthropic, GitHub, GitLab, Slack tokens, private keys). If found, tells Claude so it removes them before committing. Never blocks. | 0, or a short warning | ~20 ms (in-process) |
 | Session end | `session-end-repo-health.sh` | Returns instantly and works in the background. For repos owned by `GITHUB_OWNERS`: commits any pending changes as a checkpoint (skips mid-merge/rebase, conflicts, or anything that looks like a secret), then pushes through `REPO_PUSH_COMMAND` if set, else `git push`. Nested repos first. Log: `logs/departure.log`. Report-only when `GITHUB_OWNERS` is unset. | 0 | 0 (background) |
 | After every response (Stop) | `daily-maintenance.js` | Checks a timestamp and exits in milliseconds, except once per 24 h per machine, when it starts a background job: counts which skills, agents, and slash commands the transcripts show were used (names and counts only) into `USAGE_DIR/<HOST>.json`, then runs the commit-everything sweep. Covers desktop sessions that stay open for days and never reach SessionEnd. | 0 | ~50 ms (background once a day) |
-| Status bar | `statusline.js` | Draws `model · effort · folder (branch) · context % · 5h/7d usage · cost` under the prompt. Rendered by the client, never sent to Claude. | 0 | ~20 ms |
+| Status bar | `statusline.js` | Draws `model · effort · folder (branch) · context tokens · prompt-cache hit % (or "cold") · 5h/7d usage · cost` under the prompt. Rendered by the client, never sent to Claude. | 0 | ~20 ms |
 
 ## Plugin hooks
 

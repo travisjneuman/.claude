@@ -1,3 +1,6 @@
+---
+description: Scan recently modified files and update the matching documentation
+---
 # Update Documentation
 
 Scan for recently modified files and update corresponding documentation.

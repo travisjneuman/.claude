@@ -45,17 +45,17 @@ Everything listed here is installed and available. Only the **core** tier keeps 
 
 | Command | Tier | Purpose |
 | --- | --- | --- |
-| `/audit-docs` | name-only | Scan documentation for staleness — broken links, outdated counts, stale version references, and inconsistenci… |
+| `/audit-docs` | core | Scan documentation for staleness — broken links, outdated counts, stale version references, and inconsistenci… |
 | `/backup-config` | name-only | Backup Claude Code configuration files |
-| `/bootstrap` | name-only | Verifies and repairs the Claude Code Toolkit installation. |
+| `/bootstrap` | name-only | Verify and repair the Claude Code toolkit installation |
 | `/changelog` | name-only | Generate a changelog entry from git commits since the last tag using conventional commit format |
 | `/context-stats` | name-only | Display context window usage and token statistics |
-| `/discover-skills` | name-only | Search skillsmp.com for Claude Code skills using their public API. |
-| `/handoff` | core | Create a handoff document for seamless session continuity. |
+| `/discover-skills` | name-only | Search skillsmp.com for Claude Code skills |
+| `/handoff` | name-only | Write a session handoff document for continuity |
 | `/health-check` | core | Run diagnostics on Claude Code toolkit configuration and status |
 | `/init-project` | name-only | Initialize project with CLAUDE.md template - adaptive detection for new or existing projects |
 | `/list-skills` | name-only | Browse available skills by domain or list all skills with comprehensive categorization |
-| `/pull-repos` | core | Pull all repos (parent + marketplace clones + configured project repos) |
+| `/pull-repos` | name-only | Pull all repos (parent + marketplace clones + configured project repos) |
 | `/scaffold` | name-only | Scaffold project components from templates |
 | `/session-log` | name-only | View and analyze the Claude Code session log |
 | `/skill-finder` | core | AI-powered skill recommendation based on your problem description - finds optimal resources from 180 local sk… |
@@ -182,7 +182,7 @@ Everything listed here is installed and available. Only the **core** tier keeps 
 
 | Command | Tier | Purpose |
 | --- | --- | --- |
-| `/deploy` | core | Deploy application with pre/post-deploy checks |
+| `/deploy` | name-only | Deploy application with pre/post-deploy checks |
 
 ## Data, ML & AI
 
@@ -200,50 +200,50 @@ Everything listed here is installed and available. Only the **core** tier keeps 
 
 | Command | Tier | Purpose |
 | --- | --- | --- |
-| `/run` | core | Execute prompt(s) from ./prompts/ with automatic archiving - for structured prompt-based work |
+| `/run` | name-only | Execute prompt(s) from ./prompts/ with automatic archiving - for structured prompt-based work |
 
 ## Quality, testing & maintenance
 
 | Skill | Tier | Purpose | Related |
 | --- | --- | --- | --- |
 | `agent-code-explainer` | name-only | Specialist subagent: Explains complex code in clear, understandable terms. Use when onboarding to a codebase,… |  |
-| `agent-documentation-writer` | name-only | Specialist subagent: Generates comprehensive documentation including READMEs, API docs, architecture docs, an… | `deep-code-reviewer` `refactoring-specialist` |
+| `agent-documentation-writer` | name-only | Specialist subagent: Generates comprehensive documentation including READMEs, API docs, architecture docs, an… | `deep-code-reviewer` |
 | `agent-e2e-test-specialist` | name-only | Specialist subagent: Playwright, Cypress, and visual regression testing specialist. Use when writing E2E test… |  |
 | `agent-migration-specialist` | name-only | Specialist subagent: Framework upgrades, codemod strategies, version migration planning, and legacy moderniza… |  |
-| `agent-technical-writer` | name-only | Specialist subagent: Architecture Decision Records, API documentation, migration guides, runbooks, and techni… | `refactoring-specialist` |
-| `agent-test-generator` | name-only | Specialist subagent: Generates comprehensive test suites using TDD patterns. Use when writing tests, improvin… | `refactoring-specialist` |
+| `agent-technical-writer` | name-only | Specialist subagent: Architecture Decision Records, API documentation, migration guides, runbooks, and techni… |  |
+| `agent-test-generator` | name-only | Specialist subagent: Generates comprehensive test suites using TDD patterns. Use when writing tests, improvin… |  |
 | `codebase-documenter` | core | Write codebase documentation: READMEs, architecture docs, getting-started guides, API docs, and code comments… |  |
-| `core-workflow` | core | Detailed development workflow patterns, checklists, and standards. Auto-loads for complex tasks, planning, de… | `debugging-specialist` `deep-code-reviewer` |
+| `core-workflow` | core | Detailed development workflow patterns, checklists, and standards. Auto-loads for complex tasks, planning, de… | `debugging-specialist` |
 | `debug-systematic` | core | Systematic 4-phase debugging methodology for complex, intermittent, or mysterious issues. Use when investigat… | `debugging-specialist` |
 | `generic-code-reviewer` | core | Review code for bugs, security vulnerabilities, performance issues, accessibility gaps, and CLAUDE.md workflo… | `deep-code-reviewer` `security-auditor` `performance-optimizer` `stacks/fullstack-nextjs-nestjs` |
 | `generic-fullstack-code-reviewer` | name-only | Review full-stack code for bugs, security vulnerabilities, performance issues, accessibility gaps, and CLAUDE… | `deep-code-reviewer` `security-auditor` `architecture-analyst` `stacks/fullstack-nextjs-nestjs` |
 | `generic-react-code-reviewer` | name-only | Review React/TypeScript code for bugs, security vulnerabilities, performance issues, accessibility gaps, and… | `deep-code-reviewer` `security-auditor` `performance-optimizer` |
 | `generic-static-code-reviewer` | name-only | Review static site code for bugs, security issues, performance problems, accessibility gaps, and CLAUDE.md co… | `deep-code-reviewer` `security-auditor` `performance-optimizer` `checklists/static-sites` |
 | `literature-review-planner` | name-only | Structured literature review planning with systematic methodology, source evaluation, and synthesis framework… | `architecture-analyst` `deep-code-reviewer` |
-| `performance-engineering` | core | Web Vitals, Lighthouse CI, bundle optimization, CDN, caching, and load testing | `performance-optimizer` `deep-code-reviewer` `checklists/performance-optimization` |
+| `performance-engineering` | core | Web Vitals, Lighthouse CI, bundle optimization, CDN, caching, and load testing | `performance-optimizer` `checklists/performance-optimization` |
 | `statistics-verifier` | name-only | Verify statistics from raw data with methodology checking, significance testing, claim validation, and bias d… |  |
-| `tdd-workflow` | name-only | Test-Driven Development workflow enforcement with RED-GREEN-REFACTOR cycle. Use when implementing features te… | `refactoring-specialist` |
-| `tech-debt-analyzer` | core | This skill should be used when analyzing technical debt in a codebase, documenting code quality issues, creat… | `deep-code-reviewer` `refactoring-specialist` `security-auditor` |
+| `tdd-workflow` | name-only | Test-Driven Development workflow enforcement with RED-GREEN-REFACTOR cycle. Use when implementing features te… |  |
+| `tech-debt-analyzer` | core | This skill should be used when analyzing technical debt in a codebase, documenting code quality issues, creat… | `deep-code-reviewer` `security-auditor` `refactoring-specialist` |
 | `test-specialist` | name-only | This skill should be used when writing test cases, fixing bugs, analyzing code for potential issues, or impro… | `debugging-specialist` `deep-code-reviewer` `performance-optimizer` |
 
 | Agent | Purpose |
 | --- | --- |
 | `architecture-analyst` | Analyzes system architecture, identifies patterns/anti-patterns, and provides strategic recommendations. Use… |
 | `debugging-specialist` | Systematic 4-phase debugging for complex and intermittent issues. Use when investigating bugs, tracking down… |
-| `deep-code-reviewer` | Thorough 6-aspect code review covering correctness, security, performance, maintainability, testing, and docu… |
+| `deep-code-reviewer` | Thorough 6-aspect code review covering correctness, security, performance, maintainability, verification, and… |
 | `performance-optimizer` | Identifies performance bottlenecks and optimization opportunities. Use when investigating slow code, optimizi… |
-| `refactoring-specialist` | Safe, incremental refactoring with comprehensive test coverage. Use when improving code structure, reducing c… |
+| `refactoring-specialist` | Safe, incremental, behavior-preserving refactoring validated by careful review. Use when improving code struc… |
 
 | Command | Tier | Purpose |
 | --- | --- | --- |
 | `/assemble-team` | name-only | Assemble a pre-built agent team for parallel work - review, feature, debug, cross-platform, full-stack, or re… |
 | `/deps-update` | name-only | Audit and update dependencies safely |
 | `/migrate` | name-only | Generate and manage database migrations |
-| `/perf-audit` | name-only | Performance audit for web applications |
+| `/perf-audit` | core | Performance audit for web applications |
 | `/review-code` | core | Trigger a comprehensive code review on recent changes or specified files |
 | `/test-plan` | name-only | Generate a test strategy document — test matrix, coverage goals, and test pyramid allocation for the current… |
 | `/test-suite` | name-only | Run comprehensive test suite with coverage analysis |
-| `/update-docs` | core | Scan for recently modified files and update corresponding documentation. |
+| `/update-docs` | core | Scan recently modified files and update the matching documentation |
 
 ## Desktop, systems & languages
 
@@ -325,7 +325,7 @@ Everything listed here is installed and available. Only the **core** tier keeps 
 
 | Command | Tier | Purpose |
 | --- | --- | --- |
-| `/log-decision` | name-only | Append an architectural decision to the persistent decision log. |
+| `/log-decision` | name-only | Append an architectural decision to the persistent decision log |
 
 ## Research, learning & life
 

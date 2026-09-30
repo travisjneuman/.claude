@@ -7,6 +7,7 @@ arguments:
   - name: name
     description: "Name for the scaffolded component (PascalCase or kebab-case)"
     required: true
+disable-model-invocation: true
 ---
 
 # Scaffold Component

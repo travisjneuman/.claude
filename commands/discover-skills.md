@@ -1,3 +1,7 @@
+---
+description: Search skillsmp.com for Claude Code skills
+disable-model-invocation: true
+---
 # Discover Skills
 
 Search skillsmp.com for Claude Code skills using their public API.

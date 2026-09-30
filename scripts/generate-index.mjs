@@ -123,7 +123,7 @@ function walkCommands(dir, prefix = "") {
     const name = `${prefix}${f.replace(/\.md$/, "")}`;
     const desc = fm.description || firstLine(t);
     nodes.push({ id: `command:${name}`, type: "command", name, path: rel(full), description: desc,
-      tier: coreCommands.has(name) ? "core" : "name-only",
+      tier: coreCommands.has(name) ? "core" : "name-only", manual: String(fm["disable-model-invocation"]) === "true",
       domain: name.startsWith("gsd:") ? "workflow" : domainOf(`${name} ${desc}`) });
   }
 }

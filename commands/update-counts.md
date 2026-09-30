@@ -1,5 +1,6 @@
 ---
 description: Update all hardcoded counts (skills, agents, marketplace repos/skills) across documentation from filesystem
+disable-model-invocation: true
 ---
 
 Run the count updater script to sync all documentation with actual filesystem counts:

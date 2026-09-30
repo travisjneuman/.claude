@@ -1,3 +1,7 @@
+---
+description: Append an architectural decision to the persistent decision log
+disable-model-invocation: true
+---
 # Log Decision
 
 Append an architectural decision to the persistent decision log.

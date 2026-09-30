@@ -1,5 +1,6 @@
 ---
 description: Display context window usage and token statistics
+disable-model-invocation: true
 ---
 
 # Context Stats

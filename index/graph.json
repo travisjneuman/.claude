@@ -1658,7 +1658,7 @@
    "name": "deep-code-reviewer",
    "path": "agents/deep-code-reviewer.md",
    "domain": "quality",
-   "description": "Thorough 6-aspect code review covering correctness, security, performance, maintainability, testing, and documentation. Use for comprehensive PR reviews or code quality audits."
+   "description": "Thorough 6-aspect code review covering correctness, security, performance, maintainability, verification, and documentation. Use for comprehensive PR reviews or code quality audits."
   },
   {
    "id": "agent:devops-engineer",
@@ -1698,7 +1698,7 @@
    "name": "refactoring-specialist",
    "path": "agents/refactoring-specialist.md",
    "domain": "quality",
-   "description": "Safe, incremental refactoring with comprehensive test coverage. Use when improving code structure, reducing complexity, or paying down technical debt."
+   "description": "Safe, incremental, behavior-preserving refactoring validated by careful review. Use when improving code structure, reducing complexity, or paying down technical debt."
   },
   {
    "id": "agent:security-auditor",
@@ -1731,7 +1731,7 @@
    "name": "audit-docs",
    "path": "commands/audit-docs.md",
    "domain": "workflow",
-   "tier": "name-only",
+   "tier": "core",
    "description": "Scan documentation for staleness — broken links, outdated counts, stale version references, and inconsistencies"
   },
   {
@@ -1750,7 +1750,7 @@
    "path": "commands/bootstrap.md",
    "domain": "workflow",
    "tier": "name-only",
-   "description": "Verifies and repairs the Claude Code Toolkit installation."
+   "description": "Verify and repair the Claude Code toolkit installation"
   },
   {
    "id": "command:changelog",
@@ -1776,7 +1776,7 @@
    "name": "deploy",
    "path": "commands/deploy.md",
    "domain": "infra",
-   "tier": "core",
+   "tier": "name-only",
    "description": "Deploy application with pre/post-deploy checks"
   },
   {
@@ -1795,7 +1795,7 @@
    "path": "commands/discover-skills.md",
    "domain": "workflow",
    "tier": "name-only",
-   "description": "Search skillsmp.com for Claude Code skills using their public API."
+   "description": "Search skillsmp.com for Claude Code skills"
   },
   {
    "id": "command:handoff",
@@ -1803,8 +1803,8 @@
    "name": "handoff",
    "path": "commands/handoff.md",
    "domain": "workflow",
-   "tier": "core",
-   "description": "Create a handoff document for seamless session continuity."
+   "tier": "name-only",
+   "description": "Write a session handoff document for continuity"
   },
   {
    "id": "command:health-check",
@@ -1840,7 +1840,7 @@
    "path": "commands/log-decision.md",
    "domain": "business",
    "tier": "name-only",
-   "description": "Append an architectural decision to the persistent decision log."
+   "description": "Append an architectural decision to the persistent decision log"
   },
   {
    "id": "command:migrate",
@@ -1857,7 +1857,7 @@
    "name": "perf-audit",
    "path": "commands/perf-audit.md",
    "domain": "quality",
-   "tier": "name-only",
+   "tier": "core",
    "description": "Performance audit for web applications"
   },
   {
@@ -1866,7 +1866,7 @@
    "name": "pull-repos",
    "path": "commands/pull-repos.md",
    "domain": "workflow",
-   "tier": "core",
+   "tier": "name-only",
    "description": "Pull all repos (parent + marketplace clones + configured project repos)"
   },
   {
@@ -1884,7 +1884,7 @@
    "name": "run",
    "path": "commands/run.md",
    "domain": "data-ai",
-   "tier": "core",
+   "tier": "name-only",
    "description": "Execute prompt(s) from ./prompts/ with automatic archiving - for structured prompt-based work"
   },
   {
@@ -1975,7 +1975,7 @@
    "path": "commands/update-docs.md",
    "domain": "quality",
    "tier": "core",
-   "description": "Scan for recently modified files and update corresponding documentation."
+   "description": "Scan recently modified files and update the matching documentation"
   },
   {
    "id": "rule:api-routes",
@@ -2767,11 +2767,6 @@
    "rel": "pairs-with"
   },
   {
-   "from": "skill:agent-documentation-writer",
-   "to": "agent:refactoring-specialist",
-   "rel": "pairs-with"
-  },
-  {
    "from": "skill:agent-flutter-developer",
    "to": "agent:ios-developer",
    "rel": "pairs-with"
@@ -2827,16 +2822,6 @@
    "rel": "reference"
   },
   {
-   "from": "skill:agent-technical-writer",
-   "to": "agent:refactoring-specialist",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:agent-test-generator",
-   "to": "agent:refactoring-specialist",
-   "rel": "pairs-with"
-  },
-  {
    "from": "skill:agent-vue-nuxt-expert",
    "to": "agent:react-expert",
    "rel": "pairs-with"
@@ -2864,11 +2849,6 @@
   {
    "from": "skill:core-workflow",
    "to": "agent:debugging-specialist",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:core-workflow",
-   "to": "agent:deep-code-reviewer",
    "rel": "pairs-with"
   },
   {
@@ -3128,11 +3108,6 @@
   },
   {
    "from": "skill:performance-engineering",
-   "to": "agent:deep-code-reviewer",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:performance-engineering",
    "to": "doc:checklists/performance-optimization",
    "rel": "reference"
   },
@@ -3172,23 +3147,18 @@
    "rel": "reference"
   },
   {
-   "from": "skill:tdd-workflow",
-   "to": "agent:refactoring-specialist",
-   "rel": "pairs-with"
-  },
-  {
    "from": "skill:tech-debt-analyzer",
    "to": "agent:deep-code-reviewer",
    "rel": "pairs-with"
   },
   {
    "from": "skill:tech-debt-analyzer",
-   "to": "agent:refactoring-specialist",
+   "to": "agent:security-auditor",
    "rel": "pairs-with"
   },
   {
    "from": "skill:tech-debt-analyzer",
-   "to": "agent:security-auditor",
+   "to": "agent:refactoring-specialist",
    "rel": "pairs-with"
   },
   {

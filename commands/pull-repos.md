@@ -4,6 +4,7 @@ arguments:
   - name: action
     description: "Action: pull, status (default: pull)"
     required: false
+disable-model-invocation: true
 ---
 
 # Pull Repos

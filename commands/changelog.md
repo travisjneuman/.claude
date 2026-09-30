@@ -4,6 +4,7 @@ arguments:
   - name: version
     description: "Optional version string for the entry header (e.g., v2.6.0). If omitted, auto-increments from latest tag."
     required: false
+disable-model-invocation: true
 ---
 
 # Changelog Generator

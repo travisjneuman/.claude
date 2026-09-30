@@ -7,6 +7,7 @@ arguments:
   - name: name
     description: "Backup name or restore target"
     required: false
+disable-model-invocation: true
 ---
 
 # Backup Config

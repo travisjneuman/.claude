@@ -7,6 +7,7 @@ arguments:
   - name: lines
     description: "Number of lines to show (default: 50)"
     required: false
+disable-model-invocation: true
 ---
 
 # Session Log

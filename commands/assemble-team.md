@@ -1,5 +1,6 @@
 ---
 description: Assemble a pre-built agent team for parallel work - review, feature, debug, cross-platform, full-stack, or research
+disable-model-invocation: true
 ---
 
 # /assemble-team Command

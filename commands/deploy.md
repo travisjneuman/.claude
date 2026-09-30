@@ -7,6 +7,7 @@ arguments:
   - name: environment
     description: "Target environment: staging | production (default: staging)"
     required: false
+disable-model-invocation: true
 ---
 
 # Deploy Application

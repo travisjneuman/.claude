@@ -4,6 +4,7 @@ arguments:
   - name: domain
     description: "Optional domain filter: frontend, backend, devops, design, business, mobile, framework, scientific, testing, etc."
     required: false
+disable-model-invocation: true
 ---
 
 # List Skills Command

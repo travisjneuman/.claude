@@ -1,3 +1,7 @@
+---
+description: Verify and repair the Claude Code toolkit installation
+disable-model-invocation: true
+---
 # Bootstrap - System Configuration & Verification
 
 Verifies and repairs the Claude Code Toolkit installation.

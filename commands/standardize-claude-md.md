@@ -4,6 +4,7 @@ arguments:
   - name: stack
     description: "Optional: react | nextjs | static | python | automation (for Related Global Rules)"
     required: false
+disable-model-invocation: true
 ---
 
 # Standardize CLAUDE.md

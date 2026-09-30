@@ -2,6 +2,21 @@
 
 All notable changes to the Ultimate Claude Code Toolkit.
 
+## [3.6.0] - September 29, 2026
+
+### Token efficiency
+- `settings.json`: `autoCompactWindow: 300000` (1M-context sessions compact at 300K instead of ~967K), `includeGitInstructions: false` (the toolkit's own git rules replace the built-in commit/PR block), `promptSuggestionEnabled: false`, `bashOutputMaxChars: 15000` and `MAX_MCP_OUTPUT_TOKENS=15000` (long output goes to a file with a preview).
+- `cloudflare` plugin off by default (14 skill descriptions plus an MCP server in every session); use `wrangler` in a terminal or enable the plugin per project.
+- 21 manual-only commands (`deploy`, `handoff`, `pull-repos`, `run`, `test-suite`, …) set `disable-model-invocation: true`: still in the `/` menu, no longer in Claude's listing. The index generator honors the flag for commands.
+- Read-only core agents (architecture-analyst, performance-optimizer, security-auditor, deep-code-reviewer) set `omitClaudeMd: true` and carry a short rules block instead of every CLAUDE.md/AGENTS.md in the tree.
+- Status line shows absolute context tokens and the prompt-cache hit ratio (or `cold`).
+
+### Plugins
+- `brag` (latent-spaces/brag, MIT) added as a plugin marketplace; `install-plugins.sh` now registers and refreshes every GitHub marketplace an enabled plugin comes from.
+
+### Zero testing alignment
+- `refactoring-specialist`, `deep-code-reviewer`, `debugging-specialist`, and `ios-developer` no longer instruct writing or running tests; `refactoring-specialist` drops `isolation: worktree`.
+
 ## [3.5.0] - September 29, 2026
 
 ### Automatic tier tuning (plan D)

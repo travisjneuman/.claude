@@ -56,7 +56,7 @@ When working on iOS development:
 2. **Code Style**: Use Swift conventions and SwiftLint rules
 3. **Performance**: Profile with Instruments, optimize for 60fps
 4. **Accessibility**: Support VoiceOver, Dynamic Type, accessibility labels
-5. **Testing**: XCTest for unit tests, XCUITest for UI tests
+5. **Testing**: only when the user asks (then XCTest for unit tests, XCUITest for UI tests)
 6. **Distribution**: Follow App Store guidelines, handle signing correctly
 
 ## Reference Skills

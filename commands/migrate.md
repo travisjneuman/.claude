@@ -7,6 +7,7 @@ arguments:
   - name: name
     description: "Migration name (for create action, e.g. 'add-user-roles')"
     required: false
+disable-model-invocation: true
 ---
 
 # Database Migration Manager

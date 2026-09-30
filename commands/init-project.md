@@ -4,6 +4,7 @@ arguments:
   - name: stack
     description: "Optional: react | nextjs | static | python | automation (auto-detected if not provided)"
     required: false
+disable-model-invocation: true
 ---
 
 # Initialize Project CLAUDE.md

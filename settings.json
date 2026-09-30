@@ -1,12 +1,14 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "env": {
-    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
+    "MAX_MCP_OUTPUT_TOKENS": "15000"
   },
   "attribution": {
     "commit": "",
     "pr": ""
   },
+  "includeGitInstructions": false,
   "permissions": {
     "allow": [
       "WebSearch",
@@ -294,6 +296,7 @@
       }
     ]
   },
+  "bashOutputMaxChars": 15000,
   "statusLine": {
     "type": "command",
     "command": "node -e \"process.env.HOOK_NAME='statusline.js';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))\"",
@@ -303,10 +306,11 @@
     "commit-commands@claude-plugins-official": true,
     "frontend-design@claude-plugins-official": true,
     "claude-security@claude-plugins-official": false,
-    "cloudflare@claude-plugins-official": true,
+    "cloudflare@claude-plugins-official": false,
     "typescript-lsp@claude-plugins-official": true,
     "pyright-lsp@claude-plugins-official": true,
-    "swift-lsp@claude-plugins-official": true
+    "swift-lsp@claude-plugins-official": true,
+    "brag@brag": true
   },
   "extraKnownMarketplaces": {
     "claude-plugins-official": {
@@ -320,10 +324,18 @@
         "source": "github",
         "repo": "open-gsd/gsd-core"
       }
+    },
+    "brag": {
+      "source": {
+        "source": "github",
+        "repo": "latent-spaces/brag"
+      }
     }
   },
   "outputStyle": "default",
   "spinnerTipsEnabled": false,
+  "autoCompactWindow": 300000,
+  "promptSuggestionEnabled": false,
   "pluginConfigs": {
     "agents-md@builtin": {
       "options": {

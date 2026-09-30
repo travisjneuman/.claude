@@ -25,14 +25,12 @@
   ],
   "core_commands": [
     "start-task",
-    "pull-repos",
     "review-code",
     "health-check",
-    "handoff",
     "security-scan",
-    "deploy",
-    "run",
     "update-docs",
-    "skill-finder"
+    "skill-finder",
+    "perf-audit",
+    "audit-docs"
   ]
 }

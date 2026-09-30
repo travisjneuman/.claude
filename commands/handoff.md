@@ -1,3 +1,7 @@
+---
+description: Write a session handoff document for continuity
+disable-model-invocation: true
+---
 # Session Handoff
 
 Create a handoff document for seamless session continuity.

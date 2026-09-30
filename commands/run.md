@@ -4,6 +4,7 @@ arguments:
   - name: prompt_ids
     description: "Prompt number(s) or name(s) to run. Examples: '001', '5 6 7', 'user-auth'. Use --parallel or --sequential for multiple prompts."
     required: false
+disable-model-invocation: true
 ---
 
 # Run Prompt with Auto-Archive
