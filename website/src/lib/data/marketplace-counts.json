@@ -1,6 +1,6 @@
 {
   "repoCount": 82,
-  "totalSkills": 10943,
+  "totalSkills": 11052,
   "repos": [
     {
       "name": "claude-code-plugins-plus-skills",
@@ -10,7 +10,7 @@
     {
       "name": "sickn33-antigravity-awesome-skills",
       "displayName": "Sickn33 Antigravity Awesome Skills",
-      "skillCount": 2496
+      "skillCount": 2600
     },
     {
       "name": "davila7-templates",
@@ -25,7 +25,7 @@
     {
       "name": "buildwithclaude",
       "displayName": "Buildwithclaude",
-      "skillCount": 385
+      "skillCount": 386
     },
     {
       "name": "alirezarezvani-claude-skills",
@@ -35,7 +35,7 @@
     {
       "name": "affaan-everything-claude",
       "displayName": "Affaan Everything Claude",
-      "skillCount": 292
+      "skillCount": 293
     },
     {
       "name": "athola-night-market",
@@ -50,7 +50,7 @@
     {
       "name": "claude-scientific-skills",
       "displayName": "Claude Scientific Skills",
-      "skillCount": 166
+      "skillCount": 168
     },
     {
       "name": "madappgang-claude-code",
@@ -170,7 +170,7 @@
     {
       "name": "claude-mem",
       "displayName": "Claude Mem",
-      "skillCount": 29
+      "skillCount": 30
     },
     {
       "name": "onmax-nuxt-skills",

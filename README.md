@@ -19,7 +19,7 @@
 [![Commands](https://img.shields.io/badge/Commands-29-a855f7?style=flat-square)](./docs/COMMANDS.md)
 [![GSD](https://img.shields.io/badge/GSD-v1.29-ef4444?style=flat-square)](https://github.com/open-gsd/gsd-core)
 [![Repos](https://img.shields.io/badge/Marketplace_Repos-82-3b82f6?style=flat-square)](./plugins/marketplaces/)
-[![Marketplace Skills](https://img.shields.io/badge/Marketplace_Skills-10900+-ec4899?style=flat-square)](./docs/MARKETPLACE-GUIDE.md)
+[![Marketplace Skills](https://img.shields.io/badge/Marketplace_Skills-11000+-ec4899?style=flat-square)](./docs/MARKETPLACE-GUIDE.md)
 [![Hooks](https://img.shields.io/badge/Hooks-7-06b6d4?style=flat-square)](./hooks/README.md)
 [![Templates](https://img.shields.io/badge/Templates-17-84cc16?style=flat-square)](./templates/README.md)
 [![MCP](https://img.shields.io/badge/MCP_Servers-12-f97316?style=flat-square)](./docs/MCP-SERVERS.md)
@@ -32,7 +32,7 @@
 
 A drop-in configuration layer for [Claude Code](https://docs.anthropic.com/en/docs/claude-code) that transforms it from a capable AI assistant into an enterprise-grade development powerhouse.
 
-**One `git clone` gives you** 180 domain skills, 10 specialist agents, 82 community marketplaces with 10,900+ additional skills, 29 slash commands, 7 lifecycle hooks, 12 MCP server configs, and the **[GSD (Get Shit Done)](https://github.com/open-gsd/gsd-core)** project management framework — all auto-activating based on what you're working on. No manual configuration required.
+**One `git clone` gives you** 180 domain skills, 10 specialist agents, 82 community marketplaces with 11,000+ additional skills, 29 slash commands, 7 lifecycle hooks, 12 MCP server configs, and the **[GSD (Get Shit Done)](https://github.com/open-gsd/gsd-core)** project management framework — all auto-activating based on what you're working on. No manual configuration required.
 
 **How it works:** Describe what you want in plain language. Everything is installed and available, but only a small core of skills keeps its full description in Claude's context. The rest is listed by name and found through a generated index ([`INDEX.md`](./INDEX.md), [`index/graph.json`](./index/graph.json)) and the `toolkit-router` skill, so a large toolkit costs almost nothing until something is needed. Language rules load only for matching files.
 
@@ -91,7 +91,7 @@ That's it. Claude Code loads the toolkit from `~/.claude/` in every session.
 | **[Skills](./skills/MASTER_INDEX.md)** | 180 | Domain expertise modules (React, security, DevOps, finance, etc.) |
 | **[Agents](./agents/README.md)** | 86 | Specialist subagents for focused tasks (code review, debugging, etc.) |
 | **[Commands](./docs/COMMANDS.md)** | 87 | Slash commands: 30 base + 57 GSD |
-| **[Marketplace Repos](./plugins/marketplaces/)** | 82 | Community skill repositories (10,900+ additional skills) |
+| **[Marketplace Repos](./plugins/marketplaces/)** | 82 | Community skill repositories (11,000+ additional skills) |
 | **[Hooks](./hooks/README.md)** | 7 | Lifecycle hooks (session start/stop, pre-commit, safety guards) |
 | **[Templates](./templates/README.md)** | 17 | Project scaffolding and task templates |
 | **[MCP Servers](./docs/MCP-SERVERS.md)** | 12 | Model Context Protocol server configurations |
@@ -225,7 +225,7 @@ See the **[GSD repository](https://github.com/open-gsd/gsd-core)** for the full 
 ## 🔑 Key Features
 
 <details>
-<summary><strong>🏪 Marketplace — 108 repos, 10,900+ skills</strong></summary>
+<summary><strong>🏪 Marketplace — 108 repos, 11,000+ skills</strong></summary>
 
 The toolkit aggregates 82 community skill repositories as ignored local clones in `plugins/marketplaces/`. All are read-only (fetch but never push). Skills span security (Trail of Bits), full-stack development, scientific computing, SAP/enterprise, Elixir, Terraform, creative writing, and more. Some marketplace repos are **installed as plugins**, making their agents, commands, and skills fully active in the routing system alongside built-in resources. Non-installed repos contribute discoverable skills via keyword search.
 
