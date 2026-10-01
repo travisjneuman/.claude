@@ -5,7 +5,7 @@ All notable changes to the Ultimate Claude Code Toolkit.
 ## [Unreleased]
 
 ### Telemetry off
-- `settings.json` env: `DISABLE_TELEMETRY=1` (usage telemetry; also turns off feature-flag evaluation, so a session started remotely can't be taken over on that machine), `DISABLE_ERROR_REPORTING=1` (error reporting), `CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY=1` (session quality surveys). `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC` is left unset because it also stops auto-updates; add it in `settings.local.json` if you want that too.
+- `settings.json` env: `DISABLE_ERROR_REPORTING=1` (error reporting) and `CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY=1` (session quality surveys). Usage telemetry stays on: `DISABLE_TELEMETRY` (and `DO_NOT_TRACK`) also turn off feature-flag evaluation, which breaks remote session takeover. `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC` is left unset because it also stops auto-updates.
 
 ## [3.6.1] - September 30, 2026
 
