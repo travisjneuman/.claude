@@ -1,209 +1,135 @@
-# ============================================
-# Claude Code - Cross-Platform .gitignore
-# ============================================
-# This .claude/ setup is designed to be cloned to any
-# Mac, Linux, or Windows system and work for anyone.
+# ============================================================
+# Claude Code toolkit (~/.claude) — public repo .gitignore
+# ============================================================
+# ~/.claude is both this toolkit and Claude Code's own home folder, so most
+# of what Claude Code writes here is runtime state, personal history, or
+# machine-specific. Only the toolkit itself is tracked:
 #
-# SECURITY NOTE (December 2025):
-#   This repo underwent a security audit. Files below are
-#   gitignored to protect user privacy. DO NOT REVERT.
-#   See docs/SECURITY.md for full explanation.
+#   CLAUDE.md, README.md, CHANGELOG.md, CONTRIBUTING.md, LICENSE, INDEX.md
+#   settings.json (toolkit defaults: permissions, hooks, plugins, budgets)
+#   agents/ commands/ skills/ rules/ hooks/ templates/ docs/ scripts/ bin/
+#   index/ website/ vscode/ archive/ local.example/ .github/
+#   plugin.json package.json counts.json .gitmodules (marketplace manifest)
 #
-# TRACKED (shared across all machines):
-#   - CLAUDE.md, README.md, CHANGELOG.md, CONTRIBUTING.md
-#   - settings.json (Claude Code toolkit config - permissions, hooks, plugins)
-#   - plugin.json (plugin manifest)
-#   - commands/, skills/, agents/, rules/, docs/, templates/
-#   - scripts/, vscode/ (setup scripts - NOT .vscode/ which is ignored)
-#   - plugins/local/ (customized plugins)
-#   - .gitmodules (submodule definitions)
+# Anything personal (private rules and hooks, host paths, identity, subagent
+# memory, the public-safety pattern list) belongs in your private layer:
+# ~/.claude/local/, ignored below. See local.example/README.md.
 #
-# IGNORED (machine-specific or auto-generated):
-#   - .archive/ (personal project archives - NEVER TRACK)
-#   - .vscode/ (VSCode workspace folder - auto-created)
-#   - vscode/settings.json (VSCode settings with local paths/IPs)
-#   - settings.local.json (personal overrides)
-#   - .mcp.json (platform-specific MCP config)
-#   - Session data, caches, credentials
-#
-# ============================================
+# SECURITY: entries here keep personal data out of a public repo. Don't
+# remove one without checking what Claude Code writes to that path.
+# New machine: docs/SETUP-GUIDE.md and scripts/setup-new-machine.sh.
+# ============================================================
 
-# ----- SESSION/EPHEMERAL DATA -----
-# These are regenerated per session and machine-specific
-
-# Active session tracking files (contain PIDs, session IDs, working paths)
-sessions/
-
-# Auto-generated local context packs (contain machine paths/status)
-.mc-context.md
-
-# Session environment snapshots
-session-env/
-
-# Subagent memory (`memory: user` agents write here; personal, often
-# project-specific). Keep it private: link it to your own private layer.
+# ----- PRIVATE LAYER -----
+/local
+/rules/local
+.env.local
+.env
+.env.*.local
+settings.local.json
+CLAUDE.local.md
+# Subagent memory (`memory: user` agents write here). Personal and often
+# project-specific; link it into your private layer instead of tracking it.
 agent-memory
 
-# Session config backups (rotating .claude.json snapshots)
-backups/
-
-# /backup-config snapshots (local-only)
-.backups/
-
-# Debug logs
-debug/
-
-# Conversation history (LARGE, contains personal data)
-history.jsonl
-
-# Session project data
-projects/
-
-# File edit history (session backups)
-file-history/
-
-# Session todos (auto-generated per conversation)
-todos/
-
-# Agent Teams session data (ephemeral, per-session)
-teams/
-
-# Shell state snapshots
-shell-snapshots/
-
-# Plan files (session-specific working files)
-plans/
-
-# Active GSD project state (user-specific)
-.planning/
-
-# Task files (user-specific work documentation)
-tasks/
-
-# Image cache
-image-cache/
-
-# ----- TELEMETRY/ANALYTICS -----
-# Claude Code telemetry - machine-specific
-
-statsig/
-telemetry/
-stats-cache.json
-
-# ----- PLUGIN SYSTEM -----
-# Plugin cache (regenerated automatically on each machine)
-plugins/cache/
-
-# Marketplace submodules (cloned via git submodule update)
-# Each machine clones these from upstream
-plugins/marketplaces/
-
-# Marketplace registry (contains machine-specific paths)
-plugins/known_marketplaces.json
-
-# Installed plugins registry (contains machine-specific install paths)
-plugins/installed_plugins.json
-
-# Plugin install counts cache
-plugins/install-counts-cache.json
-
-# ----- CREDENTIALS & AUTH TOKENS -----
-# OAuth tokens are machine-specific and regenerated per device.
-# Even in private repos, these should not be committed:
-# - Tokens expire/rotate
-# - Won't work on other machines
-# - Security best practice
-
+# ----- CREDENTIALS -----
 .credentials.json
+.credentials.lock
 credentials.json
-
-# Additional secrets (if you ever add them)
-# *.pem
-# *.key
-.env
-.env.local
-.env.*.local
-
-# ----- SESSION-SPECIFIC FILES -----
-# These contain session IDs and are regenerated
-
-# Security warning state (contains session IDs)
 security_warnings_state_*.json
 
-# SQLite databases (session-specific, regenerated)
-*.db
-*.sqlite
-*.sqlite3
-
-# ----- LOCAL/PERSONAL OVERRIDES -----
-# Machine-specific settings that shouldn't be shared
-# Note: settings.json (Claude Code config) IS tracked - it's the toolkit config
-# Only settings.local.json is for personal overrides
-
-settings.local.json
-.claude.json
-AGENTS.md
-
-# ----- PLATFORM-SPECIFIC CONFIG -----
-# MCP server config requires platform-specific commands:
-#   Windows: "command": "cmd", "args": ["/c", "npx", ...]
-#   Mac/Linux: "command": "npx", "args": [...]
-# Each machine must configure .mcp.json manually.
-# See docs/MCP-SERVERS.md for templates.
-.mcp.json
-
-# ----- GIT WORKTREES -----
-# Git worktree data is machine-specific
-.worktrees/
-
-# ----- IDE/EDITOR DIRECTORIES -----
-# Standard IDE folders (auto-generated, machine-specific)
+# ----- CONVERSATIONS, SESSIONS, AND HISTORY -----
+history.jsonl
+projects/
+sessions/
+session-env/
+session-summaries/
+last-session.md
+shell-snapshots/
+file-history/
+todos/
+tasks/
+teams/
+plans/
+debug/
 ide/
+.mc-context.md
+
+# ----- CACHES, TELEMETRY, AND DOWNLOADS -----
+cache/
+paste-cache/
+image-cache/
+downloads/
+statsig/
+telemetry/
+usage-data/
+stats-cache.json
+mcp-needs-auth-cache.json
+*-cache.json
+.last-cleanup
+logs/
+*.log
+
+# ----- BACKUPS -----
+backups/
+.backups/
+.archive/
+
+# ----- PLUGINS AND MARKETPLACES (pulled per machine, never committed) -----
+# .gitmodules is only the marketplace manifest read by
+# scripts/init-marketplaces.sh; the clones themselves stay local.
+/plugins/marketplaces/
+/plugins/cache/
+/plugins/data/
+/plugins/synced/
+/plugins/installed_plugins.json
+/plugins/known_marketplaces.json
+/plugins/blocklist.json
+/plugins/.last_inuse_sweep
+/skills/synced/
+/index/marketplace-catalog.json
+/security/
+
+# ----- TOOL STATE IN THIS FOLDER -----
+.claude.json
+.mcp.json
+AGENTS.md
+.planning/
+.auto-claude/
+.worktrees/
+# A nested .claude/ keeps only the toolkit's own project settings.
+/.claude/*
+!/.claude/settings.json
+
+# ----- EDITORS -----
 .idea/
 .vscode/
 *.code-workspace
-
-# Our custom vscode/ folder (without dot) is tracked for setup scripts
-# But vscode/settings.json contains machine-specific paths and local IPs
+# vscode/ (no dot) holds tracked setup scripts; its settings.json is personal.
 vscode/settings.json
+*.swp
+*.swo
+*.swn
+\#*\#
+.#*
 
-# ----- OS-SPECIFIC FILES -----
-# macOS
+# ----- OPERATING SYSTEMS -----
 .DS_Store
 .AppleDouble
 .LSOverride
 ._*
-
-# Windows
 Thumbs.db
 Thumbs.db:encryptable
 ehthumbs.db
 ehthumbs_vista.db
 Desktop.ini
 $RECYCLE.BIN/
-
-# Linux
 *~
 .fuse_hidden*
 .Trash-*
 .nfs*
 
-# ----- EDITOR TEMP FILES -----
-# Vim
-*.swp
-*.swo
-*.swn
-# *~ already covered in Linux section above
-
-# Emacs
-\#*\#
-.#*
-
-# VSCode (except .vscode/ which we track for shared settings)
-# *.code-workspace already covered in IDE section above
-
-# ----- BUILD/DEPENDENCY ARTIFACTS -----
-# Node.js
+# ----- DEPENDENCIES AND BUILD OUTPUT -----
 node_modules/
 npm-debug.log*
 yarn-debug.log*
@@ -211,8 +137,6 @@ yarn-error.log*
 .npm
 .yarn/cache
 .yarn/unplugged
-
-# Python
 __pycache__/
 *.py[cod]
 *$py.class
@@ -227,95 +151,13 @@ env/
 .pytest_cache/
 .mypy_cache/
 
-# ----- LOGS -----
-logs/
-*.log
-
-# ----- ARCHIVES/TEMP -----
+# ----- DATABASES, ARCHIVES, TEMP -----
+*.db
+*.sqlite
+*.sqlite3
 *.zip
 *.tar.gz
 *.rar
 *.7z
 tmp/
 temp/
-
-# ----- ARCHIVE FOLDER -----
-# User-specific archived files (old CLAUDE.md versions, completed tasks, project snapshots)
-# Created at runtime when workflows archive completed work
-.archive/
-
-# ----- NESTED CLAUDE FOLDER -----
-# Only the toolkit-repo project settings are tracked (enables plugin-dev when
-# working inside ~/.claude); everything else in a nested .claude/ is ignored.
-/.claude/*
-!/.claude/settings.json
-
-# ============================================
-# SETUP INSTRUCTIONS FOR NEW MACHINES:
-#
-# 1. Clone: git clone <repo-url> ~/.claude
-# 2. Init submodules: git submodule update --init
-# 3. Create .mcp.json from template (see docs/MCP-SERVERS.md)
-# 4. (Optional) Create settings.local.json for personal overrides
-# ============================================
-
-# ----- AUTO-CLAUDE ANALYSIS CACHE -----
-# External tool (https://github.com/AndyMik90/Auto-Claude) generates
-# analysis/spec files that are personal documentation, not tracked.
-# Similar to .planning/ and tasks/ which are gitignored for session data.
-.auto-claude/
-
-# Database files
-*.db
-
-# ----- LOCAL REFERENCE DOCUMENTATION -----
-# Personal backup strategy documentation (local-only reference)
-docs/BACKUP-STRATEGIES.md
-
-# Machine-specific caches
-paste-cache/
-session-summaries/
-last-session.md
-
-# MCP auth cache (machine-specific)
-mcp-needs-auth-cache.json
-
-# GSD update check (Unix timestamp, per-machine)
-cache/gsd-update-check.json
-
-# ============================================
-# 2026-09 MODERNIZATION: RUNTIME + PRIVATE LAYER
-# ============================================
-# Claude Code runtime state (regenerated per machine)
-cache/
-downloads/
-logs/
-.last-cleanup
-.credentials.lock
-file-history/
-paste-cache/
-statsig/
-
-# Private per-user layer. Everything personal or host-specific lives here:
-# private rules, private hooks, host paths, identity, pattern lists for the
-# public-safety gate. See local.example/ for the layout. Back it up yourself
-# (the maintainer keeps the canonical copy in a private notes vault).
-/local
-/rules/local
-/.env.local
-
-# Marketplace clones are pulled on demand, never committed (see .gitmodules
-# manifest + scripts/update-marketplaces.sh). Belt and braces:
-/plugins/marketplaces/
-/plugins/cache/
-/index/marketplace-catalog.json
-
-# Claude Code runtime (skill/plugin sync, plugin sweep markers)
-/plugins/synced/
-/skills/synced/
-/plugins/.last_inuse_sweep
-
-# Plugin runtime state (venvs, plugin data)
-/security/
-/plugins/data/
-/plugins/installed_plugins.json
