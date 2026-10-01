@@ -1,6 +1,6 @@
 {
   "repoCount": 81,
-  "totalSkills": 10980,
+  "totalSkills": 10995,
   "repos": [
     {
       "name": "claude-code-plugins-plus-skills",
@@ -50,7 +50,7 @@
     {
       "name": "claude-scientific-skills",
       "displayName": "Claude Scientific Skills",
-      "skillCount": 168
+      "skillCount": 181
     },
     {
       "name": "madappgang-claude-code",
@@ -133,6 +133,11 @@
       "skillCount": 36
     },
     {
+      "name": "claude-plugins-official",
+      "displayName": "Claude Plugins Official",
+      "skillCount": 33
+    },
+    {
       "name": "p47phoenix-plugins",
       "displayName": "P47phoenix Plugins",
       "skillCount": 33
@@ -145,11 +150,6 @@
     {
       "name": "akin-ozer-devops",
       "displayName": "Akin Ozer Devops",
-      "skillCount": 31
-    },
-    {
-      "name": "claude-plugins-official",
-      "displayName": "Claude Plugins Official",
       "skillCount": 31
     },
     {

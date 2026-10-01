@@ -159,3 +159,8 @@ env/
 *.7z
 tmp/
 temp/
+
+# Working files from third-party agent tools run against this repo (never part of the toolkit)
+.auto-claude/
+/.planning/
+.mc-context.md
