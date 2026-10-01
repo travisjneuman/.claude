@@ -169,6 +169,19 @@ manifest_marketplace_paths() {
     git config --file "$SCRIPT_DIR/.gitmodules" --get-regexp path 2>/dev/null | awk '{print $2}'
 }
 
+# Plugin marketplaces declared in settings.json extraKnownMarketplaces are
+# registered and refreshed by Claude Code (scripts/install-plugins.sh), so a
+# clone of one that is not in .gitmodules is expected, not an orphan.
+plugin_marketplace_names() {
+    command -v node >/dev/null 2>&1 || return 0
+    node -e '
+      try {
+        const s = JSON.parse(require("fs").readFileSync(process.argv[1], "utf8"));
+        console.log(Object.keys(s.extraKnownMarketplaces || {}).join("\n"));
+      } catch {}
+    ' "$SCRIPT_DIR/settings.json" 2>/dev/null
+}
+
 repo_is_dirty() {
     local repo_path="$1"
     [[ -n "$(git -C "$repo_path" status --porcelain 2>/dev/null)" ]]
@@ -399,10 +412,12 @@ if [[ "$STATUS_ONLY" == false ]]; then
         fi
     done
     # Clones no longer in the manifest are reported, never deleted automatically.
+    PLUGIN_MARKETPLACES=$(plugin_marketplace_names)
     for dir in "$SCRIPT_DIR"/plugins/marketplaces/*/; do
         rel="plugins/marketplaces/$(basename "$dir")"
-        git config --file "$SCRIPT_DIR/.gitmodules" --get "submodule.$rel.path" >/dev/null 2>&1 || \
-            echo -e "${YELLOW}  $(basename "$dir"): not in the manifest (remove with: rm -rf \"$dir\")${NC}"
+        git config --file "$SCRIPT_DIR/.gitmodules" --get "submodule.$rel.path" >/dev/null 2>&1 && continue
+        printf '%s\n' "$PLUGIN_MARKETPLACES" | grep -qxF "$(basename "$dir")" && continue
+        echo -e "${YELLOW}  $(basename "$dir"): not in the manifest (remove with: rm -rf \"$dir\")${NC}"
     done
     if [[ $NO_PUSH_FIXED -eq 0 ]]; then
         echo -e "${GREEN}  All marketplace clones already have no_push configured${NC}"

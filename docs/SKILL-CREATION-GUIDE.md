@@ -218,7 +218,7 @@ When deprecating a skill: don't delete it — set its description to `[DEPRECATE
 ## Reference
 
 - Skills system overview: [`docs/SKILLS.md`](./SKILLS.md).
-- Auto-routing keyword table: top of [`CLAUDE.md`](../CLAUDE.md).
+- Routing: the generated `INDEX.md` and the `toolkit-router` skill (see [`CLAUDE.md`](../CLAUDE.md), "Finding the right tool").
 - Marketplace skills: [`docs/MARKETPLACE-GUIDE.md`](./MARKETPLACE-GUIDE.md).
 - Agent vs. skill vs. rule decision: [`docs/ARCHITECTURE.md`](./ARCHITECTURE.md).
 

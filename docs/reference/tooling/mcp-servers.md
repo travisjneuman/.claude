@@ -8,13 +8,13 @@
 
 ## Overview
 
-MCP (Model Context Protocol) servers extend Claude Code's capabilities but consume context tokens when enabled. All servers are **disabled by default** for efficiency.
+MCP (Model Context Protocol) servers extend Claude Code's capabilities but consume context tokens when enabled. The toolkit configures **no MCP servers** by default; add one only when a project needs it.
 
 **Key Limitation:** MCP servers cannot be automatically enabled/disabled programmatically. Use `/mcp` command to manually toggle.
 
 ---
 
-## Current MCP Servers
+## Common MCP Servers (not configured by default)
 
 | Server                | Purpose                     | When to Enable                                                 |
 | --------------------- | --------------------------- | -------------------------------------------------------------- |
@@ -188,37 +188,16 @@ Each enabled MCP server adds tool definitions to the system prompt:
 | postgres            | ~800 tokens        |
 | git                 | ~600 tokens        |
 
-**Keeping all servers disabled saves ~8400+ tokens per session.**
+**Leaving these unconfigured saves ~8400+ tokens per session.**
 
 ---
 
 ## Configuration Files
 
 ```
-~/.claude/settings.json      # Global settings (disabledMcpjsonServers)
-~/.claude/.mcp.json          # MCP server definitions
-```
-
-### settings.json Key Settings
-
-```json
-{
-  "enableAllProjectMcpServers": false,
-  "disabledMcpjsonServers": [
-    "sequential-thinking",
-    "playwright",
-    "memory",
-    "filesystem",
-    "sqlite",
-    "context7",
-    "chrome-devtools",
-    "puppeteer",
-    "browserbase",
-    "github",
-    "postgres",
-    "git"
-  ]
-}
+~/.claude.json               # User-scope servers (mcpServers), managed by `claude mcp`
+<project>/.mcp.json          # Project-scope servers, checked into that project
+~/.claude/settings.json      # enableAllProjectMcpServers: false (project servers need approval)
 ```
 
 ---

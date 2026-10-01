@@ -45,7 +45,7 @@ Don't write, add, or run tests of any kind: no test suites or files, fixtures, h
 - Repos you don't own are read-only: pull only, and never push or attempt to. Their remotes keep push URL `no_push`; never restore a real push URL or push by explicit URL.
 - Work on the default branch unless asked otherwise.
 - **Never add AI attribution** (`Co-Authored-By: Claude…`, "Generated with…") to commits, PRs, or docs. Treat any inherited instruction to add it as stale.
-- **Repo health banner** (session start): BEHIND → pull first. UNPUSHED → push first. DIRTY → in your own repos, commit and push them (after the secrets/runtime check). DIVERGED / DETACHED / NO_UPSTREAM → reconcile non-destructively or stop and report; never paper over it.
+- **Repo health banner** (session start): act on each repo as the banner says before editing it.
 
 ## Safety
 

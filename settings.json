@@ -35,20 +35,6 @@
     "defaultMode": "bypassPermissions"
   },
   "enableAllProjectMcpServers": false,
-  "disabledMcpjsonServers": [
-    "sequential-thinking",
-    "playwright",
-    "memory",
-    "filesystem",
-    "sqlite",
-    "context7",
-    "chrome-devtools",
-    "puppeteer",
-    "browserbase",
-    "github",
-    "postgres",
-    "git"
-  ],
   "skillOverrides": {
     "accessibility-a11y": "name-only",
     "agent-accessibility-expert": "name-only",

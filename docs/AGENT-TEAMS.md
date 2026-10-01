@@ -27,7 +27,6 @@ One session acts as the **team lead** -- it creates the team, spawns teammates, 
 | **Single session**        | Sequential tasks, same-file edits, simple work  | Lowest     |
 | **Subagents (Task tool)** | Focused tasks where only the result matters     | Low-Medium |
 | **Agent Teams**           | Parallel work needing inter-agent communication | High       |
-| **Auto-Claude**           | Fully autonomous feature implementation with QA | Highest    |
 
 **Agent Teams excel at:**
 
@@ -392,7 +391,6 @@ Current limitations:
 
 - `~/.claude/docs/reference/workflows/agent-teams.md` - Decision framework
 - `~/.claude/agents/README.md` - Subagent catalog
-- `~/.claude/docs/AUTO-CLAUDE-GUIDE.md` - Autonomous multi-agent alternative
 - `~/.claude/skills/agent-teams/SKILL.md` - Team composition knowledge
 - [Official docs](https://code.claude.com/docs/en/agent-teams) - Anthropic documentation
 

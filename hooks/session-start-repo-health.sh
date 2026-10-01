@@ -150,9 +150,10 @@ if [[ -n "$PROBLEMS" ]]; then
     echo ""
     echo -n "$PROBLEMS"
     echo ""
-    echo "Legend: DIVERGED=both sides ahead (manual merge/reset) | UNPUSHED=local commits to push |"
-    echo "        BEHIND=fast-forward pull available | DIRTY=uncommitted changes |"
-    echo "        DETACHED=detached HEAD | NO_UPSTREAM=branch has no remote tracking"
+    echo "What to do: BEHIND -> pull first. UNPUSHED -> push first."
+    echo "  DIRTY (uncommitted changes) -> in your own repos, commit and push them after the secrets/runtime check."
+    echo "  DIVERGED (both sides ahead) / DETACHED (detached HEAD) / NO_UPSTREAM (no remote tracking branch)"
+    echo "    -> reconcile non-destructively or stop and report; never paper over it."
     echo "=== End Repo Health Check ==="
 fi
 

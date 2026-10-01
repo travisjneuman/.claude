@@ -35,7 +35,7 @@ Already set up? Jump to the section you need below.
 | [CONFIGURATION.md](./CONFIGURATION.md)       | Settings, permissions, hooks, env files     |
 | [SKILLS.md](./SKILLS.md)                     | Skills system: creation, activation, format |
 | [SKILL-CREATION-GUIDE.md](./SKILL-CREATION-GUIDE.md) | Step-by-step guide for adding a new local skill |
-| [MCP-SERVERS.md](./MCP-SERVERS.md)           | 0 MCP servers: when to enable, token cost  |
+| [MCP-SERVERS.md](./MCP-SERVERS.md)           | Optional MCP servers: when to add, token cost |
 | [ARCHITECTURE.md](./ARCHITECTURE.md)         | How all components interact as a system     |
 | [GLOSSARY.md](./GLOSSARY.md)                 | Definitions of all toolkit terms            |
 | [FAQ.md](./FAQ.md)                           | Common questions answered                   |
@@ -107,12 +107,11 @@ Already set up? Jump to the section you need below.
 This `~/.claude/` folder is a fully configured, portable Claude Code environment containing:
 
 - **180 local skills** for code review, design systems, feature development, domain expertise
-- **67 agents** for specialized autonomous workflows
+- **10 specialist agents** plus more specialists as `agent-*` skills, for autonomous workflows
 - **29 slash commands** for workflow automation
-- **12 MCP server configurations** for extended capabilities (disabled by default to save context)
 - **81 marketplace repos** providing 10,900+ additional skills from the community
-- **10 hooks** for session lifecycle, safety guards, path validation, and auto-lint
-- **9 rules files** for contextual guidance (checklists, stack patterns, workflows, tooling)
+- **7 lifecycle hooks** for session start/end, the safety guard, secret scanning, daily maintenance, and the status line
+- **9 rules files**: path-scoped language rules that load only when Claude reads a matching file
 - **17 templates** for task planning, component creation, and project scaffolding
 
 ---

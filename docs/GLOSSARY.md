@@ -83,7 +83,7 @@ A starter file in `~/.claude/templates/` for creating new toolkit components (sk
 
 ### Auto-Routing
 
-The keyword-matching system defined in CLAUDE.md that automatically loads relevant rules and skills based on prompt content. No slash commands needed — Claude detects context and loads the right resources.
+How the toolkit loads the right resources without slash commands: core skills match from their descriptions, the `toolkit-router` skill greps the generated `INDEX.md` for everything else, and path-scoped rules load when matching files are read. (CLAUDE.md no longer carries a keyword routing table.)
 
 ### Counts (counts.json)
 

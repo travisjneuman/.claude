@@ -21,7 +21,6 @@
 [![Marketplace Skills](https://img.shields.io/badge/Marketplace_Skills-10900+-ec4899?style=flat-square)](./docs/MARKETPLACE-GUIDE.md)
 [![Hooks](https://img.shields.io/badge/Hooks-7-06b6d4?style=flat-square)](./hooks/README.md)
 [![Templates](https://img.shields.io/badge/Templates-17-84cc16?style=flat-square)](./templates/README.md)
-[![MCP](https://img.shields.io/badge/MCP_Servers-12-f97316?style=flat-square)](./docs/MCP-SERVERS.md)
 
 </div>
 
@@ -31,7 +30,7 @@
 
 A drop-in configuration layer for [Claude Code](https://docs.anthropic.com/en/docs/claude-code) that transforms it from a capable AI assistant into an enterprise-grade development powerhouse.
 
-**One `git clone` gives you** 180 domain skills, 10 specialist agents, 81 community marketplaces with 10,900+ additional skills, 29 slash commands, 7 lifecycle hooks, 12 MCP server configs — all auto-activating based on what you're working on. No manual configuration required.
+**One `git clone` gives you** 180 domain skills, 10 specialist agents, 81 community marketplaces with 10,900+ additional skills, 29 slash commands, 7 lifecycle hooks — all auto-activating based on what you're working on. No manual configuration required.
 
 **How it works:** Describe what you want in plain language. Everything is installed and available, but only a small core of skills keeps its full description in Claude's context. The rest is listed by name and found through a generated index ([`INDEX.md`](./INDEX.md), [`index/graph.json`](./index/graph.json)) and the `toolkit-router` skill, so a large toolkit costs almost nothing until something is needed. Language rules load only for matching files.
 
@@ -84,12 +83,11 @@ That's it. Claude Code loads the toolkit from `~/.claude/` in every session.
 | Component | Count | Description |
 |-----------|-------|-------------|
 | **[Skills](./skills/MASTER_INDEX.md)** | 180 | Domain expertise modules (React, security, DevOps, finance, etc.) |
-| **[Agents](./agents/README.md)** | 86 | Specialist subagents for focused tasks (code review, debugging, etc.) |
+| **[Agents](./agents/README.md)** | 10 | Specialist subagents for focused tasks (code review, debugging, etc.) |
 | **[Commands](./docs/COMMANDS.md)** | 29 | Slash commands for common workflows |
 | **[Marketplace Repos](./plugins/marketplaces/)** | 81 | Community skill repositories (10,900+ additional skills) |
 | **[Hooks](./hooks/README.md)** | 7 | Lifecycle hooks (session start/stop, pre-commit, safety guards) |
 | **[Templates](./templates/README.md)** | 17 | Project scaffolding and task templates |
-| **[MCP Servers](./docs/MCP-SERVERS.md)** | 12 | Model Context Protocol server configurations |
 | **[Rules](./rules/)** | 9 | Stack-specific coding guardrails (TypeScript, Python, Go, Rust, etc.) |
 
 <details>
@@ -126,43 +124,26 @@ See **[MASTER_INDEX.md](./skills/MASTER_INDEX.md)** for the full listing with de
 
 ### Dynamic Routing
 
-Every prompt flows through a routing system that loads the best-fit resources on-demand — drawing from 128 built-in skills, 86 agents, 9 rules + 10 checklists, and 16,500+ community marketplace skills across 108 repos:
+Every session loads `CLAUDE.md`, the unscoped rules, and the skill listing. Only the core skills and agents carry full descriptions there; every other skill, command, checklist, and stack guide is listed by name only, so it costs almost nothing until it is used. For specialized work, the `toolkit-router` skill greps the generated `INDEX.md` for the domain and loads what fits, including the indexed marketplace skills:
 
 ```
  Your prompt
      │
      ▼
  ┌──────────────────────────────┐
- │  CLAUDE.md Auto-Routing      │  ← Keyword detection table
- │  (always loaded)             │
+ │  Core skills (described)     │  ← matched from their descriptions
+ │  + toolkit-router → INDEX.md │  ← grep by domain for everything else
  └──────────┬───────────────────┘
             │
    ┌────────┼────────┬────────────┐
    ▼        ▼        ▼            ▼
 ┌──────┐ ┌──────┐ ┌──────┐ ┌────────────┐
 │Skills│ │Rules │ │Agents│ │ Marketplace│
-│(128) │ │& Chk │ │ (86) │ │ 108 repos│
-│      │ │      │ │      │ │16,500+ │
+│      │ │& Chk │ │      │ │   skills   │
 └──────┘ └──────┘ └──────┘ └────────────┘
 ```
 
-**Example:** Type "review this React component for security issues" and the router automatically loads the React/TypeScript stack guide, the security hardening checklist, and spawns the code reviewer agent — without any slash commands.
-
-### Auto-Routing Table (from CLAUDE.md)
-
-CLAUDE.md routes to **docs and checklists** on keyword match. Skills and agents auto-match from their descriptions — no explicit routing needed.
-
-| Your prompt mentions... | Toolkit loads... |
-|------------------------|------------------|
-| React, TypeScript | React/TS stack guide |
-| Security, OWASP | Security hardening checklist |
-| Deploy, CI/CD, Docker | Deployment workflow |
-| Database, schema, SQL | Database design checklist |
-| Performance, speed | Performance optimization checklist |
-| UI, visual, CSS | UI/visual changes checklist |
-| Research, investigate | Research methodology workflow |
-| Monitoring, alerting | Monitoring & alerting design checklist |
-| Any specialized domain | Best-fit skill + agent auto-matched, marketplace (6,900+) |
+Path-scoped rules load only when matching files are read.
 
 ### Hook Lifecycle
 
@@ -180,6 +161,9 @@ Before Bash / Write / Edit
 After File Edits
   └── Secret scan (tells Claude if a credential-looking string was written)
 
+After Each Response
+  └── Once a day per machine: usage tally + commit-everything sweep (background)
+
 Session End
   └── Push clean finished work in repos you own; log anything dirty or diverged
 
@@ -194,7 +178,7 @@ See **[hooks/README.md](./hooks/README.md)** for the full hook reference.
 ## 🔑 Key Features
 
 <details>
-<summary><strong>🏪 Marketplace — 108 repos, 10,900+ skills</strong></summary>
+<summary><strong>🏪 Marketplace — 81 marketplace repos, 10,900+ skills</strong></summary>
 
 The toolkit aggregates 81 community skill repositories as ignored local clones in `plugins/marketplaces/`. All are read-only (fetch but never push). Skills span security (Trail of Bits), full-stack development, scientific computing, SAP/enterprise, Elixir, Terraform, creative writing, and more. Some marketplace repos are **installed as plugins**, making their agents, commands, and skills fully active in the routing system alongside built-in resources. Non-installed repos contribute discoverable skills via keyword search.
 
@@ -213,7 +197,7 @@ See **[docs/MARKETPLACE-GUIDE.md](./docs/MARKETPLACE-GUIDE.md)** for the full ca
 <details>
 <summary><strong>🛡️ Safety Guards</strong></summary>
 
-The `guard-dangerous.sh` hook blocks dangerous commands before execution:
+The `guard.js` hook blocks dangerous commands before execution:
 
 | Blocked Pattern | Risk |
 |----------------|------|
@@ -227,7 +211,7 @@ The `guard-dangerous.sh` hook blocks dangerous commands before execution:
 | `chmod -R 777` | Overly permissive permissions |
 | `docker system prune -a` | Destroy all Docker resources |
 
-Additional safety: `guard.js` also blocks writes to `.env`, credential, key, `.ssh`, `.gnupg`, `.git/`, and `node_modules` files, and commits carrying AI attribution trailers. `secret-scan.sh` checks every file Claude writes for credential-looking strings and tells Claude if it finds one.
+Additional safety: `guard.js` also blocks writes to `.env`, credential, key, `.ssh`, `.gnupg`, `.git/`, and `node_modules` files, and commits carrying AI attribution trailers. `secret-scan.js` checks every file Claude writes for credential-looking strings and tells Claude if it finds one.
 
 </details>
 
@@ -255,26 +239,14 @@ For complex tasks, spawn multiple specialist agents to work in parallel:
 - **Cross-layer features** — frontend + backend + database agents
 - **Competing hypotheses** — debug with parallel investigation
 
-Agent types include architecture analysts, debugging specialists, performance optimizers, security auditors, test generators, and 50+ more. See **[agents/README.md](./agents/README.md)**.
+Agent types include architecture analysts, debugging specialists, performance optimizers, security auditors, and many more specialists that run as `agent-*` skills. See **[agents/README.md](./agents/README.md)**.
 
 </details>
 
 <details>
 <summary><strong>🔌 MCP Servers</strong></summary>
 
-12 MCP server configurations available (all disabled by default for token efficiency):
-
-| Server | Purpose |
-|--------|---------|
-| `sequential-thinking` | Structured reasoning chains |
-| `playwright` | Browser testing & automation |
-| `memory` | Persistent memory across sessions |
-| `sqlite` / `postgres` | Database operations |
-| `github` / `git` | Enhanced GitHub/git operations |
-| `chrome-devtools` | Browser debugging & profiling |
-| `context7` | Enhanced context retrieval |
-
-Enable on-demand via `/mcp`. See **[docs/MCP-SERVERS.md](./docs/MCP-SERVERS.md)**.
+No MCP servers are configured by default, which keeps every session's context lean. Add one with `claude mcp add` when a project needs it; **[docs/MCP-SERVERS.md](./docs/MCP-SERVERS.md)** covers common options (Playwright, memory, databases, GitHub, Context7) and their token cost.
 
 </details>
 
@@ -297,9 +269,8 @@ The toolkit maintains context between sessions automatically:
 
 | File | Purpose |
 |------|---------|
-| `CLAUDE.md` | Core rules, auto-routing table, code standards |
+| `CLAUDE.md` | Core rules: autonomy, workflow, git, safety, code standards |
 | `settings.json` | Claude Code settings, hook registrations, permissions |
-| `.mcp.json` | MCP server definitions |
 | `counts.json` | Resource counts (source of truth) |
 | `plugin.json` | Plugin metadata |
 
@@ -384,7 +355,7 @@ See **[CHANGELOG.md](./CHANGELOG.md)** for the full history.
 
 | Document | Description |
 |----------|-------------|
-| [CLAUDE.md](./CLAUDE.md) | Core rules and auto-routing table |
+| [CLAUDE.md](./CLAUDE.md) | Core rules (the always-loaded constitution) |
 | [CHANGELOG.md](./CHANGELOG.md) | Version history |
 | [Architecture](./docs/ARCHITECTURE.md) | System design and component interactions |
 | [Setup Guide](./docs/SETUP-GUIDE.md) | First-time installation walkthrough |
@@ -395,8 +366,8 @@ See **[CHANGELOG.md](./CHANGELOG.md)** for the full history.
 | [MCP Servers](./docs/MCP-SERVERS.md) | MCP server reference |
 | [Configuration](./docs/CONFIGURATION.md) | Full settings.json reference |
 | [Folder Structure](./docs/FOLDER-STRUCTURE.md) | Directory layout and purpose |
-| [Skills Index](./skills/MASTER_INDEX.md) | All 128 skills with descriptions |
-| [Agents Index](./agents/README.md) | All 86 agents with descriptions |
+| [Skills Index](./skills/MASTER_INDEX.md) | All skills with descriptions |
+| [Agents Index](./agents/README.md) | All agents with descriptions |
 
 ---
 

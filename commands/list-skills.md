@@ -158,7 +158,6 @@ Display comprehensive categorized skill overview:
 - **Planning:** othmanadi-planning
 - **Infrastructure:** diet103-infrastructure
 - **Meta-Skills:** taches-cc-resources, claude-plugins-official
-- **Workflow:** auto-claude
 
 ### Search Marketplace Skills
 

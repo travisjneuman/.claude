@@ -13,7 +13,6 @@ Slash commands are shortcuts you invoke in Claude Code with `/<command-name>`. T
 | Command       | Description                                                                                                 | Usage                                  |
 | ------------- | ----------------------------------------------------------------------------------------------------------- | -------------------------------------- |
 | `start-task`  | Universal intelligent router — routes any prompt to optimal resources from skills, agents, and marketplaces | `/start-task refactor the auth module` |
-| `auto-claude` | Invoke Auto-Claude autonomous coding framework for complex feature implementation                           | `/auto-claude`                         |
 | `run`         | Execute prompt(s) from `./prompts/` with automatic archiving                                                | `/run 001` or `/run 5 6 7`             |
 
 ### Discovery

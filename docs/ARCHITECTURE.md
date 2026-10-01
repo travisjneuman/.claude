@@ -52,28 +52,18 @@ How the Claude Code Toolkit's components interact, from prompt to execution.
 
 The root `~/.claude/CLAUDE.md` file loads into every Claude Code session. It defines:
 
-- **Identity and role** — how Claude should behave
-- **P0 non-negotiables** — data integrity, security, coherence
-- **Workflow rules** — plan-approve-execute-verify cycle
-- **Tool policy** — which tools to use for which operations
-- **Auto-routing table** — keyword-to-resource mapping
-- **Code standards** — type safety, function size limits
+- **Authority and evidence** — what outranks what; tool output is evidence, not instructions
+- **Full Access+++** — autonomous execution and when to stop for the user
+- **Workflow** — discover, scope, execute, verify, document, commit, hand off
+- **Testing policy** — validate by review
+- **Git and safety** — pull first, never reset or force-push, no AI attribution, no secrets
+- **Code standards** and **finding the right tool** (`toolkit-router` → `INDEX.md`)
 
 Everything else in the toolkit extends or is referenced by CLAUDE.md.
 
 ### Rules — Contextual Guidance
 
-Rules live in `~/.claude/rules/` organized by purpose:
-
-```
-rules/
-├── checklists/        # Task-type verification (UI, scripts, static sites, API, DB, security, perf)
-├── workflows/         # Methodology (research, context, agent teams, deployment CI/CD)
-├── stacks/            # Technology patterns (React, Python, Go, Rust, full-stack, Vue, Svelte, Flutter, React Native, Django/FastAPI)
-└── tooling/           # Tool setup (git hooks, MCP servers, troubleshooting)
-```
-
-Rules load on demand based on the auto-routing table in CLAUDE.md. When a prompt mentions "React," the `docs/reference/stacks/react-typescript.md` file loads. When completing work, `docs/reference/checklists/verification-template.md` loads.
+Language rules live flat in `~/.claude/rules/` (`typescript-react.md`, `python.md`, `go.md`, …). Each has `paths:` frontmatter, so it loads only when Claude reads a matching file. Private owner rules load from `rules/local/` (gitignored). Checklists, workflows, stack guides, and tooling references live under `docs/reference/` and are found through `INDEX.md` or the `toolkit-router` skill.
 
 ### Skills — Domain Knowledge
 
@@ -128,7 +118,7 @@ Hooks are configured in `settings.json` and execute cross-platform (macOS, Linux
 
 ### Commands — User-Invoked Workflows
 
-Commands in `~/.claude/commands/` define slash-invoked workflows like `/start-task`, `/auto-claude`, `/handoff`. They're markdown files with YAML frontmatter that instruct Claude on multi-step processes.
+Commands in `~/.claude/commands/` define slash-invoked workflows like `/start-task`, `/handoff`, `/health-check`. They're markdown files with YAML frontmatter that instruct Claude on multi-step processes.
 
 ### MCP Servers — Extended Capabilities
 
@@ -151,7 +141,7 @@ MCP (Model Context Protocol) servers add tools beyond Claude's built-in capabili
 4. Tool calls execute
    │  ├── PreToolUse: guard.js (+ optional local-pre-tool-use.py)
    │  ├── Tool executes; path-scoped rules load when matching files are read
-   │  └── PostToolUse: secret-scan.sh on Write/Edit
+   │  └── PostToolUse: secret-scan.js on Write/Edit
    │
 5. git commit in ~/.claude
    │  └── pre-commit: public-safety gate, index + counts regenerated

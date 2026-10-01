@@ -90,7 +90,7 @@ There are 5 lifecycle events that can trigger hooks:
 
 ### Can hooks block actions?
 
-Yes. `PreToolUse` hooks can exit with code 2 to block the tool from executing. The `guard-dangerous.sh` hook uses this to prevent commands like `rm -rf /`, `git push --force`, and `DROP TABLE`.
+Yes. A `PreToolUse` hook can block a tool call, either by exiting with code 2 or by returning a structured `permissionDecision: "deny"`. The `guard.js` hook uses the structured deny to prevent commands like `rm -rf /`, `git push --force`, and `DROP TABLE`.
 
 ### How do I add a new hook?
 
@@ -142,9 +142,9 @@ Use subagents when you just need results back. Use Agent Teams when teammates ne
 | `.mcp.json`           | MCP server definitions        | No          |
 | Project `CLAUDE.md`   | Per-project overrides         | Per project |
 
-### How does the auto-routing system work?
+### How does routing work?
 
-When you type a prompt, Claude automatically matches keywords against a routing table defined in `CLAUDE.md`. For example, mentioning "React" loads `docs/reference/stacks/react-typescript.md`, mentioning "bug" loads `docs/reference/tooling/troubleshooting.md`. This happens without any slash commands — it's keyword-driven context loading.
+Core skills and agents are matched from their descriptions, which are always in context. Everything else (most skills, commands, checklists, stack guides, and the indexed marketplace skills) is listed by name only; for specialized work the `toolkit-router` skill greps the generated `INDEX.md` for the domain and loads what fits. Language rules load automatically when Claude reads a matching file. No slash commands are needed.
 
 ### What's the difference between `settings.json` and `settings.local.json`?
 

@@ -88,8 +88,10 @@ Verify:
 **List configured servers:**
 
 ```bash
-grep -A1 '"disabledMcpjsonServers"' ~/.claude/settings.json
+claude mcp list
 ```
+
+The toolkit configures none by default; any listed server was added on this machine or by the current project.
 
 ### Step 6: Report
 
@@ -101,9 +103,9 @@ grep -A1 '"disabledMcpjsonServers"' ~/.claude/settings.json
 ╠════════════════════════════════════════════════════════════╣
 ║  Configuration:  OK OK                                      ║
 ║  Structure:      OK OK (N skills, N agents, N markets)      ║
-║  Hooks:          OK 8 hooks across 8 events                   ║
+║  Hooks:          OK N hooks wired in settings.json          ║
 ║  Git:            OK Clean, submodules synced               ║
-║  MCP Servers:    OK 12 available (all disabled by default) ║
+║  MCP Servers:    OK N configured (none by default)          ║
 ╠════════════════════════════════════════════════════════════╣
 ║  Status: HEALTHY                                            ║
 ╚════════════════════════════════════════════════════════════╝

@@ -60,13 +60,20 @@ function stripHeredocs(cmd) {
   return cmd.replace(/<<-?\s*['"]?(\w+)['"]?[\s\S]*?\n\1\b/g, "");
 }
 
+// `git` plus global options before the subcommand: -C <path>, -c <key=value>,
+// --git-dir/--work-tree/--namespace <value>, --flag[=value], -p/-P.
+const GIT_VALUE = String.raw`(?:"[^"]*"|'[^']*'|[^\s;&|]+)`;
+const GIT = String.raw`\bgit(?:\s+(?:-[Cc]\s+${GIT_VALUE}|--(?:git-dir|work-tree|namespace)\s+${GIT_VALUE}|--[A-Za-z][A-Za-z-]*(?:=${GIT_VALUE})?|-[pP]))*`;
+const git = (rest) => new RegExp(GIT + rest);
+
 const BASH_RULES = [
   [/\brm\s+(-[a-zA-Z]*r[a-zA-Z]*f|-[a-zA-Z]*f[a-zA-Z]*r|-r\s+-f|-f\s+-r)[a-zA-Z]*\s+(\/|~|\$HOME|\$\{HOME\})(\s|\/?\*?\s*$|\/?$)/, "Recursive force delete of a filesystem or home root is blocked."],
-  [/\bgit\s+(-C\s+\S+\s+)?push\b[^\n;&|]*\s(--force(?!-with-lease)|-f)\b/, "Force push is blocked.", "approvable"],
-  [/\bgit\s+(-C\s+\S+\s+)?push\b[^\n;&|]*\s--force-with-lease\b/, "Force push (with lease) is blocked.", "approvable"],
-  [/\bgit\s+(-C\s+\S+\s+)?reset\s+--hard\b/, "git reset --hard discards work and is blocked.", "approvable"],
-  [/\bgit\s+(-C\s+\S+\s+)?clean\s+-[a-zA-Z]*[fdx]/, "git clean deleting files is blocked."],
-  [/\bgit\s+(-C\s+\S+\s+)?(checkout|restore)\s+(--\s+)?\.(\s|$)/, "Discarding all working-tree changes is blocked."],
+  // --force, --force-if-includes, -f or a short-flag cluster holding f (-fu), or a +refspec (origin +main).
+  [git(String.raw`\s+push\b[^\n;&|]*?\s(?:--force(?:-if-includes)?(?![\w-])|-[a-zA-Z0-9]*f[a-zA-Z0-9]*(?![\w-])|["']?\+[^\s"'])`), "Force push is blocked.", "approvable"],
+  [git(String.raw`\s+push\b[^\n;&|]*\s--force-with-lease(?![\w-])`), "Force push (with lease) is blocked.", "approvable"],
+  [git(String.raw`\s+reset\b[^\n;&|]*?\s--hard(?![\w-])`), "git reset --hard discards work and is blocked.", "approvable"],
+  [git(String.raw`\s+clean\s+-[a-zA-Z]*[fdx]`), "git clean deleting files is blocked."],
+  [git(String.raw`\s+(checkout|restore)\s+(--\s+)?(\.|:\/)(\s|$)`), "Discarding all working-tree changes is blocked."],
   [/\bchmod\s+-R\s+777\b/, "chmod -R 777 is blocked."],
   [/\b(curl|wget)\b[^\n|]*\|\s*(sudo\s+)?(ba|z)?sh\b/, "Piping a download straight into a shell is blocked; download, inspect, then run."],
   [/\b(DROP\s+(TABLE|DATABASE|SCHEMA)|TRUNCATE\s+TABLE)\b/i, "Destructive SQL is blocked."],

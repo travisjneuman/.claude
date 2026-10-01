@@ -18,15 +18,16 @@ Plugins extend Claude Code with reusable skills, agents, commands, and hooks. Th
 
 ## Current plugin set (authoritative)
 
-All from the official marketplace (`claude-plugins-official`), declared in `settings.json` and installed on each machine by `scripts/install-plugins.sh` (the daily background pull runs it, so every machine converges automatically).
+From the official marketplace (`claude-plugins-official`) unless noted, declared in `settings.json` and installed on each machine by `scripts/install-plugins.sh` (the daily background pull runs it, so every machine converges automatically).
 
 | Plugin | Why it's in | Cost |
 | --- | --- | --- |
 | `commit-commands` | `/commit`, `/commit-push-pr`, `/clean_gone`; no built-in equivalent | ~105 tokens/turn |
 | `frontend-design` | Anthropic's frontend design skill | ~80 |
-| `claude-security` | On-demand deep security scan with verified findings (beyond `/security-review`) | ~780 |
-| `cloudflare` | Cloudflare's own Workers/DO/Wrangler/Agents skills + Cloudflare MCP | see `claude plugin details cloudflare` |
+| `claude-security` | On-demand deep security scan with verified findings (beyond `/security-review`); declared but currently `false` | ~780 when on |
+| `cloudflare` | Cloudflare's own Workers/DO/Wrangler/Agents skills; declared but currently `false`. Cloudflare work goes through Wrangler and GitHub-connected deploys, not an MCP server | see `claude plugin details cloudflare` |
 | `typescript-lsp`, `pyright-lsp`, `swift-lsp` | Type errors surface right after edits; the installer adds `typescript-language-server`/`pyright` binaries (Swift uses Xcode's `sourcekit-lsp`) | ~0 |
+| `brag` (`brag` marketplace, `latent-spaces/brag`) | `/brag` launch videos for a project | see `claude plugin details brag` |
 | `plugin-dev` (project scope) | Plugin-authoring reference; enabled only inside the toolkit repo via `.claude/settings.json` | ~2.3k, only there |
 
 Dropped as duplicates or obsolete: `code-review` (built-in `/code-review`; also added an attribution footer), `pr-review-toolkit` and `feature-dev` (built-in `/code-review`, `/simplify`, Explore/Plan agents, toolkit agents), `agent-sdk-dev` (built-in `/claude-api`), `document-skills` (toolkit/claude.ai skills), `taches-cc-resources` (duplicates toolkit + plugin-dev), `hookify`, output-style plugins, `ralph-wiggum` (built-in `/loop`), `claude-opus-4-5-migration`. Skipped: `security-guidance` (runs an Opus review on every commit, too heavy with commit-everything).

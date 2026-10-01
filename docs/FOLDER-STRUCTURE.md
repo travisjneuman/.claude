@@ -302,10 +302,11 @@ This repo underwent a security audit before being made public. The following wer
     │   ├── README.md               ← What each hook does, token/time cost
     │   ├── run-hook.js             ← Cross-platform dispatcher (public + local/hooks)
     │   ├── guard.js                ← PreToolUse: footgun guard
-    │   ├── secret-scan.sh          ← PostToolUse: credential scan
+    │   ├── secret-scan.js          ← PostToolUse: credential scan
     │   ├── session-start-pull.sh   ← SessionStart (async): daily pull
     │   ├── session-start-repo-health.sh ← SessionStart: repo banner
     │   ├── session-end-repo-health.sh   ← SessionEnd: push finished work
+    │   ├── daily-maintenance.js    ← Stop: once-a-day usage tally + commit sweep
     │   └── statusline.js           ← Status bar
     │
     ├── rules/                      ← Contextual rules (17 files across 4 dirs)

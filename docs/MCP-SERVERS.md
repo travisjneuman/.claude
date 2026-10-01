@@ -1,6 +1,6 @@
 ---
 name: MCP Servers
-description: Configure and manage 12 MCP servers for browser testing, memory, databases, and structured reasoning.
+description: Optional MCP servers (none configured by default) for browser testing, memory, databases, and structured reasoning.
 category: reference
 ---
 
@@ -28,24 +28,26 @@ MCP (Model Context Protocol) is a standard for connecting AI models to external 
 
 ## Currently Installed Servers
 
-| Server              | Package                                            | Purpose                            | Status   |
-| ------------------- | -------------------------------------------------- | ---------------------------------- | -------- |
-| sequential-thinking | `@modelcontextprotocol/server-sequential-thinking` | Complex reasoning chains           | Active   |
-| playwright          | `@playwright/mcp@latest`                           | Browser automation (cross-browser) | Active   |
-| memory              | `@modelcontextprotocol/server-memory`              | Persistent memory                  | Active   |
-| filesystem          | `@modelcontextprotocol/server-filesystem`          | File operations                    | Active   |
-| sqlite              | `uvx mcp-server-sqlite`                            | Database queries                   | Active   |
-| context7            | `@upstash/context7-mcp`                            | Up-to-date library docs            | Disabled |
-| chrome-devtools     | `@anthropic-ai/chrome-devtools-mcp`                | Chrome debugging/performance       | Disabled |
-| puppeteer           | `@modelcontextprotocol/server-puppeteer`           | Simple browser automation          | Disabled |
-| browserbase         | `@browserbase/mcp-server-browserbase`              | Cloud browser automation           | Disabled |
-| github              | `@modelcontextprotocol/server-github`              | GitHub API operations              | Disabled |
-| postgres            | `@crystaldba/postgres-mcp`                         | PostgreSQL read-only access        | Disabled |
-| git                 | `@modelcontextprotocol/server-git`                 | Git operations via MCP             | Disabled |
+None. The toolkit ships no MCP server configuration: no `.mcp.json` and no user-scope servers. The servers below are documented options; add one with `claude mcp add` when a project needs it (see [Adding New Servers](#adding-new-servers)).
 
 ---
 
 ## Server Details
+
+| Server              | Package                                            | Purpose                            |
+| ------------------- | -------------------------------------------------- | ---------------------------------- |
+| sequential-thinking | `@modelcontextprotocol/server-sequential-thinking` | Complex reasoning chains           |
+| playwright          | `@playwright/mcp@latest`                           | Browser automation (cross-browser) |
+| memory              | `@modelcontextprotocol/server-memory`              | Persistent memory                  |
+| filesystem          | `@modelcontextprotocol/server-filesystem`          | File operations                    |
+| sqlite              | `uvx mcp-server-sqlite`                            | Database queries                   |
+| context7            | `@upstash/context7-mcp`                            | Up-to-date library docs            |
+| chrome-devtools     | `@anthropic-ai/chrome-devtools-mcp`                | Chrome debugging/performance       |
+| puppeteer           | `@modelcontextprotocol/server-puppeteer`           | Simple browser automation          |
+| browserbase         | `@browserbase/mcp-server-browserbase`              | Cloud browser automation           |
+| github              | `@modelcontextprotocol/server-github`              | GitHub API operations              |
+| postgres            | `@crystaldba/postgres-mcp`                         | PostgreSQL read-only access        |
+| git                 | `@modelcontextprotocol/server-git`                 | Git operations via MCP             |
 
 ### sequential-thinking
 
@@ -701,18 +703,7 @@ Servers like `playwright` and `fetch` have network access. Be cautious about:
 
 ## Portable Backup
 
-A clean copy of MCP config is maintained at:
-
-```
-~/.claude/.claude.json
-```
-
-This contains ONLY `mcpServers` - no machine-specific data.
-
-When setting up a new machine:
-
-1. Copy `.claude/.claude.json` to `~/.claude.json`
-2. Claude Code will add its own tracking data as you use it
+User-scope MCP servers live in `~/.claude.json` (`mcpServers`). When you add servers you want on every machine, prefer project-scope `.mcp.json` files in the projects that need them, or re-add them with `claude mcp add --scope user` on each machine.
 
 ---
 

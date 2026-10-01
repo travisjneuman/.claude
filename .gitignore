@@ -54,7 +54,6 @@ teams/
 plans/
 debug/
 ide/
-.mc-context.md
 
 # ----- CACHES, TELEMETRY, AND DOWNLOADS -----
 cache/
@@ -95,8 +94,6 @@ backups/
 .claude.json
 .mcp.json
 AGENTS.md
-.planning/
-.auto-claude/
 .worktrees/
 # A nested .claude/ keeps only the toolkit's own project settings.
 /.claude/*
