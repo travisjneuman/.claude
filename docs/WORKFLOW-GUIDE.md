@@ -54,15 +54,14 @@ Detailed patterns for getting work done with Claude Code.
 **What Happens:**
 
 1. All of the above, PLUS:
-2. Complexity scoring (determines GSD vs Planning vs Direct)
+2. Complexity scoring (determines Phased vs Planning vs Direct)
 3. Domain-specific resource loading from router files
-4. GSD project detection and auto-routing
-5. Decision framework invocation (if "should I", "vs", etc.)
-6. Post-work automation triggers
+4. Decision framework invocation (if "should I", "vs", etc.)
+5. Post-work automation triggers
 
 **Best For:**
 
-- Multi-phase projects (auto-routes to GSD)
+- Multi-phase projects (plans in phases)
 - When unsure about approach (decision frameworks)
 - Complex tasks spanning multiple systems
 - When you want explicit complexity analysis
@@ -75,14 +74,14 @@ Detailed patterns for getting work done with Claude Code.
 | "Build a new feature with API and UI" | `/start-task`                               |
 | "Should I use Redux or Zustand?"      | `/start-task` (triggers decision framework) |
 | "Debug why tests are failing"         | Standard prompt (skill auto-activates)      |
-| "Create a full authentication system" | `/start-task` (routes to GSD)               |
+| "Create a full authentication system" | `/start-task` (plans in phases)             |
 | "Update the README"                   | Standard prompt                             |
 
 ---
 
 ## Always Available Capabilities
 
-These can be used **anytime**, regardless of workflow stage or GSD phase:
+These can be used **anytime**, regardless of workflow stage or project phase:
 
 | Capability              | When to Use                                  | How to Invoke                        |
 | ----------------------- | -------------------------------------------- | ------------------------------------ |
@@ -95,7 +94,7 @@ These can be used **anytime**, regardless of workflow stage or GSD phase:
 | **Agent Teams**         | Parallel work with inter-agent coordination  | `/assemble-team` or natural language |
 | **Workflows**         | Autonomous feature implementation            | `ultracode: [description]` (built-in workflows)         |
 
-**Philosophy:** GSD provides _structure_, not _gates_. Use every tool that helps.
+**Philosophy:** Plans and phases provide _structure_, not _gates_. Use every tool that helps.
 
 ---
 
@@ -139,19 +138,17 @@ These can be used **anytime**, regardless of workflow stage or GSD phase:
 
 ---
 
-## GSD + Tools Integration
+## Phases + Tools Integration
 
-**GSD provides structure. Tools provide capabilities.** Use them together:
+**Phases provide structure. Tools provide capabilities.** Use them together:
 
-| Within GSD Phase | Still Use                                                    |
+| Within a Phase   | Still Use                                                    |
 | ---------------- | ------------------------------------------------------------ |
 | **Planning**     | WebSearch for research, Explore agent for codebase discovery |
 | **Execution**    | Skills for domain expertise, agents for specialized work     |
 | **Any phase**    | TodoWrite for tracking, Decision frameworks for choices      |
 
-**Key principle:** If a tool, skill, agent, or research would help accomplish the current phase's goals, **use it immediately**. Don't wait for a specific GSD command.
-
-See [GSD-TUTORIAL.md](./GSD-TUTORIAL.md) for complete GSD documentation.
+**Key principle:** If a tool, skill, agent, or research would help accomplish the current phase's goals, **use it immediately**. Don't wait for a specific command.
 
 ---
 
@@ -256,17 +253,16 @@ Create an agent team to build the user settings module:
 
 ---
 
-### 4. Multi-Phase Projects (GSD)
+### 4. Multi-Phase Projects (Phased Planning)
 
 **Process:**
 
 ```
 /start-task Build complete e-commerce platform
 → Complexity score: 5+ (high)
-→ Routes to GSD automatically
-→ Creates .planning/STATE.md
-→ Breaks into phases
-→ Tracks progress across sessions
+→ EnterPlanMode
+→ Breaks into phases, one task file per phase in tasks/
+→ Tracks progress across sessions through task files and commits
 ```
 
 **Best For:**
@@ -279,30 +275,28 @@ Create an agent team to build the user settings module:
 **Characteristics:**
 
 - Phased approach with milestones
-- Persistent state (.planning/)
+- Persistent state (task files in `tasks/`)
 - Multi-session support
 - Manual or Workflows per phase
-
-**See:** [GSD-TUTORIAL.md](./GSD-TUTORIAL.md) for complete documentation
 
 ---
 
 ### Workflow Comparison
 
-| Aspect         | Manual                | Agent Teams           | Workflows      | GSD            |
+| Aspect         | Manual                | Agent Teams           | Workflows      | Phased         |
 | -------------- | --------------------- | --------------------- | ---------------- | -------------- |
 | **Complexity** | 1-2                   | 3-4                   | 3-4              | 5+             |
 | **Control**    | Maximum               | Lead coordinates      | Medium           | Structured     |
 | **Speed**      | Slower                | Fast (parallel)       | Fast             | Phased         |
 | **Review**     | Each step             | Lead synthesizes      | End              | Per phase      |
-| **Isolation**  | Main branch           | Shared workspace      | Git worktree     | .planning/     |
+| **Isolation**  | Main branch           | Shared workspace      | Git worktree     | tasks/         |
 | **Best for**   | Learning, exploration | Cross-layer, parallel | Defined features | Large projects |
 
 **Combining workflows:**
 
 - Use Manual for research → Workflows for implementation
-- Use Agent Teams for cross-layer features within a GSD phase
-- Use GSD phases → Workflows for individual features within phases
+- Use Agent Teams for cross-layer features within a phase
+- Use phases → Workflows for individual features within phases
 - Switch between approaches as needs change
 
 ---
@@ -324,7 +318,7 @@ The `/start-task` command scores complexity to determine workflow:
 
 | Score | Workflow                       |
 | ----- | ------------------------------ |
-| >= 5  | GSD (multi-phase project)      |
+| >= 5  | Phased planning (multi-phase)  |
 | 3-4   | Workflows or EnterPlanMode   |
 | 1-2   | EnterPlanMode (planning first) |
 | <= 0  | Direct execution               |
@@ -378,7 +372,6 @@ This ensures every project has proper integration with `~/.claude/` including Re
 
 ## Related Documentation
 
-- [GSD-TUTORIAL.md](./GSD-TUTORIAL.md) - Multi-phase project management
 - [AGENT-TEAMS.md](./AGENT-TEAMS.md) - Parallel team coordination
 - [DOMAIN-ROUTING.md](./DOMAIN-ROUTING.md) - How /start-task routes work
 - [MARKETPLACE-GUIDE.md](./MARKETPLACE-GUIDE.md) - Marketplace resources

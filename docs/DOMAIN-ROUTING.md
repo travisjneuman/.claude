@@ -18,7 +18,7 @@ When you use `/start-task` (or just type naturally), the Universal Router:
 
 1. **Detects domains** from your description
 2. **Loads resources** (skills, agents, rules)
-3. **Determines workflow** (GSD vs Planning vs Direct)
+3. **Determines workflow** (Phased vs Planning vs Direct)
 4. **Executes** with optimal tooling
 
 ---
@@ -155,7 +155,7 @@ The router calculates complexity to determine workflow:
 
 | Score              | Workflow                                    |
 | ------------------ | ------------------------------------------- |
-| >= 5               | **GSD** (multi-phase project)               |
+| >= 5               | **Phased planning** (multi-phase work)      |
 | 3-4 (well-defined) | **Auto-Claude** (autonomous implementation) |
 | 3-4 (exploratory)  | **EnterPlanMode** (planning first)          |
 | 1-2                | **EnterPlanMode** (planning first)          |
@@ -236,14 +236,14 @@ Resources: /auto-claude suggestion, api-design skill
 Action: Suggest autonomous implementation with QA validation
 ```
 
-### Example 2b: New Feature (GSD)
+### Example 2b: New Feature (Phased Planning)
 
 ```
 User: Add complete notification system with email, push, and SMS
 
 Detected: Development/backend + development/mobile
 Complexity: 6 (multiple systems, integration, multi-phase)
-Workflow: GSD
+Workflow: Phased planning (plan mode, one task file per phase)
 Resources: api-design skill, notification patterns
 ```
 
@@ -332,7 +332,7 @@ Skill(ios-development)
 ## Related Documentation
 
 - [AUTO-CLAUDE-GUIDE.md](./AUTO-CLAUDE-GUIDE.md) - Auto-Claude setup and usage
-- [WORKFLOW-GUIDE.md](./WORKFLOW-GUIDE.md) - Workflow patterns (Manual, Auto-Claude, GSD)
+- [WORKFLOW-GUIDE.md](./WORKFLOW-GUIDE.md) - Workflow patterns (Manual, Auto-Claude, Phased)
 - `CLAUDE.md` - Workflow overview
 - `README.md` - Full toolkit capabilities
 - `skills/README.md` - Available skills

@@ -26,7 +26,6 @@ const GITHUB_URLS: Record<string, string> = {
     "https://github.com/anthropics/claude-plugins-official",
   "claude-scientific-skills":
     "https://github.com/K-Dense-AI/claude-scientific-skills",
-  "gsd-core": "https://github.com/open-gsd/gsd-core",
   "hesreallyhim-awesome": "https://github.com/hesreallyhim/awesome-claude-code",
   "mhattingpete-skills":
     "https://github.com/mhattingpete/claude-skills-marketplace",

@@ -112,7 +112,6 @@ This repo underwent a security audit before being made public. The following wer
     │   ├── FAQ.md                   ← Frequently asked questions
     │   ├── FOLDER-STRUCTURE.md     ← (this file)
     │   ├── GLOSSARY.md             ← Terminology definitions
-    │   ├── GSD-TUTORIAL.md         ← GSD workflow tutorial
     │   ├── MAINTENANCE.md          ← Cleanup and maintenance procedures
     │   ├── MARKETPLACE-GUIDE.md    ← Plugin marketplace guide
     │   ├── MCP-SERVERS.md          ← MCP server capabilities
@@ -142,7 +141,6 @@ This repo underwent a security audit before being made public. The following wer
     │       ├── claude-code-plugins/
     │       ├── claude-plugins-official/
     │       ├── taches-cc-resources/
-    │       ├── gsd-core/      ← GSD workflow system
     │       ├── obra-superpowers/
     │       ├── wshobson-agents/
     │       ├── voltagent-subagents/
@@ -308,8 +306,7 @@ This repo underwent a security audit before being made public. The following wer
     │   ├── session-start-pull.sh   ← SessionStart (async): daily pull
     │   ├── session-start-repo-health.sh ← SessionStart: repo banner
     │   ├── session-end-repo-health.sh   ← SessionEnd: push finished work
-    │   ├── statusline.js           ← Status bar
-    │   └── gsd-*.js                ← GSD framework hooks (not wired globally)
+    │   └── statusline.js           ← Status bar
     │
     ├── rules/                      ← Contextual rules (17 files across 4 dirs)
     │   ├── README.md               ← Rules index
@@ -402,27 +399,7 @@ Custom commands that appear as `/command-name` in Claude Code.
 | `update-docs.md`           | `/update-docs`           | Update documentation files          |
 | `router/*.md`              | (reference)              | Domain detection tables (7 files)   |
 
-**Note:** GSD commands (`/gsd-core:*`) come from the `gsd-core` marketplace plugin.
-
 **To add a command:** Create a `.md` file with YAML frontmatter. See `templates/command-template.md`.
-
----
-
-### GSD Workflow Commands (from marketplace)
-
-**Source:** `plugins/marketplaces/gsd-core/commands/gsd/`
-
-Complete workflow system for multi-phase projects:
-
-| Command             | Purpose                                            |
-| ------------------- | -------------------------------------------------- |
-| `/gsd-core:new-project`  | Initialize new project with deep context gathering |
-| `/gsd-core:progress`     | Check project status, route to next action         |
-| `/gsd-core:plan-phase`   | Create detailed execution plan for a phase         |
-| `/gsd-core:execute-plan` | Execute a PLAN.md file                             |
-| `/gsd-core:pause-work`   | Create context handoff when pausing                |
-| `/gsd-core:resume-work`  | Resume work with full context restoration          |
-| `/gsd-core:help`         | Show available GSD commands                        |
 
 ---
 
@@ -548,7 +525,6 @@ All documentation for understanding and maintaining this configuration.
 | `FAQ.md`                   | Frequently asked questions             |
 | `FOLDER-STRUCTURE.md`      | Directory map (this file)              |
 | `GLOSSARY.md`              | Terminology definitions                |
-| `GSD-TUTORIAL.md`          | GSD workflow tutorial                  |
 | `MAINTENANCE.md`           | Cleanup and maintenance procedures     |
 | `MARKETPLACE-GUIDE.md`     | Plugin marketplace guide               |
 | `MCP-SERVERS.md`           | MCP server capabilities                |

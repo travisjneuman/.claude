@@ -99,7 +99,7 @@ Load this file when development-related keywords detected.
 - Complexity < 3: Manual implementation (generic-feature-developer)
 - Complexity 3-4 + clear spec: **Suggest Auto-Claude**
 - Complexity 3-4 + unclear spec: EnterPlanMode first
-- Complexity >= 5: Route to GSD (`/gsd-core:new-project`)
+- Complexity >= 5: EnterPlanMode, then execute phase by phase
 
 **Keywords:** "implement", "add feature", "build", "create [complex feature]", "autonomous"
 

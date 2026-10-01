@@ -19,7 +19,7 @@ Execute one or more prompts from `./prompts/` directory, then automatically arch
 | -------------------------------------------- | ----------------------------------------------- |
 | You have pre-written prompts in `./prompts/` | Describing a task naturally                     |
 | Executing structured workflows               | Need intelligent skill/agent routing            |
-| Running batch prompt sequences               | Need complexity scoring (GSD vs Plan vs Direct) |
+| Running batch prompt sequences               | Need complexity scoring (Plan vs Direct)        |
 | Following established prompt files           | Starting fresh work                             |
 
 **Note:** Both approaches leverage the full skill ecosystem. `/run` is for pre-defined prompts; `/start-task` is for natural language routing.
@@ -67,19 +67,6 @@ fi
 
 ---
 
-## GSD Projects
-
-If working in a GSD project (has `.planning/STATE.md`), use GSD commands instead:
-
-| This Command | GSD Equivalent                   |
-| ------------ | -------------------------------- |
-| `/run`       | `/gsd-core:execute-phase`        |
-| `./prompts/` | `.planning/phases/XX-XX-PLAN.md` |
-
-Use `/gsd-core:progress` to see current project status and next plan to execute.
-
----
-
 ## Creating Prompts
 
 Store prompts in `./prompts/` directory:
@@ -101,7 +88,6 @@ Each prompt file should contain clear instructions for Claude to execute.
 | Command                           | Purpose                          |
 | --------------------------------- | -------------------------------- |
 | `/start-task`                     | Intelligent routing for any task |
-| `/gsd-core:execute-phase`         | Execute GSD phase plans          |
 
 ---
 

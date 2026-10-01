@@ -38,17 +38,13 @@ A user-invoked workflow defined as a markdown file in `~/.claude/commands/`. Typ
 
 The total amount of text Claude can process in a single session. The toolkit manages context by loading only relevant rules/skills, disabling unused MCP servers, and supporting `/compact` for context compression.
 
-### GSD (Get Shit Done)
-
-A multi-phase project management workflow system from the `gsd-core` marketplace plugin. Provides commands like `/gsd-core:new-project`, `/gsd-core:progress`, `/gsd-core:plan-phase` for structured project execution. See `docs/GSD-TUTORIAL.md`.
-
 ### Hook
 
 A bash script that runs automatically during Claude Code lifecycle events (SessionStart, Stop, UserPromptSubmit, PreToolUse, PostToolUse). Configured in `settings.json`. Hooks automate tasks like pulling repos, formatting code, and blocking dangerous commands. Located in `~/.claude/hooks/`.
 
 ### Marketplace
 
-A collection of 82 community-maintained GitHub repositories providing over 11,000+ additional skills, agents, and commands. Located in `~/.claude/plugins/marketplaces/`. Configured as read-only (fetch-only, push blocked).
+A collection of 81 community-maintained GitHub repositories providing over 10,900+ additional skills, agents, and commands. Located in `~/.claude/plugins/marketplaces/`. Configured as read-only (fetch-only, push blocked).
 
 ### MCP Server (Model Context Protocol)
 
@@ -126,7 +122,7 @@ A rating (0-5+) assigned by `/start-task` to determine which workflow to use. Ba
 | <= 0  | Direct execution         |
 | 1-2   | Plan mode                |
 | 3-4   | Auto-Claude or plan mode |
-| >= 5  | GSD multi-phase project  |
+| >= 5  | Phased planning          |
 
 ### Domain Routing
 
@@ -154,7 +150,7 @@ The hosting platform for the showcase website. Auto-deploys from the GitHub repo
 
 ### Pull-All-Repos Script
 
-`~/.claude/_pull-all-repos.sh` — fetches updates for the parent repo and all 82 marketplace repos, fixes detached HEAD states, enforces no-push on marketplace repos, and updates documentation counts.
+`~/.claude/_pull-all-repos.sh` — fetches updates for the parent repo and all 81 marketplace repos, fixes detached HEAD states, enforces no-push on marketplace repos, and updates documentation counts.
 
 ### Update-Counts Script
 

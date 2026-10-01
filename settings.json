@@ -321,12 +321,6 @@
         "repo": "anthropics/claude-plugins-official"
       }
     },
-    "gsd-core": {
-      "source": {
-        "source": "github",
-        "repo": "open-gsd/gsd-core"
-      }
-    },
     "brag": {
       "source": {
         "source": "github",

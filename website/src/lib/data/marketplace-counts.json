@@ -1,6 +1,6 @@
 {
-  "repoCount": 82,
-  "totalSkills": 11052,
+  "repoCount": 81,
+  "totalSkills": 10980,
   "repos": [
     {
       "name": "claude-code-plugins-plus-skills",
@@ -76,11 +76,6 @@
       "name": "trailofbits-skills",
       "displayName": "Trailofbits Skills",
       "skillCount": 83
-    },
-    {
-      "name": "gsd-core",
-      "displayName": "Gsd Core",
-      "skillCount": 72
     },
     {
       "name": "gmickel-marketplace",

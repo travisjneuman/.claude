@@ -206,14 +206,13 @@ System prompt here...
 
 ### Plugin Marketplace Ecosystem
 
-This setup includes 82 marketplace repositories providing access to 11,000+ community skills. Key marketplaces for plugin development reference:
+This setup includes 81 marketplace repositories providing access to 10,900+ community skills. Key marketplaces for plugin development reference:
 
 | Repository                        | URL                                                  | Specialization                |
 | --------------------------------- | ---------------------------------------------------- | ----------------------------- |
 | anthropics/claude-code            | https://github.com/anthropics/claude-code            | Official plugin format        |
 | obra/superpowers                  | https://github.com/obra/superpowers                  | TDD, debugging workflows      |
 | glittercowboy/taches-cc-resources | https://github.com/glittercowboy/taches-cc-resources | Prompts, meta-prompting       |
-| open-gsd/gsd-core       | https://github.com/open-gsd/gsd-core       | Workflow automation framework |
 
 ### Skill File Structure
 

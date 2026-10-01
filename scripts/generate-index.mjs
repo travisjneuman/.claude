@@ -61,7 +61,7 @@ const clip = (s, n = 110) => {
 
 // ---------- domains ----------
 const DOMAINS = [
-  ["workflow", "Workflow & toolkit", /\b(gsd|milestone|phase|backlog|handoff|session|workstream|router|routing|toolkit|index|counts|bootstrap|backup|standardi[sz]e|skill[- ]finder|discover|workspace|todo|plan(ning)?|roadmap|changelog|decision log|log-decision|context|scaffold|init-project|list-skills|pull-repos|repos|auto-claude|autonomous|agent teams?|team composition)\b/i],
+  ["workflow", "Workflow & toolkit", /\b(milestone|phase|backlog|handoff|session|workstream|router|routing|toolkit|index|counts|bootstrap|backup|standardi[sz]e|skill[- ]finder|discover|workspace|todo|plan(ning)?|roadmap|changelog|decision log|log-decision|context|scaffold|init-project|list-skills|pull-repos|repos|auto-claude|autonomous|agent teams?|team composition)\b/i],
   ["security", "Security & compliance", /\b(security|owasp|secure|secret|vulnerab|compliance|soc ?2|hipaa|gdpr|pci|threat|pentest|devsecops|harden)/i],
   ["mobile", "Mobile", /\b(ios|ipados|android|swift(ui)?|kotlin|flutter|dart|react native|expo|mobile|testflight|app store)\b/i],
   ["frontend", "Frontend, UI & UX", /\b(react|vue|nuxt|svelte|next\.?js|css|tailwind|ui|ux|design system|animation|accessib|a11y|wcag|frontend|pwa|seo|i18n|locali[sz]|browser extension)\b/i],
@@ -110,7 +110,7 @@ for (const f of fs.readdirSync(path.join(root, "agents")).sort()) {
   const name = fm.name || f.replace(/\.md$/, "");
   const desc = fm.description || firstLine(t);
   nodes.push({ id: `agent:${name}`, type: "agent", name, path: rel(file), description: desc, model: fm.model || "",
-    domain: name.startsWith("gsd-") ? "workflow" : domainOf(`${name} ${desc}`) });
+    domain: domainOf(`${name} ${desc}`) });
 }
 
 function walkCommands(dir, prefix = "") {
@@ -124,7 +124,7 @@ function walkCommands(dir, prefix = "") {
     const desc = fm.description || firstLine(t);
     nodes.push({ id: `command:${name}`, type: "command", name, path: rel(full), description: desc,
       tier: coreCommands.has(name) ? "core" : "name-only", manual: String(fm["disable-model-invocation"]) === "true",
-      domain: name.startsWith("gsd:") ? "workflow" : domainOf(`${name} ${desc}`) });
+      domain: domainOf(`${name} ${desc}`) });
   }
 }
 walkCommands(path.join(root, "commands"));
@@ -286,7 +286,7 @@ if (write) {
   }
   // One entry per distinct skill body; the copy from the most canonical source wins.
   const CANONICAL = ["anthropic-agent-skills", "claude-plugins-official", "anthropic-life-sciences", "vercel-agent-skills",
-    "expo-skills", "trailofbits-skills", "trailofbits-skills-curated", "hashicorp-agent-skills", "obra-superpowers", "gsd-core"];
+    "expo-skills", "trailofbits-skills", "trailofbits-skills-curated", "hashicorp-agent-skills", "obra-superpowers"];
   const rank = (m) => { const i = CANONICAL.indexOf(m); return i === -1 ? CANONICAL.length : i; };
   cat.sort((a, b) => rank(a.marketplace) - rank(b.marketplace) || a.marketplace.localeCompare(b.marketplace));
   const seen = new Map();

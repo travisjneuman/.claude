@@ -12,7 +12,7 @@ category: ecosystem
 
 ## Overview
 
-Plugins extend Claude Code with reusable skills, agents, commands, and hooks. This setup manages 82 marketplace repos containing 11,000+ community skills alongside 180 local skills. Marketplace repos are read-only references pulled from upstream, while local plugins are your own customizations tracked in your personal repo.
+Plugins extend Claude Code with reusable skills, agents, commands, and hooks. This setup manages 81 marketplace repos containing 10,900+ community skills alongside 180 local skills. Marketplace repos are read-only references pulled from upstream, while local plugins are your own customizations tracked in your personal repo.
 
 ---
 
@@ -59,9 +59,8 @@ plugins/
     ├── anthropic-agent-skills/
     ├── claude-code-plugins/
     │   └── plugins/           # Each subdirectory is one plugin
-    ├── gsd-core/
     ├── obra-superpowers/
-    └── ... (82 marketplace repos total)
+    └── ... (81 marketplace repos total)
 ```
 
 | Directory       | Purpose                                  | Git Tracked? |
@@ -153,7 +152,7 @@ claude doctor
 
 ## The Marketplace Ecosystem
 
-This setup aggregates 82 marketplace repos containing 11,000+ community-contributed skills across many domains.
+This setup aggregates 81 marketplace repos containing 10,900+ community-contributed skills across many domains.
 
 ### Notable Marketplaces
 
@@ -162,7 +161,6 @@ This setup aggregates 82 marketplace repos containing 11,000+ community-contribu
 | `claude-code-plugins`      | Official Anthropic plugins (13 plugins) |
 | `anthropic-agent-skills`   | Official agent skill definitions        |
 | `obra-superpowers`         | TDD, debugging, collaboration patterns  |
-| `gsd-core`            | GSD productivity workflow               |
 | `trailofbits-skills`       | Security analysis and auditing          |
 | `expo-skills`              | React Native / Expo development         |
 | `vercel-agent-skills`      | Vercel deployment and Next.js           |
@@ -284,7 +282,7 @@ git submodule init && git submodule update --remote
 ### Detached HEAD in Submodule
 
 ```bash
-cd ~/.claude/plugins/marketplaces/gsd-core
+cd ~/.claude/plugins/marketplaces/<repo-name>
 git checkout main && git pull origin main
 ```
 
@@ -336,6 +334,6 @@ This keeps upstream updates accessible while preserving your customizations.
 
 - `~/.claude/CLAUDE.md` -- Core rules and plugin philosophy
 - `~/.claude/docs/MARKETPLACE-GUIDE.md` -- Marketplace browsing and discovery
-- `~/.claude/docs/reference/tooling/external-repos.md` -- Full list of 82 marketplace repos
+- `~/.claude/docs/reference/tooling/external-repos.md` -- Full list of 81 marketplace repos
 - `~/.claude/docs/reference/tooling/troubleshooting.md` -- General troubleshooting
 - `~/.claude/skills/README.md` -- Skills overview (180 local skills)

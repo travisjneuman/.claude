@@ -161,7 +161,7 @@ Agent column: plain names are core agents (Agent tool); `agent-*` names are skil
 
 **Primary:** `Skill(vue-development)`
 **Supporting:** `generic-design-system` for UI patterns
-**Route:** May need GSD for complex multi-phase work
+**Route:** Use plan mode for complex multi-phase work
 
 ### Problem: "Create a Svelte 5 app with runes"
 
@@ -187,7 +187,7 @@ Agent column: plain names are core agents (Agent tool); `agent-*` names are skil
 **Primary:** `Skill(devops-cloud)`
 **Agent:** `devops-engineer` (Agent tool)
 **Marketplace:** voltagent-subagents has CI/CD specialists
-**Route:** Consider `/gsd-core:new-project` for multi-step setup
+**Route:** Use plan mode for multi-step setup
 
 ---
 
@@ -197,7 +197,7 @@ After identifying skills, determine execution route:
 
 | Complexity   | Route              | Criteria                                           |
 | ------------ | ------------------ | -------------------------------------------------- |
-| High (3+)    | `/gsd-core:new-project` | Multi-phase, architecture decisions, 3+ file types |
+| High (3+)    | `EnterPlanMode`, phased | Multi-phase, architecture decisions, 3+ file types |
 | Medium (1-2) | `EnterPlanMode`    | Single feature, some planning needed               |
 | Low (0)      | Direct execution   | Single file, clear task, immediate                 |
 

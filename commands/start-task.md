@@ -32,15 +32,7 @@ Parallel tool usage: When multiple independent searches/reads needed, make ALL c
 
 Query persistent memory for context relevant to: `{{task_description}}`
 
-### Step 3: Active GSD Project Check
-
-```bash
-[ -f .planning/STATE.md ] && echo "ACTIVE_GSD_PROJECT"
-```
-
-If active: Invoke `/gsd-core:progress` and EXIT.
-
-### Step 4: Domain Detection
+### Step 3: Domain Detection
 
 Grep `~/.claude/INDEX.md` for the task's keywords (see the `toolkit-router` skill). For multi-domain requests, load the matching route file:
 
@@ -53,24 +45,23 @@ Grep `~/.claude/INDEX.md` for the task's keywords (see the `toolkit-router` skil
 
 Extract from the domain file: **skill** to invoke, **agent** to spawn, **contextual rules** to read.
 
-### Step 5: Route Selection
+### Step 4: Route Selection
 
 - Diff describable in one sentence → execute directly.
 - Ambiguous scope or multiple systems → short plan (plan mode only when a real choice needs the user), then execute.
-- Long multi-phase project with an existing `.planning/` directory → make sure the `gsd-core` plugin is enabled for that project (`/plugin install gsd-core@gsd-core --scope project`), then `/gsd-core:progress`. Otherwise do not start GSD unprompted.
 - Full Access+++ applies: do not ask for approval of in-scope steps. See CLAUDE.md.
 
-### Step 6: Execute
+### Step 5: Execute
 
 - Invoke identified skill(s) from domain files
 - Use `TodoWrite` for multi-step tracking (always for 3+ steps)
 - Spawn core agents via the Agent tool, or invoke `agent-<name>` skills via the Skill tool, as needed
 - For specialized domains: `find ~/.claude/plugins/marketplaces -name "SKILL.md" | xargs grep -li "<keyword>"`
 
-### Step 7: Verify
+### Step 6: Verify
 
 Validate by review: re-read the request and review the whole diff and the code it touches. No tests (see CLAUDE.md); tests only if the user explicitly asks.
 
-**If `{{task_description}}` is empty:** Check GSD project → query memory → check todos → ask user.
+**If `{{task_description}}` is empty:** Query memory → check todos → ask user.
 
 _v3.2: Trimmed — removed inline duplication with CLAUDE.md auto-routing_

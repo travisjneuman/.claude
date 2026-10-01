@@ -14,10 +14,9 @@ export interface Hook {
 }
 
 // Keyed by filename. Only hooks listed here are shown: they are the ones wired
-// in settings.json (all through the run-hook.js dispatcher). The gsd-*.js files
-// in hooks/ are kept for GSD users but are not wired globally, so they are
-// intentionally absent. Private hooks in the gitignored local/hooks/ layer are
-// not in the public repo and never appear here.
+// in settings.json (all through the run-hook.js dispatcher). Private hooks in
+// the gitignored local/hooks/ layer are not in the public repo and never
+// appear here.
 const HOOK_METADATA: Record<
   string,
   { event: string; matcher: string; description: string }

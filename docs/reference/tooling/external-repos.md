@@ -1,6 +1,6 @@
 # External Repository Management
 
-**When to use:** Updating GSD, marketplace plugins, or other external dependencies.
+**When to use:** Updating marketplace plugins or other external dependencies.
 
 ---
 
@@ -52,7 +52,6 @@ All external repos are located in `~/.claude/plugins/marketplaces/`:
 | expo-skills                       | https://github.com/expo/skills.git                                         |
 | francyjg-agent-skill-creator      | https://github.com/FrancyJGLisboa/agent-skill-creator.git                  |
 | georgeguimaraes-elixir            | https://github.com/georgeguimaraes/claude-code-elixir.git                  |
-| gsd-core                     | https://github.com/open-gsd/gsd-core.git                         |
 | giuseppe-developer-kit            | https://github.com/giuseppe-trisciuoglio/developer-kit.git                 |
 | gmickel-marketplace               | https://github.com/gmickel/gmickel-claude-marketplace.git                  |
 | hardikpandya-stop-slop            | https://github.com/hardikpandya/stop-slop.git                              |
@@ -119,7 +118,7 @@ All external repos are located in `~/.claude/plugins/marketplaces/`:
 **What gets pulled:**
 
 1. `~/.claude` - Parent repo (travisjneuman/.claude)
-2. `~/.claude/plugins/marketplaces/*` - All 82 marketplace repos
+2. `~/.claude/plugins/marketplaces/*` - All 81 marketplace repos
 3. Custom project directories (if configured) - your own repos
 4. Documentation counts updated automatically if any repos changed
 
@@ -182,11 +181,11 @@ Each external repo should have `no_push` as the push URL:
 
 ```bash
 # Check a repo's remotes
-cd ~/.claude/plugins/marketplaces/gsd-core
+cd ~/.claude/plugins/marketplaces/obra-superpowers
 git remote -v
 
 # Expected output:
-# origin  https://github.com/open-gsd/gsd-core.git (fetch)
+# origin  https://github.com/obra/superpowers.git (fetch)
 # origin  no_push (push)
 ```
 
@@ -254,7 +253,7 @@ git submodule update --remote
 ### Detached HEAD in Submodule
 
 ```bash
-cd ~/.claude/plugins/marketplaces/gsd-core
+cd ~/.claude/plugins/marketplaces/<repo-name>
 git checkout main  # or master
 git pull origin main
 ```
@@ -263,8 +262,7 @@ git pull origin main
 
 ## Related Documentation
 
-- `~/.claude/CLAUDE.md` - GSD integration section
-- `~/.claude/plugins/marketplaces/gsd-core/README.md` - GSD usage guide
+- `~/.claude/docs/MARKETPLACE-GUIDE.md` - Marketplace catalog
 - `~/.claude/plugins/README.md` - Plugin marketplace info
 
 ---

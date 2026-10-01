@@ -88,7 +88,6 @@ Load these `~/.claude/` files when relevant:
 | I want to...         | Command                      |
 | -------------------- | ---------------------------- |
 | Start any task       | `/start-task [description]`  |
-| Check project status | `/gsd-core:progress`              |
 | Debug an issue       | `Skill(debug-systematic)`    |
 ```
 

@@ -1,12 +1,12 @@
 ---
 name: Marketplace Guide
-description: Browse, install, and manage 109 community plugin marketplaces with 11,000+ additional skills.
+description: Browse, install, and manage 109 community plugin marketplaces with 10,900+ additional skills.
 category: ecosystem
 ---
 
 # Marketplace Guide
 
-Complete reference for the 82 plugin marketplaces and how to use them.
+Complete reference for the 81 plugin marketplaces and how to use them.
 
 **Last Updated:** February 2026 (v2.10.1)
 
@@ -41,7 +41,6 @@ Complete reference for the 82 plugin marketplaces and how to use them.
 | Marketplace           | Contents                                 | Key Features                       |
 | --------------------- | ---------------------------------------- | ---------------------------------- |
 | `taches-cc-resources` | Meta-prompting, debugging, hooks, agents | Prompt engineering, skill creation |
-| `gsd-core`       | Multi-phase project management           | GSD system for complex projects    |
 
 ### Large Collections
 
@@ -179,18 +178,6 @@ Complete reference for the 82 plugin marketplaces and how to use them.
 | `/consider:5-whys`                        | Root cause analysis                 |
 | `/consider:swot`                          | Trade-off evaluation (SWOT)         |
 
-### gsd-core (GSD)
-
-| Command               | Purpose                        |
-| --------------------- | ------------------------------ |
-| `/gsd-core:new-project`    | Initialize multi-phase project |
-| `/gsd-core:progress`       | Check status, get next action  |
-| `/gsd-core:plan-phase [n]` | Create phase execution plan    |
-| `/gsd-core:execute-plan`   | Work through current plan      |
-| `/gsd-core:resume-work`    | Restore session context        |
-| `/gsd-core:pause-work`     | Save state before break        |
-| `/gsd-core:help`           | Full command reference         |
-
 ### obra-superpowers
 
 | Command              | Purpose                     |
@@ -252,7 +239,7 @@ find ~/.claude/plugins/marketplaces -name "*.md" -path "*/agents/*" | head -20
 
 ### skillsmp.com
 
-Search 11,000+ community skills:
+Search 10,900+ community skills:
 
 ```
 /discover-skills <query>
@@ -280,11 +267,10 @@ All marketplaces are configured with `no_push` - read-only access.
 ## Related Documentation
 
 - [WORKFLOW-GUIDE.md](./WORKFLOW-GUIDE.md) - Workflow patterns
-- [GSD-TUTORIAL.md](./GSD-TUTORIAL.md) - GSD system guide
 - [../skills/MASTER_INDEX.md](../skills/MASTER_INDEX.md) - Local skills catalog
 - [../CLAUDE.md](../CLAUDE.md) - Core rules
 
 ---
 
-_82 marketplaces, 11,000+ skills, discovered proactively when domain expertise is needed._
+_81 marketplaces, 10,900+ skills, discovered proactively when domain expertise is needed._
 

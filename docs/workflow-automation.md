@@ -21,7 +21,7 @@ category: workflow
 | [Troubleshooting](#troubleshooting)                   | Common issues and fixes                |
 | [Customization](#customization)                       | Extend and modify tools                |
 | [Best Practices](#best-practices)                     | Tips for success                       |
-| [Workflow Selection Guide](#workflow-selection-guide) | When to use GSD vs prompts vs direct   |
+| [Workflow Selection Guide](#workflow-selection-guide) | When to use phases vs prompts vs direct |
 
 ---
 
@@ -553,13 +553,13 @@ tasks/task1.md
 ## Task Complexity Spectrum
 
 ```
-Simple              Moderate            Multi-Stage         Multi-Phase (GSD)
-(Direct)            (/create-prompt)    (/create-meta)      (/gsd-core:*)
+Simple              Moderate            Multi-Stage         Multi-Phase
+(Direct)            (/create-prompt)    (/create-meta)      (plan mode + tasks/)
    │                     │                   │                   │
 <30 min              30min-2hr            2-8 hours          Days/Weeks
 1-2 files            3-10 files           10+ files          Phases
 Clear scope          Defined scope        Research needed    Vision → Execution
-No state             Stateless            Stateless          STATE.md (persistent)
+No state             Stateless            Stateless          Task files (persistent)
 ```
 
 ## When to Use Each System
@@ -602,7 +602,7 @@ No state             Stateless            Stateless          STATE.md (persisten
 
 **How:** `/start-task research then implement user auth`
 
-### GSD (Get Shit Done)
+### Phased Planning
 
 **Scope:** Days/weeks, multiple phases, persistent state
 
@@ -613,38 +613,33 @@ No state             Stateless            Stateless          STATE.md (persisten
 - Complex system with dependencies
 - Anything needing persistent context
 
-**How:** `/start-task new project for my app` or `/gsd-core:new-project`
+**How:** `/start-task new project for my app`, which plans in plan mode and keeps one task file per phase in `tasks/`
 
 ## Automatic Detection
 
-The `/start-task` command automatically detects:
+The `/start-task` command automatically detects complexity signals:
 
-1. **GSD Project:** Checks for `.planning/STATE.md`
-   - If found + no task → routes to `/gsd-core:progress`
-   - If found + project-related task → routes to GSD commands
-
-2. **Complexity Signals:**
-   - Multiple components → suggests GSD
-   - Sequential dependencies → suggests GSD
-   - Large scope keywords → suggests GSD
+- Multiple components → suggests phased planning
+- Sequential dependencies → suggests phased planning
+- Large scope keywords → suggests phased planning
 
 ## Transition Scenarios
 
-### Escalating from Prompt to GSD
+### Escalating from Prompt to Phased Work
 
 If during `/create-prompt` you realize scope is larger:
 
 1. Complete current prompt if it provides value
-2. Run `/gsd-core:new-project` to initialize
-3. Import insights from prompt work into PROJECT.md
+2. Enter plan mode and split the remaining work into phases
+3. Record insights from the prompt work in the first phase's task file
 
-### De-escalating from GSD to Simple
+### De-escalating from Phased Work to Simple
 
-If GSD project turns out simpler than expected:
+If phased work turns out simpler than expected:
 
-1. Keep `.planning/` for documentation
+1. Keep the task files for documentation
 2. Execute remaining work directly
-3. Run `/gsd-core:complete-milestone` when done
+3. Archive the task files when done
 
 ## Quick Reference Table
 
@@ -653,9 +648,8 @@ If GSD project turns out simpler than expected:
 | "Fix typo"            | Direct   | Just do it                     |
 | "Refactor X"          | Prompt   | `/start-task refactor X`       |
 | "Research then build" | Meta     | `/start-task research then...` |
-| "New project"         | GSD      | `/gsd-core:new-project`             |
-| "Where was I"         | GSD      | `/gsd-core:progress`                |
-| Multi-component task  | GSD      | Auto-detected                  |
+| "New project"         | Phased   | `/start-task new project...`   |
+| Multi-component task  | Phased   | Auto-detected                  |
 
 ---
 
@@ -729,12 +723,10 @@ git commit -m "feat: Add fuzzy search to notes list"
 ## Related Documentation
 
 - [WORKFLOW-GUIDE.md](./WORKFLOW-GUIDE.md) - Workflow patterns and routing
-- [GSD-TUTORIAL.md](./GSD-TUTORIAL.md) - Multi-phase project management
 - `~/.claude/CLAUDE.md` - Core workflow rules
 - `~/.claude/templates/task-template.md` - Task file template
 - `~/.claude/skills/README.md` - Available skills (85 skills)
 - `~/.claude/commands/` - Custom commands (30 commands)
-- `~/.claude/commands/gsd/help.md` - GSD command reference
 
 ---
 

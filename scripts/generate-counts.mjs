@@ -131,11 +131,10 @@ function buildCounts() {
       marketplace = { totalSkills: previous.marketplaceSkills, repos: previousRepos || marketplace.repos };
     }
   }
-  const gsdCommands = countFiles(path.join(repoRoot, "commands", "gsd"), (name) => name.endsWith(".md") && name !== "README.md");
   const routerCommands = countFiles(path.join(repoRoot, "commands", "router"), (name) => name.endsWith(".md") && name !== "README.md");
   const commands = countFiles(path.join(repoRoot, "commands"), (name) => name.endsWith(".md") && name !== "README.md");
-  // Count hooks that are actually wired in settings.json (the gsd-*.js files ship
-  // for GSD users but are not wired globally; run-hook.js is the dispatcher).
+  // Count hooks that are actually wired in settings.json (unwired files are not
+  // counted; run-hook.js is the dispatcher).
   const wired = readText(path.join(repoRoot, "settings.json"));
   const hooks = countFiles(path.join(repoRoot, "hooks"), (name) => (name.endsWith(".sh") || name.endsWith(".js")) && name !== "run-hook.js" && wired.includes(`'${name}'`));
   return {
@@ -144,9 +143,8 @@ function buildCounts() {
     agents: countFiles(path.join(repoRoot, "agents"), (name) => name.endsWith(".md") && name !== "README.md"),
     repos: manifest.length,
     commands,
-    gsdCommands,
     routerCommands,
-    totalCommands: commands + gsdCommands + routerCommands,
+    totalCommands: commands + routerCommands,
     hooks,
     rules: countFiles(path.join(repoRoot, "rules"), (name) => name.endsWith(".md") && name !== "README.md"),
     templates: countEntries(path.join(repoRoot, "templates"), (entry) => entry.name !== "README.md"),
@@ -174,7 +172,6 @@ function replaceCoreCounts(text, counts) {
     .replace(/[0-9]+ specialized agents/g, `${counts.agents} specialized agents`)
     .replace(/[0-9]+ specialist agents/g, `${counts.agents} specialist agents`)
     .replace(/[0-9]+ slash commands/g, `${counts.commands} slash commands`)
-    .replace(/[0-9]+ base \+ [0-9]+ GSD \+ [0-9]+ router = [0-9]+ total/g, `${counts.commands} base + ${counts.gsdCommands} GSD + ${counts.routerCommands} router = ${counts.totalCommands} total`)
     .replace(/[0-9]+ lifecycle hooks/g, `${counts.hooks} lifecycle hooks`)
     .replace(/[0-9]+ MCP server configs/g, `${counts.mcpServers} MCP server configs`)
     .replace(/[0-9]+ MCP Servers/g, `${counts.mcpServers} MCP Servers`)

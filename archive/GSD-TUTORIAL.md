@@ -6,6 +6,8 @@ category: workflow
 
 # GSD (Get Shit Done) Tutorial
 
+> **Archived.** GSD (the `gsd-core` marketplace) has been removed from this toolkit. This guide is kept for historical reference only; nothing in the toolkit registers, routes to, or counts GSD any more.
+
 A practical guide to using the GSD system for multi-phase projects.
 
 **Last Updated:** February 2026 (v2.10.1)

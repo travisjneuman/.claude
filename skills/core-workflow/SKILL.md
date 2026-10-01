@@ -46,55 +46,14 @@ git push    # or the configured push runner, when one is defined; never force
 
 ---
 
-## GSD (Get Shit Done) - Multi-Phase Projects
+## Sizing Work
 
-For complex features spanning days/weeks, use **GSD**.
-
-### When to Use GSD
-
-| Complexity                 | Use GSD? | Workflow              |
-| -------------------------- | -------- | --------------------- |
-| Simple fix (<30 min)       | No       | Direct execution      |
-| Single feature (30min-2hr) | No       | Task file + TodoWrite |
-| Multi-phase feature (days) | **Yes**  | GSD workflow          |
-| New project/app            | **Yes**  | GSD from start        |
-
-### GSD Quick Start
-
-```bash
-/gsd-core:new-project       # Initialize with brief + config
-/gsd-core:create-roadmap    # Create phases and state tracking
-/gsd-core:plan-phase 1      # Create detailed plan for phase
-/gsd-core:execute-plan <path>  # Execute the plan
-```
-
-### GSD Commands Reference
-
-| Command                            | Purpose                            |
-| ---------------------------------- | ---------------------------------- |
-| `/gsd-core:progress`                    | Check status, route to next action |
-| `/gsd-core:resume-work`                 | Resume from previous session       |
-| `/gsd-core:pause-work`                  | Create handoff when pausing        |
-| `/gsd-core:plan-phase <n>`              | Create detailed phase plan         |
-| `/gsd-core:execute-plan <path>`         | Execute a PLAN.md                  |
-| `/gsd-core:add-phase <desc>`            | Add phase to roadmap               |
-| `/gsd-core:insert-phase <after> <desc>` | Insert urgent work                 |
-| `/gsd-core:complete-milestone <ver>`    | Archive and tag release            |
-| `/gsd-core:help`                        | Full command reference             |
-
-### GSD File Structure
-
-```
-.planning/
-├── PROJECT.md          # Vision and requirements
-├── ROADMAP.md          # Phase breakdown
-├── STATE.md            # Project memory (context accumulation)
-├── config.json         # Workflow mode (interactive/yolo)
-└── phases/
-    └── 01-foundation/
-        ├── 01-01-PLAN.md
-        └── 01-01-SUMMARY.md
-```
+| Complexity                 | Workflow                                          |
+| -------------------------- | ------------------------------------------------- |
+| Simple fix (<30 min)       | Direct execution                                  |
+| Single feature (30min-2hr) | Task file + TodoWrite                             |
+| Multi-phase feature (days) | Plan mode, then one task file per phase in `tasks/` |
+| New project/app            | `/init-project`, then plan mode for the first phase |
 
 ---
 

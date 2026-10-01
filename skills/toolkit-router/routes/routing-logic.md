@@ -21,7 +21,7 @@ Load this file for complexity scoring and route selection.
 
 | Score | Route                                   | Action                    |
 | ----- | --------------------------------------- | ------------------------- |
-| >= 5  | **GSD Route**                           | Invoke `/gsd-core:new-project` |
+| >= 5  | **Phased Planning Route**               | Use `EnterPlanMode`, split into phases |
 | 3-4   | **Auto-Claude Route** (if well-defined) | Suggest `/auto-claude`    |
 | 3-4   | **Planning Route** (if exploratory)     | Use `EnterPlanMode`       |
 | 1-2   | **Planning Route**                      | Use `EnterPlanMode`       |
@@ -62,15 +62,14 @@ See `docs/AUTO-CLAUDE-GUIDE.md` for full documentation.
 
 ---
 
-## GSD Route (Score >= 5)
+## Phased Planning Route (Score >= 5)
 
-Multi-phase project management:
+Multi-phase work:
 
-1. Invoke `/gsd-core:new-project` with task description
-2. GSD gathers context through discussion
-3. Creates PROJECT.md and roadmap
-4. Breaks into phases with PLAN.md files
-5. Tracks state across sessions
+1. Use `EnterPlanMode` with the task description
+2. Break the work into phases, one task file per phase in `tasks/`
+3. Execute one phase at a time with `TodoWrite` tracking
+4. Commit at the end of each phase so a later session can resume from git history and the task files
 
 ## Planning Route (Score 1-2)
 

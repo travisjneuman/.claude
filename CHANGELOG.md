@@ -2,6 +2,13 @@
 
 All notable changes to the Ultimate Claude Code Toolkit.
 
+## [3.6.1] - September 30, 2026
+
+### GSD removed
+- GSD (Get Shit Done, the `gsd-core` marketplace from `open-gsd/gsd-core`) is no longer part of the toolkit: its `.gitmodules` manifest entry is gone, and the README, docs, commands, templates, `toolkit-router` routes, and `core-workflow` no longer register, recommend, or route to it. Large multi-phase work now routes to plan mode with one task file per phase.
+- `generate-counts.mjs` no longer counts GSD commands (`gsdCommands` dropped from `counts.json`), and `generate-index.mjs` no longer special-cases GSD names. Marketplace counts are now 81 repos.
+- `docs/GSD-TUTORIAL.md` moved to `archive/GSD-TUTORIAL.md` for reference.
+
 ## [3.6.0] - September 29, 2026
 
 ### Token efficiency

@@ -2704,11 +2704,6 @@
    "name": "millionco-expect",
    "url": "https://github.com/millionco/expect.git",
    "path": "plugins/marketplaces/millionco-expect"
-  },
-  {
-   "name": "gsd-core",
-   "url": "https://github.com/open-gsd/gsd-core.git",
-   "path": "plugins/marketplaces/gsd-core"
   }
  ],
  "edges": [

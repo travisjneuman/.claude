@@ -126,7 +126,7 @@ description: Command with no arguments
 
 | Category      | Purpose               | Examples                          |
 | ------------- | --------------------- | --------------------------------- |
-| **Workflow**  | Task management       | `/start-task`, `/gsd-core:progress`    |
+| **Workflow**  | Task management       | `/start-task`, `/handoff`         |
 | **Discovery** | Finding resources     | `/list-skills`, `/skill-finder`   |
 | **Quality**   | Code quality          | `/review-code`, `/test`           |
 | **Utility**   | System operations     | `/health-check`, `/backup-config` |
@@ -173,7 +173,7 @@ For plugin-specific commands, use namespacing:
 Example:
 
 ```
-/gsd-core:new-project
+/commit-commands:commit
 /taches-cc-resources:check-todos
 ```
 

@@ -324,7 +324,3 @@
 	url = https://github.com/millionco/expect.git
 	ignore = all
 	fetchRecurseSubmodules = false
-[submodule "plugins/marketplaces/gsd-core"]
-	path = plugins/marketplaces/gsd-core
-	url = https://github.com/open-gsd/gsd-core.git
-	ignore = all
