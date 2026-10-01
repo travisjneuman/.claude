@@ -22,7 +22,7 @@ From the official marketplace (`claude-plugins-official`) unless noted, declared
 
 | Plugin | Why it's in | Cost |
 | --- | --- | --- |
-| `commit-commands` | `/commit`, `/commit-push-pr`, `/clean_gone`; no built-in equivalent | ~105 tokens/turn |
+| `commit-commands` | Declared but `false`: its `/commit-push-pr` creates branches and PRs and `/clean_gone` removes branches and worktrees, which the commit-everything, default-branch workflow forbids | ~105 tokens/turn when on |
 | `frontend-design` | Anthropic's frontend design skill | ~80 |
 | `claude-security` | On-demand deep security scan with verified findings (beyond `/security-review`); declared but currently `false` | ~780 when on |
 | `cloudflare` | Cloudflare's own Workers/DO/Wrangler/Agents skills; declared but currently `false`. Cloudflare work goes through Wrangler and GitHub-connected deploys, not an MCP server | see `claude plugin details cloudflare` |
