@@ -35,6 +35,7 @@ agent-memory
 # ----- CREDENTIALS -----
 .credentials.json
 .credentials.lock
+.oauth_refresh.lock*
 credentials.json
 security_warnings_state_*.json
 
