@@ -119,7 +119,22 @@ function checkWrite(input) {
   }
 }
 
-const input = readInput();
+// Other agents that load these hooks (e.g. Grok's Claude compatibility) send
+// camelCase {toolName, toolInput} with their own tool names. Map them to the
+// Claude shape so this guard and the private guard check them too.
+const TOOL_ALIASES = { run_terminal_command: "Bash", spawn_subagent: "Task" };
+function normalize(input) {
+  if (input.tool_name || !input.toolName) return input;
+  const normalized = {
+    ...input,
+    tool_name: TOOL_ALIASES[input.toolName] || input.toolName,
+    tool_input: input.toolInput || {},
+  };
+  RAW = JSON.stringify(normalized);
+  return normalized;
+}
+
+const input = normalize(readInput());
 const tool = input.tool_name || "";
 if (tool === "Bash") checkBash(input);
 else if (tool === "Write" || tool === "Edit" || tool === "MultiEdit" || tool === "NotebookEdit") checkWrite(input);
