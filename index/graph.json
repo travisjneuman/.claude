@@ -589,7 +589,7 @@
    "name": "api-design",
    "path": "skills/api-design/SKILL.md",
    "domain": "backend",
-   "tier": "core",
+   "tier": "name-only",
    "description": "REST and GraphQL API design best practices including OpenAPI specs. Use when designing APIs, documenting endpoints, or reviewing API architecture."
   },
   {
@@ -598,7 +598,7 @@
    "name": "application-security",
    "path": "skills/application-security/SKILL.md",
    "domain": "security",
-   "tier": "core",
+   "tier": "name-only",
    "description": "OWASP Top 10 with code examples, SAST/DAST tools, dependency scanning, CSP headers, and input validation patterns. Use when hardening applications, reviewing security posture, or implementing defensi…"
   },
   {
@@ -625,7 +625,7 @@
    "name": "authentication-patterns",
    "path": "skills/authentication-patterns/SKILL.md",
    "domain": "backend",
-   "tier": "core",
+   "tier": "name-only",
    "description": "OAuth 2.0, JWT, SSO, MFA, NextAuth/Clerk/Supabase Auth implementation patterns"
   },
   {
@@ -688,7 +688,7 @@
    "name": "codebase-documenter",
    "path": "skills/codebase-documenter/SKILL.md",
    "domain": "quality",
-   "tier": "core",
+   "tier": "name-only",
    "description": "Write codebase documentation: READMEs, architecture docs, getting-started guides, API docs, and code comments. Use when documenting code or making a project easier for new developers."
   },
   {
@@ -778,7 +778,7 @@
    "name": "database-expert",
    "path": "skills/database-expert/SKILL.md",
    "domain": "backend",
-   "tier": "core",
+   "tier": "name-only",
    "description": "Advanced database design and administration for PostgreSQL, MongoDB, and Redis. Use when designing schemas, optimizing queries, managing database performance, or implementing data patterns."
   },
   {
@@ -814,7 +814,7 @@
    "name": "devops-cloud",
    "path": "skills/devops-cloud/SKILL.md",
    "domain": "infra",
-   "tier": "core",
+   "tier": "name-only",
    "description": "DevOps, cloud infrastructure, and platform engineering. Use when working with AWS, GCP, Azure, Kubernetes, Terraform, CI/CD pipelines, or infrastructure as code."
   },
   {
@@ -823,7 +823,7 @@
    "name": "edge-computing",
    "path": "skills/edge-computing/SKILL.md",
    "domain": "backend",
-   "tier": "core",
+   "tier": "name-only",
    "description": "Edge computing with Cloudflare Workers, Deno Deploy, Bun, Vercel Edge Functions, AWS Lambda@Edge, and edge databases (Turso, D1, DynamoDB Global Tables). Use when building low-latency edge applicatio…"
   },
   {
@@ -1165,7 +1165,7 @@
    "name": "ios-development",
    "path": "skills/ios-development/SKILL.md",
    "domain": "mobile",
-   "tier": "core",
+   "tier": "name-only",
    "description": "iOS, iPadOS, and tvOS development with Swift, SwiftUI, and UIKit. Use when building Apple platform apps, implementing iOS-specific features, or following Apple Human Interface Guidelines."
   },
   {
@@ -1219,7 +1219,7 @@
    "name": "llm-app-development",
    "path": "skills/llm-app-development/SKILL.md",
    "domain": "data-ai",
-   "tier": "core",
+   "tier": "name-only",
    "description": "LLM app development with RAG, prompt engineering, vector databases, and AI agents"
   },
   {
@@ -1282,7 +1282,7 @@
    "name": "monitoring-observability",
    "path": "skills/monitoring-observability/SKILL.md",
    "domain": "infra",
-   "tier": "core",
+   "tier": "name-only",
    "description": "OpenTelemetry, structured logging, distributed tracing, alerting, and dashboards. Use when instrumenting services, designing logs/traces/metrics, defining SLOs and alerts, or debugging production beh…"
   },
   {
@@ -1336,7 +1336,7 @@
    "name": "performance-engineering",
    "path": "skills/performance-engineering/SKILL.md",
    "domain": "quality",
-   "tier": "core",
+   "tier": "name-only",
    "description": "Web Vitals, bundle optimization, CDN, caching, and load analysis. Use when diagnosing slow pages or APIs, reducing bundle size, or designing caching and performance budgets."
   },
   {
@@ -1399,7 +1399,7 @@
    "name": "react-native",
    "path": "skills/react-native/SKILL.md",
    "domain": "mobile",
-   "tier": "core",
+   "tier": "name-only",
    "description": "Cross-platform mobile development with React Native and Expo. Use when building iOS/Android apps with JavaScript/TypeScript, implementing native features, or optimizing mobile performance."
   },
   {
@@ -1471,7 +1471,7 @@
    "name": "serverless-development",
    "path": "skills/serverless-development/SKILL.md",
    "domain": "backend",
-   "tier": "core",
+   "tier": "name-only",
    "description": "AWS Lambda, Vercel Edge Functions, Cloudflare Workers, cold starts, deployment patterns, and infrastructure as code (SST, Serverless Framework). Use when building serverless applications or optimizin…"
   },
   {
@@ -1552,7 +1552,7 @@
    "name": "tech-debt-analyzer",
    "path": "skills/tech-debt-analyzer/SKILL.md",
    "domain": "quality",
-   "tier": "core",
+   "tier": "name-only",
    "description": "This skill should be used when analyzing technical debt in a codebase, documenting code quality issues, creating technical debt registers, or assessing code maintainability. Use this for identifying…"
   },
   {

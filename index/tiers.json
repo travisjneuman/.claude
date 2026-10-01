@@ -6,22 +6,8 @@
     "debug-systematic",
     "generic-code-reviewer",
     "generic-feature-developer",
-    "api-design",
-    "database-expert",
-    "application-security",
-    "authentication-patterns",
     "frontend-enhancer",
-    "ui-research",
-    "performance-engineering",
-    "devops-cloud",
-    "serverless-development",
-    "edge-computing",
-    "monitoring-observability",
-    "llm-app-development",
-    "ios-development",
-    "react-native",
-    "codebase-documenter",
-    "tech-debt-analyzer"
+    "ui-research"
   ],
   "core_commands": [
     "start-task",

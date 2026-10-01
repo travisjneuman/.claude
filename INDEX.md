@@ -70,7 +70,7 @@ Everything listed here is installed and available. Only the **core** tier keeps 
 | --- | --- | --- | --- |
 | `agent-compliance-engineer` | name-only | Specialist subagent: SOC2, HIPAA, GDPR, PCI-DSS compliance implementation specialist. Use when implementing a… |  |
 | `agent-devsecops-engineer` | name-only | Specialist subagent: CI/CD security, SAST/DAST pipelines, supply chain security, container scanning, and secu… | `security-auditor` `checklists/security-hardening` |
-| `application-security` | core | OWASP Top 10 with code examples, SAST/DAST tools, dependency scanning, CSP headers, and input validation patt… | `security-auditor` `checklists/security-hardening` |
+| `application-security` | name-only | OWASP Top 10 with code examples, SAST/DAST tools, dependency scanning, CSP headers, and input validation patt… | `security-auditor` `checklists/security-hardening` |
 | `compliance-engineering` | name-only | SOC2, HIPAA, GDPR, PCI-DSS, FedRAMP compliance implementation in code. Audit logging, data encryption, access… |  |
 | `payment-integration` | name-only | Stripe, RevenueCat, subscription billing, webhooks, PCI compliance, and tax. Use when integrating payments or… |  |
 | `security` | name-only | Information security expertise for cybersecurity frameworks (NIST, ISO 27001), security architecture, inciden… |  |
@@ -94,10 +94,10 @@ Everything listed here is installed and available. Only the **core** tier keeps 
 | `agent-mobile-release-manager` | name-only | Specialist subagent: App store submissions, mobile CI/CD, ASO, code signing, and beta distribution specialist… | `checklists/mobile-app-deployment` |
 | `android-development` | name-only | Android development with Kotlin, Jetpack Compose, and modern Android architecture. Use when building Android… |  |
 | `flutter-development` | name-only | Cross-platform development with Flutter and Dart for iOS, Android, Web, Desktop, and embedded. Use when build… | `ios-developer` `flutter-dart` `stacks/flutter-dart` |
-| `ios-development` | core | iOS, iPadOS, and tvOS development with Swift, SwiftUI, and UIKit. Use when building Apple platform apps, impl… | `ios-developer` `swift-ios` |
+| `ios-development` | name-only | iOS, iPadOS, and tvOS development with Swift, SwiftUI, and UIKit. Use when building Apple platform apps, impl… | `ios-developer` `swift-ios` |
 | `kotlin-multiplatform` | name-only | KMP/CMP shared business logic, Compose Multiplatform, expect/actual, Ktor, SQLDelight, and platform-specific… | `ios-developer` |
 | `mobile-cicd` | name-only | Fastlane, GitHub Actions for mobile, code signing (iOS provisioning, Android keystores), beta distribution (T… | `devops-engineer` `checklists/mobile-app-deployment` |
-| `react-native` | core | Cross-platform mobile development with React Native and Expo. Use when building iOS/Android apps with JavaScr… | `ios-developer` `stacks/react-native-expo` |
+| `react-native` | name-only | Cross-platform mobile development with React Native and Expo. Use when building iOS/Android apps with JavaScr… | `ios-developer` `stacks/react-native-expo` |
 
 | Agent | Purpose |
 | --- | --- |
@@ -153,18 +153,18 @@ Everything listed here is installed and available. Only the **core** tier keeps 
 | `agent-pwa-specialist` | name-only | Specialist subagent: Progressive Web App development, service workers, offline-first architecture, and push n… |  |
 | `agent-realtime-specialist` | name-only | Specialist subagent: Expert real-time systems specialist for WebSockets, SSE, and live data applications |  |
 | `agent-serverless-specialist` | name-only | Specialist subagent: AWS Lambda, Cloudflare Workers, Vercel Edge Functions, and serverless architecture speci… |  |
-| `api-design` | core | REST and GraphQL API design best practices including OpenAPI specs. Use when designing APIs, documenting endp… |  |
-| `authentication-patterns` | core | OAuth 2.0, JWT, SSO, MFA, NextAuth/Clerk/Supabase Auth implementation patterns |  |
-| `database-expert` | core | Advanced database design and administration for PostgreSQL, MongoDB, and Redis. Use when designing schemas, o… | `performance-optimizer` `checklists/database-design` |
+| `api-design` | name-only | REST and GraphQL API design best practices including OpenAPI specs. Use when designing APIs, documenting endp… |  |
+| `authentication-patterns` | name-only | OAuth 2.0, JWT, SSO, MFA, NextAuth/Clerk/Supabase Auth implementation patterns |  |
+| `database-expert` | name-only | Advanced database design and administration for PostgreSQL, MongoDB, and Redis. Use when designing schemas, o… | `performance-optimizer` `checklists/database-design` |
 | `devex-sdk-design` | name-only | Developer experience (DX) engineering, SDK design patterns, API ergonomics, CLI tooling design, documentation… |  |
-| `edge-computing` | core | Edge computing with Cloudflare Workers, Deno Deploy, Bun, Vercel Edge Functions, AWS Lambda@Edge, and edge da… |  |
+| `edge-computing` | name-only | Edge computing with Cloudflare Workers, Deno Deploy, Bun, Vercel Edge Functions, AWS Lambda@Edge, and edge da… |  |
 | `email-systems` | name-only | Transactional email (Resend, SendGrid, SES), templates (React Email, MJML), deliverability (SPF/DKIM/DMARC),… |  |
 | `event-driven-architecture` | name-only | Kafka, RabbitMQ, SQS/SNS, event sourcing, CQRS, saga patterns, dead letter queues, and idempotency. Use when… |  |
 | `generic-fullstack-feature-developer` | name-only | Guide feature development for full-stack applications with architecture focus. Covers Next.js App Router patt… | `architecture-analyst` `stacks/fullstack-nextjs-nestjs` `stacks/django-fastapi` |
 | `graphql-expert` | name-only | GraphQL API design and implementation. Use when building GraphQL APIs, designing schemas, implementing resolv… |  |
 | `low-code-platforms` | name-only | Low-code and internal tool platforms including Retool, Supabase, Appsmith, Tooljet, n8n, and Zapier. Use when… |  |
 | `microservices-architecture` | name-only | Microservices architecture patterns and best practices. Use when designing distributed systems, breaking down… |  |
-| `serverless-development` | core | AWS Lambda, Vercel Edge Functions, Cloudflare Workers, cold starts, deployment patterns, and infrastructure a… | `devops-engineer` |
+| `serverless-development` | name-only | AWS Lambda, Vercel Edge Functions, Cloudflare Workers, cold starts, deployment patterns, and infrastructure a… | `devops-engineer` |
 | `websockets-realtime` | name-only | Real-time communication with WebSockets, Server-Sent Events, and related technologies. Use when building chat… |  |
 
 ## DevOps, cloud & observability
@@ -173,9 +173,9 @@ Everything listed here is installed and available. Only the **core** tier keeps 
 | --- | --- | --- | --- |
 | `agent-cloud-architect` | name-only | Specialist subagent: Multi-cloud architecture, cost optimization, serverless vs containers, disaster recovery… | `devops-engineer` `architecture-analyst` |
 | `agent-observability-engineer` | name-only | Specialist subagent: OpenTelemetry, Prometheus, Grafana, distributed tracing, SLO design, and alerting specia… | `devops-engineer` `checklists/monitoring-alerting-design` |
-| `devops-cloud` | core | DevOps, cloud infrastructure, and platform engineering. Use when working with AWS, GCP, Azure, Kubernetes, Te… | `devops-engineer` |
+| `devops-cloud` | name-only | DevOps, cloud infrastructure, and platform engineering. Use when working with AWS, GCP, Azure, Kubernetes, Te… | `devops-engineer` |
 | `growth-engineering` | name-only | A/B testing infrastructure, feature flags (LaunchDarkly, Unleash), experimentation platforms, PLG patterns, a… |  |
-| `monitoring-observability` | core | OpenTelemetry, structured logging, distributed tracing, alerting, and dashboards. Use when instrumenting serv… | `checklists/monitoring-alerting-design` |
+| `monitoring-observability` | name-only | OpenTelemetry, structured logging, distributed tracing, alerting, and dashboards. Use when instrumenting serv… | `checklists/monitoring-alerting-design` |
 
 | Agent | Purpose |
 | --- | --- |
@@ -195,7 +195,7 @@ Everything listed here is installed and available. Only the **core** tier keeps 
 | `ai-ml-development` | name-only | AI and machine learning development with PyTorch, TensorFlow, and LLM integration. Use when building ML model… |  |
 | `data-engineering` | name-only | ETL/ELT pipelines, data warehousing (BigQuery, Snowflake, Redshift), stream processing (Kafka, Spark Streamin… |  |
 | `data-science` | name-only | Data science and analytics expertise for statistical analysis, machine learning pipelines, data governance, b… |  |
-| `llm-app-development` | core | LLM app development with RAG, prompt engineering, vector databases, and AI agents |  |
+| `llm-app-development` | name-only | LLM app development with RAG, prompt engineering, vector databases, and AI agents |  |
 | `product-analytics` | name-only | Event tracking architecture, funnels, cohorts, A/B testing, PostHog/Amplitude. Use when designing event track… |  |
 | `seo-analytics-auditor` | name-only | Use this skill when auditing SEO, analyzing Core Web Vitals, verifying meta tags, checking structured data, o… |  |
 
@@ -213,17 +213,17 @@ Everything listed here is installed and available. Only the **core** tier keeps 
 | `agent-migration-specialist` | name-only | Specialist subagent: Framework upgrades, codemod strategies, version migration planning, and legacy moderniza… |  |
 | `agent-technical-writer` | name-only | Specialist subagent: Architecture Decision Records, API documentation, migration guides, runbooks, and techni… |  |
 | `agent-test-generator` | name-only | Specialist subagent: Generates comprehensive test suites using TDD patterns. Use only when the user explicitl… |  |
-| `codebase-documenter` | core | Write codebase documentation: READMEs, architecture docs, getting-started guides, API docs, and code comments… |  |
+| `codebase-documenter` | name-only | Write codebase documentation: READMEs, architecture docs, getting-started guides, API docs, and code comments… |  |
 | `debug-systematic` | core | Systematic 4-phase debugging methodology for complex, intermittent, or mysterious issues. Use when investigat… | `debugging-specialist` |
 | `generic-code-reviewer` | core | Review code for bugs, security vulnerabilities, performance issues, accessibility gaps, and CLAUDE.md workflo… | `deep-code-reviewer` `security-auditor` `performance-optimizer` `stacks/fullstack-nextjs-nestjs` |
 | `generic-fullstack-code-reviewer` | name-only | Review full-stack code for bugs, security vulnerabilities, performance issues, accessibility gaps, and CLAUDE… | `deep-code-reviewer` `security-auditor` `architecture-analyst` `stacks/fullstack-nextjs-nestjs` |
 | `generic-react-code-reviewer` | name-only | Review React/TypeScript code for bugs, security vulnerabilities, performance issues, accessibility gaps, and… | `deep-code-reviewer` `security-auditor` `performance-optimizer` |
 | `generic-static-code-reviewer` | name-only | Review static site code for bugs, security issues, performance problems, accessibility gaps, and CLAUDE.md co… | `deep-code-reviewer` `security-auditor` `performance-optimizer` `checklists/static-sites` |
 | `literature-review-planner` | name-only | Structured literature review planning with systematic methodology, source evaluation, and synthesis framework… | `architecture-analyst` `deep-code-reviewer` |
-| `performance-engineering` | core | Web Vitals, bundle optimization, CDN, caching, and load analysis. Use when diagnosing slow pages or APIs, red… | `performance-optimizer` `checklists/performance-optimization` |
+| `performance-engineering` | name-only | Web Vitals, bundle optimization, CDN, caching, and load analysis. Use when diagnosing slow pages or APIs, red… | `performance-optimizer` `checklists/performance-optimization` |
 | `statistics-verifier` | name-only | Verify statistics from raw data with methodology checking, significance testing, claim validation, and bias d… |  |
 | `tdd-workflow` | name-only | Test-Driven Development workflow enforcement with RED-GREEN-REFACTOR cycle. Use only when the user explicitly… |  |
-| `tech-debt-analyzer` | core | This skill should be used when analyzing technical debt in a codebase, documenting code quality issues, creat… | `deep-code-reviewer` `security-auditor` `refactoring-specialist` |
+| `tech-debt-analyzer` | name-only | This skill should be used when analyzing technical debt in a codebase, documenting code quality issues, creat… | `deep-code-reviewer` `security-auditor` `refactoring-specialist` |
 | `test-specialist` | name-only | Test-writing patterns for JS/TS, Python, Go, and Rust (unit, integration, E2E, visual regression). Use only w… |  |
 
 | Agent | Purpose |
