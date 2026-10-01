@@ -62,9 +62,9 @@ function stripHeredocs(cmd) {
 
 const BASH_RULES = [
   [/\brm\s+(-[a-zA-Z]*r[a-zA-Z]*f|-[a-zA-Z]*f[a-zA-Z]*r|-r\s+-f|-f\s+-r)[a-zA-Z]*\s+(\/|~|\$HOME|\$\{HOME\})(\s|\/?\*?\s*$|\/?$)/, "Recursive force delete of a filesystem or home root is blocked."],
-  [/\bgit\s+(-C\s+\S+\s+)?push\b[^\n;&|]*\s(--force(?!-with-lease)|-f)\b/, "Force push is blocked."],
-  [/\bgit\s+(-C\s+\S+\s+)?push\b[^\n;&|]*\s--force-with-lease\b/, "Force push (with lease) is blocked."],
-  [/\bgit\s+(-C\s+\S+\s+)?reset\s+--hard\b/, "git reset --hard discards work and is blocked."],
+  [/\bgit\s+(-C\s+\S+\s+)?push\b[^\n;&|]*\s(--force(?!-with-lease)|-f)\b/, "Force push is blocked.", "approvable"],
+  [/\bgit\s+(-C\s+\S+\s+)?push\b[^\n;&|]*\s--force-with-lease\b/, "Force push (with lease) is blocked.", "approvable"],
+  [/\bgit\s+(-C\s+\S+\s+)?reset\s+--hard\b/, "git reset --hard discards work and is blocked.", "approvable"],
   [/\bgit\s+(-C\s+\S+\s+)?clean\s+-[a-zA-Z]*[fdx]/, "git clean deleting files is blocked."],
   [/\bgit\s+(-C\s+\S+\s+)?(checkout|restore)\s+(--\s+)?\.(\s|$)/, "Discarding all working-tree changes is blocked."],
   [/\bchmod\s+-R\s+777\b/, "chmod -R 777 is blocked."],
@@ -73,6 +73,12 @@ const BASH_RULES = [
   [/\bdocker\s+system\s+prune\s+(-a|--all)\b/, "docker system prune -a is blocked."],
   [/\b(npm|yarn|pnpm)\s+publish\b/, "Package publishing is blocked."],
 ];
+
+// A force push or `reset --hard` the user approved for a repo they own runs
+// when the command carries GUARD_APPROVED_FORCE=<owner>/<repo>. The marker is
+// the agent's record of that approval, never a way around a refusal; a private
+// guard (below) can verify the owner and remotes.
+const OWNER_APPROVED_FORCE = /(^|[\s;&|(])GUARD_APPROVED_FORCE=[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+\s/;
 
 const ATTRIBUTION = /Co-Authored-By:\s*(Claude|Codex|ChatGPT|OpenAI|Anthropic|AI\b|.*noreply@anthropic\.com)/i;
 
@@ -83,8 +89,9 @@ function checkBash(input) {
     deny("AI attribution trailers in commit messages are not allowed by this toolkit's rules.");
   }
   const cmd = stripHeredocs(raw);
-  for (const [re, reason] of BASH_RULES) {
-    if (re.test(cmd)) deny(reason);
+  const approved = OWNER_APPROVED_FORCE.test(cmd);
+  for (const [re, reason, approvable] of BASH_RULES) {
+    if (re.test(cmd) && !(approvable && approved)) deny(reason);
   }
 }
 
