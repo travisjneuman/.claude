@@ -69,7 +69,7 @@ Check status without pulling:
 
 - ✅ **Auto-discovers marketplace entries** - Add new manifest entries and they're automatically included
 - ✅ **Custom project directories** - Add your own project folders (see below)
-- ✅ **Recursive project discovery** - Finds nested repos such as Example App frontend/backend checkouts
+- ✅ **Recursive project discovery** - Finds nested repos such as frontend/backend checkouts inside a platform folder
 - ✅ **Reports detached HEAD** - Detached repos are skipped and reported, never switched
 - ✅ **Detects correct branch** - main/master/development per repo
 - ✅ **Enforces no_push** - Marketplace clones and non-Travis-owned custom repos cannot push

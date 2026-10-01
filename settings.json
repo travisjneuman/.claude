@@ -348,8 +348,8 @@
   "autoUpdatesChannel": "latest",
   "skipDangerousModePermissionPrompt": true,
   "claudeMdExcludes": [
-    "**/my.notes/*/**/AGENTS.md",
-    "**/my.notes/*/**/CLAUDE.md",
+    "**/*.notes/*/**/AGENTS.md",
+    "**/*.notes/*/**/CLAUDE.md",
     "**/Backups/**/AGENTS.md",
     "**/Backups/**/CLAUDE.md",
     "**/backups/**/AGENTS.md",

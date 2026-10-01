@@ -40,6 +40,10 @@ sessions/
 # Session environment snapshots
 session-env/
 
+# Subagent memory (`memory: user` agents write here; personal, often
+# project-specific). Keep it private: link it to your own private layer.
+agent-memory
+
 # Session config backups (rotating .claude.json snapshots)
 backups/
 

@@ -99,7 +99,7 @@ for project_dir in "${CUSTOM_PROJECT_DIRS[@]}"; do
     [[ -d "$project_dir" ]] || continue
 
     # Depth 0: the custom project dir itself, if it's a git repo
-    # (e.g. ~/projects IS the .workspace repo). Without this we'd miss
+    # (e.g. ~/projects is itself a workspace repo). Without this we'd miss
     # divergence on the parent and only see its children. Bug from 2026-04-29.
     if out=$(check_repo "$project_dir"); then
         [[ -n "$out" ]] && PROBLEMS+="$out"$'\n'
@@ -123,7 +123,7 @@ for project_dir in "${CUSTOM_PROJECT_DIRS[@]}"; do
                 [[ -n "$out" ]] && PROBLEMS+="$out"$'\n'
             fi
 
-            # Depth 3: submodules of submodules (rare but covers .app-platform layout)
+            # Depth 3: submodules of submodules (rare but covers platform monorepo layouts)
             for nested2 in "$nested"*/ "$nested".*/; do
                 [[ -d "$nested2" ]] || continue
                 nested2_base=$(basename "$nested2")

@@ -27,7 +27,8 @@ Discover → Scope → Plan (only when useful) → Execute → Verify → Docume
 - Read code before changing it. Follow the existing architecture, package manager, and conventions. No drive-by upgrades or reformatting.
 - Fix root causes. Prefer one canonical mechanism over parallel or competing ones.
 - Use plan mode only for genuinely ambiguous or multi-system work; a diff you can describe in a sentence doesn't need a plan.
-- Delegate to subagents only when parallel progress beats coordination cost. Give each one the full scope, constraints, and prohibitions.
+- Delegate when the work splits into independent pieces with separate files; do small or sequential work yourself. Give each subagent the full scope, constraints, prohibitions, and the files it owns. Run them in the background and act on their completion notifications; never sleep or poll. Review each result against its assignment and send corrections to that same subagent. One owner handles git.
+- Honor the session's model, effort, and fast mode; instructions don't pick models, config does.
 - After two materially identical failures with no new evidence, stop repeating and re-scope.
 - Before finishing: re-read the request, review the diff, stop processes you started, and remove temp files you created.
 
