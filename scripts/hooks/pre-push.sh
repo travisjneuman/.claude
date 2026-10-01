@@ -29,7 +29,12 @@ while read local_ref local_sha remote_ref remote_sha; do
     if [[ "$remote_ref" == *"master"* ]] || [[ "$remote_ref" == *"main"* ]]; then
         # Check if this is a force push (non-fast-forward)
         if ! git merge-base --is-ancestor "$remote_sha" "$local_sha" 2>/dev/null; then
-            if [ "$remote_sha" != "0000000000000000000000000000000000000000" ]; then
+            # A force push the owner approved names this repo in GUARD_APPROVED_FORCE
+            # (owner/repo, as in the remote URL); see CLAUDE.md, Git and repositories.
+            approved="${GUARD_APPROVED_FORCE%.git}"
+            if [ -n "$approved" ] && { [[ "$URL" == *[:/]"$approved".git ]] || [[ "$URL" == *[:/]"$approved" ]]; }; then
+                echo -e "${YELLOW}⚠ Approved force push to $remote_ref (${GUARD_APPROVED_FORCE})${NC}"
+            elif [ "$remote_sha" != "0000000000000000000000000000000000000000" ]; then
                 echo -e "${RED}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
                 echo -e "${RED}  PUSH BLOCKED - Force Push to Protected Branch${NC}"
                 echo -e "${RED}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
@@ -37,7 +42,7 @@ while read local_ref local_sha remote_ref remote_sha; do
                 echo -e "${YELLOW}Branch: $remote_ref${NC}"
                 echo "Force pushing to master/main is blocked for safety."
                 echo ""
-                echo -e "${YELLOW}If intentional: git push --force --no-verify${NC}"
+                echo -e "${YELLOW}If the owner approved it: GUARD_APPROVED_FORCE=<owner>/<repo> git push --force-with-lease${NC}"
                 exit 1
             fi
         fi
