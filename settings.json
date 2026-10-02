@@ -332,7 +332,7 @@
   },
   "outputStyle": "default",
   "spinnerTipsEnabled": false,
-  "autoCompactWindow": 300000,
+  "autoCompactWindow": 240000,
   "promptSuggestionEnabled": false,
   "pluginConfigs": {
     "agents-md@builtin": {
