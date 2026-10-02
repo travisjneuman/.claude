@@ -108,12 +108,6 @@ const SCRIPT_METADATA: Record<
       "Add a marketplace: writes a manifest-only .gitmodules entry (no gitlink, no content), clones it locally into the gitignored plugins/marketplaces/ with no_push, and regenerates the index.",
     whenToRun: "When adding a new marketplace repo",
   },
-    name: "Force Sync Repos",
-    category: "repo-management",
-    description:
-      "Pull-only sync of every discovered repo to its remote state (nuclear option, never pushes).",
-    whenToRun: "When repos are severely broken",
-  },
 
   // Utilities
   "fix-plugin-line-endings": {
