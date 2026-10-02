@@ -242,7 +242,7 @@ function updateTravisReadme(counts, repo) {
     text = text.replace(/> [0-9]+ custom skills\. [0-9]+ specialized agents\. [0-9,]+\+ marketplace skills\. Open source\./g, `> ${counts.skills} custom skills. ${counts.agents} specialized agents. ${counts.marketplaceSkillsDisplay} marketplace skills. Open source.`);
     text = text.replace(/\*\*[0-9]+ skills\*\* · \*\*[0-9]+ agents\*\* · \*\*[0-9]+ repos\*\* · \*\*[0-9,]+\+ marketplace skills\*\*/g, `**${counts.skills} skills** · **${counts.agents} agents** · **${counts.repos} repos** · **${counts.marketplaceSkillsDisplay} marketplace skills**`);
     text = text.replace(/[0-9]+ open-source marketplace integrations/g, `${counts.repos} open-source marketplace integrations`);
-    text = text.replace(/\*\*100\+ custom skills\*\* · \*\*80\+ specialist agents\*\* · \*\*[0-9,]+\+ marketplace skills\*\* · \*\*30\+ commands\*\*/g, `**${counts.skills} custom skills** · **${counts.agents} specialist agents** · **${counts.marketplaceSkillsDisplay} marketplace skills** · **${counts.commands}+ commands**`);
+    text = text.replace(/\*\*[0-9]+\+? custom skills\*\* · \*\*[0-9]+\+? specialist agents\*\* · \*\*[0-9,]+\+ marketplace skills\*\* · \*\*[0-9]+\+? commands\*\*/g, `**${counts.skills} custom skills** · **${counts.agents} specialist agents** · **${counts.marketplaceSkillsDisplay} marketplace skills** · **${counts.commands} commands**`);
     text = text.replace(/Next\.js_15/g, "Next.js_16");
     writeText(file, text);
   }
