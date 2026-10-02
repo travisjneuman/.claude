@@ -22,7 +22,7 @@ Helper scripts for setup, maintenance, and automation of the Claude Code toolkit
 | Script                | Purpose                                 | When to Run                                                |
 | --------------------- | --------------------------------------- | ---------------------------------------------------------- |
 | `update-counts.sh`    | Update all hardcoded counts across docs | After adding/removing skills, agents, or marketplace repos |
-| `generate-showcase-images.mjs` | Regenerate `.claude` OG images and optional `tjn.portfolio` screenshots from `counts.json` | After public showcase counts change |
+| `generate-showcase-images.mjs` | Regenerate the `tjn.portfolio` showcase screenshots from `counts.json` (the website OG image is the static GitHub social preview) | After public showcase counts change |
 | `regenerate-index.sh` | Regenerate `skills/MASTER_INDEX.md`     | After adding/removing skills                               |
 | `install-plugins.sh`  | Install enabled plugins + LSP binaries  | Runs daily automatically; run after changing plugins       |
 | `_pull-all-repos.sh`      | Fix remote URLs on marketplace repos    | If remotes are misconfigured after a pull                  |

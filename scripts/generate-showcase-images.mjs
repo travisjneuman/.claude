@@ -130,9 +130,7 @@ async function writeOrCheck(file, buffer) {
 
 async function main() {
   const data = counts();
-  await writeOrCheck(path.join(repoRoot, "website", "public", "og-image.png"), await renderBuffer(1200, 630, "png", data));
-  await writeOrCheck(path.join(repoRoot, "website", "public", "og-image.jpg"), await renderBuffer(1200, 630, "jpg", data));
-  await writeOrCheck(path.join(repoRoot, "website", "public", "og-image.webp"), await renderBuffer(1200, 630, "webp", data));
+  // The website's og-image.png is the repo's GitHub social preview image, kept static and count-free.
 
   const portfolioRepo = argValue("--portfolio-repo");
   if (portfolioRepo) {

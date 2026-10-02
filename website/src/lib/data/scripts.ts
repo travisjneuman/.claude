@@ -84,7 +84,7 @@ const SCRIPT_METADATA: Record<
     name: "Generate Showcase Images",
     category: "maintenance",
     description:
-      "Render the website's Open Graph images from counts.json. Called by the count generator.",
+      "Render the tjn.portfolio showcase screenshots from counts.json. Called by the count generator; runs on the media host.",
     whenToRun: "When counts change (run through the count generator)",
   },
   "update-counts": {
