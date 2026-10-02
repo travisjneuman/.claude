@@ -1,6 +1,6 @@
 ---
 name: codebase-documenter
-description: Write codebase documentation: READMEs, architecture docs, getting-started guides, API docs, and code comments. Use when documenting code or making a project easier for new developers.
+description: "Write codebase documentation: READMEs, architecture docs, getting-started guides, API docs, and code comments. Use when documenting code or making a project easier for new developers."
 context: fork
 ---
 

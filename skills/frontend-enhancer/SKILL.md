@@ -1,6 +1,6 @@
 ---
 name: frontend-enhancer
-description: Enhance the visual design of web apps: modern UI components, layout, responsive design, color palettes, animations. Use for styling and UI polish; pair with ui-research first for new design directions.
+description: "Enhance the visual design of web apps: modern UI components, layout, responsive design, color palettes, animations. Use for styling and UI polish; pair with ui-research first for new design directions."
 ---
 
 # Frontend Enhancer
