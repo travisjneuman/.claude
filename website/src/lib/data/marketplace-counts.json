@@ -1,6 +1,6 @@
 {
   "repoCount": 81,
-  "totalSkills": 10995,
+  "totalSkills": 11000,
   "repos": [
     {
       "name": "claude-code-plugins-plus-skills",
@@ -10,7 +10,7 @@
     {
       "name": "sickn33-antigravity-awesome-skills",
       "displayName": "Sickn33 Antigravity Awesome Skills",
-      "skillCount": 2600
+      "skillCount": 2608
     },
     {
       "name": "davila7-templates",
@@ -78,11 +78,6 @@
       "skillCount": 83
     },
     {
-      "name": "gmickel-marketplace",
-      "displayName": "Gmickel Marketplace",
-      "skillCount": 70
-    },
-    {
       "name": "phuryn-pm-skills",
       "displayName": "Phuryn Pm Skills",
       "skillCount": 69
@@ -101,6 +96,11 @@
       "name": "manutej-luxor-marketplace",
       "displayName": "Manutej Luxor Marketplace",
       "skillCount": 67
+    },
+    {
+      "name": "gmickel-marketplace",
+      "displayName": "Gmickel Marketplace",
+      "skillCount": 66
     },
     {
       "name": "rohitg00-claude-code-toolkit",
@@ -193,13 +193,13 @@
       "skillCount": 19
     },
     {
-      "name": "mhattingpete-skills",
-      "displayName": "Mhattingpete Skills",
-      "skillCount": 18
-    },
-    {
       "name": "muratcankoylan-agent-skills",
       "displayName": "Muratcankoylan Agent Skills",
+      "skillCount": 19
+    },
+    {
+      "name": "mhattingpete-skills",
+      "displayName": "Mhattingpete Skills",
       "skillCount": 18
     },
     {
