@@ -390,7 +390,7 @@ DATABASE_URL="postgresql://user:pass@localhost:5432/myapp"
 
 # Auth.js
 NEXTAUTH_URL="http://localhost:3000"
-NEXTAUTH_SECRET=generate-with-openssl-rand-base64-32
+NEXTAUTH_SECRET=<output of: openssl rand -base64 32>
 
 # OAuth Providers
 GOOGLE_CLIENT_ID=""
