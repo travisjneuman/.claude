@@ -21,7 +21,7 @@ Expert product analytics engineer specializing in event tracking architecture, a
 
 ### Analytics SDKs & Platforms
 
-- PostHog (self-hosted and cloud, feature flags, session replay)
+- PostHog (self-hosted and cloud, feature flags, session replay; replay off by default, enabled only after consent with input masking)
 - Mixpanel (event analytics, funnels, retention)
 - Amplitude (product analytics, behavioral cohorts)
 - Segment (customer data platform, event routing)
@@ -141,6 +141,7 @@ export function initPostHog(): void {
     capture_pageview: false, // We handle this manually for SPA
     capture_pageleave: true,
     persistence: 'localStorage+cookie',
+    disable_session_recording: true, // Replay only after explicit consent, with inputs masked (CIPA wiretap / GDPR)
     loaded: (ph) => {
       if (process.env.NODE_ENV === 'development') {
         ph.debug();

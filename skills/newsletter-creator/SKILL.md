@@ -50,7 +50,8 @@ NEWSLETTER LAYOUT:
    - Calendar format or simple list
 
 8. FOOTER
-   - Unsubscribe / manage preferences
+   - Unsubscribe / manage preferences (honor within 10 business days)
+   - Sender's physical postal address (required by CAN-SPAM for external sends)
    - Social media links
    - Feedback prompt ("Reply with your thoughts")
    - Archives link
@@ -242,7 +243,7 @@ EMAIL TEMPLATE SKELETON:
 
 [EVENTS: Simple list or calendar]
 
-[FOOTER: Unsubscribe, social, feedback]
+[FOOTER: Unsubscribe, postal address, social, feedback]
 ```
 
 ## Subject Line Optimization
@@ -378,6 +379,7 @@ RECURRING SECTIONS:
 | Content is curated (not just aggregated) | [ ] |
 | Each item has a clear "why it matters" | [ ] |
 | Unsubscribe link present and functional | [ ] |
+| Physical postal address in footer (external sends, CAN-SPAM) | [ ] |
 | Send time optimized for audience | [ ] |
 | Proofread by at least one other person | [ ] |
 

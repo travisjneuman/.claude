@@ -1,6 +1,6 @@
 {
   "repoCount": 81,
-  "totalSkills": 11000,
+  "totalSkills": 11037,
   "repos": [
     {
       "name": "claude-code-plugins-plus-skills",
@@ -10,12 +10,12 @@
     {
       "name": "sickn33-antigravity-awesome-skills",
       "displayName": "Sickn33 Antigravity Awesome Skills",
-      "skillCount": 2608
+      "skillCount": 2650
     },
     {
       "name": "davila7-templates",
       "displayName": "Davila7 Templates",
-      "skillCount": 888
+      "skillCount": 889
     },
     {
       "name": "awesome-claude-skills",
@@ -25,7 +25,7 @@
     {
       "name": "buildwithclaude",
       "displayName": "Buildwithclaude",
-      "skillCount": 386
+      "skillCount": 389
     },
     {
       "name": "alirezarezvani-claude-skills",
@@ -40,7 +40,7 @@
     {
       "name": "athola-night-market",
       "displayName": "Athola Night Market",
-      "skillCount": 210
+      "skillCount": 206
     },
     {
       "name": "wshobson-agents",
@@ -50,7 +50,7 @@
     {
       "name": "claude-scientific-skills",
       "displayName": "Claude Scientific Skills",
-      "skillCount": 181
+      "skillCount": 177
     },
     {
       "name": "madappgang-claude-code",
@@ -65,7 +65,7 @@
     {
       "name": "daymade-skills",
       "displayName": "Daymade Skills",
-      "skillCount": 114
+      "skillCount": 115
     },
     {
       "name": "ccplugins-awesome",
@@ -100,7 +100,7 @@
     {
       "name": "gmickel-marketplace",
       "displayName": "Gmickel Marketplace",
-      "skillCount": 66
+      "skillCount": 56
     },
     {
       "name": "rohitg00-claude-code-toolkit",
@@ -168,6 +168,11 @@
       "skillCount": 30
     },
     {
+      "name": "henkisdabro-marketplace",
+      "displayName": "Henkisdabro Marketplace",
+      "skillCount": 27
+    },
+    {
       "name": "onmax-nuxt-skills",
       "displayName": "Onmax Nuxt Skills",
       "skillCount": 26
@@ -185,11 +190,6 @@
     {
       "name": "anthropic-agent-skills",
       "displayName": "Anthropic Agent Skills",
-      "skillCount": 19
-    },
-    {
-      "name": "henkisdabro-marketplace",
-      "displayName": "Henkisdabro Marketplace",
       "skillCount": 19
     },
     {

@@ -111,6 +111,7 @@ class Analytics {
       autocapture: false, // Explicit tracking only
       capture_pageview: false, // Manual pageview tracking
       capture_pageleave: true,
+      disable_session_recording: true, // Replay only after explicit consent, with inputs masked (CIPA wiretap / GDPR)
       // Respect Do Not Track
       respect_dnt: true,
       // Cookie-less mode until consent

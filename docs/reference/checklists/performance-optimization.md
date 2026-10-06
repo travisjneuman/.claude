@@ -519,7 +519,7 @@ jobs:
 
 ### Fonts
 
-- [ ] Font files self-hosted (not loaded from Google Fonts CDN)
+- [ ] Font files self-hosted (not loaded from Google Fonts CDN; a CDN request leaks visitor IPs, which a German court held a GDPR violation in 2022). Use `next/font`, `@fontsource/*`, or local woff2
 - [ ] `font-display: swap` set
 - [ ] Font subsetting applied (only needed characters)
 - [ ] Preload critical fonts: `<link rel="preload" href="font.woff2" as="font" type="font/woff2" crossorigin>`
@@ -533,7 +533,7 @@ jobs:
 - [ ] `dns-prefetch` or `preconnect` for known third-party domains
 
 ```html
-<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://cdn.example.com" />
 <link rel="dns-prefetch" href="https://analytics.example.com" />
 ```
 

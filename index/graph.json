@@ -2059,6 +2059,15 @@
    "description": "TypeScript/React Rules"
   },
   {
+   "id": "rule:web-legal-exposure",
+   "type": "rule",
+   "name": "web-legal-exposure",
+   "path": "rules/web-legal-exposure.md",
+   "domain": "business",
+   "loads": "when reading **/*.{html,htm,astro,vue,svelte,jsx,tsx,css,scss,sass,less,mdx}, **/{layout,_document,_app,root,head,app}.{ts,tsx,js,jsx}, **/{next,nuxt,astro,vite,svelte}.config.*, **/{instrumentation,instrumentation-client,sentry}*.{ts,js}, **/*{analytics,posthog,tracking,telemetry,consent}*, **/{email,emails,mail,mailer,newsletter,templates}/**, **/*{checkout,billing,subscription,subscribe,pricing,paywall,storekit}*, **/*{signup,sign-up,register,onboarding,auth}*, **/*{upload,uploads,media,attachment}*, **/{privacy,terms,legal,dmca,copyright}*",
+   "description": "Web App Legal Exposure Rules"
+  },
+  {
    "id": "doc:checklists/api-development",
    "type": "doc",
    "name": "checklists/api-development",

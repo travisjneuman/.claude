@@ -398,6 +398,8 @@ INTERNAL REPORTING:
 | **Training**          | Role-based, regular updates                   |
 | **Auditing**          | Compliance testing, gap remediation           |
 
+**Consumer web/app exposure checks:** self-hosted fonts (no Google Fonts CDN, GDPR); session replay consent-gated with masking (CIPA); CAN-SPAM unsubscribe + postal address on marketing email; auto-renewal terms beside the button and online cancellation (California ARL); COPPA age policy before any under-13 data; DMCA designated agent + takedown process for user uploads.
+
 ### Data Classification
 
 | Level            | Definition                        | Handling                  |

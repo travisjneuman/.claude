@@ -76,6 +76,12 @@ export async function POST(req: NextRequest) {
       address: "auto",
       name: "auto",
     },
+    // Auto-renewal disclosure next to the pay button + express consent
+    // (California ARL, FTC ROSCA). terms_of_service needs a ToS URL set in the Dashboard.
+    custom_text: {
+      submit: { message: "Renews automatically each month at the listed price after your 14-day trial until you cancel. Cancel anytime online in Billing settings." },
+    },
+    consent_collection: { terms_of_service: "required" },
   });
 
   return NextResponse.json({ url: session.url });
@@ -118,6 +124,11 @@ function PricingCard({ plan }: { plan: PricingPlan }) {
           <li key={f}>{f}</li>
         ))}
       </ul>
+      {/* Renewal terms must sit next to the button (California ARL) */}
+      <p className="renewal-terms">
+        Free for 14 days, then ${plan.price}/mo, renewing automatically until you cancel.
+        Cancel anytime online in Billing settings.
+      </p>
       <button onClick={handleSubscribe} disabled={loading}>
         {loading ? "Redirecting..." : "Subscribe"}
       </button>
@@ -445,6 +456,8 @@ Use any future expiry date and any 3-digit CVC.
 - [ ] All subscription status changes handled (created, updated, canceled, past_due)
 - [ ] Failed payment dunning flow implemented (email + retry)
 - [ ] Customer portal configured for self-service billing
+- [ ] Auto-renewal terms (price, frequency, trial end, how to cancel) shown next to the subscribe button; express consent captured; confirmation email repeats them
+- [ ] Online cancellation as easy as signup (portal `subscription_cancel` enabled), no forced retention call (California ARL, FTC ROSCA)
 - [ ] Test mode used for all development and staging
 - [ ] PCI compliance level confirmed (SAQ-A with Stripe Checkout/Elements)
 - [ ] Tax calculation enabled (Stripe Tax or external provider)

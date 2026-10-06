@@ -440,6 +440,7 @@ Compact guardrails that load automatically for every session. Detailed reference
 | `typescript-react.md`  | TypeScript/React coding standards (strict types)  |
 | `python.md`            | Python coding standards (type hints, async-first) |
 | `api-routes.md`        | API endpoint conventions (REST, auth, validation) |
+| `web-legal-exposure.md` | Self-hosted fonts, consent-gated replay, CAN-SPAM, renewal terms, age policy, DMCA |
 
 ---
 

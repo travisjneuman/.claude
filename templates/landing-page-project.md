@@ -343,6 +343,7 @@ export function AnalyticsProvider({ children }: { children: React.ReactNode }) {
         api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
         capture_pageview: true,
         capture_pageleave: true,
+        disable_session_recording: true, // Replay only after explicit consent, with inputs masked (CIPA wiretap / GDPR)
       });
     }
   }, []);
@@ -501,6 +502,8 @@ export async function POST(request: Request) {
     audienceId: process.env.RESEND_AUDIENCE_ID!,
   });
 
+  // Every later newsletter/marketing send needs a visible unsubscribe link,
+  // a List-Unsubscribe header, and your physical postal address (CAN-SPAM).
   await resend.emails.send({
     from: 'Your Product <hello@yoursite.com>',
     to: email,
@@ -584,6 +587,7 @@ Key elements:
 - Monthly/yearly toggle
 - Feature comparison per plan
 - CTA per plan
+- Auto-renewal terms (price, frequency, trial end, how to cancel online) right next to each subscribe CTA
 - FAQ about pricing below
 - "Enterprise" option with "Contact us"
 
@@ -723,7 +727,7 @@ NEXT_PUBLIC_SITE_NAME="Your Product"
 
 # Contact Form
 CONTACT_EMAIL="hello@yoursite.com"
-RESEND_API_KEY="re_..."
+RESEND_API_KEY=re_...
 RESEND_AUDIENCE_ID=""
 
 # Or external form service
@@ -802,6 +806,7 @@ CONTENTFUL_ACCESS_TOKEN=""
 - [ ] Mobile tested (375px, 768px, 1024px)
 - [ ] Social sharing tested (paste URL in Twitter/LinkedIn/Slack)
 - [ ] Cookie consent (if required by jurisdiction)
+- [ ] No runtime font/CSS from third-party CDNs; session replay off until consent
 
 ### Post-Launch
 

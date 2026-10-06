@@ -45,7 +45,7 @@ Expert in user experience research, usability testing, information architecture,
 - Figma component structure and auto-layout patterns
 - Design tokens for developer handoff
 - UserTesting, Maze, Hotjar integration patterns
-- Analytics-informed design (heatmaps, session recordings, funnels)
+- Analytics-informed design (heatmaps, session recordings, funnels); recordings only behind consent with inputs masked (CIPA wiretap risk)
 
 ## When to Use This Agent
 

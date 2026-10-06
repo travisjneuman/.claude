@@ -355,6 +355,7 @@ function getEmailSender() {
 - [ ] Complaint feedback loop registered
 - [ ] Unsubscribe link in every email
 - [ ] List-Unsubscribe header included
+- [ ] Marketing emails carry the sender's physical postal address and honor opt-outs within 10 business days (CAN-SPAM)
 - [ ] IP warmed up gradually for new senders
 - [ ] Email content passes spam filter checks
 

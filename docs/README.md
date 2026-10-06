@@ -111,7 +111,7 @@ This `~/.claude/` folder is a fully configured, portable Claude Code environment
 - **29 slash commands** for workflow automation
 - **81 marketplace repos** providing 11,000+ additional skills from the community
 - **7 lifecycle hooks** for session start/end, the safety guard, secret scanning, daily maintenance, and the status line
-- **9 rules files**: path-scoped language rules that load only when Claude reads a matching file
+- **10 rules files**: path-scoped language rules that load only when Claude reads a matching file
 - **17 templates** for task planning, component creation, and project scaffolding
 
 ---

@@ -315,7 +315,8 @@ enum TeamRole {
 - [ ] Pricing page with plan cards
 - [ ] Current plan display in settings
 - [ ] Upgrade/downgrade buttons
-- [ ] Cancel subscription flow
+- [ ] Cancel subscription flow (online, as easy as signup; California ARL)
+- [ ] Auto-renewal terms (price, frequency, trial end, how to cancel) shown next to the subscribe button, with express consent
 - [ ] Invoice history
 - [ ] Usage meters (if usage-based)
 
@@ -328,7 +329,7 @@ enum TeamRole {
 - [ ] Welcome email (after registration)
 - [ ] Email verification
 - [ ] Password reset
-- [ ] Subscription confirmation
+- [ ] Subscription confirmation (repeats renewal terms and how to cancel)
 - [ ] Invoice/receipt
 - [ ] Trial ending warning (3 days before)
 - [ ] Payment failed notification
@@ -389,7 +390,7 @@ DATABASE_URL="postgresql://user:pass@localhost:5432/myapp"
 
 # Auth.js
 NEXTAUTH_URL="http://localhost:3000"
-NEXTAUTH_SECRET="generate-with-openssl-rand-base64-32"
+NEXTAUTH_SECRET=generate-with-openssl-rand-base64-32
 
 # OAuth Providers
 GOOGLE_CLIENT_ID=""
@@ -400,10 +401,10 @@ GITHUB_CLIENT_SECRET=""
 # Stripe
 STRIPE_SECRET_KEY="sk_test_..."
 STRIPE_PUBLISHABLE_KEY="pk_test_..."
-STRIPE_WEBHOOK_SECRET="whsec_..."
+STRIPE_WEBHOOK_SECRET=whsec_...
 
 # Email (Resend)
-RESEND_API_KEY="re_..."
+RESEND_API_KEY=re_...
 
 # Analytics
 NEXT_PUBLIC_POSTHOG_KEY=""

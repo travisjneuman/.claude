@@ -94,6 +94,14 @@ async function handleDSAR(userId: string, type: 'access' | 'erasure' | 'portabil
 - Pseudonymize where possible (replace PII with tokens)
 - Anonymize for analytics (k-anonymity, differential privacy)
 
+## Consumer Web App Defaults
+- [ ] Fonts, CSS, and JS self-hosted (`next/font`, `@fontsource/*`); no `fonts.googleapis.com` on page view (GDPR IP leak; Munich court, 2022)
+- [ ] Session replay (Sentry Replay, PostHog, Hotjar, Clarity, LogRocket, FullStory) off until consent, inputs masked (California CIPA wiretap claims)
+- [ ] Marketing email: unsubscribe link, List-Unsubscribe header, physical postal address (CAN-SPAM)
+- [ ] Subscriptions: renewal terms next to the button, express consent, online cancellation (California ARL, FTC ROSCA)
+- [ ] Age policy: not child-directed, or verifiable parental consent before collecting data from under-13s (COPPA)
+- [ ] Public user uploads: DMCA designated agent registered with the Copyright Office (renew every 3 years) and a notice-and-takedown page (17 U.S.C. 512(c))
+
 ## PCI-DSS Key Controls
 - **Never store CVV/CVC** — ever, in any form
 - **Tokenize card numbers** — use Stripe/Braintree tokens instead of raw PANs

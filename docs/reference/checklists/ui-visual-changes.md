@@ -119,6 +119,7 @@ Before committing:
 **Font Inspiration Sources:**
 
 - Google Fonts: Playfair Display, Crimson Text, Merriweather (editorial)
+- Self-host every font (`next/font`, `@fontsource/*`, or local woff2); never link `fonts.googleapis.com` at runtime (GDPR IP leak)
 - Display fonts: Bebas Neue, Righteous, Bungee
 - Modern: DM Sans, Plus Jakarta Sans, Outfit
 - Code/technical: JetBrains Mono, Fira Code, Source Code Pro

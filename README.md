@@ -88,7 +88,7 @@ That's it. Claude Code loads the toolkit from `~/.claude/` in every session.
 | **[Marketplace Repos](./plugins/marketplaces/)** | 81 | Community skill repositories (11,000+ additional skills) |
 | **[Hooks](./hooks/README.md)** | 7 | Lifecycle hooks (session start/stop, pre-commit, safety guards) |
 | **[Templates](./templates/README.md)** | 17 | Project scaffolding and task templates |
-| **[Rules](./rules/)** | 9 | Stack-specific coding guardrails (TypeScript, Python, Go, Rust, etc.) |
+| **[Rules](./rules/)** | 10 | Stack-specific coding guardrails (TypeScript, Python, Go, Rust, etc.) plus web legal-exposure defaults |
 
 <details>
 <summary><strong>📋 Skills by Category</strong></summary>

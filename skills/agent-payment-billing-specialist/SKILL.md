@@ -117,6 +117,9 @@ export async function POST(req: NextRequest) {
     billing_address_collection: 'auto',
     tax_id_collection: { enabled: true },
     automatic_tax: { enabled: true },
+    // Renewal disclosure beside the pay button + express consent (California ARL)
+    custom_text: { submit: { message: 'Renews automatically at the listed price after the trial until you cancel. Cancel anytime online.' } },
+    consent_collection: { terms_of_service: 'required' }, // needs a ToS URL in the Dashboard
   });
 
   return NextResponse.json({ url: session.url });
@@ -355,7 +358,8 @@ async function reportUsage(
 - [ ] No raw card data touches your server (use Checkout/Elements)
 - [ ] Idempotent webhook processing (deduplication by event ID)
 - [ ] Prices created in Stripe Dashboard or via API (not hardcoded)
-- [ ] Customer portal enabled for self-service
+- [ ] Customer portal enabled for self-service, including online cancellation
+- [ ] Auto-renewal terms shown next to the subscribe button with express consent; confirmation email repeats terms and how to cancel (California ARL)
 - [ ] Failed payment retry logic configured in Stripe
 
 ## Reference Skills
