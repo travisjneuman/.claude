@@ -19,7 +19,7 @@ const LIMITS = {
   agentDescriptionChars: 3000,   // every agent description loads every session
   coreDescriptionChars: 8000,    // core-tier skill + command descriptions
   coreDescriptionEach: 400,      // one core description
-  nameOnlyEntries: 260,          // names in the listing (~25 chars each)
+  nameOnlyEntries: 300,          // names in the listing (~25 chars each); 260 -> 300 on 2026-10-08 for vendored plugin skills
   claudeMdLines: 150,            // global CLAUDE.md
   alwaysOnRuleLines: 60,         // rules without `paths:` frontmatter, combined
 };
