@@ -89,6 +89,8 @@ const tiers = JSON.parse(read(path.join(root, "index/tiers.json")) || "{}");
 const coreSkills = new Set(tiers.core_skills || []);
 const coreCommands = new Set(tiers.core_commands || []);
 const nodes = [];
+// Skills linked in from outside the repo (vendored per host) stay out of the public index.
+const linkedSkills = [];
 
 for (const dir of fs.readdirSync(path.join(root, "skills")).sort()) {
   const file = path.join(root, "skills", dir, "SKILL.md");
@@ -96,6 +98,7 @@ for (const dir of fs.readdirSync(path.join(root, "skills")).sort()) {
   const t = read(file);
   const fm = frontmatter(t);
   const name = fm.name || dir;
+  if (fs.lstatSync(path.join(root, "skills", dir)).isSymbolicLink()) { linkedSkills.push(name); continue; }
   const desc = [fm.description, fm.when_to_use].filter(Boolean).join(" ") || firstLine(t);
   nodes.push({ id: `skill:${name}`, type: "skill", name, path: rel(file), description: desc,
     tier: coreSkills.has(name) ? "core" : "name-only", manual: String(fm["disable-model-invocation"]) === "true",
@@ -249,6 +252,7 @@ const overrides = {};
 for (const [k, v] of Object.entries(prev)) if (v === "off" || v === "user-invocable-only") overrides[k] = v; // keep explicit user choices
 // Skills the toolkit doesn't ship (claude.ai-synced, bundled) listed in tiers.json.
 for (const k of tiers.external_name_only || []) if (!overrides[k]) overrides[k] = "name-only";
+for (const k of linkedSkills) if (!overrides[k] && !coreSkills.has(k)) overrides[k] = "name-only";
 for (const n of nodes.filter((n) => (n.type === "skill" || n.type === "command") && n.tier === "name-only" && !n.manual)) {
   if (!overrides[n.name]) overrides[n.name] = "name-only";
 }
