@@ -83,6 +83,7 @@ backups/
 /plugins/data/
 /plugins/synced/
 /plugins/installed_plugins.json
+/plugins/plugin-directory-cache-v2.json
 /plugins/known_marketplaces.json
 /plugins/blocklist.json
 /plugins/.last_inuse_sweep
