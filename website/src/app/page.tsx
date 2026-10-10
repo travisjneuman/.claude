@@ -8,6 +8,7 @@ import HomeCards from "./HomeCards";
 import { getSkills } from "@/lib/data/skills";
 import { getAgents } from "@/lib/data/agents";
 import { getMarketplaceStats } from "@/lib/data/marketplace";
+import { getCounts } from "@/lib/data/counts";
 import { getScripts } from "@/lib/data/scripts";
 
 // Hand-picked for highest end-user ROI on homepage
@@ -49,8 +50,9 @@ function pickFeatured<T extends { slug: string }>(
 export default function Home() {
   const skills = getSkills();
   const agents = getAgents();
-  const { repos, totalSkills: marketplaceSkills } = getMarketplaceStats();
-  const marketplaceSkillsRounded = Math.floor(marketplaceSkills / 100) * 100;
+  const { repos } = getMarketplaceStats();
+  const counts = getCounts();
+  const marketplaceSkillsRounded = counts.marketplaceSkillsDisplayValue;
 
   const featuredSkills = pickFeatured(skills, FEATURED_SKILL_SLUGS);
   const featuredAgents = pickFeatured(agents, FEATURED_AGENT_SLUGS);
@@ -188,7 +190,7 @@ export default function Home() {
                   <CounterAnimation end={marketplaceSkillsRounded} suffix="+" />
                 </div>
                 <div className="text-xs font-mono text-[var(--accent-yellow)] uppercase tracking-wider mt-1">
-                  Marketplace Skills
+                  unique normalized skill bodies
                 </div>
               </div>
               <div className="text-center">
@@ -200,6 +202,10 @@ export default function Home() {
                 </div>
               </div>
             </div>
+            <p className="text-xs text-[var(--text-secondary)] max-w-xl mx-auto">
+              Snapshot as of {counts.asOf}: selected local revisions, including
+              pins, not latest upstream. Repo totals overlap; don&apos;t sum them.
+            </p>
           </div>
 
           {/* CTAs */}
@@ -251,6 +257,7 @@ export default function Home() {
         agents={featuredAgents}
         repos={repos}
         marketplaceSkills={marketplaceSkillsRounded}
+        snapshotAsOf={counts.asOf}
         totalSkills={skills.length}
         totalAgents={agents.length}
         scriptCategories={scriptCategories}
@@ -279,7 +286,7 @@ export default function Home() {
             </div>
             <div>
               <span className="text-[var(--text-muted)]">
-                # Install the repo&apos;s git hooks (safety and index checks)
+                # Install the repo&apos;s git hooks (privacy and safety gates)
               </span>
               <div className="text-[var(--accent-green)] mt-1">
                 $ bash ~/.claude/scripts/setup-hooks.sh

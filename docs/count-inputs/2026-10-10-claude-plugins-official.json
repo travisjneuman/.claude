@@ -1,0 +1,183 @@
+{
+  "definitionVersion": "public-toolkit-v2",
+  "measuredAsOf": "2026-10-10",
+  "repo": {
+    "name": "claude-plugins-official",
+    "path": "plugins/marketplaces/claude-plugins-official",
+    "githubUrl": "https://github.com/anthropics/claude-plugins-official",
+    "displayName": "Claude Plugins Official",
+    "skillCount": 33,
+    "revision": "b8e53f1c05dff3b6d751297f6527990ffc81c2f4",
+    "tree": "0be010881e66c2d08e762db4573c43eceaf70b63",
+    "worktree": "clean",
+    "inputMode": "committed-HEAD-snapshot",
+    "inputDigest": "075454325495001c5533e11b3b9d4b9421fb201f5acdf680bd01c10fae1539dd",
+    "files": [
+      {
+        "path": "external_plugins/discord/skills/access/SKILL.md",
+        "blob": "389065df51031eda1fe94e9050fb6985889a1f9b",
+        "bodyHash": "19b9544d03f995c0646b19c42ec628b45ed4eaa76a62785d5965ef428005a892"
+      },
+      {
+        "path": "external_plugins/discord/skills/configure/SKILL.md",
+        "blob": "a1e15f8b927ca7385a06ebf6eacacbd4e4acd527",
+        "bodyHash": "196787d23ae3ed50e4ecbb133813355db247139cc369aea57dd6f901db74aa94"
+      },
+      {
+        "path": "external_plugins/imessage/skills/access/SKILL.md",
+        "blob": "c197d80a0277bf3600fce43d963cefb060786115",
+        "bodyHash": "490df67ec8af03ba21885bb2d975f3e7420c142d9065f62c3023d59ec2d6858f"
+      },
+      {
+        "path": "external_plugins/imessage/skills/configure/SKILL.md",
+        "blob": "fa6fec9df8f0e8b77c9a3a0c97cc0b73f889dcdd",
+        "bodyHash": "0d02146da2e3a55f58105fe6a60f67a154714e529238b881f1a4c2e8ef7caea8"
+      },
+      {
+        "path": "external_plugins/telegram/skills/access/SKILL.md",
+        "blob": "b104f963ffec80575419af07474abb9fb58a8626",
+        "bodyHash": "bbc586ce901d9fa9418de451f4fa7d8451cabcd70fa9f8bf535f1168ff7280c0"
+      },
+      {
+        "path": "external_plugins/telegram/skills/configure/SKILL.md",
+        "blob": "16cf133109844d61a5c13e5f18a1757248e6b95e",
+        "bodyHash": "b65e80963c761fcd9ef5a8d992dd0330cee747b3e15097b05947d4ee8544de2a"
+      },
+      {
+        "path": "plugins/claude-code-setup/skills/claude-automation-recommender/SKILL.md",
+        "blob": "07712a231e19c498391dd819417136c89e142b81",
+        "bodyHash": "b8a46a63e9b2489aae21f50b08fc395c5284549bf55fd7e6684106f0bfbc3a5e"
+      },
+      {
+        "path": "plugins/claude-md-management/skills/claude-md-improver/SKILL.md",
+        "blob": "744444e4df385e9b9160e23fba02321062dfba9a",
+        "bodyHash": "116fd3c22420e54dfb4b48153a5d1802233ea5f29d0ad8cc7838ccc3a272857c"
+      },
+      {
+        "path": "plugins/claude-security/skills/claude-security/SKILL.md",
+        "blob": "00fb777430f2e7bc1199a48617acfbcf6b744003",
+        "bodyHash": "9befc4905341d3dfa41e06edc849a39f5e9a5810e5dd14c051b2480c289b74eb"
+      },
+      {
+        "path": "plugins/cwc-makers/skills/cardputer-buddy/SKILL.md",
+        "blob": "932033cb5bc61a89d1421633d494ac04e87a8e57",
+        "bodyHash": "62fff34948e97a1cf74df1087fde5d2c6c5aa8bafd2fb93ba72d13fb793d975a"
+      },
+      {
+        "path": "plugins/cwc-makers/skills/m5-onboard/SKILL.md",
+        "blob": "ae4517ff17f1543804764d1340e00f1ab471791b",
+        "bodyHash": "f5b2db4f5646778cda026627cb07157252d1e0c53e4668d073dfa9934fec7fdd"
+      },
+      {
+        "path": "plugins/example-plugin/skills/example-command/SKILL.md",
+        "blob": "a1793378ec4135b7638a97650492c6d80e3f9131",
+        "bodyHash": "3bb75b3fa41556965a6a177398c5ec13d48294c77054c85c60f3737b6fbfd678"
+      },
+      {
+        "path": "plugins/example-plugin/skills/example-skill/SKILL.md",
+        "blob": "9e0e268cac50d1c4016dc7e1dc5cddde54f594fb",
+        "bodyHash": "9451379d80f616e8c197ce2b4d7b925e34012974ade235e9d1d18cfdfcf72ce6"
+      },
+      {
+        "path": "plugins/frontend-design/skills/frontend-design/SKILL.md",
+        "blob": "a5333457c414d20d625f307df945842c0952ecc3",
+        "bodyHash": "2fde794c579a159c150088acc91ba1a99c3b80ba3ef0e48b411a6f05c875a1da"
+      },
+      {
+        "path": "plugins/hookify/skills/writing-rules/SKILL.md",
+        "blob": "58f9e6d1b4f37f52f936372ba0c65ab627fcf4e0",
+        "bodyHash": "86d7b65a66a93a86107a3fad7b9028e03cbca311c3052afbc848ffbfb424e35a"
+      },
+      {
+        "path": "plugins/math-olympiad/skills/math-olympiad/SKILL.md",
+        "blob": "94a064d7902d9d5282e7e75228ed2b3934cac30f",
+        "bodyHash": "2172c06f85e1dfb9939f97b095ca3cbf2fc2b434ccd4252c61af8ffaa23c15cc"
+      },
+      {
+        "path": "plugins/math-proof/skills/siege/SKILL.md",
+        "blob": "a705c8eca5dcd13218c304dc8b2bdf2edb804aaa",
+        "bodyHash": "ecbb10731a89cedc1cd3954de8d4b26ad4a750938c3e8590c6576ca8a8d655cf"
+      },
+      {
+        "path": "plugins/math-proof/skills/solo/SKILL.md",
+        "blob": "baf2dc488e7d993bff4ae4be9d3a3ff0f08d172a",
+        "bodyHash": "43b42c97493eafe858c47a80601d35b81405f5029dbeca74492e91072469ce18"
+      },
+      {
+        "path": "plugins/mcp-server-dev/skills/build-mcp-app/SKILL.md",
+        "blob": "c400abdb126d392a2fbbf11539fa1bebf5b0146a",
+        "bodyHash": "a4daedeeb89f0c760129d1bff97a5dac9e5a435098eb736dc53d64f7e90f9f64"
+      },
+      {
+        "path": "plugins/mcp-server-dev/skills/build-mcp-server/SKILL.md",
+        "blob": "5ab19c3ae3ee57d11f4cdd0a550f942207dc6a5c",
+        "bodyHash": "aad56d828cf4d02749d3e20c6e29b0ef47723d678b78bd8a696df774dbddf02d"
+      },
+      {
+        "path": "plugins/mcp-server-dev/skills/build-mcpb/SKILL.md",
+        "blob": "772097ddbbd78e8faaad2ff57dc7faa64c7a5ea3",
+        "bodyHash": "0e5d109e47da318aa978a2305eb8924596064f80c066ba553c1aa3f80e138b6f"
+      },
+      {
+        "path": "plugins/playground/skills/playground/SKILL.md",
+        "blob": "e8b2da023f4bfb25907fb7a48e8234bbd0e1cb7d",
+        "bodyHash": "c2991ba1560333b05b01901189df77de84894d2beac00701579e1a0e5f885b30"
+      },
+      {
+        "path": "plugins/plugin-dev/skills/agent-development/SKILL.md",
+        "blob": "f4ea78d89bcee2febcce2285d9d41b3d17df3656",
+        "bodyHash": "cd716400d37a156afcdd1fd1ea9cce0698107d3cffb2f6ffa77457e9c3783150"
+      },
+      {
+        "path": "plugins/plugin-dev/skills/command-development/SKILL.md",
+        "blob": "4c82f7e8472706bcde5a0605d6e04f6c05bf4704",
+        "bodyHash": "36281d658790d372f47bad0e45f19fabe2d0460a6cdd70e7c72cfc04e80cb657"
+      },
+      {
+        "path": "plugins/plugin-dev/skills/hook-development/SKILL.md",
+        "blob": "6317441bfe3fcb60ea0d611e3826c2c4147d65f0",
+        "bodyHash": "7661c2443b7101d04cd659e25f16e6bb02b2dd47212c1c0bfb780869f24c6db0"
+      },
+      {
+        "path": "plugins/plugin-dev/skills/mcp-integration/SKILL.md",
+        "blob": "1a77a654b1bf43f5955a895434d92f049cbd8758",
+        "bodyHash": "85f8032a7c2873d76d7d697029bdfa7752e58ecd9254c2d5cbaef83bc1666105"
+      },
+      {
+        "path": "plugins/plugin-dev/skills/plugin-settings/SKILL.md",
+        "blob": "3ab48bca0137d06557ef16d8b8448ab7de84f26f",
+        "bodyHash": "0117121557faa7ea94069ccd9f2653589bd2108bb5985bd099fadc9b4ce6dbe1"
+      },
+      {
+        "path": "plugins/plugin-dev/skills/plugin-structure/SKILL.md",
+        "blob": "6bcae94a524429d1fbdc37fb08f2bb7d58630d7c",
+        "bodyHash": "99cdb8560b0918bbe5990973c074e01f6da6fd0a2a9e2f7e5908da7273e0f04a"
+      },
+      {
+        "path": "plugins/plugin-dev/skills/skill-development/SKILL.md",
+        "blob": "1cb3bd90b29d0469d25c5df9ad72741ac1e2c4cd",
+        "bodyHash": "a05063e8e5e4633ca1b93b1aff40bf1f6b9490f82827a94661e20b8fd3df3113"
+      },
+      {
+        "path": "plugins/project-artifact/skills/project-artifact/SKILL.md",
+        "blob": "44772ed78a5b30236284a6935d96131e2ed25759",
+        "bodyHash": "03ab3d82dad2d5f3dd10683db9f78739d298095772f8ad11b97d0e73a7b61122"
+      },
+      {
+        "path": "plugins/receipts/skills/receipts/SKILL.md",
+        "blob": "93342c8a693646042ef80fb0e343ed557e2482e1",
+        "bodyHash": "53aa2cf61a150506cbb7b731490eecec7883ac0efd12f0f7f77668202185ec54"
+      },
+      {
+        "path": "plugins/session-report/skills/session-report/SKILL.md",
+        "blob": "c3eea47947ca093c858a86d4619e43175730892d",
+        "bodyHash": "2ec3ea1d275506a920760693922b259029389ce8882722339121ba2ffe0fc3a8"
+      },
+      {
+        "path": "plugins/skill-creator/skills/skill-creator/SKILL.md",
+        "blob": "65b3a402dbd09b8e83f9d637c6b553875189085c",
+        "bodyHash": "4ab151a83429953395a9e243e0998b1814f39ac724ec9ec7170e32099fe3c376"
+      }
+    ]
+  }
+}

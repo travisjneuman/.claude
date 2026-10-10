@@ -150,6 +150,10 @@ env/
 .pytest_cache/
 .mypy_cache/
 
+# Count publication stages self-ignore in consumers too; retain after a crash
+# only for manual recovery, never publish them.
+.claude-counts-stage-*/
+
 # ----- DATABASES, ARCHIVES, TEMP -----
 *.db
 *.sqlite

@@ -45,11 +45,11 @@ Before starting work, always sync all repositories:
 
 1. Initializes missing marketplace clones from the manifest
 2. Pulls parent repo (`~/.claude` - travisjneuman/.claude)
-3. Pulls all 109 marketplace clones in `plugins/marketplaces/`
+3. Pulls all 81 manifest marketplace repositories in `plugins/marketplaces/`
 4. Enforces `no_push` on marketplace clones (read-only protection)
 5. Pulls custom project directories (if configured)
 6. Fixes detached HEAD state automatically
-7. Updates documentation counts if any repos changed (skills, agents, marketplace skills)
+7. Leaves public counts/indexes unchanged; refresh them explicitly when publication is authorized (see [Count pipeline](./COUNT-PIPELINE.md)).
 
 **Location-based push access:**
 | Location | Push Access |

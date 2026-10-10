@@ -1,5 +1,5 @@
-import fs from "fs";
 import path from "path";
+import { getPublicCounts, readPublicSource } from "./snapshot";
 import { getFrontmatterString, parseMarkdown } from "./frontmatter";
 import { remark } from "remark";
 import remarkHtml from "remark-html";
@@ -89,71 +89,36 @@ function categorize(slug: string): string {
 }
 
 export function getSkills(): Skill[] {
-  const skillsDir = path.resolve(process.cwd(), "..", "skills");
-
-  if (!fs.existsSync(skillsDir)) {
-    return [];
-  }
-
   const skills: Skill[] = [];
-
-  function scanDir(dir: string, parentSlug?: string) {
-    const entries = fs.readdirSync(dir, { withFileTypes: true });
-    for (const entry of entries) {
-      if (!entry.isDirectory() || entry.name.startsWith("_")) continue;
-      // skills/synced/ is a Claude Code runtime directory (gitignored), not
-      // part of the toolkit; skip it so local builds match deployed ones.
-      if (!parentSlug && entry.name === "synced") continue;
-      const skillMd = path.join(dir, entry.name, "SKILL.md");
-      const slug = parentSlug ? `${parentSlug}/${entry.name}` : entry.name;
-
-      if (fs.existsSync(skillMd)) {
-        const raw = fs.readFileSync(skillMd, "utf-8");
-        const { data, content } = parseMarkdown(raw);
-        const firstLine = content.trim().split("\n")[0] || "";
-        const description =
-          getFrontmatterString(data, "description") ||
-          firstLine
-            .replace(/^#+\s*/, "")
-            .replace(/\*+/g, "")
-            .trim() ||
-          entry.name;
-
-        const htmlResult = remark()
-          .use(remarkHtml)
-          .processSync(content.slice(0, 5000));
-
-        skills.push({
-          slug,
-          name:
-            getFrontmatterString(data, "name") ||
-            entry.name
-              .replace(/-/g, " ")
-              .replace(/\b\w/g, (c: string) => c.toUpperCase()),
-          description,
-          category: categorize(entry.name),
-          content: content.slice(0, 5000),
-          htmlContent: String(htmlResult),
-        });
-      }
-
-      // Scan subdirectories for nested skills
-      const subDir = path.join(dir, entry.name);
-      scanDir(subDir, slug);
-    }
+  for (const file of getPublicCounts().inventory.skills) {
+    const slug = file.slice("skills/".length).replace(/\/SKILL\.md$/, "");
+    const name = path.posix.basename(slug);
+    const raw = readPublicSource(file);
+    const { data, content } = parseMarkdown(raw);
+    const firstLine = content.trim().split("\n")[0] || "";
+    const description =
+      getFrontmatterString(data, "description") ||
+      firstLine.replace(/^#+\s*/, "").replace(/\*+/g, "").trim() ||
+      name;
+    const htmlResult = remark().use(remarkHtml).processSync(content.slice(0, 5000));
+    skills.push({
+      slug,
+      name:
+        getFrontmatterString(data, "name") ||
+        name.replace(/-/g, " ").replace(/\b\w/g, (c: string) => c.toUpperCase()),
+      description,
+      category: categorize(name),
+      content: content.slice(0, 5000),
+      htmlContent: String(htmlResult),
+    });
   }
-
-  scanDir(skillsDir);
   return skills.sort((a, b) => a.name.localeCompare(b.name));
 }
 
 export function getSkillBySlug(slug: string): Skill | null {
-  const skillsDir = path.resolve(process.cwd(), "..", "skills");
-  const skillMd = path.join(skillsDir, slug, "SKILL.md");
-
-  if (!fs.existsSync(skillMd)) return null;
-
-  const raw = fs.readFileSync(skillMd, "utf-8");
+  const file = `skills/${slug}/SKILL.md`;
+  if (!getPublicCounts().inventory.skills.includes(file)) return null;
+  const raw = readPublicSource(file);
   const { data, content } = parseMarkdown(raw);
   const firstLine = content.trim().split("\n")[0] || "";
 

@@ -21,7 +21,7 @@ Helper scripts for setup, maintenance, and automation of the Claude Code toolkit
 
 | Script                | Purpose                                 | When to Run                                                |
 | --------------------- | --------------------------------------- | ---------------------------------------------------------- |
-| `update-counts.sh`    | Update all hardcoded counts across docs | After adding/removing skills, agents, or marketplace repos |
+| `update-counts.sh`    | Explicitly refresh public counts, source evidence, website snapshots and current numeric docs | After reviewed public source changes |
 | `generate-showcase-images.mjs` | Regenerate the `tjn.portfolio` showcase screenshots from `counts.json` (the website OG image is the static GitHub social preview) | After public showcase counts change |
 | `regenerate-index.sh` | Regenerate `skills/MASTER_INDEX.md`     | After adding/removing skills                               |
 | `install-plugins.sh`  | Install enabled plugins + LSP binaries  | Runs daily automatically; run after changing plugins       |
@@ -50,7 +50,7 @@ These are git hooks installed into `.git/hooks/` by `setup-hooks.sh`:
 
 | Hook               | Purpose                                                                       |
 | ------------------ | ----------------------------------------------------------------------------- |
-| `pre-commit.sh`    | Block secrets, validate SKILL.md files, check .gitignore                      |
+| `pre-commit.sh`    | Marketplace/gitlink, privacy, credential and ignored-runtime safety gates; no generation/tests/staging |
 | `commit-msg.sh`    | Enforce conventional commit message format                                    |
 | `pre-push.sh`      | Block force-push to master/main, warn about unsafe nested repo changes                 |
 | `session-start.sh` | SessionStart hook template (legacy — current hooks are in `~/.claude/hooks/`) |
@@ -69,7 +69,7 @@ These are different from the Claude Code lifecycle hooks in `~/.claude/hooks/`. 
 4. Enforces `no_push` on marketplace repos
 5. Protects parent repo push URL
 6. Pulls custom project directories (from `.env.local`)
-7. Updates documentation counts if repos changed
+7. Leaves public counts/indexes unchanged; publication requires an explicit source refresh
 
 ```bash
 # Pull everything
@@ -94,13 +94,15 @@ bash ~/.claude/scripts/setup-new-machine.sh
 ### After adding a new skill
 
 ```bash
-bash ~/.claude/scripts/update-counts.sh
-# Counts in README, plugin.json, and all docs updated automatically
+# Refresh discovery first if needed (also updates public settings.json).
+node ~/.claude/scripts/generate-index.mjs --write
 
-# Full public showcase sync, including travisjneuman + tjn.portfolio text and images:
-node ~/.claude/scripts/generate-counts.mjs --write --sync-consumers --sync-images \
-  --travis-repo="/e/Projects/travisjneuman" \
-  --portfolio-repo="/e/Projects/tjn.portfolio"
+# One explicit count write, from complete existing marketplace checkouts.
+node ~/.claude/scripts/generate-counts.mjs --write --as-of=YYYY-MM-DD \
+  --travis-repo=/path/to/travisjneuman \
+  --portfolio-repo=/path/to/tjn.portfolio
+# Omit consumer paths for a deliberately local-only refresh.
+# No implicit images, generic showcase sync, Git staging, commit or push.
 ```
 
 ### Fixing broken marketplace repos
@@ -114,6 +116,12 @@ bash ~/.claude/scripts/init-marketplaces.sh
 ```
 
 ---
+
+## Count publication contract
+
+See [COUNT-PIPELINE.md](../docs/COUNT-PIPELINE.md) for public populations, committed HEAD marketplace evidence, snapshot dates/pins, fail-closed source coverage, preflight/rollback, marker-owned profile prose and portfolio JSON. Website builds always consume the same saved canonical inventory; they do not recount local clones. `--check` is read-only, and `--write --check` is rejected. No automatic pre-commit budget/tests or regeneration remains; privacy/credential/marketplace gates still run.
+
+Image rendering is separate, DESK-only, in an approved dated `desk-run` work folder. Optional `--sync-images` requires explicit `--renderer-path` and `--image-output-dir`, with the documented renderer contract; it never implies portfolio delivery. Do not use legacy direct-to-repo rendering commands.
 
 ## See Also
 

@@ -1,15 +1,17 @@
 # Claude Code Skills Library
 
-Comprehensive skills for Claude Code - 119 skills covering all development domains.
+Comprehensive skills for Claude Code - 180 skills covering all development domains.
 
-**Plus:** 90 marketplace repos with 11,700+ additional skills.
+**Plus:** 81 marketplace repos with 11,000+ additional skills.
 
-**Version:** 5.0 (119 Skills, 90 Marketplace Repos)
+**Version:** 5.0 (180 Skills, 81 Marketplace Repos)
 **Last Updated:** February 2026
 
 ---
 
 ## Skills Overview
+
+The category examples below are a legacy navigation aid, not an exhaustive current inventory or category-total promise. Authoritative public counts and source identities are in [`../counts.json`](../counts.json), refreshed explicitly by the [count pipeline](../docs/COUNT-PIPELINE.md). Linked, private, synced and vendor/imported runtime trees are not included. The local number counts public real toolkit `SKILL.md` files, not uniquely authored or body-deduplicated skills.
 
 | Category               | Count  | Coverage                                         |
 | ---------------------- | ------ | ------------------------------------------------ |
@@ -29,9 +31,9 @@ Comprehensive skills for Claude Code - 119 skills covering all development domai
 | Utilities              | 8      | Docs, Testing, SEO, AI/ML, DB, DevOps            |
 | Document Skills        | 5      | PDF, DOCX, XLSX, PPTX generation                 |
 | Personal & Lifestyle   | 4      | Travel, Career, Recipe, Podcast                  |
-| Marketplace            | 7,400+ | From 90 plugin repositories                      |
+| Marketplace | 11,000+ | From 81 manifest repositories |
 
-**Local: 127 unique skills | Marketplace: 11,700+ additional skills**
+**Local: 180 public skills | Marketplace: 11,000+ additional skills**
 
 ---
 

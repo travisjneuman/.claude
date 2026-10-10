@@ -91,7 +91,7 @@ This script:
 
 - Clones or pulls all 81 marketplace repos from their original upstreams
 - Sets `no_push` on each to prevent accidental modifications
-- Fixes detached HEAD states and updates documentation counts
+- Handles repository sync; public counts/indexes require a separate explicit source refresh
 - Ensures main repo can push to your GitHub
 
 ### Step 3: Setup MCP Config (Platform-Specific)
@@ -185,7 +185,7 @@ bash ~/.claude/_pull-all-repos.sh
 ~/.claude/_pull-all-repos.sh
 ```
 
-This pulls all 81 marketplace repos, fixes detached HEADs, enforces `no_push`, and updates documentation counts automatically. Each machine fetches independently -- gitlinks are not tracked in the parent repo.
+This pulls manifest marketplace repos, handles detached HEADs, and enforces `no_push`. It does not publish counts or indexes automatically; use the [explicit count pipeline](./COUNT-PIPELINE.md) when authorized. Each machine fetches independently -- gitlinks are not tracked in the parent repo.
 
 ---
 
@@ -196,8 +196,8 @@ This pulls all 81 marketplace repos, fixes detached HEADs, enforces `no_push`, a
 +-- CLAUDE.md              <- Core rules
 +-- settings.json          <- Shared settings
 +-- commands/              <- Slash commands
-+-- skills/                <- 119 skills
-+-- agents/                <- 67 agents
++-- skills/                <- 180 skills
++-- agents/                <- 10 agents
 +-- rules/                 <- Contextual rules
 +-- templates/             <- Templates
 +-- docs/                  <- Documentation

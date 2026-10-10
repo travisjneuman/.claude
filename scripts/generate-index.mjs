@@ -19,10 +19,13 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { createHash } from "node:crypto";
+import { collectCore, readManifest } from "./count-inventory.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const args = new Set(process.argv.slice(2));
 const write = args.has("--write");
+if (write && args.has("--check")) throw new Error("--write and --check are mutually exclusive.");
+const publicInventory = collectCore(root).inventory;
 const rel = (p) => path.relative(root, p).split(path.sep).join("/");
 const read = (p) => (fs.existsSync(p) ? fs.readFileSync(p, "utf8") : "");
 
@@ -93,21 +96,23 @@ const nodes = [];
 const linkedSkills = [];
 
 for (const dir of fs.readdirSync(path.join(root, "skills")).sort()) {
-  const file = path.join(root, "skills", dir, "SKILL.md");
-  if (!fs.existsSync(file)) continue;
+  if (fs.lstatSync(path.join(root, "skills", dir)).isSymbolicLink()) linkedSkills.push(dir);
+}
+for (const relative of publicInventory.skills) {
+  const file = path.join(root, relative);
+  const dir = relative.slice("skills/".length).replace(/\/SKILL\.md$/, "");
   const t = read(file);
   const fm = frontmatter(t);
   const name = fm.name || dir;
-  if (fs.lstatSync(path.join(root, "skills", dir)).isSymbolicLink()) { linkedSkills.push(name); continue; }
   const desc = [fm.description, fm.when_to_use].filter(Boolean).join(" ") || firstLine(t);
   nodes.push({ id: `skill:${name}`, type: "skill", name, path: rel(file), description: desc,
     tier: coreSkills.has(name) ? "core" : "name-only", manual: String(fm["disable-model-invocation"]) === "true",
     domain: domainOf(`${name} ${desc}`) });
 }
 
-for (const f of fs.readdirSync(path.join(root, "agents")).sort()) {
-  if (!f.endsWith(".md") || f === "README.md") continue;
-  const file = path.join(root, "agents", f);
+for (const relative of publicInventory.agents) {
+  const f = path.posix.basename(relative);
+  const file = path.join(root, relative);
   const t = read(file);
   const fm = frontmatter(t);
   const name = fm.name || f.replace(/\.md$/, "");
@@ -116,25 +121,20 @@ for (const f of fs.readdirSync(path.join(root, "agents")).sort()) {
     domain: domainOf(`${name} ${desc}`) });
 }
 
-function walkCommands(dir, prefix = "") {
-  for (const f of fs.readdirSync(dir).sort()) {
-    const full = path.join(dir, f);
-    if (fs.statSync(full).isDirectory()) { walkCommands(full, `${prefix}${f}:`); continue; }
-    if (!f.endsWith(".md") || f === "README.md") continue;
-    const t = read(full);
-    const fm = frontmatter(t);
-    const name = `${prefix}${f.replace(/\.md$/, "")}`;
-    const desc = fm.description || firstLine(t);
-    nodes.push({ id: `command:${name}`, type: "command", name, path: rel(full), description: desc,
-      tier: coreCommands.has(name) ? "core" : "name-only", manual: String(fm["disable-model-invocation"]) === "true",
-      domain: domainOf(`${name} ${desc}`) });
-  }
+for (const relative of [...publicInventory.commands, ...publicInventory.routerCommands]) {
+  const full = path.join(root, relative);
+  const t = read(full);
+  const fm = frontmatter(t);
+  const name = relative.slice("commands/".length).replace(/\.md$/, "").replace(/\//g, ":");
+  const desc = fm.description || firstLine(t);
+  nodes.push({ id: `command:${name}`, type: "command", name, path: rel(full), description: desc,
+    tier: coreCommands.has(name) ? "core" : "name-only", manual: String(fm["disable-model-invocation"]) === "true",
+    domain: domainOf(`${name} ${desc}`) });
 }
-walkCommands(path.join(root, "commands"));
 
-for (const f of fs.readdirSync(path.join(root, "rules")).sort()) {
-  if (!f.endsWith(".md")) continue;
-  const file = path.join(root, "rules", f);
+for (const relative of publicInventory.rules) {
+  const f = path.posix.basename(relative);
+  const file = path.join(root, relative);
   const t = read(file);
   const fm = frontmatter(t);
   const paths = Array.isArray(fm.paths) ? fm.paths : fm.paths ? String(fm.paths).split(",").map((s) => s.trim()) : [];
@@ -158,11 +158,9 @@ for (const group of fs.existsSync(refRoot) ? fs.readdirSync(refRoot).sort() : []
 }
 
 // Marketplaces: manifest in .gitmodules (clones are local-only, never committed)
-const marketplaces = [];
-for (const m of read(path.join(root, ".gitmodules")).matchAll(/\[submodule "([^"]+)"\][^[]*?path = (\S+)[^[]*?url = (\S+)/g)) {
-  const dir = path.join(root, m[2]);
-  marketplaces.push({ name: path.basename(m[2]), path: m[2], url: m[3], cloned: fs.existsSync(dir) });
-}
+const marketplaces = readManifest(root).map(({ name, path: p, githubUrl }) => ({
+  name, path: p, url: githubUrl, cloned: fs.existsSync(path.join(root, p)),
+}));
 
 // ---------- edges ----------
 const tokens = (s) => new Set(String(s).toLowerCase().match(/[a-z][a-z0-9+#.]{2,}/g) || []);
@@ -186,9 +184,9 @@ const count = (t) => byType(t).length;
 const L = [];
 L.push("# Toolkit Index", "");
 L.push("<!-- Generated by scripts/generate-index.mjs. Do not edit by hand. -->", "");
-L.push(`${count("skill")} skills · ${count("agent")} agents · ${count("command")} commands · ${count("rule")} rules · ${count("doc")} reference docs · ${marketplaces.length} marketplace repos`, "");
+L.push(`${count("skill")} skills · ${count("agent")} agents · ${publicInventory.commands.length} base commands + ${publicInventory.routerCommands.length} router commands · ${count("rule")} rules · ${count("doc")} reference docs · ${marketplaces.length} marketplace repos`, "");
 L.push("## How to use this index", "");
-L.push("Everything listed here is installed and available. Only the **core** tier keeps its full description in Claude's context every turn; the rest are listed by name only and found through this index, so a large toolkit costs almost nothing until something is needed.", "");
+L.push("This explicit source refresh lists public toolkit definitions; marketplace membership is the manifest, not a guarantee every clone/plugin is installed. Only the **core** tier keeps its full description in Claude's context every turn; the rest are listed by name only and found through this index, so a large toolkit costs almost nothing until something is needed.", "");
 L.push("1. Find the task's domain below (or search this file / `index/graph.json`).");
 L.push("2. Invoke the skill with the Skill tool or `/name`, delegate to the agent, or read the rule/doc.");
 L.push("3. Nothing local fits: search the marketplace catalog (`index/marketplace-catalog.json`, present once marketplaces are pulled) or `/skill-finder`.", "");

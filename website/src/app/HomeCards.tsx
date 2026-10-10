@@ -46,6 +46,7 @@ interface HomeCardsProps {
   agents: AgentItem[];
   repos: RepoItem[];
   marketplaceSkills: number;
+  snapshotAsOf: string;
   totalSkills: number;
   totalAgents: number;
   scriptCategories: ScriptCategorySummary[];
@@ -64,6 +65,7 @@ export default function HomeCards({
   agents,
   repos,
   marketplaceSkills,
+  snapshotAsOf,
   totalSkills,
   totalAgents,
   scriptCategories,
@@ -174,8 +176,10 @@ export default function HomeCards({
               Skills
             </h2>
             <p className="text-[var(--text-secondary)] max-w-xl mx-auto mb-10">
-              Curated from {repos.length} open-source repositories. Discover,
-              install, and extend your capabilities.
+              Curated from {repos.length} open-source repositories: unique normalized skill bodies.
+              Snapshot as of {snapshotAsOf} at selected local revisions, including
+              pins, not latest upstream. Repo totals overlap; don&apos;t sum them.
+              Discover, install, and extend your capabilities.
             </p>
           </ScrollReveal>
 

@@ -1,5 +1,5 @@
-import fs from "fs";
 import path from "path";
+import { getPublicCounts, readPublicSource } from "./snapshot";
 import {
   getFrontmatterString,
   getFrontmatterStringArray,
@@ -88,20 +88,12 @@ function categorizeAgent(slug: string): string {
 }
 
 export function getAgents(): Agent[] {
-  const agentsDir = path.resolve(process.cwd(), "..", "agents");
-
-  if (!fs.existsSync(agentsDir)) {
-    return [];
-  }
-
-  const files = fs
-    .readdirSync(agentsDir)
-    .filter((f) => f.endsWith(".md") && f !== "README.md");
+  const files = getPublicCounts().inventory.agents;
   const agents: Agent[] = [];
 
   for (const file of files) {
-    const slug = file.replace(".md", "");
-    const raw = fs.readFileSync(path.join(agentsDir, file), "utf-8");
+    const slug = path.posix.basename(file, ".md");
+    const raw = readPublicSource(file);
     const { data, content } = parseMarkdown(raw);
 
     const firstLine = content.trim().split("\n")[0] || "";
@@ -137,12 +129,9 @@ export function getAgents(): Agent[] {
 }
 
 export function getAgentBySlug(slug: string): Agent | null {
-  const agentsDir = path.resolve(process.cwd(), "..", "agents");
-  const file = path.join(agentsDir, `${slug}.md`);
-
-  if (!fs.existsSync(file)) return null;
-
-  const raw = fs.readFileSync(file, "utf-8");
+  const file = `agents/${slug}.md`;
+  if (!getPublicCounts().inventory.agents.includes(file)) return null;
+  const raw = readPublicSource(file);
   const { data, content } = parseMarkdown(raw);
   const firstLine = content.trim().split("\n")[0] || "";
   const htmlResult = remark().use(remarkHtml).processSync(content);

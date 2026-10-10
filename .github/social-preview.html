@@ -3,15 +3,13 @@
 <head>
 <meta charset="utf-8">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@600;800&display=swap');
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
     width: 1280px;
     height: 640px;
     overflow: hidden;
-    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     color: #fafafa;
     background: #0a0a0f;
   }
@@ -94,7 +92,7 @@
   }
 
   .stat-number {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
     font-size: 28px;
     font-weight: 700;
     color: #fff;
@@ -117,7 +115,7 @@
   .tagline {
     font-size: 16px;
     color: #64748b;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
   }
 
   .tagline span {
@@ -128,13 +126,14 @@
     position: absolute;
     bottom: 24px;
     right: 32px;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
     font-size: 14px;
     color: #475569;
   }
 </style>
 </head>
 <body>
+<!-- claude-counts:as-of 2026-10-10; committed marketplace snapshots, not latest-upstream -->
 <div class="canvas">
   <div class="border-glow"></div>
   <div class="content">
@@ -142,23 +141,23 @@
     <div class="subtitle">The Ultimate Claude Code Toolkit</div>
     <div class="stats">
       <div class="stat">
-        <div class="stat-number green">180</div>
+        <div class="stat-number green" data-count="skills">180</div>
         <div class="stat-label">Skills</div>
       </div>
       <div class="stat">
-        <div class="stat-number amber">10</div>
+        <div class="stat-number amber" data-count="agents">10</div>
         <div class="stat-label">Agents</div>
       </div>
       <div class="stat">
-        <div class="stat-number purple">29</div>
+        <div class="stat-number purple" data-count="commands">29</div>
         <div class="stat-label">Commands</div>
       </div>
       <div class="stat">
-        <div class="stat-number blue">81</div>
+        <div class="stat-number blue" data-count="repos">81</div>
         <div class="stat-label">Repos</div>
       </div>
       <div class="stat">
-        <div class="stat-number pink">11,000+</div>
+        <div class="stat-number pink" data-count="marketplaceSkillsDisplay">11,000+</div>
         <div class="stat-label">Community</div>
       </div>
     </div>

@@ -86,7 +86,7 @@ That's it. Claude Code loads the toolkit from `~/.claude/` in every session.
 | **[Agents](./agents/README.md)** | 10 | Specialist subagents for focused tasks (code review, debugging, etc.) |
 | **[Commands](./docs/COMMANDS.md)** | 29 | Slash commands for common workflows |
 | **[Marketplace Repos](./plugins/marketplaces/)** | 81 | Community skill repositories (11,000+ additional skills) |
-| **[Hooks](./hooks/README.md)** | 7 | Lifecycle hooks (session start/stop, pre-commit, safety guards) |
+| **[Hooks](./hooks/README.md)** | 7 | Wired public hooks (session lifecycle, status line, safety guards; not git hooks or the dispatcher) |
 | **[Templates](./templates/README.md)** | 17 | Project scaffolding and task templates |
 | **[Rules](./rules/)** | 10 | Stack-specific coding guardrails (TypeScript, Python, Go, Rust, etc.) plus web legal-exposure defaults |
 
@@ -271,8 +271,12 @@ The toolkit maintains context between sessions automatically:
 |------|---------|
 | `CLAUDE.md` | Core rules: autonomy, workflow, git, safety, code standards |
 | `settings.json` | Claude Code settings, hook registrations, permissions |
-| `counts.json` | Resource counts (source of truth) |
+| `counts.json` | Public counts, identity lists, source revisions/digests and snapshot date |
 | `plugin.json` | Plugin metadata |
+
+### Explicit count publication
+
+Public toolkit resources and committed manifest marketplace skill bodies are distinct populations. Local and hosted website builds consume the same generated snapshots. Pulling sources or committing does not regenerate them; authorize one explicit source refresh, inspect its output/diff, and then publish. Pins and recorded dates label selected source snapshots, not latest-upstream guarantees. See **[Count pipeline](./docs/COUNT-PIPELINE.md)** for commands, definitions, profile/portfolio destinations and the separate DESK-only media contract.
 
 ### Common Customizations
 
@@ -362,6 +366,7 @@ See **[CHANGELOG.md](./CHANGELOG.md)** for the full history.
 | [New Device Setup](./docs/NEW-DEVICE-SETUP.md) | Multi-machine configuration |
 | [Workflow Guide](./docs/WORKFLOW-GUIDE.md) | Development workflow patterns |
 | [Marketplace Guide](./docs/MARKETPLACE-GUIDE.md) | Community skill catalog |
+| [Count Pipeline](./docs/COUNT-PIPELINE.md) | Public populations, snapshot evidence and explicit publication |
 | [Agent Teams](./docs/AGENT-TEAMS.md) | Multi-agent coordination |
 | [MCP Servers](./docs/MCP-SERVERS.md) | MCP server reference |
 | [Configuration](./docs/CONFIGURATION.md) | Full settings.json reference |

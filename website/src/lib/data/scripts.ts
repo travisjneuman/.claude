@@ -71,21 +71,21 @@ const SCRIPT_METADATA: Record<
     category: "maintenance",
     description:
       "Build the discovery layer from what is on disk: INDEX.md, index/graph.json, skills/MASTER_INDEX.md, and the name-only skillOverrides in settings.json (core tiers come from index/tiers.json).",
-    whenToRun: "Automatically in pre-commit; manually after editing index/tiers.json",
+    whenToRun: "Explicitly after public discovery/tiering changes, before refreshing counts",
   },
   "generate-counts": {
     name: "Generate Counts",
     category: "maintenance",
     description:
-      "Canonical count generator: writes counts.json and the website's marketplace-counts.json and updates counts in the docs. --check reports drift without writing.",
-    whenToRun: "Automatically in pre-commit; manually after adding or removing resources",
+      "Canonical public-source snapshot producer: committed marketplace HEAD blobs, complete manifest coverage, revisions/digests/date, public identity lists, numeric docs and explicit consumer destinations. --check is read-only; conflicting modes are rejected.",
+    whenToRun: "Explicitly after reviewed source changes, when publication is authorized",
   },
   "generate-showcase-images": {
     name: "Generate Showcase Images",
     category: "maintenance",
     description:
-      "Render the tjn.portfolio showcase screenshots from counts.json. Called by the count generator; runs on the media host.",
-    whenToRun: "When counts change (run through the count generator)",
+      "Render count-bearing showcase screenshots from counts.json only through an explicit reviewed DESK renderer/work-folder contract. No implicit portfolio delivery.",
+    whenToRun: "Separately approved media operation after reviewing changed counts",
   },
   "update-counts": {
     name: "Update Counts",
@@ -144,7 +144,7 @@ const SCRIPT_METADATA: Record<
     name: "Pre-Commit Hook",
     category: "git-hooks",
     description:
-      "Block staged marketplace clones or gitlinks, run the public-safety gate, regenerate INDEX.md, index/graph.json, skills/MASTER_INDEX.md, and counts, and block obvious secrets.",
+      "Block staged marketplace clones/gitlinks, private-pattern leaks, credentials and ignored runtime files. No automatic generation, staging, budget checks or tests.",
     whenToRun: "Automatically before every commit",
   },
   "commit-msg": {
@@ -157,7 +157,7 @@ const SCRIPT_METADATA: Record<
     name: "Pre-Push Hook",
     category: "git-hooks",
     description:
-      "Block non-fast-forward pushes to main/master, gitlinks or marketplace content in HEAD, and large skill/agent changes without a CHANGELOG entry.",
+      "Block unapproved non-fast-forward pushes to main/master and gitlinks or marketplace content in HEAD.",
     whenToRun: "Automatically before every push",
   },
 };

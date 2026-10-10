@@ -2,18 +2,69 @@
 import fs from "node:fs";
 import path from "node:path";
 import { createRequire } from "node:module";
+import { loadMediaRoutingPolicy } from "./media-routing.mjs";
 import { fileURLToPath } from "node:url";
 
 const scriptDir = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(scriptDir, "..");
-const requireFromWebsite = createRequire(new URL("../website/package.json", import.meta.url));
-const sharp = requireFromWebsite("sharp");
-
 const args = new Set(process.argv.slice(2));
-const writeMode = args.has("--write");
-const checkMode = args.has("--check") || !writeMode;
 const changed = [];
-const stale = [];
+
+// Rendering is an explicit production operation, never a commit-time check.
+if (!args.has("--write") || args.has("--check")) {
+  throw new Error("Use --write on the approved media host through desk-run; no check/render mode is supported.");
+}
+const policy = loadMediaRoutingPolicy();
+const work = process.env.TJN_MEDIA_WORK;
+if (!work || !path.isAbsolute(work)) throw new Error("desk-run must set TJN_MEDIA_WORK to an absolute dated production folder.");
+const workRoot = path.resolve(work);
+if (work.toLowerCase() !== workRoot.toLowerCase()) {
+  throw new Error("Production job must use its canonical lexical spelling, without removed path components.");
+}
+if (path.dirname(workRoot).toLowerCase() !== policy.jobsRoot.toLowerCase() ||
+    !/^[a-z0-9]+(?:-[a-z0-9]+)*-\d{4}-\d{2}-\d{2}$/i.test(path.basename(workRoot))) {
+  throw new Error("Production must use a dated desk-run job under the approved jobs root.");
+}
+for (let cursor = workRoot; ; cursor = path.dirname(cursor)) {
+  const stat = fs.lstatSync(cursor);
+  if (!stat.isDirectory() || stat.isSymbolicLink() || statOrMissing(path.join(cursor, ".git"))) {
+    throw new Error("Production job ancestors must be real directories outside Git checkouts.");
+  }
+  if (path.dirname(cursor) === cursor) break;
+}
+if (fs.realpathSync(workRoot).toLowerCase() !== workRoot.toLowerCase()) {
+  throw new Error("Production job cannot resolve through a junction or alias.");
+}
+function statOrMissing(file) {
+  try { return fs.lstatSync(file); }
+  catch (error) { if (error.code === "ENOENT") return null; throw error; }
+}
+function assertOutputPath(file, directory = false) {
+  const target = path.resolve(file);
+  const relative = path.relative(workRoot, target);
+  if (relative === ".." || relative.startsWith(`..${path.sep}`) || path.isAbsolute(relative) || (!relative && !directory)) {
+    throw new Error("Image output must stay inside TJN_MEDIA_WORK, never inside a repo or Proton.");
+  }
+  let current = workRoot;
+  const parts = relative ? relative.split(path.sep) : [];
+  for (let i = 0; i < parts.length; i++) {
+    current = path.join(current, parts[i]);
+    const stat = statOrMissing(current);
+    if (!stat) continue;
+    if (stat.isSymbolicLink() || ((directory || i < parts.length - 1) ? !stat.isDirectory() : !stat.isFile()) ||
+        (stat.isDirectory() && statOrMissing(path.join(current, ".git"))) ||
+        fs.realpathSync(current).toLowerCase() !== current.toLowerCase()) {
+      throw new Error("Production output paths must be literal real paths outside every Git checkout.");
+    }
+  }
+}
+const outputDir = path.resolve(argValue("--output-dir") || path.join(workRoot, "claude-showcase"));
+assertOutputPath(outputDir, true);
+const targets = [["full", 1920, 1080], ["medium", 1200, 675], ["thumb", 800, 450]];
+const targetFiles = targets.map(([size]) => path.join(outputDir, `tjn-claude-${size}.webp`));
+for (const file of targetFiles) assertOutputPath(file);
+const requireFromWebsite = createRequire(new URL("../website/package.json", import.meta.url));
+const sharp = requireFromWebsite(argValue("--sharp-module") || "sharp");
 
 function argValue(prefix) {
   const item = process.argv.find((a) => a.startsWith(`${prefix}=`));
@@ -29,7 +80,12 @@ function xml(value) {
 }
 
 function counts() {
-  return JSON.parse(fs.readFileSync(path.join(repoRoot, "counts.json"), "utf8"));
+  const data = JSON.parse(fs.readFileSync(argValue("--counts-file") || path.join(repoRoot, "counts.json"), "utf8"));
+  for (const key of ["skills", "agents", "repos", "marketplaceSkills"]) {
+    if (!Number.isSafeInteger(data[key]) || data[key] < 0) throw new Error(`Invalid count: ${key}`);
+  }
+  if (typeof data.marketplaceSkillsDisplay !== "string") throw new Error("Missing marketplace display value.");
+  return data;
 }
 
 function showcaseSvg(width, height, data) {
@@ -62,9 +118,9 @@ function showcaseSvg(width, height, data) {
   ].map(([x, y, r, fill, opacity]) => `<circle cx="${x * sx}" cy="${y * sy}" r="${r * scale}" fill="${fill}" opacity="${opacity}"/>`).join("");
   const line = (x1, y1, x2, y2) => `<line x1="${x1 * sx}" y1="${y1 * sy}" x2="${x2 * sx}" y2="${y2 * sy}" stroke="#7c3aed" stroke-width="${Math.max(1, scale)}" opacity="0.25"/>`;
   const labels = [
-    ["CUSTOM", "SKILLS"],
+    ["TOOLKIT", "SKILLS"],
     ["SPECIALIZED", "AGENTS"],
-    ["MARKETPLACE", "SKILLS"],
+    ["NORMALIZED", "SKILL BODIES"],
     ["OPEN-SOURCE", "REPOS"],
   ];
   const values = [data.skills, data.agents, data.marketplaceSkillsDisplay, data.repos];
@@ -115,43 +171,39 @@ async function renderBuffer(width, height, format, data) {
   return pipeline.toBuffer();
 }
 
-async function writeOrCheck(file, buffer) {
-  const rel = path.relative(repoRoot, file);
-  const existing = fs.existsSync(file) ? fs.readFileSync(file) : null;
-  const same = existing && Buffer.compare(existing, buffer) === 0;
-  if (same) return;
-  if (checkMode) stale.push(rel);
-  if (writeMode) {
-    fs.mkdirSync(path.dirname(file), { recursive: true });
-    fs.writeFileSync(file, buffer);
-    changed.push(rel);
+async function deliverToWork(file, buffer) {
+  assertOutputPath(file);
+  if (fs.existsSync(file)) {
+    if (Buffer.compare(fs.readFileSync(file), buffer) === 0) return;
+    throw new Error(`Refusing to overwrite an existing production artifact: ${path.basename(file)}`);
   }
+  fs.mkdirSync(path.dirname(file), { recursive: true });
+  assertOutputPath(file);
+  fs.writeFileSync(file, buffer, { flag: "wx" });
+  changed.push(path.basename(file));
 }
 
 async function main() {
   const data = counts();
   // The website's og-image.png is the repo's GitHub social preview image, kept static and count-free.
 
-  const portfolioRepo = argValue("--portfolio-repo");
-  if (portfolioRepo) {
-    const targets = [
-      ["full", 1920, 1080],
-      ["medium", 1200, 675],
-      ["thumb", 800, 450],
-    ];
-    for (const [size, width, height] of targets) {
-      const buffer = await renderBuffer(width, height, "webp", data);
-      await writeOrCheck(path.join(portfolioRepo, "images", "screenshots", `tjn-claude-${size}.webp`), buffer);
-      await writeOrCheck(path.join(portfolioRepo, "src", "public", "images", "screenshots", `tjn-claude-${size}.webp`), buffer);
+  if (argValue("--portfolio-repo")) {
+    throw new Error("Render to --output-dir in TJN_MEDIA_WORK; deliver finished images separately, never directly into a repo.");
+  }
+  // Prepare every buffer before writing any artifact.
+  const rendered = await Promise.all(targets.map(async ([size, width, height], index) => ({
+    file: targetFiles[index],
+    buffer: await renderBuffer(width, height, "webp", data),
+  })));
+  for (const { file, buffer } of rendered) {
+    assertOutputPath(file);
+    if (fs.existsSync(file) && Buffer.compare(fs.readFileSync(file), buffer) !== 0) {
+      throw new Error(`Refusing to overwrite an existing production artifact: ${path.basename(file)}`);
     }
   }
-
-  console.log(`Showcase images: ${data.skills} skills, ${data.agents} agents, ${data.repos} repos, ${data.marketplaceSkillsDisplay} marketplace skills`);
-  if (writeMode) console.log(changed.length ? `Updated ${changed.length} image(s):\n- ${changed.join("\n- ")}` : "No image changes needed.");
-  if (checkMode && stale.length) {
-    console.error(`Stale generated image(s):\n- ${stale.join("\n- ")}`);
-    process.exit(1);
-  }
+  for (const { file, buffer } of rendered) await deliverToWork(file, buffer);
+  console.log(`Showcase images: ${data.skills} skills, ${data.agents} agents, ${data.repos} sources, ${data.marketplaceSkillsDisplay} normalized skill bodies`);
+  console.log(changed.length ? `Produced ${changed.length} image(s) in ${outputDir}:\n- ${changed.join("\n- ")}` : "Existing job artifacts are byte-identical.");
 }
 
 main().catch((error) => {

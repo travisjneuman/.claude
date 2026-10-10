@@ -1,6 +1,9 @@
 {
+  "schemaVersion": 2,
+  "definitionVersion": "public-toolkit-v2",
+  "asOf": "2026-10-10",
   "skills": 180,
-  "skillDirectories": 181,
+  "skillDirectories": 180,
   "agents": 10,
   "repos": 81,
   "commands": 29,
@@ -11,6 +14,1463 @@
   "templates": 17,
   "checklists": 10,
   "mcpServers": 0,
-  "marketplaceSkills": 11060,
-  "marketplaceSkillsDisplay": "11,000+"
+  "marketplaceSkills": 11078,
+  "marketplaceSkillsDisplayValue": 11000,
+  "marketplaceSkillsDisplay": "11,000+",
+  "inventory": {
+    "skills": [
+      "skills/accessibility-a11y/SKILL.md",
+      "skills/agent-accessibility-expert/SKILL.md",
+      "skills/agent-android-developer/SKILL.md",
+      "skills/agent-api-designer/SKILL.md",
+      "skills/agent-api-integration-specialist/SKILL.md",
+      "skills/agent-audio-engineer/SKILL.md",
+      "skills/agent-auth-specialist/SKILL.md",
+      "skills/agent-blockchain-developer/SKILL.md",
+      "skills/agent-brand-strategist/SKILL.md",
+      "skills/agent-browser-extension-developer/SKILL.md",
+      "skills/agent-cli-developer/SKILL.md",
+      "skills/agent-cloud-architect/SKILL.md",
+      "skills/agent-code-explainer/SKILL.md",
+      "skills/agent-compliance-engineer/SKILL.md",
+      "skills/agent-cpp-expert/SKILL.md",
+      "skills/agent-data-engineer/SKILL.md",
+      "skills/agent-database-expert/SKILL.md",
+      "skills/agent-desktop-developer/SKILL.md",
+      "skills/agent-devsecops-engineer/SKILL.md",
+      "skills/agent-django-fastapi-expert/SKILL.md",
+      "skills/agent-documentation-writer/SKILL.md",
+      "skills/agent-e2e-test-specialist/SKILL.md",
+      "skills/agent-email-specialist/SKILL.md",
+      "skills/agent-embedded-developer/SKILL.md",
+      "skills/agent-event-driven-architect/SKILL.md",
+      "skills/agent-flutter-developer/SKILL.md",
+      "skills/agent-game-developer/SKILL.md",
+      "skills/agent-go-expert/SKILL.md",
+      "skills/agent-graphic-designer/SKILL.md",
+      "skills/agent-graphql-architect/SKILL.md",
+      "skills/agent-i18n-specialist/SKILL.md",
+      "skills/agent-kotlin-expert/SKILL.md",
+      "skills/agent-macos-developer/SKILL.md",
+      "skills/agent-microservices-architect/SKILL.md",
+      "skills/agent-migration-specialist/SKILL.md",
+      "skills/agent-ml-engineer/SKILL.md",
+      "skills/agent-mobile-architect/SKILL.md",
+      "skills/agent-mobile-release-manager/SKILL.md",
+      "skills/agent-monetization-expert/SKILL.md",
+      "skills/agent-motion-designer/SKILL.md",
+      "skills/agent-next-js-expert/SKILL.md",
+      "skills/agent-observability-engineer/SKILL.md",
+      "skills/agent-payment-billing-specialist/SKILL.md",
+      "skills/agent-product-analytics-specialist/SKILL.md",
+      "skills/agent-product-manager/SKILL.md",
+      "skills/agent-pwa-specialist/SKILL.md",
+      "skills/agent-python-expert/SKILL.md",
+      "skills/agent-realtime-specialist/SKILL.md",
+      "skills/agent-rust-expert/SKILL.md",
+      "skills/agent-seo-specialist/SKILL.md",
+      "skills/agent-serverless-specialist/SKILL.md",
+      "skills/agent-startup-advisor/SKILL.md",
+      "skills/agent-svelte-expert/SKILL.md",
+      "skills/agent-teams/SKILL.md",
+      "skills/agent-technical-writer/SKILL.md",
+      "skills/agent-test-generator/SKILL.md",
+      "skills/agent-ux-researcher/SKILL.md",
+      "skills/agent-video-producer/SKILL.md",
+      "skills/agent-vue-nuxt-expert/SKILL.md",
+      "skills/agent-wasm-specialist/SKILL.md",
+      "skills/ai-ml-development/SKILL.md",
+      "skills/ai-policy-generator/SKILL.md",
+      "skills/android-development/SKILL.md",
+      "skills/api-design/SKILL.md",
+      "skills/application-security/SKILL.md",
+      "skills/ar-vr-xr/SKILL.md",
+      "skills/audio-production/SKILL.md",
+      "skills/authentication-patterns/SKILL.md",
+      "skills/battle-card-builder/SKILL.md",
+      "skills/blockchain-web3/SKILL.md",
+      "skills/brand-identity/SKILL.md",
+      "skills/business-strategy/SKILL.md",
+      "skills/career-path-planner/SKILL.md",
+      "skills/case-interview-practice/SKILL.md",
+      "skills/codebase-documenter/SKILL.md",
+      "skills/compliance-engineering/SKILL.md",
+      "skills/content-repurposer/SKILL.md",
+      "skills/contract-redliner/SKILL.md",
+      "skills/core-workflow/SKILL.md",
+      "skills/course-material-creator/SKILL.md",
+      "skills/customer-persona-builder/SKILL.md",
+      "skills/customer-success/SKILL.md",
+      "skills/data-engineering/SKILL.md",
+      "skills/data-science/SKILL.md",
+      "skills/database-expert/SKILL.md",
+      "skills/debate-practice-coach/SKILL.md",
+      "skills/debug-systematic/SKILL.md",
+      "skills/devex-sdk-design/SKILL.md",
+      "skills/devops-cloud/SKILL.md",
+      "skills/edge-computing/SKILL.md",
+      "skills/electron-desktop/SKILL.md",
+      "skills/email-systems/SKILL.md",
+      "skills/embedded-iot/SKILL.md",
+      "skills/event-driven-architecture/SKILL.md",
+      "skills/event-planner/SKILL.md",
+      "skills/finance/SKILL.md",
+      "skills/financial-scenario-planner/SKILL.md",
+      "skills/flutter-development/SKILL.md",
+      "skills/frontend-enhancer/SKILL.md",
+      "skills/fundraising-analyzer/SKILL.md",
+      "skills/game-development/SKILL.md",
+      "skills/generic-code-reviewer/SKILL.md",
+      "skills/generic-design-system/SKILL.md",
+      "skills/generic-feature-developer/SKILL.md",
+      "skills/generic-fullstack-code-reviewer/SKILL.md",
+      "skills/generic-fullstack-design-system/SKILL.md",
+      "skills/generic-fullstack-feature-developer/SKILL.md",
+      "skills/generic-fullstack-ux-designer/SKILL.md",
+      "skills/generic-react-code-reviewer/SKILL.md",
+      "skills/generic-react-design-system/SKILL.md",
+      "skills/generic-react-feature-developer/SKILL.md",
+      "skills/generic-react-ux-designer/SKILL.md",
+      "skills/generic-static-code-reviewer/SKILL.md",
+      "skills/generic-static-design-system/SKILL.md",
+      "skills/generic-static-feature-developer/SKILL.md",
+      "skills/generic-static-ux-designer/SKILL.md",
+      "skills/generic-ux-designer/SKILL.md",
+      "skills/grant-proposal-builder/SKILL.md",
+      "skills/graphic-design/SKILL.md",
+      "skills/graphql-expert/SKILL.md",
+      "skills/growth-engineering/SKILL.md",
+      "skills/health-wellness/SKILL.md",
+      "skills/hr-talent/SKILL.md",
+      "skills/i18n-localization/SKILL.md",
+      "skills/impact-report-writer/SKILL.md",
+      "skills/innovation/SKILL.md",
+      "skills/investment-memo-generator/SKILL.md",
+      "skills/ios-development/SKILL.md",
+      "skills/kotlin-multiplatform/SKILL.md",
+      "skills/leadership/SKILL.md",
+      "skills/learning-gap-analyzer/SKILL.md",
+      "skills/legal-compliance/SKILL.md",
+      "skills/literature-review-planner/SKILL.md",
+      "skills/llm-app-development/SKILL.md",
+      "skills/low-code-platforms/SKILL.md",
+      "skills/macos-native/SKILL.md",
+      "skills/marketing/SKILL.md",
+      "skills/microservices-architecture/SKILL.md",
+      "skills/mobile-cicd/SKILL.md",
+      "skills/monetization-strategy/SKILL.md",
+      "skills/monitoring-observability/SKILL.md",
+      "skills/newsletter-creator/SKILL.md",
+      "skills/onboarding-guide-creator/SKILL.md",
+      "skills/operations/SKILL.md",
+      "skills/options-comparator/SKILL.md",
+      "skills/payment-integration/SKILL.md",
+      "skills/performance-engineering/SKILL.md",
+      "skills/podcast-producer/SKILL.md",
+      "skills/process-flowchart-designer/SKILL.md",
+      "skills/product-analytics/SKILL.md",
+      "skills/product-management/SKILL.md",
+      "skills/pwa-development/SKILL.md",
+      "skills/rd-management/SKILL.md",
+      "skills/react-native/SKILL.md",
+      "skills/real-estate-analyzer/SKILL.md",
+      "skills/recipe-card-creator/SKILL.md",
+      "skills/research-presenter/SKILL.md",
+      "skills/risk-management/SKILL.md",
+      "skills/sales/SKILL.md",
+      "skills/security/SKILL.md",
+      "skills/seo-analytics-auditor/SKILL.md",
+      "skills/serverless-development/SKILL.md",
+      "skills/startup-launch/SKILL.md",
+      "skills/statistics-verifier/SKILL.md",
+      "skills/status-report-generator/SKILL.md",
+      "skills/supply-chain-optimizer/SKILL.md",
+      "skills/sustainability-esg/SKILL.md",
+      "skills/svelte-development/SKILL.md",
+      "skills/tauri-desktop/SKILL.md",
+      "skills/tdd-workflow/SKILL.md",
+      "skills/tech-debt-analyzer/SKILL.md",
+      "skills/test-specialist/SKILL.md",
+      "skills/toolkit-router/SKILL.md",
+      "skills/travel-planner/SKILL.md",
+      "skills/ui-animation/SKILL.md",
+      "skills/ui-research/SKILL.md",
+      "skills/video-production/SKILL.md",
+      "skills/volunteer-coordinator/SKILL.md",
+      "skills/vue-development/SKILL.md",
+      "skills/websockets-realtime/SKILL.md"
+    ],
+    "agents": [
+      "agents/architecture-analyst.md",
+      "agents/debugging-specialist.md",
+      "agents/deep-code-reviewer.md",
+      "agents/devops-engineer.md",
+      "agents/ios-developer.md",
+      "agents/performance-optimizer.md",
+      "agents/react-expert.md",
+      "agents/refactoring-specialist.md",
+      "agents/security-auditor.md",
+      "agents/typescript-expert.md"
+    ],
+    "commands": [
+      "commands/assemble-team.md",
+      "commands/audit-docs.md",
+      "commands/backup-config.md",
+      "commands/bootstrap.md",
+      "commands/changelog.md",
+      "commands/context-stats.md",
+      "commands/deploy.md",
+      "commands/deps-update.md",
+      "commands/discover-skills.md",
+      "commands/handoff.md",
+      "commands/health-check.md",
+      "commands/init-project.md",
+      "commands/list-skills.md",
+      "commands/log-decision.md",
+      "commands/migrate.md",
+      "commands/perf-audit.md",
+      "commands/pull-repos.md",
+      "commands/review-code.md",
+      "commands/run.md",
+      "commands/scaffold.md",
+      "commands/security-scan.md",
+      "commands/session-log.md",
+      "commands/skill-finder.md",
+      "commands/standardize-claude-md.md",
+      "commands/start-task.md",
+      "commands/test-plan.md",
+      "commands/test-suite.md",
+      "commands/update-counts.md",
+      "commands/update-docs.md"
+    ],
+    "routerCommands": [],
+    "hooks": [
+      {
+        "file": "hooks/daily-maintenance.js",
+        "events": [
+          "Stop"
+        ],
+        "matchers": []
+      },
+      {
+        "file": "hooks/guard.js",
+        "events": [
+          "PreToolUse"
+        ],
+        "matchers": [
+          "Bash|Write|Edit|MultiEdit|NotebookEdit|EnterWorktree|Agent|Task"
+        ]
+      },
+      {
+        "file": "hooks/secret-scan.js",
+        "events": [
+          "PostToolUse"
+        ],
+        "matchers": [
+          "Write|Edit|MultiEdit|NotebookEdit"
+        ]
+      },
+      {
+        "file": "hooks/session-end-repo-health.sh",
+        "events": [
+          "SessionEnd"
+        ],
+        "matchers": []
+      },
+      {
+        "file": "hooks/session-start-pull.sh",
+        "events": [
+          "SessionStart"
+        ],
+        "matchers": [
+          "startup|resume"
+        ]
+      },
+      {
+        "file": "hooks/session-start-repo-health.sh",
+        "events": [
+          "SessionStart"
+        ],
+        "matchers": [
+          "startup|resume"
+        ]
+      },
+      {
+        "file": "hooks/statusline.js",
+        "events": [
+          "StatusLine"
+        ],
+        "matchers": []
+      }
+    ],
+    "rules": [
+      "rules/api-routes.md",
+      "rules/cpp.md",
+      "rules/flutter-dart.md",
+      "rules/go.md",
+      "rules/java-kotlin.md",
+      "rules/python.md",
+      "rules/rust.md",
+      "rules/swift-ios.md",
+      "rules/typescript-react.md",
+      "rules/web-legal-exposure.md"
+    ],
+    "checklists": [
+      "docs/reference/checklists/api-development.md",
+      "docs/reference/checklists/automation-scripts.md",
+      "docs/reference/checklists/database-design.md",
+      "docs/reference/checklists/mobile-app-deployment.md",
+      "docs/reference/checklists/monitoring-alerting-design.md",
+      "docs/reference/checklists/performance-optimization.md",
+      "docs/reference/checklists/security-hardening.md",
+      "docs/reference/checklists/static-sites.md",
+      "docs/reference/checklists/ui-visual-changes.md",
+      "docs/reference/checklists/verification-template.md"
+    ],
+    "templates": [
+      "templates/agent-template.md",
+      "templates/api-project.md",
+      "templates/architecture-decision-template.md",
+      "templates/command-template.md",
+      "templates/incident-response-template.md",
+      "templates/init.sh",
+      "templates/landing-page-project.md",
+      "templates/mobile-app-project.md",
+      "templates/plugin-template/agents/example-agent.md",
+      "templates/plugin-template/commands/example-command.md",
+      "templates/plugin-template/plugin.json",
+      "templates/plugin-template/skills/example-skill/SKILL.md",
+      "templates/progress.md",
+      "templates/project-CLAUDE.md",
+      "templates/release-checklist-template.md",
+      "templates/research-notes.md",
+      "templates/saas-project.md",
+      "templates/skill-template.md",
+      "templates/task-template.md",
+      "templates/tests.json"
+    ]
+  },
+  "provenance": {
+    "generator": "scripts/generate-counts.mjs",
+    "core": {
+      "revision": "92e1c86619035d1a8f85098ceb33b270f3e9060a",
+      "inputMode": "public-working-source",
+      "worktree": "modified",
+      "inputDigest": "23eaa9594b6ef4e0d921a90906b5f96566dfa7f02b4ebc755e43e65aee3c87ce",
+      "files": [
+        {
+          "path": ".gitmodules",
+          "sha256": "a9aaa53496559a8722711c0bbb5c5250ecdec11321024e8d13a006c9e04b59d2"
+        },
+        {
+          "path": "agents/architecture-analyst.md",
+          "sha256": "5e7bb113fa36b205be8bde4e60dc60f42c01e33740ce88ee4f16c3f4c4c32a99"
+        },
+        {
+          "path": "agents/debugging-specialist.md",
+          "sha256": "eccc7b1f7179446fc8e1c90b1e3b1414e17cfb0b2af890078886ca57929ca39d"
+        },
+        {
+          "path": "agents/deep-code-reviewer.md",
+          "sha256": "d30cccda569e5455300ae9b07cb33b6a163cff3922c164b7da366c2c378e4564"
+        },
+        {
+          "path": "agents/devops-engineer.md",
+          "sha256": "6a91ed535aed5bd0b5bebf106d4bbd82914f40d1da8fe119050947a6cf5cce29"
+        },
+        {
+          "path": "agents/ios-developer.md",
+          "sha256": "14d831807d29b46bda83563c3772098b509190b86cf374c6d085e2a46e77b1dd"
+        },
+        {
+          "path": "agents/performance-optimizer.md",
+          "sha256": "1cd65d1f457e7429a72e33cad2b8cc4df88addde7d9ce0d5eb284581ec621642"
+        },
+        {
+          "path": "agents/react-expert.md",
+          "sha256": "fe5f2ca7e404a143ec3f6096f1ba2f221ad213dc88f4f447a436ade0ced42797"
+        },
+        {
+          "path": "agents/refactoring-specialist.md",
+          "sha256": "379eea02be4d8c138b23652cdf5eeb0ed8adda125cfbbcce8212cf0518536bad"
+        },
+        {
+          "path": "agents/security-auditor.md",
+          "sha256": "e642f58e77e3b3bf8b5d4d0a59ac13a5656850c9f0f4c091987a28e341009a2b"
+        },
+        {
+          "path": "agents/typescript-expert.md",
+          "sha256": "dc2649c4a78c92d82a62b5985da66eace93c51f22f744ac5b0a02af12e011f08"
+        },
+        {
+          "path": "commands/assemble-team.md",
+          "sha256": "58d7bfe516a389d5e0babce3b4ddaeeba572d456699ec097e91a0977d0100ea7"
+        },
+        {
+          "path": "commands/audit-docs.md",
+          "sha256": "91d1f4691ccfeebecc56af34e7cb2e5f561f0f24ae01f9775588791aeaee785f"
+        },
+        {
+          "path": "commands/backup-config.md",
+          "sha256": "b98e7cb08461f1aed689f9a23c357fbf1e134b2844e5be67a026928018194367"
+        },
+        {
+          "path": "commands/bootstrap.md",
+          "sha256": "446c1b1b8d0357a8f12dfbbd51c1104d8c6ec160875374009e2847f58a2be9c8"
+        },
+        {
+          "path": "commands/changelog.md",
+          "sha256": "60fabee41f3be667b69b15756c2dba31951d04c7fc4bbfe0e15ea843db4d9c85"
+        },
+        {
+          "path": "commands/context-stats.md",
+          "sha256": "c8798dbad2d0950eb60b9f9dff3925065dff496ef44c59b169121e759d742b2f"
+        },
+        {
+          "path": "commands/deploy.md",
+          "sha256": "f66093332704dd5f4dfafa5027a51af5ba0a033e3ea23a16679e75c65f83b453"
+        },
+        {
+          "path": "commands/deps-update.md",
+          "sha256": "6d88172f312b18277142bf93335811082e631c11f4a52472bbca0363b1b54d94"
+        },
+        {
+          "path": "commands/discover-skills.md",
+          "sha256": "0879321c33c367a4ea01e301d68d72101ea737ba06389d8e1576b1d96abd3b96"
+        },
+        {
+          "path": "commands/handoff.md",
+          "sha256": "f72d6b846f07a5be622f6fa85bae44b214a9a0bcc71b789d77b1c6452ae3c366"
+        },
+        {
+          "path": "commands/health-check.md",
+          "sha256": "97ee97ad025a355666e27431bcfa9c0610095f5967b667b13ee96aa47063b0f6"
+        },
+        {
+          "path": "commands/init-project.md",
+          "sha256": "93e46165f8607016fdd74ff8d07eedd8ae27ba296de74f0cafbe2ea1701948fe"
+        },
+        {
+          "path": "commands/list-skills.md",
+          "sha256": "aeb7521a00b9234fc55790dc3f54b45331c65e7afff4bcecb6adb7c833cef30d"
+        },
+        {
+          "path": "commands/log-decision.md",
+          "sha256": "e3b1a1b680bb74381f299b1bb170a9e206470d34d8791420df8cb4e3ee6a0039"
+        },
+        {
+          "path": "commands/migrate.md",
+          "sha256": "80142863cadab4fd54227c7b7da286e29c6f07ffaaf1a997358b7a1dc8b0608e"
+        },
+        {
+          "path": "commands/perf-audit.md",
+          "sha256": "baf03949458a7756b15e09bb3a9bd5df65f8dff7d6f1b70f62041579d2143fe3"
+        },
+        {
+          "path": "commands/pull-repos.md",
+          "sha256": "62102fdd59268199354cbe48768eee59cc960283dfe2b79cb3fafcca416ffaec"
+        },
+        {
+          "path": "commands/review-code.md",
+          "sha256": "3975fa025e2c9d5c5478f074663dac161e04fd1361170d58a358903a6c5ca866"
+        },
+        {
+          "path": "commands/run.md",
+          "sha256": "0616fc2d2af7ed4793ffda95f9e50f996cbad8ce0de598cbe0938e6c6ff41bb8"
+        },
+        {
+          "path": "commands/scaffold.md",
+          "sha256": "330dd28a03f6c9bb627b230717cd7987a3357a778636b6bbe3e48180419089a8"
+        },
+        {
+          "path": "commands/security-scan.md",
+          "sha256": "1ad11309b17d22eba82783b39abd3844a076518f288e23ccf9427b3b2eba3f3f"
+        },
+        {
+          "path": "commands/session-log.md",
+          "sha256": "b7a482c88885a5d08aaa1cc442967609bdbae3b34ee8df7d198152e546259506"
+        },
+        {
+          "path": "commands/skill-finder.md",
+          "sha256": "fae4d63f319b17a551de06cc390d34e8ee7b6b66944eaf48f389425bd26a2956"
+        },
+        {
+          "path": "commands/standardize-claude-md.md",
+          "sha256": "3d291899c3f3c333bbdd3f54d6eca5137b7ff474c5a24f3e800d158418e1774e"
+        },
+        {
+          "path": "commands/start-task.md",
+          "sha256": "239fd00d4888d186a163c57228e67e702c3084c6f5c0fe00921226ac4f59556e"
+        },
+        {
+          "path": "commands/test-plan.md",
+          "sha256": "94241ed235af94a6a8387062b499775612ebe19e8708879da1e159c4d6aa5b7a"
+        },
+        {
+          "path": "commands/test-suite.md",
+          "sha256": "3b647b4e5f31db345fb1f5283c6227ff3befd35049cd3de89b30303f384658d7"
+        },
+        {
+          "path": "commands/update-counts.md",
+          "sha256": "625ddd5440954b2cc5f3dcc281784b11de4951b8f8354ed075217ae123830667"
+        },
+        {
+          "path": "commands/update-docs.md",
+          "sha256": "91c8229373308849a8d5d630bc439f101264607bc3b508b49c06dd94a96653b6"
+        },
+        {
+          "path": "docs/MCP-SERVERS.md",
+          "sha256": "7121e4f6050822d4e73fc660624a57037bdadeccbcd59359263d4cdaaafe0adc"
+        },
+        {
+          "path": "docs/reference/checklists/api-development.md",
+          "sha256": "0e079ab9a887df7bb0b63bae13b59c3b6f0275385c7ebb0dd55224eda5c8537f"
+        },
+        {
+          "path": "docs/reference/checklists/automation-scripts.md",
+          "sha256": "736f9f6830eba1e31c4ec2987f6afcaa9f447e3beca68712a63a29fcfc2f9143"
+        },
+        {
+          "path": "docs/reference/checklists/database-design.md",
+          "sha256": "4bd10915a4be958208451c9de0be2372611931ec170fb82d4fe0173092f27afd"
+        },
+        {
+          "path": "docs/reference/checklists/mobile-app-deployment.md",
+          "sha256": "664a9c0b52abdeca6865120b146fe1b683cb53231abe12bc76edcc2479779197"
+        },
+        {
+          "path": "docs/reference/checklists/monitoring-alerting-design.md",
+          "sha256": "63dce589759090304b2299153e5abdad362dc741b1bfbb5224c2a77a5ce674fc"
+        },
+        {
+          "path": "docs/reference/checklists/performance-optimization.md",
+          "sha256": "7081e6c9580223b3919b0eac8ff2917caaeeecbd915a2d409a97319ce7d6802b"
+        },
+        {
+          "path": "docs/reference/checklists/security-hardening.md",
+          "sha256": "27ca24b509fee106a211e09b3d47e58c5f326e17d8244e287fcbe6c4eeb2adf1"
+        },
+        {
+          "path": "docs/reference/checklists/static-sites.md",
+          "sha256": "7930f8764f09176f06be2d790a979a4f372fca32d613448e82c6d1c1991b0ecd"
+        },
+        {
+          "path": "docs/reference/checklists/ui-visual-changes.md",
+          "sha256": "3d92aacf0dec4ea2458c07f46d70e691e58f286a11e947b16a1197103b62017b"
+        },
+        {
+          "path": "docs/reference/checklists/verification-template.md",
+          "sha256": "38d053642b61a2c70c674ab1d8df0967312408bd352b0cee84098dd029bc1c73"
+        },
+        {
+          "path": "hooks/daily-maintenance.js",
+          "sha256": "c6abad9b998e31ccf9a583e7e87b4f6e0d41600790881b771a6bfa438ad7d983"
+        },
+        {
+          "path": "hooks/guard.js",
+          "sha256": "6427e0348d264af7506101fdc209d72f48d2810f4f0128e91325185d160cbf91"
+        },
+        {
+          "path": "hooks/secret-scan.js",
+          "sha256": "757cca3eb4859ff9171b101ad67684c563004171cc41d7459a99c6e47a1678e2"
+        },
+        {
+          "path": "hooks/session-end-repo-health.sh",
+          "sha256": "0d3d123d88e23d1d9a68ef5942a4be2d33fa524e051d944740e43e4e11da4c3e"
+        },
+        {
+          "path": "hooks/session-start-pull.sh",
+          "sha256": "436229febf004b45f7214ce904e24c26eb47a55632c46568e704bd1cc14453dd"
+        },
+        {
+          "path": "hooks/session-start-repo-health.sh",
+          "sha256": "71fa1b144c2a157674cb42c370094b5b61b6ff9c9a470094af1ab0fd97b799e2"
+        },
+        {
+          "path": "hooks/statusline.js",
+          "sha256": "4b4913477137708cbff0f0e0981f749b46750351004bd02f6ec4038c108bc768"
+        },
+        {
+          "path": "rules/api-routes.md",
+          "sha256": "34a8a2657fdc072190778d214daded460964e653f564e41e8678a83e8cf1953c"
+        },
+        {
+          "path": "rules/cpp.md",
+          "sha256": "02d2da52714c39c63d6ca1c85be9e1fa455fcb5f98b27e8bfc027ebd5de468a6"
+        },
+        {
+          "path": "rules/flutter-dart.md",
+          "sha256": "a780f1a8a0cad7de86fe81e4bb8a2a6210d8f0bf1cff37a4b77d0c203868b33e"
+        },
+        {
+          "path": "rules/go.md",
+          "sha256": "4ea5d6aa67301842e10be73c7e205aaa3159bf1979b2599f0143802623fc8958"
+        },
+        {
+          "path": "rules/java-kotlin.md",
+          "sha256": "98124e269ee44e466a2832c5d5f061c5ff4948a2fa4d852e4dceb62aaec8848c"
+        },
+        {
+          "path": "rules/python.md",
+          "sha256": "748012b53b6d9862952c1a30cec31d8f42576accdf09484d0bc44b329c2c34d6"
+        },
+        {
+          "path": "rules/rust.md",
+          "sha256": "42c703d345998315eadd198cc75e45c39549e12b005fb2b7c80f7494979f2997"
+        },
+        {
+          "path": "rules/swift-ios.md",
+          "sha256": "a447845db57caf82cd5f0ac8e4c299774e48fda74fcba1015ce0c9d17003b263"
+        },
+        {
+          "path": "rules/typescript-react.md",
+          "sha256": "c8cad969a7205f2747f6da4df2dfc3d814d5b1994adbbcc158a08cdb861610e1"
+        },
+        {
+          "path": "rules/web-legal-exposure.md",
+          "sha256": "7e42e0733f44cd57bf413935c4bae182b07c2a59683e17dd0f2b9a439c65a173"
+        },
+        {
+          "path": "scripts/count-inventory.mjs",
+          "sha256": "0820347106f4ae2eacf7c76fdf4c6444295cbdd5396bff0f97df1c8f3a7484dc"
+        },
+        {
+          "path": "scripts/generate-counts.mjs",
+          "sha256": "3b475ccab833f148bba6baab0afda08da0193600495097469b2422e5b10857dd"
+        },
+        {
+          "path": "scripts/media-routing.mjs",
+          "sha256": "328a0f815d6d13c85bb35e1093a24a58c4721929272317fcf97f355808eae948"
+        },
+        {
+          "path": "scripts/public-output-safety.mjs",
+          "sha256": "e19e8fc6948c2cada98879c5cd73c6690f123d35d29d812639a8a9d288e524d8"
+        },
+        {
+          "path": "settings.json",
+          "sha256": "f9c20aa6b68ca5e856012d05e0effd32b14536a5fb91aaa209dbb31d5f271982"
+        },
+        {
+          "path": "skills/accessibility-a11y/SKILL.md",
+          "sha256": "dd0255baab04ae9e1f0bc1aa5ec351c0d7876537ea0ad2cdf89f9bd0b5e0d0b9"
+        },
+        {
+          "path": "skills/agent-accessibility-expert/SKILL.md",
+          "sha256": "f78457c3b108e699288b521f222d88a6545a2db9f1154ebdfbbb048d2b804b8e"
+        },
+        {
+          "path": "skills/agent-android-developer/SKILL.md",
+          "sha256": "e3c39dd54008af77bd1adc7887e06236fdc6673cdd4d437f6ccb999a2add108c"
+        },
+        {
+          "path": "skills/agent-api-designer/SKILL.md",
+          "sha256": "950d5ed2d6470a2a3c30e76aae94eb585f8aa4ebda29f556c0f1d35a46a31422"
+        },
+        {
+          "path": "skills/agent-api-integration-specialist/SKILL.md",
+          "sha256": "053b94ea98db5c7a16ed176909e753b8b2b8475c4597892f1f9282ec1fbbe87e"
+        },
+        {
+          "path": "skills/agent-audio-engineer/SKILL.md",
+          "sha256": "3cb730fe2d8bf27b249d0fff7de83806218d70c8056400ef00f15bad7ccb1587"
+        },
+        {
+          "path": "skills/agent-auth-specialist/SKILL.md",
+          "sha256": "74989b193b207c7fd2697139049c8035f1002a31927b066d9fe0ef12d92d01d6"
+        },
+        {
+          "path": "skills/agent-blockchain-developer/SKILL.md",
+          "sha256": "010f6c99f1566f1524a054ca25b2313323b03acce244acb5daebd681619ccbfb"
+        },
+        {
+          "path": "skills/agent-brand-strategist/SKILL.md",
+          "sha256": "b4b987a4dbcc7b07d4f05d035b867fb5746942df24949c35dc90c70c92edba8b"
+        },
+        {
+          "path": "skills/agent-browser-extension-developer/SKILL.md",
+          "sha256": "4c7735d5642692682ba8dff33bb8cf02c205bb067251197877f0798a779671b5"
+        },
+        {
+          "path": "skills/agent-cli-developer/SKILL.md",
+          "sha256": "20728c4887b2483bd651315bf052705f3f6d7d8211ba7c02bd5d781c7a69df1e"
+        },
+        {
+          "path": "skills/agent-cloud-architect/SKILL.md",
+          "sha256": "d81314f534503648a837e64f0d94d90ad98479ab6b18d9053ec7e481c39be904"
+        },
+        {
+          "path": "skills/agent-code-explainer/SKILL.md",
+          "sha256": "17e8e40fe2c1e5c6fa0e63217c0e6115979ff4d2fbf259caf2089e17014c01c1"
+        },
+        {
+          "path": "skills/agent-compliance-engineer/SKILL.md",
+          "sha256": "34af10072a8223322e2d32215bc5483484bbccbb34d554ee8163016bbe55c9bc"
+        },
+        {
+          "path": "skills/agent-cpp-expert/SKILL.md",
+          "sha256": "5dca006a2cfd3669a7171bbb85c1b1ef473c3e3c7aaf1d42aeba8373048414ec"
+        },
+        {
+          "path": "skills/agent-data-engineer/SKILL.md",
+          "sha256": "b3e43f2c4d105025578c5c7ac4021086ee61393f8fd403344c646fca35eda91a"
+        },
+        {
+          "path": "skills/agent-database-expert/SKILL.md",
+          "sha256": "cf0d7f4a380b1db4270571c8c8caa8dae97a5276d5b35f9e8d63d84f420e6aec"
+        },
+        {
+          "path": "skills/agent-desktop-developer/SKILL.md",
+          "sha256": "73c831a99235a8b6a189db0f89f71ff4ab4a9f9c206c037d4a83ab8e3f693326"
+        },
+        {
+          "path": "skills/agent-devsecops-engineer/SKILL.md",
+          "sha256": "265ba52ffa8094bd53f53e757f2dab8d180be993d49b5323d98d99ee5c54cf61"
+        },
+        {
+          "path": "skills/agent-django-fastapi-expert/SKILL.md",
+          "sha256": "a6670dd6e69845933fc54795274b6f9b3acd46d993372ed4f6edf15298ab9013"
+        },
+        {
+          "path": "skills/agent-documentation-writer/SKILL.md",
+          "sha256": "124b54093d1ec7457a445d7164f102dd4951df6b7f1e308e520268fde1b59449"
+        },
+        {
+          "path": "skills/agent-e2e-test-specialist/SKILL.md",
+          "sha256": "d621d9b5db39adcfa675ce75ac3c4a52ae592be3750f75f61363853087b23fd8"
+        },
+        {
+          "path": "skills/agent-email-specialist/SKILL.md",
+          "sha256": "656ba9034d032a199ebc23f3191c81fffbb92ae30c05cd3f60ddd1137075af6f"
+        },
+        {
+          "path": "skills/agent-embedded-developer/SKILL.md",
+          "sha256": "b88e2c65aed259e51b4c94c1ce33cbc047cb48d1e1420273eda9a08008711229"
+        },
+        {
+          "path": "skills/agent-event-driven-architect/SKILL.md",
+          "sha256": "d77f65fa07a41eb97c75d7af518acacd0f0eae5db2a47db8cc168191a0a0186c"
+        },
+        {
+          "path": "skills/agent-flutter-developer/SKILL.md",
+          "sha256": "558d5852e2e17fea85dbf4e3a622226c255204fb6960a0dcdfc689f826887330"
+        },
+        {
+          "path": "skills/agent-game-developer/SKILL.md",
+          "sha256": "cb3b1005850839a591c7d3326ca711877082e113e879a0ae2887b4ac1fd7aadc"
+        },
+        {
+          "path": "skills/agent-go-expert/SKILL.md",
+          "sha256": "f2a38fead54331ccabfe2fb1f186caccad8188dafb79b8a41883c25c7852229a"
+        },
+        {
+          "path": "skills/agent-graphic-designer/SKILL.md",
+          "sha256": "259fce088fd169544350e4abc427ab544c346a115c136a425639acbaeff8de55"
+        },
+        {
+          "path": "skills/agent-graphql-architect/SKILL.md",
+          "sha256": "702e85fa5c643527a6cddf7a691ea5d1f7c5fa3e43cebd6d1436ed44395dbfab"
+        },
+        {
+          "path": "skills/agent-i18n-specialist/SKILL.md",
+          "sha256": "130fcc9ceb4520d4d1fe0501326ad6d30b29673024b3464cbf47d3b213e8af11"
+        },
+        {
+          "path": "skills/agent-kotlin-expert/SKILL.md",
+          "sha256": "aeafa16cdc7c00a623aaace77874688d65e166ec395a633dd02b32b94069f681"
+        },
+        {
+          "path": "skills/agent-macos-developer/SKILL.md",
+          "sha256": "a1e5e2daed85bead1e451e921079d4f063bbbeae8fd1f2697c75c83e9c188671"
+        },
+        {
+          "path": "skills/agent-microservices-architect/SKILL.md",
+          "sha256": "0edf8c730bb715c3a8b79d841c374a5ce23f0ff098bb7a13cc330e61f00176b0"
+        },
+        {
+          "path": "skills/agent-migration-specialist/SKILL.md",
+          "sha256": "c1c761955ceda773d7e4e67a1175692285e1af24f195411ca7d8b1f9837228df"
+        },
+        {
+          "path": "skills/agent-ml-engineer/SKILL.md",
+          "sha256": "087ee521dd4c8c3b21c712ce1b8ca9b2eb2cd8df007e3b91c483bbc8c412c80d"
+        },
+        {
+          "path": "skills/agent-mobile-architect/SKILL.md",
+          "sha256": "4cf3ebcff18ee4026c07eb65df61b16e56d9ff4e897b38b491a52ce43c12a399"
+        },
+        {
+          "path": "skills/agent-mobile-release-manager/SKILL.md",
+          "sha256": "46d56ec47b42e14f9cad32466f9a54198ceb51b3a855be49f4d06783f7270a3f"
+        },
+        {
+          "path": "skills/agent-monetization-expert/SKILL.md",
+          "sha256": "4eae7f38d46756ec1bd2ab1d316a66f6a4e18fe3de51bc022fd08b95bdcae045"
+        },
+        {
+          "path": "skills/agent-motion-designer/SKILL.md",
+          "sha256": "361a9839cd4e52ef2bd510d9c23a8fa031cf70e9641e433496407a0b2beaeeee"
+        },
+        {
+          "path": "skills/agent-next-js-expert/SKILL.md",
+          "sha256": "c7f8c10f909c36e3d604540b299da7c94ad9ce9d4ab9eb8044dcd8c64bf4f718"
+        },
+        {
+          "path": "skills/agent-observability-engineer/SKILL.md",
+          "sha256": "2d11e3ed2537c68c6af14f891b5e11f00bb3dea363285b83e269fd915e2e3c58"
+        },
+        {
+          "path": "skills/agent-payment-billing-specialist/SKILL.md",
+          "sha256": "6544a0e301a634a72a308a7f45da6353b7151f4f7341c5b9864451402464cdf8"
+        },
+        {
+          "path": "skills/agent-product-analytics-specialist/SKILL.md",
+          "sha256": "37b22c2f0f26f908567502c867aa69f9b98f359d2ab4b6b620c59bb2a97bf4bb"
+        },
+        {
+          "path": "skills/agent-product-manager/SKILL.md",
+          "sha256": "931ff34a06e32aa51d00b7bf6fa27aa5ffe2b0140c2393b0b526ea9fdd087686"
+        },
+        {
+          "path": "skills/agent-pwa-specialist/SKILL.md",
+          "sha256": "8bc6fb49a4e51d6a4bb0779a8836725a3471f97a43646ce8bc598957c125664a"
+        },
+        {
+          "path": "skills/agent-python-expert/SKILL.md",
+          "sha256": "d12062e86efcb33d52d974d9b2fd7dac2d52328dd2eb71ff36d5f099d2362629"
+        },
+        {
+          "path": "skills/agent-realtime-specialist/SKILL.md",
+          "sha256": "a0c59f3d8f02e5276bdd2c5a0585ef91c69535056044a9a17dcd9c70af41c847"
+        },
+        {
+          "path": "skills/agent-rust-expert/SKILL.md",
+          "sha256": "0c5502ecea663e023496c2f0abdd694742149a7733658af8ebefddd335f0c819"
+        },
+        {
+          "path": "skills/agent-seo-specialist/SKILL.md",
+          "sha256": "befda88167b6705e1729f6ec7654971c6550bcd505242bdf811433fe6ef01d18"
+        },
+        {
+          "path": "skills/agent-serverless-specialist/SKILL.md",
+          "sha256": "8ae5b92f56484e3356a40b046ac778793baacc545db4b3ce423f4a67a093f99a"
+        },
+        {
+          "path": "skills/agent-startup-advisor/SKILL.md",
+          "sha256": "e3f24a1e529924af6d04497971c6afdf82ee7fbb635d5b7070d5688e0b7be490"
+        },
+        {
+          "path": "skills/agent-svelte-expert/SKILL.md",
+          "sha256": "0e959fb1d8433fb2d3f3918fc866d5d840fdd3afaf79958992fbc26e5fb45b2a"
+        },
+        {
+          "path": "skills/agent-teams/SKILL.md",
+          "sha256": "1eb2ac00d5097f44e0144ee4c3fe0dae6970399fcfd38143430ae633b3c30768"
+        },
+        {
+          "path": "skills/agent-technical-writer/SKILL.md",
+          "sha256": "b336aa7147644f8993da10b9877313e016246af2f8b77e674d5e3eace627ff9d"
+        },
+        {
+          "path": "skills/agent-test-generator/SKILL.md",
+          "sha256": "73ce7c99b7c9f8994d4c31e5d317366510dba5cef6218fb9a54d3855da613f41"
+        },
+        {
+          "path": "skills/agent-ux-researcher/SKILL.md",
+          "sha256": "f1840d78ca066f1987f64e09fe32eb261080cda2d4bbba631cffa3f3ee080a53"
+        },
+        {
+          "path": "skills/agent-video-producer/SKILL.md",
+          "sha256": "3397cc2c05a6fb32200a77da8772983bfa2592892faeac34ad0f83a3b5f68896"
+        },
+        {
+          "path": "skills/agent-vue-nuxt-expert/SKILL.md",
+          "sha256": "6aebaff7b3f8409f9b102d6ce01ec1b778fb0ce713851c11bce4e97fc2c3d95b"
+        },
+        {
+          "path": "skills/agent-wasm-specialist/SKILL.md",
+          "sha256": "2da215c20a4d18112ef5735df3a284a0993711fef301c022230e50a1827dd956"
+        },
+        {
+          "path": "skills/ai-ml-development/SKILL.md",
+          "sha256": "1127203e19cdafb937cbea79cea0ee25dde054d2a7229645083e0d4472b74934"
+        },
+        {
+          "path": "skills/ai-policy-generator/SKILL.md",
+          "sha256": "ff85205495ecf2699db7020bdd7ca65a36b9c40c985ad12b1d6795d21ef04a0f"
+        },
+        {
+          "path": "skills/android-development/SKILL.md",
+          "sha256": "2640795f6d213edc0b848972f895469c4432bbc621c600b006f73ae86db26821"
+        },
+        {
+          "path": "skills/api-design/SKILL.md",
+          "sha256": "603bf18be7eef813f6447901951ed7a846956328482a0e2d9ca8bc3e511141b6"
+        },
+        {
+          "path": "skills/application-security/SKILL.md",
+          "sha256": "dabf2942141b39d9eecce3b95ba21823fba8bd8edb5dce0d652f3d8f3317cdb4"
+        },
+        {
+          "path": "skills/ar-vr-xr/SKILL.md",
+          "sha256": "e5074b7b8c023f8a7d5ed57d5a68bfe5166dc42351725c56a05651501048038c"
+        },
+        {
+          "path": "skills/audio-production/SKILL.md",
+          "sha256": "e2fd80998834c0bcdcaf5e85946a096bf605a5703b4ebe849aef6f49d8c164cf"
+        },
+        {
+          "path": "skills/authentication-patterns/SKILL.md",
+          "sha256": "1511a244212776a2f3a215206e2d2dbf9897ac846862d3104c331dc852b0225e"
+        },
+        {
+          "path": "skills/battle-card-builder/SKILL.md",
+          "sha256": "228124234fce491bf572666a4f57227ff47c7aafeb0b2b3bc8a6143e0a3f9d81"
+        },
+        {
+          "path": "skills/blockchain-web3/SKILL.md",
+          "sha256": "a743b551f5fc33b01f69e0e368b5bb62e93cc60f7d3ef38c2403ebfa44a7a0cd"
+        },
+        {
+          "path": "skills/brand-identity/SKILL.md",
+          "sha256": "cc68b8174c16e4ad8a396b45852da2610be34fcd266d63b6614a815ccbc0373f"
+        },
+        {
+          "path": "skills/business-strategy/SKILL.md",
+          "sha256": "2e7ddf8e583da14ec7c556791fa1a6dcc8b33663d9ee2c6390f83e4ca0eee54d"
+        },
+        {
+          "path": "skills/career-path-planner/SKILL.md",
+          "sha256": "aa7ed83191ba944baae50a2dac7528a2c807185eed8f88328bbe31c874956df7"
+        },
+        {
+          "path": "skills/case-interview-practice/SKILL.md",
+          "sha256": "2891a118158533611d72c1906096a5989a0189c84af7e31b2f052e72875d4d1d"
+        },
+        {
+          "path": "skills/codebase-documenter/SKILL.md",
+          "sha256": "c27162c10b35881895e258ab8977c57798b26fa338871d43ff5316743a2a5a11"
+        },
+        {
+          "path": "skills/compliance-engineering/SKILL.md",
+          "sha256": "5e4866856316471e71e6517a7b83cd1be7fb2ec4642a425208caa1c5116b8fcd"
+        },
+        {
+          "path": "skills/content-repurposer/SKILL.md",
+          "sha256": "2937ac3563e3da50c1caacdae713842a31fd0d1dabc4f1b961672a4369928eff"
+        },
+        {
+          "path": "skills/contract-redliner/SKILL.md",
+          "sha256": "a1ef1b20f2d77b834babc56e8854686d81238825899c34b93b7abb577411fe3b"
+        },
+        {
+          "path": "skills/core-workflow/SKILL.md",
+          "sha256": "1d69b7b5df2aa8e96633ac190652f6a700c2e92eb854f1e7516dd22b6a8e58d0"
+        },
+        {
+          "path": "skills/course-material-creator/SKILL.md",
+          "sha256": "ef38b04db524bdf03dd370eb29fae76fc8e7d293b5bc20e06593c9592e8cc704"
+        },
+        {
+          "path": "skills/customer-persona-builder/SKILL.md",
+          "sha256": "b6628b71b392c26c02a8ea14060b85c09623c47ac2daeba2b49dc009ffcee653"
+        },
+        {
+          "path": "skills/customer-success/SKILL.md",
+          "sha256": "e1917aedaea7b6c894beedb37ae28ab3df8cf92b6050e130801c1fa510b071a5"
+        },
+        {
+          "path": "skills/data-engineering/SKILL.md",
+          "sha256": "a9a66a0045778e57c957119b0a2859b802ccd9466e3d1843a1d25de30cb1e837"
+        },
+        {
+          "path": "skills/data-science/SKILL.md",
+          "sha256": "85f0a59aef37391be0d98430ba55fa53f750db9dd6285df64c5cc0d581533498"
+        },
+        {
+          "path": "skills/database-expert/SKILL.md",
+          "sha256": "91db88d0f5da915d43fefbb1c332af9494fe1fe3c9d9f5fd7a48e87c5e23e97c"
+        },
+        {
+          "path": "skills/debate-practice-coach/SKILL.md",
+          "sha256": "dc7dc00e06ef5e85cf5baefdf305ddbf233c288e882dee3789edf848e6968dc0"
+        },
+        {
+          "path": "skills/debug-systematic/SKILL.md",
+          "sha256": "0bbcd0f6b65082295440371501e8bcb9f1f2796ba83626ea1c896e8bca4f3c1d"
+        },
+        {
+          "path": "skills/devex-sdk-design/SKILL.md",
+          "sha256": "b273e029ba3068658e6c00bca65ac1ccacdabc9565b68716f4e3eb6c21253a40"
+        },
+        {
+          "path": "skills/devops-cloud/SKILL.md",
+          "sha256": "d8858f339af65905c44f4ce214ee106acc293184349b084ac69505209758b3ac"
+        },
+        {
+          "path": "skills/edge-computing/SKILL.md",
+          "sha256": "c48ce240991fc73505d5b11d09d6b36c2dbb3069d165106096006aa9d5adc65f"
+        },
+        {
+          "path": "skills/electron-desktop/SKILL.md",
+          "sha256": "85e67151cb97c0c404c315d5884d52e318f20789ac8aa67b21f5235d98165639"
+        },
+        {
+          "path": "skills/email-systems/SKILL.md",
+          "sha256": "6d836c45c516dd8ca0e932b65964afa3176be50c99defcf6ca7759fdfd332021"
+        },
+        {
+          "path": "skills/embedded-iot/SKILL.md",
+          "sha256": "a99534481e2c84046acf417d2eda9d89b64a9cd6c260b35e800c03f7fbb6f06e"
+        },
+        {
+          "path": "skills/event-driven-architecture/SKILL.md",
+          "sha256": "501d35af1cda57c77d9f03389a57e1a9a1987ecccf0b9ba053b551543c3706f4"
+        },
+        {
+          "path": "skills/event-planner/SKILL.md",
+          "sha256": "be87e160a16e49adcce8155922949cb1c8cc6ac1c9722ece3198e2a93f91c3c6"
+        },
+        {
+          "path": "skills/finance/SKILL.md",
+          "sha256": "7add80635c19fde0eea69f68a8a7f6d00c033632589c1fbff070e3a5d00df602"
+        },
+        {
+          "path": "skills/financial-scenario-planner/SKILL.md",
+          "sha256": "6cd075ec4f74e572a644cfd7aa922894651684a6314622c44a5e1fdf1316f2fb"
+        },
+        {
+          "path": "skills/flutter-development/SKILL.md",
+          "sha256": "07bdcebf760e5d7ea0e70bb600748f5d8675cbd68eda39a3e1cc0a160af437ec"
+        },
+        {
+          "path": "skills/frontend-enhancer/SKILL.md",
+          "sha256": "721decf5d8df2f921f6e24bc37e2208815d4e19bc10c3e995d7b6027957a6f77"
+        },
+        {
+          "path": "skills/fundraising-analyzer/SKILL.md",
+          "sha256": "0c14e0084316df9d775c0d0229dce1ee9ec76fc4b5ea72eae5c11d7dc7eb7542"
+        },
+        {
+          "path": "skills/game-development/SKILL.md",
+          "sha256": "0a28a5633157072c6986d76457472b140f125081494f6bd40739aa2ff4d49d70"
+        },
+        {
+          "path": "skills/generic-code-reviewer/SKILL.md",
+          "sha256": "236fca17898ee613fac7365e8f89783369e595f36ed72c0cd4af237afe4483f8"
+        },
+        {
+          "path": "skills/generic-design-system/SKILL.md",
+          "sha256": "a8e58db1c019323b79d50ee3f5dbd6c6db292fad9844c751e5291127986156e9"
+        },
+        {
+          "path": "skills/generic-feature-developer/SKILL.md",
+          "sha256": "fdcbbf60a967f52e6c0c861ebb1c1804352fd86f29c1bd7a3f73442f1003c848"
+        },
+        {
+          "path": "skills/generic-fullstack-code-reviewer/SKILL.md",
+          "sha256": "70877cede00c42eb8ff3489338ae78260ef247cb15d3e9151334ff69b00bda04"
+        },
+        {
+          "path": "skills/generic-fullstack-design-system/SKILL.md",
+          "sha256": "8147e3634c52cd366c9ad6c9d0df3d78d6acdb52aeb6f40bda21c5e7dd8c4f51"
+        },
+        {
+          "path": "skills/generic-fullstack-feature-developer/SKILL.md",
+          "sha256": "11923396ce657104f87d01a1386ff8ce60f95279e9f0be1cb216d99383e2d8e7"
+        },
+        {
+          "path": "skills/generic-fullstack-ux-designer/SKILL.md",
+          "sha256": "01b014a131be60bbf0f463467dfe5486579da31b6838de3951a106d34e70f9ee"
+        },
+        {
+          "path": "skills/generic-react-code-reviewer/SKILL.md",
+          "sha256": "d101dd1eb781f6de6250f01e9f88a41275b086759c6f74e8713b9843588c20f5"
+        },
+        {
+          "path": "skills/generic-react-design-system/SKILL.md",
+          "sha256": "3a8e6d6cfbec5f356f0e6bc8eb5fd7972851876d40187682b6a34f97c90fc630"
+        },
+        {
+          "path": "skills/generic-react-feature-developer/SKILL.md",
+          "sha256": "009f4e11e870ac3348ea66cb5516de961cc79336c83f320d1848bdd95d139111"
+        },
+        {
+          "path": "skills/generic-react-ux-designer/SKILL.md",
+          "sha256": "57fe1befaee48d6811e26943031fab1a341ad74fbe9fe18327fec0bccf5074e6"
+        },
+        {
+          "path": "skills/generic-static-code-reviewer/SKILL.md",
+          "sha256": "9bb44ed90aececbdc96610bcab812e85ef06ae48f7ad87a469c8c47cc59a671a"
+        },
+        {
+          "path": "skills/generic-static-design-system/SKILL.md",
+          "sha256": "e159c16f2c699b0e704a3521ca5d843cb8e694a11cd83d3fdbd430327cb7c1c7"
+        },
+        {
+          "path": "skills/generic-static-feature-developer/SKILL.md",
+          "sha256": "65c76692e5998f3121460b031486622e0037d170b1b875655866b9502e5a49ab"
+        },
+        {
+          "path": "skills/generic-static-ux-designer/SKILL.md",
+          "sha256": "62aa2e27237c173e652577620f21b151fc19e2f179be6bd9879c11602a3be691"
+        },
+        {
+          "path": "skills/generic-ux-designer/SKILL.md",
+          "sha256": "8e4e805a969df05cee57ac975d5ada193136a9ddccb39eaddc526749ab165b93"
+        },
+        {
+          "path": "skills/grant-proposal-builder/SKILL.md",
+          "sha256": "b50b2a84e0e47344ad52d5b69430e11854cc4d726cc9ad831ad18f0ad2c9043b"
+        },
+        {
+          "path": "skills/graphic-design/SKILL.md",
+          "sha256": "b6db05eab7ad80cd6c498fc6d5fe12d7d3ec029c23054814d57811fb73e8ebe7"
+        },
+        {
+          "path": "skills/graphql-expert/SKILL.md",
+          "sha256": "697ec1f5e92438faec819c7dfbd4dce1ab9fb7d1f4e7fcbac423ddf79b233b51"
+        },
+        {
+          "path": "skills/growth-engineering/SKILL.md",
+          "sha256": "c9f2d16587593cc9577d2ed966b596fb99b88956210e18423ed788853d89ae26"
+        },
+        {
+          "path": "skills/health-wellness/SKILL.md",
+          "sha256": "6db5629439de2ddc8b26d50982d3ab418bd0bcc27ec5bab33452dc8c0e820505"
+        },
+        {
+          "path": "skills/hr-talent/SKILL.md",
+          "sha256": "2d0dee15721a47222bc79a59880b031d51529055be49fb878b51110ef59b51c2"
+        },
+        {
+          "path": "skills/i18n-localization/SKILL.md",
+          "sha256": "3942a22d936c4912d458e223378fcfdcd6a20485d37bd2ccb1810e3cecaf3bea"
+        },
+        {
+          "path": "skills/impact-report-writer/SKILL.md",
+          "sha256": "3d8b20a20b44ab034ea5e6a6bcdcd14f92b1ea1a8cc91527ecc85760ad02224a"
+        },
+        {
+          "path": "skills/innovation/SKILL.md",
+          "sha256": "7f8a66a089da34661a3f50cb0f21302a792b496517545d8e28e0ea8e0735ac07"
+        },
+        {
+          "path": "skills/investment-memo-generator/SKILL.md",
+          "sha256": "91a86777a0f3eac967260566f8c7e9a3ecd5a2572c4dc63b218c9538971bf071"
+        },
+        {
+          "path": "skills/ios-development/SKILL.md",
+          "sha256": "99aec886e326cf2dc6b8c7b4028396cbcaa108fd4c77ad73e7faa0a4843926c0"
+        },
+        {
+          "path": "skills/kotlin-multiplatform/SKILL.md",
+          "sha256": "64f3eb8afad7ccdfff664f70dc60da1569cf8e32e0b4cc62df96585f451a3aae"
+        },
+        {
+          "path": "skills/leadership/SKILL.md",
+          "sha256": "bf00b36b5ac00341e6752f8e54d596da3b6a23c436563f1c6f74dc1cc8cafbd9"
+        },
+        {
+          "path": "skills/learning-gap-analyzer/SKILL.md",
+          "sha256": "8f1042a0ee7f55e31e1d96ae4aca559fd902207dc6aca533cfff7cd64544e0c0"
+        },
+        {
+          "path": "skills/legal-compliance/SKILL.md",
+          "sha256": "42ade2b2e7d2ed3a1494e6399de8bc1227c39d9bd10f7847ecd113f1d726d0fa"
+        },
+        {
+          "path": "skills/literature-review-planner/SKILL.md",
+          "sha256": "56f7227c54f7ca0238aa2f65f195723e9e5d48b168e48491556f9a019dafc1ee"
+        },
+        {
+          "path": "skills/llm-app-development/SKILL.md",
+          "sha256": "3d1b8eba54336bb0385755e6c9389317b9fa8be266075657297a2be11af06938"
+        },
+        {
+          "path": "skills/low-code-platforms/SKILL.md",
+          "sha256": "5858e9a530db12eca1ae5b3b4fb8868b92881fa7a568021929de8746a4314570"
+        },
+        {
+          "path": "skills/macos-native/SKILL.md",
+          "sha256": "449ca5542663dc1af41e8f2a3d90ee1141890b7d6169bed3335eea72cc46ae20"
+        },
+        {
+          "path": "skills/marketing/SKILL.md",
+          "sha256": "e0fc919c6b8fd33ca731c92487432b876700a0d4cb7d649072a7ffe121f38b1f"
+        },
+        {
+          "path": "skills/microservices-architecture/SKILL.md",
+          "sha256": "d0a4e25bb89aaa63d850717fd652ce9a65ea8f5d5aeb86d18995675a1fb8a10b"
+        },
+        {
+          "path": "skills/mobile-cicd/SKILL.md",
+          "sha256": "97cba681da029356b31e251b086edc93e8e8179d6eb0228f8a1e6859f3a70967"
+        },
+        {
+          "path": "skills/monetization-strategy/SKILL.md",
+          "sha256": "f4c825182110a0bf78ec92154aa390cb184df3c4f5d003cac22580f021a1e311"
+        },
+        {
+          "path": "skills/monitoring-observability/SKILL.md",
+          "sha256": "8c5f34a3d69b0a759addc09dbed7a3cd8450fa3c054265f75a60f4aca053b6c1"
+        },
+        {
+          "path": "skills/newsletter-creator/SKILL.md",
+          "sha256": "0a79f0ff7656afd767cd816a0d77dc4c243a90b365a9d6437341d2a7c501e882"
+        },
+        {
+          "path": "skills/onboarding-guide-creator/SKILL.md",
+          "sha256": "5ef96ec31fedc247b413a732db3ce9526d41252f45e9e1e288b6bcf7b348e916"
+        },
+        {
+          "path": "skills/operations/SKILL.md",
+          "sha256": "61d4625a46f2967e5c7e5950d52edb6f78c2c122ab23e12d138e30c04c0e3835"
+        },
+        {
+          "path": "skills/options-comparator/SKILL.md",
+          "sha256": "6bdcef583aef59ae874dec682f45e6f55530f4142ea654ea8ba8ea7c06da8dd8"
+        },
+        {
+          "path": "skills/payment-integration/SKILL.md",
+          "sha256": "602c74cc7107faf627890ccd756a47329c0b6ce840802509fbfb8a03163a278b"
+        },
+        {
+          "path": "skills/performance-engineering/SKILL.md",
+          "sha256": "de2162feb5ce46759bf0fe0be75667e35142550255f3a1d62a2a41a2eed1981a"
+        },
+        {
+          "path": "skills/podcast-producer/SKILL.md",
+          "sha256": "7050e93abf4ea152a22e1923babbe89a46d38b3e720c08f517f9506728d5b300"
+        },
+        {
+          "path": "skills/process-flowchart-designer/SKILL.md",
+          "sha256": "f8a72ad62f72344bcf90abd60790d6f8116af7ed64612fc0edc9b61775657abe"
+        },
+        {
+          "path": "skills/product-analytics/SKILL.md",
+          "sha256": "ba366fcecdaed483cc9d093d566bbf0e0ae27870ea46de248505a4de00057960"
+        },
+        {
+          "path": "skills/product-management/SKILL.md",
+          "sha256": "b2dc38d6f20bd5869c61435227a4033cd1774c93f1f27b51a745ab627c9017cc"
+        },
+        {
+          "path": "skills/pwa-development/SKILL.md",
+          "sha256": "ea41974c648934c1425fe7432a763cb726ffb62269b6a337fb6d9e4e6337da7d"
+        },
+        {
+          "path": "skills/rd-management/SKILL.md",
+          "sha256": "0488c853aaa07ee3260737b125ea24a1dde4b22cd28f5ef538b8848eb8855fd1"
+        },
+        {
+          "path": "skills/react-native/SKILL.md",
+          "sha256": "f034734e274be6d6250bc2c366190e9d28b88d0ac88c3747e3e4a39e33f87b5c"
+        },
+        {
+          "path": "skills/real-estate-analyzer/SKILL.md",
+          "sha256": "45b3bed8c6b0ac7743adbd02086955276b52fee65c545abae1be561850b077a6"
+        },
+        {
+          "path": "skills/recipe-card-creator/SKILL.md",
+          "sha256": "97f7de98238a007555092eaedf8aeac1725e2837b73349c8a3eb8d727d930965"
+        },
+        {
+          "path": "skills/research-presenter/SKILL.md",
+          "sha256": "44b1256d53827dd15d6c5664d050edfc810ff478703f6aba79c7c65ad0ac757f"
+        },
+        {
+          "path": "skills/risk-management/SKILL.md",
+          "sha256": "2f2d5ebe43b88b1922ca63a39c8a92b14d4e2d5543650a9a2377521d1e634214"
+        },
+        {
+          "path": "skills/sales/SKILL.md",
+          "sha256": "a2c597e279d58785036a51b6ffb47c69eb6c3f7f0f12d0fadb696f8a67a5d800"
+        },
+        {
+          "path": "skills/security/SKILL.md",
+          "sha256": "917515429337a461c28e2bc17f93dbccc933f6d19f7211965addd2e3ed41aa03"
+        },
+        {
+          "path": "skills/seo-analytics-auditor/SKILL.md",
+          "sha256": "4ed9821fd7099e9ca5151cdd0fb84f353ae01a3727f02193ec3daa30397b7863"
+        },
+        {
+          "path": "skills/serverless-development/SKILL.md",
+          "sha256": "6a88bfb9ae0592762bbdef73bbe447e71c10e91663b0298d08842e076912b262"
+        },
+        {
+          "path": "skills/startup-launch/SKILL.md",
+          "sha256": "43c66739c1e14576300b23b94e85e94e4daf9384a0d3a795784594d2dd5754ac"
+        },
+        {
+          "path": "skills/statistics-verifier/SKILL.md",
+          "sha256": "a0d380ea6f44318f100a2f570f26183f341cddf8c2e982ae86088338098943b8"
+        },
+        {
+          "path": "skills/status-report-generator/SKILL.md",
+          "sha256": "5009fa9e2b768d3eacecf88db3268ea6985e34dc665ad260b4aa00d87d85f421"
+        },
+        {
+          "path": "skills/supply-chain-optimizer/SKILL.md",
+          "sha256": "f71b787f452626905c5a299fcfd5c88e37acd772a8121cb4b3e3dff3d0f59520"
+        },
+        {
+          "path": "skills/sustainability-esg/SKILL.md",
+          "sha256": "a5daf840918db5d6faf37ada7f7d3b953592dcb5601aaa14a2d834b563ccbfac"
+        },
+        {
+          "path": "skills/svelte-development/SKILL.md",
+          "sha256": "f39e7a08c4b135fb1351707761e665c3a9d212ece4919f744c71664310b7cfe8"
+        },
+        {
+          "path": "skills/tauri-desktop/SKILL.md",
+          "sha256": "55036f153982c91601f9066f3754cd22401e331167efc28deaf55e2979e784c7"
+        },
+        {
+          "path": "skills/tdd-workflow/SKILL.md",
+          "sha256": "7a439c81c57e8ecd1ee4f306d5626be4d79b7b0541dc6d9c476344ea740bca0c"
+        },
+        {
+          "path": "skills/tech-debt-analyzer/SKILL.md",
+          "sha256": "6f1148dcd5f43c7855ec2cc21640b4d60fb54a77dc037f145448963acb3618df"
+        },
+        {
+          "path": "skills/test-specialist/SKILL.md",
+          "sha256": "ce6d4e39c41c25f448e8c38fd4cc75be10361451a39b1c85053e3ebb1a871ba0"
+        },
+        {
+          "path": "skills/toolkit-router/SKILL.md",
+          "sha256": "44d43b0763613eeff13891231db085c0b2d693b3c4c1653f171f6a43409d1f91"
+        },
+        {
+          "path": "skills/travel-planner/SKILL.md",
+          "sha256": "07365c7cee881f02ab1e4e8d93348fd561a624f3464d0b4186a7ae3356d88183"
+        },
+        {
+          "path": "skills/ui-animation/SKILL.md",
+          "sha256": "eedc44d6ae9790158370e8e0d5ef6ba0465babc8bc77cb17e8193cc6d711a93e"
+        },
+        {
+          "path": "skills/ui-research/SKILL.md",
+          "sha256": "8161178abf56615faafa99e2ff03b9a9238545cd980ce689e7e1ae4018395633"
+        },
+        {
+          "path": "skills/video-production/SKILL.md",
+          "sha256": "e0758172d1bfa1ec07129b2e7b07509d51ccb14725a2795e6ad605410e8bf649"
+        },
+        {
+          "path": "skills/volunteer-coordinator/SKILL.md",
+          "sha256": "b266f11232e5c2701bd5590d990eab105618f241e7c69341fa9e36c3c1e1c10c"
+        },
+        {
+          "path": "skills/vue-development/SKILL.md",
+          "sha256": "5805f4cca2fabf3e20ae1264d3198d52e1dcabed25c0627c9f2b600d4dcdbe09"
+        },
+        {
+          "path": "skills/websockets-realtime/SKILL.md",
+          "sha256": "c4d41c6f69ce62a49b4e9b6102b4eda2d2a61d708989b14f70101a99f5306cff"
+        },
+        {
+          "path": "templates/agent-template.md",
+          "sha256": "4b999b8bdfe2e82a78f2751b8ec5ab31aa2ebbae0847349a5da45389739c0bb0"
+        },
+        {
+          "path": "templates/api-project.md",
+          "sha256": "b9b5def4ba33091b5a7b74deb09831d9bac70c9478943b3390dce10ac834e47a"
+        },
+        {
+          "path": "templates/architecture-decision-template.md",
+          "sha256": "4ba6c00001779615624b0bcc2513c9f254d778db885a73886083ac7527bd6e5b"
+        },
+        {
+          "path": "templates/command-template.md",
+          "sha256": "2315e97232694e3562e34cc516ba8db3813252f81105408410f4be0994f695ec"
+        },
+        {
+          "path": "templates/incident-response-template.md",
+          "sha256": "906031e43c5e3a46075b39bd7006270071e44104d5310f61e9f7a4805e3e78c9"
+        },
+        {
+          "path": "templates/init.sh",
+          "sha256": "d3a2f9e2bd099cacc0d6695c179de50ed7988ded0004c9a1d97f265c9e2865ed"
+        },
+        {
+          "path": "templates/landing-page-project.md",
+          "sha256": "73e5b4e69da3605037bb430a91cd63f7db0a688f14fda55a396df877e1e61ec0"
+        },
+        {
+          "path": "templates/mobile-app-project.md",
+          "sha256": "92508a8b67e15acab9b4f5f864a6abb33414c375e6d1e07b4e77c3ea1ec0fd2f"
+        },
+        {
+          "path": "templates/plugin-template/agents/example-agent.md",
+          "sha256": "f708bfa2b0866153288a036610648ef2312eb01c9627839a14cae5ed8c144dd6"
+        },
+        {
+          "path": "templates/plugin-template/commands/example-command.md",
+          "sha256": "5ca2852cd5bfa17263997769cb28c10b6af0c16817c2aa8532862fb19b86c76f"
+        },
+        {
+          "path": "templates/plugin-template/plugin.json",
+          "sha256": "05fd910af758f7f6c0d02fe82e3b7c69e1ebad0888aac66fbaad4bb98cbeca7f"
+        },
+        {
+          "path": "templates/plugin-template/skills/example-skill/SKILL.md",
+          "sha256": "c5751740e5d0c8984aa7a84797f38ae83b9fb936cbbb0ccb847b27d7ade61b23"
+        },
+        {
+          "path": "templates/progress.md",
+          "sha256": "723249beffabd6fb45fa25ddecf769e276a8b3a2171905bdbf59c8baf5ad5158"
+        },
+        {
+          "path": "templates/project-CLAUDE.md",
+          "sha256": "15e09f5c17acd4f1dd71a29046573d6b3042c31e2c2e7e9f1bbb166a753cc310"
+        },
+        {
+          "path": "templates/release-checklist-template.md",
+          "sha256": "dab3c3dd4d1c0dbaa050140e36775d53d7149ed7e43cff348bc3a1020ff5596d"
+        },
+        {
+          "path": "templates/research-notes.md",
+          "sha256": "42d26374074cebaa001ce892dadb937d3ea33971d808676c4f53e2128b5cd4b6"
+        },
+        {
+          "path": "templates/saas-project.md",
+          "sha256": "d8ee5d58beaf0235456c62af9da090d71a3ca0e80d65e1a81de270f3acf63496"
+        },
+        {
+          "path": "templates/skill-template.md",
+          "sha256": "609c9df23065034dcc126cb5b2caa203b8bc8dbf3ee772d6b7a9f1ef98c8d9eb"
+        },
+        {
+          "path": "templates/task-template.md",
+          "sha256": "07f51ab4051a38485547923c6117f33965e37dae585672c78cb16e2037bd1cf9"
+        },
+        {
+          "path": "templates/tests.json",
+          "sha256": "cc4550555be110fefdfdca773a63771a1e17821a4308ac2dce8a6ae734b218cd"
+        }
+      ]
+    },
+    "marketplace": {
+      "inputMode": "committed-HEAD-snapshots",
+      "coverage": "complete",
+      "repoCount": 81,
+      "freshness": "Selected committed revisions (including deliberate pins); reviewed exports retain their own observation dates, not a latest-upstream guarantee.",
+      "snapshotExports": [
+        {
+          "name": "claude-plugins-official",
+          "revision": "b8e53f1c05dff3b6d751297f6527990ffc81c2f4",
+          "tree": "0be010881e66c2d08e762db4573c43eceaf70b63",
+          "inputMode": "committed-HEAD-snapshot",
+          "inputDigest": "075454325495001c5533e11b3b9d4b9421fb201f5acdf680bd01c10fae1539dd",
+          "measuredAsOf": "2026-10-10",
+          "transport": "reviewed-committed-snapshot-export",
+          "snapshotDigest": "4f5218ff36e17c05a44b5897216931281484875e7011426fb4c70a1ff2d93316"
+        }
+      ],
+      "normalization": "strip initial frontmatter, collapse whitespace, lowercase; nonempty SHA-256 bodies deduplicated within/across repos",
+      "inputDigest": "52bee5f72f29432ca5eb410c3f4dbf2861c0ba24fb7db6163100f1baad8634e8"
+    }
+  }
 }

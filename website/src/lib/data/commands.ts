@@ -1,5 +1,4 @@
-import fs from "fs";
-import path from "path";
+import { getPublicCounts, readPublicSource } from "./snapshot";
 import { getFrontmatterString, parseMarkdown } from "./frontmatter";
 import { remark } from "remark";
 import remarkHtml from "remark-html";
@@ -13,18 +12,14 @@ export interface Command {
 }
 
 export function getCommands(): Command[] {
-  const commandsDir = path.resolve(process.cwd(), "..", "commands");
-
-  if (!fs.existsSync(commandsDir)) {
-    return [];
-  }
-
-  const files = fs.readdirSync(commandsDir).filter((f) => f.endsWith(".md"));
+  // The public slash-command count is base commands; router wrappers are a
+  // separate canonical field/inventory, not an accidental recursive population.
+  const files = getPublicCounts().inventory.commands;
   const commands: Command[] = [];
 
   for (const file of files) {
-    const slug = file.replace(".md", "");
-    const raw = fs.readFileSync(path.join(commandsDir, file), "utf-8");
+    const slug = file.slice("commands/".length).replace(/\.md$/, "");
+    const raw = readPublicSource(file);
     const { data, content } = parseMarkdown(raw);
 
     const firstLine = content.trim().split("\n")[0] || "";

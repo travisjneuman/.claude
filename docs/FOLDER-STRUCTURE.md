@@ -71,7 +71,7 @@ This repo underwent a security audit before being made public. The following wer
     ├── CLAUDE.md                   ← Global memory/instructions
     ├── README.md                   ← Folder overview
     │
-    ├── commands/                   ← Custom slash commands (30 + 7 router)
+    ├── commands/                   ← Custom slash commands (29 + 0 router)
     │   ├── README.md               ← Commands index
     │   ├── assemble-team.md        ← /assemble-team - Agent Teams setup
     │   ├── backup-config.md        ← /backup-config - Configuration backup
@@ -146,9 +146,9 @@ This repo underwent a security audit before being made public. The following wer
     │       ├── voltagent-subagents/
     │       ├── trailofbits-skills/
     │       ├── claude-scientific-skills/
-    │       └── ... (109 marketplace clone manifest entries; parent repo tracks no gitlinks)
+    │       └── ... (81 manifest entries; clones are local-only; parent repo tracks no gitlinks)
     │
-    ├── skills/                     ← Custom skills (123 directories, 127 SKILL.md files)
+    ├── skills/                     ← Custom skills (180 directories, 180 SKILL.md files)
     │   ├── README.md               ← Skills documentation
     │   ├── MASTER_INDEX.md         ← Navigation hub for all skills docs
     │   ├── EXPERT-SKILLS-GUIDE.md  ← All 16 domain expert skills guide
@@ -229,7 +229,7 @@ This repo underwent a security audit before being made public. The following wer
     │
     ├── tasks/                      ← Active task files (gitignored)
     │
-    ├── templates/                  ← Templates (10 files + plugin-template/)
+    ├── templates/                  ← Templates (17 represented top-level artifacts)
     │   ├── README.md               ← Templates index
     │   ├── agent-template.md       ← Agent definition template
     │   ├── command-template.md     ← Command creation template
@@ -247,7 +247,7 @@ This repo underwent a security audit before being made public. The following wer
     │       ├── commands/example-command.md
     │       └── skills/example-skill/SKILL.md
     │
-    ├── agents/                     ← Subagent definitions (67 agents)
+    ├── agents/                     ← Subagent definitions (10 agents)
     │   ├── README.md               ← Agents index
     │   ├── accessibility-expert.md
     │   ├── android-developer.md
@@ -309,7 +309,7 @@ This repo underwent a security audit before being made public. The following wer
     │   ├── daily-maintenance.js    ← Stop: once-a-day usage tally + commit sweep
     │   └── statusline.js           ← Status bar
     │
-    ├── rules/                      ← Contextual rules (17 files across 4 dirs)
+    ├── rules/                      ← Contextual rules (10 public immediate files)
     │   ├── README.md               ← Rules index
     │   ├── checklists/             ← Task-type checklists
     │   │   ├── automation-scripts.md
@@ -373,7 +373,7 @@ This repo underwent a security audit before being made public. The following wer
 
 ## Folder Details
 
-### `/commands/` - Custom Slash Commands (30 commands + 7 router files)
+### `/commands/` - Custom Slash Commands (29 commands + 0 router files)
 
 Custom commands that appear as `/command-name` in Claude Code.
 
@@ -398,13 +398,13 @@ Custom commands that appear as `/command-name` in Claude Code.
 | `start-task.md`            | `/start-task`            | Intelligent task router (modular)   |
 | `update-counts.md`         | `/update-counts`         | Update documentation counts         |
 | `update-docs.md`           | `/update-docs`           | Update documentation files          |
-| `router/*.md`              | (reference)              | Domain detection tables (7 files)   |
+| `router/*.md`              | (reference)              | Domain detection tables (0 files)   |
 
 **To add a command:** Create a `.md` file with YAML frontmatter. See `templates/command-template.md`.
 
 ---
 
-### `/agents/` - Subagent Definitions (67 agents)
+### `/agents/` - Subagent Definitions (10 agents)
 
 Agent definitions for the Task tool's `subagent_type` parameter. Each agent is a markdown file that defines a specialized role with constrained tools.
 
@@ -423,7 +423,7 @@ Agent definitions for the Task tool's `subagent_type` parameter. Each agent is a
 
 ---
 
-### `/hooks/` - Event Hooks (10 scripts)
+### `/hooks/` - Event Hooks (7 wired public files)
 
 Shell scripts triggered by Claude Code events (configured in `settings.json`).
 
@@ -431,7 +431,7 @@ See [`hooks/README.md`](../hooks/README.md) for the current hooks.
 
 ---
 
-### `/rules/` - Always-Load Rules (3 files)
+### `/rules/` - Always-Load Rules (10 files)
 
 Compact guardrails that load automatically for every session. Detailed reference content has been migrated to `docs/reference/`.
 
@@ -465,7 +465,7 @@ Shell scripts for setup, maintenance, and automation.
 
 ---
 
-### `/skills/` - Domain Knowledge (127 SKILL.md files across 123 directories)
+### `/skills/` - Domain Knowledge (180 SKILL.md files across 180 directories)
 
 Skills provide specialized knowledge and guidelines. They auto-activate based on context.
 
@@ -494,7 +494,7 @@ skills/
 
 ---
 
-### `/templates/` - Templates (10 files + plugin-template/)
+### `/templates/` - Templates (17 represented top-level artifacts)
 
 | Template              | Purpose                       |
 | --------------------- | ----------------------------- |
@@ -647,14 +647,14 @@ This folder is **automatically created by VSCode** when you open `.claude/` as a
 
 | Path         | Typical Size | Notes                            |
 | ------------ | ------------ | -------------------------------- |
-| `skills/`    | ~1.1MB       | 119 SKILL.md files across 116 dirs |
+| `skills/`    | ~1.1MB       | 180 SKILL.md files across 180 dirs |
 | `docs/`      | ~200KB       | 24 documentation files           |
-| `commands/`  | ~150KB       | 30 commands + 7 router files     |
-| `agents/`    | ~250KB       | 67 agent definitions             |
-| `rules/`     | ~150KB       | 27 rule files across 4 subdirs   |
+| `commands/`  | ~150KB       | 29 commands + 0 router files     |
+| `agents/`    | ~250KB       | 10 agent definitions             |
+| `rules/`     | ~150KB       | 10 public immediate rule files   |
 | `scripts/`   | ~50KB        | 16 scripts + 4 hook scripts      |
-| `hooks/`     | ~25KB        | 8 event hook scripts             |
-| `templates/` | ~40KB        | 17 templates + plugin-template/  |
+| `hooks/`     | ~25KB        | 7 wired public hook files             |
+| `templates/` | ~40KB        | 17 represented top-level artifacts  |
 
 **Total portable size:** ~1MB
 **With generated files:** Can grow to 100MB+

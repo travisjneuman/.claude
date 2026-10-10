@@ -227,11 +227,11 @@ tags: [category, domain]
 ---
 ```
 
-This installation has 180 local skills and 86 custom agents. Run `bash ~/.claude/scripts/regenerate-index.sh` to refresh the master index.
+This installation has 180 local skills and 10 custom agents. Run `bash ~/.claude/scripts/regenerate-index.sh` to refresh the master index.
 
 ### Agent Development
 
-Agents are defined in `~/.claude/agents/` as markdown files with YAML frontmatter specifying name, description, allowed tools, and model. Agents can be scoped by tool access (read-only for research, full access for implementation). See `~/.claude/agents/README.md` for the full catalog of 67 agents.
+Agents are defined in `~/.claude/agents/` as markdown files with YAML frontmatter specifying name, description, allowed tools, and model. Agents can be scoped by tool access (read-only for research, full access for implementation). See `~/.claude/agents/README.md` for the full catalog of 10 public agents.
 
 ---
 
@@ -277,7 +277,7 @@ This installation's `~/.claude/docs/` directory contains:
 | `MCP-SERVERS.md`           | MCP server capabilities and details   |
 | `RESOURCES.md`             | External resources and learning links |
 | `CLAUDE-CODE-RESOURCES.md` | This file -- quick reference          |
-| `DOCUMENTATION-COUNTS.md`  | Ecosystem metrics and counts          |
+| `COUNT-PIPELINE.md`        | Public populations, snapshot evidence and explicit count publication |
 
 ### Rules & Checklists
 
@@ -299,7 +299,7 @@ This installation's `~/.claude/docs/` directory contains:
 5. **Less is more** -- Each MCP server tool loads into context
 6. **CLAUDE.md is king** -- Project-level overrides global settings
 7. **Hooks for automation** -- PreToolUse/PostToolUse for formatting, linting
-8. **Slash commands** -- 30 custom commands available via `~/.claude/commands/`
+8. **Slash commands** -- 29 base commands available via `~/.claude/commands/`
 9. **Skill discovery** -- Check `skills/MASTER_INDEX.md` before writing from scratch
 10. **Agent Teams for parallel work** -- When subagents are not enough
 
@@ -307,14 +307,16 @@ This installation's `~/.claude/docs/` directory contains:
 
 ## Ecosystem At a Glance
 
+These are public toolkit/manifest snapshot populations, not all installed or private resources. `Installed MCP entries (documented)` reflects the documented toolkit defaults, not a runtime probe. Exact source identities, revisions, date and marketplace normalization are in `counts.json` and the [count pipeline](./COUNT-PIPELINE.md).
+
 | Component                | Count  |
 | ------------------------ | ------ |
-| Local skills             | 119    |
-| Custom agents            | 59     |
-| Marketplace repos        | 101    |
-| Marketplace skills       | 7,400+ |
-| Custom commands          | 30     |
-| MCP servers (configured) | 12     |
+| Local skills             | 180    |
+| Custom agents            | 10     |
+| Marketplace repos        | 81    |
+| Marketplace skills       | 11,000+ |
+| Custom commands          | 29     |
+| Installed MCP entries (documented) | 0     |
 
 ---
 

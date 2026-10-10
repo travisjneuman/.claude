@@ -1,411 +1,1166 @@
 {
+  "schemaVersion": 2,
+  "definitionVersion": "public-toolkit-v2",
+  "asOf": "2026-10-10",
   "repoCount": 81,
-  "totalSkills": 11060,
+  "totalSkills": 11078,
+  "marketplaceSkillsDisplay": "11,000+",
+  "provenance": {
+    "inputMode": "committed-HEAD-snapshots",
+    "coverage": "complete",
+    "repoCount": 81,
+    "freshness": "Selected committed revisions (including deliberate pins); reviewed exports retain their own observation dates, not a latest-upstream guarantee.",
+    "snapshotExports": [
+      {
+        "name": "claude-plugins-official",
+        "revision": "b8e53f1c05dff3b6d751297f6527990ffc81c2f4",
+        "tree": "0be010881e66c2d08e762db4573c43eceaf70b63",
+        "inputMode": "committed-HEAD-snapshot",
+        "inputDigest": "075454325495001c5533e11b3b9d4b9421fb201f5acdf680bd01c10fae1539dd",
+        "measuredAsOf": "2026-10-10",
+        "transport": "reviewed-committed-snapshot-export",
+        "snapshotDigest": "4f5218ff36e17c05a44b5897216931281484875e7011426fb4c70a1ff2d93316"
+      }
+    ],
+    "normalization": "strip initial frontmatter, collapse whitespace, lowercase; nonempty SHA-256 bodies deduplicated within/across repos",
+    "inputDigest": "52bee5f72f29432ca5eb410c3f4dbf2861c0ba24fb7db6163100f1baad8634e8"
+  },
   "repos": [
     {
       "name": "claude-code-plugins-plus-skills",
+      "path": "plugins/marketplaces/claude-code-plugins-plus-skills",
+      "githubUrl": "https://github.com/jeremylongshore/tons-of-skills-marketplace",
       "displayName": "Claude Code Plugins Plus Skills",
-      "skillCount": 3458
+      "skillCount": 3458,
+      "revision": "8ad93248b0b08c1341b80db6efea42e060c3b193",
+      "tree": "36323cb687030fd30ea056b4206bb7f50d47da7a",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "4b3b348c3400f14671125f66dbfac43e39c39012dbe53527dd0a2fa8f1dc6dac",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 3471
     },
     {
       "name": "sickn33-antigravity-awesome-skills",
+      "path": "plugins/marketplaces/sickn33-antigravity-awesome-skills",
+      "githubUrl": "https://github.com/sickn33/agentic-awesome-skills",
       "displayName": "Sickn33 Antigravity Awesome Skills",
-      "skillCount": 2669
+      "skillCount": 2673,
+      "revision": "1c7bdea7f9094080fdb6f8b9b0aefb13030a2e31",
+      "tree": "7c2d77129f1c43da0a62f3d382e7be4258f4af07",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "f1ce5b583849d5d2bf2b578d6d83aecf8046fad1facac15de04d3f950a1ad0f4",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 8320
     },
     {
       "name": "davila7-templates",
+      "path": "plugins/marketplaces/davila7-templates",
+      "githubUrl": "https://github.com/davila7/claude-code-templates",
       "displayName": "Davila7 Templates",
-      "skillCount": 889
+      "skillCount": 889,
+      "revision": "02fefb5e7276421b1c8cc863b6c4026f92aedcb2",
+      "tree": "6792ed266cb0cf007b709d6586996213d25f091b",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "fc72e2045cab55c28a9e599f9424468c8f8d2c21e3eaca17e4f12cdb610902f0",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 912
     },
     {
       "name": "awesome-claude-skills",
+      "path": "plugins/marketplaces/awesome-claude-skills",
+      "githubUrl": "https://github.com/ComposioHQ/awesome-claude-skills",
       "displayName": "Awesome Claude Skills",
-      "skillCount": 864
+      "skillCount": 864,
+      "revision": "be2a406907dbc61b73e6827ded415c96139d13a2",
+      "tree": "070545c75ce600c2f6e66ee84e78124887accc6f",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "56ce421a2383fb4e646e00065d03e473d094787bd5652edb1bd2761c85282336",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 864
     },
     {
       "name": "buildwithclaude",
+      "path": "plugins/marketplaces/buildwithclaude",
+      "githubUrl": "https://github.com/davepoon/buildwithclaude",
       "displayName": "Buildwithclaude",
-      "skillCount": 392
+      "skillCount": 395,
+      "revision": "fc03a95b41212888c261493630a4803698c1f3c9",
+      "tree": "799add2cc93a10f585cb1a908bea9a74bed5f81b",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "72624dc2524cd4089f28684a8f83609069752b288376d9be434d66e191965c8d",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 399
     },
     {
       "name": "alirezarezvani-claude-skills",
+      "path": "plugins/marketplaces/alirezarezvani-claude-skills",
+      "githubUrl": "https://github.com/alirezarezvani/claude-skills",
       "displayName": "Alirezarezvani Claude Skills",
-      "skillCount": 376
+      "skillCount": 376,
+      "revision": "19392f7a08264ed00486a251f5b2098321771f94",
+      "tree": "2ca17edb975af77f0ef3cf0d5450878295777a17",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "934741dbbf6efa5490bc9da365bffe1a2d24442db7582f8bb63295d81f4eb953",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 388
     },
     {
       "name": "affaan-everything-claude",
+      "path": "plugins/marketplaces/affaan-everything-claude",
+      "githubUrl": "https://github.com/affaan-m/ECC",
       "displayName": "Affaan Everything Claude",
-      "skillCount": 293
+      "skillCount": 302,
+      "revision": "4eb71d92a39cab44ad40ac9d8a6a5ccb4029d6c2",
+      "tree": "22e434c4134af0ad682da9676f12e16765c1f663",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "fe8c27e325ff23002c56dedd641cd0eecd20cbce123fc29aef08765dc0d457ff",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 430
     },
     {
       "name": "athola-night-market",
+      "path": "plugins/marketplaces/athola-night-market",
+      "githubUrl": "https://github.com/athola/claude-night-market",
       "displayName": "Athola Night Market",
-      "skillCount": 206
+      "skillCount": 206,
+      "revision": "9f3eb003bedbd1d84389c5dd68711ea56c8c69b4",
+      "tree": "a544faee01855c12d642768aadbe813a16d23f0c",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "adff8e53a146a88be100797ca1cba09341058c73e4a70c11d10c9e70421d4c7b",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 206
     },
     {
       "name": "wshobson-agents",
+      "path": "plugins/marketplaces/wshobson-agents",
+      "githubUrl": "https://github.com/wshobson/agents",
       "displayName": "Wshobson Agents",
-      "skillCount": 184
+      "skillCount": 184,
+      "revision": "46891e7e60da0e52baf1050b7b6391b64e84c6d9",
+      "tree": "169e5fe84fd726c6661f094496a7aba60cba3a8e",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "60d0e90e460e515bb87cde697bbf2e4dd3dfc7ea174ccdafb6c75f63e37becd0",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 184
     },
     {
       "name": "claude-scientific-skills",
+      "path": "plugins/marketplaces/claude-scientific-skills",
+      "githubUrl": "https://github.com/K-Dense-AI/scientific-agent-skills",
       "displayName": "Claude Scientific Skills",
-      "skillCount": 177
+      "skillCount": 177,
+      "revision": "92ace75ac21efe19a620434e0ca4e356081fe807",
+      "tree": "9a2d8a9b7d7cf9a89fcf31a25e826838f735d764",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "f389d16a98df5f96fb1f6e120a80ee6c9ddf9e5085f404758d211b00fd8a2a1e",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 177
     },
     {
       "name": "madappgang-claude-code",
+      "path": "plugins/marketplaces/madappgang-claude-code",
+      "githubUrl": "https://github.com/MadAppGang/claude-code",
       "displayName": "Madappgang Claude Code",
-      "skillCount": 129
+      "skillCount": 129,
+      "revision": "6097ad4643f23b7645a9c99c329887b623b32e57",
+      "tree": "89cada38f99dcf90b7d489afb25425d3f456c61f",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "85e0a3341562c67354a869c18f78f32a470dc4cd8b2de5ca6e7e638e6dcc9276",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 131
     },
     {
       "name": "giuseppe-developer-kit",
+      "path": "plugins/marketplaces/giuseppe-developer-kit",
+      "githubUrl": "https://github.com/giuseppe-trisciuoglio/developer-kit",
       "displayName": "Giuseppe Developer Kit",
-      "skillCount": 119
+      "skillCount": 119,
+      "revision": "fe73fb33a09ee6562eeec7415a3f9a3bcf795177",
+      "tree": "e27ff92ca3b223840a54f19019fbaa2284260035",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "a1969549cf6605930b5f55f4cb022bca7a22626a13f67386825846ab5b006bf5",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 119
     },
     {
       "name": "daymade-skills",
+      "path": "plugins/marketplaces/daymade-skills",
+      "githubUrl": "https://github.com/daymade/claude-code-skills",
       "displayName": "Daymade Skills",
-      "skillCount": 116
+      "skillCount": 116,
+      "revision": "95a81528fa7e00d89f9f4e12bbd3d321aba55677",
+      "tree": "bc8c7c54cba7fefdcf7eb34c1b7669c01405eac8",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "43ed51371f3afbc9b64179da4dabec1e888090b6eac53db74787cd8ddeb7dc3f",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 116
     },
     {
       "name": "ccplugins-awesome",
+      "path": "plugins/marketplaces/ccplugins-awesome",
+      "githubUrl": "https://github.com/ccplugins/awesome-claude-code-plugins",
       "displayName": "Ccplugins Awesome",
-      "skillCount": 84
+      "skillCount": 84,
+      "revision": "5bd4f168edf7c18a8303cbfde20708ff62aabc4d",
+      "tree": "a4c7de6759858eb1ba29420cfe01e5a6d0926437",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "91f9518519cedb531cc29fd4b71f302c65fe689d5e506a1600324c2d8bfedac9",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 84
     },
     {
       "name": "trailofbits-skills",
+      "path": "plugins/marketplaces/trailofbits-skills",
+      "githubUrl": "https://github.com/trailofbits/skills",
       "displayName": "Trailofbits Skills",
-      "skillCount": 83
+      "skillCount": 83,
+      "revision": "442fc9d6c89b1e937e6f7a477e7071ea75fcbea4",
+      "tree": "e4bf3e138d9afeff17c08d9c63cf5c9db9af6dff",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "3242223ffd9fe70a479f94e51443299c9017eeb9804376d00af6c20a313e400c",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 83
     },
     {
       "name": "phuryn-pm-skills",
+      "path": "plugins/marketplaces/phuryn-pm-skills",
+      "githubUrl": "https://github.com/phuryn/pm-skills",
       "displayName": "Phuryn Pm Skills",
-      "skillCount": 69
+      "skillCount": 69,
+      "revision": "c68487d721e419ec87af1ae6412a842978eab785",
+      "tree": "0b19e6e5b178c8cf5a2a2f9de9f62f4299e07fe5",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "50a13bb4e5d16f7771c53f0d79604b859757f1f7c8540d26bd5d134f384509ef",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 69
     },
     {
       "name": "neolab-context-kit",
+      "path": "plugins/marketplaces/neolab-context-kit",
+      "githubUrl": "https://github.com/NeoLabHQ/context-engineering-kit",
       "displayName": "Neolab Context Kit",
-      "skillCount": 68
+      "skillCount": 68,
+      "revision": "23e2428e809d77717f8acc9659c374a3a1fcb93e",
+      "tree": "d304e4d62ae4283b4edfd568ee7eaf6c8f3c3d8f",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "7fa57d817e947caece9aac8370018c7b2c9f5a5b71d176e1d1b14b028586643a",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 202
     },
     {
       "name": "jeffallan-claude-skills",
+      "path": "plugins/marketplaces/jeffallan-claude-skills",
+      "githubUrl": "https://github.com/Jeffallan/claude-skills",
       "displayName": "Jeffallan Claude Skills",
-      "skillCount": 67
+      "skillCount": 67,
+      "revision": "1be15d8064f88fc25216442406d40add8fd23b53",
+      "tree": "afea5ecdd68864b9354b57706dd362ebca25db9c",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "13d2b2643fb1dfb2ef65cfffd28d98adfa5be92bcd9b1c525ed77351004aa04d",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 67
     },
     {
       "name": "manutej-luxor-marketplace",
+      "path": "plugins/marketplaces/manutej-luxor-marketplace",
+      "githubUrl": "https://github.com/manutej/luxor-claude-marketplace",
       "displayName": "Manutej Luxor Marketplace",
-      "skillCount": 67
+      "skillCount": 67,
+      "revision": "1861cc9720d5656410415e5c19b06bef3e4609e8",
+      "tree": "fdc3aa190226a16949a863eef362cd25b785e0a6",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "1f14440047f630393998f01037cd938a837c0ee11c69a67d2a117d760f17a581",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 67
     },
     {
       "name": "gmickel-marketplace",
+      "path": "plugins/marketplaces/gmickel-marketplace",
+      "githubUrl": "https://github.com/gmickel/flow-next",
       "displayName": "Gmickel Marketplace",
-      "skillCount": 56
+      "skillCount": 56,
+      "revision": "39308b309fde394f4f18e8ac12f1fb7593844404",
+      "tree": "b6fb157e110e85eb498bb9129277b83cec42b4dd",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "858826a273cb6c0ea7cffcc9f32a294fcd4af0263fc531c00f99805821eb37a9",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 58
     },
     {
       "name": "rohitg00-claude-code-toolkit",
+      "path": "plugins/marketplaces/rohitg00-claude-code-toolkit",
+      "githubUrl": "https://github.com/rohitg00/awesome-claude-code-toolkit",
       "displayName": "Rohitg00 Claude Code Toolkit",
-      "skillCount": 40
+      "skillCount": 40,
+      "revision": "ebdf1d596d2cde5c5cceb32177e8d1cf4829e7d9",
+      "tree": "5ccfbe49c891159a33397b64ab957e7585897dfd",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "a2df66f6c711528a21609ece168a31786b23a04763b9888dd44cab777dfc1c99",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 40
     },
     {
       "name": "secondsky-sap-skills",
+      "path": "plugins/marketplaces/secondsky-sap-skills",
+      "githubUrl": "https://github.com/secondsky/sap-skills",
       "displayName": "Secondsky Sap Skills",
-      "skillCount": 40
-    },
-    {
-      "name": "actionbook-rust-skills",
-      "displayName": "Actionbook Rust Skills",
-      "skillCount": 38
+      "skillCount": 40,
+      "revision": "652a861d3ed422b71f01c8805f9ec03b14017cd8",
+      "tree": "4505c120b28c7aac4bbc3fce0a2eee4e1881266e",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "a11cfa4b458f51ab186f4904ca37100cd619e688e721b260f7452750dad87b97",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 40
     },
     {
       "name": "aaronontheweb-dotnet-skills",
+      "path": "plugins/marketplaces/aaronontheweb-dotnet-skills",
+      "githubUrl": "https://github.com/Aaronontheweb/dotnet-skills",
       "displayName": "Aaronontheweb Dotnet Skills",
-      "skillCount": 37
+      "skillCount": 39,
+      "revision": "46003affea00e602a0c2112375d6f0217e90962d",
+      "tree": "513c061ee0f66ae3b58176170f73499fc849e861",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "87b7aa1f6c5089919095e691a312e44ca2775756fedda0e088d54ff470e79049",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 39
+    },
+    {
+      "name": "actionbook-rust-skills",
+      "path": "plugins/marketplaces/actionbook-rust-skills",
+      "githubUrl": "https://github.com/actionbook/rust-skills",
+      "displayName": "Actionbook Rust Skills",
+      "skillCount": 38,
+      "revision": "5c40d3ad785193231b7d0dbfb8e1eb447e5edd94",
+      "tree": "39d7315462740d94c2346db75af1c83bb09f4898",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "804c78354cb32a5d542848372741eae2c5a35197ff4b73a7291cf7350a4ab2cf",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 38
     },
     {
       "name": "skillsforge",
+      "path": "plugins/marketplaces/skillsforge",
+      "githubUrl": "https://github.com/rawveg/skillsforge-marketplace",
       "displayName": "Skillsforge",
-      "skillCount": 37
+      "skillCount": 37,
+      "revision": "9561ce20885bada1d6012d24d9b598d69c097ef2",
+      "tree": "15f414b08e20132460bcefb4e2f318348a705378",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "7accd86fb18e878a69872b96f0098a337916df423888498411cebe2151998d19",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 37
     },
     {
       "name": "EveryInc-compound",
+      "path": "plugins/marketplaces/EveryInc-compound",
+      "githubUrl": "https://github.com/EveryInc/compound-engineering-plugin",
       "displayName": "EveryInc Compound",
-      "skillCount": 36
+      "skillCount": 36,
+      "revision": "51aa537383744736eb8ad30468d34420e9fb8ea8",
+      "tree": "5f0307e96b2781941d225738c45bf1043e9b5bf0",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "79ae8cd3fe3698ee0f1ae260660a5c1769e25a49d7d7415ccc4496b55b601268",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 36
     },
     {
       "name": "claude-plugins-official",
+      "path": "plugins/marketplaces/claude-plugins-official",
+      "githubUrl": "https://github.com/anthropics/claude-plugins-official",
       "displayName": "Claude Plugins Official",
-      "skillCount": 33
+      "skillCount": 33,
+      "revision": "b8e53f1c05dff3b6d751297f6527990ffc81c2f4",
+      "tree": "0be010881e66c2d08e762db4573c43eceaf70b63",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "075454325495001c5533e11b3b9d4b9421fb201f5acdf680bd01c10fae1539dd",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 33,
+      "transport": "reviewed-committed-snapshot-export",
+      "snapshotDigest": "4f5218ff36e17c05a44b5897216931281484875e7011426fb4c70a1ff2d93316"
     },
     {
       "name": "p47phoenix-plugins",
+      "path": "plugins/marketplaces/p47phoenix-plugins",
+      "githubUrl": "https://github.com/P47Phoenix/Claude-Plugins",
       "displayName": "P47phoenix Plugins",
-      "skillCount": 33
+      "skillCount": 33,
+      "revision": "f4fea7db5b39da374ab0d24e529da7a049abb150",
+      "tree": "6a0540519c165877bd5f3c26a0c10e5247d3c046",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "dcbf5d9fe9a0fb03fe8acc92a980317d44b032af78e47935eeb7f7510f9ba859",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 33
     },
     {
       "name": "sangrokjung-claude-forge",
+      "path": "plugins/marketplaces/sangrokjung-claude-forge",
+      "githubUrl": "https://github.com/sangrokjung/claude-forge",
       "displayName": "Sangrokjung Claude Forge",
-      "skillCount": 33
+      "skillCount": 33,
+      "revision": "34d881dc9bdc669aadc3a1e8147a4bd5467ecbe3",
+      "tree": "18d06de516f8e2696322dcdb97a65c620dbe0949",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "fb11d86dac47105f4d06cb2912332aff1633f5e7198096ed6fccbeee44ddba76",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 33
     },
     {
       "name": "akin-ozer-devops",
+      "path": "plugins/marketplaces/akin-ozer-devops",
+      "githubUrl": "https://github.com/akin-ozer/cc-devops-skills",
       "displayName": "Akin Ozer Devops",
-      "skillCount": 31
+      "skillCount": 31,
+      "revision": "276af751e659315aaf56d3ad13d7c26f4e72e28a",
+      "tree": "1a2c8163f5b3d817141fee0eb9c5c64fa2fef46c",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "b635500abd728a69c5d8e9c3bf6d724b0e6fd82b7a66f4694370680541fe67ee",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 31
     },
     {
       "name": "levnikolaevich-claude-code-skills",
+      "path": "plugins/marketplaces/levnikolaevich-claude-code-skills",
+      "githubUrl": "https://github.com/levnikolaevich/claude-code-skills",
       "displayName": "Levnikolaevich Claude Code Skills",
-      "skillCount": 31
+      "skillCount": 31,
+      "revision": "0ce87969906ac3c00947298ee2127d9e7cd466d8",
+      "tree": "4d28be7b169cb1e06e2708db5eaf1014777657f8",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "7cdd6b5c9615e994ba5012c829fd3dd2b1fc47699fd17329c6a26d994c810ff1",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 31
     },
     {
       "name": "trailofbits-skills-curated",
+      "path": "plugins/marketplaces/trailofbits-skills-curated",
+      "githubUrl": "https://github.com/trailofbits/skills-curated",
       "displayName": "Trailofbits Skills Curated",
-      "skillCount": 31
+      "skillCount": 31,
+      "revision": "6d05be4889017b06fb15069f371afd220daffb62",
+      "tree": "a87743b12d12643ff4f2aa2bc7ef8e7905fa41eb",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "9ccaa905ef9021e162b1250f4a3d4bdce7f6b18691008c4b7f6afab3a2f0a02f",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 31
     },
     {
       "name": "claude-mem",
+      "path": "plugins/marketplaces/claude-mem",
+      "githubUrl": "https://github.com/thedotmack/claude-mem",
       "displayName": "Claude Mem",
-      "skillCount": 30
+      "skillCount": 30,
+      "revision": "fa8ab09f06aa05f958c5225cf3756ce52a3ebb96",
+      "tree": "a067757fd4a9e207ac428d699d66dab1cfaf7456",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "76c7da16b449b7af45df1ff04b12aed41b91f064a16d1ebe5f3d6f09783db6e5",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 34
     },
     {
       "name": "henkisdabro-marketplace",
+      "path": "plugins/marketplaces/henkisdabro-marketplace",
+      "githubUrl": "https://github.com/henkisdabro/wookstar-claude-plugins",
       "displayName": "Henkisdabro Marketplace",
-      "skillCount": 27
+      "skillCount": 27,
+      "revision": "cdc5961bd33293a54751d4b3b30e72be424aaf5a",
+      "tree": "9451d000782beea0223230d76a195d79aa6f25e2",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "71f412f6b0c299a342ff3413e24d6ba0bdafb890eecf236b4f3e2b381c2c6303",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 27
     },
     {
       "name": "onmax-nuxt-skills",
+      "path": "plugins/marketplaces/onmax-nuxt-skills",
+      "githubUrl": "https://github.com/onmax/nuxt-skills",
       "displayName": "Onmax Nuxt Skills",
-      "skillCount": 26
+      "skillCount": 26,
+      "revision": "008232b5d7a5d697693f776eca0e1c8e66aa7597",
+      "tree": "8457fecad0c200e064ada98c4a871e9720493d46",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "7a43b12086c7fabbf3812e52ea985ca5a0f775819896397dad6e18a53df7cd85",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 26
     },
     {
       "name": "expo-skills",
+      "path": "plugins/marketplaces/expo-skills",
+      "githubUrl": "https://github.com/expo/skills",
       "displayName": "Expo Skills",
-      "skillCount": 25
+      "skillCount": 25,
+      "revision": "d4f484024fec15196bfd3c272e953e3f983972cf",
+      "tree": "1cec4260059ac854dc54946bc1e68671d3a2da45",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "7f8b46efedd19509d9aebef1f4cc42f156160f4489f7f19ce302b9c60e0512a7",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 25
     },
     {
       "name": "hashicorp-agent-skills",
+      "path": "plugins/marketplaces/hashicorp-agent-skills",
+      "githubUrl": "https://github.com/hashicorp/agent-skills",
       "displayName": "Hashicorp Agent Skills",
-      "skillCount": 20
+      "skillCount": 20,
+      "revision": "f706481af9b8fedb66de909f6243ad29601afa0c",
+      "tree": "6e8e987c9e3f8b400f900075324305b9cef674af",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "33620f9d7edd75b6a27494287e974a0a9c9ac6e195495582e5296041ff18d835",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 20
     },
     {
       "name": "anthropic-agent-skills",
+      "path": "plugins/marketplaces/anthropic-agent-skills",
+      "githubUrl": "https://github.com/anthropics/skills",
       "displayName": "Anthropic Agent Skills",
-      "skillCount": 19
+      "skillCount": 19,
+      "revision": "dbd4588f9e1033efb41dad4bef2f7947c8993d44",
+      "tree": "73374b8632b6c29c41ac7641e58bf97743f0aeb9",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "ecc4cc0ff356a17fb50b5d77f88910d6686977543a137081bfa216a64fd57c7f",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 19
     },
     {
       "name": "muratcankoylan-agent-skills",
+      "path": "plugins/marketplaces/muratcankoylan-agent-skills",
+      "githubUrl": "https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering",
       "displayName": "Muratcankoylan Agent Skills",
-      "skillCount": 19
+      "skillCount": 19,
+      "revision": "58b55a8921758d13453b440704fb1b5b208c0b0e",
+      "tree": "5ae86597fd6bf752b43e5e4124030dddb66a3f14",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "e8e9a347d4a076a95fa1ccc867536b25c23be8a4f841a3a5894724283a08f856",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 19
     },
     {
       "name": "mhattingpete-skills",
+      "path": "plugins/marketplaces/mhattingpete-skills",
+      "githubUrl": "https://github.com/mhattingpete/claude-skills-marketplace",
       "displayName": "Mhattingpete Skills",
-      "skillCount": 18
+      "skillCount": 18,
+      "revision": "b5b34bcf4c920bb72cee1c391b54a33cb5353c12",
+      "tree": "86480cf2495896e72098e4f25d81f29ab6ffa929",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "2ccec695b7c03a92ce7cd352e63519e4c343cba146612a44cdfc5614ca775cf9",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 18
     },
     {
       "name": "skillcreatorai-agent-skills",
+      "path": "plugins/marketplaces/skillcreatorai-agent-skills",
+      "githubUrl": "https://github.com/MoizIbnYousaf/ai-agent-skills",
       "displayName": "Skillcreatorai Agent Skills",
-      "skillCount": 18
+      "skillCount": 18,
+      "revision": "6d95c788aa22ce39a4807b9a4c31c758a2036dc6",
+      "tree": "2a0f292471b93509c17b12db46ab9ae808672173",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "7576d39d9a0ac3781b872ac12e4761b4c25d6255618f31e49e20bc474433204c",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 18
     },
     {
       "name": "team-attention-plugins",
+      "path": "plugins/marketplaces/team-attention-plugins",
+      "githubUrl": "https://github.com/team-attention/plugins-for-claude-natives",
       "displayName": "Team Attention Plugins",
-      "skillCount": 17
+      "skillCount": 17,
+      "revision": "fd9c20754dba0b0ab040f3f2cd2cb533fc43347d",
+      "tree": "6646f02c421f30d7985943965d60212e8ebdd5b3",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "9dd273406922059ee521f9ea195f42cafba992484201275c75c2a50e7c95f257",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 18
     },
     {
       "name": "obra-superpowers",
+      "path": "plugins/marketplaces/obra-superpowers",
+      "githubUrl": "https://github.com/obra/superpowers",
       "displayName": "Obra Superpowers",
-      "skillCount": 15
+      "skillCount": 15,
+      "revision": "bb92a77741419a4ab5f06e711a283343f1ada0c3",
+      "tree": "4ac675daa3415bc836f707c7e60237ac7b66c7d5",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "d27986a05407d5589786c3a2107ed99b2a05a059c64aa2afd61799399eed01fb",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 15
     },
     {
       "name": "taches-cc-resources",
+      "path": "plugins/marketplaces/taches-cc-resources",
+      "githubUrl": "https://github.com/glittercowboy/taches-cc-resources",
       "displayName": "Taches Cc Resources",
-      "skillCount": 12
+      "skillCount": 12,
+      "revision": "1757615b99ab789a72ff2d02e9f6112af2a15c04",
+      "tree": "038b3e0dc83765fafa5e3769e4cfc8861d0a4b9b",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "d9b508d17e4c1d558e8559d64573f52405e3f2c561489e38c138d337949f1937",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 12
     },
     {
       "name": "devgom-marketplace",
+      "path": "plugins/marketplaces/devgom-marketplace",
+      "githubUrl": "https://github.com/Dev-GOM/claude-code-marketplace",
       "displayName": "Devgom Marketplace",
-      "skillCount": 11
+      "skillCount": 11,
+      "revision": "eed6aa291ad984d436b800e7e1cb8991ef3ff866",
+      "tree": "d83aedc037daf1ccb8d968cef7e134bde45c4023",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "1bc131b9f77fcec109ec2a67fa2e8aaaa18bf7e646fb9fc650313ec2e67d54a1",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 11
     },
     {
       "name": "slavingia-skills",
+      "path": "plugins/marketplaces/slavingia-skills",
+      "githubUrl": "https://github.com/slavingia/skills",
       "displayName": "Slavingia Skills",
-      "skillCount": 10
+      "skillCount": 10,
+      "revision": "eb9f57fba03ddb0382ed3bfe6654d3d7df128c70",
+      "tree": "0ee457034c4a345c5c80dfea4db001a6a39f8529",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "86046b76bc89993f403b938c1bad220c34e0976b0490ff63bcddc5cdc7abcac5",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 10
     },
     {
       "name": "understand-anything",
+      "path": "plugins/marketplaces/understand-anything",
+      "githubUrl": "https://github.com/Egonex-AI/Understand-Anything",
       "displayName": "Understand Anything",
-      "skillCount": 9
+      "skillCount": 9,
+      "revision": "000fbf3f36b5e534a0a8d3461cf24f5dc9ae43fe",
+      "tree": "2c163769d3e0321ce7efe9214fdb072565f837b4",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "9a4036511dc2d76c559d7daf7f5052b78ccd56df535ec0d844f63e906d5acfb7",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 9
     },
     {
       "name": "vercel-agent-skills",
+      "path": "plugins/marketplaces/vercel-agent-skills",
+      "githubUrl": "https://github.com/vercel-labs/agent-skills",
       "displayName": "Vercel Agent Skills",
-      "skillCount": 9
+      "skillCount": 9,
+      "revision": "063bee94c3f4df8453406c830b0a7df0f2860278",
+      "tree": "f94978e8351f77b2d84911fac5d3dd9d51408af9",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "eadc5a71887e6bc5e4a8b7060df6b07b3553e8ebeafa1af90b07e6e41718bee0",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 9
     },
     {
       "name": "ykdojo-tips",
+      "path": "plugins/marketplaces/ykdojo-tips",
+      "githubUrl": "https://github.com/ykdojo/claude-code-tips",
       "displayName": "Ykdojo Tips",
-      "skillCount": 9
+      "skillCount": 9,
+      "revision": "577ac89252195d61283b334c4b9d292b52c82203",
+      "tree": "fcd6bac0108a5dd82ba219d8a265a9e878974a1e",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "4a320d7f9b5beb0d034ff1c28172ff9c36fe151da531b02f60c8938218191654",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 9
     },
     {
       "name": "danielscholl-sdlc",
+      "path": "plugins/marketplaces/danielscholl-sdlc",
+      "githubUrl": "https://github.com/danielscholl/claude-sdlc",
       "displayName": "Danielscholl Sdlc",
-      "skillCount": 8
+      "skillCount": 8,
+      "revision": "2c9391e6c0c67b37e915baecde18b874b2d02d4e",
+      "tree": "97cdba73a461d2335f7883dc5205097a74ac7ac9",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "6ef8692ba76503f4e81e42a03f38f1504b2a31124718474a831a88d811a315a6",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 8
     },
     {
       "name": "ahmedasmar-devops-skills",
+      "path": "plugins/marketplaces/ahmedasmar-devops-skills",
+      "githubUrl": "https://github.com/ahmedasmar/devops-claude-skills",
       "displayName": "Ahmedasmar Devops Skills",
-      "skillCount": 6
+      "skillCount": 6,
+      "revision": "1489c33ad8829a11219e423327d6b59f8339cee4",
+      "tree": "7abd5b000060311711f9a5b444d5702cc9a087f5",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "434deda7a1dbd027440af6f2054e9d0627c7f0f9a26cc46e6838825835fc9867",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 6
     },
     {
       "name": "anthropic-life-sciences",
+      "path": "plugins/marketplaces/anthropic-life-sciences",
+      "githubUrl": "https://github.com/anthropics/life-sciences",
       "displayName": "Anthropic Life Sciences",
-      "skillCount": 6
+      "skillCount": 6,
+      "revision": "e96556b637b56d6cc3a5ad33987009be9e60aa5c",
+      "tree": "9d2ab56572855709b65f2a7d3fcd0223b3119d77",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "b9ac3beedeb45acf622706794fc728f077299c0449555188d68825de86a66da0",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 6
     },
     {
       "name": "othmanadi-planning",
+      "path": "plugins/marketplaces/othmanadi-planning",
+      "githubUrl": "https://github.com/OthmanAdi/planning-with-files",
       "displayName": "Othmanadi Planning",
-      "skillCount": 6
+      "skillCount": 6,
+      "revision": "7056ed2f2b86a8a9e18840f625ac66a48fa07693",
+      "tree": "d2800a9e90213773f36594d585855fe307b183f3",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "9c710453b96f4b050e34f827421817f32c0be00c92fdb3e122768d93169101c8",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 6
     },
     {
       "name": "georgeguimaraes-elixir",
+      "path": "plugins/marketplaces/georgeguimaraes-elixir",
+      "githubUrl": "https://github.com/georgeguimaraes/elixir-agent-tools",
       "displayName": "Georgeguimaraes Elixir",
-      "skillCount": 5
+      "skillCount": 5,
+      "revision": "ac3a5a1661a087158b39d5eb742b3c25fe3c7b44",
+      "tree": "4b993940dbae2e3a54cfb9f57baba93f4f022069",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "18b6f291d6b35371f2be43845bcb3808d97e242b9efa184927968ebc8d9c5a2c",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 5
     },
     {
       "name": "numman-ali-skills",
+      "path": "plugins/marketplaces/numman-ali-skills",
+      "githubUrl": "https://github.com/numman-ali/n-skills",
       "displayName": "Numman Ali Skills",
-      "skillCount": 5
+      "skillCount": 5,
+      "revision": "fdabc47a713c9e00925296f1d9c65e139dce3ed4",
+      "tree": "c19b79b0323e47d0219db705d78a087afae2ac79",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "fe56e63f492fea732fce9ecc888c0ad70b6de9a43d02843e4f8514baf1a067c1",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 5
     },
     {
       "name": "sivalabs-marketplace",
+      "path": "plugins/marketplaces/sivalabs-marketplace",
+      "githubUrl": "https://github.com/sivaprasadreddy/sivalabs-marketplace",
       "displayName": "Sivalabs Marketplace",
-      "skillCount": 5
+      "skillCount": 5,
+      "revision": "cc3ff0c58fd723adf925b3c9e474308d3a06caf9",
+      "tree": "95ac0f149d81da5a6fc42ca777ff3ac2c3acb1d4",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "3c8fcecd07a6a611d6396bf141e6771ecc6aace8feb925cdc0cee2e3829acd02",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 5
     },
     {
       "name": "bradleygolden-elixir",
+      "path": "plugins/marketplaces/bradleygolden-elixir",
+      "githubUrl": "https://github.com/bradleygolden/claude-marketplace-elixir",
       "displayName": "Bradleygolden Elixir",
-      "skillCount": 4
+      "skillCount": 4,
+      "revision": "624d46be6c7a73ffb4e0def9a6455001ad0426df",
+      "tree": "025ac2ebdc2cf577f698db86a60b1c09f0483132",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "da0ec1da27cc051c289789ffd03d2fca9737e408fd5f05706de0c29509d558a4",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 4
     },
     {
       "name": "pbakaus-impeccable",
+      "path": "plugins/marketplaces/pbakaus-impeccable",
+      "githubUrl": "https://github.com/pbakaus/impeccable",
       "displayName": "Pbakaus Impeccable",
-      "skillCount": 2
+      "skillCount": 2,
+      "revision": "d631a8827f99414d2b6daba4ef08b7f8701751d7",
+      "tree": "f705ad02e6ae6a33b0c7e6b0923106bb96f938e2",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "01f2e29cb41ec869bb739f223ad48daaedea800a8ebf755f419a5906ddbb427a",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 2
     },
     {
       "name": "sawyerhood-mart",
+      "path": "plugins/marketplaces/sawyerhood-mart",
+      "githubUrl": "https://github.com/SawyerHood/sawyer-mart",
       "displayName": "Sawyerhood Mart",
-      "skillCount": 2
+      "skillCount": 2,
+      "revision": "1d7c97e9511cda1f0308ccbc310a2d24a3dd96f0",
+      "tree": "35ead5e680a039eae8add74c732bf716bd27677d",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "ab4d8b1643ea4f5b7eae4b2c634a4fe21dd8c8202de9ee72fdb3a31b3dbb7aa0",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 2
     },
     {
       "name": "skill-seekers",
+      "path": "plugins/marketplaces/skill-seekers",
+      "githubUrl": "https://github.com/yusufkaraaslan/Skill_Seekers",
       "displayName": "Skill Seekers",
-      "skillCount": 2
+      "skillCount": 2,
+      "revision": "5b5d8dfca263fa76e6daae9f292890b311ef36aa",
+      "tree": "1f8443c0b5d622b53894cdd216f4a2562ca7ef64",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "743556d5f7a0107e8279e0af87031bfd489759c945f6ba63b2fd109245b3dfd0",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 2
     },
     {
       "name": "automazeio-ccpm",
+      "path": "plugins/marketplaces/automazeio-ccpm",
+      "githubUrl": "https://github.com/automazeio/ccpm",
       "displayName": "Automazeio Ccpm",
-      "skillCount": 1
+      "skillCount": 1,
+      "revision": "7d7e4623bc6d4c0c9ba66ca6bfecd7e5261dc697",
+      "tree": "db7052ac18028aa6e1c73c6c1b534fd6dcbdeac3",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "1aa675432f0b460623c854358ba9459275d5e8f05af7d66cbb9d29a3046faa89",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 1
     },
     {
       "name": "blader-humanizer",
+      "path": "plugins/marketplaces/blader-humanizer",
+      "githubUrl": "https://github.com/blader/humanizer",
       "displayName": "Blader Humanizer",
-      "skillCount": 1
+      "skillCount": 1,
+      "revision": "225a6f39ac85f76ee48dbad772ea4abe4ed6c9d8",
+      "tree": "8ed37b6d1d98a0bbdb599d0399a4a2185eb8fa03",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "54a571c1ccc1f69272dbb1b06bf363a108a2b0c258255684f411357791af7187",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 1
     },
     {
       "name": "francyjg-agent-skill-creator",
+      "path": "plugins/marketplaces/francyjg-agent-skill-creator",
+      "githubUrl": "https://github.com/FrancyJGLisboa/agent-skills-platform",
       "displayName": "Francyjg Agent Skill Creator",
-      "skillCount": 1
+      "skillCount": 1,
+      "revision": "0c6900a0597622791d1daaafc1c19b2fead0e8d4",
+      "tree": "a01686b8f7d0c4764569eb92296c97c0fbd044ac",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "823c70fcd9c762873ac86c195ce4e2df80d6f8f24de792bd5658f72a18596060",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 1
     },
     {
       "name": "hardikpandya-stop-slop",
+      "path": "plugins/marketplaces/hardikpandya-stop-slop",
+      "githubUrl": "https://github.com/hardikpandya/stop-slop",
       "displayName": "Hardikpandya Stop Slop",
-      "skillCount": 1
+      "skillCount": 1,
+      "revision": "8da1f030185bdfe8471220585162991eaeb970e9",
+      "tree": "ad0fbeffcd18b385764221d4de1ba3f1a3abaf2b",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "3271cfb0f65de75806a078e48b17b6da56eab5f829eb6f02c61b6eba67912090",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 1
     },
     {
       "name": "kenryu42-safety-net",
+      "path": "plugins/marketplaces/kenryu42-safety-net",
+      "githubUrl": "https://github.com/kenryu42/cc-safety-net",
       "displayName": "Kenryu42 Safety Net",
-      "skillCount": 1
+      "skillCount": 1,
+      "revision": "f9f2e5a84ab60e81dc1a4ec12562e23c5f7760e0",
+      "tree": "bfbf76437008673ec311f9ad7fce6b489ac11f40",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "f7f425230be4fbf357e346a3cdd11f239683a2341603b389bfb8439bef7dec62",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 1
     },
     {
       "name": "mvanhorn-last30days-skill",
+      "path": "plugins/marketplaces/mvanhorn-last30days-skill",
+      "githubUrl": "https://github.com/mvanhorn/last30days-skill",
       "displayName": "Mvanhorn Last30days Skill",
-      "skillCount": 1
+      "skillCount": 1,
+      "revision": "267d50f7fcbab8a6457a93ad6ca15cbc199f633c",
+      "tree": "c2964132f3167cac73be03cf378bb74893492885",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "62b6f26ac66691e1ab73972454149415f833822683bb918b6b623eb4b8fbe50c",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 1
     },
     {
       "name": "sawyerhood-dev-browser",
+      "path": "plugins/marketplaces/sawyerhood-dev-browser",
+      "githubUrl": "https://github.com/SawyerHood/dev-browser",
       "displayName": "Sawyerhood Dev Browser",
-      "skillCount": 1
+      "skillCount": 1,
+      "revision": "a25e7672e199153b2f5b52a841a62436a28d925f",
+      "tree": "408583799040a9ddcb1a5f502d0c399538105c5f",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "bec6f0d58b0636469e7ffaec53dd8900e4c5ed2b3893fccffa0c97119f5fc016",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 1
     },
     {
       "name": "agentskills-agentskills",
+      "path": "plugins/marketplaces/agentskills-agentskills",
+      "githubUrl": "https://github.com/agentskills/agentskills",
       "displayName": "Agentskills Agentskills",
-      "skillCount": 0
+      "skillCount": 0,
+      "revision": "69ef37e9424c0a7ea9dd2293b559e43ec8176379",
+      "tree": "65e11c9faad14a022055ce0ff3ebf99f2b55142f",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 0
     },
     {
       "name": "brennercruvinel-CCPlugins",
+      "path": "plugins/marketplaces/brennercruvinel-CCPlugins",
+      "githubUrl": "https://github.com/brennercruvinel/CCPlugins",
       "displayName": "Brennercruvinel CCPlugins",
-      "skillCount": 0
+      "skillCount": 0,
+      "revision": "b02d67e33091abff7cef3c98465fc1fa5f96ba46",
+      "tree": "cbc41586aea5247d67535fbe608aa59d6fe938ae",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 0
     },
     {
       "name": "diet103-infrastructure",
+      "path": "plugins/marketplaces/diet103-infrastructure",
+      "githubUrl": "https://github.com/diet103/claude-code-infrastructure-showcase",
       "displayName": "Diet103 Infrastructure",
-      "skillCount": 0
+      "skillCount": 0,
+      "revision": "07f75ce3c301259e857343596e7883b8ce5a9f50",
+      "tree": "e23eeae49a97c6f81ba5f0e12c14282146d0915b",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 0
     },
     {
       "name": "disler-hooks-mastery",
+      "path": "plugins/marketplaces/disler-hooks-mastery",
+      "githubUrl": "https://github.com/disler/claude-code-hooks-mastery",
       "displayName": "Disler Hooks Mastery",
-      "skillCount": 0
+      "skillCount": 0,
+      "revision": "052ad1cbd5aeb1ec4a1def22012d1293c6225625",
+      "tree": "a43a57483fe2770589e54bab51028096a3b1d292",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 0
     },
     {
       "name": "hesreallyhim-awesome",
+      "path": "plugins/marketplaces/hesreallyhim-awesome",
+      "githubUrl": "https://github.com/hesreallyhim/awesome-claude-code",
       "displayName": "Hesreallyhim Awesome",
-      "skillCount": 0
+      "skillCount": 0,
+      "revision": "f8d0bd1ac22b0771e77100b8eddc6237d8e4614f",
+      "tree": "4fbe061143efa3027609c4b655df5752a099f258",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 0
     },
     {
       "name": "millionco-expect",
+      "path": "plugins/marketplaces/millionco-expect",
+      "githubUrl": "https://github.com/millionco/expect",
       "displayName": "Millionco Expect",
-      "skillCount": 0
+      "skillCount": 0,
+      "revision": "39e97500725783490136a8fc7040e6e4dbaafa44",
+      "tree": "45ab527b8139b158fe2d0a1587c044fa82773395",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 0
     },
     {
       "name": "mrgoonie-claudekit-skills",
+      "path": "plugins/marketplaces/mrgoonie-claudekit-skills",
+      "githubUrl": "https://github.com/mrgoonie/claudekit-skills",
       "displayName": "Mrgoonie Claudekit Skills",
-      "skillCount": 0
+      "skillCount": 0,
+      "revision": "80113d86bc4407f105af40a2c4ea58194f7c370a",
+      "tree": "5a3bebba81e42a69fb5d15d6544c1b28cf87ed2e",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 0
     },
     {
       "name": "piebald-lsps",
+      "path": "plugins/marketplaces/piebald-lsps",
+      "githubUrl": "https://github.com/Piebald-AI/claude-code-lsps",
       "displayName": "Piebald Lsps",
-      "skillCount": 0
+      "skillCount": 0,
+      "revision": "92afe66527c948082c1a751e484f6eaf20815b36",
+      "tree": "6755af760dcff8e0e80c71a46c955af9019ddd95",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 0
     },
     {
       "name": "quant-equity-research",
+      "path": "plugins/marketplaces/quant-equity-research",
+      "githubUrl": "https://github.com/quant-sentiment-ai/claude-equity-research",
       "displayName": "Quant Equity Research",
-      "skillCount": 0
+      "skillCount": 0,
+      "revision": "978e035084698ac6f67f9ae758f1d3019929b97d",
+      "tree": "9496bd8d679a65e407db4b0fb79fc06a8c2757a2",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 0
     },
     {
       "name": "quemsah-awesome",
+      "path": "plugins/marketplaces/quemsah-awesome",
+      "githubUrl": "https://github.com/quemsah/awesome-claude-plugins",
       "displayName": "Quemsah Awesome",
-      "skillCount": 0
+      "skillCount": 0,
+      "revision": "e63552fc0b2ccd3117f921467f2eac98a271264a",
+      "tree": "8a2c2a24461ebfc15013eda49fe54e68cf2336b6",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 0
     },
     {
       "name": "shanraisshan-best-practice",
+      "path": "plugins/marketplaces/shanraisshan-best-practice",
+      "githubUrl": "https://github.com/shanraisshan/claude-code-best-practice",
       "displayName": "Shanraisshan Best Practice",
-      "skillCount": 0
+      "skillCount": 0,
+      "revision": "63e587bf0ae13a344866c2e8f55cc0605d6a35d3",
+      "tree": "784ff8b345ce7b8944491389452b2ef8c6694c10",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 0
     },
     {
       "name": "superpowers-marketplace",
+      "path": "plugins/marketplaces/superpowers-marketplace",
+      "githubUrl": "https://github.com/obra/superpowers-marketplace",
       "displayName": "Superpowers Marketplace",
-      "skillCount": 0
+      "skillCount": 0,
+      "revision": "2cf27fa76667afa0ba724ad8141a6938a3834e32",
+      "tree": "38b4b278b9cce0f0a42bdd8dd6a41d2240c5afd0",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 0
     },
     {
       "name": "voltagent-agent-skills",
+      "path": "plugins/marketplaces/voltagent-agent-skills",
+      "githubUrl": "https://github.com/VoltAgent/awesome-agent-skills",
       "displayName": "Voltagent Agent Skills",
-      "skillCount": 0
+      "skillCount": 0,
+      "revision": "8e70c976525abe568c6d6698f555bf57218aac80",
+      "tree": "00baca2e7a6a9231e2c2159b6aa5391bc3e39604",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 0
     },
     {
       "name": "voltagent-subagents",
+      "path": "plugins/marketplaces/voltagent-subagents",
+      "githubUrl": "https://github.com/VoltAgent/awesome-claude-code-subagents",
       "displayName": "Voltagent Subagents",
-      "skillCount": 0
+      "skillCount": 0,
+      "revision": "721e9734670bfaf7283194e234ebb88e94c82dcd",
+      "tree": "fcfc46e1c9ed87dd1d5cd6d9bc9f20b3d6664d49",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "measuredAsOf": "2026-10-10",
+      "selectedFileCount": 0
     }
   ]
 }

@@ -29,7 +29,7 @@ Slash commands are shortcuts you invoke in Claude Code with `/<command-name>`. T
 | --------------- | ----------------------------------------------------------------------- | ----------------------- |
 | `health-check`  | Run diagnostics on toolkit configuration and status                     | `/health-check`         |
 | `backup-config` | Backup Claude Code configuration files                                  | `/backup-config create` |
-| `update-counts` | Sync all hardcoded counts across documentation with filesystem          | `/update-counts`        |
+| `update-counts` | Explicit public-source snapshot refresh; committed marketplace HEAD evidence and numeric docs | `/update-counts` |
 | `update-docs`   | Scan for recently modified files and update corresponding documentation | `/update-docs`          |
 | `changelog`     | Generate formatted changelog entry from git commits since last tag     | `/changelog v2.6.0`    |
 | `audit-docs`    | Scan documentation for staleness — broken links, outdated counts       | `/audit-docs all`       |
@@ -109,4 +109,4 @@ Slash commands are shortcuts you invoke in Claude Code with `/<command-name>`. T
 
 ---
 
-_30 commands across 8 categories. Type `/<name>` to invoke._
+_Base commands and router wrappers are separate populations in `counts.json`; this category guide is not the inventory. Type `/<name>` to invoke. See [Count pipeline](./COUNT-PIPELINE.md)._

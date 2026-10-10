@@ -30,13 +30,13 @@ Hooks are small scripts Claude Code runs automatically at fixed moments: when a 
 | `session-stop-summary.sh` + `session-start-context.sh` | Wrote a "last session" file after every turn and injected it into the next session, even in an unrelated project. `claude --continue` / `--resume` and auto memory do this properly. |
 | `statusline.sh` | Read fields that don't exist in the status line JSON, so it showed "unknown". Replaced by `statusline.js`. |
 | `gsd-*.js` (5 files) | GSD-specific hooks from the vendored GSD copy. Removed in v3.2.0 together with that copy. GSD itself (the `gsd-core` marketplace) has since been removed from the toolkit. |
-| Auto-commit/push inside `_pull-all-repos.sh` | The background pull used to `git add -u`, commit, and push `~/.claude` on its own. That could sweep in-progress edits into a public push. Counts and indexes now regenerate in the git pre-commit hook instead. |
+| Auto-commit/push inside `_pull-all-repos.sh` | The background pull used to `git add -u`, commit, and push `~/.claude` on its own. That could sweep in-progress edits into a public push. Counts and indexes are now explicit source-refresh operations; neither a background pull nor a commit regenerates them. |
 
 ## Git hooks for this repo (`scripts/hooks/`)
 
 Installed by `bash scripts/setup-hooks.sh` as thin wrappers, so updates arrive with a normal pull.
 
-- **pre-commit:** blocks staged marketplace clones or gitlinks; runs the public-safety gate (`local/public-safety-patterns.txt`, private); regenerates `INDEX.md`, `index/graph.json`, `skills/MASTER_INDEX.md`, and counts; blocks obvious secrets.
+- **pre-commit:** blocks staged marketplace clones or gitlinks; runs the public-safety gate (`local/public-safety-patterns.txt`, private); blocks obvious secrets and ignored private runtime files. No count/index generation, automatic staging, cross-repo writes, budget checks or tests. [Explicit source refresh](../docs/COUNT-PIPELINE.md) happens before publication, with visible failures and diff review.
 - **commit-msg:** conventional commit format.
 - **pre-push:** blocks non-fast-forward pushes to `main`/`master` and gitlinks or marketplace content in `HEAD`.
 

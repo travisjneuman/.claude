@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 };
 
 export default function MarketplacesPage() {
-  const { repos, totalSkills } = getMarketplaceStats();
+  const { repos } = getMarketplaceStats();
 
   return (
     <>
@@ -26,11 +26,12 @@ export default function MarketplacesPage() {
               Community Marketplace
             </p>
             <h1 className="text-4xl font-bold text-[var(--text-primary)] mb-4">
-              {totalSkills.toLocaleString()}+ Skills
+              {counts.marketplaceSkillsDisplay} Skills
             </h1>
             <p className="text-[var(--text-secondary)] max-w-xl mx-auto">
-              Curated from {repos.length} open-source repositories maintained by
-              the community.
+              Curated from {repos.length} open-source repositories: unique normalized skill bodies.
+              Snapshot as of {counts.asOf} at selected local revisions, including
+              pins, not latest upstream. Repo totals overlap; don&apos;t sum them.
             </p>
           </div>
 
@@ -39,8 +40,7 @@ export default function MarketplacesPage() {
           {repos.length === 0 && (
             <div className="text-center py-16">
               <p className="text-[var(--text-muted)]">
-                Marketplace data is generated at build time from the
-                plugins/marketplaces/ directory.
+                Marketplace data comes from the canonical public count snapshot.
               </p>
             </div>
           )}

@@ -62,7 +62,7 @@ This means:
 3. Enforces `no_push` on every marketplace repo
 4. Fixes detached HEAD states automatically
 5. Pulls custom project directories (if configured via `.env.local`)
-6. Updates documentation counts if repos changed
+6. Leaves public count/index snapshots unchanged; publication uses the [explicit count pipeline](./COUNT-PIPELINE.md).
 
 ---
 

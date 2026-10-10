@@ -75,16 +75,16 @@ Already set up? Jump to the section you need below.
 
 | Component           | Count  | Location                       |
 | ------------------- | ------ | ------------------------------ |
-| Local skills        | 119    | `skills/`                      |
-| Agents              | 67     | `agents/`                      |
-| Commands            | 30     | `commands/`                    |
-| Rules files         | 30     | `rules/`                       |
+| Local skills        | 180    | `skills/`                      |
+| Agents              | 10     | `agents/`                      |
+| Commands            | 29     | `commands/`                    |
+| Rules files         | 10     | `rules/`                       |
 | Templates           | 17     | `templates/`                   |
-| Hooks               | 8      | `hooks/`                       |
-| MCP servers         | 12     | `.mcp.json`                    |
-| Marketplace repos   | 101    | `plugins/marketplaces/`        |
-| Marketplace skills  | 7,400+ | (across all marketplace repos) |
-| **Total git repos** | **109+** | 1 parent + 108 marketplace clones plus configured project repos |
+| Hooks               | 7      | `hooks/`                       |
+| Installed MCP entries (documented)         | 0     | `docs/MCP-SERVERS.md` (installed section; not optional configurations)                    |
+| Marketplace repos   | 81    | `.gitmodules` manifest entries (not installed clones)        |
+| Marketplace skills  | 11,000+ | nonempty normalized unique manifest skill bodies; display floored to 100 |
+| **Total git repos** | **Not measured** | Host/device clone and configured-project totals are not measured; parent + manifest entries is a different population |
 
 ---
 

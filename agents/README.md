@@ -25,4 +25,4 @@ Core agents inherit the session's model (no per-agent model pins).
 
 ## Changing the core set
 
-Promote or demote by moving a file between `agents/<name>.md` and `skills/agent-<name>/SKILL.md` (the conversion is mechanical: same prompt body, `context: fork`, `agent: general-purpose`). The weekly tuning job does this from real usage counts; the pre-commit budget check (`scripts/check-budgets.mjs`) keeps agent descriptions under their limit.
+Promote or demote by moving a file between `agents/<name>.md` and `skills/agent-<name>/SKILL.md` (the conversion is mechanical: same prompt body, `context: fork`, `agent: general-purpose`). The separately configured weekly tuning job can do this from real usage counts. Pre-commit runs safety gates only: no budget tests, generation or automatic staging. Review public source changes, then explicitly refresh the index and [count snapshot](../docs/COUNT-PIPELINE.md) when publication is authorized.

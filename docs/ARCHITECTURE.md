@@ -107,11 +107,11 @@ Agents run independently and return results to the caller.
 Hooks in `~/.claude/hooks/` are bash scripts triggered by Claude Code lifecycle events:
 
 ```
-SessionStart  →  Pull repos, load previous session context
-UserPromptSubmit  →  Inject git branch/status into prompt
-PreToolUse (Bash)  →  Block dangerous commands, update counts before commit
-PostToolUse (Write|Edit)  →  Auto-format modified files
-Stop  →  Save session summary for next session
+SessionStart  →  Throttled background pull and repository health banner
+PreToolUse  →  Public safety guard plus optional private guard
+PostToolUse (Write|Edit)  →  Secret scan
+SessionEnd / Stop  →  Configured background maintenance (no count generation)
+StatusLine  →  Client-side status display
 ```
 
 Hooks are configured in `settings.json` and execute cross-platform (macOS, Linux, Windows via Git Bash).
@@ -144,7 +144,8 @@ MCP (Model Context Protocol) servers add tools beyond Claude's built-in capabili
    │  └── PostToolUse: secret-scan.js on Write/Edit
    │
 5. git commit in ~/.claude
-   │  └── pre-commit: public-safety gate, index + counts regenerated
+   │  └── pre-commit: marketplace/gitlink, privacy, credential and runtime safety gates
+   │      (no generation/tests/staging; publication is an explicit source refresh)
    │
 6. Session ends
    └── session-end-repo-health.sh pushes clean finished work in owned repos
@@ -163,14 +164,14 @@ The showcase website at `claude.travisjneuman.com` is a Next.js static export th
     ├── skills/*/SKILL.md  →  getSkills()      →  /skills page
     ├── agents/*.md        →  getAgents()      →  /agents page
     ├── commands/*.md      →  getCommands()    →  /commands page
-    ├── plugins/marketplaces/  →  getMarketplaceStats()  →  /marketplaces page
-    └── counts.json        →  API data         →  stats display
+    ├── marketplace-counts.json → getMarketplaceStats() → /marketplaces page
+    └── counts.json (counts + public identities) → collectors/getCounts() → display
 
     Build: next build → static HTML/CSS/JS
     Deploy: git push → Cloudflare Pages auto-deploy
 ```
 
-Each data function parses markdown frontmatter with `gray-matter`, extracts content, and returns typed objects for React components.
+Content collectors parse only the canonical public identity lists' real source files and return typed objects for existing React components. Counts and manifest marketplace membership/totals come from one explicit source refresh, not live installed clones; selected revisions and dates are snapshots, not latest guarantees. See [Count pipeline](./COUNT-PIPELINE.md).
 
 ---
 
@@ -219,7 +220,7 @@ plugins/
     ├── anthropic-agent-skills/
     ├── claude-code-plugins/
     ├── taches-cc-resources/
-    └── ... (109 manifest-managed marketplace clones)
+    └── ... (81 manifest entries; clones are local-only)
 ```
 
 Plugins can contribute commands, agents, skills, and hooks. They're registered in `settings.json` under `enabledPlugins`.

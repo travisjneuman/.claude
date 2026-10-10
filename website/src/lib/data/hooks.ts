@@ -1,5 +1,5 @@
-import fs from "fs";
 import path from "path";
+import { getPublicCounts, readPublicSource } from "./snapshot";
 import { remark } from "remark";
 import remarkHtml from "remark-html";
 
@@ -13,19 +13,17 @@ export interface Hook {
   htmlContent: string;
 }
 
-// Keyed by filename. Only hooks listed here are shown: they are the ones wired
-// in settings.json (all through the run-hook.js dispatcher). Private hooks in
-// the gitignored local/hooks/ layer are not in the public repo and never
-// appear here.
+// Descriptions supplement the canonical public wiring inventory. Membership,
+// events and matchers come from counts.json, never this presentation map.
 const HOOK_METADATA: Record<
   string,
   { event: string; matcher: string; description: string }
 > = {
-  "run-hook.js": {
-    event: "Dispatcher",
-    matcher: "all hooks",
+  "daily-maintenance.js": {
+    event: "Stop",
+    matcher: "",
     description:
-      "Cross-platform runner that every hook entry in settings.json goes through. Resolves the hook from the public hooks/ directory first, then the private local/hooks/ layer, picks the interpreter by extension (Node, Python, or Bash), and passes Claude Code's JSON through. A missing hook exits silently.",
+      "At most daily, schedules a background usage rollup and the configured repository maintenance sweep. Public output contains no transcripts; private runtime data is not part of the toolkit inventory.",
   },
   "session-start-pull.sh": {
     event: "SessionStart",
@@ -69,40 +67,31 @@ const HOOK_METADATA: Record<
 const HOOK_EXTENSIONS: Record<string, string> = {
   ".sh": "bash",
   ".js": "javascript",
+  ".py": "python",
 };
 
-// Lifecycle order: dispatcher, session start, tool use, session end, status bar
+// Lifecycle order: session start, tool use, session end, stop, status bar
 const EVENT_ORDER: Record<string, number> = {
-  Dispatcher: 0,
   SessionStart: 1,
   PreToolUse: 2,
   PostToolUse: 3,
   SessionEnd: 4,
-  StatusLine: 5,
+  Stop: 5,
+  StatusLine: 6,
 };
 
 export function getHooks(): Hook[] {
-  const hooksDir = path.resolve(process.cwd(), "..", "hooks");
-
-  if (!fs.existsSync(hooksDir)) {
-    return [];
-  }
-
-  const files = fs
-    .readdirSync(hooksDir)
-    .filter((f) => path.extname(f) in HOOK_EXTENSIONS)
-    .sort();
   const hooks: Hook[] = [];
-
-  for (const file of files) {
-    const meta = HOOK_METADATA[file];
-
-    // Skip hooks without metadata (not wired in settings.json)
-    if (!meta) continue;
-
+  for (const identity of getPublicCounts().inventory.hooks) {
+    const file = path.posix.basename(identity.file);
+    const meta = {
+      description: HOOK_METADATA[file]?.description || "Public hook wired in the toolkit settings.",
+      event: identity.events.join(", "),
+      matcher: identity.matchers.join("; "),
+    };
     const ext = path.extname(file);
     const slug = file.slice(0, -ext.length);
-    const raw = fs.readFileSync(path.join(hooksDir, file), "utf-8");
+    const raw = readPublicSource(identity.file);
 
     // Build markdown content from the script with syntax highlighting
     const markdownContent = [
