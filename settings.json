@@ -5,7 +5,8 @@
     "CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS": "12",
     "CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH": "1",
     "DISABLE_ERROR_REPORTING": "1",
-    "CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY": "1"
+    "CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY": "1",
+    "COMPUTER_USE_CODEX_LAUNCHER_PATH": "/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS/codex"
   },
   "attribution": {
     "commit": "",
@@ -391,7 +392,8 @@
     "pyright-lsp@claude-plugins-official": true,
     "swift-lsp@claude-plugins-official": true,
     "brag@brag": true,
-    "context7@claude-plugins-official": true
+    "context7@claude-plugins-official": true,
+    "claude-codex-computer-use@songkeys": true
   },
   "extraKnownMarketplaces": {
     "claude-plugins-official": {
@@ -404,6 +406,12 @@
       "source": {
         "source": "github",
         "repo": "latent-spaces/brag"
+      }
+    },
+    "songkeys": {
+      "source": {
+        "source": "github",
+        "repo": "songkeys/claude-codex-computer-use"
       }
     }
   },
