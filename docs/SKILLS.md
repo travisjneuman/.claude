@@ -42,10 +42,10 @@ Skills auto-activate based on conversation context or can be explicitly invoked.
 | ----------------------- | ----------------------------- | ------------------------ |
 | `codebase-documenter`   | Generate documentation        | README, docs discussions |
 | `tech-debt-analyzer`    | Code health analysis          | Audits, refactoring      |
-| `test-specialist`       | Testing guidance              | Test writing, debugging  |
+| `test-specialist`       | Testing guidance              | Only when the user explicitly asks for tests |
 | `frontend-enhancer`     | Frontend patterns             | UI improvements          |
 | `seo-analytics-auditor` | SEO analysis                  | Performance audits       |
-| `document-skills`       | Office docs (docx, xlsx, pdf) | Document creation        |
+| `anthropic-skills:docx` / `pdf` / `pptx` / `xlsx` | Office docs (claude.ai-synced; toolkit copies removed in v3.2.0) | Document creation |
 
 ### Stack-Specific Skills
 

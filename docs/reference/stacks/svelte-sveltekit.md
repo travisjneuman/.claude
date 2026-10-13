@@ -24,7 +24,7 @@ npm run check                  # svelte-check (types + a11y + warnings)
 npm run lint                   # ESLint
 npm run format                 # Prettier
 
-# Verify before committing
+# Only when the user asks for checks (default: validate by review)
 npm run check && npm run test && npm run lint
 ```
 

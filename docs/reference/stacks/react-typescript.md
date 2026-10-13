@@ -19,7 +19,7 @@ npx @biomejs/biome check .        # Lint
 npx @biomejs/biome format .       # Format
 npx @biomejs/biome check --fix .  # Lint + fix
 
-# Verify before committing
+# Only when the user asks for checks (default: validate by review)
 npm run test && npm run type-check
 ```
 
@@ -144,6 +144,8 @@ src/
 ---
 
 ## Testing Checklist
+
+Use this list only when the user explicitly asks for these checks; otherwise validate by reviewing the diff and the code it touches.
 
 - [ ] `npm run test` passes
 - [ ] `npm run type-check` passes

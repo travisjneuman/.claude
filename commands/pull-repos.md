@@ -100,7 +100,7 @@ The script uses both location and remote ownership:
 | `plugins/marketplaces/*` | ✅ Yes | External upstream references |
 | Custom Travis-owned repos | ❌ No | Commit/push policy applies |
 | Custom non-Travis repos | ✅ Yes | External/no-push policy applies |
-| `.openclaw` | ✅ Yes | Deprecated local-only exception |
+| `.openclaw` | ✅ Yes | Archived and removed from every host (2026-09-30); the script still forces `no_push` on any leftover checkout |
 
 **Key points:**
 

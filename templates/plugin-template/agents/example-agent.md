@@ -7,7 +7,7 @@ tools:
   - Read
   - Grep
   - Glob
-model: sonnet
+# no model: line; agents inherit the session model from config
 ---
 
 # Example Agent

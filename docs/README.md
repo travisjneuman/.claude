@@ -1,73 +1,47 @@
 ---
 name: Documentation Index
-description: Navigation hub for all 23 guides covering setup, workflows, architecture, and operations.
+description: Front door for the toolkit's guides and on-demand reference docs, routed by need and keyword.
 category: reference
 ---
 
 # Claude Code Toolkit Documentation
 
-**Last Updated:** February 2026 (v2.10.1)
-**Maintainer:** Travis J. Neuman
-**Purpose:** Portable, optimized Claude Code configuration for any project
+Front door for every guide in `docs/` and the on-demand reference docs in `docs/reference/`.
+Up: [README](../README.md) · Not here: skills, agents, commands, and rules are found through the generated [`INDEX.md`](../INDEX.md) (grep it, or use the `toolkit-router` skill).
+
+**Last Updated:** October 2026 · **Version history:** [CHANGELOG.md](../CHANGELOG.md)
 
 ---
 
-## Start Here
+## Routes
 
-New to this toolkit? Follow this path:
+| Need / keywords | Open | Notes |
+| --- | --- | --- |
+| install, first-time setup, clone | [SETUP-GUIDE.md](./SETUP-GUIDE.md) | Start here if new |
+| new machine, multi-device, `.env.local` | [NEW-DEVICE-SETUP.md](./NEW-DEVICE-SETUP.md) | |
+| folder layout, what lives where | [FOLDER-STRUCTURE.md](./FOLDER-STRUCTURE.md) | |
+| settings.json, permissions, hooks config | [CONFIGURATION.md](./CONFIGURATION.md) | Hook behavior: [hooks/README.md](../hooks/README.md) |
+| architecture, how components interact | [ARCHITECTURE.md](./ARCHITECTURE.md) | |
+| routing, which skill or agent for a prompt | [DOMAIN-ROUTING.md](./DOMAIN-ROUTING.md) | Live index: [`INDEX.md`](../INDEX.md) |
+| slash commands, `/name` | [COMMANDS.md](./COMMANDS.md) | |
+| skills, create or customize a skill | [SKILLS.md](./SKILLS.md), [SKILL-CREATION-GUIDE.md](./SKILL-CREATION-GUIDE.md) | Full list: [skills/MASTER_INDEX.md](../skills/MASTER_INDEX.md) |
+| agent teams, parallel sessions | [AGENT-TEAMS.md](./AGENT-TEAMS.md) | Core agents: [agents/README.md](../agents/README.md) |
+| workflow, task management, context hygiene | [WORKFLOW-GUIDE.md](./WORKFLOW-GUIDE.md), [workflow-automation.md](./workflow-automation.md) | |
+| marketplace, community skills, plugins | [MARKETPLACE-GUIDE.md](./MARKETPLACE-GUIDE.md), [PLUGIN-MANAGEMENT.md](./PLUGIN-MANAGEMENT.md) | |
+| MCP servers, token cost | [MCP-SERVERS.md](./MCP-SERVERS.md) | None configured by default |
+| counts, public numbers, index/count refresh | [COUNT-PIPELINE.md](./COUNT-PIPELINE.md) | Scripts: [scripts/README.md](../scripts/README.md) |
+| maintenance, cleanup, repo pulls | [MAINTENANCE.md](./MAINTENANCE.md) | |
+| backup, recovery | [BACKUP-STRATEGIES.md](./BACKUP-STRATEGIES.md) | |
+| security, gitignore policy, public exposure | [SECURITY.md](./SECURITY.md) | |
+| terms, definitions | [GLOSSARY.md](./GLOSSARY.md), [FAQ.md](./FAQ.md) | |
+| stack guide (React, Next/Nest, Vue, Svelte, Python, Django/FastAPI, Go, Rust, Flutter, Expo) | [`reference/stacks/`](./reference/stacks/) | 10 docs, one per stack |
+| checklist (API, database, security, performance, monitoring, mobile deploy, static site, UI change, automation, verification) | [`reference/checklists/`](./reference/checklists/) | 10 docs |
+| workflow reference (action policy, agent teams, context, deploy/CI, post-change docs, research) | [`reference/workflows/`](./reference/workflows/) | 6 docs |
+| tooling (external repos, git hooks, MCP, troubleshooting) | [`reference/tooling/`](./reference/tooling/) | 4 docs |
+| external links, community resources | [RESOURCES.md](./RESOURCES.md), [CLAUDE-CODE-RESOURCES.md](./CLAUDE-CODE-RESOURCES.md), [REFERENCE-URLS.md](./REFERENCE-URLS.md) | |
+| model-specific notes (Opus 4.6, Feb 2026) | [OPUS-4-6-GUIDE.md](./OPUS-4-6-GUIDE.md) | Dated guide |
 
-1. **[SETUP-GUIDE.md](./SETUP-GUIDE.md)** -- Deploy to your machine (or a new device)
-2. **[FOLDER-STRUCTURE.md](./FOLDER-STRUCTURE.md)** -- Understand what lives where
-3. **[CONFIGURATION.md](./CONFIGURATION.md)** -- Tweak settings, permissions, hooks
-4. **[WORKFLOW-GUIDE.md](./WORKFLOW-GUIDE.md)** -- How to work effectively with Claude Code
-
-Already set up? Jump to the section you need below.
-
----
-
-## Documentation Map
-
-### Core References
-
-| Document                                     | What it covers                              |
-| -------------------------------------------- | ------------------------------------------- |
-| [FOLDER-STRUCTURE.md](./FOLDER-STRUCTURE.md) | Complete file/folder map                    |
-| [CONFIGURATION.md](./CONFIGURATION.md)       | Settings, permissions, hooks, env files     |
-| [SKILLS.md](./SKILLS.md)                     | Skills system: creation, activation, format |
-| [SKILL-CREATION-GUIDE.md](./SKILL-CREATION-GUIDE.md) | Step-by-step guide for adding a new local skill |
-| [MCP-SERVERS.md](./MCP-SERVERS.md)           | Optional MCP servers: when to add, token cost |
-| [ARCHITECTURE.md](./ARCHITECTURE.md)         | How all components interact as a system     |
-| [GLOSSARY.md](./GLOSSARY.md)                 | Definitions of all toolkit terms            |
-| [FAQ.md](./FAQ.md)                           | Common questions answered                   |
-
-### Workflows and Guides
-
-| Document                                           | What it covers                              |
-| -------------------------------------------------- | ------------------------------------------- |
-| [WORKFLOW-GUIDE.md](./WORKFLOW-GUIDE.md)           | Development workflow patterns and standards |
-| [workflow-automation.md](./workflow-automation.md) | Git hooks, templates, task enforcement      |
-| [DOMAIN-ROUTING.md](./DOMAIN-ROUTING.md)           | How prompts route to skills/agents          |
-| [AGENT-TEAMS.md](./AGENT-TEAMS.md)                 | Agent teams: parallel sessions, composition |
-
-### Setup and Operations
-
-| Document                                       | What it covers                             |
-| ---------------------------------------------- | ------------------------------------------ |
-| [SETUP-GUIDE.md](./SETUP-GUIDE.md)             | Installation, cross-platform sync          |
-| [NEW-DEVICE-SETUP.md](./NEW-DEVICE-SETUP.md)   | Cloning to a new machine, marketplace init |
-| [MAINTENANCE.md](./MAINTENANCE.md)             | Cleanup, repo pulls, space audits          |
-| [BACKUP-STRATEGIES.md](./BACKUP-STRATEGIES.md) | Backup procedures and recovery             |
-| [SECURITY.md](./SECURITY.md)                   | Security audit decisions, gitignore policy |
-
-### Ecosystem
-
-| Document                                               | What it covers                      |
-| ------------------------------------------------------ | ----------------------------------- |
-| [MARKETPLACE-GUIDE.md](./MARKETPLACE-GUIDE.md)         | 81 marketplace repos, 11,000+ skills |
-| [PLUGIN-MANAGEMENT.md](./PLUGIN-MANAGEMENT.md)         | Plugin lifecycle, customization     |
-| [AUTO-CLAUDE-GUIDE.md](./AUTO-CLAUDE-GUIDE.md)         | Autonomous multi-agent coding       |
-| [CLAUDE-CODE-RESOURCES.md](./CLAUDE-CODE-RESOURCES.md) | Community resources and tips        |
-| [RESOURCES.md](./RESOURCES.md)                         | External links and references       |
+`count-inputs/` holds dated count-source snapshots consumed by the [count pipeline](./COUNT-PIPELINE.md); it is data, not a guide. The Auto-Claude guide was removed with that workflow; older docs that still mention it are historical.
 
 ---
 
@@ -95,7 +69,7 @@ Already set up? Jump to the section you need below.
 | Sync all repos           | `~/.claude/_pull-all-repos.sh` or `/pull-repos` |
 | Add a new skill          | Create folder in `skills/`, add `SKILL.md`      |
 | Add a slash command      | Create `.md` file in `commands/`                |
-| Add MCP server           | Edit `~/.claude/.mcp.json`                      |
+| Add MCP server           | `claude mcp add` (see `MCP-SERVERS.md`)         |
 | Change permissions       | Edit `settings.json` or use `/permissions`      |
 | Run diagnostics          | `/health-check` or `/bootstrap`                 |
 | Find a marketplace skill | `/discover-skills` or `/skill-finder`           |

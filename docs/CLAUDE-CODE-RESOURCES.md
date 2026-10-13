@@ -40,7 +40,7 @@ Quick reference for Claude Code optimization.
 name: agent-name
 description: When to use
 tools: [Read, Write, Edit, Bash, Glob, Grep]
-model: sonnet # sonnet, opus, haiku, inherit
+# model: optional (sonnet, opus, haiku, inherit); this toolkit omits it so agents inherit the session model
 ---
 System prompt here...
 ```
@@ -273,7 +273,6 @@ This installation's `~/.claude/docs/` directory contains:
 | -------------------------- | ------------------------------------- |
 | `WORKFLOW-GUIDE.md`        | End-to-end workflow patterns          |
 | `AGENT-TEAMS.md`           | Agent Teams comprehensive guide       |
-| `AUTO-CLAUDE-GUIDE.md`     | Autonomous multi-agent system guide   |
 | `MCP-SERVERS.md`           | MCP server capabilities and details   |
 | `RESOURCES.md`             | External resources and learning links |
 | `CLAUDE-CODE-RESOURCES.md` | This file -- quick reference          |

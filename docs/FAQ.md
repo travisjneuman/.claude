@@ -122,11 +122,9 @@ This is an experimental feature requiring `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=
 
 Use subagents when you just need results back. Use Agent Teams when teammates need to communicate with each other or the lead.
 
-### When should I use Agent Teams vs Auto-Claude?
+### What happened to Auto-Claude?
 
-**Agent Teams** are best for research, review, and investigation — work where multiple perspectives add value and results feed into human decisions.
-
-**Auto-Claude** is best for autonomous feature implementation — it creates an isolated git worktree, implements the feature with QA validation, and returns completed code.
+It was removed from the toolkit. It worked in an isolated git worktree, which conflicts with the canonical-checkout rule (no worktrees, clones, or feature branches). Implement directly in the existing checkout, delegating independent pieces to subagents; use **Agent Teams** (off by default) for research, review, and investigation where teammates need to talk to each other.
 
 ---
 
@@ -158,7 +156,7 @@ Core skills and agents are matched from their descriptions, which are always in 
 
 ### Why do counts sometimes drift?
 
-Counts are hardcoded in multiple places (README.md, CLAUDE.md, plugin.json, docs, website components). When skills or repos are added/removed, not all locations get updated. The `update-counts.sh` script reconciles counts across all known locations, and the `pre-commit-counts.sh` hook runs it automatically before every git commit.
+Counts are hardcoded in multiple places (README.md, CLAUDE.md, plugin.json, docs, website components). When skills or repos are added/removed, not all locations get updated. The `update-counts.sh` script reconciles counts across all known locations when you run it; no hook runs it automatically (the `pre-commit-counts.sh` hook was removed, and pre-commit now checks publication safety only). See [COUNT-PIPELINE.md](./COUNT-PIPELINE.md).
 
 ### What are the current accurate counts?
 

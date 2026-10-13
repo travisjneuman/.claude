@@ -2,23 +2,25 @@
 
 **When to use:** After completing any task to verify success before marking complete.
 
+Verification here is review-based (toolkit zero-testing rule in `~/.claude/CLAUDE.md`): re-read the request, read the whole diff and the code it touches, reason through inputs, edge cases, error paths, and callers, and use the output the work itself already produced. Tests, type checks, linters, and builds run only when the user explicitly asks for that scope.
+
 Based on the KERNEL "Easy to verify" principle - explicit success criteria reduce unwanted outputs by 91%.
 
 ---
 
 ## Quick Verification
 
-- [ ] Primary goal achieved
-- [ ] No errors in console/logs
-- [ ] Builds successfully
+- [ ] Primary goal achieved (re-read the request against the diff)
+- [ ] No errors in the output the work itself produced (command, deploy status, logs)
+- [ ] Build result recorded only if the work or the user ran one; otherwise "not run"
 
 ---
 
 ## Code Verification
 
-- [ ] Tests pass: `npm run test` / `pytest` / `go test ./...`
-- [ ] Type check passes: `npm run type-check` / `mypy src/`
-- [ ] Linter passes: `npm run lint` / `ruff check .`
+- [ ] Whole diff read, plus the callers and code it touches
+- [ ] Types reasoned through (no `any`, no unchecked casts) by reading, not by running a checker
+- [ ] Only when the user explicitly asked for that scope: tests (`npm run test` / `pytest` / `go test ./...`), type check (`npm run type-check` / `mypy src/`), linter (`npm run lint` / `ruff check .`)
 
 ---
 
@@ -88,7 +90,7 @@ Add task-specific verification items here:
 - [ ] User can log in with valid credentials
 - [ ] Invalid credentials show error message
 - [ ] Session persists across page refresh
-- [ ] Tests pass: `npm run test:auth`
+- [ ] Tests pass: `npm run test:auth` (only when the user asked for tests)
 ```
 
 ### In Skills
@@ -119,4 +121,4 @@ From research:
 
 ---
 
-_Verify before marking complete. Every time._
+_Verify by review before marking complete. Every time._

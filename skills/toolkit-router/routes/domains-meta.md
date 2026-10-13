@@ -51,7 +51,6 @@ For creating skills from external documentation:
 | ------------------- | -------------------------------------------------------------------- | ------------------------------ |
 | Official Anthropic  | anthropic-agent-skills, claude-code-plugins, claude-plugins-official  | Core patterns and plugins      |
 | Skill creation      | skill-seekers, francyjg-agent-skill-creator, skillcreatorai-agent-skills (47) | Auto-generate skills from docs |
-| Autonomous coding   | auto-claude                                                           | Multi-agent dev with QA        |
 | Project management  | taches-cc-resources                                                   | Meta-prompting, todos, plans   |
 | Hooks/Reference     | disler-hooks-mastery, agentskills-agentskills (11.4K stars), shanraisshan-best-practice (6K stars) | Hook types, standards, reference |
 | Memory/Context      | claude-mem                                                            | Persistent memory, semantic search |

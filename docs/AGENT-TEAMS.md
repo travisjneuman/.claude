@@ -47,19 +47,15 @@ See `docs/reference/workflows/agent-teams.md` for the full decision framework.
 
 ## Setup
 
-### Automatic (Already Done)
+### Off by Default
 
-Agent Teams are enabled globally via `settings.json`:
+Agent Teams are not enabled in the tracked `settings.json` (removed in v3.6.0: with it on, a named subagent could launch as a full teammate session unasked). To use teams, start that one session with the variable set:
 
-```json
-{
-  "env": {
-    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
-  }
-}
+```bash
+CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1 claude
 ```
 
-This setting syncs across all machines via the `~/.claude` repo.
+Without it, use ordinary subagents.
 
 ### Display Mode
 
@@ -188,7 +184,7 @@ Have each reviewer report findings with severity ratings.
 Create an agent team for building [feature]:
 - Architect teammate: design the approach, identify files to modify, plan dependencies
 - Implementer teammate: write the code following the architect's plan
-- Test writer teammate: write tests for the implementation
+- Reviewer teammate: review the implementation diff against the request (a test writer only when the user asks for tests)
 Require plan approval from the architect before implementation begins.
 ```
 
@@ -273,7 +269,7 @@ The shared task list coordinates work via TaskCreate, TaskUpdate, and TaskList. 
 Create these tasks for the team:
 1. "Design API schema" - assign to architect
 2. "Implement endpoints" - blocked by task 1, assign to backend-dev
-3. "Write integration tests" - blocked by task 2, assign to tester
+3. "Review the endpoints diff" - blocked by task 2, assign to reviewer
 ```
 
 The lead calls TaskCreate for each, then TaskUpdate to set dependencies and owners.

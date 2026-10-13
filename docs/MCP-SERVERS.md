@@ -711,4 +711,4 @@ User-scope MCP servers live in `~/.claude.json` (`mcpServers`). When you add ser
 
 - [CONFIGURATION.md](./CONFIGURATION.md) - Settings including enableAllProjectMcpServers
 - [SETUP-GUIDE.md](./SETUP-GUIDE.md) - Installing on new machines
-- [../CLAUDE-CODE-RESOURCES.md](../CLAUDE-CODE-RESOURCES.md) - More MCP server options
+- [CLAUDE-CODE-RESOURCES.md](./CLAUDE-CODE-RESOURCES.md) - More MCP server options

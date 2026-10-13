@@ -11,6 +11,8 @@ disable-model-invocation: true
 
 Detects the project's test framework, runs tests at the specified scope, analyzes failures, reports coverage, and suggests missing test coverage.
 
+Runs only when the user invokes it for that scope. The toolkit default is no testing: other work is validated by reviewing the diff and the code it touches.
+
 ---
 
 ## Execution Flow
@@ -35,8 +37,10 @@ Detects the project's test framework, runs tests at the specified scope, analyze
 | Pytest                 | `pytest`                       | `--cov`               |
 | Go test                | `go test ./...`                | `-cover -coverprofile`|
 | Cargo test             | `cargo test`                   | `cargo tarpaulin`     |
-| Cypress                | `npx cypress run`              | (via istanbul)        |
-| Playwright             | `npx playwright test`          | (via istanbul)        |
+| Cypress                | `npx --no cypress run`         | (via istanbul)        |
+| Playwright             | `npx --no playwright test`     | (via istanbul)        |
+
+Browser runners use only the copy the project already has (`npx --no`); never let `npx` fetch Playwright, Cypress, or browser binaries.
 
 ---
 
@@ -79,11 +83,11 @@ cargo test --test '*'
 #### E2E Tests
 
 ```bash
-# Playwright
-npx playwright test
+# Playwright (project's installed copy only)
+npx --no playwright test
 
-# Cypress
-npx cypress run
+# Cypress (project's installed copy only)
+npx --no cypress run
 
 # Python (selenium/playwright)
 pytest tests/e2e/ -v

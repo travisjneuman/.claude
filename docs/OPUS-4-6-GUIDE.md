@@ -6,6 +6,8 @@ category: reference
 
 # Opus 4.6 Feature Guide
 
+> Superseded by [`../CLAUDE.md`](../CLAUDE.md) and [`../CHANGELOG.md`](../CHANGELOG.md) (2026-10-12): historical v2.10.1 snapshot. Models and effort now come from session config, never from instructions or agent pins (`CLAUDE.md` Workflow; CHANGELOG 3.2.0 dropped per-agent model pins), the `CLAUDE.md` Identity section it cites no longer exists, Agent Teams are off by default (CHANGELOG 3.6), and tests run only on explicit request. Do not follow its Model Selection Guide or `model: opus` advice.
+
 How this toolkit leverages Claude Opus 4.6 capabilities released February 2026.
 
 **Last Updated:** February 2026 (v2.10.1)

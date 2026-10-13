@@ -5,6 +5,8 @@ description: Professional video production from planning to delivery. Use when c
 
 # Video Production
 
+> Rendering, encoding, and audio or image synthesis run only on the owner's designated media host when the private layer defines one, in a dated work folder outside any repository; on other hosts, plan and write source only. Source logos are copy-only.
+
 Comprehensive guide for professional video production across all platforms.
 
 ## Production Phases

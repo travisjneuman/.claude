@@ -32,8 +32,8 @@
 | --------------- | ------------------------ |
 | `npm run dev`   | Start development server |
 | `npm run build` | Production build         |
-| `npm run test`  | Run tests                |
-| `npm run lint`  | Lint code                |
+| `npm run test`  | Run tests (only when the user asks) |
+| `npm run lint`  | Lint code (only when the user asks) |
 
 ---
 

@@ -156,14 +156,13 @@ The router calculates complexity to determine workflow:
 | Score              | Workflow                                    |
 | ------------------ | ------------------------------------------- |
 | >= 5               | **Phased planning** (multi-phase work)      |
-| 3-4 (well-defined) | **Auto-Claude** (autonomous implementation) |
+| 3-4 (well-defined) | **Direct execution** (delegate independent pieces to subagents) |
 | 3-4 (exploratory)  | **EnterPlanMode** (planning first)          |
-| 1-2                | **EnterPlanMode** (planning first)          |
-| <= 0               | **Direct execution**                        |
+| <= 2               | **Direct execution** (plan mode only if genuinely ambiguous) |
 
 **Note on 3-4 complexity:**
 
-- Well-defined feature + established codebase → Suggest **Auto-Claude**
+- Well-defined feature + established codebase → **Execute directly** (Auto-Claude was removed from the toolkit)
 - Exploratory/unclear requirements → Use **EnterPlanMode**
 - User choice always honored
 
@@ -224,16 +223,16 @@ Workflow: Direct execution
 Resources: None needed (simple fix)
 ```
 
-### Example 2: New Feature (Auto-Claude)
+### Example 2: New Feature (Direct, well-defined)
 
 ```
 User: Add user authentication with JWT tokens
 
 Detected: Development/backend
 Complexity: 4 (multiple files, clear spec, established codebase)
-Workflow: Auto-Claude (autonomous implementation)
-Resources: /auto-claude suggestion, api-design skill
-Action: Suggest autonomous implementation with QA validation
+Workflow: Direct execution
+Resources: authentication-patterns and api-design skills
+Action: Implement in the existing checkout, validate by reviewing the diff
 ```
 
 ### Example 2b: New Feature (Phased Planning)
@@ -331,8 +330,7 @@ Skill(ios-development)
 
 ## Related Documentation
 
-- [AUTO-CLAUDE-GUIDE.md](./AUTO-CLAUDE-GUIDE.md) - Auto-Claude setup and usage
-- [WORKFLOW-GUIDE.md](./WORKFLOW-GUIDE.md) - Workflow patterns (Manual, Auto-Claude, Phased)
+- [WORKFLOW-GUIDE.md](./WORKFLOW-GUIDE.md) - Workflow patterns
 - `CLAUDE.md` - Workflow overview
 - `README.md` - Full toolkit capabilities
 - `skills/README.md` - Available skills

@@ -35,4 +35,4 @@ For multi-domain or ambiguous requests, the route files in `routes/` map intents
 
 ## Keeping the index current
 
-The index is generated. After adding or changing skills, agents, commands, rules, or marketplaces run `node ~/.claude/scripts/generate-index.mjs --write` (the pre-commit hook does this automatically). Promote a skill to full-description "core" by adding it to `index/tiers.json`.
+The index is generated. After adding or changing skills, agents, commands, rules, or marketplaces run `node ~/.claude/scripts/generate-index.mjs --write` yourself; no hook regenerates it (the pre-commit hook only runs publication-safety checks). Promote a skill to full-description "core" by adding it to `index/tiers.json`.

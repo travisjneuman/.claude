@@ -26,6 +26,8 @@
 
 ## Pre-Deploy Checks
 
+> Agents don't run tests, linters, type checks, or build ladders for this checklist by default (toolkit zero-testing rule). Fill the Testing and Type Safety items from results the project's existing CI or deploy already produced, or from a run the user explicitly asked for; otherwise mark them "not run" and validate by reviewing the release diff.
+
 ### Code Quality
 
 - [ ] All CI checks passing on release branch

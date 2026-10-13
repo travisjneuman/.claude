@@ -1,11 +1,13 @@
 #!/usr/bin/env node
-// Always-on context budgets. Run by the pre-commit hook; exits 1 with a clear
-// message when a commit would grow what Claude loads every session past a limit.
+// Always-on context budgets. Nothing runs this automatically: the pre-commit
+// hook is publication safety only (scripts/hooks/pre-commit.sh). Run it by hand
+// when asked; it exits 1 with a clear message when what Claude loads every
+// session has grown past a limit.
 //
 //   node scripts/check-budgets.mjs          check (default)
 //   node scripts/check-budgets.mjs --report print usage without failing
 //
-// Adjust limits here deliberately; don't bypass the hook.
+// Adjust limits here deliberately.
 
 import fs from "node:fs";
 import path from "node:path";

@@ -91,28 +91,18 @@ Load this file when development-related keywords detected.
 
 **Skills:**
 
-- `generic-feature-developer` - Manual implementation patterns
-- `auto-claude` - Autonomous multi-agent implementation
+- `generic-feature-developer` - Implementation patterns
 
 **Routing Logic:**
 
-- Complexity < 3: Manual implementation (generic-feature-developer)
-- Complexity 3-4 + clear spec: **Suggest Auto-Claude**
+- Complexity < 3: Direct implementation (generic-feature-developer)
+- Complexity 3-4 + clear spec: implement directly; delegate independent pieces to subagents in the same checkout
 - Complexity 3-4 + unclear spec: EnterPlanMode first
 - Complexity >= 5: EnterPlanMode, then execute phase by phase
 
-**Keywords:** "implement", "add feature", "build", "create [complex feature]", "autonomous"
+**Keywords:** "implement", "add feature", "build", "create [complex feature]"
 
-**Auto-Claude Benefits:**
-
-- Git worktree isolation (safe development)
-- QA validation loops
-- Multi-agent coordination
-- Semantic memory across sessions
-
-**Example suggestion:**
-
-> "This feature appears complex (score: 3+) with a clear specification. Would you like to use `/auto-claude` for autonomous implementation with QA validation, or proceed with manual step-by-step development?"
+`auto-claude` (worktree-based autonomous implementation) was removed from the toolkit; don't suggest it.
 
 ## Marketplace Repos by Development Domain
 

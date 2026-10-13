@@ -11,6 +11,8 @@ disable-model-invocation: true
 
 Analyzes the current project structure and generates a comprehensive test strategy document with test matrix, coverage goals, and test pyramid allocation.
 
+Runs only when the user invokes it. It writes a plan; it does not write or run tests, and the toolkit default remains validation by review.
+
 ## Usage
 
 ```

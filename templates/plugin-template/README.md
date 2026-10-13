@@ -112,7 +112,6 @@ description: When to use this agent
 tools:
   - Read
   - Grep
-model: sonnet
 ---
 
 # My Agent

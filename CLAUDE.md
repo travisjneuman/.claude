@@ -66,7 +66,7 @@ Only core skills and the core agents show a full description in your context; th
 
 - Auto memory is recall, not authority. Durable rules belong in `CLAUDE.md` / `AGENTS.md`.
 - When corrected on a repeated mistake, propose the rule that would have prevented it.
-- After changing toolkit skills, agents, commands, hooks, or rules, update the affected README; the pre-commit hook regenerates `INDEX.md` and counts.
+- After changing toolkit skills, agents, commands, hooks, or rules, update the affected README and regenerate `INDEX.md` with `scripts/regenerate-index.sh`; the pre-commit hook only runs the public-safety gate.
 
 ## Communication
 

@@ -2,6 +2,8 @@
 
 **When to use:** Setting up automation for any project via git hooks.
 
+Install a hook only when the user asks for that hook in that project; agents don't add hooks or other automation unasked. The test-running pre-push sample below is for projects whose owner wants it; the toolkit itself validates by review (zero-testing rule in `~/.claude/CLAUDE.md`).
+
 ---
 
 ## Overview

@@ -119,7 +119,7 @@ go get <module>@latest
 cargo update <crate>
 ```
 
-After each update, check the release notes for APIs the project uses, then build.
+After each update, check the release notes for APIs the project uses and review the call sites they touch.
 
 #### minor
 
@@ -139,11 +139,7 @@ go get -u ./...
 cargo update
 ```
 
-**After updating, build the project:**
-
-```bash
-npm run build 2>/dev/null || go build ./... 2>/dev/null
-```
+**After updating, review the result:** read the release notes for the updated packages and the call sites that use changed APIs. Build only when the user asks; otherwise the project's next deploy produces the build.
 
 #### major
 
@@ -170,23 +166,15 @@ Priority 2 (Maintenance):
       Effort: Large (4-8 hours)
 ```
 
-**Update major versions one at a time**, building and reviewing affected call sites after each.
+**Update major versions one at a time**, reviewing affected call sites after each.
 
 ---
 
 ### Step 5: Compatibility Verification
 
-After any updates:
+After any updates, confirm the install itself succeeded and the lock file changed only for the intended packages, then review the call sites of every package whose API changed. Run a clean install or build only when the user asks for that check.
 
-```bash
-# 1. Clean install
-rm -rf node_modules && npm install
-
-# 2. Build
-npm run build 2>/dev/null
-```
-
-**If any step fails:** Roll back the problematic update, report the incompatibility, and suggest resolution.
+**If the install fails or review finds an incompatibility:** Roll back the problematic update, report the incompatibility, and suggest resolution.
 
 ---
 
@@ -209,14 +197,15 @@ After:
   Vulnerabilities: X remaining
 
 Verification:
-  Build:     PASS
+  Review:    <call sites reviewed>
+  Build:     not run (or result, if the user asked)
 ```
 
 ---
 
 ## Safety Rules
 
-- Build after updates; run tests only when the user asks
+- Validate updates by review; build or run tests only when the user asks
 - Never update all major versions at once
 - Security updates take priority
 - Keep lock files committed

@@ -102,7 +102,7 @@
 # Development
 npm run dev
 
-# Tests
+# Tests (only when the user asks)
 npm test
 
 # Build

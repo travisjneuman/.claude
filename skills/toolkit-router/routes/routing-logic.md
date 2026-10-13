@@ -22,43 +22,20 @@ Load this file for complexity scoring and route selection.
 | Score | Route                                   | Action                    |
 | ----- | --------------------------------------- | ------------------------- |
 | >= 5  | **Phased Planning Route**               | Use `EnterPlanMode`, split into phases |
-| 3-4   | **Auto-Claude Route** (if well-defined) | Suggest `/auto-claude`    |
+| 3-4   | **Direct Route** (if well-defined)      | Execute with `TodoWrite`  |
 | 3-4   | **Planning Route** (if exploratory)     | Use `EnterPlanMode`       |
-| 1-2   | **Planning Route**                      | Use `EnterPlanMode`       |
+| 1-2   | **Direct Route**                        | Execute; plan mode only if genuinely ambiguous |
 | <= 0  | **Direct Route**                        | Execute immediately       |
 
 **Note on 3-4 complexity:**
 
-- Well-defined feature + established codebase → **Suggest Auto-Claude**
+- Well-defined feature + established codebase → **Execute directly** (plan mode only if a choice is genuinely open)
 - Exploratory/unclear requirements → **Use EnterPlanMode**
 - User choice always honored
 
-## Auto-Claude Route (Score 3-4, Well-Defined)
+## Removed: Auto-Claude Route
 
-Autonomous multi-agent implementation:
-
-1. Suggest `/auto-claude [description]` to user
-2. If user accepts:
-   - Auto-Claude analyzes codebase
-   - Generates implementation spec
-   - Creates isolated git worktree
-   - Autonomous implementation with QA loops
-3. If user declines, fall back to EnterPlanMode
-
-**When to suggest:**
-
-- Clear, well-defined requirements
-- Established codebase with patterns
-- Multiple files/components involved
-- User prefers autonomous vs step-by-step
-
-**When NOT to suggest:**
-
-- Greenfield projects
-- Exploratory/research tasks
-- User explicitly requests manual control
-
-See `docs/AUTO-CLAUDE-GUIDE.md` for full documentation.
+`/auto-claude` and its worktree-based autonomous route were removed from the toolkit (its guide is gone and worktrees conflict with the canonical-checkout rule). Route well-defined 3-4 work directly, or delegate independent pieces to subagents in the same checkout.
 
 ---
 
@@ -71,16 +48,16 @@ Multi-phase work:
 3. Execute one phase at a time with `TodoWrite` tracking
 4. Commit at the end of each phase so a later session can resume from git history and the task files
 
-## Planning Route (Score 1-2)
+## Planning Route (exploratory or genuinely ambiguous work)
 
-Approval-gated planning:
+Approval-gated planning (`~/.claude/CLAUDE.md`: a diff you can describe in a sentence doesn't need a plan):
 
 1. Use `EnterPlanMode`
 2. Create plan with loaded skills as context
 3. Execute with `TodoWrite` tracking
 4. Use loaded agents via `Task` tool
 
-## Direct Route (Score <= 0)
+## Direct Route (Score <= 2, or well-defined 3-4)
 
 Immediate execution:
 
@@ -90,13 +67,12 @@ Immediate execution:
 
 ## Post-Work Automation
 
-After completing code changes:
+After completing code changes (validate by review; no tests unless the user asks):
 
-| Trigger                  | Action                                                |
-| ------------------------ | ----------------------------------------------------- |
-| Code written/modified    | `Task` with `pr-review-toolkit:code-reviewer`         |
-| Complex code added       | `Task` with `pr-review-toolkit:code-simplifier`       |
-| Types/interfaces created | `Task` with `pr-review-toolkit:type-design-analyzer`  |
-| Error handling added     | `Task` with `pr-review-toolkit:silent-failure-hunter` |
-| Tests needed             | `Task` with `pr-review-toolkit:pr-test-analyzer`      |
-| Ready to commit          | `/commit-commands:commit`                             |
+| Trigger                  | Action                                                                 |
+| ------------------------ | ---------------------------------------------------------------------- |
+| Code written/modified    | Review the whole diff yourself; for a deeper pass, `deep-code-reviewer` agent or `/review-code` |
+| Complex code added       | `simplify` skill                                                       |
+| Security-sensitive code  | `security-auditor` agent                                               |
+| Tests explicitly requested | `test-specialist` skill (only on the user's request for that scope)  |
+| Ready to commit          | Follow the git workflow in `~/.claude/CLAUDE.md` (the `commit-commands` plugin is off by design) |

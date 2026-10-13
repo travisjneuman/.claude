@@ -1,6 +1,7 @@
 # Scripts
 
 Helper scripts for setup, maintenance, and automation of the Claude Code toolkit.
+Up: [README](../README.md) · Not here: Claude Code lifecycle hooks are in [hooks/README.md](../hooks/README.md); count definitions are in [COUNT-PIPELINE.md](../docs/COUNT-PIPELINE.md).
 
 **Location:** `~/.claude/scripts/`
 
@@ -23,16 +24,17 @@ Helper scripts for setup, maintenance, and automation of the Claude Code toolkit
 | --------------------- | --------------------------------------- | ---------------------------------------------------------- |
 | `update-counts.sh`    | Explicitly refresh public counts, source evidence, website snapshots and current numeric docs | After reviewed public source changes |
 | `generate-showcase-images.mjs` | Regenerate the `tjn.portfolio` showcase screenshots from `counts.json` (the website OG image is the static GitHub social preview) | After public showcase counts change |
-| `regenerate-index.sh` | Regenerate `skills/MASTER_INDEX.md`     | After adding/removing skills                               |
+| `generate-index.mjs`  | Regenerate `INDEX.md`, `index/graph.json`, `skills/MASTER_INDEX.md` (`--write`) | After adding/removing skills, agents, commands, rules, or marketplaces |
+| `regenerate-index.sh` | Compatibility wrapper for `generate-index.mjs --write` | Same as above                                   |
 | `install-plugins.sh`  | Install enabled plugins + LSP binaries  | Runs daily automatically; run after changing plugins       |
-| `_pull-all-repos.sh`      | Fix remote URLs on marketplace repos    | If remotes are misconfigured after a pull                  |
+| `_pull-all-repos.sh` (repo root) | Pull marketplace clones and re-sync their URLs and `no_push` | After upstream changes, or if remotes are misconfigured |
 
 ### Repo Management
 
 | Script                     | Purpose                               | When to Run                                    |
 | -------------------------- | ------------------------------------- | ---------------------------------------------- |
-| `_pull-all-repos.sh` | Pull all marketplace repos            | Use `_pull-all-repos.sh` instead (recommended) |
-| `_pull-all-repos.sh`   | Update marketplace clones | After upstream changes                         |
+| `add-marketplace.sh <git-url> [name]` | Add a marketplace repo to the manifest and clone it | When adopting a new community repo |
+| `install-in-place.sh`      | Turn an existing `~/.claude` into a checkout of this toolkit without deleting anything | First install over a Claude-created `~/.claude` |
 
 ### Utilities
 
@@ -40,7 +42,10 @@ Helper scripts for setup, maintenance, and automation of the Claude Code toolkit
 | ----------------------------------- | ------------------------------------------------------------- |
 | `fix-plugin-line-endings.sh`        | Convert CRLF to LF in plugin files (Linux/Mac)                |
 | `fix-plugin-line-endings.ps1`       | Same, for Windows PowerShell                                  |
-| `website/scripts/fix-submodules.mjs`| Prebuild: remove broken nested gitlink refs for Cloudflare  |
+| `generate-counts.mjs`, `count-inventory.mjs` | Count pipeline (see [COUNT-PIPELINE.md](../docs/COUNT-PIPELINE.md)) |
+| `check-budgets.mjs`                 | Always-on context budget check; run manually (pre-commit no longer runs it) |
+| `tune-tiers.mjs`                    | Promote/demote core-tier skills from usage counts (`--apply` to write) |
+| `public-output-safety.mjs`, `media-routing.mjs` | Shared libraries for publication safety and media routing; not run directly |
 
 ---
 
@@ -53,7 +58,7 @@ These are git hooks installed into `.git/hooks/` by `setup-hooks.sh`:
 | `pre-commit.sh`    | Marketplace/gitlink, privacy, credential and ignored-runtime safety gates; no generation/tests/staging |
 | `commit-msg.sh`    | Enforce conventional commit message format                                    |
 | `pre-push.sh`      | Block force-push to master/main, warn about unsafe nested repo changes                 |
-| `session-start.sh` | SessionStart hook template (legacy — current hooks are in `~/.claude/hooks/`) |
+| `staged-public-safety.mjs` | Implementation of the pre-commit safety gates (called by `pre-commit.sh`) |
 
 These are different from the Claude Code lifecycle hooks in `~/.claude/hooks/`. See [hooks/README.md](../hooks/README.md) for that system.
 

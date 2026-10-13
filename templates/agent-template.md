@@ -33,7 +33,7 @@ tools:
   - Edit
   - WebSearch
   - WebFetch
-model: sonnet
+# no model: line; agents inherit the session model from config
 ---
 
 # Agent Name
@@ -116,8 +116,9 @@ When given a task:
 
 ## Model Selection
 
-| Model    | When to Use         | Token Cost |
-| -------- | ------------------- | ---------- |
+Don't pin a model. Omit `model:` so the agent inherits the session model, effort, and fast mode from config; this toolkit's agents pin none (CHANGELOG 3.2.0), and instructions never pick models.
+
+-------- | ------------------- | ---------- |
 | `haiku`  | Quick, simple tasks | Low        |
 | `sonnet` | Balanced (default)  | Medium     |
 | `opus`   | Complex reasoning   | High       |
@@ -166,16 +167,16 @@ When given a task:
 
 ### Model Choice
 
-- Default to `sonnet` unless you have a reason not to
-- Use `haiku` for high-volume, simple tasks
-- Reserve `opus` for critical decisions
+- Omit `model:`; the session's configured model applies
 
 ---
 
-## Testing Your Agent
+## Trying Your Agent
+
+Validate an agent by reviewing its frontmatter, tools, and prompt against the task; invoke it to try it only when you want to (agents don't run sample invocations unasked).
 
 1. Create the agent file in `agents/`
-2. Test invocation:
+2. Invocation:
    ```
    Task tool with subagent_type="your-agent-name"
    ```
@@ -208,7 +209,7 @@ description: Quickly locates files by name or pattern. Use for "find file", "whe
 tools:
   - Glob
   - Grep
-model: haiku
+# no model: line; agents inherit the session model from config
 ---
 
 # File Finder
@@ -235,7 +236,7 @@ tools:
   - Read
   - Grep
   - Glob
-model: opus
+# no model: line; agents inherit the session model from config
 ---
 
 # Architecture Analyst

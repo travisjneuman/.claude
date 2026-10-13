@@ -89,10 +89,10 @@ These can be used **anytime**, regardless of workflow stage or project phase:
 | **Skills**              | Domain expertise needed                      | `Skill(name)` or auto-activates      |
 | **Agents**              | Deep specialized work                        | `Task` tool with subagent            |
 | **Research**            | Explore codebase, find patterns              | `Task` with Explore agent            |
-| **Decision Frameworks** | Complex choices, trade-offs                  | `/consider:first-principles`         |
+| **Decision Frameworks** | Complex choices, trade-offs                  | `options-comparator` skill           |
 | **TodoWrite**           | Track multi-step progress                    | Use tool directly                    |
 | **Agent Teams**         | Parallel work with inter-agent coordination  | `/assemble-team` or natural language |
-| **Workflows**         | Autonomous feature implementation            | `ultracode: [description]` (built-in workflows)         |
+| **Workflows**         | Autonomous feature implementation (only when the user opts in) | `ultracode: [description]` (built-in workflows)         |
 
 **Philosophy:** Plans and phases provide _structure_, not _gates_. Use every tool that helps.
 
@@ -165,7 +165,7 @@ When `/start-task` detects a development task, you have three workflow options:
 → EnterPlanMode (if complex)
 → You + Claude work step-by-step
 → Review each change before applying
-→ Manual testing and verification
+→ Validation by reviewing the diff (tests only when you ask)
 ```
 
 **Best For:**
@@ -192,9 +192,8 @@ When `/start-task` detects a development task, you have three workflow options:
 ultracode: Add user authentication
 → Analyzes codebase automatically
 → Generates implementation spec
-→ Creates isolated git worktree
-→ Multi-agent autonomous implementation
-→ QA validation loops
+→ Multi-agent autonomous implementation in the existing checkout
+→ Review of the combined diff
 → Returns completed code for review
 ```
 
@@ -208,14 +207,14 @@ ultracode: Add user authentication
 **Characteristics:**
 
 - Autonomous multi-agent execution
-- Review at end (full worktree)
-- Git worktree isolation
-- Automatic QA validation
+- Review at end (full diff)
+- Runs in the canonical checkout: no worktree, clone, or branch isolation (toolkit git rules)
+- Validation by review; tests only on explicit request
 
 **How to Invoke:**
 
-- Direct: `ultracode: [description]` (built-in workflows)
-- Via router: `/start-task` auto-suggests when complexity >= 3
+- Direct: `ultracode: [description]` (built-in workflows), only when the user opts in to a multi-agent workflow
+- Via router: `/start-task` may mention it for complexity >= 3; it never starts one unasked
 
 
 ---
@@ -228,7 +227,7 @@ ultracode: Add user authentication
 Create an agent team to build the user settings module:
 - Frontend teammate: React components at src/components/settings/
 - Backend teammate: API endpoints at src/api/settings/
-- Test writer: tests for both layers
+- Reviewer: reviews both layers (add a test writer only when you ask for tests)
 → Spawns team via Teammate tool
 → Creates shared task list via TaskCreate
 → Teammates coordinate via SendMessage
@@ -289,7 +288,7 @@ Create an agent team to build the user settings module:
 | **Control**    | Maximum               | Lead coordinates      | Medium           | Structured     |
 | **Speed**      | Slower                | Fast (parallel)       | Fast             | Phased         |
 | **Review**     | Each step             | Lead synthesizes      | End              | Per phase      |
-| **Isolation**  | Main branch           | Shared workspace      | Git worktree     | tasks/         |
+| **Isolation**  | Main branch           | Shared workspace      | Main branch      | tasks/         |
 | **Best for**   | Learning, exploration | Cross-layer, parallel | Defined features | Large projects |
 
 **Combining workflows:**

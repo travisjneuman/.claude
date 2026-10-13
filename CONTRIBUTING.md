@@ -78,7 +78,6 @@ Agents are specialized subagents for focused task execution.
 ---
 name: my-agent
 description: Brief description of agent's expertise
-model: sonnet  # or opus, haiku
 tools:
   - Glob
   - Grep
@@ -118,10 +117,7 @@ When working on this domain:
 ### Guidelines
 
 1. **Name**: Use kebab-case matching the domain
-2. **Model Selection**:
-   - `opus`: Complex analysis, architecture
-   - `sonnet`: Standard tasks (recommended default)
-   - `haiku`: Quick tasks, documentation
+2. **Model**: don't add `model:`; agents inherit the session model from config (no per-agent pins since v3.2.0)
 3. **Tools**: Only include tools the agent needs
 4. **Reference Skills**: Link to related skills for context
 

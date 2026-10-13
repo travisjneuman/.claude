@@ -223,7 +223,8 @@ git log --all --oneline -- vscode/settings.json
 grep -r "192\.168\." --include="*.json" --include="*.md"
 
 # Search for user paths (adjust username)
-grep -r "C:\\\\Users\\\\tjn" --include="*.json" --include="*.md"
+grep -r "C:\\\\Users\\\\<your-username>" --include="*.json" --include="*.md"
+grep -r "/Users/<your-username>\|/home/<your-username>" --include="*.json" --include="*.md"
 ```
 
 ---

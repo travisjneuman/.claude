@@ -26,7 +26,7 @@ An experimental feature where multiple Claude Code sessions collaborate via shar
 
 ### Auto-Claude
 
-An autonomous multi-agent implementation system that creates an isolated git worktree, generates a spec, implements the feature, runs QA validation, and returns completed code. Invoked via `/auto-claude`. See `docs/AUTO-CLAUDE-GUIDE.md`.
+Removed. A former autonomous multi-agent implementation workflow (`/auto-claude`) that ran in an isolated git worktree; dropped because worktrees conflict with the canonical-checkout rule. Its guide is no longer in the toolkit.
 
 ### Command (Slash Command)
 
@@ -119,9 +119,8 @@ A rating (0-5+) assigned by `/start-task` to determine which workflow to use. Ba
 
 | Score | Route                    |
 | ----- | ------------------------ |
-| <= 0  | Direct execution         |
-| 1-2   | Plan mode                |
-| 3-4   | Auto-Claude or plan mode |
+| <= 2  | Direct execution (plan mode only if genuinely ambiguous) |
+| 3-4   | Direct if well-defined, plan mode if exploratory |
 | >= 5  | Phased planning          |
 
 ### Domain Routing

@@ -217,7 +217,6 @@ This repo underwent a security audit before being made public. The following wer
     │   │   ├── codebase-documenter/    ← Code documentation
     │   │   ├── core-workflow/          ← Core workflow patterns
     │   │   ├── debug-systematic/       ← Systematic debugging
-    │   │   ├── document-skills/        ← Document generation (docx/pdf/pptx/xlsx)
     │   │   ├── frontend-enhancer/      ← Frontend improvements
     │   │   ├── i18n-localization/      ← Internationalization
     │   │   ├── monetization-strategy/  ← Monetization planning
@@ -490,7 +489,9 @@ skills/
 | Architecture/Infra  | 7     | `api-design`, `database-expert`, `devops-cloud`              |
 | Domain Expert       | 16    | `marketing`, `sales`, `finance`, `leadership`                |
 | Creative            | 6     | `audio-production`, `graphic-design`, `video-production`     |
-| Utility             | 14    | `tech-debt-analyzer`, `document-skills`, `agent-teams`       |
+| Utility             | 14    | `tech-debt-analyzer`, `codebase-documenter`, `agent-teams`   |
+
+Office documents (docx/pdf/pptx/xlsx) come from the claude.ai-synced `anthropic-skills:*` skills; the toolkit's own `document-skills` copies were removed in v3.2.0 because their license forbids redistribution.
 
 ---
 

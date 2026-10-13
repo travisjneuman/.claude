@@ -1966,7 +1966,7 @@
    "path": "commands/update-counts.md",
    "domain": "workflow",
    "tier": "name-only",
-   "description": "Update all hardcoded counts (skills, agents, marketplace repos/skills) across documentation from filesystem"
+   "description": "Explicitly refresh public toolkit and committed marketplace source snapshots and numeric documentation"
   },
   {
    "id": "command:update-docs",
@@ -2310,409 +2310,409 @@
  ],
  "marketplaces": [
   {
-   "name": "anthropic-agent-skills",
-   "url": "https://github.com/anthropics/skills.git",
-   "path": "plugins/marketplaces/anthropic-agent-skills"
+   "name": "EveryInc-compound",
+   "url": "https://github.com/EveryInc/compound-engineering-plugin",
+   "path": "plugins/marketplaces/EveryInc-compound"
   },
   {
-   "name": "claude-plugins-official",
-   "url": "https://github.com/anthropics/claude-plugins-official.git",
-   "path": "plugins/marketplaces/claude-plugins-official"
+   "name": "aaronontheweb-dotnet-skills",
+   "url": "https://github.com/Aaronontheweb/dotnet-skills",
+   "path": "plugins/marketplaces/aaronontheweb-dotnet-skills"
   },
   {
-   "name": "taches-cc-resources",
-   "url": "https://github.com/glittercowboy/taches-cc-resources.git",
-   "path": "plugins/marketplaces/taches-cc-resources"
-  },
-  {
-   "name": "awesome-claude-skills",
-   "url": "https://github.com/ComposioHQ/awesome-claude-skills.git",
-   "path": "plugins/marketplaces/awesome-claude-skills"
-  },
-  {
-   "name": "claude-mem",
-   "url": "https://github.com/thedotmack/claude-mem.git",
-   "path": "plugins/marketplaces/claude-mem"
-  },
-  {
-   "name": "skill-seekers",
-   "url": "https://github.com/yusufkaraaslan/Skill_Seekers.git",
-   "path": "plugins/marketplaces/skill-seekers"
-  },
-  {
-   "name": "claude-scientific-skills",
-   "url": "https://github.com/K-Dense-AI/scientific-agent-skills.git",
-   "path": "plugins/marketplaces/claude-scientific-skills"
-  },
-  {
-   "name": "mhattingpete-skills",
-   "url": "https://github.com/mhattingpete/claude-skills-marketplace.git",
-   "path": "plugins/marketplaces/mhattingpete-skills"
-  },
-  {
-   "name": "skillsforge",
-   "url": "https://github.com/rawveg/skillsforge-marketplace.git",
-   "path": "plugins/marketplaces/skillsforge"
-  },
-  {
-   "name": "voltagent-subagents",
-   "url": "https://github.com/VoltAgent/awesome-claude-code-subagents.git",
-   "path": "plugins/marketplaces/voltagent-subagents"
-  },
-  {
-   "name": "wshobson-agents",
-   "url": "https://github.com/wshobson/agents.git",
-   "path": "plugins/marketplaces/wshobson-agents"
-  },
-  {
-   "name": "alirezarezvani-claude-skills",
-   "url": "https://github.com/alirezarezvani/claude-skills.git",
-   "path": "plugins/marketplaces/alirezarezvani-claude-skills"
-  },
-  {
-   "name": "buildwithclaude",
-   "url": "https://github.com/davepoon/buildwithclaude.git",
-   "path": "plugins/marketplaces/buildwithclaude"
-  },
-  {
-   "name": "trailofbits-skills",
-   "url": "https://github.com/trailofbits/skills.git",
-   "path": "plugins/marketplaces/trailofbits-skills"
-  },
-  {
-   "name": "henkisdabro-marketplace",
-   "url": "https://github.com/henkisdabro/wookstar-claude-plugins.git",
-   "path": "plugins/marketplaces/henkisdabro-marketplace"
-  },
-  {
-   "name": "anthropic-life-sciences",
-   "url": "https://github.com/anthropics/life-sciences.git",
-   "path": "plugins/marketplaces/anthropic-life-sciences"
-  },
-  {
-   "name": "davila7-templates",
-   "url": "https://github.com/davila7/claude-code-templates.git",
-   "path": "plugins/marketplaces/davila7-templates"
-  },
-  {
-   "name": "secondsky-sap-skills",
-   "url": "https://github.com/secondsky/sap-skills.git",
-   "path": "plugins/marketplaces/secondsky-sap-skills"
-  },
-  {
-   "name": "bradleygolden-elixir",
-   "url": "https://github.com/bradleygolden/claude-marketplace-elixir.git",
-   "path": "plugins/marketplaces/bradleygolden-elixir"
-  },
-  {
-   "name": "p47phoenix-plugins",
-   "url": "https://github.com/P47Phoenix/Claude-Plugins.git",
-   "path": "plugins/marketplaces/p47phoenix-plugins"
-  },
-  {
-   "name": "numman-ali-skills",
-   "url": "https://github.com/numman-ali/n-skills.git",
-   "path": "plugins/marketplaces/numman-ali-skills"
-  },
-  {
-   "name": "gmickel-marketplace",
-   "url": "https://github.com/gmickel/flow-next.git",
-   "path": "plugins/marketplaces/gmickel-marketplace"
-  },
-  {
-   "name": "neolab-context-kit",
-   "url": "https://github.com/NeoLabHQ/context-engineering-kit.git",
-   "path": "plugins/marketplaces/neolab-context-kit"
+   "name": "actionbook-rust-skills",
+   "url": "https://github.com/actionbook/rust-skills",
+   "path": "plugins/marketplaces/actionbook-rust-skills"
   },
   {
    "name": "affaan-everything-claude",
-   "url": "https://github.com/affaan-m/ECC.git",
+   "url": "https://github.com/affaan-m/ECC",
    "path": "plugins/marketplaces/affaan-everything-claude"
   },
   {
-   "name": "vercel-agent-skills",
-   "url": "https://github.com/vercel-labs/agent-skills.git",
-   "path": "plugins/marketplaces/vercel-agent-skills"
+   "name": "agentskills-agentskills",
+   "url": "https://github.com/agentskills/agentskills",
+   "path": "plugins/marketplaces/agentskills-agentskills"
+  },
+  {
+   "name": "ahmedasmar-devops-skills",
+   "url": "https://github.com/ahmedasmar/devops-claude-skills",
+   "path": "plugins/marketplaces/ahmedasmar-devops-skills"
+  },
+  {
+   "name": "akin-ozer-devops",
+   "url": "https://github.com/akin-ozer/cc-devops-skills",
+   "path": "plugins/marketplaces/akin-ozer-devops"
+  },
+  {
+   "name": "alirezarezvani-claude-skills",
+   "url": "https://github.com/alirezarezvani/claude-skills",
+   "path": "plugins/marketplaces/alirezarezvani-claude-skills"
+  },
+  {
+   "name": "anthropic-agent-skills",
+   "url": "https://github.com/anthropics/skills",
+   "path": "plugins/marketplaces/anthropic-agent-skills"
+  },
+  {
+   "name": "anthropic-life-sciences",
+   "url": "https://github.com/anthropics/life-sciences",
+   "path": "plugins/marketplaces/anthropic-life-sciences"
+  },
+  {
+   "name": "athola-night-market",
+   "url": "https://github.com/athola/claude-night-market",
+   "path": "plugins/marketplaces/athola-night-market"
+  },
+  {
+   "name": "automazeio-ccpm",
+   "url": "https://github.com/automazeio/ccpm",
+   "path": "plugins/marketplaces/automazeio-ccpm"
+  },
+  {
+   "name": "awesome-claude-skills",
+   "url": "https://github.com/ComposioHQ/awesome-claude-skills",
+   "path": "plugins/marketplaces/awesome-claude-skills"
+  },
+  {
+   "name": "blader-humanizer",
+   "url": "https://github.com/blader/humanizer",
+   "path": "plugins/marketplaces/blader-humanizer"
+  },
+  {
+   "name": "bradleygolden-elixir",
+   "url": "https://github.com/bradleygolden/claude-marketplace-elixir",
+   "path": "plugins/marketplaces/bradleygolden-elixir"
+  },
+  {
+   "name": "brennercruvinel-CCPlugins",
+   "url": "https://github.com/brennercruvinel/CCPlugins",
+   "path": "plugins/marketplaces/brennercruvinel-CCPlugins"
+  },
+  {
+   "name": "buildwithclaude",
+   "url": "https://github.com/davepoon/buildwithclaude",
+   "path": "plugins/marketplaces/buildwithclaude"
+  },
+  {
+   "name": "ccplugins-awesome",
+   "url": "https://github.com/ccplugins/awesome-claude-code-plugins",
+   "path": "plugins/marketplaces/ccplugins-awesome"
+  },
+  {
+   "name": "claude-code-plugins-plus-skills",
+   "url": "https://github.com/jeremylongshore/tons-of-skills-marketplace",
+   "path": "plugins/marketplaces/claude-code-plugins-plus-skills"
+  },
+  {
+   "name": "claude-mem",
+   "url": "https://github.com/thedotmack/claude-mem",
+   "path": "plugins/marketplaces/claude-mem"
+  },
+  {
+   "name": "claude-plugins-official",
+   "url": "https://github.com/anthropics/claude-plugins-official",
+   "path": "plugins/marketplaces/claude-plugins-official"
+  },
+  {
+   "name": "claude-scientific-skills",
+   "url": "https://github.com/K-Dense-AI/scientific-agent-skills",
+   "path": "plugins/marketplaces/claude-scientific-skills"
+  },
+  {
+   "name": "danielscholl-sdlc",
+   "url": "https://github.com/danielscholl/claude-sdlc",
+   "path": "plugins/marketplaces/danielscholl-sdlc"
+  },
+  {
+   "name": "davila7-templates",
+   "url": "https://github.com/davila7/claude-code-templates",
+   "path": "plugins/marketplaces/davila7-templates"
+  },
+  {
+   "name": "daymade-skills",
+   "url": "https://github.com/daymade/claude-code-skills",
+   "path": "plugins/marketplaces/daymade-skills"
+  },
+  {
+   "name": "devgom-marketplace",
+   "url": "https://github.com/Dev-GOM/claude-code-marketplace",
+   "path": "plugins/marketplaces/devgom-marketplace"
+  },
+  {
+   "name": "diet103-infrastructure",
+   "url": "https://github.com/diet103/claude-code-infrastructure-showcase",
+   "path": "plugins/marketplaces/diet103-infrastructure"
+  },
+  {
+   "name": "disler-hooks-mastery",
+   "url": "https://github.com/disler/claude-code-hooks-mastery",
+   "path": "plugins/marketplaces/disler-hooks-mastery"
+  },
+  {
+   "name": "expo-skills",
+   "url": "https://github.com/expo/skills",
+   "path": "plugins/marketplaces/expo-skills"
+  },
+  {
+   "name": "francyjg-agent-skill-creator",
+   "url": "https://github.com/FrancyJGLisboa/agent-skills-platform",
+   "path": "plugins/marketplaces/francyjg-agent-skill-creator"
+  },
+  {
+   "name": "georgeguimaraes-elixir",
+   "url": "https://github.com/georgeguimaraes/elixir-agent-tools",
+   "path": "plugins/marketplaces/georgeguimaraes-elixir"
+  },
+  {
+   "name": "giuseppe-developer-kit",
+   "url": "https://github.com/giuseppe-trisciuoglio/developer-kit",
+   "path": "plugins/marketplaces/giuseppe-developer-kit"
+  },
+  {
+   "name": "gmickel-marketplace",
+   "url": "https://github.com/gmickel/flow-next",
+   "path": "plugins/marketplaces/gmickel-marketplace"
+  },
+  {
+   "name": "hardikpandya-stop-slop",
+   "url": "https://github.com/hardikpandya/stop-slop",
+   "path": "plugins/marketplaces/hardikpandya-stop-slop"
+  },
+  {
+   "name": "hashicorp-agent-skills",
+   "url": "https://github.com/hashicorp/agent-skills",
+   "path": "plugins/marketplaces/hashicorp-agent-skills"
+  },
+  {
+   "name": "henkisdabro-marketplace",
+   "url": "https://github.com/henkisdabro/wookstar-claude-plugins",
+   "path": "plugins/marketplaces/henkisdabro-marketplace"
+  },
+  {
+   "name": "hesreallyhim-awesome",
+   "url": "https://github.com/hesreallyhim/awesome-claude-code",
+   "path": "plugins/marketplaces/hesreallyhim-awesome"
+  },
+  {
+   "name": "jeffallan-claude-skills",
+   "url": "https://github.com/Jeffallan/claude-skills",
+   "path": "plugins/marketplaces/jeffallan-claude-skills"
+  },
+  {
+   "name": "kenryu42-safety-net",
+   "url": "https://github.com/kenryu42/cc-safety-net",
+   "path": "plugins/marketplaces/kenryu42-safety-net"
+  },
+  {
+   "name": "levnikolaevich-claude-code-skills",
+   "url": "https://github.com/levnikolaevich/claude-code-skills",
+   "path": "plugins/marketplaces/levnikolaevich-claude-code-skills"
+  },
+  {
+   "name": "madappgang-claude-code",
+   "url": "https://github.com/MadAppGang/claude-code",
+   "path": "plugins/marketplaces/madappgang-claude-code"
+  },
+  {
+   "name": "manutej-luxor-marketplace",
+   "url": "https://github.com/manutej/luxor-claude-marketplace",
+   "path": "plugins/marketplaces/manutej-luxor-marketplace"
+  },
+  {
+   "name": "mhattingpete-skills",
+   "url": "https://github.com/mhattingpete/claude-skills-marketplace",
+   "path": "plugins/marketplaces/mhattingpete-skills"
+  },
+  {
+   "name": "millionco-expect",
+   "url": "https://github.com/millionco/expect",
+   "path": "plugins/marketplaces/millionco-expect"
+  },
+  {
+   "name": "mrgoonie-claudekit-skills",
+   "url": "https://github.com/mrgoonie/claudekit-skills",
+   "path": "plugins/marketplaces/mrgoonie-claudekit-skills"
   },
   {
    "name": "muratcankoylan-agent-skills",
-   "url": "https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering.git",
+   "url": "https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering",
    "path": "plugins/marketplaces/muratcankoylan-agent-skills"
   },
   {
+   "name": "mvanhorn-last30days-skill",
+   "url": "https://github.com/mvanhorn/last30days-skill",
+   "path": "plugins/marketplaces/mvanhorn-last30days-skill"
+  },
+  {
+   "name": "neolab-context-kit",
+   "url": "https://github.com/NeoLabHQ/context-engineering-kit",
+   "path": "plugins/marketplaces/neolab-context-kit"
+  },
+  {
+   "name": "numman-ali-skills",
+   "url": "https://github.com/numman-ali/n-skills",
+   "path": "plugins/marketplaces/numman-ali-skills"
+  },
+  {
+   "name": "obra-superpowers",
+   "url": "https://github.com/obra/superpowers",
+   "path": "plugins/marketplaces/obra-superpowers"
+  },
+  {
+   "name": "onmax-nuxt-skills",
+   "url": "https://github.com/onmax/nuxt-skills",
+   "path": "plugins/marketplaces/onmax-nuxt-skills"
+  },
+  {
+   "name": "othmanadi-planning",
+   "url": "https://github.com/OthmanAdi/planning-with-files",
+   "path": "plugins/marketplaces/othmanadi-planning"
+  },
+  {
+   "name": "p47phoenix-plugins",
+   "url": "https://github.com/P47Phoenix/Claude-Plugins",
+   "path": "plugins/marketplaces/p47phoenix-plugins"
+  },
+  {
+   "name": "pbakaus-impeccable",
+   "url": "https://github.com/pbakaus/impeccable",
+   "path": "plugins/marketplaces/pbakaus-impeccable"
+  },
+  {
+   "name": "phuryn-pm-skills",
+   "url": "https://github.com/phuryn/pm-skills",
+   "path": "plugins/marketplaces/phuryn-pm-skills"
+  },
+  {
    "name": "piebald-lsps",
-   "url": "https://github.com/Piebald-AI/claude-code-lsps.git",
+   "url": "https://github.com/Piebald-AI/claude-code-lsps",
    "path": "plugins/marketplaces/piebald-lsps"
   },
   {
    "name": "quant-equity-research",
-   "url": "https://github.com/quant-sentiment-ai/claude-equity-research.git",
+   "url": "https://github.com/quant-sentiment-ai/claude-equity-research",
    "path": "plugins/marketplaces/quant-equity-research"
   },
   {
-   "name": "athola-night-market",
-   "url": "https://github.com/athola/claude-night-market.git",
-   "path": "plugins/marketplaces/athola-night-market"
-  },
-  {
-   "name": "georgeguimaraes-elixir",
-   "url": "https://github.com/georgeguimaraes/elixir-agent-tools.git",
-   "path": "plugins/marketplaces/georgeguimaraes-elixir"
-  },
-  {
-   "name": "sawyerhood-mart",
-   "url": "https://github.com/SawyerHood/sawyer-mart.git",
-   "path": "plugins/marketplaces/sawyerhood-mart"
-  },
-  {
-   "name": "devgom-marketplace",
-   "url": "https://github.com/Dev-GOM/claude-code-marketplace.git",
-   "path": "plugins/marketplaces/devgom-marketplace"
-  },
-  {
-   "name": "sivalabs-marketplace",
-   "url": "https://github.com/sivaprasadreddy/sivalabs-marketplace.git",
-   "path": "plugins/marketplaces/sivalabs-marketplace"
-  },
-  {
-   "name": "madappgang-claude-code",
-   "url": "https://github.com/MadAppGang/claude-code.git",
-   "path": "plugins/marketplaces/madappgang-claude-code"
-  },
-  {
-   "name": "othmanadi-planning",
-   "url": "https://github.com/OthmanAdi/planning-with-files.git",
-   "path": "plugins/marketplaces/othmanadi-planning"
-  },
-  {
-   "name": "diet103-infrastructure",
-   "url": "https://github.com/diet103/claude-code-infrastructure-showcase.git",
-   "path": "plugins/marketplaces/diet103-infrastructure"
-  },
-  {
-   "name": "obra-superpowers",
-   "url": "https://github.com/obra/superpowers.git",
-   "path": "plugins/marketplaces/obra-superpowers"
-  },
-  {
-   "name": "mvanhorn-last30days-skill",
-   "url": "https://github.com/mvanhorn/last30days-skill.git",
-   "path": "plugins/marketplaces/mvanhorn-last30days-skill"
-  },
-  {
-   "name": "expo-skills",
-   "url": "https://github.com/expo/skills.git",
-   "path": "plugins/marketplaces/expo-skills"
-  },
-  {
-   "name": "voltagent-agent-skills",
-   "url": "https://github.com/VoltAgent/awesome-agent-skills.git",
-   "path": "plugins/marketplaces/voltagent-agent-skills"
-  },
-  {
-   "name": "danielscholl-sdlc",
-   "url": "https://github.com/danielscholl/claude-sdlc.git",
-   "path": "plugins/marketplaces/danielscholl-sdlc"
-  },
-  {
-   "name": "akin-ozer-devops",
-   "url": "https://github.com/akin-ozer/cc-devops-skills.git",
-   "path": "plugins/marketplaces/akin-ozer-devops"
-  },
-  {
-   "name": "EveryInc-compound",
-   "url": "https://github.com/EveryInc/compound-engineering-plugin.git",
-   "path": "plugins/marketplaces/EveryInc-compound"
-  },
-  {
-   "name": "daymade-skills",
-   "url": "https://github.com/daymade/claude-code-skills.git",
-   "path": "plugins/marketplaces/daymade-skills"
-  },
-  {
-   "name": "automazeio-ccpm",
-   "url": "https://github.com/automazeio/ccpm.git",
-   "path": "plugins/marketplaces/automazeio-ccpm"
-  },
-  {
-   "name": "ykdojo-tips",
-   "url": "https://github.com/ykdojo/claude-code-tips.git",
-   "path": "plugins/marketplaces/ykdojo-tips"
-  },
-  {
-   "name": "hesreallyhim-awesome",
-   "url": "https://github.com/hesreallyhim/awesome-claude-code.git",
-   "path": "plugins/marketplaces/hesreallyhim-awesome"
-  },
-  {
    "name": "quemsah-awesome",
-   "url": "https://github.com/quemsah/awesome-claude-plugins.git",
+   "url": "https://github.com/quemsah/awesome-claude-plugins",
    "path": "plugins/marketplaces/quemsah-awesome"
   },
   {
-   "name": "aaronontheweb-dotnet-skills",
-   "url": "https://github.com/Aaronontheweb/dotnet-skills.git",
-   "path": "plugins/marketplaces/aaronontheweb-dotnet-skills"
-  },
-  {
-   "name": "levnikolaevich-claude-code-skills",
-   "url": "https://github.com/levnikolaevich/claude-code-skills.git",
-   "path": "plugins/marketplaces/levnikolaevich-claude-code-skills"
-  },
-  {
-   "name": "giuseppe-developer-kit",
-   "url": "https://github.com/giuseppe-trisciuoglio/developer-kit.git",
-   "path": "plugins/marketplaces/giuseppe-developer-kit"
-  },
-  {
    "name": "rohitg00-claude-code-toolkit",
-   "url": "https://github.com/rohitg00/awesome-claude-code-toolkit.git",
+   "url": "https://github.com/rohitg00/awesome-claude-code-toolkit",
    "path": "plugins/marketplaces/rohitg00-claude-code-toolkit"
   },
   {
-   "name": "disler-hooks-mastery",
-   "url": "https://github.com/disler/claude-code-hooks-mastery.git",
-   "path": "plugins/marketplaces/disler-hooks-mastery"
-  },
-  {
-   "name": "manutej-luxor-marketplace",
-   "url": "https://github.com/manutej/luxor-claude-marketplace.git",
-   "path": "plugins/marketplaces/manutej-luxor-marketplace"
-  },
-  {
-   "name": "jeffallan-claude-skills",
-   "url": "https://github.com/Jeffallan/claude-skills.git",
-   "path": "plugins/marketplaces/jeffallan-claude-skills"
-  },
-  {
-   "name": "ahmedasmar-devops-skills",
-   "url": "https://github.com/ahmedasmar/devops-claude-skills.git",
-   "path": "plugins/marketplaces/ahmedasmar-devops-skills"
-  },
-  {
-   "name": "mrgoonie-claudekit-skills",
-   "url": "https://github.com/mrgoonie/claudekit-skills.git",
-   "path": "plugins/marketplaces/mrgoonie-claudekit-skills"
-  },
-  {
-   "name": "onmax-nuxt-skills",
-   "url": "https://github.com/onmax/nuxt-skills.git",
-   "path": "plugins/marketplaces/onmax-nuxt-skills"
-  },
-  {
-   "name": "actionbook-rust-skills",
-   "url": "https://github.com/actionbook/rust-skills.git",
-   "path": "plugins/marketplaces/actionbook-rust-skills"
-  },
-  {
-   "name": "hashicorp-agent-skills",
-   "url": "https://github.com/hashicorp/agent-skills.git",
-   "path": "plugins/marketplaces/hashicorp-agent-skills"
-  },
-  {
    "name": "sangrokjung-claude-forge",
-   "url": "https://github.com/sangrokjung/claude-forge.git",
+   "url": "https://github.com/sangrokjung/claude-forge",
    "path": "plugins/marketplaces/sangrokjung-claude-forge"
   },
   {
-   "name": "team-attention-plugins",
-   "url": "https://github.com/team-attention/plugins-for-claude-natives.git",
-   "path": "plugins/marketplaces/team-attention-plugins"
-  },
-  {
-   "name": "shanraisshan-best-practice",
-   "url": "https://github.com/shanraisshan/claude-code-best-practice.git",
-   "path": "plugins/marketplaces/shanraisshan-best-practice"
-  },
-  {
-   "name": "brennercruvinel-CCPlugins",
-   "url": "https://github.com/brennercruvinel/CCPlugins.git",
-   "path": "plugins/marketplaces/brennercruvinel-CCPlugins"
-  },
-  {
-   "name": "ccplugins-awesome",
-   "url": "https://github.com/ccplugins/awesome-claude-code-plugins.git",
-   "path": "plugins/marketplaces/ccplugins-awesome"
-  },
-  {
-   "name": "kenryu42-safety-net",
-   "url": "https://github.com/kenryu42/cc-safety-net.git",
-   "path": "plugins/marketplaces/kenryu42-safety-net"
-  },
-  {
-   "name": "trailofbits-skills-curated",
-   "url": "https://github.com/trailofbits/skills-curated.git",
-   "path": "plugins/marketplaces/trailofbits-skills-curated"
-  },
-  {
-   "name": "superpowers-marketplace",
-   "url": "https://github.com/obra/superpowers-marketplace.git",
-   "path": "plugins/marketplaces/superpowers-marketplace"
-  },
-  {
-   "name": "sickn33-antigravity-awesome-skills",
-   "url": "https://github.com/sickn33/agentic-awesome-skills.git",
-   "path": "plugins/marketplaces/sickn33-antigravity-awesome-skills"
-  },
-  {
-   "name": "agentskills-agentskills",
-   "url": "https://github.com/agentskills/agentskills.git",
-   "path": "plugins/marketplaces/agentskills-agentskills"
-  },
-  {
-   "name": "skillcreatorai-agent-skills",
-   "url": "https://github.com/MoizIbnYousaf/ai-agent-skills.git",
-   "path": "plugins/marketplaces/skillcreatorai-agent-skills"
-  },
-  {
-   "name": "francyjg-agent-skill-creator",
-   "url": "https://github.com/FrancyJGLisboa/agent-skills-platform.git",
-   "path": "plugins/marketplaces/francyjg-agent-skill-creator"
-  },
-  {
-   "name": "pbakaus-impeccable",
-   "url": "https://github.com/pbakaus/impeccable.git",
-   "path": "plugins/marketplaces/pbakaus-impeccable"
-  },
-  {
-   "name": "hardikpandya-stop-slop",
-   "url": "https://github.com/hardikpandya/stop-slop.git",
-   "path": "plugins/marketplaces/hardikpandya-stop-slop"
-  },
-  {
-   "name": "claude-code-plugins-plus-skills",
-   "url": "https://github.com/jeremylongshore/tons-of-skills-marketplace.git",
-   "path": "plugins/marketplaces/claude-code-plugins-plus-skills"
-  },
-  {
-   "name": "slavingia-skills",
-   "url": "https://github.com/slavingia/skills.git",
-   "path": "plugins/marketplaces/slavingia-skills"
-  },
-  {
    "name": "sawyerhood-dev-browser",
-   "url": "https://github.com/SawyerHood/dev-browser.git",
+   "url": "https://github.com/SawyerHood/dev-browser",
    "path": "plugins/marketplaces/sawyerhood-dev-browser"
   },
   {
-   "name": "blader-humanizer",
-   "url": "https://github.com/blader/humanizer.git",
-   "path": "plugins/marketplaces/blader-humanizer"
+   "name": "sawyerhood-mart",
+   "url": "https://github.com/SawyerHood/sawyer-mart",
+   "path": "plugins/marketplaces/sawyerhood-mart"
+  },
+  {
+   "name": "secondsky-sap-skills",
+   "url": "https://github.com/secondsky/sap-skills",
+   "path": "plugins/marketplaces/secondsky-sap-skills"
+  },
+  {
+   "name": "shanraisshan-best-practice",
+   "url": "https://github.com/shanraisshan/claude-code-best-practice",
+   "path": "plugins/marketplaces/shanraisshan-best-practice"
+  },
+  {
+   "name": "sickn33-antigravity-awesome-skills",
+   "url": "https://github.com/sickn33/agentic-awesome-skills",
+   "path": "plugins/marketplaces/sickn33-antigravity-awesome-skills"
+  },
+  {
+   "name": "sivalabs-marketplace",
+   "url": "https://github.com/sivaprasadreddy/sivalabs-marketplace",
+   "path": "plugins/marketplaces/sivalabs-marketplace"
+  },
+  {
+   "name": "skill-seekers",
+   "url": "https://github.com/yusufkaraaslan/Skill_Seekers",
+   "path": "plugins/marketplaces/skill-seekers"
+  },
+  {
+   "name": "skillcreatorai-agent-skills",
+   "url": "https://github.com/MoizIbnYousaf/ai-agent-skills",
+   "path": "plugins/marketplaces/skillcreatorai-agent-skills"
+  },
+  {
+   "name": "skillsforge",
+   "url": "https://github.com/rawveg/skillsforge-marketplace",
+   "path": "plugins/marketplaces/skillsforge"
+  },
+  {
+   "name": "slavingia-skills",
+   "url": "https://github.com/slavingia/skills",
+   "path": "plugins/marketplaces/slavingia-skills"
+  },
+  {
+   "name": "superpowers-marketplace",
+   "url": "https://github.com/obra/superpowers-marketplace",
+   "path": "plugins/marketplaces/superpowers-marketplace"
+  },
+  {
+   "name": "taches-cc-resources",
+   "url": "https://github.com/glittercowboy/taches-cc-resources",
+   "path": "plugins/marketplaces/taches-cc-resources"
+  },
+  {
+   "name": "team-attention-plugins",
+   "url": "https://github.com/team-attention/plugins-for-claude-natives",
+   "path": "plugins/marketplaces/team-attention-plugins"
+  },
+  {
+   "name": "trailofbits-skills",
+   "url": "https://github.com/trailofbits/skills",
+   "path": "plugins/marketplaces/trailofbits-skills"
+  },
+  {
+   "name": "trailofbits-skills-curated",
+   "url": "https://github.com/trailofbits/skills-curated",
+   "path": "plugins/marketplaces/trailofbits-skills-curated"
   },
   {
    "name": "understand-anything",
-   "url": "https://github.com/Egonex-AI/Understand-Anything.git",
+   "url": "https://github.com/Egonex-AI/Understand-Anything",
    "path": "plugins/marketplaces/understand-anything"
   },
   {
-   "name": "phuryn-pm-skills",
-   "url": "https://github.com/phuryn/pm-skills.git",
-   "path": "plugins/marketplaces/phuryn-pm-skills"
+   "name": "vercel-agent-skills",
+   "url": "https://github.com/vercel-labs/agent-skills",
+   "path": "plugins/marketplaces/vercel-agent-skills"
   },
   {
-   "name": "millionco-expect",
-   "url": "https://github.com/millionco/expect.git",
-   "path": "plugins/marketplaces/millionco-expect"
+   "name": "voltagent-agent-skills",
+   "url": "https://github.com/VoltAgent/awesome-agent-skills",
+   "path": "plugins/marketplaces/voltagent-agent-skills"
+  },
+  {
+   "name": "voltagent-subagents",
+   "url": "https://github.com/VoltAgent/awesome-claude-code-subagents",
+   "path": "plugins/marketplaces/voltagent-subagents"
+  },
+  {
+   "name": "wshobson-agents",
+   "url": "https://github.com/wshobson/agents",
+   "path": "plugins/marketplaces/wshobson-agents"
+  },
+  {
+   "name": "ykdojo-tips",
+   "url": "https://github.com/ykdojo/claude-code-tips",
+   "path": "plugins/marketplaces/ykdojo-tips"
   }
  ],
  "edges": [

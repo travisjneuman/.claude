@@ -1,3 +1,9 @@
+---
+name: Skill Creation Guide
+description: Step-by-step guide for adding a new local skill to the toolkit, from deciding whether a skill is needed to frontmatter, routing, and upkeep.
+category: reference
+---
+
 # Skill Creation Guide
 
 > Step-by-step guide for adding a new local skill to `~/.claude/skills/`. Pairs with the [skill template](../templates/skill-template.md) (which is the file structure you copy from) and the [Skills overview](./SKILLS.md) (which explains the system itself).
@@ -146,11 +152,13 @@ bash ~/.claude/scripts/regenerate-index.sh
 bash ~/.claude/scripts/update-counts.sh
 ```
 
-Both scripts are idempotent. Run them whenever you add or rename a skill.
+Both scripts are idempotent. Run them whenever you add or rename a skill; no git hook runs them for you (the pre-commit hook only checks publication safety).
 
 If your skill belongs to a routable domain, add a row to the relevant `~/.claude/skills/toolkit-router/routes/domains-*.md` file so the router surfaces it. Most skills don't need this — they get found via the description match alone.
 
-### 7. Test
+### 7. Try it by hand
+
+These are checks for you to run yourself. An agent adding a skill validates it by reviewing the frontmatter and description against neighboring skills, and runs sample prompts only when you ask.
 
 1. **Restart Claude Code** (skills load at session start).
 2. **Test auto-activation**. Open a fresh session, type a prompt that should hit your skill, and check whether Claude's response shows it loaded. The `/list-skills` slash command shows currently loaded skills.

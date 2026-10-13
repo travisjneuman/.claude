@@ -5,6 +5,8 @@ description: Professional audio production for music, podcasts, and sound design
 
 # Audio Production
 
+> Rendering, encoding, and audio or image synthesis run only on the owner's designated media host when the private layer defines one, in a dated work folder outside any repository; on other hosts, plan and write source only. Source logos are copy-only.
+
 Comprehensive guide for professional audio production across music, podcasts, video, and interactive media.
 
 ## Audio Fundamentals
