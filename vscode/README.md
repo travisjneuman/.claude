@@ -2,6 +2,8 @@
 
 This folder contains global VSCode settings that apply to all VSCode variants.
 
+Up: [README](../README.md)
+
 ---
 
 ## ⚠️ Important: Two VSCode Folders

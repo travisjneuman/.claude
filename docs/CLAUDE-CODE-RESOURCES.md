@@ -10,6 +10,10 @@ Quick reference for Claude Code optimization.
 
 **Last Updated:** February 2026 (v2.10.1)
 
+## Contents
+
+[File Locations](#file-locations) · [Essential Commands](#essential-commands) · [Subagent Configuration](#subagent-configuration) · [Hook Types](#hook-types) · [MCP Servers](#mcp-servers) · [Context Management](#context-management) · [Keyboard Shortcuts](#keyboard-shortcuts) · [Thinking Depth](#thinking-depth) · [Portable .claude Files](#portable-claude-files) · [Official Anthropic Documentation](#official-anthropic-documentation) · [Community Guides & Tutorials](#community-guides--tutorials) · [Awesome Lists & Collections](#awesome-lists--collections) · [MCP Server Resources](#mcp-server-resources) · [Plugin & Skills Development](#plugin--skills-development) · [Agent Teams Resources](#agent-teams-resources) · [Internal Documentation Map](#internal-documentation-map) · [Quick Tips](#quick-tips) · [Ecosystem At a Glance](#ecosystem-at-a-glance)
+
 ---
 
 ## File Locations

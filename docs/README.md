@@ -2,12 +2,17 @@
 name: Documentation Index
 description: Front door for the toolkit's guides and on-demand reference docs, routed by need and keyword.
 category: reference
+type: index
+status: active
+updated: 2026-10-14
+domain: toolkit-docs
+canonical_location: true
 ---
 
 # Claude Code Toolkit Documentation
 
 Front door for every guide in `docs/` and the on-demand reference docs in `docs/reference/`.
-Up: [README](../README.md) · Not here: skills, agents, commands, and rules are found through the generated [`INDEX.md`](../INDEX.md) (grep it, or use the `toolkit-router` skill).
+Up: [README](../README.md) · Not here: skills and agents are found through the generated [`INDEX.md`](../INDEX.md) (grep it, or use the `toolkit-router` skill); hook behavior is in [hooks/README.md](../hooks/README.md).
 
 **Last Updated:** October 2026 · **Version history:** [CHANGELOG.md](../CHANGELOG.md)
 
@@ -34,14 +39,77 @@ Up: [README](../README.md) · Not here: skills, agents, commands, and rules are 
 | backup, recovery | [BACKUP-STRATEGIES.md](./BACKUP-STRATEGIES.md) | |
 | security, gitignore policy, public exposure | [SECURITY.md](./SECURITY.md) | |
 | terms, definitions | [GLOSSARY.md](./GLOSSARY.md), [FAQ.md](./FAQ.md) | |
-| stack guide (React, Next/Nest, Vue, Svelte, Python, Django/FastAPI, Go, Rust, Flutter, Expo) | [`reference/stacks/`](./reference/stacks/) | 10 docs, one per stack |
-| checklist (API, database, security, performance, monitoring, mobile deploy, static site, UI change, automation, verification) | [`reference/checklists/`](./reference/checklists/) | 10 docs |
-| workflow reference (action policy, agent teams, context, deploy/CI, post-change docs, research) | [`reference/workflows/`](./reference/workflows/) | 6 docs |
-| tooling (external repos, git hooks, MCP, troubleshooting) | [`reference/tooling/`](./reference/tooling/) | 4 docs |
+| language rules, path-scoped rules, `rules/` | [reference/README.md](./reference/README.md#rules) | Lists every rule file and its scope |
+| stack guide (React, Next/Nest, Vue, Svelte, Python, Django/FastAPI, Go, Rust, Flutter, Expo) | [reference/README.md](./reference/README.md#stacks) | One guide per stack in `reference/stacks/` |
+| checklist (API, database, security, performance, monitoring, mobile deploy, static site, UI change, automation, verification) | [reference/README.md](./reference/README.md#checklists) | `reference/checklists/` |
+| workflow reference (action policy, agent teams, context, deploy/CI, post-change docs, research) | [reference/README.md](./reference/README.md#workflows) | `reference/workflows/` |
+| tooling (external repos, git hooks, MCP, troubleshooting) | [reference/README.md](./reference/README.md#tooling) | `reference/tooling/` |
 | external links, community resources | [RESOURCES.md](./RESOURCES.md), [CLAUDE-CODE-RESOURCES.md](./CLAUDE-CODE-RESOURCES.md), [REFERENCE-URLS.md](./REFERENCE-URLS.md) | |
 | model-specific notes (Opus 4.6, Feb 2026) | [OPUS-4-6-GUIDE.md](./OPUS-4-6-GUIDE.md) | Dated guide |
+| git hook samples, task-file enforcement (old v2.10.1 workflow) | [workflow-automation.md](./workflow-automation.md) | Superseded by [CLAUDE.md](../CLAUDE.md); samples only on request |
 
 `count-inputs/` holds dated count-source snapshots consumed by the [count pipeline](./COUNT-PIPELINE.md); it is data, not a guide. The Auto-Claude guide was removed with that workflow; older docs that still mention it are historical.
+
+## Map
+
+```mermaid
+graph LR
+  R[README] --> D[docs/README]
+  D --> SET[Setup and configuration]
+  D --> USE[Routing, commands, skills, agents]
+  D --> ECO[Marketplace, plugins, MCP]
+  D --> OPS[Counts, maintenance, backup, security]
+  D --> HELP[Glossary, FAQ, resources]
+  D --> REF[reference/README]
+  REF --> RU[rules/]
+  REF --> ST[stacks, checklists, workflows, tooling]
+  OPS --> CI[count-inputs/]
+  USE --> IDX[INDEX.md]
+```
+
+## Contents
+
+**Setup and configuration**
+
+- [SETUP-GUIDE.md](./SETUP-GUIDE.md) — first-time install on macOS, Linux, or Windows
+- [NEW-DEVICE-SETUP.md](./NEW-DEVICE-SETUP.md) — deploy to another machine, `.env.local`, marketplace init
+- [CONFIGURATION.md](./CONFIGURATION.md) — settings.json, permissions, hooks, MCP configuration reference
+- [FOLDER-STRUCTURE.md](./FOLDER-STRUCTURE.md) — directory map with file purposes and security notes
+- [ARCHITECTURE.md](./ARCHITECTURE.md) — how CLAUDE.md, rules, skills, agents, hooks, website interact
+
+**Using the toolkit**
+
+- [DOMAIN-ROUTING.md](./DOMAIN-ROUTING.md) — how prompts reach the right skill, agent, or resource
+- [COMMANDS.md](./COMMANDS.md) — every slash command by category (front door for `commands/`)
+- [SKILLS.md](./SKILLS.md) — create, customize, and manage local and marketplace skills
+- [SKILL-CREATION-GUIDE.md](./SKILL-CREATION-GUIDE.md) — step by step: decide, write, route, maintain a skill
+- [AGENT-TEAMS.md](./AGENT-TEAMS.md) — coordinate several Claude Code sessions as a team
+- [WORKFLOW-GUIDE.md](./WORKFLOW-GUIDE.md) — work patterns, task routing, context hygiene
+- [workflow-automation.md](./workflow-automation.md) — superseded v2.10.1 guide; git hook samples only
+
+**Marketplace, plugins, MCP**
+
+- [MARKETPLACE-GUIDE.md](./MARKETPLACE-GUIDE.md) — manifest marketplaces, searching and updating them
+- [PLUGIN-MANAGEMENT.md](./PLUGIN-MANAGEMENT.md) — current plugin set, custom plugins, discovery troubleshooting
+- [MCP-SERVERS.md](./MCP-SERVERS.md) — optional MCP servers; none configured by default
+
+**Operations**
+
+- [COUNT-PIPELINE.md](./COUNT-PIPELINE.md) — public count definitions, snapshot evidence, explicit publication
+- [MAINTENANCE.md](./MAINTENANCE.md) — keeping skills, agents, marketplaces, configs current
+- [BACKUP-STRATEGIES.md](./BACKUP-STRATEGIES.md) — backing up gitignored session data and local config
+- [SECURITY.md](./SECURITY.md) — public-repo exposure decisions, gitignore policy, sensitive data
+- `count-inputs/` — dated count-source snapshots (data, `YYYY-MM-DD-<source>.json`)
+
+**Reference and help**
+
+- [reference/README.md](./reference/README.md) — rules, stack guides, checklists, workflow and tooling references
+- [GLOSSARY.md](./GLOSSARY.md) — definitions of toolkit terms
+- [FAQ.md](./FAQ.md) — common questions on skills, agents, marketplace, hooks
+- [RESOURCES.md](./RESOURCES.md) — curated external tools and learning material
+- [CLAUDE-CODE-RESOURCES.md](./CLAUDE-CODE-RESOURCES.md) — quick reference: shortcuts, file locations, official docs
+- [REFERENCE-URLS.md](./REFERENCE-URLS.md) — audited Anthropic resource and use-case URLs
+- [OPUS-4-6-GUIDE.md](./OPUS-4-6-GUIDE.md) — dated February 2026 notes on Opus 4.6 features
 
 ---
 

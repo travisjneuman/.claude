@@ -2,6 +2,10 @@
 
 **When to use:** Optimizing web performance, analyzing bundle sizes, or improving load times.
 
+## Contents
+
+[Core Web Vitals Targets](#core-web-vitals-targets) · [Bundle Analysis and Code Splitting](#bundle-analysis-and-code-splitting) · [Image Optimization](#image-optimization) · [Caching Strategies](#caching-strategies) · [Database Query Optimization](#database-query-optimization) · [SSR vs SSG Decision Matrix](#ssr-vs-ssg-decision-matrix) · [React Rendering Optimization](#react-rendering-optimization) · [Server-Side Performance](#server-side-performance) · [Lighthouse CI Integration](#lighthouse-ci-integration) · [Quick Wins Checklist](#quick-wins-checklist) · [Related Skills](#related-skills) · [Related Documentation](#related-documentation) · [Anti-Patterns](#anti-patterns)
+
 ---
 
 ## Core Web Vitals Targets

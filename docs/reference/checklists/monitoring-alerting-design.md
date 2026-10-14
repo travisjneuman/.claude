@@ -2,6 +2,10 @@
 
 **When to use:** Setting up observability infrastructure, defining SLOs, designing dashboards, or configuring alerting policies.
 
+## Contents
+
+[SLO/SLI Definition](#slosli-definition) · [Metric Selection](#metric-selection) · [Alerting Design](#alerting-design) · [Dashboard Design](#dashboard-design) · [Incident Correlation](#incident-correlation) · [Tooling Patterns](#tooling-patterns) · [Structured Logging for Observability](#structured-logging-for-observability) · [Distributed Tracing](#distributed-tracing) · [Pre-Production Monitoring Checklist](#pre-production-monitoring-checklist) · [Related Skills](#related-skills) · [Related Documentation](#related-documentation) · [Anti-Patterns](#anti-patterns)
+
 ---
 
 ## SLO/SLI Definition

@@ -8,6 +8,10 @@ category: ecosystem
 
 **Last Updated:** September 2026 (v3.1.0)
 
+## Contents
+
+[Overview](#overview) · [Current plugin set (authoritative)](#current-plugin-set-authoritative) · [Directory Structure](#directory-structure) · [Plugin Anatomy](#plugin-anatomy) · [Plugin Discovery and Loading](#plugin-discovery-and-loading) · [Installing Plugins from Marketplaces](#installing-plugins-from-marketplaces) · [The Marketplace Ecosystem](#the-marketplace-ecosystem) · [Creating Plugins](#creating-plugins) · [Updating Upstream Plugins](#updating-upstream-plugins) · [Creating a New Custom Plugin](#creating-a-new-custom-plugin) · [Marketplace Submodule Configuration](#marketplace-submodule-configuration) · [Troubleshooting](#troubleshooting) · [Quick Reference](#quick-reference) · [Workflow Summary](#workflow-summary) · [Related Documentation](#related-documentation)
+
 ---
 
 ## Overview

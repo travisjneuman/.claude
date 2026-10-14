@@ -12,6 +12,10 @@ Complete reference for the 81 plugin marketplaces and how to use them.
 
 **Location:** `~/.claude/plugins/marketplaces/`
 
+## Contents
+
+[Quick Start](#quick-start) · [Manifest Marketplaces](#manifest-marketplaces) · [Key Commands by Marketplace](#key-commands-by-marketplace) · [Domain Quick Reference](#domain-quick-reference) · [How to Search Marketplaces](#how-to-search-marketplaces) · [External Discovery](#external-discovery) · [Updating Marketplaces](#updating-marketplaces) · [Related Documentation](#related-documentation)
+
 ---
 
 ## Quick Start
@@ -22,6 +26,8 @@ Complete reference for the 81 plugin marketplaces and how to use them.
 4. **For commands:** Check marketplace README for slash commands
 
 ---
+
+<a id="manifest-marketplaces"></a>
 
 ## Manifest Marketplaces (81)
 

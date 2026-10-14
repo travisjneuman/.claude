@@ -2,6 +2,8 @@
 
 Showcase website for the `.claude` configuration framework.
 
+Up: [README](../README.md) · Not here: the toolkit's own docs are in [docs/README.md](../docs/README.md); the website reads them at build time.
+
 **Live:** https://claude.travisjneuman.com
 
 ## Stack

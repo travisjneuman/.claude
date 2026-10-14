@@ -2,6 +2,8 @@
 
 Hooks are small scripts Claude Code runs automatically at fixed moments: when a session starts, before or after a tool runs, when a session ends. They're wired in `settings.json` and all go through `run-hook.js`, which finds the script (public `hooks/` first, then your private `local/hooks/`), picks the right interpreter on macOS, Linux, or Windows, and passes Claude Code's JSON through.
 
+Up: [README](../README.md) · Not here: git hooks for this repo are in `scripts/hooks/` ([scripts/README.md](../scripts/README.md)); hook settings syntax is in [docs/CONFIGURATION.md](../docs/CONFIGURATION.md); private hooks go in `local/hooks/` ([local.example/README.md](../local.example/README.md)).
+
 **Token cost** means text injected into Claude's context. Most hooks here cost zero: they either do their work silently or only speak up when something is wrong.
 
 ## Active hooks

@@ -10,6 +10,10 @@ Coordinate multiple Claude Code sessions working together as a team.
 
 **Last Updated:** February 2026
 
+## Contents
+
+[What Are Agent Teams?](#what-are-agent-teams) · [When to Use Agent Teams](#when-to-use-agent-teams) · [Setup](#setup) · [Core Tools](#core-tools) · [Starting a Team](#starting-a-team) · [Pre-Built Team Templates](#pre-built-team-templates) · [Controlling Your Team](#controlling-your-team) · [Architecture](#architecture) · [Best Practices](#best-practices) · [Cross-Platform Behavior](#cross-platform-behavior) · [Limitations](#limitations) · [Troubleshooting](#troubleshooting) · [Related Documentation](#related-documentation)
+
 ---
 
 ## What Are Agent Teams?

@@ -2,6 +2,10 @@
 
 **When to use:** Setting up CI/CD pipelines, deployment strategies, or release processes.
 
+## Contents
+
+[CI/CD Pipeline Stages](#cicd-pipeline-stages) · [GitHub Actions Patterns](#github-actions-patterns) · [GitLab CI Patterns](#gitlab-ci-patterns) · [Deployment Strategies](#deployment-strategies) · [Rollback Procedures](#rollback-procedures) · [Health Checks and Monitoring](#health-checks-and-monitoring) · [Environment Variable Management](#environment-variable-management) · [Docker Deployment Patterns](#docker-deployment-patterns) · [Platform-Specific Deployment](#platform-specific-deployment) · [Pre-Deployment Checklist](#pre-deployment-checklist) · [Related Skills](#related-skills) · [Related Documentation](#related-documentation) · [Anti-Patterns](#anti-patterns)
+
 ---
 
 ## CI/CD Pipeline Stages

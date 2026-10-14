@@ -10,6 +10,10 @@ Detailed patterns for getting work done with Claude Code.
 
 **Last Updated:** February 2026 (v2.10.1)
 
+## Contents
+
+[Prompt Types: Standard vs /start-task](#prompt-types-standard-vs-start-task) · [Always Available Capabilities](#always-available-capabilities) · [Proactive Resource Discovery](#proactive-resource-discovery) · [Phases + Tools Integration](#phases--tools-integration) · [Three Implementation Approaches](#three-implementation-approaches) · [Complexity Routing](#complexity-routing) · [Decision Frameworks](#decision-frameworks) · [Automation Hooks](#automation-hooks) · [Project Initialization](#project-initialization) · [Related Documentation](#related-documentation)
+
 **Quick Start:** Just describe what you want. Skills auto-activate via SessionStart hook. Use `/start-task` for complex work.
 
 **New in v2.1:** SessionStart hook for automatic skill/agent routing on every prompt. See [CHANGELOG.md](../CHANGELOG.md#210---january-13-2026).

@@ -10,7 +10,11 @@ Model Context Protocol servers extend Claude's capabilities with external tools.
 
 **Last Updated:** February 2026 (v2.10.1)
 
-**See also:** [MCP Server Management Guide](../docs/reference/tooling/mcp-servers.md) for lifecycle management.
+**See also:** [MCP Server Management Guide](./reference/tooling/mcp-servers.md) for lifecycle management.
+
+## Contents
+
+[What Is MCP?](#what-is-mcp) · [Currently Installed Servers](#currently-installed-servers) · [Server Details](#server-details) · [Browser Automation: Which Server to Use?](#browser-automation-which-server-to-use) · [Configuration](#configuration) · [Adding New Servers](#adding-new-servers) · [Removing Servers](#removing-servers) · [Lazy Loading](#lazy-loading) · [Troubleshooting](#troubleshooting) · [Available MCP Servers (Not Installed)](#available-mcp-servers-not-installed) · [Security Considerations](#security-considerations) · [Portable Backup](#portable-backup) · [See Also](#see-also)
 
 ---
 

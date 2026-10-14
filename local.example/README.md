@@ -2,6 +2,34 @@
 
 Everything personal or machine-specific goes in `~/.claude/local/`, which is gitignored. The public toolkit works without it; with it, you get your own rules, hooks, and settings on top.
 
+Up: [README](../README.md) · Not here: public, shared rules are in `rules/` (listed in [docs/reference/README.md](../docs/reference/README.md#rules)); hook behavior is in [hooks/README.md](../hooks/README.md); gitignore and exposure policy is in [docs/SECURITY.md](../docs/SECURITY.md).
+
+## Routes
+
+| Need / keywords | Open | Notes |
+| --- | --- | --- |
+| private rule, about me, GitHub owner, git identity | [`rules/00-me.md`](./rules/00-me.md) | Loads in every session once linked as `rules/local` |
+| settings for all machines, push owners, pull cadence, autopush | [`shared.env`](./shared.env) | Keys explained in [Settings](#settings-read-by-the-toolkit-hooks) below |
+| per-machine settings, project dirs, push command | [`hosts/example.env`](./hosts/example.env) | Copy or link to `~/.claude/.env.local` |
+| public-safety gate, private names that must never be committed | [`public-safety-patterns.txt`](./public-safety-patterns.txt) | Read by the pre-commit hook |
+| private hooks | `local/hooks/` (create it; not shipped in the template) | `local-session-start.sh`, `local-pre-tool-use.py` |
+| setup on a new machine | [Setup](#setup-on-a-machine) below | |
+
+## Map
+
+```mermaid
+graph LR
+  L[local.example/README] --> R[rules/00-me.md]
+  L --> S[shared.env]
+  L --> H[hosts/example.env]
+  L --> P[public-safety-patterns.txt]
+  L --> K[hooks/]
+  R --> RL[rules/local link]
+  H --> ENV[.env.local]
+```
+
+## Contents
+
 ```
 ~/.claude/local/
 ├── rules/                     # Private rules, auto-loaded: link ~/.claude/rules/local -> local/rules
@@ -13,7 +41,7 @@ Everything personal or machine-specific goes in `~/.claude/local/`, which is git
 └── public-safety-patterns.txt # regexes the public repo must never contain (pre-commit gate)
 ```
 
-Setup on a machine:
+### Setup on a machine
 
 ```bash
 cp -R ~/.claude/local.example ~/.claude/local      # or link a folder you back up elsewhere

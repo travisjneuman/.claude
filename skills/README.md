@@ -9,7 +9,7 @@ Comprehensive skills for Claude Code - 180 skills covering all development domai
 
 Up: [README](../README.md) · Not here: the authoritative, generated skill list is [`MASTER_INDEX.md`](./MASTER_INDEX.md) and the cross-reference is [`INDEX.md`](../INDEX.md).
 
-## Find a Skill
+## Routes
 
 Don't read this file to find a skill. Grep the generated index instead:
 
@@ -21,8 +21,27 @@ Don't read this file to find a skill. Grep the generated index instead:
 | marketplace skill | `index/marketplace-catalog.json` | Present once marketplaces are pulled |
 | write a new skill | [`../docs/SKILL-CREATION-GUIDE.md`](../docs/SKILL-CREATION-GUIDE.md), [`../templates/skill-template.md`](../templates/skill-template.md) | Then refresh the index: [`../scripts/README.md`](../scripts/README.md) |
 | shared helpers used by several skills | `_shared/` | Not a skill |
+| domain expert skills (product, health, ESG, innovation) in depth | [`EXPERT-SKILLS-GUIDE.md`](./EXPERT-SKILLS-GUIDE.md) | December 2025 guide; skill names may have changed since, check `MASTER_INDEX.md` |
 
 The category tables below are a human browse aid.
+
+## Map
+
+```mermaid
+graph LR
+  SR[skills/README] --> IDX[INDEX.md]
+  SR --> MI[MASTER_INDEX.md]
+  SR --> AG[agents/README.md]
+  SR --> SCG[SKILL-CREATION-GUIDE.md]
+  SR --> EX[EXPERT-SKILLS-GUIDE.md]
+  SR --> MC[marketplace-catalog.json]
+  IDX --> TR[toolkit-router skill]
+  SCG --> TPL[skill-template.md]
+```
+
+## Contents
+
+[Routes](#routes) · [Map](#map) · [Skills Overview](#skills-overview) · [Generic Skills (Any Project)](#generic-skills-any-project) · [Stack-Specific Skills](#stack-specific-skills) · [Framework Skills (Modern JS Frameworks)](#framework-skills-modern-js-frameworks) · [Platform Development Skills](#platform-development-skills) · [Creative & Design Skills](#creative--design-skills) · [Business & Startup Skills](#business--startup-skills) · [Technical Architecture Skills](#technical-architecture-skills) · [Domain Expert Skills](#domain-expert-skills) · [Education & Learning Skills](#education--learning-skills) · [Nonprofit & Social Impact Skills](#nonprofit--social-impact-skills) · [Analysis & Decision-Making Skills](#analysis--decision-making-skills) · [Industry & Domain Skills](#industry--domain-skills) · [Personal & Lifestyle Skills](#personal--lifestyle-skills) · [Development Workflow Skills](#development-workflow-skills) · [Document Skills](#document-skills) · [How to Use Skills](#how-to-use-skills) · [Skill Structure](#skill-structure) · [Creating New Skills](#creating-new-skills) · [Skills vs Agents](#skills-vs-agents) · [Best Practices](#best-practices) · [Quick Reference by Task](#quick-reference-by-task) · [See Also](#see-also)
 
 ---
 
