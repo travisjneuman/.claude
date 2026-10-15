@@ -1,0 +1,15 @@
+{
+  "restrictions": {
+    "enforce_web_search_mcp_isolation": {
+      "allowed": false
+    },
+    "require_trusted_devices": {
+      "allowed": true
+    }
+  },
+  "compliance_taints": [],
+  "monitoring_notice": null,
+  "defaults": {
+    "remote_control_at_startup": false
+  }
+}
