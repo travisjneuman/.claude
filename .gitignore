@@ -88,6 +88,13 @@ backups/
 /plugins/blocklist.json
 /plugins/.last_inuse_sweep
 /skills/synced/
+# Claude Code moves replaced synced skills here and fetches account policy and
+# remote settings into these files; all of it is runtime state.
+/skills/.trash/
+/policy-limits.json
+/policy-limits.json.stamp.json
+/remote-settings.json
+/remote-settings.json.synced-at
 /index/marketplace-catalog.json
 /security/
 
