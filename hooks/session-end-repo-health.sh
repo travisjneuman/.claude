@@ -34,7 +34,6 @@ GITHUB_OWNERS=$(env_get GITHUB_OWNERS)
 REPO_PUSH_COMMAND=$(env_get REPO_PUSH_COMMAND)
 AUTOPUSH=$(env_get SESSION_END_AUTOPUSH); AUTOPUSH=${AUTOPUSH:-1}
 [ -z "$GITHUB_OWNERS" ] && exit 0
-HOST=$(env_get TJN_HOST_NAME); HOST=${HOST:-$(hostname)}
 
 # Only one departure run at a time per machine.
 LOCK="$SCRIPT_DIR/logs/.departure.lock"
@@ -74,10 +73,8 @@ process() {
     [ -n "$newfiles" ] && printf '%s\n' "$newfiles" | tr '\n' '\0' | xargs -0 grep -Elq "$SECRET_RE" 2>/dev/null && hit=1
     if [ -n "$hit" ]; then log "SKIP possible secret in pending changes $name (commit manually after checking)"; return 0; fi
     git -C "$repo" add -A
-    # The toolkit repo is public: keep the host name out of its history.
-    local where=" ($HOST)"
-    [ "$repo" = "$SCRIPT_DIR" ] && where=""
-    if git -C "$repo" commit -q -m "chore: checkpoint pending changes at session end$where" >/dev/null 2>&1; then
+    # Several owned repos are public: never put the host name in a commit message.
+    if git -C "$repo" commit -q -m "chore: checkpoint pending changes at session end" >/dev/null 2>&1; then
       log "COMMITTED  $name"
     else
       log "COMMIT-FAILED $name (a commit hook refused; see the repo)"; return 0
