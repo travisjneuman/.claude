@@ -425,6 +425,11 @@
   },
   "outputStyle": "default",
   "spinnerTipsEnabled": false,
+  "modelSettings": {
+    "claude-opus-5-5": {
+      "effortLevel": "high"
+    }
+  },
   "autoCompactWindow": 240000,
   "promptSuggestionEnabled": false,
   "pluginConfigs": {
@@ -454,10 +459,5 @@
   "theme": "dark",
   "verbose": true,
   "teammateMode": "auto",
-  "remoteControlAtStartup": true,
-  "modelSettings": {
-    "claude-opus-5-5": {
-      "effortLevel": "high"
-    }
-  }
+  "remoteControlAtStartup": true
 }

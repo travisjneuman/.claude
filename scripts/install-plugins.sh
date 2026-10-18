@@ -44,12 +44,37 @@ markets=$(node -e '
     if (where) console.log(m+" "+where+" "+auto);
   }
 ' "$wanted")
+declared=$(node -e '
+  const fs=require("fs"),p=require("path"),h=require("os").homedir();
+  try{console.log(JSON.stringify(JSON.parse(fs.readFileSync(p.join(h,".claude","settings.json"),"utf8")).extraKnownMarketplaces||{}))}catch{console.log("{}")}
+')
 registered=$(claude plugin marketplace list 2>/dev/null)
 while read -r name where _auto; do
   [ -z "${name:-}" ] && continue
-  printf '%s' "$registered" | grep -q "$name" || claude plugin marketplace add "$where" </dev/null >/dev/null 2>&1
+  if ! printf '%s' "$registered" | grep -q "$name"; then
+    claude plugin marketplace add "$where" </dev/null >/dev/null 2>&1 && continue
+    # A host whose AI traffic goes through a scoped proxy may not reach this
+    # toolkit's raw URL; the same file is already here from the toolkit checkout.
+    # settings.json keeps declaring the URL (restored below), so Claude retries it
+    # in the background at startup and keeps this registration when that fails.
+    case "$where" in
+      */travisjneuman/.claude/*/marketplace/marketplace.json)
+        [ -f "$CLAUDE_DIR/marketplace/marketplace.json" ] &&
+          claude plugin marketplace add "$CLAUDE_DIR/marketplace/marketplace.json" </dev/null >/dev/null 2>&1 ;;
+    esac
+  fi
   claude plugin marketplace update "$name" </dev/null >/dev/null 2>&1
 done <<< "$markets"
+
+# `marketplace add` rewrites its settings.json entry as {source} alone, dropping
+# autoUpdate. Put back the declarations this repo tracks.
+node -e '
+  const fs=require("fs"),p=require("path"),f=p.join(require("os").homedir(),".claude","settings.json");
+  const want=JSON.parse(process.argv[1]);let s;try{s=JSON.parse(fs.readFileSync(f,"utf8"))}catch{process.exit(0)}
+  const cur=s.extraKnownMarketplaces||{};let changed=false;
+  for (const [m,v] of Object.entries(want)) if (JSON.stringify(cur[m])!==JSON.stringify(v)) {cur[m]=v;changed=true}
+  if (changed) {s.extraKnownMarketplaces=cur;fs.writeFileSync(f,JSON.stringify(s,null,2)+"\n")}
+' "$declared"
 
 installed=$(cd "$CLAUDE_DIR" && claude plugin list --json 2>/dev/null || echo '[]')
 
