@@ -36,7 +36,7 @@ A drop-in configuration layer for [Claude Code](https://docs.anthropic.com/en/do
 
 **Runs in YOLO mode on purpose:** `bypassPermissions` plus a Full Access+++ contract in `CLAUDE.md` (your request authorizes in-scope work; explicit "do not"s are absolute), backed by a guard hook that blocks a short list of footguns. Personal and machine-specific rules live in a gitignored [`local/`](./local.example/README.md) layer.
 
-**Cross-machine Git safety:** a session-start banner flags repos that are behind, unpushed, dirty, or diverged; a session-end hook pushes clean, finished work in repos you own (optionally through your own push runner, set in `local/`). Marketplace clones are pulled at most daily and are never committed.
+**Cross-machine Git safety:** a session-start banner flags repos that are behind, unpushed, dirty, or diverged. Session-end and daily maintenance hooks checkpoint all pending changes in configured owned repos, including unfinished work, then push through the configured runner when repository state permits. They stop for conflicts or possible secrets and report other push blockers. Marketplace clones are pulled at most daily and are never committed.
 
 **Who it's for:** Developers who use Claude Code and want deeper domain expertise, structured workflows, and quality guardrails without manual setup.
 
@@ -50,7 +50,7 @@ Up: [github.com/travisjneuman](https://github.com/travisjneuman) · Not here: pe
 
 | Step | Open | Answers |
 |------|------|---------|
-| 1 | [`CLAUDE.md`](./CLAUDE.md) (always loaded) | How to work: autonomy, git, safety, review-based validation |
+| 1 | [`CLAUDE.md`](./CLAUDE.md) (always loaded) | How to work: autonomy, git, safety, browser access, model selection, review-based validation |
 | 2 | [`INDEX.md`](./INDEX.md): `rg -n -i "<keyword>" ~/.claude/INDEX.md`, or invoke the `toolkit-router` skill, which does this | Which skill, agent, command, rule, checklist, or marketplace repo fits |
 | 3 | `skills/<name>/SKILL.md`, `agents/<name>.md`, `rules/<lang>.md`, `docs/reference/<kind>/<name>.md` | The procedure itself |
 
@@ -140,14 +140,11 @@ cd ~/.claude
 bash ~/.claude/scripts/init-marketplaces.sh
 ```
 
-### Verify Installation
+### Start Claude Code
 
 ```bash
 # Start Claude Code — the toolkit loads automatically
 claude
-
-# Run diagnostics
-/health-check
 ```
 
 That's it. Claude Code loads the toolkit from `~/.claude/` in every session.
@@ -241,7 +238,7 @@ After Each Response
   └── Once a day per machine: usage tally + commit-everything sweep (background)
 
 Session End
-  └── Push clean finished work in repos you own; log anything dirty or diverged
+  └── Commit all pending work in configured owned repos, then push when repository state permits; log conflicts, possible secrets, and push blockers
 
 Status bar
   └── model · effort · folder (branch) · context % · 5h/7d usage · cost

@@ -29,6 +29,7 @@ Discover → Scope → Plan (only when useful) → Execute → Verify → Docume
 - Use plan mode only for genuinely ambiguous or multi-system work; a diff you can describe in a sentence doesn't need a plan.
 - Delegate when the work splits into independent pieces with separate files; do small or sequential work yourself. Give each subagent the full scope, constraints, prohibitions, and the files it owns. Run them in the background and act on their completion notifications; never sleep or poll. Review each result against its assignment and send corrections to that same subagent. One owner handles git.
 - Honor the session's model, effort, and fast mode; instructions don't pick models, config does.
+- Provider, model, effort, and main/subagent assignments come from the active setup's configuration or the current user request. Do not prescribe named models or effort levels as general instruction prose, skills guidance, or adapter policy. Preserve explicit configuration assignments, including different providers or models for the main session and its coworkers; never silently substitute another choice.
 - After two materially identical failures with no new evidence, stop repeating and re-scope.
 - Before finishing: re-read the request, review the diff, stop processes you started, and remove temp files you created.
 
@@ -56,11 +57,17 @@ Don't write, add, or run tests of any kind: no test suites or files, fixtures, h
 
 ## Code standards
 
-Strict types (`unknown`, not `any`). Small focused functions and files. DRY after the third repetition. Tests must hold for all inputs, never hard-coded to pass. Language rules in `rules/` load automatically for matching files.
+Strict types (`unknown`, not `any`). Small focused functions and files. DRY after the third repetition. When Travis explicitly requests tests, cover relevant inputs rather than hard-coding a passing case. Language rules in `rules/` load automatically for matching files.
 
 ## Finding the right tool
 
 Only core skills and the core agents show a full description in your context; the rest of the toolkit (170+ skills including the specialist `agent-*` skills that run as their own subagent, commands, checklists, stack guides, and the indexed marketplace skills) is listed by name only. When a task is specialized, use the `toolkit-router` skill: grep `~/.claude/INDEX.md` for the domain, then invoke what fits. Don't read the whole index.
+
+## Browser use
+
+- Use only managed CamoFox Headless, the browser built into the active app, or computer use.
+- Do not install or independently invoke Playwright or another browser-automation runtime. Do not route browser work through a separate launcher or agent to bypass this rule.
+- Follow the shared source-intake instructions; use CamoFox for shared, social, and authenticated sources when that protocol requires it.
 
 ## Memory and documentation
 
