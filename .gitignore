@@ -8,7 +8,7 @@
 #   CLAUDE.md, README.md, CHANGELOG.md, CONTRIBUTING.md, LICENSE, INDEX.md
 #   settings.json (toolkit defaults: permissions, hooks, plugins, budgets)
 #   agents/ commands/ skills/ rules/ hooks/ templates/ docs/ scripts/ bin/
-#   index/ website/ vscode/ archive/ local.example/ .github/
+#   index/ website/ vscode/ archive/ local.example/ .github/ marketplace/
 #   plugin.json package.json counts.json .gitmodules (marketplace manifest)
 #
 # Anything personal (private rules and hooks, host paths, identity, subagent

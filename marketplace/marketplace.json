@@ -1,0 +1,24 @@
+{
+  "name": "travisjneuman-upstream",
+  "owner": {
+    "name": "travisjneuman"
+  },
+  "metadata": {
+    "description": "Third-party plugins installed straight from their upstream repos, so every upstream release reaches this toolkit without waiting for a curated marketplace to re-pin it."
+  },
+  "plugins": [
+    {
+      "name": "unreal-engine-skills-for-claude-code",
+      "description": "Epic Games' Unreal Engine skills (unreal-mcp, unreal-skill, create-toolset) and SessionStart project hook for driving Unreal Editor over its MCP server.",
+      "author": {
+        "name": "Epic Games"
+      },
+      "category": "development",
+      "homepage": "https://dev.epicgames.com/documentation/unreal-engine/unreal-mcp-in-unreal-editor",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/EpicGames/unreal-engine-skills-for-claude-code-plugin.git"
+      }
+    }
+  ]
+}

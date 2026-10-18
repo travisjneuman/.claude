@@ -393,7 +393,8 @@
     "swift-lsp@claude-plugins-official": true,
     "brag@brag": true,
     "context7@claude-plugins-official": true,
-    "claude-codex-computer-use@songkeys": true
+    "claude-codex-computer-use@songkeys": true,
+    "unreal-engine-skills-for-claude-code@travisjneuman-upstream": true
   },
   "extraKnownMarketplaces": {
     "claude-plugins-official": {
@@ -413,6 +414,13 @@
         "source": "github",
         "repo": "songkeys/claude-codex-computer-use"
       }
+    },
+    "travisjneuman-upstream": {
+      "source": {
+        "source": "url",
+        "url": "https://raw.githubusercontent.com/travisjneuman/.claude/master/marketplace/marketplace.json"
+      },
+      "autoUpdate": true
     }
   },
   "outputStyle": "default",

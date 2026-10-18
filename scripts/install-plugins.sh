@@ -6,9 +6,12 @@
 # 1. Installs every plugin set to true in ~/.claude/settings.json (user scope)
 #    or ~/.claude/.claude/settings.json (project scope: loads only inside the
 #    toolkit repo) that isn't installed yet.
-# 2. Registers and refreshes each GitHub marketplace those plugins come from
-#    (extraKnownMarketplaces).
-# 3. Installs the language-server binaries the enabled LSP plugins need.
+# 2. Registers and refreshes each GitHub or URL marketplace those plugins come
+#    from (extraKnownMarketplaces).
+# 3. Updates installed plugins from marketplaces marked "autoUpdate": true, so
+#    plugins that track an upstream repo (marketplace/marketplace.json) follow
+#    its releases even on machines with no interactive sessions.
+# 4. Installs the language-server binaries the enabled LSP plugins need.
 #
 # The daily background pull runs this, so every machine converges on the same
 # plugins without manual steps. Nothing is uninstalled.
@@ -28,19 +31,23 @@ wanted=$(node -e '
   console.log(out.join("\n"));
 ')
 
-# Register every GitHub marketplace an enabled plugin comes from (listed in
-# extraKnownMarketplaces) and refresh its catalog.
+# Register every GitHub or URL marketplace an enabled plugin comes from (listed
+# in extraKnownMarketplaces) and refresh its catalog. Third field: autoUpdate.
 markets=$(node -e '
   const fs=require("fs"),p=require("path"),h=require("os").homedir();
   let s={};try{s=JSON.parse(fs.readFileSync(p.join(h,".claude","settings.json"),"utf8"))}catch{}
   const known=s.extraKnownMarketplaces||{};
   const used=new Set(process.argv[1].split("\n").map(l=>l.split(" ")[0].split("@")[1]).filter(Boolean));
-  for (const m of used) { const src=known[m]?.source; if (src?.source==="github" && src.repo) console.log(m+" "+src.repo); }
+  for (const m of used) {
+    const src=known[m]?.source, auto=known[m]?.autoUpdate===true?"auto":"-";
+    const where=src?.source==="github"?src.repo:src?.source==="url"?src.url:"";
+    if (where) console.log(m+" "+where+" "+auto);
+  }
 ' "$wanted")
 registered=$(claude plugin marketplace list 2>/dev/null)
-while read -r name repo; do
+while read -r name where _auto; do
   [ -z "${name:-}" ] && continue
-  printf '%s' "$registered" | grep -q "$name" || claude plugin marketplace add "$repo" </dev/null >/dev/null 2>&1
+  printf '%s' "$registered" | grep -q "$name" || claude plugin marketplace add "$where" </dev/null >/dev/null 2>&1
   claude plugin marketplace update "$name" </dev/null >/dev/null 2>&1
 done <<< "$markets"
 
@@ -51,6 +58,15 @@ while read -r id scope; do
   if printf '%s' "$installed" | grep -q "\"$id\""; then continue; fi
   echo "installing $id ($scope)"
   (cd "$CLAUDE_DIR" && claude plugin install "$id" --scope "$scope" </dev/null 2>&1 | tail -1)
+done <<< "$wanted"
+
+# Plugins from autoUpdate marketplaces follow upstream: update the installed ones.
+auto_markets=$(printf '%s\n' "$markets" | awk '$3=="auto"{print $1}')
+while read -r id scope; do
+  [ -z "${id:-}" ] && continue
+  printf '%s\n' "$auto_markets" | grep -qx "${id#*@}" || continue
+  printf '%s' "$installed" | grep -q "\"$id\"" || continue
+  (cd "$CLAUDE_DIR" && claude plugin update "$id" --scope "$scope" </dev/null 2>&1 | grep -iv 'already at the latest' | tail -1)
 done <<< "$wanted"
 
 # Language servers for the LSP plugins
