@@ -427,6 +427,7 @@
     }
   },
   "autoUpdatesChannel": "latest",
+  "tui": "fullscreen",
   "skipDangerousModePermissionPrompt": true,
   "claudeMdExcludes": [
     "**/*.notes/*/**/AGENTS.md",
@@ -445,5 +446,10 @@
   "theme": "dark",
   "verbose": true,
   "teammateMode": "auto",
-  "remoteControlAtStartup": true
+  "remoteControlAtStartup": true,
+  "modelSettings": {
+    "claude-opus-5-5": {
+      "effortLevel": "high"
+    }
+  }
 }
