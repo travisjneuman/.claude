@@ -7,6 +7,9 @@ All notable changes to the Ultimate Claude Code Toolkit.
 ### Telemetry off
 - `settings.json` env: `DISABLE_ERROR_REPORTING=1` (error reporting) and `CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY=1` (session quality surveys). Usage telemetry stays on: `DISABLE_TELEMETRY` (and `DO_NOT_TRACK`) also turn off feature-flag evaluation, which breaks remote session takeover. `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC` is left unset because it also stops auto-updates.
 
+### kivilaid-marketplace references removed
+- The upstream `kivilaid/plugin-marketplace` repository no longer exists, and its leftover local clones failed every scheduled pull. Its rows are gone from `docs/MARKETPLACE-GUIDE.md` and `docs/reference/tooling/external-repos.md`. It was already out of `.gitmodules`, so marketplace counts (81 repos) are unchanged.
+
 ## [3.6.1] - September 30, 2026
 
 ### GSD removed

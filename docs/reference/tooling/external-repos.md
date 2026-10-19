@@ -60,7 +60,6 @@ All external repos are located in `~/.claude/plugins/marketplaces/`:
 | hesreallyhim-awesome              | https://github.com/hesreallyhim/awesome-claude-code.git                    |
 | jeffallan-claude-skills           | https://github.com/Jeffallan/claude-skills.git                             |
 | kenryu42-safety-net               | https://github.com/kenryu42/claude-code-safety-net.git                     |
-| kivilaid-marketplace              | https://github.com/kivilaid/plugin-marketplace.git                         |
 | levnikolaevich-claude-code-skills | https://github.com/levnikolaevich/claude-code-skills.git                   |
 | madappgang-claude-code            | https://github.com/MadAppGang/claude-code.git                              |
 | manutej-luxor-marketplace         | https://github.com/manutej/luxor-claude-marketplace.git                    |

@@ -59,7 +59,6 @@ Complete reference for the 81 plugin marketplaces and how to use them.
 | `madappgang-claude-code`             | 110 resources                           | Full-stack development                          |
 | `athola-night-market`                | 125 skills                              | Curated night market                            |
 | `voltagent-agent-skills`             | 200+ official dev team skills           | Stripe, Cloudflare, Sentry, HuggingFace, Expo  |
-| `kivilaid-marketplace`               | 87 plugins from 10+ sources             | Aggregated plugin marketplace                   |
 | `rohitg00-claude-code-toolkit`       | 35 skills + 135 agents                  | Comprehensive toolkit across 10 categories      |
 | `jeffallan-claude-skills`            | 66 skills + 9 commands                  | 12 categories: languages, frameworks, security  |
 | `manutej-luxor-marketplace`          | 67 skills + 28 commands + 30 agents     | DevOps, Testing, Full-stack, 10 plugins         |
