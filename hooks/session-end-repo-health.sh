@@ -6,7 +6,8 @@
 #
 # For ~/.claude and every git repo under CUSTOM_PROJECT_DIRS (depth <= 3), when the
 # origin owner is listed in GITHUB_OWNERS (otherwise the repo is left alone):
-#   1. Skip if detached, without upstream, mid-merge/rebase, or with conflicts.
+#   1. Skip if detached, without upstream, mid-merge/rebase, with conflicts, or
+#      held by a build (a <git-dir>/checkout-hold file under 3 hours old).
 #   2. Pending changes (anyone's): skip if a credential-looking string is in the
 #      diff or new files; otherwise `git add -A` and commit a checkpoint.
 #   3. Push when ahead and not diverged, through REPO_PUSH_COMMAND (e.g. repo-sync
@@ -64,6 +65,11 @@ process() {
   gitdir=$(git -C "$repo" rev-parse --absolute-git-dir)
   if [ -e "$gitdir/MERGE_HEAD" ] || [ -d "$gitdir/rebase-merge" ] || [ -d "$gitdir/rebase-apply" ] || [ -n "$(git -C "$repo" diff --name-only --diff-filter=U)" ]; then
     log "SKIP in-progress merge/rebase or conflicts $name"; return 0
+  fi
+  # A build that temporarily rewrites tracked files holds the checkout. An older
+  # hold is treated as left behind by a killed build.
+  if [ -n "$(find "$gitdir/checkout-hold" -mmin -180 2>/dev/null)" ]; then
+    log "SKIP checkout held by a build $name"; return 0
   fi
 
   if [ -n "$(git -C "$repo" status --porcelain)" ]; then

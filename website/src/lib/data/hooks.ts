@@ -53,7 +53,7 @@ const HOOK_METADATA: Record<
     event: "SessionEnd",
     matcher: "",
     description:
-      "Walks the same repos at exit. Pushes clean, unpushed work only in repos owned by the configured GITHUB_OWNERS (optionally through REPO_PUSH_COMMAND) and logs warnings for dirty or diverged repos. Report-only when GITHUB_OWNERS is unset.",
+      "Walks the same repos at exit, in the background. In repos owned by the configured GITHUB_OWNERS it commits pending changes as a checkpoint, then pushes (optionally through REPO_PUSH_COMMAND). It skips repos that are mid-merge, conflicted, held by a build (<git-dir>/checkout-hold), or whose changes look like a secret. Report-only when GITHUB_OWNERS is unset.",
   },
   "statusline.js": {
     event: "StatusLine",
