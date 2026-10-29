@@ -324,3 +324,23 @@
 	url = https://github.com/millionco/expect.git
 	ignore = all
 	fetchRecurseSubmodules = false
+[submodule "plugins/marketplaces/mattpocock-skills"]
+	path = plugins/marketplaces/mattpocock-skills
+	url = https://github.com/mattpocock/skills.git
+	ignore = all
+[submodule "plugins/marketplaces/t3dotgg-tstack"]
+	path = plugins/marketplaces/t3dotgg-tstack
+	url = https://github.com/t3dotgg/tstack.git
+	ignore = all
+[submodule "plugins/marketplaces/poteto-how"]
+	path = plugins/marketplaces/poteto-how
+	url = https://github.com/poteto/how.git
+	ignore = all
+[submodule "plugins/marketplaces/poteto-brainmaxxing"]
+	path = plugins/marketplaces/poteto-brainmaxxing
+	url = https://github.com/poteto/brainmaxxing.git
+	ignore = all
+[submodule "plugins/marketplaces/poteto-noodle"]
+	path = plugins/marketplaces/poteto-noodle
+	url = https://github.com/poteto/noodle.git
+	ignore = all
