@@ -2520,6 +2520,11 @@
    "path": "plugins/marketplaces/manutej-luxor-marketplace"
   },
   {
+   "name": "mattpocock-skills",
+   "url": "https://github.com/mattpocock/skills",
+   "path": "plugins/marketplaces/mattpocock-skills"
+  },
+  {
    "name": "mhattingpete-skills",
    "url": "https://github.com/mhattingpete/claude-skills-marketplace",
    "path": "plugins/marketplaces/mhattingpete-skills"
@@ -2588,6 +2593,21 @@
    "name": "piebald-lsps",
    "url": "https://github.com/Piebald-AI/claude-code-lsps",
    "path": "plugins/marketplaces/piebald-lsps"
+  },
+  {
+   "name": "poteto-brainmaxxing",
+   "url": "https://github.com/poteto/brainmaxxing",
+   "path": "plugins/marketplaces/poteto-brainmaxxing"
+  },
+  {
+   "name": "poteto-how",
+   "url": "https://github.com/poteto/how",
+   "path": "plugins/marketplaces/poteto-how"
+  },
+  {
+   "name": "poteto-noodle",
+   "url": "https://github.com/poteto/noodle",
+   "path": "plugins/marketplaces/poteto-noodle"
   },
   {
    "name": "quant-equity-research",
@@ -2663,6 +2683,11 @@
    "name": "superpowers-marketplace",
    "url": "https://github.com/obra/superpowers-marketplace",
    "path": "plugins/marketplaces/superpowers-marketplace"
+  },
+  {
+   "name": "t3dotgg-tstack",
+   "url": "https://github.com/t3dotgg/tstack",
+   "path": "plugins/marketplaces/t3dotgg-tstack"
   },
   {
    "name": "taches-cc-resources",
