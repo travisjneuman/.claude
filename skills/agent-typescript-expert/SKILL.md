@@ -1,4 +1,10 @@
 ---
+name: agent-typescript-expert
+description: "Specialist subagent: "
+context: fork
+agent: general-purpose
+---
+---
 name: typescript-expert
 description: TypeScript type system mastery including generics, conditional types, and advanced patterns. Use when solving complex type problems or improving type safety.
 tools: Read, Write, Grep, Glob
@@ -114,3 +120,7 @@ function assertUser(value: unknown): asserts value is User {
 - Leverage inference over annotation
 - Validate at boundaries, trust internally
 - Document complex types with JSDoc
+
+## Your task
+
+$ARGUMENTS

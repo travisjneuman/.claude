@@ -1,4 +1,10 @@
 ---
+name: agent-devops-engineer
+description: "Specialist subagent: "
+context: fork
+agent: general-purpose
+---
+---
 name: devops-engineer
 description: >-
   Expert DevOps and cloud infrastructure engineer for AWS, GCP, Azure, Kubernetes,
@@ -137,3 +143,7 @@ CMD ["node", "server.js"]
 - `devops-cloud` - Comprehensive DevOps guide
 - `security` - Security best practices
 - `microservices-architecture` - Distributed systems patterns
+
+## Your task
+
+$ARGUMENTS

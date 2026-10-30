@@ -24,6 +24,7 @@ Full cross-reference (skills, agents, commands, rules, docs, marketplaces): [`IN
 | `agent-data-engineer` | Data, ML & AI | name-only | Specialist subagent: ETL pipelines, data warehousing, stream processing, and data infrastructure specialist. Use when building data pipelin… |
 | `agent-database-expert` | Backend, APIs & data stores | name-only | Specialist subagent: Expert database architect and engineer for PostgreSQL, MongoDB, Redis, and all major databases. Use when designing sch… |
 | `agent-desktop-developer` | Desktop, systems & languages | name-only | Specialist subagent: Expert desktop application developer for Electron, Tauri, and native desktop development |
+| `agent-devops-engineer` | DevOps, cloud & observability | name-only | Specialist subagent: |
 | `agent-devsecops-engineer` | Security & compliance | name-only | Specialist subagent: CI/CD security, SAST/DAST pipelines, supply chain security, container scanning, and security automation specialist. Us… |
 | `agent-django-fastapi-expert` | Backend, APIs & data stores | name-only | Specialist subagent: Django ORM, Django REST Framework, FastAPI async patterns, and Pydantic v2 specialist. Use when building Python web ap… |
 | `agent-documentation-writer` | Quality, testing & maintenance | name-only | Specialist subagent: Generates comprehensive documentation including READMEs, API docs, architecture docs, and inline comments. Use when do… |
@@ -37,6 +38,7 @@ Full cross-reference (skills, agents, commands, rules, docs, marketplaces): [`IN
 | `agent-graphic-designer` | Creative & content | name-only | Specialist subagent: Expert graphic designer for digital and print design, color theory, typography, and visual identity |
 | `agent-graphql-architect` | Backend, APIs & data stores | name-only | Specialist subagent: Expert GraphQL architect for API design, schema development, and performance optimization |
 | `agent-i18n-specialist` | Frontend, UI & UX | name-only | Specialist subagent: Expert internationalization specialist for multi-language support and localization |
+| `agent-ios-developer` | Mobile | name-only | Specialist subagent: |
 | `agent-kotlin-expert` | Mobile | name-only | Specialist subagent: Kotlin Multiplatform, Compose Multiplatform, coroutines, Ktor, and JVM ecosystem specialist. Use when writing Kotlin c… |
 | `agent-macos-developer` | Desktop, systems & languages | name-only | Specialist subagent: Expert macOS native developer for AppKit, Catalyst, and macOS-specific features |
 | `agent-microservices-architect` | Backend, APIs & data stores | name-only | Specialist subagent: Expert microservices architect for distributed system design, service decomposition, and resilience patterns |
@@ -62,6 +64,7 @@ Full cross-reference (skills, agents, commands, rules, docs, marketplaces): [`IN
 | `agent-teams` | Workflow & toolkit | name-only | Team composition knowledge for Claude Code Agent Teams - when teams fit, optimal sizing, spawn prompt patterns. Use only when the user has… |
 | `agent-technical-writer` | Quality, testing & maintenance | name-only | Specialist subagent: Architecture Decision Records, API documentation, migration guides, runbooks, and technical documentation specialist.… |
 | `agent-test-generator` | Quality, testing & maintenance | name-only | Specialist subagent: Generates comprehensive test suites using TDD patterns. Use only when the user explicitly asks for tests, improved cov… |
+| `agent-typescript-expert` | Desktop, systems & languages | name-only | Specialist subagent: |
 | `agent-ux-researcher` | Research, learning & life | name-only | Specialist subagent: UX research, usability testing, user interviews, wireframing, and information architecture specialist. Use when planni… |
 | `agent-video-producer` | Creative & content | name-only | Specialist subagent: Expert video production specialist for planning, shooting, editing, and delivering video content |
 | `agent-vue-nuxt-expert` | Frontend, UI & UX | name-only | Specialist subagent: Vue 3 Composition API, Nuxt 3 server routes, Pinia state management, and VueUse composables specialist. Use when build… |
@@ -92,7 +95,7 @@ Full cross-reference (skills, agents, commands, rules, docs, marketplaces): [`IN
 | `data-science` | Data, ML & AI | name-only | Data science and analytics expertise for statistical analysis, machine learning pipelines, data governance, business intelligence, predicti… |
 | `database-expert` | Backend, APIs & data stores | name-only | Advanced database design and administration for PostgreSQL, MongoDB, and Redis. Use when designing schemas, optimizing queries, managing da… |
 | `debate-practice-coach` | Research, learning & life | name-only | Interactive debate and argument practice with structured feedback, counterargument generation, logical fallacy identification, and scoring… |
-| `debug-systematic` | Quality, testing & maintenance | core | Systematic 4-phase debugging methodology for complex, intermittent, or mysterious issues. Use when investigating bugs, race conditions, or… |
+| `debug-systematic` | Quality, testing & maintenance | name-only | Systematic 4-phase debugging methodology for complex, intermittent, or mysterious issues. Use when investigating bugs, race conditions, or… |
 | `devex-sdk-design` | Backend, APIs & data stores | name-only | Developer experience (DX) engineering, SDK design patterns, API ergonomics, CLI tooling design, documentation-driven development, and devel… |
 | `devops-cloud` | DevOps, cloud & observability | name-only | DevOps, cloud infrastructure, and platform engineering. Use when working with AWS, GCP, Azure, Kubernetes, Terraform, CI/CD pipelines, or i… |
 | `edge-computing` | Backend, APIs & data stores | name-only | Edge computing with Cloudflare Workers, Deno Deploy, Bun, Vercel Edge Functions, AWS Lambda@Edge, and edge databases (Turso, D1, DynamoDB G… |
@@ -104,12 +107,12 @@ Full cross-reference (skills, agents, commands, rules, docs, marketplaces): [`IN
 | `finance` | Business & product | name-only | Financial analysis expertise for financial modeling (DCF, LBO, M&A), valuation, financial statement analysis, capital allocation, treasury… |
 | `financial-scenario-planner` | Business & product | name-only | Stress-test financial plans across scenarios (bull/bear/base), sensitivity tables, and Monte Carlo-style analysis. Use when evaluating fina… |
 | `flutter-development` | Mobile | name-only | Cross-platform development with Flutter and Dart for iOS, Android, Web, Desktop, and embedded. Use when building Flutter apps, implementing… |
-| `frontend-enhancer` | Frontend, UI & UX | core | Enhance the visual design of web apps: modern UI components, layout, responsive design, color palettes, animations. Use for styling and UI… |
+| `frontend-enhancer` | Frontend, UI & UX | name-only | Enhance the visual design of web apps: modern UI components, layout, responsive design, color palettes, animations. Use for styling and UI… |
 | `fundraising-analyzer` | Business & product | name-only | Nonprofit fundraising performance analysis with donor segmentation, campaign ROI, retention metrics, and trend analysis. Use when evaluatin… |
 | `game-development` | Desktop, systems & languages | name-only | Game development with Unity, Unreal Engine, and Godot. Use when building games, implementing game mechanics, physics, AI, or working with g… |
-| `generic-code-reviewer` | Quality, testing & maintenance | core | Review code for bugs, security vulnerabilities, performance issues, accessibility gaps, and CLAUDE.md workflow compliance. Supports any tec… |
+| `generic-code-reviewer` | Quality, testing & maintenance | name-only | Review code for bugs, security vulnerabilities, performance issues, accessibility gaps, and CLAUDE.md workflow compliance. Supports any tec… |
 | `generic-design-system` | Frontend, UI & UX | name-only | Complete design system reference for any project - colors, typography, spacing, components, animations. Adapts to project theme and tech st… |
-| `generic-feature-developer` | Workflow & toolkit | core | Guide feature development with architecture patterns for any tech stack. Covers frontend, backend, full-stack, and automation projects. Use… |
+| `generic-feature-developer` | Workflow & toolkit | name-only | Guide feature development with architecture patterns for any tech stack. Covers frontend, backend, full-stack, and automation projects. Use… |
 | `generic-fullstack-code-reviewer` | Quality, testing & maintenance | name-only | Review full-stack code for bugs, security vulnerabilities, performance issues, accessibility gaps, and CLAUDE.md compliance. Enforces TypeS… |
 | `generic-fullstack-design-system` | Frontend, UI & UX | name-only | Complete design system reference for full-stack applications. Covers colors, typography, spacing, component patterns (shadcn/ui), effects,… |
 | `generic-fullstack-feature-developer` | Backend, APIs & data stores | name-only | Guide feature development for full-stack applications with architecture focus. Covers Next.js App Router patterns, NestJS backend services,… |
@@ -181,7 +184,7 @@ Full cross-reference (skills, agents, commands, rules, docs, marketplaces): [`IN
 | `toolkit-router` | Workflow & toolkit | core | Find the right skill, agent, command, rule, checklist, or marketplace skill in this ~/.claude toolkit for the current task. Use when a task… |
 | `travel-planner` | Research, learning & life | name-only | Travel destination research and daily itinerary creation with logistics planning, budget tracking, and experience optimization. Use when pl… |
 | `ui-animation` | Frontend, UI & UX | name-only | Motion design and animation for user interfaces. Use when creating micro-interactions, page transitions, loading states, or any UI animatio… |
-| `ui-research` | Frontend, UI & UX | core | Research-first UI/UX design workflow. Use BEFORE any frontend visual work to research modern patterns, gather inspiration from real product… |
+| `ui-research` | Frontend, UI & UX | name-only | Research-first UI/UX design workflow. Use BEFORE any frontend visual work to research modern patterns, gather inspiration from real product… |
 | `video-production` | Creative & content | name-only | Professional video production from planning to delivery. Use when creating video content, editing workflows, motion graphics, or optimizing… |
 | `volunteer-coordinator` | Research, learning & life | name-only | Volunteer management system design with scheduling, skill matching, communication templates, recognition programs, and retention strategies… |
 | `vue-development` | Frontend, UI & UX | name-only | Vue.js 3 development with Composition API, TypeScript, Pinia state management, and Nuxt 3 full-stack. Use when building Vue applications, i… |
