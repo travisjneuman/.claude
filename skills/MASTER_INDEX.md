@@ -134,6 +134,7 @@ Full cross-reference (skills, agents, commands, rules, docs, marketplaces): [`IN
 | `health-wellness` | Research, learning & life | name-only | Workplace health and wellness expertise for employee wellness programs, mental health initiatives, ergonomics and safety, healthcare benefi… |
 | `hr-talent` | Business & product | name-only | HR and talent management expertise for talent acquisition, performance management, compensation strategy, organizational design, culture bu… |
 | `i18n-localization` | Frontend, UI & UX | name-only | Internationalization and localization for global applications. Use when adding multi-language support, handling regional formats, or prepar… |
+| `image-studio` | Other | core | Create, edit, find, or reuse images, logos, icons, illustrations, and visual assets through a private Image Studio library and MCP workflow. |
 | `impact-report-writer` | Creative & content | name-only | Nonprofit/NGO impact report generation with data visualization suggestions, outcome metrics, narrative structure, and program data presenta… |
 | `innovation` | Business & product | name-only | Innovation management expertise for innovation frameworks (Design Thinking, Stage-Gate), ideation processes, innovation portfolio managemen… |
 | `investment-memo-generator` | Business & product | name-only | Investment memo creation combining financial analysis, document generation, and structured templates. Use when creating investment memos, p… |

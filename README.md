@@ -64,6 +64,7 @@ Up: [github.com/travisjneuman](https://github.com/travisjneuman) · Not here: pe
 | marketplace, community skills | `index/marketplace-catalog.json`, [`docs/MARKETPLACE-GUIDE.md`](./docs/MARKETPLACE-GUIDE.md) | Catalog exists once marketplaces are pulled |
 | setup, new machine, configuration, troubleshooting | [`docs/README.md`](./docs/README.md) | Docs front door |
 | private rules, host settings, `local/` | [`local.example/README.md`](./local.example/README.md) | `local/` is gitignored |
+| image, logo, icon, illustration, visual asset create/edit/find | [`image-studio`](./skills/image-studio/SKILL.md) | Automatic reuse-first workflow; private runtime descriptor required |
 | scripts, counts, regenerate index | [`scripts/README.md`](./scripts/README.md), [`docs/COUNT-PIPELINE.md`](./docs/COUNT-PIPELINE.md) | Counts and index refresh are explicit, never automatic |
 | project or task templates | [`templates/README.md`](./templates/README.md) | |
 | version history, release notes | [`CHANGELOG.md`](./CHANGELOG.md) | |

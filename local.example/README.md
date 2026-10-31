@@ -13,6 +13,7 @@ Up: [README](../README.md) · Not here: public, shared rules are in `rules/` (li
 | per-machine settings, project dirs, push command | [`hosts/example.env`](./hosts/example.env) | Copy or link to `~/.claude/.env.local` |
 | public-safety gate, private names that must never be committed | [`public-safety-patterns.txt`](./public-safety-patterns.txt) | Read by the pre-commit hook |
 | private hooks | `local/hooks/` (create it; not shipped in the template) | `local-session-start.sh`, `local-pre-tool-use.py` |
+| private Image Studio connection, context exclusions, job records | `local/image-studio.md` (create it privately) | Read by the automatic `image-studio` skill; trusted origin, native server names, dynamic knowledge root and privacy/media policy, never credentials |
 | setup on a new machine | [Setup](#setup-on-a-machine) below | |
 
 ## Map

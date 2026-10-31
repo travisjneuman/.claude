@@ -21,6 +21,7 @@ Don't read this file to find a skill. Grep the generated index instead:
 | marketplace skill | `index/marketplace-catalog.json` | Present once marketplaces are pulled |
 | write a new skill | [`../docs/SKILL-CREATION-GUIDE.md`](../docs/SKILL-CREATION-GUIDE.md), [`../templates/skill-template.md`](../templates/skill-template.md) | Then refresh the index: [`../scripts/README.md`](../scripts/README.md) |
 | shared helpers used by several skills | `_shared/` | Not a skill |
+| image, logo, icon, illustration, visual asset create/edit/find | [`image-studio/SKILL.md`](image-studio/SKILL.md) | Automatic reuse-first workflow; private connection/context comes from `~/.claude/local/image-studio.md` |
 | domain expert skills (product, health, ESG, innovation) in depth | [`EXPERT-SKILLS-GUIDE.md`](./EXPERT-SKILLS-GUIDE.md) | December 2025 guide; skill names may have changed since, check `MASTER_INDEX.md` |
 
 The category tables below are a human browse aid.
