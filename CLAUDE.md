@@ -67,7 +67,7 @@ Only core skills and the core agents show a full description in your context; th
 
 - Use managed CamoFox, approved managed `agent-browser`, the active app's built-in browser, or Computer Use. Follow the private owner layer for host eligibility and the ordered fallback lanes after a recorded task blocker.
 - Shared, social and authenticated intake stays read-only. Use loopback control through existing SSH and a unique task session; close only task-owned tabs and preserve services.
-- The owner signs in separately in each engine/host's own profile. Never copy credentials, profiles, cookies or sessions between engines or hosts. High-trust reads need exact-account/read-scope approval; writes need action-specific approval. Public HTTP fallback stays partial.
+- Headless engines obtain logged-in state from the primary managed browser's persistent identity through the owner's private clone tool: copy cookies and site storage only, host-to-host over SSH, never printed or stored outside target profiles. Copy nothing else between engines or hosts and never write to the source identity; serialize persistent profile use. High-trust reads need exact-account/read-scope approval; writes need action-specific approval. Public HTTP fallback stays partial.
 - Browser installation and independent automation remain prohibited outside explicit owner-approved host exceptions. Never use a separate launcher or agent to bypass these boundaries.
 
 ## Memory and documentation

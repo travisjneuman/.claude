@@ -17,9 +17,9 @@ From another host use the existing approved SSH alias and explicitly wrap the re
 
 ## Prerequisites and scope
 
-- Keep browser control loopback-only through existing SSH; do not expose debugging ports on LAN/WAN or add forwarding/services. High-trust reads require exact-account and read-scope approval before access. The owner signs in once per engine/host in its own profile; an unauthenticated fallback must be reported as such.
+- Keep browser control loopback-only through existing SSH; do not expose debugging ports on LAN/WAN or add forwarding/services. High-trust reads require exact-account and read-scope approval before access. These headless engines obtain logged-in state from the primary managed browser's persistent identity; an unauthenticated fallback must be reported as such.
 - Install or upgrade the CLI/browser only with explicit installation approval, pinned **per the runbook**; missing prerequisites are a blocker. Do not use an unpinned on-demand download or substitute another runtime, cloud browser, or paid service.
-- Use the existing dedicated persistent profile directory, never a personal/default or named Chrome profile. Named-profile reuse can copy profile state. Do not copy cookies, profiles, credentials, or saved authentication state between engines or hosts; do not export, import, print, clear, or delete them.
+- Use the existing dedicated persistent profile directory, never a personal/default or named Chrome profile. Named-profile reuse can copy profile state. Copy cookies and site storage only from the primary managed browser's persistent identity through the owner's private clone tool, host-to-host over SSH, never printed or stored outside target profiles. Copy nothing else between engines or hosts and never write to the source identity; do not clear or delete persistent state.
 - Use a task-unique `--session` on **every** command. Replace `read-20261031-a7f3` below with your unique task identifier; never use the default or another task's session. Do not run concurrent sessions against a locked profile; record that blocker without killing another browser or copying its profile.
 
 ## Read-only work loop
