@@ -65,9 +65,10 @@ Only core skills and the core agents show a full description in your context; th
 
 ## Browser use
 
-- Use only managed CamoFox Headless, the browser built into the active app, or computer use.
-- Do not install or independently invoke Playwright or another browser-automation runtime. Do not route browser work through a separate launcher or agent to bypass this rule.
-- Follow the shared source-intake instructions; use CamoFox for shared, social, and authenticated sources when that protocol requires it.
+- Use managed CamoFox, approved managed `agent-browser`, the active app's built-in browser, or Computer Use. Follow the private owner layer for host eligibility and the ordered fallback lanes after a recorded task blocker.
+- Shared, social and authenticated intake stays read-only. Use loopback control through existing SSH and a unique task session; close only task-owned tabs and preserve services.
+- The owner signs in separately in each engine/host's own profile. Never copy credentials, profiles, cookies or sessions between engines or hosts. High-trust reads need exact-account/read-scope approval; writes need action-specific approval. Public HTTP fallback stays partial.
+- Browser installation and independent automation remain prohibited outside explicit owner-approved host exceptions. Never use a separate launcher or agent to bypass these boundaries.
 
 ## Memory and documentation
 

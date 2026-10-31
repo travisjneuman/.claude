@@ -107,6 +107,15 @@
    "description": "Specialist subagent: Chrome, Firefox, and cross-browser extension development specialist. Manifest V3, service workers, content scripts, and WebExtension APIs. Use when building browser extensions or…"
   },
   {
+   "id": "skill:agent-browser",
+   "type": "skill",
+   "name": "agent-browser",
+   "path": "skills/agent-browser/SKILL.md",
+   "domain": "workflow",
+   "tier": "name-only",
+   "description": "Read-only browser source intake through agent-browser on approved hosts after recorded CamoFox blockers; dedicated Chrome profile and task-unique session required."
+  },
+  {
    "id": "skill:agent-cli-developer",
    "type": "skill",
    "name": "agent-cli-developer",

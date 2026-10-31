@@ -16,6 +16,7 @@ Full cross-reference (skills, agents, commands, rules, docs, marketplaces): [`IN
 | `agent-blockchain-developer` | Desktop, systems & languages | name-only | Specialist subagent: Solidity, smart contracts, Web3, EVM, DeFi protocols, and blockchain development specialist. Use when writing smart co… |
 | `agent-brand-strategist` | Creative & content | name-only | Specialist subagent: Expert brand strategist for brand identity, positioning, naming, and brand guidelines |
 | `agent-browser-extension-developer` | Frontend, UI & UX | name-only | Specialist subagent: Chrome, Firefox, and cross-browser extension development specialist. Manifest V3, service workers, content scripts, an… |
+| `agent-browser` | Workflow & toolkit | name-only | Read-only browser source intake through agent-browser on approved hosts after recorded CamoFox blockers; dedicated Chrome profile and task-… |
 | `agent-cli-developer` | Desktop, systems & languages | name-only | Specialist subagent: Command-line tool development, argument parsing, interactive prompts, and terminal UI specialist. Use when building CL… |
 | `agent-cloud-architect` | DevOps, cloud & observability | name-only | Specialist subagent: Multi-cloud architecture, cost optimization, serverless vs containers, disaster recovery, and infrastructure design sp… |
 | `agent-code-explainer` | Quality, testing & maintenance | name-only | Specialist subagent: Explains complex code in clear, understandable terms. Use when onboarding to a codebase, understanding unfamiliar patt… |

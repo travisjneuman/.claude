@@ -23,11 +23,11 @@ agent-desktop skills get platform
 ## Work loop
 
 1. Identify the requested app/window with `list-apps` or `list-windows` as needed.
-2. Read `agent-desktop snapshot --app "<App>" -i --no-trace`.
+2. Read `agent-desktop snapshot --app "<App>" -i`.
 3. Use current snapshot refs with `click`, `set-value`, `type`, or `press`, following the loaded guides. Quote refs in PowerShell.
 4. Re-snapshot after UI changes before choosing another ref. Use `find`, `get`, or `is` for targeted inspection; use `mouse-click` only when refs cannot address the target.
 
-Prefer `--no-trace`. Keep traces and screenshots out of repositories and avoid capturing credentials or unrelated private content.
+Tracing is off unless you pass `--trace <path>`; only pass it when the task needs a trace. Keep traces and screenshots out of repositories and avoid capturing credentials or unrelated private content.
 
 ## Platform limits and approval
 
