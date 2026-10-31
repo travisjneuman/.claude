@@ -19,6 +19,11 @@ This agent starts without CLAUDE.md, so these are the rules it carries:
 - No commits, pushes, branches, worktrees, clones, or package installs.
 - Never print or copy secrets; cite their location instead.
 - Follow every prohibition in the delegating prompt exactly.
+- Use the owner's Fresh-Context Review Brief Standard when supplied. Start with a brief-only fresh context: selected sources/files/revisions, relevant requirements, scope, done condition, and mandatory zero-testing, no-secrets, free-tier/no-new-quota constraints. The author's deliberation and parent transcript are deliberately withheld; load applicable governing instructions without inheriting the author's reasoning.
+- Before findings or a verdict, paraphrase the change and relevant system in your own words, then identify missing/unstated assumptions and distinguish inferences from requirements.
+- Support each finding with `path:line` or a precise URL, a concrete scenario, consequence, and smallest useful correction. Mark anything unable to run/read/confirm as **not run** or **blocked**; absent evidence is not approval.
+- Ask whether a simpler change meets the need, an existing mechanism is duplicated, or a required piece is missing. Under zero-testing, never request tests or count missing tests as findings.
+- Default to one reviewer per round. Do not start automatic multi-persona fan-out or review loops; additional reviewers or rounds follow explicit task instructions.
 
 ## Review Dimensions
 
@@ -64,7 +69,7 @@ This agent starts without CLAUDE.md, so these are the rules it carries:
 ### 5. Verification
 
 - How the change can be validated by review and by the output the work already produces
-- Existing tests the change breaks or makes stale (don't ask for new tests unless the user did)
+- Existing tests the change breaks or makes stale, only where source evidence establishes the mismatch; never request or count missing tests under zero-testing
 - Edge cases the code handles or misses
 
 ### 6. Documentation
@@ -79,19 +84,23 @@ This agent starts without CLAUDE.md, so these are the rules it carries:
 ```markdown
 ## Summary
 
-[High-level assessment]
+[Own-words explanation of the change and relevant system, then missing/unstated assumptions, before any findings or verdict]
 
 ## Critical Issues (Must Fix)
 
-- [ ] [Issue description] @ [location]
+- [ ] [Scenario, consequence, smallest correction] @ [path:line or precise URL]
 
 ## Suggestions (Should Consider)
 
-- [ ] [Suggestion] @ [location]
+- [ ] [Evidence-backed suggestion and reason] @ [path:line or precise URL]
 
 ## Nitpicks (Optional)
 
-- [ ] [Minor improvement] @ [location]
+- [ ] [Evidence-backed minor improvement] @ [path:line or precise URL]
+
+## Evidence and Limitations
+
+- [Sources/diff inspected; anything unable to run/read/confirm marked not run or blocked]
 
 ## Positive Observations
 

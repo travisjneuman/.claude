@@ -177,7 +177,7 @@ That's it. Claude Code loads the toolkit from `~/.claude/` in every session.
 | **Quality** | `generic-code-reviewer`, `generic-feature-developer`, `generic-design-system`, `generic-ux-designer`, `test-specialist`, `tdd-workflow`, `debug-systematic`, `tech-debt-analyzer` |
 | **Business** | `business-strategy`, `finance`, `marketing`, `sales`, `product-management`, `hr-talent`, `legal-compliance`, `risk-management`, `operations`, `innovation` |
 | **Creative** | `brand-identity`, `graphic-design`, `video-production`, `audio-production`, `ui-animation`, `ui-research` |
-| **Productivity** | `codebase-documenter`, `reports-pdfs-and-slide-automation`, `content-repurposer`, `status-report-generator`, `core-workflow` |
+| **Productivity** | `codebase-documenter`, `reports-pdfs-and-slide-automation`, `content-repurposer`, `status-report-generator`, `core-workflow`, [`agent-desktop`](./skills/agent-desktop/SKILL.md) (native desktop app control) |
 | **Specialized** | `game-development`, `i18n-localization`, `seo-analytics-auditor`, `email-systems`, `payment-integration`, `product-analytics`, `growth-engineering`, `monetization-strategy` |
 | **Blockchain & Web3** | `blockchain-web3` (Solidity, DeFi, NFTs, Hardhat/Foundry) |
 | **Data Engineering** | `data-engineering` (ETL, Airflow, dbt, Kafka, BigQuery/Snowflake) |

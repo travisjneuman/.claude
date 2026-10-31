@@ -24,6 +24,7 @@ Full cross-reference (skills, agents, commands, rules, docs, marketplaces): [`IN
 | `agent-data-engineer` | Data, ML & AI | name-only | Specialist subagent: ETL pipelines, data warehousing, stream processing, and data infrastructure specialist. Use when building data pipelin… |
 | `agent-database-expert` | Backend, APIs & data stores | name-only | Specialist subagent: Expert database architect and engineer for PostgreSQL, MongoDB, Redis, and all major databases. Use when designing sch… |
 | `agent-desktop-developer` | Desktop, systems & languages | name-only | Specialist subagent: Expert desktop application developer for Electron, Tauri, and native desktop development |
+| `agent-desktop` | Desktop, systems & languages | name-only | Control native desktop apps with agent-desktop accessibility snapshots and actions on macOS, Windows, or Linux. Use for desktop UI tasks, n… |
 | `agent-devops-engineer` | DevOps, cloud & observability | name-only | Specialist subagent: |
 | `agent-devsecops-engineer` | Security & compliance | name-only | Specialist subagent: CI/CD security, SAST/DAST pipelines, supply chain security, container scanning, and security automation specialist. Us… |
 | `agent-django-fastapi-expert` | Backend, APIs & data stores | name-only | Specialist subagent: Django ORM, Django REST Framework, FastAPI async patterns, and Pydantic v2 specialist. Use when building Python web ap… |

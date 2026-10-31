@@ -179,6 +179,15 @@
    "description": "Specialist subagent: Expert desktop application developer for Electron, Tauri, and native desktop development"
   },
   {
+   "id": "skill:agent-desktop",
+   "type": "skill",
+   "name": "agent-desktop",
+   "path": "skills/agent-desktop/SKILL.md",
+   "domain": "systems",
+   "tier": "name-only",
+   "description": "Control native desktop apps with agent-desktop accessibility snapshots and actions on macOS, Windows, or Linux. Use for desktop UI tasks, never browser automation or web research."
+  },
+  {
    "id": "skill:agent-devops-engineer",
    "type": "skill",
    "name": "agent-devops-engineer",
