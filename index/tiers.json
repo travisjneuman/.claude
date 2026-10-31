@@ -2,7 +2,8 @@
   "$comment": "Context tiers. Every skill and command stays installed and invocable. 'core' entries keep their full description in Claude's skill listing (auto-matched every turn). Everything else is listed by name only (skillOverrides: name-only), so it costs a few tokens instead of a paragraph and is found through the toolkit-router skill + INDEX.md. Edit this list, then run: node scripts/generate-index.mjs --write",
   "core_skills": [
     "toolkit-router",
-    "core-workflow"
+    "core-workflow",
+    "image-studio"
   ],
   "core_commands": [],
   "$comment_external": "Skills this toolkit doesn't ship but that appear in sessions (claude.ai-synced anthropic-skills:*). Listed by name only here; still invocable. A name that isn't present on a machine is a no-op.",
