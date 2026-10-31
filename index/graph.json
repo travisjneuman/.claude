@@ -1169,6 +1169,15 @@
    "description": "Internationalization and localization for global applications. Use when adding multi-language support, handling regional formats, or preparing apps for global markets."
   },
   {
+   "id": "skill:image-studio",
+   "type": "skill",
+   "name": "image-studio",
+   "path": "skills/image-studio/SKILL.md",
+   "domain": "other",
+   "tier": "core",
+   "description": "Create, edit, find, or reuse images, logos, icons, illustrations, and visual assets through a private Image Studio library and MCP workflow."
+  },
+  {
    "id": "skill:impact-report-writer",
    "type": "skill",
    "name": "impact-report-writer",
@@ -2024,6 +2033,15 @@
    "domain": "other",
    "loads": "when reading **/*.go, **/go.mod",
    "description": "Go Rules"
+  },
+  {
+   "id": "rule:image-assets",
+   "type": "rule",
+   "name": "image-assets",
+   "path": "rules/image-assets.md",
+   "domain": "other",
+   "loads": "every session",
+   "description": "Image asset requests"
   },
   {
    "id": "rule:java-kotlin",
@@ -3037,6 +3055,11 @@
    "from": "skill:generic-static-ux-designer",
    "to": "doc:checklists/static-sites",
    "rel": "reference"
+  },
+  {
+   "from": "skill:image-studio",
+   "to": "rule:image-assets",
+   "rel": "rules"
   },
   {
    "from": "skill:ios-development",
