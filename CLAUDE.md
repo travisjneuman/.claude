@@ -35,7 +35,7 @@ Discover → Scope → Plan (only when useful) → Execute → Verify → Docume
 
 ## Testing: none; validate by review
 
-Don't write, add, or run tests of any kind: no test suites or files, fixtures, harnesses, lint/typecheck/build ladders, smoke runs, or installs done for testing. This includes repo check, drift, count, or link scripts, syntax checks, sample-input runs of scripts or hooks, and one-off verification loops. Validate like a senior reviewer instead: re-read the request, read the whole diff and the code it touches, reason through inputs, edge cases, error paths, and callers, and use the output the work itself already produces (the command that did the task, a deploy status the push reports). Say what you reviewed and what review couldn't confirm. Tests only when the user explicitly asks for a specific scope.
+Don't write, add, or run tests of any kind: no test suites or files, fixtures, harnesses, lint/typecheck/build ladders, smoke runs, or installs done for testing. This includes repo check, drift, count, or link scripts, syntax checks, sample-input runs of scripts or hooks, and one-off verification loops. Validate like a senior reviewer instead: re-read the request, read the whole diff and the code it touches, reason through inputs, edge cases, error paths, and callers, and use the output the work itself already produces (the command that did the task, a deploy status the push reports). Say what you reviewed and what review couldn't confirm. Tests only when the user explicitly asks for a specific scope. Pass this rule unchanged to every delegate and handoff.
 
 ## Git and repositories
 
@@ -65,11 +65,7 @@ Only core skills and the core agents show a full description in your context; th
 
 ## Browser use
 
-- Use managed CamoFox, approved managed `agent-browser`, the active app's built-in browser, or Computer Use. Follow the private owner layer for host eligibility and the ordered fallback lanes after a recorded task blocker.
-- Shared, social and authenticated intake stays read-only. Use loopback control through existing SSH and a unique task session; close only task-owned tabs and preserve services.
-- Headless engines obtain logged-in state from the primary managed browser's persistent identity through the owner's private clone tool: copy cookies and site storage only, host-to-host over SSH, never printed or stored outside target profiles. Copy nothing else between engines or hosts and never write to the source identity; serialize persistent profile use. High-trust reads need exact-account/read-scope approval; writes need action-specific approval. Public HTTP fallback stays partial.
-- Browser installation and independent automation remain prohibited outside explicit owner-approved host exceptions. Never use a separate launcher or agent to bypass these boundaries.
-- Agents running outside the owner's machines (provider-hosted cloud runs) or scoped away from personal systems are not in conflict with these rules: they use their own hosted browser and public research tools read-only, sign in to nothing of the owner's, never reach into the managed lanes or their profiles, and label social or authenticated reads partial for an agent on the owner's machines to finish.
+The private owner layer's browser rule governs lanes, host eligibility, session state and approvals. Without one: use the active app's built-in browser or Computer Use, read-only for shared, social and authenticated sources; sign in to nothing of the owner's, label such reads partial, and never install or drive a standalone browser (Playwright, Puppeteer, Selenium) from a shell.
 
 ## Memory and documentation
 
