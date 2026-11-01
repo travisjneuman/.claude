@@ -11,6 +11,7 @@ Full cross-reference (skills, agents, commands, rules, docs, marketplaces): [`IN
 | `agent-android-developer` | Mobile | name-only | Specialist subagent: Expert Android developer specializing in Kotlin, Jetpack Compose, and modern Android architecture |
 | `agent-api-designer` | Backend, APIs & data stores | name-only | Specialist subagent: Designs REST and GraphQL APIs following best practices. Use when creating new APIs, reviewing API design, or writing O… |
 | `agent-api-integration-specialist` | Backend, APIs & data stores | name-only | Specialist subagent: Third-party API integration, webhook handling, OAuth flows, rate limiting, and SDK wrapping specialist. Use when integ… |
+| `agent-architecture-analyst` | Other | name-only | Specialist subagent: |
 | `agent-audio-engineer` | Creative & content | name-only | Specialist subagent: Expert audio engineer for recording, mixing, mastering, and sound design |
 | `agent-auth-specialist` | Backend, APIs & data stores | name-only | Specialist subagent: OAuth 2.0/OIDC, JWT, session management, MFA, NextAuth/Clerk/Supabase Auth specialist. Use when implementing authentic… |
 | `agent-blockchain-developer` | Desktop, systems & languages | name-only | Specialist subagent: Solidity, smart contracts, Web3, EVM, DeFi protocols, and blockchain development specialist. Use when writing smart co… |
@@ -24,6 +25,7 @@ Full cross-reference (skills, agents, commands, rules, docs, marketplaces): [`IN
 | `agent-cpp-expert` | Desktop, systems & languages | name-only | Specialist subagent: C and C++ development, modern C++ (C++17/20/23), CMake, systems programming, and memory management specialist. Use whe… |
 | `agent-data-engineer` | Data, ML & AI | name-only | Specialist subagent: ETL pipelines, data warehousing, stream processing, and data infrastructure specialist. Use when building data pipelin… |
 | `agent-database-expert` | Backend, APIs & data stores | name-only | Specialist subagent: Expert database architect and engineer for PostgreSQL, MongoDB, Redis, and all major databases. Use when designing sch… |
+| `agent-debugging-specialist` | Quality, testing & maintenance | name-only | Specialist subagent: |
 | `agent-desktop-developer` | Desktop, systems & languages | name-only | Specialist subagent: Expert desktop application developer for Electron, Tauri, and native desktop development |
 | `agent-desktop` | Desktop, systems & languages | name-only | Control native desktop apps with agent-desktop accessibility snapshots and actions on macOS, Windows, or Linux. Use for desktop UI tasks, n… |
 | `agent-devops-engineer` | DevOps, cloud & observability | name-only | Specialist subagent: |
@@ -58,6 +60,7 @@ Full cross-reference (skills, agents, commands, rules, docs, marketplaces): [`IN
 | `agent-pwa-specialist` | Backend, APIs & data stores | name-only | Specialist subagent: Progressive Web App development, service workers, offline-first architecture, and push notification specialist. Use wh… |
 | `agent-python-expert` | Desktop, systems & languages | name-only | Specialist subagent: Python best practices, type hints, async patterns, and ecosystem expertise. Use for Python-specific guidance, typing i… |
 | `agent-realtime-specialist` | Backend, APIs & data stores | name-only | Specialist subagent: Expert real-time systems specialist for WebSockets, SSE, and live data applications |
+| `agent-refactoring-specialist` | Quality, testing & maintenance | name-only | Specialist subagent: |
 | `agent-rust-expert` | Desktop, systems & languages | name-only | Specialist subagent: Rust ownership/borrowing, async Rust, Axum/Actix web frameworks, and WASM specialist. Use when writing Rust code, debu… |
 | `agent-seo-specialist` | Frontend, UI & UX | name-only | Specialist subagent: Technical SEO, structured data, Core Web Vitals, meta tags, and Schema.org specialist. Use when optimizing search engi… |
 | `agent-serverless-specialist` | Backend, APIs & data stores | name-only | Specialist subagent: AWS Lambda, Cloudflare Workers, Vercel Edge Functions, and serverless architecture specialist. Use when building serve… |
@@ -135,7 +138,7 @@ Full cross-reference (skills, agents, commands, rules, docs, marketplaces): [`IN
 | `health-wellness` | Research, learning & life | name-only | Workplace health and wellness expertise for employee wellness programs, mental health initiatives, ergonomics and safety, healthcare benefi… |
 | `hr-talent` | Business & product | name-only | HR and talent management expertise for talent acquisition, performance management, compensation strategy, organizational design, culture bu… |
 | `i18n-localization` | Frontend, UI & UX | name-only | Internationalization and localization for global applications. Use when adding multi-language support, handling regional formats, or prepar… |
-| `image-studio` | Other | core | Create, edit, find, or reuse images, logos, icons, illustrations, and visual assets through a private Image Studio library and MCP workflow. |
+| `image-studio` | Other | name-only | Create, edit, find, or reuse images, logos, icons, illustrations, and visual assets through a private Image Studio library and MCP workflow. |
 | `impact-report-writer` | Creative & content | name-only | Nonprofit/NGO impact report generation with data visualization suggestions, outcome metrics, narrative structure, and program data presenta… |
 | `innovation` | Business & product | name-only | Innovation management expertise for innovation frameworks (Design Thinking, Stage-Gate), ideation processes, innovation portfolio managemen… |
 | `investment-memo-generator` | Business & product | name-only | Investment memo creation combining financial analysis, document generation, and structured templates. Use when creating investment memos, p… |

@@ -1,4 +1,10 @@
 ---
+name: agent-debugging-specialist
+description: "Specialist subagent: "
+context: fork
+agent: general-purpose
+---
+---
 name: debugging-specialist
 description: Systematic 4-phase debugging for complex and intermittent issues. Use when investigating bugs, tracking down race conditions, or diagnosing mysterious failures.
 tools: Read, Grep, Glob, Bash
@@ -110,3 +116,7 @@ Techniques:
 
 [How to prevent similar bugs]
 ```
+
+## Your task
+
+$ARGUMENTS

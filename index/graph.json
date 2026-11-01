@@ -62,6 +62,15 @@
    "description": "Specialist subagent: Third-party API integration, webhook handling, OAuth flows, rate limiting, and SDK wrapping specialist. Use when integrating external APIs, building webhook handlers, or creating…"
   },
   {
+   "id": "skill:agent-architecture-analyst",
+   "type": "skill",
+   "name": "agent-architecture-analyst",
+   "path": "skills/agent-architecture-analyst/SKILL.md",
+   "domain": "other",
+   "tier": "name-only",
+   "description": "Specialist subagent:"
+  },
+  {
    "id": "skill:agent-audio-engineer",
    "type": "skill",
    "name": "agent-audio-engineer",
@@ -177,6 +186,15 @@
    "domain": "backend",
    "tier": "name-only",
    "description": "Specialist subagent: Expert database architect and engineer for PostgreSQL, MongoDB, Redis, and all major databases. Use when designing schemas, optimizing queries, planning migrations, implementing…"
+  },
+  {
+   "id": "skill:agent-debugging-specialist",
+   "type": "skill",
+   "name": "agent-debugging-specialist",
+   "path": "skills/agent-debugging-specialist/SKILL.md",
+   "domain": "quality",
+   "tier": "name-only",
+   "description": "Specialist subagent:"
   },
   {
    "id": "skill:agent-desktop-developer",
@@ -483,6 +501,15 @@
    "domain": "backend",
    "tier": "name-only",
    "description": "Specialist subagent: Expert real-time systems specialist for WebSockets, SSE, and live data applications"
+  },
+  {
+   "id": "skill:agent-refactoring-specialist",
+   "type": "skill",
+   "name": "agent-refactoring-specialist",
+   "path": "skills/agent-refactoring-specialist/SKILL.md",
+   "domain": "quality",
+   "tier": "name-only",
+   "description": "Specialist subagent:"
   },
   {
    "id": "skill:agent-rust-expert",
@@ -1183,7 +1210,7 @@
    "name": "image-studio",
    "path": "skills/image-studio/SKILL.md",
    "domain": "other",
-   "tier": "core",
+   "tier": "name-only",
    "description": "Create, edit, find, or reuse images, logos, icons, illustrations, and visual assets through a private Image Studio library and MCP workflow."
   },
   {
@@ -1691,22 +1718,6 @@
    "description": "Real-time communication with WebSockets, Server-Sent Events, and related technologies. Use when building chat, live updates, collaborative features, or any real-time functionality."
   },
   {
-   "id": "agent:architecture-analyst",
-   "type": "agent",
-   "name": "architecture-analyst",
-   "path": "agents/architecture-analyst.md",
-   "domain": "quality",
-   "description": "Analyzes system architecture, identifies patterns/anti-patterns, and provides strategic recommendations. Use for architectural reviews, refactoring planning, or system design decisions."
-  },
-  {
-   "id": "agent:debugging-specialist",
-   "type": "agent",
-   "name": "debugging-specialist",
-   "path": "agents/debugging-specialist.md",
-   "domain": "quality",
-   "description": "Systematic 4-phase debugging for complex and intermittent issues. Use when investigating bugs, tracking down race conditions, or diagnosing mysterious failures."
-  },
-  {
    "id": "agent:deep-code-reviewer",
    "type": "agent",
    "name": "deep-code-reviewer",
@@ -1729,14 +1740,6 @@
    "path": "agents/react-expert.md",
    "domain": "frontend",
    "description": "React patterns, hooks, state management, and performance optimization. Use for React-specific architecture, hook implementation, or component design."
-  },
-  {
-   "id": "agent:refactoring-specialist",
-   "type": "agent",
-   "name": "refactoring-specialist",
-   "path": "agents/refactoring-specialist.md",
-   "domain": "quality",
-   "description": "Safe, incremental, behavior-preserving refactoring validated by careful review. Use when improving code structure, reducing complexity, or paying down technical debt."
   },
   {
    "id": "agent:security-auditor",
@@ -2781,11 +2784,6 @@
  ],
  "edges": [
   {
-   "from": "skill:agent-cloud-architect",
-   "to": "agent:architecture-analyst",
-   "rel": "pairs-with"
-  },
-  {
    "from": "skill:agent-cpp-expert",
    "to": "rule:cpp",
    "rel": "rules"
@@ -2876,11 +2874,6 @@
    "rel": "reference"
   },
   {
-   "from": "skill:business-strategy",
-   "to": "agent:architecture-analyst",
-   "rel": "pairs-with"
-  },
-  {
    "from": "skill:database-expert",
    "to": "agent:performance-optimizer",
    "rel": "pairs-with"
@@ -2889,11 +2882,6 @@
    "from": "skill:database-expert",
    "to": "doc:checklists/database-design",
    "rel": "reference"
-  },
-  {
-   "from": "skill:debug-systematic",
-   "to": "agent:debugging-specialist",
-   "rel": "pairs-with"
   },
   {
    "from": "skill:flutter-development",
@@ -2947,7 +2935,7 @@
   },
   {
    "from": "skill:generic-fullstack-code-reviewer",
-   "to": "agent:architecture-analyst",
+   "to": "agent:performance-optimizer",
    "rel": "pairs-with"
   },
   {
@@ -2959,11 +2947,6 @@
    "from": "skill:generic-fullstack-design-system",
    "to": "doc:stacks/fullstack-nextjs-nestjs",
    "rel": "reference"
-  },
-  {
-   "from": "skill:generic-fullstack-feature-developer",
-   "to": "agent:architecture-analyst",
-   "rel": "pairs-with"
   },
   {
    "from": "skill:generic-fullstack-feature-developer",
@@ -3003,11 +2986,6 @@
   {
    "from": "skill:generic-react-feature-developer",
    "to": "agent:react-expert",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:generic-react-feature-developer",
-   "to": "agent:architecture-analyst",
    "rel": "pairs-with"
   },
   {
@@ -3077,11 +3055,6 @@
   },
   {
    "from": "skill:literature-review-planner",
-   "to": "agent:architecture-analyst",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:literature-review-planner",
    "to": "agent:deep-code-reviewer",
    "rel": "pairs-with"
   },
@@ -3143,11 +3116,6 @@
   {
    "from": "skill:tech-debt-analyzer",
    "to": "agent:security-auditor",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:tech-debt-analyzer",
-   "to": "agent:refactoring-specialist",
    "rel": "pairs-with"
   },
   {

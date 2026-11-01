@@ -1,4 +1,10 @@
 ---
+name: agent-architecture-analyst
+description: "Specialist subagent: "
+context: fork
+agent: general-purpose
+---
+---
 name: architecture-analyst
 description: "Analyzes system architecture, identifies patterns/anti-patterns, and provides strategic recommendations. Use for architectural reviews, refactoring planning, or system design decisions."
 tools: Read, Grep, Glob, Write
@@ -105,3 +111,7 @@ Generate Mermaid diagrams for:
 - Consider team capabilities
 - Account for technical debt
 - Plan incremental migration paths
+
+## Your task
+
+$ARGUMENTS
