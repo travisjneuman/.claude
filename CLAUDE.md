@@ -69,6 +69,7 @@ Only core skills and the core agents show a full description in your context; th
 - Shared, social and authenticated intake stays read-only. Use loopback control through existing SSH and a unique task session; close only task-owned tabs and preserve services.
 - Headless engines obtain logged-in state from the primary managed browser's persistent identity through the owner's private clone tool: copy cookies and site storage only, host-to-host over SSH, never printed or stored outside target profiles. Copy nothing else between engines or hosts and never write to the source identity; serialize persistent profile use. High-trust reads need exact-account/read-scope approval; writes need action-specific approval. Public HTTP fallback stays partial.
 - Browser installation and independent automation remain prohibited outside explicit owner-approved host exceptions. Never use a separate launcher or agent to bypass these boundaries.
+- Agents running outside the owner's machines (provider-hosted cloud runs) or scoped away from personal systems are not in conflict with these rules: they use their own hosted browser and public research tools read-only, sign in to nothing of the owner's, never reach into the managed lanes or their profiles, and label social or authenticated reads partial for an agent on the owner's machines to finish.
 
 ## Memory and documentation
 
