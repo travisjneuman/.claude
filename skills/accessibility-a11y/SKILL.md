@@ -429,36 +429,28 @@ describe("LoginForm", () => {
 ```
 
 ```typescript
-// Playwright + axe for E2E accessibility testing
-import { test, expect } from "@playwright/test";
-import AxeBuilder from "@axe-core/playwright";
-
-test.describe("accessibility", () => {
-  test("home page passes axe audit", async ({ page }) => {
-    await page.goto("/");
-
-    const results = await new AxeBuilder({ page })
-      .withTags(["wcag2a", "wcag2aa", "wcag22aa"])
-      .analyze();
-
-    expect(results.violations).toEqual([]);
+// Cypress + cypress-axe for E2E accessibility testing
+// cypress/support/e2e.ts: import "cypress-axe";
+describe("accessibility", () => {
+  it("home page passes axe audit", () => {
+    cy.visit("/");
+    cy.injectAxe();
+    cy.checkA11y(undefined, {
+      runOnly: { type: "tag", values: ["wcag2a", "wcag2aa", "wcag22aa"] },
+    });
   });
 
-  test("modal dialog passes axe audit when open", async ({ page }) => {
-    await page.goto("/dashboard");
-    await page.getByRole("button", { name: "Create project" }).click();
-
-    const results = await new AxeBuilder({ page })
-      .include(".dialog")
-      .analyze();
-
-    expect(results.violations).toEqual([]);
+  it("modal dialog passes axe audit when open", () => {
+    cy.visit("/dashboard");
+    cy.injectAxe();
+    cy.findByRole("button", { name: "Create project" }).click();
+    cy.checkA11y(".dialog");
   });
 });
 ```
 
 ```yaml
-# GitHub Actions CI integration
+# GitHub Actions CI integration (add only when the user asks for CI)
 name: Accessibility Audit
 on: [pull_request]
 jobs:
@@ -466,17 +458,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-      - run: npm ci
-      - run: npm run build
-      - name: Run axe accessibility tests
-        run: npx playwright test --grep "accessibility"
-      - name: Run pa11y on built pages
-        run: |
-          npx serve -s build -l 3000 &
-          sleep 3
-          npx pa11y-ci --config .pa11yci.json
+      - name: Run axe accessibility specs
+        uses: cypress-io/github-action@v6
+        with:
+          build: npm run build
+          start: npx serve -s build -l 3000
+          wait-on: "http://localhost:3000"
+          spec: cypress/e2e/accessibility/**
 ```
+
+Playwright (`@axe-core/playwright` included), Puppeteer-based scanners (pa11y, pa11y-ci), and Selenium/WebDriver tools (`@axe-core/cli`) are prohibited. For a quick manual pass without a suite, open the page in the active app's built-in browser (then `agent-browser`) and check the accessibility tree, focus order, and contrast.
 
 **Why:** Automated testing catches structural issues (missing labels, invalid ARIA, contrast failures) consistently and early. Catching 30% of issues automatically in CI is better than catching 0% and discovering problems after launch. Combine with manual testing for full coverage.
 

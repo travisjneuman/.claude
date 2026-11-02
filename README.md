@@ -320,7 +320,7 @@ Agent types include architecture analysts, debugging specialists, performance op
 <details>
 <summary><strong>🔌 MCP Servers</strong></summary>
 
-No MCP servers are configured by default, which keeps every session's context lean. Add one with `claude mcp add` when a project needs it; **[docs/MCP-SERVERS.md](./docs/MCP-SERVERS.md)** covers common options (Playwright, memory, databases, GitHub, Context7) and their token cost.
+No MCP servers are configured by default, which keeps every session's context lean. Add one with `claude mcp add` when a project needs it; **[docs/MCP-SERVERS.md](./docs/MCP-SERVERS.md)** covers common options (memory, databases, GitHub, Context7) and their token cost. Browser work needs no MCP server: it uses the active app's built-in browser, then [`agent-browser`](./skills/agent-browser/SKILL.md), then Computer Use; Playwright, Puppeteer, and Selenium/WebDriver are prohibited.
 
 </details>
 

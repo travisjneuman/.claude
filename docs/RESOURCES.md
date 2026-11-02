@@ -95,7 +95,6 @@ A curated collection of resources for expanding and optimizing Claude Code capab
 | Server              | Purpose                    | Install                                                |
 | ------------------- | -------------------------- | ------------------------------------------------------ |
 | sequential-thinking | Structured problem-solving | `npx @modelcontextprotocol/server-sequential-thinking` |
-| playwright          | Browser automation         | `npx @playwright/mcp@latest`                           |
 | memory              | Persistent memory          | `npx @modelcontextprotocol/server-memory`              |
 | filesystem          | File operations            | `npx @modelcontextprotocol/server-filesystem`          |
 | context7            | Real-time documentation    | `https://mcp.context7.com/mcp`                         |

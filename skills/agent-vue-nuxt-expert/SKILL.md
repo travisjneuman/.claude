@@ -107,7 +107,7 @@ Expert Vue 3 and Nuxt 3 engineer specializing in Composition API patterns, serve
 - Composable testing with `createApp` context
 - Store testing (Pinia with `setActivePinia`)
 - Server route testing with `$fetch`
-- Playwright for E2E testing
+- Cypress for E2E testing (never Playwright)
 - Snapshot testing for components
 - Mock utilities for `useFetch` and `useAsyncData`
 

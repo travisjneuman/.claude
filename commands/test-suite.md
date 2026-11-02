@@ -21,7 +21,7 @@ Runs only when the user invokes it for that scope. The toolkit default is no tes
 
 ```bash
 # Check for common test frameworks
-[ -f "package.json" ] && grep -qE '"(jest|vitest|mocha|cypress|playwright)"' package.json && echo "NODE_PROJECT"
+[ -f "package.json" ] && grep -qE '"(jest|vitest|mocha|cypress)"' package.json && echo "NODE_PROJECT"
 [ -f "pytest.ini" ] || [ -f "pyproject.toml" ] && grep -q "pytest" pyproject.toml 2>/dev/null && echo "PYTEST"
 [ -f "go.mod" ] && echo "GO_TEST"
 [ -f "Cargo.toml" ] && echo "CARGO_TEST"
@@ -38,9 +38,8 @@ Runs only when the user invokes it for that scope. The toolkit default is no tes
 | Go test                | `go test ./...`                | `-cover -coverprofile`|
 | Cargo test             | `cargo test`                   | `cargo tarpaulin`     |
 | Cypress                | `npx --no cypress run`         | (via istanbul)        |
-| Playwright             | `npx --no playwright test`     | (via istanbul)        |
 
-Browser runners use only the copy the project already has (`npx --no`); never let `npx` fetch Playwright, Cypress, or browser binaries.
+Browser runners use only the copy the project already has (`npx --no`); never let `npx` fetch Cypress or browser binaries. Playwright (`@playwright/test`, `playwright-core`, Playwright browsers), Puppeteer, and Selenium/WebDriver suites are prohibited: never run, install, or extend them. If the project's only E2E suite uses one of them, report that scope as skipped for that reason and offer a migration through `agent-e2e-test-specialist`.
 
 ---
 
@@ -83,13 +82,10 @@ cargo test --test '*'
 #### E2E Tests
 
 ```bash
-# Playwright (project's installed copy only)
-npx --no playwright test
-
 # Cypress (project's installed copy only)
 npx --no cypress run
 
-# Python (selenium/playwright)
+# Python: only HTTP/API-level e2e suites; skip Selenium- or Playwright-driven ones
 pytest tests/e2e/ -v
 ```
 

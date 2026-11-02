@@ -19,14 +19,12 @@ MCP (Model Context Protocol) servers extend Claude Code's capabilities but consu
 | Server                | Purpose                     | When to Enable                                                 |
 | --------------------- | --------------------------- | -------------------------------------------------------------- |
 | `sequential-thinking` | Structured reasoning chains | Complex multi-step problems, architecture decisions            |
-| `playwright`          | Browser testing/automation  | E2E testing, UI automation, web scraping                       |
 | `memory`              | Persistent memory           | Long-running projects needing context between sessions         |
 | `filesystem`          | Enhanced file operations    | Bulk file operations (Claude's built-in tools usually suffice) |
 | `sqlite`              | Database operations         | Working with SQLite databases directly                         |
 | `context7`            | Context management          | Large codebases needing enhanced retrieval                     |
-| `chrome-devtools`     | Browser debugging           | Frontend debugging, performance profiling                      |
-| `puppeteer`           | Browser automation          | Similar to Playwright, alternative automation                  |
-| `browserbase`         | Cloud browser               | Remote browser sessions (requires API keys)                    |
+
+No browser automation MCP server is listed. Browser work uses the active app's built-in browser first, then a managed `agent-browser` CLI (or `agent-desktop` for native desktop apps), then Codex Computer Use, then Claude computer use. Playwright (including its MCP server), Puppeteer-based servers such as Chrome DevTools MCP, Selenium/WebDriver, and cloud browsers built on them are prohibited.
 
 ---
 
@@ -53,7 +51,7 @@ Claude will provide exact enable commands when a task would benefit:
 
 ```
 This task would benefit from MCP servers. Please enable:
-/mcp enable playwright
+/mcp enable memory
 /mcp enable sequential-thinking
 ```
 
@@ -65,7 +63,7 @@ Claude will IMMEDIATELY provide exact disable commands:
 
 ```
 Task complete. Please disable to free context:
-/mcp disable playwright
+/mcp disable memory
 /mcp disable sequential-thinking
 ```
 
@@ -93,17 +91,6 @@ User runs the exact command(s) to free context.
 
 **Disable after:** Decision is made
 
-### playwright / puppeteer
-
-**Enable for:**
-
-- Writing E2E tests
-- Browser automation scripts
-- Web scraping tasks
-- UI testing
-
-**Disable after:** Tests are written and passing
-
 ### memory
 
 **Enable for:**
@@ -123,16 +110,6 @@ User runs the exact command(s) to free context.
 - Data queries
 
 **Disable after:** Database work complete
-
-### chrome-devtools
-
-**Enable for:**
-
-- Frontend performance profiling
-- JavaScript debugging
-- Network analysis
-
-**Disable after:** Debugging complete
 
 ### context7
 
@@ -180,7 +157,6 @@ Each enabled MCP server adds tool definitions to the system prompt:
 | Server              | Approx. Token Cost |
 | ------------------- | ------------------ |
 | sequential-thinking | ~500 tokens        |
-| playwright          | ~2000 tokens       |
 | memory              | ~800 tokens        |
 | filesystem          | ~1500 tokens       |
 | sqlite              | ~1000 tokens       |
@@ -188,7 +164,7 @@ Each enabled MCP server adds tool definitions to the system prompt:
 | postgres            | ~800 tokens        |
 | git                 | ~600 tokens        |
 
-**Leaving these unconfigured saves ~8400+ tokens per session.**
+**Leaving these unconfigured saves ~6200+ tokens per session.**
 
 ---
 
@@ -221,7 +197,7 @@ claude mcp add server-name --scope project https://server-url
 
 The following are feature requests, not current capabilities:
 
-- [ ] CLI commands for enable/disable (`claude mcp disable playwright`)
+- [ ] CLI commands for enable/disable (`claude mcp disable memory`)
 - [ ] Hook-based activation (auto-enable on SessionStart)
 - [ ] Programmatic on-demand activation
 - [ ] Time-based auto-disable

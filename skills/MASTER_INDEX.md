@@ -17,7 +17,7 @@ Full cross-reference (skills, agents, commands, rules, docs, marketplaces): [`IN
 | `agent-blockchain-developer` | Desktop, systems & languages | name-only | Specialist subagent: Solidity, smart contracts, Web3, EVM, DeFi protocols, and blockchain development specialist. Use when writing smart co… |
 | `agent-brand-strategist` | Creative & content | name-only | Specialist subagent: Expert brand strategist for brand identity, positioning, naming, and brand guidelines |
 | `agent-browser-extension-developer` | Frontend, UI & UX | name-only | Specialist subagent: Chrome, Firefox, and cross-browser extension development specialist. Manifest V3, service workers, content scripts, an… |
-| `agent-browser` | Workflow & toolkit | name-only | Read-only browser source intake through agent-browser on approved hosts after recorded CamoFox blockers; dedicated Chrome profile and task-… |
+| `agent-browser` | Workflow & toolkit | name-only | Second browser lane after the active app's built-in browser, through the managed agent-browser CLI; read-only for shared, social, and authe… |
 | `agent-cli-developer` | Desktop, systems & languages | name-only | Specialist subagent: Command-line tool development, argument parsing, interactive prompts, and terminal UI specialist. Use when building CL… |
 | `agent-cloud-architect` | DevOps, cloud & observability | name-only | Specialist subagent: Multi-cloud architecture, cost optimization, serverless vs containers, disaster recovery, and infrastructure design sp… |
 | `agent-code-explainer` | Quality, testing & maintenance | name-only | Specialist subagent: Explains complex code in clear, understandable terms. Use when onboarding to a codebase, understanding unfamiliar patt… |
@@ -32,7 +32,7 @@ Full cross-reference (skills, agents, commands, rules, docs, marketplaces): [`IN
 | `agent-devsecops-engineer` | Security & compliance | name-only | Specialist subagent: CI/CD security, SAST/DAST pipelines, supply chain security, container scanning, and security automation specialist. Us… |
 | `agent-django-fastapi-expert` | Backend, APIs & data stores | name-only | Specialist subagent: Django ORM, Django REST Framework, FastAPI async patterns, and Pydantic v2 specialist. Use when building Python web ap… |
 | `agent-documentation-writer` | Quality, testing & maintenance | name-only | Specialist subagent: Generates comprehensive documentation including READMEs, API docs, architecture docs, and inline comments. Use when do… |
-| `agent-e2e-test-specialist` | Quality, testing & maintenance | name-only | Specialist subagent: Playwright, Cypress, and visual regression testing specialist. Use only when the user explicitly asks for E2E tests, b… |
+| `agent-e2e-test-specialist` | Quality, testing & maintenance | name-only | Specialist subagent: Cypress, Vitest browser mode, and visual regression testing specialist. Use only when the user explicitly asks for E2E… |
 | `agent-email-specialist` | Backend, APIs & data stores | name-only | Specialist subagent: Transactional email (Resend, SES, SendGrid), email templates (React Email, MJML), and deliverability specialist. Use w… |
 | `agent-embedded-developer` | Desktop, systems & languages | name-only | Specialist subagent: Embedded systems, firmware, RTOS, microcontrollers (STM32, ESP32, Arduino), IoT, and bare-metal C/C++ specialist. Use… |
 | `agent-event-driven-architect` | Backend, APIs & data stores | name-only | Specialist subagent: Kafka, RabbitMQ, SQS/SNS, event sourcing, CQRS, and message-driven architecture specialist. Use when designing event-d… |

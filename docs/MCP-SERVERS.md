@@ -1,6 +1,6 @@
 ---
 name: MCP Servers
-description: Optional MCP servers (none configured by default) for browser testing, memory, databases, and structured reasoning.
+description: Optional MCP servers (none configured by default) for memory, databases, library docs, and structured reasoning; browser work uses the app's built-in browser lanes, not a browser MCP server.
 category: reference
 ---
 
@@ -14,7 +14,7 @@ Model Context Protocol servers extend Claude's capabilities with external tools.
 
 ## Contents
 
-[What Is MCP?](#what-is-mcp) · [Currently Installed Servers](#currently-installed-servers) · [Server Details](#server-details) · [Browser Automation: Which Server to Use?](#browser-automation-which-server-to-use) · [Configuration](#configuration) · [Adding New Servers](#adding-new-servers) · [Removing Servers](#removing-servers) · [Lazy Loading](#lazy-loading) · [Troubleshooting](#troubleshooting) · [Available MCP Servers (Not Installed)](#available-mcp-servers-not-installed) · [Security Considerations](#security-considerations) · [Portable Backup](#portable-backup) · [See Also](#see-also)
+[What Is MCP?](#what-is-mcp) · [Currently Installed Servers](#currently-installed-servers) · [Server Details](#server-details) · [Browser Work: No Browser MCP Server](#browser-work-no-browser-mcp-server) · [Configuration](#configuration) · [Adding New Servers](#adding-new-servers) · [Removing Servers](#removing-servers) · [Lazy Loading](#lazy-loading) · [Troubleshooting](#troubleshooting) · [Available MCP Servers (Not Installed)](#available-mcp-servers-not-installed) · [Security Considerations](#security-considerations) · [Portable Backup](#portable-backup) · [See Also](#see-also)
 
 ---
 
@@ -22,7 +22,6 @@ Model Context Protocol servers extend Claude's capabilities with external tools.
 
 MCP (Model Context Protocol) is a standard for connecting AI models to external tools and services. MCP servers provide Claude with capabilities like:
 
-- Browser automation
 - Database queries
 - File system access
 - Memory persistence
@@ -41,14 +40,10 @@ None. The toolkit ships no MCP server configuration: no `.mcp.json` and no user-
 | Server              | Package                                            | Purpose                            |
 | ------------------- | -------------------------------------------------- | ---------------------------------- |
 | sequential-thinking | `@modelcontextprotocol/server-sequential-thinking` | Complex reasoning chains           |
-| playwright          | `@playwright/mcp@latest`                           | Browser automation (cross-browser) |
 | memory              | `@modelcontextprotocol/server-memory`              | Persistent memory                  |
 | filesystem          | `@modelcontextprotocol/server-filesystem`          | File operations                    |
 | sqlite              | `uvx mcp-server-sqlite`                            | Database queries                   |
 | context7            | `@upstash/context7-mcp`                            | Up-to-date library docs            |
-| chrome-devtools     | `@anthropic-ai/chrome-devtools-mcp`                | Chrome debugging/performance       |
-| puppeteer           | `@modelcontextprotocol/server-puppeteer`           | Simple browser automation          |
-| browserbase         | `@browserbase/mcp-server-browserbase`              | Cloud browser automation           |
 | github              | `@modelcontextprotocol/server-github`              | GitHub API operations              |
 | postgres            | `@crystaldba/postgres-mcp`                         | PostgreSQL read-only access        |
 | git                 | `@modelcontextprotocol/server-git`                 | Git operations via MCP             |
@@ -64,33 +59,6 @@ None. The toolkit ships no MCP server configuration: no `.mcp.json` and no user-
 - Decision trees
 
 **Invocation:** Automatic when complex reasoning needed.
-
----
-
-### playwright
-
-**Purpose:** Browser automation and testing.
-
-**Capabilities:**
-
-- Navigate web pages
-- Click elements
-- Fill forms
-- Take screenshots
-- Extract content
-
-**When to use:**
-
-- Web scraping
-- UI testing
-- Form automation
-- Screenshot capture
-
-**Example:**
-
-```
-Navigate to example.com and take a screenshot
-```
 
 ---
 
@@ -188,104 +156,6 @@ The single quotes keep the variable for Claude Code to expand at launch. Codex u
 
 ---
 
-### chrome-devtools
-
-**Purpose:** Deep Chrome debugging and performance profiling using Chrome DevTools Protocol.
-
-**Capabilities:**
-
-- Core Web Vitals measurement (LCP, CLS, INP)
-- DevTools performance traces
-- Network inspection and debugging
-- Console access and JavaScript execution
-- DOM inspection and manipulation
-
-**When to use:**
-
-- Performance optimization and profiling
-- Debugging complex frontend issues
-- Measuring Core Web Vitals
-- Network request analysis
-- When you need your existing Chrome session (cookies, login state)
-
-**Status:** Disabled by default.
-
-**Token usage:** ~18k tokens (26 tools)
-
-**Example:**
-
-```
-Analyze the performance of example.com and suggest improvements
-```
-
-**Note:** Uses your installed Chrome browser, preserving existing sessions.
-
----
-
-### puppeteer
-
-**Purpose:** Simple, lightweight browser automation via headless Chrome.
-
-**Capabilities:**
-
-- Navigate web pages
-- Click and interact with elements
-- Take screenshots and generate PDFs
-- Fill forms
-- Execute JavaScript
-
-**When to use:**
-
-- Simple browser automation tasks
-- Quick screenshots or PDF generation
-- Basic web scraping
-- When you want a lighter alternative to Playwright
-
-**Status:** Disabled by default.
-
-**Example:**
-
-```
-Take a screenshot of example.com
-```
-
-**Note:** Simpler API than Playwright or Chrome DevTools, but Chrome-only.
-
----
-
-### browserbase
-
-**Purpose:** Cloud-based browser automation with anti-detection and scaling.
-
-**Capabilities:**
-
-- Cloud browser sessions (no local browser needed)
-- 50-1000+ concurrent sessions
-- Built-in anti-bot detection bypass
-- CAPTCHA solving
-- 195+ country IP coverage
-- Works across Playwright, Puppeteer, and Patchright
-
-**When to use:**
-
-- Large-scale scraping or testing
-- CI/CD pipeline browser testing
-- Sites with anti-bot protection
-- When you need concurrent browser sessions
-- Testing from different geographic locations
-
-**Status:** Disabled by default.
-
-**Requirements:** API key required. Set `BROWSERBASE_API_KEY` and `BROWSERBASE_PROJECT_ID` in environment.
-
-**Example:**
-
-```
-Scrape product prices from 100 pages concurrently using Browserbase
-```
-
----
-
 ### github
 
 **Purpose:** Full GitHub API access beyond the gh CLI.
@@ -347,59 +217,18 @@ Scrape product prices from 100 pages concurrently using Browserbase
 
 ---
 
-## Browser Automation: Which Server to Use?
+## Browser Work: No Browser MCP Server
 
-We have four browser automation servers. Here's when to use each:
+The toolkit documents no browser automation MCP server. Browser work follows one lane order:
 
-### Decision Matrix
+1. **The active app's built-in browser** — the default for all web work: local dev servers, rendered pages, UI checks, screenshots, and public pages.
+2. **A managed `agent-browser` CLI** (see the `agent-browser` skill) when the built-in browser is blocked; for native desktop apps, `agent-desktop` instead.
+3. **Codex Computer Use.**
+4. **Claude computer use.**
 
-| Use Case                            | Best Choice     | Why                                |
-| ----------------------------------- | --------------- | ---------------------------------- |
-| **Cross-browser testing**           | Playwright      | Supports Chromium, Firefox, WebKit |
-| **Performance profiling**           | Chrome DevTools | Core Web Vitals, DevTools traces   |
-| **Simple automation**               | Puppeteer       | Lighter weight, simpler API        |
-| **Scale/anti-bot**                  | Browserbase     | Cloud-based, concurrent sessions   |
-| **Debugging with existing session** | Chrome DevTools | Uses your logged-in Chrome         |
-| **LLM-friendly (no vision)**        | Playwright      | Accessibility tree approach        |
-| **Quick screenshots**               | Puppeteer       | Fast, minimal overhead             |
-| **CI/CD pipelines**                 | Browserbase     | Cloud-native, no local browser     |
+Move down a lane only after recording why the one above cannot serve the task. Shared, social, and authenticated sources stay read-only in every lane.
 
-### Comparison Table
-
-| Feature                 | Playwright              | Chrome DevTools | Puppeteer   | Browserbase    |
-| ----------------------- | ----------------------- | --------------- | ----------- | -------------- |
-| **Browser Support**     | Chrome, Firefox, Safari | Chrome only     | Chrome only | Chrome (cloud) |
-| **Token Usage**         | ~14k                    | ~18k            | ~8k         | ~12k           |
-| **Local/Cloud**         | Local                   | Local           | Local       | Cloud          |
-| **Performance Tools**   | Basic                   | Excellent       | None        | Basic          |
-| **LLM Approach**        | Accessibility tree      | Pixel-based     | Pixel-based | Stagehand AI   |
-| **Anti-bot**            | None                    | None            | None        | Built-in       |
-| **Concurrent Sessions** | Limited                 | 1               | Limited     | 50-1000+       |
-| **API Key Required**    | No                      | No              | No          | Yes            |
-
-### Recommended Workflow
-
-1. **Start with Playwright** (default) — Best balance of capability and LLM-friendliness
-2. **Add Chrome DevTools** for performance work — When optimizing Core Web Vitals
-3. **Use Puppeteer** for simple tasks — Quick screenshots, basic automation
-4. **Use Browserbase** for scale — CI/CD, bulk operations, anti-bot sites
-
-### Example Scenarios
-
-**"Test my app works in Safari"**
-→ Use **Playwright** (only option with WebKit support)
-
-**"Why is my page slow? Measure LCP."**
-→ Use **Chrome DevTools** (Core Web Vitals profiling)
-
-**"Take a quick screenshot of this URL"**
-→ Use **Puppeteer** (simplest, fastest)
-
-**"Scrape 500 product pages with rate limiting"**
-→ Use **Browserbase** (cloud scale, anti-detection)
-
-**"Fill out a form on a site I'm logged into"**
-→ Use **Chrome DevTools** (preserves your Chrome session)
+Prohibited, with no exceptions: Playwright in any form (`playwright`, `playwright-core`, `@playwright/test`, the Playwright MCP server, Playwright browser downloads), Puppeteer and Puppeteer-based servers (including the Chrome DevTools MCP server), Selenium/WebDriver, cloud browser services built on them, and any standalone browser driven from a shell. Performance measurement uses the hosted PageSpeed Insights or Search Console reports, or the built-in browser's own tools.
 
 ---
 
@@ -430,12 +259,6 @@ The `command` field differs between Windows and Linux/Mac:
         "-y",
         "@modelcontextprotocol/server-sequential-thinking"
       ],
-      "env": {}
-    },
-    "playwright": {
-      "type": "stdio",
-      "command": "cmd",
-      "args": ["/c", "npx", "-y", "@playwright/mcp@latest"],
       "env": {}
     },
     "memory": {
@@ -475,12 +298,6 @@ The `command` field differs between Windows and Linux/Mac:
       "type": "stdio",
       "command": "npx",
       "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
-      "env": {}
-    },
-    "playwright": {
-      "type": "stdio",
-      "command": "npx",
-      "args": ["-y", "@playwright/mcp@latest"],
       "env": {}
     },
     "memory": {
@@ -704,7 +521,7 @@ The `filesystem` server has access to files. Current scope is `.` (current direc
 
 ### Network Access
 
-Servers like `playwright` and `fetch` have network access. Be cautious about:
+Servers like `fetch` and `brave-search` have network access. Be cautious about:
 
 - Visiting untrusted URLs
 - Sending data to external services

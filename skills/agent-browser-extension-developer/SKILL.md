@@ -44,7 +44,7 @@ Expert in building cross-browser extensions using Manifest V3, WebExtension APIs
 - TypeScript + bundler setup (Vite, Webpack, Parcel)
 - React/Svelte/Vue in popup and options pages
 - Hot reload during development (CRXJS, Plasmo)
-- Testing (Jest, Playwright for extension testing)
+- Testing (Jest or Vitest for logic, Cypress for options/popup pages served locally; never Playwright, Puppeteer, or WebDriver)
 - MV2 to MV3 migration strategies
 - Chrome Web Store and AMO review guidelines
 - Automated publishing with CI/CD

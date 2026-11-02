@@ -65,7 +65,7 @@ Only core skills and the core agents show a full description in your context; th
 
 ## Browser use
 
-The private owner layer's browser rule governs lanes, host eligibility, session state and approvals. Without one: use the active app's built-in browser or Computer Use, read-only for shared, social and authenticated sources; sign in to nothing of the owner's, label such reads partial, and never install or drive a standalone browser (Playwright, Puppeteer, Selenium) from a shell.
+Lane order for all web work: the active app's built-in browser (default); then a managed `agent-browser` CLI (`agent-desktop` for native desktop apps); then Codex Computer Use; then Claude computer use. Move down only after recording why the lane above can't serve the task. Shared, social and authenticated sources are read-only in every lane. Playwright in any form (`playwright-core`, `@playwright/test`, its MCP server and browsers), Puppeteer, Selenium/WebDriver, and any standalone browser installed or driven from a shell are prohibited, no exceptions. The private owner layer's browser rule adds host eligibility, session state and approvals; without one, sign in to nothing of the owner's and label such reads partial.
 
 ## Memory and documentation
 

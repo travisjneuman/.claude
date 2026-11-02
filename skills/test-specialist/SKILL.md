@@ -26,13 +26,13 @@ Use this skill only when the user explicitly asks for tests. Without that reques
 
 ## Testing Stack by Project
 
-| Project Type  | Unit Tests  | Component       | E2E        |
-| ------------- | ----------- | --------------- | ---------- |
-| React/Next.js | Vitest/Jest | Testing Library | Playwright |
-| Node.js       | Vitest/Jest | Supertest       | Playwright |
-| Static        | Jest        | -               | Playwright |
+| Project Type  | Unit Tests  | Component       | E2E     |
+| ------------- | ----------- | --------------- | ------- |
+| React/Next.js | Vitest/Jest | Testing Library | Cypress |
+| Node.js       | Vitest/Jest | Supertest       | Cypress |
+| Static        | Jest        | -               | Cypress |
 
-Browser automation (Playwright, Percy, Chromatic, `npx` browser installs) is not installed or run on the owner's Mac. Run it only when the user asks, through an environment they have approved for it.
+Playwright (`@playwright/test`, `playwright-core`, Playwright MCP, Playwright browsers) is prohibited, and so are Puppeteer and Selenium/WebDriver: never add, install, run, or suggest them. For a browser-level suite use Cypress (or the project's existing non-Playwright runner); for components in a real browser, Vitest browser mode with the `preview` provider, never the `playwright` or `webdriverio` providers. Browser test runners, Percy, Chromatic, and `npx` browser downloads run only when the user asks, through an environment they have approved. To look at a page without a suite, use the active app's built-in browser, then `agent-browser`.
 
 ## Test Patterns
 
@@ -71,25 +71,25 @@ it('creates item when user clicks Add', async () => {
 });
 ```
 
-### E2E Tests (Playwright)
+### E2E Tests (Cypress)
 
 ```typescript
-import { test, expect } from "@playwright/test";
+describe("checkout", () => {
+  it("user can complete checkout", () => {
+    cy.visit("/products");
 
-test("user can complete checkout", async ({ page }) => {
-  await page.goto("/products");
+    // Add to cart
+    cy.contains("button", "Add to Cart").click();
+    cy.contains("a", "Cart").click();
 
-  // Add to cart
-  await page.click('button:has-text("Add to Cart")');
-  await page.click('a:has-text("Cart")');
+    // Checkout
+    cy.contains("button", "Checkout").click();
+    cy.get('[name="email"]').type("test@example.com");
+    cy.contains("button", "Place Order").click();
 
-  // Checkout
-  await page.click('button:has-text("Checkout")');
-  await page.fill('[name="email"]', "test@example.com");
-  await page.click('button:has-text("Place Order")');
-
-  // Verify
-  await expect(page.locator("h1")).toContainText("Order Confirmed");
+    // Verify
+    cy.get("h1").should("contain.text", "Order Confirmed");
+  });
 });
 ```
 
@@ -488,44 +488,39 @@ proptest! {
 
 ## Visual Regression Testing
 
-### Playwright Screenshots
+### Cypress Screenshot Comparison
 
 ```typescript
-import { test, expect } from "@playwright/test";
+// Uses a local image-snapshot plugin such as @simonsmith/cypress-image-snapshot
+describe("homepage visual regression", () => {
+  it("matches the baseline", () => {
+    cy.visit("/");
+    cy.matchImageSnapshot("homepage", { failureThreshold: 0.01, failureThresholdType: "percent" });
+  });
 
-test("homepage visual regression", async ({ page }) => {
-  await page.goto("/");
-  await expect(page).toHaveScreenshot("homepage.png", {
-    maxDiffPixelRatio: 0.01,
+  it("component states", () => {
+    cy.visit("/components");
+
+    // Default state
+    cy.get(".card").first().matchImageSnapshot("card-default");
+
+    // Mobile viewport
+    cy.viewport(375, 812);
+    cy.matchImageSnapshot("homepage-mobile");
   });
 });
 
-test("component states", async ({ page }) => {
-  await page.goto("/components");
-
-  // Default state
-  await expect(page.locator(".card")).toHaveScreenshot("card-default.png");
-
-  // Hover state
-  await page.locator(".card").hover();
-  await expect(page.locator(".card")).toHaveScreenshot("card-hover.png");
-
-  // Full page with specific viewport
-  await page.setViewportSize({ width: 375, height: 812 }); // iPhone
-  await expect(page).toHaveScreenshot("homepage-mobile.png");
-});
-
-// Update snapshots: npx playwright test --update-snapshots
+// Update baselines: npx --no cypress run --env updateSnapshots=true
 ```
 
 ### Percy (Cloud Visual Testing)
 
 ```typescript
-import percySnapshot from "@percy/playwright";
+import "@percy/cypress";
 
-test("visual test with Percy", async ({ page }) => {
-  await page.goto("/dashboard");
-  await percySnapshot(page, "Dashboard");
+it("visual test with Percy", () => {
+  cy.visit("/dashboard");
+  cy.percySnapshot("Dashboard");
   // Percy compares across browsers and viewport sizes
 });
 ```
@@ -543,7 +538,7 @@ npx chromatic --project-token=<token>
 
 | Tool           | Approach                        | Best For                      |
 | -------------- | ------------------------------- | ----------------------------- |
-| **Playwright** | Local screenshot comparison     | E2E visual tests, free        |
+| **Cypress + image snapshot** | Local screenshot comparison | E2E visual tests, free |
 | **Percy**      | Cloud cross-browser comparison  | Multi-browser, team review    |
 | **Chromatic**  | Storybook story snapshots       | Component library visual QA   |
 

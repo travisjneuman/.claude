@@ -148,11 +148,6 @@ A clean copy is maintained at `~/.claude/.claude.json` containing only MCP serve
       "command": "npx",
       "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"]
     },
-    "playwright": {
-      "type": "stdio",
-      "command": "npx",
-      "args": ["-y", "@playwright/mcp@latest"]
-    },
     "memory": {
       "type": "stdio",
       "command": "npx",

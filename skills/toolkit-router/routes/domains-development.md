@@ -14,7 +14,7 @@ Load this file when development-related keywords detected.
 | `backend`       | api, backend, server, endpoint, rest, express, nestjs, fastify                          |
 | `database`      | database, db, sql, postgres, mongodb, redis, prisma, schema, query, migration           |
 | `devops`        | deploy, ci/cd, docker, kubernetes, aws, gcp, azure, terraform, pipeline, github actions |
-| `testing`       | test, testing, jest, vitest, pytest, coverage, tdd, unit test, e2e, cypress, playwright |
+| `testing`       | test, testing, jest, vitest, pytest, coverage, tdd, unit test, e2e, cypress             |
 | `security`      | security, auth, authentication, oauth, jwt, vulnerability, owasp, encryption, ssl       |
 | `debugging`     | debug, bug, fix, error, crash, issue, broken, not working, failing                      |
 | `performance`   | performance, slow, optimize, speed, latency, bottleneck, profiling, memory leak         |

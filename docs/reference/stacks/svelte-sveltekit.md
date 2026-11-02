@@ -17,7 +17,7 @@ npm run preview                # Preview production build locally
 
 # Testing
 npm run test                   # Run Vitest unit tests
-npm run test:e2e               # Run Playwright E2E tests
+npm run test:e2e               # Run Cypress E2E tests
 
 # Code quality
 npm run check                  # svelte-check (types + a11y + warnings)
@@ -408,23 +408,26 @@ describe("Counter", () => {
 });
 ```
 
-### E2E Tests (Playwright)
+### E2E Tests (Cypress)
+
+Playwright is prohibited: never add `@playwright/test`, choose a Playwright add-on in a scaffolder, or run Playwright browsers. Use Cypress (with `@testing-library/cypress` for role and label queries); for a quick look without a suite, use the active app's built-in browser, then `agent-browser`.
 
 ```typescript
-import { test, expect } from "@playwright/test";
+// cypress/e2e/navigation.cy.ts
+describe("app", () => {
+  it("navigation works", () => {
+    cy.visit("/");
+    cy.findByRole("link", { name: "Users" }).click();
+    cy.location("pathname").should("eq", "/users");
+    cy.findByRole("heading", { name: "Users" }).should("be.visible");
+  });
 
-test("navigation works", async ({ page }) => {
-  await page.goto("/");
-  await page.getByRole("link", { name: "Users" }).click();
-  await expect(page).toHaveURL("/users");
-  await expect(page.getByRole("heading", { name: "Users" })).toBeVisible();
-});
+  it("form submission with validation", () => {
+    cy.visit("/login");
+    cy.findByRole("button", { name: "Sign In" }).click();
 
-test("form submission with validation", async ({ page }) => {
-  await page.goto("/login");
-  await page.getByRole("button", { name: "Sign In" }).click();
-
-  await expect(page.getByText("Email and password are required")).toBeVisible();
+    cy.contains("Email and password are required").should("be.visible");
+  });
 });
 ```
 

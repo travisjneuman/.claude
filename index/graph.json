@@ -122,7 +122,7 @@
    "path": "skills/agent-browser/SKILL.md",
    "domain": "workflow",
    "tier": "name-only",
-   "description": "Read-only browser source intake through agent-browser on approved hosts after recorded CamoFox blockers; dedicated Chrome profile and task-unique session required."
+   "description": "Second browser lane after the active app's built-in browser, through the managed agent-browser CLI; read-only for shared, social, and authenticated sources, dedicated Chrome profile and task-unique s…"
   },
   {
    "id": "skill:agent-cli-developer",
@@ -257,7 +257,7 @@
    "path": "skills/agent-e2e-test-specialist/SKILL.md",
    "domain": "quality",
    "tier": "name-only",
-   "description": "Specialist subagent: Playwright, Cypress, and visual regression testing specialist. Use only when the user explicitly asks for E2E tests, browser test automation, or visual regression testing. Trigge…"
+   "description": "Specialist subagent: Cypress, Vitest browser mode, and visual regression testing specialist. Use only when the user explicitly asks for E2E tests, browser test automation, or visual regression testin…"
   },
   {
    "id": "skill:agent-email-specialist",

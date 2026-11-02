@@ -63,17 +63,15 @@ System prompt here...
 | Server              | Purpose              |
 | ------------------- | -------------------- |
 | sequential-thinking | Complex reasoning    |
-| playwright          | Browser automation   |
 | memory              | Persistent memory    |
 | filesystem          | File operations      |
 | sqlite              | Database queries     |
 | context7            | Context management   |
-| chrome-devtools     | Browser debugging    |
-| puppeteer           | Browser automation   |
-| browserbase         | Cloud browser        |
 | github              | GitHub API via MCP   |
 | postgres            | PostgreSQL access    |
 | git                 | Git operations       |
+
+Browser work uses no MCP server: the active app's built-in browser first, then `agent-browser`, then Computer Use. Playwright, Puppeteer, and Selenium/WebDriver servers are prohibited ([MCP-SERVERS.md](./MCP-SERVERS.md#browser-work-no-browser-mcp-server)).
 
 ## Context Management
 
@@ -198,7 +196,6 @@ System prompt here...
 | Server              | Purpose                    | Install Command                                        |
 | ------------------- | -------------------------- | ------------------------------------------------------ |
 | sequential-thinking | Structured problem-solving | `npx @modelcontextprotocol/server-sequential-thinking` |
-| playwright          | Browser automation         | `npx @playwright/mcp@latest`                           |
 | memory              | Persistent memory          | `npx @modelcontextprotocol/server-memory`              |
 | filesystem          | File operations            | `npx @modelcontextprotocol/server-filesystem`          |
 | context7            | Real-time documentation    | `https://mcp.context7.com/mcp`                         |

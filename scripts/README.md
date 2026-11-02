@@ -24,7 +24,7 @@ Up: [README](../README.md) · Not here: Claude Code lifecycle hooks are in [hook
 | --------------------- | --------------------------------------- | ---------------------------------------------------------- |
 | `update-counts.sh`    | Explicitly refresh public counts, source evidence, website snapshots and current numeric docs | After reviewed public source changes |
 | `generate-showcase-images.mjs` | Regenerate the `tjn.portfolio` showcase screenshots from `counts.json` (the website OG image is the static GitHub social preview) | After public showcase counts change |
-| `generate-index.mjs`  | Regenerate `INDEX.md`, `index/graph.json`, `skills/MASTER_INDEX.md` (`--write`) | After adding/removing skills, agents, commands, rules, or marketplaces |
+| `generate-index.mjs`  | Regenerate `INDEX.md`, `index/graph.json`, `skills/MASTER_INDEX.md` (`--write`) and the local marketplace catalog, which leaves out marketplace skills whose name, path, or description mentions Playwright or Puppeteer (prohibited) and marketplaces built on them | After adding/removing skills, agents, commands, rules, or marketplaces |
 | `regenerate-index.sh` | Compatibility wrapper for `generate-index.mjs --write` | Same as above                                   |
 | `install-plugins.sh`  | Install enabled plugins, update upstream-tracking ones, LSP binaries | Runs daily automatically; run after changing plugins       |
 | `_pull-all-repos.sh` (repo root) | Pull marketplace clones and re-sync their URLs and `no_push` | After upstream changes, or if remotes are misconfigured |

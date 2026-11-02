@@ -48,7 +48,7 @@ A collection of 81 community-maintained GitHub repositories providing over 11,00
 
 ### MCP Server (Model Context Protocol)
 
-External server processes that extend Claude Code's tool capabilities. Examples: sequential-thinking for structured reasoning, playwright for browser automation, memory for persistent storage. Configured in `~/.claude/.mcp.json`, toggled via `/mcp`. All disabled by default to save context tokens.
+External server processes that extend Claude Code's tool capabilities. Examples: sequential-thinking for structured reasoning, context7 for library docs, memory for persistent storage. Browser work uses the app's built-in browser lanes, not a browser MCP server. Configured in `~/.claude/.mcp.json`, toggled via `/mcp`. All disabled by default to save context tokens.
 
 ### Plugin
 

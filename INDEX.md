@@ -35,7 +35,7 @@ This explicit source refresh lists public toolkit definitions; marketplace membe
 
 | Skill | Tier | Purpose | Related |
 | --- | --- | --- | --- |
-| `agent-browser` | name-only | Read-only browser source intake through agent-browser on approved hosts after recorded CamoFox blockers; dedi… |  |
+| `agent-browser` | name-only | Second browser lane after the active app's built-in browser, through the managed agent-browser CLI; read-only… |  |
 | `agent-go-expert` | name-only | Specialist subagent: Go concurrency, error handling, stdlib patterns, Chi/Echo web frameworks specialist. Use… |  |
 | `agent-product-manager` | name-only | Specialist subagent: Product requirements, user stories, roadmaps, prioritization frameworks, and sprint plan… |  |
 | `agent-teams` | name-only | Team composition knowledge for Claude Code Agent Teams - when teams fit, optimal sizing, spawn prompt pattern… | `workflows/agent-teams` |
@@ -206,7 +206,7 @@ This explicit source refresh lists public toolkit definitions; marketplace membe
 | `agent-code-explainer` | name-only | Specialist subagent: Explains complex code in clear, understandable terms. Use when onboarding to a codebase,… |  |
 | `agent-debugging-specialist` | name-only | Specialist subagent: |  |
 | `agent-documentation-writer` | name-only | Specialist subagent: Generates comprehensive documentation including READMEs, API docs, architecture docs, an… | `deep-code-reviewer` |
-| `agent-e2e-test-specialist` | name-only | Specialist subagent: Playwright, Cypress, and visual regression testing specialist. Use only when the user ex… |  |
+| `agent-e2e-test-specialist` | name-only | Specialist subagent: Cypress, Vitest browser mode, and visual regression testing specialist. Use only when th… |  |
 | `agent-migration-specialist` | name-only | Specialist subagent: Framework upgrades, codemod strategies, version migration planning, and legacy moderniza… |  |
 | `agent-refactoring-specialist` | name-only | Specialist subagent: |  |
 | `agent-technical-writer` | name-only | Specialist subagent: Architecture Decision Records, API documentation, migration guides, runbooks, and techni… |  |

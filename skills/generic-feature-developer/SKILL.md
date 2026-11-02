@@ -194,7 +194,7 @@ if (err instanceof AuthError)
 | UI    | Component   | Testing Library |
 | Logic | Unit        | Jest, Vitest    |
 | API   | Integration | Supertest       |
-| E2E   | End-to-end  | Playwright      |
+| E2E   | End-to-end  | Cypress         |
 
 ## Performance
 

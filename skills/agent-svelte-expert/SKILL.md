@@ -113,7 +113,7 @@ Expert Svelte 5 and SvelteKit engineer specializing in rune-based reactivity, co
 - Store/state testing
 - Load function testing
 - Server route testing
-- Playwright for E2E tests
+- Cypress for E2E tests (never Playwright)
 - Accessibility testing (built-in Svelte warnings)
 - Snapshot testing
 

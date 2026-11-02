@@ -114,10 +114,10 @@ If MCP servers are enabled, show their token cost:
 ```
 MCP Server Token Impact:
 ├── sequential-thinking: ~500 tokens
-├── playwright: ~2,000 tokens (ENABLED)
-└── Total MCP overhead: ~2,500 tokens
+├── context7: ~1,000 tokens (ENABLED)
+└── Total MCP overhead: ~1,500 tokens
 
-Tip: Disable unused MCP servers to save ~2,000 tokens
+Tip: Disable unused MCP servers to save ~1,000 tokens
 ```
 
 ## Technical Notes

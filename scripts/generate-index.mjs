@@ -19,6 +19,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { createHash } from "node:crypto";
+import os from "node:os";
 import { collectCore, readManifest } from "./count-inventory.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -92,11 +93,17 @@ const tiers = JSON.parse(read(path.join(root, "index/tiers.json")) || "{}");
 const coreSkills = new Set(tiers.core_skills || []);
 const coreCommands = new Set(tiers.core_commands || []);
 const nodes = [];
-// Skills linked in from outside the repo (vendored per host) stay out of the public index.
+// Skills linked in from outside the repo (vendored per host) stay out of the public index but
+// get name-only overrides in settings.json. Only links into the user's own trees count: a link
+// that is dangling or resolves outside the home directory (OS-provided, host-specific) is skipped,
+// so regenerating on one host never writes that host's skills into the shared settings.json.
 const linkedSkills = [];
+const home = fs.realpathSync(os.homedir());
+const resolvesUnderHome = (p) => { try { return fs.realpathSync(p).startsWith(home + path.sep); } catch { return false; } };
 
 for (const dir of fs.readdirSync(path.join(root, "skills")).sort()) {
-  if (fs.lstatSync(path.join(root, "skills", dir)).isSymbolicLink()) linkedSkills.push(dir);
+  const p = path.join(root, "skills", dir);
+  if (fs.lstatSync(p).isSymbolicLink() && resolvesUnderHome(p)) linkedSkills.push(dir);
 }
 for (const relative of publicInventory.skills) {
   const file = path.join(root, relative);
@@ -267,9 +274,13 @@ const outputs = [
 const stale = outputs.filter(([p, c]) => read(p) !== c).map(([p]) => rel(p));
 if (write) {
   for (const [p, c] of outputs) { fs.mkdirSync(path.dirname(p), { recursive: true }); if (read(p) !== c) fs.writeFileSync(p, c); }
-  // Local-only marketplace catalog
+  // Local-only marketplace catalog. Playwright and Puppeteer are prohibited, so the catalog that
+  // INDEX.md routes to drops skills whose name, path, or description mentions either, and every
+  // skill from marketplaces whose tooling is built on them.
+  const EXCLUDED = /playwright|puppeteer/i;
+  const EXCLUDED_MARKETPLACES = new Set(["sawyerhood-dev-browser", "millionco-expect"]);
   const cat = [];
-  for (const m of marketplaces.filter((m) => m.cloned)) {
+  for (const m of marketplaces.filter((m) => m.cloned && !EXCLUDED_MARKETPLACES.has(m.name))) {
     const stack = [path.join(root, m.path)];
     while (stack.length) {
       const d = stack.pop();
@@ -281,7 +292,10 @@ if (write) {
         if (e.isDirectory()) stack.push(full);
         else if (e.name === "SKILL.md") {
           const fm = frontmatter(read(full));
-          cat.push({ marketplace: m.name, name: fm.name || path.basename(d), description: clip(fm.description || "", 200), path: rel(full) });
+          const name = fm.name || path.basename(d);
+          const description = fm.description || "";
+          if (EXCLUDED.test(name) || EXCLUDED.test(rel(full)) || EXCLUDED.test(description)) continue;
+          cat.push({ marketplace: m.name, name, description: clip(description, 200), path: rel(full) });
         }
       }
     }

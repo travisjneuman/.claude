@@ -18,7 +18,7 @@ npm run type-check             # TypeScript validation (vue-tsc)
 
 # Testing
 npm run test                   # Run Vitest unit tests
-npm run test:e2e               # Run Playwright E2E tests
+npm run test:e2e               # Run Cypress E2E tests
 
 # Utilities
 npx nuxi add page users        # Scaffold a new page
@@ -376,19 +376,22 @@ describe("useAuth", () => {
 });
 ```
 
-### E2E Tests (Playwright)
+### E2E Tests (Cypress)
+
+Playwright is prohibited: never add `@playwright/test`, choose a Playwright add-on in a scaffolder, or run Playwright browsers. Use Cypress (with `@testing-library/cypress` for role and label queries); for a quick look without a suite, use the active app's built-in browser, then `agent-browser`.
 
 ```typescript
-import { test, expect } from "@playwright/test";
+// cypress/e2e/login.cy.ts
+describe("auth", () => {
+  it("login flow", () => {
+    cy.visit("/login");
+    cy.findByLabelText("Email").type("user@example.com");
+    cy.findByLabelText("Password").type("password123", { log: false });
+    cy.findByRole("button", { name: "Sign In" }).click();
 
-test("login flow", async ({ page }) => {
-  await page.goto("/login");
-  await page.getByLabel("Email").fill("user@example.com");
-  await page.getByLabel("Password").fill("password123");
-  await page.getByRole("button", { name: "Sign In" }).click();
-
-  await expect(page).toHaveURL("/dashboard");
-  await expect(page.getByText("Welcome back")).toBeVisible();
+    cy.location("pathname").should("eq", "/dashboard");
+    cy.contains("Welcome back").should("be.visible");
+  });
 });
 ```
 

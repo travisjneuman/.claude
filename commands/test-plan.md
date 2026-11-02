@@ -49,7 +49,8 @@ Analyze the current project to understand the tech stack and structure:
 find . -name "*.test.*" -o -name "*.spec.*" -o -name "*_test.*" -o -name "test_*" | head -30
 
 # Test config files
-ls jest.config* vitest.config* pytest.ini setup.cfg .mocharc* playwright.config* cypress.config* 2>/dev/null
+ls jest.config* vitest.config* pytest.ini setup.cfg .mocharc* cypress.config* 2>/dev/null
+# A playwright.config* or @playwright/test dependency marks a Playwright suite: never run or extend it; plan a migration to Cypress instead
 
 # Test directories
 ls -d test/ tests/ __tests__/ e2e/ integration/ 2>/dev/null
@@ -191,7 +192,7 @@ Based on detected tech stack, recommend testing tools:
 | --- | --- | --- |
 | Unit/Integration runner | Vitest | Jest |
 | Component testing | Testing Library | Enzyme (legacy) |
-| E2E testing | Playwright | Cypress |
+| E2E testing | Cypress | Vitest browser mode (`preview` provider) for component-level browser checks |
 | API testing | Supertest | httpx (Python) |
 | Mocking | vi.mock / vi.fn | jest.mock |
 | Coverage | v8 (via Vitest) | Istanbul |

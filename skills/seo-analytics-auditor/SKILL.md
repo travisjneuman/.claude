@@ -20,14 +20,14 @@ Audit SEO, verify analytics, and optimize Core Web Vitals.
 
 ## Quick Audit Workflow
 
-Local browser automation installs (`npx lighthouse`, Playwright, headless Chrome) are not allowed on the owner's Mac. Start from reading the source, meta tags, and deployed HTML; run Lighthouse or other browser audits only when the user asks, through an approved lane (such as PageSpeed Insights or the Search Console reports).
+Local browser automation (`npx lighthouse`, Playwright, Puppeteer, Selenium/WebDriver, headless Chrome from a shell) is not installed or run. Start from reading the source, meta tags, and deployed HTML; view rendered pages in the active app's built-in browser (then `agent-browser`). Run Lighthouse-style audits only when the user asks, through a hosted lane such as PageSpeed Insights or the Search Console reports.
 
 ```bash
-# 1. Run Lighthouse audit
-npx lighthouse https://yoursite.com --output=html --output-path=./audit.html
+# 1. Lighthouse audit via the hosted PageSpeed Insights API (no local browser)
+curl -s "https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https://yoursite.com&category=seo&category=performance&strategy=mobile"
 
-# 2. Check Core Web Vitals
-npx lighthouse https://yoursite.com --only-categories=performance
+# 2. Check Core Web Vitals field data
+# Open: https://pagespeed.web.dev/ or the Search Console Core Web Vitals report
 
 # 3. Validate structured data
 # Open: https://search.google.com/test/rich-results
