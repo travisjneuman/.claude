@@ -177,7 +177,14 @@ Navigate to example.com and take a screenshot
 use context7 - how do I set up a Next.js 15 app router?
 ```
 
-**Note:** No API key required for basic use. Optional API key for higher rate limits and private repos.
+**Setup (API key required):** Since 2026-11 the remote server answers tokenless clients with a 401 sign-in challenge, so connect with a key. Keep the key in a private file (mode 0600) that your shell profile loads into `CONTEXT7_API_KEY`, then add the server at user scope:
+
+```bash
+claude mcp add --scope user --transport http context7 https://mcp.context7.com/mcp \
+  --header 'Authorization: Bearer ${CONTEXT7_API_KEY}'
+```
+
+The single quotes keep the variable for Claude Code to expand at launch. Codex uses `bearer_token_env_var = "CONTEXT7_API_KEY"` under `[mcp_servers.context7]`; Grok uses `bearer_token_file` pointing at the key file. The `context7@claude-plugins-official` plugin stays disabled in `settings.json`: it cannot carry a key, and Grok's Claude-compatibility import treats its 401 as fatal.
 
 ---
 

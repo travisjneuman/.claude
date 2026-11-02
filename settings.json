@@ -414,7 +414,7 @@
     "pyright-lsp@claude-plugins-official": true,
     "swift-lsp@claude-plugins-official": true,
     "brag@brag": true,
-    "context7@claude-plugins-official": true,
+    "context7@claude-plugins-official": false,
     "claude-codex-computer-use@songkeys": true,
     "unreal-engine-skills-for-claude-code@travisjneuman-upstream": true
   },
