@@ -133,7 +133,7 @@ A workflow state (entered via EnterPlanMode) where Claude explores the codebase 
 
 ### Session Handoff
 
-The process of preserving context between Claude Code sessions: `claude --continue` / `--resume`, auto memory, and the explicit `/handoff` command (which writes `~/.claude/last-session.md` on request).
+The process of preserving context between Claude Code sessions: `claude --continue` / `--resume` and the explicit `/handoff` command (which writes `~/.claude/last-session.md` on request).
 
 ### Verification Template
 

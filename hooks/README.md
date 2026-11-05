@@ -29,7 +29,7 @@ Up: [README](../README.md) · Not here: git hooks for this repo are in `scripts/
 | --- | --- |
 | `pre-bash-check.sh`, `pre-write-validate.sh` | Read `$CLAUDE_TOOL_INPUT`, which Claude Code never sets (input arrives as JSON on stdin), so they never blocked anything. Replaced by `guard.js`. |
 | `prompt-context.sh` (every prompt) | Injected branch and last commit into every prompt. Claude Code already gives the model git status at session start, so this was pure repeated token cost. |
-| `session-stop-summary.sh` + `session-start-context.sh` | Wrote a "last session" file after every turn and injected it into the next session, even in an unrelated project. `claude --continue` / `--resume` and auto memory do this properly. |
+| `session-stop-summary.sh` + `session-start-context.sh` | Wrote a "last session" file after every turn and injected it into the next session, even in an unrelated project. `claude --continue` / `--resume` and `/handoff` do this properly. |
 | `statusline.sh` | Read fields that don't exist in the status line JSON, so it showed "unknown". Replaced by `statusline.js`. |
 | `gsd-*.js` (5 files) | GSD-specific hooks from the vendored GSD copy. Removed in v3.2.0 together with that copy. GSD itself (the `gsd-core` marketplace) has since been removed from the toolkit. |
 | Auto-commit/push inside `_pull-all-repos.sh` | The background pull used to `git add -u`, commit, and push `~/.claude` on its own. That could sweep in-progress edits into a public push. Counts and indexes are now explicit source-refresh operations; neither a background pull nor a commit regenerates them. |

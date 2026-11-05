@@ -70,7 +70,7 @@ Lane order for all web work: the active app's built-in browser (default); then a
 ## Memory and documentation
 
 - Before writing durable project knowledge, update the existing owning subject note first: in the private knowledge base when the local layer configures one (follow its routing rules for domain-first placement, canonical links, portable paths, and unresolved destinations), otherwise in the project's own docs or ADRs. If no owner exists, report the unresolved destination instead of creating a stray note. Keep one owner per fact; link related surfaces instead of copying policy. Agent-specific notes own only agent operations. Public repository docs stay self-contained and contain no private knowledge-base paths or content.
-- Auto memory is recall, not authority. Durable rules belong in `CLAUDE.md` / `AGENTS.md`.
+- Auto memory is off (`autoMemoryEnabled: false` in `settings.json`). Durable rules belong in `CLAUDE.md` / `AGENTS.md`; project knowledge belongs in its owning note.
 - When corrected on a repeated mistake, propose the rule that would have prevented it.
 - After changing toolkit skills, agents, commands, hooks, or rules, update the affected README and regenerate `INDEX.md` with `scripts/regenerate-index.sh`; the pre-commit hook only runs the public-safety gate.
 

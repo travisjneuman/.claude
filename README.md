@@ -330,7 +330,7 @@ No MCP servers are configured by default, which keeps every session's context le
 
 The toolkit maintains context between sessions automatically:
 
-1. **Resume** — `claude --continue` / `--resume` reopen a previous conversation; auto memory carries preferences and project facts across sessions; `/handoff` writes an explicit handoff note when you want one
+1. **Resume** — `claude --continue` / `--resume` reopen a previous conversation (auto memory is disabled in `settings.json`; durable preferences live in `CLAUDE.md`/`AGENTS.md`); `/handoff` writes an explicit handoff note when you want one
 2. **Repo health** — `session-start-repo-health.sh` flags repos that need a pull, push, or reconciliation before you edit them
 3. **Repo sync** — `session-start-pull.sh` fast-forward pulls in the background, at most once a day
 
