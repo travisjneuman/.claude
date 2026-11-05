@@ -8,7 +8,7 @@ Create a handoff document for seamless session continuity.
 
 ## Instructions
 
-Write `~/.claude/last-session.md` with:
+First follow [Memory and documentation](../CLAUDE.md#memory-and-documentation) to update durable findings and decisions in the owning subject note. Then write `~/.claude/last-session.md` as a session continuation summary with links to those owners, not the only record of durable project knowledge:
 
 1. **Current task:** What was being worked on
 2. **Status:** What's done and what remains

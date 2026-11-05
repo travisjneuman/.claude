@@ -14,7 +14,7 @@ When invoked, tell the user this and point them to what replaced it:
 | Reopen or review a session    | `claude --resume` (pick a past session) or `claude --continue` (most recent) |
 | Token and cost usage          | `/usage` in the current session                            |
 | Usage across sessions/hosts   | The Claude usage rollup in the owner's notes vault         |
-| Carry context to next session | `/handoff`, which writes `~/.claude/last-session.md`       |
+| Carry context to next session | `/handoff`, which routes durable knowledge first, then writes a continuation summary to `~/.claude/last-session.md` |
 
 ## Related
 

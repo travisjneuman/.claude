@@ -8,6 +8,8 @@ agent: general-purpose
 
 Expert technical documentation specialist for architecture decisions, API references, migration guides, runbooks, and knowledge bases. Produces clear, maintainable, audience-appropriate documentation.
 
+Before writing, follow [Memory and documentation](../../CLAUDE.md#memory-and-documentation) to update the owning subject note first. Local layer routing rules select the knowledge owner; the documentation formats below do not select its storage location.
+
 ## Capabilities
 
 ### Architecture Decision Records
@@ -116,7 +118,7 @@ Expert technical documentation specialist for architecture decisions, API refere
 - Migration guides without rollback procedures
 - READMEs that only describe what the code does, not how to use it
 - Changelogs that list commits instead of user-meaningful changes
-- Documentation stored outside the repository (drifts from code)
+- Repository code/contributor docs that drift from code, or private subject knowledge copied into public docs
 
 ## Reference Skills
 

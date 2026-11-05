@@ -34,20 +34,22 @@
 
 ## State Persistence
 
+Before persisting durable knowledge, follow [Memory and documentation](../../../CLAUDE.md#memory-and-documentation). Session files carry continuation context and links; the existing subject note owns durable findings and decisions.
+
 | Data Type | Storage |
 | --------- | ------- |
 | Structured data | JSON files (tests.json, metrics.json) |
-| Progress notes | Markdown files (progress.md, research-notes.md) |
+| Durable findings and research | Existing owning subject note, selected by local layer routing rules |
 | State checkpoints | Git commits with descriptive messages |
 | Session handoffs | `~/.claude/last-session.md` |
-| Key decisions | `~/.claude/decisions.log` |
+| Key decisions | Owning subject note via `/log-decision` |
 
 ---
 
 ## Session Handoff
 
 When ending a session with work in progress:
-1. Summarize current state to `last-session.md`
+1. Use `/handoff` to update owning notes first, then summarize continuation state in `~/.claude/last-session.md`
 2. Commit any in-progress work
 3. Note next steps clearly
 

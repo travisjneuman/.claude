@@ -318,7 +318,7 @@ This explicit source refresh lists public toolkit definitions; marketplace membe
 
 | Command | Tier | Purpose |
 | --- | --- | --- |
-| `/log-decision` | name-only | Append an architectural decision to the persistent decision log |
+| `/log-decision` | name-only | Record an architectural decision in its existing owning subject note |
 
 ## Research, learning & life
 

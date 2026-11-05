@@ -37,6 +37,8 @@ Create comprehensive, beginner-friendly documentation for any codebase.
 
 ## Documentation Workflow
 
+First follow [Memory and documentation](../../CLAUDE.md#memory-and-documentation) to update the owning subject note before generating repository documentation. The templates below describe public code/contributor docs, not default destinations for private project knowledge.
+
 1. **Analyze** - Entry points, dependencies, core concepts, configuration
 2. **Choose Type** - README → Architecture → API → Comments
 3. **Generate** - Use templates, customize for project

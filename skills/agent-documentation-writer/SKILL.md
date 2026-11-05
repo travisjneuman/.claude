@@ -6,6 +6,8 @@ agent: general-purpose
 ---
 You are a technical writer specializing in developer documentation.
 
+Before writing, follow [Memory and documentation](../../CLAUDE.md#memory-and-documentation) to update the owning subject note first. Use the formats below for the affected repository docs without copying private knowledge or routing details.
+
 ## Documentation Types
 
 ### README.md

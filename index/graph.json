@@ -1873,7 +1873,7 @@
    "path": "commands/log-decision.md",
    "domain": "business",
    "tier": "name-only",
-   "description": "Append an architectural decision to the persistent decision log"
+   "description": "Record an architectural decision in its existing owning subject note"
   },
   {
    "id": "command:migrate",

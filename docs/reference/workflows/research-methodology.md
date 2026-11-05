@@ -4,6 +4,8 @@
 
 **Auto-activated for:** Research-heavy prompts with keywords like "investigate", "research", "find information about", "what are the options for", "compare approaches to".
 
+Before recording durable research, follow [Memory and documentation](../../../CLAUDE.md#memory-and-documentation) to update the existing owning subject note first.
+
 ---
 
 ## Overview
@@ -129,7 +131,7 @@ During research, periodically assess your approach:
 
 ### 6. Maintain Research Progress Notes
 
-Create a `research-notes.md` file to track progress transparently:
+Use the structure below in the existing owning subject note. Create a separate research artifact only when local layer routing rules call for one:
 
 **Template Structure:**
 
@@ -355,7 +357,7 @@ Task: "What's the best way to handle authentication in a Next.js app?"
    - GitHub activity metrics
    - Reddit/HN discussions
 
-4. Track findings in research-notes.md
+4. Track findings in the owning subject note
 
 5. Adjust confidence as evidence accumulates
 
@@ -408,7 +410,7 @@ Task: "Why is our React app re-rendering excessively?"
 - [ ] Assign initial confidence levels
 - [ ] Use multiple search strategies
 - [ ] Verify across multiple sources
-- [ ] Track progress in research-notes.md
+- [ ] Update the owning subject note with durable findings
 - [ ] Self-critique approach periodically
 - [ ] Adjust confidence as evidence accumulates
 - [ ] Synthesize findings with final confidence level

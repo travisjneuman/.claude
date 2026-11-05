@@ -32,6 +32,7 @@ Up: [README](../README.md) · Not here: skills and agents are found through the 
 | skills, create or customize a skill | [SKILLS.md](./SKILLS.md), [SKILL-CREATION-GUIDE.md](./SKILL-CREATION-GUIDE.md) | Full list: [skills/MASTER_INDEX.md](../skills/MASTER_INDEX.md) |
 | agent teams, parallel sessions | [AGENT-TEAMS.md](./AGENT-TEAMS.md) | Core agents: [agents/README.md](../agents/README.md) |
 | workflow, task management, context hygiene | [WORKFLOW-GUIDE.md](./WORKFLOW-GUIDE.md), [workflow-automation.md](./workflow-automation.md) | |
+| durable knowledge, owning subject note, documentation routing | [Memory and documentation](../CLAUDE.md#memory-and-documentation) | Follow local layer routes before writing durable project knowledge |
 | marketplace, community skills, plugins | [MARKETPLACE-GUIDE.md](./MARKETPLACE-GUIDE.md), [PLUGIN-MANAGEMENT.md](./PLUGIN-MANAGEMENT.md) | |
 | MCP servers, token cost | [MCP-SERVERS.md](./MCP-SERVERS.md) | None configured by default |
 | counts, public numbers, index/count refresh | [COUNT-PIPELINE.md](./COUNT-PIPELINE.md) | Scripts: [scripts/README.md](../scripts/README.md) |

@@ -18,6 +18,7 @@ Up: [docs/README.md](./README.md) · Not here: `commands/` has no README on purp
 | deploy, security scan, dependency updates, performance audit, migrations | [DevOps & Security](#devops--security) | |
 | agent team | [Collaboration](#collaboration) | `assemble-team` |
 | architecture decision log | [Decision](#decision) | `log-decision` |
+| durable documentation, decisions, handoff ownership | [Memory and documentation](../CLAUDE.md#memory-and-documentation) | Update owning subject knowledge first; private routes come from the local layer |
 
 ## Map
 
@@ -61,7 +62,7 @@ graph LR
 | [`health-check`](../commands/health-check.md)  | Run diagnostics on toolkit configuration and status                     | `/health-check`         |
 | [`backup-config`](../commands/backup-config.md) | Backup Claude Code configuration files                                  | `/backup-config create` |
 | [`update-counts`](../commands/update-counts.md) | Explicit public-source snapshot refresh; committed marketplace HEAD evidence and numeric docs | `/update-counts` |
-| [`update-docs`](../commands/update-docs.md)   | Scan for recently modified files and update corresponding documentation | `/update-docs`          |
+| [`update-docs`](../commands/update-docs.md)   | Update owning subject knowledge first, then corresponding repository docs | `/update-docs`          |
 | [`changelog`](../commands/changelog.md)     | Generate formatted changelog entry from git commits since last tag     | `/changelog v2.6.0`    |
 | [`audit-docs`](../commands/audit-docs.md)    | Scan documentation for staleness — broken links, outdated counts       | `/audit-docs all`       |
 | [`pull-repos`](../commands/pull-repos.md)    | Pull all repos (parent + marketplace clones)                        | `/pull-repos`           |
@@ -106,7 +107,7 @@ graph LR
 
 | Command        | Description                                                     | Usage           |
 | -------------- | --------------------------------------------------------------- | --------------- |
-| [`log-decision`](../commands/log-decision.md) | Append an architectural decision to the persistent decision log | `/log-decision` |
+| [`log-decision`](../commands/log-decision.md) | Record an architectural decision in its existing owning subject note | `/log-decision` |
 
 ---
 

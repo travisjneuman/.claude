@@ -30,6 +30,8 @@ Take today's date from the environment context rather than inferring it.
 
 ### End Checklist
 
+Before archiving or writing durable documentation, follow [Memory and documentation](../../CLAUDE.md#memory-and-documentation). Update the owning subject note first; task files and handoff summaries link to it.
+
 ```bash
 # 1. Verify by review: re-read the request and the whole diff (no test/type-check ladder)
 

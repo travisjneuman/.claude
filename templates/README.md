@@ -14,6 +14,8 @@ Up: [README](../README.md) · Not here: `plugin-template/README.md` is part of t
 | incident, ADR, architecture decision, release checklist | [Contents](#contents) below | Operational templates |
 | task plan, research notes, progress, multi-session state | [`task-template.md`](./task-template.md), [`research-notes.md`](./research-notes.md), [`progress.md`](./progress.md) | |
 
+Before using a template for durable project knowledge, follow [Memory and documentation](../CLAUDE.md#memory-and-documentation). Apply the format to the owning subject note first; copy a template into a new artifact only when local layer routing calls for one.
+
 ## Map
 
 ```mermaid

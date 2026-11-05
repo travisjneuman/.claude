@@ -19,6 +19,8 @@ Generates a formatted changelog entry by analyzing git commits since the last ta
 
 ## Execution Protocol
 
+Before writing, follow [Memory and documentation](../CLAUDE.md#memory-and-documentation); update owning subject knowledge first and keep the repository changelog public-safe.
+
 ### Step 1: Find Latest Tag
 
 ```bash

@@ -2,6 +2,8 @@
 
 **When to use:** ALWAYS — after ANY code, configuration, skill, hook, command, or agent change.
 
+First follow [Memory and documentation](../../../CLAUDE.md#memory-and-documentation) to update the owning subject note. The tables below identify affected public toolkit documentation; they do not replace local layer knowledge routing or authorize copying private facts into the repository.
+
 ---
 
 ## P0 Rule: Never Ship Without Docs

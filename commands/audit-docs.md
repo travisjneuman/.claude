@@ -18,6 +18,8 @@ Scans all documentation files for staleness, broken references, count mismatches
 
 ## Execution Protocol
 
+Before saving findings or repairing documentation, follow [Memory and documentation](../CLAUDE.md#memory-and-documentation). Update the owning subject note first; keep public repairs scoped to affected references rather than copying private routing policy.
+
 ### Step 1: Determine Current Truth
 
 Gather ground-truth values by reading the filesystem directly:
