@@ -1211,7 +1211,7 @@
    "path": "skills/image-studio/SKILL.md",
    "domain": "other",
    "tier": "name-only",
-   "description": "Create, edit, find, or reuse images, logos, icons, illustrations, and visual assets through a private Image Studio library and MCP workflow."
+   "description": "Always route image creation and editing through the private Image Studio service unless the user names another tool; find and reuse existing visual assets first."
   },
   {
    "id": "skill:impact-report-writer",

@@ -343,7 +343,7 @@ This explicit source refresh lists public toolkit definitions; marketplace membe
 | Skill | Tier | Purpose | Related |
 | --- | --- | --- | --- |
 | `agent-architecture-analyst` | name-only | Specialist subagent: |  |
-| `image-studio` | name-only | Create, edit, find, or reuse images, logos, icons, illustrations, and visual assets through a private Image S… | `image-assets` |
+| `image-studio` | name-only | Always route image creation and editing through the private Image Studio service unless the user names anothe… | `image-assets` |
 
 ## Rules
 
