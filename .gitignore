@@ -178,3 +178,6 @@ temp/
 .auto-claude/
 /.planning/
 .mc-context.md
+
+# Runtime state written by hooks (not source)
+state/
