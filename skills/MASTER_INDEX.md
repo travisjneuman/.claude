@@ -59,6 +59,7 @@ Full cross-reference (skills, agents, commands, rules, docs, marketplaces): [`IN
 | `agent-product-manager` | Workflow & toolkit | name-only | Specialist subagent: Product requirements, user stories, roadmaps, prioritization frameworks, and sprint planning specialist. Use when writ… |
 | `agent-pwa-specialist` | Backend, APIs & data stores | name-only | Specialist subagent: Progressive Web App development, service workers, offline-first architecture, and push notification specialist. Use wh… |
 | `agent-python-expert` | Desktop, systems & languages | name-only | Specialist subagent: Python best practices, type hints, async patterns, and ecosystem expertise. Use for Python-specific guidance, typing i… |
+| `agent-react-expert` | Frontend, UI & UX | name-only | Specialist subagent: |
 | `agent-realtime-specialist` | Backend, APIs & data stores | name-only | Specialist subagent: Expert real-time systems specialist for WebSockets, SSE, and live data applications |
 | `agent-refactoring-specialist` | Quality, testing & maintenance | name-only | Specialist subagent: |
 | `agent-rust-expert` | Desktop, systems & languages | name-only | Specialist subagent: Rust ownership/borrowing, async Rust, Axum/Actix web frameworks, and WASM specialist. Use when writing Rust code, debu… |

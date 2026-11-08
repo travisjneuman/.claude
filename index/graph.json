@@ -494,6 +494,15 @@
    "description": "Specialist subagent: Python best practices, type hints, async patterns, and ecosystem expertise. Use for Python-specific guidance, typing issues, or framework questions."
   },
   {
+   "id": "skill:agent-react-expert",
+   "type": "skill",
+   "name": "agent-react-expert",
+   "path": "skills/agent-react-expert/SKILL.md",
+   "domain": "frontend",
+   "tier": "name-only",
+   "description": "Specialist subagent:"
+  },
+  {
    "id": "skill:agent-realtime-specialist",
    "type": "skill",
    "name": "agent-realtime-specialist",
@@ -1734,14 +1743,6 @@
    "description": "Identifies performance bottlenecks and optimization opportunities. Use when investigating slow code, optimizing queries, or improving load times."
   },
   {
-   "id": "agent:react-expert",
-   "type": "agent",
-   "name": "react-expert",
-   "path": "agents/react-expert.md",
-   "domain": "frontend",
-   "description": "React patterns, hooks, state management, and performance optimization. Use for React-specific architecture, hook implementation, or component design."
-  },
-  {
    "id": "agent:security-auditor",
    "type": "agent",
    "name": "security-auditor",
@@ -2840,11 +2841,6 @@
   },
   {
    "from": "skill:agent-svelte-expert",
-   "to": "agent:react-expert",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:agent-svelte-expert",
    "to": "doc:stacks/svelte-sveltekit",
    "rel": "reference"
   },
@@ -2852,11 +2848,6 @@
    "from": "skill:agent-teams",
    "to": "doc:workflows/agent-teams",
    "rel": "reference"
-  },
-  {
-   "from": "skill:agent-vue-nuxt-expert",
-   "to": "agent:react-expert",
-   "rel": "pairs-with"
   },
   {
    "from": "skill:agent-vue-nuxt-expert",
@@ -2979,24 +2970,9 @@
    "rel": "pairs-with"
   },
   {
-   "from": "skill:generic-react-design-system",
-   "to": "agent:react-expert",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:generic-react-feature-developer",
-   "to": "agent:react-expert",
-   "rel": "pairs-with"
-  },
-  {
    "from": "skill:generic-react-feature-developer",
    "to": "doc:stacks/react-typescript",
    "rel": "reference"
-  },
-  {
-   "from": "skill:generic-react-ux-designer",
-   "to": "agent:react-expert",
-   "rel": "pairs-with"
   },
   {
    "from": "skill:generic-static-code-reviewer",
@@ -3032,11 +3008,6 @@
    "from": "skill:generic-static-feature-developer",
    "to": "doc:workflows/agent-teams",
    "rel": "reference"
-  },
-  {
-   "from": "skill:generic-static-ux-designer",
-   "to": "agent:react-expert",
-   "rel": "pairs-with"
   },
   {
    "from": "skill:generic-static-ux-designer",
@@ -3116,11 +3087,6 @@
   {
    "from": "skill:tech-debt-analyzer",
    "to": "agent:security-auditor",
-   "rel": "pairs-with"
-  },
-  {
-   "from": "skill:vue-development",
-   "to": "agent:react-expert",
    "rel": "pairs-with"
   },
   {

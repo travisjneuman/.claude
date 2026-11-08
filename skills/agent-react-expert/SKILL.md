@@ -1,4 +1,10 @@
 ---
+name: agent-react-expert
+description: "Specialist subagent: "
+context: fork
+agent: general-purpose
+---
+---
 name: react-expert
 description: React patterns, hooks, state management, and performance optimization. Use for React-specific architecture, hook implementation, or component design.
 tools: Read, Write, Grep, Glob
@@ -150,3 +156,7 @@ function App() {
 - useEffect for derived state
 - Index as key for dynamic lists
 - Direct DOM manipulation
+
+## Your task
+
+$ARGUMENTS
