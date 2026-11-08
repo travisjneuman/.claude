@@ -482,11 +482,11 @@
   "theme": "dark",
   "verbose": true,
   "teammateMode": "auto",
-  "remoteControlAtStartup": true,
+  "remoteControlAtStartup": false,
   "switchModelsOnFlag": false,
   "disableBundledSkills": true,
   "disableWorkflows": true,
   "disableRemoteControl": true,
   "disableClaudeAiConnectors": true,
-  "disableArtifact": true
+  "enableArtifact": false
 }
