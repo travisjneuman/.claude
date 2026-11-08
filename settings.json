@@ -483,5 +483,10 @@
   "verbose": true,
   "teammateMode": "auto",
   "remoteControlAtStartup": true,
-  "switchModelsOnFlag": false
+  "switchModelsOnFlag": false,
+  "disableBundledSkills": true,
+  "disableWorkflows": true,
+  "disableRemoteControl": true,
+  "disableClaudeAiConnectors": true,
+  "disableArtifact": true
 }
