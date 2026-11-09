@@ -13,7 +13,6 @@
     "pr": ""
   },
   "includeGitInstructions": false,
-  "autoMemoryEnabled": false,
   "permissions": {
     "allow": [
       "WebSearch",
@@ -39,6 +38,7 @@
     "defaultMode": "bypassPermissions"
   },
   "enableAllProjectMcpServers": false,
+  "disableClaudeAiConnectors": true,
   "skillOverrides": {
     "accessibility-a11y": "name-only",
     "accessibility-and-inclusive-visualization": "name-only",
@@ -333,6 +333,7 @@
     "website-to-hyperframes": "name-only",
     "websockets-realtime": "name-only"
   },
+  "disableBundledSkills": true,
   "hooks": {
     "SessionStart": [
       {
@@ -401,6 +402,9 @@
       }
     ]
   },
+  "disableRemoteControl": true,
+  "disableWorkflows": true,
+  "enableArtifact": false,
   "bashOutputMaxChars": 15000,
   "statusLine": {
     "type": "command",
@@ -465,6 +469,7 @@
   },
   "autoUpdatesChannel": "latest",
   "tui": "fullscreen",
+  "autoMemoryEnabled": false,
   "skipDangerousModePermissionPrompt": true,
   "claudeMdExcludes": [
     "**/*.notes/*/**/AGENTS.md",
@@ -482,12 +487,8 @@
   ],
   "theme": "dark",
   "verbose": true,
+  "switchModelsOnFlag": false,
   "teammateMode": "auto",
   "remoteControlAtStartup": false,
-  "switchModelsOnFlag": false,
-  "disableBundledSkills": true,
-  "disableWorkflows": true,
-  "disableRemoteControl": true,
-  "disableClaudeAiConnectors": true,
-  "enableArtifact": false
+  "fileCheckpointingEnabled": false
 }
