@@ -57,7 +57,7 @@ Keep a backup of `local/` somewhere private (a private repo or notes vault). Git
 
 | Key | Where | Effect |
 | --- | --- | --- |
-| `GITHUB_OWNERS` | `shared.env` | Comma list of GitHub owners whose repos the session-end hook may commit and push. Unset = it does nothing. When set, the pull script also sets `no_push` on repos under `CUSTOM_PROJECT_DIRS` owned by anyone else, and on any repo inside a `.openclaw` folder. Unset = the pull script changes no push URL at all. |
+| `GITHUB_OWNERS` | `shared.env` | Comma list of GitHub owners whose repos the session-end hook may commit and push. Unset = it does nothing. When set, the pull script also sets `no_push` on repos under `CUSTOM_PROJECT_DIRS` owned by anyone else. Unset = the pull script changes no push URL at all. |
 | `PULL_INTERVAL_HOURS` | `shared.env` | Background pull cadence (default 24, `0` disables). |
 | `PULL_CUSTOM_PROJECT_DIRS` | `shared.env` | `0` = don't pull your project repos, only `~/.claude` + marketplaces. |
 | `SESSION_END_AUTOPUSH` | `shared.env` | `0` = never push at session end. |

@@ -214,18 +214,6 @@ enforce_custom_push_policy() {
 
     push_url=$(git -C "$repo_path" remote get-url --push origin 2>/dev/null) || push_url=""
 
-    # A repo under a .openclaw folder is kept local-only, whoever owns its remote.
-    case "$(echo "$repo_path" | tr '[:upper:]' '[:lower:]')" in
-        *"/.openclaw"|*"/.openclaw/"*)
-            if [[ "$push_url" != "no_push" ]]; then
-                git -C "$repo_path" remote set-url --push origin no_push 2>/dev/null || true
-                echo -e "${CYAN}  $repo_name: push disabled (local-only .openclaw)${NC}"
-                NO_PUSH_FIXED=$((NO_PUSH_FIXED + 1))
-            fi
-            return 0
-            ;;
-    esac
-
     if remote_is_owned "$repo_path"; then
         if [[ "$push_url" == "no_push" ]]; then
             local fetch_url

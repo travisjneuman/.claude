@@ -22,7 +22,7 @@ Pull the parent repo, ignored marketplace clones, and configured project directo
 2. **Pulls all manifest marketplace clones** (read-only repos in `plugins/marketplaces/`)
 3. **Pulls custom project directories recursively** (if configured)
 4. **Reports detached HEAD** repos and skips them (never switches branches)
-5. **Enforces no_push** on marketplace clones and non-Travis-owned custom repos
+5. **Enforces no_push** on marketplace clones, and on project repos not owned by an account in `GITHUB_OWNERS` (only when that setting exists)
 
 ## Arguments
 
@@ -62,7 +62,7 @@ Check status without pulling:
 | :--: | :-------------------------------- | :--------- | :------------------ |
 |  1   | `.claude` (travisjneuman/.claude) | Parent     | ✅ Push enabled     |
 | 2+   | `.gitmodules` marketplace entries | Clones     | ❌ no_push enforced |
-| ...  | Custom project directories        | Mixed      | ✅ Travis-owned only |
+| ...  | Custom project directories        | Mixed      | ✅ Yours only (`GITHUB_OWNERS`) |
 
 ## Features
 
@@ -71,7 +71,7 @@ Check status without pulling:
 - ✅ **Recursive project discovery** - Finds nested repos such as frontend/backend checkouts inside a platform folder
 - ✅ **Reports detached HEAD** - Detached repos are skipped and reported, never switched
 - ✅ **Detects correct branch** - main/master/development per repo
-- ✅ **Enforces no_push** - Marketplace clones and non-Travis-owned custom repos cannot push
+- ✅ **Enforces no_push** - Marketplace clones cannot push; with `GITHUB_OWNERS` set, neither can project repos owned by anyone else
 - ✅ **Safe** - Dirty repos are skipped; pulls are fast-forward only; no merge/rebase/reset
 
 ## Adding Your Own Project Directories
@@ -87,7 +87,7 @@ CUSTOM_PROJECT_DIRS="/e/Projects,/c/Users/you/.codex,/c/Users/you/.hermes"
 - `E:\Projects` → `/e/Projects`
 - `C:\Users\you\projects` → `/c/Users/you/projects`
 
-Custom directories are recursively scanned. Travis-owned GitHub repos retain push access; non-Travis repos are set to `no_push`; dirty repos are skipped for safety.
+Custom directories are recursively scanned. With `GITHUB_OWNERS` set, repos owned by those accounts retain push access and other repos are set to `no_push`; with it unset no push URL is touched; dirty repos are skipped for safety.
 
 ## How no_push Works
 
@@ -95,11 +95,10 @@ The script uses both location and remote ownership:
 
 | Repo class | no_push? | Why |
 | --- | --- | --- |
-| `~/.claude` parent | ❌ No | Travis-owned public toolkit repo |
+| `~/.claude` parent | ❌ No | Your toolkit checkout; its remote is never changed |
 | `plugins/marketplaces/*` | ✅ Yes | External upstream references |
-| Custom Travis-owned repos | ❌ No | Commit/push policy applies |
-| Custom non-Travis repos | ✅ Yes | External/no-push policy applies |
-| `.openclaw` | ✅ Yes | Archived and removed from every host (2026-09-30); the script still forces `no_push` on any leftover checkout |
+| Project repos owned by an account in `GITHUB_OWNERS` | ❌ No | Yours; push stays enabled |
+| Other project repos | ✅ Yes, only when `GITHUB_OWNERS` is set | Not yours; with `GITHUB_OWNERS` unset no push URL is touched |
 
 **Key points:**
 

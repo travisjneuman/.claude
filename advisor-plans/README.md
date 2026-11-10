@@ -1,6 +1,6 @@
 # Advisor plans
 
-Findings from read-through audits of this repo (method: [shadcn/improve](https://github.com/shadcn/improve)), with their status. First pass against `14bb4b1`, second against `f3d1d00`. `plans/` is gitignored here (Claude Code writes runtime plans there), so audit plans live in this folder.
+Findings from read-through audits of this repo (method: [shadcn/improve](https://github.com/shadcn/improve)), with their status. First pass against `14bb4b1`, second against `f3d1d00`, third (efficiency) against `c22d027`. `plans/` is gitignored here (Claude Code writes runtime plans there), so audit plans live in this folder.
 
 Up: [README](../README.md) · Not here: release history is in [CHANGELOG.md](../CHANGELOG.md); the security policy and trust model are in [SECURITY.md](../SECURITY.md).
 
@@ -32,7 +32,7 @@ Validation in this repo is by review, not tests (see `CLAUDE.md`). An executor c
 | 20 | Commands used placeholders and argument declarations Claude Code does not read; stale checks | Correctness | DONE |
 | 21 | Literal `$1`-style text in skills is replaced by arguments | Correctness | WON'T FIX by escaping (it would regress other agents that read these files); see "Considered and rejected" |
 | 22 | Four unanswered community items; no security policy | Community | `SECURITY.md` and private vulnerability reporting DONE; triage is the owner's (assessment below) |
-| 23 | Project-folder push policy still lives in the public pull script | Debt | DONE differently: kept, and now entirely opt-in through `GITHUB_OWNERS` |
+| 23 | Project-folder push policy still lives in the public pull script | Debt | DONE differently: kept, entirely opt-in through `GITHUB_OWNERS`; the leftover `.openclaw` rule is removed |
 | 24 | Hooks assume `~/.claude`; `CLAUDE_CONFIG_DIR` is not honored | DX | TODO (low priority) |
 | 25 | Unreferenced files: `bin/prettier-hook.js`, `bin/setup.ps1` | Debt | TODO (archive, don't delete) |
 
@@ -97,6 +97,43 @@ Private vulnerability reporting, which `SECURITY.md` points people to, was turne
 - **24**: `hooks/run-hook.js` and every hook build paths from `os.homedir()/.claude`. Someone running with `CLAUDE_CONFIG_DIR` set gets no hooks. Honor that variable first when it is set.
 - **25**: nothing references `bin/prettier-hook.js` or `bin/setup.ps1`. Move them to `archive/` with a line in `archive/` explaining what they were.
 
+## Efficiency roadmap (third pass, 2026-11-10)
+
+Measured on the maintainer's machine from session transcripts (sizes only): a desktop session reached its first reply with about 80,000 to 96,000 tokens of context; a lean session with about 33,000. What that is made of, in one 80,000-token start:
+
+| Block | Size | Who controls it |
+|-------|------|-----------------|
+| Tool definitions and system prompt | about 33,000 tokens | Claude Code and the desktop app |
+| Skill listing | 26,012 chars, about 6,500 tokens | Mixed, see below |
+| Instructions (CLAUDE.md, rules, project files) | 38,433 chars, about 9,600 tokens | This repo: `CLAUDE.md` 9,383 and `rules/image-assets.md` 1,422. Private layer and project files: the rest |
+| Deferred tool names (384 tools) | 17,717 chars, about 4,400 tokens | Desktop app, connectors, plugin MCP servers |
+| MCP server instructions | 11,603 chars, about 2,900 tokens | Connected servers |
+| Agent listing (9 to 10 agents) | about 900 tokens | This repo |
+
+Inside the skill listing: the toolkit's own design works. 272 name-only entries cost 6,381 chars (about 1,600 tokens) and the two core skills 619. The other 19,000 chars are 45 descriptions the toolkit's overrides cannot reach: 23 skills synced from claude.ai (11,500 chars), and plugin skills from `unreal-engine-skills-for-claude-code` (3 skills, 3,259 chars), `cloudflare` (14, 2,703), `brag`, `frontend-design` and `claude-codex-computer-use`. Claude Code's docs say plugin skills are not affected by `skillOverrides`, and synced skills load as a plugin.
+
+Ranked by saving per unit of work. E1 to E6 are small.
+
+| # | Change | Saves | Evidence | Effort / risk |
+|---|--------|-------|----------|---------------|
+| E1 | Run hooks in exec form: `"command": "node", "args": ["-e", "<the same script>"]` instead of one shell string | A shell start on every Bash, PowerShell, Write and Edit call and after every response; largest on Windows, where the shell is Git Bash | `settings.json` hook commands; hooks reference, "Exec form and shell form" | S / low. The status line stays shell form (its `command` always runs in a shell) |
+| E2 | Mark the Stop hook (`daily-maintenance.js`) `"async": true` | Claude no longer waits on it after each response | It only checks a timestamp and never returns a decision | S / low |
+| E3 | Move `rules/image-assets.md` to the private layer | About 355 tokens in every session and subagent, for every user | It has no `paths:` and routes to a private image service a stranger doesn't have | S / low; the maintainer keeps it by placing the same file in `local/rules/` |
+| E4 | Decide on claude.ai skill sync: `syncClaudeAiSkills: false`, or leave on; either way remove the 20 `external_name_only` entries, which do nothing | About 2,900 tokens per session if turned off | Measured listing; skills doc, "Skills synced from claude.ai" | S / owner decision: off means those skills are no longer available inside Claude Code |
+| E5 | Keep personal plugins out of the public defaults (settings split, item 10), and consider enabling `unreal-engine-skills-for-claude-code` per project instead of everywhere | About 800 tokens per session for the maintainer; several thousand, plus installs, for a stranger | Measured listing; `enabledPlugins` | With item 10 |
+| E6 | Add a short "Compact instructions" section to `CLAUDE.md` | Less re-reading after compaction | Costs doc, "Manage context proactively" | S / low |
+| E7 | Split the 37 skills longer than 500 lines into an overview `SKILL.md` plus `references/` files, one level deep, moving text and deleting none | Up to several thousand tokens every time one of them loads, in every harness | Agent Skills spec and Anthropic's skill best practices both say to keep `SKILL.md` under 500 lines; `wc -l skills/*/SKILL.md` | L / low-medium. Other agents read these files directly, so each overview must name its reference files plainly |
+| E8 | Offer the plugin as domain bundles (several marketplace entries, each listing skill folders in its `skills` array) beside the all-in-one | Listings that fit the budget: 183 descriptions are about 43,000 chars, and the listing budget is 1% of the context window, so most descriptions are dropped | Skills doc, "Skill descriptions are cut short"; plugin manifest reference, `skills` | M / low |
+| E9 | Website: add `website/public/_headers` so hashed `/_next/static/*` files are cached as immutable; stop embedding 5,000 chars of every skill in `/skills` (load detail on demand or trim); move `og-image-backup.png` (1.6 MB) out of `public/` into `archive/` | Repeat visits re-validate every asset today; `/skills` is 425 KB compressed HTML | Response headers show `max-age=0, must-revalidate` on a hashed chunk; `curl` sizes | S to M / low |
+| E10 | Optional "lite" marketplace mode for other users: sparse, blob-filtered clones of only the skill files | Disk: the 86 clones are 4.4 GB here, 2.5 GB of it in five repos | `du` of `plugins/marketplaces` | M / medium. The count pipeline needs full local blobs, so the maintainer's hosts keep full clones |
+| E11 | Status line: read `.git/HEAD` instead of starting `git` on every render; repo-health banner: remember the repo list between sessions | Milliseconds per render and per session start | `hooks/statusline.js`, `hooks/session-start-repo-health.sh` | S / low |
+
+Outside this repo but larger than anything in it, for the maintainer: the private owner rules are 19,595 chars (about 4,900 tokens) in every session and every subagent, twice the size of `CLAUDE.md`; and the 384 deferred tool names come from the desktop app and connectors (`/mcp` shows which can be turned off).
+
+Restoring the seven agents added roughly 500 tokens to each session's agent listing. If that matters more than having them listed, `tune-tiers.mjs --move-agents` now moves them without losing anything.
+
+What separates this from a top score is evidence rather than more content: nothing measures whether a skill improves an answer. Claude Code ships skill and plugin evals; using them would be a deliberate exception to the repo's no-tests rule and is the owner's call.
+
 ## Considered and rejected
 
 - **No tests, no CI**: decided in `CLAUDE.md` and the hooks README. Not a finding.
@@ -105,7 +142,7 @@ Private vulnerability reporting, which `SECURITY.md` points people to, was turne
 - **Session-end commit and push**: only acts for owners in `GITHUB_OWNERS`, skips anything that looks like a secret, never forces. By design.
 - **Regex guard can be evaded**: `hooks/guard.js` says so itself; it guards against slips, not intent.
 - **Escaping literal `$1`-style text in skills**: Claude Code replaces `$0`, `$1`, … in a skill's content with the arguments the skill was invoked with, so a dollar amount or SQL placeholder in an example can be garbled when a skill is invoked with several words (24 skills contain such text; `grep -l '\$[0-9]' skills/*/SKILL.md`). The documented escape is a backslash, but these files are also read directly by other agents and tools, which would then always see the backslash, and in code examples it would be wrong code. A rare glitch in one harness is the smaller cost; the text stays as written.
-- **Removing the project-folder push policy from `_pull-all-repos.sh`**: the maintainer's hosts run it (their settings keep the project-folder pull on, and the `.openclaw` local-only rule exists nowhere else), so removing it would change their behaviour. It is instead fully opt-in: with `GITHUB_OWNERS` unset, no push URL is touched.
+- **Removing the project-folder push policy from `_pull-all-repos.sh`**: the maintainer's hosts run it (their settings keep the project-folder pull on), so removing it would change their behaviour. It is instead fully opt-in: with `GITHUB_OWNERS` unset, no push URL is touched. Its `.openclaw` special case, for a tool retired from every host, is gone.
 - **Trimming the skill library**: nothing is to be removed (owner, 2026-11). Quality work on skills means fixing, not culling.
 - **Strict website snapshot**: the site lists only what `counts.json` names and fails the build on a missing file, by design (`docs/COUNT-PIPELINE.md`). The fix for the outage was the import, not loosening this.
 
