@@ -207,7 +207,7 @@ Browser work uses no MCP server: the active app's built-in browser first, then `
 
 ### Plugin Marketplace Ecosystem
 
-This setup includes 81 marketplace repositories providing access to 11,000+ community skills. Key marketplaces for plugin development reference:
+This setup includes 86 marketplace repositories providing access to 11,300+ community skills. Key marketplaces for plugin development reference:
 
 | Repository                        | URL                                                  | Specialization                |
 | --------------------------------- | ---------------------------------------------------- | ----------------------------- |
@@ -228,7 +228,7 @@ tags: [category, domain]
 ---
 ```
 
-This installation has 180 local skills and 10 custom agents. Run `bash ~/.claude/scripts/regenerate-index.sh` to refresh the master index.
+This installation has 183 local skills and 10 custom agents. Run `bash ~/.claude/scripts/regenerate-index.sh` to refresh the master index.
 
 ### Agent Development
 
@@ -311,10 +311,10 @@ These are public toolkit/manifest snapshot populations, not all installed or pri
 
 | Component                | Count  |
 | ------------------------ | ------ |
-| Local skills             | 180    |
+| Local skills             | 183    |
 | Custom agents            | 10     |
-| Marketplace repos        | 81    |
-| Marketplace skills       | 11,000+ |
+| Marketplace repos        | 86    |
+| Marketplace skills       | 11,300+ |
 | Custom commands          | 29     |
 | Installed MCP entries (documented) | 0     |
 

@@ -14,11 +14,11 @@
 [![License](https://img.shields.io/badge/MIT-blue?style=flat-square&logo=opensourceinitiative&logoColor=white)](./LICENSE)
 [![Use Template](https://img.shields.io/badge/Use_This_Template-2ea44f?style=flat-square&logo=github&logoColor=white)](https://github.com/travisjneuman/.claude/generate)
 
-[![Skills](https://img.shields.io/badge/Skills-180-10b981?style=flat-square)](./skills/MASTER_INDEX.md)
+[![Skills](https://img.shields.io/badge/Skills-183-10b981?style=flat-square)](./skills/MASTER_INDEX.md)
 [![Agents](https://img.shields.io/badge/Agents-10-f59e0b?style=flat-square)](./agents/README.md)
 [![Commands](https://img.shields.io/badge/Commands-29-a855f7?style=flat-square)](./docs/COMMANDS.md)
-[![Repos](https://img.shields.io/badge/Marketplace_Repos-81-3b82f6?style=flat-square)](./plugins/marketplaces/)
-[![Marketplace Skills](https://img.shields.io/badge/Marketplace_Skills-11000+-ec4899?style=flat-square)](./docs/MARKETPLACE-GUIDE.md)
+[![Repos](https://img.shields.io/badge/Marketplace_Repos-86-3b82f6?style=flat-square)](./plugins/marketplaces/)
+[![Marketplace Skills](https://img.shields.io/badge/Marketplace_Skills-11300+-ec4899?style=flat-square)](./docs/MARKETPLACE-GUIDE.md)
 [![Hooks](https://img.shields.io/badge/Hooks-7-06b6d4?style=flat-square)](./hooks/README.md)
 [![Templates](https://img.shields.io/badge/Templates-17-84cc16?style=flat-square)](./templates/README.md)
 
@@ -30,7 +30,7 @@
 
 A drop-in configuration layer for [Claude Code](https://docs.anthropic.com/en/docs/claude-code) that transforms it from a capable AI assistant into an enterprise-grade development powerhouse.
 
-**One `git clone` gives you** 180 domain skills, 10 specialist agents, 81 community marketplaces with 11,000+ additional skills, 29 slash commands, 7 lifecycle hooks — all auto-activating based on what you're working on. No manual configuration required.
+**One `git clone` gives you** 183 domain skills, 10 specialist agents, 86 community marketplaces with 11,300+ additional skills, 29 slash commands, 7 lifecycle hooks — all auto-activating based on what you're working on. No manual configuration required.
 
 **How it works:** Describe what you want in plain language. Everything is installed and available, but only a small core of skills keeps its full description in Claude's context. The rest is listed by name and found through a generated index ([`INDEX.md`](./INDEX.md), [`index/graph.json`](./index/graph.json)) and the `toolkit-router` skill, so a large toolkit costs almost nothing until something is needed. Language rules load only for matching files.
 
@@ -190,10 +190,10 @@ Read this before the first session. Everything here is switched off with one lin
 
 | Component | Count | Description |
 |-----------|-------|-------------|
-| **[Skills](./skills/MASTER_INDEX.md)** | 180 | Domain expertise modules (React, security, DevOps, finance, etc.) |
+| **[Skills](./skills/MASTER_INDEX.md)** | 183 | Domain expertise modules (React, security, DevOps, finance, etc.) |
 | **[Agents](./agents/README.md)** | 10 | Specialist subagents for focused tasks (code review, debugging, etc.) |
 | **[Commands](./docs/COMMANDS.md)** | 29 | Slash commands for common workflows |
-| **[Marketplace Repos](./plugins/marketplaces/)** | 81 | Community skill repositories (11,000+ additional skills) |
+| **[Marketplace Repos](./plugins/marketplaces/)** | 86 | Community skill repositories (11,300+ additional skills) |
 | **[Hooks](./hooks/README.md)** | 7 | Wired public hooks (session lifecycle, status line, safety guards; not git hooks or the dispatcher) |
 | **[Templates](./templates/README.md)** | 17 | Project scaffolding and task templates |
 | **[Rules](./rules/)** | 10 | Stack-specific coding guardrails (TypeScript, Python, Go, Rust, etc.) plus web legal-exposure defaults |
@@ -286,9 +286,9 @@ See **[hooks/README.md](./hooks/README.md)** for the full hook reference.
 ## 🔑 Key Features
 
 <details>
-<summary><strong>🏪 Marketplace — 81 marketplace repos, 11,000+ skills</strong></summary>
+<summary><strong>🏪 Marketplace — 86 marketplace repos, 11,300+ skills</strong></summary>
 
-The toolkit aggregates 81 community skill repositories as ignored local clones in `plugins/marketplaces/`. All are read-only (fetch but never push). Skills span security (Trail of Bits), full-stack development, scientific computing, SAP/enterprise, Elixir, Terraform, creative writing, and more. Some marketplace repos are **installed as plugins**, making their agents, commands, and skills fully active in the routing system alongside built-in resources. Non-installed repos contribute discoverable skills via keyword search.
+The toolkit aggregates 86 community skill repositories as ignored local clones in `plugins/marketplaces/`. All are read-only (fetch but never push). Skills span security (Trail of Bits), full-stack development, scientific computing, SAP/enterprise, Elixir, Terraform, creative writing, and more. Some marketplace repos are **installed as plugins**, making their agents, commands, and skills fully active in the routing system alongside built-in resources. Non-installed repos contribute discoverable skills via keyword search.
 
 ```bash
 # Search marketplace skills
@@ -435,6 +435,15 @@ See **[docs/NEW-DEVICE-SETUP.md](./docs/NEW-DEVICE-SETUP.md)** for the full walk
 ---
 
 ## 🆕 What's New
+
+**November 2026 — Audit, efficiency pass, and a plugin install**
+
+- **Fixes for people who are not the maintainer:** setup scripts no longer rewrite your `origin` or disable pushing on your own repos; the installer no longer writes a broken `.mcp.json`. If you installed earlier, see the CHANGELOG's "If you installed before November 2026".
+- **Skills-only plugin:** `/plugin marketplace add travisjneuman/.claude`, then `tjn-skills` or one of ten domain bundles. No hooks, settings or background jobs.
+- **Guard covers PowerShell**, and hooks start without a shell (exec form), which matters most on Windows.
+- **Skills follow the 500-line guidance:** 37 long skills are now an overview plus `references/` files, with every line kept.
+- **Security policy and trust model:** [`SECURITY.md`](./SECURITY.md) says what a full-access setup trusts and how to narrow it.
+- **Sessions are kept**, not deleted after 30 days; the website builds again; counts refreshed on 2026-11-10.
 
 **September 2026 — Modernization for current Claude Code**
 

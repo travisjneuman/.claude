@@ -146,9 +146,9 @@ This repo underwent a security audit before being made public. The following wer
     │       ├── voltagent-subagents/
     │       ├── trailofbits-skills/
     │       ├── claude-scientific-skills/
-    │       └── ... (81 manifest entries; clones are local-only; parent repo tracks no gitlinks)
+    │       └── ... (86 manifest entries; clones are local-only; parent repo tracks no gitlinks)
     │
-    ├── skills/                     ← Custom skills (180 directories, 180 SKILL.md files)
+    ├── skills/                     ← Custom skills (183 directories, 183 SKILL.md files)
     │   ├── README.md               ← Skills documentation
     │   ├── MASTER_INDEX.md         ← Navigation hub for all skills docs
     │   ├── EXPERT-SKILLS-GUIDE.md  ← All 16 domain expert skills guide
@@ -464,7 +464,7 @@ Shell scripts for setup, maintenance, and automation.
 
 ---
 
-### `/skills/` - Domain Knowledge (180 SKILL.md files across 180 directories)
+### `/skills/` - Domain Knowledge (183 SKILL.md files across 183 directories)
 
 Skills provide specialized knowledge and guidelines. They auto-activate based on context.
 
@@ -648,7 +648,7 @@ This folder is **automatically created by VSCode** when you open `.claude/` as a
 
 | Path         | Typical Size | Notes                            |
 | ------------ | ------------ | -------------------------------- |
-| `skills/`    | ~1.1MB       | 180 SKILL.md files across 180 dirs |
+| `skills/`    | ~1.1MB       | 183 SKILL.md files across 183 dirs |
 | `docs/`      | ~200KB       | 24 documentation files           |
 | `commands/`  | ~150KB       | 29 commands + 0 router files     |
 | `agents/`    | ~250KB       | 10 agent definitions             |

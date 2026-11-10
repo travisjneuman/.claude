@@ -93,7 +93,7 @@ bash ~/.claude/_pull-all-repos.sh
 
 This script:
 
-- Clones or pulls all 81 marketplace repos from their original upstreams
+- Clones or pulls all 86 marketplace repos from their original upstreams
 - Sets `no_push` on each to prevent accidental modifications
 - Handles repository sync; public counts/indexes require a separate explicit source refresh
 - Ensures main repo can push to your GitHub
@@ -200,7 +200,7 @@ This pulls manifest marketplace repos, handles detached HEADs, and enforces `no_
 +-- CLAUDE.md              <- Core rules
 +-- settings.json          <- Shared settings
 +-- commands/              <- Slash commands
-+-- skills/                <- 180 skills
++-- skills/                <- 183 skills
 +-- agents/                <- 10 agents
 +-- rules/                 <- Contextual rules
 +-- templates/             <- Templates

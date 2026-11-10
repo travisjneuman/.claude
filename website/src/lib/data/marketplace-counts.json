@@ -1,14 +1,14 @@
 {
   "schemaVersion": 2,
   "definitionVersion": "public-toolkit-v2",
-  "asOf": "2026-10-10",
-  "repoCount": 81,
-  "totalSkills": 11078,
-  "marketplaceSkillsDisplay": "11,000+",
+  "asOf": "2026-11-10",
+  "repoCount": 86,
+  "totalSkills": 11353,
+  "marketplaceSkillsDisplay": "11,300+",
   "provenance": {
     "inputMode": "committed-HEAD-snapshots",
     "coverage": "complete",
-    "repoCount": 81,
+    "repoCount": 86,
     "freshness": "Selected committed revisions (including deliberate pins); reviewed exports retain their own observation dates, not a latest-upstream guarantee.",
     "snapshotExports": [
       {
@@ -23,7 +23,7 @@
       }
     ],
     "normalization": "strip initial frontmatter, collapse whitespace, lowercase; nonempty SHA-256 bodies deduplicated within/across repos",
-    "inputDigest": "52bee5f72f29432ca5eb410c3f4dbf2861c0ba24fb7db6163100f1baad8634e8"
+    "inputDigest": "5c8fd85b6945e4d1511395a197df9c1ab1504f919798ffe6b83364fc60378cc8"
   },
   "repos": [
     {
@@ -31,42 +31,42 @@
       "path": "plugins/marketplaces/claude-code-plugins-plus-skills",
       "githubUrl": "https://github.com/jeremylongshore/tons-of-skills-marketplace",
       "displayName": "Claude Code Plugins Plus Skills",
-      "skillCount": 3458,
-      "revision": "8ad93248b0b08c1341b80db6efea42e060c3b193",
-      "tree": "36323cb687030fd30ea056b4206bb7f50d47da7a",
+      "skillCount": 3274,
+      "revision": "0500b275e963c027f6b410e8c49c0446945c574e",
+      "tree": "19d58e677bf6ee0430f6b54cc46a60ed9664af95",
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
-      "inputDigest": "4b3b348c3400f14671125f66dbfac43e39c39012dbe53527dd0a2fa8f1dc6dac",
-      "measuredAsOf": "2026-10-10",
-      "selectedFileCount": 3471
+      "inputDigest": "ba2c51fd01944bea426ef54e3016f7290f718f5892cd8da9b3743c115a0762f5",
+      "measuredAsOf": "2026-11-10",
+      "selectedFileCount": 3287
     },
     {
       "name": "sickn33-antigravity-awesome-skills",
       "path": "plugins/marketplaces/sickn33-antigravity-awesome-skills",
       "githubUrl": "https://github.com/sickn33/agentic-awesome-skills",
       "displayName": "Sickn33 Antigravity Awesome Skills",
-      "skillCount": 2673,
-      "revision": "1c7bdea7f9094080fdb6f8b9b0aefb13030a2e31",
-      "tree": "7c2d77129f1c43da0a62f3d382e7be4258f4af07",
+      "skillCount": 2959,
+      "revision": "55d9399a4ea05dccbfccfa63ad430478c74ca1e9",
+      "tree": "188a8e1d84fb9ff3301f66e2f680cbc0be66e7d0",
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
-      "inputDigest": "f1ce5b583849d5d2bf2b578d6d83aecf8046fad1facac15de04d3f950a1ad0f4",
-      "measuredAsOf": "2026-10-10",
-      "selectedFileCount": 8320
+      "inputDigest": "d47c0a93394f68b7be1a9a678030c816e98a3e2605ad95bcace1fd026768a7de",
+      "measuredAsOf": "2026-11-10",
+      "selectedFileCount": 9077
     },
     {
       "name": "davila7-templates",
       "path": "plugins/marketplaces/davila7-templates",
       "githubUrl": "https://github.com/davila7/claude-code-templates",
       "displayName": "Davila7 Templates",
-      "skillCount": 889,
-      "revision": "02fefb5e7276421b1c8cc863b6c4026f92aedcb2",
-      "tree": "6792ed266cb0cf007b709d6586996213d25f091b",
+      "skillCount": 901,
+      "revision": "a6e6f93e9a4baaa6ff337aee5505bf5c2bae4ce6",
+      "tree": "9ffcd2c98f360f8859e50e1854bd0239de2e9698",
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
-      "inputDigest": "fc72e2045cab55c28a9e599f9424468c8f8d2c21e3eaca17e4f12cdb610902f0",
-      "measuredAsOf": "2026-10-10",
-      "selectedFileCount": 912
+      "inputDigest": "7a405dca29901af83244b98db87fa342b26b6f32d55daa74b687455e68151638",
+      "measuredAsOf": "2026-11-10",
+      "selectedFileCount": 923
     },
     {
       "name": "awesome-claude-skills",
@@ -79,7 +79,7 @@
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
       "inputDigest": "56ce421a2383fb4e646e00065d03e473d094787bd5652edb1bd2761c85282336",
-      "measuredAsOf": "2026-10-10",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 864
     },
     {
@@ -87,70 +87,70 @@
       "path": "plugins/marketplaces/buildwithclaude",
       "githubUrl": "https://github.com/davepoon/buildwithclaude",
       "displayName": "Buildwithclaude",
-      "skillCount": 395,
-      "revision": "fc03a95b41212888c261493630a4803698c1f3c9",
-      "tree": "799add2cc93a10f585cb1a908bea9a74bed5f81b",
+      "skillCount": 419,
+      "revision": "b8e39b909f5e248090b16b2fd62048ba0ac6a70e",
+      "tree": "076ac8d59c8533b7b21c1f113a699f323cf677b4",
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
-      "inputDigest": "72624dc2524cd4089f28684a8f83609069752b288376d9be434d66e191965c8d",
-      "measuredAsOf": "2026-10-10",
-      "selectedFileCount": 399
+      "inputDigest": "cf386397bfc7c59af7af7159d0fde8ddf9bfc64910cdf16764ec47171dc3dba3",
+      "measuredAsOf": "2026-11-10",
+      "selectedFileCount": 423
     },
     {
       "name": "alirezarezvani-claude-skills",
       "path": "plugins/marketplaces/alirezarezvani-claude-skills",
       "githubUrl": "https://github.com/alirezarezvani/claude-skills",
       "displayName": "Alirezarezvani Claude Skills",
-      "skillCount": 376,
-      "revision": "19392f7a08264ed00486a251f5b2098321771f94",
-      "tree": "2ca17edb975af77f0ef3cf0d5450878295777a17",
+      "skillCount": 390,
+      "revision": "91a1ddaab1ae8fe95b8ecd3e98419458db86a992",
+      "tree": "7d8552a202a56d840d2966e0540320263af3b91e",
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
-      "inputDigest": "934741dbbf6efa5490bc9da365bffe1a2d24442db7582f8bb63295d81f4eb953",
-      "measuredAsOf": "2026-10-10",
-      "selectedFileCount": 388
+      "inputDigest": "7179b1fed70c8004431e6771f07eb900170799775ba74f0d398dd2265de60f50",
+      "measuredAsOf": "2026-11-10",
+      "selectedFileCount": 411
     },
     {
       "name": "affaan-everything-claude",
       "path": "plugins/marketplaces/affaan-everything-claude",
       "githubUrl": "https://github.com/affaan-m/ECC",
       "displayName": "Affaan Everything Claude",
-      "skillCount": 302,
-      "revision": "4eb71d92a39cab44ad40ac9d8a6a5ccb4029d6c2",
-      "tree": "22e434c4134af0ad682da9676f12e16765c1f663",
+      "skillCount": 314,
+      "revision": "d2ef2680594f9a17526a6e1a2e18b3d242c5d17b",
+      "tree": "f4836fe8429f4c36fae9d32aa105331e238c3af1",
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
-      "inputDigest": "fe8c27e325ff23002c56dedd641cd0eecd20cbce123fc29aef08765dc0d457ff",
-      "measuredAsOf": "2026-10-10",
-      "selectedFileCount": 430
+      "inputDigest": "9ed74e7d9d729d22fef7e372c47d7cb43c211621fa3ff0cde0c045be009b854b",
+      "measuredAsOf": "2026-11-10",
+      "selectedFileCount": 448
     },
     {
       "name": "athola-night-market",
       "path": "plugins/marketplaces/athola-night-market",
       "githubUrl": "https://github.com/athola/claude-night-market",
       "displayName": "Athola Night Market",
-      "skillCount": 206,
-      "revision": "9f3eb003bedbd1d84389c5dd68711ea56c8c69b4",
-      "tree": "a544faee01855c12d642768aadbe813a16d23f0c",
+      "skillCount": 207,
+      "revision": "4f94139a2d325f14442a62dc0b4cd28b41dbb5ba",
+      "tree": "f41ebfe398196404ed88af5fec3dbcb9dbeff71f",
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
-      "inputDigest": "adff8e53a146a88be100797ca1cba09341058c73e4a70c11d10c9e70421d4c7b",
-      "measuredAsOf": "2026-10-10",
-      "selectedFileCount": 206
+      "inputDigest": "da6030beb17f6ef866abef7a443e43aab07022c06fbd258bbe22297b665ef99d",
+      "measuredAsOf": "2026-11-10",
+      "selectedFileCount": 207
     },
     {
       "name": "wshobson-agents",
       "path": "plugins/marketplaces/wshobson-agents",
       "githubUrl": "https://github.com/wshobson/agents",
       "displayName": "Wshobson Agents",
-      "skillCount": 184,
-      "revision": "46891e7e60da0e52baf1050b7b6391b64e84c6d9",
-      "tree": "169e5fe84fd726c6661f094496a7aba60cba3a8e",
+      "skillCount": 185,
+      "revision": "9c61ab243def98f72da12abd41cfcf5bcd91af9d",
+      "tree": "4c04f34efb0df8148b81591384578146b10ebc91",
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
-      "inputDigest": "60d0e90e460e515bb87cde697bbf2e4dd3dfc7ea174ccdafb6c75f63e37becd0",
-      "measuredAsOf": "2026-10-10",
-      "selectedFileCount": 184
+      "inputDigest": "16e50f965cdfb1a45be767f35ac88b5a8d8bcaa203d8c5980f5445b787d2516f",
+      "measuredAsOf": "2026-11-10",
+      "selectedFileCount": 185
     },
     {
       "name": "claude-scientific-skills",
@@ -158,12 +158,12 @@
       "githubUrl": "https://github.com/K-Dense-AI/scientific-agent-skills",
       "displayName": "Claude Scientific Skills",
       "skillCount": 177,
-      "revision": "92ace75ac21efe19a620434e0ca4e356081fe807",
-      "tree": "9a2d8a9b7d7cf9a89fcf31a25e826838f735d764",
+      "revision": "2d2065fb4520fa3f3f2bcf61cff26ec8b7eba4b5",
+      "tree": "390fe361644ba6ef88019af55a45a28ace2014ba",
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
       "inputDigest": "f389d16a98df5f96fb1f6e120a80ee6c9ddf9e5085f404758d211b00fd8a2a1e",
-      "measuredAsOf": "2026-10-10",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 177
     },
     {
@@ -177,8 +177,22 @@
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
       "inputDigest": "85e0a3341562c67354a869c18f78f32a470dc4cd8b2de5ca6e7e638e6dcc9276",
-      "measuredAsOf": "2026-10-10",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 131
+    },
+    {
+      "name": "daymade-skills",
+      "path": "plugins/marketplaces/daymade-skills",
+      "githubUrl": "https://github.com/daymade/claude-code-skills",
+      "displayName": "Daymade Skills",
+      "skillCount": 121,
+      "revision": "5e8eb6c41de1216e27ed47494737c73504f26492",
+      "tree": "269ee70f3d0a5f1b8656ea7e824c8d306766dfda",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "16644b3a590f0daaf0de46d69e29395a9ebdbcefe9fc02fc66e9de71aaf57968",
+      "measuredAsOf": "2026-11-10",
+      "selectedFileCount": 121
     },
     {
       "name": "giuseppe-developer-kit",
@@ -191,22 +205,22 @@
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
       "inputDigest": "a1969549cf6605930b5f55f4cb022bca7a22626a13f67386825846ab5b006bf5",
-      "measuredAsOf": "2026-10-10",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 119
     },
     {
-      "name": "daymade-skills",
-      "path": "plugins/marketplaces/daymade-skills",
-      "githubUrl": "https://github.com/daymade/claude-code-skills",
-      "displayName": "Daymade Skills",
-      "skillCount": 116,
-      "revision": "95a81528fa7e00d89f9f4e12bbd3d321aba55677",
-      "tree": "bc8c7c54cba7fefdcf7eb34c1b7669c01405eac8",
+      "name": "trailofbits-skills",
+      "path": "plugins/marketplaces/trailofbits-skills",
+      "githubUrl": "https://github.com/trailofbits/skills",
+      "displayName": "Trailofbits Skills",
+      "skillCount": 96,
+      "revision": "e4dd0bb5b15535f7c5a0834187dffba6ac37e4ff",
+      "tree": "8fbb3fea8713ef79cb78c9936e2e62f7216cecd7",
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
-      "inputDigest": "43ed51371f3afbc9b64179da4dabec1e888090b6eac53db74787cd8ddeb7dc3f",
-      "measuredAsOf": "2026-10-10",
-      "selectedFileCount": 116
+      "inputDigest": "3ea7144618b789271878864c5ac384d0008944a19fe3a0366653ce889b8c562a",
+      "measuredAsOf": "2026-11-10",
+      "selectedFileCount": 96
     },
     {
       "name": "ccplugins-awesome",
@@ -219,36 +233,22 @@
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
       "inputDigest": "91f9518519cedb531cc29fd4b71f302c65fe689d5e506a1600324c2d8bfedac9",
-      "measuredAsOf": "2026-10-10",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 84
-    },
-    {
-      "name": "trailofbits-skills",
-      "path": "plugins/marketplaces/trailofbits-skills",
-      "githubUrl": "https://github.com/trailofbits/skills",
-      "displayName": "Trailofbits Skills",
-      "skillCount": 83,
-      "revision": "442fc9d6c89b1e937e6f7a477e7071ea75fcbea4",
-      "tree": "e4bf3e138d9afeff17c08d9c63cf5c9db9af6dff",
-      "worktree": "clean",
-      "inputMode": "committed-HEAD-snapshot",
-      "inputDigest": "3242223ffd9fe70a479f94e51443299c9017eeb9804376d00af6c20a313e400c",
-      "measuredAsOf": "2026-10-10",
-      "selectedFileCount": 83
     },
     {
       "name": "phuryn-pm-skills",
       "path": "plugins/marketplaces/phuryn-pm-skills",
       "githubUrl": "https://github.com/phuryn/pm-skills",
       "displayName": "Phuryn Pm Skills",
-      "skillCount": 69,
-      "revision": "c68487d721e419ec87af1ae6412a842978eab785",
-      "tree": "0b19e6e5b178c8cf5a2a2f9de9f62f4299e07fe5",
+      "skillCount": 72,
+      "revision": "9af7bfd0bc47fdad43c2eaa7a43cd13918e7aaef",
+      "tree": "b47f917213f9adbb1554a39834961ead25c2bff0",
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
-      "inputDigest": "50a13bb4e5d16f7771c53f0d79604b859757f1f7c8540d26bd5d134f384509ef",
-      "measuredAsOf": "2026-10-10",
-      "selectedFileCount": 69
+      "inputDigest": "968659b1fabb0d9918fb00a77cd9d9323a5a5088e4960cd072d1dbc67859e244",
+      "measuredAsOf": "2026-11-10",
+      "selectedFileCount": 72
     },
     {
       "name": "neolab-context-kit",
@@ -261,7 +261,7 @@
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
       "inputDigest": "7fa57d817e947caece9aac8370018c7b2c9f5a5b71d176e1d1b14b028586643a",
-      "measuredAsOf": "2026-10-10",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 202
     },
     {
@@ -270,12 +270,12 @@
       "githubUrl": "https://github.com/Jeffallan/claude-skills",
       "displayName": "Jeffallan Claude Skills",
       "skillCount": 67,
-      "revision": "1be15d8064f88fc25216442406d40add8fd23b53",
-      "tree": "afea5ecdd68864b9354b57706dd362ebca25db9c",
+      "revision": "078a25cc5bfd8011459be7b91d004e900c1d02d3",
+      "tree": "30ecd61bfd3a0cdd7e8766ec6066956948f6a364",
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
-      "inputDigest": "13d2b2643fb1dfb2ef65cfffd28d98adfa5be92bcd9b1c525ed77351004aa04d",
-      "measuredAsOf": "2026-10-10",
+      "inputDigest": "4bb6214461a5965fdc7b9bc3f4ea547b0198da3d34327f68af47fba976b9a17b",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 67
     },
     {
@@ -289,7 +289,7 @@
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
       "inputDigest": "1f14440047f630393998f01037cd938a837c0ee11c69a67d2a117d760f17a581",
-      "measuredAsOf": "2026-10-10",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 67
     },
     {
@@ -297,14 +297,42 @@
       "path": "plugins/marketplaces/gmickel-marketplace",
       "githubUrl": "https://github.com/gmickel/flow-next",
       "displayName": "Gmickel Marketplace",
-      "skillCount": 56,
-      "revision": "39308b309fde394f4f18e8ac12f1fb7593844404",
-      "tree": "b6fb157e110e85eb498bb9129277b83cec42b4dd",
+      "skillCount": 55,
+      "revision": "2cfc64394ebd0d6b16c2b04b37fc7fe888cfdaf2",
+      "tree": "d2bdc07ad5eb93e59683a9e6399e93c2fa655e2c",
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
-      "inputDigest": "858826a273cb6c0ea7cffcc9f32a294fcd4af0263fc531c00f99805821eb37a9",
-      "measuredAsOf": "2026-10-10",
+      "inputDigest": "5c1c4d31d40d0ae477ccf230ab24e64ef2e4b5e46e1112c467e40ed310a1ab1b",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 58
+    },
+    {
+      "name": "p47phoenix-plugins",
+      "path": "plugins/marketplaces/p47phoenix-plugins",
+      "githubUrl": "https://github.com/P47Phoenix/Claude-Plugins",
+      "displayName": "P47phoenix Plugins",
+      "skillCount": 48,
+      "revision": "271c45f9f6e90a7ef50c1a09e9ad1aed6fde74d6",
+      "tree": "63047390bf38a2596205fb5a500ccee58717a70a",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "ccf1232a0ff851315a6fb4e693746158c6de1acaa6df463780ea9a4399fe9ac7",
+      "measuredAsOf": "2026-11-10",
+      "selectedFileCount": 48
+    },
+    {
+      "name": "levnikolaevich-claude-code-skills",
+      "path": "plugins/marketplaces/levnikolaevich-claude-code-skills",
+      "githubUrl": "https://github.com/levnikolaevich/claude-code-skills",
+      "displayName": "Levnikolaevich Claude Code Skills",
+      "skillCount": 41,
+      "revision": "dd42ac28c105ee5e04cbb6ca42121ac305ef7f95",
+      "tree": "4925da8915485ed316a983bfc769da92a5151aa5",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "6c644abebc08873cde0d34e4351ed32405c5935fabf74c7532bb3750737f3d03",
+      "measuredAsOf": "2026-11-10",
+      "selectedFileCount": 41
     },
     {
       "name": "rohitg00-claude-code-toolkit",
@@ -317,7 +345,7 @@
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
       "inputDigest": "a2df66f6c711528a21609ece168a31786b23a04763b9888dd44cab777dfc1c99",
-      "measuredAsOf": "2026-10-10",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 40
     },
     {
@@ -331,7 +359,7 @@
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
       "inputDigest": "a11cfa4b458f51ab186f4904ca37100cd619e688e721b260f7452750dad87b97",
-      "measuredAsOf": "2026-10-10",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 40
     },
     {
@@ -340,12 +368,26 @@
       "githubUrl": "https://github.com/Aaronontheweb/dotnet-skills",
       "displayName": "Aaronontheweb Dotnet Skills",
       "skillCount": 39,
-      "revision": "46003affea00e602a0c2112375d6f0217e90962d",
-      "tree": "513c061ee0f66ae3b58176170f73499fc849e861",
+      "revision": "5ca5db8cf25566f19d2a5dc53204d4af22b23a0d",
+      "tree": "d937623e8d575fec63fc492d2602209e86f07b9d",
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
-      "inputDigest": "87b7aa1f6c5089919095e691a312e44ca2775756fedda0e088d54ff470e79049",
-      "measuredAsOf": "2026-10-10",
+      "inputDigest": "1879199d216581d4a411cbc8bb25e054503b37fcb76b6979ed3213ebde19fcf1",
+      "measuredAsOf": "2026-11-10",
+      "selectedFileCount": 39
+    },
+    {
+      "name": "mattpocock-skills",
+      "path": "plugins/marketplaces/mattpocock-skills",
+      "githubUrl": "https://github.com/mattpocock/skills",
+      "displayName": "Mattpocock Skills",
+      "skillCount": 39,
+      "revision": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",
+      "tree": "a73b182b5f22565e829e0969eb0bfd284508a7b8",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "3288dbe87bb761560ee041934c46404aec2efb4579341bde93b519648970b9d7",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 39
     },
     {
@@ -359,8 +401,36 @@
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
       "inputDigest": "804c78354cb32a5d542848372741eae2c5a35197ff4b73a7291cf7350a4ab2cf",
-      "measuredAsOf": "2026-10-10",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 38
+    },
+    {
+      "name": "claude-mem",
+      "path": "plugins/marketplaces/claude-mem",
+      "githubUrl": "https://github.com/thedotmack/claude-mem",
+      "displayName": "Claude Mem",
+      "skillCount": 38,
+      "revision": "701a504d9bd696a9d338f06615bad82a0562629f",
+      "tree": "e72f390cf2b13972e88224c25301c6fa790575e1",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "be4482745ed677190b295598d9841b5e60333806d7b91dd368316006db1d13c4",
+      "measuredAsOf": "2026-11-10",
+      "selectedFileCount": 42
+    },
+    {
+      "name": "EveryInc-compound",
+      "path": "plugins/marketplaces/EveryInc-compound",
+      "githubUrl": "https://github.com/EveryInc/compound-engineering-plugin",
+      "displayName": "EveryInc Compound",
+      "skillCount": 37,
+      "revision": "dd9b7921c9c80498eba84994ff1b8e1e81dbc1db",
+      "tree": "03f8c4f9d4d9b6848e9fb0f27591dc3d1c18f3f8",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "2c746a9d1336c016085590d69c2793f0bb24031c195d203848f00304b4cc85bc",
+      "measuredAsOf": "2026-11-10",
+      "selectedFileCount": 37
     },
     {
       "name": "skillsforge",
@@ -373,22 +443,8 @@
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
       "inputDigest": "7accd86fb18e878a69872b96f0098a337916df423888498411cebe2151998d19",
-      "measuredAsOf": "2026-10-10",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 37
-    },
-    {
-      "name": "EveryInc-compound",
-      "path": "plugins/marketplaces/EveryInc-compound",
-      "githubUrl": "https://github.com/EveryInc/compound-engineering-plugin",
-      "displayName": "EveryInc Compound",
-      "skillCount": 36,
-      "revision": "51aa537383744736eb8ad30468d34420e9fb8ea8",
-      "tree": "5f0307e96b2781941d225738c45bf1043e9b5bf0",
-      "worktree": "clean",
-      "inputMode": "committed-HEAD-snapshot",
-      "inputDigest": "79ae8cd3fe3698ee0f1ae260660a5c1769e25a49d7d7415ccc4496b55b601268",
-      "measuredAsOf": "2026-10-10",
-      "selectedFileCount": 36
     },
     {
       "name": "claude-plugins-official",
@@ -407,20 +463,6 @@
       "snapshotDigest": "4f5218ff36e17c05a44b5897216931281484875e7011426fb4c70a1ff2d93316"
     },
     {
-      "name": "p47phoenix-plugins",
-      "path": "plugins/marketplaces/p47phoenix-plugins",
-      "githubUrl": "https://github.com/P47Phoenix/Claude-Plugins",
-      "displayName": "P47phoenix Plugins",
-      "skillCount": 33,
-      "revision": "f4fea7db5b39da374ab0d24e529da7a049abb150",
-      "tree": "6a0540519c165877bd5f3c26a0c10e5247d3c046",
-      "worktree": "clean",
-      "inputMode": "committed-HEAD-snapshot",
-      "inputDigest": "dcbf5d9fe9a0fb03fe8acc92a980317d44b032af78e47935eeb7f7510f9ba859",
-      "measuredAsOf": "2026-10-10",
-      "selectedFileCount": 33
-    },
-    {
       "name": "sangrokjung-claude-forge",
       "path": "plugins/marketplaces/sangrokjung-claude-forge",
       "githubUrl": "https://github.com/sangrokjung/claude-forge",
@@ -431,7 +473,7 @@
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
       "inputDigest": "fb11d86dac47105f4d06cb2912332aff1633f5e7198096ed6fccbeee44ddba76",
-      "measuredAsOf": "2026-10-10",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 33
     },
     {
@@ -445,21 +487,7 @@
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
       "inputDigest": "b635500abd728a69c5d8e9c3bf6d724b0e6fd82b7a66f4694370680541fe67ee",
-      "measuredAsOf": "2026-10-10",
-      "selectedFileCount": 31
-    },
-    {
-      "name": "levnikolaevich-claude-code-skills",
-      "path": "plugins/marketplaces/levnikolaevich-claude-code-skills",
-      "githubUrl": "https://github.com/levnikolaevich/claude-code-skills",
-      "displayName": "Levnikolaevich Claude Code Skills",
-      "skillCount": 31,
-      "revision": "0ce87969906ac3c00947298ee2127d9e7cd466d8",
-      "tree": "4d28be7b169cb1e06e2708db5eaf1014777657f8",
-      "worktree": "clean",
-      "inputMode": "committed-HEAD-snapshot",
-      "inputDigest": "7cdd6b5c9615e994ba5012c829fd3dd2b1fc47699fd17329c6a26d994c810ff1",
-      "measuredAsOf": "2026-10-10",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 31
     },
     {
@@ -473,22 +501,22 @@
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
       "inputDigest": "9ccaa905ef9021e162b1250f4a3d4bdce7f6b18691008c4b7f6afab3a2f0a02f",
-      "measuredAsOf": "2026-10-10",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 31
     },
     {
-      "name": "claude-mem",
-      "path": "plugins/marketplaces/claude-mem",
-      "githubUrl": "https://github.com/thedotmack/claude-mem",
-      "displayName": "Claude Mem",
+      "name": "onmax-nuxt-skills",
+      "path": "plugins/marketplaces/onmax-nuxt-skills",
+      "githubUrl": "https://github.com/onmax/nuxt-skills",
+      "displayName": "Onmax Nuxt Skills",
       "skillCount": 30,
-      "revision": "fa8ab09f06aa05f958c5225cf3756ce52a3ebb96",
-      "tree": "a067757fd4a9e207ac428d699d66dab1cfaf7456",
+      "revision": "7838f56fc60fdf4c752d66f72ed5a89aa1fda7c9",
+      "tree": "deeaac6693fcf4c4a38c5030c17b49c105b4cb8f",
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
-      "inputDigest": "76c7da16b449b7af45df1ff04b12aed41b91f064a16d1ebe5f3d6f09783db6e5",
-      "measuredAsOf": "2026-10-10",
-      "selectedFileCount": 34
+      "inputDigest": "bfca024db532646ebe7064065cedb342ae17e2586f7d9e79d85389a05ef22eba",
+      "measuredAsOf": "2026-11-10",
+      "selectedFileCount": 30
     },
     {
       "name": "henkisdabro-marketplace",
@@ -501,36 +529,22 @@
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
       "inputDigest": "71f412f6b0c299a342ff3413e24d6ba0bdafb890eecf236b4f3e2b381c2c6303",
-      "measuredAsOf": "2026-10-10",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 27
-    },
-    {
-      "name": "onmax-nuxt-skills",
-      "path": "plugins/marketplaces/onmax-nuxt-skills",
-      "githubUrl": "https://github.com/onmax/nuxt-skills",
-      "displayName": "Onmax Nuxt Skills",
-      "skillCount": 26,
-      "revision": "008232b5d7a5d697693f776eca0e1c8e66aa7597",
-      "tree": "8457fecad0c200e064ada98c4a871e9720493d46",
-      "worktree": "clean",
-      "inputMode": "committed-HEAD-snapshot",
-      "inputDigest": "7a43b12086c7fabbf3812e52ea985ca5a0f775819896397dad6e18a53df7cd85",
-      "measuredAsOf": "2026-10-10",
-      "selectedFileCount": 26
     },
     {
       "name": "expo-skills",
       "path": "plugins/marketplaces/expo-skills",
       "githubUrl": "https://github.com/expo/skills",
       "displayName": "Expo Skills",
-      "skillCount": 25,
-      "revision": "d4f484024fec15196bfd3c272e953e3f983972cf",
-      "tree": "1cec4260059ac854dc54946bc1e68671d3a2da45",
+      "skillCount": 24,
+      "revision": "a9e5bd3fa00b4e61f632e43f85da73aee1942582",
+      "tree": "8d9fcc99adbe93c080a96aedf2fdbdd96f533b55",
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
-      "inputDigest": "7f8b46efedd19509d9aebef1f4cc42f156160f4489f7f19ce302b9c60e0512a7",
-      "measuredAsOf": "2026-10-10",
-      "selectedFileCount": 25
+      "inputDigest": "3e2d88a6d0d47fccc4814e7b44f34256284ef1f7452ff3ffee6352b94dde80a4",
+      "measuredAsOf": "2026-11-10",
+      "selectedFileCount": 24
     },
     {
       "name": "hashicorp-agent-skills",
@@ -538,12 +552,12 @@
       "githubUrl": "https://github.com/hashicorp/agent-skills",
       "displayName": "Hashicorp Agent Skills",
       "skillCount": 20,
-      "revision": "f706481af9b8fedb66de909f6243ad29601afa0c",
-      "tree": "6e8e987c9e3f8b400f900075324305b9cef674af",
+      "revision": "5e30fa5c867ba6777c37e4206babfd08049c396f",
+      "tree": "c40e8eea283598685a7c89c39f07060cb06ab7cb",
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
-      "inputDigest": "33620f9d7edd75b6a27494287e974a0a9c9ac6e195495582e5296041ff18d835",
-      "measuredAsOf": "2026-10-10",
+      "inputDigest": "5b4e5e7d7ad662d7c6d3d5a1fe972ebda34d370c88e843233dbbeb5f6b7fdcda",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 20
     },
     {
@@ -552,12 +566,12 @@
       "githubUrl": "https://github.com/anthropics/skills",
       "displayName": "Anthropic Agent Skills",
       "skillCount": 19,
-      "revision": "dbd4588f9e1033efb41dad4bef2f7947c8993d44",
-      "tree": "73374b8632b6c29c41ac7641e58bf97743f0aeb9",
+      "revision": "2c5958ecac7cee2b583967a2c4981d0f4a75c579",
+      "tree": "4bcffd51f1f2d19946b520405782c0f2c544906a",
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
-      "inputDigest": "ecc4cc0ff356a17fb50b5d77f88910d6686977543a137081bfa216a64fd57c7f",
-      "measuredAsOf": "2026-10-10",
+      "inputDigest": "202f3682d2d50be59627f08a48bf1f9ffd462ea63d659d3dc64f888fe20f5176",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 19
     },
     {
@@ -566,12 +580,12 @@
       "githubUrl": "https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering",
       "displayName": "Muratcankoylan Agent Skills",
       "skillCount": 19,
-      "revision": "58b55a8921758d13453b440704fb1b5b208c0b0e",
-      "tree": "5ae86597fd6bf752b43e5e4124030dddb66a3f14",
+      "revision": "9ff0c99108b36d3b886defd825d8ac1f47dba374",
+      "tree": "404babfb9b3434440162e06286b8da05a5b16139",
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
-      "inputDigest": "e8e9a347d4a076a95fa1ccc867536b25c23be8a4f841a3a5894724283a08f856",
-      "measuredAsOf": "2026-10-10",
+      "inputDigest": "ebb31ad37df4a3ed03e2d21a89bd3ec05c215468d8616003efd993f5af56d47d",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 19
     },
     {
@@ -585,7 +599,7 @@
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
       "inputDigest": "2ccec695b7c03a92ce7cd352e63519e4c343cba146612a44cdfc5614ca775cf9",
-      "measuredAsOf": "2026-10-10",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 18
     },
     {
@@ -599,7 +613,7 @@
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
       "inputDigest": "7576d39d9a0ac3781b872ac12e4761b4c25d6255618f31e49e20bc474433204c",
-      "measuredAsOf": "2026-10-10",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 18
     },
     {
@@ -613,7 +627,7 @@
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
       "inputDigest": "9dd273406922059ee521f9ea195f42cafba992484201275c75c2a50e7c95f257",
-      "measuredAsOf": "2026-10-10",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 18
     },
     {
@@ -622,12 +636,12 @@
       "githubUrl": "https://github.com/obra/superpowers",
       "displayName": "Obra Superpowers",
       "skillCount": 15,
-      "revision": "bb92a77741419a4ab5f06e711a283343f1ada0c3",
-      "tree": "4ac675daa3415bc836f707c7e60237ac7b66c7d5",
+      "revision": "22f0b463e7a5e579904dd6211a520321035526f7",
+      "tree": "8fddc972a73e9af7501442df0e638d8e29842b6b",
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
-      "inputDigest": "d27986a05407d5589786c3a2107ed99b2a05a059c64aa2afd61799399eed01fb",
-      "measuredAsOf": "2026-10-10",
+      "inputDigest": "0ac452d8fe91780f859018733ad21c1bc7119b5accec4864c1c7dff78be77c96",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 15
     },
     {
@@ -641,7 +655,7 @@
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
       "inputDigest": "d9b508d17e4c1d558e8559d64573f52405e3f2c561489e38c138d337949f1937",
-      "measuredAsOf": "2026-10-10",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 12
     },
     {
@@ -655,7 +669,7 @@
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
       "inputDigest": "1bc131b9f77fcec109ec2a67fa2e8aaaa18bf7e646fb9fc650313ec2e67d54a1",
-      "measuredAsOf": "2026-10-10",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 11
     },
     {
@@ -669,8 +683,22 @@
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
       "inputDigest": "86046b76bc89993f403b938c1bad220c34e0976b0490ff63bcddc5cdc7abcac5",
-      "measuredAsOf": "2026-10-10",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 10
+    },
+    {
+      "name": "t3dotgg-tstack",
+      "path": "plugins/marketplaces/t3dotgg-tstack",
+      "githubUrl": "https://github.com/t3dotgg/tstack",
+      "displayName": "T3dotgg Tstack",
+      "skillCount": 9,
+      "revision": "1085050f3baed1ac724caa4a8166145fb2ac88af",
+      "tree": "a939d866f545629c277cc9fdf766051385f3e9d9",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "163667084ce669651ff732797862f1129e4fe99f5f9ff31fc823d6a623842743",
+      "measuredAsOf": "2026-11-10",
+      "selectedFileCount": 9
     },
     {
       "name": "understand-anything",
@@ -678,12 +706,12 @@
       "githubUrl": "https://github.com/Egonex-AI/Understand-Anything",
       "displayName": "Understand Anything",
       "skillCount": 9,
-      "revision": "000fbf3f36b5e534a0a8d3461cf24f5dc9ae43fe",
-      "tree": "2c163769d3e0321ce7efe9214fdb072565f837b4",
+      "revision": "182c7fbf1745d9acd55dda6c47cceff77de4c111",
+      "tree": "088db16e5608d091fe8f672b51b3e384d0ad094a",
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
-      "inputDigest": "9a4036511dc2d76c559d7daf7f5052b78ccd56df535ec0d844f63e906d5acfb7",
-      "measuredAsOf": "2026-10-10",
+      "inputDigest": "62491376cb1942f4f4e278c18e61c5ca3cdf67bcb7f4f0fad1c99dac3671dcc9",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 9
     },
     {
@@ -692,12 +720,12 @@
       "githubUrl": "https://github.com/vercel-labs/agent-skills",
       "displayName": "Vercel Agent Skills",
       "skillCount": 9,
-      "revision": "063bee94c3f4df8453406c830b0a7df0f2860278",
-      "tree": "f94978e8351f77b2d84911fac5d3dd9d51408af9",
+      "revision": "1a2c79d4e6c4a2283dc2c614b6538cbe1ed5ca62",
+      "tree": "339e66e210e08989967e7d992ce3906313165f77",
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
-      "inputDigest": "eadc5a71887e6bc5e4a8b7060df6b07b3553e8ebeafa1af90b07e6e41718bee0",
-      "measuredAsOf": "2026-10-10",
+      "inputDigest": "97556e25b8c2c269c433a7d72b78fe68f5ad07c76db6f09b9a85337e2abe4276",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 9
     },
     {
@@ -711,7 +739,7 @@
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
       "inputDigest": "4a320d7f9b5beb0d034ff1c28172ff9c36fe151da531b02f60c8938218191654",
-      "measuredAsOf": "2026-10-10",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 9
     },
     {
@@ -725,7 +753,7 @@
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
       "inputDigest": "6ef8692ba76503f4e81e42a03f38f1504b2a31124718474a831a88d811a315a6",
-      "measuredAsOf": "2026-10-10",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 8
     },
     {
@@ -739,21 +767,7 @@
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
       "inputDigest": "434deda7a1dbd027440af6f2054e9d0627c7f0f9a26cc46e6838825835fc9867",
-      "measuredAsOf": "2026-10-10",
-      "selectedFileCount": 6
-    },
-    {
-      "name": "anthropic-life-sciences",
-      "path": "plugins/marketplaces/anthropic-life-sciences",
-      "githubUrl": "https://github.com/anthropics/life-sciences",
-      "displayName": "Anthropic Life Sciences",
-      "skillCount": 6,
-      "revision": "e96556b637b56d6cc3a5ad33987009be9e60aa5c",
-      "tree": "9d2ab56572855709b65f2a7d3fcd0223b3119d77",
-      "worktree": "clean",
-      "inputMode": "committed-HEAD-snapshot",
-      "inputDigest": "b9ac3beedeb45acf622706794fc728f077299c0449555188d68825de86a66da0",
-      "measuredAsOf": "2026-10-10",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 6
     },
     {
@@ -762,12 +776,12 @@
       "githubUrl": "https://github.com/OthmanAdi/planning-with-files",
       "displayName": "Othmanadi Planning",
       "skillCount": 6,
-      "revision": "7056ed2f2b86a8a9e18840f625ac66a48fa07693",
-      "tree": "d2800a9e90213773f36594d585855fe307b183f3",
+      "revision": "2362ca385ad74f061aa0e7b73f56543a4b7e6df2",
+      "tree": "eba6c04ef6fb8d44ef3bdc578eac17c392962c85",
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
-      "inputDigest": "9c710453b96f4b050e34f827421817f32c0be00c92fdb3e122768d93169101c8",
-      "measuredAsOf": "2026-10-10",
+      "inputDigest": "ed552d0fd2fe7a001ac501b16307a2398dd9e88f10c64ba26d43602a61ecd432",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 6
     },
     {
@@ -781,7 +795,7 @@
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
       "inputDigest": "18b6f291d6b35371f2be43845bcb3808d97e242b9efa184927968ebc8d9c5a2c",
-      "measuredAsOf": "2026-10-10",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 5
     },
     {
@@ -795,7 +809,7 @@
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
       "inputDigest": "fe56e63f492fea732fce9ecc888c0ad70b6de9a43d02843e4f8514baf1a067c1",
-      "measuredAsOf": "2026-10-10",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 5
     },
     {
@@ -809,8 +823,22 @@
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
       "inputDigest": "3c8fcecd07a6a611d6396bf141e6771ecc6aace8feb925cdc0cee2e3829acd02",
-      "measuredAsOf": "2026-10-10",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 5
+    },
+    {
+      "name": "anthropic-life-sciences",
+      "path": "plugins/marketplaces/anthropic-life-sciences",
+      "githubUrl": "https://github.com/anthropics/life-sciences",
+      "displayName": "Anthropic Life Sciences",
+      "skillCount": 4,
+      "revision": "0d38fe5c0a50d711ebe6ecd85dc84b98660579d0",
+      "tree": "51ebc2e43dd135fa6884539891d00a6582674a37",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "80d7ddb68e953864944a5b2f8f3a42bbafb4b8bbc6bd712e21f1de716f67c4c0",
+      "measuredAsOf": "2026-11-10",
+      "selectedFileCount": 4
     },
     {
       "name": "bradleygolden-elixir",
@@ -823,7 +851,7 @@
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
       "inputDigest": "da0ec1da27cc051c289789ffd03d2fca9737e408fd5f05706de0c29509d558a4",
-      "measuredAsOf": "2026-10-10",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 4
     },
     {
@@ -832,12 +860,12 @@
       "githubUrl": "https://github.com/pbakaus/impeccable",
       "displayName": "Pbakaus Impeccable",
       "skillCount": 2,
-      "revision": "d631a8827f99414d2b6daba4ef08b7f8701751d7",
-      "tree": "f705ad02e6ae6a33b0c7e6b0923106bb96f938e2",
+      "revision": "ebe9c265f416f7f9b83ed424ed5b9bd0d2684536",
+      "tree": "abb1463e5c13915d5154faaa30540e51983ca649",
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
-      "inputDigest": "01f2e29cb41ec869bb739f223ad48daaedea800a8ebf755f419a5906ddbb427a",
-      "measuredAsOf": "2026-10-10",
+      "inputDigest": "224f644e5b7f6b8842ea67d26a0cbf4120d51c2f81b0e9641075f81b22130c63",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 2
     },
     {
@@ -851,7 +879,7 @@
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
       "inputDigest": "ab4d8b1643ea4f5b7eae4b2c634a4fe21dd8c8202de9ee72fdb3a31b3dbb7aa0",
-      "measuredAsOf": "2026-10-10",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 2
     },
     {
@@ -865,7 +893,7 @@
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
       "inputDigest": "743556d5f7a0107e8279e0af87031bfd489759c945f6ba63b2fd109245b3dfd0",
-      "measuredAsOf": "2026-10-10",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 2
     },
     {
@@ -874,12 +902,12 @@
       "githubUrl": "https://github.com/automazeio/ccpm",
       "displayName": "Automazeio Ccpm",
       "skillCount": 1,
-      "revision": "7d7e4623bc6d4c0c9ba66ca6bfecd7e5261dc697",
-      "tree": "db7052ac18028aa6e1c73c6c1b534fd6dcbdeac3",
+      "revision": "0bcfabb516913b6d484f20a8c9e449fae8e0c0ee",
+      "tree": "8e1d3e9b54ce9a08f7ab986106014300dff6c1b4",
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
-      "inputDigest": "1aa675432f0b460623c854358ba9459275d5e8f05af7d66cbb9d29a3046faa89",
-      "measuredAsOf": "2026-10-10",
+      "inputDigest": "e172b5bd97d70481493140c1cc3d098ed6c3267f62b05b2cfdfa3253351c8d72",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 1
     },
     {
@@ -888,12 +916,12 @@
       "githubUrl": "https://github.com/blader/humanizer",
       "displayName": "Blader Humanizer",
       "skillCount": 1,
-      "revision": "225a6f39ac85f76ee48dbad772ea4abe4ed6c9d8",
-      "tree": "8ed37b6d1d98a0bbdb599d0399a4a2185eb8fa03",
+      "revision": "b48c832f0f809c1b5658edbb838c2521b72f2413",
+      "tree": "1fe9a61991dfc2b8906f88bedc0f32f1ef074234",
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
-      "inputDigest": "54a571c1ccc1f69272dbb1b06bf363a108a2b0c258255684f411357791af7187",
-      "measuredAsOf": "2026-10-10",
+      "inputDigest": "ec26fd67e743cdd4cabb6c885bd7b6910418f246906eda47b77af96ae272ce5b",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 1
     },
     {
@@ -907,7 +935,7 @@
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
       "inputDigest": "823c70fcd9c762873ac86c195ce4e2df80d6f8f24de792bd5658f72a18596060",
-      "measuredAsOf": "2026-10-10",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 1
     },
     {
@@ -921,7 +949,7 @@
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
       "inputDigest": "3271cfb0f65de75806a078e48b17b6da56eab5f829eb6f02c61b6eba67912090",
-      "measuredAsOf": "2026-10-10",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 1
     },
     {
@@ -930,12 +958,12 @@
       "githubUrl": "https://github.com/kenryu42/cc-safety-net",
       "displayName": "Kenryu42 Safety Net",
       "skillCount": 1,
-      "revision": "f9f2e5a84ab60e81dc1a4ec12562e23c5f7760e0",
-      "tree": "bfbf76437008673ec311f9ad7fce6b489ac11f40",
+      "revision": "4afb921b2be8ea07499e02794814cbfba96ad4a4",
+      "tree": "0d0a6a4008e90b5f326118d69c08c7bd23d5cde3",
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
-      "inputDigest": "f7f425230be4fbf357e346a3cdd11f239683a2341603b389bfb8439bef7dec62",
-      "measuredAsOf": "2026-10-10",
+      "inputDigest": "367f577f51e605ea7a558b6244857e0f637a8e0459a596e50587e80d4aee1809",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 1
     },
     {
@@ -944,12 +972,40 @@
       "githubUrl": "https://github.com/mvanhorn/last30days-skill",
       "displayName": "Mvanhorn Last30days Skill",
       "skillCount": 1,
-      "revision": "267d50f7fcbab8a6457a93ad6ca15cbc199f633c",
-      "tree": "c2964132f3167cac73be03cf378bb74893492885",
+      "revision": "c567827c3d25865fafa6b1ad33a173346da8cdcb",
+      "tree": "5ceb09c7bef512732925a1f7b615602d991d81be",
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
-      "inputDigest": "62b6f26ac66691e1ab73972454149415f833822683bb918b6b623eb4b8fbe50c",
-      "measuredAsOf": "2026-10-10",
+      "inputDigest": "05f55225d23159659de027e9b6ab2cbf2868eeaf48734bbcd4b7e5da002a6f0b",
+      "measuredAsOf": "2026-11-10",
+      "selectedFileCount": 1
+    },
+    {
+      "name": "poteto-how",
+      "path": "plugins/marketplaces/poteto-how",
+      "githubUrl": "https://github.com/poteto/how",
+      "displayName": "Poteto How",
+      "skillCount": 1,
+      "revision": "b1ef42969ea7a2bb50aa26c2480274828a0385e7",
+      "tree": "47aee131d3f6b0210548e9e2645bad8db071a1e4",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "ee79b5f13368d4f1e03e2d1bbdcd4c6297e491a7abcfb2cf635f8d5aa6705e48",
+      "measuredAsOf": "2026-11-10",
+      "selectedFileCount": 1
+    },
+    {
+      "name": "poteto-noodle",
+      "path": "plugins/marketplaces/poteto-noodle",
+      "githubUrl": "https://github.com/poteto/noodle",
+      "displayName": "Poteto Noodle",
+      "skillCount": 1,
+      "revision": "82d2921c52370f23f29086de81ccfb600939c037",
+      "tree": "9fccb6bb9d9173922a9f3be74100d738761b4688",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "fda978611dc94d70dbdbc579f44b091e6cff42224c8a59d1beffd32a8ecc7bf2",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 1
     },
     {
@@ -958,12 +1014,12 @@
       "githubUrl": "https://github.com/SawyerHood/dev-browser",
       "displayName": "Sawyerhood Dev Browser",
       "skillCount": 1,
-      "revision": "a25e7672e199153b2f5b52a841a62436a28d925f",
-      "tree": "408583799040a9ddcb1a5f502d0c399538105c5f",
+      "revision": "520ba5cb4fa2856a501376cd8a62fe54a6576549",
+      "tree": "2e304d48064c1411cbf8b3012683eddef6da3d20",
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
       "inputDigest": "bec6f0d58b0636469e7ffaec53dd8900e4c5ed2b3893fccffa0c97119f5fc016",
-      "measuredAsOf": "2026-10-10",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 1
     },
     {
@@ -972,12 +1028,12 @@
       "githubUrl": "https://github.com/agentskills/agentskills",
       "displayName": "Agentskills Agentskills",
       "skillCount": 0,
-      "revision": "69ef37e9424c0a7ea9dd2293b559e43ec8176379",
-      "tree": "65e11c9faad14a022055ce0ff3ebf99f2b55142f",
+      "revision": "83021e2be457a9b6679148719c1f6074f0ad975e",
+      "tree": "4887e8fa23c1fc0aaf43343b2016c182e1238c52",
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
       "inputDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-      "measuredAsOf": "2026-10-10",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 0
     },
     {
@@ -991,7 +1047,7 @@
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
       "inputDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-      "measuredAsOf": "2026-10-10",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 0
     },
     {
@@ -1005,7 +1061,7 @@
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
       "inputDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-      "measuredAsOf": "2026-10-10",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 0
     },
     {
@@ -1019,7 +1075,7 @@
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
       "inputDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-      "measuredAsOf": "2026-10-10",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 0
     },
     {
@@ -1028,12 +1084,12 @@
       "githubUrl": "https://github.com/hesreallyhim/awesome-claude-code",
       "displayName": "Hesreallyhim Awesome",
       "skillCount": 0,
-      "revision": "f8d0bd1ac22b0771e77100b8eddc6237d8e4614f",
-      "tree": "4fbe061143efa3027609c4b655df5752a099f258",
+      "revision": "20c1f7ea3bd0275827031aa9686f97a1d9e2e724",
+      "tree": "9f746cc6dd02aabbf994b48cc0dc7e9aeab8e2a9",
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
       "inputDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-      "measuredAsOf": "2026-10-10",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 0
     },
     {
@@ -1047,7 +1103,7 @@
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
       "inputDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-      "measuredAsOf": "2026-10-10",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 0
     },
     {
@@ -1061,7 +1117,7 @@
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
       "inputDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-      "measuredAsOf": "2026-10-10",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 0
     },
     {
@@ -1070,12 +1126,26 @@
       "githubUrl": "https://github.com/Piebald-AI/claude-code-lsps",
       "displayName": "Piebald Lsps",
       "skillCount": 0,
-      "revision": "92afe66527c948082c1a751e484f6eaf20815b36",
-      "tree": "6755af760dcff8e0e80c71a46c955af9019ddd95",
+      "revision": "4993cffe10ad2457a27279ffb3492f283e91980e",
+      "tree": "ae41b25ac9f0c3216018e79696fb7b2e8154cd84",
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
       "inputDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-      "measuredAsOf": "2026-10-10",
+      "measuredAsOf": "2026-11-10",
+      "selectedFileCount": 0
+    },
+    {
+      "name": "poteto-brainmaxxing",
+      "path": "plugins/marketplaces/poteto-brainmaxxing",
+      "githubUrl": "https://github.com/poteto/brainmaxxing",
+      "displayName": "Poteto Brainmaxxing",
+      "skillCount": 0,
+      "revision": "ec4d8e43dee639d6f5d94aed3ca16af7b298ecfc",
+      "tree": "a236b62c8c4872a689307de1fc7cceecf4ff4f9a",
+      "worktree": "clean",
+      "inputMode": "committed-HEAD-snapshot",
+      "inputDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 0
     },
     {
@@ -1084,12 +1154,12 @@
       "githubUrl": "https://github.com/quant-sentiment-ai/claude-equity-research",
       "displayName": "Quant Equity Research",
       "skillCount": 0,
-      "revision": "978e035084698ac6f67f9ae758f1d3019929b97d",
-      "tree": "9496bd8d679a65e407db4b0fb79fc06a8c2757a2",
+      "revision": "adb0fd26ab67b42594995710475f340a94f8e895",
+      "tree": "35eae28c5fc11a78148551f226f7c1e3af575631",
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
       "inputDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-      "measuredAsOf": "2026-10-10",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 0
     },
     {
@@ -1098,12 +1168,12 @@
       "githubUrl": "https://github.com/quemsah/awesome-claude-plugins",
       "displayName": "Quemsah Awesome",
       "skillCount": 0,
-      "revision": "e63552fc0b2ccd3117f921467f2eac98a271264a",
-      "tree": "8a2c2a24461ebfc15013eda49fe54e68cf2336b6",
+      "revision": "27057aa94abf9b273543836010b27cd6c49ca5a5",
+      "tree": "cbafc81ce8e6d7d23f367e1d73d06d4e3ed7a5b3",
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
       "inputDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-      "measuredAsOf": "2026-10-10",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 0
     },
     {
@@ -1112,12 +1182,12 @@
       "githubUrl": "https://github.com/shanraisshan/claude-code-best-practice",
       "displayName": "Shanraisshan Best Practice",
       "skillCount": 0,
-      "revision": "63e587bf0ae13a344866c2e8f55cc0605d6a35d3",
-      "tree": "784ff8b345ce7b8944491389452b2ef8c6694c10",
+      "revision": "97013ec8eadd2ac141d97acd975ad8f9795d68c1",
+      "tree": "1028dad84b21e3c0686c95e14e51ac503d116414",
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
       "inputDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-      "measuredAsOf": "2026-10-10",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 0
     },
     {
@@ -1126,12 +1196,12 @@
       "githubUrl": "https://github.com/obra/superpowers-marketplace",
       "displayName": "Superpowers Marketplace",
       "skillCount": 0,
-      "revision": "2cf27fa76667afa0ba724ad8141a6938a3834e32",
-      "tree": "38b4b278b9cce0f0a42bdd8dd6a41d2240c5afd0",
+      "revision": "5c9072877417873fee42be1805aa776a453ec394",
+      "tree": "644690dccd6f6840c1d6c5c7414af7852c8724ae",
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
       "inputDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-      "measuredAsOf": "2026-10-10",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 0
     },
     {
@@ -1140,12 +1210,12 @@
       "githubUrl": "https://github.com/VoltAgent/awesome-agent-skills",
       "displayName": "Voltagent Agent Skills",
       "skillCount": 0,
-      "revision": "8e70c976525abe568c6d6698f555bf57218aac80",
-      "tree": "00baca2e7a6a9231e2c2159b6aa5391bc3e39604",
+      "revision": "6d483e29da745a010d88974ef6d0e50d15755e9a",
+      "tree": "24df08568873ae74db4316aea6b72d65a08ecf51",
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
       "inputDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-      "measuredAsOf": "2026-10-10",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 0
     },
     {
@@ -1154,12 +1224,12 @@
       "githubUrl": "https://github.com/VoltAgent/awesome-claude-code-subagents",
       "displayName": "Voltagent Subagents",
       "skillCount": 0,
-      "revision": "721e9734670bfaf7283194e234ebb88e94c82dcd",
-      "tree": "fcfc46e1c9ed87dd1d5cd6d9bc9f20b3d6664d49",
+      "revision": "ed74d115b7fb7026a22a4f816a8e3250f425e3b4",
+      "tree": "becb7a8a2000a2f019f305f0d231c47e96b0a1de",
       "worktree": "clean",
       "inputMode": "committed-HEAD-snapshot",
       "inputDigest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
-      "measuredAsOf": "2026-10-10",
+      "measuredAsOf": "2026-11-10",
       "selectedFileCount": 0
     }
   ]

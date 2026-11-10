@@ -6,7 +6,7 @@
 
 ## Overview
 
-External repositories are managed as git submodules or nested repos with **read-only** configuration:
+External repositories are plain local clones under `plugins/marketplaces/` (gitignored; `.gitmodules` is only the manifest that lists them, and nothing is a git submodule) with **read-only** configuration:
 
 - **Fetch:** Pulls updates from upstream
 - **Push:** Blocked via `no_push` URL
@@ -104,7 +104,7 @@ All external repos are located in `~/.claude/plugins/marketplaces/`:
 ### Recommended: \_pull-all-repos.sh
 
 ```bash
-# Pull parent + all submodules + custom directories
+# Pull parent + all marketplace clones + custom directories
 ~/.claude/_pull-all-repos.sh
 
 # Check status without pulling
@@ -117,7 +117,7 @@ All external repos are located in `~/.claude/plugins/marketplaces/`:
 **What gets pulled:**
 
 1. `~/.claude` - Parent repo (travisjneuman/.claude)
-2. `~/.claude/plugins/marketplaces/*` - All 81 marketplace repos
+2. `~/.claude/plugins/marketplaces/*` - All 86 marketplace repos
 3. Custom project directories (if configured) - your own repos
 4. Documentation counts updated automatically if any repos changed
 
@@ -159,8 +159,8 @@ bash ~/.claude/_pull-all-repos.sh
 ```bash
 cd ~/.claude
 
-# Update all submodules
-git submodule update --remote --merge
+# Update every marketplace clone (fast-forward only)
+bash _pull-all-repos.sh
 
 # Or update each individually
 for repo in plugins/marketplaces/*/; do
@@ -199,13 +199,13 @@ git remote set-url --push origin no_push
 
 ## Adding New External Repos
 
-### As a Submodule (Preferred)
+### As a Marketplace Clone (Preferred)
 
 ```bash
 cd ~/.claude
 
-# Add submodule
-git submodule add https://github.com/owner/repo.git path/to/repo
+# Add a manifest entry and a read-only local clone (sets no_push for you)
+bash scripts/add-marketplace.sh https://github.com/owner/repo.git
 
 # Set no-push
 cd path/to/repo
@@ -241,15 +241,14 @@ fatal: 'no_push' does not appear to be a git repository
 
 This is **expected behavior**. The repo is configured as read-only.
 
-### Submodule Not Updating
+### Marketplace Clone Missing or Not Updating
 
 ```bash
-# Re-initialize submodules
-git submodule init
-git submodule update --remote
+bash ~/.claude/scripts/init-marketplaces.sh   # clone any that are missing
+bash ~/.claude/_pull-all-repos.sh             # fast-forward the ones that exist
 ```
 
-### Detached HEAD in Submodule
+### Detached HEAD in a Marketplace Clone
 
 ```bash
 cd ~/.claude/plugins/marketplaces/<repo-name>

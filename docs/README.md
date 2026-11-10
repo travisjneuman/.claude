@@ -118,15 +118,15 @@ graph LR
 
 | Component           | Count  | Location                       |
 | ------------------- | ------ | ------------------------------ |
-| Local skills        | 180    | `skills/`                      |
+| Local skills        | 183    | `skills/`                      |
 | Agents              | 10     | `agents/`                      |
 | Commands            | 29     | `commands/`                    |
 | Rules files         | 10     | `rules/`                       |
 | Templates           | 17     | `templates/`                   |
 | Hooks               | 7      | `hooks/`                       |
 | Installed MCP entries (documented)         | 0     | `docs/MCP-SERVERS.md` (installed section; not optional configurations)                    |
-| Marketplace repos   | 81    | `.gitmodules` manifest entries (not installed clones)        |
-| Marketplace skills  | 11,000+ | nonempty normalized unique manifest skill bodies; display floored to 100 |
+| Marketplace repos   | 86    | `.gitmodules` manifest entries (not installed clones)        |
+| Marketplace skills  | 11,300+ | nonempty normalized unique manifest skill bodies; display floored to 100 |
 | **Total git repos** | **Not measured** | Host/device clone and configured-project totals are not measured; parent + manifest entries is a different population |
 
 ---
@@ -149,10 +149,10 @@ graph LR
 
 This `~/.claude/` folder is a fully configured, portable Claude Code environment containing:
 
-- **180 local skills** for code review, design systems, feature development, domain expertise
+- **183 local skills** for code review, design systems, feature development, domain expertise
 - **10 specialist agents** plus more specialists as `agent-*` skills, for autonomous workflows
 - **29 slash commands** for workflow automation
-- **81 marketplace repos** providing 11,000+ additional skills from the community
+- **86 marketplace repos** providing 11,300+ additional skills from the community
 - **7 lifecycle hooks** for session start/end, the safety guard, secret scanning, daily maintenance, and the status line
 - **10 rules files**: path-scoped language rules that load only when Claude reads a matching file
 - **17 templates** for task planning, component creation, and project scaffolding

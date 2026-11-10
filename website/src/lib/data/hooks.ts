@@ -39,7 +39,7 @@ const HOOK_METADATA: Record<
   },
   "guard.js": {
     event: "PreToolUse",
-    matcher: "Bash|Write|Edit|MultiEdit|NotebookEdit",
+    matcher: "Bash|PowerShell|Write|Edit|NotebookEdit",
     description:
       "Blocks a short list of footguns with a structured deny: rm -rf on / or ~, force push, reset --hard, git clean, discarding all changes, curl | sh, destructive SQL, package publishing, AI attribution trailers, and writes to .env, credential, key, .git/, or node_modules files. Everything else passes silently.",
   },

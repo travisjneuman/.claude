@@ -39,7 +39,7 @@ That's it. The scripts handle everything cross-platform.
 
 ## How Marketplace Repos Work
 
-The `~/.claude` repo references 81 marketplace repositories. These are **not** tracked as git submodule content in the parent repo. Instead, each machine independently fetches the marketplace repos from their original upstreams using `_pull-all-repos.sh`.
+The `~/.claude` repo references 86 marketplace repositories. These are **not** tracked as git submodule content in the parent repo. Instead, each machine independently fetches the marketplace repos from their original upstreams using `_pull-all-repos.sh`.
 
 This means:
 
@@ -58,7 +58,7 @@ This means:
 ### What `_pull-all-repos.sh` Does
 
 1. Pulls the parent repo (`~/.claude`)
-2. Clones or pulls all 81 marketplace repos from their original upstreams
+2. Clones or pulls all 86 marketplace repos from their original upstreams
 3. Enforces `no_push` on every marketplace repo
 4. Fixes detached HEAD states automatically
 5. Pulls custom project directories (if configured via `.env.local`)
@@ -178,7 +178,7 @@ Ensure you're using Git Bash, not PowerShell or CMD:
 
 ### "Old device had init-marketplaces.sh -- is that still needed?"
 
-No. The `_pull-all-repos.sh` script replaces the old `init-marketplaces.sh` approach. It handles both initial cloning and subsequent updates in a single script. Just run `_pull-all-repos.sh` on any new or existing device.
+Either works. `scripts/init-marketplaces.sh` clones the marketplaces listed in `.gitmodules` and needs only stock bash. `_pull-all-repos.sh` updates them and also calls `init-marketplaces.sh` for any that are missing, but it needs Bash 4 or later (on macOS: `brew install bash`).
 
 ---
 
@@ -186,10 +186,10 @@ No. The `_pull-all-repos.sh` script replaces the old `init-marketplaces.sh` appr
 
 | Script                 | Purpose                                                                   |
 | ---------------------- | ------------------------------------------------------------------------- |
-| `_pull-all-repos.sh`   | **Primary:** Pull/clone all 81 marketplace repos + parent repo            |
+| `_pull-all-repos.sh`   | **Primary:** Pull/clone all 86 marketplace repos + parent repo            |
 | `setup-new-machine.sh` | Complete setup (plugins, hooks, etc.)                                     |
 | `_pull-all-repos.sh`       | Fix remote URLs without re-cloning                                        |
-| `init-marketplaces.sh` | Legacy: clone/reinitialize marketplaces (use \_pull-all-repos.sh instead) |
+| `init-marketplaces.sh` | Clone the marketplaces listed in `.gitmodules` (first time, or to repair a missing clone) |
 
 ---
 

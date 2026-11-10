@@ -18,7 +18,7 @@ Validation in this repo is by review, not tests (see `CLAUDE.md`). An executor c
 | 06 | `secret-scan.js` echoed the matched line into the conversation | Security | DONE |
 | 07 | No opt-out for background plugin and language-server installs; trust model undocumented | DX / Security | DONE |
 | 08 | README version, quick start, and `agents/README.md` out of step with the tree | Docs | DONE |
-| 09 | Published counts lag the tree (180 skills published, 183 exist; hook matcher text) | Correctness | TODO (needs an authorized count refresh) |
+| 09 | Published counts lagged the tree (180 skills published, 183 existed; hook matcher text) | Correctness | DONE 2026-11-10 (authorized refresh: 183 skills, 10 agents, 86 repos, 11,300+ marketplace skills) |
 | 10 | `settings.json` mixes toolkit defaults with the maintainer's own choices | DX | IN PROGRESS (groundwork shipped, dormant) |
 | 11 | Tier tuning moved agents without updating what describes them | Debt | DONE (agents are report-only by default) |
 | 12 | `setup-new-machine.sh` and the setup docs describe an older marketplace model | Docs / Debt | TODO |
@@ -36,11 +36,11 @@ Validation in this repo is by review, not tests (see `CLAUDE.md`). An executor c
 | 24 | Hooks assume `~/.claude`; `CLAUDE_CONFIG_DIR` is not honored | DX | TODO (low priority) |
 | 25 | Unreferenced files: `bin/prettier-hook.js`, `bin/setup.ps1` | Debt | TODO (archive, don't delete) |
 
-Recommended order for the open items: 09, then 10 (second release), 12, 13. Items 14, 24 and 25 only when those files are being edited anyway.
+Recommended order for the open items: 10 (second release, not before 2026-11-24), 12, 13. Items 14, 24 and 25 only when those files are being edited anyway.
 
 ## Open items
 
-### 09: Refresh the published counts
+### 09: Refresh the published counts (done 2026-11-10; kept for the procedure and the reminder)
 
 - **Evidence**: `counts.json` lists 180 skills; `git ls-files 'skills/*/SKILL.md'` gives 183 (`agent-browser`, `agent-desktop` and `image-studio` were added after the 2026-10-10 snapshot). Its hook entry for `guard.js` still shows the matcher without `PowerShell`. `INDEX.md` is regenerated and already says 183.
 - **Why it's open**: counts are regenerated only by an explicit, reviewed source refresh with private inputs ([docs/COUNT-PIPELINE.md](../docs/COUNT-PIPELINE.md)); the audits did not run one.

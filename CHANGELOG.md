@@ -4,6 +4,10 @@ All notable changes to the Ultimate Claude Code Toolkit.
 
 ## [Unreleased]
 
+### Counts refreshed (2026-11-10)
+- Explicit source refresh through `scripts/generate-counts.mjs`: **183 skills, 10 agents, 29 commands, 7 hooks, 10 rules, 86 marketplace repos, 11,353 unique marketplace skill bodies (shown as 11,300+)**. `counts.json`, `plugin.json`, the README badges and tables, the docs that carry these numbers, `.github/social-preview.html`, the website's marketplace snapshot, the GitHub profile and the portfolio were written from the same measurement. The `claude-plugins-official` entry reuses its reviewed 2026-10-10 committed snapshot (`docs/count-inputs/`), labelled with that date.
+- Docs that still told readers to run `git submodule` commands for marketplaces (`docs/PLUGIN-MANAGEMENT.md`, `docs/reference/tooling/external-repos.md`) now give the real commands; `docs/NEW-DEVICE-SETUP.md` no longer calls `init-marketplaces.sh` legacy. The README has a November 2026 "What's New" entry.
+
 ### Efficiency pass
 - **Hooks start without a shell.** Every hook in `settings.json` is now exec form (`"command": "node"` with an `args` list) instead of one shell string, so each Bash, PowerShell, Write and Edit call, and each response, starts Node directly. On Windows that removes a Git Bash start per call. Needs Claude Code 2.1.139 or later. The status line stays shell form, which is the only form it supports. `scripts/count-inventory.mjs` reads the hook name from `args` as well as `command`.
 - **The Stop hook is `async`.** `daily-maintenance.js` only checks a timestamp; Claude no longer waits on it after each response.

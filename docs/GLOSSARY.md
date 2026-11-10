@@ -44,7 +44,7 @@ A bash script that runs automatically during Claude Code lifecycle events (Sessi
 
 ### Marketplace
 
-A collection of 81 community-maintained GitHub repositories providing over 11,000+ additional skills, agents, and commands. Located in `~/.claude/plugins/marketplaces/`. Configured as read-only (fetch-only, push blocked).
+A collection of 86 community-maintained GitHub repositories providing over 11,300+ additional skills, agents, and commands. Located in `~/.claude/plugins/marketplaces/`. Configured as read-only (fetch-only, push blocked).
 
 ### MCP Server (Model Context Protocol)
 
@@ -149,7 +149,7 @@ The hosting platform for the showcase website. Auto-deploys from the GitHub repo
 
 ### Pull-All-Repos Script
 
-`~/.claude/_pull-all-repos.sh` — fetches updates for the parent repo and all 81 marketplace repos, fixes detached HEAD states, enforces no-push on marketplace repos, and updates documentation counts.
+`~/.claude/_pull-all-repos.sh` — fetches updates for the parent repo and all 86 marketplace repos, fixes detached HEAD states, enforces no-push on marketplace repos, and updates documentation counts.
 
 ### Update-Counts Script
 

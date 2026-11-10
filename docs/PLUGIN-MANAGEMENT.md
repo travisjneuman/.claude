@@ -10,13 +10,13 @@ category: ecosystem
 
 ## Contents
 
-[Overview](#overview) · [Current plugin set (authoritative)](#current-plugin-set-authoritative) · [Directory Structure](#directory-structure) · [Plugin Anatomy](#plugin-anatomy) · [Plugin Discovery and Loading](#plugin-discovery-and-loading) · [Installing Plugins from Marketplaces](#installing-plugins-from-marketplaces) · [The Marketplace Ecosystem](#the-marketplace-ecosystem) · [Creating Plugins](#creating-plugins) · [Updating Upstream Plugins](#updating-upstream-plugins) · [Creating a New Custom Plugin](#creating-a-new-custom-plugin) · [Marketplace Submodule Configuration](#marketplace-submodule-configuration) · [Troubleshooting](#troubleshooting) · [Quick Reference](#quick-reference) · [Workflow Summary](#workflow-summary) · [Related Documentation](#related-documentation)
+[Overview](#overview) · [Current plugin set (authoritative)](#current-plugin-set-authoritative) · [Directory Structure](#directory-structure) · [Plugin Anatomy](#plugin-anatomy) · [Plugin Discovery and Loading](#plugin-discovery-and-loading) · [Installing Plugins from Marketplaces](#installing-plugins-from-marketplaces) · [The Marketplace Ecosystem](#the-marketplace-ecosystem) · [Creating Plugins](#creating-plugins) · [Updating Upstream Plugins](#updating-upstream-plugins) · [Creating a New Custom Plugin](#creating-a-new-custom-plugin) · [Marketplace Clone Configuration](#marketplace-clone-configuration) · [Troubleshooting](#troubleshooting) · [Quick Reference](#quick-reference) · [Workflow Summary](#workflow-summary) · [Related Documentation](#related-documentation)
 
 ---
 
 ## Overview
 
-Plugins extend Claude Code with reusable skills, agents, commands, and hooks. This setup manages 81 marketplace repos containing 11,000+ community skills alongside 180 local skills. Marketplace repos are read-only references pulled from upstream, while local plugins are your own customizations tracked in your personal repo.
+Plugins extend Claude Code with reusable skills, agents, commands, and hooks. This setup manages 86 marketplace repos containing 11,300+ community skills alongside 183 local skills. Marketplace repos are read-only references pulled from upstream, while local plugins are your own customizations tracked in your personal repo.
 
 ---
 
@@ -66,7 +66,7 @@ plugins/
     ├── claude-code-plugins/
     │   └── plugins/           # Each subdirectory is one plugin
     ├── obra-superpowers/
-    └── ... (81 marketplace repos total)
+    └── ... (86 marketplace repos total)
 ```
 
 | Directory       | Purpose                                  | Git Tracked? |
@@ -158,7 +158,7 @@ claude doctor
 
 ## The Marketplace Ecosystem
 
-This setup aggregates 81 marketplace repos containing 11,000+ community-contributed skills across many domains.
+This setup aggregates 86 marketplace repos containing 11,300+ community-contributed skills across many domains.
 
 ### Notable Marketplaces
 
@@ -254,7 +254,7 @@ git add plugins/local/my-plugin/ && git commit -m "feat(plugins): create my-plug
 
 ---
 
-## Marketplace Submodule Configuration
+## Marketplace Clone Configuration
 
 Marketplace repos are configured as read-only:
 
@@ -279,13 +279,16 @@ OS-specific paths in `known_marketplaces.json` break when shared across macOS, L
 
 The error `fatal: 'no_push' does not appear to be a git repository` is expected. Marketplace repos are read-only by design.
 
-### Submodule Not Updating
+### Marketplace Clone Missing or Not Updating
+
+Marketplaces are plain, gitignored clones listed in `.gitmodules` (a manifest; nothing is a git submodule).
 
 ```bash
-git submodule init && git submodule update --remote
+bash ~/.claude/scripts/init-marketplaces.sh   # clone any that are missing
+bash ~/.claude/_pull-all-repos.sh             # fast-forward the ones that exist
 ```
 
-### Detached HEAD in Submodule
+### Detached HEAD in a Marketplace Clone
 
 ```bash
 cd ~/.claude/plugins/marketplaces/<repo-name>
@@ -340,6 +343,6 @@ This keeps upstream updates accessible while preserving your customizations.
 
 - `~/.claude/CLAUDE.md` -- Core rules and plugin philosophy
 - `~/.claude/docs/MARKETPLACE-GUIDE.md` -- Marketplace browsing and discovery
-- `~/.claude/docs/reference/tooling/external-repos.md` -- Full list of 81 marketplace repos
+- `~/.claude/docs/reference/tooling/external-repos.md` -- Full list of 86 marketplace repos
 - `~/.claude/docs/reference/tooling/troubleshooting.md` -- General troubleshooting
-- `~/.claude/skills/README.md` -- Skills overview (180 local skills)
+- `~/.claude/skills/README.md` -- Skills overview (183 local skills)
