@@ -470,49 +470,15 @@ function ProjectSettings({ project }: { project: Project }) {
 
 ---
 
-## Password Hashing Reference
+## Reference files
 
-| Algorithm | Recommended | Cost Factor | Notes |
-|---|---|---|---|
-| **argon2id** | Best | Memory: 64MB, Iterations: 3 | Best protection against GPU/ASIC attacks |
-| **bcrypt** | Good | Rounds: 12-14 | Widely supported, proven track record |
-| **scrypt** | Good | N: 2^15, r: 8, p: 1 | Memory-hard, good alternative to argon2 |
-| **PBKDF2** | Acceptable | Iterations: 600,000+ (SHA-256) | NIST recommended, but not memory-hard |
-| **MD5/SHA-256** | Never | N/A | Not a password hash -- too fast, no salt |
+Detailed material is in separate files so this overview stays short. Read only the file whose topic matches the task; each one is self-contained. Paths are relative to the folder that holds this `SKILL.md` (in the full toolkit install, `~/.claude/skills/authentication-patterns/`).
 
----
-
-## Anti-Patterns
-
-| Anti-Pattern | Why It's Bad | Better Approach |
-|---|---|---|
-| Storing passwords in plain text | Single breach exposes all passwords | Use argon2id or bcrypt with per-user salt |
-| JWT in localStorage | XSS can steal tokens | httpOnly Secure cookies |
-| Long-lived access tokens (days/weeks) | Extended damage window if stolen | 15-minute access tokens + refresh token rotation |
-| Checking permissions only on the client | Client-side checks are bypassable | Server-side middleware + client-side UX |
-| Custom OAuth implementation | Subtle security bugs (state, PKCE, redirect) | Use established libraries (Auth.js, Passport) |
-| SMS-based 2FA as only MFA option | SIM swapping vulnerability | Offer TOTP and WebAuthn alongside SMS |
-| No rate limiting on login endpoint | Brute force attacks | Rate limit by IP and username |
-| Password reset tokens that don't expire | Token can be used indefinitely | 1-hour expiry, single-use, invalidate on password change |
-
----
-
-## Checklist
-
-- [ ] Passwords hashed with argon2id or bcrypt (never plain text, never MD5/SHA)
-- [ ] OAuth flows use PKCE for public clients (SPAs, mobile)
-- [ ] Access tokens are short-lived (< 30 minutes)
-- [ ] Refresh tokens are rotated on use and stored server-side
-- [ ] Tokens delivered in httpOnly Secure SameSite cookies (web)
-- [ ] Login endpoint rate-limited (by IP and username)
-- [ ] MFA available for all users, enforced for admin roles
-- [ ] Recovery codes generated during MFA setup
-- [ ] RBAC permissions checked on server (middleware) and client (UX)
-- [ ] Password reset tokens expire in 1 hour, single-use
-- [ ] Account lockout after N failed attempts (with progressive delay)
-- [ ] Session invalidation on password change
-
----
+| Topic | File | Covers |
+| --- | --- | --- |
+| Password Hashing Reference | [`references/password-hashing-reference.md`](references/password-hashing-reference.md) | 12 lines |
+| Anti-Patterns | [`references/anti-patterns.md`](references/anti-patterns.md) | 15 lines |
+| Checklist | [`references/checklist.md`](references/checklist.md) | 17 lines |
 
 ## Related Resources
 

@@ -41,7 +41,6 @@ export default function SkillsPage() {
               name: s.name,
               description: s.description,
               category: s.category,
-              content: s.content,
               htmlContent: s.htmlContent,
             }))}
             categories={categories}

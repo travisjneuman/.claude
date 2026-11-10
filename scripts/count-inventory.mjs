@@ -103,7 +103,9 @@ export function collectCore(root) {
   const wiring = new Map();
   const add = (event, matcher, entry) => {
     if (entry.type !== "command" || typeof entry.command !== "string") return;
-    const name = entry.command.match(/\bHOOK_NAME\s*=\s*['"]([\w.-]+)['"]/)?.[1];
+    // Shell form keeps the dispatcher script in `command`; exec form keeps it in `args`.
+    const source = [entry.command, ...(Array.isArray(entry.args) ? entry.args : [])].join(" ");
+    const name = source.match(/\bHOOK_NAME\s*=\s*['"]([\w.-]+)['"]/)?.[1];
     if (!name || !hookFiles.includes(`hooks/${name}`)) return; // private hook or dispatcher
     const item = wiring.get(name) || { file: `hooks/${name}`, events: [], matchers: [] };
     if (!item.events.includes(event)) item.events.push(event);

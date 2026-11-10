@@ -145,7 +145,7 @@ If you already have a `~/.claude` you like, you can take only the skills. This a
 /plugin install tjn-skills@tjn-claude
 ```
 
-Skills then appear under the plugin's name, with their descriptions; Claude Code trims the least-used descriptions on its own if the listing gets too large, and `/skill-doctor` shows what each one costs. The agents, commands, rules, hooks, and `CLAUDE.md` are not part of the plugin; for those, use the full install above. (Added November 2026; if it misbehaves on your Claude Code version, please open an issue.)
+That is all 183 skills. Claude Code lists plugin skills with their descriptions and trims the least-used ones when the listing outgrows its budget, so if you only work in one area, install a domain bundle instead (`tjn-frontend`, `tjn-mobile`, `tjn-backend`, `tjn-systems-infra`, `tjn-quality-security`, `tjn-data-ai`, `tjn-business`, `tjn-creative`, `tjn-research`, `tjn-workflow`); the full list with install lines is in [`skills/README.md`](./skills/README.md#install-as-a-plugin). `/skill-doctor` shows what each skill costs. The agents, commands, rules, hooks, and `CLAUDE.md` are not part of the plugin; for those, use the full install above. (Added November 2026; if it misbehaves on your Claude Code version, please open an issue.)
 
 ### Optional: community marketplaces
 
@@ -179,6 +179,7 @@ Read this before the first session. Everything here is switched off with one lin
 | Install and update the plugins `settings.json` enables | After that pull | `PLUGIN_AUTOINSTALL=0` |
 | Install missing language servers for the LSP plugins (`npm install -g`, or `pacman` where passwordless sudo exists) | After that pull | `LSP_AUTOINSTALL=0` |
 | Tally which skills, agents, and commands were used (names and counts only, stays on your machine) | Daily | `DAILY_MAINTENANCE=0` |
+| Session transcripts are kept instead of deleted after 30 days (`cleanupPeriodDays` is 36500) | Always | Lower `cleanupPeriodDays` in `settings.json` |
 | Commit and push pending work in repos you own | Session end and daily, **only after you set `GITHUB_OWNERS`** | Leave `GITHUB_OWNERS` unset, or `SESSION_END_AUTOPUSH=0` |
 
 **Trust model.** The daily pull brings in whatever the `origin` of your `~/.claude` publishes, including hook scripts that then run on your machine. If you cloned this repo directly, that origin is this repo. If you'd rather review changes first, use the template (your copy becomes the origin and you merge upstream when you choose) or set `PULL_INTERVAL_HOURS=0` and pull by hand. `settings.json` is the maintainer's working configuration: review its `enabledPlugins`, `env`, and `permissions` and make them yours. Marketplace clones are other people's repositories, pulled at their latest commit and unreviewed; Claude can read and follow a skill from one. That is intended for a full-access setup, and [SECURITY.md](./SECURITY.md) says how to narrow it.
@@ -429,7 +430,7 @@ See **[docs/NEW-DEVICE-SETUP.md](./docs/NEW-DEVICE-SETUP.md)** for the full walk
 | **Windows 11** | Full support | Git Bash | Hooks use Node.js runner to avoid WSL issues |
 | **WSL** | Works | bash | Native Linux behavior inside WSL |
 
-**Requirements:** Node.js (comes with Claude Code), Git, bash (Git Bash on Windows).
+**Requirements:** Claude Code 2.1.139 or later (the hooks use exec form), Node.js (comes with Claude Code), Git, bash (Git Bash on Windows).
 
 ---
 

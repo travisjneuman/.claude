@@ -1,8 +1,10 @@
 #!/usr/bin/env node
 // Cross-platform hook runner for Claude Code.
 //
-// Usage (from settings.json):
-//   node -e "process.env.HOOK_NAME='guard.js';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))"
+// Usage (from settings.json), in exec form so no shell is started per hook call
+// (needs Claude Code 2.1.139 or later; the status line is the one shell-form caller):
+//   "command": "node",
+//   "args": ["-e", "process.env.HOOK_NAME='guard.js';require(require('path').join(require('os').homedir(),'.claude','hooks','run-hook'))"]
 //
 // Resolution order for HOOK_NAME:
 //   1. ~/.claude/hooks/<name>          (public toolkit hook)

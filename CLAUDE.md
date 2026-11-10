@@ -74,6 +74,10 @@ Lane order for all web work: the active app's built-in browser (default); then a
 - When corrected on a repeated mistake, propose the rule that would have prevented it.
 - After changing toolkit skills, agents, commands, hooks, or rules, update the affected README and regenerate `INDEX.md` with `scripts/regenerate-index.sh`; the pre-commit hook only runs the public-safety gate.
 
+## Compact instructions
+
+When compacting, keep: the current request and every explicit "do not"; decisions made and why; files changed and their state; commands run with their outcomes; open blockers and unanswered questions. Drop tool output and file contents that were already acted on.
+
 ## Communication
 
 Direct and grounded; no celebration or filler. Short summaries after tool use. Prose over bullet spam. Code blocks for code only. No emojis unless asked.

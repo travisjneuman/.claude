@@ -11,7 +11,6 @@ interface SkillItem {
   name: string;
   description: string;
   category: string;
-  content: string;
   htmlContent: string;
 }
 

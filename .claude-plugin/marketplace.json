@@ -4,13 +4,13 @@
     "name": "travisjneuman",
     "url": "https://github.com/travisjneuman"
   },
-  "description": "The skills from the tjn.claude toolkit as an installable plugin, for people who want them without replacing their own ~/.claude.",
+  "description": "The skills from the tjn.claude toolkit as installable plugins, for people who want them without replacing their own ~/.claude. Install everything (tjn-skills) or one domain bundle. Skills only: no hooks, settings, permission changes or background jobs.",
   "plugins": [
     {
       "name": "tjn-skills",
       "source": "./skills",
       "skills": ".",
-      "description": "Every skill in the toolkit's skills/ folder, including the agent-<name> specialists that run as their own subagent. Skills only: no hooks, no settings, no permission changes, no background jobs.",
+      "description": "All 183 skills, including the agent-<name> specialists that run as their own subagent. Don't combine it with the bundles below; they are subsets of it.",
       "category": "development",
       "author": {
         "name": "travisjneuman",
@@ -18,8 +18,340 @@
       },
       "homepage": "https://claude.travisjneuman.com",
       "repository": "https://github.com/travisjneuman/.claude",
-      "license": "MIT",
-      "keywords": ["skills", "agents", "full-stack", "mobile", "devops", "security", "business", "design"]
+      "license": "MIT"
+    },
+    {
+      "name": "tjn-frontend",
+      "source": "./skills",
+      "skills": [
+        "./accessibility-a11y",
+        "./agent-accessibility-expert",
+        "./agent-browser-extension-developer",
+        "./agent-i18n-specialist",
+        "./agent-next-js-expert",
+        "./agent-seo-specialist",
+        "./agent-svelte-expert",
+        "./agent-vue-nuxt-expert",
+        "./frontend-enhancer",
+        "./generic-design-system",
+        "./generic-fullstack-design-system",
+        "./generic-fullstack-ux-designer",
+        "./generic-react-design-system",
+        "./generic-react-feature-developer",
+        "./generic-react-ux-designer",
+        "./generic-static-design-system",
+        "./generic-static-ux-designer",
+        "./generic-ux-designer",
+        "./i18n-localization",
+        "./pwa-development",
+        "./svelte-development",
+        "./ui-animation",
+        "./ui-research",
+        "./vue-development"
+      ],
+      "description": "Web frontend: React, Vue, Svelte, design systems, UX, animation, accessibility. 24 skills.",
+      "category": "development",
+      "author": {
+        "name": "travisjneuman",
+        "url": "https://github.com/travisjneuman"
+      },
+      "homepage": "https://claude.travisjneuman.com",
+      "repository": "https://github.com/travisjneuman/.claude",
+      "license": "MIT"
+    },
+    {
+      "name": "tjn-mobile",
+      "source": "./skills",
+      "skills": [
+        "./agent-android-developer",
+        "./agent-flutter-developer",
+        "./agent-kotlin-expert",
+        "./agent-mobile-architect",
+        "./agent-mobile-release-manager",
+        "./android-development",
+        "./flutter-development",
+        "./ios-development",
+        "./kotlin-multiplatform",
+        "./mobile-cicd",
+        "./react-native"
+      ],
+      "description": "Mobile: iOS, Android, React Native, Flutter, Kotlin Multiplatform, mobile release. 11 skills.",
+      "category": "development",
+      "author": {
+        "name": "travisjneuman",
+        "url": "https://github.com/travisjneuman"
+      },
+      "homepage": "https://claude.travisjneuman.com",
+      "repository": "https://github.com/travisjneuman/.claude",
+      "license": "MIT"
+    },
+    {
+      "name": "tjn-backend",
+      "source": "./skills",
+      "skills": [
+        "./agent-api-designer",
+        "./agent-api-integration-specialist",
+        "./agent-auth-specialist",
+        "./agent-database-expert",
+        "./agent-django-fastapi-expert",
+        "./agent-email-specialist",
+        "./agent-event-driven-architect",
+        "./agent-graphql-architect",
+        "./agent-microservices-architect",
+        "./agent-payment-billing-specialist",
+        "./agent-pwa-specialist",
+        "./agent-realtime-specialist",
+        "./agent-serverless-specialist",
+        "./api-design",
+        "./authentication-patterns",
+        "./database-expert",
+        "./devex-sdk-design",
+        "./edge-computing",
+        "./email-systems",
+        "./event-driven-architecture",
+        "./generic-fullstack-feature-developer",
+        "./graphql-expert",
+        "./low-code-platforms",
+        "./microservices-architecture",
+        "./serverless-development",
+        "./websockets-realtime"
+      ],
+      "description": "Backend: APIs, databases, GraphQL, auth, payments, realtime, serverless, microservices. 26 skills.",
+      "category": "development",
+      "author": {
+        "name": "travisjneuman",
+        "url": "https://github.com/travisjneuman"
+      },
+      "homepage": "https://claude.travisjneuman.com",
+      "repository": "https://github.com/travisjneuman/.claude",
+      "license": "MIT"
+    },
+    {
+      "name": "tjn-systems-infra",
+      "source": "./skills",
+      "skills": [
+        "./agent-blockchain-developer",
+        "./agent-cli-developer",
+        "./agent-cloud-architect",
+        "./agent-cpp-expert",
+        "./agent-desktop",
+        "./agent-desktop-developer",
+        "./agent-embedded-developer",
+        "./agent-game-developer",
+        "./agent-macos-developer",
+        "./agent-observability-engineer",
+        "./agent-python-expert",
+        "./agent-rust-expert",
+        "./agent-wasm-specialist",
+        "./ar-vr-xr",
+        "./blockchain-web3",
+        "./devops-cloud",
+        "./electron-desktop",
+        "./embedded-iot",
+        "./game-development",
+        "./growth-engineering",
+        "./macos-native",
+        "./monitoring-observability",
+        "./tauri-desktop"
+      ],
+      "description": "Systems and infrastructure: DevOps, cloud, observability, desktop, embedded, edge, languages. 23 skills.",
+      "category": "development",
+      "author": {
+        "name": "travisjneuman",
+        "url": "https://github.com/travisjneuman"
+      },
+      "homepage": "https://claude.travisjneuman.com",
+      "repository": "https://github.com/travisjneuman/.claude",
+      "license": "MIT"
+    },
+    {
+      "name": "tjn-quality-security",
+      "source": "./skills",
+      "skills": [
+        "./agent-code-explainer",
+        "./agent-compliance-engineer",
+        "./agent-devsecops-engineer",
+        "./agent-documentation-writer",
+        "./agent-e2e-test-specialist",
+        "./agent-migration-specialist",
+        "./agent-technical-writer",
+        "./agent-test-generator",
+        "./application-security",
+        "./codebase-documenter",
+        "./compliance-engineering",
+        "./debug-systematic",
+        "./generic-code-reviewer",
+        "./generic-fullstack-code-reviewer",
+        "./generic-react-code-reviewer",
+        "./generic-static-code-reviewer",
+        "./literature-review-planner",
+        "./payment-integration",
+        "./performance-engineering",
+        "./security",
+        "./statistics-verifier",
+        "./tdd-workflow",
+        "./tech-debt-analyzer",
+        "./test-specialist"
+      ],
+      "description": "Code quality and security: review, debugging, refactoring, performance, application security, compliance. 24 skills.",
+      "category": "development",
+      "author": {
+        "name": "travisjneuman",
+        "url": "https://github.com/travisjneuman"
+      },
+      "homepage": "https://claude.travisjneuman.com",
+      "repository": "https://github.com/travisjneuman/.claude",
+      "license": "MIT"
+    },
+    {
+      "name": "tjn-data-ai",
+      "source": "./skills",
+      "skills": [
+        "./agent-data-engineer",
+        "./agent-ml-engineer",
+        "./agent-product-analytics-specialist",
+        "./ai-ml-development",
+        "./data-engineering",
+        "./data-science",
+        "./llm-app-development",
+        "./product-analytics",
+        "./seo-analytics-auditor"
+      ],
+      "description": "Data and AI: data engineering, data science, ML, LLM applications. 9 skills.",
+      "category": "development",
+      "author": {
+        "name": "travisjneuman",
+        "url": "https://github.com/travisjneuman"
+      },
+      "homepage": "https://claude.travisjneuman.com",
+      "repository": "https://github.com/travisjneuman/.claude",
+      "license": "MIT"
+    },
+    {
+      "name": "tjn-business",
+      "source": "./skills",
+      "skills": [
+        "./agent-monetization-expert",
+        "./agent-startup-advisor",
+        "./ai-policy-generator",
+        "./battle-card-builder",
+        "./business-strategy",
+        "./contract-redliner",
+        "./customer-persona-builder",
+        "./customer-success",
+        "./finance",
+        "./financial-scenario-planner",
+        "./fundraising-analyzer",
+        "./grant-proposal-builder",
+        "./hr-talent",
+        "./innovation",
+        "./investment-memo-generator",
+        "./leadership",
+        "./legal-compliance",
+        "./marketing",
+        "./monetization-strategy",
+        "./operations",
+        "./options-comparator",
+        "./process-flowchart-designer",
+        "./product-management",
+        "./real-estate-analyzer",
+        "./risk-management",
+        "./sales",
+        "./startup-launch",
+        "./supply-chain-optimizer",
+        "./sustainability-esg"
+      ],
+      "description": "Business: strategy, finance, marketing, sales, product, legal, operations, HR. 29 skills.",
+      "category": "development",
+      "author": {
+        "name": "travisjneuman",
+        "url": "https://github.com/travisjneuman"
+      },
+      "homepage": "https://claude.travisjneuman.com",
+      "repository": "https://github.com/travisjneuman/.claude",
+      "license": "MIT"
+    },
+    {
+      "name": "tjn-creative",
+      "source": "./skills",
+      "skills": [
+        "./agent-audio-engineer",
+        "./agent-brand-strategist",
+        "./agent-graphic-designer",
+        "./agent-motion-designer",
+        "./agent-video-producer",
+        "./audio-production",
+        "./brand-identity",
+        "./content-repurposer",
+        "./graphic-design",
+        "./impact-report-writer",
+        "./newsletter-creator",
+        "./podcast-producer",
+        "./video-production"
+      ],
+      "description": "Creative: brand, graphic design, video, audio, content. 13 skills.",
+      "category": "development",
+      "author": {
+        "name": "travisjneuman",
+        "url": "https://github.com/travisjneuman"
+      },
+      "homepage": "https://claude.travisjneuman.com",
+      "repository": "https://github.com/travisjneuman/.claude",
+      "license": "MIT"
+    },
+    {
+      "name": "tjn-research",
+      "source": "./skills",
+      "skills": [
+        "./agent-ux-researcher",
+        "./career-path-planner",
+        "./case-interview-practice",
+        "./course-material-creator",
+        "./debate-practice-coach",
+        "./health-wellness",
+        "./learning-gap-analyzer",
+        "./onboarding-guide-creator",
+        "./rd-management",
+        "./recipe-card-creator",
+        "./research-presenter",
+        "./travel-planner",
+        "./volunteer-coordinator"
+      ],
+      "description": "Research and planning: research presentation, analysis, education, personal planning. 13 skills.",
+      "category": "development",
+      "author": {
+        "name": "travisjneuman",
+        "url": "https://github.com/travisjneuman"
+      },
+      "homepage": "https://claude.travisjneuman.com",
+      "repository": "https://github.com/travisjneuman/.claude",
+      "license": "MIT"
+    },
+    {
+      "name": "tjn-workflow",
+      "source": "./skills",
+      "skills": [
+        "./agent-browser",
+        "./agent-go-expert",
+        "./agent-product-manager",
+        "./agent-teams",
+        "./core-workflow",
+        "./event-planner",
+        "./generic-feature-developer",
+        "./generic-static-feature-developer",
+        "./image-studio",
+        "./status-report-generator",
+        "./toolkit-router"
+      ],
+      "description": "Workflow: task routing, documentation, toolkit helpers. 11 skills.",
+      "category": "development",
+      "author": {
+        "name": "travisjneuman",
+        "url": "https://github.com/travisjneuman"
+      },
+      "homepage": "https://claude.travisjneuman.com",
+      "repository": "https://github.com/travisjneuman/.claude",
+      "license": "MIT"
     }
   ]
 }

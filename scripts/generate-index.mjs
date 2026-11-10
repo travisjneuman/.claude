@@ -264,8 +264,52 @@ for (const n of nodes.filter((n) => (n.type === "skill" || n.type === "command")
 const sorted = Object.fromEntries(Object.keys(overrides).sort().map((k) => [k, overrides[k]]));
 const settingsOut = JSON.stringify({ ...settings, skillOverrides: sorted }, null, 2) + "\n";
 
+// ---------- plugin marketplace (.claude-plugin/marketplace.json) ----------
+// One plugin with every skill, plus smaller bundles by domain. A bundle is the same
+// skills/ folder with a `skills` list naming only its folders, so nothing is copied.
+// Claude Code lists plugin skills with their descriptions and trims the listing to a
+// budget (1% of the context window), so a bundle keeps descriptions the all-in-one loses.
+const BUNDLES = [
+  ["tjn-frontend", ["frontend"], "Web frontend: React, Vue, Svelte, design systems, UX, animation, accessibility."],
+  ["tjn-mobile", ["mobile"], "Mobile: iOS, Android, React Native, Flutter, Kotlin Multiplatform, mobile release."],
+  ["tjn-backend", ["backend"], "Backend: APIs, databases, GraphQL, auth, payments, realtime, serverless, microservices."],
+  ["tjn-systems-infra", ["systems", "infra"], "Systems and infrastructure: DevOps, cloud, observability, desktop, embedded, edge, languages."],
+  ["tjn-quality-security", ["quality", "security"], "Code quality and security: review, debugging, refactoring, performance, application security, compliance."],
+  ["tjn-data-ai", ["data-ai"], "Data and AI: data engineering, data science, ML, LLM applications."],
+  ["tjn-business", ["business"], "Business: strategy, finance, marketing, sales, product, legal, operations, HR."],
+  ["tjn-creative", ["creative"], "Creative: brand, graphic design, video, audio, content."],
+  ["tjn-research", ["research"], "Research and planning: research presentation, analysis, education, personal planning."],
+  ["tjn-workflow", ["workflow", "other"], "Workflow: task routing, documentation, toolkit helpers."],
+];
+const pluginSkills = nodes.filter((n) => n.type === "skill").sort((a, b) => a.name.localeCompare(b.name));
+const bundled = new Set(BUNDLES.flatMap(([, domains]) => domains));
+const unbundled = [...new Set(pluginSkills.map((n) => n.domain))].filter((d) => !bundled.has(d));
+if (unbundled.length) throw new Error(`Plugin bundles do not cover domain(s): ${unbundled.join(", ")}`);
+const pluginMeta = {
+  category: "development",
+  author: { name: "travisjneuman", url: "https://github.com/travisjneuman" },
+  homepage: "https://claude.travisjneuman.com",
+  repository: "https://github.com/travisjneuman/.claude",
+  license: "MIT",
+};
+const marketplaceJson = JSON.stringify({
+  name: "tjn-claude",
+  owner: { name: "travisjneuman", url: "https://github.com/travisjneuman" },
+  description: "The skills from the tjn.claude toolkit as installable plugins, for people who want them without replacing their own ~/.claude. Install everything (tjn-skills) or one domain bundle. Skills only: no hooks, settings, permission changes or background jobs.",
+  plugins: [
+    { name: "tjn-skills", source: "./skills", skills: ".",
+      description: `All ${pluginSkills.length} skills, including the agent-<name> specialists that run as their own subagent. Don't combine it with the bundles below; they are subsets of it.`,
+      ...pluginMeta },
+    ...BUNDLES.map(([name, domains, description]) => {
+      const members = pluginSkills.filter((n) => domains.includes(n.domain)).map((n) => `./${n.name}`);
+      return { name, source: "./skills", skills: members, description: `${description} ${members.length} skills.`, ...pluginMeta };
+    }),
+  ],
+}, null, 2) + "\n";
+
 // ---------- write / check ----------
 const outputs = [
+  [path.join(root, ".claude-plugin/marketplace.json"), marketplaceJson],
   [path.join(root, "INDEX.md"), indexMd],
   [path.join(root, "index/graph.json"), graph],
   [path.join(root, "skills/MASTER_INDEX.md"), masterMd],

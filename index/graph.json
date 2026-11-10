@@ -2041,15 +2041,6 @@
    "description": "Go Rules"
   },
   {
-   "id": "rule:image-assets",
-   "type": "rule",
-   "name": "image-assets",
-   "path": "rules/image-assets.md",
-   "domain": "other",
-   "loads": "every session",
-   "description": "Image asset requests"
-  },
-  {
    "id": "rule:java-kotlin",
    "type": "rule",
    "name": "java-kotlin",
@@ -3106,11 +3097,6 @@
    "from": "skill:generic-static-ux-designer",
    "to": "doc:checklists/static-sites",
    "rel": "reference"
-  },
-  {
-   "from": "skill:image-studio",
-   "to": "rule:image-assets",
-   "rel": "rules"
   },
   {
    "from": "skill:ios-development",

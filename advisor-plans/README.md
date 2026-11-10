@@ -51,7 +51,8 @@ Recommended order for the open items: 09, then 10 (second release), 12, 13. Item
 
 ### 10: Separate toolkit defaults from the maintainer's own settings (second release)
 
-- **Decision (owner, 2026-11)**: go ahead, in two releases.
+- **Decision (owner, 2026-11)**: go ahead, in two releases. The first shipped on 2026-11-10 (`2993291`). **Do not ship the second before 2026-11-24**: anyone who cloned directly updates through the daily background pull, and they need the first release (which carries the rebuild step) on their machine before the commit that removes `settings.json` arrives. The `post-merge` hook was installed on all five of the maintainer's hosts on 2026-11-10.
+- **Also goes in the private overlay at that point**: `cleanupPeriodDays` (the maintainer keeps every session; the public default can then return to Claude Code's), and the per-project Unreal plugin change.
 - **Why two**: once `settings.json` stops being tracked, the pull that delivers that commit deletes the file from every checkout, and with it all hook wiring. Something must rebuild it immediately after that pull, and that something has to be on the machine before the pull arrives.
 - **Shipped in the first release (dormant)**: `scripts/build-settings.mjs` (merges `settings.base.json` and a private `local/settings.overlay.json` into `settings.json`; does nothing while `settings.json` is tracked or the base is absent), `scripts/hooks/post-merge.sh`, and calls from `_pull-all-repos.sh` and `scripts/install.sh`.
 - **Facts checked against the Claude Code docs**: there is no user-level `settings.local.json` (only `.claude/settings.local.json` at project scope); `--settings` applies to one session; array settings such as `permissions.allow` combine across scopes, but there is only one user-scope file.
@@ -112,7 +113,12 @@ Measured on the maintainer's machine from session transcripts (sizes only): a de
 
 Inside the skill listing: the toolkit's own design works. 272 name-only entries cost 6,381 chars (about 1,600 tokens) and the two core skills 619. The other 19,000 chars are 45 descriptions the toolkit's overrides cannot reach: 23 skills synced from claude.ai (11,500 chars), and plugin skills from `unreal-engine-skills-for-claude-code` (3 skills, 3,259 chars), `cloudflare` (14, 2,703), `brag`, `frontend-design` and `claude-codex-computer-use`. Claude Code's docs say plugin skills are not affected by `skillOverrides`, and synced skills load as a plugin.
 
-Ranked by saving per unit of work. E1 to E6 are small.
+Status on 2026-11-10: **E1, E2, E3, E6, E7, E8 and E9 are done** (see the CHANGELOG, "Efficiency pass"), and the dead overrides from E4 are removed. Still open: the sync decision in E4, E5, E10 and E11.
+
+- **E4, sync decision**: don't turn sync off wholesale. Usage counts for 33 days across five hosts show one synced skill in use, `anthropic-skills:built-in-browser`, and turning sync off would take it away too. The saving comes from switching off the unused synced skills one by one in the claude.ai skills settings, which only the account owner can do.
+- **E5, per-project Unreal plugin**: no Unreal skill use was recorded in those 33 days. Moving the plugin from user scope to the Unreal projects' own `.claude/settings.json` belongs with item 10's second release, because `enabledPlugins` is public until then.
+
+The table below is the roadmap as written before those changes.
 
 | # | Change | Saves | Evidence | Effort / risk |
 |---|--------|-------|----------|---------------|
