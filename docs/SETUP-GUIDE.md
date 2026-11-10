@@ -49,13 +49,17 @@ bash ~/.claude/scripts/setup-new-machine.sh
 
 ---
 
-## Alternative: One-Line Install
+## Alternative: Installer Script
 
-**macOS / Linux / Windows (Git Bash):**
+**macOS / Linux / Windows (Git Bash).** Download it, read it, then run it (the toolkit's own guard blocks piping a download into a shell):
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/travisjneuman/.claude/master/scripts/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/travisjneuman/.claude/master/scripts/install.sh -o install.sh
+less install.sh
+bash install.sh
 ```
+
+It only clones the toolkit (or fast-forward pulls an existing checkout) and installs the repo's git hooks. If `~/.claude` already exists and isn't a checkout, use `scripts/install-in-place.sh`, which keeps your files.
 
 After install, run `/bootstrap` in Claude Code to verify configuration.
 

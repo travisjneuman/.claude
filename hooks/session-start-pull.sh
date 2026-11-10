@@ -48,7 +48,10 @@ for b in /opt/homebrew/bin/bash /usr/local/bin/bash; do [ -x "$b" ] && BASH4="$b
   kill "$WATCHDOG" 2>/dev/null
   echo "=== Pull ended (exit $RC): $(date) ==="
   # Converge plugins + language servers with the toolkit settings.
-  [ -f "$CLAUDE_DIR/scripts/install-plugins.sh" ] && bash "$CLAUDE_DIR/scripts/install-plugins.sh"
+  # PLUGIN_AUTOINSTALL=0 (local layer) turns this background step off.
+  if [ "$(env_get PLUGIN_AUTOINSTALL)" != "0" ] && [ -f "$CLAUDE_DIR/scripts/install-plugins.sh" ]; then
+    bash "$CLAUDE_DIR/scripts/install-plugins.sh"
+  fi
 ) >> "$LOGFILE" 2>&1 &
 
 exit 0

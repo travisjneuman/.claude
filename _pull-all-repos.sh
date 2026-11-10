@@ -4,7 +4,7 @@
 # =============================================================================
 #
 # Cross-platform script (Linux, macOS, Windows via Git Bash) that:
-#   1. Pulls the parent ~/.claude repo (travisjneuman/.claude)
+#   1. Pulls the parent ~/.claude repo (whatever its origin is)
 #   2. Pulls all marketplace clones listed in .gitmodules
 #   3. Enforces no_push on all marketplace clones (prevents accidental pushes)
 #   4. Pulls all git repos recursively in your custom project directories (optional)
@@ -16,7 +16,8 @@
 #   - Pulls parent repo first, then marketplace clones, then custom directories
 #   - Reports and skips repos in detached HEAD state (never checks out)
 #   - Detects main/master/development branches
-#   - Enforces no_push on marketplace and non-Travis-owned custom repos
+#   - Enforces no_push on marketplace clones, and on custom repos whose owner
+#     is not in GITHUB_OWNERS (only when GITHUB_OWNERS is set)
 #   - Safe: only fast-forward pulls, never merges, rebases, pushes external repos, or discards changes
 #   - Works on: Linux (including Arch), macOS, Windows (Git Bash)
 #
@@ -108,7 +109,7 @@ while [[ $# -gt 0 ]]; do
             echo "Also enforces no_push on all marketplace clones to prevent accidental pushes."
             echo ""
             echo "Repos pulled:"
-            echo "  1. ~/.claude (travisjneuman/.claude) - parent repo (push enabled)"
+            echo "  1. ~/.claude - parent repo (push enabled)"
             echo "  2. ~/.claude/plugins/marketplaces/* - ignored marketplace clones from .gitmodules (no_push enforced)"
             echo "  3. Custom project directories (if configured) - recursively discovered repos"
             echo ""
@@ -187,11 +188,20 @@ repo_is_dirty() {
     [[ -n "$(git -C "$repo_path" status --porcelain 2>/dev/null)" ]]
 }
 
-remote_is_travis_owned() {
+# Owners whose repos keep push access: GITHUB_OWNERS (comma list) from the
+# local layer, the same setting the session-end hook uses.
+GITHUB_OWNERS=$(env_get GITHUB_OWNERS)
+
+remote_is_owned() {
     local repo_path="$1"
-    local fetch_url
+    local fetch_url owner owners
     fetch_url=$(git -C "$repo_path" remote get-url origin 2>/dev/null) || return 1
-    [[ "$fetch_url" == *"github.com/travisjneuman/"* ]] || [[ "$fetch_url" == git@github.com:travisjneuman/* ]]
+    IFS=',' read -ra owners <<< "$GITHUB_OWNERS"
+    for owner in "${owners[@]}"; do
+        owner="${owner// /}"
+        [[ -n "$owner" && "$fetch_url" =~ github\.com[:/]${owner}/ ]] && return 0
+    done
+    return 1
 }
 
 enforce_custom_push_policy() {
@@ -211,18 +221,22 @@ enforce_custom_push_policy() {
             ;;
     esac
 
-    if remote_is_travis_owned "$repo_path"; then
+    # Without GITHUB_OWNERS there is no way to tell your repos from anyone
+    # else's, so push URLs are left exactly as they are.
+    [[ -z "$GITHUB_OWNERS" ]] && return 0
+
+    if remote_is_owned "$repo_path"; then
         if [[ "$push_url" == "no_push" ]]; then
             local fetch_url
             fetch_url=$(git -C "$repo_path" remote get-url origin 2>/dev/null) || return 0
             git -C "$repo_path" remote set-url --push origin "$fetch_url" 2>/dev/null || true
-            echo -e "${CYAN}  $repo_name: push restored for Travis-owned repo${NC}"
+            echo -e "${CYAN}  $repo_name: push restored (owner in GITHUB_OWNERS)${NC}"
             NO_PUSH_FIXED=$((NO_PUSH_FIXED + 1))
         fi
     else
         if [[ -n "$push_url" && "$push_url" != "no_push" ]]; then
             git -C "$repo_path" remote set-url --push origin no_push 2>/dev/null || true
-            echo -e "${CYAN}  $repo_name: push disabled (non-Travis repo)${NC}"
+            echo -e "${CYAN}  $repo_name: push disabled (owner not in GITHUB_OWNERS)${NC}"
             NO_PUSH_FIXED=$((NO_PUSH_FIXED + 1))
         fi
     fi
@@ -371,7 +385,7 @@ echo ""
 echo -e "${BOLD}${BLUE}=== Pull All Repos ===${NC}"
 echo ""
 echo -e "${BOLD}Parent Repo (~/.claude):${NC}"
-process_repo "$SCRIPT_DIR" ".claude (travisjneuman/.claude)" true
+process_repo "$SCRIPT_DIR" ".claude" true
 
 # =============================================================================
 # PHASE 2: Pull all marketplace clones
@@ -475,7 +489,7 @@ if [[ ${#CUSTOM_PROJECT_DIRS[@]} -gt 0 && "${PULL_CUSTOM_PROJECT_DIRS:-1}" != "0
         else
             echo ""
             echo -e "${YELLOW}Custom directory not found: $project_dir${NC}"
-            echo -e "${DIM}  (Edit CUSTOM_PROJECT_DIRS in this script to fix)${NC}"
+            echo -e "${DIM}  (Edit CUSTOM_PROJECT_DIRS in ~/.claude/.env.local to fix)${NC}"
         fi
     done
 fi

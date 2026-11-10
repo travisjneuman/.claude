@@ -2,3 +2,9 @@
 # Claude Code rewrites these with LF on every OS; keep checkouts LF so Windows shows no phantom diffs.
 settings.json text eol=lf
 .claude/settings.json text eol=lf
+# Scripts must be LF to run under Git Bash, and the tier tuner rewrites agent and
+# skill files by frontmatter: CRLF checkouts once produced broken skills.
+*.sh text eol=lf
+*.js text eol=lf
+*.mjs text eol=lf
+*.md text eol=lf

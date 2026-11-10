@@ -57,9 +57,12 @@ Keep a backup of `local/` somewhere private (a private repo or notes vault). Git
 
 | Key | Where | Effect |
 | --- | --- | --- |
-| `GITHUB_OWNERS` | `shared.env` | Comma list of GitHub owners whose repos the session-end hook may push. Unset = report only. |
+| `GITHUB_OWNERS` | `shared.env` | Comma list of GitHub owners whose repos the session-end hook may commit and push. Unset = it does nothing. When set, the pull script also sets `no_push` on repos under `CUSTOM_PROJECT_DIRS` owned by anyone else. |
 | `PULL_INTERVAL_HOURS` | `shared.env` | Background pull cadence (default 24, `0` disables). |
 | `PULL_CUSTOM_PROJECT_DIRS` | `shared.env` | `0` = don't pull your project repos, only `~/.claude` + marketplaces. |
 | `SESSION_END_AUTOPUSH` | `shared.env` | `0` = never push at session end. |
+| `PLUGIN_AUTOINSTALL` | `shared.env` | `0` = the background pull never installs or updates plugins. |
+| `LSP_AUTOINSTALL` | `shared.env` | `0` = never install language-server packages globally. |
+| `DAILY_MAINTENANCE` | `shared.env` | `0` = no daily usage tally or commit sweep. |
 | `CUSTOM_PROJECT_DIRS` | host file | Comma list of project roots for the repo-health banner and daily pull. |
 | `REPO_PUSH_COMMAND` | host file | Push command run inside a repo instead of `git push`. |

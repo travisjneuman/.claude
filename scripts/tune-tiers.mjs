@@ -28,7 +28,8 @@ if (!usageDir) { console.error("usage: tune-tiers.mjs --usage-dir <dir> [--repor
 
 const WINDOW = 30, MIN = 3, PINNED = new Set(["toolkit-router", "core-workflow"]);
 const CAP = { skills: 30, commands: 12, agents: 12 };
-const read = (p) => (fs.existsSync(p) ? fs.readFileSync(p, "utf8") : "");
+// Normalise CRLF: a Windows checkout would otherwise fail every frontmatter match below.
+const read = (p) => (fs.existsSync(p) ? fs.readFileSync(p, "utf8").replace(/\r\n/g, "\n") : "");
 
 // ---- usage ----
 const today = new Date();
@@ -83,18 +84,21 @@ function agentToSkill(n) {
   const src = path.join(root, "agents", `${n}.md`);
   const text = read(src);
   const m = text.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
-  const desc = ((m?.[1] || "").match(/^description:\s*(.*)$/m)?.[1] || "").replace(/^["']|["']$/g, "").replace(/"/g, "'");
+  const desc = ((m?.[1] || "").match(/^description:\s*(.*)$/m)?.[1] || "").replace(/^["']|["']$/g, "").replace(/"/g, "'").trim();
+  // Never write a skill with an empty description or a second frontmatter block.
+  if (!m || !desc) throw new Error(`agents/${n}.md: frontmatter or description not readable; left unchanged`);
   const dst = path.join(root, "skills", `agent-${n}`, "SKILL.md");
   remember(src); remember(dst);
   fs.mkdirSync(path.dirname(dst), { recursive: true });
-  fs.writeFileSync(dst, `---\nname: agent-${n}\ndescription: "Specialist subagent: ${desc}"\ncontext: fork\nagent: general-purpose\n---\n${(m?.[2] || text).trim()}\n\n## Your task\n\n$ARGUMENTS\n`);
+  fs.writeFileSync(dst, `---\nname: agent-${n}\ndescription: "Specialist subagent: ${desc}"\ncontext: fork\nagent: general-purpose\n---\n${m[2].trim()}\n\n## Your task\n\n$ARGUMENTS\n`);
   fs.rmSync(src);
 }
 function skillToAgent(n) {
   const src = path.join(root, "skills", `agent-${n}`, "SKILL.md");
   const text = read(src);
   const m = text.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
-  const desc = ((m?.[1] || "").match(/^description:\s*"?(.*?)"?$/m)?.[1] || "").replace(/^Specialist subagent:\s*/, "");
+  const desc = ((m?.[1] || "").match(/^description:\s*"?(.*?)"?$/m)?.[1] || "").replace(/^Specialist subagent:\s*/, "").trim();
+  if (!m || !desc) throw new Error(`skills/agent-${n}/SKILL.md: frontmatter or description not readable; left unchanged`);
   const body = (m?.[2] || "").replace(/\n## Your task\n\n\$ARGUMENTS\n?$/, "").trim();
   const dst = path.join(root, "agents", `${n}.md`);
   remember(src); remember(dst);
@@ -107,8 +111,10 @@ if (apply && changes.length) {
   remember(tiersPath); remember(path.join(root, "settings.json"));
   for (const p of ["INDEX.md", "index/graph.json", "skills/MASTER_INDEX.md"]) remember(path.join(root, p));
   fs.writeFileSync(tiersPath, JSON.stringify({ ...tiers, core_skills: [...newCoreSkills], core_commands: [...newCoreCommands] }, null, 2) + "\n");
-  promoteAgents.forEach(skillToAgent);
-  demoteAgents.forEach(agentToSkill);
+  // One unreadable file skips that agent only; the rest of the tuning still applies.
+  const convert = (fn) => (n) => { try { fn(n); } catch (e) { changes.push(`SKIPPED agent ${n}: ${e.message}`); } };
+  promoteAgents.forEach(convert(skillToAgent));
+  demoteAgents.forEach(convert(agentToSkill));
   spawnSync(process.execPath, [path.join(root, "scripts/generate-index.mjs"), "--write"], { stdio: "ignore" });
   const b = spawnSync(process.execPath, [path.join(root, "scripts/check-budgets.mjs")], { encoding: "utf8" });
   budgetOutput = (b.stdout + b.stderr).trim();

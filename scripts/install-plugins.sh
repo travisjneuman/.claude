@@ -15,6 +15,11 @@
 #
 # The daily background pull runs this, so every machine converges on the same
 # plugins without manual steps. Nothing is uninstalled.
+#
+# Opt-outs (in ~/.claude/.env.local or ~/.claude/local/shared.env):
+#   PLUGIN_AUTOINSTALL=0   the background pull skips this script entirely
+#   LSP_AUTOINSTALL=0      never install language-server packages (step 4),
+#                          which otherwise uses `npm install -g` or pacman
 
 set -u
 CLAUDE_DIR="$HOME/.claude"
@@ -95,6 +100,8 @@ while read -r id scope; do
 done <<< "$wanted"
 
 # Language servers for the LSP plugins
+env_get() { grep -h "^$1=" "$HOME/.claude/.env.local" "$HOME/.claude/local/shared.env" 2>/dev/null | head -1 | cut -d'=' -f2- | sed -e 's/^["'"'"']//' -e 's/["'"'"']$//'; }
+[ "$(env_get LSP_AUTOINSTALL)" = "0" ] && exit 0
 need_bin() { printf '%s' "$wanted" | grep -q "^$1@" && ! command -v "$2" >/dev/null 2>&1; }
 pkgs=()
 need_bin typescript-lsp typescript-language-server && pkgs+=(typescript-language-server typescript)

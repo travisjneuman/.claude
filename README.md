@@ -8,7 +8,7 @@
 
 <br/>
 
-[![v3.0.1](https://img.shields.io/badge/v3.0.1-6366f1?style=flat-square&logo=semver&logoColor=white)](./CHANGELOG.md)
+[![v3.6.1](https://img.shields.io/badge/v3.6.1-6366f1?style=flat-square&logo=semver&logoColor=white)](./CHANGELOG.md)
 [![Platform](https://img.shields.io/badge/macOS_·_Linux_·_Windows-334155?style=flat-square&logo=apple&logoColor=white)](./docs/SETUP-GUIDE.md)
 [![Website](https://img.shields.io/badge/claude.travisjneuman.com-818cf8?style=flat-square&logo=cloudflare&logoColor=white)](https://claude.travisjneuman.com)
 [![License](https://img.shields.io/badge/MIT-blue?style=flat-square&logo=opensourceinitiative&logoColor=white)](./LICENSE)
@@ -70,6 +70,7 @@ Up: [github.com/travisjneuman](https://github.com/travisjneuman) · Not here: pe
 | project or task templates | [`templates/README.md`](./templates/README.md) | |
 | version history, release notes | [`CHANGELOG.md`](./CHANGELOG.md) | |
 | contributing, pull requests | [`CONTRIBUTING.md`](./CONTRIBUTING.md) | |
+| audit findings, open improvement items | [`advisor-plans/README.md`](./advisor-plans/README.md) | Status table; done and open |
 | showcase website, claude.travisjneuman.com | [`website/README.md`](./website/README.md) | Next.js static export |
 | VS Code settings | [`vscode/README.md`](./vscode/README.md) | |
 | archived README, GSD tutorial, 2026-03 audits | [`archive/`](./archive/) | Historical only; see Contents below |
@@ -126,21 +127,25 @@ graph LR
 
 Click the green **"Use this template"** button at the top of this repo to create your own copy with a clean commit history. Then clone your new repo to `~/.claude/`.
 
-### One-Line Install
-
-Or clone directly if you prefer:
+### Or clone directly
 
 ```bash
 git clone https://github.com/travisjneuman/.claude.git ~/.claude
 ```
 
-### Initialize Marketplace Clones
+Already have a `~/.claude` that Claude Code created? Don't clone over it: download and run [`scripts/install-in-place.sh`](./scripts/install-in-place.sh), which turns it into a checkout and keeps your existing files.
+
+### Optional: community marketplaces
+
+About 80 third-party skill repos, cloned read-only into an ignored folder. The toolkit works without them.
 
 ```bash
-git clone https://github.com/travisjneuman/.claude.git ~/.claude
-cd ~/.claude
 bash ~/.claude/scripts/init-marketplaces.sh
 ```
+
+### Optional: your private layer
+
+Your GitHub account, project folders, and private rules go in a gitignored `local/` folder; see [`local.example/README.md`](./local.example/README.md). Until you set `GITHUB_OWNERS` there, nothing is ever committed or pushed for you.
 
 ### Start Claude Code
 
@@ -150,6 +155,21 @@ claude
 ```
 
 That's it. Claude Code loads the toolkit from `~/.claude/` in every session.
+
+### What runs on its own
+
+Read this before the first session. Everything here is switched off with one line in `~/.claude/.env.local` (copy [`.env.example`](./.env.example)).
+
+| What | When | Turn off with |
+|------|------|---------------|
+| Claude Code runs without permission prompts (`bypassPermissions`); the guard hook blocks only a short list of destructive commands | Every session | Change `permissions.defaultMode` in `settings.json` |
+| Fast-forward pull of `~/.claude` from its `origin`, and of the marketplace clones | Background, at most daily | `PULL_INTERVAL_HOURS=0` |
+| Install and update the plugins `settings.json` enables | After that pull | `PLUGIN_AUTOINSTALL=0` |
+| Install missing language servers for the LSP plugins (`npm install -g`, or `pacman` where passwordless sudo exists) | After that pull | `LSP_AUTOINSTALL=0` |
+| Tally which skills, agents, and commands were used (names and counts only, stays on your machine) | Daily | `DAILY_MAINTENANCE=0` |
+| Commit and push pending work in repos you own | Session end and daily, **only after you set `GITHUB_OWNERS`** | Leave `GITHUB_OWNERS` unset, or `SESSION_END_AUTOPUSH=0` |
+
+**Trust model.** The daily pull brings in whatever the `origin` of your `~/.claude` publishes, including hook scripts that then run on your machine. If you cloned this repo directly, that origin is this repo. If you'd rather review changes first, use the template (your copy becomes the origin and you merge upstream when you choose) or set `PULL_INTERVAL_HOURS=0` and pull by hand. `settings.json` is the maintainer's working configuration: review its `enabledPlugins`, `env`, and `permissions` and make them yours.
 
 ---
 

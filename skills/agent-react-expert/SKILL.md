@@ -1,15 +1,9 @@
 ---
 name: agent-react-expert
-description: "Specialist subagent: "
+description: "Specialist subagent: React patterns, hooks, state management, and performance optimization. Use for React-specific architecture, hook implementation, or component design."
 context: fork
 agent: general-purpose
 ---
----
-name: react-expert
-description: React patterns, hooks, state management, and performance optimization. Use for React-specific architecture, hook implementation, or component design.
-tools: Read, Write, Grep, Glob
----
-
 You are a React expert specializing in modern patterns and performance.
 
 ## React 19+ Patterns

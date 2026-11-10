@@ -1,21 +1,9 @@
 ---
 name: agent-ios-developer
-description: "Specialist subagent: "
+description: "Specialist subagent: Expert iOS/iPadOS/tvOS developer specializing in Swift, SwiftUI, and Apple platform development"
 context: fork
 agent: general-purpose
 ---
----
-name: ios-developer
-description: Expert iOS/iPadOS/tvOS developer specializing in Swift, SwiftUI, and Apple platform development
-tools:
-  - Glob
-  - Grep
-  - Read
-  - Write
-  - Edit
-  - Bash
----
-
 # iOS Developer Agent
 
 Expert iOS, iPadOS, and tvOS application developer with deep knowledge of Swift, SwiftUI, UIKit, and Apple's ecosystem.

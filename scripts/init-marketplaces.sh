@@ -127,7 +127,7 @@ done
 echo ""
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# Fix main repo remote (ensure it points to user's repo, not an upstream)
+# Main repo remote: never rewritten. A fork or template copy keeps its own origin.
 # ═══════════════════════════════════════════════════════════════════════════════
 echo -e "${YELLOW}Verifying main repo configuration...${NC}"
 cd "$CLAUDE_DIR"
@@ -135,14 +135,14 @@ cd "$CLAUDE_DIR"
 MAIN_FETCH=$(git remote get-url origin 2>/dev/null || echo "")
 MAIN_PUSH=$(git remote get-url --push origin 2>/dev/null || echo "")
 
-# The main repo should push to travisjneuman/.claude
-if [[ "$MAIN_PUSH" == *"travisjneuman/.claude"* ]]; then
-    echo -e "  ${GREEN}✓ Main repo can push to travisjneuman/.claude${NC}"
+if [[ -z "$MAIN_FETCH" ]]; then
+    echo -e "  ${YELLOW}⚠ Main repo has no origin remote; add one with: git remote add origin <your repo URL>${NC}"
+elif [[ "$MAIN_PUSH" == "no_push" ]]; then
+    # Only undo an accidental no_push on the toolkit itself; the URL stays yours.
+    git remote set-url --push origin "$MAIN_FETCH"
+    echo -e "  ${GREEN}✓ Main repo push URL restored to $MAIN_FETCH${NC}"
 else
-    echo -e "  ${YELLOW}⚠ Fixing main repo push URL...${NC}"
-    git remote set-url origin https://github.com/travisjneuman/.claude.git
-    git remote set-url --push origin https://github.com/travisjneuman/.claude.git
-    echo -e "  ${GREEN}✓ Main repo configured for push/pull${NC}"
+    echo -e "  ${GREEN}✓ Main repo origin: $MAIN_FETCH${NC}"
 fi
 
 # Prevent recursive submodule pushes

@@ -8,7 +8,7 @@ Up: [README](../README.md) · Not here: agent skills (`agent-<name>`) are listed
 
 | Need / keywords | Open | Notes |
 | --- | --- | --- |
-| core agent, review, debug, security, architecture, performance, refactor, React, TypeScript, iOS, DevOps | [Core agents](#core-agents-always-listed) below | Always listed to the main model |
+| core agent, review, security, performance | [Core agents](#core-agents-always-listed) below | Always listed to the main model |
 | specialist agent, `agent-<name>`, language or domain expert | [`INDEX.md`](../INDEX.md), [`skills/MASTER_INDEX.md`](../skills/MASTER_INDEX.md) | Run as their own subagent when invoked |
 | write a new agent | [`templates/agent-template.md`](../templates/agent-template.md) | |
 | promote or demote an agent | [Changing the core set](#changing-the-core-set) below | |
@@ -33,21 +33,16 @@ graph LR
 | Agent | Use for |
 | --- | --- |
 | [`deep-code-reviewer`](./deep-code-reviewer.md) | Thorough review of a change set |
-| [`debugging-specialist`](./debugging-specialist.md) | Hard or intermittent bugs |
 | [`security-auditor`](./security-auditor.md) | Security review, secrets, dependency risk |
-| [`architecture-analyst`](./architecture-analyst.md) | Structure, boundaries, design trade-offs |
 | [`performance-optimizer`](./performance-optimizer.md) | Profiling and speed work |
-| [`refactoring-specialist`](./refactoring-specialist.md) | Large safe refactors |
-| [`react-expert`](./react-expert.md) | React / frontend work |
-| [`typescript-expert`](./typescript-expert.md) | TypeScript typing and patterns |
-| [`ios-developer`](./ios-developer.md) | Swift / SwiftUI / Apple platforms |
-| [`devops-engineer`](./devops-engineer.md) | CI/CD, infrastructure, deployment |
+
+The core set changes with use: the weekly tuning job moves an agent that went unused for 30 days to an on-demand skill, and promotes an agent skill that is used often. The files in this folder are the current set. Moved out by tuning and still available on demand: [`agent-debugging-specialist`](../skills/agent-debugging-specialist/SKILL.md), [`agent-architecture-analyst`](../skills/agent-architecture-analyst/SKILL.md), [`agent-refactoring-specialist`](../skills/agent-refactoring-specialist/SKILL.md), [`agent-react-expert`](../skills/agent-react-expert/SKILL.md), [`agent-typescript-expert`](../skills/agent-typescript-expert/SKILL.md), [`agent-ios-developer`](../skills/agent-ios-developer/SKILL.md), [`agent-devops-engineer`](../skills/agent-devops-engineer/SKILL.md).
 
 Core agents inherit the session's model (no per-agent model pins).
 
 ### Specialist agent skills (on demand)
 
-58 more specialists (languages, frameworks, mobile, data/ML, design, business, product, and more) are invoked as `/agent-<name>` or by Claude through the Skill tool, e.g. `/agent-python-expert refactor the settings loader`. Each runs in its own subagent with the full original agent prompt.
+Dozens more specialists (languages, frameworks, mobile, data/ML, design, business, product, and more) are invoked as `/agent-<name>` or by Claude through the Skill tool, e.g. `/agent-python-expert refactor the settings loader`. Each runs in its own subagent with the full original agent prompt.
 
 ## Changing the core set
 

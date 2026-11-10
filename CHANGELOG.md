@@ -4,6 +4,22 @@ All notable changes to the Ultimate Claude Code Toolkit.
 
 ## [Unreleased]
 
+### Audit fixes for people who are not the maintainer
+- `scripts/init-marketplaces.sh` no longer rewrites the toolkit's `origin` to `travisjneuman/.claude`. A fork or template copy keeps its own remote; only an accidental `no_push` on the toolkit itself is undone. The daily background pull calls this script when a marketplace clone is missing, so template users could have had their remote replaced.
+- `_pull-all-repos.sh` decides which repos under `CUSTOM_PROJECT_DIRS` keep push access from `GITHUB_OWNERS` instead of a hard-coded owner. With `GITHUB_OWNERS` unset it changes no push URL. Before, every repo not owned by the maintainer was set to `no_push`, including the user's own.
+- `scripts/install.sh` rewritten: no submodule flags (marketplaces are plain clones), no `.mcp.json` (the toolkit ships no MCP servers, and the old file named packages that don't exist), no prompt that moves `~/.claude` aside. It clones or fast-forward pulls, installs the git hooks, and points an existing non-checkout `~/.claude` at `install-in-place.sh`. Docs now say download, read, run instead of piping into a shell.
+- New switches in the local layer: `PLUGIN_AUTOINSTALL=0` (background pull never installs or updates plugins) and `LSP_AUTOINSTALL=0` (never install language servers globally). `.env.example` lists every background switch; the README has a "What runs on its own" table and the trust model of the daily pull.
+
+### Tier tuning no longer writes broken skills
+- `scripts/tune-tiers.mjs` normalises CRLF before parsing frontmatter and skips an agent (reported as `SKIPPED`) when its frontmatter or description can't be read, instead of writing a skill with an empty description and two frontmatter blocks. `.gitattributes` pins `*.md`, `*.sh`, `*.js`, `*.mjs` to LF.
+- Repaired the seven skills that had been written that way (`agent-architecture-analyst`, `agent-debugging-specialist`, `agent-devops-engineer`, `agent-ios-developer`, `agent-react-expert`, `agent-refactoring-specialist`, `agent-typescript-expert`). `agents/README.md` lists the agents that exist and links the moved ones.
+- `counts.json`, `plugin.json` counts, and the website still say 10 agents; that changes with the next explicit count refresh.
+
+### Smaller fixes
+- `hooks/secret-scan.js` reports line numbers only, so a real credential is not copied into the conversation.
+- Untracked `skills/diagnose-crash` and `skills/omarchy`: symlinks to absolute paths on one Linux host, dangling everywhere else. Now gitignored.
+- Removed the empty stray file `docs/seddsoprg`. README badge and `plugin.json` version now match the latest release (3.6.1).
+
 ### Telemetry off
 - `settings.json` env: `DISABLE_ERROR_REPORTING=1` (error reporting) and `CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY=1` (session quality surveys). Usage telemetry stays on: `DISABLE_TELEMETRY` (and `DO_NOT_TRACK`) also turn off feature-flag evaluation, which breaks remote session takeover. `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC` is left unset because it also stops auto-updates.
 

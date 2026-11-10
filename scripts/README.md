@@ -13,7 +13,7 @@ Up: [README](../README.md) · Not here: Claude Code lifecycle hooks are in [hook
 
 | Script                 | Purpose                                       | When to Run                                    |
 | ---------------------- | --------------------------------------------- | ---------------------------------------------- |
-| `install.sh`           | One-line installer (curl-pipe)                | First-time setup on any machine                |
+| `install.sh`           | Clone the toolkit + install git hooks (download, read, run) | Machine with no `~/.claude` yet     |
 | `setup-new-machine.sh` | Complete setup (plugins, hooks, verification) | After cloning the repo                         |
 | `init-marketplaces.sh` | Clone all 81 marketplace repos from upstreams | After cloning, or to fix broken marketplace clones     |
 | `setup-hooks.sh`       | Install git hooks into `.git/hooks/`          | After cloning (called by setup-new-machine.sh) |

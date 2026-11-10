@@ -1,8 +1,10 @@
 #!/usr/bin/env node
 // PostToolUse (Write/Edit/MultiEdit/NotebookEdit): scan the file Claude just wrote
 // for strings that look like real credentials. Never blocks. On a match, tells
-// Claude (additionalContext) so it removes them before committing. Silent and
-// zero-token otherwise. Runs in-process via run-hook.js.
+// Claude (additionalContext) so it removes them before committing. Reports line
+// numbers only: the matched text is never echoed, so a real credential is not
+// copied into the conversation or transcript. Silent and zero-token otherwise.
+// Runs in-process via run-hook.js.
 
 const fs = require("fs");
 
@@ -23,10 +25,10 @@ if (file && !skip.test(file) && fs.existsSync(file)) {
   const pattern = /(AKIA[0-9A-Z]{16}|sk-(?:ant-|proj-)?[A-Za-z0-9_-]{20,}|gh[pousr]_[A-Za-z0-9]{36}|github_pat_[A-Za-z0-9_]{40,}|glpat-[A-Za-z0-9_-]{20}|xox[bpors]-[A-Za-z0-9-]{10,}|-----BEGIN[A-Z ]*PRIVATE KEY)/;
   const hits = [];
   text.split("\n").forEach((line, i) => {
-    if (hits.length < 5 && pattern.test(line)) hits.push(`${i + 1}: ${line.slice(0, 120)}`);
+    if (hits.length < 5 && pattern.test(line)) hits.push(`line ${i + 1}`);
   });
   if (hits.length) {
-    const msg = `Possible secret written to ${file} (first matches, truncated):\n${hits.join("\n")}\nIf any of these are real credentials, remove them and use an environment variable or an ignored local file instead.`;
+    const msg = `Possible secret written to ${file} at ${hits.join(", ")}. If any of these are real credentials, remove them and use an environment variable or an ignored local file instead.`;
     process.stdout.write(JSON.stringify({ hookSpecificOutput: { hookEventName: "PostToolUse", additionalContext: msg } }) + "\n");
   }
 }
