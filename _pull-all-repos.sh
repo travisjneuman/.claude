@@ -208,8 +208,13 @@ enforce_custom_push_policy() {
     local repo_path="$1"
     local repo_name="$2"
     local push_url
+    # Without GITHUB_OWNERS there is no way to tell your repos from anyone
+    # else's, so no push URL is ever changed: the whole policy is opt-in.
+    [[ -z "$GITHUB_OWNERS" ]] && return 0
+
     push_url=$(git -C "$repo_path" remote get-url --push origin 2>/dev/null) || push_url=""
 
+    # A repo under a .openclaw folder is kept local-only, whoever owns its remote.
     case "$(echo "$repo_path" | tr '[:upper:]' '[:lower:]')" in
         *"/.openclaw"|*"/.openclaw/"*)
             if [[ "$push_url" != "no_push" ]]; then
@@ -220,10 +225,6 @@ enforce_custom_push_policy() {
             return 0
             ;;
     esac
-
-    # Without GITHUB_OWNERS there is no way to tell your repos from anyone
-    # else's, so push URLs are left exactly as they are.
-    [[ -z "$GITHUB_OWNERS" ]] && return 0
 
     if remote_is_owned "$repo_path"; then
         if [[ "$push_url" == "no_push" ]]; then

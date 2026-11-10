@@ -108,7 +108,7 @@ Trace Anatomy:
 │   └── Span: Route Handler (8ms) [kind: INTERNAL]
 │       ├── Span: Database Query (3ms) [kind: CLIENT]
 │       │   ├── Attribute: db.system = "postgresql"
-│       │   └── Attribute: db.statement = "SELECT * FROM users WHERE id = \$1"
+│       │   └── Attribute: db.statement = "SELECT * FROM users WHERE id = $1"
 │       ├── Span: Cache Lookup (1ms) [kind: CLIENT]
 │       │   └── Attribute: cache.hit = false
 │       └── Span: External API Call (4ms) [kind: CLIENT]

@@ -28,15 +28,15 @@ Validation in this repo is by review, not tests (see `CLAUDE.md`). An executor c
 | 16 | Guard never saw PowerShell commands | Security | DONE |
 | 17 | Unreviewed marketplace content can be followed as instructions; undocumented | Security / Docs | DONE (documented as intended: `SECURITY.md`) |
 | 18 | Forked skills ran in the background with a reduced tool set; three had no task | Correctness | DONE |
-| 19 | Toolkit could not be installed as a plugin | Direction | DONE (`tjn-skills`, skills only; not yet exercised on a live install) |
+| 19 | Toolkit could not be installed as a plugin | Direction | DONE (`tjn-skills`, skills only; `claude plugin validate` passes; not yet exercised on a live install) |
 | 20 | Commands used placeholders and argument declarations Claude Code does not read; stale checks | Correctness | DONE |
-| 21 | Literal `$1`-style text in skills is replaced by arguments | Correctness | PARTLY (three agent skills fixed; 23 other skills TODO) |
-| 22 | Four unanswered community items; no security policy | Community | `SECURITY.md` DONE; triage is the owner's (assessment below) |
-| 23 | Project-folder push policy still lives in the public pull script | Debt | TODO (owner decision) |
+| 21 | Literal `$1`-style text in skills is replaced by arguments | Correctness | WON'T FIX by escaping (it would regress other agents that read these files); see "Considered and rejected" |
+| 22 | Four unanswered community items; no security policy | Community | `SECURITY.md` and private vulnerability reporting DONE; triage is the owner's (assessment below) |
+| 23 | Project-folder push policy still lives in the public pull script | Debt | DONE differently: kept, and now entirely opt-in through `GITHUB_OWNERS` |
 | 24 | Hooks assume `~/.claude`; `CLAUDE_CONFIG_DIR` is not honored | DX | TODO (low priority) |
 | 25 | Unreferenced files: `bin/prettier-hook.js`, `bin/setup.ps1` | Debt | TODO (archive, don't delete) |
 
-Recommended order for the open items: 09, then 10 (second release), 12, 21, 23, 13. Items 14, 24 and 25 only when those files are being edited anyway.
+Recommended order for the open items: 09, then 10 (second release), 12, 13. Items 14, 24 and 25 only when those files are being edited anyway.
 
 ## Open items
 
@@ -81,13 +81,6 @@ Recommended order for the open items: 09, then 10 (second release), 12, 21, 23, 
 - **Evidence**: `env_get` is defined in `_pull-all-repos.sh`, `hooks/session-start-pull.sh`, `hooks/session-start-repo-health.sh`, `hooks/session-end-repo-health.sh`, and `scripts/install-plugins.sh`, with a JavaScript twin in `hooks/daily-maintenance.js`. The credential regex is in `hooks/secret-scan.js` and `hooks/session-end-repo-health.sh`.
 - **Not urgent**: the copies are identical today. Hooks must stay standalone and fast, so a shared file is only worth it if it can't make a hook fail when missing.
 
-### 21: Literal `$1`-style text in skills
-
-- **Evidence**: Claude Code replaces `$0`, `$1`, … in a skill's content with the arguments it was invoked with (documented under "Available string substitutions"; a position with no argument is left alone). Twenty-three skills contain such text as ordinary content: dollar amounts (`case-interview-practice`, `real-estate-analyzer`, `fundraising-analyzer` and other business skills) and SQL placeholders (`database-expert`). Invoked as `/database-expert tune my query`, `$1::vector` becomes `my::vector`. List them with `grep -l '[^\\]\$[0-9]' skills/*/SKILL.md`.
-- **Fixed already**: `agent-go-expert`, `agent-observability-engineer` and `agent-cloud-architect`, because forked skills always receive a task.
-- **Do**: escape each literal as `\$1` (the documented escape). Check each file's rendering afterwards, because another agent reading the file directly will see the backslash; where that reads badly (SQL in a code block), reword the example instead (`$1` → `:id`, or spell out "dollars").
-- **Done when**: `grep -n '[^\\]\$[0-9]' skills/*/SKILL.md` shows only intended placeholders.
-
 ### 22: Community items (assessment only; nothing was posted, closed or merged)
 
 | Item | What it is | Assessment |
@@ -97,13 +90,7 @@ Recommended order for the open items: 09, then 10 (second release), 12, 21, 23, 
 | Issue #3, "online entry point" for `recipe-card-creator` (2026-06-30) | A third party hosted the skill on their own site and posted a tracked badge link | Promotional. MIT allows the reuse. Nothing to do in the repo; close when triaging |
 | Issue #1, "Add a description to improve Dispatch discoverability" (2026-03-29) | Automated outreach from a third-party tool | Promotional and wrong on the facts: `database-expert` has a description. Close when triaging |
 
-Also worth doing on GitHub, by the owner: turn on private vulnerability reporting (repository Settings → Security), which `SECURITY.md` points people to and which is currently off.
-
-### 23: Take the project-folder push policy out of the public pull script
-
-- **Evidence**: `_pull-all-repos.sh` `enforce_custom_push_policy` sets or restores push URLs on repos under `CUSTOM_PROJECT_DIRS` (now only when `GITHUB_OWNERS` is set), and always sets `no_push` on any repo whose path contains `/.openclaw`.
-- **Why remove**: changing other repos' remotes is not something a toolkit pull should do for strangers, and the maintainer's fleet enforces the same policy with a private tool.
-- **Owner decision needed**: confirm the private tool covers every host before the public copy goes.
+Private vulnerability reporting, which `SECURITY.md` points people to, was turned on for the repository on 2026-11-10.
 
 ### 24, 25: Small items
 
@@ -117,6 +104,8 @@ Also worth doing on GitHub, by the owner: turn on private vulnerability reportin
 - **Unpinned, unreviewed marketplaces**: intended for a full-access setup (owner, 2026-11). Documented in `SECURITY.md`; not to be "fixed" by pinning.
 - **Session-end commit and push**: only acts for owners in `GITHUB_OWNERS`, skips anything that looks like a secret, never forces. By design.
 - **Regex guard can be evaded**: `hooks/guard.js` says so itself; it guards against slips, not intent.
+- **Escaping literal `$1`-style text in skills**: Claude Code replaces `$0`, `$1`, … in a skill's content with the arguments the skill was invoked with, so a dollar amount or SQL placeholder in an example can be garbled when a skill is invoked with several words (24 skills contain such text; `grep -l '\$[0-9]' skills/*/SKILL.md`). The documented escape is a backslash, but these files are also read directly by other agents and tools, which would then always see the backslash, and in code examples it would be wrong code. A rare glitch in one harness is the smaller cost; the text stays as written.
+- **Removing the project-folder push policy from `_pull-all-repos.sh`**: the maintainer's hosts run it (their settings keep the project-folder pull on, and the `.openclaw` local-only rule exists nowhere else), so removing it would change their behaviour. It is instead fully opt-in: with `GITHUB_OWNERS` unset, no push URL is touched.
 - **Trimming the skill library**: nothing is to be removed (owner, 2026-11). Quality work on skills means fixing, not culling.
 - **Strict website snapshot**: the site lists only what `counts.json` names and fails the build on a missing file, by design (`docs/COUNT-PIPELINE.md`). The fix for the outage was the import, not loosening this.
 

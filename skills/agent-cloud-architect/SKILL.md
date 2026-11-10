@@ -114,7 +114,7 @@ Team has moderate Kubernetes experience. Budget is constrained.
 Use AWS ECS with Fargate for container orchestration.
 
 ## Rationale
-- **vs Kubernetes (EKS)**: EKS adds \$73/mo per cluster + operational complexity.
+- **vs Kubernetes (EKS)**: EKS adds $73/mo per cluster + operational complexity.
   Our team size (4 engineers) makes managing K8s control plane overhead unjustified.
 - **vs Lambda**: Several services require long-running connections (WebSocket),
   persistent in-memory caches, and >15min execution times.
@@ -127,9 +127,9 @@ Use AWS ECS with Fargate for container orchestration.
 - Simpler operational model reduces on-call burden
 
 ## Cost Estimate
-- 12 services * avg 0.5 vCPU / 1GB RAM = ~\$180/mo (Fargate)
-- Equivalent EC2 (3x t3.medium reserved): ~\$150/mo
-- EKS alternative: \$73/mo cluster + ~\$150/mo compute = ~\$223/mo
+- 12 services * avg 0.5 vCPU / 1GB RAM = ~$180/mo (Fargate)
+- Equivalent EC2 (3x t3.medium reserved): ~$150/mo
+- EKS alternative: $73/mo cluster + ~$150/mo compute = ~$223/mo
 ```
 
 ### Serverless vs Containers Decision Framework
@@ -205,7 +205,7 @@ Is the workload:
    [ ] Right-size RDS instances
    [ ] Use Aurora Serverless v2 for variable workloads
    [ ] Read replicas for read-heavy workloads (instead of scaling primary)
-   [ ] Consider serverless DB (PlanetScale, Neon) for <\$100/mo workloads
+   [ ] Consider serverless DB (PlanetScale, Neon) for <$100/mo workloads
 
 4. Network
    [ ] Use VPC endpoints to avoid NAT Gateway data charges
