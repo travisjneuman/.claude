@@ -1,12 +1,11 @@
 ---
 description: Trigger a comprehensive code review on recent changes or specified files
-arguments:
-  - name: target
-    description: "File path, directory, or 'staged' for git staged changes (default: staged)"
-    required: false
+argument-hint: "[target]"
 ---
 
 # Review Code
+
+**Arguments:** `target` (optional): File path, directory, or 'staged' for git staged changes (default: staged).
 
 Perform comprehensive code review with multi-aspect analysis.
 

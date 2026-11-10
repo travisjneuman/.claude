@@ -3,6 +3,7 @@ name: agent-android-developer
 description: "Specialist subagent: Expert Android developer specializing in Kotlin, Jetpack Compose, and modern Android architecture"
 context: fork
 agent: general-purpose
+background: false
 ---
 # Android Developer Agent
 

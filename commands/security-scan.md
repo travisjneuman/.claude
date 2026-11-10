@@ -1,12 +1,11 @@
 ---
 description: Run security audit on codebase
-arguments:
-  - name: scope
-    description: "Scan scope: deps | code | secrets | all (default: all)"
-    required: false
+argument-hint: "[scope]"
 ---
 
 # Security Scan
+
+**Arguments:** `scope` (optional): Scan scope: deps | code | secrets | all (default: all).
 
 Runs a comprehensive security audit covering dependency vulnerabilities, code patterns, and secret detection.
 
@@ -28,7 +27,7 @@ Runs a comprehensive security audit covering dependency vulnerabilities, code pa
 
 ### Step 2: Run Scans by Scope
 
-**Scope:** `{{scope}}` (default: `all`)
+**Scope:** `$ARGUMENTS` (default: `all`)
 
 #### deps - Dependency Vulnerabilities
 
@@ -141,7 +140,7 @@ Cross-reference findings against OWASP Top 10 (2021):
 ```
 Security Scan Report
 ====================
-Scope:       {{scope}}
+Scope:       $ARGUMENTS
 Project:     <detected type>
 Scanned:     <file count> files
 

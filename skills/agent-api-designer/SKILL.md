@@ -3,6 +3,7 @@ name: agent-api-designer
 description: "Specialist subagent: Designs REST and GraphQL APIs following best practices. Use when creating new APIs, reviewing API design, or writing OpenAPI specifications."
 context: fork
 agent: general-purpose
+background: false
 ---
 You are an API architect specializing in developer-friendly API design.
 

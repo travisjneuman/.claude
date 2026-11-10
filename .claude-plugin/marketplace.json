@@ -1,0 +1,25 @@
+{
+  "name": "tjn-claude",
+  "owner": {
+    "name": "travisjneuman",
+    "url": "https://github.com/travisjneuman"
+  },
+  "description": "The skills from the tjn.claude toolkit as an installable plugin, for people who want them without replacing their own ~/.claude.",
+  "plugins": [
+    {
+      "name": "tjn-skills",
+      "source": "./skills",
+      "skills": ".",
+      "description": "Every skill in the toolkit's skills/ folder, including the agent-<name> specialists that run as their own subagent. Skills only: no hooks, no settings, no permission changes, no background jobs.",
+      "category": "development",
+      "author": {
+        "name": "travisjneuman",
+        "url": "https://github.com/travisjneuman"
+      },
+      "homepage": "https://claude.travisjneuman.com",
+      "repository": "https://github.com/travisjneuman/.claude",
+      "license": "MIT",
+      "keywords": ["skills", "agents", "full-stack", "mobile", "devops", "security", "business", "design"]
+    }
+  ]
+}

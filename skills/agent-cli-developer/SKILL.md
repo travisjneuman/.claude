@@ -3,6 +3,7 @@ name: agent-cli-developer
 description: "Specialist subagent: Command-line tool development, argument parsing, interactive prompts, and terminal UI specialist. Use when building CLI tools, implementing interactive terminal interfaces, or designing command-line experiences. Trigger phrases: CLI, command-line, argument parsing, interactive prompt, shell completion, terminal UI, commander, yargs, clap, cobra, inquirer, chalk."
 context: fork
 agent: general-purpose
+background: false
 ---
 # CLI Developer
 

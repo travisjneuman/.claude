@@ -3,6 +3,7 @@ name: agent-event-driven-architect
 description: "Specialist subagent: Kafka, RabbitMQ, SQS/SNS, event sourcing, CQRS, and message-driven architecture specialist. Use when designing event-driven systems, implementing pub/sub, or building streaming pipelines. Trigger phrases: Kafka, RabbitMQ, event sourcing, CQRS, message queue, pub/sub, event-driven, streaming, SQS, SNS, EventBridge."
 context: fork
 agent: general-purpose
+background: false
 ---
 # Event-Driven Architect Agent
 

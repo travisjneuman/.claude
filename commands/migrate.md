@@ -1,16 +1,13 @@
 ---
 description: Generate and manage database migrations
-arguments:
-  - name: action
-    description: "Migration action: create | run | rollback | status"
-    required: true
-  - name: name
-    description: "Migration name (for create action, e.g. 'add-user-roles')"
-    required: false
+argument-hint: "[action] [name]"
+arguments: [action, name]
 disable-model-invocation: true
 ---
 
 # Database Migration Manager
+
+**Arguments:** `action` (required): Migration action: create | run | rollback | status; `name` (optional): Migration name (for create action, e.g. 'add-user-roles').
 
 Detects the project's ORM, generates migrations, validates them, and manages the migration lifecycle.
 
@@ -50,15 +47,15 @@ grep -q "knex" package.json 2>/dev/null && echo "KNEX"
 
 ### Step 2: Run Action
 
-**Action:** `{{action}}`
-**Name:** `{{name}}`
+**Action:** `$action`
+**Name:** `$name`
 
 #### create - Generate a New Migration
 
 **Prisma:**
 
 ```bash
-npx prisma migrate dev --name {{name}} --create-only
+npx prisma migrate dev --name $name --create-only
 ```
 
 Before running, read `prisma/schema.prisma` and validate:
@@ -70,31 +67,31 @@ Before running, read `prisma/schema.prisma` and validate:
 **Drizzle:**
 
 ```bash
-npx drizzle-kit generate:pg --name {{name}}
+npx drizzle-kit generate:pg --name $name
 ```
 
 **TypeORM:**
 
 ```bash
-npx typeorm migration:generate -n {{name}} -d src/data-source.ts
+npx typeorm migration:generate -n $name -d src/data-source.ts
 ```
 
 **Django:**
 
 ```bash
-python manage.py makemigrations --name {{name}}
+python manage.py makemigrations --name $name
 ```
 
 **Alembic:**
 
 ```bash
-alembic revision --autogenerate -m "{{name}}"
+alembic revision --autogenerate -m "$name"
 ```
 
 **Knex:**
 
 ```bash
-npx knex migrate:make {{name}}
+npx knex migrate:make $name
 ```
 
 **After generation:**
@@ -189,7 +186,7 @@ Duration: 0.3s
 
 ```bash
 # Preferred: create a reverse migration (keeps data)
-npx prisma migrate dev --name undo_{{name}}
+npx prisma migrate dev --name undo_$name
 ```
 
 `npx prisma migrate reset` drops the database and deletes all its data. Never run or suggest it by default; use it only when the user explicitly asks for a reset of a disposable development database, after warning them that all data in it will be lost.

@@ -8,7 +8,14 @@ category: operations
 
 This document explains the security decisions made when this repository was made public, and why certain files are gitignored.
 
-**Last Updated:** February 2026 (v2.10.1)
+**Last Updated:** November 2026 (trust model added; the sections below are the December 2025 publication audit and still apply)
+
+## Trust model
+
+What this toolkit trusts by design (full access, daily self-update, unreviewed community marketplaces, background plugin installs), how to narrow each one, and how to report a vulnerability are in the root [SECURITY.md](../SECURITY.md). Two mechanical protections back the gitignore rules described here:
+
+- The pre-commit gate (`scripts/hooks/staged-public-safety.mjs`) refuses staged private or ignored paths, credential-looking values, marketplace content, and symlinks that point outside the repository.
+- The session-end checkpoint lists any new link to an absolute path outside the repo in the clone's private `.git/info/exclude` before it stages anything, so a link an OS package or another tool drops into `~/.claude` is never committed.
 
 ---
 

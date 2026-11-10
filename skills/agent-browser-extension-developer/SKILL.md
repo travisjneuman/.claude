@@ -3,6 +3,7 @@ name: agent-browser-extension-developer
 description: "Specialist subagent: Chrome, Firefox, and cross-browser extension development specialist. Manifest V3, service workers, content scripts, and WebExtension APIs. Use when building browser extensions or migrating from MV2 to MV3. Trigger phrases: browser extension, Chrome extension, Firefox addon, Manifest V3, MV3, content script, service worker, WebExtension."
 context: fork
 agent: general-purpose
+background: false
 ---
 # Browser Extension Developer Agent
 

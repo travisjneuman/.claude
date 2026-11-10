@@ -1,12 +1,11 @@
 ---
 description: Route any task to the right skills, agents, rules, and marketplace resources via INDEX.md, then execute it
-arguments:
-  - name: task_description
-    description: "What you want to accomplish. Natural language - just describe it."
-    required: false
+argument-hint: "[task_description]"
 ---
 
 # Start Task - Universal Intelligent Router v3.2
+
+**Arguments:** `task_description` (optional): What you want to accomplish. Natural language - just describe it.
 
 Routes ANY prompt to optimal execution by loading resources on-demand.
 Skills and agents auto-match from descriptions. CLAUDE.md routes docs/checklists.
@@ -28,9 +27,9 @@ If research needed: Use `WebSearch` immediately. For complex research: Load `doc
 
 Parallel tool usage: When multiple independent searches/reads needed, make ALL calls in single message.
 
-### Step 2: Memory Check
+### Step 2: Context Check
 
-Query persistent memory for context relevant to: `{{task_description}}`
+Read the project's `CLAUDE.md` / `AGENTS.md` and any handoff note the user points to for context relevant to: `$ARGUMENTS`. The toolkit keeps no automatic memory (auto memory is off, no memory server is configured).
 
 ### Step 3: Domain Detection
 
@@ -54,7 +53,7 @@ Extract from the domain file: **skill** to invoke, **agent** to spawn, **context
 ### Step 5: Execute
 
 - Invoke identified skill(s) from domain files
-- Use `TodoWrite` for multi-step tracking (always for 3+ steps)
+- Track multi-step work (3+ steps) with the session's task list tools
 - Spawn core agents via the Agent tool, or invoke `agent-<name>` skills via the Skill tool, as needed
 - For specialized domains: `find ~/.claude/plugins/marketplaces -name "SKILL.md" | xargs grep -li "<keyword>"`
 
@@ -62,6 +61,6 @@ Extract from the domain file: **skill** to invoke, **agent** to spawn, **context
 
 Validate by review: re-read the request and review the whole diff and the code it touches. No tests (see CLAUDE.md); tests only if the user explicitly asks.
 
-**If `{{task_description}}` is empty:** Query memory → check todos → ask user.
+**If `$ARGUMENTS` is empty:** check the session's task list, then ask the user.
 
 _v3.2: Trimmed — removed inline duplication with CLAUDE.md auto-routing_

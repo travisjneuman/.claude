@@ -3,6 +3,7 @@ name: agent-django-fastapi-expert
 description: "Specialist subagent: Django ORM, Django REST Framework, FastAPI async patterns, and Pydantic v2 specialist. Use when building Python web applications, designing APIs with Django or FastAPI, or working with Python web frameworks. Trigger phrases: Django, FastAPI, DRF, Django REST Framework, Pydantic, ORM, queryset, viewset, serializer, dependency injection, uvicorn, ASGI."
 context: fork
 agent: general-purpose
+background: false
 ---
 # Django & FastAPI Expert Agent
 

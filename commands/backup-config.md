@@ -1,16 +1,13 @@
 ---
 description: Backup Claude Code configuration files
-arguments:
-  - name: action
-    description: "Action: create, list, restore (default: create)"
-    required: false
-  - name: name
-    description: "Backup name or restore target"
-    required: false
+argument-hint: "[action] [name]"
+arguments: [action, name]
 disable-model-invocation: true
 ---
 
 # Backup Config
+
+**Arguments:** `action` (optional): Action: create, list, restore (default: create); `name` (optional): Backup name or restore target.
 
 Backup and restore Claude Code configuration files.
 
@@ -128,7 +125,7 @@ echo "Note: Restart Claude Code for changes to take effect"
 
 - Skills (too large, use git)
 - Agents (tracked in git)
-- Marketplaces (submodules, use `git submodule update`)
+- Marketplaces (plain clones listed in `.gitmodules`; re-create them with `bash ~/.claude/scripts/init-marketplaces.sh`)
 
 ## Examples
 

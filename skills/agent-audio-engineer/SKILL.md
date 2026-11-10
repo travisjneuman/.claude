@@ -3,6 +3,7 @@ name: agent-audio-engineer
 description: "Specialist subagent: Expert audio engineer for recording, mixing, mastering, and sound design"
 context: fork
 agent: general-purpose
+background: false
 ---
 # Audio Engineer Agent
 

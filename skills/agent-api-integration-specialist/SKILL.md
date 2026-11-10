@@ -3,6 +3,7 @@ name: agent-api-integration-specialist
 description: "Specialist subagent: Third-party API integration, webhook handling, OAuth flows, rate limiting, and SDK wrapping specialist. Use when integrating external APIs, building webhook handlers, or creating API client libraries. Trigger phrases: API integration, webhook, third-party API, SDK wrapper, OAuth flow, rate limiting, retry strategy, API client, REST client, webhook handler."
 context: fork
 agent: general-purpose
+background: false
 ---
 # API Integration Specialist
 

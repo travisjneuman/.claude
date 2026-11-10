@@ -3,6 +3,7 @@ name: agent-product-analytics-specialist
 description: "Specialist subagent: PostHog, Mixpanel, Amplitude event tracking, funnels, cohorts, and A/B testing specialist. Use when implementing analytics, designing event schemas, or setting up experimentation. Trigger phrases: analytics, tracking, PostHog, Mixpanel, Amplitude, Segment, events, funnel, cohort, A/B test, feature flag, conversion, metrics, KPI."
 context: fork
 agent: general-purpose
+background: false
 ---
 # Product Analytics Specialist Agent
 

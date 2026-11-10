@@ -1,16 +1,13 @@
 ---
 description: Deploy application with pre/post-deploy checks
-arguments:
-  - name: target
-    description: "Deployment target: vercel | docker | aws | netlify"
-    required: true
-  - name: environment
-    description: "Target environment: staging | production (default: staging)"
-    required: false
+argument-hint: "[target] [environment]"
+arguments: [target, environment]
 disable-model-invocation: true
 ---
 
 # Deploy Application
+
+**Arguments:** `target` (required): Deployment target: vercel | docker | aws | netlify; `environment` (optional): Target environment: staging | production (default: staging).
 
 Runs a full deployment pipeline: pre-flight checks, build, deploy, health verification, and status report.
 
@@ -33,8 +30,8 @@ git status --porcelain
 
 ### Step 2: Detect Environment
 
-**Target:** `{{target}}`
-**Environment:** `{{environment}}` (default: `staging`)
+**Target:** `$target`
+**Environment:** `$environment` (default: `staging`)
 
 If environment is `production`, add an extra confirmation step:
 
@@ -83,7 +80,7 @@ docker tag app:latest registry.example.com/app:$(git rev-parse --short HEAD)
 docker push registry.example.com/app:$(git rev-parse --short HEAD)
 
 # Deploy (compose)
-docker compose -f docker-compose.{{environment}}.yml up -d
+docker compose -f docker-compose.$environment.yml up -d
 ```
 
 **Pre-requisites:** `Dockerfile` exists, Docker daemon running.
@@ -98,7 +95,7 @@ docker compose -f docker-compose.{{environment}}.yml up -d
 [ -f "copilot/.workspace" ] && echo "COPILOT"
 
 # Serverless Framework
-npx sls deploy --stage {{environment}}
+npx sls deploy --stage $environment
 
 # AWS CDK
 npx cdk deploy --require-approval never
@@ -107,7 +104,7 @@ npx cdk deploy --require-approval never
 sam build && sam deploy --no-confirm-changeset
 
 # AWS Copilot
-copilot deploy --env {{environment}}
+copilot deploy --env $environment
 ```
 
 **Pre-requisites:** AWS credentials configured, deployment framework installed.
@@ -153,8 +150,8 @@ Generate a deployment summary:
 ```
 Deployment Summary
 ------------------
-Target:      {{target}}
-Environment: {{environment}}
+Target:      $target
+Environment: $environment
 Branch:      <current branch>
 Commit:      <short SHA + message>
 Status:      SUCCESS / FAILED

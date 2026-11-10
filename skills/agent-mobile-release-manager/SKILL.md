@@ -3,6 +3,7 @@ name: agent-mobile-release-manager
 description: "Specialist subagent: App store submissions, mobile CI/CD, ASO, code signing, and beta distribution specialist. Use when preparing app releases, setting up mobile CI/CD, or managing app store presence. Trigger phrases: app store, Play Store, TestFlight, release, code signing, provisioning profile, Fastlane, ASO, beta, OTA update, version, build number."
 context: fork
 agent: general-purpose
+background: false
 ---
 # Mobile Release Manager Agent
 

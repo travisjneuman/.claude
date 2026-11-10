@@ -3,6 +3,7 @@ name: agent-payment-billing-specialist
 description: "Specialist subagent: Stripe integration, subscription billing, webhooks, PCI compliance, and tax handling specialist. Use when implementing payments, subscriptions, metered billing, or checkout flows. Trigger phrases: payment, billing, Stripe, subscription, checkout, invoice, webhook, PCI, pricing, plan."
 context: fork
 agent: general-purpose
+background: false
 ---
 # Payment & Billing Specialist Agent
 

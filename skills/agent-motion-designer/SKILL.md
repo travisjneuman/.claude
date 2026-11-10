@@ -3,6 +3,7 @@ name: agent-motion-designer
 description: "Specialist subagent: Expert motion designer for UI animations, micro-interactions, and motion systems"
 context: fork
 agent: general-purpose
+background: false
 ---
 # Motion Designer Agent
 

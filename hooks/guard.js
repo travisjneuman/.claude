@@ -1,5 +1,6 @@
 #!/usr/bin/env node
-// PreToolUse guard for Bash, Write, Edit, and NotebookEdit.
+// PreToolUse guard for Bash, PowerShell, Write, Edit, and NotebookEdit. Shell
+// commands Claude starts with the Monitor tool arrive here as Bash calls.
 //
 // Claude Code sends the tool call as JSON on stdin ({tool_name, tool_input,
 // cwd, ...}). This hook answers with a structured deny when a call matches a
@@ -27,12 +28,18 @@ function readInput() {
 // for the tools it cares about and only after the public checks pass; its deny
 // (Claude Code JSON on stdout) is relayed unchanged.
 function runLocalGuard(tool) {
-  if (!["Bash", "EnterWorktree", "Agent", "Task"].includes(tool)) return;
+  if (!["Bash", "PowerShell", "EnterWorktree", "Agent", "Task"].includes(tool)) return;
+  // The private guard checks shell commands under the name Bash; a PowerShell
+  // command is the same git/shell text, so hand it over under that name.
+  let payload = RAW;
+  if (tool === "PowerShell") {
+    try { payload = JSON.stringify({ ...JSON.parse(RAW), tool_name: "Bash" }); } catch {}
+  }
   const path = require("path");
   const local = path.join(require("os").homedir(), ".claude", "local", "hooks", "local-pre-tool-use.py");
   if (!fs.existsSync(local)) return;
   const py = process.platform === "win32" ? "python" : "python3";
-  const r = require("child_process").spawnSync(py, [local], { input: RAW, encoding: "utf8", timeout: 9000 });
+  const r = require("child_process").spawnSync(py, [local], { input: payload, encoding: "utf8", timeout: 9000 });
   const out = (r.stdout || "").trim();
   if (out.includes('"permissionDecision"')) {
     process.stdout.write(out + "\n");
@@ -57,7 +64,9 @@ function deny(reason) {
 // attribution trailers separately, so a blocked word inside a quoted string
 // in an unrelated command does not trip the destructive-command checks.
 function stripHeredocs(cmd) {
-  return cmd.replace(/<<-?\s*['"]?(\w+)['"]?[\s\S]*?\n\1\b/g, "");
+  return cmd
+    .replace(/<<-?\s*['"]?(\w+)['"]?[\s\S]*?\n\1\b/g, "")
+    .replace(/@(['"])[ \t]*\r?\n[\s\S]*?\n\1@/g, ""); // PowerShell here-strings
 }
 
 // `git` plus global options before the subcommand: -C <path>, -c <key=value>,
@@ -81,24 +90,41 @@ const BASH_RULES = [
   [/\b(npm|yarn|pnpm)\s+publish\b/, "Package publishing is blocked."],
 ];
 
+// PowerShell-only forms of the same footguns. The git, SQL, docker and publish
+// rules above apply to PowerShell commands unchanged.
+const PS_ROOT = String.raw`["']?(?:~|\$HOME|\$env:USERPROFILE|\$env:HOMEPATH|\$env:SystemDrive|[A-Za-z]:|/)[\\/]?\*?["']?(?=\s|$|[;|&)])`;
+const POWERSHELL_RULES = [
+  // Remove-Item (or an alias) with both -Recurse and -Force, aimed at a drive or home root.
+  [new RegExp(String.raw`\b(?:Remove-Item|ri|rm|rmdir|rd|del|erase)\b(?=[^\n;|&]*\s-r(?:ec(?:urse)?)?\b)(?=[^\n;|&]*\s-fo(?:rce)?\b)[^\n;|&]*?\s${PS_ROOT}`, "i"), "Recursive force delete of a drive or home root is blocked."],
+  [new RegExp(String.raw`\b(?:rd|rmdir)\s+/s\b[^\n;|&]*?\s${PS_ROOT}`, "i"), "Recursive delete of a drive or home root is blocked."],
+  [/\b(?:iwr|irm|curl|wget|Invoke-WebRequest|Invoke-RestMethod)\b[^\n|]*\|\s*(?:iex|Invoke-Expression)\b/i, "Piping a download straight into Invoke-Expression is blocked; download, inspect, then run."],
+  [/\b(?:iex|Invoke-Expression)\b[\s(&"']*\(?\s*(?:iwr|irm|Invoke-WebRequest|Invoke-RestMethod|\(?\s*New-Object\s+(?:System\.)?Net\.WebClient)/i, "Running a download through Invoke-Expression is blocked; download, inspect, then run."],
+  [/\b(?:Format-Volume|Clear-Disk|Initialize-Disk)\b/i, "Disk formatting commands are blocked."],
+];
+
 // A force push or `reset --hard` the user approved for a repo they own runs
 // when the command carries GUARD_APPROVED_FORCE=<owner>/<repo>. The marker is
 // the agent's record of that approval, never a way around a refusal; a private
 // guard (below) can verify the owner and remotes.
 const OWNER_APPROVED_FORCE = /(^|[\s;&|(])GUARD_APPROVED_FORCE=[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+\s/;
+// The same record in PowerShell: $env:GUARD_APPROVED_FORCE = '<owner>/<repo>'; git push ...
+const OWNER_APPROVED_FORCE_PS = /\$env:GUARD_APPROVED_FORCE\s*=\s*(["'])[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+\1/i;
 
 const ATTRIBUTION = /Co-Authored-By:\s*(Claude|Codex|ChatGPT|OpenAI|Anthropic|AI\b|.*noreply@anthropic\.com)/i;
 
-function checkBash(input) {
+function checkShell(input, powershell) {
   const raw = String(input.tool_input?.command || "");
   if (!raw) return;
   if (/\bgit\b[\s\S]*\bcommit\b/.test(raw) && ATTRIBUTION.test(raw)) {
     deny("AI attribution trailers in commit messages are not allowed by this toolkit's rules.");
   }
   const cmd = stripHeredocs(raw);
-  const approved = OWNER_APPROVED_FORCE.test(cmd);
+  const approved = OWNER_APPROVED_FORCE.test(cmd) || (powershell && OWNER_APPROVED_FORCE_PS.test(cmd));
   for (const [re, reason, approvable] of BASH_RULES) {
     if (re.test(cmd) && !(approvable && approved)) deny(reason);
+  }
+  if (powershell) {
+    for (const [re, reason] of POWERSHELL_RULES) if (re.test(cmd)) deny(reason);
   }
 }
 
@@ -136,7 +162,8 @@ function normalize(input) {
 
 const input = normalize(readInput());
 const tool = input.tool_name || "";
-if (tool === "Bash") checkBash(input);
+if (tool === "Bash") checkShell(input, false);
+else if (tool === "PowerShell") checkShell(input, true);
 else if (tool === "Write" || tool === "Edit" || tool === "MultiEdit" || tool === "NotebookEdit") checkWrite(input);
 runLocalGuard(tool);
 process.exit(0);

@@ -74,6 +74,8 @@ echo ""
 
 # ---- git hooks for the toolkit repo itself ----
 bash "$CLAUDE_DIR/scripts/setup-hooks.sh" >/dev/null && echo -e "  ${GREEN}✓${NC} git hooks installed"
+# No-op today; builds settings.json from its layers once the toolkit ships them.
+node "$CLAUDE_DIR/scripts/build-settings.mjs" --quiet || true
 
 # ---- verify ----
 ERRORS=0

@@ -3,6 +3,7 @@ name: agent-embedded-developer
 description: "Specialist subagent: Embedded systems, firmware, RTOS, microcontrollers (STM32, ESP32, Arduino), IoT, and bare-metal C/C++ specialist. Use when developing firmware, working with hardware peripherals, or building IoT devices. Trigger phrases: embedded, firmware, RTOS, microcontroller, Arduino, ESP32, STM32, IoT, bare-metal, I2C, SPI, UART, FreeRTOS, Zephyr."
 context: fork
 agent: general-purpose
+background: false
 ---
 # Embedded Developer Agent
 

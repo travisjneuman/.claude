@@ -1,13 +1,12 @@
 ---
 description: Run comprehensive test suite with coverage analysis
-arguments:
-  - name: scope
-    description: "Test scope: unit | integration | e2e | all (default: all)"
-    required: false
+argument-hint: "[scope]"
 disable-model-invocation: true
 ---
 
 # Test Suite Runner
+
+**Arguments:** `scope` (optional): Test scope: unit | integration | e2e | all (default: all).
 
 Detects the project's test framework, runs tests at the specified scope, analyzes failures, reports coverage, and suggests missing test coverage.
 
@@ -45,7 +44,7 @@ Browser runners use only the copy the project already has (`npx --no`); never le
 
 ### Step 2: Run Tests by Scope
 
-**Scope:** `{{scope}}` (default: `all`)
+**Scope:** `$ARGUMENTS` (default: `all`)
 
 #### Unit Tests
 
@@ -192,7 +191,7 @@ Priority 3 (Missing edge cases):
 Test Suite Report
 =================
 Framework:    [detected]
-Scope:        {{scope}}
+Scope:        $ARGUMENTS
 Duration:     X.Xs
 
 Results:

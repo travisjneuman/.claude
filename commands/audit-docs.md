@@ -1,12 +1,11 @@
 ---
 description: Scan documentation for staleness — broken links, outdated counts, stale version references, and inconsistencies
-arguments:
-  - name: scope
-    description: "Optional scope to narrow the audit: 'counts', 'links', 'versions', or 'all' (default: all)"
-    required: false
+argument-hint: "[scope]"
 ---
 
 # Documentation Audit
+
+**Arguments:** `scope` (optional): Optional scope to narrow the audit: 'counts', 'links', 'versions', or 'all' (default: all).
 
 Scans all documentation files for staleness, broken references, count mismatches, and version drift.
 

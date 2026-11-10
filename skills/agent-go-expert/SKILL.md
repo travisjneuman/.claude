@@ -3,6 +3,7 @@ name: agent-go-expert
 description: "Specialist subagent: Go concurrency, error handling, stdlib patterns, Chi/Echo web frameworks specialist. Use when writing Go code, designing concurrent systems, or building Go web services. Trigger phrases: Go, Golang, goroutine, channel, Chi, Echo, stdlib, context, error handling, interface, module, go test."
 context: fork
 agent: general-purpose
+background: false
 ---
 # Go Expert Agent
 
@@ -393,11 +394,11 @@ func TestParseAmount(t *testing.T) {
         want    int64
         wantErr bool
     }{
-        {name: "valid dollars", input: "$10.50", want: 1050},
-        {name: "valid no cents", input: "$10", want: 1000},
-        {name: "zero", input: "$0.00", want: 0},
+        {name: "valid dollars", input: "\$10.50", want: 1050},
+        {name: "valid no cents", input: "\$10", want: 1000},
+        {name: "zero", input: "\$0.00", want: 0},
         {name: "invalid format", input: "abc", wantErr: true},
-        {name: "negative", input: "-$5.00", wantErr: true},
+        {name: "negative", input: "-\$5.00", wantErr: true},
         {name: "empty", input: "", wantErr: true},
     }
 

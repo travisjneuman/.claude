@@ -1,16 +1,13 @@
 ---
 description: Scaffold project components from templates
-arguments:
-  - name: type
-    description: "Component type: component | api | service | page | middleware | project"
-    required: true
-  - name: name
-    description: "Name for the scaffolded component (PascalCase or kebab-case)"
-    required: true
+argument-hint: "[type] [name]"
+arguments: [type, name]
 disable-model-invocation: true
 ---
 
 # Scaffold Component
+
+**Arguments:** `type` (required): Component type: component | api | service | page | middleware | project; `name` (required): Name for the scaffolded component (PascalCase or kebab-case).
 
 Generates project files following existing conventions. Detects the project type, creates properly structured files, and updates barrel exports.
 
@@ -37,7 +34,7 @@ Also scan existing files for naming conventions (PascalCase vs kebab-case, file 
 
 ### Step 2: Normalize Name
 
-Convert `{{name}}` to needed formats:
+Convert `$name` to needed formats:
 
 | Format      | Example (from "user-profile") |
 | ----------- | ----------------------------- |
@@ -212,7 +209,7 @@ Add the new export to the barrel file if one exists.
 Report what was created:
 
 ```
-Scaffolded: {{type}} "{{name}}"
+Scaffolded: $type "$name"
 
 Created files:
   - src/components/UserProfile/UserProfile.tsx

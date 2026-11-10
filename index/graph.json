@@ -62,15 +62,6 @@
    "description": "Specialist subagent: Third-party API integration, webhook handling, OAuth flows, rate limiting, and SDK wrapping specialist. Use when integrating external APIs, building webhook handlers, or creating…"
   },
   {
-   "id": "skill:agent-architecture-analyst",
-   "type": "skill",
-   "name": "agent-architecture-analyst",
-   "path": "skills/agent-architecture-analyst/SKILL.md",
-   "domain": "other",
-   "tier": "name-only",
-   "description": "Specialist subagent:"
-  },
-  {
    "id": "skill:agent-audio-engineer",
    "type": "skill",
    "name": "agent-audio-engineer",
@@ -188,15 +179,6 @@
    "description": "Specialist subagent: Expert database architect and engineer for PostgreSQL, MongoDB, Redis, and all major databases. Use when designing schemas, optimizing queries, planning migrations, implementing…"
   },
   {
-   "id": "skill:agent-debugging-specialist",
-   "type": "skill",
-   "name": "agent-debugging-specialist",
-   "path": "skills/agent-debugging-specialist/SKILL.md",
-   "domain": "quality",
-   "tier": "name-only",
-   "description": "Specialist subagent:"
-  },
-  {
    "id": "skill:agent-desktop-developer",
    "type": "skill",
    "name": "agent-desktop-developer",
@@ -213,15 +195,6 @@
    "domain": "systems",
    "tier": "name-only",
    "description": "Control native desktop apps with agent-desktop accessibility snapshots and actions on macOS, Windows, or Linux. Use for desktop UI tasks, never browser automation or web research."
-  },
-  {
-   "id": "skill:agent-devops-engineer",
-   "type": "skill",
-   "name": "agent-devops-engineer",
-   "path": "skills/agent-devops-engineer/SKILL.md",
-   "domain": "infra",
-   "tier": "name-only",
-   "description": "Specialist subagent:"
   },
   {
    "id": "skill:agent-devsecops-engineer",
@@ -339,15 +312,6 @@
    "domain": "frontend",
    "tier": "name-only",
    "description": "Specialist subagent: Expert internationalization specialist for multi-language support and localization"
-  },
-  {
-   "id": "skill:agent-ios-developer",
-   "type": "skill",
-   "name": "agent-ios-developer",
-   "path": "skills/agent-ios-developer/SKILL.md",
-   "domain": "mobile",
-   "tier": "name-only",
-   "description": "Specialist subagent:"
   },
   {
    "id": "skill:agent-kotlin-expert",
@@ -494,15 +458,6 @@
    "description": "Specialist subagent: Python best practices, type hints, async patterns, and ecosystem expertise. Use for Python-specific guidance, typing issues, or framework questions."
   },
   {
-   "id": "skill:agent-react-expert",
-   "type": "skill",
-   "name": "agent-react-expert",
-   "path": "skills/agent-react-expert/SKILL.md",
-   "domain": "frontend",
-   "tier": "name-only",
-   "description": "Specialist subagent:"
-  },
-  {
    "id": "skill:agent-realtime-specialist",
    "type": "skill",
    "name": "agent-realtime-specialist",
@@ -510,15 +465,6 @@
    "domain": "backend",
    "tier": "name-only",
    "description": "Specialist subagent: Expert real-time systems specialist for WebSockets, SSE, and live data applications"
-  },
-  {
-   "id": "skill:agent-refactoring-specialist",
-   "type": "skill",
-   "name": "agent-refactoring-specialist",
-   "path": "skills/agent-refactoring-specialist/SKILL.md",
-   "domain": "quality",
-   "tier": "name-only",
-   "description": "Specialist subagent:"
   },
   {
    "id": "skill:agent-rust-expert",
@@ -591,15 +537,6 @@
    "domain": "quality",
    "tier": "name-only",
    "description": "Specialist subagent: Generates comprehensive test suites using TDD patterns. Use only when the user explicitly asks for tests, improved coverage, or test-first development."
-  },
-  {
-   "id": "skill:agent-typescript-expert",
-   "type": "skill",
-   "name": "agent-typescript-expert",
-   "path": "skills/agent-typescript-expert/SKILL.md",
-   "domain": "systems",
-   "tier": "name-only",
-   "description": "Specialist subagent:"
   },
   {
    "id": "skill:agent-ux-researcher",
@@ -1727,12 +1664,44 @@
    "description": "Real-time communication with WebSockets, Server-Sent Events, and related technologies. Use when building chat, live updates, collaborative features, or any real-time functionality."
   },
   {
+   "id": "agent:architecture-analyst",
+   "type": "agent",
+   "name": "architecture-analyst",
+   "path": "agents/architecture-analyst.md",
+   "domain": "quality",
+   "description": "Analyzes system architecture, identifies patterns/anti-patterns, and provides strategic recommendations. Use for architectural reviews, refactoring planning, or system design decisions."
+  },
+  {
+   "id": "agent:debugging-specialist",
+   "type": "agent",
+   "name": "debugging-specialist",
+   "path": "agents/debugging-specialist.md",
+   "domain": "quality",
+   "description": "Systematic 4-phase debugging for complex and intermittent issues. Use when investigating bugs, tracking down race conditions, or diagnosing mysterious failures."
+  },
+  {
    "id": "agent:deep-code-reviewer",
    "type": "agent",
    "name": "deep-code-reviewer",
    "path": "agents/deep-code-reviewer.md",
    "domain": "quality",
    "description": "Thorough 6-aspect code review covering correctness, security, performance, maintainability, verification, and documentation. Use for comprehensive PR reviews or code quality audits."
+  },
+  {
+   "id": "agent:devops-engineer",
+   "type": "agent",
+   "name": "devops-engineer",
+   "path": "agents/devops-engineer.md",
+   "domain": "infra",
+   "description": "Expert DevOps and cloud infrastructure engineer for AWS, GCP, Azure, Kubernetes, Terraform, and CI/CD pipelines. Use when setting up pipelines, containerizing apps, writing infrastructure as code, or…"
+  },
+  {
+   "id": "agent:ios-developer",
+   "type": "agent",
+   "name": "ios-developer",
+   "path": "agents/ios-developer.md",
+   "domain": "mobile",
+   "description": "Expert iOS/iPadOS/tvOS developer specializing in Swift, SwiftUI, and Apple platform development"
   },
   {
    "id": "agent:performance-optimizer",
@@ -1743,12 +1712,36 @@
    "description": "Identifies performance bottlenecks and optimization opportunities. Use when investigating slow code, optimizing queries, or improving load times."
   },
   {
+   "id": "agent:react-expert",
+   "type": "agent",
+   "name": "react-expert",
+   "path": "agents/react-expert.md",
+   "domain": "frontend",
+   "description": "React patterns, hooks, state management, and performance optimization. Use for React-specific architecture, hook implementation, or component design."
+  },
+  {
+   "id": "agent:refactoring-specialist",
+   "type": "agent",
+   "name": "refactoring-specialist",
+   "path": "agents/refactoring-specialist.md",
+   "domain": "quality",
+   "description": "Safe, incremental, behavior-preserving refactoring validated by careful review. Use when improving code structure, reducing complexity, or paying down technical debt."
+  },
+  {
    "id": "agent:security-auditor",
    "type": "agent",
    "name": "security-auditor",
    "path": "agents/security-auditor.md",
    "domain": "security",
    "description": "Deep security analysis for OWASP Top 10, auth vulnerabilities, secrets exposure, and dependency risks. Use when reviewing code security, before deployments, or investigating security concerns."
+  },
+  {
+   "id": "agent:typescript-expert",
+   "type": "agent",
+   "name": "typescript-expert",
+   "path": "agents/typescript-expert.md",
+   "domain": "systems",
+   "description": "TypeScript type system mastery including generics, conditional types, and advanced patterns. Use when solving complex type problems or improving type safety."
   },
   {
    "id": "command:assemble-team",
@@ -2785,9 +2778,29 @@
  ],
  "edges": [
   {
+   "from": "skill:agent-android-developer",
+   "to": "agent:ios-developer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:agent-cloud-architect",
+   "to": "agent:devops-engineer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:agent-cloud-architect",
+   "to": "agent:architecture-analyst",
+   "rel": "pairs-with"
+  },
+  {
    "from": "skill:agent-cpp-expert",
    "to": "rule:cpp",
    "rel": "rules"
+  },
+  {
+   "from": "skill:agent-data-engineer",
+   "to": "agent:devops-engineer",
+   "rel": "pairs-with"
   },
   {
    "from": "skill:agent-devsecops-engineer",
@@ -2807,6 +2820,11 @@
   {
    "from": "skill:agent-documentation-writer",
    "to": "agent:deep-code-reviewer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:agent-flutter-developer",
+   "to": "agent:ios-developer",
    "rel": "pairs-with"
   },
   {
@@ -2831,12 +2849,22 @@
   },
   {
    "from": "skill:agent-observability-engineer",
+   "to": "agent:devops-engineer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:agent-observability-engineer",
    "to": "doc:checklists/monitoring-alerting-design",
    "rel": "reference"
   },
   {
    "from": "skill:agent-seo-specialist",
    "to": "agent:performance-optimizer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:agent-svelte-expert",
+   "to": "agent:react-expert",
    "rel": "pairs-with"
   },
   {
@@ -2848,6 +2876,11 @@
    "from": "skill:agent-teams",
    "to": "doc:workflows/agent-teams",
    "rel": "reference"
+  },
+  {
+   "from": "skill:agent-vue-nuxt-expert",
+   "to": "agent:react-expert",
+   "rel": "pairs-with"
   },
   {
    "from": "skill:agent-vue-nuxt-expert",
@@ -2865,6 +2898,11 @@
    "rel": "reference"
   },
   {
+   "from": "skill:business-strategy",
+   "to": "agent:architecture-analyst",
+   "rel": "pairs-with"
+  },
+  {
    "from": "skill:database-expert",
    "to": "agent:performance-optimizer",
    "rel": "pairs-with"
@@ -2873,6 +2911,21 @@
    "from": "skill:database-expert",
    "to": "doc:checklists/database-design",
    "rel": "reference"
+  },
+  {
+   "from": "skill:debug-systematic",
+   "to": "agent:debugging-specialist",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:devops-cloud",
+   "to": "agent:devops-engineer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:flutter-development",
+   "to": "agent:ios-developer",
+   "rel": "pairs-with"
   },
   {
    "from": "skill:flutter-development",
@@ -2926,7 +2979,7 @@
   },
   {
    "from": "skill:generic-fullstack-code-reviewer",
-   "to": "agent:performance-optimizer",
+   "to": "agent:architecture-analyst",
    "rel": "pairs-with"
   },
   {
@@ -2941,6 +2994,11 @@
   },
   {
    "from": "skill:generic-fullstack-feature-developer",
+   "to": "agent:architecture-analyst",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:generic-fullstack-feature-developer",
    "to": "doc:stacks/fullstack-nextjs-nestjs",
    "rel": "reference"
   },
@@ -2948,6 +3006,11 @@
    "from": "skill:generic-fullstack-feature-developer",
    "to": "doc:stacks/django-fastapi",
    "rel": "reference"
+  },
+  {
+   "from": "skill:generic-fullstack-ux-designer",
+   "to": "agent:typescript-expert",
+   "rel": "pairs-with"
   },
   {
    "from": "skill:generic-fullstack-ux-designer",
@@ -2970,9 +3033,34 @@
    "rel": "pairs-with"
   },
   {
+   "from": "skill:generic-react-design-system",
+   "to": "agent:react-expert",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:generic-react-feature-developer",
+   "to": "agent:react-expert",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:generic-react-feature-developer",
+   "to": "agent:architecture-analyst",
+   "rel": "pairs-with"
+  },
+  {
    "from": "skill:generic-react-feature-developer",
    "to": "doc:stacks/react-typescript",
    "rel": "reference"
+  },
+  {
+   "from": "skill:generic-react-ux-designer",
+   "to": "agent:react-expert",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:generic-react-ux-designer",
+   "to": "agent:typescript-expert",
+   "rel": "pairs-with"
   },
   {
    "from": "skill:generic-static-code-reviewer",
@@ -3011,6 +3099,11 @@
   },
   {
    "from": "skill:generic-static-ux-designer",
+   "to": "agent:react-expert",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:generic-static-ux-designer",
    "to": "doc:checklists/static-sites",
    "rel": "reference"
   },
@@ -3021,12 +3114,32 @@
   },
   {
    "from": "skill:ios-development",
+   "to": "agent:ios-developer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:ios-development",
    "to": "rule:swift-ios",
    "rel": "rules"
   },
   {
+   "from": "skill:kotlin-multiplatform",
+   "to": "agent:ios-developer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:literature-review-planner",
+   "to": "agent:architecture-analyst",
+   "rel": "pairs-with"
+  },
+  {
    "from": "skill:literature-review-planner",
    "to": "agent:deep-code-reviewer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:mobile-cicd",
+   "to": "agent:devops-engineer",
    "rel": "pairs-with"
   },
   {
@@ -3061,8 +3174,18 @@
   },
   {
    "from": "skill:react-native",
+   "to": "agent:ios-developer",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:react-native",
    "to": "doc:stacks/react-native-expo",
    "rel": "reference"
+  },
+  {
+   "from": "skill:serverless-development",
+   "to": "agent:devops-engineer",
+   "rel": "pairs-with"
   },
   {
    "from": "skill:supply-chain-optimizer",
@@ -3087,6 +3210,16 @@
   {
    "from": "skill:tech-debt-analyzer",
    "to": "agent:security-auditor",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:tech-debt-analyzer",
+   "to": "agent:refactoring-specialist",
+   "rel": "pairs-with"
+  },
+  {
+   "from": "skill:vue-development",
+   "to": "agent:react-expert",
    "rel": "pairs-with"
   },
   {

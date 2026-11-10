@@ -3,6 +3,7 @@ name: agent-graphql-architect
 description: "Specialist subagent: Expert GraphQL architect for API design, schema development, and performance optimization"
 context: fork
 agent: general-purpose
+background: false
 ---
 # GraphQL Architect Agent
 

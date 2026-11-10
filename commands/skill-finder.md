@@ -1,16 +1,15 @@
 ---
 description: AI-powered skill recommendation based on your problem description - finds the best local skills, agents, and marketplace resources
-arguments:
-  - name: problem
-    description: "Describe what you're trying to accomplish or the problem you're facing"
-    required: true
+argument-hint: "[problem]"
 ---
 
 # Skill Finder - AI-Powered Recommendation
 
+**Arguments:** `problem` (required): Describe what you're trying to accomplish or the problem you're facing.
+
 Analyzes your problem and recommends the best skills, agents, and marketplace resources from the complete ecosystem.
 
-## Analysis: `{{problem}}`
+## Analysis: `$ARGUMENTS`
 
 ### Step 1: Problem Classification
 

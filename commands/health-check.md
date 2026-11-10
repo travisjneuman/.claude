@@ -1,12 +1,11 @@
 ---
 description: Run diagnostics on Claude Code toolkit configuration and status
-arguments:
-  - name: verbose
-    description: "Show detailed output (default: false)"
-    required: false
+argument-hint: "[verbose]"
 ---
 
 # Health Check
+
+**Arguments:** `verbose` (optional): Show detailed output (default: false).
 
 Comprehensive diagnostics for Claude Code toolkit.
 
@@ -67,21 +66,21 @@ Compare each count with the generated counts line at the top of `~/.claude/INDEX
 grep -c '"type": "command"' ~/.claude/settings.json
 ```
 
-Expected: 7+ hook commands across 5+ events (SessionStart, Stop, UserPromptSubmit, PreToolUse, PostToolUse, PreCompact)
+Expected: 7 hook commands across 5 events (SessionStart, PreToolUse, PostToolUse, SessionEnd, Stop), plus the status line command.
 
 ### Step 4: Git Status
 
-**Check submodules:**
+**Check the toolkit checkout and its marketplace clones** (plain gitignored clones listed in `.gitmodules`; nothing is a git submodule):
 
 ```bash
-cd ~/.claude && git submodule status
+cd ~/.claude && git status -sb && bash _pull-all-repos.sh --status
 ```
 
 Verify:
 
-- [ ] All submodules initialized
-- [ ] No detached heads
-- [ ] No uncommitted changes
+- [ ] Toolkit checkout is on its default branch and not behind or diverged
+- [ ] No uncommitted changes that shouldn't be there
+- [ ] Marketplace clones (if any were initialized) are not detached
 
 ### Step 5: MCP Servers
 
@@ -104,7 +103,7 @@ The toolkit configures none by default; any listed server was added on this mach
 ║  Configuration:  OK OK                                      ║
 ║  Structure:      OK OK (N skills, N agents, N markets)      ║
 ║  Hooks:          OK N hooks wired in settings.json          ║
-║  Git:            OK Clean, submodules synced               ║
+║  Git:            OK Clean, marketplace clones current      ║
 ║  MCP Servers:    OK N configured (none by default)          ║
 ╠════════════════════════════════════════════════════════════╣
 ║  Status: HEALTHY                                            ║
@@ -116,7 +115,7 @@ The toolkit configures none by default; any listed server was added on this mach
 - List all skills
 - List all agents
 - Show hook details
-- Show git submodule status
+- Show marketplace clone status (`_pull-all-repos.sh --status`)
 - Show MCP server details
 
 ### Step 7: Recommendations

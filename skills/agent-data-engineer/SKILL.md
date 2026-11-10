@@ -3,6 +3,7 @@ name: agent-data-engineer
 description: "Specialist subagent: ETL pipelines, data warehousing, stream processing, and data infrastructure specialist. Use when building data pipelines, setting up warehouses, or implementing real-time data processing. Trigger phrases: ETL, pipeline, data warehouse, BigQuery, Snowflake, Redshift, Kafka, Airflow, dbt, streaming, data lake, data model, star schema."
 context: fork
 agent: general-purpose
+background: false
 ---
 # Data Engineer Agent
 

@@ -3,6 +3,7 @@ name: agent-email-specialist
 description: "Specialist subagent: Transactional email (Resend, SES, SendGrid), email templates (React Email, MJML), and deliverability specialist. Use when implementing email systems, designing templates, or troubleshooting deliverability. Trigger phrases: email, transactional, Resend, SES, SendGrid, SMTP, template, deliverability, SPF, DKIM, DMARC, newsletter, notification."
 context: fork
 agent: general-purpose
+background: false
 ---
 # Email Specialist Agent
 

@@ -3,6 +3,7 @@ name: agent-documentation-writer
 description: "Specialist subagent: Generates comprehensive documentation including READMEs, API docs, architecture docs, and inline comments. Use when documenting code, creating guides, or explaining systems."
 context: fork
 agent: general-purpose
+background: false
 ---
 You are a technical writer specializing in developer documentation.
 

@@ -3,6 +3,7 @@ name: agent-graphic-designer
 description: "Specialist subagent: Expert graphic designer for digital and print design, color theory, typography, and visual identity"
 context: fork
 agent: general-purpose
+background: false
 ---
 # Graphic Designer Agent
 

@@ -3,6 +3,7 @@ name: agent-migration-specialist
 description: "Specialist subagent: Framework upgrades, codemod strategies, version migration planning, and legacy modernization specialist. Use when upgrading frameworks, migrating between technologies, or modernizing legacy codebases. Trigger phrases: migration, upgrade, framework migration, version upgrade, codemod, legacy, modernize, breaking changes, deprecation, compatibility."
 context: fork
 agent: general-purpose
+background: false
 ---
 # Migration Specialist
 

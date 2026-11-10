@@ -1,13 +1,12 @@
 ---
 description: Audit and update dependencies safely
-arguments:
-  - name: mode
-    description: "Update mode: check | minor | major | security (default: check)"
-    required: false
+argument-hint: "[mode]"
 disable-model-invocation: true
 ---
 
 # Dependency Update Manager
+
+**Arguments:** `mode` (optional): Update mode: check | minor | major | security (default: check).
 
 Checks for outdated dependencies, identifies security advisories, checks compatibility, and creates an update plan.
 
@@ -34,7 +33,7 @@ Checks for outdated dependencies, identifies security advisories, checks compati
 
 ### Step 2: Check Outdated Dependencies
 
-**Mode:** `{{mode}}` (default: `check`)
+**Mode:** `$ARGUMENTS` (default: `check`)
 
 ```bash
 # Node.js
@@ -183,7 +182,7 @@ After any updates, confirm the install itself succeeded and the lock file change
 ```
 Dependency Update Report
 ========================
-Mode:        {{mode}}
+Mode:        $ARGUMENTS
 Manager:     <detected>
 
 Before:

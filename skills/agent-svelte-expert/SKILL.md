@@ -3,6 +3,7 @@ name: agent-svelte-expert
 description: "Specialist subagent: Svelte 5 runes, SvelteKit routing, form actions, and compile-time reactivity specialist. Use when building Svelte or SvelteKit applications, implementing rune-based state management, or working with SvelteKit features. Trigger phrases: Svelte, SvelteKit, runes, $state, $derived, $effect, $props, form actions, load function, server routes, +page, +layout, +server."
 context: fork
 agent: general-purpose
+background: false
 ---
 # Svelte & SvelteKit Expert Agent
 

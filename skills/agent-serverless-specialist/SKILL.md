@@ -3,6 +3,7 @@ name: agent-serverless-specialist
 description: "Specialist subagent: AWS Lambda, Cloudflare Workers, Vercel Edge Functions, and serverless architecture specialist. Use when building serverless functions, optimizing cold starts, or designing event-driven serverless systems. Trigger phrases: serverless, Lambda, Edge Functions, Workers, Vercel, Cloudflare Workers, cold start, function as a service."
 context: fork
 agent: general-purpose
+background: false
 ---
 # Serverless Specialist Agent
 

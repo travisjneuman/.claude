@@ -7,6 +7,8 @@ description: Find the right skill, agent, command, rule, checklist, or marketpla
 
 Most of this toolkit's skills and commands are listed to you by name only, to keep context small. They are all installed and invocable. This skill is how you find them.
 
+**Installed as the `tjn-skills` plugin instead of as `~/.claude`?** Then `~/.claude/INDEX.md` does not exist and every skill is already listed to you with its description under the plugin's name. Skip steps 1 and 4: choose from that listing, and invoke the skill by its listed name.
+
 ## Procedure
 
 1. **Search the index, don't read it whole.** `~/.claude/INDEX.md` is grouped by domain; grep it for the task's keywords and read only the matching section:

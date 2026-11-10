@@ -3,6 +3,7 @@ name: agent-rust-expert
 description: "Specialist subagent: Rust ownership/borrowing, async Rust, Axum/Actix web frameworks, and WASM specialist. Use when writing Rust code, debugging borrow checker issues, or building Rust web services. Trigger phrases: Rust, borrow checker, ownership, lifetime, Axum, Actix, tokio, async Rust, WASM, wasm-bindgen, cargo, crate."
 context: fork
 agent: general-purpose
+background: false
 ---
 # Rust Expert Agent
 

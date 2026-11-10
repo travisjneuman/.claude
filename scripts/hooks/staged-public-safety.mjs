@@ -84,6 +84,15 @@ try {
       if (binary && entry.mode !== "120000") continue;
       throw new Error("Staged text contains binary data; commit blocked.");
     }
+    // A link's blob is its target. One that is absolute or climbs out of the
+    // repository exists on the committing machine only and dangles everywhere else.
+    if (entry.mode === "120000") {
+      const target = text.trim();
+      const resolved = path.posix.normalize(path.posix.join(path.posix.dirname(file), target.replace(/\\/g, "/")));
+      if (path.posix.isAbsolute(target) || /^[A-Za-z]:[\\/]/.test(target) || resolved === ".." || resolved.startsWith("../")) {
+        throw new Error("Symlink to a path outside the repository is staged; commit blocked.");
+      }
+    }
     patternGate(text);
     for (const match of text.matchAll(secret)) {
       const value = match[3];
@@ -95,7 +104,7 @@ try {
   console.log("Staged marketplace, privacy, credential and ignored-file safety gates passed. No generation or tests run.");
 } catch (error) {
   // Never emit filenames, patterns, source URLs, matched text or raw Git errors.
-  const reason = /^(?:Private pattern gate blocked public content at line [0-9]+; refusing publication\.|Potential credential in final staged content; commit blocked\.)$/.test(error.message) ? error.message : "Staged publication safety failed.";
+  const reason = /^(?:Private pattern gate blocked public content at line [0-9]+; refusing publication\.|Potential credential in final staged content; commit blocked\.|Symlink to a path outside the repository is staged; commit blocked\.)$/.test(error.message) ? error.message : "Staged publication safety failed.";
   console.error(`COMMIT BLOCKED: ${reason} Staged entry ${stageOrdinal}. Review the index and private policy locally; do not bypass the hook.`);
   process.exitCode = 1;
 }

@@ -3,6 +3,7 @@ name: agent-auth-specialist
 description: "Specialist subagent: OAuth 2.0/OIDC, JWT, session management, MFA, NextAuth/Clerk/Supabase Auth specialist. Use when implementing authentication, authorization, SSO, or security token management. Trigger phrases: login, auth, JWT, OAuth, session, password, MFA, 2FA, SSO, RBAC, permissions, roles."
 context: fork
 agent: general-purpose
+background: false
 ---
 # Auth Specialist Agent
 

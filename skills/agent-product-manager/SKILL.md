@@ -3,6 +3,7 @@ name: agent-product-manager
 description: "Specialist subagent: Product requirements, user stories, roadmaps, prioritization frameworks, and sprint planning specialist. Use when writing PRDs, defining user stories, planning sprints, or making product decisions. Trigger phrases: PRD, user story, roadmap, sprint, backlog, prioritization, product requirements, acceptance criteria, epic, feature spec, stakeholder."
 context: fork
 agent: general-purpose
+background: false
 ---
 # Product Manager Agent
 

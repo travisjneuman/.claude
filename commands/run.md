@@ -1,13 +1,12 @@
 ---
 description: Execute prompt(s) from ./prompts/ with automatic archiving - for structured prompt-based work
-arguments:
-  - name: prompt_ids
-    description: "Prompt number(s) or name(s) to run. Examples: '001', '5 6 7', 'user-auth'. Use --parallel or --sequential for multiple prompts."
-    required: false
+argument-hint: "[prompt_ids]"
 disable-model-invocation: true
 ---
 
 # Run Prompt with Auto-Archive
+
+**Arguments:** `prompt_ids` (optional): Prompt number(s) or name(s) to run. Examples: '001', '5 6 7', 'user-auth'. Use --parallel or --sequential for multiple prompts.
 
 Execute one or more prompts from `./prompts/` directory, then automatically archive completed prompts to `.archive/completed-prompts/` per CLAUDE.md session protocol.
 
@@ -36,7 +35,7 @@ Execute one or more prompts from `./prompts/` directory, then automatically arch
 
 ## Implementation
 
-**Step 1:** Resolve `{{prompt_ids}}` against `./prompts/*.md`:
+**Step 1:** Resolve `$ARGUMENTS` against `./prompts/*.md`:
 
 - Empty: the most recently modified prompt
 - A number: the file with that zero-padded prefix (`5` matches `005-*.md`)

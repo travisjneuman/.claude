@@ -1,13 +1,12 @@
 ---
 description: Initialize project with CLAUDE.md template - adaptive detection for new or existing projects
-arguments:
-  - name: stack
-    description: "Optional: react | nextjs | static | python | automation (auto-detected if not provided)"
-    required: false
+argument-hint: "[stack]"
 disable-model-invocation: true
 ---
 
 # Initialize Project CLAUDE.md
+
+**Arguments:** `stack` (optional): Optional: react | nextjs | static | python | automation (auto-detected if not provided).
 
 Creates a properly configured `CLAUDE.md` file using the optimized template with global toolkit integration.
 
@@ -28,7 +27,7 @@ Creates a properly configured `CLAUDE.md` file using the optimized template with
 
 ### Step 2: Detect or Ask Stack
 
-**If `{{stack}}` argument provided:** Use that stack directly.
+**If `$ARGUMENTS` argument provided:** Use that stack directly.
 
 **If no argument:** Check for project files:
 

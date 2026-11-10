@@ -3,6 +3,7 @@ name: agent-database-expert
 description: "Specialist subagent: Expert database architect and engineer for PostgreSQL, MongoDB, Redis, and all major databases. Use when designing schemas, optimizing queries, planning migrations, implementing caching, or troubleshooting database performance."
 context: fork
 agent: general-purpose
+background: false
 ---
 # Database Expert Agent
 

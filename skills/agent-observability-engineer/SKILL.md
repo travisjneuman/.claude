@@ -3,6 +3,7 @@ name: agent-observability-engineer
 description: "Specialist subagent: OpenTelemetry, Prometheus, Grafana, distributed tracing, SLO design, and alerting specialist. Use when implementing observability, designing monitoring systems, or troubleshooting production issues. Trigger phrases: observability, monitoring, tracing, Prometheus, Grafana, OpenTelemetry, SLO, SLI, alerting, metrics, logging, distributed tracing, Jaeger, DataDog."
 context: fork
 agent: general-purpose
+background: false
 ---
 # Observability Engineer Agent
 
@@ -107,7 +108,7 @@ Trace Anatomy:
 │   └── Span: Route Handler (8ms) [kind: INTERNAL]
 │       ├── Span: Database Query (3ms) [kind: CLIENT]
 │       │   ├── Attribute: db.system = "postgresql"
-│       │   └── Attribute: db.statement = "SELECT * FROM users WHERE id = $1"
+│       │   └── Attribute: db.statement = "SELECT * FROM users WHERE id = \$1"
 │       ├── Span: Cache Lookup (1ms) [kind: CLIENT]
 │       │   └── Attribute: cache.hit = false
 │       └── Span: External API Call (4ms) [kind: CLIENT]

@@ -1,12 +1,11 @@
 ---
 description: Performance audit for web applications
-arguments:
-  - name: focus
-    description: "Audit focus: bundle | rendering | api | database | all (default: all)"
-    required: false
+argument-hint: "[focus]"
 ---
 
 # Performance Audit
+
+**Arguments:** `focus` (optional): Audit focus: bundle | rendering | api | database | all (default: all).
 
 Analyzes application performance across bundle size, rendering, API response times, and database queries. Provides actionable optimization recommendations.
 
@@ -37,7 +36,7 @@ Analyzes application performance across bundle size, rendering, API response tim
 
 ### Step 2: Run Audits by Focus
 
-**Focus:** `{{focus}}` (default: `all`)
+**Focus:** `$ARGUMENTS` (default: `all`)
 
 #### bundle - Bundle Size Analysis
 
@@ -178,7 +177,7 @@ Recommendations:
 ```
 Performance Audit Report
 ========================
-Focus:    {{focus}}
+Focus:    $ARGUMENTS
 Project:  <detected type>
 
 Score:    68/100

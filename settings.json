@@ -50,7 +50,6 @@
     "agent-android-developer": "name-only",
     "agent-api-designer": "name-only",
     "agent-api-integration-specialist": "name-only",
-    "agent-architecture-analyst": "name-only",
     "agent-audio-engineer": "name-only",
     "agent-auth-specialist": "name-only",
     "agent-blockchain-developer": "name-only",
@@ -64,10 +63,8 @@
     "agent-cpp-expert": "name-only",
     "agent-data-engineer": "name-only",
     "agent-database-expert": "name-only",
-    "agent-debugging-specialist": "name-only",
     "agent-desktop": "name-only",
     "agent-desktop-developer": "name-only",
-    "agent-devops-engineer": "name-only",
     "agent-devsecops-engineer": "name-only",
     "agent-django-fastapi-expert": "name-only",
     "agent-documentation-writer": "name-only",
@@ -82,7 +79,6 @@
     "agent-graphic-designer": "name-only",
     "agent-graphql-architect": "name-only",
     "agent-i18n-specialist": "name-only",
-    "agent-ios-developer": "name-only",
     "agent-kotlin-expert": "name-only",
     "agent-macos-developer": "name-only",
     "agent-microservices-architect": "name-only",
@@ -99,9 +95,7 @@
     "agent-product-manager": "name-only",
     "agent-pwa-specialist": "name-only",
     "agent-python-expert": "name-only",
-    "agent-react-expert": "name-only",
     "agent-realtime-specialist": "name-only",
-    "agent-refactoring-specialist": "name-only",
     "agent-rust-expert": "name-only",
     "agent-seo-specialist": "name-only",
     "agent-serverless-specialist": "name-only",
@@ -110,7 +104,6 @@
     "agent-teams": "name-only",
     "agent-technical-writer": "name-only",
     "agent-test-generator": "name-only",
-    "agent-typescript-expert": "name-only",
     "agent-ux-researcher": "name-only",
     "agent-video-producer": "name-only",
     "agent-vue-nuxt-expert": "name-only",
@@ -358,7 +351,7 @@
     ],
     "PreToolUse": [
       {
-        "matcher": "Bash|Write|Edit|MultiEdit|NotebookEdit|EnterWorktree|Agent|Task",
+        "matcher": "Bash|PowerShell|Write|Edit|MultiEdit|NotebookEdit|EnterWorktree|Agent|Task",
         "hooks": [
           {
             "type": "command",

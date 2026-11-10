@@ -3,6 +3,7 @@ name: agent-realtime-specialist
 description: "Specialist subagent: Expert real-time systems specialist for WebSockets, SSE, and live data applications"
 context: fork
 agent: general-purpose
+background: false
 ---
 # Real-Time Specialist Agent
 

@@ -9,7 +9,10 @@
 #   1. Skip if detached, without upstream, mid-merge/rebase, with conflicts, or
 #      held by a build (a <git-dir>/checkout-hold file under 3 hours old).
 #   2. Pending changes (anyone's): skip if a credential-looking string is in the
-#      diff or new files; otherwise `git add -A` and commit a checkpoint.
+#      diff or new files; otherwise `git add -A` and commit a checkpoint. New
+#      links to absolute paths outside the repo (an OS package or another tool
+#      linking its own files in) are first added to this clone's private
+#      exclude file, since they exist on this machine only.
 #   3. Push when ahead and not diverged, through REPO_PUSH_COMMAND (e.g. repo-sync
 #      push-safe) or `git push`.
 # Nested repos are handled before their parents so submodule pointers are current.
@@ -56,6 +59,23 @@ owned() {
   return 1
 }
 
+# Untracked symlinks whose target is an absolute path outside the repo would dangle
+# on every other machine. List them in <git-dir>/info/exclude (never committed).
+exclude_external_links() {
+  local repo="$1" gitdir="$2" name="$3" top f target
+  top=$(cd "$repo" && pwd -P) || return 0
+  while IFS= read -r -d '' f; do
+    [ -L "$repo/$f" ] || continue
+    target=$(readlink "$repo/$f") || continue
+    case "$target" in /*) ;; *) continue ;; esac
+    case "$target" in "$top"|"$top"/*) continue ;; esac
+    mkdir -p "$gitdir/info"
+    # Leading newline: the file may not end with one.
+    printf '\n/%s\n' "$f" >> "$gitdir/info/exclude"
+    log "EXCLUDED   $name/$f (link to a path outside the repo)"
+  done < <(git -C "$repo" ls-files -o --exclude-standard -z 2>/dev/null)
+}
+
 process() {
   local repo="$1" name gitdir branch
   name="${repo#$HOME/}"
@@ -71,6 +91,8 @@ process() {
   if [ -n "$(find "$gitdir/checkout-hold" -mmin -180 2>/dev/null)" ]; then
     log "SKIP checkout held by a build $name"; return 0
   fi
+
+  exclude_external_links "$repo" "$gitdir" "$name"
 
   if [ -n "$(git -C "$repo" status --porcelain)" ]; then
     local newfiles hit=""

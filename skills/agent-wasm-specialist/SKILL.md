@@ -3,6 +3,7 @@ name: agent-wasm-specialist
 description: "Specialist subagent: WebAssembly, WASI, wasm-bindgen, Emscripten, and cross-language compilation specialist. Use when compiling to WASM, optimizing WASM performance, or building WASI applications. Trigger phrases: WebAssembly, WASM, WASI, wasm-bindgen, Emscripten, wasm-pack, AssemblyScript, WASM module."
 context: fork
 agent: general-purpose
+background: false
 ---
 # WebAssembly Specialist Agent
 

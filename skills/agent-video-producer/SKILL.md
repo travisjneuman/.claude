@@ -3,6 +3,7 @@ name: agent-video-producer
 description: "Specialist subagent: Expert video production specialist for planning, shooting, editing, and delivering video content"
 context: fork
 agent: general-purpose
+background: false
 ---
 # Video Producer Agent
 

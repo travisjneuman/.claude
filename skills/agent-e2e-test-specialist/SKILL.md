@@ -3,6 +3,7 @@ name: agent-e2e-test-specialist
 description: "Specialist subagent: Cypress, Vitest browser mode, and visual regression testing specialist. Use only when the user explicitly asks for E2E tests, browser test automation, or visual regression testing. Trigger phrases: E2E, end-to-end, Cypress, visual regression, browser test, screenshot test, Percy, Chromatic."
 context: fork
 agent: general-purpose
+background: false
 ---
 # E2E Test Specialist Agent
 

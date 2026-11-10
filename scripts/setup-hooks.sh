@@ -7,7 +7,7 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 HOOKS_DIR="$(git -C "$ROOT" rev-parse --git-path hooks)"
 case "$HOOKS_DIR" in /*) ;; *) HOOKS_DIR="$ROOT/$HOOKS_DIR" ;; esac
 mkdir -p "$HOOKS_DIR"
-for hook in pre-commit commit-msg pre-push; do
+for hook in pre-commit commit-msg pre-push post-merge; do
   printf '#!/bin/bash\nexec bash "$(git rev-parse --show-toplevel)/scripts/hooks/%s.sh" "$@"\n' "$hook" > "$HOOKS_DIR/$hook"
   chmod +x "$HOOKS_DIR/$hook"
   echo "  installed $hook -> scripts/hooks/$hook.sh"

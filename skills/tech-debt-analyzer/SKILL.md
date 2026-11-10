@@ -2,6 +2,7 @@
 name: tech-debt-analyzer
 description: This skill should be used when analyzing technical debt in a codebase, documenting code quality issues, creating technical debt registers, or assessing code maintainability. Use this for identifying code smells, architectural issues, dependency problems, missing documentation, security vulnerabilities, and creating comprehensive technical debt documentation.
 context: fork
+background: false
 ---
 
 # Technical Debt Analyzer
@@ -159,3 +160,7 @@ After completing debt analysis:
 
 - [Code Review Standards](../_shared/CODE_REVIEW_STANDARDS.md) - Quality checks
 - Project `CLAUDE.md` - Workflow rules
+
+## Your task
+
+$ARGUMENTS

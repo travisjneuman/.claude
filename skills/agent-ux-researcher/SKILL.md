@@ -3,6 +3,7 @@ name: agent-ux-researcher
 description: "Specialist subagent: UX research, usability testing, user interviews, wireframing, and information architecture specialist. Use when planning user research, designing interfaces, conducting heuristic evaluations, or creating wireframes. Trigger phrases: UX research, user research, usability, wireframe, user interview, persona, journey map, information architecture, heuristic evaluation."
 context: fork
 agent: general-purpose
+background: false
 ---
 # UX Researcher Agent
 

@@ -1,6 +1,18 @@
 import fs from "fs";
 import path from "path";
-import snapshot from "../../../../counts.json";
+
+// counts.json lives at the repo root, outside the website project. Turbopack
+// resolves no module outside the project root (a bundler import of it fails the
+// build with "Module not found"), so it is read from disk at build time, the
+// same way readPublicSource() below reads every other public source file.
+let cachedCounts: PublicCounts | undefined;
+function loadSnapshot(): PublicCounts {
+  if (!cachedCounts) {
+    const file = path.resolve(process.cwd(), "..", "counts.json");
+    cachedCounts = JSON.parse(fs.readFileSync(file, "utf8")) as PublicCounts;
+  }
+  return cachedCounts;
+}
 
 export interface PublicHookIdentity {
   file: string;
@@ -33,7 +45,7 @@ export interface PublicCounts {
 // Same immutable generated identities/totals on local and hosted builds.
 // Old snapshots are not silently presented as newly measured data.
 export function getPublicCounts(): PublicCounts {
-  const counts = snapshot as unknown as PublicCounts;
+  const counts = loadSnapshot();
   if (counts.schemaVersion !== 2 || !counts.inventory || counts.provenance?.marketplace?.coverage !== "complete") {
     throw new Error("Public count inventory requires an explicit generate-counts.mjs --write refresh before publication.");
   }

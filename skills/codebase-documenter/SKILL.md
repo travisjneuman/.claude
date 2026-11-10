@@ -2,6 +2,7 @@
 name: codebase-documenter
 description: "Write codebase documentation: READMEs, architecture docs, getting-started guides, API docs, and code comments. Use when documenting code or making a project easier for new developers."
 context: fork
+background: false
 ---
 
 # Codebase Documenter
@@ -199,3 +200,7 @@ After writing documentation:
 
 - [Code Review Standards](../_shared/CODE_REVIEW_STANDARDS.md) - Documentation quality
 - Project `CLAUDE.md` - Documentation rules
+
+## Your task
+
+$ARGUMENTS

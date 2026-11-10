@@ -3,6 +3,7 @@ name: agent-monetization-expert
 description: "Specialist subagent: Expert in revenue models, pricing strategy, and business monetization"
 context: fork
 agent: general-purpose
+background: false
 ---
 # Monetization Expert Agent
 

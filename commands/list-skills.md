@@ -1,19 +1,18 @@
 ---
 description: Browse available skills by domain or list all skills with comprehensive categorization
-arguments:
-  - name: domain
-    description: "Optional domain filter: frontend, backend, devops, design, business, mobile, framework, scientific, testing, etc."
-    required: false
+argument-hint: "[domain]"
 disable-model-invocation: true
 ---
 
 # List Skills Command
 
+**Arguments:** `domain` (optional): Optional domain filter: frontend, backend, devops, design, business, mobile, framework, scientific, testing, etc.
+
 Browse all available skills across local and marketplace sources.
 
 ## Execution
 
-### If domain specified: `{{domain}}`
+### If domain specified: `$ARGUMENTS`
 
 Filter and display skills matching the domain:
 

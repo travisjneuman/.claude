@@ -70,6 +70,7 @@ Up: [github.com/travisjneuman](https://github.com/travisjneuman) · Not here: pe
 | project or task templates | [`templates/README.md`](./templates/README.md) | |
 | version history, release notes | [`CHANGELOG.md`](./CHANGELOG.md) | |
 | contributing, pull requests | [`CONTRIBUTING.md`](./CONTRIBUTING.md) | |
+| security, reporting a vulnerability, trust model | [`SECURITY.md`](./SECURITY.md) | What full access trusts and how to narrow it |
 | audit findings, open improvement items | [`advisor-plans/README.md`](./advisor-plans/README.md) | Status table; done and open |
 | showcase website, claude.travisjneuman.com | [`website/README.md`](./website/README.md) | Next.js static export |
 | VS Code settings | [`vscode/README.md`](./vscode/README.md) | |
@@ -135,6 +136,17 @@ git clone https://github.com/travisjneuman/.claude.git ~/.claude
 
 Already have a `~/.claude` that Claude Code created? Don't clone over it: download and run [`scripts/install-in-place.sh`](./scripts/install-in-place.sh), which turns it into a checkout and keeps your existing files.
 
+### Or: just the skills, as a plugin
+
+If you already have a `~/.claude` you like, you can take only the skills. This adds no hooks, no settings, no permission changes, and no background jobs. Inside Claude Code:
+
+```
+/plugin marketplace add travisjneuman/.claude
+/plugin install tjn-skills@tjn-claude
+```
+
+Skills then appear under the plugin's name, with their descriptions; Claude Code trims the least-used descriptions on its own if the listing gets too large, and `/skill-doctor` shows what each one costs. The agents, commands, rules, hooks, and `CLAUDE.md` are not part of the plugin; for those, use the full install above. (Added November 2026; if it misbehaves on your Claude Code version, please open an issue.)
+
 ### Optional: community marketplaces
 
 About 80 third-party skill repos, cloned read-only into an ignored folder. The toolkit works without them.
@@ -162,14 +174,14 @@ Read this before the first session. Everything here is switched off with one lin
 
 | What | When | Turn off with |
 |------|------|---------------|
-| Claude Code runs without permission prompts (`bypassPermissions`); the guard hook blocks only a short list of destructive commands | Every session | Change `permissions.defaultMode` in `settings.json` |
+| Claude Code runs without permission prompts (`bypassPermissions`); the guard hook blocks only a short list of destructive commands in Bash and PowerShell | Every session | Change `permissions.defaultMode` in `settings.json` |
 | Fast-forward pull of `~/.claude` from its `origin`, and of the marketplace clones | Background, at most daily | `PULL_INTERVAL_HOURS=0` |
 | Install and update the plugins `settings.json` enables | After that pull | `PLUGIN_AUTOINSTALL=0` |
 | Install missing language servers for the LSP plugins (`npm install -g`, or `pacman` where passwordless sudo exists) | After that pull | `LSP_AUTOINSTALL=0` |
 | Tally which skills, agents, and commands were used (names and counts only, stays on your machine) | Daily | `DAILY_MAINTENANCE=0` |
 | Commit and push pending work in repos you own | Session end and daily, **only after you set `GITHUB_OWNERS`** | Leave `GITHUB_OWNERS` unset, or `SESSION_END_AUTOPUSH=0` |
 
-**Trust model.** The daily pull brings in whatever the `origin` of your `~/.claude` publishes, including hook scripts that then run on your machine. If you cloned this repo directly, that origin is this repo. If you'd rather review changes first, use the template (your copy becomes the origin and you merge upstream when you choose) or set `PULL_INTERVAL_HOURS=0` and pull by hand. `settings.json` is the maintainer's working configuration: review its `enabledPlugins`, `env`, and `permissions` and make them yours.
+**Trust model.** The daily pull brings in whatever the `origin` of your `~/.claude` publishes, including hook scripts that then run on your machine. If you cloned this repo directly, that origin is this repo. If you'd rather review changes first, use the template (your copy becomes the origin and you merge upstream when you choose) or set `PULL_INTERVAL_HOURS=0` and pull by hand. `settings.json` is the maintainer's working configuration: review its `enabledPlugins`, `env`, and `permissions` and make them yours. Marketplace clones are other people's repositories, pulled at their latest commit and unreviewed; Claude can read and follow a skill from one. That is intended for a full-access setup, and [SECURITY.md](./SECURITY.md) says how to narrow it.
 
 ---
 
@@ -250,7 +262,7 @@ Session Start
   ├── Repo health banner (only when something needs attention)
   └── Private local hook (optional, from local/)
 
-Before Bash / Write / Edit
+Before Bash / PowerShell / Write / Edit
   └── Guard: blocks root rm -rf, force push, reset --hard, secret-file writes, AI trailers
 
 After File Edits
@@ -292,7 +304,7 @@ See **[docs/MARKETPLACE-GUIDE.md](./docs/MARKETPLACE-GUIDE.md)** for the full ca
 <details>
 <summary><strong>🛡️ Safety Guards</strong></summary>
 
-The `guard.js` hook blocks dangerous commands before execution:
+The `guard.js` hook blocks dangerous commands before execution, in Bash and in PowerShell (where it also blocks a recursive force delete of a drive or home root and piping a download into `Invoke-Expression`). It is pattern matching, a seatbelt rather than a sandbox; see [SECURITY.md](./SECURITY.md).
 
 | Blocked Pattern | Risk |
 |----------------|------|

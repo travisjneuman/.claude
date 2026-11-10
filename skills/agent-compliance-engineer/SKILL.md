@@ -3,6 +3,7 @@ name: agent-compliance-engineer
 description: "Specialist subagent: SOC2, HIPAA, GDPR, PCI-DSS compliance implementation specialist. Use when implementing audit logging, data encryption, access controls, privacy by design, or preparing for compliance audits. Trigger phrases: SOC2, HIPAA, GDPR, PCI, compliance, audit log, data privacy, encryption, access control, DSAR, consent."
 context: fork
 agent: general-purpose
+background: false
 ---
 # Compliance Engineer Agent
 

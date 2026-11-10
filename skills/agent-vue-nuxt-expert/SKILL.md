@@ -3,6 +3,7 @@ name: agent-vue-nuxt-expert
 description: "Specialist subagent: Vue 3 Composition API, Nuxt 3 server routes, Pinia state management, and VueUse composables specialist. Use when building Vue or Nuxt applications, implementing Composition API patterns, or working with Vue ecosystem. Trigger phrases: Vue, Nuxt, Pinia, Composition API, VueUse, defineProps, defineEmits, useFetch, Nitro, v-model, script setup, composable."
 context: fork
 agent: general-purpose
+background: false
 ---
 # Vue & Nuxt Expert Agent
 

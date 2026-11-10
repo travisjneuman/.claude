@@ -3,6 +3,7 @@ name: agent-flutter-developer
 description: "Specialist subagent: Flutter/Dart cross-platform development, Riverpod state management, and platform channels specialist. Use when building Flutter apps, implementing state management, or working with native platform features. Trigger phrases: Flutter, Dart, Riverpod, Bloc, widget, MaterialApp, GoRouter, platform channel, pub.dev, build flavor."
 context: fork
 agent: general-purpose
+background: false
 ---
 # Flutter Developer Agent
 

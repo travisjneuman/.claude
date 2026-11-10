@@ -10,14 +10,41 @@ All notable changes to the Ultimate Claude Code Toolkit.
 - `scripts/install.sh` rewritten: no submodule flags (marketplaces are plain clones), no `.mcp.json` (the toolkit ships no MCP servers, and the old file named packages that don't exist), no prompt that moves `~/.claude` aside. It clones or fast-forward pulls, installs the git hooks, and points an existing non-checkout `~/.claude` at `install-in-place.sh`. Docs now say download, read, run instead of piping into a shell.
 - New switches in the local layer: `PLUGIN_AUTOINSTALL=0` (background pull never installs or updates plugins) and `LSP_AUTOINSTALL=0` (never install language servers globally). `.env.example` lists every background switch; the README has a "What runs on its own" table and the trust model of the daily pull.
 
-### Tier tuning no longer writes broken skills
-- `scripts/tune-tiers.mjs` normalises CRLF before parsing frontmatter and skips an agent (reported as `SKIPPED`) when its frontmatter or description can't be read, instead of writing a skill with an empty description and two frontmatter blocks. `.gitattributes` pins `*.md`, `*.sh`, `*.js`, `*.mjs` to LF.
-- Repaired the seven skills that had been written that way (`agent-architecture-analyst`, `agent-debugging-specialist`, `agent-devops-engineer`, `agent-ios-developer`, `agent-react-expert`, `agent-refactoring-specialist`, `agent-typescript-expert`). `agents/README.md` lists the agents that exist and links the moved ones.
-- `counts.json`, `plugin.json` counts, and the website still say 10 agents; that changes with the next explicit count refresh.
+### The seven demoted agents are back, and tuning can no longer lose anything
+- Restored `architecture-analyst`, `debugging-specialist`, `devops-engineer`, `ios-developer`, `react-expert`, `refactoring-specialist` and `typescript-expert` to `agents/`, byte-identical to the published snapshot. Weekly tuning had turned them into `agent-*` skills, which dropped their `tools`, `memory`, `background` and `omitClaudeMd` settings and (on a CRLF checkout) left the skills with an empty description and two frontmatter blocks. The toolkit has 10 agents again, as the README, `counts.json` and the website say.
+- `scripts/tune-tiers.mjs`: agents are now reported only and move only with `--move-agents`. When one does move, its own frontmatter is kept beside the skill (`agent-frontmatter.yml`) and restored on promotion; descriptions written as block or multi-line YAML are read correctly; CRLF is normalised; an unreadable file is skipped (`SKIPPED`) instead of written broken; a promotion no longer deletes other files in the skill folder. `.gitattributes` pins `*.md`, `*.sh`, `*.js`, `*.mjs` to LF.
+
+### Website build fix
+- The Cloudflare Pages build had failed on every push since 2026-10-10 with `Module not found: Can't resolve '../../../../counts.json'`: Turbopack resolves nothing outside the project root. `website/src/lib/data/snapshot.ts` now reads `counts.json` from disk at build time, like every other public source file. The second failure waiting behind it (the agent list in `counts.json` named seven files that no longer existed) is gone with the agents restored.
+
+### Guard covers PowerShell
+- `hooks/guard.js` now also checks Claude Code's PowerShell tool (on by default on Windows), which it never saw before: the git, SQL, docker and publish rules apply unchanged, plus a recursive force delete of a drive or home root, piping a download into `Invoke-Expression`, and disk formatting. A private `local-pre-tool-use.py` receives PowerShell commands under the tool name `Bash`. Commands started with the Monitor tool already arrive as Bash calls.
+
+### Skills and commands behave as written
+- All 58 `agent-<name>` specialist skills set `background: false`: the caller waits for the specialist's answer and the subagent keeps the full tool set, instead of running in the background with a reduced one. `codebase-documenter` and `tech-debt-analyzer` (forked, but with no task in them) now end with the task they are given; `debug-systematic` loads into the conversation instead of a forked subagent, because the bug's context is in the conversation.
+- 20 commands declared `arguments:` as a list of objects and used `{{name}}` placeholders, neither of which Claude Code substitutes. They now use `argument-hint`, `$ARGUMENTS` for a single argument and `$name` for two; each argument's description moved into the command body.
+- `/bootstrap` and `/health-check` check marketplace clones instead of `git submodule status` and no longer expect a `.mcp.json` or a Prettier hook; `/start-task` no longer queries a memory that doesn't exist; `/backup-config` and `/discover-skills` no longer say "submodule".
+- Literal `$0`/`$1`-style text in `agent-go-expert`, `agent-observability-engineer` and `agent-cloud-architect` is escaped so a task passed to them isn't substituted into their examples.
+
+### Install just the skills as a plugin
+- New `.claude-plugin/marketplace.json`: `/plugin marketplace add travisjneuman/.claude`, then `/plugin install tjn-skills@tjn-claude`, installs the `skills/` folder as a plugin with no hooks, settings, permission changes or background jobs. The root `plugin.json` stays as the toolkit's own metadata file; Claude Code does not read it.
+
+### Security policy and trust model
+- New root `SECURITY.md`: how to report a problem privately, and what a full-access setup trusts on purpose (no permission prompts, a guard that is a seatbelt and not a sandbox, the daily self-update, unreviewed community marketplaces whose skills Claude may follow, background plugin installs) with the switch that narrows each one. `docs/SECURITY.md` links to it.
+
+### Host-only links can't be committed again
+- The session-end checkpoint now lists any new symlink to an absolute path outside the repo in the clone's `.git/info/exclude` before it stages anything, and the pre-commit gate refuses a staged symlink that points outside the repository. That is how `skills/omarchy` and `skills/diagnose-crash` got committed from one Linux host.
+
+### Groundwork for separating personal settings (dormant)
+- `scripts/build-settings.mjs`, a `post-merge` git hook, and calls from the pull script and installer. They do nothing until `settings.json` stops being tracked; see `advisor-plans/README.md`, item 10.
+
+### If you installed before November 2026
+- Run `git -C ~/.claude remote -v`. If you use your own copy of this repo and `origin` points at `travisjneuman/.claude`, an older `init-marketplaces.sh` changed it; set it back with `git remote set-url origin <your repo URL>`.
+- If you set `CUSTOM_PROJECT_DIRS`, check your own repos there with `git remote get-url --push origin`. If it prints `no_push`, an older pull script disabled pushing; restore it with `git remote set-url --push origin "$(git remote get-url origin)"`.
 
 ### Smaller fixes
 - `hooks/secret-scan.js` reports line numbers only, so a real credential is not copied into the conversation.
-- Untracked `skills/diagnose-crash` and `skills/omarchy`: symlinks to absolute paths on one Linux host, dangling everywhere else. Now gitignored.
+- Untracked `skills/diagnose-crash` and `skills/omarchy`: symlinks to absolute paths on one Linux host, dangling everywhere else. Now gitignored, so that host keeps its own links.
 - Removed the empty stray file `docs/seddsoprg`. README badge and `plugin.json` version now match the latest release (3.6.1).
 
 ### Telemetry off

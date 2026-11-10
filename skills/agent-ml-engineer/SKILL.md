@@ -3,6 +3,7 @@ name: agent-ml-engineer
 description: "Specialist subagent: Expert machine learning engineer for PyTorch, TensorFlow, LLM integration, and ML pipelines"
 context: fork
 agent: general-purpose
+background: false
 ---
 # ML Engineer Agent
 

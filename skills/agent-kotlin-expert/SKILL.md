@@ -3,6 +3,7 @@ name: agent-kotlin-expert
 description: "Specialist subagent: Kotlin Multiplatform, Compose Multiplatform, coroutines, Ktor, and JVM ecosystem specialist. Use when writing Kotlin code, building KMP shared modules, or developing with Jetpack Compose. Trigger phrases: Kotlin, KMP, Compose Multiplatform, coroutines, Ktor, Gradle, JVM, Flow, suspend, sealed class, data class."
 context: fork
 agent: general-purpose
+background: false
 ---
 # Kotlin Expert Agent
 

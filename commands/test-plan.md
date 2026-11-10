@@ -1,13 +1,12 @@
 ---
 description: Generate a test strategy document — test matrix, coverage goals, and test pyramid allocation for the current project
-arguments:
-  - name: focus
-    description: "Optional focus area: a specific module, feature, or directory to scope the plan (e.g., 'src/auth', 'payment flow')"
-    required: false
+argument-hint: "[focus]"
 disable-model-invocation: true
 ---
 
 # Test Plan Generator
+
+**Arguments:** `focus` (optional): Optional focus area: a specific module, feature, or directory to scope the plan (e.g., 'src/auth', 'payment flow').
 
 Analyzes the current project structure and generates a comprehensive test strategy document with test matrix, coverage goals, and test pyramid allocation.
 
@@ -63,7 +62,7 @@ ls -d test/ tests/ __tests__/ e2e/ integration/ 2>/dev/null
 find . -maxdepth 3 -type d -not -path "*/node_modules/*" -not -path "*/.git/*" -not -path "*/dist/*" -not -path "*/.next/*" -not -path "*/__pycache__/*" | head -40
 ```
 
-If `{{focus}}` is provided, narrow discovery to that area only.
+If `$ARGUMENTS` is provided, narrow discovery to that area only.
 
 ---
 

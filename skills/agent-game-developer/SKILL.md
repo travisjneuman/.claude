@@ -3,6 +3,7 @@ name: agent-game-developer
 description: "Specialist subagent: Expert game developer for Unity, Unreal Engine, and Godot game development"
 context: fork
 agent: general-purpose
+background: false
 ---
 # Game Developer Agent
 

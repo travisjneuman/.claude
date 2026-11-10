@@ -1,15 +1,17 @@
 #!/usr/bin/env node
 // Weekly tier tuning from real usage.
 //
-//   node scripts/tune-tiers.mjs --usage-dir <dir> [--report <file.md>] [--apply]
+//   node scripts/tune-tiers.mjs --usage-dir <dir> [--report <file.md>] [--apply] [--move-agents]
 //
 // Reads every <HOST>.json written by hooks/daily-maintenance.js, totals the last
 // 30 days, and adjusts what is always visible to Claude:
 //   - skills / commands used >= 3 times become core (full description listed);
 //   - core skills / commands unused for 30 days become name-only
 //     (only once at least 30 days of data exist; toolkit-router and core-workflow stay);
-//   - agent-<name> skills used >= 3 times become core agents (agents/<name>.md);
-//   - core agents unused for 30 days become agent-<name> skills again.
+//   - agents are reported, and moved only with --move-agents: agent-<name> skills used
+//     >= 3 times become core agents (agents/<name>.md); core agents unused for 30 days
+//     become agent-<name> skills. The agent file's own frontmatter is kept beside the
+//     skill (agent-frontmatter.yml) and restored on promotion, so a move loses nothing.
 // Caps: 30 core skills, 12 core commands, 12 core agents. After applying, the index
 // is regenerated and the context budgets checked; if a budget fails, every change
 // is undone. Without --apply it only reports.
@@ -24,6 +26,7 @@ const arg = (k) => { const i = process.argv.indexOf(k); return i > 0 ? process.a
 const usageDir = arg("--usage-dir");
 const reportFile = arg("--report");
 const apply = process.argv.includes("--apply");
+const moveAgents = process.argv.includes("--move-agents");
 if (!usageDir) { console.error("usage: tune-tiers.mjs --usage-dir <dir> [--report file] [--apply]"); process.exit(2); }
 
 const WINDOW = 30, MIN = 3, PINNED = new Set(["toolkit-router", "core-workflow"]);
@@ -73,37 +76,60 @@ const newCoreCommands = new Set(tiers.core_commands);
 for (const c of commandNames) if (!newCoreCommands.has(c) && used(c) >= MIN && newCoreCommands.size < CAP.commands) { newCoreCommands.add(c); changes.push(`command ${c}: name-only → core (${used(c)} uses)`); }
 if (canDemote) for (const c of [...newCoreCommands]) if (used(c) === 0) { newCoreCommands.delete(c); changes.push(`command ${c}: core → name-only (unused ${WINDOW}d)`); }
 
-// agents
+// agents: moved only with --move-agents. A move changes what every user of the public
+// repo gets, and the website build reads the agent list from counts.json, so a move
+// also needs a count refresh (docs/COUNT-PIPELINE.md). Without the flag: report only.
 const agentUses = (n) => (totals.agents[n] || 0) + used(`agent-${n}`);
 const promoteAgents = agentSkills.filter((n) => agentUses(n) >= MIN).slice(0, Math.max(0, CAP.agents - coreAgents.length));
 const demoteAgents = canDemote ? coreAgents.filter((n) => agentUses(n) === 0) : [];
-promoteAgents.forEach((n) => changes.push(`agent ${n}: on-demand skill → core agent (${agentUses(n)} uses)`));
-demoteAgents.forEach((n) => changes.push(`agent ${n}: core agent → on-demand skill (unused ${WINDOW}d)`));
+const agentNote = moveAgents ? "" : " [not applied: pass --move-agents]";
+promoteAgents.forEach((n) => changes.push(`agent ${n}: on-demand skill → core agent (${agentUses(n)} uses)${agentNote}`));
+demoteAgents.forEach((n) => changes.push(`agent ${n}: core agent → on-demand skill (unused ${WINDOW}d)${agentNote}`));
+
+const FRONTMATTER = /^---\n([\s\S]*?)\n---\n?([\s\S]*)$/;
+// A description may be one line, quoted, a block scalar (> or |), or continued on indented lines.
+function fmDescription(fm) {
+  const lines = fm.split("\n");
+  const i = lines.findIndex((l) => /^description:/.test(l));
+  if (i < 0) return "";
+  let first = lines[i].replace(/^description:\s*/, "").trim();
+  if (/^[>|][-+]?$/.test(first)) first = "";
+  const rest = [];
+  for (let j = i + 1; j < lines.length && (/^\s+\S/.test(lines[j]) || lines[j].trim() === ""); j++) rest.push(lines[j].trim());
+  return [first, ...rest].filter(Boolean).join(" ").replace(/^["']|["']$/g, "").trim();
+}
+// An agent file's own frontmatter (tools, memory, background, omitClaudeMd, ...) has no
+// equivalent in a skill, so it is kept beside the skill and put back on promotion.
+const sidecar = (n) => path.join(root, "skills", `agent-${n}`, "agent-frontmatter.yml");
 
 function agentToSkill(n) {
   const src = path.join(root, "agents", `${n}.md`);
-  const text = read(src);
-  const m = text.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
-  const desc = ((m?.[1] || "").match(/^description:\s*(.*)$/m)?.[1] || "").replace(/^["']|["']$/g, "").replace(/"/g, "'").trim();
+  const m = read(src).match(FRONTMATTER);
+  const desc = fmDescription(m?.[1] || "").replace(/"/g, "'");
   // Never write a skill with an empty description or a second frontmatter block.
   if (!m || !desc) throw new Error(`agents/${n}.md: frontmatter or description not readable; left unchanged`);
   const dst = path.join(root, "skills", `agent-${n}`, "SKILL.md");
-  remember(src); remember(dst);
+  remember(src); remember(dst); remember(sidecar(n));
   fs.mkdirSync(path.dirname(dst), { recursive: true });
-  fs.writeFileSync(dst, `---\nname: agent-${n}\ndescription: "Specialist subagent: ${desc}"\ncontext: fork\nagent: general-purpose\n---\n${m[2].trim()}\n\n## Your task\n\n$ARGUMENTS\n`);
+  fs.writeFileSync(sidecar(n), m[1] + "\n");
+  // background: false = the caller waits for the specialist's answer and it keeps the full tool set.
+  fs.writeFileSync(dst, `---\nname: agent-${n}\ndescription: "Specialist subagent: ${desc}"\ncontext: fork\nagent: general-purpose\nbackground: false\n---\n${m[2].trim()}\n\n## Your task\n\n$ARGUMENTS\n`);
   fs.rmSync(src);
 }
 function skillToAgent(n) {
   const src = path.join(root, "skills", `agent-${n}`, "SKILL.md");
-  const text = read(src);
-  const m = text.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
-  const desc = ((m?.[1] || "").match(/^description:\s*"?(.*?)"?$/m)?.[1] || "").replace(/^Specialist subagent:\s*/, "").trim();
+  const m = read(src).match(FRONTMATTER);
+  const desc = fmDescription(m?.[1] || "").replace(/^Specialist subagent:\s*/, "").trim();
   if (!m || !desc) throw new Error(`skills/agent-${n}/SKILL.md: frontmatter or description not readable; left unchanged`);
-  const body = (m?.[2] || "").replace(/\n## Your task\n\n\$ARGUMENTS\n?$/, "").trim();
+  const body = m[2].replace(/\n## Your task\n\n\$ARGUMENTS\n?$/, "").trim();
   const dst = path.join(root, "agents", `${n}.md`);
-  remember(src); remember(dst);
-  fs.writeFileSync(dst, `---\nname: ${n}\ndescription: ${desc}\n---\n${body}\n`);
-  fs.rmSync(path.dirname(src), { recursive: true });
+  const original = read(sidecar(n)).trim();
+  remember(src); remember(dst); remember(sidecar(n));
+  fs.writeFileSync(dst, `---\n${original || `name: ${n}\ndescription: ${desc}`}\n---\n${body}\n`);
+  fs.rmSync(src);
+  if (fs.existsSync(sidecar(n))) fs.rmSync(sidecar(n));
+  // Other files in the skill folder (references, assets) stay; the folder goes only when empty.
+  try { fs.rmdirSync(path.dirname(src)); } catch {}
 }
 
 let applied = false, reverted = false, budgetOutput = "";
@@ -113,8 +139,10 @@ if (apply && changes.length) {
   fs.writeFileSync(tiersPath, JSON.stringify({ ...tiers, core_skills: [...newCoreSkills], core_commands: [...newCoreCommands] }, null, 2) + "\n");
   // One unreadable file skips that agent only; the rest of the tuning still applies.
   const convert = (fn) => (n) => { try { fn(n); } catch (e) { changes.push(`SKIPPED agent ${n}: ${e.message}`); } };
-  promoteAgents.forEach(convert(skillToAgent));
-  demoteAgents.forEach(convert(agentToSkill));
+  if (moveAgents) {
+    promoteAgents.forEach(convert(skillToAgent));
+    demoteAgents.forEach(convert(agentToSkill));
+  }
   spawnSync(process.execPath, [path.join(root, "scripts/generate-index.mjs"), "--write"], { stdio: "ignore" });
   const b = spawnSync(process.execPath, [path.join(root, "scripts/check-budgets.mjs")], { encoding: "utf8" });
   budgetOutput = (b.stdout + b.stderr).trim();

@@ -1,9 +1,15 @@
 ---
-name: agent-ios-developer
-description: "Specialist subagent: Expert iOS/iPadOS/tvOS developer specializing in Swift, SwiftUI, and Apple platform development"
-context: fork
-agent: general-purpose
+name: ios-developer
+description: Expert iOS/iPadOS/tvOS developer specializing in Swift, SwiftUI, and Apple platform development
+tools:
+  - Glob
+  - Grep
+  - Read
+  - Write
+  - Edit
+  - Bash
 ---
+
 # iOS Developer Agent
 
 Expert iOS, iPadOS, and tvOS application developer with deep knowledge of Swift, SwiftUI, UIKit, and Apple's ecosystem.
@@ -58,7 +64,3 @@ When working on iOS development:
 - `ios-development` - Comprehensive iOS development patterns
 - `pwa-development` - For web-based alternatives
 - `ui-animation` - For motion design principles
-
-## Your task
-
-$ARGUMENTS

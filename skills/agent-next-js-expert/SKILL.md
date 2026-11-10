@@ -3,6 +3,7 @@ name: agent-next-js-expert
 description: "Specialist subagent: Next.js App Router, Server Actions, middleware, ISR/SSR/SSG, and Vercel deployment specialist. Use when building Next.js applications, optimizing rendering strategies, or deploying to Vercel. Trigger phrases: Next.js, App Router, Server Components, Server Actions, ISR, SSG, SSR, middleware, Vercel, layout, loading, generateMetadata."
 context: fork
 agent: general-purpose
+background: false
 ---
 # Next.js Expert Agent
 

@@ -3,6 +3,7 @@ name: agent-startup-advisor
 description: "Specialist subagent: Expert startup advisor for launch strategy, validation, MVP development, and growth"
 context: fork
 agent: general-purpose
+background: false
 ---
 # Startup Advisor Agent
 

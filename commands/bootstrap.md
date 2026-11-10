@@ -11,7 +11,7 @@ Verifies and repairs the Claude Code Toolkit installation.
 - Fresh install verification (after running install.sh)
 - Troubleshooting configuration issues
 - Ensuring cross-machine sync is working
-- Repairing broken submodule configurations
+- Repairing marketplace clone configuration (missing clones, missing `no_push`)
 
 ---
 
@@ -40,21 +40,22 @@ Check that essential files exist:
 | `CLAUDE.md`                      | Core rules and configuration | ✓                     |
 | `settings.json`                  | Permissions, hooks, plugins  | ✓                     |
 | `hooks/run-hook.js`              | Hook dispatcher              | ✓                     |
-| `.mcp.json`                      | MCP server configuration     | ✓ (platform-specific) |
 
 **Action:** Read and verify each file exists. If missing, report which files need attention.
 
 ---
 
-### Step 3: Submodule Health Check
+### Step 3: Marketplace Clone Check
 
-Verify all marketplace repos are properly configured:
+Marketplaces are optional plain clones under `plugins/marketplaces/` (gitignored). `.gitmodules` is only the manifest that lists them; nothing is a git submodule. If the folder is empty the user simply hasn't run `scripts/init-marketplaces.sh`, which is fine.
 
 ```bash
 cd ~/.claude
 
-# Check submodule status
-git submodule status
+# Manifest entries that have no clone yet
+git config --file .gitmodules --get-regexp path | cut -d' ' -f2 | while read -r p; do
+    [ -d "$p/.git" ] || echo "NOT CLONED: $p"
+done
 
 # Verify no_push on all marketplace repos
 for repo in plugins/marketplaces/*/; do
@@ -95,12 +96,7 @@ Check that hooks are properly configured:
 
 ### Step 5: MCP Configuration Check
 
-Verify `.mcp.json` exists and matches the platform:
-
-**For macOS/Linux:** Commands should use `npx` directly
-**For Windows:** Commands should use `cmd /c npx` wrapper
-
-If missing or incorrect, offer to create/fix it.
+The toolkit ships no MCP servers, so a missing `.mcp.json` is the expected state. Run `claude mcp list` and report what this machine or project has added. If an old `~/.claude/.mcp.json` from a previous installer names `@anthropic-ai/mcp-*` packages, tell the user those package names don't exist and the file can be removed.
 
 ---
 
@@ -148,11 +144,10 @@ Installation: [~/.claude]
 Core Files:
   ✓ CLAUDE.md
   ✓ settings.json
-  ✓ SessionStart hook
-  ✓ .mcp.json
+  ✓ hooks/run-hook.js
 
-Submodules:
-  ✓ <N> marketplace repos configured
+Marketplaces (optional):
+  ✓ <N> of <M> manifest repos cloned
   ✓ All repos have no_push protection
 
 Resources (from the Step 7 counts; generated totals live at the top of ~/.claude/INDEX.md):
@@ -161,8 +156,9 @@ Resources (from the Step 7 counts; generated totals live at the top of ~/.claude
   • <N> marketplace skills (<M> repos)
 
 Hooks:
-  ✓ SessionStart: Auto-routing enabled
-  ✓ PostToolUse: Prettier formatting enabled
+  ✓ SessionStart: daily pull + repo health banner
+  ✓ PreToolUse: guard.js (Bash, PowerShell, file writes)
+  ✓ PostToolUse: secret-scan.js
 
 Status: HEALTHY / NEEDS ATTENTION
 ```
@@ -174,9 +170,8 @@ Status: HEALTHY / NEEDS ATTENTION
 If any issues were detected, offer to fix them:
 
 1. **Missing no_push:** Run fix script
-2. **Missing .mcp.json:** Create platform-appropriate template
-3. **Missing hook:** Alert user to pull latest from git
-4. **Outdated submodules:** Offer to update
+2. **Missing hook or hook wiring:** Alert user to pull latest from git
+3. **Marketplace clones missing or behind:** Offer `bash ~/.claude/scripts/init-marketplaces.sh` (first time) or `bash ~/.claude/_pull-all-repos.sh` (update)
 
 ---
 
@@ -198,22 +193,17 @@ git merge --ff-only origin/main  # or origin/master
 
 If it cannot fast-forward, or the clone has local changes, stop and report the repo and its `git status`; never reset, clean, or discard changes.
 
-**Recreate .mcp.json:**
-
-```bash
-bash ~/.claude/scripts/install.sh  # Will skip clone, just reconfigure
-```
-
----
 
 ## For Fresh Installs
 
-If you don't have ~/.claude yet, clone it, read the installer, then run it (never pipe a download straight into a shell):
+If you don't have ~/.claude yet, clone it and install the repo's git hooks:
 
 ```bash
 git clone https://github.com/travisjneuman/.claude.git ~/.claude
-bash ~/.claude/scripts/install.sh
+bash ~/.claude/scripts/setup-hooks.sh
 ```
+
+If `~/.claude` already exists and isn't a checkout, use `scripts/install-in-place.sh` instead; it keeps the existing files.
 
 The same commands work on Windows in Git Bash.
 

@@ -1,13 +1,12 @@
 ---
 description: Add missing toolkit sections (Related Global Rules, Quick Start) to existing CLAUDE.md
-arguments:
-  - name: stack
-    description: "Optional: react | nextjs | static | python | automation (for Related Global Rules)"
-    required: false
+argument-hint: "[stack]"
 disable-model-invocation: true
 ---
 
 # Standardize CLAUDE.md
+
+**Arguments:** `stack` (optional): Optional: react | nextjs | static | python | automation (for Related Global Rules).
 
 Adds missing sections to an existing `CLAUDE.md` file while preserving project-specific content.
 
@@ -48,7 +47,7 @@ Read the current `./CLAUDE.md` and check for:
 
 ### Step 3: Detect Stack (if not provided)
 
-If `{{stack}}` not provided, detect from:
+If `$ARGUMENTS` not provided, detect from:
 
 - `package.json` → react or nextjs
 - `pyproject.toml` / `requirements.txt` → python

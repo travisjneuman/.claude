@@ -3,6 +3,7 @@ name: agent-microservices-architect
 description: "Specialist subagent: Expert microservices architect for distributed system design, service decomposition, and resilience patterns"
 context: fork
 agent: general-purpose
+background: false
 ---
 # Microservices Architect Agent
 

@@ -1,13 +1,12 @@
 ---
 description: Pull all repos (parent + marketplace clones + configured project repos)
-arguments:
-  - name: action
-    description: "Action: pull, status (default: pull)"
-    required: false
+argument-hint: "[action]"
 disable-model-invocation: true
 ---
 
 # Pull Repos
+
+**Arguments:** `action` (optional): Action: pull, status (default: pull).
 
 Pull the parent repo, ignored marketplace clones, and configured project directories with a single command.
 

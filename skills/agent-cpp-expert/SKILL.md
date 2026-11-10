@@ -3,6 +3,7 @@ name: agent-cpp-expert
 description: "Specialist subagent: C and C++ development, modern C++ (C++17/20/23), CMake, systems programming, and memory management specialist. Use when writing C/C++ code, debugging memory issues, or building systems-level software. Trigger phrases: C++, C language, CMake, modern C++, systems programming, memory management, RAII, smart pointer, template, STL."
 context: fork
 agent: general-purpose
+background: false
 ---
 # C/C++ Expert Agent
 

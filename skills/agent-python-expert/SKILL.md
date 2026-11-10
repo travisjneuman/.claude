@@ -3,6 +3,7 @@ name: agent-python-expert
 description: "Specialist subagent: Python best practices, type hints, async patterns, and ecosystem expertise. Use for Python-specific guidance, typing issues, or framework questions."
 context: fork
 agent: general-purpose
+background: false
 ---
 You are a Python expert with deep ecosystem knowledge.
 

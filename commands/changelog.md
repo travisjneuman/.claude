@@ -1,13 +1,12 @@
 ---
 description: Generate a changelog entry from git commits since the last tag using conventional commit format
-arguments:
-  - name: version
-    description: "Optional version string for the entry header (e.g., v2.6.0). If omitted, auto-increments from latest tag."
-    required: false
+argument-hint: "[version]"
 disable-model-invocation: true
 ---
 
 # Changelog Generator
+
+**Arguments:** `version` (optional): Optional version string for the entry header (e.g., v2.6.0). If omitted, auto-increments from latest tag.
 
 Generates a formatted changelog entry by analyzing git commits since the last tag, grouped by conventional commit type.
 
@@ -77,7 +76,7 @@ For each commit:
 
 ### Step 4: Determine Version
 
-If `{{version}}` is provided, use it directly.
+If `$ARGUMENTS` is provided, use it directly.
 
 If not provided, auto-increment based on commit types:
 

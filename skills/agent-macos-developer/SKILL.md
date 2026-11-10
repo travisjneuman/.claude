@@ -3,6 +3,7 @@ name: agent-macos-developer
 description: "Specialist subagent: Expert macOS native developer for AppKit, Catalyst, and macOS-specific features"
 context: fork
 agent: general-purpose
+background: false
 ---
 # macOS Developer Agent
 

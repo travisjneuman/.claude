@@ -3,6 +3,7 @@ name: agent-desktop-developer
 description: "Specialist subagent: Expert desktop application developer for Electron, Tauri, and native desktop development"
 context: fork
 agent: general-purpose
+background: false
 ---
 # Desktop Developer Agent
 

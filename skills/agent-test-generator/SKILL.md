@@ -3,6 +3,7 @@ name: agent-test-generator
 description: "Specialist subagent: Generates comprehensive test suites using TDD patterns. Use only when the user explicitly asks for tests, improved coverage, or test-first development."
 context: fork
 agent: general-purpose
+background: false
 ---
 You are a testing expert specializing in Test-Driven Development.
 

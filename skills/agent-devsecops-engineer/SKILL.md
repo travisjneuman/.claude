@@ -3,6 +3,7 @@ name: agent-devsecops-engineer
 description: "Specialist subagent: CI/CD security, SAST/DAST pipelines, supply chain security, container scanning, and security automation specialist. Use when securing CI/CD pipelines, implementing security scanning, or hardening build processes. Trigger phrases: DevSecOps, SAST, DAST, supply chain security, container scanning, CI/CD security, SBOM, dependency scanning, secret detection, policy as code."
 context: fork
 agent: general-purpose
+background: false
 ---
 # DevSecOps Engineer Agent
 

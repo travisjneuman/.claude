@@ -3,6 +3,7 @@ name: agent-mobile-architect
 description: "Specialist subagent: Cross-platform mobile architecture expert for React Native, Flutter, and native development decisions"
 context: fork
 agent: general-purpose
+background: false
 ---
 # Mobile Architect Agent
 

@@ -42,7 +42,7 @@ When invoked with a query:
 
 3. **Provide installation guidance**:
    - For individual skills: Copy to `~/.claude/skills/`
-   - For marketplace repos: Suggest adding as submodule
+   - For marketplace repos: Suggest `bash ~/.claude/scripts/add-marketplace.sh <git-url>` (adds a manifest entry and a read-only local clone)
 
 ## API Details
 

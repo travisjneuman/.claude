@@ -44,7 +44,8 @@ Up: [README](../README.md) · Not here: Claude Code lifecycle hooks are in [hook
 | `fix-plugin-line-endings.ps1`       | Same, for Windows PowerShell                                  |
 | `generate-counts.mjs`, `count-inventory.mjs` | Count pipeline (see [COUNT-PIPELINE.md](../docs/COUNT-PIPELINE.md)) |
 | `check-budgets.mjs`                 | Always-on context budget check; run manually (pre-commit no longer runs it) |
-| `tune-tiers.mjs`                    | Promote/demote core-tier skills from usage counts (`--apply` to write) |
+| `tune-tiers.mjs`                    | Promote/demote core-tier skills and commands from usage counts (`--apply` to write). Agents are reported only; `--move-agents` moves them, losslessly |
+| `build-settings.mjs`                | Builds `settings.json` from `settings.base.json` plus a private `local/settings.overlay.json`. Dormant until `settings.json` stops being tracked (see `advisor-plans/README.md`, item 10) |
 | `public-output-safety.mjs`, `media-routing.mjs` | Shared libraries for publication safety and media routing; not run directly |
 
 ---
@@ -55,9 +56,10 @@ These are git hooks installed into `.git/hooks/` by `setup-hooks.sh`:
 
 | Hook               | Purpose                                                                       |
 | ------------------ | ----------------------------------------------------------------------------- |
-| `pre-commit.sh`    | Marketplace/gitlink, privacy, credential and ignored-runtime safety gates; no generation/tests/staging |
+| `pre-commit.sh`    | Marketplace/gitlink, outside-the-repo symlink, privacy, credential and ignored-runtime safety gates; no generation/tests/staging |
 | `commit-msg.sh`    | Enforce conventional commit message format                                    |
 | `pre-push.sh`      | Block force-push to master/main, warn about unsafe nested repo changes                 |
+| `post-merge.sh`    | Runs `build-settings.mjs` after a pull or merge (a no-op today); never fails a merge |
 | `staged-public-safety.mjs` | Implementation of the pre-commit safety gates (called by `pre-commit.sh`) |
 
 These are different from the Claude Code lifecycle hooks in `~/.claude/hooks/`. See [hooks/README.md](../hooks/README.md) for that system.

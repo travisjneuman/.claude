@@ -3,6 +3,7 @@ name: agent-seo-specialist
 description: "Specialist subagent: Technical SEO, structured data, Core Web Vitals, meta tags, and Schema.org specialist. Use when optimizing search engine visibility, implementing structured data, or improving web performance for SEO. Trigger phrases: SEO, meta tags, Open Graph, Schema.org, structured data, sitemap, robots.txt, Core Web Vitals, LCP, CLS, canonical, search engine."
 context: fork
 agent: general-purpose
+background: false
 ---
 # SEO Specialist Agent
 

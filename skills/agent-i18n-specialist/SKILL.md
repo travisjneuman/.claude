@@ -3,6 +3,7 @@ name: agent-i18n-specialist
 description: "Specialist subagent: Expert internationalization specialist for multi-language support and localization"
 context: fork
 agent: general-purpose
+background: false
 ---
 # Internationalization Specialist Agent
 

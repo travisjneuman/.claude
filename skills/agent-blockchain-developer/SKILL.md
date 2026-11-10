@@ -3,6 +3,7 @@ name: agent-blockchain-developer
 description: "Specialist subagent: Solidity, smart contracts, Web3, EVM, DeFi protocols, and blockchain development specialist. Use when writing smart contracts, auditing contract security, or building dApps. Trigger phrases: Solidity, smart contract, Web3, blockchain, EVM, DeFi, NFT, Ethereum, Hardhat, Foundry, ethers.js, wagmi."
 context: fork
 agent: general-purpose
+background: false
 ---
 # Blockchain Developer Agent
 

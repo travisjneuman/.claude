@@ -386,6 +386,11 @@ echo -e "${BOLD}${BLUE}=== Pull All Repos ===${NC}"
 echo ""
 echo -e "${BOLD}Parent Repo (~/.claude):${NC}"
 process_repo "$SCRIPT_DIR" ".claude" true
+# Rebuild settings.json from its layers when that applies (a no-op while
+# settings.json is tracked; see scripts/build-settings.mjs).
+if [[ "$STATUS_ONLY" == false && -f "$SCRIPT_DIR/scripts/build-settings.mjs" ]] && command -v node >/dev/null 2>&1; then
+    node "$SCRIPT_DIR/scripts/build-settings.mjs" --quiet || true
+fi
 
 # =============================================================================
 # PHASE 2: Pull all marketplace clones

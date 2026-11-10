@@ -3,6 +3,7 @@ name: agent-brand-strategist
 description: "Specialist subagent: Expert brand strategist for brand identity, positioning, naming, and brand guidelines"
 context: fork
 agent: general-purpose
+background: false
 ---
 # Brand Strategist Agent
 

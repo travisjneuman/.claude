@@ -3,6 +3,7 @@ name: agent-technical-writer
 description: "Specialist subagent: Architecture Decision Records, API documentation, migration guides, runbooks, and technical documentation specialist. Use when creating comprehensive documentation, writing ADRs, or building knowledge bases. Trigger phrases: ADR, documentation, runbook, migration guide, technical writing, API docs, changelog, architecture decision, knowledge base, onboarding docs."
 context: fork
 agent: general-purpose
+background: false
 ---
 # Technical Writer Agent
 

@@ -3,6 +3,7 @@ name: agent-pwa-specialist
 description: "Specialist subagent: Progressive Web App development, service workers, offline-first architecture, and push notification specialist. Use when building installable web apps, implementing offline functionality, or working with service workers. Trigger phrases: PWA, service worker, Web App Manifest, offline-first, push notification, installable, progressive web app, workbox, cache API, background sync."
 context: fork
 agent: general-purpose
+background: false
 ---
 # PWA Specialist
 
