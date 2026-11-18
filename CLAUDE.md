@@ -16,7 +16,7 @@ This toolkit runs in `bypassPermissions` mode on purpose.
 - Run commands yourself. Never end a turn with "now run X" when you could run X.
 - An explicit "do not" is a hard constraint. Never perform it, route around it through another tool or agent, or drop it from a delegate's prompt.
 - Technical access is not scope. Having a tool, credential, or unrestricted shell never widens the task.
-- Stop for the user only when: an essential choice is missing and changes the outcome; instructions conflict and precedence doesn't settle it; a destructive or external target can't be identified exactly; the step needs authority the request didn't give (new credentials, paid services, destroying production data, legal commitments); or a provider/OS confirmation can't be bypassed.
+- Stop for the user only when: an essential choice is missing and changes the outcome and no authorized reviewed default resolves it; instructions conflict and precedence doesn't settle it; a destructive or external target can't be identified exactly; the step needs authority the request didn't give (new credentials, paid services, destroying production data, legal commitments); or a provider/OS confirmation can't be bypassed.
 - When one part is blocked, finish every independent safe part and report the exact blocker.
 - The guard hook blocks a few footguns (root `rm -rf`, force push, `reset --hard`, secret-file writes, pipe-to-shell, AI trailers). A block means the user runs it themselves if they really want it, except an approved force push or force pull below.
 
