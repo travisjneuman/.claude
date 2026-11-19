@@ -185,3 +185,17 @@ temp/
 
 # Runtime state written by hooks (not source)
 state/
+
+# Credential files (secret exposure audit, 2026-11-18)
+.dev.vars*
+*.p8
+*.p12
+*.pem
+*.key
+id_rsa
+id_ed25519
+id_ecdsa
+service-account*.json
+.netrc
+.env.production
+auth.json
