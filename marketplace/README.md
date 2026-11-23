@@ -11,3 +11,4 @@ Claude Code updates a plugin only when its `plugin.json` `version` changes (the 
 | Plugin | Upstream | Notes |
 | --- | --- | --- |
 | `unreal-engine-skills-for-claude-code` | [EpicGames/unreal-engine-skills-for-claude-code-plugin](https://github.com/EpicGames/unreal-engine-skills-for-claude-code-plugin) | Also listed in `claude-plugins-official`; install only this copy so the two never load together. Needs a running Unreal Editor with the ModelContextProtocol and AllToolsets plugins for its MCP tools. |
+| `firecrawl` | [firecrawl/skills](https://github.com/firecrawl/skills) | Not the same repo as the `firecrawl` plugin in `claude-plugins-official` (firecrawl/firecrawl-claude-plugin); enable one of the two. Search and scrape work without a key at a lower rate limit; set `FIRECRAWL_API_KEY` for the rest. |
