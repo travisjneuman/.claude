@@ -19,6 +19,19 @@
         "source": "url",
         "url": "https://github.com/EpicGames/unreal-engine-skills-for-claude-code-plugin.git"
       }
+    },
+    {
+      "name": "firecrawl",
+      "description": "Firecrawl skills for searching, scraping, crawling and interacting with the web through the Firecrawl CLI, skills for building Firecrawl into apps, and the Firecrawl MCP server config. With an API key, search also finds Firecrawl Alexandria data APIs and indexes for structured data.",
+      "author": {
+        "name": "Firecrawl"
+      },
+      "category": "development",
+      "homepage": "https://www.firecrawl.dev/?utm_source=travisjneuman-claude&utm_medium=integration",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/firecrawl/skills.git"
+      }
     }
   ]
 }
